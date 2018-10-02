@@ -1,0 +1,49 @@
+import docutils.nodes
+from typing import Any, Optional, Sequence
+from typing_extensions import Protocol
+
+
+class NodeVisitor(Protocol):
+    def dispatch_visit(self, node: docutils.nodes.Node) -> None: ...
+    def dispatch_departure(self, node: docutils.nodes.Node) -> None: ...
+
+
+class Node:
+    source: Optional[str]
+    line: Optional[int]
+    parent: Optional[Node]
+    document: Optional[Node]
+    children: Sequence[Node]
+
+    def walkabout(self, visitor: NodeVisitor) -> None: ...
+    def astext(self) -> str: ...
+
+    def __getitem__(self, key: str) -> str: ...
+    def __setitem__(self, key: str, value: Any) -> None: ...
+
+
+class Root: ...
+
+
+class Body: ...
+
+
+class Inline: ...
+
+
+class General(Body): ...
+
+
+class Element(Node): ...
+
+
+class Structural: ...
+
+
+class document(Root, Structural, Element): ...
+
+
+class TreePruningException(Exception): ...
+
+
+class SkipNode(TreePruningException): ...

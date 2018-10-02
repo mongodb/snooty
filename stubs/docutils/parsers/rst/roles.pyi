@@ -1,0 +1,3 @@
+from typing import Callable, Tuple, Optional, List
+
+def role(role_name: str, language_module: object, lineno: int, reporter: object) -> Tuple[Optional[Callable], List]: ...
