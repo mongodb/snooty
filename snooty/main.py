@@ -99,7 +99,7 @@ class JSONVisitor(Visitor):
             if node.children and node.children[0].__class__.__name__ == 'directive_argument':
                 visitor = JSONVisitor(self.document)
                 node.children[0].walkabout(visitor)
-                doc['arguments'] = visitor.state[-1]
+                doc['arguments'] = visitor.state[-1]['children']
                 node.children = node.children[1:]
             else:
                 doc['arguments'] = []
