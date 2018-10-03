@@ -1,13 +1,15 @@
 import docutils.nodes
 import docutils.statemachine
-from typing import Any
+from typing import Any, List, Tuple
 
 
 class RSTState(docutils.statemachine.State):
     def nested_parse(self, block: str, input_offset: int, node: docutils.nodes.Node) -> None: ...
+    def inline_text(self, text: str, lineno: int) -> Tuple[List[docutils.nodes.Node], List[docutils.nodes.Node]]: ...
 
 
 class Directive:
+    arguments: List[str]
     name: str
     content: str
     content_offset: int

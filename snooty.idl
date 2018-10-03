@@ -40,6 +40,7 @@ interface Paragraph <: Parent {
 interface Directive <: Parent {
   type: "directive";
   name: string;
+  argument: [PhrasingContent];
   options: [Option]?;
 }
 

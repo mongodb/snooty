@@ -11,11 +11,12 @@ import watchdog.events
 import watchdog.observers
 from functools import partial
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, Tuple, Set, List, Union
+from typing import Any, Dict, Iterator, Tuple, Set, List
 
+from . import gizaparser
+from .gizaparser import SerializableType
 from .parser import Visitor, Parser
 
-SerializableType = Union[None, bool, str, int, float, Dict[str, Any], List[Any]]
 logger = logging.getLogger(__name__)
 
 
@@ -36,8 +37,8 @@ def get_line(node: docutils.nodes.Node) -> int:
     """Return the first line number we can find in node's ancestry."""
     while node.line is None:
         if node.parent is None:
-            print(node)
-            return -1
+            # This is probably a document node
+            return 0
         node = node.parent
 
     return node.line
@@ -95,6 +96,13 @@ class JSONVisitor(Visitor):
             self.depth += 1
         elif node_name == 'directive':
             doc['name'] = node['name']
+            if node.children and node.children[0].__class__.__name__ == 'directive_argument':
+                visitor = JSONVisitor(self.document)
+                node.children[0].walkabout(visitor)
+                doc['arguments'] = visitor.state[-1]
+                node.children = node.children[1:]
+            else:
+                doc['arguments'] = []
         elif node_name == 'role':
             doc['name'] = node['name']
             doc['label'] = node['label']
@@ -147,11 +155,39 @@ class Page:
     warnings: List[Tuple[str, int]]
 
 
+def step_to_page(step: gizaparser.steps.Step) -> SerializableType:
+    return {
+        'type': 'directive',
+        'name': 'step',
+        'position': {'start': {'line': step.__line__}},
+        'children': []
+    }
+
+
+def steps_to_page(steps: List[gizaparser.steps.Step]) -> SerializableType:
+    return {
+        'type': 'directive',
+        'name': 'steps',
+        'position': {'start': {'line': 0}},
+        'children': [step_to_page(step) for step in steps]
+    }
+
+
 def parse(parser: Parser[JSONVisitor], path: str) -> Page:
-    with open(path, 'r') as f:
-        text = f.read()
-    visitor = parser.parse(path, text)
-    return Page(path, text, visitor.state[-1], visitor.warnings)
+    if path.endswith('.txt') or path.endswith('.rst'):
+        with open(path, 'r') as f:
+            text = f.read()
+        visitor = parser.parse(path, text)
+        return Page(path, text, visitor.state[-1], visitor.warnings)
+
+    if path.endswith('.yaml'):
+        filename = os.path.basename(path)
+        if filename.startswith('steps-'):
+            steps, text = gizaparser.parse(path, gizaparser.steps.Step)
+            ast = steps_to_page(steps)
+        return Page(path, text, ast, [])
+
+    raise Exception('Unknown file type: ' + path)
 
 
 class Project:
@@ -164,7 +200,7 @@ class Project:
         username = pwd.getpwuid(os.getuid()).pw_name
         branch = subprocess.check_output(
             ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
-            encoding='utf-8')
+            encoding='utf-8').strip()
         self.prefix = [self.name, username, branch]
 
     def get_page_id(self, path: str) -> str:
@@ -191,7 +227,7 @@ class Project:
     def build(self) -> None:
         logging.info('Building %s', self.name)
         with multiprocessing.Pool() as pool:
-            paths = get_files(self.root, {'.rst', '.txt'})
+            paths = get_files(self.root, {'.rst', '.txt', '.yaml'})
             for page in pool.imap(partial(parse, self.parser), paths):
                 self._update(page.path, page.source, page.ast)
                 # if page.warnings:
@@ -200,7 +236,7 @@ class Project:
 
 class ObserveHandler(watchdog.events.PatternMatchingEventHandler):
     def __init__(self, project: Project) -> None:
-        super(ObserveHandler, self).__init__(patterns=['*.rst', '*.txt'])
+        super(ObserveHandler, self).__init__(patterns=['*.rst', '*.txt', '*.yaml'])
         self.project = project
 
     def dispatch(self, event: watchdog.events.FileSystemEvent) -> None:

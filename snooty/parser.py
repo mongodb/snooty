@@ -13,6 +13,10 @@ PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$',
 SPECIAL_DIRECTIVES = {'code-block', 'include', 'tabs-drivers', 'tabs', 'tabs-platforms', 'only'}
 
 
+class directive_argument(docutils.nodes.General, docutils.nodes.TextElement):
+    pass
+
+
 class directive(docutils.nodes.General, docutils.nodes.Element):
     def __init__(self, name: str) -> None:
         super(directive, self).__init__()
@@ -39,16 +43,28 @@ class role(docutils.nodes.General, docutils.nodes.Inline, docutils.nodes.Element
 
 
 class Directive(docutils.parsers.rst.Directive):
-    optional_arguments = 0
+    optional_arguments = 1
     final_argument_whitespace = True
     option_spec: Dict[str, object] = {}
     has_content = True
 
     def run(self) -> List[docutils.nodes.Node]:
+        messages: List[docutils.nodes.Node] = []
+        source, line = self.state_machine.get_source_and_line(self.lineno)
+
         node = directive(self.name)
         node.document = self.state.document
-        node.source, node.line = self.state_machine.get_source_and_line(self.lineno)
+        node.source, node.line = source, line
         self.add_name(node)
+
+        if self.arguments:
+            argument_text = self.arguments[0]
+            textnodes, messages = self.state.inline_text(argument_text, self.lineno)
+            argument = directive_argument(argument_text, '', *textnodes)
+            argument.document = self.state.document
+            argument.source, argument.line = source, line
+            node.append(argument)
+
         if self.name not in SPECIAL_DIRECTIVES:
             self.state.nested_parse(self.content, self.content_offset, node)
 
