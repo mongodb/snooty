@@ -1,11 +1,11 @@
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
-from typing import Any, Dict, List, Tuple, Type, TypeVar, Union
+from typing import Dict, List, Tuple, Type, TypeVar
 from .flutter import check_type, LoadError
+from .nodes import SerializableType
 from . import steps  # NoQA
 
-SerializableType = Union[None, bool, str, int, float, Dict[str, Any], List[Any]]
 T = TypeVar('T')
 
 

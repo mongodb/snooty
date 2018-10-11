@@ -11,13 +11,14 @@ import watchdog.events
 import watchdog.observers
 from functools import partial
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, Tuple, Set, List
+from typing import Any, Callable, Dict, Iterator, Tuple, Set, List
 
 from . import gizaparser
 from .gizaparser import SerializableType
 from .parser import Visitor, Parser
 
 logger = logging.getLogger(__name__)
+EmbeddedRstParser = Callable[[str, int, bool], Tuple[SerializableType, List[Tuple[str, int]]]]
 
 
 def get_files(root: str, extensions: Set[str]) -> Iterator[str]:
@@ -92,6 +93,9 @@ class JSONVisitor(Visitor):
             doc['value'] = str(node)
             return
 
+        # Most, but not all, nodes have children nodes
+        make_children = True
+
         if node_name == 'section':
             self.depth += 1
         elif node_name == 'directive':
@@ -99,17 +103,19 @@ class JSONVisitor(Visitor):
             if node.children and node.children[0].__class__.__name__ == 'directive_argument':
                 visitor = JSONVisitor(self.document)
                 node.children[0].walkabout(visitor)
-                doc['arguments'] = visitor.state[-1]['children']
+                doc['argument'] = visitor.state[-1]['children']
                 node.children = node.children[1:]
             else:
-                doc['arguments'] = []
+                doc['argument'] = []
         elif node_name == 'role':
             doc['name'] = node['name']
             doc['label'] = node['label']
             doc['target'] = node['target']
             doc['raw'] = node['raw']
         elif node_name == 'target':
+            doc['type'] = 'target'
             doc['ids'] = node['ids']
+            make_children = False
         elif node_name == 'definition_list':
             doc['type'] = 'definitionList'
         elif node_name == 'definition_list_item':
@@ -126,8 +132,13 @@ class JSONVisitor(Visitor):
         elif node_name == 'title':
             doc['type'] = 'heading'
             doc['level'] = self.depth
+        elif node_name == 'FixedTextElement':
+            doc['type'] = 'literal'
+            doc['value'] = node.astext()
+            make_children = False
 
-        doc['children'] = []
+        if make_children:
+            doc['children'] = []
 
     def dispatch_departure(self, node: docutils.nodes.Node) -> None:
         node_name = node.__class__.__name__
@@ -145,6 +156,21 @@ class JSONVisitor(Visitor):
             self.state[-1]['children'].append(popped)
 
 
+class InlineJSONVisitor(JSONVisitor):
+    """A JSONVisitor subclass which does not emit block nodes."""
+    def dispatch_visit(self, node: docutils.nodes.Node) -> None:
+        if isinstance(node, docutils.nodes.Body):
+            return
+
+        JSONVisitor.dispatch_visit(self, node)
+
+    def dispatch_departure(self, node: docutils.nodes.Node) -> None:
+        if isinstance(node, docutils.nodes.Body):
+            return
+
+        JSONVisitor.dispatch_departure(self, node)
+
+
 @dataclass
 class Page:
     __slots__ = ('path', 'source', 'ast', 'warnings')
@@ -155,21 +181,23 @@ class Page:
     warnings: List[Tuple[str, int]]
 
 
-def step_to_page(step: gizaparser.steps.Step) -> SerializableType:
+def step_to_page(step: gizaparser.steps.Step, rst_parser: EmbeddedRstParser) -> SerializableType:
+    rendered, warnings = step.render(rst_parser)
     return {
         'type': 'directive',
         'name': 'step',
         'position': {'start': {'line': step.__line__}},
-        'children': []
+        'children': [rendered]
     }
 
 
-def steps_to_page(steps: List[gizaparser.steps.Step]) -> SerializableType:
+def steps_to_page(steps: List[gizaparser.steps.Step],
+                  rst_parser: EmbeddedRstParser) -> SerializableType:
     return {
         'type': 'directive',
         'name': 'steps',
         'position': {'start': {'line': 0}},
-        'children': [step_to_page(step) for step in steps]
+        'children': [step_to_page(step, rst_parser) for step in steps]
     }
 
 
@@ -181,13 +209,29 @@ def parse(parser: Parser[JSONVisitor], path: str) -> Page:
         return Page(path, text, visitor.state[-1], visitor.warnings)
 
     if path.endswith('.yaml'):
+        rst_parser = make_embedded_rst_parser(path)
         filename = os.path.basename(path)
         if filename.startswith('steps-'):
             steps, text = gizaparser.parse(path, gizaparser.steps.Step)
-            ast = steps_to_page(steps)
+            ast = steps_to_page(steps, rst_parser)
         return Page(path, text, ast, [])
 
     raise Exception('Unknown file type: ' + path)
+
+
+def make_embedded_rst_parser(path: str) -> EmbeddedRstParser:
+    def parse_embedded_rst(rst: str,
+                           lineno: int,
+                           inline: bool) -> Tuple[List[SerializableType], List[Tuple[str, int]]]:
+        # Crudely make docutils line numbers match
+        text = '\n' * lineno + rst.strip()
+        visitor_class = InlineJSONVisitor if inline else JSONVisitor
+        parser = Parser(visitor_class)
+        visitor = parser.parse(path, text)
+        children = visitor.state[-1]['children']
+        return children, visitor.warnings
+
+    return parse_embedded_rst
 
 
 class Project:

@@ -43,6 +43,9 @@ class TextElement(Element):
     def __init__(self, rawsource: str='', text: str='', *children: Node, **attribute: object) -> None: ...
 
 
+class FixedTextElement(TextElement): ...
+
+
 class Structural: ...
 
 

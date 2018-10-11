@@ -21,4 +21,5 @@ class Directive:
 
 
 class Parser:
+    inliner: Any
     def parse(self, data: str, document: docutils.nodes.document) -> None: ...

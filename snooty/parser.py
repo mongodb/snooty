@@ -42,6 +42,13 @@ class role(docutils.nodes.General, docutils.nodes.Inline, docutils.nodes.Element
             self['target'] = text
 
 
+from typing import Any
+def parse_options(data: Any) -> Dict:
+    for line in data:
+        print(line)
+    return {}
+
+
 class Directive(docutils.parsers.rst.Directive):
     optional_arguments = 1
     final_argument_whitespace = True
@@ -57,6 +64,7 @@ class Directive(docutils.parsers.rst.Directive):
         node.source, node.line = source, line
         self.add_name(node)
 
+        # Parse the argument (i.e. what's after the colon on the 0th line)
         if self.arguments:
             argument_text = self.arguments[0]
             textnodes, messages = self.state.inline_text(argument_text, self.lineno)
@@ -65,7 +73,17 @@ class Directive(docutils.parsers.rst.Directive):
             argument.source, argument.line = source, line
             node.append(argument)
 
-        if self.name not in SPECIAL_DIRECTIVES:
+        # Parse options
+        options = parse_options(self.content)
+        node['options'] = options
+
+        # Parse the content
+        if self.name in SPECIAL_DIRECTIVES:
+            raw = docutils.nodes.FixedTextElement()
+            raw.document = self.state.document
+            raw.source, raw.line = source, line
+            node.append(raw)
+        else:
             self.state.nested_parse(self.content, self.content_offset, node)
 
         return [node]

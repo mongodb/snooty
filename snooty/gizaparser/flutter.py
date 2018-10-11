@@ -1,35 +1,26 @@
 import collections.abc
-from typing import Dict, Type, TypeVar, Union
-from typing_extensions import Protocol, runtime
+import typing
+from typing import cast, Any, Dict, Type, TypeVar, Optional, Union
+from typing_extensions import Protocol
 
-CACHED_TYPES: Dict[type, Dict[str, type]] = {}
+CACHED_TYPES: Dict[type, Optional[Dict[str, type]]] = {}
 
 
 class HasAnnotations(Protocol):
-    def __init__(self, **kwargs: object) -> None: ...
     __annotations__: Dict[str, type]
 
 
-@runtime
-class HasOrigin(Protocol):
-    __origin__: type
+class Constructable(Protocol):
+    def __init__(self, **kwargs: object) -> None: ...
 
 
 T = TypeVar('T', bound=HasAnnotations)
+C = TypeVar('C', bound=Constructable)
 
 
 def checked(klass: Type[T]) -> Type[T]:
     """Marks a dataclass as being deserializable."""
-    annotations = {}
-    for base in klass.__bases__:
-        if base is object:
-            continue
-
-        annotations.update(CACHED_TYPES[base])
-
-    annotations.update(klass.__annotations__)
-    CACHED_TYPES[klass] = annotations
-
+    CACHED_TYPES[klass] = None
     return klass
 
 
@@ -42,8 +33,11 @@ class LoadError(TypeError):
 
 class LoadWrongType(LoadError):
     def __init__(self, ty: type, bad_data: object) -> None:
-        super().__init__('Incorrect type. Expected "{}", got "{}"'.format(
-            ty, type(bad_data)), ty, bad_data)
+        super().__init__('Incorrect type. Expected "{}"'.format(ty), ty, bad_data)
+
+
+class LoadWrongArity(LoadWrongType):
+    pass
 
 
 class LoadUnknownField(LoadError):
@@ -52,7 +46,7 @@ class LoadUnknownField(LoadError):
         self.bad_field = bad_field
 
 
-def check_type(ty: Type[T], data: object) -> T:
+def check_type(ty: Type[C], data: object, ty_module: str='') -> C:
     # Check for a primitive type
     if ty in (str, int, float, bool, type(None)):
         if not isinstance(data, ty):
@@ -62,6 +56,9 @@ def check_type(ty: Type[T], data: object) -> T:
     # Check for an object
     if isinstance(data, dict) and ty in CACHED_TYPES:
         annotations = CACHED_TYPES[ty]
+        if annotations is None:
+            annotations = typing.get_type_hints(ty)
+            CACHED_TYPES[ty] = annotations
         result: Dict[str, object] = {}
 
         # Assign missing fields None
@@ -75,38 +72,42 @@ def check_type(ty: Type[T], data: object) -> T:
                 raise LoadUnknownField(ty, data, key)
 
             expected_type = annotations[key]
-            result[key] = check_type(expected_type, value)
+            result[key] = check_type(expected_type, value, ty.__module__)
 
         return ty(**result)
 
     # Check for one of the special types defined by PEP-484
-    # These tests should(?) be redundant, but the former is needed for
-    # runtime, and the latter satisfies mypy.
-    if hasattr(ty, '__origin__') and isinstance(ty, HasOrigin):
-        if ty.__origin__ is list:
+    origin = getattr(ty, '__origin__', None)
+    if origin is not None:
+        args = getattr(ty, '__args__')
+        if origin is list:
             if not isinstance(data, list):
                 raise LoadWrongType(ty, data)
-            arg, = ty.__args__
-            return [check_type(arg, x) for x in data]
-        elif ty.__origin__ is dict:
+            return cast(C, [check_type(args[0], x, ty_module) for x in data])
+        elif origin is dict:
             if not isinstance(data, dict):
                 raise LoadWrongType(ty, data)
-            key_type, value_type = ty.__args__
-            return {check_type(key_type, k): check_type(value_type, v) for k, v in data.items()}
-        elif ty.__origin__ is tuple and isinstance(data, collections.abc.Collection):
-            if not len(data) == len(ty.__args__):
-                raise LoadError('Incorrect tuple arity', ty, data)
-            return tuple(check_type(x, tuple_ty) for x, tuple_ty in zip(data, ty.__args__))
-        elif ty.__origin__ is Union:
-            for candidate_ty in ty.__args__:
+            key_type, value_type = args
+            return cast(C, {
+                check_type(key_type, k, ty_module): check_type(value_type, v, ty_module)
+                for k, v in data.items()})
+        elif origin is tuple and isinstance(data, collections.abc.Collection):
+            if not len(data) == len(args):
+                raise LoadWrongArity(ty, data)
+            return cast(C, tuple(
+                check_type(tuple_ty, x, ty_module) for x, tuple_ty in zip(data, args)))
+        elif origin is Union:
+            for candidate_ty in args:
                 try:
-                    return check_type(candidate_ty, data)
+                    return cast(C, check_type(candidate_ty, data, ty_module))
                 except LoadError:
                     pass
 
-            print(data)
             raise LoadWrongType(ty, data)
 
         raise LoadError('Unsupported PEP-484 type', ty, data)
+
+    if ty is object or ty is Any:
+        return cast(C, data)
 
     raise LoadError('Unloadable type', ty, data)
