@@ -18,7 +18,7 @@ from .gizaparser import SerializableType
 from .parser import Visitor, Parser
 
 logger = logging.getLogger(__name__)
-EmbeddedRstParser = Callable[[str, int, bool], Tuple[SerializableType, List[Tuple[str, int]]]]
+EmbeddedRstParser = Callable[[str, int, bool], Tuple[List[SerializableType], List[Tuple[str, int]]]]
 
 
 def get_files(root: str, extensions: Set[str]) -> Iterator[str]:
@@ -104,6 +104,7 @@ class JSONVisitor(Visitor):
                 visitor = JSONVisitor(self.document)
                 node.children[0].walkabout(visitor)
                 doc['argument'] = visitor.state[-1]['children']
+                doc['options'] = node['options']
                 node.children = node.children[1:]
             else:
                 doc['argument'] = []
@@ -153,6 +154,8 @@ class JSONVisitor(Visitor):
         if popped['type'] == 'term':
             self.state[-1]['term'] = popped['children']
         else:
+            if 'children' not in self.state[-1]:
+                print(self.state[-1])
             self.state[-1]['children'].append(popped)
 
 
@@ -214,7 +217,9 @@ def parse(parser: Parser[JSONVisitor], path: str) -> Page:
         if filename.startswith('steps-'):
             steps, text = gizaparser.parse(path, gizaparser.steps.Step)
             ast = steps_to_page(steps, rst_parser)
-        return Page(path, text, ast, [])
+            return Page(path, text, ast, [])
+        else:
+            return Page(path, '', {'children': []}, [])
 
     raise Exception('Unknown file type: ' + path)
 

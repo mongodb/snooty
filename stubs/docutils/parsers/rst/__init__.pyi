@@ -1,6 +1,6 @@
 import docutils.nodes
 import docutils.statemachine
-from typing import Any, List, Tuple
+from typing import Any, Dict, List, Tuple
 
 
 class RSTState(docutils.statemachine.State):
@@ -10,12 +10,15 @@ class RSTState(docutils.statemachine.State):
 
 class Directive:
     arguments: List[str]
+    block_text: str
+    options: Any
     name: str
     content: str
     content_offset: int
     state: RSTState
     lineno: int
     state_machine: Any
+    option_spec: Dict[str, object]
 
     def add_name(self, node: docutils.nodes.Node) -> None: ...
 

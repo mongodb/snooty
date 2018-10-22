@@ -3,13 +3,15 @@ import re
 import docutils.frontend
 import docutils.nodes
 import docutils.parsers.rst
-import docutils.parsers.rst.roles
 import docutils.parsers.rst.directives
+import docutils.parsers.rst.roles
+import docutils.parsers.rst.states
 import docutils.statemachine
 import docutils.utils
 from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
 
 PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
+PAT_WHITESPACE = re.compile(r'^\x20*')
 SPECIAL_DIRECTIVES = {'code-block', 'include', 'tabs-drivers', 'tabs', 'tabs-platforms', 'only'}
 
 
@@ -42,17 +44,49 @@ class role(docutils.nodes.General, docutils.nodes.Inline, docutils.nodes.Element
             self['target'] = text
 
 
-from typing import Any
-def parse_options(data: Any) -> Dict:
-    for line in data:
-        print(line)
-    return {}
+def parse_options(block_text: str) -> Dict[str, str]:
+    """Docutils doesn't parse directive options that aren't known ahead
+       of time. Do it ourselves, badly."""
+    lines = block_text.split('\n')
+    current_key: Optional[str] = None
+    kv: Dict[str, str] = {}
+    base_indentation = 0
+
+    for i, line in enumerate(lines):
+        if i == 0:
+            continue
+
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        whitespace_match = PAT_WHITESPACE.match(line)
+        assert whitespace_match is not None
+        indentation = len(whitespace_match.group(0))
+
+        if base_indentation == 0:
+            base_indentation = indentation
+
+        match = re.match(docutils.parsers.rst.states.Body.patterns['field_marker'], stripped)
+        if match:
+            current_key = match.group(0)
+            assert current_key is not None
+            value = stripped[len(current_key):]
+            current_key = current_key.strip().strip(':')
+            kv[current_key] = value
+            continue
+
+        if indentation == base_indentation:
+            break
+        elif current_key:
+            kv[current_key] += '\n' + line[indentation:]
+
+    return kv
 
 
 class Directive(docutils.parsers.rst.Directive):
     optional_arguments = 1
     final_argument_whitespace = True
-    option_spec: Dict[str, object] = {}
     has_content = True
 
     def run(self) -> List[docutils.nodes.Node]:
@@ -66,7 +100,7 @@ class Directive(docutils.parsers.rst.Directive):
 
         # Parse the argument (i.e. what's after the colon on the 0th line)
         if self.arguments:
-            argument_text = self.arguments[0]
+            argument_text = self.arguments[0].split('\n')[0]
             textnodes, messages = self.state.inline_text(argument_text, self.lineno)
             argument = directive_argument(argument_text, '', *textnodes)
             argument.document = self.state.document
@@ -74,8 +108,7 @@ class Directive(docutils.parsers.rst.Directive):
             node.append(argument)
 
         # Parse options
-        options = parse_options(self.content)
-        node['options'] = options
+        node['options'] = parse_options(self.block_text)
 
         # Parse the content
         if self.name in SPECIAL_DIRECTIVES:
@@ -84,7 +117,7 @@ class Directive(docutils.parsers.rst.Directive):
             raw.source, raw.line = source, line
             node.append(raw)
         else:
-            self.state.nested_parse(self.content, self.content_offset, node)
+            self.state.nested_parse(self.content, self.state_machine.line_offset, node)
 
         return [node]
 

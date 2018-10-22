@@ -33,7 +33,7 @@ class LoadError(TypeError):
 
 class LoadWrongType(LoadError):
     def __init__(self, ty: type, bad_data: object) -> None:
-        super().__init__('Incorrect type. Expected "{}"'.format(ty), ty, bad_data)
+        super().__init__('Incorrect type. Expected "{}", got "{}"'.format(ty, bad_data), ty, bad_data)
 
 
 class LoadWrongArity(LoadWrongType):
