@@ -1,4 +1,5 @@
 import docutils.nodes
+import docutils.utils
 from typing import Any, Optional, Sequence
 from typing_extensions import Protocol
 
@@ -49,10 +50,14 @@ class FixedTextElement(TextElement): ...
 class Structural: ...
 
 
-class document(Root, Structural, Element): ...
+class document(Root, Structural, Element):
+    reporter: docutils.utils.Reporter
 
 
 class TreePruningException(Exception): ...
 
 
 class SkipNode(TreePruningException): ...
+
+
+class system_message(Element): ...

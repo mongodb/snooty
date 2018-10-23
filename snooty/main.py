@@ -12,6 +12,7 @@ import watchdog.observers
 from functools import partial
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, Iterator, Tuple, Set, List
+import docutils.utils
 
 from . import gizaparser
 from .gizaparser import SerializableType
@@ -209,6 +210,7 @@ def parse(parser: Parser[JSONVisitor], path: str) -> Page:
         with open(path, 'r') as f:
             text = f.read()
         visitor = parser.parse(path, text)
+
         return Page(path, text, visitor.state[-1], visitor.warnings)
 
     if path.endswith('.yaml'):

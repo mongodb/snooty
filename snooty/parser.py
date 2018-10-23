@@ -1,5 +1,4 @@
 import abc
-import re
 import docutils.frontend
 import docutils.nodes
 import docutils.parsers.rst
@@ -8,11 +7,33 @@ import docutils.parsers.rst.roles
 import docutils.parsers.rst.states
 import docutils.statemachine
 import docutils.utils
+import re
+import sys
+from dataclasses import dataclass
 from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
+from .gizaparser import load_yaml
+from .gizaparser.flutter import checked, check_type, LoadError
 
 PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
 PAT_WHITESPACE = re.compile(r'^\x20*')
 SPECIAL_DIRECTIVES = {'code-block', 'include', 'tabs-drivers', 'tabs', 'tabs-platforms', 'only'}
+
+
+@checked
+@dataclass
+class LegacyTabDefinition:
+    __line__: int
+    id: str
+    title: Optional[str]
+    content: str
+
+
+@checked
+@dataclass
+class LegacyTabsDefinition:
+    __line__: int
+    hidden: Optional[bool]
+    tabs: List[LegacyTabDefinition]
 
 
 class directive_argument(docutils.nodes.General, docutils.nodes.TextElement):
@@ -122,6 +143,107 @@ class Directive(docutils.parsers.rst.Directive):
         return [node]
 
 
+def prepare_viewlist(text: str, ignore: int=1) -> List[str]:
+    """Convert a docstring into lines of parseable reST.  Remove common leading
+    indentation, where the indentation of a given number of lines (usually just
+    one) is ignored.
+    Return the docstring as a list of lines usable for inserting into a docutils
+    ViewList (used as argument of nested_parse().)  An empty line is added to
+    act as a separator between this docstring and following content.
+    """
+    lines = text.expandtabs().splitlines()
+    # Find minimum indentation of any non-blank lines after ignored lines.
+    margin = sys.maxsize
+    for line in lines[ignore:]:
+        content = len(line.lstrip())
+        if content:
+            indent = len(line) - content
+            margin = min(margin, indent)
+    # Remove indentation from ignored lines.
+    for i in range(ignore):
+        if i < len(lines):
+            lines[i] = lines[i].lstrip()
+    if margin < sys.maxsize:
+        for i in range(ignore, len(lines)):
+            lines[i] = lines[i][margin:]
+    # Remove any leading blank lines.
+    while lines and not lines[0]:
+        lines.pop(0)
+    # make sure there is an empty line at the end
+    if lines and lines[-1]:
+        lines.append('')
+    return lines
+
+
+class TabsDirective(Directive):
+    option_spec = {
+        'tabset': str,
+        'hidden': bool
+    }
+    has_content = True
+
+    def run(self) -> List[docutils.nodes.Node]:
+        # Transform the old YAML-based syntax into the new pure-rst syntax.
+        # This heuristic gusses whether we have the old syntax or the NEW.
+        if any(line == 'tabs:' for line in self.content):
+            parsed = load_yaml('\n'.join(self.content))[0]
+            try:
+                loaded = check_type(LegacyTabsDefinition, parsed)
+            except LoadError as err:
+                line = self.lineno + getattr(err.bad_data, '__line__', 0) + 1
+                error_node = self.state.document.reporter.error(
+                    str(err),
+                    line=line)
+                return [error_node]
+
+            tabset = self.name.split('-', 1)[-1]
+            node = directive('tabs')
+            node.document = self.state.document
+            source, node.line = self.state_machine.get_source_and_line(self.lineno)
+            node.source = source
+            self.add_name(node)
+
+            options: Dict[str, object] = {}
+            node['options'] = options
+            if loaded.hidden:
+                options['hidden'] = True
+
+            if tabset and tabset != 'tabs':
+                options['tabset'] = tabset
+
+            for child in loaded.tabs:
+                node.append(self.make_tab_node(source, child))
+
+            return [node]
+
+        # The new syntax needs no special handling
+        return Directive.run(self)
+
+    def make_tab_node(self, source: str, child: LegacyTabDefinition) -> docutils.nodes.Node:
+        line = self.lineno + child.__line__
+
+        node = directive('tab')
+        node.document = self.state.document
+        node.source = source
+        node.line = line
+
+        argument_text = child.id
+        textnodes, messages = self.state.inline_text(argument_text, line)
+        argument = directive_argument(argument_text, '', *textnodes)
+        argument.document = self.state.document
+        argument.source, argument.line = source, line
+        node.append(argument)
+        node['options'] = {}
+
+        content_lines = prepare_viewlist(child.content)
+        self.state.nested_parse(
+            docutils.statemachine.ViewList(content_lines, source=source),
+            self.state_machine.line_offset,
+            node)
+
+        return node
+
+
 def handle_role(typ: str, rawtext: str, text: str,
                 lineno: int, inliner: object,
                 options: Dict={}, content: List=[]) -> Tuple[List, List]:
@@ -131,6 +253,9 @@ def handle_role(typ: str, rawtext: str, text: str,
 
 def lookup_directive(directive_name: str, language_module: object,
                      document: docutils.nodes.document) -> Tuple[Type, List]:
+    if directive_name.startswith('tabs'):
+        return TabsDirective, []
+
     return Directive, []
 
 

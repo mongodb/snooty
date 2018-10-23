@@ -127,7 +127,6 @@ class Step(Node):
             actions = [self.action] if isinstance(self.action, Action) else self.action
             for action in actions:
                 result, warnings = action.render(parse_rst)
-                print(result)
                 children.extend(result)
                 all_warnings.extend(warnings)
 
