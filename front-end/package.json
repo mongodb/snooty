@@ -10,11 +10,6 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8"
   },
-  "scripts": {
-    "dev": "gatsby develop",
-    "build": "gatsby build --prefix-paths",
-    "serve": "gatsby serve"
-  },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
