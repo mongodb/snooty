@@ -17,24 +17,24 @@ export default class HTML extends React.Component {
           <meta name="DC.Source" content="https://github.com/mongodb/docs-bi-connector/blob/DOCSP-3279/source/index.txt"/>
           <meta property="og:image" content="http://s3.amazonaws.com/info-mongodb-com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"/>
           <meta property="og:image:secure_url" content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"/>
-          <link rel="stylesheet" href="/_static/guides.css" type="text/css" />
-          <link rel="stylesheet" href="/_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="/_static/css/navbar.min.css" type="text/css" />
+          <link rel="stylesheet" href="/static/guides.css" type="text/css" />
+          <link rel="stylesheet" href="/static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="/static/css/navbar.min.css" type="text/css" />
           <link rel="search" type="application/opensearchdescription+xml" href="https://docs.mongodb.com/osd.xml" title="MongoDB Help"/>
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes} data-project="guides" data-project-title="MongoDB Guides" data-branch="DOCSP-3279" data-enable-marian="1">
           <div id="navbar" data-navprops='{"links": [{"url": "https://docs.mongodb.com/manual/","text": "Server"},{"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},{"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},{"url": "https://docs.mongodb.com/tools/","text": "Tools"},{"url": "https://docs.mongodb.com/guides/","text": "Guides","active": true}]}'></div>
-          <script async src="/_static/navbar.min.js"></script>
+          <script async src="/static/navbar.min.js"></script>
           {this.props.preBodyComponents}
           <div
             key={`body`}
             id="___gatsby"
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
-          <script type="text/javascript" src="/_static/lib/jquery.min.js"></script>
-          <script type="text/javascript" src="/_static/lib/bootstrap.js"></script>
-          <script type="text/javascript" src="/_static/controller.js"></script>
+          <script type="text/javascript" src="/static/lib/jquery.min.js"></script>
+          <script type="text/javascript" src="/static/lib/bootstrap.js"></script>
+          <script type="text/javascript" src="/static/controller.js"></script>
           {this.props.postBodyComponents}
         </body>
       </html>

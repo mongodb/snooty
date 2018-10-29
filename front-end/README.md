@@ -1,6 +1,6 @@
 # Front-end for Docs
 
-Uses Gatsby to build static site. 
+Uses Gatsby to build static site.
 
 Installation:
 
@@ -9,6 +9,12 @@ npm install
 ```
 
 Running locally:
+
+If this is your first time running the site you'll need the static directory:
+
+```
+make static
+```
 
 ```
 STITCH_ID=<STITCH_ID> NAMESPACE=<DB/COLLECTION> PREFIX=<SITE/USER/BRANCH> gatsby develop
