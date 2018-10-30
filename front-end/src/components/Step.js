@@ -3,6 +3,7 @@ import Paragraph from '../components/Paragraph';
 import CodeBlock from '../components/CodeBlock';
 import LiteralInclude from '../components/LiteralInclude';
 import Tabs from '../components/Tabs';
+import Admonition from '../components/Admonition';
 
 export default class Step extends Component {
 
@@ -10,6 +11,9 @@ export default class Step extends Component {
     if (sectionData.type === 'paragraph') {
       return <Paragraph paragraphData={ sectionData } key={ index } modal={ this.props.modal } />
     } 
+    else if (sectionData.type === 'directive' && this.props.admonitions.includes(sectionData.name)) {
+      return <Admonition admonitionData={ sectionData } key={ index } modal={ this.props.modal } />
+    }
     else if (sectionData.type === 'directive' && sectionData.name === 'literalinclude') {
       return <LiteralInclude literalIncludeData={ sectionData } refDocMapping={ this.props.refDocMapping } key={ index } />
     }

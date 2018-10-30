@@ -20,6 +20,13 @@ export default class Guide extends Component {
       'summary',
       'whats_next'
     ];
+    this.admonitions = [
+      'admonition',
+      'note',
+      'tip',
+      'important',
+      'warning'
+    ];
     this.state = {
       languages: [],
       activeLanguage: undefined,
@@ -144,6 +151,7 @@ export default class Guide extends Component {
         return (
           <Section sectionData={ section } 
                    key={ index } 
+                   admonitions={ this.admonitions }
                    refDocMapping={ this.props.pageContext.__refDocMapping } 
                    modal={ this.modalFetchData.bind(this) } 
                    addLanguages={ this.addLanguages.bind(this) } 
