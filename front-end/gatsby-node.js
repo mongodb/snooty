@@ -5,7 +5,7 @@ const contentful = require('contentful');
 const mongoclient = require('mongodb').MongoClient;
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
-let LANGUAGES = [
+const LANGUAGES = [
   ['shell', 'Mongo Shell'],
   ['compass', 'Compass'],
   ['python', 'Python'],
