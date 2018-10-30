@@ -7,22 +7,11 @@ import Admonition from '../components/Admonition';
 
 export default class Step extends Component {
 
-  constructor() {
-    super();
-    this.admonitions = [
-      'admonition',
-      'note',
-      'tip',
-      'important',
-      'warning'
-    ];
-  }
-
   stepRendering(sectionData, index) {
     if (sectionData.type === 'paragraph') {
       return <Paragraph paragraphData={ sectionData } key={ index } modal={ this.props.modal } />
     } 
-    else if (sectionData.type === 'directive' && this.admonitions.includes(sectionData.name)) {
+    else if (sectionData.type === 'directive' && this.props.admonitions.includes(sectionData.name)) {
       return <Admonition admonitionData={ sectionData } key={ index } modal={ this.props.modal } />
     }
     else if (sectionData.type === 'directive' && sectionData.name === 'literalinclude') {

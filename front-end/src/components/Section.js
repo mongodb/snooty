@@ -80,6 +80,7 @@ export default class Section extends Component {
               return <Include includeData={ child } 
                               key={ index } 
                               modal={ this.props.modal }
+                              admonitions={ this.props.admonitions } 
                               refDocMapping={ this.props.refDocMapping } 
                               showAllSteps={ this.state.showAllSteps } 
                               showStepIndex={ this.state.showStepIndex }

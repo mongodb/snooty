@@ -3,7 +3,7 @@ import Paragraph from '../components/Paragraph';
 
 export default class Admonition extends Component {
 
-  // backwards compatible css clasnames
+  // backwards compatible css classnames
   admonitionRendering() {
     if (this.props.admonitionData.name === 'admonition') {
       return (
