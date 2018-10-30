@@ -3,7 +3,7 @@ import Paragraph from '../components/Paragraph';
 import List from '../components/List';
 import Include from '../components/Include';
 import Stepper from '../components/Stepper';
-import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import URIForm from '../components/URIForm';
 
 export default class Section extends Component {
 
@@ -88,6 +88,9 @@ export default class Section extends Component {
                               activeLanguage={ this.props.activeLanguage } />
             }
           })
+        }
+        {
+          (this.props.sectionData.name === 'summary') ? <URIForm /> : '' 
         }
       </div>
     )

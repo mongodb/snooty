@@ -24,7 +24,7 @@ then go to http://localhost:8000
 To build and serve the site, use the same ENV vars from above:
 
 ```
-ENV_VARS gatsby build --prefix-paths
+<ENV_VARS> gatsby build --prefix-paths
 gatsby serve
 ```
 
