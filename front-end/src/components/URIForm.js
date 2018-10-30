@@ -4,7 +4,7 @@ export default class URIForm extends Component {
 
   render() {
     return (
-      <form className="uriwriter__form" id="uriwriter" autoComplete="off" __bizdiag="0" __biza="WJ__">
+      <form className="uriwriter__form" id="uriwriter" autoComplete="off">
         <div id="deployment_type" className="mongodb-form__prompt" style={ {display: 'block'} }>
           <div className="mongodb-form__label">Server deployment type</div>
           <ul className="guide__pills">

@@ -28,7 +28,7 @@ export default class Paragraph extends Component {
 
   render() {
     return (
-      <p>
+      <p style={ { margin: this.props.admonition ? '0 auto' : '' } }>
         { this.paragraphRendering() }
       </p>
     )
