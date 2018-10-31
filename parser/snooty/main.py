@@ -397,12 +397,19 @@ def main() -> None:
     connection = pymongo.MongoClient(url, password=getpass.getpass())
     root_path = sys.argv[3]
     project = Project('guides', root_path, connection, warning_callback=log_warning)
-    project.build()
 
-    if sys.argv[1] == 'watch':
-        observer = watchdog.observers.Observer()
-        handler = ObserveHandler(project)
-        logger.info('Watching for changes...')
-        observer.schedule(handler, root_path, recursive=True)
-        observer.start()
-        observer.join()
+    try:
+        project.build()
+
+        if sys.argv[1] == 'watch':
+            observer = watchdog.observers.Observer()
+            handler = ObserveHandler(project)
+            logger.info('Watching for changes...')
+            observer.schedule(handler, root_path, recursive=True)
+            observer.start()
+            observer.join()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        print('Closing connection...')
+        connection.close()
