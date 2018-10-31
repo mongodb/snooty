@@ -3,7 +3,7 @@ from yaml.composer import Composer
 from yaml.constructor import Constructor
 from typing import Dict, List, Tuple, Type, TypeVar
 from .flutter import check_type, LoadError
-from .nodes import SerializableType
+from ..types import SerializableType
 from . import steps  # NoQA
 
 T = TypeVar('T')

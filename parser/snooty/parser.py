@@ -274,7 +274,8 @@ class NoTransformRstParser(docutils.parsers.rst.Parser):
 
 
 class Visitor(metaclass=abc.ABCMeta):
-    def __init__(self, document: docutils.nodes.document) -> None: pass
+    def __init__(self, project_root: str, docpath: str, document: docutils.nodes.document) -> None:
+        pass
 
     @abc.abstractmethod
     def dispatch_visit(self, node: docutils.nodes.Node) -> None:
@@ -289,9 +290,10 @@ V = TypeVar('V', bound=Visitor)
 
 
 class Parser(Generic[V]):
-    __slots__ = ('visitor_class', 'directives')
+    __slots__ = ('project_root', 'visitor_class')
 
-    def __init__(self, visitor_class: Type[V]) -> None:
+    def __init__(self, project_root: str, visitor_class: Type[V]) -> None:
+        self.project_root = project_root
         self.visitor_class = visitor_class
 
     def parse(self, path: str, text: str) -> V:
@@ -303,6 +305,6 @@ class Parser(Generic[V]):
         document = docutils.utils.new_document(path, settings)
         parser.parse(text, document)
 
-        visitor = self.visitor_class(document)
+        visitor = self.visitor_class(self.project_root, path, document)
         document.walkabout(visitor)
         return visitor

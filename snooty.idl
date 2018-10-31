@@ -64,7 +64,6 @@ interface Target <: Node {
 
 interface Heading <: Parent {
   type: "heading";
-  depth: 1 <= number <= 6;
   children: [PhrasingContent];
 }
 

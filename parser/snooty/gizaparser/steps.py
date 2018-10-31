@@ -1,10 +1,8 @@
 from dataclasses import dataclass
-from typing import Dict, Callable, Tuple, Optional, List, Union
+from typing import Dict, Optional, List, Union
 from .flutter import checked
-from .nodes import Node, Inherit, SerializableType
-
-Warnings = List[Tuple[str, int]]
-EmbeddedRstParser = Callable[[str, int, bool], Tuple[List[SerializableType], List[Tuple[str, int]]]]
+from .nodes import Node, Inherit
+from ..types import EmbeddedRstParser, SerializableType, Page
 
 
 @checked
@@ -25,8 +23,7 @@ class Action(Node):
     post: Optional[str]
     pre: Optional[str]
 
-    def render(self, parse_rst: EmbeddedRstParser) -> Tuple[List[SerializableType], Warnings]:
-        all_warnings: Warnings = []
+    def render(self, parse_rst: EmbeddedRstParser) -> List[SerializableType]:
         all_nodes: List[SerializableType] = []
         nodes_to_append_children: List[SerializableType] = all_nodes
         if self.heading:
@@ -42,8 +39,7 @@ class Action(Node):
             else:
                 heading_text = self.heading
 
-            result, warnings = parse_rst(heading_text, self.__line__, True)
-            all_warnings.extend(warnings)
+            result = parse_rst(heading_text, self.__line__, True)
 
             nodes_to_append_children.append({
                 'type': 'heading',
@@ -51,9 +47,8 @@ class Action(Node):
             })
 
         if self.pre:
-            result, warnings = parse_rst(self.pre, self.__line__, False)
+            result = parse_rst(self.pre, self.__line__, False)
             nodes_to_append_children.extend(result)
-            all_warnings.extend(warnings)
 
         if self.code:
             nodes_to_append_children.append({
@@ -65,16 +60,14 @@ class Action(Node):
             })
 
         if self.content:
-            result, warnings = parse_rst(self.content, self.__line__, False)
+            result = parse_rst(self.content, self.__line__, False)
             nodes_to_append_children.extend(result)
-            all_warnings.extend(warnings)
 
         if self.post:
-            result, warnings = parse_rst(self.post, self.__line__, False)
+            result = parse_rst(self.post, self.__line__, False)
             nodes_to_append_children.extend(result)
-            all_warnings.extend(warnings)
 
-        return all_nodes, all_warnings
+        return all_nodes
 
 
 @checked
@@ -95,8 +88,7 @@ class Step(Node):
     source: Optional[Inherit]
     inherit: Optional[Inherit]
 
-    def render(self, parse_rst: EmbeddedRstParser) -> Tuple[SerializableType, Warnings]:
-        all_warnings: Warnings = []
+    def render(self, page: Page, parse_rst: EmbeddedRstParser) -> SerializableType:
         children: List[SerializableType] = []
         root = {
             'type': 'section',
@@ -110,34 +102,29 @@ class Step(Node):
             else:
                 heading_text = self.title
 
-            result, warnings = parse_rst(heading_text, self.__line__, True)
+            result = parse_rst(heading_text, self.__line__, True)
             children.append({
                 'type': 'heading',
                 'position': {'start': {'line': self.__line__}},
                 'children': result
             })
-            all_warnings.extend(warnings)
 
         if self.pre:
-            result, warnings = parse_rst(self.pre, self.__line__, False)
+            result = parse_rst(self.pre, self.__line__, False)
             children.append(result)
-            all_warnings.extend(warnings)
 
         if self.action:
             actions = [self.action] if isinstance(self.action, Action) else self.action
             for action in actions:
-                result, warnings = action.render(parse_rst)
+                result = action.render(parse_rst)
                 children.extend(result)
-                all_warnings.extend(warnings)
 
         if self.content:
-            result, warnings = parse_rst(self.content, self.__line__, False)
+            result = parse_rst(self.content, self.__line__, False)
             children.append(result)
-            all_warnings.extend(warnings)
 
         if self.post:
-            result, warnings = parse_rst(self.post, self.__line__, False)
+            result = parse_rst(self.post, self.__line__, False)
             children.append(result)
-            all_warnings.extend(warnings)
 
-        return root, all_warnings
+        return root
