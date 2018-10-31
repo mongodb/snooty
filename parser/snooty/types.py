@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Dict, Set, List, Tuple, Optional, Union
 
 SerializableType = Union[None, bool, str, int, float, Dict[str, Any], List[Any]]
+ParseWarning = Tuple[str, str, int]
 
 
 @dataclass

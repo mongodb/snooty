@@ -15,7 +15,7 @@ from typing import Any, Callable, Dict, Iterator, Optional, Tuple, Set, List
 import docutils.utils
 
 from . import gizaparser
-from .types import SerializableType, EmbeddedRstParser, Page, StaticAsset
+from .types import SerializableType, EmbeddedRstParser, Page, StaticAsset, ParseWarning
 from .parser import Visitor, Parser
 
 logger = logging.getLogger(__name__)
@@ -68,7 +68,8 @@ class JSONVisitor(Visitor):
     def dispatch_visit(self, node: docutils.nodes.Node) -> None:
         node_name = node.__class__.__name__
         if node_name == 'system_message':
-            self.warnings.append((node.astext(), get_line(node)))
+            msg = node[0].astext()
+            self.warnings.append((msg, get_line(node)))
             raise docutils.nodes.SkipNode()
         elif node_name in ('definition', 'field_list'):
             return
@@ -286,14 +287,16 @@ class Project:
                  name: str,
                  root: str,
                  client: pymongo.MongoClient,
-                 progress_poker: Optional[Callable[[int, int, str], None]]=None) -> None:
+                 progress_callback: Optional[Callable[[int, int, str], None]]=None,
+                 warning_callback: Optional[Callable[[List[ParseWarning]], None]]=None) -> None:
         self.name = name
         self.root = root
         self.client = client
         self.parser = Parser(self.root, JSONVisitor)
-
         self.static_assets: Dict[str, Set[StaticAsset]] = collections.defaultdict(set)
-        self.progress_poker = progress_poker if progress_poker else lambda cur, total, status: None
+
+        self.progress = progress_callback if progress_callback else lambda cur, total, status: None
+        self.warning = warning_callback if warning_callback else lambda warnings: None
 
         username = pwd.getpwuid(os.getuid()).pw_name
         branch = subprocess.check_output(
@@ -304,10 +307,10 @@ class Project:
     def get_page_id(self, path: str) -> str:
         return '/'.join(self.prefix + [path.split('.')[0].split('/', 1)[1]])
 
-    def update(self, path: str) -> List[Tuple[str, int]]:
+    def update(self, path: str) -> None:
         page = parse(self.parser, path)
         self._update(page)
-        return page.warnings
+        self.warning(list((path, msg, lineno) for msg, lineno in page.warnings))
 
     def _update(self, page: Page) -> None:
         page_id = self.get_page_id(page.path)
@@ -343,8 +346,9 @@ class Project:
             paths = get_files(self.root, {'.rst', '.txt', '.yaml'})
             for page in pool.imap(partial(parse, self.parser), paths):
                 self._update(page)
-                # if page.warnings:
-                #     print(page.warnings)
+                if page.warnings:
+                    warnings = ((page.path, msg, lineno) for msg, lineno in page.warnings)
+                    self.warning(list(warnings))
 
 
 class ObserveHandler(watchdog.events.PatternMatchingEventHandler):
@@ -371,6 +375,12 @@ class ObserveHandler(watchdog.events.PatternMatchingEventHandler):
             assert False
 
 
+def log_warning(warnings: List[ParseWarning]) -> None:
+    for path, msg, lineno in warnings:
+        # Line numbers are currently... uh, "approximate"
+        print('WARNING({}:{}ish): {}'.format(path, lineno, msg))
+
+
 def usage(exit_code: int) -> None:
     """Exit and print usage information."""
     print('Usage: {} <build|watch> <mongodb-url> <source-path>'.format(sys.argv[0]))
@@ -386,7 +396,7 @@ def main() -> None:
     url = sys.argv[2]
     connection = pymongo.MongoClient(url, password=getpass.getpass())
     root_path = sys.argv[3]
-    project = Project('guides', root_path, connection)
+    project = Project('guides', root_path, connection, warning_callback=log_warning)
     project.build()
 
     if sys.argv[1] == 'watch':

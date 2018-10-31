@@ -1,6 +1,6 @@
 import docutils.nodes
 import docutils.utils
-from typing import Any, Optional, Sequence
+from typing import Any, Optional, Sequence, Union
 from typing_extensions import Protocol
 
 
@@ -19,7 +19,7 @@ class Node:
     def walkabout(self, visitor: NodeVisitor) -> None: ...
     def astext(self) -> str: ...
 
-    def __getitem__(self, key: str) -> Any: ...
+    def __getitem__(self, key: Union[int, str]) -> Any: ...
     def __setitem__(self, key: str, value: Any) -> None: ...
 
 
