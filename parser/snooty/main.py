@@ -185,7 +185,7 @@ class JSONVisitor(Visitor):
 
             try:
                 static_asset = self.add_static_asset(argument_text)
-                options = static_asset.checksum
+                options['checksum'] = static_asset.checksum
             except OSError as err:
                 msg = '"figure" could not open "{}": {}'.format(
                     argument_text, os.strerror(err.errno))
