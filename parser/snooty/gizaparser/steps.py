@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from typing import Dict, Optional, List, Union
+from typing import Optional, List, Union
 from .flutter import checked
-from .nodes import Node, Inherit
+from .nodes import Node, Inheritable
 from ..types import EmbeddedRstParser, SerializableType, Page
 
 
@@ -72,8 +72,7 @@ class Action(Node):
 
 @checked
 @dataclass
-class Step(Node):
-    ref: Optional[str]
+class Step(Node, Inheritable):
     title: Union[str, None, OldHeading]
     stepnum: Optional[int]
     content: Optional[str]
@@ -83,10 +82,6 @@ class Step(Node):
     optional: Optional[bool]
 
     action: Union[List[Action], Action, None]
-
-    replacement: Optional[Dict[str, object]]
-    source: Optional[Inherit]
-    inherit: Optional[Inherit]
 
     def render(self, page: Page, parse_rst: EmbeddedRstParser) -> SerializableType:
         children: List[SerializableType] = []

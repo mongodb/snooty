@@ -1,310 +1,336 @@
-import abc
-import docutils.frontend
+import collections
 import docutils.nodes
-import docutils.parsers.rst
-import docutils.parsers.rst.directives
-import docutils.parsers.rst.roles
-import docutils.parsers.rst.states
-import docutils.statemachine
+import logging
+import multiprocessing
+import os
+import pwd
+import subprocess
+from functools import partial
+from typing import Any, Dict, Sequence, Tuple, Set, List
+from typing_extensions import Protocol
 import docutils.utils
-import re
-import sys
-from dataclasses import dataclass
-from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
-from .gizaparser import load_yaml
-from .gizaparser.flutter import checked, check_type, LoadError
 
-PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
-PAT_WHITESPACE = re.compile(r'^\x20*')
-SPECIAL_DIRECTIVES = {'code-block', 'include', 'tabs-drivers', 'tabs', 'tabs-platforms', 'only'}
+from . import gizaparser, rstparser, util
+from .gizaparser.nodes import Registry, GizaCategory
+from .types import SerializableType, EmbeddedRstParser, Page, StaticAsset
+
+RST_EXTENSIONS = {'.rst', '.txt'}
+logger = logging.getLogger(__name__)
 
 
-@checked
-@dataclass
-class LegacyTabDefinition:
-    __line__: int
-    id: str
-    title: Optional[str]
-    content: str
-
-
-@checked
-@dataclass
-class LegacyTabsDefinition:
-    __line__: int
-    hidden: Optional[bool]
-    tabs: List[LegacyTabDefinition]
-
-
-class directive_argument(docutils.nodes.General, docutils.nodes.TextElement):
-    pass
-
-
-class directive(docutils.nodes.General, docutils.nodes.Element):
-    def __init__(self, name: str) -> None:
-        super(directive, self).__init__()
-        self['name'] = name
-
-
-class role(docutils.nodes.General, docutils.nodes.Inline, docutils.nodes.Element):
-    def __init__(self, name: str, rawtext: str, text: str, lineno: int) -> None:
-        super(role, self).__init__()
-        self['name'] = name
-        self['raw'] = text
-
-        match = PAT_EXPLICIT_TILE.match(text)
-        if match:
-            self['label'] = {
-                'type': 'text',
-                'value': match['label'],
-                'position': {'start': {'line': lineno}}
-            }
-            self['target'] = match['target']
-        else:
-            self['label'] = text
-            self['target'] = text
-
-
-def parse_options(block_text: str) -> Dict[str, str]:
-    """Docutils doesn't parse directive options that aren't known ahead
-       of time. Do it ourselves, badly."""
-    lines = block_text.split('\n')
-    current_key: Optional[str] = None
-    kv: Dict[str, str] = {}
-    base_indentation = 0
-
-    for i, line in enumerate(lines):
-        if i == 0:
-            continue
-
-        stripped = line.strip()
-        if not stripped:
-            continue
-
-        whitespace_match = PAT_WHITESPACE.match(line)
-        assert whitespace_match is not None
-        indentation = len(whitespace_match.group(0))
-
-        if base_indentation == 0:
-            base_indentation = indentation
-
-        match = re.match(docutils.parsers.rst.states.Body.patterns['field_marker'], stripped)
-        if match:
-            current_key = match.group(0)
-            assert current_key is not None
-            value = stripped[len(current_key):]
-            current_key = current_key.strip().strip(':')
-            kv[current_key] = value
-            continue
-
-        if indentation == base_indentation:
-            break
-        elif current_key:
-            kv[current_key] += '\n' + line[indentation:]
-
-    return kv
-
-
-class Directive(docutils.parsers.rst.Directive):
-    optional_arguments = 1
-    final_argument_whitespace = True
-    has_content = True
-
-    def run(self) -> List[docutils.nodes.Node]:
-        messages: List[docutils.nodes.Node] = []
-        source, line = self.state_machine.get_source_and_line(self.lineno)
-
-        node = directive(self.name)
-        node.document = self.state.document
-        node.source, node.line = source, line
-        self.add_name(node)
-
-        # Parse the argument (i.e. what's after the colon on the 0th line)
-        if self.arguments:
-            argument_text = self.arguments[0].split('\n')[0]
-            textnodes, messages = self.state.inline_text(argument_text, self.lineno)
-            argument = directive_argument(argument_text, '', *textnodes)
-            argument.document = self.state.document
-            argument.source, argument.line = source, line
-            node.append(argument)
-
-        # Parse options
-        node['options'] = parse_options(self.block_text)
-
-        # Parse the content
-        if self.name in SPECIAL_DIRECTIVES:
-            raw = docutils.nodes.FixedTextElement()
-            raw.document = self.state.document
-            raw.source, raw.line = source, line
-            node.append(raw)
-        else:
-            self.state.nested_parse(self.content, self.state_machine.line_offset, node)
-
-        return [node]
-
-
-def prepare_viewlist(text: str, ignore: int=1) -> List[str]:
-    """Convert a docstring into lines of parseable reST.  Remove common leading
-    indentation, where the indentation of a given number of lines (usually just
-    one) is ignored.
-    Return the docstring as a list of lines usable for inserting into a docutils
-    ViewList (used as argument of nested_parse().)  An empty line is added to
-    act as a separator between this docstring and following content.
-    """
-    lines = text.expandtabs().splitlines()
-    # Find minimum indentation of any non-blank lines after ignored lines.
-    margin = sys.maxsize
-    for line in lines[ignore:]:
-        content = len(line.lstrip())
-        if content:
-            indent = len(line) - content
-            margin = min(margin, indent)
-    # Remove indentation from ignored lines.
-    for i in range(ignore):
-        if i < len(lines):
-            lines[i] = lines[i].lstrip()
-    if margin < sys.maxsize:
-        for i in range(ignore, len(lines)):
-            lines[i] = lines[i][margin:]
-    # Remove any leading blank lines.
-    while lines and not lines[0]:
-        lines.pop(0)
-    # make sure there is an empty line at the end
-    if lines and lines[-1]:
-        lines.append('')
-    return lines
-
-
-class TabsDirective(Directive):
-    option_spec = {
-        'tabset': str,
-        'hidden': bool
-    }
-    has_content = True
-
-    def run(self) -> List[docutils.nodes.Node]:
-        # Transform the old YAML-based syntax into the new pure-rst syntax.
-        # This heuristic gusses whether we have the old syntax or the NEW.
-        if any(line == 'tabs:' for line in self.content):
-            parsed = load_yaml('\n'.join(self.content))[0]
-            try:
-                loaded = check_type(LegacyTabsDefinition, parsed)
-            except LoadError as err:
-                line = self.lineno + getattr(err.bad_data, '__line__', 0) + 1
-                error_node = self.state.document.reporter.error(
-                    str(err),
-                    line=line)
-                return [error_node]
-
-            tabset = self.name.split('-', 1)[-1]
-            node = directive('tabs')
-            node.document = self.state.document
-            source, node.line = self.state_machine.get_source_and_line(self.lineno)
-            node.source = source
-            self.add_name(node)
-
-            options: Dict[str, object] = {}
-            node['options'] = options
-            if loaded.hidden:
-                options['hidden'] = True
-
-            if tabset and tabset != 'tabs':
-                options['tabset'] = tabset
-
-            for child in loaded.tabs:
-                node.append(self.make_tab_node(source, child))
-
-            return [node]
-
-        # The new syntax needs no special handling
-        return Directive.run(self)
-
-    def make_tab_node(self, source: str, child: LegacyTabDefinition) -> docutils.nodes.Node:
-        line = self.lineno + child.__line__
-
-        node = directive('tab')
-        node.document = self.state.document
-        node.source = source
-        node.line = line
-
-        argument_text = child.id
-        textnodes, messages = self.state.inline_text(argument_text, line)
-        argument = directive_argument(argument_text, '', *textnodes)
-        argument.document = self.state.document
-        argument.source, argument.line = source, line
-        node.append(argument)
-        node['options'] = {}
-
-        content_lines = prepare_viewlist(child.content)
-        self.state.nested_parse(
-            docutils.statemachine.ViewList(content_lines, source=source),
-            self.state_machine.line_offset,
-            node)
-
-        return node
-
-
-def handle_role(typ: str, rawtext: str, text: str,
-                lineno: int, inliner: object,
-                options: Dict={}, content: List=[]) -> Tuple[List, List]:
-    node = role(typ, rawtext, text, lineno)
-    return [node], []
-
-
-def lookup_directive(directive_name: str, language_module: object,
-                     document: docutils.nodes.document) -> Tuple[Type, List]:
-    if directive_name.startswith('tabs'):
-        return TabsDirective, []
-
-    return Directive, []
-
-
-def lookup_role(role_name: str, language_module: object, lineno: int,
-                reporter: object) -> Tuple[Optional[Callable], List]:
-    return handle_role, []
-
-
-docutils.parsers.rst.directives.directive = lookup_directive
-docutils.parsers.rst.roles.role = lookup_role
-
-
-class NoTransformRstParser(docutils.parsers.rst.Parser):
-    def get_transforms(self) -> List:
-        return []
-
-
-class Visitor(metaclass=abc.ABCMeta):
+class JSONVisitor(rstparser.Visitor):
+    """Node visitor that creates a JSON-serializable structure."""
     def __init__(self, project_root: str, docpath: str, document: docutils.nodes.document) -> None:
-        pass
-
-    @abc.abstractmethod
-    def dispatch_visit(self, node: docutils.nodes.Node) -> None:
-        pass
-
-    @abc.abstractmethod
-    def dispatch_departure(self, node: docutils.nodes.Node) -> None:
-        pass
-
-
-V = TypeVar('V', bound=Visitor)
-
-
-class Parser(Generic[V]):
-    __slots__ = ('project_root', 'visitor_class')
-
-    def __init__(self, project_root: str, visitor_class: Type[V]) -> None:
         self.project_root = project_root
-        self.visitor_class = visitor_class
+        self.docpath = docpath
+        self.document = document
+        self.state: List[Dict[str, Any]] = []
+        self.warnings: List[Tuple[str, int]] = []
+        self.static_assets: Set[StaticAsset] = set()
 
-    def parse(self, path: str, text: str) -> V:
-        parser = NoTransformRstParser()
-        settings = docutils.frontend.OptionParser(
-            components=(docutils.parsers.rst.Parser,)
-            ).get_default_values()
-        settings.report_level = docutils.utils.Reporter.SEVERE_LEVEL
-        document = docutils.utils.new_document(path, settings)
-        parser.parse(text, document)
+    def dispatch_visit(self, node: docutils.nodes.Node) -> None:
+        node_name = node.__class__.__name__
+        if node_name == 'system_message':
+            msg = node[0].astext()
+            self.warnings.append((msg, util.get_line(node)))
+            raise docutils.nodes.SkipNode()
+        elif node_name in ('definition', 'field_list'):
+            return
 
-        visitor = self.visitor_class(self.project_root, path, document)
-        document.walkabout(visitor)
-        return visitor
+        if node_name == 'document':
+            self.state.append({
+                'type': 'root',
+                'children': [],
+                'position': {
+                    'start': {'line': 0}
+                }
+            })
+            return
+
+        doc: Dict[str, SerializableType] = {
+            'type': node_name,
+            'position': {
+                'start': {'line': util.get_line(node)}
+            }
+        }
+
+        if node_name == 'field':
+            key = node.children[0].astext()
+            value = node.children[1].astext()
+            self.state[-1].setdefault('options', {})[key] = value
+            raise docutils.nodes.SkipNode()
+
+        self.state.append(doc)
+
+        if node_name == 'Text':
+            doc['type'] = 'text'
+            doc['value'] = str(node)
+            return
+
+        # Most, but not all, nodes have children nodes
+        make_children = True
+
+        if node_name == 'directive':
+            self.handle_directive(node, doc)
+        elif node_name == 'role':
+            doc['name'] = node['name']
+            doc['label'] = node['label']
+            doc['target'] = node['target']
+            doc['raw'] = node['raw']
+        elif node_name == 'target':
+            doc['type'] = 'target'
+            doc['ids'] = node['ids']
+            make_children = False
+        elif node_name == 'definition_list':
+            doc['type'] = 'definitionList'
+        elif node_name == 'definition_list_item':
+            doc['type'] = 'definitionListItem'
+            doc['term'] = []
+        elif node_name == 'bullet_list':
+            doc['type'] = 'list'
+            doc['ordered'] = False
+        elif node_name == 'enumerated_list':
+            doc['type'] = 'list'
+            doc['ordered'] = True
+        elif node_name == 'list_item':
+            doc['type'] = 'listItem'
+        elif node_name == 'title':
+            doc['type'] = 'heading'
+        elif node_name == 'FixedTextElement':
+            doc['type'] = 'literal'
+            doc['value'] = node.astext()
+            make_children = False
+
+        if make_children:
+            doc['children'] = []
+
+    def dispatch_departure(self, node: docutils.nodes.Node) -> None:
+        node_name = node.__class__.__name__
+        if len(self.state) == 1 or node_name == 'definition':
+            return
+
+        popped = self.state.pop()
+
+        if popped['type'] == 'term':
+            self.state[-1]['term'] = popped['children']
+        else:
+            if 'children' not in self.state[-1]:
+                print(self.state[-1])
+            self.state[-1]['children'].append(popped)
+
+    def handle_directive(self, node: docutils.nodes.Node, doc: Dict[str, SerializableType]) -> None:
+        name = node['name']
+        doc['name'] = name
+
+        if node.children and node.children[0].__class__.__name__ == 'directive_argument':
+            visitor = JSONVisitor(self.project_root, self.docpath, self.document)
+            node.children[0].walkabout(visitor)
+            argument = visitor.state[-1]['children']
+            doc['argument'] = argument
+            options = node['options']
+            doc['options'] = options
+            node.children = node.children[1:]
+        else:
+            argument = []
+            options = {}
+            doc['argument'] = argument
+
+        argument_text = None
+        try:
+            argument_text = argument[0]['value']
+        except (IndexError, KeyError):
+            pass
+
+        if name == 'figure':
+            if argument_text is None:
+                self.warnings.append(('"figure" expected a path argument', util.get_line(node)))
+                return
+
+            try:
+                static_asset = self.add_static_asset(argument_text)
+                options['checksum'] = static_asset.checksum
+            except OSError as err:
+                msg = '"figure" could not open "{}": {}'.format(
+                    argument_text, os.strerror(err.errno))
+                self.warnings.append((msg, util.get_line(node)))
+
+    def add_static_asset(self, path: str) -> StaticAsset:
+        fileid, path = util.reroot_path(path, self.docpath, self.project_root)
+        static_asset = StaticAsset.load(fileid, path)
+        self.static_assets.add(static_asset)
+        return static_asset
+
+
+class InlineJSONVisitor(JSONVisitor):
+    """A JSONVisitor subclass which does not emit block nodes."""
+    def dispatch_visit(self, node: docutils.nodes.Node) -> None:
+        if isinstance(node, docutils.nodes.Body):
+            return
+
+        JSONVisitor.dispatch_visit(self, node)
+
+    def dispatch_departure(self, node: docutils.nodes.Node) -> None:
+        if isinstance(node, docutils.nodes.Body):
+            return
+
+        JSONVisitor.dispatch_departure(self, node)
+
+
+def step_to_page(page: Page,
+                 step: gizaparser.steps.Step,
+                 rst_parser: EmbeddedRstParser) -> SerializableType:
+    rendered = step.render(page, rst_parser)
+    return {
+        'type': 'directive',
+        'name': 'step',
+        'position': {'start': {'line': step.__line__}},
+        'children': [rendered]
+    }
+
+
+def steps_to_page(page: Page,
+                  steps: Sequence[gizaparser.steps.Step],
+                  rst_parser: EmbeddedRstParser) -> None:
+    page.ast = {
+        'type': 'directive',
+        'name': 'steps',
+        'position': {'start': {'line': 0}},
+        'children': [step_to_page(page, step, rst_parser) for step in steps]
+    }
+
+
+def parse_steps(path: str) -> Tuple[Sequence[gizaparser.steps.Step], str]:
+    return gizaparser.parse(gizaparser.steps.Step, path)
+
+
+def parse_rst(parser: rstparser.Parser[JSONVisitor], path: str) -> Page:
+    with open(path, 'r') as f:
+        text = f.read()
+    visitor = parser.parse(path, text)
+
+    return Page(
+        path,
+        text,
+        visitor.state[-1],
+        visitor.warnings,
+        visitor.static_assets)
+
+
+def make_embedded_rst_parser(project_root: str, page: Page) -> EmbeddedRstParser:
+    def parse_embedded_rst(rst: str,
+                           lineno: int,
+                           inline: bool) -> List[SerializableType]:
+        # Crudely make docutils line numbers match
+        text = '\n' * lineno + rst.strip()
+        visitor_class = InlineJSONVisitor if inline else JSONVisitor
+        parser = rstparser.Parser(project_root, visitor_class)
+        visitor = parser.parse(page.path, text)
+        children: List[SerializableType] = visitor.state[-1]['children']
+
+        page.warnings.extend(visitor.warnings)
+        page.static_assets.update(visitor.static_assets)
+
+        return children
+
+    return parse_embedded_rst
+
+
+def get_giza_category(path: str) -> str:
+    return os.path.basename(path).split('-', 1)[0]
+
+
+class ProjectBackend(Protocol):
+    def on_progress(self, progress: int, total: int, message: str) -> None: ...
+
+    def on_update(self, prefix: List[str], page_id: str, page: Page) -> None: ...
+
+    def on_delete(self, page_id: str) -> None: ...
+
+
+class Project:
+    def __init__(self,
+                 name: str,
+                 root: str,
+                 backend: ProjectBackend) -> None:
+        self.root = root
+        self.parser = rstparser.Parser(self.root, JSONVisitor)
+        self.static_assets: Dict[str, Set[StaticAsset]] = collections.defaultdict(set)
+        self.backend = backend
+
+        self.steps_registry: Registry[gizaparser.steps.Step] = Registry()
+        self.yaml_mapping = {
+            'steps': GizaCategory(self.steps_registry, parse_steps, steps_to_page)
+        }
+
+        username = pwd.getpwuid(os.getuid()).pw_name
+        branch = subprocess.check_output(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+            encoding='utf-8').strip()
+        self.prefix = [name, username, branch]
+
+    def get_page_id(self, path: str) -> str:
+        return '/'.join(self.prefix + [path.split('.')[0].split('/', 1)[1]])
+
+    def update(self, path: str) -> None:
+        node_id = os.path.basename(path)
+        prefix = get_giza_category(path)
+        _, ext = os.path.splitext(path)
+        if ext in RST_EXTENSIONS:
+            page = parse_rst(self.parser, path)
+        elif ext == '.yaml' and prefix in self.yaml_mapping:
+            giza_category = self.yaml_mapping[prefix]
+            needs_rebuild = self.steps_registry.dg.dependents[node_id].union(set([node_id]))
+            logger.debug('needs_rebuild: %s', ','.join(needs_rebuild))
+            for node_id in needs_rebuild:
+                steps, text = getattr(giza_category, 'parse')(path)
+                giza_category.registry.add(path, text, steps)
+                giza_node = giza_category.registry.reify_node_id(node_id)
+                page = Page(giza_node.path, text, {}, [], set())
+                embedded_parser = make_embedded_rst_parser(self.root, page)
+                getattr(giza_category, 'to_page')(page, giza_node.data, embedded_parser)
+                path = page.path
+        else:
+            raise ValueError('Unknown file type: ' + path)
+
+        self.backend.on_update(self.prefix, self.get_page_id(path), page)
+
+    def delete(self, path: str) -> None:
+        self.backend.on_delete(self.get_page_id(path))
+
+    def build(self) -> None:
+        with multiprocessing.Pool() as pool:
+            paths = util.get_files(self.root, RST_EXTENSIONS)
+            logger.debug('Processing rst files')
+            for page in pool.imap_unordered(partial(parse_rst, self.parser), paths):
+                self.backend.on_update(self.prefix, self.get_page_id(page.path), page)
+
+            # Categorize our YAML files
+            logger.debug('Categorizing YAML files')
+            categorized: Dict[str, List[str]] = collections.defaultdict(list)
+            for path in util.get_files(self.root, ('.yaml',)):
+                prefix = get_giza_category(path)
+                if prefix in self.yaml_mapping:
+                    categorized[prefix].append(path)
+
+            # Initialize our YAML file registry
+            for prefix, giza_category in self.yaml_mapping.items():
+                logger.debug('Parsing %s YAML', prefix)
+                paths_in_category: List[str] = categorized[prefix]
+                # getattr is necessary because of https://github.com/python/mypy/issues/5485
+                fun = getattr(giza_category, 'parse')
+                for path, (steps, text) in zip(
+                        paths_in_category,
+                        pool.imap_unordered(fun, paths_in_category)):
+                    giza_category.registry.add(path, text, steps)
+
+        # Now that all of our YAML files are loaded, generate a page for each one
+        for prefix, giza_category in self.yaml_mapping.items():
+            logger.debug('Processing %s YAML: %d nodes', prefix, len(giza_category.registry))
+            # getattr is necessary because of https://github.com/python/mypy/issues/5485
+            to_page = getattr(giza_category, 'to_page')
+
+            for node_id, giza_node in giza_category.registry:
+                page = Page(giza_node.path, giza_node.text, {}, [], set())
+                embedded_parser = make_embedded_rst_parser(self.root, page)
+                to_page(page, giza_node.data, embedded_parser)
+                self.backend.on_update(self.prefix, self.get_page_id(page.path), page)

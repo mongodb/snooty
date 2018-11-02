@@ -2,7 +2,7 @@
 
 run:
 	pipenv run mypy --strict snooty
-	pipenv run python -m snooty watch 'mongodb://localhost/test?retryWrites=true' source
+	pipenv run python -m snooty watch source 'mongodb://localhost/test?retryWrites=true'
 
 lint:
 	pipenv run mypy --strict snooty

@@ -6,7 +6,7 @@ from .flutter import check_type, LoadError
 from ..types import SerializableType
 from . import steps  # NoQA
 
-T = TypeVar('T')
+_T = TypeVar('_T')
 
 
 class ParseError(Exception):
@@ -41,7 +41,7 @@ def load_yaml(text: str) -> List[SerializableType]:
     return result
 
 
-def parse(path: str, ty: Type[T]) -> Tuple[List[T], str]:
+def parse(ty: Type[_T], path: str) -> Tuple[List[_T], str]:
     with open(path, 'r') as f:
         text = f.read()
 
