@@ -4,6 +4,7 @@ import List from '../components/List';
 import Include from '../components/Include';
 import Stepper from '../components/Stepper';
 import URIForm from '../components/URIForm';
+import OSTabs from '../components/OSTabs';
 
 export default class Section extends Component {
 
