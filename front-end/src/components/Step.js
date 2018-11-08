@@ -4,6 +4,7 @@ import CodeBlock from '../components/CodeBlock';
 import LiteralInclude from '../components/LiteralInclude';
 import Tabs from '../components/Tabs';
 import Admonition from '../components/Admonition';
+import Figure from '../components/Figure';
 
 export default class Step extends Component {
 
@@ -19,6 +20,9 @@ export default class Step extends Component {
     }
     else if (sectionData.type === 'directive' && sectionData.name === 'tabs') {
       return <Tabs tabsData={ sectionData } refDocMapping={ this.props.refDocMapping } key={ index } addLanguages={ this.props.addLanguages } activeLanguage={ this.props.activeLanguage } />
+    }
+    else if (sectionData.type === 'directive' && sectionData.name === 'figure') {
+      return <Figure figureData={ sectionData } key={ index } />
     }
     else if (sectionData.type === 'code') {
       return <CodeBlock codeData={ sectionData } key={ index } />

@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const crypto = require('crypto');
 const uuidv1 = require('uuid/v1');
 const contentful = require('contentful');
@@ -26,12 +27,18 @@ const LANGUAGES = [
 const PREFIX = process.env.PREFIX.split('/');
 const STITCH_ID = process.env.STITCH_ID;
 const NAMESPACE = process.env.NAMESPACE;
+const NAMESPACE_ASSETS = NAMESPACE.split('/')[0] + '/' + 'assets';
 
-let PAGES = [];
-let INCLUDE_FILES = [];
-let GITHUB_CODE_EXAMPLES = [];
+// different types of references
+const PAGES = [];
+const INCLUDE_FILES = [];
+const GITHUB_CODE_EXAMPLES = [];
+const ASSETS = [];
+
+// in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
 
+// stich client connection
 let stitchClient;
 
 const setupStitch = () => {
@@ -44,6 +51,15 @@ const setupStitch = () => {
   });
 };
 
+const saveAssetFile = async (name, objData) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(`static/${name}`, objData.data.buffer, 'binary', (err) => {
+      if (err) throw err;
+      resolve();
+    });
+  });
+}
+
 exports.sourceNodes = async ({ actions }) => {
 
   const { createNode } = actions;
@@ -51,7 +67,7 @@ exports.sourceNodes = async ({ actions }) => {
 
   await setupStitch();
 
-  // params to get index document
+  // start from index document
   const query = { _id: `${ PREFIX.join('/') }/index` };
 
   // get index document
@@ -63,13 +79,15 @@ exports.sourceNodes = async ({ actions }) => {
   // resolve references/urls to documents
   RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [PREFIX, NAMESPACE, documents, RESOLVED_REF_DOC_MAPPING]);
 
-  // find what refs are pages 
+  // separate references into correct types, e.g. pages, include files, assets, etc.
   for (const ref of Object.keys(RESOLVED_REF_DOC_MAPPING)) {
     if (ref.includes('includes/')) {
       INCLUDE_FILES.push(ref);
-    } else if (ref.indexOf('https://github.com') !== -1) {
+    } else if (ref.includes('https://github.com')) {
       GITHUB_CODE_EXAMPLES.push(ref);
-    } else if (ref.indexOf('curl') === -1) {
+    } else if (ref.includes('#')) {
+      ASSETS.push(ref);
+    } else if (!ref.includes('curl') && !ref.includes('https://')) {
       PAGES.push(ref);
     }
   }
@@ -81,10 +99,21 @@ exports.sourceNodes = async ({ actions }) => {
     RESOLVED_REF_DOC_MAPPING[url] = codeFile;
   }
 
+  // create images directory
+  for (const asset of ASSETS) {
+    const [assetName, assetHash] = asset.split('#');
+    const assetQuery = { _id: assetHash };
+    const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [NAMESPACE_ASSETS, assetQuery]);
+    if (assetDataDocuments && assetDataDocuments[0]) {
+      await saveAssetFile(assetName, assetDataDocuments[0]);
+    }
+  }
+
   console.log(11, PAGES);
   console.log(22, INCLUDE_FILES);
   console.log(33, GITHUB_CODE_EXAMPLES);
-  console.log(RESOLVED_REF_DOC_MAPPING);
+  console.log(44, ASSETS);
+  //console.log(RESOLVED_REF_DOC_MAPPING);
 
 };
 
