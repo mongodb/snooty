@@ -5,9 +5,8 @@ export default class Card extends Component {
   getTitle(val) {
     if (this.props.refDocMapping[val].ast) {
       return this.props.refDocMapping[val].ast.children[0].children[0].children[0].value;
-    } else {
-      return 'Title goes here';
-    }
+    } 
+    return 'Title goes here';
   }
 
   cardContent() {
