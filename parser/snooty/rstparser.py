@@ -143,7 +143,7 @@ class Directive(docutils.parsers.rst.Directive):
         return [node]
 
 
-def prepare_viewlist(text: str, ignore: int=1) -> List[str]:
+def prepare_viewlist(text: str, ignore: int = 1) -> List[str]:
     """Convert a docstring into lines of parseable reST.  Remove common leading
     indentation, where the indentation of a given number of lines (usually just
     one) is ignored.
@@ -246,7 +246,7 @@ class TabsDirective(Directive):
 
 def handle_role(typ: str, rawtext: str, text: str,
                 lineno: int, inliner: object,
-                options: Dict={}, content: List=[]) -> Tuple[List, List]:
+                options: Dict = {}, content: List = []) -> Tuple[List, List]:
     node = role(typ, rawtext, text, lineno)
     return [node], []
 

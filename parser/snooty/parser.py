@@ -11,7 +11,7 @@ from typing_extensions import Protocol
 import docutils.utils
 
 from . import gizaparser, rstparser, util
-from .gizaparser.nodes import Registry, GizaCategory
+from .gizaparser.nodes import GizaRegistry, GizaCategory
 from .types import SerializableType, EmbeddedRstParser, Page, StaticAsset
 
 RST_EXTENSIONS = {'.rst', '.txt'}
@@ -257,7 +257,7 @@ class Project:
         self.static_assets: Dict[str, Set[StaticAsset]] = collections.defaultdict(set)
         self.backend = backend
 
-        self.steps_registry: Registry[gizaparser.steps.Step] = Registry()
+        self.steps_registry: GizaRegistry[gizaparser.steps.Step] = GizaRegistry()
         self.yaml_mapping = {
             'steps': GizaCategory(self.steps_registry, parse_steps, steps_to_page)
         }
@@ -272,19 +272,19 @@ class Project:
         return '/'.join(self.prefix + [path.split('.')[0].split('/', 1)[1]])
 
     def update(self, path: str) -> None:
-        node_id = os.path.basename(path)
         prefix = get_giza_category(path)
         _, ext = os.path.splitext(path)
         if ext in RST_EXTENSIONS:
             page = parse_rst(self.parser, path)
         elif ext == '.yaml' and prefix in self.yaml_mapping:
+            file_id = os.path.basename(path)
             giza_category = self.yaml_mapping[prefix]
-            needs_rebuild = self.steps_registry.dg.dependents[node_id].union(set([node_id]))
+            needs_rebuild = self.steps_registry.dg.dependents[file_id].union(set([file_id]))
             logger.debug('needs_rebuild: %s', ','.join(needs_rebuild))
-            for node_id in needs_rebuild:
+            for file_id in needs_rebuild:
                 steps, text = getattr(giza_category, 'parse')(path)
                 giza_category.registry.add(path, text, steps)
-                giza_node = giza_category.registry.reify_node_id(node_id)
+                giza_node = giza_category.registry.reify_file_id(file_id)
                 page = Page(giza_node.path, text, {}, [], set())
                 embedded_parser = make_embedded_rst_parser(self.root, page)
                 getattr(giza_category, 'to_page')(page, giza_node.data, embedded_parser)
@@ -329,7 +329,7 @@ class Project:
             # getattr is necessary because of https://github.com/python/mypy/issues/5485
             to_page = getattr(giza_category, 'to_page')
 
-            for node_id, giza_node in giza_category.registry:
+            for file_id, giza_node in giza_category.registry:
                 page = Page(giza_node.path, giza_node.text, {}, [], set())
                 embedded_parser = make_embedded_rst_parser(self.root, page)
                 to_page(page, giza_node.data, embedded_parser)

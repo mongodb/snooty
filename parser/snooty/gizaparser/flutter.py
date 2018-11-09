@@ -49,7 +49,7 @@ class LoadUnknownField(LoadError):
         self.bad_field = bad_field
 
 
-def check_type(ty: Type[C], data: object, ty_module: str='') -> C:
+def check_type(ty: Type[C], data: object, ty_module: str = '') -> C:
     # Check for a primitive type
     if ty in (str, int, float, bool, type(None)):
         if not isinstance(data, ty):

@@ -23,7 +23,7 @@ def load_yaml(text: str) -> List[SerializableType]:
         node.__line__ = line + 1
         return node
 
-    def construct_mapping(node: yaml.nodes.Node, deep: bool=False) -> Dict:
+    def construct_mapping(node: yaml.nodes.Node, deep: bool = False) -> Dict:
         mapping = Constructor.construct_mapping(loader, node, deep=deep)
         mapping['__line__'] = node.__line__
         return mapping

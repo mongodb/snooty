@@ -63,15 +63,6 @@ def inherit(obj: T, parent: T) -> T:
     return dataclasses.replace(obj, **changes)
 
 
-@dataclass
-class GizaNode(Generic[T]):
-    __slots__ = ('path', 'text', 'data')
-
-    path: str
-    text: str
-    data: Sequence[T]
-
-
 class DependencyGraph:
     __slots__ = ('dependencies', 'dependents')
 
@@ -87,14 +78,26 @@ class DependencyGraph:
             self.dependents[dependency].add(obj)
 
 
-class Registry(Generic[T]):
+@dataclass
+class GizaFile(Generic[T]):
+    """A GizaFile represents a single Giza YAML file."""
+    __slots__ = ('path', 'text', 'data')
+
+    path: str
+    text: str
+    data: Sequence[T]
+
+
+class GizaRegistry(Generic[T]):
+    """A GizaRegistry stores all of the parsed YAML files of a given GizaCategory,
+       and stores file-level dependency information between the different files."""
     def __init__(self) -> None:
-        self.nodes: Dict[str, GizaNode] = {}
+        self.nodes: Dict[str, GizaFile] = {}
         self.dg = DependencyGraph()
 
     def add(self, path: str, text: str, elements: Sequence[T]) -> None:
-        node_id = os.path.basename(path)
-        self.nodes[node_id] = GizaNode(path, text, elements)
+        file_id = os.path.basename(path)
+        self.nodes[file_id] = GizaFile(path, text, elements)
         dependencies = set()
         for element in elements:
             inherit = None
@@ -108,7 +111,7 @@ class Registry(Generic[T]):
 
             dependencies.add(inherit.file)
 
-        self.dg.set_dependencies(node_id, dependencies)
+        self.dg.set_dependencies(file_id, dependencies)
 
     def reify(self, obj: T) -> T:
         parent_identifier = obj.source if obj.source is not None else obj.inherit
@@ -121,14 +124,14 @@ class Registry(Generic[T]):
 
         return obj
 
-    def reify_node_id(self, node_id: str) -> GizaNode[T]:
-        node = self.nodes[node_id]
+    def reify_file_id(self, file_id: str) -> GizaFile[T]:
+        node = self.nodes[file_id]
         return dataclasses.replace(node, data=[self.reify(el) for el in node.data])
 
-    def __iter__(self) -> Iterator[Tuple[str, GizaNode[T]]]:
+    def __iter__(self) -> Iterator[Tuple[str, GizaFile[T]]]:
         yield from (
-            (node_id, dataclasses.replace(node, data=[self.reify(el) for el in node.data]))
-            for node_id, node in self.nodes.items())
+            (file_id, dataclasses.replace(node, data=[self.reify(el) for el in node.data]))
+            for file_id, node in self.nodes.items())
 
     def __len__(self) -> int:
         return len(self.nodes)
@@ -136,6 +139,9 @@ class Registry(Generic[T]):
 
 @dataclass
 class GizaCategory(Generic[T]):
-    registry: Registry[T]
+    """A GizaCategory stores metadata about a "category" of Giza YAML files. For
+       example, "steps", or "apiargs". Each GizaCategory contains all types necessary
+       to transform a given path into a Page."""
+    registry: GizaRegistry[T]
     parse: Callable[[str], Tuple[Sequence[T], str]]
     to_page: Callable[[Page, Sequence[T], EmbeddedRstParser], None]
