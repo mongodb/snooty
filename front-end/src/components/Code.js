@@ -1,6 +1,6 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 
-export default class CodeBlock extends Component {
+export default class Code extends Component {
 
   render() {
     return (
@@ -11,7 +11,7 @@ export default class CodeBlock extends Component {
         <div className="copyable-code-block highlight-python notranslate">
           <div className="highlight">
             <pre>
-              { this.props.codeData.value }
+              { this.props.nodeData.value }
             </pre>
           </div>
         </div>

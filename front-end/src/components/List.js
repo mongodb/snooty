@@ -1,5 +1,5 @@
-import React, { Component} from 'react';
-import Paragraph from '../components/Paragraph';
+import React, { Component } from 'react';
+import ComponentFactory from '../components/ComponentFactory';
 
 export default class List extends Component {
 
@@ -7,15 +7,12 @@ export default class List extends Component {
     return (
       <ul>
         {
-          // List can only contain ListItems so no need for check here
-          this.props.listData.children.map((item, index) => {
+          this.props.nodeData.children.map((item, index) => {
             return (
               <li key={ index }>
                 {
                   item.children.map((listItem, listItemIndex) => {
-                    if (listItem.type === 'paragraph') {
-                      return <Paragraph paragraphData={ listItem } key={ listItemIndex } />
-                    } 
+                    return <ComponentFactory { ...this.props } nodeData={ listItem } key={ listItemIndex } />
                   })
                 }
               </li>

@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 
 export default class Role extends Component {
 
@@ -14,20 +14,20 @@ export default class Role extends Component {
 
   roleRendering() {
     // normal link
-    if (this.props.roleData.name === 'doc') {
+    if (this.props.nodeData.name === 'doc') {
       return (
-        <a href={ this.props.roleData.target }>
-          { this.props.roleData.label.value }
+        <a href={ this.props.nodeData.target }>
+          { this.props.nodeData.label.value }
         </a>
       )
     }
     // role with interaction
-    if (this.roleDataTypes[this.props.roleData.name]) {
-      const termModified = this.props.roleData.target.replace('()', '').replace('$', '');
-      const href = this.roleDataTypes[this.props.roleData.name](termModified);
+    if (this.roleDataTypes[this.props.nodeData.name]) {
+      const termModified = this.props.nodeData.target.replace('()', '').replace('$', '');
+      const href = this.roleDataTypes[this.props.nodeData.name](termModified);
       return (
         <a href={ href } onMouseEnter={ (e) => { this.props.modal(e, href) } }>
-          { this.props.roleData.label }
+          { this.props.nodeData.label }
         </a>
       )
     }

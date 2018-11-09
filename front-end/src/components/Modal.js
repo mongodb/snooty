@@ -1,5 +1,5 @@
-import React, { Component} from 'react';
-import CodeBlock from '../components/CodeBlock';
+import React, { Component } from 'react';
+import ComponentFactory from '../components/ComponentFactory';
 
 export default class Modal extends Component {
 
@@ -31,7 +31,7 @@ export default class Modal extends Component {
         </p>
         {
           (this.props.modalProperties.modalContent.example) ? 
-            <CodeBlock codeData={ { value: this.props.modalProperties.modalContent.example } } /> :
+            <ComponentFactory { ...this.props } nodeData={ { type: 'code', value: this.props.modalProperties.modalContent.example } } /> :
             ''
         }
       </div>

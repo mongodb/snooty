@@ -1,32 +1,33 @@
-import React, { Component} from 'react';
-import Paragraph from '../components/Paragraph';
+import React, { Component } from 'react';
+import ComponentFactory from '../components/ComponentFactory';
 
 export default class Admonition extends Component {
 
   // backwards compatible css classnames
   admonitionRendering() {
-    if (this.props.admonitionData.name === 'admonition') {
+    if (this.props.nodeData.name === 'admonition') {
       return (
-        <div className={ `admonition admonition-${this.props.admonitionData.argument[0].value.toLowerCase().replace(/\s/g, '-')}` }>
-          <p className="first admonition-title">{ this.props.admonitionData.argument[0].value }</p>
+        <div className={ `admonition admonition-${this.props.nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}` }>
+          <p className="first admonition-title">{ this.props.nodeData.argument[0].value }</p>
           <section>
-            <Paragraph paragraphData={ this.props.admonitionData.children[0] } admonition={ true } modal={ this.props.modal } />
+            <ComponentFactory { ...this.props } nodeData={ { type: 'paragraph', children: this.props.nodeData.children[0].children } } admonition={ true } />
           </section>
         </div>
       )
     } else {
       return (
-        <div className={ (this.props.admonitionData.name === 'tip') ? `admonition admonition-tip` : `admonition ${this.props.admonitionData.name}` }>
-          <p className="first admonition-title">{ this.props.admonitionData.name }</p>
+        <div className={ (this.props.nodeData.name === 'tip') ? `admonition admonition-tip` : `admonition ${this.props.nodeData.name}` }>
+          <p className="first admonition-title">{ this.props.nodeData.name }</p>
           <section>
-            <Paragraph 
-              modal={ this.props.modal }
+            <ComponentFactory 
+              { ...this.props }
               admonition={ true }
-              paragraphData={ 
+              nodeData={ 
                 { 
-                  children: this.props.admonitionData.children.length > 0 ? 
-                            [...this.props.admonitionData.children[0].children, ...this.props.admonitionData.argument] : 
-                            this.props.admonitionData.argument 
+                  type: 'paragraph',
+                  children: this.props.nodeData.children.length > 0 ? 
+                            [...this.props.nodeData.children[0].children, ...this.props.nodeData.argument] : 
+                            this.props.nodeData.argument 
                 } 
               } />
           </section>

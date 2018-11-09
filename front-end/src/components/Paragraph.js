@@ -1,35 +1,20 @@
-import React, { Component} from 'react';
-import Role from '../components/Role';
+import React, { Component } from 'react';
+import ComponentFactory from '../components/ComponentFactory';
 
 export default class Paragraph extends Component {
-
-  paragraphRendering() {
-    return (
-      this.props.paragraphData.children.map((element, index) => {
-        // plain text 
-        if (element.type === 'text') {
-          return element.value
-        }
-        // different roles
-        else if (element.type === 'role') {
-          return <Role roleData={ element } key={ index } modal={ this.props.modal } />
-        } 
-        // literal
-        else if (element.type === 'literal') {
-          return (
-            <code className="docutils literal notranslate" key={ index }>
-              <span className="pre">{ element.children[0].value }</span>
-            </code>
-          ) 
-        } 
-      })
-    )
-  }
 
   render() {
     return (
       <p style={ { margin: this.props.admonition ? '0 auto' : '' } }>
-        { this.paragraphRendering() }
+        { 
+          this.props.nodeData.children.map((element, index) => {
+            if (element.type === 'text') {
+              return <span key={ index }>{ element.value }</span>
+            } else {
+              return <ComponentFactory { ...this.props } nodeData={ element } key={ index } />
+            }
+          })
+        }
       </p>
     )
   }
