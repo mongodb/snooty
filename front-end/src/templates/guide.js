@@ -1,6 +1,6 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import TOC from '../components/TOC';
-import Section from '../components/Section';
+import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
@@ -149,13 +149,13 @@ export default class Guide extends Component {
       .filter((section) => this.validNames.includes(section.name))
       .map((section, index) => {
         return (
-          <Section sectionData={ section } 
-                   key={ index } 
-                   admonitions={ this.admonitions }
-                   refDocMapping={ this.props.pageContext.__refDocMapping } 
-                   modal={ this.modalFetchData.bind(this) } 
-                   addLanguages={ this.addLanguages.bind(this) } 
-                   activeLanguage={ this.state.activeLanguage } />
+          <GuideSection guideSectionData={ section } 
+                        key={ index } 
+                        admonitions={ this.admonitions }
+                        refDocMapping={ this.props.pageContext.__refDocMapping } 
+                        modal={ this.modalFetchData.bind(this) } 
+                        addLanguages={ this.addLanguages.bind(this) } 
+                        activeLanguage={ this.state.activeLanguage } />
         )
       })
     )
