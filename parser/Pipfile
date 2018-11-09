@@ -11,6 +11,7 @@ watchdog = "*"
 toml = "*"
 pyyaml = "*"
 typing-extensions = "*"
+pytest = "*"
 
 [dev-packages]
 mypy = "*"

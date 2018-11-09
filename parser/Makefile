@@ -1,4 +1,4 @@
-.PHONY: lint run
+.PHONY: lint run test
 
 run:
 	pipenv run mypy --strict snooty
@@ -7,3 +7,6 @@ run:
 lint:
 	pipenv run mypy --strict snooty
 	pipenv run flake8 --max-line-length=100 snooty
+
+test: lint
+	pipenv run pytest
