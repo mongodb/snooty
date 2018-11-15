@@ -15,7 +15,8 @@ export default class LiteralInclude extends Component {
   }
 
   render() {
-    return <ComponentFactory { ...this.props } nodeData={ { type: 'code', value: this.codeExample.substring(0, this.codeExample.lastIndexOf('\n')).trim() } } />
+    const filename = this.props.nodeData.argument[0].value;
+    return <ComponentFactory { ...this.props } nodeData={ { type: 'code', value: this.codeExample.substring(0, this.codeExample.lastIndexOf('\n')).trim() } } filename={filename} />
   }
 
 }

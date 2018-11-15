@@ -27,6 +27,10 @@ const STITCH_ID = process.env.STITCH_ID;
 const NAMESPACE = process.env.NAMESPACE;
 const NAMESPACE_ASSETS = NAMESPACE.split('/')[0] + '/' + 'assets';
 
+const STITCH_CR_ID = process.env.STITCH_CR_ID;
+const CR_NAMESPACE = process.env.CR_NAMESPACE;
+const [CR_DB, CR_COLLECTION, CR_SERVICE] = CR_NAMESPACE.split('/');
+
 // different types of references
 const PAGES = [];
 const INCLUDE_FILES = [];
@@ -130,7 +134,11 @@ exports.createPages = ({ graphql, actions }) => {
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
             __languageList: LANGUAGES,
-            __stitchID: STITCH_ID
+            __stitchID: STITCH_ID,
+            __stitchCodeReviewID: STITCH_CR_ID,
+            __stitchCodeReviewDB: CR_DB,
+            __stitchCodeReviewColl: CR_COLLECTION,
+            __stitchCodeReviewService: CR_SERVICE
           }
         });
       }

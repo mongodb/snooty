@@ -17,9 +17,9 @@ make static
 Running locally:
 
 ```
-STITCH_ID=<STITCH_ID> NAMESPACE=<DB/COLLECTION> PREFIX=<SITE/USER/BRANCH> gatsby develop
-then go to http://localhost:8000
+STITCH_ID=<STITCH_ID> NAMESPACE=<DB/COLLECTION> STITCH_CR_ID=<STITCH_CR_ID> CR_NAMESPACE=<CR_DB/CR_COLLECTION/CR_SERVICE> PREFIX=<SITE/USER/BRANCH> gatsby develop
 ```
+then go to http://localhost:8000
 
 To build and serve the site, use the same ENV vars from above:
 

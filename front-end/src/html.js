@@ -20,6 +20,7 @@ export default class HTML extends React.Component {
           <link rel="stylesheet" href="/static/guides.css" type="text/css" />
           <link rel="stylesheet" href="/static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="/static/css/navbar.min.css" type="text/css" />
+          <link rel="stylesheet" href="/static/css/codereview.css" type="text/css" />
           <link rel="search" type="application/opensearchdescription+xml" href="https://docs.mongodb.com/osd.xml" title="MongoDB Help"/>
           {this.props.headComponents}
         </head>
@@ -35,6 +36,7 @@ export default class HTML extends React.Component {
           <script type="text/javascript" src="/static/lib/jquery.min.js"></script>
           <script type="text/javascript" src="/static/lib/bootstrap.js"></script>
           <script type="text/javascript" src="/static/controller.js"></script>
+<script src="/static/octokit-rest.min.js"></script>
           {this.props.postBodyComponents}
         </body>
       </html>

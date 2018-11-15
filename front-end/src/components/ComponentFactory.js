@@ -42,11 +42,15 @@ export default class ComponentFactory extends Component {
     const lookup = (type === 'directive') ? name : type;
     let ComponentType = this.componentMap[lookup];
     // the different admonition types are all under the Admonition component
-    // see 'this.admonitions' in 'guide.js' for the list
+    // see 'this.admonitions' in uide.js' for the list
     if (!ComponentType && this.props.admonitions.includes(name)) {
       ComponentType = this.componentMap['admonition'];
     }
-    return <ComponentType { ...this.props } />
+    if (!this.props.filename) {
+      return <ComponentType { ...this.props } filename="cloud/atlas.rst" />
+    } else {
+      return <ComponentType { ...this.props } />
+    }
   }
 
   render() {

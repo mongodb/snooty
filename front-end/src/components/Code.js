@@ -4,7 +4,10 @@ export default class Code extends Component {
 
   render() {
     return (
-      <div className="button-code-block">
+      <div
+        className="button-code-block"
+        onClick={(event) => this.props.handleClick(event, this.props.nodeData.position.start.line, this.props.filename)}
+      >
         <div className="button-row">
           <a className="code-button--copy code-button" role="button">copy<div className="code-button__tooltip code-button__tooltip--inactive">copied</div></a>
         </div>

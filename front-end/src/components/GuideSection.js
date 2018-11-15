@@ -50,9 +50,17 @@ export default class GuideSection extends Component {
   }
 
   render() {
+    const line = this.props.guideSectionData.position.start.line;
+    const file = 'cloud/atlas.rst'; // TODO: get filename properly
+    const headingIsActive = (this.props.activePosition === line && this.props.activeFile === file)
+      ? 'highlight' : '';
+    const headingHasComment = this.props.lineHasComment(line, file) ? 'highlight-light' : '';
     return (
       <div className="section" id={ this.props.guideSectionData.name }>
-        <h2> 
+        <h2
+          className={`${headingHasComment} ${headingIsActive}`}
+          onClick={(event) => this.props.handleClick(event, this.props.guideSectionData.position.start.line, file)}
+        >
           { this.nameMapping[this.props.guideSectionData.name] } 
           <a className="headerlink" href={ '#' + this.props.guideSectionData.name } title="Permalink to this headline">¶</a>
         </h2>
@@ -66,12 +74,15 @@ export default class GuideSection extends Component {
         }
         {
           this.props.guideSectionData.children.map((child, index) => {
+            const hasComment = this.props.linesWithComments.includes(child.position.start.line);
             return <ComponentFactory { ...this.props } 
                                       nodeData={ child } 
                                       key={ index } 
                                       showAllSteps={ this.state.showAllSteps } 
                                       showStepIndex={ this.state.showStepIndex }
-                                      updateTotalStepCount={ this.updateTotalStepCount.bind(this) } />
+                                      updateTotalStepCount={ this.updateTotalStepCount.bind(this) }
+                                      activePosition={this.props.activePosition}
+                                      linesWithComments={this.props.linesWithComments} />
           })
         }
         {

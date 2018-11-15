@@ -4,6 +4,8 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import NewComment from '../components/CodeReview/NewComment';
+import CommentList from '../components/CodeReview/CommentList';
 
 export default class Guide extends Component {
 
@@ -12,7 +14,12 @@ export default class Guide extends Component {
     this.sections = this.props.pageContext.__refDocMapping[this.props['*']].ast.children[0].children;
     this.languageList = this.props.pageContext.__languageList;
     this.stitchClient = undefined;
+    this.codeReviewClient = undefined;
     this.DOMParser = undefined;
+    this.dismissCreateCommentModal = this.dismissCreateCommentModal.bind(this);
+    this.highlightLinesWithComments = this.highlightLinesWithComments.bind(this);
+    this.lineHasComment = this.lineHasComment.bind(this);
+    this.handleCRClick = this.handleCRClick.bind(this);
     this.validNames = [
       'prerequisites',
       'check_your_environment',
@@ -30,6 +37,18 @@ export default class Guide extends Component {
     this.state = {
       languages: [],
       activeLanguage: undefined,
+      activeElement: {
+        filename: undefined,
+        position: undefined
+      },
+      commitSHA: '12345',
+      crDB: this.props.pageContext.__stitchCodeReviewDB,
+      crCollection: this.props.pageContext.__stitchCodeReviewColl,
+      crService: this.props.pageContext.__stitchCodeReviewService,
+      refreshCommentList: false,
+      repo: '10gen/mms-docs', // TODO: get accurate repo name
+      showNewCommentModal: false,
+      linesWithComments: [],
       modalPositionLeft: 0,
       modalPositionTop: 0,
       modalVisible: false,
@@ -53,6 +72,36 @@ export default class Guide extends Component {
     this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
       console.log('logged into stitch');
     });
+
+    const codeReviewAppName = this.props.pageContext.__stitchCodeReviewID;
+    this.codeReviewClient = Stitch.hasAppClient(codeReviewAppName)
+      ? Stitch.getAppClient(codeReviewAppName)
+      : Stitch.initializeAppClient(codeReviewAppName);
+    this.codeReviewClient.auth.loginWithCredential(
+      new AnonymousCredential()).then((user) => {
+        console.log('logged into stitch code review');
+      });
+  }
+
+  handleCRClick(event, position, filename) {
+    event.preventDefault();
+    if (position !== this.state.activeElement.position) {
+      this.setState({
+        activeElement: {
+          ...this.state.activeElement,
+          filename: filename,
+          position: position
+        }
+      });
+    } else {
+      this.setState({
+        activeElement: {
+          ...this.state.activeElement,
+          filename: undefined,
+          position: undefined
+        }
+      });
+    }
   }
 
   // this function gets an array of objects with language pill options
@@ -143,6 +192,44 @@ export default class Guide extends Component {
     this.modalBeginHidingInterval();
   }
 
+  dismissCreateCommentModal() {
+    this.setState({
+      activeElement: {
+        ...this.state.activeElement,
+        filename: undefined,
+        position: undefined
+      },
+      showNewCommentModal: false
+    });
+  }
+
+  submitNewComment(event, line, filename) {
+    event.preventDefault();
+
+    if (this.state.activeElement.position === line && this.state.activeElement.filename === filename) {
+      this.dismissCreateCommentModal();
+    } else {
+      this.setState({
+        activeElement: {
+          ...this.state.activeElement,
+          filename: filename,
+          position: line
+        },
+        showNewCommentModal: true
+      });
+    }
+  }
+
+  highlightLinesWithComments(lines) {
+    this.setState({linesWithComments: lines});
+  }
+
+  lineHasComment(position, filename) {
+    return this.state.linesWithComments.some(
+      line => line.filename === filename && line.position === position
+    );
+  }
+
   createSections() {
     return (
       this.sections
@@ -155,10 +242,19 @@ export default class Guide extends Component {
                         refDocMapping={ this.props.pageContext.__refDocMapping } 
                         modal={ this.modalFetchData.bind(this) } 
                         addLanguages={ this.addLanguages.bind(this) } 
-                        activeLanguage={ this.state.activeLanguage } />
+                        activeLanguage={ this.state.activeLanguage } 
+                        handleClick={ this.submitNewComment.bind(this) }
+                        activeFile={ this.state.activeElement.filename }
+                        activePosition={ this.state.activeElement.position }
+                        linesWithComments={ this.state.linesWithComments } 
+                        lineHasComment={ this.lineHasComment } />
         )
       })
     )
+  }
+
+  handleCRUpdate() {
+    this.setState({refreshCommentList: !this.state.refreshCommentList});
   }
 
   render() {
@@ -168,13 +264,29 @@ export default class Guide extends Component {
         <div className="left-nav-space"></div>
         <div id="main-column" className="main-column">
           <div className="body" data-pagename="server/read">
+            {this.state.showNewCommentModal &&
+              <NewComment
+                activeCommit={this.state.commitSHA}
+                commentLineNumber={this.state.activeElement.position}
+                db={this.state.crDB}
+                collection={this.state.crCollection}
+                filename={this.state.activeElement.filename}
+                handleCRUpdate={this.handleCRUpdate.bind(this)}
+                hideModal={this.dismissCreateCommentModal}
+                repo={this.state.repo}
+                service={this.state.crService}
+                stitchClient={this.codeReviewClient}
+              />
+            }
             <ul className="breadcrumbs">
               <li className="breadcrumbs__bc"><a href="/">MongoDB Guides</a> &gt; </li>
             </ul>
             <GuideHeading sections={ this.sections } 
                           languages={ this.state.languages } 
                           activeLanguage={ this.state.activeLanguage } 
-                          changeActiveLanguage={ this.changeActiveLanguage.bind(this) } />
+                          changeActiveLanguage={ this.changeActiveLanguage.bind(this) }
+                          handleClick={ this.submitNewComment.bind(this) }
+                          refreh={this.state.refreshCommentList} />
             <Modal modalProperties={ this.state } />
             { this.createSections() }
             <div className="footer">
@@ -184,6 +296,20 @@ export default class Guide extends Component {
             </div>
           </div>
         </div>
+        {this.codeReviewClient && <CommentList
+          activeCommentLine={this.state.activeElement.position}
+          activeCommit={this.state.commitSHA}
+          activeFile={this.state.activeElement.filename}
+          db={this.state.crDB}
+          collection={this.state.crCollection}
+          handleClick={this.handleCRClick}
+          handleCRUpdate={this.handleCRUpdate.bind(this)}
+          highlightLinesWithComments={this.highlightLinesWithComments}
+          refresh={this.state.refreshCommentList}
+          repo={this.state.repo}
+          service={this.state.crService}
+          stitchClient={this.codeReviewClient}
+        />}
       </div>
     )
   }

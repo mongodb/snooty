@@ -14,9 +14,10 @@ export default class Include extends Component {
   }
 
   render() {
+    const filename = this.props.nodeData.argument[0].value;
     return (
       this.resolvedIncludeData.map((includeObj, index) => {
-        return <ComponentFactory { ...this.props } nodeData={ includeObj } key={ index } stepNum={ index } />
+        return <ComponentFactory { ...this.props } nodeData={ includeObj } key={ index } stepNum={ index } isInclude={true} filename={filename} />
       })
     )
   }
