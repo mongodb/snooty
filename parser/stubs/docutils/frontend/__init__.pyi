@@ -4,6 +4,7 @@ import optparse
 
 class Values(optparse.Values):
     report_level: int
+    halt_level: int
 
 
 class OptionParser:

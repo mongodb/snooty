@@ -11,8 +11,8 @@ import re
 import sys
 from dataclasses import dataclass
 from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
-from .gizaparser import load_yaml
-from .gizaparser.flutter import checked, check_type, LoadError
+from .gizaparser.parse import load_yaml
+from .flutter import checked, check_type, LoadError
 
 PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
 PAT_WHITESPACE = re.compile(r'^\x20*')
@@ -301,8 +301,10 @@ class Parser(Generic[V]):
         settings = docutils.frontend.OptionParser(
             components=(docutils.parsers.rst.Parser,)
             ).get_default_values()
-        settings.report_level = docutils.utils.Reporter.SEVERE_LEVEL
+        settings.report_level = 10000
+        settings.halt_level = 10000
         document = docutils.utils.new_document(path, settings)
+
         parser.parse(text, document)
 
         visitor = self.visitor_class(self.project_root, path, document)

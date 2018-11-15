@@ -1,8 +1,9 @@
 from dataclasses import dataclass
-from typing import Optional, List, Union
-from .flutter import checked
-from .nodes import Node, Inheritable
-from ..types import EmbeddedRstParser, SerializableType, Page
+from typing import Optional, List, Sequence, Union, Tuple
+from ..flutter import checked
+from .parse import parse
+from .nodes import Node, Inheritable, GizaCategory, GizaRegistry
+from ..types import Diagnostic, EmbeddedRstParser, SerializableType, Page
 
 
 @checked
@@ -123,3 +124,31 @@ class Step(Node, Inheritable):
             children.append(result)
 
         return root
+
+
+def step_to_page(page: Page, step: Step, rst_parser: EmbeddedRstParser) -> SerializableType:
+    rendered = step.render(page, rst_parser)
+    return {
+        'type': 'directive',
+        'name': 'step',
+        'position': {'start': {'line': step.__line__}},
+        'children': [rendered]
+    }
+
+
+@dataclass
+class GizaStepsCategory(GizaCategory):
+    registry: GizaRegistry[Step]
+
+    def parse(self,
+              path: str,
+              text: Optional[str] = None) -> Tuple[Sequence[Step], str, List[Diagnostic]]:
+        return parse(Step, path, text)
+
+    def to_page(self, page: Page, steps: Sequence[Step], rst_parser: EmbeddedRstParser) -> None:
+        page.ast = {
+            'type': 'directive',
+            'name': 'steps',
+            'position': {'start': {'line': 0}},
+            'children': [step_to_page(page, step, rst_parser) for step in steps]
+        }

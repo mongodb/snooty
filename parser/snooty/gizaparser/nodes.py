@@ -4,9 +4,10 @@ import logging
 import os.path
 import re
 from dataclasses import dataclass
-from typing import Callable, Dict, Set, Generic, Optional, TypeVar, Tuple, Iterator, Sequence
-from .flutter import checked
-from ..types import Page, EmbeddedRstParser
+from typing import Dict, Set, Generic, Optional, TypeVar, Tuple, Iterator, Sequence, List
+from typing_extensions import Protocol
+from ..flutter import checked
+from ..types import Diagnostic, Page, EmbeddedRstParser
 
 PAT_SUBSTITUTION = re.compile(r'\{\{([\w-]+)\}\}')
 logger = logging.getLogger(__name__)
@@ -77,6 +78,9 @@ class DependencyGraph:
         for dependency in dependencies:
             self.dependents[dependency].add(obj)
 
+    def __delitem__(self, obj: str) -> None:
+        pass
+
 
 @dataclass
 class GizaFile(Generic[T]):
@@ -136,12 +140,19 @@ class GizaRegistry(Generic[T]):
     def __len__(self) -> int:
         return len(self.nodes)
 
+    def __delitem__(self, file_id: str) -> None:
+        del self.dg[file_id]
+        del self.nodes[file_id]
 
-@dataclass
-class GizaCategory(Generic[T]):
+
+class GizaCategory(Generic[T], Protocol):
     """A GizaCategory stores metadata about a "category" of Giza YAML files. For
        example, "steps", or "apiargs". Each GizaCategory contains all types necessary
        to transform a given path into a Page."""
     registry: GizaRegistry[T]
-    parse: Callable[[str], Tuple[Sequence[T], str]]
-    to_page: Callable[[Page, Sequence[T], EmbeddedRstParser], None]
+
+    def parse(self,
+              path: str,
+              text: Optional[str] = None) -> Tuple[Sequence[T], str, List[Diagnostic]]: ...
+
+    def to_page(self, page: Page, data: Sequence[T], rst_parser: EmbeddedRstParser) -> None: ...

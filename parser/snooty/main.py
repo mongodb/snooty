@@ -7,8 +7,9 @@ import watchdog.events
 import watchdog.observers
 from typing import List, Iterable
 
+from . import language_server
 from .parser import Project, RST_EXTENSIONS
-from .types import Page, ParseWarning
+from .types import Page, Diagnostic
 
 PATTERNS = ['*' + ext for ext in RST_EXTENSIONS] + ['*.yaml']
 logger = logging.getLogger(__name__)
@@ -45,16 +46,15 @@ class Backend:
     def on_progress(self, progress: int, total: int, message: str) -> None:
         pass
 
-    def on_warning(self, warnings: Iterable[ParseWarning]) -> None:
-        for path, msg, lineno in warnings:
+    def on_warning(self, path: str, diagnostics: Iterable[Diagnostic]) -> None:
+        for diagnostic in diagnostics:
             # Line numbers are currently... uh, "approximate"
-            print('WARNING({}:{}ish): {}'.format(path, lineno, msg))
+            print('WARNING({}:{}ish): {}'.format(path, diagnostic.start[0], diagnostic.message))
             self.total_warnings += 1
 
     def on_update(self, prefix: List[str], page_id: str, page: Page) -> None:
-        if page.warnings:
-            warnings = ((page.path, msg, lineno) for msg, lineno in page.warnings)
-            self.on_warning(warnings)
+        if page.diagnostics:
+            self.on_warning(page.path, page.diagnostics)
 
     def on_delete(self, page_id: str) -> None:
         pass
@@ -66,7 +66,7 @@ class MongoBackend(Backend):
         self.client = connection
 
     def on_update(self, prefix: List[str], page_id: str, page: Page) -> None:
-        if page.warnings:
+        if page.diagnostics:
             return Backend.on_update(self, prefix, page_id, page)
 
         checksums = list(asset.checksum for asset in page.static_assets)
@@ -100,14 +100,18 @@ class MongoBackend(Backend):
 
 def usage(exit_code: int) -> None:
     """Exit and print usage information."""
-    print('Usage: {} <build|watch> <source-path> <mongodb-url>'.format(sys.argv[0]))
+    print('Usage: {} <build|watch|language-server> <source-path> <mongodb-url>'.format(sys.argv[0]))
     sys.exit(exit_code)
 
 
 def main() -> None:
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
 
-    if len(sys.argv) < 3 or len(sys.argv) > 4 or sys.argv[1] not in ('watch', 'build'):
+    if len(sys.argv) == 2 and sys.argv[1] == 'language-server':
+        language_server.start()
+        return
+
+    if len(sys.argv) not in (3, 4) or sys.argv[1] not in ('watch', 'build'):
         usage(1)
 
     url = sys.argv[3] if len(sys.argv) == 4 else None

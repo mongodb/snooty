@@ -1,4 +1,4 @@
-.PHONY: lint run test
+.PHONY: lint run test nuitka
 
 run:
 	pipenv run mypy --strict snooty
@@ -10,3 +10,8 @@ lint:
 
 test: lint
 	pipenv run pytest
+
+nuitka:
+	echo 'from snooty import main; main.main()' > snooty.py
+	nuitka3 --lto --standalone --python-flag=no_site --remove-output snooty.py
+	rm snooty.py

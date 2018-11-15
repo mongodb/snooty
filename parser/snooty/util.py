@@ -34,4 +34,4 @@ def get_line(node: docutils.nodes.Node) -> int:
             return 0
         node = node.parent
 
-    return node.line
+    return node.line - 1

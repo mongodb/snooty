@@ -6,13 +6,13 @@ import os
 import pwd
 import subprocess
 from functools import partial
-from typing import Any, Dict, Sequence, Tuple, Set, List
+from typing import Any, Dict, Optional, Set, List
 from typing_extensions import Protocol
 import docutils.utils
 
 from . import gizaparser, rstparser, util
-from .gizaparser.nodes import GizaRegistry, GizaCategory
-from .types import SerializableType, EmbeddedRstParser, Page, StaticAsset
+from .gizaparser.nodes import GizaRegistry
+from .types import Diagnostic, SerializableType, EmbeddedRstParser, Page, StaticAsset
 
 RST_EXTENSIONS = {'.rst', '.txt'}
 logger = logging.getLogger(__name__)
@@ -25,14 +25,14 @@ class JSONVisitor(rstparser.Visitor):
         self.docpath = docpath
         self.document = document
         self.state: List[Dict[str, Any]] = []
-        self.warnings: List[Tuple[str, int]] = []
+        self.diagnostics: List[Diagnostic] = []
         self.static_assets: Set[StaticAsset] = set()
 
     def dispatch_visit(self, node: docutils.nodes.Node) -> None:
         node_name = node.__class__.__name__
         if node_name == 'system_message':
             msg = node[0].astext()
-            self.warnings.append((msg, util.get_line(node)))
+            self.diagnostics.append(Diagnostic.warning(msg, util.get_line(node)))
             raise docutils.nodes.SkipNode()
         elif node_name in ('definition', 'field_list'):
             return
@@ -80,7 +80,6 @@ class JSONVisitor(rstparser.Visitor):
         elif node_name == 'target':
             doc['type'] = 'target'
             doc['ids'] = node['ids']
-            make_children = False
         elif node_name == 'definition_list':
             doc['type'] = 'definitionList'
         elif node_name == 'definition_list_item':
@@ -143,7 +142,8 @@ class JSONVisitor(rstparser.Visitor):
 
         if name == 'figure':
             if argument_text is None:
-                self.warnings.append(('"figure" expected a path argument', util.get_line(node)))
+                self.diagnostics.append(
+                    Diagnostic.error('"figure" expected a path argument', util.get_line(node)))
                 return
 
             try:
@@ -152,7 +152,7 @@ class JSONVisitor(rstparser.Visitor):
             except OSError as err:
                 msg = '"figure" could not open "{}": {}'.format(
                     argument_text, os.strerror(err.errno))
-                self.warnings.append((msg, util.get_line(node)))
+                self.diagnostics.append(Diagnostic.error(msg, util.get_line(node)))
 
     def add_static_asset(self, path: str) -> StaticAsset:
         fileid, path = util.reroot_path(path, self.docpath, self.project_root)
@@ -176,43 +176,17 @@ class InlineJSONVisitor(JSONVisitor):
         JSONVisitor.dispatch_departure(self, node)
 
 
-def step_to_page(page: Page,
-                 step: gizaparser.steps.Step,
-                 rst_parser: EmbeddedRstParser) -> SerializableType:
-    rendered = step.render(page, rst_parser)
-    return {
-        'type': 'directive',
-        'name': 'step',
-        'position': {'start': {'line': step.__line__}},
-        'children': [rendered]
-    }
-
-
-def steps_to_page(page: Page,
-                  steps: Sequence[gizaparser.steps.Step],
-                  rst_parser: EmbeddedRstParser) -> None:
-    page.ast = {
-        'type': 'directive',
-        'name': 'steps',
-        'position': {'start': {'line': 0}},
-        'children': [step_to_page(page, step, rst_parser) for step in steps]
-    }
-
-
-def parse_steps(path: str) -> Tuple[Sequence[gizaparser.steps.Step], str]:
-    return gizaparser.parse(gizaparser.steps.Step, path)
-
-
-def parse_rst(parser: rstparser.Parser[JSONVisitor], path: str) -> Page:
-    with open(path, 'r') as f:
-        text = f.read()
+def parse_rst(parser: rstparser.Parser[JSONVisitor], path: str, text: Optional[str] = None) -> Page:
+    if text is None:
+        with open(path, 'r') as f:
+            text = f.read()
     visitor = parser.parse(path, text)
 
     return Page(
         path,
         text,
         visitor.state[-1],
-        visitor.warnings,
+        visitor.diagnostics,
         visitor.static_assets)
 
 
@@ -227,7 +201,7 @@ def make_embedded_rst_parser(project_root: str, page: Page) -> EmbeddedRstParser
         visitor = parser.parse(page.path, text)
         children: List[SerializableType] = visitor.state[-1]['children']
 
-        page.warnings.extend(visitor.warnings)
+        page.diagnostics.extend(visitor.diagnostics)
         page.static_assets.update(visitor.static_assets)
 
         return children
@@ -259,7 +233,7 @@ class Project:
 
         self.steps_registry: GizaRegistry[gizaparser.steps.Step] = GizaRegistry()
         self.yaml_mapping = {
-            'steps': GizaCategory(self.steps_registry, parse_steps, steps_to_page)
+            'steps': gizaparser.steps.GizaStepsCategory(self.steps_registry)
         }
 
         username = pwd.getpwuid(os.getuid()).pw_name
@@ -269,35 +243,48 @@ class Project:
         self.prefix = [name, username, branch]
 
     def get_page_id(self, path: str) -> str:
+        path = os.path.normpath(path)
         return '/'.join(self.prefix + [path.split('.')[0].split('/', 1)[1]])
 
-    def update(self, path: str) -> None:
+    def update(self, path: str, optional_text: Optional[str] = None) -> None:
         prefix = get_giza_category(path)
         _, ext = os.path.splitext(path)
+        page: Optional[Page] = None
         if ext in RST_EXTENSIONS:
-            page = parse_rst(self.parser, path)
+            page = parse_rst(self.parser, path, optional_text)
         elif ext == '.yaml' and prefix in self.yaml_mapping:
             file_id = os.path.basename(path)
             giza_category = self.yaml_mapping[prefix]
             needs_rebuild = self.steps_registry.dg.dependents[file_id].union(set([file_id]))
             logger.debug('needs_rebuild: %s', ','.join(needs_rebuild))
             for file_id in needs_rebuild:
-                steps, text = getattr(giza_category, 'parse')(path)
+                try:
+                    giza_node = giza_category.registry.reify_file_id(file_id)
+                except KeyError:
+                    logging.warn('No file found in registry: %s', file_id)
+                    continue
+
+                steps, text, diagnostics = giza_category.parse(path, optional_text)
+                page = Page(giza_node.path, text, {}, diagnostics, set())
                 giza_category.registry.add(path, text, steps)
-                giza_node = giza_category.registry.reify_file_id(file_id)
-                page = Page(giza_node.path, text, {}, [], set())
                 embedded_parser = make_embedded_rst_parser(self.root, page)
-                getattr(giza_category, 'to_page')(page, giza_node.data, embedded_parser)
+                giza_category.to_page(page, giza_node.data, embedded_parser)
                 path = page.path
         else:
             raise ValueError('Unknown file type: ' + path)
 
-        self.backend.on_update(self.prefix, self.get_page_id(path), page)
+        if page:
+            self.backend.on_update(self.prefix, self.get_page_id(path), page)
 
     def delete(self, path: str) -> None:
+        file_id = os.path.basename(path)
+        for giza_category in self.yaml_mapping.values():
+            del giza_category.registry[file_id]
+
         self.backend.on_delete(self.get_page_id(path))
 
     def build(self) -> None:
+        all_yaml_diagnostics: Dict[str, List[Diagnostic]] = {}
         with multiprocessing.Pool() as pool:
             paths = util.get_files(self.root, RST_EXTENSIONS)
             logger.debug('Processing rst files')
@@ -316,21 +303,18 @@ class Project:
             for prefix, giza_category in self.yaml_mapping.items():
                 logger.debug('Parsing %s YAML', prefix)
                 paths_in_category: List[str] = categorized[prefix]
-                # getattr is necessary because of https://github.com/python/mypy/issues/5485
-                fun = getattr(giza_category, 'parse')
-                for path, (steps, text) in zip(
+                for path, (steps, text, diagnostics) in zip(
                         paths_in_category,
-                        pool.imap_unordered(fun, paths_in_category)):
+                        pool.imap_unordered(giza_category.parse, paths_in_category)):
+                    all_yaml_diagnostics[path] = diagnostics
                     giza_category.registry.add(path, text, steps)
 
         # Now that all of our YAML files are loaded, generate a page for each one
         for prefix, giza_category in self.yaml_mapping.items():
             logger.debug('Processing %s YAML: %d nodes', prefix, len(giza_category.registry))
-            # getattr is necessary because of https://github.com/python/mypy/issues/5485
-            to_page = getattr(giza_category, 'to_page')
-
             for file_id, giza_node in giza_category.registry:
                 page = Page(giza_node.path, giza_node.text, {}, [], set())
                 embedded_parser = make_embedded_rst_parser(self.root, page)
-                to_page(page, giza_node.data, embedded_parser)
+                giza_category.to_page(page, giza_node.data, embedded_parser)
+                page.diagnostics.extend(all_yaml_diagnostics.get(giza_node.path, []))
                 self.backend.on_update(self.prefix, self.get_page_id(page.path), page)
