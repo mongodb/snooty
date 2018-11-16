@@ -5,12 +5,16 @@ import multiprocessing
 import os
 import pwd
 import subprocess
+from dataclasses import dataclass
 from functools import partial
-from typing import Any, Dict, Optional, Set, List
+from pathlib import PurePath
+from typing import Any, Dict, Tuple, Optional, Set, List
 from typing_extensions import Protocol
 import docutils.utils
+import toml
 
 from . import gizaparser, rstparser, util
+from .flutter import check_type, checked
 from .gizaparser.nodes import GizaRegistry
 from .types import Diagnostic, SerializableType, EmbeddedRstParser, Page, StaticAsset
 
@@ -176,7 +180,9 @@ class InlineJSONVisitor(JSONVisitor):
         JSONVisitor.dispatch_departure(self, node)
 
 
-def parse_rst(parser: rstparser.Parser[JSONVisitor], path: str, text: Optional[str] = None) -> Page:
+def parse_rst(parser: rstparser.Parser[JSONVisitor],
+              path: str,
+              text: Optional[str] = None) -> Page:
     if text is None:
         with open(path, 'r') as f:
             text = f.read()
@@ -221,11 +227,31 @@ class ProjectBackend(Protocol):
     def on_delete(self, page_id: str) -> None: ...
 
 
+@checked
+@dataclass
+class ProjectConfig:
+    name: str
+
+    @classmethod
+    def open(cls, root: PurePath) -> Tuple[str, 'ProjectConfig']:
+        path = root
+        while path.parent != path:
+            try:
+                with open(path.joinpath('snooty.toml'), 'r') as f:
+                    return str(path), check_type(ProjectConfig, toml.load(f))
+            except FileNotFoundError:
+                pass
+            path = path.parent
+
+        return str(root), cls('untitled')
+
+
 class Project:
     def __init__(self,
-                 name: str,
                  root: str,
                  backend: ProjectBackend) -> None:
+        root, config = ProjectConfig.open(PurePath(root))
+
         self.root = root
         self.parser = rstparser.Parser(self.root, JSONVisitor)
         self.static_assets: Dict[str, Set[StaticAsset]] = collections.defaultdict(set)
@@ -240,7 +266,7 @@ class Project:
         branch = subprocess.check_output(
             ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
             encoding='utf-8').strip()
-        self.prefix = [name, username, branch]
+        self.prefix = [config.name, username, branch]
 
     def get_page_id(self, path: str) -> str:
         path = os.path.normpath(path)

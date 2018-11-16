@@ -118,7 +118,7 @@ def main() -> None:
     connection = None if not url else pymongo.MongoClient(url, password=getpass.getpass())
     backend = MongoBackend(connection) if connection else Backend()
     root_path = sys.argv[2]
-    project = Project('guides', root_path, backend)
+    project = Project(root_path, backend)
 
     try:
         project.build()

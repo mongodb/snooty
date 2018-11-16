@@ -214,7 +214,7 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
                      **kwargs: object) -> SerializableType:
         if rootUri:
             root_path = rootUri.replace('file://', '', 1)
-            self.project = Project('guides', root_path, Backend(self))
+            self.project = Project(root_path, Backend(self))
             self.project.build()
             self.rootUri = rootUri
 
@@ -258,13 +258,12 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
         self.project.update(page_path, change.text)
 
     def m_text_document__did_close(self, textDocument: SerializableType) -> None:
-        if not self.project:
-            return
-
         identifier = check_type(TextDocumentIdentifier, textDocument)
         page_path = self.uri_to_path(identifier.uri)
         del self.workspace[identifier.uri]
-        self.project.update(page_path)
+
+        if self.project:
+            self.project.update(page_path)
 
     def m_shutdown(self, **_kwargs: object) -> None:
         self._shutdown = True
