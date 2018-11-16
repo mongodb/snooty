@@ -1,29 +1,32 @@
 import os
 import docutils.nodes
+from pathlib import Path, PurePath
 from typing import Container, Tuple, Iterator
 
 
-def reroot_path(filename: str, docpath: str, project_root: str) -> Tuple[str, str]:
+def reroot_path(filename: PurePath,
+                docpath: PurePath,
+                project_root: Path) -> Tuple[PurePath, PurePath]:
     """Files within a project may refer to other files. Return a canonical path
        relative to the project root."""
-    if filename.startswith('/'):
-        rel_fn = filename[1:]
+    if filename.is_absolute():
+        rel_fn = PurePath(*filename.parts[1:])
     else:
-        rel_fn = os.path.normpath(os.path.join(os.path.dirname(docpath), filename))
-    return rel_fn, os.path.abspath(os.path.join(project_root, rel_fn))
+        rel_fn = PurePath(os.path.normpath(docpath.parent.joinpath(filename)))
+    return rel_fn, project_root.joinpath(rel_fn).resolve()
 
 
-def get_files(root: str, extensions: Container[str]) -> Iterator[str]:
+def get_files(root: PurePath, extensions: Container[str]) -> Iterator[PurePath]:
     """Recursively iterate over files underneath the given root, yielding
        only filenames with the given extensions."""
-    for root, dirs, files in os.walk(root):
+    for base, dirs, files in os.walk(root):
         for name in files:
             ext = os.path.splitext(name)[1]
 
             if ext not in extensions:
                 continue
 
-            yield os.path.join(root, name)
+            yield PurePath(os.path.join(base, name))
 
 
 def get_line(node: docutils.nodes.Node) -> int:

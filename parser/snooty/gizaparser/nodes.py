@@ -1,9 +1,9 @@
 import collections
 import dataclasses
 import logging
-import os.path
 import re
 from dataclasses import dataclass
+from pathlib import PurePath
 from typing import Dict, Set, Generic, Optional, TypeVar, Tuple, Iterator, Sequence, List
 from typing_extensions import Protocol
 from ..flutter import checked
@@ -87,7 +87,7 @@ class GizaFile(Generic[T]):
     """A GizaFile represents a single Giza YAML file."""
     __slots__ = ('path', 'text', 'data')
 
-    path: str
+    path: PurePath
     text: str
     data: Sequence[T]
 
@@ -99,8 +99,8 @@ class GizaRegistry(Generic[T]):
         self.nodes: Dict[str, GizaFile] = {}
         self.dg = DependencyGraph()
 
-    def add(self, path: str, text: str, elements: Sequence[T]) -> None:
-        file_id = os.path.basename(path)
+    def add(self, path: PurePath, text: str, elements: Sequence[T]) -> None:
+        file_id = path.name
         self.nodes[file_id] = GizaFile(path, text, elements)
         dependencies = set()
         for element in elements:
@@ -152,7 +152,7 @@ class GizaCategory(Generic[T], Protocol):
     registry: GizaRegistry[T]
 
     def parse(self,
-              path: str,
+              path: PurePath,
               text: Optional[str] = None) -> Tuple[Sequence[T], str, List[Diagnostic]]: ...
 
     def to_page(self, page: Page, data: Sequence[T], rst_parser: EmbeddedRstParser) -> None: ...

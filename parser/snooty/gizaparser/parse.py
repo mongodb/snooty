@@ -1,9 +1,10 @@
 import logging
 import yaml
 import yaml.scanner
+from pathlib import PurePath
+from typing import Dict, List, Optional, Tuple, Type, TypeVar
 from yaml.composer import Composer
 from yaml.constructor import Constructor
-from typing import Dict, List, Optional, Tuple, Type, TypeVar
 from ..flutter import check_type, LoadError
 from ..types import Diagnostic, SerializableType
 
@@ -46,7 +47,7 @@ def load_yaml(text: str) -> List[SerializableType]:
 
 
 def parse(ty: Type[_T],
-          path: str,
+          path: PurePath,
           text: Optional[str] = None) -> Tuple[List[_T], str, List[Diagnostic]]:
     if text is None:
         with open(path, 'r') as f:

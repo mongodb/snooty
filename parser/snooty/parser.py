@@ -7,7 +7,7 @@ import pwd
 import subprocess
 from dataclasses import dataclass
 from functools import partial
-from pathlib import PurePath
+from pathlib import Path, PurePath
 from typing import Any, Dict, Tuple, Optional, Set, List
 from typing_extensions import Protocol
 import docutils.utils
@@ -22,9 +22,12 @@ RST_EXTENSIONS = {'.rst', '.txt'}
 logger = logging.getLogger(__name__)
 
 
-class JSONVisitor(rstparser.Visitor):
+class JSONVisitor:
     """Node visitor that creates a JSON-serializable structure."""
-    def __init__(self, project_root: str, docpath: str, document: docutils.nodes.document) -> None:
+    def __init__(self,
+                 project_root: Path,
+                 docpath: PurePath,
+                 document: docutils.nodes.document) -> None:
         self.project_root = project_root
         self.docpath = docpath
         self.document = document
@@ -151,16 +154,16 @@ class JSONVisitor(rstparser.Visitor):
                 return
 
             try:
-                static_asset = self.add_static_asset(argument_text)
+                static_asset = self.add_static_asset(PurePath(argument_text))
                 options['checksum'] = static_asset.checksum
             except OSError as err:
                 msg = '"figure" could not open "{}": {}'.format(
                     argument_text, os.strerror(err.errno))
                 self.diagnostics.append(Diagnostic.error(msg, util.get_line(node)))
 
-    def add_static_asset(self, path: str) -> StaticAsset:
+    def add_static_asset(self, path: PurePath) -> StaticAsset:
         fileid, path = util.reroot_path(path, self.docpath, self.project_root)
-        static_asset = StaticAsset.load(fileid, path)
+        static_asset = StaticAsset.load(fileid.as_posix(), path)
         self.static_assets.add(static_asset)
         return static_asset
 
@@ -181,7 +184,7 @@ class InlineJSONVisitor(JSONVisitor):
 
 
 def parse_rst(parser: rstparser.Parser[JSONVisitor],
-              path: str,
+              path: PurePath,
               text: Optional[str] = None) -> Page:
     if text is None:
         with open(path, 'r') as f:
@@ -196,7 +199,7 @@ def parse_rst(parser: rstparser.Parser[JSONVisitor],
         visitor.static_assets)
 
 
-def make_embedded_rst_parser(project_root: str, page: Page) -> EmbeddedRstParser:
+def make_embedded_rst_parser(project_root: Path, page: Page) -> EmbeddedRstParser:
     def parse_embedded_rst(rst: str,
                            lineno: int,
                            inline: bool) -> List[SerializableType]:
@@ -215,8 +218,8 @@ def make_embedded_rst_parser(project_root: str, page: Page) -> EmbeddedRstParser
     return parse_embedded_rst
 
 
-def get_giza_category(path: str) -> str:
-    return os.path.basename(path).split('-', 1)[0]
+def get_giza_category(path: PurePath) -> str:
+    return path.name.split('-', 1)[0]
 
 
 class ProjectBackend(Protocol):
@@ -233,28 +236,29 @@ class ProjectConfig:
     name: str
 
     @classmethod
-    def open(cls, root: PurePath) -> Tuple[str, 'ProjectConfig']:
+    def open(cls, root: Path) -> Tuple[Path, 'ProjectConfig']:
         path = root
         while path.parent != path:
             try:
                 with open(path.joinpath('snooty.toml'), 'r') as f:
-                    return str(path), check_type(ProjectConfig, toml.load(f))
+                    return path, check_type(ProjectConfig, toml.load(f))
             except FileNotFoundError:
                 pass
             path = path.parent
 
-        return str(root), cls('untitled')
+        return root, cls('untitled')
 
 
 class Project:
     def __init__(self,
-                 root: str,
+                 root: Path,
                  backend: ProjectBackend) -> None:
-        root, config = ProjectConfig.open(PurePath(root))
+        root = root.resolve(strict=True)
+        root, config = ProjectConfig.open(root)
 
         self.root = root
         self.parser = rstparser.Parser(self.root, JSONVisitor)
-        self.static_assets: Dict[str, Set[StaticAsset]] = collections.defaultdict(set)
+        self.static_assets: Dict[PurePath, Set[StaticAsset]] = collections.defaultdict(set)
         self.backend = backend
 
         self.steps_registry: GizaRegistry[gizaparser.steps.Step] = GizaRegistry()
@@ -268,11 +272,11 @@ class Project:
             encoding='utf-8').strip()
         self.prefix = [config.name, username, branch]
 
-    def get_page_id(self, path: str) -> str:
-        path = os.path.normpath(path)
-        return '/'.join(self.prefix + [path.split('.')[0].split('/', 1)[1]])
+    def get_page_id(self, path: PurePath) -> str:
+        page_id = path.with_suffix('').relative_to(self.root).as_posix()
+        return '/'.join(self.prefix + [page_id])
 
-    def update(self, path: str, optional_text: Optional[str] = None) -> None:
+    def update(self, path: PurePath, optional_text: Optional[str] = None) -> None:
         prefix = get_giza_category(path)
         _, ext = os.path.splitext(path)
         page: Optional[Page] = None
@@ -297,12 +301,12 @@ class Project:
                 giza_category.to_page(page, giza_node.data, embedded_parser)
                 path = page.path
         else:
-            raise ValueError('Unknown file type: ' + path)
+            raise ValueError('Unknown file type: ' + str(path))
 
         if page:
             self.backend.on_update(self.prefix, self.get_page_id(path), page)
 
-    def delete(self, path: str) -> None:
+    def delete(self, path: PurePath) -> None:
         file_id = os.path.basename(path)
         for giza_category in self.yaml_mapping.values():
             del giza_category.registry[file_id]
@@ -310,7 +314,7 @@ class Project:
         self.backend.on_delete(self.get_page_id(path))
 
     def build(self) -> None:
-        all_yaml_diagnostics: Dict[str, List[Diagnostic]] = {}
+        all_yaml_diagnostics: Dict[PurePath, List[Diagnostic]] = {}
         with multiprocessing.Pool() as pool:
             paths = util.get_files(self.root, RST_EXTENSIONS)
             logger.debug('Processing rst files')
@@ -319,7 +323,7 @@ class Project:
 
             # Categorize our YAML files
             logger.debug('Categorizing YAML files')
-            categorized: Dict[str, List[str]] = collections.defaultdict(list)
+            categorized: Dict[str, List[PurePath]] = collections.defaultdict(list)
             for path in util.get_files(self.root, ('.yaml',)):
                 prefix = get_giza_category(path)
                 if prefix in self.yaml_mapping:
@@ -328,7 +332,7 @@ class Project:
             # Initialize our YAML file registry
             for prefix, giza_category in self.yaml_mapping.items():
                 logger.debug('Parsing %s YAML', prefix)
-                paths_in_category: List[str] = categorized[prefix]
+                paths_in_category: List[PurePath] = categorized[prefix]
                 for path, (steps, text, diagnostics) in zip(
                         paths_in_category,
                         pool.imap_unordered(giza_category.parse, paths_in_category)):

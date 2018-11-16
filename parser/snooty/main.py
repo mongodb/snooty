@@ -5,6 +5,7 @@ import sys
 import pymongo
 import watchdog.events
 import watchdog.observers
+from pathlib import Path, PurePath
 from typing import List, Iterable
 
 from . import language_server
@@ -27,14 +28,14 @@ class ObserveHandler(watchdog.events.PatternMatchingEventHandler):
         if event.event_type in (watchdog.events.EVENT_TYPE_CREATED,
                                 watchdog.events.EVENT_TYPE_MODIFIED):
             logging.info('Rebuilding %s', event.src_path)
-            self.project.update(event.src_path)
+            self.project.update(Path(event.src_path))
         elif event.event_type == watchdog.events.EVENT_TYPE_DELETED:
             logging.info('Deleting %s', event.src_path)
-            self.project.delete(event.src_path)
+            self.project.delete(Path(event.src_path))
         elif isinstance(event, watchdog.events.FileSystemMovedEvent):
             logging.info('Moving %s', event.src_path)
-            self.project.delete(event.src_path)
-            self.project.update(event.dest_path)
+            self.project.delete(Path(event.src_path))
+            self.project.update(Path(event.dest_path))
         else:
             assert False
 
@@ -46,7 +47,7 @@ class Backend:
     def on_progress(self, progress: int, total: int, message: str) -> None:
         pass
 
-    def on_warning(self, path: str, diagnostics: Iterable[Diagnostic]) -> None:
+    def on_warning(self, path: PurePath, diagnostics: Iterable[Diagnostic]) -> None:
         for diagnostic in diagnostics:
             # Line numbers are currently... uh, "approximate"
             print('WARNING({}:{}ish): {}'.format(path, diagnostic.start[0], diagnostic.message))
@@ -117,7 +118,7 @@ def main() -> None:
     url = sys.argv[3] if len(sys.argv) == 4 else None
     connection = None if not url else pymongo.MongoClient(url, password=getpass.getpass())
     backend = MongoBackend(connection) if connection else Backend()
-    root_path = sys.argv[2]
+    root_path = Path(sys.argv[2])
     project = Project(root_path, backend)
 
     try:
@@ -127,7 +128,7 @@ def main() -> None:
             observer = watchdog.observers.Observer()
             handler = ObserveHandler(project)
             logger.info('Watching for changes...')
-            observer.schedule(handler, root_path, recursive=True)
+            observer.schedule(handler, str(root_path), recursive=True)
             observer.start()
             observer.join()
     except KeyboardInterrupt:

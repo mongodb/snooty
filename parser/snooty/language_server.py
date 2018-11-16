@@ -7,15 +7,16 @@ import jsonrpc.endpoint
 import jsonrpc.streams
 from dataclasses import dataclass
 from functools import wraps
+from pathlib import Path, PurePath
 from typing import cast, Any, BinaryIO, Callable, Dict, List, Optional, Union, TypeVar
 from .flutter import checked, check_type
 from . import types
 from .parser import Project, SerializableType
 
 _F = TypeVar('_F', bound=Callable[..., Any])
+Uri = str
 PARENT_PROCESS_WATCH_INTERVAL_SECONDS = 60
 logger = logging.getLogger(__name__)
-DocumentUri = str
 
 
 class debounce:
@@ -56,20 +57,20 @@ class Range:
 @checked
 @dataclass
 class Location:
-    uri: DocumentUri
+    uri: Uri
     range: Range
 
 
 @checked
 @dataclass
 class TextDocumentIdentifier:
-    uri: DocumentUri
+    uri: Uri
 
 
 @checked
 @dataclass
 class TextDocumentItem:
-    uri: DocumentUri
+    uri: Uri
     languageId: str
     version: int
     text: str
@@ -155,7 +156,7 @@ class Backend:
 @dataclass
 class WorkspaceEntry:
     page_id: str
-    document_uri: str
+    document_uri: Uri
     diagnostics: List[types.Diagnostic]
 
     def create_lsp_diagnostics(self) -> object:
@@ -178,10 +179,10 @@ class WorkspaceEntry:
 class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
     def __init__(self, rx: BinaryIO, tx: BinaryIO) -> None:
         self.project: Optional[Project] = None
-        self.rootUri = ''
+        self.root_uri = ''
         self.workspace: Dict[str, WorkspaceEntry] = {}
-        self.diagnostics: Dict[str, List[types.Diagnostic]] = {}
-        self.path_to_uri: Dict[str, str] = {}
+        self.path_to_uri: Dict[PurePath, Uri] = {}
+        self.diagnostics: Dict[PurePath, List[types.Diagnostic]] = {}
 
         self._jsonrpc_stream_reader = jsonrpc.streams.JsonRpcStreamReader(rx)
         self._jsonrpc_stream_writer = jsonrpc.streams.JsonRpcStreamWriter(tx)
@@ -191,7 +192,7 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
     def start(self) -> None:
         self._jsonrpc_stream_reader.listen(self._endpoint.consume)
 
-    def set_diagnostics(self, page_path: str, diagnostics: List[types.Diagnostic]) -> None:
+    def set_diagnostics(self, page_path: PurePath, diagnostics: List[types.Diagnostic]) -> None:
         if page_path not in self.path_to_uri:
             # Not open; don't report diagnostics
             return
@@ -205,15 +206,15 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
             'diagnostics': workspace_item.create_lsp_diagnostics()
         })
 
-    def uri_to_path(self, uri: str) -> str:
-        path = uri.replace(self.rootUri, '').lstrip('/')
+    def uri_to_path(self, uri: Uri) -> PurePath:
+        path = PurePath(uri.replace('file://', '', 1).replace(self.root_uri, ''))
         self.path_to_uri[path] = uri
         return path
 
-    def m_initialize(self, processId: Optional[int] = None, rootUri: Optional[str] = None,
+    def m_initialize(self, processId: Optional[int] = None, rootUri: Optional[Uri] = None,
                      **kwargs: object) -> SerializableType:
         if rootUri:
-            root_path = rootUri.replace('file://', '', 1)
+            root_path = Path(rootUri.replace('file://', '', 1))
             self.project = Project(root_path, Backend(self))
             self.project.build()
             self.rootUri = rootUri
@@ -238,11 +239,20 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
             'textDocumentSync': 1,
         }}
 
+    def m_initialized(self, **kwargs: object) -> None:
+        # Ignore this message to avoid logging a pointless warning
+        pass
+
     def m_text_document__did_open(self, textDocument: SerializableType) -> None:
+        if not self.project:
+            return
+
         item = check_type(TextDocumentItem, textDocument)
         page_path = self.uri_to_path(item.uri)
-        entry = WorkspaceEntry(page_path, item.uri, [])
+        page_id = self.project.get_page_id(page_path)
+        entry = WorkspaceEntry(page_id, item.uri, [])
         self.workspace[item.uri] = entry
+        self.project.update(page_path, item.text)
 
     @debounce(0.2)
     def m_text_document__did_change(self,
@@ -258,12 +268,14 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
         self.project.update(page_path, change.text)
 
     def m_text_document__did_close(self, textDocument: SerializableType) -> None:
+        if not self.project:
+            return
+
         identifier = check_type(TextDocumentIdentifier, textDocument)
         page_path = self.uri_to_path(identifier.uri)
+        del self.path_to_uri[page_path]
         del self.workspace[identifier.uri]
-
-        if self.project:
-            self.project.update(page_path)
+        self.project.update(page_path)
 
     def m_shutdown(self, **_kwargs: object) -> None:
         self._shutdown = True

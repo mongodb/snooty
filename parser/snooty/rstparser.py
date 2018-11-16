@@ -1,4 +1,3 @@
-import abc
 import docutils.frontend
 import docutils.nodes
 import docutils.parsers.rst
@@ -10,7 +9,9 @@ import docutils.utils
 import re
 import sys
 from dataclasses import dataclass
+from pathlib import Path, PurePath
 from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
+from typing_extensions import Protocol
 from .gizaparser.parse import load_yaml
 from .flutter import checked, check_type, LoadError
 
@@ -273,17 +274,15 @@ class NoTransformRstParser(docutils.parsers.rst.Parser):
         return []
 
 
-class Visitor(metaclass=abc.ABCMeta):
-    def __init__(self, project_root: str, docpath: str, document: docutils.nodes.document) -> None:
-        pass
+class Visitor(Protocol):
+    def __init__(self,
+                 project_root: Path,
+                 docpath: PurePath,
+                 document: docutils.nodes.document) -> None: ...
 
-    @abc.abstractmethod
-    def dispatch_visit(self, node: docutils.nodes.Node) -> None:
-        pass
+    def dispatch_visit(self, node: docutils.nodes.Node) -> None: ...
 
-    @abc.abstractmethod
-    def dispatch_departure(self, node: docutils.nodes.Node) -> None:
-        pass
+    def dispatch_departure(self, node: docutils.nodes.Node) -> None: ...
 
 
 V = TypeVar('V', bound=Visitor)
@@ -292,18 +291,18 @@ V = TypeVar('V', bound=Visitor)
 class Parser(Generic[V]):
     __slots__ = ('project_root', 'visitor_class')
 
-    def __init__(self, project_root: str, visitor_class: Type[V]) -> None:
+    def __init__(self, project_root: Path, visitor_class: Type[V]) -> None:
         self.project_root = project_root
         self.visitor_class = visitor_class
 
-    def parse(self, path: str, text: str) -> V:
+    def parse(self, path: PurePath, text: str) -> V:
         parser = NoTransformRstParser()
         settings = docutils.frontend.OptionParser(
             components=(docutils.parsers.rst.Parser,)
             ).get_default_values()
         settings.report_level = 10000
         settings.halt_level = 10000
-        document = docutils.utils.new_document(path, settings)
+        document = docutils.utils.new_document(str(path), settings)
 
         parser.parse(text, document)
 

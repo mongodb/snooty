@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import PurePath
 from typing import Optional, List, Sequence, Union, Tuple
 from ..flutter import checked
 from .parse import parse
@@ -141,7 +142,7 @@ class GizaStepsCategory(GizaCategory):
     registry: GizaRegistry[Step]
 
     def parse(self,
-              path: str,
+              path: PurePath,
               text: Optional[str] = None) -> Tuple[Sequence[Step], str, List[Diagnostic]]:
         return parse(Step, path, text)
 

@@ -1,5 +1,6 @@
 import hashlib
 from dataclasses import dataclass
+from pathlib import PurePath
 from typing import Any, Callable, Dict, Set, List, Tuple, Optional, Union
 
 SerializableType = Union[None, bool, str, int, float, Dict[str, Any], List[Any]]
@@ -33,7 +34,7 @@ class Diagnostic:
         else:
             end_line, end_column = end
 
-        return cls(LEVEL_WARNING, message, (start_line, start_column), (end_line, end_column))
+        return cls(severity, message, (start_line, start_column), (end_line, end_column))
 
     @classmethod
     def warning(cls, message: str,
@@ -60,18 +61,18 @@ class StaticAsset:
         return hash(self.checksum)
 
     @classmethod
-    def load(cls, fileid: str, path: str) -> 'StaticAsset':
+    def load(cls, fileid: str, path: PurePath) -> 'StaticAsset':
         with open(path, 'rb') as f:
             data = f.read()
         asset_hash = hashlib.blake2b(data, digest_size=32).hexdigest()
-        return StaticAsset(fileid, asset_hash, data)
+        return cls(fileid, asset_hash, data)
 
 
 @dataclass
 class Page:
     __slots__ = ('path', 'source', 'ast', 'diagnostics', 'static_assets')
 
-    path: str
+    path: PurePath
     source: str
     ast: SerializableType
     diagnostics: List[Diagnostic]
