@@ -10,14 +10,17 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8"
   },
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "axios": "^0.18.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "contentful": "^7.0.3",
+    "express": "^4.16.4",
     "gatsby": "^2.0.2",
-    "mongodb": "^3.1.6",
+    "http": "0.0.0",
     "mongodb-stitch-browser-sdk": "^4.0.13",
     "mongodb-stitch-server-sdk": "^4.0.13",
     "react": "^16.5.2",

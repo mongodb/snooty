@@ -2,8 +2,6 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const uuidv1 = require('uuid/v1');
-const contentful = require('contentful');
-const mongoclient = require('mongodb').MongoClient;
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
 const LANGUAGES = [
