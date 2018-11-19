@@ -20,7 +20,6 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "express": "^4.16.4",
     "gatsby": "^2.0.2",
-    "http": "0.0.0",
     "mongodb-stitch-browser-sdk": "^4.0.13",
     "mongodb-stitch-server-sdk": "^4.0.13",
     "react": "^16.5.2",
