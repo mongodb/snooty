@@ -1,6 +1,6 @@
 import collections.abc
 import typing
-from typing import cast, Any, Dict, Type, TypeVar, Optional, Union
+from typing import cast, Any, Callable, Dict, Tuple, Type, TypeVar, Optional, Union
 from typing_extensions import Protocol
 
 CACHED_TYPES: Dict[type, Optional[Dict[str, type]]] = {}
@@ -18,6 +18,106 @@ T = TypeVar('T', bound=HasAnnotations)
 C = TypeVar('C', bound=Constructable)
 
 
+def _add_indefinite_article(s: str) -> str:
+    if s == 'nothing':
+        return s
+
+    return ('an ' if s[0].lower() in 'aeiouy' else 'a ') + s
+
+
+def _get_typename(ty: type) -> str:
+    return str(ty).replace('typing.', '')
+
+
+def _pluralize(s: str) -> str:
+    if s[-1].isalpha():
+        return s + 's'
+
+    return s + '\'s'
+
+
+def _generate_hint(ty: type, get_description: Callable[[type], str]) -> str:
+    try:
+        name = ty.__name__
+    except AttributeError:
+        return str(ty)
+    docstring = '\n'.join('  ' + line for line in (ty.__doc__ or '').split('\n'))
+    fields = '\n'.join(f'  {k}: {get_description(v)}'
+                       for k, v in typing.get_type_hints(ty).items() if not k.startswith('_'))
+    return f'{name}:\n{docstring}\n{fields}'
+
+
+def english_description_of_type(ty: type) -> Tuple[str, Dict[type, str]]:
+    hints: Dict[type, str] = {}
+
+    def inner(ty: type, plural: bool, level: int) -> str:
+        pluralize = _pluralize if plural else lambda s: s
+        plural_suffix = 's' if plural else ''
+
+        if ty is str:
+            return pluralize('string')
+
+        if ty is int:
+            return pluralize('integer')
+
+        if ty is float:
+            return pluralize('number')
+
+        if ty is bool:
+            return pluralize('boolean')
+
+        if ty is type(None):  # noqa
+            return 'nothing'
+
+        level += 1
+        if level > 4:
+            # Making nested English clauses understandable is hard. Give up.
+            return pluralize(_get_typename(ty))
+
+        origin = getattr(ty, '__origin__', None)
+        if origin is not None:
+            args = getattr(ty, '__args__')
+            if origin is list:
+                return f'list{plural_suffix} of {inner(args[0], True, level)}'
+            elif origin is dict:
+                key_type = inner(args[0], True, level)
+                value_type = inner(args[1], True, level)
+                return f'mapping{plural_suffix} of {key_type} to {value_type}'
+            elif origin is tuple:
+                # Tuples are a hard problem... this is okay
+                return pluralize(_get_typename(ty))
+            elif origin is Union:
+                if len(args) == 2:
+                    try:
+                        none_index = args.index(type(None))
+                    except ValueError:
+                        pass
+                    else:
+                        non_none_arg = args[int(not none_index)]
+                        return f'optional {inner(non_none_arg, plural, level)}'
+
+                up_to_last = args[:-1]
+                part1 = (inner(arg, plural, level=level) for arg in up_to_last)
+                part2 = inner(args[-1], plural, level=level)
+                if not plural:
+                    part1 = (_add_indefinite_article(desc) for desc in part1)
+                    part2 = _add_indefinite_article(part2)
+                comma = ',' if len(up_to_last) > 1 else ''
+                joined_part1 = ', '.join(part1)
+                return f'either {joined_part1}{comma} or {part2}'
+
+        # A custom type
+        if ty not in hints:
+            hints[ty] = _generate_hint(ty, lambda ty: inner(ty, False, level))
+
+        try:
+            return pluralize(ty.__name__)
+        except AttributeError:
+            return pluralize(_get_typename(ty))
+
+    return inner(ty, False, 0), hints
+
+
 def checked(klass: Type[T]) -> Type[T]:
     """Marks a dataclass as being deserializable."""
     CACHED_TYPES[klass] = None
@@ -33,8 +133,13 @@ class LoadError(TypeError):
 
 class LoadWrongType(LoadError):
     def __init__(self, ty: type, bad_data: object) -> None:
+        description, hints = english_description_of_type(ty)
+        hint_text = '\n\n'.join(hints.values())
+        if hint_text:
+            hint_text = '\n\n' + hint_text
+
         super().__init__(
-            'Incorrect type. Expected "{}", got "{}"'.format(ty, bad_data),
+            f'Incorrect type. Expected {description}.{hint_text}',
             ty,
             bad_data)
 
@@ -45,7 +150,7 @@ class LoadWrongArity(LoadWrongType):
 
 class LoadUnknownField(LoadError):
     def __init__(self, ty: type, bad_data: object, bad_field: str) -> None:
-        super().__init__('Unknown field "{}"'.format(bad_field), ty, bad_data)
+        super().__init__('Unexpected field: "{}"'.format(bad_field), ty, bad_data)
         self.bad_field = bad_field
 
 

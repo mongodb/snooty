@@ -17,10 +17,11 @@ class OldHeading(Node):
 @checked
 @dataclass
 class Action(Node):
+    """An action that a user must take."""
     code: Optional[str]
     copyable: Optional[bool]
     content: Optional[str]
-    heading: Union[str, None, OldHeading]
+    heading: Union[str, OldHeading, None]
     language: Optional[str]
     post: Optional[str]
     pre: Optional[str]
