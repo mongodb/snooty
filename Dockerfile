@@ -2,7 +2,7 @@
 # of the docs site to be built online and push changes to aws
 
 # get nodejs
-FROM node:latest
+FROM node:10.10.0
 
 COPY front-end/ .
 

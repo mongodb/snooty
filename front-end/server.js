@@ -15,6 +15,7 @@ const port = 8080;
 
 const beginBuild = (req, res) => {
   // start sending output to client
+  res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
   res.write('<html>');
   res.write('<body>');
   res.write('<h1>Building site...</h1>');
@@ -26,8 +27,18 @@ const beginBuild = (req, res) => {
     res.write('<p>Error with query params</p>');
     return;
   }
+  // set env variables
+  const env = Object.assign({}, process.env);
+  env['STITCH_ID'] = STITCH_ID;
+  env['NAMESPACE'] = NAMESPACE;
+  env['PREFIX'] = PREFIX;
   // kick off build
-  const gatsbyBuild = exec(`STITCH_ID=${STITCH_ID} NAMESPACE=${NAMESPACE} PREFIX=${PREFIX} gatsby build --prefix-paths`);
+  const gatsbyBuild = exec('gatsby build --prefix-paths', { env: env }, (err, stdout, stderr) => {
+    if (err || stderr) {
+      console.log('ERROR: problem with kicking off build using Gatsby');
+    }
+  });
+  // get console data as build is running
   gatsbyBuild.stdout.on('data', (data) => {
     console.log(data); 
     res.write('<p style="margin:0;font-size:13px;">' + data + '</p>');
@@ -37,6 +48,8 @@ const beginBuild = (req, res) => {
     const gatsbyServe = exec('gatsby serve');
     gatsbyServe.stdout.on('data', (data) => {
       console.log(data); 
+      // TODO: upload files to aws
+      res.write('<p style="margin:0;font-size:13px;font-size:25px;font-weight:bold;">' + data + '</p>');
       res.write('</body>');
       res.write('</html>');
       res.end();
@@ -47,14 +60,10 @@ const beginBuild = (req, res) => {
 // https://github.com/gatsbyjs/gatsby/issues/3485
 router.get('/', (req, res) => { 
   // pre-build config
-  if (!fs.existsSync('docs-tools/')) {
-    console.log('running makefile because docs-tools has not been pulled');
-    exec('make static', () => {
-      beginBuild(req, res);
-    });
-  } else {
+  console.log('running makefile to get docs-tools');
+  exec('make static', () => {
     beginBuild(req, res);
-  }
+  });
 });
 
 app.listen(port, () => {
