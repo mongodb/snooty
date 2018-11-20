@@ -52,7 +52,7 @@ const setupStitch = () => {
 const saveAssetFile = async (name, objData) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(`static/${name}`, objData.data.buffer, 'binary', (err) => {
-      if (err) throw err;
+      if (err) console.log('ERROR with saving asset', err);
       resolve();
     });
   });
