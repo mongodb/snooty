@@ -10,7 +10,9 @@ const app = express();
 app.use('/', router);
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use('/public', express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/public/static'));
+app.use('/images', express.static(__dirname + '/public/images'));
 
 const port = 8080;
 
@@ -56,7 +58,7 @@ const beginBuild = (req, res) => {
 };
 
 // https://github.com/gatsbyjs/gatsby/issues/3485
-router.get('/', (req, res) => { 
+router.get('/build', (req, res) => { 
   // pre-build config
   console.log('running makefile to get docs-tools');
   exec('make static', (err, stdout, stderr) => {
