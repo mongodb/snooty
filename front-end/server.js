@@ -10,6 +10,7 @@ const app = express();
 app.use('/', router);
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 const port = 8080;
 
@@ -35,8 +36,8 @@ const beginBuild = (req, res) => {
   env['PREFIX'] = PREFIX;
   // kick off build
   const gatsbyBuild = exec('gatsby build --prefix-paths', { env: env }, (err, stdout, stderr) => {
-    if (err || stderr) {
-      console.log('ERROR: problem with kicking off build using Gatsby');
+    if (err) {
+      console.log('ERROR: problem with kicking off build using Gatsby', err);
     }
   });
   // get console data as build is running
@@ -47,14 +48,10 @@ const beginBuild = (req, res) => {
   // when build is finished
   // TODO: upload files to aws
   gatsbyBuild.on('exit', function() {
-    res.write('<p style="margin:0;font-size:13px;font-size:25px;font-weight:bold;">Uploading to aws...</p>');
+    res.write('<p style="margin:0;font-size:13px;font-size:25px;font-weight:bold;">View your site at: https://snooty.docs.staging.mongodb.sh/index.html</p>');
     res.write('</body>');
     res.write('</html>');
     res.end();
-    /*const gatsbyServe = exec('gatsby serve');
-    gatsbyServe.stdout.on('data', (data) => {
-      console.log(data); 
-    });*/
   });
 };
 
@@ -62,7 +59,7 @@ const beginBuild = (req, res) => {
 router.get('/', (req, res) => { 
   // pre-build config
   console.log('running makefile to get docs-tools');
-  exec('make static', () => {
+  exec('make static', (err, stdout, stderr) => {
     beginBuild(req, res);
   });
 });
