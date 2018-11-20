@@ -24,7 +24,8 @@ const beginBuild = (req, res) => {
   const NAMESPACE = req.query.namespace;
   const PREFIX = req.query.prefix;
   if (!STITCH_ID || !NAMESPACE || !PREFIX) {
-    res.write('<p>Error with query params</p>');
+    res.write('<p>Error with query params</p></body></html>');
+    res.end();
     return;
   }
   // set env variables
@@ -44,16 +45,16 @@ const beginBuild = (req, res) => {
     res.write('<p style="margin:0;font-size:13px;">' + data + '</p>');
   });
   // when build is finished
+  // TODO: upload files to aws
   gatsbyBuild.on('exit', function() {
-    const gatsbyServe = exec('gatsby serve');
+    res.write('<p style="margin:0;font-size:13px;font-size:25px;font-weight:bold;">Uploading to aws...</p>');
+    res.write('</body>');
+    res.write('</html>');
+    res.end();
+    /*const gatsbyServe = exec('gatsby serve');
     gatsbyServe.stdout.on('data', (data) => {
       console.log(data); 
-      // TODO: upload files to aws
-      res.write('<p style="margin:0;font-size:13px;font-size:25px;font-weight:bold;">' + data + '</p>');
-      res.write('</body>');
-      res.write('</html>');
-      res.end();
-    });
+    });*/
   });
 };
 
