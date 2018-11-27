@@ -1,7 +1,7 @@
 import os
 import docutils.nodes
 from pathlib import Path, PurePath
-from typing import Container, Tuple, Iterator
+from typing import cast, Container, Optional, Tuple, Iterator
 
 
 def reroot_path(filename: PurePath,
@@ -31,10 +31,18 @@ def get_files(root: PurePath, extensions: Container[str]) -> Iterator[PurePath]:
 
 def get_line(node: docutils.nodes.Node) -> int:
     """Return the first line number we can find in node's ancestry."""
-    while node.line is None:
+    def line_of_node(node: docutils.nodes.Node) -> Optional[int]:
+        """Sometimes you need node['line']. Sometimes you need node.line.
+           Sometimes you want to just run away and herd yaks."""
+        if isinstance(node, docutils.nodes.Element) and 'line' in node:
+            return cast(int, node['line'])
+
+        return node.line
+
+    while line_of_node(node) is None:
         if node.parent is None:
             # This is probably a document node
             return 0
         node = node.parent
 
-    return node.line - 1
+    return cast(int, line_of_node(node)) - 1
