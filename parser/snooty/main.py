@@ -50,7 +50,11 @@ class Backend:
     def on_warning(self, path: PurePath, diagnostics: Iterable[Diagnostic]) -> None:
         for diagnostic in diagnostics:
             # Line numbers are currently... uh, "approximate"
-            print('WARNING({}:{}ish): {}'.format(path, diagnostic.start[0], diagnostic.message))
+            print('{}({}:{}ish): {}'.format(
+                diagnostic.severity_string.upper(),
+                path,
+                diagnostic.start[0],
+                diagnostic.message))
             self.total_warnings += 1
 
     def on_update(self, prefix: List[str], page_id: str, page: Page) -> None:

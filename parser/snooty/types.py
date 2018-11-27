@@ -18,6 +18,12 @@ class Diagnostic:
     start: Tuple[int, int]
     end: Tuple[int, int]
 
+    @property
+    def severity_string(self) -> str:
+        return {
+            LEVEL_ERROR: 'Error',
+        }.get(self.severity, 'Warning')
+
     @classmethod
     def create(cls, severity: int, message: str,
                start: Union[int, Tuple[int, int]],
