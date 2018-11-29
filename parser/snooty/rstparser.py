@@ -7,7 +7,6 @@ import docutils.parsers.rst.states
 import docutils.statemachine
 import docutils.utils
 import re
-import sys
 from dataclasses import dataclass
 from pathlib import Path, PurePath
 from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
@@ -145,34 +144,16 @@ class Directive(docutils.parsers.rst.Directive):
 
 
 def prepare_viewlist(text: str, ignore: int = 1) -> List[str]:
-    """Convert a docstring into lines of parseable reST.  Remove common leading
-    indentation, where the indentation of a given number of lines (usually just
-    one) is ignored.
-    Return the docstring as a list of lines usable for inserting into a docutils
-    ViewList (used as argument of nested_parse().)  An empty line is added to
-    act as a separator between this docstring and following content.
-    """
-    lines = text.expandtabs().splitlines()
-    # Find minimum indentation of any non-blank lines after ignored lines.
-    margin = sys.maxsize
-    for line in lines[ignore:]:
-        content = len(line.lstrip())
-        if content:
-            indent = len(line) - content
-            margin = min(margin, indent)
-    # Remove indentation from ignored lines.
-    for i in range(ignore):
-        if i < len(lines):
-            lines[i] = lines[i].lstrip()
-    if margin < sys.maxsize:
-        for i in range(ignore, len(lines)):
-            lines[i] = lines[i][margin:]
+    lines = docutils.statemachine.string2lines(text, tab_width=4, convert_whitespace=True)
+
     # Remove any leading blank lines.
     while lines and not lines[0]:
         lines.pop(0)
+
     # make sure there is an empty line at the end
     if lines and lines[-1]:
         lines.append('')
+
     return lines
 
 
@@ -240,7 +221,8 @@ class TabsDirective(Directive):
         self.state.nested_parse(
             docutils.statemachine.ViewList(content_lines, source=source),
             self.state_machine.line_offset,
-            node)
+            node,
+            match_titles=True)
 
         return node
 

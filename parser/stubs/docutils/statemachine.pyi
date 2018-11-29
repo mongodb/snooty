@@ -1,5 +1,5 @@
 import docutils.nodes
-from typing import Iterator, Optional
+from typing import List, Iterator, Optional
 
 
 class ViewList:
@@ -14,3 +14,8 @@ class StringList(ViewList): ...
 
 class State:
     document: docutils.nodes.document
+
+
+def string2lines(astring: str,
+                 tab_width: int = 8,
+                 convert_whitespace: bool = False) -> List[str]: ...
