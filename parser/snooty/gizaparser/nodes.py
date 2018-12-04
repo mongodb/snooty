@@ -121,7 +121,11 @@ class GizaRegistry(Generic[T]):
         parent_identifier = obj.source if obj.source is not None else obj.inherit
         if parent_identifier is not None:
             parent_sequence = self.nodes[parent_identifier.file].data
-            parent: T = next(x for x in parent_sequence if x.ref == parent_identifier.ref)
+            try:
+                parent: T = next(x for x in parent_sequence if x.ref == parent_identifier.ref)
+            except StopIteration:
+                logger.debug('Inheritance failed: %s', obj.ref)
+                return obj
             obj.ref = parent.ref
             reified = inherit(obj, parent)
             return reified
