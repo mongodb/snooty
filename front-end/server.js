@@ -3,69 +3,147 @@ const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser'); 
 const querystring = require('querystring');  
-const router = express.Router();
 const exec = require('child_process').exec;
 
+// express setup
 const app = express();
-app.use('/', router);
-app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());
-app.use('/public', express.static(__dirname + '/public'));
-app.use('/static', express.static(__dirname + '/public/static'));
-app.use('/images', express.static(__dirname + '/public/images'));
+app.use(bodyParser.urlencoded({ extended: false }));  
 
-const port = 8080;
+// server + socket setup
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
-const beginBuild = (req, res) => {
-  // start sending output to client
-  res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-  res.write('<html>');
-  res.write('<body>');
-  res.write('<h1>Building site...</h1>');
-  // get params
-  const STITCH_ID = req.query.stitch_id;
-  const NAMESPACE = req.query.namespace;
-  const PREFIX = req.query.prefix;
-  if (!STITCH_ID || !NAMESPACE || !PREFIX) {
-    res.write('<p>Error with query params</p></body></html>');
-    res.end();
-    return;
+// data structure to store running builds
+const QUEUE = [];
+const BUILDS = {};
+
+// allow static files to be viewed
+const setupStaticConfig = (path) => {
+  app.use(express.static(__dirname + `/staging`));
+  app.use(express.static(__dirname + `/staging/${path}`));
+  app.use('/static', express.static(__dirname + `/staging/${path}/static`));
+  app.use('/images', express.static(__dirname + `/staging/${path}/images`));
+};
+
+// https://stackoverflow.com/questions/18052762/remove-directory-which-is-not-empty
+const deleteFolderRecursive = (path) => {
+  if (fs.existsSync(path)) {
+    fs.readdirSync(path).forEach((file, index) => {
+      var curPath = path + "/" + file;
+      if (fs.lstatSync(curPath).isDirectory()) { 
+        deleteFolderRecursive(curPath);
+      } else { 
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(path);
   }
+};
+
+const getStatus = (req, res, id) => {
+  if (BUILDS[id]) {
+    res.json(BUILDS[id]);
+  } else {
+    res.json({
+      'status': 'error',
+      'message': 'prefix ID does not exist'
+    });
+  }
+};
+
+const addToQueue = (params) => {
+  const prefix = params.buildInfo.prefix;
+  // only add build object to queue if not currently in queue, not in progress, 
+  // or was already completed and a new build needs to start
+  if (!BUILDS[prefix] || BUILDS[prefix]['status'] === 'complete') {
+    const updatedQueueLength = QUEUE.unshift(params);
+    BUILDS[prefix] = { 'status': 'queued', 'message': `inserted on ${new Date().toLocaleString()} at position ${updatedQueueLength} in queue` };
+    console.log('added to queue, new size is', updatedQueueLength);
+  }
+};
+
+const processQueue = () => {
+  if (QUEUE.length === 0) return;
+  const currentBuildObject = QUEUE[QUEUE.length - 1];
+  const prefix = currentBuildObject.buildInfo.prefix;
+  if (BUILDS[prefix]['status'] !== 'in progress') {
+    BUILDS[prefix]['status'] = 'in progress';
+    BUILDS[prefix]['message'] = 'currently building site';
+    console.log('getting first item in queue and starting build', currentBuildObject.buildInfo);
+    beginBuild(currentBuildObject);
+  }
+};
+
+const beginBuild = (buildObject) => {
+  const stitch_id = buildObject.buildInfo.stitch_id;
+  const namespace = buildObject.buildInfo.namespace;
+  const prefix = buildObject.buildInfo.prefix;
+  const output_json = {};
   // set env variables
   const env = Object.assign({}, process.env);
-  env['STITCH_ID'] = STITCH_ID;
-  env['NAMESPACE'] = NAMESPACE;
-  env['PREFIX'] = PREFIX;
+  env['STITCH_ID'] = stitch_id;
+  env['NAMESPACE'] = namespace;
+  env['PREFIX'] = prefix;
   // kick off build
   const gatsbyBuild = exec('gatsby build --prefix-paths', { env: env }, (err, stdout, stderr) => {
     if (err) {
-      console.log('ERROR: problem with kicking off build using Gatsby', err);
+      console.log('ERROR: problem with kicking off build using Gatsby');
     }
   });
-  // get console data as build is running
-  gatsbyBuild.stdout.on('data', (data) => {
-    console.log(data); 
-    res.write('<p style="margin:0;font-size:13px;">' + data + '</p>');
-  });
+  // TODO: upload files to aws `make stage`
   // when build is finished
-  // TODO: upload files to aws
   gatsbyBuild.on('exit', function() {
-    res.write('<p style="margin:0;font-size:13px;font-size:25px;font-weight:bold;">View your site at: https://snooty.docs.staging.mongodb.sh/index.html</p>');
-    res.write('</body>');
-    res.write('</html>');
-    res.end();
+    // create proper prefix directory and move files into it
+    const outputDir = `staging/${prefix}`;
+    exec(`mkdir -p ${outputDir}`, (err, stdout, stderr) => {
+      if (err) throw err;
+      deleteFolderRecursive(outputDir);
+      fs.rename(__dirname + `/public`, __dirname + '/' + outputDir, (err) => {
+        if (err) throw err;
+        setupStaticConfig(prefix);
+        console.log(`moved public/ directory to staging/${prefix}`);
+      });
+    });
+    // remove build object from queue
+    QUEUE.pop();
+    BUILDS[prefix]['status'] = 'complete';
+    BUILDS[prefix]['message'] = 'last build completed on ' + new Date().toLocaleString();
+    BUILDS[prefix]['url'] = `https://snooty-test.docs.staging.mongodb.sh/${prefix}/index.html`;
+    // move on to next build
+    processQueue();
   });
 };
 
-// https://github.com/gatsbyjs/gatsby/issues/3485
-router.get('/build', (req, res) => { 
-  // pre-build config
-  console.log('running makefile to get docs-tools');
-  exec('make static', (err, stdout, stderr) => {
-    beginBuild(req, res);
-  });
+// being build
+app.post('/build', (req, res) => { 
+  // make sure params are all set
+  const stitch_id = req.body.stitch_id;
+  const namespace = req.body.namespace;
+  const prefix = req.body.prefix;
+  if (!stitch_id || !namespace || !prefix) {
+    res.json({ 'status': 'error', 'message': 'incorrect params' });
+  } else {
+    addToQueue({
+      httpInfo: { req, res },
+      buildInfo: { stitch_id, namespace, prefix }
+    });
+    res.json({ 'status': 'success', 'message': `added build object to queue, check status at route /status/${prefix}` });
+    processQueue();
+  }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+// get status of build
+app.get('/status/:namespace*', (req, res) => { 
+  let fullPrefixPath;
+  if (req.params) {
+    fullPrefixPath = req.params.namespace + req.params[0];
+  }
+  getStatus(req, res, fullPrefixPath);
 });
+
+server.listen(8080, () => {
+  console.log(`Server running on http://localhost:8080`);
+});
+
+
