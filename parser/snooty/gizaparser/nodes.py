@@ -4,7 +4,7 @@ import logging
 import re
 from dataclasses import dataclass
 from pathlib import PurePath
-from typing import Dict, Set, Generic, Optional, TypeVar, Tuple, Iterator, Sequence, List
+from typing import cast, Dict, Set, Generic, Optional, TypeVar, Tuple, Iterator, Sequence, List
 from typing_extensions import Protocol
 from ..flutter import checked
 from ..types import Diagnostic, Page, EmbeddedRstParser
@@ -17,10 +17,10 @@ def substitute(text: str, replacements: Dict[str, str]) -> str:
     return PAT_SUBSTITUTION.sub(lambda match: replacements[match.group(1)], text)
 
 
-@checked
-@dataclass
 class Node:
-    __line__: int
+    @property
+    def line(self) -> int:
+        return cast(int, getattr(self, '__line__', 0))
 
 
 @checked

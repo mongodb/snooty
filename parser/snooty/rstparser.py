@@ -12,6 +12,7 @@ from pathlib import Path, PurePath
 from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
 from typing_extensions import Protocol
 from .gizaparser.parse import load_yaml
+from .gizaparser import nodes
 from .flutter import checked, check_type, LoadError
 
 PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
@@ -21,17 +22,15 @@ SPECIAL_DIRECTIVES = {'code-block', 'include', 'tabs-drivers', 'tabs', 'tabs-pla
 
 @checked
 @dataclass
-class LegacyTabDefinition:
-    __line__: int
+class LegacyTabDefinition(nodes.Node):
     id: str
-    title: Optional[str]
+    name: Optional[str]
     content: str
 
 
 @checked
 @dataclass
-class LegacyTabsDefinition:
-    __line__: int
+class LegacyTabsDefinition(nodes.Node):
     hidden: Optional[bool]
     tabs: List[LegacyTabDefinition]
 
@@ -138,7 +137,11 @@ class Directive(docutils.parsers.rst.Directive):
             raw.source, raw.line = source, line
             node.append(raw)
         else:
-            self.state.nested_parse(self.content, self.state_machine.line_offset, node)
+            self.state.nested_parse(
+                self.content,
+                self.state_machine.line_offset,
+                node,
+                match_titles=True)
 
         return [node]
 
@@ -202,7 +205,7 @@ class TabsDirective(Directive):
         return Directive.run(self)
 
     def make_tab_node(self, source: str, child: LegacyTabDefinition) -> docutils.nodes.Node:
-        line = self.lineno + child.__line__
+        line = self.lineno + child.line
 
         node = directive('tab')
         node.document = self.state.document
