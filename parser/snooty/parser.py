@@ -319,7 +319,7 @@ class Project:
 
     def build(self) -> None:
         all_yaml_diagnostics: Dict[PurePath, List[Diagnostic]] = {}
-        with multiprocessing.Pool() as pool:
+        with multiprocessing.Pool(1) as pool:
             paths = util.get_files(self.root, RST_EXTENSIONS)
             logger.debug('Processing rst files')
             for page in pool.imap_unordered(partial(parse_rst, self.parser), paths):
