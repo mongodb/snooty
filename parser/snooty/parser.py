@@ -319,29 +319,27 @@ class Project:
 
     def build(self) -> None:
         all_yaml_diagnostics: Dict[PurePath, List[Diagnostic]] = {}
-        with multiprocessing.Pool(1) as pool:
+        with multiprocessing.Pool() as pool:
             paths = util.get_files(self.root, RST_EXTENSIONS)
             logger.debug('Processing rst files')
             for page in pool.imap_unordered(partial(parse_rst, self.parser), paths):
                 self.backend.on_update(self.prefix, self.get_page_id(page.path), page)
 
-            # Categorize our YAML files
-            logger.debug('Categorizing YAML files')
-            categorized: Dict[str, List[PurePath]] = collections.defaultdict(list)
-            for path in util.get_files(self.root, ('.yaml',)):
-                prefix = get_giza_category(path)
-                if prefix in self.yaml_mapping:
-                    categorized[prefix].append(path)
+        # Categorize our YAML files
+        logger.debug('Categorizing YAML files')
+        categorized: Dict[str, List[PurePath]] = collections.defaultdict(list)
+        for path in util.get_files(self.root, ('.yaml',)):
+            prefix = get_giza_category(path)
+            if prefix in self.yaml_mapping:
+                categorized[prefix].append(path)
 
-            # Initialize our YAML file registry
-            for prefix, giza_category in self.yaml_mapping.items():
-                logger.debug('Parsing %s YAML', prefix)
-                paths_in_category: List[PurePath] = categorized[prefix]
-                for path, (steps, text, diagnostics) in zip(
-                        paths_in_category,
-                        pool.imap_unordered(giza_category.parse, paths_in_category)):
-                    all_yaml_diagnostics[path] = diagnostics
-                    giza_category.registry.add(path, text, steps)
+        # Initialize our YAML file registry
+        for prefix, giza_category in self.yaml_mapping.items():
+            logger.debug('Parsing %s YAML', prefix)
+            for path in categorized[prefix]:
+                steps, text, diagnostics = giza_category.parse(path)
+                all_yaml_diagnostics[path] = diagnostics
+                giza_category.registry.add(path, text, steps)
 
         # Now that all of our YAML files are loaded, generate a page for each one
         for prefix, giza_category in self.yaml_mapping.items():
