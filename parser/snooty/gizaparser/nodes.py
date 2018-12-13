@@ -43,7 +43,7 @@ def substitute(obj: _T, replacements: Dict[str, str]) -> _T:
 class Node:
     @property
     def line(self) -> int:
-        return cast(int, getattr(self, '__line__', 0))
+        return cast(int, getattr(self, '_start_line', 0))
 
 
 @checked
@@ -154,7 +154,7 @@ class GizaRegistry(Generic[_I]):
                 parent_sequence = self.nodes[parent_identifier.file].data
             except KeyError:
                 msg = 'No such file "{}"'.format(parent_identifier.file)
-                warnings.append(Diagnostic.error(msg, obj.line))
+                warnings.append(Diagnostic.error(msg, parent_identifier.line))
                 return obj
             try:
                 _parent: _I = next(x for x in parent_sequence if x.ref == parent_identifier.ref)

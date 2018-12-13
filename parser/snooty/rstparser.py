@@ -175,7 +175,7 @@ class TabsDirective(Directive):
             try:
                 loaded = check_type(LegacyTabsDefinition, parsed)
             except LoadError as err:
-                line = self.lineno + getattr(err.bad_data, '__line__', 0) + 1
+                line = self.lineno + getattr(err.bad_data, '_start_line', 0) + 1
                 error_node = self.state.document.reporter.error(
                     str(err),
                     line=line)

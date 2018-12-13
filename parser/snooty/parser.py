@@ -161,6 +161,7 @@ class JSONVisitor:
                 static_asset = self.add_static_asset(PurePath(argument_text))
                 options['checksum'] = static_asset.checksum
             except OSError as err:
+                print(util.get_line(node))
                 msg = '"figure" could not open "{}": {}'.format(
                     argument_text, os.strerror(err.errno))
                 self.diagnostics.append(Diagnostic.error(msg, util.get_line(node)))
