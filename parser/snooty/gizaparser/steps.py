@@ -75,7 +75,7 @@ class Action(Node):
 
 @checked
 @dataclass
-class Step(Node, Inheritable):
+class Step(Inheritable):
     title: Union[str, None, OldHeading]
     stepnum: Optional[int]
     content: Optional[str]

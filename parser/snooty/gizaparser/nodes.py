@@ -54,7 +54,7 @@ class Inherit(Node):
 
 
 @dataclass
-class Inheritable:
+class Inheritable(Node):
     ref: Optional[str]
     replacement: Optional[Dict[str, str]]
 
@@ -146,11 +146,16 @@ class GizaRegistry(Generic[_I]):
 
         self.dg.set_dependencies(file_id, dependencies)
 
-    def reify(self, obj: _I) -> _I:
+    def reify(self, obj: _I, warnings: List[Diagnostic]) -> _I:
         parent_identifier = obj.source if obj.source is not None else obj.inherit
         parent: Optional[_I] = None
         if parent_identifier is not None:
-            parent_sequence = self.nodes[parent_identifier.file].data
+            try:
+                parent_sequence = self.nodes[parent_identifier.file].data
+            except KeyError:
+                msg = 'No such file "{}"'.format(parent_identifier.file)
+                warnings.append(Diagnostic.error(msg, obj.line))
+                return obj
             try:
                 _parent: _I = next(x for x in parent_sequence if x.ref == parent_identifier.ref)
                 if _parent.ref is None:
@@ -168,14 +173,15 @@ class GizaRegistry(Generic[_I]):
         obj = inherit(obj, parent)
         return obj
 
-    def reify_file_id(self, file_id: str) -> GizaFile[_I]:
+    def reify_file_id(self, file_id: str, warnings: List[Diagnostic]) -> GizaFile[_I]:
         node = self.nodes[file_id]
-        return dataclasses.replace(node, data=[self.reify(el) for el in node.data])
+        return dataclasses.replace(node, data=[self.reify(el, warnings) for el in node.data])
 
-    def __iter__(self) -> Iterator[Tuple[str, GizaFile[_I]]]:
-        yield from (
-            (file_id, dataclasses.replace(node, data=[self.reify(el) for el in node.data]))
-            for file_id, node in self.nodes.items())
+    def __iter__(self) -> Iterator[Tuple[str, GizaFile[_I], List[Diagnostic]]]:
+        for file_id, node in self.nodes.items():
+            diagnostics: List[Diagnostic] = []
+            data = [self.reify(el, diagnostics) for el in node.data]
+            yield file_id, dataclasses.replace(node, data=data), diagnostics
 
     def __len__(self) -> int:
         return len(self.nodes)

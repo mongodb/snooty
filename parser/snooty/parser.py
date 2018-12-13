@@ -292,13 +292,15 @@ class Project:
             needs_rebuild = self.steps_registry.dg.dependents[file_id].union(set([file_id]))
             logger.debug('needs_rebuild: %s', ','.join(needs_rebuild))
             for file_id in needs_rebuild:
+                diagnostics: List[Diagnostic] = []
                 try:
-                    giza_node = giza_category.registry.reify_file_id(file_id)
+                    giza_node = giza_category.registry.reify_file_id(file_id, diagnostics)
                 except KeyError:
                     logging.warn('No file found in registry: %s', file_id)
                     continue
 
-                steps, text, diagnostics = giza_category.parse(path, optional_text)
+                steps, text, parse_diagnostics = giza_category.parse(path, optional_text)
+                diagnostics.extend(parse_diagnostics)
                 page = Page(giza_node.path, text, {}, diagnostics, set())
                 giza_category.registry.add(path, text, steps)
                 embedded_parser = make_embedded_rst_parser(self.root, page)
@@ -344,9 +346,10 @@ class Project:
         # Now that all of our YAML files are loaded, generate a page for each one
         for prefix, giza_category in self.yaml_mapping.items():
             logger.debug('Processing %s YAML: %d nodes', prefix, len(giza_category.registry))
-            for file_id, giza_node in giza_category.registry:
+            for file_id, giza_node, diagnostics in giza_category.registry:
                 page = Page(giza_node.path, giza_node.text, {}, [], set())
                 embedded_parser = make_embedded_rst_parser(self.root, page)
                 giza_category.to_page(page, giza_node.data, embedded_parser)
+                page.diagnostics.extend(diagnostics)
                 page.diagnostics.extend(all_yaml_diagnostics.get(giza_node.path, []))
                 self.backend.on_update(self.prefix, self.get_page_id(page.path), page)
