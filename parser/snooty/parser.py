@@ -212,7 +212,7 @@ def make_embedded_rst_parser(project_root: Path, page: Page) -> EmbeddedRstParse
         text = '\n' * lineno + rst.strip()
         visitor_class = InlineJSONVisitor if inline else JSONVisitor
         parser = rstparser.Parser(project_root, visitor_class)
-        visitor = parser.parse(page.path, text)
+        visitor = parser.parse(page.source_path, text)
         children: List[SerializableType] = visitor.state[-1]['children']
 
         page.diagnostics.extend(visitor.diagnostics)
@@ -306,7 +306,7 @@ class Project:
                 giza_category.registry.add(path, text, steps)
                 embedded_parser = make_embedded_rst_parser(self.root, page)
                 giza_category.to_page(page, giza_node.data, embedded_parser)
-                path = page.path
+                path = page.source_path
         else:
             raise ValueError('Unknown file type: ' + str(path))
 
@@ -326,7 +326,7 @@ class Project:
             paths = util.get_files(self.root, RST_EXTENSIONS)
             logger.debug('Processing rst files')
             for page in pool.imap_unordered(partial(parse_rst, self.parser), paths):
-                self.backend.on_update(self.prefix, self.get_page_id(page.path), page)
+                self.backend.on_update(self.prefix, self.get_page_id(page.get_id()), page)
 
         # Categorize our YAML files
         logger.debug('Categorizing YAML files')
@@ -353,4 +353,4 @@ class Project:
                 giza_category.to_page(page, giza_node.data, embedded_parser)
                 page.diagnostics.extend(diagnostics)
                 page.diagnostics.extend(all_yaml_diagnostics.get(giza_node.path, []))
-                self.backend.on_update(self.prefix, self.get_page_id(page.path), page)
+                self.backend.on_update(self.prefix, self.get_page_id(page.get_id()), page)

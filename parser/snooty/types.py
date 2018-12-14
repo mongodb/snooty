@@ -85,11 +85,18 @@ class StaticAsset:
 
 @dataclass
 class Page:
-    __slots__ = ('path', 'source', 'ast', 'diagnostics', 'static_assets')
-
-    path: PurePath
+    source_path: PurePath
     source: str
     ast: SerializableType
     diagnostics: List[Diagnostic]
-
     static_assets: Set[StaticAsset]
+    category: Optional[str] = None
+
+    def get_id(self) -> PurePath:
+        if self.category:
+            # Giza wrote out yaml file artifacts under a directory. e.g. steps-foo.yaml becomes
+            # steps/foo.rst
+            return self.source_path.parent.joinpath(
+                PurePath(self.category),
+                self.source_path.name.replace(f'{self.category}-', '', 1))
+        return self.source_path

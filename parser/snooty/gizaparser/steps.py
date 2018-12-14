@@ -148,6 +148,7 @@ class GizaStepsCategory(GizaCategory):
         return parse(Step, path, text)
 
     def to_page(self, page: Page, steps: Sequence[Step], rst_parser: EmbeddedRstParser) -> None:
+        page.category = 'steps'
         page.ast = {
             'type': 'directive',
             'name': 'steps',
