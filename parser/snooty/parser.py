@@ -39,11 +39,10 @@ class JSONVisitor:
         node_name = node.__class__.__name__
         if node_name == 'system_message':
             level = int(node['level'])
-            if level < 2:
-                return
-            level = Diagnostic.Level.from_docutils(level)
-            msg = node[0].astext()
-            self.diagnostics.append(Diagnostic.create(level, msg, util.get_line(node)))
+            if level >= 2:
+                level = Diagnostic.Level.from_docutils(level)
+                msg = node[0].astext()
+                self.diagnostics.append(Diagnostic.create(level, msg, util.get_line(node)))
             raise docutils.nodes.SkipNode()
         elif node_name in ('definition', 'field_list'):
             return

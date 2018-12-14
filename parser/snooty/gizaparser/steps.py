@@ -109,7 +109,7 @@ class Step(Inheritable):
 
         if self.pre:
             result = parse_rst(self.pre, self.line, False)
-            children.append(result)
+            children.extend(result)
 
         if self.action:
             actions = [self.action] if isinstance(self.action, Action) else self.action
@@ -119,11 +119,11 @@ class Step(Inheritable):
 
         if self.content:
             result = parse_rst(self.content, self.line, False)
-            children.append(result)
+            children.extend(result)
 
         if self.post:
             result = parse_rst(self.post, self.line, False)
-            children.append(result)
+            children.extend(result)
 
         return root
 
