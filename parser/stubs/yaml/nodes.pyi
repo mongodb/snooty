@@ -3,7 +3,7 @@ class Node:
     value: object
     start_mark: object
     end_mark: object
-    __line__: int
+    _start_line: int
 
 
 class ScalarNode(Node):

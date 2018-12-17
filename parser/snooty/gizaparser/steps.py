@@ -33,7 +33,7 @@ class Action(Node):
             nodes_to_append_children = []
             all_nodes.append({
                 'type': 'section',
-                'position': {'start': {'line': self.__line__}},
+                'position': {'start': {'line': self.line}},
                 'children': nodes_to_append_children
             })
 
@@ -42,7 +42,7 @@ class Action(Node):
             else:
                 heading_text = self.heading
 
-            result = parse_rst(heading_text, self.__line__, True)
+            result = parse_rst(heading_text, self.line, True)
 
             nodes_to_append_children.append({
                 'type': 'heading',
@@ -50,7 +50,7 @@ class Action(Node):
             })
 
         if self.pre:
-            result = parse_rst(self.pre, self.__line__, False)
+            result = parse_rst(self.pre, self.line, False)
             nodes_to_append_children.extend(result)
 
         if self.code:
@@ -58,16 +58,16 @@ class Action(Node):
                 'type': 'code',
                 'lang': self.language,
                 'copyable': False if self.copyable is None else self.copyable,
-                'position': {'start': {'line': self.__line__}},
+                'position': {'start': {'line': self.line}},
                 'value': self.code
             })
 
         if self.content:
-            result = parse_rst(self.content, self.__line__, False)
+            result = parse_rst(self.content, self.line, False)
             nodes_to_append_children.extend(result)
 
         if self.post:
-            result = parse_rst(self.post, self.__line__, False)
+            result = parse_rst(self.post, self.line, False)
             nodes_to_append_children.extend(result)
 
         return all_nodes
@@ -75,7 +75,7 @@ class Action(Node):
 
 @checked
 @dataclass
-class Step(Node, Inheritable):
+class Step(Inheritable):
     title: Union[str, None, OldHeading]
     stepnum: Optional[int]
     content: Optional[str]
@@ -90,7 +90,7 @@ class Step(Node, Inheritable):
         children: List[SerializableType] = []
         root = {
             'type': 'section',
-            'position': {'start': {'line': self.__line__}},
+            'position': {'start': {'line': self.line}},
             'children': children
         }
 
@@ -100,16 +100,16 @@ class Step(Node, Inheritable):
             else:
                 heading_text = self.title
 
-            result = parse_rst(heading_text, self.__line__, True)
+            result = parse_rst(heading_text, self.line, True)
             children.append({
                 'type': 'heading',
-                'position': {'start': {'line': self.__line__}},
+                'position': {'start': {'line': self.line}},
                 'children': result
             })
 
         if self.pre:
-            result = parse_rst(self.pre, self.__line__, False)
-            children.append(result)
+            result = parse_rst(self.pre, self.line, False)
+            children.extend(result)
 
         if self.action:
             actions = [self.action] if isinstance(self.action, Action) else self.action
@@ -118,12 +118,12 @@ class Step(Node, Inheritable):
                 children.extend(result)
 
         if self.content:
-            result = parse_rst(self.content, self.__line__, False)
-            children.append(result)
+            result = parse_rst(self.content, self.line, False)
+            children.extend(result)
 
         if self.post:
-            result = parse_rst(self.post, self.__line__, False)
-            children.append(result)
+            result = parse_rst(self.post, self.line, False)
+            children.extend(result)
 
         return root
 
@@ -133,7 +133,7 @@ def step_to_page(page: Page, step: Step, rst_parser: EmbeddedRstParser) -> Seria
     return {
         'type': 'directive',
         'name': 'step',
-        'position': {'start': {'line': step.__line__}},
+        'position': {'start': {'line': step.line}},
         'children': [rendered]
     }
 
@@ -148,6 +148,7 @@ class GizaStepsCategory(GizaCategory):
         return parse(Step, path, text)
 
     def to_page(self, page: Page, steps: Sequence[Step], rst_parser: EmbeddedRstParser) -> None:
+        page.category = 'steps'
         page.ast = {
             'type': 'directive',
             'name': 'steps',

@@ -1,11 +1,11 @@
 import logging
 import yaml
+import yaml.resolver
 import yaml.scanner
 from pathlib import PurePath
-from typing import Dict, List, Optional, Tuple, Type, TypeVar
+from typing import List, Optional, Tuple, Type, TypeVar
 from yaml.composer import Composer
-from yaml.constructor import Constructor
-from ..flutter import check_type, LoadError
+from ..flutter import check_type, LoadError, mapping_dict
 from ..types import Diagnostic, SerializableType
 
 _T = TypeVar('_T')
@@ -19,22 +19,23 @@ class ParseError(Exception):
 
 
 def load_yaml(text: str) -> List[SerializableType]:
-    loader = yaml.Loader(text)
+    class MyLoader(yaml.SafeLoader):
+        def compose_node(self, parent: yaml.nodes.Node, index: int) -> yaml.nodes.Node:
+            # the line number where the previous token has ended (plus empty lines)
+            line = self.line
+            node = Composer.compose_node(self, parent, index)
+            node._start_line = line + 1
+            return node
 
-    def compose_node(parent: yaml.nodes.Node, index: int) -> yaml.nodes.Node:
-        # the line number where the previous token has ended (plus empty lines)
-        line = loader.line
-        node = Composer.compose_node(loader, parent, index)
-        node.__line__ = line + 1
-        return node
-
-    def construct_mapping(node: yaml.nodes.Node, deep: bool = False) -> Dict:
-        mapping = Constructor.construct_mapping(loader, node, deep=deep)
-        mapping['__line__'] = node.__line__
+    def dict_constructor(loader: yaml.Loader, node: yaml.nodes.Node) -> mapping_dict:
+        mapping = mapping_dict(loader.construct_pairs(node))
+        mapping._start_line = node._start_line
         return mapping
 
-    loader.compose_node = compose_node  # type: ignore
-    loader.construct_mapping = construct_mapping  # type: ignore
+    loader = MyLoader(text)
+    loader.add_constructor(
+        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+        dict_constructor)
     result: List[SerializableType] = []
     while True:
         data = loader.get_data()
@@ -65,5 +66,5 @@ def parse(ty: Type[_T],
         return parsed, text, []
     except LoadError as err:
         mapping = err.bad_data if isinstance(err.bad_data, dict) else {}
-        lineno = mapping.get('__line__', 0)
+        lineno = mapping.get('_start_line', 0)
         return [], text, [Diagnostic.error(str(err), lineno)]

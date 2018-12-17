@@ -14,6 +14,12 @@ class Constructable(Protocol):
     def __init__(self, **kwargs: object) -> None: ...
 
 
+class mapping_dict(dict):
+    __slots__ = ('_start_line', '_end_line')
+    _start_line: int
+    _end_line: int
+
+
 T = TypeVar('T', bound=HasAnnotations)
 C = TypeVar('C', bound=Constructable)
 
@@ -156,10 +162,10 @@ class LoadUnknownField(LoadError):
 
 def check_type(ty: Type[C], data: object, ty_module: str = '') -> C:
     # Check for a primitive type
-    if ty in (str, int, float, bool, type(None)):
+    if isinstance(ty, type) and issubclass(ty, (str, int, float, bool, type(None))):
         if not isinstance(data, ty):
             raise LoadWrongType(ty, data)
-        return data
+        return cast(C, data)
 
     # Check for an object
     if isinstance(data, dict) and ty in CACHED_TYPES:
@@ -182,7 +188,11 @@ def check_type(ty: Type[C], data: object, ty_module: str = '') -> C:
             expected_type = annotations[key]
             result[key] = check_type(expected_type, value, ty.__module__)
 
-        return ty(**result)
+        output = ty(**result)
+        start_line = getattr(data, '_start_line', None)
+        if start_line is not None:
+            setattr(output, '_start_line', start_line)
+        return output
 
     # Check for one of the special types defined by PEP-484
     origin = getattr(ty, '__origin__', None)

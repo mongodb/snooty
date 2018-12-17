@@ -59,7 +59,7 @@ class Backend:
 
     def on_update(self, prefix: List[str], page_id: str, page: Page) -> None:
         if page.diagnostics:
-            self.on_warning(page.path, page.diagnostics)
+            self.on_warning(page.source_path, page.diagnostics)
 
     def on_delete(self, page_id: str) -> None:
         pass

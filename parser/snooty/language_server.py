@@ -147,7 +147,7 @@ class Backend:
         pass
 
     def on_update(self, prefix: List[str], page_id: str, page: types.Page) -> None:
-        self.server.set_diagnostics(page.path, page.diagnostics)
+        self.server.set_diagnostics(page.source_path, page.diagnostics)
 
     def on_delete(self, page_id: str) -> None:
         pass

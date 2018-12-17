@@ -1,3 +1,4 @@
+import enum
 import hashlib
 from dataclasses import dataclass
 from pathlib import PurePath
@@ -5,27 +6,35 @@ from typing import Any, Callable, Dict, Set, List, Tuple, Optional, Union
 
 SerializableType = Union[None, bool, str, int, float, Dict[str, Any], List[Any]]
 EmbeddedRstParser = Callable[[str, int, bool], List[SerializableType]]
-LEVEL_ERROR = 1
-LEVEL_WARNING = 2
 
 
 @dataclass
 class Diagnostic:
     __slots__ = ('message', 'severity', 'start', 'end')
 
-    severity: int
+    class Level(enum.IntEnum):
+        info = 0
+        error = 1
+        warning = 2
+
+        @classmethod
+        def from_docutils(cls, docutils_level: int) -> 'Diagnostic.Level':
+            level = docutils_level - 1
+            level = min(level, cls.warning)
+            level = max(level, cls.info)
+            return cls(level)
+
+    severity: Level
     message: str
     start: Tuple[int, int]
     end: Tuple[int, int]
 
     @property
     def severity_string(self) -> str:
-        return {
-            LEVEL_ERROR: 'Error',
-        }.get(self.severity, 'Warning')
+        return self.severity.name.title()
 
     @classmethod
-    def create(cls, severity: int, message: str,
+    def create(cls, severity: Level, message: str,
                start: Union[int, Tuple[int, int]],
                end: Union[None, int, Tuple[int, int]] = None) -> 'Diagnostic':
         if isinstance(start, int):
@@ -46,13 +55,13 @@ class Diagnostic:
     def warning(cls, message: str,
                 start: Union[int, Tuple[int, int]],
                 end: Union[None, int, Tuple[int, int]] = None) -> 'Diagnostic':
-        return cls.create(LEVEL_WARNING, message, start, end)
+        return cls.create(cls.Level.warning, message, start, end)
 
     @classmethod
     def error(cls, message: str,
               start: Union[int, Tuple[int, int]],
               end: Union[None, int, Tuple[int, int]] = None) -> 'Diagnostic':
-        return cls.create(LEVEL_ERROR, message, start, end)
+        return cls.create(cls.Level.error, message, start, end)
 
 
 @dataclass
@@ -76,11 +85,18 @@ class StaticAsset:
 
 @dataclass
 class Page:
-    __slots__ = ('path', 'source', 'ast', 'diagnostics', 'static_assets')
-
-    path: PurePath
+    source_path: PurePath
     source: str
     ast: SerializableType
     diagnostics: List[Diagnostic]
-
     static_assets: Set[StaticAsset]
+    category: Optional[str] = None
+
+    def get_id(self) -> PurePath:
+        if self.category:
+            # Giza wrote out yaml file artifacts under a directory. e.g. steps-foo.yaml becomes
+            # steps/foo.rst
+            return self.source_path.parent.joinpath(
+                PurePath(self.category),
+                self.source_path.name.replace(f'{self.category}-', '', 1))
+        return self.source_path
