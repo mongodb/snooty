@@ -7,10 +7,16 @@ export default class Include extends Component {
     super(props);
     let key = this.props.nodeData.argument[0].value;
     if (key.startsWith('/')) key = key.substr(1);
-    if (key.includes('.rst')) key = key.replace('.rst', '');
-    this.resolvedIncludeData = this.props.refDocMapping[key].ast.children;
-    this.props.updateTotalStepCount(this.resolvedIncludeData.length);
-    console.log(99, this.props.refDocMapping[key]);
+    if (key.endsWith('.rst')) key = key.replace('.rst', '');
+    this.resolvedIncludeData = [];
+    // get document for include url
+    if (this.props.refDocMapping && Object.keys(this.props.refDocMapping).length > 0 ) {
+      this.resolvedIncludeData = this.props.refDocMapping[key].ast ? this.props.refDocMapping[key].ast.children : [];
+      console.log(99, this.props.refDocMapping[key]);
+    } 
+    if (this.props.updateTotalStepCount) {
+      this.props.updateTotalStepCount(this.resolvedIncludeData.length);
+    }
   }
 
   render() {

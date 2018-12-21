@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ComponentFactory from '../components/ComponentFactory';
 
 export default class GuideHeading extends Component {
 
@@ -43,11 +44,13 @@ export default class GuideHeading extends Component {
         <hr />
 
         <p>Author: { this.getSection(['name', 'author']).argument[0].value }</p>
-        <p>{ this.getSection(['name', 'result_description']).children[0].children[0].value }</p>
-        <ul className="simple">
-          <li>{ this.getSection(['name', 'result_description']).children[1].children[0].children[0].children[0].value }</li>
-          <li>{ this.getSection(['name', 'result_description']).children[1].children[1].children[0].children[0].value }</li>
-        </ul>
+        <section>
+          {
+            this.getSection(['name', 'result_description']).children.map((element, index) => {
+              return <ComponentFactory { ...this.props } nodeData={ element } key={ index } />
+            })
+          }
+        </section>
         <p><em>Time required: { this.getSection(['name', 'time']).argument[0].value } minutes</em></p>
 
       </div>
@@ -55,4 +58,3 @@ export default class GuideHeading extends Component {
   }
 
 }
-

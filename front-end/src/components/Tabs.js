@@ -14,7 +14,11 @@ export default class Tabs extends Component {
         return (
           <div key={ index} style={ { display: (this.props.activeLanguage === undefined || (this.props.activeLanguage[0] === tab.argument[0].value)) ? 'block' : 'none' } }>
             <h3 style={ { color: 'green' } }>{ tab.argument[0].value } Code</h3>
-            <ComponentFactory { ...this.props } nodeData={ tab.children[0] } key={ index } />
+            { 
+              tab.children.length > 0 ? 
+                <ComponentFactory { ...this.props } nodeData={ tab.children[0] } key={ index } /> :
+                ''
+            }
           </div>
         )
       })

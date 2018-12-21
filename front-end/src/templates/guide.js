@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
@@ -9,8 +10,10 @@ export default class Guide extends Component {
 
   constructor(propsFromServer) {
     super(propsFromServer);
+    // get data from server
     this.sections = this.props.pageContext.__refDocMapping[this.props['*']].ast.children[0].children;
     this.languageList = this.props.pageContext.__languageList;
+    this.stitchId = this.props.pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
     this.validNames = [
@@ -48,7 +51,8 @@ export default class Guide extends Component {
   }
 
   setupStitch() {
-    const appName = this.props.pageContext.__stitchID;
+    const appName = this.stitchId;
+    if (!appName) return;
     this.stitchClient = Stitch.hasAppClient(appName) ? Stitch.defaultAppClient : Stitch.initializeDefaultAppClient(appName);
     this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
       console.log('logged into stitch');
@@ -125,9 +129,9 @@ export default class Guide extends Component {
         };
       } else {
         const parsed = this.DOMParser.parseFromString(response, 'text/html');
-        const mainContainer = parsed.getElementById(findHashPart).nextElementSibling;
+        const mainContainer = parsed.getElementById(findHashPart) ? parsed.getElementById(findHashPart).nextElementSibling : null;
         contentObj = {
-          text: mainContainer.getElementsByTagName('p')[0].textContent.trim(),
+          text: mainContainer.getElementsByTagName('p')[0] ? mainContainer.getElementsByTagName('p')[0].textContent.trim() : 'FIX: no content found',
           example: 'no code example'
         };
         // if syntax example is within first container
@@ -152,10 +156,11 @@ export default class Guide extends Component {
           <GuideSection guideSectionData={ section } 
                         key={ index } 
                         admonitions={ this.admonitions }
-                        refDocMapping={ this.props.pageContext.__refDocMapping } 
+                        refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
                         modal={ this.modalFetchData.bind(this) } 
                         addLanguages={ this.addLanguages.bind(this) } 
-                        activeLanguage={ this.state.activeLanguage } />
+                        activeLanguage={ this.state.activeLanguage }
+                        stitchClient={ this.stitchClient } />
         )
       })
     )
@@ -174,7 +179,13 @@ export default class Guide extends Component {
             <GuideHeading sections={ this.sections } 
                           languages={ this.state.languages } 
                           activeLanguage={ this.state.activeLanguage } 
-                          changeActiveLanguage={ this.changeActiveLanguage.bind(this) } />
+                          changeActiveLanguage={ this.changeActiveLanguage.bind(this) }
+                          admonitions={ this.admonitions }
+                          refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
+                          modal={ this.modalFetchData.bind(this) } 
+                          addLanguages={ this.addLanguages.bind(this) } 
+                          activeLanguage={ this.state.activeLanguage }
+                          stitchClient={ this.stitchClient } />
             <Modal modalProperties={ this.state } />
             { this.createSections() }
             <div className="footer">

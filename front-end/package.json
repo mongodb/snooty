@@ -8,10 +8,11 @@
     "babel-plugin-react-html-attrs": "^2.1.0",
     "webpack": "^4.19.0",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
+    "webpack-dev-server": ">=3.1.11"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "webpack --mode development"
   },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
@@ -19,7 +20,8 @@
     "axios": "^0.18.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "express": "^4.16.4",
-    "gatsby": "^2.0.2",
+    "gatsby": "^2.0.72",
+    "html-webpack-plugin": "^3.2.0",
     "mongodb-stitch-browser-sdk": "^4.0.13",
     "mongodb-stitch-server-sdk": "^4.0.13",
     "react": "^16.5.2",

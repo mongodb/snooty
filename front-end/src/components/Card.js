@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 export default class Card extends Component {
 
   getTitle(val) {
-    if (this.props.refDocMapping[val].ast) {
+    if (this.props.refDocMapping[val] && this.props.refDocMapping[val].ast) {
       return this.props.refDocMapping[val].ast.children[0].children[0].children[0].value;
     } 
-    return 'Title goes here';
+    return 'Title not found';
   }
 
   cardContent() {
+    console.log(88, this.props.card);
     const innerContent = (
       <section style={ {height:'100%'} }>
         <div className="guide__title"> 
