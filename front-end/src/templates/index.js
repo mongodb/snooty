@@ -8,7 +8,7 @@ export default class Index extends Component {
     this.state = {
       name: 'Guides',
       description: 'Getting Started',
-      guides: this.props.pageContext.__refDocMapping.index.ast.children[1].children[2].children
+      guides: this.props.pageContext.__refDocMapping.index.ast.children[3].children
     };
     console.log(11, this.props.pageContext.__refDocMapping);
   }

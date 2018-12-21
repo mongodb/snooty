@@ -10,7 +10,16 @@ export default class GuideHeading extends Component {
     return (
       <div className="section" id="SOMETHING_HERE">
 
-        <h1> 
+        hello
+
+      </div>
+    );
+  }
+
+}
+
+
+/*<h1> 
           { this.getSection(['type', 'heading']).children[0].value } 
           <a className="headerlink" href="#read-data-from-mongodb" title="Permalink to this headline">¶</a>
         </h1>
@@ -48,11 +57,6 @@ export default class GuideHeading extends Component {
           <li>{ this.getSection(['name', 'result_description']).children[1].children[0].children[0].children[0].value }</li>
           <li>{ this.getSection(['name', 'result_description']).children[1].children[1].children[0].children[0].value }</li>
         </ul>
-        <p><em>Time required: { this.getSection(['name', 'time']).argument[0].value } minutes</em></p>
+        <p><em>Time required: { this.getSection(['name', 'time']).argument[0].value } minutes</em></p>*/
 
-      </div>
-    );
-  }
-
-}
-
+        

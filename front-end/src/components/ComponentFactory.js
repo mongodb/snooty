@@ -46,6 +46,10 @@ export default class ComponentFactory extends Component {
     if (!ComponentType && this.props.admonitions.includes(name)) {
       ComponentType = this.componentMap['admonition'];
     }
+    // component with this type not implemented
+    if (!ComponentType) {
+      return <span>==Not implemented: { type }, { name } ==</span>
+    }
     return <ComponentType { ...this.props } />
   }
 

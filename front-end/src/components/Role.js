@@ -22,7 +22,7 @@ export default class Role extends Component {
       )
     }
     // role with interaction
-    if (this.roleDataTypes[this.props.nodeData.name]) {
+    else if (this.roleDataTypes[this.props.nodeData.name]) {
       const termModified = this.props.nodeData.target.replace('()', '').replace('$', '');
       const href = this.roleDataTypes[this.props.nodeData.name](termModified);
       return (
@@ -30,6 +30,9 @@ export default class Role extends Component {
           { this.props.nodeData.label }
         </a>
       )
+    }
+    else {
+      return <span>==Role not implemented: { this.props.nodeData.name } ==</span>
     }
   }
 
