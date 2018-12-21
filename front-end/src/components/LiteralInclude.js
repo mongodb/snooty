@@ -5,13 +5,19 @@ export default class LiteralInclude extends Component {
 
   constructor(props) {
     super(props);
-    let key = this.props.nodeData.argument[0].children[0].value;
+    let key = this.props.nodeData.argument[0].value;
+    // fix for some includes
+    if (key && key[0] === '/') {
+      key = key.substr(1);
+    }
     let startText = this.props.nodeData.options['start-after'];
     let endText = this.props.nodeData.options['end-before'];
     this.resolvedIncludeData = this.props.refDocMapping[key];
     console.log('LIT', this.props.nodeData);
     // extract code example
-    this.codeExample = this.resolvedIncludeData.substring(this.resolvedIncludeData.indexOf(startText) + startText.length, this.resolvedIncludeData.indexOf(endText));
+    this.codeExample = typeof this.resolvedIncludeData === 'string' ? 
+      this.resolvedIncludeData.substring(this.resolvedIncludeData.indexOf(startText) + startText.length, this.resolvedIncludeData.indexOf(endText)) : 
+      '';
   }
 
   render() {

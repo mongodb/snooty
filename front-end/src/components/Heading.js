@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ComponentFactory from '../components/ComponentFactory';
 
 export default class Heading extends Component {
 
