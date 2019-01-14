@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ComponentFactory from '../components/ComponentFactory';
 
 export default class GuideHeading extends Component {
 
@@ -10,16 +11,7 @@ export default class GuideHeading extends Component {
     return (
       <div className="section" id="SOMETHING_HERE">
 
-        hello
-
-      </div>
-    );
-  }
-
-}
-
-
-/*<h1> 
+        <h1> 
           { this.getSection(['type', 'heading']).children[0].value } 
           <a className="headerlink" href="#read-data-from-mongodb" title="Permalink to this headline">¶</a>
         </h1>
@@ -52,11 +44,11 @@ export default class GuideHeading extends Component {
         <hr />
 
         <p>Author: { this.getSection(['name', 'author']).argument[0].value }</p>
-        <p>{ this.getSection(['name', 'result_description']).children[0].children[0].value }</p>
-        <ul className="simple">
-          <li>{ this.getSection(['name', 'result_description']).children[1].children[0].children[0].children[0].value }</li>
-          <li>{ this.getSection(['name', 'result_description']).children[1].children[1].children[0].children[0].value }</li>
-        </ul>
-        <p><em>Time required: { this.getSection(['name', 'time']).argument[0].value } minutes</em></p>*/
+        <ComponentFactory { ...this.props } nodeData={ this.getSection(['name', 'result_description']).children[0] } />
+        <p><em>Time required: { this.getSection(['name', 'time']).argument[0].value } minutes</em></p>
 
-        
+      </div>
+    );
+  }
+
+}

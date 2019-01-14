@@ -43,7 +43,7 @@ export default class ComponentFactory extends Component {
     let ComponentType = this.componentMap[lookup];
     // the different admonition types are all under the Admonition component
     // see 'this.admonitions' in 'guide.js' for the list
-    if (!ComponentType && this.props.admonitions.includes(name)) {
+    if (!ComponentType && this.props.admonitions && this.props.admonitions.includes(name)) {
       ComponentType = this.componentMap['admonition'];
     }
     // component with this type not implemented

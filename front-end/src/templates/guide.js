@@ -6,46 +6,14 @@ import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 
-// move to module
-window.languageList = [
-  ['shell', 'Mongo Shell'],
-  ['compass', 'Compass'],
-  ['python', 'Python'],
-  ['java-sync', 'Java (Sync)'],
-  ['nodejs', 'Node.js'],
-  ['php', 'PHP'],
-  ['motor', 'Motor'],
-  ['java-async', 'Java (Async)'],
-  ['c', 'C'],
-  ['cpp', 'C++11'],
-  ['csharp', 'C#'],
-  ['perl', 'Perl'],
-  ['ruby', 'Ruby'],
-  ['scala', 'Scala']
-];
-
 export default class Guide extends Component {
 
   constructor(propsFromServer) {
     super(propsFromServer);
-    this.sections;
-    this.stitchId;
-    this.clientDataFetching = false;
-    // server did not fetch data and pass into component so we relay
-    // data fetching to the client-side
-    if (Object.keys(propsFromServer).length === 0) {
-      this.clientDataFetching = true;
-      this.sections = [];
-      this.languageList = window.languageList;
-      this.stitchId = ''; 
-      this.namespace = '';
-      this.query = '';
-    } else {
-      this.sections = this.props.pageContext.__refDocMapping[this.props['*']].ast.children[0].children;
-      this.languageList = this.props.pageContext.__languageList;
-      this.stitchId = this.props.pageContext.__stitchID;
-      console.log(2222, this.props.pageContext.__refDocMapping);
-    }
+    // get data from server
+    this.sections = this.props.pageContext.__refDocMapping[this.props['*']].ast.children[0].children;
+    this.languageList = this.props.pageContext.__languageList;
+    this.stitchId = this.props.pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
     this.validNames = [
@@ -73,6 +41,7 @@ export default class Guide extends Component {
         example: null
       }
     }; 
+    console.log(2222, this.props.pageContext.__refDocMapping);
     console.log(4544, this.sections);
   }
 
@@ -81,27 +50,12 @@ export default class Guide extends Component {
     this.setupStitch();
   }
 
-  fetchDataForPage() {
-    if (!this.clientDataFetching) return;
-    console.log('going to fetch data for page now!');
-    this.stitchClient.callFunction('fetchDocuments', [this.namespace, { _id: this.query }]).then((response) => {
-      console.log('data for page', response);
-      if (response) {
-        this.sections = response[0].ast.children[0].children;
-        this.forceUpdate();
-      }
-    });
-  }
-
   setupStitch() {
     const appName = this.stitchId;
     if (!appName) return;
     this.stitchClient = Stitch.hasAppClient(appName) ? Stitch.defaultAppClient : Stitch.initializeDefaultAppClient(appName);
     this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
       console.log('logged into stitch');
-      if (this.clientDataFetching) {
-        this.fetchDataForPage();
-      } 
     });
   }
 
@@ -240,7 +194,3 @@ export default class Guide extends Component {
   }
 
 };
-
-if (typeof document !== 'undefined') {
-  ReactDOM.render(<Guide />, document.getElementById('__contententry'));
-}

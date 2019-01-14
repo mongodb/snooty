@@ -24,10 +24,10 @@ export default class GuideSection extends Component {
   }
 
   componentDidMount() {
-    this.setState({
+    /*this.setState({
       showAllSteps: false,
       showStepper: true
-    });
+    });*/
   }
 
   updateTotalStepCount(total) {
@@ -73,9 +73,6 @@ export default class GuideSection extends Component {
                                       showStepIndex={ this.state.showStepIndex }
                                       updateTotalStepCount={ this.updateTotalStepCount.bind(this) } />
           })
-        }
-        {
-          (this.props.guideSectionData.name === 'summary') ? <URIForm /> : '' 
         }
       </div>
     )

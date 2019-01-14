@@ -12,7 +12,7 @@ export default class Include extends Component {
     // TODO: use param from parent comp instead
     // server vs. client side data fetching
     if (Object.keys(this.props.refDocMapping).length > 0 ) {
-      this.props.refDocMapping[key].ast.children
+      this.resolvedIncludeData = this.props.refDocMapping[key].ast ? this.props.refDocMapping[key].ast.children : [];
     } else {
       this.props.stitchClient.callFunction('fetchDocuments', ['snooty/documents', { _id: 'guides/andrew/master' + '/' + key }]).then((response) => {
         console.log('data for include', response);
