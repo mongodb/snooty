@@ -11,9 +11,11 @@ export default class Include extends Component {
     this.resolvedIncludeData = [];
     // TODO: use param from parent comp instead
     // server vs. client side data fetching
-    if (Object.keys(this.props.refDocMapping).length > 0 ) {
+    if (this.props.refDocMapping && Object.keys(this.props.refDocMapping).length > 0 ) {
       this.resolvedIncludeData = this.props.refDocMapping[key].ast ? this.props.refDocMapping[key].ast.children : [];
-    } else {
+      console.log(99, this.props.refDocMapping[key]);
+    } 
+    /*else {
       this.props.stitchClient.callFunction('fetchDocuments', ['snooty/documents', { _id: 'guides/andrew/master' + '/' + key }]).then((response) => {
         console.log('data for include', response);
         if (response) {
@@ -21,9 +23,10 @@ export default class Include extends Component {
           this.forceUpdate();
         }
       });
+    }*/
+    if (this.props.updateTotalStepCount) {
+      this.props.updateTotalStepCount(this.resolvedIncludeData.length);
     }
-    this.props.updateTotalStepCount(this.resolvedIncludeData.length);
-    console.log(99, this.props.refDocMapping[key]);
   }
 
   render() {
