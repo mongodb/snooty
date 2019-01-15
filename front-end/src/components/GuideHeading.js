@@ -44,7 +44,13 @@ export default class GuideHeading extends Component {
         <hr />
 
         <p>Author: { this.getSection(['name', 'author']).argument[0].value }</p>
-        <ComponentFactory { ...this.props } nodeData={ this.getSection(['name', 'result_description']).children[0] } />
+        <section>
+          {
+            this.getSection(['name', 'result_description']).children.map((element, index) => {
+              return <ComponentFactory { ...this.props } nodeData={ element } key={ index } />
+            })
+          }
+        </section>
         <p><em>Time required: { this.getSection(['name', 'time']).argument[0].value } minutes</em></p>
 
       </div>

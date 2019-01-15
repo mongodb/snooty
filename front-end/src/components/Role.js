@@ -31,6 +31,19 @@ export default class Role extends Component {
         </a>
       )
     }
+    else if (this.props.nodeData.name === 'binary') {
+      const termModified = this.props.nodeData.target.substr(this.props.nodeData.target.indexOf('.') + 1);
+      const href = `${this.base}/program/${termModified}/#${this.props.nodeData.target.replace('~', '')}`
+      return (
+        <a href={ href } className="reference external" onMouseEnter={ (e) => { this.props.modal(e, href) } }>
+          <code className="xref mongodb mongodb-binary docutils literal notranslate">
+            <span className="pre">
+              { termModified }
+            </span>
+          </code>
+        </a>
+      )
+    }
     else {
       return <span>==Role not implemented: { this.props.nodeData.name } ==</span>
     }

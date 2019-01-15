@@ -129,9 +129,9 @@ export default class Guide extends Component {
         };
       } else {
         const parsed = this.DOMParser.parseFromString(response, 'text/html');
-        const mainContainer = parsed.getElementById(findHashPart).nextElementSibling;
+        const mainContainer = parsed.getElementById(findHashPart) ? parsed.getElementById(findHashPart).nextElementSibling : false;
         contentObj = {
-          text: mainContainer.getElementsByTagName('p')[0].textContent.trim(),
+          text: mainContainer.getElementsByTagName('p')[0] ? mainContainer.getElementsByTagName('p')[0].textContent.trim() : 'FIX: no content found',
           example: 'no code example'
         };
         // if syntax example is within first container
@@ -179,7 +179,13 @@ export default class Guide extends Component {
             <GuideHeading sections={ this.sections } 
                           languages={ this.state.languages } 
                           activeLanguage={ this.state.activeLanguage } 
-                          changeActiveLanguage={ this.changeActiveLanguage.bind(this) } />
+                          changeActiveLanguage={ this.changeActiveLanguage.bind(this) }
+                          admonitions={ this.admonitions }
+                          refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
+                          modal={ this.modalFetchData.bind(this) } 
+                          addLanguages={ this.addLanguages.bind(this) } 
+                          activeLanguage={ this.state.activeLanguage }
+                          stitchClient={ this.stitchClient } />
             <Modal modalProperties={ this.state } />
             { this.createSections() }
             <div className="footer">

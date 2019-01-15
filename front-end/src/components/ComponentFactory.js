@@ -13,6 +13,7 @@ import Admonition from '../components/Admonition';
 import Figure from '../components/Figure';
 import Literal from '../components/Literal';
 import Heading from '../components/Heading';
+import BlockQuote from '../components/BlockQuote';
 
 export default class ComponentFactory extends Component {
 
@@ -32,7 +33,8 @@ export default class ComponentFactory extends Component {
       'admonition': Admonition,
       'figure': Figure,
       'literal': Literal,
-      'heading': Heading
+      'heading': Heading,
+      'block_quote': BlockQuote
     };
   }
 
