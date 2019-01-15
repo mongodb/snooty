@@ -16,6 +16,10 @@ class Directive:
     state_machine: Any
     option_spec: Dict[str, object]
 
+    required_arguments: int
+    optional_arguments: int
+    final_argument_whitespace: bool
+
     def add_name(self, node: docutils.nodes.Node) -> None: ...
 
 

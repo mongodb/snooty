@@ -1,6 +1,6 @@
 import docutils.nodes
 import docutils.utils
-from typing import Any, Optional, Sequence, Union
+from typing import Any, Optional, Sequence, Iterable, Union
 from typing_extensions import Protocol
 
 
@@ -39,6 +39,7 @@ class Element(Node):
     def __init__(self, rawsource: str='', *children: Node, **attribute: object) -> None: ...
     def __contains__(self, key: str) -> bool: ...
     def append(self, node: Node) -> None: ...
+    def extend(self, nodes: Iterable[Node]) -> None: ...
 
 
 class TextElement(Element):

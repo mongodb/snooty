@@ -132,7 +132,7 @@ class JSONVisitor:
         doc['name'] = name
 
         if node.children and node.children[0].__class__.__name__ == 'directive_argument':
-            visitor = JSONVisitor(self.project_root, self.docpath, self.document)
+            visitor = self.__make_child_visitor()
             node.children[0].walkabout(visitor)
             argument = visitor.state[-1]['children']
             doc['argument'] = argument
@@ -170,6 +170,11 @@ class JSONVisitor:
         static_asset = StaticAsset.load(fileid.as_posix(), path)
         self.static_assets.add(static_asset)
         return static_asset
+
+    def __make_child_visitor(self) -> 'JSONVisitor':
+        visitor = type(self)(self.project_root, self.docpath, self.document)
+        visitor.diagnostics = self.diagnostics
+        return visitor
 
 
 class InlineJSONVisitor(JSONVisitor):

@@ -9,7 +9,7 @@ import docutils.utils
 import re
 from dataclasses import dataclass
 from pathlib import Path, PurePath
-from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar
+from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar, Iterable, Sequence
 from typing_extensions import Protocol
 from .gizaparser.parse import load_yaml
 from .gizaparser import nodes
@@ -17,6 +17,7 @@ from .flutter import checked, check_type, LoadError
 
 PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
 PAT_WHITESPACE = re.compile(r'^\x20*')
+PAT_BLOCK_HAS_ARGUMENT = re.compile(r'^\x20*\.\.\x20[^\s]+::\s*\S+')
 SPECIAL_DIRECTIVES = {'code-block', 'include', 'tabs-drivers', 'tabs', 'tabs-platforms', 'only'}
 
 
@@ -62,6 +63,30 @@ class role(docutils.nodes.General, docutils.nodes.Inline, docutils.nodes.Element
         else:
             self['label'] = text
             self['target'] = text
+
+
+def parse_directive_arguments(self: docutils.parsers.rst.states.Body,
+                              directive: docutils.parsers.rst.Directive,
+                              arg_block: Iterable[str]) -> Sequence[str]:
+        required = directive.required_arguments
+        optional = directive.optional_arguments
+        arg_text = '\n'.join(arg_block)
+        arguments = arg_text.split()
+        if len(arguments) < required:
+            raise docutils.parsers.rst.states.MarkupError(
+                '{} argument(s) required, {} supplied'.format(required, len(arguments)))
+        elif len(arguments) > required + optional:
+            if directive.final_argument_whitespace:
+                arguments = arg_text.split(' ', required + optional - 1)
+            else:
+                raise docutils.parsers.rst.states.MarkupError(
+                    'maximum %s argument(s) allowed, %s supplied'
+                    % (required + optional, len(arguments)))
+        return arguments
+
+
+docutils.parsers.rst.states.Body.parse_directive_arguments = (  # type: ignore
+    parse_directive_arguments)
 
 
 def parse_options(block_text: str) -> Dict[str, str]:
@@ -110,25 +135,30 @@ class Directive(docutils.parsers.rst.Directive):
     has_content = True
 
     def run(self) -> List[docutils.nodes.Node]:
-        messages: List[docutils.nodes.Node] = []
         source, line = self.state_machine.get_source_and_line(self.lineno)
-
         node = directive(self.name)
         node.document = self.state.document
         node.source, node.line = source, line
         self.add_name(node)
 
-        # Parse the argument (i.e. what's after the colon on the 0th line)
-        if self.arguments:
-            argument_text = self.arguments[0].split('\n')[0]
-            textnodes, messages = self.state.inline_text(argument_text, self.lineno)
-            argument = directive_argument(argument_text, '', *textnodes)
-            argument.document = self.state.document
-            argument.source, argument.line = source, line
-            node.append(argument)
-
         # Parse options
-        node['options'] = parse_options(self.block_text)
+        options = parse_options(self.block_text)
+        node['options'] = options
+
+        # Parse the directive's argument. An argument spans from the 0th line to the first
+        # non-option line; this is a heuristic that is not part of docutils, since docutils
+        # requires each directive to define its syntax.
+        if self.arguments and not self.arguments[0].startswith(':'):
+            arg_lines = self.arguments[0].split('\n')
+            argument_text = arg_lines[0]
+            textnodes, messages = self.state.inline_text(argument_text, self.lineno)
+            if len(arg_lines) > 1 and not options and PAT_BLOCK_HAS_ARGUMENT.match(self.block_text):
+                node.extend(textnodes)
+            else:
+                argument = directive_argument(argument_text, '', *textnodes)
+                argument.document = self.state.document
+                argument.source, argument.line = source, line
+                node.append(argument)
 
         # Parse the content
         if self.name in SPECIAL_DIRECTIVES:

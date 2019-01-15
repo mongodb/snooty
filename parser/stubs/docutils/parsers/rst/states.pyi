@@ -1,6 +1,11 @@
+import docutils.parsers.rst
 import docutils.parsers.rst.states
 import docutils.statemachine
-from typing import Dict, List, Tuple, Pattern, Union
+import docutils
+from typing import Dict, List, Tuple, Iterable, Sequence, Pattern, Union
+
+
+class MarkupError(docutils.DataError): ...
 
 
 class RSTState(docutils.statemachine.State):
@@ -21,3 +26,6 @@ class Struct:
 
 class Body:
     patterns: Dict[str, Pattern] = ...
+    def parse_directive_arguments(self,
+                                  directive: docutils.parsers.rst.Directive,
+                                  arg_block: Iterable[str]) -> Sequence[str]: ...
