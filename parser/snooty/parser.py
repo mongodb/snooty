@@ -271,8 +271,10 @@ class Project:
         self.backend = backend
 
         self.steps_registry: GizaRegistry[gizaparser.steps.Step] = GizaRegistry()
+        self.extracts_registry: GizaRegistry[gizaparser.extracts.Extract] = GizaRegistry()
         self.yaml_mapping = {
-            'steps': gizaparser.steps.GizaStepsCategory(self.steps_registry)
+            'steps': gizaparser.steps.GizaStepsCategory(self.steps_registry),
+            'extracts': gizaparser.extracts.GizaExtractsCategory(self.extracts_registry)
         }
 
         username = pwd.getpwuid(os.getuid()).pw_name
@@ -288,13 +290,15 @@ class Project:
     def update(self, path: PurePath, optional_text: Optional[str] = None) -> None:
         prefix = get_giza_category(path)
         _, ext = os.path.splitext(path)
-        page: Optional[Page] = None
+        pages: List[Page] = []
         if ext in RST_EXTENSIONS:
-            page = parse_rst(self.parser, path, optional_text)
+            pages.append(parse_rst(self.parser, path, optional_text))
         elif ext == '.yaml' and prefix in self.yaml_mapping:
             file_id = os.path.basename(path)
             giza_category = self.yaml_mapping[prefix]
-            needs_rebuild = self.steps_registry.dg.dependents[file_id].union(set([file_id]))
+            needs_rebuild = self.steps_registry.dg.dependents[file_id].union(
+                self.extracts_registry.dg.dependents[file_id]).union(
+                set([file_id]))
             logger.debug('needs_rebuild: %s', ','.join(needs_rebuild))
             for file_id in needs_rebuild:
                 diagnostics: List[Diagnostic] = []
@@ -306,15 +310,18 @@ class Project:
 
                 steps, text, parse_diagnostics = giza_category.parse(path, optional_text)
                 diagnostics.extend(parse_diagnostics)
-                page = Page(giza_node.path, text, {}, diagnostics, set())
+
+                def create_page() -> Tuple[Page, EmbeddedRstParser]:
+                    page = Page(giza_node.path, text, {}, diagnostics, set())
+                    return page, make_embedded_rst_parser(self.root, page)
+
                 giza_category.registry.add(path, text, steps)
-                embedded_parser = make_embedded_rst_parser(self.root, page)
-                giza_category.to_page(page, giza_node.data, embedded_parser)
-                path = page.source_path
+                pages = giza_category.to_pages(create_page, giza_node.data)
+                path = giza_node.path
         else:
             raise ValueError('Unknown file type: ' + str(path))
 
-        if page:
+        for page in pages:
             self.backend.on_update(self.prefix, self.get_page_id(path), page)
 
     def delete(self, path: PurePath) -> None:
@@ -352,9 +359,11 @@ class Project:
         for prefix, giza_category in self.yaml_mapping.items():
             logger.debug('Processing %s YAML: %d nodes', prefix, len(giza_category.registry))
             for file_id, giza_node, diagnostics in giza_category.registry:
-                page = Page(giza_node.path, giza_node.text, {}, [], set())
-                embedded_parser = make_embedded_rst_parser(self.root, page)
-                giza_category.to_page(page, giza_node.data, embedded_parser)
-                page.diagnostics.extend(diagnostics)
-                page.diagnostics.extend(all_yaml_diagnostics.get(giza_node.path, []))
-                self.backend.on_update(self.prefix, self.get_page_id(page.get_id()), page)
+                def create_page() -> Tuple[Page, EmbeddedRstParser]:
+                    page = Page(giza_node.path, giza_node.text, {}, [], set())
+                    return page, make_embedded_rst_parser(self.root, page)
+
+                for page in giza_category.to_pages(create_page, giza_node.data):
+                    page.diagnostics.extend(diagnostics)
+                    page.diagnostics.extend(all_yaml_diagnostics.get(giza_node.path, []))
+                    self.backend.on_update(self.prefix, self.get_page_id(page.get_id()), page)

@@ -4,10 +4,11 @@ import logging
 import re
 from dataclasses import dataclass
 from pathlib import PurePath
-from typing import cast, Dict, Set, Generic, Optional, TypeVar, Tuple, Iterator, Sequence, List
+from typing import cast, Callable, Dict, Set, Generic, Optional, \
+                   TypeVar, Tuple, Iterator, Sequence, List, Union
 from typing_extensions import Protocol
 from ..flutter import checked
-from ..types import Diagnostic, Page, EmbeddedRstParser
+from ..types import Diagnostic, Page, EmbeddedRstParser, SerializableType
 
 _T = TypeVar('_T', str, object)
 PAT_SUBSTITUTION = re.compile(r'\{\{([\w-]+)\}\}')
@@ -201,4 +202,40 @@ class GizaCategory(Generic[_I], Protocol):
               path: PurePath,
               text: Optional[str] = None) -> Tuple[Sequence[_I], str, List[Diagnostic]]: ...
 
-    def to_page(self, page: Page, data: Sequence[_I], rst_parser: EmbeddedRstParser) -> None: ...
+    def to_pages(self,
+                 page_factory: Callable[[], Tuple[Page, EmbeddedRstParser]],
+                 data: Sequence[_I]) -> List[Page]: ...
+
+
+@checked
+@dataclass
+class OldHeading(Node):
+    character: Optional[str]
+    text: str
+
+
+@dataclass
+@checked
+class HeadingMixin(Node):
+    title: Union[str, OldHeading, None]
+    heading: Union[str, OldHeading, None]
+    level: Optional[int]
+    optional: Optional[bool]
+
+    def render_heading(self, parse_rst: EmbeddedRstParser) -> Sequence[SerializableType]:
+        """Return a list of heading node representing this heading node's properties."""
+        title = self.title if self.title is not None else self.heading
+        if title is None:
+            return ()
+
+        heading_text = title.text if isinstance(title, OldHeading) else title
+
+        if self.optional:
+            heading_text = 'Optional: ' + heading_text
+
+        result = parse_rst(heading_text, self.line, True)
+        return ({
+            'type': 'heading',
+            'position': {'start': {'line': self.line}},
+            'children': result
+        },)

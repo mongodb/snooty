@@ -91,6 +91,7 @@ class Page:
     diagnostics: List[Diagnostic]
     static_assets: Set[StaticAsset]
     category: Optional[str] = None
+    output_filename: Optional[str] = None
 
     def get_id(self) -> PurePath:
         if self.category:
@@ -98,5 +99,7 @@ class Page:
             # steps/foo.rst
             return self.source_path.parent.joinpath(
                 PurePath(self.category),
-                self.source_path.name.replace(f'{self.category}-', '', 1))
+                (self.output_filename if
+                 self.output_filename else
+                 self.source_path.name.replace(f'{self.category}-', '', 1)))
         return self.source_path
