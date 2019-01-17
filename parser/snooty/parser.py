@@ -15,7 +15,7 @@ import toml
 
 from . import gizaparser, rstparser, util
 from .flutter import check_type, checked
-from .gizaparser.nodes import GizaRegistry
+from .gizaparser.nodes import GizaRegistry, GizaCategory
 from .types import Diagnostic, SerializableType, EmbeddedRstParser, Page, StaticAsset
 
 RST_EXTENSIONS = {'.rst', '.txt'}
@@ -272,7 +272,7 @@ class Project:
 
         self.steps_registry: GizaRegistry[gizaparser.steps.Step] = GizaRegistry()
         self.extracts_registry: GizaRegistry[gizaparser.extracts.Extract] = GizaRegistry()
-        self.yaml_mapping = {
+        self.yaml_mapping: Dict[str, GizaCategory[Any]] = {
             'steps': gizaparser.steps.GizaStepsCategory(self.steps_registry),
             'extracts': gizaparser.extracts.GizaExtractsCategory(self.extracts_registry)
         }

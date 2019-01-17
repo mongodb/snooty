@@ -20,12 +20,11 @@ class RSTState(docutils.statemachine.State):
 
 
 class Struct:
-    title_styles: List
     section_level: int
 
 
 class Body:
-    patterns: Dict[str, Pattern] = ...
+    patterns: Dict[str, Pattern[str]] = ...
     def parse_directive_arguments(self,
                                   directive: docutils.parsers.rst.Directive,
                                   arg_block: Iterable[str]) -> Sequence[str]: ...

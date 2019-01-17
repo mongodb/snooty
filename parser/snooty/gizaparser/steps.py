@@ -111,7 +111,7 @@ def step_to_page(page: Page, step: Step, rst_parser: EmbeddedRstParser) -> Seria
 
 
 @dataclass
-class GizaStepsCategory(GizaCategory):
+class GizaStepsCategory(GizaCategory[Step]):
     registry: GizaRegistry[Step]
 
     def parse(self,

@@ -9,7 +9,8 @@ import docutils.utils
 import re
 from dataclasses import dataclass
 from pathlib import Path, PurePath
-from typing import Callable, Dict, Generic, Optional, List, Tuple, Type, TypeVar, Iterable, Sequence
+from typing import Any, Callable, Dict, Generic, Optional, List, Tuple, \
+    Type, TypeVar, Iterable, Sequence
 from typing_extensions import Protocol
 from .gizaparser.parse import load_yaml
 from .gizaparser import nodes
@@ -262,13 +263,14 @@ class TabsDirective(Directive):
 
 def handle_role(typ: str, rawtext: str, text: str,
                 lineno: int, inliner: object,
-                options: Dict = {}, content: List = []) -> Tuple[List, List]:
+                options: Dict[str, object] = {},
+                content: List[object] = []) -> Tuple[List[object], List[object]]:
     node = role(typ, rawtext, text, lineno)
     return [node], []
 
 
 def lookup_directive(directive_name: str, language_module: object,
-                     document: docutils.nodes.document) -> Tuple[Type, List]:
+                     document: docutils.nodes.document) -> Tuple[Type[Any], List[object]]:
     if directive_name.startswith('tabs'):
         return TabsDirective, []
 
@@ -276,7 +278,7 @@ def lookup_directive(directive_name: str, language_module: object,
 
 
 def lookup_role(role_name: str, language_module: object, lineno: int,
-                reporter: object) -> Tuple[Optional[Callable], List]:
+                reporter: object) -> Tuple[Optional[Callable[..., Any]], List[object]]:
     return handle_role, []
 
 
@@ -285,7 +287,7 @@ docutils.parsers.rst.roles.role = lookup_role
 
 
 class NoTransformRstParser(docutils.parsers.rst.Parser):
-    def get_transforms(self) -> List:
+    def get_transforms(self) -> List[object]:
         return []
 
 

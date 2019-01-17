@@ -126,7 +126,7 @@ class GizaRegistry(Generic[_I]):
     """A GizaRegistry stores all of the parsed YAML files of a given GizaCategory,
        and stores file-level dependency information between the different files."""
     def __init__(self) -> None:
-        self.nodes: Dict[str, GizaFile] = {}
+        self.nodes: Dict[str, GizaFile[_I]] = {}
         self.dg = DependencyGraph()
 
     def add(self, path: PurePath, text: str, elements: Sequence[_I]) -> None:

@@ -38,7 +38,7 @@ def extract_to_page(page: Page,
 
 
 @dataclass
-class GizaExtractsCategory(GizaCategory):
+class GizaExtractsCategory(GizaCategory[Extract]):
     registry: GizaRegistry[Extract]
 
     def parse(self,

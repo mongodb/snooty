@@ -14,7 +14,7 @@ class Constructable(Protocol):
     def __init__(self, **kwargs: object) -> None: ...
 
 
-class mapping_dict(dict):
+class mapping_dict(Dict[str, Any]):
     __slots__ = ('_start_line', '_end_line')
     _start_line: int
     _end_line: int
