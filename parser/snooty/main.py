@@ -6,7 +6,7 @@ import pymongo
 import watchdog.events
 import watchdog.observers
 from pathlib import Path, PurePath
-from typing import List, Iterable
+from typing import List
 
 from . import language_server
 from .parser import Project, RST_EXTENSIONS
@@ -47,7 +47,7 @@ class Backend:
     def on_progress(self, progress: int, total: int, message: str) -> None:
         pass
 
-    def on_warning(self, path: PurePath, diagnostics: Iterable[Diagnostic]) -> None:
+    def on_diagnostics(self, path: PurePath, diagnostics: List[Diagnostic]) -> None:
         for diagnostic in diagnostics:
             # Line numbers are currently... uh, "approximate"
             print('{}({}:{}ish): {}'.format(
@@ -58,8 +58,7 @@ class Backend:
             self.total_warnings += 1
 
     def on_update(self, prefix: List[str], page_id: str, page: Page) -> None:
-        if page.diagnostics:
-            self.on_warning(page.source_path, page.diagnostics)
+        pass
 
     def on_delete(self, page_id: str) -> None:
         pass
@@ -71,9 +70,6 @@ class MongoBackend(Backend):
         self.client = connection
 
     def on_update(self, prefix: List[str], page_id: str, page: Page) -> None:
-        if page.diagnostics:
-            return Backend.on_update(self, prefix, page_id, page)
-
         checksums = list(asset.checksum for asset in page.static_assets)
 
         self.client['snooty']['documents'].replace_one({'_id': page_id}, {
@@ -96,8 +92,6 @@ class MongoBackend(Backend):
                 'type': os.path.splitext(static_asset.fileid)[1],
                 'data': static_asset.data
             }, upsert=True)
-
-        Backend.on_update(self, prefix, page_id, page)
 
     def on_delete(self, page_id: str) -> None:
         pass

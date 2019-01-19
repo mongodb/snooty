@@ -3,7 +3,7 @@ from pathlib import PurePath
 from typing import Callable, Optional, List, Sequence, Union, Tuple
 from ..flutter import checked
 from .parse import parse
-from .nodes import Inheritable, GizaCategory, GizaRegistry, HeadingMixin
+from .nodes import Inheritable, GizaCategory, HeadingMixin
 from ..types import Diagnostic, EmbeddedRstParser, SerializableType, Page
 
 
@@ -112,8 +112,6 @@ def step_to_page(page: Page, step: Step, rst_parser: EmbeddedRstParser) -> Seria
 
 @dataclass
 class GizaStepsCategory(GizaCategory[Step]):
-    registry: GizaRegistry[Step]
-
     def parse(self,
               path: PurePath,
               text: Optional[str] = None) -> Tuple[Sequence[Step], str, List[Diagnostic]]:

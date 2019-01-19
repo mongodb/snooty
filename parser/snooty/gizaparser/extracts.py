@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from pathlib import PurePath
 from typing import Callable, List, Tuple, Sequence, Optional
 from ..flutter import checked
-from .nodes import Inheritable, GizaCategory, GizaRegistry, HeadingMixin
+from .nodes import Inheritable, GizaCategory, HeadingMixin
 from .parse import parse
 from ..types import Diagnostic, EmbeddedRstParser, SerializableType, Page
 
@@ -39,8 +39,6 @@ def extract_to_page(page: Page,
 
 @dataclass
 class GizaExtractsCategory(GizaCategory[Extract]):
-    registry: GizaRegistry[Extract]
-
     def parse(self,
               path: PurePath,
               text: Optional[str] = None) -> Tuple[Sequence[Extract], str, List[Diagnostic]]:

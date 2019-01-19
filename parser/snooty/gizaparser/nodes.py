@@ -2,11 +2,10 @@ import collections
 import dataclasses
 import logging
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import PurePath
-from typing import cast, Callable, Dict, Set, Generic, Optional, \
+from typing import cast, Any, Callable, Dict, Set, Generic, Optional, \
                    TypeVar, Tuple, Iterator, Sequence, List, Union
-from typing_extensions import Protocol
 from ..flutter import checked
 from ..types import Diagnostic, Page, EmbeddedRstParser, SerializableType
 
@@ -27,16 +26,16 @@ def substitute(obj: _T, replacements: Dict[str, str]) -> _T:
         return obj
 
     changes: Dict[str, object] = {}
-    for field in dataclasses.fields(obj):
-        value = getattr(obj, field.name)
+    for obj_field in dataclasses.fields(obj):
+        value = getattr(obj, obj_field.name)
         if isinstance(value, str):
             new_str = substitute_text(value, replacements)
             if new_str is not value:
-                changes[field.name] = new_str
+                changes[obj_field.name] = new_str
         elif dataclasses.is_dataclass(value):
             new_value = substitute(value, replacements)
             if new_value is not value:
-                changes[field.name] = new_value
+                changes[obj_field.name] = new_value
 
     return dataclasses.replace(obj, **changes) if changes else obj
 
@@ -122,12 +121,23 @@ class GizaFile(Generic[_I]):
     data: Sequence[_I]
 
 
-class GizaRegistry(Generic[_I]):
-    """A GizaRegistry stores all of the parsed YAML files of a given GizaCategory,
-       and stores file-level dependency information between the different files."""
-    def __init__(self) -> None:
-        self.nodes: Dict[str, GizaFile[_I]] = {}
-        self.dg = DependencyGraph()
+@dataclass
+class GizaCategory(Generic[_I]):
+    """A GizaCategory stores metadata about a "category" of Giza YAML files. For
+       example, "steps", or "apiargs". Each GizaCategory contains all types necessary
+       to transform a given path into Pages."""
+    nodes: Dict[str, GizaFile[_I]] = field(default_factory=dict)
+    dg: DependencyGraph = field(default_factory=DependencyGraph)
+
+    def parse(self,
+              path: PurePath,
+              text: Optional[str] = None) -> Tuple[Sequence[_I], str, List[Diagnostic]]:
+        pass
+
+    def to_pages(self,
+                 page_factory: Callable[[], Tuple[Page, EmbeddedRstParser]],
+                 data: Sequence[_I]) -> List[Page]:
+        pass
 
     def add(self, path: PurePath, text: str, elements: Sequence[_I]) -> None:
         file_id = path.name
@@ -147,15 +157,17 @@ class GizaRegistry(Generic[_I]):
 
         self.dg.set_dependencies(file_id, dependencies)
 
-    def reify(self, obj: _I, warnings: List[Diagnostic]) -> _I:
+    def reify(self, obj: _I, diagnostics: List[Diagnostic]) -> _I:
         parent_identifier = obj.source if obj.source is not None else obj.inherit
         parent: Optional[_I] = None
         if parent_identifier is not None:
             try:
                 parent_sequence = self.nodes[parent_identifier.file].data
             except KeyError:
-                msg = 'No such file "{}"'.format(parent_identifier.file)
-                warnings.append(Diagnostic.error(msg, parent_identifier.line))
+                diagnostics.append(
+                    Diagnostic.error(
+                        f'No such file "{parent_identifier.file}"',
+                        parent_identifier.line))
                 return obj
             try:
                 _parent: _I = next(x for x in parent_sequence if x.ref == parent_identifier.ref)
@@ -165,6 +177,7 @@ class GizaRegistry(Generic[_I]):
                 obj.ref = _parent.ref
                 parent = _parent
             except StopIteration:
+                diagnostics.append(Diagnostic.error(f'Failed to inherit {obj.ref}', obj.line))
                 logger.debug('Inheritance failed: %s', obj.ref)
                 return obj
 
@@ -174,15 +187,19 @@ class GizaRegistry(Generic[_I]):
         obj = inherit(obj, parent)
         return obj
 
-    def reify_file_id(self, file_id: str, warnings: List[Diagnostic]) -> GizaFile[_I]:
+    def reify_file_id(self,
+                      file_id: str,
+                      diagnostics: Dict[PurePath, List[Diagnostic]]) -> GizaFile[_I]:
         node = self.nodes[file_id]
-        return dataclasses.replace(node, data=[self.reify(el, warnings) for el in node.data])
+        return dataclasses.replace(node, data=[
+            self.reify(el, diagnostics.setdefault(node.path, [])) for el in node.data])
 
-    def __iter__(self) -> Iterator[Tuple[str, GizaFile[_I], List[Diagnostic]]]:
+    def reify_all_files(self,
+                        diagnostics: Dict[PurePath, List[Diagnostic]]) -> Iterator[
+                            Tuple[str, GizaFile[_I]]]:
         for file_id, node in self.nodes.items():
-            diagnostics: List[Diagnostic] = []
-            data = [self.reify(el, diagnostics) for el in node.data]
-            yield file_id, dataclasses.replace(node, data=data), diagnostics
+            data = [self.reify(el, diagnostics.setdefault(node.path, [])) for el in node.data]
+            yield file_id, dataclasses.replace(node, data=data)
 
     def __len__(self) -> int:
         return len(self.nodes)
@@ -190,21 +207,6 @@ class GizaRegistry(Generic[_I]):
     def __delitem__(self, file_id: str) -> None:
         del self.dg[file_id]
         del self.nodes[file_id]
-
-
-class GizaCategory(Generic[_I], Protocol):
-    """A GizaCategory stores metadata about a "category" of Giza YAML files. For
-       example, "steps", or "apiargs". Each GizaCategory contains all types necessary
-       to transform a given path into a Page."""
-    registry: GizaRegistry[_I]
-
-    def parse(self,
-              path: PurePath,
-              text: Optional[str] = None) -> Tuple[Sequence[_I], str, List[Diagnostic]]: ...
-
-    def to_pages(self,
-                 page_factory: Callable[[], Tuple[Page, EmbeddedRstParser]],
-                 data: Sequence[_I]) -> List[Page]: ...
 
 
 @checked
@@ -239,3 +241,19 @@ class HeadingMixin(Node):
             'position': {'start': {'line': self.line}},
             'children': result
         },)
+
+
+def ast_to_testing_string(ast: Any) -> str:
+    value = ast.get('value', '')
+    children = ast.get('children', [])
+    attrs = ', '.join(
+        '{}="{}"'.format(k, v) for k, v in ast.items() if k not in (
+            'value', 'children', 'type', 'position'))
+    contents = value if value else (''.join(
+        ast_to_testing_string(child) for child in children)
+        if children else '')
+    return '<{}{}>{}</{}>'.format(
+        ast['type'],
+        ' ' + attrs if attrs else '',
+        contents,
+        ast['type'])

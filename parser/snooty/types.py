@@ -1,6 +1,6 @@
 import enum
 import hashlib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import PurePath
 from typing import Any, Callable, Dict, Set, List, Tuple, Optional, Union
 
@@ -88,8 +88,7 @@ class Page:
     source_path: PurePath
     source: str
     ast: SerializableType
-    diagnostics: List[Diagnostic]
-    static_assets: Set[StaticAsset]
+    static_assets: Set[StaticAsset] = field(default_factory=set)
     category: Optional[str] = None
     output_filename: Optional[str] = None
 

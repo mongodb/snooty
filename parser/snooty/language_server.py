@@ -146,8 +146,11 @@ class Backend:
     def on_progress(self, progress: int, total: int, message: str) -> None:
         pass
 
+    def on_diagnostics(self, path: PurePath, diagnostics: List[types.Diagnostic]) -> None:
+        self.server.set_diagnostics(path, diagnostics)
+
     def on_update(self, prefix: List[str], page_id: str, page: types.Page) -> None:
-        self.server.set_diagnostics(page.source_path, page.diagnostics)
+        pass
 
     def on_delete(self, page_id: str) -> None:
         pass
