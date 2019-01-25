@@ -1,9 +1,12 @@
 import collections.abc
+import dataclasses
 import typing
-from typing import cast, Any, Callable, Dict, Tuple, Type, TypeVar, Optional, Union
+from typing import cast, Any, Callable, Dict, Set, Tuple, Type, TypeVar, Optional, Union  # noqa
 from typing_extensions import Protocol
 
-CACHED_TYPES: Dict[type, Optional[Dict[str, type]]] = {}
+# As of Python 3.7, the mypy Field definition is different from Python's version.
+# Use an old-fashioned comment until this situation is fixed.
+CACHED_TYPES = {}  # type: Dict[type, Optional[Dict[str, dataclasses.Field[Any]]]]
 
 
 class HasAnnotations(Protocol):
@@ -74,6 +77,9 @@ def english_description_of_type(ty: type) -> Tuple[str, Dict[type, str]]:
 
         if ty is type(None):  # noqa
             return 'nothing'
+
+        if ty is object or ty is Any:
+            return 'anything'
 
         level += 1
         if level > 4:
@@ -171,22 +177,34 @@ def check_type(ty: Type[C], data: object, ty_module: str = '') -> C:
     if isinstance(data, dict) and ty in CACHED_TYPES:
         annotations = CACHED_TYPES[ty]
         if annotations is None:
-            annotations = typing.get_type_hints(ty)
+            annotations = {field.name: field for field in dataclasses.fields(ty)}
             CACHED_TYPES[ty] = annotations
         result: Dict[str, object] = {}
 
         # Assign missing fields None
+        missing: Set[str] = set()
         for key in annotations:
             if key not in data:
                 data[key] = None
+                missing.add(key)
 
         # Check field types
         for key, value in data.items():
             if key not in annotations:
                 raise LoadUnknownField(ty, data, key)
 
-            expected_type = annotations[key]
-            result[key] = check_type(expected_type, value, ty.__module__)
+            field = annotations[key]
+            have_value = False
+            if key in missing:
+                # Use the field's default_factory if it's defined
+                try:
+                    result[key] = field.default_factory()  # type: ignore
+                    have_value = True
+                except TypeError:
+                    pass
+
+            if not have_value:
+                result[key] = check_type(field.type, value, ty.__module__)
 
         output = ty(**result)
         start_line = getattr(data, '_start_line', None)

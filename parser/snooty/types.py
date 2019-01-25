@@ -122,7 +122,7 @@ class Page:
 class ProjectConfig:
     root: Path
     name: str
-    constants: Optional[Dict[str, object]] = None
+    constants: Dict[str, object] = field(default_factory=dict)
 
     @classmethod
     def open(cls, root: Path) -> Tuple[Path, 'ProjectConfig', List[Diagnostic]]:
@@ -138,7 +138,7 @@ class ProjectConfig:
                 pass
             path = path.parent
 
-        return root, cls(root, 'untitled', None), []
+        return root, cls(root, 'untitled'), []
 
     def render_constants(self) -> Tuple['ProjectConfig', List[Diagnostic]]:
         if not self.constants:
@@ -155,7 +155,7 @@ class ProjectConfig:
 
     def read(self, path: Path) -> Tuple[str, List[Diagnostic]]:
         text = path.open().read()
-        return ProjectConfig.substitute(self.constants, text) if self.constants else text, []
+        return ProjectConfig.substitute(self.constants, text)
 
     @staticmethod
     def substitute(constants: Dict[str, object], source: str) -> Tuple[str, List[Diagnostic]]:
