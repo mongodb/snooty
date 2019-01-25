@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from pathlib import PurePath
+from pathlib import Path
 from typing import Callable, Optional, List, Sequence, Union, Tuple
 from ..flutter import checked
 from .parse import parse
@@ -110,12 +110,11 @@ def step_to_page(page: Page, step: Step, rst_parser: EmbeddedRstParser) -> Seria
     }
 
 
-@dataclass
 class GizaStepsCategory(GizaCategory[Step]):
     def parse(self,
-              path: PurePath,
+              path: Path,
               text: Optional[str] = None) -> Tuple[Sequence[Step], str, List[Diagnostic]]:
-        return parse(Step, path, text)
+        return parse(Step, path, self.project_config, text)
 
     def to_pages(self,
                  page_factory: Callable[[], Tuple[Page, EmbeddedRstParser]],

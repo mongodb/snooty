@@ -209,8 +209,8 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
             'diagnostics': workspace_item.create_lsp_diagnostics()
         })
 
-    def uri_to_path(self, uri: Uri) -> PurePath:
-        path = PurePath(uri.replace('file://', '', 1).replace(self.root_uri, ''))
+    def uri_to_path(self, uri: Uri) -> Path:
+        path = Path(uri.replace('file://', '', 1).replace(self.root_uri, ''))
         self.path_to_uri[path] = uri
         return path
 

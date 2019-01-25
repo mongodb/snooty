@@ -3,11 +3,11 @@ import dataclasses
 import logging
 import re
 from dataclasses import dataclass, field
-from pathlib import PurePath
+from pathlib import Path, PurePath
 from typing import cast, Any, Callable, Dict, Set, Generic, Optional, \
                    TypeVar, Tuple, Iterator, Sequence, List, Union
 from ..flutter import checked
-from ..types import Diagnostic, Page, EmbeddedRstParser, SerializableType
+from ..types import Diagnostic, Page, EmbeddedRstParser, SerializableType, ProjectConfig
 
 _T = TypeVar('_T', str, object)
 PAT_SUBSTITUTION = re.compile(r'\{\{([\w-]+)\}\}')
@@ -116,7 +116,7 @@ class GizaFile(Generic[_I]):
     """A GizaFile represents a single Giza YAML file."""
     __slots__ = ('path', 'text', 'data')
 
-    path: PurePath
+    path: Path
     text: str
     data: Sequence[_I]
 
@@ -126,11 +126,12 @@ class GizaCategory(Generic[_I]):
     """A GizaCategory stores metadata about a "category" of Giza YAML files. For
        example, "steps", or "apiargs". Each GizaCategory contains all types necessary
        to transform a given path into Pages."""
+    project_config: ProjectConfig
     nodes: Dict[str, GizaFile[_I]] = field(default_factory=dict)
     dg: DependencyGraph = field(default_factory=DependencyGraph)
 
     def parse(self,
-              path: PurePath,
+              path: Path,
               text: Optional[str] = None) -> Tuple[Sequence[_I], str, List[Diagnostic]]:
         pass
 
@@ -139,7 +140,7 @@ class GizaCategory(Generic[_I]):
                  data: Sequence[_I]) -> List[Page]:
         pass
 
-    def add(self, path: PurePath, text: str, elements: Sequence[_I]) -> None:
+    def add(self, path: Path, text: str, elements: Sequence[_I]) -> None:
         file_id = path.name
         self.nodes[file_id] = GizaFile(path, text, elements)
         dependencies = set()

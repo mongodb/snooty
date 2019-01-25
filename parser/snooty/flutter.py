@@ -225,7 +225,7 @@ def check_type(ty: Type[C], data: object, ty_module: str = '') -> C:
 
         raise LoadError('Unsupported PEP-484 type', ty, data)
 
-    if ty is object or ty is Any:
+    if ty is object or ty is Any or isinstance(data, ty):
         return cast(C, data)
 
     raise LoadError('Unloadable type', ty, data)

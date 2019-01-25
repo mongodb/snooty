@@ -5,18 +5,16 @@ import multiprocessing
 import os
 import pwd
 import subprocess
-from dataclasses import dataclass
 from functools import partial
 from pathlib import Path, PurePath
-from typing import Any, Dict, Tuple, Optional, Set, List
+from typing import Any, Dict, Tuple, Optional, Set, List, Iterable
 from typing_extensions import Protocol
 import docutils.utils
-import toml
 
 from . import gizaparser, rstparser, util
-from .flutter import check_type, checked
 from .gizaparser.nodes import GizaCategory
-from .types import Diagnostic, SerializableType, EmbeddedRstParser, Page, StaticAsset
+from .types import Diagnostic, SerializableType, EmbeddedRstParser, Page, \
+    StaticAsset, ProjectConfigError, ProjectConfig
 
 RST_EXTENSIONS = {'.rst', '.txt'}
 logger = logging.getLogger(__name__)
@@ -171,6 +169,9 @@ class JSONVisitor:
         self.static_assets.add(static_asset)
         return static_asset
 
+    def add_diagnostics(self, diagnostics: Iterable[Diagnostic]) -> None:
+        self.diagnostics.extend(diagnostics)
+
     def __make_child_visitor(self) -> 'JSONVisitor':
         visitor = type(self)(self.project_root, self.docpath, self.document)
         visitor.diagnostics = self.diagnostics
@@ -193,12 +194,9 @@ class InlineJSONVisitor(JSONVisitor):
 
 
 def parse_rst(parser: rstparser.Parser[JSONVisitor],
-              path: PurePath,
+              path: Path,
               text: Optional[str] = None) -> Tuple[Page, List[Diagnostic]]:
-    if text is None:
-        with open(path, 'r') as f:
-            text = f.read()
-    visitor = parser.parse(path, text)
+    visitor, text = parser.parse(path, text)
 
     return Page(
         path,
@@ -207,7 +205,7 @@ def parse_rst(parser: rstparser.Parser[JSONVisitor],
         visitor.static_assets), visitor.diagnostics
 
 
-def make_embedded_rst_parser(project_root: Path,
+def make_embedded_rst_parser(project_config: ProjectConfig,
                              page: Page,
                              diagnostics: List[Diagnostic]) -> EmbeddedRstParser:
     def parse_embedded_rst(rst: str,
@@ -216,8 +214,8 @@ def make_embedded_rst_parser(project_root: Path,
         # Crudely make docutils line numbers match
         text = '\n' * lineno + rst.strip()
         visitor_class = InlineJSONVisitor if inline else JSONVisitor
-        parser = rstparser.Parser(project_root, visitor_class)
-        visitor = parser.parse(page.source_path, text)
+        parser = rstparser.Parser(project_config, visitor_class)
+        visitor, _ = parser.parse(page.source_path, text)
         children: List[SerializableType] = visitor.state[-1]['children']
 
         diagnostics.extend(visitor.diagnostics)
@@ -242,55 +240,38 @@ class ProjectBackend(Protocol):
     def on_delete(self, page_id: str) -> None: ...
 
 
-@checked
-@dataclass
-class ProjectConfig:
-    name: str
-
-    @classmethod
-    def open(cls, root: Path) -> Tuple[Path, 'ProjectConfig']:
-        path = root
-        while path.parent != path:
-            try:
-                with open(path.joinpath('snooty.toml'), 'r') as f:
-                    return path, check_type(ProjectConfig, toml.load(f))
-            except FileNotFoundError:
-                pass
-            path = path.parent
-
-        return root, cls('untitled')
-
-
 class Project:
     def __init__(self,
                  root: Path,
                  backend: ProjectBackend) -> None:
         root = root.resolve(strict=True)
-        root, config = ProjectConfig.open(root)
+        root, self.config, config_diagnostics = ProjectConfig.open(root)
+
+        if config_diagnostics:
+            backend.on_diagnostics(root, config_diagnostics)
+            raise ProjectConfigError()
 
         self.root = root
-        self.parser = rstparser.Parser(self.root, JSONVisitor)
+        self.parser = rstparser.Parser(self.config, JSONVisitor)
         self.static_assets: Dict[PurePath, Set[StaticAsset]] = collections.defaultdict(set)
         self.backend = backend
 
-        self.steps_category = gizaparser.steps.GizaStepsCategory()
-        self.extracts_category = gizaparser.extracts.GizaExtractsCategory()
         self.yaml_mapping: Dict[str, GizaCategory[Any]] = {
-            'steps': self.steps_category,
-            'extracts': self.extracts_category
+            'steps': gizaparser.steps.GizaStepsCategory(self.config),
+            'extracts': gizaparser.extracts.GizaExtractsCategory(self.config)
         }
 
         username = pwd.getpwuid(os.getuid()).pw_name
         branch = subprocess.check_output(
             ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
             encoding='utf-8').strip()
-        self.prefix = [config.name, username, branch]
+        self.prefix = [self.config.name, username, branch]
 
     def get_page_id(self, path: PurePath) -> str:
         page_id = path.with_suffix('').relative_to(self.root).as_posix()
         return '/'.join(self.prefix + [page_id])
 
-    def update(self, path: PurePath, optional_text: Optional[str] = None) -> None:
+    def update(self, path: Path, optional_text: Optional[str] = None) -> None:
         diagnostics: Dict[PurePath, List[Diagnostic]] = {path: []}
         prefix = get_giza_category(path)
         _, ext = os.path.splitext(path)
@@ -302,9 +283,8 @@ class Project:
         elif ext == '.yaml' and prefix in self.yaml_mapping:
             file_id = os.path.basename(path)
             giza_category = self.yaml_mapping[prefix]
-            needs_rebuild = self.steps_category.dg.dependents[file_id].union(
-                self.extracts_category.dg.dependents[file_id]).union(
-                set([file_id]))
+            needs_rebuild = set((file_id)).union(*(
+                category.dg.dependents[file_id] for category in self.yaml_mapping.values()))
             logger.debug('needs_rebuild: %s', ','.join(needs_rebuild))
             for file_id in needs_rebuild:
                 file_diagnostics: List[Diagnostic] = []
@@ -319,7 +299,7 @@ class Project:
 
                 def create_page() -> Tuple[Page, EmbeddedRstParser]:
                     page = Page(giza_node.path, text, {})
-                    return page, make_embedded_rst_parser(self.root, page, file_diagnostics)
+                    return page, make_embedded_rst_parser(self.config, page, file_diagnostics)
 
                 giza_category.add(path, text, steps)
                 pages = giza_category.to_pages(create_page, giza_node.data)
@@ -352,7 +332,7 @@ class Project:
 
         # Categorize our YAML files
         logger.debug('Categorizing YAML files')
-        categorized: Dict[str, List[PurePath]] = collections.defaultdict(list)
+        categorized: Dict[str, List[Path]] = collections.defaultdict(list)
         for path in util.get_files(self.root, ('.yaml',)):
             prefix = get_giza_category(path)
             if prefix in self.yaml_mapping:
@@ -373,7 +353,7 @@ class Project:
                 def create_page() -> Tuple[Page, EmbeddedRstParser]:
                     page = Page(giza_node.path, giza_node.text, {})
                     return page, make_embedded_rst_parser(
-                        self.root, page, all_yaml_diagnostics.setdefault(giza_node.path, []))
+                        self.config, page, all_yaml_diagnostics.setdefault(giza_node.path, []))
 
                 for page in giza_category.to_pages(create_page, giza_node.data):
                     self.backend.on_update(self.prefix, self.get_page_id(page.get_id()), page)

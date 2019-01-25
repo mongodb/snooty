@@ -16,7 +16,7 @@ def reroot_path(filename: PurePath,
     return rel_fn, project_root.joinpath(rel_fn).resolve()
 
 
-def get_files(root: PurePath, extensions: Container[str]) -> Iterator[PurePath]:
+def get_files(root: PurePath, extensions: Container[str]) -> Iterator[Path]:
     """Recursively iterate over files underneath the given root, yielding
        only filenames with the given extensions."""
     for base, dirs, files in os.walk(root):
@@ -26,7 +26,7 @@ def get_files(root: PurePath, extensions: Container[str]) -> Iterator[PurePath]:
             if ext not in extensions:
                 continue
 
-            yield PurePath(os.path.join(base, name))
+            yield Path(os.path.join(base, name))
 
 
 def get_line(node: docutils.nodes.Node) -> int:

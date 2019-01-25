@@ -14,6 +14,7 @@ from typing import Any, Callable, Dict, Generic, Optional, List, Tuple, \
 from typing_extensions import Protocol
 from .gizaparser.parse import load_yaml
 from .gizaparser import nodes
+from .types import Diagnostic, ProjectConfig
 from .flutter import checked, check_type, LoadError
 
 PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
@@ -301,18 +302,23 @@ class Visitor(Protocol):
 
     def dispatch_departure(self, node: docutils.nodes.Node) -> None: ...
 
+    def add_diagnostics(self, diagnostics: Iterable[Diagnostic]) -> None: ...
 
-V = TypeVar('V', bound=Visitor)
+
+_V = TypeVar('_V', bound=Visitor)
 
 
-class Parser(Generic[V]):
-    __slots__ = ('project_root', 'visitor_class')
+class Parser(Generic[_V]):
+    __slots__ = ('project_config', 'visitor_class')
 
-    def __init__(self, project_root: Path, visitor_class: Type[V]) -> None:
-        self.project_root = project_root
+    def __init__(self, project_config: ProjectConfig, visitor_class: Type[_V]) -> None:
+        self.project_config = project_config
         self.visitor_class = visitor_class
 
-    def parse(self, path: PurePath, text: str) -> V:
+    def parse(self, path: Path, text: Optional[str]) -> Tuple[_V, str]:
+        diagnostics: List[Diagnostic] = []
+        if text is None:
+            text, diagnostics = self.project_config.read(path)
         parser = NoTransformRstParser()
         settings = docutils.frontend.OptionParser(
             components=(docutils.parsers.rst.Parser,)
@@ -323,6 +329,7 @@ class Parser(Generic[V]):
 
         parser.parse(text, document)
 
-        visitor = self.visitor_class(self.project_root, path, document)
+        visitor = self.visitor_class(self.project_config.root, path, document)
+        visitor.add_diagnostics(diagnostics)
         document.walkabout(visitor)
-        return visitor
+        return visitor, text

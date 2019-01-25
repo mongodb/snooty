@@ -1,11 +1,24 @@
 import enum
 import hashlib
+import re
+from pathlib import Path
 from dataclasses import dataclass, field
 from pathlib import PurePath
-from typing import Any, Callable, Dict, Set, List, Tuple, Optional, Union
+import toml
+from .flutter import checked, check_type
+from typing import Any, Callable, Dict, Set, List, Tuple, Optional, Union, Match
 
+PAT_VARIABLE = re.compile(r'{\+([\w-]+)\+}')
 SerializableType = Union[None, bool, str, int, float, Dict[str, Any], List[Any]]
 EmbeddedRstParser = Callable[[str, int, bool], List[SerializableType]]
+
+
+class SnootyError(Exception):
+    pass
+
+
+class ProjectConfigError(SnootyError):
+    pass
 
 
 @dataclass
@@ -85,7 +98,7 @@ class StaticAsset:
 
 @dataclass
 class Page:
-    source_path: PurePath
+    source_path: Path
     source: str
     ast: SerializableType
     static_assets: Set[StaticAsset] = field(default_factory=set)
@@ -102,3 +115,65 @@ class Page:
                  self.output_filename else
                  self.source_path.name.replace(f'{self.category}-', '', 1)))
         return self.source_path
+
+
+@checked
+@dataclass
+class ProjectConfig:
+    root: Path
+    name: str
+    constants: Optional[Dict[str, object]] = None
+
+    @classmethod
+    def open(cls, root: Path) -> Tuple[Path, 'ProjectConfig', List[Diagnostic]]:
+        path = root
+        while path.parent != path:
+            try:
+                with open(path.joinpath('snooty.toml'), 'r') as f:
+                    data = toml.load(f)
+                    data['root'] = root
+                    result, diagnostics = check_type(ProjectConfig, data).render_constants()
+                    return path, result, diagnostics
+            except FileNotFoundError:
+                pass
+            path = path.parent
+
+        return root, cls(root, 'untitled', None), []
+
+    def render_constants(self) -> Tuple['ProjectConfig', List[Diagnostic]]:
+        if not self.constants:
+            return self, []
+        constants: Dict[str, object] = {}
+        all_diagnostics: List[Diagnostic] = []
+        for k, v in self.constants.items():
+            result, diagnostics = ProjectConfig.substitute(constants, str(v))
+            all_diagnostics.extend(diagnostics)
+            constants[k] = result
+
+        self.constants = constants
+        return self, all_diagnostics
+
+    def read(self, path: Path) -> Tuple[str, List[Diagnostic]]:
+        text = path.open().read()
+        return ProjectConfig.substitute(self.constants, text) if self.constants else text, []
+
+    @staticmethod
+    def substitute(constants: Dict[str, object], source: str) -> Tuple[str, List[Diagnostic]]:
+        """Substitute all placeholders within a string."""
+        diagnostics: List[Diagnostic] = []
+
+        def handle_match(match: Match[str]) -> str:
+            """Replace a given placeholder match with a value from the Sphinx
+               configuration. Log a warning if it's not defined."""
+            variable_name = match.group(1)
+            try:
+                return str(constants[variable_name])
+            except KeyError:
+                lineno = source.count('\n', 0, match.start())
+                diagnostics.append(
+                    Diagnostic.error(
+                        f'{variable_name} not defined as a source constant',
+                        lineno))
+            return ''
+
+        return PAT_VARIABLE.sub(handle_match, source), diagnostics

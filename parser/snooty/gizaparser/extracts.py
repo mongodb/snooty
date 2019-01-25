@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from pathlib import PurePath
+from pathlib import Path
 from typing import Callable, List, Tuple, Sequence, Optional
 from ..flutter import checked
 from .nodes import Inheritable, GizaCategory, HeadingMixin
@@ -37,12 +37,11 @@ def extract_to_page(page: Page,
     }
 
 
-@dataclass
 class GizaExtractsCategory(GizaCategory[Extract]):
     def parse(self,
-              path: PurePath,
+              path: Path,
               text: Optional[str] = None) -> Tuple[Sequence[Extract], str, List[Diagnostic]]:
-        extracts, text, diagnostics = parse(Extract, path, text)
+        extracts, text, diagnostics = parse(Extract, path, self.project_config, text)
 
         def report_missing_ref(extract: Extract) -> bool:
             diagnostics.append(

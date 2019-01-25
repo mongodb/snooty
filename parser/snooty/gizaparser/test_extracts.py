@@ -2,12 +2,13 @@ from pathlib import Path, PurePath
 from typing import Dict, Tuple, List
 from .extracts import GizaExtractsCategory
 from .nodes import ast_to_testing_string
-from ..types import Diagnostic, Page, EmbeddedRstParser
+from ..types import Diagnostic, Page, EmbeddedRstParser, ProjectConfig
 from ..parser import make_embedded_rst_parser
 
 
 def test_extract() -> None:
-    category = GizaExtractsCategory()
+    project_config = ProjectConfig(Path('test_data'), '')
+    category = GizaExtractsCategory(project_config)
     path = Path('test_data/extracts-test.yaml')
     child_path = Path('test_data/extracts-test-child.yaml')
 
@@ -35,7 +36,7 @@ def test_extract() -> None:
 
     def create_page() -> Tuple[Page, EmbeddedRstParser]:
         page = Page(path, '', {})
-        return page, make_embedded_rst_parser(path, page, all_diagnostics[path])
+        return page, make_embedded_rst_parser(project_config, page, all_diagnostics[path])
 
     pages = category.to_pages(create_page, giza_node.data)
     assert len(pages) == 4
