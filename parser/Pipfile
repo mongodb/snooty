@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pymongo = {extras = ["snappy", "srv", "tls"], version = "*"}
+pymongo = {extras = ["snappy", "srv", "tls"],version = "*"}
 docutils = "*"
 dnspython = "*"
 watchdog = "*"
@@ -17,3 +17,4 @@ python-jsonrpc-server = "*"
 "flake8" = "*"
 mypy = "*"
 pytest = "*"
+pytest-cov = "*"

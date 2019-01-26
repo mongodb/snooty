@@ -9,7 +9,7 @@ lint:
 	pipenv run flake8 --max-line-length=100 snooty
 
 test: lint
-	pipenv run pytest
+	pipenv run pytest --cov=snooty
 
 nuitka:
 	echo 'from snooty import main; main.main()' > snooty.py

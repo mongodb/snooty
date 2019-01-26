@@ -5,3 +5,4 @@ __pycache__/
 parser/snooty.py
 *.dist/
 node_modules/
+.coverage
