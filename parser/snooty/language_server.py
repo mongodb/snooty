@@ -2,9 +2,9 @@ import logging
 import os
 import sys
 import threading
-import jsonrpc.dispatchers
-import jsonrpc.endpoint
-import jsonrpc.streams
+import pyls_jsonrpc.dispatchers
+import pyls_jsonrpc.endpoint
+import pyls_jsonrpc.streams
 from dataclasses import dataclass
 from functools import wraps
 from pathlib import Path, PurePath
@@ -179,7 +179,7 @@ class WorkspaceEntry:
         } for diagnostic in self.diagnostics]
 
 
-class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
+class LanguageServer(pyls_jsonrpc.dispatchers.MethodDispatcher):
     def __init__(self, rx: BinaryIO, tx: BinaryIO) -> None:
         self.project: Optional[Project] = None
         self.root_uri = ''
@@ -187,9 +187,9 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
         self.path_to_uri: Dict[PurePath, Uri] = {}
         self.diagnostics: Dict[PurePath, List[types.Diagnostic]] = {}
 
-        self._jsonrpc_stream_reader = jsonrpc.streams.JsonRpcStreamReader(rx)
-        self._jsonrpc_stream_writer = jsonrpc.streams.JsonRpcStreamWriter(tx)
-        self._endpoint = jsonrpc.endpoint.Endpoint(self, self._jsonrpc_stream_writer.write)
+        self._jsonrpc_stream_reader = pyls_jsonrpc.streams.JsonRpcStreamReader(rx)
+        self._jsonrpc_stream_writer = pyls_jsonrpc.streams.JsonRpcStreamWriter(tx)
+        self._endpoint = pyls_jsonrpc.endpoint.Endpoint(self, self._jsonrpc_stream_writer.write)
         self._shutdown = False
 
     def start(self) -> None:
@@ -293,4 +293,5 @@ class LanguageServer(jsonrpc.dispatchers.MethodDispatcher):
 def start() -> None:
     stdin, stdout = sys.stdin.buffer, sys.stdout.buffer
     server = LanguageServer(stdin, stdout)
+    logger.info('Started')
     server.start()

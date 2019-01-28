@@ -8,7 +8,7 @@ import watchdog.observers
 from pathlib import Path, PurePath
 from typing import List
 
-# from . import language_server
+from . import language_server
 from .parser import Project, RST_EXTENSIONS
 from .types import Page, Diagnostic
 
@@ -106,9 +106,9 @@ def usage(exit_code: int) -> None:
 def main() -> None:
     logging.basicConfig(level=logging.INFO)
 
-    # if len(sys.argv) == 2 and sys.argv[1] == 'language-server':
-    #     language_server.start()
-    #     return
+    if len(sys.argv) == 2 and sys.argv[1] == 'language-server':
+        language_server.start()
+        return
 
     if len(sys.argv) not in (3, 4) or sys.argv[1] not in ('watch', 'build'):
         usage(1)
