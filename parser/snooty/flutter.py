@@ -18,6 +18,7 @@ class Constructable(Protocol):
 
 
 class mapping_dict(Dict[str, Any]):
+    """A dictionary that also contains source line information."""
     __slots__ = ('_start_line', '_end_line')
     _start_line: int
     _end_line: int

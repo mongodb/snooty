@@ -13,3 +13,9 @@ def test_reroot_path() -> None:
         PurePath('../bar/baz.rst'),
         PurePath('foo/dir/test.txt'),
         Path('foo'))[0] == PurePath('foo/bar/baz.rst')
+
+
+def test_get_files() -> None:
+    assert list(util.get_files(PurePath('test_data'), ('.toml',))) == [
+        Path('test_data/snooty.toml'),
+        Path('test_data/bad_project/snooty.toml')]

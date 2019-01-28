@@ -247,12 +247,14 @@ class HeadingMixin(Node):
 def ast_to_testing_string(ast: Any) -> str:
     value = ast.get('value', '')
     children = ast.get('children', [])
-    attrs = ', '.join(
+    attrs = ' '.join(
         '{}="{}"'.format(k, v) for k, v in ast.items() if k not in (
-            'value', 'children', 'type', 'position'))
+            'argument', 'value', 'children', 'type', 'position') and v)
     contents = value if value else (''.join(
         ast_to_testing_string(child) for child in children)
         if children else '')
+    if 'argument' in ast:
+        contents = ''.join(ast_to_testing_string(part) for part in ast['argument']) + contents
     return '<{}{}>{}</{}>'.format(
         ast['type'],
         ' ' + attrs if attrs else '',

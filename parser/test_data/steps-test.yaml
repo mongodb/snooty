@@ -1,0 +1,27 @@
+stepnum: 1
+level: 4
+source:
+  file: steps-test-child.yaml
+  ref: import-key
+---
+title: Create a ``/etc/apt/sources.list.d/mongodb-org-{+version+}.list`` file for MongoDB.
+stepnum: 2
+level: 4
+ref: sources-list
+action:
+  pre: |
+    Create the list file using the command appropriate for your version
+    of Debian.
+---
+stepnum: 3
+level: 4
+source:
+  file: steps-test-child.yaml
+  ref: reload
+---
+stepnum: 4
+level: 4
+source:
+  file: steps-test-child.yaml
+  ref: install
+...

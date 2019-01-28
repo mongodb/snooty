@@ -67,5 +67,5 @@ def parse(ty: Type[_T],
         return parsed, text, diagnostics
     except LoadError as err:
         mapping = err.bad_data if isinstance(err.bad_data, dict) else {}
-        lineno = mapping.get('_start_line', 0)
+        lineno = mapping._start_line if isinstance(mapping, mapping_dict) else 0
         return [], text, diagnostics + [Diagnostic.error(str(err), lineno)]
