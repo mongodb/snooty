@@ -162,7 +162,7 @@ class WorkspaceEntry:
     document_uri: Uri
     diagnostics: List[types.Diagnostic]
 
-    def create_lsp_diagnostics(self) -> object:
+    def create_lsp_diagnostics(self) -> List[object]:
         return [{
             'range': {
                 'start': {

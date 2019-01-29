@@ -4,7 +4,7 @@ import logging
 import re
 from dataclasses import dataclass, field
 from pathlib import Path, PurePath
-from typing import cast, Any, Callable, Dict, Set, Generic, Optional, \
+from typing import cast, Callable, Dict, Set, Generic, Optional, \
                    TypeVar, Tuple, Iterator, Sequence, List, Union
 from ..flutter import checked
 from ..types import Diagnostic, Page, EmbeddedRstParser, SerializableType, ProjectConfig
@@ -242,21 +242,3 @@ class HeadingMixin(Node):
             'position': {'start': {'line': self.line}},
             'children': result
         },)
-
-
-def ast_to_testing_string(ast: Any) -> str:
-    value = ast.get('value', '')
-    children = ast.get('children', [])
-    attrs = ' '.join(
-        '{}="{}"'.format(k, v) for k, v in ast.items() if k not in (
-            'argument', 'value', 'children', 'type', 'position') and v)
-    contents = value if value else (''.join(
-        ast_to_testing_string(child) for child in children)
-        if children else '')
-    if 'argument' in ast:
-        contents = ''.join(ast_to_testing_string(part) for part in ast['argument']) + contents
-    return '<{}{}>{}</{}>'.format(
-        ast['type'],
-        ' ' + attrs if attrs else '',
-        contents,
-        ast['type'])

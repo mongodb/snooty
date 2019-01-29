@@ -20,7 +20,7 @@ from .flutter import checked, check_type, LoadError
 PAT_EXPLICIT_TILE = re.compile(r'^(?P<label>.+?)\s*(?<!\x00)<(?P<target>.*?)>$', re.DOTALL)
 PAT_WHITESPACE = re.compile(r'^\x20*')
 PAT_BLOCK_HAS_ARGUMENT = re.compile(r'^\x20*\.\.\x20[^\s]+::\s*\S+')
-SPECIAL_DIRECTIVES = {'code-block', 'include', 'tabs-drivers', 'tabs', 'tabs-platforms', 'only'}
+SPECIAL_DIRECTIVES = {'code-block', 'include', 'only'}
 
 
 @checked

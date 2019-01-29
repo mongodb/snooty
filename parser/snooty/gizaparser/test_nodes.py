@@ -38,6 +38,9 @@ def test_substitution() -> None:
     substituted_string = 'testing substitution. test.'
     assert nodes.substitute_text(test_string, replacements) == substituted_string
 
+    obj = object()
+    assert nodes.substitute(obj, replacements) is obj
+
     # Test complex substitution
     node = SubstitutionTest(
         foo=test_string,
@@ -56,3 +59,15 @@ def test_substitution() -> None:
     # Ensure the identity of the zero-substitutions case remains the same
     test_string = 'foo'
     assert nodes.substitute_text(test_string, {}) is test_string
+
+
+def test_inheritance() -> None:
+    parent = nodes.Inheritable('parent', {'foo': 'bar', 'old': ''}, source=None, inherit=None)
+    child = nodes.Inheritable(
+        'child',
+        {'bar': 'baz', 'old': 'new'},
+        source=nodes.Inherit('self.yaml', 'parent'),
+        inherit=None)
+    child = nodes.inherit(child, parent)
+
+    assert child.replacement == {'foo': 'bar', 'bar': 'baz', 'old': 'new'}

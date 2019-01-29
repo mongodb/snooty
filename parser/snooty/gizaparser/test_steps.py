@@ -1,9 +1,9 @@
 from pathlib import Path, PurePath
 from typing import Dict, Tuple, List
 from .steps import GizaStepsCategory
-from .nodes import ast_to_testing_string
 from ..types import Diagnostic, Page, EmbeddedRstParser, ProjectConfig
 from ..parser import make_embedded_rst_parser
+from ..util import ast_to_testing_string
 
 
 def test_step() -> None:
@@ -31,6 +31,7 @@ def test_step() -> None:
     all_diagnostics[path] = add_main_file()
     all_diagnostics[child_path] = add_child_file()
 
+    assert len(category) == 2
     file_id, giza_node = next(category.reify_all_files(all_diagnostics))
 
     def create_page() -> Tuple[Page, EmbeddedRstParser]:
@@ -49,8 +50,13 @@ def test_step() -> None:
 
         '<directive name="step"><section><heading><text>Create a </text><literal><text>',
         '/etc/apt/sources.list.d/mongodb-org-3.4.list</text></literal><text> file for MongoDB.',
-        '</text></heading><paragraph><text>Create the list file using the command appropriate for ',
-        'your version\nof Debian.</text></paragraph></section></directive>',
+        '</text></heading>',
+        '<section><heading><text>Optional: action heading</text></heading>'
+        '<paragraph><text>Create the list file using the command appropriate for ',
+        'your version\nof Debian.</text></paragraph>',
+        '<paragraph><text>action-content</text></paragraph>',
+        '<paragraph><text>action-post</text></paragraph>',
+        '</section></section></directive>',
 
         '<directive name="step"><section><heading><text>Reload local package database.</text>',
         '</heading><paragraph><text>Issue the following command to reload the local package ',
@@ -58,8 +64,10 @@ def test_step() -> None:
         '</section></directive>',
 
         '<directive name="step"><section><heading><text>Install the MongoDB packages.</text>',
-        '</heading><paragraph><text>You can install either the latest stable version of MongoDB ',
+        '</heading><paragraph><text>hi</text></paragraph>',
+        '<paragraph><text>You can install either the latest stable version of MongoDB ',
         'or a\nspecific version of MongoDB.</text></paragraph>',
         '<directive name="code-block">',
-        '<text>sh</text><literal></literal></directive></section></directive></directive>'
+        '<text>sh</text><literal></literal></directive><paragraph><text>bye</text></paragraph>',
+        '</section></directive></directive>'
     ))

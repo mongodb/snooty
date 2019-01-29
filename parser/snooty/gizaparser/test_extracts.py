@@ -1,9 +1,9 @@
 from pathlib import Path, PurePath
 from typing import Dict, Tuple, List
 from .extracts import GizaExtractsCategory
-from .nodes import ast_to_testing_string
 from ..types import Diagnostic, Page, EmbeddedRstParser, ProjectConfig
 from ..parser import make_embedded_rst_parser
+from ..util import ast_to_testing_string
 
 
 def test_extract() -> None:
@@ -32,6 +32,7 @@ def test_extract() -> None:
     all_diagnostics[path] = add_main_file()
     all_diagnostics[child_path] = add_child_file()
 
+    assert len(category) == 2
     file_id, giza_node = next(category.reify_all_files(all_diagnostics))
 
     def create_page() -> Tuple[Page, EmbeddedRstParser]:

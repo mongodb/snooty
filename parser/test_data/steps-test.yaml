@@ -9,9 +9,13 @@ stepnum: 2
 level: 4
 ref: sources-list
 action:
+  heading: 'action heading'
+  optional: true
   pre: |
     Create the list file using the command appropriate for your version
     of Debian.
+  content: 'action-content'
+  post: 'action-post'
 ---
 stepnum: 3
 level: 4
@@ -24,4 +28,6 @@ level: 4
 source:
   file: steps-test-child.yaml
   ref: install
+post: 'bye'
+pre: 'hi'
 ...

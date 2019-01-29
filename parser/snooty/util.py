@@ -1,7 +1,7 @@
 import os
 import docutils.nodes
 from pathlib import Path, PurePath
-from typing import cast, Container, Optional, Tuple, Iterator
+from typing import cast, Any, Container, Optional, Tuple, Iterator
 
 
 def reroot_path(filename: PurePath,
@@ -46,3 +46,21 @@ def get_line(node: docutils.nodes.Node) -> int:
         node = node.parent
 
     return cast(int, line_of_node(node)) - 1
+
+
+def ast_to_testing_string(ast: Any) -> str:
+    value = ast.get('value', '')
+    children = ast.get('children', [])
+    attrs = ' '.join(
+        '{}="{}"'.format(k, v) for k, v in ast.items() if k not in (
+            'argument', 'value', 'children', 'type', 'position') and v)
+    contents = value if value else (''.join(
+        ast_to_testing_string(child) for child in children)
+        if children else '')
+    if 'argument' in ast:
+        contents = ''.join(ast_to_testing_string(part) for part in ast['argument']) + contents
+    return '<{}{}>{}</{}>'.format(
+        ast['type'],
+        ' ' + attrs if attrs else '',
+        contents,
+        ast['type'])
