@@ -16,6 +16,7 @@ def test_reroot_path() -> None:
 
 
 def test_get_files() -> None:
-    assert list(util.get_files(PurePath('test_data'), ('.toml',))) == [
+    assert set(util.get_files(PurePath('test_data'), ('.toml',))) == {
         Path('test_data/snooty.toml'),
-        Path('test_data/bad_project/snooty.toml')]
+        Path('test_data/bad_project/snooty.toml'),
+        Path('test_data/empty_project/snooty.toml')}

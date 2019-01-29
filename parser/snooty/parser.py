@@ -155,7 +155,7 @@ class JSONVisitor:
                 return
 
             try:
-                static_asset = self.add_static_asset(PurePath(argument_text))
+                static_asset = self.add_static_asset(Path(argument_text))
                 options['checksum'] = static_asset.checksum
             except OSError as err:
                 print(util.get_line(node))
@@ -163,7 +163,7 @@ class JSONVisitor:
                     argument_text, os.strerror(err.errno))
                 self.diagnostics.append(Diagnostic.error(msg, util.get_line(node)))
 
-    def add_static_asset(self, path: PurePath) -> StaticAsset:
+    def add_static_asset(self, path: Path) -> StaticAsset:
         fileid, path = util.reroot_path(path, self.docpath, self.project_root)
         static_asset = StaticAsset.load(fileid.as_posix(), path)
         self.static_assets.add(static_asset)

@@ -1,9 +1,8 @@
 import enum
 import hashlib
 import re
-from pathlib import Path
+from pathlib import Path, PurePath
 from dataclasses import dataclass, field
-from pathlib import PurePath
 import toml
 from .flutter import checked, check_type
 from typing import Any, Callable, Dict, Set, List, Tuple, Optional, Union, Match
@@ -88,10 +87,14 @@ class StaticAsset:
     def __hash__(self) -> int:
         return hash(self.checksum)
 
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, StaticAsset) and \
+               self.checksum == other.checksum and \
+               self.fileid == other.fileid
+
     @classmethod
-    def load(cls, fileid: str, path: PurePath) -> 'StaticAsset':
-        with open(path, 'rb') as f:
-            data = f.read()
+    def load(cls, fileid: str, path: Path) -> 'StaticAsset':
+        data = path.read_bytes()
         asset_hash = hashlib.blake2b(data, digest_size=32).hexdigest()
         return cls(fileid, asset_hash, data)
 
@@ -129,7 +132,7 @@ class ProjectConfig:
         path = root
         while path.parent != path:
             try:
-                with open(path.joinpath('snooty.toml'), 'r') as f:
+                with path.joinpath('snooty.toml').open() as f:
                     data = toml.load(f)
                     data['root'] = root
                     result, diagnostics = check_type(ProjectConfig, data).render_constants()

@@ -6,7 +6,7 @@ from typing import cast, Container, Optional, Tuple, Iterator
 
 def reroot_path(filename: PurePath,
                 docpath: PurePath,
-                project_root: Path) -> Tuple[PurePath, PurePath]:
+                project_root: Path) -> Tuple[PurePath, Path]:
     """Files within a project may refer to other files. Return a canonical path
        relative to the project root."""
     if filename.is_absolute():
