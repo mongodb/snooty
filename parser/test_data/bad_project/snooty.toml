@@ -1,6 +1,0 @@
-name = "test_data"
-
-[constants]
-version = 3.4
-package_title = "{+version+}.tar.gz"
-invalid = "{+foo+}"
