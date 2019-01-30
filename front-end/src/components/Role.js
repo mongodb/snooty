@@ -10,6 +10,7 @@ export default class Role extends Component {
       dbcommand: (term) => `${this.base}/command/${term}/#dbcmd.${term}`,
       method: (term) => `${this.base}/method/${term}/#${term}`
     };
+    this.codeRoles = ['binary'];
   }
 
   roleRendering() {
@@ -20,8 +21,8 @@ export default class Role extends Component {
           { this.props.nodeData.label.value }
         </a>
       )
-    }
-    // role with interaction
+    } 
+    // roles with interaction
     else if (this.roleDataTypes[this.props.nodeData.name]) {
       const termModified = this.props.nodeData.target.replace('()', '').replace('$', '');
       const href = this.roleDataTypes[this.props.nodeData.name](termModified);
@@ -30,6 +31,22 @@ export default class Role extends Component {
           { this.props.nodeData.label }
         </a>
       )
+    } 
+    // binary case is unique (maybe others will be as well)
+    else if (this.codeRoles.includes(this.props.nodeData.name)) {
+      const termModified = this.props.nodeData.target.substr(this.props.nodeData.target.indexOf('.') + 1);
+      const href = `${this.base}/program/${termModified}/#${this.props.nodeData.target.replace('~', '')}`
+      return (
+        <a href={ href } className="reference external" onMouseEnter={ (e) => { this.props.modal(e, href) } }>
+          <code className="xref mongodb mongodb-binary docutils literal notranslate">
+            <span className="pre">
+              { termModified }
+            </span>
+          </code>
+        </a>
+      )
+    } else {
+      return <span>==Role not implemented: { this.props.nodeData.name } ==</span>
     }
     else if (this.props.nodeData.name === 'binary') {
       const termModified = this.props.nodeData.target.substr(this.props.nodeData.target.indexOf('.') + 1);

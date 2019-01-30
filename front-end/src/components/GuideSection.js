@@ -23,13 +23,6 @@ export default class GuideSection extends Component {
     };
   }
 
-  componentDidMount() {
-    /*this.setState({
-      showAllSteps: false,
-      showStepper: true
-    });*/
-  }
-
   updateTotalStepCount(total) {
     this.setState({
       totalStepsInProcedure: total

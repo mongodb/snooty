@@ -1,5 +1,6 @@
 ---
 pipeline:
+
   publish:
     image: plugins/ecr
     secrets: [ ecr_access_key, ecr_secret_key]
@@ -12,6 +13,14 @@ pipeline:
     when:
       branch: master
       event: push
+
+  trigger:  
+    image: plugins/downstream
+    server: https://drone.prod.mongodb.sh
+    secrets: [downstream_token]
+    fork: true
+    repositories:
+      - mongodb/docs-worker-pool
 
   deploy-staging:
     image: quay.io/ipedrazas/drone-helm
