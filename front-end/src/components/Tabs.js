@@ -5,7 +5,7 @@ export default class Tabs extends Component {
 
   constructor(props) {
     super(props);
-    this.props.addLanguages([...this.props.nodeData.children]);
+    this.props.addTabset([...this.props.nodeData.children]);
   }
 
   render() {

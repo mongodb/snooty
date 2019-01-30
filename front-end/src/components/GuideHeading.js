@@ -16,7 +16,7 @@ export default class GuideHeading extends Component {
           <a className="headerlink" href="#read-data-from-mongodb" title="Permalink to this headline">¶</a>
         </h1>
 
-        <div className="guide-prefs__deploy" style={ { display: 'none'} }>
+        <div className="guide-prefs__deploy">
           <div className="guide-prefs__caption">Deployment Type: <span className="show-current-deployment">local</span></div>
           <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="cloud">
             <li className="guide__pill guide__deploymentpill" data-tabid="cloud">cloud</li>

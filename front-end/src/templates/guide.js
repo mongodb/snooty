@@ -59,11 +59,15 @@ export default class Guide extends Component {
     });
   }
 
-  // this function gets an array of objects with language pill options
+  // this function gets an array of objects that is the tabset
   // and sets the state to this list in the correct order 
-  addLanguages(languages) {
+  addTabset(languages) {
     const languagesInGuide = languages.map(langObj => langObj.argument[0].value);
     const setLanguages = this.languageList.filter(langOpts => languagesInGuide.includes(langOpts[0]));
+    // TODO: do something for OS tabs and cloud/local tabs
+    if (!setLanguages || setLanguages.length === 0) {
+      return;
+    }
     this.setState({
       'languages': setLanguages,
       'activeLanguage': setLanguages[0]
@@ -158,7 +162,7 @@ export default class Guide extends Component {
                         admonitions={ this.admonitions }
                         refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
                         modal={ this.modalFetchData.bind(this) } 
-                        addLanguages={ this.addLanguages.bind(this) } 
+                        addTabset={ this.addTabset.bind(this) } 
                         activeLanguage={ this.state.activeLanguage }
                         stitchClient={ this.stitchClient } />
         )
@@ -183,7 +187,7 @@ export default class Guide extends Component {
                           admonitions={ this.admonitions }
                           refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
                           modal={ this.modalFetchData.bind(this) } 
-                          addLanguages={ this.addLanguages.bind(this) } 
+                          addTabset={ this.addTabset.bind(this) } 
                           activeLanguage={ this.state.activeLanguage }
                           stitchClient={ this.stitchClient } />
             <Modal modalProperties={ this.state } />
