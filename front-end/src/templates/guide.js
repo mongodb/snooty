@@ -162,11 +162,7 @@ export default class Guide extends Component {
                         admonitions={ this.admonitions }
                         refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
                         modal={ this.modalFetchData.bind(this) } 
-<<<<<<< HEAD
                         addTabset={ this.addTabset.bind(this) } 
-=======
-                        addLanguages={ this.addLanguages.bind(this) } 
->>>>>>> 20f831966df167e348ebd0ff9fdb327c2a0647de
                         activeLanguage={ this.state.activeLanguage }
                         stitchClient={ this.stitchClient } />
         )
@@ -191,11 +187,7 @@ export default class Guide extends Component {
                           admonitions={ this.admonitions }
                           refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
                           modal={ this.modalFetchData.bind(this) } 
-<<<<<<< HEAD
                           addTabset={ this.addTabset.bind(this) } 
-=======
-                          addLanguages={ this.addLanguages.bind(this) } 
->>>>>>> 20f831966df167e348ebd0ff9fdb327c2a0647de
                           activeLanguage={ this.state.activeLanguage }
                           stitchClient={ this.stitchClient } />
             <Modal modalProperties={ this.state } />
