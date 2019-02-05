@@ -13,6 +13,7 @@ export default class Guide extends Component {
     // get data from server
     this.sections = this.props.pageContext.__refDocMapping[this.props['*']].ast.children[0].children;
     this.languageList = this.props.pageContext.__languageList;
+    this.OSTabList = this.props.pageContext.__OSTabList;
     this.stitchId = this.props.pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
@@ -33,6 +34,8 @@ export default class Guide extends Component {
     this.state = {
       languages: [],
       activeLanguage: undefined,
+      OSTabs: [],
+      activeOSTab: undefined,
       modalPositionLeft: 0,
       modalPositionTop: 0,
       modalVisible: false,
@@ -59,24 +62,39 @@ export default class Guide extends Component {
     });
   }
 
-  // this function gets an array of objects that is the tabset
-  // and sets the state to this list in the correct order 
-  addTabset(languages) {
-    const languagesInGuide = languages.map(langObj => langObj.argument[0].value);
-    const setLanguages = this.languageList.filter(langOpts => languagesInGuide.includes(langOpts[0]));
-    // TODO: do something for OS tabs and cloud/local tabs
-    if (!setLanguages || setLanguages.length === 0) {
-      return;
-    }
+  createTabsetType(opts, setTabs) {
     this.setState({
-      'languages': setLanguages,
-      'activeLanguage': setLanguages[0]
+      [opts.type]: setTabs,
+      [opts.active]: setTabs[0]
     });
+  }
+
+  // this function gets an array of objects that compose some tabset
+  // currently only supports: language pills, OS tabs
+  // TODO: cloud/local
+  addTabset(languages) {
+    // language tabset
+    let tabsInGuide = languages.map(langObj => langObj.argument[0].value);
+    let setTabs = this.languageList.filter(langOpts => tabsInGuide.includes(langOpts[0]));
+    // OS tabset
+    if (!setTabs || setTabs.length === 0) {
+      setTabs = this.OSTabList.filter(langOpts => tabsInGuide.includes(langOpts[0]));
+      this.createTabsetType({type: 'OSTabs', 'active': 'activeOSTab'}, setTabs);
+    } else {
+      this.createTabsetType({type: 'languages', 'active': 'activeLanguage'}, setTabs);
+    }
+    return setTabs;
   }
 
   changeActiveLanguage(language) {
     this.setState({
       'activeLanguage': language
+    });
+  }
+
+  changeActiveOSTab(language) {
+    this.setState({
+      'activeOSTab': language
     });
   }
 
@@ -164,6 +182,9 @@ export default class Guide extends Component {
                         modal={ this.modalFetchData.bind(this) } 
                         addTabset={ this.addTabset.bind(this) } 
                         activeLanguage={ this.state.activeLanguage }
+                        OSTabs={ this.state.OSTabs }
+                        activeOSTab={ this.state.activeOSTab }
+                        changeActiveOSTab={ this.changeActiveOSTab.bind(this) }
                         stitchClient={ this.stitchClient } />
         )
       })
@@ -191,7 +212,9 @@ export default class Guide extends Component {
                           activeLanguage={ this.state.activeLanguage }
                           stitchClient={ this.stitchClient } />
             <Modal modalProperties={ this.state } />
-            { this.createSections() }
+            { 
+              this.createSections() 
+            }
             <div className="footer">
               <div className="copyright">
                 <p>© MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB, Inc.</p>

@@ -21,6 +21,12 @@ const LANGUAGES = [
   ['scala', 'Scala']
 ];
 
+const OSTABS = [
+  ['windows', 'Windows'],
+  ['macOS', 'macOS'],
+  ['linux', 'Linux']
+];
+
 // ENV vars
 const PREFIX = process.env.PREFIX.split('/');
 const STITCH_ID = process.env.STITCH_ID;
@@ -130,6 +136,7 @@ exports.createPages = ({ graphql, actions }) => {
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
             __languageList: LANGUAGES,
+            __OSTabList: OSTABS,
             __stitchID: STITCH_ID
           }
         });

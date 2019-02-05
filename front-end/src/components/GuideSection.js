@@ -58,6 +58,21 @@ export default class GuideSection extends Component {
                      showAllStepsText={ this.state.showAllStepsText } /> : ''
         }
         {
+          (this.props.guideSectionData.name === 'procedure' && this.props.OSTabs.length > 0) ? 
+            <ul className="tab-strip tab-strip--singleton" role="tablist">
+              {
+                this.props.OSTabs.map((langOpts, index) => {
+                  return <li className='tab-strip__element'
+                             data-tabid={ langOpts[0] } 
+                             role='tab'
+                             aria-selected={ (this.props.activeOSTab[0] === langOpts[0]) ? 'true' : 'false' }
+                             key={ index }
+                             onClick={ () => { this.props.changeActiveOSTab(langOpts) } }>{ langOpts[1] }</li>
+                })
+              }
+            </ul> : ''
+        }
+        {
           this.props.guideSectionData.children.map((child, index) => {
             return <ComponentFactory { ...this.props } 
                                       nodeData={ child } 

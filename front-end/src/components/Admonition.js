@@ -15,6 +15,13 @@ export default class Admonition extends Component {
         </div>
       )
     } else {
+      let children = null;
+      if (this.props.nodeData.children.length > 0) {
+        children = [...this.props.nodeData.children, ...this.props.nodeData.argument];
+      } else {
+        children = this.props.nodeData.argument.length > 0 ? this.props.nodeData.argument : this.props.nodeData.children;
+      }
+      console.log('Admonition about to render paragraph', this.props.nodeData, children);
       return (
         <div className={ (this.props.nodeData.name === 'tip') ? `admonition admonition-tip` : `admonition ${this.props.nodeData.name}` }>
           <p className="first admonition-title">{ this.props.nodeData.name }</p>
@@ -25,9 +32,7 @@ export default class Admonition extends Component {
               nodeData={ 
                 { 
                   type: 'paragraph',
-                  children: this.props.nodeData.children.length > 0 ? 
-                            [...this.props.nodeData.children[0].children, ...this.props.nodeData.argument] : 
-                            this.props.nodeData.argument 
+                  children: children
                 } 
               } />
           </section>
