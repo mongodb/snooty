@@ -1,6 +1,18 @@
 ---
 pipeline:
 
+  build:
+    image: node:10.10.0
+    commands:
+      - cd front-end/
+      - npm install
+
+  test:
+    image: node:10.10.0
+    commands:
+      - cd front-end/
+      - npm test
+
   publish:
     image: plugins/ecr
     secrets: [ ecr_access_key, ecr_secret_key]
