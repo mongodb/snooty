@@ -22,7 +22,6 @@ export default class Tabs extends Component {
           <div key={ index } style={ 
             { display: ((this.props[this.tabsetType] === undefined || this.props[this.tabsetType][0] === tab.argument[0].value)) ? 'block' : 'none' } 
           }>
-            <h3 style={ { color: 'green' } }>{ tab.argument[0].value } Code</h3>
             { 
               tab.children.length > 0 ? 
                 <ComponentFactory { ...this.props } nodeData={ tab.children[0] } key={ index } /> :
