@@ -1,60 +1,49 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Role extends Component {
   constructor() {
     super();
-    this.base = "https://docs.mongodb.com/manual/reference";
+    this.base = 'https://docs.mongodb.com/manual/reference';
     this.roleDataTypes = {
       query: term => `${this.base}/operator/query/${term}/#op._S_${term}`,
       dbcommand: term => `${this.base}/command/${term}/#dbcmd.${term}`,
-      method: term => `${this.base}/method/${term}/#${term}`
+      method: term => `${this.base}/method/${term}/#${term}`,
     };
-    this.codeRoles = ["binary"];
+    this.codeRoles = ['binary'];
   }
 
   roleRendering() {
+    const { modal, nodeData } = this.props;
     // normal link
-    if (this.props.nodeData.name === "doc") {
-      return (
-        <a href={this.props.nodeData.target}>
-          {this.props.nodeData.label.value}
-        </a>
-      );
+    if (nodeData.name === 'doc') {
+      return <a href={nodeData.target}>{nodeData.label.value}</a>;
     }
     // roles with interaction
-    if (this.roleDataTypes[this.props.nodeData.name]) {
-      const termModified = this.props.nodeData.target
-        .replace("()", "")
-        .replace("$", "");
-      const href = this.roleDataTypes[this.props.nodeData.name](termModified);
+    if (this.roleDataTypes[nodeData.name]) {
+      const termModified = nodeData.target.replace('()', '').replace('$', '');
+      const href = this.roleDataTypes[nodeData.name](termModified);
       return (
         <a
           href={href}
           onMouseEnter={e => {
-            this.props.modal(e, href);
+            modal(e, href);
           }}
         >
-          {this.props.nodeData.label}
+          {nodeData.label}
         </a>
       );
     }
     // binary case is unique (maybe others will be as well)
-    if (this.codeRoles.includes(this.props.nodeData.name)) {
-      const termModified = this.props.nodeData.target.substr(
-        this.props.nodeData.target.indexOf(".") + 1
-      );
-      const href = `${
-        this.base
-      }/program/${termModified}/#${this.props.nodeData.target.replace(
-        "~",
-        ""
-      )}`;
+    if (this.codeRoles.includes(nodeData.name)) {
+      const termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
+      const href = `${this.base}/program/${termModified}/#${nodeData.target.replace('~', '')}`;
       return (
         <a
           href={href}
           className="reference external"
           onMouseEnter={e => {
-            this.props.modal(e, href);
+            modal(e, href);
           }}
         >
           <code className="xref mongodb mongodb-binary docutils literal notranslate">
@@ -66,10 +55,8 @@ export default class Role extends Component {
     return (
       <span>
         ==Role not implemented:
-        {this.props.nodeData.name}
-{' '}
-==
-</span>
+        {nodeData.name} ==
+      </span>
     );
   }
 
@@ -77,3 +64,17 @@ export default class Role extends Component {
     return this.roleRendering();
   }
 }
+
+Role.propTypes = {
+  modal: PropTypes.func.isRequired,
+  nodeData: PropTypes.shape({
+    label: PropTypes.oneOfType([
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+      }),
+      PropTypes.string,
+    ]),
+    name: PropTypes.string.isRequired,
+    target: PropTypes.string.isRequired,
+  }).isRequired,
+};

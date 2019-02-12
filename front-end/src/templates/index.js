@@ -1,27 +1,24 @@
-import React, { Component } from "react";
-import Card from "../components/Card";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Card from '../components/Card';
 
 export default class Index extends Component {
   constructor(propsFromServer) {
     super(propsFromServer);
+    const { pageContext } = this.props;
     this.state = {
-      name: "Guides",
-      description: "Getting Started",
-      guides: this.props.pageContext.__refDocMapping.index.ast.children[3]
-        .children
+      name: 'Guides',
+      description: 'Getting Started',
+      guides: pageContext.__refDocMapping.index.ast.children[1].children[2].children,
+      // guides: pageContext.__refDocMapping.index.ast.children[3].children
     };
-    console.log(11, this.props.pageContext.__refDocMapping);
   }
 
   render() {
-    console.log(22, this.state.guides);
-    const allCards = this.state.guides.map((card, index) => (
-      <Card
-        card={card}
-        key={index}
-        cardId={index}
-        refDocMapping={this.props.pageContext.__refDocMapping}
-      />
+    const { description, guides, name } = this.state;
+    const { pageContext } = this.props;
+    const allCards = guides.map((card, index) => (
+      <Card card={card} key={index} cardId={index} refDocMapping={pageContext.__refDocMapping} />
     ));
     return (
       <div className="content">
@@ -29,19 +26,13 @@ export default class Index extends Component {
           <div className="section" id="guides">
             <div>
               <h1>
-                {this.state.name}
-                <a
-                  className="headerlink"
-                  href="#guides"
-                  title="Permalink to this headline"
-                >
+                {name}
+                <a className="headerlink" href="#guides" title="Permalink to this headline">
                   ¶
                 </a>
               </h1>
               <section className="guide-category">
-                <div className="guide-category__title guide-category__title--getting-started">
-                  {this.state.description}
-                </div>
+                <div className="guide-category__title guide-category__title--getting-started">{description}</div>
                 <div className="guide-category__guides">{allCards}</div>
               </section>
             </div>
@@ -51,3 +42,13 @@ export default class Index extends Component {
     );
   }
 }
+
+Index.propTypes = {
+  pageContext: PropTypes.shape({
+    __refDocMapping: PropTypes.shape({
+      index: PropTypes.shape({
+        ast: PropTypes.object,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+};

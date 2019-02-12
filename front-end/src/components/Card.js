@@ -1,50 +1,42 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Card extends Component {
   getTitle(val) {
-    if (this.props.refDocMapping[val] && this.props.refDocMapping[val].ast) {
-      return this.props.refDocMapping[val].ast.children[0].children[0]
-        .children[0].value;
+    const { refDocMapping } = this.props;
+    if (refDocMapping[val] && refDocMapping[val].ast) {
+      return refDocMapping[val].ast.children[0].children[0].children[0].value;
     }
-    return "Title not found";
+    return 'Title not found';
   }
 
   cardContent() {
-    console.log(88, this.props.card);
+    const { card } = this.props;
     const innerContent = (
-      <section style={{ height: "100%" }}>
+      <section style={{ height: '100%' }}>
         <div className="guide__title">
-          {this.props.card.name === "card"
-            ? this.getTitle(this.props.card.argument[0].value)
-            : this.props.card.argument[0].value}
+          {card.name === 'card' ? this.getTitle(card.argument[0].value) : card.argument[0].value}
         </div>
         <ul className="guide__body">
-          {this.props.card.name === "card"
-            ? ""
-            : this.props.card.children[0].children.map((listItem, index) => (
+          {card.name === 'multi-card' &&
+            card.children[0].children.map((listItem, index) => (
               <li className="guide__entry" key={index}>
-                  <a href={listItem.children[0].children[0].value}>
+                <a href={listItem.children[0].children[0].value}>
                   {this.getTitle(listItem.children[0].children[0].value)}
                 </a>
-                </li>
-              ))}
+              </li>
+            ))}
         </ul>
         <ul className="guide__pills" />
-        <div className="guide__time">
-          {this.props.card.name === "card" ? "5min" : ""}
-        </div>
+        {/* TODO: display accurate time estimate for guide */}
+        {card.name === 'card' && <div className="guide__time">{card.name === 'card' && '5min'}</div>}
       </section>
     );
-    if (this.props.card.name === "multi-card") {
-      return (
-        <div className="guide guide--jumbo guide--expanded">{innerContent}</div>
-      );
+    if (card.name === 'multi-card') {
+      return <div className="guide guide--jumbo guide--expanded">{innerContent}</div>;
     }
     return (
-      <a
-        href={this.props.card.argument[0].value}
-        className="guide guide--regular"
-      >
+      <a href={card.argument[0].value} className="guide guide--regular">
         {innerContent}
       </a>
     );
@@ -54,3 +46,20 @@ export default class Card extends Component {
     return this.cardContent();
   }
 }
+
+Card.propTypes = {
+  card: PropTypes.shape({
+    argument: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string,
+      })
+    ),
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        children: PropTypes.array,
+      })
+    ),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
+};

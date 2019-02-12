@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ComponentFactory from "./ComponentFactory";
-import Stepper from "./Stepper";
-import URIForm from "./URIForm";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
+import Stepper from './Stepper';
 
 export default class GuideSection extends Component {
   constructor() {
@@ -9,76 +9,84 @@ export default class GuideSection extends Component {
     this.state = {
       showAllSteps: true,
       showStepper: false,
-      showAllStepsText: "Expand All Steps",
+      showAllStepsText: 'Expand All Steps',
       showStepIndex: 0,
-      totalStepsInProcedure: 1
+      totalStepsInProcedure: 1,
     };
     this.nameMapping = {
-      prerequisites: "What You’ll Need",
-      check_your_environment: "Check Your Environment",
-      procedure: "Procedure",
-      summary: "Summary",
-      whats_next: "What’s Next"
+      prerequisites: 'What You’ll Need',
+      check_your_environment: 'Check Your Environment',
+      procedure: 'Procedure',
+      summary: 'Summary',
+      whats_next: 'What’s Next',
     };
+
+    this.updateVisibleStep = this.updateVisibleStep.bind(this);
+    this.toggleAllSteps = this.toggleAllSteps.bind(this);
+    this.updateTotalStepCount = this.updateTotalStepCount.bind(this);
   }
 
   updateTotalStepCount(total) {
     this.setState({
-      totalStepsInProcedure: total
+      totalStepsInProcedure: total,
     });
   }
 
   updateVisibleStep(newStep) {
     this.setState({
-      showStepIndex: newStep
+      showStepIndex: newStep,
     });
   }
 
   toggleAllSteps() {
+    const { showAllSteps } = this.state;
     this.setState({
-      showAllSteps: !this.state.showAllSteps,
-      showAllStepsText: this.state.showAllSteps
-        ? "Expand All Steps"
-        : "Collapse All Steps"
+      showAllSteps: !showAllSteps,
+      showAllStepsText: showAllSteps ? 'Expand All Steps' : 'Collapse All Steps',
     });
   }
 
   render() {
+    const {
+      guideSectionData: { children, name },
+    } = this.props;
+    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure } = this.state;
+
     return (
-      <div className="section" id={this.props.guideSectionData.name}>
+      <div className="section" id={name}>
         <h2>
-          {this.nameMapping[this.props.guideSectionData.name]}
-          <a
-            className="headerlink"
-            href={`#${this.props.guideSectionData.name}`}
-            title="Permalink to this headline"
-          >
+          {this.nameMapping[name]}
+          <a className="headerlink" href={`#${name}`} title="Permalink to this headline">
             ¶
           </a>
         </h2>
-        {this.props.guideSectionData.name === "procedure" &&
-        this.state.showStepper ? (
+        {name === 'procedure' && showStepper && (
           <Stepper
-            totalStepsInProcedure={this.state.totalStepsInProcedure}
-            showStepIndex={this.state.showStepIndex}
-            updateVisibleStep={this.updateVisibleStep.bind(this)}
-            toggleAllSteps={this.toggleAllSteps.bind(this)}
-            showAllStepsText={this.state.showAllStepsText}
+            totalStepsInProcedure={totalStepsInProcedure}
+            showStepIndex={showStepIndex}
+            updateVisibleStep={this.updateVisibleStep}
+            toggleAllSteps={this.toggleAllSteps}
+            showAllStepsText={showAllStepsText}
           />
-        ) : (
-          ""
         )}
-        {this.props.guideSectionData.children.map((child, index) => (
+        {children.map((child, index) => (
           <ComponentFactory
             {...this.props}
             nodeData={child}
             key={index}
-            showAllSteps={this.state.showAllSteps}
-            showStepIndex={this.state.showStepIndex}
-            updateTotalStepCount={this.updateTotalStepCount.bind(this)}
+            showAllSteps={showAllSteps}
+            showStepIndex={showStepIndex}
+            updateTotalStepCount={this.updateTotalStepCount}
           />
         ))}
       </div>
     );
   }
 }
+
+GuideSection.propTypes = {
+  guideSectionData: PropTypes.shape({
+    children: PropTypes.array.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};

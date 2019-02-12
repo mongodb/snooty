@@ -1,30 +1,28 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Stitch, AnonymousCredential } from "mongodb-stitch-browser-sdk";
-import TOC from "../components/TOC";
-import GuideSection from "../components/GuideSection";
-import GuideHeading from "../components/GuideHeading";
-import Modal from "../components/Modal";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import TOC from '../components/TOC';
+import GuideSection from '../components/GuideSection';
+import GuideHeading from '../components/GuideHeading';
+import Modal from '../components/Modal';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
     super(propsFromServer);
+
+    const { pageContext } = this.props;
+
     // get data from server
-    this.sections = this.props.pageContext.__refDocMapping[
-      this.props["*"]
-    ].ast.children[0].children;
-    this.languageList = this.props.pageContext.__languageList;
-    this.stitchId = this.props.pageContext.__stitchID;
+    this.sections =
+      pageContext.__refDocMapping[
+        this.props['*'] // eslint-disable-line react/destructuring-assignment
+      ].ast.children[0].children;
+    this.languageList = pageContext.__languageList;
+    this.stitchId = pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
-    this.validNames = [
-      "prerequisites",
-      "check_your_environment",
-      "procedure",
-      "summary",
-      "whats_next"
-    ];
-    this.admonitions = ["admonition", "note", "tip", "important", "warning"];
+    this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next'];
+    this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       languages: [],
       activeLanguage: undefined,
@@ -33,11 +31,13 @@ export default class Guide extends Component {
       modalVisible: false,
       modalContent: {
         text: null,
-        example: null
-      }
+        example: null,
+      },
     };
-    console.log(2222, this.props.pageContext.__refDocMapping);
-    console.log(4544, this.sections);
+
+    this.addLanguages = this.addLanguages.bind(this);
+    this.changeActiveLanguage = this.changeActiveLanguage.bind(this);
+    this.modalFetchData = this.modalFetchData.bind(this);
   }
 
   componentDidMount() {
@@ -51,37 +51,30 @@ export default class Guide extends Component {
     this.stitchClient = Stitch.hasAppClient(appName)
       ? Stitch.defaultAppClient
       : Stitch.initializeDefaultAppClient(appName);
-    this.stitchClient.auth
-      .loginWithCredential(new AnonymousCredential())
-      .then(user => {
-        console.log("logged into stitch");
-      });
+    this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+      console.log(`logged in as user ${user.id}`);
+    });
   }
 
   // this function gets an array of objects with language pill options
   // and sets the state to this list in the correct order
   addLanguages(languages) {
-    const languagesInGuide = languages.map(
-      langObj => langObj.argument[0].value
-    );
-    const setLanguages = this.languageList.filter(langOpts =>
-      languagesInGuide.includes(langOpts[0])
-    );
+    const languagesInGuide = languages.map(langObj => langObj.argument[0].value);
+    const setLanguages = this.languageList.filter(langOpts => languagesInGuide.includes(langOpts[0]));
     this.setState({
       languages: setLanguages,
-      activeLanguage: setLanguages[0]
+      activeLanguage: setLanguages[0],
     });
   }
 
   changeActiveLanguage(language) {
     this.setState({
-      activeLanguage: language
+      activeLanguage: language,
     });
   }
 
   modalShow(event) {
-    const newX =
-      event.target.offsetLeft + Math.floor(event.target.offsetWidth / 2);
+    const newX = event.target.offsetLeft + Math.floor(event.target.offsetWidth / 2);
     let newY;
     if (event.screenY < 400) {
       newY = event.target.offsetTop + event.target.offsetHeight;
@@ -91,33 +84,34 @@ export default class Guide extends Component {
     this.setState({
       modalVisible: true,
       modalPositionLeft: newX,
-      modalPositionTop: newY
+      modalPositionTop: newY,
     });
   }
 
   modalHide() {
     this.setState({
-      modalVisible: false
+      modalVisible: false,
     });
   }
 
   // TODO: use css instead??
   // https://codepen.io/anon/pen/YJEaZo
-  modalBeginHidingInterval() {
+  modalBeginHidingInterval(refElement) {
     let event;
-    const modalContainer = document.getElementsByClassName("__ref-modal")[0];
+    const modalContainer = document.getElementsByClassName('__ref-modal')[0];
     const saveEvent = e => {
       event = e || window.event;
     };
     // watch mouse movements globally
-    document.addEventListener("mousemove", saveEvent);
+    document.addEventListener('mousemove', saveEvent);
     // if not hovered over modal (or any element within the modal) remove it and end event listener
     const interval = setInterval(() => {
       if (
-        event.target.nodeName !== "A" &&
-        !modalContainer.contains(event.target)
+        event.target.nodeName !== 'A' &&
+        !modalContainer.contains(event.target) &&
+        !refElement.contains(event.target)
       ) {
-        document.removeEventListener("mousemove", saveEvent);
+        document.removeEventListener('mousemove', saveEvent);
         clearInterval(interval);
         this.modalHide();
       }
@@ -128,43 +122,41 @@ export default class Guide extends Component {
   // first fetch the data and then show the modal with the content
   modalFetchData(event, href) {
     event.persist();
-    console.log("going to get url", href);
-    const findHashPart = href.substr(href.indexOf("#") + 1);
+    const findHashPart = href.substr(href.indexOf('#') + 1);
     let contentObj;
-    this.stitchClient
-      .callFunction("fetchReferenceUrlContent", [href])
-      .then(response => {
-        if (!response) {
-          contentObj = {
-            text: "Error fetching data..."
-          };
-        } else {
-          const parsed = this.DOMParser.parseFromString(response, "text/html");
-          const mainContainer = parsed.getElementById(findHashPart)
-            ? parsed.getElementById(findHashPart).nextElementSibling
-            : null;
-          contentObj = {
-            text: mainContainer.getElementsByTagName("p")[0]
-              ? mainContainer.getElementsByTagName("p")[0].textContent.trim()
-              : "FIX: no content found",
-            example: "no code example"
-          };
-          // if syntax example is within first container
-          if (mainContainer.getElementsByClassName("button-code-block")[0]) {
-            contentObj.example = mainContainer
-              .getElementsByClassName("copyable-code-block")[0]
-              .textContent.trim();
-          }
+    this.stitchClient.callFunction('fetchReferenceUrlContent', [href]).then(response => {
+      if (!response) {
+        contentObj = {
+          text: 'Error fetching data...',
+        };
+      } else {
+        const parsed = this.DOMParser.parseFromString(response, 'text/html');
+        const mainContainer = parsed.getElementById(findHashPart)
+          ? parsed.getElementById(findHashPart).nextElementSibling
+          : null;
+        contentObj = {
+          text: mainContainer.getElementsByTagName('p')[0]
+            ? mainContainer.getElementsByTagName('p')[0].textContent.trim()
+            : 'FIX: no content found',
+          example: 'no code example',
+        };
+        // if syntax example is within first container
+        if (mainContainer.getElementsByClassName('button-code-block')[0]) {
+          contentObj.example = mainContainer.getElementsByClassName('copyable-code-block')[0].textContent.trim();
         }
-        this.setState({
-          modalContent: contentObj
-        });
+      }
+      this.setState({
+        modalContent: contentObj,
       });
+    });
     this.modalShow(event);
-    this.modalBeginHidingInterval();
+    const refElement = event.target;
+    this.modalBeginHidingInterval(refElement);
   }
 
   createSections() {
+    const { pageContext } = this.props;
+    const { activeLanguage } = this.state;
     return this.sections
       .filter(section => this.validNames.includes(section.name))
       .map((section, index) => (
@@ -172,20 +164,19 @@ export default class Guide extends Component {
           guideSectionData={section}
           key={index}
           admonitions={this.admonitions}
-          refDocMapping={
-            this.props && this.props.pageContext
-              ? this.props.pageContext.__refDocMapping
-              : {}
-          }
-          modal={this.modalFetchData.bind(this)}
-          addLanguages={this.addLanguages.bind(this)}
-          activeLanguage={this.state.activeLanguage}
+          refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+          modal={this.modalFetchData}
+          addLanguages={this.addLanguages}
+          activeLanguage={activeLanguage}
           stitchClient={this.stitchClient}
         />
       ));
   }
 
   render() {
+    const { pageContext } = this.props;
+    const { activeLanguage, languages, modalContent, modalPositionLeft, modalPositionTop, modalVisible } = this.state;
+
     return (
       <div className="content">
         <TOC />
@@ -194,35 +185,34 @@ export default class Guide extends Component {
           <div className="body" data-pagename="server/read">
             <ul className="breadcrumbs">
               <li className="breadcrumbs__bc">
-                <a href="/">MongoDB Guides</a>
-{' '}
-&gt;
-{" "}
+                <a href="/">MongoDB Guides</a> &gt;{' '}
               </li>
             </ul>
             <GuideHeading
               sections={this.sections}
-              languages={this.state.languages}
-              activeLanguage={this.state.activeLanguage}
-              changeActiveLanguage={this.changeActiveLanguage.bind(this)}
+              languages={languages}
+              activeLanguage={activeLanguage}
+              changeActiveLanguage={this.changeActiveLanguage}
               admonitions={this.admonitions}
-              refDocMapping={
-                this.props && this.props.pageContext
-                  ? this.props.pageContext.__refDocMapping
-                  : {}
-              }
-              modal={this.modalFetchData.bind(this)}
-              addLanguages={this.addLanguages.bind(this)}
-              activeLanguage={this.state.activeLanguage}
+              refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+              modal={this.modalFetchData}
+              addLanguages={this.addLanguages}
               stitchClient={this.stitchClient}
             />
-            <Modal modalProperties={this.state} />
+            <Modal
+              modalProperties={{
+                modalContent,
+                modalPositionLeft,
+                modalPositionTop,
+                modalVisible,
+              }}
+            />
             {this.createSections()}
             <div className="footer">
               <div className="copyright">
                 <p>
-                  © MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo
-                  are registered trademarks of MongoDB, Inc.
+                  © MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB,
+                  Inc.
                 </p>
               </div>
             </div>
@@ -232,3 +222,12 @@ export default class Guide extends Component {
     );
   }
 }
+
+Guide.propTypes = {
+  '*': PropTypes.string.isRequired,
+  pageContext: PropTypes.shape({
+    __languageList: PropTypes.arrayOf(PropTypes.array).isRequired,
+    __refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
+    __stitchID: PropTypes.string.isRequired,
+  }).isRequired,
+};

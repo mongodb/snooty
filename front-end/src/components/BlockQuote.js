@@ -1,14 +1,22 @@
-import React, { Component } from "react";
-import ComponentFactory from "./ComponentFactory";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 
-export default class BlockQuote extends Component {
-  render() {
-    return (
-      <section>
-        {this.props.nodeData.children.map((element, index) => (
-          <ComponentFactory {...this.props} nodeData={element} key={index} />
-        ))}
-      </section>
-    );
-  }
-}
+const BlockQuote = props => {
+  const { nodeData } = props;
+  return (
+    <section>
+      {nodeData.children.map((element, index) => (
+        <ComponentFactory {...props} nodeData={element} key={index} />
+      ))}
+    </section>
+  );
+};
+
+BlockQuote.propTypes = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.array.isRequired,
+  }).isRequired,
+};
+
+export default BlockQuote;

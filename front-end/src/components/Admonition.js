@@ -1,62 +1,61 @@
-import React, { Component } from "react";
-import ComponentFactory from "./ComponentFactory";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 
-export default class Admonition extends Component {
-  // backwards compatible css classnames
-  admonitionRendering() {
-    if (this.props.nodeData.name === "admonition") {
-      return (
-        <div
-          className={`admonition admonition-${this.props.nodeData.argument[0].value
-            .toLowerCase()
-            .replace(/\s/g, "-")}`}
-        >
-          <p className="first admonition-title">
-            {this.props.nodeData.argument[0].value}
-          </p>
+const Admonition = props => {
+  const { nodeData } = props;
+  return (
+    <React.Fragment>
+      {nodeData.name === 'admonition' ? (
+        <div className={`admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`}>
+          <p className="first admonition-title">{nodeData.argument[0].value}</p>
           <section>
             <ComponentFactory
-              {...this.props}
+              {...props}
               nodeData={{
-                type: "paragraph",
-                children: this.props.nodeData.children[0].children
+                type: 'paragraph',
+                children: nodeData.children[0].children,
               }}
               admonition
             />
           </section>
         </div>
-      );
-    }
-    return (
-      <div
-        className={
-          this.props.nodeData.name === "tip"
-            ? "admonition admonition-tip"
-            : `admonition ${this.props.nodeData.name}`
-        }
-      >
-        <p className="first admonition-title">{this.props.nodeData.name}</p>
-        <section>
-          <ComponentFactory
-            {...this.props}
-            admonition
-            nodeData={{
-              type: "paragraph",
-              children:
-                this.props.nodeData.children.length > 0
-                  ? [
-                      ...this.props.nodeData.children[0].children,
-                      ...this.props.nodeData.argument
-                    ]
-                  : this.props.nodeData.argument
-            }}
-          />
-        </section>
-      </div>
-    );
-  }
+      ) : (
+        <div className={['admonition', `${nodeData.name === 'tip' ? 'admonition-tip' : nodeData.name}`].join(' ')}>
+          <p className="first admonition-title">{nodeData.name}</p>
+          <section>
+            <ComponentFactory
+              {...props}
+              admonition
+              nodeData={{
+                type: 'paragraph',
+                children:
+                  nodeData.children.length > 0
+                    ? [...nodeData.children[0].children, ...nodeData.argument]
+                    : nodeData.argument,
+              }}
+            />
+          </section>
+        </div>
+      )}
+    </React.Fragment>
+  );
+};
 
-  render() {
-    return this.admonitionRendering();
-  }
-}
+Admonition.propTypes = {
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        children: PropTypes.array,
+      })
+    ),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default Admonition;

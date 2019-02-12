@@ -1,17 +1,25 @@
-import React, { Component } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Figure extends Component {
-  render() {
-    return (
-      <img
-        src={this.props.nodeData.argument[0].value}
-        alt={
-          this.props.nodeData.options.alt
-            ? this.props.nodeData.options.alt
-            : this.props.nodeData.argument[0].value
-        }
-        width="50%"
-      />
-    );
-  }
-}
+const Figure = ({ nodeData }) => (
+  <img
+    src={nodeData.argument[0].value}
+    alt={nodeData.options.alt ? nodeData.options.alt : nodeData.argument[0].value}
+    width="50%"
+  />
+);
+
+Figure.propTypes = {
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    options: PropTypes.shape({
+      alt: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+};
+
+export default Figure;
