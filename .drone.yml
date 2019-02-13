@@ -13,6 +13,15 @@ pipeline:
       - cd front-end/
       - npm test
 
+  lint:
+    image: node:10.10.0
+    commands:
+      - cd front-end/
+      - npm run lint
+    when:
+      branch:
+        exclude: [ master ]
+
   publish:
     image: plugins/ecr
     secrets: [ ecr_access_key, ecr_secret_key]
@@ -51,18 +60,3 @@ pipeline:
     when:
       branch: master
       event: push
-
-  build:
-    image: node:10.10.0
-    commands:
-      - cd front-end/
-      - npm install
-
-  lint:
-    image: node:10.10.0
-    commands:
-      - cd front-end/
-      - npm run lint
-    when:
-      branch:
-        exclude: [ master ]
