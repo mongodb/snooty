@@ -54,6 +54,11 @@ export default class ComponentFactory extends Component {
     if (!ComponentType) {
       return <span>==Not implemented: { type }, { name } ==</span>
     }
+
+    if (ComponentType === URIWriter) {
+      return <ComponentType key={this.props.templateType} {...this.props} />
+    }
+
     return <ComponentType { ...this.props } />
   }
 
