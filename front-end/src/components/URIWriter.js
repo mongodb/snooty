@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-const TEMPLATE_TYPE_SELF_MANAGED = 'local MongoDB';
-const TEMPLATE_TYPE_REPLICA_SET = 'local MongoDB with replica set';
-const TEMPLATE_TYPE_ATLAS_36 = 'Atlas (Cloud) v. 3.6';
-const TEMPLATE_TYPE_ATLAS_34 = 'Atlas (Cloud) v. 3.4';
-const TEMPLATE_TYPE_ATLAS = 'Atlas (Cloud)';
+export const TEMPLATE_TYPE_SELF_MANAGED = 'local MongoDB';
+export const TEMPLATE_TYPE_REPLICA_SET = 'local MongoDB with replica set';
+export const TEMPLATE_TYPE_ATLAS_36 = 'Atlas (Cloud) v. 3.6';
+export const TEMPLATE_TYPE_ATLAS_34 = 'Atlas (Cloud) v. 3.4';
+export const TEMPLATE_TYPE_ATLAS = 'Atlas (Cloud)';
 
 const LOCAL_ENVS = [TEMPLATE_TYPE_SELF_MANAGED, TEMPLATE_TYPE_REPLICA_SET];
 

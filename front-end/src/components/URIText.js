@@ -1,15 +1,16 @@
 import React from 'react';
+import {
+  TEMPLATE_TYPE_SELF_MANAGED,
+  TEMPLATE_TYPE_REPLICA_SET,
+  TEMPLATE_TYPE_ATLAS_36,
+  TEMPLATE_TYPE_ATLAS_34,
+  TEMPLATE_TYPE_ATLAS
+} from './URIWriter';
 
-const TEMPLATE_TYPE_SELF_MANAGED = 'local MongoDB';
-const TEMPLATE_TYPE_REPLICA_SET = 'local MongoDB with replica set';
-const TEMPLATE_TYPE_ATLAS_36 = 'Atlas (Cloud) v. 3.6';
-const TEMPLATE_TYPE_ATLAS_34 = 'Atlas (Cloud) v. 3.4';
-const TEMPLATE_TYPE_ATLAS = 'Atlas (Cloud)';
-
-const URI_PLACEHOLDER = '<URISTRING>';
-const USERNAME_PLACEHOLDER = '<USERNAME>';
-const URISTRING_SHELL_PLACEHOLDER = '<URISTRING_SHELL>';
-const URISTRING_SHELL_NOUSER_PLACEHOLDER = '<URISTRING_SHELL_NOUSER>';
+export const URI_PLACEHOLDER = '<URISTRING>';
+export const USERNAME_PLACEHOLDER = '<USERNAME>';
+export const URISTRING_SHELL_PLACEHOLDER = '<URISTRING_SHELL>';
+export const URISTRING_SHELL_NOUSER_PLACEHOLDER = '<URISTRING_SHELL_NOUSER>';
 
 const TEMPLATE_OPTIONS = {
   [TEMPLATE_TYPE_SELF_MANAGED]: [
@@ -51,11 +52,11 @@ const TEMPLATE_OPTIONS = {
   ],
 }
 
-const URIText = ({ value, templateType, uri }) => {
+function URIText({ value, templateType, uri }) {
   return replacePlaceholderWithURI(value, templateType, uri);
 }
 
-const replacePlaceholderWithURI = (value, templateType, uri) => {
+function replacePlaceholderWithURI(value, templateType, uri) {
   return value
     .replace(URI_PLACEHOLDER, generateURI(uri, templateType, 'template'))
     .replace(USERNAME_PLACEHOLDER, uri.username || '$[username]')
@@ -63,7 +64,7 @@ const replacePlaceholderWithURI = (value, templateType, uri) => {
     .replace(URISTRING_SHELL_NOUSER_PLACEHOLDER, generateURI(uri, templateType, 'templatePasswordRedactedShell'));
 }
 
-const optionStringifier = (options, uri) => {
+function optionStringifier(options, uri) {
   const paramJoinCharacter = '&';
   let optionParams = [];
   options.forEach(({ name, type, value }) => {
@@ -76,7 +77,7 @@ const optionStringifier = (options, uri) => {
   return optionParams.join(paramJoinCharacter);
 }
 
-const generateURI = (uri, templateName, templateType) => {
+function generateURI(uri, templateName, templateType) {
   if (uri.env) {
     templateName = uri.env;
   } else if (templateName === TEMPLATE_TYPE_ATLAS) {
@@ -91,7 +92,7 @@ const generateURI = (uri, templateName, templateType) => {
   let hostlist = '$[hostlist]';
   if (uri.hostlist && Object.values(uri.hostlist).length > 0) {
     hostlist = Object.values(uri.hostlist);
-    hostlist.filter(host => host !== '');
+    hostlist = hostlist.filter(host => host !== '');
   }
 
   const TEMPLATES = {

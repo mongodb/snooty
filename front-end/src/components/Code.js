@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import URIText from './URIText.js';
+import URIText, {
+  URI_PLACEHOLDER,
+  USERNAME_PLACEHOLDER,
+  URISTRING_SHELL_PLACEHOLDER,
+  URISTRING_SHELL_NOUSER_PLACEHOLDER,
+} from './URIText.js';
 
 const URI_PLACEHOLDERS = [
-  '<URISTRING>',
-  '<USERNAME>',
-  '<URISTRING_SHELL>',
-  '<URISTRING_SHELL_NOUSER>',
+  URI_PLACEHOLDER,
+  USERNAME_PLACEHOLDER,
+  URISTRING_SHELL_PLACEHOLDER,
+  URISTRING_SHELL_NOUSER_PLACEHOLDER,
 ];
 
 export default class Code extends Component {
@@ -36,5 +41,4 @@ export default class Code extends Component {
       </div>
     )
   }
-
 }

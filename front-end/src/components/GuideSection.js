@@ -73,7 +73,7 @@ export default class GuideSection extends Component {
             return <ComponentFactory { ...this.props } 
                                       nodeData={ child } 
                                       key={ index } 
-                                      handleUpdateURIWriter={this.handleUpdateURIWriter.bind(this)}
+                                      handleUpdateURIWriter={ this.handleUpdateURIWriter.bind(this) }
                                       showAllSteps={ this.state.showAllSteps } 
                                       showStepIndex={ this.state.showStepIndex }
                                       templateType={ this.state.templateType }
