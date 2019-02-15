@@ -20,31 +20,27 @@ export default class GuideSection extends Component {
       summary: 'Summary',
       whats_next: 'What’s Next',
     };
-
-    this.updateVisibleStep = this.updateVisibleStep.bind(this);
-    this.toggleAllSteps = this.toggleAllSteps.bind(this);
-    this.updateTotalStepCount = this.updateTotalStepCount.bind(this);
   }
 
-  updateTotalStepCount(total) {
+  updateTotalStepCount = total => {
     this.setState({
       totalStepsInProcedure: total,
     });
-  }
+  };
 
-  updateVisibleStep(newStep) {
+  updateVisibleStep = newStep => {
     this.setState({
       showStepIndex: newStep,
     });
-  }
+  };
 
-  toggleAllSteps() {
+  toggleAllSteps = () => {
     const { showAllSteps } = this.state;
     this.setState({
       showAllSteps: !showAllSteps,
       showAllStepsText: showAllSteps ? 'Expand All Steps' : 'Collapse All Steps',
     });
-  }
+  };
 
   render() {
     const {

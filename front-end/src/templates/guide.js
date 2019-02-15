@@ -34,10 +34,6 @@ export default class Guide extends Component {
         example: null,
       },
     };
-
-    this.addLanguages = this.addLanguages.bind(this);
-    this.changeActiveLanguage = this.changeActiveLanguage.bind(this);
-    this.modalFetchData = this.modalFetchData.bind(this);
   }
 
   componentDidMount() {
@@ -58,20 +54,56 @@ export default class Guide extends Component {
 
   // this function gets an array of objects with language pill options
   // and sets the state to this list in the correct order
-  addLanguages(languages) {
+  addLanguages = languages => {
     const languagesInGuide = languages.map(langObj => langObj.argument[0].value);
     const setLanguages = this.languageList.filter(langOpts => languagesInGuide.includes(langOpts[0]));
     this.setState({
       languages: setLanguages,
       activeLanguage: setLanguages[0],
     });
-  }
+  };
 
-  changeActiveLanguage(language) {
+  changeActiveLanguage = language => {
     this.setState({
       activeLanguage: language,
     });
-  }
+  };
+
+  // when a user hovers over a specific role
+  // first fetch the data and then show the modal with the content
+  modalFetchData = (event, href) => {
+    event.persist();
+    const findHashPart = href.substr(href.indexOf('#') + 1);
+    let contentObj;
+    this.stitchClient.callFunction('fetchReferenceUrlContent', [href]).then(response => {
+      if (!response) {
+        contentObj = {
+          text: 'Error fetching data...',
+        };
+      } else {
+        const parsed = this.DOMParser.parseFromString(response, 'text/html');
+        const mainContainer = parsed.getElementById(findHashPart)
+          ? parsed.getElementById(findHashPart).nextElementSibling
+          : null;
+        contentObj = {
+          text: mainContainer.getElementsByTagName('p')[0]
+            ? mainContainer.getElementsByTagName('p')[0].textContent.trim()
+            : 'FIX: no content found',
+          example: 'no code example',
+        };
+        // if syntax example is within first container
+        if (mainContainer.getElementsByClassName('button-code-block')[0]) {
+          contentObj.example = mainContainer.getElementsByClassName('copyable-code-block')[0].textContent.trim();
+        }
+      }
+      this.setState({
+        modalContent: contentObj,
+      });
+    });
+    this.modalShow(event);
+    const refElement = event.target;
+    this.modalBeginHidingInterval(refElement);
+  };
 
   modalShow(event) {
     const newX = event.target.offsetLeft + Math.floor(event.target.offsetWidth / 2);
@@ -116,42 +148,6 @@ export default class Guide extends Component {
         this.modalHide();
       }
     }, 1000);
-  }
-
-  // when a user hovers over a specific role
-  // first fetch the data and then show the modal with the content
-  modalFetchData(event, href) {
-    event.persist();
-    const findHashPart = href.substr(href.indexOf('#') + 1);
-    let contentObj;
-    this.stitchClient.callFunction('fetchReferenceUrlContent', [href]).then(response => {
-      if (!response) {
-        contentObj = {
-          text: 'Error fetching data...',
-        };
-      } else {
-        const parsed = this.DOMParser.parseFromString(response, 'text/html');
-        const mainContainer = parsed.getElementById(findHashPart)
-          ? parsed.getElementById(findHashPart).nextElementSibling
-          : null;
-        contentObj = {
-          text: mainContainer.getElementsByTagName('p')[0]
-            ? mainContainer.getElementsByTagName('p')[0].textContent.trim()
-            : 'FIX: no content found',
-          example: 'no code example',
-        };
-        // if syntax example is within first container
-        if (mainContainer.getElementsByClassName('button-code-block')[0]) {
-          contentObj.example = mainContainer.getElementsByClassName('copyable-code-block')[0].textContent.trim();
-        }
-      }
-      this.setState({
-        modalContent: contentObj,
-      });
-    });
-    this.modalShow(event);
-    const refElement = event.target;
-    this.modalBeginHidingInterval(refElement);
   }
 
   createSections() {
