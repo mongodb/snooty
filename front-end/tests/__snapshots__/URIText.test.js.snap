@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cloud (MongoDB version 3.4) when called without a placeholder returns the original string 1`] = `"This is the body text"`;
+
+exports[`Cloud (MongoDB version 3.4) when there are multiple placeholders replaces all placeholders 1`] = `
+"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?replicaSet=$[replicaSet]&authSource=admin&ssl=true\\")
+        username is myUsername
+        shell string (mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?replicaSet=$[replicaSet] --ssl --authenticationDatabase admin --username myUsername --password $[password])
+        without password (mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?replicaSet=$[replicaSet] --ssl --authenticationDatabase admin --username myUsername --password)"
+`;
+
+exports[`Cloud (MongoDB version 3.4) when there is a <URISTRNG> placeholder replaces the placeholder 1`] = `"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?replicaSet=$[replicaSet]&authSource=admin&ssl=true\\")"`;
+
+exports[`Cloud (unspecified version) when called without a placeholder returns the original string 1`] = `"This is the body text"`;
+
+exports[`Cloud (unspecified version) when there are multiple placeholders replaces all placeholders 1`] = `
+"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8&authSource=admin&ssl=true\\")
+        username is myUsername
+        shell string (mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8 --ssl --authenticationDatabase admin --username myUsername --password $[password])
+        without password (mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8 --ssl --authenticationDatabase admin --username myUsername --password)"
+`;
+
+exports[`Cloud (unspecified version) when there is a <URISTRNG> placeholder replaces the placeholder 1`] = `"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8&authSource=admin&ssl=true\\")"`;
+
+exports[`local MongoDB when called without a placeholder returns the original string 1`] = `"This is the body text"`;
+
+exports[`local MongoDB when there are multiple placeholders replaces all placeholders 1`] = `
+"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?authSource=admin\\")
+        username is myUsername
+        shell string (mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?authSource=admin)
+        without password (mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?authSource=admin --username myUsername)"
+`;
+
+exports[`local MongoDB when there is a <URISTRNG> placeholder replaces the placeholder 1`] = `"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabase?authSource=admin\\")"`;
+
+exports[`local MongoDB with replica set when called without a placeholder returns the original string 1`] = `"This is the body text"`;
+
+exports[`local MongoDB with replica set when there are multiple placeholders replaces all placeholders 1`] = `
+"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8&authSource=$[authSource]&ssl=true\\")
+        username is myUsername
+        shell string (mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8&authSource=$[authSource]&ssl=true)
+        without password (mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8&authSource=$[authSource]&ssl=true --username myUsername --password)"
+`;
+
+exports[`local MongoDB with replica set when there is a <URISTRNG> placeholder replaces the placeholder 1`] = `"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?replicaSet=Cluster0-shard-8&authSource=$[authSource]&ssl=true\\")"`;
