@@ -46,11 +46,16 @@ export default class GuideHeading extends Component {
                   className={activeLanguage[0] === langOpts[0] ? 'guide__pill guide__pill--active' : 'guide__pill'}
                   data-tabid={langOpts[0]}
                   key={index}
-                  onClick={() => {
-                    changeActiveLanguage(langOpts);
-                  }}
                 >
-                  {langOpts[1]}
+                  <span
+                    onClick={() => {
+                      changeActiveLanguage(langOpts);
+                    }}
+                    role='button'
+                    tabIndex={index}
+                  >
+                    {langOpts[1]}
+                  </span>
                 </li>
               ))}
             </ul>

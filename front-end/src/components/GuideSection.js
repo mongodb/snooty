@@ -11,8 +11,12 @@ export default class GuideSection extends Component {
       showStepper: false,
       showAllStepsText: 'Expand All Steps',
       showStepIndex: 0,
+      // TODO: set state based on Daniel's implementation of cloud/local tabs
+      templateType: 'local MongoDB',
       totalStepsInProcedure: 1,
+      uri: {},
     };
+
     this.nameMapping = {
       prerequisites: 'What You’ll Need',
       check_your_environment: 'Check Your Environment',
@@ -42,11 +46,20 @@ export default class GuideSection extends Component {
     });
   };
 
+  handleUpdateURIWriter = uri => {
+    this.setState(prevState => ({
+      uri: {
+        ...prevState.uri,
+        ...uri,
+      },
+    }));
+  };
+
   render() {
     const {
       guideSectionData: { children, name },
     } = this.props;
-    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure } = this.state;
+    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, templateType, totalStepsInProcedure, uri } = this.state;
 
     return (
       <div className="section" id={name}>
@@ -68,11 +81,14 @@ export default class GuideSection extends Component {
         {children.map((child, index) => (
           <ComponentFactory
             {...this.props}
-            nodeData={child}
+            handleUpdateURIWriter={this.handleUpdateURIWriter}
             key={index}
+            nodeData={child}
             showAllSteps={showAllSteps}
             showStepIndex={showStepIndex}
+            templateType={templateType}
             updateTotalStepCount={this.updateTotalStepCount}
+            uri={uri}
           />
         ))}
       </div>

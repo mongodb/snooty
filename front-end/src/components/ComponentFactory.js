@@ -15,6 +15,7 @@ import Figure from './Figure';
 import Literal from './Literal';
 import Heading from './Heading';
 import BlockQuote from './BlockQuote';
+import URIWriter from './URIWriter';
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -35,6 +36,7 @@ export default class ComponentFactory extends Component {
       literal: Literal,
       heading: Heading,
       block_quote: BlockQuote,
+      uriwriter: URIWriter,
     };
   }
 
@@ -59,6 +61,12 @@ export default class ComponentFactory extends Component {
         </span>
       );
     }
+
+    if (ComponentType === URIWriter) {
+      const { templateType } = this.props;
+      return <ComponentType key={templateType} {...this.props} />;
+    }
+
     return <ComponentType {...this.props} />;
   }
 
@@ -73,6 +81,7 @@ ComponentFactory.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  templateType: PropTypes.string.isRequired,
 };
 
 ComponentFactory.defaultProps = {

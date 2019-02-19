@@ -5,21 +5,50 @@ import Card from '../components/Card';
 export default class Index extends Component {
   constructor(propsFromServer) {
     super(propsFromServer);
-    const { pageContext } = this.props;
     this.state = {
       name: 'Guides',
       description: 'Getting Started',
-      guides: pageContext.__refDocMapping.index.ast.children[1].children[2].children,
-      // guides: pageContext.__refDocMapping.index.ast.children[3].children
+      guides: [],
     };
   }
 
-  render() {
-    const { description, guides, name } = this.state;
+  componentDidMount() {
     const { pageContext } = this.props;
+    this.findGuideIndex(pageContext.__refDocMapping.index.ast);
+  }
+
+  findGuideIndex(node) {
+    if (node.name === 'guide-index') {
+      this.setState({ guides: node.children });
+      return node.children;
+    }
+
+    if (node.children) {
+      node.children.forEach(child => {
+        const result = this.findGuideIndex(child);
+
+        if (result !== false) {
+          return result;
+        }
+        return false;
+      });
+    }
+
+    return false;
+  }
+
+  render() {
+    const { pageContext } = this.props;
+    const { description, guides, name } = this.state;
+
+    if (guides.length === 0) {
+      return null;
+    }
+
     const allCards = guides.map((card, index) => (
       <Card card={card} key={index} cardId={index} refDocMapping={pageContext.__refDocMapping} />
     ));
+
     return (
       <div className="content">
         <div className="guide-category-list">

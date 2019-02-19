@@ -6,9 +6,6 @@ const Stepper = ({ showAllStepsText, showStepIndex, toggleAllSteps, totalStepsIn
     {new Array(totalStepsInProcedure).fill(0).map((el, index) => (
       <section
         key={index}
-        onClick={() => {
-          updateVisibleStep(index);
-        }}
         style={{
           background: showStepIndex === index ? '#13AA52' : '#f1f1f1',
           color: showStepIndex === index ? 'white' : 'black',
@@ -20,7 +17,13 @@ const Stepper = ({ showAllStepsText, showStepIndex, toggleAllSteps, totalStepsIn
           border: '1px solid #c5c5c5',
         }}
       >
-        <span>
+        <span
+          onClick={() => {
+            updateVisibleStep(index);
+          }}
+          role='button'
+          tabIndex={0}
+        >
           Step
           {index + 1}
         </span>
@@ -30,6 +33,8 @@ const Stepper = ({ showAllStepsText, showStepIndex, toggleAllSteps, totalStepsIn
       onClick={() => {
         toggleAllSteps();
       }}
+      role='button'
+      tabIndex={0}
       style={{
         float: 'right',
         marginTop: '10px',
