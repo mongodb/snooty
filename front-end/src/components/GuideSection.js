@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ComponentFactory from '../components/ComponentFactory';
 import Stepper from '../components/Stepper';
-import URIForm from '../components/URIForm';
 
 export default class GuideSection extends Component {
 
@@ -12,7 +11,10 @@ export default class GuideSection extends Component {
       showStepper: false,
       showAllStepsText: 'Expand All Steps',
       showStepIndex: 0,
-      totalStepsInProcedure: 1
+      // TODO: set state based on Daniel's implementation of cloud/local tabs
+      templateType: 'local MongoDB',
+      totalStepsInProcedure: 1,
+      uri: {},
     };  
     this.nameMapping = {
       'prerequisites': 'What You’ll Need',
@@ -42,6 +44,15 @@ export default class GuideSection extends Component {
     });
   }
 
+  handleUpdateURIWriter(uri) {
+    this.setState({
+      uri: {
+        ...this.state.uri,
+        ...uri,
+      }
+    });
+  }
+
   render() {
     return (
       <div className="section" id={ this.props.guideSectionData.name }>
@@ -62,9 +73,12 @@ export default class GuideSection extends Component {
             return <ComponentFactory { ...this.props } 
                                       nodeData={ child } 
                                       key={ index } 
+                                      handleUpdateURIWriter={ this.handleUpdateURIWriter.bind(this) }
                                       showAllSteps={ this.state.showAllSteps } 
                                       showStepIndex={ this.state.showStepIndex }
-                                      updateTotalStepCount={ this.updateTotalStepCount.bind(this) } />
+                                      templateType={ this.state.templateType }
+                                      updateTotalStepCount={ this.updateTotalStepCount.bind(this) }
+                                      uri={this.state.uri} />
           })
         }
       </div>
