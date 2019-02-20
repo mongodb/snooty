@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when mounted with one type of guide renders correctly 1`] = `ShallowWrapper {}`;

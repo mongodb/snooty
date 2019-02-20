@@ -17,19 +17,17 @@ const CATEGORIES = [
 ];
 
 const LandingPageCards = ({ guides, refDocMapping }) => {
-  console.log(refDocMapping)
   return CATEGORIES.map((category, index) => (
     <Category
       cards={guides.filter(card => {
         const cardName = card.name === 'card'
           ? card.argument[0].value
           : card.children[0].children[0].children[0].children[0].value;
-          console.log(getGuideType(refDocMapping[cardName].ast))
         return category.name === getGuideType(refDocMapping[cardName].ast)
       })}
       category={category}
       refDocMapping={refDocMapping}
-      key={index}
+      key={category.iconSlug}
     />
   ));
 }
