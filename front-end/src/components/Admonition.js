@@ -15,6 +15,9 @@ export default class Admonition extends Component {
         </div>
       )
     } else {
+      // combine argument and children from admonition as separate paragraphs
+      const childElements = [...this.props.nodeData.argument, ...this.props.nodeData.children];
+      console.log('Admonition about to render paragraph', this.props.nodeData, childElements);
       return (
         <div className={ (this.props.nodeData.name === 'tip') ? `admonition admonition-tip` : `admonition ${this.props.nodeData.name}` }>
           <p className="first admonition-title">{ this.props.nodeData.name }</p>
@@ -25,9 +28,7 @@ export default class Admonition extends Component {
               nodeData={ 
                 { 
                   type: 'paragraph',
-                  children: this.props.nodeData.children.length > 0 ? 
-                            [...this.props.nodeData.children[0].children, ...this.props.nodeData.argument] : 
-                            this.props.nodeData.argument 
+                  children: childElements
                 } 
               } />
           </section>
