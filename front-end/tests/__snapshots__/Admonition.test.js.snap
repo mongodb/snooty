@@ -17,9 +17,7 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <span>
-        These instructions are for installing MongoDB directly from
-      </span>
+      These instructions are for installing MongoDB directly from
     </p>
   </section>
 </div>

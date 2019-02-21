@@ -1,25 +1,35 @@
-import React, { Component } from 'react';
-import ComponentFactory from '../components/ComponentFactory';
+import React from 'react';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 
-export default class Step extends Component {
-
-  render() {
-    return (
-      <div className="sequence-block" style={
-        { display: (this.props.showAllSteps || this.props.showStepIndex === this.props.stepNum) ? 'block' : 'none' }
-      }>
-        <div className="bullet-block" style={ {display: (this.props.showAllSteps) ? 'block' : 'none'} }>
-          <div className="sequence-step">{ this.props.stepNum + 1 }</div>
-        </div>
-        <div className="section" id="SOMETHING-HERE">
-          {
-            this.props.nodeData.children.map((child, index) => {
-              return <ComponentFactory { ...this.props } nodeData={ child } key={ index } />
-            })
-          }
-        </div>
+const Step = props => {
+  const { nodeData, showAllSteps, showStepIndex, stepNum } = props;
+  return (
+    <div
+      className="sequence-block"
+      style={{
+        display: !(showAllSteps || showStepIndex === stepNum) && 'none',
+      }}
+    >
+      <div className="bullet-block" style={{ display: !showAllSteps && 'none' }}>
+        <div className="sequence-step">{stepNum + 1}</div>
       </div>
-    )
-  }
+      <div className="section" id="SOMETHING-HERE">
+        {nodeData.children.map((child, index) => (
+          <ComponentFactory {...props} nodeData={child} key={index} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-}
+Step.propTypes = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.array.isRequired,
+  }).isRequired,
+  showAllSteps: PropTypes.bool.isRequired,
+  showStepIndex: PropTypes.number.isRequired,
+  stepNum: PropTypes.number.isRequired,
+};
+
+export default Step;

@@ -51,9 +51,7 @@ exports[`renders correctly 1`] = `
                 </div>
                 <ul
                   className="guide__body"
-                >
-                  
-                </ul>
+                />
                 <ul
                   className="guide__pills"
                 />
@@ -82,9 +80,7 @@ exports[`renders correctly 1`] = `
                 </div>
                 <ul
                   className="guide__body"
-                >
-                  
-                </ul>
+                />
                 <ul
                   className="guide__pills"
                 />
@@ -135,11 +131,6 @@ exports[`renders correctly 1`] = `
                 <ul
                   className="guide__pills"
                 />
-                <div
-                  className="guide__time"
-                >
-                  
-                </div>
               </section>
             </div>
             <div
@@ -191,11 +182,6 @@ exports[`renders correctly 1`] = `
                 <ul
                   className="guide__pills"
                 />
-                <div
-                  className="guide__time"
-                >
-                  
-                </div>
               </section>
             </div>
             <a
@@ -216,9 +202,7 @@ exports[`renders correctly 1`] = `
                 </div>
                 <ul
                   className="guide__body"
-                >
-                  
-                </ul>
+                />
                 <ul
                   className="guide__pills"
                 />
@@ -247,9 +231,7 @@ exports[`renders correctly 1`] = `
                 </div>
                 <ul
                   className="guide__body"
-                >
-                  
-                </ul>
+                />
                 <ul
                   className="guide__pills"
                 />
@@ -336,11 +318,6 @@ exports[`renders correctly 1`] = `
                 <ul
                   className="guide__pills"
                 />
-                <div
-                  className="guide__time"
-                >
-                  
-                </div>
               </section>
             </div>
           </div>
