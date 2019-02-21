@@ -16,13 +16,27 @@ const CATEGORIES = [
   },
 ];
 
+const getGuideType = nodes => {
+  let result;
+  const iter = node => {
+    if (node.name === 'type') {
+      result = node.argument[0].value;
+      return true;
+    }
+    return Array.isArray(node.children) && node.children.some(iter);
+  };
+
+  nodes.some(iter);
+  return result;
+};
+
 const LandingPageCards = ({ guides, refDocMapping }) => {
-  return CATEGORIES.map((category, index) => (
+  return CATEGORIES.map(category => (
     <Category
       cards={guides.filter(card => {
         const cardName =
           card.name === 'card' ? card.argument[0].value : card.children[0].children[0].children[0].children[0].value;
-        return category.name === getGuideType(refDocMapping[cardName].ast);
+        return category.name === getGuideType(refDocMapping[cardName].ast.children);
       })}
       category={category}
       refDocMapping={refDocMapping}
@@ -44,25 +58,6 @@ const Category = ({ cards, category, refDocMapping }) => {
       </section>
     )
   );
-};
-
-const getGuideType = node => {
-  if (node.name === 'type') {
-    return node.argument[0].value;
-  }
-
-  if (node.children) {
-    for (const i in node.children) {
-      const child = node.children[i];
-      const result = getGuideType(child);
-
-      if (result !== false) {
-        return result;
-      }
-    }
-  }
-
-  return false;
 };
 
 export default LandingPageCards;

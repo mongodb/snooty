@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import LandingPageCards, { Category } from '../src/components/LandingPageCards';
-import Card from '../src/components/Card';
+import LandingPageCards from '../src/components/LandingPageCards';
 
 const mountLandingPageCards = ({ guides, refDocMapping }) =>
   mount(<LandingPageCards guides={guides} refDocMapping={refDocMapping} />);
@@ -54,6 +53,118 @@ const getOneCategoryDefaultProps = () => ({
   },
 });
 
+const getTwoCategoryDefaultProps = () => ({
+  guides: [
+    {
+      argument: [
+        {
+          value: 'server/install',
+        },
+      ],
+      name: 'card',
+    },
+    {
+      argument: [
+        {
+          type: 'text',
+          value: 'MongoDB in the Cloud',
+        },
+      ],
+      children: [
+        {
+          children: [
+            {
+              children: [
+                {
+                  children: [
+                    {
+                      value: 'cloud/atlas',
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              children: [
+                {
+                  children: [
+                    {
+                      value: 'cloud/connectionstring',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      name: 'multi-card',
+    },
+  ],
+  refDocMapping: {
+    'server/install': {
+      ast: {
+        children: [
+          {
+            children: [
+              {
+                children: [
+                  {
+                    type: 'text',
+                    value: 'Install MongoDB',
+                  },
+                ],
+                type: 'heading',
+              },
+              {
+                argument: [
+                  {
+                    type: 'text',
+                    value: 'Getting Started',
+                  },
+                ],
+                children: [],
+                name: 'type',
+                type: 'directive',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    'cloud/atlas': {
+      ast: {
+        children: [
+          {
+            children: [
+              {
+                children: [
+                  {
+                    type: 'text',
+                    value: 'Create an Atlas Account and Cluster',
+                  },
+                ],
+                type: 'heading',
+              },
+              {
+                argument: [
+                  {
+                    type: 'text',
+                    value: 'Deep Dive',
+                  },
+                ],
+                children: [],
+                name: 'type',
+                type: 'directive',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+});
+
 describe('when mounted with one type of guide', () => {
   let wrapper;
   let shallowWrapper;
@@ -77,7 +188,7 @@ describe('when mounted with one type of guide', () => {
   });
 });
 
-describe('when mounted with two types of guide', () => {
+describe('when mounted with two types of guides', () => {
   let wrapper;
   let shallowWrapper;
 
@@ -95,5 +206,7 @@ describe('when mounted with two types of guide', () => {
     expect(wrapper.find('.guide-category__title')).toHaveLength(2);
   });
 
-  it('shows x cards', () => {});
+  it('shows 2 cards', () => {
+    expect(wrapper.find('Card')).toHaveLength(2);
+  });
 });
