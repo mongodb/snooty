@@ -4,41 +4,42 @@ import ComponentFactory from './ComponentFactory';
 
 const Admonition = props => {
   const { nodeData } = props;
+  if (nodeData.name === 'admonition') {
+    return (
+      <div className={`admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`}>
+        <p className="first admonition-title">{nodeData.argument[0].value}</p>
+        <section>
+          <ComponentFactory
+            {...props}
+            nodeData={{
+              type: 'paragraph',
+              children: nodeData.children[0].children,
+            }}
+            admonition
+          />
+        </section>
+      </div>
+    );
+  }
+  // combine argument and children from admonition as separate paragraphs
+  const childElements = [...nodeData.argument, ...nodeData.children];
+
+
+
   return (
-    <React.Fragment>
-      {nodeData.name === 'admonition' ? (
-        <div className={`admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`}>
-          <p className="first admonition-title">{nodeData.argument[0].value}</p>
-          <section>
-            <ComponentFactory
-              {...props}
-              nodeData={{
-                type: 'paragraph',
-                children: nodeData.children[0].children,
-              }}
-              admonition
-            />
-          </section>
-        </div>
-      ) : (
-        <div className={['admonition', `${nodeData.name === 'tip' ? 'admonition-tip' : nodeData.name}`].join(' ')}>
-          <p className="first admonition-title">{nodeData.name}</p>
-          <section>
-            <ComponentFactory
-              {...props}
-              admonition
-              nodeData={{
-                type: 'paragraph',
-                children:
-                  nodeData.children.length > 0
-                    ? [...nodeData.children[0].children, ...nodeData.argument]
-                    : nodeData.argument,
-              }}
-            />
-          </section>
-        </div>
-      )}
-    </React.Fragment>
+    <div className={nodeData.name === 'tip' ? `admonition admonition-tip` : `admonition ${nodeData.name}`}>
+      <p className="first admonition-title">{nodeData.name}</p>
+      <section>
+        <ComponentFactory
+          {...props}
+          admonition
+          nodeData={{
+            type: 'paragraph',
+            children: childElements,
+          }}
+        />
+      </section>
+    </div>
   );
 };
 
