@@ -28,6 +28,7 @@ const NAMESPACE = process.env.NAMESPACE;
 const NAMESPACE_ASSETS = NAMESPACE.split('/')[0] + '/' + 'assets';
 
 const USE_TEST_DATA = process.env.USE_TEST_DATA;
+const TEST_DATA_PATH = 'tests/data/site';
 const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
@@ -72,20 +73,19 @@ exports.sourceNodes = async ({ actions }) => {
   if (USE_TEST_DATA) {
 
     // make sure file exists before loading test data from it
-    if (fs.existsSync(`tests/${USE_TEST_DATA}`)) {
-      const fileContent = fs.readFileSync(`tests/${USE_TEST_DATA}`, 'utf8');
+    const fullpath = `${TEST_DATA_PATH}/${USE_TEST_DATA}`;
+    if (fs.existsSync(fullpath)) {
+      const fileContent = fs.readFileSync(fullpath, 'utf8');
       RESOLVED_REF_DOC_MAPPING = JSON.parse(fileContent); 
-      console.log(`*** Using test data from "tests/${USE_TEST_DATA}"`);
+      console.log(`*** Using test data from "${fullpath}"`);
     } else {
-      throw Error (`ERROR: file "tests/${USE_TEST_DATA}" does not exist`);
+      throw Error (`ERROR: file "${fullpath}" does not exist`);
     }
 
   } else {
 
     // start from index document
     const query = { _id: `${ PREFIX.join('/') }/index` };
-
-    // get index document
     const documents = await stitchClient.callFunction('fetchDocuments', [NAMESPACE, query]);
 
     // set data for index page
@@ -135,9 +135,10 @@ exports.sourceNodes = async ({ actions }) => {
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
-    fs.writeFile(`tests/${LATEST_TEST_DATA_FILE}`, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', (err) => {
-      if (err) console.log(`ERROR saving test data into "tests/${LATEST_TEST_DATA_FILE}" file`, err);
-      console.log(`** Saved test data into "tests/${LATEST_TEST_DATA_FILE}"`);
+    const fullpathLatest = `${TEST_DATA_PATH}/${LATEST_TEST_DATA_FILE}`;
+    fs.writeFile(fullpathLatest, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', (err) => {
+      if (err) console.log(`ERROR saving test data into "${fullpathLatest}" file`, err);
+      console.log(`** Saved test data into "${fullpathLatest}"`);
     });
   }
 
