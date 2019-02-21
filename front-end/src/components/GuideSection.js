@@ -59,7 +59,15 @@ export default class GuideSection extends Component {
     const {
       guideSectionData: { children, name },
     } = this.props;
-    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, templateType, totalStepsInProcedure, uri } = this.state;
+    const {
+      showAllSteps,
+      showAllStepsText,
+      showStepIndex,
+      showStepper,
+      templateType,
+      totalStepsInProcedure,
+      uri,
+    } = this.state;
 
     return (
       <div className="section" id={name}>

@@ -51,7 +51,7 @@ export default class GuideHeading extends Component {
                     onClick={() => {
                       changeActiveLanguage(langOpts);
                     }}
-                    role='button'
+                    role="button"
                     tabIndex={index}
                   >
                     {langOpts[1]}

@@ -73,7 +73,7 @@ export default class URIWriter extends Component {
     }
 
     return 'Connection string could not be parsed';
-  }
+  };
 
   parseURIParams = shellString => {
     const params = {};
@@ -84,7 +84,7 @@ export default class URIWriter extends Component {
       }
     });
     return params;
-  }
+  };
 
   parseOutEnvAndClusters(splitOnSpaceClusterEnv, callback) {
     // depending on whether this is 3.6 or 3.4 the cluster info looks slightly different
@@ -98,7 +98,9 @@ export default class URIWriter extends Component {
     if (shellArray[1] === 'mongodb') {
       const hostlist = {};
       const hostListString = shellArray[2];
-      hostListString.split(',').forEach((host, index) => {hostlist[`host${index}`] = host});
+      hostListString.split(',').forEach((host, index) => {
+        hostlist[`host${index}`] = host;
+      });
       this.setState(
         {
           env: TEMPLATE_TYPE_ATLAS_34,
@@ -145,8 +147,8 @@ export default class URIWriter extends Component {
         }
       }
     }
-    this.setState(prevState => (
-      {
+    this.setState(
+      prevState => ({
         ...prevState,
         ...params,
       }),
@@ -163,7 +165,9 @@ export default class URIWriter extends Component {
     }
 
     const hostlist = {};
-    matchesArray[4].split(',').forEach((host, index) => {hostlist[`host${index}`] = host});
+    matchesArray[4].split(',').forEach((host, index) => {
+      hostlist[`host${index}`] = host;
+    });
     this.setState(
       {
         env: TEMPLATE_TYPE_ATLAS_34,
@@ -195,7 +199,6 @@ export default class URIWriter extends Component {
       () => callback(this.state)
     );
   }
-
 
   parseShell(atlasString, callback) {
     const splitOnSpace = atlasString.split(' ');
@@ -270,18 +273,21 @@ export default class URIWriter extends Component {
   updateHostlist(name, value, callback) {
     const { hostlist } = this.state;
     if (value === '' && Object.keys(hostlist).length > 1) {
-      this.setState(prevState => {
-        const deletedState = Object.assign({}, prevState.hostlist);
-        delete deletedState[name];
-        return {hostlist: deletedState};
-      }, () => {
-        if (!this.hostnameHasError(value)) {
-          callback(this.state);
+      this.setState(
+        prevState => {
+          const deletedState = Object.assign({}, prevState.hostlist);
+          delete deletedState[name];
+          return { hostlist: deletedState };
+        },
+        () => {
+          if (!this.hostnameHasError(value)) {
+            callback(this.state);
+          }
         }
-      });
+      );
     } else {
-      this.setState(prevState => (
-        {
+      this.setState(
+        prevState => ({
           hostlist: {
             ...prevState.hostlist,
             [name]: value,
@@ -291,7 +297,8 @@ export default class URIWriter extends Component {
           if (this.hostnameHasError(value) === '') {
             callback(this.state);
           }
-          if (!Object.values(this.state.hostlist).includes('')) { // eslint-disable-line react/destructuring-assignment
+          // eslint-disable-next-line react/destructuring-assignment
+          if (!Object.values(this.state.hostlist).includes('')) {
             const newKeyName = `host${this.hostlistCounter++}`; // eslint-disable-line no-plusplus
             this.setState(prevState => ({
               hostlist: {
@@ -307,15 +314,7 @@ export default class URIWriter extends Component {
 
   render() {
     const { templateType } = this.props;
-    const {
-      atlas,
-      authSource,
-      database,
-      env,
-      hostlist,
-      replicaSet,
-      username
-    } = this.state;
+    const { atlas, authSource, database, env, hostlist, replicaSet, username } = this.state;
     const isAtlas = templateType.includes(TEMPLATE_TYPE_ATLAS);
 
     return (
@@ -358,7 +357,7 @@ export default class URIWriter extends Component {
                     <span
                       id={localEnv.replace(/\s+/g, '-')}
                       onClick={() => this.handleEnvChange(localEnv)}
-                      role='button'
+                      role="button"
                       tabIndex={index}
                     >
                       {localEnv}

@@ -21,7 +21,7 @@ const Stepper = ({ showAllStepsText, showStepIndex, toggleAllSteps, totalStepsIn
           onClick={() => {
             updateVisibleStep(index);
           }}
-          role='button'
+          role="button"
           tabIndex={0}
         >
           Step
@@ -33,7 +33,7 @@ const Stepper = ({ showAllStepsText, showStepIndex, toggleAllSteps, totalStepsIn
       onClick={() => {
         toggleAllSteps();
       }}
-      role='button'
+      role="button"
       tabIndex={0}
       style={{
         float: 'right',

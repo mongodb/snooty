@@ -41,7 +41,7 @@ describe('URIWriter', () => {
 
     it('updates username state when input is filled in', () => {
       const usernameValue = 'usernameTest';
-      const usernameInput = wrapper.find("input[name='username']")
+      const usernameInput = wrapper.find("input[name='username']");
       usernameInput.instance().value = usernameValue;
       usernameInput.simulate('change');
       expect(wrapper.state().username).toBe(usernameValue);
@@ -49,7 +49,7 @@ describe('URIWriter', () => {
 
     it('updates database state when input is filled in', () => {
       const databaseValue = 'testDB';
-      const databaseInput = wrapper.find("input[name='database']")
+      const databaseInput = wrapper.find("input[name='database']");
       databaseInput.instance().value = databaseValue;
       databaseInput.simulate('change');
       expect(wrapper.state().database).toBe(databaseValue);
@@ -57,7 +57,7 @@ describe('URIWriter', () => {
 
     it('updates authSource state when input is filled in', () => {
       const authSourceValue = 'testAuthSource';
-      const authSourceInput = wrapper.find("input[name='authSource']")
+      const authSourceInput = wrapper.find("input[name='authSource']");
       authSourceInput.instance().value = authSourceValue;
       authSourceInput.simulate('change');
       expect(wrapper.state().authSource).toBe(authSourceValue);
@@ -75,10 +75,10 @@ describe('URIWriter', () => {
     });
 
     it('adds an input field when a host is added', () => {
-      const host0Input = wrapper.find("input[name='host0']")
+      const host0Input = wrapper.find("input[name='host0']");
       host0Input.instance().value = 'testing';
       host0Input.simulate('change');
-      const host1Input = wrapper.find("input[name='host1']")
+      const host1Input = wrapper.find("input[name='host1']");
       expect(host1Input).toHaveLength(1);
     });
 
@@ -92,7 +92,7 @@ describe('URIWriter', () => {
 
     describe('when replica set is selected', () => {
       beforeAll(() => {
-        const replicaSetPill = wrapper.find("#local-MongoDB-with-replica-set");
+        const replicaSetPill = wrapper.find('#local-MongoDB-with-replica-set');
         replicaSetPill.simulate('click');
       });
 
@@ -141,7 +141,6 @@ describe('URIWriter', () => {
       wrapper = mountURIWriter({ mockCallback, templateType: 'Atlas (Cloud)' });
     });
 
-
     it('displays no input elements', () => {
       const inputs = wrapper.find('input');
       expect(inputs).toHaveLength(0);
@@ -158,7 +157,8 @@ describe('URIWriter', () => {
       });
 
       it('parses the string correctly', () => {
-        const inputString = 'mongodb://myUsername:myPassword@cluster0-shard-00-00-juau5.mongodb.net:27017,cluster0-shard-00-01-juau5.mongodb.net:27017,cluster0-shard-00-02-juau5.mongodb.net:27017/myDatabaseName?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
+        const inputString =
+          'mongodb://myUsername:myPassword@cluster0-shard-00-00-juau5.mongodb.net:27017,cluster0-shard-00-01-juau5.mongodb.net:27017,cluster0-shard-00-02-juau5.mongodb.net:27017/myDatabaseName?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
         const atlasTextarea = wrapper.find("textarea[name='atlas']");
         atlasTextarea.instance().value = inputString;
         atlasTextarea.simulate('change');
@@ -179,7 +179,6 @@ describe('URIWriter', () => {
         expect(mockCallback.mock.calls.length).toBe(1);
       });
     });
-
 
     describe('when a MongoDB 3.6 string is entered', () => {
       beforeAll(() => {
@@ -213,7 +212,8 @@ describe('URIWriter', () => {
       });
 
       it('parses the string correctly', () => {
-        const inputString = 'mongo "mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabaseName3?replicaSet=Cluster0-shard-8" --ssl --authenticationDatabase admin3 --username myUsername3 --password myPassword3';
+        const inputString =
+          'mongo "mongodb://cluster0-shard-00-00-igkvv.mongodb.net:27017,cluster0-shard-00-01-igkvv.mongodb.net:27017,cluster0-shard-00-02-igkvv.mongodb.net:27017/myDatabaseName3?replicaSet=Cluster0-shard-8" --ssl --authenticationDatabase admin3 --username myUsername3 --password myPassword3';
         const atlasTextarea = wrapper.find("textarea[name='atlas']");
         atlasTextarea.instance().value = inputString;
         atlasTextarea.simulate('change');
@@ -249,8 +249,8 @@ describe('URIWriter', () => {
       });
 
       it('has an empty uri state', () => {
-        const state = wrapper.state()
-        delete state.atlas
+        const state = wrapper.state();
+        delete state.atlas;
         expect(state).toEqual(emptyCloudURI);
       });
 

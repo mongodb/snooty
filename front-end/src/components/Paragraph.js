@@ -4,6 +4,7 @@ import ComponentFactory from './ComponentFactory';
 
 const Paragraph = props => {
   const { admonition, nodeData } = props;
+
   return (
     <p style={{ margin: admonition ? '0 auto' : '' }}>
       {nodeData.children.map((element, index) => {

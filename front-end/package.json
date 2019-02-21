@@ -19,6 +19,7 @@
     "lint-staged": "^8.1.1",
     "prettier": "^1.16.3",
     "prettier-eslint": "^8.8.2",
+    "prettier-eslint-cli": "^4.7.1",
     "react-test-renderer": "^16.7.0",
     "webpack": "^4.19.0",
     "webpack-cli": "^3.1.0",
@@ -40,7 +41,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,md}": [
-      "eslint --fix src",
+      "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
       "git add"
     ]
   },
