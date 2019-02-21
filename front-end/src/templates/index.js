@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import Card from '../components/Card';
+import PropTypes from 'prop-types';
 import LandingPageCards from '../components/LandingPageCards';
 
 export default class Index extends Component {
-
   constructor(propsFromServer) {
     super(propsFromServer);
     this.state = {
       name: 'Guides',
       guides: [],
     };
-    console.log(11, this.props.pageContext.__refDocMapping);
   }
-  
+
   componentDidMount() {
-    this.findGuideIndex(this.props.pageContext.__refDocMapping.index.ast);
+    const { pageContext } = this.props;
+    this.findGuideIndex(pageContext.__refDocMapping.index.ast);
   }
 
   findGuideIndex(node) {
@@ -24,12 +23,13 @@ export default class Index extends Component {
     }
 
     if (node.children) {
-      node.children.forEach((child, index) => {
-        let result = this.findGuideIndex(child);
+      node.children.forEach(child => {
+        const result = this.findGuideIndex(child);
 
         if (result !== false) {
           return result;
         }
+        return false;
       });
     }
 
@@ -37,28 +37,37 @@ export default class Index extends Component {
   }
 
   render() {
+    const { pageContext } = this.props;
     const { guides, name } = this.state;
 
-    if (this.state.guides.length === 0) {
+    if (guides.length === 0) {
       return null;
     }
 
-    return ( 
+    return (
       <div className="content">
         <div className="guide-category-list">
           <div className="section" id="guides">
             <h1>
-              { name }
-              <a className="headerlink" href="#guides" title="Permalink to this headline">¶</a>
+              {name}
+              <a className="headerlink" href="#guides" title="Permalink to this headline">
+                ¶
+              </a>
             </h1>
-            <LandingPageCards
-              guides={guides}
-              refDocMapping={this.props.pageContext.__refDocMapping}
-            />
+            <LandingPageCards guides={guides} refDocMapping={pageContext.__refDocMapping} />
           </div>
         </div>
       </div>
-    )
+    );
   }
+}
 
-} 
+Index.propTypes = {
+  pageContext: PropTypes.shape({
+    __refDocMapping: PropTypes.shape({
+      index: PropTypes.shape({
+        ast: PropTypes.object,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+};

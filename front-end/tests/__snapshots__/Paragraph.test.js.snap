@@ -8,8 +8,6 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <span>
-    hello world
-  </span>
+  hello world
 </p>
 `;
