@@ -1,35 +1,28 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
-import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 
 export default class Guide extends Component {
-
   constructor(propsFromServer) {
     super(propsFromServer);
+
+    const { pageContext } = this.props;
+
     // get data from server
-    this.sections = this.props.pageContext.__refDocMapping[this.props['*']].ast.children[0].children;
-    this.languageList = this.props.pageContext.__languageList;
-    this.stitchId = this.props.pageContext.__stitchID;
+    this.sections =
+      pageContext.__refDocMapping[
+        this.props['*'] // eslint-disable-line react/destructuring-assignment
+      ].ast.children[0].children;
+    this.languageList = pageContext.__languageList;
+    this.stitchId = pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
-    this.validNames = [
-      'prerequisites',
-      'check_your_environment',
-      'procedure',
-      'summary',
-      'whats_next'
-    ];
-    this.admonitions = [
-      'admonition',
-      'note',
-      'tip',
-      'important',
-      'warning'
-    ];
+    this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next'];
+    this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       languages: [],
       activeLanguage: undefined,
@@ -38,11 +31,9 @@ export default class Guide extends Component {
       modalVisible: false,
       modalContent: {
         text: null,
-        example: null
-      }
-    }; 
-    console.log(2222, this.props.pageContext.__refDocMapping);
-    console.log(4544, this.sections);
+        example: null,
+      },
+    };
   }
 
   componentDidMount() {
@@ -53,31 +44,69 @@ export default class Guide extends Component {
   setupStitch() {
     const appName = this.stitchId;
     if (!appName) return;
-    this.stitchClient = Stitch.hasAppClient(appName) ? Stitch.defaultAppClient : Stitch.initializeDefaultAppClient(appName);
-    this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).then((user) => {
-      console.log('logged into stitch');
+    this.stitchClient = Stitch.hasAppClient(appName)
+      ? Stitch.defaultAppClient
+      : Stitch.initializeDefaultAppClient(appName);
+    this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+      console.log(`logged in as user ${user.id}`);
     });
   }
 
   // this function gets an array of objects with language pill options
-  // and sets the state to this list in the correct order 
-  addLanguages(languages) {
+  // and sets the state to this list in the correct order
+  addLanguages = languages => {
     const languagesInGuide = languages.map(langObj => langObj.argument[0].value);
     const setLanguages = this.languageList.filter(langOpts => languagesInGuide.includes(langOpts[0]));
     this.setState({
-      'languages': setLanguages,
-      'activeLanguage': setLanguages[0]
+      languages: setLanguages,
+      activeLanguage: setLanguages[0],
     });
-  }
+  };
 
-  changeActiveLanguage(language) {
+  changeActiveLanguage = language => {
     this.setState({
-      'activeLanguage': language
+      activeLanguage: language,
     });
-  }
+  };
+
+  // when a user hovers over a specific role
+  // first fetch the data and then show the modal with the content
+  modalFetchData = (event, href) => {
+    event.persist();
+    const findHashPart = href.substr(href.indexOf('#') + 1);
+    let contentObj;
+    this.stitchClient.callFunction('fetchReferenceUrlContent', [href]).then(response => {
+      if (!response) {
+        contentObj = {
+          text: 'Error fetching data...',
+        };
+      } else {
+        const parsed = this.DOMParser.parseFromString(response, 'text/html');
+        const mainContainer = parsed.getElementById(findHashPart)
+          ? parsed.getElementById(findHashPart).nextElementSibling
+          : null;
+        contentObj = {
+          text: mainContainer.getElementsByTagName('p')[0]
+            ? mainContainer.getElementsByTagName('p')[0].textContent.trim()
+            : 'FIX: no content found',
+          example: 'no code example',
+        };
+        // if syntax example is within first container
+        if (mainContainer.getElementsByClassName('button-code-block')[0]) {
+          contentObj.example = mainContainer.getElementsByClassName('copyable-code-block')[0].textContent.trim();
+        }
+      }
+      this.setState({
+        modalContent: contentObj,
+      });
+    });
+    this.modalShow(event);
+    const refElement = event.target;
+    this.modalBeginHidingInterval(refElement);
+  };
 
   modalShow(event) {
-    let newX = event.target.offsetLeft + Math.floor(event.target.offsetWidth / 2);
+    const newX = event.target.offsetLeft + Math.floor(event.target.offsetWidth / 2);
     let newY;
     if (event.screenY < 400) {
       newY = event.target.offsetTop + event.target.offsetHeight;
@@ -87,27 +116,33 @@ export default class Guide extends Component {
     this.setState({
       modalVisible: true,
       modalPositionLeft: newX,
-      modalPositionTop: newY
+      modalPositionTop: newY,
     });
   }
 
   modalHide() {
     this.setState({
-      modalVisible: false
+      modalVisible: false,
     });
   }
 
-  // TODO: use css instead?? 
+  // TODO: use css instead??
   // https://codepen.io/anon/pen/YJEaZo
-  modalBeginHidingInterval() {
+  modalBeginHidingInterval(refElement) {
     let event;
-    let modalContainer = document.getElementsByClassName('__ref-modal')[0];
-    let saveEvent = (e) => { event = e || window.event; };
+    const modalContainer = document.getElementsByClassName('__ref-modal')[0];
+    const saveEvent = e => {
+      event = e || window.event;
+    };
     // watch mouse movements globally
     document.addEventListener('mousemove', saveEvent);
     // if not hovered over modal (or any element within the modal) remove it and end event listener
-    let interval = setInterval(() => {
-      if (event.target.nodeName !== 'A' && !modalContainer.contains(event.target)) {
+    const interval = setInterval(() => {
+      if (
+        event.target.nodeName !== 'A' &&
+        !modalContainer.contains(event.target) &&
+        !refElement.contains(event.target)
+      ) {
         document.removeEventListener('mousemove', saveEvent);
         clearInterval(interval);
         this.modalHide();
@@ -115,88 +150,80 @@ export default class Guide extends Component {
     }, 1000);
   }
 
-  // when a user hovers over a specific role
-  // first fetch the data and then show the modal with the content
-  modalFetchData(event, href) {
-    event.persist();
-    console.log('going to get url', href);
-    const findHashPart = href.substr(href.indexOf('#') + 1);
-    let contentObj;
-    this.stitchClient.callFunction('fetchReferenceUrlContent', [href]).then((response) => {
-      if (!response) {
-        contentObj = {
-          text: 'Error fetching data...'
-        };
-      } else {
-        const parsed = this.DOMParser.parseFromString(response, 'text/html');
-        const mainContainer = parsed.getElementById(findHashPart) ? parsed.getElementById(findHashPart).nextElementSibling : null;
-        contentObj = {
-          text: mainContainer.getElementsByTagName('p')[0] ? mainContainer.getElementsByTagName('p')[0].textContent.trim() : 'FIX: no content found',
-          example: 'no code example'
-        };
-        // if syntax example is within first container
-        if (mainContainer.getElementsByClassName('button-code-block')[0]) {
-          contentObj.example = mainContainer.getElementsByClassName('copyable-code-block')[0].textContent.trim();
-        }
-      }
-      this.setState({
-        modalContent: contentObj
-      });
-    });
-    this.modalShow(event);
-    this.modalBeginHidingInterval();
-  }
-
   createSections() {
-    return (
-      this.sections
-      .filter((section) => this.validNames.includes(section.name))
-      .map((section, index) => {
-        return (
-          <GuideSection guideSectionData={ section } 
-                        key={ index } 
-                        admonitions={ this.admonitions }
-                        refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
-                        modal={ this.modalFetchData.bind(this) } 
-                        addLanguages={ this.addLanguages.bind(this) } 
-                        activeLanguage={ this.state.activeLanguage }
-                        stitchClient={ this.stitchClient } />
-        )
-      })
-    )
+    const { pageContext } = this.props;
+    const { activeLanguage } = this.state;
+    return this.sections
+      .filter(section => this.validNames.includes(section.name))
+      .map((section, index) => (
+        <GuideSection
+          guideSectionData={section}
+          key={index}
+          admonitions={this.admonitions}
+          refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+          modal={this.modalFetchData}
+          addLanguages={this.addLanguages}
+          activeLanguage={activeLanguage}
+          stitchClient={this.stitchClient}
+        />
+      ));
   }
 
   render() {
+    const { pageContext } = this.props;
+    const { activeLanguage, languages, modalContent, modalPositionLeft, modalPositionTop, modalVisible } = this.state;
+
     return (
       <div className="content">
         <TOC />
-        <div className="left-nav-space"></div>
+        <div className="left-nav-space" />
         <div id="main-column" className="main-column">
           <div className="body" data-pagename="server/read">
             <ul className="breadcrumbs">
-              <li className="breadcrumbs__bc"><a href="/">MongoDB Guides</a> &gt; </li>
+              <li className="breadcrumbs__bc">
+                <a href="/">MongoDB Guides</a> &gt;{' '}
+              </li>
             </ul>
-            <GuideHeading sections={ this.sections } 
-                          languages={ this.state.languages } 
-                          activeLanguage={ this.state.activeLanguage } 
-                          changeActiveLanguage={ this.changeActiveLanguage.bind(this) }
-                          admonitions={ this.admonitions }
-                          refDocMapping={ (this.props && this.props.pageContext) ? this.props.pageContext.__refDocMapping : {} } 
-                          modal={ this.modalFetchData.bind(this) } 
-                          addLanguages={ this.addLanguages.bind(this) } 
-                          activeLanguage={ this.state.activeLanguage }
-                          stitchClient={ this.stitchClient } />
-            <Modal modalProperties={ this.state } />
-            { this.createSections() }
+            <GuideHeading
+              sections={this.sections}
+              languages={languages}
+              activeLanguage={activeLanguage}
+              changeActiveLanguage={this.changeActiveLanguage}
+              admonitions={this.admonitions}
+              refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+              modal={this.modalFetchData}
+              addLanguages={this.addLanguages}
+              stitchClient={this.stitchClient}
+            />
+            <Modal
+              modalProperties={{
+                modalContent,
+                modalPositionLeft,
+                modalPositionTop,
+                modalVisible,
+              }}
+            />
+            {this.createSections()}
             <div className="footer">
               <div className="copyright">
-                <p>© MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB, Inc.</p>
+                <p>
+                  © MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB,
+                  Inc.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
+}
 
+Guide.propTypes = {
+  '*': PropTypes.string.isRequired,
+  pageContext: PropTypes.shape({
+    __languageList: PropTypes.arrayOf(PropTypes.array).isRequired,
+    __refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
+    __stitchID: PropTypes.string.isRequired,
+  }).isRequired,
 };

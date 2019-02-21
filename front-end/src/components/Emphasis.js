@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Emphasis extends Component {
+const Emphasis = ({ nodeData }) => <em>{nodeData.children[0].value}</em>;
 
-  render() {
-    return <em>{ this.props.nodeData.children[0].value }</em>
-  }
+Emphasis.propTypes = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+};
 
-}
+export default Emphasis;

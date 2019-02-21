@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ComponentFactory from '../components/ComponentFactory';
-import Stepper from '../components/Stepper';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
+import Stepper from './Stepper';
 
 export default class GuideSection extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -15,75 +15,98 @@ export default class GuideSection extends Component {
       templateType: 'local MongoDB',
       totalStepsInProcedure: 1,
       uri: {},
-    };  
+    };
+
     this.nameMapping = {
-      'prerequisites': 'What You’ll Need',
-      'check_your_environment': 'Check Your Environment',
-      'procedure': 'Procedure',
-      'summary': 'Summary',
-      'whats_next': 'What’s Next'
+      prerequisites: 'What You’ll Need',
+      check_your_environment: 'Check Your Environment',
+      procedure: 'Procedure',
+      summary: 'Summary',
+      whats_next: 'What’s Next',
     };
   }
 
-  updateTotalStepCount(total) {
+  updateTotalStepCount = total => {
     this.setState({
-      totalStepsInProcedure: total
+      totalStepsInProcedure: total,
     });
-  }
+  };
 
-  updateVisibleStep(newStep) {
+  updateVisibleStep = newStep => {
     this.setState({
-      showStepIndex: newStep
+      showStepIndex: newStep,
     });
-  }
+  };
 
-  toggleAllSteps() {
+  toggleAllSteps = () => {
+    const { showAllSteps } = this.state;
     this.setState({
-      showAllSteps: !this.state.showAllSteps,
-      showAllStepsText: this.state.showAllSteps ? 'Expand All Steps' : 'Collapse All Steps'
+      showAllSteps: !showAllSteps,
+      showAllStepsText: showAllSteps ? 'Expand All Steps' : 'Collapse All Steps',
     });
-  }
+  };
 
-  handleUpdateURIWriter(uri) {
-    this.setState({
+  handleUpdateURIWriter = uri => {
+    this.setState(prevState => ({
       uri: {
-        ...this.state.uri,
+        ...prevState.uri,
         ...uri,
-      }
-    });
-  }
+      },
+    }));
+  };
 
   render() {
-    return (
-      <div className="section" id={ this.props.guideSectionData.name }>
-        <h2> 
-          { this.nameMapping[this.props.guideSectionData.name] } 
-          <a className="headerlink" href={ '#' + this.props.guideSectionData.name } title="Permalink to this headline">¶</a>
-        </h2>
-        {
-          (this.props.guideSectionData.name === 'procedure' && this.state.showStepper) ?  
-            <Stepper totalStepsInProcedure={ this.state.totalStepsInProcedure } 
-                     showStepIndex={ this.state.showStepIndex } 
-                     updateVisibleStep={ this.updateVisibleStep.bind(this) } 
-                     toggleAllSteps={ this.toggleAllSteps.bind(this) }
-                     showAllStepsText={ this.state.showAllStepsText } /> : ''
-        }
-        {
-          this.props.guideSectionData.children.map((child, index) => {
-            return <ComponentFactory { ...this.props } 
-                                      nodeData={ child } 
-                                      key={ index } 
-                                      handleUpdateURIWriter={ this.handleUpdateURIWriter.bind(this) }
-                                      showAllSteps={ this.state.showAllSteps } 
-                                      showStepIndex={ this.state.showStepIndex }
-                                      templateType={ this.state.templateType }
-                                      updateTotalStepCount={ this.updateTotalStepCount.bind(this) }
-                                      uri={this.state.uri} />
-          })
-        }
-      </div>
-    )
-  }
+    const {
+      guideSectionData: { children, name },
+    } = this.props;
+    const {
+      showAllSteps,
+      showAllStepsText,
+      showStepIndex,
+      showStepper,
+      templateType,
+      totalStepsInProcedure,
+      uri,
+    } = this.state;
 
+    return (
+      <div className="section" id={name}>
+        <h2>
+          {this.nameMapping[name]}
+          <a className="headerlink" href={`#${name}`} title="Permalink to this headline">
+            ¶
+          </a>
+        </h2>
+        {name === 'procedure' && showStepper && (
+          <Stepper
+            totalStepsInProcedure={totalStepsInProcedure}
+            showStepIndex={showStepIndex}
+            updateVisibleStep={this.updateVisibleStep}
+            toggleAllSteps={this.toggleAllSteps}
+            showAllStepsText={showAllStepsText}
+          />
+        )}
+        {children.map((child, index) => (
+          <ComponentFactory
+            {...this.props}
+            handleUpdateURIWriter={this.handleUpdateURIWriter}
+            key={index}
+            nodeData={child}
+            showAllSteps={showAllSteps}
+            showStepIndex={showStepIndex}
+            templateType={templateType}
+            updateTotalStepCount={this.updateTotalStepCount}
+            uri={uri}
+          />
+        ))}
+      </div>
+    );
+  }
 }
 
+GuideSection.propTypes = {
+  guideSectionData: PropTypes.shape({
+    children: PropTypes.array.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};

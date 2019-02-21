@@ -1,5 +1,4 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import URIText from '../src/components/URIText';
 
@@ -22,9 +21,7 @@ describe('local MongoDB', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });
@@ -32,30 +29,25 @@ describe('local MongoDB', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
-    })
+    });
   });
 
   describe('when there are multiple placeholders', () => {
     it('replaces all placeholders', () => {
-      const value =
-        `return MongoClient("<URISTRING>")
+      const value = `return MongoClient("<URISTRING>")
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });
 });
 
 describe('local MongoDB with replica set', () => {
-  const templateType = 'local MongoDB'
+  const templateType = 'local MongoDB';
   const uri = {
     authSource: '',
     database: 'myDatabase',
@@ -71,9 +63,7 @@ describe('local MongoDB with replica set', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });
@@ -81,30 +71,25 @@ describe('local MongoDB with replica set', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
-    })
+    });
   });
 
   describe('when there are multiple placeholders', () => {
     it('replaces all placeholders', () => {
-      const value =
-        `return MongoClient("<URISTRING>")
+      const value = `return MongoClient("<URISTRING>")
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });
 });
 
 describe('Cloud (unspecified version)', () => {
-  const templateType = 'Atlas (Cloud)'
+  const templateType = 'Atlas (Cloud)';
   const uri = {
     authSource: 'admin',
     database: 'myDatabase',
@@ -120,9 +105,7 @@ describe('Cloud (unspecified version)', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });
@@ -130,30 +113,25 @@ describe('Cloud (unspecified version)', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
-    })
+    });
   });
 
   describe('when there are multiple placeholders', () => {
     it('replaces all placeholders', () => {
-      const value =
-        `return MongoClient("<URISTRING>")
+      const value = `return MongoClient("<URISTRING>")
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });
 });
 
 describe('Cloud (MongoDB version 3.4)', () => {
-  const templateType = 'Atlas (Cloud)'
+  const templateType = 'Atlas (Cloud)';
   const uri = {
     authSource: 'admin',
     database: 'myDatabase',
@@ -171,9 +149,7 @@ describe('Cloud (MongoDB version 3.4)', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });
@@ -181,23 +157,18 @@ describe('Cloud (MongoDB version 3.4)', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
-    })
+    });
   });
 
   describe('when there are multiple placeholders', () => {
     it('replaces all placeholders', () => {
-      const value =
-        `return MongoClient("<URISTRING>")
+      const value = `return MongoClient("<URISTRING>")
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = renderer
-        .create(<URIText value={value} templateType={templateType} uri={uri} />)
-        .toJSON();
+      const tree = renderer.create(<URIText value={value} templateType={templateType} uri={uri} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });

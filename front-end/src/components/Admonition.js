@@ -1,46 +1,60 @@
-import React, { Component } from 'react';
-import ComponentFactory from '../components/ComponentFactory';
+import React from 'react';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 
-export default class Admonition extends Component {
-
-  // backwards compatible css classnames
-  admonitionRendering() {
-    if (this.props.nodeData.name === 'admonition') {
-      return (
-        <div className={ `admonition admonition-${this.props.nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}` }>
-          <p className="first admonition-title">{ this.props.nodeData.argument[0].value }</p>
-          <section>
-            <ComponentFactory { ...this.props } nodeData={ { type: 'paragraph', children: this.props.nodeData.children[0].children } } admonition={ true } />
-          </section>
-        </div>
-      )
-    } else {
-      // combine argument and children from admonition as separate paragraphs
-      const childElements = [...this.props.nodeData.argument, ...this.props.nodeData.children];
-      console.log('Admonition about to render paragraph', this.props.nodeData, childElements);
-      return (
-        <div className={ (this.props.nodeData.name === 'tip') ? `admonition admonition-tip` : `admonition ${this.props.nodeData.name}` }>
-          <p className="first admonition-title">{ this.props.nodeData.name }</p>
-          <section>
-            <ComponentFactory 
-              { ...this.props }
-              admonition={ true }
-              nodeData={ 
-                { 
-                  type: 'paragraph',
-                  children: childElements
-                } 
-              } />
-          </section>
-        </div>
-      )
-    }
-  }
-
-  render() {
+const Admonition = props => {
+  const { nodeData } = props;
+  if (nodeData.name === 'admonition') {
     return (
-      this.admonitionRendering()
-    )
+      <div className={`admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`}>
+        <p className="first admonition-title">{nodeData.argument[0].value}</p>
+        <section>
+          <ComponentFactory
+            {...props}
+            nodeData={{
+              type: 'paragraph',
+              children: nodeData.children[0].children,
+            }}
+            admonition
+          />
+        </section>
+      </div>
+    );
   }
+  // combine argument and children from admonition as separate paragraphs
+  const childElements = [...nodeData.argument, ...nodeData.children];
 
-}
+  return (
+    <div className={nodeData.name === 'tip' ? `admonition admonition-tip` : `admonition ${nodeData.name}`}>
+      <p className="first admonition-title">{nodeData.name}</p>
+      <section>
+        <ComponentFactory
+          {...props}
+          admonition
+          nodeData={{
+            type: 'paragraph',
+            children: childElements,
+          }}
+        />
+      </section>
+    </div>
+  );
+};
+
+Admonition.propTypes = {
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        children: PropTypes.array,
+      })
+    ),
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default Admonition;

@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import ComponentFactory from '../components/ComponentFactory';
+import React from 'react';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 
-export default class List extends Component {
+const List = props => {
+  const { nodeData } = props;
+  return (
+    <ul>
+      {nodeData.children.map((item, index) => (
+        <li key={index}>
+          {item.children.map((listItem, listItemIndex) => (
+            <ComponentFactory {...props} nodeData={listItem} key={listItemIndex} />
+          ))}
+        </li>
+      ))}
+    </ul>
+  );
+};
 
-  render() {
-    return (
-      <ul>
-        {
-          this.props.nodeData.children.map((item, index) => {
-            return (
-              <li key={ index }>
-                {
-                  item.children.map((listItem, listItemIndex) => {
-                    return <ComponentFactory { ...this.props } nodeData={ listItem } key={ listItemIndex } />
-                  })
-                }
-              </li>
-            )
-          })
-        }
-      </ul>
-    )
-  }
+List.propTypes = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.array.isRequired,
+  }).isRequired,
+};
 
-}
-
+export default List;
