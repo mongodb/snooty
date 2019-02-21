@@ -1,22 +1,36 @@
-import React, { Component } from 'react';
-import ComponentFactory from '../components/ComponentFactory';
+import React from 'react';
+import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 
-export default class Paragraph extends Component {
+const Paragraph = props => {
+  const { admonition, nodeData } = props;
 
-  render() {
-    return (
-      <p style={ { margin: this.props.admonition ? '0 auto' : '' } }>
-        { 
-          this.props.nodeData.children.map((element, index) => {
-            if (element.type === 'text') {
-              return <span key={ index }>{ element.value }</span>
-            } else {
-              return <ComponentFactory { ...this.props } nodeData={ element } key={ index } />
-            }
-          })
+  return (
+    <p style={{ margin: admonition ? '0 auto' : '' }}>
+      {nodeData.children.map((element, index) => {
+        if (element.type === 'text') {
+          return <React.Fragment key={index}>{element.value}</React.Fragment>;
         }
-      </p>
-    )
-  }
+        return <ComponentFactory {...props} nodeData={element} key={index} />;
+      })}
+    </p>
+  );
+};
 
-}
+Paragraph.propTypes = {
+  admonition: PropTypes.bool,
+  nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        value: PropTypes.string,
+      })
+    ).isRequired,
+  }).isRequired,
+};
+
+Paragraph.defaultProps = {
+  admonition: false,
+};
+
+export default Paragraph;
