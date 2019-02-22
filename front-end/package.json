@@ -63,7 +63,6 @@
     "html-webpack-plugin": "^3.2.0",
     "mongodb-stitch-browser-sdk": "^4.0.13",
     "mongodb-stitch-server-sdk": "^4.0.13",
-    "path": "^0.12.7",
     "prop-types": "^15.7.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
