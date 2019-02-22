@@ -1,5 +1,427 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`when mounted with one type of guide renders correctly 1`] = `ShallowWrapper {}`;
+exports[`when mounted with one type of guide renders correctly 1`] = `
+Array [
+  <Category
+    cards={
+      Array [
+        Object {
+          "argument": Array [
+            Object {
+              "value": "server/install",
+            },
+          ],
+          "name": "card",
+        },
+      ]
+    }
+    category={
+      Object {
+        "iconSlug": "getting-started",
+        "name": "Getting Started",
+      }
+    }
+    key="getting-started"
+    refDocMapping={
+      Object {
+        "server/install": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Install MongoDB",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Getting Started",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      }
+    }
+  />,
+  <Category
+    cards={Array []}
+    category={
+      Object {
+        "iconSlug": "use-case",
+        "name": "Use Case",
+      }
+    }
+    key="use-case"
+    refDocMapping={
+      Object {
+        "server/install": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Install MongoDB",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Getting Started",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      }
+    }
+  />,
+  <Category
+    cards={Array []}
+    category={
+      Object {
+        "iconSlug": "deep-dive",
+        "name": "Deep Dive",
+      }
+    }
+    key="deep-dive"
+    refDocMapping={
+      Object {
+        "server/install": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Install MongoDB",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Getting Started",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      }
+    }
+  />,
+]
+`;
 
-exports[`when mounted with two types of guides renders correctly 1`] = `ShallowWrapper {}`;
+exports[`when mounted with two types of guides renders correctly 1`] = `
+Array [
+  <Category
+    cards={
+      Array [
+        Object {
+          "argument": Array [
+            Object {
+              "value": "server/install",
+            },
+          ],
+          "name": "card",
+        },
+      ]
+    }
+    category={
+      Object {
+        "iconSlug": "getting-started",
+        "name": "Getting Started",
+      }
+    }
+    key="getting-started"
+    refDocMapping={
+      Object {
+        "cloud/atlas": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Create an Atlas Account and Cluster",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Deep Dive",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        "server/install": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Install MongoDB",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Getting Started",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      }
+    }
+  />,
+  <Category
+    cards={Array []}
+    category={
+      Object {
+        "iconSlug": "use-case",
+        "name": "Use Case",
+      }
+    }
+    key="use-case"
+    refDocMapping={
+      Object {
+        "cloud/atlas": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Create an Atlas Account and Cluster",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Deep Dive",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        "server/install": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Install MongoDB",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Getting Started",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      }
+    }
+  />,
+  <Category
+    cards={
+      Array [
+        Object {
+          "argument": Array [
+            Object {
+              "type": "text",
+              "value": "MongoDB in the Cloud",
+            },
+          ],
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "value": "cloud/atlas",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "value": "cloud/connectionstring",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          "name": "multi-card",
+        },
+      ]
+    }
+    category={
+      Object {
+        "iconSlug": "deep-dive",
+        "name": "Deep Dive",
+      }
+    }
+    key="deep-dive"
+    refDocMapping={
+      Object {
+        "cloud/atlas": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Create an Atlas Account and Cluster",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Deep Dive",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        "server/install": Object {
+          "ast": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Install MongoDB",
+                      },
+                    ],
+                    "type": "heading",
+                  },
+                  Object {
+                    "argument": Array [
+                      Object {
+                        "type": "text",
+                        "value": "Getting Started",
+                      },
+                    ],
+                    "children": Array [],
+                    "name": "type",
+                    "type": "directive",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      }
+    }
+  />,
+]
+`;

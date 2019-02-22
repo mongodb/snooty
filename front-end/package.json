@@ -7,6 +7,7 @@
     "babel-jest": "^24.0.0",
     "babel-loader": "^8.0.2",
     "babel-plugin-react-html-attrs": "^2.1.0",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.12.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",
@@ -37,6 +38,9 @@
     "verbose": true,
     "setupFilesAfterEnv": [
       "./src/testsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ]
   },
   "lint-staged": {
@@ -57,7 +61,6 @@
     "express": "^4.16.4",
     "gatsby": "^2.0.72",
     "html-webpack-plugin": "^3.2.0",
-    "json5": "^2.1.0",
     "mongodb-stitch-browser-sdk": "^4.0.13",
     "mongodb-stitch-server-sdk": "^4.0.13",
     "prop-types": "^15.7.1",
