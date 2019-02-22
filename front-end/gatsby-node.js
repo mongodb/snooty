@@ -72,14 +72,14 @@ exports.sourceNodes = async ({ actions }) => {
   // if running with test data
   if (USE_TEST_DATA) {
 
-    // make sure file exists before loading test data from it
-    const fullpath = `${TEST_DATA_PATH}/${USE_TEST_DATA}`;
-    if (fs.existsSync(fullpath)) {
+    // get data from test file
+    try {
+      const fullpath = path.join(TEST_DATA_PATH, USE_TEST_DATA);
       const fileContent = fs.readFileSync(fullpath, 'utf8');
       RESOLVED_REF_DOC_MAPPING = JSON.parse(fileContent); 
       console.log(`*** Using test data from "${fullpath}"`);
-    } else {
-      throw Error (`ERROR: file "${fullpath}" does not exist`);
+    } catch (e) {
+      throw Error (`ERROR with test data file: ${e}`);
     }
 
   } else {
@@ -135,7 +135,7 @@ exports.sourceNodes = async ({ actions }) => {
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
-    const fullpathLatest = `${TEST_DATA_PATH}/${LATEST_TEST_DATA_FILE}`;
+    const fullpathLatest = path.join(TEST_DATA_PATH, ); `${TEST_DATA_PATH}/${LATEST_TEST_DATA_FILE}`;
     fs.writeFile(fullpathLatest, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', (err) => {
       if (err) console.log(`ERROR saving test data into "${fullpathLatest}" file`, err);
       console.log(`** Saved test data into "${fullpathLatest}"`);

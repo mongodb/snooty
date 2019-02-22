@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import Admonition from '../src/components/Admonition';
 
 // data for this component
-import mockData from "./data/Admonition.test.json";
+import mockData from './data/Admonition.test.json';
 
 it('renders correctly', () => {
   const tree = shallow(<Admonition nodeData={ mockData } />);

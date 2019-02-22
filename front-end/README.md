@@ -2,7 +2,7 @@
 
 Uses Gatsby to build static site.
 
-Installation:
+## Installation:
 
 ```
 npm install
@@ -14,7 +14,7 @@ If this is your first time running the site you'll need the static directory:
 make static
 ```
 
-Running locally:
+## Running locally:
 
 ```
 STITCH_ID=<STITCH_ID> NAMESPACE=<DB/COLLECTION> PREFIX=<SITE/USER/BRANCH> gatsby develop
@@ -28,9 +28,9 @@ To build and serve the site, use the same ENV vars from above:
 gatsby serve
 ```
 
-Using mock test data:
+## Using mock test data:
 
-Everytime you run the application, the data retrieved for the docs site is stored in `tests/__testDataLatest.json` and there is a stable version of the data that does not change in `tests/__testData.json`. You can load either one of these into the Gatsby build with the flag:
+Every time you run the application without the flag below, the data retrieved for the docs site is stored in `tests/__testDataLatest.json`. There is also a reference data file in `tests/__testData.json`. You can load either one of these into the Gatsby build with the flag:
 
 ```
 USE_TEST_DATA=__testData.json
