@@ -1,24 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
-<div
-  className="admonition note"
->
-  <p
-    className="first admonition-title"
-  >
-    note
-  </p>
-  <section>
-    <p
-      style={
-        Object {
-          "margin": "0 auto",
-        }
-      }
-    >
-      These instructions are for installing MongoDB directly from
-    </p>
-  </section>
-</div>
-`;
+exports[`renders correctly 1`] = `ShallowWrapper {}`;

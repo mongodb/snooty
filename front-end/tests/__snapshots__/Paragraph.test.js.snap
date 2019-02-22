@@ -1,14 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
-<p
-  style={
-    Object {
-      "margin": "",
-    }
-  }
->
-  Verify that MongoDB has started successfully by
-checking the process output for the following line:
-</p>
-`;
+exports[`renders correctly 1`] = `ShallowWrapper {}`;

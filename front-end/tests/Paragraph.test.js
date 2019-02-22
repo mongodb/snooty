@@ -1,14 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import Paragraph from '../src/components/Paragraph';
 
 // data for this component
-import mockData from '../tests/data/Paragraph.test.json';
+import mockData from "./data/Paragraph.test.json";
 
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<Paragraph nodeData={ mockData } />)
-    .toJSON();
+  const tree = shallow(<Paragraph nodeData={ mockData } />);
   expect(tree).toMatchSnapshot();
 });

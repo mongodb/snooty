@@ -1,14 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import Admonition from '../src/components/Admonition';
 
 // data for this component
-import mockData from '../tests/data/Admonition.test.json';
+import mockData from "./data/Admonition.test.json";
 
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<Admonition nodeData={ mockData } />)
-    .toJSON();
+  const tree = shallow(<Admonition nodeData={ mockData } />);
   expect(tree).toMatchSnapshot();
 });
