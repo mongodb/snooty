@@ -6,6 +6,6 @@ import Emphasis from '../src/components/Emphasis';
 import mockData from './data/Emphasis.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Emphasis nodeData={ mockData } />);
+  const tree = shallow(<Emphasis nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

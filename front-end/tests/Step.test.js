@@ -6,6 +6,6 @@ import Step from '../src/components/Step';
 import mockData from './data/Step.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Step nodeData={ mockData } />);
+  const tree = shallow(<Step nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

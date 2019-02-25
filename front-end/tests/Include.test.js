@@ -6,6 +6,6 @@ import Include from '../src/components/Include';
 import mockData from './data/Include.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Include nodeData={ mockData } />);
+  const tree = shallow(<Include nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

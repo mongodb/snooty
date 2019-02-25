@@ -6,6 +6,6 @@ import List from '../src/components/List';
 import mockData from './data/List.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<List nodeData={ mockData } />);
+  const tree = shallow(<List nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

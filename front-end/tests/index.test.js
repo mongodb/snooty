@@ -6,6 +6,6 @@ import Index from '../src/templates/index';
 import mockData from './data/index.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Index pageContext={ { __refDocMapping: mockData } } />);
+  const tree = shallow(<Index pageContext={{ __refDocMapping: mockData }} />);
   expect(tree).toMatchSnapshot();
 });

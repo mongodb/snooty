@@ -6,6 +6,6 @@ import Literal from '../src/components/Literal';
 import mockData from './data/Literal.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Literal nodeData={ mockData } />);
+  const tree = shallow(<Literal nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

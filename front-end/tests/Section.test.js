@@ -6,6 +6,6 @@ import Section from '../src/components/Section';
 import mockData from './data/Section.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Section nodeData={ mockData } />);
+  const tree = shallow(<Section nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

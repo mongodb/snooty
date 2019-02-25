@@ -6,6 +6,6 @@ import Figure from '../src/components/Figure';
 import mockData from './data/Figure.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Figure nodeData={ mockData } />);
+  const tree = shallow(<Figure nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

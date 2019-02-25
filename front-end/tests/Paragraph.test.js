@@ -6,6 +6,6 @@ import Paragraph from '../src/components/Paragraph';
 import mockData from './data/Paragraph.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Paragraph nodeData={ mockData } />);
+  const tree = shallow(<Paragraph nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

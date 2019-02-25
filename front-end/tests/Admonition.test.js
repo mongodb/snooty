@@ -6,6 +6,6 @@ import Admonition from '../src/components/Admonition';
 import mockData from './data/Admonition.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Admonition nodeData={ mockData } />);
+  const tree = shallow(<Admonition nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

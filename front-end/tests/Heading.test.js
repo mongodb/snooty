@@ -6,6 +6,6 @@ import Heading from '../src/components/Heading';
 import mockData from './data/Heading.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Heading nodeData={ mockData } />);
+  const tree = shallow(<Heading nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

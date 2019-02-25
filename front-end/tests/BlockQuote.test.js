@@ -6,6 +6,6 @@ import BlockQuote from '../src/components/BlockQuote';
 import mockData from './data/BlockQuote.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<BlockQuote nodeData={ mockData } />);
+  const tree = shallow(<BlockQuote nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });
