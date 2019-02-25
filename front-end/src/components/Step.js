@@ -32,4 +32,10 @@ Step.propTypes = {
   stepNum: PropTypes.number,
 };
 
+Step.defaultProps = {
+  showAllSteps: true,
+  showStepIndex: 0,
+  stepNum: 0,
+};
+
 export default Step;

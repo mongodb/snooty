@@ -53,4 +53,8 @@ Code.propTypes = {
   }),
 };
 
+Code.defaultProps = {
+  uri: {},
+};
+
 export default Code;

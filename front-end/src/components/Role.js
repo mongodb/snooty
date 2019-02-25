@@ -78,3 +78,7 @@ Role.propTypes = {
     target: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+Role.defaultProps = {
+  modal: () => {},
+};
