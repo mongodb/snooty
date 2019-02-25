@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly role "doc" 1`] = `
+<a
+  href="/cloud/atlas"
+>
+  Create an Atlas Account and Cluster
+</a>
+`;
+
+exports[`renders correctly role "ref" 1`] = `
+<span>
+  ==Role not implemented:
+  ref
+   ==
+</span>
+`;

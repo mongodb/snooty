@@ -94,7 +94,6 @@ exports.sourceNodes = async ({ actions }) => {
     // resolve references/urls to documents
     RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [PREFIX, NAMESPACE, documents, RESOLVED_REF_DOC_MAPPING]);
 
-
   }
 
   // separate references into correct types, e.g. pages, include files, assets, etc.
