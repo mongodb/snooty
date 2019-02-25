@@ -50,7 +50,7 @@ Code.propTypes = {
     hostlist: PropTypes.object,
     replicaSet: PropTypes.string,
     username: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default Code;
