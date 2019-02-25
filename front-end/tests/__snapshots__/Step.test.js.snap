@@ -13,14 +13,14 @@ exports[`renders correctly 1`] = `
     className="bullet-block"
     style={
       Object {
-        "display": "none",
+        "display": false,
       }
     }
   >
     <div
       className="sequence-step"
     >
-      NaN
+      1
     </div>
   </div>
   <div
@@ -122,6 +122,9 @@ exports[`renders correctly 1`] = `
           "type": "section",
         }
       }
+      showAllSteps={true}
+      showStepIndex={0}
+      stepNum={0}
     />
   </div>
 </div>
