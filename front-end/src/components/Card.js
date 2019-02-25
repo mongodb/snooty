@@ -11,26 +11,28 @@ export default class Card extends Component {
   }
 
   cardContent() {
-    const { card } = this.props;
+    const { card, time } = this.props;
     const innerContent = (
-      <section style={{ height: '100%' }}>
+      <React.Fragment>
         <div className="guide__title">
           {card.name === 'card' ? this.getTitle(card.argument[0].value) : card.argument[0].value}
         </div>
-        <ul className="guide__body">
-          {card.name === 'multi-card' &&
-            card.children[0].children.map((listItem, index) => (
+        {card.name === 'multi-card' ? (
+          <ul className="guide__body">
+            {card.children[0].children.map((listItem, index) => (
               <li className="guide__entry" key={index}>
                 <a href={listItem.children[0].children[0].value}>
                   {this.getTitle(listItem.children[0].children[0].value)}
                 </a>
               </li>
             ))}
-        </ul>
+          </ul>
+        ) : (
+          <div className="guide__body" />
+        )}
         <ul className="guide__pills" />
-        {/* TODO: display accurate time estimate for guide */}
-        {card.name === 'card' && <div className="guide__time">{card.name === 'card' && '5min'}</div>}
-      </section>
+        {card.name === 'card' && <div className="guide__time">{time} min</div>}
+      </React.Fragment>
     );
     if (card.name === 'multi-card') {
       return <div className="guide guide--jumbo guide--expanded">{innerContent}</div>;
@@ -62,4 +64,9 @@ Card.propTypes = {
     name: PropTypes.string.isRequired,
   }).isRequired,
   refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
+  time: PropTypes.string,
+};
+
+Card.defaultProps = {
+  time: undefined,
 };
