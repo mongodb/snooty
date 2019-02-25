@@ -1,10 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import Paragraph from '../src/components/Paragraph';
 
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<Paragraph nodeData={{ children: [{ type: 'text', value: 'hello world' }] }} />)
-    .toJSON();
+  const tree = shallow(<Paragraph nodeData={{ children: [{ type: 'text', value: 'hello world' }] }} />);
   expect(tree).toMatchSnapshot();
 });
