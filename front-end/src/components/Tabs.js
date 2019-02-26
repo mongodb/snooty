@@ -5,8 +5,14 @@ import ComponentFactory from './ComponentFactory';
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
-    const { addLanguages, nodeData } = this.props;
-    addLanguages([...nodeData.children]);
+    const { changeActiveLanguage, nodeData, addTabset } = this.props;
+    const createdTabset = addTabset([...nodeData.children]);
+    const tabsetValues = createdTabset.map(element => element[0]);
+    // TODO: make this not as lame
+    this.tabsetType = 'activeLanguage';
+    if (tabsetValues.includes('windows')) {
+      this.tabsetType = 'activeOSTab';
+    }
   }
 
   render() {
@@ -15,7 +21,10 @@ export default class Tabs extends Component {
       <div
         key={index}
         style={{
-          display: activeLanguage === undefined || activeLanguage[0] === tab.argument[0].value ? 'block' : 'none',
+          display:
+            this.props[this.tabsetType] === undefined || this.props[this.tabsetType][0] === tab.argument[0].value
+              ? 'block'
+              : 'none',
         }}
       >
         <h3 style={{ color: 'green' }}>{tab.argument[0].value} Code</h3>
@@ -27,7 +36,7 @@ export default class Tabs extends Component {
 
 Tabs.propTypes = {
   activeLanguage: PropTypes.arrayOf(PropTypes.string),
-  addLanguages: PropTypes.func.isRequired,
+  changeActiveLanguage: PropTypes.func.isRequired,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({

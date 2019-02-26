@@ -18,6 +18,7 @@ export default class Guide extends Component {
         this.props['*'] // eslint-disable-line react/destructuring-assignment
       ].ast.children[0].children;
     this.languageList = pageContext.__languageList;
+    this.OSTabList = this.props.pageContext.__OSTabList;
     this.stitchId = pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
@@ -26,6 +27,8 @@ export default class Guide extends Component {
     this.state = {
       languages: [],
       activeLanguage: undefined,
+      OSTabs: [],
+      activeOSTab: undefined,
       modalPositionLeft: 0,
       modalPositionTop: 0,
       modalVisible: false,
@@ -52,20 +55,39 @@ export default class Guide extends Component {
     });
   }
 
-  // this function gets an array of objects with language pill options
-  // and sets the state to this list in the correct order
-  addLanguages = languages => {
-    const languagesInGuide = languages.map(langObj => langObj.argument[0].value);
-    const setLanguages = this.languageList.filter(langOpts => languagesInGuide.includes(langOpts[0]));
+  createTabsetType = (opts, setTabs) => {
     this.setState({
-      languages: setLanguages,
-      activeLanguage: setLanguages[0],
+      [opts.type]: setTabs,
+      [opts.active]: setTabs[0],
     });
+  };
+
+  // this function gets an array of objects that compose some tabset
+  // currently only supports: language pills, OS tabs
+  // TODO: cloud/local
+  addTabset = languages => {
+    // language tabset
+    const tabsInGuide = languages.map(langObj => langObj.argument[0].value);
+    let setTabs = this.languageList.filter(langOpts => tabsInGuide.includes(langOpts[0]));
+    // OS tabset
+    if (!setTabs || setTabs.length === 0) {
+      setTabs = this.OSTabList.filter(langOpts => tabsInGuide.includes(langOpts[0]));
+      this.createTabsetType({ type: 'OSTabs', active: 'activeOSTab' }, setTabs);
+    } else {
+      this.createTabsetType({ type: 'languages', active: 'activeLanguage' }, setTabs);
+    }
+    return setTabs;
   };
 
   changeActiveLanguage = language => {
     this.setState({
       activeLanguage: language,
+    });
+  };
+
+  changeActiveOSTab = language => {
+    this.setState({
+      activeOSTab: language,
     });
   };
 
@@ -152,7 +174,7 @@ export default class Guide extends Component {
 
   createSections() {
     const { pageContext } = this.props;
-    const { activeLanguage } = this.state;
+    const { activeLanguage, activeOSTab, OSTabs } = this.state;
     return this.sections
       .filter(section => this.validNames.includes(section.name))
       .map((section, index) => (
@@ -162,8 +184,12 @@ export default class Guide extends Component {
           admonitions={this.admonitions}
           refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
           modal={this.modalFetchData}
-          addLanguages={this.addLanguages}
+          changeActiveLanguage={this.changeActiveLanguage}
+          addTabset={this.addTabset}
           activeLanguage={activeLanguage}
+          OSTabs={OSTabs}
+          activeOSTab={activeOSTab}
+          changeActiveOSTab={this.changeActiveOSTab}
           stitchClient={this.stitchClient}
         />
       ));
@@ -189,10 +215,10 @@ export default class Guide extends Component {
               languages={languages}
               activeLanguage={activeLanguage}
               changeActiveLanguage={this.changeActiveLanguage}
+              addTabset={this.addTabset}
               admonitions={this.admonitions}
               refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
               modal={this.modalFetchData}
-              addLanguages={this.addLanguages}
               stitchClient={this.stitchClient}
             />
             <Modal
