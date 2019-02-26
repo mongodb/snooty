@@ -54,7 +54,7 @@ Code.propTypes = {
 };
 
 Code.defaultProps = {
-  uri: {},
+  uri: undefined,
 };
 
 export default Code;

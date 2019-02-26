@@ -46,5 +46,5 @@ Include.propTypes = {
 
 Include.defaultProps = {
   updateTotalStepCount: () => {},
-  refDocMapping: {},
+  refDocMapping: undefined,
 };
