@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="button-code-block"
+>
+  <div
+    className="button-row"
+  >
+    <button
+      className="code-button--copy code-button"
+      type="button"
+    >
+      copy
+      <div
+        className="code-button__tooltip code-button__tooltip--inactive"
+      >
+        copied
+      </div>
+    </button>
+  </div>
+  <div
+    className="copyable-code-block highlight-python notranslate"
+  >
+    <div
+      className="highlight"
+    >
+      <pre>
+        mongoimport --db test --collection inventory ^
+          --authenticationDatabase admin --username &lt;user&gt; --password &lt;password&gt; ^
+          --drop --file ~\\downloads\\inventory.crud.json
+      </pre>
+    </div>
+  </div>
+</div>
+`;

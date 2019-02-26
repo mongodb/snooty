@@ -40,10 +40,11 @@ Include.propTypes = {
     ast: PropTypes.shape({
       children: PropTypes.array,
     }),
-  }).isRequired,
+  }),
   updateTotalStepCount: PropTypes.func,
 };
 
 Include.defaultProps = {
   updateTotalStepCount: () => {},
+  refDocMapping: undefined,
 };

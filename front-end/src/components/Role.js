@@ -66,7 +66,7 @@ export default class Role extends Component {
 }
 
 Role.propTypes = {
-  modal: PropTypes.func.isRequired,
+  modal: PropTypes.func,
   nodeData: PropTypes.shape({
     label: PropTypes.oneOfType([
       PropTypes.shape({
@@ -77,4 +77,8 @@ Role.propTypes = {
     name: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
   }).isRequired,
+};
+
+Role.defaultProps = {
+  modal: () => {},
 };
