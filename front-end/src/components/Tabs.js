@@ -6,15 +6,15 @@ export default class Tabs extends Component {
   constructor(props) {
     super(props);
     const { nodeData, addTabset } = this.props;
-    const createdTabset = addTabset([...nodeData.children]);
-    const tabsetValues = createdTabset.map(element => element[0]);
-    this.renderedTabset = tabsetValues.includes('windows') ? 'activeOSTab' : 'activeLanguage';
+    addTabset([...nodeData.children]);
   }
 
   render() {
     const { nodeData, activeOSTab, activeLanguage } = this.props;
-    // TODO: make more robust and allow for more tab types
-    const tabsetType = activeOSTab && this.renderedTabset === 'activeOSTab' ? activeOSTab : activeLanguage;
+    const tabsetType =
+      nodeData.options && nodeData.options.tabset && nodeData.options.tabset === 'drivers'
+        ? activeLanguage
+        : activeOSTab;
     return nodeData.children.map((tab, index) => (
       <div
         key={index}
