@@ -18,7 +18,7 @@ export default class Guide extends Component {
         this.props['*'] // eslint-disable-line react/destructuring-assignment
       ].ast.children[0].children;
     this.languageList = pageContext.__languageList;
-    this.OSTabList = this.props.pageContext.__OSTabList;
+    this.OSTabList = pageContext.__OSTabList;
     this.stitchId = pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
@@ -249,6 +249,7 @@ Guide.propTypes = {
   '*': PropTypes.string.isRequired,
   pageContext: PropTypes.shape({
     __languageList: PropTypes.arrayOf(PropTypes.array).isRequired,
+    __OSTabList: PropTypes.arrayOf(PropTypes.array).isRequired,
     __refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
     __stitchID: PropTypes.string.isRequired,
   }).isRequired,

@@ -5,26 +5,21 @@ import ComponentFactory from './ComponentFactory';
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
-    const { changeActiveLanguage, nodeData, addTabset } = this.props;
+    const { nodeData, addTabset } = this.props;
     const createdTabset = addTabset([...nodeData.children]);
     const tabsetValues = createdTabset.map(element => element[0]);
-    // TODO: make this not as lame
-    this.tabsetType = 'activeLanguage';
-    if (tabsetValues.includes('windows')) {
-      this.tabsetType = 'activeOSTab';
-    }
+    this.renderedTabset = tabsetValues.includes('windows') ? 'activeOSTab' : 'activeLanguage';
   }
 
   render() {
-    const { activeLanguage, nodeData } = this.props;
+    const { nodeData, activeOSTab, activeLanguage } = this.props;
+    // TODO: make more robust and allow for more tab types
+    const tabsetType = activeOSTab && this.renderedTabset === 'activeOSTab' ? activeOSTab : activeLanguage;
     return nodeData.children.map((tab, index) => (
       <div
         key={index}
         style={{
-          display:
-            this.props[this.tabsetType] === undefined || this.props[this.tabsetType][0] === tab.argument[0].value
-              ? 'block'
-              : 'none',
+          display: !tabsetType || tabsetType[0] === tab.argument[0].value ? 'block' : 'none',
         }}
       >
         <h3 style={{ color: 'green' }}>{tab.argument[0].value} Code</h3>
@@ -36,7 +31,7 @@ export default class Tabs extends Component {
 
 Tabs.propTypes = {
   activeLanguage: PropTypes.arrayOf(PropTypes.string),
-  changeActiveLanguage: PropTypes.func.isRequired,
+  activeOSTab: PropTypes.arrayOf(PropTypes.string),
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -49,8 +44,10 @@ Tabs.propTypes = {
       })
     ),
   }).isRequired,
+  addTabset: PropTypes.func.isRequired,
 };
 
 Tabs.defaultProps = {
   activeLanguage: undefined,
+  activeOSTab: undefined,
 };
