@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="admonition note"
+>
+  <p
+    className="first admonition-title"
+  >
+    note
+  </p>
+  <section>
+    <ComponentFactory
+      admonition={true}
+      nodeData={
+        Object {
+          "children": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 6,
+                },
+              },
+              "type": "text",
+              "value": "These instructions are for installing MongoDB directly from",
+            },
+          ],
+          "type": "paragraph",
+        }
+      }
+    />
+  </section>
+</div>
+`;

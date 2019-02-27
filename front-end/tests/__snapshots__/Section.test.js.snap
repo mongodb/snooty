@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <ComponentFactory
+    key="0"
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "Connect to your MongoDB instance",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 0,
+          },
+        },
+        "type": "heading",
+      }
+    }
+  />,
+  <ComponentFactory
+    key="1"
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "/includes/drivers_whitelist.rst",
+          },
+        ],
+        "children": Array [
+          Object {
+            "children": Array [],
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "FixedTextElement",
+          },
+        ],
+        "name": "include",
+        "position": Object {
+          "start": Object {
+            "line": 0,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />,
+  <ComponentFactory
+    key="2"
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 2,
+              },
+            },
+            "type": "text",
+            "value": "/includes/drivers_connect.rst",
+          },
+        ],
+        "children": Array [
+          Object {
+            "children": Array [],
+            "position": Object {
+              "start": Object {
+                "line": 2,
+              },
+            },
+            "type": "FixedTextElement",
+          },
+        ],
+        "name": "include",
+        "position": Object {
+          "start": Object {
+            "line": 2,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />,
+]
+`;

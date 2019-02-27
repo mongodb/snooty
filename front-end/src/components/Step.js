@@ -27,9 +27,15 @@ Step.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
   }).isRequired,
-  showAllSteps: PropTypes.bool.isRequired,
-  showStepIndex: PropTypes.number.isRequired,
-  stepNum: PropTypes.number.isRequired,
+  showAllSteps: PropTypes.bool,
+  showStepIndex: PropTypes.number,
+  stepNum: PropTypes.number,
+};
+
+Step.defaultProps = {
+  showAllSteps: true,
+  showStepIndex: 0,
+  stepNum: 0,
 };
 
 export default Step;
