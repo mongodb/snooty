@@ -1,0 +1,504 @@
+[
+  {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 10
+      }
+    },
+    "name": "card",
+    "argument": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 10
+          }
+        },
+        "value": "server/introduction"
+      }
+    ],
+    "children": []
+  },
+  {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 12
+      }
+    },
+    "name": "card",
+    "argument": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 12
+          }
+        },
+        "value": "server/install"
+      }
+    ],
+    "children": []
+  },
+  {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 14
+      }
+    },
+    "name": "multi-card",
+    "argument": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 14
+          }
+        },
+        "value": "MongoDB in the Cloud"
+      }
+    ],
+    "children": [
+      {
+        "type": "list",
+        "position": {
+          "start": {
+            "line": 16
+          }
+        },
+        "ordered": false,
+        "children": [
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 16
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 16
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 16
+                      }
+                    },
+                    "value": "cloud/atlas"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 16
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 17
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 17
+                      }
+                    },
+                    "value": "cloud/connectionstring"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 19
+      }
+    },
+    "name": "multi-card",
+    "argument": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 19
+          }
+        },
+        "value": "Migrate to MongoDB Atlas"
+      }
+    ],
+    "children": [
+      {
+        "type": "list",
+        "position": {
+          "start": {
+            "line": 21
+          }
+        },
+        "ordered": false,
+        "children": [
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 21
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 21
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 21
+                      }
+                    },
+                    "value": "cloud/migrate-from-aws-to-atlas"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 21
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 22
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 22
+                      }
+                    },
+                    "value": "cloud/migrate-from-compose"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 21
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 23
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 23
+                      }
+                    },
+                    "value": "cloud/migrate-from-mlab"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 25
+      }
+    },
+    "name": "card",
+    "argument": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 25
+          }
+        },
+        "value": "server/import"
+      }
+    ],
+    "children": []
+  },
+  {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 27
+      }
+    },
+    "name": "card",
+    "argument": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 27
+          }
+        },
+        "value": "server/drivers"
+      }
+    ],
+    "children": []
+  },
+  {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 29
+      }
+    },
+    "name": "multi-card",
+    "argument": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 29
+          }
+        },
+        "value": "CRUD Guides: Create, Read, Update, and Delete Data"
+      }
+    ],
+    "children": [
+      {
+        "type": "list",
+        "position": {
+          "start": {
+            "line": 31
+          }
+        },
+        "ordered": false,
+        "children": [
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 31
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 31
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 31
+                      }
+                    },
+                    "value": "server/insert"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 31
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 32
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 32
+                      }
+                    },
+                    "value": "server/read"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 31
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 33
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 33
+                      }
+                    },
+                    "value": "server/read_queries"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 31
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 34
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 34
+                      }
+                    },
+                    "value": "server/read_operators"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 31
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 35
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 35
+                      }
+                    },
+                    "value": "server/update"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "position": {
+              "start": {
+                "line": 31
+              }
+            },
+            "children": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 36
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": 36
+                      }
+                    },
+                    "value": "server/delete"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

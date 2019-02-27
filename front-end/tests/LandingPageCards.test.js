@@ -2,176 +2,23 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import LandingPageCards from '../src/components/LandingPageCards';
 
+import mockRefDocMapping from './data/index.test.json';
+import mockRefDocMappingMultiple from './data/indexTwoGuideCategories.test.json';
+import mockGuides from './data/LandingPageCards.test.json';
+
 const mountLandingPageCards = ({ guides, refDocMapping }) =>
   mount(<LandingPageCards guides={guides} refDocMapping={refDocMapping} />);
 
 const shallowLandingPageCards = ({ guides, refDocMapping }) =>
   shallow(<LandingPageCards guides={guides} refDocMapping={refDocMapping} />);
 
-const getOneCategoryDefaultProps = () => ({
-  guides: [
-    {
-      argument: [
-        {
-          value: 'server/install',
-        },
-      ],
-      name: 'card',
-    },
-  ],
-  refDocMapping: {
-    'server/install': {
-      ast: {
-        children: [
-          {
-            children: [
-              {
-                children: [
-                  {
-                    type: 'text',
-                    value: 'Install MongoDB',
-                  },
-                ],
-                type: 'heading',
-              },
-              {
-                argument: [
-                  {
-                    type: 'text',
-                    value: 'Getting Started',
-                  },
-                ],
-                children: [],
-                name: 'type',
-                type: 'directive',
-              },
-            ],
-          },
-        ],
-      },
-    },
-  },
-});
-
-const getTwoCategoryDefaultProps = () => ({
-  guides: [
-    {
-      argument: [
-        {
-          value: 'server/install',
-        },
-      ],
-      name: 'card',
-    },
-    {
-      argument: [
-        {
-          type: 'text',
-          value: 'MongoDB in the Cloud',
-        },
-      ],
-      children: [
-        {
-          children: [
-            {
-              children: [
-                {
-                  children: [
-                    {
-                      value: 'cloud/atlas',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              children: [
-                {
-                  children: [
-                    {
-                      value: 'cloud/connectionstring',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      name: 'multi-card',
-    },
-  ],
-  refDocMapping: {
-    'server/install': {
-      ast: {
-        children: [
-          {
-            children: [
-              {
-                children: [
-                  {
-                    type: 'text',
-                    value: 'Install MongoDB',
-                  },
-                ],
-                type: 'heading',
-              },
-              {
-                argument: [
-                  {
-                    type: 'text',
-                    value: 'Getting Started',
-                  },
-                ],
-                children: [],
-                name: 'type',
-                type: 'directive',
-              },
-            ],
-          },
-        ],
-      },
-    },
-    'cloud/atlas': {
-      ast: {
-        children: [
-          {
-            children: [
-              {
-                children: [
-                  {
-                    type: 'text',
-                    value: 'Create an Atlas Account and Cluster',
-                  },
-                ],
-                type: 'heading',
-              },
-              {
-                argument: [
-                  {
-                    type: 'text',
-                    value: 'Deep Dive',
-                  },
-                ],
-                children: [],
-                name: 'type',
-                type: 'directive',
-              },
-            ],
-          },
-        ],
-      },
-    },
-  },
-});
-
 describe('when mounted with one type of guide', () => {
   let wrapper;
   let shallowWrapper;
 
   beforeAll(() => {
-    wrapper = mountLandingPageCards(getOneCategoryDefaultProps());
-    shallowWrapper = shallowLandingPageCards(getOneCategoryDefaultProps());
+    wrapper = mountLandingPageCards({ guides: mockGuides, refDocMapping: mockRefDocMapping });
+    shallowWrapper = shallowLandingPageCards({ guides: mockGuides, refDocMapping: mockRefDocMapping });
   });
 
   it('renders correctly', () => {
@@ -183,8 +30,8 @@ describe('when mounted with one type of guide', () => {
     expect(wrapper.find('.guide-category__title')).toHaveLength(1);
   });
 
-  it('shows one card', () => {
-    expect(wrapper.find('Card')).toHaveLength(1);
+  it('shows seven cards', () => {
+    expect(wrapper.find('Card')).toHaveLength(7);
   });
 });
 
@@ -193,8 +40,8 @@ describe('when mounted with two types of guides', () => {
   let shallowWrapper;
 
   beforeAll(() => {
-    wrapper = mountLandingPageCards(getTwoCategoryDefaultProps());
-    shallowWrapper = shallowLandingPageCards(getTwoCategoryDefaultProps());
+    wrapper = mountLandingPageCards({ guides: mockGuides, refDocMapping: mockRefDocMappingMultiple });
+    shallowWrapper = shallowLandingPageCards({ guides: mockGuides, refDocMapping: mockRefDocMappingMultiple });
   });
 
   it('renders correctly', () => {
@@ -206,7 +53,7 @@ describe('when mounted with two types of guides', () => {
     expect(wrapper.find('.guide-category__title')).toHaveLength(2);
   });
 
-  it('shows 2 cards', () => {
-    expect(wrapper.find('Card')).toHaveLength(2);
+  it('shows seven cards', () => {
+    expect(wrapper.find('Card')).toHaveLength(7);
   });
 });
