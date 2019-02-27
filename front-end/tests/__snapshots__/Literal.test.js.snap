@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<code
+  className="docutils literal notranslate"
+>
+  <span
+    className="pre"
+  >
+    N. Virginia (us-east-1)
+  </span>
+</code>
+`;

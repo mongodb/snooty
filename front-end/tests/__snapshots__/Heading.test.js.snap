@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<h3>
+  Create an administrative username and password
+  <a
+    className="headerlink"
+    href="#BLA-BLA"
+    title="Permalink to this headline"
+  >
+    ¶
+  </a>
+</h3>
+`;
