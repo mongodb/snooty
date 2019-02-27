@@ -27,6 +27,10 @@ const STITCH_ID = process.env.STITCH_ID;
 const NAMESPACE = process.env.NAMESPACE;
 const NAMESPACE_ASSETS = NAMESPACE.split('/')[0] + '/' + 'assets';
 
+const USE_TEST_DATA = process.env.USE_TEST_DATA;
+const TEST_DATA_PATH = 'tests/data/site';
+const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
+
 // different types of references
 const PAGES = [];
 const INCLUDE_FILES = [];
@@ -65,17 +69,32 @@ exports.sourceNodes = async ({ actions }) => {
 
   await setupStitch();
 
-  // start from index document
-  const query = { _id: `${ PREFIX.join('/') }/index` };
+  // if running with test data
+  if (USE_TEST_DATA) {
 
-  // get index document
-  const documents = await stitchClient.callFunction('fetchDocuments', [NAMESPACE, query]);
+    // get data from test file
+    try {
+      const fullpath = path.join(TEST_DATA_PATH, USE_TEST_DATA);
+      const fileContent = fs.readFileSync(fullpath, 'utf8');
+      RESOLVED_REF_DOC_MAPPING = JSON.parse(fileContent); 
+      console.log(`*** Using test data from "${fullpath}"`);
+    } catch (e) {
+      throw Error (`ERROR with test data file: ${e}`);
+    }
 
-  // set data for index page
-  RESOLVED_REF_DOC_MAPPING['index'] = (documents && documents.length > 0) ? documents[0] : {};
+  } else {
 
-  // resolve references/urls to documents
-  RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [PREFIX, NAMESPACE, documents, RESOLVED_REF_DOC_MAPPING]);
+    // start from index document
+    const query = { _id: `${ PREFIX.join('/') }/index` };
+    const documents = await stitchClient.callFunction('fetchDocuments', [NAMESPACE, query]);
+
+    // set data for index page
+    RESOLVED_REF_DOC_MAPPING['index'] = (documents && documents.length > 0) ? documents[0] : {};
+
+    // resolve references/urls to documents
+    RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [PREFIX, NAMESPACE, documents, RESOLVED_REF_DOC_MAPPING]);
+
+  }
 
   // separate references into correct types, e.g. pages, include files, assets, etc.
   for (const ref of Object.keys(RESOLVED_REF_DOC_MAPPING)) {
@@ -112,6 +131,15 @@ exports.sourceNodes = async ({ actions }) => {
   console.log(33, GITHUB_CODE_EXAMPLES);
   console.log(44, ASSETS);
   //console.log(RESOLVED_REF_DOC_MAPPING);
+
+  // whenever we get latest data, always save latest version
+  if (!USE_TEST_DATA) {
+    const fullpathLatest = path.join(TEST_DATA_PATH, ); `${TEST_DATA_PATH}/${LATEST_TEST_DATA_FILE}`;
+    fs.writeFile(fullpathLatest, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', (err) => {
+      if (err) console.log(`ERROR saving test data into "${fullpathLatest}" file`, err);
+      console.log(`** Saved test data into "${fullpathLatest}"`);
+    });
+  }
 
 };
 

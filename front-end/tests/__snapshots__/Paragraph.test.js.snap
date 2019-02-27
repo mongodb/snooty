@@ -8,6 +8,7 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  hello world
+  Verify that MongoDB has started successfully by
+checking the process output for the following line:
 </p>
 `;
