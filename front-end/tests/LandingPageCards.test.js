@@ -30,6 +30,12 @@ describe('when mounted with one type of guide', () => {
     expect(wrapper.find('.guide-category__title')).toHaveLength(1);
   });
 
+  it('shows the correct icon', () => {
+    expect(wrapper.find('.guide-category__title--getting-started')).toHaveLength(1);
+    expect(wrapper.find('.guide-category__title--use-case')).toHaveLength(0);
+    expect(wrapper.find('.guide-category__title--deep-dive')).toHaveLength(0);
+  });
+
   it('shows seven cards', () => {
     expect(wrapper.find('Card')).toHaveLength(7);
   });
@@ -51,6 +57,12 @@ describe('when mounted with two types of guides', () => {
   it('only shows one heading', () => {
     expect(wrapper.find('Category')).toHaveLength(3);
     expect(wrapper.find('.guide-category__title')).toHaveLength(2);
+  });
+
+  it('shows the correct icons', () => {
+    expect(wrapper.find('.guide-category__title--getting-started')).toHaveLength(1);
+    expect(wrapper.find('.guide-category__title--use-case')).toHaveLength(1);
+    expect(wrapper.find('.guide-category__title--deep-dive')).toHaveLength(0);
   });
 
   it('shows seven cards', () => {
