@@ -6,13 +6,14 @@ const ListTable = ({ nodeData: { children, options } }) => {
   const stubColumnCount = parseInt(options['stub-columns'], 10);
   const headerRows = children[0].children[0].children.slice(0, headerRowCount);
   const bodyRows = children[0].children.slice(headerRowCount);
+  const customWidth = options.width ? options.width : 'auto';
   let widths = '';
   if (options.widths) {
     widths = options.widths === 'auto' ? 'colwidths-auto' : 'colwidths-given';
   }
 
   return (
-    <table className={`docutils ${options.class} ${widths}`}>
+    <table className={`docutils ${options.class} ${widths}`} style={{ width: customWidth }}>
       {widths === 'colwidths-given' && <Colgroup widths={options.widths.split(/[ ,]+/)} />}
       <ListTableHeader rows={headerRows} stubColumnCount={stubColumnCount} />
       <ListTableBody rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
