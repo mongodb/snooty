@@ -9,7 +9,7 @@ export default class GuideHeading extends Component {
   }
 
   render() {
-    const { activeLanguage, changeActiveLanguage, languages } = this.props;
+    const { setActiveTab, activeLanguage, languages, activeDeployment, deployments } = this.props;
     return (
       <div className="section" id="SOMETHING_HERE">
         <h1>
@@ -19,26 +19,43 @@ export default class GuideHeading extends Component {
           </a>
         </h1>
 
-        <div className="guide-prefs__deploy" style={{ display: 'none' }}>
-          <div className="guide-prefs__caption">
-            Deployment Type:
-            <span className="show-current-deployment">local</span>
+        {deployments && deployments.length > 0 && (
+          <div className="guide-prefs">
+            <div className="guide-prefs__caption">
+              Deployment Type:
+              <span className="show-current-deployment"> {activeDeployment[1]}</span>
+            </div>
+            <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="cloud">
+              {deployments.map((langOpts, index) => (
+                <li
+                  className={
+                    activeDeployment[0] === langOpts[0]
+                      ? 'guide__pill guide__deploymentpill guide__deploymentpill--active'
+                      : 'guide__pill guide__deploymentpill'
+                  }
+                  data-tabid={langOpts[0]}
+                  key={index}
+                >
+                  <span
+                    onClick={() => {
+                      setActiveTab(langOpts, 'activeDeployment');
+                    }}
+                    role="button"
+                    tabIndex={index}
+                  >
+                    {langOpts[1]}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="cloud">
-            <li className="guide__pill guide__deploymentpill" data-tabid="cloud">
-              cloud
-            </li>
-            <li className="guide__pill guide__deploymentpill guide__deploymentpill--active" data-tabid="local">
-              local
-            </li>
-          </ul>
-        </div>
+        )}
 
         {languages && languages.length > 0 && (
           <div className="guide-prefs">
             <div className="guide-prefs__caption">
               Client:
-              <span className="show-current-language">{activeLanguage[1]}</span>
+              <span className="show-current-language"> {activeLanguage[1]}</span>
             </div>
             <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="languages">
               {languages.map((langOpts, index) => (
@@ -49,7 +66,7 @@ export default class GuideHeading extends Component {
                 >
                   <span
                     onClick={() => {
-                      changeActiveLanguage(langOpts);
+                      setActiveTab(langOpts, 'activeLanguage');
                     }}
                     role="button"
                     tabIndex={index}
@@ -80,8 +97,10 @@ export default class GuideHeading extends Component {
 
 GuideHeading.propTypes = {
   activeLanguage: PropTypes.arrayOf(PropTypes.string),
-  changeActiveLanguage: PropTypes.func.isRequired,
+  activeDeployment: PropTypes.arrayOf(PropTypes.string),
+  setActiveTab: PropTypes.func.isRequired,
   languages: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  deployments: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   sections: PropTypes.arrayOf(
     PropTypes.shape({
       children: PropTypes.arrayOf(
@@ -96,4 +115,6 @@ GuideHeading.propTypes = {
 GuideHeading.defaultProps = {
   activeLanguage: undefined,
   languages: [],
+  activeDeployment: undefined,
+  deployments: [],
 };

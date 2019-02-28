@@ -58,6 +58,9 @@ export default class GuideSection extends Component {
   render() {
     const {
       guideSectionData: { children, name },
+      OSTabs,
+      activeOSTab,
+      setActiveTab,
     } = this.props;
     const {
       showAllSteps,
@@ -86,6 +89,26 @@ export default class GuideSection extends Component {
             showAllStepsText={showAllStepsText}
           />
         )}
+        {name === 'procedure' && OSTabs.length > 0 && (
+          <ul className="tab-strip tab-strip--singleton" role="tablist">
+            {OSTabs.map((langOpts, index) => {
+              return (
+                <li
+                  className="tab-strip__element"
+                  data-tabid={langOpts[0]}
+                  role="tab"
+                  aria-selected={activeOSTab[0] === langOpts[0] ? 'true' : 'false'}
+                  key={index}
+                  onClick={() => {
+                    setActiveTab(langOpts, 'activeOSTab');
+                  }}
+                >
+                  {langOpts[1]}
+                </li>
+              );
+            })}
+          </ul>
+        )}
         {children.map((child, index) => (
           <ComponentFactory
             {...this.props}
@@ -109,4 +132,13 @@ GuideSection.propTypes = {
     children: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
+  OSTabs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  activeOSTab: PropTypes.arrayOf(PropTypes.string),
+  setActiveTab: PropTypes.func,
+};
+
+GuideSection.defaultProps = {
+  OSTabs: undefined,
+  activeOSTab: undefined,
+  setActiveTab: undefined,
 };

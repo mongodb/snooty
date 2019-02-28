@@ -4,23 +4,6 @@ const crypto = require('crypto');
 const uuidv1 = require('uuid/v1');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
-const LANGUAGES = [
-  ['shell', 'Mongo Shell'],
-  ['compass', 'Compass'],
-  ['python', 'Python'],
-  ['java-sync', 'Java (Sync)'],
-  ['nodejs', 'Node.js'],
-  ['php', 'PHP'],
-  ['motor', 'Motor'],
-  ['java-async', 'Java (Async)'],
-  ['c', 'C'],
-  ['cpp', 'C++11'],
-  ['csharp', 'C#'],
-  ['perl', 'Perl'],
-  ['ruby', 'Ruby'],
-  ['scala', 'Scala']
-];
-
 // ENV vars
 const PREFIX = process.env.PREFIX.split('/');
 const STITCH_ID = process.env.STITCH_ID;
@@ -157,7 +140,6 @@ exports.createPages = ({ graphql, actions }) => {
           component: path.resolve(`./src/templates/${ template }.js`),
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
-            __languageList: LANGUAGES,
             __stitchID: STITCH_ID
           }
         });
