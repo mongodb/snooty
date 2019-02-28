@@ -29,7 +29,7 @@
     "start": "node server.js",
     "dev": "webpack --mode development",
     "lint": "eslint src/ tests/",
-    "lintfix": "eslint --fix src/ tests/",
+    "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
     "precommit": "lint-staged",
     "test": "jest --verbose ./tests"
   },

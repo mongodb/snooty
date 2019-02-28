@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Card from '../components/Card';
+import LandingPageCards from '../components/LandingPageCards';
 
 export default class Index extends Component {
   constructor(propsFromServer) {
     super(propsFromServer);
     this.state = {
       name: 'Guides',
-      description: 'Getting Started',
       guides: [],
     };
   }
@@ -39,32 +38,23 @@ export default class Index extends Component {
 
   render() {
     const { pageContext } = this.props;
-    const { description, guides, name } = this.state;
+    const { guides, name } = this.state;
 
     if (guides.length === 0) {
       return null;
     }
 
-    const allCards = guides.map((card, index) => (
-      <Card card={card} key={index} cardId={index} refDocMapping={pageContext.__refDocMapping} />
-    ));
-
     return (
       <div className="content">
         <div className="guide-category-list">
           <div className="section" id="guides">
-            <div>
-              <h1>
-                {name}
-                <a className="headerlink" href="#guides" title="Permalink to this headline">
-                  ¶
-                </a>
-              </h1>
-              <section className="guide-category">
-                <div className="guide-category__title guide-category__title--getting-started">{description}</div>
-                <div className="guide-category__guides">{allCards}</div>
-              </section>
-            </div>
+            <h1>
+              {name}
+              <a className="headerlink" href="#guides" title="Permalink to this headline">
+                ¶
+              </a>
+            </h1>
+            <LandingPageCards guides={guides} refDocMapping={pageContext.__refDocMapping} />
           </div>
         </div>
       </div>
