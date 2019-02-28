@@ -1,1 +1,97 @@
-{"type":"list","position":{"start":{"line":16}},"ordered":false,"children":[{"type":"listItem","position":{"start":{"line":16}},"children":[{"type":"paragraph","position":{"start":{"line":16}},"children":[{"type":"text","position":{"start":{"line":16}},"value":"create a free account on Atlas, MongoDB's managed database solution in the cloud"}]}]},{"type":"listItem","position":{"start":{"line":16}},"children":[{"type":"paragraph","position":{"start":{"line":17}},"children":[{"type":"text","position":{"start":{"line":17}},"value":"create a free MongoDB "},{"type":"emphasis","position":{"start":{"line":17}},"children":[{"type":"text","position":{"start":{"line":17}},"value":"cluster"}]},{"type":"text","position":{"start":{"line":17}},"value":", or group of database instances."}]}]}]}
+{
+  "type": "list",
+  "position": {
+    "start": {
+      "line": 16
+    }
+  },
+  "ordered": false,
+  "children": [
+    {
+      "type": "listItem",
+      "position": {
+        "start": {
+          "line": 16
+        }
+      },
+      "children": [
+        {
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 16
+            }
+          },
+          "children": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 16
+                }
+              },
+              "value": "create a free account on Atlas, MongoDB's managed database solution in the cloud"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "listItem",
+      "position": {
+        "start": {
+          "line": 16
+        }
+      },
+      "children": [
+        {
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 17
+            }
+          },
+          "children": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 17
+                }
+              },
+              "value": "create a free MongoDB "
+            },
+            {
+              "type": "emphasis",
+              "position": {
+                "start": {
+                  "line": 17
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "value": "cluster"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 17
+                }
+              },
+              "value": ", or group of database instances."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
