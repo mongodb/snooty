@@ -61,5 +61,9 @@ Card.propTypes = {
     ),
     name: PropTypes.string.isRequired,
   }).isRequired,
-  refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
+  refDocMapping: PropTypes.shape({
+    index: PropTypes.shape({
+      ast: PropTypes.object,
+    }).isRequired,
+  }).isRequired,
 };
