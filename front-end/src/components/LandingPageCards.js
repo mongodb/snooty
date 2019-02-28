@@ -17,6 +17,10 @@ const CATEGORIES = [
   },
 ];
 
+/**
+ * Recursively searches the AST to find the guide category ('type').
+ * Prevents us from having to rely on a fixed depth for this property.
+ */
 const getGuideType = nodes => {
   let result;
   const iter = node => {
