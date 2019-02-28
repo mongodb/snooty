@@ -1,1 +1,25 @@
-{"type":"directive","position":{"start":{"line":13}},"name":"figure","argument":[{"type":"text","position":{"start":{"line":13}},"value":"/images/firstcluster.png"}],"options":{"figwidth":"700px","checksum":"968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706"},"children":[]}
+{
+  "type": "directive",
+  "position": {
+    "start": {
+      "line": 13
+    }
+  },
+  "name": "figure",
+  "argument": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 13
+        }
+      },
+      "value": "/images/firstcluster.png"
+    }
+  ],
+  "options": {
+    "figwidth": "700px",
+    "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706"
+  },
+  "children": []
+}
