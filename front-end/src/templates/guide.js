@@ -5,7 +5,7 @@ import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
-import { __languages, __ostabs, __deployments } from '../constants';
+import { LANGUAGES, OSTABS, DEPLOYMENTS } from '../constants';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -18,9 +18,9 @@ export default class Guide extends Component {
       pageContext.__refDocMapping[
         this.props['*'] // eslint-disable-line react/destructuring-assignment
       ].ast.children[0].children;
-    this.languageList = __languages;
-    this.OSTabList = __ostabs;
-    this.deploymentList = __deployments;
+    this.languageList = LANGUAGES;
+    this.OSTabList = OSTABS;
+    this.deploymentList = DEPLOYMENTS;
     this.stitchId = pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;

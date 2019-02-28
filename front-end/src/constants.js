@@ -1,4 +1,4 @@
-const __languages = [
+const LANGUAGES = [
   ['shell', 'Mongo Shell'],
   ['compass', 'Compass'],
   ['python', 'Python'],
@@ -15,8 +15,8 @@ const __languages = [
   ['scala', 'Scala'],
 ];
 
-const __ostabs = [['windows', 'Windows'], ['macOS', 'macOS'], ['linux', 'Linux']];
+const OSTABS = [['windows', 'Windows'], ['macOS', 'macOS'], ['linux', 'Linux']];
 
-const __deployments = [['cloud', 'Cloud'], ['local', 'Local']];
+const DEPLOYMENTS = [['cloud', 'Cloud'], ['local', 'Local']];
 
-export { __languages, __ostabs, __deployments };
+export { LANGUAGES, OSTABS, DEPLOYMENTS };
