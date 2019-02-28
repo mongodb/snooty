@@ -6,7 +6,7 @@ export default class Tabs extends Component {
   constructor(props) {
     super(props);
     const { nodeData, addTabset } = this.props;
-    addTabset([...nodeData.children]);
+    addTabset(nodeData.options ? nodeData.options : { tabset: 'os' }, [...nodeData.children]);
   }
 
   render() {

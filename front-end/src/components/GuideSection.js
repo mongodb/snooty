@@ -56,7 +56,12 @@ export default class GuideSection extends Component {
   };
 
   render() {
-    const { guideSectionData, OSTabs, activeOSTab, changeActiveOSTab } = this.props;
+    const {
+      guideSectionData: { children, name },
+      OSTabs,
+      activeOSTab,
+      setActiveTab,
+    } = this.props;
     const {
       showAllSteps,
       showAllStepsText,
@@ -68,14 +73,14 @@ export default class GuideSection extends Component {
     } = this.state;
 
     return (
-      <div className="section" id={guideSectionData.name}>
+      <div className="section" id={name}>
         <h2>
-          {this.nameMapping[guideSectionData.name]}
-          <a className="headerlink" href={`#${guideSectionData.name}`} title="Permalink to this headline">
+          {this.nameMapping[name]}
+          <a className="headerlink" href={`#${name}`} title="Permalink to this headline">
             ¶
           </a>
         </h2>
-        {guideSectionData.name === 'procedure' && showStepper && (
+        {name === 'procedure' && showStepper && (
           <Stepper
             totalStepsInProcedure={totalStepsInProcedure}
             showStepIndex={showStepIndex}
@@ -84,7 +89,7 @@ export default class GuideSection extends Component {
             showAllStepsText={showAllStepsText}
           />
         )}
-        {guideSectionData.name === 'procedure' && OSTabs.length > 0 ? (
+        {name === 'procedure' && OSTabs.length > 0 && (
           <ul className="tab-strip tab-strip--singleton" role="tablist">
             {OSTabs.map((langOpts, index) => {
               return (
@@ -95,7 +100,7 @@ export default class GuideSection extends Component {
                   aria-selected={activeOSTab[0] === langOpts[0] ? 'true' : 'false'}
                   key={index}
                   onClick={() => {
-                    changeActiveOSTab(langOpts);
+                    setActiveTab(langOpts, 'activeOSTab');
                   }}
                 >
                   {langOpts[1]}
@@ -103,10 +108,8 @@ export default class GuideSection extends Component {
               );
             })}
           </ul>
-        ) : (
-          ''
         )}
-        {guideSectionData.children.map((child, index) => (
+        {children.map((child, index) => (
           <ComponentFactory
             {...this.props}
             handleUpdateURIWriter={this.handleUpdateURIWriter}
@@ -131,11 +134,11 @@ GuideSection.propTypes = {
   }).isRequired,
   OSTabs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   activeOSTab: PropTypes.arrayOf(PropTypes.string),
-  changeActiveOSTab: PropTypes.func,
+  setActiveTab: PropTypes.func,
 };
 
 GuideSection.defaultProps = {
   OSTabs: undefined,
   activeOSTab: undefined,
-  changeActiveOSTab: undefined,
+  setActiveTab: undefined,
 };
