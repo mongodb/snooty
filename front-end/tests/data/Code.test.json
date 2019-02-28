@@ -1,1 +1,11 @@
-{"type":"code","position":{"start":{"line":0}},"lang":"javascript","copyable":true,"value":"mongoimport --db test --collection inventory ^\n          --authenticationDatabase admin --username <user> --password <password> ^\n          --drop --file ~\\downloads\\inventory.crud.json"}
+{
+  "type": "code",
+  "position": {
+    "start": {
+      "line": 0
+    }
+  },
+  "lang": "javascript",
+  "copyable": true,
+  "value": "mongoimport --db test --collection inventory ^\n          --authenticationDatabase admin --username <user> --password <password> ^\n          --drop --file ~\\downloads\\inventory.crud.json"
+}
