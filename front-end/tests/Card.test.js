@@ -8,7 +8,7 @@ import refDocMappingData from './data/index.test.json';
 
 const mountCard = ({ card, refDocMapping, time }) =>
   mount(<Card card={card} refDocMapping={refDocMapping} time={time} />);
-	
+
 const shallowCard = ({ card, refDocMapping, time }) =>
   shallow(<Card card={card} refDocMapping={refDocMapping} time={time} />);
 
