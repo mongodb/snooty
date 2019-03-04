@@ -60,7 +60,6 @@ export default class ComponentFactory extends Component {
     }
     // component with this type not implemented
     if (!ComponentType) {
-      console.log(111, this.props.nodeData);
       return (
         <span>
           ==Not implemented:

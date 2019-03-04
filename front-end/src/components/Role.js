@@ -15,7 +15,7 @@ export default class Role extends Component {
   }
 
   roleRendering() {
-    const { modal, nodeData } = this.props;
+    const { nodeData } = this.props;
     // normal link
     if (this.linkRoles.includes(nodeData.name)) {
       const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
@@ -87,7 +87,6 @@ export default class Role extends Component {
 }
 
 Role.propTypes = {
-  modal: PropTypes.func,
   nodeData: PropTypes.shape({
     label: PropTypes.oneOfType([
       PropTypes.shape({
@@ -98,8 +97,4 @@ Role.propTypes = {
     name: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
   }).isRequired,
-};
-
-Role.defaultProps = {
-  modal: () => {},
 };

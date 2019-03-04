@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
 
 const Reference = props => {
   const { nodeData } = props;
