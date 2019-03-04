@@ -15,27 +15,29 @@ import Figure from './Figure';
 import Literal from './Literal';
 import Heading from './Heading';
 import BlockQuote from './BlockQuote';
+import Reference from './Reference';
 import URIWriter from './URIWriter';
 
 export default class ComponentFactory extends Component {
   constructor() {
     super();
     this.componentMap = {
-      step: Step,
-      paragraph: Paragraph,
-      list: List,
+      admonition: Admonition,
+      block_quote: BlockQuote,
+      code: Code,
       emphasis: Emphasis,
+      figure: Figure,
+      heading: Heading,
       include: Include,
+      list: List,
+      literal: Literal,
+      literalinclude: LiteralInclude,
+      paragraph: Paragraph,
+      reference: Reference,
       role: Role,
       section: Section,
-      code: Code,
-      literalinclude: LiteralInclude,
+      step: Step,
       tabs: Tabs,
-      admonition: Admonition,
-      figure: Figure,
-      literal: Literal,
-      heading: Heading,
-      block_quote: BlockQuote,
       uriwriter: URIWriter,
     };
   }
@@ -45,6 +47,10 @@ export default class ComponentFactory extends Component {
       admonitions,
       nodeData: { name, type },
     } = this.props;
+    // do nothing with targets for now (cc. Andrew)
+    if (type === 'target') {
+      return null;
+    }
     const lookup = type === 'directive' ? name : type;
     let ComponentType = this.componentMap[lookup];
     // the different admonition types are all under the Admonition component
@@ -54,6 +60,7 @@ export default class ComponentFactory extends Component {
     }
     // component with this type not implemented
     if (!ComponentType) {
+      console.log(111, this.props.nodeData);
       return (
         <span>
           ==Not implemented:

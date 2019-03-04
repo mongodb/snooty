@@ -4,9 +4,15 @@ import ComponentFactory from './ComponentFactory';
 
 const Admonition = props => {
   const { nodeData } = props;
+
   if (nodeData.name === 'admonition') {
+    let fullClassName = `admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`;
+    // special admonitions have options
+    if (nodeData.options && nodeData.options.class) {
+      fullClassName += ` ${nodeData.options.class}`;
+    }
     return (
-      <div className={`admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`}>
+      <div className={fullClassName}>
         <p className="first admonition-title">{nodeData.argument[0].value}</p>
         <section>
           <ComponentFactory

@@ -10,42 +10,63 @@ export default class Role extends Component {
       dbcommand: term => `${this.base}/command/${term}/#dbcmd.${term}`,
       method: term => `${this.base}/method/${term}/#${term}`,
     };
-    this.codeRoles = ['binary'];
+    this.linkRoles = ['doc', 'manual'];
+    this.codeRoles = ['binary', 'option', 'authrole', 'setting'];
   }
 
   roleRendering() {
     const { modal, nodeData } = this.props;
     // normal link
-    if (nodeData.name === 'doc') {
-      return <a href={nodeData.target}>{nodeData.label.value}</a>;
-    }
-    // roles with interaction
-    if (this.roleDataTypes[nodeData.name]) {
-      const termModified = nodeData.target.replace('()', '').replace('$', '');
-      const href = this.roleDataTypes[nodeData.name](termModified);
+    if (this.linkRoles.includes(nodeData.name)) {
+      const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
       return (
-        <a
-          href={href}
-          onMouseEnter={e => {
-            modal(e, href);
-          }}
-        >
-          {nodeData.label}
+        <a href={nodeData.target} className="reference external">
+          {label}
         </a>
       );
     }
-    // binary case is unique (maybe others will be as well)
-    if (this.codeRoles.includes(nodeData.name)) {
-      const termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
-      const href = `${this.base}/program/${termModified}/#${nodeData.target.replace('~', '')}`;
+    // guilabel
+    if (nodeData.name === 'guilabel') {
+      return <span className="guilabel">{nodeData.label}</span>;
+    }
+    // ref role
+    if (nodeData.name === 'ref') {
+      const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
       return (
-        <a
-          href={href}
-          className="reference external"
-          onMouseEnter={e => {
-            modal(e, href);
-          }}
-        >
+        <a href={`https://docs.mongodb.com/compass/current/#${nodeData.target}`} className="reference external">
+          <span className="xref std std-ref">{label}</span>
+        </a>
+      );
+    }
+    // basic roles with interaction
+    if (this.roleDataTypes[nodeData.name]) {
+      const termModified = nodeData.target.replace('()', '').replace('$', '');
+      const href = this.roleDataTypes[nodeData.name](termModified);
+      return <a href={href}>{nodeData.label}</a>;
+    }
+    // some special roles
+    if (this.codeRoles.includes(nodeData.name)) {
+      let termModified;
+      let href;
+      // TODO: see what can be done about all the slight differences in roles
+      if (nodeData.name === 'binary') {
+        termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
+        href = `${this.base}/program/${termModified}/#${nodeData.target.replace('~', '')}`;
+      }
+      if (nodeData.name === 'option') {
+        termModified = nodeData.label.value;
+        href = `${this.base}/program/mongoimport/#cmdoption-mongoimport-${termModified.replace('--', '')}`;
+      }
+      if (nodeData.name === 'authrole') {
+        termModified = nodeData.label;
+        href = `${this.base}/built-in-roles/#${termModified}`;
+      }
+      if (nodeData.name === 'setting') {
+        termModified = nodeData.label;
+        href = `${this.base}/configuration-options/#${termModified}`;
+      }
+      return (
+        <a href={href} className="reference external">
           <code className="xref mongodb mongodb-binary docutils literal notranslate">
             <span className="pre">{termModified}</span>
           </code>

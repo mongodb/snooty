@@ -24,7 +24,7 @@ export default class Guide extends Component {
     this.stitchId = pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
-    this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next'];
+    this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next', 'seealso'];
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       languages: [],
