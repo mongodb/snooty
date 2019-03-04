@@ -13,28 +13,23 @@ export default class Index extends Component {
 
   componentDidMount() {
     const { pageContext } = this.props;
-    this.findGuideIndex(pageContext.__refDocMapping.index.ast);
+    const guides = this.findGuideProperty(pageContext.__refDocMapping.index.ast.children, 'guide-index');
+    this.setState({ guides: guides.children });
   }
 
-  findGuideIndex(node) {
-    if (node.name === 'guide-index') {
-      this.setState({ guides: node.children });
-      return node.children;
-    }
+  findGuideProperty = (nodes, propertyName) => {
+    let result;
+    const iter = node => {
+      if (node.name === propertyName) {
+        result = node;
+        return true;
+      }
+      return Array.isArray(node.children) && node.children.some(iter);
+    };
 
-    if (node.children) {
-      node.children.forEach(child => {
-        const result = this.findGuideIndex(child);
-
-        if (result !== false) {
-          return result;
-        }
-        return false;
-      });
-    }
-
-    return false;
-  }
+    nodes.some(iter);
+    return result;
+  };
 
   render() {
     const { pageContext } = this.props;

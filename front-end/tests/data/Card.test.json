@@ -1,0 +1,21 @@
+{
+  "type": "directive",
+  "position": {
+    "start": {
+      "line": 12
+    }
+  },
+  "name": "card",
+  "argument": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "value": "server/install"
+    }
+  ],
+  "children": []
+}
