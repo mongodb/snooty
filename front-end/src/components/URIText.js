@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { DEPLOYMENTS } from '../constants';
 import {
   TEMPLATE_TYPE_SELF_MANAGED,
   TEMPLATE_TYPE_REPLICA_SET,
@@ -64,11 +66,13 @@ function optionStringifier(options, uri) {
   return optionParams.join(paramJoinCharacter);
 }
 
-function generateURI(uri, templateName, templateType) {
-  let template = templateName;
+function generateURI(uri, activeDeployment, templateType) {
+  let template = activeDeployment;
   if (uri.env) {
     template = uri.env;
-  } else if (templateName === TEMPLATE_TYPE_ATLAS) {
+  }
+
+  if (activeDeployment === TEMPLATE_TYPE_ATLAS) {
     template = TEMPLATE_TYPE_ATLAS_34;
   }
 
@@ -109,16 +113,30 @@ function generateURI(uri, templateName, templateType) {
   return TEMPLATES[template][templateType];
 }
 
-function replacePlaceholderWithURI(value, templateType, uri) {
+function replacePlaceholderWithURI(value, activeDeployment, uri) {
   return value
-    .replace(URI_PLACEHOLDER, generateURI(uri, templateType, 'template'))
+    .replace(URI_PLACEHOLDER, generateURI(uri, activeDeployment, 'template'))
     .replace(USERNAME_PLACEHOLDER, uri.username || '$[username]')
-    .replace(URISTRING_SHELL_PLACEHOLDER, generateURI(uri, templateType, 'templateShell'))
-    .replace(URISTRING_SHELL_NOUSER_PLACEHOLDER, generateURI(uri, templateType, 'templatePasswordRedactedShell'));
+    .replace(URISTRING_SHELL_PLACEHOLDER, generateURI(uri, activeDeployment, 'templateShell'))
+    .replace(URISTRING_SHELL_NOUSER_PLACEHOLDER, generateURI(uri, activeDeployment, 'templatePasswordRedactedShell'));
 }
 
-function URIText({ value, templateType, uri }) {
-  return replacePlaceholderWithURI(value, templateType, uri);
+function URIText({ value, activeDeployment, uri }) {
+  return replacePlaceholderWithURI(value, activeDeployment, uri);
 }
+
+URIText.propTypes = {
+  activeDeployment: PropTypes.string.isRequired,
+  uri: PropTypes.shape({
+    atlas: PropTypes.string,
+    authSource: PropTypes.string,
+    database: PropTypes.string,
+    env: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    hostlist: PropTypes.objectOf(PropTypes.string),
+    replicaSet: PropTypes.string,
+    username: PropTypes.string,
+  }).isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default URIText;

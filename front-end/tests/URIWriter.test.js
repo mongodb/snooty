@@ -1,14 +1,18 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { DEPLOYMENTS } from '../src/constants';
 import URIWriter from '../src/components/URIWriter';
 
-const mountURIWriter = ({ templateType, mockCallback }) =>
-  mount(<URIWriter templateType={templateType} handleUpdateURIWriter={mockCallback} />);
+const CLOUD_DEPLOYMENT = DEPLOYMENTS[0].name;
+const LOCAL_DEPLOYMENT = DEPLOYMENTS[1].name;
+
+const mountURIWriter = ({ activeDeployment, mockCallback }) =>
+  mount(<URIWriter activeDeployment={activeDeployment} handleUpdateURIWriter={mockCallback} />);
 
 const emptyCloudURI = {
   authSource: '',
   database: '',
-  env: 'Atlas (Cloud)',
+  env: 'cloud',
   hostlist: {
     host0: '',
   },
@@ -23,11 +27,11 @@ describe('URIWriter', () => {
     const mockCallback = jest.fn();
 
     beforeAll(() => {
-      wrapper = mountURIWriter({ mockCallback, templateType: 'local MongoDB' });
+      wrapper = mountURIWriter({ mockCallback, activeDeployment: LOCAL_DEPLOYMENT });
     });
 
     it('sets the env state to be local MongoDB', () => {
-      expect(wrapper.state().env).toBe('local MongoDB');
+      expect(wrapper.state().env).toBe('local');
     });
 
     it('does not show an error', () => {
@@ -87,7 +91,7 @@ describe('URIWriter', () => {
     });
 
     it('has local MongoDB selected as the active pill', () => {
-      expect(wrapper.find('.guide__pill--active').text()).toEqual('local MongoDB');
+      expect(wrapper.find('.guide__pill--active').text()).toEqual('Local MongoDB');
     });
 
     describe('when replica set is selected', () => {
@@ -108,7 +112,7 @@ describe('URIWriter', () => {
 
     describe('when updated with invalid host inputs', () => {
       beforeAll(() => {
-        wrapper = mountURIWriter({ mockCallback, templateType: 'local MongoDB' });
+        wrapper = mountURIWriter({ mockCallback, activeDeployment: LOCAL_DEPLOYMENT });
       });
 
       it('has one input field for hosts', () => {
@@ -138,7 +142,7 @@ describe('URIWriter', () => {
 
     beforeAll(() => {
       mockCallback = jest.fn();
-      wrapper = mountURIWriter({ mockCallback, templateType: 'Atlas (Cloud)' });
+      wrapper = mountURIWriter({ mockCallback, activeDeployment: CLOUD_DEPLOYMENT });
     });
 
     it('displays no input elements', () => {
@@ -251,6 +255,7 @@ describe('URIWriter', () => {
       it('has an empty uri state', () => {
         const state = wrapper.state();
         delete state.atlas;
+        delete state.prevPropsActiveDeployment;
         expect(state).toEqual(emptyCloudURI);
       });
 

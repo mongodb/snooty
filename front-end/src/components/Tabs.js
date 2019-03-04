@@ -30,8 +30,8 @@ export default class Tabs extends Component {
 }
 
 Tabs.propTypes = {
-  activeLanguage: PropTypes.arrayOf(PropTypes.string),
-  activeOSTab: PropTypes.arrayOf(PropTypes.string),
+  activeLanguage: PropTypes.string,
+  activeOSTab: PropTypes.string,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({

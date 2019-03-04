@@ -18,9 +18,6 @@ export default class Guide extends Component {
       pageContext.__refDocMapping[
         this.props['*'] // eslint-disable-line react/destructuring-assignment
       ].ast.children[0].children;
-    this.languageList = LANGUAGES;
-    this.OSTabList = OSTABS;
-    this.deploymentList = DEPLOYMENTS;
     this.stitchId = pageContext.__stitchID;
     this.stitchClient = undefined;
     this.DOMParser = undefined;
@@ -28,11 +25,11 @@ export default class Guide extends Component {
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       languages: [],
-      activeLanguage: undefined,
+      activeLanguage: LANGUAGES[0].name,
       OSTabs: [],
-      activeOSTab: undefined,
+      activeOSTab: OSTABS[0].name,
       deployments: [],
-      activeDeployment: undefined,
+      activeDeployment: DEPLOYMENTS[0].name,
       modalPositionLeft: 0,
       modalPositionTop: 0,
       modalVisible: false,
@@ -62,35 +59,34 @@ export default class Guide extends Component {
   createTabsetType = (opts, setTabs) => {
     this.setState({
       [opts.type]: setTabs,
-      [opts.active]: setTabs[0],
+      [opts.active]: setTabs[0].name,
     });
   };
 
   // this function gets an array of objects that compose some tabset
-  addTabset = (options, languages) => {
+  addTabset = (options, tabData) => {
     let tabsetOptions;
     let tabsetType;
     // different types of tabs
     if (options && options.tabset === 'cloud') {
-      tabsetType = 'deploymentList';
+      tabsetType = DEPLOYMENTS;
       tabsetOptions = { type: 'deployments', active: 'activeDeployment' };
     } else if (options && options.tabset === 'drivers') {
-      tabsetType = 'languageList';
+      tabsetType = LANGUAGES;
       tabsetOptions = { type: 'languages', active: 'activeLanguage' };
     } else {
-      tabsetType = 'OSTabList';
+      tabsetType = OSTABS;
       tabsetOptions = { type: 'OSTabs', active: 'activeOSTab' };
     }
     // get the values of tabset passed in and make sure they are valid names
-    const tabsInGuide = languages.map(langObj => langObj.argument[0].value);
-    const setTabs = this[tabsetType].filter(langOpts => tabsInGuide.includes(langOpts[0]));
-    this.createTabsetType(tabsetOptions, setTabs);
+    const tabs = tabData.map(tab => tab.argument[0].value);
+    const filteredTabs = tabsetType.filter(tab => tabs.includes(tab.name));
+    this.createTabsetType(tabsetOptions, filteredTabs);
   };
 
-  // change active tabset
-  setActiveTab = (language, type) => {
+  setActiveTab = (value, tabset) => {
     this.setState({
-      [type]: language,
+      [tabset]: value.name,
     });
   };
 
@@ -177,7 +173,7 @@ export default class Guide extends Component {
 
   createSections() {
     const { pageContext } = this.props;
-    const { activeLanguage, activeOSTab, OSTabs } = this.state;
+    const { activeDeployment, activeLanguage, activeOSTab, OSTabs } = this.state;
     return this.sections
       .filter(section => this.validNames.includes(section.name))
       .map((section, index) => (
@@ -190,6 +186,7 @@ export default class Guide extends Component {
           setActiveTab={this.setActiveTab}
           addTabset={this.addTabset}
           activeLanguage={activeLanguage}
+          activeDeployment={activeDeployment}
           OSTabs={OSTabs}
           activeOSTab={activeOSTab}
           stitchClient={this.stitchClient}
