@@ -1,0 +1,1415 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when rendering a list table with fixed widths renders correctly 1`] = `
+<table
+  className="docutils guide-tablenate-odd colwidths-given "
+  style={
+    Object {
+      "width": "auto",
+    }
+  }
+>
+  <ColGroup
+    widths={
+      Array [
+        "20",
+        "80",
+      ]
+    }
+  />
+  <ListTableHeader
+    rows={Array []}
+    stubColumnCount={0}
+  />
+  <ListTableBody
+    headerRowCount={0}
+    rows={
+      Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 33,
+                            },
+                          },
+                          "type": "text",
+                          "value": "notebook",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 33,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 33,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 34,
+                            },
+                          },
+                          "type": "text",
+                          "value": "50",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 34,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 33,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 35,
+                            },
+                          },
+                          "type": "text",
+                          "value": "8.5x11,in",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 35,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 33,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 36,
+                            },
+                          },
+                          "type": "text",
+                          "value": "A",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 36,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 33,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 37,
+                            },
+                          },
+                          "type": "text",
+                          "value": "college-ruled,perforated",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 37,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 33,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 38,
+                            },
+                          },
+                          "type": "text",
+                          "value": "8",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 38,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 33,
+                    },
+                  },
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "position": Object {
+                "start": Object {
+                  "line": 33,
+                },
+              },
+              "type": "list",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 26,
+            },
+          },
+          "type": "listItem",
+        },
+      ]
+    }
+    stubColumnCount={0}
+  />
+</table>
+`;
+
+exports[`when rendering a list-table directive renders correctly 1`] = `
+<table
+  className="docutils guide-tablenate colwidths-auto "
+  style={
+    Object {
+      "width": "auto",
+    }
+  }
+>
+  <ListTableHeader
+    rows={
+      Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 14,
+                        },
+                      },
+                      "type": "text",
+                      "value": "name",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 14,
+                    },
+                  },
+                  "type": "paragraph",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 14,
+                },
+              },
+              "type": "listItem",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 15,
+                        },
+                      },
+                      "type": "text",
+                      "value": "quantity",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 15,
+                    },
+                  },
+                  "type": "paragraph",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 14,
+                },
+              },
+              "type": "listItem",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 16,
+                        },
+                      },
+                      "type": "text",
+                      "value": "size",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 16,
+                    },
+                  },
+                  "type": "paragraph",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 14,
+                },
+              },
+              "type": "listItem",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 17,
+                        },
+                      },
+                      "type": "text",
+                      "value": "status",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 17,
+                    },
+                  },
+                  "type": "paragraph",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 14,
+                },
+              },
+              "type": "listItem",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 18,
+                        },
+                      },
+                      "type": "text",
+                      "value": "tags",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 18,
+                    },
+                  },
+                  "type": "paragraph",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 14,
+                },
+              },
+              "type": "listItem",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 19,
+                        },
+                      },
+                      "type": "text",
+                      "value": "rating",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 19,
+                    },
+                  },
+                  "type": "paragraph",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 14,
+                },
+              },
+              "type": "listItem",
+            },
+          ],
+          "ordered": false,
+          "position": Object {
+            "start": Object {
+              "line": 14,
+            },
+          },
+          "type": "list",
+        },
+      ]
+    }
+    stubColumnCount={1}
+  />
+  <ListTableBody
+    headerRowCount={1}
+    rows={
+      Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 21,
+                            },
+                          },
+                          "type": "text",
+                          "value": "journal",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 21,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 21,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 22,
+                            },
+                          },
+                          "type": "text",
+                          "value": "25",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 22,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 21,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 23,
+                            },
+                          },
+                          "type": "text",
+                          "value": "14x21,cm",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 23,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 21,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 24,
+                            },
+                          },
+                          "type": "text",
+                          "value": "A",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 24,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 21,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 25,
+                            },
+                          },
+                          "type": "text",
+                          "value": "brown, lined",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 25,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 21,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 26,
+                            },
+                          },
+                          "type": "text",
+                          "value": "9",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 26,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 21,
+                    },
+                  },
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "position": Object {
+                "start": Object {
+                  "line": 21,
+                },
+              },
+              "type": "list",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 14,
+            },
+          },
+          "type": "listItem",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 28,
+                            },
+                          },
+                          "type": "text",
+                          "value": "notebook",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 28,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 28,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 29,
+                            },
+                          },
+                          "type": "text",
+                          "value": "50",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 29,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 28,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 30,
+                            },
+                          },
+                          "type": "text",
+                          "value": "8.5x11,in",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 30,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 28,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 31,
+                            },
+                          },
+                          "type": "text",
+                          "value": "A",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 31,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 28,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 32,
+                            },
+                          },
+                          "type": "text",
+                          "value": "college-ruled,perforated",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 32,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 28,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 33,
+                            },
+                          },
+                          "type": "text",
+                          "value": "8",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 33,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 28,
+                    },
+                  },
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "position": Object {
+                "start": Object {
+                  "line": 28,
+                },
+              },
+              "type": "list",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 14,
+            },
+          },
+          "type": "listItem",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 35,
+                            },
+                          },
+                          "type": "text",
+                          "value": "paper",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 35,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 35,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 36,
+                            },
+                          },
+                          "type": "text",
+                          "value": "100",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 36,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 35,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 37,
+                            },
+                          },
+                          "type": "text",
+                          "value": "8.5x11,in",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 37,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 35,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 38,
+                            },
+                          },
+                          "type": "text",
+                          "value": "D",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 38,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 35,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 39,
+                            },
+                          },
+                          "type": "text",
+                          "value": "watercolor",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 39,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 35,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 40,
+                            },
+                          },
+                          "type": "text",
+                          "value": "10",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 40,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 35,
+                    },
+                  },
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "position": Object {
+                "start": Object {
+                  "line": 35,
+                },
+              },
+              "type": "list",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 14,
+            },
+          },
+          "type": "listItem",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 42,
+                            },
+                          },
+                          "type": "text",
+                          "value": "planner",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 42,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 42,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 43,
+                            },
+                          },
+                          "type": "text",
+                          "value": "75",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 43,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 42,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 44,
+                            },
+                          },
+                          "type": "text",
+                          "value": "22.85x30,cm",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 44,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 42,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 45,
+                            },
+                          },
+                          "type": "text",
+                          "value": "D",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 45,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 42,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 46,
+                            },
+                          },
+                          "type": "text",
+                          "value": "2019",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 46,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 42,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 47,
+                            },
+                          },
+                          "type": "text",
+                          "value": "10",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 47,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 42,
+                    },
+                  },
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "position": Object {
+                "start": Object {
+                  "line": 42,
+                },
+              },
+              "type": "list",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 14,
+            },
+          },
+          "type": "listItem",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 49,
+                            },
+                          },
+                          "type": "text",
+                          "value": "postcard",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 49,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 49,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 50,
+                            },
+                          },
+                          "type": "text",
+                          "value": "45",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 50,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 49,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 51,
+                            },
+                          },
+                          "type": "text",
+                          "value": "10x,cm",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 51,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 49,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "D",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 49,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 53,
+                            },
+                          },
+                          "type": "text",
+                          "value": "double-sided,white",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 53,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 49,
+                    },
+                  },
+                  "type": "listItem",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 54,
+                            },
+                          },
+                          "type": "text",
+                          "value": "2",
+                        },
+                      ],
+                      "position": Object {
+                        "start": Object {
+                          "line": 54,
+                        },
+                      },
+                      "type": "paragraph",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 49,
+                    },
+                  },
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "position": Object {
+                "start": Object {
+                  "line": 49,
+                },
+              },
+              "type": "list",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 14,
+            },
+          },
+          "type": "listItem",
+        },
+      ]
+    }
+    stubColumnCount={1}
+  />
+</table>
+`;

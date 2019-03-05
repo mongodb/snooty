@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when a multi card is mounted renders correctly 1`] = `
+<div
+  className="guide guide--jumbo guide--expanded"
+>
+  <div
+    className="guide__title"
+  >
+    CRUD Guides: Create, Read, Update, and Delete Data
+  </div>
+  <ul
+    className="guide__body"
+  >
+    <li
+      className="guide__entry"
+      key="0"
+    >
+      <a
+        href="server/insert"
+      >
+        Insert Data into MongoDB
+      </a>
+    </li>
+    <li
+      className="guide__entry"
+      key="1"
+    >
+      <a
+        href="server/read"
+      >
+        Read Data from MongoDB
+      </a>
+    </li>
+    <li
+      className="guide__entry"
+      key="2"
+    >
+      <a
+        href="server/read_queries"
+      >
+        Read Data from MongoDB With Queries
+      </a>
+    </li>
+    <li
+      className="guide__entry"
+      key="3"
+    >
+      <a
+        href="server/read_operators"
+      >
+        Read Data using Operators and Compound Queries
+      </a>
+    </li>
+    <li
+      className="guide__entry"
+      key="4"
+    >
+      <a
+        href="server/update"
+      >
+        Update Data in MongoDB
+      </a>
+    </li>
+    <li
+      className="guide__entry"
+      key="5"
+    >
+      <a
+        href="server/delete"
+      >
+        Delete Data from MongoDB
+      </a>
+    </li>
+  </ul>
+  <ul
+    className="guide__pills"
+  />
+</div>
+`;
+
+exports[`when a standard card is mounted renders correctly 1`] = `
+<a
+  className="guide guide--regular"
+  href="server/install"
+>
+  <div
+    className="guide__title"
+  >
+    Install MongoDB
+  </div>
+  <div
+    className="guide__body"
+  />
+  <ul
+    className="guide__pills"
+  />
+  <div
+    className="guide__time"
+  >
+    20
+     min
+  </div>
+</a>
+`;
