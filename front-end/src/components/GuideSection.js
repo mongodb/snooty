@@ -117,7 +117,8 @@ export default class GuideSection extends Component {
 }
 
 GuideSection.propTypes = {
-  activeDeployment: PropTypes.string.isRequired,
+  activeDeployment: PropTypes.string,
+  activeOSTab: PropTypes.string,
   guideSectionData: PropTypes.shape({
     children: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,
@@ -128,12 +129,12 @@ GuideSection.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ),
-  activeOSTab: PropTypes.string,
   setActiveTab: PropTypes.func,
 };
 
 GuideSection.defaultProps = {
-  OSTabs: [],
+  activeDeployment: undefined,
   activeOSTab: undefined,
+  OSTabs: [],
   setActiveTab: undefined,
 };

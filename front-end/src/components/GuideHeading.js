@@ -96,8 +96,8 @@ export default class GuideHeading extends Component {
 }
 
 GuideHeading.propTypes = {
-  activeDeployment: PropTypes.string.isRequired,
-  activeLanguage: PropTypes.string.isRequired,
+  activeDeployment: PropTypes.string,
+  activeLanguage: PropTypes.string,
   setActiveTab: PropTypes.func.isRequired,
   languages: PropTypes.arrayOf(
     PropTypes.shape({
@@ -123,6 +123,8 @@ GuideHeading.propTypes = {
 };
 
 GuideHeading.defaultProps = {
+  activeDeployment: undefined,
+  activeLanguage: undefined,
   languages: [],
   deployments: [],
 };

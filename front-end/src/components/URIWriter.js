@@ -461,6 +461,10 @@ export default class URIWriter extends Component {
 }
 
 URIWriter.propTypes = {
+  activeDeployment: PropTypes.string,
   handleUpdateURIWriter: PropTypes.func.isRequired,
-  activeDeployment: PropTypes.string.isRequired,
+};
+
+URIWriter.defaultProps = {
+  activeDeployment: TEMPLATE_TYPE_ATLAS,
 };

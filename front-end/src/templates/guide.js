@@ -25,11 +25,11 @@ export default class Guide extends Component {
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       languages: [],
-      activeLanguage: LANGUAGES[0].name,
+      activeLanguage: undefined,
       OSTabs: [],
-      activeOSTab: OSTABS[0].name,
+      activeOSTab: undefined,
       deployments: [],
-      activeDeployment: DEPLOYMENTS[0].name,
+      activeDeployment: undefined,
       modalPositionLeft: 0,
       modalPositionTop: 0,
       modalVisible: false,
