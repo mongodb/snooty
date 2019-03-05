@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Step from './Step';
 import Paragraph from './Paragraph';
 import List from './List';
+import ListTable from './ListTable';
 import Emphasis from './Emphasis';
 import Include from './Include';
 import Role from './Role';
@@ -24,6 +25,7 @@ export default class ComponentFactory extends Component {
       step: Step,
       paragraph: Paragraph,
       list: List,
+      'list-table': ListTable,
       emphasis: Emphasis,
       include: Include,
       role: Role,
