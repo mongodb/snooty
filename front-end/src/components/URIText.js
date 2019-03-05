@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { DEPLOYMENTS } from '../constants';
 import {
   TEMPLATE_TYPE_SELF_MANAGED,
   TEMPLATE_TYPE_REPLICA_SET,
