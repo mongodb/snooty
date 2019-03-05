@@ -16,6 +16,7 @@ import Literal from './Literal';
 import Heading from './Heading';
 import BlockQuote from './BlockQuote';
 import Reference from './Reference';
+import Strong from './Strong';
 import URIWriter from './URIWriter';
 
 export default class ComponentFactory extends Component {
@@ -37,6 +38,7 @@ export default class ComponentFactory extends Component {
       role: Role,
       section: Section,
       step: Step,
+      strong: Strong,
       tabs: Tabs,
       uriwriter: URIWriter,
     };
@@ -48,7 +50,7 @@ export default class ComponentFactory extends Component {
       nodeData: { name, type },
     } = this.props;
     // do nothing with targets for now (cc. Andrew)
-    if (type === 'target') {
+    if (type === 'target' || type === 'class') {
       return null;
     }
     const lookup = type === 'directive' ? name : type;

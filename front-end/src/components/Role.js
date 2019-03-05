@@ -16,6 +16,14 @@ export default class Role extends Component {
 
   roleRendering() {
     const { nodeData } = this.props;
+    // guilabel
+    if (nodeData.name === 'guilabel') {
+      return <span className="guilabel">{nodeData.label}</span>;
+    }
+    // bolded `program` role
+    if (nodeData.name === 'program') {
+      return <strong className="program">{nodeData.label}</strong>;
+    }
     // normal link
     if (this.linkRoles.includes(nodeData.name)) {
       const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
@@ -24,10 +32,6 @@ export default class Role extends Component {
           {label}
         </a>
       );
-    }
-    // guilabel
-    if (nodeData.name === 'guilabel') {
-      return <span className="guilabel">{nodeData.label}</span>;
     }
     // ref role
     if (nodeData.name === 'ref') {
