@@ -16,14 +16,14 @@ const ListTable = ({ nodeData: { children, options } }) => {
 
   return (
     <table className={['docutils', options.class, widths, customAlign].join(' ')} style={{ width: customWidth }}>
-      {widths === 'colwidths-given' && <Colgroup widths={options.widths.split(/[ ,]+/)} />}
+      {widths === 'colwidths-given' && <ColGroup widths={options.widths.split(/[ ,]+/)} />}
       <ListTableHeader rows={headerRows} stubColumnCount={stubColumnCount} />
       <ListTableBody rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
     </table>
   );
 };
 
-const Colgroup = ({ widths }) => (
+const ColGroup = ({ widths }) => (
   <colgroup>
     {widths.map((width, index) => (
       <col width={`${width}%`} key={index} />
@@ -31,7 +31,7 @@ const Colgroup = ({ widths }) => (
   </colgroup>
 );
 
-Colgroup.propTypes = {
+ColGroup.propTypes = {
   widths: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
