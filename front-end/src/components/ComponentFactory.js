@@ -64,11 +64,6 @@ export default class ComponentFactory extends Component {
       );
     }
 
-    if (ComponentType === URIWriter) {
-      const { templateType } = this.props;
-      return <ComponentType key={templateType} {...this.props} />;
-    }
-
     return <ComponentType {...this.props} />;
   }
 
@@ -83,7 +78,6 @@ ComponentFactory.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
-  templateType: PropTypes.string.isRequired,
 };
 
 ComponentFactory.defaultProps = {
