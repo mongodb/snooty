@@ -1,9 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import URIText from '../src/components/URIText';
+import { DEPLOYMENTS } from '../src/constants';
+
+const CLOUD_DEPLOYMENT = DEPLOYMENTS[0].name;
+const LOCAL_DEPLOYMENT = DEPLOYMENTS[1].name;
 
 describe('local MongoDB', () => {
-  const templateType = 'local MongoDB';
+  const activeDeployment = LOCAL_DEPLOYMENT;
   const uri = {
     authSource: 'admin',
     database: 'myDatabase',
@@ -21,7 +25,7 @@ describe('local MongoDB', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -29,7 +33,7 @@ describe('local MongoDB', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -40,14 +44,14 @@ describe('local MongoDB', () => {
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
 });
 
 describe('local MongoDB with replica set', () => {
-  const templateType = 'local MongoDB';
+  const activeDeployment = LOCAL_DEPLOYMENT;
   const uri = {
     authSource: '',
     database: 'myDatabase',
@@ -63,7 +67,7 @@ describe('local MongoDB with replica set', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -71,7 +75,7 @@ describe('local MongoDB with replica set', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -82,14 +86,14 @@ describe('local MongoDB with replica set', () => {
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
 });
 
 describe('Cloud (unspecified version)', () => {
-  const templateType = 'Atlas (Cloud)';
+  const activeDeployment = CLOUD_DEPLOYMENT;
   const uri = {
     authSource: 'admin',
     database: 'myDatabase',
@@ -105,7 +109,7 @@ describe('Cloud (unspecified version)', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -113,7 +117,7 @@ describe('Cloud (unspecified version)', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -124,14 +128,14 @@ describe('Cloud (unspecified version)', () => {
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
 });
 
 describe('Cloud (MongoDB version 3.4)', () => {
-  const templateType = 'Atlas (Cloud)';
+  const activeDeployment = CLOUD_DEPLOYMENT;
   const uri = {
     authSource: 'admin',
     database: 'myDatabase',
@@ -149,7 +153,7 @@ describe('Cloud (MongoDB version 3.4)', () => {
   describe('when called without a placeholder', () => {
     it('returns the original string', () => {
       const value = 'This is the body text';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -157,7 +161,7 @@ describe('Cloud (MongoDB version 3.4)', () => {
   describe('when there is a <URISTRNG> placeholder', () => {
     it('replaces the placeholder', () => {
       const value = 'return MongoClient("<URISTRING>")';
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
@@ -168,7 +172,7 @@ describe('Cloud (MongoDB version 3.4)', () => {
         username is <USERNAME>
         shell string (<URISTRING_SHELL>)
         without password (<URISTRING_SHELL_NOUSER>)`;
-      const tree = shallow(<URIText value={value} templateType={templateType} uri={uri} />);
+      const tree = shallow(<URIText value={value} activeDeployment={activeDeployment} uri={uri} />);
       expect(tree).toMatchSnapshot();
     });
   });
