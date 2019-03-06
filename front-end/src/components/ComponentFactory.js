@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Step from './Step';
 import Paragraph from './Paragraph';
 import List from './List';
+import ListTable from './ListTable';
 import Emphasis from './Emphasis';
 import Include from './Include';
 import Role from './Role';
@@ -31,6 +32,7 @@ export default class ComponentFactory extends Component {
       heading: Heading,
       include: Include,
       list: List,
+      'list-table': ListTable,
       literal: Literal,
       literalinclude: LiteralInclude,
       paragraph: Paragraph,
@@ -70,11 +72,6 @@ export default class ComponentFactory extends Component {
       );
     }
 
-    if (ComponentType === URIWriter) {
-      const { templateType } = this.props;
-      return <ComponentType key={templateType} {...this.props} />;
-    }
-
     return <ComponentType {...this.props} />;
   }
 
@@ -89,7 +86,6 @@ ComponentFactory.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
-  templateType: PropTypes.string.isRequired,
 };
 
 ComponentFactory.defaultProps = {

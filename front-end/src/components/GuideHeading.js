@@ -23,27 +23,27 @@ export default class GuideHeading extends Component {
           <div className="guide-prefs">
             <div className="guide-prefs__caption">
               Deployment Type:
-              <span className="show-current-deployment"> {activeDeployment[1]}</span>
+              <span className="show-current-deployment"> {activeDeployment}</span>
             </div>
             <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="cloud">
-              {deployments.map((langOpts, index) => (
+              {deployments.map((deployment, index) => (
                 <li
                   className={
-                    activeDeployment[0] === langOpts[0]
+                    activeDeployment === deployment.name
                       ? 'guide__pill guide__deploymentpill guide__deploymentpill--active'
                       : 'guide__pill guide__deploymentpill'
                   }
-                  data-tabid={langOpts[0]}
+                  data-tabid={deployment.name}
                   key={index}
                 >
                   <span
                     onClick={() => {
-                      setActiveTab(langOpts, 'activeDeployment');
+                      setActiveTab(deployment, 'activeDeployment');
                     }}
                     role="button"
                     tabIndex={index}
                   >
-                    {langOpts[1]}
+                    {deployment.value}
                   </span>
                 </li>
               ))}
@@ -55,23 +55,23 @@ export default class GuideHeading extends Component {
           <div className="guide-prefs">
             <div className="guide-prefs__caption">
               Client:
-              <span className="show-current-language"> {activeLanguage[1]}</span>
+              <span className="show-current-language"> {activeLanguage}</span>
             </div>
             <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="languages">
-              {languages.map((langOpts, index) => (
+              {languages.map((language, index) => (
                 <li
-                  className={activeLanguage[0] === langOpts[0] ? 'guide__pill guide__pill--active' : 'guide__pill'}
-                  data-tabid={langOpts[0]}
+                  className={activeLanguage === language.name ? 'guide__pill guide__pill--active' : 'guide__pill'}
+                  data-tabid={language.name}
                   key={index}
                 >
                   <span
                     onClick={() => {
-                      setActiveTab(langOpts, 'activeLanguage');
+                      setActiveTab(language, 'activeLanguage');
                     }}
                     role="button"
                     tabIndex={index}
                   >
-                    {langOpts[1]}
+                    {language.value}
                   </span>
                 </li>
               ))}
@@ -96,11 +96,21 @@ export default class GuideHeading extends Component {
 }
 
 GuideHeading.propTypes = {
-  activeLanguage: PropTypes.arrayOf(PropTypes.string),
-  activeDeployment: PropTypes.arrayOf(PropTypes.string),
+  activeDeployment: PropTypes.string,
+  activeLanguage: PropTypes.string,
   setActiveTab: PropTypes.func.isRequired,
-  languages: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  deployments: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  languages: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })
+  ),
+  deployments: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })
+  ),
   sections: PropTypes.arrayOf(
     PropTypes.shape({
       children: PropTypes.arrayOf(
@@ -113,8 +123,8 @@ GuideHeading.propTypes = {
 };
 
 GuideHeading.defaultProps = {
+  activeDeployment: undefined,
   activeLanguage: undefined,
   languages: [],
-  activeDeployment: undefined,
   deployments: [],
 };

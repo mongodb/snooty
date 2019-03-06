@@ -11,8 +11,6 @@ export default class GuideSection extends Component {
       showStepper: false,
       showAllStepsText: 'Expand All Steps',
       showStepIndex: 0,
-      // TODO: set state based on Daniel's implementation of cloud/local tabs
-      templateType: 'local MongoDB',
       totalStepsInProcedure: 1,
       uri: {},
     };
@@ -63,15 +61,7 @@ export default class GuideSection extends Component {
       activeOSTab,
       setActiveTab,
     } = this.props;
-    const {
-      showAllSteps,
-      showAllStepsText,
-      showStepIndex,
-      showStepper,
-      templateType,
-      totalStepsInProcedure,
-      uri,
-    } = this.state;
+    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uri } = this.state;
 
     return (
       <div className="section" id={name}>
@@ -92,19 +82,19 @@ export default class GuideSection extends Component {
         )}
         {name === 'procedure' && OSTabs.length > 0 && (
           <ul className="tab-strip tab-strip--singleton" role="tablist">
-            {OSTabs.map((langOpts, index) => {
+            {OSTabs.map((os, index) => {
               return (
                 <li
                   className="tab-strip__element"
-                  data-tabid={langOpts[0]}
+                  data-tabid={os.name}
                   role="tab"
-                  aria-selected={activeOSTab[0] === langOpts[0] ? 'true' : 'false'}
+                  aria-selected={activeOSTab === os.name ? 'true' : 'false'}
                   key={index}
                   onClick={() => {
-                    setActiveTab(langOpts, 'activeOSTab');
+                    setActiveTab(os, 'activeOSTab');
                   }}
                 >
-                  {langOpts[1]}
+                  {os.value}
                 </li>
               );
             })}
@@ -118,7 +108,6 @@ export default class GuideSection extends Component {
             nodeData={child}
             showAllSteps={showAllSteps}
             showStepIndex={showStepIndex}
-            templateType={templateType}
             updateTotalStepCount={this.updateTotalStepCount}
             uri={uri}
           />
@@ -129,17 +118,24 @@ export default class GuideSection extends Component {
 }
 
 GuideSection.propTypes = {
+  activeDeployment: PropTypes.string,
+  activeOSTab: PropTypes.string,
   guideSectionData: PropTypes.shape({
     children: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
-  OSTabs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  activeOSTab: PropTypes.arrayOf(PropTypes.string),
+  OSTabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })
+  ),
   setActiveTab: PropTypes.func,
 };
 
 GuideSection.defaultProps = {
-  OSTabs: undefined,
+  activeDeployment: undefined,
   activeOSTab: undefined,
+  OSTabs: [],
   setActiveTab: undefined,
 };
