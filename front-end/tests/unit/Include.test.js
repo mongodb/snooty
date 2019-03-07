@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Step from '../src/components/Step';
+import Include from '../../src/components/Include';
 
 // data for this component
-import mockData from './data/Step.test.json';
+import mockData from './data/Include.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Step nodeData={mockData} />);
+  const tree = shallow(<Include nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import LandingPageCards from '../src/components/LandingPageCards';
+import LandingPageCards from '../../src/components/LandingPageCards';
 
 import mockRefDocMapping from './data/index.test.json';
 import mockRefDocMappingMultiple from './data/indexTwoGuideCategories.test.json';

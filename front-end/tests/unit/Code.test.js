@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Literal from '../src/components/Literal';
+import Code from '../../src/components/Code';
 
 // data for this component
-import mockData from './data/Literal.test.json';
+import mockData from './data/Code.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Literal nodeData={mockData} />);
+  const tree = shallow(<Code nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Role from '../src/components/Role';
+import Role from '../../src/components/Role';
 
 // data for this component
 import mockDataDoc from './data/Role-doc.test.json';

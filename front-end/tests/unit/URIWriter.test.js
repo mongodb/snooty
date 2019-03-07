@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { DEPLOYMENTS } from '../src/constants';
-import URIWriter from '../src/components/URIWriter';
+import { DEPLOYMENTS } from '../../src/constants';
+import URIWriter from '../../src/components/URIWriter';
 
 const CLOUD_DEPLOYMENT = DEPLOYMENTS[0].name;
 const LOCAL_DEPLOYMENT = DEPLOYMENTS[1].name;

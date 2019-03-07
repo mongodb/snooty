@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Figure from '../src/components/Figure';
+import Figure from '../../src/components/Figure';
 
 // data for this component
 import mockData from './data/Figure.test.json';

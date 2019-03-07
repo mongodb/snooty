@@ -31,7 +31,8 @@
     "lint": "eslint src/ tests/",
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "test-unit": "jest ./tests/unit/"
   },
   "jest": {
     "verbose": true,
