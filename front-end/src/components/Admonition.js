@@ -18,7 +18,7 @@ const Admonition = props => {
           <ComponentFactory
             {...props}
             nodeData={{
-              type: 'paragraph',
+              type: 'section',
               children: nodeData.children[0].children,
             }}
             admonition
@@ -29,7 +29,6 @@ const Admonition = props => {
   }
   // combine argument and children from admonition as separate paragraphs
   const childElements = [...nodeData.argument, ...nodeData.children];
-
   return (
     <div className={nodeData.name === 'tip' ? `admonition admonition-tip` : `admonition ${nodeData.name}`}>
       <p className="first admonition-title">{nodeData.name}</p>
@@ -38,7 +37,7 @@ const Admonition = props => {
           {...props}
           admonition
           nodeData={{
-            type: 'paragraph',
+            type: 'section',
             children: childElements,
           }}
         />
