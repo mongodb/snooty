@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-export default class Section extends Component {
-  render() {
-    const { nodeData } = this.props;
-    return nodeData.children.map((child, index) => <ComponentFactory {...this.props} nodeData={child} key={index} />);
-  }
-}
+const Section = props => {
+  const { nodeData } = props;
+  return (
+    <section>
+      {nodeData.children.map((child, index) => {
+        if (child.type === 'text') {
+          return <React.Fragment key={index}>{child.value}</React.Fragment>;
+        }
+        return <ComponentFactory {...props} nodeData={child} key={index} />;
+      })}
+    </section>
+  );
+};
 
 Section.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
   }).isRequired,
 };
+
+export default Section;

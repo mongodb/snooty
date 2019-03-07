@@ -19,7 +19,7 @@ export default class Tabs extends Component {
       <div
         key={index}
         style={{
-          display: !tabsetType || tabsetType === tab.argument[0].value ? 'block' : 'block',
+          display: !tabsetType || tabsetType === tab.argument[0].value ? 'block' : 'none',
         }}
       >
         <h3 style={{ color: 'green' }}>{tab.argument[0].value} Code</h3>

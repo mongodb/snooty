@@ -5,7 +5,7 @@ import ComponentFactory from './ComponentFactory';
 const Paragraph = props => {
   const { admonition, nodeData } = props;
   return (
-    <p style={{ margin: admonition ? '0 auto' : '' }}>
+    <p style={{ margin: admonition ? '0 0 12.5px' : '' }}>
       {nodeData.children.map((element, index) => {
         if (element.type === 'text') {
           return <React.Fragment key={index}>{element.value}</React.Fragment>;

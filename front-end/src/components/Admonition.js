@@ -14,7 +14,7 @@ const Admonition = props => {
     return (
       <div className={fullClassName}>
         <p className="first admonition-title">{nodeData.argument[0].value}</p>
-        <section>
+        <React.Fragment>
           <ComponentFactory
             {...props}
             nodeData={{
@@ -23,7 +23,7 @@ const Admonition = props => {
             }}
             admonition
           />
-        </section>
+        </React.Fragment>
       </div>
     );
   }
@@ -32,7 +32,7 @@ const Admonition = props => {
   return (
     <div className={nodeData.name === 'tip' ? `admonition admonition-tip` : `admonition ${nodeData.name}`}>
       <p className="first admonition-title">{nodeData.name}</p>
-      <section>
+      <React.Fragment>
         <ComponentFactory
           {...props}
           admonition
@@ -41,7 +41,7 @@ const Admonition = props => {
             children: childElements,
           }}
         />
-      </section>
+      </React.Fragment>
     </div>
   );
 };
