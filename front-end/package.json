@@ -30,7 +30,6 @@
     "dev": "webpack --mode development",
     "lint": "eslint src/ tests/",
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
-    "precommit": "lint-staged",
     "test": "jest",
     "test-unit": "jest ./tests/unit/"
   },
@@ -74,5 +73,10 @@
     "start-server-webpack-plugin": "^2.2.5",
     "uuid": "^3.3.2",
     "webpack-node-externals": "^1.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
