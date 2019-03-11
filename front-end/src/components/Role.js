@@ -34,6 +34,7 @@ export default class Role extends Component {
       );
     }
     // ref role
+    // TODO: link to target properly and not hardcode url
     if (nodeData.name === 'ref') {
       const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
       return (
@@ -46,12 +47,20 @@ export default class Role extends Component {
     if (this.roleDataTypes[nodeData.name]) {
       const termModified = nodeData.target.replace('()', '').replace('$', '');
       const href = this.roleDataTypes[nodeData.name](termModified);
-      return <a href={href}>{nodeData.label}</a>;
+      const label = nodeData.label.replace('~op.', '');
+      return (
+        <a className="reference external" href={href}>
+          <code className="xref mongodb mongodb-query docutils literal notranslate">
+            <span className="pre">{label}</span>
+          </code>
+        </a>
+      );
     }
     // some special roles
     if (this.codeRoles.includes(nodeData.name)) {
       let termModified;
       let href;
+      const classNameComplete = `mongodb-${nodeData.name} xref mongodb docutils literal notranslate`;
       // TODO: see what can be done about all the slight differences in roles
       if (nodeData.name === 'binary') {
         termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
@@ -71,7 +80,7 @@ export default class Role extends Component {
       }
       return (
         <a href={href} className="reference external">
-          <code className="xref mongodb mongodb-binary docutils literal notranslate">
+          <code className={classNameComplete}>
             <span className="pre">{termModified}</span>
           </code>
         </a>
