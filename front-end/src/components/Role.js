@@ -5,17 +5,17 @@ export default class Role extends Component {
   constructor() {
     super();
     this.base = 'https://docs.mongodb.com/manual/reference';
-    this.roleDataTypes = {
-      query: term => `${this.base}/operator/query/${term}/#op._S_${term}`,
-      dbcommand: term => `${this.base}/command/${term}/#dbcmd.${term}`,
-      method: term => `${this.base}/method/${term}/#${term}`,
-    };
     this.linkRoles = ['doc', 'manual'];
-    this.codeRoles = ['binary', 'option', 'authrole', 'setting'];
+    this.codeRoles = ['binary', 'option', 'authrole', 'setting', 'method', 'query', 'dbcommand'];
   }
 
   roleRendering() {
     const { nodeData } = this.props;
+    // remove namespace
+    if (nodeData.name.includes(':')) {
+      const splitNames = nodeData.name.split(':');
+      nodeData.name = splitNames[1];
+    }
     // guilabel
     if (nodeData.name === 'guilabel') {
       return <span className="guilabel">{nodeData.label}</span>;
@@ -43,20 +43,7 @@ export default class Role extends Component {
         </a>
       );
     }
-    // basic roles with interaction
-    if (this.roleDataTypes[nodeData.name]) {
-      const termModified = nodeData.target.replace('()', '').replace('$', '');
-      const href = this.roleDataTypes[nodeData.name](termModified);
-      const label = nodeData.label.replace('~op.', '');
-      return (
-        <a className="reference external" href={href}>
-          <code className="xref mongodb mongodb-query docutils literal notranslate">
-            <span className="pre">{label}</span>
-          </code>
-        </a>
-      );
-    }
-    // some special roles
+    // special roles
     if (this.codeRoles.includes(nodeData.name)) {
       let termModified;
       let href;
@@ -77,6 +64,18 @@ export default class Role extends Component {
       if (nodeData.name === 'setting') {
         termModified = nodeData.label;
         href = `${this.base}/configuration-options/#${termModified}`;
+      }
+      if (nodeData.name === 'method') {
+        termModified = nodeData.label;
+        href = `${this.base}/method/${termModified}/#${termModified}`;
+      }
+      if (nodeData.name === 'query') {
+        termModified = nodeData.label.replace('~op.', '');
+        href = `${this.base}/operator/query/${termModified.replace('$', '')}/#op._S_${termModified}`;
+      }
+      if (nodeData.name === 'dbcommand') {
+        termModified = nodeData.label;
+        href = `${this.base}/command/${termModified}/#dbcmd.${termModified}`;
       }
       return (
         <a href={href} className="reference external">

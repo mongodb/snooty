@@ -57,10 +57,10 @@ export default class Guide extends Component {
   }
 
   createTabsetType = (opts, setTabs) => {
-    this.setState({
-      [opts.type]: setTabs,
+    this.setState(prevState => ({
+      [opts.type]: Array.from(new Set([...prevState[opts.type], ...setTabs])),
       [opts.active]: setTabs[0].name,
-    });
+    }));
   };
 
   // this function gets an array of objects that compose some tabset
@@ -173,7 +173,7 @@ export default class Guide extends Component {
 
   createSections() {
     const { pageContext } = this.props;
-    const { activeDeployment, activeLanguage, activeOSTab, OSTabs } = this.state;
+    const { activeDeployment, activeLanguage, activeOSTab, OSTabs, languages, deployments } = this.state;
     return this.sections
       .filter(section => this.validNames.includes(section.name))
       .map((section, index) => (
@@ -185,10 +185,12 @@ export default class Guide extends Component {
           modal={this.modalFetchData}
           setActiveTab={this.setActiveTab}
           addTabset={this.addTabset}
+          OSTabs={OSTabs}
+          languages={languages}
+          deployments={deployments}
+          activeOSTab={activeOSTab}
           activeLanguage={activeLanguage}
           activeDeployment={activeDeployment}
-          OSTabs={OSTabs}
-          activeOSTab={activeOSTab}
           stitchClient={this.stitchClient}
         />
       ));

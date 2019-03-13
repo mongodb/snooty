@@ -10,11 +10,16 @@ export default class Tabs extends Component {
   }
 
   render() {
-    const { nodeData, activeOSTab, activeLanguage } = this.props;
-    const tabsetType =
-      nodeData.options && nodeData.options.tabset && nodeData.options.tabset === 'drivers'
-        ? activeLanguage
-        : activeOSTab;
+    const { nodeData, activeOSTab, activeLanguage, activeDeployment } = this.props;
+    let tabsetType;
+    // if tabset options exists, then determine if pills or proper tabs
+    if (nodeData.options && nodeData.options.tabset === 'drivers') {
+      tabsetType = activeLanguage;
+    } else if (nodeData.options && nodeData.options.tabset === 'cloud') {
+      tabsetType = activeDeployment;
+    } else {
+      tabsetType = activeOSTab;
+    }
     return nodeData.children.map((tab, index) => (
       <div
         key={index}
@@ -23,7 +28,9 @@ export default class Tabs extends Component {
         }}
       >
         <h3 style={{ color: 'green' }}>{tab.argument[0].value} Code</h3>
-        {tab.children.length > 0 && <ComponentFactory {...this.props} nodeData={tab.children[0]} />}
+        {tab.children.map((tabChild, tabChildIndex) => (
+          <ComponentFactory {...this.props} nodeData={tabChild} key={tabChildIndex} />
+        ))}
       </div>
     ));
   }
@@ -32,6 +39,7 @@ export default class Tabs extends Component {
 Tabs.propTypes = {
   activeLanguage: PropTypes.string,
   activeOSTab: PropTypes.string,
+  activeDeployment: PropTypes.string,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -50,4 +58,5 @@ Tabs.propTypes = {
 Tabs.defaultProps = {
   activeLanguage: undefined,
   activeOSTab: undefined,
+  activeDeployment: undefined,
 };
