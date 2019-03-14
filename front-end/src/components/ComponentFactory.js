@@ -51,8 +51,8 @@ export default class ComponentFactory extends Component {
       admonitions,
       nodeData: { name, type },
     } = this.props;
-    // do nothing with targets for now (cc. Andrew)
-    if (type === 'target' || type === 'class') {
+    // do nothing with these nodes for now (cc. Andrew)
+    if (type === 'target' || type === 'class' || type === 'cssclass' || name === 'cssclass') {
       return null;
     }
     const lookup = type === 'directive' ? name : type;

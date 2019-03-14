@@ -12,7 +12,7 @@ exports[`renders correctly role "doc" 1`] = `
 exports[`renders correctly role "ref" 1`] = `
 <a
   className="reference external"
-  href="https://docs.mongodb.com/compass/current/#mongodb-supported-platforms"
+  href="https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms"
 >
   <span
     className="xref std std-ref"

@@ -5,12 +5,15 @@ export default class Role extends Component {
   constructor() {
     super();
     this.base = 'https://docs.mongodb.com/manual/reference';
-    this.linkRoles = ['doc', 'manual'];
+    this.linkRoles = ['doc', 'manual', 'term'];
     this.codeRoles = ['binary', 'option', 'authrole', 'setting', 'method', 'query', 'dbcommand'];
   }
 
   roleRendering() {
-    const { nodeData } = this.props;
+    const {
+      nodeData,
+      refDocMapping: { REF_TARGETS },
+    } = this.props;
     // remove namespace
     if (nodeData.name.includes(':')) {
       const splitNames = nodeData.name.split(':');
@@ -34,11 +37,19 @@ export default class Role extends Component {
       );
     }
     // ref role
-    // TODO: link to target properly and not hardcode url
     if (nodeData.name === 'ref') {
       const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
+      // make sure target is hardcoded in list for now
+      if (!REF_TARGETS[nodeData.target]) {
+        return (
+          <span>
+            ==Role TARGET does not exist:
+            {nodeData.target} ==
+          </span>
+        );
+      }
       return (
-        <a href={`https://docs.mongodb.com/compass/current/#${nodeData.target}`} className="reference external">
+        <a href={REF_TARGETS[nodeData.target]} className="reference external">
           <span className="xref std std-ref">{label}</span>
         </a>
       );
@@ -108,5 +119,8 @@ Role.propTypes = {
     ]),
     name: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
+  }).isRequired,
+  refDocMapping: PropTypes.shape({
+    REF_TARGETS: PropTypes.object.isRequired,
   }).isRequired,
 };

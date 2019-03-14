@@ -5,13 +5,16 @@ import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
-import { LANGUAGES, OSTABS, DEPLOYMENTS } from '../constants';
+import { LANGUAGES, OSTABS, DEPLOYMENTS, REF_TARGETS } from '../constants';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
     super(propsFromServer);
 
     const { pageContext } = this.props;
+
+    // add ref targets to mapping
+    pageContext.__refDocMapping.REF_TARGETS = REF_TARGETS;
 
     // get data from server
     this.sections =
