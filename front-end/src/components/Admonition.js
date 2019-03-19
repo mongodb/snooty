@@ -4,39 +4,44 @@ import ComponentFactory from './ComponentFactory';
 
 const Admonition = props => {
   const { nodeData } = props;
+
   if (nodeData.name === 'admonition') {
+    let fullClassName = `admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`;
+    // special admonitions have options
+    if (nodeData.options && nodeData.options.class) {
+      fullClassName += ` ${nodeData.options.class}`;
+    }
     return (
-      <div className={`admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`}>
+      <div className={fullClassName}>
         <p className="first admonition-title">{nodeData.argument[0].value}</p>
-        <section>
+        <React.Fragment>
           <ComponentFactory
             {...props}
             nodeData={{
-              type: 'paragraph',
+              type: 'section',
               children: nodeData.children[0].children,
             }}
             admonition
           />
-        </section>
+        </React.Fragment>
       </div>
     );
   }
   // combine argument and children from admonition as separate paragraphs
   const childElements = [...nodeData.argument, ...nodeData.children];
-
   return (
     <div className={nodeData.name === 'tip' ? `admonition admonition-tip` : `admonition ${nodeData.name}`}>
       <p className="first admonition-title">{nodeData.name}</p>
-      <section>
+      <React.Fragment>
         <ComponentFactory
           {...props}
           admonition
           nodeData={{
-            type: 'paragraph',
+            type: 'section',
             children: childElements,
           }}
         />
-      </section>
+      </React.Fragment>
     </div>
   );
 };

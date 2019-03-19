@@ -5,48 +5,92 @@ export default class Role extends Component {
   constructor() {
     super();
     this.base = 'https://docs.mongodb.com/manual/reference';
-    this.roleDataTypes = {
-      query: term => `${this.base}/operator/query/${term}/#op._S_${term}`,
-      dbcommand: term => `${this.base}/command/${term}/#dbcmd.${term}`,
-      method: term => `${this.base}/method/${term}/#${term}`,
-    };
-    this.codeRoles = ['binary'];
+    this.linkRoles = ['doc', 'manual', 'term'];
+    this.codeRoles = ['binary', 'option', 'authrole', 'setting', 'method', 'query', 'dbcommand'];
   }
 
   roleRendering() {
-    const { modal, nodeData } = this.props;
-    // normal link
-    if (nodeData.name === 'doc') {
-      return <a href={nodeData.target}>{nodeData.label.value}</a>;
+    const {
+      nodeData,
+      refDocMapping: { REF_TARGETS },
+    } = this.props;
+    // remove namespace
+    if (nodeData.name.includes(':')) {
+      const splitNames = nodeData.name.split(':');
+      nodeData.name = splitNames[1];
     }
-    // roles with interaction
-    if (this.roleDataTypes[nodeData.name]) {
-      const termModified = nodeData.target.replace('()', '').replace('$', '');
-      const href = this.roleDataTypes[nodeData.name](termModified);
+    // guilabel
+    if (nodeData.name === 'guilabel') {
+      return <span className="guilabel">{nodeData.label}</span>;
+    }
+    // bolded `program` role
+    if (nodeData.name === 'program') {
+      return <strong className="program">{nodeData.label}</strong>;
+    }
+    // normal link
+    if (this.linkRoles.includes(nodeData.name)) {
+      const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
       return (
-        <a
-          href={href}
-          onMouseEnter={e => {
-            modal(e, href);
-          }}
-        >
-          {nodeData.label}
+        <a href={nodeData.target} className="reference external">
+          {label}
         </a>
       );
     }
-    // binary case is unique (maybe others will be as well)
-    if (this.codeRoles.includes(nodeData.name)) {
-      const termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
-      const href = `${this.base}/program/${termModified}/#${nodeData.target.replace('~', '')}`;
+    // ref role
+    if (nodeData.name === 'ref') {
+      const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
+      // make sure target is hardcoded in list for now
+      if (!REF_TARGETS[nodeData.target]) {
+        return (
+          <span>
+            ==Role TARGET does not exist:
+            {nodeData.target} ==
+          </span>
+        );
+      }
       return (
-        <a
-          href={href}
-          className="reference external"
-          onMouseEnter={e => {
-            modal(e, href);
-          }}
-        >
-          <code className="xref mongodb mongodb-binary docutils literal notranslate">
+        <a href={REF_TARGETS[nodeData.target]} className="reference external">
+          <span className="xref std std-ref">{label}</span>
+        </a>
+      );
+    }
+    // special roles
+    if (this.codeRoles.includes(nodeData.name)) {
+      let termModified;
+      let href;
+      const classNameComplete = `mongodb-${nodeData.name} xref mongodb docutils literal notranslate`;
+      // TODO: see what can be done about all the slight differences in roles
+      if (nodeData.name === 'binary') {
+        termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
+        href = `${this.base}/program/${termModified}/#${nodeData.target.replace('~', '')}`;
+      }
+      if (nodeData.name === 'option') {
+        termModified = nodeData.label.value;
+        href = `${this.base}/program/mongoimport/#cmdoption-mongoimport-${termModified.replace('--', '')}`;
+      }
+      if (nodeData.name === 'authrole') {
+        termModified = nodeData.label;
+        href = `${this.base}/built-in-roles/#${termModified}`;
+      }
+      if (nodeData.name === 'setting') {
+        termModified = nodeData.label;
+        href = `${this.base}/configuration-options/#${termModified}`;
+      }
+      if (nodeData.name === 'method') {
+        termModified = nodeData.label;
+        href = `${this.base}/method/${termModified}/#${termModified}`;
+      }
+      if (nodeData.name === 'query') {
+        termModified = nodeData.label.replace('~op.', '');
+        href = `${this.base}/operator/query/${termModified.replace('$', '')}/#op._S_${termModified}`;
+      }
+      if (nodeData.name === 'dbcommand') {
+        termModified = nodeData.label;
+        href = `${this.base}/command/${termModified}/#dbcmd.${termModified}`;
+      }
+      return (
+        <a href={href} className="reference external">
+          <code className={classNameComplete}>
             <span className="pre">{termModified}</span>
           </code>
         </a>
@@ -66,7 +110,6 @@ export default class Role extends Component {
 }
 
 Role.propTypes = {
-  modal: PropTypes.func,
   nodeData: PropTypes.shape({
     label: PropTypes.oneOfType([
       PropTypes.shape({
@@ -77,8 +120,7 @@ Role.propTypes = {
     name: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
   }).isRequired,
-};
-
-Role.defaultProps = {
-  modal: () => {},
+  refDocMapping: PropTypes.shape({
+    REF_TARGETS: PropTypes.object.isRequired,
+  }).isRequired,
 };

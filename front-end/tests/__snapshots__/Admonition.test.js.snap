@@ -9,26 +9,24 @@ exports[`renders correctly 1`] = `
   >
     note
   </p>
-  <section>
-    <ComponentFactory
-      admonition={true}
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 6,
-                },
+  <ComponentFactory
+    admonition={true}
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 6,
               },
-              "type": "text",
-              "value": "These instructions are for installing MongoDB directly from",
             },
-          ],
-          "type": "paragraph",
-        }
+            "type": "text",
+            "value": "These instructions are for installing MongoDB directly from",
+          },
+        ],
+        "type": "section",
       }
-    />
-  </section>
+    }
+  />
 </div>
 `;
