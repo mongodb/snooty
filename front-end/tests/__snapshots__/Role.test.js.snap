@@ -2,6 +2,7 @@
 
 exports[`renders correctly role "doc" 1`] = `
 <a
+  className="reference external"
   href="/cloud/atlas"
 >
   Create an Atlas Account and Cluster
@@ -9,9 +10,14 @@ exports[`renders correctly role "doc" 1`] = `
 `;
 
 exports[`renders correctly role "ref" 1`] = `
-<span>
-  ==Role not implemented:
-  ref
-   ==
-</span>
+<a
+  className="reference external"
+  href="https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms"
+>
+  <span
+    className="xref std std-ref"
+  >
+    Supported Platforms
+  </span>
+</a>
 `;

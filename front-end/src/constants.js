@@ -83,4 +83,13 @@ const DEPLOYMENTS = [
   },
 ];
 
-export { LANGUAGES, OSTABS, DEPLOYMENTS };
+// hardcoded for now because this target lookup will be complex
+// as it relies on other sites (e.g. manual) cc. Andrew
+const REF_TARGETS = {
+  'compass-index': 'https://docs.mongodb.com/compass/current/#compass-index',
+  'document-dot-notation': 'https://docs.mongodb.com/manual/core/document/#document-dot-notation',
+  'mongodb-uri': 'https://docs.mongodb.com/manual/reference/connection-string/#mongodb-uri',
+  'mongodb-supported-platforms': 'https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms',
+};
+
+export { LANGUAGES, OSTABS, DEPLOYMENTS, REF_TARGETS };

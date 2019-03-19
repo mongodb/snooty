@@ -21,6 +21,7 @@ export default class GuideSection extends Component {
       procedure: 'Procedure',
       summary: 'Summary',
       whats_next: 'What’s Next',
+      seealso: 'See Also',
     };
   }
 
