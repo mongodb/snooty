@@ -7,7 +7,7 @@ import { REF_TARGETS } from '../src/constants';
 import mockDataDoc from './data/Role-doc.test.json';
 import mockDataRef from './data/Role-ref.test.json';
 
-const refDocMapping = {REF_TARGETS};
+const refDocMapping = { REF_TARGETS };
 
 it('renders correctly role "doc"', () => {
   const tree = shallow(<Role nodeData={mockDataDoc} refDocMapping={refDocMapping} />);
