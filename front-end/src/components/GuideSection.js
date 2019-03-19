@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Stepper from './Stepper';
+import { setLocalValue } from '../localStorage';
 
 export default class GuideSection extends Component {
   constructor() {
@@ -45,12 +46,15 @@ export default class GuideSection extends Component {
   };
 
   handleUpdateURIWriter = uri => {
-    this.setState(prevState => ({
-      uri: {
-        ...prevState.uri,
-        ...uri,
-      },
-    }));
+    this.setState(
+      prevState => ({
+        uri: {
+          ...prevState.uri,
+          ...uri,
+        },
+      }),
+      () => setLocalValue('uri', this.state.uri) // eslint-disable-line react/destructuring-assignment
+    );
   };
 
   render() {

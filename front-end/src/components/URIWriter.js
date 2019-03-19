@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DEPLOYMENTS } from '../constants';
+import { getLocalValue } from '../localStorage';
 
 export const TEMPLATE_TYPE_SELF_MANAGED = DEPLOYMENTS[1].name;
 export const TEMPLATE_TYPE_REPLICA_SET = 'local MongoDB with replica set';
@@ -19,17 +20,21 @@ const LOCAL_ENVS = [
   },
 ];
 
+const getDefaultEnvConfig = activeDeployment => {
+  return activeDeployment === TEMPLATE_TYPE_ATLAS ? TEMPLATE_TYPE_ATLAS : TEMPLATE_TYPE_SELF_MANAGED;
+};
+
 export default class URIWriter extends Component {
   constructor(props) {
     super(props);
 
     const { activeDeployment } = this.props;
 
-    this.state = {
+    const emptyURI = {
       atlas: '',
       authSource: '',
       database: '',
-      env: activeDeployment,
+      envConfig: getDefaultEnvConfig(activeDeployment),
       hostlist: {
         host0: '',
       },
@@ -38,6 +43,7 @@ export default class URIWriter extends Component {
       username: '',
     };
 
+    this.state = { ...emptyURI, ...getLocalValue('uri') };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.hostlistCounter = 1;
   }
@@ -45,7 +51,7 @@ export default class URIWriter extends Component {
   static getDerivedStateFromProps(props, state) {
     if (props.activeDeployment !== state.prevPropsActiveDeployment) {
       return {
-        env: props.activeDeployment,
+        envConfig: getLocalValue('uri').envConfig || getDefaultEnvConfig(props.activeDeployment),
         prevPropsActiveDeployment: props.activeDeployment,
       };
     }
@@ -124,7 +130,7 @@ export default class URIWriter extends Component {
       });
       this.setState(
         {
-          env: TEMPLATE_TYPE_ATLAS_34,
+          envConfig: TEMPLATE_TYPE_ATLAS_34,
           database: shellArray[6],
           hostlist,
           ...this.parseURIParams(shellArray[7]),
@@ -135,7 +141,7 @@ export default class URIWriter extends Component {
       const hostlist = { host0: shellArray[4] };
       this.setState(
         {
-          env: TEMPLATE_TYPE_ATLAS_36,
+          envConfig: TEMPLATE_TYPE_ATLAS_36,
           database: shellArray[6],
           hostlist,
         },
@@ -191,7 +197,7 @@ export default class URIWriter extends Component {
     });
     this.setState(
       {
-        env: TEMPLATE_TYPE_ATLAS_34,
+        envConfig: TEMPLATE_TYPE_ATLAS_34,
         username: matchesArray[2],
         hostlist,
         database: matchesArray[5],
@@ -212,7 +218,7 @@ export default class URIWriter extends Component {
     const hostlist = { host0: matchesArray[4] };
     this.setState(
       {
-        env: TEMPLATE_TYPE_ATLAS_36,
+        envConfig: TEMPLATE_TYPE_ATLAS_36,
         username: matchesArray[2],
         hostlist,
         database: matchesArray[5],
@@ -255,7 +261,7 @@ export default class URIWriter extends Component {
       {
         authSource: '',
         database: '',
-        env: activeDeployment,
+        envConfig: getDefaultEnvConfig(activeDeployment),
         hostlist: {
           host0: '',
         },
@@ -286,10 +292,10 @@ export default class URIWriter extends Component {
     }
   }
 
-  handleEnvChange(env) {
+  handleLocalEnvChange(envConfig) {
     const { handleUpdateURIWriter } = this.props;
 
-    this.setState({ env }, () => handleUpdateURIWriter(this.state));
+    this.setState({ envConfig }, () => handleUpdateURIWriter(this.state));
   }
 
   updateHostlist(name, value, callback) {
@@ -336,7 +342,7 @@ export default class URIWriter extends Component {
 
   render() {
     const { activeDeployment } = this.props;
-    const { atlas, authSource, database, env, hostlist, replicaSet, username } = this.state;
+    const { atlas, authSource, database, envConfig, hostlist, replicaSet, username } = this.state;
     const isAtlas = activeDeployment === TEMPLATE_TYPE_ATLAS;
 
     return (
@@ -373,12 +379,12 @@ export default class URIWriter extends Component {
               <ul className="guide__pills">
                 {LOCAL_ENVS.map((localEnv, index) => (
                   <li
-                    className={`uriwriter__toggle guide__pill ${env === localEnv.key && 'guide__pill--active'}`}
+                    className={`uriwriter__toggle guide__pill ${envConfig === localEnv.key && 'guide__pill--active'}`}
                     key={index}
                   >
                     <span
                       id={localEnv.key.replace(/\s+/g, '-')}
-                      onClick={() => this.handleEnvChange(localEnv.key)}
+                      onClick={() => this.handleLocalEnvChange(localEnv.key)}
                       role="button"
                       tabIndex={index}
                     >
@@ -408,7 +414,7 @@ export default class URIWriter extends Component {
                 className="mongodb-form__input"
               />
             </label>
-            {env === TEMPLATE_TYPE_REPLICA_SET && (
+            {envConfig === TEMPLATE_TYPE_REPLICA_SET && (
               <label className="mongodb-form__prompt">
                 <span className="mongodb-form__label">replicaSet</span>
                 <input
@@ -466,5 +472,5 @@ URIWriter.propTypes = {
 };
 
 URIWriter.defaultProps = {
-  activeDeployment: TEMPLATE_TYPE_ATLAS,
+  activeDeployment: undefined,
 };

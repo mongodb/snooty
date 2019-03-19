@@ -6,6 +6,7 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
 import { LANGUAGES, OSTABS, DEPLOYMENTS } from '../constants';
+import { getLocalValue, setLocalValue } from '../localStorage';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -59,7 +60,7 @@ export default class Guide extends Component {
   createTabsetType = (opts, setTabs) => {
     this.setState({
       [opts.type]: setTabs,
-      [opts.active]: setTabs[0].name,
+      [opts.active]: getLocalValue(opts.active) || setTabs[0].name,
     });
   };
 
@@ -88,6 +89,7 @@ export default class Guide extends Component {
     this.setState({
       [tabset]: value.name,
     });
+    setLocalValue(tabset, value.name);
   };
 
   // when a user hovers over a specific role

@@ -6,7 +6,6 @@ import URIText, {
   URISTRING_SHELL_PLACEHOLDER,
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 } from './URIText';
-import { DEPLOYMENTS } from '../constants';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -55,7 +54,7 @@ Code.propTypes = {
 };
 
 Code.defaultProps = {
-  activeDeployment: DEPLOYMENTS[0].name,
+  activeDeployment: undefined,
   uri: undefined,
 };
 

@@ -12,7 +12,7 @@ const mountURIWriter = ({ activeDeployment, mockCallback }) =>
 const emptyCloudURI = {
   authSource: '',
   database: '',
-  env: 'cloud',
+  envConfig: CLOUD_DEPLOYMENT,
   hostlist: {
     host0: '',
   },
@@ -31,7 +31,7 @@ describe('URIWriter', () => {
     });
 
     it('sets the env state to be local MongoDB', () => {
-      expect(wrapper.state().env).toBe('local');
+      expect(wrapper.state().envConfig).toBe(LOCAL_DEPLOYMENT);
     });
 
     it('does not show an error', () => {
@@ -106,7 +106,7 @@ describe('URIWriter', () => {
       });
 
       it('sets the env state to be local MongoDB with replica set', () => {
-        expect(wrapper.state().env).toBe('local MongoDB with replica set');
+        expect(wrapper.state().envConfig).toBe('local MongoDB with replica set');
       });
     });
 
