@@ -6,7 +6,6 @@ import List from './List';
 import ListTable from './ListTable';
 import Emphasis from './Emphasis';
 import Include from './Include';
-import Role from './Role';
 import Section from './Section';
 import Code from './Code';
 import LiteralInclude from './LiteralInclude';
@@ -20,9 +19,31 @@ import Reference from './Reference';
 import Strong from './Strong';
 import URIWriter from './URIWriter';
 
+// the different roles
+import RoleGUILabel from './Roles/GUILabel';
+import RoleProgram from './Roles/Program';
+import RoleLink from './Roles/Link';
+import RoleRef from './Roles/Ref';
+import RoleCode from './Roles/Code';
+
 export default class ComponentFactory extends Component {
   constructor() {
     super();
+    this.roles = {
+      authrole: RoleCode,
+      binary: RoleCode,
+      dbcommand: RoleCode,
+      doc: RoleLink,
+      guilabel: RoleGUILabel,
+      manual: RoleLink,
+      method: RoleCode,
+      option: RoleCode,
+      program: RoleProgram,
+      query: RoleCode,
+      ref: RoleRef,
+      setting: RoleCode,
+      term: RoleLink,
+    };
     this.componentMap = {
       admonition: Admonition,
       block_quote: BlockQuote,
@@ -37,7 +58,6 @@ export default class ComponentFactory extends Component {
       literalinclude: LiteralInclude,
       paragraph: Paragraph,
       reference: Reference,
-      role: Role,
       section: Section,
       step: Step,
       strong: Strong,
@@ -52,11 +72,21 @@ export default class ComponentFactory extends Component {
       nodeData: { name, type },
     } = this.props;
     // do nothing with these nodes for now (cc. Andrew)
-    if (type === 'target' || type === 'class' || type === 'cssclass' || name === 'cssclass') {
+    if (type === 'target' || type === 'class' || type === 'cssclass' || name === 'cssclass' || name === 'class') {
       return null;
     }
     const lookup = type === 'directive' ? name : type;
     let ComponentType = this.componentMap[lookup];
+    // roles are each in separate file
+    if (type === 'role') {
+      // remove namespace
+      let modName = name;
+      if (modName.includes(':')) {
+        const splitNames = modName.split(':');
+        modName = splitNames[1];
+      }
+      ComponentType = this.roles[modName];
+    }
     // the different admonition types are all under the Admonition component
     // see 'this.admonitions' in 'guide.js' for the list
     if (!ComponentType && admonitions && admonitions.includes(name)) {
