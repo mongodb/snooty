@@ -6,6 +6,6 @@ import Code from '../src/components/Code';
 import mockData from './data/Code.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Code nodeData={mockData} />);
+  const tree = shallow(<Code nodeData={mockData} activeTabs={{ cloud: undefined }} />);
   expect(tree).toMatchSnapshot();
 });

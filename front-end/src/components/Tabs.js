@@ -1,45 +1,70 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { stringifyTab } from '../constants';
 
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
     const { nodeData, addTabset } = this.props;
-    addTabset(nodeData.options ? nodeData.options : { tabset: 'os' }, [...nodeData.children]);
+    addTabset(nodeData.options ? nodeData.options.tabset : this.generateAnonymousTabsetName(nodeData), [
+      ...nodeData.children,
+    ]);
+    this.state = {
+      tabset: nodeData.options ? nodeData.options.tabset : this.generateAnonymousTabsetName(nodeData),
+    };
   }
 
+  generateAnonymousTabsetName = nodeData => {
+    return nodeData.children.flatMap(child => child.argument[0].value).join('/');
+  };
+
   render() {
-    const { nodeData, activeOSTab, activeLanguage, activeDeployment } = this.props;
-    let tabsetType;
-    // if tabset options exists, then determine if pills or proper tabs
-    if (nodeData.options && nodeData.options.tabset === 'drivers') {
-      tabsetType = activeLanguage;
-    } else if (nodeData.options && nodeData.options.tabset === 'cloud') {
-      tabsetType = activeDeployment;
-    } else {
-      tabsetType = activeOSTab;
-    }
-    return nodeData.children.map((tab, index) => (
-      <div
-        key={index}
-        style={{
-          display: !tabsetType || tabsetType === tab.argument[0].value ? 'block' : 'none',
-        }}
-      >
-        <h3 style={{ color: 'green' }}>{tab.argument[0].value} Code</h3>
-        {tab.children.map((tabChild, tabChildIndex) => (
-          <ComponentFactory {...this.props} nodeData={tabChild} key={tabChildIndex} />
-        ))}
-      </div>
-    ));
+    const { tabset } = this.state;
+    const { nodeData, activeTabs, setActiveTab } = this.props;
+    const tabsetIsNamed = Object.prototype.hasOwnProperty.call(nodeData, 'options');
+    return (
+      <React.Fragment>
+        <ul className="tab-strip tab-strip--singleton" role="tablist">
+          {tabsetIsNamed ||
+            nodeData.children.map((tab, index) => {
+              const tabName = tab.argument[0].value;
+              return (
+                <li
+                  className="tab-strip__element"
+                  data-tabid={tabName}
+                  role="tab"
+                  aria-selected={activeTabs[tabset] === tabName ? 'true' : 'false'}
+                  key={index}
+                  onClick={() => {
+                    setActiveTab(tabName, tabset);
+                  }}
+                >
+                  {stringifyTab(tabName)}
+                </li>
+              );
+            })}
+        </ul>
+        {nodeData.children.map((tab, index) => {
+          return (
+            activeTabs[tabset] === tab.argument[0].value && (
+              <div key={index}>
+                {tab.children.map((tabChild, tabChildIndex) => (
+                  <ComponentFactory {...this.props} nodeData={tabChild} key={tabChildIndex} />
+                ))}
+              </div>
+            )
+          );
+        })}
+      </React.Fragment>
+    );
   }
 }
 
 Tabs.propTypes = {
-  activeLanguage: PropTypes.string,
-  activeOSTab: PropTypes.string,
-  activeDeployment: PropTypes.string,
+  activeTabs: PropTypes.shape({
+    [PropTypes.string]: PropTypes.string,
+  }).isRequired,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -53,10 +78,5 @@ Tabs.propTypes = {
     ),
   }).isRequired,
   addTabset: PropTypes.func.isRequired,
-};
-
-Tabs.defaultProps = {
-  activeLanguage: undefined,
-  activeOSTab: undefined,
-  activeDeployment: undefined,
+  setActiveTab: PropTypes.func.isRequired,
 };
