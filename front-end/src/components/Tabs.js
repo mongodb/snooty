@@ -7,12 +7,10 @@ export default class Tabs extends Component {
   constructor(props) {
     super(props);
     const { nodeData, addTabset } = this.props;
-    addTabset(nodeData.options ? nodeData.options.tabset : this.generateAnonymousTabsetName(nodeData), [
-      ...nodeData.children,
-    ]);
-    this.state = {
-      tabset: nodeData.options ? nodeData.options.tabset : this.generateAnonymousTabsetName(nodeData),
-    };
+    const tabsetName = nodeData.options ? nodeData.options.tabset : this.generateAnonymousTabsetName(nodeData);
+    this.state = { tabsetName };
+
+    addTabset(tabsetName, [...nodeData.children]);
   }
 
   generateAnonymousTabsetName = nodeData => {
@@ -20,7 +18,7 @@ export default class Tabs extends Component {
   };
 
   render() {
-    const { tabset } = this.state;
+    const { tabsetName } = this.state;
     const { nodeData, activeTabs, setActiveTab } = this.props;
     const tabsetIsNamed = Object.prototype.hasOwnProperty.call(nodeData, 'options');
     return (
@@ -34,10 +32,10 @@ export default class Tabs extends Component {
                   className="tab-strip__element"
                   data-tabid={tabName}
                   role="tab"
-                  aria-selected={activeTabs[tabset] === tabName ? 'true' : 'false'}
+                  aria-selected={activeTabs[tabsetName] === tabName ? 'true' : 'false'}
                   key={index}
                   onClick={() => {
-                    setActiveTab(tabName, tabset);
+                    setActiveTab(tabName, tabsetName);
                   }}
                 >
                   {stringifyTab(tabName)}
@@ -47,12 +45,12 @@ export default class Tabs extends Component {
         </ul>
         {nodeData.children.map((tab, index) => {
           return (
-            activeTabs[tabset] === tab.argument[0].value && (
-              <div key={index}>
+            activeTabs[tabsetName] === tab.argument[0].value && (
+              <React.Fragment key={index}>
                 {tab.children.map((tabChild, tabChildIndex) => (
                   <ComponentFactory {...this.props} nodeData={tabChild} key={tabChildIndex} />
                 ))}
-              </div>
+              </React.Fragment>
             )
           );
         })}

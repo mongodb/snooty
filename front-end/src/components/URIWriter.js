@@ -45,10 +45,11 @@ export default class URIWriter extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.activeTabs.deployments !== state.prevPropsActiveDeployment) {
+    const activeDeployment = props.activeTabs.deployments;
+    if (activeDeployment !== state.prevPropsActiveDeployment) {
       return {
-        env: props.activeTabs.deployments,
-        prevPropsActiveDeployment: props.activeTabs.deployments,
+        env: activeDeployment,
+        prevPropsActiveDeployment: activeDeployment,
       };
     }
     return null;

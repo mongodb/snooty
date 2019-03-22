@@ -99,9 +99,4 @@ GuideSection.propTypes = {
     children: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
-  setActiveTab: PropTypes.func,
-};
-
-GuideSection.defaultProps = {
-  setActiveTab: undefined,
 };

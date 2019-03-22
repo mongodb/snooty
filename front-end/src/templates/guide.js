@@ -54,15 +54,16 @@ export default class Guide extends Component {
     });
   }
 
-  addTabset = (tabsetName, tabData) => {
+  addTabset = (tabName, tabData) => {
     let tabs = tabData.map(tab => tab.argument[0].value);
+    let tabsetName = tabName;
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
-      tabsetName = 'deployments'; // eslint-disable-line no-param-reassign
+      tabsetName = 'deployments';
       this.setNamedTabData(tabsetName, tabs);
     } else if (tabsetName === 'drivers') {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
-      tabsetName = 'languages'; // eslint-disable-line no-param-reassign
+      tabsetName = 'languages';
       this.setNamedTabData(tabsetName, tabs);
     }
     this.setActiveTab(tabs[0], tabsetName);
@@ -166,7 +167,7 @@ export default class Guide extends Component {
 
   createSections() {
     const { pageContext } = this.props;
-    const { activeTabs, languages, deployments } = this.state;
+    const { activeTabs } = this.state;
     return this.sections
       .filter(section => this.validNames.includes(section.name))
       .map((section, index) => (
