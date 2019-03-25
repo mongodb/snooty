@@ -20,11 +20,11 @@ export default class Tabs extends Component {
   render() {
     const { tabsetName } = this.state;
     const { nodeData, activeTabs, setActiveTab } = this.props;
-    const tabsetIsNamed = Object.prototype.hasOwnProperty.call(nodeData, 'options');
+    const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud';
     return (
       <React.Fragment>
         <ul className="tab-strip tab-strip--singleton" role="tablist">
-          {tabsetIsNamed ||
+          {isHeaderTabset ||
             nodeData.children.map((tab, index) => {
               const tabName = tab.argument[0].value;
               return (

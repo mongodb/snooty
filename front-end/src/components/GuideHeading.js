@@ -10,7 +10,7 @@ export default class GuideHeading extends Component {
   }
 
   render() {
-    const { setActiveTab, languages, deployments, activeTabs } = this.props;
+    const { setActiveTab, cloud, drivers, activeTabs } = this.props;
     return (
       <div className="section" id="SOMETHING_HERE">
         <h1>
@@ -20,17 +20,17 @@ export default class GuideHeading extends Component {
           </a>
         </h1>
 
-        {deployments && deployments.length > 0 && (
+        {cloud && cloud.length > 0 && (
           <div className="guide-prefs">
             <div className="guide-prefs__caption">
               Deployment Type:
-              <span className="show-current-deployment"> {stringifyTab(activeTabs.deployments)}</span>
+              <span className="show-current-deployment"> {stringifyTab(activeTabs.cloud)}</span>
             </div>
             <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="deployments">
-              {deployments.map((deployment, index) => (
+              {cloud.map((deployment, index) => (
                 <li
                   className={
-                    activeTabs.deployments === deployment
+                    activeTabs.cloud === deployment
                       ? 'guide__pill guide__deploymentpill guide__deploymentpill--active'
                       : 'guide__pill guide__deploymentpill'
                   }
@@ -39,7 +39,7 @@ export default class GuideHeading extends Component {
                 >
                   <span
                     onClick={() => {
-                      setActiveTab(deployment, 'deployments');
+                      setActiveTab(deployment, 'cloud');
                     }}
                     role="button"
                     tabIndex={index}
@@ -52,27 +52,27 @@ export default class GuideHeading extends Component {
           </div>
         )}
 
-        {languages && languages.length > 0 && (
+        {drivers && drivers.length > 0 && (
           <div className="guide-prefs">
             <div className="guide-prefs__caption">
               Client:
-              <span className="show-current-language"> {stringifyTab(activeTabs.languages)}</span>
+              <span className="show-current-language"> {stringifyTab(activeTabs.drivers)}</span>
             </div>
             <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="languages">
-              {languages.map((language, index) => (
+              {drivers.map((driver, index) => (
                 <li
-                  className={activeTabs.languages === language ? 'guide__pill guide__pill--active' : 'guide__pill'}
-                  data-tabid={language}
+                  className={activeTabs.drivers === driver ? 'guide__pill guide__pill--active' : 'guide__pill'}
+                  data-tabid={driver}
                   key={index}
                 >
                   <span
                     onClick={() => {
-                      setActiveTab(language, 'languages');
+                      setActiveTab(driver, 'drivers');
                     }}
                     role="button"
                     tabIndex={index}
                   >
-                    {stringifyTab(language)}
+                    {stringifyTab(driver)}
                   </span>
                 </li>
               ))}
@@ -98,12 +98,12 @@ export default class GuideHeading extends Component {
 
 GuideHeading.propTypes = {
   activeTabs: PropTypes.shape({
-    deployments: PropTypes.string,
-    languages: PropTypes.string,
+    cloud: PropTypes.string,
+    drivers: PropTypes.string,
   }).isRequired,
   setActiveTab: PropTypes.func.isRequired,
-  languages: PropTypes.arrayOf(PropTypes.string),
-  deployments: PropTypes.arrayOf(PropTypes.string),
+  cloud: PropTypes.arrayOf(PropTypes.string),
+  drivers: PropTypes.arrayOf(PropTypes.string),
   sections: PropTypes.arrayOf(
     PropTypes.shape({
       children: PropTypes.arrayOf(
@@ -116,6 +116,6 @@ GuideHeading.propTypes = {
 };
 
 GuideHeading.defaultProps = {
-  languages: [],
-  deployments: [],
+  cloud: [],
+  drivers: [],
 };

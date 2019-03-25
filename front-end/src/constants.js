@@ -17,6 +17,8 @@ const LANGUAGES = [
 
 const DEPLOYMENTS = ['cloud', 'local'];
 
+const PLATFORMS = ['windows', 'macos', 'linux', 'debian', 'rhel'];
+
 const SLUG_TO_STRING = {
   shell: 'Mongo Shell',
   compass: 'Compass',
@@ -37,6 +39,8 @@ const SLUG_TO_STRING = {
   macos: 'macOS',
   linux: 'Linux',
   windows: 'Windows',
+  debian: 'Debian',
+  rhel: 'RHEL',
 };
 
 const stringifyTab = tabName => {
@@ -52,4 +56,4 @@ const REF_TARGETS = {
   'mongodb-supported-platforms': 'https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms',
 };
 
-export { LANGUAGES, DEPLOYMENTS, REF_TARGETS, stringifyTab };
+export { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_TARGETS, stringifyTab };

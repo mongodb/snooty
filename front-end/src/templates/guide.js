@@ -5,7 +5,7 @@ import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
-import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
+import { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_TARGETS } from '../constants';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -54,16 +54,13 @@ export default class Guide extends Component {
     });
   }
 
-  addTabset = (tabName, tabData) => {
+  addTabset = (tabsetName, tabData) => {
     let tabs = tabData.map(tab => tab.argument[0].value);
-    let tabsetName = tabName;
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
-      tabsetName = 'deployments';
       this.setNamedTabData(tabsetName, tabs);
     } else if (tabsetName === 'drivers') {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
-      tabsetName = 'languages';
       this.setNamedTabData(tabsetName, tabs);
     }
     this.setActiveTab(tabs[0], tabsetName);
@@ -187,15 +184,7 @@ export default class Guide extends Component {
 
   render() {
     const { pageContext } = this.props;
-    const {
-      activeTabs,
-      languages,
-      deployments,
-      modalContent,
-      modalPositionLeft,
-      modalPositionTop,
-      modalVisible,
-    } = this.state;
+    const { activeTabs, cloud, drivers, modalContent, modalPositionLeft, modalPositionTop, modalVisible } = this.state;
 
     return (
       <div className="content">
@@ -210,8 +199,8 @@ export default class Guide extends Component {
             </ul>
             <GuideHeading
               sections={this.sections}
-              languages={languages}
-              deployments={deployments}
+              drivers={drivers}
+              cloud={cloud}
               setActiveTab={this.setActiveTab}
               addTabset={this.addTabset}
               admonitions={this.admonitions}
