@@ -5,7 +5,7 @@ import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
-import { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_TARGETS } from '../constants';
+import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
