@@ -5,7 +5,7 @@ import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
-import { LANGUAGES, OSTABS, DEPLOYMENTS, REF_TARGETS } from '../constants';
+import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -27,12 +27,7 @@ export default class Guide extends Component {
     this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next', 'seealso'];
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
-      languages: [],
-      activeLanguage: undefined,
-      OSTabs: [],
-      activeOSTab: undefined,
-      deployments: [],
-      activeDeployment: undefined,
+      activeTabs: {},
       modalPositionLeft: 0,
       modalPositionTop: 0,
       modalVisible: false,
@@ -59,38 +54,31 @@ export default class Guide extends Component {
     });
   }
 
-  createTabsetType = (opts, setTabs) => {
+  addTabset = (tabsetName, tabData) => {
+    let tabs = tabData.map(tab => tab.argument[0].value);
+    if (tabsetName === 'cloud') {
+      tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
+      this.setNamedTabData(tabsetName, tabs);
+    } else if (tabsetName === 'drivers') {
+      tabs = LANGUAGES.filter(tab => tabs.includes(tab));
+      this.setNamedTabData(tabsetName, tabs);
+    }
+    this.setActiveTab(tabs[0], tabsetName);
+  };
+
+  setNamedTabData = (tabsetName, tabs) => {
     this.setState(prevState => ({
-      [opts.type]: Array.from(new Set([...prevState[opts.type], ...setTabs])),
-      [opts.active]: setTabs[0].name,
+      [tabsetName]: Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])),
     }));
   };
 
-  // this function gets an array of objects that compose some tabset
-  addTabset = (options, tabData) => {
-    let tabsetOptions;
-    let tabsetType;
-    // different types of tabs
-    if (options && options.tabset === 'cloud') {
-      tabsetType = DEPLOYMENTS;
-      tabsetOptions = { type: 'deployments', active: 'activeDeployment' };
-    } else if (options && options.tabset === 'drivers') {
-      tabsetType = LANGUAGES;
-      tabsetOptions = { type: 'languages', active: 'activeLanguage' };
-    } else {
-      tabsetType = OSTABS;
-      tabsetOptions = { type: 'OSTabs', active: 'activeOSTab' };
-    }
-    // get the values of tabset passed in and make sure they are valid names
-    const tabs = tabData.map(tab => tab.argument[0].value);
-    const filteredTabs = tabsetType.filter(tab => tabs.includes(tab.name));
-    this.createTabsetType(tabsetOptions, filteredTabs);
-  };
-
-  setActiveTab = (value, tabset) => {
-    this.setState({
-      [tabset]: value.name,
-    });
+  setActiveTab = (value, tabsetName) => {
+    this.setState(prevState => ({
+      activeTabs: {
+        ...prevState.activeTabs,
+        [tabsetName]: value,
+      },
+    }));
   };
 
   // when a user hovers over a specific role
@@ -176,7 +164,7 @@ export default class Guide extends Component {
 
   createSections() {
     const { pageContext } = this.props;
-    const { activeDeployment, activeLanguage, activeOSTab, OSTabs, languages, deployments } = this.state;
+    const { activeTabs } = this.state;
     return this.sections
       .filter(section => this.validNames.includes(section.name))
       .map((section, index) => (
@@ -188,29 +176,15 @@ export default class Guide extends Component {
           modal={this.modalFetchData}
           setActiveTab={this.setActiveTab}
           addTabset={this.addTabset}
-          OSTabs={OSTabs}
-          languages={languages}
-          deployments={deployments}
-          activeOSTab={activeOSTab}
-          activeLanguage={activeLanguage}
-          activeDeployment={activeDeployment}
           stitchClient={this.stitchClient}
+          activeTabs={activeTabs}
         />
       ));
   }
 
   render() {
     const { pageContext } = this.props;
-    const {
-      activeLanguage,
-      languages,
-      deployments,
-      activeDeployment,
-      modalContent,
-      modalPositionLeft,
-      modalPositionTop,
-      modalVisible,
-    } = this.state;
+    const { activeTabs, cloud, drivers, modalContent, modalPositionLeft, modalPositionTop, modalVisible } = this.state;
 
     return (
       <div className="content">
@@ -225,16 +199,15 @@ export default class Guide extends Component {
             </ul>
             <GuideHeading
               sections={this.sections}
-              languages={languages}
-              activeLanguage={activeLanguage}
-              deployments={deployments}
-              activeDeployment={activeDeployment}
+              drivers={drivers}
+              cloud={cloud}
               setActiveTab={this.setActiveTab}
               addTabset={this.addTabset}
               admonitions={this.admonitions}
               refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
               modal={this.modalFetchData}
               stitchClient={this.stitchClient}
+              activeTabs={activeTabs}
             />
             <Modal
               modalProperties={{
