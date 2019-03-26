@@ -6,6 +6,7 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Modal from '../components/Modal';
 import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
+import { getLocalValue, setLocalValue } from '../localStorage';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -63,7 +64,7 @@ export default class Guide extends Component {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs);
     }
-    this.setActiveTab(tabs[0], tabsetName);
+    this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
   };
 
   setNamedTabData = (tabsetName, tabs) => {
@@ -79,6 +80,7 @@ export default class Guide extends Component {
         [tabsetName]: value,
       },
     }));
+    setLocalValue(tabsetName, value);
   };
 
   // when a user hovers over a specific role

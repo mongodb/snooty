@@ -12,7 +12,7 @@ const mountURIWriter = ({ activeTabs, mockCallback }) =>
 const emptyCloudURI = {
   authSource: '',
   database: '',
-  env: 'cloud',
+  envConfig: CLOUD_DEPLOYMENT,
   hostlist: {
     host0: '',
   },
@@ -27,11 +27,11 @@ describe('URIWriter', () => {
     const mockCallback = jest.fn();
 
     beforeAll(() => {
-      wrapper = mountURIWriter({ mockCallback, activeTabs: { deployments: LOCAL_DEPLOYMENT } });
+      wrapper = mountURIWriter({ mockCallback, activeTabs: { cloud: LOCAL_DEPLOYMENT } });
     });
 
     it('sets the env state to be local MongoDB', () => {
-      expect(wrapper.state().env).toBe('local');
+      expect(wrapper.state().envConfig).toBe(LOCAL_DEPLOYMENT);
     });
 
     it('does not show an error', () => {
@@ -106,13 +106,13 @@ describe('URIWriter', () => {
       });
 
       it('sets the env state to be local MongoDB with replica set', () => {
-        expect(wrapper.state().env).toBe('local MongoDB with replica set');
+        expect(wrapper.state().envConfig).toBe('local MongoDB with replica set');
       });
     });
 
     describe('when updated with invalid host inputs', () => {
       beforeAll(() => {
-        wrapper = mountURIWriter({ mockCallback, activeTabs: { deployments: LOCAL_DEPLOYMENT } });
+        wrapper = mountURIWriter({ mockCallback, activeTabs: { cloud: LOCAL_DEPLOYMENT } });
       });
 
       it('has one input field for hosts', () => {
@@ -142,7 +142,7 @@ describe('URIWriter', () => {
 
     beforeAll(() => {
       mockCallback = jest.fn();
-      wrapper = mountURIWriter({ mockCallback, activeTabs: { deployments: CLOUD_DEPLOYMENT } });
+      wrapper = mountURIWriter({ mockCallback, activeTabs: { cloud: CLOUD_DEPLOYMENT } });
     });
 
     it('displays no input elements', () => {
