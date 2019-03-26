@@ -54,7 +54,7 @@ export default class URIWriter extends Component {
     const activeDeployment = props.activeTabs.cloud;
     if (activeDeployment !== state.prevPropsActiveDeployment) {
       return {
-        envConfig: getLocalValue('uri').envConfig || getDefaultEnvConfig(activeDeployment),
+        envConfig: getDefaultEnvConfig(activeDeployment),
         prevPropsActiveDeployment: activeDeployment,
       };
     }
@@ -475,7 +475,7 @@ export default class URIWriter extends Component {
 
 URIWriter.propTypes = {
   activeTabs: PropTypes.shape({
-    cloud: PropTypes.string.isRequired,
+    cloud: PropTypes.string,
   }).isRequired,
   handleUpdateURIWriter: PropTypes.func.isRequired,
 };
