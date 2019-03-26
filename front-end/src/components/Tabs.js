@@ -13,8 +13,19 @@ export default class Tabs extends Component {
     addTabset(tabsetName, [...nodeData.children]);
   }
 
+  /*
+   * For anonymous tabsets, create a tabset name that alphabetizes the tab names, formats them in lowercase,
+   * and joins them with a forward slash (/)
+   */
   generateAnonymousTabsetName = nodeData => {
-    return nodeData.children.flatMap(child => child.argument[0].value).join('/');
+    return nodeData.children
+      .map(child => child.argument[0].value.toLowerCase())
+      .sort((a, b) => {
+        if (a > b) return 1;
+        if (a < b) return -1;
+        return 0;
+      })
+      .join('/');
   };
 
   render() {
@@ -26,7 +37,7 @@ export default class Tabs extends Component {
         <ul className="tab-strip tab-strip--singleton" role="tablist">
           {isHeaderTabset ||
             nodeData.children.map((tab, index) => {
-              const tabName = tab.argument[0].value;
+              const tabName = tab.argument[0].value.toLowerCase();
               return (
                 <li
                   className="tab-strip__element"
@@ -44,8 +55,9 @@ export default class Tabs extends Component {
             })}
         </ul>
         {nodeData.children.map((tab, index) => {
+          const tabName = tab.argument[0].value.toLowerCase();
           return (
-            activeTabs[tabsetName] === tab.argument[0].value && (
+            activeTabs[tabsetName] === tabName && (
               <React.Fragment key={index}>
                 {tab.children.map((tabChild, tabChildIndex) => (
                   <ComponentFactory {...this.props} nodeData={tabChild} key={tabChildIndex} />

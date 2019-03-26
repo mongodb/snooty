@@ -14,10 +14,10 @@ const URI_PLACEHOLDERS = [
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 ];
 
-const Code = ({ nodeData: { value }, activeTabs: { deployments }, uri }) => {
+const Code = ({ nodeData: { value }, activeTabs: { cloud }, uri }) => {
   let code = value;
   if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
-    code = <URIText value={code} activeDeployment={deployments} uri={uri} />;
+    code = <URIText value={code} activeDeployment={cloud} uri={uri} />;
   }
 
   return (
@@ -42,7 +42,7 @@ Code.propTypes = {
     value: PropTypes.string.isRequired,
   }).isRequired,
   activeTabs: PropTypes.shape({
-    deployments: PropTypes.string.isRequired,
+    cloud: PropTypes.string,
   }).isRequired,
   uri: PropTypes.shape({
     atlas: PropTypes.string,
