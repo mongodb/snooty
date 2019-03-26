@@ -19,7 +19,7 @@ export default class Tabs extends Component {
    */
   generateAnonymousTabsetName = nodeData => {
     return nodeData.children
-      .flatMap(child => child.argument[0].value.toLowerCase())
+      .map(child => child.argument[0].value.toLowerCase())
       .sort((a, b) => {
         if (a > b) return 1;
         if (a < b) return -1;
