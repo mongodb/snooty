@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DEPLOYMENTS } from '../constants';
 
-export const TEMPLATE_TYPE_SELF_MANAGED = DEPLOYMENTS[1].name;
+export const TEMPLATE_TYPE_SELF_MANAGED = DEPLOYMENTS[1];
 export const TEMPLATE_TYPE_REPLICA_SET = 'local MongoDB with replica set';
 export const TEMPLATE_TYPE_ATLAS_36 = 'Atlas (Cloud) v. 3.6';
 export const TEMPLATE_TYPE_ATLAS_34 = 'Atlas (Cloud) v. 3.4';
-export const TEMPLATE_TYPE_ATLAS = DEPLOYMENTS[0].name;
+export const TEMPLATE_TYPE_ATLAS = DEPLOYMENTS[0];
 
 const LOCAL_ENVS = [
   {
@@ -23,17 +23,19 @@ export default class URIWriter extends Component {
   constructor(props) {
     super(props);
 
-    const { activeDeployment } = this.props;
+    const {
+      activeTabs: { deployments },
+    } = this.props;
 
     this.state = {
       atlas: '',
       authSource: '',
       database: '',
-      env: activeDeployment,
+      env: deployments,
       hostlist: {
         host0: '',
       },
-      prevPropsActiveDeployment: activeDeployment,
+      prevPropsActiveDeployment: deployments,
       replicaSet: '',
       username: '',
     };
@@ -43,10 +45,11 @@ export default class URIWriter extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.activeDeployment !== state.prevPropsActiveDeployment) {
+    const activeDeployment = props.activeTabs.deployments;
+    if (activeDeployment !== state.prevPropsActiveDeployment) {
       return {
-        env: props.activeDeployment,
-        prevPropsActiveDeployment: props.activeDeployment,
+        env: activeDeployment,
+        prevPropsActiveDeployment: activeDeployment,
       };
     }
     return null;
@@ -250,16 +253,18 @@ export default class URIWriter extends Component {
   }
 
   clearURI(callback) {
-    const { activeDeployment } = this.props;
+    const {
+      activeTabs: { deployments },
+    } = this.props;
     this.setState(
       {
         authSource: '',
         database: '',
-        env: activeDeployment,
+        env: deployments,
         hostlist: {
           host0: '',
         },
-        prevPropsActiveDeployment: activeDeployment,
+        prevPropsActiveDeployment: deployments,
         replicaSet: '',
         ssl: '',
         username: '',
@@ -335,9 +340,11 @@ export default class URIWriter extends Component {
   }
 
   render() {
-    const { activeDeployment } = this.props;
+    const {
+      activeTabs: { deployments },
+    } = this.props;
     const { atlas, authSource, database, env, hostlist, replicaSet, username } = this.state;
-    const isAtlas = activeDeployment === TEMPLATE_TYPE_ATLAS;
+    const isAtlas = deployments === TEMPLATE_TYPE_ATLAS;
 
     return (
       <form className="uriwriter__form" autoComplete="off">
@@ -371,21 +378,23 @@ export default class URIWriter extends Component {
             <div className="mongodb-form__prompt" style={{ display: 'block' }}>
               <div className="mongodb-form__label">Server deployment type</div>
               <ul className="guide__pills">
-                {LOCAL_ENVS.map((localEnv, index) => (
-                  <li
-                    className={`uriwriter__toggle guide__pill ${env === localEnv.key && 'guide__pill--active'}`}
-                    key={index}
-                  >
-                    <span
-                      id={localEnv.key.replace(/\s+/g, '-')}
-                      onClick={() => this.handleEnvChange(localEnv.key)}
-                      role="button"
-                      tabIndex={index}
+                {LOCAL_ENVS.map((localEnv, index) => {
+                  return (
+                    <li
+                      className={`uriwriter__toggle guide__pill ${env === localEnv.key && 'guide__pill--active'}`}
+                      key={index}
                     >
-                      {localEnv.value}
-                    </span>
-                  </li>
-                ))}
+                      <span
+                        id={localEnv.key.replace(/\s+/g, '-')}
+                        onClick={() => this.handleEnvChange(localEnv.key)}
+                        role="button"
+                        tabIndex={index}
+                      >
+                        {localEnv.value}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
             <label className="mongodb-form__prompt">
@@ -461,10 +470,8 @@ export default class URIWriter extends Component {
 }
 
 URIWriter.propTypes = {
-  activeDeployment: PropTypes.string,
+  activeTabs: PropTypes.shape({
+    deployments: PropTypes.string.isRequired,
+  }).isRequired,
   handleUpdateURIWriter: PropTypes.func.isRequired,
-};
-
-URIWriter.defaultProps = {
-  activeDeployment: TEMPLATE_TYPE_ATLAS,
 };
