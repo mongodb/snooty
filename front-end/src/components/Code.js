@@ -42,7 +42,7 @@ Code.propTypes = {
     value: PropTypes.string.isRequired,
   }).isRequired,
   activeTabs: PropTypes.shape({
-    cloud: PropTypes.string.isRequired,
+    cloud: PropTypes.string,
   }).isRequired,
   uri: PropTypes.shape({
     atlas: PropTypes.string,
