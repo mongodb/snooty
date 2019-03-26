@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { stringifyTab } from '../constants';
 
 export default class GuideHeading extends Component {
   getSection(params) {
@@ -9,7 +10,7 @@ export default class GuideHeading extends Component {
   }
 
   render() {
-    const { setActiveTab, activeLanguage, languages, activeDeployment, deployments } = this.props;
+    const { setActiveTab, cloud, drivers, activeTabs } = this.props;
     return (
       <div className="section" id="SOMETHING_HERE">
         <h1>
@@ -19,31 +20,31 @@ export default class GuideHeading extends Component {
           </a>
         </h1>
 
-        {deployments && deployments.length > 0 && (
+        {cloud && cloud.length > 0 && (
           <div className="guide-prefs">
             <div className="guide-prefs__caption">
               Deployment Type:
-              <span className="show-current-deployment"> {activeDeployment}</span>
+              <span className="show-current-deployment"> {stringifyTab(activeTabs.cloud)}</span>
             </div>
-            <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="cloud">
-              {deployments.map((deployment, index) => (
+            <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="deployments">
+              {cloud.map((deployment, index) => (
                 <li
                   className={
-                    activeDeployment === deployment.name
+                    activeTabs.cloud === deployment
                       ? 'guide__pill guide__deploymentpill guide__deploymentpill--active'
                       : 'guide__pill guide__deploymentpill'
                   }
-                  data-tabid={deployment.name}
+                  data-tabid={deployment}
                   key={index}
                 >
                   <span
                     onClick={() => {
-                      setActiveTab(deployment, 'activeDeployment');
+                      setActiveTab(deployment, 'cloud');
                     }}
                     role="button"
                     tabIndex={index}
                   >
-                    {deployment.value}
+                    {stringifyTab(deployment)}
                   </span>
                 </li>
               ))}
@@ -51,27 +52,27 @@ export default class GuideHeading extends Component {
           </div>
         )}
 
-        {languages && languages.length > 0 && (
+        {drivers && drivers.length > 0 && (
           <div className="guide-prefs">
             <div className="guide-prefs__caption">
               Client:
-              <span className="show-current-language"> {activeLanguage}</span>
+              <span className="show-current-language"> {stringifyTab(activeTabs.drivers)}</span>
             </div>
             <ul className="guide__pills pillstrip-declaration" role="tablist" data-tab-preference="languages">
-              {languages.map((language, index) => (
+              {drivers.map((driver, index) => (
                 <li
-                  className={activeLanguage === language.name ? 'guide__pill guide__pill--active' : 'guide__pill'}
-                  data-tabid={language.name}
+                  className={activeTabs.drivers === driver ? 'guide__pill guide__pill--active' : 'guide__pill'}
+                  data-tabid={driver}
                   key={index}
                 >
                   <span
                     onClick={() => {
-                      setActiveTab(language, 'activeLanguage');
+                      setActiveTab(driver, 'drivers');
                     }}
                     role="button"
                     tabIndex={index}
                   >
-                    {language.value}
+                    {stringifyTab(driver)}
                   </span>
                 </li>
               ))}
@@ -96,21 +97,13 @@ export default class GuideHeading extends Component {
 }
 
 GuideHeading.propTypes = {
-  activeDeployment: PropTypes.string,
-  activeLanguage: PropTypes.string,
+  activeTabs: PropTypes.shape({
+    cloud: PropTypes.string,
+    drivers: PropTypes.string,
+  }).isRequired,
   setActiveTab: PropTypes.func.isRequired,
-  languages: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
-  deployments: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
+  cloud: PropTypes.arrayOf(PropTypes.string),
+  drivers: PropTypes.arrayOf(PropTypes.string),
   sections: PropTypes.arrayOf(
     PropTypes.shape({
       children: PropTypes.arrayOf(
@@ -123,8 +116,6 @@ GuideHeading.propTypes = {
 };
 
 GuideHeading.defaultProps = {
-  activeDeployment: undefined,
-  activeLanguage: undefined,
-  languages: [],
-  deployments: [],
+  cloud: [],
+  drivers: [],
 };

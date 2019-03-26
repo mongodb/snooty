@@ -81,7 +81,7 @@ function generateURI(uri, activeDeployment, templateType) {
   const replicaSet = uri.replicaSet || '$[replicaSet]';
   const options = optionStringifier(TEMPLATE_OPTIONS[template], uri);
   let hostlist = '$[hostlist]';
-  if (uri.hostlist && Object.values(uri.hostlist).length > 0) {
+  if (uri.hostlist && Object.values(uri.hostlist).length > 0 && !Object.values(uri.hostlist).every(e => e === '')) {
     hostlist = Object.values(uri.hostlist);
     hostlist = hostlist.filter(host => host !== '');
   }
@@ -125,7 +125,7 @@ function URIText({ value, activeDeployment, uri }) {
 }
 
 URIText.propTypes = {
-  activeDeployment: PropTypes.string.isRequired,
+  activeDeployment: PropTypes.string,
   uri: PropTypes.shape({
     atlas: PropTypes.string,
     authSource: PropTypes.string,
@@ -136,6 +136,10 @@ URIText.propTypes = {
     username: PropTypes.string,
   }).isRequired,
   value: PropTypes.string.isRequired,
+};
+
+URIText.defaultProps = {
+  activeDeployment: TEMPLATE_TYPE_ATLAS,
 };
 
 export default URIText;

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { DEPLOYMENTS } from '../constants';
 import { getLocalValue } from '../localStorage';
 
-export const TEMPLATE_TYPE_SELF_MANAGED = DEPLOYMENTS[1].name;
+export const TEMPLATE_TYPE_SELF_MANAGED = DEPLOYMENTS[1];
 export const TEMPLATE_TYPE_REPLICA_SET = 'local MongoDB with replica set';
 export const TEMPLATE_TYPE_ATLAS_36 = 'Atlas (Cloud) v. 3.6';
 export const TEMPLATE_TYPE_ATLAS_34 = 'Atlas (Cloud) v. 3.4';
-export const TEMPLATE_TYPE_ATLAS = DEPLOYMENTS[0].name;
+export const TEMPLATE_TYPE_ATLAS = DEPLOYMENTS[0];
 
 const LOCAL_ENVS = [
   {
@@ -28,17 +28,19 @@ export default class URIWriter extends Component {
   constructor(props) {
     super(props);
 
-    const { activeDeployment } = this.props;
+    const {
+      activeTabs: { cloud },
+    } = this.props;
 
     const emptyURI = {
       atlas: '',
       authSource: '',
       database: '',
-      envConfig: getDefaultEnvConfig(activeDeployment),
+      envConfig: getDefaultEnvConfig(cloud),
       hostlist: {
         host0: '',
       },
-      prevPropsActiveDeployment: activeDeployment,
+      prevPropsActiveDeployment: cloud,
       replicaSet: '',
       username: '',
     };
@@ -49,10 +51,11 @@ export default class URIWriter extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.activeDeployment !== state.prevPropsActiveDeployment) {
+    const activeDeployment = props.activeTabs.cloud;
+    if (activeDeployment !== state.prevPropsActiveDeployment) {
       return {
-        envConfig: getLocalValue('uri').envConfig || getDefaultEnvConfig(props.activeDeployment),
-        prevPropsActiveDeployment: props.activeDeployment,
+        envConfig: getLocalValue('uri').envConfig || getDefaultEnvConfig(activeDeployment),
+        prevPropsActiveDeployment: activeDeployment,
       };
     }
     return null;
@@ -256,16 +259,18 @@ export default class URIWriter extends Component {
   }
 
   clearURI(callback) {
-    const { activeDeployment } = this.props;
+    const {
+      activeTabs: { cloud },
+    } = this.props;
     this.setState(
       {
         authSource: '',
         database: '',
-        envConfig: getDefaultEnvConfig(activeDeployment),
+        envConfig: getDefaultEnvConfig(cloud),
         hostlist: {
           host0: '',
         },
-        prevPropsActiveDeployment: activeDeployment,
+        prevPropsActiveDeployment: cloud,
         replicaSet: '',
         ssl: '',
         username: '',
@@ -341,9 +346,11 @@ export default class URIWriter extends Component {
   }
 
   render() {
-    const { activeDeployment } = this.props;
+    const {
+      activeTabs: { cloud },
+    } = this.props;
     const { atlas, authSource, database, envConfig, hostlist, replicaSet, username } = this.state;
-    const isAtlas = activeDeployment === TEMPLATE_TYPE_ATLAS;
+    const isAtlas = cloud === TEMPLATE_TYPE_ATLAS;
 
     return (
       <form className="uriwriter__form" autoComplete="off">
@@ -467,10 +474,8 @@ export default class URIWriter extends Component {
 }
 
 URIWriter.propTypes = {
-  activeDeployment: PropTypes.string,
+  activeTabs: PropTypes.shape({
+    cloud: PropTypes.string.isRequired,
+  }).isRequired,
   handleUpdateURIWriter: PropTypes.func.isRequired,
-};
-
-URIWriter.defaultProps = {
-  activeDeployment: undefined,
 };

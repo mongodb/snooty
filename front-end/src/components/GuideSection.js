@@ -22,6 +22,7 @@ export default class GuideSection extends Component {
       procedure: 'Procedure',
       summary: 'Summary',
       whats_next: 'What’s Next',
+      seealso: 'See Also',
     };
   }
 
@@ -60,9 +61,6 @@ export default class GuideSection extends Component {
   render() {
     const {
       guideSectionData: { children, name },
-      OSTabs,
-      activeOSTab,
-      setActiveTab,
     } = this.props;
     const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uri } = this.state;
 
@@ -83,26 +81,6 @@ export default class GuideSection extends Component {
             showAllStepsText={showAllStepsText}
           />
         )}
-        {name === 'procedure' && OSTabs.length > 0 && (
-          <ul className="tab-strip tab-strip--singleton" role="tablist">
-            {OSTabs.map((os, index) => {
-              return (
-                <li
-                  className="tab-strip__element"
-                  data-tabid={os.name}
-                  role="tab"
-                  aria-selected={activeOSTab === os.name ? 'true' : 'false'}
-                  key={index}
-                  onClick={() => {
-                    setActiveTab(os, 'activeOSTab');
-                  }}
-                >
-                  {os.value}
-                </li>
-              );
-            })}
-          </ul>
-        )}
         {children.map((child, index) => (
           <ComponentFactory
             {...this.props}
@@ -121,24 +99,8 @@ export default class GuideSection extends Component {
 }
 
 GuideSection.propTypes = {
-  activeDeployment: PropTypes.string,
-  activeOSTab: PropTypes.string,
   guideSectionData: PropTypes.shape({
     children: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
-  OSTabs: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
-  setActiveTab: PropTypes.func,
-};
-
-GuideSection.defaultProps = {
-  activeDeployment: undefined,
-  activeOSTab: undefined,
-  OSTabs: [],
-  setActiveTab: undefined,
 };

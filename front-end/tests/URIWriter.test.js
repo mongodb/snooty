@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 import { DEPLOYMENTS } from '../src/constants';
 import URIWriter from '../src/components/URIWriter';
 
-const CLOUD_DEPLOYMENT = DEPLOYMENTS[0].name;
-const LOCAL_DEPLOYMENT = DEPLOYMENTS[1].name;
+const CLOUD_DEPLOYMENT = DEPLOYMENTS[0];
+const LOCAL_DEPLOYMENT = DEPLOYMENTS[1];
 
-const mountURIWriter = ({ activeDeployment, mockCallback }) =>
-  mount(<URIWriter activeDeployment={activeDeployment} handleUpdateURIWriter={mockCallback} />);
+const mountURIWriter = ({ activeTabs, mockCallback }) =>
+  mount(<URIWriter activeTabs={activeTabs} handleUpdateURIWriter={mockCallback} />);
 
 const emptyCloudURI = {
   authSource: '',
@@ -27,7 +27,7 @@ describe('URIWriter', () => {
     const mockCallback = jest.fn();
 
     beforeAll(() => {
-      wrapper = mountURIWriter({ mockCallback, activeDeployment: LOCAL_DEPLOYMENT });
+      wrapper = mountURIWriter({ mockCallback, activeTabs: { deployments: LOCAL_DEPLOYMENT } });
     });
 
     it('sets the env state to be local MongoDB', () => {
@@ -112,7 +112,7 @@ describe('URIWriter', () => {
 
     describe('when updated with invalid host inputs', () => {
       beforeAll(() => {
-        wrapper = mountURIWriter({ mockCallback, activeDeployment: LOCAL_DEPLOYMENT });
+        wrapper = mountURIWriter({ mockCallback, activeTabs: { deployments: LOCAL_DEPLOYMENT } });
       });
 
       it('has one input field for hosts', () => {
@@ -142,7 +142,7 @@ describe('URIWriter', () => {
 
     beforeAll(() => {
       mockCallback = jest.fn();
-      wrapper = mountURIWriter({ mockCallback, activeDeployment: CLOUD_DEPLOYMENT });
+      wrapper = mountURIWriter({ mockCallback, activeTabs: { deployments: CLOUD_DEPLOYMENT } });
     });
 
     it('displays no input elements', () => {
