@@ -1,14 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-// the different roles
-import RoleLink from '../src/components/Roles/Link';
-import RoleRef from '../src/components/Roles/Ref';
-import RoleCode from '../src/components/Roles/Code';
-import RoleProgram from '../src/components/Roles/Program';
+import RoleLink from '../../src/components/Roles/Link';
+import RoleRef from '../../src/components/Roles/Ref';
+import RoleCode from '../../src/components/Roles/Code';
+import RoleProgram from '../../src/components/Roles/Program';
 
-// data for this component
-import { REF_TARGETS } from '../src/constants';
+import { REF_TARGETS } from '../../src/constants';
 import mockDataDoc from './data/Role-doc.test.json';
 import mockDataRef from './data/Role-ref.test.json';
 import mockDataManual from './data/Role-manual.test.json';

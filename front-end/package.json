@@ -30,8 +30,8 @@
     "dev": "webpack --mode development",
     "lint": "eslint src/ tests/",
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
-    "precommit": "lint-staged",
-    "test": "jest --verbose ./tests"
+    "test": "jest",
+    "test-unit": "jest ./tests/unit/"
   },
   "jest": {
     "verbose": true,
@@ -40,6 +40,10 @@
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules",
+      ".cache"
     ]
   },
   "lint-staged": {
@@ -69,5 +73,10 @@
     "start-server-webpack-plugin": "^2.2.5",
     "uuid": "^3.3.2",
     "webpack-node-externals": "^1.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

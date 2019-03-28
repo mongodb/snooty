@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import URIText from '../src/components/URIText';
-import { DEPLOYMENTS } from '../src/constants';
+import URIText from '../../src/components/URIText';
+import { DEPLOYMENTS } from '../../src/constants';
 
 const CLOUD_DEPLOYMENT = DEPLOYMENTS[0];
 const LOCAL_DEPLOYMENT = DEPLOYMENTS[1];
