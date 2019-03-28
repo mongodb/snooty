@@ -1,0 +1,21 @@
+{
+  "type": "role",
+  "position": {
+    "start": {
+      "line": 0
+    }
+  },
+  "name": "manual",
+  "label": {
+    "type": "text",
+    "value": "The MongoDB Server Manual",
+    "position": {
+      "start": {
+        "line": 1
+      }
+    }
+  },
+  "target": "/manual/introduction",
+  "raw": "The MongoDB Server Manual </manual/introduction>",
+  "children": []
+}
