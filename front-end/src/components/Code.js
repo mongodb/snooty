@@ -6,7 +6,6 @@ import URIText, {
   URISTRING_SHELL_PLACEHOLDER,
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 } from './URIText';
-import { DEPLOYMENTS } from '../constants';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -15,10 +14,10 @@ const URI_PLACEHOLDERS = [
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 ];
 
-const Code = ({ nodeData: { value }, activeDeployment, uri }) => {
+const Code = ({ nodeData: { value }, activeTabs: { cloud }, uri }) => {
   let code = value;
   if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
-    code = <URIText value={code} activeDeployment={activeDeployment} uri={uri} />;
+    code = <URIText value={code} activeDeployment={cloud} uri={uri} />;
   }
 
   return (
@@ -42,7 +41,9 @@ Code.propTypes = {
   nodeData: PropTypes.shape({
     value: PropTypes.string.isRequired,
   }).isRequired,
-  activeDeployment: PropTypes.string,
+  activeTabs: PropTypes.shape({
+    cloud: PropTypes.string,
+  }).isRequired,
   uri: PropTypes.shape({
     atlas: PropTypes.string,
     authSource: PropTypes.string,
@@ -55,7 +56,6 @@ Code.propTypes = {
 };
 
 Code.defaultProps = {
-  activeDeployment: DEPLOYMENTS[0].name,
   uri: undefined,
 };
 

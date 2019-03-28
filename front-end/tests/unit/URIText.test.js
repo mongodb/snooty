@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import URIText from '../../src/components/URIText';
 import { DEPLOYMENTS } from '../../src/constants';
 
-const CLOUD_DEPLOYMENT = DEPLOYMENTS[0].name;
-const LOCAL_DEPLOYMENT = DEPLOYMENTS[1].name;
+const CLOUD_DEPLOYMENT = DEPLOYMENTS[0];
+const LOCAL_DEPLOYMENT = DEPLOYMENTS[1];
 
 describe('local MongoDB', () => {
   const activeDeployment = LOCAL_DEPLOYMENT;
