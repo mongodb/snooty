@@ -10,7 +10,7 @@ const RoleGUILabel = props => {
 
 RoleGUILabel.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    label: PropTypes.string.isRequired,
   }).isRequired,
 };
 
