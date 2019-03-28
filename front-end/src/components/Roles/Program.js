@@ -10,7 +10,7 @@ const RoleProgram = props => {
 
 RoleProgram.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   }).isRequired,
 };
 

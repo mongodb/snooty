@@ -22,7 +22,7 @@ const RoleRef = props => {
 
 RoleRef.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     target: PropTypes.string.isRequired,
   }).isRequired,
   refDocMapping: PropTypes.shape({

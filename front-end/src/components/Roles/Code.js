@@ -41,7 +41,7 @@ const RoleCode = props => {
 
 RoleCode.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     name: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
   }).isRequired,

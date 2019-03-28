@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders correctly role "binary" 1`] = `
+<a
+  className="reference external"
+  href="https://docs.mongodb.com/manual/reference/program/mongod.exe/#bin.mongod.exe"
+>
+  <code
+    className="mongodb-binary xref mongodb docutils literal notranslate"
+  >
+    <span
+      className="pre"
+    >
+      mongod.exe
+    </span>
+  </code>
+</a>
+`;
+
 exports[`renders correctly role "doc" 1`] = `
 <a
   className="reference external"
@@ -7,6 +24,23 @@ exports[`renders correctly role "doc" 1`] = `
 >
   Create an Atlas Account and Cluster
 </a>
+`;
+
+exports[`renders correctly role "manual" 1`] = `
+<a
+  className="reference external"
+  href="/manual/introduction"
+>
+  The MongoDB Server Manual
+</a>
+`;
+
+exports[`renders correctly role "program" 1`] = `
+<strong
+  className="program"
+>
+  mongoimport
+</strong>
 `;
 
 exports[`renders correctly role "ref" 1`] = `
@@ -19,5 +53,14 @@ exports[`renders correctly role "ref" 1`] = `
   >
     Supported Platforms
   </span>
+</a>
+`;
+
+exports[`renders correctly role "term" 1`] = `
+<a
+  className="reference external"
+  href="dbpath"
+>
+  data directory
 </a>
 `;

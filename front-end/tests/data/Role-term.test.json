@@ -1,0 +1,21 @@
+{
+  "type": "role",
+  "position": {
+    "start": {
+      "line": 6
+    }
+  },
+  "name": "term",
+  "label": {
+    "type": "text",
+    "value": "data directory",
+    "position": {
+      "start": {
+        "line": 7
+      }
+    }
+  },
+  "target": "dbpath",
+  "raw": "data directory <dbpath>",
+  "children": []
+}
