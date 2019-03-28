@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Index from '../src/templates/index';
+import Index from '../../src/templates/index';
 
 // data for this component
 import mockData from './data/index.test.json';
