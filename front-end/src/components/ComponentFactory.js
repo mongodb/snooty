@@ -80,12 +80,8 @@ export default class ComponentFactory extends Component {
     // roles are each in separate file
     if (type === 'role') {
       // remove namespace
-      let modName = name;
-      if (modName.includes(':')) {
-        const splitNames = modName.split(':');
-        modName = splitNames[1];
-      }
-      ComponentType = this.roles[modName];
+      const roleName = name.includes(':') ? name.split(':')[1] : name;
+      ComponentType = this.roles[roleName];
     }
     // the different admonition types are all under the Admonition component
     // see 'this.admonitions' in 'guide.js' for the list

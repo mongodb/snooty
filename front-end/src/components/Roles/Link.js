@@ -2,23 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RoleLink = props => {
-  const { nodeData } = props;
-  const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
+  const {
+    nodeData: { label, target },
+  } = props;
+  const labelDisplay = label && label.value ? label.value : label;
   return (
-    <a href={nodeData.target} className="reference external">
-      {label}
+    <a href={target} className="reference external">
+      {labelDisplay}
     </a>
   );
 };
 
 RoleLink.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        value: PropTypes.string,
-      })
-    ).isRequired,
+    label: PropTypes.string.isRequired,
+    target: PropTypes.string.isRequired,
   }).isRequired,
 };
 

@@ -8,13 +8,10 @@ const RoleRef = props => {
   } = props;
   const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
   // make sure target is hardcoded in list for now
+  // TODO: chat w andrew about how to move forward with sphinx inv files
   if (!REF_TARGETS[nodeData.target]) {
-    return (
-      <span>
-        ==Role TARGET does not exist:
-        {nodeData.target} ==
-      </span>
-    );
+    console.log(`ERROR: ROLE TARGET DOES NOT EXIST => ${nodeData.target}`);
+    return '';
   }
   return (
     <a href={REF_TARGETS[nodeData.target]} className="reference external">
@@ -25,12 +22,8 @@ const RoleRef = props => {
 
 RoleRef.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        value: PropTypes.string,
-      })
-    ).isRequired,
+    label: PropTypes.string.isRequired,
+    target: PropTypes.string.isRequired,
   }).isRequired,
   refDocMapping: PropTypes.shape({
     REF_TARGETS: PropTypes.object.isRequired,

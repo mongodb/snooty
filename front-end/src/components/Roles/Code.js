@@ -11,28 +11,22 @@ const RoleCode = props => {
   if (nodeData.name === 'binary') {
     termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
     href = `${base}/program/${termModified}/#${nodeData.target.replace('~', '')}`;
-  }
-  if (nodeData.name === 'option') {
+  } else if (nodeData.name === 'option') {
     termModified = nodeData.label.value;
     href = `${base}/program/mongoimport/#cmdoption-mongoimport-${termModified.replace('--', '')}`;
-  }
-  if (nodeData.name === 'authrole') {
+  } else if (nodeData.name === 'authrole') {
     termModified = nodeData.label;
     href = `${base}/built-in-roles/#${termModified}`;
-  }
-  if (nodeData.name === 'setting') {
+  } else if (nodeData.name === 'setting') {
     termModified = nodeData.label;
     href = `${base}/configuration-options/#${termModified}`;
-  }
-  if (nodeData.name === 'method') {
+  } else if (nodeData.name === 'method') {
     termModified = nodeData.label;
     href = `${base}/method/${termModified}/#${termModified}`;
-  }
-  if (nodeData.name === 'query') {
+  } else if (nodeData.name === 'query') {
     termModified = nodeData.label.replace('~op.', '');
     href = `${base}/operator/query/${termModified.replace('$', '')}/#op._S_${termModified}`;
-  }
-  if (nodeData.name === 'dbcommand') {
+  } else if (nodeData.name === 'dbcommand') {
     termModified = nodeData.label;
     href = `${base}/command/${termModified}/#dbcmd.${termModified}`;
   }
@@ -47,12 +41,9 @@ const RoleCode = props => {
 
 RoleCode.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        value: PropTypes.string,
-      })
-    ).isRequired,
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    target: PropTypes.string.isRequired,
   }).isRequired,
 };
 
