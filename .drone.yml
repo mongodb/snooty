@@ -4,19 +4,16 @@ pipeline:
   build:
     image: node:10
     commands:
-      - cd front-end/
       - npm install
 
   test:
     image: node:10
     commands:
-      - cd front-end/
       - npm test
 
   lint:
     image: node:10
     commands:
-      - cd front-end/
       - npm run lint
     when:
       branch:
