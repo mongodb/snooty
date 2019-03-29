@@ -1,7 +1,0 @@
-node_modules/
-public/
-.cache/
-.DS_Store
-static/
-docs-tools/
-coverage/

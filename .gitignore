@@ -1,9 +1,8 @@
-__pycache__/
-.mypy_cache/
-*.pyc
-.DS_Store
-parser/snooty.py
-*.dist/
 node_modules/
+public/
+.cache/
+.DS_Store
+static/
+docs-tools/
+coverage/
 .coverage
-htmlcov/
