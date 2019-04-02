@@ -1,3 +1,6 @@
 [submodule "front-end/docs-tools"]
 	path = front-end/docs-tools
 	url = https://github.com/mongodb/docs-tools
+[submodule "docs-tools"]
+	path = docs-tools
+	url = https://github.com/mongodb/docs-tools
