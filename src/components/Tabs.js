@@ -34,9 +34,9 @@ export default class Tabs extends Component {
     const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud';
     return (
       <React.Fragment>
-        <ul className="tab-strip tab-strip--singleton" role="tablist">
-          {isHeaderTabset ||
-            nodeData.children.map((tab, index) => {
+        {isHeaderTabset || (
+          <ul className="tab-strip tab-strip--singleton" role="tablist">
+            {nodeData.children.map((tab, index) => {
               const tabName = tab.argument[0].value.toLowerCase();
               return (
                 <li
@@ -53,7 +53,8 @@ export default class Tabs extends Component {
                 </li>
               );
             })}
-        </ul>
+          </ul>
+        )}
         {nodeData.children.map((tab, index) => {
           const tabName = tab.argument[0].value.toLowerCase();
           return (
