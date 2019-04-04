@@ -20,16 +20,11 @@ export default class Guide extends Component {
       pageContext.__refDocMapping[
         this.props['*'] // eslint-disable-line react/destructuring-assignment
       ].ast.children[0].children;
-    this.DOMParser = undefined;
     this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next', 'seealso'];
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       activeTabs: {},
     };
-  }
-
-  componentDidMount() {
-    this.DOMParser = new DOMParser();
   }
 
   addTabset = (tabsetName, tabData) => {
