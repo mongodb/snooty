@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
-import Modal from '../components/Modal';
 import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
 
@@ -26,13 +25,6 @@ export default class Guide extends Component {
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       activeTabs: {},
-      modalPositionLeft: 0,
-      modalPositionTop: 0,
-      modalVisible: false,
-      modalContent: {
-        text: null,
-        example: null,
-      },
     };
   }
 
@@ -79,7 +71,6 @@ export default class Guide extends Component {
           key={index}
           admonitions={this.admonitions}
           refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
-          modal={this.modalFetchData}
           setActiveTab={this.setActiveTab}
           addTabset={this.addTabset}
           activeTabs={activeTabs}
@@ -89,7 +80,7 @@ export default class Guide extends Component {
 
   render() {
     const { pageContext } = this.props;
-    const { activeTabs, cloud, drivers, modalContent, modalPositionLeft, modalPositionTop, modalVisible } = this.state;
+    const { activeTabs, cloud, drivers } = this.state;
 
     return (
       <div className="content">
@@ -110,16 +101,7 @@ export default class Guide extends Component {
               addTabset={this.addTabset}
               admonitions={this.admonitions}
               refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
-              modal={this.modalFetchData}
               activeTabs={activeTabs}
-            />
-            <Modal
-              modalProperties={{
-                modalContent,
-                modalPositionLeft,
-                modalPositionTop,
-                modalVisible,
-              }}
             />
             {this.createSections()}
             <div className="footer">
