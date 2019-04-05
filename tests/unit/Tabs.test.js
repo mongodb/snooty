@@ -1,22 +1,23 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { PLATFORMS } from '../../src/constants';
+import { PLATFORMS, LANGUAGES } from '../../src/constants';
 import Tabs from '../../src/components/Tabs';
 
 // data for this component
-import mockData from './data/Tabs.test.json';
+import mockDataPlatforms from './data/Tabs-platform.test.json';
+import mockDataLanguages from './data/Tabs-languages.test.json';
 
-const mountTabs = ({ mockSetActiveTab, mockAddTabset, activeTabs }) =>
+const mountTabs = ({ mockData, mockSetActiveTab, mockAddTabset, activeTabs }) =>
   mount(<Tabs nodeData={mockData} setActiveTab={mockSetActiveTab} addTabset={mockAddTabset} activeTabs={activeTabs} />);
 
 describe('Tabs testing', () => {
-  describe('Tabs selection', () => {
+  describe('Tab unit tests', () => {
     let wrapper;
     const mockSetActiveTab = jest.fn();
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
-      wrapper = mountTabs({ mockSetActiveTab, mockAddTabset, activeTabs: { platforms: PLATFORMS[0] } });
+      wrapper = mountTabs({ mockData: mockDataPlatforms, mockSetActiveTab, mockAddTabset, activeTabs: { platforms: PLATFORMS[0] } });
     });
 
     it('tabs container exists with correct number of children', () => {
@@ -45,6 +46,20 @@ describe('Tabs testing', () => {
       const nonactiveTab = wrapper.find('.tab-strip__element[aria-selected="false"]').first();
       nonactiveTab.simulate('click');
       expect(mockSetActiveTab.mock.calls.length).toBe(1);
+    });
+  });
+
+  describe('Drivers unit tests', () => {
+    let wrapper;
+    const mockSetActiveTab = jest.fn();
+    const mockAddTabset = jest.fn();
+
+    beforeAll(() => {
+      wrapper = mountTabs({ mockData: mockDataLanguages, mockSetActiveTab, mockAddTabset, activeTabs: { drivers: LANGUAGES[0] } });
+    });
+
+    it('tabset should not be created for drivers/language pills', () => {
+      expect(wrapper.find('.tab-strip__element').exists()).toEqual(false)
     });
   });
 });
