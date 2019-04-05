@@ -1,6 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`admonition one-off (name=admonition) renders correctly 1`] = `
+<div
+  className="admonition admonition-mlab-is-now-a-part-of-mongodb,-inc. note"
+>
+  <p
+    className="first admonition-title"
+  >
+    mLab is now a part of MongoDB, Inc.
+  </p>
+  <ComponentFactory
+    admonition={true}
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 3,
+              },
+            },
+            "type": "text",
+            "value": "The procedure to migrate from mLab to MongoDB Atlas will be
+further streamlined in the future. If you are looking to migrate
+immediately, use the following procedure to migrate your data
+using the Atlas Live Migration Service.",
+          },
+        ],
+        "type": "section",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`admonitions render correctly 1`] = `
 <div
   className="admonition note"
 >
