@@ -76,13 +76,14 @@ export default class Guide extends Component {
   render() {
     const { pageContext } = this.props;
     const { activeTabs, cloud, drivers } = this.state;
+    const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     return (
       <div className="content">
         <TOC />
         <div className="left-nav-space" />
         <div id="main-column" className="main-column">
-          <div className="body" data-pagename="server/read">
+          <div className="body" data-pagename={pageSlug}>
             <ul className="breadcrumbs">
               <li className="breadcrumbs__bc">
                 <a href="/">MongoDB Guides</a> &gt;{' '}
