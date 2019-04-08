@@ -1,6 +1,5 @@
 import { diffLines } from 'diff';
-import { LANGUAGES, DEPLOYMENTS } from '../../src/constants';
-import { fromString } from 'html-to-text';
+import { DEPLOYMENTS, LANGUAGES, PLATFORMS } from '../../src/constants';
 
 const slugs = [
   'cloud/atlas',
@@ -35,51 +34,99 @@ const cleanString = str =>
     .replace(/[\u201C\u201D]/g, '"')
     .replace('--', '–');
 
-describe('testing all languages and deployments', () => {
-  LANGUAGES.forEach(language => {
-    DEPLOYMENTS.forEach(deployment => {
-      slugs.forEach(slug => {
-        test(`${slug} [language: ${language}] [deployment: ${deployment}]`, async () => {
-          const oldPage = await browser.newPage();
-          await oldPage.goto(`${oldUrl}${slug}`);
+const setLocalStorage = async (page, parentKey, storageObj) => {
+  await page.evaluate(
+    // eslint-disable-next-line no-shadow
+    (parentKey, storageObj) => {
+      localStorage.setItem(parentKey, JSON.stringify(storageObj));
+    },
+    parentKey,
+    storageObj
+  );
+};
 
-          await oldPage.evaluate(
-            (deployment, language) => {
-              localStorage.setItem('tabPref', JSON.stringify({ cloud: deployment, languages: language }));
-            },
-            deployment,
-            language
-          );
+const getTextFromUrl = async (page, baseUrl, slug, parentKey = undefined, obj = undefined) => {
+  await page.goto(`${baseUrl}${slug}`);
+  if (parentKey && obj) {
+    await setLocalStorage(page, parentKey, obj);
+  }
+  const bodyElement = await page.$(`div[data-pagename="${slug}"]`);
+  return page.evaluate(element => element.innerText, bodyElement);
+};
 
-          const oldElement = await oldPage.$(`div[data-pagename="${slug}"]`);
-          const oldText = await oldPage.evaluate(element => element.innerText, oldElement);
+const getDiffObject = (oldText, newText) => {
+  return diffLines(cleanString(oldText), cleanString(newText), {
+    ignoreWhitespace: true,
+    newlineIsToken: true,
+  }).filter(
+    obj =>
+      (Object.prototype.hasOwnProperty.call(obj, 'added') || Object.prototype.hasOwnProperty.call(obj, 'removed')) &&
+      !obj.value.includes('Deployment Type:') &&
+      !obj.value.includes('Client:')
+  );
+};
 
-          const newPage = await browser.newPage();
-          await newPage.goto(`${localUrl}${slug}`);
+describe('without local storage', () => {
+  describe.each(slugs)('%p', slug => {
+    let oldText;
+    let newText;
+    beforeEach(async () => {
+      [oldText, newText] = await Promise.all([
+        getTextFromUrl(await browser.newPage(), oldUrl, slug),
+        getTextFromUrl(await browser.newPage(), localUrl, slug),
+      ]);
+    });
 
-          await newPage.evaluate(
-            (deployment, language) => {
-              localStorage.setItem('mongodb-docs', JSON.stringify({ cloud: deployment, languages: language }));
-            },
-            deployment,
-            language
-          );
+    it(`file text is the same`, () => {
+      expect(getDiffObject(oldText, newText)).toEqual([]);
+    });
+  });
+});
 
-          const newElement = await newPage.$(`div[data-pagename="${slug}"]`);
-          const newText = await newPage.evaluate(element => element.innerText, newElement);
+describe('with local storage', () => {
+  describe.each(slugs)('%p', slug => {
+    describe.each(DEPLOYMENTS)('deployment: %p', deployment => {
+      let oldText;
+      let newText;
+      beforeEach(async () => {
+        [oldText, newText] = await Promise.all([
+          getTextFromUrl(await browser.newPage(), oldUrl, slug, 'tabPref', { cloud: deployment }),
+          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', { cloud: deployment }),
+        ]);
+      });
 
-          const changeObjects = diffLines(cleanString(oldText), cleanString(newText), {
-            ignoreWhitespace: true,
-            newlineIsToken: true,
-          }).filter(
-            obj =>
-              (Object.prototype.hasOwnProperty.call(obj, 'added') ||
-                Object.prototype.hasOwnProperty.call(obj, 'removed')) &&
-              !obj.value.includes('Deployment Type:') &&
-              !obj.value.includes('Client:')
-          );
-          expect(changeObjects).toEqual([]);
-        });
+      it(`file text is the same`, () => {
+        expect(getDiffObject(oldText, newText)).toEqual([]);
+      });
+    });
+
+    describe.each(LANGUAGES)('language: %p', language => {
+      let oldText;
+      let newText;
+      beforeEach(async () => {
+        [oldText, newText] = await Promise.all([
+          getTextFromUrl(await browser.newPage(), oldUrl, slug, 'tabPref', { languages: language }),
+          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', { drivers: language }),
+        ]);
+      });
+
+      it(`file text is the same`, () => {
+        expect(getDiffObject(oldText, newText)).toEqual([]);
+      });
+    });
+
+    describe.each(PLATFORMS)('platform: %p', platform => {
+      let oldText;
+      let newText;
+      beforeEach(async () => {
+        [oldText, newText] = await Promise.all([
+          getTextFromUrl(await browser.newPage(), oldUrl, slug, 'tabPref', { platforms: platform }),
+          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', { platforms: platform }),
+        ]);
+      });
+
+      it(`file text is the same`, () => {
+        expect(getDiffObject(oldText, newText)).toEqual([]);
       });
     });
   });
