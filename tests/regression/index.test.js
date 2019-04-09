@@ -1,24 +1,6 @@
 import { diffLines } from 'diff';
 import { DEPLOYMENTS, LANGUAGES, PLATFORMS } from '../../src/constants';
-
-const slugs = [
-  'cloud/atlas',
-  'cloud/connectionstring',
-  'cloud/migrate-from-aws-to-atlas',
-  'cloud/migrate-from-compose',
-  'cloud/migrate-from-mlab',
-  'server/auth',
-  'server/delete',
-  'server/drivers',
-  'server/import',
-  'server/insert',
-  'server/install',
-  'server/introduction',
-  'server/read',
-  'server/read_operators',
-  'server/read_queries',
-  'server/update',
-];
+import { slugArray } from '../../src/testsetup';
 
 const oldUrl = 'https://docs.mongodb.com/guides/';
 const localUrl = 'http://127.0.0.1:9000/';
@@ -66,6 +48,7 @@ const getDiffObject = (oldText, newText) => {
   );
 };
 
+const slugs = slugArray;
 describe('without local storage', () => {
   describe.each(slugs)('%p', slug => {
     let oldText;
