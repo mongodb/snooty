@@ -13,6 +13,7 @@ const LANGUAGES = [
   'perl',
   'ruby',
   'scala',
+  'go',
 ];
 
 const DEPLOYMENTS = ['cloud', 'local'];
@@ -34,6 +35,7 @@ const SLUG_TO_STRING = {
   perl: 'Perl',
   ruby: 'Ruby',
   scala: 'Scala',
+  go: 'Go',
   cloud: 'Cloud',
   local: 'Local',
   macos: 'macOS',
