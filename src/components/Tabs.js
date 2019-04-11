@@ -41,7 +41,7 @@ export default class Tabs extends Component {
     const { nodeData, activeTabs, setActiveTab } = this.props;
     const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud';
     const tabs =
-      tabsetName === 'platforms' || tabsetName === 'linux/macos/windows'
+      tabsetName === 'platforms' || PLATFORMS.some(p => tabsetName.includes(p))
         ? this.sortTabset(nodeData, PLATFORMS)
         : nodeData.children;
 
