@@ -44,6 +44,7 @@ export default class Tabs extends Component {
       tabsetName === 'platforms' || tabsetName === 'linux/macos/windows'
         ? this.sortTabset(nodeData, PLATFORMS)
         : nodeData.children;
+
     return (
       <React.Fragment>
         {isHeaderTabset || (
