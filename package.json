@@ -33,22 +33,8 @@
     "lint": "eslint src/ tests/",
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
     "test": "jest",
-    "test-regression": "jest ./tests/regression/",
-    "test-unit": "jest ./tests/unit/"
-  },
-  "jest": {
-    "verbose": true,
-    "preset": "jest-puppeteer",
-    "setupFilesAfterEnv": [
-      "./src/testsetup.js"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "testPathIgnorePatterns": [
-      "node_modules",
-      ".cache"
-    ]
+    "test-regression": "jest regression",
+    "test-unit": "jest unit"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,md}": [
