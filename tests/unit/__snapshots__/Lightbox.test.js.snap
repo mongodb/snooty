@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Lightbox renders correctly 1`] = `
+<Fragment>
+  <div
+    className="figure lightbox"
+    style={
+      Object {
+        "width": "700px",
+      }
+    }
+  >
+    <div
+      className="lightbox__imageWrapper"
+      onClick={[Function]}
+      role="button"
+      tabIndex="-1"
+    >
+      <img
+        alt="/images/firstcluster.png"
+        src="/images/firstcluster.png"
+        width="50%"
+      />
+      <div
+        className="lightbox__caption"
+      >
+        click to enlarge
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;
