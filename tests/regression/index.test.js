@@ -51,6 +51,7 @@ const getDiffObject = (oldText, newText) => {
 
 const slugs = slugArray;
 describe('without local storage', () => {
+  let errors = 0;
   describe.each(slugs)('%p', slug => {
     let oldText;
     let newText;
@@ -62,9 +63,12 @@ describe('without local storage', () => {
     });
 
     it(`file text is the same`, () => {
-      expect(getDiffObject(oldText, newText)).toEqual([]);
+      const diffObj = getDiffObject(oldText, newText);
+      errors += diffObj.length;
+      expect(diffObj).toEqual([]);
     });
   });
+  afterAll(() => console.log(`errors: ${errors}`))
 });
 
 describe('with local storage', () => {
