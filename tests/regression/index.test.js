@@ -14,7 +14,8 @@ const cleanString = str =>
   str
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201C\u201D]/g, '"')
-    .replace('--', '–');
+    .replace('--', '–')
+    .replace('…', '...');
 
 const setLocalStorage = async (page, parentKey, storageObj) => {
   await page.evaluate(
