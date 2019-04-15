@@ -1,13 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { REF_TARGETS } from '../../constants';
 
 const RoleLink = props => {
   const {
-    nodeData: { label, target },
+    nodeData: { label, name, target },
   } = props;
   const labelDisplay = label && label.value ? label.value : label;
+
+  let urlDestination = 'internal';
+  let url = target;
+  if (name === 'manual') {
+    url = REF_TARGETS.manual + target;
+    urlDestination = 'external';
+  }
+
   return (
-    <a href={target} className="reference external">
+    <a href={url} className={`reference ${urlDestination}`}>
       {labelDisplay}
     </a>
   );

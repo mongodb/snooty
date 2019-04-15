@@ -54,6 +54,7 @@ const stringifyTab = tabName => {
 const REF_TARGETS = {
   'compass-index': 'https://docs.mongodb.com/compass/current/#compass-index',
   'document-dot-notation': 'https://docs.mongodb.com/manual/core/document/#document-dot-notation',
+  manual: 'https://docs.mongodb.com/manual',
   'mongodb-uri': 'https://docs.mongodb.com/manual/reference/connection-string/#mongodb-uri',
   'mongodb-supported-platforms': 'https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms',
 };

@@ -21,6 +21,7 @@ import URIWriter from './URIWriter';
 import TitleReference from './TitleReference';
 
 // the different roles
+import RoleDoc from './Roles/Doc';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleProgram from './Roles/Program';
 import RoleLink from './Roles/Link';
@@ -34,7 +35,7 @@ export default class ComponentFactory extends Component {
       authrole: RoleCode,
       binary: RoleCode,
       dbcommand: RoleCode,
-      doc: RoleLink,
+      doc: RoleDoc,
       guilabel: RoleGUILabel,
       manual: RoleLink,
       method: RoleCode,
@@ -44,6 +45,7 @@ export default class ComponentFactory extends Component {
       ref: RoleRef,
       setting: RoleCode,
       term: RoleLink,
+      update: RoleCode,
     };
     this.componentMap = {
       admonition: Admonition,

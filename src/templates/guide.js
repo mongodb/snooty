@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
-import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
+import { LANGUAGES, DEPLOYMENTS } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
 
 export default class Guide extends Component {
@@ -11,9 +11,6 @@ export default class Guide extends Component {
     super(propsFromServer);
 
     const { pageContext } = this.props;
-
-    // add ref targets to mapping
-    pageContext.__refDocMapping.REF_TARGETS = REF_TARGETS;
 
     // get data from server
     this.sections =

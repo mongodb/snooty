@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
+import { findKeyValuePair } from '../util';
 
 const CATEGORIES = [
   {
@@ -17,23 +18,6 @@ const CATEGORIES = [
   },
 ];
 
-/**
- * Recursively searches the AST to find the specified guide category.
- * Prevents us from having to rely on a fixed depth for this property.
- */
-const findGuideProperty = (nodes, propertyName) => {
-  let result;
-  const iter = node => {
-    if (node.name === propertyName) {
-      result = node;
-      return true;
-    }
-    return Array.isArray(node.children) && node.children.some(iter);
-  };
-  nodes.some(iter);
-  return result;
-};
-
 const Category = ({ cards, category, refDocMapping }) =>
   cards.length > 0 && (
     <section className="guide-category" key={category.iconSlug}>
@@ -43,7 +27,7 @@ const Category = ({ cards, category, refDocMapping }) =>
           let completionTime;
           if (card.name === 'card') {
             const cardSlug = card.argument[0].value;
-            completionTime = findGuideProperty(refDocMapping[cardSlug].ast.children, 'time').argument[0].value;
+            completionTime = findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value;
           }
           return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
         })}
@@ -57,7 +41,9 @@ const LandingPageCards = ({ guides, refDocMapping }) =>
       cards={guides.filter(card => {
         const cardName =
           card.name === 'card' ? card.argument[0].value : card.children[0].children[0].children[0].children[0].value;
-        return category.name === findGuideProperty(refDocMapping[cardName].ast.children, 'type').argument[0].value;
+        return (
+          category.name === findKeyValuePair(refDocMapping[cardName].ast.children, 'name', 'type').argument[0].value
+        );
       })}
       category={category}
       refDocMapping={refDocMapping}

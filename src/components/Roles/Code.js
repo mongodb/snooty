@@ -1,34 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RoleCode = props => {
-  const { nodeData } = props;
+const RoleCode = ({ nodeData: { label, name, target }, nodeData }) => {
   const base = 'https://docs.mongodb.com/manual/reference';
-  const classNameComplete = `mongodb-${nodeData.name} xref mongodb docutils literal notranslate`;
+  const classNameComplete = `mongodb-${name} xref mongodb docutils literal notranslate`;
   let termModified;
   let href;
   // each code role has its own properties
-  if (nodeData.name === 'binary') {
-    termModified = nodeData.target.substr(nodeData.target.indexOf('.') + 1);
-    href = `${base}/program/${termModified}/#${nodeData.target.replace('~', '')}`;
-  } else if (nodeData.name === 'option') {
-    termModified = nodeData.label.value;
+  if (name === 'binary') {
+    termModified = label.value || target.substr(target.indexOf('.') + 1);
+    href = `${base}/program/${termModified}/#${target.replace('~', '')}`;
+  } else if (name === 'option') {
+    termModified = label.value;
     href = `${base}/program/mongoimport/#cmdoption-mongoimport-${termModified.replace('--', '')}`;
-  } else if (nodeData.name === 'authrole') {
-    termModified = nodeData.label;
+  } else if (name === 'authrole') {
+    termModified = label;
     href = `${base}/built-in-roles/#${termModified}`;
-  } else if (nodeData.name === 'setting') {
-    termModified = nodeData.label;
+  } else if (name === 'setting') {
+    termModified = label;
     href = `${base}/configuration-options/#${termModified}`;
-  } else if (nodeData.name === 'method') {
-    termModified = nodeData.label;
+  } else if (name === 'method') {
+    termModified = label;
     href = `${base}/method/${termModified}/#${termModified}`;
-  } else if (nodeData.name === 'query') {
-    termModified = nodeData.label.replace('~op.', '');
+  } else if (name === 'query') {
+    termModified = label.replace('~op.', '');
     href = `${base}/operator/query/${termModified.replace('$', '')}/#op._S_${termModified}`;
-  } else if (nodeData.name === 'dbcommand') {
-    termModified = nodeData.label;
+  } else if (name === 'dbcommand') {
+    termModified = label;
     href = `${base}/command/${termModified}/#dbcmd.${termModified}`;
+  } else if (name === 'update') {
+    termModified = label.replace('~up.', '');
+    href = `${base}/operator/update/${termModified.replace('$', '')}/#up._S_${termModified}`;
   }
   return (
     <a href={href} className="reference external">
