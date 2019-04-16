@@ -6,6 +6,7 @@ import Tabs from '../../src/components/Tabs';
 // data for this component
 import mockDataPlatforms from './data/Tabs-platform.test.json';
 import mockDataLanguages from './data/Tabs-languages.test.json';
+import mockDataHidden from './data/Tabs-hidden.test.json';
 
 const mountTabs = ({ mockData, mockSetActiveTab, mockAddTabset, activeTabs }) =>
   mount(<Tabs nodeData={mockData} setActiveTab={mockSetActiveTab} addTabset={mockAddTabset} activeTabs={activeTabs} />);
@@ -17,11 +18,17 @@ describe('Tabs testing', () => {
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
-      wrapper = mountTabs({ mockData: mockDataPlatforms, mockSetActiveTab, mockAddTabset, activeTabs: { platforms: PLATFORMS[0] } });
+      wrapper = mountTabs({
+        mockData: mockDataPlatforms,
+        mockSetActiveTab,
+        mockAddTabset,
+        activeTabs: { platforms: PLATFORMS[0] },
+      });
     });
 
     it('tabs container exists with correct number of children', () => {
       const tabCount = wrapper.props().nodeData.children.length;
+      expect(wrapper.find('.tab-strip')).toHaveLength(1);
       expect(wrapper.find('.tab-strip__element').exists()).toEqual(true);
       expect(wrapper.find('.tab-strip__element')).toHaveLength(tabCount);
     });
@@ -55,11 +62,35 @@ describe('Tabs testing', () => {
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
-      wrapper = mountTabs({ mockData: mockDataLanguages, mockSetActiveTab, mockAddTabset, activeTabs: { drivers: LANGUAGES[0] } });
+      wrapper = mountTabs({
+        mockData: mockDataLanguages,
+        mockSetActiveTab,
+        mockAddTabset,
+        activeTabs: { drivers: LANGUAGES[0] },
+      });
     });
 
     it('tabset should not be created for drivers/language pills', () => {
-      expect(wrapper.find('.tab-strip__element').exists()).toEqual(false)
+      expect(wrapper.find('.tab-strip__element').exists()).toEqual(false);
+    });
+  });
+
+  describe('when a hidden tabset is passed in', () => {
+    let wrapper;
+    const mockSetActiveTab = jest.fn();
+    const mockAddTabset = jest.fn();
+
+    beforeAll(() => {
+      wrapper = mountTabs({
+        mockData: mockDataHidden,
+        mockSetActiveTab,
+        mockAddTabset,
+        activeTabs: {},
+      });
+    });
+
+    it('does not render a tabset', () => {
+      expect(wrapper.find('.tab-strip')).toHaveLength(0);
     });
   });
 });

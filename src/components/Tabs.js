@@ -40,6 +40,7 @@ export default class Tabs extends Component {
     const { tabsetName } = this.state;
     const { nodeData, activeTabs, setActiveTab } = this.props;
     const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud';
+    const isHidden = nodeData.options && nodeData.options.hidden;
     const tabs =
       tabsetName === 'platforms' || PLATFORMS.some(p => tabsetName.includes(p))
         ? this.sortTabset(nodeData, PLATFORMS)
@@ -47,7 +48,7 @@ export default class Tabs extends Component {
 
     return (
       <React.Fragment>
-        {isHeaderTabset || (
+        {isHeaderTabset || isHidden || (
           <ul className="tab-strip tab-strip--singleton" role="tablist">
             {tabs.map((tab, index) => {
               const tabName = tab.argument[0].value.toLowerCase();
