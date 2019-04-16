@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <img
   alt="/images/firstcluster.png"
-  src="/images/firstcluster.png"
+  src="undefined/images/firstcluster.png"
   width="50%"
 />
 `;
