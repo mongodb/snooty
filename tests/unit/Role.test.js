@@ -9,21 +9,21 @@ import RoleProgram from '../../src/components/Roles/Program';
 import RoleRef from '../../src/components/Roles/Ref';
 import RoleTerm from '../../src/components/Roles/Term';
 
-import mockRefDocMapping from './data/index.test.json';
+import mockDataAuthrole from './data/Role-authrole.test.json';
+import mockDataBinary from './data/Role-binary.test.json';
 import mockDataDoc from './data/Role-doc.test.json';
 import mockDataDocUnlabeled from './data/Role-doc-unlabeled.test.json';
-import mockDataRef from './data/Role-ref.test.json';
-import mockDataManual from './data/Role-manual.test.json';
-import mockDataTerm from './data/Role-term.test.json';
-import mockDataBinary from './data/Role-binary.test.json';
-import mockDataProgram from './data/Role-program.test.json';
 import mockDataGUILabel from './data/Role-guilabel.test.json';
-import mockDataSetting from './data/Role-setting.test.json';
-import mockDataUpdate from './data/Role-update.test.json';
-import mockDataQuery from './data/Role-query.test.json';
-import mockDataAuthrole from './data/Role-authrole.test.json';
-import mockDataOption from './data/Role-option.test.json';
+import mockDataManual from './data/Role-manual.test.json';
 import mockDataMethod from './data/Role-method.test.json';
+import mockDataOption from './data/Role-option.test.json';
+import mockDataProgram from './data/Role-program.test.json';
+import mockDataQuery from './data/Role-query.test.json';
+import mockDataRef from './data/Role-ref.test.json';
+import mockDataSetting from './data/Role-setting.test.json';
+import mockDataTerm from './data/Role-term.test.json';
+import mockDataUpdate from './data/Role-update.test.json';
+import mockRefDocMapping from './data/index.test.json';
 
 it('renders correctly a role "authrole"', () => {
   const tree = shallow(<RoleCode nodeData={mockDataAuthrole} />);
