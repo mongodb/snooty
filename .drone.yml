@@ -15,9 +15,6 @@ pipeline:
     image: node:10
     commands:
       - npm run lint
-    when:
-      branch:
-        exclude: [ master ]
 
   publish:
     image: plugins/ecr
