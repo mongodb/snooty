@@ -24,7 +24,7 @@ To build and serve the site, use the same ENV vars from above:
 
 ```shell
 <ENV_VARS> gatsby build --prefix-paths
-gatsby serve
+<ENV_VARS> gatsby serve --prefix-paths
 ```
 
 ## Using mock test data:

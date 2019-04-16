@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Figure = ({ nodeData }) => (
   <img
-    src={nodeData.argument[0].value}
+    src={`${process.env.GATSBY_PREFIX}/${nodeData.argument[0].value}`}
     alt={nodeData.options.alt ? nodeData.options.alt : nodeData.argument[0].value}
     width="50%"
   />

@@ -10,8 +10,17 @@ const STITCH_ID = process.env.STITCH_ID;
 const NAMESPACE = process.env.NAMESPACE;
 const NAMESPACE_ASSETS = NAMESPACE.split('/')[0] + '/' + 'assets';
 
+// save env variables so that we can use them in front-end
+// https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
+const ENV_FILE = '.env.production';
+const ENV_CONTENTS = `GATSBY_PREFIX=/${process.env.PREFIX}`;
+fs.writeFile(ENV_FILE, ENV_CONTENTS, 'utf8', err => {
+  if (err) console.log(`ERROR saving env variables into "${ENV_FILE}" file`, err);
+  console.log(`** Saved env variables into "${ENV_FILE}"`);
+});
+
 const USE_TEST_DATA = process.env.USE_TEST_DATA;
-const TEST_DATA_PATH = 'tests/data/site';
+const TEST_DATA_PATH = 'tests/unit/data/site';
 const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
@@ -122,8 +131,7 @@ exports.sourceNodes = async ({ actions }) => {
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
-    const fullpathLatest = path.join(TEST_DATA_PATH);
-    `${TEST_DATA_PATH}/${LATEST_TEST_DATA_FILE}`;
+    const fullpathLatest = path.join(TEST_DATA_PATH, LATEST_TEST_DATA_FILE);
     fs.writeFile(fullpathLatest, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', err => {
       if (err) console.log(`ERROR saving test data into "${fullpathLatest}" file`, err);
       console.log(`** Saved test data into "${fullpathLatest}"`);
