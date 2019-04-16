@@ -18,6 +18,7 @@ import BlockQuote from './BlockQuote';
 import Reference from './Reference';
 import Strong from './Strong';
 import URIWriter from './URIWriter';
+import TitleReference from './TitleReference';
 
 // the different roles
 import RoleGUILabel from './Roles/GUILabel';
@@ -62,6 +63,7 @@ export default class ComponentFactory extends Component {
       step: Step,
       strong: Strong,
       tabs: Tabs,
+      title_reference: TitleReference,
       uriwriter: URIWriter,
     };
   }
