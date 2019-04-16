@@ -16,4 +16,4 @@ const findKeyValuePair = (nodes, key, value) => {
   return result;
 };
 
-export { findKeyValuePair };
+export { findKeyValuePair }; // eslint-disable-line import/prefer-default-export

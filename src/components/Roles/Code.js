@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RoleCode = ({ nodeData: { label, name, target }, nodeData }) => {
+const RoleCode = ({ nodeData: { label, name, target } }) => {
   const base = 'https://docs.mongodb.com/manual/reference';
   const classNameComplete = `mongodb-${name} xref mongodb docutils literal notranslate`;
   let termModified;
