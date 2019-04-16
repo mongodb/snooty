@@ -12,6 +12,8 @@ const NAMESPACE_ASSETS = NAMESPACE.split('/')[0] + '/' + 'assets';
 
 // save env variables so that we can use them in front-end
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
+// env.production is used for `gatsby build --prefix-paths`
+// env.development is used for `gatsby develop` and should be empty string
 const ENV_FILE = '.env.production';
 const ENV_CONTENTS = `GATSBY_PREFIX=/${process.env.PREFIX}`;
 fs.writeFile(ENV_FILE, ENV_CONTENTS, 'utf8', err => {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => (
-  <html lang="en">
+  <html lang="en" {...htmlAttributes}>
     <head>
       <title>Guides</title>
       <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
@@ -31,6 +31,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         title="MongoDB Help"
       />
     </head>
+    {headComponents}
     <body
       {...bodyAttributes}
       data-project="guides"

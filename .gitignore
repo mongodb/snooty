@@ -6,4 +6,3 @@ static/
 docs-tools/
 coverage/
 .coverage
-.env.production

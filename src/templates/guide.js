@@ -11,17 +11,19 @@ export default class Guide extends Component {
     super(propsFromServer);
 
     const { pageContext } = this.props;
-    const gatsbyPrefix = process.env.GATSBY_PREFIX.substr(1);
-    const guideWithoutPrefix = this.props['*'].replace(`${gatsbyPrefix}/`, '');
+    let guideKeyInMapping = this.props['*']; // eslint-disable-line react/destructuring-assignment
+
+    // get correct lookup key based on whether running dev/prod
+    if (process.env.GATSBY_PREFIX !== '') {
+      const gatsbyPrefix = process.env.GATSBY_PREFIX.substr(1);
+      guideKeyInMapping = guideKeyInMapping.replace(`${gatsbyPrefix}/`, '');
+    }
 
     // add ref targets to mapping
     pageContext.__refDocMapping.REF_TARGETS = REF_TARGETS;
 
     // get data from server
-    this.sections =
-      pageContext.__refDocMapping[
-        guideWithoutPrefix // eslint-disable-line react/destructuring-assignment
-      ].ast.children[0].children;
+    this.sections = pageContext.__refDocMapping[guideKeyInMapping].ast.children[0].children;
     this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next', 'seealso'];
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
