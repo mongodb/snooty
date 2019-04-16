@@ -1,0 +1,21 @@
+{
+  "type": "role",
+  "position": {
+    "start": {
+      "line": 5
+    }
+  },
+  "name": "option",
+  "label": {
+    "type": "text",
+    "value": "--file",
+    "position": {
+      "start": {
+        "line": 6
+      }
+    }
+  },
+  "target": "mongoimport.--file",
+  "raw": "--file <mongoimport.--file>",
+  "children": []
+}
