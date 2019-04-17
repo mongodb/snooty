@@ -1,9 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<img
-  alt="/images/firstcluster.png"
-  src="/images/firstcluster.png"
-  width="50%"
+<div
+  className="figure"
+  style={
+    Object {
+      "width": "700px",
+    }
+  }
+>
+  <img
+    alt="/images/firstcluster.png"
+    onLoad={[Function]}
+    src="/images/firstcluster.png"
+    width="50%"
+  />
+</div>
+`;
+
+exports[`renders lightbox correctly when specified as an option 1`] = `
+<Lightbox
+  nodeData={
+    Object {
+      "argument": Array [
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 13,
+            },
+          },
+          "type": "text",
+          "value": "/images/firstcluster.png",
+        },
+      ],
+      "children": Array [],
+      "name": "figure",
+      "options": Object {
+        "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+        "figwidth": "700px",
+        "lightbox": true,
+      },
+      "position": Object {
+        "start": Object {
+          "line": 13,
+        },
+      },
+      "type": "directive",
+    }
+  }
 />
 `;
