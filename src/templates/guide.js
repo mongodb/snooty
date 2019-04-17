@@ -15,8 +15,8 @@ export default class Guide extends Component {
 
     // get correct lookup key based on whether running dev/prod
     if (process.env.GATSBY_PREFIX !== '') {
-      const gatsbyPrefix = process.env.GATSBY_PREFIX.substr(1);
-      guideKeyInMapping = guideKeyInMapping.replace(`${gatsbyPrefix}/`, '');
+      const documentPrefix = process.env.GATSBY_PREFIX.substr(1);
+      guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
     }
 
     // add ref targets to mapping

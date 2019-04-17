@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Figure = ({ nodeData }) => {
-  const fullImagePath = (process.env.GATSBY_PREFIX || '') + nodeData.argument[0].value;
+  const fullImagePath = (process.env.GATSBY_PREFIX ? process.env.GATSBY_PREFIX : '') + nodeData.argument[0].value;
   return (
     <img
       src={fullImagePath}
