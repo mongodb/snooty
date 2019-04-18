@@ -18,13 +18,15 @@ import BlockQuote from './BlockQuote';
 import Reference from './Reference';
 import Strong from './Strong';
 import URIWriter from './URIWriter';
+import TitleReference from './TitleReference';
 
-// the different roles
-import RoleGUILabel from './Roles/GUILabel';
-import RoleProgram from './Roles/Program';
-import RoleLink from './Roles/Link';
-import RoleRef from './Roles/Ref';
 import RoleCode from './Roles/Code';
+import RoleDoc from './Roles/Doc';
+import RoleGUILabel from './Roles/GUILabel';
+import RoleManual from './Roles/Manual';
+import RoleProgram from './Roles/Program';
+import RoleRef from './Roles/Ref';
+import RoleTerm from './Roles/Term';
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -33,16 +35,17 @@ export default class ComponentFactory extends Component {
       authrole: RoleCode,
       binary: RoleCode,
       dbcommand: RoleCode,
-      doc: RoleLink,
+      doc: RoleDoc,
       guilabel: RoleGUILabel,
-      manual: RoleLink,
+      manual: RoleManual,
       method: RoleCode,
       option: RoleCode,
       program: RoleProgram,
       query: RoleCode,
       ref: RoleRef,
       setting: RoleCode,
-      term: RoleLink,
+      term: RoleTerm,
+      update: RoleCode,
     };
     this.componentMap = {
       admonition: Admonition,
@@ -62,6 +65,7 @@ export default class ComponentFactory extends Component {
       step: Step,
       strong: Strong,
       tabs: Tabs,
+      title_reference: TitleReference,
       uriwriter: URIWriter,
     };
   }

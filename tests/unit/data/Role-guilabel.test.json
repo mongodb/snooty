@@ -1,0 +1,13 @@
+{
+  "type": "role",
+  "position": {
+  "start": {
+    "line": 28
+  }
+  },
+  "name": "guilabel",
+  "label": "Yes",
+  "target": "Yes",
+  "raw": "Yes",
+  "children": []
+}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
-import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
+import { LANGUAGES, DEPLOYMENTS } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
 
 export default class Guide extends Component {
@@ -19,9 +19,6 @@ export default class Guide extends Component {
       guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
     }
 
-    // add ref targets to mapping
-    pageContext.__refDocMapping.REF_TARGETS = REF_TARGETS;
-
     // get data from server
     this.sections = pageContext.__refDocMapping[guideKeyInMapping].ast.children[0].children;
     this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next', 'seealso'];
@@ -35,17 +32,19 @@ export default class Guide extends Component {
     let tabs = tabData.map(tab => tab.argument[0].value);
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
-      this.setNamedTabData(tabsetName, tabs);
+      this.setNamedTabData(tabsetName, tabs, DEPLOYMENTS);
     } else if (tabsetName === 'drivers') {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
-      this.setNamedTabData(tabsetName, tabs);
+      this.setNamedTabData(tabsetName, tabs, LANGUAGES);
     }
     this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
   };
 
-  setNamedTabData = (tabsetName, tabs) => {
+  matchArraySorting = (tabs, referenceArray) => referenceArray.filter(t => tabs.includes(t));
+
+  setNamedTabData = (tabsetName, tabs, constants) => {
     this.setState(prevState => ({
-      [tabsetName]: Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])),
+      [tabsetName]: this.matchArraySorting(Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])), constants),
     }));
   };
 

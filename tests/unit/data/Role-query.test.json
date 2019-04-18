@@ -1,0 +1,13 @@
+{
+  "type": "role",
+  "position": {
+  "start": {
+    "line": 5
+  }
+  },
+  "name": "query",
+  "label": "$lt",
+  "target": "$lt",
+  "raw": "$lt",
+  "children": []
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import { stringifyTab } from '../constants';
+import { PLATFORMS, stringifyTab } from '../constants';
 
 export default class Tabs extends Component {
   constructor(props) {
@@ -28,15 +28,29 @@ export default class Tabs extends Component {
       .join('/');
   };
 
+  sortTabset = (nodeData, referenceArray) => {
+    return nodeData.children.sort(
+      (a, b) =>
+        referenceArray.indexOf(a.argument[0].value.toLowerCase()) -
+        referenceArray.indexOf(b.argument[0].value.toLowerCase())
+    );
+  };
+
   render() {
     const { tabsetName } = this.state;
     const { nodeData, activeTabs, setActiveTab } = this.props;
     const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud';
+    const isHidden = nodeData.options && nodeData.options.hidden;
+    const tabs =
+      tabsetName === 'platforms' || PLATFORMS.some(p => tabsetName.includes(p))
+        ? this.sortTabset(nodeData, PLATFORMS)
+        : nodeData.children;
+
     return (
       <React.Fragment>
-        {isHeaderTabset || (
+        {isHeaderTabset || isHidden || (
           <ul className="tab-strip tab-strip--singleton" role="tablist">
-            {nodeData.children.map((tab, index) => {
+            {tabs.map((tab, index) => {
               const tabName = tab.argument[0].value.toLowerCase();
               return (
                 <li
@@ -55,7 +69,7 @@ export default class Tabs extends Component {
             })}
           </ul>
         )}
-        {nodeData.children.map((tab, index) => {
+        {tabs.map((tab, index) => {
           const tabName = tab.argument[0].value.toLowerCase();
           return (
             activeTabs[tabsetName] === tabName && (
