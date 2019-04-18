@@ -21,9 +21,9 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         property="og:image:secure_url"
         content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
       />
-      <link rel="stylesheet" href="/static/guides.css" type="text/css" />
-      <link rel="stylesheet" href="/static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="/static/css/navbar.min.css" type="text/css" />
+      <link rel="stylesheet" href={`${process.env.GATSBY_PREFIX}/static/guides.css`} type="text/css" />
+      <link rel="stylesheet" href={`${process.env.GATSBY_PREFIX}/static/pygments.css`} type="text/css" />
+      <link rel="stylesheet" href={`${process.env.GATSBY_PREFIX}/static/css/navbar.min.css`} type="text/css" />
       <link
         rel="search"
         type="application/opensearchdescription+xml"
@@ -43,16 +43,16 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         id="navbar"
         data-navprops='{"links": [{"url": "https://docs.mongodb.com/manual/","text": "Server"},{"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},{"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},{"url": "https://docs.mongodb.com/tools/","text": "Tools"},{"url": "https://docs.mongodb.com/guides/","text": "Guides","active": true}]}'
       />
-      <script async src="/static/navbar.min.js" />
+      <script async src={`${process.env.GATSBY_PREFIX}/static/navbar.min.js`} />
       {preBodyComponents}
       <div
         key="body"
         id="___gatsby"
         dangerouslySetInnerHTML={{ __html: body }} // eslint-disable-line react/no-danger
       />
-      <script type="text/javascript" src="/static/lib/jquery.min.js" />
-      <script type="text/javascript" src="/static/lib/bootstrap.js" />
-      <script type="text/javascript" src="/static/controller.js" />
+      <script type="text/javascript" src={`${process.env.GATSBY_PREFIX}/static/lib/jquery.min.js`} />
+      <script type="text/javascript" src={`${process.env.GATSBY_PREFIX}/static/lib/bootstrap.js`} />
+      <script type="text/javascript" src={`${process.env.GATSBY_PREFIX}/static/controller.js`} />
       {postBodyComponents}
     </body>
   </html>
