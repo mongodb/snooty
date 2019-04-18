@@ -4,14 +4,13 @@ const crypto = require('crypto');
 const uuidv1 = require('uuid/v1');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
-// ENV vars
-const PREFIX = process.env.PREFIX.split('/');
-const STITCH_ID = process.env.STITCH_ID;
-const NAMESPACE = process.env.NAMESPACE;
-const NAMESPACE_ASSETS = NAMESPACE.split('/')[0] + '/' + 'assets';
+// where assets and documents are referenced
+let NAMESPACE_ASSETS = null;
+let DOCUMENTS = null;
 
+// test data properties
 const USE_TEST_DATA = process.env.USE_TEST_DATA;
-const TEST_DATA_PATH = 'tests/data/site';
+const TEST_DATA_PATH = 'tests/unit/data/site';
 const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
@@ -28,9 +27,9 @@ let stitchClient;
 
 const setupStitch = () => {
   return new Promise((resolve, reject) => {
-    stitchClient = Stitch.hasAppClient(STITCH_ID)
-      ? Stitch.getAppClient(STITCH_ID)
-      : Stitch.initializeAppClient(STITCH_ID);
+    stitchClient = Stitch.hasAppClient(process.env.STITCH_ID)
+      ? Stitch.getAppClient(process.env.STITCH_ID)
+      : Stitch.initializeAppClient(process.env.STITCH_ID);
     stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
       .then(user => {
@@ -39,6 +38,37 @@ const setupStitch = () => {
       })
       .catch(console.error);
   });
+};
+
+// env variables for building site along with use in front-end
+// https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
+const validateEnvVariables = () => {
+  // make sure necessary env vars exist
+  if (!process.env.NAMESPACE || !process.env.STITCH_ID || !process.env.DOCUMENTS || process.env.GATSBY_PREFIX === undefined) {
+    return { 
+      error: true, 
+      message: 'ERROR with .env.* file: parameters required are GATSBY_PREFIX, DOCUMENTS, NAMESPACE, and STITCH_ID' 
+    };
+  }
+  // make sure formats are correct
+  if (process.env.NODE_ENV === 'production' && !process.env.GATSBY_PREFIX.startsWith('/')) {
+    return { 
+      error: true, 
+      message: 'ERROR with .env.* file: GATSBY_PREFIX must be in format /<site>/<user>/<branch>' 
+    };
+  } 
+  if (!process.env.DOCUMENTS.startsWith('/')) {
+    return { 
+      error: true, 
+      message: 'ERROR with .env.* file: DOCUMENTS must be in format /<site>/<user>/<branch>' 
+    };
+  }
+  // create split prefix for use in stitch function
+  DOCUMENTS = process.env.DOCUMENTS.substr(1).split('/');
+  NAMESPACE_ASSETS = `${process.env.NAMESPACE.split('/')[0]}/assets`;
+  return {
+    error: false
+  };
 };
 
 const saveAssetFile = async (name, objData) => {
@@ -54,6 +84,14 @@ exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
   const items = [];
 
+  // setup env variables
+  const envResults = validateEnvVariables();
+
+  if (envResults.error) {
+    throw Error(envResults.message);
+  } 
+
+  // wait to connect to stitch
   await setupStitch();
 
   // if running with test data
@@ -69,16 +107,16 @@ exports.sourceNodes = async ({ actions }) => {
     }
   } else {
     // start from index document
-    const query = { _id: `${PREFIX.join('/')}/index` };
-    const documents = await stitchClient.callFunction('fetchDocuments', [NAMESPACE, query]);
+    const query = { _id: `${DOCUMENTS.join('/')}/index` };
+    const documents = await stitchClient.callFunction('fetchDocuments', [process.env.NAMESPACE, query]);
 
     // set data for index page
     RESOLVED_REF_DOC_MAPPING['index'] = documents && documents.length > 0 ? documents[0] : {};
 
     // resolve references/urls to documents
     RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [
-      PREFIX,
-      NAMESPACE,
+      DOCUMENTS,
+      process.env.NAMESPACE,
       documents,
       RESOLVED_REF_DOC_MAPPING,
     ]);
@@ -122,8 +160,7 @@ exports.sourceNodes = async ({ actions }) => {
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
-    const fullpathLatest = path.join(TEST_DATA_PATH);
-    `${TEST_DATA_PATH}/${LATEST_TEST_DATA_FILE}`;
+    const fullpathLatest = path.join(TEST_DATA_PATH, LATEST_TEST_DATA_FILE);
     fs.writeFile(fullpathLatest, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', err => {
       if (err) console.log(`ERROR saving test data into "${fullpathLatest}" file`, err);
       console.log(`** Saved test data into "${fullpathLatest}"`);
@@ -144,7 +181,7 @@ exports.createPages = ({ graphql, actions }) => {
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
-            __stitchID: STITCH_ID,
+            __stitchID: process.env.STITCH_ID,
           },
         });
       }

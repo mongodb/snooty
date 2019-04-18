@@ -48,6 +48,7 @@
     "axios": "^0.18.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "diff": "^4.0.1",
+    "dotenv": "^7.0.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "eslint-plugin-class-property": "^1.1.0",

@@ -6,7 +6,7 @@ const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
 const Lightbox = ({ nodeData }) => {
   const [showModal, setShowModal] = useState(false);
-  const imgSrc = nodeData.argument[0].value;
+  const imgSrc = (process.env.GATSBY_PREFIX || '') + nodeData.argument[0].value;
   const altText = nodeData.options.alt ? nodeData.options.alt : imgSrc;
 
   const toggleShowModal = () => {

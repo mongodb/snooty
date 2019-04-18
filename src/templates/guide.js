@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
-import { LANGUAGES, DEPLOYMENTS, REF_TARGETS } from '../constants';
+import { LANGUAGES, DEPLOYMENTS } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
 
 export default class Guide extends Component {
@@ -11,15 +11,16 @@ export default class Guide extends Component {
     super(propsFromServer);
 
     const { pageContext } = this.props;
+    let guideKeyInMapping = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
-    // add ref targets to mapping
-    pageContext.__refDocMapping.REF_TARGETS = REF_TARGETS;
+    // get correct lookup key based on whether running dev/prod
+    if (process.env.GATSBY_PREFIX !== '') {
+      const documentPrefix = process.env.GATSBY_PREFIX.substr(1);
+      guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
+    }
 
     // get data from server
-    this.sections =
-      pageContext.__refDocMapping[
-        this.props['*'] // eslint-disable-line react/destructuring-assignment
-      ].ast.children[0].children;
+    this.sections = pageContext.__refDocMapping[guideKeyInMapping].ast.children[0].children;
     this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next', 'seealso'];
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {

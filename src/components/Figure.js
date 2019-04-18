@@ -5,6 +5,7 @@ import Lightbox from './Lightbox';
 const Figure = ({ nodeData }) => {
   const imgRef = React.createRef();
   const [isLightboxSize, setIsLightboxSize] = useState(false);
+  const imgSrc = (process.env.GATSBY_PREFIX || '') + nodeData.argument[0].value;
 
   const imgShouldHaveLightbox = () => {
     const naturalArea = imgRef.current.naturalWidth * imgRef.current.naturalHeight;
@@ -28,7 +29,7 @@ const Figure = ({ nodeData }) => {
       }}
     >
       <img
-        src={nodeData.argument[0].value}
+        src={imgSrc}
         alt={nodeData.options.alt ? nodeData.options.alt : nodeData.argument[0].value}
         width="50%"
         onLoad={handleImageLoaded}
