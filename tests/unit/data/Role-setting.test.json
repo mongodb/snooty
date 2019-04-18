@@ -1,0 +1,13 @@
+{
+  "type": "role",
+  "position": {
+    "start": {
+      "line": 0
+    }
+  },
+  "name": "setting",
+  "label": "dbpath",
+  "target": "dbpath",
+  "raw": "dbpath",
+  "children": []
+}

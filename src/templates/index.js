@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LandingPageCards from '../components/LandingPageCards';
+import { findKeyValuePair } from '../util';
 
 export default class Index extends Component {
   constructor(propsFromServer) {
@@ -13,23 +14,9 @@ export default class Index extends Component {
 
   componentDidMount() {
     const { pageContext } = this.props;
-    const guides = this.findGuideProperty(pageContext.__refDocMapping.index.ast.children, 'guide-index');
+    const guides = findKeyValuePair(pageContext.__refDocMapping.index.ast.children, 'name', 'guide-index');
     this.setState({ guides: guides.children });
   }
-
-  findGuideProperty = (nodes, propertyName) => {
-    let result;
-    const iter = node => {
-      if (node.name === propertyName) {
-        result = node;
-        return true;
-      }
-      return Array.isArray(node.children) && node.children.some(iter);
-    };
-
-    nodes.some(iter);
-    return result;
-  };
 
   render() {
     const { pageContext } = this.props;

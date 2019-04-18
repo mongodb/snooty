@@ -1,0 +1,13 @@
+{
+  "type": "role",
+  "position": {
+    "start": {
+      "line": 0
+    }
+  },
+  "name": "method",
+  "label": "ObjectId",
+  "target": "ObjectId",
+  "raw": "ObjectId",
+  "children": []
+}
