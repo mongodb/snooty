@@ -51,11 +51,18 @@ const validateEnvVariables = () => {
     };
   }
   // make sure formats are correct
-  if (process.env.NODE_ENV === 'production' && (!process.env.GATSBY_PREFIX.startsWith('/') || !process.env.DOCUMENTS.startsWith('/'))) {
-    return { 
-      error: true, 
-      message: 'ERROR with .env.* file: GATSBY_PREFIX and DOCUMENTS must be in format /<site>/<user>/<branch>' 
-    };
+  if (process.env.NODE_ENV === 'production') {
+    if (!process.env.GATSBY_PREFIX.startsWith('/')) {
+      return { 
+        error: true, 
+        message: 'ERROR with .env.* file: GATSBY_PREFIX must be in format /<site>/<user>/<branch>' 
+      };
+    } else if (!process.env.DOCUMENTS.startsWith('/')) {
+      return { 
+        error: true, 
+        message: 'ERROR with .env.* file: DOCUMENTS must be in format /<site>/<user>/<branch>' 
+      };
+    }
   }
   // create split prefix for use in stitch function
   DOCUMENTS = process.env.DOCUMENTS.substr(1).split('/');
