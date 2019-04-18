@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { REF_TARGETS } from '../../constants';
 
 const RoleRef = props => {
-  const {
-    nodeData,
-    refDocMapping: { REF_TARGETS },
-  } = props;
+  const { nodeData } = props;
   const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
   // make sure target is hardcoded in list for now
   // TODO: chat w andrew about how to move forward with sphinx inventory files
@@ -24,9 +22,6 @@ RoleRef.propTypes = {
   nodeData: PropTypes.shape({
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     target: PropTypes.string.isRequired,
-  }).isRequired,
-  refDocMapping: PropTypes.shape({
-    REF_TARGETS: PropTypes.object.isRequired,
   }).isRequired,
 };
 

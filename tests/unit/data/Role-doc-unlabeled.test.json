@@ -1,0 +1,13 @@
+{
+  "type": "role",
+  "position": {
+    "start": {
+      "line": 45
+    }
+  },
+  "name": "doc",
+  "label": "/server/drivers",
+  "target": "/server/drivers",
+  "raw": "/server/drivers",
+  "children": []
+}
