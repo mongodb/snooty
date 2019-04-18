@@ -33,4 +33,12 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.tsx'] }],
     'react/no-array-index-key': 0,
   },
+  "overrides": [
+    {
+      "files": ['*.js'],
+      "rules": {
+        "import/no-cycle": "off"
+      }
+    }
+  ]
 };
