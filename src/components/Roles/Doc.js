@@ -14,7 +14,7 @@ const RoleDoc = ({ nodeData: { label, target }, refDocMapping }) => {
 
 RoleDoc.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    label: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
   }).isRequired,
   refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,

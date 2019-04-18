@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Card from './Card';
 import { findKeyValuePair } from '../util';
 
+const DEFAULT_COMPLETION_TIME = 15;
 const CATEGORIES = [
   {
     name: 'Getting Started',
@@ -27,7 +28,9 @@ const Category = ({ cards, category, refDocMapping }) =>
           let completionTime;
           if (card.name === 'card') {
             const cardSlug = card.argument[0].value;
-            completionTime = findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value;
+            completionTime =
+              findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value ||
+              DEFAULT_COMPLETION_TIME;
           }
           return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
         })}
