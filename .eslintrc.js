@@ -25,6 +25,7 @@ module.exports = {
   rules: {
     'no-underscore-dangle': 0,
     'prefer-destructuring': 0,
+    'import/no-cycle': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/label-has-associated-control': [ 2, {
       'controlComponents': ['span'],
