@@ -25,6 +25,7 @@ module.exports = {
   rules: {
     'no-underscore-dangle': 0,
     'prefer-destructuring': 0,
+    'import/no-cycle': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/label-has-associated-control': [ 2, {
       'controlComponents': ['span'],
@@ -33,12 +34,4 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.tsx'] }],
     'react/no-array-index-key': 0,
   },
-  "overrides": [
-    {
-      "files": ['*.js'],
-      "rules": {
-        "import/no-cycle": "off"
-      }
-    }
-  ]
 };
