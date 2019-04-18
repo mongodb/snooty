@@ -3,7 +3,7 @@ import { DEPLOYMENTS, LANGUAGES, PLATFORMS } from '../../src/constants';
 import { slugArray } from '../../src/testsetup';
 
 const oldUrl = 'https://docs.mongodb.com/guides/';
-const localUrl = 'http://127.0.0.1:9000/';
+const localUrl = `http://127.0.0.1:9000/${process.env.GATSBY_PREFIX}/`;
 
 /*
  * Replace characters to standardize between the two builders.
@@ -33,7 +33,7 @@ const getTextFromUrl = async (page, baseUrl, slug, parentKey = undefined, obj = 
   if (parentKey && obj) {
     await setLocalStorage(page, parentKey, obj);
   }
-  const bodyElement = await page.$(`div[data-pagename="${slug}"]`);
+  const bodyElement = await page.$('.body');
   return page.evaluate(element => element.innerText, bodyElement);
 };
 
@@ -68,7 +68,7 @@ describe('without local storage', () => {
       expect(diffObj).toEqual([]);
     });
   });
-  afterAll(() => console.log(`errors: ${errors}`))
+  afterAll(() => console.log(`errors: ${errors}`));
 });
 
 describe('with local storage', () => {
