@@ -30,8 +30,8 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         href="https://docs.mongodb.com/osd.xml"
         title="MongoDB Help"
       />
+      {headComponents}
     </head>
-    {headComponents}
     <body
       {...bodyAttributes}
       data-project="guides"
