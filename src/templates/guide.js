@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
+import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
 
@@ -102,6 +103,7 @@ export default class Guide extends Component {
               activeTabs={activeTabs}
             />
             {this.createSections()}
+            <Widgets />
             <div className="footer">
               <div className="copyright">
                 <p>
