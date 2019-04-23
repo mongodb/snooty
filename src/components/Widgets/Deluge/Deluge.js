@@ -11,12 +11,12 @@ const EMAIL_ERROR_TEXT = 'Please enter a valid email address.';
 const EMAIL_PROMPT_TEXT = 'May we contact you about your feedback?';
 
 // Take a url and a query parameters object, and return the resulting url.
-function addQueryParameters(url, parameters) {
+const addQueryParameters = (url, parameters) => {
   const queryComponents = Object.keys(parameters).map(
     key => `${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(parameters[key]))}`
   );
   return `${url}?${queryComponents.join('&')}`;
-}
+};
 
 class Deluge extends Component {
   constructor(props) {
@@ -27,7 +27,6 @@ class Deluge extends Component {
       formLengthError: false,
       voteAcknowledgement: null,
     };
-    // this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit = vote => {
@@ -56,21 +55,23 @@ class Deluge extends Component {
   };
 
   sendRating = (vote, fields) => {
-    const path = `${this.props.project}/${this.props.path}`;
+    const { path, project } = this.props;
+    const response = fields;
+    const urlPath = `${project}/${path}`;
 
     // Report to Segment
     const analyticsData = {
       useful: vote,
-      ...fields,
+      ...response,
     };
 
     try {
       const user = window.analytics.user();
       const segmentUID = user.id();
       if (segmentUID) {
-        fields.segmentUID = segmentUID.toString();
+        response.segmentUID = segmentUID.toString();
       } else {
-        fields.segmentAnonymousID = user.anonymousId().toString();
+        response.segmentAnonymousID = user.anonymousId().toString();
       }
       window.analytics.track('Feedback Submitted', analyticsData);
     } catch (err) {
@@ -80,10 +81,10 @@ class Deluge extends Component {
     // Report to Deluge
     return new Promise((resolve, reject) => {
       const url = addQueryParameters(FEEDBACK_URL, {
-        ...fields,
+        ...response,
         v: vote,
-        p: path,
-        url: location.href,
+        p: urlPath,
+        url: window.location.href,
       });
 
       // Report this rating using an image GET to work around the
@@ -131,7 +132,6 @@ class Deluge extends Component {
         onSubmit={this.onSubmit}
         onClear={() => this.setState({ answers: {} })}
         canShowSuggestions={canShowSuggestions}
-        i
         handleOpenDrawer={openDrawer}
         error={hasError}
       >

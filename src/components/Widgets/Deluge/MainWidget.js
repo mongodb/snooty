@@ -147,4 +147,9 @@ MainWidget.propTypes = {
   canShowSuggestions: PropTypes.bool.isRequired,
 };
 
+MainWidget.defaultProps = {
+  children: null,
+  voteAcknowledgement: undefined,
+};
+
 export default MainWidget;

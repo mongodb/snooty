@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const FreeformQuestion = ({ errorText, hasError, placeholder, store }) => {
+const Input = props => <input {...props} />;
+
+const Textarea = props => <textarea {...props} />;
+
+const FormWithError = ({ children, errorText, hasError, placeholder, store }) => {
   const [error, setError] = useState(false);
   const [text, setText] = useState('');
 
@@ -22,6 +26,7 @@ const FreeformQuestion = ({ errorText, hasError, placeholder, store }) => {
 
   return (
     <div>
+      {children}
       <textarea placeholder={placeholder} onInput={handleChange} value={text} />
       <div className="error" style={{ visibility: error ? 'visible' : 'hidden' }}>
         {errorText}
@@ -30,17 +35,17 @@ const FreeformQuestion = ({ errorText, hasError, placeholder, store }) => {
   );
 };
 
-FreeformQuestion.propTypes = {
+FormWithError.propTypes = {
   errorText: PropTypes.string,
   hasError: PropTypes.func,
   placeholder: PropTypes.string,
   store: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-FreeformQuestion.defaultProps = {
+FormWithError.defaultProps = {
   errorText: 'This input contains an error.',
   hasError: () => false,
   placeholder: '',
 };
 
-export default FreeformQuestion;
+export default FormWithError;

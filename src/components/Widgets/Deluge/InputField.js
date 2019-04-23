@@ -54,8 +54,10 @@ InputField.propTypes = {
 };
 
 InputField.defaultProps = {
+  errorText: 'This field contains an error.',
   hasError: () => false,
   inputType: 'text',
+  placeholder: '',
 };
 
 export default InputField;

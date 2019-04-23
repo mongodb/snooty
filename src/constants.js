@@ -60,4 +60,12 @@ const REF_TARGETS = {
   'mongodb-supported-platforms': 'https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms',
 };
 
-export { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_TARGETS, stringifyTab };
+const SUGGESTION_WHITELIST = [
+  'tutorial/install-mongodb-on-windows',
+  'tutorial/install-mongodb-on-ubuntu',
+  'tutorial/query-documents',
+  'reference/method/db.collection.find',
+  'reference/method/db.collection.updateOne',
+];
+
+export { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_TARGETS, stringifyTab, SUGGESTION_WHITELIST };

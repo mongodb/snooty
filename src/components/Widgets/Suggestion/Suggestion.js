@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
+import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
 import SuggestionCardList from './SuggestionCardList';
-// import { reportAnalytics } from '../../js/util';
+import { reportAnalytics } from '../../../util';
 
 function getPageName() {
   const bodyElements = document.getElementsByClassName('body');
@@ -19,39 +19,35 @@ export default class Suggestion extends Component {
   constructor(props) {
     super(props);
 
-    // this.handleCloseDrawer = this.handleCloseDrawer.bind(this);
-    // this.handleDismissCard = this.handleDismissCard.bind(this);
-    // this.fetchStitchSuggestions = this.fetchStitchSuggestions.bind(this);
     this.pageName = getPageName();
 
     this.state = {
-      isLoaded: false,
       showThankYouMessage: false,
       suggestions: [],
     };
   }
 
-  /* componentDidMount() {
+  componentDidMount() {
     this.setupStitch();
-  } */
+  }
 
   handleCloseDrawer = () => {
     const { showThankYouMessage } = this.state;
     const { closeDrawer } = this.props;
 
     closeDrawer();
-    /* reportAnalytics('Suggestion Drawer Closed', {
+    reportAnalytics('Suggestion Drawer Closed', {
       userDismissedSuggestions: showThankYouMessage,
-    }); */
+    });
   };
 
   handleDismissCard = () => {
     this.setState({ showThankYouMessage: true });
-    // reportAnalytics('Suggestions Dismissed');
+    reportAnalytics('Suggestions Dismissed');
   };
 
-  /* setupStitch = () => {
-    const appName = 'ref_data-bnbxq';
+  setupStitch = () => {
+    const appName = process.env.GATSBY_STITCH_ID;
     this.stitchClient = Stitch.hasAppClient(appName)
       ? Stitch.defaultAppClient
       : Stitch.initializeDefaultAppClient(appName);
@@ -61,33 +57,29 @@ export default class Suggestion extends Component {
         this.fetchStitchSuggestions();
       })
       .catch(err => {
-        console.log(err);
+        console.err(err);
       });
-  }; */
+  };
 
-  /* fetchStitchSuggestions = () => {
+  fetchStitchSuggestions = () => {
     this.stitchClient.callFunction('fetchSuggestions', [this.pageName]).then(
       result => {
         this.setState({
-          isLoaded: true,
           suggestions: result,
         });
       },
       error => {
         console.error('error:', error);
-        this.setState({
-          isLoaded: true,
-        });
       }
     );
-  }; */
+  };
 
   render() {
     const { showThankYouMessage, suggestions } = this.state;
     const { drawerIsOpen } = this.props;
 
     const drawerIsOpenClass = drawerIsOpen ? 'is-open' : '';
-    let bodyDisplay; // eslint-disable-line init-declarations
+    let bodyDisplay;
 
     if (showThankYouMessage) {
       bodyDisplay = (

@@ -1,7 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const crypto = require('crypto');
-const uuidv1 = require('uuid/v1');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
 // where assets and documents are referenced
@@ -27,9 +25,9 @@ let stitchClient;
 
 const setupStitch = () => {
   return new Promise((resolve, reject) => {
-    stitchClient = Stitch.hasAppClient(process.env.STITCH_ID)
-      ? Stitch.getAppClient(process.env.STITCH_ID)
-      : Stitch.initializeAppClient(process.env.STITCH_ID);
+    stitchClient = Stitch.hasAppClient(process.env.GATSBY_STITCH_ID)
+      ? Stitch.getAppClient(process.env.GATSBY_STITCH_ID)
+      : Stitch.initializeAppClient(process.env.GATSBY_STITCH_ID);
     stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
       .then(user => {
@@ -44,30 +42,36 @@ const setupStitch = () => {
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
 const validateEnvVariables = () => {
   // make sure necessary env vars exist
-  if (!process.env.NAMESPACE || !process.env.STITCH_ID || !process.env.DOCUMENTS || process.env.GATSBY_PREFIX === undefined) {
-    return { 
-      error: true, 
-      message: 'ERROR with .env.* file: parameters required are GATSBY_PREFIX, DOCUMENTS, NAMESPACE, and STITCH_ID' 
+  if (
+    !process.env.NAMESPACE ||
+    !process.env.GATSBY_STITCH_ID ||
+    !process.env.DOCUMENTS ||
+    process.env.GATSBY_PREFIX === undefined
+  ) {
+    return {
+      error: true,
+      message:
+        'ERROR with .env.* file: parameters required are GATSBY_PREFIX, DOCUMENTS, NAMESPACE, and GATSBY_STITCH_ID',
     };
   }
   // make sure formats are correct
   if (process.env.NODE_ENV === 'production' && !process.env.GATSBY_PREFIX.startsWith('/')) {
-    return { 
-      error: true, 
-      message: 'ERROR with .env.* file: GATSBY_PREFIX must be in format /<site>/<user>/<branch>' 
+    return {
+      error: true,
+      message: 'ERROR with .env.* file: GATSBY_PREFIX must be in format /<site>/<user>/<branch>',
     };
-  } 
+  }
   if (!process.env.DOCUMENTS.startsWith('/')) {
-    return { 
-      error: true, 
-      message: 'ERROR with .env.* file: DOCUMENTS must be in format /<site>/<user>/<branch>' 
+    return {
+      error: true,
+      message: 'ERROR with .env.* file: DOCUMENTS must be in format /<site>/<user>/<branch>',
     };
   }
   // create split prefix for use in stitch function
   DOCUMENTS = process.env.DOCUMENTS.substr(1).split('/');
   NAMESPACE_ASSETS = `${process.env.NAMESPACE.split('/')[0]}/assets`;
   return {
-    error: false
+    error: false,
   };
 };
 
@@ -89,7 +93,7 @@ exports.sourceNodes = async ({ actions }) => {
 
   if (envResults.error) {
     throw Error(envResults.message);
-  } 
+  }
 
   // wait to connect to stitch
   await setupStitch();
@@ -181,11 +185,25 @@ exports.createPages = ({ graphql, actions }) => {
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
-            __stitchID: process.env.STITCH_ID,
           },
         });
       }
     }
     resolve();
   });
+};
+
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /mongodb-stitch-browser-sdk/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
 };

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Suggestion from './Suggestion/Suggestion';
-import Deluge from './Deluge/deluge';
-
-const whitelist = [
-  'tutorial/install-mongodb-on-windows',
-  'tutorial/install-mongodb-on-ubuntu',
-  'tutorial/query-documents',
-  'reference/method/db.collection.find',
-  'reference/method/db.collection.updateOne',
-];
+import Deluge from './Deluge/Deluge';
+import { SUGGESTION_WHITELIST } from '../../constants';
 
 export default class Widgets extends Component {
   constructor(props) {
@@ -17,8 +10,6 @@ export default class Widgets extends Component {
     const { path } = this.props;
 
     this.isSuggestionPage = this.isSuggestionPage(path);
-    // this.openDrawer = this.openDrawer.bind(this);
-    // this.closeDrawer = this.closeDrawer.bind(this);
 
     this.state = {
       drawerIsOpen: false,
@@ -27,7 +18,7 @@ export default class Widgets extends Component {
   }
 
   isSuggestionPage = path => {
-    return whitelist.indexOf(path) >= 0;
+    return SUGGESTION_WHITELIST.includes(path);
   };
 
   openDrawer = () => {

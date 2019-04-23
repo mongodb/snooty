@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function BinaryQuestion({ children, store }) {
+const BinaryQuestion = ({ children, store }) => {
   const value = store.get();
   const upvoteClass = value === true ? 'selected' : '';
   const downvoteClass = value === false ? 'selected' : '';
@@ -15,9 +15,11 @@ export default function BinaryQuestion({ children, store }) {
       </div>
     </div>
   );
-}
+};
 
 BinaryQuestion.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
   store: PropTypes.objectOf(PropTypes.func).isRequired,
 };
+
+export default BinaryQuestion;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function addQueryParameters(url, pageName) {
+const addQueryParameters = (url, pageName) => {
   return `${url}?suggestor=${encodeURIComponent(pageName)}`;
-}
+};
 
 const SuggestionCard = ({ pageName, suggestion }) => {
   const urlWithParams = addQueryParameters(suggestion.url, pageName);
@@ -25,9 +25,9 @@ const EmptyCard = ({ handleDismissCard }) => (
   </div>
 );
 
-const SuggestionCardList = ({ handleDismissCard, suggestions }) => {
+const SuggestionCardList = ({ handleDismissCard, pageName, suggestions }) => {
   const suggestionCards = suggestions.map(suggestion => (
-    <SuggestionCard suggestion={suggestion} key={suggestion.url} pageName={this.props.pageName} />
+    <SuggestionCard suggestion={suggestion} key={suggestion.url} pageName={pageName} />
   ));
   return (
     <div>
