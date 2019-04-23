@@ -4,6 +4,10 @@ const crypto = require('crypto');
 const uuidv1 = require('uuid/v1');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
+// log errors to file
+const access = fs.createWriteStream('__stderr.log', {encoding: 'utf8', flags: 'a'});
+process.stderr.write = access.write.bind(access);
+
 // where assets and documents are referenced
 let NAMESPACE_ASSETS = null;
 let DOCUMENTS = null;
@@ -88,6 +92,7 @@ exports.sourceNodes = async ({ actions }) => {
   const envResults = validateEnvVariables();
 
   if (envResults.error) {
+    console.error(envResults.message);
     throw Error(envResults.message);
   } 
 
@@ -103,7 +108,9 @@ exports.sourceNodes = async ({ actions }) => {
       RESOLVED_REF_DOC_MAPPING = JSON.parse(fileContent);
       console.log(`*** Using test data from "${fullpath}"`);
     } catch (e) {
-      throw Error(`ERROR with test data file: ${e}`);
+      const errMsg = `ERROR with test data file: ${e}`;
+      console.error(errMsg);
+      throw Error(errMsg);
     }
   } else {
     // start from index document
