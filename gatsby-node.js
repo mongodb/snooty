@@ -5,7 +5,7 @@ const uuidv1 = require('uuid/v1');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
 // log errors to file
-const access = fs.createWriteStream('__stderr.log', {encoding: 'utf8', flags: 'a'});
+const access = fs.createWriteStream('__stderr.log', {encoding: 'utf8', flags: 'w'});
 process.stderr.write = access.write.bind(access);
 
 // where assets and documents are referenced
