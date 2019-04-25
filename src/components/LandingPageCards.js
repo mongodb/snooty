@@ -19,24 +19,28 @@ const CATEGORIES = [
   },
 ];
 
-const Category = ({ cards, category, refDocMapping }) =>
-  cards.length > 0 && (
-    <section className="guide-category" key={category.iconSlug}>
-      <div className={`guide-category__title guide-category__title--${category.iconSlug}`}>{category.name}</div>
-      <div className="guide-category__guides">
-        {cards.map((card, index) => {
-          let completionTime;
-          if (card.name === 'card') {
-            const cardSlug = card.argument[0].value;
-            completionTime =
-              findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value ||
-              DEFAULT_COMPLETION_TIME;
-          }
-          return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
-        })}
-      </div>
-    </section>
+const Category = ({ cards, category, refDocMapping }) => {
+  const getCardCompletionTime = cardSlug =>
+    findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value || DEFAULT_COMPLETION_TIME;
+
+  return (
+    cards.length > 0 && (
+      <section className="guide-category" key={category.iconSlug}>
+        <div className={`guide-category__title guide-category__title--${category.iconSlug}`}>{category.name}</div>
+        <div className="guide-category__guides">
+          {cards.map((card, index) => {
+            let completionTime;
+            if (card.name === 'card') {
+              const cardSlug = card.argument[0].value;
+              completionTime = getCardCompletionTime(cardSlug);
+            }
+            return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
+          })}
+        </div>
+      </section>
+    )
   );
+};
 
 const LandingPageCards = ({ guides, refDocMapping }) =>
   CATEGORIES.map(category => (
@@ -45,7 +49,7 @@ const LandingPageCards = ({ guides, refDocMapping }) =>
         const cardName =
           card.name === 'card' ? card.argument[0].value : card.children[0].children[0].children[0].children[0].value;
         return (
-          category.name === findKeyValuePair(refDocMapping[cardName].ast.children, 'name', 'type').argument[0].value
+          category.name === findKeyValuePair(refDocMapping[cardName].ast.children, 'name', 'category').argument[0].value
         );
       })}
       category={category}
