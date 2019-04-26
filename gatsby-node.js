@@ -51,7 +51,7 @@ const validateEnvVariables = () => {
     };
   }
   // make sure formats are correct
-  if (process.env.NODE_ENV === 'production' && (!process.env.GATSBY_PREFIX.startsWith('/') || process.env.GATSBY_PREFIX.split('/').length !== 4)) {
+  if (process.env.NODE_ENV === 'production' && !process.env.GATSBY_PREFIX.startsWith('/')) {
     return { 
       error: true, 
       message: 'ERROR with .env.* file: GATSBY_PREFIX must be in format /<site>/<user>/<branch>' 
