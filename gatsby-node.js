@@ -4,10 +4,6 @@ const crypto = require('crypto');
 const uuidv1 = require('uuid/v1');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
-// log errors to file
-const access = fs.createWriteStream('__stderr.log', {encoding: 'utf8', flags: 'w'});
-process.stderr.write = access.write.bind(access);
-
 // where assets and documents are referenced
 let NAMESPACE_ASSETS = null;
 let DOCUMENTS = null;
@@ -55,16 +51,22 @@ const validateEnvVariables = () => {
     };
   }
   // make sure formats are correct
-  if (process.env.NODE_ENV === 'production' && !process.env.GATSBY_PREFIX.startsWith('/')) {
+  if (process.env.NODE_ENV === 'production' && (!process.env.GATSBY_PREFIX.startsWith('/') || process.env.GATSBY_PREFIX.split('/').length !== 4)) {
     return { 
       error: true, 
       message: 'ERROR with .env.* file: GATSBY_PREFIX must be in format /<site>/<user>/<branch>' 
     };
   } 
-  if (!process.env.DOCUMENTS.startsWith('/')) {
+  if (!process.env.DOCUMENTS.startsWith('/') || process.env.DOCUMENTS.split('/').length !== 4) {
     return { 
       error: true, 
       message: 'ERROR with .env.* file: DOCUMENTS must be in format /<site>/<user>/<branch>' 
+    };
+  }
+  if (process.env.NAMESPACE.split('/').length !== 2) {
+    return { 
+      error: true, 
+      message: 'ERROR with .env.* file: NAMESPACE must be in format <db>/<collection>' 
     };
   }
   // create split prefix for use in stitch function
@@ -92,7 +94,6 @@ exports.sourceNodes = async ({ actions }) => {
   const envResults = validateEnvVariables();
 
   if (envResults.error) {
-    console.error(envResults.message);
     throw Error(envResults.message);
   } 
 
@@ -109,7 +110,6 @@ exports.sourceNodes = async ({ actions }) => {
       console.log(`*** Using test data from "${fullpath}"`);
     } catch (e) {
       const errMsg = `ERROR with test data file: ${e}`;
-      console.error(errMsg);
       throw Error(errMsg);
     }
   } else {

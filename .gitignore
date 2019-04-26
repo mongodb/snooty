@@ -7,4 +7,3 @@ docs-tools/
 coverage/
 .coverage
 .env.*
-__stderr.log
