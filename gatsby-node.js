@@ -109,8 +109,7 @@ exports.sourceNodes = async ({ actions }) => {
       RESOLVED_REF_DOC_MAPPING = JSON.parse(fileContent);
       console.log(`*** Using test data from "${fullpath}"`);
     } catch (e) {
-      const errMsg = `ERROR with test data file: ${e}`;
-      throw Error(errMsg);
+      throw Error(`ERROR with test data file: ${e}`);
     }
   } else {
     // start from index document
