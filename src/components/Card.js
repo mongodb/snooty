@@ -7,8 +7,7 @@ import { setLocalValue } from '../localStorage';
 const CardPills = ({ pillsNode, pillsetName }) => {
   const getPillTitle = node => node.children[0].children[0].value;
 
-  // Get the name of each pill.
-  // If the total character length of pills > 50, truncate them and add a "See All" pill.
+  // Get the name of each pill. If the total character length of pills > 50, truncate them and add a "See All" pill.
   const mapPills = node => {
     let totalLength = 0;
     let isTruncated = false;
@@ -107,7 +106,7 @@ const Card = ({ card, refDocMapping, time }) => {
           <div className="guide__body" />
         )}
         {card.name !== 'multi-card' && languagesNode && <CardPills pillsNode={languagesNode} pillsetName="drivers" />}
-        {card.name === 'card' && <div className="guide__time">{time} min</div>}
+        {card.name === 'card' && <div className="guide__time">{time}min</div>}
       </React.Fragment>
     );
     if (card.name === 'multi-card') {

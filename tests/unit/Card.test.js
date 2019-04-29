@@ -12,38 +12,40 @@ const mountCard = ({ card, refDocMapping, time }) =>
 const shallowCard = ({ card, refDocMapping, time }) =>
   shallow(<Card card={card} refDocMapping={refDocMapping} time={time} />);
 
-describe('when a standard card is mounted', () => {
-  let wrapper;
-  let shallowWrapper;
+describe('Card component', () => {
+  describe('when a standard card is mounted', () => {
+    let wrapper;
+    let shallowWrapper;
 
-  beforeAll(() => {
-    wrapper = mountCard({ card: cardData, refDocMapping: refDocMappingData, time: '20' });
-    shallowWrapper = shallowCard({ card: cardData, refDocMapping: refDocMappingData, time: '20' });
+    beforeAll(() => {
+      wrapper = mountCard({ card: cardData, refDocMapping: refDocMappingData, time: '20' });
+      shallowWrapper = shallowCard({ card: cardData, refDocMapping: refDocMappingData, time: '20' });
+    });
+
+    it('renders correctly', () => {
+      expect(shallowWrapper).toMatchSnapshot();
+    });
+
+    it('displays a time estimate', () => {
+      expect(wrapper.find('.guide__time')).toHaveLength(1);
+    });
   });
 
-  it('renders correctly', () => {
-    expect(shallowWrapper).toMatchSnapshot();
-  });
+  describe('when a multi card is mounted', () => {
+    let wrapper;
+    let shallowWrapper;
 
-  it('displays a time estimate', () => {
-    expect(wrapper.find('.guide__time')).toHaveLength(1);
-  });
-});
+    beforeAll(() => {
+      wrapper = mountCard({ card: multiCardData, refDocMapping: refDocMappingData, time: '20' });
+      shallowWrapper = shallowCard({ card: multiCardData, refDocMapping: refDocMappingData, time: '20' });
+    });
 
-describe('when a multi card is mounted', () => {
-  let wrapper;
-  let shallowWrapper;
+    it('renders correctly', () => {
+      expect(shallowWrapper).toMatchSnapshot();
+    });
 
-  beforeAll(() => {
-    wrapper = mountCard({ card: multiCardData, refDocMapping: refDocMappingData, time: '20' });
-    shallowWrapper = shallowCard({ card: multiCardData, refDocMapping: refDocMappingData, time: '20' });
-  });
-
-  it('renders correctly', () => {
-    expect(shallowWrapper).toMatchSnapshot();
-  });
-
-  it('does not display a time estimate', () => {
-    expect(wrapper.find('.guide__time')).toHaveLength(0);
+    it('does not display a time estimate', () => {
+      expect(wrapper.find('.guide__time')).toHaveLength(0);
+    });
   });
 });
