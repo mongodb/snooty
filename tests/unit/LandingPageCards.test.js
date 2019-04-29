@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import LandingPageCards from '../../src/components/LandingPageCards';
+import LandingPageCards from '../../src/components/LandingPage/LandingPageCards';
 
 import mockRefDocMapping from './data/index.test.json';
 import mockRefDocMappingMultiple from './data/indexTwoGuideCategories.test.json';
@@ -39,6 +39,18 @@ describe('LandingPageCards component', () => {
 
     it('shows seven cards', () => {
       expect(wrapper.find('Card')).toHaveLength(7);
+    });
+
+    it('shows a set of language pills', () => {
+      expect(wrapper.find('ul.guide__pills')).toHaveLength(1);
+    });
+
+    it('shows a See More button', () => {
+      expect(wrapper.find('.guide__pill--seeall')).toHaveLength(1);
+    });
+
+    it('shows 5 pills (4 languages + 1 See More button)', () => {
+      expect(wrapper.find('li.guide__pill')).toHaveLength(5);
     });
   });
 

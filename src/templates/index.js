@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LandingPageCards from '../components/LandingPageCards';
+import LandingPageCards from '../components/LandingPage/LandingPageCards';
 import { findKeyValuePair } from '../util';
 
 export default class Index extends Component {

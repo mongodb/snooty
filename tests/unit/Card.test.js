@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Card from '../../src/components/Card';
+import Card from '../../src/components/LandingPage/Card';
 
 import cardData from './data/Card.test.json';
 import multiCardData from './data/MultiCard.test.json';
