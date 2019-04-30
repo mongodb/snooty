@@ -23,3 +23,5 @@ export const reportAnalytics = (eventName, data) => {
     console.error(`Error reporting analytics: ${eventName}`, err);
   }
 };
+
+export const isBrowser = () => typeof window !== 'undefined';

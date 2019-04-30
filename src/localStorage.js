@@ -1,4 +1,4 @@
-const isBrowser = () => typeof window !== 'undefined';
+import { isBrowser } from './util';
 
 export const setLocalValue = (key, value) => {
   if (isBrowser()) {

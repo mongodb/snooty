@@ -20,7 +20,6 @@ You'll need to set some environment variables in two separate files at the root 
 
 #### `.env.production`
 ```
-NODE_ENV=production
 GATSBY_STITCH_ID=<STITCH_ID>
 NAMESPACE=<DB/COLLECTION>
 DOCUMENTS=/<SITE/USER/BRANCH>
@@ -29,7 +28,6 @@ GATSBY_PREFIX=/<SITE/USER/BRANCH>
 
 #### `.env.development`
 ```
-NODE_ENV=development
 GATSBY_STITCH_ID=<STITCH_ID>
 NAMESPACE=<DB/COLLECTION>
 DOCUMENTS=/<SITE/USER/BRANCH>

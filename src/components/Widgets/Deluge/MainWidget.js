@@ -11,31 +11,28 @@ class MainWidget extends Component {
     this.state = {
       state: STATE_INITIAL,
     };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onInitialVote = this.onInitialVote.bind(this);
-    this.onToggle = this.onToggle.bind(this);
   }
 
-  onSubmit() {
+  onSubmitFeedback = () => {
     const { state } = this.state;
-    const { onSubmit } = this.props;
+    const { onSubmitFeedback } = this.props;
 
-    onSubmit(state);
+    onSubmitFeedback(state);
     this.setState({ state: STATE_VOTED });
-  }
+  };
 
-  onInitialVote(e, state) {
-    const { handleOpenDrawer } = this.props;
+  onInitialVote = (e, state) => {
+    const { handleOpenDrawer, onSubmitVote } = this.props;
 
     e.stopPropagation();
     this.setState({ state });
+    onSubmitVote(state);
     if (state === false) {
       handleOpenDrawer();
     }
-  }
+  };
 
-  onToggle() {
+  onToggle = () => {
     const { state } = this.state;
     const { onClear } = this.props;
 
@@ -44,7 +41,7 @@ class MainWidget extends Component {
       return;
     }
     this.setState({ state: STATE_INITIAL });
-  }
+  };
 
   render() {
     const { state } = this.state;
@@ -81,7 +78,7 @@ class MainWidget extends Component {
               <button onClick={this.onToggle} type="button">
                 Cancel
               </button>
-              <button className="primary" onClick={this.onSubmit} disabled={error} type="submit">
+              <button className="primary" onClick={this.onSubmitFeedback} disabled={error} type="submit">
                 Submit
               </button>
             </div>
@@ -101,7 +98,7 @@ class MainWidget extends Component {
               <button onClick={this.onToggle} type="button">
                 Cancel
               </button>
-              <button className="primary" onClick={this.onSubmit} disabled={error} type="submit">
+              <button className="primary" onClick={this.onSubmitFeedback} disabled={error} type="submit">
                 Submit
               </button>
             </div>
@@ -139,7 +136,8 @@ class MainWidget extends Component {
 
 MainWidget.propTypes = {
   error: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmitFeedback: PropTypes.func.isRequired,
+  onSubmitVote: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
   children: PropTypes.arrayOf(PropTypes.node),
   voteAcknowledgement: PropTypes.string,
