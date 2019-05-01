@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardPills component renders correctly 1`] = `
+<Pills
+  activeClass="guide__pill--active"
+  handleClick={[Function]}
+  isTruncated={true}
+  liClass=""
+  pills={
+    Array [
+      "shell",
+      "compass",
+      "python",
+      "java-sync",
+    ]
+  }
+  ulClass=""
+/>
+`;
