@@ -68,7 +68,7 @@ npm test  # alias for npm run test
 Unit tests are located in the `tests/unit/` directory. To run only unit tests, use:
 
 ```shell
-npm run test-unit
+npm run test:unit
 ```
 
 ### Running individual suites

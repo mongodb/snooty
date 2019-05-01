@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pills component renders correctly 1`] = `
+<ul
+  className="guide__pills "
+  role="tablist"
+>
+  <li
+    className="guide__pill  "
+    data-tabid="python"
+    key="0"
+  >
+    <span
+      onClick={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      Python
+    </span>
+  </li>
+  <li
+    className="guide__pill  "
+    data-tabid="compass"
+    key="1"
+  >
+    <span
+      onClick={[Function]}
+      role="button"
+      tabIndex={1}
+    >
+      Compass
+    </span>
+  </li>
+  <li
+    className="guide__pill  "
+    data-tabid="motor"
+    key="2"
+  >
+    <span
+      onClick={[Function]}
+      role="button"
+      tabIndex={2}
+    >
+      Motor
+    </span>
+  </li>
+  <li
+    className="guide__pill  "
+    data-tabid="go"
+    key="3"
+  >
+    <span
+      onClick={[Function]}
+      role="button"
+      tabIndex={3}
+    >
+      Go
+    </span>
+  </li>
+</ul>
+`;
