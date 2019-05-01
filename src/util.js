@@ -19,6 +19,6 @@ export const findKeyValuePair = (nodes, key, value) => {
 // export const getPrefix = () => process.env.GATSBY_PREFIX || ''
 export const getPrefix = () =>
   process.env.GATSBY_PREFIX ||
-  (process.env.NODE_ENV === 'development'
-    ? ''
-    : `/${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`);
+  (process.env.NODE_ENV === 'production'
+    ? `/${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`
+    : '');
