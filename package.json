@@ -1,4 +1,7 @@
 {
+  "name": "snooty",
+  "version": "0.1.0",
+  "repository": "github:mongodb/snooty",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
@@ -28,10 +31,11 @@
     "webpack-dev-server": ">=3.1.11"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "webpack --mode development",
+    "build": "gatsby build --prefix-paths",
+    "develop": "gatsby develop --prefix-paths",
     "lint": "eslint src/ tests/",
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
+    "serve": "gatsby serve --prefix-paths",
     "test": "jest",
     "test-regression": "GATSBY_PREFIX=guides/andrew/master jest regression --setupFiles dotenv/config",
     "test-unit": "jest unit"
