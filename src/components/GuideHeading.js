@@ -9,12 +9,8 @@ const GuideHeading = ({ activeTabs, cloud, drivers, sections, setActiveTab, ...r
     return sections.filter(s => s[params[0]] === params[1])[0];
   };
 
-  const setActiveCloudPill = pill => {
-    setActiveTab(pill, 'cloud');
-  };
-
-  const setActiveDriversPill = pill => {
-    setActiveTab(pill, 'drivers');
+  const setActivePill = pillsetName => pill => {
+    setActiveTab(pill, pillsetName);
   };
 
   return (
@@ -38,7 +34,7 @@ const GuideHeading = ({ activeTabs, cloud, drivers, sections, setActiveTab, ...r
             liClass="guide__deploymentpill"
             activePill={activeTabs.cloud}
             activeClass="guide__deploymentpill--active"
-            handleClick={setActiveCloudPill}
+            handleClick={setActivePill('cloud')}
             dataTabPreference="deployments"
           />
         </div>
@@ -54,7 +50,7 @@ const GuideHeading = ({ activeTabs, cloud, drivers, sections, setActiveTab, ...r
             pills={drivers}
             ulClass="pillstrip-declaration"
             activePill={activeTabs.drivers}
-            handleClick={setActiveDriversPill}
+            handleClick={setActivePill('drivers')}
             dataTabPreference="languages"
           />
         </div>

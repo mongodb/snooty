@@ -43,8 +43,8 @@ Pills.defaultProps = {
   activePill: undefined,
   dataTabPreference: undefined,
   isTruncated: false,
-  liClass: undefined,
-  ulClass: undefined,
+  liClass: '',
+  ulClass: '',
 };
 
 export default Pills;

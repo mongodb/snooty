@@ -2,7 +2,7 @@
 
 exports[`Pills component renders correctly 1`] = `
 <ul
-  className="guide__pills undefined"
+  className="guide__pills "
   role="tablist"
 >
   <li

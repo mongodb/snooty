@@ -19,7 +19,9 @@ const CardPills = ({ pillsNode, pillsetName }) => {
       } else {
         pills.push(pill);
       }
-      totalLength += stringifyTab(pill).length + 4;
+      // Include estimated padding length in the total pillset length
+      const paddingLength = 4;
+      totalLength += stringifyTab(pill).length + paddingLength;
     });
     return [pills, isTruncated];
   };

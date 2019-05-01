@@ -5,6 +5,7 @@ exports[`CardPills component renders correctly 1`] = `
   activeClass="guide__pill--active"
   handleClick={[Function]}
   isTruncated={true}
+  liClass=""
   pills={
     Array [
       "shell",
@@ -13,5 +14,6 @@ exports[`CardPills component renders correctly 1`] = `
       "java-sync",
     ]
   }
+  ulClass=""
 />
 `;
