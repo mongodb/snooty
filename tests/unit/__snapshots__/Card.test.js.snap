@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`when a multi card is mounted renders correctly 1`] = `
+exports[`Card component when a multi card is mounted renders correctly 1`] = `
 <div
   className="guide guide--jumbo guide--expanded"
 >
@@ -73,13 +73,10 @@ exports[`when a multi card is mounted renders correctly 1`] = `
       </a>
     </li>
   </ul>
-  <ul
-    className="guide__pills"
-  />
 </div>
 `;
 
-exports[`when a standard card is mounted renders correctly 1`] = `
+exports[`Card component when a standard card is mounted renders correctly 1`] = `
 <a
   className="guide guide--regular"
   href="server/install"
@@ -92,14 +89,11 @@ exports[`when a standard card is mounted renders correctly 1`] = `
   <div
     className="guide__body"
   />
-  <ul
-    className="guide__pills"
-  />
   <div
     className="guide__time"
   >
     20
-     min
+    min
   </div>
 </a>
 `;

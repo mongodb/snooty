@@ -5,7 +5,9 @@ import Index from '../../src/templates/index';
 // data for this component
 import mockData from './data/index.test.json';
 
-it('renders correctly', () => {
-  const tree = shallow(<Index pageContext={{ __refDocMapping: mockData }} />);
-  expect(tree).toMatchSnapshot();
+describe('Landing Page', () => {
+  it('renders correctly', () => {
+    const tree = shallow(<Index pageContext={{ __refDocMapping: mockData }} />);
+    expect(tree).toMatchSnapshot();
+  });
 });
