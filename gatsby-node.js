@@ -49,9 +49,9 @@ const validateEnvVariables = () => {
   ) {
     return {
       error: true,
-      message: `ERROR with .env.${
+      message: `${
         process.env.NODE_ENV
-      } file: parameters required are NAMESPACE, GATSBY_STITCH_ID, GATSBY_SITE, GATSBY_USER, and GATSBY_BRANCH`,
+      } requires the variables NAMESPACE, GATSBY_STITCH_ID, GATSBY_SITE, GATSBY_USER, and GATSBY_BRANCH`,
     };
   }
   // make sure formats are correct
@@ -62,9 +62,9 @@ const validateEnvVariables = () => {
   ) {
     return {
       error: true,
-      message: `ERROR with .env.${
+      message: `within .env.${
         process.env.NODE_ENV
-      } file: GATSBY_PREFIX must start with a slash: GATSBY_PREFIX=/<PREFIX_NAME>`,
+      }, GATSBY_PREFIX must start with a slash: GATSBY_PREFIX=/<PREFIX_NAME>`,
     };
   }
   // create split prefix for use in stitch function
@@ -119,7 +119,7 @@ exports.sourceNodes = async ({ actions }) => {
 
     // resolve references/urls to documents
     RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [
-      DOCUMENTS,
+      DOCUMENTS.split('/'),
       process.env.NAMESPACE,
       documents,
       RESOLVED_REF_DOC_MAPPING,

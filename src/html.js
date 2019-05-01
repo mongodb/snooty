@@ -35,9 +35,9 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
     </head>
     <body
       {...bodyAttributes}
-      data-project="guides"
+      data-project={process.env.GATSBY_SITE}
       data-project-title="MongoDB Guides"
-      data-branch="DOCSP-3279"
+      data-branch={process.env.GATSBY_BRANCH}
       data-enable-marian="1"
     >
       <div
