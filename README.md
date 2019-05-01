@@ -1,8 +1,8 @@
-# Front-end for Docs
+# MongoDB Docs Front-End
 
 Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 
-## Installation:
+## Installation
 
 ```shell
 npm install
@@ -14,9 +14,11 @@ If this is your first time running the site you'll need the static directory:
 make static
 ```
 
-You'll need to set some ENV variables in two separate files at the root of this directory for separate production/development environments.
+### .env file setup
 
-`.env.production`
+You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments.
+
+#### `.env.production`
 ```
 NODE_ENV=production
 STITCH_ID=<STITCH_ID> 
@@ -25,7 +27,7 @@ DOCUMENTS=/<SITE/USER/BRANCH>
 GATSBY_PREFIX=/<SITE/USER/BRANCH>
 ```
 
-`.env.development`
+#### `.env.development`
 ```
 NODE_ENV=development
 STITCH_ID=<STITCH_ID> 
@@ -34,20 +36,20 @@ DOCUMENTS=/<SITE/USER/BRANCH>
 GATSBY_PREFIX=''
 ```
 
-## Running locally:
+## Running locally
 
 ```shell
-gatsby develop --prefix-paths
+npm run develop
 ```
 
 To build and serve the site, run the following commands:
 
 ```shell
-gatsby build --prefix-paths
-gatsby serve --prefix-paths
+$ npm run build
+$ npm run serve
 ```
 
-## Using mock test data:
+## Using mock test data
 
 Every time you run the application without the flag below, the data retrieved for the docs site is stored in `tests/unit/data/site/__testDataLatest.json`. There is also a reference data file in `tests/unit/data/site/__testData.json`. You can load either one of these into the Gatsby build with the flag:
 
@@ -62,7 +64,7 @@ Tests can be run using:
 npm test  # alias for npm run test
 ```
 
-### Unit Tests
+### Unit tests
 Unit tests are located in the `tests/unit/` directory. To run only unit tests, use:
 
 ```shell
