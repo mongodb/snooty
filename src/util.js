@@ -2,7 +2,7 @@
  * Recursively searches child nodes to find the specified key/value pair.
  * Prevents us from having to rely on a fixed depth for properties in the AST.
  */
-const findKeyValuePair = (nodes, key, value) => {
+export const findKeyValuePair = (nodes, key, value) => {
   let result;
   const iter = node => {
     if (node[key] === value) {
@@ -16,4 +16,9 @@ const findKeyValuePair = (nodes, key, value) => {
   return result;
 };
 
-export { findKeyValuePair }; // eslint-disable-line import/prefer-default-export
+// export const getPrefix = () => process.env.GATSBY_PREFIX || ''
+export const getPrefix = () =>
+  process.env.GATSBY_PREFIX ||
+  (process.env.NODE_ENV === 'development'
+    ? ''
+    : `/${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`);
