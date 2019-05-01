@@ -20,9 +20,11 @@ import Strong from './Strong';
 import URIWriter from './URIWriter';
 import TitleReference from './TitleReference';
 
+import RoleClass from './Roles/Class';
 import RoleCode from './Roles/Code';
 import RoleDoc from './Roles/Doc';
 import RoleGUILabel from './Roles/GUILabel';
+import RoleApi from './Roles/Api';
 import RoleManual from './Roles/Manual';
 import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
@@ -34,9 +36,12 @@ export default class ComponentFactory extends Component {
     this.roles = {
       authrole: RoleCode,
       binary: RoleCode,
+      class: RoleClass,
+      'csharp-api': RoleApi,
       dbcommand: RoleCode,
       doc: RoleDoc,
       guilabel: RoleGUILabel,
+      'java-sync-api': RoleApi,
       manual: RoleManual,
       method: RoleCode,
       option: RoleCode,
@@ -76,7 +81,14 @@ export default class ComponentFactory extends Component {
       nodeData: { name, type },
     } = this.props;
     // do nothing with these nodes for now (cc. Andrew)
-    if (type === 'target' || type === 'class' || type === 'cssclass' || name === 'cssclass' || name === 'class') {
+    if (
+      type === 'target' ||
+      type === 'class' ||
+      type === 'cssclass' ||
+      name === 'cssclass' ||
+      name === 'class' ||
+      type === 'comment'
+    ) {
       return null;
     }
     const lookup = type === 'directive' ? name : type;
