@@ -16,4 +16,12 @@ const findKeyValuePair = (nodes, key, value) => {
   return result;
 };
 
-export { findKeyValuePair }; // eslint-disable-line import/prefer-default-export
+const reportAnalytics = (eventName, data) => {
+  try {
+    window.analytics.track(eventName, data);
+  } catch (err) {
+    console.error(`Error reporting analytics: ${eventName}`, err);
+  }
+};
+
+export { findKeyValuePair, reportAnalytics }; // eslint-disable-line import/prefer-default-export

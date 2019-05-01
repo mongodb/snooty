@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { stringifyTab } from '../constants';
+import { reportAnalytics } from '../util';
 
 const Pills = ({ activeClass, activePill, dataTabPreference, handleClick, isTruncated, liClass, pills, ulClass }) => {
   return (
@@ -14,6 +15,10 @@ const Pills = ({ activeClass, activePill, dataTabPreference, handleClick, isTrun
           <span
             onClick={() => {
               handleClick(pill);
+              reportAnalytics('Tab Selected', {
+                tabSet: pills,
+                tabSelected: pill,
+              });
             }}
             role="button"
             tabIndex={index}
