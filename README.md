@@ -19,7 +19,7 @@ make static
 You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments.
 
 #### `.env.production`
-Running Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
+Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 ```
 NAMESPACE=<DB>/<COLLECTION> 
 GATSBY_STITCH_ID=<STITCH_ID> 
@@ -37,7 +37,7 @@ GATSBY_PREFIX=/<descriptive-slug>
 If `GATSBY_PREFIX` is not set, a prefix will automatically be generated in the form of `/SITE/USER/BRANCH`.
 
 #### `.env.development`
-Running Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
+Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
 ```
 NAMESPACE=<DB>/<COLLECTION> 
 GATSBY_STITCH_ID=<STITCH_ID> 
