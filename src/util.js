@@ -16,7 +16,6 @@ export const findKeyValuePair = (nodes, key, value) => {
   return result;
 };
 
-// export const getPrefix = () => process.env.GATSBY_PREFIX || ''
 export const getPrefix = () =>
   process.env.GATSBY_PREFIX ||
   (process.env.NODE_ENV === 'production'
