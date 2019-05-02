@@ -5,6 +5,7 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import { LANGUAGES, DEPLOYMENTS } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
+import { getPrefix } from '../util';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -14,8 +15,8 @@ export default class Guide extends Component {
     let guideKeyInMapping = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     // get correct lookup key based on whether running dev/prod
-    if (process.env.GATSBY_PREFIX !== '') {
-      const documentPrefix = process.env.GATSBY_PREFIX.substr(1);
+    if (process.env.NODE_ENV === 'production') {
+      const documentPrefix = getPrefix().substr(1);
       guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
     }
 

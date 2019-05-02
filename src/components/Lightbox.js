@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { getPrefix } from '../util';
 
 const CAPTION_TEXT = 'click to enlarge';
 const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
 const Lightbox = ({ nodeData }) => {
   const [showModal, setShowModal] = useState(false);
-  const imgSrc = (process.env.GATSBY_PREFIX || '') + nodeData.argument[0].value;
+  const imgSrc = `${getPrefix()}${nodeData.argument[0].value}`;
   const altText = nodeData.options.alt ? nodeData.options.alt : imgSrc;
 
   const toggleShowModal = () => {

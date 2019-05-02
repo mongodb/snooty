@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from './Lightbox';
+import { getPrefix } from '../util';
 
 const Figure = ({ nodeData }) => {
   const imgRef = React.createRef();
   const [isLightboxSize, setIsLightboxSize] = useState(false);
-  const imgSrc = (process.env.GATSBY_PREFIX || '') + nodeData.argument[0].value;
+  const imgSrc = `${getPrefix()}${nodeData.argument[0].value}`;
 
   const imgShouldHaveLightbox = () => {
     const naturalArea = imgRef.current.naturalWidth * imgRef.current.naturalHeight;
