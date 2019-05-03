@@ -9,7 +9,6 @@ const RoleJavaSyncApi = ({
   },
 }) => {
   let href;
-  console.log(name);
   if (name === 'java-sync-api') {
     href = `http://mongodb.github.io/mongo-java-driver/3.7/javadoc/${target}`;
   } else if (name === 'csharp-api') {
