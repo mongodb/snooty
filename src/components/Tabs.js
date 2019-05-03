@@ -63,8 +63,9 @@ export default class Tabs extends Component {
                   onClick={() => {
                     setActiveTab(tabName, tabsetName);
                     reportAnalytics('Tab Selected', {
+                      tabId: tabName,
+                      title: stringifyTab(tabName),
                       tabSet: tabsetName,
-                      tabSelected: tabName,
                     });
                   }}
                 >
