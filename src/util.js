@@ -16,6 +16,15 @@ export const findKeyValuePair = (nodes, key, value) => {
   return result;
 };
 
+export const reportAnalytics = (eventName, data) => {
+  if (!window || !window.analytics) return;
+  try {
+    window.analytics.track(eventName, data);
+  } catch (err) {
+    console.error(`Error reporting analytics: ${eventName}`, err);
+  }
+};
+
 export const getPrefix = () =>
   process.env.GATSBY_PREFIX ||
   (process.env.NODE_ENV === 'production'
