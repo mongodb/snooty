@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RoleJavaSyncApi = ({
+const RoleApi = ({
   nodeData: {
     label: { value },
     name,
@@ -22,7 +22,7 @@ const RoleJavaSyncApi = ({
   );
 };
 
-RoleJavaSyncApi.propTypes = {
+RoleApi.propTypes = {
   nodeData: PropTypes.shape({
     label: PropTypes.shape({
       value: PropTypes.string.isRequired,
@@ -32,4 +32,4 @@ RoleJavaSyncApi.propTypes = {
   }).isRequired,
 };
 
-export default RoleJavaSyncApi;
+export default RoleApi;

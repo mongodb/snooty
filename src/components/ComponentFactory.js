@@ -20,11 +20,11 @@ import Strong from './Strong';
 import URIWriter from './URIWriter';
 import TitleReference from './TitleReference';
 
+import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
 import RoleCode from './Roles/Code';
 import RoleDoc from './Roles/Doc';
 import RoleGUILabel from './Roles/GUILabel';
-import RoleApi from './Roles/Api';
 import RoleManual from './Roles/Manual';
 import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
