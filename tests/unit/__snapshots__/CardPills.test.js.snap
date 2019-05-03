@@ -14,6 +14,7 @@ exports[`CardPills component renders correctly 1`] = `
       "java-sync",
     ]
   }
+  pillsetName="drivers"
   ulClass=""
 />
 `;
