@@ -35,6 +35,7 @@ const GuideHeading = ({ activeTabs, cloud, drivers, sections, setActiveTab, ...r
             activePill={activeTabs.cloud}
             activeClass="guide__deploymentpill--active"
             handleClick={setActivePill('cloud')}
+            pillsetName="cloud"
             dataTabPreference="deployments"
           />
         </div>
@@ -51,6 +52,7 @@ const GuideHeading = ({ activeTabs, cloud, drivers, sections, setActiveTab, ...r
             ulClass="pillstrip-declaration"
             activePill={activeTabs.drivers}
             handleClick={setActivePill('drivers')}
+            pillsetName="drivers"
             dataTabPreference="languages"
           />
         </div>
