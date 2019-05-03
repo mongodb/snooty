@@ -32,7 +32,7 @@ const CardPills = ({ pillsNode, pillsetName }) => {
     setLocalValue(pillsetName, pill);
   };
 
-  return <Pills pills={pills} handleClick={setActiveLanguage} isTruncated={isTruncated} />;
+  return <Pills pills={pills} pillsetName={pillsetName} handleClick={setActiveLanguage} isTruncated={isTruncated} />;
 };
 
 CardPills.propTypes = {
