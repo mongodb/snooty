@@ -1,7 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const crypto = require('crypto');
-const uuidv1 = require('uuid/v1');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
 // where assets and documents are referenced
@@ -16,7 +14,6 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 // different types of references
 const PAGES = [];
 const INCLUDE_FILES = [];
-const GITHUB_CODE_EXAMPLES = [];
 const ASSETS = [];
 
 // in-memory object with key/value = filename/document
@@ -27,9 +24,8 @@ let stitchClient;
 
 const setupStitch = () => {
   return new Promise((resolve, reject) => {
-    stitchClient = Stitch.hasAppClient(process.env.STITCH_ID)
-      ? Stitch.getAppClient(process.env.STITCH_ID)
-      : Stitch.initializeAppClient(process.env.STITCH_ID);
+    const stitchId = process.env.GATSBY_STITCH_ID;
+    stitchClient = Stitch.hasAppClient(stitchId) ? Stitch.getAppClient(stitchId) : Stitch.initializeAppClient(stitchId);
     stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
       .then(user => {
@@ -44,30 +40,38 @@ const setupStitch = () => {
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
 const validateEnvVariables = () => {
   // make sure necessary env vars exist
-  if (!process.env.NAMESPACE || !process.env.STITCH_ID || !process.env.DOCUMENTS || process.env.GATSBY_PREFIX === undefined) {
-    return { 
-      error: true, 
-      message: 'ERROR with .env.* file: parameters required are GATSBY_PREFIX, DOCUMENTS, NAMESPACE, and STITCH_ID' 
+  if (
+    !process.env.NAMESPACE ||
+    !process.env.GATSBY_STITCH_ID ||
+    !process.env.GATSBY_SITE ||
+    !process.env.GATSBY_USER ||
+    !process.env.GATSBY_BRANCH
+  ) {
+    return {
+      error: true,
+      message: `${
+        process.env.NODE_ENV
+      } requires the variables NAMESPACE, GATSBY_STITCH_ID, GATSBY_SITE, GATSBY_USER, and GATSBY_BRANCH`,
     };
   }
   // make sure formats are correct
-  if (process.env.NODE_ENV === 'production' && !process.env.GATSBY_PREFIX.startsWith('/')) {
-    return { 
-      error: true, 
-      message: 'ERROR with .env.* file: GATSBY_PREFIX must be in format /<site>/<user>/<branch>' 
-    };
-  } 
-  if (!process.env.DOCUMENTS.startsWith('/')) {
-    return { 
-      error: true, 
-      message: 'ERROR with .env.* file: DOCUMENTS must be in format /<site>/<user>/<branch>' 
+  if (
+    process.env.NODE_ENV === 'production' &&
+    process.env.GATSBY_PREFIX &&
+    !process.env.GATSBY_PREFIX.startsWith('/')
+  ) {
+    return {
+      error: true,
+      message: `within .env.${
+        process.env.NODE_ENV
+      }, GATSBY_PREFIX must start with a slash: GATSBY_PREFIX=/<PREFIX_NAME>`,
     };
   }
   // create split prefix for use in stitch function
-  DOCUMENTS = process.env.DOCUMENTS.substr(1).split('/');
+  DOCUMENTS = `${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`;
   NAMESPACE_ASSETS = `${process.env.NAMESPACE.split('/')[0]}/assets`;
   return {
-    error: false
+    error: false,
   };
 };
 
@@ -89,7 +93,7 @@ exports.sourceNodes = async ({ actions }) => {
 
   if (envResults.error) {
     throw Error(envResults.message);
-  } 
+  }
 
   // wait to connect to stitch
   await setupStitch();
@@ -107,7 +111,7 @@ exports.sourceNodes = async ({ actions }) => {
     }
   } else {
     // start from index document
-    const query = { _id: `${DOCUMENTS.join('/')}/index` };
+    const query = { _id: `${DOCUMENTS}/index` };
     const documents = await stitchClient.callFunction('fetchDocuments', [process.env.NAMESPACE, query]);
 
     // set data for index page
@@ -115,7 +119,7 @@ exports.sourceNodes = async ({ actions }) => {
 
     // resolve references/urls to documents
     RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [
-      DOCUMENTS,
+      DOCUMENTS.split('/'),
       process.env.NAMESPACE,
       documents,
       RESOLVED_REF_DOC_MAPPING,
@@ -126,20 +130,11 @@ exports.sourceNodes = async ({ actions }) => {
   for (const ref of Object.keys(RESOLVED_REF_DOC_MAPPING)) {
     if (ref.includes('includes/')) {
       INCLUDE_FILES.push(ref);
-    } else if (ref.includes('https://github.com')) {
-      GITHUB_CODE_EXAMPLES.push(ref);
     } else if (ref.includes('#')) {
       ASSETS.push(ref);
     } else if (!ref.includes('curl') && !ref.includes('https://')) {
       PAGES.push(ref);
     }
-  }
-
-  // get code examples for all github urls
-  for (const url of GITHUB_CODE_EXAMPLES) {
-    const githubRawUrl = url.replace('https://github.com', 'https://raw.githubusercontent.com').replace('blob/', '');
-    const codeFile = await stitchClient.callFunction('fetchReferenceUrlContent', [githubRawUrl]);
-    RESOLVED_REF_DOC_MAPPING[url] = codeFile;
   }
 
   // create images directory
@@ -154,7 +149,6 @@ exports.sourceNodes = async ({ actions }) => {
 
   console.log(11, PAGES);
   console.log(22, INCLUDE_FILES);
-  console.log(33, GITHUB_CODE_EXAMPLES);
   console.log(44, ASSETS);
   //console.log(RESOLVED_REF_DOC_MAPPING);
 
@@ -181,7 +175,6 @@ exports.createPages = ({ graphql, actions }) => {
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
-            __stitchID: process.env.STITCH_ID,
           },
         });
       }
