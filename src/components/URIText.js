@@ -72,7 +72,7 @@ function generateURI(uri, activeDeployment, templateType) {
   }
 
   if (activeDeployment === TEMPLATE_TYPE_ATLAS) {
-    template = TEMPLATE_TYPE_ATLAS_34;
+    template = TEMPLATE_TYPE_ATLAS_36;
   }
 
   const username = uri.username || '$[username]';

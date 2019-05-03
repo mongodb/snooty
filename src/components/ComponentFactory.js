@@ -73,12 +73,18 @@ export default class ComponentFactory extends Component {
   selectComponent() {
     const {
       admonitions,
-      nodeData: { name, type },
+      nodeData: { children, name, type },
+      ...rest
     } = this.props;
     // do nothing with these nodes for now (cc. Andrew)
     if (type === 'target' || type === 'class' || type === 'cssclass' || name === 'cssclass' || name === 'class') {
       return null;
     }
+
+    if (type === 'problematic') {
+      return <ComponentFactory nodeData={children[0]} {...rest} />;
+    }
+
     const lookup = type === 'directive' ? name : type;
     let ComponentType = this.componentMap[lookup];
     // roles are each in separate file
