@@ -17,6 +17,7 @@ export const findKeyValuePair = (nodes, key, value) => {
 };
 
 export const reportAnalytics = (eventName, data) => {
+  if (!window || !window.analytics) return;
   try {
     window.analytics.track(eventName, data);
   } catch (err) {

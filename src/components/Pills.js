@@ -51,7 +51,7 @@ Pills.propTypes = {
   isTruncated: PropTypes.bool,
   liClass: PropTypes.string,
   pills: PropTypes.arrayOf(PropTypes.string).isRequired,
-  pillsetName: PropTypes.string.isRequired,
+  pillsetName: PropTypes.string,
   ulClass: PropTypes.string,
 };
 
@@ -61,6 +61,7 @@ Pills.defaultProps = {
   dataTabPreference: undefined,
   isTruncated: false,
   liClass: '',
+  pillsetName: '',
   ulClass: '',
 };
 
