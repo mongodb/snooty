@@ -51,6 +51,7 @@ Pills.propTypes = {
   isTruncated: PropTypes.bool,
   liClass: PropTypes.string,
   pills: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pillsetName: PropTypes.string.isRequired,
   ulClass: PropTypes.string,
 };
 
