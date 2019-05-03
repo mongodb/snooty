@@ -107,7 +107,7 @@ describe('with default local storage', () => {
       });
     });
 
-    describe.only('compare links', () => {
+    describe('compare links', () => {
       let oldLinks;
       let newLinks;
 
