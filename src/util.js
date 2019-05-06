@@ -17,6 +17,7 @@ export const findKeyValuePair = (nodes, key, value) => {
 };
 
 export const reportAnalytics = (eventName, data) => {
+  if (!window || !window.analytics) return;
   try {
     window.analytics.track(eventName, data);
   } catch (err) {
@@ -25,3 +26,9 @@ export const reportAnalytics = (eventName, data) => {
 };
 
 export const isBrowser = () => typeof window !== 'undefined';
+
+export const getPrefix = () =>
+  process.env.GATSBY_PREFIX ||
+  (process.env.NODE_ENV === 'production'
+    ? `/${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`
+    : '');

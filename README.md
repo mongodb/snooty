@@ -19,19 +19,31 @@ make static
 You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments.
 
 #### `.env.production`
+Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 ```
-GATSBY_STITCH_ID=<STITCH_ID>
-NAMESPACE=<DB/COLLECTION>
-DOCUMENTS=/<SITE/USER/BRANCH>
-GATSBY_PREFIX=/<SITE/USER/BRANCH>
+NAMESPACE=<DB>/<COLLECTION> 
+GATSBY_STITCH_ID=<STITCH_ID> 
+GATSBY_SITE=<SITE>
+GATSBY_USER=<USER>
+GATSBY_BRANCH=<BRANCH>
 ```
 
-#### `.env.development`
+##### Path prefixing
+When setting up a staging environment, you may wish to include a descriptive path prefix (e.g. `ops-manager-update`). To do so, set the `GATSBY_PREFIX` variable in your production .env file *with a preceding slash*:
 ```
-GATSBY_STITCH_ID=<STITCH_ID>
-NAMESPACE=<DB/COLLECTION>
-DOCUMENTS=/<SITE/USER/BRANCH>
-GATSBY_PREFIX=''
+GATSBY_PREFIX=/<descriptive-slug>
+```
+
+If `GATSBY_PREFIX` is not set, a prefix will automatically be generated in the form of `/SITE/USER/BRANCH`.
+
+#### `.env.development`
+Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
+```
+NAMESPACE=<DB>/<COLLECTION> 
+GATSBY_STITCH_ID=<STITCH_ID> 
+GATSBY_SITE=<SITE>
+GATSBY_USER=<USER>
+GATSBY_BRANCH=<BRANCH>
 ```
 
 ## Running locally
@@ -66,7 +78,7 @@ npm test  # alias for npm run test
 Unit tests are located in the `tests/unit/` directory. To run only unit tests, use:
 
 ```shell
-npm run test-unit
+npm run test:unit
 ```
 
 ### Running individual suites

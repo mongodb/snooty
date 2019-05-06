@@ -1,0 +1,226 @@
+{
+  "type": "directive",
+  "position": {
+    "start": {
+      "line": 12
+    }
+  },
+  "name": "languages",
+  "argument": [],
+  "children": [
+    {
+      "type": "list",
+      "position": {
+        "start": {
+          "line": 14
+        }
+      },
+      "ordered": false,
+      "children": [
+        {
+          "type": "listItem",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "value": "shell"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 15
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "value": "compass"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 16
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "value": "python"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 17
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "value": "java-sync"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 18
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "value": "nodejs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 19
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "value": "motor"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 20
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "value": "csharp"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

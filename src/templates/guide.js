@@ -6,6 +6,7 @@ import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
+import { getPrefix } from '../util';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -15,8 +16,8 @@ export default class Guide extends Component {
     let guideKeyInMapping = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     // get correct lookup key based on whether running dev/prod
-    if (process.env.GATSBY_PREFIX !== '') {
-      const documentPrefix = process.env.GATSBY_PREFIX.substr(1);
+    if (process.env.NODE_ENV === 'production') {
+      const documentPrefix = getPrefix().substr(1);
       guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
     }
 
@@ -37,26 +38,38 @@ export default class Guide extends Component {
     } else if (tabsetName === 'drivers') {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs, LANGUAGES);
+    } else {
+      this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
     }
-    this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
   };
 
   matchArraySorting = (tabs, referenceArray) => referenceArray.filter(t => tabs.includes(t));
 
   setNamedTabData = (tabsetName, tabs, constants) => {
-    this.setState(prevState => ({
-      [tabsetName]: this.matchArraySorting(Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])), constants),
-    }));
+    this.setState(
+      prevState => ({
+        [tabsetName]: this.matchArraySorting(
+          Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])),
+          constants
+        ),
+      }),
+      () => this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName)
+    );
   };
 
   setActiveTab = (value, tabsetName) => {
+    const { [tabsetName]: tabs } = this.state;
+    let activeTab = value;
+    if (tabs && !tabs.includes(value)) {
+      activeTab = tabs[0];
+    }
     this.setState(prevState => ({
       activeTabs: {
         ...prevState.activeTabs,
-        [tabsetName]: value,
+        [tabsetName]: activeTab,
       },
     }));
-    setLocalValue(tabsetName, value);
+    setLocalValue(tabsetName, activeTab);
   };
 
   createSections() {

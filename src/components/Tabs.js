@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { PLATFORMS, stringifyTab } from '../constants';
+import { reportAnalytics } from '../util';
 
 export default class Tabs extends Component {
   constructor(props) {
@@ -61,6 +62,11 @@ export default class Tabs extends Component {
                   key={index}
                   onClick={() => {
                     setActiveTab(tabName, tabsetName);
+                    reportAnalytics('Tab Selected', {
+                      tabId: tabName,
+                      title: stringifyTab(tabName),
+                      tabSet: tabsetName,
+                    });
                   }}
                 >
                   {stringifyTab(tabName)}

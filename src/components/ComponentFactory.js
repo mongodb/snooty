@@ -20,6 +20,8 @@ import Strong from './Strong';
 import URIWriter from './URIWriter';
 import TitleReference from './TitleReference';
 
+import RoleApi from './Roles/Api';
+import RoleClass from './Roles/Class';
 import RoleCode from './Roles/Code';
 import RoleDoc from './Roles/Doc';
 import RoleGUILabel from './Roles/GUILabel';
@@ -34,9 +36,12 @@ export default class ComponentFactory extends Component {
     this.roles = {
       authrole: RoleCode,
       binary: RoleCode,
+      class: RoleClass,
+      'csharp-api': RoleApi,
       dbcommand: RoleCode,
       doc: RoleDoc,
       guilabel: RoleGUILabel,
+      'java-sync-api': RoleApi,
       manual: RoleManual,
       method: RoleCode,
       option: RoleCode,
@@ -73,12 +78,25 @@ export default class ComponentFactory extends Component {
   selectComponent() {
     const {
       admonitions,
-      nodeData: { name, type },
+      nodeData: { children, name, type },
+      ...rest
     } = this.props;
     // do nothing with these nodes for now (cc. Andrew)
-    if (type === 'target' || type === 'class' || type === 'cssclass' || name === 'cssclass' || name === 'class') {
+    if (
+      type === 'target' ||
+      type === 'class' ||
+      type === 'cssclass' ||
+      name === 'cssclass' ||
+      name === 'class' ||
+      type === 'comment'
+    ) {
       return null;
     }
+
+    if (type === 'problematic') {
+      return <ComponentFactory nodeData={children[0]} {...rest} />;
+    }
+
     const lookup = type === 'directive' ? name : type;
     let ComponentType = this.componentMap[lookup];
     // roles are each in separate file
