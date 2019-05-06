@@ -37,26 +37,38 @@ export default class Guide extends Component {
     } else if (tabsetName === 'drivers') {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs, LANGUAGES);
+    } else {
+      this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
     }
-    this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
   };
 
   matchArraySorting = (tabs, referenceArray) => referenceArray.filter(t => tabs.includes(t));
 
   setNamedTabData = (tabsetName, tabs, constants) => {
-    this.setState(prevState => ({
-      [tabsetName]: this.matchArraySorting(Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])), constants),
-    }));
+    this.setState(
+      prevState => ({
+        [tabsetName]: this.matchArraySorting(
+          Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])),
+          constants
+        ),
+      }),
+      () => this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName)
+    );
   };
 
   setActiveTab = (value, tabsetName) => {
+    const { [tabsetName]: tabs } = this.state;
+    let activeTab = value;
+    if (!tabs.includes(value)) {
+      activeTab = tabs[0];
+    }
     this.setState(prevState => ({
       activeTabs: {
         ...prevState.activeTabs,
-        [tabsetName]: value,
+        [tabsetName]: activeTab,
       },
     }));
-    setLocalValue(tabsetName, value);
+    setLocalValue(tabsetName, activeTab);
   };
 
   createSections() {
