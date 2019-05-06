@@ -45,9 +45,8 @@ const cleanOldString = str =>
 
 const setLocalStorage = async (page, parentKey, storageObj) => {
   await page.evaluate(
-    // eslint-disable-next-line no-shadow
-    (parentKey, storageObj) => {
-      localStorage.setItem(parentKey, JSON.stringify(storageObj));
+    (key, value) => {
+      localStorage.setItem(key, JSON.stringify(value));
     },
     parentKey,
     storageObj
@@ -61,11 +60,10 @@ const getLinksFromUrl = async (page, baseUrl, slug, prefix, parentKey = undefine
   }
   const hrefs = await page.$$eval(
     '.body a',
-    // eslint-disable-next-line no-shadow
-    (as, prefix) => {
+    (as, localPrefix) => {
       return as.reduce((acc, a) => {
         acc[a.text] = a.href
-          .replace(`/${prefix}`, '')
+          .replace(`/${localPrefix}`, '')
           .replace('http://docs.mongodb.com/guides', '')
           .replace('https://docs.mongodb.com/guides', '')
           .replace('http://127.0.0.1:9000', '')
@@ -116,10 +114,12 @@ describe('with default local storage', () => {
           getLinksFromUrl(await browser.newPage(), prodUrl, slug, gatsbyPrefix, 'tabPref', {
             cloud: 'cloud',
             languages: 'shell',
+            platforms: 'windows',
           }),
           getLinksFromUrl(await browser.newPage(), localUrl, slug, gatsbyPrefix, 'mongodb-docs', {
             cloud: 'cloud',
             drivers: 'shell',
+            platforms: 'windows',
           }),
         ]);
       });
@@ -138,8 +138,16 @@ describe('with local storage', () => {
       let snootyText;
       beforeEach(async () => {
         [legacyText, snootyText] = await Promise.all([
-          getTextFromUrl(await browser.newPage(), prodUrl, slug, 'tabPref', { cloud: deployment }),
-          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', { cloud: deployment }),
+          getTextFromUrl(await browser.newPage(), prodUrl, slug, 'tabPref', {
+            cloud: deployment,
+            languages: 'shell',
+            platforms: 'windows',
+          }),
+          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', {
+            cloud: deployment,
+            drivers: 'shell',
+            platforms: 'windows',
+          }),
         ]);
       });
 
@@ -155,8 +163,16 @@ describe('with local storage', () => {
       let snootyText;
       beforeEach(async () => {
         [legacyText, snootyText] = await Promise.all([
-          getTextFromUrl(await browser.newPage(), prodUrl, slug, 'tabPref', { languages: language }),
-          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', { drivers: language }),
+          getTextFromUrl(await browser.newPage(), prodUrl, slug, 'tabPref', {
+            cloud: 'cloud',
+            languages: language,
+            platforms: 'windows',
+          }),
+          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', {
+            cloud: 'cloud',
+            drivers: language,
+            platforms: 'windows',
+          }),
         ]);
       });
 
@@ -172,8 +188,16 @@ describe('with local storage', () => {
       let snootyText;
       beforeEach(async () => {
         [legacyText, snootyText] = await Promise.all([
-          getTextFromUrl(await browser.newPage(), prodUrl, slug, 'tabPref', { platforms: platform }),
-          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', { platforms: platform }),
+          getTextFromUrl(await browser.newPage(), prodUrl, slug, 'tabPref', {
+            cloud: 'cloud',
+            languages: 'shell',
+            platforms: platform,
+          }),
+          getTextFromUrl(await browser.newPage(), localUrl, slug, 'mongodb-docs', {
+            cloud: 'cloud',
+            drivers: 'shell',
+            platforms: platform,
+          }),
         ]);
       });
 
