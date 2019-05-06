@@ -356,7 +356,7 @@ export default class URIWriter extends Component {
       <form className="uriwriter__form" autoComplete="off">
         {isAtlas ? (
           <label className="mongodb-form__prompt">
-            <span className="mongodb-form__label">Atlas Connection String</span>
+            <span className="mongodb-form__label">Atlas connection string</span>
             <div style={{ width: '100%' }}>
               <textarea
                 name="atlas"
