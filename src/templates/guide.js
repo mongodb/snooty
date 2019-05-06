@@ -59,7 +59,7 @@ export default class Guide extends Component {
   setActiveTab = (value, tabsetName) => {
     const { [tabsetName]: tabs } = this.state;
     let activeTab = value;
-    if (!tabs.includes(value)) {
+    if (tabs && !tabs.includes(value)) {
       activeTab = tabs[0];
     }
     this.setState(prevState => ({
