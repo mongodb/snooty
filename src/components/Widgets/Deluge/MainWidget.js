@@ -21,7 +21,7 @@ class MainWidget extends Component {
     this.setState({ state: STATE_VOTED });
   };
 
-  onInitialVote = (e, state) => {
+  onSubmitVote = (e, state) => {
     const { handleOpenDrawer, onSubmitVote } = this.props;
 
     e.stopPropagation();
@@ -116,10 +116,10 @@ class MainWidget extends Component {
         </div>
         {state === STATE_INITIAL && (
           <div className="deluge-vote">
-            <a key="voteup" id="rate-up" onClick={e => this.onInitialVote(e, true)}>
+            <a key="voteup" id="rate-up" onClick={e => this.onSubmitVote(e, true)}>
               Yes
             </a>
-            <a key="votedown" id="rate-down" onClick={e => this.onInitialVote(e, false)}>
+            <a key="votedown" id="rate-down" onClick={e => this.onSubmitVote(e, false)}>
               No
             </a>
           </div>

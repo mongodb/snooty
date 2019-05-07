@@ -1,3 +1,5 @@
+import { Stitch } from 'mongodb-stitch-browser-sdk';
+
 /**
  * Recursively searches child nodes to find the specified key/value pair.
  * Prevents us from having to rely on a fixed depth for properties in the AST.
@@ -32,3 +34,9 @@ export const getPrefix = () =>
   (process.env.NODE_ENV === 'production'
     ? `/${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`
     : '');
+
+/**
+ * Check to see if Stitch appId is linked to an existing connection. If not, intialize a new connection.
+ */
+export const getStitchClient = appId =>
+  Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);

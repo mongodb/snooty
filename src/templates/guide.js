@@ -27,6 +27,7 @@ export default class Guide extends Component {
     this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
     this.state = {
       activeTabs: {},
+      guideName: guideKeyInMapping,
     };
   }
 
@@ -92,14 +93,14 @@ export default class Guide extends Component {
 
   render() {
     const { pageContext } = this.props;
-    const { activeTabs, cloud, drivers } = this.state;
+    const { activeTabs, cloud, drivers, guideName } = this.state;
 
     return (
       <div className="content">
         <TOC />
         <div className="left-nav-space" />
         <div id="main-column" className="main-column">
-          <div className="body" data-pagename="server/read">
+          <div className="body" data-pagename={guideName}>
             <ul className="breadcrumbs">
               <li className="breadcrumbs__bc">
                 <a href="/">MongoDB Guides</a> &gt;{' '}
@@ -116,7 +117,7 @@ export default class Guide extends Component {
               activeTabs={activeTabs}
             />
             {this.createSections()}
-            <Widgets />
+            <Widgets guideName={guideName} project={process.env.GATSBY_SITE} />
             <div className="footer">
               <div className="copyright">
                 <p>

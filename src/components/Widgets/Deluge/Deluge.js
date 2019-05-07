@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
-import { isBrowser } from '../../../util';
+import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import { getStitchClient, isBrowser } from '../../../util';
 import FreeformQuestion from './FreeformQuestion';
 import InputField from './InputField';
 import MainWidget from './MainWidget';
@@ -40,9 +40,7 @@ class Deluge extends Component {
 
   setupStitch = () => {
     const appName = 'feedback-ibcyy';
-    this.stitchClient = Stitch.hasAppClient(appName)
-      ? Stitch.defaultAppClient
-      : Stitch.initializeDefaultAppClient(appName);
+    this.stitchClient = getStitchClient(appName);
     this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch(err => {
       console.error(err);
     });
@@ -181,11 +179,12 @@ class Deluge extends Component {
   };
 
   render() {
-    const { emailError, formLengthError, voteAcknowledgement } = this.state;
+    const { answers, emailError, formLengthError, voteAcknowledgement } = this.state;
     const { canShowSuggestions, openDrawer } = this.props;
-    const noAnswersSubmitted =
-      Object.keys(this.state.answers).length === 0 || Object.values(this.state.answers).every(val => val === '');
-    const hasError = noAnswersSubmitted || this.state.formLengthError || this.state.emailError;
+
+    const noAnswersSubmitted = Object.keys(answers).length === 0 || Object.values(answers).every(val => val === '');
+    const hasError = noAnswersSubmitted || formLengthError || emailError;
+
     return (
       <MainWidget
         voteAcknowledgement={voteAcknowledgement}

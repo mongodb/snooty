@@ -36,7 +36,7 @@ class InputField extends Component {
     const { error, text } = this.state;
     return (
       <div>
-        <input onInput={this.handleChange} placeholder={placeholder} type={inputType} value={text} />
+        <input onChange={this.handleChange} placeholder={placeholder} type={inputType} value={text} />
         <div className="error" style={{ visibility: error ? 'visible' : 'hidden' }}>
           {errorText}
         </div>

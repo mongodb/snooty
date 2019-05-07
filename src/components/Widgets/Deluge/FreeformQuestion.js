@@ -22,7 +22,7 @@ const FreeformQuestion = ({ errorText, hasError, placeholder, store }) => {
 
   return (
     <div>
-      <textarea placeholder={placeholder} onInput={handleChange} value={text} />
+      <textarea placeholder={placeholder} onChange={handleChange} value={text} />
       <div className="error" style={{ visibility: error ? 'visible' : 'hidden' }}>
         {errorText}
       </div>

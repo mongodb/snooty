@@ -7,9 +7,9 @@ import { SUGGESTION_WHITELIST } from '../../constants';
 export default class Widgets extends Component {
   constructor(props) {
     super(props);
-    const { path } = this.props;
 
-    this.isSuggestionPage = this.isSuggestionPage(path);
+    const { guideName } = this.props;
+    this.isSuggestionPage = this.isSuggestionPage(guideName);
 
     this.state = {
       drawerIsOpen: false,
@@ -43,10 +43,16 @@ export default class Widgets extends Component {
 
   render() {
     const { drawerIsOpen } = this.state;
-    const { path, project } = this.props;
+    const { guideName, project } = this.props;
+
     return (
       <div>
-        <Deluge project={project} path={path} openDrawer={this.openDrawer} canShowSuggestions={this.isSuggestionPage} />
+        <Deluge
+          path={guideName}
+          project={project}
+          openDrawer={this.openDrawer}
+          canShowSuggestions={this.isSuggestionPage}
+        />
         {this.isSuggestionPage && <Suggestion drawerIsOpen={drawerIsOpen} closeDrawer={this.closeDrawer} />}
       </div>
     );
@@ -54,6 +60,6 @@ export default class Widgets extends Component {
 }
 
 Widgets.propTypes = {
+  guideName: PropTypes.string.isRequired,
   project: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
 };
