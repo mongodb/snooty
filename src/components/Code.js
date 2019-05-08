@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import hljs from 'highlight.js';
 import Highlight from 'react-highlight';
 import 'highlight.js/styles/atom-one-light.css';
 import URIText, {
@@ -31,7 +30,7 @@ const Code = ({ nodeData: { value, lang }, activeTabs: { cloud }, uri }) => {
           <div className="code-button__tooltip code-button__tooltip--inactive">copied</div>
         </button>
       </div>
-      <div className="copyable-code-block highlight-python notranslate">
+      <div className={`copyable-code-block notranslate highlight-${lang}`}>
         <div className="highlight">
           <Highlight className={lang}>{code}</Highlight>
         </div>
@@ -63,8 +62,3 @@ Code.defaultProps = {
 };
 
 export default Code;
-
-/*
-<div className="highlight">
-          <pre><code className={lang} style={{'background':'none','padding':'0px','display':'inline'}}>{code}</code></pre>
-        </div> */

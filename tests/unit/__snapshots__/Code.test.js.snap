@@ -20,16 +20,20 @@ exports[`renders correctly 1`] = `
     </button>
   </div>
   <div
-    className="copyable-code-block highlight-python notranslate"
+    className="copyable-code-block notranslate highlight-javascript"
   >
     <div
       className="highlight"
     >
-      <pre>
+      <Highlight
+        className="javascript"
+        element={null}
+        innerHTML={false}
+      >
         mongoimport --db test --collection inventory ^
           --authenticationDatabase admin --username &lt;user&gt; --password &lt;password&gt; ^
           --drop --file ~\\downloads\\inventory.crud.json
-      </pre>
+      </Highlight>
     </div>
   </div>
 </div>

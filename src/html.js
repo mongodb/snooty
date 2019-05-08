@@ -28,12 +28,12 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .hljs {
-          background: none !important;
-          padding: 0px !important;
-          display: inline !important;
-        }
-      `,
+          .hljs {
+            background: none !important;
+            padding: 0px !important;
+            display: inline !important;
+          }
+        `,
         }}
       />
       <link
