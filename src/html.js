@@ -25,6 +25,17 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <link rel="stylesheet" href={`${getPrefix()}/static/guides.css`} type="text/css" />
       <link rel="stylesheet" href={`${getPrefix()}/static/pygments.css`} type="text/css" />
       <link rel="stylesheet" href={`${getPrefix()}/static/css/navbar.min.css`} type="text/css" />
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .hljs {
+          background: none !important;
+          padding: 0px !important;
+          display: inline !important;
+        }
+      `,
+        }}
+      />
       <link
         rel="search"
         type="application/opensearchdescription+xml"

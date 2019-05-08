@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import hljs from 'highlight.js';
+import Highlight from 'react-highlight';
+import 'highlight.js/styles/atom-one-light.css';
 import URIText, {
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
@@ -14,7 +17,7 @@ const URI_PLACEHOLDERS = [
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 ];
 
-const Code = ({ nodeData: { value }, activeTabs: { cloud }, uri }) => {
+const Code = ({ nodeData: { value, lang }, activeTabs: { cloud }, uri }) => {
   let code = value;
   if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
     code = <URIText value={code} activeDeployment={cloud} uri={uri} />;
@@ -30,7 +33,7 @@ const Code = ({ nodeData: { value }, activeTabs: { cloud }, uri }) => {
       </div>
       <div className="copyable-code-block highlight-python notranslate">
         <div className="highlight">
-          <pre>{code}</pre>
+          <Highlight className={lang}>{code}</Highlight>
         </div>
       </div>
     </div>
@@ -60,3 +63,8 @@ Code.defaultProps = {
 };
 
 export default Code;
+
+/*
+<div className="highlight">
+          <pre><code className={lang} style={{'background':'none','padding':'0px','display':'inline'}}>{code}</code></pre>
+        </div> */
