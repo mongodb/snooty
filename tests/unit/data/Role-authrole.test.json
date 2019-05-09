@@ -1,13 +1,11 @@
 {
   "type": "role",
   "position": {
-  "start": {
-  "line": 0
-  }
+    "start": {
+      "line": 0
+    }
   },
   "name": "authrole",
-  "label": "clusterMonitor",
   "target": "clusterMonitor",
-  "raw": "clusterMonitor",
   "children": []
 }
