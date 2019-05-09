@@ -6,8 +6,6 @@
     }
   },
   "name": "program",
-  "label": "mongoimport",
   "target": "mongoimport",
-  "raw": "mongoimport",
   "children": []
 }
