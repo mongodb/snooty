@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Highlight from 'react-highlight';
-import 'highlight.js/styles/atom-one-light.css';
+import 'highlight.js/styles/xcode.css';
 import URIText, {
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
