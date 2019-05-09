@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { copyCodeButton, reportAnalytics } from '../util';
 import URIText, {
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
@@ -23,7 +24,16 @@ const Code = ({ nodeData: { value }, activeTabs: { cloud }, uri }) => {
   return (
     <div className="button-code-block">
       <div className="button-row">
-        <button className="code-button--copy code-button" type="button">
+        <button
+          className="code-button--copy code-button"
+          type="button"
+          onClick={() => {
+            copyCodeButton(value);
+            reportAnalytics('Codeblock Copied', {
+              code: value,
+            });
+          }}
+        >
           copy
           <div className="code-button__tooltip code-button__tooltip--inactive">copied</div>
         </button>

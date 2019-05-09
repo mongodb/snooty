@@ -25,6 +25,22 @@ export const reportAnalytics = (eventName, data) => {
   }
 };
 
+export const copyCodeButton = code => {
+  const tempElement = document.createElement('textarea');
+  tempElement.style.position = 'fixed';
+  document.body.appendChild(tempElement);
+  tempElement.value = code;
+  tempElement.select();
+  try {
+    const successful = document.execCommand('copy');
+    if (!successful) {
+      throw new Error('Failed to copy');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const getPrefix = () =>
   process.env.GATSBY_PREFIX ||
   (process.env.NODE_ENV === 'production'
