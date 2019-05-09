@@ -16,6 +16,5 @@
     }
   },
   "target": "mongoimport.--file",
-  "raw": "--file <mongoimport.--file>",
   "children": []
 }
