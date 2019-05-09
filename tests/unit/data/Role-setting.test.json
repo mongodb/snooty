@@ -6,8 +6,6 @@
     }
   },
   "name": "setting",
-  "label": "dbpath",
   "target": "dbpath",
-  "raw": "dbpath",
   "children": []
 }

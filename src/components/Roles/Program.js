@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RoleProgram = props => {
-  const {
-    nodeData: { label },
-  } = props;
-  return <strong className="program">{label}</strong>;
+const RoleProgram = ({ nodeData: { label, target } }) => {
+  const labelDisplay = label && label.value ? label.value : target;
+  return <strong className="program">{labelDisplay}</strong>;
 };
 
 RoleProgram.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.shape({
+      value: PropTypes.string,
+    }),
+    target: PropTypes.string.isRequired,
   }).isRequired,
 };
 

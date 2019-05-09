@@ -2,12 +2,10 @@
   "type": "role",
   "position": {
     "start": {
-      "line": 45
+      "line": 25
     }
   },
   "name": "doc",
-  "label": "/server/drivers",
   "target": "/server/drivers",
-  "raw": "/server/drivers",
   "children": []
 }

@@ -2,7 +2,7 @@
   "type": "role",
   "position": {
     "start": {
-      "line": 2
+      "line": 37
     }
   },
   "name": "doc",
@@ -11,11 +11,10 @@
     "value": "Create an Atlas Account and Cluster",
     "position": {
       "start": {
-        "line": 3
+        "line": 36
       }
     }
   },
   "target": "/cloud/atlas",
-  "raw": "Create an Atlas Account and Cluster</cloud/atlas>",
   "children": []
 }
