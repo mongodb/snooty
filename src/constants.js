@@ -24,6 +24,7 @@ const SLUG_TO_STRING = {
   shell: 'Mongo Shell',
   compass: 'Compass',
   python: 'Python',
+  javasync: 'Java (Sync)',
   'java-sync': 'Java (Sync)',
   nodejs: 'Node.js',
   php: 'PHP',
@@ -64,4 +65,9 @@ const REF_TARGETS = {
   'write-op-insert-behavior': 'https://docs.mongodb.com/manual/tutorial/insert-documents/#insert-behavior',
 };
 
-export { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_TARGETS, stringifyTab };
+const REF_LABELS = {
+  'install-rhel-configure-selinux': 'Configure SELinux',
+  'write-op-insert-behavior': 'Insert Behavior',
+};
+
+export { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_LABELS, REF_TARGETS, stringifyTab };

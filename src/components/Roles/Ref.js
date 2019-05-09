@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { REF_TARGETS } from '../../constants';
+import { REF_LABELS, REF_TARGETS } from '../../constants';
 
 const RoleRef = props => {
   const { nodeData } = props;
-  const label = nodeData.label && nodeData.label.value ? nodeData.label.value : nodeData.label;
+  let label;
+  if (nodeData.label) {
+    label = nodeData.label.value || nodeData.label;
+  } else {
+    label = REF_LABELS[nodeData.target] || nodeData.target;
+  }
   // make sure target is hardcoded in list for now
   // TODO: chat w andrew about how to move forward with sphinx inventory files
   if (!REF_TARGETS[nodeData.target]) {
