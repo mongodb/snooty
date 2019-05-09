@@ -73,9 +73,10 @@ const cleanOldString = str => {
     });
 };
 
-const setLocalStorage = async (page, parentKey, storageObj) => {
-  await page.evaluate(
+const setLocalStorage = async (slug, page, parentKey, storageObj) => {
+  return page.evaluate(
     (key, value) => {
+      localStorage.clear();
       localStorage.setItem(key, JSON.stringify(value));
     },
     parentKey,
@@ -107,10 +108,16 @@ const getLinksFromUrl = async (baseUrl, slug, prefix, parentKey = undefined, obj
   return hrefs;
 };
 
-const getTextFromUrl = async (baseUrl, slug, pill = undefined, parentKey = undefined, localStorageObj = undefined) => {
+const getTextFromUrl = async (
+  baseUrl,
+  slug = undefined,
+  pill = undefined,
+  parentKey = undefined,
+  localStorageObj = undefined
+) => {
   const page = await browser.newPage();
-await page.goto(`${baseUrl}${slug}`);
-  if (await page.$('ul[data-tab-preference="languages"]')) {
+  await page.goto(`${baseUrl}${slug}`);
+  /* if (await page.$('ul[data-tab-preference="languages"]')) {
     const pageContainsTab = await page.$$eval(
       'ul[data-tab-preference="languages"] .guide__pill',
       (lis, dataPill) => {
@@ -123,14 +130,22 @@ await page.goto(`${baseUrl}${slug}`);
       console.log(slug, pill, 'DOES NOT CONTAIN TAB');
       return '';
     }
+  } */
+  // await setLocalStorage(slug, page, parentKey, localStorageObj);A
+  if (pill) {
+    await page.click(`li[data-tabid="${pill}"]`).catch(err => {});
   }
-  await setLocalStorage(page, parentKey, localStorageObj);
   const bodyElement = await page.$('.body');
-  return page.evaluate(element => element.innerText, bodyElement);
+  return page.evaluate(element => Promise.resolve(element.innerText), bodyElement);
 };
 
-const runComparisons = async (slug, legacyStorageObj = defaultStorageObj, snootyStorageObj = legacyStorageObj) => {
-  const pill = legacyStorageObj.languages || snootyStorageObj.drivers;
+const runComparisons = async (
+  slug,
+  pill,
+  legacyStorageObj = defaultStorageObj,
+  snootyStorageObj = legacyStorageObj
+) => {
+  // const pill = legacyStorageObj.languages || snootyStorageObj.drivers;
   return Promise.all([
     getTextFromUrl(prodUrl, slug, pill, 'tabPref', {
       ...defaultStorageObj,
@@ -146,10 +161,11 @@ const runComparisons = async (slug, legacyStorageObj = defaultStorageObj, snooty
 const slugs = slugArray;
 describe('with default local storage', () => {
   describe.each(slugs)('%p', slug => {
-    describe.only('compare text', () => {
+    describe('compare text', () => {
       let legacyText;
       let snootyText;
       beforeEach(async () => {
+        jest.setTimeout(15000);
         [legacyText, snootyText] = await runComparisons(slug);
       });
 
@@ -166,12 +182,12 @@ describe('with default local storage', () => {
 
       beforeEach(async () => {
         [oldLinks, newLinks] = await Promise.all([
-          getLinksFromUrl(prodUrl, slug, gatsbyPrefix, 'tabPref', {
+          await getLinksFromUrl(prodUrl, slug, gatsbyPrefix, 'tabPref', {
             cloud: 'cloud',
             languages: 'shell',
             platforms: 'windows',
           }),
-          getLinksFromUrl(await browser.newPage(), localUrl, slug, gatsbyPrefix, 'mongodb-docs', {
+          await getLinksFromUrl(await browser.newPage(), localUrl, slug, gatsbyPrefix, 'mongodb-docs', {
             cloud: 'cloud',
             drivers: 'shell',
             platforms: 'windows',
@@ -189,49 +205,31 @@ describe('with default local storage', () => {
 describe('with local storage', () => {
   describe.each(slugs)('%p', slug => {
     describe.each(DEPLOYMENTS)('deployment: %p', deployment => {
-      let legacyText;
-      let snootyText;
-      beforeEach(async () => {
-        [legacyText, snootyText] = await runComparisons(slug, { cloud: deployment });
-      });
-
-      it(`file text is the same`, () => {
-        legacyText = cleanString(cleanOldString(legacyText));
-        snootyText = cleanString(snootyText);
-        expect(snootyText).toEqual(legacyText);
-      });
+      it(`file text is the same`, async () => {
+        const [legacyText, snootyText] = await runComparisons(slug, deployment, { cloud: deployment });
+        expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+      }, 1500000);
     });
 
-    describe.each(guidesLanguages)('language: %p', language => {
-      let legacyText;
-      let snootyText;
-      beforeEach(async () => {
-        [legacyText, snootyText] = await runComparisons(
+    describe.only.each(guidesLanguages)('language: %p', language => {
+      it(`file text is the same`, async () => {
+        expect.assertions(1);
+
+        const [legacyText, snootyText] = await runComparisons(
           slug,
+          language,
           { languages: driverToLang[language] },
           { drivers: language }
         );
-      });
-
-      it(`file text is the same`, () => {
-        legacyText = cleanString(cleanOldString(legacyText));
-        snootyText = cleanString(snootyText);
-        expect(snootyText).toEqual(legacyText);
-      });
+        expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+      }, 1500000);
     });
 
     describe.each(PLATFORMS)('platform: %p', platform => {
-      let legacyText;
-      let snootyText;
-      beforeEach(async () => {
-        [legacyText, snootyText] = await runComparisons(slug, { platforms: platform });
-      });
-
-      it(`file text is the same`, () => {
-        legacyText = cleanString(cleanOldString(legacyText));
-        snootyText = cleanString(snootyText);
-        expect(snootyText).toEqual(legacyText);
-      });
+      it(`file text is the same`, async () => {
+        const [legacyText, snootyText] = await runComparisons(slug, platform, { platforms: platform });
+        expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+      }, 1500000);
     });
   });
 });

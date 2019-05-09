@@ -98,7 +98,7 @@ function generateURI(uri, activeDeployment, templateType) {
       templateShell: `mongodb://${username}:$[password]@${hostlist}/${database}?${options}`,
     },
     [TEMPLATE_TYPE_ATLAS_36]: {
-      template: `mongodb://${username}:$[password]@${hostlist}/${database}?retryWrites=true`,
+      template: `mongodb+srv://${username}:$[password]@${hostlist}/${database}?retryWrites=true`,
       templatePasswordRedactedShell: `mongodb+srv://${hostlist}/${database} --username ${username} --password`,
       templateShell: `mongodb+srv://${username}:$[password]@${hostlist}/${database}`,
     },
