@@ -6,8 +6,6 @@
     }
   },
   "name": "update",
-  "label": "~up.$set",
   "target": "~up.$set",
-  "raw": "~up.$set",
   "children": []
 }

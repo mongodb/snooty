@@ -1,13 +1,13 @@
 {
-  "type": "role",
-  "position": {
-  "start": {
-    "line": 28
-  }
-  },
   "name": "guilabel",
-  "label": "Yes",
-  "target": "Yes",
-  "raw": "Yes",
+  "label": {
+    "type": "text",
+    "value": "Yes",
+    "position": {
+      "start": {
+        "line": 13
+      }
+    }
+  },
   "children": []
 }
