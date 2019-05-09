@@ -136,8 +136,8 @@ ListTable.propTypes = {
     children: PropTypes.array.isRequired,
     options: PropTypes.shape({
       class: PropTypes.string,
-      'header-rows': PropTypes.string,
-      'stub-columns': PropTypes.string,
+      'header-rows': PropTypes.number,
+      'stub-columns': PropTypes.number,
       widths: PropTypes.string,
     }),
   }).isRequired,

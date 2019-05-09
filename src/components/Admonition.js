@@ -50,7 +50,7 @@ Admonition.propTypes = {
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
-        value: PropTypes.string.isRequired,
+        value: PropTypes.string,
       })
     ).isRequired,
     children: PropTypes.arrayOf(
