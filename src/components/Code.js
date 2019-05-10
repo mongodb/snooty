@@ -74,9 +74,9 @@ export default class Code extends Component {
           >
             copy
             <div
-              className={
-                `code-button__tooltip ${  copied ? 'code-button__tooltip--active' : 'code-button__tooltip--inactive'}`
-              }
+              className={`code-button__tooltip ${
+                copied ? 'code-button__tooltip--active' : 'code-button__tooltip--inactive'
+              }`}
             >
               copied
             </div>
