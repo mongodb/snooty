@@ -8,25 +8,21 @@ const gatsbyPrefix = process.env.GATSBY_PREFIX;
 const defaultStorageObj = {
   cloud: 'cloud',
   drivers: 'shell',
-  languages: 'shell',
   platforms: 'windows',
 };
 
 const driverToLang = {
-  shell: 'shell',
-  compass: 'compass',
-  python: 'python',
   'java-sync': 'javasync',
-  nodejs: 'nodejs',
-  motor: 'motor',
-  csharp: 'csharp',
-  go: 'go',
+};
+
+const convertToLegacy = string => {
+  return driverToLang[string] || string;
 };
 
 const guidesLanguages = ['shell', 'compass', 'python', 'java-sync', 'nodejs', 'motor', 'csharp', 'motor', 'go'];
 
 /*
- * Replace characters to standardize between the two builders. Sphinx uses smart quotes, dashes, etc. and Snooty does not yet.
+ * Replace characters to standardize between the two builders.
  * - Trim whitespace from beginning and end of each line (mostly affects codeblocks)
  * - Replace curly single quotes with straight single quotes
  * - Replace curly double quotes with straight double quotes
@@ -108,52 +104,27 @@ const getLinksFromUrl = async (baseUrl, slug, prefix, parentKey = undefined, obj
   return hrefs;
 };
 
-const getTextFromUrl = async (
-  baseUrl,
-  slug = undefined,
-  pill = undefined,
-  parentKey = undefined,
-  localStorageObj = undefined
-) => {
+const getTextFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => {
   const page = await browser.newPage();
   await page.goto(`${baseUrl}${slug}`);
-  /* if (await page.$('ul[data-tab-preference="languages"]')) {
-    const pageContainsTab = await page.$$eval(
-      'ul[data-tab-preference="languages"] .guide__pill',
-      (lis, dataPill) => {
-        const pillsOnPage = lis.map(li => li.dataset.tabid.replace('-', ''));
-        return pillsOnPage.some(p => p === dataPill.replace('-', ''));
-      },
-      pill
-    );
-    if (!pageContainsTab) {
-      console.log(slug, pill, 'DOES NOT CONTAIN TAB');
-      return '';
-    }
-  } */
-  // await setLocalStorage(slug, page, parentKey, localStorageObj);A
-  if (pill) {
-    await page.click(`li[data-tabid="${pill}"]`).catch(err => {});
-  }
+  await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
+  await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
+  await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
   const bodyElement = await page.$('.body');
   return page.evaluate(element => Promise.resolve(element.innerText), bodyElement);
 };
 
-const runComparisons = async (
-  slug,
-  pill,
-  legacyStorageObj = defaultStorageObj,
-  snootyStorageObj = legacyStorageObj
-) => {
-  // const pill = legacyStorageObj.languages || snootyStorageObj.drivers;
+const runComparisons = async (slug, storageObj = {}) => {
+  const key = Object.keys(storageObj)[0];
+  const val = Object.values(storageObj)[0];
   return Promise.all([
-    getTextFromUrl(prodUrl, slug, pill, 'tabPref', {
+    getTextFromUrl(prodUrl, slug, {
       ...defaultStorageObj,
-      ...legacyStorageObj,
+      [key]: convertToLegacy(val),
     }),
-    getTextFromUrl(localUrl, slug, pill, 'mongodb-docs', {
+    getTextFromUrl(localUrl, slug, {
       ...defaultStorageObj,
-      ...snootyStorageObj,
+      ...storageObj,
     }),
   ]);
 };
@@ -162,18 +133,12 @@ const slugs = slugArray;
 describe('with default local storage', () => {
   describe.each(slugs)('%p', slug => {
     describe('compare text', () => {
-      let legacyText;
-      let snootyText;
-      beforeEach(async () => {
-        jest.setTimeout(15000);
-        [legacyText, snootyText] = await runComparisons(slug);
-      });
+      it(`file text is the same`, async () => {
+        expect.assertions(1);
 
-      it(`file text is the same`, () => {
-        legacyText = cleanString(cleanOldString(legacyText));
-        snootyText = cleanString(snootyText);
-        expect(snootyText).toEqual(legacyText);
-      });
+        const [legacyText, snootyText] = await runComparisons(slug);
+        return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+      }, 1500000);
     });
 
     describe('compare links', () => {
@@ -205,30 +170,29 @@ describe('with default local storage', () => {
 describe('with local storage', () => {
   describe.each(slugs)('%p', slug => {
     describe.each(DEPLOYMENTS)('deployment: %p', deployment => {
-      it(`file text is the same`, async () => {
-        const [legacyText, snootyText] = await runComparisons(slug, deployment, { cloud: deployment });
-        expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+      it(`deployment file text is the same`, async () => {
+        const [legacyText, snootyText] = await runComparisons(slug, {
+          cloud: deployment,
+        });
+        return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
       }, 1500000);
     });
 
-    describe.only.each(guidesLanguages)('language: %p', language => {
-      it(`file text is the same`, async () => {
-        expect.assertions(1);
-
-        const [legacyText, snootyText] = await runComparisons(
-          slug,
-          language,
-          { languages: driverToLang[language] },
-          { drivers: language }
-        );
-        expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+    describe.each(guidesLanguages)('language: %p', language => {
+      it(`language file text is the same`, async () => {
+        const [legacyText, snootyText] = await runComparisons(slug, {
+          drivers: language,
+        });
+        return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
       }, 1500000);
     });
 
     describe.each(PLATFORMS)('platform: %p', platform => {
-      it(`file text is the same`, async () => {
-        const [legacyText, snootyText] = await runComparisons(slug, platform, { platforms: platform });
-        expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+      it(`platform file text is the same`, async () => {
+        const [legacyText, snootyText] = await runComparisons(slug, {
+          platforms: platform,
+        });
+        return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
       }, 1500000);
     });
   });
