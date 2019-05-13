@@ -19,7 +19,7 @@ const RoleDoc = ({ nodeData: { label, target }, refDocMapping }) => {
 RoleDoc.propTypes = {
   nodeData: PropTypes.shape({
     label: PropTypes.shape({
-      value: PropTypes.string.isRequired,
+      value: PropTypes.string,
     }),
     target: PropTypes.string.isRequired,
   }).isRequired,
