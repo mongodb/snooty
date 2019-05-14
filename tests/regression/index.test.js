@@ -39,7 +39,7 @@ const cleanString = str => {
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201C\u201D]/g, '"')
     .replace('–', '--')
-    .replace('…', '...')
+    .replace(/\u2026/g, '...')
     .replace(/^\s*[\r\n]/gm, '');
 };
 
@@ -69,37 +69,28 @@ const cleanOldString = str => {
     });
 };
 
-const setLocalStorage = async (slug, page, parentKey, storageObj) => {
-  return page.evaluate(
-    (key, value) => {
-      localStorage.clear();
-      localStorage.setItem(key, JSON.stringify(value));
-    },
-    parentKey,
-    storageObj
-  );
-};
-
-const getLinksFromUrl = async (baseUrl, slug, prefix, parentKey = undefined, obj = undefined) => {
+const getLinksFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => {
   const page = await browser.newPage();
   await page.goto(`${baseUrl}${slug}`);
-  if (parentKey && obj) {
-    await setLocalStorage(page, parentKey, obj);
-  }
+  await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
+  await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
+  await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
   const hrefs = await page.$$eval(
     '.body a',
     (as, localPrefix) => {
       return as.reduce((acc, a) => {
-        acc[a.text] = a.href
-          .replace(`/${localPrefix}`, '')
-          .replace('http://docs.mongodb.com/guides', '')
-          .replace('https://docs.mongodb.com/guides', '')
-          .replace('http://127.0.0.1:9000', '')
-          .replace(/\/$/, '');
+        if (a.className === 'headerlink' || (a.offsetWidth > 0 || a.offsetHeight > 0)) {
+          acc[a.text] = a.href
+            .replace(`/${localPrefix}`, '')
+            .replace('http://docs.mongodb.com/guides', '')
+            .replace('https://docs.mongodb.com/guides', '')
+            .replace('http://127.0.0.1:9000', '')
+            .replace(/\/$/, '');
+        }
         return acc;
       }, {});
     },
-    prefix
+    gatsbyPrefix
   );
   return hrefs;
 };
@@ -107,14 +98,16 @@ const getLinksFromUrl = async (baseUrl, slug, prefix, parentKey = undefined, obj
 const getTextFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => {
   const page = await browser.newPage();
   await page.goto(`${baseUrl}${slug}`);
-  await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
-  await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
-  await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
-  const bodyElement = await page.$('.body');
+  if (slug) {
+    await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
+    await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
+    await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
+  }
+  const bodyElement = slug ? await page.$('.body') : await page.$('.guide-category-list');
   return page.evaluate(element => Promise.resolve(element.innerText), bodyElement);
 };
 
-const runComparisons = async (slug, storageObj = {}) => {
+const runComparisons = async (slug, storageObj = defaultStorageObj) => {
   const key = Object.keys(storageObj)[0];
   const val = Object.values(storageObj)[0];
   return Promise.all([
@@ -129,8 +122,17 @@ const runComparisons = async (slug, storageObj = {}) => {
   ]);
 };
 
+describe('landing page', () => {
+  it(`file text is the same`, async () => {
+    expect.assertions(1);
+
+    const [legacyText, snootyText] = await runComparisons('');
+    return expect(snootyText).toEqual(legacyText);
+  });
+});
+
 const slugs = slugArray;
-describe('with default local storage', () => {
+describe('with default tabs', () => {
   describe.each(slugs)('%p', slug => {
     describe('compare text', () => {
       it(`file text is the same`, async () => {
@@ -141,27 +143,13 @@ describe('with default local storage', () => {
       }, 1500000);
     });
 
-    describe('compare links', () => {
-      let oldLinks;
-      let newLinks;
-
-      beforeEach(async () => {
-        [oldLinks, newLinks] = await Promise.all([
-          await getLinksFromUrl(prodUrl, slug, gatsbyPrefix, 'tabPref', {
-            cloud: 'cloud',
-            languages: 'shell',
-            platforms: 'windows',
-          }),
-          await getLinksFromUrl(await browser.newPage(), localUrl, slug, gatsbyPrefix, 'mongodb-docs', {
-            cloud: 'cloud',
-            drivers: 'shell',
-            platforms: 'windows',
-          }),
+    describe.only('compare links', () => {
+      it(`links are the same`, async () => {
+        const [oldLinks, newLinks] = await Promise.all([
+          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
+          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
         ]);
-      });
-
-      it(`links are the same`, () => {
-        expect(oldLinks).toEqual(newLinks);
+        expect(newLinks).toEqual(oldLinks);
       });
     });
   });

@@ -34,8 +34,6 @@ const getSlugs = (dir, results) => {
     } else if (filePath.includes('index.html')) {
       if (filePath.match(new RegExp('public/(.*)/index.html'))) {
         results.push(filePath.match(new RegExp('public/(.*)/index.html'))[1]);
-      } else if (filePath.match(new RegExp('public/index.html'))) {
-        results.push('');
       }
     }
   });
