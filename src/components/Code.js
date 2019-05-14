@@ -45,6 +45,8 @@ export default class Code extends Component {
       }, 1500);
     } catch (err) {
       console.error(err);
+    } finally {
+      document.body.removeChild(tempElement);
     }
   };
 
