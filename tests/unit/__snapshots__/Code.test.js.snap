@@ -9,6 +9,7 @@ exports[`renders correctly 1`] = `
   >
     <button
       className="code-button--copy code-button"
+      onClick={[Function]}
       type="button"
     >
       copy
