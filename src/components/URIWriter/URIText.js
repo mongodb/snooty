@@ -5,12 +5,11 @@ import {
   TEMPLATE_TYPE_ATLAS_36,
   TEMPLATE_TYPE_ATLAS_34,
   TEMPLATE_TYPE_ATLAS,
-} from './URIWriter';
-
-export const URI_PLACEHOLDER = '<URISTRING>';
-export const USERNAME_PLACEHOLDER = '<USERNAME>';
-export const URISTRING_SHELL_PLACEHOLDER = '<URISTRING_SHELL>';
-export const URISTRING_SHELL_NOUSER_PLACEHOLDER = '<URISTRING_SHELL_NOUSER>';
+  URI_PLACEHOLDER,
+  USERNAME_PLACEHOLDER,
+  URISTRING_SHELL_PLACEHOLDER,
+  URISTRING_SHELL_NOUSER_PLACEHOLDER,
+} from './constants';
 
 const TEMPLATE_OPTIONS = {
   [TEMPLATE_TYPE_SELF_MANAGED]: [
@@ -67,12 +66,12 @@ function optionStringifier(options, uri) {
 
 function generateURI(uri, activeDeployment, templateType) {
   let template = activeDeployment;
-  if (uri.env) {
-    template = uri.env;
-  }
-
-  if (activeDeployment === TEMPLATE_TYPE_ATLAS) {
+  if (Object.entries(uri).length === 0 && activeDeployment === TEMPLATE_TYPE_ATLAS) {
     template = TEMPLATE_TYPE_ATLAS_36;
+  } else if (uri.atlasVersion) {
+    template = uri.atlasVersion;
+  } else if (uri.localEnv) {
+    template = uri.localEnv;
   }
 
   const username = uri.username || '$[username]';
@@ -80,11 +79,7 @@ function generateURI(uri, activeDeployment, templateType) {
   const database = uri.database || '$[database]';
   const replicaSet = uri.replicaSet || '$[replicaSet]';
   const options = optionStringifier(TEMPLATE_OPTIONS[template], uri);
-  let hostlist = '$[hostlist]';
-  if (uri.hostlist && Object.values(uri.hostlist).length > 0 && !Object.values(uri.hostlist).every(e => e === '')) {
-    hostlist = Object.values(uri.hostlist);
-    hostlist = hostlist.filter(host => host !== '');
-  }
+  const hostlist = uri.hostlist && uri.hostlist.length > 0 ? uri.hostlist : '$[hostlist]';
 
   const TEMPLATES = {
     [TEMPLATE_TYPE_SELF_MANAGED]: {
@@ -127,11 +122,11 @@ function URIText({ value, activeDeployment, uri }) {
 URIText.propTypes = {
   activeDeployment: PropTypes.string,
   uri: PropTypes.shape({
-    atlas: PropTypes.string,
+    atlasVersion: PropTypes.string,
     authSource: PropTypes.string,
     database: PropTypes.string,
-    env: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    hostlist: PropTypes.objectOf(PropTypes.string),
+    localEnv: PropTypes.string,
+    hostlist: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
     replicaSet: PropTypes.string,
     username: PropTypes.string,
   }).isRequired,

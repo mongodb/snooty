@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import URIText, {
+import URIText from './URIWriter/URIText';
+import {
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
   URISTRING_SHELL_PLACEHOLDER,
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
-} from './URIText';
+} from './URIWriter/constants';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -14,9 +15,10 @@ const URI_PLACEHOLDERS = [
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 ];
 
-const Code = ({ nodeData: { value }, activeTabs: { cloud }, uri }) => {
+const Code = ({ nodeData: { value }, activeTabs: { cloud }, uri: { cloudURI, localURI } }) => {
   let code = value;
   if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
+    const uri = cloud === 'cloud' ? cloudURI : localURI;
     code = <URIText value={code} activeDeployment={cloud} uri={uri} />;
   }
 

@@ -17,7 +17,7 @@ import Heading from './Heading';
 import BlockQuote from './BlockQuote';
 import Reference from './Reference';
 import Strong from './Strong';
-import URIWriter from './URIWriter';
+import URIWriter from './URIWriter/URIWriter';
 import TitleReference from './TitleReference';
 
 import RoleApi from './Roles/Api';

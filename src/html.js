@@ -51,9 +51,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         id="___gatsby"
         dangerouslySetInnerHTML={{ __html: body }} // eslint-disable-line react/no-danger
       />
-      <script type="text/javascript" src={`${getPrefix()}/static/lib/jquery.min.js`} />
-      <script type="text/javascript" src={`${getPrefix()}/static/lib/bootstrap.js`} />
-      <script type="text/javascript" src={`${getPrefix()}/static/controller.js`} />
       {postBodyComponents}
     </body>
   </html>
