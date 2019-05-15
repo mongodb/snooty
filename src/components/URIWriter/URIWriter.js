@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { TEMPLATE_TYPE_ATLAS } from './constants';
 import CloudForm from './CloudForm';

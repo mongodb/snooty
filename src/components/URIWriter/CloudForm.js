@@ -44,7 +44,7 @@ export default class CloudForm extends Component {
           ...EMPTY_URI,
         },
       }),
-      () => handleUpdateURIWriter(this.state.uri)
+      () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
     );
   };
 
@@ -155,7 +155,7 @@ export default class CloudForm extends Component {
           ...envAndClusters,
         },
       },
-      () => handleUpdateURIWriter(this.state.uri)
+      () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
     );
 
     return true;
@@ -185,7 +185,7 @@ export default class CloudForm extends Component {
           ...this.parseURIParams(uriParams),
         },
       },
-      () => handleUpdateURIWriter(this.state.uri)
+      () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
     );
   };
 

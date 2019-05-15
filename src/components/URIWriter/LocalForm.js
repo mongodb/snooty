@@ -46,7 +46,7 @@ export default class LocalForm extends Component {
           },
         }),
         () => {
-          handleUpdateURIWriter(this.state.uri);
+          handleUpdateURIWriter(this.state.uri); // eslint-disable-line react/destructuring-assignment
           this.fillHostInputs(parentURI.localURI.hostlist);
         }
       );
@@ -105,7 +105,7 @@ export default class LocalForm extends Component {
           hostlist: Object.values(hostInputs).filter(host => !this.hostnameHasError(host) && host !== ''),
         },
       }),
-      () => handleUpdateURIWriter(this.state.uri)
+      () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
     );
   };
 
@@ -133,7 +133,7 @@ export default class LocalForm extends Component {
   handleLocalEnvChange = localEnv => {
     const { handleUpdateURIWriter } = this.props;
 
-    this.setState(prevState => ({ uri: { ...prevState.uri, localEnv } }), () => handleUpdateURIWriter(this.state.uri));
+    this.setState(prevState => ({ uri: { ...prevState.uri, localEnv } }), () => handleUpdateURIWriter(this.state.uri)); // eslint-disable-line react/destructuring-assignment
   };
 
   handleInputChange = ({ target, target: { name, value } }) => {
@@ -145,7 +145,7 @@ export default class LocalForm extends Component {
     } else {
       this.setState(
         prevState => ({ uri: { ...prevState.uri, [name]: value } }),
-        () => handleUpdateURIWriter(this.state.uri)
+        () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
       );
     }
   };
