@@ -47,10 +47,10 @@ Code.propTypes = {
     cloud: PropTypes.string,
   }).isRequired,
   uri: PropTypes.shape({
-    atlas: PropTypes.string,
+    atlasVersion: PropTypes.string,
     authSource: PropTypes.string,
     database: PropTypes.string,
-    env: PropTypes.string,
+    localEnv: PropTypes.string,
     hostlist: PropTypes.object,
     replicaSet: PropTypes.string,
     username: PropTypes.string,
@@ -58,7 +58,10 @@ Code.propTypes = {
 };
 
 Code.defaultProps = {
-  uri: undefined,
+  uri: {
+    cloudURI: undefined,
+    localURI: undefined,
+  },
 };
 
 export default Code;

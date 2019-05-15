@@ -68,6 +68,8 @@ function generateURI(uri, activeDeployment, templateType) {
   let template = activeDeployment;
   if (Object.entries(uri).length === 0 && activeDeployment === TEMPLATE_TYPE_ATLAS) {
     template = TEMPLATE_TYPE_ATLAS_36;
+  } else if (Object.entries(uri).length === 0 && activeDeployment === TEMPLATE_TYPE_SELF_MANAGED) {
+    template = TEMPLATE_TYPE_SELF_MANAGED;
   } else if (uri.atlasVersion) {
     template = uri.atlasVersion;
   } else if (uri.localEnv) {

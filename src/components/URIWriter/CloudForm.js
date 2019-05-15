@@ -3,20 +3,23 @@ import PropTypes from 'prop-types';
 import { TEMPLATE_TYPE_ATLAS_34, TEMPLATE_TYPE_ATLAS_36 } from './constants';
 import { getLocalValue, setLocalValue } from '../../localStorage';
 
+const EMPTY_URI = {
+  atlasVersion: TEMPLATE_TYPE_ATLAS_36,
+  authSource: '',
+  database: '',
+  hostlist: [],
+  replicaSet: '',
+  ssl: '',
+  username: '',
+};
+
 export default class CloudForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       connectionString: '',
-      uri: {
-        atlasVersion: TEMPLATE_TYPE_ATLAS_36,
-        authSource: '',
-        database: '',
-        hostlist: [],
-        replicaSet: '',
-        username: '',
-      },
+      uri: { ...EMPTY_URI },
     };
   }
 
@@ -38,12 +41,7 @@ export default class CloudForm extends Component {
       prevState => ({
         connectionString: prevState.connectionString,
         uri: {
-          atlasVersion: TEMPLATE_TYPE_ATLAS_36,
-          authSource: '',
-          database: '',
-          hostlist: [],
-          replicaSet: '',
-          username: '',
+          ...EMPTY_URI,
         },
       }),
       () => handleUpdateURIWriter(this.state.uri)
@@ -174,12 +172,15 @@ export default class CloudForm extends Component {
     }
 
     const [, , username, , hostlist, database, uriParams] = matchesArray;
+
+    const hostlistArr = hostlist.split(',');
     this.setState(
       {
         uri: {
+          ...EMPTY_URI,
           atlasVersion,
           database,
-          hostlist,
+          hostlist: hostlistArr,
           username,
           ...this.parseURIParams(uriParams),
         },
@@ -190,9 +191,7 @@ export default class CloudForm extends Component {
 
   parseConnectionString = (pastedValue, target = undefined) => {
     const atlasString = pastedValue.replace(/[\n\r]+/g, '').trim();
-    console.log(target);
     if (target) {
-      console.log('ok');
       const error = target.setCustomValidity(this.formHasError(atlasString));
       if (error) {
         this.clearURI();
@@ -210,7 +209,6 @@ export default class CloudForm extends Component {
   };
 
   handleInputChange = ({ target, target: { value } }) => {
-    console.log(target);
     this.setState({ connectionString: value }, () => {
       this.parseConnectionString(value, target);
       setLocalValue('connectionString', value);

@@ -64,7 +64,6 @@ export default class LocalForm extends Component {
     hostInputs[`host${this.hostlistCounter}`] = '';
     this.hostlistCounter += 1;
     this.setState({ hostInputs });
-    console.log(hostInputs);
   };
 
   hostnameHasError = host => {
@@ -111,7 +110,6 @@ export default class LocalForm extends Component {
   };
 
   updateHostInputs = (name, value) => {
-    const { handleUpdateURIWriter } = this.props;
     const { hostInputs } = this.state;
 
     let updatedHostInputs = hostInputs;
@@ -130,29 +128,6 @@ export default class LocalForm extends Component {
       }
     }
     this.setState({ hostInputs: updatedHostInputs }, () => this.updateHostlist());
-    /* this.setState(
-        prevState => ({
-          hostlist: {
-            ...prevState.hostlist,
-            [name]: value,
-          },
-        }),
-        () => {
-          if (this.hostnameHasError(value) === '') {
-            handleUpdateURIWriter(this.state);
-          }
-          // eslint-disable-next-line react/destructuring-assignment
-          if (!Object.values(this.state.hostlist).includes('')) {
-            const newKeyName = `host${this.hostlistCounter++}`; // eslint-disable-line no-plusplus
-            this.setState(prevState => ({
-              hostlist: {
-                ...prevState.hostlist,
-                [newKeyName]: '',
-              },
-            }));
-          }
-        }
-      ); */
   };
 
   handleLocalEnvChange = localEnv => {
