@@ -3,13 +3,13 @@
 exports[`Cloud  (MongoDB version 3.6) when called without a placeholder returns the original string 1`] = `"This is the body text"`;
 
 exports[`Cloud  (MongoDB version 3.6) when there are multiple placeholders replaces all placeholders 1`] = `
-"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?retryWrites=true\\")
+"return MongoClient(\\"mongodb+srv://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?retryWrites=true\\")
         username is myUsername
         shell string (mongodb+srv://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase)
         without password (mongodb+srv://cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase --username myUsername --password)"
 `;
 
-exports[`Cloud  (MongoDB version 3.6) when there is a <URISTRNG> placeholder replaces the placeholder 1`] = `"return MongoClient(\\"mongodb://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?retryWrites=true\\")"`;
+exports[`Cloud  (MongoDB version 3.6) when there is a <URISTRNG> placeholder replaces the placeholder 1`] = `"return MongoClient(\\"mongodb+srv://myUsername:$[password]@cluster0-shard-00-00-igkvv.mongodb.net:27017/myDatabase?retryWrites=true\\")"`;
 
 exports[`Cloud (MongoDB version 3.4) when called without a placeholder returns the original string 1`] = `"This is the body text"`;
 
