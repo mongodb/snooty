@@ -37,7 +37,7 @@
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",
-    "test:regression": "GATSBY_PREFIX=guides/andrew/master jest regression --setupFiles dotenv/config",
+    "test:regression": "GATSBY_PREFIX=guides/sophstad/DOCSP-5575 jest regression --setupFiles dotenv/config",
     "test:unit": "jest unit"
   },
   "jest": {

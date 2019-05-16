@@ -69,6 +69,15 @@ const cleanOldString = str => {
     });
 };
 
+/*
+ * Remove errors in the old build system
+ * - Migration Support should have been rendered as a primary section, so we should not expect to find it in Snooty's TOC
+ * - Remove resulting blank lines
+ */
+const cleanOldTOC = str => {
+  return str.replace(/Migration Support/g, '').replace(/^\s*[\r\n]/gm, '');
+};
+
 const getLinksFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => {
   const page = await browser.newPage();
   await page.goto(`${baseUrl}${slug}`);
@@ -107,6 +116,13 @@ const getTextFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => {
   return page.evaluate(element => Promise.resolve(element.innerText), bodyElement);
 };
 
+const getTOCFromUrl = async (baseUrl, slug) => {
+  const page = await browser.newPage();
+  await page.goto(`${baseUrl}${slug}`);
+  const tocElement = await page.$('.left-toc');
+  return page.evaluate(element => Promise.resolve(element.innerText), tocElement);
+};
+
 const runComparisons = async (slug, storageObj = defaultStorageObj) => {
   const key = Object.keys(storageObj)[0];
   const val = Object.values(storageObj)[0];
@@ -143,7 +159,17 @@ describe('with default tabs', () => {
       }, 1500000);
     });
 
-    describe.only('compare links', () => {
+    describe('compare TOC', () => {
+      it(`section headings are the same`, async () => {
+        const [oldTOC, newTOC] = await Promise.all([
+          await getTOCFromUrl(prodUrl, slug),
+          await getTOCFromUrl(localUrl, slug),
+        ]);
+        expect(newTOC).toEqual(cleanOldTOC(oldTOC));
+      });
+    });
+
+    describe('compare links', () => {
       it(`links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
           await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
