@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Highlight from 'react-highlight';
 import { reportAnalytics } from '../util';
+import 'highlight.js/styles/a11y-light.css';
 import URIText, {
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
@@ -53,7 +55,7 @@ export default class Code extends Component {
   render() {
     const { copied } = this.state;
     const {
-      nodeData: { value },
+      nodeData: { value, lang },
       activeTabs: { cloud },
       uri,
     } = this.props;
@@ -84,9 +86,9 @@ export default class Code extends Component {
             </div>
           </button>
         </div>
-        <div className="copyable-code-block highlight-python notranslate">
+        <div className={`copyable-code-block notranslate highlight-${lang}`}>
           <div className="highlight">
-            <pre>{code}</pre>
+            <Highlight className={lang}>{code}</Highlight>
           </div>
         </div>
       </div>
