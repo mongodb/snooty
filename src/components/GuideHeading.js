@@ -3,21 +3,19 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Pills from './Pills';
 import { stringifyTab } from '../constants';
+import { slugifyTitle } from '../util';
 
-const GuideHeading = ({ activeTabs, cloud, drivers, sections, setActiveTab, ...rest }) => {
-  const getSection = params => {
-    return sections.filter(s => s[params[0]] === params[1])[0];
-  };
-
+const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActiveTab, time, title, ...rest }) => {
   const setActivePill = pillsetName => pill => {
     setActiveTab(pill, pillsetName);
   };
 
+  const displayTitle = title.children[0].value;
   return (
-    <div className="section" id="SOMETHING_HERE">
+    <div className="section" id={slugifyTitle(displayTitle)}>
       <h1>
-        {getSection(['type', 'heading']).children[0].value}
-        <a className="headerlink" href="#read-data-from-mongodb" title="Permalink to this headline">
+        {displayTitle}
+        <a className="headerlink" href={`#${slugifyTitle(displayTitle)}`} title="Permalink to this headline">
           ¶
         </a>
       </h1>
@@ -60,36 +58,51 @@ const GuideHeading = ({ activeTabs, cloud, drivers, sections, setActiveTab, ...r
 
       <hr />
 
-      <p>Author: {getSection(['name', 'author']).argument[0].value}</p>
+      <p>Author: {author.argument[0].value}</p>
       <section>
-        {getSection(['name', 'result_description']).children.map((element, index) => (
+        {description.children.map((element, index) => (
           <ComponentFactory {...rest} nodeData={element} key={index} />
         ))}
       </section>
       <p>
-        <em>Time required: {getSection(['name', 'time']).argument[0].value} minutes</em>
+        <em>Time required: {time.argument[0].value} minutes</em>
       </p>
     </div>
   );
 };
 
 GuideHeading.propTypes = {
+  author: PropTypes.shape({
+    argument: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string,
+      })
+    ).isRequired,
+  }).isRequired,
   activeTabs: PropTypes.shape({
     cloud: PropTypes.string,
     drivers: PropTypes.string,
   }).isRequired,
-  setActiveTab: PropTypes.func.isRequired,
   cloud: PropTypes.arrayOf(PropTypes.string),
+  description: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
   drivers: PropTypes.arrayOf(PropTypes.string),
-  sections: PropTypes.arrayOf(
-    PropTypes.shape({
-      children: PropTypes.arrayOf(
-        PropTypes.shape({
-          value: PropTypes.string,
-        })
-      ),
-    })
-  ).isRequired,
+  setActiveTab: PropTypes.func.isRequired,
+  time: PropTypes.shape({
+    argument: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string,
+      })
+    ).isRequired,
+  }).isRequired,
+  title: PropTypes.shape({
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string,
+      })
+    ).isRequired,
+  }).isRequired,
 };
 
 GuideHeading.defaultProps = {

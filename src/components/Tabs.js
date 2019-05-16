@@ -60,8 +60,27 @@ export default class Tabs extends Component {
                   role="tab"
                   aria-selected={activeTabs[tabsetName] === tabName ? 'true' : 'false'}
                   key={index}
-                  onClick={() => {
-                    setActiveTab(tabName, tabsetName);
+                  onClick={async e => {
+                    const element = e.target;
+                    // Get the initial position of the tab clicked
+                    // to avoid page jumping after new tab is selected
+                    const initRect = element.getBoundingClientRect();
+
+                    // Get the position where the user scrolled to
+                    const initScrollY = window.scrollY;
+
+                    // Calc the distance from the tab strip to the top
+                    // of whatever the user has scrolled to
+                    const offset = initScrollY - initRect.y;
+
+                    // Await for page to re-render after setting active tab
+                    await setActiveTab(tabName, tabsetName);
+
+                    // Get the position of tab strip after re-render
+                    const rects = element.getBoundingClientRect();
+
+                    // Reset the scroll position of the browser
+                    window.scrollTo(rects.x, rects.y + offset);
                     reportAnalytics('Tab Selected', {
                       tabId: tabName,
                       title: stringifyTab(tabName),
