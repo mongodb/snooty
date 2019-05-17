@@ -31,6 +31,9 @@ export const getPrefix = () =>
     ? `/${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`
     : '');
 
+/*
+ * Limit the rate at which a function is called (for example, useful to limit invokation of a scroll event listener)
+ */
 export const throttle = (func, wait) => {
   let args = null;
   let result = null;
