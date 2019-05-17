@@ -23,7 +23,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
       />
       <link rel="stylesheet" href={`${getPrefix()}/static/guides.css`} type="text/css" />
-      <link rel="stylesheet" href={`${getPrefix()}/static/pygments.css`} type="text/css" />
       <link rel="stylesheet" href={`${getPrefix()}/static/css/navbar.min.css`} type="text/css" />
       <style
         dangerouslySetInnerHTML={{
