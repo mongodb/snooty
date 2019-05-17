@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { TEMPLATE_TYPE_ATLAS_34, TEMPLATE_TYPE_ATLAS_36 } from './constants';
 import { getLocalValue, setLocalValue } from '../../localStorage';
 
+const re3dot4 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/(\S+)\?(\S+)/;
+const re3dot6 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/([^\s?]+)\?/;
+
 const EMPTY_URI = {
   atlasVersion: TEMPLATE_TYPE_ATLAS_36,
   authSource: '',
@@ -24,14 +27,10 @@ export default class CloudForm extends Component {
   }
 
   componentDidMount() {
+    // Fetch connection string from localStorage and set URI values accordingly
     const connectionString = getLocalValue('connectionString');
     if (connectionString) {
-      this.setState(
-        {
-          connectionString,
-        },
-        () => this.parseConnectionString(connectionString)
-      );
+      this.setState({ connectionString }, () => this.parseConnectionString(connectionString));
     }
   }
 
@@ -49,9 +48,6 @@ export default class CloudForm extends Component {
   };
 
   formHasError = str => {
-    const re3dot4 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/(\S+)\?(\S+)/;
-    const re3dot6 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/([^\s?]+)\?/;
-
     if (!str || str === '' || str.match(re3dot4) || str.match(re3dot6) || str.indexOf(' --') > -1) {
       return '';
     }
@@ -73,6 +69,10 @@ export default class CloudForm extends Component {
     return params;
   };
 
+  /*
+   * Parse out the database name, hostlist, and uri params from a shell string
+   * Return an array of shape [{uriFields}, error] where error is a boolean
+   */
   parseOutEnvAndClusters = splitOnSpaceClusterEnv => {
     // depending on whether this is 3.6 or 3.4 the cluster info looks slightly different
     // 3.4 uses the URI to pass in a replica set name
@@ -142,6 +142,7 @@ export default class CloudForm extends Component {
     const splitOnSpace = atlasString.split(' ');
     let splitOnSpaceClusterEnv = splitOnSpace[1];
     splitOnSpaceClusterEnv = splitOnSpaceClusterEnv.replace(/"/g, '');
+
     const [envAndClusters, error] = this.parseOutEnvAndClusters(splitOnSpaceClusterEnv);
     if (error) {
       this.clearURI();
@@ -163,8 +164,6 @@ export default class CloudForm extends Component {
 
   parseAtlasString = (atlasString, atlasVersion) => {
     const { handleUpdateURIWriter } = this.props;
-    const re3dot4 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/(\S+)\?(\S+)/;
-    const re3dot6 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/([^\s?]+)\?/;
     const matchesArray = atlasString.match(re3dot4) || atlasString.match(re3dot6);
     if (!matchesArray) {
       this.clearURI();
@@ -172,7 +171,6 @@ export default class CloudForm extends Component {
     }
 
     const [, , username, , hostlist, database, uriParams] = matchesArray;
-
     const hostlistArr = hostlist.split(',');
     this.setState(
       {

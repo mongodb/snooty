@@ -37,6 +37,8 @@ export default class LocalForm extends Component {
   componentDidMount() {
     const { handleUpdateURIWriter } = this.props;
     const parentURI = getLocalValue('uri');
+
+    // Populate forms from localStorage
     if (parentURI) {
       this.setState(
         prevState => ({
@@ -47,13 +49,14 @@ export default class LocalForm extends Component {
         }),
         () => {
           handleUpdateURIWriter(this.state.uri); // eslint-disable-line react/destructuring-assignment
-          this.fillHostInputs(parentURI.localURI.hostlist);
+          this.populateHostInputs(parentURI.localURI.hostlist);
         }
       );
     }
   }
 
-  fillHostInputs = hostlist => {
+  populateHostInputs = hostlist => {
+    // Populate the host input fields using the validated hostlist fetched from localStorage
     const hostInputs = {};
     if (hostlist) {
       hostlist.forEach(host => {
@@ -95,6 +98,7 @@ export default class LocalForm extends Component {
     return deletedState;
   };
 
+  // Set state.uri.hostlist from the values in the input fields
   updateHostlist = () => {
     const { handleUpdateURIWriter } = this.props;
     const { hostInputs } = this.state;
@@ -130,10 +134,15 @@ export default class LocalForm extends Component {
     this.setState({ hostInputs: updatedHostInputs }, () => this.updateHostlist());
   };
 
-  handleLocalEnvChange = localEnv => {
+  toggleLocalEnv = localEnv => {
     const { handleUpdateURIWriter } = this.props;
 
-    this.setState(prevState => ({ uri: { ...prevState.uri, localEnv } }), () => handleUpdateURIWriter(this.state.uri)); // eslint-disable-line react/destructuring-assignment
+    this.setState(
+      prevState => ({
+        uri: { ...prevState.uri, localEnv },
+      }),
+      () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
+    );
   };
 
   handleInputChange = ({ target, target: { name, value } }) => {
@@ -167,7 +176,7 @@ export default class LocalForm extends Component {
               >
                 <span
                   id={env.key.replace(/\s+/g, '-')}
-                  onClick={() => this.handleLocalEnvChange(env.key)}
+                  onClick={() => this.toggleLocalEnv(env.key)}
                   role="button"
                   tabIndex={index}
                 >
