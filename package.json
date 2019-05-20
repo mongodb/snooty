@@ -34,7 +34,7 @@
     "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop --prefix-paths",
     "lint": "eslint src/ tests/",
-    "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
+    "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/**/*.js\"",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",
     "test:regression": "GATSBY_PREFIX=guides/sophstad/DOCSP-5575 jest regression --setupFiles dotenv/config",
