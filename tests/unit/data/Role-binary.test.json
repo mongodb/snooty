@@ -2,12 +2,10 @@
   "type": "role",
   "position": {
     "start": {
-      "line": 6
+      "line": 16
     }
   },
   "name": "binary",
-  "label": "~bin.mongod.exe",
   "target": "~bin.mongod.exe",
-  "raw": "~bin.mongod.exe",
   "children": []
 }

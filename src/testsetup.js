@@ -30,3 +30,5 @@ Object.defineProperty(global.self, 'crypto', {
     getRandomValues: arr => crypto.randomBytes(arr.length),
   },
 });
+
+window.scrollTo = () => {};

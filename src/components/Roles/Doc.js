@@ -8,7 +8,7 @@ const RoleDoc = ({ nodeData: { label, target }, refDocMapping }) => {
     return findKeyValuePair(refDocMapping[slug].ast.children, 'type', 'heading').children[0].value;
   };
 
-  const labelDisplay = label.value || getLinkText(label);
+  const labelDisplay = label && label.value ? label.value : getLinkText(target);
   return (
     <a href={target} className="reference internal">
       {labelDisplay}
@@ -18,7 +18,9 @@ const RoleDoc = ({ nodeData: { label, target }, refDocMapping }) => {
 
 RoleDoc.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    label: PropTypes.shape({
+      value: PropTypes.string,
+    }),
     target: PropTypes.string.isRequired,
   }).isRequired,
   refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,

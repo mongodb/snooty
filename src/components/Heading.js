@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
 const Heading = props => {
-  const { nodeData } = props;
+  const { id, nodeData } = props;
   return (
     <h3>
       {nodeData.children.map((element, index) => {
@@ -12,7 +12,7 @@ const Heading = props => {
         }
         return <ComponentFactory {...props} nodeData={element} key={index} />;
       })}
-      <a className="headerlink" href="#BLA-BLA" title="Permalink to this headline">
+      <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
         ¶
       </a>
     </h3>
@@ -20,6 +20,7 @@ const Heading = props => {
 };
 
 Heading.propTypes = {
+  id: PropTypes.string,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -27,6 +28,10 @@ Heading.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+};
+
+Heading.defaultProps = {
+  id: '',
 };
 
 export default Heading;

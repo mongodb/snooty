@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { REF_TARGETS } from '../../constants';
 
 const RoleManual = ({ nodeData: { label, target } }) => {
-  const labelDisplay = label.value || label;
-
+  const labelDisplay = label && label.value ? label.value : target;
   return (
     <a href={`${REF_TARGETS.manual}${target.replace('/manual', '')}`} className="reference external">
       {labelDisplay}
@@ -14,7 +13,9 @@ const RoleManual = ({ nodeData: { label, target } }) => {
 
 RoleManual.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    label: PropTypes.shape({
+      value: PropTypes.string,
+    }),
     target: PropTypes.string.isRequired,
   }).isRequired,
 };
