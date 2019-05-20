@@ -1,7 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import URIText from '../../src/components/URIText';
+import URIText from '../../src/components/URIWriter/URIText';
 import { DEPLOYMENTS } from '../../src/constants';
+import {
+  TEMPLATE_TYPE_ATLAS_34,
+  TEMPLATE_TYPE_ATLAS_36,
+  TEMPLATE_TYPE_SELF_MANAGED,
+  TEMPLATE_TYPE_REPLICA_SET,
+} from '../../src/components/URIWriter/constants';
 
 const CLOUD_DEPLOYMENT = DEPLOYMENTS[0];
 const LOCAL_DEPLOYMENT = DEPLOYMENTS[1];
@@ -11,12 +17,12 @@ describe('local MongoDB', () => {
   const uri = {
     authSource: 'admin',
     database: 'myDatabase',
-    env: '',
-    hostlist: {
-      host0: 'cluster0-shard-00-00-igkvv.mongodb.net:27017',
-      host1: 'cluster0-shard-00-01-igkvv.mongodb.net:27017',
-      host2: 'cluster0-shard-00-02-igkvv.mongodb.net:27017',
-    },
+    hostlist: [
+      'cluster0-shard-00-00-igkvv.mongodb.net:27017',
+      'cluster0-shard-00-01-igkvv.mongodb.net:27017',
+      'cluster0-shard-00-02-igkvv.mongodb.net:27017',
+    ],
+    localEnv: TEMPLATE_TYPE_SELF_MANAGED,
     replicaSet: '',
     ssl: '',
     username: 'myUsername',
@@ -55,10 +61,8 @@ describe('local MongoDB with replica set', () => {
   const uri = {
     authSource: '',
     database: 'myDatabase',
-    env: 'local MongoDB with replica set',
-    hostlist: {
-      host0: 'cluster0-shard-00-00-igkvv.mongodb.net:27017',
-    },
+    hostlist: ['cluster0-shard-00-00-igkvv.mongodb.net:27017'],
+    localEnv: TEMPLATE_TYPE_REPLICA_SET,
     replicaSet: 'Cluster0-shard-8',
     ssl: '',
     username: 'myUsername',
@@ -92,15 +96,13 @@ describe('local MongoDB with replica set', () => {
   });
 });
 
-describe('Cloud (unspecified version)', () => {
+describe('Cloud  (MongoDB version 3.6)', () => {
   const activeDeployment = CLOUD_DEPLOYMENT;
   const uri = {
+    atlasVersion: TEMPLATE_TYPE_ATLAS_36,
     authSource: 'admin',
     database: 'myDatabase',
-    env: '',
-    hostlist: {
-      host0: 'cluster0-shard-00-00-igkvv.mongodb.net:27017',
-    },
+    hostlist: ['cluster0-shard-00-00-igkvv.mongodb.net:27017'],
     replicaSet: 'Cluster0-shard-8',
     ssl: '',
     username: 'myUsername',
@@ -137,14 +139,14 @@ describe('Cloud (unspecified version)', () => {
 describe('Cloud (MongoDB version 3.4)', () => {
   const activeDeployment = CLOUD_DEPLOYMENT;
   const uri = {
+    atlasVersion: TEMPLATE_TYPE_ATLAS_34,
     authSource: 'admin',
     database: 'myDatabase',
-    env: 'Atlas (Cloud) v. 3.4',
-    hostlist: {
-      host0: 'cluster0-shard-00-00-igkvv.mongodb.net:27017',
-      host1: 'cluster0-shard-00-01-igkvv.mongodb.net:27017',
-      host2: 'cluster0-shard-00-02-igkvv.mongodb.net:27017',
-    },
+    hostlist: [
+      'cluster0-shard-00-00-igkvv.mongodb.net:27017',
+      'cluster0-shard-00-01-igkvv.mongodb.net:27017',
+      'cluster0-shard-00-02-igkvv.mongodb.net:27017',
+    ],
     replicaSet: '',
     ssl: '',
     username: 'myUsername',

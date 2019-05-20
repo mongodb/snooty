@@ -25,9 +25,10 @@ exports[`renders correctly 1`] = `
   </div>
   <div
     className="section"
-    id="SOMETHING-HERE"
+    id="connect-to-your-mongodb-instance"
   >
     <ComponentFactory
+      id="connect-to-your-mongodb-instance"
       key="0"
       nodeData={
         Object {

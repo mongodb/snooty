@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import Highlight from 'react-highlight';
 import { reportAnalytics } from '../util';
 import 'highlight.js/styles/a11y-light.css';
-import URIText, {
+import URIText from './URIWriter/URIText';
+import {
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
   URISTRING_SHELL_PLACEHOLDER,
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
-} from './URIText';
+} from './URIWriter/constants';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -57,10 +58,11 @@ export default class Code extends Component {
     const {
       nodeData: { value, lang },
       activeTabs: { cloud },
-      uri,
+      uri: { cloudURI, localURI },
     } = this.props;
     let code = value;
     if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
+      const uri = cloud === 'cloud' ? cloudURI : localURI;
       code = <URIText value={code} activeDeployment={cloud} uri={uri} />;
     }
     return (
@@ -104,10 +106,10 @@ Code.propTypes = {
     cloud: PropTypes.string,
   }).isRequired,
   uri: PropTypes.shape({
-    atlas: PropTypes.string,
+    atlasVersion: PropTypes.string,
     authSource: PropTypes.string,
     database: PropTypes.string,
-    env: PropTypes.string,
+    localEnv: PropTypes.string,
     hostlist: PropTypes.object,
     replicaSet: PropTypes.string,
     username: PropTypes.string,
@@ -115,5 +117,8 @@ Code.propTypes = {
 };
 
 Code.defaultProps = {
-  uri: undefined,
+  uri: {
+    cloudURI: undefined,
+    localURI: undefined,
+  },
 };

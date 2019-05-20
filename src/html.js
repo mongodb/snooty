@@ -25,6 +25,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <link rel="stylesheet" href={`${getPrefix()}/static/guides.css`} type="text/css" />
       <link rel="stylesheet" href={`${getPrefix()}/static/css/navbar.min.css`} type="text/css" />
       <style
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: `
           .hljs {
@@ -61,9 +62,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         id="___gatsby"
         dangerouslySetInnerHTML={{ __html: body }} // eslint-disable-line react/no-danger
       />
-      <script type="text/javascript" src={`${getPrefix()}/static/lib/jquery.min.js`} />
-      <script type="text/javascript" src={`${getPrefix()}/static/lib/bootstrap.js`} />
-      <script type="text/javascript" src={`${getPrefix()}/static/controller.js`} />
       {postBodyComponents}
     </body>
   </html>

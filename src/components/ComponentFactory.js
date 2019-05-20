@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ADMONITIONS } from '../constants';
 import Step from './Step';
 import Paragraph from './Paragraph';
 import List from './List';
@@ -17,7 +18,7 @@ import Heading from './Heading';
 import BlockQuote from './BlockQuote';
 import Reference from './Reference';
 import Strong from './Strong';
-import URIWriter from './URIWriter';
+import URIWriter from './URIWriter/URIWriter';
 import TitleReference from './TitleReference';
 
 import RoleApi from './Roles/Api';
@@ -77,7 +78,6 @@ export default class ComponentFactory extends Component {
 
   selectComponent() {
     const {
-      admonitions,
       nodeData: { children, name, type },
       ...rest
     } = this.props;
@@ -107,7 +107,7 @@ export default class ComponentFactory extends Component {
     }
     // the different admonition types are all under the Admonition component
     // see 'this.admonitions' in 'guide.js' for the list
-    if (!ComponentType && admonitions && admonitions.includes(name)) {
+    if (!ComponentType && ADMONITIONS.includes(name)) {
       ComponentType = this.componentMap.admonition;
     }
     // component with this type not implemented
@@ -129,13 +129,8 @@ export default class ComponentFactory extends Component {
 }
 
 ComponentFactory.propTypes = {
-  admonitions: PropTypes.arrayOf(PropTypes.string),
   nodeData: PropTypes.shape({
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
-};
-
-ComponentFactory.defaultProps = {
-  admonitions: undefined,
 };
