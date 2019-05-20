@@ -7,6 +7,9 @@ module.exports = {
     },
     {
       displayName: 'unit',
+      moduleNameMapper: {
+        '^.+\\.(css)$': '<rootDir>/tests/unit/__mockStyles.js',
+      },
       setupFilesAfterEnv: ['<rootDir>/src/testSetup.js'],
       snapshotSerializers: ['enzyme-to-json/serializer'],
       testMatch: ['<rootDir>/tests/unit/*.test.js'],

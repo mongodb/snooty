@@ -41,5 +41,3 @@ const getSlugs = (dir, results) => {
 };
 
 export const slugArray = getSlugs('./public', []);
-
-window.scrollTo = () => {};

@@ -1,9 +1,11 @@
 import { DEPLOYMENTS, LANGUAGES, PLATFORMS, stringifyTab } from '../../src/constants';
 import { slugArray } from '../../src/testsetup';
 
+require('dotenv').config({ path: './.env.production' });
+
+const gatsbyPrefix = process.env.GATSBY_PREFIX.substr(1);
 const prodUrl = 'https://docs.mongodb.com/guides/';
-const localUrl = `http://127.0.0.1:9000/${process.env.GATSBY_PREFIX}/`;
-const gatsbyPrefix = process.env.GATSBY_PREFIX;
+const localUrl = `http://127.0.0.1:9000/${gatsbyPrefix}/`;
 
 const defaultStorageObj = {
   cloud: 'cloud',
