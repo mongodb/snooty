@@ -23,21 +23,34 @@ const Category = ({ cards, category, refDocMapping }) => {
   const getCardCompletionTime = cardSlug =>
     findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value || DEFAULT_COMPLETION_TIME;
 
-  const columnSeparatedCards = [];
-  let tempCards = [];
+  const columnSeparatedCards = [[], [], []];
+  const lastRow = [];
 
   // create 3 sets of columns with cards
   cards.forEach((card, index) => {
-    // every set of 3, create new column
-    if (index % 3 === 0 && tempCards.length > 0) {
-      columnSeparatedCards.push(tempCards);
-      tempCards = [];
+    const modIndex = index % columnSeparatedCards.length;
+    columnSeparatedCards[modIndex].push(card);
+  });
+
+  // separate out last row so we can sort it
+  columnSeparatedCards.forEach(cardColumn => {
+    if (cardColumn.length > 0) {
+      lastRow.push(cardColumn[cardColumn.length - 1]);
     }
-    tempCards.push(card);
-    // at end of array of cards
-    if (index === cards.length - 1) {
-      columnSeparatedCards.push(tempCards);
+  });
+
+  // sort last row by largest height
+  lastRow.sort(a => {
+    if (a && a.name === 'multi-card') {
+      return -1;
     }
+    return 1;
+  });
+
+  // replace last row
+  lastRow.forEach((card, index) => {
+    columnSeparatedCards[index].pop();
+    columnSeparatedCards[index].push(card);
   });
 
   return (
