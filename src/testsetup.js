@@ -22,3 +22,5 @@ beforeAll(async () => {
 afterAll(() => {
   process.removeListener('unhandledRejection', rejectionHandler);
 });
+
+window.scrollTo = () => {};

@@ -1,9 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { findKeyValuePair, slugifyTitle } from '../util';
 
 const Step = props => {
   const { nodeData, showAllSteps, showStepIndex, stepNum } = props;
+  const getHeadingText = (node, stringArr) => {
+    if (node.value) {
+      stringArr.push(node.value);
+    } else if (node.children) {
+      node.children.forEach(child => {
+        stringArr = getHeadingText(child, stringArr); // eslint-disable-line no-param-reassign
+      });
+    }
+    return stringArr;
+  };
+
+  const headingNode = findKeyValuePair(nodeData.children, 'type', 'heading');
+  const headingId = slugifyTitle(getHeadingText(headingNode, []).join(''));
+
   return (
     <div
       className="sequence-block"
@@ -14,9 +29,9 @@ const Step = props => {
       <div className="bullet-block" style={{ display: !showAllSteps && 'none' }}>
         <div className="sequence-step">{stepNum + 1}</div>
       </div>
-      <div className="section" id="SOMETHING-HERE">
+      <div className="section" id={headingId}>
         {nodeData.children.map((child, index) => (
-          <ComponentFactory {...props} nodeData={child} key={index} />
+          <ComponentFactory {...props} nodeData={child} key={index} id={headingId} />
         ))}
       </div>
     </div>
