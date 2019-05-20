@@ -23,18 +23,54 @@ const Category = ({ cards, category, refDocMapping }) => {
   const getCardCompletionTime = cardSlug =>
     findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value || DEFAULT_COMPLETION_TIME;
 
+  const columnSeparatedCards = [[], [], []];
+  const lastRow = [];
+
+  // create 3 sets of columns with cards
+  cards.forEach((card, index) => {
+    const modIndex = index % columnSeparatedCards.length;
+    columnSeparatedCards[modIndex].push(card);
+  });
+
+  // separate out last row so we can sort it
+  columnSeparatedCards.forEach(cardColumn => {
+    if (cardColumn.length > 0) {
+      lastRow.push(cardColumn[cardColumn.length - 1]);
+    }
+  });
+
+  // sort last row by largest height
+  lastRow.sort(a => {
+    if (a && a.name === 'multi-card') {
+      return -1;
+    }
+    return 1;
+  });
+
+  // replace last row
+  lastRow.forEach((card, index) => {
+    columnSeparatedCards[index].pop();
+    columnSeparatedCards[index].push(card);
+  });
+
   return (
     cards.length > 0 && (
       <section className="guide-category" key={category.iconSlug}>
         <div className={`guide-category__title guide-category__title--${category.iconSlug}`}>{category.name}</div>
         <div className="guide-category__guides">
-          {cards.map((card, index) => {
-            let completionTime;
-            if (card.name === 'card') {
-              const cardSlug = card.argument[0].value;
-              completionTime = getCardCompletionTime(cardSlug);
-            }
-            return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
+          {columnSeparatedCards.map((cardColumn, indexColumn) => {
+            return (
+              <div className="guide-column" key={indexColumn}>
+                {cardColumn.map((card, index) => {
+                  let completionTime;
+                  if (card.name === 'card') {
+                    const cardSlug = card.argument[0].value;
+                    completionTime = getCardCompletionTime(cardSlug);
+                  }
+                  return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
+                })}
+              </div>
+            );
           })}
         </div>
       </section>

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Stepper from './Stepper';
 import { setLocalValue } from '../localStorage';
+import { SECTION_NAME_MAPPING } from '../constants';
+import { slugifyTitle } from '../util';
 
 export default class GuideSection extends Component {
   constructor() {
@@ -13,16 +15,10 @@ export default class GuideSection extends Component {
       showAllStepsText: 'Expand All Steps',
       showStepIndex: 0,
       totalStepsInProcedure: 1,
-      uri: {},
-    };
-
-    this.nameMapping = {
-      prerequisites: 'What You’ll Need',
-      check_your_environment: 'Check Your Environment',
-      procedure: 'Procedure',
-      summary: 'Summary',
-      whats_next: 'What’s Next',
-      seealso: 'See Also',
+      uri: {
+        cloudURI: {},
+        localURI: {},
+      },
     };
   }
 
@@ -54,21 +50,28 @@ export default class GuideSection extends Component {
           ...uri,
         },
       }),
-      () => setLocalValue('uri', this.state.uri) // eslint-disable-line react/destructuring-assignment
+      () => {
+        setLocalValue('uri', this.state.uri); // eslint-disable-line react/destructuring-assignment
+      }
     );
   };
 
   render() {
     const {
       guideSectionData: { children, name },
+      headingRef,
     } = this.props;
     const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uri } = this.state;
 
     return (
-      <div className="section" id={name}>
-        <h2>
-          {this.nameMapping[name]}
-          <a className="headerlink" href={`#${name}`} title="Permalink to this headline">
+      <div className="section" id={`${slugifyTitle(SECTION_NAME_MAPPING[name])}`}>
+        <h2 ref={headingRef}>
+          {SECTION_NAME_MAPPING[name]}
+          <a
+            className="headerlink"
+            href={`#${slugifyTitle(SECTION_NAME_MAPPING[name])}`}
+            title="Permalink to this headline"
+          >
             ¶
           </a>
         </h2>
@@ -99,6 +102,7 @@ export default class GuideSection extends Component {
 }
 
 GuideSection.propTypes = {
+  headingRef: PropTypes.shape({ current: PropTypes.element }).isRequired,
   guideSectionData: PropTypes.shape({
     children: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,

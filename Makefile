@@ -8,7 +8,7 @@ PROJECT=guides
 
 stage:
 	mut-publish public ${STAGING_BUCKET} --prefix=${PROJECT} --stage ${ARGS}
-	@echo "Hosted at ${STAGING_URL}/${PROJECT}/${USER}/${GIT_BRANCH}/index.html"
+	@echo "Hosted at ${STAGING_URL}/${PROJECT}/${USER}/${GIT_BRANCH}/"
 
 static:
 	-rm -r ./static/
@@ -16,3 +16,4 @@ static:
 	git submodule add --force https://github.com/mongodb/docs-tools
 	-mkdir -p ./static/images
 	mv ./docs-tools/themes/mongodb/static ./static/static/
+	mv ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/static/images/bg-accent.svg

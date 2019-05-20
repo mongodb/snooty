@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
-import { LANGUAGES, DEPLOYMENTS } from '../constants';
+import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
 import { getLocalValue, setLocalValue } from '../localStorage';
-import { getPrefix } from '../util';
+import { findKeyValuePair, getPrefix, throttle } from '../util';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -22,12 +22,46 @@ export default class Guide extends Component {
 
     // get data from server
     this.sections = pageContext.__refDocMapping[guideKeyInMapping].ast.children[0].children;
-    this.validNames = ['prerequisites', 'check_your_environment', 'procedure', 'summary', 'whats_next', 'seealso'];
-    this.admonitions = ['admonition', 'note', 'tip', 'important', 'warning'];
+    this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
+
     this.state = {
       activeTabs: {},
+      activeSection: this.bodySections[0].name,
     };
+
+    this.sectionRefs = this.bodySections.map(() => React.createRef());
   }
+
+  componentDidMount() {
+    document.addEventListener('scroll', throttle(this.recalculate, 150));
+  }
+
+  recalculate = () => {
+    const height = document.body.clientHeight - window.innerHeight;
+    const headings = this.sectionRefs.map((ref, index) => [ref, this.bodySections[index].name]);
+
+    // This is a bit hacky, but it mostly works. Choose our current
+    // position in the page as a decimal in the range [0, 1], adding
+    // our window size multiplied by 80% of the unadjusted [0, 1]
+    // position.
+    // The 80% is necessary because the last sections of a guide tend to
+    // be shorter, and we need to make sure that scrolling to the bottom
+    // highlights the last section.
+    let currentPosition = document.documentElement.scrollTop / height;
+    currentPosition = (document.documentElement.scrollTop + currentPosition * 0.8 * window.innerHeight) / height;
+
+    let bestMatch = [Infinity, null];
+
+    headings.forEach(([headingRef, sectionName]) => {
+      const headingPosition = headingRef.current.offsetTop / height;
+      const delta = Math.abs(headingPosition - currentPosition);
+      if (delta <= bestMatch[0]) {
+        bestMatch = [delta, sectionName];
+      }
+    });
+
+    this.setState({ activeSection: bestMatch[1] });
+  };
 
   addTabset = (tabsetName, tabData) => {
     let tabs = tabData.map(tab => tab.argument[0].value);
@@ -74,29 +108,29 @@ export default class Guide extends Component {
   createSections() {
     const { pageContext } = this.props;
     const { activeTabs } = this.state;
-    return this.sections
-      .filter(section => this.validNames.includes(section.name))
-      .map((section, index) => (
+    return this.bodySections.map((section, index) => {
+      return (
         <GuideSection
           guideSectionData={section}
           key={index}
-          admonitions={this.admonitions}
+          headingRef={this.sectionRefs[index]}
           refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
           setActiveTab={this.setActiveTab}
           addTabset={this.addTabset}
           activeTabs={activeTabs}
         />
-      ));
+      );
+    });
   }
 
   render() {
     const { pageContext } = this.props;
-    const { activeTabs, cloud, drivers } = this.state;
+    const { activeSection, activeTabs, cloud, drivers } = this.state;
     const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     return (
       <div className="content">
-        <TOC />
+        <TOC activeSection={activeSection} sectionKeys={this.bodySections.map(section => section.name)} />
         <div className="left-nav-space" />
         <div id="main-column" className="main-column">
           <div className="body" data-pagename={pageSlug}>
@@ -106,14 +140,15 @@ export default class Guide extends Component {
               </li>
             </ul>
             <GuideHeading
-              sections={this.sections}
-              drivers={drivers}
-              cloud={cloud}
-              setActiveTab={this.setActiveTab}
-              addTabset={this.addTabset}
-              admonitions={this.admonitions}
-              refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
               activeTabs={activeTabs}
+              author={findKeyValuePair(this.sections, 'name', 'author')}
+              cloud={cloud}
+              description={findKeyValuePair(this.sections, 'name', 'result_description')}
+              drivers={drivers}
+              refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+              setActiveTab={this.setActiveTab}
+              time={findKeyValuePair(this.sections, 'name', 'time')}
+              title={findKeyValuePair(this.sections, 'type', 'heading')}
             />
             {this.createSections()}
             <div className="footer">
