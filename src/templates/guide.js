@@ -5,7 +5,7 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
-import { getLocalValue, setLocalValue } from '../localStorage';
+import { getLocalValue, setLocalValue } from '../browserStorage';
 import { findKeyValuePair, getPrefix, throttle } from '../util';
 
 export default class Guide extends Component {

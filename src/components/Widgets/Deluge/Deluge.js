@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
-import { getStitchClient, isBrowser } from '../../../util';
+import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
+import { isBrowser } from '../../../util';
 import FreeformQuestion from './FreeformQuestion';
 import InputField from './InputField';
 import MainWidget from './MainWidget';
 
-const MIN_CHAR_COUNT = 15;
-const MIN_CHAR_ERROR_TEXT = `Please respond with at least ${MIN_CHAR_COUNT} characters.`;
 const EMAIL_ERROR_TEXT = 'Please enter a valid email address.';
 const EMAIL_PROMPT_TEXT = 'May we contact you about your feedback?';
 
@@ -18,7 +16,6 @@ class Deluge extends Component {
     this.state = {
       answers: {},
       emailError: false,
-      formLengthError: false,
       interactionId: undefined,
       voteAcknowledgement: null,
       voteId: undefined,
@@ -39,14 +36,15 @@ class Deluge extends Component {
   }
 
   setupStitch = () => {
-    const appName = 'feedback-ibcyy';
-    this.stitchClient = getStitchClient(appName);
+    const appId = 'feedback-ibcyy';
+    this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
     this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch(err => {
       console.error(err);
     });
   };
 
-  sendAnalytics = (eventName, eventObj) => {
+  sendAnalytics = (eventName, voteObj) => {
+    const eventObj = voteObj;
     try {
       const user = window.analytics.user();
       const segmentUID = user.id();
@@ -138,7 +136,7 @@ class Deluge extends Component {
     Object.keys(fields).forEach(key => {
       if (!key.startsWith('q-')) {
         Object.defineProperty(fields, `q-${key}`, Object.getOwnPropertyDescriptor(fields, key));
-        delete fields[key];
+        delete fields[key]; // eslint-disable-line no-param-reassign
       }
     });
 
@@ -166,12 +164,6 @@ class Deluge extends Component {
     };
   };
 
-  validateFormLength = input => {
-    const hasError = !(input === '' || input.length >= MIN_CHAR_COUNT);
-    this.setState({ formLengthError: hasError });
-    return hasError;
-  };
-
   validateEmail = input => {
     const hasError = !(input === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input));
     this.setState({ emailError: hasError });
@@ -179,11 +171,11 @@ class Deluge extends Component {
   };
 
   render() {
-    const { answers, emailError, formLengthError, voteAcknowledgement } = this.state;
+    const { answers, emailError, voteAcknowledgement } = this.state;
     const { canShowSuggestions, openDrawer } = this.props;
 
     const noAnswersSubmitted = Object.keys(answers).length === 0 || Object.values(answers).every(val => val === '');
-    const hasError = noAnswersSubmitted || formLengthError || emailError;
+    const hasError = noAnswersSubmitted || emailError;
 
     return (
       <MainWidget
@@ -195,12 +187,7 @@ class Deluge extends Component {
         handleOpenDrawer={openDrawer}
         error={hasError}
       >
-        <FreeformQuestion
-          errorText={MIN_CHAR_ERROR_TEXT}
-          hasError={input => this.validateFormLength(input)}
-          store={this.makeStore('reason')}
-          placeholder="What are you trying to do?"
-        />
+        <FreeformQuestion store={this.makeStore('reason')} placeholder="What are you trying to do?" />
         <div className="caption">{EMAIL_PROMPT_TEXT}</div>
         <InputField
           errorText={EMAIL_ERROR_TEXT}

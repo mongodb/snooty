@@ -1,5 +1,3 @@
-import { Stitch } from 'mongodb-stitch-browser-sdk';
-
 /**
  * Recursively searches child nodes to find the specified key/value pair.
  * Prevents us from having to rely on a fixed depth for properties in the AST.
@@ -36,10 +34,11 @@ export const getPrefix = () =>
     : '');
 
 /**
+ * TODO: Attempt to get this working as a util function. Currently, it causes a failure when running npm run develop
  * Check to see if Stitch appId is linked to an existing connection. If not, intialize a new connection.
  */
-export const getStitchClient = appId =>
-  Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
+/* export const getStitchClient = appId =>
+  Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId); */
 
 /*
  * Limit the rate at which a function is called (for example, useful to limit invokation of a scroll event listener)

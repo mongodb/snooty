@@ -42,10 +42,9 @@ describe('MainWidget', () => {
   });
 
   describe("when a 'Yes' vote is cast", () => {
-    const mockStopPropagation = jest.fn();
     it('clicks the yes button', () => {
       const yesButton = wrapper.find('#rate-up');
-      yesButton.simulate('click', { stopPropagation: mockStopPropagation });
+      yesButton.simulate('click', { stopPropagation: jest.fn() });
     });
 
     it('updates the state', () => {
@@ -85,11 +84,30 @@ describe('MainWidget', () => {
   describe('when the cancel button is clicked', () => {
     it('clicks cancel', () => {
       const cancelButton = wrapper.find('button[type="button"]');
-      cancelButton.simulate('click');
+      cancelButton.simulate('click', { stopPropagation: jest.fn() });
     });
 
     it('updates the state', () => {
       expect(wrapper.state().state).toBe('Initial');
+    });
+
+    it('shows the minimized feedback widget', () => {
+      expect(wrapper.find('.deluge-header-minimized')).toHaveLength(1);
+    });
+
+    it('shows the reopen button', () => {
+      expect(wrapper.find('.deluge-open-icon')).toHaveLength(1);
+    });
+
+    it('does not show any body elements', () => {
+      expect(wrapper.find('.deluge-body').children()).toHaveLength(0);
+    });
+  });
+
+  describe('when the reopen button is clicked', () => {
+    it('clicks the reopen button', () => {
+      const openButton = wrapper.find('.deluge-header-minimized');
+      openButton.simulate('click', { stopPropagation: jest.fn() });
     });
 
     it('shows yes/no buttons', () => {
@@ -108,10 +126,9 @@ describe('MainWidget', () => {
   });
 
   describe("when a 'No' vote is cast", () => {
-    const mockStopPropagation = jest.fn();
-    it('clicks the yes button', () => {
+    it('clicks the no button', () => {
       const noButton = wrapper.find('#rate-down');
-      noButton.simulate('click', { stopPropagation: mockStopPropagation });
+      noButton.simulate('click', { stopPropagation: jest.fn() });
     });
 
     it('updates the state', () => {
@@ -142,10 +159,6 @@ describe('MainWidget', () => {
       expect(onSubmitFeedback).toHaveBeenCalledTimes(1);
     });
 
-    it('shows a Submitting message', () => {
-      expect(wrapper.find('p').text()).toBe('Submitting feedback...');
-    });
-
     it('updates the state', () => {
       expect(wrapper.state().state).toBe('Voted');
     });
@@ -153,8 +166,26 @@ describe('MainWidget', () => {
     it('shows a link to JIRA', () => {
       // wait for setState to finish
       setTimeout(() => {
-        expect(wrapper.find('.deluge-fix-button')).toHaveLength(1);
+        expect(wrapper.find('.deluge-fix-button')).toHaveLength(2);
       }, 500);
+    });
+
+    it('shows a close button', () => {
+      expect(wrapper.find('.deluge-close-link')).toHaveLength(1);
+    });
+  });
+
+  describe('clicking the close button', () => {
+    it('clicks Close', () => {
+      const closeButton = wrapper
+        .find('.deluge-close-link')
+        .childAt(0)
+        .childAt(0);
+      closeButton.simulate('click', { stopPropagation: jest.fn() });
+    });
+
+    it('shows the minimized feedback widget', () => {
+      expect(wrapper.find('.deluge-header-minimized')).toHaveLength(1);
     });
   });
 });

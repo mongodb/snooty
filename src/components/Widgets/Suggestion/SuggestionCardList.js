@@ -20,7 +20,7 @@ const SuggestionCard = ({ pageName, suggestion }) => {
 };
 
 const EmptyCard = ({ handleDismissCard }) => (
-  <div className="suggestion-card suggestion-close" onClick={() => handleDismissCard()}>
+  <div className="suggestion-card suggestion-close" onClick={() => handleDismissCard()} role="button" tabIndex={0}>
     <h2>This isn&#39;t what I was looking for</h2>
   </div>
 );

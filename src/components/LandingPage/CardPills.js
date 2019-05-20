@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Pills from '../Pills';
 import { stringifyTab } from '../../constants';
-import { setLocalValue } from '../../localStorage';
+import { setLocalValue } from '../../browserStorage';
 
 const CardPills = ({ pillsNode, pillsetName }) => {
   const getPillTitle = node => node.children[0].children[0].value;

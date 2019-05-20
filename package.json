@@ -30,6 +30,7 @@
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
+    "clean": "gatsby clean",
     "develop": "gatsby develop --prefix-paths",
     "lint": "eslint src/ tests/",
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",

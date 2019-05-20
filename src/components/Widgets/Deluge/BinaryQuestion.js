@@ -10,8 +10,18 @@ const BinaryQuestion = ({ children, store }) => {
     <div>
       <div key="caption">{children}</div>
       <div key="question">
-        <span className={`switch fa fa-thumbs-up good ${upvoteClass}`} onClick={() => store.set(true)} />
-        <span className={`switch fa fa-thumbs-down bad ${downvoteClass}`} onClick={() => store.set(false)} />
+        <span
+          className={`switch fa fa-thumbs-up good ${upvoteClass}`}
+          onClick={() => store.set(true)}
+          role="button"
+          tabIndex={0}
+        />
+        <span
+          className={`switch fa fa-thumbs-down bad ${downvoteClass}`}
+          onClick={() => store.set(false)}
+          role="button"
+          tabIndex={0}
+        />
       </div>
     </div>
   );

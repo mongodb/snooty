@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Deluge from '../../src/components/Widgets/Deluge/Deluge';
-jest.mock('mongodb-stitch-browser-sdk');
 
 describe('Deluge', () => {
   let wrapper;
@@ -17,10 +16,16 @@ describe('Deluge', () => {
 
   beforeAll(() => {
     wrapper = shallow(<Deluge {...props} />);
+    wrapper.instance().setupStitch = jest.fn();
+    wrapper.instance().sendVote = jest.fn().mockResolvedValue(true);
   });
 
   it('renders a caption', () => {
     expect(wrapper.find('.caption')).toHaveLength(1);
+  });
+
+  it('has one FreeformQuestion child', () => {
+    expect(wrapper.find('FreeformQuestion')).toHaveLength(1);
   });
 
   describe('when a Yes votes is submitted', () => {
@@ -30,49 +35,9 @@ describe('Deluge', () => {
         .dive()
         .find('#rate-up')
         .simulate('click', { stopPropagation: jest.fn() });
-      expect(wrapper.state().voteAcknowledgement).toBe('up');
-    });
-  });
-
-  describe('when text is entered into the textarea', () => {
-    const validResponse = 'this is valid response';
-
-    it('has one FreeformQuestion child', () => {
-      expect(wrapper.find('FreeformQuestion')).toHaveLength(1);
-    });
-
-    it('has formLengthError state set to false', () => {
-      expect(wrapper.state().formLengthError).toBe(false);
-    });
-
-    it('sets the formLengthError state to true when invalid text is entered into the form', () => {
-      wrapper
-        .find('FreeformQuestion')
-        .dive()
-        .find('textarea')
-        .simulate('change', {
-          target: {
-            value: invalidText,
-            setCustomValidity: setCustomValidityMock,
-          },
-        });
-
-      expect(wrapper.state().formLengthError).toBe(true);
-    });
-
-    it('sets the formLengthError state to false when valid text is entered into the form', () => {
-      wrapper
-        .find('FreeformQuestion')
-        .dive()
-        .find('textarea')
-        .simulate('change', {
-          target: {
-            value: validResponse,
-            setCustomValidity: setCustomValidityMock,
-          },
-        });
-
-      expect(wrapper.state().formLengthError).toBe(false);
+      setTimeout(() => {
+        expect(wrapper.state().voteAcknowledgement).toBe('up');
+      }, 500);
     });
   });
 
@@ -83,7 +48,7 @@ describe('Deluge', () => {
       expect(wrapper.find('InputField')).toHaveLength(1);
     });
 
-    it('has formLengthError state set to false', () => {
+    it('has emailError state set to false', () => {
       expect(wrapper.state().emailError).toBe(false);
     });
 

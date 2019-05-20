@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
 import SuggestionCardList from './SuggestionCardList';
-import { getStitchClient, reportAnalytics } from '../../../util';
+import { reportAnalytics } from '../../../util';
 
 function getPageName() {
   const bodyElements = document.getElementsByClassName('body');
@@ -47,15 +47,15 @@ export default class Suggestion extends Component {
   };
 
   setupStitch = () => {
-    const appName = process.env.GATSBY_STITCH_ID;
-    this.stitchClient = getStitchClient(appName);
+    const appId = process.env.GATSBY_STITCH_ID;
+    this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
     this.stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
       .then(() => {
         this.fetchStitchSuggestions();
       })
       .catch(err => {
-        console.err(err);
+        console.error(err);
       });
   };
 
@@ -85,6 +85,8 @@ export default class Suggestion extends Component {
           <span
             onClick={() => this.handleCloseDrawer()}
             className="fa fa-times suggestion-close suggestion-close-button"
+            role="button"
+            tabIndex={0}
           />
           <h1>Thanks for your feedback.</h1>
           <p>We&apos;ll use it to make more helpful suggestions in the future.</p>
@@ -96,6 +98,8 @@ export default class Suggestion extends Component {
           <span
             onClick={() => this.handleCloseDrawer()}
             className="fa fa-times suggestion-close suggestion-close-button"
+            role="button"
+            tabIndex={0}
           />
           <h1>Need help?</h1>
           <p>Other MongoDB users have found these resources useful.</p>
