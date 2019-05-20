@@ -15,7 +15,10 @@ export default class GuideSection extends Component {
       showAllStepsText: 'Expand All Steps',
       showStepIndex: 0,
       totalStepsInProcedure: 1,
-      uri: {},
+      uri: {
+        cloudURI: {},
+        localURI: {},
+      },
     };
   }
 
@@ -47,7 +50,9 @@ export default class GuideSection extends Component {
           ...uri,
         },
       }),
-      () => setLocalValue('uri', this.state.uri) // eslint-disable-line react/destructuring-assignment
+      () => {
+        setLocalValue('uri', this.state.uri); // eslint-disable-line react/destructuring-assignment
+      }
     );
   };
 
