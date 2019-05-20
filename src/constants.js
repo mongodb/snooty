@@ -1,4 +1,4 @@
-const LANGUAGES = [
+export const LANGUAGES = [
   'shell',
   'compass',
   'python',
@@ -16,11 +16,11 @@ const LANGUAGES = [
   'go',
 ];
 
-const DEPLOYMENTS = ['cloud', 'local'];
+export const DEPLOYMENTS = ['cloud', 'local'];
 
-const PLATFORMS = ['windows', 'macos', 'linux', 'debian', 'rhel'];
+export const PLATFORMS = ['windows', 'macos', 'linux', 'debian', 'rhel'];
 
-const SLUG_TO_STRING = {
+export const SLUG_TO_STRING = {
   shell: 'Mongo Shell',
   compass: 'Compass',
   python: 'Python',
@@ -45,13 +45,13 @@ const SLUG_TO_STRING = {
   rhel: 'RHEL',
 };
 
-const stringifyTab = tabName => {
+export const stringifyTab = tabName => {
   return SLUG_TO_STRING[tabName] || tabName;
 };
 
 // hardcoded for now because this target lookup will be complex
 // as it relies on other sites (e.g. manual) cc. Andrew
-const REF_TARGETS = {
+export const REF_TARGETS = {
   'compass-index': 'https://docs.mongodb.com/compass/current/#compass-index',
   'document-dot-notation': 'https://docs.mongodb.com/manual/core/document/#document-dot-notation',
   glossary: 'https://docs.mongodb.com/manual/reference/glossary',
@@ -64,9 +64,18 @@ const REF_TARGETS = {
   'write-op-insert-behavior': 'https://docs.mongodb.com/manual/tutorial/insert-documents/#insert-behavior',
 };
 
-const REF_LABELS = {
+export const REF_LABELS = {
   'install-rhel-configure-selinux': 'Configure SELinux',
   'write-op-insert-behavior': 'Insert Behavior',
 };
 
-export { LANGUAGES, DEPLOYMENTS, PLATFORMS, REF_LABELS, REF_TARGETS, stringifyTab };
+export const SECTION_NAME_MAPPING = {
+  prerequisites: 'What You’ll Need',
+  check_your_environment: 'Check Your Environment',
+  procedure: 'Procedure',
+  summary: 'Summary',
+  whats_next: 'What’s Next',
+  seealso: 'See Also',
+};
+
+export const ADMONITIONS = ['admonition', 'note', 'tip', 'important', 'warning'];
