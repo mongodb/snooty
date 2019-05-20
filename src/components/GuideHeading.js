@@ -5,6 +5,7 @@ import Pills from './Pills';
 import { stringifyTab } from '../constants';
 import { slugifyTitle } from '../util';
 
+// TODO: Improve validation of template content
 const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActiveTab, time, title, ...rest }) => {
   const setActivePill = pillsetName => pill => {
     setActiveTab(pill, pillsetName);
