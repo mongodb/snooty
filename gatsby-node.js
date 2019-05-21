@@ -183,6 +183,7 @@ exports.createPages = ({ graphql, actions }) => {
   });
 };
 
+// Prevent errors when running gatsby build caused by browser packages run in a node environment.
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === 'build-html') {
     actions.setWebpackConfig({
