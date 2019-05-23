@@ -35,6 +35,7 @@ class Deluge extends Component {
     }
   }
 
+  // TODO: abstract Stitch environment in order to toggle staging and production Stitch environments
   setupStitch = () => {
     const appId = 'feedback-ibcyy';
     this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
@@ -43,6 +44,7 @@ class Deluge extends Component {
     });
   };
 
+  // TODO: remove Segment binding in Deluge and abstract analytics calls to a generic utility for encapsulation
   sendAnalytics = (eventName, voteObj) => {
     const eventObj = voteObj;
     try {
@@ -91,6 +93,8 @@ class Deluge extends Component {
       date: new Date(),
     };
 
+    // TODO: remove Segment-specific names to Atlas tables and provide an identity type string that identifies
+    // the identity source in preparation for SSO integration
     if (segmentEvent.segmentUID) {
       voteDocument['q-segmentUID'] = segmentEvent.segmentUID;
     } else {
