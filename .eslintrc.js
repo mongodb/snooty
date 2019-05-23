@@ -23,13 +23,17 @@ module.exports = {
     es6: true,
   },
   rules: {
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-underscore-dangle': 0,
     'prefer-destructuring': 0,
     'import/no-cycle': 0,
     'jsx-a11y/click-events-have-key-events': 0,
-    'jsx-a11y/label-has-associated-control': [ 2, {
-      'controlComponents': ['span'],
-    }],
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        controlComponents: ['span'],
+      },
+    ],
     'jsx-a11y/label-has-for': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.tsx'] }],
     'react/no-array-index-key': 0,

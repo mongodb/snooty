@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TEMPLATE_TYPE_SELF_MANAGED, TEMPLATE_TYPE_REPLICA_SET } from './constants';
-import { getLocalValue } from '../../localStorage';
+import { getLocalValue } from '../../browserStorage';
 
 const LOCAL_ENVS = [
   {
