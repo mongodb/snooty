@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import Highlight from 'react-highlight';
 import { reportAnalytics } from '../util';
@@ -63,7 +64,7 @@ export default class Code extends Component {
     let code = value;
     if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
       const uri = cloud === 'cloud' ? cloudURI : localURI;
-      code = <URIText value={code} activeDeployment={cloud} uri={uri} />;
+      code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uri={uri} />);
     }
     return (
       <div className="button-code-block">
