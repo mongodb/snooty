@@ -4,7 +4,6 @@ import ComponentFactory from './ComponentFactory';
 import Stepper from './Stepper';
 import { setLocalValue } from '../browserStorage';
 import { SECTION_NAME_MAPPING } from '../constants';
-import { slugifyTitle } from '../util';
 
 export default class GuideSection extends Component {
   constructor() {
@@ -62,16 +61,13 @@ export default class GuideSection extends Component {
       headingRef,
     } = this.props;
     const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uri } = this.state;
+    const section = SECTION_NAME_MAPPING[name];
 
     return (
-      <div className="section" id={`${slugifyTitle(SECTION_NAME_MAPPING[name])}`}>
-        <h2 ref={headingRef}>
-          {SECTION_NAME_MAPPING[name]}
-          <a
-            className="headerlink"
-            href={`#${slugifyTitle(SECTION_NAME_MAPPING[name])}`}
-            title="Permalink to this headline"
-          >
+      <div className="section">
+        <h2 ref={headingRef} id={section.id}>
+          {section.title}
+          <a className="headerlink" href={`#${section.id}`} title="Permalink to this headline">
             ¶
           </a>
         </h2>
@@ -102,9 +98,12 @@ export default class GuideSection extends Component {
 }
 
 GuideSection.propTypes = {
-  headingRef: PropTypes.shape({ current: PropTypes.element }).isRequired,
+  headingRef: PropTypes.shape({
+    // for server-side rendering, replace Element with an empty function
+    current: PropTypes.instanceOf(typeof Element === 'undefined' ? () => {} : Element),
+  }).isRequired,
   guideSectionData: PropTypes.shape({
     children: PropTypes.array.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.oneOf(Object.keys(SECTION_NAME_MAPPING)),
   }).isRequired,
 };
