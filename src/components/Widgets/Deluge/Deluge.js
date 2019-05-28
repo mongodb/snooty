@@ -37,11 +37,15 @@ class Deluge extends Component {
 
   // TODO: abstract Stitch environment in order to toggle staging and production Stitch environments
   setupStitch = () => {
-    const appId = 'feedback-ibcyy';
-    this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
-    this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch(err => {
-      console.error(err);
-    });
+    try {
+      const appId = 'feedback-ibcyy';
+      this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
+      this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch(err => {
+        console.error(err);
+      });
+    } catch (error) {
+      console.error('Could not connect to Stitch', error);
+    }
   };
 
   // TODO: remove Segment binding in Deluge and abstract analytics calls to a generic utility for encapsulation
