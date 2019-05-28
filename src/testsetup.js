@@ -25,23 +25,6 @@ afterAll(() => {
   process.removeListener('unhandledRejection', rejectionHandler);
 });
 
-const getSlugs = (dir, results) => {
-  fs.readdirSync(dir).forEach(fileName => {
-    const filePath = path.resolve(dir, fileName);
-    const stat = fs.statSync(filePath);
-    if (stat && stat.isDirectory()) {
-      getSlugs(filePath, results);
-    } else if (filePath.includes('index.html')) {
-      if (filePath.match(new RegExp('public/(.*)/index.html'))) {
-        results.push(filePath.match(new RegExp('public/(.*)/index.html'))[1]);
-      }
-    }
-  });
-  return results;
-};
-
-export const slugArray = getSlugs('./public', []);
-
 const crypto = require('crypto');
 
 Object.defineProperty(global.self, 'crypto', {
@@ -49,3 +32,5 @@ Object.defineProperty(global.self, 'crypto', {
     getRandomValues: arr => crypto.randomBytes(arr.length),
   },
 });
+
+window.scrollTo = () => {};

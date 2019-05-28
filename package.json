@@ -43,9 +43,6 @@
   },
   "jest": {
     "verbose": true,
-    "setupFilesAfterEnv": [
-      "./src/testsetup.js"
-    ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],

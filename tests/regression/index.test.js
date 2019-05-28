@@ -1,5 +1,5 @@
 import { DEPLOYMENTS, LANGUAGES, PLATFORMS, stringifyTab } from '../../src/constants';
-import { slugArray } from '../../src/testsetup';
+import { slugArray } from '../../src/regressionTestSetup';
 
 require('dotenv').config({ path: './.env.production' });
 
@@ -73,19 +73,26 @@ const cleanOldString = str => {
 
 /*
  * Remove errors in the old build system
- * - Migration Support should have been rendered as a primary section, so we should not expect to find it in Snooty's TOC
+ * - Migration Support should not have been rendered as a primary section, so we should not expect to find it in Snooty's TOC
  * - Remove resulting blank lines
  */
 const cleanOldTOC = str => {
   return str.replace(/Migration Support/g, '').replace(/^\s*[\r\n]/gm, '');
 };
 
-const getLinksFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => {
+const setUpPage = async (baseUrl, slug, { cloud, drivers, platforms }) => {
   const page = await browser.newPage();
   await page.goto(`${baseUrl}${slug}`);
-  await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
-  await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
-  await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
+  if (slug) {
+    await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
+    await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
+    await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
+  }
+  return page;
+};
+
+const getLinksFromUrl = async (baseUrl, slug, storageObj) => {
+  const page = await setUpPage(baseUrl, slug, storageObj);
   const hrefs = await page.$$eval(
     '.body a',
     (as, localPrefix) => {
@@ -106,14 +113,8 @@ const getLinksFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => 
   return hrefs;
 };
 
-const getTextFromUrl = async (baseUrl, slug, { cloud, drivers, platforms }) => {
-  const page = await browser.newPage();
-  await page.goto(`${baseUrl}${slug}`);
-  if (slug) {
-    await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
-    await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
-    await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
-  }
+const getTextFromUrl = async (baseUrl, slug, storageObj) => {
+  const page = await setUpPage(baseUrl, slug, storageObj);
   const bodyElement = slug ? await page.$('.body') : await page.$('.guide-category-list');
   return page.evaluate(element => Promise.resolve(element.innerText), bodyElement);
 };
@@ -152,33 +153,27 @@ describe('landing page', () => {
 const slugs = slugArray;
 describe('with default tabs', () => {
   describe.each(slugs)('%p', slug => {
-    describe('compare text', () => {
-      it(`file text is the same`, async () => {
-        expect.assertions(1);
+    it.only(`file text is the same`, async () => {
+      expect.assertions(1);
 
-        const [legacyText, snootyText] = await runComparisons(slug);
-        return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
-      }, 1500000);
+      const [legacyText, snootyText] = await runComparisons(slug);
+      return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
     });
 
-    describe('compare TOC', () => {
-      it(`section headings are the same`, async () => {
-        const [oldTOC, newTOC] = await Promise.all([
-          await getTOCFromUrl(prodUrl, slug),
-          await getTOCFromUrl(localUrl, slug),
-        ]);
-        expect(newTOC).toEqual(cleanOldTOC(oldTOC));
-      });
+    it(`table of contents labels are the same`, async () => {
+      const [oldTOC, newTOC] = await Promise.all([
+        await getTOCFromUrl(prodUrl, slug),
+        await getTOCFromUrl(localUrl, slug),
+      ]);
+      expect(newTOC).toEqual(cleanOldTOC(oldTOC));
     });
 
-    describe('compare links', () => {
-      it(`links are the same`, async () => {
-        const [oldLinks, newLinks] = await Promise.all([
-          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
-          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
-        ]);
-        expect(newLinks).toEqual(oldLinks);
-      });
+    it(`links are the same`, async () => {
+      const [oldLinks, newLinks] = await Promise.all([
+        await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
+        await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+      ]);
+      expect(newLinks).toEqual(oldLinks);
     });
   });
 });

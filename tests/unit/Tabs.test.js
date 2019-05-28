@@ -8,8 +8,6 @@ import mockDataPlatforms from './data/Tabs-platform.test.json';
 import mockDataLanguages from './data/Tabs-languages.test.json';
 import mockDataHidden from './data/Tabs-hidden.test.json';
 
-window.scrollTo = () => {};
-
 const mountTabs = ({ mockData, mockSetActiveTab, mockAddTabset, activeTabs }) =>
   mount(<Tabs nodeData={mockData} setActiveTab={mockSetActiveTab} addTabset={mockAddTabset} activeTabs={activeTabs} />);
 
