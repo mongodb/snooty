@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Stepper from './Stepper';
-import { setLocalValue } from '../localStorage';
+import { setLocalValue } from '../browserStorage';
 import { SECTION_NAME_MAPPING } from '../constants';
 import { slugifyTitle } from '../util';
 

@@ -27,6 +27,7 @@ module.exports = {
     browser: true,
   },
   rules: {
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-underscore-dangle': 0,
     'prefer-destructuring': 0,
     'import/no-cycle': 0,

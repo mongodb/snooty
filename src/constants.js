@@ -65,6 +65,14 @@ export const REF_TARGETS = {
   'write-op-insert-behavior': 'https://docs.mongodb.com/manual/tutorial/insert-documents/#insert-behavior',
 };
 
+export const SUGGESTION_WHITELIST = [
+  'tutorial/install-mongodb-on-windows',
+  'tutorial/install-mongodb-on-ubuntu',
+  'tutorial/query-documents',
+  'reference/method/db.collection.find',
+  'reference/method/db.collection.updateOne',
+];
+
 export const REF_LABELS = {
   'install-rhel-configure-selinux': 'Configure SELinux',
   'write-op-insert-behavior': 'Insert Behavior',

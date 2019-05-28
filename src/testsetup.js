@@ -41,3 +41,11 @@ const getSlugs = (dir, results) => {
 };
 
 export const slugArray = getSlugs('./public', []);
+
+const crypto = require('crypto');
+
+Object.defineProperty(global.self, 'crypto', {
+  value: {
+    getRandomValues: arr => crypto.randomBytes(arr.length),
+  },
+});
