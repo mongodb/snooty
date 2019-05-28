@@ -1,44 +1,63 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from './Lightbox';
 import { getPrefix } from '../util';
 
-const Figure = ({ nodeData }) => {
-  const imgRef = React.createRef();
-  const [isLightboxSize, setIsLightboxSize] = useState(false);
-  const imgSrc = `${getPrefix()}${nodeData.argument[0].value}`;
+export default class Figure extends Component {
+  constructor(props) {
+    super(props);
+    this.imgRef = React.createRef();
+    this.state = {
+      isLightboxSize: false,
+    };
+  }
 
-  const imgShouldHaveLightbox = () => {
-    const naturalArea = imgRef.current.naturalWidth * imgRef.current.naturalHeight;
-    const clientArea = imgRef.current.clientWidth * imgRef.current.clientHeight;
+  componentDidMount() {
+    const img = this.imgRef.current;
+    if (img && img.complete) {
+      this.handleImageLoaded();
+    }
+  }
+
+  imgShouldHaveLightbox = () => {
+    const img = this.imgRef.current;
+    const naturalArea = img.naturalWidth * img.naturalHeight;
+    const clientArea = img.clientWidth * img.clientHeight;
     return clientArea < naturalArea * 0.9;
   };
 
-  const handleImageLoaded = () => {
-    setIsLightboxSize(imgShouldHaveLightbox());
+  handleImageLoaded = () => {
+    this.setState({
+      isLightboxSize: this.imgShouldHaveLightbox(),
+    });
   };
 
-  if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
-    return <Lightbox nodeData={nodeData} />;
-  }
+  render() {
+    const { nodeData } = this.props;
+    const { isLightboxSize } = this.state;
+    const imgSrc = `${getPrefix()}${nodeData.argument[0].value}`;
 
-  return (
-    <div
-      className="figure"
-      style={{
-        width: nodeData.options && nodeData.options.figwidth ? nodeData.options.figwidth : 'auto',
-      }}
-    >
-      <img
-        src={imgSrc}
-        alt={nodeData.options.alt ? nodeData.options.alt : nodeData.argument[0].value}
-        width="50%"
-        onLoad={handleImageLoaded}
-        ref={imgRef}
-      />
-    </div>
-  );
-};
+    if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
+      return <Lightbox nodeData={nodeData} />;
+    }
+    return (
+      <div
+        className="figure"
+        style={{
+          width: nodeData.options && nodeData.options.figwidth ? nodeData.options.figwidth : 'auto',
+        }}
+      >
+        <img
+          src={imgSrc}
+          alt={nodeData.options.alt ? nodeData.options.alt : nodeData.argument[0].value}
+          width="50%"
+          onLoad={this.handleImageLoaded}
+          ref={this.imgRef}
+        />
+      </div>
+    );
+  }
+}
 
 Figure.propTypes = {
   nodeData: PropTypes.shape({
@@ -53,5 +72,3 @@ Figure.propTypes = {
     }).isRequired,
   }).isRequired,
 };
-
-export default Figure;
