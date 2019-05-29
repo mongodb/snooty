@@ -54,6 +54,11 @@ export default class Code extends Component {
     }
   };
 
+  htmlDecode = input => {
+    const doc = new DOMParser().parseFromString(input, 'text/html');
+    return doc.documentElement.textContent;
+  };
+
   render() {
     const { copied } = this.state;
     const {
@@ -65,6 +70,7 @@ export default class Code extends Component {
     if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
       const uri = cloud === 'cloud' ? cloudURI : localURI;
       code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uri={uri} />);
+      code = this.htmlDecode(code);
     }
     return (
       <div className="button-code-block">
