@@ -153,7 +153,6 @@ export default class Guide extends Component {
               title={findKeyValuePair(this.sections, 'type', 'heading')}
             />
             {this.createSections()}
-            <Widgets guideName={pageSlug} project={process.env.GATSBY_SITE} />
             <div className="footer">
               <div className="copyright">
                 <p>
@@ -164,6 +163,7 @@ export default class Guide extends Component {
             </div>
           </div>
         </div>
+        <Widgets guideName={pageSlug} project={process.env.GATSBY_SITE} />
       </div>
     );
   }
