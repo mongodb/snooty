@@ -2,7 +2,8 @@ node_modules/
 public/
 .cache/
 .DS_Store
-static/
+static/images/
+static/docs-tools/
 docs-tools/
 coverage/
 .coverage

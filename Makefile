@@ -11,9 +11,10 @@ stage:
 	@echo "Hosted at ${STAGING_URL}/${PROJECT}/${USER}/${GIT_BRANCH}/"
 
 static:
-	-rm -r ./static/
+	-rm -r ./static/images/
+	-rm -r ./static/docs-tools/
 	-rm -r ./docs-tools/
 	git submodule add --force https://github.com/mongodb/docs-tools
 	-mkdir -p ./static/images
-	mv ./docs-tools/themes/mongodb/static ./static/static/
-	mv ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/static/images/bg-accent.svg
+	mv ./docs-tools/themes/mongodb/static ./static/docs-tools/
+	mv ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/docs-tools/images/bg-accent.svg

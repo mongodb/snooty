@@ -22,8 +22,8 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         property="og:image:secure_url"
         content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
       />
-      <link rel="stylesheet" href={`${getPrefix()}/static/guides.css`} type="text/css" />
-      <link rel="stylesheet" href={`${getPrefix()}/static/css/navbar.min.css`} type="text/css" />
+      <link rel="stylesheet" href={`${getPrefix()}/docs-tools/guides.css`} type="text/css" />
+      <link rel="stylesheet" href={`${getPrefix()}/docs-tools/css/navbar.min.css`} type="text/css" />
       <style
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
@@ -33,15 +33,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
             padding: 0px !important;
             display: inline !important;
           }
-        `,
-        }}
-      />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-          !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
-              analytics.load("aGhVvyxnPWlyP71vVl9ZjGWxAtoVGLXX");
-          }}();
         `,
         }}
       />
@@ -64,7 +55,8 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         id="navbar"
         data-navprops='{"links": [{"url": "https://docs.mongodb.com/manual/","text": "Server"},{"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},{"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},{"url": "https://docs.mongodb.com/tools/","text": "Tools"},{"url": "https://docs.mongodb.com/guides/","text": "Guides","active": true}]}'
       />
-      <script async src={`${getPrefix()}/static/navbar.min.js`} />
+      <script async src={`${getPrefix()}/scripts/segment.js`} />
+      <script async src={`${getPrefix()}/docs-tools/navbar.min.js`} />
       {preBodyComponents}
       <div
         key="body"
