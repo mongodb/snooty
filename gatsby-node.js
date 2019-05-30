@@ -2,6 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
+const GATSBY_USER = require('os').userInfo().username;
+
 // where assets and documents are referenced
 let NAMESPACE_ASSETS = null;
 let DOCUMENTS = null;
@@ -44,7 +46,6 @@ const validateEnvVariables = () => {
     !process.env.NAMESPACE ||
     !process.env.GATSBY_STITCH_ID ||
     !process.env.GATSBY_SITE ||
-    !process.env.GATSBY_USER ||
     !process.env.GATSBY_BRANCH
   ) {
     return {
