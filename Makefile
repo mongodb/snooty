@@ -17,4 +17,4 @@ static:
 	git submodule add --force https://github.com/mongodb/docs-tools
 	-mkdir -p ./static/images
 	mv ./docs-tools/themes/mongodb/static ./static/docs-tools/
-	mv ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/static/images/bg-accent.svg
+	mv ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/docs-tools/images/bg-accent.svg
