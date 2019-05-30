@@ -22,8 +22,8 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         property="og:image:secure_url"
         content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
       />
-      <link rel="stylesheet" href={`${getPrefix()}/static/guides.css`} type="text/css" />
-      <link rel="stylesheet" href={`${getPrefix()}/static/css/navbar.min.css`} type="text/css" />
+      <link rel="stylesheet" href={`${getPrefix()}/docs-tools/guides.css`} type="text/css" />
+      <link rel="stylesheet" href={`${getPrefix()}/docs-tools/css/navbar.min.css`} type="text/css" />
       <style
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
@@ -55,7 +55,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         id="navbar"
         data-navprops='{"links": [{"url": "https://docs.mongodb.com/manual/","text": "Server"},{"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},{"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},{"url": "https://docs.mongodb.com/tools/","text": "Tools"},{"url": "https://docs.mongodb.com/guides/","text": "Guides","active": true}]}'
       />
-      <script async src={`${getPrefix()}/static/navbar.min.js`} />
+      <script async src={`${getPrefix()}/docs-tools/navbar.min.js`} />
       {preBodyComponents}
       <div
         key="body"
