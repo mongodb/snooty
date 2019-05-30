@@ -48,8 +48,9 @@ export default class Guide extends Component {
     // The 80% is necessary because the last sections of a guide tend to
     // be shorter, and we need to make sure that scrolling to the bottom
     // highlights the last section.
-    let currentPosition = document.documentElement.scrollTop / height;
-    currentPosition = (document.documentElement.scrollTop + currentPosition * 0.8 * window.innerHeight) / height;
+    const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+    let currentPosition = scrollTop / height;
+    currentPosition = (scrollTop + currentPosition * 0.8 * window.innerHeight) / height;
 
     let bestMatch = [Infinity, null];
 

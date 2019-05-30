@@ -62,6 +62,7 @@ export const REF_TARGETS = {
   'mongodb-supported-platforms': 'https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms',
   'schema-validation-json': 'https://docs.mongodb.com/manual/core/schema-validation/#schema-validation-json',
   'write-op-insert-behavior': 'https://docs.mongodb.com/manual/tutorial/insert-documents/#insert-behavior',
+  'configuration-options': 'https://docs.mongodb.com/manual/reference/configuration-options/#configuration-options',
 };
 
 export const SUGGESTION_WHITELIST = [
