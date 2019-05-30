@@ -79,12 +79,27 @@ export const REF_LABELS = {
 };
 
 export const SECTION_NAME_MAPPING = {
-  prerequisites: 'What You’ll Need',
-  check_your_environment: 'Check Your Environment',
-  procedure: 'Procedure',
-  summary: 'Summary',
-  whats_next: 'What’s Next',
-  seealso: 'See Also',
+  prerequisites: {
+    id: 'what-you-ll-need',
+    title: 'What You’ll Need',
+  },
+  check_your_environment: {
+    id: 'check-your-environment',
+    title: 'Check Your Environment',
+  },
+  procedure: {
+    id: 'procedure',
+    title: 'Procedure',
+  },
+  summary: { id: 'summary', title: 'Summary' },
+  whats_next: {
+    id: 'what-s-next',
+    title: 'What’s Next',
+  },
+  seealso: {
+    id: 'see-also',
+    title: 'See Also',
+  },
 };
 
 export const ADMONITIONS = ['admonition', 'note', 'tip', 'important', 'warning'];

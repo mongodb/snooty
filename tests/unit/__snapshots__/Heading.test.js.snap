@@ -1,11 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<h3>
+<h3
+  id="create-an-administrative-username-and-password"
+>
   Create an administrative username and password
   <a
     className="headerlink"
-    href="#"
+    href="#create-an-administrative-username-and-password"
     title="Permalink to this headline"
   >
     ¶
