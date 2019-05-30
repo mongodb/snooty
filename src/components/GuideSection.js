@@ -102,9 +102,7 @@ export default class GuideSection extends Component {
 }
 
 GuideSection.propTypes = {
-  headingRef: PropTypes.shape({
-    current: PropTypes.oneOfType([PropTypes.element, PropTypes.object]),
-  }).isRequired,
+  headingRef: PropTypes.shape({ current: PropTypes.element }).isRequired,
   guideSectionData: PropTypes.shape({
     children: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,

@@ -13,6 +13,7 @@ class Deluge extends Component {
   constructor(props) {
     super(props);
 
+    this.stitchClient = null;
     this.state = {
       answers: {},
       emailError: false,
@@ -44,6 +45,7 @@ class Deluge extends Component {
         console.error(err);
       });
     } catch (error) {
+      this.stitchClient = null;
       console.error('Could not connect to Stitch', error);
     }
   };
@@ -185,7 +187,7 @@ class Deluge extends Component {
     const noAnswersSubmitted = Object.keys(answers).length === 0 || Object.values(answers).every(val => val === '');
     const hasError = noAnswersSubmitted || emailError;
 
-    return (
+    return this.stitchClient ? (
       <MainWidget
         voteAcknowledgement={voteAcknowledgement}
         onSubmitFeedback={this.onSubmitFeedback}
@@ -205,7 +207,7 @@ class Deluge extends Component {
           placeholder="Email address"
         />
       </MainWidget>
-    );
+    ) : null;
   }
 }
 
