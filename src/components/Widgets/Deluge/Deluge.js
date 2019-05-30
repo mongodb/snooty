@@ -13,6 +13,7 @@ class Deluge extends Component {
   constructor(props) {
     super(props);
 
+    this.stitchClient = null;
     this.state = {
       answers: {},
       emailError: false,
@@ -37,11 +38,16 @@ class Deluge extends Component {
 
   // TODO: abstract Stitch environment in order to toggle staging and production Stitch environments
   setupStitch = () => {
-    const appId = 'feedback-ibcyy';
-    this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
-    this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch(err => {
-      console.error(err);
-    });
+    try {
+      const appId = 'feedback-ibcyy';
+      this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
+      this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch(err => {
+        console.error(err);
+      });
+    } catch (error) {
+      this.stitchClient = null;
+      console.error('Could not connect to Stitch', error);
+    }
   };
 
   // TODO: remove Segment binding in Deluge and abstract analytics calls to a generic utility for encapsulation
@@ -181,7 +187,7 @@ class Deluge extends Component {
     const noAnswersSubmitted = Object.keys(answers).length === 0 || Object.values(answers).every(val => val === '');
     const hasError = noAnswersSubmitted || emailError;
 
-    return (
+    return this.stitchClient ? (
       <MainWidget
         voteAcknowledgement={voteAcknowledgement}
         onSubmitFeedback={this.onSubmitFeedback}
@@ -201,7 +207,7 @@ class Deluge extends Component {
           placeholder="Email address"
         />
       </MainWidget>
-    );
+    ) : null;
   }
 }
 

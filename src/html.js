@@ -55,6 +55,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         id="navbar"
         data-navprops='{"links": [{"url": "https://docs.mongodb.com/manual/","text": "Server"},{"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},{"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},{"url": "https://docs.mongodb.com/tools/","text": "Tools"},{"url": "https://docs.mongodb.com/guides/","text": "Guides","active": true}]}'
       />
+      <script async src={`${getPrefix()}/scripts/segment.js`} />
       <script async src={`${getPrefix()}/docs-tools/navbar.min.js`} />
       {preBodyComponents}
       <div
