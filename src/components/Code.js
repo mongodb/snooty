@@ -75,9 +75,9 @@ export default class Code extends Component {
     return (
       <div className="button-code-block">
         <div className="button-row">
-          <button
+          <a
             className="code-button--copy code-button"
-            type="button"
+            role="button"
             onClick={() => {
               this.copyCodeButton(value);
               reportAnalytics('Codeblock Copied', {
@@ -93,7 +93,7 @@ export default class Code extends Component {
             >
               copied
             </div>
-          </button>
+          </a>
         </div>
         <div className={`copyable-code-block notranslate highlight-${lang}`}>
           <div className="highlight">
