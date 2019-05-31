@@ -72,10 +72,11 @@ export default class Code extends Component {
       code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uri={uri} />);
       code = this.htmlDecode(code);
     }
+    // TODO: when we move off docs-tools CSS, change the copy button from <a> to <button>
     return (
       <div className="button-code-block">
         <div className="button-row">
-          <a
+          <a // eslint-disable-line jsx-a11y/anchor-is-valid, jsx-a11y/interactive-supports-focus
             className="code-button--copy code-button"
             role="button"
             onClick={() => {
