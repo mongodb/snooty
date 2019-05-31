@@ -103,6 +103,8 @@ const getLinksFromUrl = async (baseUrl, slug, storageObj) => {
             .replace('http://docs.mongodb.com/guides', '')
             .replace('https://docs.mongodb.com/guides', '')
             .replace('http://127.0.0.1:9000', '')
+            .replace('https://', 'http://')
+            .replace('/#', '#')
             .replace(/\/$/, '');
         }
         return acc;
@@ -153,7 +155,7 @@ describe('landing page', () => {
 const slugs = slugArray;
 describe('with default tabs', () => {
   describe.each(slugs)('%p', slug => {
-    it.only(`file text is the same`, async () => {
+    it(`file text is the same`, async () => {
       expect.assertions(1);
 
       const [legacyText, snootyText] = await runComparisons(slug);
