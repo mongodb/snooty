@@ -28,7 +28,7 @@ exports[`renders correctly a role "guilabel" 1`] = `
 exports[`renders correctly a role "query" 1`] = `
 <a
   className="reference external"
-  href="https://docs.mongodb.com/manual/reference/operator/query/lt/#op._S_$lt"
+  href="https://docs.mongodb.com/manual/reference/operator/query/lt/#op._S_lt"
 >
   <code
     className="mongodb-query xref mongodb docutils literal notranslate"
@@ -62,7 +62,7 @@ exports[`renders correctly a role "setting" 1`] = `
 exports[`renders correctly a role "update" 1`] = `
 <a
   className="reference external"
-  href="https://docs.mongodb.com/manual/reference/operator/update/set/#up._S_$set"
+  href="https://docs.mongodb.com/manual/reference/operator/update/set/#up._S_set"
 >
   <code
     className="mongodb-update xref mongodb docutils literal notranslate"
