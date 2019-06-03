@@ -67,11 +67,11 @@ export default class Tabs extends Component {
                     const initRect = element.getBoundingClientRect();
 
                     // Get the position where the user scrolled to
-                    const initScrollY = window.scrollY;
+                    const initScrollY = window.scrollY || document.documentElement.scrollTop;
 
                     // Calc the distance from the tab strip to the top
                     // of whatever the user has scrolled to
-                    const offset = initScrollY - initRect.y;
+                    const offset = Math.abs(initScrollY - initRect.top);
 
                     // Await for page to re-render after setting active tab
                     await setActiveTab(tabName, tabsetName);
@@ -80,7 +80,7 @@ export default class Tabs extends Component {
                     const rects = element.getBoundingClientRect();
 
                     // Reset the scroll position of the browser
-                    window.scrollTo(rects.x, rects.y + offset);
+                    window.scrollTo(rects.x, rects.top + offset);
                     reportAnalytics('Tab Selected', {
                       tabId: tabName,
                       title: stringifyTab(tabName),
