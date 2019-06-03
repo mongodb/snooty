@@ -71,7 +71,7 @@ export default class Tabs extends Component {
 
                     // Calc the distance from the tab strip to the top
                     // of whatever the user has scrolled to
-                    const offset = Math.abs(initScrollY - initRect.top);
+                    const offset = initScrollY - initRect.top;
 
                     // Await for page to re-render after setting active tab
                     await setActiveTab(tabName, tabsetName);
