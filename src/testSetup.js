@@ -2,8 +2,6 @@
 const Enzyme = require('enzyme'); // eslint-disable-line import/no-extraneous-dependencies
 const Adapter = require('enzyme-adapter-react-16'); // eslint-disable-line import/no-extraneous-dependencies
 const Loadable = require('react-loadable');
-const fs = require('fs');
-const path = require('path');
 
 Enzyme.configure({ adapter: new Adapter() });
 
