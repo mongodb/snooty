@@ -31,6 +31,7 @@ const guidesLanguages = ['shell', 'compass', 'python', 'java-sync', 'nodejs', 'm
  * - Replace en dashes with double hyphens
  * - Replace ellipses with 3 periods
  * - Remove blank lines/whitespace
+ * - Normalize versions of macOS downloads to 1.0
  */
 const cleanString = str => {
   const trimmedStrs = str
@@ -42,7 +43,8 @@ const cleanString = str => {
     .replace(/[\u201C\u201D]/g, '"')
     .replace('–', '--')
     .replace(/\u2026/g, '...')
-    .replace(/^\s*[\r\n]/gm, '');
+    .replace(/^\s*[\r\n]/gm, '')
+    .replace(/tar -zxvf mongodb-macos-x86_64-([0-9]+).([0-9]+).tgz\n+/, 'tar -zxvf mongodb-macos-x86_64-1.0.tgz');
 };
 
 /*
@@ -73,6 +75,18 @@ const cleanOldString = str => {
 
 /*
  * Remove errors in the old build system
+ * - The correct command is sometimes not provided for Windows executables
+ */
+const cleanStringByPlatform = (str, platform) => {
+  let cleanStr = str;
+  if (platform === 'windows') {
+    cleanStr = str.replace('mongo mongodb+srv', 'mongo.exe mongodb+srv');
+  }
+  return cleanOldString(cleanStr);
+};
+
+/*
+ * Remove errors in the old build system
  * - Migration Support should not have been rendered as a primary section, so we should not expect to find it in Snooty's TOC
  * - Remove resulting blank lines
  */
@@ -95,10 +109,14 @@ const getLinksFromUrl = async (baseUrl, slug, storageObj) => {
   const page = await setUpPage(baseUrl, slug, storageObj);
   const hrefs = await page.$$eval(
     '.body a',
-    (as, localPrefix) => {
+    (as, localPrefix, isProd, isCloud, isServerGuide) => {
       return as.reduce((acc, a) => {
+        // Don't include admonition that is incorrectly shown when "Cloud" is selected on prod
+        if (isProd && a.text === 'Enable Auth' && isCloud && isServerGuide) {
+          return acc;
+        }
         if (a.className === 'headerlink' || (a.offsetWidth > 0 || a.offsetHeight > 0)) {
-          acc[a.text] = a.href
+          acc[a.text.trim()] = a.href
             .replace(`/${localPrefix}`, '')
             .replace('http://docs.mongodb.com/guides', '')
             .replace('https://docs.mongodb.com/guides', '')
@@ -110,7 +128,10 @@ const getLinksFromUrl = async (baseUrl, slug, storageObj) => {
         return acc;
       }, {});
     },
-    gatsbyPrefix
+    gatsbyPrefix,
+    baseUrl === prodUrl,
+    storageObj.cloud === 'cloud',
+    slug.includes('server')
   );
   return hrefs;
 };
@@ -189,6 +210,14 @@ describe('with local storage', () => {
         });
         return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
       }, 1500000);
+
+      it(`links are the same`, async () => {
+        const [oldLinks, newLinks] = await Promise.all([
+          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
+          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+        ]);
+        expect(newLinks).toEqual(oldLinks);
+      });
     });
 
     describe.each(guidesLanguages)('language: %p', language => {
@@ -198,6 +227,14 @@ describe('with local storage', () => {
         });
         return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
       }, 1500000);
+
+      it(`links are the same`, async () => {
+        const [oldLinks, newLinks] = await Promise.all([
+          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
+          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+        ]);
+        expect(newLinks).toEqual(oldLinks);
+      });
     });
 
     describe.each(PLATFORMS)('platform: %p', platform => {
@@ -205,8 +242,16 @@ describe('with local storage', () => {
         const [legacyText, snootyText] = await runComparisons(slug, {
           platforms: platform,
         });
-        return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
+        return expect(cleanString(snootyText)).toEqual(cleanString(cleanStringByPlatform(legacyText, platform)));
       }, 1500000);
+
+      it(`links are the same`, async () => {
+        const [oldLinks, newLinks] = await Promise.all([
+          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
+          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+        ]);
+        expect(newLinks).toEqual(oldLinks);
+      });
     });
   });
 });
