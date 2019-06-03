@@ -1,4 +1,4 @@
-import { DEPLOYMENTS, LANGUAGES, PLATFORMS, stringifyTab } from '../../src/constants';
+import { DEPLOYMENTS, PLATFORMS, stringifyTab } from '../../src/constants';
 import { slugArray } from '../../src/regressionTestSetup';
 
 require('dotenv').config({ path: './.env.production' });
@@ -211,7 +211,7 @@ describe('with local storage', () => {
         return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
       }, 1500000);
 
-      it(`links are the same`, async () => {
+      it(`deployment links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
           await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
           await getLinksFromUrl(localUrl, slug, defaultStorageObj),
@@ -228,7 +228,7 @@ describe('with local storage', () => {
         return expect(cleanString(snootyText)).toEqual(cleanString(cleanOldString(legacyText)));
       }, 1500000);
 
-      it(`links are the same`, async () => {
+      it(`language links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
           await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
           await getLinksFromUrl(localUrl, slug, defaultStorageObj),
@@ -245,7 +245,7 @@ describe('with local storage', () => {
         return expect(cleanString(snootyText)).toEqual(cleanString(cleanStringByPlatform(legacyText, platform)));
       }, 1500000);
 
-      it(`links are the same`, async () => {
+      it(`platform links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
           await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
           await getLinksFromUrl(localUrl, slug, defaultStorageObj),

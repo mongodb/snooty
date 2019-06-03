@@ -16,4 +16,4 @@ const getSlugs = (dir, results) => {
   return results;
 };
 
-export const slugArray = getSlugs('./public', []);
+export const slugArray = getSlugs('./public', []); // eslint-disable-line import/prefer-default-export
