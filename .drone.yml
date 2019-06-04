@@ -9,7 +9,7 @@ pipeline:
   test:
     image: node:10
     commands:
-      - npm test
+      - npm run test:unit
 
   lint:
     image: node:10

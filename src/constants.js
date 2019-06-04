@@ -24,6 +24,7 @@ export const SLUG_TO_STRING = {
   shell: 'Mongo Shell',
   compass: 'Compass',
   python: 'Python',
+  javasync: 'Java (Sync)',
   'java-sync': 'Java (Sync)',
   nodejs: 'Node.js',
   php: 'PHP',
