@@ -115,7 +115,7 @@ const getLinksFromUrl = async (baseUrl, slug, storageObj) => {
         if (isProd && a.text === 'Enable Auth' && isCloud && isServerGuide) {
           return acc;
         }
-        if (a.className === 'headerlink' || (a.offsetWidth > 0 || a.offsetHeight > 0)) {
+        if (a.className === 'headerlink' || a.offsetWidth > 0 || a.offsetHeight > 0) {
           acc[a.text.trim()] = a.href
             .replace(`/${localPrefix}`, '')
             .replace('http://docs.mongodb.com/guides', '')
