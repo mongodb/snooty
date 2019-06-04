@@ -130,6 +130,7 @@ export default class ComponentFactory extends Component {
 
 ComponentFactory.propTypes = {
   nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.object),
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,

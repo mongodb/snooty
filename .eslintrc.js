@@ -21,6 +21,10 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
+    jest: true,
+  },
+  globals: {
+    browser: true,
   },
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
