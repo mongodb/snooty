@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
 const Heading = props => {
-  const { id, nodeData } = props;
+  const { nodeData } = props;
+  const id = nodeData.id || '';
   return (
-    <h3>
+    <h3 id={id}>
       {nodeData.children.map((element, index) => {
         if (element.type === 'text') {
           return <React.Fragment key={index}>{element.value}</React.Fragment>;
@@ -20,18 +21,14 @@ const Heading = props => {
 };
 
 Heading.propTypes = {
-  id: PropTypes.string,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.string,
       })
     ).isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
-};
-
-Heading.defaultProps = {
-  id: '',
 };
 
 export default Heading;

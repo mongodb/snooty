@@ -7,10 +7,10 @@ exports[`renders correctly 1`] = `
   <div
     className="button-row"
   >
-    <button
+    <a
       className="code-button--copy code-button"
       onClick={[Function]}
-      type="button"
+      role="button"
     >
       copy
       <div
@@ -18,7 +18,7 @@ exports[`renders correctly 1`] = `
       >
         copied
       </div>
-    </button>
+    </a>
   </div>
   <div
     className="copyable-code-block notranslate highlight-javascript"

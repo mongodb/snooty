@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Pills from './Pills';
 import { stringifyTab } from '../constants';
-import { slugifyTitle } from '../util';
 
 // TODO: Improve validation of template content
 const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActiveTab, time, title, ...rest }) => {
@@ -13,10 +12,10 @@ const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActi
 
   const displayTitle = title.children[0].value;
   return (
-    <div className="section" id={slugifyTitle(displayTitle)}>
-      <h1>
+    <div className="section">
+      <h1 id={title.id}>
         {displayTitle}
-        <a className="headerlink" href={`#${slugifyTitle(displayTitle)}`} title="Permalink to this headline">
+        <a className="headerlink" href={`#${title.id}`} title="Permalink to this headline">
           ¶
         </a>
       </h1>

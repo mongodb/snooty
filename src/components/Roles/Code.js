@@ -8,24 +8,35 @@ const RoleCode = ({ nodeData: { label, name, target } }) => {
   let href;
 
   if (name === 'binary') {
-    termModified = label && label.value ? label.value : target.substr(target.indexOf('.') + 1);
-    href = `${base}/program/${termModified}/#${target.replace('~', '')}`;
+    const program = target.includes('bin')
+      ? target
+          .split('.')
+          .slice(1)
+          .join('.')
+      : target;
+    const id = target.includes('bin') ? target : `bin.${target}`;
+    termModified = label && label.value ? label.value : program;
+    href = `${base}/program/${program}/#${id.replace('~', '')}`;
   } else if (name === 'option') {
-    href = `${base}/program/mongoimport/#cmdoption-mongoimport-${termModified.replace('--', '')}`;
+    const [program] = target.split('.');
+    href = `${base}/program/${program}/#cmdoption-${program}-${termModified.replace('--', '')}`;
   } else if (name === 'authrole') {
     href = `${base}/built-in-roles/#${termModified}`;
   } else if (name === 'setting') {
     href = `${base}/configuration-options/#${termModified}`;
   } else if (name === 'method') {
-    href = `${base}/method/${termModified}/#${termModified}`;
+    const slug = termModified.replace('()', '');
+    href = `${base}/method/${slug}/#${slug}`;
   } else if (name === 'query') {
     termModified = termModified.replace('~op.', '');
-    href = `${base}/operator/query/${termModified.replace('$', '')}/#op._S_${termModified}`;
+    const linkTerm = termModified.replace('$', '');
+    href = `${base}/operator/query/${linkTerm}/#op._S_${linkTerm}`;
   } else if (name === 'dbcommand') {
     href = `${base}/command/${termModified}/#dbcmd.${termModified}`;
   } else if (name === 'update') {
     termModified = termModified.replace('~up.', '');
-    href = `${base}/operator/update/${termModified.replace('$', '')}/#up._S_${termModified}`;
+    const linkTerm = termModified.replace('$', '');
+    href = `${base}/operator/update/${linkTerm}/#up._S_${linkTerm}`;
   }
   return (
     <a href={href} className="reference external">

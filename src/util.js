@@ -80,5 +80,3 @@ export const throttle = (func, wait) => {
     return result;
   };
 };
-
-export const slugifyTitle = title => title.toLowerCase().replace(/\W+/g, '-');
