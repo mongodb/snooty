@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { stringifyTab } from '../constants';
-import { reportAnalytics } from '../util';
+import { reportAnalytics } from '../utils/report-analytics';
 
 const Pills = ({
   activeClass,

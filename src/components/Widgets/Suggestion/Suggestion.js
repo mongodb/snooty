@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
 import SuggestionCardList from './SuggestionCardList';
-import { reportAnalytics } from '../../../util';
+import { reportAnalytics } from '../../../utils/report-analytics';
 
 function getPageName() {
   const bodyElements = document.getElementsByClassName('body');

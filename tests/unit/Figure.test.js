@@ -6,6 +6,8 @@ import Figure from '../../src/components/Figure';
 import mockData from './data/Figure.test.json';
 import lightboxData from './data/FigureLightbox.test.json';
 
+jest.mock('../../src/utils/get-path-prefix');
+
 it('renders correctly', () => {
   const tree = shallow(<Figure nodeData={mockData} />);
   expect(tree).toMatchSnapshot();

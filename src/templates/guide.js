@@ -5,8 +5,11 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
-import { getLocalValue, setLocalValue } from '../browserStorage';
-import { findKeyValuePair, getPrefix, throttle } from '../util';
+import { getLocalValue, setLocalValue } from '../utils/browser-storage';
+import { findKeyValuePair } from '../utils/find-key-value-pair';
+import { getPathPrefix } from '../utils/get-path-prefix';
+import { throttle } from '../utils/throttle';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -17,7 +20,7 @@ export default class Guide extends Component {
 
     // get correct lookup key based on whether running dev/prod
     if (process.env.NODE_ENV === 'production') {
-      const documentPrefix = getPrefix().substr(1);
+      const documentPrefix = getPathPrefix().substr(1);
       guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
     }
 
@@ -128,6 +131,7 @@ export default class Guide extends Component {
   render() {
     const { pageContext } = this.props;
     const { activeSection, activeTabs, cloud, drivers } = this.state;
+    const { project } = useSiteMetadata();
     const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     return (
@@ -163,7 +167,7 @@ export default class Guide extends Component {
             </div>
           </div>
         </div>
-        <Widgets guideName={pageSlug} project={process.env.GATSBY_SITE} />
+        <Widgets guideName={pageSlug} project={project} />
       </div>
     );
   }

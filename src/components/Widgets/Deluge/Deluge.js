@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
-import { isBrowser } from '../../../util';
+import { isBrowser } from '../../../utils/is-browser';
 import FreeformQuestion from './FreeformQuestion';
 import InputField from './InputField';
 import MainWidget from './MainWidget';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TEMPLATE_TYPE_ATLAS_34, TEMPLATE_TYPE_ATLAS_36 } from './constants';
-import { getLocalValue, setLocalValue } from '../../browserStorage';
+import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 
 const re3dot4 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/(\S+)\?(\S+)/;
 const re3dot6 = /(\S+):\/\/(\S+):(\S*)@(\S+)\/([^\s?]+)\?/;

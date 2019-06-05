@@ -2,8 +2,6 @@ const path = require('path');
 const fs = require('fs');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
-const GATSBY_USER = require('os').userInfo().username;
-
 // where assets and documents are referenced
 let NAMESPACE_ASSETS = null;
 let DOCUMENTS = null;
@@ -42,34 +40,14 @@ const setupStitch = () => {
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
 const validateEnvVariables = () => {
   // make sure necessary env vars exist
-  if (
-    !process.env.NAMESPACE ||
-    !process.env.GATSBY_STITCH_ID ||
-    !process.env.GATSBY_SITE ||
-    !process.env.GATSBY_BRANCH
-  ) {
+  if (!process.env.NAMESPACE || !process.env.DOCUMENTS || !process.env.GATSBY_STITCH_ID || !process.env.SITE) {
     return {
       error: true,
-      message: `${
-        process.env.NODE_ENV
-      } requires the variables NAMESPACE, GATSBY_STITCH_ID, GATSBY_SITE, GATSBY_USER, and GATSBY_BRANCH`,
-    };
-  }
-  // make sure formats are correct
-  if (
-    process.env.NODE_ENV === 'production' &&
-    process.env.GATSBY_PREFIX &&
-    !process.env.GATSBY_PREFIX.startsWith('/')
-  ) {
-    return {
-      error: true,
-      message: `within .env.${
-        process.env.NODE_ENV
-      }, GATSBY_PREFIX must start with a slash: GATSBY_PREFIX=/<PREFIX_NAME>`,
+      message: `${process.env.NODE_ENV} requires the variables NAMESPACE, DOCUMENTS, GATSBY_STITCH_ID, and SITE`,
     };
   }
   // create split prefix for use in stitch function
-  DOCUMENTS = `${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`;
+  DOCUMENTS = process.env.DOCUMENTS;
   NAMESPACE_ASSETS = `${process.env.NAMESPACE.split('/')[0]}/assets`;
   return {
     error: false,
@@ -147,11 +125,6 @@ exports.sourceNodes = async ({ actions }) => {
       await saveAssetFile(assetName, assetDataDocuments[0]);
     }
   }
-
-  console.log(11, PAGES);
-  console.log(22, INCLUDE_FILES);
-  console.log(44, ASSETS);
-  //console.log(RESOLVED_REF_DOC_MAPPING);
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {

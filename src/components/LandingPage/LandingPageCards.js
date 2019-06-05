@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
-import { findKeyValuePair } from '../../util';
+import { findKeyValuePair } from '../../utils/find-key-value-pair';
 
 const DEFAULT_COMPLETION_TIME = 15;
 const CATEGORIES = [

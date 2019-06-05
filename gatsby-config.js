@@ -1,26 +1,31 @@
-const runningEnv = process.env.NODE_ENV || 'production';
-const { promisify } = require('util');
-const exec = promisify(require('child_process').exec);
+const { execSync } = require('child_process');
 const userInfo = require('os').userInfo;
+
+const runningEnv = process.env.NODE_ENV || 'production';
 
 require('dotenv').config({
   path: `.env.${runningEnv}`,
 });
 
-const getGitBranch = async () => {
-  return exec('git rev-parse --abbrev-ref HEAD');
+const getGitBranch = () => {
+  return execSync('git rev-parse --abbrev-ref HEAD')
+    .toString('utf8')
+    .replace(/[\n\r\s]+$/, '');
 };
 
 const getPathPrefix = () => {
   const user = userInfo().username;
   const gitBranch = getGitBranch();
 
-  return (
-    process.env.GATSBY_PREFIX ||
-    (runningEnv === 'production' ? `/${process.env.GATSBY_SITE}/${user}/${gitBranch}` : '/')
-  );
+  return runningEnv === 'production' ? `/${process.env.SITE}/${user}/${gitBranch}` : '/';
 };
 
 module.exports = {
   pathPrefix: getPathPrefix(),
+  siteMetadata: {
+    branch: getGitBranch(),
+    project: process.env.SITE,
+    title: 'MongoDB Guides',
+    user: userInfo().username,
+  },
 };
