@@ -77,4 +77,5 @@ export default class Widgets extends Component {
 
 Widgets.propTypes = {
   guideName: PropTypes.string.isRequired,
+  snootyStitchId: PropTypes.string.isRequired,
 };

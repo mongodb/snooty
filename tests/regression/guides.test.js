@@ -1,7 +1,8 @@
-const { execSync } = require('child_process');
-const userInfo = require('os').userInfo;
 import { DEPLOYMENTS, PLATFORMS, stringifyTab } from '../../src/constants';
 import { slugArray } from '../../src/regressionTestSetup';
+
+const { execSync } = require('child_process');
+const userInfo = require('os').userInfo;
 
 require('dotenv').config({ path: './.env.production' });
 

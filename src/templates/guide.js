@@ -4,7 +4,6 @@ import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
-import SiteMetadata from '../components/site-metadata';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
@@ -180,4 +179,5 @@ Guide.propTypes = {
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
+  snootyStitchId: PropTypes.string.isRequired,
 };
