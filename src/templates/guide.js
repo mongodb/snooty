@@ -142,7 +142,7 @@ export default class Guide extends Component {
             <div className="body" data-pagename={pageSlug}>
               <ul className="breadcrumbs">
                 <li className="breadcrumbs__bc">
-                  <a href="/">MongoDB Guides</a> &gt;{' '}
+                  <a href={`${getPathPrefix()}/`}>MongoDB Guides</a> &gt;{' '}
                 </li>
               </ul>
               <GuideHeading
