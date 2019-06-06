@@ -25,6 +25,8 @@ import mockDataTerm from './data/Role-term.test.json';
 import mockDataUpdate from './data/Role-update.test.json';
 import mockRefDocMapping from './data/index.test.json';
 
+jest.mock('../../src/utils/get-path-prefix');
+
 it('renders correctly a role "authrole"', () => {
   const tree = shallow(<RoleCode nodeData={mockDataAuthrole} />);
   expect(tree).toMatchSnapshot();

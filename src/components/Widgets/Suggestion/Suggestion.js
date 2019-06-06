@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
 import SuggestionCardList from './SuggestionCardList';
-import { reportAnalytics } from '../../../util';
+import { reportAnalytics } from '../../../utils/report-analytics';
 
 function getPageName() {
   const bodyElements = document.getElementsByClassName('body');
@@ -47,8 +47,10 @@ export default class Suggestion extends Component {
   };
 
   setupStitch = () => {
-    const appId = process.env.GATSBY_STITCH_ID;
-    this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
+    const { stitchId } = this.props;
+    this.stitchClient = Stitch.hasAppClient(stitchId)
+      ? Stitch.getAppClient(stitchId)
+      : Stitch.initializeAppClient(stitchId);
     this.stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
       .then(() => {
@@ -118,4 +120,5 @@ export default class Suggestion extends Component {
 Suggestion.propTypes = {
   closeDrawer: PropTypes.func.isRequired,
   drawerIsOpen: PropTypes.bool.isRequired,
+  stitchId: PropTypes.string.isRequired,
 };

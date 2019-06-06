@@ -5,6 +5,8 @@ import Index from '../../src/templates/index';
 // data for this component
 import mockData from './data/index.test.json';
 
+jest.mock('../../src/hooks/use-site-metadata');
+
 describe('Landing Page', () => {
   it('renders correctly', () => {
     const tree = shallow(<Index pageContext={{ __refDocMapping: mockData }} />);

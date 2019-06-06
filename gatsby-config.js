@@ -1,15 +1,32 @@
+const { execSync } = require('child_process');
+const userInfo = require('os').userInfo;
+
 const runningEnv = process.env.NODE_ENV || 'production';
 
 require('dotenv').config({
   path: `.env.${runningEnv}`,
 });
 
-const getPathPrefix = () =>
-  process.env.GATSBY_PREFIX ||
-  (runningEnv === 'production'
-    ? `/${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`
-    : '/');
+const getGitBranch = () => {
+  return execSync('git rev-parse --abbrev-ref HEAD')
+    .toString('utf8')
+    .replace(/[\n\r\s]+$/, '');
+};
+
+const getPathPrefix = () => {
+  const user = userInfo().username;
+  const gitBranch = getGitBranch();
+
+  return runningEnv === 'production' ? `/${process.env.SITE}/${user}/${gitBranch}` : '/';
+};
 
 module.exports = {
   pathPrefix: getPathPrefix(),
+  plugins: ['gatsby-plugin-react-helmet'],
+  siteMetadata: {
+    branch: getGitBranch(),
+    project: process.env.SITE,
+    title: 'MongoDB Guides',
+    user: userInfo().username,
+  },
 };

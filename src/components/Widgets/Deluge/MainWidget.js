@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getSessionValue, setSessionValue } from '../../../browserStorage';
+import { getSessionValue, setSessionValue } from '../../../utils/browser-storage';
 
 // State enum
 const STATE_INITIAL = 'Initial';

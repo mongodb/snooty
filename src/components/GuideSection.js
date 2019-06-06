@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Stepper from './Stepper';
-import { setLocalValue } from '../browserStorage';
+import { setLocalValue } from '../utils/browser-storage';
 import { SECTION_NAME_MAPPING } from '../constants';
 
 export default class GuideSection extends Component {
