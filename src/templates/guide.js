@@ -4,12 +4,13 @@ import TOC from '../components/TOC';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
+import SiteMetadata from '../components/site-metadata';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getPathPrefix } from '../utils/get-path-prefix';
 import { throttle } from '../utils/throttle';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+import DefaultLayout from '../components/layout';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -129,46 +130,47 @@ export default class Guide extends Component {
   }
 
   render() {
-    const { pageContext } = this.props;
+    const { pageContext, snootyStitchId } = this.props;
     const { activeSection, activeTabs, cloud, drivers } = this.state;
-    const { project } = useSiteMetadata();
     const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     return (
-      <div className="content">
-        <TOC activeSection={activeSection} sectionKeys={this.bodySections.map(section => section.name)} />
-        <div className="left-nav-space" />
-        <div id="main-column" className="main-column">
-          <div className="body" data-pagename={pageSlug}>
-            <ul className="breadcrumbs">
-              <li className="breadcrumbs__bc">
-                <a href="/">MongoDB Guides</a> &gt;{' '}
-              </li>
-            </ul>
-            <GuideHeading
-              activeTabs={activeTabs}
-              author={findKeyValuePair(this.sections, 'name', 'author')}
-              cloud={cloud}
-              description={findKeyValuePair(this.sections, 'name', 'result_description')}
-              drivers={drivers}
-              refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
-              setActiveTab={this.setActiveTab}
-              time={findKeyValuePair(this.sections, 'name', 'time')}
-              title={findKeyValuePair(this.sections, 'type', 'heading')}
-            />
-            {this.createSections()}
-            <div className="footer">
-              <div className="copyright">
-                <p>
-                  © MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB,
-                  Inc.
-                </p>
+      <DefaultLayout>
+        <div className="content">
+          <TOC activeSection={activeSection} sectionKeys={this.bodySections.map(section => section.name)} />
+          <div className="left-nav-space" />
+          <div id="main-column" className="main-column">
+            <div className="body" data-pagename={pageSlug}>
+              <ul className="breadcrumbs">
+                <li className="breadcrumbs__bc">
+                  <a href="/">MongoDB Guides</a> &gt;{' '}
+                </li>
+              </ul>
+              <GuideHeading
+                activeTabs={activeTabs}
+                author={findKeyValuePair(this.sections, 'name', 'author')}
+                cloud={cloud}
+                description={findKeyValuePair(this.sections, 'name', 'result_description')}
+                drivers={drivers}
+                refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+                setActiveTab={this.setActiveTab}
+                time={findKeyValuePair(this.sections, 'name', 'time')}
+                title={findKeyValuePair(this.sections, 'type', 'heading')}
+              />
+              {this.createSections()}
+              <div className="footer">
+                <div className="copyright">
+                  <p>
+                    © MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB,
+                    Inc.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
+          <Widgets guideName={pageSlug} snootyStitchId={snootyStitchId} />
         </div>
-        <Widgets guideName={pageSlug} project={project} />
-      </div>
+      </DefaultLayout>
     );
   }
 }

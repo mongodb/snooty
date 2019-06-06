@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Suggestion from './Suggestion/Suggestion';
 import Deluge from './Deluge/Deluge';
@@ -43,23 +44,37 @@ export default class Widgets extends Component {
 
   render() {
     const { drawerIsOpen } = this.state;
-    const { guideName, project } = this.props;
+    const { guideName, snootyStitchId } = this.props;
 
     return (
-      <div>
-        <Deluge
-          path={guideName}
-          project={project}
-          openDrawer={this.openDrawer}
-          canShowSuggestions={this.isSuggestionPage}
-        />
-        {this.isSuggestionPage && <Suggestion drawerIsOpen={drawerIsOpen} closeDrawer={this.closeDrawer} />}
-      </div>
+      <StaticQuery
+        query={graphql`
+          query SiteMetadata {
+            site {
+              siteMetadata {
+                project
+              }
+            }
+          }
+        `}
+        render={data => (
+          <React.Fragment>
+            <Deluge
+              path={guideName}
+              project={data.site.siteMetadata.project}
+              openDrawer={this.openDrawer}
+              canShowSuggestions={this.isSuggestionPage}
+            />
+            {this.isSuggestionPage && (
+              <Suggestion drawerIsOpen={drawerIsOpen} closeDrawer={this.closeDrawer} stitchId={snootyStitchId} />
+            )}
+          </React.Fragment>
+        )}
+      />
     );
   }
 }
 
 Widgets.propTypes = {
   guideName: PropTypes.string.isRequired,
-  project: PropTypes.string.isRequired,
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LandingPageCards from '../components/LandingPage/LandingPageCards';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
+import DefaultLayout from '../components/layout';
 
 export default class Index extends Component {
   constructor(propsFromServer) {
@@ -27,19 +28,21 @@ export default class Index extends Component {
     }
 
     return (
-      <div className="content">
-        <div className="guide-category-list">
-          <div className="section" id="guides">
-            <h1>
-              {name}
-              <a className="headerlink" href="#guides" title="Permalink to this headline">
-                ¶
-              </a>
-            </h1>
-            <LandingPageCards guides={guides} refDocMapping={pageContext.__refDocMapping} />
+      <DefaultLayout>
+        <div className="content">
+          <div className="guide-category-list">
+            <div className="section" id="guides">
+              <h1>
+                {name}
+                <a className="headerlink" href="#guides" title="Permalink to this headline">
+                  ¶
+                </a>
+              </h1>
+              <LandingPageCards guides={guides} refDocMapping={pageContext.__refDocMapping} />
+            </div>
           </div>
         </div>
-      </div>
+      </DefaultLayout>
     );
   }
 }

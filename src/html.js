@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getPathPrefix } from './utils/get-path-prefix';
-import { useSiteMetadata } from './hooks/use-site-metadata';
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => {
-  const { branch, project, title } = useSiteMetadata();
   return (
     <html lang="en" {...htmlAttributes}>
       <head>
@@ -28,8 +25,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
           property="og:image:secure_url"
           content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
         />
-        <link rel="stylesheet" href={`${getPathPrefix()}/docs-tools/guides.css`} type="text/css" />
-        <link rel="stylesheet" href={`${getPathPrefix()}/docs-tools/css/navbar.min.css`} type="text/css" />
         <style
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
@@ -50,19 +45,11 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         />
         {headComponents}
       </head>
-      <body
-        {...bodyAttributes}
-        data-project={project}
-        data-project-title={title}
-        data-branch={branch}
-        data-enable-marian="1"
-      >
+      <body {...bodyAttributes}>
         <div
           id="navbar"
           data-navprops='{"links": [{"url": "https://docs.mongodb.com/manual/","text": "Server"},{"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},{"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},{"url": "https://docs.mongodb.com/tools/","text": "Tools"},{"url": "https://docs.mongodb.com/guides/","text": "Guides","active": true}]}'
         />
-        <script async src={`${getPathPrefix()}/scripts/segment.js`} />
-        <script async src={`${getPathPrefix()}/docs-tools/navbar.min.js`} />
         {preBodyComponents}
         <div
           key="body"

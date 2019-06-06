@@ -21,18 +21,18 @@ You'll need to set some environment variables in two separate files at the root 
 #### `.env.production`
 Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 ```
-SITE=guides
-NAMESPACE=<DB>/<COLLECTION>
-DOCUMENTS=<SITE>/<USER>/<BRANCH>
+SITE=<SITE>
+PARSER_USER=<USER>
+PARSER_BRANCH=<BRANCH>
 GATSBY_STITCH_ID=<STITCH_ID>
 ```
 
 #### `.env.development`
 Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
 ```
-SITE=guides
-NAMESPACE=<DB>/<COLLECTION>
-DOCUMENTS=<SITE>/<USER>/<BRANCH>
+SITE=<SITE>
+PARSER_USER=<USER>
+PARSER_BRANCH=<BRANCH>
 GATSBY_STITCH_ID=<STITCH_ID>
 ```
 

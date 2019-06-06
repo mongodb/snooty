@@ -47,8 +47,10 @@ export default class Suggestion extends Component {
   };
 
   setupStitch = () => {
-    const appId = process.env.GATSBY_STITCH_ID;
-    this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
+    const { stitchId } = this.props;
+    this.stitchClient = Stitch.hasAppClient(stitchId)
+      ? Stitch.getAppClient(stitchId)
+      : Stitch.initializeAppClient(stitchId);
     this.stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
       .then(() => {
@@ -118,4 +120,5 @@ export default class Suggestion extends Component {
 Suggestion.propTypes = {
   closeDrawer: PropTypes.func.isRequired,
   drawerIsOpen: PropTypes.bool.isRequired,
+  stitchId: PropTypes.string.isRequired,
 };
