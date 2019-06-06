@@ -22,7 +22,7 @@ const getPathPrefix = () => {
 
 module.exports = {
   pathPrefix: getPathPrefix(),
-  plugins: [`gatsby-plugin-react-helmet`],
+  plugins: ['gatsby-plugin-react-helmet'],
   siteMetadata: {
     branch: getGitBranch(),
     project: process.env.SITE,
