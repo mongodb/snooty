@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from './Lightbox';
-import { getPrefix } from '../util';
+import { getPathPrefix } from '../utils/get-path-prefix';
 
 export default class Figure extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export default class Figure extends Component {
   render() {
     const { nodeData } = this.props;
     const { isLightboxSize } = this.state;
-    const imgSrc = `${getPrefix()}${nodeData.argument[0].value}`;
+    const imgSrc = `${getPathPrefix()}${nodeData.argument[0].value}`;
 
     if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
       return <Lightbox nodeData={nodeData} />;

@@ -1,9 +1,18 @@
 import { DEPLOYMENTS, PLATFORMS, stringifyTab } from '../../src/constants';
 import { slugArray } from '../../src/regressionTestSetup';
 
+const { execSync } = require('child_process');
+const userInfo = require('os').userInfo;
+
 require('dotenv').config({ path: './.env.production' });
 
-const gatsbyPrefix = process.env.GATSBY_PREFIX.substr(1);
+const getGitBranch = () => {
+  return execSync('git rev-parse --abbrev-ref HEAD')
+    .toString('utf8')
+    .replace(/[\n\r\s]+$/, '');
+};
+
+const gatsbyPrefix = `${process.env.SITE}/${userInfo().username}/${getGitBranch()}`;
 const prodUrl = 'https://docs.mongodb.com/guides/';
 const localUrl = `http://127.0.0.1:9000/${gatsbyPrefix}/`;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardPills from './CardPills';
-import { findKeyValuePair } from '../../util';
+import { findKeyValuePair } from '../../utils/find-key-value-pair';
 
 const Card = ({ card, refDocMapping, time }) => {
   const getCardTitle = cardSlug => {

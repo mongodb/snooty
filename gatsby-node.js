@@ -2,9 +2,13 @@ const path = require('path');
 const fs = require('fs');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
-// where assets and documents are referenced
-let NAMESPACE_ASSETS = null;
-let DOCUMENTS = null;
+let idPrefix = null;
+
+// Atlas DB config
+const DB = 'snooty';
+const DOCUMENTS_COLLECTION = 'documents';
+const ASSETS_COLLECTION = 'assets';
+const SNOOTY_STITCH_ID = 'ref_data-bnbxq';
 
 // test data properties
 const USE_TEST_DATA = process.env.USE_TEST_DATA;
@@ -24,8 +28,9 @@ let stitchClient;
 
 const setupStitch = () => {
   return new Promise((resolve, reject) => {
-    const stitchId = process.env.GATSBY_STITCH_ID;
-    stitchClient = Stitch.hasAppClient(stitchId) ? Stitch.getAppClient(stitchId) : Stitch.initializeAppClient(stitchId);
+    stitchClient = Stitch.hasAppClient(SNOOTY_STITCH_ID)
+      ? Stitch.getAppClient(SNOOTY_STITCH_ID)
+      : Stitch.initializeAppClient(SNOOTY_STITCH_ID);
     stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
       .then(user => {
@@ -40,36 +45,14 @@ const setupStitch = () => {
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
 const validateEnvVariables = () => {
   // make sure necessary env vars exist
-  if (
-    !process.env.NAMESPACE ||
-    !process.env.GATSBY_STITCH_ID ||
-    !process.env.GATSBY_SITE ||
-    !process.env.GATSBY_USER ||
-    !process.env.GATSBY_BRANCH
-  ) {
+  if (!process.env.SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
     return {
       error: true,
-      message: `${
-        process.env.NODE_ENV
-      } requires the variables NAMESPACE, GATSBY_STITCH_ID, GATSBY_SITE, GATSBY_USER, and GATSBY_BRANCH`,
-    };
-  }
-  // make sure formats are correct
-  if (
-    process.env.NODE_ENV === 'production' &&
-    process.env.GATSBY_PREFIX &&
-    !process.env.GATSBY_PREFIX.startsWith('/')
-  ) {
-    return {
-      error: true,
-      message: `within .env.${
-        process.env.NODE_ENV
-      }, GATSBY_PREFIX must start with a slash: GATSBY_PREFIX=/<PREFIX_NAME>`,
+      message: `${process.env.NODE_ENV} requires the variables SITE, PARSER_USER, and PARSER_BRANCH`,
     };
   }
   // create split prefix for use in stitch function
-  DOCUMENTS = `${process.env.GATSBY_SITE}/${process.env.GATSBY_USER}/${process.env.GATSBY_BRANCH}`;
-  NAMESPACE_ASSETS = `${process.env.NAMESPACE.split('/')[0]}/assets`;
+  idPrefix = `${process.env.SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
   return {
     error: false,
   };
@@ -85,9 +68,6 @@ const saveAssetFile = async (name, objData) => {
 };
 
 exports.sourceNodes = async ({ actions }) => {
-  const { createNode } = actions;
-  const items = [];
-
   // setup env variables
   const envResults = validateEnvVariables();
 
@@ -111,16 +91,17 @@ exports.sourceNodes = async ({ actions }) => {
     }
   } else {
     // start from index document
-    const query = { _id: `${DOCUMENTS}/index` };
-    const documents = await stitchClient.callFunction('fetchDocuments', [process.env.NAMESPACE, query]);
+    const query = { _id: `${idPrefix}/index` };
+    const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
     // set data for index page
     RESOLVED_REF_DOC_MAPPING['index'] = documents && documents.length > 0 ? documents[0] : {};
 
     // resolve references/urls to documents
     RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [
-      DOCUMENTS.split('/'),
-      process.env.NAMESPACE,
+      idPrefix.split('/'),
+      DB,
+      DOCUMENTS_COLLECTION,
       documents,
       RESOLVED_REF_DOC_MAPPING,
     ]);
@@ -141,16 +122,11 @@ exports.sourceNodes = async ({ actions }) => {
   for (const asset of ASSETS) {
     const [assetName, assetHash] = asset.split('#');
     const assetQuery = { _id: assetHash };
-    const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [NAMESPACE_ASSETS, assetQuery]);
+    const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
     if (assetDataDocuments && assetDataDocuments[0]) {
       await saveAssetFile(assetName, assetDataDocuments[0]);
     }
   }
-
-  console.log(11, PAGES);
-  console.log(22, INCLUDE_FILES);
-  console.log(44, ASSETS);
-  //console.log(RESOLVED_REF_DOC_MAPPING);
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
@@ -175,6 +151,7 @@ exports.createPages = ({ graphql, actions }) => {
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
+            snootyStitchId: SNOOTY_STITCH_ID,
           },
         });
       }

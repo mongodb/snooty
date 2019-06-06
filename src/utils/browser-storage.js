@@ -1,4 +1,4 @@
-import { isBrowser } from './util';
+import { isBrowser } from './is-browser';
 
 export const setLocalValue = (key, value) => {
   if (isBrowser()) {

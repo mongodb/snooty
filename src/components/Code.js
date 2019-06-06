@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import Highlight from 'react-highlight';
-import { reportAnalytics } from '../util';
+import { reportAnalytics } from '../utils/report-analytics';
 import 'highlight.js/styles/a11y-light.css';
 import URIText from './URIWriter/URIText';
 import {
