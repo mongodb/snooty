@@ -151,8 +151,8 @@ exports.createPages = ({ graphql, actions }) => {
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
             __refDocMapping: RESOLVED_REF_DOC_MAPPING,
+            snootyStitchId: SNOOTY_STITCH_ID,
           },
-          snootyStitchId: SNOOTY_STITCH_ID,
         });
       }
     }

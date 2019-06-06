@@ -129,7 +129,7 @@ export default class Guide extends Component {
   }
 
   render() {
-    const { pageContext, snootyStitchId } = this.props;
+    const { pageContext } = this.props;
     const { activeSection, activeTabs, cloud, drivers } = this.state;
     const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
@@ -167,7 +167,7 @@ export default class Guide extends Component {
               </div>
             </div>
           </div>
-          <Widgets guideName={pageSlug} snootyStitchId={snootyStitchId} />
+          <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
         </div>
       </DefaultLayout>
     );
@@ -178,6 +178,6 @@ Guide.propTypes = {
   '*': PropTypes.string.isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
+    snootyStitchId: PropTypes.string.isRequired,
   }).isRequired,
-  snootyStitchId: PropTypes.string.isRequired,
 };

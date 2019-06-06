@@ -17,16 +17,38 @@ const SiteMetadata = () => {
       }}
     >
       <html lang="en" />
-      <meta name="docsearch:version" content="2.0" />
-      <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover" />
 
-      <meta property="og:type" content="website" />
-      <meta property="og:locale" content="en" />
-      <meta property="og:site_name" content={title} />
-      <meta property="og:image:width" content="512" />
-      <meta property="og:image:height" content="512" />
-
-      <meta name="twitter:card" content="summary" />
+      <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
+      <link rel="shortcut icon" href="https://media.mongodb.org/favicon.ico" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="robots" content="index" />
+      <meta name="release" content="1.0" />
+      <meta name="version" content="master" />
+      <meta name="DC.Source" content="https://github.com/mongodb/docs-bi-connector/blob/DOCSP-3279/source/index.txt" />
+      <meta
+        property="og:image"
+        content="http://s3.amazonaws.com/info-mongodb-com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
+      />
+      <meta
+        property="og:image:secure_url"
+        content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
+      />
+      <style type="text/css">
+        {`
+          .hljs {
+            background: none !important;
+            padding: 0px !important;
+            display: inline !important;
+          }
+        `}
+      </style>
+      <link
+        rel="search"
+        type="application/opensearchdescription+xml"
+        href="https://docs.mongodb.com/osd.xml"
+        title="MongoDB Help"
+      />
 
       <link rel="stylesheet" href={`${getPathPrefix()}/docs-tools/guides.css`} type="text/css" />
       <link rel="stylesheet" href={`${getPathPrefix()}/docs-tools/css/navbar.min.css`} type="text/css" />
