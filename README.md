@@ -24,7 +24,6 @@ Snooty's `build` and `serve` stages use the `production` environment. Your `.env
 SITE=<SITE>
 PARSER_USER=<USER>
 PARSER_BRANCH=<BRANCH>
-GATSBY_STITCH_ID=<STITCH_ID>
 ```
 
 #### `.env.development`
@@ -33,7 +32,6 @@ Snooty's `develop` stage uses the `development` environment. Your `.env.developm
 SITE=<SITE>
 PARSER_USER=<USER>
 PARSER_BRANCH=<BRANCH>
-GATSBY_STITCH_ID=<STITCH_ID>
 ```
 
 ## Running locally
