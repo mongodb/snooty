@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
+import GuideBreadcrumbs from '../components/GuideBreadcrumbs';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
@@ -140,11 +141,7 @@ export default class Guide extends Component {
           <div className="left-nav-space" />
           <div id="main-column" className="main-column">
             <div className="body" data-pagename={pageSlug}>
-              <ul className="breadcrumbs">
-                <li className="breadcrumbs__bc">
-                  <a href={`${getPathPrefix()}/`}>MongoDB Guides</a> &gt;{' '}
-                </li>
-              </ul>
+              <GuideBreadcrumbs />
               <GuideHeading
                 activeTabs={activeTabs}
                 author={findKeyValuePair(this.sections, 'name', 'author')}
