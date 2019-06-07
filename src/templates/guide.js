@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
 import TOC from '../components/TOC';
 import GuideBreadcrumbs from '../components/GuideBreadcrumbs';
 import GuideSection from '../components/GuideSection';
@@ -8,7 +9,6 @@ import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
-import { getPathPrefix } from '../utils/get-path-prefix';
 import { throttle } from '../utils/throttle';
 import DefaultLayout from '../components/layout';
 
@@ -21,7 +21,7 @@ export default class Guide extends Component {
 
     // get correct lookup key based on whether running dev/prod
     if (process.env.NODE_ENV === 'production') {
-      const documentPrefix = getPathPrefix().substr(1);
+      const documentPrefix = withPrefix().slice(1, -1);
       guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
     }
 
@@ -42,6 +42,9 @@ export default class Guide extends Component {
   }
 
   recalculate = () => {
+    if (this.sectionRefs.map(ref => ref.current).some(ref => ref === null)) {
+      return;
+    }
     const height = document.body.clientHeight - window.innerHeight;
     const headings = this.sectionRefs.map((ref, index) => [ref, this.bodySections[index].name]);
 

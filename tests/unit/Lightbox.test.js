@@ -5,8 +5,6 @@ import Lightbox from '../../src/components/Lightbox';
 // data for this component
 import mockData from './data/Figure.test.json';
 
-jest.mock('../../src/utils/get-path-prefix');
-
 const mountLightbox = nodeData => mount(<Lightbox nodeData={nodeData} />);
 const shallowLightbox = nodeData => shallow(<Lightbox nodeData={nodeData} />);
 

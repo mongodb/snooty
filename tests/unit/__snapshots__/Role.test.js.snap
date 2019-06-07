@@ -95,7 +95,7 @@ exports[`renders correctly role "binary" 1`] = `
 
 exports[`renders correctly role "doc" 1`] = `
 <a
-  className="reference internal"
+  class="reference internal"
   href="/cloud/atlas"
 >
   Create an Atlas Account and Cluster
@@ -104,7 +104,7 @@ exports[`renders correctly role "doc" 1`] = `
 
 exports[`renders correctly role "doc" when no link title is included 1`] = `
 <a
-  className="reference internal"
+  class="reference internal"
   href="/server/drivers"
 >
   Connect to MongoDB
