@@ -1,13 +1,13 @@
 import React from 'react';
+import { withPrefix } from 'gatsby';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { getPathPrefix } from '../utils/get-path-prefix';
 
 const GuideBreadcrumbs = () => {
   const { title } = useSiteMetadata();
   return (
     <ul className="breadcrumbs">
       <li className="breadcrumbs__bc">
-        <a href={`${getPathPrefix()}/`}>{title}</a> &gt;{' '}
+        <a href={withPrefix('/')}>{title}</a> &gt;{' '}
       </li>
     </ul>
   );

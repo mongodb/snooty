@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { getPathPrefix } from '../utils/get-path-prefix';
+import { withPrefix } from 'gatsby';
 
 const CAPTION_TEXT = 'click to enlarge';
 const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
 const Lightbox = ({ nodeData }) => {
   const [showModal, setShowModal] = useState(false);
-  const imgSrc = `${getPathPrefix()}${nodeData.argument[0].value}`;
+  const imgSrc = nodeData.argument[0].value;
   const altText = nodeData.options.alt ? nodeData.options.alt : imgSrc;
 
   const toggleShowModal = () => {
@@ -21,7 +21,7 @@ const Lightbox = ({ nodeData }) => {
         style={{ width: nodeData.options && nodeData.options.figwidth ? nodeData.options.figwidth : 'auto' }}
       >
         <div className="lightbox__imageWrapper" onClick={toggleShowModal} role="button" tabIndex="-1">
-          <img src={imgSrc} alt={altText} width="50%" />
+          <img src={withPrefix(imgSrc)} alt={altText} width="50%" />
           <div className="lightbox__caption">{CAPTION_TEXT}</div>
         </div>
       </div>
@@ -33,7 +33,7 @@ const Lightbox = ({ nodeData }) => {
               'lightbox__content--activated',
               isSvg(imgSrc) ? 'lightbox__content--scalable' : null,
             ].join(' ')}
-            src={imgSrc}
+            src={withPrefix(imgSrc)}
             alt={`${altText} — Enlarged`}
           />
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { withPrefix } from 'gatsby';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { getPathPrefix } from '../utils/get-path-prefix';
 
 const SiteMetadata = () => {
   const { branch, project, title } = useSiteMetadata();
@@ -50,10 +50,10 @@ const SiteMetadata = () => {
         title="MongoDB Help"
       />
 
-      <link rel="stylesheet" href={`${getPathPrefix()}/docs-tools/guides.css`} type="text/css" />
-      <link rel="stylesheet" href={`${getPathPrefix()}/docs-tools/css/navbar.min.css`} type="text/css" />
-      <script async src={`${getPathPrefix()}/scripts/segment.js`} />
-      <script async src={`${getPathPrefix()}/docs-tools/navbar.min.js`} />
+      <link rel="stylesheet" href={withPrefix('docs-tools/guides.css')} type="text/css" />
+      <link rel="stylesheet" href={withPrefix('docs-tools/css/navbar.min.css')} type="text/css" />
+      <script async src={withPrefix('scripts/segment.js')} />
+      <script async src={withPrefix('docs-tools/navbar.min.js')} />
     </Helmet>
   );
 };
