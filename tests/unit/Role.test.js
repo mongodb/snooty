@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, render } from 'enzyme';
 
 import RoleCode from '../../src/components/Roles/Code';
 import RoleDoc from '../../src/components/Roles/Doc';
@@ -25,8 +25,6 @@ import mockDataTerm from './data/Role-term.test.json';
 import mockDataUpdate from './data/Role-update.test.json';
 import mockRefDocMapping from './data/index.test.json';
 
-jest.mock('../../src/utils/get-path-prefix');
-
 it('renders correctly a role "authrole"', () => {
   const tree = shallow(<RoleCode nodeData={mockDataAuthrole} />);
   expect(tree).toMatchSnapshot();
@@ -38,12 +36,12 @@ it('renders correctly role "binary"', () => {
 });
 
 it('renders correctly role "doc"', () => {
-  const tree = shallow(<RoleDoc nodeData={mockDataDoc} refDocMapping={mockRefDocMapping} />);
+  const tree = render(<RoleDoc nodeData={mockDataDoc} refDocMapping={mockRefDocMapping} />);
   expect(tree).toMatchSnapshot();
 });
 
 it('renders correctly role "doc" when no link title is included', () => {
-  const tree = shallow(<RoleDoc nodeData={mockDataDocUnlabeled} refDocMapping={mockRefDocMapping} />);
+  const tree = render(<RoleDoc nodeData={mockDataDocUnlabeled} refDocMapping={mockRefDocMapping} />);
   expect(tree).toMatchSnapshot();
 });
 

@@ -7,6 +7,9 @@ module.exports = {
     },
     {
       displayName: 'unit',
+      globals: {
+        __PATH_PREFIX__: '',
+      },
       moduleNameMapper: {
         '^.+\\.(css)$': '<rootDir>/tests/unit/__mockStyles.js',
       },
