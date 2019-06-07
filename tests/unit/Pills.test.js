@@ -23,9 +23,8 @@ describe('Pills component', () => {
 
   it('clicking a pill calls the event handler', () => {
     wrapper
-      .find('li.guide__pill')
+      .find('.guide__pill')
       .first()
-      .childAt(0)
       .simulate('click');
     expect(wrapper.props().handleClick).toHaveBeenCalledTimes(1);
   });

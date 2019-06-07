@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { stringifyTab } from '../constants';
 import { reportAnalytics } from '../utils/report-analytics';
+import pillStyles from '../styles/pills.module.css';
 
 const Pills = ({
   activeClass,
@@ -17,12 +18,11 @@ const Pills = ({
   return (
     <ul className={`guide__pills ${ulClass}`} role="tablist" data-tab-preference={dataTabPreference}>
       {pills.map((pill, index) => (
-        <li
-          className={['guide__pill', activePill === pill ? activeClass : '', liClass].join(' ')}
-          data-tabid={pill}
-          key={index}
-        >
+        <li data-tabid={pill} key={index}>
           <span
+            className={['guide__pill', activePill === pill ? activeClass : '', liClass, pillStyles.guide__pill].join(
+              ' '
+            )}
             onClick={() => {
               handleClick(pill);
               reportAnalytics('Pill Selected', {
