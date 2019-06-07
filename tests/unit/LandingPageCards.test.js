@@ -50,7 +50,7 @@ describe('LandingPageCards component', () => {
     });
 
     it('shows 5 pills (4 languages + 1 See More button)', () => {
-      expect(wrapper.find('li.guide__pill')).toHaveLength(5);
+      expect(wrapper.find('.guide__pill')).toHaveLength(5);
     });
   });
 
