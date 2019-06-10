@@ -38,11 +38,9 @@ export default class Code extends Component {
   // https://stackoverflow.com/a/34046084
   isCopyButtonEnabled = () => {
     if (!window || !window.navigator || !window.navigator.clipboard) {
-      let checkCopyCommand = false;
-      if (document && document.execCommand) {
-        checkCopyCommand = document.execCommand('copy');
-      }
-      if (!checkCopyCommand) {
+      const userAgent = window.navigator.userAgent;
+      // iOS Safari does not support execCommand('copy')
+      if (userAgent.includes('iPhone') && userAgent.includes('Safari')) {
         this.setState({
           showCopyButton: false,
         });
@@ -65,7 +63,6 @@ export default class Code extends Component {
 
   // clicking copy button for code blocks
   copyCodeButton = async code => {
-    if (!this.showCopyButton) return;
     // async copy method
     if (window && window.navigator && window.navigator.clipboard) {
       window.navigator.clipboard.writeText(code).then(() => {
