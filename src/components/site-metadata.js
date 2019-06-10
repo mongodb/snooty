@@ -34,15 +34,6 @@ const SiteMetadata = () => {
         property="og:image:secure_url"
         content="https://webassets.mongodb.com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
       />
-      <style type="text/css">
-        {`
-          .hljs {
-            background: none !important;
-            padding: 0px !important;
-            display: inline !important;
-          }
-        `}
-      </style>
       <link
         rel="search"
         type="application/opensearchdescription+xml"
