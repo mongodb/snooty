@@ -11,7 +11,7 @@ module.exports = {
         __PATH_PREFIX__: '',
       },
       moduleNameMapper: {
-        '^.+\\.(css)$': '<rootDir>/tests/unit/__mockStyles.js',
+        '^.+\\.(css)$': 'identity-obj-proxy',
       },
       setupFilesAfterEnv: ['<rootDir>/src/testSetup.js'],
       snapshotSerializers: ['enzyme-to-json/serializer'],

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Highlight from 'react-highlight';
 import { reportAnalytics } from '../utils/report-analytics';
 import 'highlight.js/styles/a11y-light.css';
+import codeStyle from '../styles/code.module.css';
 import URIText from './URIWriter/URIText';
 import {
   URI_PLACEHOLDER,
@@ -136,7 +137,7 @@ export default class Code extends Component {
         </div>
         <div className={`copyable-code-block notranslate highlight-${lang}`}>
           <div className="highlight">
-            <Highlight className={lang}>{code}</Highlight>
+            <Highlight className={`${lang} ${codeStyle.hljs}`}>{code}</Highlight>
           </div>
         </div>
       </div>
