@@ -64,13 +64,14 @@ export default class Code extends Component {
     const { copied } = this.state;
     const {
       nodeData: { value, lang },
-      activeTabs: { cloud },
-      uri: { cloudURI, localURI },
+      activeTabs,
+      uriWriter: { cloudURI, localURI },
     } = this.props;
     let code = value;
-    if (URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
-      const uri = cloud === 'cloud' ? cloudURI : localURI;
-      code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uri={uri} />);
+    if (activeTabs && URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
+      const { cloud } = activeTabs;
+      const activeUri = cloud === 'cloud' ? cloudURI : localURI;
+      code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uriData={activeUri} />);
       code = this.htmlDecode(code);
     }
     // TODO: when we move off docs-tools CSS, change the copy button from <a> to <button>
@@ -113,8 +114,8 @@ Code.propTypes = {
   }).isRequired,
   activeTabs: PropTypes.shape({
     cloud: PropTypes.string,
-  }).isRequired,
-  uri: PropTypes.shape({
+  }),
+  uriWriter: PropTypes.shape({
     atlasVersion: PropTypes.string,
     authSource: PropTypes.string,
     database: PropTypes.string,
@@ -126,7 +127,8 @@ Code.propTypes = {
 };
 
 Code.defaultProps = {
-  uri: {
+  activeTabs: undefined,
+  uriWriter: {
     cloudURI: undefined,
     localURI: undefined,
   },

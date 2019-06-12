@@ -2,8 +2,6 @@ const path = require('path');
 const fs = require('fs');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 
-let idPrefix = null;
-
 // Atlas DB config
 const DB = 'snooty';
 const DOCUMENTS_COLLECTION = 'documents';
@@ -52,7 +50,6 @@ const validateEnvVariables = () => {
     };
   }
   // create split prefix for use in stitch function
-  idPrefix = `${process.env.SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
   return {
     error: false,
   };
@@ -61,13 +58,27 @@ const validateEnvVariables = () => {
 const saveAssetFile = async (name, objData) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(`static/${name}`, objData.data.buffer, 'binary', err => {
-      if (err) console.log('ERROR with saving asset', err);
+      if (err) reject(err);
       resolve();
     });
   });
 };
 
-exports.sourceNodes = async ({ actions }) => {
+// Write all assets to static directory
+const saveAssetFiles = async () => {
+  const promises = [];
+  ASSETS.forEach(async asset => {
+    const [assetName, assetHash] = asset.split('#');
+    const assetQuery = { _id: assetHash };
+    const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
+    if (assetDataDocuments && assetDataDocuments[0]) {
+      promises.push(saveAssetFile(assetName, assetDataDocuments[0]));
+    }
+  });
+  return Promise.all(promises);
+};
+
+exports.sourceNodes = async () => {
   // setup env variables
   const envResults = validateEnvVariables();
 
@@ -91,24 +102,18 @@ exports.sourceNodes = async ({ actions }) => {
     }
   } else {
     // start from index document
-    const query = { _id: `${idPrefix}/index` };
+    const idPrefix = `${process.env.SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
+    const query = { _id: { $regex: new RegExp(`${idPrefix}/*`) } };
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
-    // set data for index page
-    RESOLVED_REF_DOC_MAPPING['index'] = documents && documents.length > 0 ? documents[0] : {};
-
-    // resolve references/urls to documents
-    RESOLVED_REF_DOC_MAPPING = await stitchClient.callFunction('resolveReferences', [
-      idPrefix.split('/'),
-      DB,
-      DOCUMENTS_COLLECTION,
-      documents,
-      RESOLVED_REF_DOC_MAPPING,
-    ]);
+    documents.forEach(doc => {
+      const { _id, ...rest } = doc;
+      RESOLVED_REF_DOC_MAPPING[_id.replace(`${idPrefix}/`, '')] = rest;
+    });
   }
 
   // separate references into correct types, e.g. pages, include files, assets, etc.
-  for (const ref of Object.keys(RESOLVED_REF_DOC_MAPPING)) {
+  Object.keys(RESOLVED_REF_DOC_MAPPING).forEach(ref => {
     if (ref.includes('includes/')) {
       INCLUDE_FILES.push(ref);
     } else if (ref.includes('#')) {
@@ -116,17 +121,9 @@ exports.sourceNodes = async ({ actions }) => {
     } else if (!ref.includes('curl') && !ref.includes('https://')) {
       PAGES.push(ref);
     }
-  }
+  });
 
-  // create images directory
-  for (const asset of ASSETS) {
-    const [assetName, assetHash] = asset.split('#');
-    const assetQuery = { _id: assetHash };
-    const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
-    if (assetDataDocuments && assetDataDocuments[0]) {
-      await saveAssetFile(assetName, assetDataDocuments[0]);
-    }
-  }
+  await saveAssetFiles();
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
@@ -138,12 +135,15 @@ exports.sourceNodes = async ({ actions }) => {
   }
 };
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = ({ actions }) => {
   const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
-    for (const page of PAGES) {
-      const template = page === 'index' ? 'index' : 'guide';
+    PAGES.forEach(page => {
+      let template = 'document';
+      if (process.env.SITE === 'guides') {
+        template = page === 'index' ? 'guides-index' : 'guide';
+      }
       const pageUrl = page === 'index' ? '/' : page;
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
@@ -155,7 +155,7 @@ exports.createPages = ({ graphql, actions }) => {
           },
         });
       }
-    }
+    });
     resolve();
   });
 };

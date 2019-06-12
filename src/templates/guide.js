@@ -28,10 +28,11 @@ export default class Guide extends Component {
     // get data from server
     this.sections = pageContext.__refDocMapping[guideKeyInMapping].ast.children[0].children;
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
+    console.log(this.sections.length);
 
     this.state = {
       activeTabs: {},
-      activeSection: this.bodySections[0].name,
+      activeSection: this.bodySections.length > 0 ? this.bodySections[0].name : null,
     };
 
     this.sectionRefs = this.bodySections.map(() => React.createRef());
