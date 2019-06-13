@@ -62,7 +62,7 @@ export default class Code extends Component {
   };
 
   // clicking copy button for code blocks
-  copyCodeButton = async code => {
+  handleCopyClick = code => {
     // async copy method
     if (window && window.navigator && window.navigator.clipboard) {
       window.navigator.clipboard.writeText(code).then(() => {
@@ -115,7 +115,7 @@ export default class Code extends Component {
               className="code-button--copy code-button"
               role="button"
               onClick={() => {
-                this.copyCodeButton(value);
+                this.handleCopyClick(value);
                 reportAnalytics('Codeblock Copied', {
                   code: value,
                 });
