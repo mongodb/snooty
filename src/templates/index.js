@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LandingPageCards from '../components/LandingPage/LandingPageCards';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
+import { getNestedValue } from '../utils/get-nested-value';
 import DefaultLayout from '../components/layout';
 
 export default class Index extends Component {
@@ -15,7 +16,11 @@ export default class Index extends Component {
 
   componentDidMount() {
     const { pageContext } = this.props;
-    const guides = findKeyValuePair(pageContext.__refDocMapping.index.ast.children, 'name', 'guide-index');
+    const guides = findKeyValuePair(
+      getNestedValue(['__refDocMapping', 'index', 'ast', 'children'], pageContext),
+      'name',
+      'guide-index'
+    );
     this.setState({ guides: guides.children });
   }
 

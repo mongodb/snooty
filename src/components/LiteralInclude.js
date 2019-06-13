@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { getNestedValue } from '../utils/get-nested-value';
 
 export default class LiteralInclude extends Component {
   constructor(props) {
@@ -8,9 +9,9 @@ export default class LiteralInclude extends Component {
 
     const { nodeData, refDocMapping } = this.props;
 
-    let key = nodeData.argument[0].value;
+    let key = getNestedValue(['argument', 0, 'value'], nodeData);
     // fix for some includes
-    if (key && key[0] === '/') {
+    if (key && key.startsWith('/')) {
       key = key.substr(1);
     }
     const startText = nodeData.options['start-after'];

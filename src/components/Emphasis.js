@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../utils/get-nested-value';
 
-const Emphasis = ({ nodeData }) => <em>{nodeData.children[0].value}</em>;
+const Emphasis = ({ nodeData }) => <em>{getNestedValue(['children', 0, 'value'], nodeData)}</em>;
 
 Emphasis.propTypes = {
   nodeData: PropTypes.shape({

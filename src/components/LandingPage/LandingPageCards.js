@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import { findKeyValuePair } from '../../utils/find-key-value-pair';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const DEFAULT_COMPLETION_TIME = 15;
 const CATEGORIES = [
@@ -21,7 +22,10 @@ const CATEGORIES = [
 
 const Category = ({ cards, category, refDocMapping }) => {
   const getCardCompletionTime = cardSlug =>
-    findKeyValuePair(refDocMapping[cardSlug].ast.children, 'name', 'time').argument[0].value || DEFAULT_COMPLETION_TIME;
+    getNestedValue(
+      ['argument', 0, 'value'],
+      findKeyValuePair(getNestedValue([cardSlug, 'ast', 'children'], refDocMapping), 'name', 'time')
+    ) || DEFAULT_COMPLETION_TIME;
 
   const columnSeparatedCards = [[], [], []];
   const lastRow = [];
@@ -64,7 +68,7 @@ const Category = ({ cards, category, refDocMapping }) => {
                 {cardColumn.map((card, index) => {
                   let completionTime;
                   if (card.name === 'card') {
-                    const cardSlug = card.argument[0].value;
+                    const cardSlug = getNestedValue(['argument', 0, 'value'], card);
                     completionTime = getCardCompletionTime(cardSlug);
                   }
                   return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
@@ -83,9 +87,15 @@ const LandingPageCards = ({ guides, refDocMapping }) =>
     <Category
       cards={guides.filter(card => {
         const cardName =
-          card.name === 'card' ? card.argument[0].value : card.children[0].children[0].children[0].children[0].value;
+          card.name === 'card'
+            ? getNestedValue(['argument', 0, 'value'], card)
+            : getNestedValue(['children', 0, 'children', 0, 'children', 0, 'children', 0, 'value'], card);
         return (
-          category.name === findKeyValuePair(refDocMapping[cardName].ast.children, 'name', 'category').argument[0].value
+          category.name ===
+          getNestedValue(
+            ['argument', 0, 'value'],
+            findKeyValuePair(getNestedValue([cardName, 'ast', 'children'], refDocMapping), 'name', 'category')
+          )
         );
       })}
       category={category}

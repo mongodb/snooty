@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import ComponentFactory from './ComponentFactory';
 import Pills from './Pills';
 import { stringifyTab } from '../constants';
+import { getNestedValue } from '../utils/get-nested-value';
 
 // TODO: Improve validation of template content
 const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActiveTab, time, title, ...rest }) => {
@@ -11,15 +12,19 @@ const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActi
     setActiveTab(pill, pillsetName);
   };
 
-  const displayTitle = title.children[0].value;
+  const displayTitle = getNestedValue(['children', 0, 'value'], title);
+  const titleId = getNestedValue(['id'], title);
+  const authorName = getNestedValue(['argument', 0, 'value'], author);
+  const descriptionChildren = getNestedValue(['children'], description);
+  const timeLength = getNestedValue(['argument', 0, 'value'], time);
   return (
     <div className="section">
       <Helmet>
         <title>{displayTitle}</title>
       </Helmet>
-      <h1 id={title.id}>
+      <h1 id={titleId}>
         {displayTitle}
-        <a className="headerlink" href={`#${title.id}`} title="Permalink to this headline">
+        <a className="headerlink" href={`#${titleId}`} title="Permalink to this headline">
           ¶
         </a>
       </h1>
@@ -62,15 +67,19 @@ const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActi
 
       <hr />
 
-      <p>Author: {author.argument[0].value}</p>
-      <section>
-        {description.children.map((element, index) => (
-          <ComponentFactory {...rest} nodeData={element} key={index} />
-        ))}
-      </section>
-      <p>
-        <em>Time required: {time.argument[0].value} minutes</em>
-      </p>
+      {authorName && <p>Author: {authorName}</p>}
+      {descriptionChildren && (
+        <section>
+          {descriptionChildren.map((element, index) => (
+            <ComponentFactory {...rest} nodeData={element} key={index} />
+          ))}
+        </section>
+      )}
+      {timeLength && (
+        <p>
+          <em>Time required: {timeLength} minutes</em>
+        </p>
+      )}
     </div>
   );
 };
