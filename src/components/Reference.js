@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../utils/get-nested-value';
 
-const Reference = props => {
-  const { nodeData } = props;
+const Reference = ({ nodeData }) => {
   return (
     <a className="reference external" href={nodeData.refuri}>
-      {nodeData.children[0].value}
+      {getNestedValue(['children', 0, 'value'], nodeData)}
     </a>
   );
 };
@@ -18,6 +18,7 @@ Reference.propTypes = {
         value: PropTypes.string,
       })
     ).isRequired,
+    refuri: PropTypes.string.isRequired,
   }).isRequired,
 };
 

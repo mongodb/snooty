@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { PLATFORMS, stringifyTab } from '../constants';
 import { reportAnalytics } from '../utils/report-analytics';
+import { getNestedValue } from '../utils/get-nested-value';
 
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
     const { nodeData, addTabset } = this.props;
-    const tabsetName = nodeData.options ? nodeData.options.tabset : this.generateAnonymousTabsetName(nodeData);
+    const tabsetName = getNestedValue(['options', 'tabset'], nodeData) || this.generateAnonymousTabsetName(nodeData);
     this.state = { tabsetName };
 
     addTabset(tabsetName, [...nodeData.children]);
@@ -30,11 +31,13 @@ export default class Tabs extends Component {
   };
 
   sortTabset = (nodeData, referenceArray) => {
-    return nodeData.children.sort(
-      (a, b) =>
-        referenceArray.indexOf(a.argument[0].value.toLowerCase()) -
-        referenceArray.indexOf(b.argument[0].value.toLowerCase())
-    );
+    return nodeData.children.sort((a, b) => {
+      let aValue = getNestedValue(['argument', 0, 'value'], a);
+      let bValue = getNestedValue(['argument', 0, 'value'], b);
+      if (aValue) aValue = aValue.toLowerCase();
+      if (bValue) bValue = bValue.toLowerCase();
+      return referenceArray.indexOf(aValue) - referenceArray.indexOf(bValue);
+    });
   };
 
   render() {
@@ -52,7 +55,8 @@ export default class Tabs extends Component {
         {isHeaderTabset || isHidden || (
           <ul className="tab-strip tab-strip--singleton" role="tablist">
             {tabs.map((tab, index) => {
-              const tabName = tab.argument[0].value.toLowerCase();
+              let tabName = getNestedValue(['argument', 0, 'value'], tab);
+              if (tabName) tabName = tabName.toLowerCase();
               return (
                 <li
                   className="tab-strip__element"
@@ -95,7 +99,8 @@ export default class Tabs extends Component {
           </ul>
         )}
         {tabs.map((tab, index) => {
-          const tabName = tab.argument[0].value.toLowerCase();
+          let tabName = getNestedValue(['argument', 0, 'value'], tab);
+          if (tabName) tabName = tabName.toLowerCase();
           return (
             activeTabs[tabsetName] === tabName && (
               <React.Fragment key={index}>

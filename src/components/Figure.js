@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
 import Lightbox from './Lightbox';
+import { getNestedValue } from '../utils/get-nested-value';
 
 export default class Figure extends Component {
   constructor(props) {
@@ -35,21 +36,16 @@ export default class Figure extends Component {
   render() {
     const { nodeData } = this.props;
     const { isLightboxSize } = this.state;
-    const imgSrc = nodeData.argument[0].value;
+    const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
 
     if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
       return <Lightbox nodeData={nodeData} />;
     }
     return (
-      <div
-        className="figure"
-        style={{
-          width: nodeData.options && nodeData.options.figwidth ? nodeData.options.figwidth : 'auto',
-        }}
-      >
+      <div className="figure" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
         <img
           src={withPrefix(imgSrc)}
-          alt={nodeData.options.alt ? nodeData.options.alt : nodeData.argument[0].value}
+          alt={getNestedValue(['options', 'alt'], nodeData) || imgSrc}
           width="50%"
           onLoad={this.handleImageLoaded}
           ref={this.imgRef}

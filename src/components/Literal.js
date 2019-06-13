@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../utils/get-nested-value';
 
 const Literal = ({ nodeData }) => (
   <code className="docutils literal notranslate">
-    <span className="pre">{nodeData.children[0].value}</span>
+    <span className="pre">{getNestedValue(['children', 0, 'value'], nodeData)}</span>
   </code>
 );
 

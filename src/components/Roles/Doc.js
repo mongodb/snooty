@@ -2,11 +2,15 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { findKeyValuePair } from '../../utils/find-key-value-pair';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const RoleDoc = ({ nodeData: { label, target }, refDocMapping }) => {
   const getLinkText = labelText => {
     const slug = labelText.startsWith('/') ? labelText.substr(1) : labelText;
-    return findKeyValuePair(refDocMapping[slug].ast.children, 'type', 'heading').children[0].value;
+    return getNestedValue(
+      ['children', 0, 'value'],
+      findKeyValuePair(getNestedValue([slug, 'ast', 'children'], refDocMapping), 'type', 'heading')
+    );
   };
 
   const labelDisplay = label && label.value ? label.value : getLinkText(target);
