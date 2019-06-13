@@ -106,7 +106,7 @@ class Deluge extends Component {
       voteDocument['q-segmentAnonymousID'] = segmentEvent.segmentAnonymousID;
     }
 
-    return this.stitchClient.callFunction('submitVote', [voteDocument]);
+    return this.stitchClient.callFunction('submitVoteV2', [voteDocument]);
   };
 
   onSubmitFeedback = vote => {
