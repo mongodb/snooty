@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
+import { getNestedValue } from '../utils/get-nested-value';
 
 const CAPTION_TEXT = 'click to enlarge';
 const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
 const Lightbox = ({ nodeData }) => {
   const [showModal, setShowModal] = useState(false);
-  const imgSrc = nodeData.argument[0].value;
-  const altText = nodeData.options.alt ? nodeData.options.alt : imgSrc;
+  const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
+  const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
 
   const toggleShowModal = () => {
     setShowModal(prevShowState => !prevShowState);
@@ -16,10 +17,7 @@ const Lightbox = ({ nodeData }) => {
 
   return (
     <React.Fragment>
-      <div
-        className="figure lightbox"
-        style={{ width: nodeData.options && nodeData.options.figwidth ? nodeData.options.figwidth : 'auto' }}
-      >
+      <div className="figure lightbox" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
         <div className="lightbox__imageWrapper" onClick={toggleShowModal} role="button" tabIndex="-1">
           <img src={withPrefix(imgSrc)} alt={altText} width="50%" />
           <div className="lightbox__caption">{CAPTION_TEXT}</div>

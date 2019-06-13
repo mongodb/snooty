@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { getNestedValue } from '../utils/get-nested-value';
 
 export default class Include extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export default class Include extends Component {
 
     const { nodeData, refDocMapping, updateTotalStepCount } = this.props;
 
-    let key = nodeData.argument[0].value;
+    let key = getNestedValue(['argument', 0, 'value'], nodeData);
     if (key.startsWith('/')) key = key.substr(1);
     if (key.endsWith('.rst')) key = key.replace('.rst', '');
     this.resolvedIncludeData = [];

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../utils/get-nested-value';
 
-const Strong = ({ nodeData }) => <strong>{nodeData.children[0].value}</strong>;
+const Strong = ({ nodeData }) => <strong>{getNestedValue(['children', 0, 'value'], nodeData)}</strong>;
 
 Strong.propTypes = {
   nodeData: PropTypes.shape({

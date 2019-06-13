@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const RoleProgram = ({ nodeData: { label, target } }) => {
-  const labelDisplay = label && label.value ? label.value : target;
+  const labelDisplay = getNestedValue(['value'], label) || target;
   return <strong className="program">{labelDisplay}</strong>;
 };
 
