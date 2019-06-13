@@ -88,7 +88,8 @@ export default class ComponentFactory extends Component {
       type === 'cssclass' ||
       name === 'cssclass' ||
       name === 'class' ||
-      type === 'comment'
+      type === 'comment' ||
+      name === 'default-domain'
     ) {
       return null;
     }

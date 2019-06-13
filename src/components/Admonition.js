@@ -1,25 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { getNestedValue } from '../utils/get-nested-value';
 
 const Admonition = props => {
   const { nodeData } = props;
+  const admonitionType = getNestedValue(['argument', 0, 'value'], nodeData);
 
   if (nodeData.name === 'admonition') {
-    let fullClassName = `admonition admonition-${nodeData.argument[0].value.toLowerCase().replace(/\s/g, '-')}`;
+    let fullClassName = `admonition admonition-${
+      admonitionType ? admonitionType.toLowerCase().replace(/\s/g, '-') : ''
+    }`;
     // special admonitions have options
-    if (nodeData.options && nodeData.options.class) {
-      fullClassName += ` ${nodeData.options.class}`;
+    const definedClass = getNestedValue(['options', 'class'], nodeData);
+    if (definedClass) {
+      fullClassName += ` ${definedClass}`;
     }
     return (
       <div className={fullClassName}>
-        <p className="first admonition-title">{nodeData.argument[0].value}</p>
+        <p className="first admonition-title">{admonitionType}</p>
         <React.Fragment>
           <ComponentFactory
             {...props}
             nodeData={{
               type: 'section',
-              children: nodeData.children[0].children,
+              children: getNestedValue(['children', 0, 'children'], nodeData),
             }}
             admonition
           />

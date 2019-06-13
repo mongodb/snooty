@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const baseUrl = 'https://api.mongodb.com/python/current/api/pymongo/results.html#';
 const RoleClass = ({ nodeData: { label, target } }) => {
-  const labelDisplay = label && label.value ? label.value : target;
+  const labelDisplay = getNestedValue(['value'], label) || target;
   return (
     <a href={`${baseUrl}${target}`} className="reference external">
       <code className="xref py py-class docutils literal notranslate">

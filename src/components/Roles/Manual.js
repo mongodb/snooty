@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { REF_TARGETS } from '../../constants';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const RoleManual = ({ nodeData: { label, target } }) => {
-  const labelDisplay = label && label.value ? label.value : target;
+  const labelDisplay = getNestedValue(['value'], label) || target;
   return (
     <a href={`${REF_TARGETS.manual}${target.replace('/manual', '')}`} className="reference external">
       {labelDisplay}

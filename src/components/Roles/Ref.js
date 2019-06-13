@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { REF_LABELS, REF_TARGETS } from '../../constants';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const RoleRef = ({ nodeData: { label, target } }) => {
   let labelDisplay;
   if (label) {
-    labelDisplay = label && label.value ? label.value : target;
+    labelDisplay = getNestedValue(['value'], label) || target;
   } else {
     labelDisplay = REF_LABELS[target] || target;
   }
