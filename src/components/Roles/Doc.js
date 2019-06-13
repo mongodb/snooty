@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import { findKeyValuePair, getPrefix } from '../../util';
+import { findKeyValuePair } from '../../utils/find-key-value-pair';
 
 const RoleDoc = ({ nodeData: { label, target }, refDocMapping }) => {
   const getLinkText = labelText => {
@@ -10,9 +11,9 @@ const RoleDoc = ({ nodeData: { label, target }, refDocMapping }) => {
 
   const labelDisplay = label && label.value ? label.value : getLinkText(target);
   return (
-    <a href={`${getPrefix()}${target}`} className="reference internal">
+    <Link to={target} className="reference internal">
       {labelDisplay}
-    </a>
+    </Link>
   );
 };
 

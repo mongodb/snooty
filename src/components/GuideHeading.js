@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import ComponentFactory from './ComponentFactory';
 import Pills from './Pills';
 import { stringifyTab } from '../constants';
@@ -13,6 +14,9 @@ const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActi
   const displayTitle = title.children[0].value;
   return (
     <div className="section">
+      <Helmet>
+        <title>{displayTitle}</title>
+      </Helmet>
       <h1 id={title.id}>
         {displayTitle}
         <a className="headerlink" href={`#${title.id}`} title="Permalink to this headline">

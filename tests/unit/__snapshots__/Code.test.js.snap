@@ -27,7 +27,7 @@ exports[`renders correctly 1`] = `
       className="highlight"
     >
       <Highlight
-        className="javascript"
+        className="javascript hljs"
         element={null}
         innerHTML={false}
       >

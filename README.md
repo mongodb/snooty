@@ -21,29 +21,17 @@ You'll need to set some environment variables in two separate files at the root 
 #### `.env.production`
 Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 ```
-NAMESPACE=<DB>/<COLLECTION> 
-GATSBY_STITCH_ID=<STITCH_ID> 
-GATSBY_SITE=<SITE>
-GATSBY_USER=<USER>
-GATSBY_BRANCH=<BRANCH>
+SITE=<SITE>
+PARSER_USER=<USER>
+PARSER_BRANCH=<BRANCH>
 ```
-
-##### Path prefixing
-When setting up a staging environment, you may wish to include a descriptive path prefix (e.g. `ops-manager-update`). To do so, set the `GATSBY_PREFIX` variable in your production .env file *with a preceding slash*:
-```
-GATSBY_PREFIX=/<descriptive-slug>
-```
-
-If `GATSBY_PREFIX` is not set, a prefix will automatically be generated in the form of `/SITE/USER/BRANCH`.
 
 #### `.env.development`
 Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
 ```
-NAMESPACE=<DB>/<COLLECTION> 
-GATSBY_STITCH_ID=<STITCH_ID> 
-GATSBY_SITE=<SITE>
-GATSBY_USER=<USER>
-GATSBY_BRANCH=<BRANCH>
+SITE=<SITE>
+PARSER_USER=<USER>
+PARSER_BRANCH=<BRANCH>
 ```
 
 ## Running locally

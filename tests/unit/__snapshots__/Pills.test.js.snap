@@ -6,11 +6,11 @@ exports[`Pills component renders correctly 1`] = `
   role="tablist"
 >
   <li
-    className="guide__pill  "
     data-tabid="python"
     key="0"
   >
     <span
+      className="guide__pill   guide__pill"
       onClick={[Function]}
       role="button"
       tabIndex={0}
@@ -19,11 +19,11 @@ exports[`Pills component renders correctly 1`] = `
     </span>
   </li>
   <li
-    className="guide__pill  "
     data-tabid="compass"
     key="1"
   >
     <span
+      className="guide__pill   guide__pill"
       onClick={[Function]}
       role="button"
       tabIndex={1}
@@ -32,11 +32,11 @@ exports[`Pills component renders correctly 1`] = `
     </span>
   </li>
   <li
-    className="guide__pill  "
     data-tabid="motor"
     key="2"
   >
     <span
+      className="guide__pill   guide__pill"
       onClick={[Function]}
       role="button"
       tabIndex={2}
@@ -45,11 +45,11 @@ exports[`Pills component renders correctly 1`] = `
     </span>
   </li>
   <li
-    className="guide__pill  "
     data-tabid="go"
     key="3"
   >
     <span
+      className="guide__pill   guide__pill"
       onClick={[Function]}
       role="button"
       tabIndex={3}
