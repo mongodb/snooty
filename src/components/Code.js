@@ -48,7 +48,7 @@ export default class Code extends Component {
     }
   };
 
-  // toggle copied bubble
+  // toggle copied bubble above code button
   toggleCopiedBubble = () => {
     this.setState({
       copied: true,
