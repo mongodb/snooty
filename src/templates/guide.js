@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import TOC from '../components/TOC';
 import ComponentFactory from '../components/ComponentFactory';
+import Footer from '../components/Footer';
 import GuideBreadcrumbs from '../components/GuideBreadcrumbs';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
@@ -33,7 +34,6 @@ export default class Guide extends Component {
       pageContext
     );
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
-    console.log(this.sections.length);
 
     this.state = {
       activeTabs: {},
@@ -171,14 +171,7 @@ export default class Guide extends Component {
                 title={findKeyValuePair(this.sections, 'type', 'heading')}
               />
               {this.createSections()}
-              <div className="footer">
-                <div className="copyright">
-                  <p>
-                    © MongoDB, Inc 2008-present. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB,
-                    Inc.
-                  </p>
-                </div>
-              </div>
+              <Footer />
             </div>
           </div>
           <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
