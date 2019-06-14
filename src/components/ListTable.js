@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../utils/get-nested-value';
 
 const ListTable = ({ nodeData: { children, options } }) => {
   const headerRowCount = parseInt(options['header-rows'], 10) || 0;
@@ -56,7 +57,7 @@ const ListTableHeaderRow = ({ row, rowIndex, stubColumnCount }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
     {row.map((column, colIndex) => (
       <th className={`head ${colIndex <= stubColumnCount - 1 && 'stub'}`} key={colIndex}>
-        {column.children[0].children[0].value}
+        {getNestedValue(['children', 0, 'children', 0, 'value'], column)}
       </th>
     ))}
   </tr>
@@ -85,7 +86,7 @@ const ListTableBody = ({ rows, headerRowCount, stubColumnCount }) => (
     {rows.map((row, index) => (
       <ListTableBodyRow
         key={index}
-        row={row.children[0].children}
+        row={getNestedValue(['children', 0, 'children'], row)}
         rowIndex={index + headerRowCount}
         stubColumnCount={stubColumnCount}
       />
@@ -107,7 +108,7 @@ const ListTableBodyRow = ({ row, rowIndex, stubColumnCount }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
     {row.map((column, colIndex) => (
       <td className={`${colIndex <= stubColumnCount - 1 && 'stub'}`} key={colIndex}>
-        {column.children[0].children[0].value}
+        {getNestedValue(['children', 0, 'children', 0, 'value'], column)}
       </td>
     ))}
   </tr>

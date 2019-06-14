@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import TOC from '../components/TOC';
+import ComponentFactory from '../components/ComponentFactory';
 import GuideBreadcrumbs from '../components/GuideBreadcrumbs';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
@@ -10,6 +11,7 @@ import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
+import { getNestedValue } from '../utils/get-nested-value';
 import DefaultLayout from '../components/layout';
 
 export default class Guide extends Component {
@@ -26,13 +28,16 @@ export default class Guide extends Component {
     }
 
     // get data from server
-    this.sections = pageContext.__refDocMapping[guideKeyInMapping].ast.children[0].children;
+    this.sections = getNestedValue(
+      ['__refDocMapping', guideKeyInMapping, 'ast', 'children', 0, 'children'],
+      pageContext
+    );
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
     console.log(this.sections.length);
 
     this.state = {
       activeTabs: {},
-      activeSection: this.bodySections.length > 0 ? this.bodySections[0].name : null,
+      activeSection: getNestedValue([0, 'name'], this.bodySections),
     };
 
     this.sectionRefs = this.bodySections.map(() => React.createRef());
@@ -118,13 +123,21 @@ export default class Guide extends Component {
   createSections() {
     const { pageContext } = this.props;
     const { activeTabs } = this.state;
+    if (this.bodySections.length === 0) {
+      return this.sections.map(section => {
+        return (
+          <ComponentFactory nodeData={section} refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}} />
+        );
+      });
+    }
+
     return this.bodySections.map((section, index) => {
       return (
         <GuideSection
           guideSectionData={section}
           key={index}
           headingRef={this.sectionRefs[index]}
-          refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+          refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           setActiveTab={this.setActiveTab}
           addTabset={this.addTabset}
           activeTabs={activeTabs}
@@ -152,7 +165,7 @@ export default class Guide extends Component {
                 cloud={cloud}
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
-                refDocMapping={pageContext ? pageContext.__refDocMapping : {}}
+                refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
                 setActiveTab={this.setActiveTab}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
                 title={findKeyValuePair(this.sections, 'type', 'heading')}

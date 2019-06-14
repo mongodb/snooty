@@ -24,34 +24,67 @@ export default class Code extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showCopyButton: true,
       copied: false,
     };
   }
 
-  copyCodeButton = code => {
-    if (!document) return;
-    const tempElement = document.createElement('textarea');
-    tempElement.style.position = 'fixed';
-    document.body.appendChild(tempElement);
-    tempElement.value = code;
-    tempElement.select();
-    try {
-      const successful = document.execCommand('copy');
-      if (!successful) throw new Error('Failed to copy');
-      // show copied bubble
-      this.setState({
-        copied: true,
-      });
-      // hide after some time passes
-      setTimeout(() => {
+  componentDidMount() {
+    this.isCopyButtonEnabled();
+  }
+
+  // this function determines if we can programmatically copy the code
+  // blocks via the copy button because some browsers disable for security reasons
+  // https://stackoverflow.com/a/34046084
+  isCopyButtonEnabled = () => {
+    if (!window || !window.navigator || !window.navigator.clipboard) {
+      const userAgent = window.navigator.userAgent;
+      // iOS Safari does not support execCommand('copy')
+      if (userAgent.includes('iPhone') && userAgent.includes('Safari')) {
         this.setState({
-          copied: false,
+          showCopyButton: false,
         });
-      }, 1500);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      document.body.removeChild(tempElement);
+      }
+    }
+  };
+
+  // toggle copied bubble above code button
+  toggleCopiedBubble = () => {
+    this.setState({
+      copied: true,
+    });
+    // hide after some time passes
+    setTimeout(() => {
+      this.setState({
+        copied: false,
+      });
+    }, 1500);
+  };
+
+  // clicking copy button for code blocks
+  handleCopyClick = code => {
+    // async copy method
+    if (window && window.navigator && window.navigator.clipboard) {
+      window.navigator.clipboard.writeText(code).then(() => {
+        this.toggleCopiedBubble();
+      });
+    } else {
+      // move text to temporary textarea element
+      const tempElement = document.createElement('textarea');
+      tempElement.style.position = 'fixed';
+      document.body.appendChild(tempElement);
+      tempElement.value = code;
+      tempElement.select();
+      try {
+        // attempt to copy using secondary method
+        const copySuccessful = document.execCommand('copy');
+        if (!copySuccessful) throw new Error('Failed to copy');
+        this.toggleCopiedBubble();
+      } catch (err) {
+        console.error(err);
+      } finally {
+        document.body.removeChild(tempElement);
+      }
     }
   };
 
@@ -61,7 +94,7 @@ export default class Code extends Component {
   };
 
   render() {
-    const { copied } = this.state;
+    const { copied, showCopyButton } = this.state;
     const {
       nodeData: { value, lang },
       activeTabs,
@@ -78,25 +111,27 @@ export default class Code extends Component {
     return (
       <div className="button-code-block">
         <div className="button-row">
-          <a // eslint-disable-line jsx-a11y/anchor-is-valid, jsx-a11y/interactive-supports-focus
-            className="code-button--copy code-button"
-            role="button"
-            onClick={() => {
-              this.copyCodeButton(value);
-              reportAnalytics('Codeblock Copied', {
-                code: value,
-              });
-            }}
-          >
-            copy
-            <div
-              className={`code-button__tooltip ${
-                copied ? 'code-button__tooltip--active' : 'code-button__tooltip--inactive'
-              }`}
+          {showCopyButton && (
+            <a // eslint-disable-line jsx-a11y/anchor-is-valid, jsx-a11y/interactive-supports-focus
+              className="code-button--copy code-button"
+              role="button"
+              onClick={() => {
+                this.handleCopyClick(value);
+                reportAnalytics('Codeblock Copied', {
+                  code: value,
+                });
+              }}
             >
-              copied
-            </div>
-          </a>
+              copy
+              <div
+                className={`code-button__tooltip ${
+                  copied ? 'code-button__tooltip--active' : 'code-button__tooltip--inactive'
+                }`}
+              >
+                copied
+              </div>
+            </a>
+          )}
         </div>
         <div className={`copyable-code-block notranslate highlight-${lang}`}>
           <div className="highlight">

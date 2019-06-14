@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const RoleCode = ({ nodeData: { label, name, target } }) => {
   const base = 'https://docs.mongodb.com/manual/reference';
   const classNameComplete = `mongodb-${name} xref mongodb docutils literal notranslate`;
-  let termModified = label && label.value ? label.value : target;
+  let termModified = getNestedValue(['value'], label) || target;
   let href;
 
   if (name === 'binary') {
