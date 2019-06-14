@@ -69,7 +69,7 @@ class Deluge extends Component {
 
   onSubmitVote = vote => {
     this.sendVote(vote)
-      .then(result => {
+      .then(() => {
         this.setState({
           voteAcknowledgement: vote ? 'up' : 'down',
         });
