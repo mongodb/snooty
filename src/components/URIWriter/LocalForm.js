@@ -118,7 +118,7 @@ export default class LocalForm extends Component {
 
     let updatedHostInputs = hostInputs;
     // Delete empty input as long as we have more than one input displayed
-    if (value === '' && Object.entries(hostInputs).length > 1) {
+    if (value === '' && Object.entries(hostInputs).length > 1 && Object.values(hostInputs).includes('')) {
       updatedHostInputs = this.removeHost(name);
     } else {
       updatedHostInputs = {
@@ -126,7 +126,8 @@ export default class LocalForm extends Component {
         [name]: value,
       };
 
-      if (!this.hostnameHasError(value) && !Object.values(hostInputs).includes('')) {
+      // Add a new empty input if all existing inputs are valid and non-empty
+      if (!this.hostnameHasError(value) && !Object.values(hostInputs).includes('') && value !== '') {
         const newKeyName = `host${this.hostlistCounter++}`; // eslint-disable-line no-plusplus
         updatedHostInputs[newKeyName] = '';
       }
@@ -231,24 +232,31 @@ export default class LocalForm extends Component {
         <label className="mongodb-form__prompt">
           <span className="mongodb-form__label">Servers</span>
           <div id="hostlist">
-            {Object.entries(hostInputs).map(([key, value], index) => {
-              const error = this.hostnameHasError(value);
-              return (
-                <React.Fragment key={index}>
-                  <input
-                    name={key}
-                    type="text"
-                    value={hostInputs[key]}
-                    onChange={this.handleInputChange}
-                    className="mongodb-form__input"
-                    placeholder="localhost:27017"
-                  />
-                  <div className={['mongodb-form__status', error && 'mongodb-form__status--invalid'].join(' ')}>
-                    {error}
-                  </div>
-                </React.Fragment>
-              );
-            })}
+            {Object.entries(hostInputs)
+              .sort()
+              .map(([key, value]) => {
+                const error = this.hostnameHasError(value);
+                return (
+                  <React.Fragment key={key}>
+                    <input
+                      name={key}
+                      type="text"
+                      key={key}
+                      value={hostInputs[key]}
+                      onChange={this.handleInputChange}
+                      onClick={e => {
+                        // Bugfix so that Safari users can click on the correct input field
+                        e.preventDefault();
+                      }}
+                      className="mongodb-form__input"
+                      placeholder="localhost:27017"
+                    />
+                    <div className={['mongodb-form__status', error && 'mongodb-form__status--invalid'].join(' ')}>
+                      {error}
+                    </div>
+                  </React.Fragment>
+                );
+              })}
           </div>
         </label>
       </React.Fragment>
