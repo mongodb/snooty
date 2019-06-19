@@ -19,7 +19,6 @@ class Deluge extends Component {
       emailError: false,
       interactionId: undefined,
       voteAcknowledgement: null,
-      voteId: undefined,
     };
   }
 
@@ -70,10 +69,9 @@ class Deluge extends Component {
 
   onSubmitVote = vote => {
     this.sendVote(vote)
-      .then(result => {
+      .then(() => {
         this.setState({
           voteAcknowledgement: vote ? 'up' : 'down',
-          voteId: result.insertedId,
         });
       })
       .catch(err => {
@@ -93,6 +91,7 @@ class Deluge extends Component {
     const pathSlug = `${project}/${path}`;
     const url = isBrowser() ? window.location.href : null;
     const voteDocument = {
+      interactionId,
       useful: vote,
       page: pathSlug,
       'q-url': url,
@@ -107,7 +106,7 @@ class Deluge extends Component {
       voteDocument['q-segmentAnonymousID'] = segmentEvent.segmentAnonymousID;
     }
 
-    return this.stitchClient.callFunction('submitVote', [voteDocument]);
+    return this.stitchClient.callFunction('submitVoteV2', [voteDocument]);
   };
 
   onSubmitFeedback = vote => {
@@ -130,17 +129,13 @@ class Deluge extends Component {
   };
 
   sendFeedback = (vote, fields) => {
-    const { interactionId, voteId } = this.state;
+    const { interactionId } = this.state;
 
     this.sendAnalytics('Feedback Submitted', {
       interactionId,
       useful: vote,
       ...fields,
     });
-
-    if (!voteId) {
-      return Promise.reject(new Error('Could not locate document ID'));
-    }
 
     // Prefix fields with q- to preserve Deluge's naming scheme
     Object.keys(fields).forEach(key => {
@@ -150,7 +145,7 @@ class Deluge extends Component {
       }
     });
 
-    const query = { _id: voteId };
+    const query = { interactionId };
     const update = {
       $set: {
         ...fields,
