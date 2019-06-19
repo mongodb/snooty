@@ -1,20 +1,10 @@
 import { DEPLOYMENTS, PLATFORMS, stringifyTab } from '../../src/constants';
 import { slugArray } from '../../src/regressionTestSetup';
-
-const { execSync } = require('child_process');
-const userInfo = require('os').userInfo;
+import { cleanString, localUrl, getLinksFromUrl, getTextFromUrl, getTOCFromUrl } from './util';
 
 require('dotenv').config({ path: './.env.production' });
 
-const getGitBranch = () => {
-  return execSync('git rev-parse --abbrev-ref HEAD')
-    .toString('utf8')
-    .replace(/[\n\r\s]+$/, '');
-};
-
-const gatsbyPrefix = `${process.env.SITE}/${userInfo().username}/${getGitBranch()}`;
-const prodUrl = 'https://docs.mongodb.com/guides/';
-const localUrl = `http://127.0.0.1:9000/${gatsbyPrefix}/`;
+const prodUrl = `https://docs.mongodb.com/${process.env.SITE}`;
 
 const defaultStorageObj = {
   cloud: 'cloud',
@@ -31,30 +21,6 @@ const convertToLegacy = string => {
 };
 
 const guidesLanguages = ['shell', 'compass', 'python', 'java-sync', 'nodejs', 'motor', 'csharp', 'motor', 'go'];
-
-/*
- * Replace characters to standardize between the two builders.
- * - Trim whitespace from beginning and end of each line (mostly affects codeblocks)
- * - Replace curly single quotes with straight single quotes
- * - Replace curly double quotes with straight double quotes
- * - Replace en dashes with double hyphens
- * - Replace ellipses with 3 periods
- * - Remove blank lines/whitespace
- * - Normalize versions of macOS downloads to 1.0
- */
-const cleanString = str => {
-  const trimmedStrs = str
-    .split('\n')
-    .map(line => line.trim())
-    .join('\n');
-  return trimmedStrs
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u201C\u201D]/g, '"')
-    .replace('–', '--')
-    .replace(/\u2026/g, '...')
-    .replace(/^\s*[\r\n]/gm, '')
-    .replace(/tar -zxvf mongodb-macos-x86_64-([0-9]+).([0-9]+).tgz\n+/, 'tar -zxvf mongodb-macos-x86_64-1.0.tgz');
-};
 
 /*
  * Remove discrepancies we have found with the old build system.
@@ -103,73 +69,48 @@ const cleanOldTOC = str => {
   return str.replace(/Migration Support/g, '').replace(/^\s*[\r\n]/gm, '');
 };
 
-const setUpPage = async (baseUrl, slug, { cloud, drivers, platforms }) => {
-  const page = await browser.newPage();
-  await page.goto(`${baseUrl}${slug}`);
+const clickPills = async (page, slug, { cloud, drivers, platforms }) => {
   if (slug) {
     await page.click(`li[data-tabid="${cloud}"]`).catch(() => {});
     await page.click(`li[data-tabid="${drivers}"]`).catch(() => {});
     await page.click(`li[data-tabid="${platforms}"]`).catch(() => {});
   }
-  return page;
 };
 
-const getLinksFromUrl = async (baseUrl, slug, storageObj) => {
-  const page = await setUpPage(baseUrl, slug, storageObj);
-  const hrefs = await page.$$eval(
-    '.body a',
-    (as, localPrefix, isProd, isCloud, isServerGuide) => {
-      return as.reduce((acc, a) => {
-        // Don't include admonition that is incorrectly shown when "Cloud" is selected on prod
-        if (isProd && a.text === 'Enable Auth' && isCloud && isServerGuide) {
-          return acc;
-        }
-        if (a.className === 'headerlink' || a.offsetWidth > 0 || a.offsetHeight > 0) {
-          acc[a.text.trim()] = a.href
-            .replace(`/${localPrefix}`, '')
-            .replace('http://docs.mongodb.com/guides', '')
-            .replace('https://docs.mongodb.com/guides', '')
-            .replace('http://127.0.0.1:9000', '')
-            .replace('https://', 'http://')
-            .replace('/#', '#')
-            .replace(/\/$/, '');
-        }
-        return acc;
-      }, {});
-    },
-    gatsbyPrefix,
-    baseUrl === prodUrl,
-    storageObj.cloud === 'cloud',
-    slug.includes('server')
-  );
-  return hrefs;
+// Don't include links in an admonition that is incorrectly shown when "Cloud" is selected on prod
+const removeEnableAuthLink = (hrefObj, baseUrl, storageObj, slug) => {
+  if (baseUrl === prodUrl && storageObj.cloud === 'cloud' && slug.includes('server')) {
+    delete hrefObj['Enable Auth']; // eslint-disable-line no-param-reassign
+  }
+  return hrefObj;
 };
 
-const getTextFromUrl = async (baseUrl, slug, storageObj) => {
-  const page = await setUpPage(baseUrl, slug, storageObj);
-  const bodyElement = slug ? await page.$('.body') : await page.$('.guide-category-list');
-  return page.evaluate(element => Promise.resolve(element.innerText), bodyElement);
-};
-
-const getTOCFromUrl = async (baseUrl, slug) => {
-  const page = await browser.newPage();
-  await page.goto(`${baseUrl}${slug}`);
-  const tocElement = await page.$('.left-toc');
-  return page.evaluate(element => Promise.resolve(element.innerText), tocElement);
-};
+const getTargetClass = slug => (slug ? '.body' : 'guide-category-list');
 
 const runComparisons = async (slug, storageObj = defaultStorageObj) => {
   const key = Object.keys(storageObj)[0];
   const val = Object.values(storageObj)[0];
   return Promise.all([
-    getTextFromUrl(prodUrl, slug, {
-      ...defaultStorageObj,
-      [key]: convertToLegacy(val),
-    }),
-    getTextFromUrl(localUrl, slug, {
-      ...defaultStorageObj,
-      ...storageObj,
-    }),
+    getTextFromUrl(
+      prodUrl,
+      slug,
+      {
+        ...defaultStorageObj,
+        [key]: convertToLegacy(val),
+      },
+      getTargetClass,
+      clickPills
+    ),
+    getTextFromUrl(
+      localUrl,
+      slug,
+      {
+        ...defaultStorageObj,
+        ...storageObj,
+      },
+      getTargetClass,
+      clickPills
+    ),
   ]);
 };
 
@@ -182,9 +123,8 @@ describe('landing page', () => {
   });
 });
 
-const slugs = slugArray;
 describe('with default tabs', () => {
-  describe.each(slugs)('%p', slug => {
+  describe.each(slugArray)('%p', slug => {
     it(`file text is the same`, async () => {
       expect.assertions(1);
 
@@ -193,17 +133,18 @@ describe('with default tabs', () => {
     });
 
     it(`table of contents labels are the same`, async () => {
+      const tocClass = '.left-toc';
       const [oldTOC, newTOC] = await Promise.all([
-        await getTOCFromUrl(prodUrl, slug),
-        await getTOCFromUrl(localUrl, slug),
+        await getTOCFromUrl(prodUrl, slug, tocClass),
+        await getTOCFromUrl(localUrl, slug, tocClass),
       ]);
       expect(newTOC).toEqual(cleanOldTOC(oldTOC));
     });
 
     it(`links are the same`, async () => {
       const [oldLinks, newLinks] = await Promise.all([
-        await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
-        await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+        await getLinksFromUrl(prodUrl, slug, defaultStorageObj, clickPills, removeEnableAuthLink),
+        await getLinksFromUrl(localUrl, slug, defaultStorageObj, clickPills),
       ]);
       expect(newLinks).toEqual(oldLinks);
     });
@@ -211,7 +152,7 @@ describe('with default tabs', () => {
 });
 
 describe('with local storage', () => {
-  describe.each(slugs)('%p', slug => {
+  describe.each(slugArray)('%p', slug => {
     describe.each(DEPLOYMENTS)('deployment: %p', deployment => {
       it(`deployment file text is the same`, async () => {
         const [legacyText, snootyText] = await runComparisons(slug, {
