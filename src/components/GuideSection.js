@@ -14,7 +14,7 @@ export default class GuideSection extends Component {
       showAllStepsText: 'Expand All Steps',
       showStepIndex: 0,
       totalStepsInProcedure: 1,
-      uri: {
+      uriWriter: {
         cloudURI: {},
         localURI: {},
       },
@@ -44,13 +44,13 @@ export default class GuideSection extends Component {
   handleUpdateURIWriter = uri => {
     this.setState(
       prevState => ({
-        uri: {
+        uriWriter: {
           ...prevState.uri,
           ...uri,
         },
       }),
       () => {
-        setLocalValue('uri', this.state.uri); // eslint-disable-line react/destructuring-assignment
+        setLocalValue('uri', this.state.uriWriter); // eslint-disable-line react/destructuring-assignment
       }
     );
   };
@@ -60,7 +60,7 @@ export default class GuideSection extends Component {
       guideSectionData: { children, name },
       headingRef,
     } = this.props;
-    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uri } = this.state;
+    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uriWriter } = this.state;
     const section = SECTION_NAME_MAPPING[name];
 
     return (
@@ -89,7 +89,7 @@ export default class GuideSection extends Component {
             showAllSteps={showAllSteps}
             showStepIndex={showStepIndex}
             updateTotalStepCount={this.updateTotalStepCount}
-            uri={uri}
+            uriWriter={uriWriter}
           />
         ))}
       </div>
