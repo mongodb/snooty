@@ -117,13 +117,13 @@ function replacePlaceholderWithURI(value, activeDeployment, uri) {
     .replace(URISTRING_SHELL_NOUSER_PLACEHOLDER, generateURI(uri, activeDeployment, 'templatePasswordRedactedShell'));
 }
 
-function URIText({ value, activeDeployment, uri }) {
-  return replacePlaceholderWithURI(value, activeDeployment, uri);
+function URIText({ value, activeDeployment, uriData }) {
+  return replacePlaceholderWithURI(value, activeDeployment, uriData);
 }
 
 URIText.propTypes = {
   activeDeployment: PropTypes.string,
-  uri: PropTypes.shape({
+  uriData: PropTypes.shape({
     atlasVersion: PropTypes.string,
     authSource: PropTypes.string,
     database: PropTypes.string,
