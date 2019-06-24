@@ -2,16 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const Paragraph = props => {
-  const { admonition, nodeData } = props;
+const Paragraph = ({ admonition, nodeData, parentNode, position, ...rest }) => {
+  if (parentNode === 'listItem' || parentNode === 'listTable') {
+    return nodeData.children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
+  }
   return (
-    <p style={{ margin: admonition ? '0 0 12.5px' : '' }}>
-      {nodeData.children.map((element, index) => {
-        if (element.type === 'text') {
-          return <React.Fragment key={index}>{element.value}</React.Fragment>;
-        }
-        return <ComponentFactory {...props} nodeData={element} key={index} />;
-      })}
+    <p style={{ margin: admonition ? '0 0 12.5px' : '' }} className={position}>
+      {nodeData.children.map((element, index) => (
+        <ComponentFactory {...rest} nodeData={element} key={index} />
+      ))}
     </p>
   );
 };
@@ -26,10 +25,14 @@ Paragraph.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  parentNode: PropTypes.string,
+  position: PropTypes.string,
 };
 
 Paragraph.defaultProps = {
   admonition: false,
+  parentNode: undefined,
+  position: '',
 };
 
 export default Paragraph;
