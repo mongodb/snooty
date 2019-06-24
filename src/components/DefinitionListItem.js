@@ -5,13 +5,13 @@ import ComponentFactory from './ComponentFactory';
 const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => (
   <React.Fragment>
     <dt>
-      {term.map(child => (
-        <ComponentFactory nodeData={child} />
+      {term.map((child, index) => (
+        <ComponentFactory nodeData={child} key={`dt-${index}`} />
       ))}
     </dt>
     <dd>
       {children.map((child, index) => (
-        <ComponentFactory {...rest} nodeData={child} key={index} />
+        <ComponentFactory {...rest} nodeData={child} key={`dd-${index}`} />
       ))}
     </dd>
   </React.Fragment>

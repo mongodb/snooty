@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefinitionList renders correctly 1`] = `
+<dl
+  class="first docutils"
+>
+  <dt>
+    <code
+      class="docutils literal notranslate"
+    >
+      <span
+        class="pre"
+      >
+        MongoDefaultPartitioner
+      </span>
+    </code>
+  </dt>
+  <dd>
+    <p
+      style="margin:"
+    >
+      <strong>
+        Default
+      </strong>
+      . Wraps the MongoSamplePartitioner and provides
+help for users of older versions of MongoDB.
+    </p>
+  </dd>
+</dl>
+`;

@@ -1,90 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`List renders correctly 1`] = `
 <ul>
-  <li
-    key="0"
-  >
-    <ComponentFactory
-      key="0"
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 16,
-                },
-              },
-              "type": "text",
-              "value": "create a free account on Atlas, MongoDB's managed database solution in the cloud",
-            },
-          ],
-          "position": Object {
-            "start": Object {
-              "line": 16,
-            },
-          },
-          "type": "paragraph",
-        }
-      }
-    />
+  <li>
+    <p
+      style="margin:"
+    >
+      create a free account on Atlas, MongoDB's managed database solution in the cloud
+    </p>
   </li>
-  <li
-    key="1"
-  >
-    <ComponentFactory
-      key="0"
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 17,
-                },
-              },
-              "type": "text",
-              "value": "create a free MongoDB ",
-            },
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 17,
-                    },
-                  },
-                  "type": "text",
-                  "value": "cluster",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 17,
-                },
-              },
-              "type": "emphasis",
-            },
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 17,
-                },
-              },
-              "type": "text",
-              "value": ", or group of database instances.",
-            },
-          ],
-          "position": Object {
-            "start": Object {
-              "line": 17,
-            },
-          },
-          "type": "paragraph",
-        }
-      }
-    />
+  <li>
+    <p
+      style="margin:"
+    >
+      create a free MongoDB 
+      <em>
+        cluster
+      </em>
+      , or group of database instances.
+    </p>
   </li>
 </ul>
 `;
