@@ -4,6 +4,7 @@ import { ADMONITIONS } from '../constants';
 import Step from './Step';
 import Paragraph from './Paragraph';
 import List from './List';
+import ListItem from './ListItem';
 import ListTable from './ListTable';
 import Emphasis from './Emphasis';
 import Include from './Include';
@@ -20,6 +21,8 @@ import Reference from './Reference';
 import Strong from './Strong';
 import URIWriter from './URIWriter/URIWriter';
 import TitleReference from './TitleReference';
+import DefinitionList from './DefinitionList';
+import DefinitionListItem from './DefinitionListItem';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -57,11 +60,14 @@ export default class ComponentFactory extends Component {
       admonition: Admonition,
       block_quote: BlockQuote,
       code: Code,
+      definitionList: DefinitionList,
+      definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
       figure: Figure,
       heading: Heading,
       include: Include,
       list: List,
+      listItem: ListItem,
       'list-table': ListTable,
       literal: Literal,
       literalinclude: LiteralInclude,

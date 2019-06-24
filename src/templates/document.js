@@ -23,7 +23,7 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   {pageNodes.map((child, index) => (
-                    <ComponentFactory {...props} key={index} nodeData={child} />
+                    <ComponentFactory key={index} nodeData={child} refDocMapping={__refDocMapping} />
                   ))}
                   <Footer />
                 </div>
