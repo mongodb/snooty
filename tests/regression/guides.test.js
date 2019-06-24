@@ -1,6 +1,6 @@
 import { DEPLOYMENTS, PLATFORMS, stringifyTab } from '../../src/constants';
 import { slugArray } from '../../src/regressionTestSetup';
-import { cleanString, localUrl, getLinksFromUrl, getTextFromUrl, getTOCFromUrl } from './util';
+import { cleanString, getClassText, getPageLinks, getPageText, localUrl } from './util';
 
 require('dotenv').config({ path: './.env.production' });
 
@@ -91,7 +91,7 @@ const runComparisons = async (slug, storageObj = defaultStorageObj) => {
   const key = Object.keys(storageObj)[0];
   const val = Object.values(storageObj)[0];
   return Promise.all([
-    getTextFromUrl(
+    getPageText(
       prodUrl,
       slug,
       {
@@ -101,7 +101,7 @@ const runComparisons = async (slug, storageObj = defaultStorageObj) => {
       getTargetClass,
       clickPills
     ),
-    getTextFromUrl(
+    getPageText(
       localUrl,
       slug,
       {
@@ -135,16 +135,16 @@ describe('with default tabs', () => {
     it(`table of contents labels are the same`, async () => {
       const tocClass = '.left-toc';
       const [oldTOC, newTOC] = await Promise.all([
-        await getTOCFromUrl(prodUrl, slug, tocClass),
-        await getTOCFromUrl(localUrl, slug, tocClass),
+        await getClassText(prodUrl, slug, tocClass),
+        await getClassText(localUrl, slug, tocClass),
       ]);
       expect(newTOC).toEqual(cleanOldTOC(oldTOC));
     });
 
     it(`links are the same`, async () => {
       const [oldLinks, newLinks] = await Promise.all([
-        await getLinksFromUrl(prodUrl, slug, defaultStorageObj, clickPills, removeEnableAuthLink),
-        await getLinksFromUrl(localUrl, slug, defaultStorageObj, clickPills),
+        await getPageLinks(prodUrl, slug, defaultStorageObj, clickPills, removeEnableAuthLink),
+        await getPageLinks(localUrl, slug, defaultStorageObj, clickPills),
       ]);
       expect(newLinks).toEqual(oldLinks);
     });
@@ -163,8 +163,8 @@ describe('with local storage', () => {
 
       it(`deployment links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
-          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
-          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+          await getPageLinks(prodUrl, slug, defaultStorageObj),
+          await getPageLinks(localUrl, slug, defaultStorageObj),
         ]);
         expect(newLinks).toEqual(oldLinks);
       });
@@ -180,8 +180,8 @@ describe('with local storage', () => {
 
       it(`language links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
-          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
-          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+          await getPageLinks(prodUrl, slug, defaultStorageObj),
+          await getPageLinks(localUrl, slug, defaultStorageObj),
         ]);
         expect(newLinks).toEqual(oldLinks);
       });
@@ -197,8 +197,8 @@ describe('with local storage', () => {
 
       it(`platform links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
-          await getLinksFromUrl(prodUrl, slug, defaultStorageObj),
-          await getLinksFromUrl(localUrl, slug, defaultStorageObj),
+          await getPageLinks(prodUrl, slug, defaultStorageObj),
+          await getPageLinks(localUrl, slug, defaultStorageObj),
         ]);
         expect(newLinks).toEqual(oldLinks);
       });

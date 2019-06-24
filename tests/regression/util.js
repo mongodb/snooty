@@ -47,14 +47,14 @@ const setUpPage = async (baseUrl, slug, storageObj, interactWithPage = undefined
   return page;
 };
 
-export const getTextFromUrl = async (baseUrl, slug, storageObj, getTargetClass, interactWithPage = undefined) => {
+export const getPageText = async (baseUrl, slug, storageObj, getTargetClass, interactWithPage = undefined) => {
   const page = await setUpPage(baseUrl, slug, storageObj, interactWithPage);
   const className = getTargetClass && typeof getTargetClass === 'function' ? getTargetClass(slug) : '.body';
   const bodyElement = await page.$(className);
   return page.evaluate(element => Promise.resolve(element.innerText), bodyElement);
 };
 
-export const getLinksFromUrl = async (
+export const getPageLinks = async (
   baseUrl,
   slug,
   storageObj,
@@ -91,7 +91,7 @@ export const getLinksFromUrl = async (
  * Return the text that is displayed in a table of contents.
  * The class surrounding the TOC must be passed as an argument.
  */
-export const getTOCFromUrl = async (baseUrl, slug, tocClass) => {
+export const getClassText = async (baseUrl, slug, tocClass) => {
   const page = await browser.newPage();
   await page.goto(`${baseUrl}/${slug}`);
   const tocElement = await page.$(tocClass);
