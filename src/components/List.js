@@ -6,12 +6,8 @@ const List = props => {
   const { nodeData } = props;
   return (
     <ul>
-      {nodeData.children.map((item, index) => (
-        <li key={index}>
-          {item.children.map((listItem, listItemIndex) => (
-            <ComponentFactory {...props} nodeData={listItem} key={listItemIndex} />
-          ))}
-        </li>
+      {nodeData.children.map((listChild, index) => (
+        <ComponentFactory {...props} nodeData={listChild} key={index} />
       ))}
     </ul>
   );
