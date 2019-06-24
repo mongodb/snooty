@@ -23,6 +23,7 @@ import URIWriter from './URIWriter/URIWriter';
 import TitleReference from './TitleReference';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
+import Transition from './Transition';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -78,6 +79,7 @@ export default class ComponentFactory extends Component {
       strong: Strong,
       tabs: Tabs,
       title_reference: TitleReference,
+      transition: Transition,
       uriwriter: URIWriter,
     };
   }
