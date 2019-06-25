@@ -21,6 +21,7 @@ import Reference from './Reference';
 import Strong from './Strong';
 import URIWriter from './URIWriter/URIWriter';
 import TitleReference from './TitleReference';
+import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 
@@ -77,6 +78,7 @@ export default class ComponentFactory extends Component {
       step: Step,
       strong: Strong,
       tabs: Tabs,
+      text: Text,
       title_reference: TitleReference,
       uriwriter: URIWriter,
     };
