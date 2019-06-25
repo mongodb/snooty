@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
 const Paragraph = ({ admonition, nodeData, parentNode, position, ...rest }) => {
+  // For paragraph nodes that appear inside certain containers, skip <p> tags and just render their contents
   if (parentNode === 'listItem' || parentNode === 'listTable') {
     return nodeData.children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
   }
