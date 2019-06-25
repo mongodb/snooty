@@ -85,8 +85,18 @@ export default class ComponentFactory extends Component {
   selectComponent() {
     const {
       nodeData: { children, name, type },
+      substitutions,
       ...rest
     } = this.props;
+
+    if (type === 'substitution_reference') {
+      if (!substitutions || !substitutions[name]) {
+        return null;
+      }
+
+      return substitutions[name].map((sub, index) => <ComponentFactory {...rest} nodeData={sub} key={index} />);
+    }
+
     // do nothing with these nodes for now (cc. Andrew)
     if (
       type === 'target' ||
@@ -141,4 +151,11 @@ ComponentFactory.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  substitutions: PropTypes.shape({
+    [PropTypes.string]: PropTypes.arrayOf(PropTypes.object),
+  }),
+};
+
+ComponentFactory.defaultProps = {
+  substitutions: undefined,
 };
