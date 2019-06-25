@@ -105,7 +105,8 @@ export default class ComponentFactory extends Component {
       name === 'cssclass' ||
       name === 'class' ||
       type === 'comment' ||
-      name === 'default-domain'
+      name === 'default-domain' ||
+      type === 'substitution_definition'
     ) {
       return null;
     }
