@@ -3,22 +3,14 @@
 exports[`List renders correctly 1`] = `
 <ul>
   <li>
-    <p
-      style="margin:"
-    >
-      create a free account on Atlas, MongoDB's managed database solution in the cloud
-    </p>
+    create a free account on Atlas, MongoDB's managed database solution in the cloud
   </li>
   <li>
-    <p
-      style="margin:"
-    >
-      create a free MongoDB 
-      <em>
-        cluster
-      </em>
-      , or group of database instances.
-    </p>
+    create a free MongoDB 
+    <em>
+      cluster
+    </em>
+    , or group of database instances.
   </li>
 </ul>
 `;

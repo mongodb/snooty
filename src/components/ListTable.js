@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const ListTable = ({ nodeData: { children, options } }) => {
@@ -16,7 +17,7 @@ const ListTable = ({ nodeData: { children, options } }) => {
   }
 
   return (
-    <table className={['docutils', options.class, widths, customAlign].join(' ')} style={{ width: customWidth }}>
+    <table className={['docutils', options.class || '', widths, customAlign].join(' ')} style={{ width: customWidth }}>
       {widths === 'colwidths-given' && <ColGroup widths={options.widths.split(/[ ,]+/)} />}
       <ListTableHeader rows={headerRows} stubColumnCount={stubColumnCount} />
       <ListTableBody rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
@@ -57,7 +58,7 @@ const ListTableHeaderRow = ({ row, rowIndex, stubColumnCount }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
     {row.map((column, colIndex) => (
       <th className={`head ${colIndex <= stubColumnCount - 1 && 'stub'}`} key={colIndex}>
-        {getNestedValue(['children', 0, 'children', 0, 'value'], column)}
+        <ComponentFactory nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
       </th>
     ))}
   </tr>
@@ -107,8 +108,17 @@ ListTableBody.propTypes = {
 const ListTableBodyRow = ({ row, rowIndex, stubColumnCount }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
     {row.map((column, colIndex) => (
-      <td className={`${colIndex <= stubColumnCount - 1 && 'stub'}`} key={colIndex}>
-        {getNestedValue(['children', 0, 'children', 0, 'value'], column)}
+      <td className={`${colIndex <= stubColumnCount - 1 ? 'stub' : ''}`} key={colIndex}>
+        {column.children.length === 1 ? (
+          <ComponentFactory nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
+        ) : (
+          column.children.map((element, index) => {
+            let position = '';
+            if (index === 0) position = 'first';
+            if (index === column.children.length - 1) position = 'last';
+            return <ComponentFactory key={index} nodeData={element} position={position} />;
+          })
+        )}
       </td>
     ))}
   </tr>

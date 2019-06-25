@@ -1,25 +1,25 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, render } from 'enzyme';
 import ListTable from '../../src/components/ListTable';
 
 import mockData from './data/ListTable.test.json';
 import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';
 
 const mountListTable = data => mount(<ListTable nodeData={data} />);
-const shallowListTable = data => shallow(<ListTable nodeData={data} />);
+const renderListTable = data => render(<ListTable nodeData={data} />);
 
 describe('when rendering a list-table directive', () => {
   let wrapper;
-  let shallowWrapper;
+  let rendered;
   const data = mockData;
 
   beforeAll(() => {
     wrapper = mountListTable(data);
-    shallowWrapper = shallowListTable(data);
+    rendered = renderListTable(data);
   });
 
   it('renders correctly', () => {
-    expect(shallowWrapper).toMatchSnapshot();
+    expect(rendered).toMatchSnapshot();
   });
 
   it('displays one header row', () => {
@@ -78,16 +78,16 @@ describe('when rendering a list-table directive', () => {
 
 describe('when rendering a list table with fixed widths', () => {
   let wrapper;
-  let shallowWrapper;
+  let rendered;
   const data = mockDataFixedWidths;
 
   beforeAll(() => {
     wrapper = mountListTable(data);
-    shallowWrapper = shallowListTable(data);
+    rendered = renderListTable(data);
   });
 
   it('renders correctly', () => {
-    expect(shallowWrapper).toMatchSnapshot();
+    expect(rendered).toMatchSnapshot();
   });
 
   it('displays no header row', () => {
