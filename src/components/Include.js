@@ -1,33 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getIncludeFile } from '../utils/get-include-file';
 
-export default class Include extends Component {
-  constructor(props) {
-    super(props);
-
-    const { nodeData, refDocMapping, updateTotalStepCount } = this.props;
-
-    let key = getNestedValue(['argument', 0, 'value'], nodeData);
-    if (key.startsWith('/')) key = key.substr(1);
-    if (key.endsWith('.rst')) key = key.replace('.rst', '');
-    this.resolvedIncludeData = [];
-    // get document for include url
-    if (refDocMapping && Object.keys(refDocMapping).length > 0) {
-      this.resolvedIncludeData = refDocMapping[key].ast ? refDocMapping[key].ast.children : [];
-    }
-    if (updateTotalStepCount) {
-      updateTotalStepCount(this.resolvedIncludeData.length);
-    }
+const Include = ({ nodeData, refDocMapping, updateTotalStepCount, ...rest }) => {
+  const filename = getNestedValue(['argument', 0, 'value'], nodeData);
+  const resolvedIncludeData = getIncludeFile(refDocMapping, filename);
+  if (updateTotalStepCount) {
+    updateTotalStepCount(resolvedIncludeData.length);
   }
-
-  render() {
-    return this.resolvedIncludeData.map((includeObj, index) => (
-      <ComponentFactory {...this.props} nodeData={includeObj} key={index} stepNum={index} />
-    ));
-  }
-}
+  return resolvedIncludeData.map((includeObj, index) => (
+    <ComponentFactory {...rest} nodeData={includeObj} key={index} stepNum={index} />
+  ));
+};
 
 Include.propTypes = {
   nodeData: PropTypes.shape({
@@ -49,3 +35,5 @@ Include.defaultProps = {
   updateTotalStepCount: () => {},
   refDocMapping: undefined,
 };
+
+export default Include;

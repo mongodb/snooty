@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from '../components/ComponentFactory';
 import DefaultLayout from '../components/layout';
 import Footer from '../components/Footer';
+import { getIncludeFile } from '../utils/get-include-file';
 import { getNestedValue } from '../utils/get-nested-value';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 
@@ -14,12 +15,19 @@ const Document = props => {
   const pageNodes = getNestedValue([pageSlug || 'index', 'ast', 'children'], __refDocMapping) || [];
 
   const getSubstitutions = () => {
-    const substitutions = findAllKeyValuePairs(pageNodes, 'type', 'substitution_definition');
-    const substitutionMap = {};
-    substitutions.forEach(sub => {
-      substitutionMap[sub.name] = sub.children;
-    });
-    return substitutionMap;
+    const fileSubstitutions = findAllKeyValuePairs(pageNodes, 'type', 'substitution_definition');
+
+    const includes = findAllKeyValuePairs(pageNodes, 'name', 'include');
+    const includeContents = includes
+      .map(include => getIncludeFile(__refDocMapping, getNestedValue(['argument', 0, 'value'], include)))
+      .flat();
+    const includeSubstitutions = findAllKeyValuePairs(includeContents, 'type', 'substitution_definition');
+
+    const substitutions = fileSubstitutions.concat(includeSubstitutions);
+    return substitutions.reduce((map, sub) => {
+      map[sub.name] = sub.children; // eslint-disable-line no-param-reassign
+      return map;
+    }, {});
   };
 
   return (
