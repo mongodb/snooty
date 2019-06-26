@@ -45,9 +45,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <script async src={withPrefix('scripts/segment.js')} />
       <script async src={withPrefix('docs-tools/navbar.min.js')} />
       {preBodyComponents}
-      <noscript key="noscript" id="gatsby-noscript">
-        This app works best with JavaScript enabled.
-      </noscript>
       <div key="body" id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
       {postBodyComponents}
     </body>

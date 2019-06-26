@@ -57,10 +57,10 @@ const setupStitch = () => {
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
 const validateEnvVariables = () => {
   // make sure necessary env vars exist
-  if (!process.env.SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
+  if (!process.env.GATSBY_SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
     return {
       error: true,
-      message: `${process.env.NODE_ENV} requires the variables SITE, PARSER_USER, and PARSER_BRANCH`,
+      message: `${process.env.NODE_ENV} requires the variables GATSBY_SITE, PARSER_USER, and PARSER_BRANCH`,
     };
   }
   // create split prefix for use in stitch function
@@ -126,7 +126,7 @@ exports.sourceNodes = async () => {
     }
   } else {
     // start from index document
-    const idPrefix = `${process.env.SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
+    const idPrefix = `${process.env.GATSBY_SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
     const query = { _id: { $regex: new RegExp(`${idPrefix}/*`) } };
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
@@ -167,7 +167,7 @@ exports.createPages = ({ actions }) => {
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
       let template = 'document';
-      if (process.env.SITE === 'guides') {
+      if (process.env.GATSBY_SITE === 'guides') {
         template = page === 'index' ? 'guides-index' : 'guide';
       }
       const pageUrl = page === 'index' ? '/' : page;
