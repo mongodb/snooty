@@ -1,6 +1,22 @@
 const path = require('path');
 const fs = require('fs');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
+const { getNestedValue } = require('./src/utils/get-nested-value');
+
+const findAllKeyValuePairs = (nodes, key, value) => {
+  const results = [];
+  const iter = node => {
+    if (node[key] === value) {
+      results.push(node);
+    }
+    if (node.children) {
+      return node.children.forEach(iter);
+    }
+    return null;
+  };
+  nodes.forEach(iter);
+  return results;
+};
 
 // Atlas DB config
 const DB = 'snooty';
@@ -15,8 +31,6 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
 const PAGES = [];
-const INCLUDE_FILES = [];
-const ASSETS = [];
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -57,7 +71,7 @@ const validateEnvVariables = () => {
 
 const saveAssetFile = async (name, objData) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(`static/${name}`, objData.data.buffer, 'binary', err => {
+    fs.writeFile(path.join('static', name), objData.data.buffer, 'binary', err => {
       if (err) reject(err);
       resolve();
     });
@@ -65,9 +79,9 @@ const saveAssetFile = async (name, objData) => {
 };
 
 // Write all assets to static directory
-const saveAssetFiles = async () => {
+const saveAssetFiles = async assets => {
   const promises = [];
-  ASSETS.forEach(async asset => {
+  assets.forEach(async asset => {
     const [assetName, assetHash] = asset.split('#');
     const assetQuery = { _id: assetHash };
     const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
@@ -76,6 +90,16 @@ const saveAssetFiles = async () => {
     }
   });
   return Promise.all(promises);
+};
+
+// Parse a page's AST to find all figure nodes and return a list of image names
+const getImagesInPage = page => {
+  const imageNodes = findAllKeyValuePairs(page, 'name', 'figure');
+  return imageNodes.map(node => {
+    const name = getNestedValue(['argument', 0, 'value'], node);
+    const checksum = getNestedValue(['options', 'checksum'], node);
+    return `${name}#${checksum}`;
+  });
 };
 
 exports.sourceNodes = async () => {
@@ -112,18 +136,20 @@ exports.sourceNodes = async () => {
     });
   }
 
-  // separate references into correct types, e.g. pages, include files, assets, etc.
-  Object.keys(RESOLVED_REF_DOC_MAPPING).forEach(ref => {
-    if (ref.includes('includes/')) {
-      INCLUDE_FILES.push(ref);
-    } else if (ref.includes('#')) {
-      ASSETS.push(ref);
-    } else if (!ref.includes('curl') && !ref.includes('https://')) {
-      PAGES.push(ref);
+  // Identify page documents and parse each document for images
+  const assets = [];
+  Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
+    const pageNode = getNestedValue(['ast', 'children'], val);
+    if (pageNode) {
+      const imgs = getImagesInPage(pageNode);
+      assets.push(...imgs);
+    }
+    if (!key.includes('includes/') && !key.includes('curl') && !key.includes('https://')) {
+      PAGES.push(key);
     }
   });
 
-  await saveAssetFiles();
+  await saveAssetFiles(assets);
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
