@@ -101,7 +101,7 @@ export default class ComponentFactory extends Component {
     }
 
     // do nothing with these nodes for now (cc. Andrew)
-    if (IGNORED_TYPES[type] !== undefined || IGNORED_NAMES[name] !== undefined) {
+    if (IGNORED_TYPES.includes(type) || IGNORED_NAMES.includes(name)) {
       return null;
     }
 
