@@ -15,8 +15,9 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
 const PAGES = [];
-const INCLUDE_FILES = [];
+let INCLUDE_FILES = {};
 const ASSETS = [];
+const PAGE_TITLE_MAP = {};
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -113,13 +114,21 @@ exports.sourceNodes = async () => {
   }
 
   // separate references into correct types, e.g. pages, include files, assets, etc.
-  Object.keys(RESOLVED_REF_DOC_MAPPING).forEach(ref => {
-    if (ref.includes('includes/')) {
-      INCLUDE_FILES.push(ref);
-    } else if (ref.includes('#')) {
-      ASSETS.push(ref);
-    } else if (!ref.includes('curl') && !ref.includes('https://')) {
-      PAGES.push(ref);
+  Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
+    if (key.includes('includes/')) {
+      INCLUDE_FILES[key] = val;
+    } else if (key.includes('#')) {
+      ASSETS.push(key);
+    } else if (!key.includes('curl') && !key.includes('https://')) {
+      PAGES.push(key);
+      // PAGE_TITLE_MAP[key] = getNestedValue(['ast', 'children', 0, 'children', 0, 'children', 0, 'value'], val);
+      PAGE_TITLE_MAP[key] = {
+        title: getNestedValue(['ast', 'children', 0, 'children', 0, 'children', 0, 'value'], val),
+        category: getNestedValue(
+          ['argument', 0, 'value'],
+          findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'category')
+        ),
+      };
     }
   });
 
@@ -150,8 +159,10 @@ exports.createPages = ({ actions }) => {
           path: pageUrl,
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
-            __refDocMapping: RESOLVED_REF_DOC_MAPPING,
             snootyStitchId: SNOOTY_STITCH_ID,
+            __refDocMapping: RESOLVED_REF_DOC_MAPPING[page],
+            includes: INCLUDE_FILES,
+            pageTitles: PAGE_TITLE_MAP,
           },
         });
       }

@@ -82,27 +82,25 @@ const Category = ({ cards, category, refDocMapping }) => {
   );
 };
 
-const LandingPageCards = ({ guides, refDocMapping }) =>
-  CATEGORIES.map(category => (
+const LandingPageCards = ({ guides, pageTitles, refDocMapping }) => {
+  console.log(pageTitles);
+  return CATEGORIES.map(category => (
     <Category
       cards={guides.filter(card => {
+        const cardSlug = getNestedValue(['argument', 0, 'value'], card);
+        console.log(cardSlug);
         const cardName =
           card.name === 'card'
             ? getNestedValue(['argument', 0, 'value'], card)
             : getNestedValue(['children', 0, 'children', 0, 'children', 0, 'children', 0, 'value'], card);
-        return (
-          category.name ===
-          getNestedValue(
-            ['argument', 0, 'value'],
-            findKeyValuePair(getNestedValue([cardName, 'ast', 'children'], refDocMapping), 'name', 'category')
-          )
-        );
+        return category.name === pageTitles[cardSlug].category;
       })}
       category={category}
       refDocMapping={refDocMapping}
       key={category.iconSlug}
     />
   ));
+};
 
 Category.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.object),

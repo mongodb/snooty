@@ -4,4 +4,7 @@
  * - p: an array containing the path to the desired return value
  * - o: the object to be searched
  */
-export const getNestedValue = (p, o) => p.reduce((xs, x) => (xs && xs[x] ? xs[x] : null), o);
+export const getNestedValue = (p, o) => {
+  if (!o) return null;
+  return p.reduce((xs, x) => (xs && xs[x] ? xs[x] : null), o);
+};

@@ -8,9 +8,9 @@ import { getNestedValue } from '../utils/get-nested-value';
 const Document = props => {
   const {
     '*': pageSlug,
-    pageContext: { __refDocMapping },
+    pageContext: { includes, pageTitles, __refDocMapping },
   } = props;
-  const pageNodes = getNestedValue([pageSlug || 'index', 'ast', 'children'], __refDocMapping) || [];
+  const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
   return (
     <DefaultLayout>
       <div className="content">
@@ -23,7 +23,13 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   {pageNodes.map((child, index) => (
-                    <ComponentFactory key={index} nodeData={child} refDocMapping={__refDocMapping} />
+                    <ComponentFactory
+                      key={index}
+                      nodeData={child}
+                      refDocMapping={__refDocMapping}
+                      includes={includes}
+                      pageTitles={pageTitles}
+                    />
                   ))}
                   <Footer />
                 </div>

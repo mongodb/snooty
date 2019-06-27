@@ -19,7 +19,9 @@ export default class Guide extends Component {
   constructor(propsFromServer) {
     super(propsFromServer);
 
-    const { pageContext } = this.props;
+    const {
+      pageContext: { __refDocMapping },
+    } = this.props;
     let guideKeyInMapping = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     // get correct lookup key based on whether running dev/prod
@@ -29,10 +31,7 @@ export default class Guide extends Component {
     }
 
     // get data from server
-    this.sections = getNestedValue(
-      ['__refDocMapping', guideKeyInMapping, 'ast', 'children', 0, 'children'],
-      pageContext
-    );
+    this.sections = getNestedValue(['ast', 'children', 0, 'children'], __refDocMapping);
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
 
     this.state = {
@@ -126,7 +125,12 @@ export default class Guide extends Component {
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
-          <ComponentFactory nodeData={section} refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}} />
+          <ComponentFactory
+            nodeData={section}
+            refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+            includes={pageContext.includes}
+            pageTitles={pageContext.pageTitles}
+          />
         );
       });
     }
@@ -141,6 +145,8 @@ export default class Guide extends Component {
           setActiveTab={this.setActiveTab}
           addTabset={this.addTabset}
           activeTabs={activeTabs}
+          includes={pageContext.includes}
+          pageTitles={pageContext.pageTitles}
         />
       );
     });
@@ -165,6 +171,8 @@ export default class Guide extends Component {
                 cloud={cloud}
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
+                includes={pageContext.includes}
+                pageTitles={pageContext.pageTitles}
                 refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
                 setActiveTab={this.setActiveTab}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
@@ -186,5 +194,9 @@ Guide.propTypes = {
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
     snootyStitchId: PropTypes.string.isRequired,
+    includes: PropTypes.objectOf(PropTypes.object).isRequired,
+    pageTitles: PropTypes.shape({
+      [PropTypes.string]: PropTypes.string,
+    }).isRequired,
   }).isRequired,
 };

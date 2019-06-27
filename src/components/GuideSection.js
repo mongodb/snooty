@@ -59,6 +59,8 @@ export default class GuideSection extends Component {
     const {
       guideSectionData: { children, name },
       headingRef,
+      includes,
+      pageTitles,
     } = this.props;
     const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uriWriter } = this.state;
     const section = SECTION_NAME_MAPPING[name];
@@ -73,6 +75,8 @@ export default class GuideSection extends Component {
         </h2>
         {name === 'procedure' && showStepper && (
           <Stepper
+            includes={includes}
+            pageTitles={pageTitles}
             totalStepsInProcedure={totalStepsInProcedure}
             showStepIndex={showStepIndex}
             updateVisibleStep={this.updateVisibleStep}

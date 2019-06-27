@@ -5,52 +5,27 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
 import DefaultLayout from '../components/layout';
 
-export default class Index extends Component {
-  constructor(propsFromServer) {
-    super(propsFromServer);
-    this.state = {
-      name: 'Guides',
-      guides: [],
-    };
-  }
+const Index = ({ pageContext: { pageTitles, __refDocMapping } }) => {
+  const guides = findKeyValuePair(getNestedValue(['ast', 'children'], __refDocMapping), 'name', 'guide-index') || [];
 
-  componentDidMount() {
-    const { pageContext } = this.props;
-    const guides = findKeyValuePair(
-      getNestedValue(['__refDocMapping', 'index', 'ast', 'children'], pageContext),
-      'name',
-      'guide-index'
-    );
-    this.setState({ guides: guides.children });
-  }
-
-  render() {
-    const { pageContext } = this.props;
-    const { guides, name } = this.state;
-
-    if (guides.length === 0) {
-      return null;
-    }
-
-    return (
-      <DefaultLayout>
-        <div className="content">
-          <div className="guide-category-list">
-            <div className="section" id="guides">
-              <h1>
-                {name}
-                <a className="headerlink" href="#guides" title="Permalink to this headline">
-                  ¶
-                </a>
-              </h1>
-              <LandingPageCards guides={guides} refDocMapping={pageContext.__refDocMapping} />
-            </div>
+  return (
+    <DefaultLayout>
+      <div className="content">
+        <div className="guide-category-list">
+          <div className="section" id="guides">
+            <h1>
+              Guides
+              <a className="headerlink" href="#guides" title="Permalink to this headline">
+                ¶
+              </a>
+            </h1>
+            <LandingPageCards guides={guides.children} refDocMapping={__refDocMapping} pageTitles={pageTitles} />
           </div>
         </div>
-      </DefaultLayout>
-    );
-  }
-}
+      </div>
+    </DefaultLayout>
+  );
+};
 
 Index.propTypes = {
   pageContext: PropTypes.shape({
@@ -61,3 +36,5 @@ Index.propTypes = {
     }).isRequired,
   }).isRequired,
 };
+
+export default Index;
