@@ -2,21 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-
-const findAllKeyValuePairs = (nodes, key, value) => {
-  const results = [];
-  const iter = node => {
-    if (node[key] === value) {
-      results.push(node);
-    }
-    if (node.children) {
-      return node.children.forEach(iter);
-    }
-    return null;
-  };
-  nodes.forEach(iter);
-  return results;
-};
+const { findAllKeyValuePairs } = require('./src/utils/find-all-key-value-pairs');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -31,6 +17,7 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
 const PAGES = [];
+const INCLUDE_FILES = [];
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -144,7 +131,9 @@ exports.sourceNodes = async () => {
       const imgs = getImagesInPage(pageNode);
       assets.push(...imgs);
     }
-    if (!key.includes('includes/') && !key.includes('curl') && !key.includes('https://')) {
+    if (key.includes('includes/')) {
+      INCLUDE_FILES.push(key);
+    } else if (!key.includes('includes/') && !key.includes('curl') && !key.includes('https://')) {
       PAGES.push(key);
     }
   });
