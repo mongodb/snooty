@@ -24,6 +24,7 @@ import TitleReference from './TitleReference';
 import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
+import Transition from './Transition';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -80,6 +81,7 @@ export default class ComponentFactory extends Component {
       tabs: Tabs,
       text: Text,
       title_reference: TitleReference,
+      transition: Transition,
       uriwriter: URIWriter,
     };
   }
