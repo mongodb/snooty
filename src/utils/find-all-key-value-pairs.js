@@ -3,7 +3,7 @@
  */
 export const findAllKeyValuePairs = (nodes, key, value) => {
   const results = [];
-  const iter = node => {
+  const searchNode = node => {
     if (node[key] === value) {
       results.push(node);
     }
@@ -12,6 +12,6 @@ export const findAllKeyValuePairs = (nodes, key, value) => {
     }
     return null;
   };
-  nodes.forEach(iter);
+  nodes.forEach(searchNode);
   return results;
 };

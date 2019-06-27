@@ -34,6 +34,9 @@ import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
 import RoleTerm from './Roles/Term';
 
+const IGNORED_NAMES = ['class', 'cssclass', 'default-domain'];
+const IGNORED_TYPES = ['class', 'comment', 'cssclass', 'substitution_definition', 'target'];
+
 export default class ComponentFactory extends Component {
   constructor() {
     super();
@@ -98,16 +101,7 @@ export default class ComponentFactory extends Component {
     }
 
     // do nothing with these nodes for now (cc. Andrew)
-    if (
-      type === 'target' ||
-      type === 'class' ||
-      type === 'cssclass' ||
-      name === 'cssclass' ||
-      name === 'class' ||
-      type === 'comment' ||
-      name === 'default-domain' ||
-      type === 'substitution_definition'
-    ) {
+    if (IGNORED_TYPES[type] !== undefined || IGNORED_NAMES[name] !== undefined) {
       return null;
     }
 

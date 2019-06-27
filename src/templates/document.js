@@ -14,16 +14,21 @@ const Document = props => {
   } = props;
   const pageNodes = getNestedValue([pageSlug || 'index', 'ast', 'children'], __refDocMapping) || [];
 
+  // Identify and save all substitutions as defined on this page and in its included files
   const getSubstitutions = () => {
-    const fileSubstitutions = findAllKeyValuePairs(pageNodes, 'type', 'substitution_definition');
+    // Find substitutions on page
+    const pageSubstitutions = findAllKeyValuePairs(pageNodes, 'type', 'substitution_definition');
 
+    // Find all include nodes on the page, get each include's contents, and find all substitutions in each include
     const includes = findAllKeyValuePairs(pageNodes, 'name', 'include');
     const includeContents = includes
       .map(include => getIncludeFile(__refDocMapping, getNestedValue(['argument', 0, 'value'], include)))
       .flat();
     const includeSubstitutions = findAllKeyValuePairs(includeContents, 'type', 'substitution_definition');
 
-    const substitutions = fileSubstitutions.concat(includeSubstitutions);
+    // Merge page and include substitutions.
+    // Create a map wherein each key is the word to be replaced, and each value is the nodes to replace it with.
+    const substitutions = pageSubstitutions.concat(includeSubstitutions);
     return substitutions.reduce((map, sub) => {
       map[sub.name] = sub.children; // eslint-disable-line no-param-reassign
       return map;
