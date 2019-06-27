@@ -3,6 +3,7 @@ module.exports = {
     {
       displayName: 'regression',
       preset: 'jest-puppeteer',
+      setupFilesAfterEnv: ['<rootDir>/src/regressionTestSetup.js'],
       testMatch: ['<rootDir>/tests/regression/*.test.js'],
     },
     {

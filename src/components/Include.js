@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getIncludeFile } from '../utils/get-include-file';
 
 export default class Include extends Component {
   constructor(props) {
@@ -9,14 +10,9 @@ export default class Include extends Component {
 
     const { nodeData, refDocMapping, updateTotalStepCount } = this.props;
 
-    let key = getNestedValue(['argument', 0, 'value'], nodeData);
-    if (key.startsWith('/')) key = key.substr(1);
-    if (key.endsWith('.rst')) key = key.replace('.rst', '');
-    this.resolvedIncludeData = [];
-    // get document for include url
-    if (refDocMapping && Object.keys(refDocMapping).length > 0) {
-      this.resolvedIncludeData = refDocMapping[key].ast ? refDocMapping[key].ast.children : [];
-    }
+    const filename = getNestedValue(['argument', 0, 'value'], nodeData);
+    this.resolvedIncludeData = getIncludeFile(refDocMapping, filename);
+
     if (updateTotalStepCount) {
       updateTotalStepCount(this.resolvedIncludeData.length);
     }

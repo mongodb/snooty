@@ -17,6 +17,7 @@ exports[`DefinitionList renders correctly 1`] = `
   </dt>
   <dd>
     <p
+      class=""
       style="margin:"
     >
       <strong>

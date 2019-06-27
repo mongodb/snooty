@@ -21,8 +21,10 @@ import Reference from './Reference';
 import Strong from './Strong';
 import URIWriter from './URIWriter/URIWriter';
 import TitleReference from './TitleReference';
+import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
+import Transition from './Transition';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -33,6 +35,9 @@ import RoleManual from './Roles/Manual';
 import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
 import RoleTerm from './Roles/Term';
+
+const IGNORED_NAMES = ['class', 'cssclass', 'default-domain'];
+const IGNORED_TYPES = ['class', 'comment', 'cssclass', 'substitution_definition', 'target'];
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -77,7 +82,9 @@ export default class ComponentFactory extends Component {
       step: Step,
       strong: Strong,
       tabs: Tabs,
+      text: Text,
       title_reference: TitleReference,
+      transition: Transition,
       uriwriter: URIWriter,
     };
   }
@@ -85,18 +92,20 @@ export default class ComponentFactory extends Component {
   selectComponent() {
     const {
       nodeData: { children, name, type },
+      substitutions,
       ...rest
     } = this.props;
+
+    if (type === 'substitution_reference') {
+      if (!substitutions || !substitutions[name]) {
+        return null;
+      }
+
+      return substitutions[name].map((sub, index) => <ComponentFactory {...rest} nodeData={sub} key={index} />);
+    }
+
     // do nothing with these nodes for now (cc. Andrew)
-    if (
-      type === 'target' ||
-      type === 'class' ||
-      type === 'cssclass' ||
-      name === 'cssclass' ||
-      name === 'class' ||
-      type === 'comment' ||
-      name === 'default-domain'
-    ) {
+    if (IGNORED_TYPES.includes(type) || IGNORED_NAMES.includes(name)) {
       return null;
     }
 
@@ -141,4 +150,11 @@ ComponentFactory.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  substitutions: PropTypes.shape({
+    [PropTypes.string]: PropTypes.arrayOf(PropTypes.object),
+  }),
+};
+
+ComponentFactory.defaultProps = {
+  substitutions: undefined,
 };
