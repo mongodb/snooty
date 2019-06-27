@@ -8,7 +8,7 @@ export const findAllKeyValuePairs = (nodes, key, value) => {
       results.push(node);
     }
     if (node.children) {
-      return node.children.forEach(iter);
+      return node.children.forEach(searchNode);
     }
     return null;
   };
