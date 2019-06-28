@@ -2,22 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getIncludeFile } from '../utils/get-include-file';
 
-const Include = ({ includes, nodeData, updateTotalStepCount, ...rest }) => {
-  let key = getNestedValue(['argument', 0, 'value'], nodeData);
-  if (key.startsWith('/')) key = key.substr(1);
-  if (key.endsWith('.rst')) key = key.replace('.rst', '');
+export default class Include extends Component {
+  constructor(props) {
+    super(props);
 
-  const includeNodes = getNestedValue(['ast', 'children'], includes[key]) || [];
-  // TODO: ask daniel if we're using this
-  /* if (updateTotalStepCount) {
-    updateTotalStepCount(includeNodes.length);
-  } */
+    const { includes, nodeData, refDocMapping, updateTotalStepCount } = this.props;
 
-  return includeNodes.map((includeObj, index) => (
-    <ComponentFactory {...rest} nodeData={includeObj} key={index} stepNum={index} includes={includes} />
-  ));
-};
+    let key = getNestedValue(['argument', 0, 'value'], nodeData);
+    if (key.startsWith('/')) key = key.substr(1);
+    if (key.endsWith('.rst')) key = key.replace('.rst', '');
+
+    this.includeNodes = getNestedValue(['ast', 'children'], includes[key]) || [];
+
+    if (updateTotalStepCount) {
+      updateTotalStepCount(this.includeNodes.length);
+    }
+  }
+
+  render() {
+    return this.includeNodes.map((includeObj, index) => (
+      <ComponentFactory {...this.props} nodeData={includeObj} key={index} stepNum={index} />
+    ));
+  }
+}
 
 Include.propTypes = {
   nodeData: PropTypes.shape({
@@ -33,5 +42,3 @@ Include.propTypes = {
 Include.defaultProps = {
   updateTotalStepCount: () => {},
 };
-
-export default Include;
