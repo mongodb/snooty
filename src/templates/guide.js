@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
 import TOC from '../components/TOC';
 import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
@@ -22,13 +21,6 @@ export default class Guide extends Component {
     const {
       pageContext: { __refDocMapping },
     } = this.props;
-    let guideKeyInMapping = this.props['*']; // eslint-disable-line react/destructuring-assignment
-
-    // get correct lookup key based on whether running dev/prod
-    if (process.env.NODE_ENV === 'production') {
-      const documentPrefix = withPrefix().slice(1, -1);
-      guideKeyInMapping = guideKeyInMapping.replace(`${documentPrefix}/`, '');
-    }
 
     // get data from server
     this.sections = getNestedValue(['ast', 'children', 0, 'children'], __refDocMapping);
@@ -192,11 +184,17 @@ export default class Guide extends Component {
 Guide.propTypes = {
   '*': PropTypes.string.isRequired,
   pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.objectOf(PropTypes.object).isRequired,
+    __refDocMapping: PropTypes.shape({
+      ast: PropTypes.shape({
+        children: PropTypes.array,
+      }).isRequired,
+    }).isRequired,
     snootyStitchId: PropTypes.string.isRequired,
-    includes: PropTypes.objectOf(PropTypes.object).isRequired,
-    pageTitles: PropTypes.shape({
-      [PropTypes.string]: PropTypes.string,
+    includes: PropTypes.shape({
+      [PropTypes.string]: PropTypes.object,
+    }).isRequired,
+    pageMetadata: PropTypes.shape({
+      [PropTypes.string]: PropTypes.object,
     }).isRequired,
   }).isRequired,
 };

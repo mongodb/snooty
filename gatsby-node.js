@@ -121,13 +121,17 @@ exports.sourceNodes = async () => {
       ASSETS.push(key);
     } else if (!key.includes('curl') && !key.includes('https://')) {
       PAGES.push(key);
-      // PAGE_TITLE_MAP[key] = getNestedValue(['ast', 'children', 0, 'children', 0, 'children', 0, 'value'], val);
       PAGE_TITLE_MAP[key] = {
         title: getNestedValue(['ast', 'children', 0, 'children', 0, 'children', 0, 'value'], val),
         category: getNestedValue(
           ['argument', 0, 'value'],
           findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'category')
         ),
+        completionTime: getNestedValue(
+          ['argument', 0, 'value'],
+          findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'time')
+        ),
+        languages: findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'languages'),
       };
     }
   });
@@ -162,7 +166,7 @@ exports.createPages = ({ actions }) => {
             snootyStitchId: SNOOTY_STITCH_ID,
             __refDocMapping: RESOLVED_REF_DOC_MAPPING[page],
             includes: INCLUDE_FILES,
-            pageTitles: PAGE_TITLE_MAP,
+            pageMetadata: PAGE_TITLE_MAP,
           },
         });
       }

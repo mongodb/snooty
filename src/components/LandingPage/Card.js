@@ -1,16 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardPills from './CardPills';
-import { findKeyValuePair } from '../../utils/find-key-value-pair';
 import { getNestedValue } from '../../utils/get-nested-value';
 
-const Card = ({ card, refDocMapping, time }) => {
-  const getCardTitle = cardSlug =>
-    getNestedValue([cardSlug, 'ast', 'children', 0, 'children', 0, 'children', 0, 'value'], refDocMapping);
+const Card = ({ card, pageMetadata, time }) => {
+  const getCardTitle = cardSlug => getNestedValue([cardSlug, 'title'], pageMetadata);
 
-  const getPills = cardSlug => {
-    return findKeyValuePair(getNestedValue([cardSlug, 'ast', 'children'], refDocMapping), 'name', 'languages');
-  };
+  const getPills = cardSlug => getNestedValue([cardSlug, 'languages'], pageMetadata);
 
   const cardContent = () => {
     const cardSlug = getNestedValue(['argument', 0, 'value'], card);
@@ -64,18 +60,6 @@ Card.propTypes = {
     ),
     name: PropTypes.string.isRequired,
   }).isRequired,
-  refDocMapping: PropTypes.oneOfType([
-    PropTypes.shape({
-      index: PropTypes.shape({
-        ast: PropTypes.object,
-      }).isRequired,
-    }),
-    PropTypes.shape({
-      [PropTypes.string]: PropTypes.shape({
-        ast: PropTypes.object.isRequired,
-      }).isRequired,
-    }).isRequired,
-  ]),
   time: PropTypes.string,
 };
 
