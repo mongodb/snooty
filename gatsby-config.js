@@ -17,7 +17,7 @@ const getPathPrefix = () => {
   const user = userInfo().username;
   const gitBranch = getGitBranch();
 
-  return runningEnv === 'production' ? `/${process.env.SITE}/${user}/${gitBranch}` : '/';
+  return runningEnv === 'production' ? `/${process.env.GATSBY_SITE}/${user}/${gitBranch}` : '/';
 };
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
   plugins: ['gatsby-plugin-react-helmet'],
   siteMetadata: {
     branch: getGitBranch(),
-    project: process.env.SITE,
+    project: process.env.GATSBY_SITE,
     title: 'MongoDB Guides',
     user: userInfo().username,
   },
