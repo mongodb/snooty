@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -10,10 +10,25 @@ const Lightbox = ({ nodeData }) => {
   const [showModal, setShowModal] = useState(false);
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
+  const modal = useRef(null);
 
   const toggleShowModal = () => {
     setShowModal(prevShowState => !prevShowState);
   };
+
+  const handleOnKeyDown = e => {
+    // Escape key
+    if (e.keyCode === 27) {
+      toggleShowModal();
+    }
+  };
+
+  // Hook to take effect with every re-render
+  useEffect(() => {
+    if (modal.current) {
+      modal.current.focus();
+    }
+  });
 
   return (
     <React.Fragment>
@@ -24,7 +39,15 @@ const Lightbox = ({ nodeData }) => {
         </div>
       </div>
       {showModal && (
-        <div className="lightbox__modal" title="click to close" onClick={toggleShowModal} role="button" tabIndex="-1">
+        <div
+          className="lightbox__modal"
+          title="click to close"
+          onClick={toggleShowModal}
+          ref={modal}
+          onKeyDown={handleOnKeyDown}
+          role="button"
+          tabIndex="-1"
+        >
           <img
             className={[
               'lightbox__content',
