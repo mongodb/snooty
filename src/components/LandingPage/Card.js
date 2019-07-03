@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import CardPills from './CardPills';
 import { getNestedValue } from '../../utils/get-nested-value';
 
-const Card = ({ card, pageMetadata, time }) => {
-  const getCardTitle = cardSlug => getNestedValue([cardSlug, 'title'], pageMetadata);
+const DEFAULT_COMPLETION_TIME = 15;
 
+const Card = ({ card, pageMetadata }) => {
+  const getCardTitle = cardSlug => getNestedValue([cardSlug, 'title'], pageMetadata);
+  const getCompletionTime = cardSlug =>
+    getNestedValue([cardSlug, 'completionTime'], pageMetadata) || DEFAULT_COMPLETION_TIME;
   const getPills = cardSlug => getNestedValue([cardSlug, 'languages'], pageMetadata);
 
   const cardContent = () => {
@@ -30,7 +33,7 @@ const Card = ({ card, pageMetadata, time }) => {
           <div className="guide__body" />
         )}
         {card.name !== 'multi-card' && languagesNode && <CardPills pillsNode={languagesNode} pillsetName="drivers" />}
-        {card.name === 'card' && <div className="guide__time">{time}min</div>}
+        {card.name === 'card' && <div className="guide__time">{getCompletionTime(cardSlug)}min</div>}
       </React.Fragment>
     );
     if (card.name === 'multi-card') {
@@ -60,7 +63,6 @@ Card.propTypes = {
     ),
     name: PropTypes.string.isRequired,
   }).isRequired,
-  time: PropTypes.string,
 };
 
 Card.defaultProps = {

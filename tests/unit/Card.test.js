@@ -4,13 +4,11 @@ import Card from '../../src/components/LandingPage/Card';
 
 import cardData from './data/Card.test.json';
 import multiCardData from './data/MultiCard.test.json';
-import refDocMappingData from './data/index.test.json';
+import mockPageMetadata from './data/guidesPageMetadata.json';
 
-const mountCard = ({ card, refDocMapping, time }) =>
-  mount(<Card card={card} refDocMapping={refDocMapping} time={time} />);
+const mountCard = ({ card }) => mount(<Card card={card} pageMetadata={mockPageMetadata} />);
 
-const shallowCard = ({ card, refDocMapping, time }) =>
-  shallow(<Card card={card} refDocMapping={refDocMapping} time={time} />);
+const shallowCard = ({ card }) => shallow(<Card card={card} pageMetadata={mockPageMetadata} />);
 
 describe('Card component', () => {
   describe('when a standard card is mounted', () => {
@@ -18,8 +16,8 @@ describe('Card component', () => {
     let shallowWrapper;
 
     beforeAll(() => {
-      wrapper = mountCard({ card: cardData, refDocMapping: refDocMappingData, time: '20' });
-      shallowWrapper = shallowCard({ card: cardData, refDocMapping: refDocMappingData, time: '20' });
+      wrapper = mountCard({ card: cardData });
+      shallowWrapper = shallowCard({ card: cardData });
     });
 
     it('renders correctly', () => {
@@ -36,8 +34,8 @@ describe('Card component', () => {
     let shallowWrapper;
 
     beforeAll(() => {
-      wrapper = mountCard({ card: multiCardData, refDocMapping: refDocMappingData, time: '20' });
-      shallowWrapper = shallowCard({ card: multiCardData, refDocMapping: refDocMappingData, time: '20' });
+      wrapper = mountCard({ card: multiCardData });
+      shallowWrapper = shallowCard({ card: multiCardData });
     });
 
     it('renders correctly', () => {

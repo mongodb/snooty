@@ -29,9 +29,7 @@ const Index = ({ pageContext: { pageMetadata, __refDocMapping } }) => {
 
 Index.propTypes = {
   pageContext: PropTypes.shape({
-    pageMetadata: PropTypes.shape({
-      [PropTypes.string]: PropTypes.object,
-    }).isRequired,
+    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,

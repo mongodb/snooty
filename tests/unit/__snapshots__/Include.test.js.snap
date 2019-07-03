@@ -1,3 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `null`;
+exports[`renders correctly 1`] = `
+<div
+  class="sequence-block"
+  style="display:"
+>
+  <div
+    class="bullet-block"
+    style="display:"
+  >
+    <div
+      class="sequence-step"
+    >
+      1
+    </div>
+  </div>
+  <div
+    class="section"
+  >
+    <section>
+      <h3
+        id="access-to-an-atlas-supported-browser"
+      >
+        Access to an Atlas supported browser
+        <a
+          class="headerlink"
+          href="#access-to-an-atlas-supported-browser"
+          title="Permalink to this headline"
+        >
+          ¶
+        </a>
+      </h3>
+      <p
+        class=""
+        style="margin:"
+      >
+        Check if you have an 
+        <a
+          class="reference external"
+          href="https://docs.atlas.mongodb.com/reference/supported-browsers"
+        >
+          Atlas supported browser
+        </a>
+        .
+      </p>
+    </section>
+  </div>
+</div>
+`;

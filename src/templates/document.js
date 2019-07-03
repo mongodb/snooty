@@ -9,7 +9,7 @@ import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 
 const Document = props => {
   const {
-    pageContext: { includes, pageTitles, __refDocMapping },
+    pageContext: { includes, pageMetadata, __refDocMapping },
   } = props;
   const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
 
@@ -20,7 +20,9 @@ const Document = props => {
 
     // Find all include nodes on the page, get each include's contents, and find all substitutions in each include
     const includeFilenames = findAllKeyValuePairs(pageNodes, 'name', 'include');
-    const includeContents = includeFilenames.map(filename => getIncludeFile(includes, filename));
+    const includeContents = includeFilenames.map(fileNode =>
+      getIncludeFile(includes, getNestedValue(['argument', 0, 'value'], fileNode))
+    );
     const includeSubstitutions = findAllKeyValuePairs(includeContents, 'type', 'substitution_definition');
 
     // Merge page and include substitutions.
@@ -49,7 +51,7 @@ const Document = props => {
                       nodeData={child}
                       refDocMapping={__refDocMapping}
                       includes={includes}
-                      pageTitles={pageTitles}
+                      pageMetadata={pageMetadata}
                       substitutions={getSubstitutions()}
                     />
                   ))}
@@ -71,6 +73,8 @@ Document.propTypes = {
         children: PropTypes.array,
       }).isRequired,
     }).isRequired,
+    includes: PropTypes.objectOf(PropTypes.object),
+    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
 };
 

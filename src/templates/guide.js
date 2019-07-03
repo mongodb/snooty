@@ -121,7 +121,7 @@ export default class Guide extends Component {
             nodeData={section}
             refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
             includes={pageContext.includes}
-            pageTitles={pageContext.pageTitles}
+            pageMetadata={pageContext.pageMetadata}
           />
         );
       });
@@ -138,7 +138,7 @@ export default class Guide extends Component {
           addTabset={this.addTabset}
           activeTabs={activeTabs}
           includes={pageContext.includes}
-          pageTitles={pageContext.pageTitles}
+          pageMetadata={pageContext.pageMetadata}
         />
       );
     });
@@ -164,7 +164,7 @@ export default class Guide extends Component {
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
                 includes={pageContext.includes}
-                pageTitles={pageContext.pageTitles}
+                pageMetadata={pageContext.pageMetadata}
                 refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
                 setActiveTab={this.setActiveTab}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
@@ -190,11 +190,7 @@ Guide.propTypes = {
       }).isRequired,
     }).isRequired,
     snootyStitchId: PropTypes.string.isRequired,
-    includes: PropTypes.shape({
-      [PropTypes.string]: PropTypes.object,
-    }).isRequired,
-    pageMetadata: PropTypes.shape({
-      [PropTypes.string]: PropTypes.object,
-    }).isRequired,
+    includes: PropTypes.objectOf(PropTypes.object).isRequired,
+    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
 };

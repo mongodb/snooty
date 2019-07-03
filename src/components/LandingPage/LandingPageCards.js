@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Card from './Card';
 import { getNestedValue } from '../../utils/get-nested-value';
 
-const DEFAULT_COMPLETION_TIME = 15;
 const CATEGORIES = [
   {
     name: 'Getting Started',
@@ -20,9 +19,6 @@ const CATEGORIES = [
 ];
 
 const Category = ({ cards, category, pageMetadata }) => {
-  const getCardCompletionTime = cardSlug =>
-    getNestedValue([cardSlug, 'completionTime'], pageMetadata) || DEFAULT_COMPLETION_TIME;
-
   const columnSeparatedCards = [[], [], []];
   const lastRow = [];
 
@@ -62,12 +58,7 @@ const Category = ({ cards, category, pageMetadata }) => {
             return (
               <div className="guide-column" key={indexColumn}>
                 {cardColumn.map((card, index) => {
-                  let completionTime;
-                  if (card.name === 'card') {
-                    const cardSlug = getNestedValue(['argument', 0, 'value'], card);
-                    completionTime = getCardCompletionTime(cardSlug);
-                  }
-                  return <Card card={card} key={index} pageMetadata={pageMetadata} time={completionTime} />;
+                  return <Card card={card} key={index} pageMetadata={pageMetadata} />;
                 })}
               </div>
             );

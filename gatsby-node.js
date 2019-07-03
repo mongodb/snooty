@@ -1,6 +1,10 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
+const mkdirp = require('mkdirp');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
+const { getNestedValue } = require('./src/utils/get-nested-value');
+const { findAllKeyValuePairs } = require('./src/utils/find-all-key-value-pairs');
+const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -15,8 +19,7 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
 const PAGES = [];
-let INCLUDE_FILES = {};
-const ASSETS = [];
+const INCLUDE_FILES = {};
 const PAGE_TITLE_MAP = {};
 
 // in-memory object with key/value = filename/document
@@ -44,10 +47,10 @@ const setupStitch = () => {
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
 const validateEnvVariables = () => {
   // make sure necessary env vars exist
-  if (!process.env.SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
+  if (!process.env.GATSBY_SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
     return {
       error: true,
-      message: `${process.env.NODE_ENV} requires the variables SITE, PARSER_USER, and PARSER_BRANCH`,
+      message: `${process.env.NODE_ENV} requires the variables GATSBY_SITE, PARSER_USER, and PARSER_BRANCH`,
     };
   }
   // create split prefix for use in stitch function
@@ -58,25 +61,37 @@ const validateEnvVariables = () => {
 
 const saveAssetFile = async (name, objData) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(`static/${name}`, objData.data.buffer, 'binary', err => {
-      if (err) reject(err);
+    // Create nested directories as specified by the asset filenames if they do not exist
+    mkdirp(path.join('static', path.dirname(name)), err => {
+      if (err) return reject(err);
+      fs.writeFile(path.join('static', name), objData.data.buffer, 'binary', err => {
+        if (err) reject(err);
+      });
       resolve();
     });
   });
 };
 
 // Write all assets to static directory
-const saveAssetFiles = async () => {
+const saveAssetFiles = async assets => {
   const promises = [];
-  ASSETS.forEach(async asset => {
-    const [assetName, assetHash] = asset.split('#');
-    const assetQuery = { _id: assetHash };
-    const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
-    if (assetDataDocuments && assetDataDocuments[0]) {
-      promises.push(saveAssetFile(assetName, assetDataDocuments[0]));
-    }
+  const assetQuery = { _id: { $in: Object.keys(assets) } };
+  const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
+  assetDataDocuments.forEach(asset => {
+    promises.push(saveAssetFile(assets[asset._id], asset));
   });
   return Promise.all(promises);
+};
+
+// Parse a page's AST to find all figure nodes and return a map of image checksums and filenames
+const getImagesInPage = page => {
+  const imageNodes = findAllKeyValuePairs(page, 'name', 'figure');
+  return imageNodes.reduce((obj, node) => {
+    const name = getNestedValue(['argument', 0, 'value'], node);
+    const checksum = getNestedValue(['options', 'checksum'], node);
+    obj[checksum] = name;
+    return obj;
+  }, {});
 };
 
 exports.sourceNodes = async () => {
@@ -113,8 +128,13 @@ exports.sourceNodes = async () => {
     });
   }
 
-  // separate references into correct types, e.g. pages, include files, assets, etc.
+  // Identify page documents and parse each document for images
+  let assets = {};
   Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
+    const pageNode = getNestedValue(['ast', 'children'], val);
+    if (pageNode) {
+      assets = { ...assets, ...getImagesInPage(pageNode) };
+    }
     if (key.includes('includes/')) {
       INCLUDE_FILES[key] = val;
     } else if (key.includes('#')) {
@@ -136,7 +156,7 @@ exports.sourceNodes = async () => {
     }
   });
 
-  await saveAssetFiles();
+  await saveAssetFiles(assets);
 
   // whenever we get latest data, always save latest version
   if (!USE_TEST_DATA) {
