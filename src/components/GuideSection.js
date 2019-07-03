@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import Stepper from './Stepper';
 import { setLocalValue } from '../utils/browser-storage';
 import { SECTION_NAME_MAPPING } from '../constants';
 
@@ -9,37 +8,12 @@ export default class GuideSection extends Component {
   constructor() {
     super();
     this.state = {
-      showAllSteps: true,
-      showStepper: false,
-      showAllStepsText: 'Expand All Steps',
-      showStepIndex: 0,
-      totalStepsInProcedure: 1,
       uriWriter: {
         cloudURI: {},
         localURI: {},
       },
     };
   }
-
-  updateTotalStepCount = total => {
-    this.setState({
-      totalStepsInProcedure: total,
-    });
-  };
-
-  updateVisibleStep = newStep => {
-    this.setState({
-      showStepIndex: newStep,
-    });
-  };
-
-  toggleAllSteps = () => {
-    const { showAllSteps } = this.state;
-    this.setState({
-      showAllSteps: !showAllSteps,
-      showAllStepsText: showAllSteps ? 'Expand All Steps' : 'Collapse All Steps',
-    });
-  };
 
   handleUpdateURIWriter = uri => {
     this.setState(
@@ -60,7 +34,7 @@ export default class GuideSection extends Component {
       guideSectionData: { children, name },
       headingRef,
     } = this.props;
-    const { showAllSteps, showAllStepsText, showStepIndex, showStepper, totalStepsInProcedure, uriWriter } = this.state;
+    const { uriWriter } = this.state;
     const section = SECTION_NAME_MAPPING[name];
 
     return (
@@ -71,24 +45,12 @@ export default class GuideSection extends Component {
             ¶
           </a>
         </h2>
-        {name === 'procedure' && showStepper && (
-          <Stepper
-            totalStepsInProcedure={totalStepsInProcedure}
-            showStepIndex={showStepIndex}
-            updateVisibleStep={this.updateVisibleStep}
-            toggleAllSteps={this.toggleAllSteps}
-            showAllStepsText={showAllStepsText}
-          />
-        )}
         {children.map((child, index) => (
           <ComponentFactory
             {...this.props}
             handleUpdateURIWriter={this.handleUpdateURIWriter}
             key={index}
             nodeData={child}
-            showAllSteps={showAllSteps}
-            showStepIndex={showStepIndex}
-            updateTotalStepCount={this.updateTotalStepCount}
             uriWriter={uriWriter}
           />
         ))}
