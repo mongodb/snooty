@@ -3,19 +3,9 @@
 exports[`renders correctly 1`] = `
 <div
   className="sequence-block"
-  style={
-    Object {
-      "display": false,
-    }
-  }
 >
   <div
     className="bullet-block"
-    style={
-      Object {
-        "display": false,
-      }
-    }
   >
     <div
       className="sequence-step"
@@ -121,9 +111,6 @@ exports[`renders correctly 1`] = `
           "type": "section",
         }
       }
-      showAllSteps={true}
-      showStepIndex={0}
-      stepNum={0}
     />
   </div>
 </div>
