@@ -131,12 +131,13 @@ URIText.propTypes = {
     hostlist: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
     replicaSet: PropTypes.string,
     username: PropTypes.string,
-  }).isRequired,
+  }),
   value: PropTypes.string.isRequired,
 };
 
 URIText.defaultProps = {
   activeDeployment: TEMPLATE_TYPE_ATLAS,
+  uriData: {},
 };
 
 export default URIText;

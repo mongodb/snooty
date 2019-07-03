@@ -7,8 +7,8 @@ include .env.production
 .PHONY: stage static
 
 stage:
-	mut-publish public ${STAGING_BUCKET} --prefix=${SITE} --stage ${ARGS}
-	@echo "Hosted at ${STAGING_URL}/${SITE}/${USER}/${GIT_BRANCH}/"
+	mut-publish public ${STAGING_BUCKET} --prefix=${GATSBY_SITE} --stage ${ARGS}
+	@echo "Hosted at ${STAGING_URL}/${GATSBY_SITE}/${USER}/${GIT_BRANCH}/"
 
 static:
 	-rm -r ./static/images/

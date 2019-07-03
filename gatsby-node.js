@@ -118,7 +118,7 @@ exports.sourceNodes = async () => {
     }
   } else {
     // start from index document
-    const idPrefix = `${process.env.SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
+    const idPrefix = `${process.env.GATSBY_SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
     const query = { _id: { $regex: new RegExp(`${idPrefix}/*`) } };
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
@@ -137,8 +137,6 @@ exports.sourceNodes = async () => {
     }
     if (key.includes('includes/')) {
       INCLUDE_FILES[key] = val;
-    } else if (key.includes('#')) {
-      ASSETS.push(key);
     } else if (!key.includes('curl') && !key.includes('https://')) {
       PAGES.push(key);
       PAGE_TITLE_MAP[key] = {
@@ -174,7 +172,7 @@ exports.createPages = ({ actions }) => {
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
       let template = 'document';
-      if (process.env.SITE === 'guides') {
+      if (process.env.GATSBY_SITE === 'guides') {
         template = page === 'index' ? 'guides-index' : 'guide';
       }
       const pageUrl = page === 'index' ? '/' : page;
