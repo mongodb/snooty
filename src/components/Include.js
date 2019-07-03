@@ -26,9 +26,7 @@ export default class Include extends Component {
 }
 
 Include.propTypes = {
-  includes: PropTypes.shape({
-    [PropTypes.string]: PropTypes.object,
-  }).isRequired,
+  includes: PropTypes.objectOf(PropTypes.object).isRequired,
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
