@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import LandingPageCards from '../components/LandingPage/LandingPageCards';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
-import DefaultLayout from '../components/layout';
 
 const Index = ({ pageContext }) => {
   const guides = findKeyValuePair(
@@ -13,21 +12,19 @@ const Index = ({ pageContext }) => {
   );
 
   return (
-    <DefaultLayout>
-      <div className="content">
-        <div className="guide-category-list">
-          <div className="section" id="guides">
-            <h1>
-              Guides
-              <a className="headerlink" href="#guides" title="Permalink to this headline">
-                ¶
-              </a>
-            </h1>
-            <LandingPageCards guides={guides.children} refDocMapping={pageContext.__refDocMapping} />
-          </div>
+    <div className="content">
+      <div className="guide-category-list">
+        <div className="section" id="guides">
+          <h1>
+            Guides
+            <a className="headerlink" href="#guides" title="Permalink to this headline">
+              ¶
+            </a>
+          </h1>
+          <LandingPageCards guides={guides.children} refDocMapping={pageContext.__refDocMapping} />
         </div>
       </div>
-    </DefaultLayout>
+    </div>
   );
 };
 

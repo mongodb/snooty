@@ -9,11 +9,12 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
-import { getLocalValue, setLocalValue } from '../utils/browser-storage';
+import { getLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
 import { getNestedValue } from '../utils/get-nested-value';
 import DefaultLayout from '../components/layout';
+import { TabContext } from '../components/tab-context';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -36,7 +37,6 @@ export default class Guide extends Component {
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
 
     this.state = {
-      activeTabs: {},
       activeSection: getNestedValue([0, 'name'], this.bodySections),
     };
 
@@ -78,7 +78,7 @@ export default class Guide extends Component {
     this.setState({ activeSection: bestMatch[1] });
   };
 
-  addTabset = (tabsetName, tabData) => {
+  addGuidesTabset = (tabsetName, tabData) => {
     let tabs = tabData.map(tab => tab.argument[0].value);
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
@@ -87,13 +87,14 @@ export default class Guide extends Component {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs, LANGUAGES);
     } else {
-      this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
+      this.context.addTabset(tabsetName, tabData); // eslint-disable-line react/destructuring-assignment
     }
   };
 
   matchArraySorting = (tabs, referenceArray) => referenceArray.filter(t => tabs.includes(t));
 
   setNamedTabData = (tabsetName, tabs, constants) => {
+    const { setActiveTab } = this.context;
     this.setState(
       prevState => ({
         [tabsetName]: this.matchArraySorting(
@@ -101,28 +102,12 @@ export default class Guide extends Component {
           constants
         ),
       }),
-      () => this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName)
+      () => setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName)
     );
-  };
-
-  setActiveTab = (value, tabsetName) => {
-    const { [tabsetName]: tabs } = this.state;
-    let activeTab = value;
-    if (tabs && !tabs.includes(value)) {
-      activeTab = tabs[0];
-    }
-    this.setState(prevState => ({
-      activeTabs: {
-        ...prevState.activeTabs,
-        [tabsetName]: activeTab,
-      },
-    }));
-    setLocalValue(tabsetName, activeTab);
   };
 
   createSections() {
     const { pageContext } = this.props;
-    const { activeTabs } = this.state;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
@@ -138,9 +123,9 @@ export default class Guide extends Component {
           key={index}
           headingRef={this.sectionRefs[index]}
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-          setActiveTab={this.setActiveTab}
-          addTabset={this.addTabset}
-          activeTabs={activeTabs}
+          addTabset={this.addGuidesTabset}
+          includes={pageContext.includes}
+          pageMetadata={pageContext.pageMetadata}
         />
       );
     });
@@ -148,7 +133,7 @@ export default class Guide extends Component {
 
   render() {
     const { pageContext } = this.props;
-    const { activeSection, activeTabs, cloud, drivers } = this.state;
+    const { activeSection, cloud, drivers } = this.state;
     const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
 
     return (
@@ -160,13 +145,11 @@ export default class Guide extends Component {
             <div className="body" data-pagename={pageSlug}>
               <GuideBreadcrumbs />
               <GuideHeading
-                activeTabs={activeTabs}
                 author={findKeyValuePair(this.sections, 'name', 'author')}
                 cloud={cloud}
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
                 refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-                setActiveTab={this.setActiveTab}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
                 title={findKeyValuePair(this.sections, 'type', 'heading')}
               />
@@ -188,3 +171,5 @@ Guide.propTypes = {
     snootyStitchId: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+Guide.contextType = TabContext;

@@ -145,19 +145,15 @@ export default class Code extends Component {
 
 Code.propTypes = {
   nodeData: PropTypes.shape({
+    lang: PropTypes.string,
     value: PropTypes.string.isRequired,
   }).isRequired,
   activeTabs: PropTypes.shape({
     cloud: PropTypes.string,
   }),
   uriWriter: PropTypes.shape({
-    atlasVersion: PropTypes.string,
-    authSource: PropTypes.string,
-    database: PropTypes.string,
-    localEnv: PropTypes.string,
-    hostlist: PropTypes.object,
-    replicaSet: PropTypes.string,
-    username: PropTypes.string,
+    cloudURI: PropTypes.object,
+    localURI: PropTypes.object,
   }),
 };
 
