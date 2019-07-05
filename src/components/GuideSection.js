@@ -65,7 +65,7 @@ export default class GuideSection extends Component {
 
     return (
       <div className="section">
-        <h2 ref={headingRef} id={section.id}>
+        <h2 ref={headingRef} style={{ paddingTop: '1.5em', marginTop: '-1.5em' }} id={section.id}>
           {section.title}
           <a className="headerlink" href={`#${section.id}`} title="Permalink to this headline">
             ¶
