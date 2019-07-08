@@ -9,8 +9,8 @@ const getGitBranch = () => {
     .replace(/[\n\r\s]+$/, '');
 };
 
-const gatsbyPrefix = `${process.env.SITE}/${userInfo().username}/${getGitBranch()}`;
-export const prodUrl = `https://docs.mongodb.com/${process.env.SITE}/${process.env.PARSER_BRANCH}`;
+const gatsbyPrefix = `${process.env.GATSBY_SITE}/${userInfo().username}/${getGitBranch()}`;
+export const prodUrl = `https://docs.mongodb.com/${process.env.GATSBY_SITE}/${process.env.PARSER_BRANCH}`;
 export const localUrl = `http://127.0.0.1:9000/${gatsbyPrefix}`;
 
 /*

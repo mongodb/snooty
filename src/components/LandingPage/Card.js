@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardPills from './CardPills';
-import { findKeyValuePair } from '../../utils/find-key-value-pair';
 import { getNestedValue } from '../../utils/get-nested-value';
 
-const Card = ({ card, refDocMapping, time }) => {
-  const getCardTitle = cardSlug =>
-    getNestedValue([cardSlug, 'ast', 'children', 0, 'children', 0, 'children', 0, 'value'], refDocMapping);
+const DEFAULT_COMPLETION_TIME = 15;
 
-  const getPills = cardSlug => {
-    return findKeyValuePair(getNestedValue([cardSlug, 'ast', 'children'], refDocMapping), 'name', 'languages');
-  };
+const Card = ({ card, pageMetadata }) => {
+  const getCardTitle = cardSlug => getNestedValue([cardSlug, 'title'], pageMetadata);
+  const getCompletionTime = cardSlug =>
+    getNestedValue([cardSlug, 'completionTime'], pageMetadata) || DEFAULT_COMPLETION_TIME;
+  const getPills = cardSlug => getNestedValue([cardSlug, 'languages'], pageMetadata);
 
   const cardContent = () => {
     const cardSlug = getNestedValue(['argument', 0, 'value'], card);
@@ -34,7 +33,7 @@ const Card = ({ card, refDocMapping, time }) => {
           <div className="guide__body" />
         )}
         {card.name !== 'multi-card' && languagesNode && <CardPills pillsNode={languagesNode} pillsetName="drivers" />}
-        {card.name === 'card' && <div className="guide__time">{time}min</div>}
+        {card.name === 'card' && <div className="guide__time">{getCompletionTime(cardSlug)}min</div>}
       </React.Fragment>
     );
     if (card.name === 'multi-card') {
@@ -64,19 +63,6 @@ Card.propTypes = {
     ),
     name: PropTypes.string.isRequired,
   }).isRequired,
-  refDocMapping: PropTypes.oneOfType([
-    PropTypes.shape({
-      index: PropTypes.shape({
-        ast: PropTypes.object,
-      }).isRequired,
-    }),
-    PropTypes.shape({
-      [PropTypes.string]: PropTypes.shape({
-        ast: PropTypes.object.isRequired,
-      }).isRequired,
-    }).isRequired,
-  ]),
-  time: PropTypes.string,
 };
 
 Card.defaultProps = {

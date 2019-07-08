@@ -1,4 +1,3 @@
-/* global afterAll, beforeAll */
 const Enzyme = require('enzyme'); // eslint-disable-line import/no-extraneous-dependencies
 const Adapter = require('enzyme-adapter-react-16'); // eslint-disable-line import/no-extraneous-dependencies
 const Loadable = require('react-loadable');

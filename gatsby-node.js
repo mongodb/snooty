@@ -1,8 +1,10 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
+const mkdirp = require('mkdirp');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { findAllKeyValuePairs } = require('./src/utils/find-all-key-value-pairs');
+const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -17,7 +19,8 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
 const PAGES = [];
-const INCLUDE_FILES = [];
+const INCLUDE_FILES = {};
+const PAGE_TITLE_MAP = {};
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -58,8 +61,12 @@ const validateEnvVariables = () => {
 
 const saveAssetFile = async (name, objData) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(path.join('static', name), objData.data.buffer, 'binary', err => {
-      if (err) reject(err);
+    // Create nested directories as specified by the asset filenames if they do not exist
+    mkdirp(path.join('static', path.dirname(name)), err => {
+      if (err) return reject(err);
+      fs.writeFile(path.join('static', name), objData.data.buffer, 'binary', err => {
+        if (err) reject(err);
+      });
       resolve();
     });
   });
@@ -68,25 +75,23 @@ const saveAssetFile = async (name, objData) => {
 // Write all assets to static directory
 const saveAssetFiles = async assets => {
   const promises = [];
-  assets.forEach(async asset => {
-    const [assetName, assetHash] = asset.split('#');
-    const assetQuery = { _id: assetHash };
-    const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
-    if (assetDataDocuments && assetDataDocuments[0]) {
-      promises.push(saveAssetFile(assetName, assetDataDocuments[0]));
-    }
+  const assetQuery = { _id: { $in: Object.keys(assets) } };
+  const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
+  assetDataDocuments.forEach(asset => {
+    promises.push(saveAssetFile(assets[asset._id], asset));
   });
   return Promise.all(promises);
 };
 
-// Parse a page's AST to find all figure nodes and return a list of image names
+// Parse a page's AST to find all figure nodes and return a map of image checksums and filenames
 const getImagesInPage = page => {
   const imageNodes = findAllKeyValuePairs(page, 'name', 'figure');
-  return imageNodes.map(node => {
+  return imageNodes.reduce((obj, node) => {
     const name = getNestedValue(['argument', 0, 'value'], node);
     const checksum = getNestedValue(['options', 'checksum'], node);
-    return `${name}#${checksum}`;
-  });
+    obj[checksum] = name;
+    return obj;
+  }, {});
 };
 
 exports.sourceNodes = async () => {
@@ -124,17 +129,28 @@ exports.sourceNodes = async () => {
   }
 
   // Identify page documents and parse each document for images
-  const assets = [];
+  let assets = {};
   Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     if (pageNode) {
-      const imgs = getImagesInPage(pageNode);
-      assets.push(...imgs);
+      assets = { ...assets, ...getImagesInPage(pageNode) };
     }
     if (key.includes('includes/')) {
-      INCLUDE_FILES.push(key);
-    } else if (!key.includes('includes/') && !key.includes('curl') && !key.includes('https://')) {
+      INCLUDE_FILES[key] = val;
+    } else if (!key.includes('curl') && !key.includes('https://')) {
       PAGES.push(key);
+      PAGE_TITLE_MAP[key] = {
+        title: getNestedValue(['ast', 'children', 0, 'children', 0, 'children', 0, 'value'], val),
+        category: getNestedValue(
+          ['argument', 0, 'value'],
+          findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'category')
+        ),
+        completionTime: getNestedValue(
+          ['argument', 0, 'value'],
+          findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'time')
+        ),
+        languages: findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'languages'),
+      };
     }
   });
 
@@ -165,8 +181,10 @@ exports.createPages = ({ actions }) => {
           path: pageUrl,
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
-            __refDocMapping: RESOLVED_REF_DOC_MAPPING,
             snootyStitchId: SNOOTY_STITCH_ID,
+            __refDocMapping: RESOLVED_REF_DOC_MAPPING[page],
+            includes: INCLUDE_FILES,
+            pageMetadata: PAGE_TITLE_MAP,
           },
         });
       }
