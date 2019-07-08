@@ -29,6 +29,7 @@ export default class Guide extends Component {
     this.state = {
       activeTabs: {},
       activeSection: getNestedValue([0, 'name'], this.bodySections),
+      isScrollable: true,
     };
 
     this.sectionRefs = this.bodySections.map(() => React.createRef());
@@ -39,34 +40,40 @@ export default class Guide extends Component {
   }
 
   recalculate = () => {
-    if (this.sectionRefs.map(ref => ref.current).some(ref => ref === null)) {
-      return;
-    }
-    const height = document.body.clientHeight - window.innerHeight;
-    const headings = this.sectionRefs.map((ref, index) => [ref, this.bodySections[index].name]);
+    const { isScrollable } = this.state;
 
-    // This is a bit hacky, but it mostly works. Choose our current
-    // position in the page as a decimal in the range [0, 1], adding
-    // our window size multiplied by 80% of the unadjusted [0, 1]
-    // position.
-    // The 80% is necessary because the last sections of a guide tend to
-    // be shorter, and we need to make sure that scrolling to the bottom
-    // highlights the last section.
-    const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
-    let currentPosition = scrollTop / height;
-    currentPosition = (scrollTop + currentPosition * 0.8 * window.innerHeight) / height;
-
-    let bestMatch = [Infinity, null];
-
-    headings.forEach(([headingRef, sectionName]) => {
-      const headingPosition = headingRef.current.offsetTop / height;
-      const delta = Math.abs(headingPosition - currentPosition);
-      if (delta <= bestMatch[0]) {
-        bestMatch = [delta, sectionName];
+    if (isScrollable) {
+      if (this.sectionRefs.map(ref => ref.current).some(ref => ref === null)) {
+        return;
       }
-    });
+      const height = document.body.clientHeight - window.innerHeight;
+      const headings = this.sectionRefs.map((ref, index) => [ref, this.bodySections[index].name]);
 
-    this.setState({ activeSection: bestMatch[1] });
+      // This is a bit hacky, but it mostly works. Choose our current
+      // position in the page as a decimal in the range [0, 1], adding
+      // our window size multiplied by 80% of the unadjusted [0, 1]
+      // position.
+      // The 80% is necessary because the last sections of a guide tend to
+      // be shorter, and we need to make sure that scrolling to the bottom
+      // highlights the last section.
+      const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+      let currentPosition = scrollTop / height;
+      currentPosition = (scrollTop + currentPosition * 0.8 * window.innerHeight) / height;
+
+      let bestMatch = [Infinity, null];
+
+      headings.forEach(([headingRef, sectionName]) => {
+        const headingPosition = headingRef.current.offsetTop / height;
+        const delta = Math.abs(headingPosition - currentPosition);
+        if (delta <= bestMatch[0]) {
+          bestMatch = [delta, sectionName];
+        }
+      });
+
+      this.setState({ activeSection: bestMatch[1] });
+    } else {
+      this.setState({ isScrollable: true });
+    }
   };
 
   addTabset = (tabsetName, tabData) => {
@@ -111,6 +118,14 @@ export default class Guide extends Component {
     setLocalValue(tabsetName, activeTab);
   };
 
+  // Temporarily disable scrolling listener by changing state of 'isScrollable'
+  disableScrollable = clickedSection => {
+    this.setState({
+      isScrollable: false,
+      activeSection: clickedSection,
+    });
+  };
+
   createSections() {
     const { pageContext } = this.props;
     const { activeTabs } = this.state;
@@ -152,7 +167,11 @@ export default class Guide extends Component {
     return (
       <DefaultLayout>
         <div className="content">
-          <TOC activeSection={activeSection} sectionKeys={this.bodySections.map(section => section.name)} />
+          <TOC
+            activeSection={activeSection}
+            sectionKeys={this.bodySections.map(section => section.name)}
+            disableScrollable={this.disableScrollable}
+          />
           <div className="left-nav-space" />
           <div id="main-column" className="main-column">
             <div className="body" data-pagename={pageSlug}>
