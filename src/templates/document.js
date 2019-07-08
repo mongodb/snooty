@@ -8,10 +8,9 @@ import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 
 const Document = props => {
   const {
-    '*': pageSlug,
-    pageContext: { __refDocMapping },
+    pageContext: { includes, pageMetadata, __refDocMapping },
   } = props;
-  const pageNodes = getNestedValue([pageSlug || 'index', 'ast', 'children'], __refDocMapping) || [];
+  const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
 
   // Identify and save all substitutions as defined on this page and in its included files
   const getSubstitutions = () => {
@@ -19,10 +18,10 @@ const Document = props => {
     const pageSubstitutions = findAllKeyValuePairs(pageNodes, 'type', 'substitution_definition');
 
     // Find all include nodes on the page, get each include's contents, and find all substitutions in each include
-    const includes = findAllKeyValuePairs(pageNodes, 'name', 'include');
-    const includeContents = includes
-      .map(include => getIncludeFile(__refDocMapping, getNestedValue(['argument', 0, 'value'], include)))
-      .flat();
+    const includeFilenames = findAllKeyValuePairs(pageNodes, 'name', 'include');
+    const includeContents = includeFilenames.map(fileNode =>
+      getIncludeFile(includes, getNestedValue(['argument', 0, 'value'], fileNode))
+    );
     const includeSubstitutions = findAllKeyValuePairs(includeContents, 'type', 'substitution_definition');
 
     // Merge page and include substitutions.
@@ -49,6 +48,8 @@ const Document = props => {
                     key={index}
                     nodeData={child}
                     refDocMapping={__refDocMapping}
+                    includes={includes}
+                    pageMetadata={pageMetadata}
                     substitutions={getSubstitutions()}
                   />
                 ))}
@@ -63,13 +64,14 @@ const Document = props => {
 };
 
 Document.propTypes = {
-  '*': PropTypes.string.isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
-      index: PropTypes.shape({
-        ast: PropTypes.object,
+      ast: PropTypes.shape({
+        children: PropTypes.array,
       }).isRequired,
     }).isRequired,
+    includes: PropTypes.objectOf(PropTypes.object),
+    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
 };
 
