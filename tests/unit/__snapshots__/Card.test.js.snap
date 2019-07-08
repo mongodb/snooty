@@ -92,7 +92,7 @@ exports[`Card component when a standard card is mounted renders correctly 1`] = 
   <div
     className="guide__time"
   >
-    20
+    10
     min
   </div>
 </a>

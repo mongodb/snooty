@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
-import { findKeyValuePair } from '../../utils/find-key-value-pair';
 import { getNestedValue } from '../../utils/get-nested-value';
 
-const DEFAULT_COMPLETION_TIME = 15;
 const CATEGORIES = [
   {
     name: 'Getting Started',
@@ -20,13 +18,7 @@ const CATEGORIES = [
   },
 ];
 
-const Category = ({ cards, category, refDocMapping }) => {
-  const getCardCompletionTime = cardSlug =>
-    getNestedValue(
-      ['argument', 0, 'value'],
-      findKeyValuePair(getNestedValue([cardSlug, 'ast', 'children'], refDocMapping), 'name', 'time')
-    ) || DEFAULT_COMPLETION_TIME;
-
+const Category = ({ cards, category, pageMetadata }) => {
   const columnSeparatedCards = [[], [], []];
   const lastRow = [];
 
@@ -66,12 +58,7 @@ const Category = ({ cards, category, refDocMapping }) => {
             return (
               <div className="guide-column" key={indexColumn}>
                 {cardColumn.map((card, index) => {
-                  let completionTime;
-                  if (card.name === 'card') {
-                    const cardSlug = getNestedValue(['argument', 0, 'value'], card);
-                    completionTime = getCardCompletionTime(cardSlug);
-                  }
-                  return <Card card={card} key={index} refDocMapping={refDocMapping} time={completionTime} />;
+                  return <Card card={card} key={index} pageMetadata={pageMetadata} />;
                 })}
               </div>
             );
@@ -82,38 +69,28 @@ const Category = ({ cards, category, refDocMapping }) => {
   );
 };
 
-const LandingPageCards = ({ guides, refDocMapping }) =>
-  CATEGORIES.map(category => (
+const LandingPageCards = ({ guides, pageMetadata }) => {
+  return CATEGORIES.map(category => (
     <Category
       cards={guides.filter(card => {
-        const cardName =
+        const cardSlug =
           card.name === 'card'
             ? getNestedValue(['argument', 0, 'value'], card)
             : getNestedValue(['children', 0, 'children', 0, 'children', 0, 'children', 0, 'value'], card);
-        return (
-          category.name ===
-          getNestedValue(
-            ['argument', 0, 'value'],
-            findKeyValuePair(getNestedValue([cardName, 'ast', 'children'], refDocMapping), 'name', 'category')
-          )
-        );
+        return category.name === getNestedValue([cardSlug, 'category'], pageMetadata);
       })}
       category={category}
-      refDocMapping={refDocMapping}
+      pageMetadata={pageMetadata}
       key={category.iconSlug}
     />
   ));
+};
 
 Category.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.object),
   category: PropTypes.shape({
     name: PropTypes.string.isRequired,
     iconSlug: PropTypes.string.isRequired,
-  }).isRequired,
-  refDocMapping: PropTypes.shape({
-    index: PropTypes.shape({
-      ast: PropTypes.object,
-    }).isRequired,
   }).isRequired,
 };
 
@@ -133,11 +110,6 @@ LandingPageCards.propTypes = {
       name: PropTypes.string,
     })
   ),
-  refDocMapping: PropTypes.shape({
-    index: PropTypes.shape({
-      ast: PropTypes.object,
-    }).isRequired,
-  }).isRequired,
 };
 
 LandingPageCards.defaultProps = {
