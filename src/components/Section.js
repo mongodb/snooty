@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const Section = props => {
-  const { sectionDepth, nodeData } = props;
+const Section = ({ sectionDepth, nodeData: { children }, ...rest }) => {
   return (
     <section>
-      {nodeData.children.map((child, index) => {
-        return <ComponentFactory {...props} nodeData={child} key={index} sectionDepth={sectionDepth + 1} />;
+      {children.map((child, index) => {
+        return <ComponentFactory {...rest} nodeData={child} key={index} sectionDepth={sectionDepth + 1} />;
       })}
     </section>
   );
