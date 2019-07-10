@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import Navbar from './Navbar';
 
 const DefaultLayout = ({ children }) => {
   const { branch, project, title } = useSiteMetadata();
@@ -16,6 +17,7 @@ const DefaultLayout = ({ children }) => {
           'data-enable-marian': 1,
         }}
       />
+      <Navbar />
       {children}
     </React.Fragment>
   );
