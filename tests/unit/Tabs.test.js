@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { PLATFORMS, LANGUAGES } from '../../src/constants';
 import Tabs from '../../src/components/Tabs';
 
 // data for this component
