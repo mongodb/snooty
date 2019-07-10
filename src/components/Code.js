@@ -156,7 +156,6 @@ Code.propTypes = {
 };
 
 Code.defaultProps = {
-  activeTabs: undefined,
   uriWriter: {
     cloudURI: undefined,
     localURI: undefined,

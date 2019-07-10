@@ -12,7 +12,6 @@ import { getLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
 import { getNestedValue } from '../utils/get-nested-value';
-import DefaultLayout from '../components/layout';
 import { TabContext } from '../components/tab-context';
 
 export default class Guide extends Component {
