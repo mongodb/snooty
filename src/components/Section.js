@@ -1,26 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import { getNestedValue } from '../utils/get-nested-value';
 
 const Section = props => {
-  const { nodeData } = props;
+  const { sectionDepth, nodeData } = props;
   return (
     <section>
       {nodeData.children.map((child, index) => {
-        if (child.type === 'text') {
-          return <React.Fragment key={index}>{getNestedValue(['value'], child)}</React.Fragment>;
-        }
-        return <ComponentFactory {...props} nodeData={child} key={index} />;
+        return <ComponentFactory {...props} nodeData={child} key={index} sectionDepth={sectionDepth + 1} />;
       })}
     </section>
   );
 };
 
 Section.propTypes = {
+  sectionDepth: PropTypes.number,
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
   }).isRequired,
+};
+
+Section.defaultProps = {
+  sectionDepth: 0,
 };
 
 export default Section;
