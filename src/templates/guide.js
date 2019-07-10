@@ -32,6 +32,7 @@ export default class Guide extends Component {
     };
 
     this.sectionRefs = this.bodySections.map(() => React.createRef());
+    this.namedTabsets = new Set();
   }
 
   componentDidMount() {
@@ -70,6 +71,7 @@ export default class Guide extends Component {
   };
 
   addGuidesTabset = (tabsetName, tabData) => {
+    const { setActiveTab } = this.context;
     let tabs = tabData.map(tab => tab.argument[0].value);
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
@@ -78,7 +80,7 @@ export default class Guide extends Component {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs, LANGUAGES);
     } else {
-      this.context.addTabset(tabsetName, tabData); // eslint-disable-line react/destructuring-assignment
+      setActiveTab(tabsetName, getLocalValue(tabsetName) || tabs[0]);
     }
   };
 
@@ -93,7 +95,7 @@ export default class Guide extends Component {
           constants
         ),
       }),
-      () => setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName)
+      () => setActiveTab(tabsetName, getLocalValue(tabsetName) || tabs[0])
     );
   };
 
@@ -128,42 +130,39 @@ export default class Guide extends Component {
   }
 
   render() {
-    const { pageContext } = this.props;
+    const { pageContext, path } = this.props;
     const { activeSection, cloud, drivers } = this.state;
-    const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
+    const pageSlug = path.substr(1);
 
     return (
-      <DefaultLayout>
-        <div className="content">
-          <TOC activeSection={activeSection} sectionKeys={this.bodySections.map(section => section.name)} />
-          <div className="left-nav-space" />
-          <div id="main-column" className="main-column">
-            <div className="body" data-pagename={pageSlug}>
-              <GuideBreadcrumbs />
-              <GuideHeading
-                author={findKeyValuePair(this.sections, 'name', 'author')}
-                cloud={cloud}
-                description={findKeyValuePair(this.sections, 'name', 'result_description')}
-                drivers={drivers}
-                includes={pageContext.includes}
-                pageMetadata={pageContext.pageMetadata}
-                refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-                time={findKeyValuePair(this.sections, 'name', 'time')}
-                title={findKeyValuePair(this.sections, 'type', 'heading')}
-              />
-              {this.createSections()}
-              <Footer />
-            </div>
+      <div className="content">
+        <TOC activeSection={activeSection} sectionKeys={this.bodySections.map(section => section.name)} />
+        <div className="left-nav-space" />
+        <div id="main-column" className="main-column">
+          <div className="body" data-pagename={pageSlug}>
+            <GuideBreadcrumbs />
+            <GuideHeading
+              author={findKeyValuePair(this.sections, 'name', 'author')}
+              cloud={cloud}
+              description={findKeyValuePair(this.sections, 'name', 'result_description')}
+              drivers={drivers}
+              includes={pageContext.includes}
+              pageMetadata={pageContext.pageMetadata}
+              refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+              time={findKeyValuePair(this.sections, 'name', 'time')}
+              title={findKeyValuePair(this.sections, 'type', 'heading')}
+            />
+            {this.createSections()}
+            <Footer />
           </div>
-          <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
         </div>
-      </DefaultLayout>
+        <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
+      </div>
     );
   }
 }
 
 Guide.propTypes = {
-  '*': PropTypes.string.isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
@@ -174,6 +173,7 @@ Guide.propTypes = {
     includes: PropTypes.objectOf(PropTypes.object).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 Guide.contextType = TabContext;

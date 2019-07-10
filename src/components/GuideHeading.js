@@ -11,7 +11,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 const GuideHeading = ({ author, cloud, description, drivers, time, title, ...rest }) => {
   const { activeTabs, setActiveTab } = useContext(TabContext);
   const setActivePill = pillsetName => pill => {
-    setActiveTab(pill, pillsetName);
+    setActiveTab(pillsetName, pill);
   };
 
   const displayTitle = getNestedValue(['children', 0, 'value'], title);

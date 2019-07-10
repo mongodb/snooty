@@ -15,11 +15,14 @@ export default class Tabs extends Component {
   }
 
   componentDidMount() {
-    const { addTabset: propsAddTabset, nodeData } = this.props;
-    const { addTabset: contextAddTabset } = this.context;
+    const { addTabset, nodeData } = this.props;
+    const { setActiveTab } = this.context;
     const { tabsetName } = this.state;
-    const addTabset = propsAddTabset !== undefined ? propsAddTabset : contextAddTabset;
-    addTabset(tabsetName, [...nodeData.children]);
+    if (addTabset !== undefined) {
+      addTabset(tabsetName, [...nodeData.children]);
+    } else {
+      setActiveTab(nodeData.children[0].argument[0].value, tabsetName);
+    }
   }
 
   /*
@@ -86,7 +89,7 @@ export default class Tabs extends Component {
                     const offset = initScrollY - initRect.top;
 
                     // Await for page to re-render after setting active tab
-                    await setActiveTab(tabName, tabsetName);
+                    await setActiveTab(tabsetName, tabName);
 
                     // Get the position of tab strip after re-render
                     const rects = element.getBoundingClientRect();

@@ -5,6 +5,7 @@ import Highlight from 'react-highlight';
 import { reportAnalytics } from '../utils/report-analytics';
 import 'highlight.js/styles/a11y-light.css';
 import codeStyle from '../styles/code.module.css';
+import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import {
   URI_PLACEHOLDER,
@@ -95,9 +96,9 @@ export default class Code extends Component {
 
   render() {
     const { copied, showCopyButton } = this.state;
+    const { activeTabs } = this.context;
     const {
       nodeData: { value, lang },
-      activeTabs,
       uriWriter: { cloudURI, localURI },
     } = this.props;
     let code = value;
@@ -148,9 +149,6 @@ Code.propTypes = {
     lang: PropTypes.string,
     value: PropTypes.string.isRequired,
   }).isRequired,
-  activeTabs: PropTypes.shape({
-    cloud: PropTypes.string,
-  }),
   uriWriter: PropTypes.shape({
     cloudURI: PropTypes.object,
     localURI: PropTypes.object,
@@ -164,3 +162,5 @@ Code.defaultProps = {
     localURI: undefined,
   },
 };
+
+Code.contextType = TabContext;
