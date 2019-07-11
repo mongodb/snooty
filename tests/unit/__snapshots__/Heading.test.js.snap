@@ -6,7 +6,7 @@ exports[`renders correctly 1`] = `
 >
   Create an administrative username and password
   <a
-    className="headerlink"
+    class="headerlink"
     href="#create-an-administrative-username-and-password"
     title="Permalink to this headline"
   >

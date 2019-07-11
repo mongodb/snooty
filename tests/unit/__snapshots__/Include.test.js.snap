@@ -19,7 +19,7 @@ exports[`renders correctly 1`] = `
     class="section"
   >
     <section>
-      <h3
+      <h1
         id="access-to-an-atlas-supported-browser"
       >
         Access to an Atlas supported browser
@@ -30,7 +30,7 @@ exports[`renders correctly 1`] = `
         >
           ¶
         </a>
-      </h3>
+      </h1>
       <p
         class=""
         style="margin:"
