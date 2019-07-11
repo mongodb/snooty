@@ -145,6 +145,7 @@ export default class Guide extends Component {
     return this.bodySections.map((section, index) => {
       return (
         <GuideSection
+          sectionDepth={2}
           guideSectionData={section}
           key={index}
           headingRef={this.sectionRefs[index]}
