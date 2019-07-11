@@ -43,6 +43,7 @@ const Document = props => {
           <div className="documentwrapper">
             <div className="bodywrapper">
               <div className="body">
+                <div className="bc" />
                 {pageNodes.map((child, index) => (
                   <ComponentFactory
                     key={index}

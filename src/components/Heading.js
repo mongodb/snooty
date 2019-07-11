@@ -2,25 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const Heading = props => {
-  const { nodeData } = props;
+const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
+  const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
   return (
-    <h3 id={id}>
+    <HeadingTag id={id}>
       {nodeData.children.map((element, index) => {
-        if (element.type === 'text') {
-          return <React.Fragment key={index}>{element.value}</React.Fragment>;
-        }
-        return <ComponentFactory {...props} nodeData={element} key={index} />;
+        return <ComponentFactory {...rest} nodeData={element} key={index} />;
       })}
       <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
         ¶
       </a>
-    </h3>
+    </HeadingTag>
   );
 };
 
 Heading.propTypes = {
+  sectionDepth: PropTypes.number.isRequired,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
