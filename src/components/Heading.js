@@ -4,7 +4,7 @@ import ComponentFactory from './ComponentFactory';
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
-  const HeadingTag = sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
+  const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
   return (
     <HeadingTag id={id}>
       {nodeData.children.map((element, index) => {
