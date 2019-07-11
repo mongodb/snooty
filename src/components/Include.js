@@ -8,24 +8,25 @@ export default class Include extends Component {
   constructor(props) {
     super(props);
 
-    const { nodeData, refDocMapping, updateTotalStepCount } = this.props;
+    const { includes, nodeData, updateTotalStepCount } = this.props;
 
     const filename = getNestedValue(['argument', 0, 'value'], nodeData);
-    this.resolvedIncludeData = getIncludeFile(refDocMapping, filename);
+    this.includeNodes = getIncludeFile(includes, filename);
 
     if (updateTotalStepCount) {
-      updateTotalStepCount(this.resolvedIncludeData.length);
+      updateTotalStepCount(this.includeNodes.length);
     }
   }
 
   render() {
-    return this.resolvedIncludeData.map((includeObj, index) => (
+    return this.includeNodes.map((includeObj, index) => (
       <ComponentFactory {...this.props} nodeData={includeObj} key={index} stepNum={index} />
     ));
   }
 }
 
 Include.propTypes = {
+  includes: PropTypes.objectOf(PropTypes.object).isRequired,
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
@@ -33,15 +34,9 @@ Include.propTypes = {
       })
     ).isRequired,
   }).isRequired,
-  refDocMapping: PropTypes.shape({
-    ast: PropTypes.shape({
-      children: PropTypes.array,
-    }),
-  }),
   updateTotalStepCount: PropTypes.func,
 };
 
 Include.defaultProps = {
   updateTotalStepCount: () => {},
-  refDocMapping: undefined,
 };

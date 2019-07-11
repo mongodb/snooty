@@ -23,7 +23,7 @@ import mockDataRef from './data/Role-ref.test.json';
 import mockDataSetting from './data/Role-setting.test.json';
 import mockDataTerm from './data/Role-term.test.json';
 import mockDataUpdate from './data/Role-update.test.json';
-import mockRefDocMapping from './data/index.test.json';
+import mockPageMetadata from './data/guidesPageMetadata.json'
 
 it('renders correctly a role "authrole"', () => {
   const tree = shallow(<RoleCode nodeData={mockDataAuthrole} />);
@@ -36,12 +36,12 @@ it('renders correctly role "binary"', () => {
 });
 
 it('renders correctly role "doc"', () => {
-  const tree = render(<RoleDoc nodeData={mockDataDoc} refDocMapping={mockRefDocMapping} />);
+  const tree = render(<RoleDoc nodeData={mockDataDoc} pageMetadata={mockPageMetadata} />);
   expect(tree).toMatchSnapshot();
 });
 
 it('renders correctly role "doc" when no link title is included', () => {
-  const tree = render(<RoleDoc nodeData={mockDataDocUnlabeled} refDocMapping={mockRefDocMapping} />);
+  const tree = render(<RoleDoc nodeData={mockDataDocUnlabeled} pageMetadata={mockPageMetadata} />);
   expect(tree).toMatchSnapshot();
 });
 

@@ -1,11 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
 import Include from '../../src/components/Include';
 
 // data for this component
 import mockData from './data/Include.test.json';
+import mockIncludesMap from './data/includesMap.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Include nodeData={mockData} />);
+  const tree = render(<Include nodeData={mockData} includes={mockIncludesMap} />);
   expect(tree).toMatchSnapshot();
 });

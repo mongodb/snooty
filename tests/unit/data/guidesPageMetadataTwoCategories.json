@@ -1,0 +1,2045 @@
+{
+  "cloud/atlas": {
+    "title": "Create an Atlas Account and Cluster",
+    "category": "Use Case",
+    "completionTime": "15"
+  },
+  "cloud/connectionstring": {
+    "title": "Set Up Atlas Connectivity",
+    "category": "Getting Started",
+    "completionTime": "15",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "cloud/migrate-from-aws-to-atlas": {
+    "title": "Migrate a MongoDB Replica Set from AWS to MongoDB Atlas",
+    "category": "Getting Started",
+    "completionTime": "20"
+  },
+  "cloud/migrate-from-compose": {
+    "title": "Migrate from Compose to MongoDB Atlas",
+    "category": "Getting Started",
+    "completionTime": "20"
+  },
+  "cloud/migrate-from-mlab": {
+    "title": "Migrate from mLab to MongoDB Atlas",
+    "category": null,
+    "completionTime": null
+  },
+  "index": {
+    "title": null,
+    "category": null,
+    "completionTime": null
+  },
+  "server/auth": {
+    "title": "Secure your MongoDB Deployment",
+    "category": "Getting Started",
+    "completionTime": "10"
+  },
+  "server/delete": {
+    "title": "Delete Data from MongoDB",
+    "category": "Getting Started",
+    "completionTime": "10",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "java-async"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 21
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 21
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "server/drivers": {
+    "title": "Connect to MongoDB",
+    "category": "Getting Started",
+    "completionTime": "15",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "server/import": {
+    "title": "Import Data into MongoDB",
+    "category": "Getting Started",
+    "completionTime": "15"
+  },
+  "server/insert": {
+    "title": "Insert Data into MongoDB",
+    "category": "Getting Started",
+    "completionTime": "15",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "go"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 21
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 21
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "server/install": {
+    "title": "Install MongoDB",
+    "category": "Getting Started",
+    "completionTime": "10"
+  },
+  "server/introduction": {
+    "title": "Structure your Data for MongoDB",
+    "category": "Getting Started",
+    "completionTime": "15"
+  },
+  "server/read": {
+    "title": "Read Data from MongoDB",
+    "category": "Getting Started",
+    "completionTime": "15",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "go"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 21
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 21
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "server/read_operators": {
+    "title": "Read Data using Operators and Compound Queries",
+    "category": "Getting Started",
+    "completionTime": "30",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "go"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 21
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 21
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "server/read_queries": {
+    "title": "Read Data from MongoDB With Queries",
+    "category": "Getting Started",
+    "completionTime": "30",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "go"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 21
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 21
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "server/update": {
+    "title": "Update Data in MongoDB",
+    "category": "Getting Started",
+    "completionTime": "10",
+    "languages": {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 12
+        }
+      },
+      "name": "languages",
+      "argument": [],
+      "children": [
+        {
+          "type": "list",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "ordered": false,
+          "children": [
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 14
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 14
+                        }
+                      },
+                      "value": "shell"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "compass"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 16
+                        }
+                      },
+                      "value": "python"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 17
+                        }
+                      },
+                      "value": "motor"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 18
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 18
+                        }
+                      },
+                      "value": "nodejs"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 19
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 19
+                        }
+                      },
+                      "value": "java-sync"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "children": [
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 20
+                        }
+                      },
+                      "value": "csharp"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "stitch/react_googleauth": {
+    "title": "Sample App: React + Stitch + Google Authentication",
+    "category": "Getting Started",
+    "completionTime": "15"
+  }
+}

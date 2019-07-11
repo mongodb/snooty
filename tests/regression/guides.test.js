@@ -1,10 +1,10 @@
-import { DEPLOYMENTS, PLATFORMS, stringifyTab } from '../../src/constants';
+import { DEPLOYMENTS, stringifyTab } from '../../src/constants';
 import { slugArray } from '../../src/regressionTestSetup';
 import { cleanString, getClassText, getPageLinks, getPageText, localUrl } from './util';
 
 require('dotenv').config({ path: './.env.production' });
 
-const prodUrl = `https://docs.mongodb.com/${process.env.SITE}`;
+const prodUrl = `https://docs.mongodb.com/${process.env.GATSBY_SITE}`;
 
 const defaultStorageObj = {
   cloud: 'cloud',
@@ -21,6 +21,7 @@ const convertToLegacy = string => {
 };
 
 const guidesLanguages = ['shell', 'compass', 'python', 'java-sync', 'nodejs', 'motor', 'csharp', 'motor', 'go'];
+const guidesPlatforms = ['windows', 'macos', 'linux'];
 
 /*
  * Remove discrepancies we have found with the old build system.
@@ -56,6 +57,8 @@ const cleanStringByPlatform = (str, platform) => {
   let cleanStr = str;
   if (platform === 'windows') {
     cleanStr = str.replace('mongo mongodb+srv', 'mongo.exe mongodb+srv');
+  } else {
+    cleanStr = str.replace('mongo.exe mongodb+srv', 'mongo mongodb+srv');
   }
   return cleanOldString(cleanStr);
 };
@@ -163,8 +166,8 @@ describe('with local storage', () => {
 
       it(`deployment links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
-          await getPageLinks(prodUrl, slug, defaultStorageObj),
-          await getPageLinks(localUrl, slug, defaultStorageObj),
+          await getPageLinks(prodUrl, slug, defaultStorageObj, clickPills, removeEnableAuthLink),
+          await getPageLinks(localUrl, slug, defaultStorageObj, clickPills),
         ]);
         expect(newLinks).toEqual(oldLinks);
       });
@@ -180,14 +183,14 @@ describe('with local storage', () => {
 
       it(`language links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
-          await getPageLinks(prodUrl, slug, defaultStorageObj),
-          await getPageLinks(localUrl, slug, defaultStorageObj),
+          await getPageLinks(prodUrl, slug, defaultStorageObj, clickPills, removeEnableAuthLink),
+          await getPageLinks(localUrl, slug, defaultStorageObj, clickPills),
         ]);
         expect(newLinks).toEqual(oldLinks);
       });
     });
 
-    describe.each(PLATFORMS)('platform: %p', platform => {
+    describe.each(guidesPlatforms)('platform: %p', platform => {
       it(`platform file text is the same`, async () => {
         const [legacyText, snootyText] = await runComparisons(slug, {
           platforms: platform,
@@ -197,8 +200,8 @@ describe('with local storage', () => {
 
       it(`platform links are the same`, async () => {
         const [oldLinks, newLinks] = await Promise.all([
-          await getPageLinks(prodUrl, slug, defaultStorageObj),
-          await getPageLinks(localUrl, slug, defaultStorageObj),
+          await getPageLinks(prodUrl, slug, defaultStorageObj, clickPills, removeEnableAuthLink),
+          await getPageLinks(localUrl, slug, defaultStorageObj, clickPills),
         ]);
         expect(newLinks).toEqual(oldLinks);
       });

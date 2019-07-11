@@ -1,16 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DefaultLayout from '../components/layout';
 import LandingPageCards from '../components/LandingPage/LandingPageCards';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
-import DefaultLayout from '../components/layout';
 
-const Index = ({ pageContext }) => {
-  const guides = findKeyValuePair(
-    getNestedValue(['__refDocMapping', 'index', 'ast', 'children'], pageContext),
-    'name',
-    'guide-index'
-  );
+const Index = ({ pageContext: { pageMetadata, __refDocMapping } }) => {
+  const guides = findKeyValuePair(getNestedValue(['ast', 'children'], __refDocMapping), 'name', 'guide-index') || [];
 
   return (
     <DefaultLayout>
@@ -23,7 +19,7 @@ const Index = ({ pageContext }) => {
                 ¶
               </a>
             </h1>
-            <LandingPageCards guides={guides.children} refDocMapping={pageContext.__refDocMapping} />
+            <LandingPageCards guides={guides.children} pageMetadata={pageMetadata} />
           </div>
         </div>
       </div>
@@ -33,9 +29,10 @@ const Index = ({ pageContext }) => {
 
 Index.propTypes = {
   pageContext: PropTypes.shape({
+    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
     __refDocMapping: PropTypes.shape({
-      index: PropTypes.shape({
-        ast: PropTypes.object,
+      ast: PropTypes.shape({
+        children: PropTypes.array,
       }).isRequired,
     }).isRequired,
   }).isRequired,
