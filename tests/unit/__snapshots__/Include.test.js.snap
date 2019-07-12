@@ -3,11 +3,9 @@
 exports[`renders correctly 1`] = `
 <div
   class="sequence-block"
-  style="display:"
 >
   <div
     class="bullet-block"
-    style="display:"
   >
     <div
       class="sequence-step"
