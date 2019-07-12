@@ -2,40 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const Step = props => {
-  const { nodeData, showAllSteps, showStepIndex, stepNum } = props;
-
-  return (
-    <div
-      className="sequence-block"
-      style={{
-        display: !(showAllSteps || showStepIndex === stepNum) && 'none',
-      }}
-    >
-      <div className="bullet-block" style={{ display: !showAllSteps && 'none' }}>
-        <div className="sequence-step">{stepNum + 1}</div>
-      </div>
-      <div className="section">
-        {nodeData.children.map((child, index) => (
-          <ComponentFactory {...props} nodeData={child} key={index} />
-        ))}
-      </div>
+const Step = ({ nodeData: { children }, stepNum, ...rest }) => (
+  <div className="sequence-block">
+    <div className="bullet-block">
+      <div className="sequence-step">{stepNum + 1}</div>
     </div>
-  );
-};
+    <div className="section">
+      {children.map((child, index) => (
+        <ComponentFactory {...rest} nodeData={child} key={index} />
+      ))}
+    </div>
+  </div>
+);
 
 Step.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
   }).isRequired,
-  showAllSteps: PropTypes.bool,
-  showStepIndex: PropTypes.number,
   stepNum: PropTypes.number,
 };
 
 Step.defaultProps = {
-  showAllSteps: true,
-  showStepIndex: 0,
   stepNum: 0,
 };
 
