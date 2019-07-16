@@ -206,64 +206,6 @@ exports[`Landing Page renders correctly 1`] = `
             </div>
             <a
               class="guide guide--regular"
-              href="stitch/react_googleauth"
-            >
-              <div
-                class="guide__title"
-              >
-                Sample App: React + Stitch + Google Authentication
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                15min
-              </div>
-            </a>
-          </div>
-          <div
-            class="guide-column"
-          >
-            <a
-              class="guide guide--regular"
-              href="server/auth"
-            >
-              <div
-                class="guide__title"
-              >
-                Secure your MongoDB Deployment
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                10min
-              </div>
-            </a>
-            <a
-              class="guide guide--regular"
-              href="server/import"
-            >
-              <div
-                class="guide__title"
-              >
-                Import Data into MongoDB
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                15min
-              </div>
-            </a>
-            <a
-              class="guide guide--regular"
               href="server/drivers"
             >
               <div
@@ -328,6 +270,64 @@ exports[`Landing Page renders correctly 1`] = `
                   See All
                 </li>
               </ul>
+              <div
+                class="guide__time"
+              >
+                15min
+              </div>
+            </a>
+          </div>
+          <div
+            class="guide-column"
+          >
+            <a
+              class="guide guide--regular"
+              href="server/auth"
+            >
+              <div
+                class="guide__title"
+              >
+                Secure your MongoDB Deployment
+              </div>
+              <div
+                class="guide__body"
+              />
+              <div
+                class="guide__time"
+              >
+                10min
+              </div>
+            </a>
+            <a
+              class="guide guide--regular"
+              href="server/import"
+            >
+              <div
+                class="guide__title"
+              >
+                Import Data into MongoDB
+              </div>
+              <div
+                class="guide__body"
+              />
+              <div
+                class="guide__time"
+              >
+                15min
+              </div>
+            </a>
+            <a
+              class="guide guide--regular"
+              href="stitch/react_googleauth"
+            >
+              <div
+                class="guide__title"
+              >
+                Sample App: React + Stitch + Google Authentication
+              </div>
+              <div
+                class="guide__body"
+              />
               <div
                 class="guide__time"
               >
