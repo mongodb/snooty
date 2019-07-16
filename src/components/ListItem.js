@@ -5,7 +5,13 @@ import ComponentFactory from './ComponentFactory';
 const ListItem = ({ nodeData, ...rest }) => (
   <li>
     {nodeData.children.map((child, index) => (
-      <ComponentFactory {...rest} nodeData={child} key={index} parentNode="listItem" />
+      <ComponentFactory
+        {...rest}
+        nodeData={child}
+        key={index}
+        // Include <p> tags in <li> if there is more than one paragraph
+        parentNode={nodeData.children.length === 1 ? 'listItem' : undefined}
+      />
     ))}
   </li>
 );

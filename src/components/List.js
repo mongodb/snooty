@@ -4,18 +4,20 @@ import ComponentFactory from './ComponentFactory';
 
 const List = props => {
   const { nodeData } = props;
+  const ListTag = nodeData.ordered ? 'ol' : 'ul';
   return (
-    <ul>
+    <ListTag>
       {nodeData.children.map((listChild, index) => (
         <ComponentFactory {...props} nodeData={listChild} key={index} />
       ))}
-    </ul>
+    </ListTag>
   );
 };
 
 List.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
+    ordered: PropTypes.bool,
   }).isRequired,
 };
 
