@@ -1,28 +1,45 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+import SiteMetadata from './site-metadata';
+import { TabContext } from './tab-context';
+import { setLocalValue } from '../utils/browser-storage';
 
-const DefaultLayout = ({ children }) => {
-  const { branch, project, title } = useSiteMetadata();
-  return (
-    <React.Fragment>
-      <Helmet
-        defaultTitle={title}
-        bodyAttributes={{
-          'data-project': project,
-          'data-project-title': title,
-          'data-branch': branch,
-          'data-enable-marian': 1,
-        }}
-      />
-      {children}
-    </React.Fragment>
-  );
-};
+export default class DefaultLayout extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeTabs: {},
+    };
+  }
+
+  setActiveTab = (tabsetName, value) => {
+    const { [tabsetName]: tabs } = this.state;
+    let activeTab = value;
+    if (tabs && !tabs.includes(value)) {
+      activeTab = tabs[0];
+    }
+    this.setState(prevState => ({
+      activeTabs: {
+        ...prevState.activeTabs,
+        [tabsetName]: activeTab,
+      },
+    }));
+    setLocalValue(tabsetName, activeTab);
+  };
+
+  render() {
+    const { children } = this.props;
+
+    return (
+      <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
+        <SiteMetadata />
+        {children}
+      </TabContext.Provider>
+    );
+  }
+}
 
 DefaultLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
-
-export default DefaultLayout;

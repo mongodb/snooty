@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { TabContext } from './tab-context';
 import { PLATFORMS, stringifyTab } from '../constants';
 import { reportAnalytics } from '../utils/report-analytics';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -8,11 +9,20 @@ import { getNestedValue } from '../utils/get-nested-value';
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
-    const { nodeData, addTabset } = this.props;
+    const { nodeData } = this.props;
     const tabsetName = getNestedValue(['options', 'tabset'], nodeData) || this.generateAnonymousTabsetName(nodeData);
     this.state = { tabsetName };
+  }
 
-    addTabset(tabsetName, [...nodeData.children]);
+  componentDidMount() {
+    const { addTabset, nodeData } = this.props;
+    const { setActiveTab } = this.context;
+    const { tabsetName } = this.state;
+    if (addTabset !== undefined) {
+      addTabset(tabsetName, [...nodeData.children]);
+    } else {
+      setActiveTab(nodeData.children[0].argument[0].value, tabsetName);
+    }
   }
 
   /*
@@ -42,7 +52,8 @@ export default class Tabs extends Component {
 
   render() {
     const { tabsetName } = this.state;
-    const { nodeData, activeTabs, setActiveTab } = this.props;
+    const { nodeData } = this.props;
+    const { activeTabs, setActiveTab } = this.context;
     const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud';
     const isHidden = nodeData.options && nodeData.options.hidden;
     const tabs =
@@ -78,7 +89,7 @@ export default class Tabs extends Component {
                     const offset = initScrollY - initRect.top;
 
                     // Await for page to re-render after setting active tab
-                    await setActiveTab(tabName, tabsetName);
+                    await setActiveTab(tabsetName, tabName);
 
                     // Get the position of tab strip after re-render
                     const rects = element.getBoundingClientRect();
@@ -117,9 +128,6 @@ export default class Tabs extends Component {
 }
 
 Tabs.propTypes = {
-  activeTabs: PropTypes.shape({
-    [PropTypes.string]: PropTypes.string,
-  }).isRequired,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -131,7 +139,15 @@ Tabs.propTypes = {
         children: PropTypes.array,
       })
     ),
+    options: PropTypes.shape({
+      hidden: PropTypes.bool,
+    }),
   }).isRequired,
-  addTabset: PropTypes.func.isRequired,
-  setActiveTab: PropTypes.func.isRequired,
+  addTabset: PropTypes.func,
 };
+
+Tabs.defaultProps = {
+  addTabset: undefined,
+};
+
+Tabs.contextType = TabContext;

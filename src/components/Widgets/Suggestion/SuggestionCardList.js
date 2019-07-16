@@ -42,6 +42,7 @@ SuggestionCard.propTypes = {
   suggestion: PropTypes.shape({
     description: PropTypes.string,
     title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
   }).isRequired,
 };
 
