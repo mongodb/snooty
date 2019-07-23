@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { withPrefix } from 'gatsby';
 import { isBrowser } from '../utils/is-browser';
-import { URL_SLUGS, URL_BASES } from '../constants';
+import { URL_SLUGS, URL_SUBDOMAINS } from '../constants';
+
+const DOCS_SITE = 'docs.mongodb.com';
+const STAGING_SITE = 'docs-mongodbcom-staging.corp.mongodb.com';
+const LOCALHOST_NAMES = ['localhost', '0.0.0.0', '127.0.0.1'];
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -38,55 +42,32 @@ export default class Navbar extends Component {
 
   // Uses location to check which link should be active
   checkForLink = location => {
-    if (location.hostname === 'docs.mongodb.com' || location.hostname === 'docs-mongodbcom-staging.corp.mongodb.com') {
+    if (location.hostname === DOCS_SITE || location.hostname === STAGING_SITE) {
       return this.validateActiveLink(location.pathname, '/', URL_SLUGS);
     }
-    if (location.hostname.includes('localhost')) {
-      const link = this.validateForLocalhost(URL_SLUGS);
-      return link !== '' ? link : this.validateForLocalhost(URL_BASES);
+    if (this.isLocalhost(location.hostname)) {
+      const link = this.checkUrlItems(process.env.GATSBY_SITE, URL_SLUGS);
+      return link !== null ? link : this.checkUrlItems(process.env.GATSBY_SITE, URL_SUBDOMAINS);
     }
-    return this.validateActiveLink(location.hostname, '.', URL_BASES);
+    return this.validateActiveLink(location.hostname, '.', URL_SUBDOMAINS);
   };
 
   // Takes the appropriate part of the URL and identifies which link it matches
   validateActiveLink = (name, token, urlItems) => {
     const slugs = name.split(token);
-    let slug;
-    if (slugs[1] === undefined || slugs[1] === '') {
-      slug = process.env.GATSBY_SITE;
-    } else {
-      slug = slugs[1];
-    }
-
-    const keys = Object.keys(urlItems);
-    const keyIndex = this.checkKeys(slug, keys, urlItems);
-    if (keyIndex !== -1) {
-      return keys[keyIndex];
-    }
-
-    // Slug doesn't match any of the links
-    return slug;
+    return this.checkUrlItems(slugs[1], urlItems);
   };
 
-  // Localhost at most requires validation from both URL_SLUGS and URL_BASES using the GATSBY_SITE variable
-  validateForLocalhost = urlItems => {
-    const keys = Object.keys(urlItems);
-    const keyIndex = this.checkKeys(process.env.GATSBY_SITE, keys, urlItems);
-    if (keyIndex !== -1) {
-      return keys[keyIndex];
-    }
-    return '';
-  };
+  checkUrlItems = (slug, urlItems) => {
+    const urlMapping = Object.entries(urlItems).find(([, value]) => value.includes(slug));
+    return urlMapping ? urlMapping[0] : null;
+  }
 
-  // Matches the slug with keys of URL_BASES or URL_SLUGS to return the index it is found
-  checkKeys = (slug, keys, urlItems) => {
-    for (let i = 0; i < keys.length; i += 1) {
-      const key = keys[i];
-      if (urlItems[key].indexOf(slug) >= 0) {
-        return i;
-      }
-    }
-    return -1;
+  isLocalhost = hostname => {
+    const found = LOCALHOST_NAMES.find(localhostName => {
+      return localhostName.includes(hostname);
+    });
+    return found !== undefined;
   };
 
   isActiveLink = link => {

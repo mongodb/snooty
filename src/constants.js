@@ -113,6 +113,6 @@ export const URL_SLUGS = {
   guides: ['guides'],
 };
 
-export const URL_BASES = {
+export const URL_SUBDOMAINS = {
   cloud: ['atlas', 'cloudmanager', 'opsmanager'],
 };
