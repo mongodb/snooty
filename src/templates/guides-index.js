@@ -3,24 +3,28 @@ import PropTypes from 'prop-types';
 import LandingPageCards from '../components/LandingPage/LandingPageCards';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
+import Navbar from '../components/Navbar';
 
 const Index = ({ pageContext: { pageMetadata, __refDocMapping } }) => {
   const guides = findKeyValuePair(getNestedValue(['ast', 'children'], __refDocMapping), 'name', 'guide-index') || [];
 
   return (
-    <div className="content">
-      <div className="guide-category-list">
-        <div className="section" id="guides">
-          <h1>
-            Guides
-            <a className="headerlink" href="#guides" title="Permalink to this headline">
-              ¶
-            </a>
-          </h1>
-          <LandingPageCards guides={guides.children} pageMetadata={pageMetadata} />
+    <React.Fragment>
+      <Navbar/>
+      <div className="content">
+        <div className="guide-category-list">
+          <div className="section" id="guides">
+            <h1>
+              Guides
+              <a className="headerlink" href="#guides" title="Permalink to this headline">
+                ¶
+              </a>
+            </h1>
+            <LandingPageCards guides={guides.children} pageMetadata={pageMetadata} />
+          </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SiteMetadata from './site-metadata';
-import Navbar from './Navbar';
 import { TabContext } from './tab-context';
 import { setLocalValue } from '../utils/browser-storage';
 
@@ -35,7 +34,6 @@ export default class DefaultLayout extends Component {
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
         <SiteMetadata />
-        <Navbar />
         {children}
       </TabContext.Provider>
     );

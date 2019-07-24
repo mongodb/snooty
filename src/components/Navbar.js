@@ -93,11 +93,8 @@ export default class Navbar extends Component {
 
   render() {
     this.navprops = this.modifyActiveLink();
-
     return (
-      <div>
-        <div id="navbar" data-navprops={this.navprops} />
-      </div>
+      <div id="navbar" className="navbar" data-navprops={this.navprops} />
     );
   }
 }
