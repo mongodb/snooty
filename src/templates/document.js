@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { getIncludeFile } from '../utils/get-include-file';
 import { getNestedValue } from '../utils/get-nested-value';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
+import Navbar from '../components/Navbar';
 
 const Document = props => {
   const {
@@ -34,33 +35,36 @@ const Document = props => {
   };
 
   return (
-    <div className="content">
-      <div id="main-column" className="main-column">
-        <span className="showNav" id="showNav">
-          Navigation
-        </span>
-        <div className="document">
-          <div className="documentwrapper">
-            <div className="bodywrapper">
-              <div className="body">
-                <div className="bc" />
-                {pageNodes.map((child, index) => (
-                  <ComponentFactory
-                    key={index}
-                    nodeData={child}
-                    refDocMapping={__refDocMapping}
-                    includes={includes}
-                    pageMetadata={pageMetadata}
-                    substitutions={getSubstitutions()}
-                  />
-                ))}
-                <Footer />
+    <React.Fragment>
+      <Navbar/>
+      <div className="content">
+        <div id="main-column" className="main-column">
+          <span className="showNav" id="showNav">
+            Navigation
+          </span>
+          <div className="document">
+            <div className="documentwrapper">
+              <div className="bodywrapper">
+                <div className="body">
+                  <div className="bc" />
+                  {pageNodes.map((child, index) => (
+                    <ComponentFactory
+                      key={index}
+                      nodeData={child}
+                      refDocMapping={__refDocMapping}
+                      includes={includes}
+                      pageMetadata={pageMetadata}
+                      substitutions={getSubstitutions()}
+                    />
+                  ))}
+                  <Footer />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
