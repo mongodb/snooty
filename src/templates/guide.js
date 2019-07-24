@@ -13,6 +13,7 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
 import { getNestedValue } from '../utils/get-nested-value';
 import { TabContext } from '../components/tab-context';
+import Navbar from '../components/Navbar';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -150,33 +151,36 @@ export default class Guide extends Component {
     const pageSlug = path.substr(1);
 
     return (
-      <div className="content">
-        <TOC
-          activeSection={activeSection}
-          sectionKeys={this.bodySections.map(section => section.name)}
-          disableScrollable={this.disableScrollable}
-        />
-        <div className="left-nav-space" />
-        <div id="main-column" className="main-column">
-          <div className="body" data-pagename={pageSlug}>
-            <GuideBreadcrumbs />
-            <GuideHeading
-              author={findKeyValuePair(this.sections, 'name', 'author')}
-              cloud={cloud}
-              description={findKeyValuePair(this.sections, 'name', 'result_description')}
-              drivers={drivers}
-              includes={pageContext.includes}
-              pageMetadata={pageContext.pageMetadata}
-              refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-              time={findKeyValuePair(this.sections, 'name', 'time')}
-              title={findKeyValuePair(this.sections, 'type', 'heading')}
-            />
-            {this.createSections()}
-            <Footer />
+      <React.Fragment>
+        <Navbar />
+        <div className="content">
+          <TOC
+            activeSection={activeSection}
+            sectionKeys={this.bodySections.map(section => section.name)}
+            disableScrollable={this.disableScrollable}
+          />
+          <div className="left-nav-space" />
+          <div id="main-column" className="main-column">
+            <div className="body" data-pagename={pageSlug}>
+              <GuideBreadcrumbs />
+              <GuideHeading
+                author={findKeyValuePair(this.sections, 'name', 'author')}
+                cloud={cloud}
+                description={findKeyValuePair(this.sections, 'name', 'result_description')}
+                drivers={drivers}
+                includes={pageContext.includes}
+                pageMetadata={pageContext.pageMetadata}
+                refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+                time={findKeyValuePair(this.sections, 'name', 'time')}
+                title={findKeyValuePair(this.sections, 'type', 'heading')}
+              />
+              {this.createSections()}
+              <Footer />
+            </div>
           </div>
+          <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
         </div>
-        <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
-      </div>
+      </React.Fragment>
     );
   }
 }

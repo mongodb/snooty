@@ -1,343 +1,356 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Landing Page renders correctly 1`] = `
-<div
-  class="content"
->
+Array [
+  <div>
+    <div
+      data-navprops="{\\"links\\": [
+                    {\\"url\\": \\"https://docs.mongodb.com/manual/\\",\\"text\\": \\"Server\\", \\"active\\": false},
+                    {\\"url\\": \\"https://docs.mongodb.com/ecosystem/drivers/\\",\\"text\\": \\"Drivers\\", \\"active\\": false},
+                    {\\"url\\": \\"https://docs.mongodb.com/cloud/\\",\\"text\\": \\"Cloud\\", \\"active\\": false},
+                    {\\"url\\": \\"https://docs.mongodb.com/tools/\\",\\"text\\": \\"Tools\\", \\"active\\": false},
+                    {\\"url\\": \\"https://docs.mongodb.com/guides/\\",\\"text\\": \\"Guides\\", \\"active\\": false}]}"
+      id="navbar"
+    />
+  </div>,
   <div
-    class="guide-category-list"
+    class="content"
   >
     <div
-      class="section"
-      id="guides"
+      class="guide-category-list"
     >
-      <h1>
-        Guides
-        <a
-          class="headerlink"
-          href="#guides"
-          title="Permalink to this headline"
-        >
-          ¶
-        </a>
-      </h1>
-      <section
-        class="guide-category"
+      <div
+        class="section"
+        id="guides"
       >
-        <div
-          class="guide-category__title guide-category__title--getting-started"
+        <h1>
+          Guides
+          <a
+            class="headerlink"
+            href="#guides"
+            title="Permalink to this headline"
+          >
+            ¶
+          </a>
+        </h1>
+        <section
+          class="guide-category"
         >
-          Getting Started
-        </div>
-        <div
-          class="guide-category__guides"
-        >
           <div
-            class="guide-column"
+            class="guide-category__title guide-category__title--getting-started"
           >
-            <a
-              class="guide guide--regular"
-              href="server/introduction"
-            >
-              <div
-                class="guide__title"
-              >
-                Structure your Data for MongoDB
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                15min
-              </div>
-            </a>
-            <div
-              class="guide guide--jumbo guide--expanded"
-            >
-              <div
-                class="guide__title"
-              >
-                MongoDB in the Cloud
-              </div>
-              <ul
-                class="guide__body"
-              >
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="cloud/atlas"
-                  >
-                    Create an Atlas Account and Cluster
-                  </a>
-                </li>
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="cloud/connectionstring"
-                  >
-                    Set Up Atlas Connectivity
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div
-              class="guide guide--jumbo guide--expanded"
-            >
-              <div
-                class="guide__title"
-              >
-                CRUD Guides: Create, Read, Update, and Delete Data
-              </div>
-              <ul
-                class="guide__body"
-              >
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="server/insert"
-                  >
-                    Insert Data into MongoDB
-                  </a>
-                </li>
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="server/read"
-                  >
-                    Read Data from MongoDB
-                  </a>
-                </li>
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="server/read_queries"
-                  >
-                    Read Data from MongoDB With Queries
-                  </a>
-                </li>
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="server/read_operators"
-                  >
-                    Read Data using Operators and Compound Queries
-                  </a>
-                </li>
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="server/update"
-                  >
-                    Update Data in MongoDB
-                  </a>
-                </li>
-                <li
-                  class="guide__entry"
-                >
-                  <a
-                    href="server/delete"
-                  >
-                    Delete Data from MongoDB
-                  </a>
-                </li>
-              </ul>
-            </div>
+            Getting Started
           </div>
           <div
-            class="guide-column"
+            class="guide-category__guides"
           >
-            <a
-              class="guide guide--regular"
-              href="server/install"
-            >
-              <div
-                class="guide__title"
-              >
-                Install MongoDB
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                10min
-              </div>
-            </a>
             <div
-              class="guide guide--jumbo guide--expanded"
+              class="guide-column"
             >
+              <a
+                class="guide guide--regular"
+                href="server/introduction"
+              >
+                <div
+                  class="guide__title"
+                >
+                  Structure your Data for MongoDB
+                </div>
+                <div
+                  class="guide__body"
+                />
+                <div
+                  class="guide__time"
+                >
+                  15min
+                </div>
+              </a>
               <div
-                class="guide__title"
+                class="guide guide--jumbo guide--expanded"
               >
-                Migrate to MongoDB Atlas
+                <div
+                  class="guide__title"
+                >
+                  MongoDB in the Cloud
+                </div>
+                <ul
+                  class="guide__body"
+                >
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="cloud/atlas"
+                    >
+                      Create an Atlas Account and Cluster
+                    </a>
+                  </li>
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="cloud/connectionstring"
+                    >
+                      Set Up Atlas Connectivity
+                    </a>
+                  </li>
+                </ul>
               </div>
-              <ul
-                class="guide__body"
+              <div
+                class="guide guide--jumbo guide--expanded"
               >
-                <li
-                  class="guide__entry"
+                <div
+                  class="guide__title"
                 >
-                  <a
-                    href="cloud/migrate-from-aws-to-atlas"
-                  >
-                    Migrate a MongoDB Replica Set from AWS to MongoDB Atlas
-                  </a>
-                </li>
-                <li
-                  class="guide__entry"
+                  CRUD Guides: Create, Read, Update, and Delete Data
+                </div>
+                <ul
+                  class="guide__body"
                 >
-                  <a
-                    href="cloud/migrate-from-compose"
+                  <li
+                    class="guide__entry"
                   >
-                    Migrate from Compose to MongoDB Atlas
-                  </a>
-                </li>
-              </ul>
+                    <a
+                      href="server/insert"
+                    >
+                      Insert Data into MongoDB
+                    </a>
+                  </li>
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="server/read"
+                    >
+                      Read Data from MongoDB
+                    </a>
+                  </li>
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="server/read_queries"
+                    >
+                      Read Data from MongoDB With Queries
+                    </a>
+                  </li>
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="server/read_operators"
+                    >
+                      Read Data using Operators and Compound Queries
+                    </a>
+                  </li>
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="server/update"
+                    >
+                      Update Data in MongoDB
+                    </a>
+                  </li>
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="server/delete"
+                    >
+                      Delete Data from MongoDB
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <a
-              class="guide guide--regular"
-              href="server/drivers"
+            <div
+              class="guide-column"
             >
-              <div
-                class="guide__title"
+              <a
+                class="guide guide--regular"
+                href="server/install"
               >
-                Connect to MongoDB
+                <div
+                  class="guide__title"
+                >
+                  Install MongoDB
+                </div>
+                <div
+                  class="guide__body"
+                />
+                <div
+                  class="guide__time"
+                >
+                  10min
+                </div>
+              </a>
+              <div
+                class="guide guide--jumbo guide--expanded"
+              >
+                <div
+                  class="guide__title"
+                >
+                  Migrate to MongoDB Atlas
+                </div>
+                <ul
+                  class="guide__body"
+                >
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="cloud/migrate-from-aws-to-atlas"
+                    >
+                      Migrate a MongoDB Replica Set from AWS to MongoDB Atlas
+                    </a>
+                  </li>
+                  <li
+                    class="guide__entry"
+                  >
+                    <a
+                      href="cloud/migrate-from-compose"
+                    >
+                      Migrate from Compose to MongoDB Atlas
+                    </a>
+                  </li>
+                </ul>
               </div>
-              <div
-                class="guide__body"
-              />
-              <ul
-                class="guide__pills "
-                role="tablist"
+              <a
+                class="guide guide--regular"
+                href="server/drivers"
               >
-                <li
-                  data-tabid="shell"
+                <div
+                  class="guide__title"
                 >
-                  <span
-                    class="guide__pill   guide__pill"
-                    role="button"
-                    tabindex="0"
+                  Connect to MongoDB
+                </div>
+                <div
+                  class="guide__body"
+                />
+                <ul
+                  class="guide__pills "
+                  role="tablist"
+                >
+                  <li
+                    data-tabid="shell"
                   >
-                    Mongo Shell
-                  </span>
-                </li>
-                <li
-                  data-tabid="compass"
-                >
-                  <span
-                    class="guide__pill   guide__pill"
-                    role="button"
-                    tabindex="1"
+                    <span
+                      class="guide__pill   guide__pill"
+                      role="button"
+                      tabindex="0"
+                    >
+                      Mongo Shell
+                    </span>
+                  </li>
+                  <li
+                    data-tabid="compass"
                   >
-                    Compass
-                  </span>
-                </li>
-                <li
-                  data-tabid="python"
-                >
-                  <span
-                    class="guide__pill   guide__pill"
-                    role="button"
-                    tabindex="2"
+                    <span
+                      class="guide__pill   guide__pill"
+                      role="button"
+                      tabindex="1"
+                    >
+                      Compass
+                    </span>
+                  </li>
+                  <li
+                    data-tabid="python"
                   >
-                    Python
-                  </span>
-                </li>
-                <li
-                  data-tabid="java-sync"
-                >
-                  <span
-                    class="guide__pill   guide__pill"
-                    role="button"
-                    tabindex="3"
+                    <span
+                      class="guide__pill   guide__pill"
+                      role="button"
+                      tabindex="2"
+                    >
+                      Python
+                    </span>
+                  </li>
+                  <li
+                    data-tabid="java-sync"
                   >
-                    Java (Sync)
-                  </span>
-                </li>
-                <li
-                  class="guide__pill guide__pill--seeall"
+                    <span
+                      class="guide__pill   guide__pill"
+                      role="button"
+                      tabindex="3"
+                    >
+                      Java (Sync)
+                    </span>
+                  </li>
+                  <li
+                    class="guide__pill guide__pill--seeall"
+                  >
+                    See All
+                  </li>
+                </ul>
+                <div
+                  class="guide__time"
                 >
-                  See All
-                </li>
-              </ul>
-              <div
-                class="guide__time"
+                  15min
+                </div>
+              </a>
+            </div>
+            <div
+              class="guide-column"
+            >
+              <a
+                class="guide guide--regular"
+                href="server/auth"
               >
-                15min
-              </div>
-            </a>
+                <div
+                  class="guide__title"
+                >
+                  Secure your MongoDB Deployment
+                </div>
+                <div
+                  class="guide__body"
+                />
+                <div
+                  class="guide__time"
+                >
+                  10min
+                </div>
+              </a>
+              <a
+                class="guide guide--regular"
+                href="server/import"
+              >
+                <div
+                  class="guide__title"
+                >
+                  Import Data into MongoDB
+                </div>
+                <div
+                  class="guide__body"
+                />
+                <div
+                  class="guide__time"
+                >
+                  15min
+                </div>
+              </a>
+              <a
+                class="guide guide--regular"
+                href="stitch/react_googleauth"
+              >
+                <div
+                  class="guide__title"
+                >
+                  Sample App: React + Stitch + Google Authentication
+                </div>
+                <div
+                  class="guide__body"
+                />
+                <div
+                  class="guide__time"
+                >
+                  15min
+                </div>
+              </a>
+            </div>
           </div>
-          <div
-            class="guide-column"
-          >
-            <a
-              class="guide guide--regular"
-              href="server/auth"
-            >
-              <div
-                class="guide__title"
-              >
-                Secure your MongoDB Deployment
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                10min
-              </div>
-            </a>
-            <a
-              class="guide guide--regular"
-              href="server/import"
-            >
-              <div
-                class="guide__title"
-              >
-                Import Data into MongoDB
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                15min
-              </div>
-            </a>
-            <a
-              class="guide guide--regular"
-              href="stitch/react_googleauth"
-            >
-              <div
-                class="guide__title"
-              >
-                Sample App: React + Stitch + Google Authentication
-              </div>
-              <div
-                class="guide__body"
-              />
-              <div
-                class="guide__time"
-              >
-                15min
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
