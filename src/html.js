@@ -38,12 +38,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       {headComponents}
     </head>
     <body {...bodyAttributes}>
-      <div
-        id="navbar"
-        data-navprops='{"links": [{"url": "https://docs.mongodb.com/manual/","text": "Server"},{"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},{"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},{"url": "https://docs.mongodb.com/tools/","text": "Tools"},{"url": "https://docs.mongodb.com/guides/","text": "Guides","active": true}]}'
-      />
       <script async src={withPrefix('scripts/segment.js')} />
-      <script async src={withPrefix('docs-tools/navbar.min.js')} />
       {preBodyComponents}
       <div key="body" id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
       {postBodyComponents}
