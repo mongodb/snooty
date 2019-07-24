@@ -8,11 +8,11 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
-import { getLocalValue, setLocalValue } from '../utils/browser-storage';
+import { getLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
 import { getNestedValue } from '../utils/get-nested-value';
-import DefaultLayout from '../components/layout';
+import { TabContext } from '../components/tab-context';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -27,12 +27,12 @@ export default class Guide extends Component {
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
 
     this.state = {
-      activeTabs: {},
       activeSection: getNestedValue([0, 'name'], this.bodySections),
       isScrollable: true,
     };
 
     this.sectionRefs = this.bodySections.map(() => React.createRef());
+    this.namedTabsets = new Set();
   }
 
   componentDidMount() {
@@ -76,7 +76,8 @@ export default class Guide extends Component {
     }
   };
 
-  addTabset = (tabsetName, tabData) => {
+  addGuidesTabset = (tabsetName, tabData) => {
+    const { setActiveTab } = this.context;
     let tabs = tabData.map(tab => tab.argument[0].value);
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
@@ -85,13 +86,14 @@ export default class Guide extends Component {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs, LANGUAGES);
     } else {
-      this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName);
+      setActiveTab(tabsetName, getLocalValue(tabsetName) || tabs[0]);
     }
   };
 
   matchArraySorting = (tabs, referenceArray) => referenceArray.filter(t => tabs.includes(t));
 
   setNamedTabData = (tabsetName, tabs, constants) => {
+    const { setActiveTab } = this.context;
     this.setState(
       prevState => ({
         [tabsetName]: this.matchArraySorting(
@@ -99,23 +101,8 @@ export default class Guide extends Component {
           constants
         ),
       }),
-      () => this.setActiveTab(getLocalValue(tabsetName) || tabs[0], tabsetName)
+      () => setActiveTab(tabsetName, getLocalValue(tabsetName) || tabs[0])
     );
-  };
-
-  setActiveTab = (value, tabsetName) => {
-    const { [tabsetName]: tabs } = this.state;
-    let activeTab = value;
-    if (tabs && !tabs.includes(value)) {
-      activeTab = tabs[0];
-    }
-    this.setState(prevState => ({
-      activeTabs: {
-        ...prevState.activeTabs,
-        [tabsetName]: activeTab,
-      },
-    }));
-    setLocalValue(tabsetName, activeTab);
   };
 
   // Temporarily disable scrolling listener by changing state of 'isScrollable'
@@ -128,7 +115,6 @@ export default class Guide extends Component {
 
   createSections() {
     const { pageContext } = this.props;
-    const { activeTabs } = this.state;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
@@ -145,13 +131,12 @@ export default class Guide extends Component {
     return this.bodySections.map((section, index) => {
       return (
         <GuideSection
+          sectionDepth={2}
           guideSectionData={section}
           key={index}
           headingRef={this.sectionRefs[index]}
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-          setActiveTab={this.setActiveTab}
-          addTabset={this.addTabset}
-          activeTabs={activeTabs}
+          addTabset={this.addGuidesTabset}
           includes={pageContext.includes}
           pageMetadata={pageContext.pageMetadata}
         />
@@ -160,48 +145,43 @@ export default class Guide extends Component {
   }
 
   render() {
-    const { pageContext } = this.props;
-    const { activeSection, activeTabs, cloud, drivers } = this.state;
-    const pageSlug = this.props['*']; // eslint-disable-line react/destructuring-assignment
+    const { pageContext, path } = this.props;
+    const { activeSection, cloud, drivers } = this.state;
+    const pageSlug = path.substr(1);
 
     return (
-      <DefaultLayout>
-        <div className="content">
-          <TOC
-            activeSection={activeSection}
-            sectionKeys={this.bodySections.map(section => section.name)}
-            disableScrollable={this.disableScrollable}
-          />
-          <div className="left-nav-space" />
-          <div id="main-column" className="main-column">
-            <div className="body" data-pagename={pageSlug}>
-              <GuideBreadcrumbs />
-              <GuideHeading
-                activeTabs={activeTabs}
-                author={findKeyValuePair(this.sections, 'name', 'author')}
-                cloud={cloud}
-                description={findKeyValuePair(this.sections, 'name', 'result_description')}
-                drivers={drivers}
-                includes={pageContext.includes}
-                pageMetadata={pageContext.pageMetadata}
-                refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-                setActiveTab={this.setActiveTab}
-                time={findKeyValuePair(this.sections, 'name', 'time')}
-                title={findKeyValuePair(this.sections, 'type', 'heading')}
-              />
-              {this.createSections()}
-              <Footer />
-            </div>
+      <div className="content">
+        <TOC
+          activeSection={activeSection}
+          sectionKeys={this.bodySections.map(section => section.name)}
+          disableScrollable={this.disableScrollable}
+        />
+        <div className="left-nav-space" />
+        <div id="main-column" className="main-column">
+          <div className="body" data-pagename={pageSlug}>
+            <GuideBreadcrumbs />
+            <GuideHeading
+              author={findKeyValuePair(this.sections, 'name', 'author')}
+              cloud={cloud}
+              description={findKeyValuePair(this.sections, 'name', 'result_description')}
+              drivers={drivers}
+              includes={pageContext.includes}
+              pageMetadata={pageContext.pageMetadata}
+              refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+              time={findKeyValuePair(this.sections, 'name', 'time')}
+              title={findKeyValuePair(this.sections, 'type', 'heading')}
+            />
+            {this.createSections()}
+            <Footer />
           </div>
-          <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
         </div>
-      </DefaultLayout>
+        <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
+      </div>
     );
   }
 }
 
 Guide.propTypes = {
-  '*': PropTypes.string.isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
@@ -212,4 +192,7 @@ Guide.propTypes = {
     includes: PropTypes.objectOf(PropTypes.object).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
+  path: PropTypes.string.isRequired,
 };
+
+Guide.contextType = TabContext;

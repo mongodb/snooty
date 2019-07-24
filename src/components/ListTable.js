@@ -146,9 +146,11 @@ ListTable.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
     options: PropTypes.shape({
+      align: PropTypes.string,
       class: PropTypes.string,
       'header-rows': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       'stub-columns': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      width: PropTypes.string,
       widths: PropTypes.string,
     }),
   }).isRequired,

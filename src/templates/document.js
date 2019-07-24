@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../components/ComponentFactory';
-import DefaultLayout from '../components/layout';
 import Footer from '../components/Footer';
 import { getIncludeFile } from '../utils/get-include-file';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -35,34 +34,33 @@ const Document = props => {
   };
 
   return (
-    <DefaultLayout>
-      <div className="content">
-        <div id="main-column" className="main-column">
-          <span className="showNav" id="showNav">
-            Navigation
-          </span>
-          <div className="document">
-            <div className="documentwrapper">
-              <div className="bodywrapper">
-                <div className="body">
-                  {pageNodes.map((child, index) => (
-                    <ComponentFactory
-                      key={index}
-                      nodeData={child}
-                      refDocMapping={__refDocMapping}
-                      includes={includes}
-                      pageMetadata={pageMetadata}
-                      substitutions={getSubstitutions()}
-                    />
-                  ))}
-                  <Footer />
-                </div>
+    <div className="content">
+      <div id="main-column" className="main-column">
+        <span className="showNav" id="showNav">
+          Navigation
+        </span>
+        <div className="document">
+          <div className="documentwrapper">
+            <div className="bodywrapper">
+              <div className="body">
+                <div className="bc" />
+                {pageNodes.map((child, index) => (
+                  <ComponentFactory
+                    key={index}
+                    nodeData={child}
+                    refDocMapping={__refDocMapping}
+                    includes={includes}
+                    pageMetadata={pageMetadata}
+                    substitutions={getSubstitutions()}
+                  />
+                ))}
+                <Footer />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </DefaultLayout>
+    </div>
   );
 };
 

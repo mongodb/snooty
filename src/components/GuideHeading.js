@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import ComponentFactory from './ComponentFactory';
 import Pills from './Pills';
+import { TabContext } from './tab-context';
 import { stringifyTab } from '../constants';
 import { getNestedValue } from '../utils/get-nested-value';
 
 // TODO: Improve validation of template content
-const GuideHeading = ({ activeTabs, author, cloud, description, drivers, setActiveTab, time, title, ...rest }) => {
+const GuideHeading = ({ author, cloud, description, drivers, time, title, ...rest }) => {
+  const { activeTabs, setActiveTab } = useContext(TabContext);
   const setActivePill = pillsetName => pill => {
-    setActiveTab(pill, pillsetName);
+    setActiveTab(pillsetName, pill);
   };
 
   const displayTitle = getNestedValue(['children', 0, 'value'], title);
@@ -92,16 +94,11 @@ GuideHeading.propTypes = {
       })
     ).isRequired,
   }).isRequired,
-  activeTabs: PropTypes.shape({
-    cloud: PropTypes.string,
-    drivers: PropTypes.string,
-  }).isRequired,
   cloud: PropTypes.arrayOf(PropTypes.string),
   description: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   drivers: PropTypes.arrayOf(PropTypes.string),
-  setActiveTab: PropTypes.func.isRequired,
   time: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
