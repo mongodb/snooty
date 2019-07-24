@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { TEMPLATE_TYPE_ATLAS } from './constants';
+import { TabContext } from '../tab-context';
 import CloudForm from './CloudForm';
 import LocalForm from './LocalForm';
 
-const URIWriter = ({ activeTabs: { cloud }, handleUpdateURIWriter }) => {
+const URIWriter = ({ handleUpdateURIWriter }) => {
+  const { activeTabs } = useContext(TabContext);
+
   const handleUpdateURI = uriType => uri => {
     handleUpdateURIWriter({
       [uriType]: uri,
     });
   };
 
-  const isAtlas = cloud === TEMPLATE_TYPE_ATLAS;
+  const isAtlas = activeTabs.cloud === TEMPLATE_TYPE_ATLAS;
 
   return (
     <form className="uriwriter__form" autoComplete="off">
@@ -25,9 +28,6 @@ const URIWriter = ({ activeTabs: { cloud }, handleUpdateURIWriter }) => {
 };
 
 URIWriter.propTypes = {
-  activeTabs: PropTypes.shape({
-    cloud: PropTypes.string,
-  }).isRequired,
   handleUpdateURIWriter: PropTypes.func.isRequired,
 };
 

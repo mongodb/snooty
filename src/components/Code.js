@@ -5,6 +5,7 @@ import Highlight from 'react-highlight';
 import { reportAnalytics } from '../utils/report-analytics';
 import 'highlight.js/styles/a11y-light.css';
 import codeStyle from '../styles/code.module.css';
+import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import {
   URI_PLACEHOLDER,
@@ -95,9 +96,9 @@ export default class Code extends Component {
 
   render() {
     const { copied, showCopyButton } = this.state;
+    const { activeTabs } = this.context;
     const {
       nodeData: { value, lang },
-      activeTabs,
       uriWriter: { cloudURI, localURI },
     } = this.props;
     let code = value;
@@ -145,26 +146,20 @@ export default class Code extends Component {
 
 Code.propTypes = {
   nodeData: PropTypes.shape({
+    lang: PropTypes.string,
     value: PropTypes.string.isRequired,
   }).isRequired,
-  activeTabs: PropTypes.shape({
-    cloud: PropTypes.string,
-  }),
   uriWriter: PropTypes.shape({
-    atlasVersion: PropTypes.string,
-    authSource: PropTypes.string,
-    database: PropTypes.string,
-    localEnv: PropTypes.string,
-    hostlist: PropTypes.object,
-    replicaSet: PropTypes.string,
-    username: PropTypes.string,
+    cloudURI: PropTypes.object,
+    localURI: PropTypes.object,
   }),
 };
 
 Code.defaultProps = {
-  activeTabs: undefined,
   uriWriter: {
     cloudURI: undefined,
     localURI: undefined,
   },
 };
+
+Code.contextType = TabContext;
