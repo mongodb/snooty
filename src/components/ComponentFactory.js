@@ -25,6 +25,8 @@ import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
+import Line from './Line';
+import LineBlock from './LineBlock';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -71,6 +73,8 @@ export default class ComponentFactory extends Component {
       figure: Figure,
       heading: Heading,
       include: Include,
+      line: Line,
+      line_block: LineBlock,
       list: List,
       listItem: ListItem,
       'list-table': ListTable,
