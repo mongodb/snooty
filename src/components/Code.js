@@ -103,20 +103,19 @@ export default class Code extends Component {
       uriWriter: { cloudURI, localURI },
     } = this.props;
     let code = value;
-    let isJsEnabled = false;
     if (activeTabs && URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
       const { cloud } = activeTabs;
       const activeUri = cloud === 'cloud' ? cloudURI : localURI;
       code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uriData={activeUri} />);
       if (isBrowser()) code = this.htmlDecode(code);
-      isJsEnabled = Object.keys(activeTabs).length !== 0;
     }
+    const hasActiveTabs = Object.keys(activeTabs).length !== 0;
 
     // TODO: when we move off docs-tools CSS, change the copy button from <a> to <button>
     return (
       <div className="button-code-block">
         <div className="button-row">
-          {showCopyButton && isJsEnabled && (
+          {showCopyButton && hasActiveTabs && (
             <a // eslint-disable-line jsx-a11y/anchor-is-valid, jsx-a11y/interactive-supports-focus
               className="code-button--copy code-button"
               role="button"

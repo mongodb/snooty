@@ -126,13 +126,10 @@ export default class Tabs extends Component {
           if (tabName) tabName = tabName.toLowerCase();
 
           // If there are no activeTabs, js would typically be disabled
-          let tabContent = this.createFragment(tab, index);
-          if (activeTabs) {
-            tabContent =
-              Object.keys(activeTabs).length === 0
-                ? this.createFragment(tab, index)
-                : activeTabs[tabsetName] === tabName && this.createFragment(tab, index);
-          }
+          const tabContent =
+            !activeTabs || Object.getOwnPropertyNames(activeTabs).length === 0
+              ? this.createFragment(tab, index)
+              : activeTabs[tabsetName] === tabName && this.createFragment(tab, index);
 
           return tabContent;
         })}
