@@ -13,6 +13,7 @@ import {
   URISTRING_SHELL_PLACEHOLDER,
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 } from './URIWriter/constants';
+import { isBrowser } from '../utils/is-browser';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -106,13 +107,15 @@ export default class Code extends Component {
       const { cloud } = activeTabs;
       const activeUri = cloud === 'cloud' ? cloudURI : localURI;
       code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uriData={activeUri} />);
-      code = this.htmlDecode(code);
+      if (isBrowser()) code = this.htmlDecode(code);
     }
+    const hasActiveTabs = Object.keys(activeTabs).length !== 0;
+
     // TODO: when we move off docs-tools CSS, change the copy button from <a> to <button>
     return (
       <div className="button-code-block">
         <div className="button-row">
-          {showCopyButton && (
+          {showCopyButton && hasActiveTabs && (
             <a // eslint-disable-line jsx-a11y/anchor-is-valid, jsx-a11y/interactive-supports-focus
               className="code-button--copy code-button"
               role="button"

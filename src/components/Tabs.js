@@ -50,6 +50,16 @@ export default class Tabs extends Component {
     });
   };
 
+  createFragment = (tab, index) => {
+    return (
+      <React.Fragment key={index}>
+        {tab.children.map((tabChild, tabChildIndex) => (
+          <ComponentFactory {...this.props} nodeData={tabChild} key={tabChildIndex} />
+        ))}
+      </React.Fragment>
+    );
+  };
+
   render() {
     const { tabsetName } = this.state;
     const { nodeData } = this.props;
@@ -68,12 +78,14 @@ export default class Tabs extends Component {
             {tabs.map((tab, index) => {
               let tabName = getNestedValue(['argument', 0, 'value'], tab);
               if (tabName) tabName = tabName.toLowerCase();
+              let ariaSelect = 'false';
+              if (activeTabs) ariaSelect = activeTabs[tabsetName] === tabName ? 'true' : 'false';
               return (
                 <li
                   className="tab-strip__element"
                   data-tabid={tabName}
                   role="tab"
-                  aria-selected={activeTabs[tabsetName] === tabName ? 'true' : 'false'}
+                  aria-selected={ariaSelect}
                   key={index}
                   onClick={async e => {
                     const element = e.target;
@@ -112,15 +124,14 @@ export default class Tabs extends Component {
         {tabs.map((tab, index) => {
           let tabName = getNestedValue(['argument', 0, 'value'], tab);
           if (tabName) tabName = tabName.toLowerCase();
-          return (
-            activeTabs[tabsetName] === tabName && (
-              <React.Fragment key={index}>
-                {tab.children.map((tabChild, tabChildIndex) => (
-                  <ComponentFactory {...this.props} nodeData={tabChild} key={tabChildIndex} />
-                ))}
-              </React.Fragment>
-            )
-          );
+
+          // If there are no activeTabs, js would typically be disabled
+          const tabContent =
+            !activeTabs || Object.getOwnPropertyNames(activeTabs).length === 0
+              ? this.createFragment(tab, index)
+              : activeTabs[tabsetName] === tabName && this.createFragment(tab, index);
+
+          return tabContent;
         })}
       </React.Fragment>
     );

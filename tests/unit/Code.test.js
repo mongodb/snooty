@@ -9,3 +9,8 @@ it('renders correctly', () => {
   const tree = shallow(<Code nodeData={mockData} activeTabs={{ cloud: undefined }} />);
   expect(tree).toMatchSnapshot();
 });
+
+it('renders with javascript disabled correctly', () => {
+  const tree = shallow(<Code nodeData={mockData} activeTabs={{}}/>)
+  expect(tree).toMatchSnapshot();
+});

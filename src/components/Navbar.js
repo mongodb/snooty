@@ -61,7 +61,7 @@ export default class Navbar extends Component {
   checkUrlItems = (slug, urlItems) => {
     const urlMapping = Object.entries(urlItems).find(([, value]) => value.includes(slug));
     return urlMapping ? urlMapping[0] : null;
-  }
+  };
 
   isLocalhost = hostname => {
     const found = LOCALHOST_NAMES.find(localhostName => {
@@ -93,8 +93,6 @@ export default class Navbar extends Component {
 
   render() {
     this.navprops = this.modifyActiveLink();
-    return (
-      <div id="navbar" className="navbar" data-navprops={this.navprops} />
-    );
+    return <div id="navbar" className="navbar" data-navprops={this.navprops} />;
   }
 }
