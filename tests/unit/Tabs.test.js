@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Tabs from '../../src/components/Tabs';
 
 // data for this component
@@ -16,6 +16,9 @@ const context = {
 // GitHub issue: https://github.com/airbnb/enzyme/issues/1959
 const mountTabs = ({ mockData, mockAddTabset }) =>
   mount(<Tabs nodeData={mockData} addTabset={mockAddTabset} />, { context });
+
+const shallowTabs = ({ mockData, mockAddTabset }) =>
+  shallow(<Tabs nodeData={mockData} addTabset={mockAddTabset} />, { context });
 
 describe('Tabs testing', () => {
   describe('Tab unit tests', () => {
@@ -84,7 +87,7 @@ describe('Tabs testing', () => {
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
-      wrapper = mountTabs({
+      wrapper = shallowTabs({
         mockData: mockDataHidden,
         mockAddTabset,
       });
@@ -94,4 +97,21 @@ describe('Tabs testing', () => {
       expect(wrapper.find('.tab-strip')).toHaveLength(0);
     });
   });
+
+  describe('when javascript is disabled', () => {
+    let wrapper;
+    const mockAddTabset = jest.fn();
+  
+    beforeAll(() => {
+      wrapper = shallowTabs({
+        mockData: mockDataPlatforms,
+        mockAddTabset,
+      });
+    });
+
+    it('renders tabs in the set', () => {
+      expect(wrapper.find('.tab-strip')).toHaveLength(1);
+    });
+  });
 });
+
