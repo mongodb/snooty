@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
+import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
+import { getIncludeFile } from '../utils/get-include-file';
 import { getNestedValue } from '../utils/get-nested-value';
 import { setLocalValue } from '../utils/browser-storage';
 
@@ -10,16 +12,45 @@ export default class DefaultLayout extends Component {
     super(props);
 
     const {
-      pageContext: { __refDocMapping },
+      pageContext: { includes, __refDocMapping },
     } = props;
     const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
 
+    this.incorporateIncludes(pageNodes, 'name', 'include', includes);
+    this.substitutions = this.getSubstitutions(pageNodes);
     this.normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
 
     this.state = {
       activeTabs: {},
     };
   }
+
+  incorporateIncludes = (nodes, key, value, includes) => {
+    const searchNode = node => {
+      // If a cssclass node has no children, add the proceeding node to its array of children,
+      // thereby appending the specified class to that component.
+      if (node[key] === value) {
+        const filename = getNestedValue(['argument', 0, 'value'], node);
+        node.children = getIncludeFile(includes, filename); // eslint-disable-line no-param-reassign
+      }
+      if (node.children) {
+        node.children.forEach(searchNode);
+      }
+    };
+    nodes.forEach(searchNode);
+  };
+
+  // Identify and save all substitutions as defined on this page and in its included files
+  getSubstitutions = pageNodes => {
+    // Find substitutions on page
+    const substitutions = findAllKeyValuePairs(pageNodes, 'type', 'substitution_definition');
+
+    // Create a map wherein each key is the word to be replaced, and each value is the nodes to replace it with.
+    return substitutions.reduce((map, sub) => {
+      map[sub.name] = sub.children; // eslint-disable-line no-param-reassign
+      return map;
+    }, {});
+  };
 
   // Modify the AST so that the node modified by cssclass is included in its "children" array.
   // Delete this modified node from its original location.
@@ -60,7 +91,7 @@ export default class DefaultLayout extends Component {
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
         <SiteMetadata />
-        {children}
+        {React.cloneElement(children, { substitutions: this.substitutions })}
       </TabContext.Provider>
     );
   }
