@@ -25,6 +25,7 @@ import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
+import CssClass from './CssClass';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -36,8 +37,8 @@ import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
 import RoleTerm from './Roles/Term';
 
-const IGNORED_NAMES = ['class', 'cssclass', 'default-domain'];
-const IGNORED_TYPES = ['class', 'comment', 'cssclass', 'substitution_definition', 'target'];
+const IGNORED_NAMES = ['default-domain'];
+const IGNORED_TYPES = ['comment', 'substitution_definition', 'target'];
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -65,6 +66,8 @@ export default class ComponentFactory extends Component {
       admonition: Admonition,
       block_quote: BlockQuote,
       code: Code,
+      class: CssClass,
+      cssclass: CssClass,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
