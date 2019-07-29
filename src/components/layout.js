@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
-import { formatIncludeKey } from '../utils/get-include-file';
 import { getNestedValue } from '../utils/get-nested-value';
 import { setLocalValue } from '../utils/browser-storage';
 
@@ -89,7 +88,7 @@ export default class DefaultLayout extends Component {
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
         <SiteMetadata />
-        {React.cloneElement(children, { includes: this.includeNodes, substitutions: this.substitutions })}
+        {React.cloneElement(children, { substitutions: this.substitutions })}
       </TabContext.Provider>
     );
   }
