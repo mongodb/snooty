@@ -36,7 +36,7 @@ const Document = props => {
 
   return (
     <React.Fragment>
-      <Navbar/>
+      <Navbar />
       <div className="content">
         <div id="main-column" className="main-column">
           <span className="showNav" id="showNav">
