@@ -23,7 +23,7 @@ import mockDataRef from './data/Role-ref.test.json';
 import mockDataSetting from './data/Role-setting.test.json';
 import mockDataTerm from './data/Role-term.test.json';
 import mockDataUpdate from './data/Role-update.test.json';
-import mockPageMetadata from './data/guidesPageMetadata.json'
+import mockPageMetadata from './data/guidesPageMetadata.json';
 
 it('renders correctly a role "authrole"', () => {
   const tree = shallow(<RoleCode nodeData={mockDataAuthrole} />);
