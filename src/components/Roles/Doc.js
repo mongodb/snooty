@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../../utils/get-nested-value';
 
@@ -16,9 +16,11 @@ const RoleDoc = ({ nodeData: { label, target }, pageMetadata }) => {
 
   const labelDisplay = label && label.value ? label.value : getLinkText(target);
   return (
-    <Link to={target} className="reference internal">
+    // TODO: Replace <a> with <Link> when back button behavior is fixed for the component
+    // GitHub issue: https://github.com/gatsbyjs/gatsby/issues/8357
+    <a href={withPrefix(target)} className="reference internal">
       {labelDisplay}
-    </Link>
+    </a>
   );
 };
 

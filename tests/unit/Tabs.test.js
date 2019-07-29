@@ -1,6 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Tabs from '../../src/components/Tabs';
+import { TabContext } from '../../src/components/tab-context';
+import { PLATFORMS } from '../../src/constants';
 
 // data for this component
 import mockDataPlatforms from './data/Tabs-platform.test.json';
@@ -14,8 +16,13 @@ const context = {
 
 // TODO: Update commented-out tests to make use of Enzyme support for React Context after it has been implemented.
 // GitHub issue: https://github.com/airbnb/enzyme/issues/1959
-const mountTabs = ({ mockData, mockAddTabset }) =>
-  mount(<Tabs nodeData={mockData} addTabset={mockAddTabset} />, { context });
+const mountTabs = ({ activeTabs, mockData, mockAddTabset, mockSetActiveTab }) => {
+  return mount(
+    <TabContext.Provider value={{ activeTabs, setActiveTab: mockSetActiveTab }}>
+      <Tabs nodeData={mockData} addTabset={mockAddTabset} />
+    </TabContext.Provider>
+  );
+};
 
 const shallowTabs = ({ mockData, mockAddTabset }) =>
   shallow(<Tabs nodeData={mockData} addTabset={mockAddTabset} />, { context });
@@ -23,12 +30,15 @@ const shallowTabs = ({ mockData, mockAddTabset }) =>
 describe('Tabs testing', () => {
   describe('Tab unit tests', () => {
     let wrapper;
+    const mockSetActiveTab = jest.fn();
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
       wrapper = mountTabs({
+        activeTabs: { platforms: PLATFORMS[0] },
         mockData: mockDataPlatforms,
         mockAddTabset,
+        mockSetActiveTab,
       });
     });
 
@@ -43,37 +53,32 @@ describe('Tabs testing', () => {
       expect(mockAddTabset.mock.calls.length).toBe(1);
     });
 
-    // TODO: Update with context support
-    /* it('active tab is set in DOM', () => {
-      wrapper.setContext({ activeTabs: { platforms: PLATFORMS[0] } });
+    it('active tab is set in DOM', () => {
       expect(wrapper.find('.tab-strip__element[aria-selected="true"]').exists()).toEqual(true);
-    }); */
-
-    // TODO: Update with context support
-    /* it('active tab is correct value', () => {
-      expect(wrapper.context().activeTabs.platforms).toEqual(PLATFORMS[0]);
-    }); */
+    });
 
     it('exists non-active tab', () => {
       expect(wrapper.find('.tab-strip__element[aria-selected="false"]').exists()).toEqual(true);
     });
 
-    // TODO: Update with context support
-    /* it('clicking new non-active tab calls function', () => {
+    it('clicking new non-active tab calls function', () => {
       const nonactiveTab = wrapper.find('.tab-strip__element[aria-selected="false"]').first();
       nonactiveTab.simulate('click');
-      expect(wrapper.context().setActiveTab.mock.calls.length).toBe(1);
-    }); */
+      expect(mockSetActiveTab.mock.calls.length).toBe(1);
+    });
   });
 
   describe('Drivers unit tests', () => {
     let wrapper;
+    const mockSetActiveTab = jest.fn();
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
       wrapper = mountTabs({
+        activeTabs: {},
         mockData: mockDataLanguages,
         mockAddTabset,
+        mockSetActiveTab,
       });
     });
 
@@ -84,12 +89,15 @@ describe('Tabs testing', () => {
 
   describe('when a hidden tabset is passed in', () => {
     let wrapper;
+    const mockSetActiveTab = jest.fn();
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
       wrapper = shallowTabs({
+        activeTabs: {},
         mockData: mockDataHidden,
         mockAddTabset,
+        mockSetActiveTab,
       });
     });
 
@@ -101,7 +109,7 @@ describe('Tabs testing', () => {
   describe('when javascript is disabled', () => {
     let wrapper;
     const mockAddTabset = jest.fn();
-  
+
     beforeAll(() => {
       wrapper = shallowTabs({
         mockData: mockDataPlatforms,
@@ -114,4 +122,3 @@ describe('Tabs testing', () => {
     });
   });
 });
-
