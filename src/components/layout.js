@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
-import { getIncludeFile } from '../utils/get-include-file';
+import { formatIncludeKey } from '../utils/get-include-file';
 import { getNestedValue } from '../utils/get-nested-value';
 import { setLocalValue } from '../utils/browser-storage';
 
@@ -11,39 +11,37 @@ export default class DefaultLayout extends Component {
   constructor(props) {
     super(props);
 
-    const {
-      pageContext: { includes, __refDocMapping },
-    } = props;
-    const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
-
-    this.incorporateIncludes(pageNodes, 'name', 'include', includes);
-    this.substitutions = this.getSubstitutions(pageNodes);
-    this.normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
+    this.preprocessPageNodes();
 
     this.state = {
       activeTabs: {},
     };
   }
 
-  incorporateIncludes = (nodes, key, value, includes) => {
-    const searchNode = node => {
-      // If a cssclass node has no children, add the proceeding node to its array of children,
-      // thereby appending the specified class to that component.
-      if (node[key] === value) {
-        const filename = getNestedValue(['argument', 0, 'value'], node);
-        node.children = getIncludeFile(includes, filename); // eslint-disable-line no-param-reassign
-      }
-      if (node.children) {
-        node.children.forEach(searchNode);
-      }
+  preprocessPageNodes = () => {
+    const {
+      pageContext: { includes, __refDocMapping },
+    } = this.props;
+    const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
+
+    // Map all substitutions that appear on the page and in its includes
+    this.substitutions = {
+      ...this.getSubstitutions(pageNodes),
+      ...this.getSubstitutions(Object.values(includes)),
     };
-    nodes.forEach(searchNode);
+
+    // Standardize cssclass nodes that appear on the page and in its includes
+    this.normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
+    Object.entries(includes).forEach(([, value]) => {
+      const node = getNestedValue(['ast', 'children'], value);
+      this.normalizeCssClassNodes(node, 'name', 'cssclass');
+    });
   };
 
-  // Identify and save all substitutions as defined on this page and in its included files
-  getSubstitutions = pageNodes => {
+  // Identify and save all substitutions as defined in the specified nodes
+  getSubstitutions = nodes => {
     // Find substitutions on page
-    const substitutions = findAllKeyValuePairs(pageNodes, 'type', 'substitution_definition');
+    const substitutions = findAllKeyValuePairs(nodes, 'type', 'substitution_definition');
 
     // Create a map wherein each key is the word to be replaced, and each value is the nodes to replace it with.
     return substitutions.reduce((map, sub) => {
@@ -91,7 +89,7 @@ export default class DefaultLayout extends Component {
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
         <SiteMetadata />
-        {React.cloneElement(children, { substitutions: this.substitutions })}
+        {React.cloneElement(children, { includes: this.includeNodes, substitutions: this.substitutions })}
       </TabContext.Provider>
     );
   }
@@ -105,5 +103,6 @@ DefaultLayout.propTypes = {
         children: PropTypes.arrayOf(PropTypes.object),
       }).isRequired,
     }).isRequired,
+    includes: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
 };

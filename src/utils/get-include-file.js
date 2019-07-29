@@ -1,6 +1,6 @@
 import { getNestedValue } from './get-nested-value';
 
-export const getIncludeFile = (includeObj, filename) => {
+export const formatIncludeKey = filename => {
   let key = filename;
   if (key.startsWith('/')) {
     key = key.substr(1);
@@ -9,6 +9,10 @@ export const getIncludeFile = (includeObj, filename) => {
   }
 
   if (key.endsWith('.rst')) key = key.replace('.rst', '');
+  return key;
+};
 
+export const getIncludeFile = (includeObj, filename) => {
+  const key = formatIncludeKey(filename);
   return getNestedValue([key, 'ast', 'children'], includeObj) || [];
 };

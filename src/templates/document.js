@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar';
 
 const Document = props => {
   const {
-    pageContext: { pageMetadata, __refDocMapping },
+    pageContext: { includes, pageMetadata, __refDocMapping },
     substitutions,
   } = props;
   const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
@@ -30,6 +30,7 @@ const Document = props => {
                       key={index}
                       nodeData={child}
                       refDocMapping={__refDocMapping}
+                      includes={includes}
                       pageMetadata={pageMetadata}
                       substitutions={substitutions}
                     />
@@ -52,6 +53,7 @@ Document.propTypes = {
         children: PropTypes.array,
       }).isRequired,
     }).isRequired,
+    includes: PropTypes.objectOf(PropTypes.object),
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
   substitutions: PropTypes.objectOf(PropTypes.array).isRequired,

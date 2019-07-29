@@ -15,7 +15,10 @@ export default class CssClass extends React.Component {
      *
      * GitHub issue: https://github.com/yannickcr/eslint-plugin-react/issues/678
      */
-    findDOMNode(this).classList.add(className); // eslint-disable-line react/no-find-dom-node
+    const childNode = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
+    if (childNode) {
+      childNode.classList.add(className);
+    }
   }
 
   render() {
