@@ -25,6 +25,7 @@ import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
+import Contents from './Contents';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -65,6 +66,7 @@ export default class ComponentFactory extends Component {
       admonition: Admonition,
       block_quote: BlockQuote,
       code: Code,
+      contents: Contents,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
