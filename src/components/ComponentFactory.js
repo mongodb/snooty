@@ -25,6 +25,8 @@ import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
+import CssClass from './CssClass';
+import SubstitutionReference from './SubstitutionReference';
 import Contents from './Contents';
 
 import RoleApi from './Roles/Api';
@@ -37,8 +39,8 @@ import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
 import RoleTerm from './Roles/Term';
 
-const IGNORED_NAMES = ['class', 'cssclass', 'default-domain'];
-const IGNORED_TYPES = ['class', 'comment', 'cssclass', 'substitution_definition', 'target'];
+const IGNORED_NAMES = ['default-domain'];
+const IGNORED_TYPES = ['comment', 'substitution_definition', 'target'];
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -67,6 +69,8 @@ export default class ComponentFactory extends Component {
       block_quote: BlockQuote,
       code: Code,
       contents: Contents,
+      class: CssClass,
+      cssclass: CssClass,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
@@ -83,6 +87,7 @@ export default class ComponentFactory extends Component {
       section: Section,
       step: Step,
       strong: Strong,
+      substitution_reference: SubstitutionReference,
       tabs: Tabs,
       text: Text,
       title_reference: TitleReference,
@@ -94,17 +99,8 @@ export default class ComponentFactory extends Component {
   selectComponent() {
     const {
       nodeData: { children, name, type },
-      substitutions,
       ...rest
     } = this.props;
-
-    if (type === 'substitution_reference') {
-      if (!substitutions || !substitutions[name]) {
-        return null;
-      }
-
-      return substitutions[name].map((sub, index) => <ComponentFactory {...rest} nodeData={sub} key={index} />);
-    }
 
     // do nothing with these nodes for now (cc. Andrew)
     if (IGNORED_TYPES.includes(type) || IGNORED_NAMES.includes(name)) {
@@ -152,11 +148,4 @@ ComponentFactory.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
-  substitutions: PropTypes.shape({
-    [PropTypes.string]: PropTypes.arrayOf(PropTypes.object),
-  }),
-};
-
-ComponentFactory.defaultProps = {
-  substitutions: undefined,
 };
