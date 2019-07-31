@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import CSSWrapper from './CSSWrapper';
 import { getNestedValue } from '../utils/get-nested-value';
+import { makeId } from '../utils/make-id';
 
 // The classname associated with each admonition is illogical, so map them statically here
 const CLASSNAME_MAP = {
@@ -17,10 +18,17 @@ const CLASSNAME_MAP = {
 
 const Admonition = ({ nodeData, ...rest }) => {
   const { name } = nodeData;
-  const titleText = getNestedValue(['argument', 0, 'value'], nodeData) || name;
+  const titleText = getNestedValue(['argument', 0, 'value'], nodeData);
   return (
-    <div className={`admonition ${CLASSNAME_MAP[name] || ''}`}>
-      <p className="first admonition-title">{titleText}</p>
+    <div
+      className={[
+        'admonition',
+        CLASSNAME_MAP[name],
+        getNestedValue(['options', 'class'], nodeData),
+        titleText ? `admonition-${makeId(titleText)}` : null, // stringify title into slug
+      ].join(' ')}
+    >
+      <p className="first admonition-title">{titleText || name}</p>
       {nodeData.children.map((child, index) => {
         // Apply "last" class to the last child element of admonition
         if (index === nodeData.children.length - 1) {
