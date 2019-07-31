@@ -13,7 +13,7 @@ export default class CSSWrapper extends React.Component {
      * GitHub issue: https://github.com/yannickcr/eslint-plugin-react/issues/678
      */
     const childNode = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
-    if (childNode) {
+    if (childNode && childNode.classList) {
       childNode.classList.add(className);
     }
   }

@@ -18,7 +18,15 @@ const CLASSNAME_MAP = {
 
 const Admonition = ({ nodeData, ...rest }) => {
   const { name } = nodeData;
-  const titleText = getNestedValue(['argument', 0, 'value'], nodeData);
+
+  // If an admonition's contents are written on the same line as the directive in the rST, they will appear as node arguments.
+  // In this case, the admonition has no defined title, and we need to treat the argument property as the node's children.
+  const hasChildren = nodeData.children.length > 0;
+  const childElements = hasChildren ? nodeData.children : nodeData.argument;
+  let titleText;
+  if (hasChildren) {
+    titleText = getNestedValue(['argument', 0, 'value'], nodeData);
+  }
   return (
     <div
       className={[
@@ -29,12 +37,12 @@ const Admonition = ({ nodeData, ...rest }) => {
       ].join(' ')}
     >
       <p className="first admonition-title">{titleText || name}</p>
-      {nodeData.children.map((child, index) => {
+      {childElements.map((child, index) => {
         // Apply "last" class to the last child element of admonition
         if (index === nodeData.children.length - 1) {
           return (
             <CSSWrapper key={index} className="last">
-              <ComponentFactory {...rest} nodeData={child} />
+              <ComponentFactory {...rest} parentNode={null} nodeData={child} />
             </CSSWrapper>
           );
         }
