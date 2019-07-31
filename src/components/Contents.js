@@ -2,21 +2,98 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const Contents = ({ nodeData: { argument, options } }) => {
-  console.log(options);
-  console.log(options.local === true);
-  const displayText = getNestedValue([0, 'value'], argument);
+const ContentsListItem = ({ id, listChildren, title }) => (
+  <li>
+    <a href={`#${id}`}>{title}</a>
+    {listChildren.length > 0 && <ContentsList listItems={listChildren} />}
+  </li>
+);
+
+ContentsListItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  listChildren: PropTypes.arrayOf(PropTypes.object).isRequired,
+  title: PropTypes.string.isRequired,
+};
+
+const ContentsList = ({ className, listItems }) => {
   return (
-    <div className={['contents', 'topic'].join(' ')} id="on-this-page">
+    <ul className={className}>
+      {listItems.map(({ children, id, title }, index) => (
+        <ContentsListItem key={index} listChildren={children} id={id} title={title} />
+      ))}
+    </ul>
+  );
+};
+
+ContentsList.propTypes = {
+  className: PropTypes.string,
+  listItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      children: PropTypes.arrayOf(PropTypes.object),
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
+ContentsList.defaultProps = {
+  className: '',
+};
+
+const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
+  const findAllKeyValuePairs = (nodes, key, value) => {
+    const results = [];
+    const searchNode = (node, sectionDepth) => {
+      if (node[key] === value && sectionDepth - 1 <= options.depth && sectionDepth > 1) {
+        const nodeTitle =
+          getNestedValue(['children', 0, 'value'], node) || getNestedValue(['children', 0, 'label', 'value'], node);
+        const newNode = {
+          children: [],
+          depth: sectionDepth,
+          id: node.id,
+          title: nodeTitle,
+        };
+        const lastElement = results[results.length - 1];
+        if (!lastElement || sectionDepth <= lastElement.depth) {
+          results.push(newNode);
+        } else {
+          lastElement.children.push(newNode);
+        }
+      }
+      if (node.children) {
+        if (node.type === 'section') {
+          sectionDepth += 1;
+        }
+        return node.children.forEach(child => searchNode(child, sectionDepth));
+      }
+      return null;
+    };
+    nodes.forEach(node => searchNode(node, 0));
+    return results;
+  };
+
+  const displayText = getNestedValue([0, 'value'], argument);
+  const headingNodes = findAllKeyValuePairs(getNestedValue(['ast', 'children'], refDocMapping), 'type', 'heading');
+  return (
+    <div className={['contents', 'topic', options.class, options.local ? 'local' : ''].join(' ')} id="on-this-page">
       <p className="topic-title first">{displayText}</p>
+      <ContentsList className="simple" listItems={headingNodes} />
     </div>
   );
 };
 
 Contents.propTypes = {
   nodeData: PropTypes.shape({
-    argument: PropTypes.object.isRequired,
-    options: PropTypes.object,
+    argument: PropTypes.arrayOf(PropTypes.object),
+    options: PropTypes.shape({
+      class: PropTypes.string,
+      local: PropTypes.bool,
+    }),
+  }).isRequired,
+  refDocMapping: PropTypes.shape({
+    ast: PropTypes.shape({
+      children: PropTypes.arrayOf(PropTypes.object),
+    }).isRequired,
   }).isRequired,
 };
 
