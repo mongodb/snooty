@@ -25,7 +25,7 @@ import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
-import CssClass from './CssClass';
+import CSSClass from './CSSClass';
 import SubstitutionReference from './SubstitutionReference';
 import Line from './Line';
 import LineBlock from './LineBlock';
@@ -69,8 +69,8 @@ export default class ComponentFactory extends Component {
       admonition: Admonition,
       block_quote: BlockQuote,
       code: Code,
-      class: CssClass,
-      cssclass: CssClass,
+      class: CSSClass,
+      cssclass: CSSClass,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,

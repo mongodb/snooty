@@ -109,7 +109,7 @@ const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
             let position = '';
             if (index === 0) position = 'first';
             if (index === column.children.length - 1) position = 'last';
-            return <ComponentFactory key={index} nodeData={element} position={position} />;
+            return <ComponentFactory {...rest} key={index} nodeData={element} position={position} />;
           })
         )}
       </td>

@@ -8,7 +8,7 @@ const Paragraph = ({ admonition, nodeData, parentNode, position, ...rest }) => {
     return nodeData.children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
   }
   return (
-    <p style={{ margin: admonition ? '0 0 12.5px' : '' }} className={position}>
+    <p className={position}>
       {nodeData.children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} />
       ))}
@@ -17,7 +17,6 @@ const Paragraph = ({ admonition, nodeData, parentNode, position, ...rest }) => {
 };
 
 Paragraph.propTypes = {
-  admonition: PropTypes.bool,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -31,7 +30,6 @@ Paragraph.propTypes = {
 };
 
 Paragraph.defaultProps = {
-  admonition: false,
   parentNode: undefined,
   position: '',
 };
