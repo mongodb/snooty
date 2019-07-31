@@ -33,8 +33,8 @@ const Admonition = ({ nodeData, ...rest }) => {
         // Apply "last" class to the last child element of admonition
         if (index === nodeData.children.length - 1) {
           return (
-            <CSSWrapper className="last">
-              <ComponentFactory {...rest} nodeData={child} key={index} />
+            <CSSWrapper key={index} className="last">
+              <ComponentFactory {...rest} nodeData={child} />
             </CSSWrapper>
           );
         }
