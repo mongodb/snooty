@@ -4,4 +4,8 @@
  *
  * Convert a string into a lowercase kebab-case slug.
  */
-export const makeId = string => string.toLowerCase().replace(/\W+/g, '-');
+export const makeId = string =>
+  string
+    .toLowerCase()
+    .replace(/\W+$/, '')
+    .replace(/\W+/g, '-');
