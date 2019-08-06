@@ -18,7 +18,6 @@ exports[`DefinitionList renders correctly 1`] = `
   <dd>
     <p
       class=""
-      style="margin:"
     >
       <strong>
         Default

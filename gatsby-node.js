@@ -10,7 +10,7 @@ const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
 const DB = 'snooty';
 const DOCUMENTS_COLLECTION = 'documents';
 const ASSETS_COLLECTION = 'assets';
-const SNOOTY_STITCH_ID = 'ref_data-bnbxq';
+const SNOOTY_STITCH_ID = 'snooty-koueq';
 
 // test data properties
 const USE_TEST_DATA = process.env.USE_TEST_DATA;

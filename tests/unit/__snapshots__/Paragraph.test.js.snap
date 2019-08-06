@@ -3,11 +3,6 @@
 exports[`renders correctly 1`] = `
 <p
   className=""
-  style={
-    Object {
-      "margin": "",
-    }
-  }
 >
   <ComponentFactory
     key="0"
