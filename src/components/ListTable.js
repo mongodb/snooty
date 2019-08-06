@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const ListTable = ({ nodeData, nodeData: { children } }) => {
-  const headerRowCount = parseInt(getNestedValue(['options', 'header-rows', nodeData]), 10) || 0;
-  const stubColumnCount = parseInt(getNestedValue(['options', 'stub-columns', nodeData]), 10) || 0;
+const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
+  const headerRowCount = parseInt(getNestedValue(['options', 'header-rows'], nodeData), 10) || 0;
+  const stubColumnCount = parseInt(getNestedValue(['options', 'stub-columns'], nodeData), 10) || 0;
   const headerRows = children[0].children[0].children.slice(0, headerRowCount);
   const bodyRows = children[0].children.slice(headerRowCount);
-  const customWidth = getNestedValue(['options', 'width', nodeData]) ? options.width : 'auto';
-  const customAlign = getNestedValue(['options', 'align', nodeData]) ? `align-${options.align}` : '';
+  const customWidth = getNestedValue(['options', 'width'], nodeData) || 'auto';
+  const customAlign = getNestedValue(['options', 'align'], nodeData)
+    ? `align-${getNestedValue(['options', 'align'], nodeData)}`
+    : '';
 
   let widths = 'colwidths-auto';
   const customWidths = getNestedValue(['options', 'widths'], nodeData);
@@ -23,8 +25,8 @@ const ListTable = ({ nodeData, nodeData: { children } }) => {
       style={{ width: customWidth }}
     >
       {widths === 'colwidths-given' && <ColGroup widths={customWidths.split(/[ ,]+/)} />}
-      <ListTableHeader rows={headerRows} stubColumnCount={stubColumnCount} />
-      <ListTableBody rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
+      <ListTableHeader {...rest} rows={headerRows} stubColumnCount={stubColumnCount} />
+      <ListTableBody {...rest} rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
     </table>
   );
 };
@@ -41,10 +43,10 @@ ColGroup.propTypes = {
   widths: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-const ListTableHeader = ({ rows, stubColumnCount }) => (
+const ListTableHeader = ({ rows, stubColumnCount, ...rest }) => (
   <thead valign="bottom">
     {rows.map((row, index) => (
-      <ListTableHeaderRow row={row.children} rowIndex={index} stubColumnCount={stubColumnCount} key={index} />
+      <ListTableHeaderRow {...rest} row={row.children} rowIndex={index} stubColumnCount={stubColumnCount} key={index} />
     ))}
   </thead>
 );
@@ -52,17 +54,17 @@ const ListTableHeader = ({ rows, stubColumnCount }) => (
 ListTableHeader.propTypes = {
   rows: PropTypes.arrayOf(
     PropTypes.shape({
-      children: PropTypes.array,
+      children: PropTypes.arrayOf(PropTypes.object).isRequired,
     })
   ).isRequired,
   stubColumnCount: PropTypes.number.isRequired,
 };
 
-const ListTableHeaderRow = ({ row, rowIndex, stubColumnCount }) => (
+const ListTableHeaderRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
     {row.map((column, colIndex) => (
       <th className={`head ${colIndex <= stubColumnCount - 1 && 'stub'}`} key={colIndex}>
-        <ComponentFactory nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
+        <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
       </th>
     ))}
   </tr>
@@ -71,25 +73,18 @@ const ListTableHeaderRow = ({ row, rowIndex, stubColumnCount }) => (
 ListTableHeaderRow.propTypes = {
   row: PropTypes.arrayOf(
     PropTypes.shape({
-      children: PropTypes.arrayOf(
-        PropTypes.shape({
-          children: PropTypes.arrayOf(
-            PropTypes.shape({
-              value: PropTypes.string.isRequired,
-            })
-          ),
-        })
-      ),
+      children: PropTypes.arrayOf(PropTypes.object).isRequired,
     })
   ).isRequired,
   rowIndex: PropTypes.number.isRequired,
   stubColumnCount: PropTypes.number.isRequired,
 };
 
-const ListTableBody = ({ rows, headerRowCount, stubColumnCount }) => (
+const ListTableBody = ({ rows, headerRowCount, stubColumnCount, ...rest }) => (
   <tbody valign="top">
     {rows.map((row, index) => (
       <ListTableBodyRow
+        {...rest}
         key={index}
         row={getNestedValue(['children', 0, 'children'], row)}
         rowIndex={index + headerRowCount}
@@ -103,24 +98,24 @@ ListTableBody.propTypes = {
   headerRowCount: PropTypes.number.isRequired,
   rows: PropTypes.arrayOf(
     PropTypes.shape({
-      children: PropTypes.array,
+      children: PropTypes.arrayOf(PropTypes.object).isRequired,
     })
   ).isRequired,
   stubColumnCount: PropTypes.number.isRequired,
 };
 
-const ListTableBodyRow = ({ row, rowIndex, stubColumnCount }) => (
+const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
     {row.map((column, colIndex) => (
       <td className={`${colIndex <= stubColumnCount - 1 ? 'stub' : ''}`} key={colIndex}>
         {column.children.length === 1 ? (
-          <ComponentFactory nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
+          <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
         ) : (
           column.children.map((element, index) => {
             let position = '';
             if (index === 0) position = 'first';
             if (index === column.children.length - 1) position = 'last';
-            return <ComponentFactory key={index} nodeData={element} position={position} />;
+            return <ComponentFactory {...rest} key={index} nodeData={element} position={position} />;
           })
         )}
       </td>
@@ -131,15 +126,7 @@ const ListTableBodyRow = ({ row, rowIndex, stubColumnCount }) => (
 ListTableBodyRow.propTypes = {
   row: PropTypes.arrayOf(
     PropTypes.shape({
-      children: PropTypes.arrayOf(
-        PropTypes.shape({
-          children: PropTypes.arrayOf(
-            PropTypes.shape({
-              value: PropTypes.string.isRequired,
-            })
-          ),
-        })
-      ),
+      children: PropTypes.arrayOf(PropTypes.object).isRequired,
     })
   ).isRequired,
   rowIndex: PropTypes.number.isRequired,

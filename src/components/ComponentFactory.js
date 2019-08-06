@@ -25,8 +25,11 @@ import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
-import CssClass from './CssClass';
+import CSSClass from './CSSClass';
 import SubstitutionReference from './SubstitutionReference';
+import Line from './Line';
+import LineBlock from './LineBlock';
+import HorizontalList from './HorizontalList';
 import VersionAdded from './VersionAdded';
 import Container from './Container';
 
@@ -68,16 +71,19 @@ export default class ComponentFactory extends Component {
     this.componentMap = {
       admonition: Admonition,
       block_quote: BlockQuote,
-      class: CssClass,
+      class: CSSClass,
       code: Code,
       container: Container,
-      cssclass: CssClass,
+      cssclass: CSSClass,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
       figure: Figure,
       heading: Heading,
+      hlist: HorizontalList,
       include: Include,
+      line: Line,
+      line_block: LineBlock,
       list: List,
       listItem: ListItem,
       'list-table': ListTable,

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 
-const Container = ({ nodeData: { argument, children } }) => {
+const Container = ({ nodeData: { argument, children }, ...rest }) => {
   const customClass = argument.map(node => node.value).join(' ');
   return (
     <div className={`${customClass} docutils container`}>
@@ -20,7 +21,7 @@ Container.propTypes = {
       })
     ),
     children: PropTypes.arrayOf(PropTypes.object),
-  }),
+  }).isRequired,
 };
 
 export default Container;

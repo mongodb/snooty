@@ -31,7 +31,6 @@ exports[`renders correctly 1`] = `
       </h1>
       <p
         class=""
-        style="margin:"
       >
         Check if you have an 
         <a
