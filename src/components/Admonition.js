@@ -1,52 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import CSSWrapper from './CSSWrapper';
 import { getNestedValue } from '../utils/get-nested-value';
+import { makeId } from '../utils/make-id';
 
-const Admonition = props => {
-  const { nodeData } = props;
-  const admonitionType = getNestedValue(['argument', 0, 'value'], nodeData);
+// The classname associated with each admonition is illogical, so map them statically here
+const CLASSNAME_MAP = {
+  admonition: '',
+  example: 'admonition-example',
+  important: 'important',
+  note: 'note',
+  seealso: 'seealso',
+  tip: 'admonition-tip',
+  warning: 'warning',
+};
 
-  if (nodeData.name === 'admonition') {
-    let fullClassName = `admonition admonition-${
-      admonitionType ? admonitionType.toLowerCase().replace(/\s/g, '-') : ''
-    }`;
-    // special admonitions have options
-    const definedClass = getNestedValue(['options', 'class'], nodeData);
-    if (definedClass) {
-      fullClassName += ` ${definedClass}`;
-    }
-    return (
-      <div className={fullClassName}>
-        <p className="first admonition-title">{admonitionType}</p>
-        <React.Fragment>
-          <ComponentFactory
-            {...props}
-            nodeData={{
-              type: 'section',
-              children: getNestedValue(['children', 0, 'children'], nodeData),
-            }}
-            admonition
-          />
-        </React.Fragment>
-      </div>
-    );
+const Admonition = ({ nodeData, ...rest }) => {
+  const { name } = nodeData;
+
+  // If an admonition's contents are written on the same line as the directive in the rST, they will appear as node arguments.
+  // In this case, the admonition has no defined title, and we need to treat the argument property as the node's children.
+  const hasChildren = nodeData.children.length > 0;
+  const childElements = hasChildren ? nodeData.children : nodeData.argument;
+  let titleText;
+  if (hasChildren) {
+    titleText = getNestedValue(['argument', 0, 'value'], nodeData);
   }
-  // combine argument and children from admonition as separate paragraphs
-  const childElements = [...nodeData.argument, ...nodeData.children];
   return (
-    <div className={nodeData.name === 'tip' ? `admonition admonition-tip` : `admonition ${nodeData.name}`}>
-      <p className="first admonition-title">{nodeData.name}</p>
-      <React.Fragment>
-        <ComponentFactory
-          {...props}
-          admonition
-          nodeData={{
-            type: 'section',
-            children: childElements,
-          }}
-        />
-      </React.Fragment>
+    <div
+      className={[
+        'admonition',
+        CLASSNAME_MAP[name],
+        getNestedValue(['options', 'class'], nodeData),
+        titleText ? `admonition-${makeId(titleText)}` : null, // stringify title into slug
+      ].join(' ')}
+    >
+      <p className="first admonition-title">{titleText || name}</p>
+      {childElements.map((child, index) => {
+        // Apply "last" class to the last child element of admonition
+        if (index === nodeData.children.length - 1) {
+          return (
+            <CSSWrapper key={index} className="last">
+              <ComponentFactory {...rest} parentNode={null} nodeData={child} />
+            </CSSWrapper>
+          );
+        }
+        return <ComponentFactory {...rest} nodeData={child} key={index} />;
+      })}
     </div>
   );
 };
@@ -58,11 +59,7 @@ Admonition.propTypes = {
         value: PropTypes.string,
       })
     ).isRequired,
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        children: PropTypes.array,
-      })
-    ),
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 };
