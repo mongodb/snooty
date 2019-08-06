@@ -25,8 +25,11 @@ import Text from './Text';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
-import CssClass from './CssClass';
+import CSSClass from './CSSClass';
 import SubstitutionReference from './SubstitutionReference';
+import Line from './Line';
+import LineBlock from './LineBlock';
+import HorizontalList from './HorizontalList';
 import Contents from './Contents';
 
 import RoleApi from './Roles/Api';
@@ -69,14 +72,17 @@ export default class ComponentFactory extends Component {
       block_quote: BlockQuote,
       code: Code,
       contents: Contents,
-      class: CssClass,
-      cssclass: CssClass,
+      class: CSSClass,
+      cssclass: CSSClass,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
       figure: Figure,
       heading: Heading,
+      hlist: HorizontalList,
       include: Include,
+      line: Line,
+      line_block: LineBlock,
       list: List,
       listItem: ListItem,
       'list-table': ListTable,
