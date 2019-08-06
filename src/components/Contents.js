@@ -41,7 +41,7 @@ ContentsList.defaultProps = {
 };
 
 const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
-  const findAllKeyValuePairs = (nodes, key, value) => {
+  const findSectionHeadings = (nodes, key, value) => {
     const results = [];
     const searchNode = (node, sectionDepth) => {
       if (node[key] === value && sectionDepth - 1 <= options.depth && sectionDepth > 1) {
@@ -62,7 +62,7 @@ const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
       }
       if (node.children) {
         if (node.type === 'section') {
-          sectionDepth += 1;
+          sectionDepth += 1; // eslint-disable-line no-param-reassign
         }
         return node.children.forEach(child => searchNode(child, sectionDepth));
       }
@@ -73,7 +73,7 @@ const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
   };
 
   const displayText = getNestedValue([0, 'value'], argument);
-  const headingNodes = findAllKeyValuePairs(getNestedValue(['ast', 'children'], refDocMapping), 'type', 'heading');
+  const headingNodes = findSectionHeadings(getNestedValue(['ast', 'children'], refDocMapping), 'type', 'heading');
   return (
     <div className={['contents', 'topic', options.class, options.local ? 'local' : ''].join(' ')} id="on-this-page">
       <p className="topic-title first">{displayText}</p>
@@ -86,7 +86,9 @@ Contents.propTypes = {
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(PropTypes.object),
     options: PropTypes.shape({
+      backlinks: PropTypes.oneOf(['none']),
       class: PropTypes.string,
+      depth: PropTypes.number,
       local: PropTypes.bool,
     }),
   }).isRequired,
