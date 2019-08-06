@@ -27,6 +27,8 @@ import DefinitionListItem from './DefinitionListItem';
 import Transition from './Transition';
 import CssClass from './CssClass';
 import SubstitutionReference from './SubstitutionReference';
+import VersionAdded from './VersionAdded';
+import Container from './Container';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -66,8 +68,9 @@ export default class ComponentFactory extends Component {
     this.componentMap = {
       admonition: Admonition,
       block_quote: BlockQuote,
-      code: Code,
       class: CssClass,
+      code: Code,
+      container: Container,
       cssclass: CssClass,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
@@ -91,6 +94,7 @@ export default class ComponentFactory extends Component {
       title_reference: TitleReference,
       transition: Transition,
       uriwriter: URIWriter,
+      versionadded: VersionAdded,
     };
   }
 

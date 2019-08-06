@@ -119,7 +119,7 @@ exports.sourceNodes = async () => {
   } else {
     // start from index document
     const idPrefix = `${process.env.GATSBY_SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
-    const query = { _id: { $regex: new RegExp(`${idPrefix}/*`) } };
+    const query = { _id: { $regex: new RegExp(`^${idPrefix}/*`) } };
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
     documents.forEach(doc => {
