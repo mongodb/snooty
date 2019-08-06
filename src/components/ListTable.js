@@ -3,22 +3,26 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const ListTable = ({ nodeData: { children, options } }) => {
-  const headerRowCount = parseInt(options['header-rows'], 10) || 0;
-  const stubColumnCount = parseInt(options['stub-columns'], 10) || 0;
+const ListTable = ({ nodeData, nodeData: { children } }) => {
+  const headerRowCount = parseInt(getNestedValue(['options', 'header-rows', nodeData]), 10) || 0;
+  const stubColumnCount = parseInt(getNestedValue(['options', 'stub-columns', nodeData]), 10) || 0;
   const headerRows = children[0].children[0].children.slice(0, headerRowCount);
   const bodyRows = children[0].children.slice(headerRowCount);
-  const customWidth = options.width ? options.width : 'auto';
-  const customAlign = options.align ? `align-${options.align}` : '';
+  const customWidth = getNestedValue(['options', 'width', nodeData]) ? options.width : 'auto';
+  const customAlign = getNestedValue(['options', 'align', nodeData]) ? `align-${options.align}` : '';
 
   let widths = 'colwidths-auto';
-  if (options.widths && options.widths !== 'auto') {
+  const customWidths = getNestedValue(['options', 'widths'], nodeData);
+  if (customWidths && customWidths !== 'auto') {
     widths = 'colwidths-given';
   }
 
   return (
-    <table className={['docutils', options.class || '', widths, customAlign].join(' ')} style={{ width: customWidth }}>
-      {widths === 'colwidths-given' && <ColGroup widths={options.widths.split(/[ ,]+/)} />}
+    <table
+      className={['docutils', getNestedValue(['options', 'class'], nodeData) || '', widths, customAlign].join(' ')}
+      style={{ width: customWidth }}
+    >
+      {widths === 'colwidths-given' && <ColGroup widths={customWidths.split(/[ ,]+/)} />}
       <ListTableHeader rows={headerRows} stubColumnCount={stubColumnCount} />
       <ListTableBody rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
     </table>
