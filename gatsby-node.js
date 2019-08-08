@@ -100,12 +100,17 @@ const populateIncludeNodes = nodes => {
   const replaceInclude = node => {
     if (node.name === 'include') {
       const includeFilename = getNestedValue(['argument', 0, 'value'], node);
-      node.children = getIncludeFile(INCLUDE_FILES, includeFilename);
+      const includeNode = getIncludeFile(INCLUDE_FILES, includeFilename);
+
+      // Perform the same operation on include nodes inside this include file
+      const replacedInclude = includeNode.map(replaceInclude);
+      node.children = replacedInclude;
     } else if (node.children) {
       node.children.forEach(replaceInclude);
     }
+    return node;
   };
-  nodes.forEach(replaceInclude);
+  return nodes.map(replaceInclude);
 };
 
 exports.sourceNodes = async () => {
@@ -133,7 +138,7 @@ exports.sourceNodes = async () => {
   } else {
     // start from index document
     const idPrefix = `${process.env.GATSBY_SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
-    const query = { _id: { $regex: new RegExp(`${idPrefix}/*`) } };
+    const query = { _id: { $regex: new RegExp(`^${idPrefix}/*`) } };
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
     documents.forEach(doc => {
@@ -186,7 +191,7 @@ exports.createPages = ({ actions }) => {
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
-      populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
+      pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
       let template = 'document';
       if (process.env.GATSBY_SITE === 'guides') {
         template = page === 'index' ? 'guides-index' : 'guide';
