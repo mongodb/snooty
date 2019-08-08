@@ -19,22 +19,15 @@ export default class DefaultLayout extends Component {
 
   preprocessPageNodes = () => {
     const {
-      pageContext: { includes, __refDocMapping },
+      pageContext: { __refDocMapping },
     } = this.props;
     const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
 
-    // Map all substitutions that appear on the page and in its includes
-    this.substitutions = {
-      ...this.getSubstitutions(pageNodes),
-      ...this.getSubstitutions(Object.values(includes)),
-    };
+    // Map all substitutions that appear on the page
+    this.substitutions = this.getSubstitutions(pageNodes);
 
-    // Standardize cssclass nodes that appear on the page and in its includes
+    // Standardize cssclass nodes that appear on the page
     this.normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
-    Object.entries(includes).forEach(([, value]) => {
-      const node = getNestedValue(['ast', 'children'], value);
-      this.normalizeCssClassNodes(node, 'name', 'cssclass');
-    });
   };
 
   // Identify and save all substitutions as defined in the specified nodes
@@ -102,6 +95,5 @@ DefaultLayout.propTypes = {
         children: PropTypes.arrayOf(PropTypes.object),
       }).isRequired,
     }).isRequired,
-    includes: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
 };

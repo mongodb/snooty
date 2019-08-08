@@ -21,7 +21,7 @@ export default class Tabs extends Component {
     if (addTabset !== undefined) {
       addTabset(tabsetName, [...nodeData.children]);
     } else {
-      setActiveTab(nodeData.children[0].argument[0].value, tabsetName);
+      setActiveTab(tabsetName, nodeData.children[0].argument[0].value);
     }
   }
 

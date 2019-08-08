@@ -60,7 +60,8 @@ const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
           lastElement.children.push(newNode);
         }
       }
-      if (node.children) {
+      // Don't include step headings in our TOC regardless of depth
+      if (node.children && node.name !== 'step') {
         if (node.type === 'section') {
           sectionDepth += 1; // eslint-disable-line no-param-reassign
         }

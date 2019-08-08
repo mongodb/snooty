@@ -122,7 +122,6 @@ export default class Guide extends Component {
           <ComponentFactory
             nodeData={section}
             refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-            includes={pageContext.includes}
             pageMetadata={pageContext.pageMetadata}
           />
         );
@@ -138,7 +137,6 @@ export default class Guide extends Component {
           headingRef={this.sectionRefs[index]}
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
-          includes={pageContext.includes}
           pageMetadata={pageContext.pageMetadata}
         />
       );
@@ -168,7 +166,6 @@ export default class Guide extends Component {
                 cloud={cloud}
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
-                includes={pageContext.includes}
                 pageMetadata={pageContext.pageMetadata}
                 refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
@@ -193,7 +190,6 @@ Guide.propTypes = {
       }).isRequired,
     }).isRequired,
     snootyStitchId: PropTypes.string.isRequired,
-    includes: PropTypes.objectOf(PropTypes.object).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,

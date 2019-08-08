@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const mkdirp = require('mkdirp');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
+const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { findAllKeyValuePairs } = require('./src/utils/find-all-key-value-pairs');
 const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
@@ -94,6 +95,19 @@ const getImagesInPage = page => {
   }, {});
 };
 
+// For each include node found in a page, set its 'children' property to be the array of include contents
+const populateIncludeNodes = nodes => {
+  const replaceInclude = node => {
+    if (node.name === 'include') {
+      const includeFilename = getNestedValue(['argument', 0, 'value'], node);
+      node.children = getIncludeFile(INCLUDE_FILES, includeFilename);
+    } else if (node.children) {
+      node.children.forEach(replaceInclude);
+    }
+  };
+  nodes.forEach(replaceInclude);
+};
+
 exports.sourceNodes = async () => {
   // setup env variables
   const envResults = validateEnvVariables();
@@ -171,6 +185,8 @@ exports.createPages = ({ actions }) => {
 
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
+      const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
+      populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
       let template = 'document';
       if (process.env.GATSBY_SITE === 'guides') {
         template = page === 'index' ? 'guides-index' : 'guide';
@@ -182,8 +198,7 @@ exports.createPages = ({ actions }) => {
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
             snootyStitchId: SNOOTY_STITCH_ID,
-            __refDocMapping: RESOLVED_REF_DOC_MAPPING[page],
-            includes: INCLUDE_FILES,
+            __refDocMapping: pageNodes,
             pageMetadata: PAGE_TITLE_MAP,
           },
         });
