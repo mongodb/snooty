@@ -32,6 +32,8 @@ import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
 import VersionAdded from './VersionAdded';
 import Container from './Container';
+import Setting from './Setting';
+import Data from './Data';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -75,6 +77,7 @@ export default class ComponentFactory extends Component {
       code: Code,
       container: Container,
       cssclass: CSSClass,
+      data: Data,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
@@ -92,6 +95,7 @@ export default class ComponentFactory extends Component {
       paragraph: Paragraph,
       reference: Reference,
       section: Section,
+      setting: Setting,
       step: Step,
       strong: Strong,
       substitution_reference: SubstitutionReference,
