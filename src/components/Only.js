@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 
+// For now, explicitly define the arguments that should be accepted for Gatsby to build the node
 const VALID_ONLY_ARGS = ['html', '(not man)'];
 
 const Only = ({ nodeData, ...rest }) => {
