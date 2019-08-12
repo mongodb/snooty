@@ -4,7 +4,7 @@ import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
-import { setLocalValue } from '../utils/browser-storage';
+import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 
 export default class DefaultLayout extends Component {
   constructor(props) {
@@ -13,8 +13,9 @@ export default class DefaultLayout extends Component {
     this.preprocessPageNodes();
 
     this.state = {
-      activeTabs: {},
+      activeTabs: getLocalValue('activeTabs'),
     };
+    console.log(this.state);
   }
 
   preprocessPageNodes = () => {
@@ -73,13 +74,17 @@ export default class DefaultLayout extends Component {
     if (tabs && !tabs.includes(value)) {
       activeTab = tabs[0];
     }
-    this.setState(prevState => ({
-      activeTabs: {
-        ...prevState.activeTabs,
-        [tabsetName]: activeTab,
-      },
-    }));
-    setLocalValue(tabsetName, activeTab);
+    this.setState(
+      prevState => ({
+        activeTabs: {
+          ...prevState.activeTabs,
+          [tabsetName]: activeTab,
+        },
+      }),
+      () => {
+        setLocalValue('activeTabs', this.state.activeTabs);
+      }
+    );
   };
 
   render() {

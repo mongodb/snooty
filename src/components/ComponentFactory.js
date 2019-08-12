@@ -30,6 +30,7 @@ import SubstitutionReference from './SubstitutionReference';
 import Line from './Line';
 import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
+import TabsPillstrip from './TabsPillstrip';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -93,6 +94,7 @@ export default class ComponentFactory extends Component {
       strong: Strong,
       substitution_reference: SubstitutionReference,
       tabs: Tabs,
+      'tabs-pillstrip': TabsPillstrip,
       text: Text,
       title_reference: TitleReference,
       transition: Transition,

@@ -9,7 +9,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
-    const { nodeData } = this.props;
+    const { addPillstripData, nodeData } = this.props;
     const tabsetName = getNestedValue(['options', 'tabset'], nodeData) || this.generateAnonymousTabsetName(nodeData);
     this.state = { tabsetName };
   }
@@ -19,9 +19,11 @@ export default class Tabs extends Component {
     const { setActiveTab } = this.context;
     const { tabsetName } = this.state;
     if (addTabset !== undefined) {
+      console.log('here');
+      console.log(this.props);
       addTabset(tabsetName, [...nodeData.children]);
     } else {
-      setActiveTab(nodeData.children[0].argument[0].value, tabsetName);
+      setActiveTab(tabsetName, getNestedValue(['children', 0, 'argument', 0, 'value'], nodeData));
     }
   }
 
@@ -31,7 +33,11 @@ export default class Tabs extends Component {
    */
   generateAnonymousTabsetName = nodeData => {
     return nodeData.children
-      .map(child => child.argument[0].value.toLowerCase())
+      .map(child => {
+        const tabName = getNestedValue(['argument', 0, 'value'], child);
+        if (!tabName) return null;
+        return child.argument[0].value.toLowerCase();
+      })
       .sort((a, b) => {
         if (a > b) return 1;
         if (a < b) return -1;
@@ -62,9 +68,9 @@ export default class Tabs extends Component {
 
   render() {
     const { tabsetName } = this.state;
-    const { nodeData } = this.props;
+    const { nodeData, pillstrips } = this.props;
     const { activeTabs, setActiveTab } = this.context;
-    const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud';
+    const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud' || pillstrips.includes(tabsetName);
     const isHidden = nodeData.options && nodeData.options.hidden;
     const tabs =
       tabsetName === 'platforms' || PLATFORMS.some(p => tabsetName.includes(p))
