@@ -31,6 +31,7 @@ import Line from './Line';
 import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
 import VersionAdded from './VersionAdded';
+import VersionChanged from './VersionChanged';
 import Container from './Container';
 import Setting from './Setting';
 import Data from './Data';
@@ -111,6 +112,7 @@ export default class ComponentFactory extends Component {
       transition: Transition,
       uriwriter: URIWriter,
       versionadded: VersionAdded,
+      versionchanged: VersionChanged,
     };
   }
 
