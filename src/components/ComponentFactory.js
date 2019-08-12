@@ -34,6 +34,9 @@ import VersionAdded from './VersionAdded';
 import Container from './Container';
 import Setting from './Setting';
 import Data from './Data';
+import Only from './Only';
+import Binary from './Binary';
+import Meta from './Meta';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -72,6 +75,7 @@ export default class ComponentFactory extends Component {
     };
     this.componentMap = {
       admonition: Admonition,
+      binary: Binary,
       block_quote: BlockQuote,
       class: CSSClass,
       code: Code,
@@ -92,6 +96,8 @@ export default class ComponentFactory extends Component {
       'list-table': ListTable,
       literal: Literal,
       literalinclude: LiteralInclude,
+      meta: Meta,
+      only: Only,
       paragraph: Paragraph,
       reference: Reference,
       section: Section,
@@ -150,6 +156,8 @@ export default class ComponentFactory extends Component {
   }
 
   render() {
+    const { nodeData } = this.props;
+    if (!nodeData) return null;
     return this.selectComponent();
   }
 }
