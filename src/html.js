@@ -40,6 +40,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
     <body {...bodyAttributes}>
       <script async src={withPrefix('scripts/segment.js')} />
       {preBodyComponents}
+      {/* eslint-disable-next-line react/no-danger */}
       <div key="body" id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
       {postBodyComponents}
     </body>

@@ -27,7 +27,7 @@ export default class Document extends Component {
 
   render() {
     const {
-      pageContext: { includes, pageMetadata, __refDocMapping },
+      pageContext: { pageMetadata, __refDocMapping },
       substitutions,
     } = this.props;
     const { pillstrips } = this.state;
@@ -51,7 +51,6 @@ export default class Document extends Component {
                         key={index}
                         nodeData={child}
                         refDocMapping={__refDocMapping}
-                        includes={includes}
                         pageMetadata={pageMetadata}
                         pillstrips={pillstrips}
                         substitutions={substitutions}
@@ -76,7 +75,6 @@ Document.propTypes = {
         children: PropTypes.array,
       }).isRequired,
     }).isRequired,
-    includes: PropTypes.objectOf(PropTypes.object),
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
   substitutions: PropTypes.objectOf(PropTypes.array).isRequired,

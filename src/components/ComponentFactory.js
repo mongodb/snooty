@@ -30,6 +30,13 @@ import SubstitutionReference from './SubstitutionReference';
 import Line from './Line';
 import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
+import Contents from './Contents';
+import Container from './Container';
+import Setting from './Setting';
+import Data from './Data';
+import Only from './Only';
+import Binary from './Binary';
+import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
 
 import RoleApi from './Roles/Api';
@@ -69,10 +76,14 @@ export default class ComponentFactory extends Component {
     };
     this.componentMap = {
       admonition: Admonition,
+      binary: Binary,
       block_quote: BlockQuote,
-      code: Code,
       class: CSSClass,
+      code: Code,
+      container: Container,
+      contents: Contents,
       cssclass: CSSClass,
+      data: Data,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
@@ -87,9 +98,12 @@ export default class ComponentFactory extends Component {
       'list-table': ListTable,
       literal: Literal,
       literalinclude: LiteralInclude,
+      meta: Meta,
+      only: Only,
       paragraph: Paragraph,
       reference: Reference,
       section: Section,
+      setting: Setting,
       step: Step,
       strong: Strong,
       substitution_reference: SubstitutionReference,
@@ -144,6 +158,8 @@ export default class ComponentFactory extends Component {
   }
 
   render() {
+    const { nodeData } = this.props;
+    if (!nodeData) return null;
     return this.selectComponent();
   }
 }
