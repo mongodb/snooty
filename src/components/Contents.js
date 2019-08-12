@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../utils/get-nested-value';
 
+const CONTENT_LIST_ITEM_SHAPE = {
+  children: PropTypes.arrayOf(PropTypes.object),
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
 const ContentsListItem = ({ id, listChildren, title }) => (
   <li>
     <a href={`#${id}`}>{title}</a>
@@ -11,7 +17,7 @@ const ContentsListItem = ({ id, listChildren, title }) => (
 
 ContentsListItem.propTypes = {
   id: PropTypes.string.isRequired,
-  listChildren: PropTypes.arrayOf(PropTypes.object).isRequired,
+  listChildren: PropTypes.arrayOf(PropTypes.shape(CONTENT_LIST_ITEM_SHAPE)).isRequired,
   title: PropTypes.string.isRequired,
 };
 
@@ -27,13 +33,7 @@ const ContentsList = ({ className, listItems }) => {
 
 ContentsList.propTypes = {
   className: PropTypes.string,
-  listItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      children: PropTypes.arrayOf(PropTypes.object),
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  listItems: PropTypes.arrayOf(PropTypes.shape(CONTENT_LIST_ITEM_SHAPE)).isRequired,
 };
 
 ContentsList.defaultProps = {
@@ -41,10 +41,12 @@ ContentsList.defaultProps = {
 };
 
 const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
+  const maxDepth = typeof options.depth === 'undefined' ? Infinity : options.depth;
+
   const findSectionHeadings = (nodes, key, value) => {
     const results = [];
     const searchNode = (node, sectionDepth) => {
-      if (node[key] === value && sectionDepth - 1 <= options.depth && sectionDepth > 1) {
+      if (node[key] === value && sectionDepth - 1 <= maxDepth && sectionDepth > 1) {
         const nodeTitle =
           getNestedValue(['children', 0, 'value'], node) || getNestedValue(['children', 0, 'label', 'value'], node);
         const newNode = {
