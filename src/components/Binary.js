@@ -4,7 +4,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 
 const Binary = ({ nodeData }) => {
   const displayText = getNestedValue(['argument', 0, 'value'], nodeData);
-  const [classname, name] = displayText.split('.');
+  const [, name] = displayText.split('.');
   return (
     <dl className="binary">
       <dt id={displayText}>
@@ -23,7 +23,7 @@ Binary.propTypes = {
       PropTypes.shape({
         value: PropTypes.string.isRequired,
       })
-    ),
+    ).isRequired,
   }).isRequired,
 };
 
