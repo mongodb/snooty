@@ -30,6 +30,7 @@ import SubstitutionReference from './SubstitutionReference';
 import Line from './Line';
 import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
+import Contents from './Contents';
 import VersionAdded from './VersionAdded';
 import VersionChanged from './VersionChanged';
 import Container from './Container';
@@ -81,6 +82,7 @@ export default class ComponentFactory extends Component {
       class: CSSClass,
       code: Code,
       container: Container,
+      contents: Contents,
       cssclass: CSSClass,
       data: Data,
       definitionList: DefinitionList,
