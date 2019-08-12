@@ -3,22 +3,28 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const ListTable = ({ nodeData: { children, options }, ...rest }) => {
-  const headerRowCount = parseInt(options['header-rows'], 10) || 0;
-  const stubColumnCount = parseInt(options['stub-columns'], 10) || 0;
+const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
+  const headerRowCount = parseInt(getNestedValue(['options', 'header-rows'], nodeData), 10) || 0;
+  const stubColumnCount = parseInt(getNestedValue(['options', 'stub-columns'], nodeData), 10) || 0;
   const headerRows = children[0].children[0].children.slice(0, headerRowCount);
   const bodyRows = children[0].children.slice(headerRowCount);
-  const customWidth = options.width ? options.width : 'auto';
-  const customAlign = options.align ? `align-${options.align}` : '';
+  const customWidth = getNestedValue(['options', 'width'], nodeData) || 'auto';
+  const customAlign = getNestedValue(['options', 'align'], nodeData)
+    ? `align-${getNestedValue(['options', 'align'], nodeData)}`
+    : '';
 
   let widths = 'colwidths-auto';
-  if (options.widths && options.widths !== 'auto') {
+  const customWidths = getNestedValue(['options', 'widths'], nodeData);
+  if (customWidths && customWidths !== 'auto') {
     widths = 'colwidths-given';
   }
 
   return (
-    <table className={['docutils', options.class || '', widths, customAlign].join(' ')} style={{ width: customWidth }}>
-      {widths === 'colwidths-given' && <ColGroup widths={options.widths.split(/[ ,]+/)} />}
+    <table
+      className={['docutils', getNestedValue(['options', 'class'], nodeData) || '', widths, customAlign].join(' ')}
+      style={{ width: customWidth }}
+    >
+      {widths === 'colwidths-given' && <ColGroup widths={customWidths.split(/[ ,]+/)} />}
       <ListTableHeader {...rest} rows={headerRows} stubColumnCount={stubColumnCount} />
       <ListTableBody {...rest} rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
     </table>

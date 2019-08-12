@@ -36,7 +36,7 @@ const Admonition = ({ nodeData, ...rest }) => {
         titleText ? `admonition-${makeId(titleText)}` : null, // stringify title into slug
       ].join(' ')}
     >
-      <p className="first admonition-title">{titleText || name}</p>
+      <p className="first admonition-title">{titleText || (name === 'seealso' ? 'see also' : name)}</p>
       {childElements.map((child, index) => {
         // Apply "last" class to the last child element of admonition
         if (index === nodeData.children.length - 1) {
