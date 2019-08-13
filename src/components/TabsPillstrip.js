@@ -23,7 +23,7 @@ export default class TabsPillstrip extends Component {
 }
 
 TabsPillstrip.propTypes = {
-  addPillstrip: PropTypes.func.isRequired,
+  addPillstrip: PropTypes.func,
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
@@ -36,4 +36,8 @@ TabsPillstrip.propTypes = {
       children: PropTypes.arrayOf(PropTypes.object).isRequired,
     }).isRequired,
   }).isRequired,
+};
+
+TabsPillstrip.defaultProps = {
+  addPillstrip: () => {},
 };
