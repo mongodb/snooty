@@ -78,7 +78,6 @@ export default class Guide extends Component {
   };
 
   addGuidesTabset = (tabsetName, tabData) => {
-    const { setActiveTab } = this.context;
     let tabs = tabData.map(tab => tab.argument[0].value);
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
@@ -86,8 +85,6 @@ export default class Guide extends Component {
     } else if (tabsetName === 'drivers') {
       tabs = LANGUAGES.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs, LANGUAGES);
-    } else {
-      setActiveTab(tabsetName, getLocalValue(tabsetName) || tabs[0]);
     }
   };
 
@@ -102,7 +99,9 @@ export default class Guide extends Component {
           constants
         ),
       }),
-      () => setActiveTab(tabsetName, getLocalValue(tabsetName) || tabs[0])
+      () => {
+        setActiveTab(tabsetName, getLocalValue(tabsetName) || this.state[tabsetName][0]); // eslint-disable-line react/destructuring-assignment
+      }
     );
   };
 
@@ -115,7 +114,7 @@ export default class Guide extends Component {
   };
 
   createSections() {
-    const { pageContext } = this.props;
+    const { pageContext, pillstrips } = this.props;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
@@ -138,6 +137,7 @@ export default class Guide extends Component {
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
           pageMetadata={pageContext.pageMetadata}
+          pillstrips={pillstrips}
         />
       );
     });
@@ -193,6 +193,7 @@ Guide.propTypes = {
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,
+  pillstrips: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 Guide.contextType = TabContext;

@@ -9,6 +9,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 
 // TODO: Improve validation of template content
 const GuideHeading = ({ author, cloud, description, drivers, time, title, ...rest }) => {
+  const { activeTabs } = useContext(TabContext);
   const displayTitle = getNestedValue(['children', 0, 'value'], title);
   const titleId = getNestedValue(['id'], title);
   const authorName = getNestedValue(['argument', 0, 'value'], author);

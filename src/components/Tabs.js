@@ -6,23 +6,26 @@ import { PLATFORMS, stringifyTab } from '../constants';
 import { reportAnalytics } from '../utils/report-analytics';
 import { getNestedValue } from '../utils/get-nested-value';
 
+const GUIDES_PILLSETS = ['cloud', 'drivers'];
+
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
-    const { addPillstripData, nodeData } = this.props;
+    const { nodeData } = this.props;
     const tabsetName = getNestedValue(['options', 'tabset'], nodeData) || this.generateAnonymousTabsetName(nodeData);
     this.state = { tabsetName };
   }
 
   componentDidMount() {
     const { addTabset, nodeData } = this.props;
-    const { setActiveTab } = this.context;
+    const { activeTabs, setActiveTab } = this.context;
     const { tabsetName } = this.state;
-    if (addTabset !== undefined) {
-      console.log('here');
-      console.log(this.props);
+
+    // Specially handle guides pillsets
+    if (GUIDES_PILLSETS.includes(tabsetName) && addTabset !== undefined) {
       addTabset(tabsetName, [...nodeData.children]);
-    } else {
+    } else if (!Object.prototype.hasOwnProperty.call(activeTabs, tabsetName)) {
+      // If a tab preference isn't saved to local storage, select the first tab by default
       setActiveTab(tabsetName, getNestedValue(['children', 0, 'argument', 0, 'value'], nodeData));
     }
   }
@@ -161,10 +164,12 @@ Tabs.propTypes = {
     }),
   }).isRequired,
   addTabset: PropTypes.func,
+  pillstrips: PropTypes.arrayOf(PropTypes.string),
 };
 
 Tabs.defaultProps = {
   addTabset: undefined,
+  pillstrips: [],
 };
 
 Tabs.contextType = TabContext;

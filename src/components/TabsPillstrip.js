@@ -22,11 +22,18 @@ export default class TabsPillstrip extends Component {
   }
 }
 
-/* const TabsPillstrip = ({ addPillstrip, nodeData }) => {
-  console.log(nodeData);
-  const pillstripName = getNestedValue(['argument', 0, 'value'], nodeData);
-  addPillstrip(pillstripName);
-  return null;
+TabsPillstrip.propTypes = {
+  addPillstrip: PropTypes.func.isRequired,
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  refDocMapping: PropTypes.shape({
+    ast: PropTypes.shape({
+      children: PropTypes.arrayOf(PropTypes.object).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
-
-export default TabsPillstrip; */

@@ -7,9 +7,6 @@ import pillStyles from '../styles/pills.module.css';
 
 const Pills = ({ activeClass, dataTabPreference, isTruncated, liClass, pills, pillsetName, ulClass }) => {
   const { activeTabs, setActiveTab } = useContext(TabContext);
-  console.log(activeTabs);
-  console.log(pillsetName);
-  console.log(activeTabs[pillsetName]);
   return (
     <ul
       className={`guide__pills pillstrip-declaration ${ulClass}`}

@@ -13,10 +13,16 @@ export default class DefaultLayout extends Component {
     this.preprocessPageNodes();
 
     this.state = {
-      activeTabs: getLocalValue('activeTabs'),
+      activeTabs: getLocalValue('activeTabs') || {},
+      pillstrips: [],
     };
-    console.log(this.state);
   }
+
+  addPillstrip = pillstripName => {
+    this.setState(prevState => ({
+      pillstrips: [...prevState.pillstrips, pillstripName],
+    }));
+  };
 
   preprocessPageNodes = () => {
     const {
@@ -75,18 +81,23 @@ export default class DefaultLayout extends Component {
         },
       }),
       () => {
-        setLocalValue('activeTabs', this.state.activeTabs);
+        setLocalValue('activeTabs', this.state.activeTabs); // eslint-disable-line react/destructuring-assignment
       }
     );
   };
 
   render() {
     const { children } = this.props;
+    const { pillstrips } = this.state;
 
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
         <SiteMetadata />
-        {React.cloneElement(children, { substitutions: this.substitutions })}
+        {React.cloneElement(children, {
+          pillstrips,
+          addPillstrip: this.addPillstrip,
+          substitutions: this.substitutions,
+        })}
       </TabContext.Provider>
     );
   }
