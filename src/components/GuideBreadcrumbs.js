@@ -1,6 +1,7 @@
 import React from 'react';
 import { withPrefix } from 'gatsby';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+// eslint-disable-next-line import/no-unresolved
+import { useSiteMetadata } from 'usesitemetadata';
 
 const GuideBreadcrumbs = () => {
   const { title } = useSiteMetadata();
