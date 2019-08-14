@@ -147,6 +147,7 @@ export default class Guide extends Component {
     const { pageContext, path } = this.props;
     const { activeSection, cloud, drivers } = this.state;
     const pageSlug = path.substr(1);
+    const previewMode = process.env.PREVIEW_PAGE !== undefined;
 
     return (
       <React.Fragment>
@@ -175,7 +176,7 @@ export default class Guide extends Component {
               <Footer />
             </div>
           </div>
-          <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
+          {!previewMode && <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />}
         </div>
       </React.Fragment>
     );
