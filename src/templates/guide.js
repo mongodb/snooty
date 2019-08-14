@@ -8,7 +8,6 @@ import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
 import Widgets from '../components/Widgets/Widgets';
 import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
-import { getLocalValue } from '../utils/browser-storage';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -78,7 +77,7 @@ export default class Guide extends Component {
   };
 
   addGuidesTabset = (tabsetName, tabData) => {
-    let tabs = tabData.map(tab => tab.argument[0].value);
+    let tabs = tabData.map(tab => getNestedValue(['options', 'tabid'], tab));
     if (tabsetName === 'cloud') {
       tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
       this.setNamedTabData(tabsetName, tabs, DEPLOYMENTS);
@@ -91,7 +90,7 @@ export default class Guide extends Component {
   matchArraySorting = (tabs, referenceArray) => referenceArray.filter(t => tabs.includes(t));
 
   setNamedTabData = (tabsetName, tabs, constants) => {
-    const { setActiveTab } = this.context;
+    const { activeTabs, setActiveTab } = this.context;
     this.setState(
       prevState => ({
         [tabsetName]: this.matchArraySorting(
@@ -100,7 +99,10 @@ export default class Guide extends Component {
         ),
       }),
       () => {
-        setActiveTab(tabsetName, getLocalValue(tabsetName) || this.state[tabsetName][0]); // eslint-disable-line react/destructuring-assignment
+        // If a tab preference isn't saved to local storage, select the first tab by default
+        if (!Object.prototype.hasOwnProperty.call(activeTabs, tabsetName)) {
+          setActiveTab(tabsetName, this.state[tabsetName][0]); // eslint-disable-line react/destructuring-assignment
+        }
       }
     );
   };

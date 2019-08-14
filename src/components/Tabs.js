@@ -26,35 +26,24 @@ export default class Tabs extends Component {
       addTabset(tabsetName, [...nodeData.children]);
     } else if (!Object.prototype.hasOwnProperty.call(activeTabs, tabsetName)) {
       // If a tab preference isn't saved to local storage, select the first tab by default
-      setActiveTab(tabsetName, getNestedValue(['children', 0, 'argument', 0, 'value'], nodeData));
+      setActiveTab(tabsetName, getNestedValue(['children', 0, 'options', 'tabid'], nodeData));
     }
   }
 
   /*
-   * For anonymous tabsets, create a tabset name that alphabetizes the tab names, formats them in lowercase,
-   * and joins them with a forward slash (/)
+   * For anonymous tabsets, create a tabset name that alphabetizes the tabid fields and joins them with a forward slash (/)
    */
   generateAnonymousTabsetName = nodeData => {
     return nodeData.children
-      .map(child => {
-        const tabName = getNestedValue(['argument', 0, 'value'], child);
-        if (!tabName) return null;
-        return child.argument[0].value.toLowerCase();
-      })
-      .sort((a, b) => {
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-      })
+      .map(child => getNestedValue(['options', 'tabid'], child))
+      .sort()
       .join('/');
   };
 
   sortTabset = (nodeData, referenceArray) => {
     return nodeData.children.sort((a, b) => {
-      let aValue = getNestedValue(['argument', 0, 'value'], a);
-      let bValue = getNestedValue(['argument', 0, 'value'], b);
-      if (aValue) aValue = aValue.toLowerCase();
-      if (bValue) bValue = bValue.toLowerCase();
+      const aValue = getNestedValue(['options', 'tabid'], a);
+      const bValue = getNestedValue(['options', 'tabid'], b);
       return referenceArray.indexOf(aValue) - referenceArray.indexOf(bValue);
     });
   };
@@ -85,14 +74,14 @@ export default class Tabs extends Component {
         {isHeaderTabset || isHidden || (
           <ul className="tab-strip tab-strip--singleton" role="tablist">
             {tabs.map((tab, index) => {
-              let tabName = getNestedValue(['argument', 0, 'value'], tab);
-              if (tabName) tabName = tabName.toLowerCase();
+              const tabId = getNestedValue(['options', 'tabid'], tab);
+              const tabTitle = getNestedValue(['argument', 0, 'value'], tab) || stringifyTab(tabId);
               let ariaSelect = 'false';
-              if (activeTabs) ariaSelect = activeTabs[tabsetName] === tabName ? 'true' : 'false';
+              if (activeTabs) ariaSelect = activeTabs[tabsetName] === tabId ? 'true' : 'false';
               return (
                 <li
                   className="tab-strip__element"
-                  data-tabid={tabName}
+                  data-tabid={tabId}
                   role="tab"
                   aria-selected={ariaSelect}
                   key={index}
@@ -110,7 +99,7 @@ export default class Tabs extends Component {
                     const offset = initScrollY - initRect.top;
 
                     // Await for page to re-render after setting active tab
-                    await setActiveTab(tabsetName, tabName);
+                    await setActiveTab(tabsetName, tabId);
 
                     // Get the position of tab strip after re-render
                     const rects = element.getBoundingClientRect();
@@ -118,27 +107,28 @@ export default class Tabs extends Component {
                     // Reset the scroll position of the browser
                     window.scrollTo(rects.x, rects.top + offset);
                     reportAnalytics('Tab Selected', {
-                      tabId: tabName,
-                      title: stringifyTab(tabName),
+                      tabId,
+                      title: tabTitle,
                       tabSet: tabsetName,
                     });
                   }}
                 >
-                  {stringifyTab(tabName)}
+                  {tabTitle}
                 </li>
               );
             })}
           </ul>
         )}
         {tabs.map((tab, index) => {
-          let tabName = getNestedValue(['argument', 0, 'value'], tab);
-          if (tabName) tabName = tabName.toLowerCase();
+          const tabId = getNestedValue(['options', 'tabid'], tab);
+          // let tabName = getNestedValue(['argument', 0, 'value'], tab);
+          // if (tabName) tabName = tabName.toLowerCase();
 
           // If there are no activeTabs, js would typically be disabled
           const tabContent =
             !activeTabs || Object.getOwnPropertyNames(activeTabs).length === 0
               ? this.createFragment(tab, index)
-              : activeTabs[tabsetName] === tabName && this.createFragment(tab, index);
+              : activeTabs[tabsetName] === tabId && this.createFragment(tab, index);
 
           return tabContent;
         })}
@@ -157,6 +147,10 @@ Tabs.propTypes = {
           })
         ).isRequired,
         children: PropTypes.array,
+        name: PropTypes.oneOf(['tab']),
+        options: PropTypes.shape({
+          tabid: PropTypes.string.isRequired,
+        }).isRequired,
       })
     ),
     options: PropTypes.shape({

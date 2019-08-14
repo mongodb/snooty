@@ -14,7 +14,7 @@ export default class TabsPillstrip extends Component {
 
     const tabsets = findAllKeyValuePairs(getNestedValue(['ast', 'children'], refDocMapping), 'name', 'tabs');
     const pillsetNode = tabsets.find(tabset => getNestedValue(['options', 'tabset'], tabset) === this.pillstripName);
-    this.pillset = pillsetNode.children.map(pill => getNestedValue(['argument', 0, 'value'], pill));
+    this.pillset = pillsetNode.children.map(pill => getNestedValue(['options', 'tabid'], pill));
   }
 
   render() {
