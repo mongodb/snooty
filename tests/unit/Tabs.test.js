@@ -8,6 +8,7 @@ import { PLATFORMS } from '../../src/constants';
 import mockDataPlatforms from './data/Tabs-platform.test.json';
 import mockDataLanguages from './data/Tabs-languages.test.json';
 import mockDataHidden from './data/Tabs-hidden.test.json';
+import mockDataAnonymous from './data/Tabs-anonymous.test.json';
 
 const context = {
   activeTabs: {},
@@ -35,8 +36,8 @@ describe('Tabs testing', () => {
 
     beforeAll(() => {
       wrapper = mountTabs({
-        activeTabs: { platforms: PLATFORMS[0] },
-        mockData: mockDataPlatforms,
+        activeTabs: { 'list-view/table-view': 'table-view' },
+        mockData: mockDataAnonymous,
         mockAddTabset,
         mockSetActiveTab,
       });
@@ -49,8 +50,8 @@ describe('Tabs testing', () => {
       expect(wrapper.find('.tab-strip__element')).toHaveLength(tabCount);
     });
 
-    it('added tabset on component load', () => {
-      expect(mockAddTabset.mock.calls.length).toBe(1);
+    it('did not call mockAddTabset for a non-guides tabset', () => {
+      expect(mockAddTabset.mock.calls.length).toBe(0);
     });
 
     it('active tab is set in DOM', () => {
@@ -109,11 +110,14 @@ describe('Tabs testing', () => {
   describe('when javascript is disabled', () => {
     let wrapper;
     const mockAddTabset = jest.fn();
+    const mockSetActiveTab = jest.fn();
 
     beforeAll(() => {
-      wrapper = shallowTabs({
+      wrapper = mountTabs({
+        activeTabs: {},
         mockData: mockDataPlatforms,
         mockAddTabset,
+        mockSetActiveTab,
       });
     });
 
