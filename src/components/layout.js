@@ -13,9 +13,13 @@ export default class DefaultLayout extends Component {
     this.preprocessPageNodes();
 
     this.state = {
-      activeTabs: getLocalValue('activeTabs') || {},
+      activeTabs: {},
       pillstrips: [],
     };
+  }
+
+  componentDidMount() {
+    this.setState({ activeTabs: getLocalValue('activeTabs') || {} });
   }
 
   addPillstrip = pillstripName => {
