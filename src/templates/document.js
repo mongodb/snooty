@@ -59,7 +59,7 @@ Document.propTypes = {
     }).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
-  pillstrips: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pillstrips: PropTypes.objectOf(PropTypes.object).isRequired,
   substitutions: PropTypes.objectOf(PropTypes.array).isRequired,
 };
 

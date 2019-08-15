@@ -14,17 +14,20 @@ export default class DefaultLayout extends Component {
 
     this.state = {
       activeTabs: {},
-      pillstrips: [],
+      pillstrips: {},
     };
   }
 
   componentDidMount() {
-    this.setState({ activeTabs: getLocalValue('activeTabs') || {} });
+    this.setState(prevState => ({ activeTabs: { ...getLocalValue('activeTabs'), ...prevState.activeTabs } }));
   }
 
-  addPillstrip = pillstripName => {
+  addPillstrip = (pillstripKey, pillstripVal) => {
     this.setState(prevState => ({
-      pillstrips: [...prevState.pillstrips, pillstripName],
+      pillstrips: {
+        ...prevState.pillstrips,
+        [pillstripKey]: pillstripVal,
+      },
     }));
   };
 

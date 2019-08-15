@@ -116,7 +116,7 @@ export default class Guide extends Component {
   };
 
   createSections() {
-    const { pageContext, pillstrips } = this.props;
+    const { addPillstrip, pageContext, pillstrips } = this.props;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
@@ -132,6 +132,7 @@ export default class Guide extends Component {
     return this.bodySections.map((section, index) => {
       return (
         <GuideSection
+          addPillstrip={addPillstrip}
           sectionDepth={2}
           guideSectionData={section}
           key={index}
@@ -185,6 +186,7 @@ export default class Guide extends Component {
 }
 
 Guide.propTypes = {
+  addPillstrip: PropTypes.func.isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
@@ -195,7 +197,7 @@ Guide.propTypes = {
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,
-  pillstrips: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pillstrips: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 Guide.contextType = TabContext;

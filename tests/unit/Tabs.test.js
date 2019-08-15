@@ -2,7 +2,6 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Tabs from '../../src/components/Tabs';
 import { TabContext } from '../../src/components/tab-context';
-import { PLATFORMS } from '../../src/constants';
 
 // data for this component
 import mockDataPlatforms from './data/Tabs-platform.test.json';

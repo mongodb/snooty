@@ -30,6 +30,14 @@ export default class Tabs extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { addPillstrip, nodeData, pillstrips } = this.props;
+    const { tabsetName } = this.state;
+    if (prevProps.pillstrips[tabsetName] !== pillstrips[tabsetName] && Object.keys(pillstrips).includes(tabsetName)) {
+      addPillstrip(tabsetName, nodeData);
+    }
+  }
+
   /*
    * For anonymous tabsets, create a tabset name that alphabetizes the tabid fields and joins them with a forward slash (/)
    */
@@ -62,7 +70,8 @@ export default class Tabs extends Component {
     const { tabsetName } = this.state;
     const { nodeData, pillstrips } = this.props;
     const { activeTabs, setActiveTab } = this.context;
-    const isHeaderTabset = tabsetName === 'drivers' || tabsetName === 'cloud' || pillstrips.includes(tabsetName);
+    const isHeaderTabset =
+      tabsetName === 'drivers' || tabsetName === 'cloud' || Object.keys(pillstrips).includes(tabsetName);
     const isHidden = nodeData.options && nodeData.options.hidden;
     const tabs =
       tabsetName === 'platforms' || PLATFORMS.some(p => tabsetName.includes(p))
@@ -138,6 +147,7 @@ export default class Tabs extends Component {
 }
 
 Tabs.propTypes = {
+  addPillstrip: PropTypes.func.isRequired,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -158,12 +168,12 @@ Tabs.propTypes = {
     }),
   }).isRequired,
   addTabset: PropTypes.func,
-  pillstrips: PropTypes.arrayOf(PropTypes.string),
+  pillstrips: PropTypes.objectOf(PropTypes.object),
 };
 
 Tabs.defaultProps = {
   addTabset: undefined,
-  pillstrips: [],
+  pillstrips: {},
 };
 
 Tabs.contextType = TabContext;
