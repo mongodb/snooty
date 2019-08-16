@@ -77,13 +77,13 @@ export default class Guide extends Component {
   };
 
   addGuidesTabset = (tabsetName, tabData) => {
-    let tabs = tabData.map(tab => getNestedValue(['options', 'tabid'], tab));
+    const tabs = tabData.map(tab => getNestedValue(['options', 'tabid'], tab));
     if (tabsetName === 'cloud') {
-      tabs = DEPLOYMENTS.filter(tab => tabs.includes(tab));
-      this.setNamedTabData(tabsetName, tabs, DEPLOYMENTS);
+      const tabsFiltered = DEPLOYMENTS.filter(tab => tabs.includes(tab));
+      this.setNamedTabData(tabsetName, tabsFiltered, DEPLOYMENTS);
     } else if (tabsetName === 'drivers') {
-      tabs = LANGUAGES.filter(tab => tabs.includes(tab));
-      this.setNamedTabData(tabsetName, tabs, LANGUAGES);
+      const tabsFiltered = LANGUAGES.filter(tab => tabs.includes(tab));
+      this.setNamedTabData(tabsetName, tabsFiltered, LANGUAGES);
     }
   };
 
