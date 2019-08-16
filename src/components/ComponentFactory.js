@@ -37,6 +37,7 @@ import Data from './Data';
 import Only from './Only';
 import Binary from './Binary';
 import Meta from './Meta';
+import LiteralBlock from './LiteralBlock';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -96,6 +97,7 @@ export default class ComponentFactory extends Component {
       listItem: ListItem,
       'list-table': ListTable,
       literal: Literal,
+      literal_block: LiteralBlock,
       literalinclude: LiteralInclude,
       meta: Meta,
       only: Only,
