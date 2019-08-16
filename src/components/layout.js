@@ -4,7 +4,7 @@ import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
-import { setLocalValue } from '../utils/browser-storage';
+import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 
 export default class DefaultLayout extends Component {
   constructor(props) {
@@ -14,8 +14,22 @@ export default class DefaultLayout extends Component {
 
     this.state = {
       activeTabs: {},
+      pillstrips: {},
     };
   }
+
+  componentDidMount() {
+    this.setState(prevState => ({ activeTabs: { ...getLocalValue('activeTabs'), ...prevState.activeTabs } }));
+  }
+
+  addPillstrip = (pillstripKey, pillstripVal) => {
+    this.setState(prevState => ({
+      pillstrips: {
+        ...prevState.pillstrips,
+        [pillstripKey]: pillstripVal,
+      },
+    }));
+  };
 
   preprocessPageNodes = () => {
     const {
@@ -66,22 +80,31 @@ export default class DefaultLayout extends Component {
     if (tabs && !tabs.includes(value)) {
       activeTab = tabs[0];
     }
-    this.setState(prevState => ({
-      activeTabs: {
-        ...prevState.activeTabs,
-        [tabsetName]: activeTab,
-      },
-    }));
-    setLocalValue(tabsetName, activeTab);
+    this.setState(
+      prevState => ({
+        activeTabs: {
+          ...prevState.activeTabs,
+          [tabsetName]: activeTab,
+        },
+      }),
+      () => {
+        setLocalValue('activeTabs', this.state.activeTabs); // eslint-disable-line react/destructuring-assignment
+      }
+    );
   };
 
   render() {
     const { children } = this.props;
+    const { pillstrips } = this.state;
 
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
         <SiteMetadata />
-        {React.cloneElement(children, { substitutions: this.substitutions })}
+        {React.cloneElement(children, {
+          pillstrips,
+          addPillstrip: this.addPillstrip,
+          substitutions: this.substitutions,
+        })}
       </TabContext.Provider>
     );
   }

@@ -19,17 +19,10 @@
         }
       },
       "name": "tab",
-      "argument": [
-        {
-          "type": "text",
-          "position": {
-            "start": {
-              "line": 74
-            }
-          },
-          "value": "windows"
-        }
-      ],
+      "argument": [],
+      "options": {
+        "tabid": "windows"
+      },
       "children": [
         {
           "type": "paragraph",
@@ -59,7 +52,7 @@
           },
           "lang": "bat",
           "copyable": true,
-          "value": "tasklist /FI \"IMAGENAME eq mongod.exe\""
+          "value": "tasklist /FI \"IMAGE\\ NAME eq mongod.exe\""
         },
         {
           "type": "paragraph",
@@ -96,7 +89,6 @@
                 }
               },
               "target": "bin.mongod.exe",
-              "raw": "mongod.exe <bin.mongod.exe>",
               "children": []
             },
             {
@@ -131,17 +123,10 @@
         }
       },
       "name": "tab",
-      "argument": [
-        {
-          "type": "text",
-          "position": {
-            "start": {
-              "line": 92
-            }
-          },
-          "value": "linux"
-        }
-      ],
+      "argument": [],
+      "options": {
+        "tabid": "linux"
+      },
       "children": [
         {
           "type": "paragraph",
@@ -158,7 +143,7 @@
                   "line": 0
                 }
               },
-              "value": "To make sure your MongoDB instance is running on Linux, run the\nfollowing command from your terminal:"
+              "value": "To make sure your MongoDB instance is running on linux, run the\nfollowing command from your terminal:"
             }
           ]
         },
@@ -198,9 +183,7 @@
                 }
               },
               "name": "binary",
-              "label": "~bin.mongod",
               "target": "~bin.mongod",
-              "raw": "~bin.mongod",
               "children": []
             },
             {
@@ -235,17 +218,10 @@
         }
       },
       "name": "tab",
-      "argument": [
-        {
-          "type": "text",
-          "position": {
-            "start": {
-              "line": 109
-            }
-          },
-          "value": "macos"
-        }
-      ],
+      "argument": [],
+      "options": {
+        "tabid": "macos"
+      },
       "children": [
         {
           "type": "paragraph",
@@ -262,7 +238,7 @@
                   "line": 0
                 }
               },
-              "value": "To make sure your MongoDB instance is running on Mac, run the\nfollowing command from your terminal:"
+              "value": "To make sure your MongoDB instance is running on mac, run the\nfollowing command from your terminal:"
             }
           ]
         },
@@ -302,9 +278,7 @@
                 }
               },
               "name": "binary",
-              "label": "~bin.mongod",
               "target": "~bin.mongod",
-              "raw": "~bin.mongod",
               "children": []
             },
             {
