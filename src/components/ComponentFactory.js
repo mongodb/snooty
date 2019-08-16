@@ -39,6 +39,7 @@ import Binary from './Binary';
 import Meta from './Meta';
 import LiteralBlock from './LiteralBlock';
 import Expression from './Expression';
+import Topic from './Topic';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -113,6 +114,7 @@ export default class ComponentFactory extends Component {
       tabs: Tabs,
       text: Text,
       title_reference: TitleReference,
+      topic: Topic,
       transition: Transition,
       uriwriter: URIWriter,
     };
