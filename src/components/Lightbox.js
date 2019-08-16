@@ -6,11 +6,12 @@ import { getNestedValue } from '../utils/get-nested-value';
 const CAPTION_TEXT = 'click to enlarge';
 const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
-const Lightbox = ({ nodeData }) => {
+const Lightbox = ({ nodeData, base64Src }) => {
   const [showModal, setShowModal] = useState(false);
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
   const modal = useRef(null);
+  const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Src;
 
   const toggleShowModal = () => {
     setShowModal(prevShowState => !prevShowState);
@@ -34,7 +35,7 @@ const Lightbox = ({ nodeData }) => {
     <React.Fragment>
       <div className="figure lightbox" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
         <div className="lightbox__imageWrapper" onClick={toggleShowModal} role="button" tabIndex="-1">
-          <img src={withPrefix(imgSrc)} alt={altText} width="50%" />
+          <img src={imgData} alt={altText} width="50%" />
           <div className="lightbox__caption">{CAPTION_TEXT}</div>
         </div>
       </div>
@@ -54,7 +55,7 @@ const Lightbox = ({ nodeData }) => {
               'lightbox__content--activated',
               isSvg(imgSrc) ? 'lightbox__content--scalable' : null,
             ].join(' ')}
-            src={withPrefix(imgSrc)}
+            src={imgData}
             alt={`${altText} — Enlarged`}
           />
         </div>
@@ -74,6 +75,11 @@ Lightbox.propTypes = {
       alt: PropTypes.string,
     }).isRequired,
   }).isRequired,
+  base64Src: PropTypes.string,
+};
+
+Lightbox.defaultProps = {
+  base64Src: null,
 };
 
 export default Lightbox;

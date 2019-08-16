@@ -3,6 +3,7 @@ import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
 import Lightbox from './Lightbox';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getAssetData } from '../../preview/preview-setup';
 
 export default class Figure extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class Figure extends Component {
     this.imgRef = React.createRef();
     this.state = {
       isLightboxSize: false,
+      base64Src: null,
     };
   }
 
@@ -17,6 +19,17 @@ export default class Figure extends Component {
     const img = this.imgRef.current;
     if (img && img.complete) {
       this.handleImageLoaded();
+    }
+    if (process.env.PREVIEW_PAGE) {
+      const { nodeData } = this.props;
+      const checksum = nodeData.options.checksum;
+      getAssetData(checksum).then(assetData => {
+        const base64 = assetData.data.buffer.toString('base64');
+        const prefix = `data:image/${assetData.type.slice(1)};base64,`;
+        const base64Src = prefix.concat(base64);
+
+        this.setState({ base64Src });
+      });
     }
   }
 
@@ -35,16 +48,18 @@ export default class Figure extends Component {
 
   render() {
     const { nodeData } = this.props;
-    const { isLightboxSize } = this.state;
+    const { isLightboxSize, base64Src } = this.state;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
+    // Choose whether to show static asset file or via base64
+    const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Src;
 
     if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
-      return <Lightbox nodeData={nodeData} />;
+      return <Lightbox nodeData={nodeData} base64Src={base64Src} />;
     }
     return (
       <div className="figure" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
         <img
-          src={withPrefix(imgSrc)}
+          src={imgData}
           alt={getNestedValue(['options', 'alt'], nodeData) || imgSrc}
           width="50%"
           onLoad={this.handleImageLoaded}

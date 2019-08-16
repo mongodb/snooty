@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs').promises;
-const mkdirp = require('mkdirp');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-browser-sdk');
+const { getIncludeFile } = require('../src/utils/get-include-file');
 const { getNestedValue } = require('../src/utils/get-nested-value');
 const { findAllKeyValuePairs } = require('../src/utils/find-all-key-value-pairs');
 const { findKeyValuePair } = require('../src/utils/find-key-value-pair');
@@ -15,7 +15,6 @@ const SNOOTY_STITCH_ID = 'snooty-koueq';
 // test data properties
 const USE_TEST_DATA = process.env.USE_TEST_DATA;
 const TEST_DATA_PATH = 'tests/unit/data/site';
-const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
 const PAGES = [];
@@ -59,30 +58,6 @@ const validateEnvVariables = () => {
   };
 };
 
-const saveAssetFile = async (name, objData) => {
-  return new Promise((resolve, reject) => {
-    // Create nested directories as specified by the asset filenames if they do not exist
-    mkdirp(path.join('static', path.dirname(name)), err => {
-      if (err) return reject(err);
-      fs.writeFile(path.join('static', name), objData.data.buffer, 'binary', err => {
-        if (err) reject(err);
-      });
-      resolve();
-    });
-  });
-};
-
-// Write all assets to static directory
-const saveAssetFiles = async assets => {
-  const promises = [];
-  const assetQuery = { _id: { $in: Object.keys(assets) } };
-  const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
-  assetDataDocuments.forEach(asset => {
-    promises.push(saveAssetFile(assets[asset._id], asset));
-  });
-  return Promise.all(promises);
-};
-
 // Parse a page's AST to find all figure nodes and return a map of image checksums and filenames
 const getImagesInPage = page => {
   const imageNodes = findAllKeyValuePairs(page, 'name', 'figure');
@@ -90,28 +65,39 @@ const getImagesInPage = page => {
     const name = getNestedValue(['argument', 0, 'value'], node);
     const checksum = getNestedValue(['options', 'checksum'], node);
     obj[checksum] = name;
+
     return obj;
   }, {});
 };
 
+// For each include node found in a page, set its 'children' property to be the array of include contents
+const populateIncludeNodes = nodes => {
+  const replaceInclude = node => {
+    if (node.name === 'include') {
+      const includeFilename = getNestedValue(['argument', 0, 'value'], node);
+      const includeNode = getIncludeFile(INCLUDE_FILES, includeFilename);
+      // Perform the same operation on include nodes inside this include file
+      const replacedInclude = includeNode.map(replaceInclude);
+      node.children = replacedInclude;
+    } else if (node.children) {
+      node.children.forEach(replaceInclude);
+    }
+    return node;
+  };
+  return nodes.map(replaceInclude);
+};
+
+
 const sourceNodes = async () => {
   // setup env variables
-  console.log("Validating environment variables");
-
   const envResults = validateEnvVariables();
-
-  console.log("Validated environment variables");
 
   if (envResults.error) {
     throw Error(envResults.message);
   }
 
-  console.log("Setting up stitch");
-
   // wait to connect to stitch
   await setupStitch();
-
-  console.log("Stitch set up");
 
   // if running with test data
   if (USE_TEST_DATA) {
@@ -161,120 +147,35 @@ const sourceNodes = async () => {
       };
     }
   });
-
-  console.log("RESOLVED_REF_DOC_MAPPING");
-  console.log(RESOLVED_REF_DOC_MAPPING);
-
-  console.log("RESOLVED_REF_DOC_MAPPING[server/delete]");
-  console.log(RESOLVED_REF_DOC_MAPPING["server/delete"])
-
-//   console.log("Saving asset files");
-
-//   await saveAssetFiles(assets);
-
-//   console.log("Asset files saved");
-
-  // whenever we get latest data, always save latest version
-//   if (!USE_TEST_DATA) {
-//     const fullpathLatest = path.join(TEST_DATA_PATH, LATEST_TEST_DATA_FILE);
-//     fs.writeFile(fullpathLatest, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', err => {
-//       if (err) console.log(`ERROR saving test data into "${fullpathLatest}" file`, err);
-//       console.log(`** Saved test data into "${fullpathLatest}"`);
-//     });
-//   }
 };
-
-const createPages = ({ actions }) => {
-  const { createPage } = actions;
-  const isSinglePage = process.env.SINGLE_PAGE !== undefined;
-
-  return new Promise((resolve, reject) => {
-    PAGES.forEach(page => {
-      let template = 'document';
-      if (process.env.GATSBY_SITE === 'guides') {
-        template = page === 'index' ? 'guides-index' : 'guide';
-      }
-      const pageUrl = page === 'index' ? '/' : page;
-      if ((!isSinglePage || process.env.SINGLE_PAGE === pageUrl) && RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
-        console.log("MAKING", pageUrl);
-        createPage({
-          path: pageUrl,
-          component: path.resolve(`./src/templates/${template}.js`),
-          context: {
-            snootyStitchId: SNOOTY_STITCH_ID,
-            __refDocMapping: RESOLVED_REF_DOC_MAPPING[page],
-            includes: INCLUDE_FILES,
-            pageMetadata: PAGE_TITLE_MAP,
-          },
-        });
-      }
-    });
-    resolve();
-  });
-};
-
-// Prevent errors when running gatsby build caused by browser packages run in a node environment.
-const onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /mongodb-stitch-browser-sdk/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    });
-  }
-};
-
-export const getPages = () => {
-    console.log("getPages() called");
-    sourceNodes();
-    console.log("Returning pages");
-
-    return PAGES;
-}
-
-// export const testStart = () => {
-//     sourceNodes();
-// }
-
-export const getSnootyStitchId = () => {
-    return SNOOTY_STITCH_ID;
-}
-
-export const getRefDocMapping = () => {
-    return RESOLVED_REF_DOC_MAPPING;
-}
-
-export const getIncludeFiles = () => {
-    return INCLUDE_FILES;
-}
-
-export const getPageTitleMap = () => {
-    return PAGE_TITLE_MAP;
-}
 
 export const getPageData = async (page) => {
     await sourceNodes();
-    console.log("PreviewPage: ", process.env.PREVIEW_PAGE);
+    const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
+
+    pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
 
     let template = 'document';
     if (process.env.GATSBY_SITE === 'guides') {
         template = page === 'index' ? 'guides-index' : 'guide';
     }
     const pageUrl = page === 'index' ? '/' : page;
-
-    return {
+    if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
+      return {
         path: pageUrl,
-        component: path.resolve(`./src/templates/${template}.js`),
+        template,
         context: {
             snootyStitchId: SNOOTY_STITCH_ID,
-            __refDocMapping: RESOLVED_REF_DOC_MAPPING[page],
-            includes: INCLUDE_FILES,
+            __refDocMapping: pageNodes,
             pageMetadata: PAGE_TITLE_MAP,
         }
-    };
+      };
+    }
+    return null;
+}
+
+export const getAssetData = async (checksum) => {
+  const query = {_id: {$eq: checksum}}
+  const assetData = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, query]);
+  return assetData[0];
 }

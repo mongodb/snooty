@@ -1,6 +1,8 @@
 const { getNestedValue } = require('./get-nested-value');
 
-const getIncludeFile = (includeObj, filename) => {
+// TODO: Remove 'export' keyword when running on gatsby develop. Figure out a workaround
+// to allow for both gatsby develop and preview mode to work
+export const getIncludeFile = (includeObj, filename) => {
   let key = filename;
   if (key.startsWith('/')) {
     key = key.substr(1);
@@ -15,4 +17,4 @@ const getIncludeFile = (includeObj, filename) => {
 
 // TODO: switch to ES6 export syntax if Gatsby implements support for ES6 module imports
 // https://github.com/gatsbyjs/gatsby/issues/7810
-module.exports.getIncludeFile = getIncludeFile;
+// module.exports.getIncludeFile = getIncludeFile;
