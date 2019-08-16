@@ -65,7 +65,6 @@ const getImagesInPage = page => {
     const name = getNestedValue(['argument', 0, 'value'], node);
     const checksum = getNestedValue(['options', 'checksum'], node);
     obj[checksum] = name;
-
     return obj;
   }, {});
 };
