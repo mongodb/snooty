@@ -38,6 +38,7 @@ import Only from './Only';
 import Binary from './Binary';
 import Meta from './Meta';
 import LiteralBlock from './LiteralBlock';
+import Expression from './Expression';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -87,6 +88,7 @@ export default class ComponentFactory extends Component {
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
+      expression: Expression,
       figure: Figure,
       heading: Heading,
       hlist: HorizontalList,
