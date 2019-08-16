@@ -7,7 +7,9 @@ import Navbar from '../components/Navbar';
 
 const Document = props => {
   const {
+    addPillstrip,
     pageContext: { pageMetadata, __refDocMapping },
+    pillstrips,
     substitutions,
   } = props;
   const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
@@ -27,10 +29,12 @@ const Document = props => {
                   <div className="bc" />
                   {pageNodes.map((child, index) => (
                     <ComponentFactory
+                      addPillstrip={addPillstrip}
                       key={index}
                       nodeData={child}
                       refDocMapping={__refDocMapping}
                       pageMetadata={pageMetadata}
+                      pillstrips={pillstrips}
                       substitutions={substitutions}
                     />
                   ))}
@@ -46,6 +50,7 @@ const Document = props => {
 };
 
 Document.propTypes = {
+  addPillstrip: PropTypes.func.isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
@@ -54,6 +59,7 @@ Document.propTypes = {
     }).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
+  pillstrips: PropTypes.objectOf(PropTypes.object).isRequired,
   substitutions: PropTypes.objectOf(PropTypes.array).isRequired,
 };
 

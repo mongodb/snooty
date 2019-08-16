@@ -2,11 +2,11 @@
 
 exports[`Pills component renders correctly 1`] = `
 <ul
-  className="guide__pills "
+  className="guide__pills pillstrip-declaration "
   role="tablist"
 >
   <li
-    data-tabid="python"
+    data-tabid="windows"
     key="0"
   >
     <span
@@ -15,11 +15,11 @@ exports[`Pills component renders correctly 1`] = `
       role="button"
       tabIndex={0}
     >
-      Python
+      Windows
     </span>
   </li>
   <li
-    data-tabid="compass"
+    data-tabid="macos"
     key="1"
   >
     <span
@@ -28,11 +28,11 @@ exports[`Pills component renders correctly 1`] = `
       role="button"
       tabIndex={1}
     >
-      Compass
+      macOS
     </span>
   </li>
   <li
-    data-tabid="motor"
+    data-tabid="linux"
     key="2"
   >
     <span
@@ -41,20 +41,7 @@ exports[`Pills component renders correctly 1`] = `
       role="button"
       tabIndex={2}
     >
-      Motor
-    </span>
-  </li>
-  <li
-    data-tabid="go"
-    key="3"
-  >
-    <span
-      className="guide__pill   guide__pill"
-      onClick={[Function]}
-      role="button"
-      tabIndex={3}
-    >
-      Go
+      Linux
     </span>
   </li>
 </ul>
