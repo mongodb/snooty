@@ -1,20 +1,30 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Pills from '../../src/components/Pills';
+import { TabContext } from '../../src/components/tab-context';
+import { PLATFORMS } from '../../src/constants';
 
-const mountPills = ({ mockData, mockHandleClick }) => mount(<Pills pills={mockData} handleClick={mockHandleClick} />);
-const shallowPills = ({ mockData, mockHandleClick }) =>
-  shallow(<Pills pills={mockData} handleClick={mockHandleClick} />);
+const mountPills = ({ activeTabs, mockData, mockSetActiveTab }) =>
+  mount(
+    <TabContext.Provider value={{ activeTabs, setActiveTab: mockSetActiveTab }}>
+      <Pills pills={mockData} />
+    </TabContext.Provider>
+  );
+const shallowPills = ({ mockData }) => shallow(<Pills pills={mockData} />);
 
 describe('Pills component', () => {
   let wrapper;
   let shallowWrapper;
-  const mockData = ['python', 'compass', 'motor', 'go'];
-  const mockHandleClick = jest.fn();
+  const mockData = ['windows', 'macos', 'linux'];
+  const mockSetActiveTab = jest.fn();
 
   beforeAll(() => {
-    wrapper = mountPills({ mockData, mockHandleClick });
-    shallowWrapper = shallowPills({ mockData, mockHandleClick });
+    wrapper = mountPills({
+      activeTabs: { platforms: PLATFORMS[1] },
+      mockData,
+      mockSetActiveTab,
+    });
+    shallowWrapper = shallowPills({ mockData });
   });
 
   it('renders correctly', () => {
@@ -26,6 +36,6 @@ describe('Pills component', () => {
       .find('.guide__pill')
       .first()
       .simulate('click');
-    expect(wrapper.props().handleClick).toHaveBeenCalledTimes(1);
+    expect(mockSetActiveTab.mock.calls.length).toBe(1);
   });
 });

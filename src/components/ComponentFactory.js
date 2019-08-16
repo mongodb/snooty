@@ -37,6 +37,7 @@ import Data from './Data';
 import Only from './Only';
 import Binary from './Binary';
 import Meta from './Meta';
+import TabsPillstrip from './TabsPillstrip';
 import LiteralBlock from './LiteralBlock';
 import Expression from './Expression';
 import Topic from './Topic';
@@ -112,6 +113,7 @@ export default class ComponentFactory extends Component {
       strong: Strong,
       substitution_reference: SubstitutionReference,
       tabs: Tabs,
+      'tabs-pillstrip': TabsPillstrip,
       text: Text,
       title_reference: TitleReference,
       topic: Topic,

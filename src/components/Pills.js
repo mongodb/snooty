@@ -1,30 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { stringifyTab } from '../constants';
 import { reportAnalytics } from '../utils/report-analytics';
+import { TabContext } from './tab-context';
 import pillStyles from '../styles/pills.module.css';
 
-const Pills = ({
-  activeClass,
-  activePill,
-  dataTabPreference,
-  handleClick,
-  isTruncated,
-  liClass,
-  pills,
-  pillsetName,
-  ulClass,
-}) => {
+const Pills = ({ activeClass, dataTabPreference, isTruncated, liClass, pills, pillsetName, ulClass }) => {
+  const { activeTabs, setActiveTab } = useContext(TabContext);
   return (
-    <ul className={`guide__pills ${ulClass}`} role="tablist" data-tab-preference={dataTabPreference}>
+    <ul
+      className={`guide__pills pillstrip-declaration ${ulClass}`}
+      role="tablist"
+      data-tab-preference={dataTabPreference}
+    >
       {pills.map((pill, index) => (
         <li data-tabid={pill} key={index}>
           <span
-            className={['guide__pill', activePill === pill ? activeClass : '', liClass, pillStyles.guide__pill].join(
-              ' '
-            )}
+            className={[
+              'guide__pill',
+              activeTabs[pillsetName] === pill ? activeClass : '',
+              liClass,
+              pillStyles.guide__pill,
+            ].join(' ')}
             onClick={() => {
-              handleClick(pill);
+              setActiveTab(pillsetName, pill);
               reportAnalytics('Pill Selected', {
                 tabId: pill,
                 title: stringifyTab(pill),
@@ -45,9 +44,7 @@ const Pills = ({
 
 Pills.propTypes = {
   activeClass: PropTypes.string,
-  activePill: PropTypes.string,
   dataTabPreference: PropTypes.string,
-  handleClick: PropTypes.func.isRequired,
   isTruncated: PropTypes.bool,
   liClass: PropTypes.string,
   pills: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -57,7 +54,6 @@ Pills.propTypes = {
 
 Pills.defaultProps = {
   activeClass: 'guide__pill--active',
-  activePill: undefined,
   dataTabPreference: undefined,
   isTruncated: false,
   liClass: '',
