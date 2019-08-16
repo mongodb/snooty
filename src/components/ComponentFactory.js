@@ -41,6 +41,8 @@ import TabsPillstrip from './TabsPillstrip';
 import LiteralBlock from './LiteralBlock';
 import Expression from './Expression';
 import Topic from './Topic';
+import Subscript from './Subscript';
+import Superscript from './Superscript';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -111,7 +113,9 @@ export default class ComponentFactory extends Component {
       setting: Setting,
       step: Step,
       strong: Strong,
+      subscript: Subscript,
       substitution_reference: SubstitutionReference,
+      superscript: Superscript,
       tabs: Tabs,
       'tabs-pillstrip': TabsPillstrip,
       text: Text,
