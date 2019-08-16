@@ -130,8 +130,6 @@ export default class Tabs extends Component {
         )}
         {tabs.map((tab, index) => {
           const tabId = getNestedValue(['options', 'tabid'], tab);
-          // let tabName = getNestedValue(['argument', 0, 'value'], tab);
-          // if (tabName) tabName = tabName.toLowerCase();
 
           // If there are no activeTabs, js would typically be disabled
           const tabContent =
@@ -147,7 +145,7 @@ export default class Tabs extends Component {
 }
 
 Tabs.propTypes = {
-  addPillstrip: PropTypes.func.isRequired,
+  addPillstrip: PropTypes.func,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(
       PropTypes.shape({
@@ -172,6 +170,7 @@ Tabs.propTypes = {
 };
 
 Tabs.defaultProps = {
+  addPillstrip: () => {},
   addTabset: undefined,
   pillstrips: {},
 };
