@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { stringifyTab } from '../constants';
+import { getNestedValue } from '../utils/get-nested-value';
 import { reportAnalytics } from '../utils/report-analytics';
 import { TabContext } from './tab-context';
 import pillStyles from '../styles/pills.module.css';
@@ -18,7 +19,7 @@ const Pills = ({ activeClass, dataTabPreference, isTruncated, liClass, pills, pi
           <span
             className={[
               'guide__pill',
-              activeTabs[pillsetName] === pill ? activeClass : '',
+              getNestedValue([pillsetName], activeTabs) === pill ? activeClass : '',
               liClass,
               pillStyles.guide__pill,
             ].join(' ')}
