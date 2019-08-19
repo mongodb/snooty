@@ -43,6 +43,7 @@ import Expression from './Expression';
 import Topic from './Topic';
 import Subscript from './Subscript';
 import Superscript from './Superscript';
+import Alert from './Alert';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -81,6 +82,7 @@ export default class ComponentFactory extends Component {
     };
     this.componentMap = {
       admonition: Admonition,
+      alert: Alert,
       binary: Binary,
       block_quote: BlockQuote,
       class: CSSClass,
