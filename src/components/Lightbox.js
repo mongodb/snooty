@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
+import CaptionLegend from './CaptionLegend';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const CAPTION_TEXT = 'click to enlarge';
 const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
-const Lightbox = ({ nodeData, base64Uri }) => {
+const Lightbox = ({ nodeData, base64Uri, ...rest }) => {
   const [showModal, setShowModal] = useState(false);
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
@@ -38,6 +39,7 @@ const Lightbox = ({ nodeData, base64Uri }) => {
           <img src={imgData} alt={altText} width="50%" />
           <div className="lightbox__caption">{CAPTION_TEXT}</div>
         </div>
+        <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
       {showModal && (
         <div

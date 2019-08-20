@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
+import CaptionLegend from './CaptionLegend';
 import Lightbox from './Lightbox';
 import { getNestedValue } from '../utils/get-nested-value';
 // import { getAssetData } from '../../preview/preview-setup';
@@ -61,7 +62,7 @@ export default class Figure extends Component {
   };
 
   render() {
-    const { nodeData } = this.props;
+    const { nodeData, ...rest } = this.props;
     const { isLightboxSize, base64Uri } = this.state;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
     // Choose whether to show static asset file or via base64
@@ -79,6 +80,7 @@ export default class Figure extends Component {
           onLoad={this.handleImageLoaded}
           ref={this.imgRef}
         />
+        <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
     );
   }
