@@ -230,7 +230,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        usesitemetadata: path.resolve(__dirname, "src/hooks/use-site-metadata.js")
+        useSiteMetadata: path.resolve(__dirname, "src/hooks/use-site-metadata.js")
       }
     }
   });

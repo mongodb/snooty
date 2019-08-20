@@ -1,7 +1,6 @@
-const path = require('path');
-const fs = require('fs').promises;
+// TODO: Optimize this file along with gatsby-node. To make things reusable
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-browser-sdk');
-const { getIncludeFile } = require('../src/utils/get-include-file');
+const { getIncludeFile } = require('./get-include-file');
 const { getNestedValue } = require('../src/utils/get-nested-value');
 const { findAllKeyValuePairs } = require('../src/utils/find-all-key-value-pairs');
 const { findKeyValuePair } = require('../src/utils/find-key-value-pair');
@@ -11,10 +10,6 @@ const DB = 'snooty';
 const DOCUMENTS_COLLECTION = 'documents';
 const ASSETS_COLLECTION = 'assets';
 const SNOOTY_STITCH_ID = 'snooty-koueq';
-
-// test data properties
-const USE_TEST_DATA = process.env.USE_TEST_DATA;
-const TEST_DATA_PATH = 'tests/unit/data/site';
 
 // different types of references
 const PAGES = [];
@@ -98,28 +93,14 @@ const sourceNodes = async () => {
   // wait to connect to stitch
   await setupStitch();
 
-  // if running with test data
-  if (USE_TEST_DATA) {
-    // get data from test file
-    try {
-      const fullpath = path.join(TEST_DATA_PATH, USE_TEST_DATA);
-      const fileContent = fs.readFileSync(fullpath, 'utf8');
-      RESOLVED_REF_DOC_MAPPING = JSON.parse(fileContent);
-      console.log(`*** Using test data from "${fullpath}"`);
-    } catch (e) {
-      throw Error(`ERROR with test data file: ${e}`);
-    }
-  } else {
-    // start from index document
-    const idPrefix = `${process.env.GATSBY_SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
-    const query = { _id: { $regex: new RegExp(`${idPrefix}/*`) } };
-    const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
-    console.log("Documents fetched");
-    documents.forEach(doc => {
-      const { _id, ...rest } = doc;
-      RESOLVED_REF_DOC_MAPPING[_id.replace(`${idPrefix}/`, '')] = rest;
-    });
-  }
+  // start from index document
+  const idPrefix = `${process.env.GATSBY_SITE}/${process.env.PARSER_USER}/${process.env.PARSER_BRANCH}`;
+  const query = { _id: { $regex: new RegExp(`${idPrefix}/*`) } };
+  const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
+  documents.forEach(doc => {
+    const { _id, ...rest } = doc;
+    RESOLVED_REF_DOC_MAPPING[_id.replace(`${idPrefix}/`, '')] = rest;
+  });
 
   // Identify page documents and parse each document for images
   let assets = {};
@@ -148,6 +129,7 @@ const sourceNodes = async () => {
   });
 };
 
+// Similar to gatsby-node's createPage(). Return the data needed by a single page
 export const getPageData = async (page) => {
     await sourceNodes();
     const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
@@ -173,8 +155,13 @@ export const getPageData = async (page) => {
     return null;
 }
 
-export const getAssetData = async (checksum) => {
+// Use checksum from a Figure component to return base64 data of image
+export const getBase64Uri = async (checksum) => {
   const query = {_id: {$eq: checksum}}
-  const assetData = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, query]);
-  return assetData[0];
+  const assets = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, query]);
+  const assetData = assets[0];
+
+  const base64 = assetData.data.buffer.toString('base64');
+  const prefix = `data:image/${assetData.type.slice(1)};base64,`;
+  return prefix.concat(base64);
 }

@@ -13,7 +13,6 @@ module.exports = (env) => {
             rules: [
                 {
                     test: /\.js$/,
-                    // exclude: /node_modules/,
                     use: {
                         loader: 'babel-loader'
                     }
@@ -27,7 +26,7 @@ module.exports = (env) => {
         resolve: {
             alias: {
                 gatsby: path.resolve(__dirname, 'preview/noop.js'),
-                usesitemetadata: path.resolve(__dirname, "preview/noop.js")
+                useSiteMetadata: path.resolve(__dirname, "preview/noop.js")
             },
             extensions: ['*', '.js', '.css']
         },

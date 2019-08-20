@@ -3,34 +3,48 @@ import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
 import Lightbox from './Lightbox';
 import { getNestedValue } from '../utils/get-nested-value';
-import { getAssetData } from '../../preview/preview-setup';
+// import { getAssetData } from '../../preview/preview-setup';
 
 export default class Figure extends Component {
   constructor(props) {
     super(props);
     this.imgRef = React.createRef();
+    this._isMounted = false; // Can't use this.isMounted
     this.state = {
       isLightboxSize: false,
-      base64Src: null,
+      base64Uri: null,
     };
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     const img = this.imgRef.current;
     if (img && img.complete) {
       this.handleImageLoaded();
     }
+
+    // Get base64 image data
     if (process.env.PREVIEW_PAGE) {
       const { nodeData } = this.props;
-      const checksum = nodeData.options.checksum;
-      getAssetData(checksum).then(assetData => {
-        const base64 = assetData.data.buffer.toString('base64');
-        const prefix = `data:image/${assetData.type.slice(1)};base64,`;
-        const base64Src = prefix.concat(base64);
+      const checksum = getNestedValue(['options', 'checksum'], nodeData);
 
-        this.setState({ base64Src });
-      });
+      // Get base64 data of image using checksum
+      import('../../preview/preview-setup')
+        .then(module => {
+          return module.getBase64Uri(checksum);
+        })
+        .then(base64Uri => {
+          // Only change the state if this is mounted. (Warning of memory leak otherwise)
+          if (this._isMounted) {
+            this.setState({ base64Uri });
+          }
+        });
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   imgShouldHaveLightbox = () => {
@@ -48,13 +62,13 @@ export default class Figure extends Component {
 
   render() {
     const { nodeData } = this.props;
-    const { isLightboxSize, base64Src } = this.state;
+    const { isLightboxSize, base64Uri } = this.state;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
     // Choose whether to show static asset file or via base64
-    const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Src;
+    const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Uri;
 
     if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
-      return <Lightbox nodeData={nodeData} base64Src={base64Src} />;
+      return <Lightbox nodeData={nodeData} base64Uri={base64Uri} />;
     }
     return (
       <div className="figure" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
@@ -80,6 +94,7 @@ Figure.propTypes = {
     options: PropTypes.shape({
       alt: PropTypes.string,
       lightbox: PropTypes.bool,
+      checksum: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

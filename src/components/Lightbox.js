@@ -6,12 +6,12 @@ import { getNestedValue } from '../utils/get-nested-value';
 const CAPTION_TEXT = 'click to enlarge';
 const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
-const Lightbox = ({ nodeData, base64Src }) => {
+const Lightbox = ({ nodeData, base64Uri }) => {
   const [showModal, setShowModal] = useState(false);
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
   const modal = useRef(null);
-  const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Src;
+  const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Uri;
 
   const toggleShowModal = () => {
     setShowModal(prevShowState => !prevShowState);
@@ -75,11 +75,11 @@ Lightbox.propTypes = {
       alt: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  base64Src: PropTypes.string,
+  base64Uri: PropTypes.string,
 };
 
 Lightbox.defaultProps = {
-  base64Src: null,
+  base64Uri: null,
 };
 
 export default Lightbox;
