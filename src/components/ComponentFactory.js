@@ -44,6 +44,7 @@ import Topic from './Topic';
 import Subscript from './Subscript';
 import Superscript from './Superscript';
 import Alert from './Alert';
+import Image from './Image';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -98,6 +99,7 @@ export default class ComponentFactory extends Component {
       figure: Figure,
       heading: Heading,
       hlist: HorizontalList,
+      image: Image,
       include: Include,
       line: Line,
       line_block: LineBlock,

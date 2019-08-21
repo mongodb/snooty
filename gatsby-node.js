@@ -86,7 +86,7 @@ const saveAssetFiles = async assets => {
 
 // Parse a page's AST to find all figure nodes and return a map of image checksums and filenames
 const getImagesInPage = page => {
-  const imageNodes = findAllKeyValuePairs(page, 'name', 'figure');
+  const imageNodes = [...findAllKeyValuePairs(page, 'name', 'figure'), ...findAllKeyValuePairs(page, 'name', 'image')];
   return imageNodes.reduce((obj, node) => {
     const name = getNestedValue(['argument', 0, 'value'], node);
     const checksum = getNestedValue(['options', 'checksum'], node);
