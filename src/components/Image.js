@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { getNestedValue } from '../utils/get-nested-value';
 
-export default class Image extends PureComponent {
+export default class Image extends Component {
   constructor(props) {
     super(props);
     this.state = {
