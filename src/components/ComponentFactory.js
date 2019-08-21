@@ -34,7 +34,7 @@ import Contents from './Contents';
 import Container from './Container';
 import Setting from './Setting';
 import Data from './Data';
-import Only from './Only';
+import Cond from './Cond';
 import Binary from './Binary';
 import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
@@ -88,6 +88,7 @@ export default class ComponentFactory extends Component {
       block_quote: BlockQuote,
       class: CSSClass,
       code: Code,
+      cond: Cond,
       container: Container,
       contents: Contents,
       cssclass: CSSClass,
@@ -110,7 +111,7 @@ export default class ComponentFactory extends Component {
       literal_block: LiteralBlock,
       literalinclude: LiteralInclude,
       meta: Meta,
-      only: Only,
+      only: Cond,
       paragraph: Paragraph,
       reference: Reference,
       section: Section,
