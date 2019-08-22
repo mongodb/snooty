@@ -1,6 +1,6 @@
 import React from 'react';
 
 export const TabContext = React.createContext({
-  activeTabs: {},
+  activeTabs: undefined,
   setActiveTab: () => {},
 });

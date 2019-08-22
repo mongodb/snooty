@@ -31,7 +31,7 @@ const GuideHeading = ({ author, cloud, description, drivers, time, title, ...res
         <div className="guide-prefs">
           <div className="guide-prefs__caption">
             Deployment Type:
-            <span className="show-current-deployment"> {stringifyTab(activeTabs.cloud)}</span>
+            <span className="show-current-deployment"> {stringifyTab(getNestedValue(['cloud'], activeTabs))}</span>
           </div>
           <Pills
             pills={cloud}
@@ -47,7 +47,7 @@ const GuideHeading = ({ author, cloud, description, drivers, time, title, ...res
         <div className="guide-prefs">
           <div className="guide-prefs__caption">
             Client:
-            <span className="show-current-language"> {stringifyTab(activeTabs.drivers)}</span>
+            <span className="show-current-language"> {stringifyTab(getNestedValue(['drivers'], activeTabs))}</span>
           </div>
           <Pills pills={drivers} pillsetName="drivers" dataTabPreference="languages" />
         </div>

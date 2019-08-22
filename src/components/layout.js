@@ -13,7 +13,7 @@ export default class DefaultLayout extends Component {
     this.preprocessPageNodes();
 
     this.state = {
-      activeTabs: {},
+      activeTabs: undefined,
       pillstrips: {},
     };
   }
