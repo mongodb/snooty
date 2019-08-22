@@ -13,28 +13,40 @@ export default class Tabs extends Component {
     super(props);
     const { nodeData } = this.props;
     const tabsetName = getNestedValue(['options', 'tabset'], nodeData) || this.generateAnonymousTabsetName(nodeData);
-    this.state = { tabsetName };
-  }
-
-  componentDidMount() {
-    const { addTabset, nodeData } = this.props;
-    const { activeTabs, setActiveTab } = this.context;
-    const { tabsetName } = this.state;
-
-    // Specially handle guides pillsets
-    if (GUIDES_PILLSETS.includes(tabsetName) && addTabset !== undefined) {
-      addTabset(tabsetName, [...nodeData.children]);
-    } else if (!Object.prototype.hasOwnProperty.call(activeTabs, tabsetName)) {
-      // If a tab preference isn't saved to local storage, select the first tab by default
-      setActiveTab(tabsetName, getNestedValue(['children', 0, 'options', 'tabid'], nodeData));
-    }
+    this.state = { tabsetName, activeTabs: undefined };
   }
 
   componentDidUpdate(prevProps) {
-    const { addPillstrip, nodeData, pillstrips } = this.props;
+    const { setActiveTab } = this.context;
+    const { addPillstrip, addTabset, nodeData, pillstrips } = this.props;
     const { tabsetName } = this.state;
+
+    // If the rST includes a `tabs-pillstrip` directive that matches this tabset, add the data from this node to our global pillstrip object
     if (prevProps.pillstrips[tabsetName] !== pillstrips[tabsetName] && Object.keys(pillstrips).includes(tabsetName)) {
       addPillstrip(tabsetName, nodeData);
+    }
+
+    /*
+     * There is currently no way to know if componentDidUpdate was caused by a context change. To approximate this, save the activeTabs context
+     * object to this component's state and compare state with the context's current value. When the layout component has mounted
+     * (i.e. getLocalValue has been called), we can update the active pill/tabs and component state with any previously set values.
+     *
+     * Implement using function parameters if this feature is ever implemented: https://github.com/facebook/react/issues/14398
+     */
+    if (
+      this.context.activeTabs !== undefined && // eslint-disable-line react/destructuring-assignment
+      JSON.stringify(this.context.activeTabs) !== JSON.stringify(this.state.activeTabs) // eslint-disable-line react/destructuring-assignment
+    ) {
+      const { activeTabs } = this.context;
+      // React Docs explicitly say that it is okay to call setState from componentDidUpdate, so ignore lint warning
+      // https://reactjs.org/docs/react-component.html#componentdidupdate
+      this.setState({ activeTabs }); // eslint-disable-line react/no-did-update-set-state
+      if (GUIDES_PILLSETS.includes(tabsetName) && addTabset !== undefined) {
+        addTabset(tabsetName, [...nodeData.children], activeTabs);
+      } else if (!Object.prototype.hasOwnProperty.call(activeTabs, tabsetName)) {
+        // If a tab preference isn't saved to local storage, select the first tab by default
+        setActiveTab(tabsetName, getNestedValue(['children', 0, 'options', 'tabid'], nodeData));
+      }
     }
   }
 

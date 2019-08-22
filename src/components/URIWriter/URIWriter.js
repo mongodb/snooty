@@ -4,6 +4,7 @@ import { TEMPLATE_TYPE_ATLAS } from './constants';
 import { TabContext } from '../tab-context';
 import CloudForm from './CloudForm';
 import LocalForm from './LocalForm';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const URIWriter = ({ handleUpdateURIWriter }) => {
   const { activeTabs } = useContext(TabContext);
@@ -14,7 +15,7 @@ const URIWriter = ({ handleUpdateURIWriter }) => {
     });
   };
 
-  const isAtlas = activeTabs.cloud === TEMPLATE_TYPE_ATLAS;
+  const isAtlas = getNestedValue(['cloud'], activeTabs) === TEMPLATE_TYPE_ATLAS;
 
   return (
     <form className="uriwriter__form" autoComplete="off">
