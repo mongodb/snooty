@@ -109,7 +109,7 @@ export default class Code extends Component {
       code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uriData={activeUri} />);
       if (isBrowser()) code = this.htmlDecode(code);
     }
-    const hasActiveTabs = Object.keys(activeTabs).length !== 0;
+    const hasActiveTabs = activeTabs !== undefined && Object.keys(activeTabs).length !== 0;
 
     // TODO: when we move off docs-tools CSS, change the copy button from <a> to <button>
     return (
