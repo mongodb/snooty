@@ -1,5 +1,6 @@
 // TODO: Optimize this file along with gatsby-node. To make things reusable
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-browser-sdk');
+const { validateEnvVariables } = require('../src/utils/setup/validate-env-variables');
 const { getIncludeFile } = require('./get-include-file');
 const { getNestedValue } = require('../src/utils/get-nested-value');
 const { findAllKeyValuePairs } = require('../src/utils/find-all-key-value-pairs');
@@ -35,22 +36,6 @@ const setupStitch = () => {
       })
       .catch(console.error);
   });
-};
-
-// env variables for building site along with use in front-end
-// https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
-const validateEnvVariables = () => {
-  // make sure necessary env vars exist
-  if (!process.env.GATSBY_SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
-    return {
-      error: true,
-      message: `${process.env.NODE_ENV} requires the variables GATSBY_SITE, PARSER_USER, and PARSER_BRANCH`,
-    };
-  }
-  // create split prefix for use in stitch function
-  return {
-    error: false,
-  };
 };
 
 // Parse a page's AST to find all figure nodes and return a map of image checksums and filenames
@@ -158,8 +143,7 @@ export const getPageData = async (page) => {
 // Use checksum from a Figure component to return base64 data of image
 export const getBase64Uri = async (checksum) => {
   const query = {_id: {$eq: checksum}}
-  const assets = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, query]);
-  const assetData = assets[0];
+  const [ assetData ] = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, query]);
 
   const base64 = assetData.data.buffer.toString('base64');
   const prefix = `data:image/${assetData.type.slice(1)};base64,`;

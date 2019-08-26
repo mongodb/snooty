@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import CaptionLegend from './CaptionLegend';
 import Lightbox from './Lightbox';
 import { getNestedValue } from '../utils/get-nested-value';
-// import { getAssetData } from '../../preview/preview-setup';
 
 export default class Figure extends Component {
   constructor(props) {
     super(props);
     this.imgRef = React.createRef();
-    this._isMounted = false; // Can't use this.isMounted
+    // Can't use this.isMounted: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
+    this._isMounted = false;
     this.state = {
       isLightboxSize: false,
       base64Uri: null,

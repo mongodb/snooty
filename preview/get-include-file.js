@@ -1,6 +1,7 @@
 const { getNestedValue } = require('../src/utils/get-nested-value');
 
-// TODO: Figure out a way to use the same getIncludeFile() in both gatsby and preview
+// TODO: Figure out a way to use the same getIncludeFile() in both gatsby and preview.
+// Issue with using ES6 import/exports with Node.js require()
 export const getIncludeFile = (includeObj, filename) => {
   let key = filename;
   if (key.startsWith('/')) {

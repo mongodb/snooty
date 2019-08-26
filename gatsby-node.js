@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs').promises;
 const mkdirp = require('mkdirp');
+const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
@@ -42,22 +43,6 @@ const setupStitch = () => {
       })
       .catch(console.error);
   });
-};
-
-// env variables for building site along with use in front-end
-// https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
-const validateEnvVariables = () => {
-  // make sure necessary env vars exist
-  if (!process.env.GATSBY_SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
-    return {
-      error: true,
-      message: `${process.env.NODE_ENV} requires the variables GATSBY_SITE, PARSER_USER, and PARSER_BRANCH`,
-    };
-  }
-  // create split prefix for use in stitch function
-  return {
-    error: false,
-  };
 };
 
 const saveAssetFile = async (name, objData) => {

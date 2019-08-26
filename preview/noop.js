@@ -6,7 +6,8 @@ function useSiteMetadata() {
 }
 
 function withPrefix(str) {
-    return "#";
+    // Allows users to click on internal links without unnecessary page jumping or refreshing
+    return "#!";
 }
 
 module.exports = {

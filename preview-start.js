@@ -2,54 +2,50 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { getPageData } from './preview/preview-setup';
+// Layouts
+import DefaultLayout from './src/components/layout';
 import Document from './src/templates/document';
 import Guide from './src/templates/guide';
 import Index from './src/templates/guides-index';
-import DefaultLayout from './src/components/layout';
 
 class Preview extends React.Component {
     constructor(props) {
         super(props);
+        this.templates = {
+            'guide': Guide,
+            'guides-index': Index
+        }
         this.state = {
             pageData: null,
-            template: null
+            Template: null
         }
     }
 
     componentDidMount() {
         getPageData(process.env.PREVIEW_PAGE).then((pageData) => {
-            let templateComponent;
-            if (pageData.template === 'guide') {
-                templateComponent = <Guide pageContext={pageData.context} path={pageData.path}/>
-            }
-            else if (pageData.template === 'guides-index') {
-                templateComponent = <Index pageContext={pageData.context}/>
-            }
-            else {
-                templateComponent = <Document pageContext={pageData.context}/>
-            }
+            const Template = this.templates[pageData.template] ? this.templates[pageData.template] : Document;
             this.setState({
                 pageData, 
-                template: templateComponent
+                Template
             });
         });
     }
 
     render() {
-        const { pageData, template } = this.state;
+        const { pageData, Template } = this.state;
 
         return(
             <React.Fragment>
                 <Helmet>
                     {process.env.GATSBY_SITE === 'guides' ? (
-                        <link rel="stylesheet" href='./public/docs-tools/guides.css' type="text/css" />
+                        <link rel="stylesheet" href='./docs-tools/themes/mongodb/static/guides.css' type="text/css" />
                     ) : (
-                        <link rel="stylesheet" href='./public/docs-tools/mongodb-docs.css' type="text/css" />
+                        <link rel="stylesheet" href='./docs-tools/themes/mongodb/static/mongodb-docs.css' type="text/css" />
                     )}
                 </Helmet>
                 {pageData && 
                 <DefaultLayout pageContext={pageData.context} path={pageData.path}>
-                    {template}
+                    <Template pageContext={pageData.context} path={pageData.path}/>
                 </DefaultLayout>}
             </React.Fragment>
         );
