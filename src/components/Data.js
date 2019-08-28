@@ -5,7 +5,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 const Data = ({ nodeData }) => {
   const displayText = getNestedValue(['argument', 0, 'value'], nodeData);
   return (
-    <dl className="first last data">
+    <dl className="data">
       <dt id={displayText}>
         <code className="descname">{displayText}</code>
         <a className="headerlink" href={`#${displayText}`} title="Permalink to this definition">

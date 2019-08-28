@@ -4,9 +4,11 @@ import { getNestedValue } from '../utils/get-nested-value';
 
 const Setting = ({ nodeData }) => {
   const displayText = getNestedValue(['argument', 0, 'value'], nodeData);
-  const [classname, name] = displayText.split('.');
+  const commaSplitArr = displayText.split('.');
+  const classname = commaSplitArr.slice(0, commaSplitArr.length - 1);
+  const name = commaSplitArr.slice(commaSplitArr.length - 1);
   return (
-    <dl className="first last setting">
+    <dl className="setting">
       <dt id={displayText}>
         <code className="descclassname">{classname}.</code>
         <code className="descname">{name}</code>

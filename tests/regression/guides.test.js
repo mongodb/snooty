@@ -126,7 +126,7 @@ describe('landing page', () => {
   });
 });
 
-describe('with default tabs', () => {
+describe.only('with default tabs', () => {
   describe.each(slugArray)('%p', slug => {
     it(`file text is the same`, async () => {
       expect.assertions(1);
