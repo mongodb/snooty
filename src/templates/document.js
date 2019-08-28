@@ -50,7 +50,7 @@ const Document = props => {
 };
 
 Document.propTypes = {
-  addPillstrip: PropTypes.func.isRequired,
+  addPillstrip: PropTypes.func,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
@@ -59,8 +59,14 @@ Document.propTypes = {
     }).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
-  pillstrips: PropTypes.objectOf(PropTypes.object).isRequired,
-  substitutions: PropTypes.objectOf(PropTypes.array).isRequired,
+  pillstrips: PropTypes.objectOf(PropTypes.object),
+  substitutions: PropTypes.objectOf(PropTypes.array),
+};
+
+Document.defaultProps = {
+  addPillstrip: () => {},
+  pillstrips: {},
+  substitutions: {},
 };
 
 export default Document;
