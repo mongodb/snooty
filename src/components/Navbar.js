@@ -26,13 +26,11 @@ export default class Navbar extends Component {
 
   componentDidMount() {
     // Add script to give navbar functionality and css
-    if (document !== undefined) {
-      const script = document.createElement('script');
-      script.src = withPrefix('docs-tools/navbar.min.js');
-      script.async = true;
+    const script = document.createElement('script');
+    script.src = withPrefix('docs-tools/navbar.min.js');
+    script.async = true;
 
-      document.body.appendChild(script);
-    }
+    document.body.appendChild(script);
 
     // Update activeLink state on render
     if (isBrowser()) {

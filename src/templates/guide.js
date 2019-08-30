@@ -178,7 +178,7 @@ export default class Guide extends Component {
               <Footer />
             </div>
           </div>
-          <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />
+          {!process.env.PREVIEW_PAGE && <Widgets guideName={pageSlug} snootyStitchId={pageContext.snootyStitchId} />}
         </div>
       </React.Fragment>
     );

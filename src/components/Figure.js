@@ -9,16 +9,43 @@ export default class Figure extends Component {
   constructor(props) {
     super(props);
     this.imgRef = React.createRef();
+    // Can't use this.isMounted: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
+    this._isMounted = false;
     this.state = {
       isLightboxSize: false,
+      base64Uri: null,
     };
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     const img = this.imgRef.current;
     if (img && img.complete) {
       this.handleImageLoaded();
     }
+
+    // Get base64 image data
+    if (process.env.PREVIEW_PAGE) {
+      const { nodeData } = this.props;
+      const checksum = getNestedValue(['options', 'checksum'], nodeData);
+
+      // Get base64 data of image using checksum
+      import('../../preview/preview-setup')
+        .then(module => {
+          return module.getBase64Uri(checksum);
+        })
+        .then(base64Uri => {
+          // Only change the state if this is mounted. (Warning of memory leak otherwise)
+          if (this._isMounted) {
+            this.setState({ base64Uri });
+          }
+        });
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   imgShouldHaveLightbox = () => {
@@ -36,16 +63,18 @@ export default class Figure extends Component {
 
   render() {
     const { nodeData, ...rest } = this.props;
-    const { isLightboxSize } = this.state;
+    const { isLightboxSize, base64Uri } = this.state;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
+    // Choose whether to show static asset file or via base64
+    const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Uri;
 
     if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
-      return <Lightbox nodeData={nodeData} />;
+      return <Lightbox nodeData={nodeData} base64Uri={base64Uri} />;
     }
     return (
       <div className="figure" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
         <img
-          src={withPrefix(imgSrc)}
+          src={imgData}
           alt={getNestedValue(['options', 'alt'], nodeData) || imgSrc}
           width="50%"
           onLoad={this.handleImageLoaded}
@@ -67,6 +96,7 @@ Figure.propTypes = {
     options: PropTypes.shape({
       alt: PropTypes.string,
       lightbox: PropTypes.bool,
+      checksum: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
