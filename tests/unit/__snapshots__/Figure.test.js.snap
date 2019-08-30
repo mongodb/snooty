@@ -49,6 +49,7 @@ exports[`renders correctly 1`] = `
 
 exports[`renders lightbox correctly when specified as an option 1`] = `
 <Lightbox
+  base64Uri={null}
   nodeData={
     Object {
       "argument": Array [

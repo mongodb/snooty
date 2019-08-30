@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+// eslint-disable-next-line import/no-unresolved
+import { useSiteMetadata } from 'useSiteMetadata'; // Alias in webpack.config
 
 const SiteMetadata = () => {
   const { branch, project, title } = useSiteMetadata();
