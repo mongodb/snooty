@@ -44,7 +44,6 @@ import Topic from './Topic';
 import Subscript from './Subscript';
 import Superscript from './Superscript';
 import Alert from './Alert';
-import Footnote from './Footnote';
 import Image from './Image';
 
 import RoleApi from './Roles/Api';
@@ -99,8 +98,6 @@ export default class ComponentFactory extends Component {
       emphasis: Emphasis,
       expression: Expression,
       figure: Figure,
-      footnote: Footnote,
-      footnote_reference: Footnote,
       heading: Heading,
       hlist: HorizontalList,
       image: Image,
