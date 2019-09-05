@@ -38,6 +38,8 @@ import Only from './Only';
 import Binary from './Binary';
 import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
+import Footnote from './Footnote';
+import FootnoteReference from './FootnoteReference';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -88,6 +90,8 @@ export default class ComponentFactory extends Component {
       definitionListItem: DefinitionListItem,
       emphasis: Emphasis,
       figure: Figure,
+      footnote: Footnote,
+      footnote_reference: FootnoteReference,
       heading: Heading,
       hlist: HorizontalList,
       include: Include,
