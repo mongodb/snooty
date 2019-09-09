@@ -38,6 +38,9 @@ import Only from './Only';
 import Binary from './Binary';
 import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
+import VersionChanged from './VersionChanged';
+import VersionAdded from './VersionAdded';
+import Deprecated from './Deprecated';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -86,6 +89,7 @@ export default class ComponentFactory extends Component {
       data: Data,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
+      deprecated: Deprecated,
       emphasis: Emphasis,
       figure: Figure,
       heading: Heading,
@@ -113,6 +117,8 @@ export default class ComponentFactory extends Component {
       title_reference: TitleReference,
       transition: Transition,
       uriwriter: URIWriter,
+      versionadded: VersionAdded,
+      versionchanged: VersionChanged,
     };
   }
 
