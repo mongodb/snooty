@@ -38,6 +38,7 @@ import Only from './Only';
 import Binary from './Binary';
 import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
+import CardGroup from './CardGroup';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -78,6 +79,7 @@ export default class ComponentFactory extends Component {
       admonition: Admonition,
       binary: Binary,
       block_quote: BlockQuote,
+      'card-group': CardGroup,
       class: CSSClass,
       code: Code,
       container: Container,
