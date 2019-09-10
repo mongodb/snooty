@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getNestedValue } from '../utils/get-nested-value';
 
-const FootnoteReference = ({ nodeData: { label, id, refname } }) => (
+const FootnoteReference = ({ footnotes, nodeData: { id, refname } }) => (
   <a className="footnote-reference" href={`#${refname}`} id={id}>
-    [{label}]
+    [{getNestedValue([refname, 'label'], footnotes)}]
   </a>
 );
 
 FootnoteReference.propTypes = {
+  footnotes: PropTypes.objectOf(PropTypes.object).isRequired,
   nodeData: PropTypes.shape({
-    label: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     refname: PropTypes.string.isRequired,
   }).isRequired,
