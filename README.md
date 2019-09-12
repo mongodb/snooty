@@ -36,9 +36,9 @@ GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
-The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that when the application is built, that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. 
+The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that when the application is built it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. 
 
-It should be set when working on snooty locally. 
+It should be set to `true` when working on snooty locally. 
 
 ## Running locally
 
