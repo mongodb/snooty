@@ -4,8 +4,9 @@ import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 import { intersperse } from '../utils/intersperse';
 
-const Footnote = ({ footnotes, nodeData: { children, id, name }, ...rest }) => {
-  const footnoteReferences = footnotes[name] ? footnotes[name].references : [];
+const Footnote = ({ nodeData, footnotes, nodeData: { children, id, name }, ...rest }) => {
+  const ref = name || id;
+  const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
     <a className="fn-backref" href={`#${footnote}`} key={footnote}>
       {index + 1}
@@ -18,7 +19,7 @@ const Footnote = ({ footnotes, nodeData: { children, id, name }, ...rest }) => {
       </colgroup>
       <tbody valign="top">
         <tr>
-          <td className="label">[{getNestedValue([name, 'label'], footnotes)}]</td>
+          <td className="label">[{getNestedValue([ref, 'label'], footnotes)}]</td>
           <td>
             <em>({intersperse(footnoteReferenceNodes)})</em>{' '}
             {children.map((child, index) => (
@@ -36,7 +37,7 @@ Footnote.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
   }).isRequired,
 };
 
