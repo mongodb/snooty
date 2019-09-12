@@ -8,7 +8,9 @@ require('dotenv').config({
 });
 
 const getContentBranch = () => {
-  return process.env.GATSBY_CONTENT_BRANCH || getGitBranch();
+  return process.env.GATSBY_SNOOTY_DEV ? 
+    getGitBranch() : 
+    process.env.GATSBY_PARSER_BRANCH;
 };
 
 const getGitBranch = () => {
