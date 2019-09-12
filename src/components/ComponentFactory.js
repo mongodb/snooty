@@ -41,6 +41,7 @@ import TabsPillstrip from './TabsPillstrip';
 import VersionChanged from './VersionChanged';
 import VersionAdded from './VersionAdded';
 import Deprecated from './Deprecated';
+import CardGroup from './CardGroup';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -81,6 +82,7 @@ export default class ComponentFactory extends Component {
       admonition: Admonition,
       binary: Binary,
       block_quote: BlockQuote,
+      'card-group': CardGroup,
       class: CSSClass,
       code: Code,
       container: Container,
