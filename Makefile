@@ -2,14 +2,13 @@ GIT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 USER=$(shell whoami)
 STAGING_URL="https://docs-mongodborg-staging.corp.mongodb.com"
 STAGING_BUCKET=docs-mongodb-org-staging
-GATSBY_SNOOTY_DEV = $(shell printenv GATSBY_SNOOTY_DEV)
 include .env.production
 
 .PHONY: stage static
 
 stage:
 	@if [ -z "${GATSBY_SNOOTY_DEV}" ]; then \
-		echo "GATSBY_SNOOTY_DEV env variable is required to be true in .env.production file"; \
+		echo "To stage changes to the Snooty frontend, ensure that GATSBY_SNOOTY_DEV=true in your production environment."; \
 	else \
 		mut-publish public ${STAGING_BUCKET} --prefix=${GATSBY_SITE} --stage ${ARGS}; \
 		echo "Hosted at ${STAGING_URL}/${GATSBY_SITE}/${USER}/${GIT_BRANCH}/"; \
