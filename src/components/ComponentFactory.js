@@ -42,6 +42,8 @@ import VersionChanged from './VersionChanged';
 import VersionAdded from './VersionAdded';
 import Deprecated from './Deprecated';
 import CardGroup from './CardGroup';
+import Footnote from './Footnote';
+import FootnoteReference from './FootnoteReference';
 
 import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
@@ -94,6 +96,8 @@ export default class ComponentFactory extends Component {
       deprecated: Deprecated,
       emphasis: Emphasis,
       figure: Figure,
+      footnote: Footnote,
+      footnote_reference: FootnoteReference,
       heading: Heading,
       hlist: HorizontalList,
       include: Include,
