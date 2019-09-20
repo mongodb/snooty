@@ -110,7 +110,7 @@ const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
     {row.map((column, colIndex) => (
       <td className={`${colIndex <= stubColumnCount - 1 ? 'stub' : ''}`} key={colIndex}>
         {column.children.length === 1 ? (
-          <CSSWrapper className={['first', 'last']}>
+          <CSSWrapper className={['first', 'last'].join(' ')}>
             <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
           </CSSWrapper>
         ) : (

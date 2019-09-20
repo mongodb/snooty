@@ -38,6 +38,12 @@ import Cond from './Cond';
 import Binary from './Binary';
 import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
+import VersionChanged from './VersionChanged';
+import VersionAdded from './VersionAdded';
+import Deprecated from './Deprecated';
+import CardGroup from './CardGroup';
+import Footnote from './Footnote';
+import FootnoteReference from './FootnoteReference';
 import LiteralBlock from './LiteralBlock';
 import Expression from './Expression';
 import Topic from './Topic';
@@ -86,6 +92,7 @@ export default class ComponentFactory extends Component {
       alert: Alert,
       binary: Binary,
       block_quote: BlockQuote,
+      'card-group': CardGroup,
       class: CSSClass,
       code: Code,
       cond: Cond,
@@ -95,9 +102,12 @@ export default class ComponentFactory extends Component {
       data: Data,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
+      deprecated: Deprecated,
       emphasis: Emphasis,
       expression: Expression,
       figure: Figure,
+      footnote: Footnote,
+      footnote_reference: FootnoteReference,
       heading: Heading,
       hlist: HorizontalList,
       image: Image,
@@ -128,6 +138,8 @@ export default class ComponentFactory extends Component {
       topic: Topic,
       transition: Transition,
       uriwriter: URIWriter,
+      versionadded: VersionAdded,
+      versionchanged: VersionChanged,
     };
   }
 

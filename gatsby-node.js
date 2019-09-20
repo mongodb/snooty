@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs').promises;
 const mkdirp = require('mkdirp');
+const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
@@ -44,28 +45,12 @@ const setupStitch = () => {
   });
 };
 
-// env variables for building site along with use in front-end
-// https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
-const validateEnvVariables = () => {
-  // make sure necessary env vars exist
-  if (!process.env.GATSBY_SITE || !process.env.PARSER_USER || !process.env.PARSER_BRANCH) {
-    return {
-      error: true,
-      message: `${process.env.NODE_ENV} requires the variables GATSBY_SITE, PARSER_USER, and PARSER_BRANCH`,
-    };
-  }
-  // create split prefix for use in stitch function
-  return {
-    error: false,
-  };
-};
-
-const saveAssetFile = async (name, objData) => {
+const saveAssetFile = async asset => {
   return new Promise((resolve, reject) => {
     // Create nested directories as specified by the asset filenames if they do not exist
-    mkdirp(path.join('static', path.dirname(name)), err => {
+    mkdirp(path.join('static', path.dirname(asset.filename)), err => {
       if (err) return reject(err);
-      fs.writeFile(path.join('static', name), objData.data.buffer, 'binary', err => {
+      fs.writeFile(path.join('static', asset.filename), asset.data.buffer, 'binary', err => {
         if (err) reject(err);
       });
       resolve();
@@ -76,23 +61,12 @@ const saveAssetFile = async (name, objData) => {
 // Write all assets to static directory
 const saveAssetFiles = async assets => {
   const promises = [];
-  const assetQuery = { _id: { $in: Object.keys(assets) } };
+  const assetQuery = { _id: { $in: assets } };
   const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
   assetDataDocuments.forEach(asset => {
-    promises.push(saveAssetFile(assets[asset._id], asset));
+    promises.push(saveAssetFile(asset));
   });
   return Promise.all(promises);
-};
-
-// Parse a page's AST to find all figure nodes and return a map of image checksums and filenames
-const getImagesInPage = page => {
-  const imageNodes = [...findAllKeyValuePairs(page, 'name', 'figure'), ...findAllKeyValuePairs(page, 'name', 'image')];
-  return imageNodes.reduce((obj, node) => {
-    const name = getNestedValue(['argument', 0, 'value'], node);
-    const checksum = getNestedValue(['options', 'checksum'], node);
-    obj[checksum] = name;
-    return obj;
-  }, {});
 };
 
 // For each include node found in a page, set its 'children' property to be the array of include contents
@@ -148,11 +122,11 @@ exports.sourceNodes = async () => {
   }
 
   // Identify page documents and parse each document for images
-  let assets = {};
+  let assets = [];
   Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     if (pageNode) {
-      assets = { ...assets, ...getImagesInPage(pageNode) };
+      assets.push(...val.static_assets);
     }
     if (key.includes('includes/')) {
       INCLUDE_FILES[key] = val;
@@ -227,4 +201,11 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     });
   }
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        useSiteMetadata: path.resolve(__dirname, 'src/hooks/use-site-metadata.js'),
+      },
+    },
+  });
 };
