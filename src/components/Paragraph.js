@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const SKIP_P_TAGS = ['caption', 'listItem', 'listTable'];
+const SKIP_P_TAGS = ['caption', 'listItem', 'listTable', 'footnote'];
 
 const Paragraph = ({ nodeData, parentNode, position, ...rest }) => {
   // For paragraph nodes that appear inside certain containers, skip <p> tags and just render their contents
