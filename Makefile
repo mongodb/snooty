@@ -7,8 +7,12 @@ include .env.production
 .PHONY: stage static
 
 stage:
-	mut-publish public ${STAGING_BUCKET} --prefix=${GATSBY_SITE} --stage ${ARGS}
-	@echo "Hosted at ${STAGING_URL}/${GATSBY_SITE}/${USER}/${GIT_BRANCH}/"
+	@if [ -z "${GATSBY_SNOOTY_DEV}" ]; then \
+		echo "To stage changes to the Snooty frontend, ensure that GATSBY_SNOOTY_DEV=true in your production environment."; exit 1; \
+	else \
+		mut-publish public ${STAGING_BUCKET} --prefix=${GATSBY_SITE} --stage ${ARGS}; \
+		echo "Hosted at ${STAGING_URL}/${GATSBY_SITE}/${USER}/${GIT_BRANCH}/"; \
+	fi
 
 static:
 	-rm -r ./static/images/

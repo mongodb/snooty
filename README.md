@@ -22,17 +22,23 @@ You'll need to set some environment variables in two separate files at the root 
 Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 ```
 GATSBY_SITE=<SITE>
-PARSER_USER=<USER>
-PARSER_BRANCH=<BRANCH>
+GATSBY_PARSER_USER=<USER>
+GATSBY_PARSER_BRANCH=<BRANCH>
+GATSBY_SNOOTY_DEV=true
 ```
 
 #### `.env.development`
 Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
 ```
 GATSBY_SITE=<SITE>
-PARSER_USER=<USER>
-PARSER_BRANCH=<BRANCH>
+GATSBY_PARSER_USER=<USER>
+GATSBY_PARSER_BRANCH=<BRANCH>
+GATSBY_SNOOTY_DEV=true
 ```
+
+The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that when the application is built it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. 
+
+It should be set to `true` when working on snooty locally. 
 
 ## Running locally
 
