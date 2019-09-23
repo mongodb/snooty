@@ -16,10 +16,34 @@ exports[`Lightbox renders correctly 1`] = `
       role="button"
       tabIndex="-1"
     >
-      <img
-        alt="/images/firstcluster.png"
-        src="/images/firstcluster.png"
-        width="50%"
+      <Image
+        nodeData={
+          Object {
+            "argument": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 13,
+                  },
+                },
+                "type": "text",
+                "value": "/images/firstcluster.png",
+              },
+            ],
+            "children": Array [],
+            "name": "figure",
+            "options": Object {
+              "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+              "figwidth": "700px",
+            },
+            "position": Object {
+              "start": Object {
+                "line": 13,
+              },
+            },
+            "type": "directive",
+          }
+        }
       />
       <div
         className="lightbox__caption"
