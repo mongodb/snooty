@@ -66,7 +66,6 @@ const populateIncludeNodes = nodes => {
   return nodes.map(replaceInclude);
 };
 
-
 const sourceNodes = async () => {
   // setup env variables
   const envResults = validateEnvVariables();
@@ -115,37 +114,38 @@ const sourceNodes = async () => {
 };
 
 // Similar to gatsby-node's createPage(). Return the data needed by a single page
-export const getPageData = async (page) => {
-    await sourceNodes();
-    const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
+export const getPageData = async page => {
+  await sourceNodes();
+  const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
 
-    pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
+  pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
 
-    let template = 'document';
-    if (process.env.GATSBY_SITE === 'guides') {
-        template = page === 'index' ? 'guides-index' : 'guide';
-    }
-    const pageUrl = page === 'index' ? '/' : page;
-    if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
-      return {
-        path: pageUrl,
-        template,
-        context: {
-            snootyStitchId: SNOOTY_STITCH_ID,
-            __refDocMapping: pageNodes,
-            pageMetadata: PAGE_TITLE_MAP,
-        }
-      };
-    }
-    return null;
-}
+  let template = 'document';
+  if (process.env.GATSBY_SITE === 'guides') {
+    template = page === 'index' ? 'guides-index' : 'guide';
+  }
+  const pageUrl = page === 'index' ? '/' : page;
+  if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
+    return {
+      path: pageUrl,
+      template,
+      context: {
+        snootyStitchId: SNOOTY_STITCH_ID,
+        __refDocMapping: pageNodes,
+        pageMetadata: PAGE_TITLE_MAP,
+      },
+    };
+  }
+  return null;
+};
 
 // Use checksum from a Figure component to return base64 data of image
-export const getBase64Uri = async (checksum) => {
-  const query = {_id: {$eq: checksum}}
-  const [ assetData ] = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, query]);
+export const getBase64Uri = async checksum => {
+  const query = { _id: { $eq: checksum } };
+  const [assetData] = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, query]);
 
   const base64 = assetData.data.buffer.toString('base64');
-  const prefix = `data:image/${assetData.type.slice(1)};base64,`;
+  const fileFormat = assetData.filename.split('.')[-1];
+  const prefix = `data:image/${fileFormat};base64,`;
   return prefix.concat(base64);
-}
+};
