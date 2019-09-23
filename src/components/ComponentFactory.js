@@ -32,10 +32,7 @@ import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
 import Contents from './Contents';
 import Container from './Container';
-import Setting from './Setting';
-import Data from './Data';
 import Cond from './Cond';
-import Binary from './Binary';
 import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
 import VersionChanged from './VersionChanged';
@@ -45,11 +42,9 @@ import CardGroup from './CardGroup';
 import Footnote from './Footnote';
 import FootnoteReference from './FootnoteReference';
 import LiteralBlock from './LiteralBlock';
-import Expression from './Expression';
 import Topic from './Topic';
 import Subscript from './Subscript';
 import Superscript from './Superscript';
-import Alert from './Alert';
 import Image from './Image';
 
 import RoleApi from './Roles/Api';
@@ -89,8 +84,6 @@ export default class ComponentFactory extends Component {
     };
     this.componentMap = {
       admonition: Admonition,
-      alert: Alert,
-      binary: Binary,
       block_quote: BlockQuote,
       'card-group': CardGroup,
       class: CSSClass,
@@ -99,12 +92,10 @@ export default class ComponentFactory extends Component {
       container: Container,
       contents: Contents,
       cssclass: CSSClass,
-      data: Data,
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       deprecated: Deprecated,
       emphasis: Emphasis,
-      expression: Expression,
       figure: Figure,
       footnote: Footnote,
       footnote_reference: FootnoteReference,
@@ -125,7 +116,6 @@ export default class ComponentFactory extends Component {
       paragraph: Paragraph,
       reference: Reference,
       section: Section,
-      setting: Setting,
       step: Step,
       strong: Strong,
       subscript: Subscript,
