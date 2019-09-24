@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -11,9 +10,7 @@ const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 const Lightbox = ({ nodeData, base64Uri, ...rest }) => {
   const [showModal, setShowModal] = useState(false);
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
-  const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
   const modal = useRef(null);
-  const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Uri;
 
   const toggleShowModal = () => {
     setShowModal(prevShowState => !prevShowState);
@@ -52,14 +49,11 @@ const Lightbox = ({ nodeData, base64Uri, ...rest }) => {
           role="button"
           tabIndex="-1"
         >
-          <img
-            className={[
-              'lightbox__content',
-              'lightbox__content--activated',
-              isSvg(imgSrc) ? 'lightbox__content--scalable' : null,
-            ].join(' ')}
-            src={imgData}
-            alt={`${altText} — Enlarged`}
+          <Image
+            nodeData={nodeData}
+            className={`lightbox__content lightbox__content--activated ${
+              isSvg(imgSrc) ? 'lightbox__content--scalable' : ''
+            }`}
           />
         </div>
       )}

@@ -8,35 +8,20 @@ import { getNestedValue } from '../utils/get-nested-value';
 export default class Figure extends Component {
   constructor(props) {
     super(props);
-    this.imgRef = React.createRef();
-    // Can't use this.isMounted: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
-    this._isMounted = false;
     this.state = {
       isLightboxSize: false,
     };
   }
 
-  componentDidMount() {
-    const img = this.imgRef.current;
-    if (img && img.complete) {
-      this.handleImageLoaded();
-    }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  imgShouldHaveLightbox = () => {
-    const img = this.imgRef.current;
+  imgShouldHaveLightbox = img => {
     const naturalArea = img.naturalWidth * img.naturalHeight;
     const clientArea = img.clientWidth * img.clientHeight;
     return clientArea < naturalArea * 0.9;
   };
 
-  handleImageLoaded = () => {
+  handleImageLoaded = imgRef => {
     this.setState({
-      isLightboxSize: this.imgShouldHaveLightbox(),
+      isLightboxSize: this.imgShouldHaveLightbox(imgRef),
     });
   };
 
@@ -49,7 +34,7 @@ export default class Figure extends Component {
     }
     return (
       <div className="figure" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
-        <Image nodeData={nodeData} />
+        <Image nodeData={nodeData} handleImageLoaded={this.handleImageLoaded} />
         <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
     );

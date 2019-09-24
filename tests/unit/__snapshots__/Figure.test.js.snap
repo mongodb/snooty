@@ -7,7 +7,7 @@ exports[`renders correctly 1`] = `
 >
   <img
     alt="/images/firstcluster.png"
-    class=" "
+    class="  "
     src="/images/firstcluster.png"
   />
 </div>
@@ -25,7 +25,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
   >
     <img
       alt="/images/firstcluster.png"
-      class=" "
+      class="  "
       src="/images/firstcluster.png"
     />
     <div

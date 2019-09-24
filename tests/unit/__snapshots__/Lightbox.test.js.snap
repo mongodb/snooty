@@ -17,6 +17,8 @@ exports[`Lightbox renders correctly 1`] = `
       tabIndex="-1"
     >
       <Image
+        className=""
+        handleImageLoaded={[Function]}
         nodeData={
           Object {
             "argument": Array [

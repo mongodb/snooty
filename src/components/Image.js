@@ -6,6 +6,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 export default class Image extends Component {
   constructor(props) {
     super(props);
+    this.imgRef = React.createRef();
     // Can't use this.isMounted: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
     this._isMounted = false;
     this.state = {
@@ -42,7 +43,10 @@ export default class Image extends Component {
   }
 
   handleLoad = ({ target: img }) => {
-    const { nodeData } = this.props;
+    const { handleImageLoaded, nodeData } = this.props;
+
+    handleImageLoaded(this.imgRef.current);
+
     const scale = getNestedValue(['options', 'scale'], nodeData);
     if (scale) {
       this.scaleSize(img.naturalWidth, img.naturalHeight, scale);
@@ -63,7 +67,7 @@ export default class Image extends Component {
   };
 
   render() {
-    const { nodeData } = this.props;
+    const { className, nodeData } = this.props;
     const { base64Uri } = this.state;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
     const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
@@ -85,15 +89,18 @@ export default class Image extends Component {
       <img
         src={imgData}
         alt={altText}
-        className={[getNestedValue(['option', 'class'], nodeData), customAlign].join(' ')}
+        className={[getNestedValue(['option', 'class'], nodeData), customAlign, className].join(' ')}
         style={nodeData.options ? buildStyles() : {}}
         onLoad={this.handleLoad}
+        ref={this.imgRef}
       />
     );
   }
 }
 
 Image.propTypes = {
+  className: PropTypes.string,
+  handleImageLoaded: PropTypes.func,
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
@@ -109,4 +116,9 @@ Image.propTypes = {
       width: PropTypes.string,
     }),
   }).isRequired,
+};
+
+Image.defaultProps = {
+  className: '',
+  handleImageLoaded: () => {},
 };
