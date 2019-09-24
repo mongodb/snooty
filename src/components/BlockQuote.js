@@ -2,16 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const BlockQuote = props => {
-  const { nodeData } = props;
-  return (
-    <section>
-      {nodeData.children.map((element, index) => (
-        <ComponentFactory {...props} nodeData={element} key={index} />
-      ))}
-    </section>
-  );
-};
+const BlockQuote = ({ nodeData: { children }, ...rest }) => (
+  <blockquote>
+    {children.map((element, index) => (
+      <ComponentFactory {...rest} nodeData={element} key={index} />
+    ))}
+  </blockquote>
+);
 
 BlockQuote.propTypes = {
   nodeData: PropTypes.shape({
