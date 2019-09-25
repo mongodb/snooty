@@ -2,81 +2,37 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="figure"
-  style={
-    Object {
-      "width": "700px",
-    }
-  }
+  class="figure"
+  style="width:700px"
 >
   <img
     alt="/images/firstcluster.png"
-    onLoad={[Function]}
+    class="  "
     src="/images/firstcluster.png"
-    width="50%"
-  />
-  <CaptionLegend
-    nodeData={
-      Object {
-        "argument": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 13,
-              },
-            },
-            "type": "text",
-            "value": "/images/firstcluster.png",
-          },
-        ],
-        "children": Array [],
-        "name": "figure",
-        "options": Object {
-          "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
-          "figwidth": "700px",
-        },
-        "position": Object {
-          "start": Object {
-            "line": 13,
-          },
-        },
-        "type": "directive",
-      }
-    }
   />
 </div>
 `;
 
 exports[`renders lightbox correctly when specified as an option 1`] = `
-<Lightbox
-  base64Uri={null}
-  nodeData={
-    Object {
-      "argument": Array [
-        Object {
-          "position": Object {
-            "start": Object {
-              "line": 13,
-            },
-          },
-          "type": "text",
-          "value": "/images/firstcluster.png",
-        },
-      ],
-      "children": Array [],
-      "name": "figure",
-      "options": Object {
-        "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
-        "figwidth": "700px",
-        "lightbox": true,
-      },
-      "position": Object {
-        "start": Object {
-          "line": 13,
-        },
-      },
-      "type": "directive",
-    }
-  }
-/>
+<div
+  class="figure lightbox"
+  style="width:700px"
+>
+  <div
+    class="lightbox__imageWrapper"
+    role="button"
+    tabindex="-1"
+  >
+    <img
+      alt="/images/firstcluster.png"
+      class="  "
+      src="/images/firstcluster.png"
+    />
+    <div
+      class="lightbox__caption"
+    >
+      click to enlarge
+    </div>
+  </div>
+</div>
 `;

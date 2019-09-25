@@ -4,13 +4,13 @@ import ComponentFactory from './ComponentFactory';
 
 const SKIP_P_TAGS = ['caption', 'listItem', 'listTable', 'footnote'];
 
-const Paragraph = ({ nodeData, parentNode, position, ...rest }) => {
+const Paragraph = ({ nodeData, parentNode, ...rest }) => {
   // For paragraph nodes that appear inside certain containers, skip <p> tags and just render their contents
   if (SKIP_P_TAGS.includes(parentNode)) {
     return nodeData.children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
   }
   return (
-    <p className={position}>
+    <p>
       {nodeData.children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} />
       ))}
@@ -28,12 +28,10 @@ Paragraph.propTypes = {
     ).isRequired,
   }).isRequired,
   parentNode: PropTypes.string,
-  position: PropTypes.string,
 };
 
 Paragraph.defaultProps = {
   parentNode: undefined,
-  position: '',
 };
 
 export default Paragraph;

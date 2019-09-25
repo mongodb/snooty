@@ -45,8 +45,8 @@ module.exports = (env) => {
         plugins: [
             new webpack.DefinePlugin({
                 'process.env.GATSBY_SITE': JSON.stringify(dotenv.parsed.GATSBY_SITE),
-                'process.env.PARSER_USER': JSON.stringify(dotenv.parsed.PARSER_USER),
-                'process.env.PARSER_BRANCH': JSON.stringify(dotenv.parsed.PARSER_BRANCH),
+                'process.env.GATSBY_PARSER_USER': JSON.stringify(dotenv.parsed.GATSBY_PARSER_USER),
+                'process.env.GATSBY_PARSER_BRANCH': JSON.stringify(dotenv.parsed.GATSBY_PARSER_BRANCH),
                 'process.env.PREVIEW_PAGE': JSON.stringify(`${env.PREVIEW_PAGE}`)
             })
         ]

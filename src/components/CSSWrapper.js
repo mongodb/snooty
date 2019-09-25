@@ -14,7 +14,14 @@ export default class CSSWrapper extends React.Component {
      */
     const childNode = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
     if (childNode && childNode.classList) {
-      childNode.classList.add(className);
+      // Handle both proptypes for className: a string or an array of strings
+      if (typeof className === 'string') {
+        childNode.classList.add(className);
+      } else if (Array.isArray(className)) {
+        className.forEach(name => {
+          childNode.classList.add(name);
+        });
+      }
     }
   }
 
@@ -27,5 +34,5 @@ export default class CSSWrapper extends React.Component {
 
 CSSWrapper.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
 };
