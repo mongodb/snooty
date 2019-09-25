@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import CSSWrapper from './CSSWrapper';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
@@ -109,13 +110,26 @@ const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
     {row.map((column, colIndex) => (
       <td className={`${colIndex <= stubColumnCount - 1 ? 'stub' : ''}`} key={colIndex}>
         {column.children.length === 1 ? (
-          <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
+          <CSSWrapper className={['first', 'last'].join(' ')}>
+            <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
+          </CSSWrapper>
         ) : (
           column.children.map((element, index) => {
-            let position = '';
-            if (index === 0) position = 'first';
-            if (index === column.children.length - 1) position = 'last';
-            return <ComponentFactory {...rest} key={index} nodeData={element} position={position} />;
+            if (index === 0) {
+              return (
+                <CSSWrapper key={index} className="first">
+                  <ComponentFactory {...rest} nodeData={element} />
+                </CSSWrapper>
+              );
+            }
+            if (index === column.children.length - 1) {
+              return (
+                <CSSWrapper key={index} className="last">
+                  <ComponentFactory {...rest} nodeData={element} />
+                </CSSWrapper>
+              );
+            }
+            return <ComponentFactory {...rest} key={index} nodeData={element} />;
           })
         )}
       </td>

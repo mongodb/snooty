@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<section>
+<blockquote>
   <ComponentFactory
     key="0"
     nodeData={
@@ -183,5 +183,5 @@ through a number of programming APIs.",
       }
     }
   />
-</section>
+</blockquote>
 `;

@@ -2,8 +2,9 @@ node_modules/
 public/
 .cache/
 .DS_Store
-static/images/
-static/docs-tools/
+static/*
+# Don't ignore the scripts directory
+!static/scripts
 docs-tools/
 coverage/
 .coverage
