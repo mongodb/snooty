@@ -1,11 +1,10 @@
 const path = require('path');
 const fs = require('fs').promises;
 const mkdirp = require('mkdirp');
-const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
+const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-const { findAllKeyValuePairs } = require('./src/utils/find-all-key-value-pairs');
 const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
 
 // Atlas DB config
@@ -22,7 +21,8 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 // different types of references
 const PAGES = [];
 const INCLUDE_FILES = {};
-const PAGE_TITLE_MAP = {};
+const IMAGE_FILES = {};
+const PAGE_METADATA = {};
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -74,7 +74,12 @@ const populateIncludeNodes = nodes => {
   const replaceInclude = node => {
     if (node.name === 'include') {
       const includeFilename = getNestedValue(['argument', 0, 'value'], node);
-      const includeNode = getIncludeFile(INCLUDE_FILES, includeFilename);
+      let includeNode;
+      if (includeFilename.includes('images')) {
+        includeNode = getIncludeFile(IMAGE_FILES, includeFilename);
+      } else {
+        includeNode = getIncludeFile(INCLUDE_FILES, includeFilename);
+      }
 
       // Perform the same operation on include nodes inside this include file
       const replacedInclude = includeNode.map(replaceInclude);
@@ -85,6 +90,17 @@ const populateIncludeNodes = nodes => {
     return node;
   };
   return nodes.map(replaceInclude);
+};
+
+// Get various metadata for a given page
+const getPageMetadata = pageNode => {
+  const children = getNestedValue(['ast', 'children'], pageNode);
+  return {
+    title: getNestedValue([0, 'children', 0, 'children', 0, 'value'], children),
+    category: getNestedValue(['argument', 0, 'value'], findKeyValuePair(children, 'name', 'category')),
+    completionTime: getNestedValue(['argument', 0, 'value'], findKeyValuePair(children, 'name', 'time')),
+    languages: findKeyValuePair(children, 'name', 'languages'),
+  };
 };
 
 exports.sourceNodes = async () => {
@@ -122,7 +138,7 @@ exports.sourceNodes = async () => {
   }
 
   // Identify page documents and parse each document for images
-  let assets = [];
+  const assets = [];
   Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     if (pageNode) {
@@ -130,20 +146,11 @@ exports.sourceNodes = async () => {
     }
     if (key.includes('includes/')) {
       INCLUDE_FILES[key] = val;
+    } else if (key.includes('images/')) {
+      IMAGE_FILES[key] = val;
     } else if (!key.includes('curl') && !key.includes('https://')) {
       PAGES.push(key);
-      PAGE_TITLE_MAP[key] = {
-        title: getNestedValue(['ast', 'children', 0, 'children', 0, 'children', 0, 'value'], val),
-        category: getNestedValue(
-          ['argument', 0, 'value'],
-          findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'category')
-        ),
-        completionTime: getNestedValue(
-          ['argument', 0, 'value'],
-          findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'time')
-        ),
-        languages: findKeyValuePair(getNestedValue(['ast', 'children'], val), 'name', 'languages'),
-      };
+      PAGE_METADATA[key] = getPageMetadata(val);
     }
   });
 
@@ -153,7 +160,7 @@ exports.sourceNodes = async () => {
   if (!USE_TEST_DATA) {
     const fullpathLatest = path.join(TEST_DATA_PATH, LATEST_TEST_DATA_FILE);
     fs.writeFile(fullpathLatest, JSON.stringify(RESOLVED_REF_DOC_MAPPING), 'utf8', err => {
-      if (err) console.log(`ERROR saving test data into "${fullpathLatest}" file`, err);
+      if (err) console.error(`ERROR saving test data into "${fullpathLatest}" file`, err);
       console.log(`** Saved test data into "${fullpathLatest}"`);
     });
   }
@@ -178,7 +185,7 @@ exports.createPages = ({ actions }) => {
           context: {
             snootyStitchId: SNOOTY_STITCH_ID,
             __refDocMapping: pageNodes,
-            pageMetadata: PAGE_TITLE_MAP,
+            pageMetadata: PAGE_METADATA,
           },
         });
       }
