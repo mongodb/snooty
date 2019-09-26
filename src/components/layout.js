@@ -99,7 +99,10 @@ export default class DefaultLayout extends Component {
   // The nth footnote on a page is associated with the nth reference on the page.
   getAnonymousFootnoteReferences = (nodes, index) => {
     const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
-    return footnoteReferences.filter(node => !Object.prototype.hasOwnProperty.call(node, 'refname'))[index].id;
+    return getNestedValue(
+      [index, 'id'],
+      footnoteReferences.filter(node => !Object.prototype.hasOwnProperty.call(node, 'refname'))
+    );
   };
 
   // Modify the AST so that the node modified by cssclass is included in its "children" array.
