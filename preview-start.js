@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
-import { getPageData } from './preview/preview-setup';
+// eslint-disable-next-line import/no-unresolved
+import { getPageData } from 'previewSetup'; // Alias found in gatsby-node and webpack.config.js
 // Layouts
 import DefaultLayout from './src/components/layout';
 import Document from './src/templates/document';
@@ -22,7 +23,7 @@ class Preview extends React.Component {
   }
 
   componentDidMount() {
-    getPageData(process.env.PREVIEW_PAGE).then(pageData => {
+    getPageData().then(pageData => {
       const Template = this.templates[pageData.template] ? this.templates[pageData.template] : Document;
       this.setState({
         pageData,
@@ -37,10 +38,11 @@ class Preview extends React.Component {
     return (
       <React.Fragment>
         <Helmet>
+          {/* See TODO in webpack.config.js */}
           {process.env.GATSBY_SITE === 'guides' ? (
-            <link rel="stylesheet" href="./static/docs-tools/guides.css" type="text/css" />
+            <link rel="stylesheet" href="./docs-tools/themes/mongodb/static/guides.css" type="text/css" />
           ) : (
-            <link rel="stylesheet" href="./static/docs-tools/mongodb-docs.css" type="text/css" />
+            <link rel="stylesheet" href="./docs-tools/themes/mongodb/static/mongodb-docs.css" type="text/css" />
           )}
         </Helmet>
         {pageData && (

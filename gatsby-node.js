@@ -211,6 +211,8 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
+        // Use noop file to prevent any preview-setup errors
+        previewSetup: path.resolve(__dirname, 'preview/noop.js'),
         useSiteMetadata: path.resolve(__dirname, 'src/hooks/use-site-metadata.js'),
       },
     },
