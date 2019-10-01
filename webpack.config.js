@@ -33,7 +33,7 @@ module.exports = env => {
     resolve: {
       alias: {
         gatsby: noopPath,
-        previewSetup: path.resolve(__dirname, 'preview-setup'),
+        previewSetup: path.resolve(__dirname, 'preview', 'preview-setup'),
         useSiteMetadata: noopPath,
       },
       extensions: ['*', '.js', '.css'],

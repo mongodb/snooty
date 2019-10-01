@@ -1,6 +1,6 @@
-# Local Preview
+# Snooty Preview
 
-Snooty can support locally rendering a single page without the use of `Gatsby.js`. 
+Snooty can support rendering a single page without the use of `Gatsby.js`. 
 This utilizes `webpack` directly. Preview mode relies on the following files:
 
 * `webpack.config.js` - Webpack configuration files.
@@ -15,20 +15,13 @@ The following files are additional files that serve as workarounds for `gatsby`:
 
 ## Usage
 
-To use local preview, `.env.development` must be set up with the intended information that 
-would be used when using `gatsby develop`.
+Note: This assumes that the Snooty Frontend has already been added as a submodule in Snooty VS Code.
 
-**On your command line:**
-```
-npm run preview -- --env.PREVIEW_PAGE="<page-name-here>"
-```
+Snooty Preview is intended to be used along with the Snooty extension on VS Code.
 
-**Example to get to the landing page:**
-```
-npm run preview -- --env.PREVIEW_PAGE="index"
-```
+To run on VS Code:
+1. `cmd + shift + p`
+2. Run `Snooty Preview`
+The Snooty extension generates `page-ast.json` when running Snooty Preview, allowing the file to be used by `preview-setup.js`.
 
-**Example to get to https://docs.mongodb.com/guides/server/drivers/ :**
-```
-npm run preview -- --env.PREVIEW_PAGE="server/drivers"
-```
+This generates `bundle.js` to be used by Snooty VS Code's webview implementation.
