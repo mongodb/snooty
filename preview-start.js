@@ -40,9 +40,9 @@ class Preview extends React.Component {
         <Helmet>
           {/* See TODO in webpack.config.js */}
           {process.env.GATSBY_SITE === 'guides' ? (
-            <link rel="stylesheet" href="./docs-tools/themes/mongodb/static/guides.css" type="text/css" />
+            <link rel="stylesheet" href="./static/docs-tools/guides.css" type="text/css" />
           ) : (
-            <link rel="stylesheet" href="./docs-tools/themes/mongodb/static/mongodb-docs.css" type="text/css" />
+            <link rel="stylesheet" href="./static/docs-tools/mongodb-docs.css" type="text/css" />
           )}
         </Helmet>
         {pageData && (
