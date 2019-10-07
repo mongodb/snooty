@@ -37,7 +37,6 @@
     "develop": "gatsby develop --prefix-paths",
     "lint": "./node_modules/.bin/eslint src/ tests/",
     "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/**/*.js\"",
-    "preview": "webpack-dev-server --config ./webpack.config.js",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",
     "test:regression": "jest regression",
