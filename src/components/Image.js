@@ -20,12 +20,14 @@ export default class Image extends Component {
     this._isMounted = true;
 
     // Get base64 image data
+    // TODO: Receive images some other way when preview for VS Code is up and running (DOCSP-6886)
     if (process.env.PREVIEW_PAGE) {
       const { nodeData } = this.props;
       const checksum = getNestedValue(['options', 'checksum'], nodeData);
 
       // Get base64 data of image using checksum
-      import('../../preview/preview-setup')
+      // eslint-disable-next-line import/no-unresolved
+      import('previewSetup')
         .then(module => {
           return module.getBase64Uri(checksum);
         })

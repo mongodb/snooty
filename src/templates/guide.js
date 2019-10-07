@@ -186,7 +186,7 @@ export default class Guide extends Component {
 }
 
 Guide.propTypes = {
-  addPillstrip: PropTypes.func.isRequired,
+  addPillstrip: PropTypes.func,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
@@ -197,7 +197,12 @@ Guide.propTypes = {
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,
-  pillstrips: PropTypes.objectOf(PropTypes.object).isRequired,
+  pillstrips: PropTypes.objectOf(PropTypes.object),
+};
+
+Guide.defaultProps = {
+  addPillstrip: () => {},
+  pillstrips: {},
 };
 
 Guide.contextType = TabContext;

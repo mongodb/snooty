@@ -1,14 +1,14 @@
 {
-  presets: [ 
+  "presets": [ 
     [
       "@babel/env", 
       {
-        loose: true,
-        useBuiltIns: "usage",
-        shippedProposals: true,
-        targets: {
-          browsers: [">0.25%", "not dead", "ie >= 11"],
-        },
+        "loose": true,
+        "useBuiltIns": "usage",
+        "shippedProposals": true,
+        "targets": {
+          "browsers": [">0.25%", "not dead", "ie >= 11"],
+        }
       }
     ],
     [
@@ -16,11 +16,11 @@
       {}
     ]
   ],
-  plugins: [
+  "plugins": [
     [
       "@babel/plugin-proposal-class-properties",
       {
-        loose: true,
+        "loose": true,
       },
     ],
     "@babel/plugin-syntax-dynamic-import",
@@ -28,8 +28,8 @@
     [
       "@babel/plugin-transform-runtime",
       {
-        helpers: true,
-        regenerator: true,
+        "helpers": true,
+        "regenerator": true,
       },
     ],
     ["@babel/plugin-transform-react-jsx"],
