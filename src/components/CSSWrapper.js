@@ -14,14 +14,12 @@ export default class CSSWrapper extends React.Component {
      */
     const childNode = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
     if (childNode && childNode.classList) {
-      // Handle both proptypes for className: a string or an array of strings
-      if (typeof className === 'string') {
-        childNode.classList.add(className);
-      } else if (Array.isArray(className)) {
-        className.forEach(name => {
-          childNode.classList.add(name);
-        });
-      }
+      // classList.add() can only handle strings that do not contain spaces, so convert strings to an array of space-free
+      // strings and iterate over this array in order to add multiple classes
+      const classes = typeof className === 'string' ? className.split(' ') : className;
+      classes.forEach(name => {
+        childNode.classList.add(name);
+      });
     }
   }
 
