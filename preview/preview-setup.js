@@ -10,6 +10,12 @@ export const getPageData = async () => {
   };
   const template = getTemplate(fileId, process.env.GATSBY_SITE);
 
+  // Pick which template to use
+  let template = 'document';
+  if (process.env.GATSBY_SITE === 'guides') {
+    template = fileId === 'index' ? 'guides-index' : 'guide';
+  }
+
   return {
     path: '',
     template,
