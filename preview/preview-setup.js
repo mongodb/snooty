@@ -3,13 +3,20 @@ const pageAST = require('./page-ast.json'); // File created by Snooty extension 
 
 // Returns bare minimum data needed by a single page
 export const getPageData = async () => {
+  const fileId = process.env.PREVIEW_PAGE;
   const pageNodes = {
     ast: pageAST,
   };
 
+  // Pick which template to use
+  let template = 'document';
+  if (process.env.GATSBY_SITE === 'guides') {
+    template = fileId === 'index' ? 'guides-index' : 'guide';
+  }
+
   return {
     path: '',
-    template: 'guide',
+    template,
     context: {
       snootyStitchId: '',
       __refDocMapping: pageNodes,
