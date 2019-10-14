@@ -8,17 +8,7 @@ export const getPageData = async () => {
   const pageNodes = {
     ast: pageAST,
   };
-<<<<<<< HEAD
   const template = getTemplate(fileId, process.env.GATSBY_SITE);
-
-  // Pick which template to use
-  let template = 'document';
-  if (process.env.GATSBY_SITE === 'guides') {
-    template = fileId === 'index' ? 'guides-index' : 'guide';
-  }
-=======
-  const template = getTemplate(fileId);
->>>>>>> Create getTemplate util function
 
   return {
     path: '',
