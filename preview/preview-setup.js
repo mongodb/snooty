@@ -8,7 +8,7 @@ export const getPageData = async () => {
   const pageNodes = {
     ast: pageAST,
   };
-  const template = getTemplate(fileId);
+  const template = getTemplate(fileId, process.env.GATSBY_SITE);
 
   return {
     path: '',

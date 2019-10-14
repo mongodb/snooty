@@ -174,7 +174,7 @@ exports.createPages = ({ actions }) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
       pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
-      const template = getTemplate(page);
+      const template = getTemplate(page, process.env.GATSBY_SITE);
       const pageUrl = page === 'index' ? '/' : page;
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({

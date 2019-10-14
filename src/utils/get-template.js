@@ -1,7 +1,7 @@
 // Returns the name of the template to be used based on the site and page name.
-const getTemplate = page => {
+const getTemplate = (page, site) => {
   let template = 'document';
-  if (process.env.GATSBY_SITE === 'guides') {
+  if (site === 'guides') {
     template = page === 'index' ? 'guides-index' : 'guide';
   }
   return template;
