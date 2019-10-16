@@ -38,7 +38,6 @@ class Preview extends React.Component {
     return (
       <React.Fragment>
         <Helmet>
-          {/* See TODO in webpack.config.js */}
           {process.env.GATSBY_SITE === 'guides' ? (
             <link rel="stylesheet" href="./static/docs-tools/guides.css" type="text/css" />
           ) : (

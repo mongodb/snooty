@@ -10,3 +10,5 @@ coverage/
 .coverage
 .env.*
 tests/unit/data/site/__testDataLatest.json
+preview/page-ast.json
+preview/bundle.js

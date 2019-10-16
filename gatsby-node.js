@@ -6,6 +6,7 @@ const { validateEnvVariables } = require('./src/utils/setup/validate-env-variabl
 const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
+const { getTemplate } = require('./src/utils/get-template');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -173,10 +174,7 @@ exports.createPages = ({ actions }) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
       pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
-      let template = 'document';
-      if (process.env.GATSBY_SITE === 'guides') {
-        template = page === 'index' ? 'guides-index' : 'guide';
-      }
+      const template = getTemplate(page, process.env.GATSBY_SITE);
       const pageUrl = page === 'index' ? '/' : page;
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
