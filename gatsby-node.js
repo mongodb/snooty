@@ -5,8 +5,8 @@ const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
 const { getTemplate } = require('./src/utils/get-template');
+const { getPageMetadata } = require('./src/utils/get-page-metadata');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -91,17 +91,6 @@ const populateIncludeNodes = nodes => {
     return node;
   };
   return nodes.map(replaceInclude);
-};
-
-// Get various metadata for a given page
-const getPageMetadata = pageNode => {
-  const children = getNestedValue(['ast', 'children'], pageNode);
-  return {
-    title: getNestedValue([0, 'children', 0, 'children', 0, 'value'], children),
-    category: getNestedValue(['argument', 0, 'value'], findKeyValuePair(children, 'name', 'category')),
-    completionTime: getNestedValue(['argument', 0, 'value'], findKeyValuePair(children, 'name', 'time')),
-    languages: findKeyValuePair(children, 'name', 'languages'),
-  };
 };
 
 exports.sourceNodes = async () => {
