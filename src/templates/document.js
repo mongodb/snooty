@@ -22,7 +22,7 @@ const Document = props => {
       <Navbar />
       <div className="content">
         <div id="left-column">
-          <TableOfContents nodeData={TEST_DATA} />
+          <TableOfContents toctreeData={TEST_DATA} />
         </div>
         <div id="main-column" className="main-column">
           <span className="showNav" id="showNav">

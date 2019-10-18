@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TOCSection from './TOCSection';
 
-const TableOfContents = props => {
-  const { nodeData } = props;
-  const { title, slug, url, children } = nodeData;
+const CURRENT_PAGE = window.location.pathname;
+/**
+ * Overall Table of Contents component, which manages open sections as children
+ */
+const TableOfContents = ({ toctreeData }) => {
+  const { title, slug, url, children } = toctreeData;
   const target = url || slug;
-  const activeSlug = window.location.pathname;
-  const [activeSection, setActiveSection] = useState(activeSlug);
-  const handleDrawer = slug => {
-    if (activeSection === slug) {
+  const [activeSection, setActiveSection] = useState(CURRENT_PAGE);
+  const toggleDrawer = newSlug => {
+    if (activeSection === newSlug) {
       setActiveSection(null);
     } else {
-      setActiveSection(slug);
+      setActiveSection(newSlug);
     }
   };
 
@@ -25,7 +27,7 @@ const TableOfContents = props => {
           </h3>
           <ul className="current">
             {children.map(c => (
-              <TOCSection sectionData={c} handleDrawer={handleDrawer} activeSection={activeSection} key={c.title} />
+              <TOCSection sectionData={c} toggleDrawer={toggleDrawer} activeSection={activeSection} key={c.title} />
             ))}
           </ul>
         </div>
@@ -35,7 +37,7 @@ const TableOfContents = props => {
 };
 
 TableOfContents.propTypes = {
-  nodeData: PropTypes.shape({
+  toctreeData: PropTypes.shape({
     title: PropTypes.string.isRequired,
     slug: PropTypes.string,
     url: PropTypes.string,
