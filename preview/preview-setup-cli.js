@@ -4,6 +4,7 @@ const { getIncludeFile } = require('./get-include-file');
 const { getNestedValue } = require('../src/utils/get-nested-value');
 const { getTemplate } = require('../src/utils/get-template');
 const { getPageMetadata } = require('../src/utils/get-page-metadata');
+const { getPageUrl } = require('../src/utils/get-page-url');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -94,7 +95,7 @@ export const getPageData = async () => {
   pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
 
   const template = getTemplate(page, process.env.GATSBY_SITE);
-  const pageUrl = page === 'index' ? '/' : page;
+  const pageUrl = getPageUrl(page);
 
   if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
     return {

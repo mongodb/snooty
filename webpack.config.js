@@ -68,8 +68,6 @@ module.exports = env => {
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'preview'),
-      // libraryTarget: 'commonjs2',
-      libraryExport: 'default',
     },
     // Config for webpack-dev-server
     devServer: {
