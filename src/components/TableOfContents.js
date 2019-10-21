@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TOCSection from './TOCSection';
 
-const CURRENT_PAGE = window.location.pathname;
 /**
  * Overall Table of Contents component, which manages open sections as children
  */
 const TableOfContents = ({ toctreeData }) => {
+  // Want to check this on each re-render
+  const currentPage = window.location.pathname;
   const { title, slug, url, children } = toctreeData;
   const target = url || slug;
-  const [activeSection, setActiveSection] = useState(CURRENT_PAGE);
+  const [activeSection, setActiveSection] = useState(currentPage);
   const toggleDrawer = newSlug => {
     if (activeSection === newSlug) {
       setActiveSection(null);
