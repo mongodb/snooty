@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatTocTitleStyle } from '../utils/format-toc-title-style';
 
 const BASE_NODE_LEVEL = 2;
 const CURRENT_PAGE = window.location.pathname;
@@ -15,10 +16,9 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const classNames = [];
   const isExternal = !!url;
   const isActive = slug === CURRENT_PAGE || CURRENT_PAGE === `/${slug}`;
-  const liClassNames = [`toctree-l${level}`];
+  const liClassNames = `toctree-l${level} ${isActive ? 'current selected-item' : ''}`;
   if (isActive) {
     classNames.push('current');
-    liClassNames.push('current selected-item');
   }
   if (isExternal) {
     classNames.push('reference external');
@@ -27,14 +27,10 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   }
   let formattedTitle = title;
   if (options && options.styles) {
-    Object.keys(options.styles).forEach(tagname => {
-      const keyword = options.styles[tagname];
-      const styledKeyword = `<${tagname}>${keyword}</${tagname}>`;
-      formattedTitle = formattedTitle.replace(keyword, styledKeyword);
-    });
+    formattedTitle = formatTocTitleStyle(title, options.styles);
   }
   return (
-    <li className={liClassNames.join(' ')}>
+    <li className={liClassNames}>
       <a href={target} className={classNames.join(' ')}>
         {/* TODO Fix formatted title to this a tag */}
         <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />

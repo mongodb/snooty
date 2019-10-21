@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TOCNode from './TOCNode';
+import { formatTocTitleStyle } from '../utils/format-toc-title-style';
 
 /**
  * Sub-Section (top level) of the Table of Contents. May be a drawer or a link to a page
@@ -22,22 +23,11 @@ const TOCSection = ({ activeSection, sectionData, toggleDrawer }) => {
   }
   const liClassNames = isActive ? 'toctree-l1 current selected-item' : 'toctree-l1';
   const childListStyle = { display: isActive ? 'block' : 'none' };
-  const ChildNodeList = () => (
-    <ul style={childListStyle}>
-      {children.map(c => (
-        <TOCNode node={c} key={c.title} />
-      ))}
-    </ul>
-  );
   const NodeLink = () => {
     const isDrawer = !!(options && options.drawer);
     let formattedTitle = title;
     if (options && options.styles) {
-      Object.keys(options.styles).forEach(tagname => {
-        const keyword = options.styles[tagname];
-        const styledKeyword = `<${tagname}>${keyword}</${tagname}>`;
-        formattedTitle = formattedTitle.replace(keyword, styledKeyword);
-      });
+      formattedTitle = formatTocTitleStyle(title, options.styles);
     }
     if (isDrawer) {
       const result = (
@@ -54,7 +44,11 @@ const TOCSection = ({ activeSection, sectionData, toggleDrawer }) => {
   return (
     <li className={liClassNames}>
       <NodeLink />
-      <ChildNodeList />
+      <ul style={childListStyle}>
+        {children.map(c => (
+          <TOCNode node={c} key={c.title} />
+        ))}
+      </ul>
     </li>
   );
 };
