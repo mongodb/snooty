@@ -22,7 +22,6 @@ const TOCSection = ({ activeSection, sectionData, toggleDrawer }) => {
     classNames.push('current');
   }
   const liClassNames = isActive ? 'toctree-l1 current selected-item' : 'toctree-l1';
-  // const childListStyle = { display: isActive ? 'block' : 'none' };
   const NodeLink = () => {
     const isDrawer = !!(options && options.drawer);
     let formattedTitle = title;

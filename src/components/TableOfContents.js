@@ -20,20 +20,16 @@ const TableOfContents = ({ toctreeData }) => {
   };
 
   return (
-    <aside className="sidebar" id="sidebar">
-      <div className="sphinxsidebar" id="sphinxsidebar">
-        <div id="sphinxsidebarwrapper" className="sphinxsidebarwrapper">
-          <h3>
-            <a href={target}>{title}</a>
-          </h3>
-          <ul className="current">
-            {children.map(c => (
-              <TOCSection sectionData={c} toggleDrawer={toggleDrawer} activeSection={activeSection} key={c.title} />
-            ))}
-          </ul>
-        </div>
-      </div>
-    </aside>
+    <>
+      <h3>
+        <a href={target}>{title}</a>
+      </h3>
+      <ul className="current">
+        {children.map(c => (
+          <TOCSection sectionData={c} toggleDrawer={toggleDrawer} activeSection={activeSection} key={c.title} />
+        ))}
+      </ul>
+    </>
   );
 };
 
