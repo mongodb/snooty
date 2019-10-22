@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { formatTocTitleStyle } from '../utils/format-toc-title-style';
+import { isActiveTocNode } from '../utils/is-active-toc-node';
 
+// Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
+// with recursive depth
 const BASE_NODE_LEVEL = 1;
 
 /**
@@ -9,47 +12,55 @@ const BASE_NODE_LEVEL = 1;
  * recursively TOCNodes.
  */
 const TOCNode = ({ activeSection, node, toggleDrawer, level = BASE_NODE_LEVEL }) => {
-  const { title, slug, url, children, options } = node;
+  const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
   const hasChildren = !!children.length;
-  const isExternal = !!url;
-  const isActive = activeSection && activeSection.includes(slug);
-  const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternal ? 'external' : 'internal'}`;
+  const isExternalLink = !!url;
+  const isActive = isActiveTocNode(activeSection, slug, children);
+  const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current selected-item' : ''}`;
-  let formattedTitle = title;
-  if (options && options.styles) {
-    formattedTitle = formatTocTitleStyle(title, options.styles);
-  }
-  let NodeLink = () => (
-    <a href={target} className={anchorTagClassNames}>
-      {/* TODO Fix formatted title to this a tag */}
-      <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
-      <span dangerouslySetInnerHTML={{ __html: formattedTitle }} />
-    </a>
-  );
-  if (level === 1) {
-    NodeLink = () => {
+
+  const NodeLink = () => {
+    const formattedTitle = formatTocTitleStyle(title, options.styles);
+    if (level === BASE_NODE_LEVEL) {
       const isDrawer = !!(options && options.drawer);
-      formattedTitle = title;
-      if (options && options.styles) {
-        formattedTitle = formatTocTitleStyle(title, options.styles);
-      }
       if (isDrawer) {
+        const _toggleDrawerOnEnter = e => {
+          if (e.key === 'Enter') {
+            toggleDrawer(slug);
+          }
+        };
         return (
           <a
             onClick={() => toggleDrawer(slug)}
+            onKeyDown={_toggleDrawerOnEnter}
             className={anchorTagClassNames}
-            dangerouslySetInnerHTML={{ __html: formattedTitle }}
-          />
+            aria-expanded={hasChildren ? isActive : undefined}
+            role="button"
+            tabIndex="0"
+          >
+            {formattedTitle}
+          </a>
         );
       }
-      return <a href={target} className={anchorTagClassNames} dangerouslySetInnerHTML={{ __html: formattedTitle }} />;
-    };
-  }
+      return (
+        <a href={target} aria-expanded={hasChildren ? isActive : undefined} className={anchorTagClassNames}>
+          {formattedTitle}
+        </a>
+      );
+    }
+
+    // In this case, we have a node which should be rendered with the 'expand-icon'
+    return (
+      <a href={target} className={anchorTagClassNames} aria-expanded={hasChildren ? isActive : undefined}>
+        <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
+        {formattedTitle}
+      </a>
+    );
+  };
   return (
     <li className={toctreeSectionClasses}>
       <NodeLink />
-
       {isActive ? (
         <ul>
           {children.map(c => (
@@ -67,13 +78,8 @@ const TOCNode = ({ activeSection, node, toggleDrawer, level = BASE_NODE_LEVEL })
   );
 };
 
-// <a href={target} className={anchorTagClassNames}>
-//   <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
-//   <span dangerouslySetInnerHTML={{ __html: formattedTitle }} />
-// </a>;
-
 TOCNode.propTypes = {
-  activeSection: PropTypes.string.isRequired,
+  activeSection: PropTypes.string,
   level: PropTypes.number,
   node: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -89,7 +95,7 @@ TOCNode.propTypes = {
 };
 
 TOCNode.defaultProps = {
-  // For legacy toctree CSS, start with level 2 for leaf nodes and increment based on recursion depth
+  activeSection: null,
   level: BASE_NODE_LEVEL,
 };
 

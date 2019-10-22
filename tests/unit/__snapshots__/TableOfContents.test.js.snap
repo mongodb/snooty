@@ -137,7 +137,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
             },
             Object {
               "children": Array [],
-              "slug": "tools/http-interfaces",
+              "slug": "/tools/http-interfaces",
               "title": "HTTP Interface",
             },
           ],
@@ -156,22 +156,22 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "children": Array [
             Object {
               "children": Array [],
-              "slug": "platforms/amazon-ec2",
+              "slug": "/platforms/amazon-ec2",
               "title": "Amazon EC2",
             },
             Object {
               "children": Array [],
-              "slug": "tutorial/backup-and-restore-mongodb-on-amazon-ec2",
+              "slug": "/tutorial/backup-and-restore-mongodb-on-amazon-ec2",
               "title": "EC2 Backup and Restore",
             },
             Object {
               "children": Array [],
-              "slug": "platforms/windows-azure",
+              "slug": "/platforms/windows-azure",
               "title": "Microsoft Azure",
             },
             Object {
               "children": Array [],
-              "slug": "platforms/windows",
+              "slug": "/platforms/windows",
               "title": "Windows Quick Links and Reference Center",
             },
           ],
