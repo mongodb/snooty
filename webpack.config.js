@@ -52,9 +52,9 @@ module.exports = env => {
       fs: 'empty',
     },
     plugins: [
-      // TODO: Pass in an environment variable for process.env.GATSBY_SITE
       new webpack.DefinePlugin({
         'process.env.PREVIEW_PAGE': JSON.stringify(`${env.PREVIEW_PAGE}`),
+        'process.env.GATSBY_SITE': JSON.stringify(`${env.PROJECT_NAME}`),
       }),
     ],
   };
