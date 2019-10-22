@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-browser-sdk');
 const { validateEnvVariables } = require('../src/utils/setup/validate-env-variables');
 const { getIncludeFile } = require('./get-include-file');
@@ -24,13 +25,13 @@ const RESOLVED_REF_DOC_MAPPING = {};
 let stitchClient;
 
 const setupStitch = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     stitchClient = Stitch.hasAppClient(SNOOTY_STITCH_ID)
       ? Stitch.getAppClient(SNOOTY_STITCH_ID)
       : Stitch.initializeAppClient(SNOOTY_STITCH_ID);
     stitchClient.auth
       .loginWithCredential(new AnonymousCredential())
-      .then(user => {
+      .then(() => {
         console.log('logged into stitch');
         resolve();
       })
@@ -46,6 +47,7 @@ const populateIncludeNodes = nodes => {
       const includeNode = getIncludeFile(INCLUDE_FILES, includeFilename);
       // Perform the same operation on include nodes inside this include file
       const replacedInclude = includeNode.map(replaceInclude);
+      // eslint-disable-next-line no-param-reassign
       node.children = replacedInclude;
     } else if (node.children) {
       node.children.forEach(replaceInclude);
