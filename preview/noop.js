@@ -5,7 +5,7 @@ function useSiteMetadata() {
   };
 }
 
-function withPrefix(str) {
+function withPrefix() {
   // Allows users to click on internal links without unnecessary page jumping or refreshing
   return '#!';
 }

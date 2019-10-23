@@ -35,13 +35,18 @@
     "build": "gatsby build --prefix-paths",
     "clean": "gatsby clean",
     "develop": "gatsby develop --prefix-paths",
-    "lint": "./node_modules/.bin/eslint src/ tests/",
-    "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/**/*.js\"",
+    "lint": "./node_modules/.bin/eslint src/ tests/ preview/",
+    "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/**/*.js\" \"preview/**/*.js\"",
+    "preview": "webpack-dev-server --open --config ./webpack.config.js --env.PREVIEW_CLI='true'",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",
     "test:regression": "jest regression",
     "test:unit": "jest unit"
   },
+  "eslintIgnore": [
+    "preview/page-ast.json",
+    "preview/bundle.js"
+  ],
   "jest": {
     "verbose": true,
     "snapshotSerializers": [

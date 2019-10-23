@@ -13,6 +13,7 @@ class Preview extends React.Component {
   constructor(props) {
     super(props);
     this.templates = {
+      document: Document,
       guide: Guide,
       'guides-index': Index,
     };
@@ -24,7 +25,7 @@ class Preview extends React.Component {
 
   componentDidMount() {
     getPageData().then(pageData => {
-      const Template = this.templates[pageData.template] ? this.templates[pageData.template] : Document;
+      const Template = this.templates[pageData.template];
       this.setState({
         pageData,
         Template,
