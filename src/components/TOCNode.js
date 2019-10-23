@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { formatTocTitleStyle } from '../utils/format-toc-title-style';
 import { isActiveTocNode } from '../utils/is-active-toc-node';
@@ -26,6 +27,13 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
 
   const NodeLink = () => {
     const formattedTitle = formatTocTitleStyle(title, options.styles);
+    const Tag = isExternalLink ? 'a' : Link;
+    const tagProps = {};
+    if (isExternalLink) {
+      tagProps.href = target;
+    } else {
+      tagProps.to = target;
+    }
     if (level === BASE_NODE_LEVEL) {
       const isDrawer = !!(options && options.drawer);
       if (isDrawer) {
@@ -49,18 +57,18 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
         );
       }
       return (
-        <a href={target} aria-expanded={hasChildren ? isActive : undefined} className={anchorTagClassNames}>
+        <Tag {...tagProps} aria-expanded={hasChildren ? isActive : undefined} className={anchorTagClassNames}>
           {formattedTitle}
-        </a>
+        </Tag>
       );
     }
 
     // In this case, we have a node which should be rendered with the 'expand-icon'
     return (
-      <a href={target} className={anchorTagClassNames} aria-expanded={hasChildren ? isActive : undefined}>
+      <Tag {...tagProps} className={anchorTagClassNames} aria-expanded={hasChildren ? isActive : undefined}>
         <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
         {formattedTitle}
-      </a>
+      </Tag>
     );
   };
   return (
