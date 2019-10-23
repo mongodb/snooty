@@ -32,7 +32,7 @@ export const formatTocTitleStyle = (title, stylesObject) => {
       }
       return child;
     });
-    formattedTitle = formattedTitle.flat();
+    formattedTitle = formattedTitle.reduce((children, child) => children.concat(child), []);
   });
   return formattedTitle;
 };
