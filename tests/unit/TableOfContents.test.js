@@ -57,12 +57,9 @@ describe('Table of Contents testing', () => {
     describe('TOC navigation should render and work as expected', () => {
       it('TOC slugs work as expected', () => {
         expect(window.location.pathname).toBe('/');
-        const testTOCLink = testComponent
-          .find('ul li.toctree-l1')
-          .first()
-          .find('.reference');
+        const testTOCLink = testComponent.find('ul li.toctree-l1 .reference').first();
         expect(testTOCLink.hasClass('internal')).toBe(true);
-        expect(testTOCLink.prop('href')).toBe('/drivers');
+        expect(testTOCLink.prop('to')).toBe('/drivers');
         expect(testComponent.find('.toctree-l2')).toHaveLength(0);
         updatePageLocation('Drivers', '/drivers');
         expect(window.location.pathname).toBe('/drivers');
@@ -77,6 +74,7 @@ describe('Table of Contents testing', () => {
           .first()
           .find('.reference');
         expect(biConnectorLink.hasClass('external')).toBe(true);
+        expect(biConnectorLink.prop('href')).toBe('https://docs.mongodb.com/bi-connector/current/');
       });
     });
 
