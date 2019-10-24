@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TOCNode from './TOCNode';
+import { TOCContext } from './toc-context';
 
 /**
  * Overall Table of Contents component, which manages open sections as children
@@ -20,16 +21,16 @@ const TableOfContents = ({ toctreeData }) => {
   };
 
   return (
-    <>
+    <TOCContext.Provider value={{ activeSection, toggleDrawer }}>
       <h3>
         <a href={target}>{title}</a>
       </h3>
       <ul className="current">
         {children.map(c => (
-          <TOCNode node={c} toggleDrawer={toggleDrawer} activeSection={activeSection} key={c.title} />
+          <TOCNode node={c} key={c.title} />
         ))}
       </ul>
-    </>
+    </TOCContext.Provider>
   );
 };
 

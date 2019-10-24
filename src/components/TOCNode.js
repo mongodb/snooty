@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { formatTocTitleStyle } from '../utils/format-toc-title-style';
 import { isActiveTocNode } from '../utils/is-active-toc-node';
+import { TOCContext } from './toc-context';
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
@@ -11,11 +12,12 @@ const BASE_NODE_LEVEL = 1;
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
-const TOCNode = ({ activeSection, node, toggleDrawer, level = BASE_NODE_LEVEL }) => {
+const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
   const hasChildren = !!children.length;
   const isExternalLink = !!url;
+  const { activeSection, toggleDrawer } = useContext(TOCContext);
   const isActive = isActiveTocNode(activeSection, slug, children);
   const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current selected-item' : ''}`;
@@ -80,7 +82,6 @@ const TOCNode = ({ activeSection, node, toggleDrawer, level = BASE_NODE_LEVEL })
 };
 
 TOCNode.propTypes = {
-  activeSection: PropTypes.string,
   level: PropTypes.number,
   node: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -92,11 +93,9 @@ TOCNode.propTypes = {
       styles: PropTypes.objectOf(PropTypes.string),
     }),
   }).isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
 };
 
 TOCNode.defaultProps = {
-  activeSection: null,
   level: BASE_NODE_LEVEL,
 };
 

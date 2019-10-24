@@ -1,7 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Table of Contents testing Table of Contents unit tests renders correctly 1`] = `
-<Fragment>
+<ContextProvider
+  value={
+    Object {
+      "activeSection": "/",
+      "toggleDrawer": [Function],
+    }
+  }
+>
   <h3>
     <a
       href="/"
@@ -13,7 +20,6 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
     className="current"
   >
     <TOCNode
-      activeSection="/"
       key="MongoDB Drivers and ODM"
       level={1}
       node={
@@ -116,10 +122,8 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "MongoDB Drivers and ODM",
         }
       }
-      toggleDrawer={[Function]}
     />
     <TOCNode
-      activeSection="/"
       key="MongoDB Integration and Tools"
       level={1}
       node={
@@ -145,10 +149,8 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "MongoDB Integration and Tools",
         }
       }
-      toggleDrawer={[Function]}
     />
     <TOCNode
-      activeSection="/"
       key="Platforms"
       level={1}
       node={
@@ -185,10 +187,8 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "Platforms",
         }
       }
-      toggleDrawer={[Function]}
     />
     <TOCNode
-      activeSection="/"
       key="Use Cases"
       level={1}
       node={
@@ -240,8 +240,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "Use Cases",
         }
       }
-      toggleDrawer={[Function]}
     />
   </ul>
-</Fragment>
+</ContextProvider>
 `;
