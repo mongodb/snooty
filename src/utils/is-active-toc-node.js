@@ -5,6 +5,6 @@
 */
 export const isActiveTocNode = (activeSlug, currentSlug, children) => {
   if (currentSlug === undefined) return false;
-  if (currentSlug === activeSlug) return true;
+  if (currentSlug === activeSlug || `${currentSlug}/` === activeSlug) return true;
   return children.reduce((a, b) => a || isActiveTocNode(activeSlug, b.slug, b.children), false);
 };
