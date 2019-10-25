@@ -4,11 +4,13 @@ import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
+import Dropdown from '../components/Dropdown';
 
 const Document = props => {
   const {
     addPillstrip,
     footnotes,
+    location: { pathname },
     pageContext: { pageMetadata, __refDocMapping },
     pillstrips,
     substitutions,
@@ -28,6 +30,7 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   <div className="bc" />
+                  <Dropdown pathname={pathname} />
                   {pageNodes.map((child, index) => (
                     <ComponentFactory
                       addPillstrip={addPillstrip}
@@ -54,6 +57,9 @@ const Document = props => {
 Document.propTypes = {
   addPillstrip: PropTypes.func,
   footnotes: PropTypes.objectOf(PropTypes.object),
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({

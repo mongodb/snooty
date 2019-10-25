@@ -11,7 +11,9 @@ const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
 const DB = 'snooty';
 const DOCUMENTS_COLLECTION = 'documents';
 const ASSETS_COLLECTION = 'assets';
+const METADATA_COLLECTION = 'metadata';
 const SNOOTY_STITCH_ID = 'snooty-koueq';
+let ID_PREFIX = null;
 
 // test data properties
 const USE_TEST_DATA = process.env.USE_TEST_DATA;
@@ -103,7 +105,7 @@ const getPageMetadata = pageNode => {
   };
 };
 
-exports.sourceNodes = async () => {
+exports.sourceNodes = async ({ actions, createContentDigest }) => {
   // setup env variables
   const envResults = validateEnvVariables();
 
@@ -127,13 +129,13 @@ exports.sourceNodes = async () => {
     }
   } else {
     // start from index document
-    const idPrefix = `${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_USER}/${process.env.GATSBY_PARSER_BRANCH}`;
-    const query = { _id: { $regex: new RegExp(`^${idPrefix}/*`) } };
+    ID_PREFIX = `${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_USER}/${process.env.GATSBY_PARSER_BRANCH}`;
+    const query = { _id: { $regex: new RegExp(`^${ID_PREFIX}/*`) } };
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
     documents.forEach(doc => {
       const { _id, ...rest } = doc;
-      RESOLVED_REF_DOC_MAPPING[_id.replace(`${idPrefix}/`, '')] = rest;
+      RESOLVED_REF_DOC_MAPPING[_id.replace(`${ID_PREFIX}/`, '')] = rest;
     });
   }
 
@@ -164,6 +166,17 @@ exports.sourceNodes = async () => {
       console.log(`** Saved test data into "${fullpathLatest}"`);
     });
   }
+
+  const siteMetadata = await stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, { _id: ID_PREFIX }]);
+  const publishedBranchesNode = {
+    ...siteMetadata.publishedBranches,
+    id: 'publishedBranches',
+    internal: {
+      type: 'PublishedBranches',
+      contentDigest: createContentDigest(siteMetadata.publishedBranches),
+    },
+  };
+  actions.createNode(publishedBranchesNode);
 };
 
 exports.createPages = ({ actions }) => {
