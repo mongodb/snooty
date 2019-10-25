@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
 import TOCSidebar from '../components/TOCSidebar';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
+import { TOCContext } from '../components/toc-context';
 import TEST_DATA from '../../tests/unit/data/Table-Of-Contents.test.json';
 
 const Document = props => {
@@ -16,42 +17,51 @@ const Document = props => {
     substitutions,
   } = props;
   const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
-
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+  const toggleSidebar = () => setSidebarVisible(!sidebarVisible);
   return (
     <React.Fragment>
       <Navbar />
-      <div className="content">
-        <div id="left-column">
-          <TOCSidebar toctreeData={TEST_DATA} />
-        </div>
-        <div id="main-column" className="main-column">
-          <span className="showNav" id="showNav">
-            Navigation
-          </span>
-          <div className="document">
-            <div className="documentwrapper">
-              <div className="bodywrapper">
-                <div className="body">
-                  <div className="bc" />
-                  {pageNodes.map((child, index) => (
-                    <ComponentFactory
-                      addPillstrip={addPillstrip}
-                      footnotes={footnotes}
-                      key={index}
-                      nodeData={child}
-                      refDocMapping={__refDocMapping}
-                      pageMetadata={pageMetadata}
-                      pillstrips={pillstrips}
-                      substitutions={substitutions}
-                    />
-                  ))}
-                  <Footer />
+      <TOCContext.Provider value={{ toggleSidebar }}>
+        <div className="content">
+          <div id="left-column" style={{ display: sidebarVisible ? 'flex' : 'none' }}>
+            <TOCSidebar toctreeData={TEST_DATA} />
+          </div>
+          <div id="main-column" className="main-column">
+            <span
+              className="showNav"
+              id="showNav"
+              style={{ display: sidebarVisible ? 'none' : 'flex' }}
+              onClick={toggleSidebar}
+              role="button"
+            >
+              Navigation
+            </span>
+            <div className="document">
+              <div className="documentwrapper">
+                <div className="bodywrapper">
+                  <div className="body">
+                    <div className="bc" />
+                    {pageNodes.map((child, index) => (
+                      <ComponentFactory
+                        addPillstrip={addPillstrip}
+                        footnotes={footnotes}
+                        key={index}
+                        nodeData={child}
+                        refDocMapping={__refDocMapping}
+                        pageMetadata={pageMetadata}
+                        pillstrips={pillstrips}
+                        substitutions={substitutions}
+                      />
+                    ))}
+                    <Footer />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </TOCContext.Provider>
     </React.Fragment>
   );
 };
