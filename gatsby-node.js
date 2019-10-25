@@ -5,8 +5,9 @@ const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-const { findKeyValuePair } = require('./src/utils/find-key-value-pair');
 const { getTemplate } = require('./src/utils/get-template');
+const { getPageMetadata } = require('./src/utils/get-page-metadata');
+const { getPageUrl } = require('./src/utils/get-page-url');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -93,17 +94,6 @@ const populateIncludeNodes = nodes => {
   return nodes.map(replaceInclude);
 };
 
-// Get various metadata for a given page
-const getPageMetadata = pageNode => {
-  const children = getNestedValue(['ast', 'children'], pageNode);
-  return {
-    title: getNestedValue([0, 'children', 0, 'children', 0, 'value'], children),
-    category: getNestedValue(['argument', 0, 'value'], findKeyValuePair(children, 'name', 'category')),
-    completionTime: getNestedValue(['argument', 0, 'value'], findKeyValuePair(children, 'name', 'time')),
-    languages: findKeyValuePair(children, 'name', 'languages'),
-  };
-};
-
 exports.sourceNodes = async () => {
   // setup env variables
   const envResults = validateEnvVariables();
@@ -174,8 +164,9 @@ exports.createPages = ({ actions }) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
       pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
+
       const template = getTemplate(page, process.env.GATSBY_SITE);
-      const pageUrl = page === 'index' ? '/' : page;
+      const pageUrl = getPageUrl(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
           path: pageUrl,
