@@ -32,7 +32,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
             toggleDrawer(slug);
           }
         };
-        // Ideally, this value should be a button, but to keep consistent with CSS render as anchor
+        // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
         return (
           <a // eslint-disable-line jsx-a11y/anchor-is-valid
             onClick={() => toggleDrawer(slug)}

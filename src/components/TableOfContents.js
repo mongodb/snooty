@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TOCNode from './TOCNode';
 import { TOCContext } from './toc-context';
+import { isBrowser } from '../utils/is-browser';
 
 /**
  * Overall Table of Contents component, which manages open sections as children
  */
 const TableOfContents = ({ toctreeData }) => {
   // Want to check this on each re-render
-  const currentPage = window.location.pathname;
+  let currentPage;
+  if (isBrowser()) {
+    currentPage = window.location.pathname;
+  }
   const { title, slug, url, children } = toctreeData;
   const target = url || slug;
   const [activeSection, setActiveSection] = useState(currentPage);
