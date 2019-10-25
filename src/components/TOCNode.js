@@ -57,7 +57,12 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
         );
       }
       return (
-        <Tag {...tagProps} aria-expanded={hasChildren ? isActive : undefined} className={anchorTagClassNames}>
+        <Tag
+          {...tagProps}
+          aria-expanded={hasChildren ? isActive : undefined}
+          className={anchorTagClassNames}
+          onClick={() => toggleDrawer(slug)}
+        >
           {formattedTitle}
         </Tag>
       );
