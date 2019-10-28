@@ -47,7 +47,7 @@
           "children": [
             {
               "title": "PHP Libraries, Frameworks, and Tools",
-              "slug": "/drivers/php-libaries",
+              "slug": "/drivers/php-libraries",
               "children": []
             }
           ]
@@ -58,12 +58,12 @@
           "children": [
             {
               "title": "PyMongo",
-              "slug": "/drivers/pymongo.txt",
+              "slug": "/drivers/pymongo",
               "children": []
             },
             {
               "title": "Motor (Async Driver)",
-              "slug": "/drivers/motor.txt",
+              "slug": "/drivers/motor",
               "children": []
             }
           ]
