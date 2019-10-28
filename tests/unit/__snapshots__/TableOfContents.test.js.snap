@@ -64,7 +64,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
               "children": Array [
                 Object {
                   "children": Array [],
-                  "slug": "/drivers/php-libaries",
+                  "slug": "/drivers/php-libraries",
                   "title": "PHP Libraries, Frameworks, and Tools",
                 },
               ],
@@ -75,12 +75,12 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
               "children": Array [
                 Object {
                   "children": Array [],
-                  "slug": "/drivers/pymongo.txt",
+                  "slug": "/drivers/pymongo",
                   "title": "PyMongo",
                 },
                 Object {
                   "children": Array [],
-                  "slug": "/drivers/motor.txt",
+                  "slug": "/drivers/motor",
                   "title": "Motor (Async Driver)",
                 },
               ],
