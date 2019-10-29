@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
-import TOCSidebar from '../components/TOCSidebar';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
-import TEST_DATA from '../../tests/unit/data/Table-Of-Contents.test.json';
 
 const Document = props => {
   const {
@@ -21,9 +19,6 @@ const Document = props => {
     <React.Fragment>
       <Navbar />
       <div className="content">
-        <div id="left-column">
-          <TOCSidebar toctreeData={TEST_DATA} />
-        </div>
         <div id="main-column" className="main-column">
           <span className="showNav" id="showNav">
             Navigation
