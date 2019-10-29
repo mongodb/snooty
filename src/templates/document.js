@@ -19,21 +19,25 @@ const Document = props => {
   const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const toggleSidebar = () => setSidebarVisible(!sidebarVisible);
+  const sidebarStyle = { display: sidebarVisible ? 'flex' : 'none' };
+  const collapsedSidebarButtonStyle = { display: sidebarVisible ? 'none' : 'flex' };
   return (
     <React.Fragment>
       <Navbar />
       <TOCContext.Provider value={{ toggleSidebar }}>
         <div className="content">
-          <div id="left-column" style={{ display: sidebarVisible ? 'flex' : 'none' }}>
+          <div id="left-column" style={sidebarStyle} aria-expanded={sidebarVisible}>
             <TOCSidebar toctreeData={TEST_DATA} />
           </div>
           <div id="main-column" className="main-column">
             <span
-              className="showNav"
               id="showNav"
-              style={{ display: sidebarVisible ? 'none' : 'flex' }}
+              className="showNav"
+              style={collapsedSidebarButtonStyle}
               onClick={toggleSidebar}
               role="button"
+              tabIndex="0"
+              aria-expanded={sidebarVisible}
             >
               Navigation
             </span>
