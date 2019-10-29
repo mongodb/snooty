@@ -8,7 +8,12 @@ const TOCSidebar = props => {
     <aside className="sidebar" id="sidebar">
       <div className="sphinxsidebar" id="sphinxsidebar">
         <div id="sphinxsidebarwrapper" className="sphinxsidebarwrapper">
-          <a href="javascript:void(0)" className="closeNav" id="closeNav" onClick={toggleSidebar}>
+          <a // eslint-disable-line jsx-a11y/anchor-is-valid, jsx-a11y/interactive-supports-focus, no-script-url
+            className="closeNav"
+            id="closeNav"
+            onClick={toggleSidebar}
+            role="button"
+          >
             Close ×
           </a>
           <TableOfContents {...props} />
