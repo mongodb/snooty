@@ -1,96 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly a role "authrole" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/built-in-roles/#clusterMonitor"
->
-  <code
-    className="mongodb-authrole xref mongodb docutils literal notranslate"
-  >
-    <span
-      className="pre"
-    >
-      clusterMonitor
-    </span>
-  </code>
-</a>
-`;
-
 exports[`renders correctly a role "guilabel" 1`] = `
 <span
   className="guilabel"
 >
   Yes
 </span>
-`;
-
-exports[`renders correctly a role "query" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/operator/query/lt/#op._S_lt"
->
-  <code
-    className="mongodb-query xref mongodb docutils literal notranslate"
-  >
-    <span
-      className="pre"
-    >
-      $lt
-    </span>
-  </code>
-</a>
-`;
-
-exports[`renders correctly a role "setting" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/configuration-options/#dbpath"
->
-  <code
-    className="mongodb-setting xref mongodb docutils literal notranslate"
-  >
-    <span
-      className="pre"
-    >
-      dbpath
-    </span>
-  </code>
-</a>
-`;
-
-exports[`renders correctly a role "update" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/operator/update/set/#up._S_set"
->
-  <code
-    className="mongodb-update xref mongodb docutils literal notranslate"
-  >
-    <span
-      className="pre"
-    >
-      $set
-    </span>
-  </code>
-</a>
-`;
-
-exports[`renders correctly role "binary" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/program/mongod.exe/#bin.mongod.exe"
->
-  <code
-    className="mongodb-binary xref mongodb docutils literal notranslate"
-  >
-    <span
-      className="pre"
-    >
-      mongod.exe
-    </span>
-  </code>
-</a>
 `;
 
 exports[`renders correctly role "doc" 1`] = `
@@ -117,40 +32,6 @@ exports[`renders correctly role "manual" 1`] = `
   href="https://docs.mongodb.com/manual/introduction"
 >
   The MongoDB Server Manual
-</a>
-`;
-
-exports[`renders correctly role "method" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/method/ObjectId/#ObjectId"
->
-  <code
-    className="mongodb-method xref mongodb docutils literal notranslate"
-  >
-    <span
-      className="pre"
-    >
-      ObjectId
-    </span>
-  </code>
-</a>
-`;
-
-exports[`renders correctly role "option" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/program/mongoimport/#cmdoption-mongoimport-file"
->
-  <code
-    className="mongodb-option xref mongodb docutils literal notranslate"
-  >
-    <span
-      className="pre"
-    >
-      --file
-    </span>
-  </code>
 </a>
 `;
 
