@@ -46,13 +46,11 @@ import Topic from './Topic';
 import Subscript from './Subscript';
 import Superscript from './Superscript';
 import Image from './Image';
+import RefRole from './RefRole';
 
-import RoleApi from './Roles/Api';
 import RoleClass from './Roles/Class';
-import RoleCode from './Roles/Code';
 import RoleDoc from './Roles/Doc';
 import RoleGUILabel from './Roles/GUILabel';
-import RoleManual from './Roles/Manual';
 import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
 import RoleTerm from './Roles/Term';
@@ -64,23 +62,12 @@ export default class ComponentFactory extends Component {
   constructor() {
     super();
     this.roles = {
-      authrole: RoleCode,
-      binary: RoleCode,
       class: RoleClass,
-      'csharp-api': RoleApi,
-      dbcommand: RoleCode,
       doc: RoleDoc,
       guilabel: RoleGUILabel,
-      'java-sync-api': RoleApi,
-      manual: RoleManual,
-      method: RoleCode,
-      option: RoleCode,
       program: RoleProgram,
-      query: RoleCode,
       ref: RoleRef,
-      setting: RoleCode,
       term: RoleTerm,
-      update: RoleCode,
     };
     this.componentMap = {
       admonition: Admonition,
@@ -114,6 +101,7 @@ export default class ComponentFactory extends Component {
       meta: Meta,
       only: Cond,
       paragraph: Paragraph,
+      ref_role: RefRole,
       reference: Reference,
       section: Section,
       step: Step,
