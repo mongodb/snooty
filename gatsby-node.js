@@ -13,7 +13,9 @@ const { getPageUrl } = require('./src/utils/get-page-url');
 const DB = 'snooty';
 const DOCUMENTS_COLLECTION = 'documents';
 const ASSETS_COLLECTION = 'assets';
+const METADATA_COLLECTION = 'metadata';
 const SNOOTY_STITCH_ID = 'snooty-koueq';
+let ID_PREFIX;
 
 // test data properties
 const USE_TEST_DATA = process.env.USE_TEST_DATA;
@@ -118,13 +120,13 @@ exports.sourceNodes = async () => {
     }
   } else {
     // start from index document
-    const idPrefix = `${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_USER}/${process.env.GATSBY_PARSER_BRANCH}`;
-    const query = { _id: { $regex: new RegExp(`^${idPrefix}/*`) } };
+    ID_PREFIX = `${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_USER}/${process.env.GATSBY_PARSER_BRANCH}`;
+    const query = { _id: { $regex: new RegExp(`^${ID_PREFIX}/*`) } };
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
     documents.forEach(doc => {
       const { _id, ...rest } = doc;
-      RESOLVED_REF_DOC_MAPPING[_id.replace(`${idPrefix}/`, '')] = rest;
+      RESOLVED_REF_DOC_MAPPING[_id.replace(`${ID_PREFIX}/`, '')] = rest;
     });
   }
 
@@ -157,8 +159,9 @@ exports.sourceNodes = async () => {
   }
 };
 
-exports.createPages = ({ actions }) => {
+exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
+  const { toctree } = await stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, { _id: ID_PREFIX }]);
 
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
@@ -172,6 +175,7 @@ exports.createPages = ({ actions }) => {
           path: pageUrl,
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
+            toctree,
             snootyStitchId: SNOOTY_STITCH_ID,
             __refDocMapping: pageNodes,
             pageMetadata: PAGE_METADATA,
