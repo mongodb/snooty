@@ -65,7 +65,7 @@ Document.propTypes = {
       }).isRequired,
     }).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
-    toctree: PropTypes.objectOf(PropTypes.object),
+    toctree: PropTypes.object,
   }).isRequired,
   pillstrips: PropTypes.objectOf(PropTypes.object),
   substitutions: PropTypes.objectOf(PropTypes.array),
