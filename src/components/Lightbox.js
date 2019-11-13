@@ -7,7 +7,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 const CAPTION_TEXT = 'click to enlarge';
 const isSvg = imgSrc => /\.svg$/.test(imgSrc);
 
-const Lightbox = ({ nodeData, base64Uri, ...rest }) => {
+const Lightbox = ({ nodeData, ...rest }) => {
   const [showModal, setShowModal] = useState(false);
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const modal = useRef(null);
@@ -72,11 +72,6 @@ Lightbox.propTypes = {
       alt: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  base64Uri: PropTypes.string,
-};
-
-Lightbox.defaultProps = {
-  base64Uri: null,
 };
 
 export default Lightbox;

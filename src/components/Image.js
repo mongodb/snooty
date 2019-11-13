@@ -20,8 +20,7 @@ export default class Image extends Component {
     this._isMounted = true;
 
     // Get base64 image data
-    // TODO: Receive images some other way when preview for VS Code is up and running (DOCSP-6886)
-    if (process.env.PREVIEW_PAGE) {
+    if (process.env.PREVIEW_MODE === 'cli') {
       const { nodeData } = this.props;
       const checksum = getNestedValue(['options', 'checksum'], nodeData);
 
@@ -68,16 +67,27 @@ export default class Image extends Component {
     });
   };
 
+  // Choose whether to use path to static asset file or base64 img data
+  getImgData = (previewMode, imgSrc) => {
+    // Use base64 data of image obtained from Stitch
+    if (previewMode === 'cli') {
+      const { base64Uri } = this.state;
+      return base64Uri;
+    }
+    // Make sure file is a valid resource for vscode
+    if (previewMode === 'vscode') {
+      return `vscode-resource://${imgSrc}`;
+    }
+    return withPrefix(imgSrc);
+  };
+
   render() {
     const { className, nodeData } = this.props;
-    const { base64Uri } = this.state;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
     const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
     const customAlign = getNestedValue(['options', 'align'], nodeData)
       ? `align-${getNestedValue(['options', 'align'], nodeData)}`
       : '';
-    // Choose whether to show static asset file or via base64
-    const imgData = !process.env.PREVIEW_PAGE ? withPrefix(imgSrc) : base64Uri;
 
     const buildStyles = () => {
       const { height, width } = this.state;
@@ -89,7 +99,7 @@ export default class Image extends Component {
 
     return (
       <img
-        src={imgData}
+        src={this.getImgData(process.env.PREVIEW_MODE, imgSrc)}
         alt={altText}
         className={[getNestedValue(['option', 'class'], nodeData), customAlign, className].join(' ')}
         style={nodeData.options ? buildStyles() : {}}
