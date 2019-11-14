@@ -14,11 +14,11 @@ exports[`renders correctly 1`] = `
     <li
       key="drivers"
     >
-      <mockConstructor
-        to="/drivers"
+      <a
+        href="/drivers"
       >
         MongoDB Drivers and ODM
-      </mockConstructor>
+      </a>
       <span
         className="bcpoint"
       >
@@ -28,11 +28,11 @@ exports[`renders correctly 1`] = `
     <li
       key="drivers/php"
     >
-      <mockConstructor
-        to="/drivers/php"
+      <a
+        href="/drivers/php"
       >
         MongoDB PHP Driver
-      </mockConstructor>
+      </a>
     </li>
   </ul>
 </div>

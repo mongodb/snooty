@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
-import { isPreviewMode } from '../utils/is-preview-mode';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 
@@ -29,7 +28,7 @@ const Document = props => {
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
-                  {!isPreviewMode() && <Breadcrumbs parentPaths={parentPaths} slugTitleMapping={slugTitleMapping} />}
+                  <Breadcrumbs parentPaths={parentPaths} slugTitleMapping={slugTitleMapping} />
                   {pageNodes.map((child, index) => (
                     <ComponentFactory
                       addPillstrip={addPillstrip}

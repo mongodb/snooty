@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { getNestedValue } from '../utils/get-nested-value';
+import { isPreviewMode } from '../utils/is-preview-mode';
 
 const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
   <div className="bc">
-    {parentPaths && (
+    {!isPreviewMode() && parentPaths && (
       <ul>
         {parentPaths.map((path, index) => (
           <li key={path}>
@@ -24,11 +25,12 @@ Breadcrumbs.propTypes = {
   parentPaths: PropTypes.arrayOf(PropTypes.string),
   slugTitleMapping: PropTypes.shape({
     [PropTypes.string]: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 Breadcrumbs.defaultProps = {
   parentPaths: [],
+  slugTitleMapping: {},
 };
 
 export default Breadcrumbs;
