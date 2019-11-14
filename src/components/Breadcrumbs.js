@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
+import { withPrefix } from 'gatsby';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
@@ -9,7 +9,9 @@ const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
       <ul>
         {parentPaths.map((path, index) => (
           <li key={path}>
-            <Link to={`/${path}`}>{getNestedValue([path], slugTitleMapping)}</Link>
+            {/* TODO: Replace <a> with <Link> when back button behavior is fixed for the component.
+              GitHub issue: https://github.com/gatsbyjs/gatsby/issues/8357 */}
+            <a href={withPrefix(`/${path}`)}>{getNestedValue([path], slugTitleMapping)}</a>
             {index !== parentPaths.length - 1 && <span className="bcpoint"> &gt; </span>}
           </li>
         ))}
