@@ -161,7 +161,11 @@ exports.sourceNodes = async () => {
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
-  const { toctree } = await stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, { _id: ID_PREFIX }]);
+  const { parentPaths, slugToTitle, toctree } = await stitchClient.callFunction('fetchDocument', [
+    DB,
+    METADATA_COLLECTION,
+    { _id: ID_PREFIX },
+  ]);
 
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
@@ -179,6 +183,8 @@ exports.createPages = async ({ actions }) => {
             snootyStitchId: SNOOTY_STITCH_ID,
             __refDocMapping: pageNodes,
             pageMetadata: PAGE_METADATA,
+            parentPaths: getNestedValue([page], parentPaths),
+            slugTitleMapping: slugToTitle,
           },
         });
       }
