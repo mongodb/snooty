@@ -4,13 +4,14 @@ import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
+import Breadcrumbs from '../components/Breadcrumbs';
 import TOCSidebar from '../components/TOCSidebar';
 
 const Document = props => {
   const {
     addPillstrip,
     footnotes,
-    pageContext: { pageMetadata, toctree, __refDocMapping },
+    pageContext: { pageMetadata, parentPaths, slugTitleMapping, toctree, __refDocMapping },
     pillstrips,
     substitutions,
   } = props;
@@ -31,7 +32,7 @@ const Document = props => {
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
-                  <div className="bc" />
+                  <Breadcrumbs parentPaths={parentPaths} slugTitleMapping={slugTitleMapping} />
                   {pageNodes.map((child, index) => (
                     <ComponentFactory
                       addPillstrip={addPillstrip}
@@ -65,6 +66,10 @@ Document.propTypes = {
       }).isRequired,
     }).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
+    parentPaths: PropTypes.arrayOf(PropTypes.string),
+    slugTitleMapping: PropTypes.shape({
+      [PropTypes.string]: PropTypes.string,
+    }).isRequired,
     toctree: PropTypes.object,
   }).isRequired,
   pillstrips: PropTypes.objectOf(PropTypes.object),
