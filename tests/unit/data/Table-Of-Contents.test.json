@@ -4,66 +4,66 @@
   "children": [
     {
       "title": "MongoDB Drivers and ODM",
-      "slug": "/drivers",
+      "slug": "drivers",
       "children": [
         {
           "title": "C Driver",
-          "slug": "/drivers/c",
+          "slug": "drivers/c",
           "children": []
         },
         {
           "title": "C++ Driver",
-          "slug": "/drivers/cxx",
+          "slug": "drivers/cxx",
           "children": []
         },
         {
           "title": "C# and .NET Driver",
-          "slug": "/drivers/csharp",
+          "slug": "drivers/csharp",
           "children": []
         },
         {
           "title": "Go Driver",
-          "slug": "/drivers/go",
+          "slug": "drivers/go",
           "children": []
         },
         {
           "title": "Java Driver",
-          "slug": "/drivers/java",
+          "slug": "drivers/java",
           "children": []
         },
         {
           "title": "Node.js Driver",
-          "slug": "/drivers/node",
+          "slug": "drivers/node",
           "children": []
         },
         {
           "title": "Perl Driver",
-          "slug": "/drivers/perl",
+          "slug": "drivers/perl",
           "children": []
         },
         {
           "title": "PHP Driver",
-          "slug": "/drivers/php",
+          "slug": "drivers/php",
           "children": [
             {
               "title": "PHP Libraries, Frameworks, and Tools",
-              "slug": "/drivers/php-libraries",
+              "slug": "drivers/php-libraries",
               "children": []
             }
           ]
         },
         {
           "title": "Python Drivers",
-          "slug": "/drivers/python",
+          "slug": "drivers/python",
           "children": [
             {
               "title": "PyMongo",
-              "slug": "/drivers/pymongo",
+              "slug": "drivers/pymongo",
               "children": []
             },
             {
               "title": "Motor (Async Driver)",
-              "slug": "/drivers/motor",
+              "slug": "drivers/motor",
               "children": []
             }
           ]
@@ -80,29 +80,29 @@
         },
         {
           "title": "Scala Driver",
-          "slug": "/drivers/scala",
+          "slug": "drivers/scala",
           "children": []
         },
         {
           "title": "Community Supported Drivers Reference",
-          "slug": "/drivers/community-supported-drivers",
+          "slug": "drivers/community-supported-drivers",
           "children": []
         },
         {
           "title": "MongoDB Drivers Specs",
-          "slug": "/drivers/specs",
+          "slug": "drivers/specs",
           "children": []
         },
         {
           "title": "Driver Compatibility",
-          "slug": "/drivers/driver-compatibility-reference",
+          "slug": "drivers/driver-compatibility-reference",
           "children": []
         }
       ]
     },
     {
       "title": "MongoDB Integration and Tools",
-      "slug": "/tools",
+      "slug": "tools",
       "children": [
         {
           "title": "MongoDB Connector for Business Intelligence",
@@ -116,14 +116,14 @@
         },
         {
           "title": "HTTP Interface",
-          "slug": "/tools/http-interfaces",
+          "slug": "tools/http-interfaces",
           "children": []
         }
       ]
     },
     {
       "title": "Platforms",
-      "slug": "/platforms",
+      "slug": "platforms",
       "options": {
         "drawer": true,
         "styles": {
@@ -133,29 +133,29 @@
       "children": [
         {
           "title": "Amazon EC2",
-          "slug": "/platforms/amazon-ec2",
+          "slug": "platforms/amazon-ec2",
           "children": []
         },
         {
           "title": "EC2 Backup and Restore",
-          "slug": "/tutorial/backup-and-restore-mongodb-on-amazon-ec2",
+          "slug": "tutorial/backup-and-restore-mongodb-on-amazon-ec2",
           "children": []
         },
         {
           "title": "Microsoft Azure",
-          "slug": "/platforms/windows-azure",
+          "slug": "platforms/windows-azure",
           "children": []
         },
         {
           "title": "Windows Quick Links and Reference Center",
-          "slug": "/platforms/windows",
+          "slug": "platforms/windows",
           "children": []
         }
       ]
     },
     {
       "title": "Use Cases",
-      "slug": "/use-cases",
+      "slug": "use-cases",
       "options": {
         "drawer": true,
         "styles": {
@@ -165,37 +165,37 @@
       "children": [
         {
           "title": "Storing Log Data",
-          "slug": "/use-cases/storing-log-data",
+          "slug": "use-cases/storing-log-data",
           "children": []
         },
         {
           "title": "Hierarchical Aggregation",
-          "slug": "/use-cases/hierarchical-aggregation",
+          "slug": "use-cases/hierarchical-aggregation",
           "children": []
         },
         {
           "title": "Product Catalog",
-          "slug": "/use-cases/product-catalog",
+          "slug": "use-cases/product-catalog",
           "children": []
         },
         {
           "title": "Inventory Management",
-          "slug": "/use-cases/inventory-management",
+          "slug": "use-cases/inventory-management",
           "children": []
         },
         {
           "title": "Category Hierarchy",
-          "slug": "/use-cases/category-hierarchy",
+          "slug": "use-cases/category-hierarchy",
           "children": []
         },
         {
           "title": "Metadata and Asset Management",
-          "slug": "/use-cases/metadata-and-asset-management",
+          "slug": "use-cases/metadata-and-asset-management",
           "children": []
         },
         {
           "title": "Storing Comments",
-          "slug": "/use-cases/storing-comments",
+          "slug": "use-cases/storing-comments",
           "children": []
         }
       ]
