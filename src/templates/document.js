@@ -5,12 +5,13 @@ import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
+import TOCSidebar from '../components/TOCSidebar';
 
 const Document = props => {
   const {
     addPillstrip,
     footnotes,
-    pageContext: { pageMetadata, parentPaths, slugTitleMapping, __refDocMapping },
+    pageContext: { pageMetadata, parentPaths, slugTitleMapping, toctree, __refDocMapping },
     pillstrips,
     substitutions,
   } = props;
@@ -20,6 +21,9 @@ const Document = props => {
     <React.Fragment>
       <Navbar />
       <div className="content">
+        <div id="left-column">
+          <TOCSidebar toctreeData={toctree} />
+        </div>
         <div id="main-column" className="main-column">
           <span className="showNav" id="showNav">
             Navigation
@@ -66,6 +70,7 @@ Document.propTypes = {
     slugTitleMapping: PropTypes.shape({
       [PropTypes.string]: PropTypes.string,
     }).isRequired,
+    toctree: PropTypes.object,
   }).isRequired,
   pillstrips: PropTypes.objectOf(PropTypes.object),
   substitutions: PropTypes.objectOf(PropTypes.array),

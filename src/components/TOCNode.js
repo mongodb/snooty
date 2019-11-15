@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 import { formatTocTitleStyle } from '../utils/format-toc-title-style';
 import { isActiveTocNode } from '../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../utils/is-selected-toc-node';
@@ -26,13 +27,17 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current' : ''} ${isSelected ? 'selected-item' : ''}`;
 
   const NodeLink = () => {
-    const formattedTitle = formatTocTitleStyle(title, options.styles);
+    // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
+    const formattedTitle =
+      typeof title === 'string'
+        ? formatTocTitleStyle(title, options.styles)
+        : title.map((e, index) => <ComponentFactory key={index} nodeData={e} />);
     const Tag = isExternalLink ? 'a' : Link;
     const tagProps = {};
     if (isExternalLink) {
       tagProps.href = target;
     } else {
-      tagProps.to = target;
+      tagProps.to = `/${target}`;
     }
     if (level === BASE_NODE_LEVEL) {
       const isDrawer = !!(options && options.drawer);
@@ -99,7 +104,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
 TOCNode.propTypes = {
   level: PropTypes.number,
   node: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    title: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]).isRequired,
     slug: PropTypes.string,
     url: PropTypes.string,
     children: PropTypes.array.isRequired,

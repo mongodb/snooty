@@ -27,64 +27,64 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "children": Array [
             Object {
               "children": Array [],
-              "slug": "/drivers/c",
+              "slug": "drivers/c",
               "title": "C Driver",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/cxx",
+              "slug": "drivers/cxx",
               "title": "C++ Driver",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/csharp",
+              "slug": "drivers/csharp",
               "title": "C# and .NET Driver",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/go",
+              "slug": "drivers/go",
               "title": "Go Driver",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/java",
+              "slug": "drivers/java",
               "title": "Java Driver",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/node",
+              "slug": "drivers/node",
               "title": "Node.js Driver",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/perl",
+              "slug": "drivers/perl",
               "title": "Perl Driver",
             },
             Object {
               "children": Array [
                 Object {
                   "children": Array [],
-                  "slug": "/drivers/php-libraries",
+                  "slug": "drivers/php-libraries",
                   "title": "PHP Libraries, Frameworks, and Tools",
                 },
               ],
-              "slug": "/drivers/php",
+              "slug": "drivers/php",
               "title": "PHP Driver",
             },
             Object {
               "children": Array [
                 Object {
                   "children": Array [],
-                  "slug": "/drivers/pymongo",
+                  "slug": "drivers/pymongo",
                   "title": "PyMongo",
                 },
                 Object {
                   "children": Array [],
-                  "slug": "/drivers/motor",
+                  "slug": "drivers/motor",
                   "title": "Motor (Async Driver)",
                 },
               ],
-              "slug": "/drivers/python",
+              "slug": "drivers/python",
               "title": "Python Drivers",
             },
             Object {
@@ -99,26 +99,26 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/scala",
+              "slug": "drivers/scala",
               "title": "Scala Driver",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/community-supported-drivers",
+              "slug": "drivers/community-supported-drivers",
               "title": "Community Supported Drivers Reference",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/specs",
+              "slug": "drivers/specs",
               "title": "MongoDB Drivers Specs",
             },
             Object {
               "children": Array [],
-              "slug": "/drivers/driver-compatibility-reference",
+              "slug": "drivers/driver-compatibility-reference",
               "title": "Driver Compatibility",
             },
           ],
-          "slug": "/drivers",
+          "slug": "drivers",
           "title": "MongoDB Drivers and ODM",
         }
       }
@@ -141,11 +141,11 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
             },
             Object {
               "children": Array [],
-              "slug": "/tools/http-interfaces",
+              "slug": "tools/http-interfaces",
               "title": "HTTP Interface",
             },
           ],
-          "slug": "/tools",
+          "slug": "tools",
           "title": "MongoDB Integration and Tools",
         }
       }
@@ -158,22 +158,22 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "children": Array [
             Object {
               "children": Array [],
-              "slug": "/platforms/amazon-ec2",
+              "slug": "platforms/amazon-ec2",
               "title": "Amazon EC2",
             },
             Object {
               "children": Array [],
-              "slug": "/tutorial/backup-and-restore-mongodb-on-amazon-ec2",
+              "slug": "tutorial/backup-and-restore-mongodb-on-amazon-ec2",
               "title": "EC2 Backup and Restore",
             },
             Object {
               "children": Array [],
-              "slug": "/platforms/windows-azure",
+              "slug": "platforms/windows-azure",
               "title": "Microsoft Azure",
             },
             Object {
               "children": Array [],
-              "slug": "/platforms/windows",
+              "slug": "platforms/windows",
               "title": "Windows Quick Links and Reference Center",
             },
           ],
@@ -183,7 +183,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
               "code": "Platforms",
             },
           },
-          "slug": "/platforms",
+          "slug": "platforms",
           "title": "Platforms",
         }
       }
@@ -196,37 +196,37 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "children": Array [
             Object {
               "children": Array [],
-              "slug": "/use-cases/storing-log-data",
+              "slug": "use-cases/storing-log-data",
               "title": "Storing Log Data",
             },
             Object {
               "children": Array [],
-              "slug": "/use-cases/hierarchical-aggregation",
+              "slug": "use-cases/hierarchical-aggregation",
               "title": "Hierarchical Aggregation",
             },
             Object {
               "children": Array [],
-              "slug": "/use-cases/product-catalog",
+              "slug": "use-cases/product-catalog",
               "title": "Product Catalog",
             },
             Object {
               "children": Array [],
-              "slug": "/use-cases/inventory-management",
+              "slug": "use-cases/inventory-management",
               "title": "Inventory Management",
             },
             Object {
               "children": Array [],
-              "slug": "/use-cases/category-hierarchy",
+              "slug": "use-cases/category-hierarchy",
               "title": "Category Hierarchy",
             },
             Object {
               "children": Array [],
-              "slug": "/use-cases/metadata-and-asset-management",
+              "slug": "use-cases/metadata-and-asset-management",
               "title": "Metadata and Asset Management",
             },
             Object {
               "children": Array [],
-              "slug": "/use-cases/storing-comments",
+              "slug": "use-cases/storing-comments",
               "title": "Storing Comments",
             },
           ],
@@ -236,7 +236,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
               "strong": "Use Cases",
             },
           },
-          "slug": "/use-cases",
+          "slug": "use-cases",
           "title": "Use Cases",
         }
       }
