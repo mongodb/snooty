@@ -1,4 +1,4 @@
-# MongoDB Docs Front-End
+# MongoDB Documentation Front-End
 
 Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 
