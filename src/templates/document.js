@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
+import { isPreviewMode } from '../utils/is-preview-mode';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import TOCSidebar from '../components/TOCSidebar';
@@ -21,9 +22,11 @@ const Document = props => {
     <React.Fragment>
       <Navbar />
       <div className="content">
-        <div id="left-column">
-          <TOCSidebar toctreeData={toctree} />
-        </div>
+        {!isPreviewMode() && (
+          <div id="left-column">
+            <TOCSidebar toctreeData={toctree} />
+          </div>
+        )}
         <div id="main-column" className="main-column">
           <span className="showNav" id="showNav">
             Navigation
