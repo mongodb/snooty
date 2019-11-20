@@ -113,13 +113,13 @@ For more information, see the [Jest CLI Options](https://jestjs.io/docs/en/cli) 
 We use [ESLint](https://eslint.org) and [Prettier](https://prettier.io) to help with linting and style.
 
 ### Lint
-Our Drone project is configured to test for lint errors. To run this test locally:
+Our CI (via [GitHub Actions](https://github.com/features/actions)) is configured to test for lint errors. To run this test locally:
 
 ```shell
 npm run lint
 ```
 
-These errors must be fixed for the Drone build to pass.
+These errors must be fixed for the CI build to pass.
 
 ### Style
 To format code using Prettier, run the following command:
