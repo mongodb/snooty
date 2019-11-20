@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import TOCNode from './TOCNode';
 import { TOCContext } from './toc-context';
+import { formatText } from '../utils/format-text';
 import { isBrowser } from '../utils/is-browser';
 
 /**
@@ -36,12 +37,13 @@ const TableOfContents = ({ toctreeData }) => {
   return (
     <TOCContext.Provider value={{ activeSection, toggleDrawer }}>
       <h3>
-        <LinkComponent {...linkProps}>{title}</LinkComponent>
+        <LinkComponent {...linkProps}>{formatText(title)}</LinkComponent>
       </h3>
       <ul className="current">
-        {children.map(c => (
-          <TOCNode node={c} key={c.title} />
-        ))}
+        {children.map(c => {
+          const key = c.slug ? c.slug : c.url;
+          return <TOCNode node={c} key={key} />;
+        })}
       </ul>
     </TOCContext.Provider>
   );

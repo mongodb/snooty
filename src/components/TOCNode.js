@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
-import { formatTocTitleStyle } from '../utils/format-toc-title-style';
+import { formatText } from '../utils/format-text';
 import { isActiveTocNode } from '../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../utils/is-selected-toc-node';
 import { TOCContext } from './toc-context';
@@ -28,10 +27,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
 
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
-    const formattedTitle =
-      typeof title === 'string'
-        ? formatTocTitleStyle(title, options.styles)
-        : title.map((e, index) => <ComponentFactory key={index} nodeData={e} />);
+    const formattedTitle = formatText(title);
     const Tag = isExternalLink ? 'a' : Link;
     const tagProps = {};
     if (isExternalLink) {
@@ -86,15 +82,12 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       <NodeLink />
       {isActive ? (
         <ul>
-          {children.map(c => (
-            <TOCNode
-              activeSection={activeSection}
-              node={c}
-              level={level + 1}
-              toggleDrawer={toggleDrawer}
-              key={c.title}
-            />
-          ))}
+          {children.map(c => {
+            const key = c.slug ? c.slug : c.url;
+            return (
+              <TOCNode activeSection={activeSection} node={c} level={level + 1} toggleDrawer={toggleDrawer} key={key} />
+            );
+          })}
         </ul>
       ) : null}
     </li>
