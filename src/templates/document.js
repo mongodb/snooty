@@ -7,16 +7,19 @@ import { isPreviewMode } from '../utils/is-preview-mode';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import TOCSidebar from '../components/TOCSidebar';
+import InternalPageNav from '../components/InternalPageNav';
 
 const Document = props => {
   const {
     addPillstrip,
     footnotes,
-    pageContext: { pageMetadata, parentPaths, slugTitleMapping, toctree, __refDocMapping },
+    pageContext: { pageMetadata, parentPaths, slugTitleMapping, toctree, toctreeOrder, __refDocMapping },
+    path,
     pillstrips,
     substitutions,
   } = props;
   const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
+  const slug = path.startsWith('/') ? path.slice(1) : path;
 
   return (
     <React.Fragment>
@@ -48,6 +51,14 @@ const Document = props => {
                       substitutions={substitutions}
                     />
                   ))}
+
+                  {!isPreviewMode() && (
+                    <InternalPageNav
+                      slug={slug || '/'}
+                      slugTitleMapping={slugTitleMapping}
+                      toctreeOrder={toctreeOrder}
+                    />
+                  )}
                   <Footer />
                 </div>
               </div>
