@@ -12,6 +12,8 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
       {prevSlug && (
         <React.Fragment>
           <span className="btn-arrow-left">← &nbsp;</span>
+          {/* TODO: Replace <a> with <Link> when back button behavior is fixed for the component.
+              GitHub issue: https://github.com/gatsbyjs/gatsby/issues/8357 */}
           <a className="btn-prev-text" href={withPrefix(prevSlug)} title="Previous Section">
             <span>{getPageTitle(prevSlug, slugTitleMapping)}</span>
           </a>

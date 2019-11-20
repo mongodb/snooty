@@ -13,13 +13,11 @@ const Document = props => {
   const {
     addPillstrip,
     footnotes,
-    pageContext: { pageMetadata, parentPaths, slugTitleMapping, toctree, toctreeOrder, __refDocMapping },
-    path,
+    pageContext: { pageMetadata, parentPaths, slug, slugTitleMapping, toctree, toctreeOrder, __refDocMapping },
     pillstrips,
     substitutions,
   } = props;
   const pageNodes = getNestedValue(['ast', 'children'], __refDocMapping) || [];
-  const slug = path.startsWith('/') ? path.slice(1) : path;
 
   return (
     <React.Fragment>
@@ -53,11 +51,7 @@ const Document = props => {
                   ))}
 
                   {!isPreviewMode() && (
-                    <InternalPageNav
-                      slug={slug || '/'}
-                      slugTitleMapping={slugTitleMapping}
-                      toctreeOrder={toctreeOrder}
-                    />
+                    <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   )}
                   <Footer />
                 </div>
@@ -81,10 +75,12 @@ Document.propTypes = {
     }).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
     parentPaths: PropTypes.arrayOf(PropTypes.string),
+    slug: PropTypes.string.isRequired,
     slugTitleMapping: PropTypes.shape({
       [PropTypes.string]: PropTypes.string,
     }).isRequired,
     toctree: PropTypes.object,
+    toctreeOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   pillstrips: PropTypes.objectOf(PropTypes.object),
   substitutions: PropTypes.objectOf(PropTypes.array),

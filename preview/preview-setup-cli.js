@@ -5,7 +5,7 @@ const { getIncludeFile } = require('./get-include-file');
 const { getNestedValue } = require('../src/utils/get-nested-value');
 const { getTemplate } = require('../src/utils/get-template');
 const { getPageMetadata } = require('../src/utils/get-page-metadata');
-const { getPageUrl } = require('../src/utils/get-page-url');
+const { getPageUrl } = require('../src/utils/get-page-slug');
 
 // Atlas DB config
 const DB = 'snooty';

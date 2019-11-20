@@ -7,7 +7,7 @@ const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getTemplate } = require('./src/utils/get-template');
 const { getPageMetadata } = require('./src/utils/get-page-metadata');
-const { getPageUrl } = require('./src/utils/get-page-url');
+const { getPageSlug } = require('./src/utils/get-page-slug');
 
 // Atlas DB config
 const DB = 'snooty';
@@ -173,12 +173,13 @@ exports.createPages = async ({ actions }) => {
       pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
 
       const template = getTemplate(page, process.env.GATSBY_SITE);
-      const pageUrl = getPageUrl(page);
+      const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
-          path: pageUrl,
+          path: slug,
           component: path.resolve(`./src/templates/${template}.js`),
           context: {
+            slug,
             toctree,
             toctreeOrder,
             snootyStitchId: SNOOTY_STITCH_ID,
