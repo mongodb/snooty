@@ -13,4 +13,4 @@ it('renders correctly', () => {
 it('fails gracefully', () => {
   const tree = shallow(<Breadcrumbs parentPaths={null} slugTitleMapping={slugTitleMapping} />);
   expect(tree).toMatchSnapshot();
-})
+});

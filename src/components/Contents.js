@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../utils/get-nested-value';
+import { formatText } from '../utils/format-text';
 
 const CONTENT_LIST_ITEM_SHAPE = {
   children: PropTypes.arrayOf(PropTypes.object),
   id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const ContentsListItem = ({ id, listChildren, title }) => (
   <li>
-    <a href={`#${id}`}>{title}</a>
+    <a href={`#${id}`}>{formatText(title)}</a>
     {listChildren.length > 0 && <ContentsList listItems={listChildren} />}
   </li>
 );
@@ -18,7 +19,7 @@ const ContentsListItem = ({ id, listChildren, title }) => (
 ContentsListItem.propTypes = {
   id: PropTypes.string.isRequired,
   listChildren: PropTypes.arrayOf(PropTypes.shape(CONTENT_LIST_ITEM_SHAPE)).isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const ContentsList = ({ className, listItems }) => {
@@ -47,8 +48,7 @@ const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
     const results = [];
     const searchNode = (node, sectionDepth) => {
       if (node[key] === value && sectionDepth - 1 <= maxDepth && sectionDepth > 1) {
-        const nodeTitle =
-          getNestedValue(['children', 0, 'value'], node) || getNestedValue(['children', 0, 'label', 'value'], node);
+        const nodeTitle = node.children;
         const newNode = {
           children: [],
           depth: sectionDepth,
