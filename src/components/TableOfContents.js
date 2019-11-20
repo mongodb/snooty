@@ -41,7 +41,7 @@ const TableOfContents = ({ toctreeData }) => {
       </h3>
       <ul className="current">
         {children.map(c => {
-          const key = c.slug ? c.slug : c.url;
+          const key = c.slug || c.url;
           return <TOCNode node={c} key={key} />;
         })}
       </ul>

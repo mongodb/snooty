@@ -83,7 +83,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       {isActive ? (
         <ul>
           {children.map(c => {
-            const key = c.slug ? c.slug : c.url;
+            const key = c.slug || c.url;
             return (
               <TOCNode activeSection={activeSection} node={c} level={level + 1} toggleDrawer={toggleDrawer} key={key} />
             );
