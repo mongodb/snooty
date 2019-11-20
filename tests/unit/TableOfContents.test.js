@@ -100,20 +100,6 @@ describe('Table of Contents testing', () => {
         const numPlatformNodes = mockTocData.children[2].children.length;
         expect(testComponent.find('.toctree-l2')).toHaveLength(numPlatformNodes);
       });
-
-      it('TOC supports a style option', () => {
-        const strongLink = testComponent
-          .find('.toctree-l1')
-          .last()
-          .find('.reference');
-        const numTOCSections = mockTocData.children.length;
-        const lastSection = mockTocData.children[numTOCSections - 1];
-        expect(lastSection.title).toBe('Use Cases');
-        expect(lastSection.options).toBeDefined();
-        expect(lastSection.options.styles).toBeDefined();
-        const expectedInnerStyle = '<strong>Use Cases</strong>';
-        expect(strongLink.html().includes(expectedInnerStyle)).toBeTruthy();
-      });
     });
   });
 });

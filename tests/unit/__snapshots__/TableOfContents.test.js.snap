@@ -20,7 +20,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
     className="current"
   >
     <TOCNode
-      key="MongoDB Drivers and ODM"
+      key="drivers"
       level={1}
       node={
         Object {
@@ -124,7 +124,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
       }
     />
     <TOCNode
-      key="MongoDB Integration and Tools"
+      key="tools"
       level={1}
       node={
         Object {
@@ -151,7 +151,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
       }
     />
     <TOCNode
-      key="Platforms"
+      key="platforms"
       level={1}
       node={
         Object {
@@ -189,7 +189,7 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
       }
     />
     <TOCNode
-      key="Use Cases"
+      key="use-cases"
       level={1}
       node={
         Object {
