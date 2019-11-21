@@ -1,0 +1,585 @@
+{
+  "contents": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "MongoDB Ecosystem Documentation Contents"
+    }
+  ],
+  "platforms": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Platforms"
+    }
+  ],
+  "tools": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "MongoDB Integration and Tools"
+    }
+  ],
+  "index": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "MongoDB Drivers and Ecosystem"
+    }
+  ],
+  "drivers": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "MongoDB Drivers and ODM"
+    }
+  ],
+  "connectors/kafka": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB Kafka Connector"
+    }
+  ],
+  "use-cases": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Use Cases"
+    }
+  ],
+  "connectors/kafka-connect-migration": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Migrate from Kafka Connect"
+    }
+  ],
+  "connectors/kafka-sink-cdc": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Kafka Sink Change Data Capture"
+    }
+  ],
+  "connectors/kafka-sink": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Kafka Sink Connector Guide"
+    }
+  ],
+  "platforms/windows-azure": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "Microsoft Azure"
+    }
+  ],
+  "platforms/windows": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Windows Quick Links and Reference Center"
+    }
+  ],
+  "connectors/kafka-installation": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Install MongoDB Kafka Connector"
+    }
+  ],
+  "platforms/red-hat-enterprise-linux": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Red Hat Enterprise Linux"
+    }
+  ],
+  "connectors/kafka-sink-data-formats": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Kafka Sink Connector Data Formats"
+    }
+  ],
+  "connectors/kafka-docker-example": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "MongoDB Kafka Connector Docker Example"
+    }
+  ],
+  "tutorial/authenticate-with-csharp-driver": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Authenticate to MongoDB with the C# Driver"
+    }
+  ],
+  "platforms/amazon-ec2": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Amazon EC2"
+    }
+  ],
+  "connectors/kafka-source": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Kafka Source Connector Guide"
+    }
+  ],
+  "tutorial/getting-started-with-hadoop": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "Getting Started with Hadoop"
+    }
+  ],
+  "tutorial/manage-red-hat-enterprise-linux-identity-management": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Operational Procedures using Red Hat Enterprise Linux Identity Management"
+    }
+  ],
+  "tutorial/configure-red-hat-enterprise-linux-identity-management": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "Configure Red Hat Enterprise Linux Identity Management with MongoDB"
+    }
+  ],
+  "connectors/kafka-sink-properties": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Kafka Sink Connector Configuration Properties"
+    }
+  ],
+  "tools/hadoop": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB Connector for Hadoop"
+    }
+  ],
+  "tools/http-interfaces": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "HTTP Interface"
+    }
+  ],
+  "tutorial/backup-and-restore-mongodb-on-amazon-ec2": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "EC2 Backup and Restore"
+    }
+  ],
+  "drivers/cxx": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB C++ Driver"
+    }
+  ],
+  "drivers/java": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "Java MongoDB Driver"
+    }
+  ],
+  "drivers/motor": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "Motor (Async Driver)"
+    }
+  ],
+  "tools/munin": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "Munin Configuration Examples"
+    }
+  ],
+  "drivers/python": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB Python Drivers"
+    }
+  ],
+  "drivers/c": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB C Driver"
+    }
+  ],
+  "drivers/scala": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB Scala Driver"
+    }
+  ],
+  "drivers/perl": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB Perl Driver"
+    }
+  ],
+  "drivers/community-supported-drivers": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Community Supported Drivers Reference"
+    }
+  ],
+  "drivers/pymongo": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "PyMongo"
+    }
+  ],
+  "drivers/php": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB PHP Driver"
+    }
+  ],
+  "drivers/go": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB Go Driver"
+    }
+  ],
+  "drivers/node": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "MongoDB Node.js Driver"
+    }
+  ],
+  "drivers/specs": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "MongoDB Drivers Specs"
+    }
+  ],
+  "drivers/php-libraries": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "PHP Libraries, Frameworks, and Tools"
+    }
+  ],
+  "drivers/csharp": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "MongoDB C#/.NET Driver"
+    }
+  ],
+  "connectors/kafka-sink-postprocessors": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 4
+        }
+      },
+      "value": "Kafka Sink Connector Post-Processors"
+    }
+  ],
+  "use-cases/hadoop": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 6
+        }
+      },
+      "value": "Hadoop and MongoDB Use Cases"
+    }
+  ],
+  "drivers/driver-compatibility-reference": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Driver Compatibility"
+    }
+  ],
+  "use-cases/category-hierarchy": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Category Hierarchy"
+    }
+  ],
+  "use-cases/metadata-and-asset-management": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Metadata and Asset Management"
+    }
+  ],
+  "use-cases/hierarchical-aggregation": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Hierarchical Aggregation"
+    }
+  ],
+  "use-cases/inventory-management": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Inventory Management"
+    }
+  ],
+  "use-cases/storing-comments": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Storing Comments"
+    }
+  ],
+  "use-cases/product-catalog": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Product Catalog"
+    }
+  ],
+  "use-cases/storing-log-data": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Storing Log Data"
+    }
+  ],
+  "use-cases/client-side-field-level-encryption-guide": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 2
+        }
+      },
+      "value": "Client Side Field Level Encryption Guide"
+    }
+  ]
+}
