@@ -14,8 +14,8 @@ export default class LiteralInclude extends Component {
     if (key && key.startsWith('/')) {
       key = key.substr(1);
     }
-    const startText = nodeData.options['start-after'];
-    const endText = nodeData.options['end-before'];
+    const startText = getNestedValue(['options', 'start-after'], nodeData);
+    const endText = getNestedValue(['options', 'end-before'], nodeData);
     this.resolvedIncludeData = refDocMapping[key];
 
     this.codeExample =

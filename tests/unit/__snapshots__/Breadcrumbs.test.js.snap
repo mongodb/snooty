@@ -2,32 +2,28 @@
 
 exports[`fails gracefully 1`] = `
 <div
-  className="bc"
+  class="bc"
 />
 `;
 
 exports[`renders correctly 1`] = `
 <div
-  className="bc"
+  class="bc"
 >
   <ul>
-    <li
-      key="drivers"
-    >
+    <li>
       <a
         href="/drivers"
       >
         MongoDB Drivers and ODM
       </a>
       <span
-        className="bcpoint"
+        class="bcpoint"
       >
          &gt; 
       </span>
     </li>
-    <li
-      key="drivers/php"
-    >
+    <li>
       <a
         href="/drivers/php"
       >

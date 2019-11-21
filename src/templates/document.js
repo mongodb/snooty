@@ -7,12 +7,13 @@ import { isPreviewMode } from '../utils/is-preview-mode';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import TOCSidebar from '../components/TOCSidebar';
+import InternalPageNav from '../components/InternalPageNav';
 
 const Document = props => {
   const {
     addPillstrip,
     footnotes,
-    pageContext: { pageMetadata, parentPaths, slugTitleMapping, toctree, __refDocMapping },
+    pageContext: { pageMetadata, parentPaths, slug, slugTitleMapping, toctree, toctreeOrder, __refDocMapping },
     pillstrips,
     substitutions,
   } = props;
@@ -48,6 +49,10 @@ const Document = props => {
                       substitutions={substitutions}
                     />
                   ))}
+
+                  {!isPreviewMode() && (
+                    <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+                  )}
                   <Footer />
                 </div>
               </div>
@@ -70,10 +75,12 @@ Document.propTypes = {
     }).isRequired,
     pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
     parentPaths: PropTypes.arrayOf(PropTypes.string),
+    slug: PropTypes.string.isRequired,
     slugTitleMapping: PropTypes.shape({
       [PropTypes.string]: PropTypes.string,
     }).isRequired,
     toctree: PropTypes.object,
+    toctreeOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   pillstrips: PropTypes.objectOf(PropTypes.object),
   substitutions: PropTypes.objectOf(PropTypes.array),
