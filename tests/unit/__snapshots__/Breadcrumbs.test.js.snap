@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fails gracefully 1`] = `
+<div
+  class="bc"
+/>
+`;
+
+exports[`renders correctly 1`] = `
+<div
+  class="bc"
+>
+  <ul>
+    <li>
+      <a
+        href="/drivers"
+      >
+        MongoDB Drivers and ODM
+      </a>
+      <span
+        class="bcpoint"
+      >
+         &gt; 
+      </span>
+    </li>
+    <li>
+      <a
+        href="/drivers/php"
+      >
+        MongoDB PHP Driver
+      </a>
+    </li>
+  </ul>
+</div>
+`;

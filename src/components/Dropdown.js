@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { usePublishedBranches } from '../hooks/use-published-branches';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { generatePathPrefix } from '../utils/generate-path-prefix';
 
-const Dropdown = ({ pathname }) => {
-  const versions = usePublishedBranches();
-  const { branch, project, user } = useSiteMetadata();
+const Dropdown = ({
+  pathname,
+  publishedBranches: {
+    version: { published },
+  },
+}) => {
+  const siteMetadata = useSiteMetadata();
+  const { parserBranch } = siteMetadata;
   const [hidden, setHidden] = useState(true);
   return (
     <div className={`btn-group btn-group-xs pull-right ${hidden ? '' : 'open'}`}>
@@ -15,12 +20,12 @@ const Dropdown = ({ pathname }) => {
         className="version-button dropdown-toggle"
         data-toggle="dropdown"
       >
-        {branch}
+        {parserBranch}
       </button>
       <ul className="dropdown-menu" role="menu">
-        {versions.map(version => (
+        {published.map(version => (
           <li key={version}>
-            <a className="version-selector" href={`${project}/${user}/${branch}${pathname}`}>
+            <a className="version-selector" href={`${generatePathPrefix(siteMetadata)}${pathname}`}>
               {version}
             </a>
           </li>
