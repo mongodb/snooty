@@ -134,6 +134,7 @@ exports.sourceNodes = async () => {
   const assets = [];
   Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
+    const filename = getNestedValue(['filename'], val) || '';
     if (pageNode) {
       assets.push(...val.static_assets);
     }
@@ -141,7 +142,7 @@ exports.sourceNodes = async () => {
       INCLUDE_FILES[key] = val;
     } else if (key.includes('images/')) {
       IMAGE_FILES[key] = val;
-    } else if (!key.includes('curl') && !key.includes('https://')) {
+    } else if (filename.endsWith('.txt')) {
       PAGES.push(key);
       PAGE_METADATA[key] = getPageMetadata(val);
     }
