@@ -3,68 +3,45 @@
   "version": "0.1.0",
   "repository": "github:mongodb/snooty",
   "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-react-jsx": "^7.7.0",
-    "@babel/preset-env": "^7.7.1",
-    "@babel/preset-react": "^7.7.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
-    "babel-plugin-react-html-attrs": "^2.1.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-gatsby": "^0.2.23",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-class-property": "^1.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.21.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-jest": "^23.1.1",
     "husky": "^3.0.9",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-puppeteer": "^4.3.0",
     "lint-staged": "^9.4.3",
     "prettier": "^1.19.1",
-    "prettier-eslint": "^9.0.0",
-    "prettier-eslint-cli": "^5.0.0",
     "puppeteer": "^1.20.0"
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
     "clean": "gatsby clean",
-    "develop": "gatsby develop --prefix-paths",
-    "lint": "./node_modules/.bin/eslint src/ tests/ preview/",
-    "lintfix": "prettier-eslint --write \"src/**/*.js\" \"tests/**/*.js\" \"preview/**/*.js\"",
+    "develop": "gatsby develop",
+    "format": "npm run prettier -- --write",
+    "format:check": "npm run prettier -- --check",
+    "lint": "npm run lint:check -- --fix",
+    "lint:check": "eslint --ignore-path .gitignore --ignore-path .prettierignore --ignore-pattern 'docs-tools/*' --ext .js,.jsx .",
+    "prettier": "prettier \"**/*.{js,jsx,json,md}\"",
     "preview": "webpack-dev-server --open --config ./webpack.config.js --env.PREVIEW_MODE='cli'",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",
     "test:regression": "jest regression",
     "test:unit": "jest unit"
   },
-  "eslintIgnore": [
-    "preview/page-ast.json",
-    "preview/bundle.js"
-  ],
-  "jest": {
-    "verbose": true,
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "testPathIgnorePatterns": [
-      "node_modules",
-      ".cache"
-    ]
-  },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css,md}": [
-      "prettier-eslint --write \"src/**/*.js\" \"tests/*.js\"",
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,md,mdx}": [
+      "prettier --write",
       "git add"
     ]
   },

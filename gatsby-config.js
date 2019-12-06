@@ -14,9 +14,7 @@ const getGitBranch = () => {
 };
 
 const getContentBranch = () => {
-  return process.env.GATSBY_SNOOTY_DEV ? 
-    getGitBranch() : 
-    process.env.GATSBY_PARSER_BRANCH;
+  return process.env.GATSBY_SNOOTY_DEV ? getGitBranch() : process.env.GATSBY_PARSER_BRANCH;
 };
 
 const getPathPrefix = () => {
