@@ -125,10 +125,10 @@ We use [ESLint](https://eslint.org) and [Prettier](https://prettier.io) to help 
 
 ### Lint
 
-Our CI (via [GitHub Actions](https://github.com/features/actions)) is configured to test for lint errors. To run this test locally:
+Our CI (via [GitHub Actions](https://github.com/features/actions)) is configured to test for lint errors. To run this test locally and attempt to automatically fix errors:
 
 ```shell
-npm run lint
+npm run lint:fix
 ```
 
 These errors must be fixed for the CI build to pass.
@@ -138,7 +138,7 @@ These errors must be fixed for the CI build to pass.
 To format code using Prettier, run the following command:
 
 ```shell
-npm run format
+npm run format:fix
 ```
 
 We have set up a precommit hook that will format staged files. Prettier also offers a variety of editor integrations to automatically format your code.
