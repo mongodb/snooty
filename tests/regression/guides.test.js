@@ -1,5 +1,5 @@
 import { DEPLOYMENTS, stringifyTab } from '../../src/constants';
-import { slugArray } from '../../src/regressionTestSetup';
+import { slugArray } from '../regressionTestSetup';
 import { cleanString, getClassText, getPageLinks, getPageText, localUrl } from './util';
 
 require('dotenv').config({ path: './.env.production' });

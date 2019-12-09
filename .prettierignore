@@ -1,0 +1,7 @@
+.cache
+docs-tools
+package.json
+package-lock.json
+public
+static
+tests/unit/data
