@@ -1,9 +1,13 @@
 module.exports = {
+  globals: {
+    __PATH_PREFIX__: ``,
+  },
+  verbose: true,
   projects: [
     {
       displayName: 'regression',
       preset: 'jest-puppeteer',
-      setupFilesAfterEnv: ['<rootDir>/src/regressionTestSetup.js'],
+      setupFilesAfterEnv: ['<rootDir>/tests/regressionTestSetup.js'],
       testMatch: ['<rootDir>/tests/regression/*.test.js'],
     },
     {
@@ -14,10 +18,12 @@ module.exports = {
       moduleNameMapper: {
         '^.+\\.(css)$': 'identity-obj-proxy',
       },
-      setupFilesAfterEnv: ['<rootDir>/src/testSetup.js'],
+      setupFilesAfterEnv: ['<rootDir>/tests/testSetup.js'],
       snapshotSerializers: ['enzyme-to-json/serializer'],
       testMatch: ['<rootDir>/tests/unit/*.test.js'],
+      transform: {
+        '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
+      },
     },
   ],
-  verbose: true,
 };
