@@ -20,6 +20,7 @@ The following files are additional files that serve as workarounds for `gatsby`:
 To use local preview, `.env.development` must be [set up](https://github.com/mongodb/snooty/tree/master#envdevelopment) with the same information that would be used when running `gatsby develop`.
 
 **On your command line:**
+
 ```
 npm run preview -- --env.PREVIEW_PAGE="<page-name-here>"
 ```
@@ -27,11 +28,13 @@ npm run preview -- --env.PREVIEW_PAGE="<page-name-here>"
 #### Examples
 
 To get to the landing page of a site:
+
 ```
 npm run preview -- --env.PREVIEW_PAGE="index"
 ```
 
 To get to https://docs.mongodb.com/guides/server/drivers/ :
+
 ```
 npm run preview -- --env.PREVIEW_PAGE="server/drivers"
 ```
