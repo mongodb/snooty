@@ -15,15 +15,14 @@ import mockDataManual from './data/Role-manual.test.json';
 import mockDataProgram from './data/Role-program.test.json';
 import mockDataRef from './data/Role-ref.test.json';
 import mockDataTerm from './data/Role-term.test.json';
-import mockPageMetadata from './data/guidesPageMetadata.json';
 
 it('renders correctly role "doc"', () => {
-  const tree = render(<RoleDoc nodeData={mockDataDoc} pageMetadata={mockPageMetadata} />);
+  const tree = render(<RoleDoc nodeData={mockDataDoc} />);
   expect(tree).toMatchSnapshot();
 });
 
 it('renders correctly role "doc" when no link title is included', () => {
-  const tree = render(<RoleDoc nodeData={mockDataDocUnlabeled} pageMetadata={mockPageMetadata} />);
+  const tree = render(<RoleDoc nodeData={mockDataDocUnlabeled} />);
   expect(tree).toMatchSnapshot();
 });
 

@@ -5,11 +5,11 @@ import { getNestedValue } from '../../utils/get-nested-value';
 
 const DEFAULT_COMPLETION_TIME = 15;
 
-const Card = ({ card, pageMetadata }) => {
-  const getCardTitle = cardSlug => getNestedValue([cardSlug, 'title'], pageMetadata);
+const Card = ({ card, guidesMetadata }) => {
+  const getCardTitle = cardSlug => getNestedValue([cardSlug, 'title'], guidesMetadata);
   const getCompletionTime = cardSlug =>
-    getNestedValue([cardSlug, 'completionTime'], pageMetadata) || DEFAULT_COMPLETION_TIME;
-  const getPills = cardSlug => getNestedValue([cardSlug, 'languages'], pageMetadata);
+    getNestedValue([cardSlug, 'completionTime'], guidesMetadata) || DEFAULT_COMPLETION_TIME;
+  const getPills = cardSlug => getNestedValue([cardSlug, 'languages'], guidesMetadata);
 
   const cardContent = () => {
     const cardSlug = getNestedValue(['argument', 0, 'value'], card);

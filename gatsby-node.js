@@ -3,10 +3,9 @@ const fs = require('fs').promises;
 const mkdirp = require('mkdirp');
 const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
-const { getIncludeFile } = require('./src/utils/get-include-file');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getTemplate } = require('./src/utils/get-template');
-const { getPageMetadata } = require('./src/utils/get-page-metadata');
+const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 
 // Atlas DB config
@@ -24,9 +23,8 @@ const LATEST_TEST_DATA_FILE = '__testDataLatest.json';
 
 // different types of references
 const PAGES = [];
-const INCLUDE_FILES = {};
 const IMAGE_FILES = {};
-const PAGE_METADATA = {};
+const GUIDES_METADATA = {};
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -73,29 +71,6 @@ const saveAssetFiles = async assets => {
   return Promise.all(promises);
 };
 
-// For each include node found in a page, set its 'children' property to be the array of include contents
-const populateIncludeNodes = nodes => {
-  const replaceInclude = node => {
-    if (node.name === 'include') {
-      const includeFilename = getNestedValue(['argument', 0, 'value'], node);
-      let includeNode;
-      if (includeFilename.includes('images')) {
-        includeNode = getIncludeFile(IMAGE_FILES, includeFilename);
-      } else {
-        includeNode = getIncludeFile(INCLUDE_FILES, includeFilename);
-      }
-
-      // Perform the same operation on include nodes inside this include file
-      const replacedInclude = includeNode.map(replaceInclude);
-      node.children = replacedInclude;
-    } else if (node.children) {
-      node.children.forEach(replaceInclude);
-    }
-    return node;
-  };
-  return nodes.map(replaceInclude);
-};
-
 exports.sourceNodes = async () => {
   // setup env variables
   const envResults = validateEnvVariables();
@@ -138,13 +113,13 @@ exports.sourceNodes = async () => {
     if (pageNode) {
       assets.push(...val.static_assets);
     }
-    if (key.includes('includes/')) {
-      INCLUDE_FILES[key] = val;
-    } else if (key.includes('images/')) {
+    if (key.includes('images/')) {
       IMAGE_FILES[key] = val;
     } else if (filename.endsWith('.txt')) {
       PAGES.push(key);
-      PAGE_METADATA[key] = getPageMetadata(val);
+      if (process.env.GATSBY_SITE === 'guides') {
+        GUIDES_METADATA[key] = getGuideMetadata(val);
+      }
     }
   });
 
@@ -171,7 +146,6 @@ exports.createPages = async ({ actions }) => {
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
-      pageNodes.ast.children = populateIncludeNodes(getNestedValue(['ast', 'children'], pageNodes));
 
       const template = getTemplate(page, process.env.GATSBY_SITE);
       const slug = getPageSlug(page);
@@ -185,7 +159,7 @@ exports.createPages = async ({ actions }) => {
             toctreeOrder,
             snootyStitchId: SNOOTY_STITCH_ID,
             __refDocMapping: pageNodes,
-            pageMetadata: PAGE_METADATA,
+            guidesMetadata: GUIDES_METADATA,
             parentPaths: getNestedValue([page], parentPaths),
             slugTitleMapping: slugToTitle,
           },
