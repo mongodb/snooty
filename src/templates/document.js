@@ -13,7 +13,12 @@ const Document = props => {
   const {
     addPillstrip,
     footnotes,
-    pageContext: { guidesMetadata, parentPaths, slug, slugTitleMapping, toctree, toctreeOrder, __refDocMapping },
+    pageContext: {
+      guidesMetadata,
+      slug,
+      __refDocMapping,
+      metadata: { parentPaths, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+    },
     pillstrips,
     substitutions,
   } = props;
@@ -36,7 +41,7 @@ const Document = props => {
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
-                  <Breadcrumbs parentPaths={parentPaths} slugTitleMapping={slugTitleMapping} />
+                  <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
                   {pageNodes.map((child, index) => (
                     <ComponentFactory
                       addPillstrip={addPillstrip}
