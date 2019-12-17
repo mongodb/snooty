@@ -7,7 +7,7 @@ import { isPreviewMode } from '../utils/is-preview-mode';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Navbar from '../components/Navbar';
-import TOCSidebar from '../components/TOCSidebar';
+import Sidebar from '../components/Sidebar';
 
 const Document = props => {
   const {
@@ -35,7 +35,7 @@ const Document = props => {
       <div className="content">
         {!isPreviewMode() && (
           <div id="left-column">
-            <TOCSidebar pathname={pathname} publishedBranches={publishedBranches} toctreeData={toctree} />
+            <Sidebar pathname={pathname} publishedBranches={publishedBranches} toctreeData={toctree} />
           </div>
         )}
         <div id="main-column" className="main-column">

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Dropdown from './Dropdown';
+import VersionDropdown from './VersionDropdown';
 import TableOfContents from './TableOfContents';
 import { formatText } from '../utils/format-text';
 
-const TOCSidebar = ({ pathname, publishedBranches, toctreeData }) => {
+const Sidebar = ({ pathname, publishedBranches, toctreeData }) => {
   const { title } = toctreeData;
   return (
     <aside className="sidebar" id="sidebar">
@@ -15,7 +15,7 @@ const TOCSidebar = ({ pathname, publishedBranches, toctreeData }) => {
               {formatText(title)}
             </Link>
           </h3>
-          <Dropdown pathname={pathname} publishedBranches={publishedBranches} />
+          <VersionDropdown pathname={pathname} publishedBranches={publishedBranches} />
           <TableOfContents toctreeData={toctreeData} />
         </div>
       </div>
@@ -23,4 +23,4 @@ const TOCSidebar = ({ pathname, publishedBranches, toctreeData }) => {
   );
 };
 
-export default TOCSidebar;
+export default Sidebar;

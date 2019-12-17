@@ -19,7 +19,6 @@ const getContentBranch = () => {
 
 const getPathPrefix = () => {
   const user = userInfo().username;
-  const branch = getContentBranch();
 
   // return runningEnv === 'production' ? `/${process.env.GATSBY_SITE}/${user}/${branch}` : '/';
   const prefix = `${process.env.GATSBY_SITE}/${user}/${process.env.GATSBY_PARSER_BRANCH}`;
