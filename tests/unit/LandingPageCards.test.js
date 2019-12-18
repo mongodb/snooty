@@ -2,15 +2,15 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import LandingPageCards from '../../src/components/LandingPage/LandingPageCards';
 
-import mockPageMetadata from './data/guidesPageMetadata.json';
-import mockPageMetadataMultiple from './data/guidesPageMetadataTwoCategories.json';
+import mockGuidesMetadata from './data/guidesPageMetadata.json';
+import mockGuidesMetadataMultiple from './data/guidesPageMetadataTwoCategories.json';
 import mockGuides from './data/LandingPageCards.test.json';
 
-const mountLandingPageCards = ({ guides, pageMetadata }) =>
-  mount(<LandingPageCards guides={guides} pageMetadata={pageMetadata} />);
+const mountLandingPageCards = ({ guides, guidesMetadata }) =>
+  mount(<LandingPageCards guides={guides} guidesMetadata={guidesMetadata} />);
 
-const shallowLandingPageCards = ({ guides, pageMetadata }) =>
-  shallow(<LandingPageCards guides={guides} pageMetadata={pageMetadata} />);
+const shallowLandingPageCards = ({ guides, guidesMetadata }) =>
+  shallow(<LandingPageCards guides={guides} guidesMetadata={guidesMetadata} />);
 
 describe('LandingPageCards component', () => {
   describe('when mounted with one type of guide', () => {
@@ -18,8 +18,8 @@ describe('LandingPageCards component', () => {
     let shallowWrapper;
 
     beforeAll(() => {
-      wrapper = mountLandingPageCards({ guides: mockGuides, pageMetadata: mockPageMetadata });
-      shallowWrapper = shallowLandingPageCards({ guides: mockGuides, pageMetadata: mockPageMetadata });
+      wrapper = mountLandingPageCards({ guides: mockGuides, guidesMetadata: mockGuidesMetadata });
+      shallowWrapper = shallowLandingPageCards({ guides: mockGuides, guidesMetadata: mockGuidesMetadata });
     });
 
     it('renders correctly', () => {
@@ -59,8 +59,8 @@ describe('LandingPageCards component', () => {
     let shallowWrapper;
 
     beforeAll(() => {
-      wrapper = mountLandingPageCards({ guides: mockGuides, pageMetadata: mockPageMetadataMultiple });
-      shallowWrapper = shallowLandingPageCards({ guides: mockGuides, pageMetadata: mockPageMetadataMultiple });
+      wrapper = mountLandingPageCards({ guides: mockGuides, guidesMetadata: mockGuidesMetadataMultiple });
+      shallowWrapper = shallowLandingPageCards({ guides: mockGuides, guidesMetadata: mockGuidesMetadataMultiple });
     });
 
     it('renders correctly', () => {

@@ -4,11 +4,11 @@ import Card from '../../src/components/LandingPage/Card';
 
 import cardData from './data/Card.test.json';
 import multiCardData from './data/MultiCard.test.json';
-import mockPageMetadata from './data/guidesPageMetadata.json';
+import mockGuidesMetadata from './data/guidesPageMetadata.json';
 
-const mountCard = ({ card }) => mount(<Card card={card} pageMetadata={mockPageMetadata} />);
+const mountCard = ({ card }) => mount(<Card card={card} guidesMetadata={mockGuidesMetadata} />);
 
-const shallowCard = ({ card }) => shallow(<Card card={card} pageMetadata={mockPageMetadata} />);
+const shallowCard = ({ card }) => shallow(<Card card={card} guidesMetadata={mockGuidesMetadata} />);
 
 describe('Card component', () => {
   describe('when a standard card is mounted', () => {

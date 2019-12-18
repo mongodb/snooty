@@ -21,9 +21,7 @@ exports[`renders correctly role "doc" when no link title is included 1`] = `
 <a
   class="reference internal"
   href="/server/drivers"
->
-  Connect to MongoDB
-</a>
+/>
 `;
 
 exports[`renders correctly role "manual" 1`] = `

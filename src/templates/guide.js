@@ -120,11 +120,7 @@ export default class Guide extends Component {
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
-          <ComponentFactory
-            nodeData={section}
-            refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
-            pageMetadata={pageContext.pageMetadata}
-          />
+          <ComponentFactory nodeData={section} refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}} />
         );
       });
     }
@@ -139,7 +135,6 @@ export default class Guide extends Component {
           headingRef={this.sectionRefs[index]}
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
-          pageMetadata={pageContext.pageMetadata}
           pillstrips={pillstrips}
         />
       );
@@ -169,7 +164,6 @@ export default class Guide extends Component {
                 cloud={cloud}
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
-                pageMetadata={pageContext.pageMetadata}
                 refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
                 title={findKeyValuePair(this.sections, 'type', 'heading')}
@@ -194,7 +188,6 @@ Guide.propTypes = {
       }).isRequired,
     }).isRequired,
     snootyStitchId: PropTypes.string.isRequired,
-    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,
   pillstrips: PropTypes.objectOf(PropTypes.object),

@@ -16,7 +16,7 @@ export const getPageData = async () => {
     context: {
       snootyStitchId: '',
       __refDocMapping: pageNodes,
-      pageMetadata: {},
+      guidesMetadata: {},
     },
   };
 };

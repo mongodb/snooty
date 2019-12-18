@@ -4,7 +4,7 @@ const { validateEnvVariables } = require('../src/utils/setup/validate-env-variab
 const { getIncludeFile } = require('./get-include-file');
 const { getNestedValue } = require('../src/utils/get-nested-value');
 const { getTemplate } = require('../src/utils/get-template');
-const { getPageMetadata } = require('../src/utils/get-page-metadata');
+const { getGuideMetadata } = require('../src/utils/get-guide-metadata');
 const { getPageSlug } = require('../src/utils/get-page-slug');
 
 // Atlas DB config
@@ -16,7 +16,7 @@ const SNOOTY_STITCH_ID = 'snooty-koueq';
 // different types of references
 const PAGES = [];
 const INCLUDE_FILES = {};
-const PAGE_METADATA = {};
+const GUIDES_METADATA = {};
 
 // in-memory object with key/value = filename/document
 const RESOLVED_REF_DOC_MAPPING = {};
@@ -83,7 +83,7 @@ const sourceNodes = async () => {
       INCLUDE_FILES[key] = val;
     } else if (!key.includes('curl') && !key.includes('https://')) {
       PAGES.push(key);
-      PAGE_METADATA[key] = getPageMetadata(val);
+      GUIDES_METADATA[key] = getGuideMetadata(val);
     }
   });
 };
@@ -106,7 +106,7 @@ export const getPageData = async () => {
       context: {
         snootyStitchId: SNOOTY_STITCH_ID,
         __refDocMapping: pageNodes,
-        pageMetadata: PAGE_METADATA,
+        guidesMetadata: GUIDES_METADATA,
       },
     };
   }
