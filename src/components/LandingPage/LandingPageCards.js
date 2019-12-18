@@ -18,7 +18,7 @@ const CATEGORIES = [
   },
 ];
 
-const Category = ({ cards, category, pageMetadata }) => {
+const Category = ({ cards, category, guidesMetadata }) => {
   const columnSeparatedCards = [[], [], []];
   const lastRow = [];
 
@@ -58,7 +58,7 @@ const Category = ({ cards, category, pageMetadata }) => {
             return (
               <div className="guide-column" key={indexColumn}>
                 {cardColumn.map((card, index) => {
-                  return <Card card={card} key={index} pageMetadata={pageMetadata} />;
+                  return <Card card={card} key={index} guidesMetadata={guidesMetadata} />;
                 })}
               </div>
             );
@@ -69,7 +69,7 @@ const Category = ({ cards, category, pageMetadata }) => {
   );
 };
 
-const LandingPageCards = ({ guides, pageMetadata }) => {
+const LandingPageCards = ({ guides, guidesMetadata }) => {
   return CATEGORIES.map(category => (
     <Category
       cards={guides.filter(card => {
@@ -77,10 +77,10 @@ const LandingPageCards = ({ guides, pageMetadata }) => {
           card.name === 'card'
             ? getNestedValue(['argument', 0, 'value'], card)
             : getNestedValue(['children', 0, 'children', 0, 'children', 0, 'children', 0, 'value'], card);
-        return category.name === getNestedValue([cardSlug, 'category'], pageMetadata);
+        return category.name === getNestedValue([cardSlug, 'category'], guidesMetadata);
       })}
       category={category}
-      pageMetadata={pageMetadata}
+      guidesMetadata={guidesMetadata}
       key={category.iconSlug}
     />
   ));

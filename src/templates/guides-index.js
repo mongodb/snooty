@@ -5,7 +5,7 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
 
-const Index = ({ pageContext: { pageMetadata, __refDocMapping } }) => {
+const Index = ({ pageContext: { guidesMetadata, __refDocMapping } }) => {
   const guides = findKeyValuePair(getNestedValue(['ast', 'children'], __refDocMapping), 'name', 'guide-index') || [];
 
   return (
@@ -20,7 +20,7 @@ const Index = ({ pageContext: { pageMetadata, __refDocMapping } }) => {
                 ¶
               </a>
             </h1>
-            <LandingPageCards guides={guides.children} pageMetadata={pageMetadata} />
+            <LandingPageCards guides={guides.children} guidesMetadata={guidesMetadata} />
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@ const Index = ({ pageContext: { pageMetadata, __refDocMapping } }) => {
 
 Index.propTypes = {
   pageContext: PropTypes.shape({
-    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
+    guidesMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,
