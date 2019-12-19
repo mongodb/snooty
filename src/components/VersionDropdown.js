@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@leafygreen-ui/button';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import dropdownStyles from '../styles/version-dropdown.module.css';
@@ -57,9 +56,16 @@ const VersionDropdown = ({
 
   return (
     <div ref={wrapperRef} className="btn-group version-sidebar">
-      <Button onClick={() => setHidden(!hidden)} className={dropdownStyles.button} title="Select branch">
+      {/* TODO: update button to use LeafyGreen component when SSR support is
+          implemented: https://jira.mongodb.org/browse/DOCSP-8176 */}
+      <button
+        type="button"
+        className="version-button dropdown-toggle"
+        onClick={() => setHidden(!hidden)}
+        title="Select version"
+      >
         {prefixVersion(currentBranch)}
-      </Button>
+      </button>
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
           {published.map(version => (

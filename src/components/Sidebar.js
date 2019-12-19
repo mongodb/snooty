@@ -15,7 +15,7 @@ const Sidebar = ({ pathname, publishedBranches, toctreeData }) => {
               {formatText(title)}
             </Link>
           </h3>
-          <VersionDropdown pathname={pathname} publishedBranches={publishedBranches} />
+          {publishedBranches && <VersionDropdown pathname={pathname} publishedBranches={publishedBranches} />}
           <TableOfContents toctreeData={toctreeData} />
         </div>
       </div>
