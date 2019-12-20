@@ -49,6 +49,7 @@ const VersionDropdown = ({
     });
   };
 
+  // Zip two sections of data to map git branches to their "pretty" names
   const gitNamedMapping = zip(gitBranches, published);
   const currentBranch = gitNamedMapping[parserBranch];
 

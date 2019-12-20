@@ -1,5 +1,5 @@
-const userInfo = require('os').userInfo;
 const { execSync } = require('child_process');
+const userInfo = require('os').userInfo;
 const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 
 const runningEnv = process.env.NODE_ENV || 'production';

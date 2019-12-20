@@ -7,20 +7,11 @@ import { isBrowser } from '../utils/is-browser';
 /**
  * Overall Table of Contents component, which manages open sections as children
  */
-const TableOfContents = ({ toctreeData }) => {
+const TableOfContents = ({ toctreeData: { children } }) => {
   // Want to check this on each re-render
   let currentPage;
   if (isBrowser()) {
     currentPage = window.location.pathname;
-  }
-  const { slug, url, children } = toctreeData;
-  const target = url || slug;
-  const isExternalLink = !!url;
-  const linkProps = {};
-  if (isExternalLink) {
-    linkProps.href = target;
-  } else {
-    linkProps.to = target;
   }
   const [activeSection, setActiveSection] = useState(currentPage);
   const toggleDrawer = newSlug => {
@@ -45,14 +36,7 @@ const TableOfContents = ({ toctreeData }) => {
 
 TableOfContents.propTypes = {
   toctreeData: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string,
-    url: PropTypes.string,
     children: PropTypes.array.isRequired,
-    options: PropTypes.shape({
-      drawer: PropTypes.bool,
-      styles: PropTypes.objectOf(PropTypes.string),
-    }),
   }).isRequired,
 };
 

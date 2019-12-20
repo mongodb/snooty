@@ -4,9 +4,9 @@ import ComponentFactory from '../components/ComponentFactory';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import { isPreviewMode } from '../utils/is-preview-mode';
+import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
-import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 
 const Document = props => {
