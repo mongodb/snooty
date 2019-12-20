@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import TOCNode from './TOCNode';
 import { TOCContext } from './toc-context';
@@ -14,10 +13,9 @@ const TableOfContents = ({ toctreeData }) => {
   if (isBrowser()) {
     currentPage = window.location.pathname;
   }
-  const { title, slug, url, children } = toctreeData;
+  const { slug, url, children } = toctreeData;
   const target = url || slug;
   const isExternalLink = !!url;
-  const LinkComponent = isExternalLink ? 'a' : Link;
   const linkProps = {};
   if (isExternalLink) {
     linkProps.href = target;

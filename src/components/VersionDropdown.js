@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
+import { normalizePath } from '../utils/normalize-path';
 import dropdownStyles from '../styles/version-dropdown.module.css';
 
 const zip = (a, b) => {
@@ -12,13 +13,13 @@ const zip = (a, b) => {
 };
 
 const VersionDropdown = ({
-  pathname,
   publishedBranches: {
+    version: { published },
     git: {
       branches: { published: gitBranches },
     },
-    version: { published },
   },
+  slug,
 }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch } = siteMetadata;
@@ -65,19 +66,20 @@ const VersionDropdown = ({
         title="Select version"
       >
         {prefixVersion(currentBranch)}
+        <span class="caret"></span>
       </button>
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
-          {published.map(version => (
-            <li className={currentBranch === version ? 'active' : ''} key={version}>
-              <a
-                className="version-selector"
-                href={`${generatePathPrefix({ ...siteMetadata, parserBranch: version })}${pathname}`}
-              >
-                {prefixVersion(version)}
-              </a>
-            </li>
-          ))}
+          {published.map(version => {
+            const url = normalizePath(`${generatePathPrefix({ ...siteMetadata, parserBranch: version })}/${slug}`);
+            return (
+              <li className={currentBranch === version ? 'active' : ''} key={version}>
+                <a className="version-selector" href={url}>
+                  {prefixVersion(version)}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
@@ -85,7 +87,17 @@ const VersionDropdown = ({
 };
 
 VersionDropdown.propTypes = {
-  pathname: PropTypes.string.isRequired,
+  publishedBranches: PropTypes.shape({
+    version: PropTypes.shape({
+      published: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }).isRequired,
+    git: PropTypes.shape({
+      branches: PropTypes.shape({
+        published: PropTypes.arrayOf(PropTypes.string).isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default VersionDropdown;

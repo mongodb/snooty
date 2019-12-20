@@ -4,7 +4,7 @@ import VersionDropdown from './VersionDropdown';
 import TableOfContents from './TableOfContents';
 import { formatText } from '../utils/format-text';
 
-const Sidebar = ({ pathname, publishedBranches, toctreeData }) => {
+const Sidebar = ({ slug, publishedBranches, toctreeData }) => {
   const { title } = toctreeData;
   return (
     <aside className="sidebar" id="sidebar">
@@ -15,7 +15,7 @@ const Sidebar = ({ pathname, publishedBranches, toctreeData }) => {
               {formatText(title)}
             </Link>
           </h3>
-          {publishedBranches && <VersionDropdown pathname={pathname} publishedBranches={publishedBranches} />}
+          {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
           <TableOfContents toctreeData={toctreeData} />
         </div>
       </div>

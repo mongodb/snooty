@@ -13,7 +13,6 @@ const Document = props => {
   const {
     addPillstrip,
     footnotes,
-    location: { pathname },
     pageContext: {
       guidesMetadata,
       slug,
@@ -31,7 +30,7 @@ const Document = props => {
       <div className="content">
         {!isPreviewMode() && (
           <div id="left-column">
-            <Sidebar pathname={pathname} publishedBranches={publishedBranches} toctreeData={toctree} />
+            <Sidebar slug={slug} publishedBranches={publishedBranches} toctreeData={toctree} />
           </div>
         )}
         <div id="main-column" className="main-column">
@@ -73,9 +72,6 @@ const Document = props => {
 Document.propTypes = {
   addPillstrip: PropTypes.func,
   footnotes: PropTypes.objectOf(PropTypes.object),
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
