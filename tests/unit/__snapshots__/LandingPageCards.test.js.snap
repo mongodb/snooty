@@ -515,8 +515,7 @@ Array [
         "name": "Getting Started",
       }
     }
-    key="getting-started"
-    pageMetadata={
+    guidesMetadata={
       Object {
         "cloud/atlas": Object {
           "category": "Getting Started",
@@ -2563,6 +2562,7 @@ Array [
         },
       }
     }
+    key="getting-started"
   />,
   <Category
     cards={Array []}
@@ -2572,8 +2572,7 @@ Array [
         "name": "Use Case",
       }
     }
-    key="use-case"
-    pageMetadata={
+    guidesMetadata={
       Object {
         "cloud/atlas": Object {
           "category": "Getting Started",
@@ -4620,6 +4619,7 @@ Array [
         },
       }
     }
+    key="use-case"
   />,
   <Category
     cards={Array []}
@@ -4629,8 +4629,7 @@ Array [
         "name": "Deep Dive",
       }
     }
-    key="deep-dive"
-    pageMetadata={
+    guidesMetadata={
       Object {
         "cloud/atlas": Object {
           "category": "Getting Started",
@@ -6677,6 +6676,7 @@ Array [
         },
       }
     }
+    key="deep-dive"
   />,
 ]
 `;
@@ -7105,8 +7105,7 @@ Array [
         "name": "Getting Started",
       }
     }
-    key="getting-started"
-    pageMetadata={
+    guidesMetadata={
       Object {
         "cloud/atlas": Object {
           "category": "Use Case",
@@ -9153,6 +9152,7 @@ Array [
         },
       }
     }
+    key="getting-started"
   />,
   <Category
     cards={
@@ -9256,8 +9256,7 @@ Array [
         "name": "Use Case",
       }
     }
-    key="use-case"
-    pageMetadata={
+    guidesMetadata={
       Object {
         "cloud/atlas": Object {
           "category": "Use Case",
@@ -11304,6 +11303,7 @@ Array [
         },
       }
     }
+    key="use-case"
   />,
   <Category
     cards={Array []}
@@ -11313,8 +11313,7 @@ Array [
         "name": "Deep Dive",
       }
     }
-    key="deep-dive"
-    pageMetadata={
+    guidesMetadata={
       Object {
         "cloud/atlas": Object {
           "category": "Use Case",
@@ -13361,6 +13360,7 @@ Array [
         },
       }
     }
+    key="deep-dive"
   />,
 ]
 `;

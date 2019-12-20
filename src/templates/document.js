@@ -15,14 +15,10 @@ const Document = props => {
     footnotes,
     location: { pathname },
     pageContext: {
-      pageMetadata,
-      parentPaths,
-      publishedBranches,
+      guidesMetadata,
       slug,
-      slugTitleMapping,
-      toctree,
-      toctreeOrder,
       __refDocMapping,
+      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
     },
     pillstrips,
     substitutions,
@@ -46,7 +42,7 @@ const Document = props => {
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
-                  <Breadcrumbs parentPaths={parentPaths} slugTitleMapping={slugTitleMapping} />
+                  <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
                   {pageNodes.map((child, index) => (
                     <ComponentFactory
                       addPillstrip={addPillstrip}
@@ -54,7 +50,7 @@ const Document = props => {
                       key={index}
                       nodeData={child}
                       refDocMapping={__refDocMapping}
-                      pageMetadata={pageMetadata}
+                      guidesMetadata={guidesMetadata}
                       pillstrips={pillstrips}
                       substitutions={substitutions}
                     />
@@ -86,7 +82,7 @@ Document.propTypes = {
         children: PropTypes.array,
       }).isRequired,
     }).isRequired,
-    pageMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
+    guidesMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
     parentPaths: PropTypes.arrayOf(PropTypes.string),
     slug: PropTypes.string.isRequired,
     slugTitleMapping: PropTypes.shape({
