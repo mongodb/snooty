@@ -68,12 +68,13 @@ describe('Tabs testing', () => {
     });
   });
 
-  describe('Drivers unit tests', () => {
+  describe('Guides unit tests', () => {
     let wrapper;
     const mockSetActiveTab = jest.fn();
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {
+      process.env = Object.assign(process.env, { GATSBY_SITE: 'guides' });
       wrapper = mountTabs({
         activeTabs: {},
         mockData: mockDataLanguages,
@@ -84,6 +85,26 @@ describe('Tabs testing', () => {
 
     it('tabset should not be created for drivers/language pills', () => {
       expect(wrapper.find('.tab-strip__element').exists()).toEqual(false);
+    });
+  });
+
+  describe('Ecosystem unit tests', () => {
+    let wrapper;
+    const mockSetActiveTab = jest.fn();
+    const mockAddTabset = jest.fn();
+
+    beforeAll(() => {
+      process.env = Object.assign(process.env, { GATSBY_SITE: 'ecosystem' });
+      wrapper = mountTabs({
+        activeTabs: {},
+        mockData: mockDataLanguages,
+        mockAddTabset,
+        mockSetActiveTab,
+      });
+    });
+
+    it('tabset should be created for drivers/language pills', () => {
+      expect(wrapper.find('.tab-strip__element').exists()).toEqual(true);
     });
   });
 
