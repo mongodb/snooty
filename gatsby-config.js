@@ -1,5 +1,6 @@
 const { execSync } = require('child_process');
 const userInfo = require('os').userInfo;
+const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 
 const runningEnv = process.env.NODE_ENV || 'production';
 
@@ -13,24 +14,18 @@ const getGitBranch = () => {
     .replace(/[\n\r\s]+$/, '');
 };
 
-const getContentBranch = () => {
-  return process.env.GATSBY_SNOOTY_DEV ? getGitBranch() : process.env.GATSBY_PARSER_BRANCH;
-};
-
-const getPathPrefix = () => {
-  const user = userInfo().username;
-  const branch = getContentBranch();
-
-  return runningEnv === 'production' ? `/${process.env.GATSBY_SITE}/${user}/${branch}` : '/';
+const metadata = {
+  parserBranch: process.env.GATSBY_PARSER_BRANCH,
+  project: process.env.GATSBY_SITE,
+  snootyBranch: getGitBranch(),
+  user: userInfo().username,
 };
 
 module.exports = {
-  pathPrefix: getPathPrefix(),
+  pathPrefix: generatePathPrefix(metadata),
   plugins: ['gatsby-plugin-react-helmet'],
   siteMetadata: {
-    branch: getContentBranch(),
-    project: process.env.GATSBY_SITE,
+    ...metadata,
     title: 'MongoDB Guides',
-    user: userInfo().username,
   },
 };

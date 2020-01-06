@@ -82,8 +82,10 @@ export default class Tabs extends Component {
     const { tabsetName } = this.state;
     const { nodeData, pillstrips } = this.props;
     const { activeTabs, setActiveTab } = this.context;
+    // Certain tabsets are rendered at the top of the page, rather than inline, in Guides
     const isHeaderTabset =
-      tabsetName === 'drivers' || tabsetName === 'cloud' || Object.keys(pillstrips).includes(tabsetName);
+      process.env.GATSBY_SITE === 'guides' &&
+      (tabsetName === 'drivers' || tabsetName === 'cloud' || Object.keys(pillstrips).includes(tabsetName));
     const isHidden = nodeData.options && nodeData.options.hidden;
     const tabs =
       tabsetName === 'platforms' || PLATFORMS.some(p => tabsetName.includes(p))

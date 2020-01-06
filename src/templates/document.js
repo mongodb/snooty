@@ -6,8 +6,8 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { isPreviewMode } from '../utils/is-preview-mode';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
-import TOCSidebar from '../components/TOCSidebar';
 import InternalPageNav from '../components/InternalPageNav';
+import Sidebar from '../components/Sidebar';
 
 const Document = props => {
   const {
@@ -17,7 +17,7 @@ const Document = props => {
       guidesMetadata,
       slug,
       __refDocMapping,
-      metadata: { parentPaths, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
     },
     pillstrips,
     substitutions,
@@ -30,7 +30,7 @@ const Document = props => {
       <div className="content">
         {!isPreviewMode() && (
           <div id="left-column">
-            <TOCSidebar toctreeData={toctree} />
+            <Sidebar slug={slug} publishedBranches={publishedBranches} toctreeData={toctree} />
           </div>
         )}
         <div id="main-column" className="main-column">

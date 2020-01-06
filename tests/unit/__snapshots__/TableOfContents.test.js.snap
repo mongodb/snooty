@@ -9,13 +9,6 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
     }
   }
 >
-  <h3>
-    <Link
-      to="/"
-    >
-      MongoDB Ecosystem
-    </Link>
-  </h3>
   <ul
     className="current"
   >
