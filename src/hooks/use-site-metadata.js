@@ -6,8 +6,9 @@ export const useSiteMetadata = () => {
       query SiteMetaData {
         site {
           siteMetadata {
-            branch
+            parserBranch
             project
+            snootyBranch
             title
             user
           }
