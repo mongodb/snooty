@@ -37,8 +37,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
     }
     if (level === BASE_NODE_LEVEL) {
       const isDrawer = !!(options && options.drawer);
-      const hasChildren = children.length > 0;
-      if (isDrawer && hasChildren) {
+      if (isDrawer && children.length > 0) {
         const _toggleDrawerOnEnter = e => {
           if (e.key === 'Enter') {
             toggleDrawer(slug);

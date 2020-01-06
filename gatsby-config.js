@@ -21,12 +21,8 @@ const metadata = {
   user: userInfo().username,
 };
 
-const getPathPrefix = () => {
-  return generatePathPrefix(metadata);
-};
-
 module.exports = {
-  pathPrefix: getPathPrefix(),
+  pathPrefix: generatePathPrefix(metadata),
   plugins: ['gatsby-plugin-react-helmet'],
   siteMetadata: {
     ...metadata,
