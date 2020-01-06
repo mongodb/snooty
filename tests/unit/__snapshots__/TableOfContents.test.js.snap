@@ -10,11 +10,11 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
   }
 >
   <h3>
-    <mockConstructor
+    <Link
       to="/"
     >
       MongoDB Ecosystem
-    </mockConstructor>
+    </Link>
   </h3>
   <ul
     className="current"

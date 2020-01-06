@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, render } from 'enzyme';
 import Card from '../../src/components/LandingPage/Card';
 
 import cardData from './data/Card.test.json';
@@ -8,20 +8,19 @@ import mockGuidesMetadata from './data/guidesPageMetadata.json';
 
 const mountCard = ({ card }) => mount(<Card card={card} guidesMetadata={mockGuidesMetadata} />);
 
-const shallowCard = ({ card }) => shallow(<Card card={card} guidesMetadata={mockGuidesMetadata} />);
+const renderCard = ({ card }) => render(<Card card={card} guidesMetadata={mockGuidesMetadata} />);
 
 describe('Card component', () => {
+  let wrapper;
+  let render;
   describe('when a standard card is mounted', () => {
-    let wrapper;
-    let shallowWrapper;
-
     beforeAll(() => {
       wrapper = mountCard({ card: cardData });
-      shallowWrapper = shallowCard({ card: cardData });
+      render = renderCard({ card: cardData });
     });
 
     it('renders correctly', () => {
-      expect(shallowWrapper).toMatchSnapshot();
+      expect(render).toMatchSnapshot();
     });
 
     it('displays a time estimate', () => {
@@ -30,16 +29,13 @@ describe('Card component', () => {
   });
 
   describe('when a multi card is mounted', () => {
-    let wrapper;
-    let shallowWrapper;
-
     beforeAll(() => {
       wrapper = mountCard({ card: multiCardData });
-      shallowWrapper = shallowCard({ card: multiCardData });
+      render = renderCard({ card: multiCardData });
     });
 
     it('renders correctly', () => {
-      expect(shallowWrapper).toMatchSnapshot();
+      expect(render).toMatchSnapshot();
     });
 
     it('does not display a time estimate', () => {

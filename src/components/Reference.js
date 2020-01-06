@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from './Link';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const Reference = ({ nodeData }) => {
-  return (
-    <a className="reference external" href={nodeData.refuri}>
-      {getNestedValue(['children', 0, 'value'], nodeData)}
-    </a>
-  );
-};
+const Reference = ({ nodeData }) => (
+  <Link className="reference external" to={nodeData.refuri}>
+    {getNestedValue(['children', 0, 'value'], nodeData)}
+  </Link>
+);
 
 Reference.propTypes = {
   nodeData: PropTypes.shape({

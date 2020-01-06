@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import Link from './Link';
 import TOCNode from './TOCNode';
 import { TOCContext } from './toc-context';
 import { formatText } from '../utils/format-text';
@@ -17,14 +17,6 @@ const TableOfContents = ({ toctreeData }) => {
   }
   const { title, slug, url, children } = toctreeData;
   const target = url || slug;
-  const isExternalLink = !!url;
-  const LinkComponent = isExternalLink ? 'a' : Link;
-  const linkProps = {};
-  if (isExternalLink) {
-    linkProps.href = target;
-  } else {
-    linkProps.to = target;
-  }
   const [activeSection, setActiveSection] = useState(currentPage);
   const toggleDrawer = newSlug => {
     if (activeSection === newSlug) {
@@ -37,7 +29,7 @@ const TableOfContents = ({ toctreeData }) => {
   return (
     <TOCContext.Provider value={{ activeSection, toggleDrawer }}>
       <h3>
-        <LinkComponent {...linkProps}>{formatText(title)}</LinkComponent>
+        <Link to={target}>{formatText(title)}</Link>
       </h3>
       <ul className="current">
         {children.map(c => {

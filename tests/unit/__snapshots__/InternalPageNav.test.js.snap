@@ -11,7 +11,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   </span>
   <a
     class="btn-prev-text"
-    href="drivers/csharp"
+    href="/drivers/csharp"
     title="Previous Section"
   >
     <span>
@@ -20,7 +20,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   </a>
   <a
     class="btn-next-text"
-    href="drivers/java"
+    href="/drivers/java"
     title="Next Section"
   >
     <span>
@@ -46,7 +46,7 @@ exports[`renders a page with no next link correctly 1`] = `
   </span>
   <a
     class="btn-prev-text"
-    href="drivers/go"
+    href="/drivers/go"
     title="Previous Section"
   >
     <span>
@@ -62,7 +62,7 @@ exports[`renders a page with no previous link correctly 1`] = `
 >
   <a
     class="btn-next-text"
-    href="drivers/go"
+    href="/drivers/go"
     title="Next Section"
   >
     <span>
