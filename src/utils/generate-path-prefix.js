@@ -1,5 +1,6 @@
 const generatePathPrefix = ({ parserBranch, project, snootyBranch, user }) => {
-  return `/${parserBranch}/${project}/${user}/${snootyBranch}`;
+  const base = `/${project}/${user}/${parserBranch}`;
+  return process.env.SNOOTY_DEV ? `/${parserBranch}/${project}/${user}/${snootyBranch}` : base;
 };
 
 // TODO: switch to ES6 export syntax if Gatsby implements support for ES6 module imports
