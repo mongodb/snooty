@@ -46,12 +46,21 @@ module.exports = env => {
           use: {
             loader: 'babel-loader',
             options: {
-              babelrc: true,
-              babelrcRoots: [path.resolve(__dirname)],
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+              plugins: [
+                '@babel/plugin-proposal-class-properties',
+                [
+                  '@babel/plugin-transform-runtime',
+                  {
+                    helpers: true,
+                    regenerator: true,
+                  },
+                ],
+              ],
             },
           },
           // Including this results in a babel-loader error within VS Code
-          exclude: /node_modules\/react-highlight/,
+          exclude: /node_modules/,
         },
         {
           test: /\.css$/,
