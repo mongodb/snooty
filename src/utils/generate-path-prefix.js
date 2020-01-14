@@ -1,6 +1,18 @@
+const normalizePath = path => path.replace(/\/+/g, `/`);
+
 const generatePathPrefix = ({ parserBranch, project, snootyBranch, user }) => {
+  let prefix = '';
+  if (process.env.COMMIT_HASH) {
+    prefix = `/${process.env.COMMIT_HASH}`;
+  }
+  if (process.env.PATCH_ID) {
+    prefix = `${prefix}/${process.env.PATCH_ID}`;
+  }
   const base = `/${project}/${user}/${parserBranch}`;
-  return process.env.SNOOTY_DEV ? `/${parserBranch}/${project}/${user}/${snootyBranch}` : base;
+  const path = process.env.SNOOTY_DEV
+    ? `${prefix}/${parserBranch}/${project}/${user}/${snootyBranch}`
+    : `${prefix}/${base}`;
+  return normalizePath(path);
 };
 
 // TODO: switch to ES6 export syntax if Gatsby implements support for ES6 module imports
