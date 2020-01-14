@@ -104,6 +104,7 @@ export const getPageData = async () => {
       path: slug,
       template,
       context: {
+        slug,
         snootyStitchId: SNOOTY_STITCH_ID,
         __refDocMapping: pageNodes,
         guidesMetadata: GUIDES_METADATA,
