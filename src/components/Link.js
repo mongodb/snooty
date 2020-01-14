@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
+import { isPreviewMode } from '../utils/is-preview-mode';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -13,7 +14,7 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
   // Assume that external links begin with http:// or https://
   const external = /^http(s)?:\/\//.test(to);
   // Use Gatsby Link for internal links, and <a> for others
-  if (to && !external) {
+  if (!isPreviewMode() && to && !external) {
     if (!to.startsWith('/')) to = `/${to}`;
     return (
       <GatsbyLink to={to} activeClassName={activeClassName} partiallyActive={partiallyActive} {...other}>
