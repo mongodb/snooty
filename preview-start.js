@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { getPageData } from 'previewSetup'; // Alias found in gatsby-node and webpack.config.js
 // Layouts
 import DefaultLayout from './src/components/layout';
-import Document from './src/templates/document';
+import DocumentBody from './src/components/DocumentBody';
 import Guide from './src/templates/guide';
 import Index from './src/templates/guides-index';
 
@@ -13,7 +13,7 @@ class Preview extends React.Component {
   constructor(props) {
     super(props);
     this.templates = {
-      document: Document,
+      document: DocumentBody,
       guide: Guide,
       'guides-index': Index,
     };
@@ -47,7 +47,11 @@ class Preview extends React.Component {
         </Helmet>
         {pageData && (
           <DefaultLayout pageContext={pageData.context} path={pageData.path}>
-            <Template pageContext={pageData.context} path={pageData.path} />
+            <Template
+              pageContext={pageData.context}
+              refDocMapping={pageData.context.__refDocMapping}
+              path={pageData.path}
+            />
           </DefaultLayout>
         )}
       </React.Fragment>
