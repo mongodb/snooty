@@ -112,6 +112,11 @@ exports.sourceNodes = async () => {
     const query = constructDbFilter();
     const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, query]);
 
+    if (documents.length === 0) {
+      console.error('No documents matched your query.');
+      process.exit(1);
+    }
+
     documents.forEach(doc => {
       const { page_id, ...rest } = doc;
       RESOLVED_REF_DOC_MAPPING[page_id.replace(`${PAGE_ID_PREFIX}/`, '')] = rest;

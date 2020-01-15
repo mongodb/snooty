@@ -25,7 +25,7 @@
     "develop": "gatsby develop",
     "format": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
-    "lint": "eslint --ignore-path .gitignore --ignore-path .prettierignore --ignore-pattern 'docs-tools/*' --ext .js,.jsx .",
+    "lint": "eslint --ignore-path .gitignore --ignore-path .prettierignore --ignore-pattern 'docs-tools/*' --ignore-pattern 'preview/*' --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier \"**/*.{js,jsx,json,md}\"",
     "preview": "webpack-dev-server --open --config ./webpack.config.js --env.PREVIEW_MODE='cli'",
