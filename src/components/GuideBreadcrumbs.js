@@ -1,5 +1,5 @@
 import React from 'react';
-import { withPrefix } from 'gatsby';
+import Link from './Link';
 // eslint-disable-next-line import/no-unresolved
 import { useSiteMetadata } from 'useSiteMetadata'; // Alias in webpack.config
 
@@ -8,7 +8,7 @@ const GuideBreadcrumbs = () => {
   return (
     <ul className="breadcrumbs">
       <li className="breadcrumbs__bc">
-        <a href={withPrefix('/')}>{title}</a> &gt;{' '}
+        <Link to="/">{title}</Link> &gt;{' '}
       </li>
     </ul>
   );

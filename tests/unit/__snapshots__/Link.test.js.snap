@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link component renders a variety of strings correctly empty string 1`] = `
+<a
+  href=""
+>
+  Empty string
+</a>
+`;
+
+exports[`Link component renders a variety of strings correctly external URL 1`] = `
+<a
+  href="http://mongodb.com"
+>
+  MongoDB Company
+</a>
+`;
+
+exports[`Link component renders a variety of strings correctly internal link 1`] = `
+<a
+  class="test-class"
+  href="/drivers/c"
+>
+  C Driver
+</a>
+`;
