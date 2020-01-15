@@ -59,7 +59,7 @@ describe('Table of Contents testing', () => {
         expect(window.location.pathname).toBe('/');
         const testTOCLink = testComponent.find('ul li.toctree-l1 .reference').first();
         expect(testTOCLink.hasClass('internal')).toBe(true);
-        expect(testTOCLink.prop('to')).toBe('/drivers');
+        expect(testTOCLink.prop('to')).toBe('drivers');
         expect(testComponent.find('.toctree-l2')).toHaveLength(0);
         updatePageLocation('Drivers', '/drivers');
         expect(window.location.pathname).toBe('/drivers');
@@ -72,7 +72,7 @@ describe('Table of Contents testing', () => {
         const biConnectorLink = testComponent
           .find('.toctree-l2')
           .first()
-          .find('.reference');
+          .find('a.reference');
         expect(biConnectorLink.hasClass('external')).toBe(true);
         expect(biConnectorLink.prop('href')).toBe('https://docs.mongodb.com/bi-connector/current/');
       });

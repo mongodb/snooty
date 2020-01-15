@@ -2,72 +2,66 @@
 
 exports[`Card component when a multi card is mounted renders correctly 1`] = `
 <div
-  className="guide guide--jumbo guide--expanded"
+  class="guide guide--jumbo guide--expanded"
 >
   <div
-    className="guide__title"
+    class="guide__title"
   >
     CRUD Guides: Create, Read, Update, and Delete Data
   </div>
   <ul
-    className="guide__body"
+    class="guide__body"
   >
     <li
-      className="guide__entry"
-      key="0"
+      class="guide__entry"
     >
       <a
-        href="server/insert"
+        href="/server/insert"
       >
         Insert Data into MongoDB
       </a>
     </li>
     <li
-      className="guide__entry"
-      key="1"
+      class="guide__entry"
     >
       <a
-        href="server/read"
+        href="/server/read"
       >
         Read Data from MongoDB
       </a>
     </li>
     <li
-      className="guide__entry"
-      key="2"
+      class="guide__entry"
     >
       <a
-        href="server/read_queries"
+        href="/server/read_queries"
       >
         Read Data from MongoDB With Queries
       </a>
     </li>
     <li
-      className="guide__entry"
-      key="3"
+      class="guide__entry"
     >
       <a
-        href="server/read_operators"
+        href="/server/read_operators"
       >
         Read Data using Operators and Compound Queries
       </a>
     </li>
     <li
-      className="guide__entry"
-      key="4"
+      class="guide__entry"
     >
       <a
-        href="server/update"
+        href="/server/update"
       >
         Update Data in MongoDB
       </a>
     </li>
     <li
-      className="guide__entry"
-      key="5"
+      class="guide__entry"
     >
       <a
-        href="server/delete"
+        href="/server/delete"
       >
         Delete Data from MongoDB
       </a>
@@ -78,22 +72,21 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
 
 exports[`Card component when a standard card is mounted renders correctly 1`] = `
 <a
-  className="guide guide--regular"
-  href="server/install"
+  class="guide guide--regular"
+  href="/server/install"
 >
   <div
-    className="guide__title"
+    class="guide__title"
   >
     Install MongoDB
   </div>
   <div
-    className="guide__body"
+    class="guide__body"
   />
   <div
-    className="guide__time"
+    class="guide__time"
   >
-    10
-    min
+    10min
   </div>
 </a>
 `;

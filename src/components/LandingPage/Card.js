@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardPills from './CardPills';
+import Link from '../Link';
 import { getNestedValue } from '../../utils/get-nested-value';
 
 const DEFAULT_COMPLETION_TIME = 15;
@@ -23,9 +24,9 @@ const Card = ({ card, guidesMetadata }) => {
             {multiCardEntries.length > 0 &&
               multiCardEntries.map((listItem, index) => (
                 <li className="guide__entry" key={index}>
-                  <a href={getNestedValue(['children', 0, 'children', 0, 'value'], listItem)}>
+                  <Link to={getNestedValue(['children', 0, 'children', 0, 'value'], listItem)}>
                     {getCardTitle(getNestedValue(['children', 0, 'children', 0, 'value'], listItem))}
-                  </a>
+                  </Link>
                 </li>
               ))}
           </ul>
@@ -40,9 +41,9 @@ const Card = ({ card, guidesMetadata }) => {
       return <div className="guide guide--jumbo guide--expanded">{innerContent}</div>;
     }
     return (
-      <a href={getNestedValue(['argument', 0, 'value'], card)} className="guide guide--regular">
+      <Link to={getNestedValue(['argument', 0, 'value'], card)} className="guide guide--regular">
         {innerContent}
-      </a>
+      </Link>
     );
   };
 

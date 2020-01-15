@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import Link from './Link';
 import { getPageTitle } from '../utils/get-page-title';
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
@@ -14,16 +14,16 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
           <span className="btn-arrow-left">← &nbsp;</span>
           {/* TODO: Replace <a> with <Link> when back button behavior is fixed for the component.
               GitHub issue: https://github.com/gatsbyjs/gatsby/issues/8357 */}
-          <a className="btn-prev-text" href={withPrefix(prevSlug)} title="Previous Section">
+          <Link className="btn-prev-text" to={prevSlug} title="Previous Section">
             <span>{getPageTitle(prevSlug, slugTitleMapping)}</span>
-          </a>
+          </Link>
         </React.Fragment>
       )}
       {nextSlug && (
         <React.Fragment>
-          <a className="btn-next-text" href={withPrefix(nextSlug)} title="Next Section">
+          <Link className="btn-next-text" to={nextSlug} title="Next Section">
             <span>{getPageTitle(nextSlug, slugTitleMapping)}</span>
-          </a>
+          </Link>
           <span className="btn-arrow-right">&nbsp;→</span>
         </React.Fragment>
       )}
