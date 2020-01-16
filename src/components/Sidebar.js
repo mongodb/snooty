@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from './Link';
 import VersionDropdown from './VersionDropdown';
 import TableOfContents from './TableOfContents';
 import { formatText } from '../utils/format-text';

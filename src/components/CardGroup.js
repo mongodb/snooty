@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
+import Link from './Link';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const Card = ({ cardid, headline, image, link, type }) => (
-  <a href={link} className={`card card-${type}`} id={cardid}>
+  <Link to={link} className={`card card-${type}`} id={cardid}>
     <div className="card-image">
       <img src={withPrefix(image)} alt={cardid} />
     </div>
     <div className="card-content">
       <div className="card-headline">{headline}</div>
     </div>
-  </a>
+  </Link>
 );
 
 Card.propTypes = {

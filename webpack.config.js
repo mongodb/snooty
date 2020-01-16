@@ -46,15 +46,9 @@ module.exports = env => {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/env', '@babel/preset-react'],
+              presets: ['@babel/preset-env', '@babel/preset-react'],
               plugins: [
-                '@babel/plugin-transform-react-jsx',
-                [
-                  '@babel/plugin-proposal-class-properties',
-                  {
-                    loose: true,
-                  },
-                ],
+                '@babel/plugin-proposal-class-properties',
                 [
                   '@babel/plugin-transform-runtime',
                   {

@@ -1,16 +1,21 @@
 import React from 'react';
-import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
+import { formatText } from '../../utils/format-text';
 import { getNestedValue } from '../../utils/get-nested-value';
+import Link from '../Link';
 
-const RoleDoc = ({ nodeData: { label, target } }) => {
-  const labelDisplay = getNestedValue(['value'], label);
+const RoleDoc = ({ nodeData: { label, target }, slugTitleMapping }) => {
+  let labelDisplay = getNestedValue(['value'], label);
+  if (!labelDisplay) {
+    const key = target.startsWith('/') ? target.slice(1) : target;
+    const text = getNestedValue([key], slugTitleMapping);
+    labelDisplay = text ? formatText(slugTitleMapping[key]) : target;
+  }
+
   return (
-    // TODO: Replace <a> with <Link> when back button behavior is fixed for the component
-    // GitHub issue: https://github.com/gatsbyjs/gatsby/issues/8357
-    <a href={withPrefix(target)} className="reference internal">
+    <Link to={target} className="reference internal">
       {labelDisplay}
-    </a>
+    </Link>
   );
 };
 
@@ -21,6 +26,9 @@ RoleDoc.propTypes = {
     }),
     target: PropTypes.string.isRequired,
   }).isRequired,
+  slugTitleMapping: PropTypes.shape({
+    [PropTypes.string]: PropTypes.oneOf([PropTypes.array, PropTypes.string]),
+  }),
 };
 
 export default RoleDoc;

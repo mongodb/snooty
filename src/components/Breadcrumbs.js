@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import Link from './Link';
 import { formatText } from '../utils/format-text';
 import { getNestedValue } from '../utils/get-nested-value';
 import { isPreviewMode } from '../utils/is-preview-mode';
@@ -15,7 +15,7 @@ const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
             <li key={path}>
               {/* TODO: Replace <a> with <Link> when back button behavior is fixed for the component.
               GitHub issue: https://github.com/gatsbyjs/gatsby/issues/8357 */}
-              <a href={withPrefix(`/${path}`)}>{formatText(title)}</a>
+              <Link to={path}>{formatText(title)}</Link>
               {index !== parentPaths.length - 1 && <span className="bcpoint"> &gt; </span>}
             </li>
           );

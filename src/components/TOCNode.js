@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import Link from './Link';
 import { formatText } from '../utils/format-text';
 import { isActiveTocNode } from '../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../utils/is-selected-toc-node';
@@ -28,13 +28,6 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
     const formattedTitle = formatText(title);
-    const Tag = isExternalLink ? 'a' : Link;
-    const tagProps = {};
-    if (isExternalLink) {
-      tagProps.href = target;
-    } else {
-      tagProps.to = `/${target}`;
-    }
     if (level === BASE_NODE_LEVEL) {
       const isDrawer = !!(options && options.drawer);
       if (isDrawer && children.length > 0) {
@@ -58,23 +51,23 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
         );
       }
       return (
-        <Tag
-          {...tagProps}
+        <Link
+          to={target}
           aria-expanded={hasChildren ? isActive : undefined}
           className={anchorTagClassNames}
           onClick={() => toggleDrawer(slug)}
         >
           {formattedTitle}
-        </Tag>
+        </Link>
       );
     }
 
     // In this case, we have a node which should be rendered with the 'expand-icon'
     return (
-      <Tag {...tagProps} className={anchorTagClassNames} aria-expanded={hasChildren ? isActive : undefined}>
+      <Link to={target} className={anchorTagClassNames} aria-expanded={hasChildren ? isActive : undefined}>
         <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
         {formattedTitle}
-      </Tag>
+      </Link>
     );
   };
   return (
