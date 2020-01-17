@@ -3,7 +3,6 @@ const normalizePath = path => path.replace(/\/+/g, `/`);
 const generatePathPrefix = ({ parserBranch, project, snootyBranch, user }) => {
   let prefix = '';
   if (process.env.COMMIT_HASH) prefix = `${process.env.COMMIT_HASH}`;
-  if (process.env.PATCH_ID) prefix = `${prefix}/${process.env.PATCH_ID}`;
 
   // Include the Snooty branch in pathPrefix for Snooty developers. mut automatically
   // includes the git branch of the repo where it is called, so this parameter must

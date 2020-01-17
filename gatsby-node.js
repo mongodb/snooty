@@ -81,7 +81,6 @@ const saveAssetFiles = async assets => {
 const constructDbFilter = () => ({
   page_id: { $regex: new RegExp(`^${PAGE_ID_PREFIX}/*`) },
   commit_hash: process.env.COMMIT_HASH || { $exists: false },
-  patch_id: process.env.PATCH_ID || { $exists: false },
 });
 
 exports.sourceNodes = async () => {
