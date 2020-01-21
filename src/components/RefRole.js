@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from './Link';
 
-// TODO: Properly render ref_role nodes with links and labels
-const RefRole = props => {
-  const {
-    nodeData: { domain, name, target, url },
-  } = props;
-
+// TODO: Update with correct formatting/class names upon completion of DOCSP-7569
+const RefRole = ({ nodeData: { domain, fileid, name, target, url }, slug }) => {
+  // Render intersphinx target links
   if (url) {
     return (
       <Link to={url} className="reference external">
@@ -18,9 +15,11 @@ const RefRole = props => {
     );
   }
 
+  // Render internal target links
+  const link = fileid === slug ? `#${target}` : `${fileid}#${target}`;
   return (
-    <Link to="" className="reference internal">
-      <span className="">RefRole</span>
+    <Link to={link} className="reference internal">
+      <span className={`${domain} ${domain}-ref`}>{target}</span>
     </Link>
   );
 };
@@ -33,6 +32,7 @@ RefRole.propTypes = {
     target: PropTypes.string.isRequired,
     url: PropTypes.string,
   }).isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default RefRole;
