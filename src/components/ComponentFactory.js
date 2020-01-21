@@ -71,7 +71,7 @@ export default class ComponentFactory extends Component {
     };
     this.componentMap = {
       admonition: Admonition,
-      block_quote: BlockQuote,
+      blockquote: BlockQuote,
       'card-group': CardGroup,
       class: CSSClass,
       code: Code,
