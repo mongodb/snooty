@@ -55,7 +55,7 @@ import RoleProgram from './Roles/Program';
 import RoleRef from './Roles/Ref';
 import RoleTerm from './Roles/Term';
 
-const IGNORED_NAMES = ['default-domain'];
+const IGNORED_NAMES = ['default-domain', 'toctree'];
 const IGNORED_TYPES = ['comment', 'substitution_definition', 'target'];
 
 export default class ComponentFactory extends Component {
