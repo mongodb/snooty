@@ -6,12 +6,23 @@ include .env.production
 
 .PHONY: stage static
 
-stage:
+# To stage a specific build, include the commit hash as environment variable when staging
+# 	example: COMMIT_HASH=123456 make stage
+# Here, generate path prefix according to environment variables
+prefix:
+ifdef COMMIT_HASH
+PREFIX = $(COMMIT_HASH)/$(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
+else
+PREFIX = $(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
+endif
+
+
+stage: prefix
 	@if [ -z "${GATSBY_SNOOTY_DEV}" ]; then \
 		echo "To stage changes to the Snooty frontend, ensure that GATSBY_SNOOTY_DEV=true in your production environment."; exit 1; \
 	else \
-		mut-publish public ${STAGING_BUCKET} --prefix=${GATSBY_PARSER_BRANCH}/${GATSBY_SITE} --stage ${ARGS}; \
-		echo "Hosted at ${STAGING_URL}/${GATSBY_PARSER_BRANCH}/${GATSBY_SITE}/${USER}/${GIT_BRANCH}/"; \
+		mut-publish public ${STAGING_BUCKET} --prefix=${PREFIX} --stage ${ARGS}; \
+		echo "Hosted at ${STAGING_URL}/${PREFIX}/${USER}/${GIT_BRANCH}/"; \
 	fi
 
 static:
