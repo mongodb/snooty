@@ -13,6 +13,23 @@ import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { PageSizeProvider } from '../hooks/usePageSize';
+import { FeedbackProvider, FeedbackCard, FeedbackTab, FeedbackFooter } from '../components/FeedbackWidget';
+
+const useFeedbackData = ({ slug, title, url }) => {
+  const { project } = useSiteMetadata();
+  // const titleMap = slugTitleMapping[slug];
+  const feedback_data = {
+    slug,
+    url,
+    title,
+    docs_property: project,
+    docs_version: '',
+  };
+  return feedback_data;
+};
+
 const Document = props => {
   const {
     pageContext: {
@@ -20,10 +37,16 @@ const Document = props => {
       __refDocMapping,
       metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
     },
+    location,
     ...rest
   } = props;
 
   const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
+  const feedbackData = useFeedbackData({
+    slug,
+    title: title || 'Home',
+    url: location.href,
+  });
 
   const windowSize = useWindowSize();
   const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
@@ -37,50 +60,58 @@ const Document = props => {
   };
 
   return (
-    <React.Fragment>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
-      <Navbar />
-      <div className="content">
-        <div>
-          {(!isBrowser || showLeftColumn) && (
-            <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
-              <Sidebar
-                slug={slug}
-                publishedBranches={publishedBranches}
-                toctreeData={toctree}
-                toggleLeftColumn={toggleLeftColumn}
-              />
-            </div>
-          )}
-        </div>
-        <div className="main-column" id="main-column">
-          {(!isBrowser || !showLeftColumn) && (
-            <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
-              Navigation
-            </span>
-          )}
-          <div className="document">
-            <div className="documentwrapper">
-              <div className="bodywrapper">
-                <div className="body">
-                  <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody
-                    refDocMapping={__refDocMapping}
-                    slug={slug}
-                    slugTitleMapping={slugTitleMapping}
-                    {...rest}
-                  />
-                  <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
-                  <Footer />
+    <PageSizeProvider>
+      <FeedbackProvider page={feedbackData}>
+        <FeedbackTab />
+        <FeedbackCard />
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
+        <Navbar />
+        <div className="content">
+          <div>
+            {(!isBrowser || showLeftColumn) && (
+              <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
+                <Sidebar
+                  slug={slug}
+                  publishedBranches={publishedBranches}
+                  toctreeData={toctree}
+                  toggleLeftColumn={toggleLeftColumn}
+                />
+              </div>
+            )}
+          </div>
+          <div id="main-column" className="main-column">
+            {(!isBrowser || !showLeftColumn) && (
+              <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
+                Navigation
+              </span>
+            )}
+            <div className="document">
+              <div className="documentwrapper">
+                <div className="bodywrapper">
+                  <div className="body">
+                    <Breadcrumbs
+                      parentPaths={getNestedValue([slug], parentPaths)}
+                      slugTitleMapping={slugTitleMapping}
+                    />
+                    <DocumentBody
+                      refDocMapping={__refDocMapping}
+                      slug={slug}
+                      slugTitleMapping={slugTitleMapping}
+                      {...rest}
+                    />
+                    <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+                    <FeedbackFooter />
+                    <Footer />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </React.Fragment>
+      </FeedbackProvider>
+    </PageSizeProvider>
   );
 };
 
