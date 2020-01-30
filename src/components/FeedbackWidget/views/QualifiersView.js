@@ -5,8 +5,9 @@ import { useFeedbackState } from '../context';
 import Checkbox from '@leafygreen-ui/checkbox';
 import Button from '@leafygreen-ui/button';
 
-const NEGATIVE_RATING_HEADING = "We're sorry to hear that.";
-const POSITIVE_RATING_HEADING = "We're glad to hear that!";
+import { Layout, RatingHeader, Footer } from '../components/view-components';
+
+const sortQualifiers = qualifiers => qualifiers.sort((q1, q2) => (q1.displayOrder > q2.displayOrder ? 1 : -1));
 
 export default function QualifierView({ ...props }) {
   const { feedback, submitQualifiers } = useFeedbackState();
@@ -15,15 +16,11 @@ export default function QualifierView({ ...props }) {
 
   return (
     <Layout>
-      <Heading>{isPositiveRating ? POSITIVE_RATING_HEADING : NEGATIVE_RATING_HEADING}</Heading>
-      <Subheading>Please describe your experience with the MongoDB Documentation.</Subheading>
+      <RatingHeader isPositive={isPositiveRating} />
       <Qualifiers>
-        {feedback.qualifiers
-          .sort((q1, q2) => (q1.displayOrder < q2.displayOrder ? -1 : 1))
-          .map(qualifier => {
-            const { id, text } = qualifier;
-            return <Qualifier key={id} id={id} text={text} />;
-          })}
+        {sortQualifiers(feedback.qualifiers).map(({ id, text }) => (
+          <Qualifier key={id} id={id} text={text} />
+        ))}
       </Qualifiers>
       <Footer>
         <Button onClick={() => submitQualifiers()}>Continue</Button>
@@ -31,54 +28,21 @@ export default function QualifierView({ ...props }) {
     </Layout>
   );
 }
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const Heading = styled.h2`
-  margin-top: 0;
-  width: 100%;
-  text-align: left;
-  font-weight: normal;
-`;
-const Footer = styled.div`
-  margin-top: 0;
-  width: 100%;
-  text-align: right;
-  font-weight: normal;
-`;
-const Subheading = styled.p`
-  margin-top: 0;
-  width: 100%;
-  text-align: left;
-  font-weight: normal;
-`;
+const Spacer = styled.div``;
 const Qualifiers = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   text-align: left;
+`;
+const QualifierLayout = styled.div`
+  padding: 10px 0;
 `;
 function Qualifier({ id, text = '' }) {
   const { setQualifier } = useFeedbackState();
   if (!text) return;
   return (
-    <QualifierContainer>
-      <QualifierCheckbox
-        className="my-checkbox"
-        onChange={event => {
-          /* Something to handle the click event */
-          setQualifier(id, event.target.checked);
-        }}
-        label={text}
-        // checked={true}
-        bold={false}
-      />
-    </QualifierContainer>
+    <QualifierLayout>
+      <Checkbox onChange={event => setQualifier(id, event.target.checked)} label={text} bold={false} />
+    </QualifierLayout>
   );
 }
-const QualifierCheckbox = styled(Checkbox)``;
-const QualifierContainer = styled.span`
-  padding: 8px 0;
-`;

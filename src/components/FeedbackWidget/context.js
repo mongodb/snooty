@@ -1,6 +1,15 @@
 import React from 'react';
-import { createNewFeedback, updateFeedback, submitFeedback, abandonFeedback, useStitchUser } from './stitch';
+import {
+  createNewFeedback,
+  updateFeedback,
+  submitFeedback,
+  abandonFeedback,
+  useStitchUser,
+  addAttachment,
+} from './stitch';
 import { getSegmentUserId } from './segment';
+import { useScreenshot } from '../Screenshot';
+import { getViewport } from '../../hooks/useViewport';
 import * as R from 'ramda';
 
 const FeedbackContext = React.createContext();
@@ -8,9 +17,16 @@ const FeedbackContext = React.createContext();
 export function FeedbackProvider({ page, ...props }) {
   const [feedback, setFeedback] = React.useState(null);
   const [isSupportRequest, setIsSupportRequest] = React.useState(false);
-  console.log('feedback', feedback);
   const [view, setView] = React.useState('waiting');
+  const { screenshot, clearScreenshot } = useScreenshot();
   const user = useStitchUser();
+
+  React.useEffect(() => {
+    console.log('feedback', feedback);
+    if (feedback) {
+      console.log('feedback_id', feedback._id.toString());
+    }
+  }, [feedback]);
 
   async function initializeFeedback(initialView = 'rating') {
     const segment = getSegmentUserId();
@@ -27,6 +43,7 @@ export function FeedbackProvider({ page, ...props }) {
         segment_id: segment.id,
         isAnonymous: segment.isAnonymous,
       },
+      viewport: getViewport(),
     });
     setFeedback(newFeedback);
     setView(initialView);
@@ -71,13 +88,23 @@ export function FeedbackProvider({ page, ...props }) {
       feedback_id: feedback._id,
       qualifiers: updatedQualifiers,
     });
-    const selectedSupportQualifier = updatedFeedback.qualifiers.find(q => q.id === 'support' && q.value === true);
-    setIsSupportRequest(Boolean(selectedSupportQualifier));
     setFeedback(updatedFeedback);
   }
 
   function submitQualifiers() {
+    if (!feedback) return;
+    const selectedSupportQualifier = feedback.qualifiers.find(q => q.id === 'support' && q.value === true);
+    setIsSupportRequest(Boolean(selectedSupportQualifier));
     setView('comment');
+  }
+
+  async function submitScreenshot({ dataUri, viewport }) {
+    if (!feedback) return;
+    const updatedFeedback = await addAttachment({
+      feedback_id: feedback._id,
+      attachment: { type: 'screenshot', dataUri, viewport },
+    });
+    setFeedback(updatedFeedback);
   }
 
   async function submitComment({ comment = '', email = '' }) {
@@ -95,6 +122,7 @@ export function FeedbackProvider({ page, ...props }) {
       setView('submitted');
       setFeedback(null);
     }
+    screenshot && clearScreenshot();
     return submittedFeedback;
   }
 
@@ -108,6 +136,7 @@ export function FeedbackProvider({ page, ...props }) {
     if (feedback) {
       await abandonFeedback({ feedback_id: feedback._id });
     }
+    screenshot && clearScreenshot();
     setView('waiting');
     setFeedback(null);
   }
@@ -121,9 +150,11 @@ export function FeedbackProvider({ page, ...props }) {
     setQualifier,
     submitQualifiers,
     submitComment,
+    submitScreenshot,
     submitSupport,
     abandon,
   };
+
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
 }
 

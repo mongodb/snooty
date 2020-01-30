@@ -15,11 +15,11 @@ import { isBrowser } from '../utils/is-browser.js';
 
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { PageSizeProvider } from '../hooks/usePageSize';
-import { FeedbackProvider, FeedbackCard, FeedbackTab, FeedbackFooter } from '../components/FeedbackWidget';
+import { ScreenshotProvider } from '../components/Screenshot';
+import { FeedbackProvider, FeedbackForm, FeedbackTab, FeedbackFooter } from '../components/FeedbackWidget';
 
 const useFeedbackData = ({ slug, title, url }) => {
   const { project } = useSiteMetadata();
-  // const titleMap = slugTitleMapping[slug];
   const feedback_data = {
     slug,
     url,
@@ -109,8 +109,7 @@ const Document = props => {
               </div>
             </div>
           </div>
-        </div>
-      </FeedbackProvider>
+        </FeedbackProvider>
     </PageSizeProvider>
   );
 };

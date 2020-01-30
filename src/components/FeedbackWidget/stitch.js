@@ -2,8 +2,6 @@ import React from 'react';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 
 const APP_ID = 'feedback-ibcyy';
-// const DATABASE = "deluge";
-// const COLLECTION = "newWidgetVotes";
 
 export const app = Stitch.hasAppClient(APP_ID) ? Stitch.getAppClient(APP_ID) : Stitch.initializeAppClient(APP_ID);
 
@@ -13,7 +11,6 @@ export async function loginAnonymous() {
     const user = await app.auth.loginWithCredential(new AnonymousCredential());
     return user;
   } else {
-    console.warn('Already authenticated.');
     return app.auth.user;
   }
 }
@@ -34,8 +31,8 @@ export const useStitchUser = () => {
 };
 
 // Feedback Widget Functions
-export async function createNewFeedback({ page, user }) {
-  const feedback = await app.callFunction('feedback_create', [{ page, user }]);
+export async function createNewFeedback({ page, user, ...rest }) {
+  const feedback = await app.callFunction('feedback_create', [{ page, user, ...rest }]);
   return feedback;
 }
 
@@ -61,4 +58,12 @@ export async function abandonFeedback({ feedback_id }) {
   }
   const result = await app.callFunction('feedback_abandon', [{ feedback_id }]);
   return result.modifiedCount === 1;
+}
+
+export async function addAttachment({ feedback_id, attachment }) {
+  if (!feedback_id) {
+    throw new Error('Must specify a feedback item _id to add an attachment to');
+  }
+  const result = await app.callFunction('feedback_addAttachment', [{ feedback_id, attachment }]);
+  return result;
 }

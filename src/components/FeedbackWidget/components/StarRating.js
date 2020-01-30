@@ -9,22 +9,26 @@ import { css } from '@emotion/core';
 
 const FILLED_STAR_COLOR = uiColors.yellow.base;
 const UNFILLED_STAR_COLOR = uiColors.gray.light2;
-const RATING_TOOLTIPS = {
-  1: 'Unusable',
-  2: 'Poor',
-  3: 'Okay',
-  4: 'Good',
-  5: 'Excellent',
+export const RATING_TOOLTIPS = {
+  1: 'Not at all',
+  2: 'A little',
+  3: 'Somewhat',
+  4: 'Very',
+  5: 'Extremely',
 };
 
 const filledStarIcon = findIconDefinition({ prefix: 'fas', iconName: 'star' });
+
+export const StarRatingLabel = styled.div`
+  margin-top: 12px;
+`;
 
 export default function StarRating({ size = '3x' }) {
   const [hoveredRating, setHoveredRating] = React.useState(null);
   const { feedback } = useFeedbackState();
   const selectedRating = feedback && feedback.rating;
   return (
-    <Layout size={size} onMouseLeave={() => setHoveredRating(null)}>
+    <Layout className="star-rating" size={size} onMouseLeave={() => setHoveredRating(null)}>
       <Star
         ratingValue={1}
         hoveredRating={hoveredRating}
@@ -119,7 +123,7 @@ export function Star({ ratingValue, hoveredRating, setHoveredRating, selectedRat
           </div>
         }
       >
-        {RATING_TOOLTIPS[ratingValue]}
+        {`${RATING_TOOLTIPS[ratingValue]} helpful`}
       </Tooltip>
     </StarContainer>
   );
@@ -128,6 +132,7 @@ const StarContainer = styled.div`
   padding-right: auto;
   padding-left: auto;
 `;
+
 const StarIcon = ({ size, onMouseEnter, isHighlighted, ...props }) => (
   <FontAwesomeIcon
     icon={filledStarIcon}

@@ -1,12 +1,13 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { useFeedbackState } from '../context';
 
 import Button from '@leafygreen-ui/button';
+import ScreenshotButton from '../components/ScreenshotButton';
+import { Layout, RatingHeader, Footer } from '../components/view-components';
 
-const NEGATIVE_RATING_HEADING = "We're sorry to hear that.";
-const POSITIVE_RATING_HEADING = "We're glad to hear that!";
+import { useFeedbackState } from '../context';
+import { useScreenshot } from '../../Screenshot';
 
 export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment } = useFeedbackState();
@@ -19,45 +20,31 @@ export default function CommentView({ ...props }) {
     submitComment({ comment, email });
   };
 
+  const { screenshot } = useScreenshot();
+
   return (
     <Layout>
-      <Heading>{isPositiveRating ? POSITIVE_RATING_HEADING : NEGATIVE_RATING_HEADING}</Heading>
-      <Subheading>Please describe your experience with the MongoDB Documentation.</Subheading>
+      <RatingHeader isPositive={isPositiveRating} />
       <CommentTextArea
         rows={8}
-        placeholder="Tell us more."
+        placeholder="Describe your experience."
         value={comment}
         onChange={e => setComment(e.target.value)}
       />
       <EmailInput placeholder="Email Address (optional)" value={email} onChange={e => setEmail(e.target.value)} />
       <Footer>
         <Button onClick={() => handleSubmitComment()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</Button>
+        <ScreenshotButton />
       </Footer>
+      <ScreenshotContainer>{screenshot && <img alt="screenshot-alt" src={screenshot.dataUri} />}</ScreenshotContainer>
     </Layout>
   );
 }
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const Heading = styled.h2`
-  margin-top: 0;
-  width: 100%;
-  text-align: left;
-  font-weight: normal;
-`;
-const Footer = styled.div`
-  margin-top: 0;
-  width: 100%;
-  text-align: right;
-  font-weight: normal;
-`;
-const Subheading = styled.p`
-  margin-top: 0;
-  width: 100%;
-  text-align: left;
-  font-weight: normal;
+
+const ScreenshotContainer = styled.div`
+  margin: 20px 0;
+  max-height: 300px;
+  overflow-y: scroll;
 `;
 
 const InputStyle = css`

@@ -1,29 +1,22 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Button from '@leafygreen-ui/button';
+import { useFeedbackState } from '../context';
+import usePageSize from '../../../hooks/usePageSize';
+import { Layout, Heading, Subheading } from '../components/view-components';
 
 export default function SubmittedView(props) {
+  const { abandon } = useFeedbackState();
+  const { isSmallScreen } = usePageSize();
   return (
     <Layout>
       <Heading>We appreciate your feedback.</Heading>
-      <Subheading>We're working hard to improve MongoDB Documentation.</Subheading>
-      <Subheading>For additional support, explore the MongoDB discussion forum.</Subheading>
+      <Subheading>We're working hard to improve.</Subheading>
+      <p>
+        <span>For additional support, explore the </span>
+        <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB discussion forum.</a>
+      </p>
+      {isSmallScreen && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
     </Layout>
   );
 }
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const Heading = styled.h2`
-  margin-top: 0;
-  width: 100%;
-  text-align: left;
-  font-weight: normal;
-`;
-const Subheading = styled.p`
-  margin-top: 0;
-  width: 100%;
-  text-align: left;
-  font-weight: normal;
-`;
