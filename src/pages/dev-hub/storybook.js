@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { colorMap, size } from '../styles/devhub';
+import { colorMap, size } from '../../components/dev-hub/theme';
 
 const StorybookContainer = styled('div')`
   padding: ${size.default};

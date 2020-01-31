@@ -28,7 +28,7 @@ const size = {
   xxlarge: '128px',
   maxWidth: '1400px',
 };
-const colorNameMap = {
+const colorMap = {
   black: '#1B272D',
   darkGreen: '#13AA52',
   greyDarkOne: '#5B6D75',
@@ -45,9 +45,6 @@ const colorNameMap = {
   violet: '#6E60F9',
   white: '#FFFFFF',
   yellow: '#FDDC49',
-};
-const colorMap = {
-  ...colorNameMap,
 };
 
 /**
