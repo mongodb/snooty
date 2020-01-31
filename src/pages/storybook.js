@@ -6,11 +6,11 @@ const StorybookContainer = styled('div')`
   padding: ${size.default};
 `;
 
-const Swatch = styled.div`
+const Swatch = styled('div')`
   background-color: ${props => props.colorValue};
-  padding: 0.5em;
-  margin: 0.3em;
   font-weight: bold;
+  padding: ${size.small};
+  margin: ${size.tiny};
 `;
 
 export default () => (
