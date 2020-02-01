@@ -31,6 +31,8 @@ const size = {
 const colorMap = {
   black: '#1B272D',
   darkGreen: '#13AA52',
+  devBlack: '#1a282e',
+  devWhite: '#e3ecea',
   greyDarkOne: '#5B6D75',
   greyDarkTwo: '#3A5058',
   greyDarkThree: '#2A3D46',
