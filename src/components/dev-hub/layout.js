@@ -15,6 +15,7 @@ const GlobalWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 0 auto;
   max-width: ${size.maxWidth};
   min-height: 100vh;
 `;
@@ -46,6 +47,7 @@ const GlobalFooter = styled('footer')`
 
 const ContentWrapper = styled('main')`
   flex: 1;
+  margin: ${size.large} 0;
 `;
 
 export default ({ children }) => (
