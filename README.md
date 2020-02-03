@@ -59,7 +59,7 @@ $ npm run serve
 
 ## Staging
 
-Ensure that you have properly configured your Giza/AWS keys. Then, from root, run:
+Install [mut](https://github.com/mongodb/mut) and ensure that you have properly configured your Giza/AWS keys. Then, from root, run:
 
 ```shell
 make stage
