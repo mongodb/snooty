@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { P } from '../text';
-import { colorMap, fontSize, size } from '../theme';
+import { P } from './text';
+import { colorMap, fontSize, size } from './theme';
 
 /* TODO: Update font once decided */
 const BadgeText = styled(P)`
