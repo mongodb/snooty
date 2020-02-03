@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Layout from '../../components/dev-hub/layout';
+import { H1, H2, P } from '../../components/dev-hub/text';
 import { colorMap, size } from '../../components/dev-hub/theme';
 
 const LiveStream = styled('div')`
@@ -68,10 +69,8 @@ export default ({ ...data }) => {
     <Layout>
       <LiveStream>Live now</LiveStream>
       <Hero>
-        <h1>
-          <pre>sample code</pre>
-        </h1>
-        <p>description text</p>
+        <H1>sample code</H1>
+        <P>description text</P>
         <div>
           <a>primary link</a>
           <a>secondary link</a>
@@ -90,8 +89,8 @@ export default ({ ...data }) => {
       </ArticleGallery>
       <FeatureSection>
         <header>
-          <h2>Developer Inspo</h2>
-          <p>description text</p>
+          <H2>Developer Inspo</H2>
+          <P>description text</P>
           <div>
             <a>primary link</a>
             <a>tertiary link</a>
@@ -102,8 +101,8 @@ export default ({ ...data }) => {
       <FeatureSection>
         <FeatureSectionVideo>Video</FeatureSectionVideo>
         <header>
-          <h2>Let's do it live</h2>
-          <p>description text</p>
+          <H2>Let's do it live</H2>
+          <P>description text</P>
           <div>
             <a>primary link</a>
           </div>
@@ -111,8 +110,8 @@ export default ({ ...data }) => {
       </FeatureSection>
       <FeatureSection>
         <header>
-          <h2>Get Involved</h2>
-          <p>description text</p>
+          <H2>Get Involved</H2>
+          <P>description text</P>
           <div>
             <a>primary link</a>
             <a>tertiary link</a>
