@@ -8,6 +8,15 @@ const globalStyles = css`
   body {
     background: ${colorMap.devBlack};
     color: ${colorMap.devWhite};
+    font-family: 'Fira Mono Bold', 'Space Mono Bold', 'Source Code Pro';
+  }
+  /* Need overrides for guides.css styles */
+  h1,
+  h2,
+  h3,
+  h4 {
+    border: none;
+    font-family: 'Fira Mono Bold', 'Space Mono Bold', 'Source Code Pro';
   }
 `;
 
@@ -49,6 +58,22 @@ const ContentWrapper = styled('main')`
   flex: 1;
   margin: ${size.large} 0;
 `;
+
+export const StorybookLayout = ({ children }) => {
+  const storybookStyles = css`
+    ${globalStyles};
+    body {
+      background: ${colorMap.devWhite};
+      color: ${colorMap.devBlack};
+    }
+  `;
+  return (
+    <GlobalWrapper>
+      <Global styles={storybookStyles} />
+      <ContentWrapper>{children}</ContentWrapper>
+    </GlobalWrapper>
+  );
+};
 
 export default ({ children }) => (
   <GlobalWrapper>
