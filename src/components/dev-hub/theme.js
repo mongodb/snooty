@@ -3,7 +3,7 @@
  * @property {string} fontsize returns px value
  */
 const fontSize = {
-  xsmall: '11px',
+  xsmall: '10px',
   tiny: '12px',
   small: '14px',
   default: '16px',
@@ -19,8 +19,8 @@ const fontSize = {
  * @property {function(string): number} stripUnit removes px unit
  */
 const size = {
-  tiny: '4px',
-  small: '8px',
+  tiny: '5px',
+  small: '10px',
   default: '16px',
   medium: '24px',
   large: '32px',
