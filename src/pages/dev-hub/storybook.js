@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import ContentLabel from '../../components/dev-hub/contentLabel';
 import { StorybookLayout } from '../../components/dev-hub/layout';
 import { H1, H2, H3, H4, P } from '../../components/dev-hub/text';
 import { colorMap, size } from '../../components/dev-hub/theme';
@@ -29,6 +30,10 @@ export default () => (
       <H3>Heading 3</H3>
       <H4>Heading 4</H4>
       <P>Paragraph</P>
+      <SectionHeader>Content Label</SectionHeader>
+      <ContentLabel text="How-To" textColor={colorMap.yellow} />
+      <ContentLabel text="Quick Start" textColor={colorMap.lightGreen} />
+      <ContentLabel text="Community" textColor={colorMap.magenta} />
       <SectionHeader>Colors</SectionHeader>
       {Object.keys(colorMap).map(colorName => (
         <Swatch key={colorName} colorName={colorName} colorValue={colorMap[colorName]}>

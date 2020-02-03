@@ -5,8 +5,8 @@ import { fontSize, size } from '../theme';
 /**
  *
  * @param {Object.string} param
- *  @param {string} italic should be italic style
  *  @param {string} bold should be bold weight
+ *  @param {string} collapse should be if the margin is to be removed
  */
 const variants = ({ bold, collapse }) =>
   css`
