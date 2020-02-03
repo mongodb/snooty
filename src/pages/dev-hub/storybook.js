@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Badge from '../../components/dev-hub/badge';
 import { StorybookLayout } from '../../components/dev-hub/layout';
+import Link from '../../components/dev-hub/link';
 import { H1, H2, H3, H4, P } from '../../components/dev-hub/text';
 import { colorMap, size } from '../../components/dev-hub/theme';
 
@@ -37,6 +38,8 @@ export default () => (
       <Badge>Event</Badge>
       <Badge>Community</Badge>
       <Badge>Deep Dive</Badge>
+      <SectionHeader>Links</SectionHeader>
+      <Link primary>Hello World</Link>
       <SectionHeader>Colors</SectionHeader>
       {Object.keys(colorMap).map(colorName => (
         <Swatch key={colorName} colorName={colorName} colorValue={colorMap[colorName]}>
