@@ -32,7 +32,7 @@ DocumentBody.propTypes = {
       children: PropTypes.array,
     }).isRequired,
   }).isRequired,
-  slugTitleMapping: PropTypes.objectOf(PropTypes.oneOf([PropTypes.array, PropTypes.string])),
+  slugTitleMapping: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string])),
   substitutions: PropTypes.objectOf(PropTypes.array),
 };
 
