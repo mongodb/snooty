@@ -1,6 +1,6 @@
 import React from 'react';
-import StarRating from '../components/StarRating';
 import { Layout, Heading } from '../components/view-components';
+import StarRating from '../components/StarRating';
 
 export default function RatingView(props) {
   return (

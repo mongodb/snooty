@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import StarRating from './components/StarRating';
 import usePageSize from '../../hooks/usePageSize';
+import StarRating from './components/StarRating';
 
 export default function FeedbackFooter() {
   const { isTabletOrMobile } = usePageSize();
@@ -28,4 +28,5 @@ const StarRatingContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 420px;
+  max-height: 80px;
 `;

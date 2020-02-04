@@ -8,7 +8,6 @@ import {
   addAttachment,
 } from './stitch';
 import { getSegmentUserId } from './segment';
-import { useScreenshot } from '../Screenshot';
 import { getViewport } from '../../hooks/useViewport';
 import * as R from 'ramda';
 
@@ -18,15 +17,7 @@ export function FeedbackProvider({ page, ...props }) {
   const [feedback, setFeedback] = React.useState(null);
   const [isSupportRequest, setIsSupportRequest] = React.useState(false);
   const [view, setView] = React.useState('waiting');
-  const { screenshot, clearScreenshot } = useScreenshot();
   const user = useStitchUser();
-
-  React.useEffect(() => {
-    console.log('feedback', feedback);
-    if (feedback) {
-      console.log('feedback_id', feedback._id.toString());
-    }
-  }, [feedback]);
 
   async function initializeFeedback(initialView = 'rating') {
     const segment = getSegmentUserId();
@@ -79,14 +70,10 @@ export function FeedbackProvider({ page, ...props }) {
     if (typeof value !== 'boolean') {
       throw new Error('value must be a boolean.');
     }
-    const updatedQualifiers = R.adjust(
-      feedback.qualifiers.findIndex(R.propEq('id', id)), // Find the qualifier by id
-      q => ({ ...q, value }), // Update the value
-      feedback.qualifiers // Adjust this array of qualifiers
-    );
+
     const updatedFeedback = await updateFeedback({
       feedback_id: feedback._id,
-      qualifiers: updatedQualifiers,
+      qualifiers: updateQualifier(feedback.qualifiers, id, value),
     });
     setFeedback(updatedFeedback);
   }
@@ -120,23 +107,19 @@ export function FeedbackProvider({ page, ...props }) {
       setView('support');
     } else {
       setView('submitted');
-      setFeedback(null);
     }
-    screenshot && clearScreenshot();
     return submittedFeedback;
   }
 
   async function submitSupport() {
     if (!feedback) return;
     setView('submitted');
-    setFeedback(null);
   }
 
   async function abandon() {
     if (feedback) {
       await abandonFeedback({ feedback_id: feedback._id });
     }
-    screenshot && clearScreenshot();
     setView('waiting');
     setFeedback(null);
   }
@@ -156,6 +139,14 @@ export function FeedbackProvider({ page, ...props }) {
   };
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
+}
+
+function updateQualifier(qualifiers, id, value) {
+  return R.adjust(
+    qualifiers.findIndex(R.propEq('id', id)), // Find the qualifier by id
+    q => ({ ...q, value }), // Update the value
+    qualifiers // Adjust this array of qualifiers
+  );
 }
 
 export function useFeedbackState() {

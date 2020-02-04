@@ -2,10 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { uiColors } from '@leafygreen-ui/palette';
-import Tooltip from '@leafygreen-ui/tooltip';
 import { useFeedbackState } from '../context';
 import { css } from '@emotion/core';
+import { isBrowser } from '../../../utils/is-browser';
+import { uiColors } from '@leafygreen-ui/palette';
+import loadable from '@loadable/component';
+const Tooltip = loadable(() => import('./LeafygreenTooltip'));
 
 const FILLED_STAR_COLOR = uiColors.yellow.base;
 const UNFILLED_STAR_COLOR = uiColors.gray.light2;
@@ -23,48 +25,55 @@ export const StarRatingLabel = styled.div`
   margin-top: 12px;
 `;
 
+// export default function StarRating({ size = '3x' }) {
 export default function StarRating({ size = '3x' }) {
   const [hoveredRating, setHoveredRating] = React.useState(null);
   const { feedback } = useFeedbackState();
   const selectedRating = feedback && feedback.rating;
   return (
-    <Layout className="star-rating" size={size} onMouseLeave={() => setHoveredRating(null)}>
-      <Star
-        ratingValue={1}
-        hoveredRating={hoveredRating}
-        setHoveredRating={setHoveredRating}
-        selectedRating={selectedRating}
-        size={size}
-      />
-      <Star
-        ratingValue={2}
-        hoveredRating={hoveredRating}
-        setHoveredRating={setHoveredRating}
-        selectedRating={selectedRating}
-        size={size}
-      />
-      <Star
-        ratingValue={3}
-        hoveredRating={hoveredRating}
-        setHoveredRating={setHoveredRating}
-        selectedRating={selectedRating}
-        size={size}
-      />
-      <Star
-        ratingValue={4}
-        hoveredRating={hoveredRating}
-        setHoveredRating={setHoveredRating}
-        selectedRating={selectedRating}
-        size={size}
-      />
-      <Star
-        ratingValue={5}
-        hoveredRating={hoveredRating}
-        setHoveredRating={setHoveredRating}
-        selectedRating={selectedRating}
-        size={size}
-      />
-    </Layout>
+    isBrowser() && (
+      <Layout size={size}>
+        {[1, 2, 3, 4, 5].map(ratingValue => (
+          <Star
+            key={ratingValue}
+            ratingValue={ratingValue}
+            hoveredRating={hoveredRating}
+            setHoveredRating={setHoveredRating}
+            selectedRating={selectedRating}
+            onMouseEnter={() => setHoveredRating(ratingValue)}
+            onMouseLeave={() => setHoveredRating(null)}
+            size={size}
+          />
+        ))}
+      </Layout>
+    )
+  );
+}
+
+export function Star({ ratingValue, hoveredRating, selectedRating, size, onMouseEnter, onMouseLeave }) {
+  const isHighlighted = selectedRating ? selectedRating >= ratingValue : hoveredRating >= ratingValue;
+  const isHovered = hoveredRating === ratingValue;
+  const { setRating } = useFeedbackState();
+  const onClick = () => setRating(ratingValue);
+  return (
+    <StarContainer onClick={onClick} onMouseLeave={onMouseLeave}>
+      <Tooltip
+        key={`star-${size}-${ratingValue}`}
+        id={`star-${size}-${ratingValue}`}
+        align="bottom"
+        justify="middle"
+        triggerEvent="hover"
+        variant="dark"
+        open={isHovered && !selectedRating}
+        trigger={
+          <div>
+            <StarIcon size={size} onMouseEnter={onMouseEnter} isHighlighted={isHighlighted} />
+          </div>
+        }
+      >
+        {`${RATING_TOOLTIPS[ratingValue]} helpful`}
+      </Tooltip>
+    </StarContainer>
   );
 }
 
@@ -102,32 +111,6 @@ const Layout = styled.div(
   `
 );
 
-export function Star({ ratingValue, hoveredRating, setHoveredRating, selectedRating, size }) {
-  const isHighlighted = selectedRating ? selectedRating >= ratingValue : hoveredRating >= ratingValue;
-  const isHovered = hoveredRating === ratingValue;
-  const { setRating } = useFeedbackState();
-  const onMouseEnter = () => setHoveredRating(ratingValue);
-  const onMouseLeave = () => setHoveredRating(null);
-  const onClick = () => setRating(ratingValue);
-  return (
-    <StarContainer onClick={onClick} onMouseLeave={onMouseLeave}>
-      <Tooltip
-        align="bottom"
-        justify="middle"
-        triggerEvent="hover"
-        variant="dark"
-        open={isHovered && !selectedRating}
-        trigger={
-          <div>
-            <StarIcon size={size} onMouseEnter={onMouseEnter} isHighlighted={isHighlighted} />
-          </div>
-        }
-      >
-        {`${RATING_TOOLTIPS[ratingValue]} helpful`}
-      </Tooltip>
-    </StarContainer>
-  );
-}
 const StarContainer = styled.div`
   padding-right: auto;
   padding-left: auto;

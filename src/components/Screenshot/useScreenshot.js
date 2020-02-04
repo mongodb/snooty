@@ -1,43 +1,38 @@
 import React from 'react';
-import { takeScreenshotOfDocument } from './Screenshot';
 import useViewport from '../../hooks/useViewport';
-
-const ScreenshotContext = React.createContext(null);
+import { takeFeedbackScreenshot } from './Screenshot';
 
 export function useScreenshot() {
-  const context = React.useContext(ScreenshotContext);
-  if (!context) {
-    throw new Error('You must nest useScreenshot() inside of a ScreenshotProvider.');
-  }
-  return context;
-}
-
-export function ScreenshotProvider({ defaultSelector = '#screenshot-context', children }) {
   const [screenshot, setScreenshot] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const viewport = useViewport();
 
-  const takeScreenshot = async () => {
+  const takeScreenshot = () => {
     setLoading(true);
+  };
+
+  const handleScreenshot = React.useCallback(async () => {
     setScreenshot({
-      dataUri: await takeScreenshotOfDocument(),
+      dataUri: await takeFeedbackScreenshot(),
       viewport,
     });
     setLoading(false);
-  };
+  }, [viewport]);
+
+  React.useEffect(() => {
+    if (loading) {
+      handleScreenshot();
+    }
+  }, [loading, handleScreenshot]);
 
   const clearScreenshot = () => {
     setScreenshot(null);
   };
 
-  const value = React.useMemo(() => {
-    return {
-      screenshot,
-      loading,
-      takeScreenshot,
-      clearScreenshot,
-    };
-  }, [screenshot, loading, takeScreenshot]);
-
-  return <ScreenshotContext.Provider value={value}>{children}</ScreenshotContext.Provider>;
+  return {
+    screenshot,
+    loading,
+    takeScreenshot,
+    clearScreenshot,
+  };
 }

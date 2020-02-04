@@ -13,22 +13,8 @@ import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from '../components/FeedbackWidget';
 import { PageSizeProvider } from '../hooks/usePageSize';
-import { ScreenshotProvider } from '../components/Screenshot';
-import { FeedbackProvider, FeedbackForm, FeedbackTab, FeedbackFooter } from '../components/FeedbackWidget';
-
-const useFeedbackData = ({ slug, title, url }) => {
-  const { project } = useSiteMetadata();
-  const feedback_data = {
-    slug,
-    url,
-    title,
-    docs_property: project,
-    docs_version: '',
-  };
-  return feedback_data;
-};
 
 const Document = props => {
   const {
@@ -46,6 +32,7 @@ const Document = props => {
     slug,
     title: title || 'Home',
     url: location.href,
+    publishedBranches,
   });
 
   const windowSize = useWindowSize();
@@ -63,7 +50,7 @@ const Document = props => {
     <PageSizeProvider>
       <FeedbackProvider page={feedbackData}>
         <FeedbackTab />
-        <FeedbackCard />
+        <FeedbackForm />
         <Helmet>
           <title>{title}</title>
         </Helmet>
@@ -102,14 +89,14 @@ const Document = props => {
                       {...rest}
                     />
                     <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
-                    <FeedbackFooter />
                     <Footer />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </FeedbackProvider>
+        </div>
+      </FeedbackProvider>
     </PageSizeProvider>
   );
 };

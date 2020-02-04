@@ -1,9 +1,11 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
+import Tooltip from '@leafygreen-ui/tooltip';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { useScreenshot } from '../../../components/Screenshot';
 import { useFeedbackState } from '../context';
+import { useScreenshot } from '../../../components/Screenshot';
 
 function useSaveScreenshot() {
   const { submitScreenshot } = useFeedbackState();
@@ -15,6 +17,7 @@ function useSaveScreenshot() {
 }
 
 export default function ScreenshotButton({ onClick, size = 'default', ...props }) {
+  const [isHovered, setIsHovered] = React.useState(false);
   const { screenshot, loading, takeScreenshot } = useScreenshot();
   const label = screenshot ? 'Screenshot Saved' : loading ? 'Taking Screenshot' : 'Take a Screenshot';
   useSaveScreenshot();
@@ -23,9 +26,22 @@ export default function ScreenshotButton({ onClick, size = 'default', ...props }
     await takeScreenshot();
   };
   return (
-    <Button variant="default" ariaLabel={label} onClick={handleClick} {...props}>
-      {screenshot ? <CheckIcon /> : loading ? <SpinnerIcon /> : <CameraIcon />}
-    </Button>
+    <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <Tooltip
+        align="bottom"
+        justify="middle"
+        triggerEvent="hover"
+        variant="dark"
+        open={isHovered}
+        trigger={
+          <Button variant="default" label={label} onClick={handleClick} {...props}>
+            {screenshot ? <CheckIcon /> : loading ? <SpinnerIcon /> : <CameraIcon />}
+          </Button>
+        }
+      >
+        {label}
+      </Tooltip>
+    </div>
   );
 }
 

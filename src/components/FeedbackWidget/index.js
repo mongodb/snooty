@@ -1,9 +1,10 @@
 import './icons';
 
 import { FeedbackProvider } from './context';
-import FeedbackCard, { FeedbackForm } from './FeedbackCard';
+import useFeedbackData from './useFeedbackData';
+import FeedbackForm from './FeedbackForm';
 import FeedbackTab from './FeedbackTab';
 import FeedbackHeading from './FeedbackHeading';
 import FeedbackFooter from './FeedbackFooter';
 
-export { FeedbackProvider, FeedbackForm, FeedbackCard, FeedbackTab, FeedbackHeading, FeedbackFooter };
+export { FeedbackProvider, useFeedbackData, FeedbackForm, FeedbackTab, FeedbackHeading, FeedbackFooter };

@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { useFeedbackState } from '../context';
 import usePageSize from '../../../hooks/usePageSize';
@@ -11,7 +10,7 @@ export default function SubmittedView(props) {
   return (
     <Layout>
       <Heading>We appreciate your feedback.</Heading>
-      <Subheading>We're working hard to improve.</Subheading>
+      <Subheading>We're working hard to improve the MongoDB Documentation.</Subheading>
       <p>
         <span>For additional support, explore the </span>
         <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB discussion forum.</a>

@@ -1,3 +1,3 @@
-import { useScreenshot, ScreenshotProvider } from './useScreenshot';
+import { useScreenshot } from './useScreenshot';
 
-export { useScreenshot, ScreenshotProvider };
+export { useScreenshot };

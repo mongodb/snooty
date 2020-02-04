@@ -21,7 +21,8 @@ export function PageSizeProvider(props) {
 export default function usePageSize() {
   const pageSize = React.useContext(PageSizeContext);
   if (!pageSize) {
-    throw new Error('You must call usePageSize() inside of a PageSizeProvider');
+    // throw new Error('You must call usePageSize() inside of a PageSizeProvider');
+    return { isTabletOrMobile: false, isSmallScreen: false };
   }
   return pageSize;
 }

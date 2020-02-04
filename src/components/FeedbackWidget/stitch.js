@@ -1,9 +1,12 @@
 import React from 'react';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import { isBrowser } from '../../utils/is-browser';
 
 const APP_ID = 'feedback-ibcyy';
-
-export const app = Stitch.hasAppClient(APP_ID) ? Stitch.getAppClient(APP_ID) : Stitch.initializeAppClient(APP_ID);
+function getStitchApp() {
+  return Stitch.hasAppClient(APP_ID) ? Stitch.getAppClient(APP_ID) : Stitch.initializeAppClient(APP_ID);
+}
+const app = isBrowser() ? getStitchApp() : { auth: {} };
 
 // User Authentication & Management
 export async function loginAnonymous() {
@@ -25,7 +28,6 @@ export const useStitchUser = () => {
   const [user, setUser] = React.useState(app.auth.user);
   React.useEffect(() => {
     loginAnonymous().then(setUser);
-    return () => logout();
   }, []);
   return user;
 };

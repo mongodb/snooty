@@ -28,7 +28,7 @@ export default function QualifierView({ ...props }) {
     </Layout>
   );
 }
-const Spacer = styled.div``;
+
 const Qualifiers = styled.div`
   display: flex;
   flex-direction: column;

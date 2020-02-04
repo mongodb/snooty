@@ -3,11 +3,11 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 import Button from '@leafygreen-ui/button';
-import ScreenshotButton from '../components/ScreenshotButton';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 
 import { useFeedbackState } from '../context';
-import { useScreenshot } from '../../Screenshot';
+import Loadable from '@loadable/component';
+const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment } = useFeedbackState();
@@ -19,8 +19,6 @@ export default function CommentView({ ...props }) {
   const handleSubmitComment = () => {
     submitComment({ comment, email });
   };
-
-  const { screenshot } = useScreenshot();
 
   return (
     <Layout>
@@ -36,16 +34,9 @@ export default function CommentView({ ...props }) {
         <Button onClick={() => handleSubmitComment()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</Button>
         <ScreenshotButton />
       </Footer>
-      <ScreenshotContainer>{screenshot && <img alt="screenshot-alt" src={screenshot.dataUri} />}</ScreenshotContainer>
     </Layout>
   );
 }
-
-const ScreenshotContainer = styled.div`
-  margin: 20px 0;
-  max-height: 300px;
-  overflow-y: scroll;
-`;
 
 const InputStyle = css`
   padding: 14px;

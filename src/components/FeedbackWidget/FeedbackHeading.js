@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import StarRating, { StarRatingLabel } from './components/StarRating';
 import { css } from '@emotion/core';
+import StarRating, { StarRatingLabel } from './components/StarRating';
 
 export default function FeedbackHeading({ isVisible, isStacked }) {
   return (
