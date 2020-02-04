@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Badge from '../../components/dev-hub/badge';
 import { StorybookLayout } from '../../components/dev-hub/layout';
 import { H1, H2, H3, H4, P } from '../../components/dev-hub/text';
 import { colorMap, size } from '../../components/dev-hub/theme';
@@ -29,6 +30,13 @@ export default () => (
       <H3>Heading 3</H3>
       <H4>Heading 4</H4>
       <P>Paragraph</P>
+      <SectionHeader>Content Label</SectionHeader>
+      <Badge>How-To</Badge>
+      <Badge>Quick Start</Badge>
+      <Badge>Article</Badge>
+      <Badge>Event</Badge>
+      <Badge>Community</Badge>
+      <Badge>Deep Dive</Badge>
       <SectionHeader>Colors</SectionHeader>
       {Object.keys(colorMap).map(colorName => (
         <Swatch key={colorName} colorName={colorName} colorValue={colorMap[colorName]}>
