@@ -11,6 +11,7 @@ import { isPreviewMode } from '../utils/is-preview-mode';
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
 const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
+  if (!to) to = '';
   // Assume that external links begin with http:// or https://
   const external = /^http(s)?:\/\//.test(to);
   const anchor = to.startsWith('#');

@@ -48,6 +48,7 @@ import Superscript from './Superscript';
 import Image from './Image';
 import RefRole from './RefRole';
 
+import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
 import RoleDoc from './Roles/Doc';
 import RoleFile from './Roles/File';
@@ -63,6 +64,7 @@ export default class ComponentFactory extends Component {
   constructor() {
     super();
     this.roles = {
+      abbr: RoleAbbr,
       class: RoleClass,
       doc: RoleDoc,
       file: RoleFile,

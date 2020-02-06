@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ComponentFactory from '../ComponentFactory';
 
-const RoleFile = ({
-  nodeData: {
-    label: { value },
-  },
-}) => (
+const RoleFile = ({ nodeData: { children } }) => (
   <code class="file docutils literal">
-    <span class="pre">{value}</span>
+    <span class="pre">
+      {children.map((node, i) => (
+        <ComponentFactory key={i} nodeData={node} />
+      ))}
+    </span>
   </code>
 );
 
 RoleFile.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.shape({
-      value: PropTypes.string.isRequired,
-    }).isRequired,
+    children: PropTypes.array.isRequired,
   }).isRequired,
 };
 

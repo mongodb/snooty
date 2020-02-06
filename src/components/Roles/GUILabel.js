@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ComponentFactory from '../ComponentFactory';
 
-const RoleGUILabel = ({
-  nodeData: {
-    label: { value },
-  },
-}) => <span className="guilabel">{value}</span>;
+const RoleGUILabel = ({ nodeData: { children } }) => (
+  <span className="guilabel">
+    {children.map((node, i) => (
+      <ComponentFactory key={i} nodeData={node} />
+    ))}
+  </span>
+);
 
 RoleGUILabel.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.shape({
-      value: PropTypes.string.isRequired,
-    }).isRequired,
+    children: PropTypes.array.isRequired,
   }).isRequired,
 };
 
