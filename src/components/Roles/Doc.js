@@ -4,13 +4,10 @@ import { formatText } from '../../utils/format-text';
 import { getNestedValue } from '../../utils/get-nested-value';
 import Link from '../Link';
 
-const RoleDoc = ({ nodeData: { label, target }, slugTitleMapping }) => {
-  let labelDisplay = getNestedValue(['value'], label);
-  if (!labelDisplay) {
-    const key = target.startsWith('/') ? target.slice(1) : target;
-    const text = getNestedValue([key], slugTitleMapping);
-    labelDisplay = text ? formatText(slugTitleMapping[key]) : target;
-  }
+const RoleDoc = ({ nodeData: { target }, slugTitleMapping }) => {
+  const key = target.startsWith('/') ? target.slice(1) : target;
+  const text = getNestedValue([key], slugTitleMapping);
+  const labelDisplay = text ? formatText(slugTitleMapping[key]) : target;
 
   return (
     <Link to={target} className="reference internal">

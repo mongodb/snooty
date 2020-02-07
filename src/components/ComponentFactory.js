@@ -55,8 +55,6 @@ import RoleDoc from './Roles/Doc';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleProgram from './Roles/Program';
-import RoleRef from './Roles/Ref';
-import RoleTerm from './Roles/Term';
 
 const IGNORED_NAMES = ['default-domain'];
 const IGNORED_TYPES = ['comment', 'substitution_definition'];
@@ -71,8 +69,6 @@ export default class ComponentFactory extends Component {
       file: RoleFile,
       guilabel: RoleGUILabel,
       program: RoleProgram,
-      ref: RoleRef,
-      term: RoleTerm,
     };
     this.componentMap = {
       admonition: Admonition,

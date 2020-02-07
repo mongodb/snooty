@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getNestedValue } from '../../utils/get-nested-value';
+import ComponentFactory from '../ComponentFactory';
 
-const RoleProgram = ({ nodeData: { label, target } }) => {
-  const labelDisplay = getNestedValue(['value'], label) || target;
-  return <strong className="program">{labelDisplay}</strong>;
+const RoleProgram = ({ nodeData: { children } }) => {
+  return (
+    <strong className="program">
+      {children.map((node, i) => (
+        <ComponentFactory key={i} nodeData={node} />
+      ))}
+    </strong>
+  );
 };
 
 RoleProgram.propTypes = {
   nodeData: PropTypes.shape({
-    label: PropTypes.shape({
-      value: PropTypes.string,
-    }),
-    target: PropTypes.string.isRequired,
+    children: PropTypes.arrayOf(PropTypes.node).isRequired,
   }).isRequired,
 };
 

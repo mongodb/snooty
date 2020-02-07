@@ -14,7 +14,7 @@ const RoleFile = ({ nodeData: { children } }) => (
 
 RoleFile.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
+    children: PropTypes.arrayOf(PropTypes.node).isRequired,
   }).isRequired,
 };
 
