@@ -47,6 +47,7 @@ import Subscript from './Subscript';
 import Superscript from './Superscript';
 import Image from './Image';
 import RefRole from './RefRole';
+import Target from './Target';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -58,7 +59,7 @@ import RoleRef from './Roles/Ref';
 import RoleTerm from './Roles/Term';
 
 const IGNORED_NAMES = ['default-domain'];
-const IGNORED_TYPES = ['comment', 'substitution_definition', 'target'];
+const IGNORED_TYPES = ['comment', 'substitution_definition'];
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -115,6 +116,7 @@ export default class ComponentFactory extends Component {
       superscript: Superscript,
       tabs: Tabs,
       'tabs-pillstrip': TabsPillstrip,
+      target: Target,
       text: Text,
       title_reference: TitleReference,
       topic: Topic,
