@@ -55,7 +55,7 @@ import RoleDoc from './Roles/Doc';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 
-const IGNORED_NAMES = ['default-domain'];
+const IGNORED_NAMES = ['default-domain', 'toctree'];
 const IGNORED_TYPES = ['comment', 'substitution_definition'];
 
 export default class ComponentFactory extends Component {
@@ -70,7 +70,7 @@ export default class ComponentFactory extends Component {
     };
     this.componentMap = {
       admonition: Admonition,
-      block_quote: BlockQuote,
+      blockquote: BlockQuote,
       'card-group': CardGroup,
       class: CSSClass,
       code: Code,

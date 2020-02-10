@@ -4,8 +4,7 @@ import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
 // TODO: Update with correct formatting/class names upon completion of DOCSP-7569
-const RefRole = ({ nodeData, nodeData: { children, domain, fileid, name, target, url }, slug }) => {
-  console.log(nodeData);
+const RefRole = ({ nodeData: { children, domain, fileid, name, target, url }, slug }) => {
   // Render intersphinx target links
   if (url) {
     return (

@@ -6,18 +6,14 @@ include .env.production
 
 .PHONY: stage static
 
-# To stage a specific build, include the commit hash/patch ID as environment variables when staging
+# To stage a specific build, include the commit hash as environment variable when staging
 # 	example: COMMIT_HASH=123456 make stage
 # Here, generate path prefix according to environment variables
 prefix:
-ifdef PATCH_ID
-PREFIX = $(COMMIT_HASH)/$(PATCH_ID)/$(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
-else
 ifdef COMMIT_HASH
 PREFIX = $(COMMIT_HASH)/$(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
 else
 PREFIX = $(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
-endif
 endif
 
 
