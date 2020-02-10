@@ -2,19 +2,13 @@
   "type": "role",
   "position": {
     "start": {
-      "line": 37
-    }
-  },
-  "name": "doc",
-  "label": {
-    "type": "text",
-    "value": "Create an Atlas Account and Cluster",
-    "position": {
-      "start": {
-        "line": 36
+      "line": {
+        "$numberInt": "19"
       }
     }
   },
-  "target": "/cloud/atlas",
+  "domain": "",
+  "name": "doc",
+  "target": "/use-cases/product-catalog",
   "children": []
 }

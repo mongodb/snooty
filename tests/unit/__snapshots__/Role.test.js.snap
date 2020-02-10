@@ -1,66 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly a role "guilabel" 1`] = `
+exports[`correctly renders a "doc" role 1`] = `
+<a
+  class="reference internal"
+  href="/use-cases/product-catalog"
+>
+  Product Catalog
+</a>
+`;
+
+exports[`correctly renders a "file" role 1`] = `
+<code
+  class="file docutils literal"
+>
+  <span
+    class="pre"
+  >
+    examples/treasury_yield/src/main/resources/yield_historical_in.json
+  </span>
+</code>
+`;
+
+exports[`correctly renders a "guilabel" role 1`] = `
 <span
-  className="guilabel"
+  class="guilabel"
 >
   Yes
 </span>
-`;
-
-exports[`renders correctly role "doc" 1`] = `
-<a
-  class="reference internal"
-  href="/cloud/atlas"
->
-  Create an Atlas Account and Cluster
-</a>
-`;
-
-exports[`renders correctly role "doc" when no link title is included 1`] = `
-<a
-  class="reference internal"
-  href="/server/drivers"
->
-  /server/drivers
-</a>
-`;
-
-exports[`renders correctly role "manual" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/introduction"
->
-  The MongoDB Server Manual
-</a>
-`;
-
-exports[`renders correctly role "program" 1`] = `
-<strong
-  className="program"
->
-  mongoimport
-</strong>
-`;
-
-exports[`renders correctly role "ref" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/installation/#mongodb-supported-platforms"
->
-  <span
-    className="xref std std-ref"
-  >
-    Supported Platforms
-  </span>
-</a>
-`;
-
-exports[`renders correctly role "term" 1`] = `
-<a
-  className="reference external"
-  href="https://docs.mongodb.com/manual/reference/glossary/#term-dbpath"
->
-  data directory
-</a>
 `;

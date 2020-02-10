@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 
 const RoleFile = ({ nodeData: { children } }) => (
-  <code class="file docutils literal">
-    <span class="pre">
+  <code className="file docutils literal">
+    <span className="pre">
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}

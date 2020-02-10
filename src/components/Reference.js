@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
-import { getNestedValue } from '../utils/get-nested-value';
 
 const Reference = ({ nodeData }) => {
   return (
