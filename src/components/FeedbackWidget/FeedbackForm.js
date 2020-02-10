@@ -1,17 +1,19 @@
 import React from 'react';
+import Loadable from '@loadable/component';
 
-import RatingView from './views/RatingView';
-import CommentView from './views/CommentView';
-import QualifiersView from './views/QualifiersView';
-import SupportView from './views/SupportView';
-import SubmittedView from './views/SubmittedView';
+import usePageSize from '../../hooks/usePageSize';
+import { useFeedbackState } from './context';
 
 import FeedbackFullScreen from './FeedbackFullScreen';
 import FeedbackCard from './FeedbackCard';
 import FeedbackModal from './FeedbackModal';
 
-import usePageSize from '../../hooks/usePageSize';
-import { useFeedbackState } from './context';
+import RatingView from './views/RatingView';
+import QualifiersView from './views/QualifiersView';
+import SupportView from './views/SupportView';
+import SubmittedView from './views/SubmittedView';
+// import CommentView from './views/CommentView';
+const CommentView = Loadable(() => import('./views/CommentView'));
 
 export function FeedbackContent(props) {
   const { view } = useFeedbackState();

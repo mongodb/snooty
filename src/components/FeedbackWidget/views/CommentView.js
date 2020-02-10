@@ -4,15 +4,15 @@ import styled from '@emotion/styled';
 
 import Button from '@leafygreen-ui/button';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
-
+import useScreenshot from '../hooks/useScreenshot';
 import { useFeedbackState } from '../context';
-import Loadable from '@loadable/component';
-const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
+import ScreenshotButton from '../components/ScreenshotButton';
 
 export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
+  const { screenshot, loading, takeScreenshot } = useScreenshot();
 
   const [comment, setComment] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -32,7 +32,7 @@ export default function CommentView({ ...props }) {
       <EmailInput placeholder="Email Address (optional)" value={email} onChange={e => setEmail(e.target.value)} />
       <Footer>
         <Button onClick={() => handleSubmitComment()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</Button>
-        <ScreenshotButton />
+        <ScreenshotButton screenshot={screenshot} loading={loading} takeScreenshot={takeScreenshot} />
       </Footer>
     </Layout>
   );
