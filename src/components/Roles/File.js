@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
-import { REF_TARGETS } from '../../constants';
 
-const RoleManual = ({ nodeData: { children, target } }) => {
-  return (
-    <a href={`${REF_TARGETS.manual}${target.replace('/manual', '')}`} className="reference external">
+const RoleFile = ({ nodeData: { children } }) => (
+  <code className="file docutils literal">
+    <span className="pre">
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
-    </a>
-  );
-};
+    </span>
+  </code>
+);
 
-RoleManual.propTypes = {
+RoleFile.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.node).isRequired,
   }).isRequired,
 };
 
-export default RoleManual;
+export default RoleFile;

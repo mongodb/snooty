@@ -136,6 +136,7 @@ export default class Guide extends Component {
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
           pillstrips={pillstrips}
+          slugTitleMapping={pageContext.slugTitleMapping}
         />
       );
     });
@@ -187,6 +188,9 @@ Guide.propTypes = {
         children: PropTypes.array,
       }).isRequired,
     }).isRequired,
+    slugTitleMapping: PropTypes.shape({
+      [PropTypes.string]: PropTypes.string,
+    }),
     snootyStitchId: PropTypes.string.isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,

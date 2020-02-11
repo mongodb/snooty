@@ -34,7 +34,12 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody refDocMapping={__refDocMapping} slugTitleMapping={slugTitleMapping} {...rest} />
+                  <DocumentBody
+                    refDocMapping={__refDocMapping}
+                    slug={slug}
+                    slugTitleMapping={slugTitleMapping}
+                    {...rest}
+                  />
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   <Footer />
                 </div>

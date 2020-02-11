@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ComponentFactory from './ComponentFactory';
 import Link from './Link';
-import { getNestedValue } from '../utils/get-nested-value';
 
-const Reference = ({ nodeData }) => (
-  <Link className="reference external" to={nodeData.refuri}>
-    {getNestedValue(['children', 0, 'value'], nodeData)}
-  </Link>
-);
+const Reference = ({ nodeData }) => {
+  return (
+    <Link className="reference external" to={nodeData.refuri}>
+      {nodeData.children.map((element, index) => (
+        <ComponentFactory key={index} nodeData={element} />
+      ))}
+    </Link>
+  );
+};
 
 Reference.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        value: PropTypes.string,
-      })
-    ).isRequired,
+    children: PropTypes.array.isRequired,
     refuri: PropTypes.string.isRequired,
   }).isRequired,
 };
