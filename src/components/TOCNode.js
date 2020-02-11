@@ -25,47 +25,46 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const isSelected = isSelectedTocNode(activeSection, slug);
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current' : ''} ${isSelected ? 'selected-item' : ''}`;
 
+  // Show caret if not on first level of TOC
+  const caretIcon =
+    level !== BASE_NODE_LEVEL ? (
+      <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
+    ) : null;
+
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
     const formattedTitle = formatText(title);
-    if (level === BASE_NODE_LEVEL) {
-      const isDrawer = !!(options && options.drawer);
-      if (isDrawer && children.length > 0) {
-        const _toggleDrawerOnEnter = e => {
-          if (e.key === 'Enter') {
-            toggleDrawer(slug);
-          }
-        };
-        // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
-        return (
-          <a // eslint-disable-line jsx-a11y/anchor-is-valid
-            onClick={() => toggleDrawer(slug)}
-            onKeyDown={_toggleDrawerOnEnter}
-            className={anchorTagClassNames}
-            aria-expanded={hasChildren ? isActive : undefined}
-            role="button"
-            tabIndex="0"
-          >
-            {formattedTitle}
-          </a>
-        );
-      }
+    const isDrawer = !!(options && options.drawer);
+
+    if (isDrawer && children.length > 0) {
+      const _toggleDrawerOnEnter = e => {
+        if (e.key === 'Enter') {
+          toggleDrawer(slug);
+        }
+      };
+      // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
       return (
-        <Link
-          to={target}
-          aria-expanded={hasChildren ? isActive : undefined}
-          className={anchorTagClassNames}
+        <a // eslint-disable-line jsx-a11y/anchor-is-valid
           onClick={() => toggleDrawer(slug)}
+          onKeyDown={_toggleDrawerOnEnter}
+          className={anchorTagClassNames}
+          aria-expanded={hasChildren ? isActive : undefined}
+          role="button"
+          tabIndex="0"
         >
+          {caretIcon}
           {formattedTitle}
-        </Link>
+        </a>
       );
     }
-
-    // In this case, we have a node which should be rendered with the 'expand-icon'
     return (
-      <Link to={target} className={anchorTagClassNames} aria-expanded={hasChildren ? isActive : undefined}>
-        <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
+      <Link
+        to={target}
+        aria-expanded={hasChildren ? isActive : undefined}
+        className={anchorTagClassNames}
+        onClick={() => toggleDrawer(slug)}
+      >
+        {caretIcon}
         {formattedTitle}
       </Link>
     );
