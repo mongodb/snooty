@@ -67,7 +67,7 @@ const VersionDropdown = ({
         title="Select version"
       >
         {prefixVersion(currentBranch)}
-        <span class="caret"></span>
+        <span className="caret"></span>
       </button>
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">

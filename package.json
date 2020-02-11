@@ -36,12 +36,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{json,md,mdx}": [
-      "prettier --write",
+      "npm run format:fix",
+      "npm run lint:fix",
       "git add"
     ]
   },
