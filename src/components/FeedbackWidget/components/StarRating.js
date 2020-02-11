@@ -82,7 +82,8 @@ const widthForSize = size => {
     case 'lg':
       return '140px';
     case '2x':
-      return '200px';
+      return '100%';
+    // return '200px';
     case '3x':
       return '100%';
     default:
@@ -94,9 +95,10 @@ const marginForSize = size => {
     case 'lg':
       return '-24px 0 0px 0';
     case '2x':
-      return '20px 0 24px 0';
+      return '16px 0 32px 0';
+    // return '20px 0 24px 0';
     case '3x':
-      return '20px 0 20px 0';
+      return '32px 0 20px 0';
     default:
       return '20px 0 20px 0';
   }
@@ -114,6 +116,7 @@ const Layout = styled.div(
 const StarContainer = styled.div`
   padding-right: auto;
   padding-left: auto;
+  /* padding: 0 10.5px 0 10.5px; */
 `;
 
 const StarIcon = ({ size, onMouseEnter, isHighlighted, ...props }) => (

@@ -25,5 +25,8 @@ const Modal = styled(LeafygreenModal)`
   padding-bottom: 0;
   > div {
     padding-top: 200px;
+    > div {
+      padding-bottom: 0px;
+    }
   }
 `;

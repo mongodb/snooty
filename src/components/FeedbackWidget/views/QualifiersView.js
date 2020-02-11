@@ -30,12 +30,13 @@ export default function QualifierView({ ...props }) {
 }
 
 const Qualifiers = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   text-align: left;
 `;
 const QualifierLayout = styled.div`
-  padding: 10px 0;
+  margin: 0 0 16px 0;
 `;
 function Qualifier({ id, text = '' }) {
   const { setQualifier } = useFeedbackState();

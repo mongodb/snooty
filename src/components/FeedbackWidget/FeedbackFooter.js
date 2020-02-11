@@ -27,6 +27,6 @@ const StarRatingContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 420px;
+  width: 220px;
   max-height: 80px;
 `;

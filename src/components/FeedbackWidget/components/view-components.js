@@ -5,11 +5,17 @@ const NEGATIVE_RATING_HEADING = "We're sorry to hear that.";
 const NEGATIVE_RATING_SUBHEADING = 'What seems to be the issue?';
 const POSITIVE_RATING_HEADING = "We're glad to hear that!";
 const POSITIVE_RATING_SUBHEADING = 'Tell us more.';
-export const RatingHeader = ({ isPositive, noSubheading = false }) => {
+export const RatingHeader = ({ isPositive, headingText, subheadingText }) => {
+  const heading = headingText ? headingText : isPositive ? POSITIVE_RATING_HEADING : NEGATIVE_RATING_HEADING;
+  const subheading = subheadingText
+    ? subheadingText
+    : isPositive
+    ? POSITIVE_RATING_SUBHEADING
+    : NEGATIVE_RATING_SUBHEADING;
   return (
     <>
-      <Heading>{isPositive ? POSITIVE_RATING_HEADING : NEGATIVE_RATING_HEADING}</Heading>
-      {!noSubheading && <Subheading>{isPositive ? POSITIVE_RATING_SUBHEADING : NEGATIVE_RATING_SUBHEADING}</Subheading>}
+      <Heading>{heading}</Heading>
+      <Subheading>{subheading}</Subheading>
     </>
   );
 };
@@ -25,24 +31,26 @@ export const Heading = styled.h2`
   margin-bottom: 16px;
   width: 100%;
   text-align: left;
-  font-weight: normal;
-  font-size: 1.85em;
+  font-weight: regular;
+  font-size: 16px;
 `;
 
-export const Subheading = styled.h3`
+export const Subheading = styled.p`
   margin-top: 0;
   margin-bottom: 16px;
   width: 100%;
   text-align: left;
-  font-weight: normal;
-  font-size: 1.25em;
+  font-weight: regular;
+  font-size: 14px;
 `;
 
 export const Footer = styled.div`
   margin-top: 0;
+  margin-bottom: 24px;
   width: 100%;
   font-weight: normal;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  align-items: center;
 `;

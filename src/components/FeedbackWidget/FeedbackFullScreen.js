@@ -18,7 +18,7 @@ export default function FeedbackFullScreen({ isOpen, children }) {
           <HeaderControls>
             <CloseButton size="xlarge" onClick={abandon} />
           </HeaderControls>
-          {feedback?.rating && (
+          {feedback && feedback.rating && (
             <HeaderContent>
               <StarRating size="lg" />
               <StarRatingLabel>{`${RATING_TOOLTIPS[feedback.rating]} helpful`}</StarRatingLabel>
@@ -30,6 +30,7 @@ export default function FeedbackFullScreen({ isOpen, children }) {
     )
   );
 }
+
 const FullScreen = styled.div`
   position: fixed;
   top: 0;
@@ -62,8 +63,7 @@ const HeaderContent = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  min-width: 375px;
+  width: 300px;
   margin: 0 auto;
   padding: 0 24px;
 `;

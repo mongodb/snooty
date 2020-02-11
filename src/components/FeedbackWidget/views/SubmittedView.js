@@ -11,10 +11,10 @@ export default function SubmittedView(props) {
     <Layout>
       <Heading>We appreciate your feedback.</Heading>
       <Subheading>We're working hard to improve the MongoDB Documentation.</Subheading>
-      <p>
+      <Subheading>
         <span>For additional support, explore the </span>
         <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB discussion forum.</a>
-      </p>
+      </Subheading>
       {isSmallScreen && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
     </Layout>
   );

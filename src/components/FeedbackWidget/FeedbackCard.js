@@ -28,13 +28,15 @@ const Floating = styled.div`
   right: 80px;
 `;
 const Card = styled(LeafygreenCard)`
-  width: 420px;
+  /* width: 420px; */
+  width: 300px;
 `;
 const CardHeader = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 4px;
+  margin-top: 10px;
+  margin-right: 10px;
 `;
 const Content = styled.div`
-  padding: 0 28px 24px 28px;
+  margin: 0px 24px;
 `;

@@ -6,7 +6,7 @@ export default function RatingView(props) {
   return (
     <Layout>
       <Heading>How helpful was this page?</Heading>
-      <StarRating size="3x" />
+      <StarRating size="2x" />
     </Layout>
   );
 }

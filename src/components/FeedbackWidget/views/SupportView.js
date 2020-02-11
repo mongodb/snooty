@@ -9,12 +9,9 @@ export default function CommentView(props) {
 
   return (
     <Layout>
-      <RatingHeader isPositive={false} noSubheading />
-      <Resource>Create a case on the Support Portal</Resource>
-      <Resource>MongoDB-User Discussion Forum</Resource>
-      <Resource>Stack Overflow</Resource>
-      <Resource>DBA StackExchange</Resource>
-      <Resource>ServerFault</Resource>
+      <RatingHeader isPositive={false} subheadingText={'Check out the following resources for support.'} />
+      <Resource link="https://support.mongodb.com/">Create a case on the Support Portal</Resource>
+      <Resource link="https://community.mongodb.com/">Visit MongoDB Community</Resource>
       <Footer>
         <Button onClick={() => submitSupport()}>Send</Button>
       </Footer>

@@ -1,9 +1,14 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
 import Tooltip from './LeafygreenTooltip';
-
+import { uiColors } from '@leafygreen-ui/palette';
+import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
+
+const greenFillStyle = css`
+  color: ${uiColors.green.base};
+`;
 
 export default function ScreenshotButton({ takeScreenshot, loading, screenshot, size = 'default', ...props }) {
   const [isHovered, setIsHovered] = React.useState(false);
@@ -18,7 +23,7 @@ export default function ScreenshotButton({ takeScreenshot, loading, screenshot, 
         open={isHovered}
         trigger={
           <Button variant="default" label={label} onClick={takeScreenshot} {...props}>
-            {screenshot ? <CheckIcon /> : loading ? <SpinnerIcon /> : <CameraIcon />}
+            {screenshot ? <CheckIcon css={greenFillStyle} /> : loading ? <SpinnerIcon /> : <CameraIcon />}
           </Button>
         }
       >

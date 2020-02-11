@@ -7,6 +7,7 @@ import { Layout, RatingHeader, Footer } from '../components/view-components';
 import useScreenshot from '../hooks/useScreenshot';
 import { useFeedbackState } from '../context';
 import ScreenshotButton from '../components/ScreenshotButton';
+import { uiColors } from '@leafygreen-ui/palette';
 
 export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment } = useFeedbackState();
@@ -32,6 +33,7 @@ export default function CommentView({ ...props }) {
       <EmailInput placeholder="Email Address (optional)" value={email} onChange={e => setEmail(e.target.value)} />
       <Footer>
         <Button onClick={() => handleSubmitComment()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</Button>
+        {screenshot && <span>Screenshot attached</span>}
         <ScreenshotButton screenshot={screenshot} loading={loading} takeScreenshot={takeScreenshot} />
       </Footer>
     </Layout>
@@ -40,8 +42,8 @@ export default function CommentView({ ...props }) {
 
 const InputStyle = css`
   padding: 14px;
-  border: 1px solid gray;
-  border-radius: 4px;
+  border: 0.5px solid ${uiColors.gray.base};
+  border-radius: 2px;
   flex-grow: 1;
   line-height: 24px;
   font-size: 16px;
