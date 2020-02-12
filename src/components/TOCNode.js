@@ -19,11 +19,12 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const target = slug || url;
   const hasChildren = !!children.length;
   const isExternalLink = !!url;
-  const { activeSection, toggleDrawer } = useContext(TOCContext);
-  const isActive = isActiveTocNode(activeSection, slug, children);
+  const { activeDrawer, activePage, toggleDrawer, togglePage } = useContext(TOCContext);
+  const isActive = isActiveTocNode(activePage, slug, children) || activeDrawer === slug;
   const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
-  const isSelected = isSelectedTocNode(activeSection, slug);
+  const isSelected = isSelectedTocNode(activePage, slug);
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current' : ''} ${isSelected ? 'selected-item' : ''}`;
+  const isDrawer = !!(options && options.drawer);
 
   // Show caret if not on first level of TOC
   const caretIcon =
@@ -34,7 +35,6 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
     const formattedTitle = formatText(title);
-    const isDrawer = !!(options && options.drawer);
 
     if (isDrawer && children.length > 0) {
       const _toggleDrawerOnEnter = e => {
@@ -62,7 +62,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
         to={target}
         aria-expanded={hasChildren ? isActive : undefined}
         className={anchorTagClassNames}
-        onClick={() => toggleDrawer(slug)}
+        onClick={() => togglePage(slug)}
       >
         {caretIcon}
         {formattedTitle}
@@ -76,9 +76,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
         <ul>
           {children.map(c => {
             const key = c.slug || c.url;
-            return (
-              <TOCNode activeSection={activeSection} node={c} level={level + 1} toggleDrawer={toggleDrawer} key={key} />
-            );
+            return <TOCNode node={c} level={level + 1} key={key} />;
           })}
         </ul>
       ) : null}
