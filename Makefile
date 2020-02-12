@@ -31,5 +31,6 @@ static:
 	-rm -r ./docs-tools/
 	git submodule add --force https://github.com/mongodb/docs-tools
 	-mkdir -p ./static/images
-	mv ./docs-tools/themes/mongodb/static ./static/docs-tools/
-	mv ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/docs-tools/images/bg-accent.svg
+	-mkdir -p ./static/docs-tools
+	cp -a ./docs-tools/themes/mongodb/static/. ./static/docs-tools/
+	cp ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/images/
