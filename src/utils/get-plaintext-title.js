@@ -5,14 +5,14 @@
 
 export const getPlaintextTitle = nodeArray => {
   function extractText(title, node) {
-    if (node.type == 'text') {
+    if (node.type === 'text') {
       return title + node.value;
     }
     /* Else we have a ComponentFactory function type */
-    if (node.props.nodeData.type == 'text') {
+    if (node.props.nodeData.type === 'text') {
       return title + node.props.nodeData.value;
     }
-    if (node.props.nodeData.type == 'literal') {
+    if (node.props.nodeData.type === 'literal') {
       let subtitle = node.props.nodeData.children.reduce(extractText, '');
       return title + subtitle;
     }
