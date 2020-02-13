@@ -12,10 +12,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build project
+      - name: Build package
+        id: build_package
         run: |
           npm install --production
-          zip -9r snooty.zip . -x "*.git*" "*.cache*" public/\* docs-tools/\*
+          make static
+          make package-preview
       - name: Get environment
         id: environment
         run: |
@@ -37,6 +39,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./snooty.zip
-          asset_name: snooty.zip
+          asset_path: ./${{ steps.build_package.outputs.package_filename }}
+          asset_name: ${{ steps.build_package.outputs.package_filename }}
           asset_content_type: application/zip
