@@ -20,7 +20,7 @@ PREFIX = $(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
 endif
 
 package-preview:
-	zip -9r ${PACKAGE_NAME} src node_modules preview preview-start.js static webpack.config.js index.html package.json package-lock.json
+	zip -9r --symlinks ${PACKAGE_NAME} src node_modules preview preview-start.js static webpack.config.js index.html package.json package-lock.json
 	echo "::set-output name=package_filename::${PACKAGE_NAME}"
 
 stage: prefix
