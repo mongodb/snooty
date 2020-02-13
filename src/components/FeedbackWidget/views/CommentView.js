@@ -8,6 +8,16 @@ import useScreenshot from '../hooks/useScreenshot';
 import { useFeedbackState } from '../context';
 import ScreenshotButton from '../components/ScreenshotButton';
 import { uiColors } from '@leafygreen-ui/palette';
+import validateEmail from '../../../utils/validate-email';
+
+function useValidation(inputValue, validator) {
+  const [isValid, setIsValid] = React.useState(null);
+  React.useEffect(() => {
+    setIsValid(validator(inputValue));
+  }, [inputValue, validator]);
+
+  return isValid;
+}
 
 export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment } = useFeedbackState();
@@ -17,22 +27,45 @@ export default function CommentView({ ...props }) {
 
   const [comment, setComment] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const handleSubmitComment = () => {
-    submitComment({ comment, email });
+  const [hasEmailError, setHasEmailError] = React.useState(false);
+  const isValidEmail = useValidation(email, validateEmail);
+
+  const handleSubmit = () => {
+    if (isValidEmail) {
+      submitComment({ comment, email });
+    } else {
+      setHasEmailError(true);
+    }
   };
 
   return (
     <Layout>
       <RatingHeader isPositive={isPositiveRating} />
+      <InputLabel htmlFor="feedback-comment">Describe your experience.</InputLabel>
       <CommentTextArea
+        id="feedback-comment"
         rows={8}
         placeholder="Describe your experience."
         value={comment}
         onChange={e => setComment(e.target.value)}
       />
-      <EmailInput placeholder="Email Address (optional)" value={email} onChange={e => setEmail(e.target.value)} />
+      <InputLabel htmlFor="feedback-email">Email Address (optional)</InputLabel>
+      <EmailInput
+        id="feedback-email"
+        placeholder="someone@example.com"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      {hasEmailError && <InputErrorLabel htmlFor="feedback-email">Please enter a valid email address.</InputErrorLabel>}
+      {/* <CommentTextArea
+        rows={8}
+        placeholder="Describe your experience."
+        value={comment}
+        onChange={e => setComment(e.target.value)}
+      />
+      <EmailInput placeholder="Email Address (optional)" value={email} onChange={e => setEmail(e.target.value)} /> */}
       <Footer>
-        <Button onClick={() => handleSubmitComment()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</Button>
+        <Button onClick={() => handleSubmit()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</Button>
         {screenshot && <span>Screenshot attached</span>}
         <ScreenshotButton screenshot={screenshot} loading={loading} takeScreenshot={takeScreenshot} />
       </Footer>
@@ -61,4 +94,13 @@ const CommentTextArea = styled.textarea`
 `;
 const EmailInput = styled.input`
   ${InputStyle}
+`;
+const InputLabel = styled.label`
+  width: 100%;
+  text-align: left;
+`;
+const InputErrorLabel = styled(InputLabel)`
+  color: red;
+  margin-top: -16px;
+  margin-bottom: 16px;
 `;
