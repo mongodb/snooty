@@ -143,12 +143,11 @@ export default class DefaultLayout extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, pageContext } = this.props;
     const { pillstrips } = this.state;
-
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
-        <SiteMetadata />
+        <SiteMetadata title={pageContext.metadata.title} />
         {React.cloneElement(children, {
           pillstrips,
           addPillstrip: this.addPillstrip,

@@ -7,6 +7,9 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
 import DocumentBody from '../components/DocumentBody';
+import { Helmet } from 'react-helmet';
+import { getPageTitle } from '../utils/get-page-title';
+import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 
 const Document = props => {
   const {
@@ -18,8 +21,14 @@ const Document = props => {
     ...rest
   } = props;
 
+  const textNodes = getPageTitle(props.pageContext.slug, props.pageContext.metadata.slugToTitle);
+  const title = getPlaintextTitle(textNodes);
+
   return (
     <React.Fragment>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <Navbar />
       <div className="content">
         <div id="left-column">
