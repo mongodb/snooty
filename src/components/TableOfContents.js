@@ -13,23 +13,14 @@ const TableOfContents = ({ toctreeData: { children } }) => {
   if (isBrowser()) {
     currentPage = window.location.pathname;
   }
-  const [activeDrawer, setActiveDrawer] = useState(null);
+
   const [activePage, setActivePage] = useState(currentPage);
-
-  const toggleDrawer = newSlug => {
-    if (activeDrawer === newSlug) {
-      setActiveDrawer(null);
-    } else {
-      setActiveDrawer(newSlug);
-    }
-  };
-
   const togglePage = newSlug => {
     setActivePage(newSlug);
   };
 
   return (
-    <TOCContext.Provider value={{ activeDrawer, activePage, toggleDrawer, togglePage }}>
+    <TOCContext.Provider value={{ activePage, togglePage }}>
       <ul className="current">
         {children.map(c => {
           const key = c.slug || c.url;

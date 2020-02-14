@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from './Link';
 import { formatText } from '../utils/format-text';
@@ -19,12 +19,14 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const target = slug || url;
   const hasChildren = !!children.length;
   const isExternalLink = !!url;
-  const { activeDrawer, activePage, toggleDrawer, togglePage } = useContext(TOCContext);
-  const isActive = isActiveTocNode(activePage, slug, children) || activeDrawer === slug;
+  const { activePage, togglePage } = useContext(TOCContext);
+  const isActive = isActiveTocNode(activePage, slug, children);
   const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
   const isSelected = isSelectedTocNode(activePage, slug);
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current' : ''} ${isSelected ? 'selected-item' : ''}`;
   const isDrawer = !!(options && options.drawer);
+
+  const [isOpen, setIsOpen] = useState(isActive);
 
   // Show caret if not on first level of TOC
   const caretIcon =
@@ -39,13 +41,15 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
     if (isDrawer && children.length > 0) {
       const _toggleDrawerOnEnter = e => {
         if (e.key === 'Enter') {
-          toggleDrawer(slug);
+          setIsOpen(!isOpen);
         }
       };
       // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
       return (
         <a // eslint-disable-line jsx-a11y/anchor-is-valid
-          onClick={() => toggleDrawer(slug)}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
           onKeyDown={_toggleDrawerOnEnter}
           className={anchorTagClassNames}
           aria-expanded={hasChildren ? isActive : undefined}
@@ -72,7 +76,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   return (
     <li className={toctreeSectionClasses}>
       <NodeLink />
-      {isActive ? (
+      {isOpen ? (
         <ul>
           {children.map(c => {
             const key = c.slug || c.url;
