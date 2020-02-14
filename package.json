@@ -38,7 +38,7 @@
     "test:unit": "jest unit",
     "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test:unit",
     "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md",
-    "postversion": "git push origin v$npm_package_version"
+    "postversion": "git push origin v$npm_package_version && git push origin master"
   },
   "lint-staged": {
     "*.js": [
