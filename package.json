@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
+    "build:prod": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
@@ -31,6 +32,7 @@
     "prettier": "prettier \"**/*.{js,jsx,json,md}\"",
     "preview": "webpack-dev-server --open --config ./webpack.config.js --env.PREVIEW_MODE='cli'",
     "serve": "gatsby serve --prefix-paths",
+    "serve:prod": "gatsby serve",
     "test": "jest",
     "test:regression": "jest regression",
     "test:unit": "jest unit",
