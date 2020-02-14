@@ -7,6 +7,8 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
 import DocumentBody from '../components/DocumentBody';
+import { Helmet } from 'react-helmet';
+import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 
 const Document = props => {
   const {
@@ -18,8 +20,13 @@ const Document = props => {
     ...rest
   } = props;
 
+  const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
+
   return (
     <React.Fragment>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <Navbar />
       <div className="content">
         <div id="left-column">
