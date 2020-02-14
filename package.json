@@ -1,10 +1,10 @@
 {
   "name": "snooty",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "repository": "github:mongodb/snooty",
   "devDependencies": {
+    "auto-changelog": "^1.16.2",
     "babel-jest": "^24.9.0",
-    "babel-loader": "^8.0.6",
     "babel-preset-gatsby": "^0.2.23",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
@@ -21,8 +21,10 @@
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
+    "build:prod": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
+    "ensure-master": "node scripts/ensure-master.js",
     "format": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ignore-path .gitignore --ignore-path .prettierignore --ignore-pattern 'docs-tools/*' --ignore-pattern 'preview/*' --ext .js,.jsx .",
@@ -30,9 +32,13 @@
     "prettier": "prettier \"**/*.{js,jsx,json,md}\"",
     "preview": "webpack-dev-server --open --config ./webpack.config.js --env.PREVIEW_MODE='cli'",
     "serve": "gatsby serve --prefix-paths",
+    "serve:prod": "gatsby serve",
     "test": "jest",
     "test:regression": "jest regression",
-    "test:unit": "jest unit"
+    "test:unit": "jest unit",
+    "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test:unit",
+    "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md",
+    "postversion": "git push origin v$npm_package_version && git push origin master"
   },
   "lint-staged": {
     "*.js": [
@@ -42,6 +48,7 @@
     ]
   },
   "dependencies": {
+    "babel-loader": "^8.0.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
