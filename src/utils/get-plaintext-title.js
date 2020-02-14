@@ -7,8 +7,7 @@ export const getPlaintextTitle = nodeArray => {
   const extractText = (title, node) => {
     if (node.type === 'text') {
       return title + node.value;
-    }
-    if (node.type === 'literal') {
+    } else if (node.children) {
       return title + node.children.reduce(extractText, '');
     }
   };
