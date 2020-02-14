@@ -34,7 +34,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       ) : (
         <link rel="stylesheet" href={withPrefix('docs-tools/mongodb-docs.css')} type="text/css" />
       )}
-      <link rel="stylesheet" href={withPrefix('docs-tools/css/navbar.min.css')} type="text/css" />
+      <link rel="stylesheet" href={withPrefix('docs-tools/navbar.min.css')} type="text/css" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
