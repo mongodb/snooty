@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
+    "build:prod": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
@@ -31,12 +32,13 @@
     "prettier": "prettier \"**/*.{js,jsx,json,md}\"",
     "preview": "webpack-dev-server --open --config ./webpack.config.js --env.PREVIEW_MODE='cli'",
     "serve": "gatsby serve --prefix-paths",
+    "serve:prod": "gatsby serve",
     "test": "jest",
     "test:regression": "jest regression",
     "test:unit": "jest unit",
     "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test:unit",
     "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md",
-    "postversion": "git push origin v$npm_package_version"
+    "postversion": "git push origin v$npm_package_version && git push origin master"
   },
   "lint-staged": {
     "*.js": [
