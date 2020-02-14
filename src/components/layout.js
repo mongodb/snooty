@@ -145,9 +145,10 @@ export default class DefaultLayout extends Component {
   render() {
     const { children, pageContext } = this.props;
     const { pillstrips } = this.state;
+    const title = getNestedValue(['metadata', 'title'], pageContext) || '';
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
-        <SiteMetadata title={pageContext.metadata.title} />
+        <SiteMetadata title={title} />
         {React.cloneElement(children, {
           pillstrips,
           addPillstrip: this.addPillstrip,
@@ -166,6 +167,9 @@ DefaultLayout.propTypes = {
       ast: PropTypes.shape({
         children: PropTypes.arrayOf(PropTypes.object),
       }).isRequired,
+    }).isRequired,
+    metadata: PropTypes.shape({
+      title: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

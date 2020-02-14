@@ -8,7 +8,6 @@ import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
 import DocumentBody from '../components/DocumentBody';
 import { Helmet } from 'react-helmet';
-import { getPageTitle } from '../utils/get-page-title';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 
 const Document = props => {
@@ -21,8 +20,7 @@ const Document = props => {
     ...rest
   } = props;
 
-  const textNodes = getPageTitle(props.pageContext.slug, props.pageContext.metadata.slugToTitle);
-  const title = getPlaintextTitle(textNodes);
+  const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
 
   return (
     <React.Fragment>
