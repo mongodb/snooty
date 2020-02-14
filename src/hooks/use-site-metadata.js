@@ -9,7 +9,6 @@ export const useSiteMetadata = () => {
             parserBranch
             project
             snootyBranch
-            title
             user
           }
         }

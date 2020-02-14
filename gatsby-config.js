@@ -20,6 +20,5 @@ module.exports = {
   plugins: ['gatsby-plugin-react-helmet'],
   siteMetadata: {
     ...metadata,
-    title: 'MongoDB Guides',
   },
 };
