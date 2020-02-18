@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AnonymousCredential, Stitch } from 'mongodb-stitch-browser-sdk';
 import { isBrowser } from '../../../utils/is-browser';
+import { sendAnalytics } from '../../../utils/segment';
 import FreeformQuestion from './FreeformQuestion';
 import InputField from './InputField';
 import MainWidget from './MainWidget';
@@ -49,24 +50,6 @@ class Deluge extends Component {
     }
   };
 
-  // TODO: remove Segment binding in Deluge and abstract analytics calls to a generic utility for encapsulation
-  sendAnalytics = (eventName, voteObj) => {
-    const eventObj = voteObj;
-    try {
-      const user = window.analytics.user();
-      const segmentUID = user.id();
-      if (segmentUID) {
-        eventObj.segmentUID = segmentUID.toString();
-      } else {
-        eventObj.segmentAnonymousID = user.anonymousId().toString();
-      }
-      window.analytics.track(eventName, eventObj);
-    } catch (err) {
-      console.error(err);
-    }
-    return eventObj;
-  };
-
   onSubmitVote = vote => {
     this.sendVote(vote)
       .then(() => {
@@ -83,7 +66,7 @@ class Deluge extends Component {
     const { path, project } = this.props;
     const { interactionId } = this.state;
 
-    const segmentEvent = this.sendAnalytics('Vote Submitted', {
+    const segmentEvent = sendAnalytics('Vote Submitted', {
       interactionId,
       useful: vote,
     });
@@ -131,7 +114,7 @@ class Deluge extends Component {
   sendFeedback = (vote, fields) => {
     const { interactionId } = this.state;
 
-    this.sendAnalytics('Feedback Submitted', {
+    sendAnalytics('Feedback Submitted', {
       interactionId,
       useful: vote,
       ...fields,
