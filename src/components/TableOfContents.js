@@ -13,7 +13,6 @@ const TableOfContents = ({ toctreeData: { children } }) => {
   if (isBrowser()) {
     currentPage = window.location.pathname;
   }
-
   const [activeSection, setActiveSection] = useState(currentPage);
 
   return (

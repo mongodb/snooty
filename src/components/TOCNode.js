@@ -31,7 +31,10 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   // Show caret if not on first level of TOC
   const caretIcon =
     level !== BASE_NODE_LEVEL ? (
-      <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
+      <span
+        className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'}
+        style={{ WebkitTransform: isOpen ? 'rotate(135deg)' : null, transform: isOpen ? 'rotate(135deg)' : null }}
+      />
     ) : null;
 
   const NodeLink = () => {
