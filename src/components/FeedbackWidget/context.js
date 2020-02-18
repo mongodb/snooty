@@ -19,6 +19,7 @@ export function FeedbackProvider({ page, ...props }) {
   const [view, setView] = React.useState('waiting');
   const user = useStitchUser();
 
+  // Create a new feedback document
   async function initializeFeedback(initialView = 'rating') {
     const segment = getSegmentUserId();
     const newFeedback = await createNewFeedback({
@@ -41,19 +42,25 @@ export function FeedbackProvider({ page, ...props }) {
     return newFeedback;
   }
 
+  // Sets the user's star rating for the page
   async function setRating(ratingValue) {
-    let feedback_id;
-    if (!feedback) {
-      feedback_id = (await initializeFeedback('waiting'))._id;
-    }
+    // Once a user has set a rating, they cannot change it unless they
+    // abandon or submit the current feedback.
     if (feedback && feedback.rating) return;
-    // Must be in range [1-5]
+    // Users on small screens start giving feedback by clicking a star
+    // rating instead of the feedback tab. In this case, we need to
+    // initialize a new feedback document before we set the rating.
+    const feedback_id = feedback ? feedback._id : (await initializeFeedback('waiting'))._id;
+    // The star rating must be in range [1-5]
     if (typeof ratingValue !== 'number') {
       throw new Error('Rating value must be a number.');
     }
     if (ratingValue < 1 || ratingValue > 5) {
       throw new Error('Rating value must be between 1 and 5, inclusive.');
     }
+    // Update the feedback with the selected rating and then show the
+    // user the relevant qualifier checkboxes. The qualifiers depend on
+    // the rating so we need to await them from the server.
     const updatedFeedback = await updateFeedback({
       feedback_id: feedback ? feedback._id : feedback_id,
       rating: ratingValue,
@@ -62,6 +69,7 @@ export function FeedbackProvider({ page, ...props }) {
     setView('qualifiers');
   }
 
+  // Sets the value of a single qualifier checkbox
   async function setQualifier(id, value) {
     if (!feedback) return;
     if (typeof id !== 'string') {
@@ -70,7 +78,6 @@ export function FeedbackProvider({ page, ...props }) {
     if (typeof value !== 'boolean') {
       throw new Error('value must be a boolean.');
     }
-
     const updatedFeedback = await updateFeedback({
       feedback_id: feedback._id,
       qualifiers: updateQualifier(feedback.qualifiers, id, value),
@@ -78,13 +85,16 @@ export function FeedbackProvider({ page, ...props }) {
     setFeedback(updatedFeedback);
   }
 
+  // Once a user has selected qualifiers, show them the comment/email input boxes.
   function submitQualifiers() {
     if (!feedback) return;
+    // The widget flow changes if the user selected the "need support" qualifier
     const selectedSupportQualifier = feedback.qualifiers.find(q => q.id === 'support' && q.value === true);
     setIsSupportRequest(Boolean(selectedSupportQualifier));
     setView('comment');
   }
 
+  // Upload a screenshot to S3 and attach it to the feedback
   async function submitScreenshot({ dataUri, viewport }) {
     if (!feedback) return;
     const updatedFeedback = await addAttachment({
@@ -94,32 +104,41 @@ export function FeedbackProvider({ page, ...props }) {
     setFeedback(updatedFeedback);
   }
 
+  // Submit the feedback and direct the user to the most appropriate "next steps" screen.
   async function submitComment({ comment = '', email = '' }) {
     if (!feedback) return;
+    // Update the document with the user's comment and email (if provided)
     await updateFeedback({
       feedback_id: feedback._id,
       comment,
       user: { email },
     });
+    // Submit the full feedback document
     const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
+    setFeedback(submittedFeedback);
+    // Route the user to their "next steps"
     if (isSupportRequest) {
-      setFeedback(submittedFeedback);
       setView('support');
     } else {
       setView('submitted');
     }
-    return submittedFeedback;
   }
 
+  // Show the user a thank you screen after they've seen support links
   async function submitSupport() {
     if (!feedback) return;
     setView('submitted');
   }
 
+  // Stop giving feedback (if in progress) and reset the widget to the
+  // initial state.
   async function abandon() {
     if (feedback) {
+      // We hold on to abandoned feedback in the database, so wait until
+      // we've marked the document as abandoned
       await abandonFeedback({ feedback_id: feedback._id });
     }
+    // Reset to the initial state
     setView('waiting');
     setFeedback(null);
   }
@@ -144,8 +163,8 @@ export function FeedbackProvider({ page, ...props }) {
 function updateQualifier(qualifiers, id, value) {
   return R.adjust(
     qualifiers.findIndex(R.propEq('id', id)), // Find the qualifier by id
-    q => ({ ...q, value }), // Update the value
-    qualifiers // Adjust this array of qualifiers
+    q => ({ ...q, value }), // ... and then update the value
+    qualifiers // ... in the provided array of qualifiers
   );
 }
 
