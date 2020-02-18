@@ -49,8 +49,9 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       };
       // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
       return (
-        <a // eslint-disable-line jsx-a11y/anchor-is-valid
-          onClick={() => {
+        <Link // eslint-disable-line jsx-a11y/anchor-is-valid
+          onClick={e => {
+            e.preventDefault();
             setIsOpen(!isOpen);
           }}
           onKeyDown={_toggleDrawerOnEnter}
@@ -58,10 +59,11 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
           aria-expanded={hasChildren ? isActive : undefined}
           role="button"
           tabIndex="0"
+          href={target}
         >
           {caretIcon}
           {formattedTitle}
-        </a>
+        </Link>
       );
     }
     return (
