@@ -19,10 +19,10 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const target = slug || url;
   const hasChildren = !!children.length;
   const isExternalLink = !!url;
-  const { activePage, togglePage } = useContext(TOCContext);
-  const isActive = isActiveTocNode(activePage, slug, children);
+  const { activeSection, setActiveSection } = useContext(TOCContext);
+  const isActive = isActiveTocNode(activeSection, slug, children);
   const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
-  const isSelected = isSelectedTocNode(activePage, slug);
+  const isSelected = isSelectedTocNode(activeSection, slug);
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current' : ''} ${isSelected ? 'selected-item' : ''}`;
   const isDrawer = !!(options && options.drawer);
 
@@ -66,7 +66,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
         to={target}
         aria-expanded={hasChildren ? isActive : undefined}
         className={anchorTagClassNames}
-        onClick={() => togglePage(slug)}
+        onClick={() => setActiveSection(slug)}
       >
         {caretIcon}
         {formattedTitle}
