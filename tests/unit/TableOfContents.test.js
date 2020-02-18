@@ -98,7 +98,7 @@ describe('Table of Contents testing', () => {
           .find('.reference');
         otherDrawer.simulate('click');
         const numPlatformNodes = mockTocData.children[2].children.length;
-        expect(testComponent.find('.toctree-l2')).toHaveLength(numPlatformNodes);
+        expect(testComponent.find('.toctree-l2')).toHaveLength(numUseCasesNodes + numPlatformNodes);
       });
     });
   });
