@@ -63,7 +63,7 @@ const HeaderContent = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 380px;
   margin: 0 auto;
   padding: 0 24px;
 `;

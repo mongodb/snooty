@@ -25,11 +25,11 @@ export default function FeedbackCard({ isOpen, children }) {
 const Floating = styled.div`
   position: fixed;
   top: 256px;
-  right: 80px;
+  right: 40px;
 `;
 const Card = styled(LeafygreenCard)`
   /* width: 420px; */
-  width: 300px;
+  width: 380px;
 `;
 const CardHeader = styled.div`
   display: flex;
