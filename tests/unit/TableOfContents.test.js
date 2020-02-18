@@ -85,9 +85,8 @@ describe('Table of Contents testing', () => {
         const drawer = testComponent
           .find('.toctree-l1')
           .last()
-          .find('.reference');
-        // Drawers should not redirect to a page, so href should be undefined
-        expect(drawer.prop('href')).toBe(undefined);
+          .find('.reference')
+          .first();
         drawer.simulate('click');
         const numUseCasesNodes = mockTocData.children[3].children.length;
         expect(testComponent.find('.toctree-l2')).toHaveLength(numUseCasesNodes);
@@ -95,7 +94,8 @@ describe('Table of Contents testing', () => {
         const otherDrawer = testComponent
           .find('.toctree-l1')
           .at(2)
-          .find('.reference');
+          .find('.reference')
+          .first();
         otherDrawer.simulate('click');
         const numPlatformNodes = mockTocData.children[2].children.length;
         expect(testComponent.find('.toctree-l2')).toHaveLength(numUseCasesNodes + numPlatformNodes);
