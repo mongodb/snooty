@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from './Link';
 import { formatText } from '../utils/format-text';
@@ -19,53 +19,61 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const target = slug || url;
   const hasChildren = !!children.length;
   const isExternalLink = !!url;
-  const { activeSection, toggleDrawer } = useContext(TOCContext);
+  const { activeSection, setActiveSection } = useContext(TOCContext);
   const isActive = isActiveTocNode(activeSection, slug, children);
   const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
   const isSelected = isSelectedTocNode(activeSection, slug);
   const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current' : ''} ${isSelected ? 'selected-item' : ''}`;
+  const isDrawer = !!(options && options.drawer);
+
+  const [isOpen, setIsOpen] = useState(isActive);
+
+  // Show caret if not on first level of TOC
+  const caretIcon =
+    level !== BASE_NODE_LEVEL ? (
+      <span
+        className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'}
+        style={{ WebkitTransform: isOpen ? 'rotate(135deg)' : null, transform: isOpen ? 'rotate(135deg)' : null }}
+      />
+    ) : null;
 
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
     const formattedTitle = formatText(title);
-    if (level === BASE_NODE_LEVEL) {
-      const isDrawer = !!(options && options.drawer);
-      if (isDrawer && children.length > 0) {
-        const _toggleDrawerOnEnter = e => {
-          if (e.key === 'Enter') {
-            toggleDrawer(slug);
-          }
-        };
-        // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
-        return (
-          <a // eslint-disable-line jsx-a11y/anchor-is-valid
-            onClick={() => toggleDrawer(slug)}
-            onKeyDown={_toggleDrawerOnEnter}
-            className={anchorTagClassNames}
-            aria-expanded={hasChildren ? isActive : undefined}
-            role="button"
-            tabIndex="0"
-          >
-            {formattedTitle}
-          </a>
-        );
-      }
+
+    if (isDrawer && children.length > 0) {
+      const _toggleDrawerOnEnter = e => {
+        if (e.key === 'Enter') {
+          setIsOpen(!isOpen);
+        }
+      };
+      // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
       return (
-        <Link
-          to={target}
-          aria-expanded={hasChildren ? isActive : undefined}
+        <Link // eslint-disable-line jsx-a11y/anchor-is-valid
+          onClick={e => {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }}
+          onKeyDown={_toggleDrawerOnEnter}
           className={anchorTagClassNames}
-          onClick={() => toggleDrawer(slug)}
+          aria-expanded={hasChildren ? isActive : undefined}
+          role="button"
+          tabIndex="0"
+          href={target}
         >
+          {caretIcon}
           {formattedTitle}
         </Link>
       );
     }
-
-    // In this case, we have a node which should be rendered with the 'expand-icon'
     return (
-      <Link to={target} className={anchorTagClassNames} aria-expanded={hasChildren ? isActive : undefined}>
-        <span className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'} />
+      <Link
+        to={target}
+        aria-expanded={hasChildren ? isActive : undefined}
+        className={anchorTagClassNames}
+        onClick={() => setActiveSection(slug)}
+      >
+        {caretIcon}
         {formattedTitle}
       </Link>
     );
@@ -73,13 +81,11 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   return (
     <li className={toctreeSectionClasses}>
       <NodeLink />
-      {isActive ? (
+      {isOpen ? (
         <ul>
           {children.map(c => {
             const key = c.slug || c.url;
-            return (
-              <TOCNode activeSection={activeSection} node={c} level={level + 1} toggleDrawer={toggleDrawer} key={key} />
-            );
+            return <TOCNode node={c} level={level + 1} key={key} />;
           })}
         </ul>
       ) : null}

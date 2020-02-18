@@ -49,7 +49,7 @@ const Target = ({ nodeData: { children, name, target } }) => {
 
 Target.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.node).isRequired,
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
     name: PropTypes.string.isRequired,
     target: PropTypes.string.isRequired,
   }).isRequired,

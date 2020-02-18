@@ -14,16 +14,9 @@ const TableOfContents = ({ toctreeData: { children } }) => {
     currentPage = window.location.pathname;
   }
   const [activeSection, setActiveSection] = useState(currentPage);
-  const toggleDrawer = newSlug => {
-    if (activeSection === newSlug) {
-      setActiveSection(null);
-    } else {
-      setActiveSection(newSlug);
-    }
-  };
 
   return (
-    <TOCContext.Provider value={{ activeSection, toggleDrawer }}>
+    <TOCContext.Provider value={{ activeSection, setActiveSection }}>
       <ul className="current">
         {children.map(c => {
           const key = c.slug || c.url;
