@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -9,6 +9,8 @@ import Sidebar from '../components/Sidebar';
 import DocumentBody from '../components/DocumentBody';
 import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
+import { GetWindowSize } from '../hooks/get-window-size.js';
+import style from '../styles/navigation.module.css';
 
 const Document = props => {
   const {
@@ -22,6 +24,15 @@ const Document = props => {
 
   const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
 
+  const windowSize = GetWindowSize();
+  const minWindowSize = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
+
+  const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowSize);
+
+  const toggleLeftColumn = () => {
+    setShowLeftColumn(!showLeftColumn);
+  };
+
   return (
     <React.Fragment>
       <Helmet>
@@ -29,13 +40,22 @@ const Document = props => {
       </Helmet>
       <Navbar />
       <div className="content">
-        <div id="left-column">
-          <Sidebar slug={slug} publishedBranches={publishedBranches} toctreeData={toctree} />
-        </div>
-        <div id="main-column" className="main-column">
-          <span className="showNav" id="showNav">
-            Navigation
-          </span>
+        {showLeftColumn && (
+          <div className={`left-column ${style.leftColumn}`} id="left-column">
+            <Sidebar
+              slug={slug}
+              publishedBranches={publishedBranches}
+              toctreeData={toctree}
+              toggleLeftColumn={toggleLeftColumn}
+            />
+          </div>
+        )}
+        <div className="main-column" id="main-column">
+          {!showLeftColumn && (
+            <span className={`showNav ${style.showNav}`} id="showNav" onClick={toggleLeftColumn}>
+              Navigation
+            </span>
+          )}
           <div className="document">
             <div className="documentwrapper">
               <div className="bodywrapper">
