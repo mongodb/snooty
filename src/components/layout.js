@@ -35,26 +35,11 @@ export default class DefaultLayout extends Component {
     const { pageContext } = this.props;
     const pageNodes = getNestedValue(['__refDocMapping', 'ast', 'children'], pageContext) || [];
 
-    // Map all substitutions that appear on the page
-    this.substitutions = this.getSubstitutions(pageNodes);
-
     // Map all footnotes and their references that appear on the page
     this.footnotes = this.getFootnotes(pageNodes);
 
     // Standardize cssclass nodes that appear on the page
     this.normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
-  };
-
-  // Identify and save all substitutions as defined in the specified nodes
-  getSubstitutions = nodes => {
-    // Find substitutions on page
-    const substitutions = findAllKeyValuePairs(nodes, 'type', 'substitution_definition');
-
-    // Create a map wherein each key is the word to be replaced, and each value is the nodes to replace it with.
-    return substitutions.reduce((map, sub) => {
-      map[sub.name] = sub.children; // eslint-disable-line no-param-reassign
-      return map;
-    }, {});
   };
 
   /*
@@ -153,7 +138,6 @@ export default class DefaultLayout extends Component {
           pillstrips,
           addPillstrip: this.addPillstrip,
           footnotes: this.footnotes,
-          substitutions: this.substitutions,
         })}
       </TabContext.Provider>
     );
