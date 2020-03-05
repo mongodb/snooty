@@ -40,16 +40,18 @@ const Document = props => {
       </Helmet>
       <Navbar />
       <div className="content">
-        {showLeftColumn && (
-          <div className={`left-column ${style.leftColumn}`} id="left-column">
-            <Sidebar
-              slug={slug}
-              publishedBranches={publishedBranches}
-              toctreeData={toctree}
-              toggleLeftColumn={toggleLeftColumn}
-            />
-          </div>
-        )}
+        <div>
+          {showLeftColumn && (
+            <div className={`left-column ${style.leftColumn}`} id="left-column">
+              <Sidebar
+                slug={slug}
+                publishedBranches={publishedBranches}
+                toctreeData={toctree}
+                toggleLeftColumn={toggleLeftColumn}
+              />
+            </div>
+          )}
+        </div>
         <div className="main-column" id="main-column">
           {!showLeftColumn && (
             <span className={`showNav ${style.showNav}`} id="showNav" onClick={toggleLeftColumn}>
