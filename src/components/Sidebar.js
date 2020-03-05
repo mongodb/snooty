@@ -11,12 +11,7 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
     <aside className={`sidebar ${style.sidebar}`} id="sidebar">
       <div className={`sphinxsidebar ${style.sphinxsidebar}`} id="sphinxsidebar">
         <div id="sphinxsidebarwrapper" className="sphinxsidebarwrapper">
-          <span
-            className={`closeNav ${style.closeNav}`}
-            id="closeNav"
-            onClick={toggleLeftColumn}
-            style={{ cursor: 'pointer' }}
-          >
+          <span className={`closeNav`} id="closeNav" onClick={toggleLeftColumn} style={{ cursor: 'pointer' }}>
             Close ×
           </span>
           <h3>
