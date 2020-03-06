@@ -21,7 +21,8 @@ export default function useViewport() {
   };
 
   React.useEffect(() => {
-    const debouncedOnChange = debounce(onChange, 200);
+    // const debouncedOnChange = debounce(onChange, 200);
+    const debouncedOnChange = onChange;
     window.addEventListener('resize', debouncedOnChange);
     window.addEventListener('scroll', debouncedOnChange);
     return () => {
