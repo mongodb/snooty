@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useFeedbackState } from './context';
-import usePageSize from '../../hooks/usePageSize';
+import useScreenSize from '../../hooks/useScreenSize';
 
 import LeafygreenCard from '@leafygreen-ui/card';
 
 export default function FeedbackTab(props) {
   const { feedback, initializeFeedback } = useFeedbackState();
-  const { isTabletOrMobile } = usePageSize();
+  const { isTabletOrMobile } = useScreenSize();
   const shouldShowFeedbackTab = !feedback && !isTabletOrMobile;
   return shouldShowFeedbackTab && <Container onClick={() => initializeFeedback()}>Give Feedback</Container>;
 }

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import { FeedbackHeading } from './FeedbackWidget';
-import usePageSize from '../hooks/usePageSize';
+import useScreenSize from '../hooks/useScreenSize';
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
 
   const isPageTitle = sectionDepth === 1;
-  const { isTabletOrMobile, isSmallScreen } = usePageSize();
+  const { isTabletOrMobile, isSmallScreen } = useScreenSize();
   const shouldShowStarRating = isPageTitle && isTabletOrMobile;
 
   return (

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import usePageSize from '../../hooks/usePageSize';
+import useScreenSize from '../../hooks/useScreenSize';
 import StarRating from './components/StarRating';
 
 export default function FeedbackFooter() {
-  const { isTabletOrMobile } = usePageSize();
+  const { isTabletOrMobile } = useScreenSize();
   return (
     isTabletOrMobile && (
       <Container>

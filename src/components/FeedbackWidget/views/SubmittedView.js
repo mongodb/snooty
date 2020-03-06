@@ -1,12 +1,12 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
 import { useFeedbackState } from '../context';
-import usePageSize from '../../../hooks/usePageSize';
+import useScreenSize from '../../../hooks/useScreenSize';
 import { Layout, Heading, Subheading } from '../components/view-components';
 
 export default function SubmittedView(props) {
   const { abandon } = useFeedbackState();
-  const { isSmallScreen } = usePageSize();
+  const { isSmallScreen } = useScreenSize();
   return (
     <Layout>
       <Heading>We appreciate your feedback.</Heading>
