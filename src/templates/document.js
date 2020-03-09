@@ -9,7 +9,7 @@ import Sidebar from '../components/Sidebar';
 import DocumentBody from '../components/DocumentBody';
 import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
-import { GetWindowSize } from '../hooks/get-window-size.js';
+import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 
 const Document = props => {
@@ -24,10 +24,10 @@ const Document = props => {
 
   const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
 
-  const windowSize = GetWindowSize();
-  const minWindowSize = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
+  const windowSize = useWindowSize();
+  const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
 
-  const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowSize);
+  const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);

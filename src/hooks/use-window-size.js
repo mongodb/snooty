@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
+import { isBrowser } from '../utils/is-browser';
 
-export const GetWindowSize = () => {
-  const isClient = typeof window === 'object';
+export const useWindowSize = () => {
+  const isClient = isBrowser();
 
   const getSize = React.useCallback(() => {
     return {
@@ -12,14 +13,14 @@ export const GetWindowSize = () => {
 
   const [windowSize, setWindowSize] = useState(getSize);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isClient) {
       return false;
     }
 
-    function handleResize() {
+    const handleResize = () => {
       setWindowSize(getSize());
-    }
+    };
 
     window.addEventListener('resize', handleResize);
 
