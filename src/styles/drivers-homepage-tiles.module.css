@@ -1,0 +1,65 @@
+.tileOuter {
+  overflow: auto;
+  margin-left: 0;
+  padding-left: 24px;
+}
+
+.tile {
+  width: 244px;
+  float: left;
+  padding: 16px 16px !important;
+  list-style-type: none;
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;	
+  margin-right: 16px;
+  margin-bottom: 16px;
+  background-color: #FFFFFF;	
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+.tile:hover {
+  box-shadow: 0 3px 6px -2px rgba(184,196,194,0.5);
+}
+
+.tile:nth-child(3n) {
+  margin-right: 0;
+}
+
+.tile svg {
+  width: 25px;
+  height: 25px;
+  margin-right: 16px;
+  vertical-align: -7px;
+}
+
+.tile svg .st00 {
+  fill: #00ACD7;
+}
+
+.tile svg .st0 {
+  fill: #679e63
+}
+
+.tile svg .st1 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #333;
+}
+
+.tile svg .st3 {
+  clip-path: url(#XMLID_3_);
+}
+
+.tile svg .st4 {
+  fill: none
+}
+
+@media screen and (max-width: 800px) {
+  .tile:nth-child(3n) {
+    margin-right: 16px;
+  }
+  .tile:nth-child(2n) {
+    margin-right: 0;
+  }
+}

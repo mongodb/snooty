@@ -6,6 +6,7 @@ import Paragraph from './Paragraph';
 import List from './List';
 import ListItem from './ListItem';
 import ListTable from './ListTable';
+import EcosystemHomepageTiles from './EcosystemHomepageTiles';
 import Emphasis from './Emphasis';
 import Include from './Include';
 import Section from './Section';
