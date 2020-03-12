@@ -9,7 +9,7 @@ export default function FeedbackFooter() {
     isTabletOrMobile && (
       <Container>
         <StarRatingContainer>
-          Was this page helpful?
+          How helpful was this page?
           <StarRating size="2x" />
         </StarRatingContainer>
       </Container>

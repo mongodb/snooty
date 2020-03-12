@@ -4,7 +4,7 @@ import Button from '@leafygreen-ui/button';
 import { useFeedbackState } from '../context';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 
-export default function CommentView(props) {
+export default function SupportView(props) {
   const { submitSupport } = useFeedbackState();
 
   return (

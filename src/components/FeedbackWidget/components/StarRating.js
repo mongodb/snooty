@@ -28,33 +28,33 @@ export const StarRatingLabel = styled.div`
 // export default function StarRating({ size = '3x' }) {
 export default function StarRating({ size = '3x' }) {
   const [hoveredRating, setHoveredRating] = React.useState(null);
-  const { feedback } = useFeedbackState();
+  const { feedback, setRating } = useFeedbackState();
   const selectedRating = feedback && feedback.rating;
   return (
     isBrowser() && (
       <Layout size={size}>
-        {[1, 2, 3, 4, 5].map(ratingValue => (
-          <Star
-            key={ratingValue}
-            ratingValue={ratingValue}
-            hoveredRating={hoveredRating}
-            setHoveredRating={setHoveredRating}
-            selectedRating={selectedRating}
-            onMouseEnter={() => setHoveredRating(ratingValue)}
-            onMouseLeave={() => setHoveredRating(null)}
-            size={size}
-          />
-        ))}
+        {[1, 2, 3, 4, 5].map(ratingValue => {
+          const isHighlighted = selectedRating ? selectedRating >= ratingValue : hoveredRating >= ratingValue;
+          const isHovered = hoveredRating === ratingValue;
+          return (
+            <Star
+              key={ratingValue}
+              ratingValue={ratingValue}
+              isHighlighted={isHighlighted}
+              shouldShowTooltip={isHovered && !selectedRating}
+              onClick={() => setRating(ratingValue)}
+              onMouseEnter={() => setHoveredRating(ratingValue)}
+              onMouseLeave={() => setHoveredRating(null)}
+              size={size}
+            />
+          );
+        })}
       </Layout>
     )
   );
 }
 
-export function Star({ ratingValue, hoveredRating, selectedRating, size, onMouseEnter, onMouseLeave }) {
-  const isHighlighted = selectedRating ? selectedRating >= ratingValue : hoveredRating >= ratingValue;
-  const isHovered = hoveredRating === ratingValue;
-  const { setRating } = useFeedbackState();
-  const onClick = () => setRating(ratingValue);
+export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onClick, onMouseEnter, onMouseLeave }) {
   return (
     <StarContainer onClick={onClick} onMouseLeave={onMouseLeave}>
       <Tooltip
@@ -64,7 +64,7 @@ export function Star({ ratingValue, hoveredRating, selectedRating, size, onMouse
         justify="middle"
         triggerEvent="hover"
         variant="dark"
-        open={isHovered && !selectedRating}
+        open={shouldShowTooltip}
         trigger={
           <div>
             <StarIcon size={size} onMouseEnter={onMouseEnter} isHighlighted={isHighlighted} />

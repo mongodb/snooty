@@ -9,7 +9,7 @@ import { Layout, RatingHeader, Footer } from '../components/view-components';
 
 const sortQualifiers = qualifiers => qualifiers.sort((q1, q2) => (q1.displayOrder > q2.displayOrder ? 1 : -1));
 
-export default function QualifierView({ ...props }) {
+export default function QualifiersView({ ...props }) {
   const { feedback, submitQualifiers } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
@@ -18,8 +18,8 @@ export default function QualifierView({ ...props }) {
     <Layout>
       <RatingHeader isPositive={isPositiveRating} />
       <Qualifiers>
-        {sortQualifiers(feedback.qualifiers).map(({ id, text }) => (
-          <Qualifier key={id} id={id} text={text} />
+        {sortQualifiers(feedback.qualifiers).map(({ id, text, value }) => (
+          <Qualifier key={id} id={id} text={text} value={value} />
         ))}
       </Qualifiers>
       <Footer>
@@ -38,12 +38,13 @@ const Qualifiers = styled.div`
 const QualifierLayout = styled.div`
   margin: 0 0 16px 0;
 `;
-function Qualifier({ id, text = '' }) {
+function Qualifier({ id, text, value }) {
   const { setQualifier } = useFeedbackState();
   if (!text) return;
   return (
-    <QualifierLayout>
-      <Checkbox onChange={event => setQualifier(id, event.target.checked)} label={text} bold={false} />
+    <QualifierLayout onClick={() => setQualifier(id, !value)}>
+      {/* <Checkbox onChange={event => setQualifier(id, event.target.checked)} label={text} bold={false} /> */}
+      <Checkbox checked={value} label={text} bold={false} />
     </QualifierLayout>
   );
 }

@@ -20,9 +20,9 @@ export function FeedbackProvider({ page, ...props }) {
   const user = useStitchUser();
 
   // Create a new feedback document
-  async function initializeFeedback(initialView = 'rating') {
+  async function initializeFeedback(nextView = 'rating') {
     const segment = getSegmentUserId();
-    const newFeedback = await createNewFeedback({
+    const newFeedback = {
       page: {
         title: page.title,
         slug: page.slug,
@@ -31,14 +31,15 @@ export function FeedbackProvider({ page, ...props }) {
         docs_version: null,
       },
       user: {
-        stitch_id: user.id,
+        stitch_id: user && user.id,
         segment_id: segment.id,
         isAnonymous: segment.isAnonymous,
       },
       viewport: getViewport(),
-    });
-    setFeedback(newFeedback);
-    setView(initialView);
+    };
+    const { _id } = await createNewFeedback(newFeedback);
+    setFeedback({ _id, ...newFeedback });
+    setView(nextView);
     return newFeedback;
   }
 
@@ -108,11 +109,15 @@ export function FeedbackProvider({ page, ...props }) {
   async function submitComment({ comment = '', email = '' }) {
     if (!feedback) return;
     // Update the document with the user's comment and email (if provided)
-    await updateFeedback({
+    const updatedFeedback = await updateFeedback({
       feedback_id: feedback._id,
       comment,
       user: { email },
     });
+    setFeedback(updatedFeedback);
+  }
+
+  async function submitAllFeedback() {
     // Submit the full feedback document
     const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
     setFeedback(submittedFeedback);
@@ -137,10 +142,10 @@ export function FeedbackProvider({ page, ...props }) {
       // We hold on to abandoned feedback in the database, so wait until
       // we've marked the document as abandoned
       await abandonFeedback({ feedback_id: feedback._id });
+      setFeedback(null);
     }
     // Reset to the initial state
     setView('waiting');
-    setFeedback(null);
   }
 
   const value = {
@@ -154,6 +159,7 @@ export function FeedbackProvider({ page, ...props }) {
     submitComment,
     submitScreenshot,
     submitSupport,
+    submitAllFeedback,
     abandon,
   };
 

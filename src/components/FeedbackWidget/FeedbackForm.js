@@ -23,7 +23,7 @@ export function FeedbackContent({ view }) {
     support: SupportView,
     submitted: SubmittedView,
   }[view];
-  return <View />;
+  return <View className={`view-${view}`} />;
 }
 
 export default function FeedbackForm(props) {

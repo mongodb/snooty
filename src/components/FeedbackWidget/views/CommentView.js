@@ -20,7 +20,7 @@ function useValidation(inputValue, validator) {
 }
 
 export default function CommentView({ ...props }) {
-  const { feedback, isSupportRequest, submitComment } = useFeedbackState();
+  const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
   const { screenshot, loading, takeScreenshot } = useScreenshot();
@@ -30,9 +30,10 @@ export default function CommentView({ ...props }) {
   const [hasEmailError, setHasEmailError] = React.useState(false);
   const isValidEmail = useValidation(email, validateEmail);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isValidEmail) {
-      submitComment({ comment, email });
+      await submitComment({ comment, email });
+      await submitAllFeedback();
     } else {
       setHasEmailError(true);
     }
@@ -65,7 +66,7 @@ export default function CommentView({ ...props }) {
       />
       <EmailInput placeholder="Email Address (optional)" value={email} onChange={e => setEmail(e.target.value)} /> */}
       <Footer>
-        <Button onClick={() => handleSubmit()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</Button>
+        <SubmitButton onClick={() => handleSubmit()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</SubmitButton>
         {screenshot && <span>Screenshot attached</span>}
         <ScreenshotButton screenshot={screenshot} loading={loading} takeScreenshot={takeScreenshot} />
       </Footer>
@@ -73,6 +74,7 @@ export default function CommentView({ ...props }) {
   );
 }
 
+const SubmitButton = styled(Button)``;
 const InputStyle = css`
   padding: 14px;
   border: 0.5px solid ${uiColors.gray.base};

@@ -24,7 +24,7 @@ function App() {
       <FeedbackTab />
       <Centered>
         <StarContainer>
-          <StarRating size="lg" />
+          <StarRating size="2x" />
         </StarContainer>
         <br />
         <br />

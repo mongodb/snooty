@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import StarRating, { StarRatingLabel } from './components/StarRating';
 
-export default function FeedbackHeading({ isVisible, isStacked }) {
+export default function FeedbackHeading({ isVisible = true, isStacked = false }) {
   return (
     isVisible && (
       <StarRatingContainer isStacked={isStacked}>

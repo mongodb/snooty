@@ -13,7 +13,7 @@ export default function FeedbackCard({ isOpen, children }) {
       <Floating>
         <Card>
           <CardHeader>
-            <CloseButton onClick={abandon} />
+            <CloseButton onClick={() => abandon()} />
           </CardHeader>
           <Content>{children}</Content>
         </Card>
@@ -29,7 +29,7 @@ const Floating = styled.div`
 `;
 const Card = styled(LeafygreenCard)`
   /* width: 420px; */
-  width: 380px;
+  width: 320px;
 `;
 const CardHeader = styled.div`
   display: flex;
