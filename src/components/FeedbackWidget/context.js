@@ -13,10 +13,10 @@ import * as R from 'ramda';
 
 const FeedbackContext = React.createContext();
 
-export function FeedbackProvider({ page, ...props }) {
-  const [feedback, setFeedback] = React.useState(null);
-  const [isSupportRequest, setIsSupportRequest] = React.useState(false);
-  const [view, setView] = React.useState('waiting');
+export function FeedbackProvider({ page, test = {}, ...props }) {
+  const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
+  const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
+  const [view, setView] = React.useState(test.view || 'waiting');
   const user = useStitchUser();
 
   // Create a new feedback document
@@ -36,6 +36,7 @@ export function FeedbackProvider({ page, ...props }) {
         isAnonymous: segment.isAnonymous,
       },
       viewport: getViewport(),
+      ...test.feedback,
     };
     const { _id } = await createNewFeedback(newFeedback);
     setFeedback({ _id, ...newFeedback });
