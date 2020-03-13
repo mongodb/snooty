@@ -3,13 +3,17 @@ import Link from './Link';
 import VersionDropdown from './VersionDropdown';
 import TableOfContents from './TableOfContents';
 import { formatText } from '../utils/format-text';
+import style from '../styles/sidebar.module.css';
 
-const Sidebar = ({ slug, publishedBranches, toctreeData }) => {
+const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => {
   const { title } = toctreeData;
   return (
-    <aside className="sidebar" id="sidebar">
-      <div className="sphinxsidebar" id="sphinxsidebar">
+    <aside className={`sidebar ${style.sidebar}`} id="sidebar">
+      <div className={`sphinxsidebar ${style.sphinxsidebar}`} id="sphinxsidebar">
         <div id="sphinxsidebarwrapper" className="sphinxsidebarwrapper">
+          <span className="closeNav" id="closeNav" onClick={toggleLeftColumn} style={{ cursor: 'pointer' }}>
+            Close ×
+          </span>
           <h3>
             <Link className="index-link" to="/">
               {formatText(title)}
