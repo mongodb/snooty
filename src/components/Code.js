@@ -24,10 +24,7 @@ const htmlDecode = input => {
 };
 
 const codeContainerStyle = {
-  display: 'inline-block',
-  position: 'relative',
-  width: '100%',
-  overflowWrap: 'break-word',
+  overflowX: 'scroll',
 };
 
 const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localURI } }) => {
