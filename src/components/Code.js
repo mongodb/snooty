@@ -69,7 +69,6 @@ const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localUR
         language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
         showLineNumbers
         variant="light"
-        multiline="true"
       >
         {code}
       </CodeBlock>
