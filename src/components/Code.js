@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
@@ -11,8 +11,6 @@ import {
 import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import { isBrowser } from '../utils/is-browser';
-import { useContext } from 'react';
-
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
@@ -25,10 +23,17 @@ const htmlDecode = input => {
   return doc.documentElement.textContent;
 };
 
+const codeContainerStyle = {
+  display: 'inline-block',
+  position: 'relative',
+  width: '100%',
+  overflowWrap: 'break-word',
+};
+
 const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localURI } }) => {
   const { activeTabs } = useContext(TabContext);
 
-  let supported_langs = [
+  const leafyGreenSupportedLangs = [
     'javascript',
     'typescript',
     'csp',
@@ -62,9 +67,16 @@ const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localUR
   }
 
   return (
-    <CodeBlock language={lang && supported_langs.includes(lang) ? lang : 'auto'} showLineNumbers variant="light">
-      {code}
-    </CodeBlock>
+    <div style={codeContainerStyle}>
+      <CodeBlock
+        language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
+        showLineNumbers
+        variant="light"
+        multiline="true"
+      >
+        {code}
+      </CodeBlock>
+    </div>
   );
 };
 
