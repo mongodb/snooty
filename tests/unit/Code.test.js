@@ -1,13 +1,13 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Code from '../../src/components/Code';
 import { TabContext } from '../../src/components/tab-context';
 
 // data for this component
 import mockData from './data/Code.test.json';
 
-const mountCode = ({ data, activeTabs }) => {
-  return mount(
+const shallowCode = ({ data, activeTabs }) => {
+  return shallow(
     <TabContext.Provider value={{ activeTabs }}>
       <Code nodeData={data} />
     </TabContext.Provider>
@@ -15,11 +15,11 @@ const mountCode = ({ data, activeTabs }) => {
 };
 
 it('renders correctly', () => {
-  const tree = mountCode({ data: mockData, activeTabs: { cloud: 'cloud' } });
+  const tree = shallowCode({ data: mockData, activeTabs: { cloud: 'cloud' } });
   expect(tree).toMatchSnapshot();
 });
 
 it('renders with javascript disabled correctly', () => {
-  const tree = mountCode({ data: mockData, activeTabs: {} });
+  const tree = shallowCode({ data: mockData, activeTabs: {} });
   expect(tree).toMatchSnapshot();
 });
