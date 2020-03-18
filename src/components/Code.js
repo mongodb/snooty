@@ -30,6 +30,13 @@ const codeContainerStyle = {
 const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localURI } }) => {
   const { activeTabs } = useContext(TabContext);
 
+  /*
+    TODO: Remove leafyGreenSupportedLangs list once https://jira.mongodb.org/browse/PD-574 
+    is resolved and unsupported languages automatically default to 'auto'
+    
+    leafyGreenSupportedLangs list was created to avoid the error leafygreen's Code
+    component throws when encountering an unsupported language
+  */
   const leafyGreenSupportedLangs = [
     'javascript',
     'typescript',
