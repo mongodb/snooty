@@ -41,3 +41,9 @@ including UTF-8.
   </dd>
 </dl>
 `;
+
+exports[`renders correctly with no directive_argument nodes 1`] = `
+<span
+  id="php-language-center"
+/>
+`;

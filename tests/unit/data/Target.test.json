@@ -145,5 +145,33 @@
         ]
       }
     ]
+  },
+  "b": {
+    "type": "target",
+    "position": {
+      "start": {
+        "line": {
+          "$numberInt": "0"
+        }
+      }
+    },
+    "children": [
+      {
+        "type": "target_identifier",
+        "position": {
+          "start": {
+            "line": {
+              "$numberInt": "0"
+            }
+          }
+        },
+        "children": [],
+        "ids": [
+          "php-language-center"
+        ]
+      }
+    ],
+    "domain": "std",
+    "name": "label"
   }
 }
