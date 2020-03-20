@@ -8,11 +8,7 @@ exports[`DefinitionList renders correctly 1`] = `
     <code
       class="docutils literal notranslate"
     >
-      <span
-        class="pre"
-      >
-        MongoDefaultPartitioner
-      </span>
+      MongoDefaultPartitioner
     </code>
   </dt>
   <dd>
