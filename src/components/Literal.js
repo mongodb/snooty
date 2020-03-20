@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getNestedValue } from '../utils/get-nested-value';
+import ComponentFactory from './ComponentFactory';
 
-const Literal = ({ nodeData }) => (
-  <code className="docutils literal notranslate">
-    <span className="pre">{getNestedValue(['children', 0, 'value'], nodeData)}</span>
+const Literal = ({ nodeData: { children } }) => (
+  <code>
+    {children.map((node, i) => (
+      <ComponentFactory nodeData={node} key={i} />
+    ))}
   </code>
 );
 
 Literal.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-      })
-    ).isRequired,
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
 };
 
