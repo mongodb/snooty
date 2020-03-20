@@ -5,9 +5,7 @@ exports[`DefinitionList renders correctly 1`] = `
   class="first docutils"
 >
   <dt>
-    <code
-      class="docutils literal notranslate"
-    >
+    <code>
       MongoDefaultPartitioner
     </code>
   </dt>

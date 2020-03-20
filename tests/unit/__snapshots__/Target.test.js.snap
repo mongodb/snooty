@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with a directive_argument node 1`] = `
+<dl
+  class="option"
+>
+  <dt
+    id="--config"
+  >
+    <code>
+      --config &lt;filename&gt;, -f &lt;filename&gt;
+    </code>
+    <a
+      class="headerlink"
+      href="#--config"
+      title="Permalink to this definition"
+    >
+      ¶
+    </a>
+  </dt>
+  <dd>
+    <p>
+      Specifies a configuration file for runtime configuration options. The
+configuration file is the preferred method for runtime configuration of 
+mongos. The options are equivalent to the command-line
+configuration options. See 
+      <a
+        class="reference internal"
+        href="/reference/configuration-options"
+      >
+        /reference/configuration-options
+      </a>
+       for
+more information.
+    </p>
+    <p>
+      Ensure the configuration file uses ASCII encoding. The mongos 
+instance does not support configuration files with non-ASCII encoding,
+including UTF-8.
+    </p>
+  </dd>
+</dl>
+`;
+
+exports[`renders correctly with no directive_argument nodes 1`] = `
+<span
+  id="php-language-center"
+/>
+`;

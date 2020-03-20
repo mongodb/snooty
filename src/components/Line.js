@@ -2,15 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const Line = ({ nodeData: { children }, ...rest }) => {
-  return (
-    <div className="line">
-      {children.map((child, index) => (
-        <ComponentFactory key={index} {...rest} nodeData={child} />
-      ))}
-    </div>
-  );
-};
+const Line = ({ nodeData: { children } }) => (
+  <div className="line">
+    {children.map((child, index) => (
+      <ComponentFactory key={index} nodeData={child} />
+    ))}
+  </div>
+);
 
 Line.propTypes = {
   nodeData: PropTypes.shape({
