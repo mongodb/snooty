@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders an empty Line node correctly 1`] = `
+<div
+  className="line"
+>
+  <br />
+</div>
+`;
+
+exports[`renders correctly 1`] = `
+<div
+  className="line"
+>
+  <ComponentFactory
+    key="0"
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "N. Virginia (us-east-1)",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 0,
+          },
+        },
+        "type": "literal",
+      }
+    }
+  />
+</div>
+`;
