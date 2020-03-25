@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`renders an empty Line node correctly 1`] = `
+<div
+  className="line"
+>
+  <br />
+</div>
+`;
+
+ectly 1`] = `
 <div
   className="line"
 >
