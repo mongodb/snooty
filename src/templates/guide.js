@@ -21,7 +21,9 @@ export default class Guide extends Component {
     const {
       pageContext: {
         __refDocMapping,
-        metadata: { slugTitleMapping },
+
+        // eslint-disable-next-line no-unused-vars
+        metadata: { slugToTitle: slugTitleMapping },
       },
     } = this.props;
 
@@ -139,7 +141,7 @@ export default class Guide extends Component {
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
           pillstrips={pillstrips}
-          slugTitleMapping={pageContext.metadata.slugTitleMapping}
+          slugTitleMapping={pageContext.metadata.slugToTitle}
         />
       );
     });
