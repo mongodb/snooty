@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Text = ({ nodeData: { value } }) => <React.Fragment>{value}</React.Fragment>;
+const Text = ({ nodeData: { value } }) => {
+  return <React.Fragment>{value}</React.Fragment>;
+};
 
 Text.propTypes = {
   nodeData: PropTypes.shape({
-    value: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    value: PropTypes.string,
   }).isRequired,
 };
 

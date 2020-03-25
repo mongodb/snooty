@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const LineBlock = ({ nodeData: { children }, ...rest }) => (
+const LineBlock = ({ nodeData: { children } }) => (
   <div className="line-block">
     {children.map((child, index) => (
-      <ComponentFactory key={index} {...rest} nodeData={child} />
+      <ComponentFactory key={index} nodeData={child} />
     ))}
   </div>
 );
