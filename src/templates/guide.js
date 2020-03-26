@@ -19,7 +19,10 @@ export default class Guide extends Component {
     super(propsFromServer);
 
     const {
-      pageContext: { __refDocMapping },
+      pageContext: {
+        __refDocMapping,
+        metadata: { slugToTitle: slugTitleMapping },
+      },
     } = this.props;
 
     // get data from server
@@ -136,7 +139,7 @@ export default class Guide extends Component {
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
           pillstrips={pillstrips}
-          slugTitleMapping={pageContext.slugTitleMapping}
+          slugTitleMapping={pageContext.metadata.slugToTitle}
         />
       );
     });
