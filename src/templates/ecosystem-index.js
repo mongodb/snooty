@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
-import DocumentBody from '../components/DocumentBody';
 import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
-import { useWindowSize } from '../hooks/use-window-size.js';
-import style from '../styles/navigation.module.css';
 import EcosystemHomepageStyles from '../styles/ecosystemHomepage.module.css';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 
@@ -17,10 +14,8 @@ const EcosystemIndex = props => {
   const {
     pageContext: {
       slug,
-      __refDocMapping,
-      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+      metadata: { parentPaths, slugToTitle: slugTitleMapping, toctreeOrder },
     },
-    ...rest
   } = props;
 
   const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));

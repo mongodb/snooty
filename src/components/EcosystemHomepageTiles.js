@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import tileStyles from '../styles/drivers-homepage-tiles.module.css';
 import Card from '@leafygreen-ui/card';
 
