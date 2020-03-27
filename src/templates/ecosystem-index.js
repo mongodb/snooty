@@ -42,7 +42,11 @@ const EcosystemIndex = props => {
                     </p>
                     <EcosystemHomepageTiles />
                     <p>
-                      Don’t see your desired language? Browse a list of <a href="">community supported libraries</a>.
+                      Don’t see your desired language? Browse a list of{' '}
+                      <a href="https://docs.mongodb.com/ecosystem/drivers/community-supported-drivers/">
+                        community supported libraries
+                      </a>
+                      .
                     </p>
                   </section>
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
