@@ -116,7 +116,14 @@ export default class Guide extends Component {
   };
 
   createSections() {
-    const { addPillstrip, pageContext, pillstrips } = this.props;
+    const {
+      addPillstrip,
+      pageContext,
+      pillstrips,
+      pageContext: {
+        metadata: { slugToTitle },
+      },
+    } = this.props;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
@@ -136,7 +143,7 @@ export default class Guide extends Component {
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
           pillstrips={pillstrips}
-          slugTitleMapping={pageContext.slugTitleMapping}
+          slugTitleMapping={slugToTitle}
         />
       );
     });
