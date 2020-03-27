@@ -21,8 +21,7 @@ export default class Guide extends Component {
     const {
       pageContext: {
         __refDocMapping,
-        // eslint-disable-next-line no-unused-vars
-        metadata: { slugToTitle: slugTitleMapping },
+        metadata: { slugToTitle },
       },
     } = this.props;
 
