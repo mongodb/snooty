@@ -41,7 +41,9 @@ const EcosystemIndex = props => {
                       new MongoDB features, and receive bug fixes, performance enhancements, and security patches.
                     </p>
                     <EcosystemHomepageTiles />
-                    <p>more stuff here</p>
+                    <p>
+                      Don’t see your desired language? Browse a list of <a href="">community supported libraries</a>.
+                    </p>
                   </section>
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   <Footer />
