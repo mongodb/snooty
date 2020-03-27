@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<code>
+<div
+  className="line-block"
+>
   <ComponentFactory
     key="0"
     nodeData={
@@ -16,5 +18,5 @@ exports[`renders correctly 1`] = `
       }
     }
   />
-</code>
+</div>
 `;

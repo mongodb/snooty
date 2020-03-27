@@ -5,14 +5,15 @@ import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
-import Sidebar from '../components/Sidebar';
 import DocumentBody from '../components/DocumentBody';
 import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
+import EcosystemHomepageStyles from '../styles/ecosystemHomepage.module.css';
+import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 
-const Document = props => {
+const EcosystemIndex = props => {
   const {
     pageContext: {
       slug,
@@ -24,15 +25,6 @@ const Document = props => {
 
   const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
 
-  const windowSize = useWindowSize();
-  const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
-
-  const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
-
-  const toggleLeftColumn = () => {
-    setShowLeftColumn(!showLeftColumn);
-  };
-
   return (
     <React.Fragment>
       <Helmet>
@@ -40,35 +32,22 @@ const Document = props => {
       </Helmet>
       <Navbar />
       <div className="content">
-        <div>
-          {showLeftColumn && (
-            <div className={`left-column ${style.leftColumn}`} id="left-column">
-              <Sidebar
-                slug={slug}
-                publishedBranches={publishedBranches}
-                toctreeData={toctree}
-                toggleLeftColumn={toggleLeftColumn}
-              />
-            </div>
-          )}
-        </div>
-        <div className="main-column" id="main-column">
-          {!showLeftColumn && (
-            <span className={`showNav ${style.showNav}`} id="showNav" onClick={toggleLeftColumn}>
-              Navigation
-            </span>
-          )}
+        <div className={[EcosystemHomepageStyles.fullWidth, 'main-column'].join(' ')} id="main-column">
           <div className="document">
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody
-                    refDocMapping={__refDocMapping}
-                    slug={slug}
-                    slugTitleMapping={slugTitleMapping}
-                    {...rest}
-                  />
+                  <section>
+                    <h1>Start Developing with MongoDB</h1>
+                    <p>Connect your application to your database with one of our official libraries.</p>
+                    <p>
+                      The following libraries are officially supported by MongoDB. They are actively maintained, support
+                      new MongoDB features, and receive bug fixes, performance enhancements, and security patches.
+                    </p>
+                    <EcosystemHomepageTiles />
+                    <p>more stuff here</p>
+                  </section>
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   <Footer />
                 </div>
@@ -81,7 +60,7 @@ const Document = props => {
   );
 };
 
-Document.propTypes = {
+EcosystemIndex.propTypes = {
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
@@ -98,4 +77,4 @@ Document.propTypes = {
   }).isRequired,
 };
 
-export default Document;
+export default EcosystemIndex;

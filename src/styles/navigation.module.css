@@ -1,0 +1,7 @@
+.left-column {
+    display: flex !important;
+}
+
+.showNav {
+    display: block !important;
+}

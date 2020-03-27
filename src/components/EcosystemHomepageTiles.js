@@ -17,76 +17,63 @@ import IconRust from '../../static/svg/icon-Rust';
 import IconScala from '../../static/svg/icon-Scala';
 import IconSwift from '../../static/svg/icon-Swift';
 
-const EcosystemHomepageTiles = ({ nodeData, nodeData: { children }, ...rest }) => {
+// does not take in any params because it is a hardcoded list
+const EcosystemHomepageTiles = () => {
   return (
     <ul className={tileStyles.tileOuter}>
       <Card as="li" className={tileStyles.tile}>
         <IconC></IconC>
-        <a href="#">C</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/c/">C</a>
       </Card>
       <Card as="li" className={tileStyles.tile}>
         <IconCpp></IconCpp>
-        <a href="#">C++</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/cxx/">C++</a>
       </Card>
       <Card as="li" className={tileStyles.tile}>
         <IconCsharp></IconCsharp>
-        <a href="#">C#</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/csharp/">C#</a>
       </Card>
 
       <Card as="li" className={tileStyles.tile}>
         <IconGo></IconGo>
-        <a href="#">Go</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/go/">Go</a>
       </Card>
       <Card as="li" className={tileStyles.tile}>
         <IconJava></IconJava>
-        <a href="#">Java</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/java/">Java</a>
       </Card>
       <Card as="li" className={tileStyles.tile}>
         <IconNode></IconNode>
-        <a href="#">Node.js</a>
-      </Card>
-
-      <Card as="li" className={tileStyles.tile}>
-        <IconPHP></IconPHP>
-        <a href="#">PHP</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconPython></IconPython>
-        <a href="#">Python</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconRuby></IconRuby>
-        <a href="#">Ruby</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/node/">Node.js</a>
       </Card>
 
       <Card as="li" className={tileStyles.tile}>
         <IconRust></IconRust>
-        <a href="#">Rust</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/perl/">Perl</a>
+      </Card>
+      <Card as="li" className={tileStyles.tile}>
+        <IconPHP></IconPHP>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/php/">PHP</a>
+      </Card>
+      <Card as="li" className={tileStyles.tile}>
+        <IconPython></IconPython>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/python/">Python</a>
+      </Card>
+
+      <Card as="li" className={tileStyles.tile}>
+        <IconRuby></IconRuby>
+        <a href="https://docs.mongodb.com/ruby-driver/current/">Ruby</a>
       </Card>
       <Card as="li" className={tileStyles.tile}>
         <IconScala></IconScala>
-        <a href="#">Scala</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/scala/">Scala</a>
       </Card>
       <Card as="li" className={tileStyles.tile}>
         <IconSwift></IconSwift>
-        <a href="#">Swift</a>
+        <a href="https://docs.mongodb.com/ecosystem/drivers/swift/">Swift</a>
       </Card>
     </ul>
   );
-};
-
-EcosystemHomepageTiles.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-    options: PropTypes.shape({
-      align: PropTypes.string,
-      class: PropTypes.string,
-      'header-rows': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-      'stub-columns': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-      width: PropTypes.string,
-      widths: PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default EcosystemHomepageTiles;
