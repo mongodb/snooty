@@ -2,19 +2,17 @@ import React, { useState, useLayoutEffect } from 'react';
 import { isBrowser } from '../utils/is-browser';
 
 export const useWindowSize = () => {
-  const isClient = isBrowser();
-
   const getSize = React.useCallback(() => {
     return {
-      width: isClient ? window.innerWidth : undefined,
-      height: isClient ? window.innerHeight : undefined,
+      width: isBrowser ? window.innerWidth : undefined,
+      height: isBrowser ? window.innerHeight : undefined,
     };
-  }, [isClient]);
+  }, []);
 
   const [windowSize, setWindowSize] = useState(getSize);
 
   useLayoutEffect(() => {
-    if (!isClient) {
+    if (!isBrowser) {
       return false;
     }
 
@@ -25,7 +23,7 @@ export const useWindowSize = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [getSize, isClient]);
+  }, [getSize]);
 
   return windowSize;
 };

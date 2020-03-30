@@ -25,7 +25,7 @@ class Deluge extends Component {
   componentDidMount() {
     this.setupStitch();
 
-    if (isBrowser()) {
+    if (isBrowser) {
       const crypto = window.crypto || window.msCrypto;
       const buf = new Uint8Array(16);
       crypto.getRandomValues(buf);
@@ -89,7 +89,7 @@ class Deluge extends Component {
     });
 
     const pathSlug = `${project}/${path}`;
-    const url = isBrowser() ? window.location.href : null;
+    const url = isBrowser ? window.location.href : null;
     const voteDocument = {
       interactionId,
       useful: vote,

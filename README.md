@@ -65,14 +65,6 @@ Install [mut](https://github.com/mongodb/mut) and ensure that you have properly 
 make stage
 ```
 
-## Using mock test data
-
-Every time you run the application without the flag below, the data retrieved for the docs site is stored in `tests/unit/data/site/__testDataLatest.json`. There is also a reference data file in `tests/unit/data/site/__testData.json`. You can load either one of these into the Gatsby build with the flag:
-
-```shell
-USE_TEST_DATA=__testData.json
-```
-
 ## Testing
 
 Tests can be run using:

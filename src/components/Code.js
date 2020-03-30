@@ -67,7 +67,7 @@ const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localUR
     const { cloud } = activeTabs;
     const activeUri = cloud === 'cloud' ? cloudURI : localURI;
     code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uriData={activeUri} />);
-    if (isBrowser()) code = htmlDecode(code);
+    if (isBrowser) code = htmlDecode(code);
   }
 
   return (

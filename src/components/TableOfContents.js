@@ -10,7 +10,7 @@ import { isBrowser } from '../utils/is-browser';
 const TableOfContents = ({ toctreeData: { children } }) => {
   // Want to check this on each re-render
   let currentPage;
-  if (isBrowser()) {
+  if (isBrowser) {
     currentPage = window.location.pathname;
   }
   const [activeSection, setActiveSection] = useState(currentPage);
