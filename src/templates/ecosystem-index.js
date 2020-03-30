@@ -13,7 +13,7 @@ const EcosystemIndex = props => {
   const {
     pageContext: {
       slug,
-      metadata: { parentPaths, slugToTitle: slugTitleMapping, toctreeOrder },
+      metadata: { slugToTitle: slugTitleMapping, toctreeOrder },
     },
   } = props;
 
