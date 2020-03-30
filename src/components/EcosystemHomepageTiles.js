@@ -1,6 +1,7 @@
 import React from 'react';
 import tileStyles from '../styles/drivers-homepage-tiles.module.css';
 import Card from '@leafygreen-ui/card';
+import Link from './Link';
 
 // language icons for tiles
 import IconC from '../../static/svg/icon-C';
@@ -84,12 +85,12 @@ const EcosystemHomepageTiles = () => {
   return (
     <ul className={tileStyles.tileOuter}>
       {tileValues.map((element, index) => (
-        <a href={element.href} className={tileStyles.tileAnchor}>
+        <Link to={element.href} className={tileStyles.tileAnchor}>
           <Card as="li" className={tileStyles.tile}>
             {element.icon}
             {element.title}
           </Card>
-        </a>
+        </Link>
       ))}
     </ul>
   );
