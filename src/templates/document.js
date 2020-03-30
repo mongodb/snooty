@@ -29,6 +29,7 @@ const Document = props => {
   const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
 
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
+  /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser() ? style.postRender : '';
 
   const toggleLeftColumn = () => {
