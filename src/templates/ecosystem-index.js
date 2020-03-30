@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
-import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
@@ -28,11 +27,10 @@ const EcosystemIndex = props => {
       <Navbar />
       <div className="content">
         <div className={[EcosystemHomepageStyles.fullWidth, 'main-column'].join(' ')} id="main-column">
-          <div className="document">
+          <div className={[EcosystemHomepageStyles.document, 'document'].join(' ')}>
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
-                  <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
                   <section>
                     <h1>Start Developing with MongoDB</h1>
                     <p>Connect your application to your database with one of our official libraries.</p>

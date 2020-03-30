@@ -12,65 +12,85 @@ import IconNode from '../../static/svg/icon-Node';
 import IconPHP from '../../static/svg/icon-PHP';
 import IconPython from '../../static/svg/icon-Python';
 import IconRuby from '../../static/svg/icon-Ruby';
-import IconRust from '../../static/svg/icon-Rust';
+import IconPerl from '../../static/svg/icon-Perl';
 import IconScala from '../../static/svg/icon-Scala';
 import IconSwift from '../../static/svg/icon-Swift';
 
 // does not take in any params because it is a hardcoded list
 const EcosystemHomepageTiles = () => {
+  const tileValues = [
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/c/',
+      title: 'C',
+      icon: <IconC />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/cxx/',
+      title: 'C++',
+      icon: <IconCpp />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/csharp/',
+      title: 'C#',
+      icon: <IconCsharp />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/go/',
+      title: 'Go',
+      icon: <IconGo />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/java/',
+      title: 'Java',
+      icon: <IconJava />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/node/',
+      title: 'Node.js',
+      icon: <IconNode />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/perl/',
+      title: 'Perl',
+      icon: <IconPerl />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/php/',
+      title: 'PHP',
+      icon: <IconPHP />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/python/',
+      title: 'Python',
+      icon: <IconPython />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/ruby/',
+      title: 'Ruby',
+      icon: <IconRuby />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/scala/',
+      title: 'Scala',
+      icon: <IconScala />,
+    },
+    {
+      href: 'https://docs.mongodb.com/ecosystem/drivers/swift/',
+      title: 'Swift',
+      icon: <IconSwift />,
+    },
+  ];
+
   return (
     <ul className={tileStyles.tileOuter}>
-      <Card as="li" className={tileStyles.tile}>
-        <IconC></IconC>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/c/">C</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconCpp></IconCpp>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/cxx/">C++</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconCsharp></IconCsharp>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/csharp/">C#</a>
-      </Card>
-
-      <Card as="li" className={tileStyles.tile}>
-        <IconGo></IconGo>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/go/">Go</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconJava></IconJava>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/java/">Java</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconNode></IconNode>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/node/">Node.js</a>
-      </Card>
-
-      <Card as="li" className={tileStyles.tile}>
-        <IconRust></IconRust>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/perl/">Perl</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconPHP></IconPHP>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/php/">PHP</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconPython></IconPython>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/python/">Python</a>
-      </Card>
-
-      <Card as="li" className={tileStyles.tile}>
-        <IconRuby></IconRuby>
-        <a href="https://docs.mongodb.com/ruby-driver/current/">Ruby</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconScala></IconScala>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/scala/">Scala</a>
-      </Card>
-      <Card as="li" className={tileStyles.tile}>
-        <IconSwift></IconSwift>
-        <a href="https://docs.mongodb.com/ecosystem/drivers/swift/">Swift</a>
-      </Card>
+      {tileValues.map((element, index) => (
+        <a href={element.href} className={tileStyles.tileAnchor}>
+          <Card as="li" className={tileStyles.tile}>
+            {element.icon}
+            {element.title}
+          </Card>
+        </a>
+      ))}
     </ul>
   );
 };

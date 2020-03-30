@@ -4,6 +4,10 @@
   padding-left: 0;
 }
 
+.tileAnchor {
+  overflow: auto;
+}
+
 .tile {
   width: 244px;
   float: left;
@@ -22,7 +26,7 @@
   box-shadow: 0 3px 6px -2px rgba(184,196,194,0.5);
 }
 
-.tile:nth-child(3n) {
+.tileAnchor:nth-child(3n) .tile {
   margin-right: 0;
 }
 
@@ -56,10 +60,16 @@
 }
 
 @media screen and (max-width: 800px) {
-  .tile:nth-child(3n) {
+  .tileAnchor:nth-child(3n) .tile {
     margin-right: 16px;
   }
-  .tile:nth-child(2n) {
+  .tileAnchor:nth-child(2n) .tile {
     margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .tile {
+    width: 200px !important;
   }
 }
