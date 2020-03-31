@@ -1,10 +1,13 @@
 // Returns the name of the template to be used based on the site and page name.
 const getTemplate = (page, site) => {
-  let template = 'document';
-  if (site === 'guides') {
-    template = page === 'index' ? 'guides-index' : 'guide';
+  switch (site) {
+    case 'guides':
+      return page === 'index' ? 'guides-index' : 'guide';
+    case 'ecosystem':
+      return page === 'index' ? 'ecosystem-index' : 'document';
+    default:
+      return 'document';
   }
-  return template;
 };
 
 module.exports.getTemplate = getTemplate;
