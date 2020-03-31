@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
+import { isBrowser } from '../utils/is-browser.js';
 
 const Document = props => {
   const {
@@ -28,6 +29,8 @@ const Document = props => {
   const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
 
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
+  /* Add the postRender CSS class without disturbing pre-render functionality */
+  const renderStatus = isBrowser() ? style.postRender : '';
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -41,8 +44,8 @@ const Document = props => {
       <Navbar />
       <div className="content">
         <div>
-          {showLeftColumn && (
-            <div className={`left-column ${style.leftColumn}`} id="left-column">
+          {(!isBrowser() || showLeftColumn) && (
+            <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
               <Sidebar
                 slug={slug}
                 publishedBranches={publishedBranches}
@@ -53,8 +56,8 @@ const Document = props => {
           )}
         </div>
         <div className="main-column" id="main-column">
-          {!showLeftColumn && (
-            <span className={`showNav ${style.showNav}`} id="showNav" onClick={toggleLeftColumn}>
+          {(!isBrowser() || !showLeftColumn) && (
+            <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
               Navigation
             </span>
           )}
