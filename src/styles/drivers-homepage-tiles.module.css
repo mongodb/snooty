@@ -59,17 +59,23 @@
   fill: none
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   .tileAnchor:nth-child(3n) .tile {
     margin-right: 16px;
   }
   .tileAnchor:nth-child(2n) .tile {
-    margin-right: 0;
+    margin-right: 16px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .tile {
+    width: 180px !important;
   }
 }
 
 @media screen and (max-width: 500px) {
   .tile {
-    width: 200px !important;
+    width: 150px !important;
   }
 }
