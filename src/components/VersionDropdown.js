@@ -57,9 +57,7 @@ const VersionDropdown = ({
   useOutsideHandler(wrapperRef);
 
   // Handle cases where EOL versions exist
-  const legacyDocsURL = normalizePath(
-    `${generatePathPrefix({ ...siteMetadata, parserBranch: 'legacy-docs' })}/?site=${process.env.GATSBY_SITE}/${slug}`
-  );
+  const legacyDocsURL = normalizePath(`https://docs.mongodb.com/legac/?site=${process.env.GATSBY_SITE}`);
   let legacyDocsHTML = '';
 
   if (published.length > active.length) {

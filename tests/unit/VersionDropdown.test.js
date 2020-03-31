@@ -45,6 +45,7 @@ useStaticQuery.mockImplementation(() => ({
   },
 }));
 
+// Testing a property with legacy docs
 describe('when rendered', () => {
   let wrapper;
 
@@ -78,7 +79,7 @@ describe('when rendered', () => {
       ).toBe(true);
     });
 
-    //The 9th element links to the Legacy Docs page
+    // The 9th element links to the Legacy Docs page
     it('has 9 list elements', () => {
       expect(wrapper.find('ul').children()).toHaveLength(9);
     });
@@ -113,14 +114,14 @@ describe('when rendered', () => {
   });
 });
 
-describe('when rendered', () => {
+describe('when rendering a property without legacy docs', () => {
   let wrapper;
 
   beforeAll(() => {
     wrapper = mount(<VersionDropdown pathname="installation" publishedBranches={publishedBranchesNoLegacy} />);
   });
 
-  describe('when the button is clicked in a property not containing legacy docs', () => {
+  describe('when the button is clicked in a property without legacy docs', () => {
     beforeAll(() => {
       wrapper.find('button').simulate('click');
     });
