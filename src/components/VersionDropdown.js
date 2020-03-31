@@ -14,7 +14,7 @@ const zip = (a, b) => {
 
 const VersionDropdown = ({
   publishedBranches: {
-    version: { published },
+    version: { published, active },
     git: {
       branches: { published: gitBranches },
     },
@@ -56,6 +56,22 @@ const VersionDropdown = ({
   const wrapperRef = useRef(null);
   useOutsideHandler(wrapperRef);
 
+  // Handle cases where EOL versions exist
+  const legacyDocsURL = normalizePath(
+    `${generatePathPrefix({ ...siteMetadata, parserBranch: 'legacy-docs' })}/?site=${process.env.GATSBY_SITE}/${slug}`
+  );
+  let legacyDocsHTML = '';
+
+  if (published.length > active.length) {
+    legacyDocsHTML = (
+      <li className="">
+        <a className="version-selector" href={legacyDocsURL}>
+          Legacy Docs
+        </a>
+      </li>
+    );
+  }
+
   return (
     <div ref={wrapperRef} className="btn-group version-sidebar">
       {/* TODO: update button to use LeafyGreen component when SSR support is
@@ -71,7 +87,7 @@ const VersionDropdown = ({
       </button>
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
-          {published.map(version => {
+          {active.map(version => {
             const url = normalizePath(`${generatePathPrefix({ ...siteMetadata, parserBranch: version })}/${slug}`);
             return (
               <li className={currentBranch === version ? 'active' : ''} key={version}>
@@ -81,6 +97,7 @@ const VersionDropdown = ({
               </li>
             );
           })}
+          {legacyDocsHTML}
         </ul>
       )}
     </div>
@@ -95,6 +112,7 @@ VersionDropdown.propTypes = {
     git: PropTypes.shape({
       branches: PropTypes.shape({
         published: PropTypes.arrayOf(PropTypes.string).isRequired,
+        active: PropTypes.arrayOf(PropTypes.string).isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
