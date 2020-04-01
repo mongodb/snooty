@@ -1,5 +1,4 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import {
   FeedbackProvider,
@@ -8,91 +7,16 @@ import {
   FeedbackHeading,
   FeedbackFooter,
 } from '../../src/components/FeedbackWidget';
-import { withScreenSize } from './useScreenSize.test';
-import * as stitch from '../../src/components/FeedbackWidget/stitch';
 import { BSON } from 'mongodb-stitch-server-sdk';
 
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 
-export async function tick() {
-  const nextTick = new Promise(resolve => {
-    setTimeout(resolve, 0);
-  });
-  jest.runAllTimers();
-  return await nextTick;
-}
-
-export function mockMutationObserver() {
-  global.MutationObserver = class {
-    constructor(callback) {}
-    disconnect() {}
-    observe(element, initObject) {}
-  };
-}
-
-export function mockSegmentAnalytics() {
-  window.analytics = {
-    user: jest.fn(() => ({
-      id: jest.fn(() => 'test-id-please-ignore'),
-    })),
-  };
-}
-
-export const stitch_function_mocks = {};
-export function mockStitchFunctions() {
-  stitch_function_mocks['createNewFeedback'] = jest
-    .spyOn(stitch, 'createNewFeedback')
-    .mockImplementation(({ page, user, ...rest }) => {
-      return {
-        _id: new BSON.ObjectId(),
-        page,
-        user,
-        ...rest,
-      };
-    });
-
-  stitch_function_mocks['updateFeedback'] = jest
-    .spyOn(stitch, 'updateFeedback')
-    .mockImplementation(({ feedback_id, ...fields }) => {
-      let qualifiers = fields.qualifiers || [];
-      if (Object.keys(fields).includes('rating')) {
-        qualifiers = fields.rating > 3 ? FEEDBACK_QUALIFIERS_POSITIVE : FEEDBACK_QUALIFIERS_NEGATIVE;
-      }
-      return { _id: feedback_id, qualifiers, ...fields };
-    });
-
-  stitch_function_mocks['submitFeedback'] = jest
-    .spyOn(stitch, 'submitFeedback')
-    .mockImplementation(({ feedback_id }) => {
-      return { _id: feedback_id };
-    });
-
-  stitch_function_mocks['abandonFeedback'] = jest
-    .spyOn(stitch, 'abandonFeedback')
-    .mockImplementation(({ feedback_id }) => {
-      return true;
-    });
-
-  stitch_function_mocks['addAttachment'] = jest
-    .spyOn(stitch, 'addAttachment')
-    .mockImplementation(({ feedback_id, attachment }) => {
-      return {
-        _id: feedback_id,
-        attachments: [attachment],
-      };
-    });
-
-  stitch_function_mocks['useStitchUser'] = jest.spyOn(stitch, 'useStitchUser').mockImplementation(() => {
-    return {
-      id: 'test-user-id',
-    };
-  });
-}
-export const clearMockStitchFunctions = () => {
-  Object.keys(stitch_function_mocks).forEach(mockedFunctionName => {
-    stitch_function_mocks[mockedFunctionName].mockClear();
-  });
-};
+import { tick, mockMutationObserver, mockSegmentAnalytics, withScreenSize } from '../utils';
+import {
+  stitchFunctionMocks,
+  mockStitchFunctions,
+  clearMockStitchFunctions,
+} from '../utils/feedbackWidgetStitchFunctions';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   const { view, isSupportRequest, ...feedback } = feedbackState;
@@ -120,10 +44,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
     options
   );
   // Need to wait for the next tick to let Loadable components load
-  await act(async () => {
-    await tick();
-  });
-  wrapper.update();
+  await tick({ wrapper });
   return wrapper;
 }
 
@@ -143,14 +64,11 @@ describe('FeedbackWidget', () => {
       expect(wrapper.exists('FeedbackForm')).toEqual(true);
       expect(wrapper.find('FeedbackForm').children()).toHaveLength(0);
       // Click the tab
-      await act(async () => {
-        wrapper
-          .find('FeedbackTab')
-          .childAt(0)
-          .simulate('click');
-        await tick();
-      });
-      wrapper.update();
+      wrapper
+        .find('FeedbackTab')
+        .childAt(0)
+        .simulate('click');
+      await tick({ wrapper });
       // After the click new feedback is initialized
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
       expect(wrapper.exists('FeedbackForm')).toEqual(true);
@@ -254,15 +172,12 @@ describe('FeedbackWidget', () => {
         withScreenSize('desktop')
       );
       // Click the close button
-      await act(async () => {
-        wrapper
-          .find('FeedbackCard')
-          .find('CloseButton')
-          .simulate('click');
-        await tick();
-      });
-      wrapper.update();
-      expect(stitch_function_mocks['abandonFeedback']).toHaveBeenCalledTimes(1);
+      wrapper
+        .find('FeedbackCard')
+        .find('CloseButton')
+        .simulate('click');
+      await tick({ wrapper });
+      expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
       expect(wrapper.exists('FeedbackCard')).toBe(false);
     });
 
@@ -290,15 +205,12 @@ describe('FeedbackWidget', () => {
         );
 
         // Simulate a 1-star rating
-        await act(async () => {
-          wrapper
-            .find('RatingView')
-            .find('Star')
-            .first()
-            .simulate('click');
-          await tick();
-        });
-        wrapper.update();
+        wrapper
+          .find('RatingView')
+          .find('Star')
+          .first()
+          .simulate('click');
+        await tick({ wrapper });
 
         expect(wrapper.exists('RatingView')).toBe(false);
         expect(wrapper.exists('QualifiersView')).toBe(true);
@@ -354,49 +266,40 @@ describe('FeedbackWidget', () => {
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(false);
 
         // Check the first qualifier
-        await act(async () => {
-          wrapper
-            .find('Qualifier')
-            .at(0)
-            .simulate('click');
-          await tick();
-        });
-        wrapper.update();
+        wrapper
+          .find('Qualifier')
+          .at(0)
+          .simulate('click');
+        await tick({ wrapper });
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(2))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(3))).toBe(false);
-        expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(1);
+        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
 
         // Check the second qualifier
-        await act(async () => {
-          wrapper
-            .find('Qualifier')
-            .at(1)
-            .simulate('click');
-          await tick();
-        });
-        wrapper.update();
+        wrapper
+          .find('Qualifier')
+          .at(1)
+          .simulate('click');
+        await tick({ wrapper });
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(2))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(3))).toBe(false);
-        expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(2);
+        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
 
         // Uncheck the first qualifier
-        await act(async () => {
-          wrapper
-            .find('Qualifier')
-            .at(0)
-            .simulate('click');
-          await tick();
-        });
-        wrapper.update();
+        wrapper
+          .find('Qualifier')
+          .at(0)
+          .simulate('click');
+        await tick({ wrapper });
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(2))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(3))).toBe(false);
-        expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(3);
+        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(3);
       });
 
       describe('when the Continue button is clicked', () => {
@@ -411,14 +314,11 @@ describe('FeedbackWidget', () => {
             withScreenSize('desktop')
           );
 
-          await act(async () => {
-            wrapper
-              .find('QualifiersView')
-              .find('Button')
-              .simulate('click');
-            await tick();
-          });
-          wrapper.update();
+          wrapper
+            .find('QualifiersView')
+            .find('Button')
+            .simulate('click');
+          await tick({ wrapper });
 
           expect(wrapper.exists('QualifiersView')).toBe(false);
           expect(wrapper.exists('CommentView')).toBe(true);
@@ -515,15 +415,12 @@ describe('FeedbackWidget', () => {
             withScreenSize('desktop')
           );
 
-          await act(async () => {
-            wrapper
-              .find('CommentView')
-              .find('SubmitButton')
-              .simulate('click');
-            await tick();
-          });
-          wrapper.update();
-          expect(stitch_function_mocks['submitFeedback']).toHaveBeenCalledTimes(1);
+          wrapper
+            .find('CommentView')
+            .find('SubmitButton')
+            .simulate('click');
+          await tick({ wrapper });
+          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
           expect(wrapper.exists('CommentView')).toBe(false);
           expect(wrapper.exists('SubmittedView')).toBe(false);
           expect(wrapper.exists('SupportView')).toBe(true);
@@ -542,16 +439,13 @@ describe('FeedbackWidget', () => {
             withScreenSize('desktop')
           );
 
-          await act(async () => {
-            wrapper
-              .find('CommentView')
-              .find('SubmitButton')
-              .simulate('click');
-            await tick();
-          });
-          wrapper.update();
+          wrapper
+            .find('CommentView')
+            .find('SubmitButton')
+            .simulate('click');
+          await tick({ wrapper });
 
-          expect(stitch_function_mocks['submitFeedback']).toHaveBeenCalledTimes(1);
+          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
           expect(wrapper.exists('CommentView')).toBe(false);
           expect(wrapper.exists('SubmittedView')).toBe(true);
         });
@@ -568,19 +462,13 @@ describe('FeedbackWidget', () => {
 
           // Type in an invalid email address
           const emailInput = wrapper.find('EmailInput');
-          await act(async () => {
-            emailInput.simulate('change', { target: { value: 'not-a-valid-email-address' } });
-            await tick();
-          });
-          wrapper.update();
+          emailInput.simulate('change', { target: { value: 'not-a-valid-email-address' } });
+          await tick({ wrapper });
 
           // Click the submit button
           const submitButton = wrapper.find('CommentView').find('SubmitButton');
-          await act(async () => {
-            submitButton.simulate('click');
-            await tick();
-          });
-          wrapper.update();
+          submitButton.simulate('click');
+          await tick({ wrapper });
 
           expect(wrapper.exists('CommentView')).toBe(true);
           expect(wrapper.exists('SubmittedView')).toBe(false);
@@ -625,11 +513,8 @@ describe('FeedbackWidget', () => {
         expect(wrapper.exists('SupportView')).toBe(true);
 
         // Click the Done button
-        await act(async () => {
-          wrapper.find('Button').simulate('click');
-          await tick();
-        });
-        wrapper.update();
+        wrapper.find('Button').simulate('click');
+        await tick({ wrapper });
       });
     });
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import debounce from 'lodash.debounce';
 import { isBrowser } from '../utils/is-browser';
+import debounce from '../utils/debounce';
 
 export function getViewport() {
   const viewport = isBrowser()
@@ -21,8 +21,7 @@ export default function useViewport() {
   };
 
   React.useEffect(() => {
-    // const debouncedOnChange = debounce(onChange, 200);
-    const debouncedOnChange = onChange;
+    const debouncedOnChange = debounce(onChange, 200);
     window.addEventListener('resize', debouncedOnChange);
     window.addEventListener('scroll', debouncedOnChange);
     return () => {

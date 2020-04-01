@@ -1,16 +1,15 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { FeedbackProvider, useFeedbackState } from '../../src/components/FeedbackWidget/context';
 import { FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 import screenshot from './data/screenshot.test.json';
+
+import { tick, mockSegmentAnalytics } from '../utils';
 import {
-  tick,
-  mockSegmentAnalytics,
-  stitch_function_mocks,
+  stitchFunctionMocks,
   mockStitchFunctions,
   clearMockStitchFunctions,
-} from './FeedbackWidget.test.js';
+} from '../utils/feedbackWidgetStitchFunctions';
 
 const FeedbackStateTest = () => {
   const {
@@ -119,14 +118,11 @@ describe('useFeedbackState', () => {
 
   it('initializes feedback and transitions to the "rating" view', async () => {
     const wrapper = await mountTest({});
-    await act(async () => {
-      wrapper.find('button#initializeFeedback').simulate('click');
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#initializeFeedback').simulate('click');
+    await tick({ wrapper });
     expect(wrapper.find('#view').prop('value')).toBe('rating');
     expect(wrapper.exists('#feedback')).toBe(true);
-    expect(stitch_function_mocks['createNewFeedback']).toHaveBeenCalledTimes(1);
+    expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('sets the feedback rating and transitions to the "qualifiers" view', async () => {
@@ -135,14 +131,11 @@ describe('useFeedbackState', () => {
       ...mockFeedback,
     });
     expect(wrapper.find('#rating').prop('value')).toBe(null);
-    await act(async () => {
-      wrapper.find('button#setRating').prop('onClick')(3);
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#setRating').prop('onClick')(3);
+    await tick({ wrapper });
     expect(wrapper.find('#rating').prop('value')).toBe(3);
     expect(wrapper.find('#view').prop('value')).toBe('qualifiers');
-    expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('selects and unselects qualifiers', async () => {
@@ -155,29 +148,23 @@ describe('useFeedbackState', () => {
     expect(wrapper.find('#qualifiers').children()).toHaveLength(4);
     expect(wrapper.exists('#qualifier-1')).toBe(true);
     expect(wrapper.find('#qualifier-1').prop('value')).toBe(false);
-    await act(async () => {
-      wrapper.find('button#setQualifier').prop('onClick')(
-        wrapper.find('#qualifier-1').prop('qualifier_id'),
-        !wrapper.find('#qualifier-1').prop('value')
-      );
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#setQualifier').prop('onClick')(
+      wrapper.find('#qualifier-1').prop('qualifier_id'),
+      !wrapper.find('#qualifier-1').prop('value')
+    );
+    await tick({ wrapper });
     expect(wrapper.find('#qualifier-1').prop('value')).toBe(true);
     // The qualifiers auto-save when they're set
-    expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
 
-    await act(async () => {
-      wrapper.find('button#setQualifier').prop('onClick')(
-        wrapper.find('#qualifier-1').prop('qualifier_id'),
-        !wrapper.find('#qualifier-1').prop('value')
-      );
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#setQualifier').prop('onClick')(
+      wrapper.find('#qualifier-1').prop('qualifier_id'),
+      !wrapper.find('#qualifier-1').prop('value')
+    );
+    await tick({ wrapper });
     expect(wrapper.find('#qualifier-1').prop('value')).toBe(false);
     // The qualifiers auto-save when they're set
-    expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(2);
+    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
   });
 
   it('submits qualifiers and transitions to the "comments" view', async () => {
@@ -187,14 +174,11 @@ describe('useFeedbackState', () => {
       rating: 3,
       qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
     });
-    await act(async () => {
-      wrapper.find('button#submitQualifiers').simulate('click');
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#submitQualifiers').simulate('click');
+    await tick({ wrapper });
     expect(wrapper.find('#view').prop('value')).toBe('comment');
     // The qualifiers auto-save when they're set, so this doesn't actually update the feedback
-    expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(0);
+    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(0);
   });
 
   it('submits a comment', async () => {
@@ -205,13 +189,10 @@ describe('useFeedbackState', () => {
       qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
     });
     expect(wrapper.find('#comment').prop('value')).toBe('');
-    await act(async () => {
-      wrapper.find('button#submitComment').prop('onClick')({ comment: 'Test Comment' });
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#submitComment').prop('onClick')({ comment: 'Test Comment' });
+    await tick({ wrapper });
     expect(wrapper.find('#comment').prop('value')).toBe('Test Comment');
-    expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('submits a user email', async () => {
@@ -222,13 +203,10 @@ describe('useFeedbackState', () => {
       qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
     });
     expect(wrapper.find('#user-email').prop('value')).toBe('');
-    await act(async () => {
-      wrapper.find('button#submitComment').prop('onClick')({ comment: '', email: 'test@example.com' });
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#submitComment').prop('onClick')({ comment: '', email: 'test@example.com' });
+    await tick({ wrapper });
     expect(wrapper.find('#user-email').prop('value')).toBe('test@example.com');
-    expect(stitch_function_mocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('attaches a screenshot', async () => {
@@ -238,12 +216,9 @@ describe('useFeedbackState', () => {
       rating: 3,
       qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
     });
-    await act(async () => {
-      wrapper.find('button#submitScreenshot').prop('onClick')(screenshot);
-      await tick();
-    });
-    wrapper.update();
-    expect(stitch_function_mocks['addAttachment']).toHaveBeenCalledTimes(1);
+    wrapper.find('button#submitScreenshot').prop('onClick')(screenshot);
+    await tick({ wrapper });
+    expect(stitchFunctionMocks['addAttachment']).toHaveBeenCalledTimes(1);
   });
 
   it('marks feedback as abandoned and resets state', async () => {
@@ -254,12 +229,9 @@ describe('useFeedbackState', () => {
       qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
     });
     expect(wrapper.find('#view').prop('value')).toBe('comment');
-    await act(async () => {
-      wrapper.find('button#abandon').prop('onClick')();
-      await tick();
-    });
-    wrapper.update();
+    wrapper.find('button#abandon').prop('onClick')();
+    await tick({ wrapper });
     expect(wrapper.find('#view').prop('value')).toBe('waiting');
-    expect(stitch_function_mocks['abandonFeedback']).toHaveBeenCalledTimes(1);
+    expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
   });
 });

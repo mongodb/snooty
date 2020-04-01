@@ -76,10 +76,7 @@ const Document = props => {
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
-                  <Breadcrumbs
-                    parentPaths={getNestedValue([slug], parentPaths)}
-                    slugTitleMapping={slugTitleMapping}
-                  />
+                  <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
                   <DocumentBody
                     refDocMapping={__refDocMapping}
                     slug={slug}
@@ -94,7 +91,7 @@ const Document = props => {
           </div>
         </div>
       </div>
-    </FeedbackProvider >
+    </FeedbackProvider>
   );
 };
 
