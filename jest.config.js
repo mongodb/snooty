@@ -3,7 +3,6 @@ module.exports = {
     __PATH_PREFIX__: ``,
   },
   verbose: true,
-  // snapshotSerializers: ['jest-emotion'],
   projects: [
     {
       displayName: 'regression',

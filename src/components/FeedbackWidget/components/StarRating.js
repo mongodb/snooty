@@ -83,7 +83,6 @@ const widthForSize = size => {
       return '140px';
     case '2x':
       return '100%';
-    // return '200px';
     case '3x':
       return '100%';
     default:
@@ -96,7 +95,6 @@ const marginForSize = size => {
       return '-24px 0 0px 0';
     case '2x':
       return '16px 0 32px 0';
-    // return '20px 0 24px 0';
     case '3x':
       return '32px 0 20px 0';
     default:

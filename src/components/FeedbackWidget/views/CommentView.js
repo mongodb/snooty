@@ -58,13 +58,6 @@ export default function CommentView({ ...props }) {
         onChange={e => setEmail(e.target.value)}
       />
       {hasEmailError && <InputErrorLabel htmlFor="feedback-email">Please enter a valid email address.</InputErrorLabel>}
-      {/* <CommentTextArea
-        rows={8}
-        placeholder="Describe your experience."
-        value={comment}
-        onChange={e => setComment(e.target.value)}
-      />
-      <EmailInput placeholder="Email Address (optional)" value={email} onChange={e => setEmail(e.target.value)} /> */}
       <Footer>
         <SubmitButton onClick={() => handleSubmit()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</SubmitButton>
         {screenshot && <span>Screenshot attached</span>}

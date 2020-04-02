@@ -28,7 +28,6 @@ const Floating = styled.div`
   right: 40px;
 `;
 const Card = styled(LeafygreenCard)`
-  /* width: 420px; */
   width: 320px;
 `;
 const CardHeader = styled.div`

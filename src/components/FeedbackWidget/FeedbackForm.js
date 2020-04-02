@@ -12,7 +12,6 @@ import RatingView from './views/RatingView';
 import QualifiersView from './views/QualifiersView';
 import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
-// import CommentView from './views/CommentView';
 const CommentView = Loadable(() => import('./views/CommentView'));
 
 export function FeedbackContent({ view }) {

@@ -9,7 +9,6 @@ import {
 } from './stitch';
 import { getSegmentUserId } from '../../utils/segment';
 import { getViewport } from '../../hooks/useViewport';
-import * as R from 'ramda';
 
 const FeedbackContext = React.createContext();
 
@@ -168,11 +167,8 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
 }
 
 function updateQualifier(qualifiers, id, value) {
-  return R.adjust(
-    qualifiers.findIndex(R.propEq('id', id)), // Find the qualifier by id
-    q => ({ ...q, value }), // ... and then update the value
-    qualifiers // ... in the provided array of qualifiers
-  );
+  const index = qualifiers.findIndex(q => q.id === id);
+  return [...qualifiers.slice(0, index), { ...qualifiers[index], value }, ...qualifiers.slice(index + 1)];
 }
 
 export function useFeedbackState() {

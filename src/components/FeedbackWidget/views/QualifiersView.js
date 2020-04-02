@@ -43,7 +43,6 @@ function Qualifier({ id, text, value }) {
   if (!text) return;
   return (
     <QualifierLayout onClick={() => setQualifier(id, !value)}>
-      {/* <Checkbox onChange={event => setQualifier(id, event.target.checked)} label={text} bold={false} /> */}
       <Checkbox checked={value} label={text} bold={false} />
     </QualifierLayout>
   );
