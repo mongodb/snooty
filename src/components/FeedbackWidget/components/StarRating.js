@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { useFeedbackState } from '../context';
 import { css } from '@emotion/core';
 import { isBrowser } from '../../../utils/is-browser';
 import { uiColors } from '@leafygreen-ui/palette';
 import loadable from '@loadable/component';
+
+import { StarIcon } from '../icons';
 const Tooltip = loadable(() => import('./LeafygreenTooltip'));
 
 const FILLED_STAR_COLOR = uiColors.yellow.base;
@@ -19,13 +19,10 @@ export const RATING_TOOLTIPS = {
   5: 'Extremely',
 };
 
-const filledStarIcon = findIconDefinition({ prefix: 'fas', iconName: 'star' });
-
 export const StarRatingLabel = styled.div`
   margin-top: 12px;
 `;
 
-// export default function StarRating({ size = '3x' }) {
 export default function StarRating({ size = '3x' }) {
   const [hoveredRating, setHoveredRating] = React.useState(null);
   const { feedback, setRating } = useFeedbackState();
@@ -67,7 +64,11 @@ export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onCl
         open={shouldShowTooltip}
         trigger={
           <div>
-            <StarIcon size={size} onMouseEnter={onMouseEnter} isHighlighted={isHighlighted} />
+            <StarIcon
+              size={size}
+              onMouseEnter={onMouseEnter}
+              style={{ color: isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR }}
+            />
           </div>
         }
       >
@@ -111,18 +112,4 @@ const Layout = styled.div(
   `
 );
 
-const StarContainer = styled.div`
-  padding-right: auto;
-  padding-left: auto;
-  /* padding: 0 10.5px 0 10.5px; */
-`;
-
-const StarIcon = ({ size, onMouseEnter, isHighlighted, ...props }) => (
-  <FontAwesomeIcon
-    icon={filledStarIcon}
-    size={size}
-    onMouseEnter={onMouseEnter}
-    color={isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR}
-    {...props}
-  />
-);
+const StarContainer = styled.div``;

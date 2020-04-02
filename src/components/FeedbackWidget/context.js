@@ -138,14 +138,14 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   // Stop giving feedback (if in progress) and reset the widget to the
   // initial state.
   async function abandon() {
+    // Reset to the initial state
+    setView('waiting');
     if (feedback) {
       // We hold on to abandoned feedback in the database, so wait until
       // we've marked the document as abandoned
       await abandonFeedback({ feedback_id: feedback._id });
       setFeedback(null);
     }
-    // Reset to the initial state
-    setView('waiting');
   }
 
   const value = {

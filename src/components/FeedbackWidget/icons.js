@@ -1,5 +1,17 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar as faStarSolid, faCamera, faSpinner, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons';
+import React from 'react';
 
-library.add(faStarSolid, faStarOutline, faCamera, faSpinner, faCheck);
+export const FontAwesomeIcon = ({ icon, size, spin, ...props }) => {
+  const classes = [`fa`, `fa-${icon}`, `fa-${size}`];
+  if (spin) {
+    classes.push(`fa-spin`);
+  }
+  return <div className={classes.join(' ')} {...props} />;
+};
+
+export const CameraIcon = props => <FontAwesomeIcon icon="camera" {...props} />;
+
+export const SpinnerIcon = props => <FontAwesomeIcon icon="spinner" spin {...props} />;
+
+export const CheckIcon = props => <FontAwesomeIcon icon="check" {...props} />;
+
+export const StarIcon = props => <FontAwesomeIcon icon="star" {...props} />;

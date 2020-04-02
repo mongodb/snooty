@@ -1,5 +1,3 @@
-import './icons';
-
 import { FeedbackProvider, useFeedbackState } from './context';
 import useFeedbackData from './useFeedbackData';
 import FeedbackForm from './FeedbackForm';
