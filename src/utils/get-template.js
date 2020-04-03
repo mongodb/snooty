@@ -3,7 +3,7 @@ const getTemplate = (page, site) => {
   switch (site) {
     case 'guides':
       return page === 'index' ? 'guides-index' : 'guide';
-    case 'drivers':
+    case 'ecosystem':
       return page === 'index' ? 'ecosystem-index' : 'document';
     default:
       return 'document';

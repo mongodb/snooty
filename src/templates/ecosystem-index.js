@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import InternalPageNav from '../components/InternalPageNav';
 import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
-import EcosystemHomepageStyles from '../styles/ecosystemHomepage.module.css';
+import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 
 const EcosystemIndex = props => {
@@ -31,7 +31,7 @@ const EcosystemIndex = props => {
             <div className="documentwrapper">
               <div className="bodywrapper">
                 <div className="body">
-                  <section>
+                  <section className={EcosystemHomepageStyles.mainContentPadding}>
                     <h1>Start Developing with MongoDB</h1>
                     <p>Connect your application to your database with one of our official libraries.</p>
                     <p>
@@ -47,7 +47,6 @@ const EcosystemIndex = props => {
                       .
                     </p>
                   </section>
-                  <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   <Footer />
                 </div>
               </div>
