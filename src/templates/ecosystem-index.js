@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
-import InternalPageNav from '../components/InternalPageNav';
 import { Helmet } from 'react-helmet';
 import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
@@ -13,7 +12,7 @@ const EcosystemIndex = props => {
   const {
     pageContext: {
       slug,
-      metadata: { slugToTitle: slugTitleMapping, toctreeOrder },
+      metadata: { slugToTitle: slugTitleMapping },
     },
   } = props;
 
