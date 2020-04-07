@@ -4,6 +4,8 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
 import dropdownStyles from '../styles/version-dropdown.module.css';
+import Button from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
 
 const zip = (a, b) => {
   // Zip arrays a and b into an object where a is used for keys and b for values
@@ -72,17 +74,15 @@ const VersionDropdown = ({
 
   return (
     <div ref={wrapperRef} className="btn-group version-sidebar">
-      {/* TODO: update button to use LeafyGreen component when SSR support is
-          implemented: https://jira.mongodb.org/browse/DOCSP-8176 */}
-      <button
-        type="button"
+      <Button
+        variant="default"
         className="version-button dropdown-toggle"
-        onClick={() => setHidden(!hidden)}
         title="Select version"
+        glyph={<Icon glyph="CaretDown" />}
+        onClick={() => setHidden(!hidden)}
       >
         {prefixVersion(currentBranch)}
-        <span className="caret"></span>
-      </button>
+      </Button>
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
           {active.map(version => {
