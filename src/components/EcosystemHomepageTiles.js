@@ -21,62 +21,62 @@ import IconSwift from '../../static/svg/icons/icon-Swift';
 const EcosystemHomepageTiles = () => {
   const tileValues = [
     {
-      slug: '/drivers/c/',
+      slug: '/c/',
       title: 'C',
       icon: <IconC />,
     },
     {
-      slug: '/drivers/cxx/',
+      slug: '/cxx/',
       title: 'C++',
       icon: <IconCpp />,
     },
     {
-      slug: '/drivers/csharp/',
+      slug: '/csharp/',
       title: 'C#',
       icon: <IconCsharp />,
     },
     {
-      slug: '/drivers/go/',
+      slug: '/go/',
       title: 'Go',
       icon: <IconGo />,
     },
     {
-      slug: '/drivers/java/',
+      slug: '/java/',
       title: 'Java',
       icon: <IconJava />,
     },
     {
-      slug: '/drivers/node/',
+      slug: '/node/',
       title: 'Node.js',
       icon: <IconNode />,
     },
     {
-      slug: '/drivers/perl/',
+      slug: '/perl/',
       title: 'Perl',
       icon: <IconPerl />,
     },
     {
-      slug: '/drivers/php/',
+      slug: '/php/',
       title: 'PHP',
       icon: <IconPHP />,
     },
     {
-      slug: '/drivers/python/',
+      slug: '/python/',
       title: 'Python',
       icon: <IconPython />,
     },
     {
-      slug: '/ruby-driver/current/',
+      slug: '/ruby/',
       title: 'Ruby',
       icon: <IconRuby />,
     },
     {
-      slug: '/drivers/scala/',
+      slug: '/scala/',
       title: 'Scala',
       icon: <IconScala />,
     },
     {
-      slug: '/drivers/swift/',
+      slug: '/swift/',
       title: 'Swift',
       icon: <IconSwift />,
     },
