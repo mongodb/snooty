@@ -5,7 +5,6 @@ import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
 import dropdownStyles from '../styles/version-dropdown.module.css';
 import Button from '@leafygreen-ui/button';
-import Icon from '@leafygreen-ui/icon';
 
 const zip = (a, b) => {
   // Zip arrays a and b into an object where a is used for keys and b for values
@@ -78,11 +77,11 @@ const VersionDropdown = ({
         variant="default"
         className="version-button dropdown-toggle"
         title="Select version"
-        glyph={<Icon glyph="CaretDown" />}
         onClick={() => setHidden(!hidden)}
-        size="large"
+        size="medium"
       >
         {prefixVersion(currentBranch)}
+        <span className={['caret', dropdownStyles.caret].join(' ')}></span>
       </Button>
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
