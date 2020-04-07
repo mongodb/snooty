@@ -53,7 +53,7 @@ export default function StarRating({ size = '3x' }) {
 
 export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onClick, onMouseEnter, onMouseLeave }) {
   return (
-    <StarContainer onClick={onClick} onMouseLeave={onMouseLeave}>
+    <div onClick={onClick} onMouseLeave={onMouseLeave}>
       <Tooltip
         key={`star-${size}-${ratingValue}`}
         id={`star-${size}-${ratingValue}`}
@@ -63,18 +63,18 @@ export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onCl
         variant="dark"
         open={shouldShowTooltip}
         trigger={
-          <div>
+          <StarContainer>
             <StarIcon
               size={size}
               onMouseEnter={onMouseEnter}
               style={{ color: isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR }}
             />
-          </div>
+          </StarContainer>
         }
       >
         {`${RATING_TOOLTIPS[ratingValue]} helpful`}
       </Tooltip>
-    </StarContainer>
+    </div>
   );
 }
 
@@ -112,4 +112,6 @@ const Layout = styled.div(
   `
 );
 
-const StarContainer = styled.div``;
+const StarContainer = styled.div`
+  cursor: pointer;
+`;

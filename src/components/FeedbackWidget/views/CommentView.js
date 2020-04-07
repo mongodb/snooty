@@ -42,15 +42,15 @@ export default function CommentView({ ...props }) {
   return (
     <Layout>
       <RatingHeader isPositive={isPositiveRating} />
-      <InputLabel htmlFor="feedback-comment">Describe your experience.</InputLabel>
+      <InputLabel htmlFor="feedback-comment">Comment</InputLabel>
       <CommentTextArea
         id="feedback-comment"
-        rows={8}
         placeholder="Describe your experience."
+        rows={8}
         value={comment}
         onChange={e => setComment(e.target.value)}
       />
-      <InputLabel htmlFor="feedback-email">Email Address (optional)</InputLabel>
+      <InputLabel htmlFor="feedback-email">Email Address</InputLabel>
       <EmailInput
         id="feedback-email"
         placeholder="someone@example.com"

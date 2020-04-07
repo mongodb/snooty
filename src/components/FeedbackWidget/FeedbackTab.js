@@ -20,4 +20,5 @@ const Container = styled(LeafygreenCard)`
   transform: rotate(-90deg);
   transform-origin: top right;
   user-select: none;
+  cursor: pointer;
 `;
