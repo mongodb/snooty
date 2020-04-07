@@ -52,6 +52,7 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.6",
     "@babel/preset-react": "^7.8.3",
+    "@leafygreen-ui/button": "^4.1.1",
     "@leafygreen-ui/card": "^2.0.0",
     "@leafygreen-ui/code": "^3.3.0",
     "babel-loader": "^8.0.6",
