@@ -80,6 +80,7 @@ const VersionDropdown = ({
         title="Select version"
         glyph={<Icon glyph="CaretDown" />}
         onClick={() => setHidden(!hidden)}
+        size="large"
       >
         {prefixVersion(currentBranch)}
       </Button>
