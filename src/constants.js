@@ -103,6 +103,20 @@ export const SECTION_NAME_MAPPING = {
   },
 };
 
+export const PROPERTY_NAME_MAPPING = {
+  manual: 'MongoDB Server',
+  cloud: 'MongoDB Atlas',
+  compass: 'MongoDB Compass',
+  charts: 'MongoDB Charts',
+  atlas_open_service_broker: 'MongoDB Atlas Open Service Broker on Kubernetes',
+  k8s_operator: 'MongoDB Enterprise Kubernetes Operator',
+  mms: 'MongoDB Ops Manager',
+  bi_connector: 'MongoDB Connector for BI',
+  spark_connector: 'MongoDB Connector for Spark',
+  mongoid: 'Mongoid',
+  ecosystem: 'MongoDB Ecosystem',
+};
+
 export const ADMONITIONS = ['admonition', 'example', 'important', 'note', 'seealso', 'tip', 'warning'];
 
 export const URL_SLUGS = {
