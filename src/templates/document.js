@@ -30,7 +30,7 @@ const Document = props => {
 
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
   /* Add the postRender CSS class without disturbing pre-render functionality */
-  const renderStatus = isBrowser() ? style.postRender : '';
+  const renderStatus = isBrowser ? style.postRender : '';
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -44,7 +44,7 @@ const Document = props => {
       <Navbar />
       <div className="content">
         <div>
-          {(!isBrowser() || showLeftColumn) && (
+          {(!isBrowser || showLeftColumn) && (
             <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
               <Sidebar
                 slug={slug}
@@ -56,7 +56,7 @@ const Document = props => {
           )}
         </div>
         <div className="main-column" id="main-column">
-          {(!isBrowser() || !showLeftColumn) && (
+          {(!isBrowser || !showLeftColumn) && (
             <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
               Navigation
             </span>
