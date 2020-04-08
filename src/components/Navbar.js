@@ -33,7 +33,7 @@ export default class Navbar extends Component {
     document.body.appendChild(script);
 
     // Update activeLink state on render
-    if (isBrowser()) {
+    if (isBrowser) {
       this.setState({ activeLink: this.checkForLink(window.location) });
     }
   }
