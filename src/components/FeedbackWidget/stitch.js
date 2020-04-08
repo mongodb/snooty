@@ -6,7 +6,7 @@ const APP_ID = 'feedback-ibcyy';
 function getStitchApp() {
   return Stitch.hasAppClient(APP_ID) ? Stitch.getAppClient(APP_ID) : Stitch.initializeAppClient(APP_ID);
 }
-export const app = isBrowser() ? getStitchApp() : { auth: {} };
+export const app = isBrowser ? getStitchApp() : { auth: {} };
 
 // User Authentication & Management
 export async function loginAnonymous() {

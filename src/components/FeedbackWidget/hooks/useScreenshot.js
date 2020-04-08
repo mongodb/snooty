@@ -25,7 +25,7 @@ async function takeScreenshot(subject, config = {}) {
 
 async function takeFeedbackScreenshot() {
   const dataUri =
-    isBrowser() &&
+    isBrowser &&
     (await takeScreenshot(document, {
       classesOfIgnoredDocBodyElements: [
         'feedback-form', // Don't include the feedback form

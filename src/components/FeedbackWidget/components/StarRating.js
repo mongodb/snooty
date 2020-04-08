@@ -28,7 +28,7 @@ export default function StarRating({ size = '3x' }) {
   const { feedback, setRating } = useFeedbackState();
   const selectedRating = feedback && feedback.rating;
   return (
-    isBrowser() && (
+    isBrowser && (
       <Layout size={size}>
         {[1, 2, 3, 4, 5].map(ratingValue => {
           const isHighlighted = selectedRating ? selectedRating >= ratingValue : hoveredRating >= ratingValue;

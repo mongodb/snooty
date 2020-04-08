@@ -1,5 +1,4 @@
 import React from 'react';
-import Loadable from '@loadable/component';
 
 import useScreenSize from '../../hooks/useScreenSize';
 import { useFeedbackState } from './context';
@@ -12,7 +11,7 @@ import RatingView from './views/RatingView';
 import QualifiersView from './views/QualifiersView';
 import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
-const CommentView = Loadable(() => import('./views/CommentView'));
+import CommentView from './views/CommentView';
 
 export function FeedbackContent({ view }) {
   const View = {

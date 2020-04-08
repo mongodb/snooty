@@ -4,11 +4,12 @@ import styled from '@emotion/styled';
 
 import Button from '@leafygreen-ui/button';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
-import useScreenshot from '../hooks/useScreenshot';
 import { useFeedbackState } from '../context';
-import ScreenshotButton from '../components/ScreenshotButton';
 import { uiColors } from '@leafygreen-ui/palette';
 import validateEmail from '../../../utils/validate-email';
+// import ScreenshotButton from '../components/ScreenshotButton';
+import Loadable from '@loadable/component';
+const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 function useValidation(inputValue, validator) {
   const [isValid, setIsValid] = React.useState(null);
@@ -23,7 +24,6 @@ export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
-  const { screenshot, loading, takeScreenshot } = useScreenshot();
 
   const [comment, setComment] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -60,8 +60,7 @@ export default function CommentView({ ...props }) {
       {hasEmailError && <InputErrorLabel htmlFor="feedback-email">Please enter a valid email address.</InputErrorLabel>}
       <Footer>
         <SubmitButton onClick={() => handleSubmit()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</SubmitButton>
-        {screenshot && <span>Screenshot attached</span>}
-        <ScreenshotButton screenshot={screenshot} loading={loading} takeScreenshot={takeScreenshot} />
+        <ScreenshotButton />
       </Footer>
     </Layout>
   );

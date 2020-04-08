@@ -3,9 +3,11 @@ import Button from '@leafygreen-ui/button';
 import Tooltip from './LeafygreenTooltip';
 import { CameraIcon, SpinnerIcon, CheckIcon } from '../icons';
 import { uiColors } from '@leafygreen-ui/palette';
+import useScreenshot from '../hooks/useScreenshot';
 
-export default function ScreenshotButton({ takeScreenshot, loading, screenshot, size = 'default', ...props }) {
+export default function ScreenshotButton({ size = 'default', ...props }) {
   const [isHovered, setIsHovered] = React.useState(false);
+  const { screenshot, loading, takeScreenshot } = useScreenshot();
   const label = screenshot ? 'Screenshot Saved' : loading ? 'Taking Screenshot' : 'Take a Screenshot';
   return (
     <div id="screenshot-button" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>

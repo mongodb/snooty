@@ -346,7 +346,7 @@ describe('FeedbackWidget', () => {
         // Input label
         const commentInputLabel = wrapper.find('InputLabel').filter({ htmlFor: commentInput.prop('id') });
         expect(commentInputLabel.exists()).toBe(true);
-        expect(commentInputLabel.text()).toBe('Describe your experience.');
+        expect(commentInputLabel.text()).toBe('Comment');
       });
 
       it('shows an email text input', async () => {
@@ -368,7 +368,7 @@ describe('FeedbackWidget', () => {
         // Input label
         const emailInputLabel = wrapper.find('InputLabel').filter({ htmlFor: emailInput.prop('id') });
         expect(emailInputLabel.exists()).toBe(true);
-        expect(emailInputLabel.text()).toBe('Email Address (optional)');
+        expect(emailInputLabel.text()).toBe('Email Address');
       });
 
       it('shows a Support button for feedback with a support request', async () => {
