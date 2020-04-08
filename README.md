@@ -65,13 +65,9 @@ Install [mut](https://github.com/mongodb/mut) and ensure that you have properly 
 make stage
 ```
 
-## Using mock test data
+## Releasing
 
-Every time you run the application without the flag below, the data retrieved for the docs site is stored in `tests/unit/data/site/__testDataLatest.json`. There is also a reference data file in `tests/unit/data/site/__testData.json`. You can load either one of these into the Gatsby build with the flag:
-
-```shell
-USE_TEST_DATA=__testData.json
-```
+We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, run `npm version [major | minor | patch]`, using [Semantic Versioning](https://semver.org) guidelines to correctly increment the version number. GitHub Actions will create a new git tag and push it to GitHub. It will additionally create a ZIP file to be used for preview mode and draft a release (found [here](https://github.com/mongodb/snooty/releases)). To complete the process, update the release notes using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/master/CHANGELOG.md) and publish the release.
 
 ## Testing
 
