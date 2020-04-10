@@ -75,7 +75,7 @@ const VersionDropdown = ({
     <div ref={wrapperRef} className="btn-group version-sidebar">
       <Button
         variant="default"
-        className="version-button dropdown-toggle"
+        className={['version-button', 'dropdown-toggle', dropdownStyles.button].join(' ')}
         title="Select version"
         onClick={() => setHidden(!hidden)}
         size="medium"
