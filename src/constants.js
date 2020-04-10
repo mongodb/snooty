@@ -113,8 +113,10 @@ export const PROPERTY_NAME_MAPPING = {
   mms: 'MongoDB Ops Manager',
   bi_connector: 'MongoDB Connector for BI',
   spark_connector: 'MongoDB Connector for Spark',
+  kafka_connector: 'MongoDB Kafka Connector',
   mongoid: 'Mongoid',
   ecosystem: 'MongoDB Ecosystem',
+  ruby_driver: 'Ruby MongoDB Driver',
 };
 
 export const ADMONITIONS = ['admonition', 'example', 'important', 'note', 'seealso', 'tip', 'warning'];
