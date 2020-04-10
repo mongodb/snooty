@@ -51,7 +51,6 @@ import Target from './Target';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
-import RoleDoc from './Roles/Doc';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 
@@ -64,7 +63,6 @@ export default class ComponentFactory extends Component {
     this.roles = {
       abbr: RoleAbbr,
       class: RoleClass,
-      doc: RoleDoc,
       file: RoleFile,
       guilabel: RoleGUILabel,
     };

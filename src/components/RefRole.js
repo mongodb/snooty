@@ -15,15 +15,19 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, target, url }, sl
     );
   }
 
-  // Render internal target links
-  const link = fileid === slug ? `#${target}` : `${fileid}#${target}`;
+  // Render internal target and page links
+  let link;
+  if (target) {
+    link = fileid === slug ? `#${target}` : `${fileid}#${target}`;
+  } else {
+    link = fileid;
+  }
+
   return (
     <Link to={link} className="reference internal">
-      <span className={`${domain} ${domain}-ref`}>
-        {children.map((node, i) => (
-          <ComponentFactory key={i} nodeData={node} />
-        ))}
-      </span>
+      {children.map((node, i) => (
+        <ComponentFactory key={i} nodeData={node} />
+      ))}
     </Link>
   );
 };
