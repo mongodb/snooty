@@ -7,8 +7,6 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
 import DocumentBody from '../components/DocumentBody';
-import { Helmet } from 'react-helmet';
-import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
@@ -23,8 +21,6 @@ const Document = props => {
     ...rest
   } = props;
 
-  const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
-
   const windowSize = useWindowSize();
   const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
 
@@ -38,9 +34,6 @@ const Document = props => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
       <Navbar />
       <div className="content">
         <div>
@@ -66,12 +59,7 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody
-                    refDocMapping={__refDocMapping}
-                    slug={slug}
-                    slugTitleMapping={slugTitleMapping}
-                    {...rest}
-                  />
+                  <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   <Footer />
                 </div>
