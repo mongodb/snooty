@@ -1,4 +1,10 @@
-const { getGitBranch } = require('../src/utils/get-git-branch');
+const { execSync } = require('child_process');
+
+const getGitBranch = () => {
+  return execSync('git rev-parse --abbrev-ref HEAD')
+    .toString('utf8')
+    .replace(/[\n\r\s]+$/, '');
+};
 
 const ensureMaster = () => getGitBranch() === 'master';
 
@@ -7,7 +13,7 @@ const main = () => {
 
   if (!ensureMaster()) {
     warned = true;
-    console.error('Can only release on master');
+    console.error('ERROR: Can only release on master');
   }
 
   if (warned) {
