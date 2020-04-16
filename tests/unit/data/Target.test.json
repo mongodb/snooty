@@ -3,18 +3,19 @@
     "type": "target",
     "position": {
       "start": {
-        "line": "78"
+        "line": {
+          "$numberInt": "78"
+        }
       }
     },
-    "domain": "std",
-    "name": "option",
-    "options": {},
     "children": [
       {
         "type": "directive_argument",
         "position": {
           "start": {
-            "line": "90"
+            "line": {
+              "$numberInt": "90"
+            }
           }
         },
         "children": [
@@ -22,7 +23,9 @@
             "type": "literal",
             "position": {
               "start": {
-                "line": "90"
+                "line": {
+                  "$numberInt": "90"
+                }
               }
             },
             "children": [
@@ -30,7 +33,9 @@
                 "type": "text",
                 "position": {
                   "start": {
-                    "line": "90"
+                    "line": {
+                      "$numberInt": "90"
+                    }
                   }
                 },
                 "value": "--config <filename>, -f <filename>"
@@ -43,53 +48,63 @@
         "type": "target_identifier",
         "position": {
           "start": {
-            "line": "90"
+            "line": {
+              "$numberInt": "90"
+            }
           }
         },
-        "ids": [
-          "--config",
-          "mongos.--config"
-        ],
         "children": [
           {
             "type": "text",
             "position": {
               "start": {
-                "line": "90"
+                "line": {
+                  "$numberInt": "90"
+                }
               }
             },
             "value": "mongos --config"
           }
+        ],
+        "ids": [
+          "--config",
+          "mongos.--config"
         ]
       },
       {
         "type": "target_identifier",
         "position": {
           "start": {
-            "line": "90"
+            "line": {
+              "$numberInt": "90"
+            }
           }
         },
-        "ids": [
-          "-f",
-          "mongos.-f"
-        ],
         "children": [
           {
             "type": "text",
             "position": {
               "start": {
-                "line": "90"
+                "line": {
+                  "$numberInt": "90"
+                }
               }
             },
             "value": "mongos -f"
           }
+        ],
+        "ids": [
+          "-f",
+          "mongos.-f"
         ]
       },
       {
         "type": "paragraph",
         "position": {
           "start": {
-            "line": "80"
+            "line": {
+              "$numberInt": "80"
+            }
           }
         },
         "children": [
@@ -97,28 +112,99 @@
             "type": "text",
             "position": {
               "start": {
-                "line": "80"
+                "line": {
+                  "$numberInt": "80"
+                }
               }
             },
-            "value": "Specifies a configuration file for runtime configuration options. The\nconfiguration file is the preferred method for runtime configuration of \nmongos. The options are equivalent to the command-line\nconfiguration options. See "
+            "value": "Specifies a configuration file for runtime configuration options. The\nconfiguration file is the preferred method for runtime configuration of\n"
           },
           {
-            "type": "role",
+            "type": "ref_role",
             "position": {
               "start": {
-                "line": "80"
+                "line": {
+                  "$numberInt": "80"
+                }
               }
             },
-            "domain": "",
-            "name": "doc",
-            "target": "/reference/configuration-options",
-            "children": []
+            "children": [
+              {
+                "type": "literal",
+                "position": {
+                  "start": {
+                    "line": {
+                      "$numberInt": "80"
+                    }
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "80"
+                        }
+                      }
+                    },
+                    "value": "mongos"
+                  }
+                ]
+              }
+            ],
+            "domain": "std",
+            "name": "program",
+            "target": "mongos",
+            "flag": "",
+            "fileid": "reference/program/mongos"
           },
           {
             "type": "text",
             "position": {
               "start": {
-                "line": "80"
+                "line": {
+                  "$numberInt": "80"
+                }
+              }
+            },
+            "value": ". The options are equivalent to the command-line\nconfiguration options. See "
+          },
+          {
+            "type": "ref_role",
+            "position": {
+              "start": {
+                "line": {
+                  "$numberInt": "80"
+                }
+              }
+            },
+            "children": [
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": {
+                      "$numberInt": "4"
+                    }
+                  }
+                },
+                "value": "Configuration File Options"
+              }
+            ],
+            "domain": "",
+            "name": "doc",
+            "target": "",
+            "flag": "",
+            "fileid": "/reference/configuration-options"
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": {
+                  "$numberInt": "80"
+                }
               }
             },
             "value": " for\nmore information."
@@ -129,7 +215,9 @@
         "type": "paragraph",
         "position": {
           "start": {
-            "line": "86"
+            "line": {
+              "$numberInt": "86"
+            }
           }
         },
         "children": [
@@ -137,14 +225,69 @@
             "type": "text",
             "position": {
               "start": {
-                "line": "86"
+                "line": {
+                  "$numberInt": "86"
+                }
               }
             },
-            "value": "Ensure the configuration file uses ASCII encoding. The mongos \ninstance does not support configuration files with non-ASCII encoding,\nincluding UTF-8."
+            "value": "Ensure the configuration file uses ASCII encoding. The "
+          },
+          {
+            "type": "ref_role",
+            "position": {
+              "start": {
+                "line": {
+                  "$numberInt": "86"
+                }
+              }
+            },
+            "children": [
+              {
+                "type": "literal",
+                "position": {
+                  "start": {
+                    "line": {
+                      "$numberInt": "86"
+                    }
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "86"
+                        }
+                      }
+                    },
+                    "value": "mongos"
+                  }
+                ]
+              }
+            ],
+            "domain": "std",
+            "name": "program",
+            "target": "mongos",
+            "flag": "",
+            "fileid": "reference/program/mongos"
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": {
+                  "$numberInt": "86"
+                }
+              }
+            },
+            "value": "\ninstance does not support configuration files with non-ASCII encoding,\nincluding UTF-8."
           }
         ]
       }
-    ]
+    ],
+    "domain": "std",
+    "name": "option"
   },
   "b": {
     "type": "target",

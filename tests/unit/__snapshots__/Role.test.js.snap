@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`correctly renders a "doc" role 1`] = `
-<a
-  class="reference internal"
-  href="/use-cases/product-catalog"
->
-  Product Catalog
-</a>
-`;
-
 exports[`correctly renders a "file" role 1`] = `
 <code
   class="file docutils literal"

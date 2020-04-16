@@ -21,20 +21,38 @@ exports[`renders correctly with a directive_argument node 1`] = `
   <dd>
     <p>
       Specifies a configuration file for runtime configuration options. The
-configuration file is the preferred method for runtime configuration of 
-mongos. The options are equivalent to the command-line
+configuration file is the preferred method for runtime configuration of
+
+      <a
+        class="reference internal"
+        href="/reference/program/mongos#mongos"
+      >
+        <code>
+          mongos
+        </code>
+      </a>
+      . The options are equivalent to the command-line
 configuration options. See 
       <a
         class="reference internal"
         href="/reference/configuration-options"
       >
-        /reference/configuration-options
+        Configuration File Options
       </a>
        for
 more information.
     </p>
     <p>
-      Ensure the configuration file uses ASCII encoding. The mongos 
+      Ensure the configuration file uses ASCII encoding. The 
+      <a
+        class="reference internal"
+        href="/reference/program/mongos#mongos"
+      >
+        <code>
+          mongos
+        </code>
+      </a>
+      
 instance does not support configuration files with non-ASCII encoding,
 including UTF-8.
     </p>
