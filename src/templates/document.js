@@ -24,6 +24,7 @@ const Document = props => {
     ...rest
   } = props;
 
+  const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
   const feedbackData = useFeedbackData({
     slug,
     title: title || 'Home',
