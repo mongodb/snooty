@@ -10,6 +10,7 @@ import DocumentBody from '../components/DocumentBody';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
+import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
 
 import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from '../components/FeedbackWidget';
 
