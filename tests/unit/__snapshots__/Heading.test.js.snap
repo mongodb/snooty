@@ -1,16 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<h3
-  id="create-an-administrative-username-and-password"
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+<div
+  class="emotion-0 emotion-1"
 >
-  Create an administrative username and password
-  <a
-    class="headerlink"
-    href="#create-an-administrative-username-and-password"
-    title="Permalink to this headline"
+  <h3
+    id="create-an-administrative-username-and-password"
   >
-    ¶
-  </a>
-</h3>
+    Create an administrative username and password
+    <a
+      class="headerlink"
+      href="#create-an-administrative-username-and-password"
+      title="Permalink to this headline"
+    >
+      ¶
+    </a>
+  </h3>
+</div>
 `;
