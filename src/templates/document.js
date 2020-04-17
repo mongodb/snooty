@@ -10,7 +10,7 @@ import DocumentBody from '../components/DocumentBody';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
-import { getPlaintextTitle } from '../utils/get-plaintext-title.js';
+import { getPlaintext } from '../utils/get-plaintext.js';
 
 import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from '../components/FeedbackWidget';
 
@@ -25,7 +25,7 @@ const Document = props => {
     ...rest
   } = props;
 
-  const title = getPlaintextTitle(getNestedValue([slug], slugTitleMapping));
+  const title = getPlaintext(getNestedValue([slug], slugTitleMapping));
   const feedbackData = useFeedbackData({
     slug,
     title: title || 'Home',
