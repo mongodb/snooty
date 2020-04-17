@@ -128,7 +128,11 @@ exports.createPages = async ({ actions }) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
 
-      const template = getTemplate(page, process.env.GATSBY_SITE);
+      const template = getTemplate(
+        process.env.GATSBY_SITE,
+        page,
+        getNestedValue(['ast', 'options', 'template'], pageNodes)
+      );
       const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({

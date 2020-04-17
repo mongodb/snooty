@@ -4,6 +4,7 @@ import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getPlaintext } from '../utils/get-plaintext';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 
 export default class DefaultLayout extends Component {
@@ -128,12 +129,17 @@ export default class DefaultLayout extends Component {
   };
 
   render() {
-    const { children, pageContext } = this.props;
+    const {
+      children,
+      pageContext: { metadata, slug },
+    } = this.props;
     const { pillstrips } = this.state;
-    const title = getNestedValue(['metadata', 'title'], pageContext) || '';
+    const lookup = slug === '/' ? 'index' : slug;
+    const siteTitle = getNestedValue(['title'], metadata) || '';
+    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
-        <SiteMetadata title={title} />
+        <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
         {React.cloneElement(children, {
           pillstrips,
           addPillstrip: this.addPillstrip,
@@ -153,6 +159,7 @@ DefaultLayout.propTypes = {
       }).isRequired,
     }).isRequired,
     metadata: PropTypes.shape({
+      slugToTitle: PropTypes.object,
       title: PropTypes.string,
     }).isRequired,
   }).isRequired,

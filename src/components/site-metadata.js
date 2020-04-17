@@ -4,16 +4,15 @@ import { Helmet } from 'react-helmet';
 // eslint-disable-next-line import/no-unresolved
 import { useSiteMetadata } from 'useSiteMetadata'; // Alias in webpack.config
 
-const SiteMetadata = props => {
+const SiteMetadata = ({ pageTitle, siteTitle }) => {
   const { branch, project } = useSiteMetadata();
-  const { title } = props;
   return (
     <Helmet
-      titleTemplate={`%s — ${title}`}
-      defaultTitle={title}
+      defaultTitle="MongoDB Documentation"
+      title={`${pageTitle} — ${siteTitle}`}
       bodyAttributes={{
         'data-project': project,
-        'data-project-title': title,
+        'data-project-title': siteTitle,
         'data-branch': branch,
         'data-enable-marian': 1,
       }}
@@ -22,7 +21,8 @@ const SiteMetadata = props => {
 };
 
 SiteMetadata.propTypes = {
-  title: PropTypes.string,
+  pageTitle: PropTypes.string.isRequired,
+  siteTitle: PropTypes.string.isRequired,
 };
 
 export default SiteMetadata;
