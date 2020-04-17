@@ -18,7 +18,7 @@ module.exports = {
       moduleNameMapper: {
         '^.+\\.(css)$': 'identity-obj-proxy',
       },
-      setupFilesAfterEnv: ['<rootDir>/tests/testSetup.js'],
+      setupFilesAfterEnv: ['<rootDir>/tests/testSetup.js', '<rootDir>/tests/emotionTestSetup.js'],
       snapshotSerializers: ['enzyme-to-json/serializer'],
       testMatch: ['<rootDir>/tests/unit/*.test.js'],
       transform: {
