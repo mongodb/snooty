@@ -1,0 +1,4 @@
+.code * {
+  overflow-wrap: normal !important;
+  white-space: pre;
+}

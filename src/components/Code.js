@@ -11,6 +11,8 @@ import {
 import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import { isBrowser } from '../utils/is-browser';
+import codeStyle from '../styles/code.module.css';
+
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
@@ -21,10 +23,6 @@ const URI_PLACEHOLDERS = [
 const htmlDecode = input => {
   const doc = new DOMParser().parseFromString(input, 'text/html');
   return doc.documentElement.textContent;
-};
-
-const codeContainerStyle = {
-  overflowX: 'scroll',
 };
 
 const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localURI } }) => {
@@ -71,7 +69,7 @@ const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localUR
   }
 
   return (
-    <div style={codeContainerStyle}>
+    <div className={codeStyle.code}>
       <CodeBlock
         language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
         showLineNumbers
