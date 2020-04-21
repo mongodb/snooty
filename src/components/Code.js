@@ -11,6 +11,8 @@ import {
 import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import { isBrowser } from '../utils/is-browser';
+import codeStyle from '../styles/code.module.css';
+
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
@@ -23,11 +25,7 @@ const htmlDecode = input => {
   return doc.documentElement.textContent;
 };
 
-const codeContainerStyle = {
-  overflowX: 'scroll',
-};
-
-const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localURI } }) => {
+const Code = ({ nodeData: { copyable, lang = null, linenos, value }, uriWriter: { cloudURI, localURI } }) => {
   const { activeTabs } = useContext(TabContext);
 
   /*
@@ -71,15 +69,15 @@ const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localUR
   }
 
   return (
-    <div style={codeContainerStyle}>
-      <CodeBlock
-        language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
-        showLineNumbers
-        variant="light"
-      >
-        {code}
-      </CodeBlock>
-    </div>
+    <CodeBlock
+      className={codeStyle.code}
+      copyable={copyable}
+      language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
+      showLineNumbers={linenos}
+      variant="light"
+    >
+      {code}
+    </CodeBlock>
   );
 };
 
