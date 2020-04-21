@@ -25,7 +25,7 @@ const htmlDecode = input => {
   return doc.documentElement.textContent;
 };
 
-const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localURI } }) => {
+const Code = ({ nodeData: { copyable, lang = null, linenos, value }, uriWriter: { cloudURI, localURI } }) => {
   const { activeTabs } = useContext(TabContext);
 
   /*
@@ -69,15 +69,15 @@ const Code = ({ nodeData: { lang = null, value }, uriWriter: { cloudURI, localUR
   }
 
   return (
-    <div className={codeStyle.code}>
-      <CodeBlock
-        language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
-        showLineNumbers
-        variant="light"
-      >
-        {code}
-      </CodeBlock>
-    </div>
+    <CodeBlock
+      className={codeStyle.code}
+      copyable={copyable}
+      language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
+      showLineNumbers={linenos}
+      variant="light"
+    >
+      {code}
+    </CodeBlock>
   );
 };
 
