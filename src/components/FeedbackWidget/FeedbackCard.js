@@ -26,6 +26,7 @@ const Floating = styled.div`
   position: fixed;
   top: 256px;
   right: 40px;
+  z-index: 80;
 `;
 const Card = styled(LeafygreenCard)`
   width: 320px;
