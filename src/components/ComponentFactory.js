@@ -48,6 +48,7 @@ import Superscript from './Superscript';
 import Image from './Image';
 import RefRole from './RefRole';
 import Target from './Target';
+import DeprecatedVersionSelector from './DeprecatedVersionSelector';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -79,6 +80,7 @@ export default class ComponentFactory extends Component {
       definitionList: DefinitionList,
       definitionListItem: DefinitionListItem,
       deprecated: Deprecated,
+      'deprecated-version-selector': DeprecatedVersionSelector,
       emphasis: Emphasis,
       figure: Figure,
       footnote: Footnote,

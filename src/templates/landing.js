@@ -5,14 +5,14 @@ import Navbar from '../components/Navbar';
 import DocumentBody from '../components/DocumentBody';
 import landingStyles from '../styles/landing.module.css';
 
-const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => (
+const Landing = ({ pageContext: { slug, __refDocMapping, metadata }, ...rest }) => (
   <React.Fragment>
     <Navbar />
     <div className="content">
       <div className={`main-column ${landingStyles.fullWidth}`} id="main-column">
         <div className={landingStyles.document}>
           <div className="body">
-            <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
+            <DocumentBody refDocMapping={__refDocMapping} slug={slug} metadata={metadata} {...rest} />
             <Footer />
           </div>
         </div>

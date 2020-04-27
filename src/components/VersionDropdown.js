@@ -78,7 +78,7 @@ const VersionDropdown = ({
         className={['version-button', 'dropdown-toggle', dropdownStyles.button].join(' ')}
         title="Select version"
         onClick={() => setHidden(!hidden)}
-        size="medium"
+        size="large"
       >
         {prefixVersion(currentBranch)}
         <span className={['caret', dropdownStyles.caret].join(' ')}></span>

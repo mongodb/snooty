@@ -5,25 +5,64 @@ import { PROPERTY_NAME_MAPPING } from '../constants';
 import queryString from 'query-string';
 import Button from '@leafygreen-ui/button';
 
-const DeprecatedVersionSelector = ({ deprecatedVersions }) => {
+const fullProductName = property => {
+  if (!property) return null;
+  // Display full product name on product dropdown
+  return PROPERTY_NAME_MAPPING[property.replace('-', '_')] || property;
+};
+
+const prefixVersion = version => {
+  if (!version) return null;
+  // Display as "Version X" on menu if numeric version and remove v from version name
+  const versionNumber = version.replace('v', '').split()[0];
+  const isNumeric = version => !isNaN(versionNumber);
+  return `${isNumeric(version) ? 'Version ' : ''}${versionNumber}`;
+};
+
+const Dropdown = ({ active, disabled = false, handleClick, placeholder, title, transform, values }) => {
   const [hidden, setHidden] = useState(true);
-  const [productDropdownValue, setProductDropdownValue] = useState('Any Product');
-  const [versionDropdownValue, setVersionDropdownValue] = useState('Any Version');
+  return (
+    <React.Fragment>
+      <Button
+        disabled={disabled}
+        variant="default"
+        className="dropdown-toggle"
+        title={title}
+        onClick={() => setHidden(!hidden)}
+        size="large"
+      >
+        {transform(active) || placeholder}
+        <span className={['caret', dropdownStyles.caret].join(' ')}></span>
+      </Button>
+      {!hidden && (
+        <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
+          {values.map(val => {
+            return (
+              <li key={val}>
+                <a
+                  onClick={() => {
+                    handleClick(val);
+                    setHidden(true);
+                  }}
+                >
+                  {transform(val)}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </React.Fragment>
+  );
+};
 
-  const prefixVersion = version => {
-    // Display as "Version X" on menu if numeric version and remove v from version name
-    const isNumeric = version => !isNaN(version.replace('v', '').split()[0]);
-    return `${isNumeric(version) ? 'Version ' : ''}${version}`;
-  };
-
-  const fullProductName = property => {
-    // Display full product name on product dropdown
-    return `${PROPERTY_NAME_MAPPING[property.replace('-', '_')]}`;
-  };
+const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
+  const [hidden, setHidden] = useState(true);
+  const [productDropdownValue, setProductDropdownValue] = useState(null);
+  const [versionDropdownValue, setVersionDropdownValue] = useState(null);
 
   const changeProduct = property => {
     setProductDropdownValue(fullProductName(property));
-    updateVersionDropdown(property);
   };
 
   const changeVersion = version => {
@@ -95,15 +134,26 @@ const DeprecatedVersionSelector = ({ deprecatedVersions }) => {
         <select> component once its ready for use: https://jira.mongodb.org/browse/PD-271 */}
 
       <div class="btn-group">
-        <span className="product-text">
-          <b>Select a Product</b>
-        </span>
+        <h3>Select a Product</h3>
+        <Dropdown
+          active={productDropdownValue}
+          handleClick={key => {
+            updateVersionDropdown(key);
+            setProductDropdownValue(key);
+            setVersionDropdownValue(null);
+          }}
+          placeholder="Any Product"
+          title="Select Product"
+          transform={fullProductName}
+          values={Object.keys(deprecatedVersions)}
+        />
+        {/*
         <Button
           variant="default"
           className="product-button dropdown-toggle"
           title="Select Product"
           onClick={() => setHidden(!hidden)}
-          size="medium"
+          size="large"
           value={productDropdownValue}
         >
           {productDropdownValue}
@@ -129,15 +179,27 @@ const DeprecatedVersionSelector = ({ deprecatedVersions }) => {
             })}
           </ul>
         )}
+        */}
       </div>
 
       <br></br>
 
       <div class="btn-group">
-        <span className="version-text">
-          <b>Select a Version</b>
-        </span>
-        <Button
+        <h3>Select a Version</h3>
+
+        <Dropdown
+          active={versionDropdownValue}
+          disabled={productDropdownValue === null}
+          handleClick={key => {
+            setVersionDropdownValue(key);
+          }}
+          placeholder="Any Version"
+          title="Select Version"
+          transform={prefixVersion}
+          values={deprecatedVersions[productDropdownValue]}
+        />
+
+        {/* <Button
           variant="default"
           className="version-button dropdown-toggle"
           title="Select version"
@@ -169,14 +231,20 @@ const DeprecatedVersionSelector = ({ deprecatedVersions }) => {
               );
             })}
           </ul>
-        )}
+        )}*/}
       </div>
 
       <br></br>
 
       <div class="btn-group">
-        <Button variant="primary" className="create-item-button" title="Create an item" size="large" href={finalUrl}>
-          View Document
+        <Button
+          variant="primary"
+          title="View Documentation"
+          size="large"
+          href={finalUrl}
+          disabled={!(productDropdownValue && versionDropdownValue)}
+        >
+          View Documentation
         </Button>
       </div>
     </div>

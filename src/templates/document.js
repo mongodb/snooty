@@ -16,15 +16,12 @@ import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from '..
 
 const Document = props => {
   const {
-    pageContext: {
-      slug,
-      __refDocMapping,
-      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
-    },
+    pageContext: { slug, __refDocMapping, metadata },
     location,
     ...rest
   } = props;
 
+  const { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder } = metadata;
   const title = getPlaintext(getNestedValue([slug], slugTitleMapping));
   const feedbackData = useFeedbackData({
     slug,
@@ -73,7 +70,7 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
+                  <DocumentBody refDocMapping={__refDocMapping} slug={slug} metadata={metadata} {...rest} />
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   <Footer />
                 </div>
