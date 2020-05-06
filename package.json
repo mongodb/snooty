@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "repository": "github:mongodb/snooty",
   "devDependencies": {
     "auto-changelog": "^1.16.2",
