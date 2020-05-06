@@ -14,7 +14,11 @@ VERSION=$(shell git describe --tags)
 # Here, generate path prefix according to environment variables
 prefix:
 ifdef COMMIT_HASH
+ifdef PATCH_ID
+PREFIX = $(COMMIT_HASH)/$(PATCH_ID)/$(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
+else
 PREFIX = $(COMMIT_HASH)/$(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
+endif
 else
 PREFIX = $(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
 endif
