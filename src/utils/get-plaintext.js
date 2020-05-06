@@ -1,9 +1,9 @@
 /*
- * Given an array of text nodes with formatting (from get-page-title.js), retrieve the title.
+ * Given an array of text nodes with formatting, retrieve the string.
  * Returns plaintext string indicating the nested title.
  */
 
-export const getPlaintextTitle = nodeArray => {
+export const getPlaintext = nodeArray => {
   const extractText = (title, node) => {
     if (node.type === 'text') {
       return title + node.value;

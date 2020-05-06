@@ -1,18 +1,15 @@
 const path = require('path');
-const fs = require('fs').promises;
-const mkdirp = require('mkdirp');
-const { Stitch, AnonymousCredential } = require('mongodb-stitch-server-sdk');
+const { initStitch } = require('./src/utils/setup/init-stitch');
+const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getTemplate } = require('./src/utils/get-template');
 const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
+const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, SNOOTY_STITCH_ID } = require('./src/build-constants');
 
 const DB = siteMetadata.database;
-const DOCUMENTS_COLLECTION = 'documents';
-const ASSETS_COLLECTION = 'assets';
-const METADATA_COLLECTION = 'metadata';
 
 const constructPageIdPrefix = ({ project, parserUser, parserBranch }) => `${project}/${parserUser}/${parserBranch}`;
 
@@ -25,7 +22,6 @@ const constructBuildFilter = ({ commitHash, patchId, ...rest }) => {
   };
 };
 
-const SNOOTY_STITCH_ID = 'snooty-koueq';
 const buildFilter = constructBuildFilter(siteMetadata);
 
 // different types of references
@@ -38,44 +34,7 @@ let RESOLVED_REF_DOC_MAPPING = {};
 // stich client connection
 let stitchClient;
 
-const setupStitch = () => {
-  return new Promise((resolve, reject) => {
-    stitchClient = Stitch.hasAppClient(SNOOTY_STITCH_ID)
-      ? Stitch.getAppClient(SNOOTY_STITCH_ID)
-      : Stitch.initializeAppClient(SNOOTY_STITCH_ID);
-    stitchClient.auth
-      .loginWithCredential(new AnonymousCredential())
-      .then(user => {
-        console.log('logged into stitch');
-        resolve();
-      })
-      .catch(console.error);
-  });
-};
-
-const saveAssetFile = async asset => {
-  return new Promise((resolve, reject) => {
-    // Create nested directories as specified by the asset filenames if they do not exist
-    mkdirp(path.join('static', path.dirname(asset.filename)), err => {
-      if (err) return reject(err);
-      fs.writeFile(path.join('static', asset.filename), asset.data.buffer, 'binary', err => {
-        if (err) reject(err);
-      });
-      resolve();
-    });
-  });
-};
-
-// Write all assets to static directory
-const saveAssetFiles = async assets => {
-  const promises = [];
-  const assetQuery = { _id: { $in: assets } };
-  const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [DB, ASSETS_COLLECTION, assetQuery]);
-  assetDataDocuments.forEach(asset => {
-    promises.push(saveAssetFile(asset));
-  });
-  return Promise.all(promises);
-};
+const assets = [];
 
 exports.sourceNodes = async () => {
   // setup env variables
@@ -86,7 +45,7 @@ exports.sourceNodes = async () => {
   }
 
   // wait to connect to stitch
-  await setupStitch();
+  stitchClient = await initStitch();
 
   const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, buildFilter]);
 
@@ -102,7 +61,6 @@ exports.sourceNodes = async () => {
   });
 
   // Identify page documents and parse each document for images
-  const assets = [];
   Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
@@ -117,19 +75,29 @@ exports.sourceNodes = async () => {
       }
     }
   });
-
-  await saveAssetFiles(assets);
 };
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
-  const metadata = await stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]);
+  const [, metadata] = await Promise.all([
+    saveAssetFiles(assets, stitchClient),
+    stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
+  ]);
+
+  // Save files in the static_files field of metadata document, including intersphinx inventories
+  if (metadata.static_files) {
+    saveStaticFiles(metadata.static_files);
+  }
 
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
 
-      const template = getTemplate(page, process.env.GATSBY_SITE);
+      const template = getTemplate(
+        process.env.GATSBY_SITE,
+        page,
+        getNestedValue(['ast', 'options', 'template'], pageNodes)
+      );
       const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({

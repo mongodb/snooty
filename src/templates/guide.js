@@ -116,14 +116,7 @@ export default class Guide extends Component {
   };
 
   createSections() {
-    const {
-      addPillstrip,
-      pageContext,
-      pillstrips,
-      pageContext: {
-        metadata: { slugToTitle },
-      },
-    } = this.props;
+    const { addPillstrip, pageContext, pillstrips } = this.props;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
@@ -143,7 +136,6 @@ export default class Guide extends Component {
           refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
           pillstrips={pillstrips}
-          slugTitleMapping={slugToTitle}
         />
       );
     });
@@ -195,9 +187,6 @@ Guide.propTypes = {
         children: PropTypes.array,
       }).isRequired,
     }).isRequired,
-    slugTitleMapping: PropTypes.shape({
-      [PropTypes.string]: PropTypes.string,
-    }),
     snootyStitchId: PropTypes.string.isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,

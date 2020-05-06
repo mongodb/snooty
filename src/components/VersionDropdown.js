@@ -28,7 +28,10 @@ const VersionDropdown = ({
 
   const prefixVersion = version => {
     // Display as "Version X" on menu if numeric version
-    const isNumeric = version => !isNaN(version.split()[0]);
+    const isNumeric = (version = '') => {
+      const [firstWord] = version.split();
+      return !isNaN(firstWord);
+    };
     return `${isNumeric(version) ? 'Version ' : ''}${version}`;
   };
 
@@ -52,7 +55,7 @@ const VersionDropdown = ({
 
   // Zip two sections of data to map git branches to their "pretty" names
   const gitNamedMapping = zip(gitBranches, published);
-  const currentBranch = gitNamedMapping[parserBranch];
+  const currentBranch = gitNamedMapping[parserBranch] || parserBranch;
 
   const wrapperRef = useRef(null);
   useOutsideHandler(wrapperRef);
@@ -75,7 +78,7 @@ const VersionDropdown = ({
     <div ref={wrapperRef} className="btn-group version-sidebar">
       <Button
         variant="default"
-        className="version-button dropdown-toggle"
+        className={['version-button', 'dropdown-toggle', dropdownStyles.button].join(' ')}
         title="Select version"
         onClick={() => setHidden(!hidden)}
         size="medium"

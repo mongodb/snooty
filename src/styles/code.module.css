@@ -1,0 +1,5 @@
+.code * {
+  overflow-wrap: normal !important;
+  white-space: pre;
+  word-break: normal !important;
+}
