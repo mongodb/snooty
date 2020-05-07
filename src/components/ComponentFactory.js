@@ -54,7 +54,7 @@ import RoleClass from './Roles/Class';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 
-const IGNORED_NAMES = ['default-domain', 'toctree'];
+const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
 const IGNORED_TYPES = ['comment', 'substitution_definition'];
 
 export default class ComponentFactory extends Component {
