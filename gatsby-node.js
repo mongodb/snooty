@@ -86,7 +86,7 @@ exports.createPages = async ({ actions }) => {
 
   // Save files in the static_files field of metadata document, including intersphinx inventories
   if (metadata.static_files) {
-    saveStaticFiles(metadata.static_files);
+    await saveStaticFiles(metadata.static_files);
   }
 
   return new Promise((resolve, reject) => {
