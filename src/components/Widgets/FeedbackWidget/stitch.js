@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
-import { isBrowser } from '../../utils/is-browser';
+import { isBrowser } from '../../../utils/is-browser';
 
 const APP_ID = 'feedback-ibcyy';
 function getStitchApp() {

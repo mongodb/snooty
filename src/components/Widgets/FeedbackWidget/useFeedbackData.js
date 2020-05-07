@@ -1,4 +1,4 @@
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 
 export default function useFeedbackData({ slug, title, url, publishedBranches }) {
   const { project } = useSiteMetadata();

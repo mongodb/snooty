@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useFeedbackState } from './context';
-import useScreenSize from '../../hooks/useScreenSize';
+import useScreenSize from '../../../hooks/useScreenSize';
 
 import LeafygreenCard from '@leafygreen-ui/card';
 

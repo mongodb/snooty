@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useScreenSize from '../../hooks/useScreenSize';
+import useScreenSize from '../../../hooks/useScreenSize';
 import { useFeedbackState } from './context';
 
 import FeedbackFullScreen from './FeedbackFullScreen';

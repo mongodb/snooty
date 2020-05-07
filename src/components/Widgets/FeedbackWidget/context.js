@@ -7,8 +7,8 @@ import {
   useStitchUser,
   addAttachment,
 } from './stitch';
-import { getSegmentUserId } from '../../utils/segment';
-import { getViewport } from '../../hooks/useViewport';
+import { getSegmentUserId } from '../../../utils/segment';
+import { getViewport } from '../../../hooks/useViewport';
 
 const FeedbackContext = React.createContext();
 
