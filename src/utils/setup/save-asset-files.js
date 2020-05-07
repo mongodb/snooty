@@ -30,7 +30,11 @@ const saveAssetFiles = async (assets, stitchClient) => {
 };
 
 const saveStaticFiles = async staticFiles => {
-  Object.entries(staticFiles).forEach(([file, data]) => saveFile(file, data));
+  const promises = [];
+  Object.entries(staticFiles).forEach(([file, data]) => {
+    promises.push(saveFile(file, data.buffer));
+  });
+  await Promise.all(promises);
 };
 
 module.exports = { saveAssetFiles, saveStaticFiles };
