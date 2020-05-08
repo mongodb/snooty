@@ -74,6 +74,11 @@ const VersionDropdown = ({
     );
   }
 
+  // Don't render dropdown if there is only 1 version of the repo
+  if (!active || active.length <= 1) {
+    return null;
+  }
+
   return (
     <div ref={wrapperRef} className="btn-group version-sidebar">
       <Button

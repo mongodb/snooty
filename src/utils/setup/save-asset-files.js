@@ -15,22 +15,18 @@ const saveFile = async (file, data) => {
 // Write all assets to static directory
 const saveAssetFiles = async (assets, stitchClient) => {
   if (assets.length) {
-    const promises = [];
     const assetQuery = { _id: { $in: assets } };
     const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [
       database,
       ASSETS_COLLECTION,
       assetQuery,
     ]);
-    assetDataDocuments.forEach(({ filename, data: { buffer } }) => {
-      promises.push(saveFile(filename, buffer));
-    });
-    await Promise.all(promises);
+    await Promise.all(assetDataDocuments.map(({ filename, data: { buffer } }) => saveFile(filename, buffer)));
   }
 };
 
 const saveStaticFiles = async staticFiles => {
-  Object.entries(staticFiles).forEach(([file, data]) => saveFile(file, data));
+  await Promise.all(Object.entries(staticFiles).map(([file, data]) => saveFile(file, data.buffer)));
 };
 
 module.exports = { saveAssetFiles, saveStaticFiles };
