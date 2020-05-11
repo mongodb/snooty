@@ -16,6 +16,7 @@ import IconRuby from '../../static/svg/icons/icon-Ruby';
 import IconPerl from '../../static/svg/icons/icon-Perl';
 import IconScala from '../../static/svg/icons/icon-Scala';
 import IconSwift from '../../static/svg/icons/icon-Swift';
+import IconRust from '../../static/svg/icons/icon-Rust';
 
 // does not take in any params because it is a hardcoded list
 const EcosystemHomepageTiles = () => {
@@ -69,6 +70,11 @@ const EcosystemHomepageTiles = () => {
       slug: '/ruby/',
       title: 'Ruby',
       icon: <IconRuby />,
+    },
+    {
+      slug: '/rust/',
+      title: 'Rust',
+      icon: <IconRust />,
     },
     {
       slug: '/scala/',
