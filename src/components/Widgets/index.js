@@ -14,9 +14,9 @@ const Widgets = ({ children, location, pageTitle, publishedBranches, slug }) => 
 
   return (
     <FeedbackProvider page={feedbackData}>
+      {children}
       <FeedbackTab />
       <FeedbackForm />
-      {children}
     </FeedbackProvider>
   );
 };
