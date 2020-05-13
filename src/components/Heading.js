@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
-import { FeedbackHeading } from './FeedbackWidget';
+import { FeedbackHeading } from './Widgets/FeedbackWidget';
 import useScreenSize from '../hooks/useScreenSize';
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {

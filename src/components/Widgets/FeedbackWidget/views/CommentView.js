@@ -6,7 +6,7 @@ import Button from '@leafygreen-ui/button';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
 import { uiColors } from '@leafygreen-ui/palette';
-import validateEmail from '../../../utils/validate-email';
+import validateEmail from '../../../../utils/validate-email';
 // import ScreenshotButton from '../components/ScreenshotButton';
 import Loadable from '@loadable/component';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));

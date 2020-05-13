@@ -6,7 +6,7 @@ import {
   FeedbackTab,
   FeedbackHeading,
   FeedbackFooter,
-} from '../../src/components/FeedbackWidget';
+} from '../../src/components/Widgets/FeedbackWidget';
 import { BSON } from 'mongodb-stitch-server-sdk';
 
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';

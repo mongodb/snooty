@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { FeedbackProvider, useFeedbackState } from '../../src/components/FeedbackWidget/context';
+import { FeedbackProvider, useFeedbackState } from '../../src/components/Widgets/FeedbackWidget/context';
 import { FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 import screenshot from './data/screenshot.test.json';
 

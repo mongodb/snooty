@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import useScreenSize from '../../hooks/useScreenSize';
+import useScreenSize from '../../../hooks/useScreenSize';
 import StarRating from './components/StarRating';
 
 export default function FeedbackFooter() {

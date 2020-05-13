@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Gatsby from 'gatsby';
 import { mount } from 'enzyme';
-import useFeedbackData from '../../src/components/FeedbackWidget/useFeedbackData';
+import useFeedbackData from '../../src/components/Widgets/FeedbackWidget/useFeedbackData';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 useStaticQuery.mockImplementation(() => ({
