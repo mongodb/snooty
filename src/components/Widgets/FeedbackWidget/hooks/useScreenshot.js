@@ -1,6 +1,6 @@
 import React from 'react';
-import useViewport from '../../../hooks/useViewport';
-import { isBrowser } from '../../../utils/is-browser';
+import useViewport from '../../../../hooks/useViewport';
+import { isBrowser } from '../../../../utils/is-browser';
 import { useFeedbackState } from '../context';
 
 // Client-side Only modules

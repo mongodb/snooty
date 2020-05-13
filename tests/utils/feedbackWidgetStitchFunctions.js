@@ -1,4 +1,4 @@
-import * as stitch from '../../src/components/FeedbackWidget/stitch';
+import * as stitch from '../../src/components/Widgets/FeedbackWidget/stitch';
 import { BSON } from 'mongodb-stitch-server-sdk';
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from '../unit/data/FeedbackWidget';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
 import { useFeedbackState } from '../context';
-import useScreenSize from '../../../hooks/useScreenSize';
+import useScreenSize from '../../../../hooks/useScreenSize';
 import { Layout, Heading, Subheading } from '../components/view-components';
 
 export default function SubmittedView(props) {

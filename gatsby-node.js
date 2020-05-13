@@ -7,7 +7,7 @@ const { getTemplate } = require('./src/utils/get-template');
 const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
-const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, SNOOTY_STITCH_ID } = require('./src/build-constants');
+const { DOCUMENTS_COLLECTION, METADATA_COLLECTION } = require('./src/build-constants');
 
 const DB = siteMetadata.database;
 
@@ -106,7 +106,6 @@ exports.createPages = async ({ actions }) => {
           context: {
             metadata,
             slug,
-            snootyStitchId: SNOOTY_STITCH_ID,
             __refDocMapping: pageNodes,
             guidesMetadata: GUIDES_METADATA,
           },
