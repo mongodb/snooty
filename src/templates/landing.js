@@ -7,7 +7,6 @@ import landingStyles from '../styles/landing.module.css';
 
 const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => (
   <React.Fragment>
-    <Navbar />
     <div className="content">
       <div className={`main-column ${landingStyles.fullWidth}`} id="main-column">
         <div className={landingStyles.document}>
@@ -18,6 +17,7 @@ const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => (
         </div>
       </div>
     </div>
+    <Navbar />
   </React.Fragment>
 );
 

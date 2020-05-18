@@ -140,7 +140,12 @@ export default class DefaultLayout extends Component {
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
-        <Widgets location={location} pageTitle={pageTitle} publishedBranches={metadata.publishedBranches} slug={slug}>
+        <Widgets
+          location={location}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+        >
           <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
           {React.cloneElement(children, {
             pillstrips,
