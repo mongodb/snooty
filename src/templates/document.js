@@ -35,7 +35,6 @@ const Document = props => {
 
   return (
     <React.Fragment>
-      <Navbar />
       <div className="content">
         <div>
           {(!isBrowser || showLeftColumn) && (
@@ -69,6 +68,7 @@ const Document = props => {
           </div>
         </div>
       </div>
+      <Navbar />
     </React.Fragment>
   );
 };

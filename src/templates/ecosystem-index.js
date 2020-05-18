@@ -6,7 +6,6 @@ import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 
 const EcosystemIndex = props => (
   <React.Fragment>
-    <Navbar />
     <div className="content">
       <div className={[EcosystemHomepageStyles.fullWidth, 'main-column'].join(' ')} id="main-column">
         <div className={[EcosystemHomepageStyles.document, 'document'].join(' ')}>
@@ -36,6 +35,7 @@ const EcosystemIndex = props => (
         </div>
       </div>
     </div>
+    <Navbar />
   </React.Fragment>
 );
 
