@@ -10,7 +10,6 @@ const Index = ({ pageContext: { guidesMetadata, __refDocMapping } }) => {
 
   return (
     <React.Fragment>
-      <Navbar />
       <div className="content">
         <div className="guide-category-list">
           <div className="section" id="guides">
@@ -24,6 +23,7 @@ const Index = ({ pageContext: { guidesMetadata, __refDocMapping } }) => {
           </div>
         </div>
       </div>
+      <Navbar />
     </React.Fragment>
   );
 };
