@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ComponentFactory as LandingComponentFactory } from './landing';
 import { ADMONITIONS } from '../constants';
 import Step from './Step';
 import Paragraph from './Paragraph';
@@ -121,7 +122,7 @@ export default class ComponentFactory extends Component {
 
   selectComponent() {
     const {
-      nodeData: { children, name, type },
+      nodeData: { children, domain, name, type },
       ...rest
     } = this.props;
 
@@ -132,6 +133,10 @@ export default class ComponentFactory extends Component {
 
     if (type === 'problematic') {
       return <ComponentFactory nodeData={children[0]} {...rest} />;
+    }
+
+    if (domain === 'landing') {
+      return <LandingComponentFactory {...this.props} />;
     }
 
     const lookup = type === 'directive' ? name : type;

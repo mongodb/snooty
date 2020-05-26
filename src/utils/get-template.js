@@ -3,6 +3,8 @@ const getTemplate = (site, page, template) => {
   switch (template) {
     case 'landing':
       return 'landing';
+    case 'docs-landing':
+      return 'docs-landing';
     default:
       switch (site) {
         case 'guides':

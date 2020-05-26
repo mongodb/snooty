@@ -18,7 +18,7 @@ export default class Navbar extends Component {
     // Static navprops by default
     this.navprops = `{"links": [
                             {"url": "https://docs.mongodb.com/manual/","text": "Server"},
-                            {"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers"},
+                            {"url": "https://docs.mongodb.com/drivers/","text": "Drivers"},
                             {"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},
                             {"url": "https://docs.mongodb.com/tools/","text": "Tools"},
                             {"url": "https://docs.mongodb.com/guides/","text": "Guides"}]}`;
@@ -79,7 +79,7 @@ export default class Navbar extends Component {
                     {"url": "https://docs.mongodb.com/manual/","text": "Server", "active": ${this.isActiveLink(
                       'Server'
                     )}},
-                    {"url": "https://docs.mongodb.com/ecosystem/drivers/","text": "Drivers", "active": ${this.isActiveLink(
+                    {"url": "https://docs.mongodb.com/drivers/","text": "Drivers", "active": ${this.isActiveLink(
                       'Drivers'
                     )}},
                     {"url": "https://docs.mongodb.com/cloud/","text": "Cloud", "active": ${this.isActiveLink('Cloud')}},
