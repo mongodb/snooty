@@ -14,7 +14,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const shouldShowStarRating = isPageTitle && isTabletOrMobile;
 
   return (
-    <HeadingContainer stackVertically={isSmallScreen}>
+    <HeadingContainer className={`heading-container-h${sectionDepth}`} stackVertically={isSmallScreen}>
       <HeadingTag id={id}>
         {nodeData.children.map((element, index) => {
           return <ComponentFactory {...rest} nodeData={element} key={index} />;

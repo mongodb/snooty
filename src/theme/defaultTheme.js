@@ -7,11 +7,10 @@ const fontSize = {
   tiny: '12px',
   small: '14px',
   default: '16px',
-  h1: '48px',
-  h2: '30px',
-  h3: '24px',
-  h4: '20px',
-  tabNav: '10px',
+  h1: '36px',
+  h2: '24px',
+  h3: '18px',
+  h4: '16px',
 };
 /**
  * @type {Object}

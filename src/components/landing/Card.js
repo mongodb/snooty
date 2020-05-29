@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Box from '@leafygreen-ui/box';
@@ -19,12 +20,17 @@ const AnchorBox = styled(Box)`
 // TODO: should padding be based on size?
 // Cards that appear in 2 columns have more x padding
 const StyledCard = styled(LeafyGreenCard)`
+  height: 100%;
   padding: ${({ theme }) => `${theme.size.large}`};
 `;
 
 const CardIcon = styled('img')`
-  margin: -4px 0 -4px 0;
-  width: ${({ theme }) => `${theme.size.large}`};
+  width: ${({ theme }) => `${theme.size.medium}`};
+`;
+
+const H4 = styled('h4')`
+  letter-spacing: 0.5px;
+  margin: ${({ theme }) => `${theme.size.medium} 0 ${theme.size.small} 0`};
 `;
 
 const Card = ({
@@ -32,24 +38,34 @@ const Card = ({
     children,
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
-}) => {
-  console.log(icon);
-  console.log(withPrefix(icon));
-  return (
-    <AnchorBox href={url}>
-      <StyledCard>
-        {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
-        {tag && <Tag text={tag} />}
-        <h4>{headline}</h4>
-        {children.map((child, i) => (
-          <ComponentFactory nodeData={child} key={i} />
-        ))}
-        <Link to={url}>
-          <strong>{cta}</strong>
-        </Link>
-      </StyledCard>
-    </AnchorBox>
-  );
+}) => (
+  <AnchorBox href={url}>
+    <StyledCard>
+      {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
+      {tag && <Tag text={tag} />}
+      <H4>{headline}</H4>
+      {children.map((child, i) => (
+        <ComponentFactory nodeData={child} key={i} />
+      ))}
+      <Link to={url}>
+        <strong>{cta}</strong>
+      </Link>
+    </StyledCard>
+  </AnchorBox>
+);
+
+Card.propTypes = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.object),
+    options: PropTypes.shape({
+      cta: PropTypes.string,
+      headline: PropTypes.string,
+      icon: PropTypes.string,
+      'icon-alt': PropTypes.string,
+      tag: PropTypes.string,
+      url: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default Card;

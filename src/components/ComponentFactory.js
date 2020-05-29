@@ -131,12 +131,12 @@ export default class ComponentFactory extends Component {
       return null;
     }
 
-    if (type === 'problematic') {
-      return <ComponentFactory nodeData={children[0]} {...rest} />;
-    }
-
     if (domain === 'landing') {
       return <LandingComponentFactory {...this.props} />;
+    }
+
+    if (type === 'problematic') {
+      return <ComponentFactory nodeData={children[0]} {...rest} />;
     }
 
     const lookup = type === 'directive' ? name : type;
@@ -152,14 +152,9 @@ export default class ComponentFactory extends Component {
     if (!ComponentType && ADMONITIONS.includes(name)) {
       ComponentType = this.componentMap.admonition;
     }
-    // component with this type not implemented
     if (!ComponentType) {
-      return (
-        <span>
-          ==Not implemented:
-          {type},{name} ==
-        </span>
-      );
+      console.warn(`${lookup} not yet implemented`);
+      return null;
     }
 
     return <ComponentType {...this.props} />;
@@ -175,6 +170,7 @@ export default class ComponentFactory extends Component {
 ComponentFactory.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
+    domain: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,

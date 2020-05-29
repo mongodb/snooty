@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BaseComponentFactory from '../ComponentFactory';
 import ATFImage from './ATFImage';
 import Card from './Card';
 import CardGroup from './CardGroup';
+import CTA from './CTA';
 import Introduction from './Introduction';
 
 const componentMap = {
   'atf-image': ATFImage,
   card: Card,
   'card-group': CardGroup,
+  cta: CTA,
   introduction: Introduction,
 };
 
@@ -17,17 +18,14 @@ const ComponentFactory = props => {
   const { nodeData } = props;
 
   const selectComponent = () => {
-    const { domain, name, type } = nodeData;
+    const { name, type } = nodeData;
 
     const lookup = type === 'directive' ? name : type;
     let ComponentType = componentMap[lookup];
 
     if (!ComponentType) {
-      if (domain === 'landing') {
-        console.warn(`${name} (${type}) not yet implemented`);
-        return null;
-      }
-      return <BaseComponentFactory {...props} />;
+      console.warn(`${lookup} not yet implemented`);
+      return null;
     }
 
     return <ComponentType {...props} />;

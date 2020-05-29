@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'emotion-theming';
 import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
 import Widgets from './Widgets';
@@ -8,7 +7,6 @@ import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
-import { theme } from '../theme/defaultTheme';
 
 export default class DefaultLayout extends Component {
   constructor(props) {
@@ -141,23 +139,21 @@ export default class DefaultLayout extends Component {
     const siteTitle = getNestedValue(['title'], metadata) || '';
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
     return (
-      <ThemeProvider theme={theme}>
-        <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
-          <Widgets
-            location={location}
-            pageTitle={pageTitle}
-            publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-            slug={slug}
-          >
-            <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
-            {React.cloneElement(children, {
-              pillstrips,
-              addPillstrip: this.addPillstrip,
-              footnotes: this.footnotes,
-            })}
-          </Widgets>
-        </TabContext.Provider>
-      </ThemeProvider>
+      <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
+        <Widgets
+          location={location}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+        >
+          <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
+          {React.cloneElement(children, {
+            pillstrips,
+            addPillstrip: this.addPillstrip,
+            footnotes: this.footnotes,
+          })}
+        </Widgets>
+      </TabContext.Provider>
     );
   }
 }
