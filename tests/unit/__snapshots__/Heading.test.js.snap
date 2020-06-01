@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Heading renders correctly 1`] = `
 .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -15,20 +15,103 @@ exports[`renders correctly 1`] = `
   justify-content: space-between;
 }
 
-<div
-  class="emotion-0 emotion-1"
+<FeedbackProvider
+  hideHeader={false}
+  page={
+    Object {
+      "docs_property": "test",
+      "slug": "/test",
+      "title": "Test Page Please Ignore",
+      "url": "https://docs.mongodb.com/test",
+    }
+  }
+  test={
+    Object {
+      "feedback": null,
+      "isSupportRequest": undefined,
+      "view": undefined,
+    }
+  }
 >
-  <h3
-    id="create-an-administrative-username-and-password"
+  <Heading
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "Create an administrative username and password",
+          },
+        ],
+        "id": "create-an-administrative-username-and-password",
+        "position": Object {
+          "start": Object {
+            "line": 0,
+          },
+        },
+        "type": "heading",
+      }
+    }
+    sectionDepth={3}
   >
-    Create an administrative username and password
-    <a
-      class="headerlink"
-      href="#create-an-administrative-username-and-password"
-      title="Permalink to this headline"
+    <HeadingContainer
+      className="heading-container-h3"
+      stackVertically={false}
     >
-      ¶
-    </a>
-  </h3>
-</div>
+      <div
+        className="heading-container-h3 emotion-0 emotion-1"
+      >
+        <h3
+          id="create-an-administrative-username-and-password"
+        >
+          <ComponentFactory
+            key="0"
+            nodeData={
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Create an administrative username and password",
+              }
+            }
+          >
+            <Text
+              nodeData={
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 0,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Create an administrative username and password",
+                }
+              }
+            >
+              Create an administrative username and password
+            </Text>
+          </ComponentFactory>
+          <a
+            className="headerlink"
+            href="#create-an-administrative-username-and-password"
+            title="Permalink to this headline"
+          >
+            ¶
+          </a>
+        </h3>
+        <FeedbackHeading
+          isStacked={false}
+          isVisible={false}
+        />
+      </div>
+    </HeadingContainer>
+  </Heading>
+</FeedbackProvider>
 `;
