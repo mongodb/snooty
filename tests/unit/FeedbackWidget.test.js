@@ -4,7 +4,6 @@ import {
   FeedbackProvider,
   FeedbackForm,
   FeedbackTab,
-  FeedbackHeading,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
 import { BSON } from 'mongodb-stitch-server-sdk';
@@ -17,9 +16,11 @@ import {
   mockStitchFunctions,
   clearMockStitchFunctions,
 } from '../utils/feedbackWidgetStitchFunctions';
+import Heading from '../../src/components/Heading';
+import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
-  const { view, isSupportRequest, ...feedback } = feedbackState;
+  const { view, isSupportRequest, hideHeader, ...feedback } = feedbackState;
   const wrapper = mount(
     <FeedbackProvider
       test={{
@@ -33,11 +34,12 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
         url: 'https://docs.mongodb.com/test',
         docs_property: 'test',
       }}
+      hideHeader={hideHeader}
     >
       <FeedbackForm />
       <div>
         <FeedbackTab />
-        <FeedbackHeading />
+        <Heading nodeData={headingData} sectionDepth={1} />
         <FeedbackFooter />
       </div>
     </FeedbackProvider>,
@@ -106,6 +108,32 @@ describe('FeedbackWidget', () => {
       wrapper = await mountFormWithFeedbackState({}, withScreenSize('iphone-x'));
       expect(wrapper.exists('FeedbackTab')).toBe(true);
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
+    });
+  });
+
+  describe('FeedbackHeading', () => {
+    it('is hidden on large/desktop screens', async () => {
+      wrapper = await mountFormWithFeedbackState({}, withScreenSize('desktop'));
+      expect(wrapper.exists('FeedbackHeading')).toBe(true);
+      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(0);
+    });
+
+    it('is visible on medium/tablet screens', async () => {
+      wrapper = await mountFormWithFeedbackState({}, withScreenSize('ipad-pro'));
+      expect(wrapper.exists('FeedbackHeading')).toBe(true);
+      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(1);
+    });
+
+    it('is visible on small/mobile screens', async () => {
+      wrapper = await mountFormWithFeedbackState({}, withScreenSize('iphone-x'));
+      expect(wrapper.exists('FeedbackHeading')).toBe(true);
+      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(1);
+    });
+
+    it('is hidden on small/mobile screens when configured with page option', async () => {
+      wrapper = await mountFormWithFeedbackState({ hideHeader: true }, withScreenSize('desktop'));
+      expect(wrapper.exists('FeedbackHeading')).toBe(true);
+      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(0);
     });
   });
 

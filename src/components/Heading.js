@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
-import { FeedbackHeading } from './Widgets/FeedbackWidget';
+import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
-import { useFeedbackState } from './Widgets/FeedbackWidget/context';
+
+const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
-  const { hideHeader } = useFeedbackState();
 
   const isPageTitle = sectionDepth === 1;
   const { isTabletOrMobile, isSmallScreen } = useScreenSize();
-  const shouldShowStarRating = isPageTitle && isTabletOrMobile && !hideHeader;
+  const shouldShowStarRating = isPageTitle && isTabletOrMobile;
 
   return (
     <HeadingContainer className={`heading-container-h${sectionDepth}`} stackVertically={isSmallScreen}>

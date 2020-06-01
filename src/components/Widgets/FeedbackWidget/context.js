@@ -12,7 +12,7 @@ import { getViewport } from '../../../hooks/useViewport';
 
 const FeedbackContext = React.createContext();
 
-export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
+export function FeedbackProvider({ page, hideHeader = false, test = {}, ...props }) {
   const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
   const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
   const [view, setView] = React.useState(test.view || 'waiting');

@@ -6,7 +6,6 @@ import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import DocumentBody from '../components/DocumentBody';
 import Footer from '../components/Footer';
-import LandingComponentFactory from '../components/landing/ComponentFactory';
 import Navbar from '../components/Navbar';
 
 const Wrapper = styled('main')`
@@ -95,6 +94,12 @@ const DocsLanding = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
 
             @media ${screenSize.upToMedium} {
               grid-column: 2/-2;
+            }
+          }
+
+          @media ${screenSize.upToLarge} {
+            .footer {
+              padding: ${size.medium};
             }
           }
 
