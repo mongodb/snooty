@@ -4,7 +4,7 @@ import ComponentFactory from './ComponentFactory';
 
 const DefinitionList = ({ nodeData, ...rest }) => {
   return (
-    <dl className="first docutils">
+    <dl>
       {nodeData.children.map((definition, index) => (
         <ComponentFactory {...rest} nodeData={definition} key={index} />
       ))}
