@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { uiColors } from '@leafygreen-ui/palette';
 
-const Tag = ({ text }) => (
+const Tag = ({ text, ...rest }) => (
   <span
     css={theme => ({
       backgroundColor: uiColors.green.light3,
@@ -11,6 +11,7 @@ const Tag = ({ text }) => (
       fontWeight: 'bold',
       padding: `${theme.size.tiny} ${theme.size.small}`,
     })}
+    {...rest}
   >
     {text}
   </span>

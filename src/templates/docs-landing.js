@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import styled from '@emotion/styled';
 import { Global, css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
@@ -37,6 +38,9 @@ const DocsLanding = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
+      <Helmet>
+        <title>MongoDB Documentation</title>
+      </Helmet>
       <Navbar />
       <Wrapper>
         <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />

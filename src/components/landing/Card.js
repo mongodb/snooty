@@ -17,9 +17,9 @@ const AnchorBox = styled(Box)`
   }
 `;
 
-// TODO: should padding be based on size?
-// Cards that appear in 2 columns have more x padding
 const StyledCard = styled(LeafyGreenCard)`
+  display: flex;
+  flex-direction: column;
   height: 100%;
   padding: ${({ theme }) => `${theme.size.large}`};
 `;
@@ -33,6 +33,15 @@ const H4 = styled('h4')`
   margin: ${({ theme }) => `${theme.size.medium} 0 ${theme.size.small} 0`};
 `;
 
+const CTA = styled(Link)`
+  margin-top: auto;
+  margin-bottom: 0;
+`;
+
+const FlexTag = styled(Tag)`
+  margin-right: auto;
+`;
+
 const Card = ({
   nodeData: {
     children,
@@ -42,14 +51,14 @@ const Card = ({
   <AnchorBox href={url}>
     <StyledCard>
       {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
-      {tag && <Tag text={tag} />}
+      {tag && <FlexTag text={tag} />}
       <H4>{headline}</H4>
       {children.map((child, i) => (
         <ComponentFactory nodeData={child} key={i} />
       ))}
-      <Link to={url}>
+      <CTA to={url}>
         <strong>{cta}</strong>
-      </Link>
+      </CTA>
     </StyledCard>
   </AnchorBox>
 );
