@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import DocumentBody from '../components/DocumentBody';
 import landingStyles from '../styles/landing.module.css';
 
-const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => (
+const Blank = ({ pageContext: { slug, __refDocMapping }, ...rest }) => (
   <React.Fragment>
     <div className="content">
       <div className={`main-column ${landingStyles.fullWidth}`} id="main-column">
@@ -21,11 +21,11 @@ const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => (
   </React.Fragment>
 );
 
-Landing.propTypes = {
+Blank.propTypes = {
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.object.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default Landing;
+export default Blank;
