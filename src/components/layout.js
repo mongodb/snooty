@@ -132,8 +132,9 @@ export default class DefaultLayout extends Component {
   render() {
     const {
       children,
-      pageContext: { location, metadata, slug },
+      pageContext: { location, metadata, slug, __refDocMapping },
     } = this.props;
+
     const { pillstrips } = this.state;
     const lookup = slug === '/' ? 'index' : slug;
     const siteTitle = getNestedValue(['title'], metadata) || '';
@@ -142,6 +143,7 @@ export default class DefaultLayout extends Component {
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
         <Widgets
           location={location}
+          pageOptions={getNestedValue(['ast', 'options'], __refDocMapping)}
           pageTitle={pageTitle}
           publishedBranches={getNestedValue(['publishedBranches'], metadata)}
           slug={slug}
