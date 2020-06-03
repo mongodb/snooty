@@ -102,7 +102,7 @@ exports.createPages = async ({ actions }) => {
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
           path: slug,
-          component: path.resolve(`./src/templates/${template}.js`),
+          component: template,
           context: {
             metadata,
             slug,
