@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
-import { FeedbackHeading } from './Widgets/FeedbackWidget';
+import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
+
+const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
@@ -14,7 +16,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const shouldShowStarRating = isPageTitle && isTabletOrMobile;
 
   return (
-    <HeadingContainer stackVertically={isSmallScreen}>
+    <HeadingContainer className={`heading-container-h${sectionDepth}`} stackVertically={isSmallScreen}>
       <HeadingTag id={id}>
         {nodeData.children.map((element, index) => {
           return <ComponentFactory {...rest} nodeData={element} key={index} />;
