@@ -131,7 +131,7 @@ describe('FeedbackWidget', () => {
     });
 
     it('is hidden on small/mobile screens when configured with page option', async () => {
-      wrapper = await mountFormWithFeedbackState({ hideHeader: true }, withScreenSize('desktop'));
+      wrapper = await mountFormWithFeedbackState({ hideHeader: true }, withScreenSize('iphone-x'));
       expect(wrapper.exists('FeedbackHeading')).toBe(true);
       expect(wrapper.find('FeedbackHeading').children()).toHaveLength(0);
     });
