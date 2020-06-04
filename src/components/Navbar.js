@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { withPrefix } from 'gatsby';
 import { isBrowser } from '../utils/is-browser';
-import { URL_SLUGS, URL_SUBDOMAINS } from '../constants';
-
-const DOCS_SITE = 'docs.mongodb.com';
-const STAGING_SITE = 'docs-mongodbcom-staging.corp.mongodb.com';
-const LOCALHOST_NAMES = ['localhost', '0.0.0.0', '127.0.0.1'];
+import { URL_SLUGS } from '../constants';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -32,40 +28,27 @@ export default class Navbar extends Component {
 
     document.body.appendChild(script);
 
-    // Update activeLink state on render
-    if (isBrowser) {
-      this.setState({ activeLink: this.checkForLink(window.location) });
-    }
+    this.setState({ activeLink: this.getActiveSection(process.env.GATSBY_SITE, URL_SLUGS) });
   }
 
-  // Uses location to check which link should be active
-  checkForLink = location => {
-    if (location.hostname === DOCS_SITE || location.hostname === STAGING_SITE) {
-      return this.validateActiveLink(location.pathname, '/', URL_SLUGS);
-    }
-    if (this.isLocalhost(location.hostname)) {
-      const link = this.checkUrlItems(process.env.GATSBY_SITE, URL_SLUGS);
-      return link !== null ? link : this.checkUrlItems(process.env.GATSBY_SITE, URL_SUBDOMAINS);
-    }
-    return this.validateActiveLink(location.hostname, '.', URL_SUBDOMAINS);
-  };
-
-  // Takes the appropriate part of the URL and identifies which link it matches
-  validateActiveLink = (name, token, urlItems) => {
-    const slugs = name.split(token);
-    return this.checkUrlItems(slugs[1], urlItems);
-  };
-
-  checkUrlItems = (slug, urlItems) => {
+  getActiveSection = (slug, urlItems) => {
     const urlMapping = Object.entries(urlItems).find(([, value]) => value.includes(slug));
-    return urlMapping ? urlMapping[0] : null;
-  };
+    if (urlMapping) {
+      return urlMapping[0];
+    }
 
-  isLocalhost = hostname => {
-    const found = LOCALHOST_NAMES.find(localhostName => {
-      return localhostName.includes(hostname);
-    });
-    return found !== undefined;
+    if (isBrowser) {
+      switch (window.location.pathname) {
+        case 'tools':
+          return 'tools';
+        case 'cloud':
+          return 'cloud';
+        default:
+          return null;
+      }
+    }
+
+    return null;
   };
 
   isActiveLink = link => {
@@ -86,7 +69,9 @@ export default class Navbar extends Component {
                     {"url": "https://docs.mongodb.com/tools/","text": "Tools", "active": ${this.isActiveLink('Tools')}},
                     {"url": "https://docs.mongodb.com/guides/","text": "Guides", "active": ${this.isActiveLink(
                       'Guides'
-                    )}}]}`;
+                    )}},
+                    {"url": "https://docs.mongodb.com/realm/","text": "Realm", "active": ${this.isActiveLink('Realm')}}
+    ]}`;
   };
 
   render() {
