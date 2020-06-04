@@ -34,7 +34,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const DocsLanding = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
+const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -67,7 +67,7 @@ const DocsLanding = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
           }
 
           p {
-            color: black;
+            color: ${uiColors.black};
             font-size: ${fontSize.default};
             letter-spacing: 0.5px;
             margin-bottom: ${size.default};
@@ -126,11 +126,11 @@ const DocsLanding = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
   );
 };
 
-DocsLanding.propTypes = {
+Landing.propTypes = {
   pageContext: PropTypes.shape({
     __refDocMapping: PropTypes.object.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default DocsLanding;
+export default Landing;

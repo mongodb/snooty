@@ -8,15 +8,6 @@ import ComponentFactory from '../ComponentFactory';
 import Link from '../Link';
 import Tag from '../Tag';
 
-const AnchorBox = styled(Box)`
-  color: #494747;
-
-  &:hover {
-    color: #494747;
-    text-decoration: none !important;
-  }
-`;
-
 const StyledCard = styled(LeafyGreenCard)`
   display: flex;
   flex-direction: column;
@@ -34,6 +25,7 @@ const H4 = styled('h4')`
 `;
 
 const CTA = styled(Link)`
+  font-weight: bold;
   margin-top: auto;
   margin-bottom: 0;
 `;
@@ -48,7 +40,7 @@ const Card = ({
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
 }) => (
-  <AnchorBox href={url}>
+  <Box href={url}>
     <StyledCard>
       {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
       {tag && <FlexTag text={tag} />}
@@ -56,11 +48,9 @@ const Card = ({
       {children.map((child, i) => (
         <ComponentFactory nodeData={child} key={i} />
       ))}
-      <CTA to={url}>
-        <strong>{cta}</strong>
-      </CTA>
+      <CTA to={url}>{cta}</CTA>
     </StyledCard>
-  </AnchorBox>
+  </Box>
 );
 
 Card.propTypes = {

@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ATFImage from './ATFImage';
 import Card from './Card';
 import CardGroup from './CardGroup';
 import CTA from './CTA';
 import Introduction from './Introduction';
 
 const componentMap = {
-  'atf-image': ATFImage,
   card: Card,
   'card-group': CardGroup,
   cta: CTA,
