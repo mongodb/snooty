@@ -5,11 +5,15 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
+  const termProps = {};
   const targetIdentifier = findKeyValuePair(term, 'type', 'target_identifier');
-  const id = getNestedValue(['ids', 0], targetIdentifier);
+  if (targetIdentifier) {
+    termProps.id = getNestedValue(['ids', 0], targetIdentifier);
+  }
+
   return (
-    <React.Fragment>
-      <dt id={id}>
+    <>
+      <dt {...termProps}>
         {term.map((child, index) => (
           <ComponentFactory nodeData={child} key={`dt-${index}`} />
         ))}
@@ -19,7 +23,7 @@ const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
           <ComponentFactory {...rest} nodeData={child} key={`dd-${index}`} parentNode="definitionListItem" />
         ))}
       </dd>
-    </React.Fragment>
+    </>
   );
 };
 
