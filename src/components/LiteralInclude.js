@@ -1,37 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes, { node } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import { getNestedValue } from '../utils/get-nested-value';
 
-export default class LiteralInclude extends Component {
-  constructor(props) {
-    super(props);
-
-    const { nodeData, _ } = this.props;
-
-    this.codeExample = '';
-
-    if (nodeData.children && nodeData.children.length) {
-      this.codeExample = nodeData.children[0].value;
-    }
+const LiteralInclude = ({ nodeData: { children }, ...rest }) => {
+  if (children && children.length) {
+    return <ComponentFactory {...rest} nodeData={children[0]} />;
   }
-
-  render() {
-    return (
-      <ComponentFactory
-        {...this.props}
-        nodeData={{
-          type: 'code',
-          value: this.codeExample,
-        }}
-      />
-    );
-  }
-}
+  return <ComponentFactory {...rest} nodeData={{ type: 'code', value: '' }} />;
+};
 
 LiteralInclude.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.node).isRequired,
   }).isRequired,
-  codeExample: PropTypes.string.isRequired,
 };
+
+export default LiteralInclude;
