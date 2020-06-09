@@ -69,8 +69,7 @@ export default class Navbar extends Component {
                     {"url": "https://docs.mongodb.com/tools/","text": "Tools", "active": ${this.isActiveLink('Tools')}},
                     {"url": "https://docs.mongodb.com/guides/","text": "Guides", "active": ${this.isActiveLink(
                       'Guides'
-                    )}},
-                    {"url": "https://docs.mongodb.com/realm/","text": "Realm", "active": ${this.isActiveLink('Realm')}}
+                    )}}
     ]}`;
   };
 
