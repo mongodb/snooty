@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ComponentFactory as LandingComponentFactory } from './landing';
 import { ADMONITIONS } from '../constants';
 import Step from './Step';
 import Paragraph from './Paragraph';
@@ -123,13 +124,17 @@ export default class ComponentFactory extends Component {
 
   selectComponent() {
     const {
-      nodeData: { children, name, type },
+      nodeData: { children, domain, name, type },
       ...rest
     } = this.props;
 
     // do nothing with these nodes for now (cc. Andrew)
     if (IGNORED_TYPES.includes(type) || IGNORED_NAMES.includes(name)) {
       return null;
+    }
+
+    if (domain === 'landing') {
+      return <LandingComponentFactory {...this.props} />;
     }
 
     if (type === 'problematic') {
@@ -149,14 +154,9 @@ export default class ComponentFactory extends Component {
     if (!ComponentType && ADMONITIONS.includes(name)) {
       ComponentType = this.componentMap.admonition;
     }
-    // component with this type not implemented
     if (!ComponentType) {
-      return (
-        <span>
-          ==Not implemented:
-          {type},{name} ==
-        </span>
-      );
+      console.warn(`${lookup} not yet implemented`);
+      return null;
     }
 
     return <ComponentType {...this.props} />;
@@ -172,6 +172,7 @@ export default class ComponentFactory extends Component {
 ComponentFactory.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
+    domain: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,

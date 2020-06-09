@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.4.11",
+  "version": "0.4.13",
   "repository": "github:mongodb/snooty",
   "devDependencies": {
     "auto-changelog": "^1.16.2",
@@ -57,6 +57,7 @@
     "@babel/preset-react": "^7.8.3",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
+    "@leafygreen-ui/box": "^1.1.1",
     "@leafygreen-ui/button": "^4.1.1",
     "@leafygreen-ui/card": "^2.0.0",
     "@leafygreen-ui/checkbox": "^4.0.0",
@@ -71,6 +72,7 @@
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "dotenv": "^8.2.0",
+    "emotion-theming": "^10.0.27",
     "gatsby": "^2.20.9",
     "gatsby-plugin-emotion": "^4.1.22",
     "gatsby-plugin-react-helmet": "^3.1.14",
