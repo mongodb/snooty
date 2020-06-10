@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 const Wrapper = styled('main')`
-  margin: ${({ theme }) => `${theme.navbar.height} auto ${theme.size.xlarge} auto`};
+  margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
   max-width: 1150px;
   padding: 0 ${({ theme }) => `${theme.size.medium}`};
 
