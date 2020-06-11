@@ -16,7 +16,7 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-  class="emotion-0 emotion-1"
+  class="heading-container-h3 emotion-0 emotion-1"
 >
   <h3
     id="create-an-administrative-username-and-password"
