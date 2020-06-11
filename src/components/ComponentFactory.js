@@ -49,6 +49,7 @@ import Superscript from './Superscript';
 import Image from './Image';
 import RefRole from './RefRole';
 import Target from './Target';
+import Glossary from './Glossary';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -56,7 +57,7 @@ import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 
 const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
-const IGNORED_TYPES = ['comment', 'substitution_definition'];
+const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -84,6 +85,7 @@ export default class ComponentFactory extends Component {
       figure: Figure,
       footnote: Footnote,
       footnote_reference: FootnoteReference,
+      glossary: Glossary,
       heading: Heading,
       hlist: HorizontalList,
       image: Image,
