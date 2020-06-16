@@ -4,18 +4,8 @@ exports[`renders correctly 1`] = `
 <ComponentFactory
   nodeData={
     Object {
-      "copyable": true,
-      "emphasize_lines": Array [
-        0,
-        1,
-      ],
-      "lang": "java",
-      "linenos": Array [
-        0,
-        1,
-      ],
       "type": "code",
-      "value": "sample code",
+      "value": "",
     }
   }
   refDocMapping={
