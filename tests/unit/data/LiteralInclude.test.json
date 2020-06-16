@@ -23,14 +23,5 @@
     "start-after": "Start Connection",
     "end-before": "End Connection"
   },
-  "children": [
-    {
-      "type": "code",
-      "lang": "java",
-      "copyable": true,
-      "emphasize_lines": [0,1],
-      "value": "sample code",
-      "linenos": [0,1]
-    }
-  ]
+  "children": []
 }
