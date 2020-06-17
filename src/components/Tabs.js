@@ -16,13 +16,25 @@ export default class Tabs extends Component {
     this.state = { tabsetName, activeTabs: undefined };
   }
 
+  componentDidMount() {
+    this.updateActiveTab(null);
+  }
+
   componentDidUpdate(prevProps) {
+    this.updateActiveTab(prevProps);
+  }
+
+  updateActiveTab(prevProps) {
     const { setActiveTab } = this.context;
     const { addPillstrip, addTabset, nodeData, pillstrips } = this.props;
     const { tabsetName } = this.state;
 
     // If the rST includes a `tabs-pillstrip` directive that matches this tabset, add the data from this node to our global pillstrip object
-    if (prevProps.pillstrips[tabsetName] !== pillstrips[tabsetName] && Object.keys(pillstrips).includes(tabsetName)) {
+    if (
+      prevProps &&
+      prevProps.pillstrips[tabsetName] !== pillstrips[tabsetName] &&
+      Object.keys(pillstrips).includes(tabsetName)
+    ) {
       addPillstrip(tabsetName, nodeData);
     }
 
