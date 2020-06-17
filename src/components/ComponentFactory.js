@@ -155,7 +155,7 @@ export default class ComponentFactory extends Component {
       ComponentType = this.componentMap.admonition;
     }
     if (!ComponentType) {
-      console.warn(`${lookup} not yet implemented`);
+      console.warn(`${type} "${name}" not yet implemented${this.props.slug && ` on page ${this.props.slug}`}`);
       return null;
     }
 
