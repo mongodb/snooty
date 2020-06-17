@@ -49,7 +49,7 @@ const screenSize = {
 };
 
 const navbar = {
-  height: '85px',
+  height: '45px',
 };
 
 export const theme = {
