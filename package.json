@@ -77,7 +77,7 @@
     "gatsby-plugin-emotion": "^4.1.22",
     "gatsby-plugin-react-helmet": "^3.1.14",
     "highlight.js": "^9.16.2",
-    "html-screen-capture-js": "^1.0.43",
+    "html-screen-capture-js": "^1.0.44",
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-server-sdk": "^4.7.1",
     "no-scroll": "^2.1.1",
