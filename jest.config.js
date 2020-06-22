@@ -20,7 +20,7 @@ module.exports = {
       },
       setupFilesAfterEnv: ['<rootDir>/tests/testSetup.js', '<rootDir>/tests/emotionTestSetup.js'],
       snapshotSerializers: ['enzyme-to-json/serializer'],
-      testMatch: ['<rootDir>/tests/unit/*.test.js'],
+      testMatch: ['<rootDir>/tests/unit/*.test.js', '<rootDir>/tests/unit/utils/*.test.js'],
       transform: {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
       },
