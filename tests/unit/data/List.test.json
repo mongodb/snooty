@@ -2,16 +2,15 @@
   "type": "list",
   "position": {
     "start": {
-      "line": 16
+      "line": 0
     }
   },
-  "ordered": false,
   "children": [
     {
       "type": "listItem",
       "position": {
         "start": {
-          "line": 16
+          "line": 0
         }
       },
       "children": [
@@ -19,7 +18,7 @@
           "type": "paragraph",
           "position": {
             "start": {
-              "line": 16
+              "line": 0
             }
           },
           "children": [
@@ -27,10 +26,61 @@
               "type": "text",
               "position": {
                 "start": {
-                  "line": 16
+                  "line": 0
                 }
               },
-              "value": "create a free account on Atlas, MongoDB's managed database solution in the cloud"
+              "value": "In "
+            },
+            {
+              "type": "substitution_reference",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "children": [],
+              "name": "service"
+            },
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "value": ", click "
+            },
+            {
+              "type": "role",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 0
+                    }
+                  },
+                  "value": "Charts"
+                }
+              ],
+              "domain": "",
+              "name": "guilabel",
+              "target": "",
+              "flag": ""
+            },
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "value": " in the navigation bar."
             }
           ]
         }
@@ -40,7 +90,7 @@
       "type": "listItem",
       "position": {
         "start": {
-          "line": 16
+          "line": 0
         }
       },
       "children": [
@@ -48,7 +98,7 @@
           "type": "paragraph",
           "position": {
             "start": {
-              "line": 17
+              "line": 2
             }
           },
           "children": [
@@ -56,16 +106,35 @@
               "type": "text",
               "position": {
                 "start": {
-                  "line": 17
+                  "line": 2
                 }
               },
-              "value": "create a free MongoDB "
+              "value": "If this is the first time you are launching "
             },
             {
-              "type": "emphasis",
+              "type": "substitution_reference",
               "position": {
                 "start": {
-                  "line": 17
+                  "line": 2
+                }
+              },
+              "children": [],
+              "name": "charts-short"
+            },
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 2
+                }
+              },
+              "value": ", click\n"
+            },
+            {
+              "type": "role",
+              "position": {
+                "start": {
+                  "line": 2
                 }
               },
               "children": [
@@ -73,25 +142,69 @@
                   "type": "text",
                   "position": {
                     "start": {
-                      "line": 17
+                      "line": 2
                     }
                   },
-                  "value": "cluster"
+                  "value": "Activate MongoDB Charts"
                 }
-              ]
+              ],
+              "domain": "",
+              "name": "guilabel",
+              "target": "",
+              "flag": ""
             },
             {
               "type": "text",
               "position": {
                 "start": {
-                  "line": 17
+                  "line": 2
                 }
               },
-              "value": ", or group of database instances."
+              "value": ". This provisions a new\n"
+            },
+            {
+              "type": "substitution_reference",
+              "position": {
+                "start": {
+                  "line": 2
+                }
+              },
+              "children": [],
+              "name": "charts-short"
+            },
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 2
+                }
+              },
+              "value": " instance in the "
+            },
+            {
+              "type": "substitution_reference",
+              "position": {
+                "start": {
+                  "line": 2
+                }
+              },
+              "children": [],
+              "name": "service"
+            },
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 2
+                }
+              },
+              "value": " project."
             }
           ]
         }
       ]
     }
-  ]
+  ],
+  "enumtype": "loweralpha",
+  "startat": 2
 }
