@@ -78,10 +78,14 @@ const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
   const displayText = getNestedValue([0, 'value'], argument);
   const headingNodes = findSectionHeadings(getNestedValue(['ast', 'children'], refDocMapping), 'type', 'heading');
   return (
-    <div className={['contents', 'topic', options.class, options.local ? 'local' : ''].join(' ')} id="on-this-page">
-      <p className="topic-title first">{displayText}</p>
-      <ContentsList className="simple" listItems={headingNodes} />
-    </div>
+    <React.Fragment>
+      {headingNodes.length > 0 && (
+        <div className={['contents', 'topic', options.class, options.local ? 'local' : ''].join(' ')} id="on-this-page">
+          <p className="topic-title first">{displayText}</p>
+          <ContentsList className="simple" listItems={headingNodes} />
+        </div>
+      )}
+    </React.Fragment>
   );
 };
 
