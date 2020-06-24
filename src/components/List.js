@@ -2,13 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const List = props => {
-  const { nodeData } = props;
-  const ListTag = nodeData.ordered ? 'ol' : 'ul';
+const enumtypeMap = {
+  arabic: '1',
+  loweralpha: 'a',
+  upperalpha: 'A',
+  lowerroman: 'i',
+  upperroman: 'I',
+};
+
+const List = ({ nodeData: { children, enumtype, startat }, ...rest }) => {
+  const ListTag = enumtype === 'unordered' ? 'ul' : 'ol';
+  const attributes = {};
+  if (enumtype in enumtypeMap) {
+    attributes.type = enumtypeMap[enumtype];
+  }
+  if (startat) {
+    attributes.start = startat;
+  }
   return (
-    <ListTag>
-      {nodeData.children.map((listChild, index) => (
-        <ComponentFactory {...props} nodeData={listChild} key={index} />
+    <ListTag {...attributes}>
+      {children.map((listChild, index) => (
+        <ComponentFactory {...rest} nodeData={listChild} key={index} />
       ))}
     </ListTag>
   );
@@ -17,7 +31,8 @@ const List = props => {
 List.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
-    ordered: PropTypes.bool,
+    enumtype: PropTypes.string.isRequired,
+    startat: PropTypes.number,
   }).isRequired,
 };
 

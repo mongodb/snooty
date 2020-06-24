@@ -1,16 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`List renders correctly 1`] = `
-<ul>
+<ol
+  start="2"
+  type="a"
+>
   <li>
-    create a free account on Atlas, MongoDB's managed database solution in the cloud
+    In , click 
+    <span
+      class="guilabel"
+    >
+      Charts
+    </span>
+     in the navigation bar.
   </li>
   <li>
-    create a free MongoDB 
-    <em>
-      cluster
-    </em>
-    , or group of database instances.
+    If this is the first time you are launching , click
+
+    <span
+      class="guilabel"
+    >
+      Activate MongoDB Charts
+    </span>
+    . This provisions a new
+ instance in the  project.
   </li>
-</ul>
+</ol>
 `;
