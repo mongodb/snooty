@@ -114,8 +114,7 @@ describe('FeedbackWidget', () => {
   describe('FeedbackHeading', () => {
     it('is hidden on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({}, withScreenSize('desktop'));
-      expect(wrapper.exists('FeedbackHeading')).toBe(true);
-      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(0);
+      expect(wrapper.exists('FeedbackHeading')).toBe(false);
     });
 
     it('is visible on medium/tablet screens', async () => {
