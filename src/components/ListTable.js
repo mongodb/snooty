@@ -109,29 +109,20 @@ const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
     {row.map((column, colIndex) => (
       <td className={`${colIndex <= stubColumnCount - 1 ? 'stub' : ''}`} key={colIndex}>
-        {column.children.length === 1 ? (
-          <CSSWrapper className={['first', 'last'].join(' ')}>
-            <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
-          </CSSWrapper>
-        ) : (
-          column.children.map((element, index) => {
-            if (index === 0) {
-              return (
-                <CSSWrapper key={index} className="first">
-                  <ComponentFactory {...rest} nodeData={element} />
-                </CSSWrapper>
-              );
-            }
-            if (index === column.children.length - 1) {
-              return (
-                <CSSWrapper key={index} className="last">
-                  <ComponentFactory {...rest} nodeData={element} />
-                </CSSWrapper>
-              );
-            }
-            return <ComponentFactory {...rest} key={index} nodeData={element} />;
-          })
-        )}
+        {column.children.map((element, index) => {
+          let colClass = [];
+          if (index === 0) {
+            colClass.push('first');
+          }
+          if (index === column.children.length - 1) {
+            colClass.push('last');
+          }
+          return (
+            <CSSWrapper className={colClass.join(' ')} key={index}>
+              <ComponentFactory {...rest} key={index} nodeData={element} parentNode="listTable" />
+            </CSSWrapper>
+          );
+        })}
       </td>
     ))}
   </tr>
