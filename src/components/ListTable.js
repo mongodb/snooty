@@ -107,24 +107,29 @@ ListTableBody.propTypes = {
 
 const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
-    {row.map((column, colIndex) => (
-      <td className={`${colIndex <= stubColumnCount - 1 ? 'stub' : ''}`} key={colIndex}>
-        {column.children.map((element, index) => {
-          let colClass = [];
-          if (index === 0) {
-            colClass.push('first');
-          }
-          if (index === column.children.length - 1) {
-            colClass.push('last');
-          }
-          return (
-            <CSSWrapper className={colClass.join(' ')} key={index}>
-              <ComponentFactory {...rest} key={index} nodeData={element} parentNode="listTable" />
-            </CSSWrapper>
-          );
-        })}
-      </td>
-    ))}
+    {row.map((column, colIndex) => {
+      let isStub = colIndex <= stubColumnCount - 1;
+      const CellTag = isStub ? 'th' : 'td';
+      let cellClass = isStub ? 'stub' : '';
+      return (
+        <CellTag className={cellClass} key={colIndex}>
+          {column.children.map((element, index) => {
+            let colChildClass = [];
+            if (index === 0) {
+              colChildClass.push('first');
+            }
+            if (index === column.children.length - 1) {
+              colChildClass.push('last');
+            }
+            return (
+              <CSSWrapper className={colChildClass.join(' ')} key={index}>
+                <ComponentFactory {...rest} key={index} nodeData={element} parentNode="listTable" />
+              </CSSWrapper>
+            );
+          })}
+        </CellTag>
+      );
+    })}
   </tr>
 );
 
