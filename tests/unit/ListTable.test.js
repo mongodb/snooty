@@ -51,7 +51,7 @@ describe('when rendering a list-table directive', () => {
     ).toHaveLength(5);
   });
 
-  it('displays six body columns', () => {
+  it('displays five body columns', () => {
     expect(
       wrapper
         .find('tbody')
@@ -60,7 +60,19 @@ describe('when rendering a list-table directive', () => {
         .first()
         .children()
         .find('td')
-    ).toHaveLength(6);
+    ).toHaveLength(5);
+  });
+
+  it('displays one stub column', () => {
+    expect(
+      wrapper
+        .find('tbody')
+        .children()
+        .find('tr')
+        .first()
+        .children()
+        .find('th')
+    ).toHaveLength(1);
   });
 
   it('applies the class passed in as an option', () => {
