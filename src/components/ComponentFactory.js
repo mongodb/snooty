@@ -55,6 +55,7 @@ import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
+import RoleIcon from './Roles/Icon';
 
 const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
 const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
@@ -67,6 +68,11 @@ export default class ComponentFactory extends Component {
       class: RoleClass,
       file: RoleFile,
       guilabel: RoleGUILabel,
+      icon: RoleIcon,
+      'icon-fa5': RoleIcon,
+      'icon-fa4': RoleIcon,
+      'icon-mms': RoleIcon,
+      'icon-charts': RoleIcon,
     };
     this.componentMap = {
       admonition: Admonition,
