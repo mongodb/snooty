@@ -113,20 +113,29 @@ const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
       let cellClass = isStub ? 'stub' : '';
       return (
         <CellTag className={cellClass} key={colIndex}>
-          {column.children.map((element, index) => {
-            let colChildClass = [];
-            if (index === 0) {
-              colChildClass.push('first');
-            }
-            if (index === column.children.length - 1) {
-              colChildClass.push('last');
-            }
-            return (
-              <CSSWrapper className={colChildClass.join(' ')} key={index}>
-                <ComponentFactory {...rest} key={index} nodeData={element} parentNode="listTable" />
-              </CSSWrapper>
-            );
-          })}
+          {column.children.length === 1 ? (
+            <CSSWrapper className={['first', 'last'].join(' ')}>
+              <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
+            </CSSWrapper>
+          ) : (
+            column.children.map((element, index) => {
+              if (index === 0) {
+                return (
+                  <CSSWrapper key={index} className="first">
+                    <ComponentFactory {...rest} nodeData={element} />
+                  </CSSWrapper>
+                );
+              }
+              if (index === column.children.length - 1) {
+                return (
+                  <CSSWrapper key={index} className="last">
+                    <ComponentFactory {...rest} nodeData={element} />
+                  </CSSWrapper>
+                );
+              }
+              return <ComponentFactory {...rest} key={index} nodeData={element} />;
+            })
+          )}
         </CellTag>
       );
     })}
