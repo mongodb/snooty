@@ -28,7 +28,8 @@ const Document = props => {
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
-
+  const pageOptions = getNestedValue(['ast', 'options'], __refDocMapping);
+  const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
   };
@@ -60,12 +61,9 @@ const Document = props => {
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
                   <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
-                  <InternalPageNav
-                    slug={slug}
-                    slugTitleMapping={slugTitleMapping}
-                    toctreeOrder={toctreeOrder}
-                    pageOptions={getNestedValue(['ast', 'options'], __refDocMapping)}
-                  />
+                  {showPrevNext && (
+                    <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+                  )}
                   <Footer />
                 </div>
               </div>
