@@ -60,7 +60,12 @@ const Document = props => {
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
                   <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
-                  <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+                  <InternalPageNav
+                    slug={slug}
+                    slugTitleMapping={slugTitleMapping}
+                    toctreeOrder={toctreeOrder}
+                    pageOptions={getNestedValue(['ast', 'options'], __refDocMapping)}
+                  />
                   <Footer />
                 </div>
               </div>
