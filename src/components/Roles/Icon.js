@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 const RoleIcon = ({ nodeData: { target, name } }) => {
   if ((name === 'icon') | (name === 'icon-fa5')) {
-    return <i class={`fa-${target} fas`}></i>;
+    return <i className={`fa-${target} fas`}></i>;
   } else if (name === 'icon-fa4') {
-    return <i class={`fa4-${target} fa4`}></i>;
+    return <i className={`fa4-${target} fa4`}></i>;
   } else if (name === 'icon-charts') {
-    return <i class={`charts-icon-${target} charts-icon`}></i>;
+    return <i className={`charts-icon-${target} charts-icon`}></i>;
   } else if (name === 'icon-mms') {
-    return <i class={`mms-icon-${target} mms-icon`}></i>;
+    return <i className={`mms-icon-${target} mms-icon`}></i>;
   }
 };
 
