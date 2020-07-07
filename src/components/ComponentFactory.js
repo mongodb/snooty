@@ -70,6 +70,7 @@ export default class ComponentFactory extends Component {
       guilabel: RoleGUILabel,
       icon: RoleIcon,
       'icon-fa5': RoleIcon,
+      'icon-fa5-brands': RoleIcon,
       'icon-fa4': RoleIcon,
       'icon-mms': RoleIcon,
       'icon-charts': RoleIcon,

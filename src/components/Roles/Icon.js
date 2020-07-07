@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 const RoleIcon = ({ nodeData: { target, name } }) => {
   if ((name === 'icon') | (name === 'icon-fa5')) {
     return <i className={`fa-${target} fas`}></i>;
+  } else if (name === 'icon-fa5-brands') {
+    return <i className={`fab fa-${target}`}></i>;
   } else if (name === 'icon-fa4') {
     return <i className={`fa4-${target} fa4`}></i>;
   } else if (name === 'icon-charts') {
