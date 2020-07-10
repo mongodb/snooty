@@ -4,6 +4,10 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import TextInput from '@leafygreen-ui/text-input';
 import Icon from '@leafygreen-ui/icon';
+import SearchDropdown from './SearchDropdown';
+
+const GO_BUTTON_COLOR = '#E4F4F4';
+const GO_BUTTON_SIZE = 24;
 
 const animationKeyframe = startingOpacity => keyframes`
     0% {
@@ -16,23 +20,23 @@ const animationKeyframe = startingOpacity => keyframes`
 
 const fadeInAnimation = (startingOpacity, seconds) => css`
   animation: ${animationKeyframe(startingOpacity)};
+  animation-duration: ${seconds};
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
-  animation-duration: ${seconds};
 `;
 
 const StyledButton = styled(Button)`
+  background-color: ${GO_BUTTON_COLOR};
+  border-radius: ${GO_BUTTON_SIZE}px;
+  height: ${GO_BUTTON_SIZE}px;
   position: absolute;
-  top: 6px;
   right: 8px;
+  top: 6px;
+  width: ${GO_BUTTON_SIZE}px;
   z-index: 1;
-  background-color: #e4f4e4;
-  border-radius: 24px;
-  height: 24px;
-  width: 24px;
+  /* Below removes default hover effects from button */
   background-image: none;
   border: none;
-  border-image-width: 0;
   box-shadow: none;
   :before {
     display: none;
@@ -48,7 +52,7 @@ const SearchbarContainer = styled('div')`
   top: 5px;
   height: 36px;
   width: 372px;
-  z-index: 99999;
+  z-index: 10000;
   opacity: 0.6;
   :focus-within {
     opacity: 1;
@@ -56,14 +60,15 @@ const SearchbarContainer = styled('div')`
   }
 `;
 
-const StyledIcon = styled(Icon)`
+const MagnifyingGlass = styled(Icon)`
   position: absolute;
-  z-index: 100000;
   top: 10px;
   left: 10px;
+  z-index: 1;
 `;
 
 const StyledTextInput = styled(TextInput)`
+  /* Curve the text input box and put padding around text for icons/buttons */
   div > input {
     border-radius: 24px;
     padding-left: 32px;
@@ -79,56 +84,28 @@ const StyledTextInput = styled(TextInput)`
   }
 `;
 
-const SearchResultContainer = styled('div')`
-  background-color: #ffffff;
-  width: 100%;
-  top: 16px;
-  z-index: -1;
-  position: absolute;
-  border-radius: 0 0 4px 4px;
-  opacity: 1;
-  ${fadeInAnimation('0', '0.3s')};
-`;
-
-const SearchResults = styled('div')`
-  box-shadow: 0 0 4px 0 rgba(184, 196, 194, 0.48);
-  width: 100%;
-  height: 368px;
-  position: relative;
-`;
-
-const StyledSearchFooter = styled('div')`
-  position: relative;
-  height: 64px;
-  width: 100%;
-  box-shadow: 0 0 4px 0 rgba(184, 196, 194, 0.64);
-`;
-
-const ArrowIcon = styled(Icon)`
-  position: absolute;
+const GoArrowIcon = styled(Icon)`
   left: 4px;
+  position: absolute;
 `;
-
-const SearchResultDropdownFooter = () => <StyledSearchFooter />;
-
-const SearchDropdown = () => (
-  <SearchResultContainer>
-    <SearchResults />
-    <SearchResultDropdownFooter />
-  </SearchResultContainer>
-);
 
 const Searchbar = () => {
   const [value, setValue] = useState('');
   const onChange = useCallback(e => setValue(e.target.value), []);
+  const [blurEvent, setBlurEvent] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
+  const onFocus = useCallback(() => {
+    clearTimeout(blurEvent);
+    setIsFocused(true);
+  }, [blurEvent]);
+  const onBlur = useCallback(() => setBlurEvent(setTimeout(() => setIsFocused(false), 0)), []);
   return (
-    <SearchbarContainer onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)}>
-      <StyledIcon glyph="MagnifyingGlass" fill="#061621" />
-      <StyledTextInput placeholder="Search Documentation" value={value} onChange={onChange} label={null} />
-      {!!value && <StyledButton href="#" glyph={<ArrowIcon glyph="ArrowRight" fill="#13AA52" />}></StyledButton>}
+    <SearchbarContainer onBlur={onBlur} onFocus={onFocus}>
+      <MagnifyingGlass glyph="MagnifyingGlass" fill="#061621" />
+      <StyledTextInput tabIndex="0" placeholder="Search Documentation" value={value} onChange={onChange} label={null} />
+      {!!value && <StyledButton href="#" glyph={<GoArrowIcon glyph="ArrowRight" fill="#13AA52" />}></StyledButton>}
       {isSearching && <SearchDropdown />}
     </SearchbarContainer>
   );
