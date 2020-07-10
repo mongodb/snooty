@@ -74,6 +74,10 @@ export default class ComponentFactory extends Component {
       'icon-fa4': RoleIcon,
       'icon-mms': RoleIcon,
       'icon-charts': RoleIcon,
+      sub: Subscript,
+      subscript: Subscript,
+      sup: Superscript,
+      superscript: Superscript,
     };
     this.componentMap = {
       admonition: Admonition,
@@ -113,9 +117,7 @@ export default class ComponentFactory extends Component {
       section: Section,
       step: Step,
       strong: Strong,
-      subscript: Subscript,
       substitution_reference: SubstitutionReference,
-      superscript: Superscript,
       tabs: Tabs,
       'tabs-pillstrip': TabsPillstrip,
       target: Target,
