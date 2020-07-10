@@ -79,7 +79,7 @@ export default class Navbar extends Component {
     return (
       <>
         <div
-          tabindex="0"
+          tabIndex="0"
           id="navbar"
           className="navbar"
           data-navprops={this.navprops}

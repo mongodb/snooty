@@ -8,6 +8,8 @@ import SearchDropdown from './SearchDropdown';
 
 const GO_BUTTON_COLOR = '#E4F4F4';
 const GO_BUTTON_SIZE = 24;
+const SEARCHBAR_DESKTOP_WIDTH = 372;
+const SEARCHBAR_HEIGHT = 36;
 
 const animationKeyframe = startingOpacity => keyframes`
     0% {
@@ -25,7 +27,12 @@ const fadeInAnimation = (startingOpacity, seconds) => css`
   animation-timing-function: ease-in;
 `;
 
-const StyledButton = styled(Button)`
+const GoArrowIcon = styled(Icon)`
+  left: 4px;
+  position: absolute;
+`;
+
+const GoButton = styled(Button)`
   background-color: ${GO_BUTTON_COLOR};
   border-radius: ${GO_BUTTON_SIZE}px;
   height: ${GO_BUTTON_SIZE}px;
@@ -46,25 +53,26 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const MagnifyingGlass = styled(Icon)`
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1;
+`;
+
 const SearchbarContainer = styled('div')`
+  height: ${SEARCHBAR_HEIGHT}px;
+  opacity: 0.6;
   position: fixed;
   right: 16px;
   top: 5px;
-  height: 36px;
-  width: 372px;
+  width: ${SEARCHBAR_DESKTOP_WIDTH}px;
+  /* docs-tools navbar z-index is 9999 */
   z-index: 10000;
-  opacity: 0.6;
   :focus-within {
     opacity: 1;
     ${fadeInAnimation(0.6, '0.3s')};
   }
-`;
-
-const MagnifyingGlass = styled(Icon)`
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 1;
 `;
 
 const StyledTextInput = styled(TextInput)`
@@ -84,11 +92,6 @@ const StyledTextInput = styled(TextInput)`
   }
 `;
 
-const GoArrowIcon = styled(Icon)`
-  left: 4px;
-  position: absolute;
-`;
-
 const Searchbar = () => {
   const [value, setValue] = useState('');
   const onChange = useCallback(e => setValue(e.target.value), []);
@@ -100,12 +103,13 @@ const Searchbar = () => {
     clearTimeout(blurEvent);
     setIsFocused(true);
   }, [blurEvent]);
+  // The React onBlur event fires when tabbing between child elements
   const onBlur = useCallback(() => setBlurEvent(setTimeout(() => setIsFocused(false), 0)), []);
   return (
     <SearchbarContainer onBlur={onBlur} onFocus={onFocus}>
       <MagnifyingGlass glyph="MagnifyingGlass" fill="#061621" />
-      <StyledTextInput tabIndex="0" placeholder="Search Documentation" value={value} onChange={onChange} label={null} />
-      {!!value && <StyledButton href="#" glyph={<GoArrowIcon glyph="ArrowRight" fill="#13AA52" />}></StyledButton>}
+      <StyledTextInput onChange={onChange} placeholder="Search Documentation" tabIndex="0" value={value} />
+      {!!value && <GoButton href="#" glyph={<GoArrowIcon glyph="ArrowRight" fill="#13AA52" />} />}
       {isSearching && <SearchDropdown />}
     </SearchbarContainer>
   );
