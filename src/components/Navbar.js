@@ -84,7 +84,7 @@ export default class Navbar extends Component {
           className="navbar"
           data-navprops={this.navprops}
           style={{ position: 'absolute' }}
-        ></div>
+        />
         <Searchbar />
       </>
     );
