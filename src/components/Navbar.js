@@ -78,13 +78,7 @@ export default class Navbar extends Component {
     this.navprops = this.modifyActiveLink();
     return (
       <>
-        <div
-          tabIndex="0"
-          id="navbar"
-          className="navbar"
-          data-navprops={this.navprops}
-          style={{ position: 'absolute' }}
-        />
+        <div id="navbar" className="navbar" data-navprops={this.navprops} tabIndex="0" />
         <Searchbar />
       </>
     );
