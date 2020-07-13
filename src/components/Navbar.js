@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withPrefix } from 'gatsby';
 import { isBrowser } from '../utils/is-browser';
 import { URL_SLUGS } from '../constants';
+import Searchbar from './Searchbar';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -75,6 +76,11 @@ export default class Navbar extends Component {
 
   render() {
     this.navprops = this.modifyActiveLink();
-    return <div id="navbar" className="navbar" data-navprops={this.navprops} />;
+    return (
+      <>
+        <div id="navbar" className="navbar" data-navprops={this.navprops} tabIndex="0" />
+        <Searchbar />
+      </>
+    );
   }
 }
