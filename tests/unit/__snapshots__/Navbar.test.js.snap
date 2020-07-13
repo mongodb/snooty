@@ -5,12 +5,12 @@ exports[`renders correctly without browser 1`] = `
   <div
     className="navbar"
     data-navprops="{\\"links\\": [
-                    {\\"url\\": \\"https://docs.mongodb.com/manual/\\",\\"text\\": \\"Server\\", \\"active\\": false},
-                    {\\"url\\": \\"https://docs.mongodb.com/drivers/\\",\\"text\\": \\"Drivers\\", \\"active\\": false},
-                    {\\"url\\": \\"https://docs.mongodb.com/cloud/\\",\\"text\\": \\"Cloud\\", \\"active\\": false},
-                    {\\"url\\": \\"https://docs.mongodb.com/tools/\\",\\"text\\": \\"Tools\\", \\"active\\": false},
-                    {\\"url\\": \\"https://docs.mongodb.com/guides/\\",\\"text\\": \\"Guides\\", \\"active\\": false}
-    ]}"
+        {\\"url\\": \\"https://docs.mongodb.com/manual/\\",\\"text\\": \\"Server\\", \\"active\\": false},
+        {\\"url\\": \\"https://docs.mongodb.com/drivers/\\",\\"text\\": \\"Drivers\\", \\"active\\": false},
+        {\\"url\\": \\"https://docs.mongodb.com/cloud/\\",\\"text\\": \\"Cloud\\", \\"active\\": false},
+        {\\"url\\": \\"https://docs.mongodb.com/tools/\\",\\"text\\": \\"Tools\\", \\"active\\": false},
+        {\\"url\\": \\"https://docs.mongodb.com/guides/\\",\\"text\\": \\"Guides\\", \\"active\\": false}
+      ]}"
     id="navbar"
     tabIndex="0"
   />

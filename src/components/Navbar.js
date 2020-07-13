@@ -26,24 +26,6 @@ const getActiveSection = (slug, urlItems) => {
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
-  const [navprops, setNavprops] = useState(`{"links": [
-    {"url": "https://docs.mongodb.com/manual/","text": "Server"},
-    {"url": "https://docs.mongodb.com/drivers/","text": "Drivers"},
-    {"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},
-    {"url": "https://docs.mongodb.com/tools/","text": "Tools"},
-    {"url": "https://docs.mongodb.com/guides/","text": "Guides"}]}`);
-
-  useEffect(() => {
-    // Add script to give navbar functionality and css
-    const script = document.createElement('script');
-    script.src = withPrefix('docs-tools/navbar.min.js');
-    script.async = true;
-
-    document.body.appendChild(script);
-
-    setActiveLink(getActiveSection(process.env.GATSBY_SITE, URL_SLUGS));
-  }, []);
-
   const isActiveLink = useCallback(link => link.toLowerCase() === activeLink, [activeLink]);
 
   // modify navprops
@@ -55,9 +37,22 @@ const Navbar = () => {
         {"url": "https://docs.mongodb.com/cloud/","text": "Cloud", "active": ${isActiveLink('Cloud')}},
         {"url": "https://docs.mongodb.com/tools/","text": "Tools", "active": ${isActiveLink('Tools')}},
         {"url": "https://docs.mongodb.com/guides/","text": "Guides", "active": ${isActiveLink('Guides')}}
-    ]}`,
+      ]}`,
     [isActiveLink]
   );
+
+  const [navprops, setNavprops] = useState(modifyActiveLink);
+
+  useEffect(() => {
+    // Add script to give navbar functionality and css
+    const script = document.createElement('script');
+    script.src = withPrefix('docs-tools/navbar.min.js');
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    setActiveLink(getActiveSection(process.env.GATSBY_SITE, URL_SLUGS));
+  }, []);
 
   useEffect(() => {
     setNavprops(modifyActiveLink);
