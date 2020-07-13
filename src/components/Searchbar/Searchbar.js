@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { css, keyframes } from '@emotion/core';
+import React, { useCallback, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
@@ -7,7 +6,6 @@ import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
-import useScreenSize from '../../hooks/useScreenSize';
 
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const GO_BUTTON_SIZE = theme.size.medium;
@@ -108,16 +106,12 @@ const ExpandMagnifyingGlass = styled(Icon)`
   z-index: 1;
 `;
 
-const Searchbar = () => {
+const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
   const [value, setValue] = useState('');
   const onChange = useCallback(e => setValue(e.target.value), []);
   const [blurEvent, setBlurEvent] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const { isMediumScreen } = useScreenSize();
-  const [isExpanded, setIsExpanded] = useState(!isMediumScreen);
-  useEffect(() => {
-    setIsExpanded(!isMediumScreen);
-  }, [isMediumScreen]);
+
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
   const onFocus = useCallback(() => {
@@ -127,7 +121,7 @@ const Searchbar = () => {
   // The React onBlur event fires when tabbing between child elements
   const onBlur = useCallback(() => setBlurEvent(setTimeout(() => setIsFocused(false), 0)), []);
   return (
-    <SearchbarContainer isMobile={isMediumScreen} isExpanded={isExpanded} onBlur={onBlur} onFocus={onFocus}>
+    <SearchbarContainer isExpanded={isExpanded} onBlur={onBlur} onFocus={onFocus} ref={ref}>
       {isExpanded ? (
         <>
           <MagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.black} />
@@ -142,6 +136,6 @@ const Searchbar = () => {
       )}
     </SearchbarContainer>
   );
-};
+});
 
 export default Searchbar;

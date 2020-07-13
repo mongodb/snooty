@@ -1,5 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { withPrefix } from 'gatsby';
+import styled from '@emotion/styled';
+import useScreenSize from '../hooks/useScreenSize';
 import { isBrowser } from '../utils/is-browser';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
@@ -24,8 +26,15 @@ const getActiveSection = (slug, urlItems) => {
   return null;
 };
 
+const NavbarContainer = styled('div')`
+  ${({ isExpanded, isMediumScreen }) => isExpanded && isMediumScreen && 'opacity: 0.2;'};
+`;
+
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
+  const searchbarRef = useRef(null);
+  const { isMediumScreen } = useScreenSize();
+  const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isMediumScreen);
   const [navprops, setNavprops] = useState(`{"links": [
     {"url": "https://docs.mongodb.com/manual/","text": "Server"},
     {"url": "https://docs.mongodb.com/drivers/","text": "Drivers"},
@@ -63,10 +72,22 @@ const Navbar = () => {
     setNavprops(modifyActiveLink);
   }, [activeLink, modifyActiveLink]);
 
+  useEffect(() => {
+    setIsSearchbarExpanded(!isMediumScreen);
+  }, [isMediumScreen]);
+
   return (
     <>
-      <div tabIndex="0" id="navbar" className="navbar" data-navprops={navprops} style={{ position: 'absolute' }} />
-      <Searchbar />
+      <NavbarContainer
+        isExpanded={isSearchbarExpanded}
+        isMediumScreen={isMediumScreen}
+        tabIndex="0"
+        id="navbar"
+        className="navbar"
+        data-navprops={navprops}
+        style={{ position: 'absolute' }}
+      />
+      <Searchbar ref={searchbarRef} isExpanded={isSearchbarExpanded} setIsExpanded={setIsSearchbarExpanded} />
     </>
   );
 };
