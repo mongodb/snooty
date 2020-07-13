@@ -1,9 +1,10 @@
 import React from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
+import { theme } from '../../theme/docsTheme';
 
 const SEARCH_RESULTS_DESKTOP_HEIGHT = 368;
-const SEARCH_FOOTER_DESKTOP_HEIGHT = 64;
+const SEARCH_FOOTER_DESKTOP_HEIGHT = theme.size.xlarge;
 
 const animationKeyframe = startingOpacity => keyframes`
     0% {
@@ -22,7 +23,7 @@ const fadeInAnimation = (startingOpacity, seconds) => css`
 `;
 
 const SearchResults = styled('div')`
-  box-shadow: 0 0 4px 0 rgba(184, 196, 194, 0.48);
+  box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.48);
   height: ${SEARCH_RESULTS_DESKTOP_HEIGHT}px;
   position: relative;
   width: 100%;
@@ -30,7 +31,7 @@ const SearchResults = styled('div')`
 
 const SearchResultsContainer = styled('div')`
   background-color: #ffffff;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 ${theme.size.tiny} ${theme.size.tiny};
   opacity: 1;
   position: absolute;
   top: 16px;
@@ -40,8 +41,8 @@ const SearchResultsContainer = styled('div')`
 `;
 
 const SearchFooter = styled('div')`
-  box-shadow: 0 0 4px 0 rgba(184, 196, 194, 0.64);
-  height: ${SEARCH_FOOTER_DESKTOP_HEIGHT}px;
+  box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.64);
+  height: ${SEARCH_FOOTER_DESKTOP_HEIGHT};
   position: relative;
   width: 100%;
 `;

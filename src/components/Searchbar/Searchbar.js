@@ -2,12 +2,14 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
-import TextInput from '@leafygreen-ui/text-input';
 import Icon from '@leafygreen-ui/icon';
+import { uiColors } from '@leafygreen-ui/palette';
+import TextInput from '@leafygreen-ui/text-input';
+import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
 
-const GO_BUTTON_COLOR = '#E4F4F4';
-const GO_BUTTON_SIZE = 24;
+const GO_BUTTON_COLOR = uiColors.green.light3;
+const GO_BUTTON_SIZE = theme.size.medium;
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
 
@@ -34,12 +36,12 @@ const GoArrowIcon = styled(Icon)`
 
 const GoButton = styled(Button)`
   background-color: ${GO_BUTTON_COLOR};
-  border-radius: ${GO_BUTTON_SIZE}px;
-  height: ${GO_BUTTON_SIZE}px;
+  border-radius: ${GO_BUTTON_SIZE};
+  height: ${GO_BUTTON_SIZE};
   position: absolute;
   right: 8px;
   top: 6px;
-  width: ${GO_BUTTON_SIZE}px;
+  width: ${GO_BUTTON_SIZE};
   z-index: 1;
   /* Below removes default hover effects from button */
   background-image: none;
@@ -78,9 +80,9 @@ const SearchbarContainer = styled('div')`
 const StyledTextInput = styled(TextInput)`
   /* Curve the text input box and put padding around text for icons/buttons */
   div > input {
-    border-radius: 24px;
-    padding-left: 32px;
-    padding-right: 32px;
+    border-radius: ${theme.size.medium};
+    padding-left: ${theme.size.large};
+    padding-right: ${theme.size.large};
   }
 
   /* Remove blue border on focus */

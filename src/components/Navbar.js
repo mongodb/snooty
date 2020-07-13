@@ -65,7 +65,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div tabIndex="0" id="navbar" className="navbar" data-navprops={navprops} style={{ position: 'absolute' }} />
+      <div tabIndex="0" id="navbar" className="navbar" data-navprops={navprops} />
       <Searchbar />
     </>
   );
