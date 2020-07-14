@@ -112,7 +112,7 @@ const ExpandMagnifyingGlass = styled(Icon)`
   z-index: 1;
 `;
 
-const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
+const Searchbar = ({ isExpanded, setIsExpanded }) => {
   const [value, setValue] = useState('');
   const onChange = useCallback(e => setValue(e.target.value), []);
   const { isMobile } = useScreenSize();
@@ -121,6 +121,7 @@ const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
 
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
+  const shouldShowGoButton = useMemo(() => !!value && !isMobile, [isMobile, value]);
   const onFocus = useCallback(() => {
     clearTimeout(blurEvent);
     setIsFocused(true);
@@ -137,7 +138,7 @@ const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
     [setIsExpanded, value]
   );
   return (
-    <SearchbarContainer isExpanded={isExpanded} onBlur={onBlur} onFocus={onFocus} ref={ref}>
+    <SearchbarContainer isExpanded={isExpanded} onBlur={onBlur} onFocus={onFocus}>
       {isExpanded ? (
         <>
           <MagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.black} />
@@ -149,7 +150,7 @@ const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
             tabIndex="0"
             value={value}
           />
-          {!!value && !isMobile && (
+          {shouldShowGoButton && (
             <GoButton aria-label="Go" href="#" glyph={<TextActionIcon glyph="ArrowRight" fill="#13AA52" />} />
           )}
           {isMobile && (
@@ -168,6 +169,6 @@ const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
       )}
     </SearchbarContainer>
   );
-});
+};
 
 export default Searchbar;

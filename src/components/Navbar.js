@@ -43,9 +43,10 @@ const Navbar = () => {
     {"url": "https://docs.mongodb.com/guides/","text": "Guides"}]}`);
 
   const onSearchbarExpand = useCallback(
-    state => {
+    isExpanded => {
+      // On desktop screens the searchbar is never collapsed
       if (isMediumScreen) {
-        setIsSearchbarExpanded(state);
+        setIsSearchbarExpanded(isExpanded);
       }
     },
     [isMediumScreen]
@@ -94,7 +95,6 @@ const Navbar = () => {
         id="navbar"
         className="navbar"
         data-navprops={navprops}
-        style={{ position: 'absolute' }}
       />
       <Searchbar ref={searchbarRef} isExpanded={isSearchbarExpanded} setIsExpanded={onSearchbarExpand} />
     </>
