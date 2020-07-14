@@ -9,19 +9,19 @@ import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
 
+const BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
-const GO_BUTTON_SIZE = theme.size.medium;
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
 
 const commonSearchButtonStyling = css`
   background-color: #fff;
-  border-radius: ${GO_BUTTON_SIZE};
-  height: ${GO_BUTTON_SIZE};
+  border-radius: ${BUTTON_SIZE};
+  height: ${BUTTON_SIZE};
   position: absolute;
   right: 8px;
   top: 6px;
-  width: ${GO_BUTTON_SIZE};
+  width: ${BUTTON_SIZE};
   z-index: 1;
   /* Below removes default hover effects from button */
   background-image: none;
@@ -35,8 +35,13 @@ const commonSearchButtonStyling = css`
   }
 `;
 
+const commonSearchIconStyling = css`
+  position: absolute;
+  z-index: 1;
+`;
+
 const TextActionIcon = styled(Icon)`
-  left: 4px;
+  left: ${theme.size.tiny};
   position: absolute;
 `;
 
@@ -53,35 +58,39 @@ const ExpandButton = styled(Button)`
   ${commonSearchButtonStyling};
 `;
 
+const ExpandMagnifyingGlass = styled(Icon)`
+  left: ${theme.size.tiny};
+  top: ${theme.size.tiny};
+  ${commonSearchIconStyling};
+`;
+
 const MagnifyingGlass = styled(Icon)`
-  position: absolute;
   left: 10px;
   top: 10px;
-  z-index: 1;
+  ${commonSearchIconStyling};
 `;
 
 const SearchbarContainer = styled('div')`
   height: ${SEARCHBAR_HEIGHT}px;
   opacity: 0.6;
   position: fixed;
-  right: 16px;
+  right: ${theme.size.default};
   top: 5px;
-  width: ${({ isExpanded }) => (isExpanded ? `${SEARCHBAR_DESKTOP_WIDTH}px` : '24px')};
+  transition: width 150ms ease-in, opacity 150ms ease-in;
+  width: ${({ isExpanded }) => (isExpanded ? `${SEARCHBAR_DESKTOP_WIDTH}px` : BUTTON_SIZE)};
   /* docs-tools navbar z-index is 9999 */
   z-index: 10000;
-  transition: width 150ms ease-in, opacity 300ms ease-in-out;
   :focus-within,
   :hover {
     opacity: 1;
   }
   @media ${theme.screenSize.upToXSmall} {
-    width: 100%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 5px;
     height: 100%;
+    left: 0;
     opacity: 1;
+    right: 0;
+    top: 5px;
+    width: 100%;
   }
 `;
 
@@ -103,13 +112,6 @@ const StyledTextInput = styled(TextInput)`
   > label {
     display: none;
   }
-`;
-
-const ExpandMagnifyingGlass = styled(Icon)`
-  position: absolute;
-  left: 4px;
-  top: 4px;
-  z-index: 1;
 `;
 
 const Searchbar = ({ isExpanded, setIsExpanded }) => {

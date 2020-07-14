@@ -40,7 +40,7 @@ const SearchResultsContainer = styled('div')`
   top: 16px;
   width: 100%;
   z-index: -1;
-  ${fadeInAnimation(0, '0.3s')};
+  ${fadeInAnimation(0, '0.2s')};
   @media ${theme.screenSize.upToXSmall} {
     height: 100%;
   }
