@@ -42,6 +42,15 @@ const Navbar = () => {
     {"url": "https://docs.mongodb.com/tools/","text": "Tools"},
     {"url": "https://docs.mongodb.com/guides/","text": "Guides"}]}`);
 
+  const onSearchbarExpand = useCallback(
+    state => {
+      if (isMediumScreen) {
+        setIsSearchbarExpanded(state);
+      }
+    },
+    [isMediumScreen]
+  );
+
   useEffect(() => {
     // Add script to give navbar functionality and css
     const script = document.createElement('script');
@@ -87,7 +96,7 @@ const Navbar = () => {
         data-navprops={navprops}
         style={{ position: 'absolute' }}
       />
-      <Searchbar ref={searchbarRef} isExpanded={isSearchbarExpanded} setIsExpanded={setIsSearchbarExpanded} />
+      <Searchbar ref={searchbarRef} isExpanded={isSearchbarExpanded} setIsExpanded={onSearchbarExpand} />
     </>
   );
 };

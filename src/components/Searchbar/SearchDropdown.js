@@ -27,6 +27,9 @@ const SearchResults = styled('div')`
   height: ${SEARCH_RESULTS_DESKTOP_HEIGHT}px;
   position: relative;
   width: 100%;
+  @media ${theme.screenSize.upToXSmall} {
+    height: calc(100% - ${SEARCH_FOOTER_DESKTOP_HEIGHT} - 16px);
+  }
 `;
 
 const SearchResultsContainer = styled('div')`
@@ -38,6 +41,9 @@ const SearchResultsContainer = styled('div')`
   width: 100%;
   z-index: -1;
   ${fadeInAnimation(0, '0.3s')};
+  @media ${theme.screenSize.upToXSmall} {
+    height: 100%;
+  }
 `;
 
 const SearchFooter = styled('div')`
