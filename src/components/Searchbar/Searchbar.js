@@ -175,14 +175,18 @@ const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
           <MagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.black} />
           <StyledTextInput
             autoFocus
+            label="Search Docs"
             onChange={onChange}
             placeholder="Search Documentation"
             tabIndex="0"
             value={value}
           />
-          {!!value && !isMobile && <GoButton href="#" glyph={<GoArrowIcon glyph="ArrowRight" fill="#13AA52" />} />}
+          {!!value && !isMobile && (
+            <GoButton aria-label="Go" href="#" glyph={<GoArrowIcon glyph="ArrowRight" fill="#13AA52" />} />
+          )}
           {isMobile && (
             <CloseButton
+              aria-label="Close Search"
               onClick={() => setIsExpanded(false)}
               glyph={<CloseIcon glyph="X" fill={uiColors.gray.base} />}
             />
@@ -190,7 +194,7 @@ const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
           {isSearching && <SearchDropdown />}
         </>
       ) : (
-        <ExpandButton onClick={() => setIsExpanded(true)}>
+        <ExpandButton aria-label="Open MongoDB Docs Search" onClick={() => setIsExpanded(true)}>
           <ExpandMagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.gray.base} />
         </ExpandButton>
       )}
