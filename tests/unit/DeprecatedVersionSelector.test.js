@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
+import DeprecatedVersionSelector from '../../src/components/landing/DeprecatedVersionSelector';
 
 const deprecatedVersions = {
   manual: ['v2.2', 'v2.4', 'v2.6', 'v3.0', 'v3.2', 'v3.4'],
