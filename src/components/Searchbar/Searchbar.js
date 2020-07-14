@@ -19,7 +19,8 @@ const commonSearchButtonStyling = css`
   border-radius: ${BUTTON_SIZE};
   height: ${BUTTON_SIZE};
   position: absolute;
-  right: 8px;
+  right: ${theme.size.small};
+  /* button is 24 px and entire container is 36px so 6px top gives equal spacing */
   top: 6px;
   width: ${BUTTON_SIZE};
   z-index: 1;
@@ -46,8 +47,8 @@ const TextActionIcon = styled(Icon)`
 `;
 
 const GoButton = styled(Button)`
-  background-color: ${GO_BUTTON_COLOR};
   ${commonSearchButtonStyling};
+  background-color: ${GO_BUTTON_COLOR};
 `;
 
 const CloseButton = styled(Button)`
@@ -59,12 +60,14 @@ const ExpandButton = styled(Button)`
 `;
 
 const ExpandMagnifyingGlass = styled(Icon)`
+  /* This icon is 16px tall in a 24 px button, so 4px gives equal spacing */
   left: ${theme.size.tiny};
   top: ${theme.size.tiny};
   ${commonSearchIconStyling};
 `;
 
 const MagnifyingGlass = styled(Icon)`
+  /* This icon is 16px tall in a 36px tall container, so 10px gives equal spacing */
   left: 10px;
   top: 10px;
   ${commonSearchIconStyling};
