@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import useScreenSize from '../hooks/useScreenSize';
@@ -32,7 +32,6 @@ const NavbarContainer = styled('div')`
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
-  const searchbarRef = useRef(null);
   const { isMediumScreen } = useScreenSize();
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isMediumScreen);
   const [navprops, setNavprops] = useState(`{"links": [
@@ -96,7 +95,7 @@ const Navbar = () => {
         className="navbar"
         data-navprops={navprops}
       />
-      <Searchbar ref={searchbarRef} isExpanded={isSearchbarExpanded} setIsExpanded={onSearchbarExpand} />
+      <Searchbar isExpanded={isSearchbarExpanded} setIsExpanded={onSearchbarExpand} />
     </>
   );
 };
