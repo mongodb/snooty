@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
@@ -13,13 +14,8 @@ const GO_BUTTON_SIZE = theme.size.medium;
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
 
-const GoArrowIcon = styled(Icon)`
-  left: 4px;
-  position: absolute;
-`;
-
-const GoButton = styled(Button)`
-  background-color: ${GO_BUTTON_COLOR};
+const commonSearchButtonStyling = css`
+  background-color: #fff;
   border-radius: ${GO_BUTTON_SIZE};
   height: ${GO_BUTTON_SIZE};
   position: absolute;
@@ -37,6 +33,24 @@ const GoButton = styled(Button)`
   :after {
     display: none;
   }
+`;
+
+const TextActionIcon = styled(Icon)`
+  left: 4px;
+  position: absolute;
+`;
+
+const GoButton = styled(Button)`
+  background-color: ${GO_BUTTON_COLOR};
+  ${commonSearchButtonStyling};
+`;
+
+const CloseButton = styled(Button)`
+  ${commonSearchButtonStyling};
+`;
+
+const ExpandButton = styled(Button)`
+  ${commonSearchButtonStyling};
 `;
 
 const MagnifyingGlass = styled(Icon)`
@@ -91,57 +105,11 @@ const StyledTextInput = styled(TextInput)`
   }
 `;
 
-const ExpandButton = styled(Button)`
-  background-color: #fff;
-  border-radius: ${GO_BUTTON_SIZE};
-  height: ${GO_BUTTON_SIZE};
-  position: absolute;
-  right: 8px;
-  top: 6px;
-  width: ${GO_BUTTON_SIZE};
-  z-index: 1;
-  /* Below removes default hover effects from button */
-  background-image: none;
-  border: none;
-  box-shadow: none;
-  :before {
-    display: none;
-  }
-  :after {
-    display: none;
-  }
-`;
-
 const ExpandMagnifyingGlass = styled(Icon)`
   position: absolute;
   left: 4px;
   top: 4px;
   z-index: 1;
-`;
-
-const CloseButton = styled(Button)`
-  background-color: #fff;
-  border-radius: ${GO_BUTTON_SIZE};
-  height: ${GO_BUTTON_SIZE};
-  position: absolute;
-  right: 8px;
-  top: 6px;
-  width: ${GO_BUTTON_SIZE};
-  z-index: 1;
-  /* Below removes default hover effects from button */
-  background-image: none;
-  border: none;
-  box-shadow: none;
-  :before {
-    display: none;
-  }
-  :after {
-    display: none;
-  }
-`;
-const CloseIcon = styled(Icon)`
-  left: 4px;
-  position: absolute;
 `;
 
 const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
@@ -182,13 +150,13 @@ const Searchbar = React.forwardRef(({ isExpanded, setIsExpanded }, ref) => {
             value={value}
           />
           {!!value && !isMobile && (
-            <GoButton aria-label="Go" href="#" glyph={<GoArrowIcon glyph="ArrowRight" fill="#13AA52" />} />
+            <GoButton aria-label="Go" href="#" glyph={<TextActionIcon glyph="ArrowRight" fill="#13AA52" />} />
           )}
           {isMobile && (
             <CloseButton
               aria-label="Close Search"
               onClick={() => setIsExpanded(false)}
-              glyph={<CloseIcon glyph="X" fill={uiColors.gray.base} />}
+              glyph={<TextActionIcon glyph="X" fill={uiColors.gray.base} />}
             />
           )}
           {isSearching && <SearchDropdown />}
