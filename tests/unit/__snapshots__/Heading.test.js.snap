@@ -1,34 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-.emotion-0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-<div
-  class="emotion-0 emotion-1"
+<h3
+  id="create-an-administrative-username-and-password"
 >
-  <h3
-    id="create-an-administrative-username-and-password"
+  Create an administrative username and password
+  <a
+    class="headerlink"
+    href="#create-an-administrative-username-and-password"
+    title="Permalink to this headline"
   >
-    Create an administrative username and password
-    <a
-      class="headerlink"
-      href="#create-an-administrative-username-and-password"
-      title="Permalink to this headline"
-    >
-      ¶
-    </a>
-  </h3>
-</div>
+    ¶
+  </a>
+</h3>
 `;

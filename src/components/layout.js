@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SiteMetadata from './site-metadata';
 import { TabContext } from './tab-context';
+import Widgets from './Widgets';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
@@ -131,20 +132,29 @@ export default class DefaultLayout extends Component {
   render() {
     const {
       children,
-      pageContext: { metadata, slug },
+      pageContext: { location, metadata, slug, __refDocMapping },
     } = this.props;
+
     const { pillstrips } = this.state;
     const lookup = slug === '/' ? 'index' : slug;
     const siteTitle = getNestedValue(['title'], metadata) || '';
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
     return (
       <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
-        <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
-        {React.cloneElement(children, {
-          pillstrips,
-          addPillstrip: this.addPillstrip,
-          footnotes: this.footnotes,
-        })}
+        <Widgets
+          location={location}
+          pageOptions={getNestedValue(['ast', 'options'], __refDocMapping)}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+        >
+          <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
+          {React.cloneElement(children, {
+            pillstrips,
+            addPillstrip: this.addPillstrip,
+            footnotes: this.footnotes,
+          })}
+        </Widgets>
       </TabContext.Provider>
     );
   }

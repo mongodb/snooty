@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
-import { FeedbackHeading } from './FeedbackWidget';
+import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
+
+const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
+
+const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
@@ -14,7 +18,15 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const shouldShowStarRating = isPageTitle && isTabletOrMobile;
 
   return (
-    <HeadingContainer stackVertically={isSmallScreen}>
+    <ConditionalWrapper
+      condition={shouldShowStarRating}
+      wrapper={children => (
+        <HeadingContainer className={`heading-container-h${sectionDepth}`} stackVertically={isSmallScreen}>
+          {children}
+          <FeedbackHeading isStacked={isSmallScreen} />
+        </HeadingContainer>
+      )}
+    >
       <HeadingTag id={id}>
         {nodeData.children.map((element, index) => {
           return <ComponentFactory {...rest} nodeData={element} key={index} />;
@@ -23,8 +35,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
           ¶
         </a>
       </HeadingTag>
-      <FeedbackHeading isVisible={shouldShowStarRating} isStacked={isSmallScreen} />
-    </HeadingContainer>
+    </ConditionalWrapper>
   );
 };
 

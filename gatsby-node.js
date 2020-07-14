@@ -7,17 +7,18 @@ const { getTemplate } = require('./src/utils/get-template');
 const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
-const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, SNOOTY_STITCH_ID } = require('./src/build-constants');
+const { DOCUMENTS_COLLECTION, METADATA_COLLECTION } = require('./src/build-constants');
 
 const DB = siteMetadata.database;
 
 const constructPageIdPrefix = ({ project, parserUser, parserBranch }) => `${project}/${parserUser}/${parserBranch}`;
 
-const constructBuildFilter = ({ commitHash, ...rest }) => {
+const constructBuildFilter = ({ commitHash, patchId, ...rest }) => {
   const pageIdPrefix = constructPageIdPrefix(rest);
   return {
     page_id: { $regex: new RegExp(`^${pageIdPrefix}/*`) },
     commit_hash: commitHash || { $exists: false },
+    patch_id: patchId || { $exists: false },
   };
 };
 
@@ -85,7 +86,7 @@ exports.createPages = async ({ actions }) => {
 
   // Save files in the static_files field of metadata document, including intersphinx inventories
   if (metadata.static_files) {
-    saveStaticFiles(metadata.static_files);
+    await saveStaticFiles(metadata.static_files);
   }
 
   return new Promise((resolve, reject) => {
@@ -101,11 +102,10 @@ exports.createPages = async ({ actions }) => {
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
           path: slug,
-          component: path.resolve(`./src/templates/${template}.js`),
+          component: template,
           context: {
             metadata,
             slug,
-            snootyStitchId: SNOOTY_STITCH_ID,
             __refDocMapping: pageNodes,
             guidesMetadata: GUIDES_METADATA,
           },

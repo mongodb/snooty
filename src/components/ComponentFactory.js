@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ComponentFactory as LandingComponentFactory } from './landing';
 import { ADMONITIONS } from '../constants';
 import Step from './Step';
 import Paragraph from './Paragraph';
@@ -48,15 +49,17 @@ import Superscript from './Superscript';
 import Image from './Image';
 import RefRole from './RefRole';
 import Target from './Target';
+import Glossary from './Glossary';
 import DeprecatedVersionSelector from './DeprecatedVersionSelector';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
+import RoleIcon from './Roles/Icon';
 
-const IGNORED_NAMES = ['default-domain', 'toctree'];
-const IGNORED_TYPES = ['comment', 'substitution_definition'];
+const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
+const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
 
 export default class ComponentFactory extends Component {
   constructor() {
@@ -66,6 +69,16 @@ export default class ComponentFactory extends Component {
       class: RoleClass,
       file: RoleFile,
       guilabel: RoleGUILabel,
+      icon: RoleIcon,
+      'icon-fa5': RoleIcon,
+      'icon-fa5-brands': RoleIcon,
+      'icon-fa4': RoleIcon,
+      'icon-mms': RoleIcon,
+      'icon-charts': RoleIcon,
+      sub: Subscript,
+      subscript: Subscript,
+      sup: Superscript,
+      superscript: Superscript,
     };
     this.componentMap = {
       admonition: Admonition,
@@ -85,6 +98,7 @@ export default class ComponentFactory extends Component {
       figure: Figure,
       footnote: Footnote,
       footnote_reference: FootnoteReference,
+      glossary: Glossary,
       heading: Heading,
       hlist: HorizontalList,
       image: Image,
@@ -105,9 +119,7 @@ export default class ComponentFactory extends Component {
       section: Section,
       step: Step,
       strong: Strong,
-      subscript: Subscript,
       substitution_reference: SubstitutionReference,
-      superscript: Superscript,
       tabs: Tabs,
       'tabs-pillstrip': TabsPillstrip,
       target: Target,
@@ -123,13 +135,17 @@ export default class ComponentFactory extends Component {
 
   selectComponent() {
     const {
-      nodeData: { children, name, type },
+      nodeData: { children, domain, name, type },
       ...rest
     } = this.props;
 
     // do nothing with these nodes for now (cc. Andrew)
     if (IGNORED_TYPES.includes(type) || IGNORED_NAMES.includes(name)) {
       return null;
+    }
+
+    if (domain === 'landing') {
+      return <LandingComponentFactory {...this.props} />;
     }
 
     if (type === 'problematic') {
@@ -149,14 +165,9 @@ export default class ComponentFactory extends Component {
     if (!ComponentType && ADMONITIONS.includes(name)) {
       ComponentType = this.componentMap.admonition;
     }
-    // component with this type not implemented
     if (!ComponentType) {
-      return (
-        <span>
-          ==Not implemented:
-          {type},{name} ==
-        </span>
-      );
+      console.warn(`${type} "${name}" not yet implemented${this.props.slug && ` on page ${this.props.slug}`}`);
+      return null;
     }
 
     return <ComponentType {...this.props} />;
@@ -172,6 +183,7 @@ export default class ComponentFactory extends Component {
 ComponentFactory.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
+    domain: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,

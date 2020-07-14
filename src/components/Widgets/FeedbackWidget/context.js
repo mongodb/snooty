@@ -7,12 +7,12 @@ import {
   useStitchUser,
   addAttachment,
 } from './stitch';
-import { getSegmentUserId } from '../../utils/segment';
-import { getViewport } from '../../hooks/useViewport';
+import { getSegmentUserId } from '../../../utils/segment';
+import { getViewport } from '../../../hooks/useViewport';
 
 const FeedbackContext = React.createContext();
 
-export function FeedbackProvider({ page, test = {}, ...props }) {
+export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
   const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
   const [view, setView] = React.useState(test.view || 'waiting');
@@ -161,6 +161,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     submitSupport,
     submitAllFeedback,
     abandon,
+    hideHeader,
   };
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;

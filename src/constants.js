@@ -122,13 +122,20 @@ export const PROPERTY_NAME_MAPPING = {
 export const ADMONITIONS = ['admonition', 'example', 'important', 'note', 'seealso', 'tip', 'warning'];
 
 export const URL_SLUGS = {
-  server: ['manual', 'master', 'v3.6', 'v3.4', 'v3.2', 'v3.0', 'v2.6', 'v2.4', 'v2.2'],
-  drivers: ['ecosystem', 'ruby-driver', 'mongoid'],
-  cloud: ['cloud', 'stitch'],
-  tools: ['tools', 'bi-connector', 'charts', 'compass', 'kubernetes-operator', 'spark-connector'],
+  server: ['manual'],
+  drivers: ['drivers', 'mongoid', 'node', 'php-library', 'ruby-driver'],
+  cloud: ['cloud', 'datalake', 'mms', 'stitch'],
+  tools: [
+    'bi-connector',
+    'charts',
+    'compass',
+    'kafka-connector',
+    'k8s-operator',
+    'mongocli',
+    'mongodb-shell',
+    'mongodb-vscode',
+    'spark-connector',
+  ],
   guides: ['guides'],
-};
-
-export const URL_SUBDOMAINS = {
-  cloud: ['atlas', 'cloudmanager', 'opsmanager'],
+  realm: ['realm'],
 };

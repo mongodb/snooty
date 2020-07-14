@@ -28,7 +28,10 @@ const VersionDropdown = ({
 
   const prefixVersion = version => {
     // Display as "Version X" on menu if numeric version
-    const isNumeric = version => !isNaN(version.split()[0]);
+    const isNumeric = (version = '') => {
+      const [firstWord] = version.split();
+      return !isNaN(firstWord);
+    };
     return `${isNumeric(version) ? 'Version ' : ''}${version}`;
   };
 
@@ -52,7 +55,7 @@ const VersionDropdown = ({
 
   // Zip two sections of data to map git branches to their "pretty" names
   const gitNamedMapping = zip(gitBranches, published);
-  const currentBranch = gitNamedMapping[parserBranch];
+  const currentBranch = gitNamedMapping[parserBranch] || parserBranch;
 
   const wrapperRef = useRef(null);
   useOutsideHandler(wrapperRef);
@@ -69,6 +72,11 @@ const VersionDropdown = ({
         </a>
       </li>
     );
+  }
+
+  // Don't render dropdown if there is only 1 version of the repo
+  if (!active || active.length <= 1) {
+    return null;
   }
 
   return (

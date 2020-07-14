@@ -30,6 +30,8 @@ const siteMetadata = {
   database: getDatabase(process.env.SNOOTY_ENV),
   parserBranch: process.env.GATSBY_PARSER_BRANCH,
   parserUser: process.env.GATSBY_PARSER_USER,
+  patchId: process.env.PATCH_ID || '',
+  pathPrefix: process.env.PATH_PREFIX,
   project: process.env.GATSBY_SITE,
   snootyBranch: gitBranch,
   user: userInfo().username,

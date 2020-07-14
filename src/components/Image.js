@@ -97,11 +97,12 @@ export default class Image extends Component {
       };
     };
 
+    const { options: { class: directiveClass } = {} } = nodeData;
     return (
       <img
         src={this.getImgData(process.env.PREVIEW_MODE, imgSrc)}
         alt={altText}
-        className={[getNestedValue(['option', 'class'], nodeData), customAlign, className].join(' ')}
+        className={[directiveClass, customAlign, className].join(' ')}
         style={nodeData.options ? buildStyles() : {}}
         onLoad={this.handleLoad}
         ref={this.imgRef}

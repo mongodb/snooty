@@ -14,7 +14,6 @@ const SiteMetadata = ({ pageTitle, siteTitle }) => {
         'data-project': project,
         'data-project-title': siteTitle,
         'data-branch': branch,
-        'data-enable-marian': 1,
       }}
     />
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FeedbackFooter } from './FeedbackWidget';
+import { FeedbackFooter } from './Widgets/FeedbackWidget';
 
 const Footer = () => (
   <>

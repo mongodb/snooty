@@ -10,25 +10,17 @@ import DocumentBody from '../components/DocumentBody';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
-import { getPlaintext } from '../utils/get-plaintext.js';
-
-import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from '../components/FeedbackWidget';
 
 const Document = props => {
   const {
-    pageContext: { slug, __refDocMapping, metadata },
+    pageContext: {
+      slug,
+      __refDocMapping,
+      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+    },
     location,
     ...rest
   } = props;
-
-  const { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder } = metadata;
-  const title = getPlaintext(getNestedValue([slug], slugTitleMapping));
-  const feedbackData = useFeedbackData({
-    slug,
-    title: title || 'Home',
-    url: location.href,
-    publishedBranches,
-  });
 
   const windowSize = useWindowSize();
   const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
@@ -36,16 +28,14 @@ const Document = props => {
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
-
+  const pageOptions = getNestedValue(['ast', 'options'], __refDocMapping);
+  const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
   };
 
   return (
-    <FeedbackProvider page={feedbackData}>
-      <FeedbackTab />
-      <FeedbackForm />
-      <Navbar />
+    <React.Fragment>
       <div className="content">
         <div>
           {(!isBrowser || showLeftColumn) && (
@@ -70,8 +60,10 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody refDocMapping={__refDocMapping} slug={slug} metadata={metadata} {...rest} />
-                  <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+                  <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
+                  {showPrevNext && (
+                    <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+                  )}
                   <Footer />
                 </div>
               </div>
@@ -79,7 +71,8 @@ const Document = props => {
           </div>
         </div>
       </div>
-    </FeedbackProvider>
+      <Navbar />
+    </React.Fragment>
   );
 };
 
