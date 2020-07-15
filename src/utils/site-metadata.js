@@ -31,9 +31,10 @@ const siteMetadata = {
   parserBranch: process.env.GATSBY_PARSER_BRANCH,
   parserUser: process.env.GATSBY_PARSER_USER,
   patchId: process.env.PATCH_ID || '',
-  pathPrefix: process.env.PATH_PREFIX,
+  pathPrefix: process.env.PATH_PREFIX || '',
   project: process.env.GATSBY_SITE,
   snootyBranch: gitBranch,
+  snootyEnv: process.env.SNOOTY_ENV || 'development',
   user: userInfo().username,
 };
 
