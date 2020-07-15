@@ -27,12 +27,12 @@ const getActiveSection = (slug, urlItems) => {
 };
 
 const NavbarContainer = styled('div')`
-  ${({ isExpanded, isMediumScreen }) => isExpanded && isMediumScreen && 'opacity: 0.2;'};
+  ${({ shouldOpaqueBackground }) => shouldOpaqueBackground && 'opacity: 0.2;'};
 `;
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
-  const { isMediumScreen } = useScreenSize();
+  const { isMediumScreen, isMobile } = useScreenSize();
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isMediumScreen);
   const [navprops, setNavprops] = useState(`{"links": [
     {"url": "https://docs.mongodb.com/manual/","text": "Server"},
@@ -77,6 +77,12 @@ const Navbar = () => {
     [isActiveLink]
   );
 
+  const shouldOpaqueNavbar = useMemo(() => !isMobile && isMediumScreen && isSearchbarExpanded, [
+    isMediumScreen,
+    isMobile,
+    isSearchbarExpanded,
+  ]);
+
   useEffect(() => {
     setNavprops(modifyActiveLink);
   }, [activeLink, modifyActiveLink]);
@@ -88,8 +94,7 @@ const Navbar = () => {
   return (
     <>
       <NavbarContainer
-        isExpanded={isSearchbarExpanded}
-        isMediumScreen={isMediumScreen}
+        shouldOpaqueBackground={shouldOpaqueNavbar}
         tabIndex="0"
         id="navbar"
         className="navbar"

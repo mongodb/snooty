@@ -28,7 +28,8 @@ const SearchResults = styled('div')`
   position: relative;
   width: 100%;
   @media ${theme.screenSize.upToXSmall} {
-    height: calc(100% - ${SEARCH_FOOTER_DESKTOP_HEIGHT} - 16px);
+    /* On mobile, let the dropdown take the available height */
+    height: calc(100% - ${SEARCH_FOOTER_DESKTOP_HEIGHT} - ${theme.size.default});
   }
 `;
 
@@ -37,7 +38,7 @@ const SearchResultsContainer = styled('div')`
   border-radius: 0 0 ${theme.size.tiny} ${theme.size.tiny};
   opacity: 1;
   position: absolute;
-  top: 16px;
+  top: ${theme.size.default};
   width: 100%;
   z-index: -1;
   ${fadeInAnimation(0, '0.2s')};
