@@ -33,13 +33,20 @@ const NavbarContainer = styled('div')`
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
   const { isMediumScreen } = useScreenSize();
+  const isActiveLink = useCallback(link => link.toLowerCase() === activeLink, [activeLink]);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isMediumScreen);
-  const [navprops, setNavprops] = useState(`{"links": [
-    {"url": "https://docs.mongodb.com/manual/","text": "Server"},
-    {"url": "https://docs.mongodb.com/drivers/","text": "Drivers"},
-    {"url": "https://docs.mongodb.com/cloud/","text": "Cloud"},
-    {"url": "https://docs.mongodb.com/tools/","text": "Tools"},
-    {"url": "https://docs.mongodb.com/guides/","text": "Guides"}]}`);
+  const modifyActiveLink = useMemo(
+    () =>
+      `{"links": [
+        {"url": "https://docs.mongodb.com/manual/","text": "Server", "active": ${isActiveLink('Server')}},
+        {"url": "https://docs.mongodb.com/drivers/","text": "Drivers", "active": ${isActiveLink('Drivers')}},
+        {"url": "https://docs.mongodb.com/cloud/","text": "Cloud", "active": ${isActiveLink('Cloud')}},
+        {"url": "https://docs.mongodb.com/tools/","text": "Tools", "active": ${isActiveLink('Tools')}},
+        {"url": "https://docs.mongodb.com/guides/","text": "Guides", "active": ${isActiveLink('Guides')}}
+      ]}`,
+    [isActiveLink]
+  );
+  const [navprops, setNavprops] = useState(modifyActiveLink);
 
   const onSearchbarExpand = useCallback(
     isExpanded => {
@@ -61,21 +68,6 @@ const Navbar = () => {
 
     setActiveLink(getActiveSection(process.env.GATSBY_SITE, URL_SLUGS));
   }, []);
-
-  const isActiveLink = useCallback(link => link.toLowerCase() === activeLink, [activeLink]);
-
-  // modify navprops
-  const modifyActiveLink = useMemo(
-    () =>
-      `{"links": [
-        {"url": "https://docs.mongodb.com/manual/","text": "Server", "active": ${isActiveLink('Server')}},
-        {"url": "https://docs.mongodb.com/drivers/","text": "Drivers", "active": ${isActiveLink('Drivers')}},
-        {"url": "https://docs.mongodb.com/cloud/","text": "Cloud", "active": ${isActiveLink('Cloud')}},
-        {"url": "https://docs.mongodb.com/tools/","text": "Tools", "active": ${isActiveLink('Tools')}},
-        {"url": "https://docs.mongodb.com/guides/","text": "Guides", "active": ${isActiveLink('Guides')}}
-    ]}`,
-    [isActiveLink]
-  );
 
   useEffect(() => {
     setNavprops(modifyActiveLink);
