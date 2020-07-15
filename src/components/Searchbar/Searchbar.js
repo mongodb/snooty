@@ -183,7 +183,6 @@ const Searchbar = ({ isExpanded, setIsExpanded }) => {
             onChange={onChange}
             placeholder="Search Documentation"
             tabIndex="0"
-            type="search"
             value={value}
           />
           {shouldShowGoButton && (
