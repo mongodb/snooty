@@ -13,6 +13,7 @@ const BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
+const SEARCHBAR_HEIGHT_OFFSET = '5px';
 
 const commonSearchButtonStyling = css`
   background-color: #fff;
@@ -78,7 +79,7 @@ const SearchbarContainer = styled('div')`
   opacity: 0.6;
   position: fixed;
   right: ${theme.size.default};
-  top: 5px;
+  top: ${SEARCHBAR_HEIGHT_OFFSET};
   transition: width 150ms ease-in, opacity 150ms ease-in;
   width: ${({ isExpanded }) => (isExpanded ? `${SEARCHBAR_DESKTOP_WIDTH}px` : BUTTON_SIZE)};
   /* docs-tools navbar z-index is 9999 */
@@ -91,8 +92,7 @@ const SearchbarContainer = styled('div')`
     height: 100%;
     left: 0;
     opacity: 1;
-    right: 0;
-    top: 5px;
+    top: ${SEARCHBAR_HEIGHT_OFFSET};
     width: 100%;
   }
 `;
@@ -114,6 +114,20 @@ const StyledTextInput = styled(TextInput)`
   }
   > label {
     display: none;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    background-color: #fff;
+    padding-bottom: 4px;
+    ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
+    :before {
+      content: '';
+      background-color: #fff;
+      position: absolute;
+      top: -${SEARCHBAR_HEIGHT_OFFSET};
+      bottom: 100%;
+      width: 100%;
+    }
   }
 `;
 
@@ -150,9 +164,11 @@ const Searchbar = ({ isExpanded, setIsExpanded }) => {
           <StyledTextInput
             autoFocus
             label="Search Docs"
+            isSearching={isSearching}
             onChange={onChange}
             placeholder="Search Documentation"
             tabIndex="0"
+            type="search"
             value={value}
           />
           {shouldShowGoButton && (
