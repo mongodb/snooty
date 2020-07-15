@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
+const SEARCHBAR_HEIGHT = 36;
 const SEARCH_RESULTS_DESKTOP_HEIGHT = 368;
 const SEARCH_FOOTER_DESKTOP_HEIGHT = theme.size.xlarge;
 
@@ -31,9 +32,9 @@ const SearchResults = styled('div')`
   padding-top: ${theme.size.default};
   width: 100%;
   @media ${theme.screenSize.upToXSmall} {
+    box-shadow: none;
     /* On mobile, let the dropdown take the available height */
-    box-shadow: 0 0 0 0;
-    height: calc(100% - ${SEARCH_FOOTER_DESKTOP_HEIGHT} - 36px);
+    height: calc(100% - ${SEARCH_FOOTER_DESKTOP_HEIGHT} - ${SEARCHBAR_HEIGHT}px);
     padding-top: 0;
   }
 `;

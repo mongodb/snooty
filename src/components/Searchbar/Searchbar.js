@@ -103,8 +103,18 @@ const StyledTextInput = styled(TextInput)`
     border-radius: ${theme.size.medium};
     padding-left: ${theme.size.large};
     padding-right: ${theme.size.large};
+    :hover,
+    :focus {
+      border-color: ${uiColors.gray.light1};
+      box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.64);
+    }
     @media ${theme.screenSize.upToXSmall} {
       border: none;
+      :hover,
+      :focus {
+        border: none;
+        box-shadow: none;
+      }
     }
   }
 
@@ -118,14 +128,19 @@ const StyledTextInput = styled(TextInput)`
 
   @media ${theme.screenSize.upToSmall} {
     background-color: #fff;
-    padding-bottom: 4px;
+    padding-bottom: ${theme.size.tiny};
     ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
+    /**
+    On mobile, there is some space above the searchbar that is uncovered (on
+      desktop this is taken care of by the navbar). Here we can block elements
+      below from peeking through with a pseudoelement to cover this top space
+    */
     :before {
-      content: '';
       background-color: #fff;
+      bottom: 100%;
+      content: '';
       position: absolute;
       top: -${SEARCHBAR_HEIGHT_OFFSET};
-      bottom: 100%;
       width: 100%;
     }
   }
