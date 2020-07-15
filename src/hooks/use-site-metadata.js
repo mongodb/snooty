@@ -11,6 +11,7 @@ export const useSiteMetadata = () => {
             parserBranch
             parserUser
             patchId
+            pathPrefix
             project
             snootyBranch
             user
