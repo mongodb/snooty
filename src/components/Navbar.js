@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
-import useScreenSize from '../hooks/useScreenSize';
 import { isBrowser } from '../utils/is-browser';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
@@ -27,14 +27,18 @@ const getActiveSection = (slug, urlItems) => {
 };
 
 const NavbarContainer = styled('div')`
-  ${({ isExpanded, isMediumScreen }) => isExpanded && isMediumScreen && 'opacity: 0.2;'};
+  ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
 `;
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
-  const { isMediumScreen } = useScreenSize();
+  // We want to expand the searchbar on default when it won't collide with any other nav elements
+  // Specifically, the upper limit works around the Get MongoDB link
+  const isSearchbarDefaultExpanded = useMediaQuery({
+    query: 'only screen and (min-width: 670px) and (max-width: 1200px), (min-width: 1300px)',
+  });
   const isActiveLink = useCallback(link => link.toLowerCase() === activeLink, [activeLink]);
-  const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isMediumScreen);
+  const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const modifyActiveLink = useMemo(
     () =>
       `{"links": [
@@ -50,12 +54,12 @@ const Navbar = () => {
 
   const onSearchbarExpand = useCallback(
     isExpanded => {
-      // On desktop screens the searchbar is never collapsed
-      if (isMediumScreen) {
+      // On certain screens the searchbar is never collapsed
+      if (!isSearchbarDefaultExpanded) {
         setIsSearchbarExpanded(isExpanded);
       }
     },
-    [isMediumScreen]
+    [isSearchbarDefaultExpanded]
   );
 
   useEffect(() => {
@@ -74,14 +78,14 @@ const Navbar = () => {
   }, [activeLink, modifyActiveLink]);
 
   useEffect(() => {
-    setIsSearchbarExpanded(!isMediumScreen);
-  }, [isMediumScreen]);
+    setIsSearchbarExpanded(isSearchbarDefaultExpanded);
+  }, [isSearchbarDefaultExpanded]);
 
   return (
     <>
       <NavbarContainer
         isExpanded={isSearchbarExpanded}
-        isMediumScreen={isMediumScreen}
+        shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
         tabIndex="0"
         id="navbar"
         className="navbar"
