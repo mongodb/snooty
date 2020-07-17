@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import useMedia from '../hooks/use-media';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { isBrowser } from '../utils/is-browser';
@@ -34,9 +35,9 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
-  const isSearchbarDefaultExpanded = useMediaQuery({
-    query: 'only screen and (min-width: 670px) and (max-width: 1200px), (min-width: 1300px)',
-  });
+  const isSearchbarDefaultExpanded = useMedia(
+    'only screen and (min-width: 670px) and (max-width: 1200px), (min-width: 1300px)'
+  );
   const isActiveLink = useCallback(link => link.toLowerCase() === activeLink, [activeLink]);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const modifyActiveLink = useMemo(
