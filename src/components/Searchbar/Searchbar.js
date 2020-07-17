@@ -74,40 +74,26 @@ const CloseButton = styled(Button)`
   ${commonSearchButtonStyling};
 `;
 
+const ExpandMagnifyingGlass = styled(Icon)`
+  /* This icon is 16px tall in a 32 px button, so 8px gives equal spacing */
+  left: ${theme.size.small};
+  top: ${theme.size.small};
+  ${commonSearchIconStyling};
+`;
+
 const ExpandButton = styled(Button)`
   ${commonSearchButtonStyling};
-`;
-
-const ExpandMagnifyingGlass = styled(Icon)`
-  /* This icon is 16px tall in a 24 px button, so 4px gives equal spacing */
-  left: ${theme.size.tiny};
-  top: ${theme.size.tiny};
-  ${commonSearchIconStyling};
-`;
-
-const MagnifyingGlass = styled(Icon)`
-  color: ${({ isActive }) => (isActive ? uiColors.gray.dark3 : uiColors.gray.base)};
-  left: ${theme.size.default};
-  /* This icon is 16px tall in a 36px tall container, so 10px gives equal spacing */
-  top: 10px;
-  transition: color ${TRANSITION_SPEED} ease-in;
-  ${commonSearchIconStyling};
-`;
-
-const SearchbarContainer = styled('div')`
-  height: ${SEARCHBAR_HEIGHT}px;
-  position: fixed;
-  right: ${theme.size.default};
-  top: ${SEARCHBAR_HEIGHT_OFFSET};
-  transition: width ${TRANSITION_SPEED} ease-in;
-  width: ${({ isExpanded }) => (isExpanded ? `${SEARCHBAR_DESKTOP_WIDTH}px` : BUTTON_SIZE)};
-  /* docs-tools navbar z-index is 9999 */
-  z-index: 10000;
-  @media ${theme.screenSize.upToXSmall} {
-    height: 100%;
-    left: 0;
-    top: ${SEARCHBAR_HEIGHT_OFFSET};
-    width: 100%;
+  height: ${theme.size.large};
+  width: ${theme.size.large};
+  /* 32px button in a 36px container, 2px top gives equal spacing */
+  top: 2px;
+  :hover,
+  :focus {
+    background-color: #f7f9f8;
+    ${ExpandMagnifyingGlass} {
+      color: ${uiColors.gray.dark3};
+      transition: color ${TRANSITION_SPEED} ease-in;
+    }
   }
 `;
 
@@ -126,11 +112,6 @@ const StyledTextInput = styled(TextInput)`
     transition: background-color ${TRANSITION_SPEED} ease-in;
     :hover,
     :focus {
-      background-color: #fff;
-      border: none;
-      box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
-      color: ${uiColors.gray.dark3};
-      transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
     }
     ::placeholder {
       color: ${uiColors.gray.dark1};
@@ -173,13 +154,54 @@ const StyledTextInput = styled(TextInput)`
   }
 `;
 
+const MagnifyingGlass = styled(Icon)`
+  color: ${uiColors.gray.base};
+  left: ${theme.size.default};
+  /* This icon is 16px tall in a 36px tall container, so 10px gives equal spacing */
+  top: 10px;
+  transition: color ${TRANSITION_SPEED} ease-in;
+  ${commonSearchIconStyling};
+`;
+
+const SearchbarContainer = styled('div')`
+  height: ${SEARCHBAR_HEIGHT}px;
+  position: fixed;
+  right: ${theme.size.default};
+  top: ${SEARCHBAR_HEIGHT_OFFSET};
+  transition: width ${TRANSITION_SPEED} ease-in;
+  width: ${({ isExpanded }) => (isExpanded ? `${SEARCHBAR_DESKTOP_WIDTH}px` : BUTTON_SIZE)};
+  /* docs-tools navbar z-index is 9999 */
+  z-index: 10000;
+  :hover,
+  :focus,
+  :focus-within {
+    ${MagnifyingGlass} {
+      color: ${uiColors.gray.dark3};
+    }
+    ${StyledTextInput} {
+      div > input {
+        background-color: #fff;
+        border: none;
+        box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
+        color: ${uiColors.gray.dark3};
+        transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
+      }
+    }
+  }
+  @media ${theme.screenSize.upToXSmall} {
+    height: 100%;
+    left: 0;
+    top: ${SEARCHBAR_HEIGHT_OFFSET};
+    width: 100%;
+  }
+`;
+
 const Searchbar = ({ isExpanded, setIsExpanded }) => {
   const [value, setValue] = useState('');
   const onChange = useCallback(e => setValue(e.target.value), []);
   const { isMobile } = useScreenSize();
   const [blurEvent, setBlurEvent] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
@@ -199,20 +221,11 @@ const Searchbar = ({ isExpanded, setIsExpanded }) => {
       ),
     [setIsExpanded, value]
   );
-  // Use event handlers to track hover to synchronize transitions between children
-  const onHoverStart = useCallback(() => setIsHovered(true), []);
-  const onHoverEnd = useCallback(() => setIsHovered(false), []);
   return (
-    <SearchbarContainer
-      isExpanded={isExpanded}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      onMouseEnter={onHoverStart}
-      onMouseLeave={onHoverEnd}
-    >
+    <SearchbarContainer isExpanded={isExpanded} onBlur={onBlur} onFocus={onFocus}>
       {isExpanded ? (
         <>
-          <MagnifyingGlass isActive={isFocused || isHovered} glyph="MagnifyingGlass" />
+          <MagnifyingGlass glyph="MagnifyingGlass" />
           <StyledTextInput
             autoFocus
             label="Search Docs"
