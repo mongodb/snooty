@@ -1,47 +1,31 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { css, keyframes } from '@emotion/core';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
+import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
 
+const BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
-const GO_BUTTON_SIZE = theme.size.medium;
+const GO_BUTTON_SIZE = '20px';
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
+const SEARCHBAR_HEIGHT_OFFSET = '5px';
+const TRANSITION_SPEED = '150ms';
 
-const animationKeyframe = startingOpacity => keyframes`
-    0% {
-      opacity: ${startingOpacity};
-    }
-    100% {
-      opacity: 1;
-    }
-`;
-
-const fadeInAnimation = (startingOpacity, seconds) => css`
-  animation: ${animationKeyframe(startingOpacity)};
-  animation-duration: ${seconds};
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-`;
-
-const GoArrowIcon = styled(Icon)`
-  left: 4px;
+const commonSearchButtonStyling = css`
+  background-color: #fff;
+  border-radius: ${BUTTON_SIZE};
+  height: ${BUTTON_SIZE};
   position: absolute;
-`;
-
-const GoButton = styled(Button)`
-  background-color: ${GO_BUTTON_COLOR};
-  border-radius: ${GO_BUTTON_SIZE};
-  height: ${GO_BUTTON_SIZE};
-  position: absolute;
-  right: 8px;
+  right: ${theme.size.small};
+  /* button is 24 px and entire container is 36px so 6px top gives equal spacing */
   top: 6px;
-  width: ${GO_BUTTON_SIZE};
+  width: ${BUTTON_SIZE};
   z-index: 1;
   /* Below removes default hover effects from button */
   background-image: none;
@@ -55,34 +39,88 @@ const GoButton = styled(Button)`
   }
 `;
 
-const MagnifyingGlass = styled(Icon)`
+const commonSearchIconStyling = css`
   position: absolute;
-  left: 10px;
-  top: 10px;
   z-index: 1;
 `;
 
-const SearchbarContainer = styled('div')`
-  height: ${SEARCHBAR_HEIGHT}px;
-  opacity: 0.6;
-  position: fixed;
-  right: 16px;
-  top: 5px;
-  width: ${SEARCHBAR_DESKTOP_WIDTH}px;
-  /* docs-tools navbar z-index is 9999 */
-  z-index: 10000;
-  :focus-within {
-    opacity: 1;
-    ${fadeInAnimation(0.6, '0.3s')};
+const TextActionIcon = styled(Icon)`
+  left: ${theme.size.tiny};
+  position: absolute;
+`;
+
+const GoIcon = styled(Icon)`
+  /* Go Button size is 20px, 5px gives equal width on each size */
+  left: 5px;
+  position: absolute;
+  height: 10px;
+  width: 10px;
+`;
+
+const GoButton = styled(Button)`
+  ${commonSearchButtonStyling};
+  background-color: ${GO_BUTTON_COLOR};
+  right: ${theme.size.default};
+  border-radius: ${GO_BUTTON_SIZE};
+  height: ${GO_BUTTON_SIZE};
+  padding: 0;
+  position: absolute;
+  /* button is 20 px and entire container is 36px so 8px top gives equal spacing */
+  top: ${theme.size.small};
+  width: ${GO_BUTTON_SIZE};
+`;
+
+const CloseButton = styled(Button)`
+  ${commonSearchButtonStyling};
+`;
+
+const ExpandMagnifyingGlass = styled(Icon)`
+  /* This icon is 16px tall in a 32 px button, so 8px gives equal spacing */
+  left: ${theme.size.small};
+  top: ${theme.size.small};
+  ${commonSearchIconStyling};
+`;
+
+const ExpandButton = styled(Button)`
+  ${commonSearchButtonStyling};
+  height: ${theme.size.large};
+  width: ${theme.size.large};
+  /* 32px button in a 36px container, 2px top gives equal spacing */
+  top: 2px;
+  :hover,
+  :focus {
+    background-color: #f7f9f8;
+    ${ExpandMagnifyingGlass} {
+      color: ${uiColors.gray.dark3};
+      transition: color ${TRANSITION_SPEED} ease-in;
+    }
   }
 `;
 
 const StyledTextInput = styled(TextInput)`
   /* Curve the text input box and put padding around text for icons/buttons */
   div > input {
+    border: none;
+    background-color: ${uiColors.gray.light3};
     border-radius: ${theme.size.medium};
-    padding-left: ${theme.size.large};
+    color: ${uiColors.gray.dark1};
+    /* 24 px for magnifying glass plus 16px margin */
+    padding-left: 40px;
     padding-right: ${theme.size.large};
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    transition: background-color ${TRANSITION_SPEED} ease-in;
+    ::placeholder {
+      color: ${uiColors.gray.dark1};
+    }
+    @media ${theme.screenSize.upToXSmall} {
+      border: none;
+      :hover,
+      :focus {
+        border: none;
+        box-shadow: none;
+      }
+    }
   }
 
   /* Remove blue border on focus */
@@ -92,27 +130,128 @@ const StyledTextInput = styled(TextInput)`
   > label {
     display: none;
   }
+
+  @media ${theme.screenSize.upToXSmall} {
+    background-color: #fff;
+    padding-bottom: ${theme.size.tiny};
+    ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
+    /**
+    On mobile, there is some space above the searchbar that is uncovered (on
+      desktop this is taken care of by the navbar). Here we can block elements
+      below from peeking through with a pseudoelement to cover this top space
+    */
+    :before {
+      background-color: #fff;
+      bottom: 100%;
+      content: '';
+      position: absolute;
+      top: -${SEARCHBAR_HEIGHT_OFFSET};
+      width: 100%;
+    }
+  }
 `;
 
-const Searchbar = () => {
+const MagnifyingGlass = styled(Icon)`
+  color: ${uiColors.gray.base};
+  left: ${theme.size.default};
+  /* This icon is 16px tall in a 36px tall container, so 10px gives equal spacing */
+  top: 10px;
+  transition: color ${TRANSITION_SPEED} ease-in;
+  ${commonSearchIconStyling};
+`;
+
+const SearchbarContainer = styled('div')`
+  height: ${SEARCHBAR_HEIGHT}px;
+  position: fixed;
+  right: ${theme.size.default};
+  top: ${SEARCHBAR_HEIGHT_OFFSET};
+  transition: width ${TRANSITION_SPEED} ease-in;
+  width: ${({ isExpanded }) => (isExpanded ? `${SEARCHBAR_DESKTOP_WIDTH}px` : BUTTON_SIZE)};
+  /* docs-tools navbar z-index is 9999 */
+  z-index: 10000;
+  :hover,
+  :focus,
+  :focus-within {
+    ${MagnifyingGlass} {
+      color: ${uiColors.gray.dark3};
+    }
+    ${StyledTextInput} {
+      div > input {
+        background-color: #fff;
+        border: none;
+        box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
+        color: ${uiColors.gray.dark3};
+        transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
+        @media ${theme.screenSize.upToXSmall} {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+  @media ${theme.screenSize.upToXSmall} {
+    height: 100%;
+    left: 0;
+    top: ${SEARCHBAR_HEIGHT_OFFSET};
+    width: 100%;
+  }
+`;
+
+const Searchbar = ({ isExpanded, setIsExpanded }) => {
   const [value, setValue] = useState('');
   const onChange = useCallback(e => setValue(e.target.value), []);
+  const { isMobile } = useScreenSize();
   const [blurEvent, setBlurEvent] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
+
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
+  const shouldShowGoButton = useMemo(() => !!value && !isMobile, [isMobile, value]);
   const onFocus = useCallback(() => {
     clearTimeout(blurEvent);
     setIsFocused(true);
   }, [blurEvent]);
   // The React onBlur event fires when tabbing between child elements
-  const onBlur = useCallback(() => setBlurEvent(setTimeout(() => setIsFocused(false), 0)), []);
+  const onBlur = useCallback(
+    () =>
+      setBlurEvent(
+        setTimeout(() => {
+          setIsFocused(false);
+          setIsExpanded(!!value);
+        }, 0)
+      ),
+    [setIsExpanded, value]
+  );
   return (
-    <SearchbarContainer onBlur={onBlur} onFocus={onFocus}>
-      <MagnifyingGlass glyph="MagnifyingGlass" fill="#061621" />
-      <StyledTextInput onChange={onChange} placeholder="Search Documentation" tabIndex="0" value={value} />
-      {!!value && <GoButton href="#" glyph={<GoArrowIcon glyph="ArrowRight" fill="#13AA52" />} />}
-      {isSearching && <SearchDropdown />}
+    <SearchbarContainer isExpanded={isExpanded} onBlur={onBlur} onFocus={onFocus}>
+      {isExpanded ? (
+        <>
+          <MagnifyingGlass glyph="MagnifyingGlass" />
+          <StyledTextInput
+            autoFocus
+            label="Search Docs"
+            isSearching={isSearching}
+            onChange={onChange}
+            placeholder="Search Documentation"
+            tabIndex="0"
+            value={value}
+          />
+          {shouldShowGoButton && (
+            <GoButton aria-label="Go" href="#" glyph={<GoIcon glyph="ArrowRight" fill="#13AA52" />} />
+          )}
+          {isMobile && (
+            <CloseButton
+              aria-label="Close Search"
+              onClick={() => setIsExpanded(false)}
+              glyph={<TextActionIcon glyph="X" fill={uiColors.gray.base} />}
+            />
+          )}
+          {isSearching && <SearchDropdown />}
+        </>
+      ) : (
+        <ExpandButton aria-label="Open MongoDB Docs Search" onClick={() => setIsExpanded(true)}>
+          <ExpandMagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.gray.base} />
+        </ExpandButton>
+      )}
     </SearchbarContainer>
   );
 };

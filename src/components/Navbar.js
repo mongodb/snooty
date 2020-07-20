@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import useMedia from '../hooks/use-media';
 import { withPrefix } from 'gatsby';
+import styled from '@emotion/styled';
 import { isBrowser } from '../utils/is-browser';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
@@ -24,11 +26,19 @@ const getActiveSection = (slug, urlItems) => {
   return null;
 };
 
+const NavbarContainer = styled('div')`
+  ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
+`;
+
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
+  // We want to expand the searchbar on default when it won't collide with any other nav elements
+  // Specifically, the upper limit works around the Get MongoDB link
+  const isSearchbarDefaultExpanded = useMedia(
+    'only screen and (min-width: 670px) and (max-width: 1200px), (min-width: 1300px)'
+  );
   const isActiveLink = useCallback(link => link.toLowerCase() === activeLink, [activeLink]);
-
-  // modify navprops
+  const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const modifyActiveLink = useMemo(
     () =>
       `{"links": [
@@ -40,8 +50,17 @@ const Navbar = () => {
       ]}`,
     [isActiveLink]
   );
-
   const [navprops, setNavprops] = useState(modifyActiveLink);
+
+  const onSearchbarExpand = useCallback(
+    isExpanded => {
+      // On certain screens the searchbar is never collapsed
+      if (!isSearchbarDefaultExpanded) {
+        setIsSearchbarExpanded(isExpanded);
+      }
+    },
+    [isSearchbarDefaultExpanded]
+  );
 
   useEffect(() => {
     // Add script to give navbar functionality and css
@@ -58,10 +77,21 @@ const Navbar = () => {
     setNavprops(modifyActiveLink);
   }, [activeLink, modifyActiveLink]);
 
+  useEffect(() => {
+    setIsSearchbarExpanded(isSearchbarDefaultExpanded);
+  }, [isSearchbarDefaultExpanded]);
+
   return (
     <>
-      <div tabIndex="0" id="navbar" className="navbar" data-navprops={navprops} />
-      <Searchbar />
+      <NavbarContainer
+        isExpanded={isSearchbarExpanded}
+        shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
+        tabIndex="0"
+        id="navbar"
+        className="navbar"
+        data-navprops={navprops}
+      />
+      <Searchbar isExpanded={isSearchbarExpanded} setIsExpanded={onSearchbarExpand} />
     </>
   );
 };
