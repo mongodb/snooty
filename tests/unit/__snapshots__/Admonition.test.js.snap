@@ -1,76 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`admonition one-off (name=admonition) renders correctly 1`] = `
-<div
-  className="admonition  note admonition-mlab-is-now-a-part-of-mongodb-inc"
->
-  <p
-    className="first admonition-title"
-  >
-    mLab is now a part of MongoDB, Inc.
-  </p>
-  <CSSWrapper
-    className="last"
-    key="0"
-  >
-    <ComponentFactory
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 3,
-                },
-              },
-              "type": "text",
-              "value": "The procedure to migrate from mLab to MongoDB Atlas will be
-further streamlined in the future. If you are looking to migrate
-immediately, use the following procedure to migrate your data
-using the Atlas Live Migration Service.",
-            },
-          ],
-          "position": Object {
-            "start": Object {
-              "line": 3,
-            },
-          },
-          "type": "paragraph",
-        }
-      }
-      parentNode={null}
-    />
-  </CSSWrapper>
-</div>
-`;
-
 exports[`admonitions render correctly 1`] = `
-<div
-  className="admonition note  "
+<StyledCallout
+  title=""
+  variant="note"
 >
-  <p
-    className="first admonition-title"
-  >
-    note
-  </p>
-  <CSSWrapper
-    className="last"
+  <ComponentFactory
     key="0"
-  >
-    <ComponentFactory
-      nodeData={
-        Object {
-          "position": Object {
-            "start": Object {
-              "line": 6,
-            },
+    nodeData={
+      Object {
+        "position": Object {
+          "start": Object {
+            "line": 6,
           },
-          "type": "text",
-          "value": "These instructions are for installing MongoDB directly from",
-        }
+        },
+        "type": "text",
+        "value": "These instructions are for installing MongoDB directly from",
       }
-      parentNode={null}
-    />
-  </CSSWrapper>
-</div>
+    }
+  />
+</StyledCallout>
 `;
