@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
+import { isBrowser } from '../utils/is-browser';
 
 // from https://github.com/streamich/react-use/blob/master/src/useMedia.ts
-
-const isClient = typeof window === 'object';
 
 const useMedia = (query, defaultState = false) => {
   const [state, setState] = useState(defaultState);
 
   useEffect(() => {
-    if (isClient) {
+    if (isBrowser) {
       let mounted = true;
       const mql = window.matchMedia(query);
       const onChange = () => {
