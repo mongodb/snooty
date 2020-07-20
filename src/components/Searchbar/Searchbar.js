@@ -5,7 +5,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
-import useMedia from '../../hooks/use-media';
+import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
 
@@ -131,7 +131,7 @@ const StyledTextInput = styled(TextInput)`
     display: none;
   }
 
-  @media ${theme.screenSize.upToSmall} {
+  @media ${theme.screenSize.upToXSmall} {
     background-color: #fff;
     padding-bottom: ${theme.size.tiny};
     ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
@@ -182,6 +182,9 @@ const SearchbarContainer = styled('div')`
         box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
         color: ${uiColors.gray.dark3};
         transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
+        @media ${theme.screenSize.upToXSmall} {
+          box-shadow: none;
+        }
       }
     }
   }
@@ -196,7 +199,7 @@ const SearchbarContainer = styled('div')`
 const Searchbar = ({ isExpanded, setIsExpanded }) => {
   const [value, setValue] = useState('');
   const onChange = useCallback(e => setValue(e.target.value), []);
-  const isMobile = useMedia(theme.screenSize.upToXSmall);
+  const { isMobile } = useScreenSize();
   const [blurEvent, setBlurEvent] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
 

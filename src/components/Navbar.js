@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import useMedia from '../hooks/use-media';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
