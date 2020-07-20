@@ -2,7 +2,7 @@
 
 exports[`renders correctly without browser 1`] = `
 <Fragment>
-  <div
+  <NavbarContainer
     className="navbar"
     data-navprops="{\\"links\\": [
         {\\"url\\": \\"https://docs.mongodb.com/manual/\\",\\"text\\": \\"Server\\", \\"active\\": false},
@@ -12,8 +12,13 @@ exports[`renders correctly without browser 1`] = `
         {\\"url\\": \\"https://docs.mongodb.com/guides/\\",\\"text\\": \\"Guides\\", \\"active\\": false}
       ]}"
     id="navbar"
+    isExpanded={false}
+    shouldOpaqueWhenExpanded={true}
     tabIndex="0"
   />
-  <Searchbar />
+  <Searchbar
+    isExpanded={false}
+    setIsExpanded={[Function]}
+  />
 </Fragment>
 `;

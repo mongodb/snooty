@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly without browser 1`] = `
+<SearchbarContainer
+  isExpanded={false}
+  onBlur={[Function]}
+  onFocus={[Function]}
+>
+  <ExpandButton
+    aria-label="Open MongoDB Docs Search"
+    onClick={[Function]}
+  >
+    <ExpandMagnifyingGlass
+      fill="#89989B"
+      glyph="MagnifyingGlass"
+    />
+  </ExpandButton>
+</SearchbarContainer>
+`;
+
+exports[`renders correctly without browser 2`] = `
+<SearchbarContainer
+  isExpanded={true}
+  onBlur={[Function]}
+  onFocus={[Function]}
+>
+  <MagnifyingGlass
+    glyph="MagnifyingGlass"
+  />
+  <StyledTextInput
+    autoFocus={true}
+    isSearching={false}
+    label="Search Docs"
+    onChange={[Function]}
+    placeholder="Search Documentation"
+    tabIndex="0"
+    value=""
+  />
+</SearchbarContainer>
+`;
