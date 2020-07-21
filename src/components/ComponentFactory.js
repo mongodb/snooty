@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ComponentFactory as LandingComponentFactory } from './landing';
-import { ADMONITIONS } from '../constants';
 import Step from './Step';
 import Paragraph from './Paragraph';
 import List from './List';
@@ -13,7 +12,7 @@ import Section from './Section';
 import Code from './Code';
 import LiteralInclude from './LiteralInclude';
 import Tabs from './Tabs';
-import Admonition from './Admonition';
+import Admonition, { admonitionMap } from './Admonition';
 import Figure from './Figure';
 import Literal from './Literal';
 import Heading from './Heading';
@@ -58,7 +57,8 @@ import RoleGUILabel from './Roles/GUILabel';
 import RoleIcon from './Roles/Icon';
 
 const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
-const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target', 'directive_argument'];
+const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
+const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
 
 const roleMap = {
   abbr: RoleAbbr,
@@ -149,8 +149,8 @@ const ComponentFactory = props => {
       ComponentType = roleMap[name];
     }
 
-    // Various different admonition types are all handled by the Admonition component
-    if (!ComponentType && ADMONITIONS.includes(name)) {
+    // Various admonition types are all handled by the Admonition component
+    if (DEPRECATED_ADMONITIONS.includes(name) || Object.keys(admonitionMap).includes(name)) {
       ComponentType = componentMap.admonition;
     }
 
