@@ -13,7 +13,6 @@ const DISABLED_COLOR = uiColors.gray.light1;
 const PaginationButton = styled(Button)`
   background-color: #fff;
   height: ${BUTTON_HEIGHT};
-  /* button is 24 px and entire container is 36px so 6px top gives equal spacing */
   padding: 0;
   width: ${BUTTON_WIDTH};
   z-index: 1;
