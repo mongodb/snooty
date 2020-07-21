@@ -56,13 +56,8 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
       <PaginationButton
         aria-label="Back Page"
         disabled={!canDecrementPage}
-        glyph={
-          <PaginationButtonIcon
-            glyph="ChevronLeft"
-            fill={canDecrementPage ? ENABLED_COLOR : DISABLED_COLOR}
-            onClick={decrementPage}
-          />
-        }
+        glyph={<PaginationButtonIcon glyph="ChevronLeft" fill={canDecrementPage ? ENABLED_COLOR : DISABLED_COLOR} />}
+        onClick={decrementPage}
         title="Back Page"
       />
       <PaginationText>
@@ -73,13 +68,8 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
       <PaginationButton
         aria-label="Forward Page"
         disabled={!canIncrementPage}
-        glyph={
-          <PaginationButtonIcon
-            glyph="ChevronRight"
-            fill={canIncrementPage ? ENABLED_COLOR : DISABLED_COLOR}
-            onClick={incrementPage}
-          />
-        }
+        glyph={<PaginationButtonIcon glyph="ChevronRight" fill={canIncrementPage ? ENABLED_COLOR : DISABLED_COLOR} />}
+        onClick={incrementPage}
         title="Forward Page"
       />
     </PaginationContainer>
