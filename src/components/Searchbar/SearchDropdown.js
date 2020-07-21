@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import Pagination from './Pagination';
 
 const SEARCHBAR_HEIGHT = 36;
 const SEARCH_RESULTS_DESKTOP_HEIGHT = 368;
@@ -56,20 +57,31 @@ const SearchResultsContainer = styled('div')`
 `;
 
 const SearchFooter = styled('div')`
+  align-items: center;
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.64);
+  display: flex;
   height: ${SEARCH_FOOTER_DESKTOP_HEIGHT};
+  justify-content: flex-end;
   position: relative;
+  padding-left: ${theme.size.default};
+  padding-right: ${theme.size.default};
   width: 100%;
   @media ${theme.screenSize.upToXSmall} {
     display: none;
   }
 `;
 
-const SearchDropdown = () => (
-  <SearchResultsContainer>
-    <SearchResults />
-    <SearchFooter />
-  </SearchResultsContainer>
-);
+const SearchDropdown = ({ results = [] }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = results ? results.length : 0;
+  return (
+    <SearchResultsContainer>
+      <SearchResults />
+      <SearchFooter>
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
+      </SearchFooter>
+    </SearchResultsContainer>
+  );
+};
 
 export default SearchDropdown;

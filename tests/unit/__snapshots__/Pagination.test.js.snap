@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders pagination correctly 1`] = `
+<PaginationContainer>
+  <PaginationButton
+    aria-label="Back Page"
+    disabled={true}
+    glyph={
+      <ForwardRef(render)
+        fill="#B8C4C2"
+        glyph="ChevronLeft"
+        onClick={[Function]}
+      />
+    }
+    title="Back Page"
+  />
+  <PaginationText>
+    <strong>
+      1
+      /
+      10
+    </strong>
+  </PaginationText>
+  <PaginationButton
+    aria-label="Forward Page"
+    disabled={false}
+    glyph={
+      <ForwardRef(render)
+        fill="#3D4F58"
+        glyph="ChevronRight"
+        onClick={[Function]}
+      />
+    }
+    title="Forward Page"
+  />
+</PaginationContainer>
+`;
