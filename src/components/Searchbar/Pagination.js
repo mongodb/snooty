@@ -38,12 +38,13 @@ const PaginationButtonIcon = styled(Icon)`
 `;
 
 const PaginationContainer = styled('div')`
+  align-items: center;
   display: flex;
 `;
 
 const PaginationText = styled('p')`
+  font-size: ${theme.size.default};
   margin: 0 ${theme.size.tiny};
-  line-height: 22px;
 `;
 
 const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
