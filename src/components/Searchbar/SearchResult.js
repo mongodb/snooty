@@ -24,7 +24,6 @@ const SearchResultContainer = styled('div')`
 
 const SearchResultLink = styled('a')`
   color: ${LINK_COLOR};
-  height: 100%;
   text-decoration: none;
   :hover,
   :focus {
@@ -55,8 +54,8 @@ const StyledResultTitle = styled('p')`
 `;
 
 const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }) => (
-  <SearchResultLink href={url}>
-    <SearchResultContainer {...props}>
+  <SearchResultLink href={url} {...props}>
+    <SearchResultContainer>
       <StyledResultTitle>
         <strong>{title}</strong>
       </StyledResultTitle>
