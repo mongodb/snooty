@@ -10,9 +10,11 @@ const Abbr = ({
     return null;
   }
 
-  // Abbreviations appear as "ABBR (Full Name Here)", so separate this into `abbr` and `expansion`
+  // Abbreviations are written as as "ABBR (Full Name Here)", so separate this into `abbr` and `expansion`
   let [abbr, expansion] = value.split('(');
-  expansion = expansion.split(')')[0];
+  if (expansion) {
+    expansion = expansion.split(')')[0];
+  }
   return <abbr title={expansion}>{abbr}</abbr>;
 };
 
