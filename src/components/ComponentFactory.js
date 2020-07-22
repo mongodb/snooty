@@ -49,6 +49,7 @@ import Image from './Image';
 import RefRole from './RefRole';
 import Target from './Target';
 import Glossary from './Glossary';
+import Rubric from './Rubric';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -112,6 +113,7 @@ const componentMap = {
   paragraph: Paragraph,
   ref_role: RefRole,
   reference: Reference,
+  rubric: Rubric,
   section: Section,
   step: Step,
   strong: Strong,
