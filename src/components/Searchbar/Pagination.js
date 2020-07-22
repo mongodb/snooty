@@ -5,27 +5,15 @@ import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
-const BUTTON_HEIGHT = theme.size.medium;
 const BUTTON_WIDTH = '14px';
 const ENABLED_COLOR = uiColors.gray.dark2;
 const DISABLED_COLOR = uiColors.gray.light1;
 
 const PaginationButton = styled(IconButton)`
   background-color: #fff;
-  height: ${BUTTON_HEIGHT};
   padding: 0;
   width: ${BUTTON_WIDTH};
   z-index: 1;
-  /* Below removes default hover effects from button */
-  background-image: none;
-  border: none;
-  box-shadow: none;
-  :before {
-    display: none;
-  }
-  :after {
-    display: none;
-  }
 `;
 
 const PaginationContainer = styled('div')`
