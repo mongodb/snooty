@@ -15,6 +15,7 @@ const truncate = maxLines => css`
 `;
 
 const SearchResultContainer = styled('div')`
+  height: 100%;
   :hover,
   :focus {
     background-color: ${RESULT_HOVER_COLOR};
