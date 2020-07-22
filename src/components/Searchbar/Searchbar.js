@@ -223,15 +223,15 @@ const Searchbar = ({ isExpanded, setIsExpanded, searchParamsToURL }) => {
   }, [setIsExpanded, value]);
   const onSearchChange = useCallback(
     e => {
-      const value = e.target.value;
-      setValue(e.target.value);
+      const enteredValue = e.target.value;
+      setValue(enteredValue);
       // Debounce any queued search event since the query has changed
       clearTimeout(searchEvent);
-      if (value) {
+      if (enteredValue) {
         // Set a timeout to trigger the search to avoid over-requesting
         setSearchEvent(
           setTimeout(async () => {
-            const result = await fetch(searchParamsToURL(value, {}));
+            const result = await fetch(searchParamsToURL(enteredValue, {}));
             const resultJson = await result.json();
             setSearchResults(resultJson.results);
           }, SEARCH_DELAY_TIME)
