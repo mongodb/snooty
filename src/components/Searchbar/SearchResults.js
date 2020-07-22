@@ -37,7 +37,9 @@ const SearchResultsContainer = styled('div')`
 const StyledSearchResult = styled(SearchResult)`
   max-height: 100%;
   height: 100%;
-  padding: ${theme.size.default} ${theme.size.medium};
+  > div {
+    padding: ${theme.size.default} ${theme.size.medium};
+  }
 `;
 
 const SearchResults = ({ totalResultsCount, visibleResults }) => (
