@@ -9,17 +9,17 @@ import { useEffect } from 'react';
  */
 export const useClickOutside = (ref, onClickOutside) => {
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
+    const handleClickOutside = e => {
+      if (ref.current && !ref.current.contains(e.target)) {
         onClickOutside();
       }
-    }
-    function handleEscape(event) {
-      event = event || window.event;
-      if (event.key === 'Escape') {
+    };
+    const handleEscape = e => {
+      e = e || window.event;
+      if (e.key === 'Escape') {
         onClickOutside();
       }
-    }
+    };
     document.addEventListener('mousedown', handleClickOutside);
     // Cannot handle ESC on FF https://bugzilla.mozilla.org/show_bug.cgi?id=1443758
     document.addEventListener('keydown', handleEscape);
