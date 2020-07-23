@@ -34,7 +34,7 @@ const SearchResultLink = styled('a')`
 `;
 
 const StyledPreviewText = styled('p')`
-  font-family: Akzidenz;
+  font-family: 'Akzidenz Grotesk BQ Light';
   font-size: 14px;
   letter-spacing: 0.5px;
   line-height: 20px;
@@ -57,9 +57,7 @@ const StyledResultTitle = styled('p')`
 const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }) => (
   <SearchResultLink href={url} {...props}>
     <SearchResultContainer>
-      <StyledResultTitle>
-        <strong>{title}</strong>
-      </StyledResultTitle>
+      <StyledResultTitle>{title}</StyledResultTitle>
       <StyledPreviewText maxLines={maxLines}>{preview}</StyledPreviewText>
     </SearchResultContainer>
   </SearchResultLink>
