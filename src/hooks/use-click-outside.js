@@ -16,11 +16,12 @@ export const useClickOutside = (ref, onClickOutside) => {
     }
     function handleEscape(event) {
       event = event || window.event;
-      if (event.keyCode == 27) {
+      if (event.key === 'Escape') {
         onClickOutside();
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
+    // Cannot handle ESC on FF https://bugzilla.mozilla.org/show_bug.cgi?id=1443758
     document.addEventListener('keydown', handleEscape);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
