@@ -7,6 +7,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
+import SearchContext from './SearchContext';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import SearchDropdown from './SearchDropdown';
 
@@ -237,37 +238,39 @@ const Searchbar = ({ isExpanded, setIsExpanded, searchParamsToURL }) => {
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(ref, onBlur);
   return (
-    <SearchbarContainer isExpanded={isExpanded} onFocus={onFocus} ref={ref}>
-      {isExpanded ? (
-        <>
-          <MagnifyingGlass glyph="MagnifyingGlass" />
-          <StyledTextInput
-            autoFocus
-            label="Search Docs"
-            isSearching={isSearching}
-            onChange={onSearchChange}
-            placeholder="Search Documentation"
-            tabIndex="0"
-            value={value}
-          />
-          {shouldShowGoButton && (
-            <GoButton aria-label="Go" href="#" glyph={<GoIcon glyph="ArrowRight" fill="#13AA52" />} />
-          )}
-          {isMobile && (
-            <CloseButton
-              aria-label="Close Search"
-              onClick={() => setIsExpanded(false)}
-              glyph={<TextActionIcon glyph="X" fill={uiColors.gray.base} />}
+    <SearchContext.Provider value={value}>
+      <SearchbarContainer isExpanded={isExpanded} onFocus={onFocus} ref={ref}>
+        {isExpanded ? (
+          <>
+            <MagnifyingGlass glyph="MagnifyingGlass" />
+            <StyledTextInput
+              autoFocus
+              label="Search Docs"
+              isSearching={isSearching}
+              onChange={onSearchChange}
+              placeholder="Search Documentation"
+              tabIndex="0"
+              value={value}
             />
-          )}
-          {isSearching && <SearchDropdown results={searchResults} />}
-        </>
-      ) : (
-        <ExpandButton aria-label="Open MongoDB Docs Search" onClick={() => setIsExpanded(true)}>
-          <ExpandMagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.gray.base} />
-        </ExpandButton>
-      )}
-    </SearchbarContainer>
+            {shouldShowGoButton && (
+              <GoButton aria-label="Go" href="#" glyph={<GoIcon glyph="ArrowRight" fill="#13AA52" />} />
+            )}
+            {isMobile && (
+              <CloseButton
+                aria-label="Close Search"
+                onClick={() => setIsExpanded(false)}
+                glyph={<TextActionIcon glyph="X" fill={uiColors.gray.base} />}
+              />
+            )}
+            {isSearching && <SearchDropdown results={searchResults} />}
+          </>
+        ) : (
+          <ExpandButton aria-label="Open MongoDB Docs Search" onClick={() => setIsExpanded(true)}>
+            <ExpandMagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.gray.base} />
+          </ExpandButton>
+        )}
+      </SearchbarContainer>
+    </SearchContext.Provider>
   );
 };
 

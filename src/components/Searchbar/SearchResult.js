@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import sanitizeHtml from 'sanitize-html';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
+// Use string for match styles due to replace/innerHTML
+const SEARCH_MATCH_STYLE = `background-color: ${uiColors.yellow.light2};`;
 
 // Truncates text to a maximum number of lines
 const truncate = maxLines => css`
@@ -52,13 +57,38 @@ const StyledResultTitle = styled('p')`
   ${truncate(1)};
 `;
 
-const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }) => (
-  <SearchResultLink href={url} {...props}>
-    <SearchResultContainer>
-      <StyledResultTitle>{title}</StyledResultTitle>
-      <StyledPreviewText maxLines={maxLines}>{preview}</StyledPreviewText>
-    </SearchResultContainer>
-  </SearchResultLink>
-));
+const highlightSearchTerm = (text, searchTerm) =>
+  text.replace(new RegExp(searchTerm, 'gi'), result => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`);
+
+// since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
+const sanitizePreviewHtml = text =>
+  sanitizeHtml(text, {
+    allowedTags: ['span'],
+    allowedAttributes: { span: ['style'] },
+    allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
+  });
+
+const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }) => {
+  const searchTerm = useContext(SearchContext);
+  const highlightedTitle = highlightSearchTerm(title, searchTerm);
+  const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
+  return (
+    <SearchResultLink href={url} {...props}>
+      <SearchResultContainer>
+        <StyledResultTitle
+          dangerouslySetInnerHTML={{
+            __html: sanitizePreviewHtml(highlightedTitle),
+          }}
+        />
+        <StyledPreviewText
+          maxLines={maxLines}
+          dangerouslySetInnerHTML={{
+            __html: sanitizePreviewHtml(highlightedPreviewText),
+          }}
+        ></StyledPreviewText>
+      </SearchResultContainer>
+    </SearchResultLink>
+  );
+});
 
 export default SearchResult;
