@@ -3,6 +3,7 @@ import useMedia from '../hooks/use-media';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { isBrowser } from '../utils/is-browser';
+import { searchParamsToURL } from '../utils/search-params-to-url';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
 
@@ -91,7 +92,11 @@ const Navbar = () => {
         className="navbar"
         data-navprops={navprops}
       />
-      <Searchbar isExpanded={isSearchbarExpanded} setIsExpanded={onSearchbarExpand} />
+      <Searchbar
+        isExpanded={isSearchbarExpanded}
+        setIsExpanded={onSearchbarExpand}
+        searchParamsToURL={searchParamsToURL}
+      />
     </>
   );
 };

@@ -5,7 +5,7 @@ import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
-const BUTTON_WIDTH = '14px';
+const BUTTON_WIDTH = theme.size.default;
 const ENABLED_COLOR = uiColors.gray.dark2;
 const DISABLED_COLOR = uiColors.gray.light1;
 

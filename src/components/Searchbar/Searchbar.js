@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -7,11 +7,13 @@ import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
+import { useClickOutside } from '../../hooks/use-click-outside';
 import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const GO_BUTTON_SIZE = '20px';
+const SEARCH_DELAY_TIME = 200;
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
@@ -196,33 +198,46 @@ const SearchbarContainer = styled('div')`
   }
 `;
 
-const Searchbar = ({ isExpanded, setIsExpanded }) => {
+const Searchbar = ({ isExpanded, setIsExpanded, searchParamsToURL }) => {
   const [value, setValue] = useState('');
-  const onChange = useCallback(e => setValue(e.target.value), []);
   const { isMobile } = useScreenSize();
-  const [blurEvent, setBlurEvent] = useState(null);
+  const [searchEvent, setSearchEvent] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
+  const ref = useRef(null);
 
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
   const shouldShowGoButton = useMemo(() => !!value && !isMobile, [isMobile, value]);
-  const onFocus = useCallback(() => {
-    clearTimeout(blurEvent);
-    setIsFocused(true);
-  }, [blurEvent]);
-  // The React onBlur event fires when tabbing between child elements
-  const onBlur = useCallback(
-    () =>
-      setBlurEvent(
-        setTimeout(() => {
-          setIsFocused(false);
-          setIsExpanded(!!value);
-        }, 0)
-      ),
-    [setIsExpanded, value]
+  const onFocus = useCallback(() => setIsFocused(true), []);
+  const onBlur = useCallback(() => {
+    setIsFocused(false);
+    setIsExpanded(!!value);
+  }, [setIsExpanded, value]);
+  const onSearchChange = useCallback(
+    e => {
+      const enteredValue = e.target.value;
+      setValue(enteredValue);
+      setIsFocused(true);
+      // Debounce any queued search event since the query has changed
+      clearTimeout(searchEvent);
+      if (enteredValue) {
+        // Set a timeout to trigger the search to avoid over-requesting
+        setSearchEvent(
+          setTimeout(async () => {
+            const result = await fetch(searchParamsToURL(enteredValue, {}));
+            const resultJson = await result.json();
+            setSearchResults(resultJson.results);
+          }, SEARCH_DELAY_TIME)
+        );
+      }
+    },
+    [searchEvent, searchParamsToURL]
   );
+  // Close the dropdown and remove focus when clicked outside
+  useClickOutside(ref, onBlur);
   return (
-    <SearchbarContainer isExpanded={isExpanded} onBlur={onBlur} onFocus={onFocus}>
+    <SearchbarContainer isExpanded={isExpanded} onFocus={onFocus} ref={ref}>
       {isExpanded ? (
         <>
           <MagnifyingGlass glyph="MagnifyingGlass" />
@@ -230,7 +245,7 @@ const Searchbar = ({ isExpanded, setIsExpanded }) => {
             autoFocus
             label="Search Docs"
             isSearching={isSearching}
-            onChange={onChange}
+            onChange={onSearchChange}
             placeholder="Search Documentation"
             tabIndex="0"
             value={value}
@@ -245,7 +260,7 @@ const Searchbar = ({ isExpanded, setIsExpanded }) => {
               glyph={<TextActionIcon glyph="X" fill={uiColors.gray.base} />}
             />
           )}
-          {isSearching && <SearchDropdown />}
+          {isSearching && <SearchDropdown results={searchResults} />}
         </>
       ) : (
         <ExpandButton aria-label="Open MongoDB Docs Search" onClick={() => setIsExpanded(true)}>
