@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 
 const LINK_COLOR = '#494747';
-const RESULT_HOVER_COLOR = '#d8d8d8';
 
 // Truncates text to a maximum number of lines
 const truncate = maxLines => css`
@@ -16,11 +15,6 @@ const truncate = maxLines => css`
 
 const SearchResultContainer = styled('div')`
   height: 100%;
-  :hover,
-  :focus {
-    background-color: ${RESULT_HOVER_COLOR};
-    transition: background-color 150ms ease-in;
-  }
 `;
 
 const SearchResultLink = styled('a')`
@@ -30,6 +24,10 @@ const SearchResultLink = styled('a')`
   :focus {
     color: ${LINK_COLOR};
     text-decoration: none;
+    ${SearchResultContainer} {
+      background-color: rgba(231, 238, 236, 0.4);
+      transition: background-color 150ms ease-in;
+    }
   }
 `;
 
