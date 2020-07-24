@@ -13,6 +13,7 @@ import SearchDropdown from './SearchDropdown';
 const BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const GO_BUTTON_SIZE = '20px';
+const NUMBER_SEARCH_RESULTS = 9;
 const SEARCH_DELAY_TIME = 200;
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
@@ -227,7 +228,7 @@ const Searchbar = ({ getResultsFromJson, isExpanded, setIsExpanded, searchParams
           setTimeout(async () => {
             const result = await fetch(searchParamsToURL(enteredValue, {}));
             const resultJson = await result.json();
-            setSearchResults(getResultsFromJson(resultJson));
+            setSearchResults(getResultsFromJson(resultJson, NUMBER_SEARCH_RESULTS));
           }, SEARCH_DELAY_TIME)
         );
       }
