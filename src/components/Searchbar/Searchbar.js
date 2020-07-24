@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useMemo, useState, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -6,8 +6,8 @@ import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import useScreenSize from '../../hooks/useScreenSize';
-import { theme } from '../../theme/docsTheme';
 import { useClickOutside } from '../../hooks/use-click-outside';
+import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
@@ -198,7 +198,7 @@ const SearchbarContainer = styled('div')`
   }
 `;
 
-const Searchbar = ({ isExpanded, setIsExpanded, searchParamsToURL }) => {
+const Searchbar = ({ getResultsFromJson, isExpanded, setIsExpanded, searchParamsToURL }) => {
   const [value, setValue] = useState('');
   const { isMobile } = useScreenSize();
   const [searchEvent, setSearchEvent] = useState(null);
@@ -227,12 +227,12 @@ const Searchbar = ({ isExpanded, setIsExpanded, searchParamsToURL }) => {
           setTimeout(async () => {
             const result = await fetch(searchParamsToURL(enteredValue, {}));
             const resultJson = await result.json();
-            setSearchResults(resultJson.results);
+            setSearchResults(getResultsFromJson(resultJson));
           }, SEARCH_DELAY_TIME)
         );
       }
     },
-    [searchEvent, searchParamsToURL]
+    [getResultsFromJson, searchEvent, searchParamsToURL]
   );
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(ref, onBlur);
