@@ -3,17 +3,16 @@
 exports[`Pagination renders pagination correctly 1`] = `
 <PaginationContainer>
   <PaginationButton
-    aria-label="Back Page"
+    ariaLabel="Back Page"
     disabled={true}
-    glyph={
-      <ForwardRef(render)
-        fill="#B8C4C2"
-        glyph="ChevronLeft"
-      />
-    }
     onClick={[Function]}
     title="Back Page"
-  />
+  >
+    <Icon
+      fill="#B8C4C2"
+      glyph="ChevronLeft"
+    />
+  </PaginationButton>
   <PaginationText>
     <strong>
       1
@@ -22,16 +21,15 @@ exports[`Pagination renders pagination correctly 1`] = `
     </strong>
   </PaginationText>
   <PaginationButton
-    aria-label="Forward Page"
+    ariaLabel="Forward Page"
     disabled={false}
-    glyph={
-      <ForwardRef(render)
-        fill="#3D4F58"
-        glyph="ChevronRight"
-      />
-    }
     onClick={[Function]}
     title="Forward Page"
-  />
+  >
+    <Icon
+      fill="#3D4F58"
+      glyph="ChevronRight"
+    />
+  </PaginationButton>
 </PaginationContainer>
 `;
