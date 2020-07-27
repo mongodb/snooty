@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchResult from './SearchResult';
 
@@ -57,15 +58,18 @@ const StyledSearchResult = styled(SearchResult)`
   }
 `;
 
-const SearchResults = ({ totalResultsCount, visibleResults }) => (
-  <SearchResultsContainer>
-    <StyledResultText>
-      <strong>Most Relevant Results ({totalResultsCount})</strong>
-    </StyledResultText>
-    {visibleResults.map(({ title, preview, url }) => (
-      <StyledSearchResult key={url} title={title} preview={preview} url={url} />
-    ))}
-  </SearchResultsContainer>
-);
+const SearchResults = ({ totalResultsCount, visibleResults }) => {
+  const { isMobile } = useScreenSize();
+  return (
+    <SearchResultsContainer>
+      <StyledResultText>
+        <strong>Most Relevant Results ({totalResultsCount})</strong>
+      </StyledResultText>
+      {visibleResults.map(({ title, preview, url }) => (
+        <StyledSearchResult key={url} learnMoreLink={isMobile} title={title} preview={preview} url={url} />
+      ))}
+    </SearchResultsContainer>
+  );
+};
 
 export default SearchResults;

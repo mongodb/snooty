@@ -37,7 +37,7 @@ const SearchResultContainer = styled('div')`
 
 const SearchResultLink = styled('a')`
   color: ${LINK_COLOR};
-  /* height: 100%; */
+  height: 100%;
   text-decoration: none;
   :hover,
   :focus {

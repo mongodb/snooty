@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
+import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import Pagination from './Pagination';
 import SearchResults from './SearchResults';
@@ -59,12 +60,17 @@ const SearchFooter = styled('div')`
 const SearchDropdown = ({ results = [] }) => {
   const [visibleResults, setVisibleResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { isMobile } = useScreenSize();
   const totalPages = results ? Math.ceil(results.length / RESULTS_PER_PAGE) : 0;
   useEffect(() => {
-    const start = (currentPage - 1) * RESULTS_PER_PAGE;
-    const end = currentPage * RESULTS_PER_PAGE;
-    setVisibleResults(results.slice(start, end));
-  }, [currentPage, results]);
+    if (isMobile) {
+      setVisibleResults(results);
+    } else {
+      const start = (currentPage - 1) * RESULTS_PER_PAGE;
+      const end = currentPage * RESULTS_PER_PAGE;
+      setVisibleResults(results.slice(start, end));
+    }
+  }, [currentPage, isMobile, results]);
   return (
     <SearchResultsContainer>
       <SearchResults totalResultsCount={results.length} visibleResults={visibleResults} />
