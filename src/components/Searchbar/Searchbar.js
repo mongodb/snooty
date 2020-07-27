@@ -199,7 +199,7 @@ const SearchbarContainer = styled('div')`
   }
 `;
 
-const Searchbar = ({ getResultsFromJson, isExpanded, setIsExpanded, searchParamsToURL }) => {
+const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL }) => {
   const [value, setValue] = useState('');
   const { isMobile } = useScreenSize();
   const [searchEvent, setSearchEvent] = useState(null);
@@ -228,12 +228,12 @@ const Searchbar = ({ getResultsFromJson, isExpanded, setIsExpanded, searchParams
           setTimeout(async () => {
             const result = await fetch(searchParamsToURL(enteredValue, {}));
             const resultJson = await result.json();
-            setSearchResults(getResultsFromJson(resultJson, NUMBER_SEARCH_RESULTS));
+            setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
           }, SEARCH_DELAY_TIME)
         );
       }
     },
-    [getResultsFromJson, searchEvent, searchParamsToURL]
+    [getResultsFromJSON, searchEvent, searchParamsToURL]
   );
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(ref, onBlur);

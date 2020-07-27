@@ -94,7 +94,7 @@ const Navbar = () => {
         data-navprops={navprops}
       />
       <Searchbar
-        getResultsFromJson={getSearchbarResultsFromJSON}
+        getResultsFromJSON={getSearchbarResultsFromJSON}
         isExpanded={isSearchbarExpanded}
         setIsExpanded={onSearchbarExpand}
         searchParamsToURL={searchParamsToURL}
