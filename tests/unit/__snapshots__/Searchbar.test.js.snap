@@ -3,7 +3,6 @@
 exports[`renders correctly without browser 1`] = `
 <SearchbarContainer
   isExpanded={false}
-  onBlur={[Function]}
   onFocus={[Function]}
 >
   <ExpandButton
@@ -21,7 +20,6 @@ exports[`renders correctly without browser 1`] = `
 exports[`renders correctly without browser 2`] = `
 <SearchbarContainer
   isExpanded={true}
-  onBlur={[Function]}
   onFocus={[Function]}
 >
   <MagnifyingGlass
