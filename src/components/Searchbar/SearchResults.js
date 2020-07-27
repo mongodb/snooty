@@ -6,6 +6,7 @@ import SearchResult from './SearchResult';
 const SEARCHBAR_HEIGHT = '36px';
 const SEARCH_RESULTS_DESKTOP_HEIGHT = '368px';
 const SEARCH_RESULT_HEIGHT = '102px';
+const SEARCH_RESULT_MOBILE_HEIGHT = '156px';
 
 const StyledResultText = styled('p')`
   font-family: Akzidenz;
@@ -28,17 +29,31 @@ const SearchResultsContainer = styled('div')`
   width: 100%;
   @media ${theme.screenSize.upToXSmall} {
     box-shadow: none;
+    grid-template-rows: ${theme.size.medium};
+    grid-auto-rows: ${SEARCH_RESULT_MOBILE_HEIGHT};
     /* On mobile, let the dropdown take the available height */
     height: calc(100% - ${SEARCHBAR_HEIGHT});
-    padding-top: 0;
+    padding-top: ${theme.size.default};
+    overflow-y: scroll;
   }
 `;
 
 const StyledSearchResult = styled(SearchResult)`
   max-height: 100%;
   height: 100%;
-  > div {
+  /* > div {
     padding: ${theme.size.default} ${theme.size.medium};
+  } */
+  @media ${theme.screenSize.upToXSmall} {
+    background-color: #fff;
+    border: 1px solid rgba(184, 196, 194, 0.2);
+    border-radius: ${theme.size.tiny};
+    box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
+    height: calc(100% - ${theme.size.default});
+    padding: ${theme.size.default};
+    /* place-self adds both align-self and justify-self for flexbox */
+    place-self: center;
+    width: calc(100% - ${theme.size.large});
   }
 `;
 
