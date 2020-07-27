@@ -1,38 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly without browser 1`] = `
-<SearchbarContainer
-  isExpanded={false}
-  onFocus={[Function]}
+<ContextProvider
+  value=""
 >
-  <ExpandButton
-    aria-label="Open MongoDB Docs Search"
-    onClick={[Function]}
+  <SearchbarContainer
+    isExpanded={false}
+    onFocus={[Function]}
   >
-    <ExpandMagnifyingGlass
-      fill="#89989B"
-      glyph="MagnifyingGlass"
-    />
-  </ExpandButton>
-</SearchbarContainer>
+    <ExpandButton
+      aria-label="Open MongoDB Docs Search"
+      onClick={[Function]}
+    >
+      <ExpandMagnifyingGlass
+        fill="#89989B"
+        glyph="MagnifyingGlass"
+      />
+    </ExpandButton>
+  </SearchbarContainer>
+</ContextProvider>
 `;
 
 exports[`renders correctly without browser 2`] = `
-<SearchbarContainer
-  isExpanded={true}
-  onFocus={[Function]}
+<ContextProvider
+  value=""
 >
-  <MagnifyingGlass
-    glyph="MagnifyingGlass"
-  />
-  <StyledTextInput
-    autoFocus={true}
-    isSearching={false}
-    label="Search Docs"
-    onChange={[Function]}
-    placeholder="Search Documentation"
-    tabIndex="0"
-    value=""
-  />
-</SearchbarContainer>
+  <SearchbarContainer
+    isExpanded={true}
+    onFocus={[Function]}
+  >
+    <MagnifyingGlass
+      glyph="MagnifyingGlass"
+    />
+    <StyledTextInput
+      autoFocus={true}
+      isSearching={false}
+      label="Search Docs"
+      onChange={[Function]}
+      placeholder="Search Documentation"
+      tabIndex="0"
+      value=""
+    />
+  </SearchbarContainer>
+</ContextProvider>
 `;
