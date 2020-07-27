@@ -3,6 +3,7 @@ import useMedia from '../hooks/use-media';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { isBrowser } from '../utils/is-browser';
+import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
@@ -93,6 +94,7 @@ const Navbar = () => {
         data-navprops={navprops}
       />
       <Searchbar
+        getResultsFromJSON={getSearchbarResultsFromJSON}
         isExpanded={isSearchbarExpanded}
         setIsExpanded={onSearchbarExpand}
         searchParamsToURL={searchParamsToURL}

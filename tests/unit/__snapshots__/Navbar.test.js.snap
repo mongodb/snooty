@@ -17,7 +17,9 @@ exports[`renders correctly without browser 1`] = `
     tabIndex="0"
   />
   <Searchbar
+    getResultsFromJson={[Function]}
     isExpanded={false}
+    searchParamsToURL={[Function]}
     setIsExpanded={[Function]}
   />
 </Fragment>

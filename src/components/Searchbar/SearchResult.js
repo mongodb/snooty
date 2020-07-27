@@ -109,7 +109,7 @@ const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, preview,
           dangerouslySetInnerHTML={{
             __html: sanitizePreviewHtml(highlightedPreviewText),
           }}
-        ></StyledPreviewText>
+        />
         {learnMoreLink && (
           <MobileFooterContainer>
             <LearnMoreLink url={url}>
