@@ -18,6 +18,19 @@ const truncate = maxLines => css`
   overflow: hidden;
 `;
 
+const MobileFooterContainer = styled('div')`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+`;
+
+const LearnMoreLink = styled('a')`
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: ${theme.size.default};
+`;
+
 const SearchResultContainer = styled('div')`
   height: 100%;
 `;
@@ -55,6 +68,11 @@ const StyledResultTitle = styled('p')`
   margin-bottom: 6px;
   margin-top: 0;
   ${truncate(1)};
+  @media ${theme.screenSize.upToXSmall} {
+    font-size: ${theme.size.default};
+    line-height: ${theme.size.medium};
+    font-weight: 300;
+  }
 `;
 
 const highlightSearchTerm = (text, searchTerm) =>
@@ -68,7 +86,7 @@ const sanitizePreviewHtml = text =>
     allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
   });
 
-const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }) => {
+const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, preview, title, url, ...props }) => {
   const searchTerm = useContext(SearchContext);
   const highlightedTitle = highlightSearchTerm(title, searchTerm);
   const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
@@ -86,6 +104,13 @@ const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }
             __html: sanitizePreviewHtml(highlightedPreviewText),
           }}
         ></StyledPreviewText>
+        {learnMoreLink && (
+          <MobileFooterContainer>
+            <LearnMoreLink url={url}>
+              <strong>Learn More</strong>
+            </LearnMoreLink>
+          </MobileFooterContainer>
+        )}
       </SearchResultContainer>
     </SearchResultLink>
   );
