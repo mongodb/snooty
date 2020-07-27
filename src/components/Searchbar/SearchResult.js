@@ -85,7 +85,7 @@ const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }
           dangerouslySetInnerHTML={{
             __html: sanitizePreviewHtml(highlightedPreviewText),
           }}
-        ></StyledPreviewText>
+        />
       </SearchResultContainer>
     </SearchResultLink>
   );
