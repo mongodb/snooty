@@ -19,14 +19,14 @@ const truncate = maxLines => css`
 `;
 
 const MobileFooterContainer = styled('div')`
+  align-items: flex-end;
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  align-items: flex-end;
 `;
 
 const LearnMoreLink = styled('a')`
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
   letter-spacing: 0.5px;
   line-height: ${theme.size.default};
 `;
@@ -57,7 +57,7 @@ const SearchResultLink = styled('a')`
 
 const StyledPreviewText = styled('p')`
   font-family: 'Akzidenz Grotesk BQ Light';
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
   letter-spacing: 0.5px;
   line-height: 20px;
   margin-bottom: 0;
@@ -67,7 +67,7 @@ const StyledPreviewText = styled('p')`
 
 const StyledResultTitle = styled('p')`
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
   height: ${theme.size.medium};
@@ -77,7 +77,6 @@ const StyledResultTitle = styled('p')`
   @media ${theme.screenSize.upToXSmall} {
     font-size: ${theme.size.default};
     line-height: ${theme.size.medium};
-    font-weight: 300;
   }
 `;
 

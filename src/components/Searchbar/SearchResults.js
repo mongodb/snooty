@@ -11,7 +11,7 @@ const SEARCH_RESULT_MOBILE_HEIGHT = '156px';
 
 const StyledResultText = styled('p')`
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
   letter-spacing: 0.5px;
   margin: 0;
   padding-left: ${theme.size.medium};

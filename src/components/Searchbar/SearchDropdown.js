@@ -64,6 +64,7 @@ const SearchDropdown = ({ results = [] }) => {
   const totalPages = results ? Math.ceil(results.length / RESULTS_PER_PAGE) : 0;
   useEffect(() => {
     if (isMobile) {
+      // If mobile, we give an overflow view, so no pagination is needed
       setVisibleResults(results);
     } else {
       const start = (currentPage - 1) * RESULTS_PER_PAGE;
