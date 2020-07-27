@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useMemo, useState, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -6,13 +6,14 @@ import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import useScreenSize from '../../hooks/useScreenSize';
-import { theme } from '../../theme/docsTheme';
 import { useClickOutside } from '../../hooks/use-click-outside';
+import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const GO_BUTTON_SIZE = '20px';
+const NUMBER_SEARCH_RESULTS = 9;
 const SEARCH_DELAY_TIME = 200;
 const SEARCHBAR_DESKTOP_WIDTH = 372;
 const SEARCHBAR_HEIGHT = 36;
@@ -198,7 +199,7 @@ const SearchbarContainer = styled('div')`
   }
 `;
 
-const Searchbar = ({ isExpanded, setIsExpanded, searchParamsToURL }) => {
+const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL }) => {
   const [value, setValue] = useState('');
   const { isMobile } = useScreenSize();
   const [searchEvent, setSearchEvent] = useState(null);
@@ -227,12 +228,12 @@ const Searchbar = ({ isExpanded, setIsExpanded, searchParamsToURL }) => {
           setTimeout(async () => {
             const result = await fetch(searchParamsToURL(enteredValue, {}));
             const resultJson = await result.json();
-            setSearchResults(resultJson.results);
+            setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
           }, SEARCH_DELAY_TIME)
         );
       }
     },
-    [searchEvent, searchParamsToURL]
+    [getResultsFromJSON, searchEvent, searchParamsToURL]
   );
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(ref, onBlur);
