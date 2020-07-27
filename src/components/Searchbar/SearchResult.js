@@ -33,6 +33,11 @@ const LearnMoreLink = styled('a')`
 
 const SearchResultContainer = styled('div')`
   height: 100%;
+  @media ${theme.screenSize.upToXSmall} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 `;
 
 const SearchResultLink = styled('a')`
