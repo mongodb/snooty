@@ -117,7 +117,7 @@ const StyledTextInput = styled(TextInput)`
     ::placeholder {
       color: ${uiColors.gray.dark1};
     }
-    @media ${theme.screenSize.upToXSmall} {
+    @media ${theme.screenSize.upToSmall} {
       border: none;
       :hover,
       :focus {
@@ -135,7 +135,7 @@ const StyledTextInput = styled(TextInput)`
     display: none;
   }
 
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     background-color: #fff;
     padding-bottom: ${theme.size.tiny};
     ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
@@ -186,14 +186,14 @@ const SearchbarContainer = styled('div')`
         box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
         color: ${uiColors.gray.dark3};
         transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
-        @media ${theme.screenSize.upToXSmall} {
+        @media ${theme.screenSize.upToSmall} {
           box-shadow: none;
         }
       }
     }
   }
-  @media ${theme.screenSize.upToXSmall} {
-    height: 100%;
+  @media ${theme.screenSize.upToSmall} {
+    height: ${({ isSearching }) => (isSearching ? '100%' : `${SEARCHBAR_HEIGHT}px`)};
     left: 0;
     top: ${SEARCHBAR_HEIGHT_OFFSET};
     width: 100%;
@@ -240,7 +240,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   useClickOutside(ref, onBlur);
   return (
     <SearchContext.Provider value={value}>
-      <SearchbarContainer isExpanded={isExpanded} onFocus={onFocus} ref={ref}>
+      <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={ref}>
         {isExpanded ? (
           <>
             <MagnifyingGlass glyph="MagnifyingGlass" />

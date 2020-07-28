@@ -33,7 +33,7 @@ const LearnMoreLink = styled('a')`
 
 const SearchResultContainer = styled('div')`
   height: 100%;
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -74,7 +74,7 @@ const StyledResultTitle = styled('p')`
   margin-bottom: 6px;
   margin-top: 0;
   ${truncate(1)};
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     font-size: ${theme.size.default};
     line-height: ${theme.size.medium};
   }

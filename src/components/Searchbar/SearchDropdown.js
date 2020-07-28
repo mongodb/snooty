@@ -35,7 +35,7 @@ const SearchResultsContainer = styled('div')`
   width: 100%;
   z-index: -1;
   ${fadeInAnimation(0, '0.2s')};
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     background-color: ${uiColors.gray.light3};
     bottom: 0;
     top: 40px;
@@ -52,7 +52,7 @@ const SearchFooter = styled('div')`
   padding-left: ${theme.size.default};
   padding-right: ${theme.size.default};
   width: 100%;
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     display: none;
   }
 `;

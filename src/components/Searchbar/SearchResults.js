@@ -28,7 +28,7 @@ const SearchResultsContainer = styled('div')`
   /* Give top padding on desktop to offset this extending into the searchbar */
   padding-top: 38px;
   width: 100%;
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     box-shadow: none;
     grid-template-rows: ${theme.size.medium};
     grid-auto-rows: ${SEARCH_RESULT_MOBILE_HEIGHT};
@@ -45,7 +45,7 @@ const StyledSearchResult = styled(SearchResult)`
   > div {
     padding: ${theme.size.default} ${theme.size.medium};
   }
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     background-color: #fff;
     border: 1px solid rgba(184, 196, 194, 0.2);
     border-radius: ${theme.size.tiny};
