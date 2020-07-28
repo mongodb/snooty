@@ -21,6 +21,12 @@ const SEARCHBAR_HEIGHT = 36;
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
+const activeTextBarStyling = css`
+  background-color: #fff;
+  border: none;
+  color: ${uiColors.gray.dark3};
+`;
+
 const commonSearchButtonStyling = css`
   background-color: #fff;
   border-radius: ${BUTTON_SIZE};
@@ -181,10 +187,8 @@ const SearchbarContainer = styled('div')`
     }
     ${StyledTextInput} {
       div > input {
-        background-color: #fff;
-        border: none;
+        ${activeTextBarStyling}
         box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
-        color: ${uiColors.gray.dark3};
         transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
         @media ${theme.screenSize.upToSmall} {
           box-shadow: none;
@@ -199,6 +203,8 @@ const SearchbarContainer = styled('div')`
     width: 100%;
     ${StyledTextInput} {
       div > input {
+        /* Always have this element filled in for mobile */
+        ${activeTextBarStyling}
         /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
         font-size: ${theme.fontSize.default};
       }
