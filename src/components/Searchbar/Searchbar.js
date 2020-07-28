@@ -193,10 +193,16 @@ const SearchbarContainer = styled('div')`
     }
   }
   @media ${theme.screenSize.upToSmall} {
-    height: ${({ isSearching }) => (isSearching ? '100%' : `${SEARCHBAR_HEIGHT}px`)};
+    height: ${({ isExpanded, isSearching }) => (isExpanded && isSearching ? '100%' : `${SEARCHBAR_HEIGHT}px`)};
     left: 0;
     top: ${SEARCHBAR_HEIGHT_OFFSET};
     width: 100%;
+    ${StyledTextInput} {
+      div > input {
+        /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
+        font-size: ${theme.fontSize.default};
+      }
+    }
   }
 `;
 
@@ -212,10 +218,15 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
   const shouldShowGoButton = useMemo(() => !!value && !isMobile, [isMobile, value]);
   const onFocus = useCallback(() => setIsFocused(true), []);
+  const onExpand = useCallback(() => setIsExpanded(true), [setIsExpanded]);
   const onBlur = useCallback(() => {
-    setIsFocused(false);
-    setIsExpanded(!!value);
-  }, [setIsExpanded, value]);
+    // On iOS, closing the Searchbar doesn't remove focus, meaning the user's next
+    // click would trigger the onBlur and potentially re-expand the modal
+    if (!isMobile) {
+      setIsFocused(false);
+      setIsExpanded(!!value);
+    }
+  }, [isMobile, setIsExpanded, value]);
   const onSearchChange = useCallback(
     e => {
       const enteredValue = e.target.value;
@@ -259,14 +270,17 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
             {isMobile && (
               <CloseButton
                 aria-label="Close Search"
-                onClick={() => setIsExpanded(false)}
+                onClick={() => {
+                  setIsFocused(false);
+                  setIsExpanded(false);
+                }}
                 glyph={<TextActionIcon glyph="X" fill={uiColors.gray.base} />}
               />
             )}
             {isSearching && <SearchDropdown results={searchResults} />}
           </>
         ) : (
-          <ExpandButton aria-label="Open MongoDB Docs Search" onClick={() => setIsExpanded(true)}>
+          <ExpandButton aria-label="Open MongoDB Docs Search" onClick={onExpand}>
             <ExpandMagnifyingGlass glyph="MagnifyingGlass" fill={uiColors.gray.base} />
           </ExpandButton>
         )}
