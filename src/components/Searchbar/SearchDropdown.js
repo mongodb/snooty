@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
+import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import Pagination from './Pagination';
 import SearchResults from './SearchResults';
@@ -34,7 +35,7 @@ const SearchResultsContainer = styled('div')`
   width: 100%;
   z-index: -1;
   ${fadeInAnimation(0, '0.2s')};
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     background-color: ${uiColors.gray.light3};
     bottom: 0;
     top: 40px;
@@ -51,7 +52,7 @@ const SearchFooter = styled('div')`
   padding-left: ${theme.size.default};
   padding-right: ${theme.size.default};
   width: 100%;
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     display: none;
   }
 `;
@@ -59,12 +60,18 @@ const SearchFooter = styled('div')`
 const SearchDropdown = ({ results = [] }) => {
   const [visibleResults, setVisibleResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { isMobile } = useScreenSize();
   const totalPages = results ? Math.ceil(results.length / RESULTS_PER_PAGE) : 0;
   useEffect(() => {
-    const start = (currentPage - 1) * RESULTS_PER_PAGE;
-    const end = currentPage * RESULTS_PER_PAGE;
-    setVisibleResults(results.slice(start, end));
-  }, [currentPage, results]);
+    if (isMobile) {
+      // If mobile, we give an overflow view, so no pagination is needed
+      setVisibleResults(results);
+    } else {
+      const start = (currentPage - 1) * RESULTS_PER_PAGE;
+      const end = currentPage * RESULTS_PER_PAGE;
+      setVisibleResults(results.slice(start, end));
+    }
+  }, [currentPage, isMobile, results]);
   return (
     <SearchResultsContainer>
       <SearchResults totalResultsCount={results.length} visibleResults={visibleResults} />

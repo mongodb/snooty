@@ -21,6 +21,12 @@ const SEARCHBAR_HEIGHT = 36;
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
+const activeTextBarStyling = css`
+  background-color: #fff;
+  border: none;
+  color: ${uiColors.gray.dark3};
+`;
+
 const commonSearchButtonStyling = css`
   background-color: #fff;
   border-radius: ${BUTTON_SIZE};
@@ -117,7 +123,7 @@ const StyledTextInput = styled(TextInput)`
     ::placeholder {
       color: ${uiColors.gray.dark1};
     }
-    @media ${theme.screenSize.upToXSmall} {
+    @media ${theme.screenSize.upToSmall} {
       border: none;
       :hover,
       :focus {
@@ -135,7 +141,7 @@ const StyledTextInput = styled(TextInput)`
     display: none;
   }
 
-  @media ${theme.screenSize.upToXSmall} {
+  @media ${theme.screenSize.upToSmall} {
     background-color: #fff;
     padding-bottom: ${theme.size.tiny};
     ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
@@ -181,22 +187,28 @@ const SearchbarContainer = styled('div')`
     }
     ${StyledTextInput} {
       div > input {
-        background-color: #fff;
-        border: none;
+        ${activeTextBarStyling}
         box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
-        color: ${uiColors.gray.dark3};
         transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
-        @media ${theme.screenSize.upToXSmall} {
+        @media ${theme.screenSize.upToSmall} {
           box-shadow: none;
         }
       }
     }
   }
-  @media ${theme.screenSize.upToXSmall} {
-    height: 100%;
+  @media ${theme.screenSize.upToSmall} {
+    height: ${({ isExpanded, isSearching }) => (isExpanded && isSearching ? '100%' : `${SEARCHBAR_HEIGHT}px`)};
     left: 0;
     top: ${SEARCHBAR_HEIGHT_OFFSET};
     width: 100%;
+    ${StyledTextInput} {
+      div > input {
+        /* Always have this element filled in for mobile */
+        ${activeTextBarStyling}
+        /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
+        font-size: ${theme.fontSize.default};
+      }
+    }
   }
 `;
 
@@ -214,8 +226,8 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   const onFocus = useCallback(() => setIsFocused(true), []);
   const onBlur = useCallback(() => {
     setIsFocused(false);
-    setIsExpanded(!!value);
-  }, [setIsExpanded, value]);
+    setIsExpanded(false);
+  }, [setIsExpanded]);
   const onSearchChange = useCallback(
     e => {
       const enteredValue = e.target.value;
@@ -240,7 +252,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   useClickOutside(ref, onBlur);
   return (
     <SearchContext.Provider value={value}>
-      <SearchbarContainer isExpanded={isExpanded} onFocus={onFocus} ref={ref}>
+      <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={ref}>
         {isExpanded ? (
           <>
             <MagnifyingGlass glyph="MagnifyingGlass" />

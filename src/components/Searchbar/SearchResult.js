@@ -18,12 +18,31 @@ const truncate = maxLines => css`
   overflow: hidden;
 `;
 
+const MobileFooterContainer = styled('div')`
+  align-items: flex-end;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+const LearnMoreLink = styled('a')`
+  font-size: ${theme.fontSize.small};
+  letter-spacing: 0.5px;
+  line-height: ${theme.size.default};
+`;
+
 const SearchResultContainer = styled('div')`
   height: 100%;
+  @media ${theme.screenSize.upToSmall} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 `;
 
 const SearchResultLink = styled('a')`
   color: ${LINK_COLOR};
+  height: 100%;
   text-decoration: none;
   :hover,
   :focus {
@@ -38,7 +57,7 @@ const SearchResultLink = styled('a')`
 
 const StyledPreviewText = styled('p')`
   font-family: 'Akzidenz Grotesk BQ Light';
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
   letter-spacing: 0.5px;
   line-height: 20px;
   margin-bottom: 0;
@@ -48,13 +67,17 @@ const StyledPreviewText = styled('p')`
 
 const StyledResultTitle = styled('p')`
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
   height: ${theme.size.medium};
   margin-bottom: 6px;
   margin-top: 0;
   ${truncate(1)};
+  @media ${theme.screenSize.upToSmall} {
+    font-size: ${theme.size.default};
+    line-height: ${theme.size.medium};
+  }
 `;
 
 const highlightSearchTerm = (text, searchTerm) =>
@@ -68,7 +91,7 @@ const sanitizePreviewHtml = text =>
     allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
   });
 
-const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }) => {
+const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, preview, title, url, ...props }) => {
   const searchTerm = useContext(SearchContext);
   const highlightedTitle = highlightSearchTerm(title, searchTerm);
   const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
@@ -86,6 +109,13 @@ const SearchResult = React.memo(({ maxLines = 2, preview, title, url, ...props }
             __html: sanitizePreviewHtml(highlightedPreviewText),
           }}
         />
+        {learnMoreLink && (
+          <MobileFooterContainer>
+            <LearnMoreLink href={url}>
+              <strong>Learn More</strong>
+            </LearnMoreLink>
+          </MobileFooterContainer>
+        )}
       </SearchResultContainer>
     </SearchResultLink>
   );
