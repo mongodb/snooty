@@ -111,7 +111,7 @@ const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, preview,
         />
         {learnMoreLink && (
           <MobileFooterContainer>
-            <LearnMoreLink url={url}>
+            <LearnMoreLink href={url}>
               <strong>Learn More</strong>
             </LearnMoreLink>
           </MobileFooterContainer>
