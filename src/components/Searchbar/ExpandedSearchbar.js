@@ -1,12 +1,12 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
+import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
-import SearchTextInput from './SearchTextInput';
 import { theme } from '../../theme/docsTheme';
+import SearchTextInput from './SearchTextInput';
 
 const CLOSE_BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
@@ -70,16 +70,14 @@ const MagnifyingGlass = styled(Icon)`
   z-index: 1;
 `;
 
-const ExpandedSearchbar = ({ isFocused, onMobileClose, onChange }) => {
-  const [value, setValue] = useState('');
+const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose, value }) => {
   const { isMobile } = useScreenSize();
-  const shouldShowGoButton = useMemo(() => !!value && !isMobile, [isMobile, value]);
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
+  const shouldShowGoButton = useMemo(() => !!value && !isMobile, [isMobile, value]);
 
-  const onSearchQueryChange = useCallback(
+  const onSearchChange = useCallback(
     e => {
       const searchTerm = e.target.value;
-      setValue(searchTerm);
       onChange(searchTerm);
     },
     [onChange]
@@ -88,7 +86,7 @@ const ExpandedSearchbar = ({ isFocused, onMobileClose, onChange }) => {
   return (
     <>
       <MagnifyingGlass glyph="MagnifyingGlass" />
-      <SearchTextInput isSearching={isSearching} onChange={onSearchQueryChange} value={value} />
+      <SearchTextInput isSearching={isSearching} onChange={onSearchChange} value={value} />
       {shouldShowGoButton && (
         <GoButton aria-label="Go" href="#">
           <GoIcon glyph="ArrowRight" fill="#13AA52" />
@@ -103,5 +101,6 @@ const ExpandedSearchbar = ({ isFocused, onMobileClose, onChange }) => {
   );
 };
 
+// Export this icon to be used as a selector by a parent component
 export { MagnifyingGlass };
 export default ExpandedSearchbar;

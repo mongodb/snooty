@@ -1,10 +1,17 @@
 import React from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import { theme } from '../../theme/docsTheme';
 
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
+
+const activeTextBarStyling = css`
+  background-color: #fff;
+  border: none;
+  color: ${uiColors.gray.dark3};
+`;
 
 const StyledTextInput = styled(TextInput)`
   /* Curve the text input box and put padding around text for icons/buttons */
@@ -43,7 +50,14 @@ const StyledTextInput = styled(TextInput)`
   @media ${theme.screenSize.upToSmall} {
     background-color: #fff;
     padding-bottom: ${theme.size.tiny};
-    ${({ issearching }) => issearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
+    ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
+    div > input {
+      /* Always have this element filled in for mobile */
+      ${activeTextBarStyling}
+      /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
+      font-size: ${theme.fontSize.default};
+      line-height: 20px;
+    }
     /**
     On mobile, there is some space above the searchbar that is uncovered (on
       desktop this is taken care of by the navbar). Here we can block elements
@@ -64,7 +78,7 @@ const SearchTextInput = ({ isSearching, onChange, value, ...props }) => (
   <StyledTextInput
     autoFocus
     label="Search Docs"
-    issearching={isSearching}
+    isSearching={isSearching}
     onChange={onChange}
     placeholder="Search Documentation"
     tabIndex="0"
@@ -74,5 +88,5 @@ const SearchTextInput = ({ isSearching, onChange, value, ...props }) => (
 );
 
 // Also export the styled component for styled selector use
-export { StyledTextInput };
+export { activeTextBarStyling, StyledTextInput };
 export default SearchTextInput;

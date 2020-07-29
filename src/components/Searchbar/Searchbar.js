@@ -1,11 +1,10 @@
 import React, { useCallback, useMemo, useState, useRef } from 'react';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
-import { StyledTextInput } from './SearchTextInput';
+import { activeTextBarStyling, StyledTextInput } from './SearchTextInput';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { theme } from '../../theme/docsTheme';
 import SearchDropdown from './SearchDropdown';
@@ -17,12 +16,6 @@ const SEARCHBAR_DESKTOP_WIDTH = '372px';
 const SEARCHBAR_HEIGHT = '36px';
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
-
-const activeTextBarStyling = css`
-  background-color: #fff;
-  border: none;
-  color: ${uiColors.gray.dark3};
-`;
 
 const SearchbarContainer = styled('div')`
   height: ${SEARCHBAR_HEIGHT};
@@ -55,14 +48,6 @@ const SearchbarContainer = styled('div')`
     left: 0;
     top: ${SEARCHBAR_HEIGHT_OFFSET};
     width: 100%;
-    ${StyledTextInput} {
-      div > input {
-        /* Always have this element filled in for mobile */
-        ${activeTextBarStyling}
-        /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
-        font-size: ${theme.fontSize.default};
-      }
-    }
   }
 `;
 
@@ -116,7 +101,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
     <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={searchContainerRef}>
       {isExpanded ? (
         <SearchContext.Provider value={value}>
-          <ExpandedSearchbar onMobileClose={onClose} onChange={onSearchChange} />
+          <ExpandedSearchbar onMobileClose={onClose} onChange={onSearchChange} value={value} />
           {isSearching && <SearchDropdown results={searchResults} />}
         </SearchContext.Provider>
       ) : (
