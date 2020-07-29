@@ -56,7 +56,7 @@ const StyledTextInput = styled(TextInput)`
       ${activeTextBarStyling}
       /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
       font-size: ${theme.fontSize.default};
-      line-height: 20px;
+      padding-top: 2px;
     }
     /**
     On mobile, there is some space above the searchbar that is uncovered (on

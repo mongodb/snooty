@@ -53,11 +53,11 @@ const GoButton = styled(IconButton)`
 
 const GoIcon = styled(Icon)`
   /* Icon box size is 16px, 3px gives equal width and height */
-  left: 2px;
-  top: 2px;
-  height: 12px;
+  left: 3px;
+  top: 3px;
+  height: 10px;
   position: absolute;
-  width: 12px;
+  width: 10px;
 `;
 
 const MagnifyingGlass = styled(Icon)`
