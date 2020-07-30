@@ -5,7 +5,6 @@ import { theme } from '../../theme/docsTheme';
 import SearchResult from './SearchResult';
 
 const SEARCHBAR_HEIGHT = '36px';
-const SEARCH_RESULTS_DESKTOP_HEIGHT = '368px';
 const SEARCH_RESULT_HEIGHT = '102px';
 const SEARCH_RESULT_MOBILE_HEIGHT = '156px';
 
@@ -23,10 +22,9 @@ const SearchResultsContainer = styled('div')`
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: ${theme.size.medium} ${SEARCH_RESULT_HEIGHT} ${SEARCH_RESULT_HEIGHT} ${SEARCH_RESULT_HEIGHT};
-  height: ${SEARCH_RESULTS_DESKTOP_HEIGHT};
   position: relative;
   /* Give top padding on desktop to offset this extending into the searchbar */
-  padding-top: 38px;
+  padding-top: ${theme.size.large};
   width: 100%;
   @media ${theme.screenSize.upToSmall} {
     box-shadow: none;
@@ -60,10 +58,10 @@ const StyledSearchResult = styled(SearchResult)`
   }
 `;
 
-const SearchResults = ({ totalResultsCount, visibleResults }) => {
+const SearchResults = ({ totalResultsCount, visibleResults, ...props }) => {
   const { isMobile } = useScreenSize();
   return (
-    <SearchResultsContainer>
+    <SearchResultsContainer {...props}>
       <StyledResultText>
         <strong>Most Relevant Results ({totalResultsCount})</strong>
       </StyledResultText>
