@@ -98,6 +98,8 @@ const Navbar = () => {
         isExpanded={isSearchbarExpanded}
         setIsExpanded={onSearchbarExpand}
         searchParamsToURL={searchParamsToURL}
+        // Autofocus the searchbar when the user expands only so the user can start typing
+        shouldAutofocus={!isSearchbarDefaultExpanded}
       />
     </>
   );

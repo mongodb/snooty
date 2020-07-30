@@ -51,7 +51,7 @@ const SearchbarContainer = styled('div')`
   }
 `;
 
-const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL }) => {
+const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
   const [value, setValue] = useState(false);
   const [searchEvent, setSearchEvent] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
@@ -100,7 +100,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   return (
     <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={searchContainerRef}>
       {isExpanded ? (
-        <SearchContext.Provider value={value}>
+        <SearchContext.Provider value={{ searchTerm: value, shouldAutofocus }}>
           <ExpandedSearchbar onMobileClose={onClose} onChange={onSearchChange} value={value} />
           {isSearching && <SearchDropdown results={searchResults} />}
         </SearchContext.Provider>

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import { theme } from '../../theme/docsTheme';
+import SearchContext from './SearchContext';
 
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 
@@ -74,18 +75,21 @@ const StyledTextInput = styled(TextInput)`
   }
 `;
 
-const SearchTextInput = ({ isSearching, onChange, value, ...props }) => (
-  <StyledTextInput
-    autoFocus
-    label="Search Docs"
-    isSearching={isSearching}
-    onChange={onChange}
-    placeholder="Search Documentation"
-    tabIndex="0"
-    value={value}
-    {...props}
-  />
-);
+const SearchTextInput = ({ isSearching, onChange, value, ...props }) => {
+  const { shouldAutofocus } = useContext(SearchContext);
+  return (
+    <StyledTextInput
+      autoFocus={shouldAutofocus}
+      label="Search Docs"
+      isSearching={isSearching}
+      onChange={onChange}
+      placeholder="Search Documentation"
+      tabIndex="0"
+      value={value}
+      {...props}
+    />
+  );
+};
 
 // Also export the styled component for styled selector use
 export { activeTextBarStyling, StyledTextInput };
