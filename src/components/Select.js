@@ -69,9 +69,9 @@ const SelectContainer = styled('div')`
 `;
 
 const StyledCustomSelect = styled('div')`
+  background-color: #fff;
   border: ${BORDER_SIZE} solid rgba(184, 196, 194, 0.4);
   border-radius: 2px;
-  background-color: #fff;
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(233, 233, 233, 0.3);
   color: #000;
   cursor: ${({ enabled }) => (enabled ? 'pointer' : 'not-allowed')};

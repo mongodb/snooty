@@ -8,7 +8,7 @@ const DEFAULT_CHOICES = [DEFAULT_SERVER_CHOICE, DEFAULT_ATLAS_CHOICE];
 
 // Simple wrapper to add state control around the Pagination component
 const SelectController = ({
-  choices,
+  choices = DEFAULT_CHOICES,
   customOnChange = null,
   defaultText = '',
   disabled = false,
@@ -35,7 +35,7 @@ const SelectController = ({
 describe('Select', () => {
   // Helper to open the dropdown passed a series of simulate args (click, keypress)
   const dropdownOpen = (args = ['click'], props = {}) => {
-    const wrapper = mount(<SelectController choices={DEFAULT_CHOICES} {...props} />);
+    const wrapper = mount(<SelectController {...props} />);
     // Dropdown should be closed by default
     expect(!wrapper.find('Options').exists());
     const selectParent = wrapper.find('StyledCustomSelect');
@@ -46,15 +46,23 @@ describe('Select', () => {
   };
 
   it('renders select correctly', () => {
-    const wrapper = shallow(<SelectController choices={DEFAULT_CHOICES} />);
+    const wrapper = shallow(<SelectController />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('displays default text', () => {
     const defaultText = 'Some default text';
-    const wrapper = mount(<SelectController choices={DEFAULT_CHOICES} defaultText={defaultText} />);
+    const wrapper = mount(<SelectController defaultText={defaultText} />);
     const renderedText = wrapper.find('SelectedText').text();
     expect(renderedText).toBe(defaultText);
+  });
+
+  it('conditionally should render a label', () => {
+    const wrapperWithoutLabel = mount(<SelectController />);
+    expect(!wrapperWithoutLabel.find('Label').exists());
+    const labelText = 'Select Label';
+    const wrapperWithLabel = mount(<SelectController label={labelText} />);
+    expect(wrapperWithLabel.find('Label').text()).toBe(labelText);
   });
 
   it('opens a dropdown with options when clicked', () => {
@@ -66,7 +74,7 @@ describe('Select', () => {
   });
 
   it('prevents interaction when disabled', () => {
-    const wrapper = mount(<SelectController choices={DEFAULT_CHOICES} disabled />);
+    const wrapper = mount(<SelectController disabled />);
     // Dropdown should be closed by default
     expect(!wrapper.find('Options').exists());
     const selectParent = wrapper.find('StyledCustomSelect');
@@ -104,5 +112,10 @@ describe('Select', () => {
     firstOption.simulate('click');
     expect(customOnChange.mock.calls.length).toBe(1);
     expect(customOnChange.mock.calls[0][0]).toStrictEqual(DEFAULT_CHOICES[0]);
+  });
+
+  it('should update selected text given a value', () => {
+    const wrapper = mount(<SelectController value={DEFAULT_CHOICES[0].value} />);
+    expect(wrapper.find('SelectedText').text()).toBe(DEFAULT_CHOICES[0].text);
   });
 });
