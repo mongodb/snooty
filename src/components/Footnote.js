@@ -8,8 +8,8 @@ const Footnote = ({ nodeData, footnotes, nodeData: { children, id, name }, ...re
   const ref = name || id;
   const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
-    <a className="fn-backref" href={`#${footnote}`} key={footnote}>
-      {index + 1}
+    <a className="fn-backref" href={`#${footnote}`} id={`fn${footnote}`}>
+      {getNestedValue([ref, 'label'], footnotes)}
     </a>
   ));
   return (
@@ -19,9 +19,8 @@ const Footnote = ({ nodeData, footnotes, nodeData: { children, id, name }, ...re
       </colgroup>
       <tbody valign="top">
         <tr>
-          <td className="label">[{getNestedValue([ref, 'label'], footnotes)}]</td>
+          <td className="label">[{intersperse(footnoteReferenceNodes)}]</td>
           <td>
-            <em>({intersperse(footnoteReferenceNodes)})</em>{' '}
             {children.map((child, index) => (
               <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />
             ))}

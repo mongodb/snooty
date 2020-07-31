@@ -12,7 +12,7 @@ const FootnoteReference = ({ footnotes, nodeData: { id, refname } }) => {
   };
   const ref = refname || getAnonymousFootnote();
   return (
-    <a className="footnote-reference" href={`#${ref}`} id={id}>
+    <a className="footnote-reference" href={`#fn${id}`} id={id}>
       [{getNestedValue([ref, 'label'], footnotes)}]
     </a>
   );
