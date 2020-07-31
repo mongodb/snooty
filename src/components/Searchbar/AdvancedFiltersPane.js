@@ -11,13 +11,10 @@ const fadeIn = keyframes`
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
 `;
-
-const SEARCH_RESULTS_DESKTOP_HEIGHT = '368px';
 
 const StyledContentContainer = styled('div')`
   animation: ${fadeIn} 300ms ease;
@@ -25,15 +22,14 @@ const StyledContentContainer = styled('div')`
 
 const StyledAdvancedFiltersPane = styled('div')`
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.48);
-  height: ${SEARCH_RESULTS_DESKTOP_HEIGHT};
   position: relative;
-  padding: 38px ${theme.size.default} 0;
+  padding: ${theme.size.large} ${theme.size.default} 0;
 `;
 
 const StyledReturnButton = styled(Button)`
   color: ${uiColors.blue.base};
   font-family: Akzidenz;
-  font-size: 12px;
+  font-size: ${theme.fontSize.tiny};
   letter-spacing: 0.5px;
   line-height: ${theme.size.default};
   margin: 0;
@@ -56,11 +52,11 @@ const SERVER_CHOICES = [
   { text: 'MongoDB Atlas', value: 'mongodb_atlas' },
 ];
 
-const AdvancedFiltersPane = ({ closeFiltersPane }) => {
+const AdvancedFiltersPane = ({ closeFiltersPane, ...props }) => {
   const [serverFilterValue, setServerFilterValue] = useState('');
   const updateChoice = useCallback(({ value }) => setServerFilterValue(value), []);
   return (
-    <StyledAdvancedFiltersPane>
+    <StyledAdvancedFiltersPane {...props}>
       <StyledContentContainer>
         <StyledReturnButton onClick={closeFiltersPane}>
           <Icon glyph="ArrowLeft" size="small" />

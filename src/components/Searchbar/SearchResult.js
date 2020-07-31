@@ -92,7 +92,7 @@ const sanitizePreviewHtml = text =>
   });
 
 const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, preview, title, url, ...props }) => {
-  const searchTerm = useContext(SearchContext);
+  const { searchTerm } = useContext(SearchContext);
   const highlightedTitle = highlightSearchTerm(title, searchTerm);
   const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
   return (
