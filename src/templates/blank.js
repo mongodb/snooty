@@ -10,10 +10,8 @@ const Blank = ({ pageContext: { metadata, slug, __refDocMapping }, ...rest }) =>
     <div className="content">
       <div className={`main-column ${landingStyles.fullWidth}`} id="main-column">
         <div className={landingStyles.document}>
-          <div className="body">
-            <DocumentBody refDocMapping={__refDocMapping} slug={slug} metadata={metadata} {...rest} />
-            <Footer />
-          </div>
+          <DocumentBody refDocMapping={__refDocMapping} slug={slug} metadata={metadata} {...rest} />
+          <Footer />
         </div>
       </div>
     </div>

@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import queryString from 'query-string';
 import Button from '@leafygreen-ui/button';
 import { isBrowser } from '../../utils/is-browser';
-import dropdownStyles from '../../styles/version-dropdown.module.css';
+import Select from '../Select';
+import { theme } from '../../theme/docsTheme';
+
+const SELECT_WIDTH = '256px';
+
+const StyledSelect = styled(Select)`
+  margin-bottom: ${theme.size.medium};
+  max-width: ${SELECT_WIDTH};
+`;
 
 const PROPERTY_NAME_MAPPING = {
   manual: 'MongoDB Server',
@@ -35,46 +44,14 @@ const prefixVersion = version => {
   return `${isNumeric(version) ? 'Version ' : ''}${versionNumber}`;
 };
 
-const Dropdown = ({ active, disabled = false, handleClick, placeholder, title, transform, values }) => {
-  const [hidden, setHidden] = useState(true);
-  return (
-    <React.Fragment>
-      <Button
-        disabled={disabled}
-        variant="default"
-        className="dropdown-toggle"
-        title={title}
-        onClick={() => setHidden(!hidden)}
-        size="large"
-      >
-        {transform(active) || placeholder}
-        <span className={['caret', dropdownStyles.caret].join(' ')}></span>
-      </Button>
-      {!hidden && (
-        <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
-          {values.map(val => {
-            return (
-              <li key={val}>
-                <a
-                  onClick={() => {
-                    handleClick(val);
-                    setHidden(true);
-                  }}
-                >
-                  {transform(val)}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </React.Fragment>
-  );
-};
-
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
-  const [product, setProduct] = useState(null);
-  const [version, setVersion] = useState(null);
+  const [product, setProduct] = useState('');
+  const [version, setVersion] = useState('');
+  const updateProduct = useCallback(({ value }) => {
+    setProduct(value);
+    setVersion('');
+  }, []);
+  const updateVersion = useCallback(({ value }) => setVersion(value), []);
 
   useEffect(() => {
     if (isBrowser) {
@@ -103,55 +80,47 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       : `${hostName}/${product}/${version}`;
   };
 
+  const productChoices = deprecatedVersions
+    ? Object.keys(deprecatedVersions).map(product => ({
+        text: fullProductName(product),
+        value: product,
+      }))
+    : [];
+
+  const versionChoices = deprecatedVersions[product]
+    ? deprecatedVersions[product].map(version => ({
+        text: prefixVersion(version),
+        value: version,
+      }))
+    : [];
+
   return (
-    <div className="btn-group legacy-version-selector">
-      <div className="btn-group">
-        <h3>Select a Product</h3>
-        <Dropdown
-          active={product}
-          handleClick={key => {
-            setProduct(key);
-            setVersion(null);
-          }}
-          placeholder="Any Product"
-          title="Select Product"
-          transform={fullProductName}
-          values={Object.keys(deprecatedVersions)}
-        />
-      </div>
-
-      <br></br>
-
-      <div className="btn-group">
-        <h3>Select a Version</h3>
-
-        <Dropdown
-          active={version}
-          disabled={product === null}
-          handleClick={key => {
-            setVersion(key);
-          }}
-          placeholder="Any Version"
-          title="Select Version"
-          transform={prefixVersion}
-          values={deprecatedVersions[product]}
-        />
-      </div>
-
-      <br></br>
-
-      <div className="btn-group">
-        <Button
-          variant="primary"
-          title="View Documentation"
-          size="large"
-          href={generateUrl()}
-          disabled={!(product && version)}
-        >
-          View Documentation
-        </Button>
-      </div>
-    </div>
+    <>
+      <StyledSelect
+        choices={productChoices}
+        defaultText="Product"
+        label="Select a Product"
+        onChange={updateProduct}
+        value={product}
+      />
+      <StyledSelect
+        choices={versionChoices}
+        defaultText="Version"
+        disabled={product === ''}
+        label="Select a Version"
+        onChange={updateVersion}
+        value={version}
+      />
+      <Button
+        variant="primary"
+        title="View Documentation"
+        size="large"
+        href={generateUrl()}
+        disabled={!(product && version)}
+      >
+        View Documentation
+      </Button>
+    </>
   );
 };
 
