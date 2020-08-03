@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ComponentFactory as LandingComponentFactory } from './landing';
-import { ADMONITIONS } from '../constants';
 import Step from './Step';
 import Paragraph from './Paragraph';
 import List from './List';
@@ -13,7 +12,7 @@ import Section from './Section';
 import Code from './Code';
 import LiteralInclude from './LiteralInclude';
 import Tabs from './Tabs';
-import Admonition from './Admonition';
+import Admonition, { admonitionMap } from './Admonition';
 import Figure from './Figure';
 import Literal from './Literal';
 import Heading from './Heading';
@@ -50,6 +49,7 @@ import Image from './Image';
 import RefRole from './RefRole';
 import Target from './Target';
 import Glossary from './Glossary';
+import Rubric from './Rubric';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -59,130 +59,122 @@ import RoleIcon from './Roles/Icon';
 
 const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
 const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
+const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
 
-export default class ComponentFactory extends Component {
-  constructor() {
-    super();
-    this.roles = {
-      abbr: RoleAbbr,
-      class: RoleClass,
-      file: RoleFile,
-      guilabel: RoleGUILabel,
-      icon: RoleIcon,
-      'icon-fa5': RoleIcon,
-      'icon-fa5-brands': RoleIcon,
-      'icon-fa4': RoleIcon,
-      'icon-mms': RoleIcon,
-      'icon-charts': RoleIcon,
-      sub: Subscript,
-      subscript: Subscript,
-      sup: Superscript,
-      superscript: Superscript,
-    };
-    this.componentMap = {
-      admonition: Admonition,
-      blockquote: BlockQuote,
-      'card-group': CardGroup,
-      class: CSSClass,
-      code: Code,
-      cond: Cond,
-      container: Container,
-      contents: Contents,
-      cssclass: CSSClass,
-      definitionList: DefinitionList,
-      definitionListItem: DefinitionListItem,
-      deprecated: Deprecated,
-      emphasis: Emphasis,
-      figure: Figure,
-      footnote: Footnote,
-      footnote_reference: FootnoteReference,
-      glossary: Glossary,
-      heading: Heading,
-      hlist: HorizontalList,
-      image: Image,
-      include: Include,
-      line: Line,
-      line_block: LineBlock,
-      list: List,
-      listItem: ListItem,
-      'list-table': ListTable,
-      literal: Literal,
-      literal_block: LiteralBlock,
-      literalinclude: LiteralInclude,
-      meta: Meta,
-      only: Cond,
-      paragraph: Paragraph,
-      ref_role: RefRole,
-      reference: Reference,
-      section: Section,
-      step: Step,
-      strong: Strong,
-      substitution_reference: SubstitutionReference,
-      tabs: Tabs,
-      'tabs-pillstrip': TabsPillstrip,
-      target: Target,
-      text: Text,
-      title_reference: TitleReference,
-      topic: Topic,
-      transition: Transition,
-      uriwriter: URIWriter,
-      versionadded: VersionAdded,
-      versionchanged: VersionChanged,
-    };
-  }
+const roleMap = {
+  abbr: RoleAbbr,
+  class: RoleClass,
+  file: RoleFile,
+  guilabel: RoleGUILabel,
+  icon: RoleIcon,
+  'icon-fa5': RoleIcon,
+  'icon-fa5-brands': RoleIcon,
+  'icon-fa4': RoleIcon,
+  'icon-mms': RoleIcon,
+  'icon-charts': RoleIcon,
+  sub: Subscript,
+  subscript: Subscript,
+  sup: Superscript,
+  superscript: Superscript,
+};
 
-  selectComponent() {
-    const {
-      nodeData: { children, domain, name, type },
-      ...rest
-    } = this.props;
+const componentMap = {
+  admonition: Admonition,
+  blockquote: BlockQuote,
+  'card-group': CardGroup,
+  class: CSSClass,
+  code: Code,
+  cond: Cond,
+  container: Container,
+  contents: Contents,
+  cssclass: CSSClass,
+  definitionList: DefinitionList,
+  definitionListItem: DefinitionListItem,
+  deprecated: Deprecated,
+  emphasis: Emphasis,
+  figure: Figure,
+  footnote: Footnote,
+  footnote_reference: FootnoteReference,
+  glossary: Glossary,
+  heading: Heading,
+  hlist: HorizontalList,
+  image: Image,
+  include: Include,
+  line: Line,
+  line_block: LineBlock,
+  list: List,
+  listItem: ListItem,
+  'list-table': ListTable,
+  literal: Literal,
+  literal_block: LiteralBlock,
+  literalinclude: LiteralInclude,
+  meta: Meta,
+  only: Cond,
+  paragraph: Paragraph,
+  ref_role: RefRole,
+  reference: Reference,
+  rubric: Rubric,
+  section: Section,
+  step: Step,
+  strong: Strong,
+  substitution_reference: SubstitutionReference,
+  tabs: Tabs,
+  'tabs-pillstrip': TabsPillstrip,
+  target: Target,
+  text: Text,
+  title_reference: TitleReference,
+  topic: Topic,
+  transition: Transition,
+  uriwriter: URIWriter,
+  versionadded: VersionAdded,
+  versionchanged: VersionChanged,
+};
 
-    // do nothing with these nodes for now (cc. Andrew)
+const ComponentFactory = props => {
+  const { nodeData, slug } = props;
+
+  const selectComponent = () => {
+    const { domain, name, type } = nodeData;
+
     if (IGNORED_TYPES.includes(type) || IGNORED_NAMES.includes(name)) {
       return null;
     }
 
     if (domain === 'landing') {
-      return <LandingComponentFactory {...this.props} />;
-    }
-
-    if (type === 'problematic') {
-      return <ComponentFactory nodeData={children[0]} {...rest} />;
+      return <LandingComponentFactory {...props} />;
     }
 
     const lookup = type === 'directive' ? name : type;
-    let ComponentType = this.componentMap[lookup];
-    // roles are each in separate file
+    let ComponentType = componentMap[lookup];
+
     if (type === 'role') {
-      // remove namespace
-      const roleName = name.includes(':') ? name.split(':')[1] : name;
-      ComponentType = this.roles[roleName];
+      ComponentType = roleMap[name];
     }
-    // the different admonition types are all under the Admonition component
-    // see 'this.admonitions' in 'guide.js' for the list
-    if (!ComponentType && ADMONITIONS.includes(name)) {
-      ComponentType = this.componentMap.admonition;
+
+    // Various admonition types are all handled by the Admonition component
+    if (DEPRECATED_ADMONITIONS.includes(name) || Object.keys(admonitionMap).includes(name)) {
+      ComponentType = componentMap.admonition;
     }
+
     if (!ComponentType) {
-      console.warn(`${type} "${name}" not yet implemented${this.props.slug && ` on page ${this.props.slug}`}`);
+      console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);
       return null;
     }
 
-    return <ComponentType {...this.props} />;
-  }
+    return <ComponentType {...props} />;
+  };
 
-  render() {
-    const { nodeData } = this.props;
-    if (!nodeData) return null;
-    return this.selectComponent();
-  }
-}
+  if (!nodeData) return null;
+  return selectComponent();
+};
 
 ComponentFactory.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
     domain: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  slug: PropTypes.string,
 };
+
+export default ComponentFactory;
