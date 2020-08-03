@@ -7,34 +7,61 @@ const deprecatedVersions = {
   mms: ['v1.1', 'v1.2', 'v1.3'],
 };
 
-// Case 1: no product selected
+const metadata = {
+  deprecated_versions: deprecatedVersions,
+};
+
 describe('when rendered', () => {
   let wrapper;
+  let productDropdown;
+  let versionDropdown;
 
   beforeAll(() => {
-    wrapper = mount(<DeprecatedVersionSelector deprecatedVersions={deprecatedVersions} />);
+    wrapper = mount(<DeprecatedVersionSelector metadata={metadata} />);
+    productDropdown = wrapper.find('StyledCustomSelect').at(0);
+    versionDropdown = wrapper.find('StyledCustomSelect').at(1);
   });
 
-  it('shows three button group', () => {
-    expect(wrapper.find('.btn-group')).toHaveLength(3);
+  it('shows two dropdowns', () => {
+    expect(wrapper.find('Select')).toHaveLength(2);
   });
 
-  it('does not show the dropdown menu', () => {
+  it('shows a disabled submit button', () => {
+    const button = wrapper.find('Button');
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
+  });
+
+  it('shows a disabled version selector', () => {
+    expect(
+      wrapper
+        .find('Select')
+        .at(1)
+        .prop('disabled')
+    ).toBe(true);
+  });
+
+  it('does not show either dropdown menu', () => {
     expect(wrapper.find('ul')).toHaveLength(0);
   });
 
   // Test product dropdown
   describe('when the product button is clicked', () => {
     beforeAll(() => {
-      wrapper.find('.product-button').simulate('click');
+      productDropdown.simulate('click');
     });
 
     it('shows the dropdown menu', () => {
       expect(wrapper.find('ul')).toHaveLength(1);
     });
 
-    it('dropdown button text shows "Any Product"', () => {
-      expect(wrapper.find('.product-button').text()).toBe('Any Product');
+    it('product dropdown text is correct', () => {
+      expect(
+        wrapper
+          .find('SelectedText')
+          .at(0)
+          .text()
+      ).toBe('Product');
     });
 
     it('has 2 list elements', () => {
@@ -53,7 +80,7 @@ describe('when rendered', () => {
 
   describe('when the button is clicked again', () => {
     beforeAll(() => {
-      wrapper.find('Button').simulate('click');
+      productDropdown.simulate('click');
     });
 
     it('hides the dropdown menu', () => {
@@ -64,7 +91,7 @@ describe('when rendered', () => {
   // Test version dropdown
   describe('when the version button is clicked', () => {
     beforeAll(() => {
-      wrapper.find('.version-button').simulate('click');
+      versionDropdown.simulate('click');
     });
 
     // Version dropdown is disabled until a product is selected
@@ -72,38 +99,43 @@ describe('when rendered', () => {
       expect(wrapper.find('ul')).toHaveLength(0);
     });
 
-    it('dropdown button text shows "Any Version"', () => {
-      expect(wrapper.find('.version-button').text()).toBe('Any Version');
+    it('version dropdown text is correct', () => {
+      expect(
+        wrapper
+          .find('SelectedText')
+          .at(1)
+          .text()
+      ).toBe('Version');
     });
   });
-});
 
-// Case 2: Server is selected from thr product dropdown
-describe('when rendered', () => {
-  let wrapper;
-
-  beforeAll(() => {
-    wrapper = mount(<DeprecatedVersionSelector deprecatedVersions={deprecatedVersions} />);
-  });
-
-  describe('when "MongoDB Server" is selected', () => {
+  describe('when the first option is selected', () => {
     beforeAll(() => {
-      wrapper.find('.manual').simulate('click');
+      productDropdown.simulate('click');
+      wrapper
+        .find('ul')
+        .childAt(0)
+        .simulate('click');
     });
 
     it('hides the dropdown menu', () => {
       expect(wrapper.find('ul')).toHaveLength(0);
     });
 
-    it('shows "MongoDB Server" on the top button', () => {
-      expect(wrapper.find('.product-button').text()).toBe('MongoDB Server');
+    it('shows the correct text', () => {
+      expect(
+        wrapper
+          .find('SelectedText')
+          .at(0)
+          .text()
+      ).toBe('MongoDB Server');
     });
   });
 
   // Test version dropdown
   describe('when the version button is clicked', () => {
     beforeAll(() => {
-      wrapper.find('.version-button').simulate('click');
+      versionDropdown.simulate('click');
     });
 
     it('shows the version dropdown menu', () => {
@@ -115,13 +147,40 @@ describe('when rendered', () => {
     });
   });
 
-  describe('when the version button is clicked again', () => {
+  describe('when a version is selected', () => {
     beforeAll(() => {
-      wrapper.find('.version-button').simulate('click');
+      wrapper
+        .find('ul')
+        .childAt(2)
+        .simulate('click');
     });
 
     it('hides the dropdown menu', () => {
       expect(wrapper.find('ul')).toHaveLength(0);
+    });
+
+    it('enables the link button', () => {
+      const button = wrapper.find('Button').first();
+      expect(button.prop('disabled')).toBe(false);
+    });
+  });
+
+  describe('when the product is changed', () => {
+    beforeAll(() => {
+      productDropdown.simulate('click');
+      wrapper
+        .find('ul')
+        .childAt(1)
+        .simulate('click');
+    });
+
+    it('version dropdown text is reset', () => {
+      expect(
+        wrapper
+          .find('SelectedText')
+          .at(1)
+          .text()
+      ).toBe('Version');
     });
   });
 });

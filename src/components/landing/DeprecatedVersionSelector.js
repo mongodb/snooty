@@ -7,11 +7,15 @@ import { isBrowser } from '../../utils/is-browser';
 import Select from '../Select';
 import { theme } from '../../theme/docsTheme';
 
-const SELECT_WIDTH = '256px';
+const SELECT_WIDTH = '296px';
 
 const StyledSelect = styled(Select)`
   margin-bottom: ${theme.size.medium};
-  max-width: ${SELECT_WIDTH};
+  width: ${SELECT_WIDTH};
+
+  @media ${theme.screenSize.upToSmall} {
+    width: 100%;
+  }
 `;
 
 const PROPERTY_NAME_MAPPING = {
@@ -126,7 +130,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
 
 DeprecatedVersionSelector.propTypes = {
   metadata: PropTypes.object.isRequired,
-  slug: PropTypes.string.isRequired,
 };
 
 export default DeprecatedVersionSelector;
