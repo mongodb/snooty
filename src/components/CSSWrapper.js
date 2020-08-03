@@ -13,7 +13,7 @@ export default class CSSWrapper extends React.Component {
      * GitHub issue: https://github.com/yannickcr/eslint-plugin-react/issues/678
      */
     const childNode = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
-    if (childNode && childNode.classList) {
+    if (childNode && childNode.classList && className) {
       // classList.add() can only handle strings that do not contain spaces, so convert strings to an array of space-free
       // strings and iterate over this array in order to add multiple classes
       const classes = typeof className === 'string' ? className.split(' ') : className;

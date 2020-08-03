@@ -103,8 +103,6 @@ export const SECTION_NAME_MAPPING = {
   },
 };
 
-export const ADMONITIONS = ['admonition', 'example', 'important', 'note', 'seealso', 'tip', 'warning'];
-
 export const URL_SLUGS = {
   server: ['manual'],
   drivers: ['drivers', 'mongoid', 'node', 'php-library', 'ruby-driver'],
