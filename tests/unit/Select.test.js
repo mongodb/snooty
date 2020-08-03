@@ -118,4 +118,20 @@ describe('Select', () => {
     const wrapper = mount(<SelectController value={DEFAULT_CHOICES[0].value} />);
     expect(wrapper.find('SelectedText').text()).toBe(DEFAULT_CHOICES[0].text);
   });
+
+  it('should reset the form when null/empty string is passed as value', () => {
+    const defaultText = 'Reset text';
+    // Bypass SelectController so we can directly modify the value prop
+    const wrapper = mount(
+      <Select
+        defaultText={defaultText}
+        choices={DEFAULT_CHOICES}
+        onChange={() => {}}
+        value={DEFAULT_CHOICES[0].value}
+      />
+    );
+    expect(wrapper.find('SelectedText').text()).toBe(DEFAULT_CHOICES[0].text);
+    wrapper.setProps({ value: '' });
+    expect(wrapper.find('SelectedText').text()).toBe('Reset text');
+  });
 });
