@@ -43,7 +43,7 @@ const Option = styled('li')`
   white-space: nowrap;
   :focus,
   :hover {
-    background-color: rgb(250, 252, 251);
+    background-color: #f6f9f8;
   }
 `;
 
