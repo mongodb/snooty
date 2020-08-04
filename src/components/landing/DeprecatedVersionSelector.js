@@ -7,7 +7,7 @@ import { isBrowser } from '../../utils/is-browser';
 import Select from '../Select';
 import { theme } from '../../theme/docsTheme';
 
-const SELECT_WIDTH = '296px';
+const SELECT_WIDTH = '336px';
 
 const StyledSelect = styled(Select)`
   margin-bottom: ${theme.size.medium};
@@ -19,25 +19,26 @@ const StyledSelect = styled(Select)`
 `;
 
 const PROPERTY_NAME_MAPPING = {
-  manual: 'MongoDB Server',
+  'atlas-open-service-broker': 'MongoDB Atlas Open Service Broker on Kubernetes',
+  'bi-connector': 'MongoDB Connector for BI',
+  charts: 'MongoDB Charts',
   cloud: 'MongoDB Atlas',
   compass: 'MongoDB Compass',
-  charts: 'MongoDB Charts',
-  atlas_open_service_broker: 'MongoDB Atlas Open Service Broker on Kubernetes',
-  k8s_operator: 'MongoDB Enterprise Kubernetes Operator',
-  mms: 'MongoDB Ops Manager',
-  bi_connector: 'MongoDB Connector for BI',
-  spark_connector: 'MongoDB Connector for Spark',
-  kafka_connector: 'MongoDB Kafka Connector',
-  mongoid: 'Mongoid',
   drivers: 'MongoDB Drivers',
-  ruby_driver: 'Ruby MongoDB Driver',
+  'kafka-connector': 'MongoDB Kafka Connector',
+  'kubernetes-operator': 'MongoDB Enterprise Kubernetes Operator',
+  manual: 'MongoDB Server',
+  mongocli: 'MongoDB CLI',
+  mongoid: 'Mongoid',
+  mms: 'MongoDB Ops Manager',
+  'ruby-driver': 'MongoDB Ruby Driver',
+  'spark-connector': 'MongoDB Connector for Spark',
 };
 
 const fullProductName = property => {
   if (!property) return null;
   // Display full product name on product dropdown
-  return PROPERTY_NAME_MAPPING[property.replace('-', '_')] || property;
+  return PROPERTY_NAME_MAPPING[property.replace('_', '-')] || property;
 };
 
 const prefixVersion = version => {
