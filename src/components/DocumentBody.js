@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const DocumentBody = ({ addPillstrip, footnotes, pillstrips, refDocMapping, slug }) => {
+const DocumentBody = ({ addPillstrip, footnotes, metadata, pillstrips, refDocMapping, slug }) => {
   const pageNodes = getNestedValue(['ast', 'children'], refDocMapping) || [];
   return (
     <React.Fragment>
@@ -12,6 +12,7 @@ const DocumentBody = ({ addPillstrip, footnotes, pillstrips, refDocMapping, slug
           addPillstrip={addPillstrip}
           footnotes={footnotes}
           key={index}
+          metadata={metadata}
           nodeData={child}
           refDocMapping={refDocMapping}
           pillstrips={pillstrips}
