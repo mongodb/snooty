@@ -32,25 +32,30 @@ export const getSortedBranchesForProperty = (parsedManifest, property) => {
   return branches;
 };
 
+export const parseMarianManifest = manifest => {
+  // Parse the format <property name>-<branch name>, where branch name is
+  // expected to be any alphanumeric character or a '.' and property name is
+  // unrestricted
+  const [, name, branch] = manifest.match(/(.*)-([\w.]*)$/);
+  // If manifest is not captured above, fallback to capitalizing each word
+  const property =
+    PROPERTY_MAPPING[name] ||
+    name
+      .split('-')
+      .map(capitalizeString)
+      .join(' ');
+  return { branch, property };
+};
+
 // Parses a list of manifest strings from Marian
 export const parseMarianManifests = manifests => {
   const result = {};
   manifests.forEach(m => {
-    // Parse the format <property name>-<branch name>, where branch name is
-    // expected to be any alphanumeric character or a '.' and property name is
-    // unrestricted
-    const [, property, branch] = m.match(/(.*)-([\w.]*)$/);
-    // If manifest is not captured above, fallback to capitalizing each word
-    const formattedPropertyName =
-      PROPERTY_MAPPING[property] ||
-      property
-        .split('-')
-        .map(capitalizeString)
-        .join(' ');
-    if (!(formattedPropertyName in result)) {
-      result[formattedPropertyName] = {};
+    const { branch, property } = parseMarianManifest(m);
+    if (!(property in result)) {
+      result[property] = {};
     }
-    result[formattedPropertyName][branch] = m;
+    result[property][branch] = m;
   });
   // This result is malformed "Charts 19-06" and seems duplicated by 'Charts 19.06'
   delete result['Charts 19'];
