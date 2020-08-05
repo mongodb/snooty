@@ -36,6 +36,9 @@ export const getSortedBranchesForProperty = (parsedManifest, property) => {
 export const parseMarianManifests = manifests => {
   const result = {};
   manifests.forEach(m => {
+    // Parse the format <property name>-<branch name>, where branch name is
+    // expected to be any alphanumeric character or a '.' and property name is
+    // unrestricted
     const [, property, branch] = m.match(/(.*)-([\w.]*)$/);
     // If manifest is not captured above, fallback to capitalizing each word
     const formattedPropertyName =
