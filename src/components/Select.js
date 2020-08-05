@@ -43,7 +43,7 @@ const Option = styled('li')`
   white-space: nowrap;
   :focus,
   :hover {
-    background-color: rgba(231, 238, 236, 0.2);
+    background-color: #f6f9f8;
   }
 `;
 
@@ -97,7 +97,8 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
   }, [enabled, showOptions]);
   /**
    * This useEffect should only be called once the component first renders with choices,
-   * this should populate the select item with the default choice if there is one
+   * this should populate the select item with the default choice if there is one.
+   * If no choice is specified, "reset" the form.
    */
   useEffect(() => {
     if (choices.length && value) {
@@ -106,9 +107,11 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
         const currentChoice = choice[0];
         setSelectText(currentChoice.text);
       }
+    } else {
+      setSelectText(defaultText);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [choices]);
+  }, [choices, value]);
   const showOptionsOnEnter = useCallback(
     e => {
       if (e.keyCode === ENTER_KEY) {
