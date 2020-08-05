@@ -1,13 +1,27 @@
 import { compareBranchesWithVersionNumbers } from './compare-branches-with-version-numbers';
 
 const PROPERTY_MAPPING = {
-  'Bi Connector': 'BI Connector',
-  'Docs Php Library': 'PHP Driver',
-  'Docs Ruby': 'Ruby Driver',
-  Manual: 'MongoDB Manual',
-  'Mms Cloud': 'MMS Cloud',
-  'Mms Onprem': 'MMS On Prem',
-  'Mongodb Vscode': 'MongoDB VSCode',
+  atlas: 'Atlas',
+  'bi-connector': 'BI Connector',
+  charts: 'Charts',
+  compass: 'Compass',
+  'database-tools': 'Database Tools',
+  datalake: 'Datalake',
+  'docs-php-library': 'PHP Driver',
+  'docs-ruby': 'Ruby Driver',
+  drivers: 'Drivers',
+  ecosystem: 'Ecosystem',
+  guides: 'Guides',
+  'kafka-connector': 'Kafka Connector',
+  'kubernetes-operator': 'Kubernetes Operator',
+  manual: 'MongoDB Manual',
+  'mms-cloud': 'MMS Cloud',
+  'mms-onprem': 'MMS On Prem',
+  mongocli: 'MongoDB CLI',
+  'mongodb-vscode': 'MongoDB VSCode',
+  mongoid: 'mongoid',
+  realm: 'Realm',
+  'spark-connector': 'Spark Connector',
 };
 
 const capitalizeString = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -22,11 +36,14 @@ export const getSortedBranchesForProperty = (parsedManifest, property) => {
 export const parseMarianManifests = manifests => {
   const result = {};
   manifests.forEach(m => {
-    const splitManifest = m.split('-');
-    // below also destructively removes last element
-    const branch = splitManifest.pop();
-    const property = splitManifest.map(capitalizeString).join(' ');
-    const formattedPropertyName = PROPERTY_MAPPING[property] || property;
+    const [, property, branch] = m.match(/(.*)-([\w.]*)$/);
+    // If manifest is not captured above, fallback to capitalizing each word
+    const formattedPropertyName =
+      PROPERTY_MAPPING[property] ||
+      property
+        .split('-')
+        .map(capitalizeString)
+        .join(' ');
     if (!(formattedPropertyName in result)) {
       result[formattedPropertyName] = {};
     }

@@ -41,7 +41,7 @@
     "v1.5": "kubernetes-operator-v1.5",
     "v1.6": "kubernetes-operator-v1.6"
   },
-  "Mongocli": {
+  "MongoDB CLI": {
     "master": "mongocli-master",
     "v0.0.3": "mongocli-v0.0.3",
     "v0.0.4": "mongocli-v0.0.4",
@@ -52,7 +52,7 @@
     "v1.1.0": "mongocli-v1.1.0",
     "v1.2.0": "mongocli-v1.2.0"
   },
-  "Mongoid": {
+  "mongoid": {
     "5.2": "mongoid-5.2",
     "6.1": "mongoid-6.1",
     "6.2": "mongoid-6.2",
