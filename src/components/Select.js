@@ -18,6 +18,9 @@ const activeSelectStyles = css`
   /* Remove bottom border radius for seamless border transition */
   border-radius: 2px 2px 0 0;
   box-shadow: none;
+  :focus {
+    outline: none;
+  }
 `;
 
 const Label = styled('p')`
@@ -46,7 +49,8 @@ const Option = styled('li')`
   :focus,
   :hover {
     background-color: #f6f9f8;
-    outline: 0;
+    cursor: pointer;
+    outline: none;
   }
 `;
 
