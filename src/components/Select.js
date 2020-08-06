@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 import { theme } from '../theme/docsTheme';
 
 const BORDER_SIZE = '1px';
+// Dropdown should scroll after this height
+const DROPDOWN_MAX_HEIGHT = '160px';
 const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
 // This is the height of the closed select
 const OPTIONS_POSITION_OFFSET = '36px';
-const DROPDOWN_MAX_HEIGHT = '160px';
 
 const activeSelectStyles = css`
   border-bottom-color: transparent;
