@@ -6,3 +6,19 @@
     display: block !important;
 }
 
+/* Adjust scroll for anchor links to below navbar */
+:root {
+    --navbar-height: 55px;
+}
+
+h1:before,
+h2:before,
+h3:before,
+h4:before {
+  content: '';
+  display: block;
+  height: var(--navbar-height);
+  margin-top: calc(var(--navbar-height) * -1);
+  position: relative;
+  width: 0;
+}
