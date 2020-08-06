@@ -7,7 +7,7 @@ const Field = ({ nodeData: { children, label, name }, ...rest }) => (
     <th>{label || name}:</th>
     <td>
       {children.map((element, index) => (
-        <ComponentFactory {...rest} nodeData={element} key={index} parentNode="field" />
+        <ComponentFactory {...rest} nodeData={element} key={index} parentNode={index === 0 ? 'field' : undefined} />
       ))}
     </td>
   </tr>
