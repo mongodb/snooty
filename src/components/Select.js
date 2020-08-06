@@ -172,7 +172,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
         onKeyDown={showOptionsOnEnter}
         role="listbox"
         showOptions={showOptions}
-        tabIndex="0"
+        tabIndex={enabled ? '0' : null}
       >
         <SelectedOption showOptions={showOptions} role="option">
           <SelectedText>{selectText}</SelectedText>
