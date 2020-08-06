@@ -10,16 +10,13 @@ const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
 // This is the height of the closed select
 const OPTIONS_POSITION_OFFSET = '36px';
+const DROPDOWN_MAX_HEIGHT = '160px';
 
 const activeSelectStyles = css`
-  border-bottom: none;
+  border-bottom-color: transparent;
   /* Remove bottom border radius for seamless border transition */
   border-radius: 2px 2px 0 0;
   box-shadow: none;
-  /* Remove the focus outline due to bottom being cut off by expanded element */
-  :focus {
-    outline: none;
-  }
 `;
 
 const Label = styled('p')`
@@ -29,14 +26,18 @@ const Label = styled('p')`
 `;
 
 const SelectedText = styled('p')`
+  display: block;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Option = styled('li')`
   align-items: center;
   background-color: #fff;
   color: black;
-  display: flex;
+  display: block;
   overflow: hidden;
   padding: 10px ${theme.size.default};
   text-overflow: ellipsis;
@@ -44,6 +45,7 @@ const Option = styled('li')`
   :focus,
   :hover {
     background-color: #f6f9f8;
+    outline: 0;
   }
 `;
 
@@ -52,6 +54,8 @@ const Options = styled('ul')`
   border-radius: 0 0 2px 2px;
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(233, 233, 233, 0.3);
   left: -${BORDER_SIZE};
+  max-height: ${DROPDOWN_MAX_HEIGHT};
+  overflow-y: auto;
   padding: 0;
   position: absolute;
   margin: 0;
@@ -81,7 +85,6 @@ const StyledCustomSelect = styled('div')`
 
 const SelectedOption = styled('div')`
   align-items: center;
-  background-color: #fff;
   display: flex;
   justify-content: space-between;
   padding: 10px ${theme.size.default};
