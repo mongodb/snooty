@@ -14,7 +14,7 @@
   },
   "Compass": { "beta": "compass-beta", "master": "compass-master" },
   "Database Tools": { "master": "database-tools-master" },
-  "Datalake": { "master": "datalake-master", "test": "datalake-test" },
+  "Atlas Datalake": { "master": "datalake-master", "test": "datalake-test" },
   "Drivers": { "master": "drivers-master" },
   "Ecosystem": { "master": "ecosystem-master" },
   "Guides": { "master": "guides-master" },
@@ -129,8 +129,8 @@
     "v3.6": "manual-v3.6",
     "v4.0": "manual-v4.0"
   },
-  "MMS Cloud": { "master": "mms-cloud-master" },
-  "MMS On Prem": {
+  "Cloud Manager": { "master": "mms-cloud-master" },
+  "Ops Manager": {
     "current": "mms-onprem-current",
     "master": "mms-onprem-master",
     "v1.1": "mms-onprem-v1.1",
@@ -147,5 +147,5 @@
     "v4.1": "mms-onprem-v4.1",
     "v4.3": "mms-onprem-v4.3"
   },
-  "MongoDB VSCode": { "master": "mongodb-vscode-master" }
+  "MongoDB for VSCode": { "master": "mongodb-vscode-master" }
 }
