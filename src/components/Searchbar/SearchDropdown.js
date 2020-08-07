@@ -13,6 +13,26 @@ const RESULTS_PER_PAGE = 3;
 const SEARCH_FOOTER_DESKTOP_HEIGHT = theme.size.xlarge;
 const SEARCH_RESULTS_DESKTOP_HEIGHT = '368px';
 
+const baseFooterButtonStyle = css`
+  font-family: Akzidenz;
+  font-size: ${theme.fontSize.small};
+  letter-spacing: 0.5px;
+  line-height: ${theme.size.default};
+  margin: 0;
+  padding: ${theme.size.tiny};
+  /* Below removes default hover effects from button */
+  background: none;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  :before {
+    display: none;
+  }
+  :after {
+    display: none;
+  }
+`;
+
 const animationKeyframe = startingOpacity => keyframes`
     0% {
       opacity: ${startingOpacity};
@@ -72,24 +92,17 @@ const SearchFooter = styled('div')`
 
 const FilterFooterButton = styled(Button)`
   color: ${uiColors.blue.base};
-  font-family: Akzidenz;
   font-weight: bolder;
-  font-size: ${theme.fontSize.small};
-  letter-spacing: 0.5px;
-  line-height: ${theme.size.default};
-  margin: 0;
-  padding: ${theme.size.tiny};
-  /* Below removes default hover effects from button */
-  background: none;
-  background-image: none;
-  border: none;
-  box-shadow: none;
-  :before {
-    display: none;
+  ${baseFooterButtonStyle};
+`;
+
+const FilterResetButton = styled(Button)`
+  color: ${uiColors.gray.base};
+  :hover,
+  :active {
+    color: ${uiColors.blue.base};
   }
-  :after {
-    display: none;
-  }
+  ${baseFooterButtonStyle};
 `;
 
 const SearchDropdown = ({ results = [] }) => {
@@ -114,6 +127,7 @@ const SearchDropdown = ({ results = [] }) => {
     <SearchResultsContainer>
       <FixedHeightFiltersPane closeFiltersPane={closeFiltersPane} />
       <SearchFooter>
+        <FilterResetButton>Reset</FilterResetButton>
         <FilterFooterButton onClick={closeFiltersPane}>Apply Search Criteria</FilterFooterButton>
       </SearchFooter>
     </SearchResultsContainer>
@@ -121,8 +135,8 @@ const SearchDropdown = ({ results = [] }) => {
     <SearchResultsContainer>
       <FixedHeightSearchResults totalResultsCount={results.length} visibleResults={visibleResults} />
       <SearchFooter>
-        <FilterFooterButton onClick={openFiltersPane}>Advanced Filters</FilterFooterButton>
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
+        <FilterFooterButton onClick={openFiltersPane}>Advanced Filters</FilterFooterButton>
       </SearchFooter>
     </SearchResultsContainer>
   );
