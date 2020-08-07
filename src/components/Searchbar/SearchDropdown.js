@@ -31,6 +31,8 @@ const fadeInAnimation = (startingOpacity, seconds) => css`
 
 const FixedHeightFiltersPane = styled(AdvancedFiltersPane)`
   height: ${SEARCH_RESULTS_DESKTOP_HEIGHT};
+  padding-left: ${theme.size.medium};
+  padding-right: ${theme.size.medium};
 `;
 
 const FixedHeightSearchResults = styled(SearchResults)`

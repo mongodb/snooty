@@ -76,8 +76,8 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
 
   // Update state on a new search query
   const fetchNewSearchResults = useCallback(
-    async (searchTerm, filters) => {
-      const result = await fetch(searchParamsToURL(searchTerm, filters));
+    async searchTerm => {
+      const result = await fetch(searchParamsToURL(searchTerm, null));
       const resultJson = await result.json();
       setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
     },

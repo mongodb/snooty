@@ -5,6 +5,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import SearchFilters from './SearchFilters';
 
 const fadeIn = keyframes`
   from {
@@ -32,7 +33,7 @@ const StyledReturnButton = styled(Button)`
   letter-spacing: 0.5px;
   line-height: ${theme.size.default};
   margin: 0;
-  padding: ${theme.size.tiny};
+  padding: 0;
   /* Below removes default hover effects from button */
   background: none;
   background-image: none;
@@ -46,13 +47,18 @@ const StyledReturnButton = styled(Button)`
   }
 `;
 
+const StyledSearchFilters = styled(SearchFilters)`
+  margin-top: ${theme.size.default};
+`;
+
 const AdvancedFiltersPane = ({ closeFiltersPane, ...props }) => (
   <StyledAdvancedFiltersPane {...props}>
     <StyledContentContainer>
       <StyledReturnButton onClick={closeFiltersPane}>
         <Icon glyph="ArrowLeft" size="small" />
-        &nbsp;Cancel
+        &nbsp;Back to results
       </StyledReturnButton>
+      <StyledSearchFilters hasSideLabels />
     </StyledContentContainer>
   </StyledAdvancedFiltersPane>
 );
