@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -105,14 +105,24 @@ const FilterResetButton = styled(Button)`
   ${baseFooterButtonStyle};
 `;
 
-const SearchDropdown = ({ results = [] }) => {
+const SearchDropdown = ({ results = [], searchFilter, setSearchFilter }) => {
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   const [visibleResults, setVisibleResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [localSearchFilter, setLocalSearchFilter] = useState(searchFilter);
+  const filterText = useMemo(() => (localSearchFilter ? ' (2)' : ''), [localSearchFilter]);
   const { isMobile } = useScreenSize();
   const totalPages = results ? Math.ceil(results.length / RESULTS_PER_PAGE) : 0;
   const closeFiltersPane = useCallback(() => setShowAdvancedFilters(false), []);
   const openFiltersPane = useCallback(() => setShowAdvancedFilters(true), []);
+  const onReset = useCallback(() => {
+    setSearchFilter(null);
+    setLocalSearchFilter(null);
+  }, [setSearchFilter]);
+  const onApplyFilters = useCallback(() => {
+    setSearchFilter(localSearchFilter);
+    closeFiltersPane();
+  }, [closeFiltersPane, localSearchFilter, setSearchFilter]);
   useEffect(() => {
     if (isMobile) {
       // If mobile, we give an overflow view, so no pagination is needed
@@ -125,10 +135,14 @@ const SearchDropdown = ({ results = [] }) => {
   }, [currentPage, isMobile, results]);
   return showAdvancedFilters ? (
     <SearchResultsContainer>
-      <FixedHeightFiltersPane closeFiltersPane={closeFiltersPane} />
+      <FixedHeightFiltersPane
+        localSearchFilter={localSearchFilter}
+        setLocalSearchFilter={setLocalSearchFilter}
+        closeFiltersPane={closeFiltersPane}
+      />
       <SearchFooter>
-        <FilterResetButton>Reset</FilterResetButton>
-        <FilterFooterButton onClick={closeFiltersPane}>Apply Search Criteria</FilterFooterButton>
+        <FilterResetButton onClick={onReset}>Reset</FilterResetButton>
+        <FilterFooterButton onClick={onApplyFilters}>Apply Search Criteria{filterText}</FilterFooterButton>
       </SearchFooter>
     </SearchResultsContainer>
   ) : (
@@ -136,7 +150,7 @@ const SearchDropdown = ({ results = [] }) => {
       <FixedHeightSearchResults totalResultsCount={results.length} visibleResults={visibleResults} />
       <SearchFooter>
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
-        <FilterFooterButton onClick={openFiltersPane}>Advanced Filters</FilterFooterButton>
+        <FilterFooterButton onClick={openFiltersPane}>Advanced Filters{filterText}</FilterFooterButton>
       </SearchFooter>
     </SearchResultsContainer>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
@@ -27,7 +27,7 @@ const MaxWidthSelect = styled(Select)`
   width: ${FILTER_WIDTH};
 `;
 
-const SearchFilters = ({ hasSideLabels, ...props }) => {
+const SearchFilters = ({ hasSideLabels, searchFilter, setSearchFilter, ...props }) => {
   const { filters } = useMarianManifests();
   const [productChoices, setProductChoices] = useState([]);
   const [product, setProduct] = useState(null);
@@ -35,6 +35,31 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
   const [branch, setBranch] = useState(null);
 
   // TODO: On mount, update filters with current values
+  useEffect(() => {
+    if (filters && searchFilter) {
+      const { branch, property } = parseMarianManifest(searchFilter);
+      setProduct(property);
+      updateBranchChoices(property);
+      setBranch(branch);
+    } else {
+      setProduct(null);
+      setBranch(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters, searchFilter]);
+
+  const updateBranchChoices = useCallback(
+    (product, setDefaultBranch = false) => {
+      if (filters && filters[product]) {
+        const branches = getSortedBranchesForProperty(filters, product);
+        if (setDefaultBranch) {
+          setBranch(branches[0]);
+        }
+        setBranchChoices(branches.map(b => ({ text: b, value: b })));
+      }
+    },
+    [filters]
+  );
 
   // Update property choices when the filter results from Marian are loaded
   useEffect(() => {
@@ -44,15 +69,13 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
   }, [filters]);
 
   // Update branch choices when a property is chosen
-  useEffect(() => {
-    if (filters && filters[product]) {
-      const branches = getSortedBranchesForProperty(filters, product);
-      setBranch(branches[0]);
-      setBranchChoices(branches.map(b => ({ text: b, value: b })));
-    }
-  }, [filters, product]);
 
   // TODO: Update parent when choices are made
+  useEffect(() => {
+    if (filters && product && filters[product] && branch) {
+      setSearchFilter(filters[product][branch]);
+    }
+  }, [branch, filters, product, setSearchFilter]);
 
   return (
     <div {...props}>
@@ -60,7 +83,10 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
         {hasSideLabels && <SideLabelText>Product</SideLabelText>}
         <MaxWidthSelect
           choices={productChoices}
-          onChange={({ value }) => setProduct(value)}
+          onChange={({ value }) => {
+            setProduct(value);
+            updateBranchChoices(value, true);
+          }}
           defaultText="Select a Product"
           value={product}
         />

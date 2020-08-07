@@ -51,14 +51,14 @@ const StyledSearchFilters = styled(SearchFilters)`
   margin-top: ${theme.size.default};
 `;
 
-const AdvancedFiltersPane = ({ closeFiltersPane, ...props }) => (
+const AdvancedFiltersPane = ({ closeFiltersPane, localSearchFilter, setLocalSearchFilter, ...props }) => (
   <StyledAdvancedFiltersPane {...props}>
     <StyledContentContainer>
       <StyledReturnButton onClick={closeFiltersPane}>
         <Icon glyph="ArrowLeft" size="small" />
         &nbsp;Back to results
       </StyledReturnButton>
-      <StyledSearchFilters hasSideLabels />
+      <StyledSearchFilters searchFilter={localSearchFilter} setSearchFilter={setLocalSearchFilter} hasSideLabels />
     </StyledContentContainer>
   </StyledAdvancedFiltersPane>
 );
