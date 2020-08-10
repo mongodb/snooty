@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -8,6 +8,7 @@ import { theme } from '../../theme/docsTheme';
 import AdvancedFiltersPane from './AdvancedFiltersPane';
 import Pagination from './Pagination';
 import SearchResults from './SearchResults';
+import SearchContext from './SearchContext';
 
 const RESULTS_PER_PAGE = 3;
 const SEARCH_FOOTER_DESKTOP_HEIGHT = theme.size.xlarge;
@@ -105,10 +106,11 @@ const FilterResetButton = styled(Button)`
   ${baseFooterButtonStyle};
 `;
 
-const SearchDropdown = ({ results = [], applySearchFilter, searchFilter, setSearchFilter }) => {
+const SearchDropdown = ({ results = [], applySearchFilter }) => {
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   const [visibleResults, setVisibleResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { searchFilter, setSearchFilter } = useContext(SearchContext);
   const filterText = useMemo(() => (searchFilter ? ' (2)' : ''), [searchFilter]);
   const { isMobile } = useScreenSize();
   const totalPages = results ? Math.ceil(results.length / RESULTS_PER_PAGE) : 0;
@@ -133,11 +135,7 @@ const SearchDropdown = ({ results = [], applySearchFilter, searchFilter, setSear
   }, [currentPage, isMobile, results]);
   return showAdvancedFilters ? (
     <SearchResultsContainer>
-      <FixedHeightFiltersPane
-        searchFilter={searchFilter}
-        setSearchFilter={setSearchFilter}
-        closeFiltersPane={closeFiltersPane}
-      />
+      <FixedHeightFiltersPane closeFiltersPane={closeFiltersPane} />
       <SearchFooter>
         <FilterResetButton onClick={onReset}>Reset</FilterResetButton>
         <FilterFooterButton onClick={onApplyFilters}>Apply Search Criteria{filterText}</FilterFooterButton>

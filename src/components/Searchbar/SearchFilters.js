@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
 import { getSortedBranchesForProperty, parseMarianManifest } from '../../utils/parse-marian-manifests';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import SearchContext from './SearchContext';
 
 const FILTER_WIDTH = '175px';
 
@@ -27,8 +28,9 @@ const MaxWidthSelect = styled(Select)`
   width: ${FILTER_WIDTH};
 `;
 
-const SearchFilters = ({ hasSideLabels, searchFilter, setSearchFilter, ...props }) => {
+const SearchFilters = ({ hasSideLabels, ...props }) => {
   const { filters } = useMarianManifests();
+  const { searchFilter, setSearchFilter } = useContext(SearchContext);
   const [productChoices, setProductChoices] = useState([]);
   const [product, setProduct] = useState(null);
   const [branchChoices, setBranchChoices] = useState([]);
