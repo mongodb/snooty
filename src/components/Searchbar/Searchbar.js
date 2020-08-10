@@ -62,6 +62,8 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   const searchContainerRef = useRef(null);
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
+  // Callback to "promote" an in-progress search filter to kick off a search
+  const onApplyFilters = useCallback(() => setSearchFilter(draftSearchFilter), [draftSearchFilter]);
 
   // Focus Handlers
   const onExpand = useCallback(() => setIsExpanded(true), [setIsExpanded]);
@@ -76,36 +78,31 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(searchContainerRef, onBlur);
   const onClose = useCallback(() => setIsExpanded(false), [setIsExpanded]);
-  const onApplyFilters = useCallback(() => setSearchFilter(draftSearchFilter), [draftSearchFilter]);
 
-  // Update state on a new search query
-  const fetchNewSearchResults = useCallback(
-    async searchTerm => {
-      const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
-      const resultJson = await result.json();
-      setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
-    },
-    [getResultsFromJSON, searchFilter, searchParamsToURL]
-  );
   const onSearchChange = useCallback(
     searchTerm => {
       setIsFocused(true);
-      setValue(searchTerm);
       // Debounce any queued search event since the query has changed
       clearTimeout(searchEvent);
-      if (searchTerm) {
-        // Set a timeout to trigger the search to avoid over-requesting
-        setSearchEvent(setTimeout(async () => fetchNewSearchResults(searchTerm), SEARCH_DELAY_TIME));
-      }
+      setValue(searchTerm);
+      // The below useEffect will then run to query a new search since `value` was updated
     },
-    [fetchNewSearchResults, searchEvent]
+    [searchEvent]
   );
 
-  // TODO: Add hook to update filter based on choice
+  // Update state on a new search query or filters
+  const fetchNewSearchResults = useCallback(async () => {
+    const result = await fetch(searchParamsToURL(value, searchFilter));
+    const resultJson = await result.json();
+    setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
+  }, [getResultsFromJSON, searchFilter, searchParamsToURL, value]);
+
   useEffect(() => {
-    fetchNewSearchResults(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchFilter]);
+    if (value) {
+      // Set a timeout to trigger the search to avoid over-requesting
+      setSearchEvent(setTimeout(fetchNewSearchResults, SEARCH_DELAY_TIME));
+    }
+  }, [fetchNewSearchResults, value]);
 
   return (
     <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={searchContainerRef}>
