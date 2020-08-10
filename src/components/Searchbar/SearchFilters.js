@@ -83,7 +83,7 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
     setProductChoices(properties.map(p => ({ text: p, value: p })));
   }, [filters]);
 
-  // Update branch choices when a property is chosen
+  // Update search filter once a property and branch are chosen
   useEffect(() => {
     if (filters && product && filters[product] && branch) {
       setSearchFilter(filters[product][branch]);
