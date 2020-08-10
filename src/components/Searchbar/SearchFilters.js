@@ -79,7 +79,7 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
   // Update property choices when the filter results from Marian are loaded
   useEffect(() => {
     const properties = Object.keys(filters);
-    properties.sort();
+    properties.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
     setProductChoices(properties.map(p => ({ text: p, value: p })));
   }, [filters]);
 
