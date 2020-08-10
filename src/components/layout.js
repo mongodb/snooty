@@ -142,7 +142,6 @@ export default class DefaultLayout extends Component {
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
     return (
       <>
-        // Adjust anchor link styling so titles aren't covered by navbar
         <Global
           styles={css`
             :root {
