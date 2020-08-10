@@ -145,7 +145,7 @@ export default class DefaultLayout extends Component {
         <Global
           styles={css`
             :root {
-              --navbar-height: 55px;
+              --navbar-height: 45px;
             }
             h1:before,
             h2:before,
@@ -153,8 +153,8 @@ export default class DefaultLayout extends Component {
             h4:before {
               content: '';
               display: block;
-              height: var(--navbar-height);
-              margin-top: calc(var(--navbar-height) * -1);
+              height: calc(var(--navbar-height) + 10px;
+              margin-top: calc((var(--navbar-height) + 10px) * -1);
               position: relative;
               width: 0;
             }
