@@ -54,6 +54,8 @@ const SearchbarContainer = styled('div')`
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
   const [value, setValue] = useState(false);
   const [searchFilter, setSearchFilter] = useState(null);
+  // Use a second search filter state var to track filters but not make any calls yet
+  const [draftSearchFilter, setDraftSearchFilter] = useState(null);
   const [searchEvent, setSearchEvent] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
@@ -74,6 +76,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(searchContainerRef, onBlur);
   const onClose = useCallback(() => setIsExpanded(false), [setIsExpanded]);
+  const onApplyFilters = useCallback(() => setSearchFilter(draftSearchFilter), [draftSearchFilter]);
 
   // Update state on a new search query
   const fetchNewSearchResults = useCallback(
@@ -110,7 +113,12 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
         <SearchContext.Provider value={{ searchTerm: value, shouldAutofocus }}>
           <ExpandedSearchbar onMobileClose={onClose} onChange={onSearchChange} value={value} />
           {isSearching && (
-            <SearchDropdown searchFilter={searchFilter} setSearchFilter={setSearchFilter} results={searchResults} />
+            <SearchDropdown
+              searchFilter={draftSearchFilter}
+              setSearchFilter={setDraftSearchFilter}
+              applySearchFilter={onApplyFilters}
+              results={searchResults}
+            />
           )}
         </SearchContext.Provider>
       ) : (
