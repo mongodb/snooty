@@ -119,14 +119,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
           }}
         >
           <ExpandedSearchbar onMobileClose={onClose} onChange={onSearchChange} value={value} />
-          {isSearching && (
-            <SearchDropdown
-              searchFilter={draftSearchFilter}
-              setSearchFilter={setDraftSearchFilter}
-              applySearchFilter={onApplyFilters}
-              results={searchResults}
-            />
-          )}
+          {isSearching && <SearchDropdown applySearchFilter={onApplyFilters} results={searchResults} />}
         </SearchContext.Provider>
       ) : (
         <CondensedSearchbar onExpand={onExpand} />
