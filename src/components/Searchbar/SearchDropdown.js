@@ -111,6 +111,7 @@ const SearchDropdown = ({ results = [], applySearchFilter }) => {
   const [visibleResults, setVisibleResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { searchFilter, setSearchFilter } = useContext(SearchContext);
+  // Number of filters is always 2, since branch is inferred when a product is picked
   const filterText = useMemo(() => (searchFilter ? ' (2)' : ''), [searchFilter]);
   const { isMobile } = useScreenSize();
   const totalPages = results ? Math.ceil(results.length / RESULTS_PER_PAGE) : 0;
@@ -118,7 +119,8 @@ const SearchDropdown = ({ results = [], applySearchFilter }) => {
   const openFiltersPane = useCallback(() => setShowAdvancedFilters(true), []);
   const onReset = useCallback(() => {
     setSearchFilter(null);
-  }, [setSearchFilter]);
+    applySearchFilter();
+  }, [applySearchFilter, setSearchFilter]);
   const onApplyFilters = useCallback(() => {
     applySearchFilter();
     closeFiltersPane();

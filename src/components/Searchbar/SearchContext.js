@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-// Simple context to pass search results to children
+// Simple context to pass search results and filters to children
 const SearchContext = createContext({
   searchFilter: null,
   searchTerm: '',
