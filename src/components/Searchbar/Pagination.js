@@ -5,12 +5,14 @@ import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
-const BUTTON_WIDTH = theme.size.default;
+// 16px for the icon + 2px padding on each side for hover circle
+const BUTTON_WIDTH = '20px';
 const ENABLED_COLOR = uiColors.gray.dark2;
 const DISABLED_COLOR = uiColors.gray.light1;
 
 const PaginationButton = styled(IconButton)`
   background-color: #fff;
+  height: ${BUTTON_WIDTH};
   padding: 0;
   width: ${BUTTON_WIDTH};
   z-index: 1;
