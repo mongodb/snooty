@@ -85,7 +85,7 @@ const SearchResultsContainer = styled('div')`
 
 const SearchFooter = styled('div')`
   align-items: center;
-  box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.64);
+  box-shadow: 0 2px ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
   display: flex;
   height: ${SEARCH_FOOTER_DESKTOP_HEIGHT};
   justify-content: space-between;
