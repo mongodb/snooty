@@ -70,8 +70,15 @@ const SearchResults = ({ totalResultsCount, visibleResults, ...props }) => {
         <strong>Most Relevant Results ({totalResultsCount})</strong>
       </StyledResultText>
       {hasResults ? (
-        visibleResults.map(({ title, preview, url }) => (
-          <StyledSearchResult key={url} learnMoreLink={isMobile} title={title} preview={preview} url={url} />
+        visibleResults.map(({ title, preview, url }, index) => (
+          <StyledSearchResult
+            // Have to use index because multiple results can show with same url
+            key={`${url}${index}`}
+            learnMoreLink={isMobile}
+            title={title}
+            preview={preview}
+            url={url}
+          />
         ))
       ) : (
         <StyledResultText>There are no search results</StyledResultText>
