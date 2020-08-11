@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -40,6 +41,20 @@ const SearchResultsContainer = styled('div')`
   }
 `;
 
+const visibleBackground = css`
+  background-color: #fff;
+  border: 1px solid rgba(184, 196, 194, 0.2);
+  border-radius: ${theme.size.tiny};
+  box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
+  height: calc(100% - ${theme.size.default});
+  /* place-self adds both align-self and justify-self for flexbox */
+  place-self: center;
+  width: calc(100% - ${theme.size.large});
+  > div {
+    padding: ${theme.size.default};
+  }
+`;
+
 const StyledSearchResult = styled(SearchResult)`
   max-height: 100%;
   height: 100%;
@@ -47,31 +62,29 @@ const StyledSearchResult = styled(SearchResult)`
     padding: ${theme.size.default} ${theme.size.medium};
   }
   @media ${theme.screenSize.upToSmall} {
-    background-color: #fff;
-    border: 1px solid rgba(184, 196, 194, 0.2);
-    border-radius: ${theme.size.tiny};
-    box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
-    height: calc(100% - ${theme.size.default});
-    /* place-self adds both align-self and justify-self for flexbox */
-    place-self: center;
-    width: calc(100% - ${theme.size.large});
-    > div {
-      padding: ${theme.size.default};
-    }
+    ${visibleBackground};
   }
 `;
 
-const SearchResults = ({ totalResultsCount, visibleResults, ...props }) => {
+const SearchResults = ({ hideTotalCount = false, totalResultsCount, visibleResults, ...props }) => {
   const hasResults = useMemo(() => !!totalResultsCount, [totalResultsCount]);
   const { isMobile } = useScreenSize();
   return (
     <SearchResultsContainer hasResults={hasResults} {...props}>
-      <StyledResultText>
-        <strong>Most Relevant Results ({totalResultsCount})</strong>
-      </StyledResultText>
+      {hideTotalCount ? null : (
+        <StyledResultText>
+          <strong>Most Relevant Results ({totalResultsCount})</strong>
+        </StyledResultText>
+      )}
       {hasResults ? (
-        visibleResults.map(({ title, preview, url }) => (
-          <StyledSearchResult key={url} learnMoreLink={isMobile} title={title} preview={preview} url={url} />
+        visibleResults.map(({ title, preview, url }, index) => (
+          <StyledSearchResult
+            key={`${url}${index}`}
+            learnMoreLink={isMobile}
+            title={title}
+            preview={preview}
+            url={url}
+          />
         ))
       ) : (
         <StyledResultText>There are no search results</StyledResultText>
@@ -80,4 +93,5 @@ const SearchResults = ({ totalResultsCount, visibleResults, ...props }) => {
   );
 };
 
+export { StyledSearchResult };
 export default SearchResults;
