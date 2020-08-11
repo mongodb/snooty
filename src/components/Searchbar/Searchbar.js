@@ -7,6 +7,7 @@ import SearchContext from './SearchContext';
 import { activeTextBarStyling, StyledTextInput } from './SearchTextInput';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
@@ -77,6 +78,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   // Update state on a new search query
   const fetchNewSearchResults = useCallback(
     async searchTerm => {
+      reportAnalytics('SearchQuery', { query: searchTerm });
       const result = await fetch(searchParamsToURL(searchTerm, null));
       const resultJson = await result.json();
       setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
