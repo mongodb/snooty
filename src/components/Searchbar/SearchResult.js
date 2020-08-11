@@ -91,12 +91,12 @@ const sanitizePreviewHtml = text =>
     allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
   });
 
-const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, preview, title, url, ...props }) => {
+const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, onClick, preview, title, url, ...props }) => {
   const { searchTerm } = useContext(SearchContext);
   const highlightedTitle = highlightSearchTerm(title, searchTerm);
   const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
   return (
-    <SearchResultLink href={url} {...props}>
+    <SearchResultLink href={url} onClick={onClick} {...props}>
       <SearchResultContainer>
         <StyledResultTitle
           dangerouslySetInnerHTML={{
