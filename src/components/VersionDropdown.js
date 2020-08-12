@@ -23,7 +23,7 @@ const VersionDropdown = ({
   slug,
 }) => {
   const siteMetadata = useSiteMetadata();
-  const { parserBranch } = siteMetadata;
+  const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
   const [hidden, setHidden] = useState(true);
 
   const prefixVersion = version => {
@@ -79,6 +79,23 @@ const VersionDropdown = ({
     return null;
   }
 
+  const generatePrefix = version => {
+    // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
+    const isManualProduction = project === 'manual' && snootyEnv === 'production';
+    if (isManualProduction) {
+      return `/${version}`;
+    }
+
+    // For production builds, append version after project name
+    if (pathPrefix) {
+      const [project] = pathPrefix.split('/');
+      return `/${project}/${version}`;
+    }
+
+    // For staging, replace current version in dynamically generated path prefix
+    return generatePathPrefix({ ...siteMetadata, parserBranch: version });
+  };
+
   return (
     <div ref={wrapperRef} className="btn-group version-sidebar">
       <Button
@@ -86,7 +103,7 @@ const VersionDropdown = ({
         className={['version-button', 'dropdown-toggle', dropdownStyles.button].join(' ')}
         title="Select version"
         onClick={() => setHidden(!hidden)}
-        size="medium"
+        size="large"
       >
         {prefixVersion(currentBranch)}
         <span className={['caret', dropdownStyles.caret].join(' ')}></span>
@@ -94,7 +111,7 @@ const VersionDropdown = ({
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
           {active.map(version => {
-            const url = normalizePath(`${generatePathPrefix({ ...siteMetadata, parserBranch: version })}/${slug}`);
+            const url = normalizePath(`${generatePrefix(version)}/${slug}`);
             return (
               <li className={currentBranch === version ? 'active' : ''} key={version}>
                 <a className="version-selector" href={url}>

@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import Card from './Card';
 import CardGroup from './CardGroup';
 import CTA from './CTA';
+import DeprecatedVersionSelector from './DeprecatedVersionSelector';
 import Introduction from './Introduction';
 
 const componentMap = {
   card: Card,
   'card-group': CardGroup,
   cta: CTA,
+  'deprecated-version-selector': DeprecatedVersionSelector,
   introduction: Introduction,
 };
 
@@ -22,7 +24,7 @@ const ComponentFactory = props => {
     let ComponentType = componentMap[lookup];
 
     if (!ComponentType) {
-      console.warn(`${lookup} not yet implemented`);
+      console.warn(`${type} "${name}" not yet implemented${props.slug && ` on page ${props.slug}`}`);
       return null;
     }
 
