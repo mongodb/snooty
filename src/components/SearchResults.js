@@ -1,75 +1,107 @@
 import React, { useEffect, useState } from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import SearchResult from './Searchbar/SearchResult';
-import { searchParamsToURL } from '../utils/search-params-to-url';
-import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
-import { parseMarianManifest } from '../utils/parse-marian-manifests';
-import { theme } from '../theme/docsTheme';
-import SearchContext from './Searchbar/SearchContext';
-import SearchFilters from './Searchbar/SearchFilters';
+import { uiColors } from '@leafygreen-ui/palette';
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
+import { theme } from '../theme/docsTheme';
+import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
+import { parseMarianManifest } from '../utils/parse-marian-manifests';
+import { searchParamsToURL } from '../utils/search-params-to-url';
+import SearchContext from './Searchbar/SearchContext';
+import SearchFilters from './Searchbar/SearchFilters';
+import SearchResult from './Searchbar/SearchResult';
 
+const DESKTOP_COLUMN_GAP = '46px';
+const FILTER_BY_TEXT_WIDTH = '62px';
+const FILTER_COLUMN_WIDTH = '173px';
+const MAX_MOBILE_WIDTH = '616px';
 const SEARCH_RESULT_HEIGHT = '128px';
 
-const HeaderText = styled('p')`
-  font-weight: bolder;
+const commonTextStyling = css`
   font-family: Akzidenz;
-  font-size: 18px;
-  letter-spacing: 0.8px;
-  line-height: 21px;
-`;
-
-const FilterHeader = styled('p')`
-  text-transform: uppercase;
-  color: #3d4f58;
-  font-family: Akzidenz;
-  font-size: 12px;
   font-weight: bolder;
   letter-spacing: 0.5px;
-  line-height: 15px;
-  white-space: nowrap;
-  margin-bottom: 0;
+  margin: 0;
 `;
 
-const FilterPane = styled('div')`
-  display: flex;
-  flex-direction: column;
-  @media ${theme.screenSize.upToLarge} {
-    flex-direction: row;
-    align-items: center;
+const EmptyStateText = styled('p')`
+  font-size: ${theme.fontSize.small};
+  ${commonTextStyling};
+  font-weight: normal;
+  grid-area: results;
+`;
+
+const HeaderText = styled('h1')`
+  font-size: 18px;
+  line-height: 21px;
+  grid-area: header;
+  ${commonTextStyling};
+  letter-spacing: 0.8px;
+`;
+
+const FilterHeader = styled('h2')`
+  align-self: center;
+  color: ${uiColors.gray.dark2};
+  font-size: ${theme.fontSize.tiny};
+  grid-area: filter-header;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  ${commonTextStyling};
+  @media ${theme.screenSize.upToSmall} {
+    display: none;
   }
 `;
 
 const SearchResultsContainer = styled('div')`
+  column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
-  grid-template-columns: auto 173px;
-  column-gap: 46px;
+  grid-template-areas: 'header filter-header' 'results filters';
+  grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+  row-gap: ${theme.size.large};
   width: 100%;
   @media ${theme.screenSize.upToLarge} {
-    grid-template-columns: unset;
-    display: flex;
-    flex-direction: column-reverse;
+    align-items: center;
+    column-gap: ${theme.size.default};
+    grid-template-areas: 'header header' 'filter-header filters' 'results results';
+    /* For the middle breakpoint, we want a column for width on specifically this text */
+    grid-template-columns: ${FILTER_BY_TEXT_WIDTH} auto;
+    margin: 0 auto;
+    max-width: ${MAX_MOBILE_WIDTH};
+    padding-left: ${theme.size.default};
+    padding-right: ${theme.size.default};
+  }
+  @media ${theme.screenSize.upToSmall} {
+    grid-template-areas: 'header' 'filters' 'results';
+    grid-template-columns: auto;
   }
 `;
 
-const StyledSearchResults = styled('div')`
-  box-shadow: none;
-  display: grid;
-  grid-template-rows: ${SEARCH_RESULT_HEIGHT};
-  height: 100%;
-  row-gap: 16px;
-  width: 100%;
-`;
-
 const StyledSearchFilters = styled(SearchFilters)`
+  grid-area: filters;
   @media ${theme.screenSize.upToLarge} {
     align-items: center;
     display: flex;
     flex-direction: row;
+    /* Slightly reduce margins from dropdown search filters */
     > div:first-of-type {
-      margin-top: 0;
       margin-bottom: 0;
+      margin-right: ${theme.size.small};
+    }
+  }
+  @media ${theme.screenSize.upToSmall} {
+    flex-direction: column;
+    /* Update the fixed width filters on mobile to go full length */
+    > div {
+      width: 100%;
+      :first-of-type {
+        margin-bottom: ${theme.size.small};
+        margin-right: 0;
+      }
+      > div {
+        width: 100%;
+      }
     }
   }
 `;
@@ -85,26 +117,65 @@ const StyledSearchResult = styled(SearchResult)`
   > div {
     padding: ${theme.size.medium};
   }
+  :hover,
+  :focus {
+    color: unset;
+    text-decoration: unset;
+    > div {
+      background-color: unset !important;
+    }
+  }
+`;
+
+const StyledSearchResults = styled('div')`
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-template-rows: ${SEARCH_RESULT_HEIGHT};
+  height: 100%;
+  row-gap: ${theme.size.default};
+  width: 100%;
+  /* Create the opaque effect on hover by opaquing everything but a hovered result */
+  :hover {
+    > ${StyledSearchResult} {
+      opacity: 0.2;
+      transition: opacity 150ms ease-in;
+      :hover {
+        opacity: 1;
+      }
+    }
+  }
+  :not(:hover) {
+    > ${StyledSearchResult} {
+      opacity: 1;
+      transition: opacity 150ms ease-in;
+    }
+  }
 `;
 
 const SearchResults = () => {
   const { search } = useLocation();
+  const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
   const [searchFilter, setSearchFilter] = useState(null);
   const [searchFilterProperty, setSearchFilterProperty] = useState(null);
 
+  // This page has a unique BG color
+  useEffect(() => {
+    if (document) {
+      document.body.style.backgroundColor = '#F9FBFA';
+    }
+  }, []);
+
+  // Parse the incoming query string for a search term and property
   useEffect(() => {
     const { q, searchProperty } = queryString.parse(search);
-    if (q) {
-      setSearchTerm(q);
-    }
-    if (searchProperty) {
-      setSearchFilter(searchProperty);
-    }
+    setSearchTerm(q);
+    setSearchFilter(searchProperty);
   }, [search]);
-  const [searchResults, setSearchResults] = useState([]);
 
-  // Update state on a new search query or filters
+  // Update results on a new search query or filters
+  // When the filter is changed, find the corresponding property to display
   useEffect(() => {
     const fetchNewSearchResults = async () => {
       if (searchTerm) {
@@ -114,42 +185,33 @@ const SearchResults = () => {
       }
     };
     fetchNewSearchResults();
-  }, [searchFilter, searchTerm]);
-
-  useEffect(() => {
     if (searchFilter) {
       const { property } = parseMarianManifest(searchFilter);
       setSearchFilterProperty(property);
     }
-  }, [searchFilter]);
+  }, [searchFilter, searchTerm]);
 
   return (
     <SearchContext.Provider value={{ searchFilter, searchTerm, setSearchFilter }}>
       <SearchResultsContainer>
+        <HeaderText>
+          {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
+        </HeaderText>
         {searchResults.length ? (
-          <div>
-            <HeaderText>
-              {searchFilterProperty ? `${searchFilterProperty} results ` : 'All search results '} for "{searchTerm}"
-            </HeaderText>
+          <>
             <StyledSearchResults>
               {searchResults.map(({ title, preview, url }, index) => (
-                <StyledSearchResult
-                  key={`${url}${index}`}
-                  // learnMoreLink={isMobile}
-                  title={title}
-                  preview={preview}
-                  url={url}
-                />
+                <StyledSearchResult key={`${url}${index}`} title={title} preview={preview} url={url} />
               ))}
             </StyledSearchResults>
-          </div>
+          </>
         ) : (
-          <p>There are no search results</p>
+          <EmptyStateText>
+            There are no {searchFilterProperty ? searchFilterProperty : ''} results for "{searchTerm}"
+          </EmptyStateText>
         )}
-        <FilterPane>
-          <FilterHeader>Filter By</FilterHeader>
-          <StyledSearchFilters hasSideLabels={false} />
-        </FilterPane>
+        <FilterHeader>Filter By</FilterHeader>
+        <StyledSearchFilters hasSideLabels={false} />
       </SearchResultsContainer>
     </SearchContext.Provider>
   );
