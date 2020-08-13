@@ -24,6 +24,11 @@ const PROPERTY_MAPPING = {
   'spark-connector': 'Spark Connector',
 };
 
+const BRANCH_MAPPING = {
+  current: 'Stable',
+  master: 'Latest',
+};
+
 const capitalizeString = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 export const getSortedBranchesForProperty = (parsedManifest, property) => {
@@ -44,7 +49,7 @@ export const parseMarianManifest = manifest => {
       .split('-')
       .map(capitalizeString)
       .join(' ');
-  return { branch, property };
+  return { branch: BRANCH_MAPPING[branch] || branch, property };
 };
 
 // Parses a list of manifest strings from Marian
