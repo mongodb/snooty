@@ -13,6 +13,10 @@ const SEARCH_MATCH_STYLE = `background-color: ${uiColors.yellow.light2};`;
 const largeResultTitle = css`
   font-size: ${theme.size.default};
   line-height: ${theme.size.medium};
+  /* Only add bold on larger devices */
+  @media ${theme.screenSize.smallAndUp} {
+    font-weight: bolder;
+  }
 `;
 
 // Truncates text to a maximum number of lines
