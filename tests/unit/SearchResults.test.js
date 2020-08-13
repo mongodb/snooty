@@ -24,7 +24,7 @@ const expectFilteredResults = wrapper => {
   expect(wrapper.text()).toContain('Realm results for "stitch"');
 
   // Check the dropdowns are filled in
-  expectValuesForFilters(wrapper, 'Realm', 'master');
+  expectValuesForFilters(wrapper, 'Realm', 'Latest');
 };
 
 const expectValuesForFilters = (wrapper, product, branch) => {
