@@ -13,8 +13,8 @@ it('should parse marian manifests', () => {
 it('should properly sort branches for a property with version numbers', () => {
   const parsedSampleData = parseMarianManifests(mockInputData.manifests);
   expect(getSortedBranchesForProperty(parsedSampleData, 'Charts')).toStrictEqual([
-    'current',
-    'master',
+    'Stable',
+    'Latest',
     '19.12',
     '19.09',
     '19.06',
@@ -27,6 +27,15 @@ it('should properly sort branches for a property with version numbers', () => {
 
 it('should properly parse a single marian manifest', () => {
   // This function is covered by testing parseMarianManifests but it is good to show a use case
-  expect(parseMarianManifest('bi-connector-v2.0')).toStrictEqual({ property: 'BI Connector', branch: 'v2.0' });
-  expect(parseMarianManifest('atlas-master')).toStrictEqual({ property: 'Atlas', branch: 'master' });
+  expect(parseMarianManifest('bi-connector-v2.0')).toStrictEqual({
+    property: 'BI Connector',
+    branch: 'v2.0',
+  });
+  // master has been mapped to "Latest"
+  expect(parseMarianManifest('atlas-master')).toStrictEqual({
+    property: 'Atlas',
+    branch: 'Latest',
+  });
+  // current has been mapped to "Stable"
+  expect(parseMarianManifest('atlas-current')).toStrictEqual({ property: 'Atlas', branch: 'Stable' });
 });
