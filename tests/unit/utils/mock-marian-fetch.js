@@ -1,5 +1,17 @@
 const allowJsonPromise = x => ({ json: () => x });
 
+export const FILTERED_RESULT = {
+  title: 'stitch (realm filter)',
+  preview: 'Stitch preview (with realm filter)',
+  url: 'stitch.withfilters',
+};
+
+export const UNFILTERED_RESULT = {
+  title: 'stitch (no filters)',
+  preview: 'Stitch preview (no filters)',
+  url: 'stitch.nofilters',
+};
+
 export const mockMarianFetch = url => {
   let endpoint = url;
   if (endpoint.includes('https://marian.mongodb.com/')) {
@@ -10,13 +22,11 @@ export const mockMarianFetch = url => {
       return allowJsonPromise({ manifests: ['realm-master'] });
     case 'search?q=stitch':
       return allowJsonPromise({
-        results: [{ title: 'stitch (no filters)', preview: 'Stitch preview (no filters)', url: 'stitch.nofilters' }],
+        results: [UNFILTERED_RESULT],
       });
     case 'search?q=stitch&searchProperty=realm-master':
       return allowJsonPromise({
-        results: [
-          { title: 'stitch (realm filter)', preview: 'Stitch preview (with realm filter)', url: 'stitch.withfilters' },
-        ],
+        results: [FILTERED_RESULT],
       });
 
     default:
