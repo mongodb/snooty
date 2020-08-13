@@ -10,6 +10,11 @@ const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `background-color: ${uiColors.yellow.light2};`;
 
+const largeResultTitle = css`
+  font-size: ${theme.size.default};
+  line-height: ${theme.size.medium};
+`;
+
 // Truncates text to a maximum number of lines
 const truncate = maxLines => css`
   display: -webkit-box;
@@ -74,9 +79,9 @@ const StyledResultTitle = styled('p')`
   margin-bottom: 6px;
   margin-top: 0;
   ${truncate(1)};
+  ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
   @media ${theme.screenSize.upToSmall} {
-    font-size: ${theme.size.default};
-    line-height: ${theme.size.medium};
+    ${largeResultTitle};
   }
 `;
 
@@ -91,34 +96,37 @@ const sanitizePreviewHtml = text =>
     allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
   });
 
-const SearchResult = React.memo(({ learnMoreLink = false, maxLines = 2, preview, title, url, ...props }) => {
-  const { searchTerm } = useContext(SearchContext);
-  const highlightedTitle = highlightSearchTerm(title, searchTerm);
-  const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
-  return (
-    <SearchResultLink href={url} {...props}>
-      <SearchResultContainer>
-        <StyledResultTitle
-          dangerouslySetInnerHTML={{
-            __html: sanitizePreviewHtml(highlightedTitle),
-          }}
-        />
-        <StyledPreviewText
-          maxLines={maxLines}
-          dangerouslySetInnerHTML={{
-            __html: sanitizePreviewHtml(highlightedPreviewText),
-          }}
-        />
-        {learnMoreLink && (
-          <MobileFooterContainer>
-            <LearnMoreLink href={url}>
-              <strong>Learn More</strong>
-            </LearnMoreLink>
-          </MobileFooterContainer>
-        )}
-      </SearchResultContainer>
-    </SearchResultLink>
-  );
-});
+const SearchResult = React.memo(
+  ({ learnMoreLink = false, maxLines = 2, useLargeTitle = false, preview, title, url, ...props }) => {
+    const { searchTerm } = useContext(SearchContext);
+    const highlightedTitle = highlightSearchTerm(title, searchTerm);
+    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
+    return (
+      <SearchResultLink href={url} {...props}>
+        <SearchResultContainer>
+          <StyledResultTitle
+            dangerouslySetInnerHTML={{
+              __html: sanitizePreviewHtml(highlightedTitle),
+            }}
+            useLargeTitle={useLargeTitle}
+          />
+          <StyledPreviewText
+            maxLines={maxLines}
+            dangerouslySetInnerHTML={{
+              __html: sanitizePreviewHtml(highlightedPreviewText),
+            }}
+          />
+          {learnMoreLink && (
+            <MobileFooterContainer>
+              <LearnMoreLink href={url}>
+                <strong>Learn More</strong>
+              </LearnMoreLink>
+            </MobileFooterContainer>
+          )}
+        </SearchResultContainer>
+      </SearchResultLink>
+    );
+  }
+);
 
 export default SearchResult;

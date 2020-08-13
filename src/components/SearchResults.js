@@ -201,7 +201,7 @@ const SearchResults = () => {
           <>
             <StyledSearchResults>
               {searchResults.map(({ title, preview, url }, index) => (
-                <StyledSearchResult key={`${url}${index}`} title={title} preview={preview} url={url} />
+                <StyledSearchResult key={`${url}${index}`} title={title} preview={preview} url={url} useLargeTitle />
               ))}
             </StyledSearchResults>
           </>
