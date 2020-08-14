@@ -142,8 +142,6 @@ const ComponentFactory = props => {
       return null;
     }
 
-    return <SearchResults />;
-
     if (domain === 'landing') {
       return <LandingComponentFactory {...props} />;
     }
