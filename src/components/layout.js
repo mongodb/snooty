@@ -8,6 +8,7 @@ import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
+import { theme } from '../theme/docsTheme.js';
 
 export default class DefaultLayout extends Component {
   constructor(props) {
@@ -142,19 +143,17 @@ export default class DefaultLayout extends Component {
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
     return (
       <>
+        {/* Anchor-link styling to compensate for navbar height */}
         <Global
           styles={css`
-            :root {
-              --navbar-height: 45px;
+            dt:target {
+              background-color: white !important;
             }
-            h1:before,
-            h2:before,
-            h3:before,
-            h4:before {
+            :target::before {
               content: '';
               display: block;
-              height: calc(var(--navbar-height) + 10px;
-              margin-top: calc((var(--navbar-height) + 10px) * -1);
+              height: calc(${theme.navbar.height} + 10px);
+              margin-top: calc((${theme.navbar.height} + 10px) * -1);
               position: relative;
               width: 0;
             }
