@@ -50,6 +50,7 @@ import RefRole from './RefRole';
 import Target from './Target';
 import Glossary from './Glossary';
 import Rubric from './Rubric';
+import SearchResults from './SearchResults';
 import Field from './Field';
 import FieldList from './FieldList';
 
@@ -118,6 +119,7 @@ const componentMap = {
   ref_role: RefRole,
   reference: Reference,
   rubric: Rubric,
+  'search-results': SearchResults,
   section: Section,
   step: Step,
   strong: Strong,
