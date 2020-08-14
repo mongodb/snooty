@@ -51,6 +51,8 @@ import Target from './Target';
 import Glossary from './Glossary';
 import Rubric from './Rubric';
 import SearchResults from './SearchResults';
+import Field from './Field';
+import FieldList from './FieldList';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -93,6 +95,8 @@ const componentMap = {
   definitionListItem: DefinitionListItem,
   deprecated: Deprecated,
   emphasis: Emphasis,
+  field: Field,
+  field_list: FieldList,
   figure: Figure,
   footnote: Footnote,
   footnote_reference: FootnoteReference,
