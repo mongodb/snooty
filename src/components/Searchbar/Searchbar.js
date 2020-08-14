@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';
@@ -53,12 +53,17 @@ const SearchbarContainer = styled('div')`
 
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
   const [value, setValue] = useState(false);
+  const [searchFilter, setSearchFilter] = useState(null);
+  // Use a second search filter state var to track filters but not make any calls yet
+  const [draftSearchFilter, setDraftSearchFilter] = useState(null);
   const [searchEvent, setSearchEvent] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
   const searchContainerRef = useRef(null);
   // A user is searching if the text input is focused and it is not empty
   const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
+  // Callback to "promote" an in-progress search filter to kick off a search
+  const onApplyFilters = useCallback(() => setSearchFilter(draftSearchFilter), [draftSearchFilter]);
 
   // Focus Handlers
   const onExpand = useCallback(() => setIsExpanded(true), [setIsExpanded]);
@@ -74,35 +79,44 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   useClickOutside(searchContainerRef, onBlur);
   const onClose = useCallback(() => setIsExpanded(false), [setIsExpanded]);
 
-  // Update state on a new search query
-  const fetchNewSearchResults = useCallback(
-    async searchTerm => {
-      const result = await fetch(searchParamsToURL(searchTerm, null));
-      const resultJson = await result.json();
-      setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
-    },
-    [getResultsFromJSON, searchParamsToURL]
-  );
   const onSearchChange = useCallback(
     searchTerm => {
       setIsFocused(true);
-      setValue(searchTerm);
       // Debounce any queued search event since the query has changed
       clearTimeout(searchEvent);
-      if (searchTerm) {
-        // Set a timeout to trigger the search to avoid over-requesting
-        setSearchEvent(setTimeout(async () => fetchNewSearchResults(searchTerm, {}), SEARCH_DELAY_TIME));
-      }
+      setValue(searchTerm);
+      // The below useEffect will then run to query a new search since `value` was updated
     },
-    [fetchNewSearchResults, searchEvent]
+    [searchEvent]
   );
+
+  // Update state on a new search query or filters
+  const fetchNewSearchResults = useCallback(async () => {
+    const result = await fetch(searchParamsToURL(value, searchFilter));
+    const resultJson = await result.json();
+    setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
+  }, [getResultsFromJSON, searchFilter, searchParamsToURL, value]);
+
+  useEffect(() => {
+    if (value) {
+      // Set a timeout to trigger the search to avoid over-requesting
+      setSearchEvent(setTimeout(fetchNewSearchResults, SEARCH_DELAY_TIME));
+    }
+  }, [fetchNewSearchResults, value]);
 
   return (
     <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={searchContainerRef}>
       {isExpanded ? (
-        <SearchContext.Provider value={{ searchTerm: value, shouldAutofocus }}>
+        <SearchContext.Provider
+          value={{
+            searchFilter: draftSearchFilter,
+            setSearchFilter: setDraftSearchFilter,
+            searchTerm: value,
+            shouldAutofocus,
+          }}
+        >
           <ExpandedSearchbar onMobileClose={onClose} onChange={onSearchChange} value={value} />
-          {isSearching && <SearchDropdown results={searchResults} />}
+          {isSearching && <SearchDropdown applySearchFilter={onApplyFilters} results={searchResults} />}
         </SearchContext.Provider>
       ) : (
         <CondensedSearchbar onExpand={onExpand} />
