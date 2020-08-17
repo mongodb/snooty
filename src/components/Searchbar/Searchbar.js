@@ -7,6 +7,7 @@ import SearchContext from './SearchContext';
 import { activeTextBarStyling, StyledTextInput } from './SearchTextInput';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
@@ -67,14 +68,22 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
 
   // Focus Handlers
   const onExpand = useCallback(() => setIsExpanded(true), [setIsExpanded]);
-  const onFocus = useCallback(() => setIsFocused(true), []);
+  const onFocus = useCallback(() => {
+    setIsFocused(true);
+    reportAnalytics('SearchFocus', {});
+  }, []);
   // Remove focus and close searchbar if it disrupts the navbar
   const onBlur = useCallback(() => {
+    // Since this is tied to a document click off event, we want to be sure this is
+    // really a blur and not just clicking outside of the searchbar
+    if (isFocused) {
+      reportAnalytics('SearchBlur', { query: value });
+    }
     setIsFocused(false);
     // The parent controls whether a searchbar is expanded by default, so this may
     // have no effect where the searchbar should always be open
     setIsExpanded(false);
-  }, [setIsExpanded]);
+  }, [isFocused, setIsExpanded, value]);
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(searchContainerRef, onBlur);
   const onClose = useCallback(() => setIsExpanded(false), [setIsExpanded]);
