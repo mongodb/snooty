@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select renders select correctly 1`] = `
+<Select
+  choices={
+    Array [
+      Object {
+        "text": "MongoDB Server",
+        "value": "server",
+      },
+      Object {
+        "text": "MongoDB Atlas",
+        "value": "atlas",
+      },
+    ]
+  }
+  defaultText=""
+  disabled={false}
+  label={null}
+  onChange={[Function]}
+  value={null}
+/>
+`;
