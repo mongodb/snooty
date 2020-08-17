@@ -13,7 +13,6 @@ import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
-import EmptyResults from './EmptyResults';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
@@ -194,31 +193,28 @@ const SearchResults = () => {
         <title>Search Results</title>
       </Helmet>
       <SearchResultsContainer hasResults={!!searchResults.length}>
-        {searchResults.length ? (
-          <>
-            <HeaderText>
-              {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
-            </HeaderText>
-            <StyledSearchResults>
-              {searchResults.map(({ title, preview, url }, index) => (
-                <StyledSearchResult
-                  key={`${url}${index}`}
-                  onClick={() =>
-                    reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
-                  }
-                  title={title}
-                  preview={preview}
-                  url={url}
-                  useLargeTitle
-                />
-              ))}
-            </StyledSearchResults>
-            <FilterHeader>Filter By</FilterHeader>
-            <StyledSearchFilters hasSideLabels={false} />
-          </>
-        ) : (
-          <EmptyResults />
-        )}
+        <>
+          <HeaderText>
+            {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
+          </HeaderText>
+          <StyledSearchResults>
+            {searchResults.map(({ title, preview, url }, index) => (
+              <StyledSearchResult
+                key={`${url}${index}`}
+                onClick={() =>
+                  reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
+                }
+                title={title}
+                preview={preview}
+                url={url}
+                useLargeTitle
+              />
+            ))}
+          </StyledSearchResults>
+          <FilterHeader>Filter By</FilterHeader>
+          <StyledSearchFilters hasSideLabels={false} />
+        </>
+        )
       </SearchResultsContainer>
     </SearchContext.Provider>
   );
