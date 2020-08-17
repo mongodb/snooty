@@ -213,7 +213,6 @@ const SearchResults = () => {
           <FilterHeader>Filter By</FilterHeader>
           <StyledSearchFilters hasSideLabels={false} />
         </>
-        )
       </SearchResultsContainer>
     </SearchContext.Provider>
   );
