@@ -52,11 +52,10 @@ const FilterHeader = styled('h2')`
 const SearchResultsContainer = styled('div')`
   column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
-  grid-template-areas: ${({ hasResults }) => (hasResults ? "'header filter-header' 'results filters'" : "'empty'")};
-  grid-template-columns: ${({ hasResults }) => (hasResults ? `auto ${FILTER_COLUMN_WIDTH}` : 'auto')};
+  grid-template-areas: 'header filter-header' 'results filters';
+  grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
   row-gap: ${theme.size.large};
   width: 100%;
-  ${({ hasResults }) => !hasResults && `height: 100%`};
   @media ${theme.screenSize.upToLarge} {
     align-items: center;
     column-gap: ${theme.size.default};
@@ -192,7 +191,7 @@ const SearchResults = () => {
       <Helmet>
         <title>Search Results</title>
       </Helmet>
-      <SearchResultsContainer hasResults={!!searchResults.length}>
+      <SearchResultsContainer>
         <>
           <HeaderText>
             {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
