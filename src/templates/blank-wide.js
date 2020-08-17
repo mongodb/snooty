@@ -6,6 +6,10 @@ import Navbar from '../components/Navbar';
 import DocumentBody from '../components/DocumentBody';
 import { theme } from '../theme/docsTheme';
 
+const Content = styled('div')`
+  margin: 0 ${theme.size.default};
+`;
+
 const Wrapper = styled('div')`
   max-width: ${theme.size.maxWidth};
   margin: 40px auto;
@@ -16,8 +20,10 @@ const BlankWide = ({ pageContext: { metadata, slug, __refDocMapping }, ...rest }
   <React.Fragment>
     <div className="content">
       <Wrapper id="main-column">
-        <DocumentBody refDocMapping={__refDocMapping} slug={slug} metadata={metadata} {...rest} />
-        <Footer />
+        <Content>
+          <DocumentBody refDocMapping={__refDocMapping} slug={slug} metadata={metadata} {...rest} />
+          <Footer />
+        </Content>
       </Wrapper>
     </div>
     <Navbar />
