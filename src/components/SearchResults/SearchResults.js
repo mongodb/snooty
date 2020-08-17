@@ -5,13 +5,15 @@ import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
-import { theme } from '../theme/docsTheme';
-import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
-import { parseMarianManifest } from '../utils/parse-marian-manifests';
-import { searchParamsToURL } from '../utils/search-params-to-url';
-import SearchContext from './Searchbar/SearchContext';
-import SearchFilters from './Searchbar/SearchFilters';
-import SearchResult from './Searchbar/SearchResult';
+import { theme } from '../../theme/docsTheme';
+import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
+import { parseMarianManifest } from '../../utils/parse-marian-manifests';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { searchParamsToURL } from '../../utils/search-params-to-url';
+import SearchContext from '../Searchbar/SearchContext';
+import SearchFilters from '../Searchbar/SearchFilters';
+import SearchResult from '../Searchbar/SearchResult';
+import EmptyResults from './EmptyResults';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
@@ -24,13 +26,6 @@ const commonTextStyling = css`
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
-`;
-
-const EmptyStateText = styled('p')`
-  font-size: ${theme.fontSize.small};
-  ${commonTextStyling};
-  font-weight: normal;
-  grid-area: results;
 `;
 
 const HeaderText = styled('h1')`
@@ -58,10 +53,11 @@ const FilterHeader = styled('h2')`
 const SearchResultsContainer = styled('div')`
   column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
-  grid-template-areas: 'header filter-header' 'results filters';
-  grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+  grid-template-areas: ${({ hasResults }) => (hasResults ? "'header filter-header' 'results filters'" : "'empty'")};
+  grid-template-columns: ${({ hasResults }) => (hasResults ? `auto ${FILTER_COLUMN_WIDTH}` : 'auto')};
   row-gap: ${theme.size.large};
   width: 100%;
+  ${({ hasResults }) => !hasResults && `height: 100%`};
   @media ${theme.screenSize.upToLarge} {
     align-items: center;
     column-gap: ${theme.size.default};
@@ -197,25 +193,32 @@ const SearchResults = () => {
       <Helmet>
         <title>Search Results</title>
       </Helmet>
-      <SearchResultsContainer>
-        <HeaderText>
-          {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
-        </HeaderText>
+      <SearchResultsContainer hasResults={!!searchResults.length}>
         {searchResults.length ? (
           <>
+            <HeaderText>
+              {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
+            </HeaderText>
             <StyledSearchResults>
               {searchResults.map(({ title, preview, url }, index) => (
-                <StyledSearchResult key={`${url}${index}`} title={title} preview={preview} url={url} useLargeTitle />
+                <StyledSearchResult
+                  key={`${url}${index}`}
+                  onClick={() =>
+                    reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
+                  }
+                  title={title}
+                  preview={preview}
+                  url={url}
+                  useLargeTitle
+                />
               ))}
             </StyledSearchResults>
+            <FilterHeader>Filter By</FilterHeader>
+            <StyledSearchFilters hasSideLabels={false} />
           </>
         ) : (
-          <EmptyStateText>
-            There are no {searchFilterProperty ? searchFilterProperty : ''} results for "{searchTerm}"
-          </EmptyStateText>
+          <EmptyResults />
         )}
-        <FilterHeader>Filter By</FilterHeader>
-        <StyledSearchFilters hasSideLabels={false} />
       </SearchResultsContainer>
     </SearchContext.Provider>
   );
