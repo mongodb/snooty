@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -193,6 +194,9 @@ const SearchResults = () => {
 
   return (
     <SearchContext.Provider value={{ searchFilter, searchTerm, setSearchFilter }}>
+      <Helmet>
+        <title>Search Results</title>
+      </Helmet>
       <SearchResultsContainer>
         <HeaderText>
           {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
