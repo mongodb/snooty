@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styled from '@emotion/styled';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -22,7 +22,10 @@ const SearchResultsContainer = styled('div')`
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.48);
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: ${theme.size.medium} ${SEARCH_RESULT_HEIGHT} ${SEARCH_RESULT_HEIGHT} ${SEARCH_RESULT_HEIGHT};
+  grid-template-rows: ${({ hasResults }) =>
+    hasResults
+      ? `${theme.size.medium} ${SEARCH_RESULT_HEIGHT} ${SEARCH_RESULT_HEIGHT} ${SEARCH_RESULT_HEIGHT}`
+      : `${theme.size.medium} ${theme.size.large}`};
   position: relative;
   /* Give top padding on desktop to offset this extending into the searchbar */
   padding-top: ${theme.size.large};
@@ -60,23 +63,28 @@ const StyledSearchResult = styled(SearchResult)`
 `;
 
 const SearchResults = ({ currentPage, totalResultsCount, visibleResults, ...props }) => {
+  const hasResults = useMemo(() => !!totalResultsCount, [totalResultsCount]);
   const { isMobile } = useScreenSize();
   const getRankFromPage = useCallback(index => (currentPage - 1) * index + 1, [currentPage]);
   return (
-    <SearchResultsContainer {...props}>
+    <SearchResultsContainer hasResults={hasResults} {...props}>
       <StyledResultText>
         <strong>Most Relevant Results ({totalResultsCount})</strong>
       </StyledResultText>
-      {visibleResults.map(({ title, preview, url }, index) => (
-        <StyledSearchResult
-          key={url}
-          onClick={() => reportAnalytics('SearchSelection', { rank: getRankFromPage(index), selectionUrl: url })}
-          learnMoreLink={isMobile}
-          title={title}
-          preview={preview}
-          url={url}
-        />
-      ))}
+      {hasResults ? (
+        visibleResults.map(({ title, preview, url }, index) => (
+          <StyledSearchResult
+            key={url}
+            onClick={() => reportAnalytics('SearchSelection', { rank: getRankFromPage(index), selectionUrl: url })}
+            learnMoreLink={isMobile}
+            title={title}
+            preview={preview}
+            url={url}
+          />
+        ))
+      ) : (
+        <StyledResultText>There are no search results</StyledResultText>
+      )}
     </SearchResultsContainer>
   );
 };

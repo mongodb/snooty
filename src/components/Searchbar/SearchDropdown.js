@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -8,6 +8,7 @@ import { theme } from '../../theme/docsTheme';
 import AdvancedFiltersPane from './AdvancedFiltersPane';
 import Pagination from './Pagination';
 import SearchResults from './SearchResults';
+import SearchContext from './SearchContext';
 
 const RESULTS_PER_PAGE = 3;
 const SEARCH_FOOTER_DESKTOP_HEIGHT = theme.size.xlarge;
@@ -105,14 +106,25 @@ const FilterResetButton = styled(Button)`
   ${baseFooterButtonStyle};
 `;
 
-const SearchDropdown = ({ results = [] }) => {
+const SearchDropdown = ({ results = [], applySearchFilter }) => {
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   const [visibleResults, setVisibleResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { searchFilter, setSearchFilter } = useContext(SearchContext);
+  // Number of filters is always 2, since branch is inferred when a product is picked
+  const filterText = useMemo(() => (searchFilter ? ' (2)' : ''), [searchFilter]);
   const { isMobile } = useScreenSize();
   const totalPages = results ? Math.ceil(results.length / RESULTS_PER_PAGE) : 0;
   const closeFiltersPane = useCallback(() => setShowAdvancedFilters(false), []);
   const openFiltersPane = useCallback(() => setShowAdvancedFilters(true), []);
+  const onReset = useCallback(() => {
+    setSearchFilter(null);
+    applySearchFilter();
+  }, [applySearchFilter, setSearchFilter]);
+  const onApplyFilters = useCallback(() => {
+    applySearchFilter();
+    closeFiltersPane();
+  }, [applySearchFilter, closeFiltersPane]);
   useEffect(() => {
     if (isMobile) {
       // If mobile, we give an overflow view, so no pagination is needed
@@ -127,8 +139,8 @@ const SearchDropdown = ({ results = [] }) => {
     <SearchResultsContainer>
       <FixedHeightFiltersPane closeFiltersPane={closeFiltersPane} />
       <SearchFooter>
-        <FilterResetButton>Reset</FilterResetButton>
-        <FilterFooterButton onClick={closeFiltersPane}>Apply Search Criteria</FilterFooterButton>
+        <FilterResetButton onClick={onReset}>Reset</FilterResetButton>
+        <FilterFooterButton onClick={onApplyFilters}>Apply Search Criteria{filterText}</FilterFooterButton>
       </SearchFooter>
     </SearchResultsContainer>
   ) : (
@@ -140,7 +152,7 @@ const SearchDropdown = ({ results = [] }) => {
       />
       <SearchFooter>
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
-        <FilterFooterButton onClick={openFiltersPane}>Advanced Filters</FilterFooterButton>
+        <FilterFooterButton onClick={openFiltersPane}>Advanced Filters{filterText}</FilterFooterButton>
       </SearchFooter>
     </SearchResultsContainer>
   );

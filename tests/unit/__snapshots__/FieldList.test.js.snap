@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Table>
+  <colgroup>
+    <col
+      className="field-name"
+    />
+    <col
+      className="field-body"
+    />
+  </colgroup>
+  <tbody>
+    <ComponentFactory
+      key="0"
+      nodeData={
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 137,
+                    },
+                  },
+                  "type": "text",
+                  "value": "A JSON Web Token string encoded for the provided ",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 137,
+                        },
+                      },
+                      "type": "text",
+                      "value": "payload",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 137,
+                    },
+                  },
+                  "type": "literal",
+                },
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 137,
+                    },
+                  },
+                  "type": "text",
+                  "value": ".",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 137,
+                },
+              },
+              "type": "paragraph",
+            },
+          ],
+          "label": "Returns",
+          "name": "returns",
+          "position": Object {
+            "start": Object {
+              "line": 136,
+            },
+          },
+          "type": "field",
+        }
+      }
+    />
+  </tbody>
+</Table>
+`;
