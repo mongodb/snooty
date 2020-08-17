@@ -101,12 +101,12 @@ const sanitizePreviewHtml = text =>
   });
 
 const SearchResult = React.memo(
-  ({ learnMoreLink = false, maxLines = 2, useLargeTitle = false, preview, title, url, ...props }) => {
+  ({ learnMoreLink = false, maxLines = 2, useLargeTitle = false, onClick, preview, title, url, ...props }) => {
     const { searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     return (
-      <SearchResultLink href={url} {...props}>
+      <SearchResultLink href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
             dangerouslySetInnerHTML={{
