@@ -11,8 +11,8 @@ const Content = styled('div')`
 `;
 
 const Wrapper = styled('div')`
-  max-width: ${theme.size.maxWidth};
   margin: 40px auto;
+  max-width: ${theme.size.maxWidth};
   width: 100%;
 `;
 
