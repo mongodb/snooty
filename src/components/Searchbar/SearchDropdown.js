@@ -145,7 +145,11 @@ const SearchDropdown = ({ results = [], applySearchFilter }) => {
     </SearchResultsContainer>
   ) : (
     <SearchResultsContainer>
-      <FixedHeightSearchResults totalResultsCount={results.length} visibleResults={visibleResults} />
+      <FixedHeightSearchResults
+        currentPage={currentPage}
+        totalResultsCount={results.length}
+        visibleResults={visibleResults}
+      />
       <SearchFooter>
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
         <FilterFooterButton onClick={openFiltersPane}>Advanced Filters{filterText}</FilterFooterButton>

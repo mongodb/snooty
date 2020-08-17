@@ -101,6 +101,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
 
   // Update state on a new search query or filters
   const fetchNewSearchResults = useCallback(async () => {
+    reportAnalytics('SearchQuery', { query: value });
     const result = await fetch(searchParamsToURL(value, searchFilter));
     const resultJson = await result.json();
     setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
