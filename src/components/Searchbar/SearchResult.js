@@ -7,7 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import SearchContext from './SearchContext';
 import { StyledTextInput } from './SearchTextInput';
-import { SearchResultsContainer } from './SearchDropdown';
+// import { SearchResultsContainer } from './SearchDropdown';
 
 const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
@@ -105,29 +105,6 @@ const sanitizePreviewHtml = text =>
     allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
   });
 
-const onArrowDown = resultLinkRef => {
-  const nextSibling = getNestedValue(['current', 'nextSibling'], resultLinkRef);
-  if (nextSibling) {
-    nextSibling.focus();
-  } else {
-    // This is the last result, so let's loop back to the top
-    document.querySelector(`${SearchResultsContainer} ${SearchResultLink}`).focus();
-  }
-};
-
-const onArrowUp = resultLinkRef => {
-  const prevSibling = getNestedValue(['current', 'previousSibling'], resultLinkRef);
-  if (prevSibling) {
-    // If these don't match, we have gone up out of the results
-    if (prevSibling.nodeName !== resultLinkRef.current.nodeName) {
-      // This is the first result, so let's go to the search bar
-      document.querySelector(`${StyledTextInput} input`).focus();
-    } else {
-      prevSibling.focus();
-    }
-  }
-};
-
 const SearchResult = React.memo(
   ({
     allowKeyNavigation = true,
@@ -144,6 +121,30 @@ const SearchResult = React.memo(
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
+
+    const onArrowDown = resultLinkRef => {
+      const nextSibling = getNestedValue(['current', 'nextSibling'], resultLinkRef);
+      if (nextSibling) {
+        nextSibling.focus();
+      } else {
+        // This is the last result, so let's loop back to the top
+        // TODO fix here
+        document.querySelector(`div ${SearchResultLink}`).focus();
+      }
+    };
+
+    const onArrowUp = resultLinkRef => {
+      const prevSibling = getNestedValue(['current', 'previousSibling'], resultLinkRef);
+      if (prevSibling) {
+        // If these don't match, we have gone up out of the results
+        if (prevSibling.nodeName !== resultLinkRef.current.nodeName) {
+          // This is the first result, so let's go to the search bar
+          document.querySelector(`${StyledTextInput} input`).focus();
+        } else {
+          prevSibling.focus();
+        }
+      }
+    };
     // Navigate with arrow keys
     const onKeyDown = useCallback(
       e => {
