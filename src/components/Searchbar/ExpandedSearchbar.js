@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
@@ -11,6 +11,7 @@ import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from './SearchContext';
 
 const CLOSE_BUTTON_SIZE = theme.size.medium;
+const ENTER_KEY = 13;
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const GO_BUTTON_SIZE = '20px';
 
@@ -88,12 +89,20 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
 
   const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
 
+  const goButton = useRef(null);
+  // On an "Enter", click the Go button
+  const onKeyDown = useCallback(e => {
+    if (e.key === 'Enter' || e.keyCode === ENTER_KEY) {
+      goButton && goButton.current && goButton.current.click();
+    }
+  }, []);
+
   return (
     <>
       <MagnifyingGlass glyph="MagnifyingGlass" />
-      <SearchTextInput isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
+      <SearchTextInput onKeyDown={onKeyDown} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
-        <GoButton aria-label="Go" href={searchUrl}>
+        <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
           <GoIcon glyph="ArrowRight" fill="#13AA52" />
         </GoButton>
       )}
