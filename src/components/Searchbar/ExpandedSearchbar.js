@@ -7,7 +7,9 @@ import { uiColors } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchTextInput from './SearchTextInput';
+import { SearchResultLink } from './SearchResult';
 
+const ARROW_DOWN_KEY = 40;
 const CLOSE_BUTTON_SIZE = theme.size.medium;
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const GO_BUTTON_SIZE = '20px';
@@ -82,11 +84,19 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose, value }) => {
     },
     [onChange]
   );
+  const onKeyDown = useCallback(e => {
+    if (e.key === 'ArrowDown' || e.keyCode === ARROW_DOWN_KEY) {
+      // prevent scrolldown
+      e.preventDefault();
+      // find first result and focus
+      document.querySelector(SearchResultLink).focus();
+    }
+  }, []);
 
   return (
     <>
       <MagnifyingGlass glyph="MagnifyingGlass" />
-      <SearchTextInput isSearching={isSearching} onChange={onSearchChange} value={value} />
+      <SearchTextInput onKeyDown={onKeyDown} isSearching={isSearching} onChange={onSearchChange} value={value} />
       {shouldShowGoButton && (
         <GoButton aria-label="Go" href="#">
           <GoIcon glyph="ArrowRight" fill="#13AA52" />

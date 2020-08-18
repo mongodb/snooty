@@ -69,9 +69,11 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   // Focus Handlers
   const onExpand = useCallback(() => setIsExpanded(true), [setIsExpanded]);
   const onFocus = useCallback(() => {
+    if (!isFocused) {
+      reportAnalytics('SearchFocus', {});
+    }
     setIsFocused(true);
-    reportAnalytics('SearchFocus', {});
-  }, []);
+  }, [isFocused]);
   // Remove focus and close searchbar if it disrupts the navbar
   const onBlur = useCallback(() => {
     // Since this is tied to a document click off event, we want to be sure this is
