@@ -76,7 +76,13 @@ const SearchResults = ({ currentPage, totalResultsCount, visibleResults, ...prop
           <StyledSearchResult
             // Have to use index because multiple results can show with same url
             key={`${url}${index}`}
-            onClick={() => reportAnalytics('SearchSelection', { rank: getRankFromPage(index), selectionUrl: url })}
+            onClick={() =>
+              reportAnalytics('SearchSelection', {
+                areaFrom: 'Searchbar',
+                rank: getRankFromPage(index),
+                selectionUrl: url,
+              })
+            }
             learnMoreLink={isMobile}
             title={title}
             preview={preview}

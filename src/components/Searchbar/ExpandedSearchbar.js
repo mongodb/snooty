@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
@@ -7,8 +7,11 @@ import { uiColors } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchTextInput from './SearchTextInput';
+import { searchParamsToURL } from '../../utils/search-params-to-url';
+import SearchContext from './SearchContext';
 
 const CLOSE_BUTTON_SIZE = theme.size.medium;
+const ENTER_KEY = 13;
 const GO_BUTTON_COLOR = uiColors.green.light3;
 const GO_BUTTON_SIZE = '20px';
 
@@ -70,10 +73,11 @@ const MagnifyingGlass = styled(Icon)`
   z-index: 1;
 `;
 
-const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose, value }) => {
+const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
   const { isMobile } = useScreenSize();
-  const isSearching = useMemo(() => !!value && isFocused, [isFocused, value]);
-  const shouldShowGoButton = useMemo(() => !!value && !isMobile, [isMobile, value]);
+  const { searchTerm, searchFilter } = useContext(SearchContext);
+  const isSearching = useMemo(() => !!searchTerm && isFocused, [isFocused, searchTerm]);
+  const shouldShowGoButton = useMemo(() => !!searchTerm && !isMobile, [isMobile, searchTerm]);
 
   const onSearchChange = useCallback(
     e => {
@@ -83,12 +87,22 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose, value }) => {
     [onChange]
   );
 
+  const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
+
+  const goButton = useRef(null);
+  // On an "Enter", click the Go button
+  const onKeyDown = useCallback(e => {
+    if (e.key === 'Enter' || e.keyCode === ENTER_KEY) {
+      goButton && goButton.current && goButton.current.click();
+    }
+  }, []);
+
   return (
     <>
       <MagnifyingGlass glyph="MagnifyingGlass" />
-      <SearchTextInput isSearching={isSearching} onChange={onSearchChange} value={value} />
+      <SearchTextInput onKeyDown={onKeyDown} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
-        <GoButton aria-label="Go" href="#">
+        <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
           <GoIcon glyph="ArrowRight" fill="#13AA52" />
         </GoButton>
       )}
