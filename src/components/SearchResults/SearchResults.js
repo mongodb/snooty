@@ -192,27 +192,25 @@ const SearchResults = () => {
         <title>Search Results</title>
       </Helmet>
       <SearchResultsContainer>
-        <>
-          <HeaderText>
-            {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
-          </HeaderText>
-          <StyledSearchResults>
-            {searchResults.map(({ title, preview, url }, index) => (
-              <StyledSearchResult
-                key={`${url}${index}`}
-                onClick={() =>
-                  reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
-                }
-                title={title}
-                preview={preview}
-                url={url}
-                useLargeTitle
-              />
-            ))}
-          </StyledSearchResults>
-          <FilterHeader>Filter By</FilterHeader>
-          <StyledSearchFilters hasSideLabels={false} />
-        </>
+        <HeaderText>
+          {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
+        </HeaderText>
+        <StyledSearchResults>
+          {searchResults.map(({ title, preview, url }, index) => (
+            <StyledSearchResult
+              key={`${url}${index}`}
+              onClick={() =>
+                reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
+              }
+              title={title}
+              preview={preview}
+              url={url}
+              useLargeTitle
+            />
+          ))}
+        </StyledSearchResults>
+        <FilterHeader>Filter By</FilterHeader>
+        <StyledSearchFilters hasSideLabels={false} />
       </SearchResultsContainer>
     </SearchContext.Provider>
   );
