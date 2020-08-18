@@ -57,6 +57,7 @@
     "@babel/preset-react": "^7.8.3",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
+    "@leafygreen-ui/badge": "^3.0.2",
     "@leafygreen-ui/box": "^1.1.1",
     "@leafygreen-ui/button": "^4.1.1",
     "@leafygreen-ui/callout": "^1.1.0",

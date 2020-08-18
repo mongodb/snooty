@@ -54,6 +54,7 @@ import SearchResults from './SearchResults';
 import Field from './Field';
 import FieldList from './FieldList';
 import Operation from './Operation';
+import OpenAPI from './OpenAPI';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -118,6 +119,7 @@ const componentMap = {
   literalinclude: LiteralInclude,
   meta: Meta,
   only: Cond,
+  openapi: OpenAPI,
   operation: Operation,
   paragraph: Paragraph,
   ref_role: RefRole,
