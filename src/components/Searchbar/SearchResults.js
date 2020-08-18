@@ -74,8 +74,15 @@ const SearchResults = ({ currentPage, totalResultsCount, visibleResults, ...prop
       {hasResults ? (
         visibleResults.map(({ title, preview, url }, index) => (
           <StyledSearchResult
-            key={url}
-            onClick={() => reportAnalytics('SearchSelection', { rank: getRankFromPage(index), selectionUrl: url })}
+            // Have to use index because multiple results can show with same url
+            key={`${url}${index}`}
+            onClick={() =>
+              reportAnalytics('SearchSelection', {
+                areaFrom: 'Searchbar',
+                rank: getRankFromPage(index),
+                selectionUrl: url,
+              })
+            }
             learnMoreLink={isMobile}
             title={title}
             preview={preview}

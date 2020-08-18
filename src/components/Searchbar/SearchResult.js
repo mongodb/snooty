@@ -7,12 +7,22 @@ import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import SearchContext from './SearchContext';
 import { StyledTextInput } from './SearchTextInput';
+import { SearchResultsContainer } from './SearchDropdown';
 
 const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `background-color: ${uiColors.yellow.light2};`;
+
+const largeResultTitle = css`
+  font-size: ${theme.size.default};
+  line-height: ${theme.size.medium};
+  /* Only add bold on larger devices */
+  @media ${theme.screenSize.smallAndUp} {
+    font-weight: bolder;
+  }
+`;
 
 // Truncates text to a maximum number of lines
 const truncate = maxLines => css`
@@ -78,9 +88,9 @@ const StyledResultTitle = styled('p')`
   margin-bottom: 6px;
   margin-top: 0;
   ${truncate(1)};
+  ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
   @media ${theme.screenSize.upToSmall} {
-    font-size: ${theme.size.default};
-    line-height: ${theme.size.medium};
+    ${largeResultTitle};
   }
 `;
 
@@ -101,7 +111,7 @@ const onArrowDown = resultLinkRef => {
     nextSibling.focus();
   } else {
     // This is the last result, so let's loop back to the top
-    document.querySelector(SearchResultLink).focus();
+    document.querySelector(`${SearchResultsContainer} ${SearchResultLink}`).focus();
   }
 };
 
@@ -119,7 +129,17 @@ const onArrowUp = resultLinkRef => {
 };
 
 const SearchResult = React.memo(
-  ({ allowKeyNavigation = true, learnMoreLink = false, maxLines = 2, onClick, preview, title, url, ...props }) => {
+  ({
+    allowKeyNavigation = true,
+    learnMoreLink = false,
+    maxLines = 2,
+    useLargeTitle = false,
+    onClick,
+    preview,
+    title,
+    url,
+    ...props
+  }) => {
     const { searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
@@ -148,6 +168,7 @@ const SearchResult = React.memo(
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(highlightedTitle),
             }}
+            useLargeTitle={useLargeTitle}
           />
           <StyledPreviewText
             maxLines={maxLines}

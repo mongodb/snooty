@@ -20,7 +20,7 @@ const baseFooterButtonStyle = css`
   letter-spacing: 0.5px;
   line-height: ${theme.size.default};
   margin: 0;
-  padding: ${theme.size.tiny};
+  padding: ${theme.size.small};
   /* Below removes default hover effects from button */
   background: none;
   background-image: none;
@@ -31,6 +31,13 @@ const baseFooterButtonStyle = css`
   }
   :after {
     display: none;
+  }
+`;
+
+const filterButtonHover = css`
+  :hover {
+    background-color: #d8d8d8;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
   }
 `;
 
@@ -78,7 +85,7 @@ const SearchResultsContainer = styled('div')`
 
 const SearchFooter = styled('div')`
   align-items: center;
-  box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.64);
+  box-shadow: 0 2px ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
   display: flex;
   height: ${SEARCH_FOOTER_DESKTOP_HEIGHT};
   justify-content: space-between;
@@ -95,15 +102,13 @@ const FilterFooterButton = styled(Button)`
   color: ${uiColors.blue.base};
   font-weight: bolder;
   ${baseFooterButtonStyle};
+  ${filterButtonHover}
 `;
 
 const FilterResetButton = styled(Button)`
   color: ${uiColors.gray.base};
-  :hover,
-  :active {
-    color: ${uiColors.blue.base};
-  }
   ${baseFooterButtonStyle};
+  ${filterButtonHover};
 `;
 
 const SearchDropdown = ({ results = [], applySearchFilter }) => {
@@ -152,10 +157,11 @@ const SearchDropdown = ({ results = [], applySearchFilter }) => {
       />
       <SearchFooter>
         <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
-        <FilterFooterButton onClick={openFiltersPane}>Advanced Filters{filterText}</FilterFooterButton>
+        <FilterFooterButton onClick={openFiltersPane}>Advanced Search{filterText}</FilterFooterButton>
       </SearchFooter>
     </SearchResultsContainer>
   );
 };
 
+export { SearchResultsContainer };
 export default SearchDropdown;
