@@ -6,7 +6,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
 // 16px for the icon + 2px padding on each side for hover circle
-const BUTTON_WIDTH = '20px';
+const BUTTON_WIDTH = `${theme.size.stripUnit(theme.size.default) + 4}px`;
 const ENABLED_COLOR = uiColors.gray.dark2;
 const DISABLED_COLOR = uiColors.gray.light1;
 
