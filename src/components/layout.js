@@ -146,9 +146,6 @@ export default class DefaultLayout extends Component {
         {/* Anchor-link styling to compensate for navbar height */}
         <Global
           styles={css`
-            dt:target {
-              background-color: white !important;
-            }
             :target::before {
               content: '';
               display: block;
