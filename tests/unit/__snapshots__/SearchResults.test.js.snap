@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search Results Page renders correctly without browser 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "searchFilter": null,
+      "searchTerm": null,
+      "setSearchFilter": [Function],
+    }
+  }
+>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+  >
+    <title>
+      Search Results
+    </title>
+  </HelmetWrapper>
+  <SearchResultsContainer>
+    <HeaderText>
+      All search results
+       for "
+      "
+    </HeaderText>
+    <StyledSearchResults />
+    <FilterHeader>
+      Filter By
+    </FilterHeader>
+    <StyledSearchFilters
+      hasSideLabels={false}
+    />
+  </SearchResultsContainer>
+</ContextProvider>
+`;
