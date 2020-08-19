@@ -106,17 +106,7 @@ const sanitizePreviewHtml = text =>
   });
 
 const SearchResult = React.memo(
-  ({
-    allowKeyNavigation = true,
-    learnMoreLink = false,
-    maxLines = 2,
-    useLargeTitle = false,
-    onClick,
-    preview,
-    title,
-    url,
-    ...props
-  }) => {
+  ({ learnMoreLink = false, maxLines = 2, useLargeTitle = false, onClick, preview, title, url, ...props }) => {
     const { searchContainerRef, searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
@@ -152,7 +142,8 @@ const SearchResult = React.memo(
     // Navigate with arrow keys
     const onKeyDown = useCallback(
       e => {
-        if (allowKeyNavigation) {
+        // Only allow arrow keys if we are within the searchbar (not if this is being reused)
+        if (searchContainerRef) {
           if (e.key === 'ArrowDown' || e.keyCode === ARROW_DOWN_KEY) {
             e.preventDefault();
             // find next result and focus
@@ -164,7 +155,7 @@ const SearchResult = React.memo(
           }
         }
       },
-      [allowKeyNavigation, onArrowDown]
+      [onArrowDown, searchContainerRef]
     );
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} onKeyDown={onKeyDown} {...props}>

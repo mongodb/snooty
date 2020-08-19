@@ -198,7 +198,6 @@ const SearchResults = () => {
         <StyledSearchResults>
           {searchResults.map(({ title, preview, url }, index) => (
             <StyledSearchResult
-              allowKeyNavigation={false}
               key={`${url}${index}`}
               onClick={() =>
                 reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
