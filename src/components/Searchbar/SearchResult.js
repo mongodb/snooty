@@ -117,21 +117,25 @@ const SearchResult = React.memo(
     url,
     ...props
   }) => {
-    const { searchTerm } = useContext(SearchContext);
+    const { searchContainerRef, searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
 
-    const onArrowDown = resultLinkRef => {
-      const nextSibling = getNestedValue(['current', 'nextSibling'], resultLinkRef);
-      if (nextSibling) {
-        nextSibling.focus();
-      } else {
-        // This is the last result, so let's loop back to the top
-        // TODO fix here
-        document.querySelector(`div ${SearchResultLink}`).focus();
-      }
-    };
+    const onArrowDown = useCallback(
+      resultLinkRef => {
+        const nextSibling = getNestedValue(['current', 'nextSibling'], resultLinkRef);
+        if (nextSibling) {
+          nextSibling.focus();
+        } else {
+          // This is the last result, so let's loop back to the top
+          if (searchContainerRef && searchContainerRef.current) {
+            searchContainerRef.current.querySelector(`${SearchResultLink}`).focus();
+          }
+        }
+      },
+      [searchContainerRef]
+    );
 
     const onArrowUp = resultLinkRef => {
       const prevSibling = getNestedValue(['current', 'previousSibling'], resultLinkRef);
@@ -160,7 +164,7 @@ const SearchResult = React.memo(
           }
         }
       },
-      [allowKeyNavigation]
+      [allowKeyNavigation, onArrowDown]
     );
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} onKeyDown={onKeyDown} {...props}>

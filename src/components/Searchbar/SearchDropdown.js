@@ -163,5 +163,4 @@ const SearchDropdown = ({ results = [], applySearchFilter }) => {
   );
 };
 
-export { SearchResultsContainer };
 export default SearchDropdown;

@@ -10,7 +10,6 @@ import SearchTextInput from './SearchTextInput';
 import { SearchResultLink } from './SearchResult';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from './SearchContext';
-import { SearchResultsContainer } from './SearchDropdown';
 
 const ARROW_DOWN_KEY = 40;
 const CLOSE_BUTTON_SIZE = theme.size.medium;
@@ -54,7 +53,6 @@ const GoButton = styled(IconButton)`
   top: ${theme.size.small};
   width: ${GO_BUTTON_SIZE};
   z-index: 1;
-  ${removeDefaultHoverEffects};
 `;
 
 const GoIcon = styled(Icon)`
@@ -78,7 +76,7 @@ const MagnifyingGlass = styled(Icon)`
 
 const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
   const { isMobile } = useScreenSize();
-  const { searchTerm, searchFilter } = useContext(SearchContext);
+  const { searchContainerRef, searchTerm, searchFilter } = useContext(SearchContext);
   const isSearching = useMemo(() => !!searchTerm && isFocused, [isFocused, searchTerm]);
   const shouldShowGoButton = useMemo(() => !!searchTerm && !isMobile, [isMobile, searchTerm]);
 
@@ -92,17 +90,22 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
 
   const goButton = useRef(null);
 
-  const onKeyDown = useCallback(e => {
-    // On an "Enter", click the Go button
-    if (e.key === 'Enter' || e.keyCode === ENTER_KEY) {
-      goButton && goButton.current && goButton.current.click();
-    } else if (e.key === 'ArrowDown' || e.keyCode === ARROW_DOWN_KEY) {
-      // prevent scrolldown
-      e.preventDefault();
-      // find first result in the dropdown and focus
-      document.querySelector(`${SearchResultsContainer} ${SearchResultLink}`).focus();
-    }
-  }, []);
+  const onKeyDown = useCallback(
+    e => {
+      // On an "Enter", click the Go button
+      if (e.key === 'Enter' || e.keyCode === ENTER_KEY) {
+        goButton && goButton.current && goButton.current.click();
+      } else if (e.key === 'ArrowDown' || e.keyCode === ARROW_DOWN_KEY) {
+        // prevent scrolldown
+        e.preventDefault();
+        // find first result in the dropdown and focus
+        if (searchContainerRef && searchContainerRef.current) {
+          searchContainerRef.current.querySelector(`${SearchResultLink}`).focus();
+        }
+      }
+    },
+    [searchContainerRef]
+  );
 
   const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
 

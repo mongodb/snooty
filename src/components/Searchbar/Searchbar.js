@@ -121,6 +121,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
       {isExpanded ? (
         <SearchContext.Provider
           value={{
+            searchContainerRef,
             searchFilter: draftSearchFilter,
             setSearchFilter: setDraftSearchFilter,
             searchTerm: value,
@@ -137,4 +138,5 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   );
 };
 
+// export { SearchbarContainer };
 export default Searchbar;
