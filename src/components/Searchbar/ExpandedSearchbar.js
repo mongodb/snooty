@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { useEventListener } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -89,6 +90,7 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
   );
 
   const goButton = useRef(null);
+  const searchTextbox = useRef(null);
 
   const onKeyDown = useCallback(
     e => {
@@ -107,12 +109,14 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
     [searchContainerRef]
   );
 
+  useEventListener('keydown', onKeyDown, { dependencies: [searchTextbox.current], element: searchTextbox.current });
+
   const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
 
   return (
     <>
       <MagnifyingGlass glyph="MagnifyingGlass" />
-      <SearchTextInput onKeyDown={onKeyDown} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
+      <SearchTextInput ref={searchTextbox} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
         <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
           <GoIcon glyph="ArrowRight" fill="#13AA52" />
