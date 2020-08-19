@@ -18,6 +18,7 @@ const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
 const FILTER_COLUMN_WIDTH = '173px';
 const MAX_MOBILE_WIDTH = '616px';
+const ROW_GAP = theme.size.default;
 const SEARCH_RESULT_HEIGHT = '128px';
 
 const commonTextStyling = css`
@@ -106,6 +107,7 @@ const StyledSearchResult = styled(SearchResult)`
   border-radius: ${theme.size.tiny};
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
   height: ${SEARCH_RESULT_HEIGHT};
+  position: relative;
   /* place-self adds both align-self and justify-self for flexbox */
   place-self: center;
   width: 100%;
@@ -120,15 +122,26 @@ const StyledSearchResult = styled(SearchResult)`
       background-color: unset !important;
     }
   }
+
+  /* Create a pseudoelement to take up space between rows for hover effect */
+  :before {
+    content: '';
+    position: absolute;
+    top: calc(-${ROW_GAP} / 2);
+    left: 0;
+    right: 0;
+    bottom: calc(-${ROW_GAP} / 2);
+    background-color: transparent;
+  }
 `;
 
 const StyledSearchResults = styled('div')`
   box-shadow: none;
   display: grid;
   grid-area: results;
-  grid-template-rows: ${SEARCH_RESULT_HEIGHT};
+  /* Build space between rows into row height for hover effect */
+  grid-auto-rows: calc(${SEARCH_RESULT_HEIGHT} + ${ROW_GAP});
   height: 100%;
-  row-gap: ${theme.size.default};
   width: 100%;
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
   :hover {
