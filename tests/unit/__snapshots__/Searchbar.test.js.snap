@@ -22,7 +22,7 @@ exports[`Searchbar renders correctly without browser 2`] = `
     value={
       Object {
         "searchFilter": null,
-        "searchTerm": false,
+        "searchTerm": "",
         "setSearchFilter": [Function],
         "shouldAutofocus": undefined,
       }
@@ -31,7 +31,7 @@ exports[`Searchbar renders correctly without browser 2`] = `
     <ExpandedSearchbar
       onChange={[Function]}
       onMobileClose={[Function]}
-      value={false}
+      value=""
     />
   </ContextProvider>
 </SearchbarContainer>

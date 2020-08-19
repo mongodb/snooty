@@ -53,7 +53,7 @@ const SearchbarContainer = styled('div')`
 `;
 
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
-  const [value, setValue] = useState(false);
+  const [value, setValue] = useState('');
   const [searchFilter, setSearchFilter] = useState(null);
   // Use a second search filter state var to track filters but not make any calls yet
   const [draftSearchFilter, setDraftSearchFilter] = useState(null);
