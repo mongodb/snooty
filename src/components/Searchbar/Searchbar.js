@@ -138,5 +138,4 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   );
 };
 
-// export { SearchbarContainer };
 export default Searchbar;
