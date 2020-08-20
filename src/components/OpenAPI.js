@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const OpenAPI = ({ nodeData: { children } }) => (
+const OpenAPI = ({ nodeData: { children }, ...rest }) => (
   <>
     {children.map((node, i) => (
-      <ComponentFactory nodeData={node} key={i} sectionDepth={1} />
+      <ComponentFactory {...rest} key={i} nodeData={node} />
     ))}
   </>
 );

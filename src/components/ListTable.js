@@ -9,7 +9,7 @@ const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
   const stubColumnCount = parseInt(getNestedValue(['options', 'stub-columns'], nodeData), 10) || 0;
   const headerRows = children[0].children[0].children.slice(0, headerRowCount);
   const bodyRows = children[0].children.slice(headerRowCount);
-  const customWidth = getNestedValue(['options', 'width'], nodeData) || 'auto';
+  const customWidth = getNestedValue(['options', 'width'], nodeData) || '100%';
   const customAlign = getNestedValue(['options', 'align'], nodeData)
     ? `align-${getNestedValue(['options', 'align'], nodeData)}`
     : '';

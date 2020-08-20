@@ -9,10 +9,13 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
+import { getNestedValue } from '../utils/get-nested-value';
 
-const boldPathParameters = str => {
+const formatPath = str => {
+  // Bold path parameters (sections that appear between braces)
+  // Add zero-width spaces after forward slashes so that linebreak occurs after a slash, not within a word
   const betweenBraces = new RegExp(/(\{).+?(\})/, 'g');
-  return str.replace(betweenBraces, match => `<strong>${match}</strong>`);
+  return str.replace(/\//g, `/&#8203;`).replace(betweenBraces, match => `<strong>${match}</strong>`);
 };
 
 const methodBadgeMap = {
@@ -21,6 +24,25 @@ const methodBadgeMap = {
   DELETE: 'red',
   PUT: 'yellow',
   PATCH: 'yellow',
+};
+
+const splitChildren = children => {
+  if (children.length === 0) {
+    return [null, children];
+  }
+
+  // Check for a summary
+  const firstChild = children[0];
+  if (firstChild.type === 'paragraph') {
+    return [firstChild, children.slice(1)];
+  }
+
+  // If no summary exists, check for a description field
+  if (getNestedValue(['children', 0, 'id'], firstChild) === 'description') {
+    const description = getNestedValue(['children', 1], firstChild);
+    return [description, children.slice(1)];
+  }
+  return [null, children];
 };
 
 const OperationHeader = styled('div')`
@@ -37,20 +59,24 @@ const OperationHeader = styled('div')`
 `;
 
 const Path = styled('code')`
-  overflow-wrap: break-word;
-  word-break: break-all;
+  color: ${uiColors.black};
 `;
 
-const OperationBody = styled('div')`
-  margin: ${({ theme }) => `${theme.size.medium} ${theme.size.large}`};
+const bodyMargins = ({ size }) => css`
+  margin: ${size.medium} ${size.large};
 `;
 
-const splitChildren = children => {
-  if (children.length > 0 && children[0].type === 'paragraph') {
-    return [children[0], children.slice(1)];
-  }
-  return [null, children];
-};
+const clampText = ({ showDetails }) => css`
+  ${!showDetails &&
+    `
+      & > p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    `}
+`;
 
 // TODO: Properly handle operation summary
 const Operation = ({
@@ -73,7 +99,7 @@ const Operation = ({
     >
       <OperationHeader>
         <Badge variant={methodBadgeMap[method]}>{method}</Badge>
-        <Path dangerouslySetInnerHTML={{ __html: boldPathParameters(path) }} />
+        <Path dangerouslySetInnerHTML={{ __html: formatPath(path) }} />
         <IconButton
           onClick={() => setShowDetails(!showDetails)}
           css={css`
@@ -83,17 +109,23 @@ const Operation = ({
           <Icon glyph={showDetails ? 'ChevronUp' : 'ChevronDown'} />
         </IconButton>
       </OperationHeader>
-      <OperationBody>
-        {description && <ComponentFactory {...rest} nodeData={description} />}
-
-        {showDetails && (
-          <>
-            {details.map((child, index) => (
-              <ComponentFactory {...rest} key={index} nodeData={child} />
-            ))}
-          </>
-        )}
-      </OperationBody>
+      {description && (
+        <div
+          css={css`
+            ${bodyMargins({ size })};
+            ${clampText({ showDetails })};
+          `}
+        >
+          <ComponentFactory {...rest} nodeData={description} />
+        </div>
+      )}
+      {showDetails && (
+        <div css={bodyMargins({ size })}>
+          {details.map((child, index) => (
+            <ComponentFactory {...rest} key={index} nodeData={child} sectionDepth={2} />
+          ))}
+        </div>
+      )}
     </Card>
   );
 };
