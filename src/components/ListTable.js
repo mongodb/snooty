@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import ComponentFactory from './ComponentFactory';
 import CSSWrapper from './CSSWrapper';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -23,7 +24,11 @@ const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
   return (
     <table
       className={['docutils', getNestedValue(['options', 'class'], nodeData) || '', widths, customAlign].join(' ')}
-      style={{ width: customWidth }}
+      css={css`
+        display: block;
+        overflow-x: auto;
+        width: ${customWidth};
+      `}
     >
       {widths === 'colwidths-given' && <ColGroup widths={customWidths.split(/[ ,]+/)} />}
       <ListTableHeader {...rest} rows={headerRows} stubColumnCount={stubColumnCount} />

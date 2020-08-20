@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { useTheme } from 'emotion-theming';
 import Badge from '@leafygreen-ui/badge';
 import Card from '@leafygreen-ui/card';
 import Icon from '@leafygreen-ui/icon';
@@ -10,6 +9,7 @@ import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
+import { theme } from '../theme/docsTheme';
 
 const formatPath = str => {
   // Bold path parameters (sections that appear between braces)
@@ -46,15 +46,19 @@ const splitChildren = children => {
 };
 
 const OperationHeader = styled('div')`
-  align-items: center;
+  align-items: baseline;
   background-color: ${uiColors.gray.light3};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: ${({ theme }) => `${theme.size.default} ${theme.size.large}`};
+  padding: ${theme.size.default} ${theme.size.large};
 
   & > *:not(:last-child) {
     margin-right: ${({ theme }) => `${theme.size.default}`};
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    padding: ${theme.size.default};
   }
 `;
 
@@ -62,8 +66,12 @@ const Path = styled('code')`
   color: ${uiColors.black};
 `;
 
-const bodyMargins = ({ size }) => css`
-  margin: ${size.medium} ${size.large};
+const bodyMargins = ({ theme }) => css`
+  margin: ${theme.size.medium} ${theme.size.large};
+
+  @media ${theme.screenSize.upToSmall} {
+    margin: ${theme.size.default};
+  }
 `;
 
 const clampText = ({ showDetails }) => css`
@@ -88,13 +96,12 @@ const Operation = ({
 }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [description, details] = splitChildren(children);
-  const { size } = useTheme();
   method = method.toUpperCase();
   return (
     <Card
       id={hash}
       css={css`
-        margin-bottom: ${size.default};
+        margin-bottom: ${theme.size.default};
       `}
     >
       <OperationHeader>
@@ -104,6 +111,8 @@ const Operation = ({
           onClick={() => setShowDetails(!showDetails)}
           css={css`
             margin-left: auto;
+            /* Move up to improve alignment with text baseline */
+            top: -6px;
           `}
         >
           <Icon glyph={showDetails ? 'ChevronUp' : 'ChevronDown'} />
@@ -112,7 +121,7 @@ const Operation = ({
       {description && (
         <div
           css={css`
-            ${bodyMargins({ size })};
+            ${bodyMargins({ theme })};
             ${clampText({ showDetails })};
           `}
         >
@@ -120,7 +129,14 @@ const Operation = ({
         </div>
       )}
       {showDetails && (
-        <div css={bodyMargins({ size })}>
+        <div
+          css={css`
+            ${bodyMargins({ theme })};
+            & > section {
+              margin-bottom: ${theme.size.large};
+            }
+          `}
+        >
           {details.map((child, index) => (
             <ComponentFactory {...rest} key={index} nodeData={child} sectionDepth={2} />
           ))}
