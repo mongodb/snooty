@@ -1,15 +1,18 @@
 import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { useEventListener } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchTextInput from './SearchTextInput';
+import { SearchResultLink } from './SearchResult';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from './SearchContext';
 
+const ARROW_DOWN_KEY = 40;
 const CLOSE_BUTTON_SIZE = theme.size.medium;
 const ENTER_KEY = 13;
 const GO_BUTTON_COLOR = uiColors.green.light3;
@@ -51,7 +54,6 @@ const GoButton = styled(IconButton)`
   top: ${theme.size.small};
   width: ${GO_BUTTON_SIZE};
   z-index: 1;
-  ${removeDefaultHoverEffects};
 `;
 
 const GoIcon = styled(Icon)`
@@ -75,7 +77,7 @@ const MagnifyingGlass = styled(Icon)`
 
 const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
   const { isMobile } = useScreenSize();
-  const { searchTerm, searchFilter } = useContext(SearchContext);
+  const { searchContainerRef, searchTerm, searchFilter } = useContext(SearchContext);
   const isSearching = useMemo(() => !!searchTerm && isFocused, [isFocused, searchTerm]);
   const shouldShowGoButton = useMemo(() => !!searchTerm && !isMobile, [isMobile, searchTerm]);
 
@@ -87,20 +89,34 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
     [onChange]
   );
 
-  const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
-
   const goButton = useRef(null);
-  // On an "Enter", click the Go button
-  const onKeyDown = useCallback(e => {
-    if (e.key === 'Enter' || e.keyCode === ENTER_KEY) {
-      goButton && goButton.current && goButton.current.click();
-    }
-  }, []);
+  const searchTextbox = useRef(null);
+
+  const onKeyDown = useCallback(
+    e => {
+      // On an "Enter", click the Go button
+      if (e.key === 'Enter' || e.keyCode === ENTER_KEY) {
+        goButton && goButton.current && goButton.current.click();
+      } else if (e.key === 'ArrowDown' || e.keyCode === ARROW_DOWN_KEY) {
+        // prevent scrolldown
+        e.preventDefault();
+        // find first result in the dropdown and focus
+        if (searchContainerRef && searchContainerRef.current) {
+          searchContainerRef.current.querySelector(`${SearchResultLink}`).focus();
+        }
+      }
+    },
+    [searchContainerRef]
+  );
+
+  useEventListener('keydown', onKeyDown, { dependencies: [searchTextbox.current], element: searchTextbox.current });
+
+  const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
 
   return (
     <>
       <MagnifyingGlass glyph="MagnifyingGlass" />
-      <SearchTextInput onKeyDown={onKeyDown} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
+      <SearchTextInput ref={searchTextbox} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
         <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
           <GoIcon glyph="ArrowRight" fill="#13AA52" />

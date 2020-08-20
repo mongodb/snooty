@@ -75,7 +75,7 @@ const StyledTextInput = styled(TextInput)`
   }
 `;
 
-const SearchTextInput = ({ isSearching, onChange, value, ...props }) => {
+const SearchTextInput = React.forwardRef(({ isSearching, onChange, value, ...props }, ref) => {
   const { shouldAutofocus } = useContext(SearchContext);
   return (
     <StyledTextInput
@@ -84,12 +84,13 @@ const SearchTextInput = ({ isSearching, onChange, value, ...props }) => {
       isSearching={isSearching}
       onChange={onChange}
       placeholder="Search Documentation"
+      ref={ref}
       tabIndex="0"
       value={value}
       {...props}
     />
   );
-};
+});
 
 // Also export the styled component for styled selector use
 export { activeTextBarStyling, StyledTextInput };
