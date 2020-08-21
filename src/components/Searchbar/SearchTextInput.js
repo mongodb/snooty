@@ -81,7 +81,7 @@ const SearchWrapper = styled('span')`
   }
 `;
 
-const SearchTextInput = ({ isSearching, onChange, value, ...props }) => {
+const SearchTextInput = React.forwardRef(({ isSearching, onChange, value, ...props }, ref) => {
   const { shouldAutofocus } = useContext(SearchContext);
   return (
     <SearchWrapper isSearching={isSearching}>
@@ -90,13 +90,14 @@ const SearchTextInput = ({ isSearching, onChange, value, ...props }) => {
         label="Search Docs"
         onChange={onChange}
         placeholder="Search Documentation"
+        ref={ref}
         tabIndex="0"
         value={value}
         {...props}
       />
     </SearchWrapper>
   );
-};
+});
 
 // Also export the styled component for styled selector use
 export { activeTextBarStyling, StyledTextInput };
