@@ -7,6 +7,6 @@ export const searchParamsToURL = (searchQuery, searchFilters, isMarian = true) =
   if (isMarian) {
     return `${MARIAN_URL}search${queryParams}`;
   } else {
-    return withPrefix(`search/${queryParams}`);
+    return withPrefix(`/search${queryParams}`);
   }
 };
