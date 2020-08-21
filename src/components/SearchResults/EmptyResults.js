@@ -4,6 +4,7 @@ import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
+export const EMPTY_STATE_HEIGHT = '150px';
 const MAGNIFYING_GLASS_SIZE = '40px';
 const MAX_WIDTH = '337px';
 

@@ -13,11 +13,12 @@ import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
-import EmptyResults from './EmptyResults';
+import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
 const FILTER_COLUMN_WIDTH = '173px';
+const LANDING_MARGIN = '40px';
 const MAX_MOBILE_WIDTH = '616px';
 const SEARCH_RESULT_HEIGHT = '128px';
 
@@ -26,6 +27,10 @@ const commonTextStyling = css`
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
+`;
+
+const EmptyResultsContainer = styled('div')`
+  margin-top: calc(50vh - ${theme.navbar.height} - ${LANDING_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2);
 `;
 
 const HeaderText = styled('h1')`
@@ -215,7 +220,9 @@ const SearchResults = () => {
           <StyledSearchFilters hasSideLabels={false} />
         </SearchResultsContainer>
       ) : (
-        <EmptyResults />
+        <EmptyResultsContainer>
+          <EmptyResults />
+        </EmptyResultsContainer>
       )}
     </SearchContext.Provider>
   );
