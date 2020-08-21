@@ -18,7 +18,8 @@ import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
 const FILTER_COLUMN_WIDTH = '173px';
-const LANDING_MARGIN = '40px';
+const LANDING_MODULE_MARGIN = '28px';
+const LANDING_PAGE_MARGIN = '40px';
 const MAX_MOBILE_WIDTH = '616px';
 const SEARCH_RESULT_HEIGHT = '128px';
 
@@ -30,7 +31,12 @@ const commonTextStyling = css`
 `;
 
 const EmptyResultsContainer = styled('div')`
-  margin-top: calc(50vh - ${theme.navbar.height} - ${LANDING_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2);
+  /* We want to place the empty state in the middle of the page. To do so, we
+  must account for the navbar, any margins added from using the blank landing
+  template, and half of the height of the empty state component */
+  margin-top: calc(
+    50vh - ${theme.navbar.height} - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2
+  );
 `;
 
 const HeaderText = styled('h1')`
