@@ -14,7 +14,7 @@ import { theme } from '../theme/docsTheme';
 // Bold path parameters (sections that appear between braces)
 // Add zero-width spaces after forward slashes so that linebreak occurs after a slash, not within a word
 const formatPath = str => {
-  const betweenBraces = new RegExp(/(\{).+?(\})/, 'g');
+  const betweenBraces = new RegExp(/(\{)[^}]+(\})/, 'g');
   return str.replace(/\//g, `/&#8203;`).replace(betweenBraces, match => `<strong>${match}</strong>`);
 };
 
@@ -67,6 +67,10 @@ const OperationHeader = styled('div')`
 
 const Path = styled('code')`
   color: ${uiColors.black};
+
+  @media ${theme.screenSize.upToSmall} {
+    word-break: break-all;
+  }
 `;
 
 const bodyMargins = ({ theme }) => css`
