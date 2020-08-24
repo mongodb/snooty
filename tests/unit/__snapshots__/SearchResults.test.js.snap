@@ -18,19 +18,8 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       Search Results
     </title>
   </HelmetWrapper>
-  <SearchResultsContainer>
-    <HeaderText>
-      All search results
-       for "
-      "
-    </HeaderText>
-    <StyledSearchResults />
-    <FilterHeader>
-      Filter By
-    </FilterHeader>
-    <StyledSearchFilters
-      hasSideLabels={false}
-    />
-  </SearchResultsContainer>
+  <EmptyResultsContainer>
+    <EmptyResults />
+  </EmptyResultsContainer>
 </ContextProvider>
 `;
