@@ -119,7 +119,10 @@ const SearchResult = React.memo(
         } else {
           // This is the last result, so let's loop back to the top
           if (searchContainerRef && searchContainerRef.current) {
-            searchContainerRef.current.querySelector(`${SearchResultLink}`).focus();
+            const firstLink = searchContainerRef.current.querySelector(`${SearchResultLink}`);
+            if (firstLink) {
+              firstLink.focus();
+            }
           }
         }
       },

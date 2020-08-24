@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
+import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import { StyledTextInput } from '../Searchbar/SearchTextInput';
 
-export const EMPTY_STATE_HEIGHT = '150px';
+export const EMPTY_STATE_HEIGHT = '166px';
 const MAGNIFYING_GLASS_SIZE = '40px';
 const MAX_WIDTH = '337px';
+
+const MagnifyingGlassButton = styled(IconButton)`
+  /* Give 8px space on each side for hover state */
+  height: calc(${MAGNIFYING_GLASS_SIZE} + ${theme.size.default});
+  width: calc(${MAGNIFYING_GLASS_SIZE} + ${theme.size.default});
+  span {
+    height: ${MAGNIFYING_GLASS_SIZE};
+    width: ${MAGNIFYING_GLASS_SIZE};
+  }
+`;
 
 const MagnifyingGlass = styled(Icon)`
   color: ${uiColors.black};
@@ -37,16 +49,26 @@ const EmptyStateContainer = styled('div')`
   text-align: center;
 `;
 
-const EmptyResults = () => (
-  <EmptyStateContainer>
-    <MagnifyingGlass glyph="MagnifyingGlass" />
-    <TitleText>
-      <strong>Search MongoDB Documentation</strong>
-    </TitleText>
-    <SupportingText>
-      Find guides, examples, and best practices for working with the MongoDB data platform.
-    </SupportingText>
-  </EmptyStateContainer>
-);
+const EmptyResults = () => {
+  const focusOnSearchbar = useCallback(() => {
+    const searchbar = document.querySelector(`${StyledTextInput} input`);
+    if (searchbar) {
+      searchbar.focus();
+    }
+  }, []);
+  return (
+    <EmptyStateContainer>
+      <MagnifyingGlassButton ariaLabel="Search MongoDB Documentation" onClick={focusOnSearchbar}>
+        <MagnifyingGlass glyph="MagnifyingGlass" />
+      </MagnifyingGlassButton>
+      <TitleText>
+        <strong>Search MongoDB Documentation</strong>
+      </TitleText>
+      <SupportingText>
+        Find guides, examples, and best practices for working with the MongoDB data platform.
+      </SupportingText>
+    </EmptyStateContainer>
+  );
+};
 
 export default EmptyResults;
