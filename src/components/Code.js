@@ -99,6 +99,4 @@ Code.defaultProps = {
   },
 };
 
-Code.contextType = TabContext;
-
 export default Code;

@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when no summary is present renders correctly  1`] = `
+<OperationHeader>
+  <Badge
+    variant="blue"
+  >
+    GET
+  </Badge>
+  <Path
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "/&#8203;auth/&#8203;providers",
+      }
+    }
+  />
+  <Icon
+    glyph="ChevronDown"
+  />
+</OperationHeader>
+<ComponentFactory
+  nodeData={
+    Object {
+      "children": Array [
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 23,
+            },
+          },
+          "type": "text",
+          "value": "This is a description. Lorem ipsum dolor sit amet, consectetur adipiscing
+elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum.",
+        },
+      ],
+      "position": Object {
+        "start": Object {
+          "line": 23,
+        },
+      },
+      "type": "paragraph",
+    }
+  }
+/>
+`;
+
+exports[`when no summary or description is present renders correctly  1`] = `
+<OperationHeader>
+  <Badge
+    variant="green"
+  >
+    POST
+  </Badge>
+  <Path
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "/&#8203;auth/&#8203;providers/&#8203;<strong>{provider}</strong>/&#8203;login",
+      }
+    }
+  />
+  <Icon
+    glyph="ChevronDown"
+  />
+</OperationHeader>
+`;
+
+exports[`when rendering all fields renders correctly  1`] = `
+<OperationHeader>
+  <Badge
+    variant="blue"
+  >
+    GET
+  </Badge>
+  <Path
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "/&#8203;auth/&#8203;profile",
+      }
+    }
+  />
+  <Icon
+    glyph="ChevronDown"
+  />
+</OperationHeader>
+<ComponentFactory
+  nodeData={
+    Object {
+      "children": Array [
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 216,
+            },
+          },
+          "type": "text",
+          "value": "Get information about the currently logged in user.",
+        },
+      ],
+      "position": Object {
+        "start": Object {
+          "line": 216,
+        },
+      },
+      "type": "paragraph",
+    }
+  }
+/>
+`;
