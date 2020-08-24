@@ -1,9 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when rendering a list table with fixed widths renders correctly 1`] = `
+.emotion-0 {
+  display: block;
+  overflow-x: auto;
+  width: auto;
+}
+
 <table
-  class="docutils guide-tablenate-odd colwidths-given "
-  style="width:auto"
+  class="docutils guide-tablenate-odd colwidths-given  emotion-0"
 >
   <colgroup>
     <col
@@ -58,9 +63,14 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 `;
 
 exports[`when rendering a list-table directive renders correctly 1`] = `
+.emotion-0 {
+  display: block;
+  overflow-x: auto;
+  width: auto;
+}
+
 <table
-  class="docutils guide-tablenate colwidths-auto "
-  style="width:auto"
+  class="docutils guide-tablenate colwidths-auto  emotion-0"
 >
   <thead
     valign="bottom"

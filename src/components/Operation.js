@@ -11,9 +11,9 @@ import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme';
 
+// Bold path parameters (sections that appear between braces)
+// Add zero-width spaces after forward slashes so that linebreak occurs after a slash, not within a word
 const formatPath = str => {
-  // Bold path parameters (sections that appear between braces)
-  // Add zero-width spaces after forward slashes so that linebreak occurs after a slash, not within a word
   const betweenBraces = new RegExp(/(\{).+?(\})/, 'g');
   return str.replace(/\//g, `/&#8203;`).replace(betweenBraces, match => `<strong>${match}</strong>`);
 };
@@ -26,6 +26,9 @@ const methodBadgeMap = {
   PATCH: 'yellow',
 };
 
+// Identify the text node to display on the collapsed card
+// If present, show the operation summary. If no summary, show description.
+// Otherwise, show nothing.
 const splitChildren = children => {
   if (children.length === 0) {
     return [null, children];
@@ -54,7 +57,7 @@ const OperationHeader = styled('div')`
   padding: ${theme.size.default} ${theme.size.large};
 
   & > *:not(:last-child) {
-    margin-right: ${({ theme }) => `${theme.size.default}`};
+    margin-right: ${theme.size.default};
   }
 
   @media ${theme.screenSize.upToSmall} {
@@ -74,6 +77,7 @@ const bodyMargins = ({ theme }) => css`
   }
 `;
 
+// Truncate text after two lines when the card is collapsed
 const clampText = ({ showDetails }) => css`
   ${!showDetails &&
     `
@@ -86,7 +90,6 @@ const clampText = ({ showDetails }) => css`
     `}
 `;
 
-// TODO: Properly handle operation summary
 const Operation = ({
   nodeData: {
     children,
@@ -108,6 +111,7 @@ const Operation = ({
         <Badge variant={methodBadgeMap[method]}>{method}</Badge>
         <Path dangerouslySetInnerHTML={{ __html: formatPath(path) }} />
         <IconButton
+          ariaLabel={`${showDetails ? 'Hide' : 'Show'} operation details`}
           onClick={() => setShowDetails(!showDetails)}
           css={css`
             margin-left: auto;
