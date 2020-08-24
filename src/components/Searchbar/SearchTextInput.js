@@ -51,7 +51,6 @@ const StyledTextInput = styled(TextInput)`
   @media ${theme.screenSize.upToSmall} {
     background-color: #fff;
     padding-bottom: ${theme.size.tiny};
-    ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`};
     div > input {
       /* Always have this element filled in for mobile */
       ${activeTextBarStyling}
@@ -75,20 +74,28 @@ const StyledTextInput = styled(TextInput)`
   }
 `;
 
+const SearchWrapper = styled('span')`
+  @media ${theme.screenSize.upToSmall} {
+    /* Putting this attribute on the input causes a DOM warning */
+    ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`}
+  }
+`;
+
 const SearchTextInput = React.forwardRef(({ isSearching, onChange, value, ...props }, ref) => {
   const { shouldAutofocus } = useContext(SearchContext);
   return (
-    <StyledTextInput
-      autoFocus={shouldAutofocus}
-      label="Search Docs"
-      isSearching={isSearching}
-      onChange={onChange}
-      placeholder="Search Documentation"
-      ref={ref}
-      tabIndex="0"
-      value={value}
-      {...props}
-    />
+    <SearchWrapper isSearching={isSearching}>
+      <StyledTextInput
+        autoFocus={shouldAutofocus}
+        label="Search Docs"
+        onChange={onChange}
+        placeholder="Search Documentation"
+        ref={ref}
+        tabIndex="0"
+        value={value}
+        {...props}
+      />
+    </SearchWrapper>
   );
 });
 

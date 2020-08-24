@@ -140,12 +140,12 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
       </MagnifyingGlassButton>
       <SearchTextInput ref={searchTextbox} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
-        <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
+        <GoButton ref={goButton} type="submit" ariaLabel="Go" href={searchUrl}>
           <GoIcon glyph="ArrowRight" fill="#13AA52" />
         </GoButton>
       )}
       {isMobile && (
-        <CloseButton aria-label="Close Search" onClick={onMobileClose}>
+        <CloseButton ariaLabel="Close Search" onClick={onMobileClose}>
           <Icon glyph="X" fill={uiColors.gray.base} />
         </CloseButton>
       )}
