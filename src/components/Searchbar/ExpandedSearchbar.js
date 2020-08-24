@@ -67,12 +67,23 @@ const GoIcon = styled(Icon)`
 
 const MagnifyingGlass = styled(Icon)`
   color: ${uiColors.gray.base};
-  left: ${theme.size.default};
-  position: absolute;
-  /* This icon is 16px tall in a 36px tall container, so 10px gives equal spacing */
-  top: 10px;
   transition: color 150ms ease-in;
+`;
+
+const MagnifyingGlassButton = styled(IconButton)`
+  padding: 0;
+  position: absolute;
+  /* This button is 28px tall in a 36px tall container, so 4px gives equal spacing */
+  top: ${theme.size.tiny};
+  left: ${theme.size.small};
   z-index: 1;
+  /* Remove hover state */
+  :before {
+    display: none;
+  }
+  :after {
+    display: none;
+  }
 `;
 
 const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
@@ -89,6 +100,12 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
     [onChange]
   );
 
+  const onSearchFocus = useCallback(() => {
+    if (searchTextbox && searchTextbox.current) {
+      searchTextbox.current.focus();
+    }
+  }, []);
+
   const goButton = useRef(null);
   const searchTextbox = useRef(null);
 
@@ -102,7 +119,10 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
         e.preventDefault();
         // find first result in the dropdown and focus
         if (searchContainerRef && searchContainerRef.current) {
-          searchContainerRef.current.querySelector(`${SearchResultLink}`).focus();
+          const firstLink = searchContainerRef.current.querySelector(`${SearchResultLink}`);
+          if (firstLink) {
+            firstLink.focus();
+          }
         }
       }
     },
@@ -115,7 +135,9 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
 
   return (
     <>
-      <MagnifyingGlass glyph="MagnifyingGlass" />
+      <MagnifyingGlassButton ariaLabel="Search MongoDB Documentation" onClick={onSearchFocus}>
+        <MagnifyingGlass glyph="MagnifyingGlass" />
+      </MagnifyingGlassButton>
       <SearchTextInput ref={searchTextbox} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
         <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
