@@ -21,6 +21,7 @@ exports[`renders correctly without browser 1`] = `
     isExpanded={false}
     searchParamsToURL={[Function]}
     setIsExpanded={[Function]}
+    shouldAutofocus={true}
   />
 </Fragment>
 `;
