@@ -71,11 +71,11 @@ const MagnifyingGlass = styled(Icon)`
 `;
 
 const MagnifyingGlassButton = styled(IconButton)`
+  left: ${theme.size.small};
   padding: 0;
   position: absolute;
   /* This button is 28px tall in a 36px tall container, so 4px gives equal spacing */
   top: ${theme.size.tiny};
-  left: ${theme.size.small};
   z-index: 1;
   /* Remove hover state */
   :before {
