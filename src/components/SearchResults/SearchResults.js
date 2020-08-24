@@ -13,10 +13,13 @@ import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
+import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
 const FILTER_COLUMN_WIDTH = '173px';
+const LANDING_MODULE_MARGIN = '28px';
+const LANDING_PAGE_MARGIN = '40px';
 const MAX_MOBILE_WIDTH = '616px';
 const ROW_GAP = theme.size.default;
 const SEARCH_RESULT_HEIGHT = '128px';
@@ -26,6 +29,15 @@ const commonTextStyling = css`
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
+`;
+
+const EmptyResultsContainer = styled('div')`
+  /* We want to place the empty state in the middle of the page. To do so, we
+  must account for the navbar, any margins added from using the blank landing
+  template, and half of the height of the empty state component */
+  margin-top: calc(
+    50vh - ${theme.navbar.height} - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2
+  );
 `;
 
 const HeaderText = styled('h1')`
@@ -204,27 +216,33 @@ const SearchResults = () => {
       <Helmet>
         <title>Search Results</title>
       </Helmet>
-      <SearchResultsContainer>
-        <HeaderText>
-          {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
-        </HeaderText>
-        <StyledSearchResults>
-          {searchResults.map(({ title, preview, url }, index) => (
-            <StyledSearchResult
-              key={`${url}${index}`}
-              onClick={() =>
-                reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
-              }
-              title={title}
-              preview={preview}
-              url={url}
-              useLargeTitle
-            />
-          ))}
-        </StyledSearchResults>
-        <FilterHeader>Filter By</FilterHeader>
-        <StyledSearchFilters hasSideLabels={false} />
-      </SearchResultsContainer>
+      {searchResults && searchResults.length ? (
+        <SearchResultsContainer>
+          <HeaderText>
+            {searchFilterProperty ? `${searchFilterProperty} results` : 'All search results'} for "{searchTerm}"
+          </HeaderText>
+          <StyledSearchResults>
+            {searchResults.map(({ title, preview, url }, index) => (
+              <StyledSearchResult
+                key={`${url}${index}`}
+                onClick={() =>
+                  reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
+                }
+                title={title}
+                preview={preview}
+                url={url}
+                useLargeTitle
+              />
+            ))}
+          </StyledSearchResults>
+          <FilterHeader>Filter By</FilterHeader>
+          <StyledSearchFilters hasSideLabels={false} />
+        </SearchResultsContainer>
+      ) : (
+        <EmptyResultsContainer>
+          <EmptyResults />
+        </EmptyResultsContainer>
+      )}
     </SearchContext.Provider>
   );
 };
