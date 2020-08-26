@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Loadable from '@loadable/component';
 import SiteMetadata from './site-metadata';
 import { Global, css } from '@emotion/core';
 import { TabContext } from './tab-context';
-import Widgets from './Widgets';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { theme } from '../theme/docsTheme.js';
+
+const Widgets = Loadable(() => import('./Widgets'));
 
 export default class DefaultLayout extends Component {
   constructor(props) {
