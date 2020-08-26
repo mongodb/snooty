@@ -31,6 +31,8 @@ const Label = styled('p')`
 
 const SelectedText = styled('p')`
   display: block;
+  font-family: Akzidenz;
+  font-size: ${theme.fontSize.small};
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
