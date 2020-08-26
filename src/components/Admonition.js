@@ -5,9 +5,8 @@ import Callout, { Variant } from '@leafygreen-ui/callout';
 import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
 
-// TODO: Update with example variant once added to LeafyGreen
 export const admonitionMap = {
-  example: Variant.Note,
+  example: Variant.Example,
   important: Variant.Important,
   note: Variant.Note,
   tip: Variant.Tip,
@@ -17,13 +16,16 @@ export const admonitionMap = {
 };
 
 const StyledCallout = styled(Callout)`
-  margin: 24px 0;
+  /* Add margin to right so drop shadow is visible */
+  margin: 24px 3px 24px 0;
 
-  & p {
-    margin: 0 0 12.5px;
+  /* Add margins below all child elements in the callout */
+  /* TODO: Increase margin when Callout component supports base font size of 16px */
+  & > div > div > * {
+    margin: 0 0 10px;
   }
 
-  & p:last-child {
+  & > div > div > *:last-child {
     margin: 0;
   }
 `;
@@ -34,8 +36,6 @@ const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
     title = `See: ${title}`;
   } else if (name === 'seealso') {
     title = `See Also: ${title}`;
-  } else if (name === 'example') {
-    title = `Example: ${title}`;
   }
 
   return (
