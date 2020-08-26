@@ -1,5 +1,6 @@
 import React from 'react';
-import { FeedbackFooter } from './Widgets/FeedbackWidget';
+import loadable from '@loadable/component';
+const FeedbackFooter = loadable(() => import('./Widgets/FeedbackWidget/FeedbackFooter'));
 
 const Footer = () => (
   <>

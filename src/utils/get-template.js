@@ -1,29 +1,23 @@
-const fs = require('fs');
-const path = require('path');
+import { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing } from '../templates';
 
-const buildPath = template => path.resolve(`src/templates/${template}.js`);
-
-// Returns the name of the template to be used based on the site, page name, and optional specified template.
-const getTemplate = (site, page, template) => {
-  const templatePath = buildPath(template);
-
-  // If template is specified, ensure file exists and use
-  if (fs.existsSync(templatePath)) {
-    return templatePath;
-  }
-
-  let templateName;
-  switch (site) {
-    case 'guides':
-      templateName = page === 'index' ? 'guides-index' : 'guide';
-      break;
-    case 'drivers':
-      templateName = page === 'index' ? 'ecosystem-index' : 'document';
-      break;
+const getTemplate = (key, slug) => {
+  switch (key) {
+    case 'blank':
+      return Blank;
+    case 'landing':
+      return Landing;
     default:
-      templateName = 'document';
+      const site = process.env.GATSBY_SITE;
+      const isIndex = slug === '/';
+      switch (site) {
+        case 'guides':
+          return isIndex ? GuidesIndex : Guide;
+        case 'drivers':
+          return isIndex ? DriversIndex : Document;
+        default:
+          return Document;
+      }
   }
-  return buildPath(templateName);
 };
 
-module.exports.getTemplate = getTemplate;
+export { getTemplate };

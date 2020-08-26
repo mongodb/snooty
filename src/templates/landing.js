@@ -5,7 +5,6 @@ import { Global, css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
-import DocumentBody from '../components/DocumentBody';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
@@ -30,7 +29,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
+const Landing = ({ children, pageContext: { slug, __refDocMapping } }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -38,9 +37,7 @@ const Landing = ({ pageContext: { slug, __refDocMapping }, ...rest }) => {
         <title>MongoDB Documentation</title>
       </Helmet>
       <Navbar />
-      <Wrapper>
-        <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
-      </Wrapper>
+      <Wrapper>{children}</Wrapper>
       <Footer />
       <Global
         styles={css`

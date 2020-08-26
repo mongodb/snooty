@@ -6,20 +6,18 @@ import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
-import DocumentBody from '../components/DocumentBody';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 
 const Document = props => {
   const {
+    children,
     pageContext: {
       slug,
       __refDocMapping,
       metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
     },
-    location,
-    ...rest
   } = props;
 
   const windowSize = useWindowSize();
@@ -60,7 +58,7 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
+                  {children}
                   {showPrevNext && (
                     <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   )}
