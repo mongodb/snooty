@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loadable from '@loadable/component';
+import loadable from '@loadable/component';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
 import { TabContext } from '../components/tab-context';
@@ -11,7 +11,7 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 
-const Widgets = Loadable(() => import('../components/Widgets'));
+const Widgets = loadable(() => import('../components/Widgets'));
 
 export default class DefaultLayout extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ export default class DefaultLayout extends Component {
       activeTabs: undefined,
       pillstrips: {},
     };
-    console.log(props.children);
   }
 
   componentDidMount() {
@@ -137,7 +136,6 @@ export default class DefaultLayout extends Component {
 
   render() {
     const { children, pageContext } = this.props;
-    console.log('!!', children);
     const { location, metadata, refDocMapping, slug, template } = pageContext;
     const { pillstrips } = this.state;
     const lookup = slug === '/' ? 'index' : slug;

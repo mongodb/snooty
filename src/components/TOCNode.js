@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from './Link';
 import { formatText } from '../utils/format-text';
@@ -27,6 +27,11 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const isDrawer = !!(options && options.drawer);
 
   const [isOpen, setIsOpen] = useState(isActive);
+
+  // If the active state of this node changes, change the open state to reflect it
+  useEffect(() => {
+    setIsOpen(isActive);
+  }, [isActive, isDrawer ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Show caret if not on first level of TOC
   const caretIcon =

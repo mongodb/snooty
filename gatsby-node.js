@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 const { initStitch } = require('./src/utils/setup/init-stitch');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
@@ -89,12 +88,6 @@ exports.createPages = async ({ actions }) => {
     await saveStaticFiles(metadata.static_files);
   }
 
-  const docBody = path.resolve(__dirname, './src/components/DocumentBody.js');
-  if (fs.existsSync(docBody)) {
-    console.log('EXISTS');
-  } else {
-    console.log('NOO');
-  }
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
