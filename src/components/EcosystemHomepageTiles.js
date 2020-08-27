@@ -52,11 +52,6 @@ const EcosystemHomepageTiles = () => {
       icon: <IconNode />,
     },
     {
-      slug: '/perl/',
-      title: 'Perl',
-      icon: <IconPerl />,
-    },
-    {
       slug: '/php/',
       title: 'PHP',
       icon: <IconPHP />,
