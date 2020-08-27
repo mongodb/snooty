@@ -53,12 +53,15 @@ import Rubric from './Rubric';
 import SearchResults from './SearchResults';
 import Field from './Field';
 import FieldList from './FieldList';
+import Operation from './Operation';
+import OpenAPI from './OpenAPI';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleIcon from './Roles/Icon';
+import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
 const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
@@ -75,6 +78,7 @@ const roleMap = {
   'icon-fa4': RoleIcon,
   'icon-mms': RoleIcon,
   'icon-charts': RoleIcon,
+  required: RoleRequired,
   sub: Subscript,
   subscript: Subscript,
   sup: Superscript,
@@ -115,6 +119,8 @@ const componentMap = {
   literalinclude: LiteralInclude,
   meta: Meta,
   only: Cond,
+  openapi: OpenAPI,
+  operation: Operation,
   paragraph: Paragraph,
   ref_role: RefRole,
   reference: Reference,
