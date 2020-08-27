@@ -56,10 +56,10 @@ export default class DefaultLayout extends Component {
    * - references: a list of the ids that refer to this footnote
    */
   getFootnotes = nodes => {
+    let anonymousCount = 0;
     const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
     return footnotes.reduce((map, footnote, index) => {
       // Track how many anonymous footnotes are on the page so that we can correctly associate footnotes and references
-      let anonymousCount = 0;
       if (footnote.name) {
         // Find references associated with a named footnote
         // eslint-disable-next-line no-param-reassign
