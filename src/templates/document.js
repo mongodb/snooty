@@ -14,7 +14,7 @@ const Document = ({
   children,
   pageContext: {
     slug,
-    refDocMapping,
+    page,
     metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
   },
 }) => {
@@ -24,7 +24,7 @@ const Document = ({
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
-  const pageOptions = getNestedValue(['ast', 'options'], refDocMapping);
+  const pageOptions = getNestedValue(['ast', 'options'], page);
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -74,7 +74,7 @@ const Document = ({
 
 Document.propTypes = {
   pageContext: PropTypes.shape({
-    refDocMapping: PropTypes.shape({
+    page: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,
       }).isRequired,

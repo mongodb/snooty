@@ -72,12 +72,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       );
     }
     return (
-      <Link
-        to={target}
-        aria-expanded={hasChildren ? isActive : undefined}
-        className={anchorTagClassNames}
-        onClick={() => setActiveSection(slug)}
-      >
+      <Link to={target} aria-expanded={hasChildren ? isActive : undefined} className={anchorTagClassNames}>
         {caretIcon}
         {formattedTitle}
       </Link>

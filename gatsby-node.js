@@ -100,8 +100,8 @@ exports.createPages = async ({ actions }) => {
           context: {
             metadata,
             slug,
-            layout: getNestedValue(['ast', 'options', 'template'], pageNodes),
-            refDocMapping: pageNodes,
+            template: getNestedValue(['ast', 'options', 'template'], pageNodes),
+            page: pageNodes,
             guidesMetadata: GUIDES_METADATA,
           },
         });

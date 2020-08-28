@@ -40,7 +40,7 @@ export default class DefaultLayout extends Component {
 
   preprocessPageNodes = () => {
     const { pageContext } = this.props;
-    const pageNodes = getNestedValue(['refDocMapping', 'ast', 'children'], pageContext) || [];
+    const pageNodes = getNestedValue(['page', 'ast', 'children'], pageContext) || [];
 
     // Map all footnotes and their references that appear on the page
     this.footnotes = this.getFootnotes(pageNodes);
@@ -136,7 +136,7 @@ export default class DefaultLayout extends Component {
 
   render() {
     const { children, pageContext } = this.props;
-    const { location, metadata, refDocMapping, slug, template } = pageContext;
+    const { location, metadata, page, slug, template } = pageContext;
     const { pillstrips } = this.state;
     const lookup = slug === '/' ? 'index' : slug;
     const siteTitle = getNestedValue(['title'], metadata) || '';
@@ -160,7 +160,7 @@ export default class DefaultLayout extends Component {
         <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
           <Widgets
             location={location}
-            pageOptions={getNestedValue(['ast', 'options'], refDocMapping)}
+            pageOptions={getNestedValue(['ast', 'options'], page)}
             pageTitle={pageTitle}
             publishedBranches={getNestedValue(['publishedBranches'], metadata)}
             slug={slug}
@@ -172,7 +172,11 @@ export default class DefaultLayout extends Component {
               addPillstrip={this.addPillstrip}
               footnotes={this.footnotes}
             >
-              {children}
+              {React.cloneElement(children, {
+                pillstrips,
+                addPillstrip: this.addPillstrip,
+                footnotes: this.footnotes,
+              })}
             </Template>
           </Widgets>
         </TabContext.Provider>
@@ -184,7 +188,7 @@ export default class DefaultLayout extends Component {
 DefaultLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
-    refDocMapping: PropTypes.shape({
+    page: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.arrayOf(PropTypes.object),
       }).isRequired,
