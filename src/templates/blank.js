@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import landingStyles from '../styles/landing.module.css';
 
-const Blank = ({ children, pageContext: { metadata, slug, __refDocMapping } }) => (
+const Blank = ({ children }) => (
   <React.Fragment>
     <div className="content">
       <div className={`main-column ${landingStyles.fullWidth}`} id="main-column">
@@ -19,10 +19,7 @@ const Blank = ({ children, pageContext: { metadata, slug, __refDocMapping } }) =
 );
 
 Blank.propTypes = {
-  pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.object.isRequired,
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
+  children: PropTypes.arrayOf(PropTypes.node),
 };
 
 export default Blank;

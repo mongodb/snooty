@@ -101,7 +101,7 @@ exports.createPages = async ({ actions }) => {
             metadata,
             slug,
             layout: getNestedValue(['ast', 'options', 'template'], pageNodes),
-            __refDocMapping: pageNodes,
+            refDocMapping: pageNodes,
             guidesMetadata: GUIDES_METADATA,
           },
         });

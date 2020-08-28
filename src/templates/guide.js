@@ -18,11 +18,11 @@ export default class Guide extends Component {
     super(propsFromServer);
 
     const {
-      pageContext: { __refDocMapping },
+      pageContext: { refDocMapping },
     } = this.props;
 
     // get data from server
-    this.sections = getNestedValue(['ast', 'children', 0, 'children'], __refDocMapping);
+    this.sections = getNestedValue(['ast', 'children', 0, 'children'], refDocMapping);
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
 
     this.state = {
@@ -119,7 +119,7 @@ export default class Guide extends Component {
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return (
-          <ComponentFactory nodeData={section} refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}} />
+          <ComponentFactory nodeData={section} refDocMapping={getNestedValue(['refDocMapping'], pageContext) || {}} />
         );
       });
     }
@@ -132,7 +132,7 @@ export default class Guide extends Component {
           guideSectionData={section}
           key={index}
           headingRef={this.sectionRefs[index]}
-          refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+          refDocMapping={getNestedValue(['refDocMapping'], pageContext) || {}}
           addTabset={this.addGuidesTabset}
           pillstrips={pillstrips}
         />
@@ -162,7 +162,7 @@ export default class Guide extends Component {
                 cloud={cloud}
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
-                refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+                refDocMapping={getNestedValue(['refDocMapping'], pageContext) || {}}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
                 title={findKeyValuePair(this.sections, 'type', 'heading')}
               />
@@ -180,7 +180,7 @@ export default class Guide extends Component {
 Guide.propTypes = {
   addPillstrip: PropTypes.func,
   pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.shape({
+    refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,
       }).isRequired,

@@ -29,7 +29,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ children, pageContext: { slug, __refDocMapping } }) => {
+const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -108,10 +108,7 @@ const Landing = ({ children, pageContext: { slug, __refDocMapping } }) => {
 };
 
 Landing.propTypes = {
-  pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.object.isRequired,
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
+  children: PropTypes.arrayOf(PropTypes.node),
 };
 
 export default Landing;

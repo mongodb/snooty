@@ -5,8 +5,8 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
 import Navbar from '../components/Navbar';
 
-const Index = ({ pageContext: { guidesMetadata, __refDocMapping } }) => {
-  const guides = findKeyValuePair(getNestedValue(['ast', 'children'], __refDocMapping), 'name', 'guide-index') || [];
+const Index = ({ pageContext: { guidesMetadata, refDocMapping } }) => {
+  const guides = findKeyValuePair(getNestedValue(['ast', 'children'], refDocMapping), 'name', 'guide-index') || [];
 
   return (
     <React.Fragment>
@@ -31,7 +31,7 @@ const Index = ({ pageContext: { guidesMetadata, __refDocMapping } }) => {
 Index.propTypes = {
   pageContext: PropTypes.shape({
     guidesMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
-    __refDocMapping: PropTypes.shape({
+    refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,
       }).isRequired,

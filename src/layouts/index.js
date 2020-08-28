@@ -184,7 +184,7 @@ export default class DefaultLayout extends Component {
 DefaultLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.shape({
+    refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.arrayOf(PropTypes.object),
       }).isRequired,

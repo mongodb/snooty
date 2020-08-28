@@ -10,23 +10,21 @@ import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 
-const Document = props => {
-  const {
-    children,
-    pageContext: {
-      slug,
-      __refDocMapping,
-      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
-    },
-  } = props;
-
+const Document = ({
+  children,
+  pageContext: {
+    slug,
+    refDocMapping,
+    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+  },
+}) => {
   const windowSize = useWindowSize();
   const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
 
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
-  const pageOptions = getNestedValue(['ast', 'options'], __refDocMapping);
+  const pageOptions = getNestedValue(['ast', 'options'], refDocMapping);
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -76,7 +74,7 @@ const Document = props => {
 
 Document.propTypes = {
   pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.shape({
+    refDocMapping: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,
       }).isRequired,
