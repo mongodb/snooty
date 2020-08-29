@@ -13,7 +13,6 @@ import IconNode from '../../static/svg/icons/icon-Node';
 import IconPHP from '../../static/svg/icons/icon-PHP';
 import IconPython from '../../static/svg/icons/icon-Python';
 import IconRuby from '../../static/svg/icons/icon-Ruby';
-import IconPerl from '../../static/svg/icons/icon-Perl';
 import IconScala from '../../static/svg/icons/icon-Scala';
 import IconSwift from '../../static/svg/icons/icon-Swift';
 import IconRust from '../../static/svg/icons/icon-Rust';
