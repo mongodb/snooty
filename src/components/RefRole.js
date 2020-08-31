@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
-const RefRole = ({ nodeData: { children, domain, fileid, name, target, url }, slug }) => {
+const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug }) => {
   // Render intersphinx target links
   if (url) {
     return (
@@ -16,11 +16,10 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, target, url }, sl
   }
 
   // Render internal target and page links
-  let link;
-  if (target) {
-    link = fileid === slug ? `#${target}` : `${fileid}#${target}`;
-  } else {
-    link = fileid;
+  let link = '';
+  if (fileid) {
+    const [filename, html_id] = fileid;
+    link = filename === slug ? `#${html_id}` : `${filename}#${html_id}`;
   }
 
   return (
@@ -34,11 +33,10 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, target, url }, sl
 
 RefRole.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.node).isRequired,
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
     domain: PropTypes.string.isRequired,
-    fileid: PropTypes.string,
+    fileid: PropTypes.arrayOf(PropTypes.string),
     name: PropTypes.string.isRequired,
-    target: PropTypes.string.isRequired,
     url: PropTypes.string,
   }).isRequired,
   slug: PropTypes.string.isRequired,
