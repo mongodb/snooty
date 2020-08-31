@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
-import { default as CodeBlock } from '@leafygreen-ui/code';
+import { css } from '@emotion/core';
+import { default as CodeBlock, Language } from '@leafygreen-ui/code';
 import {
   URI_PLACEHOLDER,
   USERNAME_PLACEHOLDER,
@@ -11,7 +12,6 @@ import {
 import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import { isBrowser } from '../utils/is-browser';
-import codeStyle from '../styles/code.module.css';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -25,39 +25,22 @@ const htmlDecode = input => {
   return doc.documentElement.textContent;
 };
 
-const Code = ({ nodeData: { copyable, lang = null, linenos, value }, uriWriter: { cloudURI, localURI } }) => {
-  const { activeTabs } = useContext(TabContext);
+const getLanguage = lang => {
+  if (Object.values(Language).includes(lang)) {
+    return lang;
+  } else if (lang === 'sh') {
+    // Writers commonly use 'sh' to represent shell scripts, but LeafyGreen and Highlight.js use the key 'shell'
+    return 'shell';
+  } else if (lang === 'js') {
+    // TODO: Remove this clause when LeafyGreen adds js alias
+    // https://jira.mongodb.org/browse/PD-843
+    return 'javascript';
+  }
+  return 'none';
+};
 
-  /*
-    TODO: Remove leafyGreenSupportedLangs list once https://jira.mongodb.org/browse/PD-574 
-    is resolved and unsupported languages automatically default to 'auto'
-    
-    leafyGreenSupportedLangs list was created to avoid the error leafygreen's Code
-    component throws when encountering an unsupported language
-  */
-  const leafyGreenSupportedLangs = [
-    'javascript',
-    'typescript',
-    'csp',
-    'cpp',
-    'go',
-    'java',
-    'perl',
-    'php',
-    'python',
-    'ruby',
-    'scala',
-    'swift',
-    'kotlin',
-    'bash',
-    'shell',
-    'sql',
-    'yaml',
-    'json',
-    'graphql',
-    'auto',
-    'none',
-  ];
+const Code = ({ nodeData: { copyable, lang = 'none', linenos, value }, uriWriter: { cloudURI, localURI } }) => {
+  const { activeTabs } = useContext(TabContext);
 
   let code = value;
 
@@ -70,9 +53,15 @@ const Code = ({ nodeData: { copyable, lang = null, linenos, value }, uriWriter: 
 
   return (
     <CodeBlock
-      className={codeStyle.code}
       copyable={copyable}
-      language={lang && leafyGreenSupportedLangs.includes(lang) ? lang : 'auto'}
+      css={css`
+        & * {
+          overflow-wrap: normal !important;
+          white-space: pre;
+          word-break: normal !important;
+        }
+      `}
+      language={getLanguage(lang)}
       showLineNumbers={linenos}
       variant="light"
     >
