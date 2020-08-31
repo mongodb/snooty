@@ -21,7 +21,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
     <ConditionalWrapper
       condition={shouldShowStarRating}
       wrapper={children => (
-        <HeadingContainer className={`heading-container-h${sectionDepth}`} stackVertically={isSmallScreen}>
+        <HeadingContainer stackVertically={isSmallScreen}>
           {children}
           <FeedbackHeading isStacked={isSmallScreen} />
         </HeadingContainer>
