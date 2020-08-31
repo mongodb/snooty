@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 
-const DefinitionListItem = ({ nodeData, nodeData: { children, term }, ...rest }) => {
+const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
   const termProps = {};
   const targetIdentifier = findKeyValuePair(term, 'type', 'inline_target');
   if (targetIdentifier) {
