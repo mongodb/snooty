@@ -19,7 +19,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const target = slug || url;
   const hasChildren = !!children.length;
   const isExternalLink = !!url;
-  const { activeSection, setActiveSection } = useContext(TOCContext);
+  const { activeSection } = useContext(TOCContext);
   const isActive = isActiveTocNode(activeSection, slug, children);
   const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
   const isSelected = isSelectedTocNode(activeSection, slug);
