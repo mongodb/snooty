@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import { getNestedValue } from '../utils/get-nested-value';
 
 // Based on condition isValid, split array into two arrays: [[valid, invalid]]
 const partition = (array, isValid) => {
