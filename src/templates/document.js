@@ -6,29 +6,25 @@ import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
-import DocumentBody from '../components/DocumentBody';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 
-const Document = props => {
-  const {
-    pageContext: {
-      slug,
-      __refDocMapping,
-      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
-    },
-    location,
-    ...rest
-  } = props;
-
+const Document = ({
+  children,
+  pageContext: {
+    slug,
+    page,
+    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+  },
+}) => {
   const windowSize = useWindowSize();
   const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
 
   const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
-  const pageOptions = getNestedValue(['ast', 'options'], __refDocMapping);
+  const pageOptions = getNestedValue(['ast', 'options'], page);
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -60,7 +56,7 @@ const Document = props => {
               <div className="bodywrapper">
                 <div className="body">
                   <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  <DocumentBody refDocMapping={__refDocMapping} slug={slug} {...rest} />
+                  {children}
                   {showPrevNext && (
                     <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                   )}
@@ -78,7 +74,7 @@ const Document = props => {
 
 Document.propTypes = {
   pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.shape({
+    page: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,
       }).isRequired,

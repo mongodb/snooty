@@ -4,7 +4,6 @@ import { renderStylesToString } from '@leafygreen-ui/emotion';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
-import DefaultLayout from './src/components/layout';
 
 // Support SSR for LeafyGreen components
 // https://github.com/mongodb/leafygreen-ui/tree/master/packages/emotion#server-side-rendering
@@ -16,5 +15,3 @@ export const wrapRootElement = ({ element }) => (
     <LeafyGreenProvider>{element}</LeafyGreenProvider>
   </ThemeProvider>
 );
-
-export const wrapPageElement = ({ element, props }) => <DefaultLayout {...props}>{element}</DefaultLayout>;

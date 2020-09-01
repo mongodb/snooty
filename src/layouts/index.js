@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loadable from '@loadable/component';
-import SiteMetadata from './site-metadata';
+import loadable from '@loadable/component';
 import { Global, css } from '@emotion/core';
-import { TabContext } from './tab-context';
+import SiteMetadata from '../components/site-metadata';
+import { TabContext } from '../components/tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { theme } from '../theme/docsTheme.js';
+import { getTemplate } from '../utils/get-template';
 
-const Widgets = Loadable(() => import('./Widgets'));
+const Widgets = loadable(() => import('../components/Widgets'));
 
 export default class DefaultLayout extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class DefaultLayout extends Component {
 
   preprocessPageNodes = () => {
     const { pageContext } = this.props;
-    const pageNodes = getNestedValue(['__refDocMapping', 'ast', 'children'], pageContext) || [];
+    const pageNodes = getNestedValue(['page', 'ast', 'children'], pageContext) || [];
 
     // Map all footnotes and their references that appear on the page
     this.footnotes = this.getFootnotes(pageNodes);
@@ -134,15 +135,13 @@ export default class DefaultLayout extends Component {
   };
 
   render() {
-    const {
-      children,
-      pageContext: { location, metadata, slug, __refDocMapping },
-    } = this.props;
-
+    const { children, pageContext } = this.props;
+    const { location, metadata, page, slug, template } = pageContext;
     const { pillstrips } = this.state;
     const lookup = slug === '/' ? 'index' : slug;
     const siteTitle = getNestedValue(['title'], metadata) || '';
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+    const Template = getTemplate(template, slug);
     return (
       <>
         {/* Anchor-link styling to compensate for navbar height */}
@@ -161,17 +160,24 @@ export default class DefaultLayout extends Component {
         <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
           <Widgets
             location={location}
-            pageOptions={getNestedValue(['ast', 'options'], __refDocMapping)}
+            pageOptions={getNestedValue(['ast', 'options'], page)}
             pageTitle={pageTitle}
             publishedBranches={getNestedValue(['publishedBranches'], metadata)}
             slug={slug}
           >
             <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
-            {React.cloneElement(children, {
-              pillstrips,
-              addPillstrip: this.addPillstrip,
-              footnotes: this.footnotes,
-            })}
+            <Template
+              pageContext={pageContext}
+              pillstrips={pillstrips}
+              addPillstrip={this.addPillstrip}
+              footnotes={this.footnotes}
+            >
+              {React.cloneElement(children, {
+                pillstrips,
+                addPillstrip: this.addPillstrip,
+                footnotes: this.footnotes,
+              })}
+            </Template>
           </Widgets>
         </TabContext.Provider>
       </>
@@ -182,7 +188,7 @@ export default class DefaultLayout extends Component {
 DefaultLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.shape({
+    page: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.arrayOf(PropTypes.object),
       }).isRequired,

@@ -18,11 +18,11 @@ export default class Guide extends Component {
     super(propsFromServer);
 
     const {
-      pageContext: { __refDocMapping },
+      pageContext: { page },
     } = this.props;
 
     // get data from server
-    this.sections = getNestedValue(['ast', 'children', 0, 'children'], __refDocMapping);
+    this.sections = getNestedValue(['ast', 'children', 0, 'children'], page);
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
 
     this.state = {
@@ -118,9 +118,7 @@ export default class Guide extends Component {
     const { addPillstrip, pageContext, pillstrips } = this.props;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
-        return (
-          <ComponentFactory nodeData={section} refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}} />
-        );
+        return <ComponentFactory nodeData={section} page={pageContext.page} />;
       });
     }
 
@@ -132,7 +130,7 @@ export default class Guide extends Component {
           guideSectionData={section}
           key={index}
           headingRef={this.sectionRefs[index]}
-          refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+          page={pageContext.page}
           addTabset={this.addGuidesTabset}
           pillstrips={pillstrips}
         />
@@ -141,9 +139,8 @@ export default class Guide extends Component {
   }
 
   render() {
-    const { pageContext, path } = this.props;
+    const { pageContext } = this.props;
     const { activeSection, cloud, drivers } = this.state;
-    const pageSlug = path.substr(1);
 
     return (
       <React.Fragment>
@@ -155,14 +152,14 @@ export default class Guide extends Component {
           />
           <div className="left-nav-space" />
           <div id="main-column" className="main-column">
-            <div className="body" data-pagename={pageSlug}>
+            <div className="body" data-pagename={pageContext.slug}>
               <GuideBreadcrumbs />
               <GuideHeading
                 author={findKeyValuePair(this.sections, 'name', 'author')}
                 cloud={cloud}
                 description={findKeyValuePair(this.sections, 'name', 'result_description')}
                 drivers={drivers}
-                refDocMapping={getNestedValue(['__refDocMapping'], pageContext) || {}}
+                page={pageContext.page}
                 time={findKeyValuePair(this.sections, 'name', 'time')}
                 title={findKeyValuePair(this.sections, 'type', 'heading')}
               />
@@ -180,11 +177,12 @@ export default class Guide extends Component {
 Guide.propTypes = {
   addPillstrip: PropTypes.func,
   pageContext: PropTypes.shape({
-    __refDocMapping: PropTypes.shape({
+    page: PropTypes.shape({
       ast: PropTypes.shape({
         children: PropTypes.array,
       }).isRequired,
     }).isRequired,
+    slug: PropTypes.string.isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,
   pillstrips: PropTypes.objectOf(PropTypes.object),
