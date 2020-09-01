@@ -13,28 +13,13 @@ const partition = (array, isValid) => {
   );
 };
 
-const TargetIdentifier = ({ nodeData: { ids } }) => (
-  <React.Fragment>
-    {ids.map((id, index) => (
-      <span key={index} id={id} />
-    ))}
-  </React.Fragment>
-);
-
-TargetIdentifier.propTypes = {
-  nodeData: PropTypes.shape({
-    ids: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-};
-
-const DescriptionTerm = ({ children, targetIdentifiers, ...rest }) => {
-  const id = getNestedValue([0, 'ids', 0], targetIdentifiers);
+const DescriptionTerm = ({ children, html_id, ...rest }) => {
   return (
-    <dt id={id}>
+    <dt id={html_id}>
       {children.map((child, j) => (
         <ComponentFactory key={j} {...rest} nodeData={child} />
       ))}
-      <a href={`#${id}`} className="headerlink" title="Permalink to this definition">
+      <a href={`#${html_id}`} className="headerlink" title="Permalink to this definition">
         ¶
       </a>
     </dt>
@@ -43,25 +28,21 @@ const DescriptionTerm = ({ children, targetIdentifiers, ...rest }) => {
 
 DescriptionTerm.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  targetIdentifiers: PropTypes.arrayOf(
-    PropTypes.shape({
-      ids: PropTypes.arrayOf(PropTypes.string).isRequired,
-    })
-  ).isRequired,
+  html_id: PropTypes.string.isRequired,
 };
 
-const Target = ({ nodeData: { children, name, target }, ...rest }) => {
-  // If directive_argument node is not present, render target_identifiers as empty spans
-  // Otherwise, render directive_argument as a dictionary node and attach the first
+const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
+  // If directive_argument node is not present, render an empty span with the target ID
+  // Otherwise, render directive_argument as a dictionary node and attach the
   // ID to the description term field
-  const [targetIdentifiers, dictList] = partition(children, elem => elem.type === 'target_identifier');
+  const [, dictList] = partition(children, elem => elem.type === 'target_identifier');
   const [[descriptionTerm], descriptionDetails] = partition(dictList, elem => elem.type === 'directive_argument');
 
   return (
     <React.Fragment>
       {dictList.length > 0 ? (
         <dl className={name}>
-          {descriptionTerm && <DescriptionTerm {...rest} {...descriptionTerm} targetIdentifiers={targetIdentifiers} />}
+          {descriptionTerm && <DescriptionTerm {...rest} {...descriptionTerm} html_id={html_id} />}
           <dd>
             {descriptionDetails.map((node, i) => (
               <ComponentFactory {...rest} nodeData={node} key={i} />
@@ -69,11 +50,7 @@ const Target = ({ nodeData: { children, name, target }, ...rest }) => {
           </dd>
         </dl>
       ) : (
-        <React.Fragment>
-          {targetIdentifiers.map((node, i) => (
-            <TargetIdentifier key={i} nodeData={node} />
-          ))}
-        </React.Fragment>
+        <span id={html_id} />
       )}
     </React.Fragment>
   );
@@ -82,6 +59,7 @@ const Target = ({ nodeData: { children, name, target }, ...rest }) => {
 Target.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
+    html_id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 };
