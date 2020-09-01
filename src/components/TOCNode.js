@@ -29,6 +29,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const [isOpen, setIsOpen] = useState(isActive);
 
   // If the active state of this node changes, change the open state to reflect it
+  // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
   useEffect(() => {
     setIsOpen(isActive);
   }, [isActive, isDrawer ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
