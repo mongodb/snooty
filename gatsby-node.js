@@ -135,3 +135,13 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     },
   });
 };
+
+// Remove type inference, as our schema is too ambiguous for this to be useful.
+// https://www.gatsbyjs.com/docs/scaling-issues/#switch-off-type-inference-for-sitepagecontext
+exports.createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+    type SitePage implements Node @dontInfer {
+      path: String!
+    }
+  `);
+};

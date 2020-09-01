@@ -70,7 +70,7 @@ const Landing = ({ children }) => {
           a:hover {
             text-decoration: none;
           }
-          .heading-container-h1 {
+          h1 {
             align-self: end;
           }
           .span-columns {
