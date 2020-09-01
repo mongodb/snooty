@@ -7,5 +7,8 @@ import { endsWith } from './ends-with';
 export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
   if (endsWith(currentUrl, slug) || endsWith(currentUrl, `${slug}/`)) return true;
-  return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.slug, b.children), false);
+  if (children) {
+    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.slug, b.children), false);
+  }
+  return false;
 };
