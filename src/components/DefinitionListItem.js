@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
-import { getNestedValue } from '../utils/get-nested-value';
 
 const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
   const termProps = {};
-  const targetIdentifier = findKeyValuePair(term, 'type', 'target_identifier');
+  const targetIdentifier = findKeyValuePair(term, 'type', 'inline_target');
   if (targetIdentifier) {
-    termProps.id = getNestedValue(['ids', 0], targetIdentifier);
+    termProps.id = targetIdentifier.html_id;
   }
 
   return (
