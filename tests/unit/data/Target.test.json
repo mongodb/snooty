@@ -3,9 +3,7 @@
     "type": "target",
     "position": {
       "start": {
-        "line": {
-          "$numberInt": "78"
-        }
+        "line": 78
       }
     },
     "children": [
@@ -13,9 +11,7 @@
         "type": "directive_argument",
         "position": {
           "start": {
-            "line": {
-              "$numberInt": "90"
-            }
+            "line": 90
           }
         },
         "children": [
@@ -23,9 +19,7 @@
             "type": "literal",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "90"
-                }
+                "line": 90
               }
             },
             "children": [
@@ -33,9 +27,7 @@
                 "type": "text",
                 "position": {
                   "start": {
-                    "line": {
-                      "$numberInt": "90"
-                    }
+                    "line": 90
                   }
                 },
                 "value": "--config <filename>, -f <filename>"
@@ -48,9 +40,7 @@
         "type": "target_identifier",
         "position": {
           "start": {
-            "line": {
-              "$numberInt": "90"
-            }
+            "line": 90
           }
         },
         "children": [
@@ -58,9 +48,7 @@
             "type": "text",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "90"
-                }
+                "line": 90
               }
             },
             "value": "mongos --config"
@@ -75,9 +63,7 @@
         "type": "target_identifier",
         "position": {
           "start": {
-            "line": {
-              "$numberInt": "90"
-            }
+            "line": 90
           }
         },
         "children": [
@@ -85,9 +71,7 @@
             "type": "text",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "90"
-                }
+                "line": 90
               }
             },
             "value": "mongos -f"
@@ -102,9 +86,7 @@
         "type": "paragraph",
         "position": {
           "start": {
-            "line": {
-              "$numberInt": "80"
-            }
+            "line": 80
           }
         },
         "children": [
@@ -112,9 +94,7 @@
             "type": "text",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "80"
-                }
+                "line": 80
               }
             },
             "value": "Specifies a configuration file for runtime configuration options. The\nconfiguration file is the preferred method for runtime configuration of\n"
@@ -123,9 +103,7 @@
             "type": "ref_role",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "80"
-                }
+                "line": 80
               }
             },
             "children": [
@@ -133,9 +111,7 @@
                 "type": "literal",
                 "position": {
                   "start": {
-                    "line": {
-                      "$numberInt": "80"
-                    }
+                    "line": 80
                   }
                 },
                 "children": [
@@ -143,9 +119,7 @@
                     "type": "text",
                     "position": {
                       "start": {
-                        "line": {
-                          "$numberInt": "80"
-                        }
+                        "line": 80
                       }
                     },
                     "value": "mongos"
@@ -157,15 +131,16 @@
             "name": "program",
             "target": "mongos",
             "flag": "",
-            "fileid": "reference/program/mongos"
+            "fileid": [
+              "reference/program/mongos",
+              "std-program-mongos"
+            ]
           },
           {
             "type": "text",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "80"
-                }
+                "line": 80
               }
             },
             "value": ". The options are equivalent to the command-line\nconfiguration options. See "
@@ -174,9 +149,7 @@
             "type": "ref_role",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "80"
-                }
+                "line": 80
               }
             },
             "children": [
@@ -184,27 +157,26 @@
                 "type": "text",
                 "position": {
                   "start": {
-                    "line": {
-                      "$numberInt": "4"
-                    }
+                    "line": 4
                   }
                 },
                 "value": "Configuration File Options"
               }
             ],
-            "domain": "",
+            "domain": "std",
             "name": "doc",
             "target": "",
             "flag": "",
-            "fileid": "/reference/configuration-options"
+            "fileid": [
+              "/reference/configuration-options",
+              ""
+            ]
           },
           {
             "type": "text",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "80"
-                }
+                "line": 80
               }
             },
             "value": " for\nmore information."
@@ -215,9 +187,7 @@
         "type": "paragraph",
         "position": {
           "start": {
-            "line": {
-              "$numberInt": "86"
-            }
+            "line": 86
           }
         },
         "children": [
@@ -225,9 +195,7 @@
             "type": "text",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "86"
-                }
+                "line": 86
               }
             },
             "value": "Ensure the configuration file uses ASCII encoding. The "
@@ -236,9 +204,7 @@
             "type": "ref_role",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "86"
-                }
+                "line": 86
               }
             },
             "children": [
@@ -246,9 +212,7 @@
                 "type": "literal",
                 "position": {
                   "start": {
-                    "line": {
-                      "$numberInt": "86"
-                    }
+                    "line": 86
                   }
                 },
                 "children": [
@@ -256,9 +220,7 @@
                     "type": "text",
                     "position": {
                       "start": {
-                        "line": {
-                          "$numberInt": "86"
-                        }
+                        "line": 86
                       }
                     },
                     "value": "mongos"
@@ -270,15 +232,16 @@
             "name": "program",
             "target": "mongos",
             "flag": "",
-            "fileid": "reference/program/mongos"
+            "fileid": [
+              "reference/program/mongos",
+              "std-program-mongos"
+            ]
           },
           {
             "type": "text",
             "position": {
               "start": {
-                "line": {
-                  "$numberInt": "86"
-                }
+                "line": 86
               }
             },
             "value": "\ninstance does not support configuration files with non-ASCII encoding,\nincluding UTF-8."
@@ -287,7 +250,8 @@
       }
     ],
     "domain": "std",
-    "name": "option"
+    "name": "option",
+    "html_id": "std-option-mongos.--config"
   },
   "b": {
     "type": "target",
@@ -315,6 +279,7 @@
       }
     ],
     "domain": "std",
-    "name": "label"
+    "name": "label",
+    "html_id": "std-label-php-language-center"
   }
 }
