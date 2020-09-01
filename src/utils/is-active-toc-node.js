@@ -2,7 +2,7 @@ import { endsWith } from './ends-with';
 /*
   Provided a current page slug, a slug, and a list of node children, returns
   true if either the given slug matches the current page slug or one of its children
-  has a slug matching the giveen page slug, and false otherwise.
+  has a slug matching the given page slug, and false otherwise.
 */
 export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
