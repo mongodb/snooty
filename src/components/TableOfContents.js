@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import TOCNode from './TOCNode';
 import { TOCContext } from './toc-context';
@@ -13,7 +13,11 @@ const TableOfContents = ({ toctreeData: { children } }) => {
   if (isBrowser) {
     currentPage = window.location.pathname;
   }
+
   const [activeSection, setActiveSection] = useState(currentPage);
+  useEffect(() => {
+    setActiveSection(currentPage);
+  }, [currentPage]);
 
   return (
     <TOCContext.Provider value={{ activeSection, setActiveSection }}>

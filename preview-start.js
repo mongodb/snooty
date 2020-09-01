@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 // eslint-disable-next-line import/no-unresolved
 import { getPageData } from 'previewSetup'; // Alias found in gatsby-node and webpack.config.js
 // Layouts
-import DefaultLayout from './src/components/layout';
+import DefaultLayout from './src/layouts';
 import DocumentBody from './src/components/DocumentBody';
 import Guide from './src/templates/guide';
 import Index from './src/templates/guides-index';

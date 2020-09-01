@@ -41,7 +41,7 @@ ContentsList.defaultProps = {
   className: '',
 };
 
-const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
+const Contents = ({ nodeData: { argument, options }, page }) => {
   const maxDepth = typeof options.depth === 'undefined' ? Infinity : options.depth;
 
   const findSectionHeadings = (nodes, key, value) => {
@@ -76,7 +76,7 @@ const Contents = ({ nodeData: { argument, options }, refDocMapping }) => {
   };
 
   const displayText = getNestedValue([0, 'value'], argument);
-  const headingNodes = findSectionHeadings(getNestedValue(['ast', 'children'], refDocMapping), 'type', 'heading');
+  const headingNodes = findSectionHeadings(getNestedValue(['ast', 'children'], page), 'type', 'heading');
   return (
     <React.Fragment>
       {headingNodes.length > 0 && (
@@ -99,7 +99,7 @@ Contents.propTypes = {
       local: PropTypes.bool,
     }),
   }).isRequired,
-  refDocMapping: PropTypes.shape({
+  page: PropTypes.shape({
     ast: PropTypes.shape({
       children: PropTypes.arrayOf(PropTypes.object),
     }).isRequired,

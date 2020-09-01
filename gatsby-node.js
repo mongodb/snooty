@@ -3,7 +3,6 @@ const { initStitch } = require('./src/utils/setup/init-stitch');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-const { getTemplate } = require('./src/utils/get-template');
 const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
@@ -93,20 +92,16 @@ exports.createPages = async ({ actions }) => {
     PAGES.forEach(page => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
 
-      const template = getTemplate(
-        process.env.GATSBY_SITE,
-        page,
-        getNestedValue(['ast', 'options', 'template'], pageNodes)
-      );
       const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
           path: slug,
-          component: template,
+          component: path.resolve(__dirname, './src/components/DocumentBody.js'),
           context: {
             metadata,
             slug,
-            __refDocMapping: pageNodes,
+            template: getNestedValue(['ast', 'options', 'template'], pageNodes),
+            page: pageNodes,
             guidesMetadata: GUIDES_METADATA,
           },
         });

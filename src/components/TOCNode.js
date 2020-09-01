@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from './Link';
 import { formatText } from '../utils/format-text';
@@ -19,7 +19,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const target = slug || url;
   const hasChildren = !!children.length;
   const isExternalLink = !!url;
-  const { activeSection, setActiveSection } = useContext(TOCContext);
+  const { activeSection } = useContext(TOCContext);
   const isActive = isActiveTocNode(activeSection, slug, children);
   const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
   const isSelected = isSelectedTocNode(activeSection, slug);
@@ -27,6 +27,12 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const isDrawer = !!(options && options.drawer);
 
   const [isOpen, setIsOpen] = useState(isActive);
+
+  // If the active state of this node changes, change the open state to reflect it
+  // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
+  useEffect(() => {
+    setIsOpen(isActive);
+  }, [isActive, isDrawer ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Show caret if not on first level of TOC
   const caretIcon =
@@ -67,12 +73,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       );
     }
     return (
-      <Link
-        to={target}
-        aria-expanded={hasChildren ? isActive : undefined}
-        className={anchorTagClassNames}
-        onClick={() => setActiveSection(slug)}
-      >
+      <Link to={target} aria-expanded={hasChildren ? isActive : undefined} className={anchorTagClassNames}>
         {caretIcon}
         {formattedTitle}
       </Link>
