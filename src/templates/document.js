@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
-import Navbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
@@ -31,44 +30,41 @@ const Document = ({
   };
 
   return (
-    <React.Fragment>
-      <div className="content">
-        <div>
-          {(!isBrowser || showLeftColumn) && (
-            <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
-              <Sidebar
-                slug={slug}
-                publishedBranches={publishedBranches}
-                toctreeData={toctree}
-                toggleLeftColumn={toggleLeftColumn}
-              />
-            </div>
-          )}
-        </div>
-        <div id="main-column" className="main-column">
-          {(!isBrowser || !showLeftColumn) && (
-            <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
-              Navigation
-            </span>
-          )}
-          <div className="document">
-            <div className="documentwrapper">
-              <div className="bodywrapper">
-                <div className="body">
-                  <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                  {children}
-                  {showPrevNext && (
-                    <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
-                  )}
-                  <Footer />
-                </div>
+    <div className="content">
+      <div>
+        {(!isBrowser || showLeftColumn) && (
+          <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
+            <Sidebar
+              slug={slug}
+              publishedBranches={publishedBranches}
+              toctreeData={toctree}
+              toggleLeftColumn={toggleLeftColumn}
+            />
+          </div>
+        )}
+      </div>
+      <div id="main-column" className="main-column">
+        {(!isBrowser || !showLeftColumn) && (
+          <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
+            Navigation
+          </span>
+        )}
+        <div className="document">
+          <div className="documentwrapper">
+            <div className="bodywrapper">
+              <div className="body">
+                <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
+                {children}
+                {showPrevNext && (
+                  <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+                )}
+                <Footer />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Navbar />
-    </React.Fragment>
+    </div>
   );
 };
 
