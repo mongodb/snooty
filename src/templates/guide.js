@@ -11,7 +11,6 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
 import { getNestedValue } from '../utils/get-nested-value';
 import { TabContext } from '../components/tab-context';
-import Navbar from '../components/Navbar';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -143,33 +142,30 @@ export default class Guide extends Component {
     const { activeSection, cloud, drivers } = this.state;
 
     return (
-      <React.Fragment>
-        <div className="content">
-          <TOC
-            activeSection={activeSection}
-            sectionKeys={this.bodySections.map(section => section.name)}
-            disableScrollable={this.disableScrollable}
-          />
-          <div className="left-nav-space" />
-          <div id="main-column" className="main-column">
-            <div className="body" data-pagename={pageContext.slug}>
-              <GuideBreadcrumbs />
-              <GuideHeading
-                author={findKeyValuePair(this.sections, 'name', 'author')}
-                cloud={cloud}
-                description={findKeyValuePair(this.sections, 'name', 'result_description')}
-                drivers={drivers}
-                page={pageContext.page}
-                time={findKeyValuePair(this.sections, 'name', 'time')}
-                title={findKeyValuePair(this.sections, 'type', 'heading')}
-              />
-              {this.createSections()}
-              <Footer />
-            </div>
+      <div className="content">
+        <TOC
+          activeSection={activeSection}
+          sectionKeys={this.bodySections.map(section => section.name)}
+          disableScrollable={this.disableScrollable}
+        />
+        <div className="left-nav-space" />
+        <div id="main-column" className="main-column">
+          <div className="body" data-pagename={pageContext.slug}>
+            <GuideBreadcrumbs />
+            <GuideHeading
+              author={findKeyValuePair(this.sections, 'name', 'author')}
+              cloud={cloud}
+              description={findKeyValuePair(this.sections, 'name', 'result_description')}
+              drivers={drivers}
+              page={pageContext.page}
+              time={findKeyValuePair(this.sections, 'name', 'time')}
+              title={findKeyValuePair(this.sections, 'type', 'heading')}
+            />
+            {this.createSections()}
+            <Footer />
           </div>
         </div>
-        <Navbar />
-      </React.Fragment>
+      </div>
     );
   }
 }
