@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import TOCNode from './TOCNode';
 import { TOCContext } from './toc-context';
 import { isBrowser } from '../utils/is-browser';
@@ -21,7 +22,14 @@ const TableOfContents = ({ toctreeData: { children } }) => {
 
   return (
     <TOCContext.Provider value={{ activeSection, setActiveSection }}>
-      <ul className="current">
+      <ul
+        className="current"
+        css={css`
+          height: 100%;
+          overflow-y: auto;
+          position: absolute;
+        `}
+      >
         {children.map(c => {
           const key = c.slug || c.url;
           return <TOCNode node={c} key={key} />;
