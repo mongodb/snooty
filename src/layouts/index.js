@@ -11,6 +11,7 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import FootnoteContext from '../components/footnote-context';
+import Navbar from '../components/Navbar';
 
 const Widgets = loadable(() => import('../components/Widgets'));
 
@@ -177,6 +178,7 @@ export default class DefaultLayout extends Component {
             </Template>
           </Widgets>
         </TabContext.Provider>
+        <Navbar />
       </>
     );
   }
