@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import mockTocData from './data/Table-Of-Contents.test.json';
 import TableOfContents from '../../src/components/TableOfContents';
 /*
@@ -11,12 +11,10 @@ import TableOfContents from '../../src/components/TableOfContents';
 */
 
 const mountedToc = mockData => mount(<TableOfContents toctreeData={mockData} />);
-const shallowToc = mockData => shallow(<TableOfContents toctreeData={mockData} />);
 
 describe('Table of Contents testing', () => {
   describe('Table of Contents unit tests', () => {
     let testComponent;
-    let testShallowComponent;
 
     const remountTOC = () => {
       testComponent = mountedToc(mockTocData);
@@ -27,17 +25,13 @@ describe('Table of Contents testing', () => {
       remountTOC();
     };
 
-    beforeAll(() => {
-      testShallowComponent = shallowToc(mockTocData);
-    });
-
     beforeEach(() => {
       updatePageLocation('Ecosystem', '/');
       remountTOC();
     });
 
     it('renders correctly', () => {
-      expect(testShallowComponent).toMatchSnapshot();
+      expect(testComponent).toMatchSnapshot();
     });
 
     it('TOC exists with proper number of sections and nodes per section', () => {

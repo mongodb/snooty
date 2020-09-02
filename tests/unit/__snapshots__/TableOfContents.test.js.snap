@@ -1,16 +1,223 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Table of Contents testing Table of Contents unit tests renders correctly 1`] = `
-<ContextProvider
-  value={
+.emotion-0 {
+  height: 100%;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+}
+
+<TableOfContents
+  toctreeData={
     Object {
-      "activeSection": "/",
-      "setActiveSection": [Function],
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [],
+              "slug": "drivers/c",
+              "title": "C Driver",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/cxx",
+              "title": "C++ Driver",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/csharp",
+              "title": "C# and .NET Driver",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/go",
+              "title": "Go Driver",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/java",
+              "title": "Java Driver",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/node",
+              "title": "Node.js Driver",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/perl",
+              "title": "Perl Driver",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [],
+                  "slug": "drivers/php-libraries",
+                  "title": "PHP Libraries, Frameworks, and Tools",
+                },
+              ],
+              "slug": "drivers/php",
+              "title": "PHP Driver",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "children": Array [],
+                  "slug": "drivers/pymongo",
+                  "title": "PyMongo",
+                },
+                Object {
+                  "children": Array [],
+                  "slug": "drivers/motor",
+                  "title": "Motor (Async Driver)",
+                },
+              ],
+              "slug": "drivers/python",
+              "title": "Python Drivers",
+            },
+            Object {
+              "children": Array [],
+              "title": "Ruby Driver",
+              "url": "https://docs.mongodb.com/ruby-driver/current/",
+            },
+            Object {
+              "children": Array [],
+              "title": "Mongoid ODM",
+              "url": "https://docs.mongodb.com/mongoid/current/",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/scala",
+              "title": "Scala Driver",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/community-supported-drivers",
+              "title": "Community Supported Drivers Reference",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/specs",
+              "title": "MongoDB Drivers Specs",
+            },
+            Object {
+              "children": Array [],
+              "slug": "drivers/driver-compatibility-reference",
+              "title": "Driver Compatibility",
+            },
+          ],
+          "slug": "drivers",
+          "title": "MongoDB Drivers and ODM",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [],
+              "title": "MongoDB Connector for Business Intelligence",
+              "url": "https://docs.mongodb.com/bi-connector/current/",
+            },
+            Object {
+              "children": Array [],
+              "title": "MongoDB ODBC Driver for BI Connector",
+              "url": "https://docs.mongodb.com/bi-connector/current/reference/odbc-driver/",
+            },
+            Object {
+              "children": Array [],
+              "slug": "tools/http-interfaces",
+              "title": "HTTP Interface",
+            },
+          ],
+          "slug": "tools",
+          "title": "MongoDB Integration and Tools",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [],
+              "slug": "platforms/amazon-ec2",
+              "title": "Amazon EC2",
+            },
+            Object {
+              "children": Array [],
+              "slug": "tutorial/backup-and-restore-mongodb-on-amazon-ec2",
+              "title": "EC2 Backup and Restore",
+            },
+            Object {
+              "children": Array [],
+              "slug": "platforms/windows-azure",
+              "title": "Microsoft Azure",
+            },
+            Object {
+              "children": Array [],
+              "slug": "platforms/windows",
+              "title": "Windows Quick Links and Reference Center",
+            },
+          ],
+          "options": Object {
+            "drawer": true,
+            "styles": Object {
+              "code": "Platforms",
+            },
+          },
+          "slug": "platforms",
+          "title": "Platforms",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [],
+              "slug": "use-cases/storing-log-data",
+              "title": "Storing Log Data",
+            },
+            Object {
+              "children": Array [],
+              "slug": "use-cases/hierarchical-aggregation",
+              "title": "Hierarchical Aggregation",
+            },
+            Object {
+              "children": Array [],
+              "slug": "use-cases/product-catalog",
+              "title": "Product Catalog",
+            },
+            Object {
+              "children": Array [],
+              "slug": "use-cases/inventory-management",
+              "title": "Inventory Management",
+            },
+            Object {
+              "children": Array [],
+              "slug": "use-cases/category-hierarchy",
+              "title": "Category Hierarchy",
+            },
+            Object {
+              "children": Array [],
+              "slug": "use-cases/metadata-and-asset-management",
+              "title": "Metadata and Asset Management",
+            },
+            Object {
+              "children": Array [],
+              "slug": "use-cases/storing-comments",
+              "title": "Storing Comments",
+            },
+          ],
+          "options": Object {
+            "drawer": true,
+            "styles": Object {
+              "strong": "Use Cases",
+            },
+          },
+          "slug": "use-cases",
+          "title": "Use Cases",
+        },
+      ],
+      "slug": "/",
+      "title": "MongoDB Ecosystem",
     }
   }
 >
   <ul
-    className="current"
+    className="current emotion-0"
   >
     <TOCNode
       key="drivers"
@@ -115,7 +322,33 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "MongoDB Drivers and ODM",
         }
       }
-    />
+    >
+      <li
+        className="toctree-l1  "
+      >
+        <NodeLink>
+          <Link
+            aria-expanded={false}
+            className="reference  internal"
+            to="drivers"
+          >
+            <mockConstructor
+              aria-expanded={false}
+              className="reference  internal"
+              to="/drivers"
+            >
+              <a
+                aria-expanded={false}
+                className="reference  internal"
+                href="/drivers"
+              >
+                MongoDB Drivers and ODM
+              </a>
+            </mockConstructor>
+          </Link>
+        </NodeLink>
+      </li>
+    </TOCNode>
     <TOCNode
       key="tools"
       level={1}
@@ -142,7 +375,33 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "MongoDB Integration and Tools",
         }
       }
-    />
+    >
+      <li
+        className="toctree-l1  "
+      >
+        <NodeLink>
+          <Link
+            aria-expanded={false}
+            className="reference  internal"
+            to="tools"
+          >
+            <mockConstructor
+              aria-expanded={false}
+              className="reference  internal"
+              to="/tools"
+            >
+              <a
+                aria-expanded={false}
+                className="reference  internal"
+                href="/tools"
+              >
+                MongoDB Integration and Tools
+              </a>
+            </mockConstructor>
+          </Link>
+        </NodeLink>
+      </li>
+    </TOCNode>
     <TOCNode
       key="platforms"
       level={1}
@@ -180,7 +439,35 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "Platforms",
         }
       }
-    />
+    >
+      <li
+        className="toctree-l1  "
+      >
+        <NodeLink>
+          <Link
+            aria-expanded={false}
+            className="reference  internal"
+            href="platforms"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            <a
+              aria-expanded={false}
+              className="reference  internal"
+              href="platforms"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              Platforms
+            </a>
+          </Link>
+        </NodeLink>
+      </li>
+    </TOCNode>
     <TOCNode
       key="use-cases"
       level={1}
@@ -233,7 +520,35 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           "title": "Use Cases",
         }
       }
-    />
+    >
+      <li
+        className="toctree-l1  "
+      >
+        <NodeLink>
+          <Link
+            aria-expanded={false}
+            className="reference  internal"
+            href="use-cases"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            <a
+              aria-expanded={false}
+              className="reference  internal"
+              href="use-cases"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              Use Cases
+            </a>
+          </Link>
+        </NodeLink>
+      </li>
+    </TOCNode>
   </ul>
-</ContextProvider>
+</TableOfContents>
 `;

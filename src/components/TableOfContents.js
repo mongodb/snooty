@@ -28,6 +28,7 @@ const TableOfContents = ({ toctreeData: { children } }) => {
           height: 100%;
           overflow-y: auto;
           position: absolute;
+          width: 100%;
         `}
       >
         {children.map(c => {
