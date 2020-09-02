@@ -10,6 +10,7 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
+import FootnoteContext from '../components/footnote-context';
 
 const Widgets = loadable(() => import('../components/Widgets'));
 
@@ -166,17 +167,13 @@ export default class DefaultLayout extends Component {
             slug={slug}
           >
             <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
-            <Template
-              pageContext={pageContext}
-              pillstrips={pillstrips}
-              addPillstrip={this.addPillstrip}
-              footnotes={this.footnotes}
-            >
-              {React.cloneElement(children, {
-                pillstrips,
-                addPillstrip: this.addPillstrip,
-                footnotes: this.footnotes,
-              })}
+            <Template pageContext={pageContext} pillstrips={pillstrips} addPillstrip={this.addPillstrip}>
+              <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
+                {React.cloneElement(children, {
+                  pillstrips,
+                  addPillstrip: this.addPillstrip,
+                })}
+              </FootnoteContext.Provider>
             </Template>
           </Widgets>
         </TabContext.Provider>
