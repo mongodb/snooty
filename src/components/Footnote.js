@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 import { intersperse } from '../utils/intersperse';
+import FootnoteContext from './footnote-context';
 
-const Footnote = ({ nodeData, footnotes, nodeData: { children, id, name }, ...rest }) => {
+const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
+  const { footnotes } = useContext(FootnoteContext);
   const ref = name || id;
   const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
@@ -33,7 +35,6 @@ const Footnote = ({ nodeData, footnotes, nodeData: { children, id, name }, ...re
 };
 
 Footnote.propTypes = {
-  footnotes: PropTypes.objectOf(PropTypes.object).isRequired,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
     id: PropTypes.string.isRequired,
