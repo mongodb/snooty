@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import loadable from '@loadable/component';
+import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
 import { TabContext } from '../components/tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
@@ -8,6 +9,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { getTemplate } from '../utils/get-template';
+import { theme } from '../theme/docsTheme.js';
 import FootnoteContext from '../components/footnote-context';
 import Navbar from '../components/Navbar';
 
@@ -144,6 +146,22 @@ export default class DefaultLayout extends Component {
     const Template = getTemplate(template, slug);
     return (
       <>
+        {/* Anchor-link styling to compensate for navbar height */}
+        <Global
+          styles={css`
+            h1::before,
+            h2::before,
+            h3::before,
+            h4::before {
+              content: '';
+              display: block;
+              height: calc(${theme.navbar.height} + 10px);
+              margin-top: calc((${theme.navbar.height} + 10px) * -1);
+              position: relative;
+              width: 0;
+            }
+          `}
+        />
         <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
           <Widgets
             location={location}
