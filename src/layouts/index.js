@@ -59,10 +59,10 @@ export default class DefaultLayout extends Component {
    * - references: a list of the ids that refer to this footnote
    */
   getFootnotes = nodes => {
+    // Track how many anonymous footnotes are on the page so that we can correctly associate footnotes and references
+    let anonymousCount = 0;
     const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
     return footnotes.reduce((map, footnote, index) => {
-      // Track how many anonymous footnotes are on the page so that we can correctly associate footnotes and references
-      let anonymousCount = 0;
       if (footnote.name) {
         // Find references associated with a named footnote
         // eslint-disable-next-line no-param-reassign
@@ -149,7 +149,10 @@ export default class DefaultLayout extends Component {
         {/* Anchor-link styling to compensate for navbar height */}
         <Global
           styles={css`
-            :target::before {
+            h1::before,
+            h2::before,
+            h3::before,
+            h4::before {
               content: '';
               display: block;
               height: calc(${theme.navbar.height} + 10px);
