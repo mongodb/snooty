@@ -6,7 +6,7 @@ const getGitBranch = () => {
     .replace(/[\n\r\s]+$/, '');
 };
 
-const ensureMaster = () => getGitBranch() === 'master';
+const ensureMaster = () => /^(?:master)|(?:v[\d\.]+)$/.test(getGitBranch());
 
 const main = () => {
   let warned = false;
