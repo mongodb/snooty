@@ -226,7 +226,7 @@ const SearchResults = () => {
               <StyledSearchResult
                 key={`${url}${index}`}
                 onClick={() =>
-                  reportAnalytics('SearchSelection', { areaFound: 'ResultsPage', rank: index, selectionUrl: url })
+                  reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
                 }
                 title={title}
                 preview={preview}
