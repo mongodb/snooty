@@ -61,6 +61,7 @@ import RoleClass from './Roles/Class';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleIcon from './Roles/Icon';
+import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
@@ -78,6 +79,7 @@ const roleMap = {
   'icon-fa4': RoleIcon,
   'icon-mms': RoleIcon,
   'icon-charts': RoleIcon,
+  red: RoleRed,
   required: RoleRequired,
   sub: Subscript,
   subscript: Subscript,
