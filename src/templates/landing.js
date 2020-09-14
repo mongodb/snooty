@@ -6,7 +6,6 @@ import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 
 const Wrapper = styled('main')`
   margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
@@ -36,7 +35,6 @@ const Landing = ({ children }) => {
       <Helmet>
         <title>MongoDB Documentation</title>
       </Helmet>
-      <Navbar />
       <Wrapper>{children}</Wrapper>
       <Footer />
       <Global
