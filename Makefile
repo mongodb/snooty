@@ -2,9 +2,6 @@ GIT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 USER=$(shell whoami)
 STAGING_URL="https://docs-mongodborg-staging.corp.mongodb.com"
 STAGING_BUCKET=docs-mongodb-org-staging
-PLATFORM=$(shell printf '%s_%s' "$$(uname -s | tr '[:upper:]' '[:lower:]')" "$$(uname -m)")
-PACKAGE_NAME=snooty-preview-${VERSION}-${PLATFORM}.zip
-VERSION=$(shell git describe --tags)
 -include .env.production
 
 .PHONY: stage static
@@ -22,10 +19,6 @@ endif
 else
 PREFIX = $(GATSBY_PARSER_BRANCH)/$(GATSBY_SITE)
 endif
-
-package-preview:
-	zip -9r --symlinks ${PACKAGE_NAME} src node_modules preview preview-start.js static webpack.config.js index.html package.json package-lock.json
-	echo "::set-output name=package_filename::${PACKAGE_NAME}"
 
 stage: prefix
 	@if [ -z "${GATSBY_SNOOTY_DEV}" ]; then \

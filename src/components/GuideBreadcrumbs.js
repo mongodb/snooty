@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from './Link';
-// eslint-disable-next-line import/no-unresolved
-import { useSiteMetadata } from 'useSiteMetadata'; // Alias in webpack.config
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const GuideBreadcrumbs = () => {
   const { title } = useSiteMetadata();

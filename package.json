@@ -3,9 +3,9 @@
   "version": "0.5.3",
   "repository": "github:mongodb/snooty",
   "devDependencies": {
+    "@babel/core": "^7.11.5",
     "auto-changelog": "^1.16.4",
     "babel-jest": "^24.9.0",
-    "babel-loader": "^8.0.6",
     "babel-plugin-emotion": "^10.0.33",
     "babel-preset-gatsby": "^0.2.36",
     "enzyme": "^3.11.0",
@@ -24,7 +24,6 @@
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
-    "build:prod": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
@@ -33,9 +32,7 @@
     "lint": "eslint --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier \"**/*.{js,jsx,json,md}\"",
-    "preview": "webpack-dev-server --open --config ./webpack.config.js --env.PREVIEW_MODE='cli'",
     "serve": "gatsby serve --prefix-paths",
-    "serve:prod": "gatsby serve",
     "test": "jest",
     "test:regression": "jest regression",
     "test:unit": "jest unit",
@@ -51,10 +48,6 @@
     ]
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@leafygreen-ui/badge": "^3.0.2",
@@ -74,7 +67,6 @@
     "@leafygreen-ui/text-input": "^3.0.4",
     "@leafygreen-ui/tooltip": "^3.3.6",
     "@loadable/component": "^5.13.1",
-    "babel-loader": "^8.0.6",
     "css-loader": "^3.6.0",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
@@ -96,10 +88,7 @@
     "react-loadable": "^5.5.0",
     "react-responsive": "^8.1.0",
     "sanitize-html": "^1.27.4",
-    "style-loader": "^1.2.1",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "style-loader": "^1.2.1"
   },
   "husky": {
     "hooks": {
