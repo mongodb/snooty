@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import Link from './Link';
 import { formatText } from '../utils/format-text';
 import { getNestedValue } from '../utils/get-nested-value';
-import { isPreviewMode } from '../utils/is-preview-mode';
 
 const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
   <div className="bc">
-    {!isPreviewMode() && parentPaths && (
+    {parentPaths && (
       <ul>
         {parentPaths.map((path, index) => {
           const title = getNestedValue([path], slugTitleMapping);
