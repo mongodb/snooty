@@ -12,12 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build package
-        id: build_package
-        run: |
-          npm install --production
-          make static
-          make package-preview
       - name: Get environment
         id: environment
         run: |
