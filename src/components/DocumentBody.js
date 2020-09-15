@@ -25,12 +25,15 @@ const DocumentBody = ({ addPillstrip, pillstrips, pageContext: { metadata, page,
 DocumentBody.propTypes = {
   addPillstrip: PropTypes.func,
   pillstrips: PropTypes.objectOf(PropTypes.object),
-  page: PropTypes.shape({
-    ast: PropTypes.shape({
-      children: PropTypes.array,
+  pageContext: PropTypes.shape({
+    metadata: PropTypes.object.isRequired,
+    page: PropTypes.shape({
+      ast: PropTypes.shape({
+        children: PropTypes.array,
+      }).isRequired,
     }).isRequired,
-  }).isRequired,
-  slug: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+  }),
 };
 
 DocumentBody.defaultProps = {

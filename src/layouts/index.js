@@ -149,7 +149,7 @@ export default class DefaultLayout extends Component {
         {/* Anchor-link styling to compensate for navbar height */}
         <Global
           styles={css`
-            :target::before {
+            .contains-headerlink::before {
               content: '';
               display: block;
               height: calc(${theme.navbar.height} + 10px);

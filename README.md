@@ -67,7 +67,7 @@ make stage
 
 ## Releasing
 
-We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, run `npm version [major | minor | patch]`, using [Semantic Versioning](https://semver.org) guidelines to correctly increment the version number. GitHub Actions will create a new git tag and push it to GitHub. It will additionally create a ZIP file to be used for preview mode and draft a release (found [here](https://github.com/mongodb/snooty/releases)). To complete the process, update the release notes using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/master/CHANGELOG.md) and publish the release.
+We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, run `npm version [major | minor | patch]`, using [Semantic Versioning](https://semver.org) guidelines to correctly increment the version number. GitHub Actions will create a new git tag and push it to GitHub. To complete the process, update the release notes using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/master/CHANGELOG.md) and publish the release.
 
 ## Testing
 
