@@ -2,13 +2,14 @@
 
 exports[`Table of Contents testing Table of Contents unit tests renders correctly 1`] = `
 .emotion-0 {
-  height: 100%;
+  height: calc(100% - 0px);
   overflow-y: auto;
   position: absolute;
   width: 100%;
 }
 
 <TableOfContents
+  height={0}
   toctreeData={
     Object {
       "children": Array [

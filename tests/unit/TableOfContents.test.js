@@ -10,7 +10,7 @@ import TableOfContents from '../../src/components/TableOfContents';
   Test links
 */
 
-const mountedToc = mockData => mount(<TableOfContents toctreeData={mockData} />);
+const mountedToc = mockData => mount(<TableOfContents toctreeData={mockData} height={0} />);
 
 describe('Table of Contents testing', () => {
   describe('Table of Contents unit tests', () => {

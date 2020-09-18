@@ -8,7 +8,7 @@ import { isBrowser } from '../utils/is-browser';
 /**
  * Overall Table of Contents component, which manages open sections as children
  */
-const TableOfContents = ({ toctreeData: { children } }) => {
+const TableOfContents = ({ height, toctreeData: { children } }) => {
   // Want to check this on each re-render
   let currentPage;
   if (isBrowser) {
@@ -25,7 +25,7 @@ const TableOfContents = ({ toctreeData: { children } }) => {
       <ul
         className="current"
         css={css`
-          height: 100%;
+          height: calc(100% - ${height}px);
           overflow-y: auto;
           position: absolute;
           width: 100%;
@@ -41,6 +41,7 @@ const TableOfContents = ({ toctreeData: { children } }) => {
 };
 
 TableOfContents.propTypes = {
+  height: PropTypes.number.isRequired,
   toctreeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
   }).isRequired,
