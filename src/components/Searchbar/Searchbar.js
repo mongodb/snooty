@@ -12,6 +12,7 @@ import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
 const NUMBER_SEARCH_RESULTS = 9;
+const REPORT_SEARCH_DELAY_TIME = 1000;
 const SEARCH_DELAY_TIME = 200;
 const SEARCHBAR_DESKTOP_WIDTH = '372px';
 const SEARCHBAR_HEIGHT = '36px';
@@ -59,6 +60,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   // Use a second search filter state var to track filters but not make any calls yet
   const [draftSearchFilter, setDraftSearchFilter] = useState(null);
   const [searchEvent, setSearchEvent] = useState(null);
+  const [reportEvent, setReportEvent] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
   const searchContainerRef = useRef(null);
@@ -96,26 +98,31 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
       setIsFocused(true);
       // Debounce any queued search event since the query has changed
       clearTimeout(searchEvent);
+      clearTimeout(reportEvent);
       setValue(searchTerm);
       // The below useEffect will then run to query a new search since `value` was updated
     },
-    [searchEvent]
+    [reportEvent, searchEvent]
   );
 
   // Update state on a new search query or filters
   const fetchNewSearchResults = useCallback(async () => {
-    reportAnalytics('SearchQuery', { query: value });
     const result = await fetch(searchParamsToURL(value, searchFilter));
     const resultJson = await result.json();
     setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
   }, [getResultsFromJSON, searchFilter, searchParamsToURL, value]);
 
+  const reportSearchEvent = useCallback(() => {
+    reportAnalytics('SearchQuery', { query: value });
+  }, [value]);
+
   useEffect(() => {
     if (value) {
       // Set a timeout to trigger the search to avoid over-requesting
       setSearchEvent(setTimeout(fetchNewSearchResults, SEARCH_DELAY_TIME));
+      setReportEvent(setTimeout(reportSearchEvent, REPORT_SEARCH_DELAY_TIME));
     }
-  }, [fetchNewSearchResults, value]);
+  }, [fetchNewSearchResults, reportSearchEvent, value]);
 
   return (
     <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={searchContainerRef}>
