@@ -22,8 +22,7 @@ const gitBranch = execSync('git rev-parse --abbrev-ref HEAD')
   .toString('utf8')
   .replace(/[\n\r\s]+$/, '');
 
-const getPathPrefix = () => {
-  const pathPrefix = process.env.PATH_PREFIX;
+const getPathPrefix = pathPrefix => {
   if (!pathPrefix) {
     return '';
   }
@@ -42,7 +41,7 @@ const siteMetadata = {
   parserBranch: process.env.GATSBY_PARSER_BRANCH,
   parserUser: process.env.GATSBY_PARSER_USER,
   patchId: process.env.PATCH_ID || '',
-  pathPrefix: getPathPrefix(),
+  pathPrefix: getPathPrefix(process.env.PATH_PREFIX),
   project: process.env.GATSBY_SITE,
   snootyBranch: gitBranch,
   snootyEnv: process.env.SNOOTY_ENV || 'development',

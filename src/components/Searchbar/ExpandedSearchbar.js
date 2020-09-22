@@ -135,17 +135,17 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
 
   return (
     <>
-      <MagnifyingGlassButton ariaLabel="Search MongoDB Documentation" onClick={onSearchFocus}>
+      <MagnifyingGlassButton aria-label="Search MongoDB Documentation" onClick={onSearchFocus}>
         <MagnifyingGlass glyph="MagnifyingGlass" />
       </MagnifyingGlassButton>
       <SearchTextInput ref={searchTextbox} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
-        <GoButton ref={goButton} type="submit" ariaLabel="Go" href={searchUrl}>
+        <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
           <GoIcon glyph="ArrowRight" fill="#13AA52" />
         </GoButton>
       )}
       {isMobile && (
-        <CloseButton ariaLabel="Close Search" onClick={onMobileClose}>
+        <CloseButton aria-label="Close Search" onClick={onMobileClose}>
           <Icon glyph="X" fill={uiColors.gray.base} />
         </CloseButton>
       )}

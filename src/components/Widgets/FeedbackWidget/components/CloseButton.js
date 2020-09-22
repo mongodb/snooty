@@ -4,7 +4,7 @@ import IconButton from '@leafygreen-ui/icon-button';
 
 export default function CloseButton({ onClick, size = 'default', ...props }) {
   return (
-    <IconButton variant="light" ariaLabel="Close Feedback Form" onClick={onClick} size={size} {...props}>
+    <IconButton aria-label="Close Feedback Form" onClick={onClick} size={size} {...props}>
       <Icon size={size} glyph="X" />
     </IconButton>
   );

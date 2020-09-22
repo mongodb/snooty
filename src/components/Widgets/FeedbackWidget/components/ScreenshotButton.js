@@ -15,7 +15,6 @@ export default function ScreenshotButton({ size = 'default', ...props }) {
         align="bottom"
         justify="middle"
         triggerEvent="hover"
-        variant="dark"
         open={isHovered}
         trigger={
           <Button variant="default" label={label} onClick={takeScreenshot} {...props}>
