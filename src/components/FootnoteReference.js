@@ -6,6 +6,14 @@ import FootnoteContext from './footnote-context';
 const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const { footnotes } = useContext(FootnoteContext);
 
+  // the nodeData originates from docutils, and may be incorrect for
+  // footnoteReferences inside included files
+  if (!refname) {
+    footnotes.__anonymous_count = footnotes.__anonymous_count || 0;
+    id = 'id' + (footnotes.__anonymous_count + 1);
+    footnotes.__anonymous_count += 1;
+  }
+
   // Get the ID of the parent of an anonymous footnote reference
   const getAnonymousFootnote = () => {
     return Object.keys(footnotes).find(key => {

@@ -72,6 +72,8 @@ export default class DefaultLayout extends Component {
         };
       } else {
         // Find references associated with an anonymous footnote
+        // Replace broken footnote id
+        footnote.id = 'id' + (anonymousCount + 1);
         // eslint-disable-next-line no-param-reassign
         map[footnote.id] = {
           label: index + 1,
@@ -92,11 +94,7 @@ export default class DefaultLayout extends Component {
   // They are used infrequently, but here we match an anonymous footnote to its reference.
   // The nth footnote on a page is associated with the nth reference on the page.
   getAnonymousFootnoteReferences = (nodes, index) => {
-    const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
-    return getNestedValue(
-      [index, 'id'],
-      footnoteReferences.filter(node => !Object.prototype.hasOwnProperty.call(node, 'refname'))
-    );
+    return 'id' + (index + 1);
   };
 
   // Modify the AST so that the node modified by cssclass is included in its "children" array.
