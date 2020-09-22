@@ -89,7 +89,7 @@ const VersionDropdown = ({
 
     // For production builds, append version after project name
     if (pathPrefix) {
-      const [project] = pathPrefix.split('/');
+      const [, project] = pathPrefix.split('/');
       return `/${project}/${version}`;
     }
 
