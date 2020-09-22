@@ -8,8 +8,9 @@ import Button from '@leafygreen-ui/button';
 
 const zip = (a, b) => {
   // Zip arrays a and b into an object where a is used for keys and b for values
+  const shorter = a.length > b.length ? b : a;
   const dict = {};
-  a.forEach((key, i) => (dict[key] = b[i]));
+  shorter.forEach((key, i) => (dict[a[i]] = b[i]));
   return dict;
 };
 
@@ -54,7 +55,7 @@ const VersionDropdown = ({
   };
 
   // Zip two sections of data to map git branches to their "pretty" names
-  const gitNamedMapping = zip(gitBranches, published);
+  const gitNamedMapping = zip(gitBranches, active);
   const currentBranch = gitNamedMapping[parserBranch] || parserBranch;
 
   const wrapperRef = useRef(null);
@@ -110,12 +111,12 @@ const VersionDropdown = ({
       </Button>
       {!hidden && (
         <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
-          {active.map(version => {
-            const url = normalizePath(`${generatePrefix(version)}/${slug}`);
+          {Object.entries(gitNamedMapping).map(([branch, name]) => {
+            const url = normalizePath(`${generatePrefix(branch)}/${slug}`);
             return (
-              <li className={currentBranch === version ? 'active' : ''} key={version}>
+              <li className={parserBranch === branch ? 'active' : ''} key={branch}>
                 <a className="version-selector" href={url}>
-                  {prefixVersion(version)}
+                  {prefixVersion(name)}
                 </a>
               </li>
             );
