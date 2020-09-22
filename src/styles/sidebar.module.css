@@ -1,6 +1,7 @@
 .sidebar {
-    display: block;
+  display: block;
 }
 .sphinxsidebar {
-    display: block;
+  display: block;
+  overflow-y: visible !important;
 }
