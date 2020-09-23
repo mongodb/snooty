@@ -38,6 +38,7 @@ useStaticQuery.mockImplementation(() => ({
   site: {
     siteMetadata: {
       parserBranch: 'master',
+      pathPrefix: '/bi-connector/master',
       project: 'bi-connector',
       snootyBranch: 'DOCSP-7502',
       user: 'docsworker',
@@ -50,7 +51,7 @@ describe('when rendered', () => {
   let wrapper;
 
   beforeAll(() => {
-    wrapper = mount(<VersionDropdown pathname="installation" publishedBranches={publishedBranches} />);
+    wrapper = mount(<VersionDropdown slug="installation" publishedBranches={publishedBranches} />);
   });
 
   it('shows a button group', () => {
@@ -77,6 +78,16 @@ describe('when rendered', () => {
           .first()
           .hasClass('active')
       ).toBe(true);
+    });
+
+    it('generates the correct links', () => {
+      expect(
+        wrapper
+          .find('li')
+          .at(1)
+          .childAt(0)
+          .prop('href')
+      ).toBe('/bi-connector/v2.11/installation');
     });
 
     // The 9th element links to the Legacy Docs page
@@ -118,7 +129,7 @@ describe('when rendering a property without legacy docs', () => {
   let wrapper;
 
   beforeAll(() => {
-    wrapper = mount(<VersionDropdown pathname="installation" publishedBranches={publishedBranchesNoLegacy} />);
+    wrapper = mount(<VersionDropdown slug="installation" publishedBranches={publishedBranchesNoLegacy} />);
   });
 
   describe('when the button is clicked in a property without legacy docs', () => {
