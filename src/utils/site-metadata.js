@@ -22,6 +22,17 @@ const gitBranch = execSync('git rev-parse --abbrev-ref HEAD')
   .toString('utf8')
   .replace(/[\n\r\s]+$/, '');
 
+const getPathPrefix = () => {
+  const pathPrefix = process.env.PATH_PREFIX;
+  if (!pathPrefix) {
+    return '';
+  }
+  if (pathPrefix.startsWith('/')) {
+    return pathPrefix;
+  }
+  return `/${pathPrefix}`;
+};
+
 /**
  * Get site metadata used to identify this build and query correct documents
  */
@@ -31,7 +42,7 @@ const siteMetadata = {
   parserBranch: process.env.GATSBY_PARSER_BRANCH,
   parserUser: process.env.GATSBY_PARSER_USER,
   patchId: process.env.PATCH_ID || '',
-  pathPrefix: process.env.PATH_PREFIX || '',
+  pathPrefix: getPathPrefix(),
   project: process.env.GATSBY_SITE,
   snootyBranch: gitBranch,
   snootyEnv: process.env.SNOOTY_ENV || 'development',
