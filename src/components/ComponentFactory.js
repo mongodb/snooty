@@ -62,6 +62,7 @@ import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleHighlight from './Roles/Highlight';
 import RoleIcon from './Roles/Icon';
+import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
@@ -84,6 +85,7 @@ const roleMap = {
   'icon-fa4': RoleIcon,
   'icon-mms': RoleIcon,
   'icon-charts': RoleIcon,
+  kbd: RoleKbd,
   red: RoleRed,
   required: RoleRequired,
   sub: Subscript,

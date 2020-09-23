@@ -66,6 +66,7 @@
     "@leafygreen-ui/palette": "^2.0.2",
     "@leafygreen-ui/text-input": "^3.0.4",
     "@leafygreen-ui/tooltip": "^3.3.6",
+    "@leafygreen-ui/typography": "^4.3.0",
     "@loadable/component": "^5.13.1",
     "css-loader": "^3.6.0",
     "dotenv": "^8.2.0",
