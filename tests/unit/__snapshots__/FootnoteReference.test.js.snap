@@ -7,6 +7,7 @@ exports[`renders correctly 1`] = `
   id="footnote-ref-id1"
 >
   [
+  1
   ]
 </a>
 `;
