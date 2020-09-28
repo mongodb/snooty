@@ -7,10 +7,10 @@ import FootnoteContext from './footnote-context';
 
 const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const { footnotes } = useContext(FootnoteContext);
-  const ref = name || id;
+  const ref = name || id.replace('id', '');
   const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
-  const footnoteReferenceNodes = footnoteReferences.map(footnote => (
-    <a className="fn-backref" href={`#footnote-ref-${footnote}`} id={`footnote-${footnote}`}>
+  const footnoteReferenceNodes = footnoteReferences.map(_ => (
+    <a className="fn-backref" href={`#footnote-ref-${ref}`} id={`footnote-${ref}`}>
       {getNestedValue([ref, 'label'], footnotes)}
     </a>
   ));

@@ -11,7 +11,7 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
 
   let ref = refname || id.replace('id', '');
   return (
-    <a className="footnote-reference" href={`#footnote-${id}`} id={`footnote-ref-${id}`}>
+    <a className="footnote-reference" href={`#footnote-${ref}`} id={`footnote-ref-${ref}`}>
       [{getNestedValue([ref, 'label'], footnotes) || ref}]
     </a>
   );

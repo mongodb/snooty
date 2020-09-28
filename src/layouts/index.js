@@ -75,7 +75,7 @@ export default class DefaultLayout extends Component {
         // Find references associated with an anonymous footnote
         // Replace potentially broken anonymous footnote ids by overwriting
         // with their index
-        footnote.id = 'id' + (index + 1);
+        footnote.id = '' + (index + 1);
         // eslint-disable-next-line no-param-reassign
         map[footnote.id] = {
           label: index + 1,
