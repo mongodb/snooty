@@ -57,9 +57,9 @@ const GoButton = styled(IconButton)`
 `;
 
 const GoIcon = styled(Icon)`
-  /* Icon box size is 16px, 3px gives equal width and height */
-  left: 3px;
-  top: 3px;
+  /* Icon box size is 20px, 5px gives equal width and height */
+  left: 5px;
+  top: 5px;
   height: 10px;
   position: absolute;
   width: 10px;
