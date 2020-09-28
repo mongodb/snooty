@@ -59,43 +59,45 @@ export default class DefaultLayout extends Component {
    * - references: a list of the footnote reference ids that refer to this footnote
    */
   getFootnotes = nodes => {
-    // Track how many anonymous footnotes are on the page so that we can correctly associate footnotes and references
-    let anonymousCount = 0;
     const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
-    // Label our footnotes by their index, regardless of their naming
+    const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
+    // Label our footnotes by their index, regardless of their names to
+    // circumvent cases such as [[1], [#], [2], ...]
     return footnotes.reduce((map, footnote, index) => {
       if (footnote.name) {
         // Find references associated with a named footnote
         // eslint-disable-next-line no-param-reassign
         map[footnote.name] = {
           label: index + 1,
-          references: this.getNamedFootnoteReferences(nodes, footnote.name),
+          references: this.getNamedFootnoteReferences(footnoteReferences, footnote.name),
         };
       } else {
         // Find references associated with an anonymous footnote
-        // Replace broken footnote id
-        footnote.id = 'anon-id' + (anonymousCount + 1);
+        // Replace potentially broken anonymous footnote ids by overwriting
+        // with their index
+        footnote.id = 'id' + (index + 1);
         // eslint-disable-next-line no-param-reassign
         map[footnote.id] = {
           label: index + 1,
-          references: [this.getAnonymousFootnoteReferences(nodes, anonymousCount)],
+          references: [this.getAnonymousFootnoteReferences(index)],
         };
-        anonymousCount += 1;
       }
       return map;
     }, {});
   };
 
-  // Find all footnote_reference nodes associated with a given footnote by their refname
-  getNamedFootnoteReferences = (nodes, refname) => {
-    const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
+  // Find all footnote_reference node IDs associated with a given footnote by
+  // that footnote's refname
+  getNamedFootnoteReferences = (footnoteReferences, refname) => {
     return footnoteReferences.filter(node => node.refname === refname).map(node => node.id);
   };
 
   // They are used infrequently, but here we match an anonymous footnote to its reference.
-  // The nth footnote on a page is associated with the nth reference on the page.
-  getAnonymousFootnoteReferences = anonymousCount => {
-    return 'anon-id' + (anonymousCount + 1);
+  // The nth footnote on a page is associated with the nth reference on the page. Since
+  // anon footnotes and footnote references are anonymous, we assume a 1:1 pairing, and
+  // have no need to query nodes
+  getAnonymousFootnoteReferences = index => {
+    return 'id' + (index + 1);
   };
 
   // Modify the AST so that the node modified by cssclass is included in its "children" array.

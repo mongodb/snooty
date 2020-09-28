@@ -7,24 +7,9 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const { footnotes } = useContext(FootnoteContext);
 
   // the nodeData originates from docutils, and may be incorrect for
-  // footnoteReferences originating from included files
+  // anonymous footnoteReferences originating from included files
 
-  if (!refname) {
-    id = 'anon-' + id;
-  }
-
-  // Get the ID of the parent of an anonymous footnote reference
-  const getAnonymousFootnote = () => {
-    return Object.keys(footnotes).find(key => {
-      const referent = getNestedValue([key, 'references'], footnotes) || [];
-      return referent.includes(id);
-    });
-  };
-  let anonFootnote = getAnonymousFootnote();
-  let ref = refname || anonFootnote;
-  if (!refname) {
-    ref = id.replace('anon-id', '');
-  }
+  let ref = refname || id.replace('id', '');
   return (
     <a className="footnote-reference" href={`#footnote-${id}`} id={`footnote-ref-${id}`}>
       [{getNestedValue([ref, 'label'], footnotes) || ref}]
