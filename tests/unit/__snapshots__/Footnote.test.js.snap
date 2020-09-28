@@ -20,6 +20,11 @@ exports[`renders correctly 1`] = `
         className="label"
       >
         [
+        <a
+          className="fn-backref"
+          href="#footnote-ref-1"
+          id="footnote-1"
+        />
         ]
       </td>
       <td>

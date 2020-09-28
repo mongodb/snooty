@@ -9,7 +9,7 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
   // the nodeData originates from docutils, and may be incorrect for
   // anonymous footnoteReferences originating from included files
 
-  let ref = refname || id.replace('id', '');
+  const ref = refname || id.replace('id', '');
   return (
     <a className="footnote-reference" href={`#footnote-${ref}`} id={`footnote-ref-${ref}`}>
       [{getNestedValue([ref, 'label'], footnotes) || ref}]

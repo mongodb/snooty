@@ -75,7 +75,7 @@ export default class DefaultLayout extends Component {
         // Find references associated with an anonymous footnote
         // Replace potentially broken anonymous footnote ids by overwriting
         // with their index
-        footnote.id = '' + (index + 1);
+        footnote.id = `${index + 1}`;
         // eslint-disable-next-line no-param-reassign
         map[footnote.id] = {
           label: index + 1,
@@ -97,7 +97,7 @@ export default class DefaultLayout extends Component {
   // anon footnotes and footnote references are anonymous, we assume a 1:1 pairing, and
   // have no need to query nodes
   getAnonymousFootnoteReferences = index => {
-    return 'id' + (index + 1);
+    return `id${index + 1}`;
   };
 
   // Modify the AST so that the node modified by cssclass is included in its "children" array.
