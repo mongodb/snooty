@@ -7,23 +7,34 @@ import FootnoteContext from './footnote-context';
 
 const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const { footnotes } = useContext(FootnoteContext);
-  const ref = name || id;
+  const ref = name || id.replace('id', '');
+  const label = getNestedValue([ref, 'label'], footnotes);
   const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
-    <a className="fn-backref" href={`#${footnote}`} key={footnote}>
+    <a className="fn-backref" href={`#ref-${footnote}`}>
       {index + 1}
     </a>
   ));
   return (
-    <table className="docutils footnote" frame="void" id={id} rules="none">
+    <table className="docutils footnote" frame="void" id={ref} rules="none">
       <colgroup>
         <col className="label" />
       </colgroup>
       <tbody valign="top">
         <tr>
-          <td className="label">[{getNestedValue([ref, 'label'], footnotes)}]</td>
+          <td className="label">
+            [
+            {footnoteReferenceNodes.length > 1 ? (
+              label
+            ) : (
+              <a className="fn-backref" href={`#ref-${footnoteReferences[0]}`}>
+                {label}
+              </a>
+            )}
+            ]
+          </td>
           <td>
-            <em>({intersperse(footnoteReferenceNodes)})</em>{' '}
+            {footnoteReferenceNodes.length > 1 && <em>({intersperse(footnoteReferenceNodes)})</em>}{' '}
             {children.map((child, index) => (
               <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />
             ))}
