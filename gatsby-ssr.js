@@ -12,6 +12,6 @@ export const replaceRenderer = ({ replaceBodyHTMLString, bodyComponent }) =>
 
 export const wrapRootElement = ({ element }) => (
   <ThemeProvider theme={theme}>
-    <LeafyGreenProvider>{element}</LeafyGreenProvider>
+    <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
   </ThemeProvider>
 );

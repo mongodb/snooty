@@ -39,7 +39,7 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
   const canIncrementPage = useMemo(() => currentPage < totalPages, [currentPage, totalPages]);
   return (
     <PaginationContainer>
-      <PaginationButton ariaLabel="Back Page" disabled={!canDecrementPage} onClick={decrementPage} title="Back Page">
+      <PaginationButton aria-label="Back Page" disabled={!canDecrementPage} onClick={decrementPage} title="Back Page">
         <Icon glyph="ChevronLeft" fill={canDecrementPage ? ENABLED_COLOR : DISABLED_COLOR} />
       </PaginationButton>
       <PaginationText>
@@ -48,7 +48,7 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
         </strong>
       </PaginationText>
       <PaginationButton
-        ariaLabel="Forward Page"
+        aria-label="Forward Page"
         disabled={!canIncrementPage}
         onClick={incrementPage}
         title="Forward Page"

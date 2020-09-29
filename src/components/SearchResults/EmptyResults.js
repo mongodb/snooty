@@ -58,7 +58,7 @@ const EmptyResults = () => {
   }, []);
   return (
     <EmptyStateContainer>
-      <MagnifyingGlassButton ariaLabel="Search MongoDB Documentation" onClick={focusOnSearchbar}>
+      <MagnifyingGlassButton aria-label="Search MongoDB Documentation" onClick={focusOnSearchbar}>
         <MagnifyingGlass glyph="MagnifyingGlass" />
       </MagnifyingGlassButton>
       <TitleText>

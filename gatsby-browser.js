@@ -5,6 +5,6 @@ import { theme } from './src/theme/docsTheme';
 
 export const wrapRootElement = ({ element }) => (
   <ThemeProvider theme={theme}>
-    <LeafyGreenProvider>{element}</LeafyGreenProvider>
+    <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
   </ThemeProvider>
 );

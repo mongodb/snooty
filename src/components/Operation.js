@@ -115,7 +115,7 @@ const Operation = ({
         <Badge variant={methodBadgeMap[method]}>{method}</Badge>
         <Path dangerouslySetInnerHTML={{ __html: formatPath(path) }} />
         <IconButton
-          ariaLabel={`${showDetails ? 'Hide' : 'Show'} operation details`}
+          aria-label={`${showDetails ? 'Hide' : 'Show'} operation details`}
           onClick={() => setShowDetails(!showDetails)}
           css={css`
             margin-left: auto;
