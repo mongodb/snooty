@@ -34,12 +34,10 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
             ]
           </td>
           <td>
-            <>
-              {footnoteReferenceNodes.length > 1 && <em>({intersperse(footnoteReferenceNodes)})</em>}{' '}
-              {children.map((child, index) => (
-                <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />
-              ))}
-            </>
+            {footnoteReferenceNodes.length > 1 && <em>({intersperse(footnoteReferenceNodes)})</em>}{' '}
+            {children.map((child, index) => (
+              <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />
+            ))}
           </td>
         </tr>
       </tbody>
