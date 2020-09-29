@@ -4,7 +4,7 @@ exports[`renders correctly 1`] = `
 <table
   className="docutils footnote"
   frame="void"
-  id="id8"
+  id="1"
   rules="none"
 >
   <colgroup>
@@ -22,12 +22,12 @@ exports[`renders correctly 1`] = `
         [
         <a
           className="fn-backref"
-          href="#footnote-ref-1"
-          id="footnote-1"
+          href="#ref-undefined"
         />
         ]
       </td>
       <td>
+         
         <ComponentFactory
           key="0"
           nodeData={

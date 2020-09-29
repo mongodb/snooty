@@ -61,7 +61,7 @@ export default class DefaultLayout extends Component {
   getFootnotes = nodes => {
     const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
     const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
-    // Label our footnotes by their index, regardless of their names to
+    // We label our footnotes by their index, regardless of their names to
     // circumvent cases such as [[1], [#], [2], ...]
     return footnotes.reduce((map, footnote, index) => {
       if (footnote.name) {
@@ -73,8 +73,7 @@ export default class DefaultLayout extends Component {
         };
       } else {
         // Find references associated with an anonymous footnote
-        // Replace potentially broken anonymous footnote ids by overwriting
-        // with their index
+        // Replace potentially broken anonymous footnote ids
         footnote.id = `${index + 1}`;
         // eslint-disable-next-line no-param-reassign
         map[footnote.id] = {
