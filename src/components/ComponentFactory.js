@@ -60,7 +60,9 @@ import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
+import RoleHighlight from './Roles/Highlight';
 import RoleIcon from './Roles/Icon';
+import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
@@ -74,11 +76,16 @@ const roleMap = {
   file: RoleFile,
   guilabel: RoleGUILabel,
   icon: RoleIcon,
+  'highlight-blue': RoleHighlight,
+  'highlight-green': RoleHighlight,
+  'highlight-red': RoleHighlight,
+  'highlight-yellow': RoleHighlight,
   'icon-fa5': RoleIcon,
   'icon-fa5-brands': RoleIcon,
   'icon-fa4': RoleIcon,
   'icon-mms': RoleIcon,
   'icon-charts': RoleIcon,
+  kbd: RoleKbd,
   red: RoleRed,
   required: RoleRequired,
   sub: Subscript,
