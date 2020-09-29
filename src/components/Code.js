@@ -63,7 +63,6 @@ const Code = ({ nodeData: { copyable, lang = 'none', linenos, value }, uriWriter
       `}
       language={getLanguage(lang)}
       showLineNumbers={linenos}
-      variant="light"
     >
       {code}
     </CodeBlock>

@@ -3,7 +3,7 @@
 exports[`Pagination renders pagination correctly 1`] = `
 <PaginationContainer>
   <PaginationButton
-    ariaLabel="Back Page"
+    aria-label="Back Page"
     disabled={true}
     onClick={[Function]}
     title="Back Page"
@@ -21,7 +21,7 @@ exports[`Pagination renders pagination correctly 1`] = `
     </strong>
   </PaginationText>
   <PaginationButton
-    ariaLabel="Forward Page"
+    aria-label="Forward Page"
     disabled={false}
     onClick={[Function]}
     title="Forward Page"

@@ -57,9 +57,9 @@ const GoButton = styled(IconButton)`
 `;
 
 const GoIcon = styled(Icon)`
-  /* Icon box size is 16px, 3px gives equal width and height */
-  left: 3px;
-  top: 3px;
+  /* Icon box size is 20px, 5px gives equal width and height */
+  left: 5px;
+  top: 5px;
   height: 10px;
   position: absolute;
   width: 10px;
@@ -135,17 +135,17 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
 
   return (
     <>
-      <MagnifyingGlassButton ariaLabel="Search MongoDB Documentation" onClick={onSearchFocus}>
+      <MagnifyingGlassButton aria-label="Search MongoDB Documentation" onClick={onSearchFocus}>
         <MagnifyingGlass glyph="MagnifyingGlass" />
       </MagnifyingGlassButton>
       <SearchTextInput ref={searchTextbox} isSearching={isSearching} onChange={onSearchChange} value={searchTerm} />
       {shouldShowGoButton && (
-        <GoButton ref={goButton} type="submit" ariaLabel="Go" href={searchUrl}>
+        <GoButton ref={goButton} type="submit" aria-label="Go" href={searchUrl}>
           <GoIcon glyph="ArrowRight" fill="#13AA52" />
         </GoButton>
       )}
       {isMobile && (
-        <CloseButton ariaLabel="Close Search" onClick={onMobileClose}>
+        <CloseButton aria-label="Close Search" onClick={onMobileClose}>
           <Icon glyph="X" fill={uiColors.gray.base} />
         </CloseButton>
       )}

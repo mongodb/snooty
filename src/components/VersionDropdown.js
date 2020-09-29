@@ -132,11 +132,11 @@ VersionDropdown.propTypes = {
   publishedBranches: PropTypes.shape({
     version: PropTypes.shape({
       published: PropTypes.arrayOf(PropTypes.string).isRequired,
+      active: PropTypes.arrayOf(PropTypes.string).isRequired,
     }).isRequired,
     git: PropTypes.shape({
       branches: PropTypes.shape({
         published: PropTypes.arrayOf(PropTypes.string).isRequired,
-        active: PropTypes.arrayOf(PropTypes.string).isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
