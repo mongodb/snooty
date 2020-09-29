@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<table
+  className="docutils footnote"
+  frame="void"
+  id="1"
+  rules="none"
+>
+  <colgroup>
+    <col
+      className="label"
+    />
+  </colgroup>
+  <tbody
+    valign="top"
+  >
+    <tr>
+      <td
+        className="label"
+      >
+        [
+        <a
+          className="fn-backref"
+          href="#ref-undefined"
+        />
+        ]
+      </td>
+      <td>
+         
+        <ComponentFactory
+          key="0"
+          nodeData={
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 108,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Numerical footnote.",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 108,
+                },
+              },
+              "type": "paragraph",
+            }
+          }
+          parentNode="footnote"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
