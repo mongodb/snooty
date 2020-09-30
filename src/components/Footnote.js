@@ -9,14 +9,15 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const { footnotes } = useContext(FootnoteContext);
   const ref = name || id.replace('id', '');
   const label = getNestedValue([ref, 'label'], footnotes);
+  const uid = name ? `${name}-` : '';
   const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
-    <a className="fn-backref" href={`#ref-${footnote}`}>
+    <a className="fn-backref" href={`#ref-${uid}${footnote}`}>
       {index + 1}
     </a>
   ));
   return (
-    <table className="docutils footnote" frame="void" id={ref} rules="none">
+    <table className="docutils footnote" frame="void" id={`footnote-${ref}`} rules="none">
       <colgroup>
         <col className="label" />
       </colgroup>
@@ -27,7 +28,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
             {footnoteReferenceNodes.length > 1 ? (
               label
             ) : (
-              <a className="fn-backref" href={`#ref-${footnoteReferences[0]}`}>
+              <a className="fn-backref" href={`#ref-${uid}${footnoteReferences[0]}`}>
                 {label}
               </a>
             )}
