@@ -12,5 +12,5 @@ export const getPlaintext = nodeArray => {
     }
   };
 
-  return nodeArray ? nodeArray.reduce(extractText, '') : '';
+  return nodeArray.length > 0 ? nodeArray.reduce(extractText, '') : '';
 };
