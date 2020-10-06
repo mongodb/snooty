@@ -3,7 +3,6 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 
 const defaultContextValue = {
   activeTabs: {},
-  selectors: {},
   setActiveTab: () => {},
 };
 
@@ -16,14 +15,14 @@ const reducer = (prevState, { name, value }) => {
   };
 };
 
-const TabProvider = ({ children, selectors }) => {
+const TabProvider = ({ children }) => {
   const [activeTabs, setActiveTab] = useReducer(reducer, getLocalValue('activeTabs') || defaultContextValue.activeTabs);
 
   useEffect(() => {
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);
 
-  return <TabContext.Provider value={{ activeTabs, selectors, setActiveTab }}>{children}</TabContext.Provider>;
+  return <TabContext.Provider value={{ activeTabs, setActiveTab }}>{children}</TabContext.Provider>;
 };
 
 export { TabContext, TabProvider };
