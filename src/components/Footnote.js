@@ -25,7 +25,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
         <tr>
           <td className="label">
             [
-            {footnoteReferenceNodes.length > 1 ? (
+            {footnoteReferenceNodes.length != 1 ? (
               label
             ) : (
               <a className="fn-backref" href={`#ref-${uid}${footnoteReferences[0]}`}>

@@ -20,10 +20,6 @@ exports[`renders correctly 1`] = `
         className="label"
       >
         [
-        <a
-          className="fn-backref"
-          href="#ref-1-undefined"
-        />
         ]
       </td>
       <td>
