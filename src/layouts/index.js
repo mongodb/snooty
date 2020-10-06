@@ -135,7 +135,6 @@ export default class DefaultLayout extends Component {
   render() {
     const { children, pageContext } = this.props;
     const pageNodes = this.getPageNodes(pageContext);
-    // Map all footnotes and their references that appear on the page
     const footnotes = this.getFootnotes(pageNodes);
     const { location, metadata, page, slug, template } = pageContext;
     const { pillstrips } = this.state;
@@ -168,7 +167,7 @@ export default class DefaultLayout extends Component {
           >
             <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
             <Template pageContext={pageContext} pillstrips={pillstrips} addPillstrip={this.addPillstrip}>
-              <FootnoteContext.Provider value={{ footnotes: footnotes }}>
+              <FootnoteContext.Provider value={footnotes}>
                 {React.cloneElement(children, {
                   pillstrips,
                   addPillstrip: this.addPillstrip,
