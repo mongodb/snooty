@@ -19,8 +19,6 @@ export default class DefaultLayout extends Component {
   constructor(props) {
     super(props);
 
-    this.preprocessPageNodes();
-
     this.state = {
       activeTabs: undefined,
       pillstrips: {},
@@ -40,15 +38,13 @@ export default class DefaultLayout extends Component {
     }));
   };
 
-  preprocessPageNodes = () => {
-    const { pageContext } = this.props;
+  getPageNodes = pageContext => {
     const pageNodes = getNestedValue(['page', 'ast', 'children'], pageContext) || [];
-
-    // Map all footnotes and their references that appear on the page
-    this.footnotes = this.getFootnotes(pageNodes);
 
     // Standardize cssclass nodes that appear on the page
     this.normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
+
+    return pageNodes;
   };
 
   /*
@@ -138,6 +134,9 @@ export default class DefaultLayout extends Component {
 
   render() {
     const { children, pageContext } = this.props;
+    const pageNodes = this.getPageNodes(pageContext);
+    // Map all footnotes and their references that appear on the page
+    const footnotes = this.getFootnotes(pageNodes);
     const { location, metadata, page, slug, template } = pageContext;
     const { pillstrips } = this.state;
     const lookup = slug === '/' ? 'index' : slug;
@@ -169,7 +168,7 @@ export default class DefaultLayout extends Component {
           >
             <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
             <Template pageContext={pageContext} pillstrips={pillstrips} addPillstrip={this.addPillstrip}>
-              <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
+              <FootnoteContext.Provider value={{ footnotes: footnotes }}>
                 {React.cloneElement(children, {
                   pillstrips,
                   addPillstrip: this.addPillstrip,
