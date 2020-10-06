@@ -61,6 +61,8 @@ export default class DefaultLayout extends Component {
   getFootnotes = nodes => {
     const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
     const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
+    const numAnonRefs = footnoteReferences.filter(node => !Object.prototype.hasOwnProperty.call(node, 'refname'))
+      .length;
     // We label our footnotes by their index, regardless of their names to
     // circumvent cases such as [[1], [#], [2], ...]
     return footnotes.reduce((map, footnote, index) => {
@@ -78,7 +80,7 @@ export default class DefaultLayout extends Component {
         // eslint-disable-next-line no-param-reassign
         map[footnote.id] = {
           label: index + 1,
-          references: [this.getAnonymousFootnoteReferences(index)],
+          references: this.getAnonymousFootnoteReferences(index, numAnonRefs),
         };
       }
       return map;
@@ -95,8 +97,8 @@ export default class DefaultLayout extends Component {
   // The nth footnote on a page is associated with the nth reference on the page. Since
   // anon footnotes and footnote references are anonymous, we assume a 1:1 pairing, and
   // have no need to query nodes
-  getAnonymousFootnoteReferences = index => {
-    return `id${index + 1}`;
+  getAnonymousFootnoteReferences = (index, numAnonRefs) => {
+    return index >= numAnonRefs ? [] : [`id${index + 1}`];
   };
 
   // Modify the AST so that the node modified by cssclass is included in its "children" array.
