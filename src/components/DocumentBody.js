@@ -5,8 +5,7 @@ import FootnoteContext from '../components/footnote-context';
 import { getNestedValue } from '../utils/get-nested-value';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 
-const DocumentBody = ({ children, addPillstrip, pillstrips, pageContext: { metadata, page, slug } }) => {
-  console.log('documentbody');
+const DocumentBody = ({ addPillstrip, pillstrips, pageContext: { metadata, page, slug } }) => {
   const pageNodes = getNestedValue(['ast', 'children'], page) || [];
 
   // Modify the AST so that the node modified by cssclass is included in its "children" array.
@@ -75,10 +74,9 @@ const DocumentBody = ({ children, addPillstrip, pillstrips, pageContext: { metad
   // Standardize cssclass nodes that appear on the page
   normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
   const footnotes = getFootnotes(pageNodes);
-  console.log(footnotes);
 
   return (
-    <React.Fragment>
+    <FootnoteContext.Provider value={{ footnotes: footnotes }}>
       {pageNodes.map((child, index) => (
         <ComponentFactory
           addPillstrip={addPillstrip}
@@ -90,13 +88,7 @@ const DocumentBody = ({ children, addPillstrip, pillstrips, pageContext: { metad
           slug={slug}
         />
       ))}
-      {/* <FootnoteContext.Provider value={footnotes}>
-        {React.cloneElement(children, {
-          pillstrips,
-          addPillstrip: this.addPillstrip,
-        })}
-      </FootnoteContext.Provider> */}
-    </React.Fragment>
+    </FootnoteContext.Provider>
   );
 };
 

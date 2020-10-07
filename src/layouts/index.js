@@ -56,7 +56,7 @@ export default class DefaultLayout extends Component {
   };
 
   render() {
-    const { pageContext } = this.props;
+    const { children, pageContext } = this.props;
     const { location, metadata, page, slug, template } = pageContext;
     const { pillstrips } = this.state;
     const lookup = slug === '/' ? 'index' : slug;
@@ -87,7 +87,12 @@ export default class DefaultLayout extends Component {
             slug={slug}
           >
             <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
-            <Template pageContext={pageContext} pillstrips={pillstrips} addPillstrip={this.addPillstrip} />
+            <Template pageContext={pageContext} pillstrips={pillstrips} addPillstrip={this.addPillstrip}>
+              {React.cloneElement(children, {
+                pillstrips,
+                addPillstrip: this.addPillstrip,
+              })}
+            </Template>
           </Widgets>
         </TabContext.Provider>
         <Navbar />
