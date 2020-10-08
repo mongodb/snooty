@@ -12,6 +12,7 @@ import {
 import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import { isBrowser } from '../utils/is-browser';
+import { theme } from '../theme/docsTheme';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -52,20 +53,26 @@ const Code = ({ nodeData: { copyable, lang = 'none', linenos, value }, uriWriter
   }
 
   return (
-    <CodeBlock
-      copyable={copyable}
+    <div
       css={css`
-        & * {
-          overflow-wrap: normal !important;
-          white-space: pre;
-          word-break: normal !important;
-        }
+        margin: ${theme.size.default} 0;
       `}
-      language={getLanguage(lang)}
-      showLineNumbers={linenos}
     >
-      {code}
-    </CodeBlock>
+      <CodeBlock
+        copyable={copyable}
+        css={css`
+          & * {
+            overflow-wrap: normal !important;
+            white-space: pre;
+            word-break: normal !important;
+          }
+        `}
+        language={getLanguage(lang)}
+        showLineNumbers={linenos}
+      >
+        {code}
+      </CodeBlock>
+    </div>
   );
 };
 

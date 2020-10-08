@@ -54,37 +54,17 @@ describe('Tabs testing', () => {
     });
 
     it('active tab is set in DOM', () => {
-      expect(wrapper.find('.tab-strip__element[aria-selected="true"]').exists()).toEqual(true);
+      expect(wrapper.find('.tab-strip__element[aria-selected=true]').exists()).toEqual(true);
     });
 
     it('exists non-active tab', () => {
-      expect(wrapper.find('.tab-strip__element[aria-selected="false"]').exists()).toEqual(true);
+      expect(wrapper.find('.tab-strip__element[aria-selected=false]').exists()).toEqual(true);
     });
 
     it('clicking new non-active tab calls function', () => {
-      const nonactiveTab = wrapper.find('.tab-strip__element[aria-selected="false"]').first();
+      const nonactiveTab = wrapper.find('.tab-strip__element[aria-selected=false]').first();
       nonactiveTab.simulate('click');
       expect(mockSetActiveTab.mock.calls.length).toBe(1);
-    });
-  });
-
-  describe('Guides unit tests', () => {
-    let wrapper;
-    const mockSetActiveTab = jest.fn();
-    const mockAddTabset = jest.fn();
-
-    beforeAll(() => {
-      process.env = Object.assign(process.env, { GATSBY_SITE: 'guides' });
-      wrapper = mountTabs({
-        activeTabs: {},
-        mockData: mockDataLanguages,
-        mockAddTabset,
-        mockSetActiveTab,
-      });
-    });
-
-    it('tabset should not be created for drivers/language pills', () => {
-      expect(wrapper.find('.tab-strip__element').exists()).toEqual(false);
     });
   });
 
