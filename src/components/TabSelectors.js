@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 import { TabContext } from './tab-context';
 import Select from './Select';
+import { getPlaintext } from '../utils/get-plaintext';
 
 const capitalizeFirstLetter = str => str.trim().replace(/^\w/, c => c.toUpperCase());
 
@@ -28,11 +29,13 @@ const TabSelectors = () => {
   return (
     <>
       {Object.entries(selectors).map(([name, options], i) => {
-        const choices = Object.entries(options).map(([key, value]) => ({ value, text: key }));
+        const choices = Object.entries(options).map(([tabId, title]) => ({ text: getPlaintext(title), value: tabId }));
         return (
           <Select
             css={css`
-              max-width: 200px;
+              /* Min width of right panel */
+              max-width: 180px;
+              width: 100%;
             `}
             choices={choices}
             key={i}

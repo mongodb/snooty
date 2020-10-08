@@ -9,6 +9,10 @@ const RightColumn = ({ children }) => (
       margin: 40px 15px;
       min-width: 180px;
       order: 2;
+
+      & > * {
+        position: fixed;
+      }
     `}
   >
     {children}
