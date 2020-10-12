@@ -26,14 +26,16 @@ const activeSelectStyles = css`
 const Label = styled('p')`
   font-weight: bolder;
   letter-spacing: 0;
-  margin: 0 0 12px;
+  /* TODO: Remove !important when mongodb-docs.css is removed */
+  margin: 0 0 12px !important;
 `;
 
 const SelectedText = styled('p')`
   display: block;
   font-family: Akzidenz;
   font-size: ${theme.fontSize.small};
-  margin: 0;
+  /* TODO: Remove !important when mongodb-docs.css is removed */
+  margin: 0 !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

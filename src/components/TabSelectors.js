@@ -3,6 +3,7 @@ import { css } from '@emotion/core';
 import { TabContext } from './tab-context';
 import Select from './Select';
 import { getPlaintext } from '../utils/get-plaintext';
+import { theme } from '../theme/docsTheme';
 
 const capitalizeFirstLetter = str => str.trim().replace(/^\w/, c => c.toUpperCase());
 
@@ -33,9 +34,12 @@ const TabSelectors = () => {
         return (
           <Select
             css={css`
-              /* Min width of right panel */
-              max-width: 180px;
               width: 100%;
+
+              @media ${theme.screenSize.smallAndUp} {
+                /* Min width of right panel */
+                max-width: 180px;
+              }
             `}
             choices={choices}
             key={i}
