@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import loadable from '@loadable/component';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
-import { TabContext } from '../components/tab-context';
+import { TabProvider } from '../components/tab-context';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
-import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import FootnoteContext from '../components/footnote-context';
@@ -20,25 +19,7 @@ export default class DefaultLayout extends Component {
     super(props);
 
     this.preprocessPageNodes();
-
-    this.state = {
-      activeTabs: undefined,
-      pillstrips: {},
-    };
   }
-
-  componentDidMount() {
-    this.setState(prevState => ({ activeTabs: { ...getLocalValue('activeTabs'), ...prevState.activeTabs } }));
-  }
-
-  addPillstrip = (pillstripKey, pillstripVal) => {
-    this.setState(prevState => ({
-      pillstrips: {
-        ...prevState.pillstrips,
-        [pillstripKey]: pillstripVal,
-      },
-    }));
-  };
 
   preprocessPageNodes = () => {
     const { pageContext } = this.props;
@@ -117,29 +98,9 @@ export default class DefaultLayout extends Component {
     nodes.forEach(searchNode);
   };
 
-  setActiveTab = (tabsetName, value) => {
-    const { [tabsetName]: tabs } = this.state;
-    let activeTab = value;
-    if (tabs && !tabs.includes(value)) {
-      activeTab = tabs[0];
-    }
-    this.setState(
-      prevState => ({
-        activeTabs: {
-          ...prevState.activeTabs,
-          [tabsetName]: activeTab,
-        },
-      }),
-      () => {
-        setLocalValue('activeTabs', this.state.activeTabs); // eslint-disable-line react/destructuring-assignment
-      }
-    );
-  };
-
   render() {
-    const { children, pageContext } = this.props;
-    const { location, metadata, page, slug, template } = pageContext;
-    const { pillstrips } = this.state;
+    const { children, location, pageContext } = this.props;
+    const { metadata, page, slug, template } = pageContext;
     const lookup = slug === '/' ? 'index' : slug;
     const siteTitle = getNestedValue(['title'], metadata) || '';
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
@@ -159,7 +120,7 @@ export default class DefaultLayout extends Component {
             }
           `}
         />
-        <TabContext.Provider value={{ ...this.state, setActiveTab: this.setActiveTab }}>
+        <TabProvider selectors={getNestedValue(['ast', 'options', 'selectors'], page)}>
           <Widgets
             location={location}
             pageOptions={getNestedValue(['ast', 'options'], page)}
@@ -168,16 +129,11 @@ export default class DefaultLayout extends Component {
             slug={slug}
           >
             <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
-            <Template pageContext={pageContext} pillstrips={pillstrips} addPillstrip={this.addPillstrip}>
-              <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
-                {React.cloneElement(children, {
-                  pillstrips,
-                  addPillstrip: this.addPillstrip,
-                })}
-              </FootnoteContext.Provider>
+            <Template pageContext={pageContext}>
+              <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>{children}</FootnoteContext.Provider>
             </Template>
           </Widgets>
-        </TabContext.Provider>
+        </TabProvider>
         <Navbar />
       </>
     );
