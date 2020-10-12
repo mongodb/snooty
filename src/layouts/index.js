@@ -120,7 +120,7 @@ export default class DefaultLayout extends Component {
             }
           `}
         />
-        <TabProvider>
+        <TabProvider selectors={getNestedValue(['ast', 'options', 'selectors'], page)}>
           <Widgets
             location={location}
             pageOptions={getNestedValue(['ast', 'options'], page)}
