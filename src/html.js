@@ -35,21 +35,9 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         <link rel="stylesheet" href={withPrefix('docs-tools/mongodb-docs.css')} type="text/css" />
       )}
       <link rel="stylesheet" href={withPrefix('docs-tools/navbar.min.css')} type="text/css" />
-      <script async src={withPrefix('scripts/gtm.js')} />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
-      {/* Google Tag Manager (noscript) */}
-      <noscript>
-        {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-GDFN"
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        ></iframe>
-      </noscript>
-      {/* End Google Tag Manager (noscript) */}
       <script async src={withPrefix('scripts/segment.js')} />
       {preBodyComponents}
       {/* eslint-disable-next-line react/no-danger */}
