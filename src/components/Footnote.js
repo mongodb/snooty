@@ -11,7 +11,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const label = getNestedValue([ref, 'label'], footnotes);
   const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
-    <a className="fn-backref" href={`#ref-${footnote}`}>
+    <a className="fn-backref" href={`#ref-${footnote}`} key={index}>
       {index + 1}
     </a>
   ));

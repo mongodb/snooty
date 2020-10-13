@@ -13,10 +13,6 @@ import Navbar from '../components/Navbar';
 const Widgets = loadable(() => import('../components/Widgets'));
 
 export default class DefaultLayout extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { children, location, pageContext } = this.props;
     const { metadata, page, slug, template } = pageContext;
