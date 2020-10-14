@@ -49,7 +49,6 @@ const TabSelectors = () => {
                 newValue: value,
               });
             }}
-            W
             value={activeTabs[name]}
           />
         );
