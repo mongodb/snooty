@@ -26,7 +26,7 @@ const activeSelectStyles = css`
 const Label = styled('p')`
   font-weight: bolder;
   letter-spacing: 0;
-  margin: 0 0 ${theme.size.tiny};
+  margin: 0 0 12px;
 `;
 
 const SelectedText = styled('p')`
