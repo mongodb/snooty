@@ -7,7 +7,6 @@ import FootnoteContext from './footnote-context';
 
 const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const { footnotes } = useContext(FootnoteContext);
-  console.log(footnotes);
   const ref = name || id.replace('id', '');
   const label = getNestedValue([ref, 'label'], footnotes);
   const uid = name ? `${name}-` : '';
