@@ -12,8 +12,7 @@ import Navbar from '../components/Navbar';
 
 const Widgets = loadable(() => import('../components/Widgets'));
 
-const DefaultLayout = () => {
-  const { children, location, pageContext } = this.props;
+const DefaultLayout = ({ children, location, pageContext }) => {
   const { metadata, page, slug, template } = pageContext;
   const lookup = slug === '/' ? 'index' : slug;
   const siteTitle = getNestedValue(['title'], metadata) || '';
