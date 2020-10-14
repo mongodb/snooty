@@ -23,7 +23,7 @@ const getLabel = name => {
 const TabSelectors = () => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
 
-  if (!selectors) {
+  if (!selectors || Object.keys(selectors).length === 0) {
     return null;
   }
 

@@ -20,6 +20,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const { isTabletOrMobile, isSmallScreen } = useScreenSize();
   const shouldShowStarRating = isPageTitle && isTabletOrMobile;
   const { selectors } = useContext(TabContext);
+  const hasSelectors = selectors && Object.keys(selectors).length > 0;
 
   return (
     <ConditionalWrapper
@@ -28,7 +29,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
         <HeadingContainer stackVertically={isSmallScreen}>
           {children}
           <ChildContainer isStacked={isSmallScreen}>
-            {selectors ? <TabSelectors /> : <FeedbackHeading isStacked={isSmallScreen} />}
+            {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isSmallScreen} />}
           </ChildContainer>
         </HeadingContainer>
       )}
