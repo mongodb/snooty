@@ -34,7 +34,6 @@ import Contents from './Contents';
 import Container from './Container';
 import Cond from './Cond';
 import Meta from './Meta';
-import TabsPillstrip from './TabsPillstrip';
 import VersionChanged from './VersionChanged';
 import VersionAdded from './VersionAdded';
 import Deprecated from './Deprecated';
@@ -140,7 +139,6 @@ const componentMap = {
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
-  'tabs-pillstrip': TabsPillstrip,
   target: Target,
   text: Text,
   title_reference: TitleReference,

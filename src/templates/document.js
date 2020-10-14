@@ -5,7 +5,10 @@ import { getNestedValue } from '../utils/get-nested-value';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
+import RightColumn from '../components/RightColumn';
+import TabSelectors from '../components/TabSelectors';
 import { useWindowSize } from '../hooks/use-window-size.js';
+import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 
@@ -28,6 +31,9 @@ const Document = ({
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
   };
+
+  const { isTabletOrMobile } = useScreenSize();
+  const showRightColumn = !isTabletOrMobile;
 
   return (
     <div className="content">
@@ -64,6 +70,11 @@ const Document = ({
           </div>
         </div>
       </div>
+      {showRightColumn && (
+        <RightColumn>
+          <TabSelectors />
+        </RightColumn>
+      )}
     </div>
   );
 };

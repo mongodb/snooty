@@ -12,7 +12,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const uid = name ? `${name}-` : '';
   const footnoteReferences = footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
-    <a className="fn-backref" href={`#ref-${uid}${footnote}`}>
+    <a className="fn-backref" href={`#ref-${uid}${footnote}`} key={index}>
       {index + 1}
     </a>
   ));
