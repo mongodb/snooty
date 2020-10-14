@@ -24,6 +24,7 @@ const activeSelectStyles = css`
 `;
 
 const Label = styled('p')`
+  font-size: ${theme.fontSize.default};
   font-weight: bolder;
   letter-spacing: 0;
   /* TODO: Remove !important when mongodb-docs.css is removed */
@@ -47,7 +48,8 @@ const Option = styled('li')`
   color: black;
   display: block;
   overflow: hidden;
-  padding: 10px ${theme.size.default};
+  /* TODO: Remove !important when mongodb-docs.css is removed */
+  padding: 10px ${theme.size.default} !important;
   text-overflow: ellipsis;
   white-space: nowrap;
   :focus,
