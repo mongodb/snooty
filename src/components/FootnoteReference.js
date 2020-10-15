@@ -11,8 +11,9 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
   // appears to assign IDs within the included files before they are collated
 
   const ref = refname || id.replace('id', '');
+  const uid = refname ? `${refname}-${id}` : id;
   return (
-    <a className="footnote-reference" href={`#${ref}`} id={`ref-${id}`}>
+    <a className="footnote-reference" href={`#footnote-${ref}`} id={`ref-${uid}`}>
       [{getNestedValue([ref, 'label'], footnotes) || ref}]
     </a>
   );

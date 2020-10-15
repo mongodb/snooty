@@ -3,8 +3,8 @@
 exports[`renders correctly 1`] = `
 <a
   className="footnote-reference"
-  href="#1"
-  id="ref-id1"
+  href="#footnote-1"
+  id="ref-1-id1"
 >
   [
   1
