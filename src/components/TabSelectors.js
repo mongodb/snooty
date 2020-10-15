@@ -45,8 +45,8 @@ const TabSelectors = () => {
               setActiveTab({ name, value });
               reportAnalytics('LanguageSelection', {
                 areaFrom: 'LanguageSelector',
-                oldValue: activeTabs[name],
-                newValue: value,
+                languageInitial: activeTabs[name],
+                languageSelected: value,
               });
             }}
             value={activeTabs[name]}
