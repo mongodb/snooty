@@ -40,7 +40,7 @@ const getLanguage = lang => {
 };
 
 const Code = ({
-  nodeData: { copyable, emphasize_lines: emphasizeLines, lang, linenos, value },
+  nodeData: { copyable, caption, emphasize_lines: emphasizeLines, lang = 'none', linenos, value },
   uriWriter: { cloudURI, localURI },
 }) => {
   const { activeTabs } = useContext(TabContext);
@@ -60,6 +60,17 @@ const Code = ({
         margin: ${theme.size.default} 0;
       `}
     >
+      {/* This implementation of caption should change with DOP-1639 */}
+      {caption && (
+        <span
+          className="caption-text"
+          css={css`
+            font-weight: bold;
+          `}
+        >
+          {caption}
+        </span>
+      )}
       <CodeBlock
         copyable={copyable}
         css={css`
@@ -72,6 +83,7 @@ const Code = ({
         highlightLines={emphasizeLines}
         language={getLanguage(lang)}
         showLineNumbers={linenos}
+        showWindowChrome={true}
       >
         {code}
       </CodeBlock>
@@ -86,6 +98,7 @@ Code.propTypes = {
     lang: PropTypes.string,
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
+    caption: PropTypes.string,
   }).isRequired,
   uriWriter: PropTypes.shape({
     cloudURI: PropTypes.object,

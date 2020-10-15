@@ -4,6 +4,7 @@ exports[`renders correctly 1`] = `
 <Code
   nodeData={
     Object {
+      "caption": "Test \`\`Caption\`\`",
       "copyable": true,
       "lang": "javascript",
       "position": Object {
@@ -30,6 +31,7 @@ exports[`renders with javascript disabled correctly 1`] = `
 <Code
   nodeData={
     Object {
+      "caption": "Test \`\`Caption\`\`",
       "copyable": true,
       "lang": "javascript",
       "position": Object {
