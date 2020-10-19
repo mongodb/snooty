@@ -6,11 +6,10 @@ import Footer from '../components/Footer';
 import GuideBreadcrumbs from '../components/GuideBreadcrumbs';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
-import { LANGUAGES, DEPLOYMENTS, SECTION_NAME_MAPPING } from '../constants';
+import { SECTION_NAME_MAPPING } from '../constants';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { throttle } from '../utils/throttle';
 import { getNestedValue } from '../utils/get-nested-value';
-import { TabContext } from '../components/tab-context';
 
 export default class Guide extends Component {
   constructor(propsFromServer) {
@@ -30,7 +29,6 @@ export default class Guide extends Component {
     };
 
     this.sectionRefs = this.bodySections.map(() => React.createRef());
-    this.namedTabsets = new Set();
   }
 
   componentDidMount() {
@@ -74,37 +72,6 @@ export default class Guide extends Component {
     }
   };
 
-  addGuidesTabset = (tabsetName, tabData) => {
-    const tabs = tabData.map(tab => getNestedValue(['options', 'tabid'], tab));
-    if (tabsetName === 'cloud') {
-      const tabsFiltered = DEPLOYMENTS.filter(tab => tabs.includes(tab));
-      this.setNamedTabData(tabsetName, tabsFiltered, DEPLOYMENTS);
-    } else if (tabsetName === 'drivers') {
-      const tabsFiltered = LANGUAGES.filter(tab => tabs.includes(tab));
-      this.setNamedTabData(tabsetName, tabsFiltered, LANGUAGES);
-    }
-  };
-
-  matchArraySorting = (tabs, referenceArray) => referenceArray.filter(t => tabs.includes(t));
-
-  setNamedTabData = (tabsetName, tabs, constants) => {
-    const { activeTabs, setActiveTab } = this.context;
-    this.setState(
-      prevState => ({
-        [tabsetName]: this.matchArraySorting(
-          Array.from(new Set([...(prevState[tabsetName] || []), ...tabs])),
-          constants
-        ),
-      }),
-      () => {
-        // If a tab preference isn't saved to local storage, select the first tab by default
-        if (!Object.prototype.hasOwnProperty.call(activeTabs, tabsetName)) {
-          setActiveTab(tabsetName, this.state[tabsetName][0]); // eslint-disable-line react/destructuring-assignment
-        }
-      }
-    );
-  };
-
   // Temporarily disable scrolling listener by changing state of 'isScrollable'
   disableScrollable = clickedSection => {
     this.setState({
@@ -114,7 +81,7 @@ export default class Guide extends Component {
   };
 
   createSections() {
-    const { addPillstrip, pageContext, pillstrips } = this.props;
+    const { pageContext } = this.props;
     if (this.bodySections.length === 0) {
       return this.sections.map(section => {
         return <ComponentFactory nodeData={section} page={pageContext.page} />;
@@ -124,14 +91,11 @@ export default class Guide extends Component {
     return this.bodySections.map((section, index) => {
       return (
         <GuideSection
-          addPillstrip={addPillstrip}
           sectionDepth={2}
           guideSectionData={section}
           key={index}
           headingRef={this.sectionRefs[index]}
           page={pageContext.page}
-          addTabset={this.addGuidesTabset}
-          pillstrips={pillstrips}
         />
       );
     });
@@ -171,7 +135,6 @@ export default class Guide extends Component {
 }
 
 Guide.propTypes = {
-  addPillstrip: PropTypes.func,
   pageContext: PropTypes.shape({
     page: PropTypes.shape({
       ast: PropTypes.shape({
@@ -181,12 +144,4 @@ Guide.propTypes = {
     slug: PropTypes.string.isRequired,
   }).isRequired,
   path: PropTypes.string.isRequired,
-  pillstrips: PropTypes.objectOf(PropTypes.object),
 };
-
-Guide.defaultProps = {
-  addPillstrip: () => {},
-  pillstrips: {},
-};
-
-Guide.contextType = TabContext;

@@ -82,22 +82,12 @@ export default class DocumentBody extends Component {
 
   render() {
     const {
-      addPillstrip,
-      pillstrips,
       pageContext: { metadata, page, slug },
     } = this.props;
     return (
       <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
         {this.pageNodes.map((child, index) => (
-          <ComponentFactory
-            addPillstrip={addPillstrip}
-            key={index}
-            metadata={metadata}
-            nodeData={child}
-            page={page}
-            pillstrips={pillstrips}
-            slug={slug}
-          />
+          <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
         ))}
       </FootnoteContext.Provider>
     );
@@ -105,8 +95,6 @@ export default class DocumentBody extends Component {
 }
 
 DocumentBody.propTypes = {
-  addPillstrip: PropTypes.func,
-  pillstrips: PropTypes.objectOf(PropTypes.object),
   pageContext: PropTypes.shape({
     metadata: PropTypes.object.isRequired,
     page: PropTypes.shape({
@@ -116,9 +104,4 @@ DocumentBody.propTypes = {
     }).isRequired,
     slug: PropTypes.string.isRequired,
   }),
-};
-
-DocumentBody.defaultProps = {
-  addPillstrip: () => {},
-  pillstrips: {},
 };
