@@ -4,18 +4,18 @@ import Card from '@leafygreen-ui/card';
 import Link from './Link';
 
 // language icons for tiles
-import IconC from '../../static/svg/icons/icon-C';
-import IconCpp from '../../static/svg/icons/icon-Cpp';
-import IconCsharp from '../../static/svg/icons/icon-Csharp';
-import IconGo from '../../static/svg/icons/icon-Go';
-import IconJava from '../../static/svg/icons/icon-Java';
-import IconNode from '../../static/svg/icons/icon-Node';
-import IconPHP from '../../static/svg/icons/icon-PHP';
-import IconPython from '../../static/svg/icons/icon-Python';
-import IconRuby from '../../static/svg/icons/icon-Ruby';
-import IconScala from '../../static/svg/icons/icon-Scala';
-import IconSwift from '../../static/svg/icons/icon-Swift';
-import IconRust from '../../static/svg/icons/icon-Rust';
+import IconC from './icons/C';
+import IconCpp from './icons/Cpp';
+import IconCsharp from './icons/Csharp';
+import IconGo from './icons/Go';
+import IconJava from './icons/Java';
+import IconNode from './icons/Node';
+import IconPHP from './icons/Php';
+import IconPython from './icons/Python';
+import IconRuby from './icons/Ruby';
+import IconScala from './icons/Scala';
+import IconSwift from './icons/Swift';
+import IconRust from './icons/Rust';
 
 // does not take in any params because it is a hardcoded list
 const EcosystemHomepageTiles = () => {
