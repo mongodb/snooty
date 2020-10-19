@@ -3,6 +3,7 @@ import { css } from '@emotion/core';
 import { TabContext } from './tab-context';
 import Select from './Select';
 import { getPlaintext } from '../utils/get-plaintext';
+import { reportAnalytics } from '../utils/report-analytics';
 import { theme } from '../theme/docsTheme';
 
 const capitalizeFirstLetter = str => str.trim().replace(/^\w/, c => c.toUpperCase());
@@ -46,6 +47,11 @@ const TabSelectors = () => {
             label={getLabel(name)}
             onChange={({ value }) => {
               setActiveTab({ name, value });
+              reportAnalytics('LanguageSelection', {
+                areaFrom: 'LanguageSelector',
+                languageInitial: activeTabs[name],
+                languageSelected: value,
+              });
             }}
             value={activeTabs[name]}
           />
