@@ -30,6 +30,7 @@ const normalizeCssClassNodes = (nodes, key, value) => {
 const getFootnotes = nodes => {
   const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
   const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
+  const numAnonRefs = footnoteReferences.filter(node => !Object.prototype.hasOwnProperty.call(node, 'refname')).length;
   // We label our footnotes by their index, regardless of their names to
   // circumvent cases such as [[1], [#], [2], ...]
   return footnotes.reduce((map, footnote, index) => {
@@ -47,7 +48,7 @@ const getFootnotes = nodes => {
       // eslint-disable-next-line no-param-reassign
       map[footnote.id] = {
         label: index + 1,
-        references: [getAnonymousFootnoteReferences(index)],
+        references: getAnonymousFootnoteReferences(index, numAnonRefs),
       };
     }
     return map;
@@ -63,9 +64,10 @@ const getNamedFootnoteReferences = (footnoteReferences, refname) => {
 // They are used infrequently, but here we match an anonymous footnote to its reference.
 // The nth footnote on a page is associated with the nth reference on the page. Since
 // anon footnotes and footnote references are anonymous, we assume a 1:1 pairing, and
-// have no need to query nodes
-const getAnonymousFootnoteReferences = index => {
-  return `id${index + 1}`;
+// have no need to query nodes. If there are more anonymous footnotes than references,
+// we may return an empty array
+const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
+  return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
 export default class DocumentBody extends Component {
@@ -80,22 +82,12 @@ export default class DocumentBody extends Component {
 
   render() {
     const {
-      addPillstrip,
-      pillstrips,
       pageContext: { metadata, page, slug },
     } = this.props;
     return (
       <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
         {this.pageNodes.map((child, index) => (
-          <ComponentFactory
-            addPillstrip={addPillstrip}
-            key={index}
-            metadata={metadata}
-            nodeData={child}
-            page={page}
-            pillstrips={pillstrips}
-            slug={slug}
-          />
+          <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
         ))}
       </FootnoteContext.Provider>
     );
@@ -103,8 +95,6 @@ export default class DocumentBody extends Component {
 }
 
 DocumentBody.propTypes = {
-  addPillstrip: PropTypes.func,
-  pillstrips: PropTypes.objectOf(PropTypes.object),
   pageContext: PropTypes.shape({
     metadata: PropTypes.object.isRequired,
     page: PropTypes.shape({
@@ -114,9 +104,4 @@ DocumentBody.propTypes = {
     }).isRequired,
     slug: PropTypes.string.isRequired,
   }),
-};
-
-DocumentBody.defaultProps = {
-  addPillstrip: () => {},
-  pillstrips: {},
 };

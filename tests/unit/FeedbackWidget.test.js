@@ -120,13 +120,13 @@ describe('FeedbackWidget', () => {
     it('is visible on medium/tablet screens', async () => {
       wrapper = await mountFormWithFeedbackState({}, withScreenSize('ipad-pro'));
       expect(wrapper.exists('FeedbackHeading')).toBe(true);
-      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(1);
+      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(2);
     });
 
     it('is visible on small/mobile screens', async () => {
       wrapper = await mountFormWithFeedbackState({}, withScreenSize('iphone-x'));
       expect(wrapper.exists('FeedbackHeading')).toBe(true);
-      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(1);
+      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(2);
     });
 
     it('is hidden on small/mobile screens when configured with page option', async () => {
