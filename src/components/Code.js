@@ -40,7 +40,7 @@ const getLanguage = lang => {
 };
 
 const Code = ({
-  nodeData: { copyable, emphasize_lines: emphasizeLines, lang, linenos, value },
+  nodeData: { copyable, caption, emphasize_lines: emphasizeLines, lang, linenos, value },
   uriWriter: { cloudURI, localURI },
 }) => {
   const { activeTabs } = useContext(TabContext);
@@ -72,6 +72,8 @@ const Code = ({
         highlightLines={emphasizeLines}
         language={getLanguage(lang)}
         showLineNumbers={linenos}
+        showWindowChrome={caption ? true : false}
+        chromeTitle={caption ? caption : ''}
       >
         {code}
       </CodeBlock>
@@ -86,6 +88,7 @@ Code.propTypes = {
     lang: PropTypes.string,
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
+    caption: PropTypes.string,
   }).isRequired,
   uriWriter: PropTypes.shape({
     cloudURI: PropTypes.object,
