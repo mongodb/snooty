@@ -7,5 +7,6 @@
   },
   "lang": "javascript",
   "copyable": true,
+  "caption": "Test Caption",
   "value": "mongoimport --db test --collection inventory ^\n          --authenticationDatabase admin --username <user> --password <password> ^\n          --drop --file ~\\downloads\\inventory.crud.json"
 }
