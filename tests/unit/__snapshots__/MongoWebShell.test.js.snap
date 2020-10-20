@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`correctly renders a MongoDB Web Shell 1`] = `
+<iframe
+  allowfullscreen=""
+  class="mws-root"
+  height="320"
+  sandbox="allow-scripts allow-same-origin"
+  src="https://mws.mongodb.com/"
+  title="MongoDB Web Shell"
+  width="100%"
+/>
+`;
+
+exports[`correctly renders a MongoDB Web Shell v4.2.9 1`] = `
+<iframe
+  allowfullscreen=""
+  class="mws-root"
+  height="320"
+  sandbox="allow-scripts allow-same-origin"
+  src="https://mws.mongodb.com/?version=4.2"
+  title="MongoDB Web Shell"
+  width="100%"
+/>
+`;
