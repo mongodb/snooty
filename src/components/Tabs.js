@@ -12,11 +12,13 @@ const getTabId = node => getNestedValue(['options', 'tabid'], node);
 const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
 const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
-  const { activeTabs, setActiveTab } = useContext(TabContext);
+  const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
   const activeTab = activeTabs[tabsetName];
-  const isHidden = Object.prototype.hasOwnProperty.call(options, 'hidden');
+  // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
+  const isHidden =
+    Object.prototype.hasOwnProperty.call(options, 'hidden') || Object.keys(selectors).includes(tabsetName);
 
   useEffect(() => {
     if (!activeTab || !tabIds.includes(activeTab)) {
