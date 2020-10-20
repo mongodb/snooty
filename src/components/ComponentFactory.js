@@ -35,9 +35,7 @@ import Container from './Container';
 import Cond from './Cond';
 import Meta from './Meta';
 import TabsPillstrip from './TabsPillstrip';
-import VersionChanged from './VersionChanged';
-import VersionAdded from './VersionAdded';
-import Deprecated from './Deprecated';
+import VersionModified from './VersionModified';
 import CardGroup from './CardGroup';
 import Footnote from './Footnote';
 import FootnoteReference from './FootnoteReference';
@@ -106,7 +104,7 @@ const componentMap = {
   cssclass: CSSClass,
   definitionList: DefinitionList,
   definitionListItem: DefinitionListItem,
-  deprecated: Deprecated,
+  deprecated: VersionModified,
   emphasis: Emphasis,
   field: Field,
   field_list: FieldList,
@@ -147,8 +145,8 @@ const componentMap = {
   topic: Topic,
   transition: Transition,
   uriwriter: URIWriter,
-  versionadded: VersionAdded,
-  versionchanged: VersionChanged,
+  versionadded: VersionModified,
+  versionchanged: VersionModified,
 };
 
 const ComponentFactory = props => {
