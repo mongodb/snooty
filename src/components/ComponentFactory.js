@@ -34,7 +34,6 @@ import Contents from './Contents';
 import Container from './Container';
 import Cond from './Cond';
 import Meta from './Meta';
-import TabsPillstrip from './TabsPillstrip';
 import VersionModified from './VersionModified';
 import CardGroup from './CardGroup';
 import Footnote from './Footnote';
@@ -64,7 +63,7 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
-const IGNORED_NAMES = ['default-domain', 'raw', 'toctree'];
+const IGNORED_NAMES = ['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector'];
 const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
 const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
 
@@ -138,7 +137,6 @@ const componentMap = {
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
-  'tabs-pillstrip': TabsPillstrip,
   target: Target,
   text: Text,
   title_reference: TitleReference,

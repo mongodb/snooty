@@ -12,6 +12,7 @@ import {
 import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import { isBrowser } from '../utils/is-browser';
+import { theme } from '../theme/docsTheme';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -31,15 +32,17 @@ const getLanguage = lang => {
   } else if (lang === 'sh') {
     // Writers commonly use 'sh' to represent shell scripts, but LeafyGreen and Highlight.js use the key 'shell'
     return 'shell';
-  } else if (lang === 'js') {
-    // TODO: Remove this clause when LeafyGreen adds js alias
-    // https://jira.mongodb.org/browse/PD-843
-    return 'javascript';
+  } else if (['c', 'csharp'].includes(lang)) {
+    // LeafyGreen renders all C-family languages with "clike"
+    return 'clike';
   }
   return 'none';
 };
 
-const Code = ({ nodeData: { copyable, lang = 'none', linenos, value }, uriWriter: { cloudURI, localURI } }) => {
+const Code = ({
+  nodeData: { copyable, caption, emphasize_lines: emphasizeLines, lang, linenos, value },
+  uriWriter: { cloudURI, localURI },
+}) => {
   const { activeTabs } = useContext(TabContext);
 
   let code = value;
@@ -52,27 +55,40 @@ const Code = ({ nodeData: { copyable, lang = 'none', linenos, value }, uriWriter
   }
 
   return (
-    <CodeBlock
-      copyable={copyable}
+    <div
       css={css`
-        & * {
-          overflow-wrap: normal !important;
-          white-space: pre;
-          word-break: normal !important;
-        }
+        margin: ${theme.size.default} 0;
       `}
-      language={getLanguage(lang)}
-      showLineNumbers={linenos}
     >
-      {code}
-    </CodeBlock>
+      <CodeBlock
+        copyable={copyable}
+        css={css`
+          & * {
+            overflow-wrap: normal !important;
+            white-space: pre;
+            word-break: normal !important;
+          }
+        `}
+        highlightLines={emphasizeLines}
+        language={getLanguage(lang)}
+        showLineNumbers={linenos}
+        showWindowChrome={caption ? true : false}
+        chromeTitle={caption ? caption : ''}
+      >
+        {code}
+      </CodeBlock>
+    </div>
   );
 };
 
 Code.propTypes = {
   nodeData: PropTypes.shape({
+    copyable: PropTypes.bool,
+    emphasize_lines: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)])),
     lang: PropTypes.string,
+    linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
+    caption: PropTypes.string,
   }).isRequired,
   uriWriter: PropTypes.shape({
     cloudURI: PropTypes.object,
