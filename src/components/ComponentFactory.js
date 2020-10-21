@@ -52,12 +52,9 @@ import Field from './Field';
 import FieldList from './FieldList';
 import Operation from './Operation';
 import OpenAPI from './OpenAPI';
-<<<<<<< HEAD
 import Root from './Root';
 import Steps from './Steps';
-=======
 import MongoWebShell from './MongoWebShell';
->>>>>>> DOP-1334: Implement MongoWebShell component
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
