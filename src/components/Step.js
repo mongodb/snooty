@@ -5,7 +5,7 @@ import ComponentFactory from './ComponentFactory';
 const Step = ({ nodeData: { children }, stepNum, ...rest }) => (
   <div className="sequence-block">
     <div className="bullet-block">
-      <div className="sequence-step">{stepNum + 1}</div>
+      <div className="sequence-step">{stepNum}</div>
     </div>
     <div className="section">
       {children.map((child, index) => (
@@ -23,7 +23,7 @@ Step.propTypes = {
 };
 
 Step.defaultProps = {
-  stepNum: 0,
+  stepNum: 1,
 };
 
 export default Step;
