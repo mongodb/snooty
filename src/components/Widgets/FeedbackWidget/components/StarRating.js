@@ -92,7 +92,7 @@ const widthForSize = size => {
 const marginForSize = size => {
   switch (size) {
     case 'lg':
-      return '-24px 0 0px 0';
+      return '0';
     case '2x':
       return '16px 0 32px 0';
     case '3x':

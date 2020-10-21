@@ -12,6 +12,8 @@ const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
 // This is the height of the closed select
 const OPTIONS_POSITION_OFFSET = '36px';
+// This is the height of the closed select when an icon is displayed
+const OPTIONS_ICON_POSITION_OFFSET = '48px';
 
 const activeSelectStyles = css`
   border-bottom-color: transparent;
@@ -24,16 +26,19 @@ const activeSelectStyles = css`
 `;
 
 const Label = styled('p')`
+  font-size: ${theme.fontSize.default};
   font-weight: bolder;
   letter-spacing: 0;
-  margin: 0 0 12px;
+  /* TODO: Remove !important when mongodb-docs.css is removed */
+  margin: 0 0 12px !important;
 `;
 
 const SelectedText = styled('p')`
-  display: block;
+  display: inline-block;
   font-family: Akzidenz;
   font-size: ${theme.fontSize.small};
-  margin: 0;
+  /* TODO: Remove !important when mongodb-docs.css is removed */
+  margin: 0 !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -43,9 +48,13 @@ const Option = styled('li')`
   align-items: center;
   background-color: #fff;
   color: black;
-  display: block;
   overflow: hidden;
-  padding: 10px ${theme.size.default};
+  /* TODO: Remove !important when mongodb-docs.css is removed */
+  /* Add padding equal to icon width + margin (44px) to left of option text */
+  padding: ${({ hasIcons }) =>
+    hasIcons
+      ? `10px ${theme.size.default} 10px calc(${theme.size.default} + 44px)`
+      : `10px ${theme.size.default}`} !important;
   text-overflow: ellipsis;
   white-space: nowrap;
   :focus,
@@ -66,7 +75,7 @@ const Options = styled('ul')`
   padding: 0;
   position: absolute;
   margin: 0;
-  top: ${OPTIONS_POSITION_OFFSET};
+  top: ${({ hasIcons }) => (hasIcons ? OPTIONS_ICON_POSITION_OFFSET : OPTIONS_POSITION_OFFSET)};
   /* account for border */
   width: calc(100% + 2px);
   z-index: 5;
@@ -95,12 +104,12 @@ const SelectedOption = styled('div')`
   display: flex;
   justify-content: space-between;
   padding: 10px ${theme.size.default};
-  position: relative;
 `;
 
 const Select = ({ choices, onChange, defaultText = '', disabled = false, label = null, value = null, ...props }) => {
   const enabled = useMemo(() => !disabled, [disabled]);
-  const [selectText, setSelectText] = useState(defaultText);
+  const hasIcons = useMemo(() => choices.some(choice => Object.hasOwnProperty.call(choice, 'icon')), [choices]);
+  const [selected, setSelected] = useState({});
   const [showOptions, setShowOptions] = useState(false);
   const toggleSelectExpand = useCallback(() => {
     if (enabled) setShowOptions(!showOptions);
@@ -115,10 +124,10 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
       const choice = choices.filter(choice => choice.value === value);
       if (choice && choice.length) {
         const currentChoice = choice[0];
-        setSelectText(currentChoice.text);
+        setSelected(currentChoice);
       }
     } else {
-      setSelectText(defaultText);
+      setSelected({});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [choices, value]);
@@ -137,7 +146,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
   const selectOption = useCallback(
     choice => {
       onChange(choice);
-      setSelectText(choice.text);
+      setSelected(choice);
       setShowOptions(false);
     },
     [onChange]
@@ -177,20 +186,44 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
         tabIndex={enabled ? '0' : null}
       >
         <SelectedOption showOptions={showOptions} role="option">
-          <SelectedText>{selectText}</SelectedText>
+          {hasIcons ? (
+            <div
+              css={css`
+                align-items: center;
+                display: flex;
+                height: 28px;
+                flex: 1;
+              `}
+            >
+              {selected.icon && (
+                <selected.icon
+                  css={css`
+                    display: inline-block;
+                    margin-right: ${theme.size.small};
+                    max-height: 28px;
+                    width: 36px;
+                  `}
+                />
+              )}
+              <SelectedText>{selected.text || defaultText}</SelectedText>
+            </div>
+          ) : (
+            <SelectedText>{selected.text || defaultText}</SelectedText>
+          )}
           <Icon glyph={showOptions ? 'CaretUp' : 'CaretDown'} />
         </SelectedOption>
         {showOptions && (
-          <Options>
-            {choices.map(({ text, value }) => (
+          <Options hasIcons={hasIcons}>
+            {choices.map(choice => (
               <Option
-                key={value}
-                onClick={() => selectOption({ text, value })}
-                onKeyDown={optionOnEnter({ text, value })}
+                hasIcons={hasIcons}
+                key={choice.value}
+                onClick={() => selectOption(choice)}
+                onKeyDown={optionOnEnter(choice)}
                 role="option"
                 tabIndex="0"
               >
-                {text}
+                {choice.text}
               </Option>
             ))}
           </Options>
