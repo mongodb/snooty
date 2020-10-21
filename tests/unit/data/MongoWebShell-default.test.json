@@ -5,7 +5,7 @@
       "line": 0
     }
   },
-  "domain": "",
+  "domain": "mongodb",
   "name": "mongo-web-shell",
   "options": {}
 }
