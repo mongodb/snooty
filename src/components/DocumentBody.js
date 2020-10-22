@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import ComponentFactory from './ComponentFactory';
-import FootnoteContext from '../components/footnote-context';
+import FootnoteContext from './footnote-context';
+import Widgets from './Widgets';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getPlaintext } from '../utils/get-plaintext';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
@@ -82,20 +85,39 @@ export default class DocumentBody extends Component {
 
   render() {
     const {
-      pageContext: { metadata, page, slug },
+      pageContext: { location, metadata, page, slug },
     } = this.props;
+    const lookup = slug === '/' ? 'index' : slug;
+    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+    const siteTitle = getNestedValue(['title'], metadata) || '';
     return (
-      <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
-        {this.pageNodes.map((child, index) => (
-          <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-        ))}
-      </FootnoteContext.Provider>
+      <>
+        <Helmet>
+          <title>
+            {pageTitle} — {siteTitle}
+          </title>
+        </Helmet>
+        <Widgets
+          location={location}
+          pageOptions={getNestedValue(['ast', 'options'], page)}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+        >
+          <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
+            {this.pageNodes.map((child, index) => (
+              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+            ))}
+          </FootnoteContext.Provider>
+        </Widgets>
+      </>
     );
   }
 }
 
 DocumentBody.propTypes = {
   pageContext: PropTypes.shape({
+    location: PropTypes.object.isRequired,
     metadata: PropTypes.object.isRequired,
     page: PropTypes.shape({
       ast: PropTypes.shape({

@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import loadable from '@loadable/component';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
 import { TabProvider } from '../components/tab-context';
 import { getNestedValue } from '../utils/get-nested-value';
-import { getPlaintext } from '../utils/get-plaintext';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
 
-const Widgets = loadable(() => import('../components/Widgets'));
-
-const DefaultLayout = ({ children, location, pageContext }) => {
-  const { metadata, page, slug, template } = pageContext;
-  const lookup = slug === '/' ? 'index' : slug;
-  const siteTitle = getNestedValue(['title'], metadata) || '';
-  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+const DefaultLayout = props => {
+  const { children, pageContext } = props;
+  const {
+    metadata: { title },
+    page,
+    slug,
+    template,
+  } = pageContext;
   const Template = getTemplate(template, slug);
   return (
     <>
@@ -33,17 +32,9 @@ const DefaultLayout = ({ children, location, pageContext }) => {
           }
         `}
       />
+      <SiteMetadata siteTitle={title} />
       <TabProvider selectors={getNestedValue(['ast', 'options', 'selectors'], page)}>
-        <Widgets
-          location={location}
-          pageOptions={getNestedValue(['ast', 'options'], page)}
-          pageTitle={pageTitle}
-          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-          slug={slug}
-        >
-          <SiteMetadata siteTitle={siteTitle} pageTitle={pageTitle} />
-          <Template pageContext={pageContext}>{children}</Template>
-        </Widgets>
+        <Template {...props}>{children}</Template>
       </TabProvider>
       <Navbar />
     </>
@@ -55,13 +46,11 @@ DefaultLayout.propTypes = {
   pageContext: PropTypes.shape({
     page: PropTypes.shape({
       ast: PropTypes.shape({
-        children: PropTypes.arrayOf(PropTypes.object),
+        options: PropTypes.object,
       }).isRequired,
     }).isRequired,
-    metadata: PropTypes.shape({
-      slugToTitle: PropTypes.object,
-      title: PropTypes.string,
-    }).isRequired,
+    slug: PropTypes.string,
+    template: PropTypes.string,
   }).isRequired,
 };
 
