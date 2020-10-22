@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 
 const SOURCE_URL = 'https://mws.mongodb.com/';
 
@@ -10,14 +11,16 @@ const MongoWebShell = ({
 }) => {
   return (
     <iframe
-      className="mws-root"
+      css={css`
+        border: 0;
+      `}
       title="MongoDB Web Shell"
       allowFullScreen
       sandbox="allow-scripts allow-same-origin"
       width="100%"
       height="320"
-      src={version ? SOURCE_URL + `?version=${version}` : SOURCE_URL}
-    ></iframe>
+      src={version ? `${SOURCE_URL}/?version=${version}` : SOURCE_URL}
+    />
   );
 };
 
