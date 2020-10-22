@@ -52,6 +52,8 @@ import Field from './Field';
 import FieldList from './FieldList';
 import Operation from './Operation';
 import OpenAPI from './OpenAPI';
+import Root from './Root';
+import Steps from './Steps';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -130,10 +132,12 @@ const componentMap = {
   paragraph: Paragraph,
   ref_role: RefRole,
   reference: Reference,
+  root: Root,
   rubric: Rubric,
   'search-results': SearchResults,
   section: Section,
   step: Step,
+  steps: Steps,
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
