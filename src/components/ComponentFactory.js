@@ -54,6 +54,7 @@ import Operation from './Operation';
 import OpenAPI from './OpenAPI';
 import Root from './Root';
 import Steps from './Steps';
+import MongoWebShell from './MongoWebShell';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -126,6 +127,7 @@ const componentMap = {
   literal_block: LiteralBlock,
   literalinclude: LiteralInclude,
   meta: Meta,
+  'mongo-web-shell': MongoWebShell,
   only: Cond,
   openapi: OpenAPI,
   operation: Operation,
