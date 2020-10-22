@@ -1,0 +1,11 @@
+{
+  "type": "directive",
+  "position": {
+    "start": {
+      "line": 0
+    }
+  },
+  "domain": "mongodb",
+  "name": "mongo-web-shell",
+  "options": {}
+}

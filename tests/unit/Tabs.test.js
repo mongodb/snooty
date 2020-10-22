@@ -27,7 +27,6 @@ const shallowTabs = ({ mockData, mockAddTabset }) =>
 describe('Tabs testing', () => {
   describe('Tab unit tests', () => {
     let wrapper;
-    const mockSetActiveTab = jest.fn();
     const mockAddTabset = jest.fn();
 
     beforeAll(() => {

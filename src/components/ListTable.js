@@ -112,38 +112,39 @@ ListTableBody.propTypes = {
 
 const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
   <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
-    {row.map((column, colIndex) => {
-      let isStub = colIndex <= stubColumnCount - 1;
-      const CellTag = isStub ? 'th' : 'td';
-      let cellClass = isStub ? 'stub' : '';
-      return (
-        <CellTag className={cellClass} key={colIndex}>
-          {column.children.length === 1 ? (
-            <CSSWrapper className={['first', 'last'].join(' ')}>
-              <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
-            </CSSWrapper>
-          ) : (
-            column.children.map((element, index) => {
-              if (index === 0) {
-                return (
-                  <CSSWrapper key={index} className="first">
-                    <ComponentFactory {...rest} nodeData={element} />
-                  </CSSWrapper>
-                );
-              }
-              if (index === column.children.length - 1) {
-                return (
-                  <CSSWrapper key={index} className="last">
-                    <ComponentFactory {...rest} nodeData={element} />
-                  </CSSWrapper>
-                );
-              }
-              return <ComponentFactory {...rest} key={index} nodeData={element} />;
-            })
-          )}
-        </CellTag>
-      );
-    })}
+    {row &&
+      row.map((column, colIndex) => {
+        let isStub = colIndex <= stubColumnCount - 1;
+        const CellTag = isStub ? 'th' : 'td';
+        let cellClass = isStub ? 'stub' : '';
+        return (
+          <CellTag className={cellClass} key={colIndex}>
+            {column.children.length === 1 ? (
+              <CSSWrapper className={['first', 'last'].join(' ')}>
+                <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
+              </CSSWrapper>
+            ) : (
+              column.children.map((element, index) => {
+                if (index === 0) {
+                  return (
+                    <CSSWrapper key={index} className="first">
+                      <ComponentFactory {...rest} nodeData={element} />
+                    </CSSWrapper>
+                  );
+                }
+                if (index === column.children.length - 1) {
+                  return (
+                    <CSSWrapper key={index} className="last">
+                      <ComponentFactory {...rest} nodeData={element} />
+                    </CSSWrapper>
+                  );
+                }
+                return <ComponentFactory {...rest} key={index} nodeData={element} />;
+              })
+            )}
+          </CellTag>
+        );
+      })}
   </tr>
 );
 
