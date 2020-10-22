@@ -3,6 +3,17 @@ const { siteMetadata } = require('./src/utils/site-metadata');
 
 module.exports = {
   pathPrefix: generatePathPrefix(siteMetadata),
-  plugins: ['gatsby-plugin-react-helmet', 'gatsby-plugin-emotion', 'gatsby-plugin-layout'],
+  plugins: [
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-layout',
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-GDFN',
+        includeInDevelopment: false,
+      },
+    },
+  ],
   siteMetadata,
 };
