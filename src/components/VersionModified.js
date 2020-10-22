@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import { getNestedValue } from '../utils/get-nested-value';
 
-const VersionModified = ({ introText, nodeData, ...rest }) => {
-  const version = getNestedValue(['argument', 0, 'value'], nodeData);
+const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) => {
+  const introText = useMemo(() => {
+    const version = argument.length > 0 ? <ComponentFactory nodeData={argument[0]} /> : null;
+    const additionalArg =
+      argument.length > 1 ? (
+        <>
+          : <ComponentFactory nodeData={argument[1]} />
+        </>
+      ) : (
+        '.'
+      );
+    let text = '';
+    if (name === 'deprecated') {
+      text = <>Deprecated{version && <> since version {version}</>}</>;
+    } else if (name === 'versionadded') {
+      text = <>New{version && <> in version {version}</>}</>;
+    } else if (name === 'versionchanged') {
+      text = <>Changed{version && <> in version {version}</>}</>;
+    }
+
+    return (
+      <>
+        <em>{text}</em>
+        {additionalArg}
+      </>
+    );
+  }, [argument, name]);
+
   return (
-    <div className={nodeData.name}>
-      <p>
-        <span className="versionmodified">
-          {introText} {version}
-          {nodeData.children.length > 0 || nodeData.argument.length > 1 ? ': ' : '.'}
-        </span>
-        {nodeData.argument.length > 1 &&
-          nodeData.argument.slice(1).map((child, index) => <ComponentFactory {...rest} nodeData={child} key={index} />)}
-      </p>
-      {nodeData.children.map((child, index) => (
+    <div className={name}>
+      <p>{introText}</p>
+      {children.map((child, index) => (
         <ComponentFactory {...rest} nodeData={child} key={index} />
       ))}
     </div>
@@ -23,7 +41,6 @@ const VersionModified = ({ introText, nodeData, ...rest }) => {
 };
 
 VersionModified.propTypes = {
-  introText: PropTypes.string.isRequired,
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
