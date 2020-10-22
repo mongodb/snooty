@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../components/Footer';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 
@@ -26,7 +25,6 @@ const EcosystemIndex = props => (
                   .
                 </p>
               </section>
-              <Footer />
             </div>
           </div>
         </div>
