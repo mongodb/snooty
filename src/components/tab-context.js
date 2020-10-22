@@ -16,7 +16,7 @@ const reducer = (prevState, { name, value }) => {
   };
 };
 
-const TabProvider = ({ children, selectors }) => {
+const TabProvider = ({ children, selectors = {} }) => {
   const [activeTabs, setActiveTab] = useReducer(reducer, getLocalValue('activeTabs') || defaultContextValue.activeTabs);
 
   useEffect(() => {
