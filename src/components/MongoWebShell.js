@@ -19,7 +19,7 @@ const MongoWebShell = ({
       sandbox="allow-scripts allow-same-origin"
       width="100%"
       height="320"
-      src={version ? `${SOURCE_URL}/?version=${version}` : SOURCE_URL}
+      src={version ? `${SOURCE_URL}?version=${version}` : SOURCE_URL}
     />
   );
 };
