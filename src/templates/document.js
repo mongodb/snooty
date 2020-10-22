@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Footer from '../components/Footer';
 import { getNestedValue } from '../utils/get-nested-value';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
@@ -64,7 +63,6 @@ const Document = ({
                 {showPrevNext && (
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                 )}
-                <Footer />
               </div>
             </div>
           </div>

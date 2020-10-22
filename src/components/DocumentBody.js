@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import ComponentFactory from './ComponentFactory';
 import FootnoteContext from './footnote-context';
+import Footer from './Footer';
 import Widgets from './Widgets';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
@@ -85,7 +86,8 @@ export default class DocumentBody extends Component {
 
   render() {
     const {
-      pageContext: { location, metadata, page, slug },
+      location,
+      pageContext: { metadata, page, slug },
     } = this.props;
     const lookup = slug === '/' ? 'index' : slug;
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
@@ -108,6 +110,7 @@ export default class DocumentBody extends Component {
             {this.pageNodes.map((child, index) => (
               <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
             ))}
+            <Footer />
           </FootnoteContext.Provider>
         </Widgets>
       </>
@@ -116,8 +119,8 @@ export default class DocumentBody extends Component {
 }
 
 DocumentBody.propTypes = {
+  location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
-    location: PropTypes.object.isRequired,
     metadata: PropTypes.object.isRequired,
     page: PropTypes.shape({
       ast: PropTypes.shape({

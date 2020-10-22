@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TOC from '../components/TOC';
 import ComponentFactory from '../components/ComponentFactory';
-import Footer from '../components/Footer';
 import GuideBreadcrumbs from '../components/GuideBreadcrumbs';
 import GuideSection from '../components/GuideSection';
 import GuideHeading from '../components/GuideHeading';
@@ -126,7 +125,6 @@ export default class Guide extends Component {
               title={findKeyValuePair(this.sections, 'type', 'heading')}
             />
             {this.createSections()}
-            <Footer />
           </div>
         </div>
       </div>
