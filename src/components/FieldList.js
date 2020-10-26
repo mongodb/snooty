@@ -14,8 +14,8 @@ const Table = styled('table')`
     vertical-align: top;
   }
 
-  th,
-  td {
+  .field-header,
+  .field-cell {
     padding: 11px 5px 12px;
     text-align: left;
   }

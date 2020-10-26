@@ -68,6 +68,17 @@ const Code = ({
             white-space: pre;
             word-break: normal !important;
           }
+
+          & table {
+            margin-bottom: 0px;
+            table-layout: fixed;
+            width: 100%;
+          }
+
+          & table > tbody > tr > td {
+            border-style: none;
+            padding: 0px;
+          }
         `}
         highlightLines={emphasizeLines}
         language={getLanguage(lang)}

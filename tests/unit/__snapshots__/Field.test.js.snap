@@ -2,11 +2,15 @@
 
 exports[`renders correctly 1`] = `
 <tr>
-  <th>
+  <th
+    className="field-header"
+  >
     Returns
     :
   </th>
-  <td>
+  <td
+    className="field-cell"
+  >
     <ComponentFactory
       key="0"
       nodeData={

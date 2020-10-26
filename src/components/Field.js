@@ -4,8 +4,8 @@ import ComponentFactory from './ComponentFactory';
 
 const Field = ({ nodeData: { children, label, name }, ...rest }) => (
   <tr>
-    <th>{label || name}:</th>
-    <td>
+    <th className="field-header">{label || name}:</th>
+    <td className="field-cell">
       {children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} parentNode={index === 0 ? 'field' : undefined} />
       ))}
