@@ -1,3 +1,11 @@
+// Set bannerContent = null when banner should be removed
+const bannerContent = {
+  altText: 'Register Now for MongoDB.live, free & fully virtual',
+  imgPath: 'assets/live-fall.png',
+  mobileImgPath: 'assets/live-fall-mobile.png',
+  url: 'https://www.mongodb.com/live?tck=dotlivefallbannerdocs',
+};
+
 /**
  * @type {Object.<string, string>}
  * @property {string} fontsize returns px value
@@ -49,10 +57,12 @@ const screenSize = {
 };
 
 const navbar = {
-  height: '45px',
+  bannerHeight: '40px',
+  height: bannerContent === null ? '45px' : '85px',
 };
 
 export const theme = {
+  bannerContent,
   fontSize,
   screenSize,
   size,

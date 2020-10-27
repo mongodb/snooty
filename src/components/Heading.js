@@ -7,10 +7,9 @@ import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
 import TabSelectors from './TabSelectors';
 import { TabContext } from './tab-context';
+import ConditionalWrapper from './ConditionalWrapper';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
-
-const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';

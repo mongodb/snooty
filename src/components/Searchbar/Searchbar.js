@@ -23,7 +23,7 @@ const SearchbarContainer = styled('div')`
   height: ${SEARCHBAR_HEIGHT};
   position: fixed;
   right: ${theme.size.default};
-  top: ${SEARCHBAR_HEIGHT_OFFSET};
+  margin-top: ${SEARCHBAR_HEIGHT_OFFSET};
   transition: width ${TRANSITION_SPEED} ease-in;
   width: ${({ isExpanded }) => (isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE)};
   /* docs-tools navbar z-index is 9999 */
