@@ -10,10 +10,10 @@ import Navbar from '../components/Navbar';
 
 const bannerPadding = css`
   #gatsby-focus-wrapper {
-    margin-top: 65px;
+    margin-top: 50px;
   }
   div.sphinxsidebar {
-    margin-top: 40px;
+    margin-top: 50px;
   }
 `;
 

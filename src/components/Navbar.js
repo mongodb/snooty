@@ -3,7 +3,6 @@ import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import useMedia from '../hooks/use-media';
-import useScreenSize from '../hooks/useScreenSize';
 import { isBrowser } from '../utils/is-browser';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
@@ -44,20 +43,39 @@ const NavbarContainer = styled('div')`
     : ''}
 `;
 
-const Banner = ({ altText, handleLoad, imgPath, mobileImgPath, url }) => {
+const Banner = React.memo(({ altText, imgPath, mobileImgPath, url }) => {
   mobileImgPath = withPrefix(mobileImgPath);
   imgPath = withPrefix(imgPath);
 
   return (
-    <a href={url}>
-      <picture>
-        <source media="(max-width: 669px)" srcset={mobileImgPath} />
-        <source media="(min-width: 670px)" srcset={imgPath} />
-        <img src={imgPath} alt={altText} />
-      </picture>
+    <a
+      href={url}
+      title={altText}
+      css={css`
+        display: block;
+        height: 40px;
+        width: 100vw;
+
+        @media ${theme.screenSize.upToMedium} {
+          height: 50px;
+        }
+      `}
+    >
+      <div
+        css={css`
+          background-image: url(${imgPath});
+          background-position: center;
+          background-size: cover;
+          height: 100%;
+
+          @media ${theme.screenSize.upToMedium} {
+            background-image: url(${mobileImgPath});
+          }
+        `}
+      />
     </a>
   );
-};
+});
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
