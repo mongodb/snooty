@@ -55,6 +55,7 @@ import OpenAPI from './OpenAPI';
 import Root from './Root';
 import Steps from './Steps';
 import MongoWebShell from './MongoWebShell';
+import Extract from './Extract';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -108,6 +109,7 @@ const componentMap = {
   definitionListItem: DefinitionListItem,
   deprecated: VersionModified,
   emphasis: Emphasis,
+  extract: Extract,
   field: Field,
   field_list: FieldList,
   figure: Figure,
