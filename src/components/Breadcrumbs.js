@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from './Link';
 import { formatText } from '../utils/format-text';
 import { getNestedValue } from '../utils/get-nested-value';
+import { reportAnalytics } from '../utils/report-analytics';
 
 const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
   <div className="bc">
@@ -12,9 +13,17 @@ const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
           const title = getNestedValue([path], slugTitleMapping);
           return (
             <li key={path}>
-              {/* TODO: Replace <a> with <Link> when back button behavior is fixed for the component.
-              GitHub issue: https://github.com/gatsbyjs/gatsby/issues/8357 */}
-              <Link to={path}>{formatText(title)}</Link>
+              <Link
+                to={path}
+                onClick={() => {
+                  reportAnalytics('BreadcrumbClick', {
+                    parentPaths: parentPaths,
+                    breadcrumbClicked: path,
+                  });
+                }}
+              >
+                {formatText(title)}
+              </Link>
               {index !== parentPaths.length - 1 && <span className="bcpoint"> &gt; </span>}
             </li>
           );
