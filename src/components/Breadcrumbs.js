@@ -17,7 +17,6 @@ const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
                 to={path}
                 onClick={() => {
                   reportAnalytics('BreadcrumbClick', {
-                    areaFrom: 'Breadcrumb',
                     parentPaths: parentPaths,
                     breadcrumbClicked: path,
                   });
