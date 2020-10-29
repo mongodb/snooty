@@ -17,10 +17,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-emotion": "^10.0.27",
-    "jest-puppeteer": "^4.4.0",
     "lint-staged": "^9.4.3",
-    "prettier": "^1.19.1",
-    "puppeteer": "^1.20.0"
+    "prettier": "^1.19.1"
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
@@ -34,9 +32,8 @@
     "prettier": "prettier \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",
-    "test:regression": "jest regression",
     "test:unit": "jest unit",
-    "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test:unit",
+    "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test",
     "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md",
     "postversion": "git push origin v$npm_package_version && git push origin master"
   },
