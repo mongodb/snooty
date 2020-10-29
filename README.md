@@ -77,8 +77,6 @@ Tests can be run using:
 npm test  # alias for npm run test
 ```
 
-Note that this will run unit _and_ regression tests, which have a long runtime. It is more likely that you want to run only unit tests.
-
 ### Unit tests
 
 Unit tests are located in the `tests/unit/` directory. To run only unit tests, use:
@@ -86,23 +84,6 @@ Unit tests are located in the `tests/unit/` directory. To run only unit tests, u
 ```shell
 npm run test:unit
 ```
-
-### Regression tests
-
-Regression tests are located in the `tests/regression/` directory. Before running regression tests, start a local Gatsby build server:
-
-```shell
-$ npm run build
-$ npm run serve
-```
-
-To run regression tests:
-
-```shell
-npm run test:regression
-```
-
-Regression tests have a long runtime, so Jest's [`describe.only`](https://jestjs.io/docs/en/api#describeonlyname-fn) and [`test.only`](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) functions are quite handy to isolate your tests.
 
 ### Running individual suites
 
