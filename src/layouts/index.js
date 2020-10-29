@@ -8,6 +8,15 @@ import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
 
+const bannerPadding = css`
+  #gatsby-focus-wrapper {
+    margin-top: 50px;
+  }
+  div.sphinxsidebar {
+    margin-top: 50px;
+  }
+`;
+
 const DefaultLayout = props => {
   const { children, pageContext } = props;
   const {
@@ -22,6 +31,7 @@ const DefaultLayout = props => {
       {/* Anchor-link styling to compensate for navbar height */}
       <Global
         styles={css`
+          ${theme.bannerContent ? bannerPadding : ''}
           .contains-headerlink::before {
             content: '';
             display: block;

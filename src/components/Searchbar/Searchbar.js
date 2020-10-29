@@ -20,10 +20,10 @@ const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
 const SearchbarContainer = styled('div')`
+  ${theme.bannerContent ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
   height: ${SEARCHBAR_HEIGHT};
   position: fixed;
   right: ${theme.size.default};
-  top: ${SEARCHBAR_HEIGHT_OFFSET};
   transition: width ${TRANSITION_SPEED} ease-in;
   width: ${({ isExpanded }) => (isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE)};
   /* docs-tools navbar z-index is 9999 */
@@ -46,8 +46,8 @@ const SearchbarContainer = styled('div')`
     }
   }
   @media ${theme.screenSize.upToSmall} {
+    ${theme.bannerContent ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
     height: ${({ isExpanded, isSearching }) => (isExpanded && isSearching ? '100%' : SEARCHBAR_HEIGHT)};
-    top: ${SEARCHBAR_HEIGHT_OFFSET};
     transition: unset;
     width: ${({ isExpanded }) => (isExpanded ? '100%' : BUTTON_SIZE)};
     ${({ isExpanded }) => (isExpanded ? 'left: 0' : 'right: 0')};
