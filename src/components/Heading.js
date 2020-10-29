@@ -4,10 +4,9 @@ import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
+import ConditionalWrapper from './ConditionalWrapper';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
-
-const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
 const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';

@@ -5,7 +5,7 @@ public/
 static/*
 # Don't ignore the scripts or svg directory
 !static/scripts
-!static/svg
+!static/assets
 docs-tools/
 coverage/
 .coverage

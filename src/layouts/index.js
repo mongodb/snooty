@@ -15,6 +15,15 @@ import Navbar from '../components/Navbar';
 
 const Widgets = loadable(() => import('../components/Widgets'));
 
+const bannerPadding = css`
+  #gatsby-focus-wrapper {
+    margin-top: 50px;
+  }
+  div.sphinxsidebar {
+    margin-top: 50px;
+  }
+`;
+
 export default class DefaultLayout extends Component {
   constructor(props) {
     super(props);
@@ -149,6 +158,7 @@ export default class DefaultLayout extends Component {
         {/* Anchor-link styling to compensate for navbar height */}
         <Global
           styles={css`
+            ${theme.bannerContent ? bannerPadding : ''}
             .contains-headerlink::before {
               content: '';
               display: block;
