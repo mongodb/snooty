@@ -23,7 +23,7 @@ jobs:
       run: npm ci
     - name: Lint
       run: npm run lint && npm run format
-    - name: Unit test
-      run: npm run test:unit
+    - name: Test
+      run: npm test
       env:
         CI: true
