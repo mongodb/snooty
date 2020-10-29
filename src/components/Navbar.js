@@ -1,12 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import useMedia from '../hooks/use-media';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
+import useMedia from '../hooks/use-media';
 import { isBrowser } from '../utils/is-browser';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
+import ConditionalWrapper from './ConditionalWrapper';
+import { theme } from '../theme/docsTheme';
 
 const getActiveSection = (slug, urlItems) => {
   const urlMapping = Object.entries(urlItems).find(([, value]) => value.includes(slug));
@@ -30,7 +33,49 @@ const getActiveSection = (slug, urlItems) => {
 
 const NavbarContainer = styled('div')`
   ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
+
+  ${theme.bannerContent
+    ? `top: unset !important;
+
+  & > nav {
+    top: unset !important;
+  }`
+    : ''}
 `;
+
+const Banner = React.memo(({ altText, imgPath, mobileImgPath, url }) => {
+  mobileImgPath = withPrefix(mobileImgPath);
+  imgPath = withPrefix(imgPath);
+
+  return (
+    <a
+      href={url}
+      title={altText}
+      css={css`
+        display: block;
+        height: 40px;
+        width: 100vw;
+
+        @media ${theme.screenSize.upToMedium} {
+          height: 50px;
+        }
+      `}
+    >
+      <div
+        css={css`
+          background-image: url(${imgPath});
+          background-position: center;
+          background-size: cover;
+          height: 100%;
+
+          @media ${theme.screenSize.upToMedium} {
+            background-image: url(${mobileImgPath});
+          }
+        `}
+      />
+    </a>
+  );
+});
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
@@ -84,7 +129,20 @@ const Navbar = () => {
   }, [isSearchbarDefaultExpanded]);
 
   return (
-    <>
+    <ConditionalWrapper
+      condition={theme.bannerContent !== null}
+      wrapper={children => (
+        <div
+          css={css`
+            position: fixed;
+            top: 0;
+          `}
+        >
+          <Banner {...theme.bannerContent} />
+          {children}
+        </div>
+      )}
+    >
       <NavbarContainer
         isExpanded={isSearchbarExpanded}
         shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
@@ -101,7 +159,7 @@ const Navbar = () => {
         // Autofocus the searchbar when the user expands only so the user can start typing
         shouldAutofocus={!isSearchbarDefaultExpanded}
       />
-    </>
+    </ConditionalWrapper>
   );
 };
 
