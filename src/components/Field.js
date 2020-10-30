@@ -1,9 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import ComponentFactory from './ComponentFactory';
 
 const Field = ({ nodeData: { children, label, name }, ...rest }) => (
-  <tr>
+  <tr
+    css={css`
+      > th,
+      > td {
+        padding: 11px 5px 12px;
+        text-align: left;
+      }
+    `}
+  >
     <th>{label || name}:</th>
     <td>
       {children.map((element, index) => (
