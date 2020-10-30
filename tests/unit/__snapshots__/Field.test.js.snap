@@ -1,65 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<tr>
-  <th>
-    Returns
-    :
-  </th>
-  <td>
-    <ComponentFactory
-      key="0"
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 137,
-                },
+<th>
+  Returns
+  :
+</th>
+<td>
+  <ComponentFactory
+    key="0"
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 137,
               },
-              "type": "text",
-              "value": "A JSON Web Token string encoded for the provided ",
             },
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 137,
-                    },
-                  },
-                  "type": "text",
-                  "value": "payload",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 137,
-                },
-              },
-              "type": "literal",
-            },
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 137,
-                },
-              },
-              "type": "text",
-              "value": ".",
-            },
-          ],
-          "position": Object {
-            "start": Object {
-              "line": 137,
-            },
+            "type": "text",
+            "value": "A JSON Web Token string encoded for the provided ",
           },
-          "type": "paragraph",
-        }
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 137,
+                  },
+                },
+                "type": "text",
+                "value": "payload",
+              },
+            ],
+            "position": Object {
+              "start": Object {
+                "line": 137,
+              },
+            },
+            "type": "literal",
+          },
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 137,
+              },
+            },
+            "type": "text",
+            "value": ".",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 137,
+          },
+        },
+        "type": "paragraph",
       }
-      parentNode="field"
-    />
-  </td>
-</tr>
+    }
+    parentNode="field"
+  />
+</td>
 `;
