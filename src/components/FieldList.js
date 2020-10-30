@@ -13,12 +13,6 @@ const Table = styled('table')`
   tbody {
     vertical-align: top;
   }
-
-  .field-header,
-  .field-cell {
-    padding: 11px 5px 12px;
-    text-align: left;
-  }
 `;
 
 const FieldList = ({ nodeData: { children }, ...rest }) => (
