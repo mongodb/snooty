@@ -71,8 +71,6 @@ const Code = ({
 
           & table {
             margin-bottom: 0px;
-            table-layout: fixed;
-            width: 100%;
           }
 
           & table > tbody > tr > td {
