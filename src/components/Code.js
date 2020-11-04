@@ -57,11 +57,11 @@ const Code = ({
   return (
     <div
       css={css`
-        margin: ${theme.size.default} 0;
         display: table;
+        margin: ${theme.size.default} 0;
+        min-width: 150px;
         table-layout: fixed;
         width: 100%;
-        min-width: 150px;
       `}
     >
       <CodeBlock
