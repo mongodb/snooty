@@ -32,7 +32,7 @@ const getLanguage = lang => {
   } else if (lang === 'sh') {
     // Writers commonly use 'sh' to represent shell scripts, but LeafyGreen and Highlight.js use the key 'shell'
     return 'shell';
-  } else if (['c', 'csharp'].includes(lang)) {
+  } else if (['c', 'cpp', 'csharp'].includes(lang)) {
     // LeafyGreen renders all C-family languages with "clike"
     return 'clike';
   }
@@ -58,6 +58,10 @@ const Code = ({
     <div
       css={css`
         margin: ${theme.size.default} 0;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        min-width: 150px;
       `}
     >
       <CodeBlock
