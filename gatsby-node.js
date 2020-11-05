@@ -33,7 +33,7 @@ let RESOLVED_REF_DOC_MAPPING = {};
 // stich client connection
 let stitchClient;
 
-const assets = [];
+const assets = {};
 
 exports.sourceNodes = async () => {
   // setup env variables
@@ -64,7 +64,15 @@ exports.sourceNodes = async () => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
     if (pageNode) {
-      assets.push(...val.static_assets);
+      val.static_assets.forEach(asset => {
+        const checksum = asset.checksum;
+        if (checksum in assets) {
+          assets[checksum].add(asset.key);
+        } else {
+          assets[checksum] = new Set();
+          assets[checksum].add(asset.key);
+        }
+      });
     }
 
     if (filename.endsWith('.txt')) {
