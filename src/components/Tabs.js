@@ -29,16 +29,24 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
-  const activeTab = activeTabs[tabsetName];
+  const [activeTab, setActiveTabIndex] = useState(0);
+  const previousTabsetChoice = activeTabs[tabsetName];
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
 
   useEffect(() => {
-    if (!activeTab || !tabIds.includes(activeTab)) {
+    if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
       // Set first tab as active if no tab was previously selected
       setActiveTab({ name: tabsetName, value: getTabId(children[0]) });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const index = tabIds.indexOf(activeTabs[tabsetName]);
+    if (index !== -1) {
+      setActiveTabIndex(index);
+    }
+  }, [activeTabs, tabIds, tabsetName]);
 
   const handleClick = useCallback(
     index => {
@@ -56,7 +64,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   );
 
   return (
-    <StyledTabs as={TabButton} isHidden={isHidden} selected={tabIds.indexOf(activeTab)} setSelected={handleClick}>
+    <StyledTabs as={TabButton} isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
       {children.map(tab => {
         const tabId = getTabId(tab);
         const tabTitle =
