@@ -14,14 +14,22 @@ const saveFile = async (file, data) => {
 
 // Write all assets to static directory
 const saveAssetFiles = async (assets, stitchClient) => {
-  if (assets.length) {
-    const assetQuery = { _id: { $in: assets } };
+  if (assets.size) {
+    const assetQuery = { _id: { $in: Array.from(assets.keys()) } };
     const assetDataDocuments = await stitchClient.callFunction('fetchDocuments', [
       database,
       ASSETS_COLLECTION,
       assetQuery,
     ]);
-    await Promise.all(assetDataDocuments.map(({ filename, data: { buffer } }) => saveFile(filename, buffer)));
+
+    const imageWrites = [];
+    assetDataDocuments.forEach(({ _id, data: { buffer } }) => {
+      const filenames = assets.get(_id);
+      if (filenames) {
+        filenames.forEach(filename => imageWrites.push(saveFile(filename, buffer)));
+      }
+    });
+    await Promise.all(imageWrites);
   }
 };
 
