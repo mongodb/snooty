@@ -107,8 +107,36 @@ exports.createPages = async ({ actions }) => {
         });
       }
     });
+
+    // Instead of build a 404 page for every docs site, we want one for only docs-landing
+    if (process.env.GATSBY_SITE === 'landing') {
+      const slug = '/404';
+
+      createPage({
+        path: slug,
+        component: path.resolve(__dirname, './src/components/NotFound.js'),
+        context: {
+          layout: '404',
+          metadata,
+          page: {
+            ast: {},
+          },
+          slug,
+        },
+      });
+    }
+
     resolve();
   });
+};
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage } = actions;
+  // Allows 404 page to be visible in development.
+  if (page.path === '/dev-404-page/' && process.env.GATSBY_SITE === 'landing') {
+    page.context.layout = '404';
+    createPage(page);
+  }
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.

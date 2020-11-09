@@ -17,8 +17,41 @@ const bannerPadding = css`
   }
 `;
 
+const globalCSS = css`
+  ${theme.bannerContent ? bannerPadding : ''}
+  .contains-headerlink::before {
+    content: '';
+    display: block;
+    height: calc(${theme.navbar.height} + 10px);
+    margin-top: calc((${theme.navbar.height} + 10px) * -1);
+    position: relative;
+    width: 0;
+  }
+`;
+
+const PageNotFoundLayout = props => {
+  const { children, pageContext } = props;
+  const { slug } = pageContext;
+  const template = 'landing';
+
+  const Template = getTemplate(template, slug);
+
+  return (
+    <>
+      <Global styles={globalCSS} />
+      <Template {...props}>{[children]}</Template>
+      <Navbar />
+    </>
+  );
+};
+
 const DefaultLayout = props => {
   const { children, pageContext } = props;
+
+  if (pageContext.layout === '404') {
+    return PageNotFoundLayout(props);
+  }
+
   const {
     metadata: { title },
     page,
@@ -29,19 +62,7 @@ const DefaultLayout = props => {
   return (
     <>
       {/* Anchor-link styling to compensate for navbar height */}
-      <Global
-        styles={css`
-          ${theme.bannerContent ? bannerPadding : ''}
-          .contains-headerlink::before {
-            content: '';
-            display: block;
-            height: calc(${theme.navbar.height} + 10px);
-            margin-top: calc((${theme.navbar.height} + 10px) * -1);
-            position: relative;
-            width: 0;
-          }
-        `}
-      />
+      <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={getNestedValue(['ast', 'options', 'selectors'], page)}>
         <Template {...props}>{children}</Template>
