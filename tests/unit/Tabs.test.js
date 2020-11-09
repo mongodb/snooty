@@ -14,7 +14,9 @@ const mountTabs = ({ activeTabs, mockData }) => {
     <TabProvider>
       <Tabs nodeData={mockData} />
     </TabProvider>
-  );
+  )
+    .childAt(0)
+    .childAt(0);
 };
 
 const shallowTabs = ({ mockData, mockAddTabset }) =>
@@ -22,7 +24,9 @@ const shallowTabs = ({ mockData, mockAddTabset }) =>
     <TabProvider>
       <Tabs nodeData={mockData} addTabset={mockAddTabset} />
     </TabProvider>
-  );
+  )
+    .childAt(0)
+    .childAt(0);
 
 describe('Tabs testing', () => {
   describe('Tab unit tests', () => {
@@ -36,10 +40,10 @@ describe('Tabs testing', () => {
     });
 
     it('tabs container exists with correct number of children', () => {
-      const tabCount = wrapper.childAt(0).props().nodeData.children.length;
-      expect(wrapper.find('.tab-strip')).toHaveLength(1);
-      expect(wrapper.find('.tab-strip__element').exists()).toEqual(true);
-      expect(wrapper.find('.tab-strip__element')).toHaveLength(tabCount);
+      const tabCount = mockDataAnonymous.children.length;
+      expect(wrapper.find('Tabs')).toHaveLength(1);
+      expect(wrapper.find('Tab').exists()).toEqual(true);
+      expect(wrapper.find('Tab')).toHaveLength(tabCount);
     });
 
     it('did not call mockAddTabset for a non-guides tabset', () => {
@@ -47,11 +51,21 @@ describe('Tabs testing', () => {
     });
 
     it('active tab is set in DOM', () => {
-      expect(wrapper.find('.tab-strip__element[aria-selected=true]').exists()).toEqual(true);
+      expect(
+        wrapper
+          .find('Tab')
+          .first()
+          .prop('selected')
+      ).toEqual(true);
     });
 
     it('exists non-active tab', () => {
-      expect(wrapper.find('.tab-strip__element[aria-selected=false]').exists()).toEqual(true);
+      expect(
+        wrapper
+          .find('Tab')
+          .at(1)
+          .prop('selected')
+      ).toEqual(false);
     });
   });
 
@@ -66,7 +80,7 @@ describe('Tabs testing', () => {
     });
 
     it('tabset should be created for drivers/language pills', () => {
-      expect(wrapper.find('.tab-strip__element').exists()).toEqual(true);
+      expect(wrapper.find('Tabs').exists()).toEqual(true);
     });
   });
 
@@ -80,7 +94,7 @@ describe('Tabs testing', () => {
     });
 
     it('does not render a tabset', () => {
-      expect(wrapper.find('.tab-strip')).toHaveLength(0);
+      expect(wrapper.find('Tabs')).toHaveLength(0);
     });
   });
 
@@ -94,7 +108,7 @@ describe('Tabs testing', () => {
     });
 
     it('renders tabs in the set', () => {
-      expect(wrapper.find('.tab-strip')).toHaveLength(1);
+      expect(wrapper.find('Tabs')).toHaveLength(1);
     });
   });
 });

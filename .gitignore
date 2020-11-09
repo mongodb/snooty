@@ -3,8 +3,7 @@ public/
 .cache/
 .DS_Store
 static/*
-# Don't ignore the scripts or svg directory
-!static/scripts
+# Don't ignore the assets directory
 !static/assets
 docs-tools/
 coverage/
