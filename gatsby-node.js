@@ -33,7 +33,7 @@ let RESOLVED_REF_DOC_MAPPING = {};
 // stich client connection
 let stitchClient;
 
-const assets = {};
+const assets = new Map();
 
 exports.sourceNodes = async () => {
   // setup env variables
@@ -66,11 +66,10 @@ exports.sourceNodes = async () => {
     if (pageNode) {
       val.static_assets.forEach(asset => {
         const checksum = asset.checksum;
-        if (checksum in assets) {
-          assets[checksum].add(asset.key);
+        if (assets.has(checksum)) {
+          assets.set(checksum, new Set([...assets.get(checksum), asset.key]));
         } else {
-          assets[checksum] = new Set();
-          assets[checksum].add(asset.key);
+          assets.set(checksum, new Set([asset.key]));
         }
       });
     }
