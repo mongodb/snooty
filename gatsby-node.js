@@ -115,7 +115,7 @@ exports.createPages = async ({ actions }) => {
       }
     });
 
-    // Instead of build a 404 page for every docs site, we want one for only docs-landing
+    // Instead of building a 404 page for every docs site, we want one for only docs-landing
     if (process.env.GATSBY_SITE === 'landing') {
       const slug = '/404';
 

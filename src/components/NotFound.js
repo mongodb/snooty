@@ -7,14 +7,10 @@ import { theme } from '../theme/docsTheme';
 import { withPrefix } from 'gatsby';
 
 const ErrorBox = styled('div')`
-  padding-left: ${theme.size.small};
-  padding-right: ${theme.size.small};
+  padding: 0px ${theme.size.small};
 
   @media ${theme.screenSize.upToSmall} {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 0px ${theme.size.default};
   }
 `;
 
@@ -31,6 +27,10 @@ const SupportButton = styled('a')`
 
   :hover {
     color: ${supportButtonColor};
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    margin-left: ${theme.size.tiny};
   }
 `;
 
@@ -60,10 +60,6 @@ const ErrorBoxContainer = () => {
         css={css`
           font-size: 32px;
           line-height: ${theme.size.large};
-
-          @media ${theme.screenSize.upToSmall} {
-            text-align: center;
-          }
         `}
       >
         Sorry, we can't find that page.
