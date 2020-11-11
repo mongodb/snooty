@@ -13,7 +13,7 @@ export default function SubmittedView(props) {
       <Subheading>We're working hard to improve the MongoDB Documentation.</Subheading>
       <Subheading>
         <span>For additional support, explore the </span>
-        <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB discussion forum.</a>
+        <a href="https://developer.mongodb.com/community/forums/">MongoDB discussion forum.</a>
       </Subheading>
       {isSmallScreen && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
     </Layout>
