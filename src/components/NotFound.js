@@ -7,7 +7,7 @@ import { theme } from '../theme/docsTheme';
 import { withPrefix } from 'gatsby';
 
 const ErrorBox = styled('div')`
-  padding: 0px ${theme.size.small};
+  padding: 0px ${theme.size.default};
 
   @media ${theme.screenSize.upToSmall} {
     padding: 0px ${theme.size.default};
@@ -43,11 +43,10 @@ const NotFoundImage = () => {
       src={withPrefix(imgPath)}
       alt={altText}
       css={css`
-        width: 50%;
+        width: 550px;
 
         @media ${theme.screenSize.upToSmall} {
-          margin-bottom: ${theme.size.medium};
-          width: 100%;
+          margin-bottom: 40px;
         }
       `}
     />
