@@ -65,7 +65,7 @@ const DefaultLayout = props => {
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={getNestedValue(['ast', 'options', 'selectors'], page)}>
-        <Template {...props}>{children}</Template>
+        <Template {...props}>{Array.isArray(children) ? children : [children]}</Template>
       </TabProvider>
       <Navbar />
     </>

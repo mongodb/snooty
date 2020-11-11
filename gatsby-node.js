@@ -141,7 +141,12 @@ exports.onCreatePage = ({ page, actions }) => {
   const { createPage } = actions;
   // Allows 404 page to be visible in development.
   if (page.path === '/dev-404-page/' && process.env.GATSBY_SITE === 'landing') {
-    page.context.layout = '404';
+    page.context = {
+      layout: '404',
+      page: {
+        ast: {},
+      },
+    };
     createPage(page);
   }
 };

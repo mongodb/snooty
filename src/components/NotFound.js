@@ -16,7 +16,7 @@ const ErrorBox = styled('div')`
 
 const supportButtonColor = '#3D4F58';
 
-const SupportButton = styled('a')`
+const SupportLink = styled('a')`
   color: ${supportButtonColor};
   display: inline-block;
   font-family: Akzidenz;
@@ -46,6 +46,7 @@ const NotFoundImage = () => {
         width: 50%;
 
         @media ${theme.screenSize.upToSmall} {
+          margin-bottom: ${theme.size.medium};
           width: 100%;
         }
       `}
@@ -60,6 +61,10 @@ const ErrorBoxContainer = () => {
         css={css`
           font-size: 32px;
           line-height: ${theme.size.large};
+
+          @media ${theme.screenSize.upToSmall} {
+            font-size: ${theme.fontSize.h2};
+          }
         `}
       >
         Sorry, we can't find that page.
@@ -76,12 +81,34 @@ const ErrorBoxContainer = () => {
       <div
         css={css`
           margin-top: ${theme.size.medium};
+
+          @media ${theme.screenSize.upToSmall} {
+            display: flex;
+            flex-direction: column;
+          }
         `}
       >
-        <Button variant="primary" href="https://docs.mongodb.com">
+        <Button
+          href="https://docs.mongodb.com"
+          variant="primary"
+          css={css`
+            @media ${theme.screenSize.upToSmall} {
+              max-width: 150px;
+            }
+          `}
+        >
           Go to Docs Home
         </Button>
-        <SupportButton href="https://support.mongodb.com/welcome">Contact Support →</SupportButton>
+        <SupportLink
+          href="https://support.mongodb.com/welcome"
+          css={css`
+            @media ${theme.screenSize.upToSmall} {
+              margin-top: ${theme.size.default};
+            }
+          `}
+        >
+          Contact Support →
+        </SupportLink>
       </div>
     </ErrorBox>
   );
@@ -94,15 +121,19 @@ const NotFound = () => {
         css={css`
           align-items: center;
           display: flex;
-          flex-wrap: wrap;
+          flex-flow: row-reverse wrap;
           justify-content: center;
           margin-bottom: ${theme.size.xxlarge};
+
+          @media ${theme.screenSize.upToSmall} {
+            margin-top: -${theme.size.large};
+          }
         `}
       >
-        <ErrorBoxContainer />
         <NotFoundImage />
+        <ErrorBoxContainer />
       </div>
-      <Footer enableFeedback={false} />
+      <Footer disableFeedback />
     </>
   );
 };
