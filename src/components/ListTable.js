@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { Table, Row, Cell, TableHeader, HeaderRow, DataType } from '@leafygreen-ui/table';
+import { css, cx } from '@leafygreen-ui/emotion';
+// import { css, cx } from '@emotion/core';
 import ComponentFactory from './ComponentFactory';
 import CSSWrapper from './CSSWrapper';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
-  const headerRowCount = parseInt(getNestedValue(['options', 'header-rows'], nodeData), 10) || 0;
-  const stubColumnCount = parseInt(getNestedValue(['options', 'stub-columns'], nodeData), 10) || 0;
+const ListTable = ({ nodeData, nodeData: { children, options }, ...rest }) => {
+  const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
+  const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const headerRows = children[0].children[0].children.slice(0, headerRowCount);
   const bodyRows = children[0].children.slice(headerRowCount);
   const customWidth = getNestedValue(['options', 'width'], nodeData) || 'auto';
@@ -22,22 +24,67 @@ const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
   }
 
   return (
-    <table
+    <Table
       className={['docutils', getNestedValue(['options', 'class'], nodeData) || '', widths, customAlign].join(' ')}
+      columns={headerRows.map((row, rowIndex) => {
+        console.log(row);
+        return (
+          <HeaderRow key={rowIndex}>
+            {row.children.map((column, colIndex) => (
+              <TableHeader
+                className={`head ${colIndex <= stubColumnCount - 1 && 'stub'}`}
+                key={`${rowIndex}-${colIndex}`}
+                label={column.children.map((child, i) => (
+                  <ComponentFactory {...rest} key={i} nodeData={child} />
+                ))}
+              />
+            ))}
+          </HeaderRow>
+        );
+      })}
       css={css`
-        display: block;
-        overflow-x: auto;
         width: ${customWidth};
       `}
+      data={bodyRows}
     >
-      {widths === 'colwidths-given' && <ColGroup widths={customWidths.split(/[ ,]+/)} />}
-      <ListTableHeader {...rest} rows={headerRows} stubColumnCount={stubColumnCount} />
-      <ListTableBody {...rest} rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
-    </table>
+      {/* widths === 'colwidths-given' && <ColGroup widths={customWidths.split(/[ ,]+/)} /> */}
+      {/* <ListTableHeader {...rest} rows={headerRows} stubColumnCount={stubColumnCount} /> */}
+      {/* <ListTableBody {...rest} rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} /> */}
+      {({ datum }) => {
+        const row = getNestedValue(['children', 0, 'children'], datum);
+        return (
+          <Row>
+            {row.map((column, colIndex) => {
+              const isStub = colIndex <= stubColumnCount - 1;
+              const cellClass = isStub ? 'stub' : '';
+              console.log(column.children);
+              const contents = column.children.map((child, i) => (
+                <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} />
+              ));
+              return (
+                <Cell
+                  key={colIndex}
+                  className={cx(css`
+                    & > div > span:first-child {
+                      margin-top: 0 !important;
+                    }
+                    & > div > span:last-child {
+                      margin-bottom: 0;
+                    }
+                  `)}
+                >
+                  {contents}
+                </Cell>
+              );
+            })}
+          </Row>
+        );
+      }}
+    </Table>
   );
 };
 
-const ColGroup = ({ widths }) => (
+/* const ColGroup = ({ widths }) => (
   <colgroup>
     {widths.map((width, index) => (
       <col width={`${width}%`} key={index} />
@@ -170,6 +217,6 @@ ListTable.propTypes = {
       widths: PropTypes.string,
     }),
   }).isRequired,
-};
+}; */
 
 export default ListTable;
