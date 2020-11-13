@@ -137,20 +137,6 @@ exports.createPages = async ({ actions }) => {
   });
 };
 
-exports.onCreatePage = ({ page, actions }) => {
-  const { createPage } = actions;
-  // Allows 404 page to be visible in development.
-  if (page.path === '/dev-404-page/' && process.env.GATSBY_SITE === 'landing') {
-    page.context = {
-      layout: '404',
-      page: {
-        ast: {},
-      },
-    };
-    createPage(page);
-  }
-};
-
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === 'build-html') {
