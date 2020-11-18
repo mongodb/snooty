@@ -15,7 +15,6 @@ const findSectionHeadings = nodes => {
     if (node[key] === value && sectionDepth - 1 <= maxDepth && sectionDepth > 1) {
       const nodeTitle = node.children;
       const newNode = {
-        children: [],
         depth: sectionDepth,
         id: node.id,
         title: nodeTitle,

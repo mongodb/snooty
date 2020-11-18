@@ -5,7 +5,7 @@ import { formatText } from '../utils/format-text';
 import { ContentsContext } from './contents-context';
 
 const CONTENT_LIST_ITEM_SHAPE = {
-  children: PropTypes.arrayOf(PropTypes.object),
+  depth: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
@@ -24,7 +24,7 @@ const chooseFontSize = inRightColumn => {
   return inRightColumn ? '14px' : '16px';
 };
 
-const ContentsListItem = ({ id, listChildren, title, depth, activeSection, inRightColumn }) => (
+const ContentsListItem = ({ id, title, depth, activeSection, inRightColumn }) => (
   <li
     className={activeSection ? 'activeSection' : ''}
     css={css`
@@ -53,44 +53,37 @@ const ContentsListItem = ({ id, listChildren, title, depth, activeSection, inRig
     >
       {formatText(title)}
     </a>
-    {listChildren.length > 0 && <ContentsList listItems={listChildren} />}
   </li>
 );
 
 ContentsListItem.propTypes = {
-  activeSectionIndex: PropTypes.number.isRequired,
+  activeSection: PropTypes.bool.isRequired,
   depth: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
-  listChildren: PropTypes.arrayOf(PropTypes.shape(CONTENT_LIST_ITEM_SHAPE)).isRequired,
   inRightColumn: PropTypes.bool.isRequired,
   title: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const ContentsList = ({ activeSectionIndex, listItems, inRightColumn }) => {
-  console.log('List Items:');
-  console.log(listItems);
+const ContentsList = ({ activeSectionIndex, listItems, inRightColumn }) => (
+  <ul
+    css={css`
+      margin-left: -20px;
 
-  return (
-    <ul
-      css={css`
-        margin-left: -20px;
-
-        ${inRightColumn ? activeBorderLeftCSS : ''}
-      `}
-    >
-      {listItems.map(({ children, depth, id, title }, index) => (
-        <ContentsListItem
-          listChildren={children}
-          depth={depth}
-          id={id}
-          title={title}
-          activeSection={activeSectionIndex == index}
-          inRightColumn={inRightColumn}
-        />
-      ))}
-    </ul>
-  );
-};
+      ${inRightColumn ? activeBorderLeftCSS : ''}
+    `}
+  >
+    {listItems.map(({ depth, id, title }, index) => (
+      <ContentsListItem
+        depth={depth}
+        id={id}
+        key={index}
+        title={title}
+        activeSection={activeSectionIndex == index}
+        inRightColumn={inRightColumn}
+      />
+    ))}
+  </ul>
+);
 
 ContentsList.propTypes = {
   activeSectionIndex: PropTypes.number.isRequired,
