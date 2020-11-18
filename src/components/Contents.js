@@ -78,7 +78,7 @@ const ContentsList = ({ activeSectionIndex, listItems, inRightColumn }) => (
         id={id}
         key={index}
         title={title}
-        activeSection={activeSectionIndex == index}
+        activeSection={activeSectionIndex === index}
         inRightColumn={inRightColumn}
       />
     ))}

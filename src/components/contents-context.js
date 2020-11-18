@@ -41,7 +41,9 @@ const findHeadingsOnPage = (headingNodes, height) => {
 
   headingNodes.forEach(heading => {
     const el = document.getElementById(heading.id);
-    locations.push(el.offsetTop / height);
+    if (el) {
+      locations.push(el.offsetTop / height);
+    }
   });
 
   return locations;
@@ -80,7 +82,8 @@ const ContentsProvider = ({ children, nodes = [] }) => {
       document.removeEventListener('scroll', handleScroll);
       setActiveSectionIndex(0);
     };
-  }, [headingNodes, nodes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nodes]);
 
   return <ContentsContext.Provider value={{ headingNodes, activeSectionIndex }}>{children}</ContentsContext.Provider>;
 };
