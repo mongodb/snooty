@@ -6,6 +6,7 @@ import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
+import Contents from '../components/Contents';
 import { useWindowSize } from '../hooks/use-window-size.js';
 import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
@@ -71,6 +72,7 @@ const Document = ({
       {showRightColumn && (
         <RightColumn>
           <TabSelectors />
+          <Contents inRightColumn />
         </RightColumn>
       )}
     </div>

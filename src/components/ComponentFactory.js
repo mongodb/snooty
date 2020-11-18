@@ -30,7 +30,6 @@ import SubstitutionReference from './SubstitutionReference';
 import Line from './Line';
 import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
-import Contents from './Contents';
 import Container from './Container';
 import Cond from './Cond';
 import Meta from './Meta';
@@ -103,7 +102,6 @@ const componentMap = {
   code: Code,
   cond: Cond,
   container: Container,
-  contents: Contents,
   cssclass: CSSClass,
   definitionList: DefinitionList,
   definitionListItem: DefinitionListItem,

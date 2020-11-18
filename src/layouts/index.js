@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
+import { ContentsProvider } from '../components/contents-context';
 import { TabProvider } from '../components/tab-context';
 import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme.js';
@@ -44,7 +45,9 @@ const DefaultLayout = props => {
       />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={getNestedValue(['ast', 'options', 'selectors'], page)}>
-        <Template {...props}>{children}</Template>
+        <ContentsProvider nodes={getNestedValue(['ast', 'children'], page)}>
+          <Template {...props}>{children}</Template>
+        </ContentsProvider>
       </TabProvider>
       <Navbar />
     </>

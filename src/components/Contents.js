@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getNestedValue } from '../utils/get-nested-value';
+import { css } from '@emotion/core';
 import { formatText } from '../utils/format-text';
+import { ContentsContext } from './contents-context';
 
 const CONTENT_LIST_ITEM_SHAPE = {
   children: PropTypes.arrayOf(PropTypes.object),
@@ -9,80 +10,123 @@ const CONTENT_LIST_ITEM_SHAPE = {
   title: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const ContentsListItem = ({ id, listChildren, title }) => (
-  <li>
-    <a href={`#${id}`}>{formatText(title)}</a>
+const activeBorderLeftCSS = css`
+  & > .activeSection,
+  li:hover,
+  li:active {
+    border-left: 2px solid #21313c;
+  }
+`;
+
+const listItemColor = '#061621';
+
+const chooseFontSize = inRightColumn => {
+  return inRightColumn ? '14px' : '16px';
+};
+
+const ContentsListItem = ({ id, listChildren, title, depth, activeSection, inRightColumn }) => (
+  <li
+    className={activeSection ? 'activeSection' : ''}
+    css={css`
+      list-style-type: none;
+      ${inRightColumn ? 'border-left: 1px solid #E7EEEC;' : ''}
+      margin-left: -16px;
+      padding: 3px 0px;
+    `}
+  >
+    <a
+      href={`#${id}`}
+      css={css`
+        color: ${listItemColor};
+        display: inline-block;
+        font-size: ${chooseFontSize(inRightColumn)};
+        line-height: 19px;
+        // Heading sections should begin at depth 2
+        padding-left: calc(${inRightColumn ? '14px +' : ''} ${depth - 2} * 16px);
+        width: 100%;
+
+        :hover {
+          color: ${listItemColor};
+          text-decoration: none;
+        }
+      `}
+    >
+      {formatText(title)}
+    </a>
     {listChildren.length > 0 && <ContentsList listItems={listChildren} />}
   </li>
 );
 
 ContentsListItem.propTypes = {
+  activeSectionIndex: PropTypes.number.isRequired,
+  depth: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   listChildren: PropTypes.arrayOf(PropTypes.shape(CONTENT_LIST_ITEM_SHAPE)).isRequired,
+  inRightColumn: PropTypes.bool.isRequired,
   title: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const ContentsList = ({ className, listItems }) => {
+const ContentsList = ({ activeSectionIndex, listItems, inRightColumn }) => {
+  console.log('List Items:');
+  console.log(listItems);
+
   return (
-    <ul className={className}>
-      {listItems.map(({ children, id, title }, index) => (
-        <ContentsListItem key={index} listChildren={children} id={id} title={title} />
+    <ul
+      css={css`
+        margin-left: -20px;
+
+        ${inRightColumn ? activeBorderLeftCSS : ''}
+      `}
+    >
+      {listItems.map(({ children, depth, id, title }, index) => (
+        <ContentsListItem
+          listChildren={children}
+          depth={depth}
+          id={id}
+          title={title}
+          activeSection={activeSectionIndex == index}
+          inRightColumn={inRightColumn}
+        />
       ))}
     </ul>
   );
 };
 
 ContentsList.propTypes = {
-  className: PropTypes.string,
+  activeSectionIndex: PropTypes.number.isRequired,
   listItems: PropTypes.arrayOf(PropTypes.shape(CONTENT_LIST_ITEM_SHAPE)).isRequired,
+  inRightColumn: PropTypes.bool.isRequired,
 };
 
-ContentsList.defaultProps = {
-  className: '',
-};
+const Contents = ({ inRightColumn }) => {
+  const displayText = 'On This Page';
+  const { headingNodes, activeSectionIndex } = useContext(ContentsContext);
 
-const Contents = ({ nodeData: { argument, options }, page }) => {
-  const maxDepth = typeof options.depth === 'undefined' ? Infinity : options.depth;
-
-  const findSectionHeadings = (nodes, key, value) => {
-    const results = [];
-    const searchNode = (node, sectionDepth) => {
-      if (node[key] === value && sectionDepth - 1 <= maxDepth && sectionDepth > 1) {
-        const nodeTitle = node.children;
-        const newNode = {
-          children: [],
-          depth: sectionDepth,
-          id: node.id,
-          title: nodeTitle,
-        };
-        const lastElement = results[results.length - 1];
-        if (!lastElement || sectionDepth <= lastElement.depth) {
-          results.push(newNode);
-        } else {
-          lastElement.children.push(newNode);
-        }
-      }
-      // Don't include step headings in our TOC regardless of depth
-      if (node.children && node.name !== 'step') {
-        if (node.type === 'section') {
-          sectionDepth += 1; // eslint-disable-line no-param-reassign
-        }
-        return node.children.forEach(child => searchNode(child, sectionDepth));
-      }
-      return null;
-    };
-    nodes.forEach(node => searchNode(node, 0));
-    return results;
-  };
-
-  const displayText = getNestedValue([0, 'value'], argument);
-  const headingNodes = findSectionHeadings(getNestedValue(['ast', 'children'], page), 'type', 'heading');
   return (
     <React.Fragment>
       {headingNodes.length > 0 && (
-        <div className={['contents', 'topic', options.class, options.local ? 'local' : ''].join(' ')} id="on-this-page">
-          <p className="topic-title first">{displayText}</p>
-          <ContentsList className="simple" listItems={headingNodes} />
+        <div
+          css={css`
+            padding-right: 36px;
+            overflow-y: auto;
+          `}
+        >
+          <p
+            css={css`
+              color: #3d4f58;
+              font-size: ${chooseFontSize(inRightColumn)};
+              font-weight: bold;
+              letter-spacing: 0.5px;
+              line-height: 16px;
+            `}
+          >
+            {displayText.toUpperCase()}
+          </p>
+          <ContentsList
+            listItems={headingNodes}
+            activeSectionIndex={activeSectionIndex}
+            inRightColumn={inRightColumn}
+          />
         </div>
       )}
     </React.Fragment>
@@ -90,20 +134,11 @@ const Contents = ({ nodeData: { argument, options }, page }) => {
 };
 
 Contents.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object),
-    options: PropTypes.shape({
-      backlinks: PropTypes.oneOf(['none']),
-      class: PropTypes.string,
-      depth: PropTypes.number,
-      local: PropTypes.bool,
-    }),
-  }).isRequired,
-  page: PropTypes.shape({
-    ast: PropTypes.shape({
-      children: PropTypes.arrayOf(PropTypes.object),
-    }).isRequired,
-  }).isRequired,
+  inRightColumn: PropTypes.bool,
+};
+
+Contents.defaultProps = {
+  inRightColumn: false,
 };
 
 export default Contents;
