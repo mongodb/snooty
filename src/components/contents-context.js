@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { throttle } from '../utils/throttle';
 
 const defaultContextValue = {
   headingNodes: [],
@@ -37,16 +38,16 @@ const findSectionHeadings = nodes => {
 };
 
 const findHeadingsOnPage = (headingNodes, height) => {
-  let locations = [];
+  let positions = [];
 
   headingNodes.forEach(heading => {
     const el = document.getElementById(heading.id);
     if (el) {
-      locations.push(el.offsetTop / height);
+      positions.push(el.offsetTop / height);
     }
   });
 
-  return locations;
+  return positions;
 };
 
 const ContentsContext = React.createContext(defaultContextValue);
@@ -57,7 +58,7 @@ const ContentsProvider = ({ children, nodes = [] }) => {
 
   useEffect(() => {
     const height = document.body.clientHeight - window.innerHeight;
-    const headingLocations = findHeadingsOnPage(headingNodes, height);
+    const headingPositions = findHeadingsOnPage(headingNodes, height);
 
     const handleScroll = () => {
       // Calculate current position of the page similar to guides.js
@@ -65,21 +66,24 @@ const ContentsProvider = ({ children, nodes = [] }) => {
       let currentPosition = scrollTop / height;
       currentPosition = (scrollTop + currentPosition * 0.8 * window.innerHeight) / height;
 
-      // Go through each heading location to see if the user has scrolled to or past a particular section
-      // Have to try out the guides version of this to check for accuracy
-      let currentSectionIndex = 0;
-      let i = 1;
-      while (currentPosition >= headingLocations[i] && i < headingLocations.length) {
-        currentSectionIndex = i++;
-      }
+      // bestMatch = [distance from closest section, closest section index]
+      let bestMatch = [Infinity, 0];
 
-      setActiveSectionIndex(currentSectionIndex);
+      headingPositions.forEach((headingPosition, index) => {
+        const delta = Math.abs(headingPosition - currentPosition);
+        if (delta <= bestMatch[0]) {
+          bestMatch = [delta, index];
+        }
+      });
+
+      setActiveSectionIndex(bestMatch[1]);
     };
 
-    document.addEventListener('scroll', handleScroll);
+    const throttledScrollFn = throttle(handleScroll, 50);
+    document.addEventListener('scroll', throttledScrollFn);
 
     return () => {
-      document.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('scroll', throttledScrollFn);
       setActiveSectionIndex(0);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
