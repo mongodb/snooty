@@ -9,20 +9,33 @@ const defaultContextValue = {
 const findSectionHeadings = nodes => {
   const maxDepth = 2;
   const key = 'type';
-  const value = 'heading';
   const results = [];
+  let hasContentsDirective = false;
 
   const searchNode = (node, sectionDepth) => {
-    if (node[key] === value && sectionDepth - 1 <= maxDepth && sectionDepth > 1) {
-      const nodeTitle = node.children;
-      const newNode = {
-        depth: sectionDepth,
-        id: node.id,
-        title: nodeTitle,
-      };
-
-      results.push(newNode);
+    // Search for contents directive before looking for heading nodes
+    if (node.name === 'contents' && sectionDepth == 1) {
+      hasContentsDirective = true;
     }
+
+    if (sectionDepth > 1) {
+      // Return early if no contents directive has been found beyond its expected depth
+      if (!hasContentsDirective) {
+        return null;
+      }
+
+      if (node[key] === 'heading' && sectionDepth - 1 <= maxDepth) {
+        const nodeTitle = node.children;
+        const newNode = {
+          depth: sectionDepth,
+          id: node.id,
+          title: nodeTitle,
+        };
+
+        results.push(newNode);
+      }
+    }
+
     // Don't include step headings in our TOC regardless of depth
     if (node.children && node.name !== 'step') {
       if (node.type === 'section') {
@@ -30,6 +43,7 @@ const findSectionHeadings = nodes => {
       }
       return node.children.forEach(child => searchNode(child, sectionDepth));
     }
+
     return null;
   };
 
