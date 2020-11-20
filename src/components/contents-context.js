@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getNestedValue } from '../utils/get-nested-value';
 import { throttle } from '../utils/throttle';
 
 const defaultContextValue = {
@@ -7,15 +8,18 @@ const defaultContextValue = {
 };
 
 const findSectionHeadings = nodes => {
-  const maxDepth = 2;
+  // Max depth is 2 by default to not make the "On This Page" feel too crowded
+  let maxDepth = 2;
   const key = 'type';
   const results = [];
   let hasContentsDirective = false;
 
   const searchNode = (node, sectionDepth) => {
-    // Search for contents directive before looking for heading nodes
+    // Search for contents directive before looking for heading nodes.
+    // Ideally, we'd want this in the postprocess layer of the parser.
     if (node.name === 'contents' && sectionDepth === 1) {
       hasContentsDirective = true;
+      maxDepth = getNestedValue(['options', 'depth'], node) || maxDepth;
     }
 
     if (sectionDepth > 1) {
