@@ -16,6 +16,10 @@ const RightColumn = ({ children }) => (
         position: fixed;
         overflow: auto;
         max-height: calc(100% - 120px);
+
+        & > * {
+          margin-bottom: 30px;
+        }
       `}
     >
       {children}
