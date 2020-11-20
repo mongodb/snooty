@@ -14,7 +14,7 @@ const findSectionHeadings = nodes => {
 
   const searchNode = (node, sectionDepth) => {
     // Search for contents directive before looking for heading nodes
-    if (node.name === 'contents' && sectionDepth == 1) {
+    if (node.name === 'contents' && sectionDepth === 1) {
       hasContentsDirective = true;
     }
 
@@ -68,7 +68,11 @@ const ContentsContext = React.createContext(defaultContextValue);
 
 const ContentsProvider = ({ children, nodes = [] }) => {
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
-  const headingNodes = findSectionHeadings(nodes);
+  const [headingNodes, setHeadingNodes] = useState([]);
+
+  useEffect(() => {
+    setHeadingNodes(findSectionHeadings(nodes));
+  }, [nodes]);
 
   useEffect(() => {
     const height = document.body.clientHeight - window.innerHeight;
@@ -100,8 +104,7 @@ const ContentsProvider = ({ children, nodes = [] }) => {
       document.removeEventListener('scroll', throttledScrollFn);
       setActiveSectionIndex(0);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nodes]);
+  }, [headingNodes]);
 
   return <ContentsContext.Provider value={{ headingNodes, activeSectionIndex }}>{children}</ContentsContext.Provider>;
 };
