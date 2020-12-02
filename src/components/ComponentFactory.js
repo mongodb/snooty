@@ -55,9 +55,11 @@ import Root from './Root';
 import Steps from './Steps';
 import MongoWebShell from './MongoWebShell';
 import Extract from './Extract';
+import Describe from './Describe';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
+import RoleCommand from './Roles/Command';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleHighlight from './Roles/Highlight';
@@ -73,6 +75,7 @@ const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
 const roleMap = {
   abbr: RoleAbbr,
   class: RoleClass,
+  command: RoleCommand,
   file: RoleFile,
   guilabel: RoleGUILabel,
   icon: RoleIcon,
@@ -106,6 +109,7 @@ const componentMap = {
   definitionList: DefinitionList,
   definitionListItem: DefinitionListItem,
   deprecated: VersionModified,
+  describe: Describe,
   emphasis: Emphasis,
   extract: Extract,
   field: Field,
