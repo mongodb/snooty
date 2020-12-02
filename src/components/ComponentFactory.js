@@ -30,7 +30,6 @@ import SubstitutionReference from './SubstitutionReference';
 import Line from './Line';
 import LineBlock from './LineBlock';
 import HorizontalList from './HorizontalList';
-import Contents from './Contents';
 import Container from './Container';
 import Cond from './Cond';
 import Meta from './Meta';
@@ -69,7 +68,7 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
-const IGNORED_NAMES = ['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector'];
+const IGNORED_NAMES = ['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector', 'contents'];
 const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
 const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
 
@@ -106,7 +105,6 @@ const componentMap = {
   code: Code,
   cond: Cond,
   container: Container,
-  contents: Contents,
   cssclass: CSSClass,
   definitionList: DefinitionList,
   definitionListItem: DefinitionListItem,

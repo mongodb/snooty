@@ -15,10 +15,11 @@ export default function FeedbackTab(props) {
 const Container = styled(LeafygreenCard)`
   padding: 12px;
   position: fixed;
-  top: 256px;
+  bottom: 256px;
   right: 42px;
   transform: rotate(-90deg);
   transform-origin: top right;
   user-select: none;
   cursor: pointer;
+  z-index: 9;
 `;

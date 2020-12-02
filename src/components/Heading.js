@@ -8,6 +8,7 @@ import useScreenSize from '../hooks/useScreenSize';
 import TabSelectors from './TabSelectors';
 import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
+import Contents from './Contents';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
@@ -17,20 +18,23 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
 
   const isPageTitle = sectionDepth === 1;
   const { isTabletOrMobile, isSmallScreen } = useScreenSize();
-  const shouldShowStarRating = isPageTitle && isTabletOrMobile;
+  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile;
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
 
   return (
     <ConditionalWrapper
-      condition={shouldShowStarRating}
+      condition={shouldShowMobileHeader}
       wrapper={children => (
-        <HeadingContainer stackVertically={isSmallScreen}>
-          {children}
-          <ChildContainer isStacked={isSmallScreen}>
-            {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isSmallScreen} />}
-          </ChildContainer>
-        </HeadingContainer>
+        <>
+          <HeadingContainer stackVertically={isSmallScreen}>
+            {children}
+            <ChildContainer isStacked={isSmallScreen}>
+              {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isSmallScreen} />}
+            </ChildContainer>
+          </HeadingContainer>
+          <Contents />
+        </>
       )}
     >
       <HeadingTag className="contains-headerlink" id={id}>

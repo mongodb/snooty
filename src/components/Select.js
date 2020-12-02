@@ -254,4 +254,4 @@ Select.defaultProps = {
   value: null,
 };
 
-export default Select;
+export { Select as default, Label };
