@@ -1,48 +1,42 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { formatText } from '../utils/format-text';
+import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
+import useScreenSize from '../hooks/useScreenSize.js';
 import { ContentsContext } from './contents-context';
-
-const CONTENT_LIST_ITEM_SHAPE = {
-  depth: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
-  title: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+import ComponentFactory from './ComponentFactory';
+import { Label } from './Select';
 
 const activeBorderLeftCSS = css`
-  & > .activeSection,
-  li:hover,
-  li:active {
-    border-left: 2px solid #21313c;
-  }
+  border-left: 2px solid ${uiColors.gray.dark3};
+  padding-left: 0;
 `;
 
-const listItemColor = '#061621';
+const listItemColor = uiColors.black;
 
-const chooseFontSize = inRightColumn => {
-  return inRightColumn ? '14px' : '16px';
-};
-
-const ContentsListItem = ({ id, title, depth, activeSection, inRightColumn }) => (
+const ContentsListItem = ({ children, depth, id, isActive, isDesktopOrLaptop }) => (
   <li
-    className={activeSection ? 'activeSection' : ''}
     css={css`
-      list-style-type: none;
-      ${inRightColumn ? 'border-left: 1px solid #E7EEEC;' : ''}
-      margin-left: -16px;
-      padding: 3px 0px;
+      padding-left: 1px;
+      ${isDesktopOrLaptop ? `border-left: 1px solid ${uiColors.gray.light2};` : ''}
+      ${isDesktopOrLaptop && isActive ? activeBorderLeftCSS : ''};
+
+      &:hover,
+      &:active {
+        ${isDesktopOrLaptop ? activeBorderLeftCSS : 'padding-left: 4px;'}
+      }
     `}
   >
     <a
       href={`#${id}`}
       css={css`
+        /* TODO: Remove when mongodb-docs.css is removed */
         color: ${listItemColor};
         display: inline-block;
-        font-size: ${chooseFontSize(inRightColumn)};
-        line-height: 19px;
-        // Heading sections should begin at depth 2
-        padding-left: calc(${inRightColumn ? '14px +' : ''} ${depth - 2} * 16px);
+        line-height: ${isDesktopOrLaptop ? '28px' : '24px'};
+        /* Heading sections should begin at depth 2 */
+        padding-left: calc(${isDesktopOrLaptop ? '14px +' : ''} ${depth - 2} * 16px);
         width: 100%;
 
         :hover {
@@ -51,87 +45,51 @@ const ContentsListItem = ({ id, title, depth, activeSection, inRightColumn }) =>
         }
       `}
     >
-      {formatText(title)}
+      {children}
     </a>
   </li>
 );
 
 ContentsListItem.propTypes = {
-  activeSection: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
   depth: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
-  inRightColumn: PropTypes.bool.isRequired,
-  title: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const ContentsList = ({ activeSectionIndex, listItems, inRightColumn }) => (
-  <ul
-    css={css`
-      margin-left: -20px;
+const ContentsList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
 
-      ${inRightColumn ? activeBorderLeftCSS : ''}
-    `}
-  >
-    {listItems.map(({ depth, id, title }, index) => (
-      <ContentsListItem
-        depth={depth}
-        id={id}
-        key={index}
-        title={title}
-        activeSection={activeSectionIndex === index}
-        inRightColumn={inRightColumn}
-      />
-    ))}
-  </ul>
-);
-
-ContentsList.propTypes = {
-  activeSectionIndex: PropTypes.number.isRequired,
-  listItems: PropTypes.arrayOf(PropTypes.shape(CONTENT_LIST_ITEM_SHAPE)).isRequired,
-  inRightColumn: PropTypes.bool.isRequired,
-};
-
-const Contents = ({ inRightColumn }) => {
-  const displayText = 'On This Page';
+const Contents = () => {
   const { headingNodes, activeSectionIndex } = useContext(ContentsContext);
+  const { isTabletOrMobile } = useScreenSize();
+
+  if (headingNodes.length === 0) {
+    return null;
+  }
 
   return (
-    <React.Fragment>
-      {headingNodes.length > 0 && (
-        <div
-          css={css`
-            padding-right: 36px;
-            overflow-y: auto;
-          `}
-        >
-          <p
-            css={css`
-              color: #3d4f58;
-              font-size: ${chooseFontSize(inRightColumn)};
-              font-weight: bold;
-              letter-spacing: 0.5px;
-              line-height: 16px;
-            `}
+    <>
+      <Label>On this page</Label>
+      <ContentsList>
+        {headingNodes.map(({ depth, id, title }, index) => (
+          <ContentsListItem
+            depth={depth}
+            key={id}
+            id={id}
+            isActive={activeSectionIndex === index}
+            isDesktopOrLaptop={!isTabletOrMobile}
           >
-            {displayText.toUpperCase()}
-          </p>
-          <ContentsList
-            listItems={headingNodes}
-            activeSectionIndex={activeSectionIndex}
-            inRightColumn={inRightColumn}
-          />
-        </div>
-      )}
-    </React.Fragment>
+            {title.map((node, i) => (
+              <ComponentFactory nodeData={node} key={`${index}-${i}`} />
+            ))}
+          </ContentsListItem>
+        ))}
+      </ContentsList>
+    </>
   );
-};
-
-Contents.propTypes = {
-  inRightColumn: PropTypes.bool,
-};
-
-Contents.defaultProps = {
-  inRightColumn: false,
 };
 
 export default Contents;

@@ -18,13 +18,13 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
 
   const isPageTitle = sectionDepth === 1;
   const { isTabletOrMobile, isSmallScreen } = useScreenSize();
-  const shouldShowStarRating = isPageTitle && isTabletOrMobile;
+  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile;
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
 
   return (
     <ConditionalWrapper
-      condition={shouldShowStarRating}
+      condition={shouldShowMobileHeader}
       wrapper={children => (
         <>
           <HeadingContainer stackVertically={isSmallScreen}>

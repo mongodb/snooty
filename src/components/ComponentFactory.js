@@ -66,7 +66,7 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
-const IGNORED_NAMES = ['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector'];
+const IGNORED_NAMES = ['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector', 'contents'];
 const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
 const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
 
