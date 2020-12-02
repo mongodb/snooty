@@ -72,7 +72,7 @@ const Document = ({
       {showRightColumn && (
         <RightColumn>
           <TabSelectors />
-          <Contents inRightColumn />
+          <Contents />
         </RightColumn>
       )}
     </div>
