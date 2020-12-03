@@ -7,6 +7,7 @@ import useScreenSize from '../hooks/useScreenSize.js';
 import { ContentsContext } from './contents-context';
 import ComponentFactory from './ComponentFactory';
 import { Label } from './Select';
+import Link from './Link';
 
 const activeBorderLeftCSS = css`
   border-left: 2px solid ${uiColors.gray.dark3};
@@ -18,7 +19,7 @@ const listItemColor = uiColors.black;
 const ContentsListItem = ({ children, depth, id, isActive, isDesktopOrLaptop }) => (
   <li
     css={css`
-      padding-left: 1px;
+      padding: 6px 0 6px 1px;
       ${isDesktopOrLaptop ? `border-left: 1px solid ${uiColors.gray.light2};` : ''}
       ${isDesktopOrLaptop && isActive ? activeBorderLeftCSS : ''};
 
@@ -28,13 +29,12 @@ const ContentsListItem = ({ children, depth, id, isActive, isDesktopOrLaptop }) 
       }
     `}
   >
-    <a
-      href={`#${id}`}
+    <Link
+      to={`#${id}`}
       css={css`
         /* TODO: Remove when mongodb-docs.css is removed */
         color: ${listItemColor};
         display: inline-block;
-        line-height: ${isDesktopOrLaptop ? '28px' : '24px'};
         /* Heading sections should begin at depth 2 */
         padding-left: calc(${isDesktopOrLaptop ? '14px +' : ''} ${depth - 2} * 16px);
         width: 100%;
@@ -46,7 +46,7 @@ const ContentsListItem = ({ children, depth, id, isActive, isDesktopOrLaptop }) 
       `}
     >
       {children}
-    </a>
+    </Link>
   </li>
 );
 
