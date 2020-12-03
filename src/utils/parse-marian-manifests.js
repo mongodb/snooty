@@ -6,7 +6,7 @@ const PROPERTY_MAPPING = {
   charts: 'Charts',
   compass: 'Compass',
   'database-tools': 'Database Tools',
-  datalake: 'Atlas Datalake',
+  datalake: 'Atlas Data Lake',
   'docs-php-library': 'PHP Driver',
   'docs-ruby': 'Ruby Driver',
   drivers: 'Drivers',
