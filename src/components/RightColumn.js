@@ -6,7 +6,7 @@ const RightColumn = ({ children }) => (
   <div
     css={css`
       flex-grow: 1;
-      margin: 70px 15px 40px 65px;
+      margin: 70px 24px 40px 54px;
       min-width: 180px;
       order: 2;
     `}
@@ -19,6 +19,7 @@ const RightColumn = ({ children }) => (
 
         & > * {
           margin-bottom: 30px;
+          margin-right: 24px;
         }
       `}
     >
