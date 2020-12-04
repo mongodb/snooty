@@ -47,7 +47,7 @@ export default class Image extends Component {
       : '';
 
     const hasBorder = getNestedValue(['options', 'border'], nodeData);
-    const border = css`
+    const borderStyling = css`
       border: 0.5px solid #babdbe;
       width: 100%;
       border-radius: 4px;
@@ -70,7 +70,7 @@ export default class Image extends Component {
         style={nodeData.options ? buildStyles() : {}}
         onLoad={this.handleLoad}
         ref={this.imgRef}
-        css={hasBorder ? border : ''}
+        css={hasBorder ? borderStyling : ''}
       />
     );
   }
