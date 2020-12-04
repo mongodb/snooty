@@ -6,16 +6,25 @@ const RightColumn = ({ children }) => (
   <div
     css={css`
       flex-grow: 1;
-      margin: 70px 15px 40px 65px;
+      margin: 70px 24px 40px 54px;
       min-width: 180px;
       order: 2;
-
-      & > * {
-        position: fixed;
-      }
     `}
   >
-    {children}
+    <div
+      css={css`
+        position: fixed;
+        overflow: auto;
+        max-height: calc(100% - 120px);
+
+        & > * {
+          margin-bottom: 30px;
+          margin-right: 24px;
+        }
+      `}
+    >
+      {children}
+    </div>
   </div>
 );
 

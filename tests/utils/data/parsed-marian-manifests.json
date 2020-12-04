@@ -14,7 +14,7 @@
   },
   "Compass": { "beta": "compass-beta", "Latest": "compass-master" },
   "Database Tools": { "Latest": "database-tools-master" },
-  "Atlas Datalake": { "Latest": "datalake-master", "test": "datalake-test" },
+  "Atlas Data Lake": { "Latest": "datalake-master", "test": "datalake-test" },
   "Drivers": { "Latest": "drivers-master" },
   "Ecosystem": { "Latest": "ecosystem-master" },
   "Guides": { "Latest": "guides-master" },
