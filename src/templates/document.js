@@ -60,7 +60,7 @@ const Document = ({
             <div className="bodywrapper">
               <div className="body">
                 <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                {children}
+                <div>{children}</div>
                 {showPrevNext && (
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                 )}
