@@ -6,7 +6,7 @@ import { Layout, Heading, Subheading } from '../components/view-components';
 
 export default function SubmittedView(props) {
   const { abandon } = useFeedbackState();
-  const { isSmallScreen } = useScreenSize();
+  const { isMobile } = useScreenSize();
   return (
     <Layout>
       <Heading>We appreciate your feedback.</Heading>
@@ -15,7 +15,7 @@ export default function SubmittedView(props) {
         <span>For additional support, explore the </span>
         <a href="https://developer.mongodb.com/community/forums/">MongoDB discussion forum.</a>
       </Subheading>
-      {isSmallScreen && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
+      {isMobile && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
     </Layout>
   );
 }

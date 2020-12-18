@@ -10,7 +10,7 @@ import { BSON } from 'mongodb-stitch-server-sdk';
 
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 
-import { tick, mockMutationObserver, mockSegmentAnalytics, withScreenSize } from '../utils';
+import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
 import {
   stitchFunctionMocks,
   mockStitchFunctions,
@@ -42,8 +42,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
         <Heading nodeData={headingData} sectionDepth={1} />
         <FeedbackFooter />
       </div>
-    </FeedbackProvider>,
-    options
+    </FeedbackProvider>
   );
   // Need to wait for the next tick to let Loadable components load
   await tick({ wrapper });
@@ -55,12 +54,13 @@ describe('FeedbackWidget', () => {
   let wrapper;
   beforeAll(mockMutationObserver);
   beforeAll(mockSegmentAnalytics);
+  beforeEach(setDesktop);
   beforeEach(mockStitchFunctions);
   afterEach(clearMockStitchFunctions);
 
   describe('FeedbackTab', () => {
     it('shows the rating view when clicked', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('desktop'));
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(1);
       // Before the click, the form is hidden
       expect(wrapper.exists('FeedbackForm')).toEqual(true);
@@ -78,20 +78,17 @@ describe('FeedbackWidget', () => {
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('desktop'));
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackTab')).toBe(true);
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(1);
     });
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState(
-        {
-          view: 'rating',
-          comment: '',
-          rating: null,
-        },
-        withScreenSize('desktop')
-      );
+      wrapper = await mountFormWithFeedbackState({
+        view: 'rating',
+        comment: '',
+        rating: null,
+      });
       expect(wrapper.exists('RatingView')).toEqual(true);
       expect(wrapper.exists('FeedbackTab')).toBe(true);
       expect(wrapper.find('FeedbackTab')).toHaveLength(1);
@@ -99,13 +96,15 @@ describe('FeedbackWidget', () => {
     });
 
     it('is hidden on medium/tablet screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('ipad-pro'));
+      setTablet();
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackTab')).toBe(true);
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
     });
 
     it('is hidden on small/mobile screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('iphone-x'));
+      setMobile();
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackTab')).toBe(true);
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
     });
@@ -113,24 +112,27 @@ describe('FeedbackWidget', () => {
 
   describe('FeedbackHeading', () => {
     it('is hidden on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('desktop'));
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackHeading')).toBe(false);
     });
 
     it('is visible on medium/tablet screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('ipad-pro'));
+      setTablet();
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackHeading')).toBe(true);
       expect(wrapper.find('FeedbackHeading').children()).toHaveLength(2);
     });
 
     it('is visible on small/mobile screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('iphone-x'));
+      setMobile();
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackHeading')).toBe(true);
       expect(wrapper.find('FeedbackHeading').children()).toHaveLength(2);
     });
 
     it('is hidden on small/mobile screens when configured with page option', async () => {
-      wrapper = await mountFormWithFeedbackState({ hideHeader: true }, withScreenSize('iphone-x'));
+      setMobile();
+      wrapper = await mountFormWithFeedbackState({ hideHeader: true });
       expect(wrapper.exists('FeedbackHeading')).toBe(true);
       expect(wrapper.find('FeedbackHeading').children()).toHaveLength(0);
     });
@@ -138,19 +140,21 @@ describe('FeedbackWidget', () => {
 
   describe('FeedbackFooter', () => {
     it('is hidden on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('desktop'));
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackFooter')).toBe(true);
       expect(wrapper.find('FeedbackFooter').children()).toHaveLength(0);
     });
 
     it('is visible on medium/tablet screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('ipad-pro'));
+      setTablet();
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackFooter')).toBe(true);
       expect(wrapper.find('FeedbackFooter').children()).toHaveLength(1);
     });
 
     it('is visible on small/mobile screens', async () => {
-      wrapper = await mountFormWithFeedbackState({}, withScreenSize('iphone-x'));
+      setMobile();
+      wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackFooter')).toBe(true);
       expect(wrapper.find('FeedbackFooter').children()).toHaveLength(1);
     });
@@ -158,46 +162,36 @@ describe('FeedbackWidget', () => {
 
   describe('FeedbackForm', () => {
     it('renders as a floating card on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState(
-        {
-          view: 'rating',
-          _id: new BSON.ObjectId(),
-        },
-        withScreenSize('desktop')
-      );
+      wrapper = await mountFormWithFeedbackState({
+        view: 'rating',
+        _id: new BSON.ObjectId(),
+      });
       expect(wrapper.exists('FeedbackCard')).toBe(true);
     });
 
     it('renders as a modal window on medium/tablet screens', async () => {
-      wrapper = await mountFormWithFeedbackState(
-        {
-          view: 'rating',
-          _id: new BSON.ObjectId(),
-        },
-        withScreenSize('ipad-pro')
-      );
+      setTablet();
+      wrapper = await mountFormWithFeedbackState({
+        view: 'rating',
+        _id: new BSON.ObjectId(),
+      });
       expect(wrapper.exists('FeedbackModal')).toBe(true);
     });
 
     it('renders as a full screen app on small/mobile screens', async () => {
-      wrapper = await mountFormWithFeedbackState(
-        {
-          view: 'rating',
-          _id: new BSON.ObjectId(),
-        },
-        withScreenSize('iphone-x')
-      );
+      setMobile();
+      wrapper = await mountFormWithFeedbackState({
+        view: 'rating',
+        _id: new BSON.ObjectId(),
+      });
       expect(wrapper.exists('FeedbackFullScreen')).toBe(true);
     });
 
     it('abandons feedback when the form is closed', async () => {
-      wrapper = await mountFormWithFeedbackState(
-        {
-          view: 'rating',
-          _id: new BSON.ObjectId(),
-        },
-        withScreenSize('desktop')
-      );
+      wrapper = await mountFormWithFeedbackState({
+        view: 'rating',
+        _id: new BSON.ObjectId(),
+      });
       // Click the close button
       wrapper
         .find('FeedbackCard')
@@ -210,26 +204,20 @@ describe('FeedbackWidget', () => {
 
     describe('RatingView', () => {
       it('shows a 5-star rating', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'rating',
-            _id: new BSON.ObjectId(),
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'rating',
+          _id: new BSON.ObjectId(),
+        });
         expect(wrapper.exists('RatingView')).toBe(true);
         expect(wrapper.exists('StarRating')).toBe(true);
         expect(wrapper.find('RatingView').find('Star')).toHaveLength(5);
       });
 
       it('transitions to the qualifiers view when a star is clicked', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'rating',
-            _id: new BSON.ObjectId(),
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'rating',
+          _id: new BSON.ObjectId(),
+        });
 
         // Simulate a 1-star rating
         wrapper
@@ -246,15 +234,12 @@ describe('FeedbackWidget', () => {
 
     describe('QualifiersView', () => {
       it('shows positive qualifiers for a positive rating', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'qualifiers',
-            rating: 4,
-            qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
-            comment: '',
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'qualifiers',
+          rating: 4,
+          qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
+          comment: '',
+        });
         expect(wrapper.exists('QualifiersView')).toBe(true);
         expect(wrapper.find('QualifiersView').text()).toContain("We're glad to hear that!");
         expect(wrapper.find('QualifiersView').text()).toContain('Tell us more.');
@@ -262,15 +247,12 @@ describe('FeedbackWidget', () => {
       });
 
       it('shows negative qualifiers for a negative rating', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'qualifiers',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            comment: '',
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'qualifiers',
+          rating: 2,
+          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          comment: '',
+        });
         expect(wrapper.exists('QualifiersView')).toBe(true);
         expect(wrapper.find('QualifiersView').text()).toContain("We're sorry to hear that.");
         expect(wrapper.find('QualifiersView').text()).toContain('What seems to be the issue?');
@@ -278,15 +260,12 @@ describe('FeedbackWidget', () => {
       });
 
       it('selects/unselects a qualifier when clicked', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'qualifiers',
-            rating: 4,
-            qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
-            comment: '',
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'qualifiers',
+          rating: 4,
+          qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
+          comment: '',
+        });
         expect(wrapper.find('Qualifier')).toHaveLength(4);
 
         const isChecked = q => q.find('Checkbox').prop('checked');
@@ -331,15 +310,12 @@ describe('FeedbackWidget', () => {
 
       describe('when the Continue button is clicked', () => {
         it('transitions to the comment view', async () => {
-          wrapper = await mountFormWithFeedbackState(
-            {
-              view: 'qualifiers',
-              rating: 2,
-              qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-              comment: '',
-            },
-            withScreenSize('desktop')
-          );
+          wrapper = await mountFormWithFeedbackState({
+            view: 'qualifiers',
+            rating: 2,
+            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+            comment: '',
+          });
 
           wrapper
             .find('QualifiersView')
@@ -355,15 +331,12 @@ describe('FeedbackWidget', () => {
 
     describe('CommentView', () => {
       it('shows a comment text input', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            comment: '',
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'comment',
+          rating: 2,
+          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          comment: '',
+        });
         // View
         expect(wrapper.exists('CommentView')).toBe(true);
         // Input
@@ -377,15 +350,12 @@ describe('FeedbackWidget', () => {
       });
 
       it('shows an email text input', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            comment: '',
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'comment',
+          rating: 2,
+          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          comment: '',
+        });
         // View
         expect(wrapper.exists('CommentView')).toBe(true);
         // Input
@@ -399,32 +369,26 @@ describe('FeedbackWidget', () => {
       });
 
       it('shows a Support button for feedback with a support request', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            comment: '',
-            isSupportRequest: true,
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'comment',
+          rating: 2,
+          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          comment: '',
+          isSupportRequest: true,
+        });
 
         const button = wrapper.find('CommentView').find('SubmitButton');
         expect(button.text()).toBe('Continue for Support');
       });
 
       it('shows a Submit button for feedback without a support request', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            comment: '',
-            isSupportRequest: false,
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'comment',
+          rating: 2,
+          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          comment: '',
+          isSupportRequest: false,
+        });
 
         const button = wrapper.find('CommentView').find('SubmitButton');
         expect(button.text()).toBe('Send');
@@ -432,15 +396,12 @@ describe('FeedbackWidget', () => {
 
       describe('when the Support button is clicked', () => {
         it('submits the feedback and transitions to the support view', async () => {
-          wrapper = await mountFormWithFeedbackState(
-            {
-              view: 'comment',
-              rating: 2,
-              qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-              isSupportRequest: true,
-            },
-            withScreenSize('desktop')
-          );
+          wrapper = await mountFormWithFeedbackState({
+            view: 'comment',
+            rating: 2,
+            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+            isSupportRequest: true,
+          });
 
           wrapper
             .find('CommentView')
@@ -455,16 +416,13 @@ describe('FeedbackWidget', () => {
       });
       describe('when the Submit button is clicked', () => {
         it('submits the feedback and transitions to the submitted view if the inputs are valid', async () => {
-          wrapper = await mountFormWithFeedbackState(
-            {
-              view: 'comment',
-              rating: 2,
-              qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-              comment: 'This is a test comment.',
-              user: { email: 'test@example.com' },
-            },
-            withScreenSize('desktop')
-          );
+          wrapper = await mountFormWithFeedbackState({
+            view: 'comment',
+            rating: 2,
+            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+            comment: 'This is a test comment.',
+            user: { email: 'test@example.com' },
+          });
 
           wrapper
             .find('CommentView')
@@ -477,15 +435,12 @@ describe('FeedbackWidget', () => {
           expect(wrapper.exists('SubmittedView')).toBe(true);
         });
         it('raises an input error if an invalid email is specified', async () => {
-          wrapper = await mountFormWithFeedbackState(
-            {
-              view: 'comment',
-              rating: 2,
-              qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-              comment: '',
-            },
-            withScreenSize('desktop')
-          );
+          wrapper = await mountFormWithFeedbackState({
+            view: 'comment',
+            rating: 2,
+            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+            comment: '',
+          });
 
           // Type in an invalid email address
           const emailInput = wrapper.find('EmailInput');
@@ -508,15 +463,12 @@ describe('FeedbackWidget', () => {
 
     describe('SupportView', () => {
       it('shows self-serve support links', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'support',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            isSupportRequest: true,
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'support',
+          rating: 2,
+          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          isSupportRequest: true,
+        });
         expect(wrapper.exists('SupportView')).toBe(true);
         const supportViewText = wrapper
           .find('SupportView')
@@ -528,15 +480,12 @@ describe('FeedbackWidget', () => {
       });
 
       it('transitions to the submitted view when the Send button is clicked', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'support',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            isSupportRequest: true,
-          },
-          withScreenSize('desktop')
-        );
+        wrapper = await mountFormWithFeedbackState({
+          view: 'support',
+          rating: 2,
+          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          isSupportRequest: true,
+        });
         expect(wrapper.exists('SupportView')).toBe(true);
 
         // Click the Done button
@@ -547,17 +496,14 @@ describe('FeedbackWidget', () => {
 
     describe('SubmittedView', () => {
       it('shows summary information', async () => {
-        wrapper = await mountFormWithFeedbackState(
-          {
-            view: 'submitted',
-            feedback: {
-              rating: 2,
-              qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-              isSubmitted: true,
-            },
+        wrapper = await mountFormWithFeedbackState({
+          view: 'submitted',
+          feedback: {
+            rating: 2,
+            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+            isSubmitted: true,
           },
-          withScreenSize('desktop')
-        );
+        });
         const view = wrapper.find('SubmittedView');
         expect(view.exists()).toBe(true);
         expect(view.find('Heading').text()).toBe('We appreciate your feedback.');

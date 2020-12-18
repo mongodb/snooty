@@ -83,7 +83,6 @@
     "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
     "react-loadable": "^5.5.0",
-    "react-responsive": "^8.2.0",
     "sanitize-html": "^2.2.0"
   },
   "husky": {
