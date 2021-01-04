@@ -11,7 +11,7 @@ export default function SupportView(props) {
     <Layout>
       <RatingHeader isPositive={false} subheadingText={'Check out the following resources for support.'} />
       <Resource link="https://support.mongodb.com/">Create a case on the Support Portal</Resource>
-      <Resource link="https://community.mongodb.com/">Visit MongoDB Community</Resource>
+      <Resource link="https://developer.mongodb.com/community/forums/">Visit MongoDB Community</Resource>
       <Footer>
         <Button onClick={() => submitSupport()}>Send</Button>
       </Footer>

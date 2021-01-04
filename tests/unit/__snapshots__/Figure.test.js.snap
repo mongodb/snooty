@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders border correctly when specified as an option 1`] = `
+.emotion-0 {
+  border: 0.5px solid #B8C4C2;
+  width: 100%;
+  border-radius: 4px;
+}
+
+<div
+  class="figure"
+  style="width:700px"
+>
+  <img
+    alt="/images/firstcluster.png"
+    class="   emotion-0"
+    src="/images/firstcluster.png"
+  />
+</div>
+`;
+
 exports[`renders correctly 1`] = `
 <div
   class="figure"
@@ -7,7 +26,7 @@ exports[`renders correctly 1`] = `
 >
   <img
     alt="/images/firstcluster.png"
-    class="  "
+    class="   css-0"
     src="/images/firstcluster.png"
   />
 </div>
@@ -25,7 +44,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
   >
     <img
       alt="/images/firstcluster.png"
-      class="  "
+      class="   emotion-0"
       src="/images/firstcluster.png"
     />
     <div
