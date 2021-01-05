@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 
 // Based on condition isValid, split array into two arrays: [[valid, invalid]]
@@ -40,27 +39,9 @@ const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
 
   return (
     <React.Fragment>
-      {dictList.length > 0 ? (
-        <dl
-          className={cx(
-            name,
-            ['binary', 'program'].includes(name)
-              ? css`
-                  /* Override dl.binary's display: none property in mongodb-docs.css */
-                  /* Also hide program targets */
-                  &,
-                  & * {
-                    display: inherit !important;
-                    height: 0;
-                    margin: 0;
-                    padding: 0;
-                    visibility: hidden;
-                    width: 0;
-                  }
-                `
-              : ''
-          )}
-        >
+      {/* Render binary and program targets as empty spans such that their IDs are rendered on the page. */}
+      {dictList.length > 0 && !['binary', 'program'].includes(name) ? (
+        <dl className={name}>
           {descriptionTerm && <DescriptionTerm {...rest} {...descriptionTerm} html_id={html_id} />}
           <dd>
             {descriptionDetails.map((node, i) => (
