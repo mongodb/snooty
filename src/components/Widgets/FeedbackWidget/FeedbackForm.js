@@ -25,11 +25,11 @@ export function FeedbackContent({ view }) {
 }
 
 export default function FeedbackForm(props) {
-  const { isTabletOrMobile, isSmallScreen } = useScreenSize();
+  const { isMobile, isTabletOrMobile } = useScreenSize();
   const { view } = useFeedbackState();
   const isOpen = view !== 'waiting';
 
-  const displayAs = isSmallScreen ? 'fullscreen' : isTabletOrMobile ? 'modal' : 'floating';
+  const displayAs = isMobile ? 'fullscreen' : isTabletOrMobile ? 'modal' : 'floating';
   const Container = {
     // If big screen, render a floating card
     floating: FeedbackCard,
