@@ -1,10 +1,5 @@
 // Set bannerContent = null when banner should be removed
-const bannerContent = {
-  altText: 'Register Now for MongoDB.live, free & fully virtual',
-  imgPath: 'assets/live-fall.png',
-  mobileImgPath: 'assets/live-fall-mobile.png',
-  url: 'https://www.mongodb.com/live?tck=dotlivefallbannerdocs',
-};
+const bannerContent = null;
 
 /**
  * @type {Object.<string, string>}
