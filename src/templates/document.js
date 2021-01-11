@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../utils/get-nested-value';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -7,7 +7,6 @@ import Sidebar from '../components/Sidebar';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
 import Contents from '../components/Contents';
-import { useWindowSize } from '../hooks/use-window-size.js';
 import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
@@ -20,20 +19,21 @@ const Document = ({
     metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
   },
 }) => {
-  const windowSize = useWindowSize();
-  const minWindowWidth = 1093; /* Specific value from docs-tools/themes/mongodb/src/css/mongodb-base.css */
-
-  const [showLeftColumn, setShowLeftColumn] = useState(windowSize.width > minWindowWidth);
+  const { isTabletOrMobile } = useScreenSize();
+  const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
   const pageOptions = getNestedValue(['ast', 'options'], page);
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
+  const showRightColumn = !isTabletOrMobile;
+
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
   };
 
-  const { isTabletOrMobile } = useScreenSize();
-  const showRightColumn = !isTabletOrMobile;
+  useEffect(() => {
+    setShowLeftColumn(!isTabletOrMobile);
+  }, [isTabletOrMobile]);
 
   return (
     <div className="content">
@@ -60,7 +60,7 @@ const Document = ({
             <div className="bodywrapper">
               <div className="body">
                 <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                {children}
+                <div>{children}</div>
                 {showPrevNext && (
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
                 )}

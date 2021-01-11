@@ -39,7 +39,8 @@ const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
 
   return (
     <React.Fragment>
-      {dictList.length > 0 ? (
+      {/* Render binary and program targets as empty spans such that their IDs are rendered on the page. */}
+      {dictList.length > 0 && !['binary', 'program'].includes(name) ? (
         <dl className={name}>
           {descriptionTerm && <DescriptionTerm {...rest} {...descriptionTerm} html_id={html_id} />}
           <dd>
