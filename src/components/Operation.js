@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -7,6 +7,7 @@ import Card from '@leafygreen-ui/card';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
+import { useLocation } from '@reach/router';
 import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme';
@@ -94,6 +95,18 @@ const clampText = ({ showDetails }) => css`
     `}
 `;
 
+const Description = styled('div')`
+  ${bodyMargins({ theme })};
+  ${({ showDetails }) => clampText({ showDetails })};
+`;
+
+const Details = styled('div')`
+  ${bodyMargins({ theme })};
+  & > section {
+    margin-bottom: ${theme.size.large};
+  }
+`;
+
 const Operation = ({
   nodeData: {
     children,
@@ -104,6 +117,19 @@ const Operation = ({
   const [showDetails, setShowDetails] = useState(false);
   const [description, details] = splitChildren(children);
   method = method.toUpperCase();
+  const { hash: windowHash } = useLocation();
+
+  useEffect(() => {
+    if (windowHash && hash === decodeURI(windowHash).slice(1)) {
+      setShowDetails(true);
+    }
+  }, [hash, windowHash]);
+
+  const toggleDrawer = useCallback(() => {
+    window.history.pushState({ href: hash }, '', `#${encodeURI(hash)}`);
+    setShowDetails(!showDetails);
+  }, [hash, setShowDetails, showDetails]);
+
   return (
     <Card
       id={hash}
@@ -116,7 +142,7 @@ const Operation = ({
         <Path dangerouslySetInnerHTML={{ __html: formatPath(path) }} />
         <IconButton
           aria-label={`${showDetails ? 'Hide' : 'Show'} operation details`}
-          onClick={() => setShowDetails(!showDetails)}
+          onClick={toggleDrawer}
           css={css`
             margin-left: auto;
             /* Move up to improve alignment with text baseline */
@@ -127,28 +153,16 @@ const Operation = ({
         </IconButton>
       </OperationHeader>
       {description && (
-        <div
-          css={css`
-            ${bodyMargins({ theme })};
-            ${clampText({ showDetails })};
-          `}
-        >
+        <Description showDetails={showDetails}>
           <ComponentFactory {...rest} nodeData={description} />
-        </div>
+        </Description>
       )}
       {showDetails && (
-        <div
-          css={css`
-            ${bodyMargins({ theme })};
-            & > section {
-              margin-bottom: ${theme.size.large};
-            }
-          `}
-        >
+        <Details>
           {details.map((child, index) => (
             <ComponentFactory {...rest} key={index} nodeData={child} sectionDepth={2} />
           ))}
-        </div>
+        </Details>
       )}
     </Card>
   );
