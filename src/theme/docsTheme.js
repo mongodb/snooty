@@ -1,5 +1,11 @@
-// Set bannerContent = null when banner should be removed
-const bannerContent = null;
+// Set bannerContent.enabled to false when banner should be removed
+const bannerContent = {
+  altText: 'Register Now for MongoDB.live, free & fully virtual',
+  imgPath: 'assets/live-fall.png',
+  mobileImgPath: 'assets/live-fall-mobile.png',
+  url: 'https://www.mongodb.com/live?tck=dotlivefallbannerdocs',
+  enabled: false,
+};
 
 /**
  * @type {Object.<string, string>}
@@ -53,7 +59,7 @@ const screenSize = {
 
 const navbar = {
   bannerHeight: '40px',
-  height: bannerContent === null ? '45px' : '85px',
+  height: bannerContent.enabled ? '85px' : '45px',
 };
 
 export const theme = {

@@ -19,7 +19,7 @@ const bannerPadding = css`
 `;
 
 const globalCSS = css`
-  ${theme.bannerContent ? bannerPadding : ''}
+  ${theme.bannerContent.enabled ? bannerPadding : ''}
   .contains-headerlink::before {
     content: '';
     display: block;

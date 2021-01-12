@@ -34,7 +34,7 @@ const getActiveSection = (slug, urlItems) => {
 const NavbarContainer = styled('div')`
   ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
 
-  ${theme.bannerContent
+  ${theme.bannerContent.enabled
     ? `top: unset !important;
 
   & > nav {
@@ -130,7 +130,7 @@ const Navbar = () => {
 
   return (
     <ConditionalWrapper
-      condition={theme.bannerContent !== null}
+      condition={theme.bannerContent.enabled}
       wrapper={children => (
         <div
           css={css`
