@@ -18,35 +18,39 @@ exports[`when no summary is present renders correctly  1`] = `
     glyph="ChevronDown"
   />
 </OperationHeader>
-<ComponentFactory
-  nodeData={
-    Object {
-      "children": Array [
-        Object {
-          "position": Object {
-            "start": Object {
-              "line": 23,
+<Description
+  showDetails={false}
+>
+  <ComponentFactory
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 23,
+              },
             },
-          },
-          "type": "text",
-          "value": "This is a description. Lorem ipsum dolor sit amet, consectetur adipiscing
+            "type": "text",
+            "value": "This is a description. Lorem ipsum dolor sit amet, consectetur adipiscing
 elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
 ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
 in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
 sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
 mollit anim id est laborum.",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 23,
+          },
         },
-      ],
-      "position": Object {
-        "start": Object {
-          "line": 23,
-        },
-      },
-      "type": "paragraph",
+        "type": "paragraph",
+      }
     }
-  }
-/>
+  />
+</Description>
 `;
 
 exports[`when no summary or description is present renders correctly  1`] = `
@@ -87,27 +91,31 @@ exports[`when rendering all fields renders correctly  1`] = `
     glyph="ChevronDown"
   />
 </OperationHeader>
-<ComponentFactory
-  nodeData={
-    Object {
-      "children": Array [
-        Object {
-          "position": Object {
-            "start": Object {
-              "line": 216,
+<Description
+  showDetails={false}
+>
+  <ComponentFactory
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 216,
+              },
             },
+            "type": "text",
+            "value": "Get information about the currently logged in user.",
           },
-          "type": "text",
-          "value": "Get information about the currently logged in user.",
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 216,
+          },
         },
-      ],
-      "position": Object {
-        "start": Object {
-          "line": 216,
-        },
-      },
-      "type": "paragraph",
+        "type": "paragraph",
+      }
     }
-  }
-/>
+  />
+</Description>
 `;
