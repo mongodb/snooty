@@ -20,7 +20,7 @@ const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
 const SearchbarContainer = styled('div')`
-  ${theme.bannerContent ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
+  ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
   height: ${SEARCHBAR_HEIGHT};
   position: fixed;
   right: ${theme.size.default};
@@ -46,7 +46,7 @@ const SearchbarContainer = styled('div')`
     }
   }
   @media ${theme.screenSize.upToSmall} {
-    ${theme.bannerContent ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
+    ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
     height: ${({ isExpanded, isSearching }) => (isExpanded && isSearching ? '100%' : SEARCHBAR_HEIGHT)};
     transition: unset;
     width: ${({ isExpanded }) => (isExpanded ? '100%' : BUTTON_SIZE)};
