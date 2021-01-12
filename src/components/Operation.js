@@ -120,13 +120,13 @@ const Operation = ({
   const { hash: windowHash } = useLocation();
 
   useEffect(() => {
-    if (windowHash && hash === windowHash.slice(1)) {
+    if (windowHash && hash === decodeURI(windowHash).slice(1)) {
       setShowDetails(true);
     }
   }, [hash, windowHash]);
 
   const toggleDrawer = useCallback(() => {
-    window.history.pushState({ href: hash }, '', `#${hash}`);
+    window.history.pushState({ href: hash }, '', `#${encodeURI(hash)}`);
     setShowDetails(!showDetails);
   }, [hash, setShowDetails, showDetails]);
 
