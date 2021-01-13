@@ -1,0 +1,23 @@
+{
+  "type": "directive",
+  "position": {
+    "start": {
+      "line": 0
+    }
+  },
+  "children": [
+    {
+      "type": "code",
+      "position": {
+        "start": {
+          "line": 0
+        }
+      },
+      "lang": "bat",
+      "copyable": true,
+      "value": "test code",
+      "linenos": false
+    }
+  ],
+  "name": "release_specification"
+}
