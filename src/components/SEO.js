@@ -7,11 +7,12 @@ const SEO = ({ canonicalUrl, pageTitle, siteTitle }) => (
     <title>
       {pageTitle} — {siteTitle}
     </title>
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="canonical" href={canonicalUrl} />
   </Helmet>
 );
 
 SEO.propTypes = {
+  canonicalUrl: PropTypes.string.isRequired,
   pageTitle: PropTypes.string.isRequired,
   siteTitle: PropTypes.string.isRequired,
 };
