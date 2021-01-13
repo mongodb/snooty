@@ -104,13 +104,14 @@ export const SECTION_NAME_MAPPING = {
 };
 
 export const URL_SLUGS = {
-  server: ['manual'],
+  server: ['docs'],
   drivers: ['drivers', 'mongoid', 'node', 'php-library', 'ruby-driver'],
-  cloud: ['cloud', 'datalake', 'mms', 'stitch'],
+  cloud: ['cloud-docs', 'datalake', 'mms', 'realm'],
   tools: [
     'bi-connector',
     'charts',
     'compass',
+    'database-tools',
     'kafka-connector',
     'k8s-operator',
     'mongocli',
@@ -119,5 +120,4 @@ export const URL_SLUGS = {
     'spark-connector',
   ],
   guides: ['guides'],
-  realm: ['realm'],
 };

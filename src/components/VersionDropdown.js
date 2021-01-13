@@ -62,7 +62,7 @@ const VersionDropdown = ({
   useOutsideHandler(wrapperRef);
 
   // Handle cases where EOL versions exist
-  const legacyDocsURL = `https://docs.mongodb.com/legacy/?site=${process.env.GATSBY_SITE}`;
+  const legacyDocsURL = `https://docs.mongodb.com/legacy/?site=${project}`;
   let legacyDocsHTML = '';
 
   if (published.length > active.length) {
@@ -82,7 +82,7 @@ const VersionDropdown = ({
 
   const generatePrefix = version => {
     // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
-    const isManualProduction = project === 'manual' && snootyEnv === 'production';
+    const isManualProduction = project === 'docs' && snootyEnv === 'production';
     if (isManualProduction) {
       return `/${version}`;
     }

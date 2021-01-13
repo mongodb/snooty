@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import queryString from 'query-string';
 import Button from '@leafygreen-ui/button';
+import { getSiteUrl } from '../../utils/get-site-url';
 import { isBrowser } from '../../utils/is-browser';
 import Select from '../Select';
 import { theme } from '../../theme/docsTheme';
@@ -69,18 +70,8 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   }, [deprecatedVersions]);
 
   const generateUrl = () => {
-    let hostName;
-    switch (product) {
-      case 'mms':
-        hostName = 'https://docs.opsmanager.mongodb.com';
-        break;
-      case 'cloud':
-        hostName = 'https://docs.atlas.mongodb.com';
-        break;
-      default:
-        hostName = 'https://docs.mongodb.com';
-    }
-    return ['manual', 'mms', 'cloud'].includes(product)
+    const hostName = getSiteUrl(product);
+    return ['manual', 'mms', 'cloud-docs'].includes(product)
       ? `${hostName}/${version}`
       : `${hostName}/${product}/${version}`;
   };

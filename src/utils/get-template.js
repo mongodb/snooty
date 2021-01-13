@@ -1,15 +1,14 @@
 import { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing } from '../templates';
 
-const getTemplate = (key, slug) => {
-  switch (key) {
+const getTemplate = (project, slug, template) => {
+  switch (template) {
     case 'blank':
       return Blank;
     case 'landing':
       return Landing;
     default:
-      const site = process.env.GATSBY_SITE;
       const isIndex = slug === '/';
-      switch (site) {
+      switch (project) {
         case 'guides':
           return isIndex ? GuidesIndex : Guide;
         case 'drivers':
