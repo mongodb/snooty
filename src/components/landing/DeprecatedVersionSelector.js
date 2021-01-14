@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import queryString from 'query-string';
 import Button from '@leafygreen-ui/button';
+import { getSiteUrl } from '../../utils/get-site-url';
 import { isBrowser } from '../../utils/is-browser';
 import Select from '../Select';
 import { theme } from '../../theme/docsTheme';
@@ -24,10 +25,10 @@ const PROPERTY_NAME_MAPPING = {
   charts: 'MongoDB Charts',
   cloud: 'MongoDB Atlas',
   compass: 'MongoDB Compass',
+  docs: 'MongoDB Server',
   drivers: 'MongoDB Drivers',
   'kafka-connector': 'MongoDB Kafka Connector',
   'kubernetes-operator': 'MongoDB Enterprise Kubernetes Operator',
-  manual: 'MongoDB Server',
   mongocli: 'MongoDB CLI',
   mongoid: 'Mongoid',
   mms: 'MongoDB Ops Manager',
@@ -69,18 +70,8 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   }, [deprecatedVersions]);
 
   const generateUrl = () => {
-    let hostName;
-    switch (product) {
-      case 'mms':
-        hostName = 'https://docs.opsmanager.mongodb.com';
-        break;
-      case 'cloud':
-        hostName = 'https://docs.atlas.mongodb.com';
-        break;
-      default:
-        hostName = 'https://docs.mongodb.com';
-    }
-    return ['manual', 'mms', 'cloud'].includes(product)
+    const hostName = getSiteUrl(product);
+    return ['docs', 'mms', 'cloud-docs'].includes(product)
       ? `${hostName}/${version}`
       : `${hostName}/${product}/${version}`;
   };
