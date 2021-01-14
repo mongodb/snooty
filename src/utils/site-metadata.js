@@ -1,5 +1,6 @@
 const { execSync } = require('child_process');
 const userInfo = require('os').userInfo;
+const { getSiteUrl } = require('./get-site-url');
 
 const runningEnv = process.env.NODE_ENV || 'production';
 
@@ -43,6 +44,7 @@ const siteMetadata = {
   patchId: process.env.PATCH_ID || '',
   pathPrefix: getPathPrefix(process.env.PATH_PREFIX),
   project: process.env.GATSBY_SITE,
+  siteUrl: getSiteUrl(process.env.GATSBY_SITE),
   snootyBranch: gitBranch,
   snootyEnv: process.env.SNOOTY_ENV || 'development',
   user: userInfo().username,

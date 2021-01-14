@@ -13,7 +13,9 @@ export const useSiteMetadata = () => {
             patchId
             pathPrefix
             project
+            siteUrl
             snootyBranch
+            snootyEnv
             user
           }
         }

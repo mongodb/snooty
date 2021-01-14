@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
+import { StaticQuery, graphql } from 'gatsby';
 import ComponentFactory from './ComponentFactory';
 import FootnoteContext from './footnote-context';
 import Footer from './Footer';
+import SEO from './SEO';
 import Widgets from './Widgets';
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
+import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
+import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
-import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
+import { normalizePath } from '../utils/normalize-path';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
 // Delete this modified node from its original location.
@@ -93,27 +97,50 @@ export default class DocumentBody extends Component {
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
     const siteTitle = getNestedValue(['title'], metadata) || '';
     return (
-      <>
-        <Helmet>
-          <title>
-            {pageTitle} — {siteTitle}
-          </title>
-        </Helmet>
-        <Widgets
-          location={location}
-          pageOptions={getNestedValue(['ast', 'options'], page)}
-          pageTitle={pageTitle}
-          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-          slug={slug}
-        >
-          <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
-            {this.pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-            <Footer />
-          </FootnoteContext.Provider>
-        </Widgets>
-      </>
+      <StaticQuery
+        query={graphql`
+          query {
+            site {
+              siteMetadata {
+                commitHash
+                parserBranch
+                patchId
+                pathPrefix
+                project
+                siteUrl
+                snootyBranch
+                user
+              }
+            }
+          }
+        `}
+        render={data => {
+          const {
+            site: { siteMetadata },
+          } = data;
+          const path = normalizePath(`${generatePathPrefix(siteMetadata)}/${slug}`);
+          const articleUrl = `${siteMetadata.siteUrl}${path}`;
+          return (
+            <>
+              <SEO canonicalUrl={assertTrailingSlash(articleUrl)} pageTitle={pageTitle} siteTitle={siteTitle} />
+              <Widgets
+                location={location}
+                pageOptions={getNestedValue(['ast', 'options'], page)}
+                pageTitle={pageTitle}
+                publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+                slug={slug}
+              >
+                <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
+                  {this.pageNodes.map((child, index) => (
+                    <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                  ))}
+                  <Footer />
+                </FootnoteContext.Provider>
+              </Widgets>
+            </>
+          );
+        }}
+      />
     );
   }
 }

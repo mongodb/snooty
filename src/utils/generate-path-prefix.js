@@ -1,4 +1,4 @@
-const normalizePath = path => path.replace(/\/+/g, `/`);
+const { normalizePath } = require('./normalize-path');
 
 const generatePathPrefix = ({ commitHash, parserBranch, patchId, pathPrefix, project, snootyBranch, user }) => {
   // If user specified a PATH_PREFIX environment variable, ensure it begins with a prefix and use
