@@ -66,6 +66,9 @@ export const REF_TARGETS = {
   'configuration-options': 'https://docs.mongodb.com/manual/reference/configuration-options/#configuration-options',
 };
 
+export const DOCS_URL = 'https://docs.mongodb.com';
+export const MARIAN_URL = 'https://marian.mongodb.com';
+
 export const SUGGESTION_WHITELIST = [
   'tutorial/install-mongodb-on-windows',
   'tutorial/install-mongodb-on-ubuntu',
