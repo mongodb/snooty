@@ -34,11 +34,12 @@ const saveAssetFiles = async (assets, stitchClient) => {
 };
 
 const saveStaticFiles = async staticFiles => {
-  // Manpages don't have buffers so we filter those out
   await Promise.all(
-    Object.entries(staticFiles)
-      .filter(data => data.buffer)
-      .map(([file, data]) => saveFile(file, data.buffer))
+    Object.entries(staticFiles).map(([file, data]) => {
+      // Certain files, like manpages, may not have buffers
+      let toSave = data.buffer ? data.buffer : data;
+      saveFile(file, toSave);
+    })
   );
 };
 
