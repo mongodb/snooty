@@ -37,8 +37,8 @@ const saveStaticFiles = async staticFiles => {
   await Promise.all(
     Object.entries(staticFiles).map(([file, data]) => {
       // Certain files, like manpages, may not have buffers
-      let toSave = data.buffer ? data.buffer : data;
-      saveFile(file, toSave);
+      const toSave = data.buffer ? data.buffer : data;
+      return saveFile(file, toSave);
     })
   );
 };
