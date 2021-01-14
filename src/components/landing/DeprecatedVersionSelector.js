@@ -25,10 +25,10 @@ const PROPERTY_NAME_MAPPING = {
   charts: 'MongoDB Charts',
   cloud: 'MongoDB Atlas',
   compass: 'MongoDB Compass',
+  docs: 'MongoDB Server',
   drivers: 'MongoDB Drivers',
   'kafka-connector': 'MongoDB Kafka Connector',
   'kubernetes-operator': 'MongoDB Enterprise Kubernetes Operator',
-  manual: 'MongoDB Server',
   mongocli: 'MongoDB CLI',
   mongoid: 'Mongoid',
   mms: 'MongoDB Ops Manager',
@@ -71,7 +71,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
 
   const generateUrl = () => {
     const hostName = getSiteUrl(product);
-    return ['manual', 'mms', 'cloud-docs'].includes(product)
+    return ['docs', 'mms', 'cloud-docs'].includes(product)
       ? `${hostName}/${version}`
       : `${hostName}/${product}/${version}`;
   };
