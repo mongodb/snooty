@@ -1,3 +1,5 @@
+import { MARIAN_URL } from '../../../src/constants';
+
 const allowJsonPromise = x => ({ json: () => x });
 
 export const FILTERED_RESULT = {
@@ -14,8 +16,8 @@ export const UNFILTERED_RESULT = {
 
 export const mockMarianFetch = url => {
   let endpoint = url;
-  if (endpoint.includes('https://marian.mongodb.com/')) {
-    endpoint = endpoint.split('https://marian.mongodb.com/')[1];
+  if (endpoint.includes(MARIAN_URL)) {
+    endpoint = endpoint.split(`${MARIAN_URL}/`)[1];
   }
   switch (endpoint) {
     case 'status':

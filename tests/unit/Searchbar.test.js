@@ -5,6 +5,7 @@ import Searchbar from '../../src/components/Searchbar';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 import { getSearchbarResultsFromJSON } from '../../src/utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../../src/utils/search-params-to-url';
+import { DOCS_URL } from '../../src/constants';
 
 const getAdvancedFiltersPane = async () => {
   const searchbar = mount(
@@ -222,7 +223,7 @@ describe('Searchbar', () => {
       searchbar.mount();
     });
     expect(searchbar.exists('GoButton'));
-    expect(searchbar.find('GoButton').props()).toHaveProperty('href', '/search?q=stitch');
+    expect(searchbar.find('GoButton').props()).toHaveProperty('href', `${DOCS_URL}/search?q=stitch`);
     await act(async () => {
       searchbar.find('FilterFooterButton').simulate('click');
     });
@@ -235,6 +236,9 @@ describe('Searchbar', () => {
       // Re-running a debounced search, so we must trigger the timeout
       jest.runAllTimers();
     });
-    expect(searchbar.find('GoButton').props()).toHaveProperty('href', '/search?q=stitch&searchProperty=realm-master');
+    expect(searchbar.find('GoButton').props()).toHaveProperty(
+      'href',
+      `${DOCS_URL}/search?q=stitch&searchProperty=realm-master`
+    );
   });
 });
