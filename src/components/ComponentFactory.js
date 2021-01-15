@@ -56,6 +56,7 @@ import Steps from './Steps';
 import MongoWebShell from './MongoWebShell';
 import Extract from './Extract';
 import Describe from './Describe';
+import ReleaseSpecification from './ReleaseSpecification';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -138,6 +139,7 @@ const componentMap = {
   paragraph: Paragraph,
   ref_role: RefRole,
   reference: Reference,
+  release_specification: ReleaseSpecification,
   root: Root,
   rubric: Rubric,
   'search-results': SearchResults,

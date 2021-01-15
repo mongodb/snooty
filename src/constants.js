@@ -66,6 +66,9 @@ export const REF_TARGETS = {
   'configuration-options': 'https://docs.mongodb.com/manual/reference/configuration-options/#configuration-options',
 };
 
+export const DOCS_URL = 'https://docs.mongodb.com';
+export const MARIAN_URL = 'https://marian.mongodb.com';
+
 export const SUGGESTION_WHITELIST = [
   'tutorial/install-mongodb-on-windows',
   'tutorial/install-mongodb-on-ubuntu',
@@ -104,13 +107,14 @@ export const SECTION_NAME_MAPPING = {
 };
 
 export const URL_SLUGS = {
-  server: ['manual'],
+  server: ['docs'],
   drivers: ['drivers', 'mongoid', 'node', 'php-library', 'ruby-driver'],
-  cloud: ['cloud', 'datalake', 'mms', 'stitch'],
+  cloud: ['cloud-docs', 'datalake', 'mms', 'realm'],
   tools: [
     'bi-connector',
     'charts',
     'compass',
+    'database-tools',
     'kafka-connector',
     'k8s-operator',
     'mongocli',
@@ -119,5 +123,4 @@ export const URL_SLUGS = {
     'spark-connector',
   ],
   guides: ['guides'],
-  realm: ['realm'],
 };

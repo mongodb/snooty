@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.emotion-0 {
+  border-spacing: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+.emotion-0:first-of-type {
+  padding-left: 12px;
+}
+
+.emotion-0:last-of-type {
+  padding-right: 12px;
+}
+
+.emotion-2 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
+}
+
+.emotion-4 {
+  overflow-x: auto;
+  border-left: 2px solid;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin: 0;
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  border-color: #E7EEEC;
+  background-color: #F9FBFA;
+  color: #21313C;
+}
+
+.emotion-6 {
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-1 {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.emotion-7 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-3 * {
+  overflow-wrap: normal !important;
+  white-space: pre;
+  word-break: normal !important;
+}
+
+.emotion-3 table {
+  margin-bottom: 0px;
+}
+
+.emotion-3 table > tbody > tr > td {
+  border-style: none;
+  padding: 0px;
+}
+
+<div
+  class="emotion-7"
+>
+  <div
+    class="emotion-6"
+  >
+    <div
+      class="emotion-5"
+    >
+      <pre
+        class="emotion-3 emotion-4"
+      >
+        <code
+          class="lg-highlight-hljs-light emotion-2 none"
+        >
+          <table
+            class="emotion-1"
+          >
+            <tbody>
+              <tr
+                class=""
+              >
+                <td
+                  class="emotion-0"
+                >
+                  test code
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </code>
+      </pre>
+    </div>
+  </div>
+</div>
+`;

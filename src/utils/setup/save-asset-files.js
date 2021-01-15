@@ -34,7 +34,13 @@ const saveAssetFiles = async (assets, stitchClient) => {
 };
 
 const saveStaticFiles = async staticFiles => {
-  await Promise.all(Object.entries(staticFiles).map(([file, data]) => saveFile(file, data.buffer)));
+  await Promise.all(
+    Object.entries(staticFiles).map(([file, data]) => {
+      // Certain files, like manpages, may not have buffers
+      const toSave = data.buffer ? data.buffer : data;
+      return saveFile(file, toSave);
+    })
+  );
 };
 
 module.exports = { saveAssetFiles, saveStaticFiles };

@@ -3,6 +3,7 @@ import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import useMedia from '../hooks/use-media';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { isBrowser } from '../utils/is-browser';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
@@ -34,7 +35,7 @@ const getActiveSection = (slug, urlItems) => {
 const NavbarContainer = styled('div')`
   ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
 
-  ${theme.bannerContent
+  ${theme.bannerContent.enabled
     ? `top: unset !important;
 
   & > nav {
@@ -78,6 +79,8 @@ const Banner = React.memo(({ altText, imgPath, mobileImgPath, url }) => {
 });
 
 const Navbar = () => {
+  const { project } = useSiteMetadata();
+
   const [activeLink, setActiveLink] = useState('');
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
@@ -117,8 +120,8 @@ const Navbar = () => {
 
     document.body.appendChild(script);
 
-    setActiveLink(getActiveSection(process.env.GATSBY_SITE, URL_SLUGS));
-  }, []);
+    setActiveLink(getActiveSection(project, URL_SLUGS));
+  }, [project]);
 
   useEffect(() => {
     setNavprops(modifyActiveLink);
@@ -130,7 +133,7 @@ const Navbar = () => {
 
   return (
     <ConditionalWrapper
-      condition={theme.bannerContent !== null}
+      condition={theme.bannerContent.enabled}
       wrapper={children => (
         <div
           css={css`

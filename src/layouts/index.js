@@ -4,6 +4,7 @@ import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
 import { ContentsProvider } from '../components/contents-context';
 import { TabProvider } from '../components/tab-context';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
@@ -19,7 +20,7 @@ const bannerPadding = css`
 `;
 
 const globalCSS = css`
-  ${theme.bannerContent ? bannerPadding : ''}
+  ${theme.bannerContent.enabled ? bannerPadding : ''}
   .contains-headerlink::before {
     content: '';
     display: block;
@@ -48,6 +49,7 @@ const PageNotFoundLayout = props => {
 
 const DefaultLayout = props => {
   const { children, pageContext } = props;
+  const { project } = useSiteMetadata();
 
   if (pageContext.layout === '404') {
     return PageNotFoundLayout(props);
@@ -59,7 +61,7 @@ const DefaultLayout = props => {
     slug,
     template,
   } = pageContext;
-  const Template = getTemplate(template, slug);
+  const Template = getTemplate(project, slug, template);
   return (
     <>
       {/* Anchor-link styling to compensate for navbar height */}
