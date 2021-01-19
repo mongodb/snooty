@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import ComponentFactory from './ComponentFactory';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 
@@ -17,9 +18,15 @@ const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
           <ComponentFactory nodeData={child} key={`dt-${index}`} />
         ))}
       </dt>
-      <dd>
+      <dd
+        css={css`
+          p:first-child {
+            margin-top: 0 !important;
+          }
+        `}
+      >
         {children.map((child, index) => (
-          <ComponentFactory {...rest} nodeData={child} key={`dd-${index}`} parentNode="definitionListItem" />
+          <ComponentFactory {...rest} nodeData={child} key={`dd-${index}`} skipPTag={children.length === 1} />
         ))}
       </dd>
     </>
