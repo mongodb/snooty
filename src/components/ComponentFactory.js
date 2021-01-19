@@ -69,9 +69,9 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
-const IGNORED_NAMES = ['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector', 'contents'];
-const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target', 'named_reference'];
-const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
+const IGNORED_NAMES = new Set(['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector', 'contents']);
+const IGNORED_TYPES = new Set(['comment', 'substitution_definition', 'inline_target', 'named_reference']);
+const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
 
 const roleMap = {
   abbr: RoleAbbr,
@@ -165,7 +165,7 @@ const ComponentFactory = props => {
   const selectComponent = () => {
     const { domain, name, type } = nodeData;
 
-    if (IGNORED_TYPES.includes(type) || IGNORED_NAMES.includes(name)) {
+    if (IGNORED_TYPES.has(type) || IGNORED_NAMES.has(name)) {
       return null;
     }
 
@@ -181,7 +181,7 @@ const ComponentFactory = props => {
     }
 
     // Various admonition types are all handled by the Admonition component
-    if (DEPRECATED_ADMONITIONS.includes(name) || Object.keys(admonitionMap).includes(name)) {
+    if (DEPRECATED_ADMONITIONS.has(name) || Object.keys(admonitionMap).includes(name)) {
       ComponentType = componentMap.admonition;
     }
 
