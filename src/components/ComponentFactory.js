@@ -181,7 +181,7 @@ const ComponentFactory = props => {
     }
 
     // Various admonition types are all handled by the Admonition component
-    if (DEPRECATED_ADMONITIONS.has(name) || Object.keys(admonitionMap).includes(name)) {
+    if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
       ComponentType = componentMap.admonition;
     }
 
