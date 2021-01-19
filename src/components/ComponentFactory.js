@@ -70,7 +70,7 @@ import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = ['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector', 'contents'];
-const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target'];
+const IGNORED_TYPES = ['comment', 'substitution_definition', 'inline_target', 'named_reference'];
 const DEPRECATED_ADMONITIONS = ['admonition', 'topic', 'caution', 'danger'];
 
 const roleMap = {
