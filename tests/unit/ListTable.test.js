@@ -75,16 +75,13 @@ describe('when rendering a list-table directive', () => {
     ).toHaveLength(1);
   });
 
-  it('applies the class passed in as an option', () => {
-    expect(wrapper.find('.guide-tablenate').hostNodes()).toHaveLength(1);
-  });
-
-  it('applies a class based on the widths property', () => {
-    expect(wrapper.find('.colwidths-auto').hostNodes()).toHaveLength(1);
-  });
-
-  it('renders one stub column', () => {
-    expect(wrapper.find('.stub')).toHaveLength(6);
+  it('renders one stub column in the body', () => {
+    expect(
+      wrapper
+        .find('th')
+        .parent()
+        .filterWhere(p => p.is('Cell'))
+    ).toHaveLength(5);
   });
 });
 
@@ -116,7 +113,7 @@ describe('when rendering a list table with fixed widths', () => {
       wrapper
         .find('tbody')
         .children()
-        .find('tr')
+        .find('Row')
     ).toHaveLength(1);
   });
 
@@ -130,18 +127,6 @@ describe('when rendering a list table with fixed widths', () => {
         .children()
         .find('td')
     ).toHaveLength(6);
-  });
-
-  it('applies the class passed in as an option', () => {
-    expect(wrapper.find('.guide-tablenate-odd').hostNodes()).toHaveLength(1);
-  });
-
-  it('applies a class based on the widths property', () => {
-    expect(wrapper.find('.colwidths-given').hostNodes()).toHaveLength(1);
-  });
-
-  it('displays a colgroup element', () => {
-    expect(wrapper.find('colgroup')).toHaveLength(1);
   });
 
   it('displays columns with set widths', () => {
