@@ -66,7 +66,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   return (
     <StyledTabs as={TabButton} isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
       {children.map(tab => {
-        if (tab.type !== 'tab') {
+        if (tab.name !== 'tab') {
           return null;
         }
 

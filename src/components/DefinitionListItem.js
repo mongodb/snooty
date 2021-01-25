@@ -20,7 +20,7 @@ const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
       </dt>
       <dd
         css={css`
-          p:first-child {
+          p:first-of-type {
             margin-top: 0 !important;
           }
         `}
