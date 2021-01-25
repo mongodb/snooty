@@ -1,13 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DefinitionList renders correctly 1`] = `
+.emotion-0 p:first-of-type {
+  margin-top: 0 !important;
+}
+
 <dl>
   <dt>
     <code>
       MongoDefaultPartitioner
     </code>
   </dt>
-  <dd>
+  <dd
+    class="emotion-0"
+  >
     <strong>
       Default
     </strong>
