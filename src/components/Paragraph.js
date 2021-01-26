@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const SKIP_P_TAGS = ['caption', 'listItem', 'listTable', 'footnote', 'definitionListItem', 'field'];
+const SKIP_P_TAGS = new Set(['caption', 'listItem', 'listTable', 'footnote', 'field']);
 
-const Paragraph = ({ nodeData, parentNode, ...rest }) => {
+const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
   // For paragraph nodes that appear inside certain containers, skip <p> tags and just render their contents
-  if (SKIP_P_TAGS.includes(parentNode)) {
+  if (skipPTag || SKIP_P_TAGS.has(parentNode)) {
     return nodeData.children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
   }
   return (
@@ -28,6 +28,7 @@ Paragraph.propTypes = {
     ).isRequired,
   }).isRequired,
   parentNode: PropTypes.string,
+  skipPTag: PropTypes.bool,
 };
 
 Paragraph.defaultProps = {
