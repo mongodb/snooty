@@ -37,7 +37,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <link rel="stylesheet" href={withPrefix('docs-tools/navbar.min.css')} type="text/css" />
       {/* dangerouslySetInnerHTML is necessary to prevent escaped JS, and is safe because it's a constant string */}
       {/* eslint-disable-next-line react/no-danger */}
-      {process.env.GATSBY_SITE === 'drivers' && (
+      {process.env.GATSBY_SITE === 'node' && (
         <script
           type="text/javascript"
           dangerouslySetInnerHTML={{
