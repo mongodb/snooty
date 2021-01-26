@@ -35,7 +35,7 @@ const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
   if (name === 'see') {
     title = `See: ${title}`;
   } else if (name === 'seealso') {
-    title = `See Also: ${title}`;
+    title = `See also: ${title}`;
   }
 
   return (
