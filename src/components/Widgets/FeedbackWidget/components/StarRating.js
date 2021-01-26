@@ -9,6 +9,15 @@ import loadable from '@loadable/component';
 import { StarIcon } from '../icons';
 const Tooltip = loadable(() => import('./LeafygreenTooltip'));
 
+// Given a string, convert all regular space characters to non-breaking spaces
+function convertSpacesToNbsp(someString) {
+  const nbsp = '\xa0';
+  return someString
+    .split('')
+    .map(c => (c === ' ' ? nbsp : c))
+    .join('');
+}
+
 const FILLED_STAR_COLOR = uiColors.yellow.base;
 const UNFILLED_STAR_COLOR = uiColors.gray.light2;
 export const RATING_TOOLTIPS = {
@@ -72,7 +81,7 @@ export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onCl
           </StarContainer>
         }
       >
-        {`${RATING_TOOLTIPS[ratingValue]} helpful`}
+        {convertSpacesToNbsp(`${RATING_TOOLTIPS[ratingValue]} helpful`)}
       </Tooltip>
     </div>
   );
