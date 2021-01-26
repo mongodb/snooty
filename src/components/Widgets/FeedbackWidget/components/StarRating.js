@@ -61,6 +61,7 @@ export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onCl
         justify="middle"
         triggerEvent="hover"
         open={shouldShowTooltip}
+        usePortal={false}
         trigger={
           <StarContainer>
             <StarIcon
