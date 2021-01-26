@@ -12,10 +12,7 @@ const Tooltip = loadable(() => import('./LeafygreenTooltip'));
 // Given a string, convert all regular space characters to non-breaking spaces
 function convertSpacesToNbsp(someString) {
   const nbsp = '\xa0';
-  return someString
-    .split('')
-    .map(c => (c === ' ' ? nbsp : c))
-    .join('');
+  return someString.replace(/\s/g, nbsp);
 }
 
 const FILLED_STAR_COLOR = uiColors.yellow.base;
