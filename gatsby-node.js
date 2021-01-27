@@ -6,6 +6,7 @@ const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
+const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { DOCUMENTS_COLLECTION, METADATA_COLLECTION } = require('./src/build-constants');
 
 const DB = siteMetadata.database;
@@ -102,7 +103,7 @@ exports.createPages = async ({ actions }) => {
       const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
-          path: slug,
+          path: assertTrailingSlash(slug),
           component: path.resolve(__dirname, './src/components/DocumentBody.js'),
           context: {
             metadata,

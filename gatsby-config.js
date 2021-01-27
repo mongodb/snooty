@@ -7,6 +7,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
     'gatsby-plugin-layout',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
