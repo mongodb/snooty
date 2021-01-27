@@ -30,7 +30,7 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
             </h3>
             {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
           </div>
-          <TableOfContents toctreeData={toctreeData} height={fixedHeight} />
+          <TableOfContents toctreeData={toctreeData} height={fixedHeight} activeSection={slug} />
         </div>
       </div>
     </aside>

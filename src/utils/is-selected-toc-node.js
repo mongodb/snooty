@@ -1,4 +1,4 @@
-import { endsWith } from './ends-with';
+import { isCurrentPage } from './is-current-page';
 
 /*
   Provided the current url and a node slug, returns true if the user is on this
@@ -6,5 +6,5 @@ import { endsWith } from './ends-with';
 */
 export const isSelectedTocNode = (currentUrl, slug) => {
   if (currentUrl === undefined) return false;
-  return endsWith(currentUrl, slug) || endsWith(currentUrl, `${slug}/`);
+  return isCurrentPage(currentUrl, slug);
 };
