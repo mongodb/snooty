@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
@@ -13,6 +13,7 @@ import { TabContext } from './tab-context';
 import URIText from './URIWriter/URIText';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
+import { reportAnalytics } from '../utils/report-analytics';
 
 const URI_PLACEHOLDERS = [
   URI_PLACEHOLDER,
@@ -54,6 +55,10 @@ const Code = ({
     if (isBrowser) code = htmlDecode(code);
   }
 
+  const reportCodeCopied = useCallback(() => {
+    reportAnalytics('CodeblockCopied', { code });
+  }, [code]);
+
   return (
     <div
       css={css`
@@ -65,6 +70,7 @@ const Code = ({
       `}
     >
       <CodeBlock
+        chromeTitle={caption ? caption : ''}
         copyable={copyable}
         css={css`
           & * {
@@ -84,9 +90,9 @@ const Code = ({
         `}
         highlightLines={emphasizeLines}
         language={getLanguage(lang)}
+        onCopy={reportCodeCopied}
         showLineNumbers={linenos}
         showWindowChrome={caption ? true : false}
-        chromeTitle={caption ? caption : ''}
       >
         {code}
       </CodeBlock>
