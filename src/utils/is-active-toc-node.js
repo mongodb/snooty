@@ -1,4 +1,4 @@
-import { endsWith } from './ends-with';
+import { isCurrentPage } from './is-current-page';
 /*
   Provided a current page slug, a slug, and a list of node children, returns
   true if either the given slug matches the current page slug or one of its children
@@ -6,7 +6,7 @@ import { endsWith } from './ends-with';
 */
 export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
-  if (endsWith(currentUrl, slug) || endsWith(currentUrl, `${slug}/`)) return true;
+  if (isCurrentPage(currentUrl, slug)) return true;
   if (children) {
     return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.slug, b.children), false);
   }
