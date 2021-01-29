@@ -1,8 +1,9 @@
 const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
 
+const pathPrefix = generatePathPrefix(siteMetadata);
+
 module.exports = {
-  pathPrefix: generatePathPrefix(siteMetadata),
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
@@ -14,6 +15,13 @@ module.exports = {
         includeInDevelopment: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `${siteMetadata.siteUrl}${pathPrefix}`,
+      },
+    },
   ],
+  pathPrefix,
   siteMetadata,
 };
