@@ -31,12 +31,10 @@ const globalCSS = css`
   }
 `;
 
-const PageNotFoundLayout = props => {
+const PageNotFoundLayout = (project, props) => {
   const { children, pageContext } = props;
-  const { slug } = pageContext;
-  const template = 'landing';
-
-  const Template = getTemplate(template, slug);
+  const { slug, template } = pageContext;
+  const Template = getTemplate(project, slug, template);
 
   return (
     <>
@@ -52,7 +50,7 @@ const DefaultLayout = props => {
   const { project } = useSiteMetadata();
 
   if (pageContext.layout === '404') {
-    return PageNotFoundLayout(props);
+    return PageNotFoundLayout(project, props);
   }
 
   const {
