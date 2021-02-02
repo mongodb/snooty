@@ -67,8 +67,8 @@ const DefaultLayout = props => {
       {/* Anchor-link styling to compensate for navbar height */}
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <TabProvider selectors={getNestedValue(['ast', 'options', 'selectors'], page)}>
-        <ContentsProvider nodes={getNestedValue(['ast', 'children'], page)}>
+      <TabProvider selectors={page?.options?.selectors}>
+        <ContentsProvider nodes={page?.children}>
           <Template {...props}>{template === 'landing' ? [children] : children}</Template>
         </ContentsProvider>
       </TabProvider>
@@ -81,9 +81,7 @@ DefaultLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
     page: PropTypes.shape({
-      ast: PropTypes.shape({
-        options: PropTypes.object,
-      }).isRequired,
+      options: PropTypes.object,
     }).isRequired,
     slug: PropTypes.string,
     template: PropTypes.string,
