@@ -93,8 +93,13 @@ const StyledResultTitle = styled('p')`
   }
 `;
 
+const escapeRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 const highlightSearchTerm = (text, searchTerm) =>
-  text.replace(new RegExp(searchTerm, 'gi'), result => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`);
+  text.replace(
+    new RegExp(escapeRegExp(searchTerm), 'gi'),
+    result => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
+  );
 
 // since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
 const sanitizePreviewHtml = text =>

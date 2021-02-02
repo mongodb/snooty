@@ -10,19 +10,19 @@ import TableOfContents from '../../src/components/TableOfContents';
   Test links
 */
 
-const mountedToc = mockData => mount(<TableOfContents toctreeData={mockData} height={0} />);
+const mountedToc = (mockData, page) =>
+  mount(<TableOfContents toctreeData={mockData} height={0} activeSection={page} />);
 
 describe('Table of Contents testing', () => {
   describe('Table of Contents unit tests', () => {
     let testComponent;
 
-    const remountTOC = () => {
-      testComponent = mountedToc(mockTocData);
+    const remountTOC = page => {
+      testComponent = mountedToc(mockTocData, page);
     };
 
     const updatePageLocation = (title, newLocation) => {
-      window.history.pushState({}, title, newLocation);
-      remountTOC();
+      remountTOC(newLocation);
     };
 
     beforeEach(() => {
@@ -35,34 +35,30 @@ describe('Table of Contents testing', () => {
     });
 
     it('TOC exists with proper number of sections and nodes per section', () => {
-      expect(window.location.pathname).toBe('/');
       // Child list of sections
       expect(testComponent.find('ul.current')).toHaveLength(1);
       // Child sections themselves
       expect(testComponent.find('ul li.toctree-l1')).toHaveLength(4);
       // Number in section
       expect(testComponent.find('.toctree-l2')).toHaveLength(0);
-      updatePageLocation('Drivers', '/drivers');
-      expect(window.location.pathname).toBe('/drivers');
+      updatePageLocation('Drivers', 'drivers');
       const numDriverNodes = mockTocData.children[0].children.length;
       expect(testComponent.find('.toctree-l2')).toHaveLength(numDriverNodes);
     });
 
     describe('TOC navigation should render and work as expected', () => {
       it('TOC slugs work as expected', () => {
-        expect(window.location.pathname).toBe('/');
         const testTOCLink = testComponent.find('ul li.toctree-l1 .reference').first();
         expect(testTOCLink.hasClass('internal')).toBe(true);
         expect(testTOCLink.prop('to')).toBe('drivers');
         expect(testComponent.find('.toctree-l2')).toHaveLength(0);
-        updatePageLocation('Drivers', '/drivers');
-        expect(window.location.pathname).toBe('/drivers');
+        updatePageLocation('Drivers', 'drivers');
         const numDriverNodes = mockTocData.children[0].children.length;
         expect(testComponent.find('.toctree-l2')).toHaveLength(numDriverNodes);
       });
 
       it('TOC external navigation (urls) should work as expected', () => {
-        updatePageLocation('Tools', '/tools');
+        updatePageLocation('Tools', 'tools');
         const biConnectorLink = testComponent
           .find('.toctree-l2')
           .first()
@@ -84,7 +80,6 @@ describe('Table of Contents testing', () => {
         drawer.simulate('click');
         const numUseCasesNodes = mockTocData.children[3].children.length;
         expect(testComponent.find('.toctree-l2')).toHaveLength(numUseCasesNodes);
-        expect(window.location.pathname).toBe('/');
         const otherDrawer = testComponent
           .find('.toctree-l1')
           .at(2)

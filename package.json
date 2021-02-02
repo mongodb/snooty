@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.8.5",
+  "version": "0.9.0",
   "repository": "github:mongodb/snooty",
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -69,10 +69,12 @@
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
     "gatsby": "^2.29.3",
+    "gatsby-plugin-canonical-urls": "^2.9.0",
     "gatsby-plugin-emotion": "^4.5.0",
     "gatsby-plugin-google-tagmanager": "^2.8.0",
     "gatsby-plugin-layout": "^1.7.0",
     "gatsby-plugin-react-helmet": "^3.7.0",
+    "gatsby-plugin-sitemap": "^2.11.0",
     "html-screen-capture-js": "^1.0.50",
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-server-sdk": "^4.8.0",
