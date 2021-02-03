@@ -5,7 +5,7 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const Index = ({ pageContext: { guidesMetadata, page } }) => {
-  const guides = findKeyValuePair(getNestedValue(['ast', 'children'], page), 'name', 'guide-index') || [];
+  const guides = findKeyValuePair(getNestedValue(['children'], page), 'name', 'guide-index') || [];
 
   return (
     <div className="content">
@@ -28,9 +28,7 @@ Index.propTypes = {
   pageContext: PropTypes.shape({
     guidesMetadata: PropTypes.objectOf(PropTypes.object).isRequired,
     page: PropTypes.shape({
-      ast: PropTypes.shape({
-        children: PropTypes.array,
-      }).isRequired,
+      children: PropTypes.array,
     }).isRequired,
   }).isRequired,
 };

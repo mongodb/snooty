@@ -23,7 +23,7 @@ const Document = ({
   const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
-  const pageOptions = getNestedValue(['ast', 'options'], page);
+  const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const showRightColumn = !isTabletOrMobile;
 
@@ -82,9 +82,8 @@ const Document = ({
 Document.propTypes = {
   pageContext: PropTypes.shape({
     page: PropTypes.shape({
-      ast: PropTypes.shape({
-        children: PropTypes.array,
-      }).isRequired,
+      children: PropTypes.array,
+      options: PropTypes.object,
     }).isRequired,
     parentPaths: PropTypes.arrayOf(PropTypes.string),
     slug: PropTypes.string.isRequired,
