@@ -5,7 +5,6 @@ import SiteMetadata from '../components/site-metadata';
 import { ContentsProvider } from '../components/contents-context';
 import { TabProvider } from '../components/tab-context';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
