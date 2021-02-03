@@ -336,12 +336,12 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
             <mockConstructor
               aria-expanded={false}
               className="reference  internal"
-              to="/drivers"
+              to="/drivers/"
             >
               <a
                 aria-expanded={false}
                 className="reference  internal"
-                href="/drivers"
+                href="/drivers/"
               >
                 MongoDB Drivers and ODM
               </a>
@@ -389,12 +389,12 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
             <mockConstructor
               aria-expanded={false}
               className="reference  internal"
-              to="/tools"
+              to="/tools/"
             >
               <a
                 aria-expanded={false}
                 className="reference  internal"
-                href="/tools"
+                href="/tools/"
               >
                 MongoDB Integration and Tools
               </a>

@@ -16,7 +16,7 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
       class="guide__entry"
     >
       <a
-        href="/server/insert"
+        href="/server/insert/"
       >
         Insert Data into MongoDB
       </a>
@@ -25,7 +25,7 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
       class="guide__entry"
     >
       <a
-        href="/server/read"
+        href="/server/read/"
       >
         Read Data from MongoDB
       </a>
@@ -34,7 +34,7 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
       class="guide__entry"
     >
       <a
-        href="/server/read_queries"
+        href="/server/read_queries/"
       >
         Read Data from MongoDB With Queries
       </a>
@@ -43,7 +43,7 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
       class="guide__entry"
     >
       <a
-        href="/server/read_operators"
+        href="/server/read_operators/"
       >
         Read Data using Operators and Compound Queries
       </a>
@@ -52,7 +52,7 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
       class="guide__entry"
     >
       <a
-        href="/server/update"
+        href="/server/update/"
       >
         Update Data in MongoDB
       </a>
@@ -61,7 +61,7 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
       class="guide__entry"
     >
       <a
-        href="/server/delete"
+        href="/server/delete/"
       >
         Delete Data from MongoDB
       </a>
@@ -73,7 +73,7 @@ exports[`Card component when a multi card is mounted renders correctly 1`] = `
 exports[`Card component when a standard card is mounted renders correctly 1`] = `
 <a
   class="guide guide--regular"
-  href="/server/install"
+  href="/server/install/"
 >
   <div
     class="guide__title"

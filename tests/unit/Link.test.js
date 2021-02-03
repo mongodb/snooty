@@ -19,4 +19,19 @@ describe('Link component renders a variety of strings correctly', () => {
     const tree = setup({ to: 'drivers/c', text: 'C Driver', className: 'test-class' });
     expect(tree).toMatchSnapshot();
   });
+
+  it('internal link with hash', () => {
+    const tree = setup({ to: 'drivers/pymongo#installation', text: 'C Driver', className: 'test-class' });
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('internal link query param', () => {
+    const tree = setup({ to: 'drivers/ruby?site=drivers', text: 'C Driver', className: 'test-class' });
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('internal link that already includes trailing slash', () => {
+    const tree = setup({ to: 'drivers/nodejs/#installation', text: 'C Driver', className: 'test-class' });
+    expect(tree).toMatchSnapshot();
+  });
 });
