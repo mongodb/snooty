@@ -86,19 +86,19 @@ exports.sourceNodes = async () => {
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
-  const [, metadata] = await Promise.all([
+  const [, { static_files: staticFiles, ...metadataMinusStatic }] = await Promise.all([
     saveAssetFiles(assets, stitchClient),
     stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
   ]);
 
   // Save files in the static_files field of metadata document, including intersphinx inventories
-  if (metadata.static_files) {
-    await saveStaticFiles(metadata.static_files);
+  if (staticFiles) {
+    await saveStaticFiles(staticFiles);
   }
 
   return new Promise((resolve, reject) => {
     PAGES.forEach(page => {
-      const pageNodes = RESOLVED_REF_DOC_MAPPING[page];
+      const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
 
       const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
@@ -106,9 +106,9 @@ exports.createPages = async ({ actions }) => {
           path: assertTrailingSlash(slug),
           component: path.resolve(__dirname, './src/components/DocumentBody.js'),
           context: {
-            metadata,
             slug,
-            template: getNestedValue(['ast', 'options', 'template'], pageNodes),
+            metadata: metadataMinusStatic,
+            template: pageNodes?.options?.template,
             page: pageNodes,
             guidesMetadata: GUIDES_METADATA,
           },
@@ -125,10 +125,8 @@ exports.createPages = async ({ actions }) => {
         component: path.resolve(__dirname, './src/components/NotFound.js'),
         context: {
           layout: '404',
-          metadata,
-          page: {
-            ast: {},
-          },
+          metadata: metadataMinusStatic,
+          page: {},
           slug,
         },
       });

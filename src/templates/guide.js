@@ -19,7 +19,7 @@ export default class Guide extends Component {
     } = this.props;
 
     // get data from server
-    this.sections = getNestedValue(['ast', 'children', 0, 'children'], page);
+    this.sections = getNestedValue(['children', 0, 'children'], page);
     this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
 
     this.state = {
@@ -135,9 +135,7 @@ export default class Guide extends Component {
 Guide.propTypes = {
   pageContext: PropTypes.shape({
     page: PropTypes.shape({
-      ast: PropTypes.shape({
-        children: PropTypes.array,
-      }).isRequired,
+      children: PropTypes.array,
     }).isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
