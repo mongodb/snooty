@@ -26,7 +26,7 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug }) =>
       // :doc: link
       link = filename;
     } else {
-      link = `${filename}#${html_id}`;
+      link = `${filename}/#${html_id}`;
     }
   }
 

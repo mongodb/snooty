@@ -13,7 +13,7 @@ exports[`renders correctly 1`] = `
   <ul>
     <li>
       <a
-        href="/drivers"
+        href="/drivers/"
       >
         MongoDB Drivers and ODM
       </a>
@@ -25,7 +25,7 @@ exports[`renders correctly 1`] = `
     </li>
     <li>
       <a
-        href="/drivers/php"
+        href="/drivers/php/"
       >
         MongoDB PHP Driver
       </a>
