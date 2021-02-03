@@ -19,7 +19,34 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 exports[`Link component renders a variety of strings correctly internal link 1`] = `
 <a
   class="test-class"
-  href="/drivers/c"
+  href="/drivers/c/"
+>
+  C Driver
+</a>
+`;
+
+exports[`Link component renders a variety of strings correctly internal link query param 1`] = `
+<a
+  class="test-class"
+  href="/drivers/ruby/?site=drivers"
+>
+  C Driver
+</a>
+`;
+
+exports[`Link component renders a variety of strings correctly internal link that already includes trailing slash 1`] = `
+<a
+  class="test-class"
+  href="/drivers/nodejs/#installation"
+>
+  C Driver
+</a>
+`;
+
+exports[`Link component renders a variety of strings correctly internal link with hash 1`] = `
+<a
+  class="test-class"
+  href="/drivers/pymongo/#installation"
 >
   C Driver
 </a>

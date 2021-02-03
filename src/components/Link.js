@@ -18,6 +18,10 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
   // Use Gatsby Link for internal links, and <a> for others
   if (to && !external && !anchor) {
     if (!to.startsWith('/')) to = `/${to}`;
+
+    // Ensure trailing slash
+    to = to.replace(/\/?(\?|#|$)/, '/$1');
+
     return (
       <GatsbyLink to={to} activeClassName={activeClassName} partiallyActive={partiallyActive} {...other}>
         {children}
