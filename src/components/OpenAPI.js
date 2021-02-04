@@ -1,34 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SwaggerUI from 'swagger-ui-react';
-import 'swagger-ui-react/swagger-ui.css';
+import { RedocStandalone } from 'redoc';
 import ComponentFactory from './ComponentFactory';
-import { getNestedValue } from '../utils/get-nested-value';
 
-const OpenAPI = ({ nodeData: { children, options = {} }, ...rest }) => {
-  const swagger_parse = getNestedValue(['swagger-parse'], options);
-  if (swagger_parse) {
-    if (children.length !== 1) {
-      return null;
-    }
-    const spec = JSON.parse(children[0].value);
-    return <SwaggerUI spec={spec} />;
+const OpenAPI = ({ nodeData: { argument, children, options = {} }, ...rest }) => {
+  const parse_method = options?.['parse-method'];
+  if (parse_method === 'snooty') {
+    return (
+      <>
+        {children.map((node, i) => (
+          <ComponentFactory {...rest} key={i} nodeData={node} />
+        ))}
+      </>
+    );
   }
 
+  const isParseUrl = parse_method === 'url';
+  const source = isParseUrl ? argument[0] : children[0];
+  if (!source) {
+    return null;
+  }
+  const specOrUrl = isParseUrl ? source.refuri : JSON.parse(source.value);
+
   return (
-    <>
-      {children.map((node, i) => (
-        <ComponentFactory {...rest} key={i} nodeData={node} />
-      ))}
-    </>
+    <RedocStandalone
+      options={{
+        maxDisplayedEnumValues: 5,
+      }}
+      spec={specOrUrl}
+      specUrl={specOrUrl}
+    />
   );
 };
 
 OpenAPI.propTypes = {
   nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
     options: PropTypes.shape({
-      swagger_parse: PropTypes.bool,
+      parse_method: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
