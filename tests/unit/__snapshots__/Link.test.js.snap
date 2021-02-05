@@ -16,6 +16,14 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 </a>
 `;
 
+exports[`Link component renders a variety of strings correctly identfies mailto links as external urls 1`] = `
+<a
+  href="mailto:docs@mongodb.com"
+>
+  docs@mongodb.com
+</a>
+`;
+
 exports[`Link component renders a variety of strings correctly internal link 1`] = `
 <a
   class="test-class"

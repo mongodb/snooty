@@ -34,4 +34,9 @@ describe('Link component renders a variety of strings correctly', () => {
     const tree = setup({ to: 'drivers/nodejs/#installation', text: 'C Driver', className: 'test-class' });
     expect(tree).toMatchSnapshot();
   });
+
+  it('identfies mailto links as external urls', () => {
+    const tree = setup({ to: 'mailto:docs@mongodb.com', text: 'docs@mongodb.com' });
+    expect(tree).toMatchSnapshot();
+  });
 });
