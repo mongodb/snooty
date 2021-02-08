@@ -4,8 +4,10 @@ import { RedocStandalone } from 'redoc';
 import ComponentFactory from './ComponentFactory';
 
 const OpenAPI = ({ nodeData: { argument, children, options = {} }, ...rest }) => {
-  const parse_method = options?.['parse-method'];
-  if (parse_method === 'snooty') {
+  const isUrl = options?.isUrl;
+  const snootyParse = options?.['snooty-parse'];
+
+  if (snootyParse) {
     return (
       <>
         {children.map((node, i) => (
@@ -15,12 +17,11 @@ const OpenAPI = ({ nodeData: { argument, children, options = {} }, ...rest }) =>
     );
   }
 
-  const isParseUrl = parse_method === 'url';
-  const source = isParseUrl ? argument[0] : children[0];
+  const source = isUrl ? argument[0] : children[0];
   if (!source) {
     return null;
   }
-  const specOrUrl = isParseUrl ? source.refuri : JSON.parse(source.value);
+  const specOrUrl = isUrl ? source.refuri : JSON.parse(source.value);
 
   return (
     <RedocStandalone
@@ -38,7 +39,8 @@ OpenAPI.propTypes = {
     argument: PropTypes.arrayOf(PropTypes.object).isRequired,
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
     options: PropTypes.shape({
-      parse_method: PropTypes.string,
+      isUrl: PropTypes.bool,
+      snooty_parse: PropTypes.bool,
     }).isRequired,
   }).isRequired,
 };
