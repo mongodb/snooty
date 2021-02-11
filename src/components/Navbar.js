@@ -55,9 +55,7 @@ const NavLabel = styled('div')`
 const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
-  const isSearchbarDefaultExpanded = useMedia(
-    'only screen and (min-width: 670px) and (max-width: 1200px), (min-width: 1300px)'
-  );
+  const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
 
   const onSearchbarExpand = useCallback(
