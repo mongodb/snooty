@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import { getNestedValue } from '../utils/get-nested-value';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
@@ -7,6 +8,7 @@ import Sidebar from '../components/Sidebar';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
 import Contents from '../components/Contents';
+import MainColumn from '../components/MainColumn';
 import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
@@ -36,38 +38,39 @@ const Document = ({
 
   return (
     <div className="content">
-      <div>
-        {(!isBrowser || showLeftColumn) && (
-          <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
-            <Sidebar
-              slug={slug}
-              publishedBranches={publishedBranches}
-              toctreeData={toctree}
-              toggleLeftColumn={toggleLeftColumn}
-            />
-          </div>
-        )}
-      </div>
-      <div id="main-column" className="main-column">
+      {(!isBrowser || showLeftColumn) && (
+        <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
+          <Sidebar
+            slug={slug}
+            publishedBranches={publishedBranches}
+            toctreeData={toctree}
+            toggleLeftColumn={toggleLeftColumn}
+          />
+        </div>
+      )}
+      <MainColumn>
         {(!isBrowser || !showLeftColumn) && (
           <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
             Navigation
           </span>
         )}
-        <div className="document">
-          <div className="documentwrapper">
-            <div className="bodywrapper">
-              <div className="body">
-                <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-                <div>{children}</div>
-                {showPrevNext && (
-                  <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
-                )}
-              </div>
-            </div>
-          </div>
+        <div
+          className="body"
+          css={css`
+            margin-left: 25px;
+
+            @media print {
+              margin: 0 !important;
+            }
+          `}
+        >
+          <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
+          {children}
+          {showPrevNext && (
+            <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+          )}
         </div>
-      </div>
+      </MainColumn>
       <RightColumn>
         <TabSelectors />
         <Contents />
