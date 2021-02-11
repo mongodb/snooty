@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 
-const MainColumn = ({ children }) => (
+const MainColumn = ({ className, children }) => (
   <div
+    className={className}
     css={css`
       align-items: center;
       display: inline-block;
@@ -32,6 +33,7 @@ const MainColumn = ({ children }) => (
 );
 
 MainColumn.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.array,
 };
 
