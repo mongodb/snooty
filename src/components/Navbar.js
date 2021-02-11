@@ -6,6 +6,7 @@ import useMedia from '../hooks/use-media';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
 import Searchbar from './Searchbar';
+import { theme } from '../theme/docsTheme';
 
 const NavbarContainer = styled('div')`
   ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
@@ -14,16 +15,25 @@ const NavbarContainer = styled('div')`
   box-shadow: 0 2px 2px 0 #e7eeec;
   display: flex;
   height: 45px;
+  justify-content: flex-start;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 9999;
+
+  @media ${theme.screenSize.upToSmall} {
+    justify-content: center;
+  }
 `;
 
 const NavbarLeft = styled('div')`
   align-items: center;
   display: flex;
   padding-left: 20px;
+
+  @media ${theme.screenSize.upToSmall} {
+    padding-left: 0px;
+  }
 `;
 
 const NavSeparator = styled('span')`
