@@ -83,6 +83,7 @@ const Navbar = () => {
           <img
             css={css`
               height: 23px;
+              width: 90px;
             `}
             alt="MongoDB Logo"
             src={withPrefix('assets/mongodb-logo.png')}
