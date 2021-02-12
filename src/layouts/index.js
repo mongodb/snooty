@@ -28,6 +28,15 @@ const globalCSS = css`
     position: relative;
     width: 0;
   }
+
+  .hidden {
+    display: inherit !important;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden !important;
+    width: 0;
+  }
 `;
 
 const PageNotFoundLayout = props => {
