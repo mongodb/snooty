@@ -37,6 +37,7 @@ const ExpandButton = styled(IconButton)`
   }
 
   @media ${theme.screenSize.upToSmall} {
+    // Update position to let navbar layout space things out more evenly on mobile
     position: relative;
   }
 `;
