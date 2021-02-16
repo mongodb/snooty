@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
 import { ContentsProvider } from '../components/contents-context';
+import { SidebarContextProvider } from '../components/sidebar-context';
 import { TabProvider } from '../components/tab-context';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme.js';
@@ -54,11 +55,13 @@ const DefaultLayout = props => {
     <>
       {/* Anchor-link styling to compensate for navbar height */}
       <Global styles={globalCSS} />
-      <Header />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
         <ContentsProvider nodes={page?.children}>
-          <Template {...props}>{template === 'landing' ? [children] : children}</Template>
+          <SidebarContextProvider>
+            <Header />
+            <Template {...props}>{template === 'landing' ? [children] : children}</Template>
+          </SidebarContextProvider>
         </ContentsProvider>
       </TabProvider>
     </>

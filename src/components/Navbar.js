@@ -7,10 +7,12 @@ import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from
 import { searchParamsToURL } from '../utils/search-params-to-url';
 import Searchbar from './Searchbar';
 import { theme } from '../theme/docsTheme';
+import SidebarMobileMenuButton from './SidebarMobileMenuButton';
 
 const NavbarContainer = styled('div')`
   ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
 
+  align-items: center;
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   display: flex;
@@ -22,7 +24,7 @@ const NavbarContainer = styled('div')`
   z-index: 9999;
 
   @media ${theme.screenSize.upToSmall} {
-    justify-content: center;
+    justify-content: space-evenly;
   }
 `;
 
@@ -78,6 +80,7 @@ const Navbar = () => {
       shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
       tabIndex="0"
     >
+      <SidebarMobileMenuButton />
       <NavbarLeft>
         <a href="https://mongodb.com">
           <img
@@ -92,14 +95,16 @@ const Navbar = () => {
         <NavSeparator></NavSeparator>
         <NavLabel>Documentation</NavLabel>
       </NavbarLeft>
-      <Searchbar
-        getResultsFromJSON={getSearchbarResultsFromJSON}
-        isExpanded={isSearchbarExpanded}
-        setIsExpanded={onSearchbarExpand}
-        searchParamsToURL={searchParamsToURL}
-        // Autofocus the searchbar when the user expands only so the user can start typing
-        shouldAutofocus={!isSearchbarDefaultExpanded}
-      />
+      <div>
+        <Searchbar
+          getResultsFromJSON={getSearchbarResultsFromJSON}
+          isExpanded={isSearchbarExpanded}
+          setIsExpanded={onSearchbarExpand}
+          searchParamsToURL={searchParamsToURL}
+          // Autofocus the searchbar when the user expands only so the user can start typing
+          shouldAutofocus={!isSearchbarDefaultExpanded}
+        />
+      </div>
     </NavbarContainer>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -12,6 +12,7 @@ import MainColumn from '../components/MainColumn';
 import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
+import { SidebarContext } from '../components/sidebar-context';
 
 const Document = ({
   children,
@@ -23,6 +24,7 @@ const Document = ({
 }) => {
   const { isTabletOrMobile } = useScreenSize();
   const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
+  const { isMobileMenuOpen } = useContext(SidebarContext);
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
   const pageOptions = page?.options;
@@ -38,7 +40,7 @@ const Document = ({
 
   return (
     <div className="content">
-      {(!isBrowser || showLeftColumn) && (
+      {(!isBrowser || showLeftColumn || isMobileMenuOpen) && (
         <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
           <Sidebar
             slug={slug}
@@ -49,7 +51,7 @@ const Document = ({
         </div>
       )}
       <MainColumn>
-        {(!isBrowser || !showLeftColumn) && (
+        {(!isBrowser || !showLeftColumn) && !isMobileMenuOpen && (
           <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
             Navigation
           </span>
