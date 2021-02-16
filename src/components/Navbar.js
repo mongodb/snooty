@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import useMedia from '../hooks/use-media';
@@ -8,6 +7,7 @@ import { searchParamsToURL } from '../utils/search-params-to-url';
 import Searchbar from './Searchbar';
 import { theme } from '../theme/docsTheme';
 import SidebarMobileMenuButton from './SidebarMobileMenuButton';
+import { Logo } from '@leafygreen-ui/logo';
 
 const NavbarContainer = styled('div')`
   align-items: center;
@@ -20,6 +20,10 @@ const NavbarContainer = styled('div')`
   top: 0;
   width: 100%;
   z-index: 9999;
+
+  :focus {
+    outline: none;
+  }
 
   @media ${theme.screenSize.upToSmall} {
     justify-content: space-evenly;
@@ -61,6 +65,7 @@ const Navbar = () => {
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
+  const imageHeight = 22;
 
   const onSearchbarExpand = useCallback(
     isExpanded => {
@@ -80,15 +85,13 @@ const Navbar = () => {
     <NavbarContainer tabIndex="0">
       <SidebarMobileMenuButton css={shouldOpaque(isSearchbarExpanded, isSearchbarDefaultExpanded)} />
       <NavbarLeft css={shouldOpaque(isSearchbarExpanded, isSearchbarDefaultExpanded)}>
-        <a href="https://mongodb.com">
-          <img
-            css={css`
-              height: 23px;
-              width: 90px;
-            `}
-            alt="MongoDB Logo"
-            src={withPrefix('assets/mongodb-logo.png')}
-          />
+        <a
+          css={css`
+            height: ${imageHeight}px;
+          `}
+          href="https://mongodb.com"
+        >
+          <Logo height={imageHeight} />
         </a>
         <NavSeparator></NavSeparator>
         <NavLabel>Documentation</NavLabel>

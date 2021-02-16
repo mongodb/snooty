@@ -6,16 +6,19 @@ import { SidebarContext } from './sidebar-context';
 import { theme } from '../theme/docsTheme';
 import { uiColors } from '@leafygreen-ui/palette';
 
+// This container prevents the leafygreen components from flashing when the media query is true
+const MenuButtonContainer = styled('div')`
+  @media ${theme.screenSize.smallAndUp} {
+    display: none;
+  }
+`;
+
 const MenuButton = styled(IconButton)`
   :focus {
     color: ${uiColors.gray.dark3};
   }
 
   :before {
-    display: none;
-  }
-
-  @media ${theme.screenSize.smallAndUp} {
     display: none;
   }
 `;
@@ -28,9 +31,11 @@ const SidebarMobileMenuButton = ({ className }) => {
   }, [setIsMobileMenuOpen]);
 
   return (
-    <MenuButton aria-label="View All Products" className={className} onClick={clickMenu}>
-      <Icon glyph={isMobileMenuOpen ? 'X' : 'Menu'} size="large" />
-    </MenuButton>
+    <MenuButtonContainer className={className}>
+      <MenuButton aria-label="View All Products" onClick={clickMenu}>
+        <Icon glyph={isMobileMenuOpen ? 'X' : 'Menu'} size="large" />
+      </MenuButton>
+    </MenuButtonContainer>
   );
 };
 
