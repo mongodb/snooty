@@ -10,8 +10,6 @@ import { theme } from '../theme/docsTheme';
 import SidebarMobileMenuButton from './SidebarMobileMenuButton';
 
 const NavbarContainer = styled('div')`
-  ${({ isExpanded, shouldOpaqueWhenExpanded }) => isExpanded && shouldOpaqueWhenExpanded && 'opacity: 0.2;'};
-
   align-items: center;
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
@@ -54,6 +52,10 @@ const NavLabel = styled('div')`
   user-select: none;
 `;
 
+const shouldOpaque = (isExpanded, isDefaultExpanded) => css`
+  ${isExpanded && !isDefaultExpanded && 'opacity: 0.2;'}
+`;
+
 const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
@@ -75,13 +77,9 @@ const Navbar = () => {
   }, [isSearchbarDefaultExpanded]);
 
   return (
-    <NavbarContainer
-      isExpanded={isSearchbarExpanded}
-      shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
-      tabIndex="0"
-    >
-      <SidebarMobileMenuButton />
-      <NavbarLeft>
+    <NavbarContainer tabIndex="0">
+      <SidebarMobileMenuButton css={shouldOpaque(isSearchbarExpanded, isSearchbarDefaultExpanded)} />
+      <NavbarLeft css={shouldOpaque(isSearchbarExpanded, isSearchbarDefaultExpanded)}>
         <a href="https://mongodb.com">
           <img
             css={css`
@@ -95,16 +93,14 @@ const Navbar = () => {
         <NavSeparator></NavSeparator>
         <NavLabel>Documentation</NavLabel>
       </NavbarLeft>
-      <div>
-        <Searchbar
-          getResultsFromJSON={getSearchbarResultsFromJSON}
-          isExpanded={isSearchbarExpanded}
-          setIsExpanded={onSearchbarExpand}
-          searchParamsToURL={searchParamsToURL}
-          // Autofocus the searchbar when the user expands only so the user can start typing
-          shouldAutofocus={!isSearchbarDefaultExpanded}
-        />
-      </div>
+      <Searchbar
+        getResultsFromJSON={getSearchbarResultsFromJSON}
+        isExpanded={isSearchbarExpanded}
+        setIsExpanded={onSearchbarExpand}
+        searchParamsToURL={searchParamsToURL}
+        // Autofocus the searchbar when the user expands only so the user can start typing
+        shouldAutofocus={!isSearchbarDefaultExpanded}
+      />
     </NavbarContainer>
   );
 };

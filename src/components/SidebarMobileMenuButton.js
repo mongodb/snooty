@@ -11,12 +11,12 @@ const MenuButton = styled(IconButton)`
   }
 `;
 
-const SidebarMobileMenuButton = () => {
+const SidebarMobileMenuButton = ({ className }) => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(SidebarContext);
   const onClick = () => setIsMobileMenuOpen(state => !state);
 
   return (
-    <MenuButton onClick={onClick}>
+    <MenuButton className={className} onClick={onClick}>
       <Icon glyph={isMobileMenuOpen ? 'X' : 'Menu'} />
     </MenuButton>
   );

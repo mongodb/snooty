@@ -49,6 +49,7 @@ const SearchbarContainer = styled('div')`
   @media ${theme.screenSize.upToSmall} {
     ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
     height: ${({ isExpanded, isSearching }) => (isExpanded && isSearching ? '100%' : SEARCHBAR_HEIGHT)};
+    ${({ isExpanded }) => !isExpanded && 'position: static;'}
     transition: unset;
     width: ${({ isExpanded }) => (isExpanded ? '100%' : BUTTON_SIZE)};
     ${({ isExpanded }) => (isExpanded ? 'left: 0' : 'right: 0')};

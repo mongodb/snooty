@@ -35,6 +35,10 @@ const ExpandButton = styled(IconButton)`
   :after {
     display: none;
   }
+
+  @media ${theme.screenSize.upToSmall} {
+    position: relative;
+  }
 `;
 
 const CondensedSearchbar = ({ onExpand }) => (
