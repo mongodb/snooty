@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
+import { theme } from '../theme/docsTheme';
 
 const RightColumn = ({ children }) => (
   <div
@@ -9,6 +10,10 @@ const RightColumn = ({ children }) => (
       margin: 70px 24px 40px 54px;
       min-width: 180px;
       order: 2;
+
+      @media ${theme.screenSize.upToLarge} {
+        display: none;
+      }
     `}
   >
     <div
