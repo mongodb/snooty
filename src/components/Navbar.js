@@ -16,6 +16,7 @@ const NavbarContainer = styled('div')`
   display: flex;
   height: 45px;
   justify-content: flex-start;
+  padding: 0px 20px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -26,18 +27,13 @@ const NavbarContainer = styled('div')`
   }
 
   @media ${theme.screenSize.upToSmall} {
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
 `;
 
 const NavbarLeft = styled('div')`
   align-items: center;
   display: flex;
-  padding-left: 20px;
-
-  @media ${theme.screenSize.upToSmall} {
-    padding-left: 0px;
-  }
 `;
 
 const NavSeparator = styled('span')`
