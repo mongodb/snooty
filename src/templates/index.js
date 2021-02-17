@@ -4,5 +4,6 @@ import DriversIndex from './ecosystem-index';
 import Guide from './guide';
 import GuidesIndex from './guides-index';
 import Landing from './landing';
+import OpenAPITemplate from './openapi';
 
-export { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing };
+export { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing, OpenAPITemplate };

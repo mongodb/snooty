@@ -90,7 +90,7 @@ export default class DocumentBody extends Component {
       pageContext: { metadata, page, slug },
     } = this.props;
     const lookup = slug === '/' ? 'index' : slug;
-    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
     const siteTitle = getNestedValue(['title'], metadata) || '';
     return (
       <>
