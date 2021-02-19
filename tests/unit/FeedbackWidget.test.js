@@ -7,6 +7,7 @@ import {
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
 import { BSON } from 'mongodb-stitch-server-sdk';
+import { matchers } from 'jest-emotion';
 
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 
@@ -18,6 +19,7 @@ import {
 } from '../utils/feedbackWidgetStitchFunctions';
 import Heading from '../../src/components/Heading';
 import headingData from './data/Heading.test.json';
+import { theme } from '../../src/theme/docsTheme';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   const { view, isSupportRequest, hideHeader, ...feedback } = feedbackState;
@@ -48,6 +50,8 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   await tick({ wrapper });
   return wrapper;
 }
+
+expect.extend(matchers);
 
 describe('FeedbackWidget', () => {
   jest.useFakeTimers();
@@ -95,18 +99,13 @@ describe('FeedbackWidget', () => {
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
     });
 
-    it('is hidden on medium/tablet screens', async () => {
-      setTablet();
+    it('is hidden on small/mobile and medium/tablet screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.exists('FeedbackTab')).toBe(true);
-      expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
-    });
-
-    it('is hidden on small/mobile screens', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.exists('FeedbackTab')).toBe(true);
-      expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
+      expect(wrapper.find('FeedbackTab').children()).toHaveLength(1);
+      expect(wrapper).toHaveStyleRule('display', 'none', {
+        media: `${theme.screenSize.upToLarge}`,
+      });
     });
   });
 
