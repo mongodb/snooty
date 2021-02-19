@@ -1,22 +1,14 @@
 import React from 'react';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useFeedbackState } from './context';
-import { theme } from '../../../theme/docsTheme';
+import { displayNone } from '../../../utils/display-none';
 
 export default function FeedbackTab(props) {
   const { feedback, initializeFeedback } = useFeedbackState();
   return (
     !feedback && (
-      <Container
-        css={css`
-          @media ${theme.screenSize.upToLarge} {
-            display: none;
-          }
-        `}
-        onClick={() => initializeFeedback()}
-      >
+      <Container css={displayNone.onMobileAndTablet} onClick={() => initializeFeedback()}>
         Give Feedback
       </Container>
     )

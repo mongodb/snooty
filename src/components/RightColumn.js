@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { theme } from '../theme/docsTheme';
+import { displayNone } from '../utils/display-none';
 
 const RightColumn = ({ children }) => (
   <div
@@ -11,9 +11,7 @@ const RightColumn = ({ children }) => (
       min-width: 180px;
       order: 2;
 
-      @media ${theme.screenSize.upToLarge} {
-        display: none;
-      }
+      ${displayNone.onMobileAndTablet};
     `}
   >
     <div
