@@ -1,5 +1,4 @@
-import { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing, OpenAPITemplate } from '../templates';
-import NotFound from '../components/NotFound';
+import { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing, OpenAPITemplate, NotFound } from '../templates';
 
 const getTemplate = (project, slug, template) => {
   switch (template) {
