@@ -24,8 +24,7 @@ exports[`renders correctly with a directive_argument node 1`] = `
 configuration file is the preferred method for runtime configuration of
 
       <a
-        class="reference internal"
-        href="/reference/program/mongos#std-program-mongos"
+        href="/reference/program/mongos/#std-program-mongos"
       >
         <code>
           mongos
@@ -34,8 +33,7 @@ configuration file is the preferred method for runtime configuration of
       . The options are equivalent to the command-line
 configuration options. See 
       <a
-        class="reference internal"
-        href="/reference/configuration-options"
+        href="/reference/configuration-options/"
       >
         Configuration File Options
       </a>
@@ -45,8 +43,7 @@ more information.
     <p>
       Ensure the configuration file uses ASCII encoding. The 
       <a
-        class="reference internal"
-        href="/reference/program/mongos#std-program-mongos"
+        href="/reference/program/mongos/#std-program-mongos"
       >
         <code>
           mongos

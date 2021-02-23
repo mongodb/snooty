@@ -40,6 +40,7 @@ const FullScreen = styled.div`
   background: white;
   padding-top: 45px;
   z-index: 1;
+  overflow-y: scroll;
 `;
 const Header = styled.div`
   display: flex;

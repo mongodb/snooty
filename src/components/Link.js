@@ -12,12 +12,16 @@ import { Link as GatsbyLink } from 'gatsby';
 const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
   if (!to) to = '';
   // Assume that external links begin with http:// or https://
-  const external = /^http(s)?:\/\//.test(to);
+  const external = /^http(s)?:\/\//.test(to) || to.startsWith('mailto:');
   const anchor = to.startsWith('#');
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && !external && !anchor) {
     if (!to.startsWith('/')) to = `/${to}`;
+
+    // Ensure trailing slash
+    to = to.replace(/\/?(\?|#|$)/, '/$1');
+
     return (
       <GatsbyLink to={to} activeClassName={activeClassName} partiallyActive={partiallyActive} {...other}>
         {children}

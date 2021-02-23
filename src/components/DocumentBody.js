@@ -78,7 +78,7 @@ export default class DocumentBody extends Component {
   constructor(props) {
     super(props);
     const { pageContext } = this.props;
-    this.pageNodes = getNestedValue(['page', 'ast', 'children'], pageContext) || [];
+    this.pageNodes = getNestedValue(['page', 'children'], pageContext) || [];
     // Standardize cssclass nodes that appear on the page
     normalizeCssClassNodes(this.pageNodes, 'name', 'cssclass');
     this.footnotes = getFootnotes(this.pageNodes);
@@ -90,14 +90,14 @@ export default class DocumentBody extends Component {
       pageContext: { metadata, page, slug },
     } = this.props;
     const lookup = slug === '/' ? 'index' : slug;
-    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
     const siteTitle = getNestedValue(['title'], metadata) || '';
     return (
       <>
         <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
         <Widgets
           location={location}
-          pageOptions={getNestedValue(['ast', 'options'], page)}
+          pageOptions={page?.options}
           pageTitle={pageTitle}
           publishedBranches={getNestedValue(['publishedBranches'], metadata)}
           slug={slug}
@@ -119,9 +119,7 @@ DocumentBody.propTypes = {
   pageContext: PropTypes.shape({
     metadata: PropTypes.object.isRequired,
     page: PropTypes.shape({
-      ast: PropTypes.shape({
-        children: PropTypes.array,
-      }).isRequired,
+      children: PropTypes.array,
     }).isRequired,
     slug: PropTypes.string.isRequired,
   }),
