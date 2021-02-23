@@ -64,7 +64,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
 
-  // If :header-rows: 0 is specified, spoof empty <thead> content to avoid LeafyGreen component crashing
+  // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
   const headerRows =
     headerRowCount > 0
       ? children[0].children[0].children.slice(0, headerRowCount)
