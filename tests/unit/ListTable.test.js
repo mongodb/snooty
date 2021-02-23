@@ -1,9 +1,12 @@
 import React from 'react';
 import { mount, render } from 'enzyme';
 import ListTable from '../../src/components/ListTable';
+import { matchers } from 'jest-emotion';
 
 import mockData from './data/ListTable.test.json';
 import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';
+
+expect.extend(matchers);
 
 const mountListTable = data => mount(<ListTable nodeData={data} />);
 const renderListTable = data => render(<ListTable nodeData={data} />);
@@ -99,13 +102,14 @@ describe('when rendering a list table with fixed widths', () => {
     expect(rendered).toMatchSnapshot();
   });
 
-  it('displays no header row', () => {
+  it('displays no content in the header row', () => {
     expect(
       wrapper
         .find('thead')
         .children()
         .find('tr')
-    ).toHaveLength(0);
+        .text()
+    ).toEqual('');
   });
 
   it('displays one body row', () => {
@@ -130,9 +134,14 @@ describe('when rendering a list table with fixed widths', () => {
   });
 
   it('displays columns with set widths', () => {
-    expect(wrapper.find('col')).toHaveLength(2);
-    expect(wrapper.find('col[width="20%"]')).toHaveLength(1);
-    expect(wrapper.find('col[width="80%"]')).toHaveLength(1);
+    const headers = wrapper.find('TableHeader');
+    expect(headers).toHaveLength(6);
+    expect(headers.at(0)).toHaveStyleRule('width', '5%');
+    expect(headers.at(1)).toHaveStyleRule('width', '10%');
+    expect(headers.at(2)).toHaveStyleRule('width', '15%');
+    expect(headers.at(3)).toHaveStyleRule('width', '20%');
+    expect(headers.at(4)).toHaveStyleRule('width', '30%');
+    expect(headers.at(5)).toHaveStyleRule('width', '20%');
   });
 
   it('displays no stub columns', () => {

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
 import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
-import { getNestedValue } from '../utils/get-nested-value';
 
 const align = key => {
   switch (key) {
@@ -23,17 +22,23 @@ const styleTable = ({ customAlign, customWidth }) => css`
 
 const hasOneChild = children => children.length === 1 && children[0].type === 'paragraph';
 
-const ListTable = ({ nodeData, nodeData: { children, options }, slug, ...rest }) => {
+const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
-  const headerRows = children[0].children[0].children.slice(0, headerRowCount);
   const bodyRows = children[0].children.slice(headerRowCount);
+  const columnCount = bodyRows[0].children[0].children.length;
+
+  // If :header-rows: 0 is specified, spoof empty <thead> content to avoid LeafyGreen component crashing
+  const headerRows =
+    headerRowCount > 0
+      ? children[0].children[0].children.slice(0, headerRowCount)
+      : [{ children: Array(columnCount).fill({ type: 'text', value: '', children: [] }) }];
 
   let widths = null;
-  const customWidths = getNestedValue(['options', 'widths'], nodeData);
+  const customWidths = options?.widths;
   if (customWidths && customWidths !== 'auto') {
     widths = customWidths.split(/[ ,]+/);
-    if (bodyRows && bodyRows[0].length !== widths.length) {
+    if (columnCount !== widths.length) {
       // If custom width specification does not match number of columns, do not apply
       widths = null;
     }
@@ -68,7 +73,7 @@ const ListTable = ({ nodeData, nodeData: { children, options }, slug, ...rest })
       data={bodyRows}
     >
       {({ datum }) => {
-        const row = getNestedValue(['children', 0, 'children'], datum);
+        const row = datum?.children?.[0]?.children || [];
         return (
           <Row>
             {row.map((cell, colIndex) => {
