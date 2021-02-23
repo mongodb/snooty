@@ -32,10 +32,7 @@ describe('Pills component', () => {
   });
 
   it('clicking a pill calls the event handler', () => {
-    wrapper
-      .find('.guide__pill')
-      .first()
-      .simulate('click');
+    wrapper.find('.guide__pill').first().simulate('click');
     expect(mockSetActiveTab.mock.calls.length).toBe(1);
   });
 });

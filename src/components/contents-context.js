@@ -7,7 +7,7 @@ const defaultContextValue = {
   activeSectionIndex: 0,
 };
 
-const findSectionHeadings = nodes => {
+const findSectionHeadings = (nodes) => {
   // Max depth is 2 by default to not make the "On This Page" feel too crowded
   let maxDepth = 2;
   const key = 'type';
@@ -45,20 +45,20 @@ const findSectionHeadings = nodes => {
       if (node.type === 'section') {
         sectionDepth += 1; // eslint-disable-line no-param-reassign
       }
-      return node.children.forEach(child => searchNode(child, sectionDepth));
+      return node.children.forEach((child) => searchNode(child, sectionDepth));
     }
 
     return null;
   };
 
-  nodes.forEach(node => searchNode(node, 0));
+  nodes.forEach((node) => searchNode(node, 0));
   return results;
 };
 
 const findHeadingsOnPage = (headingNodes, height) => {
   let positions = [];
 
-  headingNodes.forEach(heading => {
+  headingNodes.forEach((heading) => {
     const el = document.getElementById(heading.id);
     if (el) {
       positions.push(el.offsetTop / height);

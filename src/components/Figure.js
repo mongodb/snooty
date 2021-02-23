@@ -13,13 +13,13 @@ export default class Figure extends Component {
     };
   }
 
-  imgShouldHaveLightbox = img => {
+  imgShouldHaveLightbox = (img) => {
     const naturalArea = img.naturalWidth * img.naturalHeight;
     const clientArea = img.clientWidth * img.clientHeight;
     return clientArea < naturalArea * 0.9;
   };
 
-  handleImageLoaded = imgRef => {
+  handleImageLoaded = (imgRef) => {
     this.setState({
       isLightboxSize: this.imgShouldHaveLightbox(imgRef),
     });

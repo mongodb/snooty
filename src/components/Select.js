@@ -108,7 +108,7 @@ const SelectedOption = styled('div')`
 
 const Select = ({ choices, onChange, defaultText = '', disabled = false, label = null, value = null, ...props }) => {
   const enabled = useMemo(() => !disabled, [disabled]);
-  const hasIcons = useMemo(() => choices.some(choice => Object.hasOwnProperty.call(choice, 'icon')), [choices]);
+  const hasIcons = useMemo(() => choices.some((choice) => Object.hasOwnProperty.call(choice, 'icon')), [choices]);
   const [selected, setSelected] = useState({});
   const [showOptions, setShowOptions] = useState(false);
   const toggleSelectExpand = useCallback(() => {
@@ -121,7 +121,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
    */
   useEffect(() => {
     if (choices.length && value) {
-      const choice = choices.filter(choice => choice.value === value);
+      const choice = choices.filter((choice) => choice.value === value);
       if (choice && choice.length) {
         const currentChoice = choice[0];
         setSelected(currentChoice);
@@ -132,7 +132,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [choices, value]);
   const showOptionsOnEnter = useCallback(
-    e => {
+    (e) => {
       if (e.keyCode === ENTER_KEY) {
         toggleSelectExpand();
       } else if (e.keyCode === ESCAPE_KEY && showOptions) {
@@ -144,7 +144,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
   );
 
   const selectOption = useCallback(
-    choice => {
+    (choice) => {
       onChange(choice);
       setSelected(choice);
       setShowOptions(false);
@@ -153,7 +153,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
   );
 
   const optionOnEnter = useCallback(
-    option => e => {
+    (option) => (e) => {
       if (e.keyCode === ENTER_KEY) {
         selectOption(option);
       }
@@ -162,7 +162,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
   );
 
   const closeOptionsOnBlur = useCallback(
-    e => {
+    (e) => {
       // Check the event to see if the next element would be a list element
       // otherwise, close the options
       const isTabbingThroughOptions = e.relatedTarget && e.relatedTarget.tagName === 'LI';
@@ -214,7 +214,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
         </SelectedOption>
         {showOptions && (
           <Options hasIcons={hasIcons}>
-            {choices.map(choice => (
+            {choices.map((choice) => (
               <Option
                 hasIcons={hasIcons}
                 key={choice.value}

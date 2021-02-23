@@ -9,7 +9,7 @@ import { getNestedValue } from '../../utils/get-nested-value';
 const URIWriter = ({ handleUpdateURIWriter }) => {
   const { activeTabs } = useContext(TabContext);
 
-  const handleUpdateURI = uriType => uri => {
+  const handleUpdateURI = (uriType) => (uri) => {
     handleUpdateURIWriter({
       [uriType]: uri,
     });

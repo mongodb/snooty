@@ -41,14 +41,14 @@ class MainWidget extends Component {
     }
   };
 
-  toggleVisibility = event => {
+  toggleVisibility = (event) => {
     const { closed, state } = this.state;
     event.stopPropagation();
     if ((typeof state === 'boolean' || state === STATE_VOTED) && closed === false) {
       this.setState({ state: STATE_INITIAL });
     }
     this.setState(
-      prevState => ({ closed: !prevState.closed }),
+      (prevState) => ({ closed: !prevState.closed }),
       // eslint-disable-next-line react/destructuring-assignment
       () => setSessionValue('feedbackHidden', JSON.stringify(this.state.closed))
     );
@@ -167,7 +167,7 @@ class MainWidget extends Component {
                   id="rate-up"
                   role="button"
                   tabIndex={0}
-                  onClick={e => this.onSubmitVote(e, true)}
+                  onClick={(e) => this.onSubmitVote(e, true)}
                 >
                   Yes
                 </a>
@@ -176,7 +176,7 @@ class MainWidget extends Component {
                   id="rate-down"
                   role="button"
                   tabIndex={0}
-                  onClick={e => this.onSubmitVote(e, false)}
+                  onClick={(e) => this.onSubmitVote(e, false)}
                 >
                   No
                 </a>

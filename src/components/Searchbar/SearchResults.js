@@ -65,7 +65,7 @@ const StyledSearchResult = styled(SearchResult)`
 const SearchResults = ({ currentPage, totalResultsCount, visibleResults, ...props }) => {
   const hasResults = useMemo(() => !!totalResultsCount, [totalResultsCount]);
   const { isMobile } = useScreenSize();
-  const getRankFromPage = useCallback(index => (currentPage - 1) * index + 1, [currentPage]);
+  const getRankFromPage = useCallback((index) => (currentPage - 1) * index + 1, [currentPage]);
   return (
     <SearchResultsContainer hasResults={hasResults} {...props}>
       <StyledResultText>

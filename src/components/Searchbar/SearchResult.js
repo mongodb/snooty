@@ -24,7 +24,7 @@ const largeResultTitle = css`
 `;
 
 // Truncates text to a maximum number of lines
-const truncate = maxLines => css`
+const truncate = (maxLines) => css`
   display: -webkit-box;
   -webkit-line-clamp: ${maxLines}; /* supported cross browser */
   -webkit-box-orient: vertical;
@@ -93,16 +93,16 @@ const StyledResultTitle = styled('p')`
   }
 `;
 
-const escapeRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const highlightSearchTerm = (text, searchTerm) =>
   text.replace(
     new RegExp(escapeRegExp(searchTerm), 'gi'),
-    result => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
+    (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
 // since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
-const sanitizePreviewHtml = text =>
+const sanitizePreviewHtml = (text) =>
   sanitizeHtml(text, {
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
@@ -117,7 +117,7 @@ const SearchResult = React.memo(
     const resultLinkRef = useRef(null);
 
     const onArrowDown = useCallback(
-      resultLinkRef => {
+      (resultLinkRef) => {
         const nextSibling = getNestedValue(['current', 'nextSibling'], resultLinkRef);
         if (nextSibling) {
           nextSibling.focus();
@@ -134,7 +134,7 @@ const SearchResult = React.memo(
       [searchContainerRef]
     );
 
-    const onArrowUp = resultLinkRef => {
+    const onArrowUp = (resultLinkRef) => {
       const prevSibling = getNestedValue(['current', 'previousSibling'], resultLinkRef);
       if (prevSibling) {
         // If these don't match, we have gone up out of the results
@@ -148,7 +148,7 @@ const SearchResult = React.memo(
     };
     // Navigate with arrow keys
     const onKeyDown = useCallback(
-      e => {
+      (e) => {
         // Only allow arrow keys if we are within the searchbar (not if this is being reused)
         if (searchContainerRef) {
           if (e.key === 'ArrowDown' || e.keyCode === ARROW_DOWN_KEY) {

@@ -31,7 +31,7 @@ class Deluge extends Component {
       const buf = new Uint8Array(16);
       crypto.getRandomValues(buf);
       this.setState({
-        interactionId: btoa(Array.prototype.map.call(buf, ch => String.fromCharCode(ch)).join('')).slice(0, -2),
+        interactionId: btoa(Array.prototype.map.call(buf, (ch) => String.fromCharCode(ch)).join('')).slice(0, -2),
       });
     }
   }
@@ -41,7 +41,7 @@ class Deluge extends Component {
     try {
       const appId = 'feedback-ibcyy';
       this.stitchClient = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
-      this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch(err => {
+      this.stitchClient.auth.loginWithCredential(new AnonymousCredential()).catch((err) => {
         console.error(err);
       });
     } catch (error) {
@@ -50,19 +50,19 @@ class Deluge extends Component {
     }
   };
 
-  onSubmitVote = vote => {
+  onSubmitVote = (vote) => {
     this.sendVote(vote)
       .then(() => {
         this.setState({
           voteAcknowledgement: vote ? 'up' : 'down',
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   };
 
-  sendVote = vote => {
+  sendVote = (vote) => {
     const { path, project } = this.props;
     const { interactionId } = this.state;
 
@@ -92,7 +92,7 @@ class Deluge extends Component {
     return this.stitchClient.callFunction('submitVoteV2', [voteDocument]);
   };
 
-  onSubmitFeedback = vote => {
+  onSubmitFeedback = (vote) => {
     const { answers } = this.state;
 
     const fields = {};
@@ -106,7 +106,7 @@ class Deluge extends Component {
       }
     }
 
-    this.sendFeedback(vote, fields).catch(err => {
+    this.sendFeedback(vote, fields).catch((err) => {
       console.error(err);
     });
   };
@@ -121,7 +121,7 @@ class Deluge extends Component {
     });
 
     // Prefix fields with q- to preserve Deluge's naming scheme
-    Object.keys(fields).forEach(key => {
+    Object.keys(fields).forEach((key) => {
       if (!key.startsWith('q-')) {
         Object.defineProperty(fields, `q-${key}`, Object.getOwnPropertyDescriptor(fields, key));
         delete fields[key]; // eslint-disable-line no-param-reassign
@@ -138,12 +138,12 @@ class Deluge extends Component {
     return this.stitchClient.callFunction('submitFeedback', [query, update]);
   };
 
-  makeStore = key => {
+  makeStore = (key) => {
     const { answers } = this.state;
     return {
       get: () => answers[key],
-      set: val =>
-        this.setState(prevState => ({
+      set: (val) =>
+        this.setState((prevState) => ({
           answers: {
             ...prevState.answers,
             [key]: val,
@@ -152,7 +152,7 @@ class Deluge extends Component {
     };
   };
 
-  validateEmail = input => {
+  validateEmail = (input) => {
     const hasError = !(input === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input));
     this.setState({ emailError: hasError });
     return hasError;
@@ -162,7 +162,7 @@ class Deluge extends Component {
     const { answers, emailError, voteAcknowledgement } = this.state;
     const { canShowSuggestions, openDrawer } = this.props;
 
-    const noAnswersSubmitted = Object.keys(answers).length === 0 || Object.values(answers).every(val => val === '');
+    const noAnswersSubmitted = Object.keys(answers).length === 0 || Object.values(answers).every((val) => val === '');
     const hasError = noAnswersSubmitted || emailError;
 
     return this.stitchClient ? (
@@ -179,7 +179,7 @@ class Deluge extends Component {
         <div className="caption">{EMAIL_PROMPT_TEXT}</div>
         <InputField
           errorText={EMAIL_ERROR_TEXT}
-          hasError={input => this.validateEmail(input)}
+          hasError={(input) => this.validateEmail(input)}
           inputType="email"
           store={this.makeStore('email')}
           placeholder="Email address"

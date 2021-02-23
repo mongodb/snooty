@@ -5,8 +5,8 @@ import ListTable from '../../src/components/ListTable';
 import mockData from './data/ListTable.test.json';
 import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';
 
-const mountListTable = data => mount(<ListTable nodeData={data} />);
-const renderListTable = data => render(<ListTable nodeData={data} />);
+const mountListTable = (data) => mount(<ListTable nodeData={data} />);
+const renderListTable = (data) => render(<ListTable nodeData={data} />);
 
 describe('when rendering a list-table directive', () => {
   let wrapper;
@@ -23,56 +23,23 @@ describe('when rendering a list-table directive', () => {
   });
 
   it('displays one header row', () => {
-    expect(
-      wrapper
-        .find('thead')
-        .children()
-        .find('tr')
-    ).toHaveLength(1);
+    expect(wrapper.find('thead').children().find('tr')).toHaveLength(1);
   });
 
   it('displays six header columns', () => {
-    expect(
-      wrapper
-        .find('thead')
-        .children()
-        .find('tr')
-        .children()
-        .find('th')
-    ).toHaveLength(6);
+    expect(wrapper.find('thead').children().find('tr').children().find('th')).toHaveLength(6);
   });
 
   it('displays five body rows', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-    ).toHaveLength(5);
+    expect(wrapper.find('tbody').children().find('tr')).toHaveLength(5);
   });
 
   it('displays five body columns', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-        .first()
-        .children()
-        .find('td')
-    ).toHaveLength(5);
+    expect(wrapper.find('tbody').children().find('tr').first().children().find('td')).toHaveLength(5);
   });
 
   it('displays one stub column', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-        .first()
-        .children()
-        .find('th')
-    ).toHaveLength(1);
+    expect(wrapper.find('tbody').children().find('tr').first().children().find('th')).toHaveLength(1);
   });
 
   it('applies the class passed in as an option', () => {
@@ -103,33 +70,15 @@ describe('when rendering a list table with fixed widths', () => {
   });
 
   it('displays no header row', () => {
-    expect(
-      wrapper
-        .find('thead')
-        .children()
-        .find('tr')
-    ).toHaveLength(0);
+    expect(wrapper.find('thead').children().find('tr')).toHaveLength(0);
   });
 
   it('displays one body row', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-    ).toHaveLength(1);
+    expect(wrapper.find('tbody').children().find('tr')).toHaveLength(1);
   });
 
   it('displays six body columns', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-        .first()
-        .children()
-        .find('td')
-    ).toHaveLength(6);
+    expect(wrapper.find('tbody').children().find('tr').first().children().find('td')).toHaveLength(6);
   });
 
   it('applies the class passed in as an option', () => {

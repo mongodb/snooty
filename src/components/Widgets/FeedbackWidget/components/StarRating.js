@@ -36,7 +36,7 @@ export default function StarRating({ size = '3x' }) {
   return (
     isBrowser && (
       <Layout size={size}>
-        {[1, 2, 3, 4, 5].map(ratingValue => {
+        {[1, 2, 3, 4, 5].map((ratingValue) => {
           const isHighlighted = selectedRating ? selectedRating >= ratingValue : hoveredRating >= ratingValue;
           const isHovered = hoveredRating === ratingValue;
           return (
@@ -84,7 +84,7 @@ export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onCl
   );
 }
 
-const widthForSize = size => {
+const widthForSize = (size) => {
   switch (size) {
     case 'lg':
       return '140px';
@@ -96,7 +96,7 @@ const widthForSize = size => {
       return '100%';
   }
 };
-const marginForSize = size => {
+const marginForSize = (size) => {
   switch (size) {
     case 'lg':
       return '0';
@@ -109,7 +109,7 @@ const marginForSize = size => {
   }
 };
 const Layout = styled.div(
-  props => css`
+  (props) => css`
     display: flex;
     flex-direction: row;
     width: ${widthForSize(props.size)};

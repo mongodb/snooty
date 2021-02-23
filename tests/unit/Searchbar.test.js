@@ -34,22 +34,12 @@ const getAdvancedFiltersPane = async () => {
 };
 
 const expectProductDropdownValues = (wrapper, productValue, versionValue) => {
-  expect(
-    wrapper
-      .find('StyledCustomSelect')
-      .at(0)
-      .text()
-  ).toContain(productValue);
+  expect(wrapper.find('StyledCustomSelect').at(0).text()).toContain(productValue);
   // Second filter should update automatically
-  expect(
-    wrapper
-      .find('StyledCustomSelect')
-      .at(1)
-      .text()
-  ).toContain(versionValue);
+  expect(wrapper.find('StyledCustomSelect').at(1).text()).toContain(versionValue);
 };
 
-const fillInFilterDropdowns = async wrapper => {
+const fillInFilterDropdowns = async (wrapper) => {
   let firstDropdown = wrapper.find('StyledCustomSelect').at(0);
   firstDropdown.simulate('click');
   const firstChoice = wrapper.find('Option').at(0);

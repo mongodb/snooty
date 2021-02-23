@@ -6,7 +6,7 @@ module.exports = {
   ...gatsby,
   graphql: jest.fn(),
   StaticQuery: jest.fn(),
-  withPrefix: jest.fn().mockImplementation(str => str),
+  withPrefix: jest.fn().mockImplementation((str) => str),
   useStaticQuery: jest.fn(),
   // https://www.gatsbyjs.org/docs/unit-testing/
   Link: jest.fn().mockImplementation(

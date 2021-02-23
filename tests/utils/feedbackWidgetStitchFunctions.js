@@ -51,7 +51,7 @@ export function mockStitchFunctions() {
   });
 }
 export const clearMockStitchFunctions = () => {
-  Object.keys(stitchFunctionMocks).forEach(mockedFunctionName => {
+  Object.keys(stitchFunctionMocks).forEach((mockedFunctionName) => {
     stitchFunctionMocks[mockedFunctionName].mockClear();
   });
 };

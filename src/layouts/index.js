@@ -39,7 +39,7 @@ const globalCSS = css`
   }
 `;
 
-const PageNotFoundLayout = props => {
+const PageNotFoundLayout = (props) => {
   const { children, pageContext } = props;
   const { slug } = pageContext;
   const template = 'landing';
@@ -55,7 +55,7 @@ const PageNotFoundLayout = props => {
   );
 };
 
-const DefaultLayout = props => {
+const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
 

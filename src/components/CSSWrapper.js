@@ -17,7 +17,7 @@ export default class CSSWrapper extends React.Component {
       // classList.add() can only handle strings that do not contain spaces, so convert strings to an array of space-free
       // strings and iterate over this array in order to add multiple classes
       const classes = typeof className === 'string' ? className.split(' ') : className;
-      classes.forEach(name => {
+      classes.forEach((name) => {
         childNode.classList.add(name);
       });
     }

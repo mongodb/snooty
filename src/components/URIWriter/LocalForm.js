@@ -41,7 +41,7 @@ export default class LocalForm extends Component {
     // Populate forms from localStorage
     if (parentURI) {
       this.setState(
-        prevState => ({
+        (prevState) => ({
           uri: {
             ...prevState.uri,
             ...parentURI.localURI,
@@ -55,11 +55,11 @@ export default class LocalForm extends Component {
     }
   }
 
-  populateHostInputs = hostlist => {
+  populateHostInputs = (hostlist) => {
     // Populate the host input fields using the validated hostlist fetched from localStorage
     const hostInputs = {};
     if (hostlist) {
-      hostlist.forEach(host => {
+      hostlist.forEach((host) => {
         hostInputs[`host${this.hostlistCounter}`] = host;
         this.hostlistCounter += 1;
       });
@@ -69,7 +69,7 @@ export default class LocalForm extends Component {
     this.setState({ hostInputs });
   };
 
-  hostnameHasError = host => {
+  hostnameHasError = (host) => {
     if (host === '') {
       return '';
     }
@@ -91,7 +91,7 @@ export default class LocalForm extends Component {
     return '';
   };
 
-  removeHost = name => {
+  removeHost = (name) => {
     const { hostInputs } = this.state;
     const deletedState = Object.assign({}, hostInputs);
     delete deletedState[name];
@@ -103,10 +103,10 @@ export default class LocalForm extends Component {
     const { handleUpdateURIWriter } = this.props;
     const { hostInputs } = this.state;
     this.setState(
-      prevState => ({
+      (prevState) => ({
         uri: {
           ...prevState.uri,
-          hostlist: Object.values(hostInputs).filter(host => !this.hostnameHasError(host) && host !== ''),
+          hostlist: Object.values(hostInputs).filter((host) => !this.hostnameHasError(host) && host !== ''),
         },
       }),
       () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
@@ -135,11 +135,11 @@ export default class LocalForm extends Component {
     this.setState({ hostInputs: updatedHostInputs }, () => this.updateHostlist());
   };
 
-  toggleLocalEnv = localEnv => {
+  toggleLocalEnv = (localEnv) => {
     const { handleUpdateURIWriter } = this.props;
 
     this.setState(
-      prevState => ({
+      (prevState) => ({
         uri: { ...prevState.uri, localEnv },
       }),
       () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
@@ -154,7 +154,7 @@ export default class LocalForm extends Component {
       this.updateHostInputs(name, value);
     } else {
       this.setState(
-        prevState => ({ uri: { ...prevState.uri, [name]: value } }),
+        (prevState) => ({ uri: { ...prevState.uri, [name]: value } }),
         () => handleUpdateURIWriter(this.state.uri) // eslint-disable-line react/destructuring-assignment
       );
     }
@@ -244,7 +244,7 @@ export default class LocalForm extends Component {
                       key={key}
                       value={hostInputs[key]}
                       onChange={this.handleInputChange}
-                      onClick={e => {
+                      onClick={(e) => {
                         // Bugfix so that Safari users can click on the correct input field
                         e.preventDefault();
                       }}

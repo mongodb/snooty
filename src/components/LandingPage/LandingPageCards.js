@@ -29,14 +29,14 @@ const Category = ({ cards, category, guidesMetadata }) => {
   });
 
   // separate out last row so we can sort it
-  columnSeparatedCards.forEach(cardColumn => {
+  columnSeparatedCards.forEach((cardColumn) => {
     if (cardColumn.length > 0) {
       lastRow.push(cardColumn[cardColumn.length - 1]);
     }
   });
 
   // sort last row by largest height
-  lastRow.sort(a => {
+  lastRow.sort((a) => {
     if (a && a.name === 'multi-card') {
       return -1;
     }
@@ -70,9 +70,9 @@ const Category = ({ cards, category, guidesMetadata }) => {
 };
 
 const LandingPageCards = ({ guides, guidesMetadata }) => {
-  return CATEGORIES.map(category => (
+  return CATEGORIES.map((category) => (
     <Category
-      cards={guides.filter(card => {
+      cards={guides.filter((card) => {
         const cardSlug =
           card.name === 'card'
             ? getNestedValue(['argument', 0, 'value'], card)

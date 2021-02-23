@@ -1,6 +1,6 @@
 import { MARIAN_URL } from '../../../src/constants';
 
-const allowJsonPromise = x => ({ json: () => x });
+const allowJsonPromise = (x) => ({ json: () => x });
 
 export const FILTERED_RESULT = {
   title: 'stitch (realm filter)',
@@ -14,7 +14,7 @@ export const UNFILTERED_RESULT = {
   url: 'stitch.nofilters',
 };
 
-export const mockMarianFetch = url => {
+export const mockMarianFetch = (url) => {
   let endpoint = url;
   if (endpoint.includes(MARIAN_URL)) {
     endpoint = endpoint.split(`${MARIAN_URL}/`)[1];
