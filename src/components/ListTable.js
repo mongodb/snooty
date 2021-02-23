@@ -22,6 +22,42 @@ const styleTable = ({ customAlign, customWidth }) => css`
 
 const hasOneChild = children => children.length === 1 && children[0].type === 'paragraph';
 
+const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
+  <Row>
+    {row.map((cell, colIndex) => {
+      const isStub = colIndex <= stubColumnCount - 1;
+      const skipPTag = hasOneChild(cell.children);
+      const contents = cell.children.map((child, i) => (
+        <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
+      ));
+      return (
+        <Cell
+          className={cx(css`
+            /* TODO: Increase margin when Table component supports base font size of 16px */
+            & > div > span > * {
+              margin: 0 0 10px;
+            }
+
+            /* Prevent extra margin below last element */
+            & > div > span > *:last-child {
+              margin-bottom: 0;
+            }
+          `)}
+          isHeader={isStub}
+          key={colIndex}
+        >
+          {contents}
+        </Cell>
+      );
+    })}
+  </Row>
+);
+
+ListTableRow.propTypes = {
+  row: PropTypes.arrayOf(PropTypes.object),
+  stubColumnCount: PropTypes.number.isRequired,
+};
+
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
@@ -72,39 +108,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
       ))}
       data={bodyRows}
     >
-      {({ datum }) => {
-        const row = datum?.children?.[0]?.children || [];
-        return (
-          <Row>
-            {row.map((cell, colIndex) => {
-              const isStub = colIndex <= stubColumnCount - 1;
-              const skipPTag = hasOneChild(cell.children);
-              const contents = cell.children.map((child, i) => (
-                <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
-              ));
-              return (
-                <Cell
-                  className={cx(css`
-                    /* TODO: Increase margin when Table component supports base font size of 16px */
-                    & > div > span > * {
-                      margin: 0 0 10px;
-                    }
-
-                    /* Prevent extra margin below last element */
-                    & > div > span > *:last-child {
-                      margin-bottom: 0;
-                    }
-                  `)}
-                  isHeader={isStub}
-                  key={colIndex}
-                >
-                  {contents}
-                </Cell>
-              );
-            })}
-          </Row>
-        );
-      }}
+      {({ datum }) => <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />}
     </Table>
   );
 };
