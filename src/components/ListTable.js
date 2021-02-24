@@ -20,6 +20,15 @@ const styleTable = ({ customAlign, customWidth }) => css`
   ${customWidth && `width: ${customWidth}`};
 `;
 
+/* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
+const unstyleThead = css`
+  & * {
+    border: 0 !important;
+    min-height: unset !important;
+    padding: 0 !important;
+  }
+`;
+
 const hasOneChild = children => children.length === 1 && children[0].type === 'paragraph';
 
 const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
@@ -89,7 +98,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         })
       )}
       columns={headerRows.map((row, rowIndex) => (
-        <HeaderRow key={rowIndex}>
+        <HeaderRow key={rowIndex} className={cx(unstyleThead)}>
           {row.children.map((cell, colIndex) => {
             const skipPTag = hasOneChild(cell.children);
             return (
