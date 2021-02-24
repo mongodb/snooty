@@ -6,6 +6,7 @@ import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
 import { activeTextBarStyling, StyledTextInput } from './SearchTextInput';
 import { useClickOutside } from '../../hooks/use-click-outside';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import SearchDropdown from './SearchDropdown';
@@ -55,10 +56,14 @@ const SearchbarContainer = styled('div')`
 `;
 
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
+  const { project } = useSiteMetadata();
   const [value, setValue] = useState('');
-  const [searchFilter, setSearchFilter] = useState(null);
+
+  // XXX: Search filter defaults to Realm if a user is on the Realm docs
+  const defaultSearchFilter = useMemo(() => (project === 'realm' ? 'realm-master' : null), [project]);
+  const [searchFilter, setSearchFilter] = useState(defaultSearchFilter);
   // Use a second search filter state var to track filters but not make any calls yet
-  const [draftSearchFilter, setDraftSearchFilter] = useState(null);
+  const [draftSearchFilter, setDraftSearchFilter] = useState(defaultSearchFilter);
   const [searchEvent, setSearchEvent] = useState(null);
   const [reportEvent, setReportEvent] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
