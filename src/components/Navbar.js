@@ -13,7 +13,7 @@ import { searchParamsToURL } from '../utils/search-params-to-url';
 const NavbarContainer = styled('div')`
   align-items: center;
   background-color: #fff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, ${props => (props.isTransparent ? '0.1' : '0.2')});
   display: flex;
   height: 45px;
   justify-content: space-between;
@@ -35,6 +35,7 @@ const NavbarContainer = styled('div')`
 const NavbarLeft = styled('div')`
   align-items: center;
   display: flex;
+  ${props => props.isTransparent && 'opacity: 0.2;'}
 `;
 
 const NavSeparator = styled('span')`
@@ -53,15 +54,12 @@ const NavLabel = styled('div')`
   user-select: none;
 `;
 
-const shouldOpaque = (isExpanded, isDefaultExpanded) => css`
-  ${isExpanded && !isDefaultExpanded && 'opacity: 0.2;'}
-`;
-
 const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
+  const [isTransparent, setIsTransparent] = useState(false);
   const imageHeight = 22;
 
   const onSearchbarExpand = useCallback(
@@ -78,10 +76,14 @@ const Navbar = () => {
     setIsSearchbarExpanded(isSearchbarDefaultExpanded);
   }, [isSearchbarDefaultExpanded]);
 
+  useEffect(() => {
+    setIsTransparent(isSearchbarExpanded && !isSearchbarDefaultExpanded);
+  }, [isSearchbarDefaultExpanded, isSearchbarExpanded]);
+
   return (
-    <NavbarContainer tabIndex="0">
-      <SidebarMobileMenuButton css={shouldOpaque(isSearchbarExpanded, isSearchbarDefaultExpanded)} />
-      <NavbarLeft css={shouldOpaque(isSearchbarExpanded, isSearchbarDefaultExpanded)}>
+    <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
+      <SidebarMobileMenuButton />
+      <NavbarLeft isTransparent={isTransparent}>
         <a
           css={css`
             height: ${imageHeight}px;

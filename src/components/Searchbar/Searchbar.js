@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
-import { activeTextBarStyling, StyledTextInput } from './SearchTextInput';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -20,40 +20,40 @@ const SEARCHBAR_HEIGHT = '36px';
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
-const SearchbarContainer = styled('div')`
-  ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
-  height: ${SEARCHBAR_HEIGHT};
-  ${({ isExpanded }) => (isExpanded ? 'position: fixed;' : '')}
-  right: ${theme.size.default};
-  transition: width ${TRANSITION_SPEED} ease-in;
-  width: ${({ isExpanded }) => (isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE)};
-  /* docs-tools navbar z-index is 9999 */
-  z-index: 10000;
-  :hover,
-  :focus,
-  :focus-within {
-    ${MagnifyingGlass} {
-      color: ${uiColors.gray.dark3};
-    }
-    ${StyledTextInput} {
-      div > input {
-        ${activeTextBarStyling}
-        box-shadow: 0 0 ${theme.size.tiny} 0 rgba(184, 196, 194, 0.56);
-        transition: background-color ${TRANSITION_SPEED} ease-in, color ${TRANSITION_SPEED} ease-in;
-        @media ${theme.screenSize.upToSmall} {
-          box-shadow: none;
-        }
+const expandedCss = css`
+  position: fixed;
+  right: 16px;
+  top: 5px;
+`;
+
+const SearchbarContainer = styled.div(
+  props => css`
+    height: ${SEARCHBAR_HEIGHT};
+    transition: width ${TRANSITION_SPEED} ease-in;
+    width: ${props.isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE};
+
+    :hover,
+    :focus,
+    :focus-within {
+      ${MagnifyingGlass} {
+        color: ${uiColors.gray.dark3};
       }
     }
-  }
-  @media ${theme.screenSize.upToSmall} {
-    ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
-    height: ${({ isExpanded, isSearching }) => (isExpanded && isSearching ? '100%' : SEARCHBAR_HEIGHT)};
-    transition: unset;
-    width: ${({ isExpanded }) => (isExpanded ? '100%' : BUTTON_SIZE)};
-    ${({ isExpanded }) => (isExpanded ? 'left: 0' : 'right: 0')};
-  }
-`;
+
+    @media ${theme.screenSize.upToSmall} {
+      ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
+      height: ${props.isExpanded && props.isSearching ? '100%' : SEARCHBAR_HEIGHT};
+      transition: unset;
+      width: ${props.isExpanded ? '100%' : BUTTON_SIZE};
+      ${props.isExpanded ? 'left: 0' : 'right: 0'};
+    }
+
+    // Allows the expanded searchbar to appear above other nav components on smaller screens
+    @media all and (max-width: 670px) {
+      ${props.isExpanded && expandedCss}
+    }
+  `
+);
 
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
   const { project } = useSiteMetadata();

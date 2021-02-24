@@ -30,6 +30,31 @@ const removeDefaultHoverEffects = css`
   }
 `;
 
+const ExpandedSearchbarContainer = styled('div')`
+  display: flex;
+  background-color: ${uiColors.gray.light3};
+  border-radius: ${theme.size.medium};
+
+  :hover,
+  :focus,
+  :focus-within {
+    background-color: ${uiColors.white};
+    box-shadow: rgba(184, 196, 194, 0.56) 0px 0px 4px 0px;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    background-color: ${uiColors.white};
+    width: 100%;
+
+    :hover,
+    :focus,
+    :focus-within {
+      border: none;
+      box-shadow: none;
+    }
+  }
+`;
+
 const CloseButton = styled(IconButton)`
   background-color: #fff;
   border-radius: ${CLOSE_BUTTON_SIZE};
@@ -48,7 +73,6 @@ const GoButton = styled(IconButton)`
   border-radius: ${GO_BUTTON_SIZE};
   height: ${GO_BUTTON_SIZE};
   padding: 0;
-  position: absolute;
   right: ${theme.size.default};
   /* button is 20 px and entire container is 36px so 8px top gives equal spacing */
   top: ${theme.size.small};
@@ -73,7 +97,6 @@ const MagnifyingGlass = styled(Icon)`
 const MagnifyingGlassButton = styled(IconButton)`
   left: ${theme.size.small};
   padding: 0;
-  position: absolute;
   /* This button is 28px tall in a 36px tall container, so 4px gives equal spacing */
   top: ${theme.size.tiny};
   z-index: 1;
@@ -134,7 +157,7 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
   const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
 
   return (
-    <>
+    <ExpandedSearchbarContainer isSearching={isSearching}>
       <MagnifyingGlassButton aria-label="Search MongoDB Documentation" onClick={onSearchFocus}>
         <MagnifyingGlass glyph="MagnifyingGlass" />
       </MagnifyingGlassButton>
@@ -149,7 +172,7 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
           <Icon glyph="X" fill={uiColors.gray.base} />
         </CloseButton>
       )}
-    </>
+    </ExpandedSearchbarContainer>
   );
 };
 
