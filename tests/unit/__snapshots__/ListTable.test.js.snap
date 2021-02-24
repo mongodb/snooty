@@ -1,288 +1,1097 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when rendering a list table with fixed widths renders correctly 1`] = `
-.emotion-0 {
-  display: block;
-  overflow-x: auto;
-  width: auto;
+.emotion-36 {
+  position: relative;
+  max-width: 100%;
 }
 
-<table
-  class="docutils guide-tablenate-odd colwidths-given  emotion-0"
+.emotion-21 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 32px;
+}
+
+.emotion-2 {
+  color: #3D4F58;
+  padding-right: 4px;
+}
+
+.emotion-20 * {
+  border: 0 !important;
+  min-height: unset !important;
+  padding: 0 !important;
+}
+
+.emotion-0 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  left: 0;
+}
+
+.emotion-0:after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  border-radius: 100%;
+  -webkit-transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
+}
+
+.emotion-0:after {
+  right: 100%;
+  box-shadow: 4px 0 4px rgba(6,22,33,0.3);
+}
+
+.emotion-1 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  right: 0;
+}
+
+.emotion-1:after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  border-radius: 100%;
+  -webkit-transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
+}
+
+.emotion-1:after {
+  left: 100%;
+  box-shadow: -4px 0 4px rgba(6,22,33,0.3);
+}
+
+.emotion-35 {
+  overflow-x: auto;
+}
+
+.emotion-34 {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border-bottom: 1px solid #E7EEEC;
+  width: 100%;
+}
+
+.emotion-33 {
+  border-top: 1px solid #E7EEEC;
+  color: #3D4F58;
+  opacity: 0;
+}
+
+.emotion-33 > td > [data-leafygreen-ui="td-inner-div"] {
+  min-height: 40px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+
+.emotion-33 > td:nth-child(1) {
+  padding-left: 8px;
+}
+
+.emotion-22 {
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 20px;
+  position: relative;
+}
+
+.emotion-22 > div > span > * {
+  margin: 0 0 10px;
+}
+
+.emotion-22 > div > span > *:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-4 {
+  border-width: 0px 1px 3px 1px;
+  border-color: #E7EEEC;
+  border-style: solid;
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 5%;
+}
+
+.emotion-7 {
+  border-width: 0px 1px 3px 1px;
+  border-color: #E7EEEC;
+  border-style: solid;
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 10%;
+}
+
+.emotion-10 {
+  border-width: 0px 1px 3px 1px;
+  border-color: #E7EEEC;
+  border-style: solid;
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 15%;
+}
+
+.emotion-13 {
+  border-width: 0px 1px 3px 1px;
+  border-color: #E7EEEC;
+  border-style: solid;
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 20%;
+}
+
+.emotion-16 {
+  border-width: 0px 1px 3px 1px;
+  border-color: #E7EEEC;
+  border-style: solid;
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 30%;
+}
+
+<div
+  class="emotion-36"
 >
-  <colgroup>
-    <col
-      width="20%"
-    />
-    <col
-      width="80%"
-    />
-  </colgroup>
-  <thead
-    valign="bottom"
+  <div
+    class="emotion-0"
   />
-  <tbody
-    valign="top"
+  <div
+    class="emotion-1"
+  />
+  <div
+    class="emotion-35"
   >
-    <tr
-      class="row-odd"
+    <table
+      cellpadding="0"
+      cellspacing="0"
+      class="emotion-34"
     >
-      <td
-        class=""
-      >
-        notebook
-      </td>
-      <td
-        class=""
-      >
-        50
-      </td>
-      <td
-        class=""
-      >
-        8.5x11,in
-      </td>
-      <td
-        class=""
-      >
-        A
-      </td>
-      <td
-        class=""
-      >
-        college-ruled,perforated
-      </td>
-      <td
-        class=""
-      >
-        8
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <thead>
+        <tr
+          class="emotion-20"
+          data-testid="leafygreen-ui-header-row"
+        >
+          <th
+            aria-sort="none"
+            class="emotion-4"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              />
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-7"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              />
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-10"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              />
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-13"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              />
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-16"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              />
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-13"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              />
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          aria-disabled="false"
+          class="emotion-33"
+          role="row"
+        >
+          <td
+            class="emotion-22"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                notebook
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-22"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                50
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-22"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                8.5x11,in
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-22"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                A
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-22"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                college-ruled,perforated
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-22"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                8
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 `;
 
 exports[`when rendering a list-table directive renders correctly 1`] = `
-.emotion-0 {
-  display: block;
-  overflow-x: auto;
-  width: auto;
+.emotion-88 {
+  position: relative;
+  max-width: 100%;
 }
 
-<table
-  class="docutils guide-tablenate colwidths-auto  emotion-0"
+.emotion-21 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 32px;
+}
+
+.emotion-2 {
+  color: #3D4F58;
+  padding-right: 4px;
+}
+
+.emotion-20 * {
+  border: 0 !important;
+  min-height: unset !important;
+  padding: 0 !important;
+}
+
+.emotion-0 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  left: 0;
+}
+
+.emotion-0:after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  border-radius: 100%;
+  -webkit-transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
+}
+
+.emotion-0:after {
+  right: 100%;
+  box-shadow: 4px 0 4px rgba(6,22,33,0.3);
+}
+
+.emotion-1 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  right: 0;
+}
+
+.emotion-1:after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  border-radius: 100%;
+  -webkit-transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
+}
+
+.emotion-1:after {
+  left: 100%;
+  box-shadow: -4px 0 4px rgba(6,22,33,0.3);
+}
+
+.emotion-87 {
+  overflow-x: auto;
+}
+
+.emotion-86 {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border-bottom: 1px solid #E7EEEC;
+  width: 100%;
+}
+
+.emotion-4 {
+  border-width: 0px 1px 3px 1px;
+  border-color: #E7EEEC;
+  border-style: solid;
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.emotion-33 {
+  border-top: 1px solid #E7EEEC;
+  color: #3D4F58;
+  opacity: 0;
+}
+
+.emotion-33 > td > [data-leafygreen-ui="td-inner-div"] {
+  min-height: 40px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+
+.emotion-33 > td:nth-child(1) {
+  padding-left: 8px;
+}
+
+.emotion-22 {
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 20px;
+  position: relative;
+  font-weight: bold;
+}
+
+.emotion-22 > div > span > * {
+  margin: 0 0 10px;
+}
+
+.emotion-22 > div > span > *:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-24 {
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 20px;
+  position: relative;
+}
+
+.emotion-24 > div > span > * {
+  margin: 0 0 10px;
+}
+
+.emotion-24 > div > span > *:last-child {
+  margin-bottom: 0;
+}
+
+<div
+  class="emotion-88"
 >
-  <thead
-    valign="bottom"
+  <div
+    class="emotion-0"
+  />
+  <div
+    class="emotion-1"
+  />
+  <div
+    class="emotion-87"
   >
-    <tr
-      class="row-odd"
+    <table
+      cellpadding="0"
+      cellspacing="0"
+      class="emotion-86"
     >
-      <th
-        class="head stub"
-      >
-        name
-      </th>
-      <th
-        class="head false"
-      >
-        quantity
-      </th>
-      <th
-        class="head false"
-      >
-        size
-      </th>
-      <th
-        class="head false"
-      >
-        status
-      </th>
-      <th
-        class="head false"
-      >
-        tags
-      </th>
-      <th
-        class="head false"
-      >
-        rating
-      </th>
-    </tr>
-  </thead>
-  <tbody
-    valign="top"
-  >
-    <tr
-      class="row-even"
-    >
-      <th
-        class="stub"
-      >
-        journal
-      </th>
-      <td
-        class=""
-      >
-        25
-      </td>
-      <td
-        class=""
-      >
-        14x21,cm
-      </td>
-      <td
-        class=""
-      >
-        A
-      </td>
-      <td
-        class=""
-      >
-        brown, lined
-      </td>
-      <td
-        class=""
-      >
-        9
-      </td>
-    </tr>
-    <tr
-      class="row-odd"
-    >
-      <th
-        class="stub"
-      >
-        notebook
-      </th>
-      <td
-        class=""
-      >
-        50
-      </td>
-      <td
-        class=""
-      >
-        8.5x11,in
-      </td>
-      <td
-        class=""
-      >
-        A
-      </td>
-      <td
-        class=""
-      >
-        college-ruled,perforated
-      </td>
-      <td
-        class=""
-      >
-        8
-      </td>
-    </tr>
-    <tr
-      class="row-even"
-    >
-      <th
-        class="stub"
-      >
-        paper
-      </th>
-      <td
-        class=""
-      >
-        100
-      </td>
-      <td
-        class=""
-      >
-        8.5x11,in
-      </td>
-      <td
-        class=""
-      >
-        D
-      </td>
-      <td
-        class=""
-      >
-        watercolor
-      </td>
-      <td
-        class=""
-      >
-        10
-      </td>
-    </tr>
-    <tr
-      class="row-odd"
-    >
-      <th
-        class="stub"
-      >
-        planner
-      </th>
-      <td
-        class=""
-      >
-        75
-      </td>
-      <td
-        class=""
-      >
-        22.85x30,cm
-      </td>
-      <td
-        class=""
-      >
-        D
-      </td>
-      <td
-        class=""
-      >
-        2019
-      </td>
-      <td
-        class=""
-      >
-        10
-      </td>
-    </tr>
-    <tr
-      class="row-even"
-    >
-      <th
-        class="stub"
-      >
-        postcard
-      </th>
-      <td
-        class=""
-      >
-        45
-      </td>
-      <td
-        class=""
-      >
-        10x,cm
-      </td>
-      <td
-        class=""
-      >
-        D
-      </td>
-      <td
-        class=""
-      >
-        double-sided,white
-      </td>
-      <td
-        class=""
-      >
-        2
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <thead>
+        <tr
+          class="emotion-20"
+          data-testid="leafygreen-ui-header-row"
+        >
+          <th
+            aria-sort="none"
+            class="emotion-4"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              >
+                name
+              </span>
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-4"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              >
+                quantity
+              </span>
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-4"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              >
+                size
+              </span>
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-4"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              >
+                status
+              </span>
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-4"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              >
+                tags
+              </span>
+            </div>
+          </th>
+          <th
+            aria-sort="none"
+            class="emotion-4"
+            role="columnheader"
+            scope="col"
+          >
+            <div
+              class="emotion-3"
+            >
+              <span
+                class="emotion-2"
+              >
+                rating
+              </span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          aria-disabled="false"
+          class="emotion-33"
+          role="row"
+        >
+          <th
+            class="emotion-22"
+            role="rowheader"
+            scope="row"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                journal
+              </span>
+            </div>
+          </th>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                25
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                14x21,cm
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                A
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                brown, lined
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                9
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-disabled="false"
+          class="emotion-33"
+          role="row"
+        >
+          <th
+            class="emotion-22"
+            role="rowheader"
+            scope="row"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                notebook
+              </span>
+            </div>
+          </th>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                50
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                8.5x11,in
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                A
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                college-ruled,perforated
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                8
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-disabled="false"
+          class="emotion-33"
+          role="row"
+        >
+          <th
+            class="emotion-22"
+            role="rowheader"
+            scope="row"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                paper
+              </span>
+            </div>
+          </th>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                100
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                8.5x11,in
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                D
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                watercolor
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                10
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-disabled="false"
+          class="emotion-33"
+          role="row"
+        >
+          <th
+            class="emotion-22"
+            role="rowheader"
+            scope="row"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                planner
+              </span>
+            </div>
+          </th>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                75
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                22.85x30,cm
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                D
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                2019
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                10
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-disabled="false"
+          class="emotion-33"
+          role="row"
+        >
+          <th
+            class="emotion-22"
+            role="rowheader"
+            scope="row"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                postcard
+              </span>
+            </div>
+          </th>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                45
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                10x,cm
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                D
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                double-sided,white
+              </span>
+            </div>
+          </td>
+          <td
+            class="emotion-24"
+          >
+            <div
+              class="emotion-21"
+              data-leafygreen-ui="td-inner-div"
+            >
+              <span>
+                2
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 `;

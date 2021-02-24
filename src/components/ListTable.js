@@ -1,169 +1,132 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
+import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
-import CSSWrapper from './CSSWrapper';
-import { getNestedValue } from '../utils/get-nested-value';
 
-const ListTable = ({ nodeData, nodeData: { children }, ...rest }) => {
-  const headerRowCount = parseInt(getNestedValue(['options', 'header-rows'], nodeData), 10) || 0;
-  const stubColumnCount = parseInt(getNestedValue(['options', 'stub-columns'], nodeData), 10) || 0;
-  const headerRows = children[0].children[0].children.slice(0, headerRowCount);
+const align = key => {
+  switch (key) {
+    case 'left':
+    case 'right':
+    case 'center':
+      return key;
+    default:
+      return 'inherit';
+  }
+};
+
+const styleTable = ({ customAlign, customWidth }) => css`
+  ${customAlign && `text-align: ${align(customAlign)}`};
+  ${customWidth && `width: ${customWidth}`};
+`;
+
+/* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
+const unstyleThead = css`
+  & * {
+    border: 0 !important;
+    min-height: unset !important;
+    padding: 0 !important;
+  }
+`;
+
+const hasOneChild = children => children.length === 1 && children[0].type === 'paragraph';
+
+const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
+  <Row>
+    {row.map((cell, colIndex) => {
+      const isStub = colIndex <= stubColumnCount - 1;
+      const skipPTag = hasOneChild(cell.children);
+      const contents = cell.children.map((child, i) => (
+        <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
+      ));
+      return (
+        <Cell
+          className={cx(css`
+            /* TODO: Increase margin when Table component supports base font size of 16px */
+            & > div > span > * {
+              margin: 0 0 10px;
+            }
+
+            /* Prevent extra margin below last element */
+            & > div > span > *:last-child {
+              margin-bottom: 0;
+            }
+          `)}
+          isHeader={isStub}
+          key={colIndex}
+        >
+          {contents}
+        </Cell>
+      );
+    })}
+  </Row>
+);
+
+ListTableRow.propTypes = {
+  row: PropTypes.arrayOf(PropTypes.object),
+  stubColumnCount: PropTypes.number.isRequired,
+};
+
+const ListTable = ({ nodeData: { children, options }, ...rest }) => {
+  const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
+  const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
-  const customWidth = getNestedValue(['options', 'width'], nodeData) || 'auto';
-  const customAlign = getNestedValue(['options', 'align'], nodeData)
-    ? `align-${getNestedValue(['options', 'align'], nodeData)}`
-    : '';
+  const columnCount = bodyRows[0].children[0].children.length;
 
-  let widths = 'colwidths-auto';
-  const customWidths = getNestedValue(['options', 'widths'], nodeData);
+  // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
+  const headerRows =
+    headerRowCount > 0
+      ? children[0].children[0].children.slice(0, headerRowCount)
+      : [{ children: Array(columnCount).fill({ type: 'text', value: '', children: [] }) }];
+
+  let widths = null;
+  const customWidths = options?.widths;
   if (customWidths && customWidths !== 'auto') {
-    widths = 'colwidths-given';
+    widths = customWidths.split(/[ ,]+/);
+    if (columnCount !== widths.length) {
+      // If custom width specification does not match number of columns, do not apply
+      widths = null;
+    }
   }
 
   return (
-    <table
-      className={['docutils', getNestedValue(['options', 'class'], nodeData) || '', widths, customAlign].join(' ')}
-      css={css`
-        display: block;
-        overflow-x: auto;
-        width: ${customWidth};
-      `}
+    <Table
+      className={cx(
+        styleTable({
+          customAlign: options?.align,
+          customWidth: options?.width,
+        })
+      )}
+      columns={headerRows.map((row, rowIndex) => (
+        <HeaderRow key={rowIndex} className={cx(unstyleThead)}>
+          {row.children.map((cell, colIndex) => {
+            const skipPTag = hasOneChild(cell.children);
+            return (
+              <TableHeader
+                className={cx(css`
+                  ${widths && `width: ${widths[colIndex]}%`}
+                `)}
+                key={`${rowIndex}-${colIndex}`}
+                label={cell.children.map((child, i) => (
+                  <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                ))}
+              />
+            );
+          })}
+        </HeaderRow>
+      ))}
+      data={bodyRows}
     >
-      {widths === 'colwidths-given' && <ColGroup widths={customWidths.split(/[ ,]+/)} />}
-      <ListTableHeader {...rest} rows={headerRows} stubColumnCount={stubColumnCount} />
-      <ListTableBody {...rest} rows={bodyRows} headerRowCount={headerRowCount} stubColumnCount={stubColumnCount} />
-    </table>
+      {({ datum }) => <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />}
+    </Table>
   );
-};
-
-const ColGroup = ({ widths }) => (
-  <colgroup>
-    {widths.map((width, index) => (
-      <col width={`${width}%`} key={index} />
-    ))}
-  </colgroup>
-);
-
-ColGroup.propTypes = {
-  widths: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
-const ListTableHeader = ({ rows, stubColumnCount, ...rest }) => (
-  <thead valign="bottom">
-    {rows.map((row, index) => (
-      <ListTableHeaderRow {...rest} row={row.children} rowIndex={index} stubColumnCount={stubColumnCount} key={index} />
-    ))}
-  </thead>
-);
-
-ListTableHeader.propTypes = {
-  rows: PropTypes.arrayOf(
-    PropTypes.shape({
-      children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    })
-  ).isRequired,
-  stubColumnCount: PropTypes.number.isRequired,
-};
-
-const ListTableHeaderRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
-  <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
-    {row.map((column, colIndex) => (
-      <th className={`head ${colIndex <= stubColumnCount - 1 && 'stub'}`} key={colIndex}>
-        <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
-      </th>
-    ))}
-  </tr>
-);
-
-ListTableHeaderRow.propTypes = {
-  row: PropTypes.arrayOf(
-    PropTypes.shape({
-      children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    })
-  ).isRequired,
-  rowIndex: PropTypes.number.isRequired,
-  stubColumnCount: PropTypes.number.isRequired,
-};
-
-const ListTableBody = ({ rows, headerRowCount, stubColumnCount, ...rest }) => (
-  <tbody valign="top">
-    {rows.map((row, index) => (
-      <ListTableBodyRow
-        {...rest}
-        key={index}
-        row={getNestedValue(['children', 0, 'children'], row)}
-        rowIndex={index + headerRowCount}
-        stubColumnCount={stubColumnCount}
-      />
-    ))}
-  </tbody>
-);
-
-ListTableBody.propTypes = {
-  headerRowCount: PropTypes.number.isRequired,
-  rows: PropTypes.arrayOf(
-    PropTypes.shape({
-      children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    })
-  ).isRequired,
-  stubColumnCount: PropTypes.number.isRequired,
-};
-
-const ListTableBodyRow = ({ row, rowIndex, stubColumnCount, ...rest }) => (
-  <tr className={rowIndex % 2 === 0 ? 'row-odd' : 'row-even'}>
-    {row &&
-      row.map((column, colIndex) => {
-        let isStub = colIndex <= stubColumnCount - 1;
-        const CellTag = isStub ? 'th' : 'td';
-        let cellClass = isStub ? 'stub' : '';
-        return (
-          <CellTag className={cellClass} key={colIndex}>
-            {column.children.length === 1 ? (
-              <CSSWrapper className={['first', 'last'].join(' ')}>
-                <ComponentFactory {...rest} nodeData={getNestedValue(['children', 0], column)} parentNode="listTable" />
-              </CSSWrapper>
-            ) : (
-              column.children.map((element, index) => {
-                if (index === 0) {
-                  return (
-                    <CSSWrapper key={index} className="first">
-                      <ComponentFactory {...rest} nodeData={element} />
-                    </CSSWrapper>
-                  );
-                }
-                if (index === column.children.length - 1) {
-                  return (
-                    <CSSWrapper key={index} className="last">
-                      <ComponentFactory {...rest} nodeData={element} />
-                    </CSSWrapper>
-                  );
-                }
-                return <ComponentFactory {...rest} key={index} nodeData={element} />;
-              })
-            )}
-          </CellTag>
-        );
-      })}
-  </tr>
-);
-
-ListTableBodyRow.propTypes = {
-  row: PropTypes.arrayOf(
-    PropTypes.shape({
-      children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    })
-  ).isRequired,
-  rowIndex: PropTypes.number.isRequired,
-  stubColumnCount: PropTypes.number.isRequired,
 };
 
 ListTable.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
     options: PropTypes.shape({
       align: PropTypes.string,
-      class: PropTypes.string,
       'header-rows': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       'stub-columns': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       width: PropTypes.string,
