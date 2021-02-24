@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import Button from '@leafygreen-ui/button';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import { theme } from '../theme/docsTheme';
 import { withPrefix } from 'gatsby';
 
