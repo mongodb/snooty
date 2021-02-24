@@ -21,11 +21,6 @@ const MainColumn = ({ className, children }) => (
       -ms-flex-order: 1;
       -ms-flex-pack: center;
       -ms-flex-positive: 2;
-
-      @media print {
-        margin-left: 0;
-        width: 100%;
-      }
     `}
   >
     {children}

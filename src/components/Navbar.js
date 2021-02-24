@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { Logo } from '@leafygreen-ui/logo';
+import { uiColors } from '@leafygreen-ui/palette';
+import Searchbar from './Searchbar';
+import SidebarMobileMenuButton from './SidebarMobileMenuButton';
 import useMedia from '../hooks/use-media';
+import { theme } from '../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
-import Searchbar from './Searchbar';
-import { theme } from '../theme/docsTheme';
-import SidebarMobileMenuButton from './SidebarMobileMenuButton';
-import { Logo } from '@leafygreen-ui/logo';
 
 const NavbarContainer = styled('div')`
   align-items: center;
@@ -15,7 +16,7 @@ const NavbarContainer = styled('div')`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   height: 45px;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0px 20px;
   position: fixed;
   top: 0;
@@ -45,7 +46,7 @@ const NavSeparator = styled('span')`
 `;
 
 const NavLabel = styled('div')`
-  color: #616161;
+  color: ${uiColors.gray.dark3}
   display: inline-block;
   font-family: Akzidenz;
   font-size: 16px;

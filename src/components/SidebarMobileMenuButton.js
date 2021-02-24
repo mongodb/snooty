@@ -1,16 +1,15 @@
 import React, { useContext, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { SidebarContext } from './sidebar-context';
-import { theme } from '../theme/docsTheme';
 import { uiColors } from '@leafygreen-ui/palette';
+import { displayNone } from '../utils/display-none';
 
 // This container prevents the leafygreen components from flashing when the media query is true
 const MenuButtonContainer = styled('div')`
-  @media ${theme.screenSize.smallAndUp} {
-    display: none;
-  }
+  ${displayNone.onLargerThanMobile}
 `;
 
 const MenuButton = styled(IconButton)`
@@ -37,6 +36,10 @@ const SidebarMobileMenuButton = ({ className }) => {
       </MenuButton>
     </MenuButtonContainer>
   );
+};
+
+SidebarMobileMenuButton.propTypes = {
+  className: PropTypes.string,
 };
 
 export default SidebarMobileMenuButton;

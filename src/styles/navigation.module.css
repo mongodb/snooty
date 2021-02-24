@@ -5,9 +5,3 @@
 .showNav.postRender {
     display: block !important;
 }
-
-@media print {
-    .leftColumn.postRender {
-        display: none !important;
-    }
-}

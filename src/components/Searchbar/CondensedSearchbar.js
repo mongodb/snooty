@@ -15,7 +15,6 @@ const ExpandButton = styled(IconButton)`
   border-radius: ${theme.size.medium};
   box-shadow: none;
   height: ${theme.size.large};
-  position: absolute;
   /* 32px button in a 36px container, 2px top gives equal spacing */
   top: 2px;
   width: ${theme.size.large};
@@ -33,11 +32,6 @@ const ExpandButton = styled(IconButton)`
   }
   :after {
     display: none;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    // Update position to let navbar layout space things out more evenly on mobile
-    position: relative;
   }
 `;
 

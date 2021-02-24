@@ -60,10 +60,6 @@ const Document = ({
           className="body"
           css={css`
             margin-left: 25px;
-
-            @media print {
-              margin: 0 !important;
-            }
           `}
         >
           <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
