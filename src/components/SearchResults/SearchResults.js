@@ -14,6 +14,7 @@ import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
+import { displayNone } from '../../utils/display-none';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
@@ -57,9 +58,7 @@ const FilterHeader = styled('h2')`
   text-transform: uppercase;
   white-space: nowrap;
   ${commonTextStyling};
-  @media ${theme.screenSize.upToSmall} {
-    display: none;
-  }
+  ${displayNone.onMobile};
 `;
 
 const SearchResultsContainer = styled('div')`

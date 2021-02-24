@@ -42,6 +42,10 @@ const NavbarContainer = styled('div')`
     top: unset !important;
   }`
     : ''}
+
+  .navbar-brand {
+    width: 90px;
+  }
 `;
 
 const Banner = React.memo(({ altText, imgPath, mobileImgPath, url }) => {

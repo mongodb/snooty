@@ -25,7 +25,6 @@ const Document = ({
   const renderStatus = isBrowser ? style.postRender : '';
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
-  const showRightColumn = !isTabletOrMobile;
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -69,12 +68,10 @@ const Document = ({
           </div>
         </div>
       </div>
-      {showRightColumn && (
-        <RightColumn>
-          <TabSelectors />
-          <Contents />
-        </RightColumn>
-      )}
+      <RightColumn>
+        <TabSelectors />
+        <Contents />
+      </RightColumn>
     </div>
   );
 };

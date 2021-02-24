@@ -9,6 +9,7 @@ import AdvancedFiltersPane from './AdvancedFiltersPane';
 import Pagination from './Pagination';
 import SearchResults from './SearchResults';
 import SearchContext from './SearchContext';
+import { displayNone } from '../../utils/display-none';
 
 const RESULTS_PER_PAGE = 3;
 const SEARCH_FOOTER_DESKTOP_HEIGHT = theme.size.xlarge;
@@ -93,9 +94,7 @@ const SearchFooter = styled('div')`
   padding-left: ${theme.size.default};
   padding-right: ${theme.size.default};
   width: 100%;
-  @media ${theme.screenSize.upToSmall} {
-    display: none;
-  }
+  ${displayNone.onMobile};
 `;
 
 const FilterFooterButton = styled(Button)`
