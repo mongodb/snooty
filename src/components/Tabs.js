@@ -13,8 +13,6 @@ const getTabId = node => getNestedValue(['options', 'tabid'], node);
 // Name anonymous tabsets by alphabetizing their tabids and concatenating with a forward slash
 const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
-const TabButton = ({ ...props }) => <button {...props} />;
-
 const hiddenTabStyling = css`
   & > div:first-child {
     display: none;
@@ -64,7 +62,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   );
 
   return (
-    <StyledTabs as={TabButton} isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
+    <StyledTabs isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
       {children.map(tab => {
         if (tab.name !== 'tab') {
           return null;
