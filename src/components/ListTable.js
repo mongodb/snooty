@@ -98,7 +98,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         })
       )}
       columns={headerRows.map((row, rowIndex) => (
-        <HeaderRow key={rowIndex} className={cx(unstyleThead)}>
+        <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
           {row.children.map((cell, colIndex) => {
             const skipPTag = hasOneChild(cell.children);
             return (
