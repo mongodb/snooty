@@ -1,5 +1,4 @@
 import React, { useContext, useMemo } from 'react';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
@@ -9,17 +8,10 @@ import SearchContext from './SearchContext';
 
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 
-const activeTextBarStyling = css`
-  // background-color: #fff;
-  // border: none;
-  // color: ${uiColors.gray.dark3};
-`;
-
 const StyledTextInput = styled(TextInput)`
   div > input {
     background-color: transparent;
-    border: none !important;
-    // color: ${uiColors.gray.dark1};
+    border: none;
     color: rgb(33, 49, 60);
     font-weight: 300;
     letter-spacing: 0.5px;
@@ -106,5 +98,5 @@ const SearchTextInput = React.forwardRef(({ isSearching, onChange, value, ...pro
 });
 
 // Also export the styled component for styled selector use
-export { activeTextBarStyling, StyledTextInput };
+export { StyledTextInput };
 export default SearchTextInput;
