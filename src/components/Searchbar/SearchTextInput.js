@@ -1,5 +1,4 @@
 import React, { useContext, useMemo } from 'react';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
@@ -9,25 +8,17 @@ import SearchContext from './SearchContext';
 
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 
-const activeTextBarStyling = css`
-  background-color: #fff;
-  border: none;
-  color: ${uiColors.gray.dark3};
-`;
-
 const StyledTextInput = styled(TextInput)`
-  /* Curve the text input box and put padding around text for icons/buttons */
   div > input {
+    background-color: transparent;
     border: none;
-    background-color: ${uiColors.gray.light3};
-    border-radius: ${theme.size.medium};
-    color: ${uiColors.gray.dark1};
-    /* 24 px for magnifying glass plus 16px margin */
-    padding-left: 40px;
-    padding-right: ${theme.size.large};
+    color: rgb(33, 49, 60);
     font-weight: 300;
     letter-spacing: 0.5px;
     transition: background-color 150ms ease-in;
+    :focus {
+      border: none;
+    }
     ::placeholder {
       color: ${uiColors.gray.dark1};
     }
@@ -54,7 +45,6 @@ const StyledTextInput = styled(TextInput)`
     padding-bottom: ${theme.size.tiny};
     div > input {
       /* Always have this element filled in for mobile */
-      ${activeTextBarStyling}
       /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
       font-size: ${theme.fontSize.default};
       padding-top: 2px;
@@ -76,6 +66,7 @@ const StyledTextInput = styled(TextInput)`
 `;
 
 const SearchWrapper = styled('span')`
+  width: 100%;
   @media ${theme.screenSize.upToSmall} {
     /* Putting this attribute on the input causes a DOM warning */
     ${({ isSearching }) => isSearching && `box-shadow: 0 2px 2px 0 rgba(231,238,236,0.2);`}
@@ -107,5 +98,5 @@ const SearchTextInput = React.forwardRef(({ isSearching, onChange, value, ...pro
 });
 
 // Also export the styled component for styled selector use
-export { activeTextBarStyling, StyledTextInput };
+export { StyledTextInput };
 export default SearchTextInput;

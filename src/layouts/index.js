@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
 import { ContentsProvider } from '../components/contents-context';
+import { SidebarContextProvider } from '../components/sidebar-context';
 import { TabProvider } from '../components/tab-context';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
-import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 
 const bannerPadding = css`
   #gatsby-focus-wrapper {
@@ -57,10 +58,12 @@ const DefaultLayout = props => {
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
         <ContentsProvider nodes={page?.children}>
-          <Template {...props}>{template === 'landing' ? [children] : children}</Template>
+          <SidebarContextProvider>
+            <Header />
+            <Template {...props}>{template === 'landing' ? [children] : children}</Template>
+          </SidebarContextProvider>
         </ContentsProvider>
       </TabProvider>
-      <Navbar />
     </>
   );
 };

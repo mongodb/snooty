@@ -82,6 +82,10 @@ const SearchResultsContainer = styled('div')`
     bottom: 0;
     top: 40px;
   }
+  // Prevent container from expanding to 100% width of screen size and not parent container
+  @media ${theme.screenSize.smallAndUp} {
+    max-width: 372px;
+  }
 `;
 
 const SearchFooter = styled('div')`
