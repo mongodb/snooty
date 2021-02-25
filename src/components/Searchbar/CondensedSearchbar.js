@@ -15,8 +15,6 @@ const ExpandButton = styled(IconButton)`
   border-radius: ${theme.size.medium};
   box-shadow: none;
   height: ${theme.size.large};
-  position: absolute;
-  right: ${theme.size.small};
   /* 32px button in a 36px container, 2px top gives equal spacing */
   top: 2px;
   width: ${theme.size.large};

@@ -38,6 +38,4 @@ static:
 	cp -a ./docs-tools/themes/mongodb/static/fonts ./static/docs-tools/
 	cp ./docs-tools/themes/mongodb/static/guides.css ./static/docs-tools/
 	cp ./docs-tools/themes/mongodb/static/mongodb-docs.css ./static/docs-tools/
-	cp ./docs-tools/themes/mongodb/static/navbar.min.js ./static/docs-tools/
-	cp ./docs-tools/themes/mongodb/static/css/navbar.min.css ./static/docs-tools/
 	cp ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/images/
