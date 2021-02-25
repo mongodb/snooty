@@ -5,7 +5,7 @@ const getTemplate = (project, slug, template) => {
     case 'blank':
       return Blank;
     case 'landing':
-      return Landing;
+      return project === 'landing' ? Landing : Document;
     case 'openapi':
       return OpenAPITemplate;
     default:

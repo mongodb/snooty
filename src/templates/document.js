@@ -10,12 +10,22 @@ import Contents from '../components/Contents';
 import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
+import { css } from '@emotion/core';
+
+const landingCSS = css`
+  font: red !important;
+  .main-column {
+    max-width: 1200px !important;
+    font: blue !important;
+  }
+`;
 
 const Document = ({
   children,
   pageContext: {
     slug,
     page,
+    template,
     metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
   },
 }) => {
@@ -25,7 +35,8 @@ const Document = ({
   const renderStatus = isBrowser ? style.postRender : '';
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
-  const showRightColumn = !isTabletOrMobile;
+  const isLanding = template === 'landing';
+  const showRightColumn = !isTabletOrMobile && !isLanding;
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -49,7 +60,7 @@ const Document = ({
           </div>
         )}
       </div>
-      <div id="main-column" className="main-column">
+      <div id="main-column" className="main-column" css={landingCSS}>
         {(!isBrowser || !showLeftColumn) && (
           <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
             Navigation
