@@ -11,12 +11,13 @@ import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 import { css } from '@emotion/core';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const landingCSS = css`
   max-width: 1172px !important;
 
-  ${'' /* All paragraphs contained in a parent class that is not named footer */}
-  p {
+  ${'' /* All paragraphs except those in the copyright div */}
+  p:not(div.copyright p) {
     max-width: 500px !important;
   }
 `;
@@ -26,7 +27,6 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    template,
     metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
   },
 }) => {
@@ -36,7 +36,9 @@ const Document = ({
   const renderStatus = isBrowser ? style.postRender : '';
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
-  const isLanding = template === 'landing';
+  const { project } = useSiteMetadata();
+  const isLanding = project === 'compass' && slug === '/';
+  console.log(isLanding);
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);

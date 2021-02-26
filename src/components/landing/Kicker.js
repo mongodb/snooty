@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ComponentFactory from '../ComponentFactory';
 import { css } from '@emotion/core';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Overline } from '@leafygreen-ui/typography';
-import { getPlaintext } from '../../utils/get-plaintext';
 
-const Kicker = ({ nodeData: { argument } }) => (
+const Kicker = ({ nodeData: { children }, ...rest }) => (
   <Overline
     css={css`
       color: ${uiColors.gray.dark1};
     `}
   >
-    {getPlaintext(argument)}
+    {children.map((child, i) => (
+      <ComponentFactory {...rest} nodeData={child} key={i} />
+    ))}
   </Overline>
 );
 
