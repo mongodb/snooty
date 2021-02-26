@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
 import { css } from '@emotion/core';
+import Navbar from '../components/Navbar';
 
 const Header = () => {
   return (

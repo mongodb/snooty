@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { getNestedValue } from '../utils/get-nested-value';
 import Breadcrumbs from '../components/Breadcrumbs';
+import Contents from '../components/Contents';
 import InternalPageNav from '../components/InternalPageNav';
+import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
-import Contents from '../components/Contents';
-import MainColumn from '../components/MainColumn';
+import { getNestedValue } from '../utils/get-nested-value';
 
 const Document = ({
   children,

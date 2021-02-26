@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
+import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 import MainColumn from '../components/MainColumn';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
-import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 
 const EcosystemIndex = ({ className }) => (
   <div className={['content', className].join(' ')}>

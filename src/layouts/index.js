@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
-import SiteMetadata from '../components/site-metadata';
-import { ContentsProvider } from '../components/contents-context';
-import { TabProvider } from '../components/tab-context';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { getTemplate } from '../utils/get-template';
-import Header from '../components/Header';
 import styled from '@emotion/styled';
-import style from '../styles/navigation.module.css';
-import SidebarContext from '../components/sidebar-context';
-import useScreenSize from '../hooks/useScreenSize.js';
-import { isBrowser } from '../utils/is-browser.js';
+import { ContentsProvider } from '../components/contents-context';
+import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import SidebarContext from '../components/sidebar-context';
+import SiteMetadata from '../components/site-metadata';
+import { TabProvider } from '../components/tab-context';
+import useScreenSize from '../hooks/useScreenSize.js';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import style from '../styles/navigation.module.css';
+import { getTemplate } from '../utils/get-template';
+import { isBrowser } from '../utils/is-browser.js';
 
 const globalCSS = css`
   .hidden {
