@@ -18,9 +18,8 @@ const NavbarContainer = styled('div')`
   height: 45px;
   justify-content: space-between;
   padding: 0px 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  // Keep relative with z-index so that box shadow will be on top of every component
+  position: relative;
   z-index: 9999;
 
   :focus {

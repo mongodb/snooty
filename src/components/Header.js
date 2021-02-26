@@ -1,9 +1,14 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import { css } from '@emotion/core';
 
 const Header = () => {
   return (
-    <header>
+    <header
+      css={css`
+        grid-area: header;
+      `}
+    >
       {/* TODO: Banner */}
       <Navbar />
     </header>

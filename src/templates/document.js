@@ -1,61 +1,35 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { getNestedValue } from '../utils/get-nested-value';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
-import Sidebar from '../components/Sidebar';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
 import Contents from '../components/Contents';
 import MainColumn from '../components/MainColumn';
-import useScreenSize from '../hooks/useScreenSize.js';
-import style from '../styles/navigation.module.css';
-import { isBrowser } from '../utils/is-browser.js';
-import { SidebarContext } from '../components/sidebar-context';
 
 const Document = ({
   children,
   pageContext: {
     slug,
     page,
-    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+    metadata: { parentPaths, slugToTitle: slugTitleMapping, toctreeOrder },
   },
 }) => {
-  const { isTabletOrMobile } = useScreenSize();
-  const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
-  const { isMobileMenuOpen } = useContext(SidebarContext);
-  /* Add the postRender CSS class without disturbing pre-render functionality */
-  const renderStatus = isBrowser ? style.postRender : '';
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
 
-  const toggleLeftColumn = () => {
-    setShowLeftColumn(!showLeftColumn);
-  };
-
-  useEffect(() => {
-    setShowLeftColumn(!isTabletOrMobile);
-  }, [isTabletOrMobile]);
-
   return (
-    <div className="content">
-      {(!isBrowser || showLeftColumn || isMobileMenuOpen) && (
-        <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
-          <Sidebar
-            slug={slug}
-            publishedBranches={publishedBranches}
-            toctreeData={toctree}
-            toggleLeftColumn={toggleLeftColumn}
-          />
-        </div>
-      )}
+    <div
+      className="content"
+      css={css`
+        grid-area: contents;
+        overflow-y: auto;
+        margin: 0px;
+      `}
+    >
       <MainColumn>
-        {(!isBrowser || !showLeftColumn) && !isMobileMenuOpen && (
-          <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
-            Navigation
-          </span>
-        )}
         <div
           className="body"
           css={css`
