@@ -13,10 +13,11 @@ import { isBrowser } from '../utils/is-browser.js';
 import { css } from '@emotion/core';
 
 const landingCSS = css`
-  font: red !important;
-  .main-column {
-    max-width: 1200px !important;
-    font: blue !important;
+  max-width: 1172px !important;
+
+  ${'' /* All paragraphs contained in a parent class that is not named footer */}
+  p {
+    max-width: 500px !important;
   }
 `;
 
@@ -60,7 +61,7 @@ const Document = ({
           </div>
         )}
       </div>
-      <div id="main-column" className="main-column" css={landingCSS}>
+      <div id="main-column" className="main-column" css={isLanding && landingCSS}>
         {(!isBrowser || !showLeftColumn) && (
           <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
             Navigation
