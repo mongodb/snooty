@@ -10,7 +10,7 @@ const ListItem = ({ nodeData, ...rest }) => (
         nodeData={child}
         key={index}
         // Include <p> tags in <li> if there is more than one paragraph
-        parentNode={nodeData.children.length === 1 ? 'listItem' : undefined}
+        skipPTag={nodeData.children.length === 1}
       />
     ))}
   </li>
