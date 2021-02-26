@@ -11,6 +11,7 @@ import MainColumn from '../components/MainColumn';
 
 const Document = ({
   children,
+  className,
   pageContext: {
     slug,
     page,
@@ -21,14 +22,7 @@ const Document = ({
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
 
   return (
-    <div
-      className="content"
-      css={css`
-        grid-area: contents;
-        overflow-y: auto;
-        margin: 0px;
-      `}
-    >
+    <div className={['content', className].join(' ')}>
       <MainColumn>
         <div
           className="body"
@@ -52,6 +46,7 @@ const Document = ({
 };
 
 Document.propTypes = {
+  className: PropTypes.string,
   pageContext: PropTypes.shape({
     page: PropTypes.shape({
       children: PropTypes.array,

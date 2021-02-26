@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getNestedValue } from '../utils/get-nested-value';
-import { isBrowser } from '../utils/is-browser';
 
 const defaultContextValue = {
   headingNodes: [],
@@ -77,18 +76,7 @@ const ContentsContext = React.createContext(defaultContextValue);
 
 const ContentsProvider = ({ children, nodes = [] }) => {
   const headingNodes = useMemo(() => findSectionHeadings(nodes), [nodes]);
-  const defaultActiveSectionId = useMemo(() => {
-    let defaultId = headingNodes[0]?.id;
-    if (isBrowser) {
-      defaultId = window.location.hash.slice(1) || defaultId;
-    }
-    return defaultId;
-  }, [headingNodes]);
-  const [activeSectionId, setActiveSectionId] = useState(defaultActiveSectionId);
-
-  useEffect(() => {
-    console.log(activeSectionId);
-  }, [activeSectionId]);
+  const [activeSectionId, setActiveSectionId] = useState(headingNodes[0]?.id);
 
   useEffect(() => {
     const options = {
@@ -100,6 +88,7 @@ const ContentsProvider = ({ children, nodes = [] }) => {
     // Callback is first performed upon page load. Ignore checking entries on first load to allow
     // headings[0] to be counted first when headings[0] and headings[1] are both intersecting
     let firstLoad = true;
+    let defaultActiveSectionId = window.location.hash.slice(1) || headingNodes[0]?.id;
     const callback = entries => {
       if (firstLoad) {
         firstLoad = false;
@@ -120,7 +109,7 @@ const ContentsProvider = ({ children, nodes = [] }) => {
       unobserveHeadings(headings, observer);
       setActiveSectionId(defaultActiveSectionId);
     };
-  }, [defaultActiveSectionId, headingNodes]);
+  }, [headingNodes]);
 
   return <ContentsContext.Provider value={{ headingNodes, activeSectionId }}>{children}</ContentsContext.Provider>;
 };

@@ -23,6 +23,26 @@ const globalCSS = css`
     visibility: hidden !important;
     width: 0;
   }
+
+  // Originally from docs-tools navbar.css
+  img.hide-medium-and-up,
+  img.show-medium-and-up {
+    max-width: 100%;
+  }
+  .hide-medium-and-up {
+    display: none !important;
+  }
+  .show-medium-and-up {
+    display: block !important;
+  }
+  @media (max-width: 767px) {
+    .hide-medium-and-up {
+      display: block !important;
+    }
+    .show-medium-and-up {
+      display: none !important;
+    }
+  }
 `;
 
 const GlobalGrid = styled('div')`
@@ -107,6 +127,8 @@ const DefaultLayout = props => {
               <Template
                 css={css`
                   grid-area: contents;
+                  margin: 0px;
+                  overflow-y: auto;
                 `}
                 {...props}
               >

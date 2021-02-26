@@ -7,6 +7,15 @@ import { Link as GatsbyLink } from 'gatsby';
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
  */
 
+// Allows scrolling to top of main "content" div. Replace or remove this in the event we stray away from
+// current layout and/or change the div className, etc.
+const handleLinkClick = () => {
+  const contentEl = document.querySelector('.content');
+  if (contentEl) {
+    contentEl.scrollTop = 0;
+  }
+};
+
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
 const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
@@ -25,12 +34,7 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     return (
       <GatsbyLink
         activeClassName={activeClassName}
-        onClick={() => {
-          // Allows scrolling to top of main "content" div. Replace or remove this in the event we stray away from
-          // current layout and/or change the div className, etc.
-          const contentEl = document.querySelector('.content');
-          contentEl.scrollTop = 0;
-        }}
+        onClick={handleLinkClick}
         partiallyActive={partiallyActive}
         to={to}
         {...other}
