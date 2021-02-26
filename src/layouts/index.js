@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -53,21 +53,47 @@ const GlobalGrid = styled('div')`
     'header header'
     'sidebar contents';
   grid-template-columns: auto 1fr;
+<<<<<<< HEAD
   grid-template-rows: auto 1fr;
   height: 100vh;
 `;
 
 const DefaultLayout = (props) => {
+=======
+  grid-template-rows: 45px 1fr;
+  height: 100vh;
+`;
+
+const DefaultLayout = props => {
+>>>>>>> Apply grid layout and get css to almost be the same on content
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
   const {
-    metadata: { title },
+    metadata: { publishedBranches, title, toctree },
     page,
     slug,
     template,
   } = pageContext;
   const Template = getTemplate(project, slug, template);
+<<<<<<< HEAD
   const isSidebarEnabled = template !== 'blank';
+=======
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isTabletOrMobile } = useScreenSize();
+  const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
+  // TODO: Check if this styling is still necessary after current Sidebar is replaced with the LG Sidebar
+  /* Add the postRender CSS class without disturbing pre-render functionality */
+  const renderStatus = isBrowser ? style.postRender : '';
+
+  const toggleLeftColumn = () => {
+    setShowLeftColumn(!showLeftColumn);
+  };
+
+  useEffect(() => {
+    setShowLeftColumn(!isTabletOrMobile);
+  }, [isTabletOrMobile]);
+>>>>>>> Apply grid layout and get css to almost be the same on content
 
   return (
     <>
@@ -75,6 +101,7 @@ const DefaultLayout = (props) => {
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
         <ContentsProvider nodes={page?.children}>
+<<<<<<< HEAD
           <GlobalGrid>
             <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
               <Header />
@@ -91,6 +118,55 @@ const DefaultLayout = (props) => {
               {template === 'landing' ? [children] : children}
             </Template>
           </GlobalGrid>
+=======
+          <SidebarContext.Provider
+            value={{
+              isMobileMenuOpen,
+              setIsMobileMenuOpen,
+            }}
+          >
+            {/* Add Grid div here */}
+            <GlobalGrid>
+              <Header />
+              {!isBrowser || showLeftColumn || isMobileMenuOpen ? (
+                <div
+                  className={`left-column ${style.leftColumn} ${renderStatus}`}
+                  css={css`
+                    grid-area: sidebar;
+                    width: 330px;
+                  `}
+                  id="left-column"
+                >
+                  <Sidebar
+                    slug={slug}
+                    publishedBranches={publishedBranches}
+                    toctreeData={toctree}
+                    toggleLeftColumn={toggleLeftColumn}
+                  />
+                </div>
+              ) : (
+                <span
+                  className={`showNav ${style.showNav} ${renderStatus}`}
+                  css={css`
+                    grid-area: sidebar;
+                  `}
+                  id="showNav"
+                  onClick={toggleLeftColumn}
+                >
+                  Navigation
+                </span>
+              )}
+              <Template
+                css={css`
+                  grid-area: contents;
+                `}
+                {...props}
+              >
+                {template === 'landing' ? [children] : children}
+              </Template>
+            </GlobalGrid>
+          </SidebarContext.Provider>
+>>>>>>> Apply grid layout and get css to almost be the same on content
         </ContentsProvider>
       </TabProvider>
     </>
