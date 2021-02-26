@@ -15,8 +15,7 @@ const MainColumn = ({ className, children }) => (
       min-height: 600px;
       order: 1;
       transition: margin-left 0.4s cubic-bezier(0.02, 0.01, 0.47, 1);
-      // Leave room for Sidebar and RightColumn
-      width: calc(100% - 330px - 180px);
+      width: 60%;
       -ms-flex-align: center;
       -ms-flex-order: 1;
       -ms-flex-pack: center;

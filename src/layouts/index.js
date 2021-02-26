@@ -9,8 +9,7 @@ import { getTemplate } from '../utils/get-template';
 import Header from '../components/Header';
 import styled from '@emotion/styled';
 import style from '../styles/navigation.module.css';
-// TODO: Delete file and remove import
-import { SidebarContext } from '../components/sidebar-context';
+import SidebarContext from '../components/sidebar-context';
 import useScreenSize from '../hooks/useScreenSize.js';
 import { isBrowser } from '../utils/is-browser.js';
 import Sidebar from '../components/Sidebar';
@@ -32,7 +31,7 @@ const GlobalGrid = styled('div')`
     'header header'
     'sidebar contents';
   grid-template-columns: auto 1fr;
-  grid-template-rows: 45px 1fr;
+  grid-template-rows: auto 1fr;
   height: 100vh;
 `;
 

@@ -23,7 +23,18 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
     return (
-      <GatsbyLink to={to} activeClassName={activeClassName} partiallyActive={partiallyActive} {...other}>
+      <GatsbyLink
+        activeClassName={activeClassName}
+        onClick={() => {
+          // Allows scrolling to top of main "content" div. Replace or remove this in the event we stray away from
+          // current layout and/or change the div className, etc.
+          const contentEl = document.querySelector('.content');
+          contentEl.scrollTop = 0;
+        }}
+        partiallyActive={partiallyActive}
+        to={to}
+        {...other}
+      >
         {children}
       </GatsbyLink>
     );
