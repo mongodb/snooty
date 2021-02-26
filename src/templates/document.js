@@ -38,7 +38,6 @@ const Document = ({
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const { project } = useSiteMetadata();
   const isLanding = project === 'compass' && slug === '/';
-  console.log(isLanding);
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
