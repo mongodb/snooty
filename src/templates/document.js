@@ -37,7 +37,6 @@ const Document = ({
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const isLanding = template === 'landing';
-  const showRightColumn = !isTabletOrMobile && !isLanding;
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -81,12 +80,10 @@ const Document = ({
           </div>
         </div>
       </div>
-      {showRightColumn && (
-        <RightColumn>
-          <TabSelectors />
-          <Contents />
-        </RightColumn>
-      )}
+      <RightColumn>
+        <TabSelectors />
+        <Contents />
+      </RightColumn>
     </div>
   );
 };
