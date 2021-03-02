@@ -13,15 +13,6 @@ import { isBrowser } from '../utils/is-browser.js';
 import { css } from '@emotion/core';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 
-const productLandingCSS = css`
-  max-width: 1172px !important;
-
-  ${'' /* All paragraphs except those in the copyright div */}
-  p:not(div.copyright p) {
-    max-width: 500px !important;
-  }
-`;
-
 const Document = props => {
   const {
     children,
@@ -38,7 +29,6 @@ const Document = props => {
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const { project } = useSiteMetadata();
-  const isProductLanding = project === 'compass' && slug === '/';
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -62,7 +52,7 @@ const Document = props => {
           </div>
         )}
       </div>
-      <div id="main-column" className="main-column" css={isProductLanding && productLandingCSS}>
+      <div id="main-column" className="main-column">
         {(!isBrowser || !showLeftColumn) && (
           <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
             Navigation
