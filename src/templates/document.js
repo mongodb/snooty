@@ -11,14 +11,15 @@ import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
 
-const Document = ({
-  children,
-  pageContext: {
-    slug,
-    page,
-    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
-  },
-}) => {
+const Document = props => {
+  const {
+    children,
+    pageContext: {
+      slug,
+      page,
+      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+    },
+  } = props;
   const { isTabletOrMobile } = useScreenSize();
   const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
   /* Add the postRender CSS class without disturbing pre-render functionality */
