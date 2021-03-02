@@ -5,6 +5,7 @@ import CardGroup from './CardGroup';
 import CTA from './CTA';
 import DeprecatedVersionSelector from './DeprecatedVersionSelector';
 import Introduction from './Introduction';
+import Kicker from './Kicker';
 
 const componentMap = {
   card: Card,
@@ -12,6 +13,7 @@ const componentMap = {
   cta: CTA,
   'deprecated-version-selector': DeprecatedVersionSelector,
   introduction: Introduction,
+  kicker: Kicker,
 };
 
 const ComponentFactory = (props) => {
