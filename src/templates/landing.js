@@ -104,7 +104,7 @@ const Landing = ({ children }) => {
 };
 
 Landing.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default Landing;

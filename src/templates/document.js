@@ -13,7 +13,7 @@ import { isBrowser } from '../utils/is-browser.js';
 import { css } from '@emotion/core';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 
-const landingCSS = css`
+const productLandingCSS = css`
   max-width: 1172px !important;
 
   ${'' /* All paragraphs except those in the copyright div */}
@@ -22,14 +22,15 @@ const landingCSS = css`
   }
 `;
 
-const Document = ({
-  children,
-  pageContext: {
-    slug,
-    page,
-    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
-  },
-}) => {
+const Document = props => {
+  const {
+    children,
+    pageContext: {
+      slug,
+      page,
+      metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+    },
+  } = props;
   const { isTabletOrMobile } = useScreenSize();
   const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
   /* Add the postRender CSS class without disturbing pre-render functionality */
@@ -37,7 +38,7 @@ const Document = ({
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
   const { project } = useSiteMetadata();
-  const isLanding = project === 'compass' && slug === '/';
+  const isProductLanding = project === 'compass' && slug === '/';
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
@@ -61,7 +62,7 @@ const Document = ({
           </div>
         )}
       </div>
-      <div id="main-column" className="main-column" css={isLanding && landingCSS}>
+      <div id="main-column" className="main-column" css={isProductLanding && productLandingCSS}>
         {(!isBrowser || !showLeftColumn) && (
           <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
             Navigation

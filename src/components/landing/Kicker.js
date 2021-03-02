@@ -5,13 +5,13 @@ import { css } from '@emotion/core';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Overline } from '@leafygreen-ui/typography';
 
-const Kicker = ({ nodeData: { children }, ...rest }) => (
+const Kicker = ({ nodeData: { argument }, ...rest }) => (
   <Overline
     css={css`
       color: ${uiColors.gray.dark1};
     `}
   >
-    {children.map((child, i) => (
+    {argument.map((child, i) => (
       <ComponentFactory {...rest} nodeData={child} key={i} />
     ))}
   </Overline>
