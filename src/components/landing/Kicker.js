@@ -19,7 +19,7 @@ const Kicker = ({ nodeData: { argument }, ...rest }) => (
 
 Kicker.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
 };
 

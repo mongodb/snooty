@@ -10,8 +10,6 @@ import Contents from '../components/Contents';
 import useScreenSize from '../hooks/useScreenSize.js';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser.js';
-import { css } from '@emotion/core';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const Document = props => {
   const {
@@ -28,7 +26,6 @@ const Document = props => {
   const renderStatus = isBrowser ? style.postRender : '';
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
-  const { project } = useSiteMetadata();
 
   const toggleLeftColumn = () => {
     setShowLeftColumn(!showLeftColumn);
