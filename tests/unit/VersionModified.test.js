@@ -5,7 +5,7 @@ import VersionModified from '../../src/components/VersionModified';
 // data for this component
 import { deprecated, versionadded, versionchanged } from './data/VersionModified.test.json';
 
-const shallowRender = data => shallow(<VersionModified nodeData={data} />);
+const shallowRender = (data) => shallow(<VersionModified nodeData={data} />);
 
 describe('when rendering a deprecated directive with 0 arguments', () => {
   let wrapper;

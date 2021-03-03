@@ -30,10 +30,10 @@ const {
 } = theme;
 
 const setMatchMedia = (...queries) => {
-  window.matchMedia = media => ({
+  window.matchMedia = (media) => ({
     addListener: () => {},
     removeListener: () => {},
-    matches: queries.some(query => media === query),
+    matches: queries.some((query) => media === query),
   });
 };
 

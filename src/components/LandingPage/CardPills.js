@@ -6,16 +6,16 @@ import { setLocalValue } from '../../utils/browser-storage';
 import { getNestedValue } from '../../utils/get-nested-value';
 
 const CardPills = ({ pillsNode, pillsetName }) => {
-  const getPillTitle = node => getNestedValue(['children', 0, 'children', 0, 'value'], node);
+  const getPillTitle = (node) => getNestedValue(['children', 0, 'children', 0, 'value'], node);
 
   // Get the name of each pill. If the total character length of pills > 50, truncate them and add a "See All" pill.
-  const mapPills = node => {
+  const mapPills = (node) => {
     let totalLength = 0;
     let isTruncated = false;
     const pills = [];
     const pillNodes = getNestedValue(['children', 0, 'children'], node);
     if (pillNodes) {
-      pillNodes.forEach(pillObj => {
+      pillNodes.forEach((pillObj) => {
         const pill = getPillTitle(pillObj);
         if (totalLength > 50) {
           isTruncated = true;
@@ -32,7 +32,7 @@ const CardPills = ({ pillsNode, pillsetName }) => {
 
   const [pills, isTruncated] = mapPills(pillsNode);
 
-  const setActiveLanguage = pill => {
+  const setActiveLanguage = (pill) => {
     setLocalValue(pillsetName, pill);
   };
 

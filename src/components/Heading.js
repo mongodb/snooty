@@ -25,7 +25,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   return (
     <ConditionalWrapper
       condition={shouldShowMobileHeader}
-      wrapper={children => (
+      wrapper={(children) => (
         <>
           <HeadingContainer stackVertically={isMobile}>
             {children}
@@ -51,7 +51,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
 
 const HeadingContainer = styled.div`
   display: flex;
-  flex-direction: ${props => (props.stackVertically ? 'column' : 'row')};
+  flex-direction: ${(props) => (props.stackVertically ? 'column' : 'row')};
   justify-content: space-between;
 `;
 

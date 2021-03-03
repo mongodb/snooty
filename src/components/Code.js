@@ -22,12 +22,12 @@ const URI_PLACEHOLDERS = [
   URISTRING_SHELL_NOUSER_PLACEHOLDER,
 ];
 
-const htmlDecode = input => {
+const htmlDecode = (input) => {
   const doc = new DOMParser().parseFromString(input, 'text/html');
   return doc.documentElement.textContent;
 };
 
-const getLanguage = lang => {
+const getLanguage = (lang) => {
   if (Object.values(Language).includes(lang)) {
     return lang;
   } else if (lang === 'sh') {
@@ -48,7 +48,7 @@ const Code = ({
 
   let code = value;
 
-  if (activeTabs && URI_PLACEHOLDERS.some(placeholder => code.includes(placeholder))) {
+  if (activeTabs && URI_PLACEHOLDERS.some((placeholder) => code.includes(placeholder))) {
     const { cloud } = activeTabs;
     const activeUri = cloud === 'cloud' ? cloudURI : localURI;
     code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uriData={activeUri} />);

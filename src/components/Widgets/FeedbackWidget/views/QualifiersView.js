@@ -7,7 +7,7 @@ import Button from '@leafygreen-ui/button';
 
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 
-const sortQualifiers = qualifiers => qualifiers.sort((q1, q2) => (q1.displayOrder > q2.displayOrder ? 1 : -1));
+const sortQualifiers = (qualifiers) => qualifiers.sort((q1, q2) => (q1.displayOrder > q2.displayOrder ? 1 : -1));
 
 export default function QualifiersView({ ...props }) {
   const { feedback, submitQualifiers } = useFeedbackState();

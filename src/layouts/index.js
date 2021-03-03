@@ -39,7 +39,7 @@ const globalCSS = css`
   }
 `;
 
-const DefaultLayout = props => {
+const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
 

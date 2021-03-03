@@ -4,7 +4,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 
 const Tag = ({ text, ...rest }) => (
   <span
-    css={theme => ({
+    css={(theme) => ({
       backgroundColor: uiColors.green.light3,
       borderRadius: 4,
       color: uiColors.green.base,

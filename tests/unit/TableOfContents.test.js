@@ -17,7 +17,7 @@ describe('Table of Contents testing', () => {
   describe('Table of Contents unit tests', () => {
     let testComponent;
 
-    const remountTOC = page => {
+    const remountTOC = (page) => {
       testComponent = mountedToc(mockTocData, page);
     };
 
@@ -59,10 +59,7 @@ describe('Table of Contents testing', () => {
 
       it('TOC external navigation (urls) should work as expected', () => {
         updatePageLocation('Tools', 'tools');
-        const biConnectorLink = testComponent
-          .find('.toctree-l2')
-          .first()
-          .find('a.reference');
+        const biConnectorLink = testComponent.find('.toctree-l2').first().find('a.reference');
         expect(biConnectorLink.hasClass('external')).toBe(true);
         expect(biConnectorLink.prop('href')).toBe('https://docs.mongodb.com/bi-connector/current/');
       });
@@ -72,19 +69,11 @@ describe('Table of Contents testing', () => {
       it('TOC supports a drawer option', () => {
         // Platforms section is a drawer, check clicking it does not redirect and opens those options
         expect(testComponent.find('.toctree-l2')).toHaveLength(0);
-        const drawer = testComponent
-          .find('.toctree-l1')
-          .last()
-          .find('.reference')
-          .first();
+        const drawer = testComponent.find('.toctree-l1').last().find('.reference').first();
         drawer.simulate('click');
         const numUseCasesNodes = mockTocData.children[3].children.length;
         expect(testComponent.find('.toctree-l2')).toHaveLength(numUseCasesNodes);
-        const otherDrawer = testComponent
-          .find('.toctree-l1')
-          .at(2)
-          .find('.reference')
-          .first();
+        const otherDrawer = testComponent.find('.toctree-l1').at(2).find('.reference').first();
         otherDrawer.simulate('click');
         const numPlatformNodes = mockTocData.children[2].children.length;
         expect(testComponent.find('.toctree-l2')).toHaveLength(numUseCasesNodes + numPlatformNodes);

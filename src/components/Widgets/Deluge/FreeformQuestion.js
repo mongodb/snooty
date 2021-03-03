@@ -5,7 +5,7 @@ const FreeformQuestion = ({ errorText, hasError, placeholder, store }) => {
   const [error, setError] = useState(false);
   const [text, setText] = useState('');
 
-  const handleChange = ev => {
+  const handleChange = (ev) => {
     const value = ev.target.value;
     const inputHasError = hasError(value);
 

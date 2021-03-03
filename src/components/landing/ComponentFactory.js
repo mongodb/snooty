@@ -14,7 +14,7 @@ const componentMap = {
   introduction: Introduction,
 };
 
-const ComponentFactory = props => {
+const ComponentFactory = (props) => {
   const { nodeData } = props;
 
   const selectComponent = () => {

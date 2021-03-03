@@ -6,10 +6,10 @@ import Operation from '../../src/components/Operation';
 // data for this component
 import { onlyDescription, neitherSummaryNorDescription, bothSummaryAndDescription } from './data/Operation.test.json';
 
-const shallowOperation = data => shallow(<Operation nodeData={data} />);
-const mountOperation = data => mount(<Operation nodeData={data} />);
+const shallowOperation = (data) => shallow(<Operation nodeData={data} />);
+const mountOperation = (data) => mount(<Operation nodeData={data} />);
 
-const mockLocation = hash => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ hash }));
+const mockLocation = (hash) => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ hash }));
 
 describe('when rendering all fields', () => {
   let wrapper;

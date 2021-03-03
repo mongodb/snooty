@@ -45,7 +45,7 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
         if (setDefaultBranch) {
           setBranch(branches[0]);
         }
-        setBranchChoices(branches.map(b => ({ text: b, value: b })));
+        setBranchChoices(branches.map((b) => ({ text: b, value: b })));
       }
     },
     [filters]
@@ -80,7 +80,7 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
   useEffect(() => {
     const properties = Object.keys(filters);
     properties.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-    setProductChoices(properties.map(p => ({ text: p, value: p })));
+    setProductChoices(properties.map((p) => ({ text: p, value: p })));
   }, [filters]);
 
   // Update search filter once a property and branch are chosen

@@ -91,7 +91,7 @@ const Navbar = () => {
   const isSearchbarDefaultExpanded = useMedia(
     'only screen and (min-width: 670px) and (max-width: 1200px), (min-width: 1300px)'
   );
-  const isActiveLink = useCallback(link => link.toLowerCase() === activeLink, [activeLink]);
+  const isActiveLink = useCallback((link) => link.toLowerCase() === activeLink, [activeLink]);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const modifyActiveLink = useMemo(
     () =>
@@ -107,7 +107,7 @@ const Navbar = () => {
   const [navprops, setNavprops] = useState(modifyActiveLink);
 
   const onSearchbarExpand = useCallback(
-    isExpanded => {
+    (isExpanded) => {
       // On certain screens the searchbar is never collapsed
       if (!isSearchbarDefaultExpanded) {
         setIsSearchbarExpanded(isExpanded);
@@ -138,7 +138,7 @@ const Navbar = () => {
   return (
     <ConditionalWrapper
       condition={theme.bannerContent.enabled}
-      wrapper={children => (
+      wrapper={(children) => (
         <div
           css={css`
             position: fixed;
