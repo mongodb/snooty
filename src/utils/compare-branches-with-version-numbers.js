@@ -19,4 +19,4 @@ export const compareBranchesWithVersionNumbers = (branchA, branchB) => {
 
 // This helper method replaces a number in a version string with it plus 10 to account for single
 // digit portions of a version number. It also removes `v` found on some for sort purposes
-const parseVersionBranchForSort = branchString => branchString.replace(/v/g, '').replace(/\d+/g, n => +n + 10);
+const parseVersionBranchForSort = (branchString) => branchString.replace(/v/g, '').replace(/\d+/g, (n) => +n + 10);

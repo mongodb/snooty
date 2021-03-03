@@ -26,14 +26,14 @@ const saveAssetFiles = async (assets, stitchClient) => {
     assetDataDocuments.forEach(({ _id, data: { buffer } }) => {
       const filenames = assets.get(_id);
       if (filenames) {
-        filenames.forEach(filename => imageWrites.push(saveFile(filename, buffer)));
+        filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
       }
     });
     await Promise.all(imageWrites);
   }
 };
 
-const saveStaticFiles = async staticFiles => {
+const saveStaticFiles = async (staticFiles) => {
   await Promise.all(
     Object.entries(staticFiles).map(([file, data]) => {
       // Certain files, like manpages, may not have buffers

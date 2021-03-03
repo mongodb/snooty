@@ -5,8 +5,8 @@ import Lightbox from '../../src/components/Lightbox';
 // data for this component
 import mockData from './data/Figure.test.json';
 
-const mountLightbox = nodeData => mount(<Lightbox nodeData={nodeData} />);
-const shallowLightbox = nodeData => shallow(<Lightbox nodeData={nodeData} />);
+const mountLightbox = (nodeData) => mount(<Lightbox nodeData={nodeData} />);
+const shallowLightbox = (nodeData) => shallow(<Lightbox nodeData={nodeData} />);
 
 describe('Lightbox', () => {
   let wrapper;

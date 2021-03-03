@@ -33,12 +33,7 @@ describe('when rendered', () => {
   });
 
   it('shows a disabled version selector', () => {
-    expect(
-      wrapper
-        .find('Select')
-        .at(1)
-        .prop('disabled')
-    ).toBe(true);
+    expect(wrapper.find('Select').at(1).prop('disabled')).toBe(true);
   });
 
   it('does not show either dropdown menu', () => {
@@ -56,12 +51,7 @@ describe('when rendered', () => {
     });
 
     it('product dropdown text is correct', () => {
-      expect(
-        wrapper
-          .find('SelectedText')
-          .at(0)
-          .text()
-      ).toBe('Product');
+      expect(wrapper.find('SelectedText').at(0).text()).toBe('Product');
     });
 
     it('has 2 list elements', () => {
@@ -69,12 +59,7 @@ describe('when rendered', () => {
     });
 
     it('shows the proper name for product', () => {
-      expect(
-        wrapper
-          .find('li')
-          .first()
-          .text()
-      ).toBe('MongoDB Server');
+      expect(wrapper.find('li').first().text()).toBe('MongoDB Server');
     });
   });
 
@@ -100,22 +85,14 @@ describe('when rendered', () => {
     });
 
     it('version dropdown text is correct', () => {
-      expect(
-        wrapper
-          .find('SelectedText')
-          .at(1)
-          .text()
-      ).toBe('Version');
+      expect(wrapper.find('SelectedText').at(1).text()).toBe('Version');
     });
   });
 
   describe('when the first option is selected', () => {
     beforeAll(() => {
       productDropdown.simulate('click');
-      wrapper
-        .find('ul')
-        .childAt(0)
-        .simulate('click');
+      wrapper.find('ul').childAt(0).simulate('click');
     });
 
     it('hides the dropdown menu', () => {
@@ -123,12 +100,7 @@ describe('when rendered', () => {
     });
 
     it('shows the correct text', () => {
-      expect(
-        wrapper
-          .find('SelectedText')
-          .at(0)
-          .text()
-      ).toBe('MongoDB Server');
+      expect(wrapper.find('SelectedText').at(0).text()).toBe('MongoDB Server');
     });
   });
 
@@ -149,10 +121,7 @@ describe('when rendered', () => {
 
   describe('when a version is selected', () => {
     beforeAll(() => {
-      wrapper
-        .find('ul')
-        .childAt(2)
-        .simulate('click');
+      wrapper.find('ul').childAt(2).simulate('click');
     });
 
     it('hides the dropdown menu', () => {
@@ -168,19 +137,11 @@ describe('when rendered', () => {
   describe('when the product is changed', () => {
     beforeAll(() => {
       productDropdown.simulate('click');
-      wrapper
-        .find('ul')
-        .childAt(1)
-        .simulate('click');
+      wrapper.find('ul').childAt(1).simulate('click');
     });
 
     it('version dropdown text is reset', () => {
-      expect(
-        wrapper
-          .find('SelectedText')
-          .at(1)
-          .text()
-      ).toBe('Version');
+      expect(wrapper.find('SelectedText').at(1).text()).toBe('Version');
     });
   });
 });

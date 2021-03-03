@@ -4,7 +4,7 @@ import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
 import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 
-const align = key => {
+const align = (key) => {
   switch (key) {
     case 'left':
     case 'right':
@@ -29,7 +29,7 @@ const unstyleThead = css`
   }
 `;
 
-const hasOneChild = children => children.length === 1 && children[0].type === 'paragraph';
+const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
 const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
   <Row>

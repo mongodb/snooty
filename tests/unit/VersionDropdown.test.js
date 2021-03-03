@@ -72,22 +72,11 @@ describe('when rendered', () => {
     });
 
     it('shows the first list item is active', () => {
-      expect(
-        wrapper
-          .find('li')
-          .first()
-          .hasClass('active')
-      ).toBe(true);
+      expect(wrapper.find('li').first().hasClass('active')).toBe(true);
     });
 
     it('generates the correct links', () => {
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .childAt(0)
-          .prop('href')
-      ).toBe('/bi-connector/v2.11/installation');
+      expect(wrapper.find('li').at(1).childAt(0).prop('href')).toBe('/bi-connector/v2.11/installation');
     });
 
     // The 9th element links to the Legacy Docs page
@@ -96,21 +85,11 @@ describe('when rendered', () => {
     });
 
     it('shows `Legacy Docs` as the last list element', () => {
-      expect(
-        wrapper
-          .find('li')
-          .last()
-          .text()
-      ).toBe('Legacy Docs');
+      expect(wrapper.find('li').last().text()).toBe('Legacy Docs');
     });
 
     it('shows the proper name for master', () => {
-      expect(
-        wrapper
-          .find('li')
-          .first()
-          .text()
-      ).not.toBe('master');
+      expect(wrapper.find('li').first().text()).not.toBe('master');
     });
   });
 
@@ -142,12 +121,7 @@ describe('when rendering a property without legacy docs', () => {
     });
 
     it('does not show `Legacy Docs` as the last list element', () => {
-      expect(
-        wrapper
-          .find('li')
-          .last()
-          .text()
-      ).not.toBe('Legacy Docs');
+      expect(wrapper.find('li').last().text()).not.toBe('Legacy Docs');
     });
   });
 });

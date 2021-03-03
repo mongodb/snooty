@@ -46,7 +46,7 @@ export const SLUG_TO_STRING = {
   rhel: 'RHEL',
 };
 
-export const stringifyTab = tabName => {
+export const stringifyTab = (tabName) => {
   return SLUG_TO_STRING[tabName] || tabName;
 };
 

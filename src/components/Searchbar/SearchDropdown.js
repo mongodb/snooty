@@ -42,7 +42,7 @@ const filterButtonHover = css`
   }
 `;
 
-const animationKeyframe = startingOpacity => keyframes`
+const animationKeyframe = (startingOpacity) => keyframes`
     0% {
       opacity: ${startingOpacity};
     }
