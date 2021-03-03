@@ -1,9 +1,12 @@
 import React from 'react';
 import { mount, render } from 'enzyme';
 import ListTable from '../../src/components/ListTable';
+import { matchers } from 'jest-emotion';
 
 import mockData from './data/ListTable.test.json';
 import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';
+
+expect.extend(matchers);
 
 const mountListTable = (data) => mount(<ListTable nodeData={data} />);
 const renderListTable = (data) => render(<ListTable nodeData={data} />);
@@ -42,16 +45,13 @@ describe('when rendering a list-table directive', () => {
     expect(wrapper.find('tbody').children().find('tr').first().children().find('th')).toHaveLength(1);
   });
 
-  it('applies the class passed in as an option', () => {
-    expect(wrapper.find('.guide-tablenate').hostNodes()).toHaveLength(1);
-  });
-
-  it('applies a class based on the widths property', () => {
-    expect(wrapper.find('.colwidths-auto').hostNodes()).toHaveLength(1);
-  });
-
-  it('renders one stub column', () => {
-    expect(wrapper.find('.stub')).toHaveLength(6);
+  it('renders one stub column in the body', () => {
+    expect(
+      wrapper
+        .find('th')
+        .parent()
+        .filterWhere((p) => p.is('Cell'))
+    ).toHaveLength(5);
   });
 });
 
@@ -69,34 +69,27 @@ describe('when rendering a list table with fixed widths', () => {
     expect(rendered).toMatchSnapshot();
   });
 
-  it('displays no header row', () => {
-    expect(wrapper.find('thead').children().find('tr')).toHaveLength(0);
+  it('displays no content in the header row', () => {
+    expect(wrapper.find('thead').children().find('tr').text()).toEqual('');
   });
 
   it('displays one body row', () => {
-    expect(wrapper.find('tbody').children().find('tr')).toHaveLength(1);
+    expect(wrapper.find('tbody').children().find('Row')).toHaveLength(1);
   });
 
   it('displays six body columns', () => {
     expect(wrapper.find('tbody').children().find('tr').first().children().find('td')).toHaveLength(6);
   });
 
-  it('applies the class passed in as an option', () => {
-    expect(wrapper.find('.guide-tablenate-odd').hostNodes()).toHaveLength(1);
-  });
-
-  it('applies a class based on the widths property', () => {
-    expect(wrapper.find('.colwidths-given').hostNodes()).toHaveLength(1);
-  });
-
-  it('displays a colgroup element', () => {
-    expect(wrapper.find('colgroup')).toHaveLength(1);
-  });
-
   it('displays columns with set widths', () => {
-    expect(wrapper.find('col')).toHaveLength(2);
-    expect(wrapper.find('col[width="20%"]')).toHaveLength(1);
-    expect(wrapper.find('col[width="80%"]')).toHaveLength(1);
+    const headers = wrapper.find('TableHeader');
+    expect(headers).toHaveLength(6);
+    expect(headers.at(0)).toHaveStyleRule('width', '5%');
+    expect(headers.at(1)).toHaveStyleRule('width', '10%');
+    expect(headers.at(2)).toHaveStyleRule('width', '15%');
+    expect(headers.at(3)).toHaveStyleRule('width', '20%');
+    expect(headers.at(4)).toHaveStyleRule('width', '30%');
+    expect(headers.at(5)).toHaveStyleRule('width', '20%');
   });
 
   it('displays no stub columns', () => {

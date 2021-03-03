@@ -1,11 +1,23 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
+import * as Gatsby from 'gatsby';
 import Searchbar from '../../src/components/Searchbar';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 import { getSearchbarResultsFromJSON } from '../../src/utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../../src/utils/search-params-to-url';
 import { DOCS_URL } from '../../src/constants';
+
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+const setProject = (project) => {
+  useStaticQuery.mockImplementation(() => ({
+    site: {
+      siteMetadata: {
+        project,
+      },
+    },
+  }));
+};
 
 const getAdvancedFiltersPane = async () => {
   const searchbar = mount(
@@ -63,6 +75,7 @@ describe('Searchbar', () => {
   beforeAll(() => {
     window.fetch = mockMarianFetch;
     jest.useFakeTimers();
+    setProject('bi-connector');
   });
 
   afterAll(() => {
@@ -230,5 +243,42 @@ describe('Searchbar', () => {
       'href',
       `${DOCS_URL}/search?q=stitch&searchProperty=realm-master`
     );
+  });
+});
+
+describe('Searchbar on Realm', () => {
+  beforeAll(() => {
+    window.fetch = mockMarianFetch;
+    jest.useFakeTimers();
+    setProject('realm');
+  });
+
+  afterAll(() => {
+    window.fetch = null;
+  });
+
+  it('should apply the Realm product filter by default', async () => {
+    const searchbar = mount(
+      <Searchbar
+        isExpanded
+        getResultsFromJSON={getSearchbarResultsFromJSON}
+        searchParamsToURL={searchParamsToURL}
+        shouldAutofocus
+      />
+    );
+    await act(async () => {
+      searchbar.find('input').simulate('change', { target: { value: 'stitch' } });
+    });
+    jest.runAllTimers();
+    await searchbar.update();
+    await act(async () => {
+      await searchbar.update();
+      expect(searchbar.find('input').props().value).toEqual('stitch');
+      // Need re-render for child array prop to update (shallow compare seems to fail)
+      searchbar.mount();
+    });
+    const searchResult = checkSearchResult(searchbar, FILTERED_RESULT);
+    const searchResultLink = searchResult.find('SearchResultLink').at(0);
+    expect(searchResultLink.props()).toHaveProperty('href', FILTERED_RESULT.url);
   });
 });

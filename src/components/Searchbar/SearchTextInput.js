@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import SearchContext from './SearchContext';
 
@@ -82,14 +83,20 @@ const SearchWrapper = styled('span')`
 `;
 
 const SearchTextInput = React.forwardRef(({ isSearching, onChange, value, ...props }, ref) => {
-  const { shouldAutofocus } = useContext(SearchContext);
+  const { searchFilter, shouldAutofocus } = useContext(SearchContext);
+  const { project } = useSiteMetadata();
+  const placeholder = useMemo(
+    () =>
+      project === 'realm' && searchFilter === 'realm-master' ? 'Search Realm Documentation' : 'Search Documentation',
+    [project, searchFilter]
+  );
   return (
     <SearchWrapper isSearching={isSearching}>
       <StyledTextInput
         autoFocus={shouldAutofocus}
         label="Search Docs"
         onChange={onChange}
-        placeholder="Search Documentation"
+        placeholder={placeholder}
         ref={ref}
         tabIndex="0"
         value={value}

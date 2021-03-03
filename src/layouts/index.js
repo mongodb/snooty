@@ -39,29 +39,9 @@ const globalCSS = css`
   }
 `;
 
-const PageNotFoundLayout = (props) => {
-  const { children, pageContext } = props;
-  const { slug } = pageContext;
-  const template = 'landing';
-
-  const Template = getTemplate(template, slug);
-
-  return (
-    <>
-      <Global styles={globalCSS} />
-      <Template {...props}>{[children]}</Template>
-      <Navbar />
-    </>
-  );
-};
-
 const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
-
-  if (pageContext.layout === '404') {
-    return PageNotFoundLayout(props);
-  }
 
   const {
     metadata: { title },

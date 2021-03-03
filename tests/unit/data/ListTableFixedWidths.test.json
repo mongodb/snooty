@@ -8,7 +8,7 @@
   "name": "list-table",
   "argument": [],
   "options": {
-    "widths": "20 80",
+    "widths": "5 10 15 20 30 20",
     "class": "guide-tablenate-odd"
   },
   "children": [
