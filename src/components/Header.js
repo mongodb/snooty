@@ -1,7 +1,11 @@
 import React from 'react';
 import { css } from '@emotion/core';
+import Loadable from '@loadable/component';
 import Navbar from '../components/Navbar';
 import { css } from '@emotion/core';
+
+// Prevents Stitch functions in Banner from erroring when starting local development
+const Banner = Loadable(() => import('../components/Banner'));
 
 const Header = () => {
   return (
@@ -10,7 +14,7 @@ const Header = () => {
         grid-area: header;
       `}
     >
-      {/* TODO: Banner */}
+      <Banner />
       <Navbar />
     </header>
   );
