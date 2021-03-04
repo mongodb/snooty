@@ -29,7 +29,7 @@
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
-    "postinstall": "husky install",
+    "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
     "prettier": "prettier '**/*.{js,jsx,json,md}' '!docs-tools/**'",
     "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test",
