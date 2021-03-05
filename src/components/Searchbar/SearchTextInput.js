@@ -15,7 +15,6 @@ const StyledTextInput = styled(TextInput)`
     color: rgb(33, 49, 60);
     font-weight: 300;
     letter-spacing: 0.5px;
-    transition: background-color 150ms ease-in;
     :focus {
       border: none;
     }

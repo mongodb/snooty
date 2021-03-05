@@ -34,6 +34,7 @@ const ExpandedSearchbarContainer = styled('div')`
   display: flex;
   background-color: ${uiColors.gray.light3};
   border-radius: ${theme.size.medium};
+  transition: background-color 150ms ease-in;
 
   :hover,
   :focus,
