@@ -22,10 +22,25 @@ const hiddenTabStyling = css`
 `;
 
 const StyledTabs = styled(LeafyTabs)`
-  ${({ isHidden }) => isHidden && hiddenTabStyling};
+  ${({ hidden }) => hidden && hiddenTabStyling};
 `;
 
-const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
+const landingTabStyling = css`
+  p {
+    color: pink !important;
+  }
+`;
+
+const StyledTab = styled(LeafyTab)`
+  ${({ isLanding }) => isLanding && landingTabStyling};
+`;
+
+const Tabs = props => {
+  const {
+    nodeData: { children, options = {} },
+    page,
+    ...rest
+  } = props;
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
@@ -33,6 +48,8 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   const previousTabsetChoice = activeTabs[tabsetName];
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
+  const temp = page?.options?.template;
+  const isLanding = temp === 'landing';
 
   useEffect(() => {
     if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
@@ -64,7 +81,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   );
 
   return (
-    <StyledTabs as={TabButton} isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
+    <StyledTabs as={TabButton} hidden={isHidden} selected={activeTab} setSelected={handleClick}>
       {children.map(tab => {
         if (tab.name !== 'tab') {
           return null;
@@ -76,11 +93,11 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
             ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
             : tabId;
         return (
-          <LeafyTab key={tabId} name={tabTitle}>
+          <StyledTab isLanding={isLanding} key={tabId} name={tabTitle}>
             {tab.children.map((child, i) => (
               <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
             ))}
-          </LeafyTab>
+          </StyledTab>
         );
       })}
     </StyledTabs>

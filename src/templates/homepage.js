@@ -27,7 +27,8 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ children }) => {
+// The Hompage template exclusively represents docs.mongodb.com. All other landings use the ProductLanding template
+const Homepage = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -103,8 +104,8 @@ const Landing = ({ children }) => {
   );
 };
 
-Landing.propTypes = {
+Homepage.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
-export default Landing;
+export default Homepage;
