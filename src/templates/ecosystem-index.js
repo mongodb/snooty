@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 import MainColumn from '../components/MainColumn';
+import { TEMPLATE_CLASSNAME } from '../constants';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 
 const EcosystemIndex = ({ className }) => (
-  <div className={['content', className].join(' ')}>
+  <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
     <MainColumn className={EcosystemHomepageStyles.fullWidth}>
       <div
         className={[EcosystemHomepageStyles.document, 'body'].join(' ')}

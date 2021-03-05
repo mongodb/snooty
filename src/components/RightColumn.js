@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { displayNone } from '../utils/display-none';
 
-const RightColumn = ({ children }) => (
+const RightColumn = ({ children, className }) => (
   <div
+    className={className}
     css={css`
-      flex-grow: 1;
       margin: 70px 24px 40px 54px;
       min-width: 180px;
-      order: 2;
 
       ${displayNone.onMobileAndTablet};
     `}

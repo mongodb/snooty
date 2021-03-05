@@ -5,11 +5,12 @@ import { Global, css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
+import { TEMPLATE_CLASSNAME } from '../constants';
 
-const Wrapper = styled('div')`
+const Wrapper = styled('main')`
   margin: ${({ theme }) => `${theme.size.large} auto ${theme.size.xlarge} auto`};
   max-width: 1150px;
-  padding: 0 ${({ theme }) => `${theme.size.medium}`} 64px;
+  padding: 0 ${({ theme }) => `${theme.size.medium}`};
   @media ${({ theme }) => theme.screenSize.upToLarge} {
     max-width: 748px;
   }
@@ -34,9 +35,9 @@ const Landing = ({ children, className }) => {
       <Helmet>
         <title>MongoDB Documentation</title>
       </Helmet>
-      <main className={className}>
+      <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <Wrapper>{children}</Wrapper>
-      </main>
+      </div>
       <Global
         styles={css`
           h1,

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
+import { TEMPLATE_CLASSNAME } from '../constants';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -10,7 +11,7 @@ import { Link as GatsbyLink } from 'gatsby';
 // Allows scrolling to top of main "content" div. Replace or remove this in the event we stray away from
 // current layout and/or change the div className, etc.
 const handleLinkClick = () => {
-  const contentEl = document.querySelector('.content');
+  const contentEl = document.querySelector(`.${TEMPLATE_CLASSNAME}`);
   if (contentEl) {
     contentEl.scrollTop = 0;
   }

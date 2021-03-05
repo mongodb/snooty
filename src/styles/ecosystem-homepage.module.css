@@ -1,5 +1,6 @@
 .fullWidth {
-  margin: 40px auto !important;
+  margin: 0px auto !important;
+  padding: 40px 0px;
 }
 
 .document {

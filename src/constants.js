@@ -74,3 +74,5 @@ export const SECTION_NAME_MAPPING = {
     title: 'See Also',
   },
 };
+
+export const TEMPLATE_CLASSNAME = 'template-container';

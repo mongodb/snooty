@@ -15,6 +15,11 @@ import { getTemplate } from '../utils/get-template';
 import { isBrowser } from '../utils/is-browser.js';
 
 const globalCSS = css`
+  body {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
   .hidden {
     display: inherit !important;
     height: 0;
@@ -69,7 +74,7 @@ const DefaultLayout = props => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isTabletOrMobile } = useScreenSize();
   const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
-  // TODO: Check if this styling is still necessary after current Sidebar is replaced with the LG Sidebar
+  // TODO: (DOP-1839) Check if this styling is still necessary after current Sidebar is replaced with the LG Sidebar
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
 
@@ -93,7 +98,6 @@ const DefaultLayout = props => {
               setIsMobileMenuOpen,
             }}
           >
-            {/* Add Grid div here */}
             <GlobalGrid>
               <Header />
               {!isBrowser || showLeftColumn || isMobileMenuOpen ? (

@@ -7,6 +7,7 @@ import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
+import { TEMPLATE_CLASSNAME } from '../constants';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const Document = ({
@@ -22,8 +23,19 @@ const Document = ({
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
 
   return (
-    <div className={['content', className].join(' ')}>
-      <MainColumn>
+    <div
+      className={`${TEMPLATE_CLASSNAME} ${className}`}
+      css={css`
+        display: grid;
+        grid-template-areas: 'main right';
+        grid-template-columns: minmax(0px, 830px) auto;
+      `}
+    >
+      <MainColumn
+        css={css`
+          grid-area: main;
+        `}
+      >
         <div
           className="body"
           css={css`
@@ -37,7 +49,11 @@ const Document = ({
           )}
         </div>
       </MainColumn>
-      <RightColumn>
+      <RightColumn
+        css={css`
+          grid-area: right;
+        `}
+      >
         <TabSelectors />
         <Contents />
       </RightColumn>
