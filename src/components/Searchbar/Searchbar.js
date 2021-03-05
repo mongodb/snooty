@@ -27,7 +27,7 @@ const expandedCss = css`
 `;
 
 const SearchbarContainer = styled.div(
-  props => css`
+  (props) => css`
     height: ${SEARCHBAR_HEIGHT};
     transition: width ${TRANSITION_SPEED} ease-in;
     width: ${props.isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE};

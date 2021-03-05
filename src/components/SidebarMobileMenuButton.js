@@ -26,7 +26,7 @@ const SidebarMobileMenuButton = ({ className }) => {
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(SidebarContext);
 
   const clickMenu = useCallback(() => {
-    setIsMobileMenuOpen(state => !state);
+    setIsMobileMenuOpen((state) => !state);
   }, [setIsMobileMenuOpen]);
 
   return (

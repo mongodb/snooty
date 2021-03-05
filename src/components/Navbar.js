@@ -13,7 +13,7 @@ import { searchParamsToURL } from '../utils/search-params-to-url';
 const NavbarContainer = styled('div')`
   align-items: center;
   background-color: #fff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, ${props => (props.isTransparent ? '0.1' : '0.2')});
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, ${(props) => (props.isTransparent ? '0.1' : '0.2')});
   display: flex;
   height: 45px;
   justify-content: space-between;
@@ -34,7 +34,7 @@ const NavbarContainer = styled('div')`
 const NavbarLeft = styled('div')`
   align-items: center;
   display: flex;
-  ${props => props.isTransparent && 'opacity: 0.2;'}
+  ${(props) => props.isTransparent && 'opacity: 0.2;'}
 `;
 
 const NavSeparator = styled('span')`

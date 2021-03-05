@@ -56,7 +56,7 @@ const findSectionHeadings = (nodes) => {
 
 const observeHeadings = (headingNodes, observer) => {
   let headingElements = [];
-  headingNodes.forEach(heading => {
+  headingNodes.forEach((heading) => {
     const el = document.getElementById(heading.id);
     if (el) {
       observer.observe(el);
@@ -67,7 +67,7 @@ const observeHeadings = (headingNodes, observer) => {
 };
 
 const unobserveHeadings = (headings, observer) => {
-  headings.forEach(el => {
+  headings.forEach((el) => {
     observer.unobserve(el);
   });
 };
@@ -89,14 +89,14 @@ const ContentsProvider = ({ children, nodes = [] }) => {
     // headings[0] to be counted first when headings[0] and headings[1] are both intersecting
     let firstLoad = true;
     let defaultActiveSectionId = window.location.hash.slice(1) || headingNodes[0]?.id;
-    const callback = entries => {
+    const callback = (entries) => {
       if (firstLoad) {
         firstLoad = false;
         setActiveSectionId(defaultActiveSectionId);
         return;
       }
 
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSectionId(entry.target.id);
         }
