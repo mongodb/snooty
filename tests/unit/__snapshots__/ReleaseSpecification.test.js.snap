@@ -90,7 +90,6 @@ exports[`renders correctly 1`] = `
     >
       <pre
         class="emotion-3 emotion-4"
-        tabindex="-1"
       >
         <code
           class="lg-highlight-hljs-light emotion-2 none"

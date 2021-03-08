@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { ContentsProvider } from '../components/contents-context';
 import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import SidebarContext from '../components/sidebar-context';
 import SiteMetadata from '../components/site-metadata';
+import { SidebarContextProvider } from '../components/sidebar-context';
+import Sidenav from '../components/Sidenav';
 import { TabProvider } from '../components/tab-context';
-import useScreenSize from '../hooks/useScreenSize.js';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import style from '../styles/navigation.module.css';
 import { getTemplate } from '../utils/get-template';
-import { isBrowser } from '../utils/is-browser.js';
 
 const globalCSS = css`
   body {
@@ -64,27 +61,13 @@ const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
   const {
-    metadata: { publishedBranches, title, toctree },
+    metadata: { title },
     page,
     slug,
     template,
   } = pageContext;
   const Template = getTemplate(project, slug, template);
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isTabletOrMobile } = useScreenSize();
-  const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
-  // TODO: (DOP-1839) Check if this styling is still necessary after current Sidebar is replaced with the LG Sidebar
-  /* Add the postRender CSS class without disturbing pre-render functionality */
-  const renderStatus = isBrowser ? style.postRender : '';
-
-  const toggleLeftColumn = () => {
-    setShowLeftColumn(!showLeftColumn);
-  };
-
-  useEffect(() => {
-    setShowLeftColumn(!isTabletOrMobile);
-  }, [isTabletOrMobile]);
+  const isBlankTemplate = template === 'blank';
 
   return (
     <>
@@ -92,54 +75,22 @@ const DefaultLayout = (props) => {
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
         <ContentsProvider nodes={page?.children}>
-          <SidebarContext.Provider
-            value={{
-              isMobileMenuOpen,
-              setIsMobileMenuOpen,
-            }}
-          >
-            <GlobalGrid>
+          <GlobalGrid>
+            <SidebarContextProvider isSidebarEnabled={isBlankTemplate}>
               <Header />
-              {!isBrowser || showLeftColumn || isMobileMenuOpen ? (
-                <div
-                  className={`left-column ${style.leftColumn} ${renderStatus}`}
-                  css={css`
-                    grid-area: sidebar;
-                    width: 330px;
-                  `}
-                  id="left-column"
-                >
-                  <Sidebar
-                    slug={slug}
-                    publishedBranches={publishedBranches}
-                    toctreeData={toctree}
-                    toggleLeftColumn={toggleLeftColumn}
-                  />
-                </div>
-              ) : (
-                <span
-                  className={`showNav ${style.showNav} ${renderStatus}`}
-                  css={css`
-                    grid-area: sidebar;
-                  `}
-                  id="showNav"
-                  onClick={toggleLeftColumn}
-                >
-                  Navigation
-                </span>
-              )}
-              <Template
-                css={css`
-                  grid-area: contents;
-                  margin: 0px;
-                  overflow-y: auto;
-                `}
-                {...props}
-              >
-                {template === 'landing' ? [children] : children}
-              </Template>
-            </GlobalGrid>
-          </SidebarContext.Provider>
+              {!isBlankTemplate && <Sidenav pageContext={pageContext} />}
+            </SidebarContextProvider>
+            <Template
+              css={css`
+                grid-area: contents;
+                margin: 0px;
+                overflow-y: auto;
+              `}
+              {...props}
+            >
+              {template === 'landing' ? [children] : children}
+            </Template>
+          </GlobalGrid>
         </ContentsProvider>
       </TabProvider>
     </>

@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
-import SidebarContext from './sidebar-context';
+import { SidebarContext } from './sidebar-context';
 import { displayNone } from '../utils/display-none';
 
 // This container prevents the leafygreen components from flashing when the media query is true
@@ -23,16 +23,16 @@ const MenuButton = styled(IconButton)`
 `;
 
 const SidebarMobileMenuButton = ({ className }) => {
-  const { isMobileMenuOpen, setIsMobileMenuOpen } = useContext(SidebarContext);
+  const { isSidebarMenuOpen, setIsSidebarMenuOpen } = useContext(SidebarContext);
 
   const clickMenu = useCallback(() => {
-    setIsMobileMenuOpen((state) => !state);
-  }, [setIsMobileMenuOpen]);
+    setIsSidebarMenuOpen((state) => !state);
+  }, [setIsSidebarMenuOpen]);
 
   return (
     <MenuButtonContainer className={className}>
       <MenuButton aria-label="View All Products" onClick={clickMenu}>
-        <Icon glyph={isMobileMenuOpen ? 'X' : 'Menu'} size="large" />
+        <Icon glyph={isSidebarMenuOpen ? 'X' : 'Menu'} size="large" />
       </MenuButton>
     </MenuButtonContainer>
   );

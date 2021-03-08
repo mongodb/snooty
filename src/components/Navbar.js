@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Logo } from '@leafygreen-ui/logo';
@@ -9,6 +10,7 @@ import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
+import { SidebarContext } from './sidebar-context';
 
 const NavbarContainer = styled('div')`
   align-items: center;
@@ -57,6 +59,7 @@ const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
+  const { isSidebarEnabled } = useContext(SidebarContext);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const [isTransparent, setIsTransparent] = useState(false);
   const imageHeight = 22;
@@ -81,7 +84,7 @@ const Navbar = () => {
 
   return (
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
-      <SidebarMobileMenuButton />
+      {!isSidebarEnabled && <SidebarMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <a
           css={css`
@@ -104,6 +107,10 @@ const Navbar = () => {
       />
     </NavbarContainer>
   );
+};
+
+Navbar.propTypes = {
+  isBlankTemplate: PropTypes.bool,
 };
 
 export default Navbar;
