@@ -43,6 +43,9 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
       return (
         <Cell
           className={cx(css`
+            overflow-wrap: anywhere;
+            word-break: break-word;
+
             /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
             vertical-align: top;
 
