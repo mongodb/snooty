@@ -133,6 +133,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   font-size: 14px;
   line-height: 20px;
   position: relative;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
 }
 
 .emotion-22 > div > span > * {
@@ -535,6 +538,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   line-height: 20px;
   position: relative;
   font-weight: bold;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+  background-clip: padding-box;
+  background-color: #F9FBFA;
 }
 
 .emotion-21 > div > span > * {
@@ -553,6 +561,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   font-size: 14px;
   line-height: 20px;
   position: relative;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
 }
 
 .emotion-23 > div > span > * {
