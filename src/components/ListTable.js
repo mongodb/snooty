@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
+import { uiColors } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 
@@ -42,6 +43,15 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
       return (
         <Cell
           className={cx(css`
+            overflow-wrap: anywhere;
+            word-break: break-word;
+
+            /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
+            vertical-align: top;
+
+            /* Apply grey background to stub <th> cells (PD-1216) */
+            ${isStub && `background-clip: padding-box; background-color: ${uiColors.gray.light3};`}
+
             /* TODO: Increase margin when Table component supports base font size of 16px */
             & > div > span > * {
               margin: 0 0 10px;
