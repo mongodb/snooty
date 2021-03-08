@@ -26,26 +26,30 @@ const Sidenav = ({ pageContext }) => {
     setIsSidebarMenuOpen(!isTabletOrMobile);
   }, [isTabletOrMobile, setIsSidebarMenuOpen]);
 
-  return !isBrowser || isSidebarMenuOpen ? (
-    <div
-      className={`left-column ${style.leftColumn} ${renderStatus}`}
-      css={css`
-        grid-area: sidebar;
-        width: 330px;
-      `}
-      id="left-column"
-    >
-      <Sidebar
-        slug={slug}
-        publishedBranches={publishedBranches}
-        toctreeData={toctree}
-        toggleLeftColumn={toggleLeftColumn}
-      />
+  return (
+    <div>
+      {!isBrowser || isSidebarMenuOpen ? (
+        <div
+          className={`left-column ${style.leftColumn} ${renderStatus}`}
+          css={css`
+            grid-area: sidebar;
+            width: 330px;
+          `}
+          id="left-column"
+        >
+          <Sidebar
+            slug={slug}
+            publishedBranches={publishedBranches}
+            toctreeData={toctree}
+            toggleLeftColumn={toggleLeftColumn}
+          />
+        </div>
+      ) : (
+        <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
+          Navigation
+        </span>
+      )}
     </div>
-  ) : (
-    <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
-      Navigation
-    </span>
   );
 };
 

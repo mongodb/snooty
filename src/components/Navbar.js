@@ -5,12 +5,12 @@ import { css } from '@emotion/core';
 import { Logo } from '@leafygreen-ui/logo';
 import { uiColors } from '@leafygreen-ui/palette';
 import Searchbar from './Searchbar';
+import { SidebarContext } from './sidebar-context';
 import SidebarMobileMenuButton from './SidebarMobileMenuButton';
 import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../utils/search-params-to-url';
-import { SidebarContext } from './sidebar-context';
 
 const NavbarContainer = styled('div')`
   align-items: center;
@@ -84,7 +84,7 @@ const Navbar = () => {
 
   return (
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
-      {!isSidebarEnabled && <SidebarMobileMenuButton />}
+      {isSidebarEnabled && <SidebarMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <a
           css={css`

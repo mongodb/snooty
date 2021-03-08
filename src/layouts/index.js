@@ -67,7 +67,7 @@ const DefaultLayout = (props) => {
     template,
   } = pageContext;
   const Template = getTemplate(project, slug, template);
-  const isBlankTemplate = template === 'blank';
+  const isSidebarEnabled = template !== 'blank';
 
   return (
     <>
@@ -76,9 +76,9 @@ const DefaultLayout = (props) => {
       <TabProvider selectors={page?.options?.selectors}>
         <ContentsProvider nodes={page?.children}>
           <GlobalGrid>
-            <SidebarContextProvider isSidebarEnabled={isBlankTemplate}>
+            <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
               <Header />
-              {!isBlankTemplate && <Sidenav pageContext={pageContext} />}
+              {isSidebarEnabled && <Sidenav pageContext={pageContext} />}
             </SidebarContextProvider>
             <Template
               css={css`
