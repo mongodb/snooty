@@ -57,7 +57,7 @@ const GlobalGrid = styled('div')`
   height: 100vh;
 `;
 
-const DefaultLayout = props => {
+const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
   const {

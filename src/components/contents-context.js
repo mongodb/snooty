@@ -109,7 +109,7 @@ const ContentsProvider = ({ children, nodes = [] }) => {
       unobserveHeadings(headings, observer);
       setActiveSectionId(defaultActiveSectionId);
     };
-  }, [defaultActiveSectionId, headingNodes]);
+  }, [headingNodes]);
 
   return <ContentsContext.Provider value={{ headingNodes, activeSectionId }}>{children}</ContentsContext.Provider>;
 };
