@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
 const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) => {
-  const introText = useMemo(() => {
+  const { introText, childIndex } = useMemo(() => {
     const version = argument.length > 0 ? <ComponentFactory nodeData={argument[0]} /> : null;
+    let childIndex = 0;
     let additionalArg = '.';
     if (argument.length > 1) {
       additionalArg = (
@@ -16,6 +17,7 @@ const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) =>
         </>
       );
     } else if (children.length > 0) {
+      childIndex = 1;
       additionalArg = (
         <>
           : <ComponentFactory nodeData={children[0]} skipPTag />
@@ -31,18 +33,21 @@ const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) =>
       text = <>Changed{version && <> in version {version}</>}</>;
     }
 
-    return (
-      <>
-        <em>{text}</em>
-        {additionalArg}
-      </>
-    );
+    return {
+      childIndex,
+      introText: (
+        <>
+          <em>{text}</em>
+          {additionalArg}
+        </>
+      ),
+    };
   }, [argument, children, name]);
 
   return (
     <div>
       <p>{introText}</p>
-      {children.slice(1).map((child, index) => (
+      {children.slice(childIndex).map((child, index) => (
         <ComponentFactory {...rest} nodeData={child} key={index} />
       ))}
     </div>
