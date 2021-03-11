@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
@@ -8,6 +8,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
+import { ENABLED_SITES_FOR_DELIGHTED } from '../constants';
 
 const bannerPadding = css`
   #gatsby-focus-wrapper {
@@ -41,8 +42,7 @@ const globalCSS = css`
 
 const DefaultLayout = (props) => {
   const { children, pageContext } = props;
-  const { project } = useSiteMetadata();
-
+  const { parserBranch, project, snootyEnv } = useSiteMetadata();
   const {
     metadata: { title },
     page,
@@ -50,6 +50,22 @@ const DefaultLayout = (props) => {
     template,
   } = pageContext;
   const Template = getTemplate(project, slug, template);
+
+  useEffect(() => {
+    if (snootyEnv === 'production' && ENABLED_SITES_FOR_DELIGHTED.includes(project)) {
+      // Set sample factor to 0.16 for now until we can figure out why Delighted's "Adaptive Sampling"
+      // was giving Node docs a sampling rate of 0%. https://app.delighted.com/docs/api/web#adaptive-sampling
+      window.delighted.survey({
+        minTimeOnPage: 90,
+        properties: {
+          branch: parserBranch,
+          project,
+        },
+        sampleFactor: 0.16,
+      });
+    }
+  }, [parserBranch, project, snootyEnv]);
+
   return (
     <>
       {/* Anchor-link styling to compensate for navbar height */}

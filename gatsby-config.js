@@ -5,21 +5,27 @@ const pathPrefix = generatePathPrefix(siteMetadata);
 
 module.exports = {
   plugins: [
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
     'gatsby-plugin-layout',
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: `${siteMetadata.siteUrl}${pathPrefix}`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-delighted',
+      options: {
+        organisationKey: 'Dk30CC86ba0nATlK',
+      },
+    },
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
         id: 'GTM-GDFN',
         includeInDevelopment: false,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-canonical-urls`,
-      options: {
-        siteUrl: `${siteMetadata.siteUrl}${pathPrefix}`,
       },
     },
   ],
