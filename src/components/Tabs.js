@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
@@ -15,24 +16,43 @@ const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
 const TabButton = ({ ...props }) => <button {...props} />;
 
-const hiddenTabStyling = css`
+// Tabs styling
+
+const hiddenTabsStyling = css`
   & > div:first-child {
     display: none;
   }
 `;
 
-const StyledTabs = styled(LeafyTabs)`
-  ${({ hidden }) => hidden && hiddenTabStyling};
+const landingTabsStyling = css`
+  width: 1044px;
 `;
 
+const StyledTabs = styled(LeafyTabs)`
+  ${({ isHidden }) => isHidden && hiddenTabsStyling};
+  ${({ isLanding }) => isLanding && landingTabsStyling};
+`;
+
+// Individual Tab styling:
+
 const landingTabStyling = css`
-  p {
-    color: pink !important;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  padding: 20px;
+
+  .right-column {
+    grid-column: 2;
+  }
+
+  .left-column {
+    grid-column: 1;
+    width: 450px;
   }
 `;
 
-const StyledTab = styled(LeafyTab)`
-  ${({ isLanding }) => isLanding && landingTabStyling};
+const styleTab = isLanding => LeafyCss`
+  ${isLanding && landingTabStyling};
 `;
 
 const Tabs = props => {
@@ -81,7 +101,7 @@ const Tabs = props => {
   );
 
   return (
-    <StyledTabs as={TabButton} hidden={isHidden} selected={activeTab} setSelected={handleClick}>
+    <StyledTabs as={TabButton} isHidden={isHidden} isLanding={isLanding} selected={activeTab} setSelected={handleClick}>
       {children.map(tab => {
         if (tab.name !== 'tab') {
           return null;
@@ -92,12 +112,13 @@ const Tabs = props => {
           tab.argument.length > 0
             ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
             : tabId;
+
         return (
-          <StyledTab isLanding={isLanding} key={tabId} name={tabTitle}>
+          <LeafyTab className={cx(styleTab(isLanding))} key={tabId} name={tabTitle}>
             {tab.children.map((child, i) => (
               <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
             ))}
-          </StyledTab>
+          </LeafyTab>
         );
       })}
     </StyledTabs>

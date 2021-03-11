@@ -1,10 +1,14 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import styled from '@emotion/styled';
-import { Global, css } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
-import { uiColors } from '@leafygreen-ui/palette';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Sidebar from '../components/Sidebar';
+import style from '../styles/navigation.module.css';
+import styled from '@emotion/styled';
+import useScreenSize from '../hooks/useScreenSize.js';
+import { Global, css } from '@emotion/core';
+import { Helmet } from 'react-helmet';
+import { isBrowser } from '../utils/is-browser.js';
+import { uiColors } from '@leafygreen-ui/palette';
+import { useTheme } from 'emotion-theming';
 
 const Wrapper = styled('main')`
   margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
@@ -27,30 +31,74 @@ const Wrapper = styled('main')`
   }
 `;
 
-const ProductLanding = ({ children }) => {
+const ProductLanding = ({
+  children,
+  pageContext: {
+    slug,
+    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+  },
+}) => {
   const { fontSize, screenSize, size } = useTheme();
+  const { isTabletOrMobile } = useScreenSize();
+  const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
+  /* Add the postRender CSS class without disturbing pre-render functionality */
+  const renderStatus = isBrowser ? style.postRender : '';
+
+  const toggleLeftColumn = () => {
+    setShowLeftColumn(!showLeftColumn);
+  };
+
+  useEffect(() => {
+    setShowLeftColumn(!isTabletOrMobile);
+  }, [isTabletOrMobile]);
+
   return (
     <>
       <Helmet>
         <title>MongoDB Documentation</title>
       </Helmet>
-      <Wrapper>{children}</Wrapper>
+      <div>
+        {(!isBrowser || showLeftColumn) && (
+          <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
+            <Sidebar
+              slug={slug}
+              publishedBranches={publishedBranches}
+              toctreeData={toctree}
+              toggleLeftColumn={toggleLeftColumn}
+            />
+          </div>
+        )}
+      </div>
+      {(!isBrowser || !showLeftColumn) && (
+        <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
+          Navigation
+        </span>
+      )}
+      <Wrapper id="main-column" className="main-column">
+        {children}
+      </Wrapper>
       <Global
         styles={css`
           h1,
           h2,
           h3,
-          h4 {
+          h4,
+          h6 {
             color: ${uiColors.black};
             font-weight: bold;
           }
-          h1,
-          h2 {
-            font-size: 32px;
-            margin-bottom: ${fontSize.default};
+          h1 {
+            font-size: ${fontSize.h2};
           }
           h2 {
+            font-size: 21px;
             margin-top: ${size.small};
+            margin-bottom: ${size.default};
+          }
+          .kicker {
+            color: ${uiColors.gray.dark1};
+            padding-top: 80px;
+            font-size: 14px;
           }
           p {
             color: ${uiColors.black};
