@@ -53,18 +53,16 @@ const DefaultLayout = (props) => {
 
   useEffect(() => {
     if (snootyEnv === 'production' && ENABLED_SITES_FOR_DELIGHTED.includes(project)) {
-      // Set sample factor to 0.16 for now until we can figure out why Delighted's "Adaptive Sampling"
-      // was giving Node docs a sampling rate of 0%. https://app.delighted.com/docs/api/web#adaptive-sampling
+      const projectName = project === 'docs' ? 'manual' : project;
       window.delighted.survey({
         minTimeOnPage: 90,
         properties: {
           branch: parserBranch,
-          project,
+          project: projectName,
         },
-        sampleFactor: 0.16,
       });
     }
-  }, [parserBranch, project, snootyEnv]);
+  }, [parserBranch, project, slug, snootyEnv]);
 
   return (
     <>
