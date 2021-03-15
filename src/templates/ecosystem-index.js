@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import MainColumn from '../components/MainColumn';
-import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
+import MainColumn from '../components/MainColumn';
+import { TEMPLATE_CLASSNAME } from '../constants';
+import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 
-const EcosystemIndex = () => (
-  <div className="content">
+const EcosystemIndex = ({ className }) => (
+  <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
     <MainColumn className={EcosystemHomepageStyles.fullWidth}>
       <div
         className={[EcosystemHomepageStyles.document, 'body'].join(' ')}
@@ -13,7 +15,11 @@ const EcosystemIndex = () => (
           margin-left: 25px;
         `}
       >
-        <section className={EcosystemHomepageStyles.mainContentPadding}>
+        <section
+          css={css`
+            padding-bottom: 50px;
+          `}
+        >
           <h1>Start Developing with MongoDB</h1>
           <p>Connect your application to your database with one of our official libraries.</p>
           <p>
@@ -33,5 +39,9 @@ const EcosystemIndex = () => (
     </MainColumn>
   </div>
 );
+
+EcosystemIndex.propTypes = {
+  className: PropTypes.string,
+};
 
 export default EcosystemIndex;

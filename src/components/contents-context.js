@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { getNestedValue } from '../utils/get-nested-value';
-import { throttle } from '../utils/throttle';
 
 const defaultContextValue = {
   headingNodes: [],
-  activeSectionIndex: 0,
+  activeSectionId: null,
 };
 
 const findSectionHeadings = (nodes) => {
@@ -55,62 +54,64 @@ const findSectionHeadings = (nodes) => {
   return results;
 };
 
-const findHeadingsOnPage = (headingNodes, height) => {
-  let positions = [];
-
+const observeHeadings = (headingNodes, observer) => {
+  let headingElements = [];
   headingNodes.forEach((heading) => {
     const el = document.getElementById(heading.id);
     if (el) {
-      positions.push(el.offsetTop / height);
+      observer.observe(el);
+      headingElements.push(el);
     }
   });
+  return headingElements;
+};
 
-  return positions;
+const unobserveHeadings = (headings, observer) => {
+  headings.forEach((el) => {
+    observer.unobserve(el);
+  });
 };
 
 const ContentsContext = React.createContext(defaultContextValue);
 
 const ContentsProvider = ({ children, nodes = [] }) => {
-  const [activeSectionIndex, setActiveSectionIndex] = useState(0);
-  const [headingNodes, setHeadingNodes] = useState([]);
+  const headingNodes = useMemo(() => findSectionHeadings(nodes), [nodes]);
+  const [activeSectionId, setActiveSectionId] = useState(headingNodes[0]?.id);
 
   useEffect(() => {
-    setHeadingNodes(findSectionHeadings(nodes));
-  }, [nodes]);
-
-  useEffect(() => {
-    const height = document.body.clientHeight - window.innerHeight;
-    const headingPositions = findHeadingsOnPage(headingNodes, height);
-
-    const handleScroll = () => {
-      // Calculate current position of the page similar to guides.js
-      const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
-      let currentPosition = scrollTop / height;
-      currentPosition = (scrollTop + currentPosition * 0.8 * window.innerHeight) / height;
-
-      // bestMatch = [distance from closest section, closest section index]
-      let bestMatch = [Infinity, 0];
-
-      headingPositions.forEach((headingPosition, index) => {
-        const delta = Math.abs(headingPosition - currentPosition);
-        if (delta <= bestMatch[0]) {
-          bestMatch = [delta, index];
-        }
-      });
-
-      setActiveSectionIndex(bestMatch[1]);
+    const options = {
+      root: document.querySelector('.content'),
+      rootMargin: '0px',
+      threshold: 1.0,
     };
 
-    const throttledScrollFn = throttle(handleScroll, 50);
-    document.addEventListener('scroll', throttledScrollFn);
+    // Callback is first performed upon page load. Ignore checking entries on first load to allow
+    // headings[0] to be counted first when headings[0] and headings[1] are both intersecting
+    let firstLoad = true;
+    let defaultActiveSectionId = window.location.hash.slice(1) || headingNodes[0]?.id;
+    const callback = (entries) => {
+      if (firstLoad) {
+        firstLoad = false;
+        setActiveSectionId(defaultActiveSectionId);
+        return;
+      }
 
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSectionId(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+    const headings = observeHeadings(headingNodes, observer);
     return () => {
-      document.removeEventListener('scroll', throttledScrollFn);
-      setActiveSectionIndex(0);
+      unobserveHeadings(headings, observer);
+      setActiveSectionId(defaultActiveSectionId);
     };
   }, [headingNodes]);
 
-  return <ContentsContext.Provider value={{ headingNodes, activeSectionIndex }}>{children}</ContentsContext.Provider>;
+  return <ContentsContext.Provider value={{ headingNodes, activeSectionId }}>{children}</ContentsContext.Provider>;
 };
 
 export { ContentsContext, ContentsProvider };

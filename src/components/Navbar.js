@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Logo } from '@leafygreen-ui/logo';
 import { uiColors } from '@leafygreen-ui/palette';
 import Searchbar from './Searchbar';
+import { SidebarContext } from './sidebar-context';
 import SidebarMobileMenuButton from './SidebarMobileMenuButton';
 import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
@@ -13,14 +14,13 @@ import { searchParamsToURL } from '../utils/search-params-to-url';
 const NavbarContainer = styled('div')`
   align-items: center;
   background-color: #fff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, ${props => (props.isTransparent ? '0.1' : '0.2')});
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, ${(props) => (props.isTransparent ? '0.1' : '0.2')});
   display: flex;
   height: 45px;
   justify-content: space-between;
   padding: 0px 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  // Keep relative with z-index so that box shadow will be on top of every component
+  position: relative;
   z-index: 9999;
 
   :focus {
@@ -35,7 +35,7 @@ const NavbarContainer = styled('div')`
 const NavbarLeft = styled('div')`
   align-items: center;
   display: flex;
-  ${props => props.isTransparent && 'opacity: 0.2;'}
+  ${(props) => props.isTransparent && 'opacity: 0.2;'}
 `;
 
 const NavSeparator = styled('span')`
@@ -58,6 +58,7 @@ const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
+  const { isSidebarEnabled } = useContext(SidebarContext);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const [isTransparent, setIsTransparent] = useState(false);
   const imageHeight = 22;
@@ -82,7 +83,7 @@ const Navbar = () => {
 
   return (
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
-      <SidebarMobileMenuButton />
+      {isSidebarEnabled && <SidebarMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <a
           css={css`
