@@ -10,30 +10,23 @@ const Wrapper = styled('main')`
   margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
   max-width: 1150px;
   padding: 0 ${({ theme }) => `${theme.size.medium}`};
-  @media ${({ theme }) => theme.screenSize.upToLarge} {
-    max-width: 748px;
-  }
   @media ${({ theme }) => theme.screenSize.upToMedium} {
-    padding: 0;
   }
   & > section,
   & > section > section {
     display: grid;
     grid-template-columns: repeat(12, [col-span] 1fr);
-    grid-column: 1/-1;
+    grid-column: 1 / -1;
     @media ${({ theme }) => theme.screenSize.upToMedium} {
       grid-template-columns: ${({ theme }) => `${theme.size.medium} 1fr ${theme.size.medium}`};
     }
   }
+  section > * {
+    grid-column: 1 / -1;
+  }
 `;
 
-const ProductLanding = ({
-  children,
-  pageContext: {
-    slug,
-    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
-  },
-}) => {
+const ProductLanding = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
 
   return (
@@ -56,17 +49,19 @@ const ProductLanding = ({
           }
           h1 {
             font-size: ${fontSize.h2};
+            align-self: end;
           }
           h2 {
             font-size: 21px;
             margin-top: ${size.small};
             margin-bottom: ${size.default};
           }
-          p {
+          p:not(.copyright p) {
             color: ${uiColors.black};
             font-size: ${fontSize.default};
             letter-spacing: 0.5px;
             margin-bottom: ${size.default};
+            max-width: 500px;
           }
           a {
             color: ${uiColors.blue.base};
@@ -75,9 +70,6 @@ const ProductLanding = ({
           }
           a:hover {
             text-decoration: none;
-          }
-          h1 {
-            align-self: end;
           }
           .kicker {
             color: ${uiColors.gray.dark1};
@@ -89,7 +81,9 @@ const ProductLanding = ({
             margin: ${size.xlarge} 0;
           }
           .procedure {
+            max-width: 400px;
             padding-top: 15px;
+            padding-left: ${size.small};
             .landing-step {
               padding-left: 50px;
               padding-bottom: 50px;
@@ -101,7 +95,7 @@ const ProductLanding = ({
             }
           }
           .circle {
-            background: ${uiColors.green.light2};
+            background: ${uiColors.green.light3};
             width: 34px;
             height: 34px;
             border-radius: 50%;
@@ -115,16 +109,16 @@ const ProductLanding = ({
             margin: auto;
             padding-top: 6px;
           }
-          section > * {
-            grid-column-start: 1;
-            grid-column-end: 7;
-            @media ${screenSize.upToMedium} {
-              grid-column: 2/-2;
-            }
-          }
           @media ${screenSize.upToLarge} {
             .footer {
               padding: ${size.medium};
+            }
+          }
+          @media ${screenSize.upToMedium} {
+            .right-column {
+              grid-column: 2 / -1 !important;
+              grid-row-start: 4 !important;
+              grid-row-end: 5 !important;
             }
           }
           @media ${screenSize.mediumAndUp} {

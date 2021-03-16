@@ -8,6 +8,7 @@ import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
 import { reportAnalytics } from '../utils/report-analytics';
 import { getNestedValue } from '../utils/get-nested-value';
+import { useTheme } from 'emotion-theming';
 
 const getTabId = node => getNestedValue(['options', 'tabid'], node);
 
@@ -16,44 +17,66 @@ const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
 const TabButton = ({ ...props }) => <button {...props} />;
 
-// Tabs styling
+const useTabStyling = screenSize => {
+  // Tabs styling
+  const hiddenTabsStyling = css`
+    & > div:first-child {
+      display: none;
+    }
+  `;
 
-const hiddenTabsStyling = css`
-  & > div:first-child {
-    display: none;
-  }
-`;
+  const landingTabsStyling = css`
+    width: 100%;
+    button {
+      min-width: 55px;
+      padding: 12px 15px;
+    }
+    @media ${screenSize.upToMedium} {
+      button {
+        padding: 12px 10px;
+      }
+    }
+    @media ${screenSize.upToSmall} {
+      button {
+        padding: 12px 3px;
+      }
+    }
+  `;
 
-const landingTabsStyling = css`
-  width: 1044px;
-`;
+  const StyledTabs = styled(LeafyTabs)`
+    ${({ isHidden }) => isHidden && hiddenTabsStyling};
+    ${({ isLanding }) => isLanding && landingTabsStyling};
+  `;
 
-const StyledTabs = styled(LeafyTabs)`
-  ${({ isHidden }) => isHidden && hiddenTabsStyling};
-  ${({ isLanding }) => isLanding && landingTabsStyling};
-`;
+  // Individual Tab styling:
 
-// Individual Tab styling:
+  const landingTabStyling = css`
+    display: grid;
+    img {
+      margin: auto;
+    }
+    @media ${screenSize.mediumAndUp} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+      padding: 20px;
 
-const landingTabStyling = css`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  padding: 20px;
+      .left-column {
+        grid-column: 1;
+        min-width: 230px;
+      }
 
-  .right-column {
-    grid-column: 2;
-  }
+      img {
+        grid-column: 2;
+      }
+    }
+  `;
 
-  .left-column {
-    grid-column: 1;
-    width: 450px;
-  }
-`;
+  const styleTab = isLanding => LeafyCss`
+    ${isLanding && landingTabStyling};
+  `;
 
-const styleTab = isLanding => LeafyCss`
-  ${isLanding && landingTabStyling};
-`;
+  return { StyledTabs, styleTab };
+};
 
 const Tabs = props => {
   const {
@@ -61,6 +84,10 @@ const Tabs = props => {
     page,
     ...rest
   } = props;
+
+  const { screenSize } = useTheme();
+  const { StyledTabs, styleTab } = useTabStyling(screenSize);
+
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
