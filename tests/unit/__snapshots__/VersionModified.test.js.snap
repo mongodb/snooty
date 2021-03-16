@@ -1,94 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when rendering a deprecated directive with 0 arguments renders correctly  1`] = `
-<div
-  className="deprecated"
->
+<div>
   <p>
     <em>
       Deprecated
     </em>
-    .
-  </p>
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 679,
+    : 
+    <ComponentFactory
+      nodeData={
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 679,
+                    },
                   },
+                  "type": "text",
+                  "value": "replicationFactor",
                 },
-                "type": "text",
-                "value": "replicationFactor",
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 679,
+                },
               },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 679,
-              },
+              "type": "literal",
             },
-            "type": "literal",
-          },
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 679,
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 679,
+                },
               },
-            },
-            "type": "text",
-            "value": " is deprecated. Use
+              "type": "text",
+              "value": " is deprecated. Use
 ",
-          },
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 679,
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 679,
+                    },
                   },
+                  "type": "text",
+                  "value": "replicationSpecs",
                 },
-                "type": "text",
-                "value": "replicationSpecs",
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 679,
+                },
               },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 679,
-              },
+              "type": "literal",
             },
-            "type": "literal",
-          },
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 679,
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 679,
+                },
               },
+              "type": "text",
+              "value": ".",
             },
-            "type": "text",
-            "value": ".",
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 679,
+            },
           },
-        ],
-        "position": Object {
-          "start": Object {
-            "line": 679,
-          },
-        },
-        "type": "paragraph",
+          "type": "paragraph",
+        }
       }
-    }
-  />
+      skipPTag={true}
+    />
+  </p>
 </div>
 `;
 
 exports[`when rendering a versionadded directive with one argument renders correctly  1`] = `
-<div
-  className="versionadded"
->
+<div>
   <p>
     <em>
       New
@@ -113,9 +109,7 @@ exports[`when rendering a versionadded directive with one argument renders corre
 `;
 
 exports[`when rendering a versionchanged directive with two arguments renders correctly  1`] = `
-<div
-  className="versionchanged"
->
+<div>
   <p>
     <em>
       Changed
@@ -134,8 +128,10 @@ exports[`when rendering a versionchanged directive with two arguments renders co
         }
       />
     </em>
-    : 
+    :
+     
     <ComponentFactory
+      key="0"
       nodeData={
         Object {
           "position": Object {
