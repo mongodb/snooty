@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Logo } from '@leafygreen-ui/logo';
@@ -107,10 +106,6 @@ const Navbar = () => {
       />
     </NavbarContainer>
   );
-};
-
-Navbar.propTypes = {
-  isBlankTemplate: PropTypes.bool,
 };
 
 export default Navbar;
