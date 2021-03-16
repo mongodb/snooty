@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Sidebar from '../components/Sidebar';
-import style from '../styles/navigation.module.css';
 import styled from '@emotion/styled';
-import useScreenSize from '../hooks/useScreenSize.js';
 import { Global, css } from '@emotion/core';
 import { Helmet } from 'react-helmet';
-import { isBrowser } from '../utils/is-browser.js';
 import { uiColors } from '@leafygreen-ui/palette';
 import { useTheme } from 'emotion-theming';
 
@@ -39,41 +35,12 @@ const ProductLanding = ({
   },
 }) => {
   const { fontSize, screenSize, size } = useTheme();
-  const { isTabletOrMobile } = useScreenSize();
-  const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
-  /* Add the postRender CSS class without disturbing pre-render functionality */
-  const renderStatus = isBrowser ? style.postRender : '';
-
-  const toggleLeftColumn = () => {
-    setShowLeftColumn(!showLeftColumn);
-  };
-
-  useEffect(() => {
-    setShowLeftColumn(!isTabletOrMobile);
-  }, [isTabletOrMobile]);
 
   return (
     <>
       <Helmet>
         <title>MongoDB Documentation</title>
       </Helmet>
-      <div>
-        {(!isBrowser || showLeftColumn) && (
-          <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
-            <Sidebar
-              slug={slug}
-              publishedBranches={publishedBranches}
-              toctreeData={toctree}
-              toggleLeftColumn={toggleLeftColumn}
-            />
-          </div>
-        )}
-      </div>
-      {(!isBrowser || !showLeftColumn) && (
-        <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
-          Navigation
-        </span>
-      )}
       <Wrapper id="main-column" className="main-column">
         {children}
       </Wrapper>
@@ -95,11 +62,6 @@ const ProductLanding = ({
             margin-top: ${size.small};
             margin-bottom: ${size.default};
           }
-          .kicker {
-            color: ${uiColors.gray.dark1};
-            padding-top: 80px;
-            font-size: 14px;
-          }
           p {
             color: ${uiColors.black};
             font-size: ${fontSize.default};
@@ -117,9 +79,41 @@ const ProductLanding = ({
           h1 {
             align-self: end;
           }
+          .kicker {
+            color: ${uiColors.gray.dark1};
+            padding-top: 80px;
+            font-size: 14px;
+          }
           .span-columns {
             grid-column: 2 / 11 !important;
             margin: ${size.xlarge} 0;
+          }
+          .procedure {
+            padding-top: 15px;
+            .landing-step {
+              padding-left: 50px;
+              padding-bottom: 50px;
+            }
+            .landing-step:not(.landing-step:last-child) {
+              border-left: dashed;
+              border-color: ${uiColors.gray.light2};
+              border-width: 2px;
+            }
+          }
+          .circle {
+            background: ${uiColors.green.light2};
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            margin-bottom: -29px;
+            margin-left: -67px;
+            text-align: center;
+          }
+          .step-number {
+            font-weight: bold;
+            color: ${uiColors.green.dark2};
+            margin: auto;
+            padding-top: 6px;
           }
           section > * {
             grid-column-start: 1;
