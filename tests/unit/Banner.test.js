@@ -11,13 +11,6 @@ const mockBannerContent = {
   url: 'https://mongodb.com',
 };
 
-const mockStitchClient = {
-  auth: {
-    loginWithCredential: jest.fn().mockImplementation(() => Promise.resolve()),
-  },
-  callFunction: jest.fn().mockImplementation(() => Promise.resolve(mockBannerContent)),
-};
-
 describe('Banner component', () => {
   it('renders without a banner image', () => {
     // bannerContent state should remain null
