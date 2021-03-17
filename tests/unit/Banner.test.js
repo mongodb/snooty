@@ -5,13 +5,6 @@ import { mount } from 'enzyme';
 import { Stitch } from 'mongodb-stitch-browser-sdk';
 import Banner from '../../src/components/Banner';
 
-let container;
-
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
 const mockBannerContent = {
   altText: 'Test',
   imgPath: '/banners/test.png',
@@ -33,6 +26,9 @@ describe('Banner component', () => {
   });
 
   it('renders with a banner image', async () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
     jest.spyOn(Stitch, 'hasAppClient').mockImplementation(() => true);
     jest.spyOn(Stitch, 'getAppClient').mockImplementation(() => {
       return mockStitchClient;

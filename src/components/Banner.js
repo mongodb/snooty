@@ -8,23 +8,22 @@ import { getStitchClient } from '../utils/stitch';
 
 const getBannerSource = (src) => {
   if (src == null || src === '') return null;
-  const hostUrl = `${SNOOTY_STITCH_ID}.mongodbstitch.com/`;
-  return 'https://' + normalizePath(hostUrl + src);
-};
-
-const fetchBannerContent = async (setBannerContent) => {
-  const client = getStitchClient(SNOOTY_STITCH_ID);
-  await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
-  const bannerContent = await client.callFunction('getBanner');
-  setBannerContent(bannerContent);
+  const srcUrl = `${SNOOTY_STITCH_ID}.mongodbstitch.com/${src}`;
+  return `https://${normalizePath(srcUrl)}`;
 };
 
 const Banner = () => {
   const [bannerContent, setBannerContent] = useState(null);
 
   useEffect(() => {
-    fetchBannerContent(setBannerContent);
-  }, []);
+    const fetchBannerContent = async () => {
+      const client = getStitchClient(SNOOTY_STITCH_ID);
+      await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
+      const bannerContent = await client.callFunction('getBanner');
+      setBannerContent(bannerContent);
+    };
+    fetchBannerContent();
+  }, [setBannerContent]);
 
   if (bannerContent == null) {
     return null;
