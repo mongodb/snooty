@@ -1,10 +1,11 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import Loadable from '@loadable/component';
-import Navbar from '../components/Navbar';
+import { BannerContextProvider } from './banner-context';
+import Navbar from './Navbar';
 
 // Prevents Stitch functions in Banner from erroring when starting local development
-const Banner = Loadable(() => import('../components/Banner'));
+const Banner = Loadable(() => import('./Banner'));
 
 const Header = () => {
   return (
@@ -13,8 +14,10 @@ const Header = () => {
         grid-area: header;
       `}
     >
-      <Banner />
-      <Navbar />
+      <BannerContextProvider>
+        <Banner />
+        <Navbar />
+      </BannerContextProvider>
     </header>
   );
 };

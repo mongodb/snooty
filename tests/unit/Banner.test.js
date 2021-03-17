@@ -1,9 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { Stitch } from 'mongodb-stitch-browser-sdk';
 import Banner from '../../src/components/Banner';
+import { BannerContext } from '../../src/components/banner-context';
 
 const mockBannerContent = {
   altText: 'Test',
@@ -21,26 +20,22 @@ const mockStitchClient = {
 
 describe('Banner component', () => {
   it('renders without a banner image', () => {
+    // bannerContent state should remain null
     const wrapper = mount(<Banner />);
     expect(wrapper.find('Banner').children()).toHaveLength(0);
   });
 
   it('renders with a banner image', async () => {
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-
     jest.spyOn(Stitch, 'hasAppClient').mockImplementation(() => true);
-    jest.spyOn(Stitch, 'getAppClient').mockImplementation(() => {
-      return mockStitchClient;
-    });
-    jest.spyOn(Stitch, 'initializeAppClient').mockImplementation(() => {
-      return mockStitchClient;
-    });
+    jest.spyOn(Stitch, 'getAppClient').mockImplementation();
+    jest.spyOn(Stitch, 'initializeAppClient').mockImplementation();
 
-    await act(async () => {
-      render(<Banner />, container);
-    });
+    const wrapper = mount(
+      <BannerContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: null }}>
+        <Banner />
+      </BannerContext.Provider>
+    );
 
-    expect(container).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

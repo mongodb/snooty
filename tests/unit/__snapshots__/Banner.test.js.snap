@@ -20,15 +20,15 @@ exports[`Banner component renders with a banner image 1`] = `
   }
 }
 
-<div>
+<Banner>
   <a
-    class="emotion-1"
+    className="emotion-1"
     href="https://mongodb.com"
     title="Test"
   >
     <div
-      class="emotion-0"
+      className="emotion-0"
     />
   </a>
-</div>
+</Banner>
 `;

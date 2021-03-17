@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState, useRef } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
+import { BannerContext } from '../banner-context';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
+import SearchDropdown from './SearchDropdown';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
 const NUMBER_SEARCH_RESULTS = 9;
@@ -20,10 +21,10 @@ const SEARCHBAR_HEIGHT = '36px';
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
-const expandedCss = css`
+const expandedCss = (isBannerEnabled) => css`
   position: fixed;
   right: 16px;
-  top: 5px;
+  top: calc(${isBannerEnabled && `${theme.header.bannerHeight} +`} ${SEARCHBAR_HEIGHT_OFFSET});
 `;
 
 const SearchbarContainer = styled.div(
@@ -41,7 +42,6 @@ const SearchbarContainer = styled.div(
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
       height: ${props.isExpanded && props.isSearching ? '100%' : SEARCHBAR_HEIGHT};
       transition: unset;
       width: ${props.isExpanded ? '100%' : BUTTON_SIZE};
@@ -50,13 +50,14 @@ const SearchbarContainer = styled.div(
 
     // Allows the expanded searchbar to appear above other nav components on smaller screens
     @media all and (max-width: 670px) {
-      ${props.isExpanded && expandedCss}
+      ${props.isExpanded && expandedCss(props.isBannerEnabled)}
     }
   `
 );
 
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
   const { project } = useSiteMetadata();
+  const { bannerContent } = useContext(BannerContext);
   const [value, setValue] = useState('');
 
   // XXX: Search filter defaults to Realm if a user is on the Realm docs
@@ -130,7 +131,13 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   }, [fetchNewSearchResults, reportSearchEvent, value]);
 
   return (
-    <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={searchContainerRef}>
+    <SearchbarContainer
+      isBannerEnabled={bannerContent?.isEnabled}
+      isExpanded={isExpanded}
+      isSearching={isSearching}
+      onFocus={onFocus}
+      ref={searchContainerRef}
+    >
       {isExpanded ? (
         <SearchContext.Provider
           value={{

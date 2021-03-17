@@ -37,7 +37,7 @@ const EmptyResultsContainer = styled('div')`
   must account for the navbar, any margins added from using the blank landing
   template, and half of the height of the empty state component */
   margin-top: calc(
-    50vh - ${theme.navbar.height} - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2
+    50vh - ${theme.header.navbarHeight} - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2
   );
 `;
 
