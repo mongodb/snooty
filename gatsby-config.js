@@ -16,12 +16,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-delighted',
-      options: {
-        organisationKey: 'Dk30CC86ba0nATlK',
-      },
-    },
-    {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
         id: 'GTM-GDFN',

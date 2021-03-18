@@ -125,4 +125,12 @@ export const URL_SLUGS = {
   guides: ['guides'],
 };
 
-export const ENABLED_SITES_FOR_DELIGHTED = ['cloud-docs', 'datalake', 'docs', 'guides', 'manual', 'node', 'realm'];
+export const ENABLED_SITES_FOR_DELIGHTED = new Set([
+  'cloud-docs',
+  'datalake',
+  'docs',
+  'guides',
+  'manual',
+  'node',
+  'realm',
+]);

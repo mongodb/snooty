@@ -52,7 +52,7 @@ const DefaultLayout = (props) => {
   const Template = getTemplate(project, slug, template);
 
   useEffect(() => {
-    if (snootyEnv === 'production' && ENABLED_SITES_FOR_DELIGHTED.includes(project)) {
+    if (snootyEnv === 'production' && ENABLED_SITES_FOR_DELIGHTED.has(project)) {
       const projectName = project === 'docs' ? 'manual' : project;
       window.delighted.survey({
         minTimeOnPage: 90,
