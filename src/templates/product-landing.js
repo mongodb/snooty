@@ -10,12 +10,25 @@ const Wrapper = styled('main')`
   margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
   max-width: 1150px;
   padding: 0 ${({ theme }) => `${theme.size.medium}`};
-  @media ${({ theme }) => theme.screenSize.upToMedium} {
+  & > section:first-of-type > h1,
+  & > section:first-of-type > p {
+    align-self: flex-start;
+    grid-column: 1;
   }
-  & > section,
-  & > section > section {
+  & > section {
     display: grid;
-    grid-template-columns: repeat(12, [col-span] 1fr);
+    grid-template-columns: repeat(2, [col-span] 1fr);
+
+    @media ${({ theme }) => theme.screenSize.upToXLarge} {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+  }
+  & > section > section {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, [col-span] 1fr);
     grid-column: 1 / -1;
     @media ${({ theme }) => theme.screenSize.upToMedium} {
       grid-template-columns: ${({ theme }) => `${theme.size.medium} 1fr ${theme.size.medium}`};
@@ -114,23 +127,11 @@ const ProductLanding = ({ children }) => {
               padding: ${size.medium};
             }
           }
-          @media ${screenSize.upToMedium} {
-            .right-column {
-              grid-column: 2 / -1 !important;
-              grid-row-start: 4 !important;
-              grid-row-end: 5 !important;
-            }
-          }
-          @media ${screenSize.mediumAndUp} {
-            .right-column {
-              grid-column: 7 / -1 !important;
-              grid-row-start: 1 !important;
-              grid-row-end: 3 !important;
-            }
-          }
-          @media ${screenSize.largeAndUp} {
-            .right-column {
-              grid-column: 9 / -1 !important;
+          .right-column {
+            grid-row: 1 / 5;
+            grid-column: 2 !important;
+            @media ${screenSize.upToXLarge} {
+              flex-basis: 100%;
             }
           }
         `}
