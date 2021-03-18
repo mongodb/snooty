@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Stitch } from 'mongodb-stitch-browser-sdk';
 import Banner from '../../src/components/Banner';
-import { BannerContext } from '../../src/components/banner-context';
+import { HeaderContext } from '../../src/components/header-context';
 
 const mockBannerContent = {
   altText: 'Test',
@@ -24,9 +24,9 @@ describe('Banner component', () => {
     jest.spyOn(Stitch, 'initializeAppClient').mockImplementation();
 
     const wrapper = mount(
-      <BannerContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: null }}>
+      <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: null }}>
         <Banner />
-      </BannerContext.Provider>
+      </HeaderContext.Provider>
     );
 
     expect(wrapper).toMatchSnapshot();

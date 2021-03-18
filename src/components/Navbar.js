@@ -19,9 +19,6 @@ const NavbarContainer = styled('div')`
   height: 45px;
   justify-content: space-between;
   padding: 0px 20px;
-  // Keep relative with z-index so that box shadow will be on top of every component
-  position: relative;
-  z-index: 9999;
 
   :focus {
     outline: none;
@@ -54,7 +51,7 @@ const NavLabel = styled('div')`
   user-select: none;
 `;
 
-const Navbar = () => {
+const Navbar = ({ ...props }) => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
@@ -82,7 +79,7 @@ const Navbar = () => {
   }, [isSearchbarDefaultExpanded, isSearchbarExpanded]);
 
   return (
-    <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
+    <NavbarContainer tabIndex="0" isTransparent={isTransparent} {...props}>
       {isSidebarEnabled && <SidebarMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <a

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 import { css } from '@emotion/core';
-import { BannerContext } from './banner-context';
+import { HeaderContext } from './header-context';
 import { SNOOTY_STITCH_ID } from '../build-constants';
 import { theme } from '../theme/docsTheme';
 import { normalizePath } from '../utils/normalize-path';
@@ -13,15 +13,15 @@ const getBannerSource = (src) => {
   return `https://${normalizePath(srcUrl)}`;
 };
 
-const Banner = () => {
-  const { bannerContent, setBannerContent } = useContext(BannerContext);
+const Banner = ({ ...props }) => {
+  const { bannerContent, setBannerContent } = useContext(HeaderContext);
 
   useEffect(() => {
     const fetchBannerContent = async () => {
       const client = getStitchClient(SNOOTY_STITCH_ID);
       await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
       const banner = await client.callFunction('getBanner');
-      setBannerContent(banner);
+      setBannerContent(null);
     };
     fetchBannerContent();
   }, [setBannerContent]);
@@ -39,6 +39,7 @@ const Banner = () => {
       `}
       href={bannerContent.url}
       title={bannerContent.altText}
+      {...props}
     >
       <div
         css={css`

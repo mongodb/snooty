@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState, useRef } 
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import { BannerContext } from '../banner-context';
+import { HeaderContext } from '../header-context';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
@@ -57,7 +57,7 @@ const SearchbarContainer = styled.div(
 
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
   const { project } = useSiteMetadata();
-  const { bannerContent } = useContext(BannerContext);
+  const { bannerContent } = useContext(HeaderContext);
   const [value, setValue] = useState('');
 
   // XXX: Search filter defaults to Realm if a user is on the Realm docs

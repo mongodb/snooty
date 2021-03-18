@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 
@@ -7,13 +7,15 @@ import useNoScroll from './hooks/useNoScroll';
 import { useFeedbackState } from './context';
 import CloseButton from './components/CloseButton';
 import StarRating, { RATING_TOOLTIPS, StarRatingLabel } from './components/StarRating';
+import { HeaderContext } from '../../header-context';
 
 export default function FeedbackFullScreen({ isOpen, children }) {
   const { feedback, abandon } = useFeedbackState();
+  const { totalHeaderHeight } = useContext(HeaderContext);
   useNoScroll(isOpen);
   return (
     isOpen && (
-      <FullScreen>
+      <FullScreen totalHeaderHeight={totalHeaderHeight}>
         <Header>
           <HeaderControls>
             <CloseButton size="xlarge" onClick={abandon} />
@@ -31,17 +33,19 @@ export default function FeedbackFullScreen({ isOpen, children }) {
   );
 }
 
-const FullScreen = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: white;
-  padding-top: 45px;
-  z-index: 1;
-  overflow-y: scroll;
-`;
+const FullScreen = styled.div(
+  (props) => `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    padding-top: ${props.totalHeaderHeight};
+    z-index: 1;
+    overflow-y: scroll;
+  `
+);
 const Header = styled.div`
   display: flex;
   flex-direction: column;

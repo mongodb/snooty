@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { HeaderContextProvider } from '../components/header-context';
 import { ContentsProvider } from '../components/contents-context';
 import Header from '../components/Header';
 import SiteMetadata from '../components/site-metadata';
@@ -75,22 +76,24 @@ const DefaultLayout = (props) => {
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
         <ContentsProvider nodes={page?.children}>
-          <GlobalGrid>
-            <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
-              <Header />
-              {isSidebarEnabled && <Sidenav pageContext={pageContext} />}
-            </SidebarContextProvider>
-            <Template
-              css={css`
-                grid-area: contents;
-                margin: 0px;
-                overflow-y: auto;
-              `}
-              {...props}
-            >
-              {template === 'landing' ? [children] : children}
-            </Template>
-          </GlobalGrid>
+          <HeaderContextProvider>
+            <GlobalGrid>
+              <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
+                <Header />
+                {isSidebarEnabled && <Sidenav pageContext={pageContext} />}
+              </SidebarContextProvider>
+              <Template
+                css={css`
+                  grid-area: contents;
+                  margin: 0px;
+                  overflow-y: auto;
+                `}
+                {...props}
+              >
+                {template === 'landing' ? [children] : children}
+              </Template>
+            </GlobalGrid>
+          </HeaderContextProvider>
         </ContentsProvider>
       </TabProvider>
     </>
