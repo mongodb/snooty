@@ -21,7 +21,7 @@ const Banner = ({ ...props }) => {
       const client = getStitchClient(SNOOTY_STITCH_ID);
       await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
       const banner = await client.callFunction('getBanner');
-      setBannerContent(null);
+      setBannerContent(banner);
     };
     fetchBannerContent();
   }, [setBannerContent]);

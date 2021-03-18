@@ -2,9 +2,9 @@ import React, { useCallback, useContext, useEffect, useMemo, useState, useRef } 
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import { HeaderContext } from '../header-context';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
+import { HeaderContext } from '../header-context';
 import SearchContext from './SearchContext';
 import SearchDropdown from './SearchDropdown';
 import { useClickOutside } from '../../hooks/use-click-outside';
