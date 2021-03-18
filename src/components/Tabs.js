@@ -17,7 +17,7 @@ const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
 const TabButton = ({ ...props }) => <button {...props} />;
 
-const useTabStyling = screenSize => {
+const useTabStyling = (screenSize, size) => {
   // Tabs styling
   const hiddenTabsStyling = css`
     & > div:first-child {
@@ -29,16 +29,16 @@ const useTabStyling = screenSize => {
     width: 100%;
     button {
       min-width: 55px;
-      padding: 12px 15px;
+      padding: 12px ${size.default};
     }
     @media ${screenSize.upToMedium} {
       button {
-        padding: 12px 10px;
+        padding: 12px ${size.small};
       }
     }
     @media ${screenSize.upToSmall} {
       button {
-        padding: 12px 3px;
+        padding: 12px ${size.tiny};
       }
     }
   `;
@@ -85,9 +85,8 @@ const Tabs = props => {
     ...rest
   } = props;
 
-  const { screenSize } = useTheme();
-  const { StyledTabs, styleTab } = useTabStyling(screenSize);
-
+  const { screenSize, size } = useTheme();
+  const { StyledTabs, styleTab } = useTabStyling(screenSize, size);
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);

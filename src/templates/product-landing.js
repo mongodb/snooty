@@ -84,43 +84,9 @@ const ProductLanding = ({ children }) => {
           a:hover {
             text-decoration: none;
           }
-          .kicker {
-            color: ${uiColors.gray.dark1};
-            padding-top: 80px;
-            font-size: 14px;
-          }
           .span-columns {
             grid-column: 2 / 11 !important;
             margin: ${size.xlarge} 0;
-          }
-          .procedure {
-            max-width: 400px;
-            padding-top: 15px;
-            padding-left: ${size.small};
-            .landing-step {
-              padding-left: 50px;
-              padding-bottom: 50px;
-            }
-            .landing-step:not(.landing-step:last-child) {
-              border-left: dashed;
-              border-color: ${uiColors.gray.light2};
-              border-width: 2px;
-            }
-          }
-          .circle {
-            background: ${uiColors.green.light3};
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            margin-bottom: -29px;
-            margin-left: -67px;
-            text-align: center;
-          }
-          .step-number {
-            font-weight: bold;
-            color: ${uiColors.green.dark2};
-            margin: auto;
-            padding-top: 6px;
           }
           @media ${screenSize.upToLarge} {
             .footer {
