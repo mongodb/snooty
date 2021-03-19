@@ -1,0 +1,22 @@
+{
+  "type": "directive",
+  "position": {
+    "start": {
+      "line": 111
+    }
+  },
+  "children": [],
+  "domain": "landing",
+  "name": "kicker",
+  "argument": [
+    {
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 111
+        }
+      },
+      "value": "Kicker text"
+    }
+  ]
+}

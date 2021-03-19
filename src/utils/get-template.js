@@ -4,7 +4,7 @@ import {
   DriversIndex,
   Guide,
   GuidesIndex,
-  Homepage,
+  Landing,
   OpenAPITemplate,
   ProductLanding,
   NotFound,
@@ -16,9 +16,9 @@ const getTemplate = (project, slug, template) => {
       return Blank;
     case 'landing':
       switch (project) {
-        // The Homepage template and the 'landing' project represent docs.mongodb.com.
+        // The Landing template + the 'landing' project represents docs.mongodb.com.
         case 'landing':
-          return Homepage;
+          return Landing;
         default:
           return ProductLanding;
       }

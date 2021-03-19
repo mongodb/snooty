@@ -60,11 +60,6 @@ const useTabStyling = (screenSize, size) => {
       gap: 5px;
       padding: 20px;
 
-      .left-column {
-        grid-column: 1;
-        min-width: 230px;
-      }
-
       img {
         grid-column: 2;
       }
@@ -94,8 +89,7 @@ const Tabs = props => {
   const previousTabsetChoice = activeTabs[tabsetName];
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
-  const temp = page?.options?.template;
-  const isLanding = temp === 'landing';
+  const isLanding = page?.options?.template === 'landing';
 
   useEffect(() => {
     if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {

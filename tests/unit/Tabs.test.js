@@ -2,19 +2,24 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Tabs from '../../src/components/Tabs';
 import { TabProvider } from '../../src/components/tab-context';
+import { theme } from '../../src/theme/docsTheme';
 
 // data for this component
 import mockDataPlatforms from './data/Tabs-platform.test.json';
 import mockDataLanguages from './data/Tabs-languages.test.json';
 import mockDataHidden from './data/Tabs-hidden.test.json';
 import mockDataAnonymous from './data/Tabs-anonymous.test.json';
+import { ThemeProvider } from 'emotion-theming';
 
-const mountTabs = ({ activeTabs, mockData }) => {
+const mountTabs = ({ mockData }) => {
   return mount(
-    <TabProvider>
-      <Tabs nodeData={mockData} />
-    </TabProvider>
+    <ThemeProvider theme={theme}>
+      <TabProvider>
+        <Tabs nodeData={mockData} />
+      </TabProvider>
+    </ThemeProvider>
   )
+    .childAt(0)
     .childAt(0)
     .childAt(0);
 };

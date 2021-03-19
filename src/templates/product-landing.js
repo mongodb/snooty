@@ -10,16 +10,28 @@ const Wrapper = styled('main')`
   margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
   max-width: 1150px;
   padding: 0 ${({ theme }) => `${theme.size.medium}`};
-  & > section:first-of-type > h1,
-  & > section:first-of-type > p {
-    align-self: flex-start;
+  & > section:first-of-type > h1 {
+    align-self: end;
+    grid-column: 1;
+
+    @media ${({ theme }) => theme.screenSize.upToLarge} {
+      align-self: flex-start;
+    }
+  }
+
+  & > section:first-of-type > .introduction {
+    align-self: start;
     grid-column: 1;
   }
+
+  & > section:first-of-type > img {
+  }
+
   & > section {
     display: grid;
     grid-template-columns: repeat(2, [col-span] 1fr);
 
-    @media ${({ theme }) => theme.screenSize.upToXLarge} {
+    @media ${({ theme }) => theme.screenSize.upToLarge} {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
@@ -93,10 +105,13 @@ const ProductLanding = ({ children }) => {
               padding: ${size.medium};
             }
           }
+          .introduction {
+            max-width: 500px;
+          }
           .right-column {
-            grid-row: 1 / 5;
+            grid-row: 1 / span 2;
             grid-column: 2 !important;
-            @media ${screenSize.upToXLarge} {
+            @media ${screenSize.upToLarge} {
               flex-basis: 100%;
             }
           }
