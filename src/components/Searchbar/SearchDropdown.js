@@ -79,7 +79,7 @@ const SearchResultsContainer = styled('div')`
   ${fadeInAnimation(0, '0.2s')};
   @media ${theme.screenSize.upToSmall} {
     background-color: ${uiColors.gray.light3};
-    bottom: 0;
+    height: calc(100vh - ${theme.header.navbarHeight});
     top: 40px;
   }
   // Prevent container from expanding to 100% width of screen size and not parent container

@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
-import { HeaderContext } from '../header-context';
 import SearchContext from './SearchContext';
 import SearchDropdown from './SearchDropdown';
 import { useClickOutside } from '../../hooks/use-click-outside';
@@ -21,10 +20,10 @@ const SEARCHBAR_HEIGHT = '36px';
 const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
-const expandedCss = (isBannerEnabled) => css`
-  position: fixed;
+const expandedCss = css`
+  position: absolute;
   right: 16px;
-  top: calc(${isBannerEnabled && `${theme.header.bannerHeight} +`} ${SEARCHBAR_HEIGHT_OFFSET});
+  top: ${SEARCHBAR_HEIGHT_OFFSET};
 `;
 
 const SearchbarContainer = styled.div(
@@ -52,14 +51,13 @@ const SearchbarContainer = styled.div(
 
     // Allows the expanded searchbar to appear above other nav components on smaller screens
     @media all and (max-width: 670px) {
-      ${props.isExpanded && expandedCss(props.isBannerEnabled)}
+      ${props.isExpanded && expandedCss}
     }
   `
 );
 
 const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParamsToURL, shouldAutofocus }) => {
   const { project } = useSiteMetadata();
-  const { bannerContent } = useContext(HeaderContext);
   const [value, setValue] = useState('');
 
   // XXX: Search filter defaults to Realm if a user is on the Realm docs
@@ -133,13 +131,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   }, [fetchNewSearchResults, reportSearchEvent, value]);
 
   return (
-    <SearchbarContainer
-      isBannerEnabled={bannerContent?.isEnabled}
-      isExpanded={isExpanded}
-      isSearching={isSearching}
-      onFocus={onFocus}
-      ref={searchContainerRef}
-    >
+    <SearchbarContainer isExpanded={isExpanded} isSearching={isSearching} onFocus={onFocus} ref={searchContainerRef}>
       {isExpanded ? (
         <SearchContext.Provider
           value={{

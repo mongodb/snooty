@@ -19,6 +19,7 @@ const NavbarContainer = styled('div')`
   height: 45px;
   justify-content: space-between;
   padding: 0px 20px;
+  position: relative;
 
   :focus {
     outline: none;
