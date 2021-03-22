@@ -6,8 +6,6 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import SearchContext from './SearchContext';
 
-const SEARCHBAR_HEIGHT_OFFSET = '5px';
-
 const StyledTextInput = styled(TextInput)`
   div > input {
     background-color: transparent;
