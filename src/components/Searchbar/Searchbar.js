@@ -30,8 +30,10 @@ const expandedCss = (isBannerEnabled) => css`
 const SearchbarContainer = styled.div(
   (props) => css`
     height: ${SEARCHBAR_HEIGHT};
+    position: relative;
     transition: width ${TRANSITION_SPEED} ease-in;
     width: ${props.isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE};
+    z-index: 1;
 
     :hover,
     :focus,

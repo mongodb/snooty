@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
-import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import { HeaderContext } from './header-context';
 import { SNOOTY_STITCH_ID } from '../build-constants';
 import { theme } from '../theme/docsTheme';
@@ -13,7 +13,26 @@ const getBannerSource = (src) => {
   return `https://${normalizePath(srcUrl)}`;
 };
 
-const Banner = ({ ...props }) => {
+const StyledBannerContainer = styled.a`
+  display: block;
+  height: ${theme.header.bannerHeight};
+  width: 100vw;
+`;
+
+const StyledBannerContent = styled.div(
+  (props) => `
+    background-image: url(${getBannerSource(props.imgPath)});
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+
+    @media ${theme.screenSize.upToMedium} {
+      background-image: url(${getBannerSource(props.mobileImgPath)});
+    }
+  `
+);
+
+const Banner = () => {
   const { bannerContent, setBannerContent } = useContext(HeaderContext);
 
   useEffect(() => {
@@ -31,29 +50,9 @@ const Banner = ({ ...props }) => {
   }
 
   return (
-    <a
-      css={css`
-        display: block;
-        height: ${theme.header.bannerHeight};
-        width: 100vw;
-      `}
-      href={bannerContent.url}
-      title={bannerContent.altText}
-      {...props}
-    >
-      <div
-        css={css`
-          background-image: url(${getBannerSource(bannerContent.imgPath)});
-          background-position: center;
-          background-size: cover;
-          height: 100%;
-
-          @media ${theme.screenSize.upToMedium} {
-            background-image: url(${getBannerSource(bannerContent.mobileImgPath)});
-          }
-        `}
-      />
-    </a>
+    <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
+      <StyledBannerContent imgPath={bannerContent.imgPath} mobileImgPath={bannerContent.mobileImgPath} />
+    </StyledBannerContainer>
   );
 };
 

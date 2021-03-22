@@ -35,15 +35,15 @@ export default function FeedbackFullScreen({ isOpen, children }) {
 
 const FullScreen = styled.div(
   (props) => `
+    background: white;
+    height: 100vh;
+    left: 0;
+    overflow-y: scroll;
+    padding-top: ${props.totalHeaderHeight};
     position: fixed;
     top: 0;
-    left: 0;
     width: 100vw;
-    height: 100vh;
-    background: white;
-    padding-top: ${props.totalHeaderHeight};
     z-index: 1;
-    overflow-y: scroll;
   `
 );
 const Header = styled.div`
