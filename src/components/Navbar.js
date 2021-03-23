@@ -52,7 +52,7 @@ const NavLabel = styled('div')`
   user-select: none;
 `;
 
-const Navbar = ({ ...props }) => {
+const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
@@ -80,7 +80,7 @@ const Navbar = ({ ...props }) => {
   }, [isSearchbarDefaultExpanded, isSearchbarExpanded]);
 
   return (
-    <NavbarContainer tabIndex="0" isTransparent={isTransparent} {...props}>
+    <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
       {isSidebarEnabled && <SidebarMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <a

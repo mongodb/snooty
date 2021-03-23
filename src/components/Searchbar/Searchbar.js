@@ -32,6 +32,7 @@ const SearchbarContainer = styled.div(
     position: relative;
     transition: width ${TRANSITION_SPEED} ease-in;
     width: ${props.isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE};
+    // Allows SearchDropdown to appear above the navbar but beneath the searchbar
     z-index: 1;
 
     :hover,

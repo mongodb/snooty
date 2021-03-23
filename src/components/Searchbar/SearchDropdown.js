@@ -79,6 +79,8 @@ const SearchResultsContainer = styled('div')`
   ${fadeInAnimation(0, '0.2s')};
   @media ${theme.screenSize.upToSmall} {
     background-color: ${uiColors.gray.light3};
+    // Allows dropdown to use the whole viewport while keeping searchbar visible
+    // when scrolling down through results
     height: calc(100vh - ${theme.header.navbarHeight});
     top: 40px;
   }
