@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from '../ComponentFactory';
 import styled from '@emotion/styled';
 import { Subtitle } from '@leafygreen-ui/typography';
 import { uiColors } from '@leafygreen-ui/palette';
+import ComponentFactory from '../ComponentFactory';
 
 const Circle = styled('div')`
   background: ${uiColors.green.light3};
@@ -29,6 +29,9 @@ const LandingStep = styled('div')`
     border-left: dashed;
     border-color: ${uiColors.gray.light2};
     border-width: 2px;
+  }
+  a {
+    font-weight: medium;
   }
 `;
 

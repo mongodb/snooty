@@ -15,13 +15,9 @@ const getTemplate = (project, slug, template) => {
     case 'blank':
       return Blank;
     case 'landing':
-      switch (project) {
-        // The Landing template + the 'landing' project represents docs.mongodb.com.
-        case 'landing':
-          return Landing;
-        default:
-          return ProductLanding;
-      }
+      return Landing;
+    case 'product-landing':
+      return ProductLanding;
     case 'openapi':
       return OpenAPITemplate;
     case 'errorpage':

@@ -4,11 +4,11 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
+import { useTheme } from 'emotion-theming';
 import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
 import { reportAnalytics } from '../utils/report-analytics';
 import { getNestedValue } from '../utils/get-nested-value';
-import { useTheme } from 'emotion-theming';
 
 const getTabId = node => getNestedValue(['options', 'tabid'], node);
 
@@ -17,7 +17,7 @@ const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
 const TabButton = ({ ...props }) => <button {...props} />;
 
-const useTabStyling = (screenSize, size) => {
+const getTabStyling = (screenSize, size) => {
   // Tabs styling
   const hiddenTabsStyling = css`
     & > div:first-child {
@@ -27,6 +27,9 @@ const useTabStyling = (screenSize, size) => {
 
   const landingTabsStyling = css`
     width: 100%;
+    & > div:first-child > button {
+      flex-grow: 1;
+    }
     button {
       min-width: 55px;
       padding: 12px ${size.default};
@@ -45,7 +48,7 @@ const useTabStyling = (screenSize, size) => {
 
   const StyledTabs = styled(LeafyTabs)`
     ${({ isHidden }) => isHidden && hiddenTabsStyling};
-    ${({ isLanding }) => isLanding && landingTabsStyling};
+    ${({ isProductLanding }) => isProductLanding && landingTabsStyling};
   `;
 
   // Individual Tab styling:
@@ -66,8 +69,8 @@ const useTabStyling = (screenSize, size) => {
     }
   `;
 
-  const styleTab = isLanding => LeafyCss`
-    ${isLanding && landingTabStyling};
+  const styleTab = isProductLanding => LeafyCss`
+    ${isProductLanding && landingTabStyling};
   `;
 
   return { StyledTabs, styleTab };
@@ -81,7 +84,7 @@ const Tabs = props => {
   } = props;
 
   const { screenSize, size } = useTheme();
-  const { StyledTabs, styleTab } = useTabStyling(screenSize, size);
+  const { StyledTabs, styleTab } = getTabStyling(screenSize, size);
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
@@ -89,7 +92,7 @@ const Tabs = props => {
   const previousTabsetChoice = activeTabs[tabsetName];
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
-  const isLanding = page?.options?.template === 'landing';
+  const isProductLanding = page?.options?.template === 'product-landing';
 
   useEffect(() => {
     if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
@@ -121,7 +124,13 @@ const Tabs = props => {
   );
 
   return (
-    <StyledTabs as={TabButton} isHidden={isHidden} isLanding={isLanding} selected={activeTab} setSelected={handleClick}>
+    <StyledTabs
+      as={TabButton}
+      isHidden={isHidden}
+      isProductLanding={isProductLanding}
+      selected={activeTab}
+      setSelected={handleClick}
+    >
       {children.map(tab => {
         if (tab.name !== 'tab') {
           return null;
@@ -134,7 +143,7 @@ const Tabs = props => {
             : tabId;
 
         return (
-          <LeafyTab className={cx(styleTab(isLanding))} key={tabId} name={tabTitle}>
+          <LeafyTab className={cx(styleTab(isProductLanding))} key={tabId} name={tabTitle}>
             {tab.children.map((child, i) => (
               <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
             ))}

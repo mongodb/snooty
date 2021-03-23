@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from '../ComponentFactory';
 import styled from '@emotion/styled';
+import ComponentFactory from '../ComponentFactory';
 
 const StyledProcedure = styled('div')`
   max-width: 400px;

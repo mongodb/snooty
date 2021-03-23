@@ -10,11 +10,12 @@ const Wrapper = styled('main')`
   margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
   max-width: 1150px;
   padding: 0 ${({ theme }) => `${theme.size.medium}`};
-  & > section:first-of-type > h1 {
+  & > section:first-of-type > h1,
+  & > section:first-of-type > div {
     align-self: end;
     grid-column: 1;
 
-    @media ${({ theme }) => theme.screenSize.upToLarge} {
+    @media ${({ theme }) => theme.screenSize.upToMedium} {
       align-self: flex-start;
     }
   }
@@ -31,7 +32,7 @@ const Wrapper = styled('main')`
     display: grid;
     grid-template-columns: repeat(2, [col-span] 1fr);
 
-    @media ${({ theme }) => theme.screenSize.upToLarge} {
+    @media ${({ theme }) => theme.screenSize.upToMedium} {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
@@ -111,7 +112,7 @@ const ProductLanding = ({ children }) => {
           .right-column {
             grid-row: 1 / span 2;
             grid-column: 2 !important;
-            @media ${screenSize.upToLarge} {
+            @media ${screenSize.upToMedium} {
               flex-basis: 100%;
             }
           }

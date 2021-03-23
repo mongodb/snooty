@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from '../ComponentFactory';
 import styled from '@emotion/styled';
 import { Overline } from '@leafygreen-ui/typography';
 import { uiColors } from '@leafygreen-ui/palette';
+import ComponentFactory from '../ComponentFactory';
 
 const StyledKicker = styled(Overline)`
   color: ${uiColors.gray.dark1};
