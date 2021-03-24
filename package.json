@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "repository": "github:mongodb/snooty",
   "devDependencies": {
     "@babel/core": "^7.12.9",
