@@ -53,7 +53,13 @@ const DefaultLayout = (props) => {
 
   useEffect(() => {
     if (snootyEnv === 'production' && ENABLED_SITES_FOR_DELIGHTED.has(project)) {
-      const projectName = project === 'docs' ? 'manual' : project;
+      let projectName = project;
+      if (project === 'docs') {
+        projectName = 'manual';
+      } else if (project === 'cloud-docs') {
+        projectName = 'atlas';
+      }
+
       window.delighted.survey({
         minTimeOnPage: 90,
         properties: {
