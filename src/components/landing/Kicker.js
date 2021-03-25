@@ -14,10 +14,10 @@ const Kicker = ({ nodeData: { argument }, ...rest }) => {
     color: ${uiColors.gray.dark1};
     padding-top: ${size.xlarge};
     padding-bottom: ${size.small};
-    @media ${screenSize.upToMedium} {
+    @media ${screenSize.upToSmall} {
       padding-top: ${size.large};
     }
-    @media ${screenSize.upToSmall} {
+    @media ${screenSize.upToXSmall} {
       padding-top: ${size.medium};
     }
   `;

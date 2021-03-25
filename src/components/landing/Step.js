@@ -24,7 +24,6 @@ const StepNumber = styled('div')`
 
 const LandingStep = styled('div')`
   padding-left: 50px;
-  padding-bottom: 20px;
   &:not(&:last-child) {
     border-left: dashed;
     border-color: ${uiColors.gray.light2};

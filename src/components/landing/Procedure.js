@@ -4,8 +4,14 @@ import styled from '@emotion/styled';
 import ComponentFactory from '../ComponentFactory';
 
 const StyledProcedure = styled('div')`
-  max-width: 400px;
-  padding-left: ${({ theme }) => theme.size.medium};
+  max-width: 500px;
+  padding-left: ${({ theme }) => theme.size.large};
+  @media ${({ theme }) => theme.screenSize.upToMedium} {
+    padding-bottom: ${({ theme }) => theme.size.large};
+  }
+  @media ${({ theme }) => theme.screenSize.upToSmall} {
+    padding-bottom: ${({ theme }) => theme.size.medium};
+  }
 `;
 
 const Procedure = ({ nodeData: { children }, ...rest }) => {

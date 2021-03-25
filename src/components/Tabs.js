@@ -26,18 +26,13 @@ const getTabsStyling = ({ screenSize, size }) => {
     width: 100%;
     & > div:first-child > button {
       flex-grow: 1;
-    }
-    button {
       min-width: 55px;
       padding: 12px ${size.default};
-    }
-    @media ${screenSize.upToMedium} {
-      button {
+
+      @media ${screenSize.upToMedium} {
         padding: 12px ${size.small};
       }
-    }
-    @media ${screenSize.upToSmall} {
-      button {
+      @media ${screenSize.upToSmall} {
         padding: 12px ${size.tiny};
       }
     }
@@ -54,21 +49,23 @@ const getTabsStyling = ({ screenSize, size }) => {
 const getTabStyling = ({ screenSize, size }) => {
   const landingTabStyling = `
     display: grid;
-    margin-top: 40px !important;
+    column-gap: ${size.medium};
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: ${size.xlarge};
+
     img {
       border-radius: ${size.small};
+      grid-column: 2;
       margin: auto;
+      display: block;
     }
-    @media ${screenSize.smallAndUp} {
-      margin-top: ${size.xlarge} !important;
-    }
-    @media ${screenSize.mediumAndUp} {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
 
-      img {
-        grid-column: 2;
-      }
+    @media ${screenSize.upToMedium} {
+      display: block;
+    }
+
+    @media ${screenSize.upToSmall} {
+      margin-top: 40px;
     }
   `;
 
