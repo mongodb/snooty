@@ -17,6 +17,10 @@ const Introduction = ({ nodeData: { children }, ...rest }) => {
     }
     .button + p {
       display: inline-block;
+
+      a:after {
+        content: ' →';
+      }
     }
     @media ${screenSize.upToMedium} {
       .button {
