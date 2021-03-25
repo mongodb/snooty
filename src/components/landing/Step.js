@@ -31,16 +31,9 @@ const LandingStep = styled('div')`
     border-width: 2px;
     padding-bottom: 50px;
   }
-`;
-
-const StepBody = styled('div')`
   & > p > a {
     font-weight: 600;
   }
-`;
-
-const StepHeader = styled('h2')`
-  font-weight: 600;
 `;
 
 const Step = ({ nodeData: { children, argument }, stepNumber, ...rest }) => {
@@ -49,16 +42,14 @@ const Step = ({ nodeData: { children, argument }, stepNumber, ...rest }) => {
       <Circle>
         <StepNumber>{stepNumber}</StepNumber>
       </Circle>
-      <StepHeader>
+      <h2>
         {argument.map((child, i) => (
           <ComponentFactory {...rest} nodeData={child} key={i} />
         ))}
-      </StepHeader>
-      <StepBody>
-        {children.map((child, i) => (
-          <ComponentFactory {...rest} nodeData={child} key={i} />
-        ))}
-      </StepBody>
+      </h2>
+      {children.map((child, i) => (
+        <ComponentFactory {...rest} nodeData={child} key={i} />
+      ))}
     </LandingStep>
   );
 };

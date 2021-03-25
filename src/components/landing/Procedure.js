@@ -5,7 +5,7 @@ import ComponentFactory from '../ComponentFactory';
 
 const StyledProcedure = styled('div')`
   max-width: 400px;
-  padding-left: ${({ theme }) => theme.size.small};
+  padding-left: ${({ theme }) => theme.size.medium};
 `;
 
 const Procedure = ({ nodeData: { children }, ...rest }) => {

@@ -1,11 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { ThemeProvider } from 'emotion-theming';
 import Kicker from '../../src/components/landing/Kicker';
+import { theme } from '../../src/theme/docsTheme';
 
 // data for this component
 import mockData from './data/landing/Kicker.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Kicker nodeData={mockData} />);
+  const tree = mount(
+    <ThemeProvider theme={theme}>
+      <Kicker nodeData={mockData} />
+    </ThemeProvider>
+  )
+    .childAt(0)
+    .childAt(0);
   expect(tree).toMatchSnapshot();
 });

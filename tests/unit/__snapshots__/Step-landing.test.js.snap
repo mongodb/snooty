@@ -5,7 +5,7 @@ exports[`renders correctly 1`] = `
   <Circle>
     <StepNumber />
   </Circle>
-  <Subtitle>
+  <h2>
     <ComponentFactory
       key="0"
       nodeData={
@@ -20,7 +20,7 @@ exports[`renders correctly 1`] = `
         }
       }
     />
-  </Subtitle>
+  </h2>
   <ComponentFactory
     key="0"
     nodeData={

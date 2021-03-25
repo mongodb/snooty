@@ -1,20 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.emotion-2 {
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 16px;
+  -webkit-letter-spacing: 0.4px;
+  -moz-letter-spacing: 0.4px;
+  -ms-letter-spacing: 0.4px;
+  letter-spacing: 0.4px;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  color: #5D6C74;
+  padding-top: 64px;
+  padding-bottom: 8px;
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-0 {
+    padding-top: 32px;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-0 {
+    padding-top: 24px;
+  }
+}
+
 <StyledKicker>
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "position": Object {
-          "start": Object {
-            "line": 111,
-          },
-        },
-        "type": "text",
-        "value": "Kicker text",
-      }
-    }
-  />
+  <Overline
+    className="emotion-0 emotion-1"
+  >
+    <Box
+      className="emotion-0 emotion-1 emotion-2"
+    >
+      <div
+        className="emotion-0 emotion-1 emotion-2"
+      >
+        <ComponentFactory
+          key="0"
+          nodeData={
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 111,
+                },
+              },
+              "type": "text",
+              "value": "Kicker text",
+            }
+          }
+        >
+          <Text
+            nodeData={
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 111,
+                  },
+                },
+                "type": "text",
+                "value": "Kicker text",
+              }
+            }
+          >
+            Kicker text
+          </Text>
+        </ComponentFactory>
+      </div>
+    </Box>
+  </Overline>
 </StyledKicker>
 `;
