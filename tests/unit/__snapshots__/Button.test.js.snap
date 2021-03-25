@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Button
+  className="button"
+  href="/install"
+  variant="primary"
+>
+  <ComponentFactory
+    key="0"
+    nodeData={
+      Object {
+        "position": Object {
+          "start": Object {
+            "line": 12,
+          },
+        },
+        "type": "text",
+        "value": "Download Compass",
+      }
+    }
+  />
+</Button>
+`;

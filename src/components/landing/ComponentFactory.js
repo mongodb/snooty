@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 import Card from './Card';
 import CardGroup from './CardGroup';
 import CTA from './CTA';
@@ -10,6 +11,7 @@ import Procedure from './Procedure';
 import Step from './Step';
 
 const componentMap = {
+  button: Button,
   card: Card,
   'card-group': CardGroup,
   cta: CTA,

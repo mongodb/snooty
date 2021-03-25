@@ -43,7 +43,7 @@ const getWrapper = ({ fontSize, screenSize, size }) => {
       max-width: 500px;
     }
 
-    section a {
+    section p > a {
       color: ${uiColors.blue.base};
       font-size: ${fontSize.default};
       letter-spacing: 0.5px;
