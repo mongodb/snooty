@@ -8,24 +8,22 @@ import { useTheme } from 'emotion-theming';
 
 const Wrapper = styled('main')`
   margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
-  max-width: 1150px;
+  max-width: 1200px;
   padding: 0 ${({ theme }) => `${theme.size.medium}`};
+
+  ${'' /* First section exclusives */}
   & > section:first-of-type > h1,
   & > section:first-of-type > div {
     align-self: end;
     grid-column: 1;
 
+    ${'' /* Handle changes induced by the FeedbackWidget */}
     @media ${({ theme }) => theme.screenSize.upToMedium} {
       align-self: flex-start;
     }
   }
-
   & > section:first-of-type > .introduction {
     align-self: start;
-    grid-column: 1;
-  }
-
-  & > section:first-of-type > img {
   }
 
   & > section {
@@ -43,9 +41,9 @@ const Wrapper = styled('main')`
     display: grid;
     grid-template-columns: repeat(2, [col-span] 1fr);
     grid-column: 1 / -1;
-    @media ${({ theme }) => theme.screenSize.upToMedium} {
-      grid-template-columns: ${({ theme }) => `${theme.size.medium} 1fr ${theme.size.medium}`};
-    }
+  }
+  & > section > section {
+    max-width: auto;
   }
   section > * {
     grid-column: 1 / -1;
@@ -69,9 +67,10 @@ const ProductLanding = ({ children }) => {
           h2,
           h3,
           h4,
+          h5,
           h6 {
-            color: ${uiColors.black};
-            font-weight: bold;
+            color: ${uiColors.black} !important;
+            font-weight: 600;
           }
           h1 {
             font-size: ${fontSize.h2};
@@ -79,7 +78,7 @@ const ProductLanding = ({ children }) => {
           }
           h2 {
             font-size: 21px;
-            margin-top: ${size.small};
+            margin-top: 0px;
             margin-bottom: ${size.default};
           }
           p:not(.copyright p) {
@@ -97,23 +96,24 @@ const ProductLanding = ({ children }) => {
           a:hover {
             text-decoration: none;
           }
-          .span-columns {
-            grid-column: 2 / 11 !important;
-            margin: ${size.xlarge} 0;
-          }
           @media ${screenSize.upToLarge} {
             .footer {
               padding: ${size.medium};
             }
           }
-          .introduction {
-            max-width: 500px;
+          img {
+            border-radius: ${size.small};
           }
+          ${'' /* Handles the header image */}
           .right-column {
             grid-row: 1 / span 2;
             grid-column: 2 !important;
             @media ${screenSize.upToMedium} {
+              margin-bottom: ${size.xlarge};
+            }
+            @media ${screenSize.upToSmall} {
               flex-basis: 100%;
+              margin-bottom: ${size.large};
             }
           }
         `}

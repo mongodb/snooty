@@ -3,21 +3,33 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Overline } from '@leafygreen-ui/typography';
 import { uiColors } from '@leafygreen-ui/palette';
+import { useTheme } from 'emotion-theming';
 import ComponentFactory from '../ComponentFactory';
 
-const StyledKicker = styled(Overline)`
-  color: ${uiColors.gray.dark1};
-  padding-top: 80px;
-  font-size: ${({ theme }) => theme.fontSize.small};
-`;
+const Kicker = ({ nodeData: { argument }, ...rest }) => {
+  const { screenSize, fontSize, size } = useTheme();
 
-const Kicker = ({ nodeData: { argument }, ...rest }) => (
-  <StyledKicker>
-    {argument.map((child, i) => (
-      <ComponentFactory {...rest} nodeData={child} key={i} />
-    ))}
-  </StyledKicker>
-);
+  const StyledKicker = styled(Overline)`
+    font-size: ${fontSize.small};
+    color: ${uiColors.gray.dark1};
+    padding-top: ${size.xlarge};
+    padding-bottom: ${size.small};
+    @media ${screenSize.upToMedium} {
+      padding-top: ${size.large};
+    }
+    @media ${screenSize.upToSmall} {
+      padding-top: ${size.medium};
+    }
+  `;
+
+  return (
+    <StyledKicker>
+      {argument.map((child, i) => (
+        <ComponentFactory {...rest} nodeData={child} key={i} />
+      ))}
+    </StyledKicker>
+  );
+};
 
 Kicker.propTypes = {
   nodeData: PropTypes.shape({

@@ -1,8 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import { useTheme } from 'emotion-theming';
 import ComponentFactory from './ComponentFactory';
@@ -17,15 +15,14 @@ const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
 const TabButton = ({ ...props }) => <button {...props} />;
 
-const getTabStyling = (screenSize, size) => {
-  // Tabs styling
-  const hiddenTabsStyling = css`
+const getTabsStyling = (screenSize, size) => {
+  const hiddenTabsStyling = `
     & > div:first-child {
       display: none;
     }
   `;
 
-  const landingTabsStyling = css`
+  const landingTabsStyling = `
     width: 100%;
     & > div:first-child > button {
       flex-grow: 1;
@@ -46,22 +43,27 @@ const getTabStyling = (screenSize, size) => {
     }
   `;
 
-  const StyledTabs = styled(LeafyTabs)`
-    ${({ isHidden }) => isHidden && hiddenTabsStyling};
-    ${({ isProductLanding }) => isProductLanding && landingTabsStyling};
+  const styleTabs = ({ isHidden, isProductLanding }) => css`
+    ${isHidden && hiddenTabsStyling};
+    ${isProductLanding && landingTabsStyling};
   `;
 
-  // Individual Tab styling:
+  return { styleTabs };
+};
 
-  const landingTabStyling = css`
+const getTabStyling = (screenSize, size) => {
+  const landingTabStyling = `
     display: grid;
+    margin-top: 40px !important;
     img {
       margin: auto;
     }
+    @media ${screenSize.smallAndUp} {
+      margin-top: ${size.xlarge} !important;
+    }
     @media ${screenSize.mediumAndUp} {
       grid-template-columns: repeat(2, 1fr);
-      gap: 5px;
-      padding: 20px;
+      gap: 15px;
 
       img {
         grid-column: 2;
@@ -69,11 +71,11 @@ const getTabStyling = (screenSize, size) => {
     }
   `;
 
-  const styleTab = isProductLanding => LeafyCss`
+  const styleTab = ({ isProductLanding }) => css`
     ${isProductLanding && landingTabStyling};
   `;
 
-  return { StyledTabs, styleTab };
+  return { styleTab };
 };
 
 const Tabs = props => {
@@ -84,7 +86,8 @@ const Tabs = props => {
   } = props;
 
   const { screenSize, size } = useTheme();
-  const { StyledTabs, styleTab } = getTabStyling(screenSize, size);
+  const { styleTabs } = getTabsStyling(screenSize, size);
+  const { styleTab } = getTabStyling(screenSize, size);
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
@@ -124,10 +127,9 @@ const Tabs = props => {
   );
 
   return (
-    <StyledTabs
+    <LeafyTabs
+      className={cx(styleTabs({ isHidden, isProductLanding }))}
       as={TabButton}
-      isHidden={isHidden}
-      isProductLanding={isProductLanding}
       selected={activeTab}
       setSelected={handleClick}
     >
@@ -143,14 +145,14 @@ const Tabs = props => {
             : tabId;
 
         return (
-          <LeafyTab className={cx(styleTab(isProductLanding))} key={tabId} name={tabTitle}>
+          <LeafyTab className={cx(styleTab({ isProductLanding }))} key={tabId} name={tabTitle}>
             {tab.children.map((child, i) => (
               <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
             ))}
           </LeafyTab>
         );
       })}
-    </StyledTabs>
+    </LeafyTabs>
   );
 };
 

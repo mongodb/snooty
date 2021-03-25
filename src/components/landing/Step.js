@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { Subtitle } from '@leafygreen-ui/typography';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 
@@ -17,6 +16,7 @@ const Circle = styled('div')`
 
 const StepNumber = styled('div')`
   font-weight: bold;
+  font-size: 16px;
   color: ${uiColors.green.dark2};
   margin: auto;
   padding-top: 6px;
@@ -24,15 +24,23 @@ const StepNumber = styled('div')`
 
 const LandingStep = styled('div')`
   padding-left: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   &:not(&:last-child) {
     border-left: dashed;
     border-color: ${uiColors.gray.light2};
     border-width: 2px;
+    padding-bottom: 50px;
   }
-  a {
-    font-weight: medium;
+`;
+
+const StepBody = styled('div')`
+  & > p > a {
+    font-weight: 600;
   }
+`;
+
+const StepHeader = styled('h2')`
+  font-weight: 600;
 `;
 
 const Step = ({ nodeData: { children, argument }, stepNumber, ...rest }) => {
@@ -41,14 +49,16 @@ const Step = ({ nodeData: { children, argument }, stepNumber, ...rest }) => {
       <Circle>
         <StepNumber>{stepNumber}</StepNumber>
       </Circle>
-      <Subtitle>
+      <StepHeader>
         {argument.map((child, i) => (
           <ComponentFactory {...rest} nodeData={child} key={i} />
         ))}
-      </Subtitle>
-      {children.map((child, i) => (
-        <ComponentFactory {...rest} nodeData={child} key={i} />
-      ))}
+      </StepHeader>
+      <StepBody>
+        {children.map((child, i) => (
+          <ComponentFactory {...rest} nodeData={child} key={i} />
+        ))}
+      </StepBody>
     </LandingStep>
   );
 };

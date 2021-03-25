@@ -5,7 +5,6 @@ import ComponentFactory from '../ComponentFactory';
 
 const StyledProcedure = styled('div')`
   max-width: 400px;
-  padding-top: ${({ theme }) => theme.size.default};
   padding-left: ${({ theme }) => theme.size.small};
 `;
 
