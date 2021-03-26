@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { useTheme } from 'emotion-theming';
+import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
 const Introduction = ({ nodeData: { children }, ...rest }) => {
-  const { screenSize, fontSize, size } = useTheme();
-
   const StyledIntroduction = styled('div')`
     .button {
-      font-size: ${fontSize.default};
+      font-size: ${theme.fontSize.default};
       height: unset;
-      margin-bottom: ${size.default};
-      margin-right: ${size.default};
-      min-height: ${size.large};
+      margin-bottom: ${theme.size.default};
+      margin-right: ${theme.size.default};
+      min-height: ${theme.size.large};
     }
     .button + p {
       display: inline-block;
@@ -22,13 +20,13 @@ const Introduction = ({ nodeData: { children }, ...rest }) => {
         content: ' →';
       }
     }
-    @media ${screenSize.upToMedium} {
+    @media ${theme.screenSize.upToMedium} {
       .button {
         margin: 0px;
       }
       .button + p {
         display: block;
-        margin: ${size.default} 0px;
+        margin: ${theme.size.default} 0px;
       }
     }
   `;
