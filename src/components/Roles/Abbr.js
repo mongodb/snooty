@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import InlineDefinition from '@leafygreen-ui/inline-definition';
 
 const Abbr = ({
   nodeData: {
@@ -15,7 +16,7 @@ const Abbr = ({
   if (expansion) {
     expansion = expansion.split(')')[0];
   }
-  return <abbr title={expansion}>{abbr}</abbr>;
+  return <InlineDefinition definition={expansion}>{abbr}</InlineDefinition>;
 };
 
 Abbr.propTypes = {
