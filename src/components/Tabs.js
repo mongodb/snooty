@@ -2,9 +2,9 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
-import { useTheme } from 'emotion-theming';
 import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
+import { theme } from '../theme/docsTheme';
 import { reportAnalytics } from '../utils/report-analytics';
 import { getNestedValue } from '../utils/get-nested-value';
 
@@ -15,77 +15,61 @@ const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
 
 const TabButton = ({ ...props }) => <button {...props} />;
 
-const getTabsStyling = ({ screenSize, size }) => {
-  const hiddenTabsStyling = `
-    & > div:first-child {
-      display: none;
+const hiddenTabsStyling = css`
+  & > div:first-child {
+    display: none;
+  }
+`;
+
+const landingTabsStyling = css`
+  width: 100%;
+
+  & > div:first-child > button {
+    flex-grow: 1;
+    min-width: 55px;
+    padding: 12px ${theme.size.default};
+
+    @media ${theme.screenSize.upToMedium} {
+      padding: 12px ${theme.size.small};
     }
-  `;
-
-  const landingTabsStyling = `
-    width: 100%;
-    & > div:first-child > button {
-      flex-grow: 1;
-      min-width: 55px;
-      padding: 12px ${size.default};
-
-      @media ${screenSize.upToMedium} {
-        padding: 12px ${size.small};
-      }
-      @media ${screenSize.upToSmall} {
-        padding: 12px ${size.tiny};
-      }
+    @media ${theme.screenSize.upToSmall} {
+      padding: 12px ${theme.size.tiny};
     }
-  `;
+  }
+`;
 
-  const styleTabs = ({ isHidden, isProductLanding }) => css`
-    ${isHidden && hiddenTabsStyling};
-    ${isProductLanding && landingTabsStyling};
-  `;
+const getTabsStyling = ({ isHidden, isProductLanding }) => css`
+  ${isHidden && hiddenTabsStyling};
+  ${isProductLanding && landingTabsStyling};
+`;
 
-  return { styleTabs };
-};
+const landingTabStyling = css`
+  display: grid;
+  column-gap: ${theme.size.medium};
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: ${theme.size.xlarge};
 
-const getTabStyling = ({ screenSize, size }) => {
-  const landingTabStyling = `
-    display: grid;
-    column-gap: ${size.medium};
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: ${size.xlarge};
+  img {
+    border-radius: ${theme.size.small};
+    grid-column: 2;
+    margin: auto;
+    display: block;
+  }
 
-    img {
-      border-radius: ${size.small};
-      grid-column: 2;
-      margin: auto;
-      display: block;
-    }
+  @media ${theme.screenSize.upToMedium} {
+    display: block;
+  }
 
-    @media ${screenSize.upToMedium} {
-      display: block;
-    }
+  @media ${theme.screenSize.upToSmall} {
+    margin-top: 40px;
+  }
+`;
 
-    @media ${screenSize.upToSmall} {
-      margin-top: 40px;
-    }
-  `;
+const getTabStyling = ({ isProductLanding }) => css`
+  ${isProductLanding && landingTabStyling}
+`;
 
-  const styleTab = ({ isProductLanding }) => css`
-    ${isProductLanding && landingTabStyling};
-  `;
-
-  return { styleTab };
-};
-
-const Tabs = props => {
-  const {
-    nodeData: { children, options = {} },
-    page,
-    ...rest
-  } = props;
-
-  const theme = useTheme();
-  const { styleTabs } = getTabsStyling(theme);
-  const { styleTab } = getTabStyling(theme);
+const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map(child => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
@@ -126,7 +110,7 @@ const Tabs = props => {
 
   return (
     <LeafyTabs
-      className={cx(styleTabs({ isHidden, isProductLanding }))}
+      className={cx(getTabsStyling({ isHidden, isProductLanding }))}
       as={TabButton}
       selected={activeTab}
       setSelected={handleClick}
@@ -143,7 +127,7 @@ const Tabs = props => {
             : tabId;
 
         return (
-          <LeafyTab className={cx(styleTab({ isProductLanding }))} key={tabId} name={tabTitle}>
+          <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
             {tab.children.map((child, i) => (
               <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
             ))}
