@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Overline } from '@leafygreen-ui/typography';
 import { uiColors } from '@leafygreen-ui/palette';
-import { useTheme } from 'emotion-theming';
+import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
 const Kicker = ({ nodeData: { argument }, ...rest }) => {
-  const { screenSize, fontSize, size } = useTheme();
-
   const StyledKicker = styled(Overline)`
-    font-size: ${fontSize.small};
+    font-size: ${theme.fontSize.small};
     color: ${uiColors.gray.dark1};
     padding-top: 80px;
-    padding-bottom: ${size.small};
-    @media ${screenSize.upToSmall} {
+    padding-bottom: ${theme.size.small};
+    @media ${theme.screenSize.upToSmall} {
       padding-top: 56px;
     }
-    @media ${screenSize.upToXSmall} {
-      padding-top: ${size.large};
+    @media ${theme.screenSize.upToXSmall} {
+      padding-top: ${theme.size.large};
     }
   `;
 
