@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
+import Loadable from '@loadable/component';
 import Sidebar from './Sidebar';
 import { SidebarContext } from './sidebar-context';
 import useScreenSize from '../hooks/useScreenSize';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import style from '../styles/navigation.module.css';
 import { isBrowser } from '../utils/is-browser';
+
+const ProductsList = Loadable(() => import('./ProductsList'));
 
 const Sidenav = ({ pageContext }) => {
   const {
@@ -14,6 +18,7 @@ const Sidenav = ({ pageContext }) => {
   } = pageContext;
   const { isSidebarMenuOpen, setIsSidebarMenuOpen } = useContext(SidebarContext);
   const { isTabletOrMobile } = useScreenSize();
+  const { project } = useSiteMetadata();
   // TODO: (DOP-1839) Check if this styling is still necessary after current Sidebar is replaced with the LG Sidebar
   /* Add the postRender CSS class without disturbing pre-render functionality */
   const renderStatus = isBrowser ? style.postRender : '';
@@ -37,12 +42,16 @@ const Sidenav = ({ pageContext }) => {
           `}
           id="left-column"
         >
-          <Sidebar
-            slug={slug}
-            publishedBranches={publishedBranches}
-            toctreeData={toctree}
-            toggleLeftColumn={toggleLeftColumn}
-          />
+          {project === 'landing' ? (
+            <ProductsList />
+          ) : (
+            <Sidebar
+              slug={slug}
+              publishedBranches={publishedBranches}
+              toctreeData={toctree}
+              toggleLeftColumn={toggleLeftColumn}
+            />
+          )}
         </div>
       ) : (
         <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
