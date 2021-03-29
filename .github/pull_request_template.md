@@ -1,6 +1,6 @@
 ### Stories/Links:
 
-[Story Number](Url of Story)
+DOP-NNNN
 
 ### Staging Links:
 
