@@ -8,7 +8,6 @@ const Banner = Loadable(() => import('./Banner'));
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
-  position: relative;
   z-index: 10;
 `;
 
