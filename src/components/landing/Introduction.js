@@ -9,6 +9,7 @@ const Introduction = ({ nodeData: { children }, ...rest }) => {
     .button {
       font-size: ${theme.fontSize.default};
       height: unset;
+      margin-top: ${theme.size.medium};
       margin-bottom: ${theme.size.default};
       margin-right: ${theme.size.default};
       min-height: ${theme.size.large};
@@ -17,12 +18,14 @@ const Introduction = ({ nodeData: { children }, ...rest }) => {
       display: inline-block;
 
       a:after {
-        content: ' →';
+        content: ' ➔';
+        font-family: 'Fira Mono';
       }
     }
     @media ${theme.screenSize.upToMedium} {
       .button {
-        margin: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
       }
       .button + p {
         display: block;
