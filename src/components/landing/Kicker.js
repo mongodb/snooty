@@ -12,13 +12,13 @@ const Kicker = ({ nodeData: { argument }, ...rest }) => {
   const StyledKicker = styled(Overline)`
     font-size: ${fontSize.small};
     color: ${uiColors.gray.dark1};
-    padding-top: ${size.xlarge};
+    padding-top: 80px;
     padding-bottom: ${size.small};
     @media ${screenSize.upToSmall} {
-      padding-top: ${size.large};
+      padding-top: 56px;
     }
     @media ${screenSize.upToXSmall} {
-      padding-top: ${size.medium};
+      padding-top: ${size.large};
     }
   `;
 

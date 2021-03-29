@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
+import { theme } from '../../theme/docsTheme';
 
 const Circle = styled('div')`
   background: ${uiColors.green.light3};
@@ -28,7 +29,13 @@ const LandingStep = styled('div')`
     border-left: dashed;
     border-color: ${uiColors.gray.light2};
     border-width: 2px;
-    padding-bottom: 50px;
+    padding-bottom: ${theme.size.xlarge};
+    @media ${theme.screenSize.upToMedium} {
+      padding-bottom: 40px;
+    }
+    @media ${theme.screenSize.upToSmall} {
+      padding-bottom: ${theme.size.large};
+    }
   }
   & > p > a {
     font-weight: 600;

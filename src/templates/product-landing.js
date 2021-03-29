@@ -21,6 +21,7 @@ const Wrapper = styled('main')`
 
   h1 {
     font-size: ${theme.fontSize.h2};
+    margin-bottom: ${theme.size.default};
   }
 
   h2 {
@@ -36,7 +37,7 @@ const Wrapper = styled('main')`
   section p {
     font-size: ${theme.fontSize.default};
     letter-spacing: 0.5px;
-    margin-bottom: ${theme.size.default};
+    margin-bottom: ${theme.size.small};
     max-width: 500px;
   }
 
@@ -44,6 +45,9 @@ const Wrapper = styled('main')`
     color: ${uiColors.blue.base};
     font-size: ${theme.fontSize.default};
     letter-spacing: 0.5px;
+    :hover {
+      text-decoration: none;
+    }
   }
 
   & > section:first-of-type {
