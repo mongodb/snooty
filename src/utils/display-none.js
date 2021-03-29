@@ -1,7 +1,7 @@
 import { css } from '@emotion/core';
 import { theme } from '../theme/docsTheme';
 
-const mediaQuery = size => css`
+const mediaQuery = (size) => css`
   @media ${size} {
     display: none;
   }

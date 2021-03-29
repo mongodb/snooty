@@ -27,7 +27,7 @@ const VersionDropdown = ({
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
   const [hidden, setHidden] = useState(true);
 
-  const prefixVersion = version => {
+  const prefixVersion = (version) => {
     // Display as "Version X" on menu if numeric version
     const isNumeric = (version = '') => {
       const [firstWord] = version.split();
@@ -36,9 +36,9 @@ const VersionDropdown = ({
     return `${isNumeric(version) ? 'Version ' : ''}${version}`;
   };
 
-  const useOutsideHandler = ref => {
+  const useOutsideHandler = (ref) => {
     // Close dropdown if user clicks outside of the Version button
-    const handleClickOutside = event => {
+    const handleClickOutside = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
         setHidden(true);
       }
@@ -80,7 +80,7 @@ const VersionDropdown = ({
     return null;
   }
 
-  const generatePrefix = version => {
+  const generatePrefix = (version) => {
     // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
     const isManualProduction = project === 'docs' && snootyEnv === 'production';
     if (isManualProduction) {
@@ -89,8 +89,8 @@ const VersionDropdown = ({
 
     // For production builds, append version after project name
     if (pathPrefix) {
-      const [, project] = pathPrefix.split('/');
-      return `/${project}/${version}`;
+      const noVersion = pathPrefix.substr(0, pathPrefix.lastIndexOf('/'));
+      return `${noVersion}/${version}`;
     }
 
     // For staging, replace current version in dynamically generated path prefix

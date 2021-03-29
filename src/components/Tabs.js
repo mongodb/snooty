@@ -8,10 +8,10 @@ import { TabContext } from './tab-context';
 import { reportAnalytics } from '../utils/report-analytics';
 import { getNestedValue } from '../utils/get-nested-value';
 
-const getTabId = node => getNestedValue(['options', 'tabid'], node);
+const getTabId = (node) => getNestedValue(['options', 'tabid'], node);
 
 // Name anonymous tabsets by alphabetizing their tabids and concatenating with a forward slash
-const generateAnonymousTabsetName = tabIds => [...tabIds].sort().join('/');
+const generateAnonymousTabsetName = (tabIds) => [...tabIds].sort().join('/');
 
 const hiddenTabStyling = css`
   & > div:first-child {
@@ -25,7 +25,7 @@ const StyledTabs = styled(LeafyTabs)`
 
 const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
-  const tabIds = children.map(child => getTabId(child));
+  const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
   const [activeTab, setActiveTabIndex] = useState(0);
   const previousTabsetChoice = activeTabs[tabsetName];
@@ -47,7 +47,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   }, [activeTabs, tabIds, tabsetName]);
 
   const handleClick = useCallback(
-    index => {
+    (index) => {
       const tabId = tabIds[index];
       setActiveTab({
         name: tabsetName,
@@ -63,7 +63,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
 
   return (
     <StyledTabs isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
-      {children.map(tab => {
+      {children.map((tab) => {
         if (tab.name !== 'tab') {
           return null;
         }

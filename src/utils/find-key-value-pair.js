@@ -4,7 +4,7 @@
  */
 const findKeyValuePair = (nodes, key, value) => {
   let result;
-  const iter = node => {
+  const iter = (node) => {
     if (node[key] === value) {
       result = node;
       return true;

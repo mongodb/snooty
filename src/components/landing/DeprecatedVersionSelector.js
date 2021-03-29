@@ -36,17 +36,17 @@ const PROPERTY_NAME_MAPPING = {
   'spark-connector': 'MongoDB Connector for Spark',
 };
 
-const fullProductName = property => {
+const fullProductName = (property) => {
   if (!property) return null;
   // Display full product name on product dropdown
   return PROPERTY_NAME_MAPPING[property.replace('_', '-')] || property;
 };
 
-const prefixVersion = version => {
+const prefixVersion = (version) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove v from version name
   const versionNumber = version.replace('v', '').split()[0];
-  const isNumeric = version => !isNaN(versionNumber);
+  const isNumeric = (version) => !isNaN(versionNumber);
   return `${isNumeric(version) ? 'Version ' : ''}${versionNumber}`;
 };
 
@@ -77,14 +77,14 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   };
 
   const productChoices = deprecatedVersions
-    ? Object.keys(deprecatedVersions).map(product => ({
+    ? Object.keys(deprecatedVersions).map((product) => ({
         text: fullProductName(product),
         value: product,
       }))
     : [];
 
   const versionChoices = deprecatedVersions[product]
-    ? deprecatedVersions[product].map(version => ({
+    ? deprecatedVersions[product].map((version) => ({
         text: prefixVersion(version),
         value: version,
       }))

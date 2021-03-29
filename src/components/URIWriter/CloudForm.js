@@ -37,7 +37,7 @@ export default class CloudForm extends Component {
   clearURI = () => {
     const { handleUpdateURIWriter } = this.props;
     this.setState(
-      prevState => ({
+      (prevState) => ({
         connectionString: prevState.connectionString,
         uri: {
           ...EMPTY_URI,
@@ -47,7 +47,7 @@ export default class CloudForm extends Component {
     );
   };
 
-  formHasError = str => {
+  formHasError = (str) => {
     if (!str || str === '' || str.match(re3dot4) || str.match(re3dot6) || str.indexOf(' --') > -1) {
       return '';
     }
@@ -55,12 +55,12 @@ export default class CloudForm extends Component {
     return 'Connection string could not be parsed';
   };
 
-  parseURIParams = shellString => {
+  parseURIParams = (shellString) => {
     const params = {};
     if (!shellString) {
       return params;
     }
-    shellString.split('&').forEach(param => {
+    shellString.split('&').forEach((param) => {
       const [key, value] = param.split('=');
       if (key !== 'password') {
         params[key] = value;
@@ -73,7 +73,7 @@ export default class CloudForm extends Component {
    * Parse out the database name, hostlist, and uri params from a shell string
    * Return an array of shape [{uriFields}, error] where error is a boolean
    */
-  parseOutEnvAndClusters = splitOnSpaceClusterEnv => {
+  parseOutEnvAndClusters = (splitOnSpaceClusterEnv) => {
     // depending on whether this is 3.6 or 3.4 the cluster info looks slightly different
     // 3.4 uses the URI to pass in a replica set name
     let shellMatch = /(\w+):\/\/((\S+)(:)+(\S+))\/(\w+)?\?(\S+)/;
@@ -110,7 +110,7 @@ export default class CloudForm extends Component {
     ];
   };
 
-  parseOutShellParams = splitOnSpace => {
+  parseOutShellParams = (splitOnSpace) => {
     const params = {};
     for (let i = 0; i < splitOnSpace.length; i += 1) {
       if (splitOnSpace[i].startsWith('--')) {
@@ -137,7 +137,7 @@ export default class CloudForm extends Component {
     return params;
   };
 
-  parseShell = atlasString => {
+  parseShell = (atlasString) => {
     const { handleUpdateURIWriter } = this.props;
     const splitOnSpace = atlasString.split(' ');
     let splitOnSpaceClusterEnv = splitOnSpace[1];

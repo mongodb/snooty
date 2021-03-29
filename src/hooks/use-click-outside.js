@@ -9,12 +9,12 @@ import { useEffect } from 'react';
  */
 export const useClickOutside = (ref, onClickOutside) => {
   useEffect(() => {
-    const handleClickOutside = e => {
+    const handleClickOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
         onClickOutside();
       }
     };
-    const handleEscape = e => {
+    const handleEscape = (e) => {
       e = e || window.event;
       if (e.key === 'Escape') {
         onClickOutside();

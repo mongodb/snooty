@@ -5,7 +5,7 @@ import slugTitleMapping from './data/ecosystem/slugTitleMapping.json';
 
 const data = ['drivers/csharp', 'drivers/go', 'drivers/java'];
 
-const renderNav = slug =>
+const renderNav = (slug) =>
   render(<InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={data} />);
 
 it('renders a page with next and previous links correctly', () => {

@@ -5,7 +5,7 @@ import Image from './Image';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const CAPTION_TEXT = 'click to enlarge';
-const isSvg = imgSrc => /\.svg$/.test(imgSrc);
+const isSvg = (imgSrc) => /\.svg$/.test(imgSrc);
 
 const Lightbox = ({ nodeData, ...rest }) => {
   const [showModal, setShowModal] = useState(false);
@@ -13,10 +13,10 @@ const Lightbox = ({ nodeData, ...rest }) => {
   const modal = useRef(null);
 
   const toggleShowModal = () => {
-    setShowModal(prevShowState => !prevShowState);
+    setShowModal((prevShowState) => !prevShowState);
   };
 
-  const handleOnKeyDown = e => {
+  const handleOnKeyDown = (e) => {
     // Escape key
     if (e.keyCode === 27) {
       toggleShowModal();

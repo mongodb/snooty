@@ -9,7 +9,7 @@ export const setLocalValue = (key, value) => {
   }
 };
 
-export const getLocalValue = key => {
+export const getLocalValue = (key) => {
   if (isValidStorage && JSON.parse(window.localStorage.getItem('mongodb-docs'))) {
     const docsObj = JSON.parse(window.localStorage.getItem('mongodb-docs'));
     if (docsObj) {
@@ -26,7 +26,7 @@ export const setSessionValue = (key, value) => {
   }
 };
 
-export const getSessionValue = key => {
+export const getSessionValue = (key) => {
   if (isValidStorage && JSON.parse(window.sessionStorage.getItem('mongodb-docs'))) {
     const docsObj = JSON.parse(window.sessionStorage.getItem('mongodb-docs'));
     if (docsObj) {

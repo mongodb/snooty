@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 
-const getColumnValue = props => props.columns || React.Children.count(props.children);
+const getColumnValue = (props) => props.columns || React.Children.count(props.children);
 
 const StyledGrid = styled('div')`
   align-items: stretch;
@@ -11,7 +11,7 @@ const StyledGrid = styled('div')`
   grid-column: 1/-1 !important;
   grid-column-gap: ${({ theme }) => theme.size.medium};
   grid-row-gap: ${({ theme }) => theme.size.medium};
-  grid-template-columns: ${props => `repeat(${getColumnValue(props)}, 1fr)`};
+  grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
   margin: ${({ theme }) => theme.size.large} 0;
 
   @media ${({ theme }) => theme.screenSize.upToLarge} {
@@ -45,7 +45,7 @@ const CardGroup = ({
   ...rest
 }) => (
   <StyledGrid columns={columns} noMargin={true}>
-    {children.map(child => (
+    {children.map((child) => (
       <ComponentFactory nodeData={child} {...rest} />
     ))}
   </StyledGrid>

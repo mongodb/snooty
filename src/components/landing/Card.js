@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
-import Box from '@leafygreen-ui/box';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import ComponentFactory from '../ComponentFactory';
 import Link from '../Link';
@@ -40,17 +39,19 @@ const Card = ({
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
 }) => (
-  <Box href={url}>
-    <StyledCard>
-      {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
-      {tag && <FlexTag text={tag} />}
-      <H4>{headline}</H4>
-      {children.map((child, i) => (
-        <ComponentFactory nodeData={child} key={i} />
-      ))}
-      <CTA to={url}>{cta}</CTA>
-    </StyledCard>
-  </Box>
+  <StyledCard
+    onClick={() => {
+      window.location.href = url;
+    }}
+  >
+    {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
+    {tag && <FlexTag text={tag} />}
+    <H4>{headline}</H4>
+    {children.map((child, i) => (
+      <ComponentFactory nodeData={child} key={i} />
+    ))}
+    <CTA to={url}>{cta}</CTA>
+  </StyledCard>
 );
 
 Card.propTypes = {

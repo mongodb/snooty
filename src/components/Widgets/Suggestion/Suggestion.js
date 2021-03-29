@@ -56,19 +56,19 @@ export default class Suggestion extends Component {
       .then(() => {
         this.fetchStitchSuggestions();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   };
 
   fetchStitchSuggestions = () => {
     this.stitchClient.callFunction('fetchSuggestions', [this.pageName]).then(
-      result => {
+      (result) => {
         this.setState({
           suggestions: result,
         });
       },
-      error => {
+      (error) => {
         console.error('error:', error);
       }
     );

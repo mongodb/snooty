@@ -77,10 +77,10 @@ describe('useViewport()', () => {
   }
 
   it('properly adds and removes event listeners', () => {
-    const getAddResizeListenerCalls = () => window.addEventListener.mock.calls.filter(c => c[0] === 'resize');
-    const getAddScrollListenerCalls = () => window.addEventListener.mock.calls.filter(c => c[0] === 'scroll');
-    const getRemoveResizeListenerCalls = () => window.removeEventListener.mock.calls.filter(c => c[0] === 'resize');
-    const getRemoveScrollListenerCalls = () => window.removeEventListener.mock.calls.filter(c => c[0] === 'scroll');
+    const getAddResizeListenerCalls = () => window.addEventListener.mock.calls.filter((c) => c[0] === 'resize');
+    const getAddScrollListenerCalls = () => window.addEventListener.mock.calls.filter((c) => c[0] === 'scroll');
+    const getRemoveResizeListenerCalls = () => window.removeEventListener.mock.calls.filter((c) => c[0] === 'resize');
+    const getRemoveScrollListenerCalls = () => window.removeEventListener.mock.calls.filter((c) => c[0] === 'scroll');
 
     expect(getAddResizeListenerCalls().length).toBe(0);
     expect(getAddScrollListenerCalls().length).toBe(0);

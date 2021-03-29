@@ -8,10 +8,10 @@ export const FontAwesomeIcon = ({ icon, size, spin, ...props }) => {
   return <div className={classes.join(' ')} {...props} />;
 };
 
-export const CameraIcon = props => <FontAwesomeIcon icon="camera" {...props} />;
+export const CameraIcon = (props) => <FontAwesomeIcon icon="camera" {...props} />;
 
-export const SpinnerIcon = props => <FontAwesomeIcon icon="spinner" spin {...props} />;
+export const SpinnerIcon = (props) => <FontAwesomeIcon icon="spinner" spin {...props} />;
 
-export const CheckIcon = props => <FontAwesomeIcon icon="check" {...props} />;
+export const CheckIcon = (props) => <FontAwesomeIcon icon="check" {...props} />;
 
-export const StarIcon = props => <FontAwesomeIcon icon="star" {...props} />;
+export const StarIcon = (props) => <FontAwesomeIcon icon="star" {...props} />;

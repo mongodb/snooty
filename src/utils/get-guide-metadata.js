@@ -2,7 +2,7 @@ const { getNestedValue } = require('./get-nested-value');
 const { findKeyValuePair } = require('./find-key-value-pair');
 
 // Get various metadata for a given page
-const getGuideMetadata = pageNode => {
+const getGuideMetadata = (pageNode) => {
   const children = getNestedValue(['ast', 'children'], pageNode);
   return {
     title: getNestedValue([0, 'children', 0, 'children', 0, 'value'], children),

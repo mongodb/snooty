@@ -42,11 +42,6 @@ describe('BinaryQuestion', () => {
   });
 
   it('displays a caption', () => {
-    expect(
-      wrapper
-        .find('div')
-        .at(1)
-        .text()
-    ).toEqual(caption);
+    expect(wrapper.find('div').at(1).text()).toEqual(caption);
   });
 });

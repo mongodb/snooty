@@ -2,7 +2,7 @@ import React from 'react';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 
-const EcosystemIndex = props => (
+const EcosystemIndex = (props) => (
   <div className="content">
     <div className={[EcosystemHomepageStyles.fullWidth, 'main-column'].join(' ')} id="main-column">
       <div className={[EcosystemHomepageStyles.document, 'document'].join(' ')}>

@@ -14,9 +14,9 @@ import { theme } from '../theme/docsTheme';
 
 // Bold path parameters (sections that appear between braces)
 // Add zero-width spaces after forward slashes so that linebreak occurs after a slash, not within a word
-const formatPath = str => {
+const formatPath = (str) => {
   const betweenBraces = new RegExp(/(\{)[^}]+(\})/, 'g');
-  return str.replace(/\//g, `/&#8203;`).replace(betweenBraces, match => `<strong>${match}</strong>`);
+  return str.replace(/\//g, `/&#8203;`).replace(betweenBraces, (match) => `<strong>${match}</strong>`);
 };
 
 const methodBadgeMap = {
@@ -30,7 +30,7 @@ const methodBadgeMap = {
 // Identify the text node to display on the collapsed card
 // If present, show the operation summary. If no summary, show description.
 // Otherwise, show nothing.
-const splitChildren = children => {
+const splitChildren = (children) => {
   if (children.length === 0) {
     return [null, children];
   }
@@ -85,7 +85,7 @@ const bodyMargins = ({ theme }) => css`
 // Truncate text after two lines when the card is collapsed
 const clampText = ({ showDetails }) => css`
   ${!showDetails &&
-    `
+  `
       & > p {
         display: -webkit-box;
         -webkit-line-clamp: 2;
