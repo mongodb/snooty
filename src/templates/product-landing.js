@@ -57,7 +57,8 @@ const Wrapper = styled('main')`
     }
   }
 
-  & > section > h1:first-of-type {
+  & > section > h1:first-child,
+  & > section > div:first-child {
     align-self: end;
   }
 
