@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`correctly renders a "file" role 1`] = `
+exports[`Abbr correctly renders a "Abbr" role 1`] = `
+<abbr
+  title="Extended"
+>
+  Display
+</abbr>
+`;
+
+exports[`File correctly renders a "file" role 1`] = `
 <code
   class="file docutils literal"
 >
@@ -12,7 +20,7 @@ exports[`correctly renders a "file" role 1`] = `
 </code>
 `;
 
-exports[`correctly renders a "guilabel" role 1`] = `
+exports[`GUI Label correctly renders a "guilabel" role 1`] = `
 <span
   class="guilabel"
 >
