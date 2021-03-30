@@ -35,7 +35,7 @@ describe('Abbr', () => {
 
     it('parses and strips whitespace from the display value', () => {
       const abbr = shallow(<RoleAbbr nodeData={mockValidAbbr} />);
-      expect(abbr.text()).toBe('Display');
+      expect(abbr.childAt(0).text()).toBe('Display');
     });
   });
 });
