@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import SiteMetadata from '../components/site-metadata';
@@ -8,7 +8,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
-import { ENABLED_SITES_FOR_DELIGHTED } from '../constants';
+import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 
 const bannerPadding = css`
   #gatsby-focus-wrapper {
@@ -42,7 +42,7 @@ const globalCSS = css`
 
 const DefaultLayout = (props) => {
   const { children, pageContext } = props;
-  const { parserBranch, project, snootyEnv } = useSiteMetadata();
+  const { project } = useSiteMetadata();
   const {
     metadata: { title },
     page,
@@ -50,25 +50,7 @@ const DefaultLayout = (props) => {
     template,
   } = pageContext;
   const Template = getTemplate(project, slug, template);
-
-  useEffect(() => {
-    if (snootyEnv === 'production' && ENABLED_SITES_FOR_DELIGHTED.has(project)) {
-      let projectName = project;
-      if (project === 'docs') {
-        projectName = 'manual';
-      } else if (project === 'cloud-docs') {
-        projectName = 'atlas';
-      }
-
-      window.delighted.survey({
-        minTimeOnPage: 90,
-        properties: {
-          branch: parserBranch,
-          project: projectName,
-        },
-      });
-    }
-  }, [parserBranch, project, slug, snootyEnv]);
+  useDelightedSurvey(slug);
 
   return (
     <>
