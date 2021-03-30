@@ -5,11 +5,11 @@ import { uiColors } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
+import SearchDropdown from './SearchDropdown';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import SearchDropdown from './SearchDropdown';
 
 const BUTTON_SIZE = theme.size.medium;
 const NUMBER_SEARCH_RESULTS = 9;
@@ -21,16 +21,19 @@ const SEARCHBAR_HEIGHT_OFFSET = '5px';
 const TRANSITION_SPEED = '150ms';
 
 const expandedCss = css`
-  position: fixed;
+  position: absolute;
   right: 16px;
-  top: 5px;
+  top: ${SEARCHBAR_HEIGHT_OFFSET};
 `;
 
 const SearchbarContainer = styled.div(
   (props) => css`
     height: ${SEARCHBAR_HEIGHT};
+    position: relative;
     transition: width ${TRANSITION_SPEED} ease-in;
     width: ${props.isExpanded ? SEARCHBAR_DESKTOP_WIDTH : BUTTON_SIZE};
+    // Allows SearchDropdown to appear above the navbar but beneath the searchbar
+    z-index: 1;
 
     :hover,
     :focus,
@@ -41,7 +44,6 @@ const SearchbarContainer = styled.div(
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${theme.bannerContent.enabled ? `margin-top` : `top`}: ${SEARCHBAR_HEIGHT_OFFSET};
       height: ${props.isExpanded && props.isSearching ? '100%' : SEARCHBAR_HEIGHT};
       transition: unset;
       width: ${props.isExpanded ? '100%' : BUTTON_SIZE};
@@ -130,7 +132,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   }, [fetchNewSearchResults, reportSearchEvent, value]);
 
   return (
-    <SearchbarContainer isSearching={isSearching} isExpanded={isExpanded} onFocus={onFocus} ref={searchContainerRef}>
+    <SearchbarContainer isExpanded={isExpanded} isSearching={isSearching} onFocus={onFocus} ref={searchContainerRef}>
       {isExpanded ? (
         <SearchContext.Provider
           value={{
