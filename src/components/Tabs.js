@@ -62,7 +62,12 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   );
 
   return (
-    <StyledTabs isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
+    <StyledTabs
+      aria-label={`Tabs to describe usage of ${tabsetName}`}
+      isHidden={isHidden}
+      selected={activeTab}
+      setSelected={handleClick}
+    >
       {children.map((tab) => {
         if (tab.name !== 'tab') {
           return null;
