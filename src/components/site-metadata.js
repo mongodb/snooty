@@ -4,13 +4,13 @@ import { Helmet } from 'react-helmet';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const SiteMetadata = ({ siteTitle }) => {
-  const { branch, project } = useSiteMetadata();
+  const { parserBranch, project } = useSiteMetadata();
   return (
     <Helmet
       bodyAttributes={{
         'data-project': project,
         'data-project-title': siteTitle,
-        'data-branch': branch,
+        'data-branch': parserBranch,
       }}
     >
       <title>MongoDB Documentation</title>
