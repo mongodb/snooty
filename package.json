@@ -1,7 +1,11 @@
 {
   "name": "snooty",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "repository": "github:mongodb/snooty",
+  "engines": {
+    "node": "^14",
+    "npm": "7.*"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "auto-changelog": "^2.2.1",

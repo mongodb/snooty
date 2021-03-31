@@ -11,6 +11,7 @@ import Sidenav from '../components/Sidenav';
 import { TabProvider } from '../components/tab-context';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getTemplate } from '../utils/get-template';
+import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 
 const globalCSS = css`
   body {
@@ -69,6 +70,7 @@ const DefaultLayout = (props) => {
   } = pageContext;
   const Template = getTemplate(project, slug, template);
   const isSidebarEnabled = template !== 'blank';
+  useDelightedSurvey(slug);
 
   return (
     <>
