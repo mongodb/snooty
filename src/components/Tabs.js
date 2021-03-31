@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
+import { theme } from '../theme/docsTheme';
 import { reportAnalytics } from '../utils/report-analytics';
 import { getNestedValue } from '../utils/get-nested-value';
 import { isBrowser } from '../utils/is-browser';
@@ -20,17 +20,61 @@ const getPosition = (element) => {
   return { x, y };
 };
 
-const hiddenTabStyling = css`
+const hiddenTabsStyling = css`
   & > div:first-child {
     display: none;
   }
 `;
 
-const StyledTabs = styled(LeafyTabs)`
-  ${({ isHidden }) => isHidden && hiddenTabStyling};
+const landingTabsStyling = css`
+  width: 100%;
+
+  & > div:first-child > button {
+    flex-grow: 1;
+    min-width: 55px;
+    padding: 12px ${theme.size.default};
+
+    @media ${theme.screenSize.upToMedium} {
+      padding: 12px ${theme.size.small};
+    }
+    @media ${theme.screenSize.upToSmall} {
+      padding: 12px ${theme.size.tiny};
+    }
+  }
 `;
 
-const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
+const getTabsStyling = ({ isHidden, isProductLanding }) => css`
+  ${isHidden && hiddenTabsStyling};
+  ${isProductLanding && landingTabsStyling};
+`;
+
+const landingTabStyling = css`
+  display: grid;
+  column-gap: ${theme.size.medium};
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: ${theme.size.xlarge};
+
+  img {
+    border-radius: ${theme.size.small};
+    grid-column: 2;
+    margin: auto;
+    display: block;
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    display: block;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    margin-top: 40px;
+  }
+`;
+
+const getTabStyling = ({ isProductLanding }) => css`
+  ${isProductLanding && landingTabStyling}
+`;
+
+const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
@@ -40,6 +84,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   const previousTabsetChoice = activeTabs[tabsetName];
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
+  const isProductLanding = page?.options?.template === 'product-landing';
 
   useEffect(() => {
     if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
@@ -82,30 +127,32 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   return (
     <>
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
-      <StyledTabs
-        aria-label={`Tabs to describe usage of ${tabsetName}`}
-        isHidden={isHidden}
+      <LeafyTabs
+        className={cx(getTabsStyling({ isHidden, isProductLanding }))}
+        as={TabButton}
         selected={activeTab}
         setSelected={handleClick}
       >
-        {children.map((tab) => {
+        {children.map(tab => {
           if (tab.name !== 'tab') {
             return null;
           }
+
           const tabId = getTabId(tab);
           const tabTitle =
             tab.argument.length > 0
               ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
               : tabId;
+
           return (
-            <LeafyTab key={tabId} name={tabTitle}>
+            <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
               {tab.children.map((child, i) => (
                 <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
               ))}
             </LeafyTab>
           );
         })}
-      </StyledTabs>
+      </LeafyTabs>
     </>
   );
 };
