@@ -6,20 +6,20 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
-const Kicker = ({ nodeData: { argument }, ...rest }) => {
-  const StyledKicker = styled(Overline)`
-    font-size: ${theme.fontSize.small};
-    color: ${uiColors.gray.dark1};
-    padding-top: 80px;
-    padding-bottom: ${theme.size.small};
-    @media ${theme.screenSize.upToSmall} {
-      padding-top: 56px;
-    }
-    @media ${theme.screenSize.upToXSmall} {
-      padding-top: ${theme.size.large};
-    }
-  `;
+const StyledKicker = styled(Overline)`
+  font-size: ${theme.fontSize.small};
+  color: ${uiColors.gray.dark1};
+  padding-top: 80px;
+  padding-bottom: ${theme.size.small};
+  @media ${theme.screenSize.upToSmall} {
+    padding-top: 56px;
+  }
+  @media ${theme.screenSize.upToXSmall} {
+    padding-top: ${theme.size.large};
+  }
+`;
 
+const Kicker = ({ nodeData: { argument }, ...rest }) => {
   return (
     <StyledKicker>
       {argument.map((child, i) => (
