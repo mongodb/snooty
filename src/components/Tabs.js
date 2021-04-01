@@ -61,6 +61,7 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
     (index) => {
       const tabId = tabIds[index];
 
+      // Calculate an offset of current top of viewport from the scroll anchor ref vs. scrollY position
       const offsetY = window.scrollY - getPosition(scrollAnchorRef.current).y;
 
       setActiveTab({
@@ -72,11 +73,10 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
         tabSet: tabsetName,
       });
 
+      // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render
       window.setTimeout(() => {
         window.scrollTo(0, getPosition(scrollAnchorRef.current).y + offsetY);
       }, 40);
-
-      // setPosition(getPosition(scrollAnchorRef.current).y);
     },
     [setActiveTab, tabIds, tabsetName] // eslint-disable-line react-hooks/exhaustive-deps
   );
