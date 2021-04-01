@@ -65,6 +65,8 @@ Install [mut](https://github.com/mongodb/mut) and ensure that you have properly 
 make stage
 ```
 
+:warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
+
 ## Releasing
 
 We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, run `npm version [major | minor | patch]`, using [Semantic Versioning](https://semver.org) guidelines to correctly increment the version number. GitHub Actions will create a new git tag and push it to GitHub. To complete the process, update the release notes using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/master/CHANGELOG.md) and publish the release.

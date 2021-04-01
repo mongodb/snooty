@@ -34,11 +34,9 @@ const commonTextStyling = css`
 
 const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
-  must account for the navbar, any margins added from using the blank landing
-  template, and half of the height of the empty state component */
-  margin-top: calc(
-    50vh - ${theme.navbar.height} - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2
-  );
+  must account for any margins added from using the blank landing template, 
+  and half of the height of the empty state component */
+  margin-top: calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2);
 `;
 
 const HeaderText = styled('h1')`

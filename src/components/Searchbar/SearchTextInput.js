@@ -6,8 +6,6 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import SearchContext from './SearchContext';
 
-const SEARCHBAR_HEIGHT_OFFSET = '5px';
-
 const StyledTextInput = styled(TextInput)`
   div > input {
     background-color: transparent;
@@ -47,19 +45,6 @@ const StyledTextInput = styled(TextInput)`
       /* Switching font size on mobile allows us to prevent iOS Safari from zooming in */
       font-size: ${theme.fontSize.default};
       padding-top: 2px;
-    }
-    /**
-    On mobile, there is some space above the searchbar that is uncovered (on
-      desktop this is taken care of by the navbar). Here we can block elements
-      below from peeking through with a pseudoelement to cover this top space
-    */
-    :before {
-      background-color: #fff;
-      bottom: 100%;
-      content: '';
-      position: absolute;
-      top: -${SEARCHBAR_HEIGHT_OFFSET};
-      width: 100%;
     }
   }
 `;
