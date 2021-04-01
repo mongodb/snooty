@@ -82,18 +82,17 @@ const DefaultLayout = (props) => {
             <GlobalGrid>
               <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
                 <Header />
-                {isSidebarEnabled && <Sidenav pageContext={pageContext} />}
+                <Template
+                  css={css`
+                    grid-area: contents;
+                    margin: 0px;
+                    overflow-y: auto;
+                  `}
+                  {...props}
+                >
+                  {template === 'landing' ? [children] : children}
+                </Template>
               </SidebarContextProvider>
-              <Template
-                css={css`
-                  grid-area: contents;
-                  margin: 0px;
-                  overflow-y: auto;
-                `}
-                {...props}
-              >
-                {template === 'landing' ? [children] : children}
-              </Template>
             </GlobalGrid>
           </HeaderContextProvider>
         </ContentsProvider>

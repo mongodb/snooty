@@ -5,6 +5,7 @@ import { Global, css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
+import Sidenav from '../components/Sidenav';
 import { TEMPLATE_CLASSNAME } from '../constants';
 
 const Wrapper = styled('main')`
@@ -28,13 +29,14 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ children, className }) => {
+const Landing = ({ children, className, pageContext }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
       <Helmet>
         <title>MongoDB Documentation</title>
       </Helmet>
+      <Sidenav pageContext={pageContext} showAllProducts={true} />
       <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <Wrapper>{children}</Wrapper>
       </div>
@@ -109,6 +111,13 @@ const Landing = ({ children, className }) => {
 Landing.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   className: PropTypes.string,
+  pageContext: PropTypes.shape({
+    metadata: PropTypes.shape({
+      publishedBranches: PropTypes.object,
+      toctree: PropTypes.object,
+    }).isRequired,
+    slug: PropTypes.string,
+  }).isRequired,
 };
 
 export default Landing;

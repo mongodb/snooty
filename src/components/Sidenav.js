@@ -11,7 +11,7 @@ import { isBrowser } from '../utils/is-browser';
 
 const ProductsList = Loadable(() => import('./ProductsList'));
 
-const Sidenav = ({ pageContext }) => {
+const Sidenav = ({ pageContext, showAllProducts }) => {
   const {
     metadata: { publishedBranches, toctree },
     slug,
@@ -42,7 +42,12 @@ const Sidenav = ({ pageContext }) => {
           `}
           id="left-column"
         >
-          {project === 'landing' ? (
+          {/* 
+            Temporarily show either the ProductsList or the Sidebar content (but not both) due to issues
+            with legacy Sidebar css and its positioning. TODO: Refactor when implementing new Sidenav
+            (DOP-1839)
+          */}
+          {showAllProducts ? (
             <ProductsList />
           ) : (
             <Sidebar
@@ -70,6 +75,7 @@ Sidenav.propTypes = {
     }).isRequired,
     slug: PropTypes.string,
   }).isRequired,
+  showAllProducts: PropTypes.bool,
 };
 
 export default Sidenav;
