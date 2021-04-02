@@ -28,7 +28,7 @@ const ProductsListContainer = styled('div')`
   grid-gap: ${theme.size.small};
   grid-template-columns: ${ICON_SIZE} 1fr;
   grid-template-rows: ${TITLE_SIZE} 1fr;
-  padding-left: ${theme.size.medium};
+  padding-left: ${theme.size.default};
   padding-top: ${theme.size.large};
   width: 100%;
 `;
@@ -66,7 +66,12 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Product = styled('li')`
+  line-height: 20px;
   padding: ${theme.size.tiny} 0;
+
+  @media ${theme.screenSize.upToSmall} {
+    padding: ${theme.size.small} 0;
+  }
 `;
 
 const ProductsList = () => {

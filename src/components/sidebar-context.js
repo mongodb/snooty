@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import useScreenSize from '../hooks/useScreenSize';
 
 const SidebarContext = createContext({
@@ -10,6 +10,10 @@ const SidebarContext = createContext({
 const SidebarContextProvider = ({ children, isSidebarEnabled = true }) => {
   const { isTabletOrMobile } = useScreenSize();
   const [isSidebarMenuOpen, setIsSidebarMenuOpen] = useState(!isTabletOrMobile);
+
+  useEffect(() => {
+    setIsSidebarMenuOpen(!isTabletOrMobile);
+  }, [isTabletOrMobile]);
 
   return (
     <SidebarContext.Provider

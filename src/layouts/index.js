@@ -14,6 +14,10 @@ import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 
 const globalCSS = css`
+  html {
+    overflow: hidden;
+  }
+
   body {
     font-size: 16px;
     line-height: 24px;

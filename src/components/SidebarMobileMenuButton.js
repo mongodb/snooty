@@ -32,7 +32,7 @@ const SidebarMobileMenuButton = ({ className }) => {
 
   return (
     <MenuButtonContainer className={className}>
-      <MenuButton aria-label="View All Products" onClick={clickMenu}>
+      <MenuButton aria-label="View sidenav" onClick={clickMenu}>
         <Icon glyph={isSidebarMenuOpen && isBrowser ? 'X' : 'Menu'} size="large" />
       </MenuButton>
     </MenuButtonContainer>
