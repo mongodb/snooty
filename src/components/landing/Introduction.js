@@ -4,35 +4,33 @@ import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
-const Introduction = ({ nodeData: { children }, ...rest }) => {
-  const StyledIntroduction = styled('div')`
+const StyledIntroduction = styled('div')`
+  .button {
+    font-size: ${theme.fontSize.default};
+    height: unset;
+    margin: ${theme.size.medium} ${theme.size.default} ${theme.size.default} 0;
+    min-height: ${theme.size.large};
+  }
+  .button + p {
+    display: inline-block;
+
+    a:after {
+      content: ' ➔';
+    }
+  }
+  @media ${theme.screenSize.upToMedium} {
     .button {
-      font-size: ${theme.fontSize.default};
-      height: unset;
-      margin-top: ${theme.size.medium};
-      margin-bottom: ${theme.size.default};
-      margin-right: ${theme.size.default};
-      min-height: ${theme.size.large};
+      margin-bottom: 0px;
+      margin-right: 0px;
     }
     .button + p {
-      display: inline-block;
+      display: block;
+      margin: ${theme.size.default} 0px;
+    }
+  }
+`;
 
-      a:after {
-        content: ' ➔';
-        font-family: 'Fira Mono';
-      }
-    }
-    @media ${theme.screenSize.upToMedium} {
-      .button {
-        margin-bottom: 0px;
-        margin-right: 0px;
-      }
-      .button + p {
-        display: block;
-        margin: ${theme.size.default} 0px;
-      }
-    }
-  `;
+const Introduction = ({ nodeData: { children }, ...rest }) => {
   return (
     <StyledIntroduction className="introduction">
       {children.map((child, i) => (
