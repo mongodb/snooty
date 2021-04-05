@@ -1,46 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import BreadcrumbSchema from './BreadcrumbSchema';
+import ComponentFactory from './ComponentFactory';
 import Link from './Link';
-import { formatText } from '../utils/format-text';
-import { getNestedValue } from '../utils/get-nested-value';
 import { reportAnalytics } from '../utils/report-analytics';
+import { theme } from '../theme/docsTheme';
 
-const Breadcrumbs = ({ parentPaths, slugTitleMapping }) => (
-  <div className="bc">
-    {parentPaths && (
-      <ul>
-        {parentPaths.map((path, index) => {
-          const title = getNestedValue([path], slugTitleMapping);
-          return (
-            <li key={path}>
-              <Link
-                to={path}
-                onClick={() => {
-                  reportAnalytics('BreadcrumbClick', {
-                    parentPaths: parentPaths,
-                    breadcrumbClicked: path,
-                  });
-                }}
-              >
-                {formatText(title)}
-              </Link>
-              {index !== parentPaths.length - 1 && <span className="bcpoint"> &gt; </span>}
-            </li>
-          );
-        })}
-      </ul>
-    )}
-  </div>
-);
+const BreadcrumbContainer = styled('nav')`
+  font-size: ${theme.fontSize.small};
 
-Breadcrumbs.propTypes = {
-  parentPaths: PropTypes.arrayOf(PropTypes.string),
-  slugTitleMapping: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string])),
+  & > p {
+    margin-top: 0;
+  }
+`;
+
+const Breadcrumbs = ({ parentPaths, siteTitle }) => {
+  if (!parentPaths) {
+    return null;
+  }
+
+  return (
+    <>
+      <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} />
+      <BreadcrumbContainer>
+        <p>
+          {parentPaths.map(({ path, plaintext, title }, index) => {
+            const isLast = index === parentPaths.length - 1;
+            return (
+              <React.Fragment key={path}>
+                <Link
+                  to={path}
+                  onClick={() => {
+                    reportAnalytics('BreadcrumbClick', {
+                      parentPaths: parentPaths,
+                      breadcrumbClicked: path,
+                    });
+                  }}
+                >
+                  {title.map((t, i) => (
+                    <ComponentFactory key={i} nodeData={t} />
+                  ))}
+                </Link>
+                {!isLast && <> &gt; </>}
+              </React.Fragment>
+            );
+          })}
+        </p>
+      </BreadcrumbContainer>
+    </>
+  );
 };
 
-Breadcrumbs.defaultProps = {
-  parentPaths: [],
-  slugTitleMapping: {},
+Breadcrumbs.propTypes = {
+  parentPaths: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.string,
+      plaintext: PropTypes.string,
+      title: PropTypes.arrayOf(PropTypes.object),
+    })
+  ),
+  siteTitle: PropTypes.string.isRequired,
 };
 
 export default Breadcrumbs;

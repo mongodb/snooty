@@ -16,7 +16,7 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, title, toctree, toctreeOrder },
   },
 }) => {
   const { isTabletOrMobile } = useScreenSize();
@@ -58,7 +58,7 @@ const Document = ({
           <div className="documentwrapper">
             <div className="bodywrapper">
               <div className="body">
-                <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
+                <Breadcrumbs parentPaths={parentPaths?.[slug]} siteTitle={title} />
                 <div>{children}</div>
                 {showPrevNext && (
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
