@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getNestedValue } from '../utils/get-nested-value';
 import Breadcrumbs from '../components/Breadcrumbs';
 import InternalPageNav from '../components/InternalPageNav';
 import Sidebar from '../components/Sidebar';
@@ -16,7 +15,7 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, toctree, toctreeOrder },
+    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, title, toctree, toctreeOrder },
   },
 }) => {
   const { isTabletOrMobile } = useScreenSize();
@@ -58,7 +57,7 @@ const Document = ({
           <div className="documentwrapper">
             <div className="bodywrapper">
               <div className="body">
-                <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
+                <Breadcrumbs parentPaths={parentPaths?.[slug]} siteTitle={title} />
                 <div>{children}</div>
                 {showPrevNext && (
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />

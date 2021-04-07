@@ -1,16 +1,15 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 import Breadcrumbs from '../../src/components/Breadcrumbs';
-import slugTitleMapping from './data/ecosystem/slugTitleMapping.json';
 
-const mockData = ['drivers', 'drivers/php'];
+import mockData from './data/Breadcrumbs.test.json';
 
 it('renders correctly', () => {
-  const tree = render(<Breadcrumbs parentPaths={mockData} slugTitleMapping={slugTitleMapping} />);
+  const tree = shallow(<Breadcrumbs parentPaths={mockData} siteTitle="MongoDB Compass" />);
   expect(tree).toMatchSnapshot();
 });
 
 it('fails gracefully', () => {
-  const tree = render(<Breadcrumbs parentPaths={null} slugTitleMapping={slugTitleMapping} />);
+  const tree = shallow(<Breadcrumbs parentPaths={null} siteTitle="untitled" />);
   expect(tree).toMatchSnapshot();
 });
