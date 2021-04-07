@@ -13,7 +13,7 @@ const getBreadcrumbList = (breadcrumb, siteUrl) =>
     item: assertTrailingSlash(`${siteUrl}${withPrefix(path)}`),
   }));
 
-const BreadcrumbSchema = ({ breadcrumb, siteTitle }) => {
+const BreadcrumbSchema = ({ breadcrumb = [], siteTitle }) => {
   const { siteUrl } = useSiteMetadata();
   return (
     <Helmet>
@@ -22,7 +22,14 @@ const BreadcrumbSchema = ({ breadcrumb, siteTitle }) => {
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
-            itemListElement: getBreadcrumbList([{ path: '/', plaintext: siteTitle }, ...breadcrumb], siteUrl),
+            itemListElement: getBreadcrumbList(
+              [
+                ...(siteUrl === 'https://docs.mongodb.com' ? [{ path: '', plaintext: 'MongoDB Documentation' }] : []),
+                ...(breadcrumb.length > 0 ? [{ path: '/', plaintext: siteTitle }] : []),
+                ...breadcrumb,
+              ],
+              siteUrl
+            ),
           })}
         </script>
       )}

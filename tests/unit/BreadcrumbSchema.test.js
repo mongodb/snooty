@@ -29,9 +29,10 @@ describe('BreadcrumbSchema', () => {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'MongoDB Compass', item: `${siteUrl}/` },
-          { '@type': 'ListItem', position: 2, name: 'Interact with Your Data', item: `${siteUrl}/manage-data/` },
-          { '@type': 'ListItem', position: 3, name: 'Manage Documents', item: `${siteUrl}/documents/` },
+          { '@type': 'ListItem', position: 1, name: 'MongoDB Documentation', item: `${siteUrl}/` },
+          { '@type': 'ListItem', position: 2, name: 'MongoDB Compass', item: `${siteUrl}/` },
+          { '@type': 'ListItem', position: 3, name: 'Interact with Your Data', item: `${siteUrl}/manage-data/` },
+          { '@type': 'ListItem', position: 4, name: 'Manage Documents', item: `${siteUrl}/documents/` },
         ],
       })
     );

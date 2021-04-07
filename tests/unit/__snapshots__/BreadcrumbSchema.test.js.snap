@@ -8,7 +8,7 @@ exports[`BreadcrumbSchema renders correctly 1`] = `
   <script
     type="application/ld+json"
   >
-    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MongoDB Compass","item":"https://docs.mongodb.com/"},{"@type":"ListItem","position":2,"name":"Interact with Your Data","item":"https://docs.mongodb.com/manage-data/"},{"@type":"ListItem","position":3,"name":"Manage Documents","item":"https://docs.mongodb.com/documents/"}]}
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MongoDB Documentation","item":"https://docs.mongodb.com/"},{"@type":"ListItem","position":2,"name":"MongoDB Compass","item":"https://docs.mongodb.com/"},{"@type":"ListItem","position":3,"name":"Interact with Your Data","item":"https://docs.mongodb.com/manage-data/"},{"@type":"ListItem","position":4,"name":"Manage Documents","item":"https://docs.mongodb.com/documents/"}]}
   </script>
 </HelmetWrapper>
 `;

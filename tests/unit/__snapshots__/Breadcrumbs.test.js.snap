@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fails gracefully 1`] = `""`;
+exports[`fails gracefully 1`] = `
+<Fragment>
+  <BreadcrumbSchema
+    breadcrumb={null}
+    siteTitle="untitled"
+  />
+</Fragment>
+`;
 
 exports[`renders correctly 1`] = `
 <Fragment>

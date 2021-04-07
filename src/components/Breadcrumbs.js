@@ -15,14 +15,10 @@ const BreadcrumbContainer = styled('nav')`
   }
 `;
 
-const Breadcrumbs = ({ parentPaths, siteTitle }) => {
-  if (!parentPaths) {
-    return null;
-  }
-
-  return (
-    <>
-      <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} />
+const Breadcrumbs = ({ parentPaths, siteTitle }) => (
+  <>
+    <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} />
+    {parentPaths && (
       <BreadcrumbContainer>
         <p>
           {parentPaths.map(({ path, plaintext, title }, index) => {
@@ -48,9 +44,9 @@ const Breadcrumbs = ({ parentPaths, siteTitle }) => {
           })}
         </p>
       </BreadcrumbContainer>
-    </>
-  );
-};
+    )}
+  </>
+);
 
 Breadcrumbs.propTypes = {
   parentPaths: PropTypes.arrayOf(
