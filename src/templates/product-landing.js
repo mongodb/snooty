@@ -41,7 +41,7 @@ const Wrapper = styled('main')`
     max-width: 500px;
   }
 
-  section a {
+  section p > a {
     color: ${uiColors.blue.base};
     font-size: ${theme.fontSize.default};
     letter-spacing: 0.5px;
