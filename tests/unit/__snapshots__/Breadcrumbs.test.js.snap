@@ -1,35 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`fails gracefully 1`] = `
-<div
-  class="bc"
-/>
+<Fragment>
+  <BreadcrumbSchema
+    breadcrumb={null}
+    siteTitle="untitled"
+  />
+</Fragment>
 `;
 
 exports[`renders correctly 1`] = `
-<div
-  class="bc"
->
-  <ul>
-    <li>
-      <a
-        href="/drivers/"
+<Fragment>
+  <BreadcrumbSchema
+    breadcrumb={
+      Array [
+        Object {
+          "path": "manage-data",
+          "plaintext": "Interact with Your Data",
+          "title": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 2,
+                },
+              },
+              "type": "text",
+              "value": "Interact with Your Data",
+            },
+          ],
+        },
+        Object {
+          "path": "documents",
+          "plaintext": "Manage Documents",
+          "title": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 4,
+                },
+              },
+              "type": "text",
+              "value": "Manage Documents",
+            },
+          ],
+        },
+      ]
+    }
+    siteTitle="MongoDB Compass"
+  />
+  <BreadcrumbContainer>
+    <p>
+      <Link
+        onClick={[Function]}
+        to="manage-data"
       >
-        MongoDB Drivers and ODM
-      </a>
-      <span
-        class="bcpoint"
+        <ComponentFactory
+          key="0"
+          nodeData={
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 2,
+                },
+              },
+              "type": "text",
+              "value": "Interact with Your Data",
+            }
+          }
+        />
+      </Link>
+       &gt; 
+      <Link
+        onClick={[Function]}
+        to="documents"
       >
-         &gt; 
-      </span>
-    </li>
-    <li>
-      <a
-        href="/drivers/php/"
-      >
-        MongoDB PHP Driver
-      </a>
-    </li>
-  </ul>
-</div>
+        <ComponentFactory
+          key="0"
+          nodeData={
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 4,
+                },
+              },
+              "type": "text",
+              "value": "Manage Documents",
+            }
+          }
+        />
+      </Link>
+    </p>
+  </BreadcrumbContainer>
+</Fragment>
 `;

@@ -1,4 +1,5 @@
 const path = require('path');
+const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { initStitch } = require('./src/utils/setup/init-stitch');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
@@ -90,6 +91,11 @@ exports.createPages = async ({ actions }) => {
     saveAssetFiles(assets, stitchClient),
     stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
   ]);
+
+  const { parentPaths, slugToTitle } = metadataMinusStatic;
+  if (parentPaths) {
+    transformBreadcrumbs(parentPaths, slugToTitle);
+  }
 
   // Save files in the static_files field of metadata document, including intersphinx inventories
   if (staticFiles) {
