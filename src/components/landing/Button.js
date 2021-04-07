@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
 import Link from '../Link';
 import LeafyButton from '@leafygreen-ui/button';
 import ComponentFactory from '../ComponentFactory';
@@ -13,7 +12,7 @@ const Button = ({
   ...rest
 }) => {
   return (
-    <LeafyButton className="button" as={Link} variant="primary" href={withPrefix(uri)}>
+    <LeafyButton className="button" as={Link} variant="primary" to={uri}>
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}

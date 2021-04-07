@@ -2,8 +2,9 @@
 
 exports[`renders correctly 1`] = `
 <Button
+  as={[Function]}
   className="button"
-  href="/install"
+  to="/install"
   variant="primary"
 >
   <ComponentFactory
