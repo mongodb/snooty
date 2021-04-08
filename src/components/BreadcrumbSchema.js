@@ -13,8 +13,8 @@ const getBreadcrumbList = (breadcrumb, siteUrl) =>
     item: assertTrailingSlash(`${siteUrl}${withPrefix(path)}`),
   }));
 
-const BreadcrumbSchema = ({ breadcrumb = [], siteTitle }) => {
-  const { siteUrl } = useSiteMetadata();
+const BreadcrumbSchema = ({ breadcrumb = [], siteTitle, slug }) => {
+  const { project, siteUrl } = useSiteMetadata();
   return (
     <Helmet>
       {Array.isArray(breadcrumb) && (
@@ -25,7 +25,7 @@ const BreadcrumbSchema = ({ breadcrumb = [], siteTitle }) => {
             itemListElement: getBreadcrumbList(
               [
                 ...(siteUrl === 'https://docs.mongodb.com' ? [{ path: '', plaintext: 'MongoDB Documentation' }] : []),
-                ...(breadcrumb.length > 0 ? [{ path: '/', plaintext: siteTitle }] : []),
+                ...(slug !== '/' && project !== 'landing' ? [{ path: '/', plaintext: siteTitle }] : []),
                 ...breadcrumb,
               ],
               siteUrl
@@ -45,6 +45,7 @@ BreadcrumbSchema.propTypes = {
     })
   ).isRequired,
   siteTitle: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default BreadcrumbSchema;

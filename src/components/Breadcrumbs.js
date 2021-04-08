@@ -15,9 +15,9 @@ const BreadcrumbContainer = styled('nav')`
   }
 `;
 
-const Breadcrumbs = ({ parentPaths, siteTitle }) => (
+const Breadcrumbs = ({ parentPaths, siteTitle, slug }) => (
   <>
-    <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} />
+    <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
     {parentPaths && (
       <BreadcrumbContainer>
         <p>
@@ -57,6 +57,7 @@ Breadcrumbs.propTypes = {
     })
   ),
   siteTitle: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default Breadcrumbs;
