@@ -57,7 +57,7 @@ const Document = ({
           <div className="documentwrapper">
             <div className="bodywrapper">
               <div className="body">
-                <Breadcrumbs parentPaths={parentPaths?.[slug]} siteTitle={title} />
+                <Breadcrumbs parentPaths={parentPaths?.[slug]} siteTitle={title} slug={slug} />
                 <div>{children}</div>
                 {showPrevNext && (
                   <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />

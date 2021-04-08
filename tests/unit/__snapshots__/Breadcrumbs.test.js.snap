@@ -5,6 +5,7 @@ exports[`fails gracefully 1`] = `
   <BreadcrumbSchema
     breadcrumb={null}
     siteTitle="untitled"
+    slug="/"
   />
 </Fragment>
 `;
@@ -47,6 +48,7 @@ exports[`renders correctly 1`] = `
       ]
     }
     siteTitle="MongoDB Compass"
+    slug="documents/view"
   />
   <BreadcrumbContainer>
     <p>
