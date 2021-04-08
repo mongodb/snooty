@@ -1,14 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
 import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
+import Sidenav from '../components/Sidenav';
 import TabSelectors from '../components/TabSelectors';
 import { TEMPLATE_CLASSNAME } from '../constants';
 import { getNestedValue } from '../utils/get-nested-value';
+
+const DocumentContainer = styled('div')`
+  display: grid;
+  grid-template-areas: 'main right';
+  grid-template-columns: minmax(0px, 830px) auto;
+`;
+
+const MainBody = styled('div')`
+  margin-left: 25px;
+`;
+
+const StyledMainColumn = styled(MainColumn)`
+  grid-area: main;
+`;
+
+const StyledRightColumn = styled(RightColumn)`
+  grid-area: right;
+`;
 
 const Document = ({
   children,
@@ -18,46 +37,30 @@ const Document = ({
     page,
     metadata: { parentPaths, slugToTitle: slugTitleMapping, toctreeOrder },
   },
+  pageContext,
 }) => {
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
 
   return (
-    <div
-      className={`${TEMPLATE_CLASSNAME} ${className}`}
-      css={css`
-        display: grid;
-        grid-template-areas: 'main right';
-        grid-template-columns: minmax(0px, 830px) auto;
-      `}
-    >
-      <MainColumn
-        css={css`
-          grid-area: main;
-        `}
-      >
-        <div
-          className="body"
-          css={css`
-            margin-left: 25px;
-          `}
-        >
-          <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
-          {children}
-          {showPrevNext && (
-            <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
-          )}
-        </div>
-      </MainColumn>
-      <RightColumn
-        css={css`
-          grid-area: right;
-        `}
-      >
-        <TabSelectors />
-        <Contents />
-      </RightColumn>
-    </div>
+    <>
+      <Sidenav pageContext={pageContext} />
+      <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
+        <StyledMainColumn>
+          <MainBody className="body">
+            <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
+            {children}
+            {showPrevNext && (
+              <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+            )}
+          </MainBody>
+        </StyledMainColumn>
+        <StyledRightColumn>
+          <TabSelectors />
+          <Contents />
+        </StyledRightColumn>
+      </DocumentContainer>
+    </>
   );
 };
 

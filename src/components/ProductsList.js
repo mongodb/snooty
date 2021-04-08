@@ -28,7 +28,7 @@ const ProductsListContainer = styled('div')`
   grid-gap: ${theme.size.small};
   grid-template-columns: ${ICON_SIZE} 1fr;
   grid-template-rows: ${TITLE_SIZE} 1fr;
-  padding-left: ${theme.size.default};
+  padding-left: ${theme.size.medium};
   padding-top: ${theme.size.large};
   width: 100%;
 `;

@@ -36,7 +36,7 @@ const Landing = ({ children, className, pageContext }) => {
       <Helmet>
         <title>MongoDB Documentation</title>
       </Helmet>
-      <Sidenav pageContext={pageContext} showAllProducts={true} />
+      <Sidenav pageContext={pageContext} />
       <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <Wrapper>{children}</Wrapper>
       </div>
