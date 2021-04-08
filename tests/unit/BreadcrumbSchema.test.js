@@ -14,7 +14,9 @@ describe('BreadcrumbSchema', () => {
   let shallowWrapper;
 
   beforeAll(() => {
-    shallowWrapper = shallow(<BreadcrumbSchema breadcrumb={mockData} siteTitle="MongoDB Compass" />);
+    shallowWrapper = shallow(
+      <BreadcrumbSchema breadcrumb={mockData} siteTitle="MongoDB Compass" slug="documents/view" />
+    );
   });
 
   it('renders correctly', () => {
