@@ -35,6 +35,24 @@ const Landing = ({ children, className, pageContext }) => {
     <>
       <Helmet>
         <title>MongoDB Documentation</title>
+        <script id="structured data" type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'http://schema.org',
+            '@type': 'WebSite',
+            name: 'MongoDB Documentation',
+            url: 'https://docs.mongodb.com/',
+            publisher: {
+              '@type': 'Organization',
+              name: 'MongoDB',
+              logo: {
+                '@type': 'imageObject',
+                url: 'https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png',
+              },
+            },
+            author: 'MongoDB Documentation Team',
+            inLanguage: 'English',
+          })}
+        </script>
       </Helmet>
       <Sidenav pageContext={pageContext} />
       <div className={`${TEMPLATE_CLASSNAME} ${className}`}>

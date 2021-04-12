@@ -16,7 +16,7 @@ const mountTabs = ({ activeTabs, mockData }) => {
     </TabProvider>
   )
     .childAt(0)
-    .childAt(0);
+    .childAt(1);
 };
 
 const shallowTabs = ({ mockData, mockAddTabset }) =>
@@ -26,7 +26,7 @@ const shallowTabs = ({ mockData, mockAddTabset }) =>
     </TabProvider>
   )
     .childAt(0)
-    .childAt(0);
+    .childAt(1);
 
 describe('Tabs testing', () => {
   describe('Tab unit tests', () => {
