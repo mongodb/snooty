@@ -1,0 +1,32 @@
+[
+  {
+    "path": "manage-data",
+    "title": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 2
+          }
+        },
+        "value": "Interact with Your Data"
+      }
+    ],
+    "plaintext": "Interact with Your Data"
+  },
+  {
+    "path": "documents",
+    "title": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 4
+          }
+        },
+        "value": "Manage Documents"
+      }
+    ],
+    "plaintext": "Manage Documents"
+  }
+]
