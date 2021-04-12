@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductsList renders with products 1`] = `
+.emotion-12 {
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: 12px 1fr;
+  grid-template-rows: 20px 1fr;
+  padding-left: 24px;
+  padding-top: 32px;
+  width: 100%;
+}
+
+.emotion-10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  grid-column: 1 / -1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.emotion-10:hover .emotion-9 {
+  color: #21313C;
+}
+
+.emotion-0 {
+  height: 12px;
+  width: 12px;
+}
+
+.emotion-8 {
+  color: #5D6C74;
+  line-height: 20px;
+  padding-left: 8px;
+}
+
+<ProductsList>
+  <ProductsListContainer>
+    <div
+      className="emotion-12 emotion-13"
+    >
+      <ProductsListHeading
+        onClick={[Function]}
+      >
+        <div
+          className="emotion-10 emotion-11"
+          onClick={[Function]}
+        >
+          <StyledIcon
+            glyph="ChevronDown"
+          >
+            <Icon
+              className="emotion-0 emotion-1"
+              glyph="ChevronDown"
+            >
+              <ChevronDown
+                className="emotion-0 emotion-1"
+              >
+                <ChevronDown
+                  className="emotion-0 emotion-1"
+                  height={16}
+                  title="Chevron Down Icon"
+                  width={16}
+                >
+                  <svg
+                    className="emotion-0 emotion-1"
+                    height={16}
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>
+                      Chevron Down Icon
+                    </title>
+                    <path
+                      d="M6.6 11.314l-4.95-4.95L3.064 4.95l4.95 4.95 4.95-4.95 1.414 1.414-6.364 6.364L6.6 11.314z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </ChevronDown>
+              </ChevronDown>
+            </Icon>
+          </StyledIcon>
+          <HeadingTitle
+            isOpen={false}
+          >
+            <span
+              className="emotion-8 emotion-9"
+            >
+              View all products
+            </span>
+          </HeadingTitle>
+        </div>
+      </ProductsListHeading>
+    </div>
+  </ProductsListContainer>
+</ProductsList>
+`;

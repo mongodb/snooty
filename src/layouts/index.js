@@ -7,7 +7,6 @@ import { ContentsProvider } from '../components/contents-context';
 import Header from '../components/Header';
 import SiteMetadata from '../components/site-metadata';
 import { SidebarContextProvider } from '../components/sidebar-context';
-import Sidenav from '../components/Sidenav';
 import { TabProvider } from '../components/tab-context';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getTemplate } from '../utils/get-template';
