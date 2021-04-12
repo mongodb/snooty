@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import Link from './Link';
-import { SNOOTY_STITCH_ID } from '../build-constants';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { useAllProducts } from '../hooks/useAllProducts';
 import { theme } from '../theme/docsTheme';
-import { getStitchClient } from '../utils/stitch';
-
-const LINE_HEIGHT = '20px';
 
 const HeadingTitle = styled('span')`
-  line-height: ${LINE_HEIGHT};
   padding-left: ${theme.size.small};
 `;
 
@@ -22,6 +16,7 @@ const Products = styled(`ul`)`
 `;
 
 const ProductsListContainer = styled('div')`
+  line-height: 20px;
   margin-top: ${theme.size.large};
   width: 100%;
 `;
@@ -31,7 +26,7 @@ const ProductsListHeading = styled('div')`
   color: ${(props) => (props.isOpen ? uiColors.gray.dark3 : uiColors.gray.dark1)};
   cursor: pointer;
   display: flex;
-  padding: 0px ${theme.size.medium};
+  padding: 0px ${theme.size.medium} 12px;
   user-select: none;
 
   :hover {
@@ -44,14 +39,17 @@ const ProductLink = styled(Link)`
   display: inline-block;
   font-size: ${theme.fontSize.small};
   letter-spacing: 0;
-  padding-left: 44px;
-  padding-right: ${theme.size.medium};
+  padding: ${theme.size.tiny} ${theme.size.medium} ${theme.size.tiny} 44px;
   width: 100%;
 
   :hover {
     color: ${uiColors.gray.dark2};
     font-weight: bold;
     text-decoration: none;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    padding: ${theme.size.small} ${theme.size.medium} ${theme.size.small} 44px;
   }
 `;
 
@@ -60,29 +58,9 @@ const StyledIcon = styled(Icon)`
   width: 12px;
 `;
 
-const Product = styled('li')`
-  line-height: ${LINE_HEIGHT};
-  padding: ${theme.size.tiny} 0;
-
-  @media ${theme.screenSize.upToSmall} {
-    padding: ${theme.size.small} 0;
-  }
-`;
-
 const ProductsList = () => {
-  const { database } = useSiteMetadata();
+  const products = useAllProducts();
   const [isOpen, setOpen] = useState(false);
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchAllProducts = async () => {
-      const client = getStitchClient(SNOOTY_STITCH_ID);
-      await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
-      const products = await client.callFunction('fetchAllProducts', [database]);
-      setProducts(products);
-    };
-    fetchAllProducts();
-  }, [database, setProducts]);
 
   return (
     <ProductsListContainer>
@@ -92,12 +70,11 @@ const ProductsList = () => {
       </ProductsListHeading>
       {isOpen && (
         <Products>
-          {products.map(({ baseUrl, slug, title }, index) => {
-            const productUrl = baseUrl + slug;
+          {products.map(({ title, url }, index) => {
             return (
-              <Product key={index}>
-                <ProductLink to={productUrl}>{title}</ProductLink>
-              </Product>
+              <li key={index}>
+                <ProductLink to={url}>{title}</ProductLink>
+              </li>
             );
           })}
         </Products>

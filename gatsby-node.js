@@ -37,7 +37,9 @@ let stitchClient;
 
 const assets = new Map();
 
-exports.sourceNodes = async () => {
+exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
+  const { createNode } = actions;
+
   // setup env variables
   const envResults = validateEnvVariables();
 
@@ -82,6 +84,20 @@ exports.sourceNodes = async () => {
         GUIDES_METADATA[key] = getGuideMetadata(val);
       }
     }
+  });
+
+  // Get all MongoDB products for the sidenav
+  const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
+  products.forEach((product) => {
+    createNode({
+      id: createNodeId(`Product-${product.title}`),
+      internal: {
+        contentDigest: createContentDigest(product),
+        type: 'Product',
+      },
+      title: product.title,
+      url: product.baseUrl + product.slug,
+    });
   });
 };
 

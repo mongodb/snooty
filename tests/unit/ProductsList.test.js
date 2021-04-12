@@ -1,64 +1,31 @@
 import React from 'react';
-import * as Gatsby from 'gatsby';
 import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
 import ProductsList from '../../src/components/ProductsList';
-import * as StitchUtil from '../../src/utils/stitch';
-import { tick } from '../utils';
-
-const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
-
-const mockStaticQuery = () => {
-  useStaticQuery.mockImplementation(() => ({
-    site: {
-      siteMetadata: {
-        database: 'snooty_dev',
-      },
-    },
-  }));
-};
 
 const mockProducts = [
   {
-    baseUrl: 'https://www.docs.mongodb.com/',
-    slug: 'drivers/',
     title: 'MongoDB Drivers',
+    url: 'https://www.docs.mongodb.com/drivers/',
   },
   {
-    baseUrl: 'https://www.docs.atlas.mongodb.com/',
-    slug: '',
     title: 'MongoDB Atlas',
+    url: 'https://www.docs.atlas.mongodb.com/',
   },
 ];
 
-const mockClient = {
-  auth: {
-    loginWithCredential: jest.fn(() => {
-      return new Promise((resolve) => resolve());
-    }),
-  },
-  callFunction: jest.fn(() => Promise.resolve(mockProducts)),
-};
+jest.mock('../../src/hooks/useAllProducts', () => ({
+  useAllProducts: () => mockProducts,
+}));
 
 describe('ProductsList', () => {
-  jest.useFakeTimers();
-
   it('renders with products', async () => {
-    jest.spyOn(StitchUtil, 'getStitchClient').mockImplementation(() => mockClient);
-    let wrapper;
-    mockStaticQuery();
-
-    await act(async () => {
-      wrapper = mount(<ProductsList />);
-    });
+    let wrapper = mount(<ProductsList />);
     expect(wrapper).toMatchSnapshot();
 
-    await act(async () => {
-      wrapper.find('ProductsListHeading').simulate('click');
-      await tick({ wrapper });
-    });
-
+    // Show products list
+    wrapper.find('ProductsListHeading').simulate('click');
     const products = wrapper.find('a');
+
     expect(products).toHaveLength(2);
     expect(products.at(0).props()).toHaveProperty('href', 'https://www.docs.mongodb.com/drivers/');
     expect(products.at(0).children().text()).toEqual('MongoDB Drivers');

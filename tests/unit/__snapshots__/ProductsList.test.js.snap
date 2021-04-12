@@ -2,6 +2,7 @@
 
 exports[`ProductsList renders with products 1`] = `
 .emotion-12 {
+  line-height: 20px;
   margin-top: 32px;
   width: 100%;
 }
@@ -17,7 +18,7 @@ exports[`ProductsList renders with products 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0px 24px;
+  padding: 0px 24px 12px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -34,7 +35,6 @@ exports[`ProductsList renders with products 1`] = `
 }
 
 .emotion-8 {
-  line-height: 20px;
   padding-left: 8px;
 }
 
