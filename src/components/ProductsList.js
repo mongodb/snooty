@@ -9,49 +9,43 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { getStitchClient } from '../utils/stitch';
 
-const ICON_SIZE = '12px';
-const TITLE_SIZE = '20px';
+const LINE_HEIGHT = '20px';
 
 const HeadingTitle = styled('span')`
-  color: ${(props) => (props.isOpen ? uiColors.gray.dark3 : uiColors.gray.dark1)};
-  line-height: ${TITLE_SIZE};
+  line-height: ${LINE_HEIGHT};
   padding-left: ${theme.size.small};
 `;
 
 const Products = styled(`ul`)`
-  grid-column: 2;
   list-style-type: none;
   padding: 0;
 `;
 
 const ProductsListContainer = styled('div')`
-  display: grid;
-  grid-gap: ${theme.size.small};
-  grid-template-columns: ${ICON_SIZE} 1fr;
-  grid-template-rows: ${TITLE_SIZE} 1fr;
-  padding-left: ${theme.size.medium};
-  padding-top: ${theme.size.large};
+  margin-top: ${theme.size.large};
   width: 100%;
 `;
 
 const ProductsListHeading = styled('div')`
   align-items: center;
+  color: ${(props) => (props.isOpen ? uiColors.gray.dark3 : uiColors.gray.dark1)};
   cursor: pointer;
   display: flex;
-  grid-column: 1 / -1;
+  padding: 0px ${theme.size.medium};
   user-select: none;
 
   :hover {
-    ${HeadingTitle} {
-      color: ${uiColors.gray.dark3};
-    }
+    color: ${uiColors.gray.dark3};
   }
 `;
 
 const ProductLink = styled(Link)`
   color: ${uiColors.gray.dark2};
   display: inline-block;
+  font-size: ${theme.fontSize.small};
   letter-spacing: 0;
+  padding-left: 44px;
+  padding-right: ${theme.size.medium};
   width: 100%;
 
   :hover {
@@ -62,12 +56,12 @@ const ProductLink = styled(Link)`
 `;
 
 const StyledIcon = styled(Icon)`
-  height: ${ICON_SIZE};
-  width: ${ICON_SIZE};
+  height: 12px;
+  width: 12px;
 `;
 
 const Product = styled('li')`
-  line-height: 20px;
+  line-height: ${LINE_HEIGHT};
   padding: ${theme.size.tiny} 0;
 
   @media ${theme.screenSize.upToSmall} {
@@ -92,9 +86,9 @@ const ProductsList = () => {
 
   return (
     <ProductsListContainer>
-      <ProductsListHeading onClick={() => setOpen(!isOpen)}>
+      <ProductsListHeading isOpen={isOpen} onClick={() => setOpen(!isOpen)}>
         <StyledIcon glyph={isOpen ? 'ChevronUp' : 'ChevronDown'} />
-        <HeadingTitle isOpen={isOpen}>View all products</HeadingTitle>
+        <HeadingTitle>View all products</HeadingTitle>
       </ProductsListHeading>
       {isOpen && (
         <Products>

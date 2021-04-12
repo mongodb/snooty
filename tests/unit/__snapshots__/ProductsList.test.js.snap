@@ -2,12 +2,7 @@
 
 exports[`ProductsList renders with products 1`] = `
 .emotion-12 {
-  display: grid;
-  grid-gap: 8px;
-  grid-template-columns: 12px 1fr;
-  grid-template-rows: 20px 1fr;
-  padding-left: 24px;
-  padding-top: 32px;
+  margin-top: 32px;
   width: 100%;
 }
 
@@ -16,19 +11,20 @@ exports[`ProductsList renders with products 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: #5D6C74;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  grid-column: 1 / -1;
+  padding: 0px 24px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.emotion-10:hover .emotion-9 {
+.emotion-10:hover {
   color: #21313C;
 }
 
@@ -38,7 +34,6 @@ exports[`ProductsList renders with products 1`] = `
 }
 
 .emotion-8 {
-  color: #5D6C74;
   line-height: 20px;
   padding-left: 8px;
 }
@@ -49,6 +44,7 @@ exports[`ProductsList renders with products 1`] = `
       className="emotion-12 emotion-13"
     >
       <ProductsListHeading
+        isOpen={false}
         onClick={[Function]}
       >
         <div
@@ -92,9 +88,7 @@ exports[`ProductsList renders with products 1`] = `
               </ChevronDown>
             </Icon>
           </StyledIcon>
-          <HeadingTitle
-            isOpen={false}
-          >
+          <HeadingTitle>
             <span
               className="emotion-8 emotion-9"
             >
