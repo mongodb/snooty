@@ -23,6 +23,8 @@ export default function FeedbackModal({ isOpen, children }) {
 }
 const Modal = styled(LeafygreenModal)`
   padding-bottom: 0;
+  z-index: 1;
+
   > div {
     padding-top: 200px;
     > div {
