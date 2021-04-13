@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProductsList renders with products 1`] = `
-.emotion-12 {
+.emotion-22 {
   line-height: 20px;
   margin-top: 32px;
   width: 100%;
@@ -38,10 +38,41 @@ exports[`ProductsList renders with products 1`] = `
   padding-left: 8px;
 }
 
+.emotion-20 {
+  list-style-type: none;
+  padding: 0;
+  display: none;
+}
+
+.emotion-12 {
+  color: #3D4F58;
+  display: inline-block;
+  font-size: 14px;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  padding: 4px 24px 4px 44px;
+  width: 100%;
+}
+
+.emotion-12:hover {
+  color: #3D4F58;
+  font-weight: bold;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-12 {
+    padding: 8px 24px 8px 44px;
+  }
+}
+
 <ProductsList>
   <ProductsListContainer>
     <div
-      className="emotion-12 emotion-13"
+      className="emotion-22 emotion-23"
     >
       <ProductsListHeading
         isOpen={false}
@@ -97,6 +128,52 @@ exports[`ProductsList renders with products 1`] = `
           </HeadingTitle>
         </div>
       </ProductsListHeading>
+      <Products
+        isOpen={false}
+      >
+        <ul
+          className="emotion-20 emotion-21"
+        >
+          <li
+            key="0"
+          >
+            <ProductLink
+              to="https://www.docs.mongodb.com/drivers/"
+            >
+              <Link
+                className="emotion-12 emotion-13"
+                to="https://www.docs.mongodb.com/drivers/"
+              >
+                <a
+                  className="emotion-12 emotion-13"
+                  href="https://www.docs.mongodb.com/drivers/"
+                >
+                  MongoDB Drivers
+                </a>
+              </Link>
+            </ProductLink>
+          </li>
+          <li
+            key="1"
+          >
+            <ProductLink
+              to="https://www.docs.atlas.mongodb.com/"
+            >
+              <Link
+                className="emotion-12 emotion-13"
+                to="https://www.docs.atlas.mongodb.com/"
+              >
+                <a
+                  className="emotion-12 emotion-13"
+                  href="https://www.docs.atlas.mongodb.com/"
+                >
+                  MongoDB Atlas
+                </a>
+              </Link>
+            </ProductLink>
+          </li>
+        </ul>
+      </Products>
     </div>
   </ProductsListContainer>
 </ProductsList>
