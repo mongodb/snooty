@@ -58,7 +58,7 @@ const DefaultLayout = (props) => {
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
-        <ContentsProvider nodes={page?.children}>
+        <ContentsProvider headingNodes={page?.options?.headings}>
           <Template {...props}>{template === 'landing' ? [children] : children}</Template>
         </ContentsProvider>
       </TabProvider>
