@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { SideNav as LeafygreenSideNav } from '@leafygreen-ui/side-nav';
-import Loadable from '@loadable/component';
-
-const ProductsList = Loadable(() => import('./ProductsList'));
+import ProductsList from './ProductsList';
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   grid-area: sidebar;

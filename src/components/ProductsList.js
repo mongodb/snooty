@@ -13,6 +13,7 @@ const HeadingTitle = styled('span')`
 const Products = styled(`ul`)`
   list-style-type: none;
   padding: 0;
+  ${(props) => !props.isOpen && 'display: none;'}
 `;
 
 const ProductsListContainer = styled('div')`
@@ -68,17 +69,15 @@ const ProductsList = () => {
         <StyledIcon glyph={isOpen ? 'ChevronUp' : 'ChevronDown'} />
         <HeadingTitle>View all products</HeadingTitle>
       </ProductsListHeading>
-      {isOpen && (
-        <Products>
-          {products.map(({ title, url }, index) => {
-            return (
-              <li key={index}>
-                <ProductLink to={url}>{title}</ProductLink>
-              </li>
-            );
-          })}
-        </Products>
-      )}
+      <Products isOpen={isOpen}>
+        {products.map(({ title, url }, index) => {
+          return (
+            <li key={index}>
+              <ProductLink to={url}>{title}</ProductLink>
+            </li>
+          );
+        })}
+      </Products>
     </ProductsListContainer>
   );
 };
