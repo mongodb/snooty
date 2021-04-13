@@ -7,13 +7,16 @@ import { ContentsProvider } from '../components/contents-context';
 import Header from '../components/Header';
 import SiteMetadata from '../components/site-metadata';
 import { SidebarContextProvider } from '../components/sidebar-context';
-import Sidenav from '../components/Sidenav';
 import { TabProvider } from '../components/tab-context';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 
 const globalCSS = css`
+  html {
+    overflow: hidden;
+  }
+
   body {
     font-size: 16px;
     line-height: 24px;
@@ -82,18 +85,17 @@ const DefaultLayout = (props) => {
             <GlobalGrid>
               <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
                 <Header />
-                {isSidebarEnabled && <Sidenav pageContext={pageContext} />}
+                <Template
+                  css={css`
+                    grid-area: contents;
+                    margin: 0px;
+                    overflow-y: auto;
+                  `}
+                  {...props}
+                >
+                  {template === 'landing' ? [children] : children}
+                </Template>
               </SidebarContextProvider>
-              <Template
-                css={css`
-                  grid-area: contents;
-                  margin: 0px;
-                  overflow-y: auto;
-                `}
-                {...props}
-              >
-                {template === 'landing' ? [children] : children}
-              </Template>
             </GlobalGrid>
           </HeaderContextProvider>
         </ContentsProvider>

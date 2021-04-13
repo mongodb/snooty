@@ -1,65 +1,27 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
-import Sidebar from './Sidebar';
-import { SidebarContext } from './sidebar-context';
-import useScreenSize from '../hooks/useScreenSize';
-import style from '../styles/navigation.module.css';
-import { isBrowser } from '../utils/is-browser';
+import styled from '@emotion/styled';
+import { SideNav as LeafygreenSideNav } from '@leafygreen-ui/side-nav';
+import ProductsList from './ProductsList';
 
-const Sidenav = ({ pageContext }) => {
-  const {
-    metadata: { publishedBranches, toctree },
-    slug,
-  } = pageContext;
-  const { isSidebarMenuOpen, setIsSidebarMenuOpen } = useContext(SidebarContext);
-  const { isTabletOrMobile } = useScreenSize();
-  // TODO: (DOP-1839) Check if this styling is still necessary after current Sidebar is replaced with the LG Sidebar
-  /* Add the postRender CSS class without disturbing pre-render functionality */
-  const renderStatus = isBrowser ? style.postRender : '';
+const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
+  grid-area: sidebar;
+  z-index: 1;
+`;
 
-  const toggleLeftColumn = () => {
-    setIsSidebarMenuOpen(!isSidebarMenuOpen);
-  };
-
-  useEffect(() => {
-    setIsSidebarMenuOpen(!isTabletOrMobile);
-  }, [isTabletOrMobile, setIsSidebarMenuOpen]);
+const Sidenav = ({ page }) => {
+  const showAllProducts = page?.options?.['nav-show-all-products'];
 
   return (
-    <div>
-      {!isBrowser || isSidebarMenuOpen ? (
-        <div
-          className={`left-column ${style.leftColumn} ${renderStatus}`}
-          css={css`
-            grid-area: sidebar;
-            width: 330px;
-          `}
-          id="left-column"
-        >
-          <Sidebar
-            slug={slug}
-            publishedBranches={publishedBranches}
-            toctreeData={toctree}
-            toggleLeftColumn={toggleLeftColumn}
-          />
-        </div>
-      ) : (
-        <span className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
-          Navigation
-        </span>
-      )}
-    </div>
+    <StyledLeafygreenSideNav aria-label="Side navigation">
+      {showAllProducts && <ProductsList />}
+    </StyledLeafygreenSideNav>
   );
 };
 
 Sidenav.propTypes = {
-  pageContext: PropTypes.shape({
-    metadata: PropTypes.shape({
-      publishedBranches: PropTypes.object,
-      toctree: PropTypes.object,
-    }).isRequired,
-    slug: PropTypes.string,
+  page: PropTypes.shape({
+    options: PropTypes.object,
   }).isRequired,
 };
 

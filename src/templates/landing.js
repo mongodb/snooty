@@ -5,6 +5,7 @@ import { Global, css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
+import Sidenav from '../components/Sidenav';
 import { TEMPLATE_CLASSNAME } from '../constants';
 
 const Wrapper = styled('main')`
@@ -28,7 +29,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ children, className }) => {
+const Landing = ({ children, className, pageContext: { page } }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -53,6 +54,7 @@ const Landing = ({ children, className }) => {
           })}
         </script>
       </Helmet>
+      <Sidenav page={page} />
       <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <Wrapper>{children}</Wrapper>
       </div>
@@ -127,6 +129,9 @@ const Landing = ({ children, className }) => {
 Landing.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   className: PropTypes.string,
+  pageContext: PropTypes.shape({
+    page: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 export default Landing;

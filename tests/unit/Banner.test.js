@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Stitch } from 'mongodb-stitch-browser-sdk';
+import * as StitchUtil from '../../src/utils/stitch';
 import Banner from '../../src/components/Banner';
 import { HeaderContext } from '../../src/components/header-context';
 
@@ -11,6 +11,15 @@ const mockBannerContent = {
   url: 'https://mongodb.com',
 };
 
+const mockClient = {
+  auth: {
+    loginWithCredential: jest.fn(() => {
+      return new Promise((resolve) => resolve());
+    }),
+  },
+  callFunction: jest.fn(() => Promise.resolve(mockBannerContent)),
+};
+
 describe('Banner component', () => {
   it('renders without a banner image', () => {
     // bannerContent state should remain null
@@ -19,12 +28,11 @@ describe('Banner component', () => {
   });
 
   it('renders with a banner image', async () => {
-    jest.spyOn(Stitch, 'hasAppClient').mockImplementation(() => true);
-    jest.spyOn(Stitch, 'getAppClient').mockImplementation();
-    jest.spyOn(Stitch, 'initializeAppClient').mockImplementation();
+    jest.spyOn(StitchUtil, 'getStitchClient').mockImplementation(() => mockClient);
+    const setBannerContent = jest.fn();
 
     const wrapper = mount(
-      <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: null }}>
+      <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent }}>
         <Banner />
       </HeaderContext.Provider>
     );
