@@ -90,11 +90,13 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   products.forEach((product) => {
     createNode({
+      children: [],
       id: createNodeId(`Product-${product.title}`),
       internal: {
         contentDigest: createContentDigest(product),
         type: 'Product',
       },
+      parent: null,
       title: product.title,
       url: product.baseUrl + product.slug,
     });

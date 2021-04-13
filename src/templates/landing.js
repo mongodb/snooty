@@ -29,7 +29,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ children, className, pageContext }) => {
+const Landing = ({ children, className, pageContext: { page } }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -54,7 +54,7 @@ const Landing = ({ children, className, pageContext }) => {
           })}
         </script>
       </Helmet>
-      <Sidenav pageContext={pageContext} />
+      <Sidenav page={page} />
       <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <Wrapper>{children}</Wrapper>
       </div>
@@ -130,11 +130,7 @@ Landing.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   className: PropTypes.string,
   pageContext: PropTypes.shape({
-    metadata: PropTypes.shape({
-      publishedBranches: PropTypes.object,
-      toctree: PropTypes.object,
-    }).isRequired,
-    slug: PropTypes.string,
+    page: PropTypes.object.isRequired,
   }).isRequired,
 };
 

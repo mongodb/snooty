@@ -37,14 +37,13 @@ const Document = ({
     page,
     metadata: { parentPaths, slugToTitle: slugTitleMapping, toctreeOrder },
   },
-  pageContext,
 }) => {
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
 
   return (
     <>
-      <Sidenav pageContext={pageContext} />
+      <Sidenav page={page} />
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">

@@ -13,7 +13,7 @@ const HeadingTitle = styled('span')`
 const Products = styled(`ul`)`
   list-style-type: none;
   padding: 0;
-  ${(props) => !props.isOpen && 'display: none;'}
+  ${({ isOpen }) => !isOpen && 'display: none;'}
 `;
 
 const ProductsListContainer = styled('div')`
@@ -24,7 +24,7 @@ const ProductsListContainer = styled('div')`
 
 const ProductsListHeading = styled('div')`
   align-items: center;
-  color: ${(props) => (props.isOpen ? uiColors.gray.dark3 : uiColors.gray.dark1)};
+  color: ${({ isOpen }) => (isOpen ? uiColors.gray.dark3 : uiColors.gray.dark1)};
   cursor: pointer;
   display: flex;
   padding: 0px ${theme.size.medium} 12px;

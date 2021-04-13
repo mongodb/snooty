@@ -9,8 +9,8 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   z-index: 1;
 `;
 
-const Sidenav = ({ pageContext }) => {
-  const showAllProducts = pageContext?.page?.options?.['nav-show-all-products'];
+const Sidenav = ({ page }) => {
+  const showAllProducts = page?.options?.['nav-show-all-products'];
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
@@ -20,10 +20,8 @@ const Sidenav = ({ pageContext }) => {
 };
 
 Sidenav.propTypes = {
-  pageContext: PropTypes.shape({
-    page: PropTypes.shape({
-      options: PropTypes.array,
-    }).isRequired,
+  page: PropTypes.shape({
+    options: PropTypes.object,
   }).isRequired,
 };
 

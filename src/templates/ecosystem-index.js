@@ -7,9 +7,9 @@ import Sidenav from '../components/Sidenav';
 import { TEMPLATE_CLASSNAME } from '../constants';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 
-const EcosystemIndex = ({ className, pageContext }) => (
+const EcosystemIndex = ({ className, pageContext: { page } }) => (
   <>
-    <Sidenav pageContext={pageContext} />
+    <Sidenav page={page} />
     <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
       <MainColumn className={EcosystemHomepageStyles.fullWidth}>
         <div
@@ -46,7 +46,9 @@ const EcosystemIndex = ({ className, pageContext }) => (
 
 EcosystemIndex.propTypes = {
   className: PropTypes.string,
-  pageContext: PropTypes.object.isRequired,
+  pageContext: PropTypes.shape({
+    page: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 export default EcosystemIndex;
