@@ -63,7 +63,7 @@ const ContentsList = styled.ul`
 `;
 
 const Contents = () => {
-  const { headingNodes, activeSectionId } = useContext(ContentsContext);
+  const { headingNodes, activeHeadingId } = useContext(ContentsContext);
   const { isTabletOrMobile } = useScreenSize();
 
   if (headingNodes.length === 0) {
@@ -79,7 +79,7 @@ const Contents = () => {
             depth={depth}
             key={id}
             id={id}
-            isActive={activeSectionId === id}
+            isActive={activeHeadingId === id}
             isDesktopOrLaptop={!isTabletOrMobile}
           >
             {title.map((node, i) => (

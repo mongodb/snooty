@@ -80,7 +80,7 @@ const DefaultLayout = (props) => {
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
-        <ContentsProvider nodes={page?.children}>
+        <ContentsProvider headingNodes={page?.options?.headings}>
           <HeaderContextProvider>
             <GlobalGrid>
               <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
