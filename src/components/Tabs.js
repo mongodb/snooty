@@ -20,8 +20,6 @@ const getPosition = (element) => {
   return { x, y };
 };
 
-const TabButton = ({ ...props }) => <button {...props} />;
-
 const hiddenTabStyling = css`
   & > div:first-child {
     display: none;
@@ -84,7 +82,12 @@ const Tabs = ({ nodeData: { children, options = {} }, ...rest }) => {
   return (
     <>
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
-      <StyledTabs as={TabButton} isHidden={isHidden} selected={activeTab} setSelected={handleClick}>
+      <StyledTabs
+        aria-label={`Tabs to describe usage of ${tabsetName}`}
+        isHidden={isHidden}
+        selected={activeTab}
+        setSelected={handleClick}
+      >
         {children.map((tab) => {
           if (tab.name !== 'tab') {
             return null;
