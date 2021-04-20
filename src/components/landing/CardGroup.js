@@ -38,43 +38,49 @@ const StyledGrid = styled('div')`
   }
 `;
 
-const LandingGrid = styled('div')`
+const CompactGrid = styled('div')`
   display: grid;
-  grid-column-gap: ${theme.size.default};
-  grid-row-gap: ${theme.size.default};
+  grid-column-gap: ${theme.size.medium};
+  grid-row-gap: ${theme.size.medium};
   grid-template-columns: repeat(3, 1fr);
   margin: ${theme.size.large} 0;
 
+  @media ${theme.screenSize.upToXLarge} {
+    grid-column-gap: 18px;
+  }
+
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: ${theme.size.default};
   }
 
   @media ${theme.screenSize.upToMedium} {
     grid-template-columns: 1fr;
+    grid-row-gap: ${theme.size.default};
   }
 `;
 
 const CardGroup = ({
   nodeData: {
     children,
-    options: { columns },
+    options: { columns, style },
   },
   page,
   ...rest
 }) => {
-  const isProductLanding = page?.options?.template === 'product-landing';
+  const isCompact = style === 'compact';
   return (
     <>
-      {isProductLanding ? (
-        <LandingGrid>
+      {isCompact ? (
+        <CompactGrid>
           {children.map(child => (
-            <ComponentFactory nodeData={child} page={page} {...rest} />
+            <ComponentFactory nodeData={child} style={style} page={page} {...rest} />
           ))}
-        </LandingGrid>
+        </CompactGrid>
       ) : (
         <StyledGrid columns={columns} noMargin={true}>
           {children.map(child => (
-            <ComponentFactory nodeData={child} {...rest} />
+            <ComponentFactory nodeData={child} style={style} {...rest} />
           ))}
         </StyledGrid>
       )}
