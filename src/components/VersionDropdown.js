@@ -107,7 +107,11 @@ const VersionDropdown = ({
           </Option>
         );
       })}
-      {published.length > active.length && <Option value="legacy">Legacy Docs</Option>}
+      {published.length > active.length && (
+        <Option value="legacy">
+          <OptionLink href={getUrl('legacy')}>Legacy Docs</OptionLink>
+        </Option>
+      )}
     </StyledSelect>
   );
 };
