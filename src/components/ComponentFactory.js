@@ -159,7 +159,7 @@ const componentMap = {
   versionchanged: VersionModified,
 };
 
-const ComponentFactory = props => {
+const ComponentFactory = (props) => {
   const { nodeData, slug } = props;
 
   const selectComponent = () => {

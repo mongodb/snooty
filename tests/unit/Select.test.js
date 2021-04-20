@@ -16,7 +16,7 @@ const SelectController = ({
   value = null,
 }) => {
   const [selectValue, setSelectValue] = useState(value);
-  const onChange = choice => {
+  const onChange = (choice) => {
     if (customOnChange) customOnChange(choice);
     setSelectValue(choice.value);
   };

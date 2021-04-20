@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
 const Container = ({ nodeData: { argument, children }, ...rest }) => {
-  const customClass = argument.map(node => node.value).join(' ');
+  const customClass = argument.map((node) => node.value).join(' ');
   return (
     <div className={`${customClass} docutils container`}>
       {children.map((element, index) => (

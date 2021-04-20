@@ -99,7 +99,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   const onClose = useCallback(() => setIsExpanded(false), [setIsExpanded]);
 
   const onSearchChange = useCallback(
-    searchTerm => {
+    (searchTerm) => {
       setIsFocused(true);
       // Debounce any queued search event since the query has changed
       clearTimeout(searchEvent);

@@ -15,7 +15,7 @@ useStaticQuery.mockImplementation(() => ({
   },
 }));
 
-const Test = props => {
+const Test = (props) => {
   const feedbackData = useFeedbackData(props.data);
   return (
     <>

@@ -21,7 +21,7 @@ const mountTabs = ({ mockData }) => {
   )
     .childAt(0)
     .childAt(0)
-    .childAt(0);
+    .childAt(1);
 };
 
 const shallowTabs = ({ mockData, mockAddTabset }) =>
@@ -31,7 +31,7 @@ const shallowTabs = ({ mockData, mockAddTabset }) =>
     </TabProvider>
   )
     .childAt(0)
-    .childAt(0);
+    .childAt(1);
 
 describe('Tabs testing', () => {
   describe('Tab unit tests', () => {
@@ -56,21 +56,11 @@ describe('Tabs testing', () => {
     });
 
     it('active tab is set in DOM', () => {
-      expect(
-        wrapper
-          .find('Tab')
-          .first()
-          .prop('selected')
-      ).toEqual(true);
+      expect(wrapper.find('Tab').first().prop('selected')).toEqual(true);
     });
 
     it('exists non-active tab', () => {
-      expect(
-        wrapper
-          .find('Tab')
-          .at(1)
-          .prop('selected')
-      ).toEqual(false);
+      expect(wrapper.find('Tab').at(1).prop('selected')).toEqual(false);
     });
   });
 

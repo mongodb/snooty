@@ -18,7 +18,7 @@ const TableOfContents = ({ activeSection, height, toctreeData: { children } }) =
         width: 100%;
       `}
     >
-      {children.map(c => {
+      {children.map((c) => {
         const key = c.slug || c.url;
         return <TOCNode node={c} key={key} />;
       })}

@@ -33,11 +33,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   min-height: 32px;
 }
 
-.emotion-2 {
-  color: #3D4F58;
-  padding-right: 4px;
-}
-
 .emotion-20 * {
   border: 0 !important;
   min-height: unset !important;
@@ -105,8 +100,13 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 .emotion-34 {
   border-collapse: collapse;
   box-sizing: border-box;
-  border-bottom: 1px solid #E7EEEC;
   width: 100%;
+  border-bottom: 1px solid #E7EEEC;
+}
+
+.emotion-2 {
+  padding-right: 4px;
+  color: #3D4F58;
 }
 
 .emotion-33 {
@@ -133,6 +133,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   font-size: 14px;
   line-height: 20px;
   position: relative;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
 }
 
 .emotion-22 > div > span > * {
@@ -145,8 +148,8 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-4 {
   border-width: 0px 1px 3px 1px;
-  border-color: #E7EEEC;
   border-style: solid;
+  border-color: #E7EEEC;
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -157,8 +160,8 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-7 {
   border-width: 0px 1px 3px 1px;
-  border-color: #E7EEEC;
   border-style: solid;
+  border-color: #E7EEEC;
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -169,8 +172,8 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-10 {
   border-width: 0px 1px 3px 1px;
-  border-color: #E7EEEC;
   border-style: solid;
+  border-color: #E7EEEC;
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -181,8 +184,8 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-13 {
   border-width: 0px 1px 3px 1px;
-  border-color: #E7EEEC;
   border-style: solid;
+  border-color: #E7EEEC;
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -193,8 +196,8 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-16 {
   border-width: 0px 1px 3px 1px;
-  border-color: #E7EEEC;
   border-style: solid;
+  border-color: #E7EEEC;
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -429,11 +432,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   min-height: 32px;
 }
 
-.emotion-2 {
-  color: #3D4F58;
-  padding-right: 4px;
-}
-
 .emotion-0 {
   position: absolute;
   top: 0;
@@ -495,19 +493,24 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 .emotion-85 {
   border-collapse: collapse;
   box-sizing: border-box;
-  border-bottom: 1px solid #E7EEEC;
   width: 100%;
+  border-bottom: 1px solid #E7EEEC;
 }
 
 .emotion-4 {
   border-width: 0px 1px 3px 1px;
-  border-color: #E7EEEC;
   border-style: solid;
+  border-color: #E7EEEC;
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
   vertical-align: middle;
   font-size: 14px;
+}
+
+.emotion-2 {
+  padding-right: 4px;
+  color: #3D4F58;
 }
 
 .emotion-32 {
@@ -535,6 +538,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   line-height: 20px;
   position: relative;
   font-weight: bold;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+  background-clip: padding-box;
+  background-color: #F9FBFA;
 }
 
 .emotion-21 > div > span > * {
@@ -553,6 +561,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   font-size: 14px;
   line-height: 20px;
   position: relative;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
 }
 
 .emotion-23 > div > span > * {

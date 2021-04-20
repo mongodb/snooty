@@ -70,10 +70,7 @@ describe('FeedbackWidget', () => {
       expect(wrapper.exists('FeedbackForm')).toEqual(true);
       expect(wrapper.find('FeedbackForm').children()).toHaveLength(0);
       // Click the tab
-      wrapper
-        .find('FeedbackTab')
-        .childAt(0)
-        .simulate('click');
+      wrapper.find('FeedbackTab').childAt(0).simulate('click');
       await tick({ wrapper });
       // After the click new feedback is initialized
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
@@ -192,10 +189,7 @@ describe('FeedbackWidget', () => {
         _id: new BSON.ObjectId(),
       });
       // Click the close button
-      wrapper
-        .find('FeedbackCard')
-        .find('CloseButton')
-        .simulate('click');
+      wrapper.find('FeedbackCard').find('CloseButton').simulate('click');
       await tick({ wrapper });
       expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
       expect(wrapper.exists('FeedbackCard')).toBe(false);
@@ -219,11 +213,7 @@ describe('FeedbackWidget', () => {
         });
 
         // Simulate a 1-star rating
-        wrapper
-          .find('RatingView')
-          .find('Star')
-          .first()
-          .simulate('click');
+        wrapper.find('RatingView').find('Star').first().simulate('click');
         await tick({ wrapper });
 
         expect(wrapper.exists('RatingView')).toBe(false);
@@ -267,14 +257,11 @@ describe('FeedbackWidget', () => {
         });
         expect(wrapper.find('Qualifier')).toHaveLength(4);
 
-        const isChecked = q => q.find('Checkbox').prop('checked');
+        const isChecked = (q) => q.find('Checkbox').prop('checked');
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(false);
 
         // Check the first qualifier
-        wrapper
-          .find('Qualifier')
-          .at(0)
-          .simulate('click');
+        wrapper.find('Qualifier').at(0).simulate('click');
         await tick({ wrapper });
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(false);
@@ -283,10 +270,7 @@ describe('FeedbackWidget', () => {
         expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
 
         // Check the second qualifier
-        wrapper
-          .find('Qualifier')
-          .at(1)
-          .simulate('click');
+        wrapper.find('Qualifier').at(1).simulate('click');
         await tick({ wrapper });
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(true);
@@ -295,10 +279,7 @@ describe('FeedbackWidget', () => {
         expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
 
         // Uncheck the first qualifier
-        wrapper
-          .find('Qualifier')
-          .at(0)
-          .simulate('click');
+        wrapper.find('Qualifier').at(0).simulate('click');
         await tick({ wrapper });
         expect(isChecked(wrapper.find('Qualifier').at(0))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(true);
@@ -316,10 +297,7 @@ describe('FeedbackWidget', () => {
             comment: '',
           });
 
-          wrapper
-            .find('QualifiersView')
-            .find('Button')
-            .simulate('click');
+          wrapper.find('QualifiersView').find('Button').simulate('click');
           await tick({ wrapper });
 
           expect(wrapper.exists('QualifiersView')).toBe(false);
@@ -402,10 +380,7 @@ describe('FeedbackWidget', () => {
             isSupportRequest: true,
           });
 
-          wrapper
-            .find('CommentView')
-            .find('SubmitButton')
-            .simulate('click');
+          wrapper.find('CommentView').find('SubmitButton').simulate('click');
           await tick({ wrapper });
           expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
           expect(wrapper.exists('CommentView')).toBe(false);
@@ -423,10 +398,7 @@ describe('FeedbackWidget', () => {
             user: { email: 'test@example.com' },
           });
 
-          wrapper
-            .find('CommentView')
-            .find('SubmitButton')
-            .simulate('click');
+          wrapper.find('CommentView').find('SubmitButton').simulate('click');
           await tick({ wrapper });
 
           expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
@@ -469,10 +441,7 @@ describe('FeedbackWidget', () => {
           isSupportRequest: true,
         });
         expect(wrapper.exists('SupportView')).toBe(true);
-        const supportViewText = wrapper
-          .find('SupportView')
-          .children()
-          .text();
+        const supportViewText = wrapper.find('SupportView').children().text();
         expect(supportViewText).toContain("We're sorry to hear that.");
         expect(supportViewText).toContain('Create a case on the Support Portal');
         expect(supportViewText).toContain('Visit MongoDB Community');
@@ -506,18 +475,10 @@ describe('FeedbackWidget', () => {
         const view = wrapper.find('SubmittedView');
         expect(view.exists()).toBe(true);
         expect(view.find('Heading').text()).toBe('We appreciate your feedback.');
-        expect(
-          view
-            .find('Subheading')
-            .at(0)
-            .text()
-        ).toBe(`We're working hard to improve the MongoDB Documentation.`);
-        expect(
-          view
-            .find('Subheading')
-            .at(1)
-            .text()
-        ).toBe(`For additional support, explore the MongoDB discussion forum.`);
+        expect(view.find('Subheading').at(0).text()).toBe(`We're working hard to improve the MongoDB Documentation.`);
+        expect(view.find('Subheading').at(1).text()).toBe(
+          `For additional support, explore the MongoDB discussion forum.`
+        );
       });
     });
   });

@@ -3,7 +3,7 @@
  */
 const findAllKeyValuePairs = (nodes, key, value) => {
   const results = [];
-  const searchNode = node => {
+  const searchNode = (node) => {
     if (node[key] === value) {
       results.push(node);
     }

@@ -177,10 +177,7 @@ describe('MainWidget', () => {
 
   describe('clicking the close button', () => {
     it('clicks Close', () => {
-      const closeButton = wrapper
-        .find('.deluge-close-link')
-        .childAt(0)
-        .childAt(0);
+      const closeButton = wrapper.find('.deluge-close-link').childAt(0).childAt(0);
       closeButton.simulate('click', { stopPropagation: jest.fn() });
     });
 

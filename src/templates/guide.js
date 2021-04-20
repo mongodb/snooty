@@ -20,7 +20,7 @@ export default class Guide extends Component {
 
     // get data from server
     this.sections = getNestedValue(['children', 0, 'children'], page);
-    this.bodySections = this.sections.filter(section => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
+    this.bodySections = this.sections.filter((section) => Object.keys(SECTION_NAME_MAPPING).includes(section.name));
 
     this.state = {
       activeSection: getNestedValue([0, 'name'], this.bodySections),
@@ -38,7 +38,7 @@ export default class Guide extends Component {
     const { isScrollable } = this.state;
 
     if (isScrollable) {
-      if (this.sectionRefs.map(ref => ref.current).some(ref => ref === null)) {
+      if (this.sectionRefs.map((ref) => ref.current).some((ref) => ref === null)) {
         return;
       }
       const height = document.body.clientHeight - window.innerHeight;
@@ -72,7 +72,7 @@ export default class Guide extends Component {
   };
 
   // Temporarily disable scrolling listener by changing state of 'isScrollable'
-  disableScrollable = clickedSection => {
+  disableScrollable = (clickedSection) => {
     this.setState({
       isScrollable: false,
       activeSection: clickedSection,
@@ -82,7 +82,7 @@ export default class Guide extends Component {
   createSections() {
     const { pageContext } = this.props;
     if (this.bodySections.length === 0) {
-      return this.sections.map(section => {
+      return this.sections.map((section) => {
         return <ComponentFactory nodeData={section} page={pageContext.page} />;
       });
     }
@@ -108,7 +108,7 @@ export default class Guide extends Component {
       <div className="content">
         <TOC
           activeSection={activeSection}
-          sectionKeys={this.bodySections.map(section => section.name)}
+          sectionKeys={this.bodySections.map((section) => section.name)}
           disableScrollable={this.disableScrollable}
         />
         <div className="left-nav-space" />

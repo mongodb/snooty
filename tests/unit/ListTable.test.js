@@ -8,8 +8,8 @@ import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';
 
 expect.extend(matchers);
 
-const mountListTable = data => mount(<ListTable nodeData={data} />);
-const renderListTable = data => render(<ListTable nodeData={data} />);
+const mountListTable = (data) => mount(<ListTable nodeData={data} />);
+const renderListTable = (data) => render(<ListTable nodeData={data} />);
 
 describe('when rendering a list-table directive', () => {
   let wrapper;
@@ -26,56 +26,23 @@ describe('when rendering a list-table directive', () => {
   });
 
   it('displays one header row', () => {
-    expect(
-      wrapper
-        .find('thead')
-        .children()
-        .find('tr')
-    ).toHaveLength(1);
+    expect(wrapper.find('thead').children().find('tr')).toHaveLength(1);
   });
 
   it('displays six header columns', () => {
-    expect(
-      wrapper
-        .find('thead')
-        .children()
-        .find('tr')
-        .children()
-        .find('th')
-    ).toHaveLength(6);
+    expect(wrapper.find('thead').children().find('tr').children().find('th')).toHaveLength(6);
   });
 
   it('displays five body rows', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-    ).toHaveLength(5);
+    expect(wrapper.find('tbody').children().find('tr')).toHaveLength(5);
   });
 
   it('displays five body columns', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-        .first()
-        .children()
-        .find('td')
-    ).toHaveLength(5);
+    expect(wrapper.find('tbody').children().find('tr').first().children().find('td')).toHaveLength(5);
   });
 
   it('displays one stub column', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-        .first()
-        .children()
-        .find('th')
-    ).toHaveLength(1);
+    expect(wrapper.find('tbody').children().find('tr').first().children().find('th')).toHaveLength(1);
   });
 
   it('renders one stub column in the body', () => {
@@ -83,7 +50,7 @@ describe('when rendering a list-table directive', () => {
       wrapper
         .find('th')
         .parent()
-        .filterWhere(p => p.is('Cell'))
+        .filterWhere((p) => p.is('Cell'))
     ).toHaveLength(5);
   });
 });
@@ -103,34 +70,15 @@ describe('when rendering a list table with fixed widths', () => {
   });
 
   it('displays no content in the header row', () => {
-    expect(
-      wrapper
-        .find('thead')
-        .children()
-        .find('tr')
-        .text()
-    ).toEqual('');
+    expect(wrapper.find('thead').children().find('tr').text()).toEqual('');
   });
 
   it('displays one body row', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('Row')
-    ).toHaveLength(1);
+    expect(wrapper.find('tbody').children().find('Row')).toHaveLength(1);
   });
 
   it('displays six body columns', () => {
-    expect(
-      wrapper
-        .find('tbody')
-        .children()
-        .find('tr')
-        .first()
-        .children()
-        .find('td')
-    ).toHaveLength(6);
+    expect(wrapper.find('tbody').children().find('tr').first().children().find('td')).toHaveLength(6);
   });
 
   it('displays columns with set widths', () => {

@@ -15,9 +15,9 @@ export default class GuideSection extends Component {
     };
   }
 
-  handleUpdateURIWriter = uri => {
+  handleUpdateURIWriter = (uri) => {
     this.setState(
-      prevState => ({
+      (prevState) => ({
         uriWriter: {
           ...prevState.uri,
           ...uri,

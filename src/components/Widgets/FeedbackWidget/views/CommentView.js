@@ -48,14 +48,14 @@ export default function CommentView({ ...props }) {
         placeholder="Describe your experience."
         rows={8}
         value={comment}
-        onChange={e => setComment(e.target.value)}
+        onChange={(e) => setComment(e.target.value)}
       />
       <InputLabel htmlFor="feedback-email">Email Address</InputLabel>
       <EmailInput
         id="feedback-email"
         placeholder="someone@example.com"
         value={email}
-        onChange={e => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
       />
       {hasEmailError && <InputErrorLabel htmlFor="feedback-email">Please enter a valid email address.</InputErrorLabel>}
       <Footer>

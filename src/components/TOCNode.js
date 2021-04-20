@@ -48,7 +48,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
     const formattedTitle = formatText(title);
 
     if (isDrawer && children.length > 0) {
-      const _toggleDrawerOnEnter = e => {
+      const _toggleDrawerOnEnter = (e) => {
         if (e.key === 'Enter') {
           setIsOpen(!isOpen);
         }
@@ -56,7 +56,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
       return (
         <Link // eslint-disable-line jsx-a11y/anchor-is-valid
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             setIsOpen(!isOpen);
           }}
@@ -84,7 +84,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       <NodeLink />
       {isOpen ? (
         <ul>
-          {children.map(c => {
+          {children.map((c) => {
             const key = c.slug || c.url;
             return <TOCNode node={c} level={level + 1} key={key} />;
           })}
