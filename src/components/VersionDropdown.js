@@ -28,6 +28,12 @@ const StyledSelect = styled(Select)`
   }
 `;
 
+const OptionLink = styled('a')`
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
 const VersionDropdown = ({
   publishedBranches: {
     version: { published, active },
@@ -74,9 +80,13 @@ const VersionDropdown = ({
     return generatePathPrefix({ ...siteMetadata, parserBranch: version });
   };
 
-  const navigate = (value) => {
+  const getUrl = (value) => {
     const legacyDocsURL = `https://docs.mongodb.com/legacy/?site=${project}`;
-    const destination = value === 'legacy' ? legacyDocsURL : normalizePath(`${generatePrefix(value)}/${slug}`);
+    return value === 'legacy' ? legacyDocsURL : normalizePath(`${generatePrefix(value)}/${slug}`);
+  };
+
+  const navigate = (value) => {
+    const destination = getUrl(value);
     reachNavigate(destination);
   };
 
@@ -89,11 +99,14 @@ const VersionDropdown = ({
       usePortal={false}
       value={parserBranch}
     >
-      {Object.entries(gitNamedMapping).map(([branch, name]) => (
-        <Option key={branch} value={branch}>
-          {prefixVersion(name)}
-        </Option>
-      ))}
+      {Object.entries(gitNamedMapping).map(([branch, name]) => {
+        const url = getUrl(branch);
+        return (
+          <Option key={branch} value={branch}>
+            <OptionLink href={url}>{prefixVersion(name)}</OptionLink>
+          </Option>
+        );
+      })}
       {published.length > active.length && <Option value="legacy">Legacy Docs</Option>}
     </StyledSelect>
   );
