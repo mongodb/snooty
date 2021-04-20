@@ -1,54 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import BreadcrumbSchema from './BreadcrumbSchema';
-import ComponentFactory from './ComponentFactory';
-import Link from './Link';
-import { reportAnalytics } from '../utils/report-analytics';
-import { theme } from '../theme/docsTheme';
+import Loadable from '@loadable/component';
 
-const BreadcrumbContainer = styled('nav')`
-  font-size: ${theme.fontSize.small};
+const BreadcrumbContainer = Loadable(() => import('./BreadcrumbContainer'));
 
-  & > p {
-    margin-top: 0;
-  }
-`;
+const Breadcrumbs = ({ pageTitle = null, parentPaths, siteTitle, slug }) => {
+  // If a pageTitle prop is passed, use that as the last breadcrumb instead
+  const lastCrumb = {
+    title: pageTitle || siteTitle,
+    url: pageTitle ? slug : '/',
+  };
 
-const Breadcrumbs = ({ parentPaths, siteTitle, slug }) => (
-  <>
-    <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-    {parentPaths && (
-      <BreadcrumbContainer>
-        <p>
-          {parentPaths.map(({ path, plaintext, title }, index) => {
-            const isLast = index === parentPaths.length - 1;
-            return (
-              <React.Fragment key={path}>
-                <Link
-                  to={path}
-                  onClick={() => {
-                    reportAnalytics('BreadcrumbClick', {
-                      parentPaths: parentPaths,
-                      breadcrumbClicked: path,
-                    });
-                  }}
-                >
-                  {title.map((t, i) => (
-                    <ComponentFactory key={i} nodeData={t} />
-                  ))}
-                </Link>
-                {!isLast && <> &gt; </>}
-              </React.Fragment>
-            );
-          })}
-        </p>
-      </BreadcrumbContainer>
-    )}
-  </>
-);
+  return (
+    <>
+      <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
+      <BreadcrumbContainer lastCrumb={lastCrumb} />
+    </>
+  );
+};
 
 Breadcrumbs.propTypes = {
+  pageTitle: PropTypes.string,
   parentPaths: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string,

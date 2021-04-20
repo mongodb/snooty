@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 import styled from '@emotion/styled';
 import { HeaderContext } from './header-context';
 import { SNOOTY_STITCH_ID } from '../build-constants';
 import { theme } from '../theme/docsTheme';
 import { normalizePath } from '../utils/normalize-path';
-import { getStitchClient } from '../utils/stitch';
+import { fetchBanner } from '../utils/stitch';
 
 const getBannerSource = (src) => {
   if (src == null || src === '') return null;
@@ -37,10 +36,7 @@ const Banner = () => {
 
   useEffect(() => {
     const fetchBannerContent = async () => {
-      const client = getStitchClient(SNOOTY_STITCH_ID);
-      await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
-      const banner = await client.callFunction('getBanner');
-      setBannerContent(banner);
+      setBannerContent(await fetchBanner(SNOOTY_STITCH_ID));
     };
     fetchBannerContent();
   }, [setBannerContent]);

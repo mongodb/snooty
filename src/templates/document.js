@@ -35,7 +35,7 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    metadata: { parentPaths, slugToTitle: slugTitleMapping, toctreeOrder },
+    metadata: { parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
   },
 }) => {
   const pageOptions = page?.options;
@@ -47,7 +47,7 @@ const Document = ({
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">
-            <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
+            <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} siteTitle={title} slug={slug} />
             {children}
             {showPrevNext && (
               <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />

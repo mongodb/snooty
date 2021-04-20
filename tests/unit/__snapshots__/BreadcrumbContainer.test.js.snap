@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
+.emotion-18 {
+  font-size: 14px;
+}
+
+.emotion-18 * {
+  color: #5D6C74;
+}
+
+.emotion-18 > p {
+  margin-top: 0;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-4 {
+  cursor: default;
+}
+
+.emotion-10 {
+  color: #21313C;
+  cursor: default;
+}
+
+.emotion-12 {
+  color: #21313C;
+}
+
+.emotion-12:hover,
+.emotion-12:focus {
+  color: #21313C;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<BreadcrumbContainer
+  lastCrumb={
+    Object {
+      "title": "MongoDB Compass",
+      "url": "documents/view",
+    }
+  }
+>
+  <StyledNav>
+    <nav
+      className="emotion-18 emotion-19"
+    >
+      <p>
+        <StyledLink
+          isLast={false}
+          onClick={[Function]}
+          to="https://docs.mongodb.com/"
+        >
+          <Link
+            className="emotion-0 emotion-1"
+            onClick={[Function]}
+            to="https://docs.mongodb.com/"
+          >
+            <a
+              className="emotion-0 emotion-1"
+              href="https://docs.mongodb.com/"
+              onClick={[Function]}
+            >
+              Docs Home
+            </a>
+          </Link>
+        </StyledLink>
+        <StyledArrow
+          isLast={false}
+        >
+          <span
+            className="emotion-4 emotion-5"
+          >
+             → 
+          </span>
+        </StyledArrow>
+        <StyledLink
+          isLast={false}
+          onClick={[Function]}
+          to="https://docs.mongodb.com/view-analyze"
+        >
+          <Link
+            className="emotion-0 emotion-1"
+            onClick={[Function]}
+            to="https://docs.mongodb.com/view-analyze"
+          >
+            <a
+              className="emotion-0 emotion-1"
+              href="https://docs.mongodb.com/view-analyze"
+              onClick={[Function]}
+            >
+              View & Analyze
+            </a>
+          </Link>
+        </StyledLink>
+        <StyledArrow
+          isLast={true}
+        >
+          <span
+            className="emotion-10 emotion-5"
+          >
+             → 
+          </span>
+        </StyledArrow>
+        <StyledLink
+          isLast={true}
+          onClick={[Function]}
+          to="documents/view"
+        >
+          <Link
+            className="emotion-12 emotion-1"
+            onClick={[Function]}
+            to="documents/view"
+          >
+            <mockConstructor
+              className="emotion-12 emotion-1"
+              onClick={[Function]}
+              to="/documents/view/"
+            >
+              <a
+                className="emotion-12 emotion-1"
+                href="/documents/view/"
+                onClick={[Function]}
+              >
+                MongoDB Compass
+              </a>
+            </mockConstructor>
+          </Link>
+        </StyledLink>
+      </p>
+    </nav>
+  </StyledNav>
+</BreadcrumbContainer>
+`;
+
+exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
+.emotion-12 {
+  font-size: 14px;
+}
+
+.emotion-12 * {
+  color: #5D6C74;
+}
+
+.emotion-12 > p {
+  margin-top: 0;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-4 {
+  color: #21313C;
+  cursor: default;
+}
+
+.emotion-6 {
+  color: #21313C;
+}
+
+.emotion-6:hover,
+.emotion-6:focus {
+  color: #21313C;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<BreadcrumbContainer
+  lastCrumb={
+    Object {
+      "title": "View & Analyze Data",
+      "url": "view-analyze",
+    }
+  }
+>
+  <StyledNav>
+    <nav
+      className="emotion-12 emotion-13"
+    >
+      <p>
+        <StyledLink
+          isLast={false}
+          onClick={[Function]}
+          to="https://docs.mongodb.com/"
+        >
+          <Link
+            className="emotion-0 emotion-1"
+            onClick={[Function]}
+            to="https://docs.mongodb.com/"
+          >
+            <a
+              className="emotion-0 emotion-1"
+              href="https://docs.mongodb.com/"
+              onClick={[Function]}
+            >
+              Docs Home
+            </a>
+          </Link>
+        </StyledLink>
+        <StyledArrow
+          isLast={true}
+        >
+          <span
+            className="emotion-4 emotion-5"
+          >
+             → 
+          </span>
+        </StyledArrow>
+        <StyledLink
+          isLast={true}
+          onClick={[Function]}
+          to="view-analyze"
+        >
+          <Link
+            className="emotion-6 emotion-1"
+            onClick={[Function]}
+            to="view-analyze"
+          >
+            <mockConstructor
+              className="emotion-6 emotion-1"
+              onClick={[Function]}
+              to="/view-analyze/"
+            >
+              <a
+                className="emotion-6 emotion-1"
+                href="/view-analyze/"
+                onClick={[Function]}
+              >
+                View & Analyze Data
+              </a>
+            </mockConstructor>
+          </Link>
+        </StyledLink>
+      </p>
+    </nav>
+  </StyledNav>
+</BreadcrumbContainer>
+`;

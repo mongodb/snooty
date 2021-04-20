@@ -6,8 +6,16 @@ import MainColumn from '../components/MainColumn';
 import Sidenav from '../components/Sidenav';
 import { TEMPLATE_CLASSNAME } from '../constants';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
+import Breadcrumbs from '../components/Breadcrumbs';
 
-const EcosystemIndex = ({ className, pageContext: { page } }) => (
+const EcosystemIndex = ({
+  className,
+  pageContext: {
+    metadata: { title, parentPaths },
+    page,
+    slug,
+  },
+}) => (
   <>
     <Sidenav page={page} />
     <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
@@ -23,6 +31,7 @@ const EcosystemIndex = ({ className, pageContext: { page } }) => (
               padding-bottom: 50px;
             `}
           >
+            <Breadcrumbs parentPaths={parentPaths.slug} siteTitle={title} slug={slug} />
             <h1>Start Developing with MongoDB</h1>
             <p>Connect your application to your database with one of our official libraries.</p>
             <p>
@@ -47,7 +56,12 @@ const EcosystemIndex = ({ className, pageContext: { page } }) => (
 EcosystemIndex.propTypes = {
   className: PropTypes.string,
   pageContext: PropTypes.shape({
+    metadata: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      parentPaths: PropTypes.arrayOf(PropTypes.string),
+    }),
     page: PropTypes.object.isRequired,
+    slug: PropTypes.string.isRequired,
   }).isRequired,
 };
 
