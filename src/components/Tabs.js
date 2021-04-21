@@ -27,18 +27,12 @@ const hiddenTabsStyling = css`
 `;
 
 const landingTabsStyling = css`
-  width: 100%;
+  ${'' /* Insert space between the tab buttons and the tab panels */}
+  & > div:first-child {
+    margin-bottom: ${theme.size.xlarge};
 
-  & > div:first-child > button {
-    flex-grow: 1;
-    min-width: 55px;
-    padding: 12px ${theme.size.default};
-
-    @media ${theme.screenSize.upToMedium} {
-      padding: 12px ${theme.size.small};
-    }
     @media ${theme.screenSize.upToSmall} {
-      padding: 12px ${theme.size.tiny};
+      margin-bottom: 40px;
     }
   }
 `;
@@ -52,7 +46,6 @@ const landingTabStyling = css`
   display: grid;
   column-gap: ${theme.size.medium};
   grid-template-columns: repeat(2, 1fr);
-  margin-top: ${theme.size.xlarge};
 
   img {
     border-radius: ${theme.size.small};
@@ -63,10 +56,6 @@ const landingTabStyling = css`
 
   @media ${theme.screenSize.upToMedium} {
     display: block;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    margin-top: 40px;
   }
 `;
 
