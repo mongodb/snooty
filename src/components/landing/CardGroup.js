@@ -6,6 +6,7 @@ import { theme } from '../../theme/docsTheme';
 
 const getColumnValue = props => props.columns || React.Children.count(props.children);
 
+// TODO: StyledGrid should make use of the 'columns' option when specified
 const StyledGrid = styled('div')`
   align-items: stretch;
   display: grid;
@@ -21,10 +22,9 @@ const StyledGrid = styled('div')`
 
   @media ${theme.screenSize.upToMedium} {
     grid-gap: ${`calc(${theme.size.medium} * 0.75)`};
-    grid-template-columns: ${({ children, theme }) =>
-      `calc(${theme.size.medium} / 2) repeat(${React.Children.count(children)}, calc(75% - calc( 2 * ${
-        theme.size.medium
-      }))) calc(${theme.size.medium} / 2)`};
+    grid-template-columns: ${({ children }) => `calc(${theme.size.medium} / 2)
+       repeat(${React.Children.count(children)}, calc(75% - (2 * ${theme.size.medium})))
+       calc(${theme.size.medium} / 2)`};
     grid-template-rows: minmax(150px, 1fr);
     margin: ${theme.size.medium} 0;
     overflow-x: scroll;
@@ -36,27 +36,13 @@ const StyledGrid = styled('div')`
       content: '';
     }
   }
-`;
 
-const CompactGrid = styled('div')`
-  display: grid;
-  grid-column-gap: ${theme.size.medium};
-  grid-row-gap: ${theme.size.medium};
-  grid-template-columns: repeat(3, 1fr);
-  margin: ${theme.size.large} 0;
-
-  @media ${theme.screenSize.upToXLarge} {
-    grid-column-gap: 18px;
-  }
-
-  @media ${theme.screenSize.upToLarge} {
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: ${theme.size.default};
-  }
-
-  @media ${theme.screenSize.upToMedium} {
-    grid-template-columns: 1fr;
-    grid-row-gap: ${theme.size.default};
+  ${'' /* If isCompact, stack Cards vertically on small screens */}
+  @media ${theme.screenSize.upToSmall} {
+    grid-template-columns: ${({ isCompact }) => isCompact && `auto`};
+    &:before {
+      content: ${({ isCompact }) => isCompact && `unset`};
+    }
   }
 `;
 
@@ -70,21 +56,11 @@ const CardGroup = ({
 }) => {
   const isCompact = style === 'compact';
   return (
-    <>
-      {isCompact ? (
-        <CompactGrid>
-          {children.map(child => (
-            <ComponentFactory nodeData={child} style={style} page={page} {...rest} />
-          ))}
-        </CompactGrid>
-      ) : (
-        <StyledGrid columns={columns} noMargin={true}>
-          {children.map(child => (
-            <ComponentFactory nodeData={child} style={style} {...rest} />
-          ))}
-        </StyledGrid>
-      )}
-    </>
+    <StyledGrid columns={columns} isCompact={isCompact}>
+      {children.map(child => (
+        <ComponentFactory nodeData={child} style={style} {...rest} />
+      ))}
+    </StyledGrid>
   );
 };
 

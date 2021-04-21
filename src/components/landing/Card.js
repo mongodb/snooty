@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
-import Box from '@leafygreen-ui/box';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
@@ -21,9 +20,16 @@ const CardIcon = styled('img')`
   width: ${theme.size.medium};
 `;
 
+const H4 = styled('h4')`
+  letter-spacing: 0.5px;
+  margin: ${theme.size.medium} 0 ${theme.size.small} 0;
+`;
+
+const FlexTag = styled(Tag)`
+  margin-right: auto;
+`;
+
 const CompactCard = styled(LeafyGreenCard)`
-  border-radius: ${theme.size.tiny};
-  box-shadow: 0px 0px ${theme.size.tiny} ${uiColors.gray.light2};
   display: grid;
   grid-template-columns: 48px auto;
   column-gap: 0px};
@@ -63,6 +69,9 @@ const CompactCardText = styled('div')`
   margin-left: ${theme.size.medium};
   a {
     font-size: ${theme.fontSize.default};
+    :hover {
+      text-decoration: none;
+    }
   }
   p {
     color: ${uiColors.gray.dark3};
@@ -70,19 +79,10 @@ const CompactCardText = styled('div')`
   }
 `;
 
-const H4 = styled('h4')`
-  letter-spacing: 0.5px;
-  margin: ${theme.size.medium} 0 ${theme.size.small} 0;
-`;
-
 const CTA = styled(Link)`
   font-weight: bold;
   margin-top: auto;
   margin-bottom: 0;
-`;
-
-const FlexTag = styled(Tag)`
-  margin-right: auto;
 `;
 
 const Card = ({
@@ -94,37 +94,42 @@ const Card = ({
   page,
 }) => {
   const isCompact = style === 'compact';
-  console.log(isCompact);
   return (
-    <Box href={url}>
-      <>
-        {isCompact ? (
-          <CompactCard>
-            {icon && (
-              <CompactIconCircle>
-                <CompactIcon src={withPrefix(icon)} alt={iconAlt} />
-              </CompactIconCircle>
-            )}
-            <CompactCardText>
-              {children.map((child, i) => (
-                <ComponentFactory nodeData={child} key={i} />
-              ))}
-              <CTA to={url}>{cta}</CTA>
-            </CompactCardText>
-          </CompactCard>
-        ) : (
-          <StyledCard>
-            {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
-            {tag && <FlexTag text={tag} />}
-            <H4>{headline}</H4>
+    <>
+      {isCompact ? (
+        <CompactCard
+          onClick={() => {
+            window.location.href = url;
+          }}
+        >
+          {icon && (
+            <CompactIconCircle>
+              <CompactIcon src={withPrefix(icon)} alt={iconAlt} />
+            </CompactIconCircle>
+          )}
+          <CompactCardText>
             {children.map((child, i) => (
               <ComponentFactory nodeData={child} key={i} />
             ))}
             <CTA to={url}>{cta}</CTA>
-          </StyledCard>
-        )}
-      </>
-    </Box>
+          </CompactCardText>
+        </CompactCard>
+      ) : (
+        <StyledCard
+          onClick={() => {
+            window.location.href = url;
+          }}
+        >
+          {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
+          {tag && <FlexTag text={tag} />}
+          <H4>{headline}</H4>
+          {children.map((child, i) => (
+            <ComponentFactory nodeData={child} key={i} />
+          ))}
+          <CTA to={url}>{cta}</CTA>
+        </StyledCard>
+      )}
+    </>
   );
 };
 
