@@ -93,24 +93,25 @@ exports[`ProductsList renders with products 1`] = `
                 className="emotion-0 emotion-1"
               >
                 <ChevronDown
+                  aria-label="Chevron Down Icon"
                   className="emotion-0 emotion-1"
                   height={16}
-                  title="Chevron Down Icon"
+                  role="img"
                   width={16}
                 >
                   <svg
+                    aria-label="Chevron Down Icon"
                     className="emotion-0 emotion-1"
+                    fill="none"
                     height={16}
                     role="img"
                     viewBox="0 0 16 16"
                     width={16}
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <title>
-                      Chevron Down Icon
-                    </title>
                     <path
-                      d="M6.6 11.314l-4.95-4.95L3.064 4.95l4.95 4.95 4.95-4.95 1.414 1.414-6.364 6.364L6.6 11.314z"
+                      clipRule="evenodd"
+                      d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
                       fill="currentColor"
                       fillRule="evenodd"
                     />
