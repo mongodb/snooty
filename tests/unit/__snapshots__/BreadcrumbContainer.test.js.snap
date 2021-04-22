@@ -3,6 +3,7 @@
 exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 .emotion-18 {
   font-size: 14px;
+  min-height: 24px;
 }
 
 .emotion-18 * {
@@ -143,6 +144,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 .emotion-12 {
   font-size: 14px;
+  min-height: 24px;
 }
 
 .emotion-12 * {
