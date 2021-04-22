@@ -15,7 +15,6 @@ const StyledCard = styled(LeafyGreenCard)`
   padding: ${({ theme }) => `${theme.size.large}`};
 
   p:last-of-type {
-    margin-top: auto;
     margin-bottom: 0;
   }
 `;
@@ -30,8 +29,9 @@ const H4 = styled('h4')`
     compact ? `0 0 ${theme.size.small}` : `${theme.size.medium} 0 ${theme.size.small} 0`};
 `;
 
-const CTA = styled(Link)`
+const CTA = styled('p')`
   font-weight: bold;
+  margin-top: auto;
 `;
 
 const FlexTag = styled(Tag)`
@@ -77,9 +77,9 @@ const Card = ({
           <ComponentFactory nodeData={child} key={i} />
         ))}
         {cta && (
-          <p>
-            <CTA to={url}>{cta}</CTA>
-          </p>
+          <CTA>
+            <Link to={url}>{cta}</Link>
+          </CTA>
         )}
       </ConditionalWrapper>
     </Card>
