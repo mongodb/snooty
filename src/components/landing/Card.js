@@ -26,8 +26,8 @@ const CardIcon = styled('img')`
 
 const H4 = styled('h4')`
   letter-spacing: 0.5px;
-  margin: ${({ isExtraCompact, theme }) =>
-    isExtraCompact ? `0 0 ${theme.size.small}` : `${theme.size.medium} 0 ${theme.size.small} 0`};
+  margin: ${({ compact, theme }) =>
+    compact ? `0 0 ${theme.size.small}` : `${theme.size.medium} 0 ${theme.size.small} 0`};
 `;
 
 const CTA = styled(Link)`
@@ -45,13 +45,15 @@ const CompactCard = styled(StyledCard)`
 `;
 
 const CompactWrapper = styled('div')`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin-left: ${({ theme }) => theme.size.default};
 `;
 
 const Card = ({
   isCompact,
   isExtraCompact,
-  nodeData,
   nodeData: {
     children,
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
@@ -70,7 +72,7 @@ const Card = ({
         wrapper={(children) => <CompactWrapper>{children}</CompactWrapper>}
       >
         {tag && <FlexTag text={tag} />}
-        <H4 isExtraCompact={isExtraCompact}>{headline}</H4>
+        <H4 compact={isCompact || isExtraCompact}>{headline}</H4>
         {children.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} />
         ))}
