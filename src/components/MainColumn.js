@@ -17,7 +17,7 @@ const MainColumn = ({ children, className }) => (
 
 MainColumn.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default MainColumn;
