@@ -40,6 +40,8 @@ const Document = ({
 }) => {
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
+  const breadcrumbsPageTitle = pageOptions?.['breadcrumbs-page-title'] === '';
+  const pageTitle = breadcrumbsPageTitle ? slugTitleMapping[slug] : null;
 
   return (
     <>
@@ -47,7 +49,12 @@ const Document = ({
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">
-            <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} siteTitle={title} slug={slug} />
+            <Breadcrumbs
+              pageTitle={pageTitle}
+              parentPaths={getNestedValue([slug], parentPaths)}
+              siteTitle={title}
+              slug={slug}
+            />
             {children}
             {showPrevNext && (
               <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
