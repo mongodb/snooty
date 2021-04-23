@@ -69,7 +69,16 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
-const IGNORED_NAMES = new Set(['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector', 'contents']);
+const IGNORED_NAMES = new Set([
+  'default-domain',
+  'raw',
+  'toctree',
+  'tabs-pillstrip',
+  'tabs-selector',
+  'contents',
+  'ia',
+  'entry',
+]);
 const IGNORED_TYPES = new Set(['comment', 'substitution_definition', 'inline_target', 'named_reference']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
 

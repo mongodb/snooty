@@ -155,7 +155,11 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
     [searchContainerRef]
   );
 
-  useEventListener('keydown', onKeyDown, { dependencies: [searchTextbox.current], element: searchTextbox.current });
+  useEventListener('keydown', onKeyDown, {
+    enabled: isFocused,
+    dependencies: [searchTextbox.current],
+    element: searchTextbox.current,
+  });
 
   const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
 
