@@ -58,7 +58,11 @@ const BreadcrumbContainer = ({ lastCrumb }) => {
   useEffect(() => {
     const fetchBreadcrumbData = async () => {
       let parentCrumbs = await fetchProjectParents(SNOOTY_STITCH_ID, database, project);
-      const breadcrumbs = [{ title: 'Docs Home', url: 'https://docs.mongodb.com/' }, ...parentCrumbs, lastCrumb];
+      const breadcrumbs = [
+        { title: 'Docs Home', url: project === 'landing' ? '/' : 'https://docs.mongodb.com/' },
+        ...parentCrumbs,
+        lastCrumb,
+      ];
       setBreadcrumbs(breadcrumbs);
     };
     fetchBreadcrumbData();
