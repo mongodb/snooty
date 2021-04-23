@@ -5,7 +5,9 @@ export const getStitchClient = (appId) =>
 
 const fetchData = async (appId, funcName, argsList = []) => {
   const client = getStitchClient(appId);
-  await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
+  if (!client.auth.isLoggedIn) {
+    await client.auth.loginWithCredential(new AnonymousCredential()).catch(console.error);
+  }
   return await client.callFunction(funcName, argsList);
 };
 

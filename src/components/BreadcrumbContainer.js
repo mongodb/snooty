@@ -29,18 +29,25 @@ const StyledNav = styled('nav')`
 `;
 
 const StyledArrow = styled('span')`
-  ${({ isLast }) => isLast && activeColor}
   cursor: default;
+
+  :last-of-type {
+    ${activeColor}
+  }
 `;
 
-const StyledLink = styled(Link, {
-  shouldForwardProp: (prop) => prop !== 'isLast',
-})`
-  ${({ isLast }) => isLast && activeColor}
+const StyledLink = styled(Link)`
+  :last-of-type {
+    ${activeColor}
+  }
 
-  :hover, :focus {
-    ${({ isLast }) => (isLast ? activeColor : 'color: inherit;')}
+  :hover,
+  :focus {
     text-decoration: none;
+
+    :not(:last-of-type) {
+      ${activeColor}
+    }
   }
 `;
 
@@ -66,12 +73,10 @@ const BreadcrumbContainer = ({ lastCrumb }) => {
       <p>
         {breadcrumbs.map(({ title, url }, index) => {
           const isFirst = index === 0;
-          const isLast = index === breadcrumbs.length - 1;
           return (
             <React.Fragment key={title}>
-              {!isFirst && <StyledArrow isLast={isLast}> &#8594; </StyledArrow>}
+              {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
               <StyledLink
-                isLast={isLast}
                 to={url}
                 onClick={() => {
                   reportAnalytics('BreadcrumbClick', {

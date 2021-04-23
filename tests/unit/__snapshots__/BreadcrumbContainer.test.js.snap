@@ -14,31 +14,27 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   margin-top: 0;
 }
 
+.emotion-0:last-of-type {
+  color: #21313C;
+}
+
 .emotion-0:hover,
 .emotion-0:focus {
-  color: inherit;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.emotion-0:hover:not(:last-of-type),
+.emotion-0:focus:not(:last-of-type) {
+  color: #21313C;
 }
 
 .emotion-4 {
   cursor: default;
 }
 
-.emotion-10 {
+.emotion-4:last-of-type {
   color: #21313C;
-  cursor: default;
-}
-
-.emotion-12 {
-  color: #21313C;
-}
-
-.emotion-12:hover,
-.emotion-12:focus {
-  color: #21313C;
-  -webkit-text-decoration: none;
-  text-decoration: none;
 }
 
 <BreadcrumbContainer
@@ -55,7 +51,6 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
     >
       <p>
         <StyledLink
-          isLast={false}
           onClick={[Function]}
           to="https://docs.mongodb.com/"
         >
@@ -73,9 +68,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
             </a>
           </Link>
         </StyledLink>
-        <StyledArrow
-          isLast={false}
-        >
+        <StyledArrow>
           <span
             className="emotion-4 emotion-5"
           >
@@ -83,7 +76,6 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
           </span>
         </StyledArrow>
         <StyledLink
-          isLast={false}
           onClick={[Function]}
           to="https://docs.mongodb.com/view-analyze"
         >
@@ -101,32 +93,29 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
             </a>
           </Link>
         </StyledLink>
-        <StyledArrow
-          isLast={true}
-        >
+        <StyledArrow>
           <span
-            className="emotion-10 emotion-5"
+            className="emotion-4 emotion-5"
           >
              → 
           </span>
         </StyledArrow>
         <StyledLink
-          isLast={true}
           onClick={[Function]}
           to="documents/view"
         >
           <Link
-            className="emotion-12 emotion-1"
+            className="emotion-0 emotion-1"
             onClick={[Function]}
             to="documents/view"
           >
             <mockConstructor
-              className="emotion-12 emotion-1"
+              className="emotion-0 emotion-1"
               onClick={[Function]}
               to="/documents/view/"
             >
               <a
-                className="emotion-12 emotion-1"
+                className="emotion-0 emotion-1"
                 href="/documents/view/"
                 onClick={[Function]}
               >
@@ -155,27 +144,27 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   margin-top: 0;
 }
 
+.emotion-0:last-of-type {
+  color: #21313C;
+}
+
 .emotion-0:hover,
 .emotion-0:focus {
-  color: inherit;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.emotion-0:hover:not(:last-of-type),
+.emotion-0:focus:not(:last-of-type) {
+  color: #21313C;
 }
 
 .emotion-4 {
-  color: #21313C;
   cursor: default;
 }
 
-.emotion-6 {
+.emotion-4:last-of-type {
   color: #21313C;
-}
-
-.emotion-6:hover,
-.emotion-6:focus {
-  color: #21313C;
-  -webkit-text-decoration: none;
-  text-decoration: none;
 }
 
 <BreadcrumbContainer
@@ -192,7 +181,6 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
     >
       <p>
         <StyledLink
-          isLast={false}
           onClick={[Function]}
           to="https://docs.mongodb.com/"
         >
@@ -210,9 +198,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
             </a>
           </Link>
         </StyledLink>
-        <StyledArrow
-          isLast={true}
-        >
+        <StyledArrow>
           <span
             className="emotion-4 emotion-5"
           >
@@ -220,22 +206,21 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
           </span>
         </StyledArrow>
         <StyledLink
-          isLast={true}
           onClick={[Function]}
           to="view-analyze"
         >
           <Link
-            className="emotion-6 emotion-1"
+            className="emotion-0 emotion-1"
             onClick={[Function]}
             to="view-analyze"
           >
             <mockConstructor
-              className="emotion-6 emotion-1"
+              className="emotion-0 emotion-1"
               onClick={[Function]}
               to="/view-analyze/"
             >
               <a
-                className="emotion-6 emotion-1"
+                className="emotion-0 emotion-1"
                 href="/view-analyze/"
                 onClick={[Function]}
               >
