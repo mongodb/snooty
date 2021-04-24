@@ -27,9 +27,14 @@ const hiddenTabsStyling = css`
 `;
 
 const landingTabsStyling = css`
-  ${'' /* Insert space between the tab buttons and the tab panels */}
   & > div:first-child {
+    margin-top: ${theme.size.large};
     margin-bottom: ${theme.size.xlarge};
+
+    button {
+      display: block;
+      flex-grow: 1;
+    }
 
     @media ${theme.screenSize.upToSmall} {
       margin-bottom: 40px;
