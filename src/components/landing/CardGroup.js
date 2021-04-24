@@ -1,9 +1,27 @@
 import React from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 
 const getColumnValue = (props) => props.columns || React.Children.count(props.children);
+
+const carouselStyling = ({ children, theme }) => css`
+  grid-gap: calc(${theme.size.medium} * 0.75);
+  grid-template-columns:
+    calc(${theme.size.medium} / 2) repeat(${React.Children.count(children)}, calc(75% - calc(2 * ${theme.size.medium})))
+    calc(${theme.size.medium} / 2);
+  grid-template-rows: minmax(150px, 1fr);
+  margin: ${theme.size.medium} 0;
+  overflow-x: scroll;
+  padding-bottom: calc(${theme.size.medium} / 2);
+  scroll-snap-type: x proximity;
+
+  &:before,
+  &:after {
+    content: '';
+  }
+`;
 
 const StyledGrid = styled('div')`
   align-items: stretch;
@@ -19,37 +37,28 @@ const StyledGrid = styled('div')`
   }
 
   @media ${({ theme }) => theme.screenSize.upToMedium} {
-    grid-gap: ${({ theme }) => `calc(${theme.size.medium} * 0.75)`};
-    grid-template-columns: ${({ children, theme }) =>
-      `calc(${theme.size.medium} / 2) repeat(${React.Children.count(children)}, calc(75% - calc( 2 * ${
-        theme.size.medium
-      }))) calc(${theme.size.medium} / 2)`};
-    grid-template-rows: minmax(150px, 1fr);
-    margin: ${({ theme }) => theme.size.medium} 0;
-    overflow-x: scroll;
-    padding-bottom: ${({ theme }) => `calc(${theme.size.medium} / 2)`};
-    scroll-snap-type: x proximity;
-
-    &:before,
-    &:after {
-      content: '';
-    }
+    ${({ isCarousel, ...props }) => (isCarousel ? carouselStyling(props) : 'grid-template-columns: repeat(1, 1fr);')}
   }
 `;
 
 const CardGroup = ({
   nodeData: {
     children,
-    options: { columns },
+    options: { columns, style },
   },
   ...rest
-}) => (
-  <StyledGrid columns={columns} noMargin={true}>
-    {children.map((child) => (
-      <ComponentFactory nodeData={child} {...rest} />
-    ))}
-  </StyledGrid>
-);
+}) => {
+  const isCompact = style === 'compact';
+  const isExtraCompact = style === 'extra-compact';
+  const isCarousel = !(isCompact || isExtraCompact);
+  return (
+    <StyledGrid columns={columns} noMargin={true} isCarousel={isCarousel}>
+      {children.map((child, i) => (
+        <ComponentFactory {...rest} key={i} nodeData={child} isCompact={isCompact} isExtraCompact={isExtraCompact} />
+      ))}
+    </StyledGrid>
+  );
+};
 
 CardGroup.propTypes = {
   nodeData: PropTypes.shape({

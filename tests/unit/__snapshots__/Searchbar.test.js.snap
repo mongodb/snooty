@@ -32,6 +32,7 @@ exports[`Searchbar renders correctly without browser 2`] = `
     }
   >
     <ExpandedSearchbar
+      isFocused={false}
       onChange={[Function]}
       onMobileClose={[Function]}
       value=""
