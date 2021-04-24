@@ -21,13 +21,13 @@ const getPosition = (element) => {
 };
 
 const hiddenTabsStyling = css`
-  & > div:first-child {
+  & > div:first-of-type {
     display: none;
   }
 `;
 
 const landingTabsStyling = css`
-  & > div:first-child {
+  & > div:first-of-type {
     margin-top: ${theme.size.large};
     margin-bottom: ${theme.size.xlarge};
 
