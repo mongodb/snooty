@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
 import BreadcrumbSchema from './BreadcrumbSchema';
+import { theme } from '../theme/docsTheme';
 
 const BreadcrumbContainer = Loadable(() => import('./BreadcrumbContainer'));
 
-// Placeholder space for breadcrumbs before they load; add extra space due to negative
-// margin-top of page's h1
-const Wrapper = styled('div')`
-  min-height: 48px;
+const Wrapper = styled('nav')`
+  font-size: ${theme.fontSize.small};
+
+  * {
+    color: ${uiColors.gray.dark1};
+  }
+
+  & > p {
+    margin-top: 0;
+    min-height: ${theme.size.medium};
+  }
 `;
 
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
@@ -27,7 +36,9 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle,
     <>
       <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
       <Wrapper>
-        <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+        <p>
+          <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+        </p>
       </Wrapper>
     </>
   );

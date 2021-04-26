@@ -1,22 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
-.emotion-20 {
-  font-size: 14px;
-}
-
-.emotion-20 * {
-  color: #5D6C74;
-}
-
-.emotion-20 > p {
-  margin-top: 0;
-}
-
-.emotion-18 {
-  min-height: 24px;
-}
-
 .emotion-0:last-of-type {
   color: #21313C;
 }
@@ -54,112 +38,84 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
     }
   }
 >
-  <StyledNav>
-    <nav
-      className="emotion-20 emotion-21"
+  <StyledLink
+    onClick={[Function]}
+    to="https://docs.mongodb.com/"
+  >
+    <Link
+      className="emotion-0 emotion-1"
+      onClick={[Function]}
+      to="https://docs.mongodb.com/"
     >
-      <P>
-        <p
-          className="emotion-18 emotion-19"
+      <a
+        className="emotion-0 emotion-1"
+        href="https://docs.mongodb.com/"
+        onClick={[Function]}
+      >
+        Docs Home
+      </a>
+    </Link>
+  </StyledLink>
+  <StyledArrow>
+    <span
+      className="emotion-4 emotion-5"
+    >
+       → 
+    </span>
+  </StyledArrow>
+  <StyledLink
+    onClick={[Function]}
+    to="https://docs.mongodb.com/view-analyze"
+  >
+    <Link
+      className="emotion-0 emotion-1"
+      onClick={[Function]}
+      to="https://docs.mongodb.com/view-analyze"
+    >
+      <a
+        className="emotion-0 emotion-1"
+        href="https://docs.mongodb.com/view-analyze"
+        onClick={[Function]}
+      >
+        View & Analyze
+      </a>
+    </Link>
+  </StyledLink>
+  <StyledArrow>
+    <span
+      className="emotion-4 emotion-5"
+    >
+       → 
+    </span>
+  </StyledArrow>
+  <StyledLink
+    onClick={[Function]}
+    to="documents/view"
+  >
+    <Link
+      className="emotion-0 emotion-1"
+      onClick={[Function]}
+      to="documents/view"
+    >
+      <mockConstructor
+        className="emotion-0 emotion-1"
+        onClick={[Function]}
+        to="/documents/view/"
+      >
+        <a
+          className="emotion-0 emotion-1"
+          href="/documents/view/"
+          onClick={[Function]}
         >
-          <StyledLink
-            onClick={[Function]}
-            to="https://docs.mongodb.com/"
-          >
-            <Link
-              className="emotion-0 emotion-1"
-              onClick={[Function]}
-              to="https://docs.mongodb.com/"
-            >
-              <a
-                className="emotion-0 emotion-1"
-                href="https://docs.mongodb.com/"
-                onClick={[Function]}
-              >
-                Docs Home
-              </a>
-            </Link>
-          </StyledLink>
-          <StyledArrow>
-            <span
-              className="emotion-4 emotion-5"
-            >
-               → 
-            </span>
-          </StyledArrow>
-          <StyledLink
-            onClick={[Function]}
-            to="https://docs.mongodb.com/view-analyze"
-          >
-            <Link
-              className="emotion-0 emotion-1"
-              onClick={[Function]}
-              to="https://docs.mongodb.com/view-analyze"
-            >
-              <a
-                className="emotion-0 emotion-1"
-                href="https://docs.mongodb.com/view-analyze"
-                onClick={[Function]}
-              >
-                View & Analyze
-              </a>
-            </Link>
-          </StyledLink>
-          <StyledArrow>
-            <span
-              className="emotion-4 emotion-5"
-            >
-               → 
-            </span>
-          </StyledArrow>
-          <StyledLink
-            onClick={[Function]}
-            to="documents/view"
-          >
-            <Link
-              className="emotion-0 emotion-1"
-              onClick={[Function]}
-              to="documents/view"
-            >
-              <mockConstructor
-                className="emotion-0 emotion-1"
-                onClick={[Function]}
-                to="/documents/view/"
-              >
-                <a
-                  className="emotion-0 emotion-1"
-                  href="/documents/view/"
-                  onClick={[Function]}
-                >
-                  MongoDB Compass
-                </a>
-              </mockConstructor>
-            </Link>
-          </StyledLink>
-        </p>
-      </P>
-    </nav>
-  </StyledNav>
+          MongoDB Compass
+        </a>
+      </mockConstructor>
+    </Link>
+  </StyledLink>
 </BreadcrumbContainer>
 `;
 
 exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
-.emotion-14 {
-  font-size: 14px;
-}
-
-.emotion-14 * {
-  color: #5D6C74;
-}
-
-.emotion-14 > p {
-  margin-top: 0;
-}
-
-.emotion-12 {
-  min-height: 24px;
-}
-
 .emotion-0:last-of-type {
   color: #21313C;
 }
@@ -197,66 +153,54 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
     }
   }
 >
-  <StyledNav>
-    <nav
-      className="emotion-14 emotion-15"
+  <StyledLink
+    onClick={[Function]}
+    to="https://docs.mongodb.com/"
+  >
+    <Link
+      className="emotion-0 emotion-1"
+      onClick={[Function]}
+      to="https://docs.mongodb.com/"
     >
-      <P>
-        <p
-          className="emotion-12 emotion-13"
+      <a
+        className="emotion-0 emotion-1"
+        href="https://docs.mongodb.com/"
+        onClick={[Function]}
+      >
+        Docs Home
+      </a>
+    </Link>
+  </StyledLink>
+  <StyledArrow>
+    <span
+      className="emotion-4 emotion-5"
+    >
+       → 
+    </span>
+  </StyledArrow>
+  <StyledLink
+    onClick={[Function]}
+    to="view-analyze"
+  >
+    <Link
+      className="emotion-0 emotion-1"
+      onClick={[Function]}
+      to="view-analyze"
+    >
+      <mockConstructor
+        className="emotion-0 emotion-1"
+        onClick={[Function]}
+        to="/view-analyze/"
+      >
+        <a
+          className="emotion-0 emotion-1"
+          href="/view-analyze/"
+          onClick={[Function]}
         >
-          <StyledLink
-            onClick={[Function]}
-            to="https://docs.mongodb.com/"
-          >
-            <Link
-              className="emotion-0 emotion-1"
-              onClick={[Function]}
-              to="https://docs.mongodb.com/"
-            >
-              <a
-                className="emotion-0 emotion-1"
-                href="https://docs.mongodb.com/"
-                onClick={[Function]}
-              >
-                Docs Home
-              </a>
-            </Link>
-          </StyledLink>
-          <StyledArrow>
-            <span
-              className="emotion-4 emotion-5"
-            >
-               → 
-            </span>
-          </StyledArrow>
-          <StyledLink
-            onClick={[Function]}
-            to="view-analyze"
-          >
-            <Link
-              className="emotion-0 emotion-1"
-              onClick={[Function]}
-              to="view-analyze"
-            >
-              <mockConstructor
-                className="emotion-0 emotion-1"
-                onClick={[Function]}
-                to="/view-analyze/"
-              >
-                <a
-                  className="emotion-0 emotion-1"
-                  href="/view-analyze/"
-                  onClick={[Function]}
-                >
-                  View & Analyze Data
-                </a>
-              </mockConstructor>
-            </Link>
-          </StyledLink>
-        </p>
-      </P>
-    </nav>
-  </StyledNav>
+          View & Analyze Data
+        </a>
+      </mockConstructor>
+    </Link>
+  </StyledLink>
 </BreadcrumbContainer>
 `;

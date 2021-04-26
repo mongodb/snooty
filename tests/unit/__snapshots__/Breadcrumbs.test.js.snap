@@ -8,20 +8,22 @@ exports[`renders correctly with pageTitle 1`] = `
     slug="view-analyze"
   />
   <Wrapper>
-    <ForwardRef
-      homeCrumb={
-        Object {
-          "title": "Docs Home",
-          "url": "https://docs.mongodb.com/",
+    <p>
+      <ForwardRef
+        homeCrumb={
+          Object {
+            "title": "Docs Home",
+            "url": "https://docs.mongodb.com/",
+          }
         }
-      }
-      lastCrumb={
-        Object {
-          "title": "View & Analyze Data",
-          "url": "view-analyze",
+        lastCrumb={
+          Object {
+            "title": "View & Analyze Data",
+            "url": "view-analyze",
+          }
         }
-      }
-    />
+      />
+    </p>
   </Wrapper>
 </Fragment>
 `;
@@ -67,20 +69,22 @@ exports[`renders correctly with siteTitle 1`] = `
     slug="documents/view"
   />
   <Wrapper>
-    <ForwardRef
-      homeCrumb={
-        Object {
-          "title": "Docs Home",
-          "url": "https://docs.mongodb.com/",
+    <p>
+      <ForwardRef
+        homeCrumb={
+          Object {
+            "title": "Docs Home",
+            "url": "https://docs.mongodb.com/",
+          }
         }
-      }
-      lastCrumb={
-        Object {
-          "title": "MongoDB Compass",
-          "url": "/",
+        lastCrumb={
+          Object {
+            "title": "MongoDB Compass",
+            "url": "/",
+          }
         }
-      }
-    />
+      />
+    </p>
   </Wrapper>
 </Fragment>
 `;

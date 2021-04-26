@@ -6,29 +6,12 @@ import { css } from '@emotion/core';
 import Link from './Link';
 import { SNOOTY_STITCH_ID } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 import { reportAnalytics } from '../utils/report-analytics';
 import { fetchProjectParents } from '../utils/stitch';
 
 const activeColor = css`
   color: ${uiColors.gray.dark3};
-`;
-
-const StyledNav = styled('nav')`
-  font-size: ${theme.fontSize.small};
-
-  * {
-    color: ${uiColors.gray.dark1};
-  }
-
-  & > p {
-    margin-top: 0;
-  }
-`;
-
-const P = styled('p')`
-  min-height: ${theme.size.medium};
 `;
 
 const StyledArrow = styled('span')`
@@ -68,29 +51,27 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
   }, [database, homeCrumb, lastCrumb, project]);
 
   return (
-    <StyledNav>
-      <P>
-        {breadcrumbs.map(({ title, url }, index) => {
-          const isFirst = index === 0;
-          return (
-            <React.Fragment key={title}>
-              {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
-              <StyledLink
-                to={url}
-                onClick={() => {
-                  reportAnalytics('BreadcrumbClick', {
-                    parentPaths: breadcrumbs,
-                    breadcrumbClicked: url,
-                  });
-                }}
-              >
-                {formatText(title)}
-              </StyledLink>
-            </React.Fragment>
-          );
-        })}
-      </P>
-    </StyledNav>
+    <>
+      {breadcrumbs.map(({ title, url }, index) => {
+        const isFirst = index === 0;
+        return (
+          <React.Fragment key={title}>
+            {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
+            <StyledLink
+              to={url}
+              onClick={() => {
+                reportAnalytics('BreadcrumbClick', {
+                  parentPaths: breadcrumbs,
+                  breadcrumbClicked: url,
+                });
+              }}
+            >
+              {formatText(title)}
+            </StyledLink>
+          </React.Fragment>
+        );
+      })}
+    </>
   );
 };
 
