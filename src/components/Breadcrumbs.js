@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BreadcrumbSchema from './BreadcrumbSchema';
 import Loadable from '@loadable/component';
+import BreadcrumbSchema from './BreadcrumbSchema';
 
 const BreadcrumbContainer = Loadable(() => import('./BreadcrumbContainer'));
 
-const Breadcrumbs = ({ pageTitle = null, parentPaths, siteTitle, slug }) => {
+const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
+  const homeCrumb = {
+    title: 'Docs Home',
+    url: homeUrl || 'https://docs.mongodb.com/',
+  };
   // If a pageTitle prop is passed, use that as the last breadcrumb instead
   const lastCrumb = {
     title: pageTitle || siteTitle,
@@ -15,12 +19,13 @@ const Breadcrumbs = ({ pageTitle = null, parentPaths, siteTitle, slug }) => {
   return (
     <>
       <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-      <BreadcrumbContainer lastCrumb={lastCrumb} />
+      <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
     </>
   );
 };
 
 Breadcrumbs.propTypes = {
+  homeUrl: PropTypes.string,
   pageTitle: PropTypes.string,
   parentPaths: PropTypes.arrayOf(
     PropTypes.shape({

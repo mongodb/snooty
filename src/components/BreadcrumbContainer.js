@@ -51,22 +51,18 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const BreadcrumbContainer = ({ lastCrumb }) => {
+const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
   const { database, project } = useSiteMetadata();
   const [breadcrumbs, setBreadcrumbs] = useState([]);
 
   useEffect(() => {
     const fetchBreadcrumbData = async () => {
       let parentCrumbs = await fetchProjectParents(SNOOTY_STITCH_ID, database, project);
-      const breadcrumbs = [
-        { title: 'Docs Home', url: project === 'landing' ? '/' : 'https://docs.mongodb.com/' },
-        ...parentCrumbs,
-        lastCrumb,
-      ];
+      const breadcrumbs = [homeCrumb, ...parentCrumbs, lastCrumb];
       setBreadcrumbs(breadcrumbs);
     };
     fetchBreadcrumbData();
-  }, [database, lastCrumb, project]);
+  }, [database, homeCrumb, lastCrumb, project]);
 
   if (breadcrumbs.length === 0) {
     return null;
@@ -99,11 +95,14 @@ const BreadcrumbContainer = ({ lastCrumb }) => {
   );
 };
 
+const crumbObjectShape = {
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+};
+
 BreadcrumbContainer.propTypes = {
-  lastCrumb: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
+  homeCrumb: PropTypes.shape(crumbObjectShape).isRequired,
+  lastCrumb: PropTypes.shape(crumbObjectShape).isRequired,
 };
 
 export default BreadcrumbContainer;

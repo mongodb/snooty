@@ -8,6 +8,12 @@ exports[`renders correctly with pageTitle 1`] = `
     slug="view-analyze"
   />
   <ForwardRef
+    homeCrumb={
+      Object {
+        "title": "Docs Home",
+        "url": "https://docs.mongodb.com/",
+      }
+    }
     lastCrumb={
       Object {
         "title": "View & Analyze Data",
@@ -59,6 +65,12 @@ exports[`renders correctly with siteTitle 1`] = `
     slug="documents/view"
   />
   <ForwardRef
+    homeCrumb={
+      Object {
+        "title": "Docs Home",
+        "url": "https://docs.mongodb.com/",
+      }
+    }
     lastCrumb={
       Object {
         "title": "MongoDB Compass",

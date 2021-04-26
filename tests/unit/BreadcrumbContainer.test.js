@@ -14,6 +14,11 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
 describe('BreadcrumbContainer', () => {
   jest.useFakeTimers();
 
+  const mockHomeCrumb = {
+    title: 'Docs Home',
+    url: 'https://docs.mongodb.com/',
+  };
+
   it('renders correctly with project parent', async () => {
     const mockLastCrumb = {
       title: 'MongoDB Compass',
@@ -26,7 +31,7 @@ describe('BreadcrumbContainer', () => {
       },
     ]);
 
-    const tree = mount(<BreadcrumbContainer lastCrumb={mockLastCrumb} />);
+    const tree = mount(<BreadcrumbContainer homeCrumb={mockHomeCrumb} lastCrumb={mockLastCrumb} />);
     await tick({ wrapper: tree });
     expect(tree).toMatchSnapshot();
   });
@@ -38,7 +43,7 @@ describe('BreadcrumbContainer', () => {
     };
     jest.spyOn(StitchUtil, 'fetchProjectParents').mockImplementation(() => []);
 
-    const tree = mount(<BreadcrumbContainer lastCrumb={mockLastCrumb} />);
+    const tree = mount(<BreadcrumbContainer homeCrumb={mockHomeCrumb} lastCrumb={mockLastCrumb} />);
     await tick({ wrapper: tree });
     expect(tree).toMatchSnapshot();
   });

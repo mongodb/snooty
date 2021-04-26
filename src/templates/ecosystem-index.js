@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
+import Breadcrumbs from '../components/Breadcrumbs';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 import MainColumn from '../components/MainColumn';
 import Sidenav from '../components/Sidenav';
 import { TEMPLATE_CLASSNAME } from '../constants';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
-import Breadcrumbs from '../components/Breadcrumbs';
 
 const EcosystemIndex = ({
   className,

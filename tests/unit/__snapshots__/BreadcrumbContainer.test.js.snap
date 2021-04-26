@@ -38,6 +38,12 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 }
 
 <BreadcrumbContainer
+  homeCrumb={
+    Object {
+      "title": "Docs Home",
+      "url": "https://docs.mongodb.com/",
+    }
+  }
   lastCrumb={
     Object {
       "title": "MongoDB Compass",
@@ -168,6 +174,12 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 }
 
 <BreadcrumbContainer
+  homeCrumb={
+    Object {
+      "title": "Docs Home",
+      "url": "https://docs.mongodb.com/",
+    }
+  }
   lastCrumb={
     Object {
       "title": "View & Analyze Data",
