@@ -9,6 +9,7 @@ import RightColumn from '../components/RightColumn';
 import Sidenav from '../components/Sidenav';
 import TabSelectors from '../components/TabSelectors';
 import { TEMPLATE_CLASSNAME } from '../constants';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const DocumentContainer = styled('div')`
@@ -35,11 +36,15 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    metadata: { parentPaths, slugToTitle: slugTitleMapping, toctreeOrder },
+    metadata: { parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
   },
 }) => {
+  const { project } = useSiteMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
+  const isLanding = project === 'landing';
+  const breadcrumbsPageTitle = isLanding ? slugTitleMapping[slug] : null;
+  const breadcrumbsHomeUrl = isLanding ? '/' : null;
 
   return (
     <>
@@ -47,7 +52,13 @@ const Document = ({
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">
-            <Breadcrumbs parentPaths={getNestedValue([slug], parentPaths)} slugTitleMapping={slugTitleMapping} />
+            <Breadcrumbs
+              homeUrl={breadcrumbsHomeUrl}
+              pageTitle={breadcrumbsPageTitle}
+              parentPaths={getNestedValue([slug], parentPaths)}
+              siteTitle={title}
+              slug={slug}
+            />
             {children}
             {showPrevNext && (
               <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
