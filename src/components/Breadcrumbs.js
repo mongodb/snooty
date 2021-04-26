@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import Loadable from '@loadable/component';
 import BreadcrumbSchema from './BreadcrumbSchema';
 
 const BreadcrumbContainer = Loadable(() => import('./BreadcrumbContainer'));
+
+// Placeholder space for breadcrumbs before they load; add extra space due to negative
+// margin-top of page's h1
+const Wrapper = styled('div')`
+  min-height: 48px;
+`;
 
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
   const homeCrumb = {
@@ -19,7 +26,9 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle,
   return (
     <>
       <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-      <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+      <Wrapper>
+        <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+      </Wrapper>
     </>
   );
 };

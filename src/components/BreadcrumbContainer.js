@@ -17,7 +17,6 @@ const activeColor = css`
 
 const StyledNav = styled('nav')`
   font-size: ${theme.fontSize.small};
-  min-height: ${theme.size.medium};
 
   * {
     color: ${uiColors.gray.dark1};
@@ -26,6 +25,10 @@ const StyledNav = styled('nav')`
   & > p {
     margin-top: 0;
   }
+`;
+
+const P = styled('p')`
+  min-height: ${theme.size.medium};
 `;
 
 const StyledArrow = styled('span')`
@@ -64,13 +67,9 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
     fetchBreadcrumbData();
   }, [database, homeCrumb, lastCrumb, project]);
 
-  if (breadcrumbs.length === 0) {
-    return null;
-  }
-
   return (
     <StyledNav>
-      <p>
+      <P>
         {breadcrumbs.map(({ title, url }, index) => {
           const isFirst = index === 0;
           return (
@@ -90,7 +89,7 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
             </React.Fragment>
           );
         })}
-      </p>
+      </P>
     </StyledNav>
   );
 };
