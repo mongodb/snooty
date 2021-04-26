@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { css } from '@emotion/core';
 import Link from './Link';
 import VersionDropdown from './VersionDropdown';
 import TableOfContents from './TableOfContents';
@@ -20,15 +19,7 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
     <aside className={`sidebar ${style.sidebar}`} id="sidebar">
       <div className={`sphinxsidebar ${style.sphinxsidebar}`} id="sphinxsidebar">
         <div id="sphinxsidebarwrapper" className="sphinxsidebarwrapper">
-          <div
-            ref={fixedHeading}
-            css={css`
-              /* Ensure that version dropdown appears above TOC */
-              /* TODO: May be deletable when LG SideNav is in use */
-              position: relative;
-              z-index: 10;
-            `}
-          >
+          <div ref={fixedHeading}>
             <span className="closeNav" id="closeNav" onClick={toggleLeftColumn} style={{ cursor: 'pointer' }}>
               Close ×
             </span>

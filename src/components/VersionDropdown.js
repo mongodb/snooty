@@ -21,15 +21,13 @@ const StyledSelect = styled(Select)`
   span {
     font-size: 16px;
   }
-
-  /* Remove "null" selection from dropdown */
-  ul > li:first-of-type {
-    display: none;
-  }
 `;
 
 const OptionLink = styled('a')`
-  &:hover {
+  color: unset;
+
+  :hover {
+    color: unset;
     text-decoration: none;
   }
 `;
@@ -92,11 +90,11 @@ const VersionDropdown = ({
 
   return (
     <StyledSelect
+      allowDeselect={false}
       aria-labelledby="View a different version of documentation."
       onChange={navigate}
       placeholder={null}
       size={Size.Large}
-      usePortal={false}
       value={parserBranch}
     >
       {Object.entries(gitNamedMapping).map(([branch, name]) => {
