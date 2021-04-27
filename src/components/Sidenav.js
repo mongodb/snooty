@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { SideNav as LeafygreenSideNav } from '@leafygreen-ui/side-nav';
+import { SideNav as LeafygreenSideNav, SideNavGroup } from '@leafygreen-ui/side-nav';
 import ProductsList from './ProductsList';
+import SidebarBack from './SidebarBack';
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   grid-area: sidebar;
@@ -14,6 +15,9 @@ const Sidenav = ({ page }) => {
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
+      <SideNavGroup>
+        <SidebarBack />
+      </SideNavGroup>
       {showAllProducts && <ProductsList />}
     </StyledLeafygreenSideNav>
   );

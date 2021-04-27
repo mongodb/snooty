@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import Loadable from '@loadable/component';
 import BreadcrumbSchema from './BreadcrumbSchema';
 import { theme } from '../theme/docsTheme';
-
-const BreadcrumbContainer = Loadable(() => import('./BreadcrumbContainer'));
+import BreadcrumbContainer from './BreadcrumbContainer';
 
 const Wrapper = styled('nav')`
   font-size: ${theme.fontSize.small};

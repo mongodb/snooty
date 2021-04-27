@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { css } from '@emotion/core';
 import Link from './Link';
-import { SNOOTY_STITCH_ID } from '../build-constants';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { NavigationContext } from './navigation-context';
 import { formatText } from '../utils/format-text';
 import { reportAnalytics } from '../utils/report-analytics';
-import { fetchProjectParents } from '../utils/stitch';
 
 const activeColor = css`
   color: ${uiColors.gray.dark3};
@@ -38,17 +36,8 @@ const StyledLink = styled(Link)`
 `;
 
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
-  const { database, project } = useSiteMetadata();
-  const [breadcrumbs, setBreadcrumbs] = useState([]);
-
-  useEffect(() => {
-    const fetchBreadcrumbData = async () => {
-      let parentCrumbs = await fetchProjectParents(SNOOTY_STITCH_ID, database, project);
-      const breadcrumbs = [homeCrumb, ...parentCrumbs, lastCrumb];
-      setBreadcrumbs(breadcrumbs);
-    };
-    fetchBreadcrumbData();
-  }, [database, homeCrumb, lastCrumb, project]);
+  const { parents } = useContext(NavigationContext);
+  const breadcrumbs = React.useMemo(() => [homeCrumb, ...parents, lastCrumb], [homeCrumb, parents, lastCrumb]);
 
   return (
     <>

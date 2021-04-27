@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { HeaderContextProvider } from '../components/header-context';
-import { ContentsProvider } from '../components/contents-context';
 import Header from '../components/Header';
 import SiteMetadata from '../components/site-metadata';
-import { SidebarContextProvider } from '../components/sidebar-context';
-import { TabProvider } from '../components/tab-context';
+import RootProvider from '../components/RootProvider';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
@@ -79,27 +76,26 @@ const DefaultLayout = (props) => {
     <>
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <TabProvider selectors={page?.options?.selectors}>
-        <ContentsProvider headingNodes={page?.options?.headings}>
-          <HeaderContextProvider>
-            <GlobalGrid>
-              <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>
-                <Header />
-                <Template
-                  css={css`
-                    grid-area: contents;
-                    margin: 0px;
-                    overflow-y: auto;
-                  `}
-                  {...props}
-                >
-                  {template === 'landing' ? [children] : children}
-                </Template>
-              </SidebarContextProvider>
-            </GlobalGrid>
-          </HeaderContextProvider>
-        </ContentsProvider>
-      </TabProvider>
+      <RootProvider
+        headingNodes={page?.options?.headings}
+        isSidebarEnabled={isSidebarEnabled}
+        selectors={page?.options?.selectors}
+        siteTitle={title}
+      >
+        <GlobalGrid>
+          <Header />
+          <Template
+            css={css`
+              grid-area: contents;
+              margin: 0px;
+              overflow-y: auto;
+            `}
+            {...props}
+          >
+            {template === 'landing' ? [children] : children}
+          </Template>
+        </GlobalGrid>
+      </RootProvider>
     </>
   );
 };
