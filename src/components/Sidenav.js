@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
-import { SideNav as LeafygreenSideNav } from '@leafygreen-ui/side-nav';
-import Link from './Link';
+import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import ProductsList from './ProductsList';
-import { theme } from '../theme/docsTheme';
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   grid-area: sidebar;
@@ -19,33 +17,17 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   }
 `;
 
-const AdditionalLink = styled(Link)`
-  align-items: center;
-  display: flex;
-  letter-spacing: 0;
-  margin-bottom: ${theme.size.default};
-  padding: 0 ${theme.size.medium};
-`;
-
-const AdditionalLinksContainer = styled('div')`
-  margin-top: ${theme.size.large};
-`;
-
-const LinkTitle = styled('span')`
-  color: ${uiColors.gray.dark3};
-  line-height: 20px;
-  padding-left: ${theme.size.default};
-`;
-
 // Allows AdditionalLinks to always be at the bottom of the SideNav
 const Spaceholder = styled('div')`
   flex-grow: 1;
 `;
 
-const StyledIcon = styled(Icon)`
-  color: ${uiColors.black};
-  height: ${theme.size.default};
-  width: ${theme.size.default};
+const StyledSideNavItem = styled(SideNavItem)`
+  letter-spacing: 0;
+
+  :hover {
+    color: ${uiColors.gray.dark2};
+  }
 `;
 
 const additionalLinks = [
@@ -61,16 +43,11 @@ const Sidenav = ({ page }) => {
     <StyledLeafygreenSideNav aria-label="Side navigation">
       {showAllProducts && <ProductsList />}
       <Spaceholder />
-      <AdditionalLinksContainer>
-        {additionalLinks.map(({ glyph, title, url }) => {
-          return (
-            <AdditionalLink to={url} key={title}>
-              <StyledIcon glyph={glyph} />
-              <LinkTitle>{title}</LinkTitle>
-            </AdditionalLink>
-          );
-        })}
-      </AdditionalLinksContainer>
+      {additionalLinks.map(({ glyph, title, url }) => (
+        <StyledSideNavItem glyph={<Icon glyph={glyph} />} href={url}>
+          {title}
+        </StyledSideNavItem>
+      ))}
     </StyledLeafygreenSideNav>
   );
 };
