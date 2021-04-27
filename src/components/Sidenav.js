@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
-import { uiColors } from '@leafygreen-ui/palette';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import ProductsList from './ProductsList';
 
@@ -25,8 +24,9 @@ const Spaceholder = styled('div')`
 const StyledSideNavItem = styled(SideNavItem)`
   letter-spacing: 0;
 
+  // TODO: Remove when mongodb-docs.css is removed
   :hover {
-    color: ${uiColors.gray.dark2};
+    color: unset;
   }
 `;
 
