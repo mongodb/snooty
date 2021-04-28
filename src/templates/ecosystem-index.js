@@ -17,7 +17,7 @@ const EcosystemIndex = ({
   },
 }) => (
   <>
-    <Sidenav page={page} />
+    <Sidenav page={page} slug={slug} />
     <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
       <MainColumn className={EcosystemHomepageStyles.fullWidth}>
         <div

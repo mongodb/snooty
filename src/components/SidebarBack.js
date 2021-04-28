@@ -2,10 +2,15 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import Icon from '@leafygreen-ui/icon';
-import ComponentFactory from './ComponentFactory';
+import Link from './Link';
 import { NavigationContext } from './navigation-context';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { formatText } from '../utils/format-text';
 
-const SidebarBack = ({ Wrapper }) => {
+const SidebarBack = ({ slug, Wrapper }) => {
+  const { parents } = useContext(NavigationContext);
+  const { project } = useSiteMetadata();
+
   const Placeholder = () => (
     <Wrapper
       as="div"
@@ -18,21 +23,25 @@ const SidebarBack = ({ Wrapper }) => {
     />
   );
 
-  const { parents } = useContext(NavigationContext);
+  let title = null,
+    url = null;
 
-  if (!parents.length) {
+  if (project === 'landing' && slug !== '/') {
+    title = 'home';
+    url = '/';
+  } else if (parents.length) {
+    [{ title, url }] = parents.slice(-1);
+  } else {
     return <Placeholder />;
   }
 
-  const [{ title, url }] = parents.slice(-1);
   if (!title || !title.length || !url) {
     return <Placeholder />;
   }
 
-  const titleNodes = title.map((child, i) => <ComponentFactory key={i} nodeData={child} />);
   return (
-    <Wrapper as="a" href={url} glyph={<Icon glyph="ArrowLeft" size="small" />}>
-      Back to {titleNodes}
+    <Wrapper as={Link} to={url} glyph={<Icon glyph="ArrowLeft" size="small" />}>
+      Back to {formatText(title)}
     </Wrapper>
   );
 };

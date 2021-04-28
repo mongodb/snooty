@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
-import { SideNav as LeafygreenSideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
+import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
 
@@ -37,14 +37,12 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page }) => {
+const Sidenav = ({ page, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
-      <SideNavGroup>
-        <SidebarBack Wrapper={StyledSideNavItem} />
-      </SideNavGroup>
+      <SidebarBack slug={slug} Wrapper={StyledSideNavItem} />
       {showAllProducts && <ProductsList />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
@@ -60,6 +58,7 @@ Sidenav.propTypes = {
   page: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default Sidenav;

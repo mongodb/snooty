@@ -29,7 +29,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ children, className, pageContext: { page } }) => {
+const Landing = ({ children, className, pageContext: { slug, page } }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -54,7 +54,7 @@ const Landing = ({ children, className, pageContext: { page } }) => {
           })}
         </script>
       </Helmet>
-      <Sidenav page={page} />
+      <Sidenav page={page} slug={slug} />
       <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <Wrapper>{children}</Wrapper>
       </div>

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { HeaderContext } from './header-context';
 import { SNOOTY_STITCH_ID } from '../build-constants';
 import { theme } from '../theme/docsTheme';
+import { isBrowser } from '../utils/is-browser';
 import { normalizePath } from '../utils/normalize-path';
 import { fetchBanner } from '../utils/realm';
 
@@ -42,7 +43,9 @@ const Banner = () => {
         console.error(err);
       }
     };
-    fetchBannerContent();
+    if (isBrowser) {
+      fetchBannerContent();
+    }
   }, [setBannerContent]);
 
   if (bannerContent == null) {
