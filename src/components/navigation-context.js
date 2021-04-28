@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { isBrowser } from '../utils/is-browser';
 import { fetchProjectParents } from '../utils/realm';
 
 const NavigationContext = React.createContext(null);
@@ -17,7 +18,9 @@ const NavigationProvider = ({ children }) => {
         console.error(err);
       }
     };
-    fetchBreadcrumbData();
+    if (isBrowser) {
+      fetchBreadcrumbData();
+    }
   }, [database, project]);
 
   return <NavigationContext.Provider value={{ parents }}>{children}</NavigationContext.Provider>;

@@ -20,12 +20,12 @@ const SidebarBack = ({ Wrapper }) => {
 
   const { parents } = useContext(NavigationContext);
 
-  if (parents.length === 0) {
+  if (!parents.length) {
     return <Placeholder />;
   }
 
   const [{ title, url }] = parents.slice(-1);
-  if (!title || title.length === 0 || !url) {
+  if (!title || !title.length || !url) {
     return <Placeholder />;
   }
 

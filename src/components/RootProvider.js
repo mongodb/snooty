@@ -1,14 +1,10 @@
 import React from 'react';
-import loadable from '@loadable/component';
 import PropTypes from 'prop-types';
-import { HeaderContextProvider } from './header-context';
 import { ContentsProvider } from './contents-context';
+import { HeaderContextProvider } from './header-context';
+import { NavigationProvider } from './navigation-context';
 import { SidebarContextProvider } from './sidebar-context';
 import { TabProvider } from './tab-context';
-
-const NavigationProvider = loadable(() => import('./navigation-context'), {
-  resolveComponent: (components) => components.NavigationProvider,
-});
 
 const RootProvider = ({ children, headingNodes, isSidebarEnabled, selectors, siteTitle }) => (
   <TabProvider selectors={selectors}>
