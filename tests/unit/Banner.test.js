@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import * as StitchUtil from '../../src/utils/stitch';
+import * as RealmUtil from '../../src/utils/realm';
 import Banner from '../../src/components/Banner';
 import { HeaderContext } from '../../src/components/header-context';
 import { tick } from '../utils';
@@ -21,7 +21,7 @@ describe('Banner component', () => {
 
   it('renders with a banner image', async () => {
     jest.useFakeTimers();
-    jest.spyOn(StitchUtil, 'fetchBanner').mockImplementation(() => mockBannerContent);
+    jest.spyOn(RealmUtil, 'fetchBanner').mockImplementation(() => mockBannerContent);
     const setBannerContent = jest.fn();
     const wrapper = mount(
       <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent }}>

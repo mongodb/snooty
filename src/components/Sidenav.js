@@ -43,12 +43,12 @@ const Sidenav = ({ page }) => {
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
       <SideNavGroup>
-        <SidebarBack />
+        <SidebarBack Wrapper={StyledSideNavItem} />
       </SideNavGroup>
       {showAllProducts && <ProductsList />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
-        <StyledSideNavItem glyph={<Icon glyph={glyph} />} href={url}>
+        <StyledSideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
           {title}
         </StyledSideNavItem>
       ))}

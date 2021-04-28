@@ -1,27 +1,44 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import Icon from '@leafygreen-ui/icon';
-import { SideNavItem } from '@leafygreen-ui/side-nav';
 import ComponentFactory from './ComponentFactory';
 import { NavigationContext } from './navigation-context';
 
-const SidebarBack = () => {
+const SidebarBack = ({ Wrapper }) => {
+  const Placeholder = () => (
+    <Wrapper
+      as="div"
+      css={css`
+        cursor: unset;
+        :hover {
+          background-color: unset;
+        }
+      `}
+    />
+  );
+
   const { parents } = useContext(NavigationContext);
 
   if (parents.length === 0) {
-    return <SideNavItem />;
+    return <Placeholder />;
   }
 
   const [{ title, url }] = parents.slice(-1);
   if (!title || title.length === 0 || !url) {
-    return <SideNavItem />;
+    return <Placeholder />;
   }
 
   const titleNodes = title.map((child, i) => <ComponentFactory key={i} nodeData={child} />);
   return (
-    <SideNavItem as="a" href={url} glyph={<Icon glyph="ArrowLeft" size="small" />}>
+    <Wrapper as="a" href={url} glyph={<Icon glyph="ArrowLeft" size="small" />}>
       Back to {titleNodes}
-    </SideNavItem>
+    </Wrapper>
   );
+};
+
+SidebarBack.propTypes = {
+  Wrapper: PropTypes.elementType,
 };
 
 export default SidebarBack;
