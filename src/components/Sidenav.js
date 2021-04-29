@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import ProductsList from './ProductsList';
+import SidebarBack from './SidebarBack';
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   grid-area: sidebar;
@@ -36,15 +37,16 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page }) => {
+const Sidenav = ({ page, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
+      <SidebarBack slug={slug} Wrapper={StyledSideNavItem} />
       {showAllProducts && <ProductsList />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
-        <StyledSideNavItem glyph={<Icon glyph={glyph} />} href={url}>
+        <StyledSideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
           {title}
         </StyledSideNavItem>
       ))}
@@ -56,6 +58,7 @@ Sidenav.propTypes = {
   page: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default Sidenav;

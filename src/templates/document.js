@@ -48,7 +48,7 @@ const Document = ({
 
   return (
     <>
-      <Sidenav page={page} />
+      <Sidenav page={page} slug={slug} />
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">

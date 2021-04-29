@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 import { HeaderContext } from './header-context';
 import { SNOOTY_STITCH_ID } from '../build-constants';
 import { theme } from '../theme/docsTheme';
+import { isBrowser } from '../utils/is-browser';
 import { normalizePath } from '../utils/normalize-path';
-import { fetchBanner } from '../utils/stitch';
+import { fetchBanner } from '../utils/realm';
 
 const getBannerSource = (src) => {
   if (src == null || src === '') return null;
@@ -36,9 +37,15 @@ const Banner = () => {
 
   useEffect(() => {
     const fetchBannerContent = async () => {
-      setBannerContent(await fetchBanner(SNOOTY_STITCH_ID));
+      try {
+        setBannerContent(await fetchBanner());
+      } catch (err) {
+        console.error(err);
+      }
     };
-    fetchBannerContent();
+    if (isBrowser) {
+      fetchBannerContent();
+    }
   }, [setBannerContent]);
 
   if (bannerContent == null) {
