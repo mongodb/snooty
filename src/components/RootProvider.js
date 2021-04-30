@@ -10,7 +10,7 @@ const RootProvider = ({ children, headingNodes, isSidebarEnabled, selectors, sit
   <TabProvider selectors={selectors}>
     <ContentsProvider headingNodes={headingNodes}>
       <HeaderContextProvider>
-        <NavigationProvider siteTitle={siteTitle}>
+        <NavigationProvider>
           <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>{children}</SidebarContextProvider>
         </NavigationProvider>
       </HeaderContextProvider>

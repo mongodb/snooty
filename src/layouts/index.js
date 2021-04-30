@@ -80,7 +80,6 @@ const DefaultLayout = (props) => {
         headingNodes={page?.options?.headings}
         isSidebarEnabled={isSidebarEnabled}
         selectors={page?.options?.selectors}
-        siteTitle={title}
       >
         <GlobalGrid>
           <Header />
@@ -92,7 +91,7 @@ const DefaultLayout = (props) => {
             `}
             {...props}
           >
-            {template === 'landing' ? [children] : children}
+            {children}
           </Template>
         </GlobalGrid>
       </RootProvider>
