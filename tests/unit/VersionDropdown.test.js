@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as Gatsby from 'gatsby';
 
@@ -33,6 +33,21 @@ const publishedBranchesNoLegacy = {
   },
 };
 
+const publishedBranchesUnversioned = {
+  version: {
+    published: ['master'],
+    active: ['master'],
+    stable: 'master',
+    upcoming: 'master',
+  },
+  git: {
+    branches: {
+      manual: 'master',
+      published: ['master'],
+    },
+  },
+};
+
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 useStaticQuery.mockImplementation(() => ({
   site: {
@@ -51,77 +66,27 @@ describe('when rendered', () => {
   let wrapper;
 
   beforeAll(() => {
-    wrapper = mount(<VersionDropdown slug="installation" publishedBranches={publishedBranches} />);
+    wrapper = shallow(<VersionDropdown slug="installation" publishedBranches={publishedBranches} />);
   });
 
-  it('shows a button group', () => {
-    expect(wrapper.find('.btn-group')).toHaveLength(1);
+  it('shows the dropdown menu', () => {
+    expect(wrapper.find('StyledSelect')).toHaveLength(1);
   });
 
-  it('does not show the dropdown menu', () => {
-    expect(wrapper.find('ul')).toHaveLength(0);
+  it('shows the "master" list item is active', () => {
+    expect(wrapper.find('StyledSelect').prop('value')).toBe('master');
   });
 
-  describe('when the button is clicked', () => {
-    beforeAll(() => {
-      wrapper.find('button').simulate('click');
-    });
-
-    it('shows the dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(1);
-    });
-
-    it('shows the first list item is active', () => {
-      expect(
-        wrapper
-          .find('li')
-          .first()
-          .hasClass('active')
-      ).toBe(true);
-    });
-
-    it('generates the correct links', () => {
-      expect(
-        wrapper
-          .find('li')
-          .at(1)
-          .childAt(0)
-          .prop('href')
-      ).toBe('/bi-connector/v2.11/installation');
-    });
-
-    // The 9th element links to the Legacy Docs page
-    it('has 9 list elements', () => {
-      expect(wrapper.find('ul').children()).toHaveLength(9);
-    });
-
-    it('shows `Legacy Docs` as the last list element', () => {
-      expect(
-        wrapper
-          .find('li')
-          .last()
-          .text()
-      ).toBe('Legacy Docs');
-    });
-
-    it('shows the proper name for master', () => {
-      expect(
-        wrapper
-          .find('li')
-          .first()
-          .text()
-      ).not.toBe('master');
-    });
+  it('has 9 list elements', () => {
+    expect(wrapper.find('Option')).toHaveLength(9);
   });
 
-  describe('when the button is clicked again', () => {
-    beforeAll(() => {
-      wrapper.find('button').simulate('click');
-    });
+  it('shows `Legacy Docs` as the last list element', () => {
+    expect(wrapper.find('Option').last().prop('value')).toBe('legacy');
+  });
 
-    it('hides the dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(0);
-    });
+  it('shows the proper name for master', () => {
+    expect(wrapper.find('Option').first().text()).not.toBe('master');
   });
 });
 
@@ -129,25 +94,26 @@ describe('when rendering a property without legacy docs', () => {
   let wrapper;
 
   beforeAll(() => {
-    wrapper = mount(<VersionDropdown slug="installation" publishedBranches={publishedBranchesNoLegacy} />);
+    wrapper = shallow(<VersionDropdown slug="installation" publishedBranches={publishedBranchesNoLegacy} />);
   });
 
-  describe('when the button is clicked in a property without legacy docs', () => {
-    beforeAll(() => {
-      wrapper.find('button').simulate('click');
-    });
+  it('has 8 list elements', () => {
+    expect(wrapper.find('Option').children()).toHaveLength(8);
+  });
 
-    it('has 8 list elements', () => {
-      expect(wrapper.find('ul').children()).toHaveLength(8);
-    });
+  it('does not show `Legacy Docs` as the last list element', () => {
+    expect(wrapper.find('Option').last().prop('value')).not.toBe('legacy');
+  });
+});
 
-    it('does not show `Legacy Docs` as the last list element', () => {
-      expect(
-        wrapper
-          .find('li')
-          .last()
-          .text()
-      ).not.toBe('Legacy Docs');
-    });
+describe('when rendering an unversioned property', () => {
+  let wrapper;
+
+  beforeAll(() => {
+    wrapper = shallow(<VersionDropdown slug="installation" publishedBranches={publishedBranchesUnversioned} />);
+  });
+
+  it('does not render', () => {
+    expect(wrapper.find('StyledSelect')).toHaveLength(0);
   });
 });

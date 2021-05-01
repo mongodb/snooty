@@ -3,7 +3,7 @@
  * Returns plaintext string indicating the nested title.
  */
 
-export const getPlaintext = nodeArray => {
+const getPlaintext = (nodeArray) => {
   const extractText = (title, node) => {
     if (node.type === 'text') {
       return title + node.value;
@@ -14,3 +14,5 @@ export const getPlaintext = nodeArray => {
 
   return nodeArray && nodeArray.length > 0 ? nodeArray.reduce(extractText, '') : '';
 };
+
+module.exports = { getPlaintext };

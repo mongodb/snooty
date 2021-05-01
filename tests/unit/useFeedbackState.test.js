@@ -53,7 +53,7 @@ const FeedbackStateTest = () => {
           <div id="rating" value={feedback.rating} />
           {feedback.qualifiers && (
             <div id="qualifiers">
-              {feedback.qualifiers.map(q => (
+              {feedback.qualifiers.map((q) => (
                 <div key={q.id} qualifier_id={q.id} id={`qualifier-${q.displayOrder}`} value={q.value} />
               ))}
             </div>
@@ -61,7 +61,7 @@ const FeedbackStateTest = () => {
         </div>
       )}
       <button id="initializeFeedback" onClick={() => initializeFeedback()} />
-      <button id="setRating" onClick={rating => setRating(rating)} />
+      <button id="setRating" onClick={(rating) => setRating(rating)} />
       <button id="setQualifier" onClick={(id, value) => setQualifier(id, value)} />
       <button id="submitQualifiers" onClick={() => submitQualifiers()} />
       <button id="submitComment" onClick={({ comment, email }) => submitComment({ comment, email })} />

@@ -3,16 +3,27 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
 const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) => {
-  const introText = useMemo(() => {
+  const { introText, childIndex } = useMemo(() => {
     const version = argument.length > 0 ? <ComponentFactory nodeData={argument[0]} /> : null;
-    const additionalArg =
-      argument.length > 1 ? (
+    let childIndex = 0;
+    let additionalArg = '.';
+    if (argument.length > 1) {
+      additionalArg = (
         <>
-          : <ComponentFactory nodeData={argument[1]} />
+          :{' '}
+          {argument.slice(1).map((arg, i) => (
+            <ComponentFactory nodeData={arg} key={i} />
+          ))}
         </>
-      ) : (
-        '.'
       );
+    } else if (children.length > 0) {
+      childIndex = 1;
+      additionalArg = (
+        <>
+          : <ComponentFactory nodeData={children[0]} skipPTag />
+        </>
+      );
+    }
     let text = '';
     if (name === 'deprecated') {
       text = <>Deprecated{version && <> since version {version}</>}</>;
@@ -22,18 +33,21 @@ const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) =>
       text = <>Changed{version && <> in version {version}</>}</>;
     }
 
-    return (
-      <>
-        <em>{text}</em>
-        {additionalArg}
-      </>
-    );
-  }, [argument, name]);
+    return {
+      childIndex,
+      introText: (
+        <>
+          <em>{text}</em>
+          {additionalArg}
+        </>
+      ),
+    };
+  }, [argument, children, name]);
 
   return (
-    <div className={name}>
+    <div>
       <p>{introText}</p>
-      {children.map((child, index) => (
+      {children.slice(childIndex).map((child, index) => (
         <ComponentFactory {...rest} nodeData={child} key={index} />
       ))}
     </div>

@@ -34,8 +34,8 @@ const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
   // If directive_argument node is not present, render an empty span with the target ID
   // Otherwise, render directive_argument as a dictionary node and attach the
   // ID to the description term field
-  const [, dictList] = partition(children, elem => elem.type === 'target_identifier');
-  const [[descriptionTerm], descriptionDetails] = partition(dictList, elem => elem.type === 'directive_argument');
+  const [, dictList] = partition(children, (elem) => elem.type === 'target_identifier');
+  const [[descriptionTerm], descriptionDetails] = partition(dictList, (elem) => elem.type === 'directive_argument');
 
   return (
     <React.Fragment>

@@ -8,7 +8,7 @@ global.navigator = {
   userAgent: 'node.js',
 };
 
-const rejectionHandler = err => {
+const rejectionHandler = (err) => {
   console.error('Unhandled Promise Rejection'); // eslint-disable-line no-console
   throw err;
 };
@@ -26,7 +26,7 @@ const crypto = require('crypto');
 
 Object.defineProperty(global.self, 'crypto', {
   value: {
-    getRandomValues: arr => crypto.randomBytes(arr.length),
+    getRandomValues: (arr) => crypto.randomBytes(arr.length),
   },
 });
 

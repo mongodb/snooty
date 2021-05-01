@@ -1,4 +1,5 @@
 const path = require('path');
+const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { initStitch } = require('./src/utils/setup/init-stitch');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
@@ -55,7 +56,7 @@ exports.sourceNodes = async () => {
   }
 
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
-  documents.forEach(doc => {
+  documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
     RESOLVED_REF_DOC_MAPPING[page_id.replace(`${pageIdPrefix}/`, '')] = rest;
   });
@@ -65,7 +66,7 @@ exports.sourceNodes = async () => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
     if (pageNode) {
-      val.static_assets.forEach(asset => {
+      val.static_assets.forEach((asset) => {
         const checksum = asset.checksum;
         if (assets.has(checksum)) {
           assets.set(checksum, new Set([...assets.get(checksum), asset.key]));
@@ -91,13 +92,18 @@ exports.createPages = async ({ actions }) => {
     stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
   ]);
 
+  const { parentPaths, slugToTitle } = metadataMinusStatic;
+  if (parentPaths) {
+    transformBreadcrumbs(parentPaths, slugToTitle);
+  }
+
   // Save files in the static_files field of metadata document, including intersphinx inventories
   if (staticFiles) {
     await saveStaticFiles(staticFiles);
   }
 
   return new Promise((resolve, reject) => {
-    PAGES.forEach(page => {
+    PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
 
       const slug = getPageSlug(page);

@@ -6,10 +6,7 @@ describe('InputField', () => {
   let wrapper;
   const testTextOne = 'error test';
   const testTextTwo = 'this is a valid submission message';
-  const hasError = jest
-    .fn()
-    .mockReturnValue(false)
-    .mockReturnValueOnce(true);
+  const hasError = jest.fn().mockReturnValue(false).mockReturnValueOnce(true);
   const setCustomValidityMock = jest.fn();
   const mockStoreSet = jest.fn();
   const mockStoreGet = jest.fn();

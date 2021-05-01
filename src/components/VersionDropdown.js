@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import { Option, Select, Size } from '@leafygreen-ui/select';
+import { navigate as reachNavigate } from '@reach/router';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
-import dropdownStyles from '../styles/version-dropdown.module.css';
-import Button from '@leafygreen-ui/button';
 
 const zip = (a, b) => {
   // Zip arrays a and b into an object where a is used for keys and b for values
@@ -13,6 +14,25 @@ const zip = (a, b) => {
   shorter.forEach((key, i) => (dict[a[i]] = b[i]));
   return dict;
 };
+
+const StyledSelect = styled(Select)`
+  margin: 8px 12px 12px 22px;
+
+  span {
+    font-size: 16px;
+  }
+
+  /* Remove "null" selection from dropdown */
+  ul > li:first-of-type {
+    display: none;
+  }
+`;
+
+const OptionLink = styled('a')`
+  &:hover {
+    text-decoration: none;
+  }
+`;
 
 const VersionDropdown = ({
   publishedBranches: {
@@ -25,9 +45,8 @@ const VersionDropdown = ({
 }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
-  const [hidden, setHidden] = useState(true);
 
-  const prefixVersion = version => {
+  const prefixVersion = (version) => {
     // Display as "Version X" on menu if numeric version
     const isNumeric = (version = '') => {
       const [firstWord] = version.split();
@@ -36,51 +55,15 @@ const VersionDropdown = ({
     return `${isNumeric(version) ? 'Version ' : ''}${version}`;
   };
 
-  const useOutsideHandler = ref => {
-    // Close dropdown if user clicks outside of the Version button
-    const handleClickOutside = event => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setHidden(true);
-      }
-    };
-
-    useEffect(() => {
-      // Bind the event listener
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    });
-  };
-
   // Zip two sections of data to map git branches to their "pretty" names
   const gitNamedMapping = zip(gitBranches, active);
-  const currentBranch = gitNamedMapping[parserBranch] || parserBranch;
-
-  const wrapperRef = useRef(null);
-  useOutsideHandler(wrapperRef);
-
-  // Handle cases where EOL versions exist
-  const legacyDocsURL = `https://docs.mongodb.com/legacy/?site=${project}`;
-  let legacyDocsHTML = '';
-
-  if (published.length > active.length) {
-    legacyDocsHTML = (
-      <li className="">
-        <a className="version-selector" href={legacyDocsURL}>
-          Legacy Docs
-        </a>
-      </li>
-    );
-  }
 
   // Don't render dropdown if there is only 1 version of the repo
   if (!active || active.length <= 1) {
     return null;
   }
 
-  const generatePrefix = version => {
+  const generatePrefix = (version) => {
     // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
     const isManualProduction = project === 'docs' && snootyEnv === 'production';
     if (isManualProduction) {
@@ -89,42 +72,47 @@ const VersionDropdown = ({
 
     // For production builds, append version after project name
     if (pathPrefix) {
-      const [, project] = pathPrefix.split('/');
-      return `/${project}/${version}`;
+      const noVersion = pathPrefix.substr(0, pathPrefix.lastIndexOf('/'));
+      return `${noVersion}/${version}`;
     }
 
     // For staging, replace current version in dynamically generated path prefix
     return generatePathPrefix({ ...siteMetadata, parserBranch: version });
   };
 
+  const getUrl = (value) => {
+    const legacyDocsURL = `https://docs.mongodb.com/legacy/?site=${project}`;
+    return value === 'legacy' ? legacyDocsURL : normalizePath(`${generatePrefix(value)}/${slug}`);
+  };
+
+  const navigate = (value) => {
+    const destination = getUrl(value);
+    reachNavigate(destination);
+  };
+
   return (
-    <div ref={wrapperRef} className="btn-group version-sidebar">
-      <Button
-        variant="default"
-        className={['version-button', 'dropdown-toggle', dropdownStyles.button].join(' ')}
-        title="Select version"
-        onClick={() => setHidden(!hidden)}
-        size="large"
-      >
-        {prefixVersion(currentBranch)}
-        <span className={['caret', dropdownStyles.caret].join(' ')}></span>
-      </Button>
-      {!hidden && (
-        <ul className={['dropdown-menu', dropdownStyles.menu].join(' ')} role="menu">
-          {Object.entries(gitNamedMapping).map(([branch, name]) => {
-            const url = normalizePath(`${generatePrefix(branch)}/${slug}`);
-            return (
-              <li className={parserBranch === branch ? 'active' : ''} key={branch}>
-                <a className="version-selector" href={url}>
-                  {prefixVersion(name)}
-                </a>
-              </li>
-            );
-          })}
-          {legacyDocsHTML}
-        </ul>
+    <StyledSelect
+      aria-labelledby="View a different version of documentation."
+      onChange={navigate}
+      placeholder={null}
+      size={Size.Large}
+      usePortal={false}
+      value={parserBranch}
+    >
+      {Object.entries(gitNamedMapping).map(([branch, name]) => {
+        const url = getUrl(branch);
+        return (
+          <Option key={branch} value={branch}>
+            <OptionLink href={url}>{prefixVersion(name)}</OptionLink>
+          </Option>
+        );
+      })}
+      {published.length > active.length && (
+        <Option value="legacy">
+          <OptionLink href={getUrl('legacy')}>Legacy Docs</OptionLink>
+        </Option>
       )}
-    </div>
+    </StyledSelect>
   );
 };
 

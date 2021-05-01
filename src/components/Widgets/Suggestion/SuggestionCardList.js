@@ -26,7 +26,7 @@ const EmptyCard = ({ handleDismissCard }) => (
 );
 
 const SuggestionCardList = ({ handleDismissCard, pageName, suggestions }) => {
-  const suggestionCards = suggestions.map(suggestion => (
+  const suggestionCards = suggestions.map((suggestion) => (
     <SuggestionCard suggestion={suggestion} key={suggestion.url} pageName={pageName} />
   ));
   return (

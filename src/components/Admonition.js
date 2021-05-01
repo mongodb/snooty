@@ -20,9 +20,8 @@ const StyledCallout = styled(Callout)`
   margin: 24px 3px 24px 0;
 
   /* Add margins below all child elements in the callout */
-  /* TODO: Increase margin when Callout component supports base font size of 16px */
   & > div > div > * {
-    margin: 0 0 10px;
+    margin: 0 0 12px;
   }
 
   & > div > div > *:last-child {

@@ -8,7 +8,7 @@ import SearchResults from '../../src/components/SearchResults';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 
 // Check the search results include the property-filtered results
-const expectFilteredResults = wrapper => {
+const expectFilteredResults = (wrapper) => {
   expect(wrapper.find('StyledSearchResult').length).toBe(1);
   const searchResult = wrapper.find('StyledSearchResult').at(0);
 
@@ -28,22 +28,12 @@ const expectFilteredResults = wrapper => {
 };
 
 const expectValuesForFilters = (wrapper, product, branch) => {
-  expect(
-    wrapper
-      .find('Select')
-      .at(0)
-      .text()
-  ).toContain(product);
-  expect(
-    wrapper
-      .find('Select')
-      .at(1)
-      .text()
-  ).toContain(branch);
+  expect(wrapper.find('Select').at(0).text()).toContain(product);
+  expect(wrapper.find('Select').at(1).text()).toContain(branch);
 };
 
 // Check the search results match the expected unfiltered results
-const expectUnfilteredResults = wrapper => {
+const expectUnfilteredResults = (wrapper) => {
   expect(wrapper.find('StyledSearchResult').length).toBe(1);
   const searchResult = wrapper.find('StyledSearchResult').at(0);
 
@@ -63,7 +53,7 @@ const expectUnfilteredResults = wrapper => {
 };
 
 // Mock the reach router useLocation hook
-const mockLocation = search => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ search }));
+const mockLocation = (search) => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ search }));
 
 describe('Search Results Page', () => {
   beforeAll(() => {

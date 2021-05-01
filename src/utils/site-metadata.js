@@ -8,7 +8,7 @@ require('dotenv').config({
   path: `.env.${runningEnv}`,
 });
 
-const getDatabase = env => {
+const getDatabase = (env) => {
   switch (env) {
     case 'staging':
       return 'snooty_stage';
@@ -23,7 +23,7 @@ const gitBranch = execSync('git rev-parse --abbrev-ref HEAD')
   .toString('utf8')
   .replace(/[\n\r\s]+$/, '');
 
-const getPathPrefix = pathPrefix => {
+const getPathPrefix = (pathPrefix) => {
   if (!pathPrefix) {
     return '';
   }

@@ -31,10 +31,11 @@ const normalizeCssClassNodes = (nodes, key, value) => {
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
 // - labels: the numerical label for the footnote
 // - references: a list of the footnote reference ids that refer to this footnote
-const getFootnotes = nodes => {
+const getFootnotes = (nodes) => {
   const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
   const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
-  const numAnonRefs = footnoteReferences.filter(node => !Object.prototype.hasOwnProperty.call(node, 'refname')).length;
+  const numAnonRefs = footnoteReferences.filter((node) => !Object.prototype.hasOwnProperty.call(node, 'refname'))
+    .length;
   // We label our footnotes by their index, regardless of their names to
   // circumvent cases such as [[1], [#], [2], ...]
   return footnotes.reduce((map, footnote, index) => {
@@ -62,7 +63,7 @@ const getFootnotes = nodes => {
 // Find all footnote_reference node IDs associated with a given footnote by
 // that footnote's refname
 const getNamedFootnoteReferences = (footnoteReferences, refname) => {
-  return footnoteReferences.filter(node => node.refname === refname).map(node => node.id);
+  return footnoteReferences.filter((node) => node.refname === refname).map((node) => node.id);
 };
 
 // They are used infrequently, but here we match an anonymous footnote to its reference.

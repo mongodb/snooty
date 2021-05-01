@@ -1,19 +1,49 @@
 import React from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 
-const getColumnValue = props => props.columns || React.Children.count(props.children);
+const getColumnValue = (props) => props.columns || React.Children.count(props.children);
 
-// TODO: StyledGrid should make use of the 'columns' option when specified
+// Carousel styling refers to the horizontal scrolling display of the Cards;
+// This is not a true carousel as it is not 'circular,' but is rather 1 row
+// with n columns displaying only a subset on screen
+const carouselStyling = ({ children, theme }) => css`
+  grid-gap: calc(${theme.size.medium} * 0.75);
+  grid-template-columns:
+    calc(${theme.size.medium} / 2) repeat(${React.Children.count(children)}, calc(75% - calc(2 * ${theme.size.medium})))
+    calc(${theme.size.medium} / 2);
+  grid-template-rows: minmax(150px, 1fr);
+  margin: ${theme.size.medium} 0;
+  overflow-x: scroll;
+  padding-bottom: calc(${theme.size.medium} / 2);
+  scroll-snap-type: x proximity;
+
+  &:before,
+  &:after {
+    content: '';
+  }
+`;
+
+const verticalStyling = css`
+  grid-column-gap: ${theme.size.default};
+  grid-template-columns: 'auto';
+  grid-row-gap: '${theme.size.default}';
+  &:before {
+    content: 'unset';
+  }
+`;
+
+// StyledGrid behavior on medium and small screens is determined by 'isCarousel'
 const StyledGrid = styled('div')`
   align-items: stretch;
   display: grid;
   grid-column: 1 / -1 !important;
   grid-column-gap: ${theme.size.medium};
   grid-row-gap: ${theme.size.medium};
-  grid-template-columns: ${props => `repeat(${getColumnValue(props)}, 1fr)`};
+  grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
   margin: ${theme.size.large} 0;
 
   @media ${theme.screenSize.upToLarge} {
@@ -21,28 +51,15 @@ const StyledGrid = styled('div')`
   }
 
   @media ${theme.screenSize.upToMedium} {
-    grid-gap: ${`calc(${theme.size.medium} * 0.75)`};
-    grid-template-columns: ${({ children }) => `calc(${theme.size.medium} / 2)
-       repeat(${React.Children.count(children)}, calc(75% - (2 * ${theme.size.medium})))
-       calc(${theme.size.medium} / 2)`};
-    grid-template-rows: minmax(150px, 1fr);
-    margin: ${theme.size.medium} 0;
-    overflow-x: scroll;
-    padding-bottom: ${`calc(${theme.size.medium} / 2)`};
-    scroll-snap-type: x proximity;
-
-    &:before,
-    &:after {
-      content: '';
-    }
+    ${({ isCarousel, ...props }) =>
+      isCarousel
+        ? carouselStyling(props)
+        : `grid-template-columns: repeat(1, 1fr); grid-column-gap: ${theme.size.default};`}
   }
 
-  ${'' /* If isCompact, stack Cards vertically on small screens */}
+  ${'' /* If not isCarousel, stack Cards vertically in 1 column on small screens */}
   @media ${theme.screenSize.upToSmall} {
-    grid-template-columns: ${({ isCompact }) => isCompact && `auto`};
-    &:before {
-      content: ${({ isCompact }) => isCompact && `unset`};
-    }
+    ${({ isCarousel }) => !isCarousel && verticalStyling}
   }
 `;
 
@@ -55,10 +72,13 @@ const CardGroup = ({
   ...rest
 }) => {
   const isCompact = style === 'compact';
+  const isExtraCompact = style === 'extra-compact';
+  const isCarousel = !(isCompact || isExtraCompact);
+  console.log(style);
   return (
-    <StyledGrid columns={columns} isCompact={isCompact}>
-      {children.map(child => (
-        <ComponentFactory nodeData={child} style={style} {...rest} />
+    <StyledGrid columns={columns} noMargin={true} isCarousel={isCarousel}>
+      {children.map((child, i) => (
+        <ComponentFactory {...rest} key={i} nodeData={child} isCompact={isCompact} isExtraCompact={isExtraCompact} />
       ))}
     </StyledGrid>
   );

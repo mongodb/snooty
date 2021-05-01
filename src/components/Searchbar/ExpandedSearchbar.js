@@ -93,7 +93,7 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
   const shouldShowGoButton = useMemo(() => !!searchTerm && !isMobile, [isMobile, searchTerm]);
 
   const onSearchChange = useCallback(
-    e => {
+    (e) => {
       const searchTerm = e.target.value;
       onChange(searchTerm);
     },
@@ -110,7 +110,7 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
   const searchTextbox = useRef(null);
 
   const onKeyDown = useCallback(
-    e => {
+    (e) => {
       // On an "Enter", click the Go button
       if (e.key === 'Enter' || e.keyCode === ENTER_KEY) {
         goButton && goButton.current && goButton.current.click();
@@ -129,7 +129,11 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
     [searchContainerRef]
   );
 
-  useEventListener('keydown', onKeyDown, { dependencies: [searchTextbox.current], element: searchTextbox.current });
+  useEventListener('keydown', onKeyDown, {
+    enabled: isFocused,
+    dependencies: [searchTextbox.current],
+    element: searchTextbox.current,
+  });
 
   const searchUrl = useMemo(() => searchParamsToURL(searchTerm, searchFilter, false), [searchFilter, searchTerm]);
 

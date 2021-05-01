@@ -6,7 +6,7 @@ import FootnoteContext from '../../src/components/footnote-context';
 // data for this component
 import mockData from './data/Footnote.test.json';
 
-const mountFootnotes = footnotes =>
+const mountFootnotes = (footnotes) =>
   mount(
     <FootnoteContext.Provider value={{ footnotes: footnotes }}>
       <Footnote nodeData={mockData} />

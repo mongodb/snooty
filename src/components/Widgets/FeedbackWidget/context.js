@@ -91,7 +91,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   function submitQualifiers() {
     if (!feedback) return;
     // The widget flow changes if the user selected the "need support" qualifier
-    const selectedSupportQualifier = feedback.qualifiers.find(q => q.id === 'support' && q.value === true);
+    const selectedSupportQualifier = feedback.qualifiers.find((q) => q.id === 'support' && q.value === true);
     setIsSupportRequest(Boolean(selectedSupportQualifier));
     setView('comment');
   }
@@ -169,7 +169,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 }
 
 function updateQualifier(qualifiers, id, value) {
-  const index = qualifiers.findIndex(q => q.id === id);
+  const index = qualifiers.findIndex((q) => q.id === id);
   return [...qualifiers.slice(0, index), { ...qualifiers[index], value }, ...qualifiers.slice(index + 1)];
 }
 

@@ -21,7 +21,7 @@ import IconScala from './icons/Scala';
 import IconShell from './icons/Shell';
 import IconSwift from './icons/Swift';
 
-const capitalizeFirstLetter = str => str.trim().replace(/^\w/, c => c.toUpperCase());
+const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
 
 const driverIconMap = {
   c: IconC,
@@ -42,7 +42,7 @@ const driverIconMap = {
   'swift-sync': IconSwift,
 };
 
-const getLabel = name => {
+const getLabel = (name) => {
   switch (name) {
     case 'drivers':
       return 'Select your language';

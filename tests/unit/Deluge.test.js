@@ -30,11 +30,7 @@ describe('Deluge', () => {
 
   describe('when a Yes votes is submitted', () => {
     it('updates the voteAcknowledgement state', () => {
-      wrapper
-        .find('MainWidget')
-        .dive()
-        .find('#rate-up')
-        .simulate('click', { stopPropagation: jest.fn() });
+      wrapper.find('MainWidget').dive().find('#rate-up').simulate('click', { stopPropagation: jest.fn() });
       setTimeout(() => {
         expect(wrapper.state().voteAcknowledgement).toBe('up');
       }, 500);

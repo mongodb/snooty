@@ -22,7 +22,7 @@ const componentMap = {
   step: Step,
 };
 
-const ComponentFactory = props => {
+const ComponentFactory = (props) => {
   const { nodeData } = props;
 
   const selectComponent = () => {

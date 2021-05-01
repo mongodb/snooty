@@ -8,6 +8,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
+import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 
 const bannerPadding = css`
   #gatsby-focus-wrapper {
@@ -39,10 +40,9 @@ const globalCSS = css`
   }
 `;
 
-const DefaultLayout = props => {
+const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
-
   const {
     metadata: { title },
     page,
@@ -50,13 +50,15 @@ const DefaultLayout = props => {
     template,
   } = pageContext;
   const Template = getTemplate(project, slug, template);
+  useDelightedSurvey(slug);
+
   return (
     <>
       {/* Anchor-link styling to compensate for navbar height */}
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
-        <ContentsProvider nodes={page?.children}>
+        <ContentsProvider headingNodes={page?.options?.headings}>
           <Template {...props}>{children}</Template>
         </ContentsProvider>
       </TabProvider>

@@ -3,16 +3,8 @@
 exports[`renders correctly 1`] = `
 .emotion-0 {
   border-spacing: 0;
-  padding: 0;
   vertical-align: top;
-}
-
-.emotion-0:first-of-type {
-  padding-left: 12px;
-}
-
-.emotion-0:last-of-type {
-  padding-right: 12px;
+  padding: 0 16px;
 }
 
 .emotion-2 {
@@ -24,18 +16,43 @@ exports[`renders correctly 1`] = `
 
 .emotion-4 {
   overflow-x: auto;
+  border-radius: 0;
+  border: 0;
   border-left: 2px solid;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   margin: 0;
   position: relative;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  white-space: pre;
   border-color: #E7EEEC;
   background-color: #F9FBFA;
-  color: #21313C;
+  color: #061621;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-4 {
+    white-space: pre-wrap;
+  }
+}
+
+@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-4 {
+    white-space: pre;
+  }
 }
 
 .emotion-6 {
@@ -90,6 +107,7 @@ exports[`renders correctly 1`] = `
     >
       <pre
         class="emotion-3 emotion-4"
+        tabindex="-1"
       >
         <code
           class="lg-highlight-hljs-light emotion-2 none"
