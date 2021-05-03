@@ -21,24 +21,23 @@ const getPosition = (element) => {
 };
 
 const hiddenTabsStyling = css`
-  & > div:first-child {
+  & > div:first-of-type {
     display: none;
   }
 `;
 
 const landingTabsStyling = css`
-  width: 100%;
+  & > div:first-of-type {
+    margin-top: ${theme.size.large};
+    margin-bottom: ${theme.size.xlarge};
 
-  & > div:first-child > button {
-    flex-grow: 1;
-    min-width: 55px;
-    padding: 12px ${theme.size.default};
-
-    @media ${theme.screenSize.upToMedium} {
-      padding: 12px ${theme.size.small};
+    button {
+      display: block;
+      flex-grow: 1;
     }
+
     @media ${theme.screenSize.upToSmall} {
-      padding: 12px ${theme.size.tiny};
+      margin-bottom: 40px;
     }
   }
 `;
@@ -52,7 +51,6 @@ const landingTabStyling = css`
   display: grid;
   column-gap: ${theme.size.medium};
   grid-template-columns: repeat(2, 1fr);
-  margin-top: ${theme.size.xlarge};
 
   img {
     border-radius: ${theme.size.small};
@@ -63,10 +61,6 @@ const landingTabStyling = css`
 
   @media ${theme.screenSize.upToMedium} {
     display: block;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    margin-top: 40px;
   }
 `;
 

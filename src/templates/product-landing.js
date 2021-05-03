@@ -50,30 +50,31 @@ const Wrapper = styled('main')`
     }
   }
 
-  & > section:first-of-type {
+  & > section {
+    h1 {
+      align-self: end;
+    }
+
+    ${'' /* Split the content into two columns on large screens. */}
     @media ${theme.screenSize.mediumAndUp} {
       display: grid;
       grid-template-columns: 1fr 1fr;
+
+      & > h1,
+      & > .introduction {
+        grid-column: 1;
+      }
+
+      & > .right-column {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+
+      ${'' /* Sub-sections should take up the full width of the main section */}
+      & > section {
+        grid-column: 1 / -1;
+      }
     }
-  }
-
-  & > section > h1:first-child,
-  & > section > div:first-child {
-    align-self: end;
-  }
-
-  & > section > h1:first-of-type,
-  & > section > .introduction {
-    grid-column: 1;
-  }
-
-  & > section > .right-column {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-  }
-
-  & > section > section {
-    grid-column: 1 / -1;
   }
 `;
 
