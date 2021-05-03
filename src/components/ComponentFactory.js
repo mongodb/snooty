@@ -13,6 +13,7 @@ import Code from './Code';
 import LiteralInclude from './LiteralInclude';
 import Tabs from './Tabs';
 import Admonition, { admonitionMap } from './Admonition';
+import Banner from './Banner';
 import Figure from './Figure';
 import Literal from './Literal';
 import Heading from './Heading';
@@ -109,6 +110,7 @@ const roleMap = {
 
 const componentMap = {
   admonition: Admonition,
+  banner: Banner,
   blockquote: BlockQuote,
   'card-group': CardGroup,
   class: CSSClass,
