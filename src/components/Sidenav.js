@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
 import IA from './IA';
+import { NavigationContext } from './navigation-context.js';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
 import { theme } from '../theme/docsTheme';
@@ -34,8 +35,6 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
 
 const titleStyle = css`
   color: ${uiColors.gray.dark3};
-  font-size: 20px;
-  line-height: 18px;
   text-transform: capitalize;
 `;
 
@@ -57,15 +56,15 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, pageTitle, slug }) => {
+const Sidenav = ({ page, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
-  const title = page?.options?.title || pageTitle;
+  const { pageTitle } = useContext(NavigationContext);
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
       <SidebarBack border={<Border />} slug={slug} />
-      {ia && <IA header={<span css={titleStyle}>{formatText(title)}</span>} ia={ia} pageTitle={pageTitle} />}
+      {ia && <IA header={<span css={titleStyle}>{formatText(pageTitle)}</span>} ia={ia} />}
       {showAllProducts && <ProductsList />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (

@@ -29,17 +29,8 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({
-  children,
-  className,
-  pageContext: {
-    slug,
-    page,
-    metadata: { slugToTitle },
-  },
-}) => {
+const Landing = ({ children, className, pageContext: { slug, page } }) => {
   const { fontSize, screenSize, size } = useTheme();
-  const pageTitle = slugToTitle[slug === '/' ? 'index' : slug];
   return (
     <>
       <Helmet>
@@ -63,7 +54,7 @@ const Landing = ({
           })}
         </script>
       </Helmet>
-      <Sidenav page={page} pageTitle={pageTitle} slug={slug} />
+      <Sidenav page={page} slug={slug} />
       <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <Wrapper>{children}</Wrapper>
       </div>

@@ -36,20 +36,19 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    metadata: { iatree, parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
+    metadata: { parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
   },
 }) => {
   const { project } = useSiteMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
-  const pageTitle = slugTitleMapping[slug === '/' ? 'index' : slug];
   const isLanding = project === 'landing';
-  const breadcrumbsPageTitle = isLanding ? pageTitle : null;
+  const breadcrumbsPageTitle = isLanding ? slugTitleMapping[slug] : null;
   const breadcrumbsHomeUrl = isLanding ? '/' : null;
 
   return (
     <>
-      <Sidenav page={page} pageTitle={pageTitle} slug={slug} />
+      <Sidenav page={page} slug={slug} />
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">
