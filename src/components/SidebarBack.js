@@ -28,17 +28,22 @@ const SidebarBack = ({ border, slug }) => {
   let title = null,
     url = null;
 
-  if (project === 'landing' && slug !== '/') {
+  if (project === 'landing') {
+    if (slug === '/') {
+      // At homepage; nothing to link back to
+      return null;
+    }
     title = 'home';
     url = '/';
   } else if (parents.length) {
     [{ title, url }] = parents.slice(-1);
   } else {
+    // Show placeholder since the data is likely being fetched
     return <Placeholder />;
   }
 
   if (!title || !title.length || !url) {
-    return <Placeholder />;
+    return null;
   }
 
   return (
