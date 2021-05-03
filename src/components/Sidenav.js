@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
+import { uiColors } from '@leafygreen-ui/palette';
+import IA from './IA';
+import { NavigationContext } from './navigation-context.js';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
+import { theme } from '../theme/docsTheme';
+import { formatText } from '../utils/format-text';
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   grid-area: sidebar;
@@ -15,6 +21,21 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
     display: flex;
     flex-direction: column;
   }
+
+  a,
+  p {
+    letter-spacing: unset;
+  }
+
+  // TODO: Remove when mongodb-docs.css is removed
+  a:hover {
+    color: ${uiColors.gray.dark2};
+  }
+`;
+
+const titleStyle = css`
+  color: ${uiColors.gray.dark3};
+  text-transform: capitalize;
 `;
 
 // Allows AdditionalLinks to always be at the bottom of the SideNav
@@ -22,13 +43,11 @@ const Spaceholder = styled('div')`
   flex-grow: 1;
 `;
 
-const StyledSideNavItem = styled(SideNavItem)`
-  letter-spacing: 0;
-
-  // TODO: Remove when mongodb-docs.css is removed
-  :hover {
-    color: unset;
-  }
+const Border = styled('hr')`
+  border: unset;
+  border-bottom: 1px solid ${uiColors.gray.light2};
+  margin: ${theme.size.default} 0;
+  width: 100%;
 `;
 
 const additionalLinks = [
@@ -39,16 +58,19 @@ const additionalLinks = [
 
 const Sidenav = ({ page, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
+  const ia = page?.options?.ia;
+  const { pageTitle } = useContext(NavigationContext);
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
-      <SidebarBack slug={slug} Wrapper={StyledSideNavItem} />
+      <SidebarBack border={<Border />} slug={slug} />
+      {ia && <IA header={<span css={titleStyle}>{formatText(pageTitle)}</span>} ia={ia} />}
       {showAllProducts && <ProductsList />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
-        <StyledSideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+        <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
           {title}
-        </StyledSideNavItem>
+        </SideNavItem>
       ))}
     </StyledLeafygreenSideNav>
   );

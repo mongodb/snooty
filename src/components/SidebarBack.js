@@ -2,52 +2,63 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import Icon from '@leafygreen-ui/icon';
+import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from './Link';
 import { NavigationContext } from './navigation-context';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { formatText } from '../utils/format-text';
 
-const SidebarBack = ({ slug, Wrapper }) => {
+const Placeholder = () => (
+  <SideNavItem
+    as="div"
+    css={css`
+      cursor: unset;
+      margin-bottom: 33px;
+      :hover {
+        background-color: unset;
+      }
+    `}
+  />
+);
+
+const SidebarBack = ({ border, slug }) => {
   const { parents } = useContext(NavigationContext);
   const { project } = useSiteMetadata();
-
-  const Placeholder = () => (
-    <Wrapper
-      as="div"
-      css={css`
-        cursor: unset;
-        :hover {
-          background-color: unset;
-        }
-      `}
-    />
-  );
 
   let title = null,
     url = null;
 
-  if (project === 'landing' && slug !== '/') {
+  if (project === 'landing') {
+    if (slug === '/') {
+      // At homepage; nothing to link back to
+      return null;
+    }
     title = 'home';
     url = '/';
   } else if (parents.length) {
     [{ title, url }] = parents.slice(-1);
   } else {
+    // Show placeholder since the data is likely being fetched
     return <Placeholder />;
   }
 
   if (!title || !title.length || !url) {
-    return <Placeholder />;
+    return null;
   }
 
   return (
-    <Wrapper as={Link} to={url} glyph={<Icon glyph="ArrowLeft" size="small" />}>
-      Back to {formatText(title)}
-    </Wrapper>
+    <>
+      <SideNavItem as={Link} to={url} glyph={<Icon glyph="ArrowLeft" size="small" />}>
+        Back to {formatText(title)}
+      </SideNavItem>
+      {border}
+    </>
   );
 };
 
 SidebarBack.propTypes = {
-  Wrapper: PropTypes.elementType,
+  border: PropTypes.element,
+  slug: PropTypes.string,
 };
 
 export default SidebarBack;
