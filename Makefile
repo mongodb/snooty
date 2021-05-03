@@ -29,15 +29,9 @@ stage: prefix
 	fi
 
 static:
-	-rm -r ./static/images/
 	-rm -r ./static/docs-tools/
 	-rm -r ./docs-tools/
 	git submodule add --force https://github.com/mongodb/docs-tools
-	-mkdir -p ./static/images
 	-mkdir -p ./static/docs-tools
-	cp -a ./docs-tools/themes/mongodb/static/fonts ./static/docs-tools/
-	cp ./docs-tools/themes/mongodb/static/guides.css ./static/docs-tools/
-	cp ./docs-tools/themes/mongodb/static/mongodb-docs.css ./static/docs-tools/
 	cp ./docs-tools/themes/mongodb/static/navbar.min.js ./static/docs-tools/
 	cp ./docs-tools/themes/mongodb/static/css/navbar.min.css ./static/docs-tools/
-	cp ./docs-tools/themes/guides/static/images/bg-accent.svg ./static/images/
