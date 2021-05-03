@@ -74,7 +74,6 @@ const CardGroup = ({
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = !(isCompact || isExtraCompact);
-  console.log(style);
   return (
     <StyledGrid columns={columns} noMargin={true} isCarousel={isCarousel}>
       {children.map((child, i) => (
