@@ -12,6 +12,8 @@ const Wrapper = styled('main')`
   color: ${uiColors.black};
   margin: calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto;
   max-width: 1200px;
+  width: 100%;
+  overflow-x: scroll;
   padding: 0 ${theme.size.large};
 
   h1,
@@ -60,7 +62,7 @@ const Wrapper = styled('main')`
     }
 
     ${'' /* Split the content into two columns on large screens. */}
-    @media ${theme.screenSize.mediumAndUp} {
+    @media ${theme.screenSize.largeAndUp} {
       display: grid;
       grid-template-columns: 1fr 1fr;
 
@@ -104,18 +106,16 @@ const ProductLanding = ({
 
   return (
     <div className="content">
-      <div>
-        {(!isBrowser || showLeftColumn) && (
-          <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
-            <Sidebar
-              slug={slug}
-              publishedBranches={publishedBranches}
-              toctreeData={toctree}
-              toggleLeftColumn={toggleLeftColumn}
-            />
-          </div>
-        )}
-      </div>
+      {(!isBrowser || showLeftColumn) && (
+        <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
+          <Sidebar
+            slug={slug}
+            publishedBranches={publishedBranches}
+            toctreeData={toctree}
+            toggleLeftColumn={toggleLeftColumn}
+          />
+        </div>
+      )}
       <>
         {(!isBrowser || !showLeftColumn) && (
           <div className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
