@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
+import { isBrowser } from '../utils/is-browser.js';
 import { theme } from '../theme/docsTheme.js';
+import Sidebar from '../components/Sidebar';
+import style from '../styles/navigation.module.css';
+import useScreenSize from '../hooks/useScreenSize.js';
 
 const Wrapper = styled('main')`
   color: ${uiColors.black};
@@ -65,7 +69,7 @@ const Wrapper = styled('main')`
         grid-column: 1;
       }
 
-      & > .right-column {
+      & > img {
         grid-column: 2;
         grid-row: 1 / span 2;
       }
@@ -78,11 +82,51 @@ const Wrapper = styled('main')`
   }
 `;
 
-const ProductLanding = ({ children }) => (
-  <Wrapper id="main-column" className="main-column">
-    {children}
-  </Wrapper>
-);
+const ProductLanding = ({
+  children,
+  pageContext: {
+    slug,
+    metadata: { publishedBranches, toctree },
+  },
+}) => {
+  const { isTabletOrMobile } = useScreenSize();
+  const [showLeftColumn, setShowLeftColumn] = useState(!isTabletOrMobile);
+  /* Add the postRender CSS class without disturbing pre-render functionality */
+  const renderStatus = isBrowser ? style.postRender : '';
+
+  const toggleLeftColumn = () => {
+    setShowLeftColumn(!showLeftColumn);
+  };
+
+  useEffect(() => {
+    setShowLeftColumn(!isTabletOrMobile);
+  }, [isTabletOrMobile]);
+
+  return (
+    <div className="content">
+      <div>
+        {(!isBrowser || showLeftColumn) && (
+          <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
+            <Sidebar
+              slug={slug}
+              publishedBranches={publishedBranches}
+              toctreeData={toctree}
+              toggleLeftColumn={toggleLeftColumn}
+            />
+          </div>
+        )}
+      </div>
+      <>
+        {(!isBrowser || !showLeftColumn) && (
+          <div className={`showNav ${style.showNav} ${renderStatus}`} id="showNav" onClick={toggleLeftColumn}>
+            Navigation
+          </div>
+        )}
+        <Wrapper>{children}</Wrapper>
+      </>
+    </div>
+  );
+};
 
 ProductLanding.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
