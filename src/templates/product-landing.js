@@ -14,7 +14,11 @@ const Wrapper = styled('main')`
   max-width: 1200px;
   width: 100%;
   overflow-x: scroll;
-  padding: 0 ${theme.size.large};
+  padding: 0 ${theme.size.large} 0 ${theme.size.xlarge};
+
+  @media ${theme.screenSize.upToMedium} {
+    padding: 0 ${theme.size.medium} 0 48px;
+  }
 
   h1,
   h2,
@@ -59,6 +63,13 @@ const Wrapper = styled('main')`
   & > section {
     h1 {
       align-self: end;
+    }
+
+    & > img {
+      display: block;
+      margin: auto;
+      max-width: 600px;
+      width: 100%;
     }
 
     ${'' /* Split the content into two columns on large screens. */}
