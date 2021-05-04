@@ -12,49 +12,30 @@ const Wrapper = styled('main')`
   margin: 0 auto;
   max-width: 1440px;
 
-  & > section {
+  & > section,
+  & > section > section {
     display: grid;
+    grid-column: 1 / -1;
 
     @media ${({ theme }) => theme.screenSize.mediumAndUp} {
-      grid-template-columns: minmax(0, 64px) repeat(12, 1fr) minmax(0, 64px);
+      grid-template-columns: ${({ theme }) => theme.size.xlarge} repeat(12, 1fr) ${({ theme }) => theme.size.xlarge};
     }
 
     @media ${({ theme }) => theme.screenSize.upToMedium} {
-      grid-template-columns: minmax(48px, 1fr) repeat(12, 1fr) minmax(48px, 1fr);
+      grid-template-columns: 48px repeat(12, 1fr) 48px;
     }
 
     @media ${({ theme }) => theme.screenSize.upToSmall} {
-      grid-template-columns: 32px repeat(12, 1fr) 32px;
+      grid-template-columns: ${({ theme }) => theme.size.large} 1fr ${({ theme }) => theme.size.large};
     }
 
-    @media only screen and (max-width: 320px) {
-      grid-template-columns: repeat(14, 1fr);
+    @media ${({ theme }) => theme.screenSize.upToXSmall} {
+      grid-template-columns: ${({ theme }) => theme.size.medium} 1fr ${({ theme }) => theme.size.medium};
     }
 
-    // Select card group
-    & > :nth-child(4) {
+    & > .card-group {
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
-      }
-    }
-  }
-
-  & > section > section {
-    display: grid;
-    grid-template-columns: repeat(12, [col-span] 1fr);
-    grid-column: 2 / -2;
-
-    @media ${({ theme }) => theme.screenSize.upToMedium} {
-      // grid-template-columns: ${({ theme }) => `${theme.size.medium} 1fr ${theme.size.medium}`};
-      grid-template-columns: 1fr;
-    }
-
-    & > * {
-      grid-column-start: 1;
-      grid-column-end: 7;
-
-      @media ${({ theme }) => theme.screenSize.upToMedium} {
-        grid-column: 1/-1;
       }
     }
   }
@@ -134,8 +115,16 @@ const Landing = ({ children, className, pageContext: { slug, page } }) => {
             }
           }
           .span-columns {
-            grid-column: 1 / 12 !important;
+            grid-column: 3 / -3 !important;
             margin: ${size.xlarge} 0;
+          }
+          section > * {
+            grid-column-start: 2;
+            grid-column-end: 8;
+
+            @media ${screenSize.upToMedium} {
+              grid-column: 2 / -2;
+            }
           }
           .hero-img {
             grid-column: 1 / -1;

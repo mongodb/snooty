@@ -52,7 +52,7 @@ const CardGroup = ({
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = !(isCompact || isExtraCompact);
   return (
-    <StyledGrid columns={columns} noMargin={true} isCarousel={isCarousel}>
+    <StyledGrid className="card-group" columns={columns} noMargin={true} isCarousel={isCarousel}>
       {children.map((child, i) => (
         <ComponentFactory {...rest} key={i} nodeData={child} isCompact={isCompact} isExtraCompact={isExtraCompact} />
       ))}
