@@ -19,9 +19,9 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const hidefeedbackheader = page?.options?.hidefeedback === 'header';
-  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && !hidefeedbackheader;
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
+  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader);
 
   return (
     <ConditionalWrapper
