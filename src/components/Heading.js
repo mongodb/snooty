@@ -76,6 +76,7 @@ Heading.propTypes = {
     ).isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
+  page: PropTypes.object,
 };
 
 export default Heading;
