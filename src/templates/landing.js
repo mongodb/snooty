@@ -9,22 +9,53 @@ import Sidenav from '../components/Sidenav';
 import { TEMPLATE_CLASSNAME } from '../constants';
 
 const Wrapper = styled('main')`
-  margin: ${({ theme }) => `${theme.size.large} auto ${theme.size.xlarge} auto`};
-  max-width: 1150px;
-  padding: 0 ${({ theme }) => `${theme.size.medium}`};
-  @media ${({ theme }) => theme.screenSize.upToLarge} {
-    max-width: 748px;
+  margin: 0 auto;
+  max-width: 1440px;
+
+  & > section {
+    display: grid;
+
+    @media ${({ theme }) => theme.screenSize.mediumAndUp} {
+      grid-template-columns: minmax(0, 64px) repeat(12, 1fr) minmax(0, 64px);
+    }
+
+    @media ${({ theme }) => theme.screenSize.upToMedium} {
+      grid-template-columns: minmax(48px, 1fr) repeat(12, 1fr) minmax(48px, 1fr);
+    }
+
+    @media ${({ theme }) => theme.screenSize.upToSmall} {
+      grid-template-columns: 32px repeat(12, 1fr) 32px;
+    }
+
+    @media only screen and (max-width: 320px) {
+      grid-template-columns: repeat(14, 1fr);
+    }
+
+    // Select card group
+    & > :nth-child(4) {
+      @media ${({ theme }) => theme.screenSize.mediumAndUp} {
+        grid-column: 2 / -2 !important;
+      }
+    }
   }
-  @media ${({ theme }) => theme.screenSize.upToMedium} {
-    padding: 0;
-  }
-  & > section,
+
   & > section > section {
     display: grid;
     grid-template-columns: repeat(12, [col-span] 1fr);
-    grid-column: 1/-1;
+    grid-column: 2 / -2;
+
     @media ${({ theme }) => theme.screenSize.upToMedium} {
-      grid-template-columns: ${({ theme }) => `${theme.size.medium} 1fr ${theme.size.medium}`};
+      // grid-template-columns: ${({ theme }) => `${theme.size.medium} 1fr ${theme.size.medium}`};
+      grid-template-columns: 1fr;
+    }
+
+    & > * {
+      grid-column-start: 1;
+      grid-column-end: 7;
+
+      @media ${({ theme }) => theme.screenSize.upToMedium} {
+        grid-column: 1/-1;
+      }
     }
   }
 `;
@@ -91,16 +122,53 @@ const Landing = ({ children, className, pageContext: { slug, page } }) => {
           }
           h1 {
             align-self: end;
+            grid-column: 2 / 8;
+            grid-row: 1 / 2;
+
+            @media ${screenSize.upToMedium} {
+              grid-column: 2 / 11;
+            }
+
+            @media ${screenSize.upToSmall} {
+              grid-column: 2 / -2;
+            }
           }
           .span-columns {
-            grid-column: 2 / 11 !important;
+            grid-column: 1 / 12 !important;
             margin: ${size.xlarge} 0;
           }
-          section > * {
-            grid-column-start: 1;
-            grid-column-end: 7;
+          .hero-img {
+            grid-column: 1 / -1;
+            grid-row: 1 / 3;
+            height: 309px;
+            max-width: 100%;
+            object-fit: cover;
+            z-index: -1;
+
             @media ${screenSize.upToMedium} {
-              grid-column: 2/-2;
+              object-position: 35%;
+            }
+
+            @media ${screenSize.upToSmall} {
+              grid-row: unset;
+              height: 200px;
+              object-position: 85%;
+            }
+
+            @media only screen and (max-width: 320px) {
+              object-position: 100%;
+            }
+          }
+          .introduction {
+            grid-column: 2 / 8;
+            grid-row: 2 / 3;
+
+            @media ${screenSize.upToMedium} {
+              grid-column: 2 / 11;
+            }
+
+            @media ${screenSize.upToSmall} {
+              grid-column: 2 / -2;
             }
           }
           @media ${screenSize.upToLarge} {

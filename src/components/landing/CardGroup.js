@@ -65,6 +65,7 @@ CardGroup.propTypes = {
     children: PropTypes.arrayOf(PropTypes.object),
     options: PropTypes.shape({
       columns: PropTypes.number,
+      style: PropTypes.string,
     }),
   }).isRequired,
 };
