@@ -141,6 +141,10 @@ const ProductLanding = ({
 
 ProductLanding.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  pageContext: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+    toctree: PropTypes.object,
+  }).isRequired,
 };
 
 export default ProductLanding;
