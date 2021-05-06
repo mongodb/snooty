@@ -7,7 +7,7 @@ import { theme } from '../../theme/docsTheme';
 const StyledProcedure = styled('div')`
   max-width: 500px;
   padding-left: ${theme.size.large};
-  @media ${theme.screenSize.upToMedium} {
+  @media ${theme.screenSize.upToLarge} {
     padding-bottom: ${theme.size.large};
   }
   @media ${theme.screenSize.upToSmall} {
