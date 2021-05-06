@@ -69,7 +69,7 @@
     "@leafygreen-ui/select": "^2.1.0",
     "@leafygreen-ui/table": "^1.4.0",
     "@leafygreen-ui/tabs": "^5.1.1",
-    "@leafygreen-ui/text-input": "^5.0.11",
+    "@leafygreen-ui/text-input": "^6.0.1",
     "@leafygreen-ui/tooltip": "^6.1.7",
     "@leafygreen-ui/typography": "^7.5.0",
     "@loadable/component": "^5.14.1",
