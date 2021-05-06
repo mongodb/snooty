@@ -59,7 +59,7 @@ const landingTabStyling = css`
     display: block;
   }
 
-  @media ${theme.screenSize.upToMedium} {
+  @media ${theme.screenSize.upToLarge} {
     display: block;
   }
 `;
