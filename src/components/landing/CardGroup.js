@@ -68,7 +68,6 @@ const CardGroup = ({
     children,
     options: { columns, style },
   },
-  page,
   ...rest
 }) => {
   const isCompact = style === 'compact';
