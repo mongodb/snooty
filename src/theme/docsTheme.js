@@ -36,8 +36,8 @@ const size = {
  * @type {Object.<string, string>}
  */
 const screenSize = {
-  upToXSmall: 'only screen and (max-width: 374px)',
-  xSmallAndUp: 'not all and (max-width: 374px)',
+  upToXSmall: 'only screen and (max-width: 320px)',
+  xSmallAndUp: 'not all and (max-width: 320px)',
   upToSmall: 'only screen and (max-width: 420px)',
   smallAndUp: 'not all and (max-width: 420px)',
   upToMedium: 'only screen and (max-width: 767px)',

@@ -64,6 +64,8 @@ const SearchResultsContainer = styled('div')`
   display: grid;
   grid-template-areas: 'header filter-header' 'results filters';
   grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+  margin: ${theme.size.large} auto ${theme.size.xlarge} auto;
+  max-width: 1150px;
   row-gap: ${theme.size.large};
   width: 100%;
   @media ${theme.screenSize.upToLarge} {

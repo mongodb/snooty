@@ -12,15 +12,16 @@ import Contents from './Contents';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
-const Heading = ({ sectionDepth, nodeData, ...rest }) => {
+const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
 
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
-  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile;
+  const hidefeedbackheader = page?.options?.hidefeedback === 'header';
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
+  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader);
 
   return (
     <ConditionalWrapper
@@ -39,7 +40,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
     >
       <HeadingTag className="contains-headerlink" id={id}>
         {nodeData.children.map((element, index) => {
-          return <ComponentFactory {...rest} nodeData={element} key={index} />;
+          return <ComponentFactory {...rest} nodeData={element} page={page} key={index} />;
         })}
         <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
           ¶
@@ -75,6 +76,7 @@ Heading.propTypes = {
     ).isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
+  page: PropTypes.object,
 };
 
 export default Heading;
