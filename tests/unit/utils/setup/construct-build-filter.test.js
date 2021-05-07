@@ -26,7 +26,7 @@ const mockMetadataDocs = [
 const docsFilter = (buildFilter) => {
   const checkForMatchOrExists = (key, doc) => {
     if (typeof buildFilter[key] === 'string') {
-      return buildFilter[key] == doc[key];
+      return buildFilter[key] === doc[key];
     } else {
       // $exists: false
       return !doc.hasOwnProperty(key);
