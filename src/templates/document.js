@@ -6,7 +6,6 @@ import Contents from '../components/Contents';
 import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
-import Sidenav from '../components/Sidenav';
 import TabSelectors from '../components/TabSelectors';
 import { TEMPLATE_CLASSNAME } from '../constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
@@ -48,7 +47,6 @@ const Document = ({
 
   return (
     <>
-      <Sidenav page={page} slug={slug} />
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">

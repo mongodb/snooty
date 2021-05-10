@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Header from '../components/Header';
+import Sidenav from '../components/Sidenav';
 import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
@@ -68,7 +69,7 @@ const DefaultLayout = (props) => {
     slug,
     template,
   } = pageContext;
-  const Template = getTemplate(project, slug, template);
+  const { Template, sidebar } = getTemplate(project, slug, template);
   const isSidebarEnabled = template !== 'blank';
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
@@ -85,6 +86,7 @@ const DefaultLayout = (props) => {
       >
         <GlobalGrid>
           <Header />
+          {sidebar && <Sidenav page={page} slug={slug} />}
           <Template
             css={css`
               grid-area: contents;

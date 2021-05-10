@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
 import IA from './IA';
+import IATransition from './IATransition';
 import { NavigationContext } from './navigation-context.js';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
@@ -60,11 +61,28 @@ const Sidenav = ({ page, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
   const { pageTitle } = useContext(NavigationContext);
+  const [back, setBack] = React.useState(null);
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
-      <SidebarBack border={<Border />} slug={slug} />
-      {ia && <IA header={<span css={titleStyle}>{formatText(pageTitle)}</span>} ia={ia} />}
+      <IATransition back={back} hasIA={!!ia.length} slug={slug}>
+        <SidebarBack
+          border={<Border />}
+          handleClick={() => {
+            setBack(true);
+          }}
+          slug={slug}
+        />
+        {ia && (
+          <IA
+            header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+            handleClick={() => {
+              setBack(false);
+            }}
+            ia={ia}
+          />
+        )}
+      </IATransition>
       {showAllProducts && <ProductsList />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
