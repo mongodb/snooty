@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
+import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
 import Sidenav from '../components/Sidenav';
 import SiteMetadata from '../components/site-metadata';
@@ -87,16 +88,18 @@ const DefaultLayout = (props) => {
         <GlobalGrid>
           <Header />
           {sidebar && <Sidenav page={page} slug={slug} />}
-          <Template
-            css={css`
-              grid-area: contents;
-              margin: 0px;
-              overflow-y: auto;
-            `}
-            {...props}
-          >
-            {children}
-          </Template>
+          <ContentTransition slug={slug}>
+            <Template
+              css={css`
+                grid-area: contents;
+                margin: 0px;
+                overflow-y: auto;
+              `}
+              {...props}
+            >
+              {children}
+            </Template>
+          </ContentTransition>
         </GlobalGrid>
       </RootProvider>
     </>

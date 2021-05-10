@@ -38,8 +38,6 @@ const forwardStyle = css`
   .slide-enter-active {
     opacity: 1;
     transform: translateX(0%);
-  }
-  .slide-enter-active {
     transition: opacity 300ms, transform 300ms;
   }
 `;
