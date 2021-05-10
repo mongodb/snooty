@@ -9,19 +9,10 @@ const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { DOCUMENTS_COLLECTION, METADATA_COLLECTION } = require('./src/build-constants');
+const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
+const { constructBuildFilter } = require('./src/utils/setup/construct-build-filter');
 
 const DB = siteMetadata.database;
-
-const constructPageIdPrefix = ({ project, parserUser, parserBranch }) => `${project}/${parserUser}/${parserBranch}`;
-
-const constructBuildFilter = ({ commitHash, patchId, ...rest }) => {
-  const pageIdPrefix = constructPageIdPrefix(rest);
-  return {
-    page_id: { $regex: new RegExp(`^${pageIdPrefix}/*`) },
-    commit_hash: commitHash || { $exists: false },
-    patch_id: patchId || { $exists: false },
-  };
-};
 
 const buildFilter = constructBuildFilter(siteMetadata);
 
