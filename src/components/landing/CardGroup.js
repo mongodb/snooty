@@ -31,9 +31,6 @@ const verticalStyling = css`
   grid-column-gap: ${theme.size.default};
   grid-template-columns: 'auto';
   grid-row-gap: '${theme.size.default}';
-  &:before {
-    content: 'unset';
-  }
 `;
 
 // StyledGrid behavior on medium and small screens is determined by 'isCarousel'
