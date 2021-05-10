@@ -22,11 +22,6 @@ const StyledSelect = styled(Select)`
   span {
     font-size: 16px;
   }
-
-  // Remove when mongodb-docs.css is removed
-  a {
-    color: unset;
-  }
 `;
 
 const OptionLink = styled('a')`
@@ -102,6 +97,7 @@ const VersionDropdown = ({
       placeholder={null}
       size={Size.Large}
       value={parserBranch}
+      usePortal={false}
     >
       {Object.entries(gitNamedMapping).map(([branch, name]) => {
         const url = getUrl(branch);
