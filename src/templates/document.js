@@ -36,7 +36,7 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    metadata: { parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
+    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, title, toctreeOrder },
   },
 }) => {
   const { project } = useSiteMetadata();
@@ -48,7 +48,7 @@ const Document = ({
 
   return (
     <>
-      <Sidenav page={page} slug={slug} />
+      <Sidenav page={page} publishedBranches={publishedBranches} siteTitle={title} slug={slug} />
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">
@@ -82,6 +82,7 @@ Document.propTypes = {
       options: PropTypes.object,
     }).isRequired,
     parentPaths: PropTypes.arrayOf(PropTypes.string),
+    publishedBranches: PropTypes.object,
     slug: PropTypes.string.isRequired,
     slugTitleMapping: PropTypes.shape({
       [PropTypes.string]: PropTypes.string,

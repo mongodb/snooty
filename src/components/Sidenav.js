@@ -9,6 +9,7 @@ import IA from './IA';
 import { NavigationContext } from './navigation-context.js';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
+import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 
@@ -50,13 +51,21 @@ const Border = styled('hr')`
   width: 100%;
 `;
 
+const SiteTitle = styled('div')`
+  color: ${uiColors.gray.dark3};
+  font-size: ${theme.fontSize.default};
+  font-weight: bold;
+  line-height: 20px;
+  margin: ${theme.size.small} ${theme.size.medium} 0 ${theme.size.medium};
+`;
+
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
   { glyph: 'Person', title: 'Join our community', url: 'https://developer.mongodb.com/' },
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, slug }) => {
+const Sidenav = ({ page, publishedBranches, siteTitle, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
   const { pageTitle } = useContext(NavigationContext);
@@ -64,6 +73,8 @@ const Sidenav = ({ page, slug }) => {
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
       <SidebarBack border={<Border />} slug={slug} />
+      {!ia && <SiteTitle>{siteTitle}</SiteTitle>}
+      {publishedBranches && <VersionDropdown publishedBranches={publishedBranches} />}
       {ia && <IA header={<span css={titleStyle}>{formatText(pageTitle)}</span>} ia={ia} />}
       {showAllProducts && <ProductsList />}
       <Spaceholder />
@@ -80,6 +91,8 @@ Sidenav.propTypes = {
   page: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
+  publishedBranches: PropTypes.object,
+  siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
 };
 

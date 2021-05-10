@@ -22,7 +22,7 @@ RootProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   headingNodes: PropTypes.arrayOf(PropTypes.object),
   isSidebarEnabled: PropTypes.bool,
-  pageTitle: PropTypes.oneOf([PropTypes.string, PropTypes.arrayOf(PropTypes.object)]),
+  pageTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.object)]),
   selectors: PropTypes.object,
 };
 
