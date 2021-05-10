@@ -44,13 +44,13 @@ const StyledGrid = styled('div')`
 const CardGroup = ({
   nodeData: {
     children,
-    options: { columns, style },
+    options: { columns, layout, style },
   },
   ...rest
 }) => {
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
-  const isCarousel = !(isCompact || isExtraCompact);
+  const isCarousel = layout === 'carousel';
   return (
     <StyledGrid className="card-group" columns={columns} noMargin={true} isCarousel={isCarousel}>
       {children.map((child, i) => (
