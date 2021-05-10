@@ -65,7 +65,7 @@ const Sidenav = ({ page, slug }) => {
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
-      <IATransition back={back} hasIA={!!ia.length} slug={slug}>
+      <IATransition back={back} hasIA={!!ia} slug={slug}>
         <SidebarBack
           border={<Border />}
           handleClick={() => {

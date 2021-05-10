@@ -37,7 +37,15 @@ const ContentTransition = ({ children, slug }) => (
         classNames="fade"
         key={slug}
       >
-        <div>{children}</div>
+        <div
+          css={css`
+            grid-area: contents;
+            margin: 0px;
+            overflow-y: auto;
+          `}
+        >
+          {children}
+        </div>
       </CSSTransition>
     </SwitchTransition>
   </>

@@ -89,16 +89,7 @@ const DefaultLayout = (props) => {
           <Header />
           {sidebar && <Sidenav page={page} slug={slug} />}
           <ContentTransition slug={slug}>
-            <Template
-              css={css`
-                grid-area: contents;
-                margin: 0px;
-                overflow-y: auto;
-              `}
-              {...props}
-            >
-              {children}
-            </Template>
+            <Template {...props}>{children}</Template>
           </ContentTransition>
         </GlobalGrid>
       </RootProvider>
