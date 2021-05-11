@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ContentsProvider } from './contents-context';
 import { HeaderContextProvider } from './header-context';
 import { NavigationProvider } from './navigation-context';
 import { SidebarContextProvider } from './sidebar-context';
@@ -8,13 +7,11 @@ import { TabProvider } from './tab-context';
 
 const RootProvider = ({ children, headingNodes, isSidebarEnabled, pageTitle, selectors }) => (
   <TabProvider selectors={selectors}>
-    <ContentsProvider headingNodes={headingNodes}>
-      <HeaderContextProvider>
-        <NavigationProvider pageTitle={pageTitle}>
-          <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>{children}</SidebarContextProvider>
-        </NavigationProvider>
-      </HeaderContextProvider>
-    </ContentsProvider>
+    <HeaderContextProvider>
+      <NavigationProvider pageTitle={pageTitle}>
+        <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>{children}</SidebarContextProvider>
+      </NavigationProvider>
+    </HeaderContextProvider>
   </TabProvider>
 );
 

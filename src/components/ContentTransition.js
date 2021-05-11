@@ -19,7 +19,7 @@ const fadeIn = css`
   }
   .fade-enter-active {
     opacity: 1;
-    transition: opacity 300ms;
+    transition: opacity 200ms;
   }
 `;
 

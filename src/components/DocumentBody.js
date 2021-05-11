@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { StaticQuery, graphql } from 'gatsby';
 import ComponentFactory from './ComponentFactory';
+import { ContentsProvider } from './contents-context';
 import FootnoteContext from './footnote-context';
 import Footer from './Footer';
 import SEO from './SEO';
@@ -8,6 +10,7 @@ import Widgets from './Widgets';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
+import { getTemplate } from '../utils/get-template';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
 // Delete this modified node from its original location.
@@ -88,29 +91,54 @@ export default class DocumentBody extends Component {
   render() {
     const {
       location,
-      pageContext: { metadata, page, slug },
+      pageContext: { metadata, page, slug, template },
     } = this.props;
     const lookup = slug === '/' ? 'index' : slug;
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
     const siteTitle = getNestedValue(['title'], metadata) || '';
+
     return (
-      <>
-        <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-        <Widgets
-          location={location}
-          pageOptions={page?.options}
-          pageTitle={pageTitle}
-          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-          slug={slug}
-        >
-          <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
-            {this.pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-            <Footer />
-          </FootnoteContext.Provider>
-        </Widgets>
-      </>
+      <StaticQuery
+        query={graphql`
+          query {
+            site {
+              siteMetadata {
+                project
+              }
+            }
+          }
+        `}
+        render={({
+          site: {
+            siteMetadata: { project },
+          },
+        }) => {
+          const { Template } = getTemplate(project, slug, template);
+          return (
+            <>
+              <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
+              <Widgets
+                location={location}
+                pageOptions={page?.options}
+                pageTitle={pageTitle}
+                publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+                slug={slug}
+              >
+                <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
+                  <ContentsProvider headingNodes={page?.options?.headings}>
+                    <Template {...this.props}>
+                      {this.pageNodes.map((child, index) => (
+                        <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                      ))}
+                    </Template>
+                  </ContentsProvider>
+                  <Footer />
+                </FootnoteContext.Provider>
+              </Widgets>
+            </>
+          );
+        }}
+      />
     );
   }
 }

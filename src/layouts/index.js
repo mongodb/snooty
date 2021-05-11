@@ -70,7 +70,7 @@ const DefaultLayout = (props) => {
     slug,
     template,
   } = pageContext;
-  const { Template, sidebar } = getTemplate(project, slug, template);
+  const { sidebar } = getTemplate(project, slug, template);
   const isSidebarEnabled = template !== 'blank';
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
@@ -79,18 +79,11 @@ const DefaultLayout = (props) => {
     <>
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <RootProvider
-        headingNodes={page?.options?.headings}
-        isSidebarEnabled={isSidebarEnabled}
-        pageTitle={pageTitle}
-        selectors={page?.options?.selectors}
-      >
+      <RootProvider isSidebarEnabled={isSidebarEnabled} pageTitle={pageTitle} selectors={page?.options?.selectors}>
         <GlobalGrid>
           <Header />
           {sidebar && <Sidenav page={page} slug={slug} />}
-          <ContentTransition slug={slug}>
-            <Template {...props}>{children}</Template>
-          </ContentTransition>
+          <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>
       </RootProvider>
     </>
