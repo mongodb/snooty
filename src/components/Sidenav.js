@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -7,7 +7,6 @@ import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-n
 import { uiColors } from '@leafygreen-ui/palette';
 import IA from './IA';
 import IATransition from './IATransition';
-import { NavigationContext } from './navigation-context.js';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
 import VersionDropdown from './VersionDropdown';
@@ -66,10 +65,9 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, publishedBranches, siteTitle, slug }) => {
+const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
-  const { pageTitle } = useContext(NavigationContext);
   const [back, setBack] = React.useState(null);
 
   return (
@@ -92,8 +90,8 @@ const Sidenav = ({ page, publishedBranches, siteTitle, slug }) => {
           />
         )}
       </IATransition>
-      {publishedBranches && <VersionDropdown publishedBranches={publishedBranches} />}
       {!ia && <SiteTitle>{siteTitle}</SiteTitle>}
+      {publishedBranches && <VersionDropdown publishedBranches={publishedBranches} />}
       {showAllProducts && <ProductsList />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
