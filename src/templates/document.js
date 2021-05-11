@@ -17,10 +17,6 @@ const DocumentContainer = styled('div')`
   grid-template-columns: minmax(0px, 830px) auto;
 `;
 
-const MainBody = styled('div')`
-  margin-left: 25px;
-`;
-
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
 `;
@@ -49,7 +45,7 @@ const Document = ({
     <>
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
-          <MainBody className="body">
+          <div className="body">
             <Breadcrumbs
               homeUrl={breadcrumbsHomeUrl}
               pageTitle={breadcrumbsPageTitle}
@@ -61,7 +57,7 @@ const Document = ({
             {showPrevNext && (
               <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
             )}
-          </MainBody>
+          </div>
         </StyledMainColumn>
         <StyledRightColumn>
           <TabSelectors />
