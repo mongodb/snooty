@@ -21,7 +21,7 @@ const Placeholder = () => (
   />
 );
 
-const SidebarBack = ({ border, slug }) => {
+const SidebarBack = ({ border, handleClick, slug }) => {
   const { parents } = useContext(NavigationContext);
   const { project } = useSiteMetadata();
 
@@ -48,7 +48,7 @@ const SidebarBack = ({ border, slug }) => {
 
   return (
     <>
-      <SideNavItem as={Link} to={url} glyph={<Icon glyph="ArrowLeft" size="small" />}>
+      <SideNavItem as={Link} to={url} glyph={<Icon glyph="ArrowLeft" size="small" />} onClick={handleClick}>
         Back to {formatText(title)}
       </SideNavItem>
       {border}

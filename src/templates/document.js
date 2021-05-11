@@ -6,7 +6,6 @@ import Contents from '../components/Contents';
 import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
-import Sidenav from '../components/Sidenav';
 import TabSelectors from '../components/TabSelectors';
 import { TEMPLATE_CLASSNAME } from '../constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
@@ -36,7 +35,7 @@ const Document = ({
   pageContext: {
     slug,
     page,
-    metadata: { parentPaths, publishedBranches, slugToTitle: slugTitleMapping, title, toctreeOrder },
+    metadata: { parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
   },
 }) => {
   const { project } = useSiteMetadata();
@@ -48,7 +47,6 @@ const Document = ({
 
   return (
     <>
-      <Sidenav page={page} publishedBranches={publishedBranches} siteTitle={title} slug={slug} />
       <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
         <StyledMainColumn>
           <MainBody className="body">
@@ -82,7 +80,6 @@ Document.propTypes = {
       options: PropTypes.object,
     }).isRequired,
     parentPaths: PropTypes.arrayOf(PropTypes.string),
-    publishedBranches: PropTypes.object,
     slug: PropTypes.string.isRequired,
     slugTitleMapping: PropTypes.shape({
       [PropTypes.string]: PropTypes.string,

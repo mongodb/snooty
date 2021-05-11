@@ -4,7 +4,6 @@ import { css } from '@emotion/core';
 import Breadcrumbs from '../components/Breadcrumbs';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
 import MainColumn from '../components/MainColumn';
-import Sidenav from '../components/Sidenav';
 import { TEMPLATE_CLASSNAME } from '../constants';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 
@@ -12,12 +11,10 @@ const EcosystemIndex = ({
   className,
   pageContext: {
     metadata: { title, parentPaths },
-    page,
     slug,
   },
 }) => (
   <>
-    <Sidenav page={page} siteTitle={title} slug={slug} />
     <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
       <MainColumn className={EcosystemHomepageStyles.fullWidth}>
         <div
@@ -60,7 +57,6 @@ EcosystemIndex.propTypes = {
       title: PropTypes.string.isRequired,
       parentPaths: PropTypes.arrayOf(PropTypes.string),
     }),
-    page: PropTypes.object.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
 };
