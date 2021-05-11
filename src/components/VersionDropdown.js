@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
 import { Option, Select, Size } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
@@ -18,6 +19,10 @@ const zip = (a, b) => {
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.default} ${theme.size.medium} ${theme.size.medium} ${theme.size.medium};
+
+  & > button {
+    background-color: ${uiColors.white};
+  }
 
   span {
     font-size: 16px;
