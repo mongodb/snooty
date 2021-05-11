@@ -36,6 +36,9 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
 
 const titleStyle = css`
   color: ${uiColors.gray.dark3};
+  font-size: ${theme.fontSize.default};
+  font-weight: bold;
+  line-height: 20px;
   text-transform: capitalize;
 `;
 
@@ -52,10 +55,7 @@ const Border = styled('hr')`
 `;
 
 const SiteTitle = styled('div')`
-  color: ${uiColors.gray.dark3};
-  font-size: ${theme.fontSize.default};
-  font-weight: bold;
-  line-height: 20px;
+  ${titleStyle}
   margin: ${theme.size.small} ${theme.size.medium} 0 ${theme.size.medium};
 `;
 
