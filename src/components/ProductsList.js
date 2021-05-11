@@ -18,7 +18,6 @@ const Products = styled(`ul`)`
 
 const ProductsListContainer = styled('div')`
   line-height: 20px;
-  margin-top: ${theme.size.large};
   width: 100%;
 `;
 
