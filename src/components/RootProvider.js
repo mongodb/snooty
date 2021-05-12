@@ -5,10 +5,10 @@ import { NavigationProvider } from './navigation-context';
 import { SidebarContextProvider } from './sidebar-context';
 import { TabProvider } from './tab-context';
 
-const RootProvider = ({ children, isSidebarEnabled, pageTitle, selectors }) => (
+const RootProvider = ({ children, isSidebarEnabled, selectors }) => (
   <TabProvider selectors={selectors}>
     <HeaderContextProvider>
-      <NavigationProvider pageTitle={pageTitle}>
+      <NavigationProvider>
         <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>{children}</SidebarContextProvider>
       </NavigationProvider>
     </HeaderContextProvider>
@@ -18,7 +18,6 @@ const RootProvider = ({ children, isSidebarEnabled, pageTitle, selectors }) => (
 RootProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   isSidebarEnabled: PropTypes.bool,
-  pageTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.object)]),
   selectors: PropTypes.object,
 };
 

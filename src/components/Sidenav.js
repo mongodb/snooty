@@ -97,7 +97,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
         )}
       </IATransition>
       {!ia && <SiteTitle>{siteTitle}</SiteTitle>}
-      {publishedBranches && <VersionDropdown publishedBranches={publishedBranches} />}
+      {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
         <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>

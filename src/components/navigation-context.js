@@ -5,7 +5,7 @@ import { fetchProjectParents } from '../utils/realm';
 
 const NavigationContext = React.createContext(null);
 
-const NavigationProvider = ({ children, pageTitle }) => {
+const NavigationProvider = ({ children }) => {
   const { database, project } = useSiteMetadata();
   const [parents, setParents] = useState([]);
 
@@ -23,7 +23,7 @@ const NavigationProvider = ({ children, pageTitle }) => {
     }
   }, [database, project]);
 
-  return <NavigationContext.Provider value={{ pageTitle, parents }}>{children}</NavigationContext.Provider>;
+  return <NavigationContext.Provider value={{ parents }}>{children}</NavigationContext.Provider>;
 };
 
 export { NavigationContext, NavigationProvider };
