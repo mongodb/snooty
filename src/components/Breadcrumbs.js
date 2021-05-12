@@ -8,6 +8,7 @@ import BreadcrumbContainer from './BreadcrumbContainer';
 
 const Wrapper = styled('nav')`
   font-size: ${theme.fontSize.small};
+  margin-bottom: ${theme.size.medium};
 
   * {
     color: ${uiColors.gray.dark1};
