@@ -3,7 +3,7 @@ import { theme } from '../theme/docsTheme';
 
 const HeaderContext = createContext({
   bannerContent: null,
-  setBannerContent: null,
+  setBannerContent: () => {},
   totalHeaderHeight: theme.header.navbarHeight,
 });
 

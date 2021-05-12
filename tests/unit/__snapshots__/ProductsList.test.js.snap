@@ -3,7 +3,6 @@
 exports[`ProductsList renders with products 1`] = `
 .emotion-22 {
   line-height: 20px;
-  margin-top: 32px;
   width: 100%;
 }
 

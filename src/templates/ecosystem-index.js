@@ -11,7 +11,6 @@ const EcosystemIndex = ({
   className,
   pageContext: {
     metadata: { title, parentPaths },
-    page,
     slug,
   },
 }) => (
@@ -58,7 +57,6 @@ EcosystemIndex.propTypes = {
       title: PropTypes.string.isRequired,
       parentPaths: PropTypes.arrayOf(PropTypes.string),
     }),
-    page: PropTypes.object.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
 };

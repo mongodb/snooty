@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -7,9 +7,9 @@ import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-n
 import { uiColors } from '@leafygreen-ui/palette';
 import IA from './IA';
 import IATransition from './IATransition';
-import { NavigationContext } from './navigation-context.js';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
+import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 
@@ -36,6 +36,9 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
 
 const titleStyle = css`
   color: ${uiColors.gray.dark3};
+  font-size: ${theme.fontSize.default};
+  font-weight: bold;
+  line-height: 20px;
   text-transform: capitalize;
 `;
 
@@ -51,16 +54,20 @@ const Border = styled('hr')`
   width: 100%;
 `;
 
+const SiteTitle = styled('div')`
+  ${titleStyle}
+  margin: ${theme.size.small} ${theme.size.medium} 0 ${theme.size.medium};
+`;
+
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
   { glyph: 'Person', title: 'Join our community', url: 'https://developer.mongodb.com/' },
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, slug }) => {
+const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
-  const { pageTitle } = useContext(NavigationContext);
   const [back, setBack] = React.useState(null);
 
   return (
@@ -82,8 +89,15 @@ const Sidenav = ({ page, slug }) => {
             ia={ia}
           />
         )}
+        {showAllProducts && (
+          <>
+            <Border />
+            <ProductsList />
+          </>
+        )}
       </IATransition>
-      {showAllProducts && <ProductsList />}
+      {!ia && <SiteTitle>{siteTitle}</SiteTitle>}
+      {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
         <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
@@ -98,6 +112,8 @@ Sidenav.propTypes = {
   page: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
+  publishedBranches: PropTypes.object,
+  siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
 };
 

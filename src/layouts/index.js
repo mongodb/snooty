@@ -65,7 +65,7 @@ const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
   const {
-    metadata: { slugToTitle, title },
+    metadata: { publishedBranches, slugToTitle, title },
     page,
     slug,
     template,
@@ -79,10 +79,18 @@ const DefaultLayout = (props) => {
     <>
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <RootProvider isSidebarEnabled={isSidebarEnabled} pageTitle={pageTitle} selectors={page?.options?.selectors}>
+      <RootProvider isSidebarEnabled={isSidebarEnabled} selectors={page?.options?.selectors}>
         <GlobalGrid>
           <Header />
-          {sidebar && <Sidenav page={page} slug={slug} />}
+          {sidebar && (
+            <Sidenav
+              page={page}
+              pageTitle={pageTitle}
+              publishedBranches={publishedBranches}
+              siteTitle={title}
+              slug={slug}
+            />
+          )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>
       </RootProvider>
@@ -96,6 +104,7 @@ DefaultLayout.propTypes = {
     page: PropTypes.shape({
       options: PropTypes.object,
     }).isRequired,
+    publishedBranches: PropTypes.object,
     slug: PropTypes.string,
     template: PropTypes.string,
   }).isRequired,
