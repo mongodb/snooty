@@ -29,11 +29,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         href="https://docs.mongodb.com/osd.xml"
         title="MongoDB Help"
       />
-      {process.env.GATSBY_SITE === 'guides' ? (
-        <link rel="stylesheet" href={withPrefix('docs-tools/guides.css')} type="text/css" />
-      ) : (
-        <link rel="stylesheet" href={withPrefix('docs-tools/mongodb-docs.css')} type="text/css" />
-      )}
       <link rel="stylesheet" href={withPrefix('docs-tools/navbar.min.css')} type="text/css" />
       {headComponents}
     </head>
