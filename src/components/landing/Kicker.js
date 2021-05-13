@@ -7,6 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
 const StyledKicker = styled(Overline)`
+  grid-column: 1;
   font-size: ${theme.fontSize.small};
   color: ${uiColors.gray.dark1};
   padding-top: 80px;
