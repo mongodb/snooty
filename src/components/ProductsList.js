@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -6,14 +8,46 @@ import Link from './Link';
 import { useAllProducts } from '../hooks/useAllProducts';
 import { theme } from '../theme/docsTheme';
 
+const chevronRotationDuration = 200;
+const openTransitionDuration = 300;
+const transitionDurationTotal = chevronRotationDuration + openTransitionDuration;
+
+const openTransition = css`
+  transition: all ${transitionDurationTotal}ms ease ${chevronRotationDuration}ms;
+`;
+
+const transitionClasses = css`
+  .products-list-enter {
+    display: block !important;
+    margin-top: -100vh;
+  }
+  .products-list-enter-active {
+    display: block !important;
+    margin-top: 0;
+    ${openTransition}
+  }
+  .products-list-enter-done {
+    display: block !important;
+  }
+  .products-list-exit {
+    display: block !important;
+    margin-top: 0;
+  }
+  .products-list-exit-active {
+    display: block !important;
+    margin-top: -100vh;
+    ${openTransition}
+  }
+`;
+
 const HeadingTitle = styled('span')`
   padding-left: ${theme.size.small};
 `;
 
 const Products = styled(`ul`)`
+  display: none;
   list-style-type: none;
   padding: 0;
-  ${({ isOpen }) => !isOpen && 'display: none;'}
 `;
 
 const ProductsListContainer = styled('div')`
@@ -23,11 +57,14 @@ const ProductsListContainer = styled('div')`
 
 const ProductsListHeading = styled('div')`
   align-items: center;
+  background-color: ${uiColors.gray.light3};
   color: ${({ isOpen }) => (isOpen ? uiColors.gray.dark3 : uiColors.gray.dark1)};
   cursor: pointer;
   display: flex;
-  padding: 0px ${theme.size.medium} 12px;
+  padding: ${theme.size.default} ${theme.size.medium} 12px;
+  position: relative;
   user-select: none;
+  z-index: 1;
 
   :hover {
     color: ${uiColors.gray.dark3};
@@ -56,6 +93,9 @@ const ProductLink = styled(Link)`
 const StyledIcon = styled(Icon)`
   height: 12px;
   width: 12px;
+
+  transform: ${({ isOpen }) => (isOpen ? 'rotate(0deg)' : 'rotate(-180deg)')};
+  transition: transform ${chevronRotationDuration}ms;
 `;
 
 const ProductsList = () => {
@@ -63,21 +103,30 @@ const ProductsList = () => {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <ProductsListContainer>
-      <ProductsListHeading isOpen={isOpen} onClick={() => setOpen(!isOpen)}>
-        <StyledIcon glyph={isOpen ? 'ChevronUp' : 'ChevronDown'} />
-        <HeadingTitle>View all products</HeadingTitle>
-      </ProductsListHeading>
-      <Products isOpen={isOpen}>
-        {products.map(({ title, url }, index) => {
-          return (
-            <li key={index}>
-              <ProductLink to={url}>{title}</ProductLink>
-            </li>
-          );
-        })}
-      </Products>
-    </ProductsListContainer>
+    <>
+      <Global styles={transitionClasses} />
+      <ProductsListContainer>
+        <ProductsListHeading isOpen={isOpen} onClick={() => setOpen(!isOpen)}>
+          <StyledIcon glyph="ChevronUp" isOpen={isOpen} />
+          <HeadingTitle>View all products</HeadingTitle>
+        </ProductsListHeading>
+      </ProductsListContainer>
+      <CSSTransition
+        in={isOpen}
+        classNames="products-list"
+        addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
+      >
+        <Products>
+          {products.map(({ title, url }, index) => {
+            return (
+              <li key={index}>
+                <ProductLink to={url}>{title}</ProductLink>
+              </li>
+            );
+          })}
+        </Products>
+      </CSSTransition>
+    </>
   );
 };
 

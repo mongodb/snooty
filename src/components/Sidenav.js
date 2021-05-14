@@ -21,6 +21,7 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   & > div > nav > div > ul {
     display: flex;
     flex-direction: column;
+    padding-top: 0px;
   }
 
   a,
@@ -59,6 +60,18 @@ const SiteTitle = styled('div')`
   margin: ${theme.size.small} ${theme.size.medium} 0 ${theme.size.medium};
 `;
 
+// Create artificial "padding" at the top of the SideNav to allow products list to transition without being seen
+// by the gap in the SideNav's original padding.
+const ArtificialPadding = styled('div')`
+  height: 16px;
+`;
+
+const NavTopContainer = styled('div')`
+  background-color: ${uiColors.gray.light3};
+  position: relative;
+  z-index: 1;
+`;
+
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
   { glyph: 'Person', title: 'Join our community', url: 'https://developer.mongodb.com/' },
@@ -73,30 +86,35 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation">
       <IATransition back={back} hasIA={!!ia} slug={slug}>
-        <SidebarBack
-          border={<Border />}
-          handleClick={() => {
-            setBack(true);
-          }}
-          slug={slug}
-        />
-        {ia && (
-          <IA
-            header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+        <NavTopContainer>
+          <ArtificialPadding />
+          <SidebarBack
+            border={<Border />}
             handleClick={() => {
-              setBack(false);
+              setBack(true);
             }}
-            ia={ia}
+            slug={slug}
           />
-        )}
-        {showAllProducts && (
-          <>
-            <Border />
-            <ProductsList />
-          </>
-        )}
+          {ia && (
+            <IA
+              header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+              handleClick={() => {
+                setBack(false);
+              }}
+              ia={ia}
+            />
+          )}
+          {showAllProducts && (
+            <Border
+              css={css`
+                margin-bottom: 0;
+              `}
+            />
+          )}
+        </NavTopContainer>
+        {showAllProducts && <ProductsList />}
       </IATransition>
-      {!ia && <SiteTitle>{siteTitle}</SiteTitle>}
+      {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
       {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
