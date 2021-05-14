@@ -9,11 +9,9 @@ import { useAllProducts } from '../hooks/useAllProducts';
 import { theme } from '../theme/docsTheme';
 
 const chevronRotationDuration = 200;
-const openTransitionDuration = 300;
-const transitionDurationTotal = chevronRotationDuration + openTransitionDuration;
 
 const openTransition = css`
-  transition: all ${transitionDurationTotal}ms ease ${chevronRotationDuration}ms;
+  transition: all 300ms ease-in-out ${chevronRotationDuration}ms;
 `;
 
 const transitionClasses = css`
