@@ -2,18 +2,6 @@ hr,
 input[type='search'] {
   box-sizing: content-box;
 }
-pre,
-textarea {
-  overflow: auto;
-}
-pre,
-pre code {
-  white-space: pre-wrap;
-}
-pre code,
-table {
-  background-color: transparent;
-}
 .auth-table td .line-block,
 .field-list p,
 .sequence-block .section > h4,
@@ -21,12 +9,6 @@ div.sidebar .button-code-block,
 fieldset,
 figure {
   margin: 0;
-}
-.btn,
-.code-button {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 .carousel,
 .collapsing,
@@ -87,10 +69,6 @@ html {
 .sequence-block,
 table.highlighttable {
   table-layout: fixed;
-}
-.apiref-resource__path,
-pre {
-  word-break: break-all;
 }
 .deluge li,
 .fa-ul,
@@ -256,13 +234,6 @@ cite {
 mark {
   background: #ff0;
   color: #000;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, serif;
-  font-size: 1em;
 }
 q {
   quotes: '\201C''\201D''\2018''\2019';
@@ -439,24 +410,6 @@ html {
 body {
   font-size: 14px;
 }
-.table-hover > tbody > tr:hover > td,
-.table-hover > tbody > tr:hover > th,
-.table > tbody > tr.active > td,
-.table > tbody > tr.active > th,
-.table > tbody > tr > td.active,
-.table > tbody > tr > th.active,
-.table > tfoot > tr.active > td,
-.table > tfoot > tr.active > th,
-.table > tfoot > tr > td.active,
-.table > tfoot > tr > th.active,
-.table > thead > tr.active > td,
-.table > thead > tr.active > th,
-.table > thead > tr > td.active,
-.table > thead > tr > th.active,
-div.highlight-powershell pre,
-pre {
-  background-color: #f5f5f5;
-}
 button,
 input,
 select,
@@ -525,14 +478,6 @@ label {
   border-radius: 4px;
   transition: 0.2s ease-in-out;
   max-width: 100%;
-}
-.checkbox,
-.form-control,
-.radio,
-address,
-legend,
-pre {
-  display: block;
 }
 .img-circle {
   border-radius: 50%;
@@ -736,12 +681,6 @@ blockquote p {
   font-weight: 300;
   line-height: 1.25;
 }
-.form-control,
-address,
-blockquote small,
-pre {
-  line-height: 1.428571429;
-}
 blockquote small {
   display: block;
   color: #999;
@@ -766,27 +705,6 @@ blockquote:before,
 q:after,
 q:before {
   content: '';
-}
-pre {
-  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
-  font-size: 13px;
-  word-wrap: break-word;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow-y: hidden;
-  padding: 24px 12px;
-  color: #222;
-  margin: 24px 0;
-}
-pre code {
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-  border: 0;
-}
-.pre-scrollable {
-  max-height: 340px;
-  overflow-y: scroll;
 }
 .container {
   margin-right: auto;
@@ -3129,10 +3047,6 @@ button.close {
   background: 0 0;
   border: 0;
   -webkit-appearance: none;
-}
-div.admonition-example pre,
-div.sidebar {
-  background-color: #fbfbfb;
 }
 .modal {
   display: none;
@@ -9614,11 +9528,6 @@ p.rubric {
   margin-top: 30px;
   font-weight: 700;
 }
-.figure,
-img,
-td.code pre {
-  max-width: 100%;
-}
 .figure.align-left,
 img.align-left,
 object.align-left {
@@ -9770,14 +9679,6 @@ a:hover {
 .classifier {
   font-style: oblique;
 }
-.linenos pre {
-  padding: 0;
-  border: 0;
-  color: #aaa;
-  font-family: 'Source Code Pro', monospace;
-  font-size: 14px;
-  line-height: 24px;
-}
 .deluge textarea,
 div.sphinxsidebarwrapper ul li a code span,
 div.sphinxsidebarwrapper ul li a tt span {
@@ -9792,108 +9693,17 @@ div.sphinxsidebarwrapper ul li a tt span {
   overflow: scroll;
   width: 100%;
 }
-div.viewcode-block:target {
-  margin: -1px -10px;
-  padding: 0 10px;
-}
 img.math {
   vertical-align: middle;
-}
-.button-row {
-  background-image: url(https://media.mongodb.org/code-block-bg.png);
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: row-reverse;
-  flex-direction: row-reverse;
-  border-left: 5px solid #494747;
-  height: 24px;
-}
-.code-button {
-  color: #fff;
-  -ms-flex-positive: 0;
-  flex-grow: 0;
-  min-width: 75px;
-  background: #7a7b7b;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  height: 100%;
-  line-height: 16px;
-  margin: 0 1px;
-  padding: 4px 8px;
-  border-radius: 0;
-  user-select: none;
 }
 .deluge-close-link,
 .deluge-vote-button {
   text-align: center;
   text-decoration: underline;
 }
-.code-button:first-of-type {
-  margin-right: 0;
-}
-.code-button:focus,
-.code-button:hover {
-  background: #9d9e9e;
-  color: #fff;
-  text-decoration: none;
-}
-.code-button:active {
-  background: #7a7b7b;
-}
-.code-button__tooltip {
-  border-radius: 6px;
-  display: inline-block;
-  font-size: 13px;
-  opacity: 0;
-  padding: 4px 16px;
-  position: absolute;
-  pointer-events: none;
-  transition: opacity 0.3s ease-out;
-  background-color: rgba(34, 34, 34, 0.8);
-  opacity: 0;
-  top: -125%;
-  right: 8px;
-}
-.code-button__tooltip::after {
-  width: 0;
-  height: 0;
-  border-top: 10px solid rgba(34, 34, 34, 0.8);
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  bottom: -10px;
-  left: calc(50% - 6px);
-  position: absolute;
-  content: '';
-}
-.code-button__tooltip--active {
-  opacity: 1;
-}
-.button-code-block {
-  margin: 20px 0;
-}
-.button-code-block pre {
-  margin: 0 auto;
-  padding-top: 2px;
-  padding-bottom: 24px;
-}
-td.code,
-td.code div.highlight,
-td.code div.highlight pre,
-td.linenos,
-td.linenos pre {
-  padding-top: 0;
-}
 div.related ul,
 table.highlighttable td {
   padding: 0;
-}
-td.code {
-  width: 100%;
-}
-.linenos-button-row-spacer {
-  width: 2em;
 }
 .deluge {
   background-color: #13aa52;
@@ -11289,15 +11099,6 @@ div.body h6 {
   color: #313030;
   padding: 0;
 }
-code,
-code span.pre,
-div.highlight pre,
-dl.method > dt big,
-dl.method > dt em,
-tt,
-tt span.pre {
-  font-family: 'Source Code Pro', monospace;
-}
 div.body h1 {
   border-top: none;
   font-size: 36px;
@@ -11360,11 +11161,6 @@ table.docutils tbody tr td div.highlight pre,
 table.docutils > div.admonition-example {
   background-color: inherit;
 }
-div.highlight pre,
-table.docutils div.admonition div.button-row,
-table.docutils div.admonition div.highlight pre {
-  background: url(https://media.mongodb.org/code-block-bg.png) #f5f6f7;
-}
 div.seealso {
   padding-bottom: 7px;
 }
@@ -11405,9 +11201,6 @@ table.docutils.field-list ul.first.last.simple > li > p {
 table.footnote {
   font-size: 0.95em;
   line-height: 1.3em;
-}
-div td pre {
-  border: none;
 }
 table.docutils {
   margin: 24px 0;
@@ -11582,26 +11375,6 @@ dl.method > dt big {
 dl.method > dt em {
   font-weight: 700;
   font-style: normal;
-}
-div.highlight pre {
-  border-radius: 0;
-  border: none;
-  border-left: 5px solid #494747;
-  font-size: 14px;
-  line-height: 24px;
-  overflow: auto;
-  word-wrap: normal;
-  white-space: pre;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  div.highlight pre {
-    background: url(https://media.mongodb.org/code-block-bg@2x.png) 0 0/12px 12px #f5f6f7;
-  }
-}
-table.docutils div.highlight pre {
-  background: 0 0;
-  border: none;
-  padding: 0;
 }
 table.docutils .button-row {
   border: none;
