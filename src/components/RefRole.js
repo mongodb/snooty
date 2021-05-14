@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import Link from './Link';
+import StyledLink from './StyledLink';
 import { normalizePath } from '../utils/normalize-path';
 
 const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug }) => {
   // Render intersphinx target links
   if (url) {
     return (
-      <Link to={url}>
+      <StyledLink to={url}>
         {children.map((node, i) => (
           <ComponentFactory key={i} nodeData={node} />
         ))}
-      </Link>
+      </StyledLink>
     );
   }
 
@@ -34,11 +34,11 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug }) =>
   }
 
   return (
-    <Link to={normalizePath(link)}>
+    <StyledLink to={normalizePath(link)}>
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
-    </Link>
+    </StyledLink>
   );
 };
 

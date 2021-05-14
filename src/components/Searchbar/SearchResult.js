@@ -56,11 +56,8 @@ const SearchResultContainer = styled('div')`
 const SearchResultLink = styled('a')`
   color: ${LINK_COLOR};
   height: 100%;
-  text-decoration: none;
   :hover,
   :focus {
-    color: ${LINK_COLOR};
-    text-decoration: none;
     ${SearchResultContainer} {
       background-color: rgba(231, 238, 236, 0.4);
       transition: background-color 150ms ease-in;

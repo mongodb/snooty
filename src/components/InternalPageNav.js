@@ -1,31 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from './Link';
+import styled from '@emotion/styled';
+import StyledLink from './StyledLink';
 import { getPageTitle } from '../utils/get-page-title';
+
+const NavContainer = styled('nav')`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
   const slugIndex = toctreeOrder.indexOf(slug);
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
   return (
-    <div id="btnv">
-      {prevSlug && (
-        <React.Fragment>
-          <span className="btn-arrow-left">← &nbsp;</span>
-          <Link className="btn-prev-text" to={prevSlug} title="Previous Section">
-            <span>{getPageTitle(prevSlug, slugTitleMapping)}</span>
-          </Link>
-        </React.Fragment>
-      )}
-      {nextSlug && (
-        <React.Fragment>
-          <Link className="btn-next-text" to={nextSlug} title="Next Section">
-            <span>{getPageTitle(nextSlug, slugTitleMapping)}</span>
-          </Link>
-          <span className="btn-arrow-right">&nbsp;→</span>
-        </React.Fragment>
-      )}
-    </div>
+    <NavContainer>
+      <div>
+        {prevSlug && (
+          <>
+            ←&nbsp;
+            <StyledLink className="btn-prev-text" to={prevSlug} title="Previous Section">
+              {getPageTitle(prevSlug, slugTitleMapping)}
+            </StyledLink>
+          </>
+        )}
+      </div>
+      <div>
+        {nextSlug && (
+          <>
+            <StyledLink className="btn-next-text" to={nextSlug} title="Next Section">
+              {getPageTitle(nextSlug, slugTitleMapping)}
+            </StyledLink>
+            &nbsp;→
+          </>
+        )}
+      </div>
+    </NavContainer>
   );
 };
 

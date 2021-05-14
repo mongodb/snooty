@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import Link from './Link';
+import StyledLink from './StyledLink';
 
-const Reference = ({ nodeData }) => {
-  return (
-    <Link className="reference external" to={nodeData.refuri}>
-      {nodeData.children.map((element, index) => (
-        <ComponentFactory key={index} nodeData={element} />
-      ))}
-    </Link>
-  );
-};
+const Reference = ({ nodeData }) => (
+  <StyledLink to={nodeData.refuri}>
+    {nodeData.children.map((element, index) => (
+      <ComponentFactory key={index} nodeData={element} />
+    ))}
+  </StyledLink>
+);
 
 Reference.propTypes = {
   nodeData: PropTypes.shape({

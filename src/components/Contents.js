@@ -38,11 +38,6 @@ const ContentsListItem = ({ children, depth, id, isActive, isDesktopOrLaptop }) 
         /* Heading sections should begin at depth 2 */
         padding-left: calc(${isDesktopOrLaptop ? '14px +' : ''} ${depth - 2} * 16px);
         width: 100%;
-
-        :hover {
-          color: ${listItemColor};
-          text-decoration: none;
-        }
       `}
     >
       {children}

@@ -12,7 +12,11 @@ import { Link as GatsbyLink } from 'gatsby';
 const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
   if (!to) to = '';
   // Assume that external links begin with http:// or https://
-  const external = /^http(s)?:\/\//.test(to) || to.startsWith('mailto:');
+  const [external, setExternal] = React.useState(true);
+  React.useEffect(() => {
+    const isExternal = /^http(s)?:\/\//.test(to) || to.startsWith('mailto:');
+    setExternal(isExternal);
+  }, [to]);
   const anchor = to.startsWith('#');
 
   // Use Gatsby Link for internal links, and <a> for others

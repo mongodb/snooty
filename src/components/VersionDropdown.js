@@ -25,11 +25,6 @@ const StyledSelect = styled(Select)`
 
 const OptionLink = styled('a')`
   color: unset;
-
-  :hover {
-    color: unset;
-    text-decoration: none;
-  }
 `;
 
 const VersionDropdown = ({

@@ -127,8 +127,6 @@ const StyledSearchResult = styled(SearchResult)`
   }
   :hover,
   :focus {
-    color: unset;
-    text-decoration: unset;
     > div {
       background-color: unset !important;
     }

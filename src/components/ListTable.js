@@ -36,9 +36,8 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
   <Row>
     {row.map((cell, colIndex) => {
       const isStub = colIndex <= stubColumnCount - 1;
-      const skipPTag = hasOneChild(cell.children);
       const contents = cell.children.map((child, i) => (
-        <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
+        <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} />
       ));
       return (
         <Cell

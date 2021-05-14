@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import BreadcrumbSchema from './BreadcrumbSchema';
 import ComponentFactory from './ComponentFactory';
-import Link from './Link';
+import StyledLink from './StyledLink';
 import { reportAnalytics } from '../utils/report-analytics';
 import { theme } from '../theme/docsTheme';
 
@@ -25,7 +25,7 @@ const Breadcrumbs = ({ parentPaths, siteTitle, slug }) => (
             const isLast = index === parentPaths.length - 1;
             return (
               <React.Fragment key={path}>
-                <Link
+                <StyledLink
                   to={path}
                   onClick={() => {
                     reportAnalytics('BreadcrumbClick', {
@@ -37,7 +37,7 @@ const Breadcrumbs = ({ parentPaths, siteTitle, slug }) => (
                   {title.map((t, i) => (
                     <ComponentFactory key={i} nodeData={t} />
                   ))}
-                </Link>
+                </StyledLink>
                 {!isLast && <> &gt; </>}
               </React.Fragment>
             );

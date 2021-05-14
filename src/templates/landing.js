@@ -81,9 +81,6 @@ const Landing = ({ children }) => {
             font-size: ${fontSize.default};
             letter-spacing: 0.5px;
           }
-          a:hover {
-            text-decoration: none;
-          }
           h1 {
             align-self: end;
           }
