@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { useFeedbackState } from '../context';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
+import StyledLink from '../../../StyledLink';
 
 export default function SupportView(props) {
   const { submitSupport } = useFeedbackState();
@@ -28,9 +29,9 @@ const ResourceLayout = styled.div`
 function Resource({ link = '', children, ...props }) {
   return (
     <ResourceLayout>
-      <a href={link} target="__blank">
+      <StyledLink to={link} target="__blank">
         {children}
-      </a>
+      </StyledLink>
     </ResourceLayout>
   );
 }

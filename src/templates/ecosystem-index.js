@@ -1,6 +1,7 @@
 import React from 'react';
 import EcosystemHomepageStyles from '../styles/ecosystem-homepage.module.css';
 import EcosystemHomepageTiles from '../components/EcosystemHomepageTiles';
+import StyledLink from '../components/StyledLink';
 
 const EcosystemIndex = (props) => (
   <div className="content">
@@ -19,10 +20,7 @@ const EcosystemIndex = (props) => (
                 <EcosystemHomepageTiles />
                 <p>
                   Don’t see your desired language? Browse a list of{' '}
-                  <a href="https://docs.mongodb.com/ecosystem/drivers/community-supported-drivers/">
-                    community supported libraries
-                  </a>
-                  .
+                  <StyledLink to="/community-supported-drivers/">community supported libraries</StyledLink>.
                 </p>
               </section>
             </div>

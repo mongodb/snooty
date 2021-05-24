@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../utils/get-nested-value';
 import FootnoteContext from './footnote-context';
+import StyledLink from './StyledLink';
 
 const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const { footnotes } = useContext(FootnoteContext);
@@ -13,9 +14,9 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const ref = refname || id.replace('id', '');
   const uid = refname ? `${refname}-${id}` : id;
   return (
-    <a className="footnote-reference" href={`#footnote-${ref}`} id={`ref-${uid}`}>
+    <StyledLink to={`#footnote-${ref}`} id={`ref-${uid}`}>
       [{getNestedValue([ref, 'label'], footnotes) || ref}]
-    </a>
+    </StyledLink>
   );
 };
 

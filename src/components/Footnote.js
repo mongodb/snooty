@@ -1,9 +1,29 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
+import FootnoteContext from './footnote-context';
+import StyledLink from './StyledLink';
+import { theme } from '../theme/docsTheme';
 import { getNestedValue } from '../utils/get-nested-value';
 import { intersperse } from '../utils/intersperse';
-import FootnoteContext from './footnote-context';
+
+const FootnoteContainer = styled((props) => <div {...props} />)`
+  align-items: baseline;
+  display: flex;
+  margin: ${theme.size.medium} 0;
+
+  :target {
+    background-color: ${uiColors.yellow.light2};
+  }
+`;
+
+const Label = styled('div')`
+  flex-basis: 10%;
+`;
+
+const Content = styled('div')``;
 
 const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const { footnotes } = useContext(FootnoteContext);
@@ -12,37 +32,28 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const uid = name ? `${name}-` : '';
   const footnoteReferences = footnotes && footnotes[ref] ? footnotes[ref].references : [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
-    <a className="fn-backref" href={`#ref-${uid}${footnote}`} key={index}>
+    <StyledLink to={`#ref-${uid}${footnote}`} key={index}>
       {index + 1}
-    </a>
+    </StyledLink>
   ));
   return (
-    <table className="docutils footnote" frame="void" id={`footnote-${ref}`} rules="none">
-      <colgroup>
-        <col className="label" />
-      </colgroup>
-      <tbody valign="top">
-        <tr>
-          <td className="label">
-            [
-            {footnoteReferenceNodes.length !== 1 ? (
-              label
-            ) : (
-              <a className="fn-backref" href={`#ref-${uid}${footnoteReferences[0]}`}>
-                {label}
-              </a>
-            )}
-            ]
-          </td>
-          <td>
-            {footnoteReferenceNodes.length > 1 && <em>({intersperse(footnoteReferenceNodes)})</em>}{' '}
-            {children.map((child, index) => (
-              <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />
-            ))}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <FootnoteContainer id={`footnote-${ref}`}>
+      <Label>
+        [
+        {footnoteReferenceNodes.length !== 1 ? (
+          label
+        ) : (
+          <StyledLink to={`#ref-${uid}${footnoteReferences[0]}`}>{label}</StyledLink>
+        )}
+        ]
+      </Label>
+      <Content>
+        {footnoteReferenceNodes.length > 1 && <em>({intersperse(footnoteReferenceNodes)})</em>}{' '}
+        {children.map((child, index) => (
+          <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />
+        ))}
+      </Content>
+    </FootnoteContainer>
   );
 };
 
