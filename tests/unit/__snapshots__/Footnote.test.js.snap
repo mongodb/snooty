@@ -1,6 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.emotion-4 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-4 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-4 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-5:focus {
+  outline: none;
+}
+
+.emotion-13 {
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 24px 0;
+}
+
+.emotion-13:target {
+  background-color: #FEF2C8;
+}
+
+.emotion-9 {
+  -webkit-flex-basis: 10%;
+  -ms-flex-preferred-size: 10%;
+  flex-basis: 10%;
+}
+
+.emotion-0 {
+  color: inherit;
+}
+
+.emotion-0 > code {
+  color: inherit;
+}
+
 <Footnote
   nodeData={
     Object {
@@ -36,61 +105,71 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <table
-    className="docutils footnote"
-    frame="void"
+  <FootnoteContainer
     id="footnote-1"
-    rules="none"
   >
-    <colgroup>
-      <col
-        className="label"
-      />
-    </colgroup>
-    <tbody
-      valign="top"
+    <Component
+      className="emotion-13 emotion-14"
+      id="footnote-1"
     >
-      <tr>
-        <td
-          className="label"
-        >
-          [
-          <a
-            className="fn-backref"
-            href="#ref-1-id1"
+      <div
+        className="emotion-13 emotion-14"
+        id="footnote-1"
+      >
+        <Label>
+          <div
+            className="emotion-9 emotion-10"
           >
-            1
-          </a>
-          ]
-        </td>
-        <td>
-           
-          <ComponentFactory
-            key="0"
-            nodeData={
-              Object {
-                "children": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 108,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Numerical footnote.",
-                  },
-                ],
-                "position": Object {
-                  "start": Object {
-                    "line": 108,
-                  },
-                },
-                "type": "paragraph",
-              }
-            }
-            parentNode="footnote"
+            [
+            <StyledLink
+              to="#ref-1-id1"
+            >
+              <Component
+                className="emotion-0 emotion-1"
+                to="#ref-1-id1"
+              >
+                <Component
+                  hideExternalIcon={true}
+                >
+                  <Box
+                    as="span"
+                    className="emotion-5"
+                    data-leafygreen-ui="anchor-container"
+                  >
+                    <span
+                      className="emotion-5"
+                      data-leafygreen-ui="anchor-container"
+                    >
+                      <span
+                        className="emotion-4"
+                      >
+                        <Link
+                          className="emotion-0 emotion-1"
+                          to="#ref-1-id1"
+                        >
+                          <a
+                            className="emotion-0 emotion-1"
+                            href="#ref-1-id1"
+                          >
+                            1
+                          </a>
+                        </Link>
+                      </span>
+                    </span>
+                  </Box>
+                </Component>
+              </Component>
+            </StyledLink>
+            ]
+          </div>
+        </Label>
+        <Content>
+          <div
+            className="emotion-11 emotion-12"
           >
-            <Paragraph
+             
+            <ComponentFactory
+              key="0"
               nodeData={
                 Object {
                   "children": Array [
@@ -114,21 +193,32 @@ exports[`renders correctly 1`] = `
               }
               parentNode="footnote"
             >
-              <ComponentFactory
-                key="0"
+              <Paragraph
                 nodeData={
                   Object {
+                    "children": Array [
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 108,
+                          },
+                        },
+                        "type": "text",
+                        "value": "Numerical footnote.",
+                      },
+                    ],
                     "position": Object {
                       "start": Object {
                         "line": 108,
                       },
                     },
-                    "type": "text",
-                    "value": "Numerical footnote.",
+                    "type": "paragraph",
                   }
                 }
+                parentNode="footnote"
               >
-                <Text
+                <ComponentFactory
+                  key="0"
                   nodeData={
                     Object {
                       "position": Object {
@@ -141,14 +231,28 @@ exports[`renders correctly 1`] = `
                     }
                   }
                 >
-                  Numerical footnote.
-                </Text>
-              </ComponentFactory>
-            </Paragraph>
-          </ComponentFactory>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+                  <Text
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 108,
+                          },
+                        },
+                        "type": "text",
+                        "value": "Numerical footnote.",
+                      }
+                    }
+                  >
+                    Numerical footnote.
+                  </Text>
+                </ComponentFactory>
+              </Paragraph>
+            </ComponentFactory>
+          </div>
+        </Content>
+      </div>
+    </Component>
+  </FootnoteContainer>
 </Footnote>
 `;

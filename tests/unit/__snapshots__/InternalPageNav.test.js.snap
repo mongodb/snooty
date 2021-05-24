@@ -1,78 +1,274 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders a page with next and previous links correctly 1`] = `
-<div
-  id="btnv"
+.emotion-2 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-3 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.emotion-0 {
+  color: inherit;
+}
+
+.emotion-0 > code {
+  color: inherit;
+}
+
+<nav
+  class="emotion-8 emotion-9"
 >
-  <span
-    class="btn-arrow-left"
-  >
-    ←  
-  </span>
-  <a
-    class="btn-prev-text"
-    href="/drivers/csharp/"
-    title="Previous Section"
-  >
-    <span>
-      MongoDB C#/.NET Driver
+  <div>
+    ← 
+    <span
+      class="emotion-3"
+      data-leafygreen-ui="anchor-container"
+    >
+      <span
+        class="emotion-2"
+      >
+        <a
+          class="btn-prev-text emotion-0 emotion-1"
+          href="/drivers/csharp/"
+          title="Previous Section"
+        >
+          MongoDB C#/.NET Driver
+        </a>
+      </span>
     </span>
-  </a>
-  <a
-    class="btn-next-text"
-    href="/drivers/java/"
-    title="Next Section"
-  >
-    <span>
-      Java MongoDB Driver
+  </div>
+  <div>
+    <span
+      class="emotion-3"
+      data-leafygreen-ui="anchor-container"
+    >
+      <span
+        class="emotion-2"
+      >
+        <a
+          class="btn-next-text emotion-0 emotion-1"
+          href="/drivers/java/"
+          title="Next Section"
+        >
+          Java MongoDB Driver
+        </a>
+      </span>
     </span>
-  </a>
-  <span
-    class="btn-arrow-right"
-  >
      →
-  </span>
-</div>
+  </div>
+</nav>
 `;
 
 exports[`renders a page with no next link correctly 1`] = `
-<div
-  id="btnv"
+.emotion-2 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-3 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.emotion-0 {
+  color: inherit;
+}
+
+.emotion-0 > code {
+  color: inherit;
+}
+
+<nav
+  class="emotion-4 emotion-5"
 >
-  <span
-    class="btn-arrow-left"
-  >
-    ←  
-  </span>
-  <a
-    class="btn-prev-text"
-    href="/drivers/go/"
-    title="Previous Section"
-  >
-    <span>
-      MongoDB Go Driver
+  <div>
+    ← 
+    <span
+      class="emotion-3"
+      data-leafygreen-ui="anchor-container"
+    >
+      <span
+        class="emotion-2"
+      >
+        <a
+          class="btn-prev-text emotion-0 emotion-1"
+          href="/drivers/go/"
+          title="Previous Section"
+        >
+          MongoDB Go Driver
+        </a>
+      </span>
     </span>
-  </a>
-</div>
+  </div>
+  <div />
+</nav>
 `;
 
 exports[`renders a page with no previous link correctly 1`] = `
-<div
-  id="btnv"
+.emotion-2 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-3 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.emotion-0 {
+  color: inherit;
+}
+
+.emotion-0 > code {
+  color: inherit;
+}
+
+<nav
+  class="emotion-4 emotion-5"
 >
-  <a
-    class="btn-next-text"
-    href="/drivers/go/"
-    title="Next Section"
-  >
-    <span>
-      MongoDB Go Driver
+  <div />
+  <div>
+    <span
+      class="emotion-3"
+      data-leafygreen-ui="anchor-container"
+    >
+      <span
+        class="emotion-2"
+      >
+        <a
+          class="btn-next-text emotion-0 emotion-1"
+          href="/drivers/go/"
+          title="Next Section"
+        >
+          MongoDB Go Driver
+        </a>
+      </span>
     </span>
-  </a>
-  <span
-    class="btn-arrow-right"
-  >
      →
-  </span>
-</div>
+  </div>
+</nav>
 `;

@@ -334,7 +334,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                notebook
+                <p>
+                  notebook
+                </p>
               </span>
             </div>
           </td>
@@ -346,7 +348,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                50
+                <p>
+                  50
+                </p>
               </span>
             </div>
           </td>
@@ -358,7 +362,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                8.5x11,in
+                <p>
+                  8.5x11,in
+                </p>
               </span>
             </div>
           </td>
@@ -370,7 +376,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                A
+                <p>
+                  A
+                </p>
               </span>
             </div>
           </td>
@@ -382,7 +390,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                college-ruled,perforated
+                <p>
+                  college-ruled,perforated
+                </p>
               </span>
             </div>
           </td>
@@ -394,7 +404,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                8
+                <p>
+                  8
+                </p>
               </span>
             </div>
           </td>
@@ -719,7 +731,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                journal
+                <p>
+                  journal
+                </p>
               </span>
             </div>
           </th>
@@ -731,7 +745,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                25
+                <p>
+                  25
+                </p>
               </span>
             </div>
           </td>
@@ -743,7 +759,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                14x21,cm
+                <p>
+                  14x21,cm
+                </p>
               </span>
             </div>
           </td>
@@ -755,7 +773,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                A
+                <p>
+                  A
+                </p>
               </span>
             </div>
           </td>
@@ -767,7 +787,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                brown, lined
+                <p>
+                  brown, lined
+                </p>
               </span>
             </div>
           </td>
@@ -779,7 +801,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                9
+                <p>
+                  9
+                </p>
               </span>
             </div>
           </td>
@@ -799,7 +823,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                notebook
+                <p>
+                  notebook
+                </p>
               </span>
             </div>
           </th>
@@ -811,7 +837,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                50
+                <p>
+                  50
+                </p>
               </span>
             </div>
           </td>
@@ -823,7 +851,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                8.5x11,in
+                <p>
+                  8.5x11,in
+                </p>
               </span>
             </div>
           </td>
@@ -835,7 +865,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                A
+                <p>
+                  A
+                </p>
               </span>
             </div>
           </td>
@@ -847,7 +879,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                college-ruled,perforated
+                <p>
+                  college-ruled,perforated
+                </p>
               </span>
             </div>
           </td>
@@ -859,7 +893,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                8
+                <p>
+                  8
+                </p>
               </span>
             </div>
           </td>
@@ -879,7 +915,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                paper
+                <p>
+                  paper
+                </p>
               </span>
             </div>
           </th>
@@ -891,7 +929,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                100
+                <p>
+                  100
+                </p>
               </span>
             </div>
           </td>
@@ -903,7 +943,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                8.5x11,in
+                <p>
+                  8.5x11,in
+                </p>
               </span>
             </div>
           </td>
@@ -915,7 +957,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                D
+                <p>
+                  D
+                </p>
               </span>
             </div>
           </td>
@@ -927,7 +971,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                watercolor
+                <p>
+                  watercolor
+                </p>
               </span>
             </div>
           </td>
@@ -939,7 +985,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                10
+                <p>
+                  10
+                </p>
               </span>
             </div>
           </td>
@@ -959,7 +1007,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                planner
+                <p>
+                  planner
+                </p>
               </span>
             </div>
           </th>
@@ -971,7 +1021,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                75
+                <p>
+                  75
+                </p>
               </span>
             </div>
           </td>
@@ -983,7 +1035,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                22.85x30,cm
+                <p>
+                  22.85x30,cm
+                </p>
               </span>
             </div>
           </td>
@@ -995,7 +1049,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                D
+                <p>
+                  D
+                </p>
               </span>
             </div>
           </td>
@@ -1007,7 +1063,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                2019
+                <p>
+                  2019
+                </p>
               </span>
             </div>
           </td>
@@ -1019,7 +1077,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                10
+                <p>
+                  10
+                </p>
               </span>
             </div>
           </td>
@@ -1039,7 +1099,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                postcard
+                <p>
+                  postcard
+                </p>
               </span>
             </div>
           </th>
@@ -1051,7 +1113,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                45
+                <p>
+                  45
+                </p>
               </span>
             </div>
           </td>
@@ -1063,7 +1127,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                10x,cm
+                <p>
+                  10x,cm
+                </p>
               </span>
             </div>
           </td>
@@ -1075,7 +1141,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                D
+                <p>
+                  D
+                </p>
               </span>
             </div>
           </td>
@@ -1087,7 +1155,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                double-sided,white
+                <p>
+                  double-sided,white
+                </p>
               </span>
             </div>
           </td>
@@ -1099,7 +1169,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               data-leafygreen-ui="td-inner-div"
             >
               <span>
-                2
+                <p>
+                  2
+                </p>
               </span>
             </div>
           </td>

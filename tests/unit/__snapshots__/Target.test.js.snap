@@ -1,6 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with a directive_argument node 1`] = `
+.emotion-2 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-3 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-0 {
+  color: inherit;
+}
+
+.emotion-0 > code {
+  color: inherit;
+}
+
 <dl
   class="option"
 >
@@ -23,32 +70,62 @@ exports[`renders correctly with a directive_argument node 1`] = `
       Specifies a configuration file for runtime configuration options. The
 configuration file is the preferred method for runtime configuration of
 
-      <a
-        href="/reference/program/mongos/#std-program-mongos"
+      <span
+        class="emotion-3"
+        data-leafygreen-ui="anchor-container"
       >
-        <code>
-          mongos
-        </code>
-      </a>
+        <span
+          class="emotion-2"
+        >
+          <a
+            class="emotion-0 emotion-1"
+            href="/reference/program/mongos/#std-program-mongos"
+          >
+            <code>
+              mongos
+            </code>
+          </a>
+        </span>
+      </span>
       . The options are equivalent to the command-line
 configuration options. See 
-      <a
-        href="/reference/configuration-options/"
+      <span
+        class="emotion-3"
+        data-leafygreen-ui="anchor-container"
       >
-        Configuration File Options
-      </a>
+        <span
+          class="emotion-2"
+        >
+          <a
+            class="emotion-0 emotion-1"
+            href="/reference/configuration-options/"
+          >
+            Configuration File Options
+          </a>
+        </span>
+      </span>
        for
 more information.
     </p>
     <p>
       Ensure the configuration file uses ASCII encoding. The 
-      <a
-        href="/reference/program/mongos/#std-program-mongos"
+      <span
+        class="emotion-3"
+        data-leafygreen-ui="anchor-container"
       >
-        <code>
-          mongos
-        </code>
-      </a>
+        <span
+          class="emotion-2"
+        >
+          <a
+            class="emotion-0 emotion-1"
+            href="/reference/program/mongos/#std-program-mongos"
+          >
+            <code>
+              mongos
+            </code>
+          </a>
+        </span>
+      </span>
       
 instance does not support configuration files with non-ASCII encoding,
 including UTF-8.

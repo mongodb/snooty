@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<a
-  className="footnote-reference"
-  href="#footnote-1"
+<StyledLink
   id="ref-1-id1"
+  to="#footnote-1"
 >
   [
   1
   ]
-</a>
+</StyledLink>
 `;

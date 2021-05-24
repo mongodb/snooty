@@ -52,7 +52,7 @@ exports[`renders correctly 1`] = `
   />
   <BreadcrumbContainer>
     <p>
-      <Link
+      <StyledLink
         onClick={[Function]}
         to="manage-data"
       >
@@ -70,9 +70,9 @@ exports[`renders correctly 1`] = `
             }
           }
         />
-      </Link>
+      </StyledLink>
        &gt; 
-      <Link
+      <StyledLink
         onClick={[Function]}
         to="documents"
       >
@@ -90,7 +90,7 @@ exports[`renders correctly 1`] = `
             }
           }
         />
-      </Link>
+      </StyledLink>
     </p>
   </BreadcrumbContainer>
 </Fragment>
