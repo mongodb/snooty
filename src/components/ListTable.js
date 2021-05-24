@@ -51,9 +51,8 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
             /* Apply grey background to stub <th> cells (PD-1216) */
             ${isStub && `background-clip: padding-box; background-color: ${uiColors.gray.light3};`}
 
-            /* TODO: Increase margin when Table component supports base font size of 16px */
             & > div > span > * {
-              margin: 0 0 10px;
+              margin: 0 0 12px;
             }
 
             /* Prevent extra margin below last element */
