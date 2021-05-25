@@ -46,7 +46,7 @@ const EcosystemHomepageTiles = () => {
       icon: <IconJava />,
     },
     {
-      slug: '/node/',
+      slug: 'https://docs.mongodb.com/drivers/node/current/',
       title: 'Node.js',
       icon: <IconNode />,
     },
@@ -61,7 +61,7 @@ const EcosystemHomepageTiles = () => {
       icon: <IconPython />,
     },
     {
-      slug: '/ruby/',
+      slug: 'https://docs.mongodb.com/ruby-driver/current/',
       title: 'Ruby',
       icon: <IconRuby />,
     },

@@ -2,6 +2,6 @@
   display: block;
 }
 .sphinxsidebar {
-  display: block;
+  display: block !important;
   overflow-y: visible !important;
 }
