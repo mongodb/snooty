@@ -12014,15 +12014,6 @@ div.admonition {
     margin-right: 15px;
     float: none;
   }
-  #showNav {
-    cursor: pointer;
-    position: fixed;
-    display: block;
-  }
-  #left-column,
-  .sphinxsidebar {
-    display: none;
-  }
   .document {
     margin-left: 25px;
   }
@@ -12152,6 +12143,17 @@ table.compatibility-large td,
 table.compatibility-large th {
   border: 1px solid #f5f6f7;
   vertical-align: middle;
+}
+@media (max-width: 1024px) {
+  #left-column,
+  .sphinxsidebar {
+    display: none;
+  }
+  #showNav {
+    cursor: pointer;
+    position: fixed;
+    display: block;
+  }
 }
 @media print {
   #left-column,
