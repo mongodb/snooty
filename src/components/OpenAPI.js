@@ -1,26 +1,155 @@
 import React from 'react';
+import { render } from 'react-dom';
 import PropTypes from 'prop-types';
-import { RedocStandalone, styled } from 'redoc';
+import { RedocStandalone } from 'redoc';
+import { Global, css } from '@emotion/core';
+import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
+import SidebarBack from './SidebarBack';
+import { theme } from '../theme/docsTheme';
+import { formatText } from '../utils/format-text';
 
-const StyledRedocComponent = styled('div')`
-  .token.string {
-    color: #000000;
+const NAVBAR_HEIGHT = 45;
+
+const borderType = '1px solid';
+
+const codeBlockCss = css`
+  span.ellipsis:after {
+    color: ${uiColors.white};
   }
-
   span.token.boolean {
-    color: #00ff00;
+    color: #e06c75 !important;
+  }
+  span.token.keyword {
+    color: #c678dd !important;
+  }
+  span.token.number {
+    color: #61aeee !important;
+  }
+  span.token.punctuation {
+    color: ${uiColors.white};
+  }
+  span.token.string:not(.property) {
+    color: #98c379 !important;
   }
 `;
 
-const OpenAPI = ({ nodeData: { argument, children, options = {} }, ...rest }) => {
+const sidebarCss = css`
+  // Keep sticky below top navbar
+  .menu-content {
+    top: ${theme.navbar.height} !important;
+  }
+
+  label[role='menuitem'] {
+    :hover {
+      background-color: ${uiColors.gray.light2};
+    }
+    &.active {
+      background-color: ${uiColors.green.light3};
+    }
+  }
+`;
+
+const spanHttpCss = css`
+  span.get {
+    border: ${borderType} ${uiColors.blue.light2};
+    color: ${uiColors.blue.dark2};
+  }
+  span.post {
+    border: ${borderType} ${uiColors.green.light2};
+    color: ${uiColors.green.dark2};
+  }
+  span.put {
+    border: ${borderType} ${uiColors.yellow.light2};
+    color: ${uiColors.yellow.dark2};
+  }
+  span.patch {
+    border: ${borderType} ${uiColors.yellow.light2};
+    color: ${uiColors.yellow.dark2};
+  }
+  span.delete {
+    border: ${borderType} ${uiColors.red.light2};
+    color: ${uiColors.red.dark2};
+  }
+`;
+
+// Overwrite css of Redoc's components that can be easily selected and that do not have
+// built-in theme options.
+const globalCSS = css`
+  ${codeBlockCss}
+  ${sidebarCss}
+  ${spanHttpCss}
+
+  // "deprecated" badge
+  span[type="warning"] {
+    border: ${borderType} ${uiColors.yellow.light2};
+  }
+
+  .menu-title-container {
+    padding-top: 24px;
+
+    li {
+      list-style: none inside none;
+
+      a {
+        :hover,
+        :focus {
+          color: ${uiColors.gray.dark3};
+          text-decoration: none;
+        }
+
+        ::before {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+`;
+
+// Copied over from docs-nav; consolidate title style after docs-nav merge to master
+const titleStyle = css`
+  color: ${uiColors.gray.dark3};
+  font-size: ${theme.fontSize.default};
+  font-weight: bold;
+  line-height: 20px;
+  text-transform: capitalize;
+`;
+
+const Border = styled('hr')`
+  border: unset;
+  border-bottom: 1px solid ${uiColors.gray.light2};
+  margin: ${theme.size.default} 0;
+  width: 100%;
+`;
+
+const MenuTitle = styled('div')`
+  ${titleStyle}
+
+  margin: ${theme.size.medium} ${theme.size.default};
+`;
+
+const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
+  const docsTitle = siteTitle + ' Docs';
+  const text = `← Back to ${formatText(docsTitle)}`;
+
+  return (
+    <>
+      <SidebarBack border={<Border />} enableGlyph={false} textOverride={text} url={'/'} />
+      <MenuTitle>{pageTitle}</MenuTitle>
+    </>
+  );
+};
+
+const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
   const usesRST = options?.['uses-rst'];
 
+  // Use snooty openapi components, such as for docs-realm
   if (usesRST) {
     return (
       <>
         {children.map((node, i) => (
-          <ComponentFactory {...rest} key={i} nodeData={node} />
+          <ComponentFactory key={i} metadata={metadata} nodeData={node} page={page} {...rest} />
         ))}
       </>
     );
@@ -32,62 +161,98 @@ const OpenAPI = ({ nodeData: { argument, children, options = {} }, ...rest }) =>
   if (!specOrUrl) {
     return null;
   }
+  const pageTitle = page?.options?.title || '';
+  const siteTitle = metadata?.title;
 
   return (
-    <StyledRedocComponent>
+    <>
+      <Global styles={globalCSS} />
       <RedocStandalone
+        onLoaded={() => {
+          const sidebarEl = document.querySelector('.menu-content');
+          if (sidebarEl) {
+            const searchEl = document.querySelector('div[role="search"]');
+            if (searchEl) {
+              const menuTitleContainerEl = document.createElement('div');
+              menuTitleContainerEl.className = 'menu-title-container';
+              sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
+              render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
+            }
+          }
+        }}
         options={{
           maxDisplayedEnumValues: 5,
           hideLoading: true,
+          scrollYOffset: NAVBAR_HEIGHT,
           theme: {
-            typography: {
-              fontSize: '16px',
-              fontFamily: 'Akzidenz',
-              headings: 'Akzidenz',
-              code: {
-                fontSize: '14px',
-                fontFamily: 'Source Code Pro',
-                color: '#800020',
-                backgroundColor: '#FFFFFF',
-              },
-              links: {
-                color: '#007CAD',
-                visited: '#1A567E',
-              },
-            },
-            sidebar: {
-              width: '268px',
-              backgroundColor: '#F9FBFA',
-              textColor: '#21313C',
-              activeTextColor: '#0B3B35',
-            },
-            rightPanel: {
-              backgroundColor: '#061621',
+            codeBlock: {
+              backgroundColor: uiColors.black,
             },
             colors: {
+              primary: {
+                main: uiColors.black,
+              },
               responses: {
                 success: {
-                  color: 'black',
-                  backgroundColor: 'red',
-                  tabTextColor: 'blue',
+                  color: uiColors.green.dark1,
+                  backgroundColor: uiColors.green.light3,
+                  tabTextColor: uiColors.green.dark1,
+                },
+                error: {
+                  color: uiColors.red.dark1,
+                  backgroundColor: uiColors.red.light3,
+                  tabTextColor: uiColors.red.dark1,
                 },
               },
               warning: {
-                main: 'green',
+                main: uiColors.yellow.light3,
+                contrastText: uiColors.yellow.dark2,
               },
               http: {
-                get: 'pink',
+                get: uiColors.blue.light3,
+                post: uiColors.green.light3,
+                put: uiColors.yellow.light3,
+                patch: uiColors.yellow.light3,
+                delete: uiColors.red.light3,
               },
             },
-            codeBlock: {
-              backgroundColor: 'orange',
+            rightPanel: {
+              backgroundColor: uiColors.black,
+            },
+            sidebar: {
+              activeTextColor: `${uiColors.green.dark3} !important`,
+              backgroundColor: uiColors.gray.light3,
+              textColor: uiColors.gray.dark3,
+              width: '268px',
+            },
+            spacing: {
+              unit: 4,
+              sectionVertical: 16,
+            },
+            typography: {
+              fontSize: theme.fontSize.default,
+              fontFamily: 'Akzidenz',
+              headings: {
+                fontFamily: 'Akzidenz',
+              },
+              code: {
+                fontSize: theme.fontSize.small,
+                fontFamily: 'Source Code Pro',
+                color: uiColors.black,
+                backgroundColor: uiColors.gray.light3,
+              },
+              links: {
+                color: uiColors.blue.base,
+                hover: uiColors.blue.dark2,
+                visited: uiColors.blue.dark2,
+              },
             },
           },
         }}
         spec={specOrUrl}
         specUrl={specOrUrl}
       />
-    </StyledRedocComponent>
+    </>
   );
 };
 
@@ -97,7 +262,7 @@ OpenAPI.propTypes = {
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
     options: PropTypes.shape({
       uses_rst: PropTypes.bool,
-    }).isRequired,
+    }),
   }).isRequired,
 };
 
