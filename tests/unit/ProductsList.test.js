@@ -24,10 +24,5 @@ describe('ProductsList', () => {
   it('renders with products', async () => {
     let wrapper = mount(<ProductsList />);
     expect(wrapper).toMatchSnapshot();
-
-    // Display products list
-    wrapper.find('ProductsListHeading').simulate('click');
-    expect(wrapper.find('Products').props()).toHaveProperty('isOpen', true);
-    expect(wrapper.find('Products')).not.toHaveStyleRule('display', 'none');
   });
 });
