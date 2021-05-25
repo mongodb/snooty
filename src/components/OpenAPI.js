@@ -72,6 +72,10 @@ const spanHttpCss = css`
     border: ${borderType} ${uiColors.red.light2};
     color: ${uiColors.red.dark2};
   }
+
+  span.operation-type {
+    font-family: Akzidenz;
+  }
 `;
 
 // Overwrite css of Redoc's components that can be easily selected and that do not have
@@ -93,6 +97,8 @@ const globalCSS = css`
       list-style: none inside none;
 
       a {
+        font-size: ${theme.fontSize.default};
+
         :hover,
         :focus {
           color: ${uiColors.gray.dark3};
@@ -131,11 +137,11 @@ const MenuTitle = styled('div')`
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   const docsTitle = siteTitle + ' Docs';
-  const text = `← Back to ${formatText(docsTitle)}`;
+  const text = <>← Back to {formatText(docsTitle)}</>;
 
   return (
     <>
-      <SidebarBack border={<Border />} enableGlyph={false} textOverride={text} url={'/'} />
+      <SidebarBack border={<Border />} enableGlyph={false} textOverride={text} title={docsTitle} url={'/'} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
@@ -163,12 +169,23 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   }
   const pageTitle = page?.options?.title || '';
   const siteTitle = metadata?.title;
+  const tempLoadingDivClassName = 'openapi-loading-margin';
 
   return (
     <>
       <Global styles={globalCSS} />
+      <div
+        className={tempLoadingDivClassName}
+        css={css`
+          margin-top: 90px;
+        `}
+      />
       <RedocStandalone
         onLoaded={() => {
+          // Remove temporary loading margin from DOM
+          const tempLoadingDivEl = document.querySelector(`.${tempLoadingDivClassName}`);
+          tempLoadingDivEl.remove();
+          // Insert back button and page title to redoc's sidenav
           const sidebarEl = document.querySelector('.menu-content');
           if (sidebarEl) {
             const searchEl = document.querySelector('div[role="search"]');
@@ -182,11 +199,10 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
         }}
         options={{
           maxDisplayedEnumValues: 5,
-          hideLoading: true,
           scrollYOffset: NAVBAR_HEIGHT,
           theme: {
             codeBlock: {
-              backgroundColor: uiColors.black,
+              backgroundColor: uiColors.gray.dark3,
             },
             colors: {
               primary: {
@@ -217,7 +233,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
               },
             },
             rightPanel: {
-              backgroundColor: uiColors.black,
+              backgroundColor: uiColors.gray.dark3,
             },
             sidebar: {
               activeTextColor: `${uiColors.green.dark3} !important`,
