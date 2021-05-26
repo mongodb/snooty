@@ -11993,26 +11993,15 @@ div.admonition {
     margin-left: 25px;
   }
 }
-@media (max-width: 1120px) {
-  .expand-toc-icon {
+@media (max-width: 1024px) {
+  #showNav {
+    cursor: pointer;
+    position: fixed;
     display: block;
-    padding-top: 10px;
-    padding-right: 10px;
-    color: #fff;
   }
-  .expand-toc-icon:active,
-  .expand-toc-icon:hover {
-    color: #fff;
-    text-decoration: none;
-  }
-  #header-db .header-content {
-    width: 1093px;
-    padding-left: 30px;
-    float: none;
-  }
-  #header-db .nav-items {
-    margin-right: 15px;
-    float: none;
+  #left-column,
+  .sphinxsidebar {
+    display: none;
   }
   .document {
     margin-left: 25px;
@@ -12143,17 +12132,6 @@ table.compatibility-large td,
 table.compatibility-large th {
   border: 1px solid #f5f6f7;
   vertical-align: middle;
-}
-@media (max-width: 1024px) {
-  #left-column,
-  .sphinxsidebar {
-    display: none;
-  }
-  #showNav {
-    cursor: pointer;
-    position: fixed;
-    display: block;
-  }
 }
 @media print {
   #left-column,
