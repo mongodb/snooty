@@ -17,12 +17,7 @@ const getCopyButtonStyle = (copied) => {
       ${baseStyle};
       color: ${uiColors.white};
       background-color: ${uiColors.green.base};
-      &:focus {
-        color: ${uiColors.white};
-        &:before {
-          background-color: ${uiColors.green.base};
-        }
-      }
+      &:focus,
       &:hover {
         color: ${uiColors.white};
         &:before {
