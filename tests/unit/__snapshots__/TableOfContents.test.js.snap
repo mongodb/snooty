@@ -3,6 +3,7 @@
 exports[`Table of Contents testing Table of Contents unit tests renders correctly 1`] = `
 .emotion-0 {
   height: calc(100% - 0px);
+  z-index: -1;
   overflow-y: auto;
   position: absolute;
   width: 100%;
