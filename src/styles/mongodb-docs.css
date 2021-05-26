@@ -11993,27 +11993,7 @@ div.admonition {
     margin-left: 25px;
   }
 }
-@media (max-width: 1120px) {
-  .expand-toc-icon {
-    display: block;
-    padding-top: 10px;
-    padding-right: 10px;
-    color: #fff;
-  }
-  .expand-toc-icon:active,
-  .expand-toc-icon:hover {
-    color: #fff;
-    text-decoration: none;
-  }
-  #header-db .header-content {
-    width: 1093px;
-    padding-left: 30px;
-    float: none;
-  }
-  #header-db .nav-items {
-    margin-right: 15px;
-    float: none;
-  }
+@media (max-width: 1024px) {
   #showNav {
     cursor: pointer;
     position: fixed;
