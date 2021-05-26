@@ -95,6 +95,7 @@ const VersionDropdown = ({
       onChange={navigate}
       placeholder={null}
       size={Size.Large}
+      usePortal={false}
       value={parserBranch}
     >
       {Object.entries(gitNamedMapping).map(([branch, name]) => {
