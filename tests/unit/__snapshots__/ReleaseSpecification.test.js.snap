@@ -14,7 +14,7 @@ exports[`renders correctly 1`] = `
   line-height: 24px;
 }
 
-.emotion-4 {
+.emotion-3 {
   overflow-x: auto;
   border-radius: 0;
   border: 0;
@@ -44,24 +44,24 @@ exports[`renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-4 {
+  .emotion-3 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-4 {
+  .emotion-3 {
     white-space: pre;
   }
 }
 
-.emotion-6 {
+.emotion-5 {
   border: 1px solid #E7EEEC;
   border-radius: 4px;
   overflow: hidden;
 }
 
-.emotion-5 {
+.emotion-4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -73,7 +73,7 @@ exports[`renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-7 {
+.emotion-6 {
   display: table;
   margin: 16px 0;
   min-width: 150px;
@@ -81,32 +81,17 @@ exports[`renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-3 * {
-  overflow-wrap: normal !important;
-  white-space: pre;
-  word-break: normal !important;
-}
-
-.emotion-3 table {
-  margin-bottom: 0px;
-}
-
-.emotion-3 table > tbody > tr > td {
-  border-style: none;
-  padding: 0px;
-}
-
 <div
-  class="emotion-7"
+  class="emotion-6"
 >
   <div
-    class="emotion-6"
+    class="emotion-5"
   >
     <div
-      class="emotion-5"
+      class="emotion-4"
     >
       <pre
-        class="emotion-3 emotion-4"
+        class="emotion-3"
         tabindex="-1"
       >
         <code
