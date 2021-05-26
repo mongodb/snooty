@@ -38,7 +38,7 @@ describe('when rendering all fields', () => {
       });
 
       it('the card expands', () => {
-        const button = wrapper.find('button');
+        const button = wrapper.find('button').at(1);
         button.simulate('click');
         expect(wrapper.exists('Details')).toBe(true);
       });

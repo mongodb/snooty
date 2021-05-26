@@ -7,13 +7,18 @@ exports[`when no summary is present renders correctly  1`] = `
   >
     GET
   </Badge>
-  <Path
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "/&#8203;auth/&#8203;providers",
+  <div>
+    <Path
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "/&#8203;auth/&#8203;providers",
+        }
       }
-    }
-  />
+    />
+    <CopyButton
+      contents="/auth/providers"
+    />
+  </div>
   <Icon
     glyph="ChevronDown"
   />
@@ -60,13 +65,18 @@ exports[`when no summary or description is present renders correctly  1`] = `
   >
     POST
   </Badge>
-  <Path
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "/&#8203;auth/&#8203;providers/&#8203;<strong>{provider}</strong>/&#8203;login",
+  <div>
+    <Path
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "/&#8203;auth/&#8203;providers/&#8203;<strong>{provider}</strong>/&#8203;login",
+        }
       }
-    }
-  />
+    />
+    <CopyButton
+      contents="/auth/providers/{provider}/login"
+    />
+  </div>
   <Icon
     glyph="ChevronDown"
   />
@@ -80,13 +90,18 @@ exports[`when rendering all fields renders correctly  1`] = `
   >
     GET
   </Badge>
-  <Path
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "/&#8203;auth/&#8203;profile",
+  <div>
+    <Path
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "/&#8203;auth/&#8203;profile",
+        }
       }
-    }
-  />
+    />
+    <CopyButton
+      contents="/auth/profile"
+    />
+  </div>
   <Icon
     glyph="ChevronDown"
   />
