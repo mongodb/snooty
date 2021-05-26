@@ -57,7 +57,7 @@ const HeadingContainer = styled.div`
 
 const ChildContainer = styled.div(
   ({ isStacked }) => css`
-    margin: ${isStacked ? '4px 0 16px 0' : '-24px 0 0 0'};
+    ${isStacked && 'margin: 4px 0 16px 0;'}
     display: flex;
     flex-direction: column;
     justify-content: center;
