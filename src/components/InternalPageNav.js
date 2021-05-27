@@ -6,6 +6,7 @@ import { getPageTitle } from '../utils/get-page-title';
 
 const NavContainer = styled('nav')`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 `;
 
