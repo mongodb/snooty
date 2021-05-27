@@ -19,7 +19,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
         {prevSlug && (
           <>
             ←&nbsp;
-            <StyledLink className="btn-prev-text" to={prevSlug} title="Previous Section">
+            <StyledLink to={prevSlug} title="Previous Section">
               {getPageTitle(prevSlug, slugTitleMapping)}
             </StyledLink>
           </>
@@ -28,7 +28,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
       <div>
         {nextSlug && (
           <>
-            <StyledLink className="btn-next-text" to={nextSlug} title="Next Section">
+            <StyledLink to={nextSlug} title="Next Section">
               {getPageTitle(nextSlug, slugTitleMapping)}
             </StyledLink>
             &nbsp;→

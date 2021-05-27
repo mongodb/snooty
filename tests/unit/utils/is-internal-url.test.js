@@ -32,6 +32,10 @@ describe('when testing non-Docs urls', () => {
     runTest('https://google.com', false);
   });
 
+  it('should identify mailto links as external', () => {
+    runTest('mailto:docs@mongodb.com', false);
+  });
+
   it('should return true on invalid urls', () => {
     runTest(undefined, true);
   });

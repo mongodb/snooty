@@ -1,4 +1,4 @@
-const isExternalUrl = /^http(s)?:\/\//;
+const isExternalUrl = /^(http(s)?:\/\/|mailto:)/;
 
 const isDocsUrl = /^http(s)?:\/\/docs.(atlas.|cloudmanager.|opsmanager.)?mongodb.com/;
 
