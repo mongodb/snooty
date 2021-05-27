@@ -9,11 +9,12 @@ import IA from './IA';
 import IATransition from './IATransition';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
+import Toctree from './Toctree';
 import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 
-const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
+const StyledLeafygreenSideNav = styled((props) => <LeafygreenSideNav {...props} />)`
   grid-area: sidebar;
   z-index: 1;
 
@@ -41,6 +42,9 @@ const titleStyle = css`
   font-weight: bold;
   line-height: 20px;
   text-transform: capitalize;
+  :hover {
+    background-color: inherit;
+  }
 `;
 
 // Allows AdditionalLinks to always be at the bottom of the SideNav
@@ -55,9 +59,8 @@ const Border = styled('hr')`
   width: 100%;
 `;
 
-const SiteTitle = styled('div')`
+const SiteTitle = styled(SideNavItem)`
   ${titleStyle}
-  margin: ${theme.size.small} ${theme.size.medium} 0 ${theme.size.medium};
 `;
 
 // Create artificial "padding" at the top of the SideNav to allow products list to transition without being seen
@@ -78,44 +81,50 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
+const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
   const [back, setBack] = React.useState(null);
 
   return (
-    <StyledLeafygreenSideNav aria-label="Side navigation">
-      <IATransition back={back} hasIA={!!ia} slug={slug}>
-        <NavTopContainer>
-          <ArtificialPadding />
-          <SidebarBack
-            border={<Border />}
-            handleClick={() => {
-              setBack(true);
-            }}
-            slug={slug}
-          />
-          {ia && (
-            <IA
-              header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+    <StyledLeafygreenSideNav aria-label="Side navigation" widthOverride={268}>
+      {!!ia ? (
+        <IATransition back={back} hasIA={!!ia} slug={slug}>
+          <NavTopContainer>
+            <ArtificialPadding />
+            <SidebarBack
+              border={<Border />}
               handleClick={() => {
-                setBack(false);
+                setBack(true);
               }}
-              ia={ia}
+              slug={slug}
             />
-          )}
-          {showAllProducts && (
-            <Border
-              css={css`
-                margin-bottom: 0;
-              `}
-            />
-          )}
-        </NavTopContainer>
-        {showAllProducts && <ProductsList />}
-      </IATransition>
-      {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
-      {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {ia && (
+              <IA
+                header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+                handleClick={() => {
+                  setBack(false);
+                }}
+                ia={ia}
+              />
+            )}
+            {showAllProducts && (
+              <Border
+                css={css`
+                  margin-bottom: 0;
+                `}
+              />
+            )}
+          </NavTopContainer>
+          {showAllProducts && <ProductsList />}
+        </IATransition>
+      ) : (
+        <>
+          <SiteTitle>{siteTitle}</SiteTitle>
+          {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+          <Toctree toctree={toctree} />
+        </>
+      )}
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
         <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
