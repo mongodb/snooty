@@ -21,6 +21,10 @@ const StyledSelect = styled(Select)`
   span {
     font-size: 16px;
   }
+
+  button {
+    z-index: 2;
+  }
 `;
 
 const OptionLink = styled('a')`
@@ -96,6 +100,7 @@ const VersionDropdown = ({
       placeholder={null}
       size={Size.Large}
       usePortal={false}
+      popoverZIndex={3}
       value={parserBranch}
     >
       {Object.entries(gitNamedMapping).map(([branch, name]) => {
