@@ -72,22 +72,6 @@ const Code = ({
       <CodeBlock
         chromeTitle={caption ? caption : ''}
         copyable={copyable}
-        css={css`
-          & * {
-            overflow-wrap: normal !important;
-            white-space: pre;
-            word-break: normal !important;
-          }
-
-          & table {
-            margin-bottom: 0px;
-          }
-
-          & table > tbody > tr > td {
-            border-style: none;
-            padding: 0px;
-          }
-        `}
         highlightLines={emphasizeLines}
         language={getLanguage(lang)}
         onCopy={reportCodeCopied}

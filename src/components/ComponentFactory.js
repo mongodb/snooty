@@ -57,6 +57,7 @@ import MongoWebShell from './MongoWebShell';
 import Extract from './Extract';
 import Describe from './Describe';
 import ReleaseSpecification from './ReleaseSpecification';
+import Twitter from './Twitter';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -163,6 +164,7 @@ const componentMap = {
   title_reference: TitleReference,
   topic: Topic,
   transition: Transition,
+  twitter: Twitter,
   uriwriter: URIWriter,
   versionadded: VersionModified,
   versionchanged: VersionModified,
