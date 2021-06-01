@@ -8,7 +8,7 @@ import { formatText } from '../utils/format-text';
 // Adapted from docs-nav branch
 // TODO: Resolve merge conflicts when merging docs-nav into master
 const SidebarBack = ({ border, enableGlyph = true, textOverride, title, url, ...props }) => {
-  const glyph = enableGlyph ? <Icon glyph="Arrow Left" size="small" /> : undefined;
+  const glyph = enableGlyph ? <Icon glyph="ArrowLeft" size="small" /> : undefined;
 
   return (
     <>
