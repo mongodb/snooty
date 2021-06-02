@@ -137,7 +137,7 @@ const MenuTitle = styled('div')`
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   const docsTitle = siteTitle + ' Docs';
-  const text = <>← Back to {formatText(docsTitle)}</>;
+  const text = <>&#8592; Back to {formatText(docsTitle)}</>;
 
   return (
     <>
@@ -174,6 +174,8 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   return (
     <>
       <Global styles={globalCSS} />
+      {/* Temporary div to be removed once the Redoc component loads. Provides additional space for Redoc's
+       loader to load below the navbar. TODO: Check if this is necessary on new docs-nav */}
       <div
         className={tempLoadingDivClassName}
         css={css`
