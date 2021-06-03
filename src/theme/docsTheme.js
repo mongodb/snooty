@@ -58,7 +58,12 @@ const screenSize = {
 };
 
 const navbar = {
-  bannerHeight: '40px',
+  bannerHeight: {
+    small: '40px',
+    medium: '50px',
+    large: '64px',
+  },
+  baseHeight: '45px',
   height: bannerContent.enabled ? '85px' : '45px',
 };
 

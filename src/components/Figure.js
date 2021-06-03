@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
 import Lightbox from './Lightbox';
@@ -33,7 +34,13 @@ export default class Figure extends Component {
       return <Lightbox nodeData={nodeData} />;
     }
     return (
-      <div className="figure" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
+      <div
+        className="figure"
+        css={css`
+          max-width: 100%;
+        `}
+        style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}
+      >
         <Image nodeData={nodeData} handleImageLoaded={this.handleImageLoaded} />
         <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
