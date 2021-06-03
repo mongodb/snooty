@@ -9,6 +9,7 @@ import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
 import { useLocation } from '@reach/router';
 import ComponentFactory from './ComponentFactory';
+import CopyButton from './CopyButton';
 import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme';
 
@@ -48,6 +49,11 @@ const splitChildren = (children) => {
   }
   return [null, children];
 };
+
+// Move up to improve alignment with text baseline
+const iconAdjust = css`
+  top: -5px;
+`;
 
 const OperationHeader = styled('div')`
   align-items: baseline;
@@ -139,14 +145,24 @@ const Operation = ({
     >
       <OperationHeader>
         <Badge variant={methodBadgeMap[method]}>{method}</Badge>
-        <Path dangerouslySetInnerHTML={{ __html: formatPath(path) }} />
+        <div>
+          <Path dangerouslySetInnerHTML={{ __html: formatPath(path) }} />
+          <span
+            css={css`
+              ${iconAdjust};
+              margin-left: ${theme.size.tiny};
+              position: relative;
+            `}
+          >
+            <CopyButton contents={path} />
+          </span>
+        </div>
         <IconButton
           aria-label={`${showDetails ? 'Hide' : 'Show'} operation details`}
           onClick={toggleDrawer}
           css={css`
+            ${iconAdjust};
             margin-left: auto;
-            /* Move up to improve alignment with text baseline */
-            top: -6px;
           `}
         >
           <Icon glyph={showDetails ? 'ChevronUp' : 'ChevronDown'} />
