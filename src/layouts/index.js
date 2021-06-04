@@ -15,19 +15,40 @@ const bannerPadding = css`
     margin-top: 50px;
   }
   div.sphinxsidebar {
-    margin-top: 50px;
+    margin-top: ${theme.navbar.bannerHeight.small};
+
+    @media ${theme.screenSize.upToMedium} {
+      margin-top: ${theme.navbar.bannerHeight.medium};
+    }
+
+    @media not all and (max-width: 1600px) {
+      margin-top: ${theme.navbar.bannerHeight.large};
+    }
   }
 `;
+
+const calculateNavSize = (bannerHeight) =>
+  `(${theme.bannerContent.enabled ? bannerHeight : '0px'} + ${theme.navbar.baseHeight} + 10px)`;
 
 const globalCSS = css`
   ${theme.bannerContent.enabled ? bannerPadding : ''}
   .contains-headerlink::before {
     content: '';
     display: block;
-    height: calc(${theme.navbar.height} + 10px);
-    margin-top: calc((${theme.navbar.height} + 10px) * -1);
+    height: calc(${calculateNavSize(theme.navbar.bannerHeight.small)});
+    margin-top: calc(${calculateNavSize(theme.navbar.bannerHeight.small)} * -1);
     position: relative;
     width: 0;
+
+    @media ${theme.screenSize.upToMedium} {
+      height: calc(${calculateNavSize(theme.navbar.bannerHeight.medium)});
+      margin-top: calc(${calculateNavSize(theme.navbar.bannerHeight.medium)} * -1);
+    }
+
+    @media not all and (max-width: 1600px) {
+      height: calc(${calculateNavSize(theme.navbar.bannerHeight.large)});
+      margin-top: calc(${calculateNavSize(theme.navbar.bannerHeight.large)} * -1);
+    }
   }
 
   .hidden {

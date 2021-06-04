@@ -64,6 +64,10 @@ const Banner = React.memo(({ altText, imgPath, mobileImgPath, url }) => {
         @media ${theme.screenSize.upToMedium} {
           height: 50px;
         }
+
+        @media not all and (max-width: 1600px) {
+          height: ${theme.size.xlarge};
+        }
       `}
     >
       <div
