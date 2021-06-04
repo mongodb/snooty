@@ -1,10 +1,10 @@
 // Set bannerContent.enabled to false when banner should be removed
 const bannerContent = {
-  altText: 'Register Now for MongoDB.live, free & fully virtual',
-  imgPath: 'assets/live-fall.png',
-  mobileImgPath: 'assets/live-fall-mobile.png',
-  url: 'https://www.mongodb.com/live?tck=dotlivefallbannerdocs',
-  enabled: false,
+  altText: 'Register for the free MongoDB.live developer conference | July 13 and 14',
+  imgPath: 'assets/live-banner.png',
+  mobileImgPath: 'assets/live-banner-mobile.png',
+  url: 'https://www.mongodb.com/live/register?tck=docs',
+  enabled: true,
 };
 
 /**
@@ -58,7 +58,12 @@ const screenSize = {
 };
 
 const navbar = {
-  bannerHeight: '40px',
+  bannerHeight: {
+    small: '40px',
+    medium: '50px',
+    large: '64px',
+  },
+  baseHeight: '45px',
   height: bannerContent.enabled ? '85px' : '45px',
 };
 
