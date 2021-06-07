@@ -446,7 +446,7 @@ textarea {
 }
 a:focus,
 a:hover {
-  color: #2a6496;
+  color: #1A567E;
   text-decoration: underline;
 }
 .btn:focus,
@@ -11064,7 +11064,7 @@ a,
 a > code,
 a > tt,
 div.body div.bc ul li a {
-  color: #006cbc;
+  color: #007CAD;
 }
 hr {
   border: 1px solid #b1b4b6;
