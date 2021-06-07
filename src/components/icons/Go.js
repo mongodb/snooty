@@ -9,6 +9,7 @@ const IconGo = ({ ...styles }) => (
     y="0"
     viewBox="0 0 205.4 76.7"
     style={{ fill: '#00ACD7' }}
+    {...styles}
   >
     <path
       className="st00"
