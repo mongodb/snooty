@@ -57,6 +57,9 @@ import MongoWebShell from './MongoWebShell';
 import Extract from './Extract';
 import Describe from './Describe';
 import ReleaseSpecification from './ReleaseSpecification';
+import Button from './Button';
+import Kicker from './Kicker';
+import Procedure from './Procedure';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -110,6 +113,7 @@ const roleMap = {
 const componentMap = {
   admonition: Admonition,
   blockquote: BlockQuote,
+  button: Button,
   'card-group': CardGroup,
   class: CSSClass,
   code: Code,
@@ -130,6 +134,7 @@ const componentMap = {
   glossary: Glossary,
   heading: Heading,
   hlist: HorizontalList,
+  kicker: Kicker,
   image: Image,
   include: Include,
   line: Line,
@@ -146,6 +151,7 @@ const componentMap = {
   openapi: OpenAPI,
   operation: Operation,
   paragraph: Paragraph,
+  procedure: Procedure,
   ref_role: RefRole,
   reference: Reference,
   release_specification: ReleaseSpecification,
@@ -179,6 +185,7 @@ const ComponentFactory = (props) => {
     }
 
     if (domain === 'landing') {
+      console.log('WRONG IF');
       return <LandingComponentFactory {...props} />;
     }
 
