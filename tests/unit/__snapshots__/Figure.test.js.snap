@@ -1,14 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders border correctly when specified as an option 1`] = `
+.emotion-1 {
+  max-width: 100%;
+}
+
 .emotion-0 {
   border: 0.5px solid #B8C4C2;
   width: 100%;
   border-radius: 4px;
+  max-width: 100%;
 }
 
 <div
-  class="figure"
+  class="figure emotion-1"
   style="width:700px"
 >
   <img
@@ -20,19 +25,31 @@ exports[`renders border correctly when specified as an option 1`] = `
 `;
 
 exports[`renders correctly 1`] = `
+.emotion-1 {
+  max-width: 100%;
+}
+
+.emotion-0 {
+  max-width: 100%;
+}
+
 <div
-  class="figure"
+  class="figure emotion-1"
   style="width:700px"
 >
   <img
     alt="/images/firstcluster.png"
-    class="   css-0"
+    class="   emotion-0"
     src="/images/firstcluster.png"
   />
 </div>
 `;
 
 exports[`renders lightbox correctly when specified as an option 1`] = `
+.emotion-0 {
+  max-width: 100%;
+}
+
 <div
   class="figure lightbox"
   style="width:700px"
