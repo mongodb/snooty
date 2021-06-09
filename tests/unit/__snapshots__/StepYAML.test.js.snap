@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sequence-block"
+>
+  <div
+    className="bullet-block"
+  >
+    <div
+      className="sequence-step"
+    >
+      1
+    </div>
+  </div>
+  <div
+    className="section"
+  >
+    <ComponentFactory
+      key="0"
+      nodeData={
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 0,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Connect to your MongoDB instance",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 0,
+                },
+              },
+              "type": "heading",
+            },
+            Object {
+              "argument": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 0,
+                    },
+                  },
+                  "type": "text",
+                  "value": "/includes/drivers_whitelist.rst",
+                },
+              ],
+              "children": Array [
+                Object {
+                  "children": Array [],
+                  "position": Object {
+                    "start": Object {
+                      "line": 0,
+                    },
+                  },
+                  "type": "FixedTextElement",
+                },
+              ],
+              "name": "include",
+              "position": Object {
+                "start": Object {
+                  "line": 0,
+                },
+              },
+              "type": "directive",
+            },
+            Object {
+              "argument": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 2,
+                    },
+                  },
+                  "type": "text",
+                  "value": "/includes/drivers_connect.rst",
+                },
+              ],
+              "children": Array [
+                Object {
+                  "children": Array [],
+                  "position": Object {
+                    "start": Object {
+                      "line": 2,
+                    },
+                  },
+                  "type": "FixedTextElement",
+                },
+              ],
+              "name": "include",
+              "position": Object {
+                "start": Object {
+                  "line": 2,
+                },
+              },
+              "type": "directive",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 0,
+            },
+          },
+          "type": "section",
+        }
+      }
+    />
+  </div>
+</div>
+`;
