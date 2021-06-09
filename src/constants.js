@@ -75,4 +75,4 @@ export const SECTION_NAME_MAPPING = {
   },
 };
 
-export const TEMPLATE_CLASSNAME = 'template-container';
+export const CONTENT_CONTAINER_CLASSNAME = 'content-container';
