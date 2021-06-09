@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'emotion-theming';
 import { renderStylesToString } from '@leafygreen-ui/emotion';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
+import { UserProvider } from './src/contexts/user-context';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 
@@ -24,6 +25,8 @@ export const replaceRenderer = ({ replaceBodyHTMLString, bodyComponent }) =>
 
 export const wrapRootElement = ({ element }) => (
   <ThemeProvider theme={theme}>
-    <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
+    <LeafyGreenProvider baseFontSize={16}>
+      <UserProvider>{element}</UserProvider>
+    </LeafyGreenProvider>
   </ThemeProvider>
 );
