@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ComponentFactory as LandingComponentFactory } from './landing';
-import Step from './Step';
 import Paragraph from './Paragraph';
 import List from './List';
 import ListItem from './ListItem';
@@ -52,7 +51,8 @@ import FieldList from './FieldList';
 import Operation from './Operation';
 import OpenAPI from './OpenAPI';
 import Root from './Root';
-import Steps from './Steps';
+import StepYAML from './StepYAML';
+import StepsYAML from './StepsYAML';
 import MongoWebShell from './MongoWebShell';
 import Extract from './Extract';
 import Describe from './Describe';
@@ -154,8 +154,8 @@ const componentMap = {
   rubric: Rubric,
   'search-results': SearchResults,
   section: Section,
-  step: Step,
-  steps: Steps,
+  'step-yaml': StepYAML,
+  'steps-yaml': StepsYAML,
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,

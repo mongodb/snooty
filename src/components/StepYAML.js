@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 
-const Step = ({ nodeData: { children }, stepNum, ...rest }) => (
+const StepYAML = ({ nodeData: { children }, stepNum, ...rest }) => (
   <div className="sequence-block">
     <div className="bullet-block">
       <div className="sequence-step">{stepNum}</div>
@@ -15,15 +15,15 @@ const Step = ({ nodeData: { children }, stepNum, ...rest }) => (
   </div>
 );
 
-Step.propTypes = {
+StepYAML.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.array.isRequired,
   }).isRequired,
   stepNum: PropTypes.number,
 };
 
-Step.defaultProps = {
+StepYAML.defaultProps = {
   stepNum: 1,
 };
 
-export default Step;
+export default StepYAML;
