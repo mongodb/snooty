@@ -1,6 +1,6 @@
 {
   "type": "directive",
-  "name": "step",
+  "name": "step-yaml",
   "position": {
     "start": {
       "line": 0
