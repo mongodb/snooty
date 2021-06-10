@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { InlineCode } from '@leafygreen-ui/typography';
 
 const Literal = ({ nodeData: { children } }) => (
-  <code>
+  <InlineCode>
     {children.map((node, i) => (
       <ComponentFactory nodeData={node} key={i} />
     ))}
-  </code>
+  </InlineCode>
 );
 
 Literal.propTypes = {
