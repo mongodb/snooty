@@ -1,13 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with a directive_argument node 1`] = `
+.emotion-0 {
+  background-color: #F9FBFA;
+  border: 1px solid #B8C4C2;
+  border-radius: 3px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  white-space: nowrap;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-0 {
+  box-shadow: 0 0 0 3px #E7EEEC;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-0 {
+  box-shadow: 0 0 0 3px #C5E4F2;
+}
+
 <dl
   class="option"
 >
   <dt
     id="std-option-mongos.--config"
   >
-    <code>
+    <code
+      class="emotion-0"
+    >
       --config &lt;filename&gt;, -f &lt;filename&gt;
     </code>
     <a
@@ -26,7 +50,9 @@ configuration file is the preferred method for runtime configuration of
       <a
         href="/reference/program/mongos/#std-program-mongos"
       >
-        <code>
+        <code
+          class="emotion-0"
+        >
           mongos
         </code>
       </a>
@@ -45,7 +71,9 @@ more information.
       <a
         href="/reference/program/mongos/#std-program-mongos"
       >
-        <code>
+        <code
+          class="emotion-0"
+        >
           mongos
         </code>
       </a>

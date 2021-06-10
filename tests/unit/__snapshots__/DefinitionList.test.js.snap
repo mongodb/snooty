@@ -1,18 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DefinitionList renders correctly 1`] = `
-.emotion-0 p:first-of-type {
+.emotion-0 {
+  background-color: #F9FBFA;
+  border: 1px solid #B8C4C2;
+  border-radius: 3px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  white-space: nowrap;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-0 {
+  box-shadow: 0 0 0 3px #E7EEEC;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-0 {
+  box-shadow: 0 0 0 3px #C5E4F2;
+}
+
+.emotion-1 p:first-of-type {
   margin-top: 0 !important;
 }
 
 <dl>
   <dt>
-    <code>
+    <code
+      class="emotion-0"
+    >
       MongoDefaultPartitioner
     </code>
   </dt>
   <dd
-    class="emotion-0"
+    class="emotion-1"
   >
     <strong>
       Default
