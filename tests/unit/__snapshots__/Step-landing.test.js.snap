@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<LandingStep>
+  <Circle>
+    <StepNumber />
+  </Circle>
+  <h2>
+    <ComponentFactory
+      key="0"
+      nodeData={
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 42,
+            },
+          },
+          "type": "text",
+          "value": "Import your data",
+        }
+      }
+    />
+  </h2>
+  <ComponentFactory
+    key="0"
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 44,
+              },
+            },
+            "type": "text",
+            "value": "Import data from CSV or JSON files into your MongoDB database.",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 44,
+          },
+        },
+        "type": "paragraph",
+      }
+    }
+  />
+  <ComponentFactory
+    key="1"
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 46,
+                  },
+                },
+                "type": "text",
+                "value": "To learn more, see Import and Export Data",
+              },
+            ],
+            "domain": "std",
+            "fileid": Array [
+              "import-export",
+              "std-label-compass-import-export",
+            ],
+            "flag": "",
+            "name": "label",
+            "position": Object {
+              "start": Object {
+                "line": 46,
+              },
+            },
+            "target": "compass-import-export",
+            "type": "ref_role",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 46,
+          },
+        },
+        "type": "paragraph",
+      }
+    }
+  />
+</LandingStep>
+`;

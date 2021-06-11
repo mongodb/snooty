@@ -9,6 +9,15 @@ import { theme } from '../theme/docsTheme';
 
 const BreadcrumbContainer = styled('nav')`
   font-size: ${theme.fontSize.small};
+  ${theme.bannerContent.enabled && `margin-top: ${theme.navbar.bannerHeight.small};`}
+
+  @media ${theme.screenSize.upToMedium} {
+    ${theme.bannerContent.enabled && `margin-top: ${theme.navbar.bannerHeight.medium};`}
+  }
+
+  @media not all and (max-width: 1600px) {
+    ${theme.bannerContent.enabled && `margin-top: ${theme.navbar.bannerHeight.large};`}
+  }
 
   & > p {
     margin-top: 0;
