@@ -116,8 +116,14 @@ const globalCSS = css`
   ${sidebarCss}
   ${spanHttpCss}
 
+  // Prevent content from appearing on top of navbar/banner when scrolling
+  // TODO: Look into removing after docs-nav
+  div.redoc-wrap {
+    z-index: 0;
+  }
+
   // "deprecated" badge
-  span[type="warning"] {
+  span[type='warning'] {
     border: ${badgeBorderType} ${uiColors.yellow.light2};
     border-radius: ${badgeBorderRadius};
   }
