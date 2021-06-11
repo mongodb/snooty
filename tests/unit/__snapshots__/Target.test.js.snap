@@ -30,7 +30,7 @@ exports[`renders correctly with a directive_argument node 1`] = `
     id="std-option-mongos.--config"
   >
     <code
-      class="emotion-0"
+      class="literal-comp emotion-0"
     >
       --config &lt;filename&gt;, -f &lt;filename&gt;
     </code>
@@ -51,7 +51,7 @@ configuration file is the preferred method for runtime configuration of
         href="/reference/program/mongos/#std-program-mongos"
       >
         <code
-          class="emotion-0"
+          class="literal-comp emotion-0"
         >
           mongos
         </code>
@@ -72,7 +72,7 @@ more information.
         href="/reference/program/mongos/#std-program-mongos"
       >
         <code
-          class="emotion-0"
+          class="literal-comp emotion-0"
         >
           mongos
         </code>

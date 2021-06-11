@@ -30,7 +30,7 @@ exports[`DefinitionList renders correctly 1`] = `
 <dl>
   <dt>
     <code
-      class="emotion-0"
+      class="literal-comp emotion-0"
     >
       MongoDefaultPartitioner
     </code>

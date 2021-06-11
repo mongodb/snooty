@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<InlineCode>
+<InlineCode
+  className="literal-comp"
+>
   <ComponentFactory
     key="0"
     nodeData={
