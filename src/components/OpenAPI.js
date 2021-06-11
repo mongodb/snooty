@@ -12,7 +12,12 @@ import { formatText } from '../utils/format-text';
 
 const NAVBAR_HEIGHT = 45;
 
-const borderType = '1px solid';
+const badgeBorderRadius = '50px';
+const badgeBorderType = '1px solid';
+const codeFontFamily = 'Source Code Pro';
+const inlineCodeBackgroundColor = uiColors.gray.light3;
+const inlineCodeBorderColor = uiColors.gray.light1;
+const textFontFamily = 'Akzidenz';
 
 const codeBlockCss = css`
   span.ellipsis:after {
@@ -32,6 +37,24 @@ const codeBlockCss = css`
   }
   span.token.string:not(.property) {
     color: #98c379 !important;
+  }
+
+  // Code block divs
+  div.hoverable {
+    color: ${uiColors.white};
+  }
+`;
+
+const inlineCodeCss = css`
+  // InlineCode inside of Parameters and Schemas
+  span.sc-eLgOdN {
+    background-color: ${inlineCodeBackgroundColor};
+    border-color: ${inlineCodeBorderColor};
+  }
+  // InlineCode found in data types of Parameters and Schemas; example: "string 24 characters"
+  span.sc-kIeTtH {
+    background-color: ${inlineCodeBackgroundColor};
+    border-color: ${inlineCodeBorderColor};
   }
 `;
 
@@ -53,28 +76,35 @@ const sidebarCss = css`
 
 const spanHttpCss = css`
   span.get {
-    border: ${borderType} ${uiColors.blue.light2};
+    border: ${badgeBorderType} ${uiColors.blue.light2};
     color: ${uiColors.blue.dark2};
   }
   span.post {
-    border: ${borderType} ${uiColors.green.light2};
+    border: ${badgeBorderType} ${uiColors.green.light2};
     color: ${uiColors.green.dark2};
   }
   span.put {
-    border: ${borderType} ${uiColors.yellow.light2};
+    border: ${badgeBorderType} ${uiColors.yellow.light2};
     color: ${uiColors.yellow.dark2};
   }
   span.patch {
-    border: ${borderType} ${uiColors.yellow.light2};
+    border: ${badgeBorderType} ${uiColors.yellow.light2};
     color: ${uiColors.yellow.dark2};
   }
   span.delete {
-    border: ${borderType} ${uiColors.red.light2};
+    border: ${badgeBorderType} ${uiColors.red.light2};
     color: ${uiColors.red.dark2};
   }
 
+  // Left sidebar badges
   span.operation-type {
-    font-family: Akzidenz;
+    border-radius: ${badgeBorderRadius};
+    font-family: ${textFontFamily};
+  }
+
+  // Right sidebar badges
+  span.http-verb {
+    border-radius: ${badgeBorderRadius};
   }
 `;
 
@@ -82,12 +112,14 @@ const spanHttpCss = css`
 // built-in theme options.
 const globalCSS = css`
   ${codeBlockCss}
+  ${inlineCodeCss}
   ${sidebarCss}
   ${spanHttpCss}
 
   // "deprecated" badge
   span[type="warning"] {
-    border: ${borderType} ${uiColors.yellow.light2};
+    border: ${badgeBorderType} ${uiColors.yellow.light2};
+    border-radius: ${badgeBorderRadius};
   }
 
   .menu-title-container {
@@ -110,6 +142,16 @@ const globalCSS = css`
         }
       }
     }
+  }
+
+  // Request Body Schema "One of" pills
+  button.sc-fKFyDc {
+    border-radius: ${badgeBorderRadius};
+  }
+
+  // Responses buttons
+  button.sc-eFubAy {
+    border-radius: 6px;
   }
 `;
 
@@ -186,7 +228,9 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
         onLoaded={() => {
           // Remove temporary loading margin from DOM
           const tempLoadingDivEl = document.querySelector(`.${tempLoadingDivClassName}`);
-          tempLoadingDivEl.remove();
+          if (tempLoadingDivEl) {
+            tempLoadingDivEl.remove();
+          }
           // Insert back button and page title to redoc's sidenav
           const sidebarEl = document.querySelector('.menu-content');
           if (sidebarEl) {
@@ -207,6 +251,13 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
               backgroundColor: uiColors.gray.dark3,
             },
             colors: {
+              http: {
+                get: uiColors.blue.light3,
+                post: uiColors.green.light3,
+                put: uiColors.yellow.light3,
+                patch: uiColors.yellow.light3,
+                delete: uiColors.red.light3,
+              },
               primary: {
                 main: uiColors.black,
               },
@@ -222,16 +273,12 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                   tabTextColor: uiColors.red.dark1,
                 },
               },
+              text: {
+                primary: uiColors.black,
+              },
               warning: {
                 main: uiColors.yellow.light3,
                 contrastText: uiColors.yellow.dark2,
-              },
-              http: {
-                get: uiColors.blue.light3,
-                post: uiColors.green.light3,
-                put: uiColors.yellow.light3,
-                patch: uiColors.yellow.light3,
-                delete: uiColors.red.light3,
               },
             },
             rightPanel: {
@@ -249,15 +296,15 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
             },
             typography: {
               fontSize: theme.fontSize.default,
-              fontFamily: 'Akzidenz',
+              fontFamily: textFontFamily,
               headings: {
-                fontFamily: 'Akzidenz',
+                fontFamily: textFontFamily,
               },
               code: {
                 fontSize: theme.fontSize.small,
-                fontFamily: 'Source Code Pro',
+                fontFamily: codeFontFamily,
                 color: uiColors.black,
-                backgroundColor: uiColors.gray.light3,
+                backgroundColor: inlineCodeBackgroundColor,
               },
               links: {
                 color: uiColors.blue.base,
