@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<InlineCode
-  className="literal-comp"
->
+<StyledInlineCode>
   <ComponentFactory
     key="0"
     nodeData={
@@ -18,5 +16,5 @@ exports[`renders correctly 1`] = `
       }
     }
   />
-</InlineCode>
+</StyledInlineCode>
 `;
