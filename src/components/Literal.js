@@ -4,7 +4,7 @@ import ComponentFactory from './ComponentFactory';
 import { InlineCode } from '@leafygreen-ui/typography';
 
 const Literal = ({ nodeData: { children } }) => (
-  <InlineCode>
+  <InlineCode className="literal-comp">
     {children.map((node, i) => (
       <ComponentFactory nodeData={node} key={i} />
     ))}
