@@ -123,11 +123,11 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
       <LeafyTabs
         className={cx(getTabsStyling({ isHidden, isProductLanding }))}
-        as={TabButton}
+        aria-label={`Tabs to describe usage of ${tabsetName}`}
         selected={activeTab}
         setSelected={handleClick}
       >
-        {children.map(tab => {
+        {children.map((tab) => {
           if (tab.name !== 'tab') {
             return null;
           }
