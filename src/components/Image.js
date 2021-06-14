@@ -39,7 +39,7 @@ export default class Image extends Component {
   };
 
   render() {
-    const { className, nodeData, isOpen } = this.props;
+    const { className, nodeData, isLightboxOpen } = this.props;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
     const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
     const customAlign = getNestedValue(['options', 'align'], nodeData)
@@ -75,7 +75,7 @@ export default class Image extends Component {
         ref={this.imgRef}
         css={css`
           ${hasBorder ? borderStyling : ''}
-          ${isOpen ? enlargedImg : ''}
+          ${isLightboxOpen ? enlargedImg : ''}
           max-width: 100%;
         `}
       />
