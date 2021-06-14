@@ -19,6 +19,7 @@ exports[`Lightbox renders correctly 1`] = `
       <Image
         className=""
         handleImageLoaded={[Function]}
+        isOpen={false}
         nodeData={
           Object {
             "argument": Array [
