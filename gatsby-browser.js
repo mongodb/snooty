@@ -8,20 +8,22 @@ import './src/styles/mongodb-docs.css';
 const contentTransitionDuration = 100;
 
 export const shouldUpdateScroll = ({ routerProps: { location } }) => {
-  const { action, hash } = location;
+  const { hash } = location;
   const scrollContainer = document.querySelector(`.${CONTENT_CONTAINER_CLASSNAME}`);
+
   // Clicking on a new link
-  if (action === 'PUSH') {
-    if (!hash && scrollContainer) {
-      window.setTimeout(() => {
-        scrollContainer.scrollTop = 0;
-      }, contentTransitionDuration);
-    } else {
+  if (scrollContainer) {
+    if (hash) {
       window.setTimeout(() => {
         document.getElementById(decodeURI(hash).slice(1)).scrollIntoView(true);
       }, contentTransitionDuration);
+    } else {
+      window.setTimeout(() => {
+        scrollContainer.scrollTop = 0;
+      }, contentTransitionDuration);
     }
   }
+
   return false;
 };
 
