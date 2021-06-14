@@ -34,7 +34,7 @@ const Lightbox = ({ nodeData, ...rest }) => {
     <React.Fragment>
       <div className="figure lightbox" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
         <div className="lightbox__imageWrapper" onClick={toggleShowModal} role="button" tabIndex="-1">
-          <Image nodeData={nodeData} />
+          <Image nodeData={nodeData} isOpen={false} />
           <div className="lightbox__caption">{CAPTION_TEXT}</div>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
@@ -51,6 +51,7 @@ const Lightbox = ({ nodeData, ...rest }) => {
         >
           <Image
             nodeData={nodeData}
+            isOpen={true}
             className={`lightbox__content lightbox__content--activated ${
               isSvg(imgSrc) ? 'lightbox__content--scalable' : ''
             }`}
