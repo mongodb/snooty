@@ -80,7 +80,7 @@ const DefaultLayout = (props) => {
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
         <ContentsProvider headingNodes={page?.options?.headings}>
-          <Template {...props}>{template === 'landing' ? [children] : children}</Template>
+          <Template {...props}>{children}</Template>
         </ContentsProvider>
       </TabProvider>
       <Navbar />
