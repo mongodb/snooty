@@ -68,7 +68,7 @@
     "@leafygreen-ui/modal": "^6.0.2",
     "@leafygreen-ui/palette": "^3.1.1",
     "@leafygreen-ui/select": "^3.0.1",
-    "@leafygreen-ui/side-nav": "^6.0.0",
+    "@leafygreen-ui/side-nav": "^7.1.2",
     "@leafygreen-ui/table": "^2.0.2",
     "@leafygreen-ui/tabs": "^5.1.1",
     "@leafygreen-ui/text-input": "^6.0.1",

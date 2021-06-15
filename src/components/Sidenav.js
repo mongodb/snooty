@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -12,10 +12,11 @@ import SidebarBack from './SidebarBack';
 import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
+import useMedia from '../hooks/use-media';
+import useScreenSize from '../hooks/useScreenSize';
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
-  grid-area: sidebar;
-  z-index: 1;
+  height: 100%;
 
   // Allows Spaceholder element to flex grow for AdditionalLinks
   & > div > nav > div > ul {
@@ -41,6 +42,10 @@ const titleStyle = css`
   font-weight: bold;
   line-height: 20px;
   text-transform: capitalize;
+`;
+
+const tabletStyle = css`
+  position: absolute;
 `;
 
 // Allows AdditionalLinks to always be at the bottom of the SideNav
@@ -79,50 +84,71 @@ const additionalLinks = [
 ];
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
+  const isTabletSize = useMedia('only screen and (min-width: 420px) and (max-width: 767px');
+  const [isCollapsed, setCollapsed] = useState(isTabletSize);
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
   const [back, setBack] = React.useState(null);
 
+  useEffect(() => {
+    setCollapsed(isTabletSize);
+  }, [isTabletSize]);
+
   return (
-    <StyledLeafygreenSideNav aria-label="Side navigation">
-      <IATransition back={back} hasIA={!!ia} slug={slug}>
-        <NavTopContainer>
-          <ArtificialPadding />
-          <SidebarBack
-            border={<Border />}
-            handleClick={() => {
-              setBack(true);
-            }}
-            slug={slug}
-          />
-          {ia && (
-            <IA
-              header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+    <div
+      css={css`
+        grid-area: sidebar;
+        min-width: 45px;
+        position: relative;
+        z-index: 1;
+      `}
+    >
+      <StyledLeafygreenSideNav
+        aria-label="Side navigation"
+        css={isTabletSize && tabletStyle}
+        collapsed={isCollapsed}
+        setCollapsed={setCollapsed}
+        widthOverride={268}
+      >
+        <IATransition back={back} hasIA={!!ia} slug={slug}>
+          <NavTopContainer>
+            <ArtificialPadding />
+            <SidebarBack
+              border={<Border />}
               handleClick={() => {
-                setBack(false);
+                setBack(true);
               }}
-              ia={ia}
+              slug={slug}
             />
-          )}
-          {showAllProducts && (
-            <Border
-              css={css`
-                margin-bottom: 0;
-              `}
-            />
-          )}
-        </NavTopContainer>
-        {showAllProducts && <ProductsList />}
-      </IATransition>
-      {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
-      {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
-      <Spaceholder />
-      {additionalLinks.map(({ glyph, title, url }) => (
-        <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
-          {title}
-        </SideNavItem>
-      ))}
-    </StyledLeafygreenSideNav>
+            {ia && (
+              <IA
+                header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+                handleClick={() => {
+                  setBack(false);
+                }}
+                ia={ia}
+              />
+            )}
+            {showAllProducts && (
+              <Border
+                css={css`
+                  margin-bottom: 0;
+                `}
+              />
+            )}
+          </NavTopContainer>
+          {showAllProducts && <ProductsList />}
+        </IATransition>
+        {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
+        {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+        <Spaceholder />
+        {additionalLinks.map(({ glyph, title, url }) => (
+          <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+            {title}
+          </SideNavItem>
+        ))}
+      </StyledLeafygreenSideNav>
+    </div>
   );
 };
 
