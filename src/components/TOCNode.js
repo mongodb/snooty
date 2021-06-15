@@ -14,6 +14,7 @@ const BASE_NODE_LEVEL = 1;
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
+
 const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
@@ -34,6 +35,15 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
     setIsOpen(isActive);
   }, [isActive, isDrawer ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const transformTOCCodeNodes = (title) => {
+    title.forEach((currTitle) => {
+      if (currTitle.type == 'literal') {
+        currTitle.type = 'toccodenode';
+      }
+    });
+    return title;
+  };
+
   // Show caret if not on first level of TOC
   const caretIcon =
     level !== BASE_NODE_LEVEL ? (
@@ -45,8 +55,8 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
 
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
-    const formattedTitle = formatText(title);
-
+    var processedTitle = transformTOCCodeNodes(title);
+    const formattedTitle = formatText(processedTitle);
     if (isDrawer && children.length > 0) {
       const _toggleDrawerOnEnter = (e) => {
         if (e.key === 'Enter') {
