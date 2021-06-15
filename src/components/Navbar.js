@@ -10,6 +10,7 @@ import { searchParamsToURL } from '../utils/search-params-to-url';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
 import ConditionalWrapper from './ConditionalWrapper';
+import ConsistentNav from 'consistent-nav';
 import { theme } from '../theme/docsTheme';
 
 const getActiveSection = (slug, urlItems) => {
@@ -140,37 +141,39 @@ const Navbar = () => {
   }, [isSearchbarDefaultExpanded]);
 
   return (
-    <ConditionalWrapper
-      condition={theme.bannerContent.enabled}
-      wrapper={(children) => (
-        <div
-          css={css`
-            position: fixed;
-            top: 0;
-          `}
-        >
-          <Banner {...theme.bannerContent} />
-          {children}
-        </div>
-      )}
-    >
-      <NavbarContainer
-        isExpanded={isSearchbarExpanded}
-        shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
-        tabIndex="0"
-        id="navbar"
-        className="navbar"
-        data-navprops={navprops}
-      />
-      <Searchbar
-        getResultsFromJSON={getSearchbarResultsFromJSON}
-        isExpanded={isSearchbarExpanded}
-        setIsExpanded={onSearchbarExpand}
-        searchParamsToURL={searchParamsToURL}
-        // Autofocus the searchbar when the user expands only so the user can start typing
-        shouldAutofocus={!isSearchbarDefaultExpanded}
-      />
-    </ConditionalWrapper>
+    <>
+      <ConditionalWrapper
+        condition={true}
+        wrapper={(children) => (
+          <div
+            css={css`
+              position: fixed;
+              top: 0;
+            `}
+          >
+            <ConsistentNav onTrack={() => alert('This would be a track event')} />
+            {children}
+          </div>
+        )}
+      >
+        <NavbarContainer
+          isExpanded={isSearchbarExpanded}
+          shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
+          tabIndex="0"
+          id="navbar"
+          className="navbar"
+          data-navprops={navprops}
+        />
+        <Searchbar
+          getResultsFromJSON={getSearchbarResultsFromJSON}
+          isExpanded={isSearchbarExpanded}
+          setIsExpanded={onSearchbarExpand}
+          searchParamsToURL={searchParamsToURL}
+          // Autofocus the searchbar when the user expands only so the user can start typing
+          shouldAutofocus={!isSearchbarDefaultExpanded}
+        />
+      </ConditionalWrapper>
+    </>
   );
 };
 

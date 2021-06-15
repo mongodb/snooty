@@ -20,6 +20,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install
+      env:
+        NPM_AUTH_TOKEN = ${{ secrets.NPM_AUTH_TOKEN }}
+        NPM_USER_EMAIL = ${{ secrets.NPM_AUTH_EMAIL }}
       run: npm ci
     - name: Lint
       run: npm run lint && npm run format
