@@ -3,61 +3,25 @@ import PropTypes from 'prop-types';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
 import { getNestedValue } from '../utils/get-nested-value';
+import Modal from '@leafygreen-ui/modal';
 
 const CAPTION_TEXT = 'click to enlarge';
-const isSvg = (imgSrc) => /\.svg$/.test(imgSrc);
 
 const Lightbox = ({ nodeData, ...rest }) => {
-  const [showModal, setShowModal] = useState(false);
-  const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
-  const modal = useRef(null);
-
-  const toggleShowModal = () => {
-    setShowModal((prevShowState) => !prevShowState);
-  };
-
-  const handleOnKeyDown = (e) => {
-    // Escape key
-    if (e.keyCode === 27) {
-      toggleShowModal();
-    }
-  };
-
-  // Hook to take effect with every re-render
-  useEffect(() => {
-    if (modal.current) {
-      modal.current.focus();
-    }
-  });
+  const [open, setOpen] = useState(false);
 
   return (
     <React.Fragment>
       <div className="figure lightbox" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
-        <div className="lightbox__imageWrapper" onClick={toggleShowModal} role="button" tabIndex="-1">
-          <Image nodeData={nodeData} isLightboxOpen={false} />
+        <div className="lightbox__imageWrapper" onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
+          <Image nodeData={nodeData} />
           <div className="lightbox__caption">{CAPTION_TEXT}</div>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
-      {showModal && (
-        <div
-          className="lightbox__modal"
-          title="click to close"
-          onClick={toggleShowModal}
-          ref={modal}
-          onKeyDown={handleOnKeyDown}
-          role="button"
-          tabIndex="-1"
-        >
-          <Image
-            nodeData={nodeData}
-            isLightboxOpen={true}
-            className={`lightbox__content lightbox__content--activated ${
-              isSvg(imgSrc) ? 'lightbox__content--scalable' : ''
-            }`}
-          />
-        </div>
-      )}
+      <Modal size="large" open={open} setOpen={setOpen}>
+        <Image nodeData={nodeData} />
+      </Modal>
     </React.Fragment>
   );
 };

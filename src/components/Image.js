@@ -52,9 +52,6 @@ export default class Image extends Component {
       width: 100%;
       border-radius: 4px;
     `;
-    const enlargedImg = css`
-      width: 80%;
-    `;
 
     const buildStyles = () => {
       const { height, width } = this.state;
@@ -75,7 +72,6 @@ export default class Image extends Component {
         ref={this.imgRef}
         css={css`
           ${hasBorder ? borderStyling : ''}
-          ${isLightboxOpen ? enlargedImg : ''}
           max-width: 100%;
         `}
       />
@@ -86,7 +82,6 @@ export default class Image extends Component {
 Image.propTypes = {
   className: PropTypes.string,
   handleImageLoaded: PropTypes.func,
-  isOpen: PropTypes.bool,
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({
