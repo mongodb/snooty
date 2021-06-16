@@ -69,6 +69,7 @@ import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
+import TOCCodeNode from './TOCCodeNode';
 
 const IGNORED_NAMES = new Set([
   'default-domain',
@@ -162,6 +163,7 @@ const componentMap = {
   target: Target,
   text: Text,
   title_reference: TitleReference,
+  toccodenode: TOCCodeNode,
   topic: Topic,
   transition: Transition,
   twitter: Twitter,
