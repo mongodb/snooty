@@ -41,11 +41,6 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
         currTitle.type = 'toccodenode';
       }
     }
-    // title.forEach((currTitle) => {
-    //   if (currTitle.type == 'literal') {
-    //     currTitle.type = 'toccodenode';
-    //   }
-    // });
     return title;
   };
 
