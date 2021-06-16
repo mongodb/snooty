@@ -36,11 +36,16 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
   }, [isActive, isDrawer ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const transformTOCCodeNodes = (title) => {
-    title.forEach((currTitle) => {
+    for (var currTitle of title) {
       if (currTitle.type == 'literal') {
         currTitle.type = 'toccodenode';
       }
-    });
+    }
+    // title.forEach((currTitle) => {
+    //   if (currTitle.type == 'literal') {
+    //     currTitle.type = 'toccodenode';
+    //   }
+    // });
     return title;
   };
 
