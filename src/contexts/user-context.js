@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getUserProfileFromJWT } from '../clients/auth.js';
+import { checkOktaSession, getUserProfileFromJWT } from '../clients/auth.js';
+import { isBrowser } from '../utils/is-browser';
 
 const defaultContextValue = {
   isFetching: false,
@@ -14,6 +15,8 @@ const UserProvider = ({ children = {} }) => {
     (async () => {
       const userProfile = await getUserProfileFromJWT();
       setUserData(userProfile);
+      console.log(userProfile);
+      checkOktaSession();
     })();
   }, []);
   return <UserContext.Provider value={{ userData, setUserData }}>{children}</UserContext.Provider>;
