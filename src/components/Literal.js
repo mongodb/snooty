@@ -11,7 +11,7 @@ const StyledInlineCode = styled(InlineCode)`
 `;
 
 const StyledNavigationInlineCode = styled('code')`
-  /* Unset font size so it inherits it from its context */
+  /* Used for Literals that don't need LeafyGreen's InlineCode component */
   font-family: 'Source Code Pro';
   color: unset;
 `;
