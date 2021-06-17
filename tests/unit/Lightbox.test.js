@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Lightbox from '../../src/components/Lightbox';
-import Modal from '@leafygreen-ui/modal';
 
 // data for this component
 import mockData from './data/Figure.test.json';
