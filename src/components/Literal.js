@@ -3,24 +3,46 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { InlineCode } from '@leafygreen-ui/typography';
 import ComponentFactory from './ComponentFactory';
+import { getNestedValue } from '../utils/get-nested-value';
 
 const StyledInlineCode = styled(InlineCode)`
   /* Unset font size so it inherits it from its context */
   font-size: unset;
 `;
 
-const Literal = ({ nodeData: { children } }) => (
-  <StyledInlineCode>
-    {children.map((node, i) => (
-      <ComponentFactory nodeData={node} key={i} />
-    ))}
-  </StyledInlineCode>
-);
+const StyledNavigationInlineCode = styled('code')`
+  /* Unset font size so it inherits it from its context */
+  font-family: 'Source Code Pro';
+  color: unset;
+`;
+
+const Literal = ({ nodeData: { children }, formatTextOptions }) => {
+  const navigationStyle = getNestedValue(['literalEnableInline'], formatTextOptions);
+  if (navigationStyle) {
+    return (
+      <StyledNavigationInlineCode>
+        {children.map((node, i) => (
+          <ComponentFactory nodeData={node} key={i} />
+        ))}
+      </StyledNavigationInlineCode>
+    );
+  }
+  return (
+    <StyledInlineCode>
+      {children.map((node, i) => (
+        <ComponentFactory nodeData={node} key={i} />
+      ))}
+    </StyledInlineCode>
+  );
+};
 
 Literal.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
+  formatTextOptions: PropTypes.shape({
+    literalEnableInline: PropTypes.bool,
+  }),
 };
 
 export default Literal;

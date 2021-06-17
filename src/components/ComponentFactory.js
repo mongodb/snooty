@@ -190,6 +190,9 @@ const ComponentFactory = (props) => {
     if (type === 'role') {
       ComponentType = roleMap[name];
     }
+    if (type === 'literal') {
+      console.log(props);
+    }
 
     // Various admonition types are all handled by the Admonition component
     if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
