@@ -195,8 +195,10 @@ const ComponentFactory = (props) => {
       return null;
     }
 
-    // TODO: Create structure for domain handling?
-    console.log(domain);
+    // Warn on unexpected usage of domains, but don't break
+    if (domain && !(domain === 'mongodb' || domain === 'std')) {
+      console.warn(`Domain '${domain}' not yet implemented`);
+    }
 
     const lookup = type === 'directive' ? name : type;
     let ComponentType = componentMap[lookup];
