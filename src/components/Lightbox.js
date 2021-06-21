@@ -19,7 +19,7 @@ const Lightbox = ({ nodeData, ...rest }) => {
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
-      <Modal size="large" open={open} setOpen={setOpen}>
+      <Modal className="imgModal" size="large" open={open} setOpen={setOpen}>
         <Image nodeData={nodeData} />
       </Modal>
     </React.Fragment>

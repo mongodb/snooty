@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Lightbox from '../../src/components/Lightbox';
-
+import Modal from '@leafygreen-ui/modal';
 // data for this component
 import mockData from './data/Figure.test.json';
 
@@ -27,7 +27,7 @@ describe('Lightbox', () => {
   });
 
   it('does not display the modal', () => {
-    expect(wrapper.find('.leafygreen-ui-xhlipt')).toHaveLength(0);
+    expect(wrapper.find('Modal')).toHaveLength(0);
   });
 
   it('shows a caption', () => {
@@ -41,7 +41,7 @@ describe('Lightbox', () => {
   });
 
   it('displays the modal', () => {
-    expect(wrapper.find('.leafygreen-ui-xhlipt')).toHaveLength(1);
+    expect(wrapper.find('Modal')).toHaveLength(1);
   });
 
   it('clicking anywhere on the modal', () => {
@@ -49,8 +49,7 @@ describe('Lightbox', () => {
     modalOpener.simulate('click');
   });
 
-  // TODO not sure how to test this
-  // it('closes the modal', () => {
-  //   expect(wrapper.find('.leafygreen-ui-xhlipt')).toHaveLength(0);
-  // });
+  it('closes the modal', () => {
+    expect(wrapper.find('Modal')).toHaveLength(0);
+  });
 });
