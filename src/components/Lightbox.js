@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes, { node } from 'prop-types';
+import PropTypes from 'prop-types';
 import Modal from '@leafygreen-ui/modal';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
-import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme.js';
 import styled from '@emotion/styled';
 
