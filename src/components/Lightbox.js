@@ -30,15 +30,22 @@ const LightboxCaption = styled('div')`
 
 const Lightbox = ({ nodeData, ...rest }) => {
   const [open, setOpen] = useState(false);
+  const LightboxWrapper = styled('div')`
+    ${{ width: nodeData.options?.figwidth || 'auto' }}
+    cursor: pointer;
+    margin: 0;
+    display: block;
+  `;
+
   return (
     <React.Fragment>
-      <div className="figure" style={{ width: nodeData.options?.figwidth || 'auto' }}>
+      <LightboxWrapper>
         <div onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
           <Image nodeData={nodeData} />
           <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
-      </div>
+      </LightboxWrapper>
       <StyledModal size="large" open={open} setOpen={setOpen}>
         <Image nodeData={nodeData} />
       </StyledModal>
