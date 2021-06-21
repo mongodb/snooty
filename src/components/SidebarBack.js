@@ -23,7 +23,7 @@ const SidebarBack = ({ border, enableGlyph = true, textOverride, title, url, ...
 SidebarBack.propTypes = {
   border: PropTypes.element,
   enableGlyph: PropTypes.bool,
-  textOverride: PropTypes.string,
+  textOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
   title: PropTypes.string,
   url: PropTypes.string,
 };

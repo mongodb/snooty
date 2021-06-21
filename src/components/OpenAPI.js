@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
 import { RedocStandalone } from 'redoc';
@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
 import SidebarBack from './SidebarBack';
+import Spinner from './Spinner';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 
@@ -17,6 +18,7 @@ const badgeBorderType = '1px solid';
 const codeFontFamily = 'Source Code Pro';
 const inlineCodeBackgroundColor = uiColors.gray.light3;
 const inlineCodeBorderColor = uiColors.gray.light1;
+const schemaDataTypeColor = uiColors.blue.dark3;
 const textFontFamily = 'Akzidenz';
 
 const codeBlockCss = css`
@@ -55,6 +57,38 @@ const inlineCodeCss = css`
   span.sc-kIeTtH {
     background-color: ${inlineCodeBackgroundColor};
     border-color: ${inlineCodeBorderColor};
+  }
+`;
+
+const schemaDataTypesCss = css`
+  // Request Body Schema "One of" pills
+  button.sc-fKFyDc {
+    border-radius: ${badgeBorderRadius};
+  }
+
+  // Responses buttons
+  button.sc-eFubAy {
+    border-radius: 6px;
+  }
+
+  // Data types under query parameters; ex - "string" / "boolean"
+  span.sc-fWSCIC {
+    color: ${schemaDataTypeColor};
+  }
+
+  // Regex next to data types under query parameters; ex - "^([\w]{24})$"
+  span.sc-hlTvYk {
+    color: ${schemaDataTypeColor};
+  }
+
+  // "Array of" keyword next to data types under query parameters
+  span.sc-GqfZa {
+    color: ${schemaDataTypeColor};
+  }
+
+  // Parenthesized data types under query paramters; ex - "(ObjectId)"
+  span.sc-dwfUOf {
+    color: ${schemaDataTypeColor};
   }
 `;
 
@@ -105,6 +139,7 @@ const spanHttpCss = css`
   // Right sidebar badges
   span.http-verb {
     border-radius: ${badgeBorderRadius};
+    font-weight: bold;
   }
 `;
 
@@ -113,6 +148,7 @@ const spanHttpCss = css`
 const globalCSS = css`
   ${codeBlockCss}
   ${inlineCodeCss}
+  ${schemaDataTypesCss}
   ${sidebarCss}
   ${spanHttpCss}
 
@@ -150,14 +186,9 @@ const globalCSS = css`
     }
   }
 
-  // Request Body Schema "One of" pills
-  button.sc-fKFyDc {
-    border-radius: ${badgeBorderRadius};
-  }
-
-  // Responses buttons
-  button.sc-eFubAy {
-    border-radius: 6px;
+  // Prevent long enum names from overlapping with right sidebar code blocks
+  table {
+    word-break: break-word;
   }
 `;
 
@@ -177,11 +208,30 @@ const Border = styled('hr')`
   width: 100%;
 `;
 
+const LoadingContainer = styled('div')`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 180px 0 ${theme.size.medium} 0;
+`;
+
+const LoadingMessage = styled('div')`
+  font-size: ${theme.fontSize.h1};
+  margin-bottom: ${theme.size.small};
+`;
+
 const MenuTitle = styled('div')`
   ${titleStyle}
 
   margin: ${theme.size.medium} ${theme.size.default};
 `;
+
+const LoadingWidget = ({ className }) => (
+  <LoadingContainer className={className}>
+    <LoadingMessage>Loading</LoadingMessage>
+    <Spinner size={48} />
+  </LoadingContainer>
+);
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   const docsTitle = siteTitle + ' Docs';
@@ -197,6 +247,8 @@ const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
 
 const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
   const usesRST = options?.['uses-rst'];
+  // Keep track of if the Redoc component has already loaded once
+  const [load, setLoad] = useState(false);
 
   // Use snooty openapi components, such as for docs-realm
   if (usesRST) {
@@ -216,22 +268,19 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
     return null;
   }
   const pageTitle = page?.options?.title || '';
+  const tempLoadingDivClassName = 'openapi-loading-container';
   const siteTitle = metadata?.title;
-  const tempLoadingDivClassName = 'openapi-loading-margin';
 
   return (
     <>
       <Global styles={globalCSS} />
-      {/* Temporary div to be removed once the Redoc component loads. Provides additional space for Redoc's
-       loader to load below the navbar. TODO: Check if this is necessary on new docs-nav */}
-      <div
-        className={tempLoadingDivClassName}
-        css={css`
-          margin-top: 90px;
-        `}
-      />
+      {/* Temporary loading widget to be removed once the Redoc component loads */}
+      <LoadingWidget className={tempLoadingDivClassName} />
       <RedocStandalone
         onLoaded={() => {
+          if (load) {
+            return;
+          }
           // Remove temporary loading margin from DOM
           const tempLoadingDivEl = document.querySelector(`.${tempLoadingDivClassName}`);
           if (tempLoadingDivEl) {
@@ -248,15 +297,21 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
               render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
             }
           }
+          // Prevent showing the loading widget and side nav additions more than once
+          setLoad(true);
         }}
         options={{
+          hideLoading: true,
           maxDisplayedEnumValues: 5,
           scrollYOffset: NAVBAR_HEIGHT,
           theme: {
             codeBlock: {
-              backgroundColor: uiColors.gray.dark3,
+              backgroundColor: uiColors.black,
             },
             colors: {
+              error: {
+                main: uiColors.red.dark1,
+              },
               http: {
                 get: uiColors.blue.light3,
                 post: uiColors.green.light3,
@@ -265,7 +320,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 delete: uiColors.red.light3,
               },
               primary: {
-                main: uiColors.black,
+                main: uiColors.gray.dark3,
               },
               responses: {
                 success: {
@@ -280,7 +335,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 },
               },
               text: {
-                primary: uiColors.black,
+                primary: uiColors.gray.dark3,
               },
               warning: {
                 main: uiColors.yellow.light3,
@@ -289,6 +344,9 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
             },
             rightPanel: {
               backgroundColor: uiColors.gray.dark3,
+            },
+            schema: {
+              requireLabelColor: uiColors.red.base,
             },
             sidebar: {
               activeTextColor: `${uiColors.green.dark3} !important`,
@@ -315,7 +373,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
               links: {
                 color: uiColors.blue.base,
                 hover: uiColors.blue.dark2,
-                visited: uiColors.blue.dark2,
+                visited: uiColors.blue.base,
               },
             },
           },
