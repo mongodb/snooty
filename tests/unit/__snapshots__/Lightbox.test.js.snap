@@ -3,7 +3,7 @@
 exports[`Lightbox renders correctly 1`] = `
 <Fragment>
   <div
-    className="figure lightbox"
+    className="figure"
     style={
       Object {
         "width": "700px",
@@ -11,7 +11,6 @@ exports[`Lightbox renders correctly 1`] = `
     }
   >
     <div
-      className="lightbox__imageWrapper"
       onClick={[Function]}
       role="button"
       tabIndex="-1"
@@ -47,11 +46,9 @@ exports[`Lightbox renders correctly 1`] = `
           }
         }
       />
-      <div
-        className="lightbox__caption"
-      >
+      <LightboxCaption>
         click to enlarge
-      </div>
+      </LightboxCaption>
     </div>
     <CaptionLegend
       nodeData={
@@ -83,8 +80,7 @@ exports[`Lightbox renders correctly 1`] = `
       }
     />
   </div>
-  <Modal
-    className="imgModal"
+  <StyledModal
     open={false}
     setOpen={[Function]}
     size="large"
@@ -120,6 +116,189 @@ exports[`Lightbox renders correctly 1`] = `
         }
       }
     />
-  </Modal>
+  </StyledModal>
 </Fragment>
+`;
+
+exports[`Lightbox renders correctly 2`] = `
+.emotion-0 {
+  max-width: 100%;
+}
+
+.emotion-1 {
+  color: #444;
+  font-size: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+}
+
+@media not all and (max-width:1023px) {
+  .emotion-3 div[role=dialog] {
+    width: 40%;
+  }
+
+  .emotion-3 img {
+    width: 100%;
+  }
+}
+
+<div
+  className="lightbox_imagewrapper"
+>
+  <Lightbox
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 13,
+              },
+            },
+            "type": "text",
+            "value": "/images/firstcluster.png",
+          },
+        ],
+        "children": Array [],
+        "name": "figure",
+        "options": Object {
+          "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+          "figwidth": "700px",
+        },
+        "position": Object {
+          "start": Object {
+            "line": 13,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  >
+    <div
+      className="figure"
+      style={
+        Object {
+          "width": "700px",
+        }
+      }
+    >
+      <div
+        onClick={[Function]}
+        role="button"
+        tabIndex="-1"
+      >
+        <Image
+          className=""
+          handleImageLoaded={[Function]}
+          nodeData={
+            Object {
+              "argument": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 13,
+                    },
+                  },
+                  "type": "text",
+                  "value": "/images/firstcluster.png",
+                },
+              ],
+              "children": Array [],
+              "name": "figure",
+              "options": Object {
+                "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+                "figwidth": "700px",
+              },
+              "position": Object {
+                "start": Object {
+                  "line": 13,
+                },
+              },
+              "type": "directive",
+            }
+          }
+        >
+          <img
+            alt="/images/firstcluster.png"
+            className="   emotion-0"
+            onLoad={[Function]}
+            src="/images/firstcluster.png"
+            style={Object {}}
+          />
+        </Image>
+        <LightboxCaption>
+          <div
+            className="emotion-1 emotion-2"
+          >
+            click to enlarge
+          </div>
+        </LightboxCaption>
+      </div>
+      <CaptionLegend
+        nodeData={
+          Object {
+            "argument": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 13,
+                  },
+                },
+                "type": "text",
+                "value": "/images/firstcluster.png",
+              },
+            ],
+            "children": Array [],
+            "name": "figure",
+            "options": Object {
+              "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+              "figwidth": "700px",
+            },
+            "position": Object {
+              "start": Object {
+                "line": 13,
+              },
+            },
+            "type": "directive",
+          }
+        }
+      />
+    </div>
+    <StyledModal
+      open={false}
+      setOpen={[Function]}
+      size="large"
+    >
+      <Modal
+        className="emotion-3 emotion-4"
+        open={false}
+        setOpen={[Function]}
+        size="large"
+      >
+        <Transition
+          appear={false}
+          enter={true}
+          exit={true}
+          in={false}
+          mountOnEnter={true}
+          nodeRef={
+            Object {
+              "current": null,
+            }
+          }
+          onEnter={[Function]}
+          onEntered={[Function]}
+          onEntering={[Function]}
+          onExit={[Function]}
+          onExited={[Function]}
+          onExiting={[Function]}
+          timeout={150}
+          unmountOnExit={true}
+        />
+      </Modal>
+    </StyledModal>
+  </Lightbox>
+</div>
 `;

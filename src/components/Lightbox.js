@@ -1,27 +1,47 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { node } from 'prop-types';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
 import { getNestedValue } from '../utils/get-nested-value';
+import { theme } from '../theme/docsTheme.js';
 import Modal from '@leafygreen-ui/modal';
+import styled from '@emotion/styled';
 
 const CAPTION_TEXT = 'click to enlarge';
+const StyledModal = styled(Modal)`
+  @media ${theme.screenSize.largeAndUp} {
+    div[role='dialog'] {
+      width: 40%;
+    }
+    img {
+      width: 100%;
+    }
+  }
+`;
+
+const LightboxCaption = styled('div')`
+  color: #444;
+  font-size: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+`;
 
 const Lightbox = ({ nodeData, ...rest }) => {
   const [open, setOpen] = useState(false);
-
   return (
     <React.Fragment>
-      <div className="figure lightbox" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
-        <div className="lightbox__imageWrapper" onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
+      <div className="figure" style={{ width: nodeData.options?.figwidth || 'auto' }}>
+        <div onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
           <Image nodeData={nodeData} />
-          <div className="lightbox__caption">{CAPTION_TEXT}</div>
+          <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
-      <Modal className="imgModal" size="large" open={open} setOpen={setOpen}>
+      <StyledModal size="large" open={open} setOpen={setOpen}>
         <Image nodeData={nodeData} />
-      </Modal>
+      </StyledModal>
     </React.Fragment>
   );
 };
