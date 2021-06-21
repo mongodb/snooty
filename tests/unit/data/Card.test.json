@@ -1,21 +1,49 @@
 {
   "type": "directive",
-  "position": {
-    "start": {
-      "line": 12
-    }
+  "position":
+  {
+      "start":
+      {
+          "line": 130
+      }
   },
-  "name": "card",
-  "argument": [
-    {
-      "type": "text",
-      "position": {
-        "start": {
-          "line": 12
-        }
-      },
-      "value": "server/install"
-    }
+  "children":
+  [
+      {
+          "type": "paragraph",
+          "position":
+          {
+              "start":
+              {
+                  "line": 136
+              }
+          },
+          "children":
+          [
+              {
+                  "type": "text",
+                  "position":
+                  {
+                      "start":
+                      {
+                          "line": 136
+                      }
+                  },
+                  "value": "Learn MongoDB Basics with MongoDB University"
+              }
+          ]
+      }
   ],
-  "children": []
+  "domain": "landing",
+  "name": "card",
+  "argument":
+  [],
+  "options":
+  {
+      "cta": "Learn MongoDB Basics",
+      "url": "https://university.mongodb.com/courses/M001/about",
+      "icon": "/images/icons/university.svg",
+      "icon-alt": "MongoDB University icon",
+      "checksum": "5a77a5f2c1d7ceec1423bad1f60110583c6c4a9a9c6e683c8f98d95b7b250c02"
+  }
 }

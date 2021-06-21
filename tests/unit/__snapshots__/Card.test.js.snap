@@ -1,92 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card component when a multi card is mounted renders correctly 1`] = `
-<div
-  class="guide guide--jumbo guide--expanded"
+exports[`renders correctly 1`] = `
+<StyledCard
+  onClick={[Function]}
 >
-  <div
-    class="guide__title"
+  <ConditionalWrapper
+    wrapper={[Function]}
   >
-    CRUD Guides: Create, Read, Update, and Delete Data
-  </div>
-  <ul
-    class="guide__body"
+    <CardIcon
+      alt="MongoDB University icon"
+      src="/images/icons/university.svg"
+    />
+  </ConditionalWrapper>
+  <ConditionalWrapper
+    wrapper={[Function]}
   >
-    <li
-      class="guide__entry"
-    >
-      <a
-        href="/server/insert/"
+    <H4 />
+    <ComponentFactory
+      key="0"
+      nodeData={
+        Object {
+          "children": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 136,
+                },
+              },
+              "type": "text",
+              "value": "Learn MongoDB Basics with MongoDB University",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 136,
+            },
+          },
+          "type": "paragraph",
+        }
+      }
+    />
+    <CTA>
+      <Link
+        to="https://university.mongodb.com/courses/M001/about"
       >
-        Insert Data into MongoDB
-      </a>
-    </li>
-    <li
-      class="guide__entry"
-    >
-      <a
-        href="/server/read/"
-      >
-        Read Data from MongoDB
-      </a>
-    </li>
-    <li
-      class="guide__entry"
-    >
-      <a
-        href="/server/read_queries/"
-      >
-        Read Data from MongoDB With Queries
-      </a>
-    </li>
-    <li
-      class="guide__entry"
-    >
-      <a
-        href="/server/read_operators/"
-      >
-        Read Data using Operators and Compound Queries
-      </a>
-    </li>
-    <li
-      class="guide__entry"
-    >
-      <a
-        href="/server/update/"
-      >
-        Update Data in MongoDB
-      </a>
-    </li>
-    <li
-      class="guide__entry"
-    >
-      <a
-        href="/server/delete/"
-      >
-        Delete Data from MongoDB
-      </a>
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`Card component when a standard card is mounted renders correctly 1`] = `
-<a
-  class="guide guide--regular"
-  href="/server/install/"
->
-  <div
-    class="guide__title"
-  >
-    Install MongoDB
-  </div>
-  <div
-    class="guide__body"
-  />
-  <div
-    class="guide__time"
-  >
-    10min
-  </div>
-</a>
+        Learn MongoDB Basics
+      </Link>
+    </CTA>
+  </ConditionalWrapper>
+</StyledCard>
 `;

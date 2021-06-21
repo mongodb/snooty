@@ -1,0 +1,169 @@
+{
+    "type": "directive",
+    "position":
+    {
+        "start":
+        {
+            "line": 118
+        }
+    },
+    "children":
+    [
+        {
+            "type": "directive",
+            "position":
+            {
+                "start":
+                {
+                    "line": 122
+                }
+            },
+            "children":
+            [
+                {
+                    "type": "paragraph",
+                    "position":
+                    {
+                        "start":
+                        {
+                            "line": 128
+                        }
+                    },
+                    "children":
+                    [
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 128
+                                }
+                            },
+                            "value": "Use Compass to connect to your Atlas cluster"
+                        }
+                    ]
+                }
+            ],
+            "domain": "landing",
+            "name": "card",
+            "argument":
+            [],
+            "options":
+            {
+                "cta": "Read Atlas docs",
+                "url": "https://docs.atlas.mongodb.com/getting-started/",
+                "icon": "/images/icons/atlas.svg",
+                "icon-alt": "MongoDB Atlas icon",
+                "checksum": "522319e9710c845a5fe15076ac78d2577a6cdef26b301dee66077ca5b02b289a"
+            }
+        },
+        {
+            "type": "directive",
+            "position":
+            {
+                "start":
+                {
+                    "line": 130
+                }
+            },
+            "children":
+            [
+                {
+                    "type": "paragraph",
+                    "position":
+                    {
+                        "start":
+                        {
+                            "line": 136
+                        }
+                    },
+                    "children":
+                    [
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 136
+                                }
+                            },
+                            "value": "Learn MongoDB Basics with MongoDB University"
+                        }
+                    ]
+                }
+            ],
+            "domain": "landing",
+            "name": "card",
+            "argument":
+            [],
+            "options":
+            {
+                "cta": "Learn MongoDB Basics",
+                "url": "https://university.mongodb.com/courses/M001/about",
+                "icon": "/images/icons/university.svg",
+                "icon-alt": "MongoDB University icon",
+                "checksum": "5a77a5f2c1d7ceec1423bad1f60110583c6c4a9a9c6e683c8f98d95b7b250c02"
+            }
+        },
+        {
+            "type": "directive",
+            "position":
+            {
+                "start":
+                {
+                    "line": 138
+                }
+            },
+            "children":
+            [
+                {
+                    "type": "paragraph",
+                    "position":
+                    {
+                        "start":
+                        {
+                            "line": 144
+                        }
+                    },
+                    "children":
+                    [
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 144
+                                }
+                            },
+                            "value": "Access more in-depth examples of querying data"
+                        }
+                    ]
+                }
+            ],
+            "domain": "landing",
+            "name": "card",
+            "argument":
+            [],
+            "options":
+            {
+                "cta": "Read Server docs",
+                "url": "https://docs.mongodb.com/manual/tutorial/getting-started/",
+                "icon": "/images/icons/server.svg",
+                "icon-alt": "MongoDB Server icon",
+                "checksum": "4435ec408acdbe18f57504d707eaa087d6d055b9dc073fe512d8f241573947c5"
+            }
+        }
+    ],
+    "domain": "landing",
+    "name": "card-group",
+    "argument":
+    [],
+    "options":
+    {
+        "columns": 3,
+        "style": "compact"
+    }
+}
