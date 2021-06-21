@@ -2,14 +2,7 @@
 
 exports[`Lightbox renders correctly 1`] = `
 <Fragment>
-  <div
-    className="figure"
-    style={
-      Object {
-        "width": "700px",
-      }
-    }
-  >
+  <LightboxWrapper>
     <div
       onClick={[Function]}
       role="button"
@@ -79,7 +72,7 @@ exports[`Lightbox renders correctly 1`] = `
         }
       }
     />
-  </div>
+  </LightboxWrapper>
   <StyledModal
     open={false}
     setOpen={[Function]}
@@ -121,6 +114,13 @@ exports[`Lightbox renders correctly 1`] = `
 `;
 
 exports[`Lightbox renders correctly 2`] = `
+.emotion-3 {
+  width: 700px;
+  cursor: pointer;
+  margin: 0;
+  display: block;
+}
+
 .emotion-0 {
   max-width: 100%;
 }
@@ -135,11 +135,11 @@ exports[`Lightbox renders correctly 2`] = `
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-3 div[role=dialog] {
+  .emotion-5 div[role='dialog'] {
     width: 40%;
   }
 
-  .emotion-3 img {
+  .emotion-5 img {
     width: 100%;
   }
 }
@@ -176,22 +176,63 @@ exports[`Lightbox renders correctly 2`] = `
       }
     }
   >
-    <div
-      className="figure"
-      style={
-        Object {
-          "width": "700px",
-        }
-      }
-    >
+    <LightboxWrapper>
       <div
-        onClick={[Function]}
-        role="button"
-        tabIndex="-1"
+        className="emotion-3 emotion-4"
       >
-        <Image
-          className=""
-          handleImageLoaded={[Function]}
+        <div
+          onClick={[Function]}
+          role="button"
+          tabIndex="-1"
+        >
+          <Image
+            className=""
+            handleImageLoaded={[Function]}
+            nodeData={
+              Object {
+                "argument": Array [
+                  Object {
+                    "position": Object {
+                      "start": Object {
+                        "line": 13,
+                      },
+                    },
+                    "type": "text",
+                    "value": "/images/firstcluster.png",
+                  },
+                ],
+                "children": Array [],
+                "name": "figure",
+                "options": Object {
+                  "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+                  "figwidth": "700px",
+                },
+                "position": Object {
+                  "start": Object {
+                    "line": 13,
+                  },
+                },
+                "type": "directive",
+              }
+            }
+          >
+            <img
+              alt="/images/firstcluster.png"
+              className="   emotion-0"
+              onLoad={[Function]}
+              src="/images/firstcluster.png"
+              style={Object {}}
+            />
+          </Image>
+          <LightboxCaption>
+            <div
+              className="emotion-1 emotion-2"
+            >
+              click to enlarge
+            </div>
+          </LightboxCaption>
+        </div>
+        <CaptionLegend
           nodeData={
             Object {
               "argument": Array [
@@ -219,60 +260,16 @@ exports[`Lightbox renders correctly 2`] = `
               "type": "directive",
             }
           }
-        >
-          <img
-            alt="/images/firstcluster.png"
-            className="   emotion-0"
-            onLoad={[Function]}
-            src="/images/firstcluster.png"
-            style={Object {}}
-          />
-        </Image>
-        <LightboxCaption>
-          <div
-            className="emotion-1 emotion-2"
-          >
-            click to enlarge
-          </div>
-        </LightboxCaption>
+        />
       </div>
-      <CaptionLegend
-        nodeData={
-          Object {
-            "argument": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 13,
-                  },
-                },
-                "type": "text",
-                "value": "/images/firstcluster.png",
-              },
-            ],
-            "children": Array [],
-            "name": "figure",
-            "options": Object {
-              "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
-              "figwidth": "700px",
-            },
-            "position": Object {
-              "start": Object {
-                "line": 13,
-              },
-            },
-            "type": "directive",
-          }
-        }
-      />
-    </div>
+    </LightboxWrapper>
     <StyledModal
       open={false}
       setOpen={[Function]}
       size="large"
     >
       <Modal
-        className="emotion-3 emotion-4"
+        className="emotion-5 emotion-6"
         open={false}
         setOpen={[Function]}
         size="large"
