@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes, { node } from 'prop-types';
+import Modal from '@leafygreen-ui/modal';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
 import { getNestedValue } from '../utils/get-nested-value';
 import { theme } from '../theme/docsTheme.js';
-import Modal from '@leafygreen-ui/modal';
 import styled from '@emotion/styled';
 
 const CAPTION_TEXT = 'click to enlarge';
