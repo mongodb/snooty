@@ -6,7 +6,6 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { formatText } from '../utils/format-text';
 import useScreenSize from '../hooks/useScreenSize.js';
 import { ContentsContext } from './contents-context';
-import ComponentFactory from './ComponentFactory';
 import { Label } from './Select';
 import Link from './Link';
 

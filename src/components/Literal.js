@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { InlineCode } from '@leafygreen-ui/typography';
 import ComponentFactory from './ComponentFactory';
-import { getNestedValue } from '../utils/get-nested-value';
 
 const StyledInlineCode = styled(InlineCode)`
   /* Unset font size so it inherits it from its context */
@@ -17,22 +16,14 @@ const StyledNavigationInlineCode = styled('code')`
 `;
 
 const Literal = ({ nodeData: { children }, formatTextOptions }) => {
-  const navigationStyle = getNestedValue(['literalEnableInline'], formatTextOptions);
-  if (navigationStyle) {
-    return (
-      <StyledNavigationInlineCode>
-        {children.map((node, i) => (
-          <ComponentFactory nodeData={node} key={i} />
-        ))}
-      </StyledNavigationInlineCode>
-    );
-  }
+  const navigationStyle = formatTextOptions?.literalEnableInline;
+  const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : StyledInlineCode;
   return (
-    <StyledInlineCode>
+    <CurrInlineCode>
       {children.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}
-    </StyledInlineCode>
+    </CurrInlineCode>
   );
 };
 
