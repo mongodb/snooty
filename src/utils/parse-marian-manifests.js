@@ -11,7 +11,6 @@ const PROPERTY_MAPPING = {
   'docs-ruby': 'Ruby Driver',
   drivers: 'Drivers',
   ecosystem: 'Ecosystem',
-  guides: 'Guides',
   'kafka-connector': 'Kafka Connector',
   'kubernetes-operator': 'Kubernetes Operator',
   manual: 'MongoDB Manual',

@@ -122,5 +122,4 @@ export const URL_SLUGS = {
     'mongodb-vscode',
     'spark-connector',
   ],
-  guides: ['guides'],
 };
