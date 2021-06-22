@@ -7,7 +7,7 @@ import { formatText } from '../utils/format-text';
 
 // Adapted from docs-nav branch
 // TODO: Resolve merge conflicts when merging docs-nav into master
-const SidebarBack = ({ border, enableGlyph = true, textOverride, title, url, ...props }) => {
+const SidebarBackButton = ({ border, enableGlyph = true, textOverride, title, url, ...props }) => {
   const glyph = enableGlyph ? <Icon glyph="ArrowLeft" size="small" /> : undefined;
 
   return (
@@ -20,7 +20,7 @@ const SidebarBack = ({ border, enableGlyph = true, textOverride, title, url, ...
   );
 };
 
-SidebarBack.propTypes = {
+SidebarBackButton.propTypes = {
   border: PropTypes.element,
   enableGlyph: PropTypes.bool,
   textOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
@@ -28,4 +28,4 @@ SidebarBack.propTypes = {
   url: PropTypes.string,
 };
 
-export default SidebarBack;
+export default SidebarBackButton;

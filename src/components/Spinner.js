@@ -14,6 +14,9 @@ const rotate = keyframes`
   }
 `;
 
+// Modified version of Redoc's Spinner used for their loading screen; sets the svg's width and height
+// so that it doesn't flash a large size on render
+// Source: https://github.com/Redocly/redoc/blob/master/src/components/Loading/Spinner.svg.tsx
 const SpinnerIcon = ({ className, size }) => (
   <svg className={className} width={size} height={size} viewBox="0 0 512 512">
     <path d="M275.682 147.999c0 10.864-8.837 19.661-19.682 19.661v0c-10.875 0-19.681-8.796-19.681-19.661v-96.635c0-10.885 8.806-19.661 19.681-19.661v0c10.844 0 19.682 8.776 19.682 19.661v96.635z" />

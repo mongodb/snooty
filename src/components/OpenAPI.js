@@ -6,12 +6,10 @@ import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
-import SidebarBack from './SidebarBack';
+import SidebarBackButton from './SidebarBackButton';
 import Spinner from './Spinner';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
-
-const NAVBAR_HEIGHT = 45;
 
 const badgeBorderRadius = '50px';
 const badgeBorderType = '1px solid';
@@ -62,6 +60,7 @@ const inlineCodeCss = css`
 
 const leftSidebarCss = css`
   // Keep sticky below top navbar
+  // TODO: Check if this is needed after merging docs-nav
   .menu-content {
     top: ${theme.navbar.height} !important;
   }
@@ -97,20 +96,11 @@ const schemaDataTypesCss = css`
   }
 
   // Data types under query parameters; ex - "string" / "boolean"
-  span.sc-fWSCIC {
-    color: ${schemaDataTypeColor};
-  }
-
+  span.sc-fWSCIC,
   // Regex next to data types under query parameters; ex - "^([\w]{24})$"
-  span.sc-hlTvYk {
-    color: ${schemaDataTypeColor};
-  }
-
+  span.sc-hlTvYk,
   // "Array of" keyword next to data types under query parameters
-  span.sc-GqfZa {
-    color: ${schemaDataTypeColor};
-  }
-
+  span.sc-GqfZa,
   // Parenthesized data types under query paramters; ex - "(ObjectId)"
   span.sc-dwfUOf {
     color: ${schemaDataTypeColor};
@@ -126,11 +116,8 @@ const spanHttpCss = css`
     border: ${badgeBorderType} ${uiColors.green.light2};
     color: ${uiColors.green.dark2};
   }
+  span.patch,
   span.put {
-    border: ${badgeBorderType} ${uiColors.yellow.light2};
-    color: ${uiColors.yellow.dark2};
-  }
-  span.patch {
     border: ${badgeBorderType} ${uiColors.yellow.light2};
     color: ${uiColors.yellow.dark2};
   }
@@ -202,15 +189,6 @@ const globalCSS = css`
   }
 `;
 
-// Copied over from docs-nav; consolidate title style after docs-nav merge to master
-const titleStyle = css`
-  color: ${uiColors.gray.dark3};
-  font-size: ${theme.fontSize.default};
-  font-weight: bold;
-  line-height: 20px;
-  text-transform: capitalize;
-`;
-
 const Border = styled('hr')`
   border: unset;
   border-bottom: 1px solid ${uiColors.gray.light2};
@@ -230,10 +208,14 @@ const LoadingMessage = styled('div')`
   margin-bottom: ${theme.size.small};
 `;
 
+// Copied over from docs-nav; TODO: consolidate title style after docs-nav merge to master
 const MenuTitle = styled('div')`
-  ${titleStyle}
-
+  color: ${uiColors.gray.dark3};
+  font-size: ${theme.fontSize.default};
+  font-weight: bold;
+  line-height: 20px;
   margin: ${theme.size.medium} ${theme.size.default};
+  text-transform: capitalize;
 `;
 
 const LoadingWidget = ({ className }) => (
@@ -244,12 +226,12 @@ const LoadingWidget = ({ className }) => (
 );
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
-  const docsTitle = siteTitle + ' Docs';
+  const docsTitle = siteTitle ? `${siteTitle} Docs` : 'Docs';
   const text = <>&#8592; Back to {formatText(docsTitle)}</>;
 
   return (
     <>
-      <SidebarBack border={<Border />} enableGlyph={false} textOverride={text} title={docsTitle} url={'/'} />
+      <SidebarBackButton border={<Border />} enableGlyph={false} textOverride={text} title={docsTitle} url={'/'} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
@@ -313,7 +295,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
         options={{
           hideLoading: true,
           maxDisplayedEnumValues: 5,
-          scrollYOffset: NAVBAR_HEIGHT,
+          scrollYOffset: theme.size.stripUnit(theme.navbar.baseHeight),
           theme: {
             codeBlock: {
               backgroundColor: uiColors.black,
@@ -322,6 +304,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
               error: {
                 main: uiColors.red.dark1,
               },
+              // Only applies to background color; color and border color touched by css
               http: {
                 get: uiColors.blue.light3,
                 post: uiColors.green.light3,
