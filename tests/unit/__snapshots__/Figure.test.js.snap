@@ -51,7 +51,8 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
 }
 
 .emotion-3 {
-  width: '700px' cursor:pointer;
+  width: '700px';
+  cursor: pointer;
   margin: 0;
   display: block;
 }
@@ -67,6 +68,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
 
 <div
   class="emotion-3 emotion-4"
+  width="700px"
 >
   <div
     role="button"
