@@ -35,7 +35,7 @@ const LightboxCaption = styled('div')`
 `;
 
 const LightboxWrapper = styled('div')`
-  width: '${(props) => props.nodeData?.options?.figwidth || 'auto'}'
+  width: '${(props) => props.width}';
   cursor: pointer;
   margin: 0;
   display: block;
@@ -43,9 +43,10 @@ const LightboxWrapper = styled('div')`
 
 const Lightbox = ({ nodeData, ...rest }) => {
   const [open, setOpen] = useState(false);
+  const figureWidth = nodeData.options?.figwidth || 'auto';
   return (
     <React.Fragment>
-      <LightboxWrapper nodeData={nodeData}>
+      <LightboxWrapper width={figureWidth}>
         <div onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
           <Image nodeData={nodeData} />
           <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>
