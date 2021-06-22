@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '@leafygreen-ui/modal';
+import styled from '@emotion/styled';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
 import { theme } from '../theme/docsTheme.js';
-import styled from '@emotion/styled';
 
 const CAPTION_TEXT = 'click to enlarge';
 const StyledModal = styled(Modal)`
   @media ${theme.screenSize.largeAndUp} {
     div[role='dialog'] {
-      width: 40%;
+      width: 80%;
     }
-    img {
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    div[role='dialog'] {
       width: 100%;
     }
+  }
+
+  img {
+    width: 100%;
   }
 `;
 
@@ -27,18 +34,18 @@ const LightboxCaption = styled('div')`
   text-align: center;
 `;
 
+const LightboxWrapper = styled('div')`
+  width: '${(props) => props.nodeData?.options?.figwidth || 'auto'}'
+  cursor: pointer;
+  margin: 0;
+  display: block;
+`;
+
 const Lightbox = ({ nodeData, ...rest }) => {
   const [open, setOpen] = useState(false);
-  const LightboxWrapper = styled('div')`
-    ${{ width: nodeData.options?.figwidth || 'auto' }}
-    cursor: pointer;
-    margin: 0;
-    display: block;
-  `;
-
   return (
     <React.Fragment>
-      <LightboxWrapper>
+      <LightboxWrapper nodeData={nodeData}>
         <div onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
           <Image nodeData={nodeData} />
           <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>

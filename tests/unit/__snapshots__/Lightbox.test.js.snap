@@ -2,7 +2,35 @@
 
 exports[`Lightbox renders correctly 1`] = `
 <Fragment>
-  <LightboxWrapper>
+  <LightboxWrapper
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 13,
+              },
+            },
+            "type": "text",
+            "value": "/images/firstcluster.png",
+          },
+        ],
+        "children": Array [],
+        "name": "figure",
+        "options": Object {
+          "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+          "figwidth": "700px",
+        },
+        "position": Object {
+          "start": Object {
+            "line": 13,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  >
     <div
       onClick={[Function]}
       role="button"
@@ -115,8 +143,7 @@ exports[`Lightbox renders correctly 1`] = `
 
 exports[`Lightbox renders correctly 2`] = `
 .emotion-3 {
-  width: 700px;
-  cursor: pointer;
+  width: '700px' cursor:pointer;
   margin: 0;
   display: block;
 }
@@ -136,12 +163,18 @@ exports[`Lightbox renders correctly 2`] = `
 
 @media not all and (max-width:1023px) {
   .emotion-5 div[role='dialog'] {
-    width: 40%;
+    width: 80%;
   }
+}
 
-  .emotion-5 img {
+@media only screen and (max-width:1023px) {
+  .emotion-5 div[role='dialog'] {
     width: 100%;
   }
+}
+
+.emotion-5 img {
+  width: 100%;
 }
 
 <div
@@ -176,7 +209,35 @@ exports[`Lightbox renders correctly 2`] = `
       }
     }
   >
-    <LightboxWrapper>
+    <LightboxWrapper
+      nodeData={
+        Object {
+          "argument": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 13,
+                },
+              },
+              "type": "text",
+              "value": "/images/firstcluster.png",
+            },
+          ],
+          "children": Array [],
+          "name": "figure",
+          "options": Object {
+            "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+            "figwidth": "700px",
+          },
+          "position": Object {
+            "start": Object {
+              "line": 13,
+            },
+          },
+          "type": "directive",
+        }
+      }
+    >
       <div
         className="emotion-3 emotion-4"
       >

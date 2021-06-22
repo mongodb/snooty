@@ -49,8 +49,8 @@ describe('Lightbox', () => {
   });
 
   it('clicking anywhere outside of the modal', () => {
-    const lightboxwrapper = wrapper.find('LightboxCaption');
-    lightboxwrapper.simulate('click');
+    const lightboxWrapper = wrapper.find('LightboxCaption');
+    lightboxWrapper.simulate('click');
     expect(wrapper.find('Modal').prop('open')).toBe(false);
   });
 });

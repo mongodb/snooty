@@ -9728,7 +9728,7 @@ table.highlighttable td {
 }
 .deluge .rangestar:hover,
 .deluge .switch:hover,
-.deluge-vote-button:hover{
+.deluge-vote-button:hover {
   cursor: pointer;
 }
 .deluge .switch.good.selected,

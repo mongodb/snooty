@@ -51,8 +51,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
 }
 
 .emotion-3 {
-  width: 700px;
-  cursor: pointer;
+  width: '700px' cursor:pointer;
   margin: 0;
   display: block;
 }
