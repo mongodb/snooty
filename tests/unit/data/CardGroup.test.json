@@ -164,6 +164,7 @@
     "options":
     {
         "columns": 3,
-        "style": "compact"
+        "style": "compact",
+        "layout": "carousel"
     }
 }

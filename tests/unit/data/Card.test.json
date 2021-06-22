@@ -29,7 +29,7 @@
                           "line": 136
                       }
                   },
-                  "value": "Learn MongoDB Basics with MongoDB University"
+                  "value": "Test card paragraph"
               }
           ]
       }
@@ -40,10 +40,12 @@
   [],
   "options":
   {
-      "cta": "Learn MongoDB Basics",
+      "headline": "Test card headline",
+      "cta": "Test card CTA",
       "url": "https://university.mongodb.com/courses/M001/about",
       "icon": "/images/icons/university.svg",
       "icon-alt": "MongoDB University icon",
-      "checksum": "5a77a5f2c1d7ceec1423bad1f60110583c6c4a9a9c6e683c8f98d95b7b250c02"
+      "checksum": "5a77a5f2c1d7ceec1423bad1f60110583c6c4a9a9c6e683c8f98d95b7b250c02",
+      "tag": "Test card tag"
   }
 }

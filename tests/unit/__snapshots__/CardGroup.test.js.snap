@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <StyledGrid
   columns={3}
-  isCarousel={false}
+  isCarousel={true}
   noMargin={true}
 >
   <ComponentFactory

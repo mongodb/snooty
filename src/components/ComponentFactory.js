@@ -196,7 +196,8 @@ const ComponentFactory = (props) => {
     }
 
     // Warn on unexpected usage of domains, but don't break
-    if (domain && !(domain === 'mongodb' || domain === 'std')) {
+    const validDomains = ['mongodb', 'std'];
+    if (domain && !validDomains.includes(domain)) {
       console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }
 

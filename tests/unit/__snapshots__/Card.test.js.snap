@@ -15,7 +15,12 @@ exports[`renders correctly 1`] = `
   <ConditionalWrapper
     wrapper={[Function]}
   >
-    <H4 />
+    <FlexTag
+      text="Test card tag"
+    />
+    <H4>
+      Test card headline
+    </H4>
     <ComponentFactory
       key="0"
       nodeData={
@@ -28,7 +33,7 @@ exports[`renders correctly 1`] = `
                 },
               },
               "type": "text",
-              "value": "Learn MongoDB Basics with MongoDB University",
+              "value": "Test card paragraph",
             },
           ],
           "position": Object {
@@ -44,7 +49,7 @@ exports[`renders correctly 1`] = `
       <Link
         to="https://university.mongodb.com/courses/M001/about"
       >
-        Learn MongoDB Basics
+        Test card CTA
       </Link>
     </CTA>
   </ConditionalWrapper>
