@@ -60,6 +60,31 @@ const inlineCodeCss = css`
   }
 `;
 
+const leftSidebarCss = css`
+  // Keep sticky below top navbar
+  .menu-content {
+    top: ${theme.navbar.height} !important;
+  }
+
+  label[role='menuitem'] {
+    :hover {
+      background-color: ${uiColors.gray.light2};
+    }
+    &.active {
+      background-color: ${uiColors.green.light3};
+    }
+  }
+`;
+
+const rightSidebarCss = css`
+  ul.react-tabs__tab-list {
+    li[role='tab'] {
+      background-color: ${uiColors.gray.dark2};
+      border: unset;
+    }
+  }
+`;
+
 const schemaDataTypesCss = css`
   // Request Body Schema "One of" pills
   button.sc-fKFyDc {
@@ -89,22 +114,6 @@ const schemaDataTypesCss = css`
   // Parenthesized data types under query paramters; ex - "(ObjectId)"
   span.sc-dwfUOf {
     color: ${schemaDataTypeColor};
-  }
-`;
-
-const sidebarCss = css`
-  // Keep sticky below top navbar
-  .menu-content {
-    top: ${theme.navbar.height} !important;
-  }
-
-  label[role='menuitem'] {
-    :hover {
-      background-color: ${uiColors.gray.light2};
-    }
-    &.active {
-      background-color: ${uiColors.green.light3};
-    }
   }
 `;
 
@@ -148,8 +157,9 @@ const spanHttpCss = css`
 const globalCSS = css`
   ${codeBlockCss}
   ${inlineCodeCss}
+  ${leftSidebarCss}
+  ${rightSidebarCss}
   ${schemaDataTypesCss}
-  ${sidebarCss}
   ${spanHttpCss}
 
   // Prevent content from appearing on top of navbar/banner when scrolling
@@ -326,12 +336,12 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 success: {
                   color: uiColors.green.dark1,
                   backgroundColor: uiColors.green.light3,
-                  tabTextColor: uiColors.green.dark1,
+                  tabTextColor: uiColors.green.base,
                 },
                 error: {
                   color: uiColors.red.dark1,
                   backgroundColor: uiColors.red.light3,
-                  tabTextColor: uiColors.red.dark1,
+                  tabTextColor: uiColors.red.base,
                 },
               },
               text: {
@@ -365,10 +375,10 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 fontFamily: textFontFamily,
               },
               code: {
-                fontSize: theme.fontSize.small,
-                fontFamily: codeFontFamily,
-                color: uiColors.black,
                 backgroundColor: inlineCodeBackgroundColor,
+                color: uiColors.black,
+                fontFamily: codeFontFamily,
+                fontSize: theme.fontSize.small,
               },
               links: {
                 color: uiColors.blue.base,
