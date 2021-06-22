@@ -20,6 +20,17 @@ const schemaDataTypeColor = uiColors.blue.dark3;
 const textFontFamily = 'Akzidenz';
 
 const codeBlockCss = css`
+  // General code tags, especially for code blocks
+  code {
+    font-family: ${codeFontFamily};
+  }
+
+  // Code block divs
+  div.hoverable {
+    color: ${uiColors.white};
+  }
+
+  // Highlight syntax in code blocks
   span.ellipsis:after {
     color: ${uiColors.white};
   }
@@ -37,11 +48,6 @@ const codeBlockCss = css`
   }
   span.token.string:not(.property) {
     color: #98c379 !important;
-  }
-
-  // Code block divs
-  div.hoverable {
-    color: ${uiColors.white};
   }
 `;
 
