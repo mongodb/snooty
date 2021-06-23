@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from '../Link';
 import LeafyButton from '@leafygreen-ui/button';
-import ComponentFactory from '../ComponentFactory';
+import ComponentFactory from './ComponentFactory';
+import Link from './Link';
 
 const Button = ({
   nodeData: {
