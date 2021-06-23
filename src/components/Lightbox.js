@@ -39,9 +39,6 @@ const LightboxWrapper = styled('div')`
   cursor: pointer;
   margin: 0;
   display: block;
-  img {
-    width: 100%;
-  }
 `;
 
 const Lightbox = ({ nodeData, ...rest }) => {
