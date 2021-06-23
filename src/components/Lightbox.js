@@ -35,10 +35,13 @@ const LightboxCaption = styled('div')`
 `;
 
 const LightboxWrapper = styled('div')`
-  width: '${(props) => props.figwidth}';
+  width: ${(props) => props.figwidth};
   cursor: pointer;
   margin: 0;
   display: block;
+  img {
+    width: 100%;
+  }
 `;
 
 const Lightbox = ({ nodeData, ...rest }) => {
