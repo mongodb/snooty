@@ -53,9 +53,15 @@ const header = {
   navbarHeight: '45px',
 };
 
+const transitionSpeed = {
+  contentFadeOut: '100ms',
+  contentFadeIn: '200ms',
+};
+
 export const theme = {
   fontSize,
   header,
   screenSize,
   size,
+  transitionSpeed,
 };

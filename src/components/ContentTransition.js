@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
 import { CONTENT_CONTAINER_CLASSNAME } from '../constants';
-
-const FADEOUT_DURATION = '100ms';
+import { theme } from '../theme/docsTheme';
 
 const fadeOut = css`
   .fade-exit {
@@ -12,17 +11,20 @@ const fadeOut = css`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: opacity ${FADEOUT_DURATION};
+    transition: opacity ${theme.transitionSpeed.contentFadeOut};
   }
 `;
 
 const fadeIn = css`
   .fade-enter {
+    // Set height to 0 to prevent content from jumping
+    height: 0px;
     opacity: 0;
   }
   .fade-enter-active {
     opacity: 1;
-    transition: opacity 200ms ${FADEOUT_DURATION};
+    // Add delay so that fade in transition doesn't begin until the previous page has finished fading out
+    transition: opacity ${theme.transitionSpeed.contentFadeIn} ${theme.transitionSpeed.contentFadeOut} ease-out;
   }
 `;
 
