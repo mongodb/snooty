@@ -68,7 +68,6 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
 
 <div
   class="emotion-3 emotion-4"
-  width="700px"
 >
   <div
     role="button"
