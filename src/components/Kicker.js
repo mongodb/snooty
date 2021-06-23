@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Overline } from '@leafygreen-ui/typography';
 import { uiColors } from '@leafygreen-ui/palette';
-import { theme } from '../../theme/docsTheme';
-import ComponentFactory from '../ComponentFactory';
+import { theme } from '../theme/docsTheme';
+import ComponentFactory from './ComponentFactory';
 
 const StyledKicker = styled(Overline)`
   grid-column: 1;
