@@ -8,7 +8,7 @@ import './src/styles/mongodb-docs.css';
 // Delay for when page should scroll. Gives time for content in tab components to render
 const contentTransitionDuration = theme.size.stripUnit(theme.transitionSpeed.contentFadeOut);
 
-// Take control of the scroll for our main content's scroll container.
+// Take control of the scroll for our main content's scroll container when clicking on a Link.
 // By default, Gatsby controls the scroll of the window object, which doesn't work
 // for our use case.
 // https://github.com/gatsbyjs/gatsby/blob/069cb535fa5bf5d2eead31533be18b1fe64c2568/packages/gatsby-react-router-scroll/src/scroll-handler.tsx#L102
@@ -36,6 +36,7 @@ export const shouldUpdateScroll = ({ routerProps: { location } }) => {
     }
   }
 
+  // Prevent Gatsby from performing its default scroll behavior after clicking on a link
   return false;
 };
 
