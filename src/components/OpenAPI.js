@@ -53,10 +53,7 @@ const codeBlockCss = css`
 
 const inlineCodeCss = css`
   // InlineCode inside of Parameters and Schemas
-  span.sc-eLgOdN {
-    background-color: ${inlineCodeBackgroundColor};
-    border-color: ${inlineCodeBorderColor};
-  }
+  span.sc-eLgOdN,
   // InlineCode found in data types of Parameters and Schemas; example: "string 24 characters"
   span.sc-kIeTtH {
     background-color: ${inlineCodeBackgroundColor};
@@ -279,7 +276,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
           if (load) {
             return;
           }
-          // Remove temporary loading margin from DOM
+          // Remove temporary loading widget from DOM
           const tempLoadingDivEl = document.querySelector(`.${tempLoadingDivClassName}`);
           if (tempLoadingDivEl) {
             tempLoadingDivEl.remove();
