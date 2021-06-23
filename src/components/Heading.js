@@ -31,9 +31,9 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
             {children}
             <ChildContainer isStacked={isMobile}>
               {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
+              <Contents />
             </ChildContainer>
           </HeadingContainer>
-          <Contents />
         </>
       )}
     >
