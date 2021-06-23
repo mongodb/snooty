@@ -117,7 +117,7 @@ exports[`Lightbox renders correctly 1`] = `
 
 exports[`Lightbox renders correctly 2`] = `
 .emotion-3 {
-  width: '700px';
+  width: 700px;
   cursor: pointer;
   margin: 0;
   display: block;
