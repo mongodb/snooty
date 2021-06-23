@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
+import { formatText } from '../utils/format-text';
 import useScreenSize from '../hooks/useScreenSize.js';
 import { ContentsContext } from './contents-context';
-import ComponentFactory from './ComponentFactory';
 import { Label } from './Select';
 import Link from './Link';
 
@@ -62,6 +62,10 @@ const ContentsList = styled.ul`
   padding: 0;
 `;
 
+const formatTextOptions = {
+  literalEnableInline: true,
+};
+
 const Contents = () => {
   const { headingNodes, activeHeadingId } = useContext(ContentsContext);
   const { isTabletOrMobile } = useScreenSize();
@@ -82,9 +86,7 @@ const Contents = () => {
             isActive={activeHeadingId === id}
             isDesktopOrLaptop={!isTabletOrMobile}
           >
-            {title.map((node, i) => (
-              <ComponentFactory nodeData={node} key={`${index}-${i}`} />
-            ))}
+            {formatText(title, formatTextOptions)}
           </ContentsListItem>
         ))}
       </ContentsList>
