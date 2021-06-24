@@ -152,97 +152,49 @@ exports[`Lightbox renders correctly 2`] = `
   width: 100%;
 }
 
-<div
-  className="lightbox_imagewrapper"
->
-  <Lightbox
-    nodeData={
-      Object {
-        "argument": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 13,
-              },
+<Lightbox
+  nodeData={
+    Object {
+      "argument": Array [
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 13,
             },
-            "type": "text",
-            "value": "/images/firstcluster.png",
           },
-        ],
-        "children": Array [],
-        "name": "figure",
-        "options": Object {
-          "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
-          "figwidth": "700px",
+          "type": "text",
+          "value": "/images/firstcluster.png",
         },
-        "position": Object {
-          "start": Object {
-            "line": 13,
-          },
+      ],
+      "children": Array [],
+      "name": "figure",
+      "options": Object {
+        "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+        "figwidth": "700px",
+      },
+      "position": Object {
+        "start": Object {
+          "line": 13,
         },
-        "type": "directive",
-      }
+      },
+      "type": "directive",
     }
+  }
+>
+  <LightboxWrapper
+    figwidth="700px"
   >
-    <LightboxWrapper
-      figwidth="700px"
+    <div
+      className="emotion-3 emotion-4"
     >
       <div
-        className="emotion-3 emotion-4"
+        onClick={[Function]}
+        role="button"
+        tabIndex="-1"
       >
-        <div
-          onClick={[Function]}
-          role="button"
-          tabIndex="-1"
-        >
-          <Image
-            className=""
-            handleImageLoaded={[Function]}
-            nodeData={
-              Object {
-                "argument": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 13,
-                      },
-                    },
-                    "type": "text",
-                    "value": "/images/firstcluster.png",
-                  },
-                ],
-                "children": Array [],
-                "name": "figure",
-                "options": Object {
-                  "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
-                  "figwidth": "700px",
-                },
-                "position": Object {
-                  "start": Object {
-                    "line": 13,
-                  },
-                },
-                "type": "directive",
-              }
-            }
-          >
-            <img
-              alt="/images/firstcluster.png"
-              className="   emotion-0"
-              onLoad={[Function]}
-              src="/images/firstcluster.png"
-              style={Object {}}
-            />
-          </Image>
-          <LightboxCaption>
-            <div
-              className="emotion-1 emotion-2"
-            >
-              click to enlarge
-            </div>
-          </LightboxCaption>
-        </div>
-        <CaptionLegend
+        <Image
+          className=""
+          handleImageLoaded={[Function]}
           nodeData={
             Object {
               "argument": Array [
@@ -270,42 +222,86 @@ exports[`Lightbox renders correctly 2`] = `
               "type": "directive",
             }
           }
-        />
+        >
+          <img
+            alt="/images/firstcluster.png"
+            className="   emotion-0"
+            onLoad={[Function]}
+            src="/images/firstcluster.png"
+            style={Object {}}
+          />
+        </Image>
+        <LightboxCaption>
+          <div
+            className="emotion-1 emotion-2"
+          >
+            click to enlarge
+          </div>
+        </LightboxCaption>
       </div>
-    </LightboxWrapper>
-    <StyledModal
+      <CaptionLegend
+        nodeData={
+          Object {
+            "argument": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 13,
+                  },
+                },
+                "type": "text",
+                "value": "/images/firstcluster.png",
+              },
+            ],
+            "children": Array [],
+            "name": "figure",
+            "options": Object {
+              "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
+              "figwidth": "700px",
+            },
+            "position": Object {
+              "start": Object {
+                "line": 13,
+              },
+            },
+            "type": "directive",
+          }
+        }
+      />
+    </div>
+  </LightboxWrapper>
+  <StyledModal
+    open={false}
+    setOpen={[Function]}
+    size="large"
+  >
+    <Modal
+      className="emotion-5 emotion-6"
       open={false}
       setOpen={[Function]}
       size="large"
     >
-      <Modal
-        className="emotion-5 emotion-6"
-        open={false}
-        setOpen={[Function]}
-        size="large"
-      >
-        <Transition
-          appear={false}
-          enter={true}
-          exit={true}
-          in={false}
-          mountOnEnter={true}
-          nodeRef={
-            Object {
-              "current": null,
-            }
+      <Transition
+        appear={false}
+        enter={true}
+        exit={true}
+        in={false}
+        mountOnEnter={true}
+        nodeRef={
+          Object {
+            "current": null,
           }
-          onEnter={[Function]}
-          onEntered={[Function]}
-          onEntering={[Function]}
-          onExit={[Function]}
-          onExited={[Function]}
-          onExiting={[Function]}
-          timeout={150}
-          unmountOnExit={true}
-        />
-      </Modal>
-    </StyledModal>
-  </Lightbox>
-</div>
+        }
+        onEnter={[Function]}
+        onEntered={[Function]}
+        onEntering={[Function]}
+        onExit={[Function]}
+        onExited={[Function]}
+        onExiting={[Function]}
+        timeout={150}
+        unmountOnExit={true}
+      />
+    </Modal>
+  </StyledModal>
+</Lightbox>
 `;

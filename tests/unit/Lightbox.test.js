@@ -4,12 +4,7 @@ import Lightbox from '../../src/components/Lightbox';
 // data for this component
 import mockData from './data/Figure.test.json';
 
-const mountLightbox = (nodeData) =>
-  mount(
-    <div className="lightbox_imagewrapper">
-      <Lightbox nodeData={nodeData} />
-    </div>
-  );
+const mountLightbox = (nodeData) => mount(<Lightbox nodeData={nodeData} />);
 const shallowLightbox = (nodeData) => shallow(<Lightbox nodeData={nodeData} />);
 
 describe('Lightbox', () => {
@@ -36,7 +31,7 @@ describe('Lightbox', () => {
     expect(wrapper.find('Modal').prop('open')).toBe(false);
   });
 
-  it('shows a caption', () => {
+  it('clicking the photo opens the modal', () => {
     expect(wrapper.find('LightboxCaption')).toHaveLength(1);
     expect(wrapper.find('LightboxCaption').text()).toEqual('click to enlarge');
   });
