@@ -39,7 +39,7 @@ export default class Image extends Component {
   };
 
   render() {
-    const { className, nodeData, isLightboxOpen } = this.props;
+    const { className, nodeData } = this.props;
     const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
     const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
     const customAlign = getNestedValue(['options', 'align'], nodeData)
@@ -51,9 +51,6 @@ export default class Image extends Component {
       border: 0.5px solid ${uiColors.gray.light1};
       width: 100%;
       border-radius: 4px;
-    `;
-    const enlargedImg = css`
-      width: 80%;
     `;
 
     const buildStyles = () => {
@@ -75,7 +72,6 @@ export default class Image extends Component {
         ref={this.imgRef}
         css={css`
           ${hasBorder ? borderStyling : ''}
-          ${isLightboxOpen ? enlargedImg : ''}
           max-width: 100%;
         `}
       />
@@ -86,7 +82,6 @@ export default class Image extends Component {
 Image.propTypes = {
   className: PropTypes.string,
   handleImageLoaded: PropTypes.func,
-  isOpen: PropTypes.bool,
   nodeData: PropTypes.shape({
     argument: PropTypes.arrayOf(
       PropTypes.shape({

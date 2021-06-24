@@ -1,63 +1,61 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Modal from '@leafygreen-ui/modal';
+import styled from '@emotion/styled';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
-import { getNestedValue } from '../utils/get-nested-value';
+import { theme } from '../theme/docsTheme.js';
 
 const CAPTION_TEXT = 'click to enlarge';
-const isSvg = (imgSrc) => /\.svg$/.test(imgSrc);
+const StyledModal = styled(Modal)`
+  @media ${theme.screenSize.largeAndUp} {
+    div[role='dialog'] {
+      width: 80%;
+    }
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    div[role='dialog'] {
+      width: 100%;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
+`;
+
+const LightboxCaption = styled('div')`
+  color: #444;
+  font-size: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+`;
+
+const LightboxWrapper = styled('div')`
+  width: ${(props) => props.figwidth};
+  cursor: pointer;
+  margin: 0;
+  display: block;
+`;
 
 const Lightbox = ({ nodeData, ...rest }) => {
-  const [showModal, setShowModal] = useState(false);
-  const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
-  const modal = useRef(null);
-
-  const toggleShowModal = () => {
-    setShowModal((prevShowState) => !prevShowState);
-  };
-
-  const handleOnKeyDown = (e) => {
-    // Escape key
-    if (e.keyCode === 27) {
-      toggleShowModal();
-    }
-  };
-
-  // Hook to take effect with every re-render
-  useEffect(() => {
-    if (modal.current) {
-      modal.current.focus();
-    }
-  });
-
+  const [open, setOpen] = useState(false);
+  const figureWidth = nodeData.options?.figwidth || 'auto';
   return (
     <React.Fragment>
-      <div className="figure lightbox" style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}>
-        <div className="lightbox__imageWrapper" onClick={toggleShowModal} role="button" tabIndex="-1">
-          <Image nodeData={nodeData} isLightboxOpen={false} />
-          <div className="lightbox__caption">{CAPTION_TEXT}</div>
+      <LightboxWrapper figwidth={figureWidth}>
+        <div onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
+          <Image nodeData={nodeData} />
+          <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
-      </div>
-      {showModal && (
-        <div
-          className="lightbox__modal"
-          title="click to close"
-          onClick={toggleShowModal}
-          ref={modal}
-          onKeyDown={handleOnKeyDown}
-          role="button"
-          tabIndex="-1"
-        >
-          <Image
-            nodeData={nodeData}
-            isLightboxOpen={true}
-            className={`lightbox__content lightbox__content--activated ${
-              isSvg(imgSrc) ? 'lightbox__content--scalable' : ''
-            }`}
-          />
-        </div>
-      )}
+      </LightboxWrapper>
+      <StyledModal size="large" open={open} setOpen={setOpen}>
+        <Image nodeData={nodeData} />
+      </StyledModal>
     </React.Fragment>
   );
 };
