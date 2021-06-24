@@ -19,15 +19,12 @@ export const shouldUpdateScroll = ({ routerProps: { location } }) => {
   if (scrollContainer) {
     if (hash) {
       window.setTimeout(() => {
-        let uri;
-
         try {
-          uri = decodeURI(hash);
+          const uri = decodeURI(hash);
+          document.getElementById(uri.slice(1)).scrollIntoView(true);
         } catch (e) {
           console.error(e);
         }
-
-        document.getElementById(uri.slice(1)).scrollIntoView(true);
       }, contentTransitionDuration);
     } else {
       window.setTimeout(() => {
