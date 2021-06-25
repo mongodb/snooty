@@ -4,11 +4,11 @@ import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
-import { theme } from '../../theme/docsTheme';
-import ComponentFactory from '../ComponentFactory';
-import ConditionalWrapper from '../ConditionalWrapper';
-import Link from '../Link';
-import Tag from '../Tag';
+import { theme } from '../theme/docsTheme';
+import ComponentFactory from './ComponentFactory';
+import ConditionalWrapper from './ConditionalWrapper';
+import Link from './Link';
+import Tag from './Tag';
 
 const StyledCard = styled(LeafyGreenCard)`
   display: flex;
