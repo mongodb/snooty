@@ -9734,8 +9734,7 @@ table.highlighttable td {
 }
 .deluge .rangestar:hover,
 .deluge .switch:hover,
-.deluge-vote-button:hover,
-.lightbox:hover {
+.deluge-vote-button:hover {
   cursor: pointer;
 }
 .deluge .switch.good.selected,
@@ -10520,7 +10519,6 @@ div td pre {
 }
 #showNav,
 .guide__pill,
-.lightbox__caption,
 .searchButton,
 .sequence-step {
   text-align: center;
@@ -10648,45 +10646,7 @@ div td pre {
     margin: 0 0 16px;
   }
 }
-.lightbox__modal {
-  background-color: rgba(0, 0, 0, 0.8);
-  display: block;
-  height: 100%;
-  left: 0;
-  overflow: auto;
-  padding-top: 100px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-}
-.lightbox__modal:hover,
-.suggestion-close,
-.tab-strip [aria-selected]:hover {
-  cursor: pointer;
-}
-.lightbox__content {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  max-width: calc(100% - 20px);
-}
-.lightbox__content--activated {
-  opacity: 1;
-}
-.lightbox__content--scalable {
-  background-color: #fff;
-  padding: 5px;
-}
-.lightbox__caption {
-  color: #444;
-  font-size: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
+
 .marian,
 div.document {
   margin-left: 25px;
