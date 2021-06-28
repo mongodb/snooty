@@ -16,21 +16,19 @@ export const shouldUpdateScroll = ({ routerProps: { location } }) => {
   const { hash } = location;
   const scrollContainer = document.querySelector(`.${CONTENT_CONTAINER_CLASSNAME}`);
 
-  if (scrollContainer) {
-    if (hash) {
-      window.setTimeout(() => {
-        try {
-          const uri = decodeURI(hash);
-          document.getElementById(uri.slice(1)).scrollIntoView(true);
-        } catch (e) {
-          console.error(e);
-        }
-      }, contentTransitionDuration);
-    } else {
-      window.setTimeout(() => {
-        scrollContainer.scrollTop = 0;
-      }, contentTransitionDuration);
+  const decodeUriAndScroll = () => {
+    try {
+      const uri = decodeURI(hash);
+      document.getElementById(uri.slice(1)).scrollIntoView(true);
+    } catch (e) {
+      console.error(e);
     }
+  };
+
+  if (scrollContainer) {
+    window.setTimeout(() => {
+      hash ? decodeUriAndScroll() : (scrollContainer.scrollTop = 0);
+    }, contentTransitionDuration);
   }
 
   // Prevent Gatsby from performing its default scroll behavior after clicking on a link
