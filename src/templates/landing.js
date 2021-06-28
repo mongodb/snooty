@@ -5,7 +5,6 @@ import { Global, css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
-import { TEMPLATE_CLASSNAME } from '../constants';
 
 const Wrapper = styled('main')`
   margin: 0 auto;
@@ -40,7 +39,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const Landing = ({ children, className, pageContext: { slug, page } }) => {
+const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -65,7 +64,7 @@ const Landing = ({ children, className, pageContext: { slug, page } }) => {
           })}
         </script>
       </Helmet>
-      <div className={`${TEMPLATE_CLASSNAME} ${className}`}>
+      <div>
         <Wrapper>{children}</Wrapper>
       </div>
       <Global
@@ -183,7 +182,6 @@ const Landing = ({ children, className, pageContext: { slug, page } }) => {
 
 Landing.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
-  className: PropTypes.string,
   pageContext: PropTypes.shape({
     page: PropTypes.object.isRequired,
   }).isRequired,
