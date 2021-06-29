@@ -19,48 +19,47 @@ const listItemColor = uiColors.black;
 
 const ListItem = styled('li')`
   @media ${theme.screenSize.mediumAndUp} {
-    border-left: ${(props) =>
-      props.isActive ? '1px solid ${uiColors.gray.light2}' : '1px solid ${uiColors.gray.light2}'};
-    padding-left: ${(props) => (props.isActive ? '0' : '')};
-    
+    ${(props) => (props.isActive ? activeBorderLeftCSS : `border-left: 1px solid ${uiColors.gray.light2};`)}
+
     &:hover,
     &:active {
-      activeBorderLeftCSS
+      ${activeBorderLeftCSS}
     }
   }
-  
+
   padding: 6px 0 6px 1px;
   width: ${(props) => props.figwidth};
 
   &:hover,
   &:active {
-    'padding-left: 4px;'
+    padding-left: 4px;
   }
+`;
+
+const StyledLink = styled(Link)`
+  color: ${listItemColor};
+  display: inline-block;
+  padding-left: ${(props) => `${props.depth - 2}` + '* 16px'}
+  width: 100%;
+  @media ${theme.screenSize.mediumAndUp} {
+    ${(props) => `padding-left: calc(14px + ${props.depth - 2} * 16px)`};
+  }
+  :hover {
+    color: ${listItemColor};
+    text-decoration: none;
+  }
+`;
+
+const ContentsList = styled('ul')`
+  list-style-type: none;
+  padding: 0;
 `;
 
 const ContentsListItem = ({ children, depth, id, isActive }) => (
   <ListItem isActive={isActive}>
-    <Link
-      to={`#${id}`}
-      css={css`
-        /* TODO: Remove when mongodb-docs.css is removed */
-        color: ${listItemColor};
-        display: inline-block;
-        /* Heading sections should begin at depth 2 */
-        @media ${theme.screenSize.mediumAndUp} {
-          padding-left: calc($14px +' ${depth - 2} * 16px);
-        }
-        padding-left: calc(${depth - 2} * 16px);
-        width: 100%;
-
-        :hover {
-          color: ${listItemColor};
-          text-decoration: none;
-        }
-      `}
-    >
+    <StyledLink to={`#${id}`} isActive={isActive} depth={depth}>
       {children}
-    </Link>
+    </StyledLink>
   </ListItem>
 );
 
@@ -71,19 +70,11 @@ ContentsListItem.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-const ContentsList = styled('ul')`
-  @media ${theme.screenSize.mediumAndUp} {
-    display: ${(props) => (props.shouldShowDesktop ? '' : 'none')};
-  }
-  list-style-type: none;
-  padding: 0;
-`;
-
 const formatTextOptions = {
   literalEnableInline: true,
 };
 
-const Contents = ({ shouldShowDesktop }) => {
+const Contents = ({ inRightColumn }) => {
   const { headingNodes, activeHeadingId } = useContext(ContentsContext);
 
   if (headingNodes.length === 0) {
@@ -91,16 +82,18 @@ const Contents = ({ shouldShowDesktop }) => {
   }
 
   return (
-    <>
-      <Label>On this page</Label>
-      <ContentsList shouldShowDesktop={shouldShowDesktop}>
-        {headingNodes.map(({ depth, id, title }, index) => (
-          <ContentsListItem depth={depth} key={id} id={id} isActive={activeHeadingId === id}>
-            {formatText(title, formatTextOptions)}
-          </ContentsListItem>
-        ))}
-      </ContentsList>
-    </>
+    { inRightColumn } && (
+      <>
+        <Label>On this page</Label>
+        <ContentsList>
+          {headingNodes.map(({ depth, id, title }, index) => (
+            <ContentsListItem depth={depth} key={id} id={id} isActive={activeHeadingId === id}>
+              {formatText(title, formatTextOptions)}
+            </ContentsListItem>
+          ))}
+        </ContentsList>
+      </>
+    )
   );
 };
 

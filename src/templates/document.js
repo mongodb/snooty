@@ -69,7 +69,7 @@ const Document = ({
       </div>
       <RightColumn>
         <TabSelectors />
-        <Contents shouldShowDesktop={true} />
+        <Contents inRightColumn={true} />
       </RightColumn>
     </div>
   );
