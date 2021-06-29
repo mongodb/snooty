@@ -8,7 +8,6 @@ import useScreenSize from '../hooks/useScreenSize';
 import TabSelectors from './TabSelectors';
 import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
-import Contents from './Contents';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 

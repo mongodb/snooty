@@ -4,7 +4,6 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { formatText } from '../utils/format-text';
-import useScreenSize from '../hooks/useScreenSize.js';
 import { ContentsContext } from './contents-context';
 import { Label } from './Select';
 import Link from './Link';
@@ -39,7 +38,7 @@ const ListItem = styled('li')`
 const StyledLink = styled(Link)`
   color: ${listItemColor};
   display: inline-block;
-  padding-left: ${(props) => `${props.depth - 2}` + '* 16px'}
+  padding-left: ${(props) => `${props.depth - 2} * 16px`}
   width: 100%;
   @media ${theme.screenSize.mediumAndUp} {
     ${(props) => `padding-left: calc(14px + ${props.depth - 2} * 16px)`};
@@ -55,6 +54,11 @@ const ContentsList = styled('ul')`
   padding: 0;
 `;
 
+const StyledContents = styled('div')`
+  @media ${theme.screenSize.mediumAndUp} {
+    display: ${(props) => (props.inRightColumn ? '' : 'none')};
+  }
+`;
 const ContentsListItem = ({ children, depth, id, isActive }) => (
   <ListItem isActive={isActive}>
     <StyledLink to={`#${id}`} isActive={isActive} depth={depth}>
@@ -80,20 +84,17 @@ const Contents = ({ inRightColumn }) => {
   if (headingNodes.length === 0) {
     return null;
   }
-
   return (
-    { inRightColumn } && (
-      <>
-        <Label>On this page</Label>
-        <ContentsList>
-          {headingNodes.map(({ depth, id, title }, index) => (
-            <ContentsListItem depth={depth} key={id} id={id} isActive={activeHeadingId === id}>
-              {formatText(title, formatTextOptions)}
-            </ContentsListItem>
-          ))}
-        </ContentsList>
-      </>
-    )
+    <StyledContents inRightColumn={inRightColumn}>
+      <Label>On this page</Label>
+      <ContentsList>
+        {headingNodes.map(({ depth, id, title }, index) => (
+          <ContentsListItem depth={depth} key={id} id={id} isActive={activeHeadingId === id}>
+            {formatText(title, formatTextOptions)}
+          </ContentsListItem>
+        ))}
+      </ContentsList>
+    </StyledContents>
   );
 };
 
