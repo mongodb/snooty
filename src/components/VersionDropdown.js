@@ -2,21 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import { Option, Select, Size } from '@leafygreen-ui/select';
+import { Option, OptionGroup, Select, Size } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
 import { baseUrl } from '../utils/dotcom';
-
-const zip = (a, b) => {
-  // Zip arrays a and b into an object where a is used for keys and b for values
-  const shorter = a.length > b.length ? b : a;
-  const dict = {};
-  shorter.forEach((key, i) => (dict[a[i]] = b[i]));
-  return dict;
-};
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -43,34 +35,81 @@ const OptionLink = styled('a')`
   }
 `;
 
-const VersionDropdown = ({
-  publishedBranches: {
-    version: { published, active },
-    git: {
-      branches: { published: gitBranches },
-    },
-  },
-  slug,
-}) => {
+const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
 
-  const prefixVersion = (version) => {
-    // Display as "Version X" on menu if numeric version
+  // Do not render version dropdown if there is only one branch
+  if (branches.length <= 1) {
+    return null;
+  }
+
+  const versionLabel = (gitBranchName = '', urlSlug = null, versionSelectorLabel = null) => {
+    // Display value of versionSelectorLabel if it's set
+    if (versionSelectorLabel) {
+      return `${versionSelectorLabel}`;
+    }
+
     const isNumeric = (version = '') => {
       const [firstWord] = version.split();
       return !isNaN(firstWord);
     };
-    return `${isNumeric(version) ? 'Version ' : ''}${version}`;
+
+    // Display as Version X on menu if numeric version (based on the urlSlug field).
+    if (urlSlug) {
+      return `${isNumeric(urlSlug) ? 'Version ' : ''}${urlSlug}`;
+    }
+    // Display as Version X on menu if numeric version (based on the gitBranchName field).
+    else {
+      return `${isNumeric(gitBranchName) ? 'Version ' : ''}${gitBranchName}`;
+    }
   };
 
-  // Zip two sections of data to map git branches to their "pretty" names
-  const gitNamedMapping = zip(gitBranches, active);
+  const gitNamedMapping = (branches = []) => {
+    var branchNameToLabel = {};
+    for (let branch of branches) {
+      if (branch['active'] === false) {
+        continue;
+      }
+      const branchName = branch['urlSlug'] ? branch['urlSlug'] : branch['gitBranchName'];
+      const UIlabel = versionLabel(branch['gitBranchName'], branch['urlSlug'], branch['versionSelectorLabel']);
+      branchNameToLabel[branchName] = UIlabel;
+    }
+    console.log(branchNameToLabel);
+    return branchNameToLabel;
+  };
 
-  // Don't render dropdown if there is only 1 version of the repo
-  if (!active || active.length <= 1) {
-    return null;
-  }
+  const legacyNeeded = (branches = []) => {
+    var count = 0;
+    branches.forEach((branch) => {
+      if (branch['active'] === false) {
+        count++;
+      }
+    });
+    return count >= 1 ? true : false;
+  };
+
+  const groupBranches = (branches, groups) => {
+    const getGroup = (branch = {}, groups = {}) => {
+      var groupName = 'ungrouped';
+      for (let group of groups) {
+        if (group['includedBranches'].includes(branch['gitBranchName'])) {
+          groupName = group['groupLabel'];
+        }
+      }
+      return groupName;
+    };
+
+    var newGroupMapping = {};
+    branches.forEach((branch) => {
+      if (!newGroupMapping[getGroup(branch, groups)]) {
+        newGroupMapping[getGroup(branch, groups)] = [];
+      }
+      newGroupMapping[getGroup(branch, groups)].push(branch);
+    });
+
+    return newGroupMapping;
+  };
 
   const generatePrefix = (version) => {
     // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
@@ -110,15 +149,15 @@ const VersionDropdown = ({
       value={parserBranch}
       usePortal={false}
     >
-      {Object.entries(gitNamedMapping).map(([branch, name]) => {
+      {Object.entries(gitNamedMapping(branches)).map(([branch, name]) => {
         const url = getUrl(branch);
         return (
           <Option key={branch} value={branch}>
-            <OptionLink href={url}>{prefixVersion(name)}</OptionLink>
+            <OptionLink href={url}>{name}</OptionLink>
           </Option>
         );
       })}
-      {published.length > active.length && (
+      {legacyNeeded(branches) === true && (
         <Option value="legacy">
           <OptionLink href={getUrl('legacy')}>Legacy Docs</OptionLink>
         </Option>
@@ -128,16 +167,16 @@ const VersionDropdown = ({
 };
 
 VersionDropdown.propTypes = {
-  publishedBranches: PropTypes.shape({
-    version: PropTypes.shape({
-      published: PropTypes.arrayOf(PropTypes.string).isRequired,
-      active: PropTypes.arrayOf(PropTypes.string).isRequired,
+  repo_branches: PropTypes.shape({
+    branches: PropTypes.shape({
+      gitBranchName: PropTypes.string.isRequired,
+      versionSelectorLabel: PropTypes.string,
+      urlSlug: PropTypes.string,
+      active: PropTypes.bool.isRequired,
     }).isRequired,
-    git: PropTypes.shape({
-      branches: PropTypes.shape({
-        published: PropTypes.arrayOf(PropTypes.string).isRequired,
-      }).isRequired,
-    }).isRequired,
+    groups: PropTypes.shape({
+      label: PropTypes.arrayOf(PropTypes.string),
+    }),
   }).isRequired,
   slug: PropTypes.string.isRequired,
 };

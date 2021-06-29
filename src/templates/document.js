@@ -32,6 +32,7 @@ const Document = ({
     slug,
     page,
     metadata: { parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
+    repo_branches,
   },
 }) => {
   const { project } = useSiteMetadata();
