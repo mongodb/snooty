@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { uiColors } from '@leafygreen-ui/palette';
 import Footer from '../components/Footer';
-import { TEMPLATE_CLASSNAME } from '../constants';
 import { theme } from '../theme/docsTheme';
 
 const ErrorBox = styled('div')`
@@ -114,9 +112,9 @@ const ErrorBoxContainer = () => {
   );
 };
 
-const NotFound = ({ className }) => {
+const NotFound = () => {
   return (
-    <main className={`${TEMPLATE_CLASSNAME} ${className}`}>
+    <main>
       <div
         css={css`
           align-items: center;
@@ -136,10 +134,6 @@ const NotFound = ({ className }) => {
       <Footer disableFeedback />
     </main>
   );
-};
-
-NotFound.propTypes = {
-  className: PropTypes.string,
 };
 
 export default NotFound;

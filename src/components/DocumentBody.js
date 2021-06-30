@@ -130,9 +130,9 @@ export default class DocumentBody extends Component {
                       {this.pageNodes.map((child, index) => (
                         <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
                       ))}
+                      <Footer />
                     </Template>
                   </ContentsProvider>
-                  <Footer />
                 </FootnoteContext.Provider>
               </Widgets>
             </>
