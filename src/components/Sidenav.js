@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -9,11 +10,13 @@ import IA from './IA';
 import IATransition from './IATransition';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
+import { SidebarContext } from './sidenav-context';
 import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
-import useMedia from '../hooks/use-media';
 import useScreenSize from '../hooks/useScreenSize';
+
+const SIDENAV_WIDTH = 268;
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   height: 100%;
@@ -45,12 +48,56 @@ const titleStyle = css`
 `;
 
 const tabletStyle = css`
+  @media ${theme.screenSize.upToLarge} {
+    position: absolute;
+  }
+`;
+
+const mobileStyle = (isCollapsed) => css`
+  @media ${theme.screenSize.upToSmall} {
+    ${isCollapsed && 'display: none;'}
+
+    button[data-testid="side-nav-collapse-toggle"] {
+      display: none;
+    }
+  }
+`;
+
+const ContentOverlay = styled('div')`
+  background-color: ${uiColors.white};
+  bottom: 0;
+  left: 0;
+  opacity: 0.5;
   position: absolute;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+`;
+
+const SidenavContainer = styled('div')`
+  grid-area: sidenav;
+  position: relative;
+  z-index: 2;
+
+  // Maintain a certain width so that the content doesn't get pushed on desktop
+  // when the SideNav opens up the first time
+  @media ${theme.screenSize.mediumAndUp} {
+    ${({ finishedInitialCollapse }) => !finishedInitialCollapse && `width: ${SIDENAV_WIDTH}px;`}
+  }
+
+  // Since we want the SideNav to open on top of the content on medium screen size,
+  // keep a min width as a placeholder for the collapsed SideNav to maintain its
+  // width on the page
+  @media ${theme.screenSize.smallAndUp} {
+    min-width: 48px;
+  }
 `;
 
 // Allows AdditionalLinks to always be at the bottom of the SideNav
 const Spaceholder = styled('div')`
   flex-grow: 1;
+  min-height: ${theme.size.medium};
 `;
 
 const Border = styled('hr')`
@@ -84,71 +131,88 @@ const additionalLinks = [
 ];
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
-  const isTabletSize = useMedia('only screen and (min-width: 420px) and (max-width: 767px');
-  const [isCollapsed, setCollapsed] = useState(isTabletSize);
+  const { isTabletOrMobile } = useScreenSize();
+  const { isCollapsed, setCollapsed } = useContext(SidebarContext);
+  const viewportSize = useViewportSize();
+  const isMobile = viewportSize?.width <= 420;
+  const [back, setBack] = React.useState(null);
+  const [timesCollapsed, setTimesCollapsed] = useState(0);
+
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
-  const [back, setBack] = React.useState(null);
 
   useEffect(() => {
-    setCollapsed(isTabletSize);
-  }, [isTabletSize]);
+    setCollapsed(isTabletOrMobile);
+  }, [isTabletOrMobile, setCollapsed]);
+
+  useEffect(() => {
+    setTimesCollapsed((curr) => ++curr);
+  }, [isCollapsed]);
+
+  const handleOverlayClick = useCallback(() => {
+    setCollapsed(true);
+  }, [setCollapsed]);
 
   return (
-    <div
-      css={css`
-        grid-area: sidebar;
-        min-width: 45px;
-        position: relative;
-        z-index: 1;
-      `}
-    >
-      <StyledLeafygreenSideNav
-        aria-label="Side navigation"
-        css={isTabletSize && tabletStyle}
-        collapsed={isCollapsed}
-        setCollapsed={setCollapsed}
-        widthOverride={268}
+    <>
+      <SidenavContainer
+        // isCollapsed is updated 2 times before it has completed its initial collapse;
+        // once when it is set to true by default, and again when checking screen size
+        finishedInitialCollapse={timesCollapsed > 2}
       >
-        <IATransition back={back} hasIA={!!ia} slug={slug}>
-          <NavTopContainer>
-            <ArtificialPadding />
-            <SidebarBack
-              border={<Border />}
-              handleClick={() => {
-                setBack(true);
-              }}
-              slug={slug}
-            />
-            {ia && (
-              <IA
-                header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+        <StyledLeafygreenSideNav
+          aria-label="Side navigation"
+          css={css`
+            ${mobileStyle(isCollapsed)}
+            ${tabletStyle}
+          `}
+          collapsed={isCollapsed}
+          setCollapsed={setCollapsed}
+          widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
+        >
+          <IATransition back={back} hasIA={!!ia} slug={slug}>
+            <NavTopContainer>
+              <ArtificialPadding />
+              <SidebarBack
+                border={<Border />}
                 handleClick={() => {
-                  setBack(false);
+                  setBack(true);
                 }}
-                ia={ia}
+                slug={slug}
               />
-            )}
-            {showAllProducts && (
-              <Border
-                css={css`
-                  margin-bottom: 0;
-                `}
-              />
-            )}
-          </NavTopContainer>
-          {showAllProducts && <ProductsList />}
-        </IATransition>
-        {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
-        {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
-        <Spaceholder />
-        {additionalLinks.map(({ glyph, title, url }) => (
-          <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
-            {title}
-          </SideNavItem>
-        ))}
-      </StyledLeafygreenSideNav>
-    </div>
+              {ia && (
+                <IA
+                  header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+                  handleClick={() => {
+                    setBack(false);
+                  }}
+                  ia={ia}
+                />
+              )}
+              {showAllProducts && (
+                <Border
+                  css={css`
+                    margin-bottom: 0;
+                  `}
+                />
+              )}
+            </NavTopContainer>
+            {showAllProducts && <ProductsList />}
+          </IATransition>
+
+          {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
+          {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+
+          <Spaceholder />
+          {additionalLinks.map(({ glyph, title, url }) => (
+            <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+              {title}
+            </SideNavItem>
+          ))}
+        </StyledLeafygreenSideNav>
+      </SidenavContainer>
+      {isTabletOrMobile && !isCollapsed && <ContentOverlay onClick={handleOverlayClick} />}
+    </>
   );
 };
 

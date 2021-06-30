@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HeaderContextProvider } from './header-context';
 import { NavigationProvider } from './navigation-context';
-import { SidebarContextProvider } from './sidebar-context';
+import { SidebarContextProvider } from './sidenav-context';
 import { TabProvider } from './tab-context';
 
 const RootProvider = ({ children, isSidebarEnabled, selectors }) => (

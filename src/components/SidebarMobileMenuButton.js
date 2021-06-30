@@ -1,12 +1,11 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
-import { SidebarContext } from './sidebar-context';
+import { SidebarContext } from './sidenav-context';
 import { displayNone } from '../utils/display-none';
-import { isBrowser } from '../utils/is-browser';
 
 // This container prevents the leafygreen components from flashing when the media query is true
 const MenuButtonContainer = styled('div')`
@@ -24,16 +23,21 @@ const MenuButton = styled(IconButton)`
 `;
 
 const SidebarMobileMenuButton = ({ className }) => {
-  const { isSidebarMenuOpen, setIsSidebarMenuOpen } = useContext(SidebarContext);
+  const { isCollapsed, setCollapsed } = useContext(SidebarContext);
+  const [glyph, setGlyph] = useState('Menu');
 
   const clickMenu = useCallback(() => {
-    setIsSidebarMenuOpen((state) => !state);
-  }, [setIsSidebarMenuOpen]);
+    setCollapsed((state) => !state);
+  }, [setCollapsed]);
+
+  useEffect(() => {
+    setGlyph(isCollapsed ? 'Menu' : 'X');
+  }, [isCollapsed]);
 
   return (
     <MenuButtonContainer className={className}>
       <MenuButton aria-label="View sidenav" onClick={clickMenu}>
-        <Icon glyph={isSidebarMenuOpen && isBrowser ? 'X' : 'Menu'} size="large" />
+        <Icon glyph={glyph} size="large" />
       </MenuButton>
     </MenuButtonContainer>
   );

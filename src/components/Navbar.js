@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import { Logo } from '@leafygreen-ui/logo';
 import { uiColors } from '@leafygreen-ui/palette';
 import Searchbar from './Searchbar';
-import { SidebarContext } from './sidebar-context';
+import { SidebarContext } from './sidenav-context';
 import SidebarMobileMenuButton from './SidebarMobileMenuButton';
 import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
