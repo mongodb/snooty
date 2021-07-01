@@ -29,11 +29,22 @@ export const logoutWithRedirect = () => {
   window.location = logoutUrl;
 };
 
-const initializeOktaApplicationSession = async () => {
-  return;
+// Handles retrieving an IDP session and initializing an id token to the token manager
+// This is the preferred authentication method when a user is logged in and an Okta IDP session is present
+// but the login did not originate from a docs property, and no application session is present
+const ensureOktaApplicationSession = async () => {
+  return authClient.token
+    .getWithoutPrompt({
+      responseType: 'id_token',
+      scopes: ['openid', 'email', 'profile'],
+    })
+    .then((res) => {
+      authClient.tokenManager.setTokens(res?.tokens);
+    });
 };
 
-// Handles parsing and storage of idTokens after auth'ing via redirectUri pattern
+// Handles parsing and storage of idTokens when authenticating via redirectUri pattern
+// This is the preferred authentication method when handling login origination from docs properties
 // If or when access tokens are needed, highly consider adding them
 // to the token manager within this function
 const authorize = async () => {
@@ -44,17 +55,16 @@ const authorize = async () => {
   });
 };
 
-export const checkOktaSession = async () => {
-  if (isBrowser && authClient) {
-    authClient.session.exists().then(function (exists) {
-      if (exists) {
-        console.log('logged in');
-        initializeOktaApplicationSession();
-      } else {
-        console.log('logged out');
-      }
-    });
-  }
+const checkOktaSession = async () => {
+  return authClient.session.exists().then(async (exists) => {
+    if (exists) {
+      const idToken = await authClient.tokenManager.get('idToken');
+      return idToken ? idToken : ensureOktaApplicationSession();
+    } else {
+      console.log('logged out - clear tokens after this message');
+      // TODO: Add a call to clear tokens here, when we're certain that all other logic is valid.
+    }
+  });
 };
 
 export const getUserProfileFromJWT = async () => {
@@ -62,7 +72,7 @@ export const getUserProfileFromJWT = async () => {
     if (authClient.isLoginRedirect()) {
       return authorize();
     } else {
-      return authClient.tokenManager.get('idToken').then((idToken) => idToken);
+      return checkOktaSession();
     }
   }
 };
