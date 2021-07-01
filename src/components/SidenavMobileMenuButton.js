@@ -22,7 +22,7 @@ const MenuButton = styled(IconButton)`
   }
 `;
 
-const SidebarMobileMenuButton = ({ className }) => {
+const SidenavMobileMenuButton = ({ className }) => {
   const { isCollapsed, setCollapsed } = useContext(SidenavContext);
   const [glyph, setGlyph] = useState('Menu');
 
@@ -43,8 +43,8 @@ const SidebarMobileMenuButton = ({ className }) => {
   );
 };
 
-SidebarMobileMenuButton.propTypes = {
+SidenavMobileMenuButton.propTypes = {
   className: PropTypes.string,
 };
 
-export default SidebarMobileMenuButton;
+export default SidenavMobileMenuButton;

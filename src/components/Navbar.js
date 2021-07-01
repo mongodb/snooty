@@ -5,7 +5,7 @@ import { Logo } from '@leafygreen-ui/logo';
 import { uiColors } from '@leafygreen-ui/palette';
 import Searchbar from './Searchbar';
 import { SidenavContext } from './sidenav-context';
-import SidebarMobileMenuButton from './SidebarMobileMenuButton';
+import SidenavMobileMenuButton from './SidenavMobileMenuButton';
 import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
@@ -81,7 +81,7 @@ const Navbar = () => {
 
   return (
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
-      {isSidenavEnabled && <SidebarMobileMenuButton />}
+      {isSidenavEnabled && <SidenavMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <a
           css={css`

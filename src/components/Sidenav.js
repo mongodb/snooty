@@ -82,7 +82,7 @@ const SidenavContainer = styled('div')`
 
   // Maintain a certain width so that the content doesn't get pushed on desktop
   // when the SideNav opens up the first time
-  @media ${theme.screenSize.mediumAndUp} {
+  @media ${theme.screenSize.largeAndUp} {
     ${({ finishedInitialCollapse }) => !finishedInitialCollapse && `width: ${SIDENAV_WIDTH}px;`}
   }
 
