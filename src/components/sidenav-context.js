@@ -1,16 +1,16 @@
 import React, { createContext, useState } from 'react';
 
-const SidebarContext = createContext({
+const SidenavContext = createContext({
   isSidebarEnabled: true,
   isCollapsed: true,
   setCollapsed: () => {},
 });
 
-const SidebarContextProvider = ({ children, isSidebarEnabled = true }) => {
+const SidenavContextProvider = ({ children, isSidebarEnabled = true }) => {
   const [isCollapsed, setCollapsed] = useState(true);
 
   return (
-    <SidebarContext.Provider
+    <SidenavContext.Provider
       value={{
         isSidebarEnabled,
         isCollapsed,
@@ -18,8 +18,8 @@ const SidebarContextProvider = ({ children, isSidebarEnabled = true }) => {
       }}
     >
       {children}
-    </SidebarContext.Provider>
+    </SidenavContext.Provider>
   );
 };
 
-export { SidebarContext, SidebarContextProvider };
+export { SidenavContext, SidenavContextProvider };

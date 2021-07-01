@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
-import { SidebarContext } from './sidenav-context';
+import { SidenavContext } from './sidenav-context';
 import { displayNone } from '../utils/display-none';
 
 // This container prevents the leafygreen components from flashing when the media query is true
@@ -23,7 +23,7 @@ const MenuButton = styled(IconButton)`
 `;
 
 const SidebarMobileMenuButton = ({ className }) => {
-  const { isCollapsed, setCollapsed } = useContext(SidebarContext);
+  const { isCollapsed, setCollapsed } = useContext(SidenavContext);
   const [glyph, setGlyph] = useState('Menu');
 
   const clickMenu = useCallback(() => {

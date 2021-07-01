@@ -10,7 +10,7 @@ import IA from './IA';
 import IATransition from './IATransition';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
-import { SidebarContext } from './sidenav-context';
+import { SidenavContext } from './sidenav-context';
 import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
@@ -132,7 +132,7 @@ const additionalLinks = [
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
   const { isTabletOrMobile } = useScreenSize();
-  const { isCollapsed, setCollapsed } = useContext(SidebarContext);
+  const { isCollapsed, setCollapsed } = useContext(SidenavContext);
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
   const [back, setBack] = React.useState(null);

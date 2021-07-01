@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import { Logo } from '@leafygreen-ui/logo';
 import { uiColors } from '@leafygreen-ui/palette';
 import Searchbar from './Searchbar';
-import { SidebarContext } from './sidenav-context';
+import { SidenavContext } from './sidenav-context';
 import SidebarMobileMenuButton from './SidebarMobileMenuButton';
 import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
@@ -56,7 +56,7 @@ const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
-  const { isSidebarEnabled } = useContext(SidebarContext);
+  const { isSidebarEnabled } = useContext(SidenavContext);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const [isTransparent, setIsTransparent] = useState(false);
   const imageHeight = 22;
