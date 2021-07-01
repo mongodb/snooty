@@ -41,6 +41,7 @@ const ensureOktaApplicationSession = async () => {
     .then((res) => {
       authClient.tokenManager.setTokens(res?.tokens);
     });
+  // TODO: Add reject logic here - how should we handle a failure to retrieve idp session?
 };
 
 // Handles parsing and storage of idTokens when authenticating via redirectUri pattern
@@ -53,6 +54,7 @@ const authorize = async () => {
     authClient.tokenManager.add('idToken', idToken);
     authClient.handleLoginRedirect();
   });
+  // TODO: Add reject logic here - how should we handle a failure to parse token from url?
 };
 
 const checkOktaSession = async () => {
