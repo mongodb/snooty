@@ -17,7 +17,7 @@ const activeBorderLeftCSS = css`
 const listItemColor = uiColors.black;
 
 const ListItem = styled('li')`
-  @media ${theme.screenSize.mediumAndUp} {
+  @media ${theme.screenSize.largeAndUp} {
     ${(props) => (props.isActive ? activeBorderLeftCSS : `border-left: 1px solid ${uiColors.gray.light2};`)}
 
     &:hover,
@@ -40,7 +40,7 @@ const StyledLink = styled(Link)`
   display: inline-block;
   padding-left: ${(props) => `${props.depth - 2} * 16px`}
   width: 100%;
-  @media ${theme.screenSize.mediumAndUp} {
+  @media ${theme.screenSize.largeAndUp} {
     ${(props) => `padding-left: calc(14px + ${props.depth - 2} * 16px)`};
   }
   :hover {
@@ -55,7 +55,7 @@ const ContentsList = styled('ul')`
 `;
 
 const StyledContents = styled('div')`
-  @media ${theme.screenSize.mediumAndUp} {
+  @media ${theme.screenSize.largeAndUp} {
     display: ${(props) => (props.inRightColumn ? '' : 'none')};
   }
 `;
