@@ -56,7 +56,7 @@ const ContentsList = styled('ul')`
 
 const StyledContents = styled('div')`
   @media ${theme.screenSize.largeAndUp} {
-    display: ${(props) => (props.inRightColumn ? '' : 'none')};
+    display: ${(props) => (props.displayOnDesktopOnly ? '' : 'none')};
   }
 `;
 const ContentsListItem = ({ children, depth, id, isActive }) => (
@@ -78,14 +78,14 @@ const formatTextOptions = {
   literalEnableInline: true,
 };
 
-const Contents = ({ inRightColumn }) => {
+const Contents = ({ displayOnDesktopOnly }) => {
   const { headingNodes, activeHeadingId } = useContext(ContentsContext);
 
   if (headingNodes.length === 0) {
     return null;
   }
   return (
-    <StyledContents inRightColumn={inRightColumn}>
+    <StyledContents displayOnDesktopOnly={displayOnDesktopOnly}>
       <Label>On this page</Label>
       <ContentsList>
         {headingNodes.map(({ depth, id, title }, index) => (
@@ -96,6 +96,10 @@ const Contents = ({ inRightColumn }) => {
       </ContentsList>
     </StyledContents>
   );
+};
+
+Contents.propTypes = {
+  displayOnDesktopOnly: PropTypes.bool,
 };
 
 export default Contents;
