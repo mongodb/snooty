@@ -8,7 +8,6 @@ import CardGroup from './CardGroup';
 import Code from './Code';
 import Cond from './Cond';
 import Container from './Container';
-import Contents from './Contents';
 import CSSClass from './CSSClass';
 import CTA from './CTA';
 import DefinitionList from './DefinitionList';
@@ -78,7 +77,16 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
-const IGNORED_NAMES = new Set(['default-domain', 'raw', 'toctree', 'tabs-pillstrip', 'tabs-selector', 'ia', 'entry']);
+const IGNORED_NAMES = new Set([
+  'contents',
+  'default-domain',
+  'raw',
+  'toctree',
+  'tabs-pillstrip',
+  'tabs-selector',
+  'ia',
+  'entry',
+]);
 const IGNORED_TYPES = new Set(['comment', 'substitution_definition', 'inline_target', 'named_reference']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
 
@@ -117,7 +125,6 @@ const componentMap = {
   code: Code,
   cond: Cond,
   container: Container,
-  contents: Contents,
   cssclass: CSSClass,
   cta: CTA,
   definitionList: DefinitionList,
