@@ -56,7 +56,7 @@ const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
-  const { isSidebarEnabled } = useContext(SidenavContext);
+  const { isSidenavEnabled } = useContext(SidenavContext);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const [isTransparent, setIsTransparent] = useState(false);
   const imageHeight = 22;
@@ -81,7 +81,7 @@ const Navbar = () => {
 
   return (
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
-      {isSidebarEnabled && <SidebarMobileMenuButton />}
+      {isSidenavEnabled && <SidebarMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <a
           css={css`

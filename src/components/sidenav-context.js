@@ -1,18 +1,18 @@
 import React, { createContext, useState } from 'react';
 
 const SidenavContext = createContext({
-  isSidebarEnabled: true,
+  isSideNavEnabled: true,
   isCollapsed: true,
   setCollapsed: () => {},
 });
 
-const SidenavContextProvider = ({ children, isSidebarEnabled = true }) => {
+const SidenavContextProvider = ({ children, isSidenavEnabled = true }) => {
   const [isCollapsed, setCollapsed] = useState(true);
 
   return (
     <SidenavContext.Provider
       value={{
-        isSidebarEnabled,
+        isSidenavEnabled,
         isCollapsed,
         setCollapsed,
       }}
