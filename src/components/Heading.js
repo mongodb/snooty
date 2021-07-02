@@ -47,7 +47,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           </a>
         </HeadingTag>
       </ConditionalWrapper>
-      <Contents />
+      {isPageTitle && <Contents />}
     </>
   );
 };
