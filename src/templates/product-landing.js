@@ -10,15 +10,10 @@ import useScreenSize from '../hooks/useScreenSize.js';
 
 const Wrapper = styled('main')`
   color: ${uiColors.black};
-  margin: calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto;
+  margin: 0 auto ${theme.size.xlarge} auto;
   max-width: 1200px;
   width: 100%;
   overflow-x: scroll;
-  padding: 0 ${theme.size.large} 0 ${theme.size.xlarge};
-
-  @media ${theme.screenSize.upToMedium} {
-    padding: 0 ${theme.size.medium} 0 48px;
-  }
 
   h1,
   h2,
@@ -46,6 +41,7 @@ const Wrapper = styled('main')`
 
   section p {
     font-size: ${theme.fontSize.default};
+    grid-column: 2;
     letter-spacing: 0.5px;
     margin-bottom: ${theme.size.small};
     max-width: 500px;
@@ -61,37 +57,78 @@ const Wrapper = styled('main')`
   }
 
   & > section {
+    display: grid;
+    grid-template-columns: ${theme.size.xlarge} 1fr 1fr ${theme.size.xlarge};
+
+    @media ${theme.screenSize.upToLarge} {
+      grid-template-columns: 48px 1fr 48px;
+    }
+
     h1 {
       align-self: end;
+      grid-column: 2;
+      grid-row: 1;
     }
 
     & > img {
       display: block;
+      grid-column: 2;
       margin: auto;
       max-width: 600px;
       width: 100%;
-    }
 
-    ${'' /* Split the content into two columns on large screens. */}
-    @media ${theme.screenSize.largeAndUp} {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      & > h1,
-      & > .introduction {
-        grid-column: 1;
-      }
-
-      & > img {
-        grid-column: 2;
+      @media ${theme.screenSize.largeAndUp} {
+        grid-column: 3;
         grid-row: 1 / span 2;
       }
+    }
 
-      ${'' /* Sub-sections should take up the full width of the main section */}
-      & > section {
-        grid-column: 1 / -1;
+    & > .hero-img {
+      grid-column: 1 / -1;
+      grid-row: 1 / 3;
+      height: 310px;
+      margin-bottom: ${theme.size.large};
+      max-width: 100%;
+      object-fit: cover;
+      z-index: -1;
+
+      @media ${theme.screenSize.upToMedium} {
+        object-position: 100%;
+        grid-row: unset;
+      }
+
+      @media ${theme.screenSize.upToSmall} {
+        grid-row: unset;
+        height: 200px;
       }
     }
+
+    & > .introduction {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    /* Sub-sections should take up the full width of the main section */
+    & > section {
+      grid-column: 2 / -2;
+      overflow: hidden;
+    }
+  }
+`;
+
+const ContentContainer = styled('div')`
+  margin-top: ${theme.navbar.height};
+
+  @media ${theme.screenSize.upToMedium} {
+    margin-top: calc(
+      ${theme.bannerContent.enabled ? `${theme.navbar.bannerHeight.medium} +` : ''} ${theme.navbar.baseHeight}
+    );
+  }
+
+  @media not all and (max-width: 1600px) {
+    margin-top: calc(
+      ${theme.bannerContent.enabled && `${theme.navbar.bannerHeight.large} +`} ${theme.navbar.baseHeight}
+    );
   }
 `;
 
@@ -116,7 +153,7 @@ const ProductLanding = ({
   }, [isTabletOrMobile]);
 
   return (
-    <div className="content">
+    <ContentContainer className="content">
       {(!isBrowser || showLeftColumn) && (
         <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
           <Sidebar
@@ -135,7 +172,7 @@ const ProductLanding = ({
         )}
         <Wrapper>{children}</Wrapper>
       </>
-    </div>
+    </ContentContainer>
   );
 };
 
