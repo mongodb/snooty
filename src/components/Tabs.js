@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import ComponentFactory from './ComponentFactory';
@@ -66,6 +67,7 @@ const landingTabStyling = css`
 
 const getTabStyling = ({ isProductLanding }) => css`
   ${isProductLanding && landingTabStyling}
+  margin-top: 24px;
 `;
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
