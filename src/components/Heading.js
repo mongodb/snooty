@@ -23,29 +23,31 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
 
   return (
-    <ConditionalWrapper
-      condition={shouldShowMobileHeader}
-      wrapper={(children) => (
-        <>
-          <HeadingContainer stackVertically={isMobile}>
-            {children}
-            <ChildContainer isStacked={isMobile}>
-              {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
-            </ChildContainer>
-          </HeadingContainer>
-          <Contents />
-        </>
-      )}
-    >
-      <HeadingTag className="contains-headerlink" id={id}>
-        {nodeData.children.map((element, index) => {
-          return <ComponentFactory {...rest} nodeData={element} key={index} />;
-        })}
-        <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
-          ¶
-        </a>
-      </HeadingTag>
-    </ConditionalWrapper>
+    <>
+      <ConditionalWrapper
+        condition={shouldShowMobileHeader}
+        wrapper={(children) => (
+          <>
+            <HeadingContainer stackVertically={isMobile}>
+              {children}
+              <ChildContainer isStacked={isMobile}>
+                {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
+              </ChildContainer>
+            </HeadingContainer>
+          </>
+        )}
+      >
+        <HeadingTag className="contains-headerlink" id={id}>
+          {nodeData.children.map((element, index) => {
+            return <ComponentFactory {...rest} nodeData={element} key={index} />;
+          })}
+          <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
+            ¶
+          </a>
+        </HeadingTag>
+      </ConditionalWrapper>
+      <Contents />
+    </>
   );
 };
 

@@ -78,12 +78,12 @@ import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = new Set([
+  'contents',
   'default-domain',
   'raw',
   'toctree',
   'tabs-pillstrip',
   'tabs-selector',
-  'contents',
   'ia',
   'entry',
 ]);
