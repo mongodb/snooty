@@ -42,7 +42,7 @@ const cardRefStyling = css`
     font-size: ${theme.fontSize.small} !important;
     font-weight: 600;
     margin-bottom: ${theme.size.small};
-    margin-right: ${theme.size.small};
+    margin-right: ${theme.size.tiny};
     padding: ${theme.size.tiny};
 
     &:after {
@@ -59,7 +59,7 @@ const H4 = styled('h4')`
 
 const CTA = styled('p')`
   font-weight: bold;
-  margin-top: auto;
+  margin-top: ${theme.size.default};
   & > a:hover {
     color: ${uiColors.blue.dark2};
   }
@@ -125,7 +125,6 @@ const Card = ({
             }
           : undefined
       }
-      url={url}
     >
       {icon && (
         <ConditionalWrapper
