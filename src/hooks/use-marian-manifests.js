@@ -6,7 +6,7 @@ export const useMarianManifests = () => {
 
   useEffect(() => {
     async function fetchManifests() {
-      const result = await fetch('https://marian.mongodb.com/status');
+      const result = await fetch('https://docs-search-transport.mongodb.com/status');
       const jsonResult = await result.json();
       setFilters(parseMarianManifests(jsonResult.manifests));
     }
