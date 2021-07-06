@@ -3,6 +3,7 @@
 exports[`renders correctly 1`] = `
 <StyledCard
   onClick={[Function]}
+  url="https://university.mongodb.com/courses/M001/about"
 >
   <ConditionalWrapper
     wrapper={[Function]}
