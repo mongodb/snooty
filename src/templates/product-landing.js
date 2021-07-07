@@ -8,10 +8,11 @@ import Sidebar from '../components/Sidebar';
 import style from '../styles/navigation.module.css';
 import useScreenSize from '../hooks/useScreenSize.js';
 
+const CONTENT_MAX_WIDTH = 1200;
+
 const Wrapper = styled('main')`
   color: ${uiColors.black};
   margin: 0 auto ${theme.size.xlarge} auto;
-  max-width: 1200px;
   width: 100%;
   overflow-x: scroll;
 
@@ -58,7 +59,13 @@ const Wrapper = styled('main')`
 
   & > section {
     display: grid;
-    grid-template-columns: ${theme.size.xlarge} 1fr 1fr ${theme.size.xlarge};
+    // Create columns such that the 2 outer ones act like margins.
+    // This will allow the hero image to span across the whole content while still being a part
+    // of the DOM flow.
+    grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(2, minmax(0, ${CONTENT_MAX_WIDTH / 2}px)) minmax(
+        ${theme.size.xlarge},
+        1fr
+      );
 
     @media ${theme.screenSize.upToLarge} {
       grid-template-columns: 48px 1fr 48px;
