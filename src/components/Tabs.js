@@ -66,6 +66,7 @@ const landingTabStyling = css`
 
 const getTabStyling = ({ isProductLanding }) => css`
   ${isProductLanding && landingTabStyling}
+  margin-top: 24px;
 `;
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
