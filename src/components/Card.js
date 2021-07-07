@@ -22,7 +22,7 @@ const StyledCard = styled(LeafyGreenCard)`
   }
 
   &:hover {
-    box-shadow: ${({ url }) => (url ? `` : `0 4px 10px -4px rgba(6,22,33,0.3)`)};
+    box-shadow: ${({ url }) => (!url ? `` : `0 4px 10px -4px rgba(6,22,33,0.3)`)};
   }
 `;
 
