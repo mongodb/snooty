@@ -115,13 +115,15 @@ const Wrapper = styled('main')`
       grid-row: 2;
     }
 
-    // Sub-sections should use all but the outer columns. Card-groups may
-    // occasionally not be nested within sections (see: Realm PLP)
-    // but should be constrained to the inner columns regardless
-    & > section,
-    .card-group {
+    // Sub-sections should use all but the outer columns.
+    & > section {
       grid-column: 2 / -2 !important;
       overflow: hidden;
+    }
+    // Card-groups may occasionally not be nested within sections (see: Realm
+    // PLP) but should be constrained to the inner columns regardless
+    .card-group {
+      grid-column: 2 / -2 !important;
     }
   }
 `;
