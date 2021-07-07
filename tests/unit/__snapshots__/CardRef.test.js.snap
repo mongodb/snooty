@@ -1,0 +1,3386 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with url 1`] = `
+.emotion-6 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px;
+}
+
+.emotion-4 p:last-of-type {
+  margin-bottom: 0;
+}
+
+.emotion-4:hover {
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+}
+
+.emotion-0 {
+  width: 24px;
+}
+
+.emotion-2 {
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  margin: 24px 0 8px 0;
+}
+
+<Card
+  nodeData={
+    Object {
+      "argument": Array [],
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 50,
+                },
+              },
+              "type": "text",
+              "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 50,
+            },
+          },
+          "type": "paragraph",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Android",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/android",
+                "std-label-android-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "android-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "iOS",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/ios",
+                "std-label-ios-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "ios-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": ".Net",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/dotnet",
+                "std-label-dotnet-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "dotnet-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Web",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "web",
+                "std-label-web-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "web-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "React Native",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/react-native",
+                "std-label-react-native-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "react-native-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Node.js",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/node",
+                "std-label-node-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "node-intro",
+              "type": "ref_role",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 52,
+            },
+          },
+          "type": "paragraph",
+        },
+      ],
+      "domain": "mongodb",
+      "name": "card",
+      "options": Object {
+        "checksum": "6ab1b6f350784c7f0de16ea79adb40b6c08ee0482a508d7b6a274597d4be6d7f",
+        "headline": "Realm SDKs",
+        "icon": "/images/icons/realm_sdk.svg",
+      },
+      "position": Object {
+        "start": Object {
+          "line": 46,
+        },
+      },
+      "type": "directive",
+    }
+  }
+  url="testdata.com"
+>
+  <StyledCard>
+    <Card
+      className="emotion-4 emotion-5"
+    >
+      <Box
+        className="emotion-4 emotion-5 emotion-6"
+      >
+        <div
+          className="emotion-4 emotion-5 emotion-6"
+        >
+          <ConditionalWrapper
+            wrapper={[Function]}
+          >
+            <CardIcon
+              src="/images/icons/realm_sdk.svg"
+            >
+              <img
+                className="emotion-0 emotion-1"
+                src="/images/icons/realm_sdk.svg"
+              />
+            </CardIcon>
+          </ConditionalWrapper>
+          <ConditionalWrapper
+            wrapper={[Function]}
+          >
+            <H4>
+              <h4
+                className="emotion-2 emotion-3"
+              >
+                Realm SDKs
+              </h4>
+            </H4>
+            <ComponentFactory
+              key="0"
+              nodeData={
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 50,
+                        },
+                      },
+                      "type": "text",
+                      "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 50,
+                    },
+                  },
+                  "type": "paragraph",
+                }
+              }
+            >
+              <Paragraph
+                nodeData={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 50,
+                          },
+                        },
+                        "type": "text",
+                        "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                      },
+                    ],
+                    "position": Object {
+                      "start": Object {
+                        "line": 50,
+                      },
+                    },
+                    "type": "paragraph",
+                  }
+                }
+              >
+                <p>
+                  <ComponentFactory
+                    key="0"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 50,
+                          },
+                        },
+                        "type": "text",
+                        "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 50,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                        }
+                      }
+                    >
+                      Use platform-specific libraries to include and work with the Realm database in your application.
+                    </Text>
+                  </ComponentFactory>
+                </p>
+              </Paragraph>
+            </ComponentFactory>
+            <ComponentFactory
+              key="1"
+              nodeData={
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Android",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/android",
+                        "std-label-android-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "android-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "iOS",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/ios",
+                        "std-label-ios-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "ios-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": ".Net",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/dotnet",
+                        "std-label-dotnet-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "dotnet-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Web",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "web",
+                        "std-label-web-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "web-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "React Native",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/react-native",
+                        "std-label-react-native-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "react-native-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Node.js",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/node",
+                        "std-label-node-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "node-intro",
+                      "type": "ref_role",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "paragraph",
+                }
+              }
+            >
+              <Paragraph
+                nodeData={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Android",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/android",
+                          "std-label-android-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "android-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "iOS",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/ios",
+                          "std-label-ios-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "ios-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": ".Net",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/dotnet",
+                          "std-label-dotnet-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "dotnet-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Web",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "web",
+                          "std-label-web-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "web-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "React Native",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/react-native",
+                          "std-label-react-native-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "react-native-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Node.js",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/node",
+                          "std-label-node-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "node-intro",
+                        "type": "ref_role",
+                      },
+                    ],
+                    "position": Object {
+                      "start": Object {
+                        "line": 52,
+                      },
+                    },
+                    "type": "paragraph",
+                  }
+                }
+              >
+                <p>
+                  <ComponentFactory
+                    key="0"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Android",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/android",
+                          "std-label-android-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "android-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "Android",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/android",
+                            "std-label-android-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "android-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/android/#std-label-android-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/android/#std-label-android-intro"
+                        >
+                          <a
+                            href="/sdk/android/#std-label-android-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "Android",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "Android",
+                                  }
+                                }
+                              >
+                                Android
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="1"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="2"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "iOS",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/ios",
+                          "std-label-ios-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "ios-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "iOS",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/ios",
+                            "std-label-ios-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "ios-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/ios/#std-label-ios-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/ios/#std-label-ios-intro"
+                        >
+                          <a
+                            href="/sdk/ios/#std-label-ios-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "iOS",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "iOS",
+                                  }
+                                }
+                              >
+                                iOS
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="3"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="4"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": ".Net",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/dotnet",
+                          "std-label-dotnet-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "dotnet-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": ".Net",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/dotnet",
+                            "std-label-dotnet-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "dotnet-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/dotnet/#std-label-dotnet-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/dotnet/#std-label-dotnet-intro"
+                        >
+                          <a
+                            href="/sdk/dotnet/#std-label-dotnet-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": ".Net",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": ".Net",
+                                  }
+                                }
+                              >
+                                .Net
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="5"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="6"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Web",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "web",
+                          "std-label-web-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "web-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "Web",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "web",
+                            "std-label-web-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "web-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="web/#std-label-web-intro"
+                      >
+                        <mockConstructor
+                          to="/web/#std-label-web-intro"
+                        >
+                          <a
+                            href="/web/#std-label-web-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "Web",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "Web",
+                                  }
+                                }
+                              >
+                                Web
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="7"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="8"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "React Native",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/react-native",
+                          "std-label-react-native-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "react-native-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "React Native",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/react-native",
+                            "std-label-react-native-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "react-native-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/react-native/#std-label-react-native-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/react-native/#std-label-react-native-intro"
+                        >
+                          <a
+                            href="/sdk/react-native/#std-label-react-native-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "React Native",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "React Native",
+                                  }
+                                }
+                              >
+                                React Native
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="9"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="10"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Node.js",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/node",
+                          "std-label-node-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "node-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "Node.js",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/node",
+                            "std-label-node-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "node-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/node/#std-label-node-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/node/#std-label-node-intro"
+                        >
+                          <a
+                            href="/sdk/node/#std-label-node-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "Node.js",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "Node.js",
+                                  }
+                                }
+                              >
+                                Node.js
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                </p>
+              </Paragraph>
+            </ComponentFactory>
+          </ConditionalWrapper>
+        </div>
+      </Box>
+    </Card>
+  </StyledCard>
+</Card>
+`;
+
+exports[`renders correctly without url 1`] = `
+.emotion-6 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px;
+}
+
+.emotion-4 p:last-of-type {
+  margin-bottom: 0;
+}
+
+.emotion-4:hover {
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+}
+
+.emotion-0 {
+  width: 24px;
+}
+
+.emotion-2 {
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  margin: 24px 0 8px 0;
+}
+
+<Card
+  nodeData={
+    Object {
+      "argument": Array [],
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 50,
+                },
+              },
+              "type": "text",
+              "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 50,
+            },
+          },
+          "type": "paragraph",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Android",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/android",
+                "std-label-android-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "android-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "iOS",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/ios",
+                "std-label-ios-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "ios-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": ".Net",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/dotnet",
+                "std-label-dotnet-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "dotnet-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Web",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "web",
+                "std-label-web-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "web-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "React Native",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/react-native",
+                "std-label-react-native-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "react-native-intro",
+              "type": "ref_role",
+            },
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "type": "text",
+              "value": "
+",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "text",
+                  "value": "Node.js",
+                },
+              ],
+              "domain": "std",
+              "fileid": Array [
+                "sdk/node",
+                "std-label-node-intro",
+              ],
+              "flag": "",
+              "name": "label",
+              "position": Object {
+                "start": Object {
+                  "line": 52,
+                },
+              },
+              "target": "node-intro",
+              "type": "ref_role",
+            },
+          ],
+          "position": Object {
+            "start": Object {
+              "line": 52,
+            },
+          },
+          "type": "paragraph",
+        },
+      ],
+      "domain": "mongodb",
+      "name": "card",
+      "options": Object {
+        "checksum": "6ab1b6f350784c7f0de16ea79adb40b6c08ee0482a508d7b6a274597d4be6d7f",
+        "headline": "Realm SDKs",
+        "icon": "/images/icons/realm_sdk.svg",
+      },
+      "position": Object {
+        "start": Object {
+          "line": 46,
+        },
+      },
+      "type": "directive",
+    }
+  }
+>
+  <StyledCard>
+    <Card
+      className="emotion-4 emotion-5"
+    >
+      <Box
+        className="emotion-4 emotion-5 emotion-6"
+      >
+        <div
+          className="emotion-4 emotion-5 emotion-6"
+        >
+          <ConditionalWrapper
+            wrapper={[Function]}
+          >
+            <CardIcon
+              src="/images/icons/realm_sdk.svg"
+            >
+              <img
+                className="emotion-0 emotion-1"
+                src="/images/icons/realm_sdk.svg"
+              />
+            </CardIcon>
+          </ConditionalWrapper>
+          <ConditionalWrapper
+            wrapper={[Function]}
+          >
+            <H4>
+              <h4
+                className="emotion-2 emotion-3"
+              >
+                Realm SDKs
+              </h4>
+            </H4>
+            <ComponentFactory
+              key="0"
+              nodeData={
+                Object {
+                  "children": Array [
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 50,
+                        },
+                      },
+                      "type": "text",
+                      "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 50,
+                    },
+                  },
+                  "type": "paragraph",
+                }
+              }
+            >
+              <Paragraph
+                nodeData={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 50,
+                          },
+                        },
+                        "type": "text",
+                        "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                      },
+                    ],
+                    "position": Object {
+                      "start": Object {
+                        "line": 50,
+                      },
+                    },
+                    "type": "paragraph",
+                  }
+                }
+              >
+                <p>
+                  <ComponentFactory
+                    key="0"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 50,
+                          },
+                        },
+                        "type": "text",
+                        "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 50,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Use platform-specific libraries to include and work with the Realm database in your application.",
+                        }
+                      }
+                    >
+                      Use platform-specific libraries to include and work with the Realm database in your application.
+                    </Text>
+                  </ComponentFactory>
+                </p>
+              </Paragraph>
+            </ComponentFactory>
+            <ComponentFactory
+              key="1"
+              nodeData={
+                Object {
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Android",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/android",
+                        "std-label-android-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "android-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "iOS",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/ios",
+                        "std-label-ios-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "ios-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": ".Net",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/dotnet",
+                        "std-label-dotnet-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "dotnet-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Web",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "web",
+                        "std-label-web-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "web-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "React Native",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/react-native",
+                        "std-label-react-native-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "react-native-intro",
+                      "type": "ref_role",
+                    },
+                    Object {
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "type": "text",
+                      "value": "
+",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "Node.js",
+                        },
+                      ],
+                      "domain": "std",
+                      "fileid": Array [
+                        "sdk/node",
+                        "std-label-node-intro",
+                      ],
+                      "flag": "",
+                      "name": "label",
+                      "position": Object {
+                        "start": Object {
+                          "line": 52,
+                        },
+                      },
+                      "target": "node-intro",
+                      "type": "ref_role",
+                    },
+                  ],
+                  "position": Object {
+                    "start": Object {
+                      "line": 52,
+                    },
+                  },
+                  "type": "paragraph",
+                }
+              }
+            >
+              <Paragraph
+                nodeData={
+                  Object {
+                    "children": Array [
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Android",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/android",
+                          "std-label-android-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "android-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "iOS",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/ios",
+                          "std-label-ios-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "ios-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": ".Net",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/dotnet",
+                          "std-label-dotnet-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "dotnet-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Web",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "web",
+                          "std-label-web-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "web-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "React Native",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/react-native",
+                          "std-label-react-native-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "react-native-intro",
+                        "type": "ref_role",
+                      },
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      },
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Node.js",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/node",
+                          "std-label-node-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "node-intro",
+                        "type": "ref_role",
+                      },
+                    ],
+                    "position": Object {
+                      "start": Object {
+                        "line": 52,
+                      },
+                    },
+                    "type": "paragraph",
+                  }
+                }
+              >
+                <p>
+                  <ComponentFactory
+                    key="0"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Android",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/android",
+                          "std-label-android-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "android-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "Android",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/android",
+                            "std-label-android-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "android-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/android/#std-label-android-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/android/#std-label-android-intro"
+                        >
+                          <a
+                            href="/sdk/android/#std-label-android-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "Android",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "Android",
+                                  }
+                                }
+                              >
+                                Android
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="1"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="2"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "iOS",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/ios",
+                          "std-label-ios-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "ios-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "iOS",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/ios",
+                            "std-label-ios-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "ios-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/ios/#std-label-ios-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/ios/#std-label-ios-intro"
+                        >
+                          <a
+                            href="/sdk/ios/#std-label-ios-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "iOS",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "iOS",
+                                  }
+                                }
+                              >
+                                iOS
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="3"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="4"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": ".Net",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/dotnet",
+                          "std-label-dotnet-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "dotnet-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": ".Net",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/dotnet",
+                            "std-label-dotnet-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "dotnet-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/dotnet/#std-label-dotnet-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/dotnet/#std-label-dotnet-intro"
+                        >
+                          <a
+                            href="/sdk/dotnet/#std-label-dotnet-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": ".Net",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": ".Net",
+                                  }
+                                }
+                              >
+                                .Net
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="5"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="6"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Web",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "web",
+                          "std-label-web-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "web-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "Web",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "web",
+                            "std-label-web-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "web-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="web/#std-label-web-intro"
+                      >
+                        <mockConstructor
+                          to="/web/#std-label-web-intro"
+                        >
+                          <a
+                            href="/web/#std-label-web-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "Web",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "Web",
+                                  }
+                                }
+                              >
+                                Web
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="7"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="8"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "React Native",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/react-native",
+                          "std-label-react-native-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "react-native-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "React Native",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/react-native",
+                            "std-label-react-native-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "react-native-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/react-native/#std-label-react-native-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/react-native/#std-label-react-native-intro"
+                        >
+                          <a
+                            href="/sdk/react-native/#std-label-react-native-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "React Native",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "React Native",
+                                  }
+                                }
+                              >
+                                React Native
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="9"
+                    nodeData={
+                      Object {
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "type": "text",
+                        "value": "
+",
+                      }
+                    }
+                  >
+                    <Text
+                      nodeData={
+                        Object {
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "type": "text",
+                          "value": "
+",
+                        }
+                      }
+                    >
+                      
+
+                    </Text>
+                  </ComponentFactory>
+                  <ComponentFactory
+                    key="10"
+                    nodeData={
+                      Object {
+                        "children": Array [
+                          Object {
+                            "position": Object {
+                              "start": Object {
+                                "line": 52,
+                              },
+                            },
+                            "type": "text",
+                            "value": "Node.js",
+                          },
+                        ],
+                        "domain": "std",
+                        "fileid": Array [
+                          "sdk/node",
+                          "std-label-node-intro",
+                        ],
+                        "flag": "",
+                        "name": "label",
+                        "position": Object {
+                          "start": Object {
+                            "line": 52,
+                          },
+                        },
+                        "target": "node-intro",
+                        "type": "ref_role",
+                      }
+                    }
+                  >
+                    <RefRole
+                      nodeData={
+                        Object {
+                          "children": Array [
+                            Object {
+                              "position": Object {
+                                "start": Object {
+                                  "line": 52,
+                                },
+                              },
+                              "type": "text",
+                              "value": "Node.js",
+                            },
+                          ],
+                          "domain": "std",
+                          "fileid": Array [
+                            "sdk/node",
+                            "std-label-node-intro",
+                          ],
+                          "flag": "",
+                          "name": "label",
+                          "position": Object {
+                            "start": Object {
+                              "line": 52,
+                            },
+                          },
+                          "target": "node-intro",
+                          "type": "ref_role",
+                        }
+                      }
+                    >
+                      <Link
+                        to="sdk/node/#std-label-node-intro"
+                      >
+                        <mockConstructor
+                          to="/sdk/node/#std-label-node-intro"
+                        >
+                          <a
+                            href="/sdk/node/#std-label-node-intro"
+                          >
+                            <ComponentFactory
+                              key="0"
+                              nodeData={
+                                Object {
+                                  "position": Object {
+                                    "start": Object {
+                                      "line": 52,
+                                    },
+                                  },
+                                  "type": "text",
+                                  "value": "Node.js",
+                                }
+                              }
+                            >
+                              <Text
+                                nodeData={
+                                  Object {
+                                    "position": Object {
+                                      "start": Object {
+                                        "line": 52,
+                                      },
+                                    },
+                                    "type": "text",
+                                    "value": "Node.js",
+                                  }
+                                }
+                              >
+                                Node.js
+                              </Text>
+                            </ComponentFactory>
+                          </a>
+                        </mockConstructor>
+                      </Link>
+                    </RefRole>
+                  </ComponentFactory>
+                </p>
+              </Paragraph>
+            </ComponentFactory>
+          </ConditionalWrapper>
+        </div>
+      </Box>
+    </Card>
+  </StyledCard>
+</Card>
+`;

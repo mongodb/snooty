@@ -41,7 +41,7 @@ const cardRefStyling = css`
     display: inline-block;
     font-size: ${theme.fontSize.small} !important;
     font-weight: 600;
-    margin-bottom: ${theme.size.small};
+    margin-bottom: ${theme.size.tiny};
     margin-right: ${theme.size.tiny};
     padding: ${theme.size.tiny};
 
@@ -59,7 +59,7 @@ const H4 = styled('h4')`
 
 const CTA = styled('p')`
   font-weight: bold;
-  margin-top: ${theme.size.default};
+  margin-top: ${theme.size.small};
   & > a:hover {
     color: ${uiColors.blue.dark2};
   }
