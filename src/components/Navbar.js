@@ -12,6 +12,10 @@ import Searchbar from './Searchbar';
 import ConditionalWrapper from './ConditionalWrapper';
 import { theme } from '../theme/docsTheme';
 
+import { loginWithRedirect } from '../clients/auth';
+
+import Button from '@leafygreen-ui/button';
+
 const getActiveSection = (slug, urlItems) => {
   const urlMapping = Object.entries(urlItems).find(([, value]) => value.includes(slug));
   if (urlMapping) {
@@ -140,37 +144,39 @@ const Navbar = () => {
   }, [isSearchbarDefaultExpanded]);
 
   return (
-    <ConditionalWrapper
-      condition={theme.bannerContent.enabled}
-      wrapper={(children) => (
-        <div
-          css={css`
-            position: fixed;
-            top: 0;
-          `}
-        >
-          <Banner {...theme.bannerContent} />
-          {children}
-        </div>
-      )}
-    >
-      <NavbarContainer
-        isExpanded={isSearchbarExpanded}
-        shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
-        tabIndex="0"
-        id="navbar"
-        className="navbar"
-        data-navprops={navprops}
-      />
-      <Searchbar
-        getResultsFromJSON={getSearchbarResultsFromJSON}
-        isExpanded={isSearchbarExpanded}
-        setIsExpanded={onSearchbarExpand}
-        searchParamsToURL={searchParamsToURL}
-        // Autofocus the searchbar when the user expands only so the user can start typing
-        shouldAutofocus={!isSearchbarDefaultExpanded}
-      />
-    </ConditionalWrapper>
+    <>
+      <ConditionalWrapper
+        condition={theme.bannerContent.enabled}
+        wrapper={(children) => (
+          <div
+            css={css`
+              position: fixed;
+              top: 0;
+            `}
+          >
+            {children}
+          </div>
+        )}
+      >
+        <NavbarContainer
+          isExpanded={isSearchbarExpanded}
+          shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
+          tabIndex="0"
+          id="navbar"
+          className="navbar"
+          data-navprops={navprops}
+        />
+        <Searchbar
+          getResultsFromJSON={getSearchbarResultsFromJSON}
+          isExpanded={isSearchbarExpanded}
+          setIsExpanded={onSearchbarExpand}
+          searchParamsToURL={searchParamsToURL}
+          // Autofocus the searchbar when the user expands only so the user can start typing
+          shouldAutofocus={!isSearchbarDefaultExpanded}
+        />
+        <Button onClick={loginWithRedirect}>Login</Button>
+      </ConditionalWrapper>
+    </>
   );
 };
 
