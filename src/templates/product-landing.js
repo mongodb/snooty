@@ -115,10 +115,15 @@ const Wrapper = styled('main')`
       grid-row: 2;
     }
 
-    /* Sub-sections should take up the full width of the main section */
+    // Sub-sections should use all but the outer columns.
     & > section {
-      grid-column: 2 / -2;
+      grid-column: 2 / -2 !important;
       overflow: hidden;
+    }
+    // Card-groups may occasionally not be nested within sections (see: Realm
+    // PLP) but should be constrained to the inner columns regardless
+    .card-group {
+      grid-column: 2 / -2 !important;
     }
   }
 `;

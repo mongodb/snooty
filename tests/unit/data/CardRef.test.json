@@ -1,0 +1,384 @@
+{
+    "type": "directive",
+    "position":
+    {
+        "start":
+        {
+            "line": 42
+        }
+    },
+    "children":
+    [
+        {
+            "type": "directive",
+            "position":
+            {
+                "start":
+                {
+                    "line": 46
+                }
+            },
+            "children":
+            [
+                {
+                    "type": "paragraph",
+                    "position":
+                    {
+                        "start":
+                        {
+                            "line": 50
+                        }
+                    },
+                    "children":
+                    [
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 50
+                                }
+                            },
+                            "value": "Use platform-specific libraries to include and work with the Realm database in your application."
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "position":
+                    {
+                        "start":
+                        {
+                            "line": 52
+                        }
+                    },
+                    "children":
+                    [
+                        {
+                            "type": "ref_role",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "children":
+                            [
+                                {
+                                    "type": "text",
+                                    "position":
+                                    {
+                                        "start":
+                                        {
+                                            "line": 52
+                                        }
+                                    },
+                                    "value": "Android"
+                                }
+                            ],
+                            "domain": "std",
+                            "name": "label",
+                            "target": "android-intro",
+                            "flag": "",
+                            "fileid":
+                            [
+                                "sdk/android",
+                                "std-label-android-intro"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "value": "\n"
+                        },
+                        {
+                            "type": "ref_role",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "children":
+                            [
+                                {
+                                    "type": "text",
+                                    "position":
+                                    {
+                                        "start":
+                                        {
+                                            "line": 52
+                                        }
+                                    },
+                                    "value": "iOS"
+                                }
+                            ],
+                            "domain": "std",
+                            "name": "label",
+                            "target": "ios-intro",
+                            "flag": "",
+                            "fileid":
+                            [
+                                "sdk/ios",
+                                "std-label-ios-intro"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "value": "\n"
+                        },
+                        {
+                            "type": "ref_role",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "children":
+                            [
+                                {
+                                    "type": "text",
+                                    "position":
+                                    {
+                                        "start":
+                                        {
+                                            "line": 52
+                                        }
+                                    },
+                                    "value": ".Net"
+                                }
+                            ],
+                            "domain": "std",
+                            "name": "label",
+                            "target": "dotnet-intro",
+                            "flag": "",
+                            "fileid":
+                            [
+                                "sdk/dotnet",
+                                "std-label-dotnet-intro"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "value": "\n"
+                        },
+                        {
+                            "type": "ref_role",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "children":
+                            [
+                                {
+                                    "type": "text",
+                                    "position":
+                                    {
+                                        "start":
+                                        {
+                                            "line": 52
+                                        }
+                                    },
+                                    "value": "Web"
+                                }
+                            ],
+                            "domain": "std",
+                            "name": "label",
+                            "target": "web-intro",
+                            "flag": "",
+                            "fileid":
+                            [
+                                "web",
+                                "std-label-web-intro"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "value": "\n"
+                        },
+                        {
+                            "type": "ref_role",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "children":
+                            [
+                                {
+                                    "type": "text",
+                                    "position":
+                                    {
+                                        "start":
+                                        {
+                                            "line": 52
+                                        }
+                                    },
+                                    "value": "React Native"
+                                }
+                            ],
+                            "domain": "std",
+                            "name": "label",
+                            "target": "react-native-intro",
+                            "flag": "",
+                            "fileid":
+                            [
+                                "sdk/react-native",
+                                "std-label-react-native-intro"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "value": "\n"
+                        },
+                        {
+                            "type": "ref_role",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 52
+                                }
+                            },
+                            "children":
+                            [
+                                {
+                                    "type": "text",
+                                    "position":
+                                    {
+                                        "start":
+                                        {
+                                            "line": 52
+                                        }
+                                    },
+                                    "value": "Node.js"
+                                }
+                            ],
+                            "domain": "std",
+                            "name": "label",
+                            "target": "node-intro",
+                            "flag": "",
+                            "fileid":
+                            [
+                                "sdk/node",
+                                "std-label-node-intro"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "domain": "mongodb",
+            "name": "card",
+            "argument":
+            [],
+            "options":
+            {
+                "headline": "Realm SDKs",
+                "icon": "/images/icons/realm_sdk.svg",
+                "checksum": "6ab1b6f350784c7f0de16ea79adb40b6c08ee0482a508d7b6a274597d4be6d7f"
+            }
+        },
+        {
+            "type": "directive",
+            "position":
+            {
+                "start":
+                {
+                    "line": 59
+                }
+            },
+            "children":
+            [
+                {
+                    "type": "paragraph",
+                    "position":
+                    {
+                        "start":
+                        {
+                            "line": 65
+                        }
+                    },
+                    "children":
+                    [
+                        {
+                            "type": "text",
+                            "position":
+                            {
+                                "start":
+                                {
+                                    "line": 65
+                                }
+                            },
+                            "value": "Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas."
+                        }
+                    ]
+                }
+            ],
+            "domain": "mongodb",
+            "name": "card",
+            "argument":
+            [],
+            "options":
+            {
+                "cta": "Learn more about MongoDB Realm Application Services",
+                "headline": "MongoDB Realm",
+                "icon": "/images/icons/realm.svg",
+                "url": "https://docs.mongodb.com/realm/services/",
+                "checksum": "a75dde0c71beef8015b5546c7402cb9f9f1e8738823e90617fd7582940a832a0"
+            }
+        }
+    ],
+    "domain": "mongodb",
+    "name": "card-group",
+    "argument":
+    [],
+    "options":
+    {
+        "columns": 3,
+        "style": "extra-compact"
+    }
+}

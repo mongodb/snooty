@@ -43,7 +43,7 @@ const StyledGrid = styled('div')`
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
   margin: ${theme.size.large} 0;
 
-  @media ${theme.screenSize.upToLarge} {
+  @media ${theme.screenSize.upToXLarge} {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -71,7 +71,7 @@ const CardGroup = ({
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
   return (
-    <StyledGrid columns={columns} noMargin={true} isCarousel={isCarousel}>
+    <StyledGrid className="card-group" columns={columns} noMargin={true} isCarousel={isCarousel}>
       {children.map((child, i) => (
         <ComponentFactory {...rest} key={i} nodeData={child} isCompact={isCompact} isExtraCompact={isExtraCompact} />
       ))}
