@@ -51,6 +51,7 @@ const landingTabStyling = css`
   display: grid;
   column-gap: ${theme.size.medium};
   grid-template-columns: repeat(2, 1fr);
+  margin-top: unset !important;
 
   img {
     border-radius: ${theme.size.small};
