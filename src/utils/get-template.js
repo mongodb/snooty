@@ -1,4 +1,14 @@
-import { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing, OpenAPITemplate, NotFound } from '../templates';
+import {
+  Blank,
+  Document,
+  DriversIndex,
+  Guide,
+  GuidesIndex,
+  Landing,
+  OpenAPITemplate,
+  ProductLanding,
+  NotFound,
+} from '../templates';
 
 const getTemplate = (project, slug, templateName) => {
   let template;
@@ -9,6 +19,10 @@ const getTemplate = (project, slug, templateName) => {
       break;
     case 'landing':
       template = Landing;
+      sidebar = true;
+      break;
+    case 'product-landing':
+      template = ProductLanding;
       sidebar = true;
       break;
     case 'openapi':

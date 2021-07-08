@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from '../../src/components/Card';
+import Button from '../../src/components/Button';
 
 // data for this component
-import mockData from './data/Card.test.json';
+import mockData from './data/Button.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<Card nodeData={mockData} />);
+  const tree = shallow(<Button nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });
