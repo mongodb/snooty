@@ -1,117 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div
-  className="sequence-block"
->
-  <div
-    className="bullet-block"
-  >
-    <div
-      className="sequence-step"
-    >
-      1
-    </div>
-  </div>
-  <div
-    className="section"
-  >
+<LandingStep>
+  <Circle>
+    <StepNumber />
+  </Circle>
+  <h2>
     <ComponentFactory
       key="0"
       nodeData={
         Object {
-          "children": Array [
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 0,
-                    },
-                  },
-                  "type": "text",
-                  "value": "Connect to your MongoDB instance",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "heading",
-            },
-            Object {
-              "argument": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 0,
-                    },
-                  },
-                  "type": "text",
-                  "value": "/includes/drivers_whitelist.rst",
-                },
-              ],
-              "children": Array [
-                Object {
-                  "children": Array [],
-                  "position": Object {
-                    "start": Object {
-                      "line": 0,
-                    },
-                  },
-                  "type": "FixedTextElement",
-                },
-              ],
-              "name": "include",
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "directive",
-            },
-            Object {
-              "argument": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 2,
-                    },
-                  },
-                  "type": "text",
-                  "value": "/includes/drivers_connect.rst",
-                },
-              ],
-              "children": Array [
-                Object {
-                  "children": Array [],
-                  "position": Object {
-                    "start": Object {
-                      "line": 2,
-                    },
-                  },
-                  "type": "FixedTextElement",
-                },
-              ],
-              "name": "include",
-              "position": Object {
-                "start": Object {
-                  "line": 2,
-                },
-              },
-              "type": "directive",
-            },
-          ],
           "position": Object {
             "start": Object {
-              "line": 0,
+              "line": 42,
             },
           },
-          "type": "section",
+          "type": "text",
+          "value": "Import your data",
         }
       }
     />
-  </div>
-</div>
+  </h2>
+  <ComponentFactory
+    key="0"
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 44,
+              },
+            },
+            "type": "text",
+            "value": "Import data from CSV or JSON files into your MongoDB database.",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 44,
+          },
+        },
+        "type": "paragraph",
+      }
+    }
+  />
+  <ComponentFactory
+    key="1"
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 46,
+                  },
+                },
+                "type": "text",
+                "value": "To learn more, see Import and Export Data",
+              },
+            ],
+            "domain": "std",
+            "fileid": Array [
+              "import-export",
+              "std-label-compass-import-export",
+            ],
+            "flag": "",
+            "name": "label",
+            "position": Object {
+              "start": Object {
+                "line": 46,
+              },
+            },
+            "target": "compass-import-export",
+            "type": "ref_role",
+          },
+        ],
+        "position": Object {
+          "start": Object {
+            "line": 46,
+          },
+        },
+        "type": "paragraph",
+      }
+    }
+  />
+</LandingStep>
 `;

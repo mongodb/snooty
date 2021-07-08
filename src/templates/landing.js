@@ -39,6 +39,7 @@ const Wrapper = styled('main')`
   }
 `;
 
+// The Landing template exclusively represents docs.mongodb.com. All other landings use the ProductLanding template
 const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
@@ -181,7 +182,7 @@ const Landing = ({ children }) => {
 };
 
 Landing.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
     page: PropTypes.object.isRequired,
   }).isRequired,

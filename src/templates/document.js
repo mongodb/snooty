@@ -58,7 +58,7 @@ const Document = ({
       </StyledMainColumn>
       <StyledRightColumn>
         <TabSelectors />
-        <Contents />
+        <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>
     </DocumentContainer>
   );
