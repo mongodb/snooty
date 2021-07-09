@@ -1,64 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ComponentFactory as LandingComponentFactory } from './landing';
-import Step from './Step';
-import Paragraph from './Paragraph';
+import Admonition, { admonitionMap } from './Admonition';
+import Banner from './Banner';
+import BlockQuote from './BlockQuote';
+import Button from './Button';
+import Card from './Card';
+import CardGroup from './CardGroup';
+import Code from './Code';
+import Cond from './Cond';
+import Container from './Container';
+import CSSClass from './CSSClass';
+import CTA from './CTA';
+import DefinitionList from './DefinitionList';
+import DefinitionListItem from './DefinitionListItem';
+import DeprecatedVersionSelector from './DeprecatedVersionSelector';
+import Describe from './Describe';
+import Emphasis from './Emphasis';
+import Extract from './Extract';
+import Field from './Field';
+import FieldList from './FieldList';
+import Figure from './Figure';
+import Footnote from './Footnote';
+import FootnoteReference from './FootnoteReference';
+import Glossary from './Glossary';
+import Heading from './Heading';
+import HorizontalList from './HorizontalList';
+import Image from './Image';
+import Include from './Include';
+import Introduction from './Introduction';
+import Kicker from './Kicker';
+import Line from './Line';
+import LineBlock from './LineBlock';
 import List from './List';
 import ListItem from './ListItem';
 import ListTable from './ListTable';
-import Emphasis from './Emphasis';
-import Include from './Include';
-import Section from './Section';
-import Code from './Code';
-import LiteralInclude from './LiteralInclude';
-import Tabs from './Tabs';
-import Admonition, { admonitionMap } from './Admonition';
-import Banner from './Banner';
-import Figure from './Figure';
 import Literal from './Literal';
-import Heading from './Heading';
-import BlockQuote from './BlockQuote';
-import Reference from './Reference';
-import Strong from './Strong';
-import URIWriter from './URIWriter/URIWriter';
-import TitleReference from './TitleReference';
-import Text from './Text';
-import DefinitionList from './DefinitionList';
-import DefinitionListItem from './DefinitionListItem';
-import Transition from './Transition';
-import CSSClass from './CSSClass';
-import SubstitutionReference from './SubstitutionReference';
-import Line from './Line';
-import LineBlock from './LineBlock';
-import HorizontalList from './HorizontalList';
-import Container from './Container';
-import Cond from './Cond';
-import Meta from './Meta';
-import VersionModified from './VersionModified';
-import CardGroup from './CardGroup';
-import Footnote from './Footnote';
-import FootnoteReference from './FootnoteReference';
 import LiteralBlock from './LiteralBlock';
-import Topic from './Topic';
-import Subscript from './Subscript';
-import Superscript from './Superscript';
-import Image from './Image';
+import LiteralInclude from './LiteralInclude';
+import Meta from './Meta';
+import MongoWebShell from './MongoWebShell';
+import OpenAPI from './OpenAPI';
+import Operation from './Operation';
+import Paragraph from './Paragraph';
+import Procedure from './Procedure';
+import Reference from './Reference';
 import RefRole from './RefRole';
-import Target from './Target';
-import Glossary from './Glossary';
+import ReleaseSpecification from './ReleaseSpecification';
+import Root from './Root';
 import Rubric from './Rubric';
 import SearchResults from './SearchResults';
-import Field from './Field';
-import FieldList from './FieldList';
-import Operation from './Operation';
-import OpenAPI from './OpenAPI';
-import Root from './Root';
-import Steps from './Steps';
-import MongoWebShell from './MongoWebShell';
-import Extract from './Extract';
-import Describe from './Describe';
-import ReleaseSpecification from './ReleaseSpecification';
+import Section from './Section';
+import Step from './Step';
+import StepsYAML from './StepsYAML';
+import StepYAML from './StepYAML';
+import Strong from './Strong';
+import Subscript from './Subscript';
+import SubstitutionReference from './SubstitutionReference';
+import Superscript from './Superscript';
+import Tabs from './Tabs';
+import Target from './Target';
+import Text from './Text';
+import TitleReference from './TitleReference';
+import Topic from './Topic';
+import Transition from './Transition';
 import Twitter from './Twitter';
+import URIWriter from './URIWriter/URIWriter';
+import VersionModified from './VersionModified';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -72,12 +79,12 @@ import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = new Set([
+  'contents',
   'default-domain',
   'raw',
   'toctree',
   'tabs-pillstrip',
   'tabs-selector',
-  'contents',
   'ia',
   'entry',
 ]);
@@ -113,15 +120,19 @@ const componentMap = {
   admonition: Admonition,
   banner: Banner,
   blockquote: BlockQuote,
+  button: Button,
+  card: Card,
   'card-group': CardGroup,
   class: CSSClass,
   code: Code,
   cond: Cond,
   container: Container,
   cssclass: CSSClass,
+  cta: CTA,
   definitionList: DefinitionList,
   definitionListItem: DefinitionListItem,
   deprecated: VersionModified,
+  'deprecated-version-selector': DeprecatedVersionSelector,
   describe: Describe,
   emphasis: Emphasis,
   extract: Extract,
@@ -135,6 +146,8 @@ const componentMap = {
   hlist: HorizontalList,
   image: Image,
   include: Include,
+  introduction: Introduction,
+  kicker: Kicker,
   line: Line,
   line_block: LineBlock,
   list: List,
@@ -149,6 +162,7 @@ const componentMap = {
   openapi: OpenAPI,
   operation: Operation,
   paragraph: Paragraph,
+  procedure: Procedure,
   ref_role: RefRole,
   reference: Reference,
   release_specification: ReleaseSpecification,
@@ -157,7 +171,8 @@ const componentMap = {
   'search-results': SearchResults,
   section: Section,
   step: Step,
-  steps: Steps,
+  'step-yaml': StepYAML,
+  'steps-yaml': StepsYAML,
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
@@ -182,8 +197,10 @@ const ComponentFactory = (props) => {
       return null;
     }
 
-    if (domain === 'landing') {
-      return <LandingComponentFactory {...props} />;
+    // Warn on unexpected usage of domains, but don't break
+    const validDomains = ['mongodb', 'std'];
+    if (domain && !validDomains.includes(domain)) {
+      console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }
 
     const lookup = type === 'directive' ? name : type;

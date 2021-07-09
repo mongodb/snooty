@@ -12,40 +12,43 @@ import Contents from './Contents';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
-const Heading = ({ sectionDepth, nodeData, ...rest }) => {
+const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
 
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
-  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile;
+  const hidefeedbackheader = page?.options?.hidefeedback === 'header';
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
+  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader);
 
   return (
-    <ConditionalWrapper
-      condition={shouldShowMobileHeader}
-      wrapper={(children) => (
-        <>
-          <HeadingContainer stackVertically={isMobile}>
-            {children}
-            <ChildContainer isStacked={isMobile}>
-              {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
-            </ChildContainer>
-          </HeadingContainer>
-          <Contents />
-        </>
-      )}
-    >
-      <HeadingTag className="contains-headerlink" id={id}>
-        {nodeData.children.map((element, index) => {
-          return <ComponentFactory {...rest} nodeData={element} key={index} />;
-        })}
-        <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
-          ¶
-        </a>
-      </HeadingTag>
-    </ConditionalWrapper>
+    <>
+      <ConditionalWrapper
+        condition={shouldShowMobileHeader}
+        wrapper={(children) => (
+          <>
+            <HeadingContainer stackVertically={isMobile}>
+              {children}
+              <ChildContainer isStacked={isMobile}>
+                {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
+              </ChildContainer>
+            </HeadingContainer>
+          </>
+        )}
+      >
+        <HeadingTag className="contains-headerlink" id={id}>
+          {nodeData.children.map((element, index) => {
+            return <ComponentFactory {...rest} nodeData={element} key={index} />;
+          })}
+          <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
+            ¶
+          </a>
+        </HeadingTag>
+      </ConditionalWrapper>
+      {isPageTitle && <Contents />}
+    </>
   );
 };
 

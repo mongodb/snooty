@@ -43,9 +43,13 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       />
     ) : null;
 
+  const formatTextOptions = {
+    literalEnableInline: true,
+  };
+
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
-    const formattedTitle = formatText(title);
+    const formattedTitle = formatText(title, formatTextOptions);
 
     if (isDrawer && children.length > 0) {
       const _toggleDrawerOnEnter = (e) => {

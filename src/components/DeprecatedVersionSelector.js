@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import queryString from 'query-string';
 import Button from '@leafygreen-ui/button';
-import { getSiteUrl } from '../../utils/get-site-url';
-import { isBrowser } from '../../utils/is-browser';
-import Select from '../Select';
-import { theme } from '../../theme/docsTheme';
+import styled from '@emotion/styled';
+import { getSiteUrl } from '../utils/get-site-url';
+import { isBrowser } from '../utils/is-browser';
+import { theme } from '../theme/docsTheme';
+import Select from './Select';
 
 const SELECT_WIDTH = '336px';
 

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import useScreenSize from '../hooks/useScreenSize.js';
+import { formatText } from '../utils/format-text';
 import { ContentsContext } from './contents-context';
-import ComponentFactory from './ComponentFactory';
 import { Label } from './Select';
 import Link from './Link';
+import { theme } from '../theme/docsTheme';
 
 const activeBorderLeftCSS = css`
   border-left: 2px solid ${uiColors.gray.dark3};
@@ -16,38 +16,55 @@ const activeBorderLeftCSS = css`
 
 const listItemColor = uiColors.black;
 
-const ContentsListItem = ({ children, depth, id, isActive, isDesktopOrLaptop }) => (
-  <li
-    css={css`
-      padding: 6px 0 6px 1px;
-      ${isDesktopOrLaptop ? `border-left: 1px solid ${uiColors.gray.light2};` : ''}
-      ${isDesktopOrLaptop && isActive ? activeBorderLeftCSS : ''};
+const ListItem = styled('li')`
+  @media ${theme.screenSize.largeAndUp} {
+    ${(props) => (props.isActive ? activeBorderLeftCSS : `border-left: 1px solid ${uiColors.gray.light2};`)}
 
-      &:hover,
-      &:active {
-        ${isDesktopOrLaptop ? activeBorderLeftCSS : 'padding-left: 4px;'}
-      }
-    `}
-  >
-    <Link
-      to={`#${id}`}
-      css={css`
-        /* TODO: Remove when mongodb-docs.css is removed */
-        color: ${listItemColor};
-        display: inline-block;
-        /* Heading sections should begin at depth 2 */
-        padding-left: calc(${isDesktopOrLaptop ? '14px +' : ''} ${depth - 2} * 16px);
-        width: 100%;
+    &:hover,
+    &:active {
+      ${activeBorderLeftCSS}
+    }
+  }
 
-        :hover {
-          color: ${listItemColor};
-          text-decoration: none;
-        }
-      `}
-    >
+  padding: 6px 0 6px 1px;
+  width: ${(props) => props.figwidth};
+
+  &:hover,
+  &:active {
+    padding-left: 4px;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  color: ${listItemColor};
+  display: inline-block;
+  padding-left: ${(props) => `${props.depth - 2} * 16px`}
+  width: 100%;
+  @media ${theme.screenSize.largeAndUp} {
+    ${(props) => `padding-left: calc(14px + ${props.depth - 2} * 16px)`};
+  }
+  :hover {
+    color: ${listItemColor};
+    text-decoration: none;
+  }
+`;
+
+const ContentsList = styled('ul')`
+  list-style-type: none;
+  padding: 0;
+`;
+
+const StyledContents = styled('div')`
+  @media ${theme.screenSize.largeAndUp} {
+    display: ${(props) => (props.displayOnDesktopOnly ? '' : 'none')};
+  }
+`;
+const ContentsListItem = ({ children, depth, id, isActive }) => (
+  <ListItem isActive={isActive}>
+    <StyledLink to={`#${id}`} isActive={isActive} depth={depth}>
       {children}
-    </Link>
-  </li>
+    </StyledLink>
+  </ListItem>
 );
 
 ContentsListItem.propTypes = {
@@ -57,39 +74,32 @@ ContentsListItem.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-const ContentsList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-`;
+const formatTextOptions = {
+  literalEnableInline: true,
+};
 
-const Contents = () => {
+const Contents = ({ displayOnDesktopOnly }) => {
   const { headingNodes, activeHeadingId } = useContext(ContentsContext);
-  const { isTabletOrMobile } = useScreenSize();
 
   if (headingNodes.length === 0) {
     return null;
   }
-
   return (
-    <>
+    <StyledContents displayOnDesktopOnly={displayOnDesktopOnly}>
       <Label>On this page</Label>
       <ContentsList>
         {headingNodes.map(({ depth, id, title }, index) => (
-          <ContentsListItem
-            depth={depth}
-            key={id}
-            id={id}
-            isActive={activeHeadingId === id}
-            isDesktopOrLaptop={!isTabletOrMobile}
-          >
-            {title.map((node, i) => (
-              <ComponentFactory nodeData={node} key={`${index}-${i}`} />
-            ))}
+          <ContentsListItem depth={depth} key={id} id={id} isActive={activeHeadingId === id}>
+            {formatText(title, formatTextOptions)}
           </ContentsListItem>
         ))}
       </ContentsList>
-    </>
+    </StyledContents>
   );
+};
+
+Contents.propTypes = {
+  displayOnDesktopOnly: PropTypes.bool,
 };
 
 export default Contents;

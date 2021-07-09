@@ -5,6 +5,7 @@ import Guide from './guide';
 import GuidesIndex from './guides-index';
 import Landing from './landing';
 import OpenAPITemplate from './openapi';
+import ProductLanding from './product-landing';
 import NotFound from './NotFound';
 
-export { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing, OpenAPITemplate, NotFound };
+export { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing, OpenAPITemplate, ProductLanding, NotFound };
