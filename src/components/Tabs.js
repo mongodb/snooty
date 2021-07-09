@@ -36,6 +36,14 @@ const landingTabsStyling = css`
       flex-grow: 1;
     }
 
+    @media ${theme.screenSize.upToLarge} {
+      button {
+        overflow: initial;
+        max-width: initial;
+        text-overflow: initial;
+      }
+    }
+
     @media ${theme.screenSize.upToSmall} {
       margin-bottom: 40px;
     }
