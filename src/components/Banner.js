@@ -29,7 +29,7 @@ const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
 
 const Banner = ({ nodeData: { children, options }, ...rest }) => {
   return (
-    <StyledBanner variant={alertMap[options.variant] || LeafyVariant.Info}>
+    <StyledBanner variant={alertMap[options?.variant] || LeafyVariant.Info}>
       {children.map((child, i) => (
         <ComponentFactory {...rest} key={i} nodeData={child} />
       ))}
