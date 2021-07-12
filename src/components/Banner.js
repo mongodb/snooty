@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import ComponentFactory from './ComponentFactory';
 import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
+import ComponentFactory from './ComponentFactory';
 
 export const alertMap = {
   info: LeafyVariant.Info,
@@ -12,7 +12,6 @@ export const alertMap = {
 };
 
 const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
-  /
   /* Add margins below all child elements in the banner */
   & > div > div > * {
     margin: 0 0 12px;
@@ -41,7 +40,6 @@ const Banner = ({ nodeData: { children, options }, ...rest }) => {
 Banner.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    name: PropTypes.string.isRequired,
     variant: PropTypes.string.isRequired,
   }).isRequired,
 };
