@@ -4,7 +4,7 @@ const bannerContent = {
   imgPath: 'assets/live-banner.png',
   mobileImgPath: 'assets/live-banner-mobile.png',
   url: 'https://www.mongodb.com/live/register?tck=docs',
-  enabled: true,
+  enabled: false,
 };
 
 /**
