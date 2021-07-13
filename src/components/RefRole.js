@@ -7,6 +7,7 @@ import Link from './Link';
 import { normalizePath } from '../utils/normalize-path';
 import { theme } from '../theme/docsTheme';
 
+// TODO: <untangle card-ref and refrole, this styling has the side effect of changing all refroles on cards into card-refs>
 const CardRef = styled(Link)`
   background: ${uiColors.gray.light3};
   border-radius: ${theme.size.tiny};

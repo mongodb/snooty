@@ -115,6 +115,7 @@ const Card = ({
         {tag && <FlexTag text={tag} />}
         <H4 compact={isCompact || isExtraCompact}>{headline}</H4>
         {children.map((child, i) => (
+          // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
           <ComponentFactory nodeData={child} key={i} cardRef={true} />
         ))}
         {cta && (
