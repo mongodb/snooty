@@ -40,7 +40,8 @@ const forwardStyle = css`
   .slide-enter-active {
     opacity: 1;
     transform: translateX(0%);
-    transition: opacity 200ms, transform 200ms ease-out;
+    transition: opacity ${theme.transitionSpeed.contentFadeIn},
+      transform ${theme.transitionSpeed.contentFadeIn} ease-out;
   }
 `;
 
@@ -52,7 +53,10 @@ const IATransition = ({ back, children, hasIA, slug }) => (
         <Global styles={back ? backStyle : forwardStyle} />
         <SwitchTransition>
           <CSSTransition
-            addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
+            timeout={{
+              enter: theme.size.stripUnit(theme.transitionSpeed.contentFadeIn),
+              exit: theme.size.stripUnit(theme.transitionSpeed.contentFadeOut),
+            }}
             classNames="slide"
             key={slug}
           >

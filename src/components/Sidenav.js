@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -11,6 +11,7 @@ import IATransition from './IATransition';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
 import { SidenavContext } from './sidenav-context';
+import SidenavMobileTransition from './SidenavMobileTransition';
 import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
@@ -20,6 +21,20 @@ const SIDENAV_WIDTH = 268;
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   height: 100%;
+
+  // Mobile sidenav
+  @media ${theme.screenSize.upToSmall} {
+    ${({ hideMobile }) => hideMobile && 'display: none;'}
+
+    button[data-testid="side-nav-collapse-toggle"] {
+      display: none;
+    }
+  }
+
+  // Tablet and mobile position
+  @media ${theme.screenSize.upToLarge} {
+    position: absolute;
+  }
 
   // Allows Spaceholder element to flex grow for AdditionalLinks
   & > div > nav > div > ul {
@@ -47,22 +62,6 @@ const titleStyle = css`
   text-transform: capitalize;
 `;
 
-const tabletStyle = css`
-  @media ${theme.screenSize.upToLarge} {
-    position: absolute;
-  }
-`;
-
-const mobileStyle = (isCollapsed) => css`
-  @media ${theme.screenSize.upToSmall} {
-    ${isCollapsed && 'display: none;'}
-
-    button[data-testid="side-nav-collapse-toggle"] {
-      display: none;
-    }
-  }
-`;
-
 const ContentOverlay = styled('div')`
   background-color: ${uiColors.white};
   bottom: 0;
@@ -80,17 +79,10 @@ const SidenavContainer = styled('div')`
   position: relative;
   z-index: 2;
 
-  // Maintain a certain width so that the content doesn't get pushed on desktop
-  // when the SideNav opens up the first time
-  @media ${theme.screenSize.largeAndUp} {
-    ${({ finishedInitialCollapse }) => !finishedInitialCollapse && `width: ${SIDENAV_WIDTH}px;`}
-  }
-
   // Since we want the SideNav to open on top of the content on medium screen size,
-  // keep a min width as a placeholder for the collapsed SideNav to maintain its
-  // width on the page
-  @media ${theme.screenSize.smallAndUp} {
-    min-width: 48px;
+  // keep a width as a placeholder for the collapsed SideNav while its position is absolute
+  @media ${theme.screenSize.tablet} {
+    width: 48px;
   }
 `;
 
@@ -118,6 +110,9 @@ const ArtificialPadding = styled('div')`
   height: 16px;
 `;
 
+// Children of this div should appear 1 z-index higher than the ProductsList component.
+// This allows the products in the ProductsList to slide up/down when closing/opening the list
+// without appearing inline with above text
 const NavTopContainer = styled('div')`
   background-color: ${uiColors.gray.light3};
   position: relative;
@@ -131,87 +126,85 @@ const additionalLinks = [
 ];
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
-  const { isTabletOrMobile } = useScreenSize();
-  const { isCollapsed, setCollapsed } = useContext(SidenavContext);
+  const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
+  const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
+
+  // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
-  const [timesCollapsed, setTimesCollapsed] = useState(0);
 
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
 
   useEffect(() => {
-    setCollapsed(isTabletOrMobile);
-  }, [isTabletOrMobile, setCollapsed]);
-
-  useEffect(() => {
-    setTimesCollapsed((curr) => ++curr);
-  }, [isCollapsed]);
+    setCollapsed(!!isTablet);
+  }, [isTablet, setCollapsed]);
 
   const handleOverlayClick = useCallback(() => {
     setCollapsed(true);
   }, [setCollapsed]);
 
+  const hideMobileSidenav = useCallback(() => {
+    setHideMobile(true);
+  }, [setHideMobile]);
+
   return (
     <>
-      <SidenavContainer
-        // isCollapsed is updated 2 times before it has completed its initial collapse;
-        // once when it is set to true by default, and again when checking screen size
-        finishedInitialCollapse={timesCollapsed > 2}
-      >
-        <StyledLeafygreenSideNav
-          aria-label="Side navigation"
-          css={css`
-            ${mobileStyle(isCollapsed)}
-            ${tabletStyle}
-          `}
-          collapsed={isCollapsed}
-          setCollapsed={setCollapsed}
-          widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
-        >
-          <IATransition back={back} hasIA={!!ia} slug={slug}>
-            <NavTopContainer>
-              <ArtificialPadding />
-              <SidebarBack
-                border={<Border />}
-                handleClick={() => {
-                  setBack(true);
-                }}
-                slug={slug}
-              />
-              {ia && (
-                <IA
-                  header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+      <SidenavContainer>
+        <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
+          <StyledLeafygreenSideNav
+            aria-label="Side navigation"
+            collapsed={isCollapsed}
+            hideMobile={hideMobile}
+            setCollapsed={setCollapsed}
+            widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
+          >
+            <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
+              <NavTopContainer>
+                <ArtificialPadding />
+                <SidebarBack
+                  border={<Border />}
                   handleClick={() => {
-                    setBack(false);
+                    setBack(true);
+                    hideMobileSidenav();
                   }}
-                  ia={ia}
+                  slug={slug}
                 />
-              )}
-              {showAllProducts && (
-                <Border
-                  css={css`
-                    margin-bottom: 0;
-                  `}
-                />
-              )}
-            </NavTopContainer>
-            {showAllProducts && <ProductsList />}
-          </IATransition>
+                {ia && (
+                  <IA
+                    header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+                    handleClick={() => {
+                      setBack(false);
+                      hideMobileSidenav();
+                    }}
+                    ia={ia}
+                  />
+                )}
+                {showAllProducts && (
+                  <Border
+                    css={css`
+                      margin-bottom: 0;
+                    `}
+                  />
+                )}
+              </NavTopContainer>
+              {showAllProducts && <ProductsList />}
+            </IATransition>
 
-          {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
-          {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
+            {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
 
-          <Spaceholder />
-          {additionalLinks.map(({ glyph, title, url }) => (
-            <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
-              {title}
-            </SideNavItem>
-          ))}
-        </StyledLeafygreenSideNav>
+            <Spaceholder />
+            {additionalLinks.map(({ glyph, title, url }) => (
+              <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+                {title}
+              </SideNavItem>
+            ))}
+          </StyledLeafygreenSideNav>
+        </SidenavMobileTransition>
       </SidenavContainer>
-      {isTabletOrMobile && !isCollapsed && <ContentOverlay onClick={handleOverlayClick} />}
+      {isTablet && !isCollapsed && <ContentOverlay onClick={handleOverlayClick} />}
     </>
   );
 };

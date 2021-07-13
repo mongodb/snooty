@@ -46,6 +46,7 @@ const screenSize = {
   largeAndUp: 'not all and (max-width: 1023px)',
   upToXLarge: 'only screen and (max-width: 1200px)',
   xLargeAndUp: 'not all and (max-width: 1200px)',
+  tablet: 'only screen and (min-width: 421px) and (max-width: 1023px)',
 };
 
 const header = {

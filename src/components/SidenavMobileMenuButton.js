@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
@@ -23,21 +23,16 @@ const MenuButton = styled(IconButton)`
 `;
 
 const SidenavMobileMenuButton = ({ className }) => {
-  const { isCollapsed, setCollapsed } = useContext(SidenavContext);
-  const [glyph, setGlyph] = useState('Menu');
+  const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
   const clickMenu = useCallback(() => {
-    setCollapsed((state) => !state);
-  }, [setCollapsed]);
-
-  useEffect(() => {
-    setGlyph(isCollapsed ? 'Menu' : 'X');
-  }, [isCollapsed]);
+    setHideMobile((state) => !state);
+  }, [setHideMobile]);
 
   return (
     <MenuButtonContainer className={className}>
       <MenuButton aria-label="View sidenav" onClick={clickMenu}>
-        <Icon glyph={glyph} size="large" />
+        <Icon glyph={hideMobile ? 'Menu' : 'X'} size="large" />
       </MenuButton>
     </MenuButtonContainer>
   );

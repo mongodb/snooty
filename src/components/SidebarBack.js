@@ -21,6 +21,7 @@ const Placeholder = () => (
   />
 );
 
+// TODO: Consolidate this component with the OpenAPI component's SidebarBackButton
 const SidebarBack = ({ border, handleClick, slug }) => {
   const { parents } = useContext(NavigationContext);
   const { project } = useSiteMetadata();
