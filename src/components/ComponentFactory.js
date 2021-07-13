@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Admonition, { admonitionMap } from './Admonition';
+import Banner from './Banner';
 import BlockQuote from './BlockQuote';
 import Button from './Button';
 import Card from './Card';
@@ -78,12 +79,12 @@ import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = new Set([
+  'contents',
   'default-domain',
   'raw',
   'toctree',
   'tabs-pillstrip',
   'tabs-selector',
-  'contents',
   'ia',
   'entry',
 ]);
@@ -117,6 +118,7 @@ const roleMap = {
 
 const componentMap = {
   admonition: Admonition,
+  banner: Banner,
   blockquote: BlockQuote,
   button: Button,
   card: Card,
