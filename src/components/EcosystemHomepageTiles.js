@@ -41,7 +41,7 @@ const EcosystemHomepageTiles = () => {
       icon: <IconGo />,
     },
     {
-      slug: '/java/',
+      slug: '/java-drivers/',
       title: 'Java',
       icon: <IconJava />,
     },
