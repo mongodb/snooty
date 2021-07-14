@@ -125,7 +125,7 @@ const componentMap = {
   card: Card,
   'card-group': CardGroup,
   class: CSSClass,
-  code: QuizWidget,
+  code: Code,
   cond: Cond,
   container: Container,
   cssclass: CSSClass,

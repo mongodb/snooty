@@ -56,12 +56,16 @@ const QuizCompleteHeader = () => {
   );
 };
 
-const QuizCompleteSubtitle = () => {
+const QuizCompleteSubtitle = (questioninfo) => {
+  console.log(questioninfo);
   return (
     <>
       <QuizSubtitle>Question</QuizSubtitle>
-
-      <QuizQuestion>Example question?</QuizQuestion>
+      <QuizQuestion>
+        {questioninfo.question.map((node, i) => (
+          <ComponentFactory nodeData={node} key={i} />
+        ))}
+      </QuizQuestion>
     </>
   );
 };
@@ -70,7 +74,7 @@ const QuizWidget = ({ nodeData: { children } }) => {
   return (
     <StyledCard>
       <QuizCompleteHeader />
-      <QuizCompleteSubtitle />
+      <QuizCompleteSubtitle question={children[0].children} />
       <StyledButton variant="default">Submit</StyledButton>
     </StyledCard>
   );
