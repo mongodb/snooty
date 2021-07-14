@@ -25,6 +25,11 @@ const CardRef = styled(Link)`
   }
 `;
 
+const stopPropagation = function (e) {
+  e.stopPropagation();
+  e.nativeEvent.stopImmediatePropagation();
+};
+
 const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef }) => {
   // Render intersphinx target links
   const CurrRefRole = cardRef ? CardRef : Link;
@@ -57,7 +62,7 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, card
   }
 
   return (
-    <CurrRefRole to={normalizePath(link)}>
+    <CurrRefRole to={normalizePath(link)} onClick={(e) => stopPropagation(e)}>
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
