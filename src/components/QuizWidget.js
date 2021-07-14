@@ -5,7 +5,10 @@ import ComponentFactory from './ComponentFactory';
 import Button from '@leafygreen-ui/button';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
+import EllipsisIcon from '@leafygreen-ui/icon/dist/Ellipsis';
+import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
+import QuizChoice from './QuizChoice';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -60,7 +63,6 @@ const QuizCompleteSubtitle = () => {
   return (
     <>
       <QuizSubtitle>Question</QuizSubtitle>
-
       <QuizQuestion>Example question?</QuizQuestion>
     </>
   );
@@ -71,6 +73,7 @@ const QuizWidget = ({ nodeData: { children } }) => {
     <StyledCard>
       <QuizCompleteHeader />
       <QuizCompleteSubtitle />
+      <QuizChoice />
       <StyledButton variant="default">Submit</StyledButton>
     </StyledCard>
   );
