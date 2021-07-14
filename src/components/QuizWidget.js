@@ -56,13 +56,12 @@ const QuizCompleteHeader = () => {
   );
 };
 
-const QuizCompleteSubtitle = (questioninfo) => {
-  console.log(questioninfo);
+const QuizCompleteSubtitle = ({ question }) => {
   return (
     <>
       <QuizSubtitle>Question</QuizSubtitle>
       <QuizQuestion>
-        {questioninfo.question.map((node, i) => (
+        {question.map((node, i) => (
           <ComponentFactory nodeData={node} key={i} />
         ))}
       </QuizQuestion>
