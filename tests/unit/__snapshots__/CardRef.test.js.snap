@@ -1658,19 +1658,23 @@ exports[`card correctly with and without url 1`] = `
                                   }
                                 >
                                   <CardRef
+                                    onClick={[Function]}
                                     to="sdk/android/#std-label-android-intro"
                                   >
                                     <Link
                                       className="emotion-4 emotion-5"
+                                      onClick={[Function]}
                                       to="sdk/android/#std-label-android-intro"
                                     >
                                       <mockConstructor
                                         className="emotion-4 emotion-5"
+                                        onClick={[Function]}
                                         to="/sdk/android/#std-label-android-intro"
                                       >
                                         <a
                                           className="emotion-4 emotion-5"
                                           href="/sdk/android/#std-label-android-intro"
+                                          onClick={[Function]}
                                         >
                                           <ComponentFactory
                                             key="0"
@@ -1809,19 +1813,23 @@ exports[`card correctly with and without url 1`] = `
                                   }
                                 >
                                   <CardRef
+                                    onClick={[Function]}
                                     to="sdk/ios/#std-label-ios-intro"
                                   >
                                     <Link
                                       className="emotion-4 emotion-5"
+                                      onClick={[Function]}
                                       to="sdk/ios/#std-label-ios-intro"
                                     >
                                       <mockConstructor
                                         className="emotion-4 emotion-5"
+                                        onClick={[Function]}
                                         to="/sdk/ios/#std-label-ios-intro"
                                       >
                                         <a
                                           className="emotion-4 emotion-5"
                                           href="/sdk/ios/#std-label-ios-intro"
+                                          onClick={[Function]}
                                         >
                                           <ComponentFactory
                                             key="0"
@@ -1960,19 +1968,23 @@ exports[`card correctly with and without url 1`] = `
                                   }
                                 >
                                   <CardRef
+                                    onClick={[Function]}
                                     to="sdk/dotnet/#std-label-dotnet-intro"
                                   >
                                     <Link
                                       className="emotion-4 emotion-5"
+                                      onClick={[Function]}
                                       to="sdk/dotnet/#std-label-dotnet-intro"
                                     >
                                       <mockConstructor
                                         className="emotion-4 emotion-5"
+                                        onClick={[Function]}
                                         to="/sdk/dotnet/#std-label-dotnet-intro"
                                       >
                                         <a
                                           className="emotion-4 emotion-5"
                                           href="/sdk/dotnet/#std-label-dotnet-intro"
+                                          onClick={[Function]}
                                         >
                                           <ComponentFactory
                                             key="0"
@@ -2111,19 +2123,23 @@ exports[`card correctly with and without url 1`] = `
                                   }
                                 >
                                   <CardRef
+                                    onClick={[Function]}
                                     to="web/#std-label-web-intro"
                                   >
                                     <Link
                                       className="emotion-4 emotion-5"
+                                      onClick={[Function]}
                                       to="web/#std-label-web-intro"
                                     >
                                       <mockConstructor
                                         className="emotion-4 emotion-5"
+                                        onClick={[Function]}
                                         to="/web/#std-label-web-intro"
                                       >
                                         <a
                                           className="emotion-4 emotion-5"
                                           href="/web/#std-label-web-intro"
+                                          onClick={[Function]}
                                         >
                                           <ComponentFactory
                                             key="0"
@@ -2262,19 +2278,23 @@ exports[`card correctly with and without url 1`] = `
                                   }
                                 >
                                   <CardRef
+                                    onClick={[Function]}
                                     to="sdk/react-native/#std-label-react-native-intro"
                                   >
                                     <Link
                                       className="emotion-4 emotion-5"
+                                      onClick={[Function]}
                                       to="sdk/react-native/#std-label-react-native-intro"
                                     >
                                       <mockConstructor
                                         className="emotion-4 emotion-5"
+                                        onClick={[Function]}
                                         to="/sdk/react-native/#std-label-react-native-intro"
                                       >
                                         <a
                                           className="emotion-4 emotion-5"
                                           href="/sdk/react-native/#std-label-react-native-intro"
+                                          onClick={[Function]}
                                         >
                                           <ComponentFactory
                                             key="0"
@@ -2413,19 +2433,23 @@ exports[`card correctly with and without url 1`] = `
                                   }
                                 >
                                   <CardRef
+                                    onClick={[Function]}
                                     to="sdk/node/#std-label-node-intro"
                                   >
                                     <Link
                                       className="emotion-4 emotion-5"
+                                      onClick={[Function]}
                                       to="sdk/node/#std-label-node-intro"
                                     >
                                       <mockConstructor
                                         className="emotion-4 emotion-5"
+                                        onClick={[Function]}
                                         to="/sdk/node/#std-label-node-intro"
                                       >
                                         <a
                                           className="emotion-4 emotion-5"
                                           href="/sdk/node/#std-label-node-intro"
+                                          onClick={[Function]}
                                         >
                                           <ComponentFactory
                                             key="0"
