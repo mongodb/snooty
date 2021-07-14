@@ -1,14 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { TEMPLATE_CLASSNAME } from '../constants';
+import { theme } from '../theme/docsTheme';
 
-const OpenAPITemplate = ({ children, className }) => (
+// TODO: Possibly remove this after docs-nav is merged
+const calculateMarginTop = (bannerHeight) => `
+  calc(${theme.bannerContent.enabled ? bannerHeight : '0px'} + 45px)
+`;
+
+const OpenAPITemplate = ({ children }) => (
   <div
-    className={`${TEMPLATE_CLASSNAME} ${className}`}
     css={css`
       // Prevent loading animation from being side by side with footer when using flex
       display: block;
+      margin-top: ${calculateMarginTop(theme.navbar.bannerHeight.small)} !important;
+
+      @media ${theme.screenSize.upToMedium} {
+        margin-top: ${calculateMarginTop(theme.navbar.bannerHeight.medium)} !important;
+      }
+
+      @media not all and (max-width: 1600px) {
+        margin-top: ${calculateMarginTop(theme.navbar.bannerHeight.large)} !important;
+      }
     `}
   >
     {children}
@@ -17,7 +30,6 @@ const OpenAPITemplate = ({ children, className }) => (
 
 OpenAPITemplate.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
-  className: PropTypes.string,
 };
 
 export default OpenAPITemplate;

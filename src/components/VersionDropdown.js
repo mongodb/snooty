@@ -105,7 +105,6 @@ const VersionDropdown = ({
       onChange={navigate}
       placeholder={null}
       size={Size.Large}
-      usePortal={false}
       popoverZIndex={3}
       value={parserBranch}
       usePortal={false}

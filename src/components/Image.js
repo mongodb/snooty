@@ -17,7 +17,6 @@ export default class Image extends Component {
 
   handleLoad = ({ target: img }) => {
     const { handleImageLoaded, nodeData } = this.props;
-
     handleImageLoaded(this.imgRef.current);
 
     const scale = getNestedValue(['options', 'scale'], nodeData);
@@ -71,7 +70,10 @@ export default class Image extends Component {
         style={nodeData.options ? buildStyles() : {}}
         onLoad={this.handleLoad}
         ref={this.imgRef}
-        css={hasBorder ? borderStyling : ''}
+        css={css`
+          ${hasBorder ? borderStyling : ''}
+          max-width: 100%;
+        `}
       />
     );
   }

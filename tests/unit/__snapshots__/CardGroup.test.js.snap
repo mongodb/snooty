@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<StyledGrid
+  className="card-group"
+  columns={3}
+  isCarousel={true}
+  noMargin={true}
+>
+  <ComponentFactory
+    isCompact={true}
+    isExtraCompact={false}
+    key="0"
+    nodeData={
+      Object {
+        "argument": Array [],
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 128,
+                  },
+                },
+                "type": "text",
+                "value": "Use Compass to connect to your Atlas cluster",
+              },
+            ],
+            "position": Object {
+              "start": Object {
+                "line": 128,
+              },
+            },
+            "type": "paragraph",
+          },
+        ],
+        "domain": "landing",
+        "name": "card",
+        "options": Object {
+          "checksum": "522319e9710c845a5fe15076ac78d2577a6cdef26b301dee66077ca5b02b289a",
+          "cta": "Read Atlas docs",
+          "icon": "/images/icons/atlas.svg",
+          "icon-alt": "MongoDB Atlas icon",
+          "url": "https://docs.atlas.mongodb.com/getting-started/",
+        },
+        "position": Object {
+          "start": Object {
+            "line": 122,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />
+  <ComponentFactory
+    isCompact={true}
+    isExtraCompact={false}
+    key="1"
+    nodeData={
+      Object {
+        "argument": Array [],
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 136,
+                  },
+                },
+                "type": "text",
+                "value": "Learn MongoDB Basics with MongoDB University",
+              },
+            ],
+            "position": Object {
+              "start": Object {
+                "line": 136,
+              },
+            },
+            "type": "paragraph",
+          },
+        ],
+        "domain": "landing",
+        "name": "card",
+        "options": Object {
+          "checksum": "5a77a5f2c1d7ceec1423bad1f60110583c6c4a9a9c6e683c8f98d95b7b250c02",
+          "cta": "Learn MongoDB Basics",
+          "icon": "/images/icons/university.svg",
+          "icon-alt": "MongoDB University icon",
+          "url": "https://university.mongodb.com/courses/M001/about",
+        },
+        "position": Object {
+          "start": Object {
+            "line": 130,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />
+  <ComponentFactory
+    isCompact={true}
+    isExtraCompact={false}
+    key="2"
+    nodeData={
+      Object {
+        "argument": Array [],
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 144,
+                  },
+                },
+                "type": "text",
+                "value": "Access more in-depth examples of querying data",
+              },
+            ],
+            "position": Object {
+              "start": Object {
+                "line": 144,
+              },
+            },
+            "type": "paragraph",
+          },
+        ],
+        "domain": "landing",
+        "name": "card",
+        "options": Object {
+          "checksum": "4435ec408acdbe18f57504d707eaa087d6d055b9dc073fe512d8f241573947c5",
+          "cta": "Read Server docs",
+          "icon": "/images/icons/server.svg",
+          "icon-alt": "MongoDB Server icon",
+          "url": "https://docs.mongodb.com/manual/tutorial/getting-started/",
+        },
+        "position": Object {
+          "start": Object {
+            "line": 138,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />
+</StyledGrid>
+`;

@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
-import ComponentFactory from '../ComponentFactory';
-import ConditionalWrapper from '../ConditionalWrapper';
-import Link from '../Link';
-import Tag from '../Tag';
+import { uiColors } from '@leafygreen-ui/palette';
+import { theme } from '../theme/docsTheme';
+import ComponentFactory from './ComponentFactory';
+import ConditionalWrapper from './ConditionalWrapper';
+import Link from './Link';
+import Tag from './Tag';
 
 const StyledCard = styled(LeafyGreenCard)`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: ${({ theme }) => `${theme.size.large}`};
+  padding: ${theme.size.large};
 
   p:last-of-type {
     margin-bottom: 0;
@@ -20,7 +22,7 @@ const StyledCard = styled(LeafyGreenCard)`
 `;
 
 const CardIcon = styled('img')`
-  width: ${({ theme }) => `${theme.size.medium}`};
+  width: ${theme.size.medium};
 `;
 
 const H4 = styled('h4')`
@@ -32,6 +34,9 @@ const H4 = styled('h4')`
 const CTA = styled('p')`
   font-weight: bold;
   margin-top: auto;
+  & > a:hover {
+    color: ${uiColors.blue.dark2};
+  }
 `;
 
 const FlexTag = styled(Tag)`
@@ -40,15 +45,39 @@ const FlexTag = styled(Tag)`
 
 const CompactCard = styled(StyledCard)`
   align-items: flex-start;
-  display: flex;
   flex-direction: row;
+  padding: ${theme.size.large} ${theme.size.medium};
 `;
 
-const CompactWrapper = styled('div')`
+const CompactIcon = styled('img')`
+  margin: auto;
+  width: ${theme.size.medium};
+  @media ${theme.screenSize.upToSmall} {
+    width: 20px;
+  }
+`;
+
+const CompactIconCircle = styled('div')`
+  background: ${uiColors.green.light3};
+  border-radius: 50%;
+  display: flex;
+  flex-shrink: 0 !important;
+  height: 48px;
+  width: 48px;
+  @media ${theme.screenSize.upToSmall} {
+    height: 40px;
+    width: 40px;
+  }
+`;
+
+const CompactTextWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-left: ${({ theme }) => theme.size.default};
+  margin-left: ${theme.size.medium};
+  @media ${theme.screenSize.upToSmall} {
+    margin-left: ${theme.size.default};
+  }
 `;
 
 const Card = ({
@@ -60,16 +89,24 @@ const Card = ({
   },
 }) => {
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
+  const Icon = isCompact ? CompactIcon : CardIcon;
   return (
     <Card
       onClick={() => {
         window.location.href = url;
       }}
     >
-      {icon && <CardIcon src={withPrefix(icon)} alt={iconAlt} />}
+      {icon && (
+        <ConditionalWrapper
+          condition={isCompact}
+          wrapper={(children) => <CompactIconCircle>{children}</CompactIconCircle>}
+        >
+          <Icon src={withPrefix(icon)} alt={iconAlt} />
+        </ConditionalWrapper>
+      )}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
-        wrapper={(children) => <CompactWrapper>{children}</CompactWrapper>}
+        wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
         {tag && <FlexTag text={tag} />}
         <H4 compact={isCompact || isExtraCompact}>{headline}</H4>

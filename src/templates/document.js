@@ -7,7 +7,6 @@ import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
-import { TEMPLATE_CLASSNAME } from '../constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
 
@@ -27,7 +26,6 @@ const StyledRightColumn = styled(RightColumn)`
 
 const Document = ({
   children,
-  className,
   pageContext: {
     slug,
     page,
@@ -42,34 +40,31 @@ const Document = ({
   const breadcrumbsHomeUrl = isLanding ? '/' : null;
 
   return (
-    <>
-      <DocumentContainer className={`${TEMPLATE_CLASSNAME} ${className}`}>
-        <StyledMainColumn>
-          <div className="body">
-            <Breadcrumbs
-              homeUrl={breadcrumbsHomeUrl}
-              pageTitle={breadcrumbsPageTitle}
-              parentPaths={getNestedValue([slug], parentPaths)}
-              siteTitle={title}
-              slug={slug}
-            />
-            {children}
-            {showPrevNext && (
-              <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
-            )}
-          </div>
-        </StyledMainColumn>
-        <StyledRightColumn>
-          <TabSelectors />
-          <Contents />
-        </StyledRightColumn>
-      </DocumentContainer>
-    </>
+    <DocumentContainer>
+      <StyledMainColumn>
+        <div className="body">
+          <Breadcrumbs
+            homeUrl={breadcrumbsHomeUrl}
+            pageTitle={breadcrumbsPageTitle}
+            parentPaths={getNestedValue([slug], parentPaths)}
+            siteTitle={title}
+            slug={slug}
+          />
+          {children}
+          {showPrevNext && (
+            <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
+          )}
+        </div>
+      </StyledMainColumn>
+      <StyledRightColumn>
+        <TabSelectors />
+        <Contents displayOnDesktopOnly={true} />
+      </StyledRightColumn>
+    </DocumentContainer>
   );
 };
 
 Document.propTypes = {
-  className: PropTypes.string,
   pageContext: PropTypes.shape({
     page: PropTypes.shape({
       children: PropTypes.array,

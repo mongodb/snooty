@@ -1,14 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders border correctly when specified as an option 1`] = `
+.emotion-1 {
+  max-width: 100%;
+}
+
 .emotion-0 {
   border: 0.5px solid #B8C4C2;
   width: 100%;
   border-radius: 4px;
+  max-width: 100%;
 }
 
 <div
-  class="figure"
+  class="figure emotion-1"
   style="width:700px"
 >
   <img
@@ -20,25 +25,51 @@ exports[`renders border correctly when specified as an option 1`] = `
 `;
 
 exports[`renders correctly 1`] = `
+.emotion-1 {
+  max-width: 100%;
+}
+
+.emotion-0 {
+  max-width: 100%;
+}
+
 <div
-  class="figure"
+  class="figure emotion-1"
   style="width:700px"
 >
   <img
     alt="/images/firstcluster.png"
-    class="   css-0"
+    class="   emotion-0"
     src="/images/firstcluster.png"
   />
 </div>
 `;
 
 exports[`renders lightbox correctly when specified as an option 1`] = `
+.emotion-0 {
+  max-width: 100%;
+}
+
+.emotion-3 {
+  width: 700px;
+  cursor: pointer;
+  margin: 0;
+  display: block;
+}
+
+.emotion-1 {
+  color: #444;
+  font-size: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+}
+
 <div
-  class="figure lightbox"
-  style="width:700px"
+  class="emotion-3 emotion-4"
 >
   <div
-    class="lightbox__imageWrapper"
     role="button"
     tabindex="-1"
   >
@@ -48,7 +79,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
       src="/images/firstcluster.png"
     />
     <div
-      class="lightbox__caption"
+      class="emotion-1 emotion-2"
     >
       click to enlarge
     </div>

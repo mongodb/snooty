@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
+import { theme } from '../theme/docsTheme';
 
 const fadeOut = css`
   .slide-exit {
@@ -9,7 +10,7 @@ const fadeOut = css`
   }
   .slide-exit-active {
     opacity: 0;
-    transition: opacity 100ms;
+    transition: opacity ${theme.transitionSpeed.contentFadeOut};
   }
 `;
 
@@ -23,7 +24,8 @@ const backStyle = css`
   .slide-enter-active {
     opacity: 1;
     transform: translateX(0%);
-    transition: opacity 200ms, transform 200ms ease-out;
+    transition: opacity ${theme.transitionSpeed.contentFadeIn},
+      transform ${theme.transitionSpeed.contentFadeIn} ease-out;
   }
 `;
 

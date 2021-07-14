@@ -49,7 +49,7 @@ export const REF_TARGETS = {
 };
 
 export const DOCS_URL = 'https://docs.mongodb.com';
-export const MARIAN_URL = 'https://marian.mongodb.com';
+export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
 
 export const SECTION_NAME_MAPPING = {
   prerequisites: {
@@ -75,4 +75,4 @@ export const SECTION_NAME_MAPPING = {
   },
 };
 
-export const TEMPLATE_CLASSNAME = 'template-container';
+export const CONTENT_CONTAINER_CLASSNAME = 'content-container';
