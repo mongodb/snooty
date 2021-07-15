@@ -15,11 +15,11 @@ const StyledCard = styled(Card)`
 `;
 
 const QuizTitle = styled('p')`
-  margin: 0 0 24px 0 !important;
+  margin: 0 0 32px 0 !important;
   font-family: Akzidenz;
   font-weight: 500;
   font-style: normal;
-  font-size: 24px;
+  font-size: 21px;
 `;
 
 const QuizHeader = styled('div')`
