@@ -12,17 +12,17 @@ import QuizChoice from './QuizChoice';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
-  width: 700px;
+  width: 100%;
   height: 573px;
   padding: 40px;
 `;
 
 const QuizTitle = styled('p')`
-  margin: 0 0 24px 0 !important;
+  margin: 0 0 32px 0 !important;
   font-family: Akzidenz;
   font-weight: 500;
   font-style: normal;
-  font-size: 24px;
+  font-size: 21px;
 `;
 
 const QuizHeader = styled('div')`
@@ -59,11 +59,15 @@ const QuizCompleteHeader = () => {
   );
 };
 
-const QuizCompleteSubtitle = () => {
+const QuizCompleteSubtitle = ({ question }) => {
   return (
     <>
       <QuizSubtitle>Question</QuizSubtitle>
-      <QuizQuestion>Example question?</QuizQuestion>
+      <QuizQuestion>
+        {question.map((node, i) => (
+          <ComponentFactory nodeData={node} key={i} />
+        ))}
+      </QuizQuestion>
     </>
   );
 };
@@ -72,8 +76,7 @@ const QuizWidget = ({ nodeData: { children } }) => {
   return (
     <StyledCard>
       <QuizCompleteHeader />
-      <QuizCompleteSubtitle />
-      <QuizChoice />
+      <QuizCompleteSubtitle question={children[0].children} />
       <StyledButton variant="default">Submit</StyledButton>
     </StyledCard>
   );
