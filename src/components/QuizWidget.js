@@ -9,7 +9,7 @@ import Icon from '@leafygreen-ui/icon';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
-  width: 700px;
+  width: 100%;
   height: 573px;
   padding: 40px;
 `;
