@@ -10,11 +10,11 @@ import ComponentFactory from './ComponentFactory';
 const StyledCard = styled(Card)`
   box-shadow: none;
   height: 56px;
-  margin: auto;
-  padding: 10px;
+  margin: auto auto 16px auto;
+  padding: 15px;
 `;
 
-const CardBody = styled()`
+const StyledChoice = styled('p')`
   font-family: Akzidenz;
   font-weight: 400;
   font-style: normal;
@@ -22,19 +22,24 @@ const CardBody = styled()`
 `;
 
 const Dot = styled('span')`
-  height: 25px;
-  width: 25px;
+  height: 10px;
+  width: 10px;
   background-color: #fff;
   border-color: black;
   border-radius: 50%;
   display: inline-block;
+  border-style: solid;
+  border-width: thin;
+  margin-right: 16px;
 `;
 
-const QuizChoice = ({ nodeData }) => {
-  console.log(nodeData, 'qc');
+const QuizChoice = ({ nodeData: { argument, children } }) => {
   return (
     <StyledCard>
       <Dot />
+      {argument.map((node, i) => (
+        <ComponentFactory nodeData={node} key={i} />
+      ))}
     </StyledCard>
   );
 };
