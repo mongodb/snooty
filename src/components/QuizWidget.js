@@ -73,10 +73,14 @@ const QuizCompleteSubtitle = ({ question }) => {
 };
 
 const QuizWidget = ({ nodeData: { children } }) => {
+  const [question, ...choices] = children;
   return (
     <StyledCard>
       <QuizCompleteHeader />
-      <QuizCompleteSubtitle question={children[0].children} />
+      <QuizCompleteSubtitle question={question.children} />
+      {choices.map((node, i) => (
+        <ComponentFactory nodeData={node} key={i} />
+      ))}
       <StyledButton variant="default">Submit</StyledButton>
     </StyledCard>
   );

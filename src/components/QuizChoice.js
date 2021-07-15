@@ -31,6 +31,7 @@ const Dot = styled('span')`
 `;
 
 const QuizChoice = ({ nodeData }) => {
+  console.log(nodeData, 'qc');
   return (
     <StyledCard>
       <Dot />
