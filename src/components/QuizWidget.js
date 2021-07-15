@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import ComponentFactory from './ComponentFactory';
 import Button from '@leafygreen-ui/button';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
+import ComponentFactory from './ComponentFactory';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
