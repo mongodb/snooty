@@ -19,7 +19,7 @@ const QuizTitle = styled('p')`
   font-family: Akzidenz;
   font-weight: 500;
   font-style: normal;
-  font-size: 21px;
+  font-size: 18px;
 `;
 
 const QuizHeader = styled('div')`
