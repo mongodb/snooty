@@ -64,7 +64,7 @@ const QuizCompleteSubtitle = ({ question }) => {
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
   return (
-    question.type === 'paragraph' && (
+    question?.type === 'paragraph' && (
       <StyledCard>
         <QuizCompleteHeader />
         <QuizCompleteSubtitle question={question.children} />
