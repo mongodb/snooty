@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
@@ -12,13 +13,9 @@ const StyledCard = styled(Card)`
   height: 56px;
   margin: auto auto 16px auto;
   padding: 15px;
-`;
-
-const StyledChoice = styled('p')`
-  font-family: Akzidenz;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
+  &:hover {
+    border-color: black;
+  }
 `;
 
 const Dot = styled('span')`
@@ -33,9 +30,15 @@ const Dot = styled('span')`
   margin-right: 16px;
 `;
 
-const QuizChoice = ({ nodeData: { argument, children } }) => {
+const QuizChoice = ({ nodeData: { argument, children }, selectedResponse, parentCallback }) => {
+  const [isSelected, setSelected] = useState();
+  const sendData = () => {
+    parentCallback('myinfo');
+  };
+
+  console.log(isSelected);
   return (
-    <StyledCard>
+    <StyledCard onClick={(e) => sendData()}>
       <Dot />
       {argument.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />

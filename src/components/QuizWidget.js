@@ -4,8 +4,6 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
-import EllipsisIcon from '@leafygreen-ui/icon/dist/Ellipsis';
-import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
 
@@ -63,14 +61,19 @@ const QuizCompleteSubtitle = ({ question }) => {
   );
 };
 
+const callbackFunction = (childData) => {
+  console.log(childData, 'hola');
+};
+
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
+
   return (
     <StyledCard>
       <QuizCompleteHeader />
       <QuizCompleteSubtitle question={question.children} />
       {choices.map((node, i) => (
-        <ComponentFactory nodeData={node} key={i} />
+        <ComponentFactory nodeData={node} key={i} parentCallback={callbackFunction} />
       ))}
       <StyledButton variant="default">Submit</StyledButton>
     </StyledCard>
