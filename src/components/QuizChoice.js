@@ -10,31 +10,36 @@ const StyledCard = styled(Card)`
   box-shadow: none;
   margin: auto auto 16px auto;
   padding: 15px;
-  ${(props) => console.log(props.anySelectedResponse)}
-  ${(props) => (props.anySelectedResponse ? (props.isCorrect ? `color: red;` : `opacity: 0.5;`) : `color: blue;`)}
+  ${(props) => console.log(props)}
+  ${(props) =>
+    props.hasSelectedResponse
+      ? props.selectedThisChoice && !props.isCorrect
+        ? `border-color: ${uiColors.black};`
+        : ``
+      : ``}
+
+  ${(props) =>
+    props.hasSelectedResponse
+      ? props.isCorrect
+        ? `border-color: ${uiColors.green.base}; border-width: 2px;`
+        : `opacity: 0.5;`
+      : `color: blue;`}
+
   &:hover {
-    border-color: black;
+    ${(props) => (!props.hasSelectedResponse ? `border-color: black;` : ``)}
   }
 `;
 
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
-  background-color: #fff;
+  background-color: ${(props) => (props.selectedThisChoice ? `black` : `white`)};
   border-color: black;
   border-radius: 50%;
   display: inline-block;
   border-style: solid;
   border-width: thin;
   margin-right: 16px;
-`;
-
-const ChoiceBody = styled('span')`
-  margin-top: 8px !important;
-`;
-
-const ChoiceAnswer = styled('span')`
-  margin-top: 8px !important;
 `;
 
 const DescriptionBody = styled('p')`
@@ -44,20 +49,32 @@ const DescriptionBody = styled('p')`
   padding-left: 26px;
 `;
 
-const AnswerDescription = (desc) => {
-  return <DescriptionBody> hola caro</DescriptionBody>;
+const AnswerDescription = ({ description }) => {
+  return (
+    <DescriptionBody>
+      {description.map((node, i) => (
+        <ComponentFactory nodeData={node} key={i} />
+      ))}
+    </DescriptionBody>
+  );
 };
 
-const QuizChoice = ({ nodeData: { argument, children } }) => {
-  const [anySelectedResponse, setSelectedResponse] = useState(true);
-  console.log(argument, children);
+const QuizChoice = ({ nodeData: { argument, children, options }, selectedChoice }) => {
+  const [hasSelectedResponse, setSelectedResponse] = useState(true);
+  const description = children[0].children;
+  const rightAnswer = options?.['is-true'] ? true : false;
+  const selectedThisChoice = false;
   return (
-    <StyledCard anySelectedResponse={anySelectedResponse} isCorrect={false}>
-      <Dot />
+    <StyledCard
+      hasSelectedResponse={hasSelectedResponse}
+      isCorrect={rightAnswer}
+      selectedThisChoice={selectedThisChoice}
+    >
+      <Dot selectedThisChoice={selectedThisChoice} />
       {argument.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}
-      {anySelectedResponse && <AnswerDescription />}
+      {hasSelectedResponse && <AnswerDescription description={description} />}
     </StyledCard>
   );
 };
