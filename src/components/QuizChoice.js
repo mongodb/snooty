@@ -3,13 +3,15 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
+import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
 
 const StyledCard = styled(Card)`
   box-shadow: none;
-  height: 56px;
   margin: auto auto 16px auto;
   padding: 15px;
+  ${(props) => console.log(props.anySelectedResponse)}
+  ${(props) => (props.anySelectedResponse ? (props.isCorrect ? `color: red;` : `opacity: 0.5;`) : `color: blue;`)}
   &:hover {
     border-color: black;
   }
@@ -27,15 +29,35 @@ const Dot = styled('span')`
   margin-right: 16px;
 `;
 
-const QuizChoice = ({ nodeData: { argument, children } }) => {
-  const [selectedChoice, setSelectedChoice] = useState(false);
+const ChoiceBody = styled('span')`
+  margin-top: 8px !important;
+`;
 
+const ChoiceAnswer = styled('span')`
+  margin-top: 8px !important;
+`;
+
+const DescriptionBody = styled('p')`
+  margin-top: 8px !important;
+  margin-bottom: 0px !important;
+
+  padding-left: 26px;
+`;
+
+const AnswerDescription = (desc) => {
+  return <DescriptionBody> hola caro</DescriptionBody>;
+};
+
+const QuizChoice = ({ nodeData: { argument, children } }) => {
+  const [anySelectedResponse, setSelectedResponse] = useState(true);
+  console.log(argument, children);
   return (
-    <StyledCard>
+    <StyledCard anySelectedResponse={anySelectedResponse} isCorrect={false}>
       <Dot />
       {argument.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}
+      {anySelectedResponse && <AnswerDescription />}
     </StyledCard>
   );
 };
