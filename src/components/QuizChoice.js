@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
-import { InlineCode } from '@leafygreen-ui/typography';
-import { uiColors } from '@leafygreen-ui/palette';
-import { Radio, RadioGroup } from '@leafygreen-ui/radio-group';
 import ComponentFactory from './ComponentFactory';
 
 const StyledCard = styled(Card)`
@@ -30,15 +27,9 @@ const Dot = styled('span')`
   margin-right: 16px;
 `;
 
-const QuizChoice = ({ nodeData: { argument, children }, selectedResponse, parentCallback }) => {
-  const [isSelected, setSelected] = useState();
-  const sendData = () => {
-    parentCallback('myinfo');
-  };
-
-  console.log(isSelected);
+const QuizChoice = ({ nodeData: { argument, children } }) => {
   return (
-    <StyledCard onClick={(e) => sendData()}>
+    <StyledCard>
       <Dot />
       {argument.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />

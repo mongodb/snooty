@@ -61,10 +61,6 @@ const QuizCompleteSubtitle = ({ question }) => {
   );
 };
 
-const callbackFunction = (childData) => {
-  console.log(childData, 'hola');
-};
-
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
 
@@ -73,7 +69,7 @@ const QuizWidget = ({ nodeData: { children } }) => {
       <QuizCompleteHeader />
       <QuizCompleteSubtitle question={question.children} />
       {choices.map((node, i) => (
-        <ComponentFactory nodeData={node} key={i} parentCallback={callbackFunction} />
+        <ComponentFactory nodeData={node} key={i} />
       ))}
       <StyledButton variant="default">Submit</StyledButton>
     </StyledCard>
