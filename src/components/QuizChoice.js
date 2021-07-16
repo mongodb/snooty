@@ -28,6 +28,8 @@ const Dot = styled('span')`
 `;
 
 const QuizChoice = ({ nodeData: { argument, children } }) => {
+  const [selectedChoice, setSelectedChoice] = useState(false);
+
   return (
     <StyledCard>
       <Dot />
