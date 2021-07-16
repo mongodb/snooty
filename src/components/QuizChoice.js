@@ -10,24 +10,16 @@ const StyledCard = styled(Card)`
   box-shadow: none;
   margin: auto auto 16px auto;
   padding: 15px;
-  ${(props) => console.log(props)}
-  ${(props) =>
-    props.hasSelectedResponse
-      ? props.selectedThisChoice && !props.isCorrect
-        ? `border-color: ${uiColors.black};`
-        : ``
-      : ``}
-
   ${(props) =>
     props.hasSelectedResponse
       ? props.isCorrect
         ? `border-color: ${uiColors.green.base}; border-width: 2px;`
+        : props.selectedThisChoice
+        ? `border-color: ${uiColors.black};`
         : `opacity: 0.5;`
-      : `color: blue;`}
-
-  &:hover {
-    ${(props) => (!props.hasSelectedResponse ? `border-color: black;` : ``)}
-  }
+      : `&:hover {
+      border-color: black;
+    }`}
 `;
 
 const Dot = styled('span')`
@@ -63,7 +55,7 @@ const QuizChoice = ({ nodeData: { argument, children, options }, selectedChoice 
   const [hasSelectedResponse, setSelectedResponse] = useState(true);
   const description = children[0].children;
   const rightAnswer = options?.['is-true'] ? true : false;
-  const selectedThisChoice = false;
+  const selectedThisChoice = true;
   return (
     <StyledCard
       hasSelectedResponse={hasSelectedResponse}
