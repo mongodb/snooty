@@ -1,20 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
-<StyledInlineCode>
+exports[`renders a Banner correctly 1`] = `
+<StyledBanner
+  variant="info"
+>
   <ComponentFactory
     key="0"
     nodeData={
       Object {
         "position": Object {
           "start": Object {
-            "line": 3,
+            "line": 6,
           },
         },
         "type": "text",
-        "value": "N. Virginia (us-east-1)",
+        "value": "These instructions are for installing MongoDB directly from",
       }
     }
   />
-</StyledInlineCode>
+</StyledBanner>
 `;

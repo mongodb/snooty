@@ -448,23 +448,33 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           <Link
             aria-expanded={false}
             className="reference  internal"
-            href="platforms"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
+            to="platforms"
           >
-            <a
+            <mockConstructor
               aria-expanded={false}
               className="reference  internal"
-              href="platforms"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="button"
               tabIndex="0"
+              to="/platforms/"
             >
-              Platforms
-            </a>
+              <a
+                aria-expanded={false}
+                className="reference  internal"
+                href="/platforms/"
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                Platforms
+              </a>
+            </mockConstructor>
           </Link>
         </NodeLink>
       </li>
@@ -529,23 +539,33 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
           <Link
             aria-expanded={false}
             className="reference  internal"
-            href="use-cases"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
             tabIndex="0"
+            to="use-cases"
           >
-            <a
+            <mockConstructor
               aria-expanded={false}
               className="reference  internal"
-              href="use-cases"
               onClick={[Function]}
               onKeyDown={[Function]}
               role="button"
               tabIndex="0"
+              to="/use-cases/"
             >
-              Use Cases
-            </a>
+              <a
+                aria-expanded={false}
+                className="reference  internal"
+                href="/use-cases/"
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                Use Cases
+              </a>
+            </mockConstructor>
           </Link>
         </NodeLink>
       </li>

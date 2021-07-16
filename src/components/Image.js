@@ -17,7 +17,6 @@ export default class Image extends Component {
 
   handleLoad = ({ target: img }) => {
     const { handleImageLoaded, nodeData } = this.props;
-
     handleImageLoaded(this.imgRef.current);
 
     const scale = getNestedValue(['options', 'scale'], nodeData);

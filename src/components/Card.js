@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
-import { theme } from '../../theme/docsTheme';
-import ComponentFactory from '../ComponentFactory';
-import ConditionalWrapper from '../ConditionalWrapper';
-import Link from '../Link';
-import Tag from '../Tag';
+import { theme } from '../theme/docsTheme';
+import ComponentFactory from './ComponentFactory';
+import ConditionalWrapper from './ConditionalWrapper';
+import Link from './Link';
+import Tag from './Tag';
 
 const StyledCard = styled(LeafyGreenCard)`
   display: flex;
@@ -25,6 +26,27 @@ const CardIcon = styled('img')`
   width: ${theme.size.medium};
 `;
 
+// Applied when no URL option is specified for the card, because the card-ref
+// and ref directives are currently indistinguishable in the AST
+const cardRefStyling = css`
+  a {
+    background: ${uiColors.gray.light3};
+    border-radius: ${theme.size.tiny};
+    border: 1px solid rgba(184, 196, 194, 0.48);
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: ${theme.fontSize.small} !important;
+    font-weight: 600;
+    margin-bottom: ${theme.size.tiny};
+    margin-right: ${theme.size.tiny};
+    padding: ${theme.size.tiny};
+
+    &:after {
+      content: ' ➔';
+    }
+  }
+`;
+
 const H4 = styled('h4')`
   letter-spacing: 0.5px;
   margin: ${({ compact, theme }) =>
@@ -33,7 +55,7 @@ const H4 = styled('h4')`
 
 const CTA = styled('p')`
   font-weight: bold;
-  margin-top: auto;
+  margin-top: ${theme.size.small};
   & > a:hover {
     color: ${uiColors.blue.dark2};
   }
@@ -92,9 +114,13 @@ const Card = ({
   const Icon = isCompact ? CompactIcon : CardIcon;
   return (
     <Card
-      onClick={() => {
-        window.location.href = url;
-      }}
+      onClick={
+        url
+          ? () => {
+              window.location.href = url;
+            }
+          : undefined
+      }
     >
       {icon && (
         <ConditionalWrapper
@@ -106,7 +132,9 @@ const Card = ({
       )}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
-        wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
+        wrapper={(children) => (
+          <CompactTextWrapper className={!url && cx(cardRefStyling)}>{children}</CompactTextWrapper>
+        )}
       >
         {tag && <FlexTag text={tag} />}
         <H4 compact={isCompact || isExtraCompact}>{headline}</H4>
