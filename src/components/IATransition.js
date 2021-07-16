@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
 import { theme } from '../theme/docsTheme';
+import ConditionalWrapper from './ConditionalWrapper';
 
 const fadeOut = css`
   .slide-exit {
@@ -44,18 +45,25 @@ const forwardStyle = css`
 `;
 
 const IATransition = ({ back, children, hasIA, slug }) => (
-  <>
-    <Global styles={back ? backStyle : forwardStyle} />
-    <SwitchTransition>
-      <CSSTransition
-        addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
-        classNames="slide"
-        key={slug}
-      >
-        <div>{children}</div>
-      </CSSTransition>
-    </SwitchTransition>
-  </>
+  <ConditionalWrapper
+    condition={hasIA}
+    wrapper={(children) => (
+      <>
+        <Global styles={back ? backStyle : forwardStyle} />
+        <SwitchTransition>
+          <CSSTransition
+            addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
+            classNames="slide"
+            key={slug}
+          >
+            <div>{children}</div>
+          </CSSTransition>
+        </SwitchTransition>
+      </>
+    )}
+  >
+    {children}
+  </ConditionalWrapper>
 );
 
 IATransition.propTypes = {

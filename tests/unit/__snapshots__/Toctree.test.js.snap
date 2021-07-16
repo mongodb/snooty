@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toctree renders 1`] = `
+.emotion-0 {
+  border-left: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  color: unset;
+}
+
+<Fragment>
+  <SideNavGroup
+    key="drawer-get-started"
+  >
+    <ComponentFactory
+      key="0"
+      nodeData={
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 0,
+            },
+          },
+          "type": "text",
+          "value": "Get Started",
+        }
+      }
+    />
+    <SideNavItem
+      active={false}
+      as={[Function]}
+      className="emotion-0"
+      key="node-get-started/introduction-mobile"
+      to="get-started/introduction-mobile"
+    >
+      <ComponentFactory
+        key="0"
+        nodeData={
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "Introduction for Mobile Developers",
+          }
+        }
+      />
+    </SideNavItem>
+    <SideNavItem
+      active={false}
+      as={[Function]}
+      className="emotion-0"
+      key="node-get-started/introduction-backend"
+      to="get-started/introduction-backend"
+    >
+      <ComponentFactory
+        key="0"
+        nodeData={
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "Introduction for Backend Developers",
+          }
+        }
+      />
+    </SideNavItem>
+  </SideNavGroup>
+  <SideNavItem
+    active={false}
+    as={[Function]}
+    className="emotion-0"
+    key="node-sdk"
+    to="sdk"
+  >
+    <ComponentFactory
+      key="0"
+      nodeData={
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 0,
+            },
+          },
+          "type": "text",
+          "value": "Realm Database SDKs",
+        }
+      }
+    />
+    <SideNavItem
+      active={false}
+      as={[Function]}
+      className="emotion-0"
+      key="node-sdk/android"
+      to="sdk/android"
+    >
+      <ComponentFactory
+        key="0"
+        nodeData={
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "Android SDK",
+          }
+        }
+      />
+      <SideNavGroup
+        key="drawer-sdk/android/fundamentals"
+      >
+        <ComponentFactory
+          key="0"
+          nodeData={
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 0,
+                },
+              },
+              "type": "text",
+              "value": "Fundamentals",
+            }
+          }
+        />
+        <SideNavItem
+          active={false}
+          as={[Function]}
+          className="emotion-0"
+          key="node-sdk/android/fundamentals/async-api"
+          to="sdk/android/fundamentals/async-api"
+        >
+          <ComponentFactory
+            key="0"
+            nodeData={
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Asynchronous API",
+              }
+            }
+          />
+        </SideNavItem>
+      </SideNavGroup>
+    </SideNavItem>
+    <SideNavItem
+      active={false}
+      as={[Function]}
+      className="emotion-0"
+      key="node-sdk/ios"
+      to="sdk/ios"
+    >
+      <ComponentFactory
+        key="0"
+        nodeData={
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 0,
+              },
+            },
+            "type": "text",
+            "value": "iOS SDK",
+          }
+        }
+      />
+    </SideNavItem>
+  </SideNavItem>
+</Fragment>
+`;

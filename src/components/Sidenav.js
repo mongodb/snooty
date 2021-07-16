@@ -13,8 +13,9 @@ import Toctree from './Toctree';
 import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
+import Link from './Link';
 
-const StyledLeafygreenSideNav = styled((props) => <LeafygreenSideNav {...props} />)`
+const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   grid-area: sidebar;
   z-index: 1;
 
@@ -31,8 +32,9 @@ const StyledLeafygreenSideNav = styled((props) => <LeafygreenSideNav {...props} 
   }
 
   // TODO: Remove when mongodb-docs.css is removed
-  a:hover {
-    color: ${uiColors.gray.dark2};
+  a:hover,
+  a:focus {
+    color: unset;
   }
 `;
 
@@ -50,6 +52,7 @@ const titleStyle = css`
 // Allows AdditionalLinks to always be at the bottom of the SideNav
 const Spaceholder = styled('div')`
   flex-grow: 1;
+  min-height: ${theme.size.medium};
 `;
 
 const Border = styled('hr')`
@@ -88,43 +91,44 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
 
   return (
     <StyledLeafygreenSideNav aria-label="Side navigation" widthOverride={268}>
-      {!!ia ? (
-        <IATransition back={back} hasIA={!!ia} slug={slug}>
-          <NavTopContainer>
-            <ArtificialPadding />
-            <SidebarBack
-              border={<Border />}
+      <IATransition back={back} hasIA={!!ia} slug={slug}>
+        <NavTopContainer>
+          <ArtificialPadding />
+          <SidebarBack
+            border={<Border />}
+            handleClick={() => {
+              setBack(true);
+            }}
+            slug={slug}
+          />
+          {ia && (
+            <IA
+              header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
               handleClick={() => {
-                setBack(true);
+                setBack(false);
               }}
-              slug={slug}
+              ia={ia}
             />
-            {ia && (
-              <IA
-                header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
-                handleClick={() => {
-                  setBack(false);
-                }}
-                ia={ia}
-              />
-            )}
-            {showAllProducts && (
-              <Border
-                css={css`
-                  margin-bottom: 0;
-                `}
-              />
-            )}
-          </NavTopContainer>
-          {showAllProducts && <ProductsList />}
-        </IATransition>
-      ) : (
-        <>
-          <SiteTitle>{siteTitle}</SiteTitle>
-          {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
-          <Toctree toctree={toctree} />
-        </>
+          )}
+          {showAllProducts && (
+            <Border
+              css={css`
+                margin-bottom: 0;
+              `}
+            />
+          )}
+        </NavTopContainer>
+        {showAllProducts && <ProductsList />}
+      </IATransition>
+
+      {!ia && !showAllProducts && (
+        <SiteTitle as={Link} to="/">
+          {siteTitle}
+        </SiteTitle>
       )}
+      {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+      {!ia && <Toctree slug={slug} toctree={toctree} />}
+
       <Spaceholder />
       {additionalLinks.map(({ glyph, title, url }) => (
         <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
