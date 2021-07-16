@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`doesnt render without question 1`] = `""`;
+exports[`doesnt render quiz widget without a specified question 1`] = `""`;
 
-exports[`renders correctly 1`] = `
+exports[`renders quiz widget correctly 1`] = `
 <StyledCard>
   <QuizCompleteHeader />
   <QuizCompleteSubtitle
