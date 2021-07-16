@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`doesnt render quiz widget without a specified question 1`] = `""`;
+
+exports[`renders quiz widget correctly 1`] = `
+<StyledCard>
+  <QuizCompleteHeader />
+  <QuizCompleteSubtitle
+    question={
+      Array [
+        Object {
+          "position": Object {
+            "start": Object {
+              "line": 17,
+            },
+          },
+          "type": "text",
+          "value": "With my MongoDB account, I can now access?",
+        },
+      ]
+    }
+  />
+  <ComponentFactory
+    key="0"
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 19,
+              },
+            },
+            "type": "text",
+            "value": "MongoDB Atlas",
+          },
+        ],
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 21,
+                  },
+                },
+                "type": "text",
+                "value": "Up to 2 lines of copy here explaining why MongoDB Atlas isn’t the right answer choice",
+              },
+            ],
+            "position": Object {
+              "start": Object {
+                "line": 21,
+              },
+            },
+            "type": "paragraph",
+          },
+        ],
+        "domain": "mongodb",
+        "name": "quizchoice",
+        "position": Object {
+          "start": Object {
+            "line": 19,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />
+  <ComponentFactory
+    key="1"
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 23,
+              },
+            },
+            "type": "text",
+            "value": "MongoDB University",
+          },
+        ],
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 25,
+                  },
+                },
+                "type": "text",
+                "value": "Up to 2 lines of copy here explaining why MongoDB University isn’t the right answer choice",
+              },
+            ],
+            "position": Object {
+              "start": Object {
+                "line": 25,
+              },
+            },
+            "type": "paragraph",
+          },
+        ],
+        "domain": "mongodb",
+        "name": "quizchoice",
+        "position": Object {
+          "start": Object {
+            "line": 23,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />
+  <ComponentFactory
+    key="2"
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "position": Object {
+              "start": Object {
+                "line": 27,
+              },
+            },
+            "type": "text",
+            "value": "All of the Above",
+          },
+        ],
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 30,
+                  },
+                },
+                "type": "text",
+                "value": "Your MongoDB account gives you access to all of the above: Atlas, University, Cloud Manager, etc.",
+              },
+            ],
+            "position": Object {
+              "start": Object {
+                "line": 30,
+              },
+            },
+            "type": "paragraph",
+          },
+        ],
+        "domain": "mongodb",
+        "name": "quizchoice",
+        "options": Object {
+          "is-true": true,
+        },
+        "position": Object {
+          "start": Object {
+            "line": 27,
+          },
+        },
+        "type": "directive",
+      }
+    }
+  />
+  <StyledButton
+    variant="default"
+  >
+    Submit
+  </StyledButton>
+</StyledCard>
+`;
