@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Banner from './Banner';
+import SiteBanner from './SiteBanner';
 import Navbar from './Navbar';
 
 const StyledHeaderContainer = styled.header`
@@ -11,7 +11,7 @@ const StyledHeaderContainer = styled.header`
 const Header = () => {
   return (
     <StyledHeaderContainer>
-      <Banner />
+      <SiteBanner />
       <Navbar />
     </StyledHeaderContainer>
   );

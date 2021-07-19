@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import * as RealmUtil from '../../src/utils/realm';
-import Banner from '../../src/components/Banner';
+import SiteBanner from '../../src/components/SiteBanner';
 import { HeaderContext } from '../../src/components/header-context';
 import { tick } from '../utils';
 
@@ -15,7 +15,7 @@ const mockBannerContent = {
 describe('Banner component', () => {
   it('renders without a banner image', () => {
     // bannerContent state should remain null
-    const wrapper = mount(<Banner />);
+    const wrapper = mount(<SiteBanner />);
     expect(wrapper.find('Banner').children()).toHaveLength(0);
   });
 
@@ -25,7 +25,7 @@ describe('Banner component', () => {
     const setBannerContent = jest.fn();
     const wrapper = mount(
       <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent }}>
-        <Banner />
+        <SiteBanner />
       </HeaderContext.Provider>
     );
     await tick({ wrapper });

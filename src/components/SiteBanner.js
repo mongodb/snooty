@@ -32,7 +32,7 @@ const StyledBannerContent = styled.div(
   `
 );
 
-const Banner = () => {
+const SiteBanner = () => {
   const { bannerContent, setBannerContent } = useContext(HeaderContext);
 
   useEffect(() => {
@@ -59,4 +59,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default SiteBanner;

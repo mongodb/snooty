@@ -20,7 +20,7 @@ exports[`Banner component renders with a banner image 1`] = `
   }
 }
 
-<Banner>
+<SiteBanner>
   <StyledBannerContainer
     href="https://mongodb.com"
     title="Test"
@@ -40,5 +40,5 @@ exports[`Banner component renders with a banner image 1`] = `
       </StyledBannerContent>
     </a>
   </StyledBannerContainer>
-</Banner>
+</SiteBanner>
 `;
