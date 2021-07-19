@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -6,6 +7,7 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
+import { QuizContext } from './quiz-context';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -49,7 +51,6 @@ const QuizCompleteHeader = () => {
 };
 
 const QuizCompleteSubtitle = ({ question }) => {
-  console.log('qq', question);
   return (
     <>
       <QuizSubtitle>Question</QuizSubtitle>
@@ -65,13 +66,24 @@ const QuizCompleteSubtitle = ({ question }) => {
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
   console.log('question', question);
+  const [selectedResponse, setSelectedResponse] = useState('');
+  const clickedChoice = (text) => {
+    console.log(text);
+    setSelectedResponse(text);
+  };
   return (
     question?.type === 'paragraph' && (
       <StyledCard>
         <QuizCompleteHeader />
         <QuizCompleteSubtitle question={question.children} />
         {choices.map((node, i) => (
-          <ComponentFactory nodeData={node} key={i} />
+          <ComponentFactory
+            nodeData={node}
+            key={i}
+            idx={i + 1}
+            selectedChoice={selectedResponse}
+            callback={clickedChoice}
+          />
         ))}
         <StyledButton variant="default">Submit</StyledButton>
       </StyledCard>

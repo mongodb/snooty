@@ -50,16 +50,18 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
-const QuizChoice = ({ nodeData: { argument, children, options }, selectedChoice }) => {
-  const [hasSelectedResponse, setSelectedResponse] = useState(true);
+const QuizChoice = ({ nodeData: { argument, children, options }, selectedChoice, callback, idx }) => {
+  const hasSelectedResponse = selectedChoice != '';
+  console.log(selectedChoice, 'hola', hasSelectedResponse);
   const description = children[0].children;
   const rightAnswer = options?.['is-true'] ? true : false;
-  const selectedThisChoice = false;
+  const selectedThisChoice = selectedChoice == idx;
   return (
     <StyledCard
       hasSelectedResponse={hasSelectedResponse}
       isCorrect={rightAnswer}
       selectedThisChoice={selectedThisChoice}
+      onClick={() => callback(idx)}
     >
       <Dot selectedThisChoice={selectedThisChoice} />
       {argument.map((node, i) => (
