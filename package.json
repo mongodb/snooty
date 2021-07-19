@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build": "gatsby build --prefix-paths",
+    "build:clean": "npm run clean && npm run build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
@@ -79,6 +80,7 @@
     "@leafygreen-ui/typography": "^7.5.0",
     "@loadable/component": "^5.14.1",
     "@mdb/consistent-nav": "^0.1.5",
+    "@mdb/flora": "^0.3.7",
     "clipboard": "^2.0.8",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
