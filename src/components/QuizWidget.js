@@ -65,12 +65,22 @@ const QuizCompleteSubtitle = ({ question }) => {
 
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
-  console.log('question', question);
   const [selectedResponse, setSelectedResponse] = useState('');
-  const clickedChoice = (text) => {
-    console.log(text);
-    setSelectedResponse(text);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const SubmitButton = () => {
+    return (
+      <StyledButton onClick={() => setHasSubmitted(true)} variant="default">
+        Submit
+      </StyledButton>
+    );
   };
+
+  const ResultFooter = () => {
+    return <div>Correct Answer</div>;
+  };
+
+  const footerWidget = !hasSubmitted ? <SubmitButton /> : <ResultFooter />;
   return (
     question?.type === 'paragraph' && (
       <StyledCard>
@@ -81,11 +91,12 @@ const QuizWidget = ({ nodeData: { children } }) => {
             nodeData={node}
             key={i}
             idx={i + 1}
-            selectedChoice={selectedResponse}
-            callback={clickedChoice}
+            selectedResponse={selectedResponse}
+            callback={setSelectedResponse}
+            hasSubmitted={hasSubmitted}
           />
         ))}
-        <StyledButton variant="default">Submit</StyledButton>
+        {footerWidget}
       </StyledCard>
     )
   );

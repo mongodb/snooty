@@ -10,9 +10,11 @@ const StyledCard = styled(Card)`
   box-shadow: none;
   margin: auto auto 16px auto;
   padding: 15px;
+  ${(props) => (props.selectedThisChoice ? `border-color: ${uiColors.black};` : ``)}
+
   ${(props) =>
-    props.hasSelectedResponse
-      ? props.isCorrect
+    props.hasSubmitted
+      ? props.isCurrentChoiceCorrect
         ? `border-color: ${uiColors.green.base}; border-width: 2px;`
         : props.selectedThisChoice
         ? `border-color: ${uiColors.black}; opacity: 0.5;`
@@ -25,7 +27,8 @@ const StyledCard = styled(Card)`
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
-  background-color: ${(props) => (props.selectedThisChoice ? `white` : `white`)};
+  background-color: ${(props) =>
+    props.selectedThisChoice && !props.hasSubmitted ? `${uiColors.gray.dark3}` : `white`};
   border-color: black;
   border-radius: 50%;
   display: inline-block;
@@ -50,24 +53,26 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
-const QuizChoice = ({ nodeData: { argument, children, options }, selectedChoice, callback, idx }) => {
-  const hasSelectedResponse = selectedChoice != '';
-  console.log(selectedChoice, 'hola', hasSelectedResponse);
+// todos ::
+// send whether question was correct in quizchoice
+// disable on click after its submitted
+
+const QuizChoice = ({ nodeData: { argument, children, options }, selectedResponse, callback, idx, hasSubmitted }) => {
   const description = children[0].children;
-  const rightAnswer = options?.['is-true'] ? true : false;
-  const selectedThisChoice = selectedChoice == idx;
+  const isCurrentChoiceCorrect = options?.['is-true'] ? true : false;
+  const selectedThisChoice = selectedResponse == idx;
   return (
     <StyledCard
-      hasSelectedResponse={hasSelectedResponse}
-      isCorrect={rightAnswer}
+      isCurrentChoiceCorrect={isCurrentChoiceCorrect}
       selectedThisChoice={selectedThisChoice}
+      hasSubmitted={hasSubmitted}
       onClick={() => callback(idx)}
     >
-      <Dot selectedThisChoice={selectedThisChoice} />
+      <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
       {argument.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}
-      {hasSelectedResponse && <AnswerDescription description={description} />}
+      {hasSubmitted && <AnswerDescription description={description} />}
     </StyledCard>
   );
 };
