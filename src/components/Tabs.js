@@ -36,6 +36,14 @@ const landingTabsStyling = css`
       flex-grow: 1;
     }
 
+    @media ${theme.screenSize.upToLarge} {
+      button {
+        overflow: initial;
+        max-width: initial;
+        text-overflow: initial;
+      }
+    }
+
     @media ${theme.screenSize.upToSmall} {
       margin-bottom: 40px;
     }
@@ -51,6 +59,7 @@ const landingTabStyling = css`
   display: grid;
   column-gap: ${theme.size.medium};
   grid-template-columns: repeat(2, 1fr);
+  margin-top: unset !important;
 
   img {
     border-radius: ${theme.size.small};

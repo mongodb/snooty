@@ -59,7 +59,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
       };
       // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
       return (
-        <Link // eslint-disable-line jsx-a11y/anchor-is-valid
+        <Link
           onClick={(e) => {
             e.preventDefault();
             setIsOpen(!isOpen);
@@ -69,7 +69,7 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
           aria-expanded={hasChildren ? isActive : undefined}
           role="button"
           tabIndex="0"
-          href={target}
+          to={target}
         >
           {caretIcon}
           {formattedTitle}

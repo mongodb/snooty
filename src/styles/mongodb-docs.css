@@ -9998,6 +9998,14 @@ div td pre {
   src: url(fonts/akzidgrostdmed.eot#iefix) format('embedded-opentype'), url(fonts/akzidgrostdmed.woff) format('woff'),
     url(fonts/akzidgrostdmed.ttf) format('truetype');
   font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: Akzidenz;
+  src: url(fonts/akzidgrostdmed.eot);
+  src: url(fonts/akzidgrostdmed.eot#iefix) format('embedded-opentype'), url(fonts/akzidgrostdmed.woff) format('woff'),
+    url(fonts/akzidgrostdmed.ttf) format('truetype');
+  font-style: normal;
   font-weight: 700;
 }
 @font-face {
