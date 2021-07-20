@@ -57,9 +57,7 @@ const UnsubmittedChoice = ({ selectedThisChoice, hasSubmitted }) => (
 );
 
 const ChoiceIconFactory = ({ hasSubmitted, selectedThisChoice, isCurrentChoiceCorrect }) => {
-  if (hasSubmitted)
-    if (isCurrentChoiceCorrect) return <CorrectChoice />;
-    else return <IncorrectChoice />;
+  if (hasSubmitted) return isCurrentChoiceCorrect ? <CorrectChoice /> : <IncorrectChoice />;
   else return <UnsubmittedChoice selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />;
 };
 
