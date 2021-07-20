@@ -57,15 +57,10 @@ const UnsubmittedChoice = ({ selectedThisChoice, hasSubmitted }) => (
 );
 
 const ChoiceIconFactory = ({ hasSubmitted, selectedThisChoice, isCurrentChoiceCorrect }) => {
-  return hasSubmitted ? (
-    isCurrentChoiceCorrect ? (
-      <CorrectChoice />
-    ) : (
-      <IncorrectChoice />
-    )
-  ) : (
-    <UnsubmittedChoice selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
-  );
+  if (hasSubmitted)
+    if (isCurrentChoiceCorrect) return <CorrectChoice />;
+    else return <IncorrectChoice />;
+  else return <UnsubmittedChoice selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />;
 };
 
 const QuizChoice = ({ nodeData: { argument, children, options }, selectedResponse, callback, idx, hasSubmitted }) => {
