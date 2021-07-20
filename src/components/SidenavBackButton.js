@@ -15,7 +15,7 @@ const Placeholder = styled(SideNavItem)`
   }
 `;
 
-const SidebarBackButton = ({
+const SidenavBackButton = ({
   border,
   currentSlug,
   enableGlyph = true,
@@ -64,7 +64,7 @@ const SidebarBackButton = ({
   );
 };
 
-SidebarBackButton.propTypes = {
+SidenavBackButton.propTypes = {
   border: PropTypes.element,
   currentSlug: PropTypes.string,
   enableGlyph: PropTypes.bool,
@@ -74,4 +74,4 @@ SidebarBackButton.propTypes = {
   textOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
 };
 
-export default SidebarBackButton;
+export default SidenavBackButton;

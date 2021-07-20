@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
-import SidebarBackButton from './SidebarBackButton';
+import SidenavBackButton from './SidenavBackButton';
 import Spinner from './Spinner';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
@@ -221,7 +221,7 @@ const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
 
   return (
     <>
-      <SidebarBackButton border={<Border />} enableGlyph={false} target={'/'} textOverride={text} />
+      <SidenavBackButton border={<Border />} enableGlyph={false} target={'/'} textOverride={text} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
