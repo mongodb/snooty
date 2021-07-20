@@ -217,11 +217,10 @@ const LoadingWidget = ({ className }) => (
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   const docsTitle = siteTitle ? `${siteTitle} Docs` : 'Docs';
-  const text = <>&#8592; Back to {formatText(docsTitle)}</>;
 
   return (
     <>
-      <SidenavBackButton border={<Border />} enableGlyph={false} target={'/'} textOverride={text} />
+      <SidenavBackButton border={<Border />} target="/" titleOverride={docsTitle} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );

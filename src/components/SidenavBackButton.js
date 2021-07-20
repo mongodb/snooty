@@ -15,23 +15,13 @@ const Placeholder = styled(SideNavItem)`
   }
 `;
 
-const SidenavBackButton = ({
-  border,
-  currentSlug,
-  enableGlyph = true,
-  handleClick,
-  project,
-  target,
-  textOverride,
-  ...props
-}) => {
+const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, titleOverride, ...props }) => {
   const { parents } = useContext(NavigationContext);
-  const glyph = enableGlyph ? <Icon glyph="ArrowLeft" size="small" /> : undefined;
-  let title = null;
+  let title = titleOverride;
   let url = target;
 
   // Fetch page to navigate to using parent category page(s)
-  if (!textOverride) {
+  if (!titleOverride) {
     if (project === 'landing') {
       const landingExceptions = ['/', 'search'];
 
@@ -48,16 +38,16 @@ const SidenavBackButton = ({
       // Show placeholder since the data is likely being fetched
       return <Placeholder />;
     }
+  }
 
-    if (!title || !title.length || !url) {
-      return null;
-    }
+  if (!title || !title.length || !url) {
+    return null;
   }
 
   return (
     <>
-      <SideNavItem as={Link} to={url} glyph={glyph} onClick={handleClick} {...props}>
-        {textOverride || <>Back to {formatText(title)}</>}
+      <SideNavItem as={Link} to={url} glyph={<Icon glyph="ArrowLeft" size="small" />} onClick={handleClick} {...props}>
+        Back to {formatText(title)}
       </SideNavItem>
       {border}
     </>
@@ -67,11 +57,10 @@ const SidenavBackButton = ({
 SidenavBackButton.propTypes = {
   border: PropTypes.element,
   currentSlug: PropTypes.string,
-  enableGlyph: PropTypes.bool,
   handleClick: PropTypes.func,
   project: PropTypes.string,
   target: PropTypes.string,
-  textOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
+  titleOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
 };
 
 export default SidenavBackButton;
