@@ -57,7 +57,7 @@ const SidenavBackButton = ({
   return (
     <>
       <SideNavItem as={Link} to={url} glyph={glyph} onClick={handleClick} {...props}>
-        {textOverride || `Back to ${formatText(title)}`}
+        {textOverride || <>Back to {formatText(title)}</>}
       </SideNavItem>
       {border}
     </>
