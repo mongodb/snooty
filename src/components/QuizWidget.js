@@ -42,7 +42,7 @@ const StyledButton = styled(Button)`
 
 const QuizFooterText = styled('p')`
   margin: 24px 0 0 0 !important;
-  color: ${uiColors.green.base};
+  color: ${uiColors.gray.dark2};
   font-size: 16px;
   font-weight: 500;
 `;
@@ -85,9 +85,9 @@ const ResultFooter = () => {
   return (
     <QuizFooterText>
       <FooterIconSpan>
-        <Icon glyph="Checkmark" fill={uiColors.green.base} size="small" />
+        <Icon glyph="X" fill={uiColors.gray.dark2} size="small" />
       </FooterIconSpan>
-      Correct Answer
+      Incorrect Answer
     </QuizFooterText>
   );
 };
@@ -98,14 +98,11 @@ const QuizWidget = ({ nodeData: { children } }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const footerWidget = hasSubmitted ? (
-    selectedResponse.isCurrentChoiceCorrect ? (
-      <ResultFooter />
-    ) : (
-      ''
-    )
+    !selectedResponse.isCurrentChoiceCorrect && <ResultFooter />
   ) : (
     <SubmitButton setHasSubmitted={setHasSubmitted} />
   );
+
   return (
     question?.type === 'paragraph' && (
       <StyledCard>

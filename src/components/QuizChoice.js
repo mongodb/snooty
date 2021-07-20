@@ -3,25 +3,17 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
+import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
 
 const StyledCard = styled(Card)`
   box-shadow: none;
   margin: auto auto 16px auto;
   padding: 15px;
-  ${(props) => (props.selectedThisChoice ? `border-color: ${uiColors.black};` : ``)}
-  ${(props) => (props.hasSubmitted ? `pointer-events: none; ` : ``)}
-
+  ${(props) => props.selectedThisChoice && `border-color: ${uiColors.black};`}
+  ${(props) => (props.hasSubmitted ? `pointer-events: none; opacity: 0.5;` : `&:hover { border-color: black; }`)}
   ${(props) =>
-    props.hasSubmitted
-      ? props.isCurrentChoiceCorrect
-        ? `border-color: ${uiColors.green.base}; border-width: 2px;`
-        : props.selectedThisChoice
-        ? `border-color: ${uiColors.black}; opacity: 0.5;`
-        : `opacity: 0.5;`
-      : `&:hover {
-        border-color: black;
-      }`}
+    props.hasSubmitted && props.isCurrentChoiceCorrect && `border-color: ${uiColors.green.base}; border-width: 2px;`}
 `;
 
 const Dot = styled('span')`
@@ -34,6 +26,10 @@ const Dot = styled('span')`
   display: inline-block;
   border-style: solid;
   border-width: thin;
+  margin-right: 16px;
+`;
+
+const SyledIcon = styled(Icon)`
   margin-right: 16px;
 `;
 
@@ -53,9 +49,16 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
+const ChoiceIconFactory = ({ hasSubmitted, selectedThisChoice, isCurrentChoiceCorrect }) => {
+  if (hasSubmitted)
+    if (isCurrentChoiceCorrect) return <SyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
+    else return <SyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
+  else return <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />;
+};
+
 const QuizChoice = ({ nodeData: { argument, children, options }, selectedResponse, callback, idx, hasSubmitted }) => {
   const description = children[0].children;
-  const isCurrentChoiceCorrect = options?.['is-true'] ? true : false;
+  const isCurrentChoiceCorrect = !!options?.['is-true'];
   const selectedThisChoice = selectedResponse === idx;
   return (
     <StyledCard
@@ -64,7 +67,11 @@ const QuizChoice = ({ nodeData: { argument, children, options }, selectedRespons
       hasSubmitted={hasSubmitted}
       onClick={() => callback({ index: idx, isCurrentChoiceCorrect: isCurrentChoiceCorrect })}
     >
-      <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
+      <ChoiceIconFactory
+        hasSubmitted={hasSubmitted}
+        selectedThisChoice={selectedThisChoice}
+        isCurrentChoiceCorrect={isCurrentChoiceCorrect}
+      />
       {argument.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}
