@@ -12,18 +12,18 @@ import {
 
 const getTemplate = (project, slug, templateName) => {
   let template;
-  let sidebar;
+  let sidenav;
   switch (templateName) {
     case 'blank':
       template = Blank;
       break;
     case 'landing':
       template = Landing;
-      sidebar = true;
+      sidenav = true;
       break;
     case 'product-landing':
       template = ProductLanding;
-      sidebar = true;
+      sidenav = true;
       break;
     case 'openapi':
       template = OpenAPITemplate;
@@ -39,16 +39,16 @@ const getTemplate = (project, slug, templateName) => {
           break;
         case 'drivers':
           template = isIndex ? DriversIndex : Document;
-          sidebar = true;
+          sidenav = true;
           break;
         default:
           template = Document;
-          sidebar = true;
+          sidenav = true;
       }
       break;
   }
 
-  return { Template: template, sidebar };
+  return { Template: template, sidenav };
 };
 
 export { getTemplate };
