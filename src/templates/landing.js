@@ -6,17 +6,24 @@ import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 
+const CONTENT_MAX_WIDTH = 1440;
+
 const Wrapper = styled('main')`
   margin: 0 auto;
-  max-width: 1440px;
+  width: 100%;
 
   & > section,
   & > section > section {
     display: grid;
     grid-column: 1 / -1;
 
+    // Use leftmost and rightmost grid columns as "margins" to allow the hero image
+    // to span across the page while remaining as part of the document flow
     @media ${({ theme }) => theme.screenSize.mediumAndUp} {
-      grid-template-columns: ${({ theme }) => theme.size.xlarge} repeat(12, 1fr) ${({ theme }) => theme.size.xlarge};
+      grid-template-columns: ${({ theme }) =>
+        `minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(${
+          theme.size.xlarge
+        }, 1fr);`};
     }
 
     @media ${({ theme }) => theme.screenSize.upToMedium} {
@@ -127,13 +134,14 @@ const Landing = ({ children }) => {
           .hero-img {
             grid-column: 1 / -1;
             grid-row: 1 / 3;
-            height: 309px;
-            max-width: 100%;
+            height: 310px;
+            width: 100%;
             object-fit: cover;
             z-index: -1;
 
             @media ${screenSize.upToMedium} {
-              object-position: 35%;
+              grid-row: unset;
+              object-position: 100%;
             }
 
             @media ${screenSize.upToSmall} {
@@ -151,10 +159,6 @@ const Landing = ({ children }) => {
             grid-row: 2 / 3;
 
             @media ${screenSize.upToMedium} {
-              grid-column: 2 / 11;
-            }
-
-            @media ${screenSize.upToSmall} {
               grid-column: 2 / -2;
             }
           }
