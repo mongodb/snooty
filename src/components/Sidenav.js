@@ -16,6 +16,8 @@ import VersionDropdown from './VersionDropdown';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 import useScreenSize from '../hooks/useScreenSize';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import SidebarBackButton from './SidebarBackButton';
 
 const SIDENAV_WIDTH = 268;
 
@@ -127,6 +129,7 @@ const additionalLinks = [
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
+  const { project } = useSiteMetadata();
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
@@ -163,13 +166,14 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SidebarBack
+                <SidebarBackButton
                   border={<Border />}
                   handleClick={() => {
                     setBack(true);
                     hideMobileSidenav();
                   }}
-                  slug={slug}
+                  project={project}
+                  currentSlug={slug}
                 />
                 {ia && (
                   <IA

@@ -62,12 +62,6 @@ const inlineCodeCss = css`
 `;
 
 const leftSidebarCss = css`
-  // Keep sticky below top navbar
-  // TODO: Check if this is needed after merging docs-nav
-  // .menu-content {
-  //   top: ${theme.navbar.height} !important;
-  // }
-
   label[role='menuitem'] {
     :hover {
       background-color: ${uiColors.gray.light2};
@@ -152,12 +146,6 @@ const globalCSS = css`
   ${schemaDataTypesCss}
   ${spanHttpCss}
 
-  // Prevent content from appearing on top of navbar/banner when scrolling
-  // TODO: Look into removing after docs-nav
-  div.redoc-wrap {
-    z-index: 0;
-  }
-
   // "deprecated" badge
   span[type='warning'] {
     border: ${badgeBorderType} ${uiColors.yellow.light2};
@@ -211,7 +199,6 @@ const LoadingMessage = styled('div')`
   margin-bottom: ${theme.size.small};
 `;
 
-// Copied over from docs-nav; TODO: consolidate title style after docs-nav merge to master
 const MenuTitle = styled('div')`
   color: ${uiColors.gray.dark3};
   font-size: ${theme.fontSize.default};
@@ -234,7 +221,7 @@ const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
 
   return (
     <>
-      <SidebarBackButton border={<Border />} enableGlyph={false} textOverride={text} title={docsTitle} url={'/'} />
+      <SidebarBackButton border={<Border />} enableGlyph={false} target={'/'} textOverride={text} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
@@ -298,7 +285,6 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
         options={{
           hideLoading: true,
           maxDisplayedEnumValues: 5,
-          scrollYOffset: theme.size.stripUnit(theme.navbar.baseHeight),
           theme: {
             codeBlock: {
               backgroundColor: uiColors.black,
