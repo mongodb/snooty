@@ -11,9 +11,10 @@ const StyledCard = styled(Card)`
   margin: auto auto 16px auto;
   padding: 15px;
   ${(props) => props.selectedThisChoice && `border-color: ${uiColors.black};`}
-  ${(props) => (props.hasSubmitted ? `pointer-events: none` : `&:hover { border-color: black; }`)}
+  ${(props) => (props.hasSubmitted ? `pointer-events: none;` : `&:hover { border-color: black; }`)}
   ${(props) =>
-    props.hasSubmitted && (props.isCurrentChoiceCorrect ? `border: 2px solid ${uiColors.green.base}` : `opacity: 0.5;`)}
+    props.hasSubmitted &&
+    (props.isCurrentChoiceCorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}
 `;
 
 const Dot = styled('span')`
