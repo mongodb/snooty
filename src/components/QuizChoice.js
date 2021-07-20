@@ -50,11 +50,22 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
+const CorrectChoice = () => <SyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
+const IncorrectChoice = () => <SyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
+const UnsubmittedChoice = ({ selectedThisChoice, hasSubmitted }) => (
+  <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
+);
+
 const ChoiceIconFactory = ({ hasSubmitted, selectedThisChoice, isCurrentChoiceCorrect }) => {
-  if (hasSubmitted)
-    if (isCurrentChoiceCorrect) return <SyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
-    else return <SyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
-  else return <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />;
+  return hasSubmitted ? (
+    isCurrentChoiceCorrect ? (
+      <CorrectChoice />
+    ) : (
+      <IncorrectChoice />
+    )
+  ) : (
+    <UnsubmittedChoice selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
+  );
 };
 
 const QuizChoice = ({ nodeData: { argument, children, options }, selectedResponse, callback, idx, hasSubmitted }) => {
