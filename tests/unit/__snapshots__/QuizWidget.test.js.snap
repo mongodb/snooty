@@ -21,6 +21,9 @@ exports[`renders quiz widget correctly 1`] = `
     }
   />
   <ComponentFactory
+    callback={[Function]}
+    hasSubmitted={false}
+    idx={1}
     key="0"
     nodeData={
       Object {
@@ -68,6 +71,9 @@ exports[`renders quiz widget correctly 1`] = `
     }
   />
   <ComponentFactory
+    callback={[Function]}
+    hasSubmitted={false}
+    idx={2}
     key="1"
     nodeData={
       Object {
@@ -115,6 +121,9 @@ exports[`renders quiz widget correctly 1`] = `
     }
   />
   <ComponentFactory
+    callback={[Function]}
+    hasSubmitted={false}
+    idx={3}
     key="2"
     nodeData={
       Object {
@@ -164,10 +173,8 @@ exports[`renders quiz widget correctly 1`] = `
       }
     }
   />
-  <StyledButton
-    variant="default"
-  >
-    Submit
-  </StyledButton>
+  <SubmitButton
+    setHasSubmitted={[Function]}
+  />
 </StyledCard>
 `;
