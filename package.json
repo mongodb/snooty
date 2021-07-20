@@ -106,6 +106,7 @@
     "react-loadable": "^5.5.0",
     "redoc": "^2.0.0-rc.48",
     "sanitize-html": "^2.2.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "theme-ui": "^0.10.0"
   }
 }
