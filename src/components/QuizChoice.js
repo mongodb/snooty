@@ -13,7 +13,8 @@ const StyledCard = styled(Card)`
   ${(props) => props.selectedThisChoice && `border-color: ${uiColors.black};`}
   ${(props) => (props.hasSubmitted ? `pointer-events: none; opacity: 0.5;` : `&:hover { border-color: black; }`)}
   ${(props) =>
-    props.hasSubmitted && props.isCurrentChoiceCorrect && `border-color: ${uiColors.green.base}; border-width: 2px;`}
+    props.hasSubmitted &&
+    (props.isCurrentChoiceCorrect ? `border-color: ${uiColors.green.base}; border-width: 2px;` : `opacity: 0.5;`)}
 `;
 
 const Dot = styled('span')`
