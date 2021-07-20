@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
@@ -57,7 +56,7 @@ const AnswerDescription = ({ description }) => {
 const QuizChoice = ({ nodeData: { argument, children, options }, selectedResponse, callback, idx, hasSubmitted }) => {
   const description = children[0].children;
   const isCurrentChoiceCorrect = options?.['is-true'] ? true : false;
-  const selectedThisChoice = selectedResponse == idx;
+  const selectedThisChoice = selectedResponse === idx;
   return (
     <StyledCard
       isCurrentChoiceCorrect={isCurrentChoiceCorrect}

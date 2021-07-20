@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
