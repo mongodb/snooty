@@ -11,6 +11,7 @@ const StyledCard = styled(Card)`
   margin: auto auto 16px auto;
   padding: 15px;
   ${(props) => (props.selectedThisChoice ? `border-color: ${uiColors.black};` : ``)}
+  ${(props) => (props.hasSubmitted ? `pointer-events: none; ` : ``)}
 
   ${(props) =>
     props.hasSubmitted
@@ -53,10 +54,6 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
-// todos ::
-// send whether question was correct in quizchoice
-// disable on click after its submitted
-
 const QuizChoice = ({ nodeData: { argument, children, options }, selectedResponse, callback, idx, hasSubmitted }) => {
   const description = children[0].children;
   const isCurrentChoiceCorrect = options?.['is-true'] ? true : false;
@@ -66,7 +63,7 @@ const QuizChoice = ({ nodeData: { argument, children, options }, selectedRespons
       isCurrentChoiceCorrect={isCurrentChoiceCorrect}
       selectedThisChoice={selectedThisChoice}
       hasSubmitted={hasSubmitted}
-      onClick={() => callback(idx)}
+      onClick={() => callback({ index: idx, isCurrentChoiceCorrect: isCurrentChoiceCorrect })}
     >
       <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
       {argument.map((node, i) => (
