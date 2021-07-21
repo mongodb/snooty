@@ -31,7 +31,7 @@ const Dot = styled('span')`
 `;
 
 const SyledIcon = styled(Icon)`
-  margin-right: 16px;
+  margin-right: 12px;
 `;
 
 const DescriptionBody = styled('p')`
