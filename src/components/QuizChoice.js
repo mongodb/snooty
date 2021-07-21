@@ -71,7 +71,9 @@ const QuizChoice = ({ nodeData: { argument, children, options }, selectedRespons
       isCurrentChoiceCorrect={isCurrentChoiceCorrect}
       selectedThisChoice={selectedThisChoice}
       hasSubmitted={hasSubmitted}
-      onClick={() => callback({ index: idx, isCurrentChoiceCorrect: isCurrentChoiceCorrect })}
+      onClick={() =>
+        !selectedThisChoice ? callback({ index: idx, isCurrentChoiceCorrect: isCurrentChoiceCorrect }) : callback()
+      }
     >
       <ChoiceIconFactory
         hasSubmitted={hasSubmitted}

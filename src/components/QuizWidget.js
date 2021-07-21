@@ -62,9 +62,9 @@ const QuizCompleteSubtitle = ({ question }) => {
   );
 };
 
-const SubmitButton = ({ setHasSubmitted }) => {
+const SubmitButton = ({ setHasSubmitted, selectedResponse }) => {
   return (
-    <StyledButton onClick={() => setHasSubmitted(true)} variant="default">
+    <StyledButton onClick={() => selectedResponse && setHasSubmitted(true)} variant="default">
       Submit
     </StyledButton>
   );
@@ -72,7 +72,7 @@ const SubmitButton = ({ setHasSubmitted }) => {
 
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
-  const [selectedResponse, setSelectedResponse] = useState({});
+  const [selectedResponse, setSelectedResponse] = useState();
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   return (
@@ -85,12 +85,12 @@ const QuizWidget = ({ nodeData: { children } }) => {
             nodeData={node}
             key={i}
             idx={i + 1}
-            selectedResponse={selectedResponse.index}
+            selectedResponse={selectedResponse?.index}
             callback={setSelectedResponse}
             hasSubmitted={hasSubmitted}
           />
         ))}
-        {!hasSubmitted && <SubmitButton setHasSubmitted={setHasSubmitted} />}
+        {!hasSubmitted && <SubmitButton setHasSubmitted={setHasSubmitted} selectedResponse={selectedResponse} />}
       </StyledCard>
     )
   );
