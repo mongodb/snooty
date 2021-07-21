@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -84,9 +83,9 @@ const QuizWidget = ({ nodeData: { children } }) => {
           <ComponentFactory
             nodeData={node}
             key={i}
-            idx={i + 1}
+            idx={i}
             selectedResponse={selectedResponse?.index}
-            callback={setSelectedResponse}
+            setSelectedResponse={setSelectedResponse}
             hasSubmitted={hasSubmitted}
           />
         ))}
