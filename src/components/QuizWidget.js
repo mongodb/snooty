@@ -40,17 +40,6 @@ const StyledButton = styled(Button)`
   font-size: 16px;
 `;
 
-const QuizFooterText = styled('p')`
-  margin: 24px 0 0 0 !important;
-  color: ${uiColors.gray.dark2};
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-const FooterIconSpan = styled('span')`
-  margin-right: 5px;
-`;
-
 const QuizCompleteHeader = () => {
   return (
     <QuizHeader>
@@ -81,27 +70,10 @@ const SubmitButton = ({ setHasSubmitted }) => {
   );
 };
 
-const ResultFooter = () => {
-  return (
-    <QuizFooterText>
-      <FooterIconSpan>
-        <Icon glyph="X" fill={uiColors.gray.dark2} size="small" />
-      </FooterIconSpan>
-      Incorrect Answer
-    </QuizFooterText>
-  );
-};
-
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
   const [selectedResponse, setSelectedResponse] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
-  const footerWidget = hasSubmitted ? (
-    !selectedResponse.isCurrentChoiceCorrect && <ResultFooter />
-  ) : (
-    <SubmitButton setHasSubmitted={setHasSubmitted} />
-  );
 
   return (
     question?.type === 'paragraph' && (
@@ -118,7 +90,7 @@ const QuizWidget = ({ nodeData: { children } }) => {
             hasSubmitted={hasSubmitted}
           />
         ))}
-        {footerWidget}
+        {!hasSubmitted && <SubmitButton setHasSubmitted={setHasSubmitted} />}
       </StyledCard>
     )
   );
