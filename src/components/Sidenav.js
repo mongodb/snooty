@@ -1,23 +1,42 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
 import IA from './IA';
 import IATransition from './IATransition';
+import Link from './Link';
 import ProductsList from './ProductsList';
 import SidebarBack from './SidebarBack';
+import { SidenavContext } from './sidenav-context';
+import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
 import VersionDropdown from './VersionDropdown';
+import useScreenSize from '../hooks/useScreenSize';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
-import Link from './Link';
+
+const SIDENAV_WIDTH = 268;
 
 const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
-  grid-area: sidebar;
-  z-index: 1;
+  height: 100%;
+
+  // Mobile sidenav
+  @media ${theme.screenSize.upToSmall} {
+    ${({ hideMobile }) => hideMobile && 'display: none;'}
+
+    button[data-testid="side-nav-collapse-toggle"] {
+      display: none;
+    }
+  }
+
+  // Tablet and mobile position
+  @media ${theme.screenSize.upToLarge} {
+    position: absolute;
+  }
 
   // Allows Spaceholder element to flex grow for AdditionalLinks
   & > div > nav > div > ul {
@@ -49,6 +68,30 @@ const titleStyle = css`
   }
 `;
 
+const ContentOverlay = styled('div')`
+  background-color: ${uiColors.white};
+  bottom: 0;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+`;
+
+const SidenavContainer = styled('div')`
+  grid-area: sidenav;
+  position: relative;
+  z-index: 2;
+
+  // Since we want the SideNav to open on top of the content on medium screen size,
+  // keep a width as a placeholder for the collapsed SideNav while its position is absolute
+  @media ${theme.screenSize.tablet} {
+    width: 48px;
+  }
+`;
+
 // Allows AdditionalLinks to always be at the bottom of the SideNav
 const Spaceholder = styled('div')`
   flex-grow: 1;
@@ -72,6 +115,9 @@ const ArtificialPadding = styled('div')`
   height: 16px;
 `;
 
+// Children of this div should appear 1 z-index higher than the ProductsList component.
+// This allows the products in the ProductsList to slide up/down when closing/opening the list
+// without appearing inline with above text
 const NavTopContainer = styled('div')`
   background-color: ${uiColors.gray.light3};
   position: relative;
@@ -85,57 +131,91 @@ const additionalLinks = [
 ];
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
-  const showAllProducts = page?.options?.['nav-show-all-products'];
-  const ia = page?.options?.ia;
+  const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
+  const { isTablet } = useScreenSize();
+  const viewportSize = useViewportSize();
+  const isMobile = viewportSize?.width <= 420;
+
+  // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
 
+  const showAllProducts = page?.options?.['nav-show-all-products'];
+  const ia = page?.options?.ia;
+
+  useEffect(() => {
+    setCollapsed(!!isTablet);
+  }, [isTablet, setCollapsed]);
+
+  const handleOverlayClick = useCallback(() => {
+    setCollapsed(true);
+  }, [setCollapsed]);
+
+  const hideMobileSidenav = useCallback(() => {
+    setHideMobile(true);
+  }, [setHideMobile]);
+
   return (
-    <StyledLeafygreenSideNav aria-label="Side navigation" widthOverride={268}>
-      <IATransition back={back} hasIA={!!ia} slug={slug}>
-        <NavTopContainer>
-          <ArtificialPadding />
-          <SidebarBack
-            border={<Border />}
-            handleClick={() => {
-              setBack(true);
-            }}
-            slug={slug}
-          />
-          {ia && (
-            <IA
-              header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
-              handleClick={() => {
-                setBack(false);
-              }}
-              ia={ia}
-            />
-          )}
-          {showAllProducts && (
-            <Border
-              css={css`
-                margin-bottom: 0;
-              `}
-            />
-          )}
-        </NavTopContainer>
-        {showAllProducts && <ProductsList />}
-      </IATransition>
+    <>
+      <SidenavContainer>
+        <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
+          <StyledLeafygreenSideNav
+            aria-label="Side navigation"
+            collapsed={isCollapsed}
+            hideMobile={hideMobile}
+            setCollapsed={setCollapsed}
+            widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
+          >
+            <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
+              <NavTopContainer>
+                <ArtificialPadding />
+                <SidebarBack
+                  border={<Border />}
+                  handleClick={() => {
+                    setBack(true);
+                    hideMobileSidenav();
+                  }}
+                  slug={slug}
+                />
+                {ia && (
+                  <IA
+                    header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+                    handleClick={() => {
+                      setBack(false);
+                      hideMobileSidenav();
+                    }}
+                    ia={ia}
+                  />
+                )}
+                {showAllProducts && (
+                  <Border
+                    css={css`
+                      margin-bottom: 0;
+                    `}
+                  />
+                )}
+              </NavTopContainer>
+              {showAllProducts && <ProductsList />}
+            </IATransition>
 
-      {!ia && !showAllProducts && (
-        <SiteTitle as={Link} to="/">
-          {siteTitle}
-        </SiteTitle>
-      )}
-      {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
-      {!ia && <Toctree slug={slug} toctree={toctree} />}
+            {!ia && !showAllProducts && (
+              <SiteTitle as={Link} to="/">
+                {siteTitle}
+              </SiteTitle>
+            )}
+            {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {!ia && <Toctree slug={slug} toctree={toctree} />}
 
-      <Spaceholder />
-      {additionalLinks.map(({ glyph, title, url }) => (
-        <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
-          {title}
-        </SideNavItem>
-      ))}
-    </StyledLeafygreenSideNav>
+            <Spaceholder />
+            {additionalLinks.map(({ glyph, title, url }) => (
+              <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+                {title}
+              </SideNavItem>
+            ))}
+          </StyledLeafygreenSideNav>
+        </SidenavMobileTransition>
+      </SidenavContainer>
+      {isTablet && !isCollapsed && <ContentOverlay onClick={handleOverlayClick} />}
+    </>
   );
 };
 

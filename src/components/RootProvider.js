@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HeaderContextProvider } from './header-context';
 import { NavigationProvider } from './navigation-context';
-import { SidebarContextProvider } from './sidebar-context';
+import { SidenavContextProvider } from './sidenav-context';
 import { TabProvider } from './tab-context';
 
-const RootProvider = ({ children, isSidebarEnabled, selectors }) => (
+const RootProvider = ({ children, isSidenavEnabled, selectors }) => (
   <TabProvider selectors={selectors}>
     <HeaderContextProvider>
       <NavigationProvider>
-        <SidebarContextProvider isSidebarEnabled={isSidebarEnabled}>{children}</SidebarContextProvider>
+        <SidenavContextProvider isSidenavEnabled={isSidenavEnabled}>{children}</SidenavContextProvider>
       </NavigationProvider>
     </HeaderContextProvider>
   </TabProvider>
@@ -17,7 +17,7 @@ const RootProvider = ({ children, isSidebarEnabled, selectors }) => (
 
 RootProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  isSidebarEnabled: PropTypes.bool,
+  isSidenavEnabled: PropTypes.bool,
   selectors: PropTypes.object,
 };
 

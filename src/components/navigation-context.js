@@ -3,7 +3,9 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { isBrowser } from '../utils/is-browser';
 import { fetchProjectParents } from '../utils/realm';
 
-const NavigationContext = React.createContext(null);
+const NavigationContext = React.createContext({
+  parents: [],
+});
 
 const NavigationProvider = ({ children }) => {
   const { database, project } = useSiteMetadata();

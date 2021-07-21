@@ -55,7 +55,7 @@ const GlobalGrid = styled('div')`
   display: grid;
   grid-template-areas:
     'header header'
-    'sidebar contents';
+    'sidenav contents';
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
@@ -70,8 +70,7 @@ const DefaultLayout = (props) => {
     slug,
     template,
   } = pageContext;
-  const { sidebar } = getTemplate(project, slug, template);
-  const isSidebarEnabled = template !== 'blank';
+  const { sidenav } = getTemplate(project, slug, template);
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 
@@ -79,10 +78,10 @@ const DefaultLayout = (props) => {
     <>
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <RootProvider isSidebarEnabled={isSidebarEnabled} selectors={page?.options?.selectors}>
+      <RootProvider isSidenavEnabled={sidenav} selectors={page?.options?.selectors}>
         <GlobalGrid>
           <Header />
-          {sidebar && (
+          {sidenav && (
             <Sidenav
               page={page}
               pageTitle={pageTitle}

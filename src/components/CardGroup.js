@@ -43,7 +43,7 @@ const StyledGrid = styled('div')`
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
   margin: ${theme.size.large} 0;
 
-  @media ${theme.screenSize.upToLarge} {
+  @media ${theme.screenSize.upToXLarge} {
     grid-template-columns: repeat(2, 1fr);
   }
 

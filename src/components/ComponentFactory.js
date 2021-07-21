@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Admonition, { admonitionMap } from './Admonition';
+import Banner from './Banner';
 import BlockQuote from './BlockQuote';
 import Button from './Button';
 import Card from './Card';
@@ -42,6 +43,7 @@ import OpenAPI from './OpenAPI';
 import Operation from './Operation';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
+import QuizWidget from './QuizWidget';
 import Reference from './Reference';
 import RefRole from './RefRole';
 import ReleaseSpecification from './ReleaseSpecification';
@@ -117,6 +119,7 @@ const roleMap = {
 
 const componentMap = {
   admonition: Admonition,
+  banner: Banner,
   blockquote: BlockQuote,
   button: Button,
   card: Card,
@@ -161,6 +164,7 @@ const componentMap = {
   operation: Operation,
   paragraph: Paragraph,
   procedure: Procedure,
+  quiz: QuizWidget,
   ref_role: RefRole,
   reference: Reference,
   release_specification: ReleaseSpecification,

@@ -4,9 +4,8 @@ import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
-import { SidebarContext } from './sidebar-context';
+import { SidenavContext } from './sidenav-context';
 import { displayNone } from '../utils/display-none';
-import { isBrowser } from '../utils/is-browser';
 
 // This container prevents the leafygreen components from flashing when the media query is true
 const MenuButtonContainer = styled('div')`
@@ -23,24 +22,24 @@ const MenuButton = styled(IconButton)`
   }
 `;
 
-const SidebarMobileMenuButton = ({ className }) => {
-  const { isSidebarMenuOpen, setIsSidebarMenuOpen } = useContext(SidebarContext);
+const SidenavMobileMenuButton = ({ className }) => {
+  const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
   const clickMenu = useCallback(() => {
-    setIsSidebarMenuOpen((state) => !state);
-  }, [setIsSidebarMenuOpen]);
+    setHideMobile((state) => !state);
+  }, [setHideMobile]);
 
   return (
     <MenuButtonContainer className={className}>
       <MenuButton aria-label="View sidenav" onClick={clickMenu}>
-        <Icon glyph={isSidebarMenuOpen && isBrowser ? 'X' : 'Menu'} size="large" />
+        <Icon glyph={hideMobile ? 'Menu' : 'X'} size="large" />
       </MenuButton>
     </MenuButtonContainer>
   );
 };
 
-SidebarMobileMenuButton.propTypes = {
+SidenavMobileMenuButton.propTypes = {
   className: PropTypes.string,
 };
 
-export default SidebarMobileMenuButton;
+export default SidenavMobileMenuButton;

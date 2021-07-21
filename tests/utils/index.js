@@ -29,7 +29,7 @@ const {
   screenSize: { largeAndUp, upToLarge, upToSmall },
 } = theme;
 
-const setMatchMedia = (...queries) => {
+export const setMatchMedia = (...queries) => {
   window.matchMedia = (media) => ({
     addListener: () => {},
     removeListener: () => {},

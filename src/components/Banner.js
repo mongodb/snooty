@@ -1,62 +1,47 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { HeaderContext } from './header-context';
-import { SNOOTY_STITCH_ID } from '../build-constants';
-import { theme } from '../theme/docsTheme';
-import { isBrowser } from '../utils/is-browser';
-import { normalizePath } from '../utils/normalize-path';
-import { fetchBanner } from '../utils/realm';
+import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
+import ComponentFactory from './ComponentFactory';
 
-const getBannerSource = (src) => {
-  if (src == null || src === '') return null;
-  const srcUrl = `${SNOOTY_STITCH_ID}.mongodbstitch.com/${src}`;
-  return `https://${normalizePath(srcUrl)}`;
+export const alertMap = {
+  info: LeafyVariant.Info,
+  warning: LeafyVariant.Warning,
+  danger: LeafyVariant.Danger,
+  success: LeafyVariant.Success,
 };
 
-const StyledBannerContainer = styled.a`
-  display: block;
-  height: ${theme.header.bannerHeight};
-  width: 100vw;
-`;
-
-const StyledBannerContent = styled.div(
-  (props) => `
-    background-image: url(${getBannerSource(props.imgPath)});
-    background-position: center;
-    background-size: cover;
-    height: 100%;
-
-    @media ${theme.screenSize.upToMedium} {
-      background-image: url(${getBannerSource(props.mobileImgPath)});
-    }
-  `
-);
-
-const Banner = () => {
-  const { bannerContent, setBannerContent } = useContext(HeaderContext);
-
-  useEffect(() => {
-    const fetchBannerContent = async () => {
-      try {
-        setBannerContent(await fetchBanner());
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    if (isBrowser) {
-      fetchBannerContent();
-    }
-  }, [setBannerContent]);
-
-  if (bannerContent == null) {
-    return null;
+const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
+  /* Add margins below all child elements in the banner */
+  & > div > div > * {
+    margin: 0 0 12px;
   }
 
+  & > div > div > *:last-child {
+    margin: 0;
+  }
+
+  /* Remove margins on individual paragraphs */
+  p {
+    margin: 0;
+  }
+`;
+
+const Banner = ({ nodeData: { children, options }, ...rest }) => {
   return (
-    <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
-      <StyledBannerContent imgPath={bannerContent.imgPath} mobileImgPath={bannerContent.mobileImgPath} />
-    </StyledBannerContainer>
+    <StyledBanner variant={alertMap[options?.variant] || LeafyVariant.Info}>
+      {children.map((child, i) => (
+        <ComponentFactory {...rest} key={i} nodeData={child} />
+      ))}
+    </StyledBanner>
   );
+};
+
+Banner.propTypes = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
+    variant: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Banner;
