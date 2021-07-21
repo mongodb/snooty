@@ -6,6 +6,7 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
+import { getNestedText } from '../utils/get-nested-text';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -73,7 +74,6 @@ const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
   const [selectedResponse, setSelectedResponse] = useState();
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
   return (
     question?.type === 'paragraph' && (
       <StyledCard>

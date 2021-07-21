@@ -6,6 +6,7 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
+import { getNestedText } from '../utils/get-nested-text';
 
 const submittedChoiceStyle = css`
   pointer-events: none;
@@ -77,6 +78,7 @@ const QuizChoice = ({
   const description = children[0].children;
   const isCurrentChoiceCorrect = !!options?.['is-true'];
   const selectedThisChoice = selectedResponse === idx;
+  const text = getNestedText(argument);
   return (
     <StyledCard
       isCurrentChoiceCorrect={isCurrentChoiceCorrect}
