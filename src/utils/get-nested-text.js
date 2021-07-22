@@ -1,3 +1,7 @@
+/*
+ * Returns plaintext nested text values from AST nodes
+ */
+
 export const getNestedText = (array) => {
   if (array.length == 0) return '';
 

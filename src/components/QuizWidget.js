@@ -62,18 +62,30 @@ const QuizCompleteSubtitle = ({ question }) => {
   );
 };
 
-const SubmitButton = ({ setHasSubmitted, selectedResponse }) => {
+const SubmitButton = ({ sethassubmitted, selectedResponse, quizResponseObj }) => {
   return (
-    <StyledButton onClick={() => selectedResponse && setHasSubmitted(true)} variant="default">
+    <StyledButton onClick={() => selectedResponse && sethassubmitted(true)} variant="default">
       Submit
     </StyledButton>
   );
 };
 
-const QuizWidget = ({ nodeData: { children } }) => {
+const createQuizResponseObj = (questionText, quizId, project, selectedResponse) => {
+  return {
+    ...selectedResponse,
+    questionText: questionText,
+    quizId: quizId,
+    project: project,
+  };
+};
+
+const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
-  const [selectedResponse, setSelectedResponse] = useState();
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [selectedResponse, setSelectedResponse] = useState({});
+  const [hassubmitted, sethassubmitted] = useState(false);
+  const questionText = getNestedText(question.children);
+  const quizId = options?.['quiz-id'];
+
   return (
     question?.type === 'paragraph' && (
       <StyledCard>
@@ -84,12 +96,18 @@ const QuizWidget = ({ nodeData: { children } }) => {
             nodeData={node}
             key={i}
             idx={i}
-            selectedResponse={selectedResponse?.index}
+            selectedResponseIdx={selectedResponse?.responseIndex}
             setSelectedResponse={setSelectedResponse}
-            hasSubmitted={hasSubmitted}
+            hassubmitted={hassubmitted}
           />
         ))}
-        {!hasSubmitted && <SubmitButton setHasSubmitted={setHasSubmitted} selectedResponse={selectedResponse} />}
+        {!hassubmitted && (
+          <SubmitButton
+            sethassubmitted={sethassubmitted}
+            selectedResponse={selectedResponse}
+            quizResponseObj={createQuizResponseObj(questionText, quizId, 'placeholderproj', selectedResponse)}
+          />
+        )}
       </StyledCard>
     )
   );
