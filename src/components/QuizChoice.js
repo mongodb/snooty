@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
@@ -46,6 +46,15 @@ const DescriptionBody = styled('p')`
   padding-left: 26px;
 `;
 
+const getCardStyling = ({ selectedThisChoice, hasSubmitted, submittedChoiceStyle, isCurrentChoiceCorrect }) => css`
+  box-shadow: none;
+  margin: auto auto 16px auto;
+  padding: 15px;
+  ${selectedThisChoice && `border-color: ${uiColors.black}`};
+  ${hasSubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`}
+  ${hasSubmitted && (isCurrentChoiceCorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}}
+`;
+
 const AnswerDescription = ({ description }) => {
   return (
     <DescriptionBody>
@@ -69,19 +78,17 @@ const ChoiceIconFactory = ({ hasSubmitted, selectedThisChoice, isCurrentChoiceCo
 
 const QuizChoice = ({
   nodeData: { argument, children, options },
-  selectedResponse,
+  selectedResponseIdx,
   setSelectedResponse,
   idx,
   hasSubmitted,
 }) => {
   const description = children[0].children;
   const isCurrentChoiceCorrect = !!options?.['is-true'];
-  const selectedThisChoice = selectedResponse === idx;
+  const selectedThisChoice = selectedResponseIdx === idx;
   return (
-    <StyledCard
-      isCurrentChoiceCorrect={isCurrentChoiceCorrect}
-      selectedThisChoice={selectedThisChoice}
-      hasSubmitted={hasSubmitted}
+    <Card
+      className={cx(getCardStyling({ selectedThisChoice, hasSubmitted, submittedChoiceStyle, isCurrentChoiceCorrect }))}
       onClick={() =>
         !selectedThisChoice
           ? setSelectedResponse({ index: idx, isCurrentChoiceCorrect: isCurrentChoiceCorrect })
@@ -97,7 +104,7 @@ const QuizChoice = ({
         <ComponentFactory nodeData={node} key={i} />
       ))}
       {hasSubmitted && <AnswerDescription description={description} />}
-    </StyledCard>
+    </Card>
   );
 };
 
@@ -105,10 +112,7 @@ QuizChoice.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  selectedResponse: PropTypes.shape({
-    index: PropTypes.number,
-    isCurrentChoiceCorrect: PropTypes.bool,
-  }),
+  selectedResponseIdx: PropTypes.number,
   setSelectedResponse: PropTypes.func,
   idx: PropTypes.number,
   hasSubmitted: PropTypes.bool,

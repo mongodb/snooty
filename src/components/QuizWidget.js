@@ -84,7 +84,7 @@ const QuizWidget = ({ nodeData: { children } }) => {
             nodeData={node}
             key={i}
             idx={i}
-            selectedResponse={selectedResponse?.index}
+            selectedResponseIdx={selectedResponse?.index}
             setSelectedResponse={setSelectedResponse}
             hasSubmitted={hasSubmitted}
           />
