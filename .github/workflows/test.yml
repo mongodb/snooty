@@ -14,15 +14,15 @@ jobs:
       matrix:
         platform: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.platform }}
+    env:
+      NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
+      NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install
-      env:
-        NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
-        NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
       run: npm ci
     - name: Lint
       run: npm run lint && npm run format
