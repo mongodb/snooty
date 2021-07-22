@@ -12,17 +12,6 @@ const submittedChoiceStyle = css`
   transition: unset !important;
 `;
 
-const StyledCard = styled(Card)`
-  box-shadow: none;
-  margin: auto auto 16px auto;
-  padding: 15px;
-  ${(props) => props.selectedThisChoice && `border-color: ${uiColors.black};`}
-  ${(props) => (props.hasSubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`)}
-  ${(props) =>
-    props.hasSubmitted &&
-    (props.isCurrentChoiceCorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}
-`;
-
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
