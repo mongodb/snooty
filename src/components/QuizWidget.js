@@ -6,6 +6,7 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
+import { theme } from '../theme/docsTheme';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -20,7 +21,9 @@ const QuizTitle = styled('p')`
 `;
 
 const QuizHeader = styled('div')`
-  text-align: center;
+  @media ${theme.screenSize.smallAndUp} {
+    text-align: center;
+  }
 `;
 
 const QuizSubtitle = styled('p')`
