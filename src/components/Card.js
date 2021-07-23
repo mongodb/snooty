@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
-import { css, cx } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
@@ -24,27 +23,6 @@ const StyledCard = styled(LeafyGreenCard)`
 
 const CardIcon = styled('img')`
   width: ${theme.size.medium};
-`;
-
-// Applied when no URL option is specified for the card, because the card-ref
-// and ref directives are currently indistinguishable in the AST
-const cardRefStyling = css`
-  a {
-    background: ${uiColors.gray.light3};
-    border-radius: ${theme.size.tiny};
-    border: 1px solid rgba(184, 196, 194, 0.48);
-    box-sizing: border-box;
-    display: inline-block;
-    font-size: ${theme.fontSize.small} !important;
-    font-weight: 600;
-    margin-bottom: ${theme.size.tiny};
-    margin-right: ${theme.size.tiny};
-    padding: ${theme.size.tiny};
-
-    &:after {
-      content: ' ➔';
-    }
-  }
 `;
 
 const H4 = styled('h4')`
@@ -132,14 +110,13 @@ const Card = ({
       )}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
-        wrapper={(children) => (
-          <CompactTextWrapper className={!url && cx(cardRefStyling)}>{children}</CompactTextWrapper>
-        )}
+        wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
         {tag && <FlexTag text={tag} />}
         <H4 compact={isCompact || isExtraCompact}>{headline}</H4>
         {children.map((child, i) => (
-          <ComponentFactory nodeData={child} key={i} />
+          // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
+          <ComponentFactory nodeData={child} key={i} cardRef={true} />
         ))}
         {cta && (
           <CTA>

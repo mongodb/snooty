@@ -22,6 +22,7 @@ exports[`renders correctly 1`] = `
       Test card headline
     </H4>
     <ComponentFactory
+      cardRef={true}
       key="0"
       nodeData={
         Object {
