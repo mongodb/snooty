@@ -11,7 +11,7 @@ import { theme } from '../theme/docsTheme';
 const CardRef = styled(Link)`
   background: ${uiColors.gray.light3};
   border-radius: ${theme.size.tiny};
-  border: 1px solid rgba(184, 196, 194, 0.48);
+  border: 1px solid ${uiColors.gray.light1};
   box-sizing: border-box;
   display: inline-block;
   font-size: ${theme.fontSize.small} !important;
