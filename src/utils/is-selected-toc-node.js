@@ -6,6 +6,5 @@ import { isCurrentPage } from './is-current-page';
 */
 export const isSelectedTocNode = (currentUrl, slug) => {
   if (currentUrl === undefined) return false;
-  // console.log(`isCurrentPage(${currentUrl}, ${slug})`, isCurrentPage(currentUrl, slug));
   return isCurrentPage(currentUrl, slug);
 };
