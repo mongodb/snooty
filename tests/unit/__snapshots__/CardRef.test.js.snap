@@ -129,7 +129,7 @@ exports[`card correctly with and without url 1`] = `
 .emotion-4 {
   background: #F9FBFA;
   border-radius: 4px;
-  border: 1px solid rgba(184,196,194,0.48);
+  border: 1px solid #B8C4C2;
   box-sizing: border-box;
   display: inline-block;
   font-size: 14px !important;
