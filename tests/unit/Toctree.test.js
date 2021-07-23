@@ -1,7 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Toctree from '../../src/components/Toctree';
 import mockData from './data/Toctree.test.json';
+import { tick } from '../utils';
 
 // mockData is a minimal toctree, based off of Realm's toctree:
 // /get-started (drawer)
@@ -13,30 +14,40 @@ import mockData from './data/Toctree.test.json';
 //       /sdk/android/fundamentals/async-api
 //   /sdk/ios
 
-const shallowToctree = (slug) => {
-  return shallow(<Toctree slug={slug} toctree={mockData?.toctree} />);
+const mountToctree = (slug) => {
+  return mount(<Toctree slug={slug} toctree={mockData?.toctree} />);
 };
 
 describe('Toctree', () => {
-  it('renders', () => {
-    const wrapper = shallowToctree('/');
-    expect(wrapper).toMatchSnapshot();
+  jest.useFakeTimers();
+
+  it('renders parent nodes', () => {
+    const wrapper = mountToctree('/');
+    expect(wrapper.children()).toHaveLength(2);
   });
 
-  it('correctly assigns the active SideNavItem', () => {
-    const checkForActiveSideNavItem = (wrapper) =>
-      wrapper.findWhere((n) => n.name() === 'SideNavItem' && n.prop('active') === true);
+  it('clicking on a drawer shows nested children', async () => {
+    const wrapper = mountToctree('/');
+    const parentDrawer = wrapper.childAt(0);
 
-    let testSlug = 'sdk/android/fundamentals/async-api';
-    let wrapper = shallowToctree(`/${testSlug}/`);
-    let activeSideNavItem = checkForActiveSideNavItem(wrapper);
-    expect(activeSideNavItem).toHaveLength(1);
-    expect(activeSideNavItem.prop('to')).toEqual(testSlug);
+    expect(parentDrawer.find('button')).toHaveLength(1);
+    parentDrawer.find('button').simulate('click');
+    await tick({ wrapper });
 
-    testSlug = 'get-started/introduction-backend';
-    wrapper = shallowToctree(testSlug);
-    activeSideNavItem = checkForActiveSideNavItem(wrapper);
-    expect(activeSideNavItem).toHaveLength(1);
-    expect(activeSideNavItem.prop('to')).toEqual(testSlug);
+    expect(parentDrawer.prop('level')).toBe(1);
+    expect(wrapper.childAt(0).findWhere((n) => n.is('TOCNode') && n.prop('level') === 2)).toHaveLength(2);
+  });
+
+  it('correct item set as active based off current page', () => {
+    const testActivePage = (testPage, expectedLevel) => {
+      const wrapper = mountToctree(testPage);
+      let activeItem = wrapper.findWhere((n) => n.is('SideNavItem') && n.prop('active') === true);
+      expect(activeItem).toHaveLength(1);
+      expect(activeItem.prop('to')).toEqual(testPage);
+      expect(activeItem.parents().at(1).prop('level')).toEqual(expectedLevel);
+    };
+
+    testActivePage('sdk/android/fundamentals/async-api', 4);
+    testActivePage('sdk/ios', 2);
   });
 });

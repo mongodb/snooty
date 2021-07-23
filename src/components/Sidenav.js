@@ -124,6 +124,11 @@ const NavTopContainer = styled('div')`
   z-index: 1;
 `;
 
+const AdditionalLink = styled(SideNavItem)`
+  padding-top: ${theme.size.small};
+  padding-bottom: ${theme.size.small};
+`;
+
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
   { glyph: 'Person', title: 'Join our community', url: 'https://developer.mongodb.com/' },
@@ -203,13 +208,13 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
               </SiteTitle>
             )}
             {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
-            {!ia && <Toctree slug={slug} toctree={toctree} />}
+            {!ia && <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />}
 
             <Spaceholder />
             {additionalLinks.map(({ glyph, title, url }) => (
-              <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+              <AdditionalLink key={url} glyph={<Icon glyph={glyph} />} href={url}>
                 {title}
-              </SideNavItem>
+              </AdditionalLink>
             ))}
           </StyledLeafygreenSideNav>
         </SidenavMobileTransition>
