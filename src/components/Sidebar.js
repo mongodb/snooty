@@ -5,6 +5,7 @@ import VersionDropdown from './VersionDropdown';
 import TableOfContents from './TableOfContents';
 import { formatText } from '../utils/format-text';
 import style from '../styles/sidebar.module.css';
+import { theme } from '../theme/docsTheme';
 
 const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => {
   const { title } = toctreeData;
@@ -19,7 +20,10 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
   const consistentNavHeightOffset =
     process.env.FEATURE_FLAG_CONSISTENT_NAVIGATION &&
     css`
-      top: 87px !important;
+      top: 56px !important;
+      @media ${theme.screenSize.largeAndUp} {
+        top: 87px !important;
+      }
     `;
 
   return (
