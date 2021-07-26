@@ -26,7 +26,7 @@ const Dot = styled('span')`
   margin-right: 16px;
 `;
 
-const SyledIcon = styled(Icon)`
+const StyledIcon = styled(Icon)`
   margin-right: 12px;
 `;
 
@@ -55,8 +55,8 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
-const CorrectChoice = () => <SyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
-const IncorrectChoice = () => <SyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
+const CorrectChoice = () => <StyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
+const IncorrectChoice = () => <StyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
 const UnsubmittedChoice = ({ selectedThisChoice, hasSubmitted }) => (
   <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
 );
