@@ -21,6 +21,8 @@ exports[`renders quiz widget correctly 1`] = `
     }
   />
   <ComponentFactory
+    hasSubmitted={false}
+    idx={0}
     key="0"
     nodeData={
       Object {
@@ -66,8 +68,11 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
   <ComponentFactory
+    hasSubmitted={false}
+    idx={1}
     key="1"
     nodeData={
       Object {
@@ -113,8 +118,11 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
   <ComponentFactory
+    hasSubmitted={false}
+    idx={2}
     key="2"
     nodeData={
       Object {
@@ -163,11 +171,10 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
-  <StyledButton
-    variant="default"
-  >
-    Submit
-  </StyledButton>
+  <SubmitButton
+    setHasSubmitted={[Function]}
+  />
 </StyledCard>
 `;
