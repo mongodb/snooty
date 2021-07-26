@@ -45,7 +45,8 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     const formatTextOptions = {
       literalEnableInline: true,
     };
-    const formattedTitle = formatText(title, formatTextOptions);
+    // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
+    const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
 
     if (isDrawer && hasChildren) {
       return (
