@@ -73,6 +73,7 @@ const IATransition = ({ back, children, hasIA, slug }) => (
 IATransition.propTypes = {
   back: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  hasIA: PropTypes.bool,
   slug: PropTypes.string,
 };
 
