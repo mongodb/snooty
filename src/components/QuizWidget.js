@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -8,6 +8,7 @@ import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
 import { getNestedText } from '../utils/get-nested-text';
 import { theme } from '../theme/docsTheme';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -66,17 +67,23 @@ const QuizCompleteSubtitle = ({ question }) => {
 };
 
 const SubmitButton = ({ setHasSubmitted, selectedResponse, quizResponseObj }) => {
+  const handleChoiceClick = useCallback(() => {
+    if (selectedResponse) {
+      setHasSubmitted(true);
+    }
+  }, [setHasSubmitted, selectedResponse]);
+
   return (
-    <StyledButton onClick={() => selectedResponse && setHasSubmitted(true)} variant="default">
+    <StyledButton onClick={handleChoiceClick} variant="default">
       Submit
     </StyledButton>
   );
 };
 
-const createQuizResponseObj = (questionText, quizId, project, selectedResponse) => {
+const createQuizResponseObj = (question, quizId, selectedResponse, project) => {
   return {
     ...selectedResponse,
-    questionText: questionText,
+    questionText: getNestedText(question.children),
     quizId: quizId,
     project: project,
   };
@@ -86,9 +93,8 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
   const [selectedResponse, setSelectedResponse] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const questionText = getNestedText(question.children);
   const quizId = options?.['quiz-id'];
-
+  const project = useSiteMetadata().project;
   return (
     question?.type === 'paragraph' && (
       <StyledCard>
@@ -108,7 +114,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
           <SubmitButton
             setHasSubmitted={setHasSubmitted}
             selectedResponse={selectedResponse}
-            quizResponseObj={createQuizResponseObj(questionText, quizId, 'placeholderproj', selectedResponse)}
+            quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project)}
           />
         )}
       </StyledCard>

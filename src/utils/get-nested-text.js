@@ -3,7 +3,7 @@
  */
 
 export const getNestedText = (array) => {
-  if (array.length == 0) return '';
+  if (!array || array.length == 0) return '';
 
   if (array[0].children) {
     return getNestedText(array[0].children) + getNestedText(array.slice(1));
