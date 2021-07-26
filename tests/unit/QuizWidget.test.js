@@ -6,9 +6,10 @@ import QuizWidget from '../../src/components/QuizWidget';
 import { completeQuiz, noQuestion } from './data/QuizWidget.test.json';
 
 const siteUrl = 'https://docs.mongodb.com';
+const project = 'cloud-docs';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
-  useSiteMetadata: () => ({ siteUrl }),
+  useSiteMetadata: () => ({ siteUrl, project }),
 }));
 
 it('renders quiz widget correctly', () => {

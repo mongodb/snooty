@@ -176,7 +176,7 @@ exports[`renders quiz widget correctly 1`] = `
   <SubmitButton
     quizResponseObj={
       Object {
-        "project": undefined,
+        "project": "cloud-docs",
         "questionText": "With my MongoDB account, I can now access?",
         "quizId": "mongoacc1",
       }
