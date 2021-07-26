@@ -25,7 +25,7 @@ const Dot = styled('span')`
   margin-right: 16px;
 `;
 
-const SyledIcon = styled(Icon)`
+const StyledIcon = styled(Icon)`
   margin-right: 12px;
 `;
 
