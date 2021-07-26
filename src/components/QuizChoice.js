@@ -1,34 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
-import { getNestedText } from '../utils/get-nested-text';
 
 const submittedChoiceStyle = css`
   pointer-events: none;
   transition: unset !important;
 `;
 
-const StyledCard = styled(Card)`
-  box-shadow: none;
-  margin: auto auto 16px auto;
-  padding: 15px;
-  ${(props) => props.selectedthischoice && `border-color: ${uiColors.black};`}
-  ${(props) => (props.hassubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`)}
-  ${(props) =>
-    props.hassubmitted &&
-    (props.iscurrentchoicecorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}
-`;
-
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
   background-color: ${(props) =>
-    props.selectedthischoice && !props.hassubmitted ? `${uiColors.gray.dark3}` : `white`};
+    props.selectedThisChoice && !props.hasSubmitted ? `${uiColors.gray.dark3}` : `white`};
   border-color: black;
   border-radius: 50%;
   display: inline-block;
@@ -47,6 +35,15 @@ const DescriptionBody = styled('p')`
   padding-left: 26px;
 `;
 
+const getCardStyling = ({ selectedThisChoice, hasSubmitted, submittedChoiceStyle, isCurrentChoiceCorrect }) => css`
+  box-shadow: none;
+  margin: auto auto 16px auto;
+  padding: 15px;
+  ${selectedThisChoice && `border-color: ${uiColors.black}`};
+  ${hasSubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`}
+  ${hasSubmitted && (isCurrentChoiceCorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}}
+`;
+
 const AnswerDescription = ({ description }) => {
   return (
     <DescriptionBody>
@@ -59,13 +56,13 @@ const AnswerDescription = ({ description }) => {
 
 const CorrectChoice = () => <SyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
 const IncorrectChoice = () => <SyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
-const UnsubmittedChoice = ({ selectedthischoice, hassubmitted }) => (
-  <Dot selectedthischoice={selectedthischoice} hassubmitted={hassubmitted} />
+const UnsubmittedChoice = ({ selectedThisChoice, hasSubmitted }) => (
+  <Dot selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />
 );
 
-const ChoiceIconFactory = ({ hassubmitted, selectedthischoice, iscurrentchoicecorrect }) => {
-  if (hassubmitted) return iscurrentchoicecorrect ? <CorrectChoice /> : <IncorrectChoice />;
-  else return <UnsubmittedChoice selectedthischoice={selectedthischoice} hassubmitted={hassubmitted} />;
+const ChoiceIconFactory = ({ hasSubmitted, selectedThisChoice, isCurrentChoiceCorrect }) => {
+  if (hasSubmitted) return isCurrentChoiceCorrect ? <CorrectChoice /> : <IncorrectChoice />;
+  else return <UnsubmittedChoice selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />;
 };
 
 const QuizChoice = ({
@@ -73,33 +70,30 @@ const QuizChoice = ({
   selectedResponseIdx,
   setSelectedResponse,
   idx,
-  hassubmitted,
+  hasSubmitted,
 }) => {
   const description = children[0].children;
-  const iscurrentchoicecorrect = !!options?.['is-true'];
-  const selectedthischoice = selectedResponseIdx === idx;
-  const responseText = getNestedText(argument);
+  const isCurrentChoiceCorrect = !!options?.['is-true'];
+  const selectedThisChoice = selectedResponseIdx === idx;
   return (
-    <StyledCard
-      iscurrentchoicecorrect={iscurrentchoicecorrect ? 1 : 0}
-      selectedthischoice={selectedthischoice ? 1 : 0}
-      hassubmitted={hassubmitted ? 1 : 0}
+    <Card
+      className={cx(getCardStyling({ selectedThisChoice, hasSubmitted, submittedChoiceStyle, isCurrentChoiceCorrect }))}
       onClick={() =>
-        !selectedthischoice
-          ? setSelectedResponse({ responseIndex: idx, responseText: responseText, isCorrect: iscurrentchoicecorrect })
+        !selectedThisChoice
+          ? setSelectedResponse({ index: idx, isCurrentChoiceCorrect: isCurrentChoiceCorrect })
           : setSelectedResponse()
       }
     >
       <ChoiceIconFactory
-        hassubmitted={hassubmitted}
-        selectedthischoice={selectedthischoice}
-        iscurrentchoicecorrect={iscurrentchoicecorrect}
+        hasSubmitted={hasSubmitted}
+        selectedThisChoice={selectedThisChoice}
+        isCurrentChoiceCorrect={isCurrentChoiceCorrect}
       />
       {argument.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}
-      {hassubmitted && <AnswerDescription description={description} />}
-    </StyledCard>
+      {hasSubmitted && <AnswerDescription description={description} />}
+    </Card>
   );
 };
 
@@ -110,7 +104,7 @@ QuizChoice.propTypes = {
   selectedResponseIdx: PropTypes.number,
   setSelectedResponse: PropTypes.func,
   idx: PropTypes.number,
-  hassubmitted: PropTypes.bool,
+  hasSubmitted: PropTypes.bool,
 };
 
 export default QuizChoice;

@@ -7,6 +7,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
 import { getNestedText } from '../utils/get-nested-text';
+import { theme } from '../theme/docsTheme';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -21,7 +22,9 @@ const QuizTitle = styled('p')`
 `;
 
 const QuizHeader = styled('div')`
-  text-align: center;
+  @media ${theme.screenSize.smallAndUp} {
+    text-align: center;
+  }
 `;
 
 const QuizSubtitle = styled('p')`
@@ -62,9 +65,9 @@ const QuizCompleteSubtitle = ({ question }) => {
   );
 };
 
-const SubmitButton = ({ sethassubmitted, selectedResponse, quizResponseObj }) => {
+const SubmitButton = ({ setHasSubmitted, selectedResponse, quizResponseObj }) => {
   return (
-    <StyledButton onClick={() => selectedResponse && sethassubmitted(true)} variant="default">
+    <StyledButton onClick={() => selectedResponse && setHasSubmitted(true)} variant="default">
       Submit
     </StyledButton>
   );
@@ -82,7 +85,7 @@ const createQuizResponseObj = (questionText, quizId, project, selectedResponse) 
 const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
   const [selectedResponse, setSelectedResponse] = useState({});
-  const [hassubmitted, sethassubmitted] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const questionText = getNestedText(question.children);
   const quizId = options?.['quiz-id'];
 
@@ -96,14 +99,14 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
             nodeData={node}
             key={i}
             idx={i}
-            selectedResponseIdx={selectedResponse?.responseIndex}
+            selectedResponseIdx={selectedResponse?.index}
             setSelectedResponse={setSelectedResponse}
-            hassubmitted={hassubmitted}
+            hasSubmitted={hasSubmitted}
           />
         ))}
-        {!hassubmitted && (
+        {!hasSubmitted && (
           <SubmitButton
-            sethassubmitted={sethassubmitted}
+            setHasSubmitted={setHasSubmitted}
             selectedResponse={selectedResponse}
             quizResponseObj={createQuizResponseObj(questionText, quizId, 'placeholderproj', selectedResponse)}
           />

@@ -21,9 +21,8 @@ exports[`renders quiz widget correctly 1`] = `
     }
   />
   <ComponentFactory
-    callback={[Function]}
     hasSubmitted={false}
-    idx={1}
+    idx={0}
     key="0"
     nodeData={
       Object {
@@ -69,11 +68,11 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
   <ComponentFactory
-    callback={[Function]}
     hasSubmitted={false}
-    idx={2}
+    idx={1}
     key="1"
     nodeData={
       Object {
@@ -119,11 +118,11 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
   <ComponentFactory
-    callback={[Function]}
     hasSubmitted={false}
-    idx={3}
+    idx={2}
     key="2"
     nodeData={
       Object {
@@ -172,6 +171,7 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
   <SubmitButton
     setHasSubmitted={[Function]}

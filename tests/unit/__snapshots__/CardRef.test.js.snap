@@ -1,24 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`card correctly with and without url 1`] = `
-.emotion-4 a {
-  background: #F9FBFA;
-  border-radius: 4px;
-  border: 1px solid rgba(184,196,194,0.48);
-  box-sizing: border-box;
-  display: inline-block;
-  font-size: 14px !important;
-  font-weight: 600;
-  margin-bottom: 4px;
-  margin-right: 4px;
-  padding: 4px;
-}
-
-.emotion-4 a:after {
-  content: ' ➔';
-}
-
-.emotion-10 {
+.emotion-44 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -29,7 +12,7 @@ exports[`card correctly with and without url 1`] = `
   color: #21313C;
 }
 
-.emotion-26 {
+.emotion-60 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -41,21 +24,21 @@ exports[`card correctly with and without url 1`] = `
   cursor: pointer;
 }
 
-.emotion-26:focus {
+.emotion-60:focus {
   outline: none;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
 }
 
-.emotion-26:hover {
+.emotion-60:hover {
   border: 1px solid #E7EEEC;
   box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
 }
 
-.emotion-26:hover:focus {
+.emotion-60:hover:focus {
   box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
 }
 
-.emotion-32 {
+.emotion-66 {
   -webkit-align-items: stretch;
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
@@ -69,27 +52,27 @@ exports[`card correctly with and without url 1`] = `
 }
 
 @media only screen and (max-width:1200px) {
-  .emotion-32 {
+  .emotion-66 {
     grid-template-columns: repeat(2,1fr);
   }
 }
 
 @media only screen and (max-width:767px) {
-  .emotion-32 {
+  .emotion-66 {
     grid-template-columns: repeat(1,1fr);
     grid-column-gap: 16px;
   }
 }
 
 @media only screen and (max-width:420px) {
-  .emotion-32 {
+  .emotion-66 {
     grid-column-gap: 16px;
     grid-template-columns: 'auto';
     grid-row-gap: '16px';
   }
 }
 
-.emotion-8 {
+.emotion-42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -109,7 +92,7 @@ exports[`card correctly with and without url 1`] = `
   padding: 32px 24px;
 }
 
-.emotion-8 p:last-of-type {
+.emotion-42 p:last-of-type {
   margin-bottom: 0;
 }
 
@@ -117,7 +100,7 @@ exports[`card correctly with and without url 1`] = `
   width: 24px;
 }
 
-.emotion-5 {
+.emotion-40 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -130,7 +113,7 @@ exports[`card correctly with and without url 1`] = `
 }
 
 @media only screen and (max-width:420px) {
-  .emotion-5 {
+  .emotion-40 {
     margin-left: 16px;
   }
 }
@@ -143,12 +126,29 @@ exports[`card correctly with and without url 1`] = `
   margin: 0 0 8px;
 }
 
-.emotion-20 {
+.emotion-4 {
+  background: #F9FBFA;
+  border-radius: 4px;
+  border: 1px solid #B8C4C2;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 14px !important;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  padding: 4px;
+}
+
+.emotion-4:after {
+  content: ' ➔';
+}
+
+.emotion-54 {
   font-weight: bold;
   margin-top: 8px;
 }
 
-.emotion-20 > a:hover {
+.emotion-54 > a:hover {
   color: #1A567E;
 }
 
@@ -478,7 +478,7 @@ exports[`card correctly with and without url 1`] = `
     noMargin={true}
   >
     <div
-      className="card-group emotion-32 emotion-33"
+      className="card-group emotion-66 emotion-67"
     >
       <ComponentFactory
         isCompact={false}
@@ -1013,13 +1013,13 @@ exports[`card correctly with and without url 1`] = `
         >
           <CompactCard>
             <Card
-              className="emotion-8 emotion-9"
+              className="emotion-42 emotion-43"
             >
               <Box
-                className="emotion-8 emotion-9 emotion-10"
+                className="emotion-42 emotion-43 emotion-44"
               >
                 <div
-                  className="emotion-8 emotion-9 emotion-10"
+                  className="emotion-42 emotion-43 emotion-44"
                 >
                   <ConditionalWrapper
                     condition={false}
@@ -1038,11 +1038,9 @@ exports[`card correctly with and without url 1`] = `
                     condition={true}
                     wrapper={[Function]}
                   >
-                    <CompactTextWrapper
-                      className="emotion-4"
-                    >
+                    <CompactTextWrapper>
                       <div
-                        className="emotion-4 emotion-5 emotion-6"
+                        className="emotion-40 emotion-41"
                       >
                         <H4
                           compact={true}
@@ -1054,6 +1052,7 @@ exports[`card correctly with and without url 1`] = `
                           </h4>
                         </H4>
                         <ComponentFactory
+                          cardRef={true}
                           key="0"
                           nodeData={
                             Object {
@@ -1078,6 +1077,7 @@ exports[`card correctly with and without url 1`] = `
                           }
                         >
                           <Paragraph
+                            cardRef={true}
                             nodeData={
                               Object {
                                 "children": Array [
@@ -1102,6 +1102,7 @@ exports[`card correctly with and without url 1`] = `
                           >
                             <p>
                               <ComponentFactory
+                                cardRef={true}
                                 key="0"
                                 nodeData={
                                   Object {
@@ -1116,6 +1117,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <Text
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "position": Object {
@@ -1135,6 +1137,7 @@ exports[`card correctly with and without url 1`] = `
                           </Paragraph>
                         </ComponentFactory>
                         <ComponentFactory
+                          cardRef={true}
                           key="1"
                           nodeData={
                             Object {
@@ -1362,6 +1365,7 @@ exports[`card correctly with and without url 1`] = `
                           }
                         >
                           <Paragraph
+                            cardRef={true}
                             nodeData={
                               Object {
                                 "children": Array [
@@ -1589,6 +1593,7 @@ exports[`card correctly with and without url 1`] = `
                           >
                             <p>
                               <ComponentFactory
+                                cardRef={true}
                                 key="0"
                                 nodeData={
                                   Object {
@@ -1621,6 +1626,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <RefRole
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "children": Array [
@@ -1651,30 +1657,27 @@ exports[`card correctly with and without url 1`] = `
                                     }
                                   }
                                 >
-                                  <Link
+                                  <CardRef
+                                    onClick={[Function]}
                                     to="sdk/android/#std-label-android-intro"
                                   >
-                                    <mockConstructor
-                                      to="/sdk/android/#std-label-android-intro"
+                                    <Link
+                                      className="emotion-4 emotion-5"
+                                      onClick={[Function]}
+                                      to="sdk/android/#std-label-android-intro"
                                     >
-                                      <a
-                                        href="/sdk/android/#std-label-android-intro"
+                                      <mockConstructor
+                                        className="emotion-4 emotion-5"
+                                        onClick={[Function]}
+                                        to="/sdk/android/#std-label-android-intro"
                                       >
-                                        <ComponentFactory
-                                          key="0"
-                                          nodeData={
-                                            Object {
-                                              "position": Object {
-                                                "start": Object {
-                                                  "line": 52,
-                                                },
-                                              },
-                                              "type": "text",
-                                              "value": "Android",
-                                            }
-                                          }
+                                        <a
+                                          className="emotion-4 emotion-5"
+                                          href="/sdk/android/#std-label-android-intro"
+                                          onClick={[Function]}
                                         >
-                                          <Text
+                                          <ComponentFactory
+                                            key="0"
                                             nodeData={
                                               Object {
                                                 "position": Object {
@@ -1687,15 +1690,30 @@ exports[`card correctly with and without url 1`] = `
                                               }
                                             }
                                           >
-                                            Android
-                                          </Text>
-                                        </ComponentFactory>
-                                      </a>
-                                    </mockConstructor>
-                                  </Link>
+                                            <Text
+                                              nodeData={
+                                                Object {
+                                                  "position": Object {
+                                                    "start": Object {
+                                                      "line": 52,
+                                                    },
+                                                  },
+                                                  "type": "text",
+                                                  "value": "Android",
+                                                }
+                                              }
+                                            >
+                                              Android
+                                            </Text>
+                                          </ComponentFactory>
+                                        </a>
+                                      </mockConstructor>
+                                    </Link>
+                                  </CardRef>
                                 </RefRole>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="1"
                                 nodeData={
                                   Object {
@@ -1711,6 +1729,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <Text
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "position": Object {
@@ -1729,6 +1748,7 @@ exports[`card correctly with and without url 1`] = `
                                 </Text>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="2"
                                 nodeData={
                                   Object {
@@ -1761,6 +1781,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <RefRole
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "children": Array [
@@ -1791,30 +1812,27 @@ exports[`card correctly with and without url 1`] = `
                                     }
                                   }
                                 >
-                                  <Link
+                                  <CardRef
+                                    onClick={[Function]}
                                     to="sdk/ios/#std-label-ios-intro"
                                   >
-                                    <mockConstructor
-                                      to="/sdk/ios/#std-label-ios-intro"
+                                    <Link
+                                      className="emotion-4 emotion-5"
+                                      onClick={[Function]}
+                                      to="sdk/ios/#std-label-ios-intro"
                                     >
-                                      <a
-                                        href="/sdk/ios/#std-label-ios-intro"
+                                      <mockConstructor
+                                        className="emotion-4 emotion-5"
+                                        onClick={[Function]}
+                                        to="/sdk/ios/#std-label-ios-intro"
                                       >
-                                        <ComponentFactory
-                                          key="0"
-                                          nodeData={
-                                            Object {
-                                              "position": Object {
-                                                "start": Object {
-                                                  "line": 52,
-                                                },
-                                              },
-                                              "type": "text",
-                                              "value": "iOS",
-                                            }
-                                          }
+                                        <a
+                                          className="emotion-4 emotion-5"
+                                          href="/sdk/ios/#std-label-ios-intro"
+                                          onClick={[Function]}
                                         >
-                                          <Text
+                                          <ComponentFactory
+                                            key="0"
                                             nodeData={
                                               Object {
                                                 "position": Object {
@@ -1827,15 +1845,30 @@ exports[`card correctly with and without url 1`] = `
                                               }
                                             }
                                           >
-                                            iOS
-                                          </Text>
-                                        </ComponentFactory>
-                                      </a>
-                                    </mockConstructor>
-                                  </Link>
+                                            <Text
+                                              nodeData={
+                                                Object {
+                                                  "position": Object {
+                                                    "start": Object {
+                                                      "line": 52,
+                                                    },
+                                                  },
+                                                  "type": "text",
+                                                  "value": "iOS",
+                                                }
+                                              }
+                                            >
+                                              iOS
+                                            </Text>
+                                          </ComponentFactory>
+                                        </a>
+                                      </mockConstructor>
+                                    </Link>
+                                  </CardRef>
                                 </RefRole>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="3"
                                 nodeData={
                                   Object {
@@ -1851,6 +1884,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <Text
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "position": Object {
@@ -1869,6 +1903,7 @@ exports[`card correctly with and without url 1`] = `
                                 </Text>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="4"
                                 nodeData={
                                   Object {
@@ -1901,6 +1936,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <RefRole
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "children": Array [
@@ -1931,30 +1967,27 @@ exports[`card correctly with and without url 1`] = `
                                     }
                                   }
                                 >
-                                  <Link
+                                  <CardRef
+                                    onClick={[Function]}
                                     to="sdk/dotnet/#std-label-dotnet-intro"
                                   >
-                                    <mockConstructor
-                                      to="/sdk/dotnet/#std-label-dotnet-intro"
+                                    <Link
+                                      className="emotion-4 emotion-5"
+                                      onClick={[Function]}
+                                      to="sdk/dotnet/#std-label-dotnet-intro"
                                     >
-                                      <a
-                                        href="/sdk/dotnet/#std-label-dotnet-intro"
+                                      <mockConstructor
+                                        className="emotion-4 emotion-5"
+                                        onClick={[Function]}
+                                        to="/sdk/dotnet/#std-label-dotnet-intro"
                                       >
-                                        <ComponentFactory
-                                          key="0"
-                                          nodeData={
-                                            Object {
-                                              "position": Object {
-                                                "start": Object {
-                                                  "line": 52,
-                                                },
-                                              },
-                                              "type": "text",
-                                              "value": ".Net",
-                                            }
-                                          }
+                                        <a
+                                          className="emotion-4 emotion-5"
+                                          href="/sdk/dotnet/#std-label-dotnet-intro"
+                                          onClick={[Function]}
                                         >
-                                          <Text
+                                          <ComponentFactory
+                                            key="0"
                                             nodeData={
                                               Object {
                                                 "position": Object {
@@ -1967,15 +2000,30 @@ exports[`card correctly with and without url 1`] = `
                                               }
                                             }
                                           >
-                                            .Net
-                                          </Text>
-                                        </ComponentFactory>
-                                      </a>
-                                    </mockConstructor>
-                                  </Link>
+                                            <Text
+                                              nodeData={
+                                                Object {
+                                                  "position": Object {
+                                                    "start": Object {
+                                                      "line": 52,
+                                                    },
+                                                  },
+                                                  "type": "text",
+                                                  "value": ".Net",
+                                                }
+                                              }
+                                            >
+                                              .Net
+                                            </Text>
+                                          </ComponentFactory>
+                                        </a>
+                                      </mockConstructor>
+                                    </Link>
+                                  </CardRef>
                                 </RefRole>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="5"
                                 nodeData={
                                   Object {
@@ -1991,6 +2039,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <Text
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "position": Object {
@@ -2009,6 +2058,7 @@ exports[`card correctly with and without url 1`] = `
                                 </Text>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="6"
                                 nodeData={
                                   Object {
@@ -2041,6 +2091,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <RefRole
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "children": Array [
@@ -2071,30 +2122,27 @@ exports[`card correctly with and without url 1`] = `
                                     }
                                   }
                                 >
-                                  <Link
+                                  <CardRef
+                                    onClick={[Function]}
                                     to="web/#std-label-web-intro"
                                   >
-                                    <mockConstructor
-                                      to="/web/#std-label-web-intro"
+                                    <Link
+                                      className="emotion-4 emotion-5"
+                                      onClick={[Function]}
+                                      to="web/#std-label-web-intro"
                                     >
-                                      <a
-                                        href="/web/#std-label-web-intro"
+                                      <mockConstructor
+                                        className="emotion-4 emotion-5"
+                                        onClick={[Function]}
+                                        to="/web/#std-label-web-intro"
                                       >
-                                        <ComponentFactory
-                                          key="0"
-                                          nodeData={
-                                            Object {
-                                              "position": Object {
-                                                "start": Object {
-                                                  "line": 52,
-                                                },
-                                              },
-                                              "type": "text",
-                                              "value": "Web",
-                                            }
-                                          }
+                                        <a
+                                          className="emotion-4 emotion-5"
+                                          href="/web/#std-label-web-intro"
+                                          onClick={[Function]}
                                         >
-                                          <Text
+                                          <ComponentFactory
+                                            key="0"
                                             nodeData={
                                               Object {
                                                 "position": Object {
@@ -2107,15 +2155,30 @@ exports[`card correctly with and without url 1`] = `
                                               }
                                             }
                                           >
-                                            Web
-                                          </Text>
-                                        </ComponentFactory>
-                                      </a>
-                                    </mockConstructor>
-                                  </Link>
+                                            <Text
+                                              nodeData={
+                                                Object {
+                                                  "position": Object {
+                                                    "start": Object {
+                                                      "line": 52,
+                                                    },
+                                                  },
+                                                  "type": "text",
+                                                  "value": "Web",
+                                                }
+                                              }
+                                            >
+                                              Web
+                                            </Text>
+                                          </ComponentFactory>
+                                        </a>
+                                      </mockConstructor>
+                                    </Link>
+                                  </CardRef>
                                 </RefRole>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="7"
                                 nodeData={
                                   Object {
@@ -2131,6 +2194,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <Text
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "position": Object {
@@ -2149,6 +2213,7 @@ exports[`card correctly with and without url 1`] = `
                                 </Text>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="8"
                                 nodeData={
                                   Object {
@@ -2181,6 +2246,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <RefRole
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "children": Array [
@@ -2211,30 +2277,27 @@ exports[`card correctly with and without url 1`] = `
                                     }
                                   }
                                 >
-                                  <Link
+                                  <CardRef
+                                    onClick={[Function]}
                                     to="sdk/react-native/#std-label-react-native-intro"
                                   >
-                                    <mockConstructor
-                                      to="/sdk/react-native/#std-label-react-native-intro"
+                                    <Link
+                                      className="emotion-4 emotion-5"
+                                      onClick={[Function]}
+                                      to="sdk/react-native/#std-label-react-native-intro"
                                     >
-                                      <a
-                                        href="/sdk/react-native/#std-label-react-native-intro"
+                                      <mockConstructor
+                                        className="emotion-4 emotion-5"
+                                        onClick={[Function]}
+                                        to="/sdk/react-native/#std-label-react-native-intro"
                                       >
-                                        <ComponentFactory
-                                          key="0"
-                                          nodeData={
-                                            Object {
-                                              "position": Object {
-                                                "start": Object {
-                                                  "line": 52,
-                                                },
-                                              },
-                                              "type": "text",
-                                              "value": "React Native",
-                                            }
-                                          }
+                                        <a
+                                          className="emotion-4 emotion-5"
+                                          href="/sdk/react-native/#std-label-react-native-intro"
+                                          onClick={[Function]}
                                         >
-                                          <Text
+                                          <ComponentFactory
+                                            key="0"
                                             nodeData={
                                               Object {
                                                 "position": Object {
@@ -2247,15 +2310,30 @@ exports[`card correctly with and without url 1`] = `
                                               }
                                             }
                                           >
-                                            React Native
-                                          </Text>
-                                        </ComponentFactory>
-                                      </a>
-                                    </mockConstructor>
-                                  </Link>
+                                            <Text
+                                              nodeData={
+                                                Object {
+                                                  "position": Object {
+                                                    "start": Object {
+                                                      "line": 52,
+                                                    },
+                                                  },
+                                                  "type": "text",
+                                                  "value": "React Native",
+                                                }
+                                              }
+                                            >
+                                              React Native
+                                            </Text>
+                                          </ComponentFactory>
+                                        </a>
+                                      </mockConstructor>
+                                    </Link>
+                                  </CardRef>
                                 </RefRole>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="9"
                                 nodeData={
                                   Object {
@@ -2271,6 +2349,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <Text
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "position": Object {
@@ -2289,6 +2368,7 @@ exports[`card correctly with and without url 1`] = `
                                 </Text>
                               </ComponentFactory>
                               <ComponentFactory
+                                cardRef={true}
                                 key="10"
                                 nodeData={
                                   Object {
@@ -2321,6 +2401,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <RefRole
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "children": Array [
@@ -2351,30 +2432,27 @@ exports[`card correctly with and without url 1`] = `
                                     }
                                   }
                                 >
-                                  <Link
+                                  <CardRef
+                                    onClick={[Function]}
                                     to="sdk/node/#std-label-node-intro"
                                   >
-                                    <mockConstructor
-                                      to="/sdk/node/#std-label-node-intro"
+                                    <Link
+                                      className="emotion-4 emotion-5"
+                                      onClick={[Function]}
+                                      to="sdk/node/#std-label-node-intro"
                                     >
-                                      <a
-                                        href="/sdk/node/#std-label-node-intro"
+                                      <mockConstructor
+                                        className="emotion-4 emotion-5"
+                                        onClick={[Function]}
+                                        to="/sdk/node/#std-label-node-intro"
                                       >
-                                        <ComponentFactory
-                                          key="0"
-                                          nodeData={
-                                            Object {
-                                              "position": Object {
-                                                "start": Object {
-                                                  "line": 52,
-                                                },
-                                              },
-                                              "type": "text",
-                                              "value": "Node.js",
-                                            }
-                                          }
+                                        <a
+                                          className="emotion-4 emotion-5"
+                                          href="/sdk/node/#std-label-node-intro"
+                                          onClick={[Function]}
                                         >
-                                          <Text
+                                          <ComponentFactory
+                                            key="0"
                                             nodeData={
                                               Object {
                                                 "position": Object {
@@ -2387,12 +2465,26 @@ exports[`card correctly with and without url 1`] = `
                                               }
                                             }
                                           >
-                                            Node.js
-                                          </Text>
-                                        </ComponentFactory>
-                                      </a>
-                                    </mockConstructor>
-                                  </Link>
+                                            <Text
+                                              nodeData={
+                                                Object {
+                                                  "position": Object {
+                                                    "start": Object {
+                                                      "line": 52,
+                                                    },
+                                                  },
+                                                  "type": "text",
+                                                  "value": "Node.js",
+                                                }
+                                              }
+                                            >
+                                              Node.js
+                                            </Text>
+                                          </ComponentFactory>
+                                        </a>
+                                      </mockConstructor>
+                                    </Link>
+                                  </CardRef>
                                 </RefRole>
                               </ComponentFactory>
                             </p>
@@ -2502,15 +2594,15 @@ exports[`card correctly with and without url 1`] = `
             onClick={[Function]}
           >
             <Card
-              className="emotion-8 emotion-9"
+              className="emotion-42 emotion-43"
               onClick={[Function]}
             >
               <Box
-                className="emotion-8 emotion-9 emotion-26"
+                className="emotion-42 emotion-43 emotion-60"
                 onClick={[Function]}
               >
                 <div
-                  className="emotion-8 emotion-9 emotion-26"
+                  className="emotion-42 emotion-43 emotion-60"
                   onClick={[Function]}
                 >
                   <ConditionalWrapper
@@ -2530,11 +2622,9 @@ exports[`card correctly with and without url 1`] = `
                     condition={true}
                     wrapper={[Function]}
                   >
-                    <CompactTextWrapper
-                      className={false}
-                    >
+                    <CompactTextWrapper>
                       <div
-                        className="false emotion-5 emotion-6"
+                        className="emotion-40 emotion-41"
                       >
                         <H4
                           compact={true}
@@ -2546,6 +2636,7 @@ exports[`card correctly with and without url 1`] = `
                           </h4>
                         </H4>
                         <ComponentFactory
+                          cardRef={true}
                           key="0"
                           nodeData={
                             Object {
@@ -2570,6 +2661,7 @@ exports[`card correctly with and without url 1`] = `
                           }
                         >
                           <Paragraph
+                            cardRef={true}
                             nodeData={
                               Object {
                                 "children": Array [
@@ -2594,6 +2686,7 @@ exports[`card correctly with and without url 1`] = `
                           >
                             <p>
                               <ComponentFactory
+                                cardRef={true}
                                 key="0"
                                 nodeData={
                                   Object {
@@ -2608,6 +2701,7 @@ exports[`card correctly with and without url 1`] = `
                                 }
                               >
                                 <Text
+                                  cardRef={true}
                                   nodeData={
                                     Object {
                                       "position": Object {
@@ -2628,7 +2722,7 @@ exports[`card correctly with and without url 1`] = `
                         </ComponentFactory>
                         <CTA>
                           <p
-                            className="emotion-20 emotion-21"
+                            className="emotion-54 emotion-55"
                           >
                             <Link
                               to="https://docs.mongodb.com/realm/services/"
