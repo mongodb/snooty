@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -6,6 +6,7 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
+import { theme } from '../theme/docsTheme';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -20,7 +21,9 @@ const QuizTitle = styled('p')`
 `;
 
 const QuizHeader = styled('div')`
-  text-align: center;
+  @media ${theme.screenSize.smallAndUp} {
+    text-align: center;
+  }
 `;
 
 const QuizSubtitle = styled('p')`
@@ -42,7 +45,7 @@ const StyledButton = styled(Button)`
 const QuizCompleteHeader = () => {
   return (
     <QuizHeader>
-      <Icon glyph="CheckmarkWithCircle" fill={uiColors.green.base} size="large" />
+      <Icon glyph="CheckmarkWithCircle" fill={uiColors.green.base} size="xlarge" />
       <QuizTitle>Check your understanding</QuizTitle>
     </QuizHeader>
   );
@@ -61,17 +64,35 @@ const QuizCompleteSubtitle = ({ question }) => {
   );
 };
 
+const SubmitButton = ({ setHasSubmitted, selectedResponse }) => {
+  return (
+    <StyledButton onClick={() => selectedResponse && setHasSubmitted(true)} variant="default">
+      Submit
+    </StyledButton>
+  );
+};
+
 const QuizWidget = ({ nodeData: { children } }) => {
   const [question, ...choices] = children;
+  const [selectedResponse, setSelectedResponse] = useState();
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
   return (
     question?.type === 'paragraph' && (
       <StyledCard>
         <QuizCompleteHeader />
         <QuizCompleteSubtitle question={question.children} />
         {choices.map((node, i) => (
-          <ComponentFactory nodeData={node} key={i} />
+          <ComponentFactory
+            nodeData={node}
+            key={i}
+            idx={i}
+            selectedResponseIdx={selectedResponse?.index}
+            setSelectedResponse={setSelectedResponse}
+            hasSubmitted={hasSubmitted}
+          />
         ))}
-        <StyledButton variant="default">Submit</StyledButton>
+        {!hasSubmitted && <SubmitButton setHasSubmitted={setHasSubmitted} selectedResponse={selectedResponse} />}
       </StyledCard>
     )
   );
