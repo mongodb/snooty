@@ -91,7 +91,7 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project) => {
 
 const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
-  const [selectedResponse, setSelectedResponse] = useState({});
+  const [selectedResponse, setSelectedResponse] = useState();
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const quizId = options?.['quiz-id'];
   const { project } = useSiteMetadata();
