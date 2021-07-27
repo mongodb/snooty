@@ -17,7 +17,7 @@ const StyledCard = styled(Card)`
 `;
 
 const QuizTitle = styled('p')`
-  margin: 0 0 32px 0 !important;
+  margin: 0 0 ${theme.size.large} 0 !important;
   font-weight: 500;
   font-size: 18px;
 `;
@@ -37,11 +37,11 @@ const QuizSubtitle = styled('p')`
 `;
 
 const QuizQuestion = styled('p')`
-  margin: 8px 0 24px 0 !important;
+  margin: ${theme.size.small} 0 ${theme.size.medium} 0 !important;
 `;
 
 const StyledButton = styled(Button)`
-  font-size: 16px;
+  font-size: ${theme.fontSize.default};
 `;
 
 const QuizCompleteHeader = () => {
