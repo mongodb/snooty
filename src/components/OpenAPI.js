@@ -9,7 +9,6 @@ import ComponentFactory from './ComponentFactory';
 import SidenavBackButton from './SidenavBackButton';
 import Spinner from './Spinner';
 import { theme } from '../theme/docsTheme';
-import { formatText } from '../utils/format-text';
 
 const badgeBorderRadius = '50px';
 const badgeBorderType = '1px solid';
