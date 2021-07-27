@@ -6,6 +6,7 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from '../../ComponentFactory';
+import { theme } from '../../../theme/docsTheme';
 import { getPlaintext } from '../../../utils/get-plaintext';
 
 const submittedChoiceStyle = css`
@@ -22,7 +23,7 @@ const Dot = styled('span')`
   display: inline-block;
   border-style: solid;
   border-width: thin;
-  margin-right: 16px;
+  margin-right: ${theme.size.default};
 `;
 
 const StyledIcon = styled(Icon)`
@@ -32,13 +33,14 @@ const StyledIcon = styled(Icon)`
 const DescriptionBody = styled('div')`
   p {
     padding-left: 26px;
-    margin: 8px 0px 0px 0px !important;
+    margin-top: ${theme.size.small} !important;
+    margin-bottom: 0 !important;
   }
 `;
 
 const getCardStyling = ({ isSelected, isSubmitted, submittedChoiceStyle, isCorrect }) => css`
   box-shadow: none;
-  margin: auto auto 16px auto;
+  margin: auto auto ${theme.size.default} auto;
   padding: 15px;
   ${isSelected && `border-color: ${uiColors.black}`};
   ${isSubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`}
