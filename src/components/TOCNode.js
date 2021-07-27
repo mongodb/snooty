@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
+import { uiColors } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from './Link';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 import { isActiveTocNode } from '../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../utils/is-selected-toc-node';
-import { uiColors } from '@leafygreen-ui/palette';
 
 const sideNavItemStyling = ({ level }) => css`
   color: ${uiColors.gray.dark3};
