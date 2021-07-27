@@ -6,9 +6,9 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
-import { getNestedText } from '../utils/get-nested-text';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { getPlaintext } from '../utils/get-plaintext';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -83,7 +83,7 @@ const SubmitButton = ({ setHasSubmitted, selectedResponse, quizResponseObj }) =>
 const createQuizResponseObj = (question, quizId, selectedResponse, project) => {
   return {
     ...selectedResponse,
-    questionText: getNestedText(question.children),
+    questionText: getPlaintext(question.children),
     quizId: quizId,
     project: project,
   };
@@ -94,7 +94,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   const [selectedResponse, setSelectedResponse] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const quizId = options?.['quiz-id'];
-  const project = useSiteMetadata().project;
+  const { project } = useSiteMetadata();
   return (
     question?.type === 'paragraph' && (
       <StyledCard>

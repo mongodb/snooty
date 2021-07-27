@@ -6,7 +6,7 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
-import { getNestedText } from '../utils/get-nested-text';
+import { getPlaintext } from '../utils/get-plaintext';
 
 const submittedChoiceStyle = css`
   pointer-events: none;
@@ -70,7 +70,7 @@ const createSelectedResponseObj = (idx, isCurrentChoiceCorrect, argument) => {
   return {
     index: idx,
     isCurrentChoiceCorrect: isCurrentChoiceCorrect,
-    choiceText: getNestedText(argument),
+    choiceText: getPlaintext(argument),
   };
 };
 
