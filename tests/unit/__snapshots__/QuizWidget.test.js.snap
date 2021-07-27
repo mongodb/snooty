@@ -181,7 +181,6 @@ exports[`renders quiz widget correctly 1`] = `
         "quizId": "mongoacc1",
       }
     }
-    selectedResponse={Object {}}
     setHasSubmitted={[Function]}
   />
 </StyledCard>
