@@ -6,7 +6,6 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
-import { getPlaintext } from '../utils/get-plaintext';
 
 const submittedChoiceStyle = css`
   pointer-events: none;
@@ -66,14 +65,6 @@ const ChoiceIconFactory = ({ hasSubmitted, selectedThisChoice, isCurrentChoiceCo
   else return <UnsubmittedChoice selectedThisChoice={selectedThisChoice} hasSubmitted={hasSubmitted} />;
 };
 
-const createSelectedResponseObj = (idx, isCurrentChoiceCorrect, argument) => {
-  return {
-    index: idx,
-    isCurrentChoiceCorrect: isCurrentChoiceCorrect,
-    choiceText: getPlaintext(argument),
-  };
-};
-
 const QuizChoice = ({
   nodeData: { argument, children, options },
   selectedResponseIdx,
@@ -89,7 +80,7 @@ const QuizChoice = ({
       className={cx(getCardStyling({ selectedThisChoice, hasSubmitted, submittedChoiceStyle, isCurrentChoiceCorrect }))}
       onClick={() =>
         !selectedThisChoice
-          ? setSelectedResponse(createSelectedResponseObj(idx, isCurrentChoiceCorrect, argument))
+          ? setSelectedResponse({ index: idx, isCurrentChoiceCorrect: isCurrentChoiceCorrect })
           : setSelectedResponse()
       }
     >
