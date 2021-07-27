@@ -21,8 +21,8 @@ exports[`renders quiz widget correctly 1`] = `
     }
   />
   <ComponentFactory
-    hasSubmitted={false}
     idx={0}
+    isSubmitted={false}
     key="0"
     nodeData={
       Object {
@@ -71,8 +71,8 @@ exports[`renders quiz widget correctly 1`] = `
     setSelectedResponse={[Function]}
   />
   <ComponentFactory
-    hasSubmitted={false}
     idx={1}
+    isSubmitted={false}
     key="1"
     nodeData={
       Object {
@@ -121,8 +121,8 @@ exports[`renders quiz widget correctly 1`] = `
     setSelectedResponse={[Function]}
   />
   <ComponentFactory
-    hasSubmitted={false}
     idx={2}
+    isSubmitted={false}
     key="2"
     nodeData={
       Object {
@@ -181,7 +181,7 @@ exports[`renders quiz widget correctly 1`] = `
         "quizId": "mongoacc1",
       }
     }
-    setHasSubmitted={[Function]}
+    setIsSubmitted={[Function]}
   />
 </StyledCard>
 `;
