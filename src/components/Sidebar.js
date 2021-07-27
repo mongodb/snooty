@@ -1,9 +1,11 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import { css } from '@emotion/core';
 import Link from './Link';
 import VersionDropdown from './VersionDropdown';
 import TableOfContents from './TableOfContents';
 import { formatText } from '../utils/format-text';
 import style from '../styles/sidebar.module.css';
+import { theme } from '../theme/docsTheme';
 
 const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => {
   const { title } = toctreeData;
@@ -15,9 +17,18 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
     setFixedHeight(fixedHeading.current.clientHeight);
   }, []);
 
+  const consistentNavHeightOffset =
+    process.env.FEATURE_FLAG_CONSISTENT_NAVIGATION &&
+    css`
+      top: 56px !important;
+      @media ${theme.screenSize.largeAndUp} {
+        top: 87px !important;
+      }
+    `;
+
   return (
     <aside className={`sidebar ${style.sidebar}`} id="sidebar">
-      <div className={`sphinxsidebar ${style.sphinxsidebar}`} id="sphinxsidebar">
+      <div className={`sphinxsidebar ${style.sphinxsidebar}`} css={consistentNavHeightOffset} id="sphinxsidebar">
         <div id="sphinxsidebarwrapper" className="sphinxsidebarwrapper">
           <div ref={fixedHeading}>
             <span className="closeNav" id="closeNav" onClick={toggleLeftColumn} style={{ cursor: 'pointer' }}>
