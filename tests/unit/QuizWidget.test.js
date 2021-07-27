@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import QuizWidget from '../../src/components/QuizWidget';
+import QuizWidget from '../../src/components/Widgets/QuizWidget/QuizWidget';
 
 // data for this component
 import { completeQuiz, noQuestion } from './data/QuizWidget.test.json';
