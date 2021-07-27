@@ -10,12 +10,13 @@ import IA from './IA';
 import IATransition from './IATransition';
 import Link from './Link';
 import ProductsList from './ProductsList';
-import SidebarBack from './SidebarBack';
+import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
 import VersionDropdown from './VersionDropdown';
 import useScreenSize from '../hooks/useScreenSize';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 
@@ -137,6 +138,7 @@ const additionalLinks = [
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
+  const { project } = useSiteMetadata();
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
@@ -173,13 +175,14 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SidebarBack
+                <SidenavBackButton
                   border={<Border />}
                   handleClick={() => {
                     setBack(true);
                     hideMobileSidenav();
                   }}
-                  slug={slug}
+                  project={project}
+                  currentSlug={slug}
                 />
                 {ia && (
                   <IA
