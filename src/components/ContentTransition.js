@@ -49,7 +49,7 @@ const ContentTransition = ({ children, slug }) => (
         classNames="fade"
         key={slug}
       >
-        {children}
+        <div>{children}</div>
       </CSSTransition>
     </TransitionGroup>
   </>
