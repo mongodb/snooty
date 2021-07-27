@@ -5,6 +5,13 @@ import QuizWidget from '../../src/components/QuizWidget';
 // data for this component
 import { completeQuiz, noQuestion } from './data/QuizWidget.test.json';
 
+const siteUrl = 'https://docs.mongodb.com';
+const project = 'cloud-docs';
+
+jest.mock('../../src/hooks/use-site-metadata', () => ({
+  useSiteMetadata: () => ({ siteUrl, project }),
+}));
+
 it('renders quiz widget correctly', () => {
   const tree = shallow(<QuizWidget nodeData={completeQuiz} />);
   expect(tree).toMatchSnapshot();
