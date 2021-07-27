@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -6,6 +6,9 @@ import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
+import { theme } from '../theme/docsTheme';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { getPlaintext } from '../utils/get-plaintext';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -20,7 +23,9 @@ const QuizTitle = styled('p')`
 `;
 
 const QuizHeader = styled('div')`
-  text-align: center;
+  @media ${theme.screenSize.smallAndUp} {
+    text-align: center;
+  }
 `;
 
 const QuizSubtitle = styled('p')`
@@ -42,7 +47,7 @@ const StyledButton = styled(Button)`
 const QuizCompleteHeader = () => {
   return (
     <QuizHeader>
-      <Icon glyph="CheckmarkWithCircle" fill={uiColors.green.base} size="large" />
+      <Icon glyph="CheckmarkWithCircle" fill={uiColors.green.base} size="xlarge" />
       <QuizTitle>Check your understanding</QuizTitle>
     </QuizHeader>
   );
@@ -61,17 +66,57 @@ const QuizCompleteSubtitle = ({ question }) => {
   );
 };
 
-const QuizWidget = ({ nodeData: { children } }) => {
+const SubmitButton = ({ setHasSubmitted, selectedResponse, quizResponseObj }) => {
+  const handleChoiceClick = useCallback(() => {
+    if (selectedResponse) {
+      setHasSubmitted(true);
+    }
+  }, [setHasSubmitted, selectedResponse]);
+
+  return (
+    <StyledButton onClick={handleChoiceClick} variant="default">
+      Submit
+    </StyledButton>
+  );
+};
+
+const createQuizResponseObj = (question, quizId, selectedResponse, project) => {
+  return {
+    ...selectedResponse,
+    questionText: getPlaintext(question.children),
+    quizId: quizId,
+    project: project,
+  };
+};
+
+const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
+  const [selectedResponse, setSelectedResponse] = useState();
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const quizId = options?.['quiz-id'];
+  const { project } = useSiteMetadata();
   return (
     question?.type === 'paragraph' && (
       <StyledCard>
         <QuizCompleteHeader />
         <QuizCompleteSubtitle question={question.children} />
         {choices.map((node, i) => (
-          <ComponentFactory nodeData={node} key={i} />
+          <ComponentFactory
+            nodeData={node}
+            key={i}
+            idx={i}
+            selectedResponseIdx={selectedResponse?.index}
+            setSelectedResponse={setSelectedResponse}
+            hasSubmitted={hasSubmitted}
+          />
         ))}
-        <StyledButton variant="default">Submit</StyledButton>
+        {!hasSubmitted && (
+          <SubmitButton
+            setHasSubmitted={setHasSubmitted}
+            selectedResponse={selectedResponse}
+            quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project)}
+          />
+        )}
       </StyledCard>
     )
   );
