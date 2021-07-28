@@ -4,7 +4,16 @@ exports[`doesnt render quiz widget without a specified question 1`] = `""`;
 
 exports[`renders quiz widget correctly 1`] = `
 <StyledCard>
-  <QuizCompleteHeader />
+  <QuizHeader>
+    <Icon
+      fill="#13AA52"
+      glyph="CheckmarkWithCircle"
+      size="xlarge"
+    />
+    <QuizTitle>
+      Check your understanding
+    </QuizTitle>
+  </QuizHeader>
   <QuizCompleteSubtitle
     question={
       Array [
