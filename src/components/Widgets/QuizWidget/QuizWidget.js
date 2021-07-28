@@ -44,14 +44,12 @@ const StyledButton = styled(Button)`
   font-size: ${theme.fontSize.default};
 `;
 
-const QuizCompleteHeader = () => {
-  return (
-    <QuizHeader>
-      <Icon glyph="CheckmarkWithCircle" fill={uiColors.green.base} size="xlarge" />
-      <QuizTitle>Check your understanding</QuizTitle>
-    </QuizHeader>
-  );
-};
+const quizCompleteHeader = (
+  <QuizHeader>
+    <Icon glyph="CheckmarkWithCircle" fill={uiColors.green.base} size="xlarge" />
+    <QuizTitle>Check your understanding</QuizTitle>
+  </QuizHeader>
+);
 
 const QuizCompleteSubtitle = ({ question }) => {
   return (
@@ -98,7 +96,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   return (
     question?.type === 'paragraph' && (
       <StyledCard>
-        <QuizCompleteHeader />
+        {quizCompleteHeader}
         <QuizCompleteSubtitle question={question.children} />
         {choices.map((node, i) => (
           <ComponentFactory
