@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
@@ -20,12 +21,13 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const SIDENAV_WIDTH = 268;
 
-const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
+// Use LG's css here to style the component without passing props
+const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
   height: 100%;
 
   // Mobile sidenav
   @media ${theme.screenSize.upToSmall} {
-    ${({ hideMobile }) => hideMobile && 'display: none;'}
+    ${hideMobile && 'display: none;'}
 
     button[data-testid="side-nav-collapse-toggle"] {
       display: none;
@@ -44,6 +46,11 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
     padding-top: 0px;
   }
 
+  // Prevent icons from appearing on the collapsed side nav
+  ul[aria-hidden="true"] {
+    ${isCollapsed && 'display: none;'}
+  }
+
   a,
   p {
     letter-spacing: unset;
@@ -55,6 +62,7 @@ const StyledLeafygreenSideNav = styled(LeafygreenSideNav)`
   }
 `;
 
+// Use emotion css since LG's css doesn't work with styled components
 const titleStyle = css`
   color: ${uiColors.gray.dark3};
   font-size: ${theme.fontSize.default};
@@ -129,6 +137,7 @@ const additionalLinks = [
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
+  const isLanding = project === 'landing';
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
@@ -155,10 +164,10 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
     <>
       <SidenavContainer>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
-          <StyledLeafygreenSideNav
+          <LeafygreenSideNav
             aria-label="Side navigation"
+            className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
             collapsed={isCollapsed}
-            hideMobile={hideMobile}
             setCollapsed={setCollapsed}
             widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
           >
@@ -198,13 +207,17 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
             {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
             {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
 
-            <Spaceholder />
-            {additionalLinks.map(({ glyph, title, url }) => (
-              <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
-                {title}
-              </SideNavItem>
-            ))}
-          </StyledLeafygreenSideNav>
+            {isLanding && (
+              <>
+                <Spaceholder />
+                {additionalLinks.map(({ glyph, title, url }) => (
+                  <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+                    {title}
+                  </SideNavItem>
+                ))}
+              </>
+            )}
+          </LeafygreenSideNav>
         </SidenavMobileTransition>
       </SidenavContainer>
       {isTablet && !isCollapsed && <ContentOverlay onClick={handleOverlayClick} />}
