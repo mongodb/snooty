@@ -125,6 +125,7 @@ const NavTopContainer = styled('div')`
   z-index: 1;
 `;
 
+// Represents the generic links at the bottom of the side nav (e.g. "Contact Support")
 const AdditionalLink = styled(SideNavItem)`
   padding-top: ${theme.size.small};
   padding-bottom: ${theme.size.small};
