@@ -110,7 +110,13 @@ exports[`ProductsList renders with products 1`] = `
           "sheet": StyleSheet {
             "before": null,
             "container": <head>
-              <div />
+              <style
+                data-emotion="leafygreen-ui"
+                data-s=""
+              >
+                
+                .leafygreen-ui-1po1agn{}
+              </style>
               <style
                 data-emotion="css-global"
               >
