@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -9,6 +9,8 @@ import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
+import { useRealmApp } from './RealmApp';
+import { useRealmFuncs } from './RealmFuncs';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -67,11 +69,15 @@ const QuizCompleteSubtitle = ({ question }) => {
 };
 
 const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => {
+  const realmApp = useRealmApp();
+  const { addResponse } = useRealmFuncs();
   const handleChoiceClick = useCallback(() => {
     if (selectedResponse) {
       setIsSubmitted(true);
+      realmApp.logIn();
+      addResponse('hola');
     }
-  }, [setIsSubmitted, selectedResponse]);
+  }, [selectedResponse, setIsSubmitted, realmApp, addResponse]);
 
   return (
     <StyledButton onClick={handleChoiceClick} variant="default">
