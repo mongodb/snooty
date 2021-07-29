@@ -20,7 +20,6 @@ export function RealmAppProvider({ appId, children }) {
   const logIn = React.useCallback(async () => {
     await realmApp.logIn(Realm.Credentials.anonymous());
     setCurrentUser(realmApp.currentUser);
-    console.log('logged in', realmApp);
   }, [realmApp]);
   // Override the App's currentUser & logIn properties + include the app-level logout function
   const realmAppContext = React.useMemo(() => {
