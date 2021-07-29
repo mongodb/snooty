@@ -65,7 +65,7 @@ const DefaultLayout = (props) => {
   const { children, pageContext } = props;
   const { project } = useSiteMetadata();
   const {
-    metadata: { publishedBranches, slugToTitle, title },
+    metadata: { publishedBranches, slugToTitle, title, toctree },
     page,
     slug,
     template,
@@ -88,6 +88,7 @@ const DefaultLayout = (props) => {
               publishedBranches={publishedBranches}
               siteTitle={title}
               slug={slug}
+              toctree={toctree}
             />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>

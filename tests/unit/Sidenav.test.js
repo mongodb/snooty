@@ -23,7 +23,7 @@ const mountSidenav = async () => {
   const wrapper = mount(
     <SidenavContextProvider>
       <SidenavMobileMenuButton />
-      <Sidenav page={{}} slug={''} />
+      <Sidenav page={{}} slug={''} toctree={{ children: [] }} />
     </SidenavContextProvider>
   );
   await tick({ wrapper });

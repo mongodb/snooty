@@ -9,15 +9,17 @@ import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-n
 import { uiColors } from '@leafygreen-ui/palette';
 import IA from './IA';
 import IATransition from './IATransition';
+import Link from './Link';
 import ProductsList from './ProductsList';
 import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
+import Toctree from './Toctree';
 import VersionDropdown from './VersionDropdown';
-import { theme } from '../theme/docsTheme';
-import { formatText } from '../utils/format-text';
 import useScreenSize from '../hooks/useScreenSize';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { theme } from '../theme/docsTheme';
+import { formatText } from '../utils/format-text';
 
 const SIDENAV_WIDTH = 268;
 
@@ -57,8 +59,9 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
   }
 
   // TODO: Remove when mongodb-docs.css is removed
-  a:hover {
-    color: ${uiColors.gray.dark2};
+  a:hover,
+  a:focus {
+    color: unset;
   }
 `;
 
@@ -69,6 +72,9 @@ const titleStyle = css`
   font-weight: bold;
   line-height: 20px;
   text-transform: capitalize;
+  :hover {
+    background-color: inherit;
+  }
 `;
 
 const ContentOverlay = styled('div')`
@@ -108,9 +114,8 @@ const Border = styled('hr')`
   width: 100%;
 `;
 
-const SiteTitle = styled('div')`
+const SiteTitle = styled(SideNavItem)`
   ${titleStyle}
-  margin: ${theme.size.small} ${theme.size.medium} 0 ${theme.size.medium};
 `;
 
 // Create artificial "padding" at the top of the SideNav to allow products list to transition without being seen
@@ -128,13 +133,19 @@ const NavTopContainer = styled('div')`
   z-index: 1;
 `;
 
+// Represents the generic links at the bottom of the side nav (e.g. "Contact Support")
+const AdditionalLink = styled(SideNavItem)`
+  padding-top: ${theme.size.small};
+  padding-bottom: ${theme.size.small};
+`;
+
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
   { glyph: 'Person', title: 'Join our community', url: 'https://developer.mongodb.com/' },
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
+const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isLanding = project === 'landing';
@@ -204,16 +215,21 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug }) => {
               {showAllProducts && <ProductsList />}
             </IATransition>
 
-            {!ia && !showAllProducts && <SiteTitle>{siteTitle}</SiteTitle>}
+            {!ia && !showAllProducts && (
+              <SiteTitle as={Link} to="/">
+                {siteTitle}
+              </SiteTitle>
+            )}
             {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {!ia && <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />}
 
             {isLanding && (
               <>
                 <Spaceholder />
                 {additionalLinks.map(({ glyph, title, url }) => (
-                  <SideNavItem key={url} glyph={<Icon glyph={glyph} />} href={url}>
+                  <AdditionalLink key={url} glyph={<Icon glyph={glyph} />} href={url}>
                     {title}
-                  </SideNavItem>
+                  </AdditionalLink>
                 ))}
               </>
             )}
