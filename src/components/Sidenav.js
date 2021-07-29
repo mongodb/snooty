@@ -148,7 +148,7 @@ const additionalLinks = [
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
-  const isLanding = project === 'landing';
+  const isDocsLanding = project === 'landing';
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
@@ -223,7 +223,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
             {!ia && <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />}
 
-            {isLanding && (
+            {isDocsLanding && (
               <>
                 <Spaceholder />
                 {additionalLinks.map(({ glyph, title, url }) => (
