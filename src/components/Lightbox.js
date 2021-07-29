@@ -8,6 +8,9 @@ import { theme } from '../theme/docsTheme.js';
 
 const CAPTION_TEXT = 'click to enlarge';
 const StyledModal = styled(Modal)`
+  // Set z-index to appear above side nav and top navbar
+  z-index: 10;
+
   @media ${theme.screenSize.largeAndUp} {
     div[role='dialog'] {
       width: 80%;

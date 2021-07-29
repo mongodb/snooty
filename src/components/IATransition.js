@@ -48,7 +48,7 @@ const forwardStyle = css`
 const IATransition = ({ back, children, hasIA, slug }) => (
   <ConditionalWrapper
     condition={hasIA}
-    wrapper={(kids) => (
+    wrapper={(children) => (
       <>
         <Global styles={back ? backStyle : forwardStyle} />
         <SwitchTransition>
@@ -60,7 +60,7 @@ const IATransition = ({ back, children, hasIA, slug }) => (
             classNames="slide"
             key={slug}
           >
-            <div>{kids}</div>
+            <div>{children}</div>
           </CSSTransition>
         </SwitchTransition>
       </>

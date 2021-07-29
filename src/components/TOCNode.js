@@ -1,10 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { cx, css } from '@leafygreen-ui/emotion';
+import { uiColors } from '@leafygreen-ui/palette';
+import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from './Link';
+import { theme } from '../theme/docsTheme';
 import { formatText } from '../utils/format-text';
 import { isActiveTocNode } from '../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../utils/is-selected-toc-node';
-import { TOCContext } from './toc-context';
+
+const sideNavItemStyling = ({ level }) => css`
+  color: ${uiColors.gray.dark3};
+  padding-top: ${theme.size.small};
+  padding-bottom: ${theme.size.small};
+  padding-left: calc(${theme.size.small} * (${level} + 1));
+`;
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
@@ -14,16 +24,12 @@ const BASE_NODE_LEVEL = 1;
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
-const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
+const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) => {
   const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
   const hasChildren = !!children.length;
-  const isExternalLink = !!url;
-  const { activeSection } = useContext(TOCContext);
   const isActive = isActiveTocNode(activeSection, slug, children);
-  const anchorTagClassNames = `reference ${isActive ? 'current' : ''} ${isExternalLink ? 'external' : 'internal'}`;
   const isSelected = isSelectedTocNode(activeSection, slug);
-  const toctreeSectionClasses = `toctree-l${level} ${isActive ? 'current' : ''} ${isSelected ? 'selected-item' : ''}`;
   const isDrawer = !!(options && options.drawer);
 
   const [isOpen, setIsOpen] = useState(isActive);
@@ -34,67 +40,50 @@ const TOCNode = ({ node, level = BASE_NODE_LEVEL }) => {
     setIsOpen(isActive);
   }, [isActive, isDrawer ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Show caret if not on first level of TOC
-  const caretIcon =
-    level !== BASE_NODE_LEVEL ? (
-      <span
-        className={hasChildren ? 'expand-icon docs-expand-arrow' : 'expand-icon'}
-        style={{ WebkitTransform: isOpen ? 'rotate(135deg)' : null, transform: isOpen ? 'rotate(135deg)' : null }}
-      />
-    ) : null;
-
-  const formatTextOptions = {
-    literalEnableInline: true,
-  };
-
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
-    const formattedTitle = formatText(title, formatTextOptions);
+    const formatTextOptions = {
+      literalEnableInline: true,
+    };
+    // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
+    const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
 
-    if (isDrawer && children.length > 0) {
-      const _toggleDrawerOnEnter = (e) => {
-        if (e.key === 'Enter') {
-          setIsOpen(!isOpen);
-        }
-      };
-      // TODO: Ideally, this value should be a button, but to keep consistent with CSS render as anchor
+    if (isDrawer && hasChildren) {
       return (
-        <Link
-          onClick={(e) => {
-            e.preventDefault();
+        <SideNavItem
+          className={cx(sideNavItemStyling({ level }))}
+          onClick={() => {
             setIsOpen(!isOpen);
           }}
-          onKeyDown={_toggleDrawerOnEnter}
-          className={anchorTagClassNames}
-          aria-expanded={hasChildren ? isActive : undefined}
-          role="button"
-          tabIndex="0"
-          to={target}
         >
-          {caretIcon}
           {formattedTitle}
-        </Link>
+        </SideNavItem>
       );
     }
     return (
-      <Link to={target} aria-expanded={hasChildren ? isActive : undefined} className={anchorTagClassNames}>
-        {caretIcon}
+      <SideNavItem
+        as={Link}
+        to={target}
+        active={isSelected}
+        className={cx(sideNavItemStyling({ level }))}
+        onClick={handleClick}
+      >
         {formattedTitle}
-      </Link>
+      </SideNavItem>
     );
   };
+
   return (
-    <li className={toctreeSectionClasses}>
+    <>
       <NodeLink />
-      {isOpen ? (
-        <ul>
-          {children.map((c) => {
-            const key = c.slug || c.url;
-            return <TOCNode node={c} level={level + 1} key={key} />;
-          })}
-        </ul>
-      ) : null}
-    </li>
+      {isOpen &&
+        children.map((c) => {
+          const key = c.slug || c.url;
+          return (
+            <TOCNode activeSection={activeSection} handleClick={handleClick} node={c} level={level + 1} key={key} />
+          );
+        })}
+    </>
   );
 };
 

@@ -1,0 +1,148 @@
+{
+  "toctree": {
+    "title": [{
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 0
+        }
+      },
+      "value": "MongoDB Realm"
+    }],
+    "slug": "/",
+    "children": [
+      {
+        "title": [{
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 0
+            }
+          },
+          "value": "Get Started"
+        }],
+        "slug": "get-started",
+        "children": [
+          {
+            "title": [{
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "value": "Introduction for Mobile Developers"
+            }],
+            "slug": "get-started/introduction-mobile",
+            "children": [],
+            "options": {
+              "drawer": true
+            }
+          },
+          {
+            "title": [{
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "value": "Introduction for Backend Developers"
+            }],
+            "slug": "get-started/introduction-backend",
+            "children": [],
+            "options": {
+              "drawer": true
+            }
+          }
+        ],
+        "options": {
+          "drawer": true
+        }
+      },
+      {
+        "title": [{
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 0
+            }
+          },
+          "value": "Realm Database SDKs"
+        }],
+        "slug": "sdk",
+        "children": [
+          {
+            "title": [{
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "value": "Android SDK"
+            }],
+            "slug": "sdk/android",
+            "children": [
+              {
+                "title": [{
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 0
+                    }
+                  },
+                  "value": "Fundamentals"
+                }],
+                "slug": "sdk/android/fundamentals",
+                "children": [
+                  {
+                    "title": [{
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 0
+                        }
+                      },
+                      "value": "Asynchronous API"
+                    }],
+                    "slug": "sdk/android/fundamentals/async-api",
+                    "children": [],
+                    "options": {
+                      "drawer": true
+                    }
+                  }
+                ],
+                "options": {
+                  "drawer": true
+                }
+              }
+            ],
+            "options": {
+              "drawer": false
+            }
+          },
+          {
+            "title": [{
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 0
+                }
+              },
+              "value": "iOS SDK"
+            }],
+            "slug": "sdk/ios",
+            "children": [],
+            "options": {
+              "drawer": false
+            }
+          }
+        ],
+        "options": {
+          "drawer": false
+        }
+      }
+    ]
+  }
+}
