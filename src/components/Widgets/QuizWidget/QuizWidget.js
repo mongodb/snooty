@@ -75,9 +75,9 @@ const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => 
     if (selectedResponse) {
       setIsSubmitted(true);
       realmApp.logIn();
-      addResponse('hola');
+      addResponse(quizResponseObj);
     }
-  }, [selectedResponse, setIsSubmitted, realmApp, addResponse]);
+  }, [selectedResponse, setIsSubmitted, realmApp, addResponse, quizResponseObj]);
 
   return (
     <StyledButton onClick={handleChoiceClick} variant="default">
@@ -92,6 +92,7 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project) => {
     questionText: getPlaintext(question.children),
     quizId: quizId,
     project: project,
+    timestamp: new Date(),
   };
 };
 

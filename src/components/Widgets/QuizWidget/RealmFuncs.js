@@ -9,7 +9,7 @@ export function useRealmFuncs() {
   });
 
   const addResponse = async (todo) => {
-    await responseCollection.insertOne({ question: 'is it working?', answer: 'yes' });
+    await responseCollection.insertOne(todo);
   };
   return {
     addResponse,

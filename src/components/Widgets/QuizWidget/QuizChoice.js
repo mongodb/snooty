@@ -17,7 +17,7 @@ const submittedChoiceStyle = css`
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
-  background-color: ${(props) => (props.isSelected && !props.isSubmitted ? `${uiColors.gray.dark3}` : `white`)};
+  background-color: ${(props) => (props.isSelected ? `${uiColors.gray.dark3}` : `white`)};
   border-color: black;
   border-radius: 50%;
   display: inline-block;
@@ -38,10 +38,10 @@ const DescriptionBody = styled('div')`
   }
 `;
 
-const getCardStyling = ({ isSelected, isSubmitted, submittedChoiceStyle, isCorrect }) => css`
+const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
   box-shadow: none;
   margin: auto auto ${theme.size.default} auto;
-  padding: 15px;
+  padding: ${theme.size.default};
   ${isSelected && `border-color: ${uiColors.black}`};
   ${isSubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`}
   ${isSubmitted && (isCorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}}
@@ -57,13 +57,13 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
-const correctChoice = <StyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
-const incorrectChoice = <StyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
-const UnsubmittedChoice = ({ isSelected, isSubmitted }) => <Dot isSelected={isSelected} isSubmitted={isSubmitted} />;
+const correctIcon = <StyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
+const incorrectIcon = <StyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
+const UnsubmittedIcon = ({ isSelected }) => <Dot isSelected={isSelected} />;
 
 const ChoiceIconFactory = ({ isSubmitted, isSelected, isCorrect }) => {
-  if (isSubmitted) return isCorrect ? correctChoice : incorrectChoice;
-  else return <UnsubmittedChoice isSelected={isSelected} isSubmitted={isSubmitted} />;
+  if (isSubmitted) return isCorrect ? correctIcon : incorrectIcon;
+  else return <UnsubmittedIcon isSelected={isSelected} />;
 };
 
 const createSelectedResponseObj = (idx, isCorrect, argument) => {
@@ -85,7 +85,7 @@ const QuizChoice = ({
   const isSelected = selectedResponseIdx === idx;
   return (
     <Card
-      className={cx(getCardStyling({ isSelected, isSubmitted, submittedChoiceStyle, isCorrect }))}
+      className={cx(getCardStyling({ isSelected, isSubmitted, isCorrect }))}
       onClick={() =>
         !isSelected ? setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)) : setSelectedResponse()
       }
