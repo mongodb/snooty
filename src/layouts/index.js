@@ -10,7 +10,7 @@ import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { appId } from '../components/Widgets/QuizWidget/realm.json';
-import { RealmAppProvider, useRealmApp } from '../components/Widgets/QuizWidget/RealmApp';
+import { RealmAppProvider } from '../components/Widgets/QuizWidget/RealmApp';
 
 const bannerPadding = css`
   #gatsby-focus-wrapper {

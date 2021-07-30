@@ -12,12 +12,10 @@ import { useRealmApp } from '../RealmApp';
  */
 export function useCollection({ cluster = 'mongodb-atlas', db, collection }) {
   const realmApp = useRealmApp();
-  if (realmApp.currentUser) {
-    return React.useMemo(() => {
+  return React.useMemo(() => {
+    if (realmApp.currentUser) {
       const mdb = realmApp.currentUser.mongoClient(cluster);
       return mdb.db(db).collection(collection);
-    }, [realmApp.currentUser, cluster, db, collection]);
-  } else {
-    throw new Error(`No Realm User found. Make sure to call logIn() inside of a <RealmAppProvider />.`);
-  }
+    }
+  }, [realmApp.currentUser, cluster, db, collection]);
 }

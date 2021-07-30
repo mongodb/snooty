@@ -1,5 +1,6 @@
 import { useCollection } from './hooks/useCollection';
 import { dataSourceName } from './realm.json';
+import { useRealmApp } from './RealmApp';
 
 export function useRealmFuncs() {
   const responseCollection = useCollection({
