@@ -9,7 +9,6 @@ import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
-import { useRealmApp } from './RealmApp';
 import { useRealmFuncs } from './RealmFuncs';
 
 const StyledCard = styled(Card)`
@@ -67,7 +66,6 @@ const QuizCompleteSubtitle = ({ question }) => {
 };
 
 const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => {
-  const realmApp = useRealmApp();
   const { addResponse } = useRealmFuncs();
   const handleChoiceClick = useCallback(() => {
     if (selectedResponse) {
