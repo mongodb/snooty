@@ -10,7 +10,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     {
-      resolve: 'gatsby-plugin-canonical-urls',
+      resolve: 'gatsby-plugin-react-helmet-canonical-urls',
       options: {
         siteUrl: `${siteMetadata.siteUrl}${pathPrefix}`,
       },
