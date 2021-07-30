@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import Link from '../Link';
@@ -88,11 +89,11 @@ const ProductLink = styled(Link)`
   }
 `;
 
-const StyledIcon = styled(Icon)`
+const iconStyle = ({ isOpen }) => LeafyCss`
   height: 12px;
   width: 12px;
 
-  transform: ${({ isOpen }) => (isOpen ? 'rotate(0deg)' : 'rotate(-180deg)')};
+  transform: rotate(${isOpen ? 0 : -180}deg);
   transition: transform ${chevronRotationDuration}ms;
 `;
 
@@ -105,7 +106,7 @@ const ProductsList = () => {
       <Global styles={transitionClasses} />
       <ProductsListContainer>
         <ProductsListHeading isOpen={isOpen} onClick={() => setOpen(!isOpen)}>
-          <StyledIcon glyph="ChevronUp" isOpen={isOpen} />
+          <Icon className={cx(iconStyle({ isOpen }))} glyph="ChevronUp" />
           <HeadingTitle>View all products</HeadingTitle>
         </ProductsListHeading>
       </ProductsListContainer>
