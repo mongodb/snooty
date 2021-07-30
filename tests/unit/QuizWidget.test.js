@@ -12,6 +12,11 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ siteUrl, project }),
 }));
 
+beforeAll(() => {
+  jest.useFakeTimers('modern');
+  jest.setSystemTime(new Date(2020, 3, 1));
+});
+
 it('renders quiz widget correctly', () => {
   const tree = shallow(<QuizWidget nodeData={completeQuiz} />);
   expect(tree).toMatchSnapshot();
@@ -20,4 +25,8 @@ it('renders quiz widget correctly', () => {
 it('doesnt render quiz widget without a specified question', () => {
   const tree = shallow(<QuizWidget nodeData={noQuestion} />);
   expect(tree).toMatchSnapshot();
+});
+
+afterAll(() => {
+  jest.useRealTimers();
 });

@@ -188,7 +188,7 @@ exports[`renders quiz widget correctly 1`] = `
         "project": "cloud-docs",
         "questionText": "With my MongoDB account, I can now access?",
         "quizId": "mongoacc1",
-        "timestamp": 2021-07-30T17:28:42.173Z,
+        "timestamp": 2020-04-01T04:00:00.000Z,
       }
     }
     setIsSubmitted={[Function]}
