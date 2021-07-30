@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSiteMetadata } from './use-site-metadata';
 
-const ENABLED_SITES = new Set(['cloud-docs', 'datalake', 'docs', 'guides', 'node', 'realm']);
+const ENABLED_SITES = new Set(['cloud-docs', 'datalake', 'docs', 'node', 'realm']);
 
 export const useDelightedSurvey = (slug) => {
   const { parserBranch, project, snootyEnv } = useSiteMetadata();
