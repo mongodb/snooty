@@ -8,14 +8,14 @@ import { completeQuiz, noQuestion } from './data/QuizWidget.test.json';
 const siteUrl = 'https://docs.mongodb.com';
 const project = 'cloud-docs';
 
+const mockDate = new Date(1466424490000);
+const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
+
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ siteUrl, project }),
 }));
 
-beforeAll(() => {
-  jest.useFakeTimers('modern');
-  jest.setSystemTime(new Date(2020, 3, 1));
-});
+beforeAll(() => {});
 
 it('renders quiz widget correctly', () => {
   const tree = shallow(<QuizWidget nodeData={completeQuiz} />);
@@ -28,5 +28,5 @@ it('doesnt render quiz widget without a specified question', () => {
 });
 
 afterAll(() => {
-  jest.useRealTimers();
+  spy.mockRestore();
 });
