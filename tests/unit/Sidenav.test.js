@@ -1,9 +1,7 @@
 import React from 'react';
 import * as Gatsby from 'gatsby';
 import { mount } from 'enzyme';
-import { SidenavContextProvider } from '../../src/components/sidenav-context';
-import Sidenav from '../../src/components/Sidenav';
-import SidenavMobileMenuButton from '../../src/components/SidenavMobileMenuButton';
+import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
 import { tick, setMatchMedia, setMobile } from '../utils';
 

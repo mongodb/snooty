@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
-import SidenavBackButton from './SidenavBackButton';
+import { SidenavBackButton } from './Sidenav';
 import Spinner from './Spinner';
 import { theme } from '../theme/docsTheme';
 

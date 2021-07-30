@@ -4,9 +4,9 @@ import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
-import Link from './Link';
-import { useAllProducts } from '../hooks/useAllProducts';
-import { theme } from '../theme/docsTheme';
+import Link from '../Link';
+import { useAllProducts } from '../../hooks/useAllProducts';
+import { theme } from '../../theme/docsTheme';
 
 const chevronRotationDuration = 200;
 

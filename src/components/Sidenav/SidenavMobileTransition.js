@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
-import ConditionalWrapper from './ConditionalWrapper';
-import { theme } from '../theme/docsTheme';
+import ConditionalWrapper from '../ConditionalWrapper';
+import { theme } from '../../theme/docsTheme';
 
 const ENTER_DURATION = 200;
 const EXIT_DURATION = theme.size.stripUnit(theme.transitionSpeed.contentFadeOut) + 10;

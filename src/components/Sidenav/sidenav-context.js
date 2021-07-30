@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import useScreenSize from '../hooks/useScreenSize';
+import useScreenSize from '../../hooks/useScreenSize';
 
 const SidenavContext = createContext({
   hideMobile: true,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { matchers } from 'jest-emotion';
-import ProductsList from '../../src/components/ProductsList';
+import ProductsList from '../../src/components/Sidenav/ProductsList';
 
 const mockProducts = [
   {

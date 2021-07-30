@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import TOCNode from './TOCNode';
+import TOCNode from './Sidenav/TOCNode';
 import { TOCContext } from './toc-context';
 
 /**

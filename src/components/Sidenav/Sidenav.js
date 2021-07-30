@@ -9,17 +9,17 @@ import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-n
 import { uiColors } from '@leafygreen-ui/palette';
 import IA from './IA';
 import IATransition from './IATransition';
-import Link from './Link';
+import Link from '../Link';
 import ProductsList from './ProductsList';
 import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
-import VersionDropdown from './VersionDropdown';
-import useScreenSize from '../hooks/useScreenSize';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { theme } from '../theme/docsTheme';
-import { formatText } from '../utils/format-text';
+import VersionDropdown from '../VersionDropdown';
+import useScreenSize from '../../hooks/useScreenSize';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { theme } from '../../theme/docsTheme';
+import { formatText } from '../../utils/format-text';
 
 const SIDENAV_WIDTH = 268;
 

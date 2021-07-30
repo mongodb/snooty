@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import Link from './Link';
-import { NavigationContext } from './navigation-context';
-import { formatText } from '../utils/format-text';
+import Link from '../Link';
+import { NavigationContext } from '../navigation-context';
+import { formatText } from '../../utils/format-text';
 
 const Placeholder = styled(SideNavItem)`
   cursor: unset;
