@@ -72,10 +72,9 @@ const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => 
   const handleChoiceClick = useCallback(() => {
     if (selectedResponse) {
       setIsSubmitted(true);
-      realmApp.logIn();
       addResponse(quizResponseObj);
     }
-  }, [selectedResponse, setIsSubmitted, realmApp, addResponse, quizResponseObj]);
+  }, [selectedResponse, setIsSubmitted, addResponse, quizResponseObj]);
 
   return (
     <StyledButton onClick={handleChoiceClick} variant="default">
