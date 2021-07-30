@@ -10,7 +10,7 @@ describe('Deluge', () => {
   const props = {
     canShowSuggestions: false,
     path: 'server/auth',
-    project: 'guides',
+    project: 'datalake',
     openDrawer,
   };
 
