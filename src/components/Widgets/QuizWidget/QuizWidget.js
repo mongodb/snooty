@@ -69,7 +69,7 @@ const QuizCompleteSubtitle = ({ question }) => {
 
 const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => {
   const { snootyEnv } = useSiteMetadata();
-  const dbName = snootyEnv == 'production' ? 'quiz_prod' : 'quiz_dev';
+  const dbName = snootyEnv === 'production' ? 'quiz_prod' : 'quiz_dev';
   const { addResponse } = useRealmFuncs(dbName, 'responses');
 
   const handleChoiceClick = useCallback(() => {
