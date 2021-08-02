@@ -81,13 +81,14 @@ const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => 
   );
 };
 
-const createQuizResponseObj = (question, quizId, selectedResponse, project) => {
+const createQuizResponseObj = (question, quizId, selectedResponse, project, quizDate) => {
   return {
     ...selectedResponse,
     questionText: getPlaintext(question.children),
     quizId: quizId,
     project: project,
     timestamp: new Date(),
+    quizDate: quizDate
   };
 };
 
@@ -96,6 +97,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   const [selectedResponse, setSelectedResponse] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const quizId = options?.['quiz-id'];
+  const quizDate = options?.['quiz-date'];
   const { project } = useSiteMetadata();
   return (
     question?.type === 'paragraph' && (
@@ -116,7 +118,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
           <SubmitButton
             setIsSubmitted={setIsSubmitted}
             selectedResponse={selectedResponse}
-            quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project)}
+            quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project, quizDate)}
           />
         )}
       </StyledCard>
