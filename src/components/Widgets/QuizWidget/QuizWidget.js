@@ -11,6 +11,7 @@ import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { useRealmFuncs } from './RealmFuncs';
 import { RealmAppProvider } from './RealmApp';
+import { quizAppId } from './realm.json';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -67,7 +68,10 @@ const QuizCompleteSubtitle = ({ question }) => {
 };
 
 const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => {
-  const { addResponse } = useRealmFuncs();
+  const { snootyEnv } = useSiteMetadata();
+  const dbName = snootyEnv == 'production' ? 'quiz_prod' : 'quiz_dev';
+  const { addResponse } = useRealmFuncs(dbName, 'responses');
+
   const handleChoiceClick = useCallback(() => {
     if (selectedResponse) {
       setIsSubmitted(true);
@@ -116,7 +120,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
           />
         ))}
         {!isSubmitted && (
-          <RealmAppProvider>
+          <RealmAppProvider appId={quizAppId}>
             <SubmitButton
               setIsSubmitted={setIsSubmitted}
               selectedResponse={selectedResponse}

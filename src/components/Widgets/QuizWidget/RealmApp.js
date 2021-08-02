@@ -7,9 +7,13 @@ function createRealmApp(id) {
 }
 const RealmAppContext = React.createContext(null);
 
-export function RealmAppProvider({ children }) {
+export function RealmAppProvider({ appId, children }) {
   // Store Realm.App in React state. If appId changes, all children will rerender and use the new realmApp.
-  const [realmApp] = React.useState(createRealmApp(appId));
+  const [realmApp, setRealmApp] = React.useState(createRealmApp(appId));
+  useEffect(() => {
+    setRealmApp(createRealmApp(appId));
+  }, [appId]);
+
   const [currentUser, setCurrentUser] = React.useState(realmApp.currentUser);
   // Wrap the base logIn function to save the logged in user in state
   const logIn = React.useCallback(async () => {

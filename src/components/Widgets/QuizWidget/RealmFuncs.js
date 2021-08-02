@@ -1,11 +1,13 @@
+import { useEffect } from 'react';
 import { useCollection } from './hooks/useCollection';
 import { dataSourceName } from './realm.json';
+import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 
-export function useRealmFuncs() {
+export function useRealmFuncs(dbName, collectionName) {
   const responseCollection = useCollection({
     cluster: dataSourceName,
-    db: 'quiz_test',
-    collection: 'responses',
+    db: dbName,
+    collection: collectionName,
   });
 
   const addResponse = async (todo) => {

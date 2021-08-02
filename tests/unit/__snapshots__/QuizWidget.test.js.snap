@@ -182,7 +182,9 @@ exports[`renders quiz widget correctly 1`] = `
     }
     setSelectedResponse={[Function]}
   />
-  <RealmAppProvider>
+  <RealmAppProvider
+    appId="quizwidget-ftaro"
+  >
     <SubmitButton
       quizResponseObj={
         Object {
