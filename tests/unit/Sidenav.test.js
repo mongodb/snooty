@@ -56,7 +56,7 @@ const expectMobileSidenavHidden = (wrapper, value) => {
   const mobileMenuButton = wrapper.find('SidenavMobileMenuButton');
   expect(mobileMenuButton.exists('Menu')).toEqual(value);
   expect(mobileMenuButton.exists('X')).toEqual(!value);
-  expect(wrapper.find('StyledLeafygreenSideNav').prop('hideMobile')).toEqual(value);
+  expect(wrapper.find('SidenavMobileTransition').prop('hideMobile')).toEqual(value);
 };
 
 describe('Sidenav', () => {
@@ -104,7 +104,7 @@ describe('Sidenav', () => {
     // Sidenav open by default, but is hidden
     wrapper = await mountSidenav();
     expectMobileSidenavHidden(wrapper, true);
-    expect(wrapper.find('StyledLeafygreenSideNav').prop('widthOverride')).toEqual(mobileWidth);
+    expect(wrapper.find('SideNav').prop('widthOverride')).toEqual(mobileWidth);
 
     // Clicking menu button displays Sidenav
     let mobileMenuButton = wrapper.find('SidenavMobileMenuButton');
