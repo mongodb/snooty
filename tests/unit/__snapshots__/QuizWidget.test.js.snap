@@ -182,17 +182,19 @@ exports[`renders quiz widget correctly 1`] = `
     }
     setSelectedResponse={[Function]}
   />
-  <SubmitButton
-    quizResponseObj={
-      Object {
-        "project": "cloud-docs",
-        "questionText": "With my MongoDB account, I can now access?",
-        "quizDate": undefined,
-        "quizId": "mongoacc1",
-        "timestamp": 2016-06-20T12:08:10.000Z,
+  <RealmAppProvider>
+    <SubmitButton
+      quizResponseObj={
+        Object {
+          "project": "cloud-docs",
+          "questionText": "With my MongoDB account, I can now access?",
+          "quizDate": undefined,
+          "quizId": "mongoacc1",
+          "timestamp": 2016-06-20T12:08:10.000Z,
+        }
       }
-    }
-    setIsSubmitted={[Function]}
-  />
+      setIsSubmitted={[Function]}
+    />
+  </RealmAppProvider>
 </StyledCard>
 `;
