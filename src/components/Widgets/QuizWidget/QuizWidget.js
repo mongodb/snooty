@@ -88,7 +88,7 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project, quiz
     quizId: quizId,
     project: project,
     timestamp: new Date(),
-    quizDate: quizDate
+    quizDate: quizDate,
   };
 };
 
