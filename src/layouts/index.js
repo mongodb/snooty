@@ -9,8 +9,6 @@ import { theme } from '../theme/docsTheme.js';
 import { getTemplate } from '../utils/get-template';
 import Navbar from '../components/Navbar';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
-import { appId } from '../components/Widgets/QuizWidget/realm.json';
-import { RealmAppProvider } from '../components/Widgets/QuizWidget/RealmApp';
 
 const bannerPadding = css`
   #gatsby-focus-wrapper {
@@ -81,11 +79,9 @@ const DefaultLayout = (props) => {
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
       <TabProvider selectors={page?.options?.selectors}>
-        <RealmAppProvider appId={appId}>
-          <ContentsProvider headingNodes={page?.options?.headings}>
-            <Template {...props}>{children}</Template>
-          </ContentsProvider>
-        </RealmAppProvider>
+        <ContentsProvider headingNodes={page?.options?.headings}>
+          <Template {...props}>{children}</Template>
+        </ContentsProvider>
       </TabProvider>
       <Navbar />
     </>

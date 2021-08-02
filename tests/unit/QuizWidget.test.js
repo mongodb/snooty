@@ -15,8 +15,6 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ siteUrl, project }),
 }));
 
-beforeAll(() => {});
-
 it('renders quiz widget correctly', () => {
   const tree = shallow(<QuizWidget nodeData={completeQuiz} />);
   expect(tree).toMatchSnapshot();

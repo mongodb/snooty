@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import * as Realm from 'realm-web';
-import { baseUrl } from './realm.json';
+import { baseUrl, appId } from './realm.json';
 
 function createRealmApp(id) {
   return new Realm.App({ id, baseUrl });
 }
 const RealmAppContext = React.createContext(null);
 
-export function RealmAppProvider({ appId, children }) {
+export function RealmAppProvider({ children }) {
   // Store Realm.App in React state. If appId changes, all children will rerender and use the new realmApp.
-  const [realmApp, setRealmApp] = React.useState(createRealmApp(appId));
+  const [realmApp] = React.useState(createRealmApp(appId));
   const [currentUser, setCurrentUser] = React.useState(realmApp.currentUser);
   // Wrap the base logIn function to save the logged in user in state
   const logIn = React.useCallback(async () => {
@@ -21,7 +21,7 @@ export function RealmAppProvider({ appId, children }) {
     logIn();
   }, [logIn]);
 
-  // Override the App's currentUser & logIn properties + include the app-level logout function
+  // Override the App's currentUser & logIn properties
   const realmAppContext = React.useMemo(() => {
     return { ...realmApp, currentUser, logIn };
   }, [realmApp, currentUser, logIn]);

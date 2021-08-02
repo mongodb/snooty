@@ -10,6 +10,7 @@ import { theme } from '../../../theme/docsTheme';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { useRealmFuncs } from './RealmFuncs';
+import { RealmAppProvider } from './RealmApp';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -115,11 +116,13 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
           />
         ))}
         {!isSubmitted && (
-          <SubmitButton
-            setIsSubmitted={setIsSubmitted}
-            selectedResponse={selectedResponse}
-            quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project, quizDate)}
-          />
+          <RealmAppProvider>
+            <SubmitButton
+              setIsSubmitted={setIsSubmitted}
+              selectedResponse={selectedResponse}
+              quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project, quizDate)}
+            />
+          </RealmAppProvider>
         )}
       </StyledCard>
     )
