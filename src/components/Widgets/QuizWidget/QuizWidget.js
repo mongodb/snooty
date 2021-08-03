@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import PropTypes, { node } from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Card from '@leafygreen-ui/card';
@@ -99,11 +99,11 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project, quiz
 
 const getCorrectAnswerCount = (choices) => {
   var correctAnswerCount = 0;
-  choices.map((node) => {
+  choices.forEach(node => {
     if(node.options?.['is-true']){
       correctAnswerCount += 1;
     }
-  })
+  });
   return correctAnswerCount;
 }
 
