@@ -99,29 +99,29 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project, quiz
 
 const getCorrectAnswerCount = (choices) => {
   var correctAnswerCount = 0;
-  choices.forEach(node => {
-    if(node.options?.['is-true']){
+  choices.forEach((node) => {
+    if (node.options?.['is-true']) {
       correctAnswerCount += 1;
     }
   });
   return correctAnswerCount;
-}
+};
 
 const unwrappedOptions = (options) => {
   return {
-    quizId : options?.['quiz-id'],
-    quizDate : options?.['quiz-date']
-  }
-}
+    quizId: options?.['quiz-id'],
+    quizDate: options?.['quiz-date'],
+  };
+};
 
 const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
   const [selectedResponse, setSelectedResponse] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const {quizId, quizDate} = unwrappedOptions(options)
+  const { quizId, quizDate } = unwrappedOptions(options);
   const { project } = useSiteMetadata();
   const correctAnswerCount = getCorrectAnswerCount(choices);
-  const shouldRender = correctAnswerCount === 1 && question?.type === 'paragraph'
+  const shouldRender = correctAnswerCount === 1 && question?.type === 'paragraph';
   return (
     shouldRender && (
       <StyledCard>
