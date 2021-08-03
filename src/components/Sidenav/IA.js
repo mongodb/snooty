@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
-import Link from './Link';
-import { formatText } from '../utils/format-text';
+import Link from '../Link';
+import { formatText } from '../../utils/format-text';
 
 const IA = ({ handleClick, header, ia }) => (
   <SideNavGroup header={header}>

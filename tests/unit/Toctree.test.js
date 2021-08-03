@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Toctree from '../../src/components/Toctree';
+import Toctree from '../../src/components/Sidenav/Toctree';
 import mockData from './data/Toctree.test.json';
 import { tick } from '../utils';
 

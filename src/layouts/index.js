@@ -4,7 +4,7 @@ import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
-import Sidenav from '../components/Sidenav';
+import { Sidenav } from '../components/Sidenav';
 import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
 import { useSiteMetadata } from '../hooks/use-site-metadata';

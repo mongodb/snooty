@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import Link from './Link';
-import { NavigationContext } from './navigation-context';
-import { formatText } from '../utils/format-text';
+import Link from '../Link';
+import { NavigationContext } from '../navigation-context';
+import { formatText } from '../../utils/format-text';
 
+// Empty SideNavItem used as a placeholder while parent category page is fetched.
+// Look into implementing a loading skeleton for this when time permits
 const Placeholder = styled(SideNavItem)`
   cursor: unset;
-  margin-bottom: 33px;
+  height: 40px;
   :hover {
     background-color: unset;
   }
@@ -36,7 +38,12 @@ const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, 
       [{ title, url }] = parents.slice(-1);
     } else {
       // Show placeholder since the data is likely being fetched
-      return <Placeholder />;
+      return (
+        <>
+          <Placeholder />
+          {border}
+        </>
+      );
     }
   }
 

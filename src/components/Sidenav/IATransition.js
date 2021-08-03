@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
-import ConditionalWrapper from './ConditionalWrapper';
-import { theme } from '../theme/docsTheme';
+import ConditionalWrapper from '../ConditionalWrapper';
+import { theme } from '../../theme/docsTheme';
 
 const fadeOut = css`
   .slide-exit {
