@@ -3,6 +3,7 @@ import LeafygreenCard from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
 
 import CloseButton from './components/CloseButton';
+import ProgressBar from './components/ProgressBar';
 import { useFeedbackState } from './context';
 
 export default function FeedbackCard({ isOpen, children }) {
@@ -12,9 +13,8 @@ export default function FeedbackCard({ isOpen, children }) {
     isOpen && (
       <Floating>
         <Card>
-          <Heading />
+          <ProgressBar/>
           <Content>{children}</Content>
-          <CloseButton onClick={() => abandon()} />
         </Card>
       </Floating>
     )
@@ -28,7 +28,8 @@ const Floating = styled.div`
   z-index: 10;
 `;
 const Card = styled(LeafygreenCard)`
-  width: 320px;
+  width: 234px;
+  height: 281px;
 `;
 const CardHeader = styled.div`
   display: flex;
@@ -38,5 +39,4 @@ const CardHeader = styled.div`
 `;
 const Content = styled.div`
   margin: 0px 24px;
-  display: inline-block;
 `;
