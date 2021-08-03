@@ -13,10 +13,6 @@ import ConditionalWrapper from './ConditionalWrapper';
 import { UnifiedNav } from '@mdb/consistent-nav';
 import { theme } from '../theme/docsTheme';
 
-import { loginWithRedirect } from '../clients/auth';
-
-import Button from '@leafygreen-ui/button';
-
 const getActiveSection = (slug, urlItems) => {
   const urlMapping = Object.entries(urlItems).find(([, value]) => value.includes(slug));
   if (urlMapping) {
