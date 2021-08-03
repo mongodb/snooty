@@ -1,4 +1,4 @@
-import { Blank, Document, DriversIndex, Guide, GuidesIndex, Landing, OpenAPITemplate, NotFound } from '../templates';
+import { Blank, Document, DriversIndex, Landing, OpenAPITemplate, ProductLanding, NotFound } from '../templates';
 
 const getTemplate = (project, slug, template) => {
   switch (template) {
@@ -6,6 +6,8 @@ const getTemplate = (project, slug, template) => {
       return Blank;
     case 'landing':
       return Landing;
+    case 'product-landing':
+      return ProductLanding;
     case 'openapi':
       return OpenAPITemplate;
     case 'errorpage':
@@ -13,8 +15,6 @@ const getTemplate = (project, slug, template) => {
     default:
       const isIndex = slug === '/';
       switch (project) {
-        case 'guides':
-          return isIndex ? GuidesIndex : Guide;
         case 'drivers':
           return isIndex ? DriversIndex : Document;
         default:

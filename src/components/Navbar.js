@@ -10,6 +10,7 @@ import { searchParamsToURL } from '../utils/search-params-to-url';
 import { URL_SLUGS } from '../constants';
 import Searchbar from './Searchbar';
 import ConditionalWrapper from './ConditionalWrapper';
+import { UnifiedNav } from '@mdb/consistent-nav';
 import { theme } from '../theme/docsTheme';
 
 import { loginWithRedirect } from '../clients/auth';
@@ -51,44 +52,6 @@ const NavbarContainer = styled('div')`
     width: 90px;
   }
 `;
-
-const Banner = React.memo(({ altText, imgPath, mobileImgPath, url }) => {
-  mobileImgPath = withPrefix(mobileImgPath);
-  imgPath = withPrefix(imgPath);
-
-  return (
-    <a
-      href={url}
-      title={altText}
-      css={css`
-        display: block;
-        height: 40px;
-        width: 100vw;
-
-        @media ${theme.screenSize.upToMedium} {
-          height: 50px;
-        }
-
-        @media not all and (max-width: 1600px) {
-          height: ${theme.size.xlarge};
-        }
-      `}
-    >
-      <div
-        css={css`
-          background-image: url(${imgPath});
-          background-position: center;
-          background-size: cover;
-          height: 100%;
-
-          @media ${theme.screenSize.upToMedium} {
-            background-image: url(${mobileImgPath});
-          }
-        `}
-      />
-    </a>
-  );
-});
 
 const Navbar = () => {
   const { project } = useSiteMetadata();
@@ -145,37 +108,49 @@ const Navbar = () => {
 
   return (
     <>
-      <ConditionalWrapper
-        condition={theme.bannerContent.enabled}
-        wrapper={(children) => (
-          <div
-            css={css`
-              position: fixed;
-              top: 0;
-            `}
-          >
-            {children}
-          </div>
-        )}
-      >
-        <NavbarContainer
-          isExpanded={isSearchbarExpanded}
-          shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
-          tabIndex="0"
-          id="navbar"
-          className="navbar"
-          data-navprops={navprops}
-        />
-        <Searchbar
-          getResultsFromJSON={getSearchbarResultsFromJSON}
-          isExpanded={isSearchbarExpanded}
-          setIsExpanded={onSearchbarExpand}
-          searchParamsToURL={searchParamsToURL}
-          // Autofocus the searchbar when the user expands only so the user can start typing
-          shouldAutofocus={!isSearchbarDefaultExpanded}
-        />
-        <Button onClick={loginWithRedirect}>Login</Button>
-      </ConditionalWrapper>
+      {process.env.FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
+        <div
+          css={css`
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+          `}
+        >
+          <UnifiedNav />
+        </div>
+      ) : (
+        <ConditionalWrapper
+          condition={true}
+          wrapper={(children) => (
+            <div
+              css={css`
+                position: fixed;
+                top: 0;
+              `}
+            >
+              {children}
+            </div>
+          )}
+        >
+          <NavbarContainer
+            isExpanded={isSearchbarExpanded}
+            shouldOpaqueWhenExpanded={!isSearchbarDefaultExpanded}
+            tabIndex="0"
+            id="navbar"
+            className="navbar"
+            data-navprops={navprops}
+          />
+          <Searchbar
+            getResultsFromJSON={getSearchbarResultsFromJSON}
+            isExpanded={isSearchbarExpanded}
+            setIsExpanded={onSearchbarExpand}
+            searchParamsToURL={searchParamsToURL}
+            // Autofocus the searchbar when the user expands only so the user can start typing
+            shouldAutofocus={!isSearchbarDefaultExpanded}
+          />
+        </ConditionalWrapper>
+      )}
     </>
   );
 };
