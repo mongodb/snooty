@@ -55,18 +55,27 @@ const authorize = async () => {
   });
 };
 
+const clearApplicationSession = async () => {
+  await authClient.tokenManager.remove('idToken');
+};
+
+//Checks for an existing IDP session and attempts to retrieve idToken.
+//If no idToken is set but an IDP session is present, attempts to ensure
+//that we can instantatiate a new token for the application session
 const checkOktaSession = async () => {
   return authClient.session.exists().then(async (exists) => {
     if (exists) {
       const idToken = await authClient.tokenManager.get('idToken');
-      return idToken ? idToken : ensureOktaApplicationSession();
+      return idToken ? idToken : await ensureOktaApplicationSession();
     } else {
       console.log('logged out - clear tokens after this message');
-      // TODO: Add a call to clear tokens here, when we're certain that all other logic is valid.
+      await clearApplicationSession();
+      return {};
     }
   });
 };
 
+//Entry point to get a user's profile data from a JWT.
 export const getUserProfileFromJWT = async () => {
   if (isBrowser && authClient) {
     if (authClient.isLoginRedirect()) {
