@@ -19,7 +19,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const user = useStitchUser();
 
   // Create a new feedback document
-  async function initializeFeedback(nextView = 'rating') {
+  async function initializeFeedback(nextView = 'sentiment') {
     const segment = getSegmentUserId();
     const newFeedback = {
       page: {

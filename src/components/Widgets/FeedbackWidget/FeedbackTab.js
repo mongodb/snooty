@@ -9,7 +9,7 @@ export default function FeedbackTab(props) {
   return (
     !feedback && (
       <Container css={displayNone.onMobileAndTablet} onClick={() => initializeFeedback()}>
-        Give Feedback
+        Share Feedback
       </Container>
     )
   );
@@ -23,4 +23,6 @@ const Container = styled(LeafygreenCard)`
   right: 42px;
   user-select: none;
   z-index: 9;
+  font-weight: 600;
+  color: #09804C;
 `;

@@ -12,10 +12,9 @@ export default function FeedbackCard({ isOpen, children }) {
     isOpen && (
       <Floating>
         <Card>
-          <CardHeader>
-            <CloseButton onClick={() => abandon()} />
-          </CardHeader>
+          <Heading />
           <Content>{children}</Content>
+          <CloseButton onClick={() => abandon()} />
         </Card>
       </Floating>
     )
@@ -24,8 +23,8 @@ export default function FeedbackCard({ isOpen, children }) {
 
 const Floating = styled.div`
   position: fixed;
-  bottom: 256px;
-  right: 40px;
+  bottom: 40px;
+  right: 16px;
   z-index: 10;
 `;
 const Card = styled(LeafygreenCard)`
@@ -39,4 +38,5 @@ const CardHeader = styled.div`
 `;
 const Content = styled.div`
   margin: 0px 24px;
+  display: inline-block;
 `;

@@ -12,6 +12,7 @@ import QualifiersView from './views/QualifiersView';
 import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
 import CommentView from './views/CommentView';
+import SentimentView from './views/SentimentView';
 
 export function FeedbackContent({ view }) {
   const View = {
@@ -20,6 +21,7 @@ export function FeedbackContent({ view }) {
     comment: CommentView,
     support: SupportView,
     submitted: SubmittedView,
+    sentiment: SentimentView
   }[view];
   return <View className={`view-${view}`} />;
 }
