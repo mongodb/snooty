@@ -5,10 +5,10 @@ import { UserProvider } from './src/contexts/user-context';
 import { theme } from './src/theme/docsTheme';
 import './src/styles/mongodb-docs.css';
 
+export const wrapPageElement = ({ element }) => <UserProvider>{element}</UserProvider>;
+
 export const wrapRootElement = ({ element }) => (
   <ThemeProvider theme={theme}>
-    <LeafyGreenProvider baseFontSize={16}>
-      <UserProvider>{element}</UserProvider>
-    </LeafyGreenProvider>
+    <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
   </ThemeProvider>
 );
