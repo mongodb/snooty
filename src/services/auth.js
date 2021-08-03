@@ -66,7 +66,9 @@ const checkOktaSession = async () => {
   return authClient.session.exists().then(async (exists) => {
     if (exists) {
       const idToken = await authClient.tokenManager.get('idToken');
-      return idToken ? idToken : await ensureOktaApplicationSession();
+      if (idToken) return idToken;
+      await ensureOktaApplicationSession();
+      return authClient.tokenManager.get('idToken');
     } else {
       console.log('logged out - clear tokens after this message');
       await clearApplicationSession();
