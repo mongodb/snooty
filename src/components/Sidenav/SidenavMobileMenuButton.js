@@ -22,6 +22,7 @@ const MenuButton = styled(IconButton)`
   }
 `;
 
+// TODO: Remove this component after consistent-nav is officially released
 const SidenavMobileMenuButton = ({ className }) => {
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
