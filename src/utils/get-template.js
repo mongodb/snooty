@@ -1,14 +1,4 @@
-import {
-  Blank,
-  Document,
-  DriversIndex,
-  Guide,
-  GuidesIndex,
-  Landing,
-  OpenAPITemplate,
-  ProductLanding,
-  NotFound,
-} from '../templates';
+import { Blank, Document, DriversIndex, Landing, OpenAPITemplate, ProductLanding, NotFound } from '../templates';
 
 const getTemplate = (project, slug, templateName) => {
   let template;
@@ -34,9 +24,6 @@ const getTemplate = (project, slug, templateName) => {
     default:
       const isIndex = slug === '/';
       switch (project) {
-        case 'guides':
-          template = isIndex ? GuidesIndex : Guide;
-          break;
         case 'drivers':
           template = isIndex ? DriversIndex : Document;
           sidenav = true;

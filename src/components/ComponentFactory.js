@@ -43,7 +43,8 @@ import OpenAPI from './OpenAPI';
 import Operation from './Operation';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
-import QuizWidget from './QuizWidget';
+import QuizChoice from './Widgets/QuizWidget/QuizChoice';
+import QuizWidget from './Widgets/QuizWidget/QuizWidget';
 import Reference from './Reference';
 import RefRole from './RefRole';
 import ReleaseSpecification from './ReleaseSpecification';
@@ -165,6 +166,7 @@ const componentMap = {
   paragraph: Paragraph,
   procedure: Procedure,
   quiz: QuizWidget,
+  quizchoice: QuizChoice,
   ref_role: RefRole,
   reference: Reference,
   release_specification: ReleaseSpecification,

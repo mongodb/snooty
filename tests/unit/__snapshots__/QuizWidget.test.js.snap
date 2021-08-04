@@ -4,7 +4,16 @@ exports[`doesnt render quiz widget without a specified question 1`] = `""`;
 
 exports[`renders quiz widget correctly 1`] = `
 <StyledCard>
-  <QuizCompleteHeader />
+  <QuizHeader>
+    <Icon
+      fill="#13AA52"
+      glyph="CheckmarkWithCircle"
+      size="xlarge"
+    />
+    <QuizTitle>
+      Check your understanding
+    </QuizTitle>
+  </QuizHeader>
   <QuizCompleteSubtitle
     question={
       Array [
@@ -21,6 +30,8 @@ exports[`renders quiz widget correctly 1`] = `
     }
   />
   <ComponentFactory
+    idx={0}
+    isSubmitted={false}
     key="0"
     nodeData={
       Object {
@@ -66,8 +77,11 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
   <ComponentFactory
+    idx={1}
+    isSubmitted={false}
     key="1"
     nodeData={
       Object {
@@ -113,8 +127,11 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
   <ComponentFactory
+    idx={2}
+    isSubmitted={false}
     key="2"
     nodeData={
       Object {
@@ -163,11 +180,17 @@ exports[`renders quiz widget correctly 1`] = `
         "type": "directive",
       }
     }
+    setSelectedResponse={[Function]}
   />
-  <StyledButton
-    variant="default"
-  >
-    Submit
-  </StyledButton>
+  <SubmitButton
+    quizResponseObj={
+      Object {
+        "project": "cloud-docs",
+        "questionText": "With my MongoDB account, I can now access?",
+        "quizId": "mongoacc1",
+      }
+    }
+    setIsSubmitted={[Function]}
+  />
 </StyledCard>
 `;
