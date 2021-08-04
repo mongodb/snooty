@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { HeaderContext } from './header-context';
 import { SNOOTY_STITCH_ID } from '../build-constants';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { isBrowser } from '../utils/is-browser';
 import { normalizePath } from '../utils/normalize-path';
@@ -34,11 +35,12 @@ const StyledBannerContent = styled.div(
 
 const SiteBanner = () => {
   const { bannerContent, setBannerContent } = useContext(HeaderContext);
+  const { snootyEnv } = useSiteMetadata();
 
   useEffect(() => {
     const fetchBannerContent = async () => {
       try {
-        setBannerContent(await fetchBanner());
+        setBannerContent(await fetchBanner(snootyEnv));
       } catch (err) {
         console.error(err);
       }
@@ -46,7 +48,7 @@ const SiteBanner = () => {
     if (isBrowser) {
       fetchBannerContent();
     }
-  }, [setBannerContent]);
+  }, [setBannerContent, snootyEnv]);
 
   if (bannerContent == null) {
     return null;

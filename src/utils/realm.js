@@ -23,8 +23,8 @@ const fetchData = async (funcName, ...argsList) => {
   return await app.currentUser.callFunction(funcName, ...argsList);
 };
 
-export const fetchBanner = async () => {
-  return await fetchData('getBanner');
+export const fetchBanner = async (snootyEnv) => {
+  return await fetchData('getBanner', snootyEnv === 'development');
 };
 
 export const fetchProjectParents = async (database, project) => {
