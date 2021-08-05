@@ -4,9 +4,9 @@ import { Helmet } from 'react-helmet';
 
 const Meta = ({ nodeData: { options } }) => (
   <Helmet>
-    {Object.entries(options).map(([key, value]) => (
-      <meta key={key} name={key} content={value} />
-    ))}
+    {Object.entries(options).map(([key, value]) =>
+      key === 'canonical' ? <link rel={key} href={value} /> : <meta key={key} name={key} content={value} />
+    )}
   </Helmet>
 );
 
