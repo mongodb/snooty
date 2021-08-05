@@ -104,7 +104,7 @@ const Navbar = () => {
 
   return (
     <>
-      {process.env.FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
+      {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
         <div
           css={css`
             position: fixed;
