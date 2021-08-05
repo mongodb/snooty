@@ -10,7 +10,6 @@ import { theme } from '../../../theme/docsTheme';
 import { getPlaintext } from '../../../utils/get-plaintext';
 
 const submittedChoiceStyle = css`
-  pointer-events: none;
   transition: unset !important;
 `;
 
@@ -38,12 +37,20 @@ const DescriptionBody = styled('div')`
   }
 `;
 
+const submittedHoverState = ({isSelected, isCorrect}) =>  css`
+  :hover{
+    ${isCorrect ? `border: 2px solid ${uiColors.green.base}!important` : isSelected ? `border-color: ${uiColors.black}!important` : ''};
+    box-shadow: none!important;
+  }
+`;
+
 const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
   box-shadow: none;
   margin: auto auto ${theme.size.default} auto;
   padding: ${theme.size.default};
+  ${isSubmitted && submittedHoverState({isSelected, isCorrect})}
   ${isSelected && `border-color: ${uiColors.black}`};
-  ${isSubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`}
+  ${isSubmitted ? submittedChoiceStyle : `&:hover { border-color: black!important; }`}
   ${isSubmitted && (isCorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}}
 `;
 
@@ -76,18 +83,18 @@ const createSelectedResponseObj = (idx, isCorrect, argument) => {
 
 const QuizChoice = ({
   nodeData: { argument, children, options },
-  selectedResponseIdx,
+  selectedResponse,
   setSelectedResponse,
   idx,
   isSubmitted,
 }) => {
   const isCorrect = !!options?.['is-true'];
-  const isSelected = selectedResponseIdx === idx;
+  const isSelected = selectedResponse?.index === idx;
   return (
     <Card
       className={cx(getCardStyling({ isSelected, isSubmitted, isCorrect }))}
       onClick={() =>
-        !isSelected ? setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)) : setSelectedResponse()
+        !isSelected && !isSubmitted ? setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)) : setSelectedResponse(selectedResponse)
       }
     >
       <ChoiceIconFactory isSubmitted={isSubmitted} isSelected={isSelected} isCorrect={isCorrect} />
