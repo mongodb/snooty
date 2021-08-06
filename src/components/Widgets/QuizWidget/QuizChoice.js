@@ -37,7 +37,7 @@ const submittedStyle = ({ isSelected, isCorrect }) => css`
   transition: unset !important;
   ${isCorrect ? submittedCorrectBorder : `opacity: 0.5;`}
   :hover {
-    ${isCorrect ? submittedCorrectBorder : isSelected ? `border-color: ${uiColors.black}!important` : ''};
+    ${isCorrect ? submittedCorrectBorder : isSelected && `border-color: ${uiColors.black}!important`};
     box-shadow: none !important;
   }
 `;
