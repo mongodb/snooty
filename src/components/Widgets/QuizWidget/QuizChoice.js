@@ -39,8 +39,9 @@ const DescriptionBody = styled('div')`
 
 const submittedStyle = ({isSelected, isCorrect}) =>  css`
   transition: unset !important;
+  ${isCorrect ? submittedCorrectBorder : `opacity: 0.5;`}
   :hover{
-    ${isCorrect ? submittedCorrectStyle : isSelected ? `border-color: ${uiColors.black}!important` : ''};
+    ${isCorrect ? submittedCorrectBorder : isSelected ? `border-color: ${uiColors.black}!important` : ''};
     box-shadow: none!important;
   }
 `;
@@ -51,10 +52,9 @@ const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
   padding: ${theme.size.default};
   ${isSelected && `border-color: ${uiColors.black}`};
   ${isSubmitted ? submittedStyle({isSelected, isCorrect}) : `&:hover { border-color: ${uiColors.black}!important; }`}
-  ${isSubmitted && (isCorrect ? submittedCorrectStyle : `opacity: 0.5;`)}}
 `;
 
-const submittedCorrectStyle = css`
+const submittedCorrectBorder = css`
   border: 2px solid ${uiColors.green.base};
 `;
 
