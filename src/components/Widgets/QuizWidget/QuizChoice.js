@@ -37,7 +37,8 @@ const DescriptionBody = styled('div')`
   }
 `;
 
-const submittedHoverState = ({isSelected, isCorrect}) =>  css`
+const submittedStyle = ({isSelected, isCorrect}) =>  css`
+  transition: unset !important;
   :hover{
     ${isCorrect ? submittedCorrectStyle : isSelected ? `border-color: ${uiColors.black}!important` : ''};
     box-shadow: none!important;
@@ -48,9 +49,8 @@ const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
   box-shadow: none;
   margin: auto auto ${theme.size.default} auto;
   padding: ${theme.size.default};
-  ${isSubmitted && submittedHoverState({isSelected, isCorrect})}
   ${isSelected && `border-color: ${uiColors.black}`};
-  ${isSubmitted ? submittedChoiceStyle : `&:hover { border-color: ${uiColors.black}!important; }`}
+  ${isSubmitted ? submittedStyle({isSelected, isCorrect}) : `&:hover { border-color: ${uiColors.black}!important; }`}
   ${isSubmitted && (isCorrect ? submittedCorrectStyle : `opacity: 0.5;`)}}
 `;
 
