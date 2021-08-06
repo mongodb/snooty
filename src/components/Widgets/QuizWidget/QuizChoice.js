@@ -9,10 +9,6 @@ import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 import { getPlaintext } from '../../../utils/get-plaintext';
 
-const submittedChoiceStyle = css`
-  transition: unset !important;
-`;
-
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
