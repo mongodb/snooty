@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as Realm from 'realm-web';
-import { baseUrl } from './realm.json';
+import { baseUrl } from './realm-constants.json';
 
 function createRealmApp(id) {
   return new Realm.App({ id, baseUrl });

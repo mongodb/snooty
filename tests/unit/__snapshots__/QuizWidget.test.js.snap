@@ -190,7 +190,7 @@ exports[`renders quiz widget correctly 1`] = `
         Object {
           "project": "cloud-docs",
           "questionText": "With my MongoDB account, I can now access?",
-          "quizDate": undefined,
+          "quizDate": "2021-06-29",
           "quizId": "mongoacc1",
           "timestamp": 2016-06-20T12:08:10.000Z,
         }

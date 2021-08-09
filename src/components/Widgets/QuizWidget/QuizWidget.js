@@ -11,7 +11,7 @@ import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { useRealmFuncs } from './RealmFuncs';
 import { RealmAppProvider } from './RealmApp';
-import { quizAppId } from './realm.json';
+import { quizAppId } from './realm-constants.json';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -70,14 +70,14 @@ const QuizCompleteSubtitle = ({ question }) => {
 const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => {
   const { snootyEnv } = useSiteMetadata();
   const dbName = snootyEnv === 'production' ? 'quiz_prod' : 'quiz_dev';
-  const { addResponse } = useRealmFuncs(dbName, 'responses');
+  const { insertDocument } = useRealmFuncs(dbName, 'responses');
 
   const handleChoiceClick = useCallback(() => {
     if (selectedResponse) {
       setIsSubmitted(true);
-      addResponse(quizResponseObj);
+      insertDocument(quizResponseObj);
     }
-  }, [selectedResponse, setIsSubmitted, addResponse, quizResponseObj]);
+  }, [selectedResponse, setIsSubmitted, insertDocument, quizResponseObj]);
 
   return (
     <StyledButton onClick={handleChoiceClick} variant="default">
@@ -97,20 +97,21 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project, quiz
   };
 };
 
+// Current workaround to verify there's only one :is-true: flag, parser layer verification will be added later
 const getCorrectAnswerCount = (choices) => {
-  var correctAnswerCount = 0;
-  choices.forEach((node) => {
-    if (node.options?.['is-true']) {
-      correctAnswerCount += 1;
-    }
-  });
+  var correctAnswerCount = choices.filter(c => !!c.options?.['is-true']).length === 1;
   return correctAnswerCount;
 };
+
+const verifyDate = (quizDate) => {
+  const verifyDateRegex = /^\d{4}\-\d{2}\-\d{2}$/;
+  return verifyDateRegex.test(quizDate) ? quizDate : null
+}
 
 const unwrappedOptions = (options) => {
   return {
     quizId: options?.['quiz-id'],
-    quizDate: options?.['quiz-date'],
+    quizDate: verifyDate(options?.['quiz-date'])
   };
 };
 
@@ -120,8 +121,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { quizId, quizDate } = unwrappedOptions(options);
   const { project } = useSiteMetadata();
-  const correctAnswerCount = getCorrectAnswerCount(choices);
-  const shouldRender = correctAnswerCount === 1 && question?.type === 'paragraph';
+  const shouldRender = getCorrectAnswerCount(choices) && question?.type === 'paragraph';
   return (
     shouldRender && (
       <StyledCard>

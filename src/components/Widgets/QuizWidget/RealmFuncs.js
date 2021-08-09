@@ -1,17 +1,17 @@
 import { useCollection } from './hooks/useCollection';
-import { dataSourceName } from './realm.json';
+import { dataSourceName } from './realm-constants.json';
 
 export function useRealmFuncs(dbName, collectionName) {
-  const responseCollection = useCollection({
+  const currentCollection = useCollection({
     cluster: dataSourceName,
     db: dbName,
     collection: collectionName,
   });
 
-  const addResponse = async (todo) => {
-    await responseCollection.insertOne(todo);
+  const insertDocument = async (todo) => {
+    await currentCollection.insertOne(todo);
   };
   return {
-    addResponse,
+    insertDocument,
   };
 }
