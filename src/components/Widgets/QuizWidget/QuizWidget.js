@@ -98,12 +98,12 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project, quiz
 };
 
 // Current workaround to verify there's only one :is-true: flag, parser layer verification will be added later
-const getCorrectAnswerCount = (choices) => {
-  var correctAnswerCount = choices.filter((c) => !!c.options?.['is-true']).length === 1;
-  return correctAnswerCount;
+const verifySingleAnswerCount = (choices) => {
+  return choices.filter((c) => !!c.options?.['is-true']).length === 1;;
 };
 
 const verifyDate = (quizDate) => {
+  {/* eslint-disable-next-line react/no-danger */}
   const verifyDateRegex = /^\d{4}\-\d{2}\-\d{2}$/;
   return verifyDateRegex.test(quizDate) ? quizDate : null;
 };
@@ -121,7 +121,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { quizId, quizDate } = unwrappedOptions(options);
   const { project } = useSiteMetadata();
-  const shouldRender = getCorrectAnswerCount(choices) && question?.type === 'paragraph';
+  const shouldRender = verifySingleAnswerCount(choices) && question?.type === 'paragraph';
   return (
     shouldRender && (
       <StyledCard>
