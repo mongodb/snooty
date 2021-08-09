@@ -34,10 +34,11 @@ const DescriptionBody = styled('div')`
 `;
 
 const submittedStyle = ({ isSelected, isCorrect }) => css`
-  transition: unset !important;
+  transition: unset!important;
   ${isCorrect ? submittedCorrectBorder : `opacity: 0.5;`}
   :hover {
-    ${isCorrect ? submittedCorrectBorder : isSelected && `border-color: ${uiColors.black}!important`};
+    ${isCorrect && submittedCorrectBorder}
+    ${isSelected && `border-color: ${uiColors.black}!important`};
     box-shadow: none !important;
   }
 `;
@@ -90,13 +91,12 @@ const QuizChoice = ({
 }) => {
   const isCorrect = !!options?.['is-true'];
   const isSelected = selectedResponse?.index === idx;
+  console.log(isSelected)
   return (
     <Card
       className={cx(getCardStyling({ isSelected, isSubmitted, isCorrect }))}
       onClick={() =>
-        !isSelected && !isSubmitted
-          ? setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument))
-          : setSelectedResponse(selectedResponse)
+        !isSubmitted && (isSelected ? setSelectedResponse() : setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)))
       }
     >
       <ChoiceIconFactory isSubmitted={isSubmitted} isSelected={isSelected} isCorrect={isCorrect} />
