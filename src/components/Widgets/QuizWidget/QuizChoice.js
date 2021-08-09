@@ -33,25 +33,17 @@ const DescriptionBody = styled('div')`
   }
 `;
 
-const submittedStyle = ({ isSelected, isCorrect }) => css`
-  transition: unset!important;
-  ${isCorrect ? submittedCorrectBorder : `opacity: 0.5;`}
-  :hover {
-    ${isCorrect ? submittedCorrectBorder : isSelected && `border-color: ${uiColors.black}!important`};
-    box-shadow: none !important;
-  }
+const submittedStyle = ({ isCorrect }) => css`
+  transition: unset !important;
+  ${isCorrect ? `border: 2px solid ${uiColors.green.base}!important;` : `opacity: 0.5;`}
 `;
 
 const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
-  box-shadow: none;
+  box-shadow: none !important;
   margin: auto auto ${theme.size.default} auto;
   padding: ${theme.size.default};
-  ${isSelected && `border-color: ${uiColors.black}`};
-  ${isSubmitted ? submittedStyle({ isSelected, isCorrect }) : `&:hover { border-color: ${uiColors.black}!important; }`}
-`;
-
-const submittedCorrectBorder = css`
-  border: 2px solid ${uiColors.green.base};
+  ${isSelected && `border-color: ${uiColors.black}!important;`};
+  ${isSubmitted ? submittedStyle({ isCorrect }) : `:hover{ border-color: ${uiColors.black}!important; }`}
 `;
 
 const AnswerDescription = ({ description }) => {
@@ -90,12 +82,13 @@ const QuizChoice = ({
 }) => {
   const isCorrect = !!options?.['is-true'];
   const isSelected = selectedResponse?.index === idx;
-  console.log(isSelected)
+  console.log(isSelected);
   return (
     <Card
       className={cx(getCardStyling({ isSelected, isSubmitted, isCorrect }))}
       onClick={() =>
-        !isSubmitted && (isSelected ? setSelectedResponse() : setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)))
+        !isSubmitted &&
+        (isSelected ? setSelectedResponse() : setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)))
       }
     >
       <ChoiceIconFactory isSubmitted={isSubmitted} isSelected={isSelected} isCorrect={isCorrect} />
