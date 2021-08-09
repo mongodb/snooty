@@ -9,6 +9,9 @@ import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
+import { useRealmFuncs } from './RealmFuncs';
+import { RealmAppProvider } from './RealmApp';
+import { quizAppId } from './realm-constants.json';
 
 const StyledCard = styled(Card)`
   background-color: ${uiColors.gray.light3};
@@ -65,11 +68,16 @@ const QuizCompleteSubtitle = ({ question }) => {
 };
 
 const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => {
+  const { snootyEnv } = useSiteMetadata();
+  const dbName = snootyEnv === 'production' ? 'quiz_prod' : 'quiz_dev';
+  const { insertDocument } = useRealmFuncs(dbName, 'responses');
+
   const handleChoiceClick = useCallback(() => {
     if (selectedResponse) {
       setIsSubmitted(true);
+      insertDocument(quizResponseObj);
     }
-  }, [setIsSubmitted, selectedResponse]);
+  }, [selectedResponse, setIsSubmitted, insertDocument, quizResponseObj]);
 
   return (
     <StyledButton onClick={handleChoiceClick} variant="default">
@@ -78,12 +86,31 @@ const SubmitButton = ({ setIsSubmitted, selectedResponse, quizResponseObj }) => 
   );
 };
 
-const createQuizResponseObj = (question, quizId, selectedResponse, project) => {
+const createQuizResponseObj = (question, quizId, selectedResponse, project, quizDate) => {
   return {
     ...selectedResponse,
     questionText: getPlaintext(question.children),
     quizId: quizId,
     project: project,
+    timestamp: new Date(),
+    quizDate: quizDate,
+  };
+};
+
+// Current workaround to verify there's only one :is-true: flag, parser layer verification will be added later
+const verifySingleAnswerCount = (choices) => {
+  return choices.filter((c) => !!c.options?.['is-true']).length === 1;
+};
+
+const verifyDate = (quizDate) => {
+  const verifyDateRegex = new RegExp(/^\d{4}-\d{2}-\d{2}$/);
+  return verifyDateRegex.test(quizDate) ? quizDate : null;
+};
+
+const unwrappedOptions = (options) => {
+  return {
+    quizId: options?.['quiz-id'],
+    quizDate: verifyDate(options?.['quiz-date']),
   };
 };
 
@@ -91,10 +118,11 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
   const [selectedResponse, setSelectedResponse] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const quizId = options?.['quiz-id'];
+  const { quizId, quizDate } = unwrappedOptions(options);
   const { project } = useSiteMetadata();
+  const shouldRender = verifySingleAnswerCount(choices) && question?.type === 'paragraph';
   return (
-    question?.type === 'paragraph' && (
+    shouldRender && (
       <StyledCard>
         {quizCompleteHeader}
         <QuizCompleteSubtitle question={question.children} />
@@ -109,11 +137,13 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
           />
         ))}
         {!isSubmitted && (
-          <SubmitButton
-            setIsSubmitted={setIsSubmitted}
-            selectedResponse={selectedResponse}
-            quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project)}
-          />
+          <RealmAppProvider appId={quizAppId}>
+            <SubmitButton
+              setIsSubmitted={setIsSubmitted}
+              selectedResponse={selectedResponse}
+              quizResponseObj={createQuizResponseObj(question, quizId, selectedResponse, project, quizDate)}
+            />
+          </RealmAppProvider>
         )}
       </StyledCard>
     )
