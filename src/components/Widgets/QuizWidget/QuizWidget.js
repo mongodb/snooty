@@ -99,7 +99,7 @@ const createQuizResponseObj = (question, quizId, selectedResponse, project, quiz
 
 // Current workaround to verify there's only one :is-true: flag, parser layer verification will be added later
 const verifySingleAnswerCount = (choices) => {
-  return choices.filter((c) => !!c.options?.['is-true']).length === 1;;
+  return choices.filter((c) => !!c.options?.['is-true']).length === 1;
 };
 
 const verifyDate = (quizDate) => {
