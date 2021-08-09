@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
+import { UnifiedFooter } from '@mdb/consistent-nav';
 import ComponentFactory from './ComponentFactory';
 import { ContentsProvider } from './contents-context';
 import FootnoteContext from './footnote-context';
@@ -130,11 +131,12 @@ export default class DocumentBody extends Component {
                       {this.pageNodes.map((child, index) => (
                         <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
                       ))}
-                      <Footer />
+                      {!process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <Footer />}
                     </Template>
                   </ContentsProvider>
                 </FootnoteContext.Provider>
               </Widgets>
+              {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <UnifiedFooter />}
             </>
           );
         }}

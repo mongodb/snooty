@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { displayNone } from '../utils/display-none';
+import { theme } from '../theme/docsTheme';
 
 const RightColumn = ({ children, className }) => (
   <div
@@ -18,7 +19,8 @@ const RightColumn = ({ children, className }) => (
         height: 100%;
         max-height: calc(100vh - 120px);
         overflow: auto;
-        position: fixed;
+        position: sticky;
+        top: ${theme.size.medium};
 
         & > * {
           margin-bottom: 30px;
