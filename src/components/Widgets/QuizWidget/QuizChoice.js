@@ -28,18 +28,18 @@ const StyledIcon = styled(Icon)`
 const DescriptionBody = styled('div')`
   p {
     padding-left: 26px;
-    margin-top: ${theme.size.small} !important;
-    margin-bottom: 0 !important;
+    margin-top: ${theme.size.small}!important;
+    margin-bottom: 0!important;
   }
 `;
 
 const submittedStyle = ({ isCorrect }) => css`
-  transition: unset !important;
+  transition: unset!important;
   ${isCorrect ? `border: 2px solid ${uiColors.green.base}!important;` : `opacity: 0.5;`}
 `;
 
 const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
-  box-shadow: none !important;
+  box-shadow: none!important;
   margin: auto auto ${theme.size.default} auto;
   padding: ${theme.size.default};
   ${isSelected && `border-color: ${uiColors.black}!important;`};
