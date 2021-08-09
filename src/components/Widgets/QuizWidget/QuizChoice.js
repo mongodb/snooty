@@ -82,7 +82,6 @@ const QuizChoice = ({
 }) => {
   const isCorrect = !!options?.['is-true'];
   const isSelected = selectedResponse?.index === idx;
-  console.log(isSelected);
   return (
     <Card
       className={cx(getCardStyling({ isSelected, isSubmitted, isCorrect }))}
