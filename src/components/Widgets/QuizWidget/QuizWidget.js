@@ -103,8 +103,7 @@ const verifySingleAnswerCount = (choices) => {
 };
 
 const verifyDate = (quizDate) => {
-  {/* eslint-disable-next-line react/no-danger */}
-  const verifyDateRegex = /^\d{4}\-\d{2}\-\d{2}$/;
+  const verifyDateRegex = new RegExp(/^\d{4}\-\d{2}\-\d{2}$/);
   return verifyDateRegex.test(quizDate) ? quizDate : null;
 };
 
