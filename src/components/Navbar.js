@@ -52,7 +52,7 @@ const NavbarContainer = styled('div')`
 const Navbar = () => {
   const { project } = useSiteMetadata();
 
-  const unifiedNavProperty = project === 'docs-realm' ? 'REALM' : 'DOCS';
+  const unifiedNavProperty = project === 'realm' ? 'REALM' : 'DOCS';
 
   const [activeLink, setActiveLink] = useState('');
   // We want to expand the searchbar on default when it won't collide with any other nav elements
