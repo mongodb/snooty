@@ -35,7 +35,7 @@ const Document = ({
 
   return (
     <div className="content">
-      <div>
+      <div style={{ display: 'flex' }}>
         {(!isBrowser || showLeftColumn) && (
           <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">
             <Sidebar

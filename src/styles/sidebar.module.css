@@ -4,4 +4,5 @@
 .sphinxsidebar {
   display: block !important;
   overflow-y: visible !important;
+  position: sticky !important;
 }

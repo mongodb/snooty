@@ -14,7 +14,6 @@ const TableOfContents = ({ activeSection, height, toctreeData: { children } }) =
       css={css`
         height: calc(100% - ${height}px);
         overflow-y: auto;
-        position: absolute;
         width: 100%;
       `}
     >
