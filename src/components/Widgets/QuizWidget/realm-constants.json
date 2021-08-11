@@ -1,0 +1,5 @@
+{
+  "quizAppId": "quizwidget-ftaro",
+  "baseUrl": "https://realm.mongodb.com",
+  "dataSourceName": "mongodb-atlas"
+}
