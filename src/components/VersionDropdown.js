@@ -41,18 +41,27 @@ const needsLegacyDropdown = (branches = []) => {
   return branches.some(isLegacy);
 };
 
-// Creates a mapping of active branch names to UI labels
-const getBranchLabel = (branch) => {
-  if (branch['active'] === false) {
-    console.warn(`Retrieving branch UI label for legacy/EOL'd/inactive branch: ${branch['gitBranchName']}`);
+// Gets UI labels for supplied active branch names
+const getUILabel = (branch) => {
+  if (!branch['active']) {
+    console.warn(
+      `Retrieving branch UI label for legacy/EOL'd/inactive branch: ${branch['gitBranchName']}. This should probably not be happening.`
+    );
     return branch['gitBranchName'];
   }
+  // TODO: Am I understanding publishOriginalBranchName correctly?
+  // if (!!branch['publishOriginalBranchName']) {
+  //   console.warn(`Using original git branch name as version selector UI label for: ${branch['gitBranchName']}.`);
+  //   return branch['gitBranchName'];
+  // }
   return branch['versionSelectorLabel'] || createVersionLabel(branch['gitBranchName'], branch['urlSlug']);
 };
 
-// Generate a version label to be displayed to docs users (only called if none was specified)
-// TODO: Shorten significantly
+// If a UI label is not specified for raw versions (e.g. v1.0), create one
+// Example: 1.0 -> Version 1.0
+// TODO: Shorten significantly, add capabilitys for 'v1.0' or 'android-v1.0'
 const createVersionLabel = (gitBranchName = '', urlSlug = null) => {
+  console.warn(`Automatically creating version label for ${gitBranchName}.`);
   if (!gitBranchName && !urlSlug) {
     console.warn('Unable to create version label - neither gitBranchName nor urlSlug defined');
     return 'Version Name Unknown';
@@ -62,21 +71,17 @@ const createVersionLabel = (gitBranchName = '', urlSlug = null) => {
   const isNumeric = (version = '') => !isNaN(version);
 
   // If numeric, append 'Version ' to urlSlug or gitBranchName.
-  const label = urlSlug || gitBranchName;
+  const label = gitBranchName || urlSlug;
   return isNumeric(label) ? `Version ${label}` : label;
 };
 
-const getActiveUngroupedGitBranchNames = (branches, groups) => {
-  // for each group, concatenate it group["branches"]
-  const groupedGitBranchNames = groups.map((g) => g['includedBranches']).flat();
-  const ungroupedActiveGitBranches = branches.filter(
-    (b) => !groupedGitBranchNames.includes(b['gitBranchName']) && b['active'] === true
-  );
-  const ungroupedActiveGitBranchNames = ungroupedActiveGitBranches.map((b) => b['gitBranchName']);
-  return ungroupedActiveGitBranchNames;
+// Returns all branches that are neither in 'groups' nor inactive
+const getActiveUngroupedBranches = (branches, groups) => {
+  const groupedBranchNames = groups.map((g) => g['includedBranches']).flat();
+  return branches.filter((b) => !groupedBranchNames.includes(b['gitBranchName']) && !!b['active']);
 };
 
-const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
+const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
 
@@ -85,9 +90,8 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
     return null;
   }
 
-  // Do not render version dropdown if there is only one branch
-  if (branches.length === 1) {
-    console.warn('Only 1 branch supplied to VersionDropdown; expected 2 or more');
+  if (branches.length < 2) {
+    console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
     return null;
   }
 
@@ -122,36 +126,43 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
     reachNavigate(destination);
   };
 
-  const mapBranchNamesToOptions = (branchNames) => {
-    return branchNames.map((branchName) => {
-      const branchCandidates = branches.filter((b) => b['gitBranchName'] === branchName || b['urlSlug'] === branchName);
-      // TODO: Should probably return null in the future (leaving for demo)
-      if (branchCandidates.length === 0) {
-        console.warn(
-          `Could not find branch in 'branches' with gitBranchName or urlSlug: ${branchName}. Check 'groups'.`
-        );
-        return (
-          <Option key={branchName} value={branchName}>
-            <StyledOptionLink href={getUrl(branchName)}>{branchName}</StyledOptionLink>
-          </Option>
-        );
-      }
-      const branch = branchCandidates[0];
-      const UIlabel = getBranchLabel(branch);
-      const branchValue = branch['urlSlug'] || branch['gitBranchName'];
-      const url = getUrl(branchValue);
-      return (
-        <Option key={branchValue} value={UIlabel}>
-          <StyledOptionLink href={url}>{UIlabel}</StyledOptionLink>
-        </Option>
-      );
-    });
+  // Return a branch object from branches that matches supplied branchName
+  // Typically used to associate a branchName from 'groups' with a branchName in 'branches'
+  const findBranch = (branchName) => {
+    const branchCandidates = branches.filter((b) => b['gitBranchName'] === branchName);
+
+    if (branchCandidates.length === 0) {
+      console.warn(`Could not find branch in 'branches' with gitBranchName: ${branchName}. Check 'groups'.`);
+      return null;
+    }
+
+    if (branchCandidates.length > 1) {
+      console.warn(`Too many branches with name ${branchName}.`);
+      return null;
+    }
+
+    // TODO: less unsafe return
+    return branchCandidates[0];
   };
 
-  const activeUngroupedGitBranchNames = getActiveUngroupedGitBranchNames(branches, groups) || [];
+  const createOption = (branch) => {
+    const UIlabel = getUILabel(branch);
+    const branchSlug = branch['urlSlug'] || branch['gitBranchName'];
+    const url = getUrl(branchSlug);
+    // TODO: Value should be unique -- not UI label, which could be have multiples
+    // of v1.0, for example
+    return (
+      <Option key={branchSlug} value={UIlabel}>
+        <StyledOptionLink href={url}>{UIlabel}</StyledOptionLink>
+      </Option>
+    );
+  };
+
+  const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
-  // It would be nice to either use the ConditionalWrapper OR have the OptionGroup not take
-  // up space when a label is empty-string
+  // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
+  // OR have the OptionGroup not take up space when a label is empty-string. For now,
+  // ungrouped branches are handled in a separate array.
   return (
     <StyledSelect
       allowDeselect={false}
@@ -163,15 +174,13 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
       value={parserBranch}
       usePortal={false}
     >
-      {activeUngroupedGitBranchNames && mapBranchNamesToOptions(activeUngroupedGitBranchNames)}
+      {activeUngroupedBranches && activeUngroupedBranches.map((b) => createOption(b))}
       {groups &&
         groups.map((group) => {
-          const { groupLabel, includedBranches = [] } = group;
-          console.log(group);
-          console.log(groupLabel, includedBranches);
+          const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
           return (
             <OptionGroup label={groupLabel}>
-              {includedBranches && mapBranchNamesToOptions(includedBranches)}
+              {groupedBranchNames && groupedBranchNames.map((bn) => createOption(findBranch(bn)))}
             </OptionGroup>
           );
         })}
@@ -185,7 +194,7 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
 };
 
 VersionDropdown.propTypes = {
-  repo_branches: PropTypes.shape({
+  repoBranches: PropTypes.shape({
     branches: PropTypes.arrayOf(
       PropTypes.shape({
         gitBranchName: PropTypes.string.isRequired,

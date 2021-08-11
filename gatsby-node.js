@@ -120,9 +120,9 @@ exports.createPages = async ({ actions }) => {
     transformBreadcrumbs(parentPaths, slugToTitle);
   }
 
-  const repo_branches = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
+  const repoBranches = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
 
-  if (repo_branches.length === 0) {
+  if (repoBranches.length === 0) {
     console.error('No version information found for', siteMetadata.project);
   }
 
@@ -143,7 +143,7 @@ exports.createPages = async ({ actions }) => {
           context: {
             slug,
             metadata: metadataMinusStatic,
-            repo_branches: repo_branches,
+            repoBranches: repoBranches,
             template: pageNodes?.options?.template,
             page: pageNodes,
             guidesMetadata: GUIDES_METADATA,
