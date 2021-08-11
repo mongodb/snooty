@@ -5,14 +5,16 @@ import { fetchProjectParents } from '../utils/realm';
 
 const NavigationContext = React.createContext({
   parents: [],
+  completedFetch: false,
 });
 
 const NavigationProvider = ({ children }) => {
   const { database, project } = useSiteMetadata();
   const [parents, setParents] = useState([]);
+  const [completedFetch, setCompletedFetch] = useState(false);
 
   useEffect(() => {
-    const fetchBreadcrumbData = async () => {
+    const fetchData = async () => {
       try {
         const parents = await fetchProjectParents(database, project);
         setParents(parents);
@@ -21,11 +23,12 @@ const NavigationProvider = ({ children }) => {
       }
     };
     if (isBrowser) {
-      fetchBreadcrumbData();
+      fetchData();
+      setCompletedFetch(true);
     }
   }, [database, project]);
 
-  return <NavigationContext.Provider value={{ parents }}>{children}</NavigationContext.Provider>;
+  return <NavigationContext.Provider value={{ completedFetch, parents }}>{children}</NavigationContext.Provider>;
 };
 
 export { NavigationContext, NavigationProvider };
