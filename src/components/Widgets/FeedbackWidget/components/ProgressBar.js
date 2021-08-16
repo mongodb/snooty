@@ -15,11 +15,17 @@ const closeButtonAlignment = css`
 const CloseButton = ({ onClick, size = 'default', ...props }) => {
   const { abandon } = useFeedbackState();
   return (
-    <IconButton className={closeButtonAlignment} aria-label="Close Feedback Form" onClick={() => abandon()} size={size} {...props}>
+    <IconButton
+      className={closeButtonAlignment}
+      aria-label="Close Feedback Form"
+      onClick={() => abandon()}
+      size={size}
+      {...props}
+    >
       <Icon size={size} glyph="X" />
     </IconButton>
   );
-}
+};
 
 const Dot = styled('span')`
   height: 5px;
@@ -41,15 +47,15 @@ const StyledBar = styled('div')`
 
 const ProgressBar = ({ children }) => {
   return (
-  <StyledBar>
-    <DotSpan>
-      <Dot/>
-      <Dot/>
-      <Dot/>
-    </DotSpan>
-    <CloseButton/>
-  </StyledBar>
-  )
+    <StyledBar>
+      <DotSpan>
+        <Dot />
+        <Dot />
+        <Dot />
+      </DotSpan>
+      <CloseButton />
+    </StyledBar>
+  );
 };
 
 export default ProgressBar;

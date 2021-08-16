@@ -45,7 +45,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   }
 
   async function setSentiment() {
-    setView('comment')
+    setView('comment');
   }
 
   // Sets the user's star rating for the page

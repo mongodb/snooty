@@ -24,5 +24,5 @@ const Container = styled(LeafygreenCard)`
   user-select: none;
   z-index: 9;
   font-weight: 600;
-  color: #09804C;
+  color: #09804c;
 `;

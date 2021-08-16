@@ -9,7 +9,7 @@ export default function FeedbackCard({ isOpen, children }) {
     isOpen && (
       <Floating>
         <Card>
-          <ProgressBar/>
+          <ProgressBar />
           <Content>{children}</Content>
         </Card>
       </Floating>
@@ -30,4 +30,3 @@ const Card = styled(LeafygreenCard)`
 const Content = styled.div`
   margin: 0px 24px 35px;
 `;
- 

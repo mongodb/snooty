@@ -116,11 +116,11 @@ describe('useFeedbackState', () => {
     expect(wrapper.exists('#feedback')).toBe(false);
   });
 
-  it('initializes feedback and transitions to the "rating" view', async () => {
+  it('initializes feedback and transitions to the "sentiment" view', async () => {
     const wrapper = await mountTest({});
     wrapper.find('button#initializeFeedback').simulate('click');
     await tick({ wrapper });
-    expect(wrapper.find('#view').prop('value')).toBe('rating');
+    expect(wrapper.find('#view').prop('value')).toBe('sentiment');
     expect(wrapper.exists('#feedback')).toBe(true);
     expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
   });

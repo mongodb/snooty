@@ -36,7 +36,7 @@ const StyledSentimentOption = styled('h4')`
   font-weight: 200 !important;
   font-size: ${theme.fontSize.default} !important;
   color: ${uiColors.gray.dark1} !important;
-  margin: 0px -24px !important;
+  margin: 0px -${theme.size.medium}px !important;
   padding: 10px ${theme.size.medium} !important;
   cursor: pointer;
   :hover {
@@ -45,7 +45,7 @@ const StyledSentimentOption = styled('h4')`
 `;
 
 const SentimentOption = ({ sentiment }) => {
-  const { feedback, setSentiment } = useFeedbackState();
+  const { setSentiment } = useFeedbackState();
   return (
     <StyledSentiment onClick={() => setSentiment()}>
       <StyledSentimentOption>

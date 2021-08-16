@@ -21,7 +21,7 @@ export function FeedbackContent({ view }) {
     comment: CommentView,
     support: SupportView,
     submitted: SubmittedView,
-    sentiment: SentimentView
+    sentiment: SentimentView,
   }[view];
   return <View className={`view-${view}`} />;
 }

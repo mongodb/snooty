@@ -7,25 +7,21 @@ const StyledEmoji = styled('span')`
 `;
 
 const getEmoji = (sentiment) => {
-  switch(sentiment){
+  switch (sentiment) {
     case 'happy':
       return '🙂';
     case 'upset':
-      return '😞'
+      return '😞';
     case 'suggesting':
-      return '💡'
+      return '💡';
     default:
       return 'noemoji';
   }
-}
+};
 
-const Emoji = ({sentiment}) => {
-    const emoji = getEmoji(sentiment)
-    return (
-      <StyledEmoji>
-        {emoji}
-      </StyledEmoji>
-    );
-}; 
+const Emoji = ({ sentiment }) => {
+  const emoji = getEmoji(sentiment);
+  return <StyledEmoji>{emoji}</StyledEmoji>;
+};
 
 export default Emoji;

@@ -63,7 +63,7 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockStitchFunctions);
 
   describe('FeedbackTab', () => {
-    it('shows the rating view when clicked', async () => {
+    it('shows the sentiment view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(1);
       // Before the click, the form is hidden
@@ -75,7 +75,7 @@ describe('FeedbackWidget', () => {
       // After the click new feedback is initialized
       expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
       expect(wrapper.exists('FeedbackForm')).toEqual(true);
-      expect(wrapper.exists('RatingView')).toEqual(true);
+      expect(wrapper.exists('SentimentView')).toEqual(true);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
