@@ -1,10 +1,9 @@
 import React from 'react';
-import LeafygreenCard from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
-import { css, cx } from '@leafygreen-ui/emotion';
+import { css } from '@leafygreen-ui/emotion';
 import { useFeedbackState } from '../context';
 
 const closeButtonAlignment = css`
