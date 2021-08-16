@@ -44,7 +44,7 @@ const StyledBar = styled('div')`
   padding-top: 8px;
 `;
 
-const ProgressBar = ({ children }) => {
+const ProgressBar = () => {
   const { progress } = useFeedbackState();
   console.log(progress);
   return (
