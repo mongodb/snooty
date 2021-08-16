@@ -9,7 +9,7 @@ const sentimentChoices = ['happy', 'upset', 'suggesting']
 
 const ViewHeader = styled('h3')`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -17,6 +17,7 @@ const ViewHeader = styled('h3')`
 
 const StyledEmoji = styled('span')`
   padding-right: 8px;
+  font-size: 18px;
 `;
 
 const getEmoji = (sentiment) => {
@@ -37,7 +38,7 @@ const getCopy = (sentiment) => {
     case 'happy':
       return 'Yes, it did';
     case 'upset':
-      return 'No, I still need help.'
+      return 'No, I have feedback.'
     case 'suggesting':
       return 'I have a suggestion.'
     default:
@@ -61,7 +62,11 @@ const StyledSentimentOption = styled('h4')`
   font-weight: 200!important;
   font-size: 16px!important;
   color: ${uiColors.gray.dark1}!important;
-  margin-bottom: 0px;
+  margin:0px -24px !important;
+  padding: 10px 24px!important;
+  :hover{
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const SentimentOption = ({sentiment}) => {

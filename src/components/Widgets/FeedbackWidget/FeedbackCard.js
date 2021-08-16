@@ -28,8 +28,7 @@ const Floating = styled.div`
   z-index: 10;
 `;
 const Card = styled(LeafygreenCard)`
-  width: 234px;
-  height: 281px;
+  width: 230px;
 `;
 const CardHeader = styled.div`
   display: flex;
@@ -38,5 +37,5 @@ const CardHeader = styled.div`
   margin-right: 10px;
 `;
 const Content = styled.div`
-  margin: 0px 24px;
+  margin: 0px 24px 35px 24px;
 `;

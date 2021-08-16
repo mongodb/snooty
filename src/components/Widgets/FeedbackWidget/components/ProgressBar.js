@@ -5,6 +5,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { useFeedbackState } from '../context';
 
 const closeButtonAlignment = css`
   display: block;
@@ -12,8 +13,9 @@ const closeButtonAlignment = css`
 `;
 
 const CloseButton = ({ onClick, size = 'default', ...props }) => {
+  const { abandon } = useFeedbackState();
   return (
-    <IconButton className={closeButtonAlignment} aria-label="Close Feedback Form" onClick={onClick} size={size} {...props}>
+    <IconButton className={closeButtonAlignment} aria-label="Close Feedback Form" onClick={() => abandon()} size={size} {...props}>
       <Icon size={size} glyph="X" />
     </IconButton>
   );
