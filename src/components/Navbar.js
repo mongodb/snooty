@@ -52,6 +52,8 @@ const NavbarContainer = styled('div')`
 const Navbar = () => {
   const { project } = useSiteMetadata();
 
+  const unifiedNavProperty = project === 'realm' ? 'REALM' : 'DOCS';
+
   const [activeLink, setActiveLink] = useState('');
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
@@ -104,7 +106,7 @@ const Navbar = () => {
 
   return (
     <>
-      {process.env.FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
+      {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
         <div
           css={css`
             position: fixed;
@@ -113,7 +115,7 @@ const Navbar = () => {
             z-index: 2;
           `}
         >
-          <UnifiedNav />
+          <UnifiedNav property={unifiedNavProperty} />
         </div>
       ) : (
         <ConditionalWrapper

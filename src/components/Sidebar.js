@@ -18,7 +18,7 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
   }, []);
 
   const consistentNavHeightOffset =
-    process.env.FEATURE_FLAG_CONSISTENT_NAVIGATION &&
+    process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION &&
     css`
       top: 56px !important;
       @media ${theme.screenSize.largeAndUp} {
