@@ -3,6 +3,7 @@
 }
 .sphinxsidebar {
   display: block !important;
-  overflow-y: visible !important;
+  overflow-y: scroll !important;
+  height: 90vh;
   position: sticky !important;
 }
