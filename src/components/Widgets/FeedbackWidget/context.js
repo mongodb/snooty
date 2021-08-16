@@ -44,6 +44,10 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     return { _id, ...newFeedback };
   }
 
+  async function setSentiment() {
+    setView('comment')
+  }
+
   // Sets the user's star rating for the page
   async function setRating(ratingValue) {
     // Once a user has set a rating, they cannot change it unless they
@@ -154,6 +158,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     view,
     isSupportRequest,
     initializeFeedback,
+    setSentiment,
     setRating,
     setQualifier,
     submitQualifiers,

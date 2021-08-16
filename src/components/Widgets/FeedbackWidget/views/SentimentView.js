@@ -1,9 +1,9 @@
 import React from 'react';
-import { Layout, Heading } from '../components/view-components';
-import StarRating from '../components/StarRating';
+import { Layout } from '../components/view-components';
+import Emoji from '../components/Emoji';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-
+import { useFeedbackState } from '../context';
 
 const sentimentChoices = ['happy', 'upset', 'suggesting']
 
@@ -14,24 +14,6 @@ const ViewHeader = styled('h3')`
   margin-top: 10px;
   margin-bottom: 10px;
 `;
-
-const StyledEmoji = styled('span')`
-  padding-right: 8px;
-  font-size: 18px;
-`;
-
-const getEmoji = (sentiment) => {
-  switch(sentiment){
-    case 'happy':
-      return '🙂';
-    case 'upset':
-      return '😞'
-    case 'suggesting':
-      return '💡'
-    default:
-      return 'noemoji';
-  }
-}
 
 const getCopy = (sentiment) => {
   switch(sentiment){
@@ -46,15 +28,6 @@ const getCopy = (sentiment) => {
   }
 }
 
-const Emoji = ({sentiment}) => {
-  const emoji = getEmoji(sentiment)
-  return (
-    <StyledEmoji>
-      {emoji}
-    </StyledEmoji>
-  );
-};
-
 const StyledSentiment = styled('div')`
   width: 100%;
 `;
@@ -64,14 +37,16 @@ const StyledSentimentOption = styled('h4')`
   color: ${uiColors.gray.dark1}!important;
   margin:0px -24px !important;
   padding: 10px 24px!important;
+  cursor: pointer;
   :hover{
     background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
 const SentimentOption = ({sentiment}) => {
+  const { feedback, setSentiment } = useFeedbackState();
   return (
-    <StyledSentiment>
+    <StyledSentiment onClick={() => setSentiment()}>
       <StyledSentimentOption>
         <Emoji sentiment={sentiment}/>
         {getCopy(sentiment)}
