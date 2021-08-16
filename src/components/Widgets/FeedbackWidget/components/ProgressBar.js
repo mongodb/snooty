@@ -29,7 +29,7 @@ const CloseButton = ({ onClick, size = 'default', ...props }) => {
 const Dot = styled('span')`
   height: 5px;
   width: 5px;
-  background-color: ${(props) => (true ? `${uiColors.green.base}` : `${uiColors.gray.light2}`)};
+  background-color: ${(props) => (props.isActive ? `${uiColors.green.base}` : `${uiColors.gray.light2}`)};
   border-radius: 50%;
   display: inline-block;
   margin-right: 5px;
@@ -45,12 +45,14 @@ const StyledBar = styled('div')`
 `;
 
 const ProgressBar = ({ children }) => {
+  const { progress } = useFeedbackState();
+  console.log(progress);
   return (
     <StyledBar>
       <DotSpan>
-        <Dot />
-        <Dot />
-        <Dot />
+        {progress.map((value) => (
+          <Dot isActive={value} />
+        ))}
       </DotSpan>
       <CloseButton />
     </StyledBar>
