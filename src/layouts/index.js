@@ -85,7 +85,7 @@ const DefaultLayout = (props) => {
         </ContentsProvider>
       </TabProvider>
       <Navbar />
-      {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <UnifiedFooter />}
+      {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <UnifiedFooter hideLocale={true} />}
     </>
   );
 };
