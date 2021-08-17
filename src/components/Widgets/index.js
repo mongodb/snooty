@@ -24,9 +24,6 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug }) 
 
 Widgets.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  location: PropTypes.shape({
-    href: PropTypes.string.isRequired,
-  }).isRequired,
   pageOptions: PropTypes.shape({
     hideFeedback: PropTypes.string,
   }),
