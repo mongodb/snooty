@@ -18,8 +18,9 @@ const RightColumn = ({ children }) => (
       css={css`
         height: 100%;
         max-height: calc(100vh - 120px);
-        overflow: auto;
-        position: fixed;
+        overflow: scroll;
+        position: sticky;
+        top: 99px;
 
         & > * {
           margin-bottom: 30px;
