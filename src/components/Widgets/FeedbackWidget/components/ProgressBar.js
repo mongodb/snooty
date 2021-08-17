@@ -46,7 +46,6 @@ const StyledBar = styled('div')`
 
 const ProgressBar = () => {
   const { progress } = useFeedbackState();
-  console.log(progress);
   return (
     <StyledBar>
       <DotSpan>

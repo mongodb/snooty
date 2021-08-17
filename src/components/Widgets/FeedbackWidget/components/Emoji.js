@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { theme } from '../../../../theme/docsTheme';
 
 const StyledEmoji = styled('span')`
-  padding-right: 8px;
+  padding-right: ${theme.size.small};
   font-size: 22px;
 `;
 
