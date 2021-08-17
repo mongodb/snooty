@@ -4,7 +4,6 @@ exports[`Table of Contents testing Table of Contents unit tests renders correctl
 .emotion-0 {
   height: calc(100% - 0px);
   overflow-y: auto;
-  position: absolute;
   width: 100%;
 }
 
