@@ -136,7 +136,7 @@ export default class DocumentBody extends Component {
                   </ContentsProvider>
                 </FootnoteContext.Provider>
               </Widgets>
-              {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <UnifiedFooter />}
+              {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <UnifiedFooter hideLocale={true} />}
             </>
           );
         }}
