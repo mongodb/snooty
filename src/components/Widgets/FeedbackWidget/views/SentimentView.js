@@ -13,7 +13,7 @@ const ViewHeader = styled('h3')`
   font-size: ${theme.fontSize.small};
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 `;
 
 const getCopy = (sentiment) => {
@@ -36,8 +36,8 @@ const StyledSentimentOption = styled('h4')`
   font-weight: 200 !important;
   font-size: ${theme.fontSize.default} !important;
   color: ${uiColors.gray.dark1} !important;
-  margin: 0px -24px !important;
-  padding: 10px ${theme.size.medium} !important;
+  margin: 0px -32px !important;
+  padding: 8px ${theme.size.medium} !important;
   cursor: pointer;
   :hover {
     background-color: rgba(0, 0, 0, 0.1);

@@ -8,10 +8,10 @@ export default function FeedbackCard({ isOpen, children }) {
   return (
     isOpen && (
       <Floating>
-        <Card>
+        <LeafygreenCard>
           <ProgressBar />
           <Content>{children}</Content>
-        </Card>
+        </LeafygreenCard>
       </Floating>
     )
   );
@@ -23,10 +23,6 @@ const Floating = styled.div`
   right: 16px;
   z-index: 10;
 `;
-const Card = styled(LeafygreenCard)`
-  width: 230px;
-`;
-
 const Content = styled.div`
-  margin: 0px 24px 35px;
+  margin: 0px 32px 35px;
 `;
