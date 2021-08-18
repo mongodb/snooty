@@ -5,6 +5,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from '../Link';
 import { NavigationContext } from '../navigation-context';
+import { DOCS_URL } from '../../constants';
 import { formatText } from '../../utils/format-text';
 
 // Empty SideNavItem used as a placeholder while parent category page is fetched.
@@ -18,7 +19,7 @@ const Placeholder = styled(SideNavItem)`
 `;
 
 const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, titleOverride, ...props }) => {
-  const { parents } = useContext(NavigationContext);
+  const { completedFetch, parents } = useContext(NavigationContext);
   let title = titleOverride;
   let url = target;
 
@@ -36,6 +37,9 @@ const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, 
       url = '/';
     } else if (parents.length) {
       [{ title, url }] = parents.slice(-1);
+    } else if (completedFetch) {
+      title = 'docs home';
+      url = DOCS_URL;
     } else {
       // Show placeholder since the data is likely being fetched
       return (
