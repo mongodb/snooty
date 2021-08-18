@@ -4,20 +4,29 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { useFeedbackState } from '../context';
 import styled from '@emotion/styled';
 
-const sentimentStyle = css`
+const SentimentEmoji = styled('span')`
   padding-right: ${theme.size.small};
   font-size: 22px !important;
 `;
 
-const commentStyle = ({ isActive }) => css`
-  ${console.log(isActive)}
+const CommentWrapper = styled('div')`
+  cursor: pointer;
+  margin: 10px 16px !important;
+  text-align: center;
+`;
+
+const CommentEmojiChar = styled('p')`
   font-size: ${theme.size.medium} !important;
-  padding: 17px;
-  ${!isActive && `opacity: 0.5`}
+  margin: 0px !important;
+  ${(props) => !props.isActive && `opacity: 0.5`};
+`;
+
+const CommentCopy = styled('p')`
+  ${(props) => !props.isActive && `display: none`};
+  margin: 0px !important;
 `;
 
 const getEmojiInfo = (sentiment) => {
-  console.log(sentiment);
   switch (sentiment) {
     case 'happy':
       return { character: '🙂', copy: 'Helpful' };
@@ -30,32 +39,35 @@ const getEmojiInfo = (sentiment) => {
   }
 };
 
-const getStyledEmoji = (currPage, isActive) => {
+const CommentEmoji = ({ isActive, sentiment, setActiveSentiment }) => {
+  const { character, copy } = getEmojiInfo(sentiment);
+  return (
+    <div>
+      <CommentWrapper isActive={isActive} onClick={() => setActiveSentiment(sentiment)}>
+        <CommentEmojiChar isActive={isActive}>{character}</CommentEmojiChar>
+        <CommentCopy isActive={isActive}>{copy}</CommentCopy>
+      </CommentWrapper>
+    </div>
+  );
+};
+
+const emojiFactory = ({ sentiment, currPage, isActive, setActiveSentiment }) => {
   switch (currPage) {
     case 'sentimentView':
-      return sentimentStyle;
+      return <SentimentEmoji>{getEmojiInfo(sentiment).character}</SentimentEmoji>;
     case 'commentView':
-      return commentStyle({ isActive });
+      return <CommentEmoji isActive={isActive} sentiment={sentiment} setActiveSentiment={setActiveSentiment} />;
   }
 };
 
-// const emojiFactory = ({sentiment, currPage, isActive}) => {
-//   switch (currPage) {
-//     case 'sentimentView':
-//       return <SentimentEmoji>{getEmojiInfo(sentiment)}</SentimentEmoji>;;
-//     case 'commentView':
-//       return commentStyle({ isActive });
-//   }
-// }
-
 const Emoji = ({ sentiment, currPage }) => {
-  const { activeSentiment } = useFeedbackState();
+  const { activeSentiment, setActiveSentiment } = useFeedbackState();
   const [isActive, setIsActive] = useState();
   useEffect(() => {
     setIsActive(activeSentiment == sentiment);
   }, [activeSentiment, sentiment]);
-  console.log(sentiment);
-  return <span className={cx(getStyledEmoji(currPage, isActive))}>{getEmojiInfo(sentiment).character}</span>;
+  const emoji = emojiFactory({ sentiment, currPage, isActive, setActiveSentiment });
+  return emoji;
 };
 
 export default Emoji;

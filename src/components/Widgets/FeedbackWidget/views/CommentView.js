@@ -24,6 +24,7 @@ function useValidation(inputValue, validator) {
 
 const CommentHeader = styled('div')`
   padding-top: 10px;
+  display: flex;
 `;
 
 export default function CommentView({ ...props }) {
