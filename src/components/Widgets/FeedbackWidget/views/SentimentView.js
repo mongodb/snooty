@@ -6,7 +6,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { useFeedbackState } from '../context';
 import { theme } from '../../../../theme/docsTheme';
 
-const characterChoices = ['happy', 'upset', 'suggesting'];
+const sentimentChoices = ['happy', 'upset', 'suggesting'];
 
 const ViewHeader = styled('h3')`
   font-weight: 600;
@@ -16,8 +16,8 @@ const ViewHeader = styled('h3')`
   margin-bottom: 16px;
 `;
 
-const getCopy = (character) => {
-  switch (character) {
+const getCopy = (sentiment) => {
+  switch (sentiment) {
     case 'happy':
       return 'Yes, it did!';
     case 'upset':
@@ -43,18 +43,18 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 
-const optionClicked = ({ character, setActiveSentiment, setView }) => {
-  setActiveSentiment(character);
+const optionClicked = ({ sentiment, setActiveSentiment, setView }) => {
+  setActiveSentiment(sentiment);
   setView('comment');
 };
 
-const SentimentOption = ({ character }) => {
+const SentimentOption = ({ sentiment }) => {
   const { setActiveSentiment, setView } = useFeedbackState();
   return (
-    <StyledSentiment onClick={() => optionClicked({ character, setActiveSentiment, setView })}>
+    <StyledSentiment onClick={() => optionClicked({ sentiment, setActiveSentiment, setView })}>
       <StyledSentimentOption>
-        <Emoji character={character} currPage={'sentimentView'} />
-        {getCopy(character)}
+        <Emoji sentiment={sentiment} currPage={'sentimentView'} />
+        {getCopy(sentiment)}
       </StyledSentimentOption>
     </StyledSentiment>
   );
@@ -64,8 +64,8 @@ const SentimentView = (props) => {
   return (
     <Layout>
       <ViewHeader>Did this page help?</ViewHeader>
-      {characterChoices.map((character) => (
-        <SentimentOption character={character} />
+      {sentimentChoices.map((sentiment) => (
+        <SentimentOption sentiment={sentiment} />
       ))}
     </Layout>
   );

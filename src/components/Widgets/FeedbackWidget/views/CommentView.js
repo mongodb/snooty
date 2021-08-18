@@ -11,7 +11,7 @@ import validateEmail from '../../../../utils/validate-email';
 // import ScreenshotButton from '../components/ScreenshotButton';
 import Loadable from '@loadable/component';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
-const characterChoices = ['happy', 'upset', 'suggesting'];
+const sentimentChoices = ['happy', 'upset', 'suggesting'];
 
 function useValidation(inputValue, validator) {
   const [isValid, setIsValid] = React.useState(null);
@@ -30,7 +30,6 @@ export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
-
   const [comment, setComment] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [hasEmailError, setHasEmailError] = React.useState(false);
@@ -44,12 +43,13 @@ export default function CommentView({ ...props }) {
       setHasEmailError(true);
     }
   };
+  console.log('hola', sentimentChoices);
 
   return (
     <Layout>
       <CommentHeader>
-        {characterChoices.map((character) => (
-          <Emoji character={character} currPage={'commentView'} />
+        {sentimentChoices.map((sentiment) => (
+          <Emoji sentiment={sentiment} currPage={'commentView'} />
         ))}
       </CommentHeader>
       <InputLabel htmlFor="feedback-comment">Comment</InputLabel>
