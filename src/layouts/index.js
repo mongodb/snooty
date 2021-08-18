@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/core';
+import { UnifiedFooter } from '@mdb/consistent-nav';
 import SiteMetadata from '../components/site-metadata';
 import { ContentsProvider } from '../components/contents-context';
 import { TabProvider } from '../components/tab-context';
@@ -84,6 +85,7 @@ const DefaultLayout = (props) => {
         </ContentsProvider>
       </TabProvider>
       <Navbar />
+      {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <UnifiedFooter hideLocale={true} />}
     </>
   );
 };

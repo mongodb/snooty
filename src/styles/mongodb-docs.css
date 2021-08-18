@@ -11480,7 +11480,7 @@ div.body div.contents.long-toc {
   min-width: 330px;
   display: -ms-flexbox;
   display: flex;
-  overflow-y: auto;
+  overflow-y: initial;
   border-right: 1px solid #e0e7e8;
 }
 #see-also > p {
