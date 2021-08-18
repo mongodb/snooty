@@ -15,6 +15,7 @@ const FeedbackContext = React.createContext();
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
   const [progress, setProgress] = React.useState([true, false, false]);
+  const [sentiment, setSentiment] = React.useState();
   const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
   const [view, setView] = React.useState(test.view || 'waiting');
   const user = useStitchUser();
@@ -43,10 +44,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setFeedback({ _id, ...newFeedback });
     setView(nextView);
     return { _id, ...newFeedback };
-  }
-
-  async function setSentiment() {
-    setView('comment');
   }
 
   // Sets the user's star rating for the page
@@ -155,6 +152,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   }
 
   const value = {
+    sentiment,
     feedback,
     progress,
     view,
@@ -164,6 +162,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setRating,
     setProgress,
     setQualifier,
+    setView,
     submitQualifiers,
     submitComment,
     submitScreenshot,

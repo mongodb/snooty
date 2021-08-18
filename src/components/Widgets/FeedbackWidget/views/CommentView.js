@@ -3,6 +3,7 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 import Button from '@leafygreen-ui/button';
+import Emoji from '../components/Emoji';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -10,6 +11,7 @@ import validateEmail from '../../../../utils/validate-email';
 // import ScreenshotButton from '../components/ScreenshotButton';
 import Loadable from '@loadable/component';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
+const characterChoices = ['happy', 'upset', 'suggesting'];
 
 function useValidation(inputValue, validator) {
   const [isValid, setIsValid] = React.useState(null);
@@ -19,6 +21,10 @@ function useValidation(inputValue, validator) {
 
   return isValid;
 }
+
+const CommentHeader = styled('div')`
+  padding-top: 10px;
+`;
 
 export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
@@ -41,7 +47,11 @@ export default function CommentView({ ...props }) {
 
   return (
     <Layout>
-      <RatingHeader isPositive={isPositiveRating} />
+      <CommentHeader>
+        {characterChoices.map((character) => (
+          <Emoji character={character} currPage={'commentView'} />
+        ))}
+      </CommentHeader>
       <InputLabel htmlFor="feedback-comment">Comment</InputLabel>
       <CommentTextArea
         id="feedback-comment"

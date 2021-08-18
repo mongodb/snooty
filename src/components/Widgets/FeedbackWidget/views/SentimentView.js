@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Layout } from '../components/view-components';
 import Emoji from '../components/Emoji';
 import styled from '@emotion/styled';
@@ -6,7 +6,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { useFeedbackState } from '../context';
 import { theme } from '../../../../theme/docsTheme';
 
-const sentimentChoices = ['happy', 'upset', 'suggesting'];
+const characterChoices = ['happy', 'upset', 'suggesting'];
 
 const ViewHeader = styled('h3')`
   font-weight: 600;
@@ -16,8 +16,8 @@ const ViewHeader = styled('h3')`
   margin-bottom: 16px;
 `;
 
-const getCopy = (sentiment) => {
-  switch (sentiment) {
+const getCopy = (character) => {
+  switch (character) {
     case 'happy':
       return 'Yes, it did!';
     case 'upset':
@@ -34,7 +34,6 @@ const StyledSentiment = styled('div')`
 `;
 const StyledSentimentOption = styled('h4')`
   font-weight: 200 !important;
-  font-size: ${theme.fontSize.default} !important;
   color: ${uiColors.gray.dark1} !important;
   margin: 0px -32px !important;
   padding: 8px 32px !important;
@@ -44,13 +43,19 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 
-const SentimentOption = ({ sentiment }) => {
-  const { setSentiment } = useFeedbackState();
+const optionClicked = ({ character, setSentiment, setView }) => {
+  setSentiment(character);
+  console.log('setting', character);
+  setView('comment');
+};
+
+const SentimentOption = ({ character }) => {
+  const { setSentiment, setView } = useFeedbackState();
   return (
-    <StyledSentiment onClick={() => setSentiment()}>
+    <StyledSentiment onClick={() => optionClicked({ character, setSentiment, setView })}>
       <StyledSentimentOption>
-        <Emoji sentiment={sentiment} />
-        {getCopy(sentiment)}
+        <Emoji character={character} currPage={'sentimentView'} />
+        {getCopy(character)}
       </StyledSentimentOption>
     </StyledSentiment>
   );
@@ -60,8 +65,8 @@ const SentimentView = (props) => {
   return (
     <Layout>
       <ViewHeader>Did this page help?</ViewHeader>
-      {sentimentChoices.map((sentiment) => (
-        <SentimentOption sentiment={sentiment} />
+      {characterChoices.map((character) => (
+        <SentimentOption character={character} />
       ))}
     </Layout>
   );
