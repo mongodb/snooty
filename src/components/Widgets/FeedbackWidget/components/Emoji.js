@@ -39,12 +39,11 @@ const getStyledEmoji = (currPage, isActive) => {
 };
 
 const Emoji = ({ character, currPage }) => {
-  const { sentiment } = useFeedbackState();
+  const { activeSentiment } = useFeedbackState();
   const [isActive, setIsActive] = useState();
   useEffect(() => {
-    setIsActive(sentiment == character);
-  }, [sentiment, character]);
-  console.log(sentiment, isActive);
+    setIsActive(activeSentiment == character);
+  }, [activeSentiment, character]);
   return <span className={cx(getStyledEmoji(currPage, isActive))}>{getEmojiCharacter(character)}</span>;
 };
 

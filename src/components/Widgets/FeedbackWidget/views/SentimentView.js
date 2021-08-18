@@ -43,16 +43,15 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 
-const optionClicked = ({ character, setSentiment, setView }) => {
-  setSentiment(character);
-  console.log('setting', character);
+const optionClicked = ({ character, setActiveSentiment, setView }) => {
+  setActiveSentiment(character);
   setView('comment');
 };
 
 const SentimentOption = ({ character }) => {
-  const { setSentiment, setView } = useFeedbackState();
+  const { setActiveSentiment, setView } = useFeedbackState();
   return (
-    <StyledSentiment onClick={() => optionClicked({ character, setSentiment, setView })}>
+    <StyledSentiment onClick={() => optionClicked({ character, setActiveSentiment, setView })}>
       <StyledSentimentOption>
         <Emoji character={character} currPage={'sentimentView'} />
         {getCopy(character)}

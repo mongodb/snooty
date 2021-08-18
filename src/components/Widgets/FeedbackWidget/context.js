@@ -15,7 +15,7 @@ const FeedbackContext = React.createContext();
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
   const [progress, setProgress] = React.useState([true, false, false]);
-  const [sentiment, setSentiment] = React.useState();
+  const [activeSentiment, setActiveSentiment] = React.useState();
   const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
   const [view, setView] = React.useState(test.view || 'waiting');
   const user = useStitchUser();
@@ -152,13 +152,13 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   }
 
   const value = {
-    sentiment,
+    activeSentiment,
     feedback,
     progress,
     view,
     isSupportRequest,
     initializeFeedback,
-    setSentiment,
+    setActiveSentiment,
     setRating,
     setProgress,
     setQualifier,
