@@ -35,6 +35,7 @@ const Document = ({
 
   return (
     <div className="content">
+      {/* TODO: If not removed during docs nav rework, move this inline style elsewhere */}
       <div style={{ display: 'flex' }}>
         {(!isBrowser || showLeftColumn) && (
           <div className={`left-column ${style.leftColumn} ${renderStatus}`} id="left-column">

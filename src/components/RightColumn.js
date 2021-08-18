@@ -14,11 +14,12 @@ const RightColumn = ({ children }) => (
       ${displayNone.onMobileAndTablet};
     `}
   >
+    {/* top: 99px allows a top margin of 12px from Consistent Nav for first element in column*/}
     <div
       css={css`
         height: 100%;
         max-height: calc(100vh - 120px);
-        overflow: scroll;
+        overflow: auto;
         position: sticky;
         top: 99px;
 
