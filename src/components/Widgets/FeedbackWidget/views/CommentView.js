@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
@@ -40,7 +40,15 @@ const getPlaceHolder = (activeSentiment) => {
 };
 
 export default function CommentView({ ...props }) {
-  const { feedback, isSupportRequest, submitComment, submitAllFeedback, activeSentiment } = useFeedbackState();
+  const {
+    feedback,
+    isSupportRequest,
+    submitComment,
+    submitAllFeedback,
+    activeSentiment,
+    setView,
+    setProgress,
+  } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
   const [comment, setComment] = React.useState('');
@@ -49,14 +57,15 @@ export default function CommentView({ ...props }) {
   const isValidEmail = useValidation(email, validateEmail);
 
   const handleSubmit = async () => {
-    if (isValidEmail) {
-      await submitComment({ comment, email });
-      await submitAllFeedback();
-    } else {
-      setHasEmailError(true);
-    }
+    setView('submitted');
+    setProgress([true, true, true]);
+    // if (isValidEmail) {
+    //   await submitComment({ comment, email });
+    //   await submitAllFeedback();
+    // } else {
+    //   setHasEmailError(true);
+    // }
   };
-  console.log('hola', sentimentChoices);
 
   return (
     <Layout>

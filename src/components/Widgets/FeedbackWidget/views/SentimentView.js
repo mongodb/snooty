@@ -43,15 +43,16 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 
-const optionClicked = ({ sentiment, setActiveSentiment, setView }) => {
+const optionClicked = ({ sentiment, setActiveSentiment, setView, setProgress }) => {
   setActiveSentiment(sentiment);
+  setProgress([true, true, false]);
   setView('comment');
 };
 
 const SentimentOption = ({ sentiment }) => {
-  const { setActiveSentiment, setView } = useFeedbackState();
+  const { setActiveSentiment, setView, setProgress } = useFeedbackState();
   return (
-    <StyledSentiment onClick={() => optionClicked({ sentiment, setActiveSentiment, setView })}>
+    <StyledSentiment onClick={() => optionClicked({ sentiment, setActiveSentiment, setView, setProgress })}>
       <StyledSentimentOption>
         <Emoji sentiment={sentiment} currPage={'sentimentView'} />
         {getCopy(sentiment)}

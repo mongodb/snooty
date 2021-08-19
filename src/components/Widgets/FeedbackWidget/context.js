@@ -143,6 +143,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   async function abandon() {
     // Reset to the initial state
     setView('waiting');
+    setProgress([true, false, false]);
     if (feedback) {
       // We hold on to abandoned feedback in the database, so wait until
       // we've marked the document as abandoned
