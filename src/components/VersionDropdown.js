@@ -76,8 +76,10 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
 
   // TODO: Cleanse
   if (project === 'realm' && slug.includes('sdk/')) {
-    groups = groups.filter((g) => g['sharedSlugPrefix'] === slug);
-    branches = branches.filter((b) => groups[0]['includedBranches'].includes(b['gitBranchName']));
+    groups = groups.filter((g) => slug.includes(g['sharedSlugPrefix']));
+    if (groups) {
+      branches = branches.filter((b) => groups[0]['includedBranches'].includes(b['gitBranchName']));
+    }
   }
 
   if (branches.length < 2) {
