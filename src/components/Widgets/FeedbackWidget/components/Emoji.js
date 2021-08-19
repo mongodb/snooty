@@ -11,8 +11,9 @@ const SentimentEmoji = styled('span')`
 
 const CommentWrapper = styled('div')`
   cursor: pointer;
-  margin: 10px 16px !important;
+  margin: 10px 0px !important;
   text-align: center;
+  width: ${(props) => (props.sentiment == 'upset' ? `70px` : `50px`)};
 `;
 
 const CommentEmojiChar = styled('p')`
@@ -42,12 +43,10 @@ const getEmojiInfo = (sentiment) => {
 const CommentEmoji = ({ isActive, sentiment, setActiveSentiment }) => {
   const { character, copy } = getEmojiInfo(sentiment);
   return (
-    <div>
-      <CommentWrapper isActive={isActive} onClick={() => setActiveSentiment(sentiment)}>
-        <CommentEmojiChar isActive={isActive}>{character}</CommentEmojiChar>
-        <CommentCopy isActive={isActive}>{copy}</CommentCopy>
-      </CommentWrapper>
-    </div>
+    <CommentWrapper sentiment={sentiment} isActive={isActive} onClick={() => setActiveSentiment(sentiment)}>
+      <CommentEmojiChar isActive={isActive}>{character}</CommentEmojiChar>
+      <CommentCopy isActive={isActive}>{copy}</CommentCopy>
+    </CommentWrapper>
   );
 };
 
