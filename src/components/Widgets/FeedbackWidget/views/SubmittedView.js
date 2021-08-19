@@ -8,7 +8,7 @@ import { Layout, Heading, Subheading } from '../components/view-components';
 import styled from '@emotion/styled';
 
 const StyledSubmitHeader = styled(Body)`
-  margin-top: 22px !important;
+  margin-top: 10px !important;
   text-align: left;
   font-size: 18px;
 `;

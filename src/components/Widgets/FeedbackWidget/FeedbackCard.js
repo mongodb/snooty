@@ -18,6 +18,7 @@ export default function FeedbackCard({ isOpen, children }) {
 }
 
 const StyledCard = styled(Card)`
+  height: 350px !important;
   width: 235px !important;
 `;
 
