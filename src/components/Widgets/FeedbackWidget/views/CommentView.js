@@ -23,12 +23,24 @@ function useValidation(inputValue, validator) {
 }
 
 const CommentHeader = styled('div')`
-  padding-top: 10px;
   display: flex;
 `;
 
+const getPlaceHolder = (activeSentiment) => {
+  switch (activeSentiment) {
+    case 'happy':
+      return 'How did this page help you?';
+    case 'upset':
+      return 'How could this page be more helpful?';
+    case 'suggesting':
+      return 'What change would you like to see?';
+    default:
+      return undefined;
+  }
+};
+
 export default function CommentView({ ...props }) {
-  const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
+  const { feedback, isSupportRequest, submitComment, submitAllFeedback, activeSentiment } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
   const [comment, setComment] = React.useState('');
@@ -53,44 +65,48 @@ export default function CommentView({ ...props }) {
           <Emoji sentiment={sentiment} currPage={'commentView'} />
         ))}
       </CommentHeader>
-      <InputLabel htmlFor="feedback-comment">Comment</InputLabel>
       <CommentTextArea
         id="feedback-comment"
-        placeholder="Describe your experience."
+        placeholder={getPlaceHolder(activeSentiment)}
         rows={8}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
-      <InputLabel htmlFor="feedback-email">Email Address</InputLabel>
       <EmailInput
         id="feedback-email"
-        placeholder="someone@example.com"
+        placeholder="email@email.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       {hasEmailError && <InputErrorLabel htmlFor="feedback-email">Please enter a valid email address.</InputErrorLabel>}
       <Footer>
         <SubmitButton onClick={() => handleSubmit()}>{isSupportRequest ? 'Continue for Support' : 'Send'}</SubmitButton>
-        <ScreenshotButton />
       </Footer>
     </Layout>
   );
 }
 
-const SubmitButton = styled(Button)``;
+const SubmitButton = styled(Button)`
+  margin-right: -16px;
+  margin-bottom: 0px;
+`;
+
 const InputStyle = css`
   padding: 14px;
-  border: 0.5px solid ${uiColors.gray.base};
-  border-radius: 2px;
+  border: 1px solid ${uiColors.gray.base};
+  border-radius: 4px;
   flex-grow: 1;
   line-height: 24px;
   font-size: 16px;
-  max-height: 100%;
-  width: 100%;
+  height: 140px;
+  width: 202px;
   margin-bottom: 16px;
   &:focus {
     outline: 0;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+  ::placeholder {
+    color: ${uiColors.gray.light1};
   }
 `;
 const CommentTextArea = styled.textarea`
@@ -99,6 +115,7 @@ const CommentTextArea = styled.textarea`
 `;
 const EmailInput = styled.input`
   ${InputStyle}
+  height: 40px!important;
 `;
 const InputLabel = styled.label`
   width: 100%;

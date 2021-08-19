@@ -1,5 +1,5 @@
 import React from 'react';
-import LeafygreenCard from '@leafygreen-ui/card';
+import Card from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
 
 import ProgressBar from './components/ProgressBar';
@@ -8,14 +8,18 @@ export default function FeedbackCard({ isOpen, children }) {
   return (
     isOpen && (
       <Floating>
-        <LeafygreenCard>
+        <StyledCard>
           <ProgressBar />
           <Content>{children}</Content>
-        </LeafygreenCard>
+        </StyledCard>
       </Floating>
     )
   );
 }
+
+const StyledCard = styled(Card)`
+  width: 235px !important;
+`;
 
 const Floating = styled.div`
   position: fixed;

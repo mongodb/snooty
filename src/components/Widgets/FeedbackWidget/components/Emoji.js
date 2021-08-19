@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { theme } from '../../../../theme/docsTheme';
-import { css, cx } from '@leafygreen-ui/emotion';
+import { uiColors } from '@leafygreen-ui/palette';
 import { useFeedbackState } from '../context';
 import styled from '@emotion/styled';
 
@@ -25,6 +25,7 @@ const CommentEmojiChar = styled('p')`
 const CommentCopy = styled('p')`
   ${(props) => !props.isActive && `display: none`};
   margin: 0px !important;
+  color: ${uiColors.gray.dark3};
 `;
 
 const getEmojiInfo = (sentiment) => {

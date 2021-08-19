@@ -46,7 +46,6 @@ export const Subheading = styled.p`
 
 export const Footer = styled.div`
   margin-top: 0;
-  margin-bottom: 24px;
   width: 100%;
   font-weight: normal;
   display: flex;
