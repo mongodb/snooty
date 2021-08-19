@@ -47,32 +47,21 @@ const getUILabel = (branch) => {
     console.warn(
       `Retrieving branch UI label for legacy/EOL'd/inactive branch: ${branch['gitBranchName']}. This should probably not be happening.`
     );
-    return branch['gitBranchName'];
   }
-  // TODO: Am I understanding publishOriginalBranchName correctly?
-  // if (!!branch['publishOriginalBranchName']) {
-  //   console.warn(`Using original git branch name as version selector UI label for: ${branch['gitBranchName']}.`);
-  //   return branch['gitBranchName'];
-  // }
-  return branch['versionSelectorLabel'] || createVersionLabel(branch['gitBranchName'], branch['urlSlug']);
+  return branch['versionSelectorLabel'] || createVersionLabel(branch['urlSlug'], branch['gitBranchName']);
 };
 
 // If a UI label is not specified for raw versions (e.g. v1.0), create one
-// Example: 1.0 -> Version 1.0
-// TODO: Shorten significantly, add capabilitys for 'v1.0' or 'android-v1.0'
-const createVersionLabel = (gitBranchName = '', urlSlug = null) => {
-  console.warn(`Automatically creating version label for ${gitBranchName}.`);
-  if (!gitBranchName && !urlSlug) {
+// Example: [1.0 or v1.0 or android-v1.0] -> Version 1.0
+const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
+  if (!urlSlug && !gitBranchName) {
     console.warn('Unable to create version label - neither gitBranchName nor urlSlug defined');
     return 'Version Name Unknown';
   }
-  // We can reasonably expect names like "v2.0"
-  // TODO: check if version is !isNaN or 'v' + !isNan
-  const isNumeric = (version = '') => !isNaN(version);
+  const label = urlSlug || gitBranchName;
+  const numeric_label = label.replace(/^\D+/g, '');
 
-  // If numeric, append 'Version ' to urlSlug or gitBranchName.
-  const label = gitBranchName || urlSlug;
-  return isNumeric(label) ? `Version ${label}` : label;
+  return numeric_label ? `Version ${numeric_label}` : label;
 };
 
 // Returns all branches that are neither in 'groups' nor inactive
@@ -85,9 +74,10 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
 
-  if (!branches) {
-    console.warn('VersionDropdown branches undefined');
-    return null;
+  // TODO: Cleanse
+  if (project === 'realm' && slug.includes('sdk/')) {
+    groups = groups.filter((g) => g['sharedSlugPrefix'] === slug);
+    branches = branches.filter((b) => groups[0]['includedBranches'].includes(b['gitBranchName']));
   }
 
   if (branches.length < 2) {
@@ -159,6 +149,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   };
 
   const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
+
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
   // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
   // OR have the OptionGroup not take up space when a label is empty-string. For now,
@@ -175,12 +166,13 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       usePortal={false}
     >
       {activeUngroupedBranches && activeUngroupedBranches.map((b) => createOption(b))}
-      {groups &&
+      {process.env.GATSBY_FEATURE_FLAG_SDK_VERSION_DROPDOWN &&
+        groups &&
         groups.map((group) => {
           const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
           return (
-            <OptionGroup label={groupLabel}>
-              {groupedBranchNames && groupedBranchNames.map((bn) => createOption(findBranch(bn)))}
+            <OptionGroup key={groupLabel} label={groupLabel}>
+              <>{groupedBranchNames && groupedBranchNames.map((bn) => createOption(findBranch(bn)))}</>
             </OptionGroup>
           );
         })}
@@ -203,9 +195,13 @@ VersionDropdown.propTypes = {
         active: PropTypes.bool.isRequired,
       })
     ).isRequired,
-    groups: PropTypes.shape({
-      label: PropTypes.arrayOf(PropTypes.string),
-    }),
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        groupLabel: PropTypes.string,
+        groupDisplayURLPrefix: PropTypes.string,
+        includedBranches: PropTypes.array,
+      })
+    ),
   }).isRequired,
   slug: PropTypes.string.isRequired,
 };
