@@ -14,6 +14,7 @@ const RightColumn = ({ children, className }) => (
       ${displayNone.onMobileAndTablet};
     `}
   >
+    {/* top: 99px allows a top margin of 12px from Consistent Nav for first element in column*/}
     <div
       css={css`
         height: 100%;

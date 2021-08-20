@@ -9,11 +9,6 @@ import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 import { getPlaintext } from '../../../utils/get-plaintext';
 
-const submittedChoiceStyle = css`
-  pointer-events: none;
-  transition: unset !important;
-`;
-
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
@@ -38,13 +33,17 @@ const DescriptionBody = styled('div')`
   }
 `;
 
+const submittedStyle = ({ isCorrect }) => css`
+  transition: unset !important;
+  ${isCorrect ? `border: 2px solid ${uiColors.green.base} !important;` : `opacity: 0.5;`}
+`;
+
 const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
-  box-shadow: none;
+  box-shadow: none !important;
   margin: auto auto ${theme.size.default} auto;
   padding: ${theme.size.default};
-  ${isSelected && `border-color: ${uiColors.black}`};
-  ${isSubmitted ? submittedChoiceStyle : `&:hover { border-color: black; }`}
-  ${isSubmitted && (isCorrect ? `border: 2px solid ${uiColors.green.base};` : `opacity: 0.5;`)}}
+  ${isSelected && `border-color: ${uiColors.black} !important;`};
+  ${isSubmitted ? submittedStyle({ isCorrect }) : `:hover{ border-color: ${uiColors.black} !important; }`}
 `;
 
 const AnswerDescription = ({ description }) => {
@@ -76,18 +75,19 @@ const createSelectedResponseObj = (idx, isCorrect, argument) => {
 
 const QuizChoice = ({
   nodeData: { argument, children, options },
-  selectedResponseIdx,
+  selectedResponse,
   setSelectedResponse,
   idx,
   isSubmitted,
 }) => {
   const isCorrect = !!options?.['is-true'];
-  const isSelected = selectedResponseIdx === idx;
+  const isSelected = selectedResponse?.index === idx;
   return (
     <Card
       className={cx(getCardStyling({ isSelected, isSubmitted, isCorrect }))}
       onClick={() =>
-        !isSelected ? setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)) : setSelectedResponse()
+        !isSubmitted &&
+        (isSelected ? setSelectedResponse() : setSelectedResponse(createSelectedResponseObj(idx, isCorrect, argument)))
       }
     >
       <ChoiceIconFactory isSubmitted={isSubmitted} isSelected={isSelected} isCorrect={isCorrect} />
