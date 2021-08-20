@@ -62,7 +62,6 @@ export const REF_TARGETS = Object.fromEntries(
 export const DOCS_URL = baseUrl(true);
 export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
 export const LEGACY_URL = 'https://docs.mongodb.com/legacy/';
-export const MARIAN_URL = 'https://marian.mongodb.com';
 
 export const SECTION_NAME_MAPPING = {
   prerequisites: {

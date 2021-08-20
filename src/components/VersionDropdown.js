@@ -87,8 +87,6 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
     return null;
   }
 
-  console.log(groupBranches(branches, groups));
-
   const generatePrefix = (version) => {
     // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
     const isManualProduction = project === 'docs' && snootyEnv === 'production';
