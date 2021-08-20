@@ -23,8 +23,9 @@ const NavigationProvider = ({ children }) => {
       }
     };
     if (isBrowser) {
-      fetchData();
-      setCompletedFetch(true);
+      fetchData().then(() => {
+        setCompletedFetch(true);
+      });
     }
   }, [database, project]);
 
