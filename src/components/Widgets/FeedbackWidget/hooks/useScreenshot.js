@@ -27,10 +27,10 @@ async function takeFeedbackScreenshot() {
   const dataUri =
     isBrowser &&
     (await takeScreenshot(document, {
-      classesOfIgnoredDocBodyElements: [
-        'feedback-form', // Don't include the feedback form
-        'feedback-tooltip', // Don't include any button/star tooltips
-        'navbar-brand', // Don't include the MongoDB logo (temporary for CORS)
+      cssSelectorsOfIgnoredElements: [
+        '.feedback-form', // Don't include the feedback form
+        '.feedback-tooltip', // Don't include any button/star tooltips
+        '.navbar-brand', // Don't include the MongoDB logo (temporary for CORS)
       ],
     }));
   return dataUri;
