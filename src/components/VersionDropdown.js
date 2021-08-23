@@ -26,15 +26,6 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const StyledOptionLink = styled('a')`
-  color: unset;
-
-  :hover {
-    color: unset;
-    text-decoration: none;
-  }
-`;
-
 // Returns true if there are any inactive (EOL'd/"legacy") branches
 const needsLegacyDropdown = (branches = []) => {
   const isLegacy = (branch = {}) => !branch['active'];
@@ -65,32 +56,67 @@ const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
 };
 
 // Returns all branches that are neither in 'groups' nor inactive
-const getActiveUngroupedBranches = (branches, groups) => {
-  const groupedBranchNames = groups.map((g) => g['includedBranches']).flat();
+const getActiveUngroupedBranches = (branches = [], groups = []) => {
+  const groupedBranchNames = groups.map((g) => g['includedBranches']).flat() || [];
   return branches.filter((b) => !groupedBranchNames.includes(b['gitBranchName']) && !!b['active']);
+};
+
+// Return a branch object from branches that matches supplied branchName
+// Typically used to associate a branchName from 'groups' with a branchName in 'branches'
+const getBranch = (branchName = '', branches = []) => {
+  const branchCandidates = branches.filter((b) => b['gitBranchName'] === branchName);
+
+  if (branchCandidates.length === 0) {
+    console.warn(`Could not find branch in 'branches' with gitBranchName: ${branchName}. Check 'groups'.`);
+    return null;
+  }
+
+  if (branchCandidates.length > 1) {
+    console.warn(`Too many branches with name ${branchName}.`);
+    return null;
+  }
+
+  // TODO: less unsafe return
+  return branchCandidates[0];
+};
+
+const createOption = (branch) => {
+  const UIlabel = getUILabel(branch);
+  const slug = branch['urlSlug'] || branch['gitBranchName'];
+  return (
+    <Option key={slug} value={branch['gitBranchName']}>
+      {UIlabel}
+    </Option>
+  );
 };
 
 const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
 
-  // TODO: Cleanse
-  if (project === 'realm' && slug.includes('sdk/')) {
-    groups = groups.filter((g) => slug.includes(g['sharedSlugPrefix']));
-    if (groups) {
-      branches = branches.filter((b) => groups[0]['includedBranches'].includes(b['gitBranchName']));
-    }
-  }
-
   if (branches.length < 2) {
     console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
     return null;
   }
 
+  // For exclusively Realm SDK pages, we show a subset of the versions depending
+  // on the current page selection. For example, on the Android SDK page, we only
+  // show Android SDK versions in the version dropdown box.
+  if (project === 'realm' && slug.startsWith('sdk/')) {
+    groups = groups.filter((g) => slug.startsWith(g['sharedSlugPrefix'])) || groups;
+    if (groups && groups.length === 1) {
+      // Get the branchNames from the indicated group, e.g. ["android-v1.0", "android-v2.0", ...]
+      const sdkBranchNames = groups[0]['includedBranches'];
+      branches = branches.filter((b) => sdkBranchNames.includes(b['gitBranchName']));
+    } else {
+      console.warn("Unexpected behavior with Realm SDK version grouping. Check 'groups' and 'sharedSlugPrefix'.");
+    }
+  }
+
   const generatePrefix = (version) => {
-    // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
-    const isManualProduction = project === 'docs' && snootyEnv === 'production';
-    if (isManualProduction) {
+    // Manual production is a special case because it does not use a path
+    // prefix (found at root of docs.mongodb.com)
+    if (project === 'docs' && snootyEnv === 'production') {
       return `/${version}`;
     }
 
@@ -116,38 +142,6 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
     reachNavigate(destination);
   };
 
-  // Return a branch object from branches that matches supplied branchName
-  // Typically used to associate a branchName from 'groups' with a branchName in 'branches'
-  const findBranch = (branchName) => {
-    const branchCandidates = branches.filter((b) => b['gitBranchName'] === branchName);
-
-    if (branchCandidates.length === 0) {
-      console.warn(`Could not find branch in 'branches' with gitBranchName: ${branchName}. Check 'groups'.`);
-      return null;
-    }
-
-    if (branchCandidates.length > 1) {
-      console.warn(`Too many branches with name ${branchName}.`);
-      return null;
-    }
-
-    // TODO: less unsafe return
-    return branchCandidates[0];
-  };
-
-  const createOption = (branch) => {
-    const UIlabel = getUILabel(branch);
-    const branchSlug = branch['urlSlug'] || branch['gitBranchName'];
-    const url = getUrl(branchSlug);
-    // TODO: Value should be unique -- not UI label, which could be have multiples
-    // of v1.0, for example
-    return (
-      <Option key={branchSlug} value={UIlabel}>
-        <StyledOptionLink href={url}>{UIlabel}</StyledOptionLink>
-      </Option>
-    );
-  };
-
   const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
 
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
@@ -158,8 +152,10 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
     <StyledSelect
       allowDeselect={false}
       aria-labelledby="View a different version of documentation."
+      defaultValue="master"
       onChange={navigate}
-      placeholder={null}
+      placeholder={'Select a version'}
+      popoverZIndex={3}
       size={Size.Large}
       popoverZIndex={3}
       value={parserBranch}
@@ -172,15 +168,11 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
           const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
           return (
             <OptionGroup key={groupLabel} label={groupLabel}>
-              <>{groupedBranchNames && groupedBranchNames.map((bn) => createOption(findBranch(bn)))}</>
+              <>{groupedBranchNames && groupedBranchNames.map((bn) => createOption(getBranch(bn, branches)))}</>
             </OptionGroup>
           );
         })}
-      {needsLegacyDropdown(branches) && (
-        <Option value="legacy">
-          <StyledOptionLink href={getUrl('legacy')}>Legacy Docs</StyledOptionLink>
-        </Option>
-      )}
+      {needsLegacyDropdown(branches) && <Option value="legacy">Legacy Docs</Option>}
     </StyledSelect>
   );
 };
