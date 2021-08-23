@@ -17,8 +17,6 @@ const DB = siteMetadata.database;
 const reposDB = siteMetadata.reposDatabase;
 
 const reposFilter = { project: siteMetadata.project };
-console.log('FILTER: ');
-console.log(reposFilter);
 
 const buildFilter = constructBuildFilter(siteMetadata);
 
