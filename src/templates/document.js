@@ -33,8 +33,16 @@ const Document = ({
     setShowLeftColumn(!isTabletOrMobile);
   }, [isTabletOrMobile]);
 
+  //TODO: When cleaning up the feature flag from code, replace the existing margin in the .content class in the legacy css.
+  let consistentNavHeightOffset;
+  if (process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION) {
+    consistentNavHeightOffset = {
+      margin: '87px auto 0',
+    };
+  }
+
   return (
-    <div className="content">
+    <div className="content" style={consistentNavHeightOffset}>
       {/* TODO: If not removed during docs nav rework, move this inline style elsewhere */}
       <div style={{ display: 'flex' }}>
         {(!isBrowser || showLeftColumn) && (
