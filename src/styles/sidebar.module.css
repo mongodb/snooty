@@ -4,6 +4,6 @@
 .sphinxsidebar {
   display: block !important;
   overflow-y: auto !important;
-  height: 90vh;
+  height: calc(100vh - 45px);
   position: sticky !important;
 }
