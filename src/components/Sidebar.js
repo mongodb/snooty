@@ -17,6 +17,7 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
     setFixedHeight(fixedHeading.current.clientHeight);
   }, []);
 
+  // Replace styling in sidebar.module.css for .sphinxsidebar if flag is removed before Docs IA update
   const consistentNavHeightOffset =
     process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION &&
     css`
@@ -24,6 +25,7 @@ const Sidebar = ({ slug, publishedBranches, toctreeData, toggleLeftColumn }) => 
       @media ${theme.screenSize.largeAndUp} {
         top: 87px !important;
       }
+      height: calc(100vh - 87px) !important;
     `;
 
   return (
