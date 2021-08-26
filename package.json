@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.11.8",
+  "version": "0.11.9",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^14",
@@ -27,6 +27,7 @@
   "scripts": {
     "build": "gatsby build --prefix-paths",
     "build:clean": "npm run clean && npm run build",
+    "build:clean:stage": "npm run build:clean && make stage",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
