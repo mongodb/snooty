@@ -28,6 +28,17 @@ const bannerPadding = css`
   }
 `;
 
+// TODO: Delete this as a part of the css cleanup
+// Currently used to preserve behavior and stop legacy css
+// from overriding specified styles in imported footer
+const footerOverrides = css`
+  footer {
+    a:hover {
+      color: currentColor;
+    }
+  }
+`;
+
 const calculateNavSize = (bannerHeight) =>
   `(${theme.bannerContent.enabled ? bannerHeight : '0px'} + ${theme.navbar.baseHeight} + 10px)`;
 
@@ -60,6 +71,7 @@ const globalCSS = css`
     visibility: hidden !important;
     width: 0;
   }
+  ${footerOverrides}
 `;
 
 const DefaultLayout = (props) => {

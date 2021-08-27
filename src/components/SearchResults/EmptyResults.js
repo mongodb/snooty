@@ -51,7 +51,7 @@ const EmptyStateContainer = styled('div')`
 
 const EmptyResults = () => {
   const focusOnSearchbar = useCallback(() => {
-    const searchbar = document.querySelector(`${StyledTextInput} input`);
+    const searchbar = document.querySelector(`form[role="search"] input[type="text"]`);
     if (searchbar) {
       searchbar.focus();
     }
