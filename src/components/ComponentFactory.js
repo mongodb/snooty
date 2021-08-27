@@ -148,6 +148,7 @@ const componentMap = {
   hlist: HorizontalList,
   image: Image,
   include: Include,
+  sharedinclude: Include,
   introduction: Introduction,
   kicker: Kicker,
   line: Line,
