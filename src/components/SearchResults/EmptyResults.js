@@ -51,10 +51,16 @@ const EmptyStateContainer = styled('div')`
 
 const EmptyResults = () => {
   let focusQuerySelector = `${StyledTextInput} input`;
+
   if (process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION) {
     focusQuerySelector = `form[role="search"] input[type="text"]`;
   }
+
   const focusOnSearchbar = useCallback(() => {
+    if (process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION) {
+      document.querySelector('button[aria-label="Open Search"]').click();
+    }
+
     const searchbar = document.querySelector(focusQuerySelector);
     if (searchbar) {
       searchbar.focus();
