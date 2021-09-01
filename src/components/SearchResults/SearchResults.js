@@ -25,6 +25,8 @@ const MAX_MOBILE_WIDTH = '616px';
 const ROW_GAP = theme.size.default;
 const SEARCH_RESULT_HEIGHT = '128px';
 
+const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
+
 const commonTextStyling = css`
   font-family: Akzidenz;
   font-weight: bolder;
@@ -36,7 +38,8 @@ const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
   must account for any margins added from using the blank landing template, 
   and half of the height of the empty state component */
-  margin-top: calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2);
+  margin-bottom: ${CALC_MARGIN};
+  margin-top: ${CALC_MARGIN};
 `;
 
 const HeaderText = styled('h1')`

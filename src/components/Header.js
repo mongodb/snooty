@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { UnifiedNav } from '@mdb/consistent-nav';
 import Navbar from './Navbar';
@@ -11,7 +12,7 @@ const StyledHeaderContainer = styled.header`
   z-index: 10;
 `;
 
-const Header = () => {
+const Header = ({ sidenav }) => {
   const { project } = useSiteMetadata();
   const unifiedNavProperty = project === 'realm' ? 'REALM' : 'DOCS';
 
@@ -21,15 +22,18 @@ const Header = () => {
       {/* TODO: Remove this flag after consistent-nav is officially released */}
       {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
         <>
-          {/* UnifiedNav currently looks wonky on grid layout; this should be changed in a future update */}
           <UnifiedNav position="relative" property={unifiedNavProperty} />
-          <SidenavMobileMenuDropdown />
+          {sidenav && <SidenavMobileMenuDropdown />}
         </>
       ) : (
         <Navbar />
       )}
     </StyledHeaderContainer>
   );
+};
+
+Header.propTypes = {
+  sidenav: PropTypes.bool,
 };
 
 export default Header;

@@ -80,7 +80,7 @@ const DefaultLayout = (props) => {
       <SiteMetadata siteTitle={title} />
       <RootProvider isSidenavEnabled={sidenav} selectors={page?.options?.selectors}>
         <GlobalGrid>
-          <Header />
+          <Header sidenav={sidenav} />
           {sidenav && (
             <Sidenav
               page={page}
