@@ -1,16 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fails gracefully 1`] = `
+exports[`renders correctly with pageTitle 1`] = `
 <Fragment>
   <BreadcrumbSchema
-    breadcrumb={null}
-    siteTitle="untitled"
-    slug="/"
+    breadcrumb={Array []}
+    siteTitle="MongoDB Documentation"
+    slug="view-analyze"
   />
+  <Wrapper>
+    <p>
+      <BreadcrumbContainer
+        homeCrumb={
+          Object {
+            "title": "Docs Home",
+            "url": "https://docs.mongodb.com/",
+          }
+        }
+        lastCrumb={
+          Object {
+            "title": "View & Analyze Data",
+            "url": "view-analyze",
+          }
+        }
+      />
+    </p>
+  </Wrapper>
 </Fragment>
 `;
 
-exports[`renders correctly 1`] = `
+exports[`renders correctly with siteTitle 1`] = `
 <Fragment>
   <BreadcrumbSchema
     breadcrumb={
@@ -50,48 +68,23 @@ exports[`renders correctly 1`] = `
     siteTitle="MongoDB Compass"
     slug="documents/view"
   />
-  <BreadcrumbContainer>
+  <Wrapper>
     <p>
-      <Link
-        onClick={[Function]}
-        to="manage-data"
-      >
-        <ComponentFactory
-          key="0"
-          nodeData={
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 2,
-                },
-              },
-              "type": "text",
-              "value": "Interact with Your Data",
-            }
+      <BreadcrumbContainer
+        homeCrumb={
+          Object {
+            "title": "Docs Home",
+            "url": "https://docs.mongodb.com/",
           }
-        />
-      </Link>
-       &gt; 
-      <Link
-        onClick={[Function]}
-        to="documents"
-      >
-        <ComponentFactory
-          key="0"
-          nodeData={
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 4,
-                },
-              },
-              "type": "text",
-              "value": "Manage Documents",
-            }
+        }
+        lastCrumb={
+          Object {
+            "title": "MongoDB Compass",
+            "url": "/",
           }
-        />
-      </Link>
+        }
+      />
     </p>
-  </BreadcrumbContainer>
+  </Wrapper>
 </Fragment>
 `;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from './FeedbackWidget';
 import { isBrowser } from '../../utils/is-browser';
 
-const Widgets = ({ children, location, pageOptions, pageTitle, publishedBranches, slug }) => {
+const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug }) => {
   const url = isBrowser ? window.location.href : null;
   const hideFeedbackHeader = pageOptions.hidefeedback === 'header';
   const feedbackData = useFeedbackData({
@@ -24,14 +24,11 @@ const Widgets = ({ children, location, pageOptions, pageTitle, publishedBranches
 
 Widgets.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  location: PropTypes.shape({
-    href: PropTypes.string.isRequired,
-  }).isRequired,
   pageOptions: PropTypes.shape({
     hideFeedback: PropTypes.string,
   }),
   pageTitle: PropTypes.string.isRequired,
-  publishedBranches: PropTypes.object.isRequired,
+  publishedBranches: PropTypes.object,
   slug: PropTypes.string.isRequired,
 };
 

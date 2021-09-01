@@ -20,9 +20,8 @@ const useActiveHeading = (headingNodes) => {
   const [activeHeadingId, setActiveHeadingId] = useState(headingNodes?.[0]?.id);
 
   useEffect(() => {
-    // TODO: Change root to document.querySelector('.content') after docs-nav work
     const options = {
-      root: null,
+      root: document.querySelector('.content'),
       rootMargin: '0px',
       threshold: 1.0,
     };

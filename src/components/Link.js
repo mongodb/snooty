@@ -23,7 +23,7 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
     return (
-      <GatsbyLink to={to} activeClassName={activeClassName} partiallyActive={partiallyActive} {...other}>
+      <GatsbyLink activeClassName={activeClassName} partiallyActive={partiallyActive} to={to} {...other}>
         {children}
       </GatsbyLink>
     );

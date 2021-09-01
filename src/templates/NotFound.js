@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import { withPrefix } from 'gatsby';
 import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
+import { uiColors } from '@leafygreen-ui/palette';
 import Footer from '../components/Footer';
 import { theme } from '../theme/docsTheme';
-import { withPrefix } from 'gatsby';
 
 const ErrorBox = styled('div')`
   padding: 0px ${theme.size.default};
@@ -14,10 +15,8 @@ const ErrorBox = styled('div')`
   }
 `;
 
-const supportButtonColor = '#3D4F58';
-
 const SupportLink = styled('a')`
-  color: ${supportButtonColor};
+  color: ${uiColors.gray.dark2};
   display: inline-block;
   font-family: Akzidenz;
   font-size: ${theme.fontSize.default};
@@ -26,7 +25,7 @@ const SupportLink = styled('a')`
   margin-left: ${theme.size.medium};
 
   :hover {
-    color: ${supportButtonColor};
+    color: ${uiColors.gray.dark2};
   }
 
   @media ${theme.screenSize.upToSmall} {
@@ -115,7 +114,7 @@ const ErrorBoxContainer = () => {
 
 const NotFound = () => {
   return (
-    <>
+    <main>
       <div
         css={css`
           align-items: center;
@@ -133,7 +132,7 @@ const NotFound = () => {
         <ErrorBoxContainer />
       </div>
       <Footer disableFeedback />
-    </>
+    </main>
   );
 };
 

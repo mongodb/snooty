@@ -17,6 +17,14 @@ const activeBorderLeftCSS = css`
 const listItemColor = uiColors.black;
 
 const ListItem = styled('li')`
+  padding: 6px 0 6px 1px;
+  width: ${(props) => props.figwidth};
+
+  &:hover,
+  &:active {
+    padding-left: 4px;
+  }
+
   @media ${theme.screenSize.largeAndUp} {
     ${(props) => (props.isActive ? activeBorderLeftCSS : `border-left: 1px solid ${uiColors.gray.light2};`)}
 
@@ -24,14 +32,6 @@ const ListItem = styled('li')`
     &:active {
       ${activeBorderLeftCSS}
     }
-  }
-
-  padding: 6px 0 6px 1px;
-  width: ${(props) => props.figwidth};
-
-  &:hover,
-  &:active {
-    padding-left: 4px;
   }
 `;
 
@@ -61,7 +61,7 @@ const StyledContents = styled('div')`
 `;
 const ContentsListItem = ({ children, depth, id, isActive }) => (
   <ListItem isActive={isActive}>
-    <StyledLink to={`#${id}`} isActive={isActive} depth={depth}>
+    <StyledLink to={`#${id}`} depth={depth}>
       {children}
     </StyledLink>
   </ListItem>

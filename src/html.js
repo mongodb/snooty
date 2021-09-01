@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => (
   <html lang="en" {...htmlAttributes}>
@@ -29,7 +28,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
         href="https://docs.mongodb.com/osd.xml"
         title="MongoDB Help"
       />
-      <link rel="stylesheet" href={withPrefix('docs-tools/navbar.min.css')} type="text/css" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>

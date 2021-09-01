@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
 import { Option, Select, Size } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
 
@@ -16,7 +18,11 @@ const zip = (a, b) => {
 };
 
 const StyledSelect = styled(Select)`
-  margin: 8px 12px 12px 22px;
+  margin: ${theme.size.default} ${theme.size.default} ${theme.size.medium} ${theme.size.default};
+
+  & > button {
+    background-color: ${uiColors.white};
+  }
 
   span {
     font-size: 16px;
@@ -99,9 +105,9 @@ const VersionDropdown = ({
       onChange={navigate}
       placeholder={null}
       size={Size.Large}
-      usePortal={false}
       popoverZIndex={3}
       value={parserBranch}
+      usePortal={false}
     >
       {Object.entries(gitNamedMapping).map(([branch, name]) => {
         const url = getUrl(branch);

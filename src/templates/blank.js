@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MainColumn from '../components/MainColumn';
 import landingStyles from '../styles/landing.module.css';
 
 const Blank = ({ children }) => (
-  <div className="content">
-    <div className={`main-column ${landingStyles.fullWidth}`} id="main-column">
+  <div>
+    <MainColumn className={landingStyles.fullWidth}>
       <div className={landingStyles.document}>{children}</div>
-    </div>
+    </MainColumn>
   </div>
 );
 

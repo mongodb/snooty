@@ -1,12 +1,3 @@
-// Set bannerContent.enabled to false when banner should be removed
-const bannerContent = {
-  altText: 'Register for the free MongoDB.live developer conference | July 13 and 14',
-  imgPath: 'assets/live-banner.png',
-  mobileImgPath: 'assets/live-banner-mobile.png',
-  url: 'https://www.mongodb.com/live/register?tck=docs',
-  enabled: false,
-};
-
 /**
  * @type {Object.<string, string>}
  * @property {string} fontsize returns px value
@@ -45,8 +36,8 @@ const size = {
  * @type {Object.<string, string>}
  */
 const screenSize = {
-  upToXSmall: 'only screen and (max-width: 374px)',
-  xSmallAndUp: 'not all and (max-width: 374px)',
+  upToXSmall: 'only screen and (max-width: 320px)',
+  xSmallAndUp: 'not all and (max-width: 320px)',
   upToSmall: 'only screen and (max-width: 420px)',
   smallAndUp: 'not all and (max-width: 420px)',
   upToMedium: 'only screen and (max-width: 767px)',
@@ -55,22 +46,23 @@ const screenSize = {
   largeAndUp: 'not all and (max-width: 1023px)',
   upToXLarge: 'only screen and (max-width: 1200px)',
   xLargeAndUp: 'not all and (max-width: 1200px)',
+  tablet: 'only screen and (min-width: 421px) and (max-width: 1023px)',
 };
 
-const navbar = {
-  bannerHeight: {
-    small: '40px',
-    medium: '50px',
-    large: '64px',
-  },
-  baseHeight: '45px',
-  height: bannerContent.enabled ? '85px' : '45px',
+const header = {
+  bannerHeight: '40px',
+  navbarHeight: '45px',
+};
+
+const transitionSpeed = {
+  contentFadeOut: '100ms',
+  contentFadeIn: '200ms',
 };
 
 export const theme = {
-  bannerContent,
   fontSize,
+  header,
   screenSize,
   size,
-  navbar,
+  transitionSpeed,
 };
