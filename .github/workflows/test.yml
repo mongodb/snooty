@@ -4,11 +4,9 @@ on:
   push:
     branches:
     - master
-    - docs-nav
   pull_request:
     branches:
     - master
-    - docs-nav
 
 jobs:
   test:
