@@ -84,7 +84,7 @@ const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
   const slug = branch['urlSlug'] || branch['gitBranchName'];
   return (
-    <Option key={slug} value={branch['gitBranchName']}>
+    <Option key={slug} value={slug}>
       {UIlabel}
     </Option>
   );
@@ -126,6 +126,15 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       return `${noVersion}/${version}`;
     }
 
+    // For development
+    if (snootyEnv === 'development') {
+      console.warn(
+        'Applying experimental development environment-specific routing for versions. ' +
+          'Behavior may differ in both staging and production. See VersionDropdown.js for more detail.'
+      );
+      return `/${version}`;
+    }
+
     // For staging, replace current version in dynamically generated path prefix
     return generatePathPrefix({ ...siteMetadata, parserBranch: version });
   };
@@ -162,8 +171,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       usePortal={false}
     >
       {activeUngroupedBranches && activeUngroupedBranches.map((b) => createOption(b))}
-      {process.env.GATSBY_FEATURE_FLAG_SDK_VERSION_DROPDOWN &&
-        groups &&
+      {groups &&
         groups.map((group) => {
           const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
           return (
