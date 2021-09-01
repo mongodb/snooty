@@ -10,7 +10,7 @@ const StyledTextInput = styled(TextInput)`
   div > input {
     background-color: transparent;
     border: none;
-    color: rgb(33, 49, 60);
+    color: ${uiColors.gray.dark3};
     font-weight: 300;
     letter-spacing: 0.5px;
     :focus {
@@ -38,7 +38,7 @@ const StyledTextInput = styled(TextInput)`
   }
 
   @media ${theme.screenSize.upToSmall} {
-    background-color: #fff;
+    background-color: ${uiColors.white};
     padding-bottom: ${theme.size.tiny};
     div > input {
       /* Always have this element filled in for mobile */

@@ -38,7 +38,7 @@ const NavbarLeft = styled('div')`
 const NavSeparator = styled('span')`
   background-color: #616161;
   display: inline-block;
-  height: 16px;
+  height: ${theme.size.default};
   margin: 0 6px;
   width: 1px;
 `;
@@ -47,7 +47,7 @@ const NavLabel = styled('div')`
   color: ${uiColors.gray.dark3}
   display: inline-block;
   font-family: Akzidenz;
-  font-size: 16px;
+  font-size: ${theme.fontSize.default};
   user-select: none;
 `;
 
@@ -59,7 +59,7 @@ const Navbar = () => {
   const { isSidenavEnabled } = useContext(SidenavContext);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const [isTransparent, setIsTransparent] = useState(false);
-  const imageHeight = 22;
+  const logoHeight = 22;
 
   const onSearchbarExpand = useCallback(
     (isExpanded) => {
@@ -85,11 +85,11 @@ const Navbar = () => {
       <NavbarLeft isTransparent={isTransparent}>
         <a
           css={css`
-            height: ${imageHeight}px;
+            height: ${logoHeight}px;
           `}
           href="https://mongodb.com"
         >
-          <Logo height={imageHeight} />
+          <Logo height={logoHeight} />
         </a>
         <NavSeparator></NavSeparator>
         <NavLabel>Documentation</NavLabel>

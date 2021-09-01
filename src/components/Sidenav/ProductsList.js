@@ -9,10 +9,10 @@ import Link from '../Link';
 import { useAllProducts } from '../../hooks/useAllProducts';
 import { theme } from '../../theme/docsTheme';
 
-const chevronRotationDuration = 200;
+const chevronRotationDuration = '200ms';
 
 const openTransition = css`
-  transition: all 300ms ease-in-out ${chevronRotationDuration}ms;
+  transition: all 300ms ease-in-out ${chevronRotationDuration};
 `;
 
 const transitionClasses = css`
@@ -94,7 +94,7 @@ const iconStyle = ({ isOpen }) => LeafyCss`
   width: 12px;
 
   transform: rotate(${isOpen ? 0 : -180}deg);
-  transition: transform ${chevronRotationDuration}ms;
+  transition: transform ${chevronRotationDuration};
 `;
 
 const ProductsList = () => {
