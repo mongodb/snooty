@@ -1,21 +1,3 @@
-export const LANGUAGES = [
-  'shell',
-  'compass',
-  'python',
-  'java-sync',
-  'nodejs',
-  'php',
-  'motor',
-  'java-async',
-  'c',
-  'cpp',
-  'csharp',
-  'perl',
-  'ruby',
-  'scala',
-  'go',
-];
-
 export const DEPLOYMENTS = ['cloud', 'local'];
 
 export const PLATFORMS = ['windows', 'macos', 'linux', 'debian', 'rhel'];
@@ -69,19 +51,6 @@ export const REF_TARGETS = {
 export const DOCS_URL = 'https://docs.mongodb.com';
 export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
 
-export const SUGGESTION_WHITELIST = [
-  'tutorial/install-mongodb-on-windows',
-  'tutorial/install-mongodb-on-ubuntu',
-  'tutorial/query-documents',
-  'reference/method/db.collection.find',
-  'reference/method/db.collection.updateOne',
-];
-
-export const REF_LABELS = {
-  'install-rhel-configure-selinux': 'Configure SELinux',
-  'write-op-insert-behavior': 'Insert Behavior',
-};
-
 export const SECTION_NAME_MAPPING = {
   prerequisites: {
     id: 'what-you-ll-need',
@@ -106,20 +75,4 @@ export const SECTION_NAME_MAPPING = {
   },
 };
 
-export const URL_SLUGS = {
-  server: ['docs'],
-  drivers: ['drivers', 'mongoid', 'node', 'php-library', 'ruby-driver'],
-  cloud: ['cloud-docs', 'datalake', 'mms', 'realm'],
-  tools: [
-    'bi-connector',
-    'charts',
-    'compass',
-    'database-tools',
-    'kafka-connector',
-    'k8s-operator',
-    'mongocli',
-    'mongodb-shell',
-    'mongodb-vscode',
-    'spark-connector',
-  ],
-};
+export const CONTENT_CONTAINER_CLASSNAME = 'content-container';

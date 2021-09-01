@@ -1,63 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
 import BreadcrumbSchema from './BreadcrumbSchema';
-import ComponentFactory from './ComponentFactory';
-import Link from './Link';
-import { reportAnalytics } from '../utils/report-analytics';
 import { theme } from '../theme/docsTheme';
+import BreadcrumbContainer from './BreadcrumbContainer';
 
-const BreadcrumbContainer = styled('nav')`
+const Wrapper = styled('nav')`
   font-size: ${theme.fontSize.small};
-  ${theme.bannerContent.enabled && `margin-top: ${theme.navbar.bannerHeight.small};`}
+  margin-bottom: ${theme.size.medium};
 
-  @media ${theme.screenSize.upToMedium} {
-    ${theme.bannerContent.enabled && `margin-top: ${theme.navbar.bannerHeight.medium};`}
-  }
-
-  @media not all and (max-width: 1600px) {
-    ${theme.bannerContent.enabled && `margin-top: ${theme.navbar.bannerHeight.large};`}
+  * {
+    color: ${uiColors.gray.dark1};
   }
 
   & > p {
     margin-top: 0;
+    min-height: ${theme.size.medium};
   }
 `;
 
-const Breadcrumbs = ({ parentPaths, siteTitle, slug }) => (
-  <>
-    <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-    {parentPaths && (
-      <BreadcrumbContainer>
+const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
+  const homeCrumb = {
+    title: 'Docs Home',
+    url: homeUrl || 'https://docs.mongodb.com/',
+  };
+  // If a pageTitle prop is passed, use that as the last breadcrumb instead
+  const lastCrumb = {
+    title: pageTitle || siteTitle,
+    url: pageTitle ? slug : '/',
+  };
+
+  return (
+    <>
+      <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
+      <Wrapper>
         <p>
-          {parentPaths.map(({ path, plaintext, title }, index) => {
-            const isLast = index === parentPaths.length - 1;
-            return (
-              <React.Fragment key={path}>
-                <Link
-                  to={path}
-                  onClick={() => {
-                    reportAnalytics('BreadcrumbClick', {
-                      parentPaths: parentPaths,
-                      breadcrumbClicked: path,
-                    });
-                  }}
-                >
-                  {title.map((t, i) => (
-                    <ComponentFactory key={i} nodeData={t} />
-                  ))}
-                </Link>
-                {!isLast && <> &gt; </>}
-              </React.Fragment>
-            );
-          })}
+          <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
         </p>
-      </BreadcrumbContainer>
-    )}
-  </>
-);
+      </Wrapper>
+    </>
+  );
+};
 
 Breadcrumbs.propTypes = {
+  homeUrl: PropTypes.string,
+  pageTitle: PropTypes.string,
   parentPaths: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string,

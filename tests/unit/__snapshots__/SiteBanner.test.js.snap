@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Banner component renders with a banner image 1`] = `
+.emotion-2 {
+  display: block;
+  height: 40px;
+  width: 100vw;
+}
+
+.emotion-0 {
+  background-image: url(https://snooty-koueq.mongodbstitch.com/banners/test.png);
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-0 {
+    background-image: url(https://snooty-koueq.mongodbstitch.com/banners/test-mobile.png);
+  }
+}
+
+<SiteBanner>
+  <StyledBannerContainer
+    href="https://mongodb.com"
+    title="Test"
+  >
+    <a
+      className="emotion-2 emotion-3"
+      href="https://mongodb.com"
+      title="Test"
+    >
+      <StyledBannerContent
+        imgPath="/banners/test.png"
+        mobileImgPath="/banners/test-mobile.png"
+      >
+        <div
+          className="emotion-0 emotion-1"
+        />
+      </StyledBannerContent>
+    </a>
+  </StyledBannerContainer>
+</SiteBanner>
+`;

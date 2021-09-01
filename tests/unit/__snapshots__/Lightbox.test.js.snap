@@ -136,6 +136,10 @@ exports[`Lightbox renders correctly 2`] = `
   text-align: center;
 }
 
+.emotion-5 {
+  z-index: 10;
+}
+
 @media not all and (max-width:1023px) {
   .emotion-5 div[role='dialog'] {
     width: 80%;

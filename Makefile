@@ -33,5 +33,3 @@ static:
 	-rm -r ./docs-tools/
 	git submodule add --force https://github.com/mongodb/docs-tools
 	-mkdir -p ./static/docs-tools
-	cp ./docs-tools/themes/mongodb/static/navbar.min.js ./static/docs-tools/
-	cp ./docs-tools/themes/mongodb/static/css/navbar.min.css ./static/docs-tools/

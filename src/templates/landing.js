@@ -6,23 +6,42 @@ import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 
+const CONTENT_MAX_WIDTH = 1440;
+
 const Wrapper = styled('main')`
-  margin: ${({ theme }) => `calc(${theme.navbar.height} + ${theme.size.large}) auto ${theme.size.xlarge} auto`};
-  max-width: 1150px;
-  padding: 0 ${({ theme }) => `${theme.size.medium}`};
-  @media ${({ theme }) => theme.screenSize.upToLarge} {
-    max-width: 748px;
-  }
-  @media ${({ theme }) => theme.screenSize.upToMedium} {
-    padding: 0;
-  }
+  margin: 0 auto;
+  width: 100%;
+
   & > section,
   & > section > section {
     display: grid;
-    grid-template-columns: repeat(12, [col-span] 1fr);
-    grid-column: 1/-1;
+    grid-column: 1 / -1;
+
+    // Use leftmost and rightmost grid columns as "margins" to allow the hero image
+    // to span across the page while remaining as part of the document flow
+    @media ${({ theme }) => theme.screenSize.mediumAndUp} {
+      grid-template-columns: ${({ theme }) =>
+        `minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(${
+          theme.size.xlarge
+        }, 1fr);`};
+    }
+
     @media ${({ theme }) => theme.screenSize.upToMedium} {
-      grid-template-columns: ${({ theme }) => `${theme.size.medium} 1fr ${theme.size.medium}`};
+      grid-template-columns: 48px repeat(12, 1fr) 48px;
+    }
+
+    @media ${({ theme }) => theme.screenSize.upToSmall} {
+      grid-template-columns: ${({ theme }) => theme.size.large} 1fr ${({ theme }) => theme.size.large};
+    }
+
+    @media ${({ theme }) => theme.screenSize.upToXSmall} {
+      grid-template-columns: ${({ theme }) => theme.size.medium} 1fr ${({ theme }) => theme.size.medium};
+    }
+
+    & > .card-group {
+      @media ${({ theme }) => theme.screenSize.mediumAndUp} {
+        grid-column: 2 / -2 !important;
+      }
     }
   }
 `;
@@ -53,7 +72,9 @@ const Landing = ({ children }) => {
           })}
         </script>
       </Helmet>
-      <Wrapper>{children}</Wrapper>
+      <div>
+        <Wrapper>{children}</Wrapper>
+      </div>
       <Global
         styles={css`
           h1,
@@ -87,16 +108,58 @@ const Landing = ({ children }) => {
           }
           h1 {
             align-self: end;
+            grid-column: 2 / 8;
+            grid-row: 1 / 2;
+
+            @media ${screenSize.upToMedium} {
+              grid-column: 2 / 11;
+            }
+
+            @media ${screenSize.upToSmall} {
+              grid-column: 2 / -2;
+            }
           }
           .span-columns {
-            grid-column: 2 / 11 !important;
+            grid-column: 3 / -3 !important;
             margin: ${size.xlarge} 0;
           }
           section > * {
-            grid-column-start: 1;
-            grid-column-end: 7;
+            grid-column-start: 2;
+            grid-column-end: 8;
+
             @media ${screenSize.upToMedium} {
-              grid-column: 2/-2;
+              grid-column: 2 / -2;
+            }
+          }
+          .hero-img {
+            grid-column: 1 / -1;
+            grid-row: 1 / 3;
+            height: 310px;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+
+            @media ${screenSize.upToMedium} {
+              grid-row: unset;
+              object-position: 100%;
+            }
+
+            @media ${screenSize.upToSmall} {
+              grid-row: unset;
+              height: 200px;
+              object-position: 85%;
+            }
+
+            @media only screen and (max-width: 320px) {
+              object-position: 100%;
+            }
+          }
+          .introduction {
+            grid-column: 2 / 8;
+            grid-row: 2 / 3;
+
+            @media ${screenSize.upToMedium} {
+              grid-column: 2 / -2;
             }
           }
           @media ${screenSize.upToLarge} {
@@ -124,6 +187,9 @@ const Landing = ({ children }) => {
 
 Landing.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  pageContext: PropTypes.shape({
+    page: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 export default Landing;

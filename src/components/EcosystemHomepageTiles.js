@@ -84,8 +84,8 @@ const EcosystemHomepageTiles = () => {
 
   return (
     <ul className={tileStyles.tileOuter}>
-      {tileValues.map((element, index) => (
-        <Link to={element.slug} className={tileStyles.tileAnchor}>
+      {tileValues.map((element) => (
+        <Link to={element.slug} className={tileStyles.tileAnchor} key={element.slug}>
           <Card as="li" className={tileStyles.tile}>
             {element.icon}
             {element.title}

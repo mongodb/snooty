@@ -48,7 +48,7 @@ BreadcrumbSchema.propTypes = {
       path: PropTypes.string,
       plaintext: PropTypes.string,
     })
-  ).isRequired,
+  ),
   siteTitle: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
 };
