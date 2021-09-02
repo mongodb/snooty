@@ -87,6 +87,7 @@ const DefaultLayout = ({
     metadata: { chapters, guides, publishedBranches, slugToTitle, title, toctree },
     page,
     slug,
+    repoBranches,
     template,
   },
 }) => {
@@ -112,6 +113,7 @@ const DefaultLayout = ({
               page={page}
               pageTitle={pageTitle}
               publishedBranches={publishedBranches}
+              repoBranches={repoBranches}
               siteTitle={title}
               slug={slug}
               toctree={toctree}

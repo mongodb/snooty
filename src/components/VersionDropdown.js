@@ -166,7 +166,6 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       placeholder={'Select a version'}
       popoverZIndex={3}
       size={Size.Large}
-      popoverZIndex={3}
       value={parserBranch}
       usePortal={false}
     >
