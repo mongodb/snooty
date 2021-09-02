@@ -26,7 +26,7 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-// Returns true if there are any inactive (EOL'd/"legacy") branches
+// Returns true if there are any inactive (EOL'd/'legacy') branches
 const needsLegacyDropdown = (branches = []) => {
   const isLegacy = (branch = {}) => !branch['active'];
   return branches.some(isLegacy);
@@ -105,11 +105,11 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   if (project === 'realm' && slug.startsWith('sdk/')) {
     groups = groups.filter((g) => slug.startsWith(g['sharedSlugPrefix'])) || groups;
     if (groups && groups.length === 1) {
-      // Get the branchNames from the indicated group, e.g. ["android-v1.0", "android-v2.0", ...]
+      // Get the branchNames from the indicated group, e.g. ['android-v1.0', 'android-v2.0', ...]
       const sdkBranchNames = groups[0]['includedBranches'];
       branches = branches.filter((b) => sdkBranchNames.includes(b['gitBranchName']));
     } else {
-      console.warn("Unexpected behavior with Realm SDK version grouping. Check 'groups' and 'sharedSlugPrefix'.");
+      console.warn(`Unexpected behavior with Realm SDK version grouping. Check 'groups' and 'sharedSlugPrefix'.`);
     }
   }
 
@@ -129,8 +129,8 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
     // For development
     if (snootyEnv === 'development') {
       console.warn(
-        'Applying experimental development environment-specific routing for versions. ' +
-          'Behavior may differ in both staging and production. See VersionDropdown.js for more detail.'
+        `Applying experimental development environment-specific routing for versions.
+         Behavior may differ in both staging and production. See VersionDropdown.js for more detail.`
       );
       return `/${version}`;
     }
@@ -139,9 +139,16 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
     return generatePathPrefix({ ...siteMetadata, parserBranch: version });
   };
 
-  const getUrl = (value) => {
-    const legacyDocsURL = `${baseUrl(true)}/legacy/?site=${project}`;
-    return value === 'legacy' ? legacyDocsURL : normalizePath(`${generatePrefix(value)}/${slug}`);
+  const getUrl = (optionValue) => {
+    if (optionValue === 'legacy') {
+      return `${baseUrl(true)}/legacy/?site=${project}`;
+    }
+    const prefix = generatePrefix(optionValue);
+    if (project === 'realm' && optionValue.startsWith('sdk/')) {
+      console.warn(`Applying routing logic that is specific to Realm SDKs.`);
+      return normalizePath(prefix);
+    }
+    return normalizePath(`${prefix}/${slug}`);
   };
 
   // Used exclusively by the LG Select component's onChange function, which receives
