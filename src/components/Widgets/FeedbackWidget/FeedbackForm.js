@@ -13,39 +13,40 @@ import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
 import CommentView from './views/CommentView';
 
-export function FeedbackContent({ view }) {
-  const View = {
-    rating: RatingView,
-    qualifiers: QualifiersView,
-    comment: CommentView,
-    support: SupportView,
-    submitted: SubmittedView,
-  }[view];
-  return <View className={`view-${view}`} />;
-}
+const getView = (view) => {
+  switch (view) {
+    case 'rating':
+      return RatingView;
+    case 'qualifiers':
+      return QualifiersView;
+    case 'comment':
+      return CommentView;
+    case 'support':
+      return SupportView;
+    case 'submitted':
+      return SubmittedView;
+    default:
+      return RatingView;
+  }
+};
 
-export default function FeedbackForm(props) {
+const FeedbackForm = (props) => {
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const { view } = useFeedbackState();
   const isOpen = view !== 'waiting';
 
-  const displayAs = isMobile ? 'fullscreen' : isTabletOrMobile ? 'modal' : 'floating';
-  const Container = {
-    // If big screen, render a floating card
-    floating: FeedbackCard,
-    // If small screen, render a card in a modal
-    modal: FeedbackModal,
-    // If mini screen, render a full screen app
-    fullscreen: FeedbackFullScreen,
-  }[displayAs];
+  const Container = isMobile ? FeedbackFullScreen : isTabletOrMobile ? FeedbackModal : FeedbackCard;
+  const View = getView(view);
 
   return (
     isOpen && (
       <div className="feedback-form" hidden={!isOpen}>
         <Container isOpen={isOpen}>
-          <FeedbackContent view={view} />
+          <View className={`view-${view}`} />
         </Container>
       </div>
     )
   );
-}
+};
+
+export default FeedbackForm;
