@@ -11,6 +11,15 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
+const WrappedFeedbackHeading = ({ isStacked }) => (
+  <div
+    css={css`
+      height: 60px;
+    `}
+  >
+    <FeedbackHeading isStacked={isStacked} />
+  </div>
+);
 
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
@@ -32,7 +41,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
             <HeadingContainer stackVertically={isMobile}>
               {children}
               <ChildContainer isStacked={isMobile}>
-                {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
+                {hasSelectors ? <TabSelectors /> : <WrappedFeedbackHeading isStacked={isMobile} />}
               </ChildContainer>
             </HeadingContainer>
           </>
