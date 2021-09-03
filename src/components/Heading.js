@@ -11,6 +11,8 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
+
+// Prevent CLS caused by late loading of 'stacked' FeedbackHeadings
 const WrappedFeedbackHeading = ({ isStacked }) => (
   <div
     css={css`
