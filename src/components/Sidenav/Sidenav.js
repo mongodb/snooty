@@ -71,6 +71,8 @@ const titleStyle = css`
   font-size: ${theme.fontSize.default};
   font-weight: bold;
   line-height: 20px;
+  padding-left: ${theme.size.medium};
+  padding-right: ${theme.size.medium};
   text-transform: capitalize;
   :hover {
     background-color: inherit;
@@ -110,7 +112,7 @@ const Spaceholder = styled('div')`
 const Border = styled('hr')`
   border: unset;
   border-bottom: 1px solid ${uiColors.gray.light2};
-  margin: ${theme.size.default} 0;
+  margin: ${theme.size.small} 0;
   width: 100%;
 `;
 
