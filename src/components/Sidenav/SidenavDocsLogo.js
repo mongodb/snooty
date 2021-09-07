@@ -1,26 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 
-const containerCSS = css`
-  display: flex;
-  align-items: center;
-  padding: 0px 16px;
-  line-height: 1.6;
-`;
+import DocsLogo from '../SVGs/DocsLogo';
+import { SideNavItem } from '@leafygreen-ui/side-nav';
 
-const logoCSS = css`
-  height: 23px;
+const PaddedDocsLogo = styled(DocsLogo)`
+  margin: 0px 16px;
 `;
 
 const SidenavDocsLogo = ({ border }) => {
-  const logoSource = 'https://docs.mongodb.com/images/mongodb-logo.png';
   return (
     <>
-      <div css={containerCSS}>
-        <img css={logoCSS} src={logoSource} alt="MongoDB" />
-        <span>&nbsp;| Documentation</span>
-      </div>
+      <SideNavItem disabled={true}>
+        <PaddedDocsLogo height={20} width={184} />
+      </SideNavItem>
       {border}
     </>
   );
