@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
+import { sideNavItemBasePadding } from './styles/sideNavItem';
 import Link from '../Link';
 import { NavigationContext } from '../navigation-context';
 import { DOCS_URL } from '../../constants';
@@ -19,10 +21,8 @@ const Placeholder = styled(SideNavItem)`
   }
 `;
 
-const StyledSideNavItem = styled(SideNavItem)`
+const backButtonStyling = css`
   font-size: ${theme.fontSize.small};
-  padding-left: ${theme.size.medium};
-  padding-right: ${theme.size.medium};
 `;
 
 const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, titleOverride, ...props }) => {
@@ -64,15 +64,16 @@ const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, 
 
   return (
     <>
-      <StyledSideNavItem
+      <SideNavItem
         as={Link}
+        className={cx(sideNavItemBasePadding, backButtonStyling)}
         to={url}
         glyph={<Icon glyph="ArrowLeft" size="small" />}
         onClick={handleClick}
         {...props}
       >
         Back to {formatText(title)}
-      </StyledSideNavItem>
+      </SideNavItem>
       {border}
     </>
   );

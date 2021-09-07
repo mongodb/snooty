@@ -18,7 +18,7 @@ const zip = (a, b) => {
 };
 
 const StyledSelect = styled(Select)`
-  margin: 8px ${theme.size.medium} 8px ${theme.size.medium};
+  margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
   & > button {
     background-color: ${uiColors.white};
