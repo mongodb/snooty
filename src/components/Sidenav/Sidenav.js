@@ -134,12 +134,6 @@ const NavTopContainer = styled('div')`
   z-index: 1;
 `;
 
-// TODO: Strongly consider moving this style into the Sidenav component
-// as part of PROCESS.ENV.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION cleanup
-const PaddedSidenavBackButton = styled(SidenavBackButton)`
-  margin-bottom: 16px;
-`;
-
 // Represents the generic links at the bottom of the side nav (e.g. "Contact Support")
 const AdditionalLink = styled(SideNavItem)`
   padding-top: ${theme.size.small};
@@ -192,15 +186,28 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SidenavDocsLogo border={<Border />} />
-                <PaddedSidenavBackButton
-                  handleClick={() => {
-                    setBack(true);
-                    hideMobileSidenav();
-                  }}
-                  project={project}
-                  currentSlug={slug}
-                />
+                {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
+                  <>
+                    <SidenavDocsLogo border={<Border />} />
+                    <SidenavBackButton
+                      handleClick={() => {
+                        setBack(true);
+                        hideMobileSidenav();
+                      }}
+                      project={project}
+                      currentSlug={slug}
+                    />
+                    {/* Instead of extra flag logic in the button, we add another spacer div to ensure proper spacing
+                          in placeholder + rendered back target
+                          TODO: Strongly consider removing this spacer div and adding a 16px margin + placeholder offset
+                          in the SidenavBackButton component
+                          as part of PROCESS.ENV.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION cleanup
+                      */}
+                    <ArtificialPadding />
+                  </>
+                ) : (
+                  <SidenavBackButton border={<Border />} />
+                )}
                 {ia && (
                   <IA
                     header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
