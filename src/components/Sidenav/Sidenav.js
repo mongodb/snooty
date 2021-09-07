@@ -12,6 +12,7 @@ import IATransition from './IATransition';
 import Link from '../Link';
 import ProductsList from './ProductsList';
 import SidenavBackButton from './SidenavBackButton';
+import SidenavDocsLogo from './SidenavDocsLogo';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
@@ -133,6 +134,12 @@ const NavTopContainer = styled('div')`
   z-index: 1;
 `;
 
+// TODO: Strongly consider moving this style into the Sidenav component
+// as part of PROCESS.ENV.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION cleanup
+const PaddedSidenavBackButton = styled(SidenavBackButton)`
+  margin-bottom: 16px;
+`;
+
 // Represents the generic links at the bottom of the side nav (e.g. "Contact Support")
 const AdditionalLink = styled(SideNavItem)`
   padding-top: ${theme.size.small};
@@ -185,8 +192,8 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SidenavBackButton
-                  border={<Border />}
+                <SidenavDocsLogo border={<Border />} />
+                <PaddedSidenavBackButton
                   handleClick={() => {
                     setBack(true);
                     hideMobileSidenav();
