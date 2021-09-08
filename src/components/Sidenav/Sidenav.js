@@ -186,7 +186,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
+                {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && !isMobile && (
                   <>
                     <SidenavDocsLogo border={<Border />} />
                     <SidenavBackButton
@@ -205,7 +205,8 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
                       */}
                     <ArtificialPadding />
                   </>
-                ) : (
+                )}
+                {(!process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION || isMobile) && (
                   <SidenavBackButton border={<Border />} />
                 )}
                 {ia && (
