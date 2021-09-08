@@ -13,7 +13,8 @@ const sideNavItemStyling = ({ level }) => css`
   color: ${uiColors.gray.dark3};
   padding-top: ${theme.size.small};
   padding-bottom: ${theme.size.small};
-  padding-left: calc(${theme.size.small} * (${level} + 1));
+  padding-left: calc(${theme.size.small} + (${level} * ${theme.size.default}));
+  padding-right: ${theme.size.medium};
 `;
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
