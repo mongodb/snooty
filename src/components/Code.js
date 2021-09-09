@@ -18,7 +18,7 @@ const getLanguage = (lang) => {
   return 'none';
 };
 
-const Code = ({ nodeData: { copyable, caption, emphasize_lines: emphasizeLines, lang, linenos, value } }) => {
+const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value } }) => {
   const code = value;
 
   const reportCodeCopied = useCallback(() => {
