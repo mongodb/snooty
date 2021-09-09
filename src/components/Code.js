@@ -1,31 +1,9 @@
-import React, { useContext, useCallback } from 'react';
-import ReactDOMServer from 'react-dom/server';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
-import {
-  URI_PLACEHOLDER,
-  USERNAME_PLACEHOLDER,
-  URISTRING_SHELL_PLACEHOLDER,
-  URISTRING_SHELL_NOUSER_PLACEHOLDER,
-} from './URIWriter/constants';
-import { TabContext } from './tab-context';
-import URIText from './URIWriter/URIText';
-import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { reportAnalytics } from '../utils/report-analytics';
-
-const URI_PLACEHOLDERS = [
-  URI_PLACEHOLDER,
-  USERNAME_PLACEHOLDER,
-  URISTRING_SHELL_PLACEHOLDER,
-  URISTRING_SHELL_NOUSER_PLACEHOLDER,
-];
-
-const htmlDecode = (input) => {
-  const doc = new DOMParser().parseFromString(input, 'text/html');
-  return doc.documentElement.textContent;
-};
 
 const getLanguage = (lang) => {
   if (Object.values(Language).includes(lang)) {
@@ -40,20 +18,8 @@ const getLanguage = (lang) => {
   return 'none';
 };
 
-const Code = ({
-  nodeData: { copyable, caption, emphasize_lines: emphasizeLines, lang, linenos, value },
-  uriWriter: { cloudURI, localURI },
-}) => {
-  const { activeTabs } = useContext(TabContext);
-
+const Code = ({ nodeData: { copyable, caption, emphasize_lines: emphasizeLines, lang, linenos, value } }) => {
   let code = value;
-
-  if (activeTabs && URI_PLACEHOLDERS.some((placeholder) => code.includes(placeholder))) {
-    const { cloud } = activeTabs;
-    const activeUri = cloud === 'cloud' ? cloudURI : localURI;
-    code = ReactDOMServer.renderToString(<URIText value={code} activeDeployment={cloud} uriData={activeUri} />);
-    if (isBrowser) code = htmlDecode(code);
-  }
 
   const reportCodeCopied = useCallback(() => {
     reportAnalytics('CodeblockCopied', { code });
@@ -70,7 +36,7 @@ const Code = ({
       `}
     >
       <CodeBlock
-        chromeTitle={caption ? caption : ''}
+        chromeTitle={caption}
         copyable={copyable}
         highlightLines={emphasizeLines}
         language={getLanguage(lang)}
@@ -86,24 +52,13 @@ const Code = ({
 
 Code.propTypes = {
   nodeData: PropTypes.shape({
+    caption: PropTypes.string,
     copyable: PropTypes.bool,
     emphasize_lines: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)])),
     lang: PropTypes.string,
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
-    caption: PropTypes.string,
   }).isRequired,
-  uriWriter: PropTypes.shape({
-    cloudURI: PropTypes.object,
-    localURI: PropTypes.object,
-  }),
-};
-
-Code.defaultProps = {
-  uriWriter: {
-    cloudURI: undefined,
-    localURI: undefined,
-  },
 };
 
 export default Code;
