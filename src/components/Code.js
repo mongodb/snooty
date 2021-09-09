@@ -19,7 +19,7 @@ const getLanguage = (lang) => {
 };
 
 const Code = ({ nodeData: { copyable, caption, emphasize_lines: emphasizeLines, lang, linenos, value } }) => {
-  let code = value;
+  const code = value;
 
   const reportCodeCopied = useCallback(() => {
     reportAnalytics('CodeblockCopied', { code });
