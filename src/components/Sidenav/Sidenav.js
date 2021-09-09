@@ -16,6 +16,7 @@ import SidenavDocsLogo from './SidenavDocsLogo';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
+import { sideNavItemBasePadding } from './styles/sideNavItem';
 import VersionDropdown from '../VersionDropdown';
 import useScreenSize from '../../hooks/useScreenSize';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
@@ -66,8 +67,7 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
   }
 `;
 
-// Use emotion css since LG's css doesn't work with styled components
-const titleStyle = css`
+const titleStyle = LeafyCss`
   color: ${uiColors.gray.dark3};
   font-size: ${theme.fontSize.default};
   font-weight: bold;
@@ -111,12 +111,8 @@ const Spaceholder = styled('div')`
 const Border = styled('hr')`
   border: unset;
   border-bottom: 1px solid ${uiColors.gray.light2};
-  margin: ${theme.size.default} 0;
+  margin: ${theme.size.small} 0;
   width: 100%;
-`;
-
-const SiteTitle = styled(SideNavItem)`
-  ${titleStyle}
 `;
 
 // Create artificial "padding" at the top of the SideNav to allow products list to transition without being seen
@@ -132,12 +128,6 @@ const NavTopContainer = styled('div')`
   background-color: ${uiColors.gray.light3};
   position: relative;
   z-index: 1;
-`;
-
-// Represents the generic links at the bottom of the side nav (e.g. "Contact Support")
-const AdditionalLink = styled(SideNavItem)`
-  padding-top: ${theme.size.small};
-  padding-bottom: ${theme.size.small};
 `;
 
 const additionalLinks = [
@@ -211,7 +201,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
                 )}
                 {ia && (
                   <IA
-                    header={<span css={titleStyle}>{formatText(pageTitle)}</span>}
+                    header={<span className={cx(titleStyle)}>{formatText(pageTitle)}</span>}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
@@ -231,9 +221,9 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             </IATransition>
 
             {!ia && !showAllProducts && (
-              <SiteTitle as={Link} to="/">
+              <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to="/">
                 {siteTitle}
-              </SiteTitle>
+              </SideNavItem>
             )}
             {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
             {!ia && <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />}
@@ -241,10 +231,16 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             {isDocsLanding && (
               <>
                 <Spaceholder />
+                {/* Represents the generic links at the bottom of the side nav (e.g. "Contact Support") */}
                 {additionalLinks.map(({ glyph, title, url }) => (
-                  <AdditionalLink key={url} glyph={<Icon glyph={glyph} />} href={url}>
+                  <SideNavItem
+                    className={cx(sideNavItemBasePadding)}
+                    key={url}
+                    glyph={<Icon glyph={glyph} />}
+                    href={url}
+                  >
                     {title}
-                  </AdditionalLink>
+                  </SideNavItem>
                 ))}
               </>
             )}
