@@ -1,8 +1,15 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const DocsLogo = ({ width = 184, height = 20 }) => (
-  <svg width={width} height={height} viewBox="0 0 184 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+const DocsLogo = ({ width = 184, height = 20, className }) => (
+  <svg
+    width={width}
+    height={height}
+    className={className}
+    viewBox="0 0 184 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <g clipPath="url(#clip0)">
       <path
         d="M8.74933 7.89904C7.70642 3.31335 5.53271 2.09258 4.97822 1.22962C4.74957 0.849468 4.54701 0.454315 4.37195 0.046875C4.34266 0.454251 4.28884 0.710897 3.94143 1.01982C3.24388 1.63971 0.281348 4.04595 0.0320296 9.25628C-0.200259 14.1142 3.61514 17.1098 4.11922 17.4194C4.50683 17.6095 4.9789 17.4235 5.20914 17.249C7.04838 15.9909 9.56132 12.6368 8.75138 7.89904"
@@ -76,5 +83,6 @@ const DocsLogo = ({ width = 184, height = 20 }) => (
 DocsLogo.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
+  className: PropTypes.string,
 };
 export default DocsLogo;

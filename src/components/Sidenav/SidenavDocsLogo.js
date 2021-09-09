@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { theme } from '../../theme/docsTheme';
 import styled from '@emotion/styled';
 
 import DocsLogo from '../SVGs/DocsLogo';
-import { SideNavItem } from '@leafygreen-ui/side-nav';
 
 const PaddedDocsLogo = styled(DocsLogo)`
-  margin: 0px 16px;
+  margin: 0px ${theme.size.medium};
 `;
 
-const SidenavDocsLogo = ({ border }) => {
+const SidenavDocsLogo = ({ border, ...props }) => {
   return (
     <>
-      <SideNavItem disabled={true}>
-        <PaddedDocsLogo height={20} width={184} />
-      </SideNavItem>
+      <PaddedDocsLogo height={20} width={184} {...props} />
       {border}
     </>
   );

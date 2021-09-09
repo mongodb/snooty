@@ -179,6 +179,12 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
                 {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && !isMobile && (
                   <>
                     <SidenavDocsLogo border={<Border />} />
+                    {/* Instead of extra flag logic in the button, we add another spacer div as the border 
+                        to ensure proper spacing in placeholder + rendered back target
+                        TODO: Strongly consider removing this spacer div and adding a 16px margin + placeholder offset
+                        in the SidenavBackButton component
+                        as part of PROCESS.ENV.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION cleanup
+                      */}
                     <SidenavBackButton
                       handleClick={() => {
                         setBack(true);
@@ -186,14 +192,8 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
                       }}
                       project={project}
                       currentSlug={slug}
+                      border={<ArtificialPadding />}
                     />
-                    {/* Instead of extra flag logic in the button, we add another spacer div to ensure proper spacing
-                          in placeholder + rendered back target
-                          TODO: Strongly consider removing this spacer div and adding a 16px margin + placeholder offset
-                          in the SidenavBackButton component
-                          as part of PROCESS.ENV.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION cleanup
-                      */}
-                    <ArtificialPadding />
                   </>
                 )}
                 {(!process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION || isMobile) && (
