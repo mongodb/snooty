@@ -1,7 +1,7 @@
 GIT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 USER=$(shell whoami)
 STAGING_URL="https://docs-mongodborg-staging.corp.mongodb.com"
-STAGING_BUCKET=docs-mongodb-org-staging
+STAGING_BUCKET=docs-mongodb-org-stg
 -include .env.production
 
 .PHONY: stage static
