@@ -12,6 +12,7 @@ import IATransition from './IATransition';
 import Link from '../Link';
 import ProductsList from './ProductsList';
 import SidenavBackButton from './SidenavBackButton';
+import SidenavDocsLogo from './SidenavDocsLogo';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
@@ -175,15 +176,29 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SidenavBackButton
-                  border={<Border />}
-                  handleClick={() => {
-                    setBack(true);
-                    hideMobileSidenav();
-                  }}
-                  project={project}
-                  currentSlug={slug}
-                />
+                {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && !isMobile && (
+                  <>
+                    <SidenavDocsLogo border={<Border />} />
+                    {/* Instead of extra flag logic in the button, we add another spacer div as the border 
+                        to ensure proper spacing in placeholder + rendered back target
+                        TODO: Strongly consider removing this spacer div and adding a 16px margin + placeholder offset
+                        in the SidenavBackButton component
+                        as part of PROCESS.ENV.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION cleanup
+                      */}
+                    <SidenavBackButton
+                      handleClick={() => {
+                        setBack(true);
+                        hideMobileSidenav();
+                      }}
+                      project={project}
+                      currentSlug={slug}
+                      border={<ArtificialPadding />}
+                    />
+                  </>
+                )}
+                {(!process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION || isMobile) && (
+                  <SidenavBackButton border={<Border />} />
+                )}
                 {ia && (
                   <IA
                     header={<span className={cx(titleStyle)}>{formatText(pageTitle)}</span>}
