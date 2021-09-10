@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { theme } from '../../theme/docsTheme';
 import styled from '@emotion/styled';
+import { theme } from '../../theme/docsTheme';
 
 import DocsLogo from '../SVGs/DocsLogo';
 

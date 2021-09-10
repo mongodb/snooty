@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const DocsLogo = ({ width = 184, height = 20, className }) => (
+const DocsLogo = ({ className, height = 20, width = 184 }) => (
   <svg
     width={width}
     height={height}
@@ -81,8 +81,8 @@ const DocsLogo = ({ width = 184, height = 20, className }) => (
 );
 
 DocsLogo.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
   className: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
 };
 export default DocsLogo;
