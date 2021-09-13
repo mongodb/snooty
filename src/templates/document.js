@@ -13,7 +13,6 @@ import { getNestedValue } from '../utils/get-nested-value';
 const DocumentContainer = styled('div')`
   display: grid;
   grid-template-areas: 'main right';
-  grid-template-columns: minmax(0px, 830px) auto;
 `;
 
 const StyledMainColumn = styled(MainColumn)`
