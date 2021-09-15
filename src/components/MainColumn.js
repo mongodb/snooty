@@ -8,7 +8,7 @@ const MainColumn = ({ children, className }) => (
     className={className}
     css={css`
       margin: ${theme.size.default} ${theme.size.xlarge} ${theme.size.xlarge};
-      max-width: 800px;
+      max-width: 775px;
       min-height: 600px;
 
       @media ${theme.screenSize.upToXSmall} {

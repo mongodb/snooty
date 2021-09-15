@@ -13,10 +13,12 @@ import { getNestedValue } from '../utils/get-nested-value';
 const DocumentContainer = styled('div')`
   display: grid;
   grid-template-areas: 'main right';
+  grid-template-columns: minmax(0, auto) 1fr;
 `;
 
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
+  overflow-x: scroll;
 `;
 
 const StyledRightColumn = styled(RightColumn)`

@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import { Logo } from '@leafygreen-ui/logo';
 import { uiColors } from '@leafygreen-ui/palette';
+import Link from './Link';
 import Searchbar from './Searchbar';
 import { SidenavContext, SidenavMobileMenuButton } from './Sidenav';
+import DocsLogo from './SVGs/DocsLogo';
+import { DOCS_URL } from '../constants';
 import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
@@ -83,16 +84,9 @@ const Navbar = () => {
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
       {isSidenavEnabled && <SidenavMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
-        <a
-          css={css`
-            height: ${logoHeight}px;
-          `}
-          href="https://mongodb.com"
-        >
-          <Logo height={logoHeight} />
-        </a>
-        <NavSeparator></NavSeparator>
-        <NavLabel>Documentation</NavLabel>
+        <Link to={`${DOCS_URL}/`}>
+          <DocsLogo />
+        </Link>
       </NavbarLeft>
       <Searchbar
         getResultsFromJSON={getSearchbarResultsFromJSON}
