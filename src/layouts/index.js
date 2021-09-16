@@ -11,6 +11,17 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 
+// TODO: Delete this as a part of the css cleanup
+// Currently used to preserve behavior and stop legacy css
+// from overriding specified styles in imported footer
+const footerOverrides = css`
+  footer {
+    a:hover {
+      color: currentColor;
+    }
+  }
+`;
+
 const globalCSS = css`
   html {
     overflow: hidden;
@@ -49,6 +60,8 @@ const globalCSS = css`
       display: none !important;
     }
   }
+
+  ${footerOverrides}
 `;
 
 const GlobalGrid = styled('div')`

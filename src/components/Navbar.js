@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import { Logo } from '@leafygreen-ui/logo';
-import { uiColors } from '@leafygreen-ui/palette';
+import Link from './Link';
 import Searchbar from './Searchbar';
 import { SidenavContext, SidenavMobileMenuButton } from './Sidenav';
+import DocsLogo from './SVGs/DocsLogo';
+import { DOCS_URL } from '../constants';
 import useMedia from '../hooks/use-media';
 import { theme } from '../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../utils/get-searchbar-results-from-json';
@@ -35,22 +35,6 @@ const NavbarLeft = styled('div')`
   ${(props) => props.isTransparent && 'opacity: 0.2;'}
 `;
 
-const NavSeparator = styled('span')`
-  background-color: #616161;
-  display: inline-block;
-  height: ${theme.size.default};
-  margin: 0 6px;
-  width: 1px;
-`;
-
-const NavLabel = styled('div')`
-  color: ${uiColors.gray.dark3}
-  display: inline-block;
-  font-family: Akzidenz;
-  font-size: ${theme.fontSize.default};
-  user-select: none;
-`;
-
 // TODO: Remove this component after consistent-nav is officially released
 const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
@@ -59,7 +43,6 @@ const Navbar = () => {
   const { isSidenavEnabled } = useContext(SidenavContext);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const [isTransparent, setIsTransparent] = useState(false);
-  const logoHeight = 22;
 
   const onSearchbarExpand = useCallback(
     (isExpanded) => {
@@ -83,16 +66,9 @@ const Navbar = () => {
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
       {isSidenavEnabled && <SidenavMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
-        <a
-          css={css`
-            height: ${logoHeight}px;
-          `}
-          href="https://mongodb.com"
-        >
-          <Logo height={logoHeight} />
-        </a>
-        <NavSeparator></NavSeparator>
-        <NavLabel>Documentation</NavLabel>
+        <Link to={`${DOCS_URL}/`}>
+          <DocsLogo />
+        </Link>
       </NavbarLeft>
       <Searchbar
         getResultsFromJSON={getSearchbarResultsFromJSON}
