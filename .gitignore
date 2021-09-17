@@ -9,4 +9,3 @@ docs-tools/
 coverage/
 .coverage
 .env.*
-tests/unit/data/site/__testDataLatest.json

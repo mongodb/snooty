@@ -66,7 +66,6 @@ import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
 import Twitter from './Twitter';
-import URIWriter from './URIWriter/URIWriter';
 import VersionModified from './VersionModified';
 
 import RoleAbbr from './Roles/Abbr';
@@ -187,7 +186,6 @@ const componentMap = {
   topic: Topic,
   transition: Transition,
   twitter: Twitter,
-  uriwriter: URIWriter,
   versionadded: VersionModified,
   versionchanged: VersionModified,
 };
