@@ -11,10 +11,11 @@ import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 
 const sideNavItemStyling = ({ level }) => css`
   color: ${uiColors.gray.dark3};
-  padding-top: ${theme.size.small};
   padding-bottom: ${theme.size.small};
   padding-left: calc(${theme.size.small} + (${level} * ${theme.size.default}));
   padding-right: ${theme.size.medium};
+  padding-top: ${theme.size.small};
+  text-transform: none;
 `;
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
@@ -91,14 +92,14 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
 TOCNode.propTypes = {
   level: PropTypes.number,
   node: PropTypes.shape({
-    title: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]).isRequired,
-    slug: PropTypes.string,
-    url: PropTypes.string,
     children: PropTypes.array.isRequired,
     options: PropTypes.shape({
       drawer: PropTypes.bool,
       styles: PropTypes.objectOf(PropTypes.string),
     }),
+    slug: PropTypes.string,
+    title: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]).isRequired,
+    url: PropTypes.string,
   }).isRequired,
 };
 

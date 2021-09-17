@@ -8,7 +8,7 @@ const RightColumn = ({ children, className }) => (
   <div
     className={className}
     css={css`
-      margin: 70px 24px 40px 54px;
+      margin: 70px 24px 40px 5px;
       min-width: 180px;
 
       ${displayNone.onMobileAndTablet};

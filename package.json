@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.11.10",
+  "version": "0.11.11",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^14",
@@ -78,8 +78,8 @@
     "@leafygreen-ui/tooltip": "^6.1.7",
     "@leafygreen-ui/typography": "^7.5.0",
     "@loadable/component": "^5.14.1",
-    "@mdb/consistent-nav": "^1.0.0-rc.13",
-    "@mdb/flora": "^0.3.11",
+    "@mdb/consistent-nav": "^1.0.0-rc.17",
+    "@mdb/flora": "^0.6.1",
     "clipboard": "^2.0.8",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",

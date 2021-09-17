@@ -173,6 +173,7 @@ const componentMap = {
   rubric: Rubric,
   'search-results': SearchResults,
   section: Section,
+  sharedinclude: Include,
   step: Step,
   'step-yaml': StepYAML,
   'steps-yaml': StepsYAML,
