@@ -18,12 +18,6 @@ exports[`renders correctly 1`] = `
           --drop --file ~\\\\downloads\\\\inventory.crud.json",
     }
   }
-  uriWriter={
-    Object {
-      "cloudURI": undefined,
-      "localURI": undefined,
-    }
-  }
 />
 `;
 
@@ -43,12 +37,6 @@ exports[`renders with javascript disabled correctly 1`] = `
       "value": "mongoimport --db test --collection inventory ^
           --authenticationDatabase admin --username <user> --password <password> ^
           --drop --file ~\\\\downloads\\\\inventory.crud.json",
-    }
-  }
-  uriWriter={
-    Object {
-      "cloudURI": undefined,
-      "localURI": undefined,
     }
   }
 />
