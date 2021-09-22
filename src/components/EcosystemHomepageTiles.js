@@ -36,7 +36,7 @@ const EcosystemHomepageTiles = () => {
       icon: <IconCsharp />,
     },
     {
-      slug: '/go/',
+      slug: 'https://docs.mongodb.com/drivers/go/current/',
       title: 'Go',
       icon: <IconGo />,
     },
