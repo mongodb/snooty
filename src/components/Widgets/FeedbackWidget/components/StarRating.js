@@ -96,6 +96,7 @@ const widthForSize = (size) => {
       return '100%';
   }
 };
+
 const marginForSize = (size) => {
   switch (size) {
     case 'lg':
@@ -108,6 +109,7 @@ const marginForSize = (size) => {
       return '20px 0 20px 0';
   }
 };
+
 const Layout = styled.div(
   (props) => css`
     display: flex;
@@ -115,6 +117,7 @@ const Layout = styled.div(
     width: ${widthForSize(props.size)};
     justify-content: space-between;
     margin: ${marginForSize(props.size)};
+    min-height: 24px;
   `
 );
 
