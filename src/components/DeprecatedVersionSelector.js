@@ -58,6 +58,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     setVersion('');
   }, []);
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
+  const buttonDisabled = !(product && version);
 
   useEffect(() => {
     if (isBrowser) {
@@ -70,6 +71,12 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   }, [deprecatedVersions]);
 
   const generateUrl = () => {
+    // Our current LG button version has a bug where a disabled button with an href allows the disabled
+    // button to be clickable. This logic can be removed when LG button is version >= 12.0.4.
+    if (buttonDisabled) {
+      return null;
+    }
+
     const hostName = getSiteUrl(product);
     return ['docs', 'mms', 'cloud-docs'].includes(product)
       ? `${hostName}/${version}`
@@ -107,13 +114,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         onChange={updateVersion}
         value={version}
       />
-      <Button
-        variant="primary"
-        title="View Documentation"
-        size="large"
-        href={generateUrl()}
-        disabled={!(product && version)}
-      >
+      <Button variant="primary" title="View Documentation" size="large" href={generateUrl()} disabled={buttonDisabled}>
         View Documentation
       </Button>
     </>
