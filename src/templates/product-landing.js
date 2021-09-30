@@ -10,7 +10,7 @@ const Wrapper = styled('main')`
   color: ${uiColors.black};
   margin: 0 auto ${theme.size.xlarge} auto;
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   h1,
   h2,
