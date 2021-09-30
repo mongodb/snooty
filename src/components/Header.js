@@ -14,7 +14,10 @@ const StyledHeaderContainer = styled.header`
 
 const Header = ({ sidenav }) => {
   const { project } = useSiteMetadata();
-  const unifiedNavProperty = project === 'realm' ? 'REALM' : 'DOCS';
+
+  const searchProperty = new URL(window.location).searchParams.get('searchProperty');
+  const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
+  const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
   return (
     <StyledHeaderContainer>
