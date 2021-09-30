@@ -51,7 +51,7 @@ const ContentTransition = ({ children, slug }) => (
       >
         <div
           css={css`
-            min-height: fill-available;
+            min-height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
