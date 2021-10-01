@@ -15,10 +15,10 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-3 {
+  border: 2px solid;
   overflow-x: auto;
   border-radius: 0;
   border: 0;
-  border-left: 2px solid;
   padding-top: 8px;
   padding-bottom: 8px;
   margin: 0;
@@ -55,13 +55,13 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-5 {
+.emotion-6 {
   border: 1px solid #E7EEEC;
   border-radius: 4px;
   overflow: hidden;
 }
 
-.emotion-4 {
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -73,7 +73,29 @@ exports[`renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-6 {
+.emotion-4 {
+  width: 38px;
+  border-left: solid 1px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding-top: 6px;
+  min-height: 36px;
+  padding-top: 4px;
+  min-height: 36px;
+  padding-top: 4px;
+  border-color: #E7EEEC;
+  background-color: white;
+}
+
+.emotion-7 {
   display: table;
   margin: 16px 0;
   min-width: 150px;
@@ -81,14 +103,22 @@ exports[`renders correctly 1`] = `
   width: 100%;
 }
 
+.emotion-7 > div > div {
+  width: unset;
+}
+
+.emotion-7 button > div > div {
+  font-size: 14px;
+}
+
 <div
-  class="emotion-6"
+  class="emotion-7"
 >
   <div
-    class="emotion-5"
+    class="emotion-6"
   >
     <div
-      class="emotion-4"
+      class="emotion-5"
     >
       <pre
         class="emotion-3"
@@ -114,6 +144,10 @@ exports[`renders correctly 1`] = `
           </table>
         </code>
       </pre>
+      <div
+        class="emotion-4"
+        data-testid="leafygreen-code-panel"
+      />
     </div>
   </div>
 </div>

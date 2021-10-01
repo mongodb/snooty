@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
+import { CodeProvider } from './code-context';
 import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
 import { theme } from '../theme/docsTheme';
@@ -150,9 +151,11 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
           return (
             <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
-              {tab.children.map((child, i) => (
-                <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
-              ))}
+              <CodeProvider>
+                {tab.children.map((child, i) => (
+                  <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
+                ))}
+              </CodeProvider>
             </LeafyTab>
           );
         })}
