@@ -49,7 +49,16 @@ const ContentTransition = ({ children, slug }) => (
         classNames="fade"
         key={slug}
       >
-        <div>{children}</div>
+        <div
+          css={css`
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          `}
+        >
+          {children}
+        </div>
       </CSSTransition>
     </TransitionGroup>
   </>
