@@ -5,7 +5,6 @@ import { UnifiedFooter } from '@mdb/consistent-nav';
 import ComponentFactory from './ComponentFactory';
 import { ContentsProvider } from './contents-context';
 import FootnoteContext from './footnote-context';
-import Footer from './Footer';
 import SEO from './SEO';
 import Widgets from './Widgets';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
@@ -131,12 +130,11 @@ export default class DocumentBody extends Component {
                       {this.pageNodes.map((child, index) => (
                         <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
                       ))}
-                      {!process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <Footer />}
                     </Template>
                   </ContentsProvider>
                 </FootnoteContext.Provider>
               </Widgets>
-              {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && <UnifiedFooter hideLocale={true} />}
+              <UnifiedFooter hideLocale={true} />
             </>
           );
         }}
