@@ -132,34 +132,34 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   return (
     <>
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
-      <LeafyTabs
-        className={cx(getTabsStyling({ isHidden, isProductLanding }))}
-        aria-label={`Tabs to describe usage of ${tabsetName}`}
-        selected={activeTab}
-        setSelected={handleClick}
-      >
-        {children.map((tab) => {
-          if (tab.name !== 'tab') {
-            return null;
-          }
+      <CodeProvider>
+        <LeafyTabs
+          className={cx(getTabsStyling({ isHidden, isProductLanding }))}
+          aria-label={`Tabs to describe usage of ${tabsetName}`}
+          selected={activeTab}
+          setSelected={handleClick}
+        >
+          {children.map((tab) => {
+            if (tab.name !== 'tab') {
+              return null;
+            }
 
-          const tabId = getTabId(tab);
-          const tabTitle =
-            tab.argument.length > 0
-              ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
-              : tabId;
+            const tabId = getTabId(tab);
+            const tabTitle =
+              tab.argument.length > 0
+                ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
+                : tabId;
 
-          return (
-            <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
-              <CodeProvider>
+            return (
+              <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
                 {tab.children.map((child, i) => (
                   <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
                 ))}
-              </CodeProvider>
-            </LeafyTab>
-          );
-        })}
-      </LeafyTabs>
+              </LeafyTab>
+            );
+          })}
+        </LeafyTabs>
+      </CodeProvider>
     </>
   );
 };
