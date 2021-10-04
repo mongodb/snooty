@@ -19,10 +19,12 @@ const Placeholder = styled(SideNavItem)`
   :hover {
     background-color: unset;
   }
+  margin-bottom: 16px;
 `;
 
 const backButtonStyling = css`
   font-size: ${theme.fontSize.small};
+  margin-bottom: 16px;
 `;
 
 const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, titleOverride, ...props }) => {
