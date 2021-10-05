@@ -1,9 +1,9 @@
 import Blank from './blank';
 import Document from './document';
-import DriversIndex from './ecosystem-index';
+import DriversIndex from './drivers-index';
 import Landing from './landing';
+import NotFound from './NotFound';
 import OpenAPITemplate from './openapi';
 import ProductLanding from './product-landing';
-import NotFound from './NotFound';
 
 export { Blank, Document, DriversIndex, Landing, OpenAPITemplate, ProductLanding, NotFound };

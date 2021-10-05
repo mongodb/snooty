@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import { Sidenav } from '../components/Sidenav';
 import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 
@@ -41,7 +40,7 @@ const globalCSS = css`
     width: 0;
   }
 
-  // Originally from docs-tools navbar.css
+  ${'' /* Originally from docs-tools navbar.css */}
   img.hide-medium-and-up,
   img.show-medium-and-up {
     max-width: 100%;
@@ -74,16 +73,16 @@ const GlobalGrid = styled('div')`
   height: 100vh;
 `;
 
-const DefaultLayout = (props) => {
-  const { children, pageContext } = props;
-  const { project } = useSiteMetadata();
-  const {
+const DefaultLayout = ({
+  children,
+  pageContext: {
     metadata: { publishedBranches, slugToTitle, title, toctree },
     page,
     slug,
     template,
-  } = pageContext;
-  const { sidenav } = getTemplate(project, slug, template);
+  },
+}) => {
+  const { sidenav } = getTemplate(template);
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import tileStyles from '../styles/drivers-homepage-tiles.module.css';
+import tileStyles from '../styles/drivers-index-tiles.module.css';
 import Card from '@leafygreen-ui/card';
 import Link from './Link';
 
@@ -18,7 +18,7 @@ import IconSwift from './icons/Swift';
 import IconRust from './icons/Rust';
 
 // does not take in any params because it is a hardcoded list
-const EcosystemHomepageTiles = () => {
+const DriversIndexTiles = () => {
   const tileValues = [
     {
       slug: '/c/',
@@ -96,4 +96,4 @@ const EcosystemHomepageTiles = () => {
   );
 };
 
-export default EcosystemHomepageTiles;
+export default DriversIndexTiles;
