@@ -6,4 +6,4 @@ import NotFound from './NotFound';
 import OpenAPITemplate from './openapi';
 import ProductLanding from './product-landing';
 
-export { Blank, Document, DriversIndex, Landing, OpenAPITemplate, ProductLanding, NotFound };
+export { Blank, Document, DriversIndex, Landing, NotFound, OpenAPITemplate, ProductLanding };
