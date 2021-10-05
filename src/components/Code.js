@@ -47,7 +47,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
 
         // Override default LG Code language switcher font size
         button > div > div {
-          font-size: ${theme.fontSize.small};
+          font-size: ${theme.fontSize.default};
         }
       `}
     >

@@ -48,18 +48,15 @@ const getDriverImage = (driver, driverIconMap) => {
     return <DriverIcon />;
   }
 
-  // LG Code default file icon; not formally added in their code yet,
-  // but is mentioned in a source code comment
+  // Use LG File icon as our default placeholder for images. This overwrites
+  // LG's Language Switcher current default icon. See:
+  // https://github.com/mongodb/leafygreen-ui/blob/6041b89bf5f9dc1e5ea76018bc2cd84bc1fd6faf/packages/code/src/LanguageSwitcher.tsx#L135-L136
   return <LeafyIcon glyph="File" />;
 };
 
-// Generates language options for code block based on drivers tabset
-const generateLanguageOptions = (selectors, driverIconMap) => {
-  if (!(selectors && Object.keys(selectors).length > 0 && selectors['drivers'])) {
-    return null;
-  }
-
-  const drivers = selectors['drivers'];
+// Generates language options for code block based on drivers tabset on current page
+const generateLanguageOptions = (selectors = {}, driverIconMap) => {
+  const drivers = selectors?.['drivers'];
   const languageOptions = [];
 
   for (const driver in drivers) {
@@ -77,14 +74,13 @@ const generateLanguageOptions = (selectors, driverIconMap) => {
 // Returns the display name of the current driver selected
 const getCurrentLanguageOption = (languageOptions, activeTabs) => {
   const currentTab = activeTabs?.drivers;
-
-  if (!(languageOptions && languageOptions.length > 0 && currentTab)) {
+  if (!currentTab) {
     return null;
   }
 
   const currentLangOption = languageOptions.find((option) => option.id === currentTab);
   // LG Code block's language switcher uses the display name to select the current "language"
-  return currentLangOption?.displayName || null;
+  return currentLangOption?.displayName;
 };
 
 const CodeProvider = ({ children }) => {
