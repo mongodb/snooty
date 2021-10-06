@@ -1,14 +1,7 @@
 import React from 'react';
 
 const IconRuby = ({ ...styles }) => (
-  <svg
-    width="256"
-    height="255"
-    viewBox="0 0 300 240"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="xMidYMid"
-    {...styles}
-  >
+  <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" {...styles}>
     <defs>
       <linearGradient x1="84.75%" y1="111.399%" x2="58.254%" y2="64.584%" id="_a">
         <stop stopColor="#FB7655" offset="0%" />

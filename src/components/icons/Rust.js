@@ -4,8 +4,6 @@ const IconRust = ({ ...styles }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="19 19 106 106"
-    height="144px"
-    width="144px"
     y="0px"
     x="0px"
     id="Layer_1"

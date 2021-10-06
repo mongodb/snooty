@@ -1,15 +1,7 @@
 import React from 'react';
 
 const IconPhp = ({ ...styles }) => (
-  <svg
-    height="383.598"
-    width="711.201"
-    x="0"
-    y="0"
-    viewBox="0 0 700 301"
-    xmlns="http://www.w3.org/2000/svg"
-    {...styles}
-  >
+  <svg x="0" y="0" viewBox="0 0 700 301" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <defs>
       <clipPath clipPathUnits="userSpaceOnUse" id="a">
         <path d="M11.52 162C11.52 81.677 135.307 16.561 288 16.561S564.481 81.677 564.481 162c0 80.322-123.788 145.439-276.481 145.439-152.693 0-276.48-65.117-276.48-145.439" />

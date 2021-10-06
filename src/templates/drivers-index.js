@@ -1,8 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import { theme } from '../theme/docsTheme';
 import Breadcrumbs from '../components/Breadcrumbs';
 import MainColumn from '../components/MainColumn';
-import DriversIndexStyles from '../styles/drivers-index.module.css';
+
+const DocumentContainer = styled('div')`
+  display: grid;
+  grid-template-areas: 'left main right';
+  grid-template-columns: 1fr minmax(${theme.size.xlarge}, auto) 1fr;
+`;
+
+const StyledMainColumn = styled(MainColumn)`
+  grid-area: main;
+  overflow-x: scroll;
+`;
 
 const DriversIndex = ({
   children,
@@ -11,14 +23,14 @@ const DriversIndex = ({
     slug,
   },
 }) => (
-  <div>
-    <MainColumn className={DriversIndexStyles.fullWidth}>
+  <DocumentContainer>
+    <StyledMainColumn>
       <div className="body">
         <Breadcrumbs parentPaths={parentPaths.slug} siteTitle={title} slug={slug} />
         {children}
       </div>
-    </MainColumn>
-  </div>
+    </StyledMainColumn>
+  </DocumentContainer>
 );
 
 DriversIndex.propTypes = {
