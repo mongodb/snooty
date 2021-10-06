@@ -27,15 +27,10 @@ const Header = ({ sidenav }) => {
   return (
     <StyledHeaderContainer>
       <SiteBanner />
-      {/* TODO: Remove this flag after consistent-nav is officially released */}
-      {process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION ? (
-        <>
-          <UnifiedNav position="relative" property={unifiedNavProperty} />
-          {sidenav && <SidenavMobileMenuDropdown />}
-        </>
-      ) : (
-        <Navbar />
-      )}
+      <>
+        <UnifiedNav position="relative" property={unifiedNavProperty} />
+        {sidenav && <SidenavMobileMenuDropdown />}
+      </>
     </StyledHeaderContainer>
   );
 };

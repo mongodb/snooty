@@ -143,7 +143,6 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
-  const showDocsLogo = process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && !isMobile;
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -177,13 +176,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                {showDocsLogo && <SidenavDocsLogo border={<Border />} />}
-                {/* Instead of extra flag logic in the button, we add another spacer div as the border 
-                    to ensure proper spacing in placeholder + rendered back target
-                    TODO: Strongly consider removing this spacer div and adding a 16px margin + placeholder offset
-                    in the SidenavBackButton component
-                    as part of PROCESS.ENV.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION cleanup
-                */}
+                <SidenavDocsLogo border={<Border />} />
                 <SidenavBackButton
                   handleClick={() => {
                     setBack(true);
@@ -191,7 +184,6 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
                   }}
                   project={project}
                   currentSlug={slug}
-                  border={showDocsLogo ? <ArtificialPadding /> : <Border />}
                 />
                 {ia && (
                   <IA
