@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { isBrowser } from '../utils/is-browser';
 import { UnifiedNav } from '@mdb/consistent-nav';
-import Navbar from './Navbar';
 import { SidenavMobileMenuDropdown } from './Sidenav';
 import SiteBanner from './SiteBanner';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
