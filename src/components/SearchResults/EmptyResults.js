@@ -4,7 +4,6 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
-import { StyledTextInput } from '../Searchbar/SearchTextInput';
 
 export const EMPTY_STATE_HEIGHT = '166px';
 const MAGNIFYING_GLASS_SIZE = '40px';
@@ -56,7 +55,7 @@ const EmptyResults = () => {
     if (searchbar) {
       searchbar.focus();
     }
-  });
+  }, []);
 
   return (
     <EmptyStateContainer>
