@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { theme } from '../theme/docsTheme';
+import { uiColors } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
+import { theme } from '../theme/docsTheme';
 
 import IconC from './icons/C';
 import IconCpp from './icons/Cpp';
@@ -12,9 +13,9 @@ import IconNode from './icons/Node';
 import IconPHP from './icons/Php';
 import IconPython from './icons/Python';
 import IconRuby from './icons/Ruby';
+import IconRust from './icons/Rust';
 import IconScala from './icons/Scala';
 import IconSwift from './icons/Swift';
-import IconRust from './icons/Rust';
 
 // TODO: Unhardcode this. Ideally, the SVG resources would just be plain SVG, not components
 const tiles = [
@@ -82,30 +83,52 @@ const tiles = [
 
 const StyledGrid = styled('div')`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: ${theme.size.default};
-  grid-row-gap: ${theme.size.default};
+  grid-gap: ${theme.size.default};
+  grid-template-columns: repeat(3, 1fr);
+  padding-right: ${theme.size.xlarge};
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    padding-right: ${theme.size.large};
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    grid-gap: ${theme.size.small};
+    grid-template-columns: 1fr;
+    padding-right: ${theme.size.medium};
+  }
 `;
 
 const StyledCard = styled(LeafyGreenCard)`
+  border: 1px solid ${uiColors.gray.light2};
+  box-shadow: none;
   display: flex;
   flex-direction: row;
-  height: 100%;
   padding: ${theme.size.default};
+
+  &:hover {
+    box-shadow: 0 3px 6px -2px ${uiColors.gray.light1};
+    text-decoration: none;
+  }
 `;
 
 const StyledIcon = styled('div')`
   display: block;
   margin-right: ${theme.size.default};
-  max-height: ${theme.size.medium};
-  max-width: ${theme.size.medium};
+
+  & > svg {
+    height: ${theme.size.medium};
+    vertical-align: -7px;
+    width: ${theme.size.medium};
+  }
 `;
 
 const DriversIndexTiles = () => {
   return (
     <StyledGrid>
       {tiles.map((t) => (
-        <StyledCard as="a" contentStyle="clickable" key={t.title}>
+        <StyledCard as="a" contentStyle="clickable" key={t.title} href={t.slug}>
           <StyledIcon>{t.icon}</StyledIcon>
           {t.title}
         </StyledCard>
