@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
+import { CodeProvider } from './code-context';
 import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
 import { theme } from '../theme/docsTheme';
@@ -131,32 +132,34 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   return (
     <>
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
-      <LeafyTabs
-        className={cx(getTabsStyling({ isHidden, isProductLanding }))}
-        aria-label={`Tabs to describe usage of ${tabsetName}`}
-        selected={activeTab}
-        setSelected={handleClick}
-      >
-        {children.map((tab) => {
-          if (tab.name !== 'tab') {
-            return null;
-          }
+      <CodeProvider>
+        <LeafyTabs
+          className={cx(getTabsStyling({ isHidden, isProductLanding }))}
+          aria-label={`Tabs to describe usage of ${tabsetName}`}
+          selected={activeTab}
+          setSelected={handleClick}
+        >
+          {children.map((tab) => {
+            if (tab.name !== 'tab') {
+              return null;
+            }
 
-          const tabId = getTabId(tab);
-          const tabTitle =
-            tab.argument.length > 0
-              ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
-              : tabId;
+            const tabId = getTabId(tab);
+            const tabTitle =
+              tab.argument.length > 0
+                ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
+                : tabId;
 
-          return (
-            <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
-              {tab.children.map((child, i) => (
-                <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
-              ))}
-            </LeafyTab>
-          );
-        })}
-      </LeafyTabs>
+            return (
+              <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
+                {tab.children.map((child, i) => (
+                  <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
+                ))}
+              </LeafyTab>
+            );
+          })}
+        </LeafyTabs>
+      </CodeProvider>
     </>
   );
 };

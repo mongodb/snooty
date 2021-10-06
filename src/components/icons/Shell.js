@@ -2,7 +2,7 @@ import React from 'react';
 
 const IconShell = ({ ...styles }) => (
   <svg viewBox="0 0 18 40" xmlns="http://www.w3.org/2000/svg" {...styles}>
-    <g fill-rule="nonzero" fill="none">
+    <g fillRule="nonzero" fill="none">
       <path
         d="M17.607 15.953c-2.1-9.267-6.484-11.735-7.596-13.479C9.406 1.525 8.79.084 8.79.084c-.06.821-.167 1.342-.869 1.966C6.517 3.302.548 8.166.047 18.696c-.468 9.817 7.214 15.872 8.235 16.498.78.383 1.735.007 2.192-.345 3.702-2.542 8.767-9.321 7.129-18.896"
         fill="#10AA50"
