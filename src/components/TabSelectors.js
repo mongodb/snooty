@@ -6,41 +6,7 @@ import Select from './Select';
 import { getPlaintext } from '../utils/get-plaintext';
 import { reportAnalytics } from '../utils/report-analytics';
 
-import IconC from './icons/C';
-import IconCompass from './icons/Compass';
-import IconCpp from './icons/Cpp';
-import IconCsharp from './icons/Csharp';
-import IconGo from './icons/Go';
-import IconJava from './icons/Java';
-import IconNode from './icons/Node';
-import IconPHP from './icons/Php';
-import IconPython from './icons/Python';
-import IconRuby from './icons/Ruby';
-import IconRust from './icons/Rust';
-import IconScala from './icons/Scala';
-import IconShell from './icons/Shell';
-import IconSwift from './icons/Swift';
-
 const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
-
-const driverIconMap = {
-  c: IconC,
-  compass: IconCompass,
-  cpp: IconCpp,
-  csharp: IconCsharp,
-  go: IconGo,
-  'java-sync': IconJava,
-  'java-async': IconJava,
-  nodejs: IconNode,
-  php: IconPHP,
-  python: IconPython,
-  ruby: IconRuby,
-  rust: IconRust,
-  scala: IconScala,
-  shell: IconShell,
-  'swift-async': IconSwift,
-  'swift-sync': IconSwift,
-};
 
 const getLabel = (name) => {
   switch (name) {
@@ -55,15 +21,15 @@ const getLabel = (name) => {
   }
 };
 
-const makeChoices = ({ name, options }) =>
+const makeChoices = ({ name, iconMapping, options }) =>
   Object.entries(options).map(([tabId, title]) => ({
     text: getPlaintext(title),
     value: tabId,
-    ...(name === 'drivers' && { icon: driverIconMap[tabId] }),
+    ...(name === 'drivers' && { icon: iconMapping[tabId] }),
   }));
 
-const TabSelector = ({ activeTab, handleClick, name, options }) => {
-  const choices = useMemo(() => makeChoices({ name, options }), [name, options]);
+const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => {
+  const choices = useMemo(() => makeChoices({ name, iconMapping, options }), [name, iconMapping, options]);
   const { screenSize } = useTheme();
   return (
     <Select
@@ -91,7 +57,7 @@ const TabSelector = ({ activeTab, handleClick, name, options }) => {
 };
 
 const TabSelectors = () => {
-  const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
+  const { activeTabs, driverIconMap, selectors, setActiveTab } = useContext(TabContext);
 
   if (!selectors || Object.keys(selectors).length === 0) {
     return null;
@@ -99,9 +65,23 @@ const TabSelectors = () => {
 
   return (
     <>
-      {Object.entries(selectors).map(([name, options]) => (
-        <TabSelector key={name} activeTab={activeTabs[name]} handleClick={setActiveTab} name={name} options={options} />
-      ))}
+      {Object.entries(selectors).map(([name, options]) => {
+        let iconMapping = {};
+        if (name === 'drivers') {
+          iconMapping = driverIconMap;
+        }
+
+        return (
+          <TabSelector
+            key={name}
+            activeTab={activeTabs[name]}
+            handleClick={setActiveTab}
+            iconMapping={iconMapping}
+            name={name}
+            options={options}
+          />
+        );
+      })}
     </>
   );
 };
