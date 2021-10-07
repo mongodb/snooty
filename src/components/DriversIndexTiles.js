@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
+import Link from './Link';
 import { theme } from '../theme/docsTheme';
 
 import IconC from './icons/C';
@@ -16,6 +17,8 @@ import IconRuby from './icons/Ruby';
 import IconRust from './icons/Rust';
 import IconScala from './icons/Scala';
 import IconSwift from './icons/Swift';
+
+// DriversIndexTiles is used to display the drivers as Cards on docs.mongodb.com/drivers
 
 // TODO: Unhardcode this. Ideally, the SVG resources would just be plain SVG, not components
 const tiles = [
@@ -128,7 +131,7 @@ const DriversIndexTiles = () => {
   return (
     <StyledGrid>
       {tiles.map((t) => (
-        <StyledCard as="a" contentStyle="clickable" key={t.title} href={t.slug}>
+        <StyledCard as={Link} contentStyle="clickable" key={t.title} to={t.slug}>
           <StyledIcon>{t.icon}</StyledIcon>
           {t.title}
         </StyledCard>
