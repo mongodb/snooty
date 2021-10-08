@@ -1,37 +1,33 @@
 import { Blank, Document, DriversIndex, Landing, OpenAPITemplate, ProductLanding, NotFound } from '../templates';
 
-const getTemplate = (project, slug, templateName) => {
+const getTemplate = (templateName) => {
   let template;
   let sidenav;
   switch (templateName) {
     case 'blank':
       template = Blank;
       break;
-    case 'landing':
-      template = Landing;
+    case 'drivers-index':
+      template = DriversIndex;
       sidenav = true;
       break;
-    case 'product-landing':
-      template = ProductLanding;
+    case 'errorpage':
+      template = NotFound;
+      break;
+    case 'landing':
+      template = Landing;
       sidenav = true;
       break;
     case 'openapi':
       template = OpenAPITemplate;
       break;
-    case 'errorpage':
-      template = NotFound;
+    case 'product-landing':
+      template = ProductLanding;
+      sidenav = true;
       break;
     default:
-      const isIndex = slug === '/';
-      switch (project) {
-        case 'drivers':
-          template = isIndex ? DriversIndex : Document;
-          sidenav = true;
-          break;
-        default:
-          template = Document;
-          sidenav = true;
-      }
+      template = Document;
+      sidenav = true;
       break;
   }
 
