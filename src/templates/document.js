@@ -72,7 +72,7 @@ Document.propTypes = {
       children: PropTypes.array,
       options: PropTypes.object,
     }).isRequired,
-    parentPaths: PropTypes.arrayOf(PropTypes.string),
+    parentPaths: PropTypes.object,
     slug: PropTypes.string.isRequired,
     slugTitleMapping: PropTypes.shape({
       [PropTypes.string]: PropTypes.string,

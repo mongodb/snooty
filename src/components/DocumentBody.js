@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import ComponentFactory from './ComponentFactory';
 import { ContentsProvider } from './contents-context';
@@ -96,49 +95,30 @@ export default class DocumentBody extends Component {
     const lookup = slug === '/' ? 'index' : slug;
     const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
     const siteTitle = getNestedValue(['title'], metadata) || '';
+    const { Template } = getTemplate(template);
 
     return (
-      <StaticQuery
-        query={graphql`
-          query {
-            site {
-              siteMetadata {
-                project
-              }
-            }
-          }
-        `}
-        render={({
-          site: {
-            siteMetadata: { project },
-          },
-        }) => {
-          const { Template } = getTemplate(project, slug, template);
-          return (
-            <>
-              <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-              <Widgets
-                location={location}
-                pageOptions={page?.options}
-                pageTitle={pageTitle}
-                publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-                slug={slug}
-              >
-                <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
-                  <ContentsProvider headingNodes={page?.options?.headings}>
-                    <Template {...this.props}>
-                      {this.pageNodes.map((child, index) => (
-                        <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                      ))}
-                    </Template>
-                  </ContentsProvider>
-                </FootnoteContext.Provider>
-              </Widgets>
-              <UnifiedFooter hideLocale={true} />
-            </>
-          );
-        }}
-      />
+      <>
+        <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
+        <Widgets
+          location={location}
+          pageOptions={page?.options}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+        >
+          <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
+            <ContentsProvider headingNodes={page?.options?.headings}>
+              <Template {...this.props}>
+                {this.pageNodes.map((child, index) => (
+                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                ))}
+              </Template>
+            </ContentsProvider>
+          </FootnoteContext.Provider>
+        </Widgets>
+        <UnifiedFooter hideLocale={true} />
+      </>
     );
   }
 }

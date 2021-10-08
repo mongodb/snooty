@@ -1,7 +1,7 @@
 import React from 'react';
 
 const IconScala = ({ ...styles }) => (
-  <svg width="64" height="64" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" {...styles}>
+  <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <defs>
       <linearGradient x1=".006%" y1="49.998%" x2="96.837%" y2="49.998%" id="aaa">
         <stop stopColor="#CD413F" offset="0%" />
