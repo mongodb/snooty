@@ -88,18 +88,15 @@ const StyledGrid = styled('div')`
   display: grid;
   grid-gap: ${theme.size.default};
   grid-template-columns: repeat(3, 1fr);
-  padding-right: ${theme.size.xlarge};
 
   @media ${theme.screenSize.upToMedium} {
     grid-gap: 12px;
     grid-template-columns: repeat(2, 1fr);
-    padding-right: ${theme.size.large};
   }
 
   @media ${theme.screenSize.upToSmall} {
     grid-gap: ${theme.size.small};
     grid-template-columns: 1fr;
-    padding-right: ${theme.size.medium};
   }
 `;
 
@@ -112,6 +109,7 @@ const StyledCard = styled(LeafyGreenCard)`
 
   &:hover {
     box-shadow: 0 3px 6px -2px ${uiColors.gray.light1};
+    color: unset;
     text-decoration: none;
   }
 `;

@@ -13,7 +13,7 @@ const DocumentContainer = styled('div')`
 
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
-  overflow-x: scroll;
+  padding-top: 40px;
 `;
 
 const DriversIndex = ({
