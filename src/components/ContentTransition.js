@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
 import { CONTENT_CONTAINER_CLASSNAME } from '../constants';
 import { theme } from '../theme/docsTheme';
+import { isBrowser } from '../utils/is-browser';
 
 const fadeOut = css`
   .fade-exit {
@@ -33,36 +34,50 @@ const fadeInOut = css`
   ${fadeIn}
 `;
 
-const ContentTransition = ({ children, slug }) => (
-  <>
-    <Global styles={fadeInOut} />
-    <TransitionGroup
-      className={CONTENT_CONTAINER_CLASSNAME}
-      css={css`
-        grid-area: contents;
-        margin: 0px;
-        overflow-y: auto;
-      `}
-    >
-      <CSSTransition
-        addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
-        classNames="fade"
-        key={slug}
+const ContentTransition = ({ children, slug }) => {
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (isBrowser) {
+      // Focus on the page's content first by default to allow page scroll navigation for keyboard
+      contentRef.current.focus();
+    }
+  }, [slug]);
+
+  return (
+    <>
+      <Global styles={fadeInOut} />
+      <TransitionGroup
+        className={CONTENT_CONTAINER_CLASSNAME}
+        css={css`
+          grid-area: contents;
+          margin: 0px;
+          overflow-y: auto;
+        `}
       >
-        <div
-          css={css`
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-          `}
+        <CSSTransition
+          addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
+          classNames="fade"
+          key={slug}
         >
-          {children}
-        </div>
-      </CSSTransition>
-    </TransitionGroup>
-  </>
-);
+          <div
+            css={css`
+              min-height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              outline: none;
+            `}
+            tabIndex="-1"
+            ref={contentRef}
+          >
+            {children}
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
+    </>
+  );
+};
 
 ContentTransition.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
