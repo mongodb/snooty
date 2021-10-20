@@ -22,10 +22,6 @@ const footerOverrides = css`
 `;
 
 const globalCSS = css`
-  html {
-    overflow: hidden;
-  }
-
   body {
     font-size: 16px;
     line-height: 24px;
@@ -70,7 +66,6 @@ const GlobalGrid = styled('div')`
     'sidenav contents';
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-  height: 100vh;
 `;
 
 const DefaultLayout = ({

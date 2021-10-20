@@ -92,7 +92,9 @@ const ContentOverlay = styled('div')`
 
 const SidenavContainer = styled('div')`
   grid-area: sidenav;
-  position: relative;
+  position: sticky;
+  top: 88px;
+  height: calc(100vh - 88px);
   z-index: 2;
 
   // Since we want the SideNav to open on top of the content on medium screen size,
