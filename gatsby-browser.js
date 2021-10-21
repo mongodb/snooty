@@ -7,9 +7,8 @@ import './src/styles/mongodb-docs.css';
 // Delay for when page should scroll. Gives time for content in tab components to render
 const contentTransitionDuration = 500;
 
-// Take control of the scroll for our main content's scroll container when clicking on a Link.
-// By default, Gatsby controls the scroll of the window object, which doesn't work
-// for our use case.
+// Slight modification to the default behavior of Gatsby's shouldUpdateScroll function.
+// We only want to perform scroll location updates through Gatsby Links after the page transitions are over.
 // https://github.com/gatsbyjs/gatsby/blob/069cb535fa5bf5d2eead31533be18b1fe64c2568/packages/gatsby-react-router-scroll/src/scroll-handler.tsx#L102
 export const shouldUpdateScroll = ({ routerProps: { location }, getSavedScrollPosition }) => {
   const { hash } = location;
@@ -18,7 +17,10 @@ export const shouldUpdateScroll = ({ routerProps: { location }, getSavedScrollPo
   const decodeUriAndScroll = () => {
     try {
       const uri = decodeURI(hash);
-      document.getElementById(uri.slice(1)).scrollIntoView(true);
+      const targetEl = document.getElementById(uri.slice(1));
+      if (targetEl) {
+        targetEl.scrollIntoView();
+      }
     } catch (e) {
       console.error(e);
     }

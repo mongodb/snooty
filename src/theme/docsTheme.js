@@ -51,7 +51,9 @@ const screenSize = {
 
 const header = {
   bannerHeight: '40px',
-  navbarHeight: '45px',
+  navbarHeight: '88px',
+  navbarMobileHeight: '56px',
+  docsMobileMenuHeight: '52px',
 };
 
 const transitionSpeed = {

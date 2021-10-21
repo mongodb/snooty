@@ -9,6 +9,7 @@ import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
+import { theme } from '../theme/docsTheme';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -34,6 +35,18 @@ const globalCSS = css`
     padding: 0;
     visibility: hidden !important;
     width: 0;
+  }
+
+  .contains-headerlink {
+    scroll-margin-top: ${theme.header.navbarHeight};
+
+    @media ${theme.screenSize.upToLarge} {
+      scroll-margin-top: ${theme.header.navbarMobileHeight};
+    }
+
+    @media ${theme.screenSize.upToSmall} {
+      scroll-margin-top: calc(${theme.header.navbarMobileHeight} + ${theme.header.docsMobileMenuHeight});
+    }
   }
 
   ${'' /* Originally from docs-tools navbar.css */}
