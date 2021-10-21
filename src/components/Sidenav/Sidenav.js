@@ -1,12 +1,13 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
+import { HeaderContext } from '../header-context';
 import IA from './IA';
 import IATransition from './IATransition';
 import Link from '../Link';
@@ -78,31 +79,65 @@ const titleStyle = LeafyCss`
   }
 `;
 
+// Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
+const disableScroll = (shouldDisableScroll) => css`
+  html {
+    ${shouldDisableScroll && 'overflow: hidden;'}
+  }
+`;
+
 const ContentOverlay = styled('div')`
   background-color: ${uiColors.white};
   bottom: 0;
   left: 0;
   opacity: 0.5;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   width: 100vw;
   z-index: 1;
 `;
 
-const SidenavContainer = styled('div')`
-  grid-area: sidenav;
-  position: sticky;
-  top: 88px;
-  height: calc(100vh - 88px);
-  z-index: 2;
+// Returns the sum of the Header component's children's heights to give the appropriate amount of space for the side nav
+const getSidenavTopValue = (bannerEnabled, heights) => {
+  let topValue = 0;
+  heights.forEach((height) => {
+    topValue += theme.size.stripUnit(height);
+  });
 
-  // Since we want the SideNav to open on top of the content on medium screen size,
-  // keep a width as a placeholder for the collapsed SideNav while its position is absolute
-  @media ${theme.screenSize.tablet} {
-    width: 48px;
+  if (bannerEnabled) {
+    topValue += theme.size.stripUnit(theme.header.bannerHeight);
   }
-`;
+
+  return `${topValue}px`;
+};
+
+// Keep the side nav container sticky to allow LG's side nav to push content seemlessly
+const SidenavContainer = styled.div(
+  ({ topLarge, topMedium, topSmall }) => css`
+    grid-area: sidenav;
+    height: calc(100vh - ${topLarge});
+    position: sticky;
+    top: ${topLarge};
+    z-index: 2;
+
+    @media ${theme.screenSize.upToLarge} {
+      top: ${topMedium};
+      height: calc(100vh - ${topMedium});
+    }
+
+    // Since we want the SideNav to open on top of the content on medium screen size,
+    // keep a width as a placeholder for the collapsed SideNav while its position is absolute
+    @media ${theme.screenSize.tablet} {
+      width: 48px;
+    }
+
+    @media ${theme.screenSize.upToSmall} {
+      top: ${topSmall};
+      height: calc(100vh - ${topSmall});
+    }
+  `
+);
 
 // Allows AdditionalLinks to always be at the bottom of the SideNav
 const Spaceholder = styled('div')`
@@ -140,11 +175,22 @@ const additionalLinks = [
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
+  const { bannerContent } = useContext(HeaderContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
+  const showContentOverlay = isTablet && !isCollapsed;
+  const isBannerEnabled = bannerContent?.isEnabled;
+
+  // CSS top property values for sticky side nav based on header height
+  const topLarge = useMemo(() => getSidenavTopValue(isBannerEnabled, [theme.header.navbarHeight]), [isBannerEnabled]);
+  const topMedium = useMemo(() => getSidenavTopValue(isBannerEnabled, [theme.header.navbarMobileHeight]), [isBannerEnabled]);
+  const topSmall = useMemo(
+    () => getSidenavTopValue(isBannerEnabled, [theme.header.navbarMobileHeight, theme.header.docsMobileMenuHeight]),
+    [isBannerEnabled]
+  );
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -166,7 +212,8 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
 
   return (
     <>
-      <SidenavContainer>
+      <Global styles={disableScroll(showContentOverlay || !hideMobile)} />
+      <SidenavContainer topLarge={topLarge} topMedium={topMedium} topSmall={topSmall}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
@@ -238,7 +285,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
           </LeafygreenSideNav>
         </SidenavMobileTransition>
       </SidenavContainer>
-      {isTablet && !isCollapsed && <ContentOverlay onClick={handleOverlayClick} />}
+      {showContentOverlay && <ContentOverlay onClick={handleOverlayClick} />}
     </>
   );
 };
