@@ -11,7 +11,7 @@ const fadeOut = css`
   }
   .slide-exit-active {
     opacity: 0;
-    transition: opacity ${theme.transitionSpeed.contentFadeOut};
+    transition: opacity ${theme.transitionSpeed.iaExit};
   }
 `;
 
@@ -25,8 +25,7 @@ const backStyle = css`
   .slide-enter-active {
     opacity: 1;
     transform: translateX(0%);
-    transition: opacity ${theme.transitionSpeed.contentFadeIn},
-      transform ${theme.transitionSpeed.contentFadeIn} ease-out;
+    transition: opacity ${theme.transitionSpeed.iaEnter}, transform ${theme.transitionSpeed.iaEnter} ease-out;
   }
 `;
 
@@ -40,8 +39,7 @@ const forwardStyle = css`
   .slide-enter-active {
     opacity: 1;
     transform: translateX(0%);
-    transition: opacity ${theme.transitionSpeed.contentFadeIn},
-      transform ${theme.transitionSpeed.contentFadeIn} ease-out;
+    transition: opacity ${theme.transitionSpeed.iaEnter}, transform ${theme.transitionSpeed.iaEnter} ease-out;
   }
 `;
 
@@ -54,8 +52,8 @@ const IATransition = ({ back, children, hasIA, slug }) => (
         <SwitchTransition>
           <CSSTransition
             timeout={{
-              enter: theme.size.stripUnit(theme.transitionSpeed.contentFadeIn),
-              exit: theme.size.stripUnit(theme.transitionSpeed.contentFadeOut),
+              enter: theme.size.stripUnit(theme.transitionSpeed.iaEnter),
+              exit: theme.size.stripUnit(theme.transitionSpeed.iaExit),
             }}
             classNames="slide"
             key={slug}

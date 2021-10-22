@@ -5,8 +5,8 @@ import { css, Global } from '@emotion/core';
 import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
 
-const ENTER_DURATION = 200;
-const EXIT_DURATION = theme.size.stripUnit(theme.transitionSpeed.contentFadeOut) + 10;
+const ENTER_DURATION = theme.size.stripUnit(theme.transitionSpeed.iaEnter);
+const EXIT_DURATION = theme.size.stripUnit(theme.transitionSpeed.iaExit) + 10;
 const TRANSITION_NAME = 'sidenav-mobile';
 
 const globalCSS = css`

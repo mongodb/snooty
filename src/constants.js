@@ -74,5 +74,3 @@ export const SECTION_NAME_MAPPING = {
     title: 'See Also',
   },
 };
-
-export const CONTENT_CONTAINER_CLASSNAME = 'content-container';

@@ -5,7 +5,7 @@ import { theme } from './src/theme/docsTheme';
 import './src/styles/mongodb-docs.css';
 
 // Delay for when page should scroll. Gives time for content in tab components to render
-const contentTransitionDuration = 500;
+const contentTransitionDuration = theme.size.stripUnit(theme.transitionSpeed.contentFade);
 
 // Slight modification to the default behavior of Gatsby's shouldUpdateScroll function.
 // We only want to perform scroll location updates through Gatsby Links after the page transitions are over.

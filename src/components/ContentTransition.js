@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
-import { CONTENT_CONTAINER_CLASSNAME } from '../constants';
+import { theme } from '../theme/docsTheme';
 
 const fadeOut = css`
   .fade-exit {
@@ -10,7 +10,7 @@ const fadeOut = css`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: opacity 500ms;
+    transition: opacity ${theme.transitionSpeed.contentFade};
   }
 `;
 
@@ -22,7 +22,7 @@ const fadeIn = css`
   .fade-enter-active {
     opacity: 1;
     // Add delay so that fade in transition doesn't begin until the previous page has finished fading out
-    transition: opacity 500ms ease-in-out;
+    transition: opacity ${theme.transitionSpeed.contentFade} ease-in-out;
   }
 `;
 
@@ -35,7 +35,6 @@ const ContentTransition = ({ children, slug }) => (
   <>
     <Global styles={fadeInOut} />
     <TransitionGroup
-      className={CONTENT_CONTAINER_CLASSNAME}
       css={css`
         grid-area: contents;
         margin: 0px;
