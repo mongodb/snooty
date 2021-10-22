@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -7,7 +7,6 @@ import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
-import { HeaderContext } from '../header-context';
 import IA from './IA';
 import IATransition from './IATransition';
 import Link from '../Link';
@@ -19,6 +18,7 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import VersionDropdown from '../VersionDropdown';
 import useScreenSize from '../../hooks/useScreenSize';
+import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
@@ -98,32 +98,21 @@ const ContentOverlay = styled('div')`
   z-index: 1;
 `;
 
-// Returns the sum of the Header component's children's heights to give the appropriate amount of space for the side nav
-const getSidenavTopValue = (bannerEnabled, heights) => {
-  let topValue = 0;
-  heights.forEach((height) => {
-    topValue += theme.size.stripUnit(height);
-  });
-
-  if (bannerEnabled) {
-    topValue += theme.size.stripUnit(theme.header.bannerHeight);
-  }
-
-  return `${topValue}px`;
-};
+const getTopAndHeight = (topValue) => css`
+  top: ${topValue};
+  height: calc(100vh - ${topValue});
+`;
 
 // Keep the side nav container sticky to allow LG's side nav to push content seemlessly
 const SidenavContainer = styled.div(
   ({ topLarge, topMedium, topSmall }) => css`
     grid-area: sidenav;
-    height: calc(100vh - ${topLarge});
     position: sticky;
-    top: ${topLarge};
     z-index: 2;
+    ${getTopAndHeight(topLarge)};
 
     @media ${theme.screenSize.upToLarge} {
-      top: ${topMedium};
-      height: calc(100vh - ${topMedium});
+      ${getTopAndHeight(topMedium)};
     }
 
     // Since we want the SideNav to open on top of the content on medium screen size,
@@ -133,8 +122,7 @@ const SidenavContainer = styled.div(
     }
 
     @media ${theme.screenSize.upToSmall} {
-      top: ${topSmall};
-      height: calc(100vh - ${topSmall});
+      ${getTopAndHeight(topSmall)};
     }
   `
 );
@@ -175,24 +163,15 @@ const additionalLinks = [
 
 const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
-  const { bannerContent } = useContext(HeaderContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
   const showContentOverlay = isTablet && !isCollapsed;
-  const isBannerEnabled = bannerContent?.isEnabled;
 
   // CSS top property values for sticky side nav based on header height
-  const topLarge = useMemo(() => getSidenavTopValue(isBannerEnabled, [theme.header.navbarHeight]), [isBannerEnabled]);
-  const topMedium = useMemo(() => getSidenavTopValue(isBannerEnabled, [theme.header.navbarMobileHeight]), [
-    isBannerEnabled,
-  ]);
-  const topSmall = useMemo(
-    () => getSidenavTopValue(isBannerEnabled, [theme.header.navbarMobileHeight, theme.header.docsMobileMenuHeight]),
-    [isBannerEnabled]
-  );
+  const topValues = useStickyTopValues();
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -215,7 +194,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
   return (
     <>
       <Global styles={disableScroll(showContentOverlay || !hideMobile)} />
-      <SidenavContainer topLarge={topLarge} topMedium={topMedium} topSmall={topSmall}>
+      <SidenavContainer {...topValues}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"

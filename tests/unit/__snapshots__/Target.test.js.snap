@@ -91,6 +91,7 @@ including UTF-8.
 
 exports[`renders correctly with no directive_argument nodes 1`] = `
 <span
+  class="contains-headerlink"
   id="std-label-php-language-center"
 />
 `;
