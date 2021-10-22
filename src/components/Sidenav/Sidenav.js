@@ -81,7 +81,7 @@ const titleStyle = LeafyCss`
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
 const disableScroll = (shouldDisableScroll) => css`
-  html {
+  body {
     ${shouldDisableScroll && 'overflow: hidden;'}
   }
 `;
@@ -186,7 +186,9 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
 
   // CSS top property values for sticky side nav based on header height
   const topLarge = useMemo(() => getSidenavTopValue(isBannerEnabled, [theme.header.navbarHeight]), [isBannerEnabled]);
-  const topMedium = useMemo(() => getSidenavTopValue(isBannerEnabled, [theme.header.navbarMobileHeight]), [isBannerEnabled]);
+  const topMedium = useMemo(() => getSidenavTopValue(isBannerEnabled, [theme.header.navbarMobileHeight]), [
+    isBannerEnabled,
+  ]);
   const topSmall = useMemo(
     () => getSidenavTopValue(isBannerEnabled, [theme.header.navbarMobileHeight, theme.header.docsMobileMenuHeight]),
     [isBannerEnabled]
