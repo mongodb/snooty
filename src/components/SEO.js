@@ -14,10 +14,7 @@ const SEO = ({ pageTitle, siteTitle }) => (
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={DEFAULT_TWITTER_SITE} />
     <meta property="twitter:title" content={pageTitle} />
-    <meta
-      name="twitter:image"
-      content="http://s3.amazonaws.com/info-mongodb-com/_com_assets/cms/mongodb-for-giant-ideas-bbab5c3cf8.png"
-    />
+    <meta name="twitter:image" content="http://docs.mongodb.com/assets/meta_generic.png" />
     <meta
       name="twitter:image:alt"
       content="MongoDB logo featuring a green leaf on a dark gray background. Slogan reads 'For giant ideas'."
