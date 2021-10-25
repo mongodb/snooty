@@ -12,7 +12,6 @@ import IATransition from './IATransition';
 import Link from '../Link';
 import ProductsList from './ProductsList';
 import SidenavBackButton from './SidenavBackButton';
-import SidenavDocsLogo from './SidenavDocsLogo';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
@@ -22,6 +21,7 @@ import useScreenSize from '../../hooks/useScreenSize';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
+import { DOCS_URL } from '../../constants';
 
 const SIDENAV_WIDTH = 268;
 
@@ -176,7 +176,10 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SidenavDocsLogo border={<Border />} />
+                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={DOCS_URL}>
+                  MongoDB Documentation
+                </SideNavItem>
+                <Border />
                 <SidenavBackButton
                   handleClick={() => {
                     setBack(true);
