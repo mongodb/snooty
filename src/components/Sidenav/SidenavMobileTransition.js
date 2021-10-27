@@ -6,7 +6,7 @@ import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
 
 const ENTER_DURATION = theme.size.stripUnit(theme.transitionSpeed.iaEnter);
-const EXIT_DURATION = theme.size.stripUnit(theme.transitionSpeed.iaExit) + 10;
+const EXIT_DURATION = theme.size.stripUnit(theme.transitionSpeed.iaExit);
 const TRANSITION_NAME = 'sidenav-mobile';
 
 const globalCSS = css`
