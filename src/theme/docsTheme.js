@@ -46,6 +46,10 @@ const screenSize = {
   largeAndUp: 'not all and (max-width: 1023px)',
   upToXLarge: 'only screen and (max-width: 1200px)',
   xLargeAndUp: 'not all and (max-width: 1200px)',
+  upTo2XLarge: 'only screen and (max-width: 1440px)',
+  '2XLargeAndUp': 'not all and (max-width: 1440px)',
+  upTo3XLarge: 'only screen and (max-width: 1920px)',
+  '3XLargeAndUp': 'not all and (max-width: 1920px)',
   tablet: 'only screen and (min-width: 421px) and (max-width: 1023px)',
 };
 

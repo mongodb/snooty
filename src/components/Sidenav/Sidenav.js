@@ -30,6 +30,10 @@ const SIDENAV_WIDTH = 268;
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
   height: 100%;
 
+  @media print {
+    display: none;
+  }
+
   // Mobile sidenav
   @media ${theme.screenSize.upToSmall} {
     ${hideMobile && 'display: none;'}

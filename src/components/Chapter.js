@@ -1,29 +1,54 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import Link from './Link';
+import { theme } from '../theme/docsTheme';
 import { getPlaintext } from '../utils/get-plaintext';
 
-// Height and width of iamge
+// Height and width of image
 const IMAGE_SIZE = 200;
 
 const Container = styled('div')`
   background-color: ${uiColors.white};
-  border-radius: 4px;
+  border-radius: ${theme.size.tiny};
   border: 1px solid ${uiColors.gray.light3};
-  display: grid;
-  grid-template-areas:
-    'description image'
-    'guides guides';
-  margin: 8px 0;
-  max-width: 743px;
-  padding: 48px 56px;
+  margin: ${theme.size.small} 0;
+  padding: ${theme.size.large} ${theme.size.medium};
+
+  @media ${theme.screenSize.mediumAndUp} {
+    display: grid;
+    grid-template-areas:
+      'description image'
+      'guides guides';
+    padding: 48px 40px;
+  }
 `;
 
-const ImageContainer = styled('img')`
-  grid-area: image;
-  margin-left: 108px;
+const ChapterImage = styled('img')`
+  display: block;
+  margin: 0 auto ${theme.size.medium} auto;
+  height: auto;
+  max-width: 100%;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-area: image;
+    margin-bottom: 0;
+    margin-left: ${theme.size.large};
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    margin-left: 40px;
+  }
+
+  @media ${theme.screenSize['2XLargeAndUp']} {
+    margin-left: 50px;
+  }
+
+  @media ${theme.screenSize['3XLargeAndUp']} {
+    margin-left: 108px;
+  }
 `;
 
 const DescriptionContainer = styled('div')`
@@ -31,15 +56,19 @@ const DescriptionContainer = styled('div')`
   flex-direction: column;
   grid-area: description;
   justify-content: center;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-area: description;
+  }
 `;
 
 const ChapterNumberLabel = styled('div')`
   background-color: ${uiColors.green.light3};
-  border-radius: 4px;
+  border-radius: ${theme.size.tiny};
   color: ${uiColors.green.base};
   font-size: 14px;
   font-weight: bold;
-  height: 25px;
+  height: ${theme.size.medium};
   text-align: center;
   width: 83px;
 `;
@@ -47,36 +76,47 @@ const ChapterNumberLabel = styled('div')`
 const ChapterTitle = styled('div')`
   font-size: 18px;
   font-weight: bold;
-  margin-top: 8px;
+  margin-top: ${theme.size.small};
 `;
 
 const ChapterDescription = styled('div')`
-  margin-top: 8px;
+  margin-top: ${theme.size.small};
 `;
 
 const GuidesList = styled('ul')`
-  grid-area: guides;
   list-style-type: none;
   list-style-image: url(${withPrefix('assets/lightning-bolt.svg')});
-  margin-top: 24px;
   margin-bottom: 0;
+  margin-top: ${theme.size.medium};
   padding-inline-start: 14px;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-area: guides;
+  }
 `;
 
 const GuidesListItem = styled('li')`
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 0 ${theme.size.small};
+
+  @media ${theme.screenSize.mediumAndUp} {
+    padding: 0 ${theme.size.tiny};
+  }
 `;
 
 const GuideLink = styled(Link)`
-  align-items: center;
   display: flex;
   color: unset;
-  justify-content: space-between;
+  flex-direction: column;
   position: relative;
 
   :hover {
     color: unset;
+  }
+
+  @media ${theme.screenSize.mediumAndUp} {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
@@ -108,21 +148,26 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
 
   return (
     <Container>
+      {image && (
+        <ChapterImage
+          src={withPrefix(image)}
+          height={IMAGE_SIZE}
+          width={IMAGE_SIZE}
+          altText={`Chapter image for ${chapterTitle}`}
+        />
+      )}
       <DescriptionContainer>
         <ChapterNumberLabel>Chapter {chapterNumber}</ChapterNumberLabel>
         <ChapterTitle>{chapterTitle}</ChapterTitle>
         <ChapterDescription>{description}</ChapterDescription>
       </DescriptionContainer>
-      {image && (
-        <ImageContainer src={withPrefix(image)} altText="Chapter image" height={IMAGE_SIZE} width={IMAGE_SIZE} />
-      )}
       <GuidesList>
-        {guides.map((guide) => {
+        {guides.map((guide, i) => {
           const time = guide.time ? `${guide.time} mins` : '';
           const guideTitle = getPlaintext(guide.title);
 
           return (
-            <GuidesListItem>
+            <GuidesListItem key={`${guideTitle}-${i}`}>
               <GuideLink to={guide.path}>
                 <span>{guideTitle}</span>
                 <span>{time}</span>
@@ -133,6 +178,20 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
       </GuidesList>
     </Container>
   );
+};
+
+Chapter.propTypes = {
+  metadata: PropTypes.shape({
+    chapters: PropTypes.object.isRequired,
+    guides: PropTypes.object.isRequired,
+  }).isRequired,
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
+    options: PropTypes.shape({
+      description: PropTypes.string,
+      image: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default Chapter;
