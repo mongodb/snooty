@@ -1,0 +1,498 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.emotion-36 {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  border: 1px solid #F9FBFA;
+  margin: 8px 0;
+  padding: 32px 24px;
+}
+
+@media not all and (max-width:767px) {
+  .emotion-36 {
+    display: grid;
+    grid-template-areas: 'description image' 'guides guides';
+    padding: 48px 40px;
+  }
+}
+
+.emotion-0 {
+  display: block;
+  margin: 0 auto 24px auto;
+  height: auto;
+  max-width: 100%;
+}
+
+@media not all and (max-width:767px) {
+  .emotion-0 {
+    grid-area: image;
+    margin-bottom: 0;
+    margin-left: 32px;
+  }
+}
+
+@media not all and (max-width:1023px) {
+  .emotion-0 {
+    margin-left: 40px;
+  }
+}
+
+@media not all and (max-width:1440px) {
+  .emotion-0 {
+    margin-left: 50px;
+  }
+}
+
+@media not all and (max-width:1920px) {
+  .emotion-0 {
+    margin-left: 108px;
+  }
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-area: description;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+@media not all and (max-width:767px) {
+  .emotion-8 {
+    grid-area: description;
+  }
+}
+
+.emotion-2 {
+  background-color: #E4F4E4;
+  border-radius: 4px;
+  color: #13AA52;
+  font-size: 14px;
+  font-weight: bold;
+  height: 24px;
+  text-align: center;
+  width: 83px;
+}
+
+.emotion-4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.emotion-6 {
+  margin-top: 8px;
+}
+
+.emotion-34 {
+  list-style-type: none;
+  list-style-image: url(/assets/lightning-bolt.svg);
+  margin-bottom: 0;
+  margin-top: 24px;
+  padding-inline-start: 14px;
+}
+
+@media not all and (max-width:767px) {
+  .emotion-34 {
+    grid-area: guides;
+  }
+}
+
+.emotion-16 {
+  padding: 0 8px;
+}
+
+@media not all and (max-width:767px) {
+  .emotion-16 {
+    padding: 0 4px;
+  }
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: unset;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+}
+
+.emotion-10:hover {
+  color: unset;
+}
+
+@media not all and (max-width:767px) {
+  .emotion-10 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+}
+
+<Chapter
+  metadata={
+    Object {
+      "chapters": Object {
+        "Atlas": Object {
+          "chapter_number": 1,
+          "description": "Get up and running with MongoDB Atlas.
+Learn how to create a cluster, load a sample dataset, and
+get your connection information.",
+          "guides": Array [
+            "cloud/account",
+            "cloud/connectionstring",
+            "cloud/migrate-from-aws-to-atlas",
+          ],
+        },
+        "CRUD": Object {
+          "chapter_number": 2,
+          "description": "Learn how to perform these core operations with
+your preferred language and associated MongoDB Driver.",
+          "guides": Array [
+            "server/read",
+          ],
+        },
+      },
+      "guides": Object {
+        "cloud/account": Object {
+          "chapter_name": "Atlas",
+          "completion_time": 15,
+          "description": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "position": Object {
+                    "start": Object {
+                      "line": 8,
+                    },
+                  },
+                  "type": "text",
+                  "value": "A brief description or preview of what to expect in this
+guide for creating a MongoDB account.",
+                },
+              ],
+              "position": Object {
+                "start": Object {
+                  "line": 8,
+                },
+              },
+              "type": "paragraph",
+            },
+          ],
+          "title": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 4,
+                },
+              },
+              "type": "text",
+              "value": "Create and Manage a MongoDB Account",
+            },
+          ],
+        },
+        "cloud/connectionstring": Object {
+          "chapter_name": "Atlas",
+          "completion_time": 0,
+          "description": Array [],
+          "title": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 0,
+                },
+              },
+              "type": "text",
+              "value": "Login to Atlas",
+            },
+          ],
+        },
+        "cloud/migrate-from-aws-to-atlas": Object {
+          "chapter_name": "Atlas",
+          "completion_time": 0,
+          "description": Array [],
+          "title": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 0,
+                },
+              },
+              "type": "text",
+              "value": "Launch your target replica set in MongoDB Atlas.",
+            },
+          ],
+        },
+        "server/read": Object {
+          "chapter_name": "CRUD",
+          "completion_time": 0,
+          "description": Array [],
+          "title": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 0,
+                },
+              },
+              "type": "text",
+              "value": "Connect to your MongoDB instance.",
+            },
+          ],
+        },
+      },
+    }
+  }
+  nodeData={
+    Object {
+      "argument": Array [
+        Object {
+          "type": "text",
+          "value": "Atlas",
+        },
+      ],
+      "children": Array [
+        Object {
+          "argument": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 14,
+                },
+              },
+              "type": "text",
+              "value": "/cloud/account.txt",
+            },
+          ],
+          "children": Array [],
+          "domain": "mongodb",
+          "name": "guide",
+          "position": Object {
+            "start": Object {
+              "line": 14,
+            },
+          },
+          "type": "directive",
+        },
+        Object {
+          "argument": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 15,
+                },
+              },
+              "type": "text",
+              "value": "/cloud/connectionstring.txt",
+            },
+          ],
+          "children": Array [],
+          "domain": "mongodb",
+          "name": "guide",
+          "position": Object {
+            "start": Object {
+              "line": 15,
+            },
+          },
+          "type": "directive",
+        },
+        Object {
+          "argument": Array [
+            Object {
+              "position": Object {
+                "start": Object {
+                  "line": 16,
+                },
+              },
+              "type": "text",
+              "value": "/cloud/migrate-from-aws-to-atlas.txt",
+            },
+          ],
+          "children": Array [],
+          "domain": "mongodb",
+          "name": "guide",
+          "position": Object {
+            "start": Object {
+              "line": 16,
+            },
+          },
+          "type": "directive",
+        },
+      ],
+      "name": "chapter",
+      "options": Object {
+        "description": "Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.",
+        "image": "/images/chapter-image-atlas.png",
+      },
+      "type": "directive",
+    }
+  }
+>
+  <Container>
+    <div
+      className="emotion-36 emotion-37"
+    >
+      <ChapterImage
+        altText="Chapter image for Atlas"
+        height={200}
+        src="/images/chapter-image-atlas.png"
+        width={200}
+      >
+        <img
+          className="emotion-0 emotion-1"
+          height={200}
+          src="/images/chapter-image-atlas.png"
+          width={200}
+        />
+      </ChapterImage>
+      <DescriptionContainer>
+        <div
+          className="emotion-8 emotion-9"
+        >
+          <ChapterNumberLabel>
+            <div
+              className="emotion-2 emotion-3"
+            >
+              Chapter 
+              1
+            </div>
+          </ChapterNumberLabel>
+          <ChapterTitle>
+            <div
+              className="emotion-4 emotion-5"
+            >
+              Atlas
+            </div>
+          </ChapterTitle>
+          <ChapterDescription>
+            <div
+              className="emotion-6 emotion-7"
+            >
+              Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.
+            </div>
+          </ChapterDescription>
+        </div>
+      </DescriptionContainer>
+      <GuidesList>
+        <ul
+          className="emotion-34 emotion-35"
+        >
+          <GuidesListItem
+            key="Create and Manage a MongoDB Account-0"
+          >
+            <li
+              className="emotion-16 emotion-17"
+            >
+              <GuideLink
+                to="cloud/account"
+              >
+                <Link
+                  className="emotion-10 emotion-11"
+                  to="cloud/account"
+                >
+                  <mockConstructor
+                    className="emotion-10 emotion-11"
+                    to="/cloud/account/"
+                  >
+                    <a
+                      className="emotion-10 emotion-11"
+                      href="/cloud/account/"
+                    >
+                      <span>
+                        Create and Manage a MongoDB Account
+                      </span>
+                      <span>
+                        15 mins
+                      </span>
+                    </a>
+                  </mockConstructor>
+                </Link>
+              </GuideLink>
+            </li>
+          </GuidesListItem>
+          <GuidesListItem
+            key="Login to Atlas-1"
+          >
+            <li
+              className="emotion-16 emotion-17"
+            >
+              <GuideLink
+                to="cloud/connectionstring"
+              >
+                <Link
+                  className="emotion-10 emotion-11"
+                  to="cloud/connectionstring"
+                >
+                  <mockConstructor
+                    className="emotion-10 emotion-11"
+                    to="/cloud/connectionstring/"
+                  >
+                    <a
+                      className="emotion-10 emotion-11"
+                      href="/cloud/connectionstring/"
+                    >
+                      <span>
+                        Login to Atlas
+                      </span>
+                      <span />
+                    </a>
+                  </mockConstructor>
+                </Link>
+              </GuideLink>
+            </li>
+          </GuidesListItem>
+          <GuidesListItem
+            key="Launch your target replica set in MongoDB Atlas.-2"
+          >
+            <li
+              className="emotion-16 emotion-17"
+            >
+              <GuideLink
+                to="cloud/migrate-from-aws-to-atlas"
+              >
+                <Link
+                  className="emotion-10 emotion-11"
+                  to="cloud/migrate-from-aws-to-atlas"
+                >
+                  <mockConstructor
+                    className="emotion-10 emotion-11"
+                    to="/cloud/migrate-from-aws-to-atlas/"
+                  >
+                    <a
+                      className="emotion-10 emotion-11"
+                      href="/cloud/migrate-from-aws-to-atlas/"
+                    >
+                      <span>
+                        Launch your target replica set in MongoDB Atlas.
+                      </span>
+                      <span />
+                    </a>
+                  </mockConstructor>
+                </Link>
+              </GuideLink>
+            </li>
+          </GuidesListItem>
+        </ul>
+      </GuidesList>
+    </div>
+  </Container>
+</Chapter>
+`;
