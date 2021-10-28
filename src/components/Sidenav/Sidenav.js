@@ -179,6 +179,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues();
+  const showVersions = publishedBranches?.branches?.length > 1;
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -294,7 +295,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
                 </SideNavItem>
               </>
             )}
-            {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {showVersions && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
             {!ia && navContent}
 
             {isDocsLanding && (
