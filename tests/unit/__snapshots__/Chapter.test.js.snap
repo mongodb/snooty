@@ -14,6 +14,25 @@ exports[`renders correctly 1`] = `
     display: grid;
     grid-template-areas: 'description image' 'guides guides';
     padding: 48px 40px;
+    grid-column-gap: 32px;
+  }
+}
+
+@media not all and (max-width:1023px) {
+  .emotion-36 {
+    grid-column-gap: 40px;
+  }
+}
+
+@media not all and (max-width:1440px) {
+  .emotion-36 {
+    grid-column-gap: 50px;
+  }
+}
+
+@media not all and (max-width:1920px) {
+  .emotion-36 {
+    grid-column-gap: 108px;
   }
 }
 
@@ -28,25 +47,6 @@ exports[`renders correctly 1`] = `
   .emotion-0 {
     grid-area: image;
     margin-bottom: 0;
-    margin-left: 32px;
-  }
-}
-
-@media not all and (max-width:1023px) {
-  .emotion-0 {
-    margin-left: 40px;
-  }
-}
-
-@media not all and (max-width:1440px) {
-  .emotion-0 {
-    margin-left: 50px;
-  }
-}
-
-@media not all and (max-width:1920px) {
-  .emotion-0 {
-    margin-left: 108px;
   }
 }
 
@@ -130,6 +130,8 @@ exports[`renders correctly 1`] = `
 
 .emotion-10:hover {
   color: unset;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 @media not all and (max-width:767px) {

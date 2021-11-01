@@ -23,6 +23,19 @@ const Container = styled('div')`
       'description image'
       'guides guides';
     padding: 48px 40px;
+    grid-column-gap: ${theme.size.large};
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    grid-column-gap: 40px;
+  }
+
+  @media ${theme.screenSize['2XLargeAndUp']} {
+    grid-column-gap: 50px;
+  }
+
+  @media ${theme.screenSize['3XLargeAndUp']} {
+    grid-column-gap: 108px;
   }
 `;
 
@@ -35,20 +48,14 @@ const ChapterImage = styled('img')`
   @media ${theme.screenSize.mediumAndUp} {
     grid-area: image;
     margin-bottom: 0;
-    margin-left: ${theme.size.large};
   }
+`;
 
-  @media ${theme.screenSize.largeAndUp} {
-    margin-left: 40px;
-  }
-
-  @media ${theme.screenSize['2XLargeAndUp']} {
-    margin-left: 50px;
-  }
-
-  @media ${theme.screenSize['3XLargeAndUp']} {
-    margin-left: 108px;
-  }
+// Reserves enough space for chapters without images, while keeping existing images for chapters responsive
+const EmptyImage = styled('div')`
+  grid-area: image;
+  height: auto;
+  width: 200px;
 `;
 
 const DescriptionContainer = styled('div')`
@@ -111,6 +118,7 @@ const GuideLink = styled(Link)`
 
   :hover {
     color: unset;
+    text-decoration: none;
   }
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -148,13 +156,15 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
 
   return (
     <Container>
-      {image && (
+      {image ? (
         <ChapterImage
           src={withPrefix(image)}
           height={IMAGE_SIZE}
           width={IMAGE_SIZE}
           altText={`Chapter image for ${chapterTitle}`}
         />
+      ) : (
+        <EmptyImage />
       )}
       <DescriptionContainer>
         <ChapterNumberLabel>Chapter {chapterNumber}</ChapterNumberLabel>
