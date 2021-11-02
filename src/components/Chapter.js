@@ -53,15 +53,17 @@ const ChapterImage = styled('img')`
 
 // Reserves enough space for chapters without images, while keeping existing images for chapters responsive
 const EmptyImage = styled('div')`
-  grid-area: image;
   height: auto;
-  width: 200px;
+  width: ${IMAGE_SIZE}px;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-area: image;
+  }
 `;
 
 const DescriptionContainer = styled('div')`
   display: flex;
   flex-direction: column;
-  grid-area: description;
   justify-content: center;
 
   @media ${theme.screenSize.mediumAndUp} {
