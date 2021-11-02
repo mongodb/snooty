@@ -51,12 +51,15 @@ const screenSize = {
 
 const header = {
   bannerHeight: '40px',
-  navbarHeight: '45px',
+  navbarHeight: '88px',
+  navbarMobileHeight: '56px',
+  docsMobileMenuHeight: '52px',
 };
 
 const transitionSpeed = {
-  contentFadeOut: '100ms',
-  contentFadeIn: '200ms',
+  iaExit: '100ms',
+  iaEnter: '200ms',
+  contentFade: '500ms',
 };
 
 export const theme = {

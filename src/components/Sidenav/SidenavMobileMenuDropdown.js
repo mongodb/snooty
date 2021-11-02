@@ -11,7 +11,7 @@ const Container = styled('div')`
   background-color: ${uiColors.gray.light3};
   border-bottom: 1px solid ${uiColors.gray.light2};
   display: flex;
-  height: 52px;
+  height: ${theme.header.docsMobileMenuHeight};
   justify-content: space-between;
   width: 100vw;
 
