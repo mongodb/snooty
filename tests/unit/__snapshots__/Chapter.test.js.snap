@@ -58,7 +58,6 @@ exports[`renders correctly 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  grid-area: description;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
