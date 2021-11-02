@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { css, Global } from '@emotion/core';
-import { CONTENT_CONTAINER_CLASSNAME } from '../constants';
 import { theme } from '../theme/docsTheme';
 
 const fadeOut = css`
@@ -11,20 +10,19 @@ const fadeOut = css`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: opacity ${theme.transitionSpeed.contentFadeOut};
+    transition: opacity ${theme.transitionSpeed.contentFade};
   }
 `;
 
 const fadeIn = css`
   .fade-enter {
     // Set height to 0 to prevent content from jumping
-    height: 0px;
     opacity: 0;
   }
   .fade-enter-active {
     opacity: 1;
     // Add delay so that fade in transition doesn't begin until the previous page has finished fading out
-    transition: opacity ${theme.transitionSpeed.contentFadeIn} ${theme.transitionSpeed.contentFadeOut} ease-out;
+    transition: opacity ${theme.transitionSpeed.contentFade} ease-in-out;
   }
 `;
 
@@ -37,11 +35,9 @@ const ContentTransition = ({ children, slug }) => (
   <>
     <Global styles={fadeInOut} />
     <TransitionGroup
-      className={CONTENT_CONTAINER_CLASSNAME}
       css={css`
         grid-area: contents;
         margin: 0px;
-        overflow-y: auto;
       `}
     >
       <CSSTransition
@@ -51,7 +47,7 @@ const ContentTransition = ({ children, slug }) => (
       >
         <div
           css={css`
-            min-height: 100%;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;

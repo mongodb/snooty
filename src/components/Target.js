@@ -50,7 +50,7 @@ const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
           </dd>
         </dl>
       ) : (
-        <span id={html_id} />
+        <span className="contains-headerlink" id={html_id} />
       )}
     </React.Fragment>
   );

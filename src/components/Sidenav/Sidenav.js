@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
@@ -18,6 +18,7 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import VersionDropdown from '../VersionDropdown';
 import useScreenSize from '../../hooks/useScreenSize';
+import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
@@ -78,29 +79,53 @@ const titleStyle = LeafyCss`
   }
 `;
 
+// Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
+const disableScroll = (shouldDisableScroll) => css`
+  body {
+    ${shouldDisableScroll && 'overflow: hidden;'}
+  }
+`;
+
 const ContentOverlay = styled('div')`
   background-color: ${uiColors.white};
   bottom: 0;
   left: 0;
   opacity: 0.5;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   width: 100vw;
   z-index: 1;
 `;
 
-const SidenavContainer = styled('div')`
-  grid-area: sidenav;
-  position: relative;
-  z-index: 2;
-
-  // Since we want the SideNav to open on top of the content on medium screen size,
-  // keep a width as a placeholder for the collapsed SideNav while its position is absolute
-  @media ${theme.screenSize.tablet} {
-    width: 48px;
-  }
+const getTopAndHeight = (topValue) => css`
+  top: ${topValue};
+  height: calc(100vh - ${topValue});
 `;
+
+// Keep the side nav container sticky to allow LG's side nav to push content seemlessly
+const SidenavContainer = styled.div(
+  ({ topLarge, topMedium, topSmall }) => css`
+    grid-area: sidenav;
+    position: sticky;
+    z-index: 2;
+    ${getTopAndHeight(topLarge)};
+
+    @media ${theme.screenSize.upToLarge} {
+      ${getTopAndHeight(topMedium)};
+    }
+
+    // Since we want the SideNav to open on top of the content on medium screen size,
+    // keep a width as a placeholder for the collapsed SideNav while its position is absolute
+    @media ${theme.screenSize.tablet} {
+      width: 48px;
+    }
+
+    @media ${theme.screenSize.upToSmall} {
+      ${getTopAndHeight(topSmall)};
+    }
+  `
+);
 
 // Allows AdditionalLinks to always be at the bottom of the SideNav
 const Spaceholder = styled('div')`
@@ -143,6 +168,10 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
+  const showContentOverlay = isTablet && !isCollapsed;
+
+  // CSS top property values for sticky side nav based on header height
+  const topValues = useStickyTopValues();
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -164,7 +193,8 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
 
   return (
     <>
-      <SidenavContainer>
+      <Global styles={disableScroll(showContentOverlay || !hideMobile)} />
+      <SidenavContainer {...topValues}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
@@ -236,7 +266,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
           </LeafygreenSideNav>
         </SidenavMobileTransition>
       </SidenavContainer>
-      {isTablet && !isCollapsed && <ContentOverlay onClick={handleOverlayClick} />}
+      {showContentOverlay && <ContentOverlay onClick={handleOverlayClick} />}
     </>
   );
 };
