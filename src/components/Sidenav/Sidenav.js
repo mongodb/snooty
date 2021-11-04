@@ -157,7 +157,7 @@ const NavTopContainer = styled('div')`
 
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
-  { glyph: 'Person', title: 'Join our community', url: 'https://developer.mongodb.com/' },
+  { glyph: 'Person', title: 'Join our community', url: 'https://community.mongodb.com/' },
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
