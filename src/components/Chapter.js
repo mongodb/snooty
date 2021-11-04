@@ -75,7 +75,7 @@ const ChapterNumberLabel = styled('div')`
   background-color: ${uiColors.green.light3};
   border-radius: ${theme.size.tiny};
   color: ${uiColors.green.base};
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
   font-weight: bold;
   height: ${theme.size.medium};
   text-align: center;
