@@ -6,6 +6,8 @@ import BlockQuote from './BlockQuote';
 import Button from './Button';
 import Card from './Card';
 import CardGroup from './CardGroup';
+import Chapter from './Chapter';
+import Chapters from './Chapters';
 import Code from './Code';
 import Cond from './Cond';
 import Container from './Container';
@@ -125,6 +127,8 @@ const componentMap = {
   button: Button,
   card: Card,
   'card-group': CardGroup,
+  chapter: Chapter,
+  chapters: Chapters,
   class: CSSClass,
   code: Code,
   cond: Cond,
