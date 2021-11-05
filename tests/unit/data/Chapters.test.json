@@ -1,0 +1,202 @@
+{
+  "metadata": {
+    "chapters": {
+      "Atlas": {
+        "chapter_number": 1,
+        "description": "Get up and running with MongoDB Atlas.\nLearn how to create a cluster, load a sample dataset, and\nget your connection information.",
+        "guides": ["cloud/account", "cloud/connectionstring", "cloud/migrate-from-aws-to-atlas"]
+      },
+      "CRUD": {
+        "chapter_number": 2,
+        "description": "Learn how to perform these core operations with\nyour preferred language and associated MongoDB Driver.",
+        "guides": ["server/read"]
+      }
+    },
+    "guides": {
+      "cloud/account": {
+        "chapter_name": "Atlas",
+        "completion_time": 15,
+        "description": [{
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 8
+            }
+          },
+          "children": [{
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 8
+              }
+            },
+            "value": "A brief description or preview of what to expect in this\nguide for creating a MongoDB account."
+          }]
+        }],
+        "title": [{
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 4
+            }
+          },
+          "value": "Create and Manage a MongoDB Account"
+        }]
+      },
+      "cloud/connectionstring": {
+        "chapter_name": "Atlas",
+        "completion_time": 0,
+        "description": [],
+        "title": [{
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 0
+            }
+          },
+          "value": "Login to Atlas"
+        }]
+      },
+      "cloud/migrate-from-aws-to-atlas": {
+        "chapter_name": "Atlas",
+        "completion_time": 0,
+        "description": [],
+        "title": [{
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 0
+            }
+          },
+          "value": "Launch your target replica set in MongoDB Atlas."
+        }]
+      },
+      "server/read": {
+        "chapter_name": "CRUD",
+        "completion_time": 0,
+        "description": [],
+        "title": [{
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 0
+            }
+          },
+          "value": "Connect to your MongoDB instance."
+        }]
+      }
+    }
+  },
+  "nodeData": {
+    "type": "directive",
+    "name": "chapters",
+    "children": [
+      {
+        "type": "directive",
+        "name": "chapter",
+        "argument": [
+          {
+            "type": "text",
+            "value": "Atlas"
+          }
+        ],
+        "children": [
+          {
+            "type": "directive",
+            "position": {
+              "start": {
+                "line": 14
+              }
+            },
+            "children": [],
+            "domain": "mongodb",
+            "name": "guide",
+            "argument": [{
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 14 
+                }
+              },
+              "value": "/cloud/account.txt"
+            }]
+          },
+          {
+            "type": "directive",
+            "position": {
+              "start": {
+                "line": 15
+              }
+            },
+            "children": [],
+            "domain": "mongodb",
+            "name": "guide",
+            "argument": [{
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 15
+                }
+              },
+              "value": "/cloud/connectionstring.txt"
+            }]
+          },
+          {
+            "type": "directive",
+            "position": {
+              "start": {
+                "line": 16
+              }
+            },
+            "children": [],
+            "domain": "mongodb",
+            "name": "guide",
+            "argument": [{
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 16
+                }
+              },
+              "value": "/cloud/migrate-from-aws-to-atlas.txt"
+            }]
+          }
+        ], 
+        "options": {
+          "description": "Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.",
+          "image": "/images/chapter-image-atlas.png"
+        }
+      },
+      {
+        "type": "directive",
+        "name": "include",
+        "children": [
+          {
+            "type": "directive",
+            "name": "chapter",
+            "argument": [
+              {
+                "type": "text",
+                "value": "CRUD"
+              }
+            ],
+            "children": [
+              {
+                "type": "directive",
+                "name": "guide",
+                "argument": [{
+                  "type": "text",
+                  "value": "/server/read.txt"
+                }]
+              }
+            ],
+            "options": {
+              "description": "Learn how to perform these core operations with\nyour preferred language and associated MongoDB Driver.",
+              "image": "/images/chapter-image-crud.png"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

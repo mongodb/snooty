@@ -1,0 +1,355 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Container>
+  <ComponentFactory
+    key="0"
+    metadata={
+      Object {
+        "chapters": Object {
+          "Atlas": Object {
+            "chapter_number": 1,
+            "description": "Get up and running with MongoDB Atlas.
+Learn how to create a cluster, load a sample dataset, and
+get your connection information.",
+            "guides": Array [
+              "cloud/account",
+              "cloud/connectionstring",
+              "cloud/migrate-from-aws-to-atlas",
+            ],
+          },
+          "CRUD": Object {
+            "chapter_number": 2,
+            "description": "Learn how to perform these core operations with
+your preferred language and associated MongoDB Driver.",
+            "guides": Array [
+              "server/read",
+            ],
+          },
+        },
+        "guides": Object {
+          "cloud/account": Object {
+            "chapter_name": "Atlas",
+            "completion_time": 15,
+            "description": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "position": Object {
+                      "start": Object {
+                        "line": 8,
+                      },
+                    },
+                    "type": "text",
+                    "value": "A brief description or preview of what to expect in this
+guide for creating a MongoDB account.",
+                  },
+                ],
+                "position": Object {
+                  "start": Object {
+                    "line": 8,
+                  },
+                },
+                "type": "paragraph",
+              },
+            ],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 4,
+                  },
+                },
+                "type": "text",
+                "value": "Create and Manage a MongoDB Account",
+              },
+            ],
+          },
+          "cloud/connectionstring": Object {
+            "chapter_name": "Atlas",
+            "completion_time": 0,
+            "description": Array [],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Login to Atlas",
+              },
+            ],
+          },
+          "cloud/migrate-from-aws-to-atlas": Object {
+            "chapter_name": "Atlas",
+            "completion_time": 0,
+            "description": Array [],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Launch your target replica set in MongoDB Atlas.",
+              },
+            ],
+          },
+          "server/read": Object {
+            "chapter_name": "CRUD",
+            "completion_time": 0,
+            "description": Array [],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Connect to your MongoDB instance.",
+              },
+            ],
+          },
+        },
+      }
+    }
+    nodeData={
+      Object {
+        "argument": Array [
+          Object {
+            "type": "text",
+            "value": "Atlas",
+          },
+        ],
+        "children": Array [
+          Object {
+            "argument": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 14,
+                  },
+                },
+                "type": "text",
+                "value": "/cloud/account.txt",
+              },
+            ],
+            "children": Array [],
+            "domain": "mongodb",
+            "name": "guide",
+            "position": Object {
+              "start": Object {
+                "line": 14,
+              },
+            },
+            "type": "directive",
+          },
+          Object {
+            "argument": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 15,
+                  },
+                },
+                "type": "text",
+                "value": "/cloud/connectionstring.txt",
+              },
+            ],
+            "children": Array [],
+            "domain": "mongodb",
+            "name": "guide",
+            "position": Object {
+              "start": Object {
+                "line": 15,
+              },
+            },
+            "type": "directive",
+          },
+          Object {
+            "argument": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 16,
+                  },
+                },
+                "type": "text",
+                "value": "/cloud/migrate-from-aws-to-atlas.txt",
+              },
+            ],
+            "children": Array [],
+            "domain": "mongodb",
+            "name": "guide",
+            "position": Object {
+              "start": Object {
+                "line": 16,
+              },
+            },
+            "type": "directive",
+          },
+        ],
+        "name": "chapter",
+        "options": Object {
+          "description": "Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.",
+          "image": "/images/chapter-image-atlas.png",
+        },
+        "type": "directive",
+      }
+    }
+  />
+  <ComponentFactory
+    key="1"
+    metadata={
+      Object {
+        "chapters": Object {
+          "Atlas": Object {
+            "chapter_number": 1,
+            "description": "Get up and running with MongoDB Atlas.
+Learn how to create a cluster, load a sample dataset, and
+get your connection information.",
+            "guides": Array [
+              "cloud/account",
+              "cloud/connectionstring",
+              "cloud/migrate-from-aws-to-atlas",
+            ],
+          },
+          "CRUD": Object {
+            "chapter_number": 2,
+            "description": "Learn how to perform these core operations with
+your preferred language and associated MongoDB Driver.",
+            "guides": Array [
+              "server/read",
+            ],
+          },
+        },
+        "guides": Object {
+          "cloud/account": Object {
+            "chapter_name": "Atlas",
+            "completion_time": 15,
+            "description": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "position": Object {
+                      "start": Object {
+                        "line": 8,
+                      },
+                    },
+                    "type": "text",
+                    "value": "A brief description or preview of what to expect in this
+guide for creating a MongoDB account.",
+                  },
+                ],
+                "position": Object {
+                  "start": Object {
+                    "line": 8,
+                  },
+                },
+                "type": "paragraph",
+              },
+            ],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 4,
+                  },
+                },
+                "type": "text",
+                "value": "Create and Manage a MongoDB Account",
+              },
+            ],
+          },
+          "cloud/connectionstring": Object {
+            "chapter_name": "Atlas",
+            "completion_time": 0,
+            "description": Array [],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Login to Atlas",
+              },
+            ],
+          },
+          "cloud/migrate-from-aws-to-atlas": Object {
+            "chapter_name": "Atlas",
+            "completion_time": 0,
+            "description": Array [],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Launch your target replica set in MongoDB Atlas.",
+              },
+            ],
+          },
+          "server/read": Object {
+            "chapter_name": "CRUD",
+            "completion_time": 0,
+            "description": Array [],
+            "title": Array [
+              Object {
+                "position": Object {
+                  "start": Object {
+                    "line": 0,
+                  },
+                },
+                "type": "text",
+                "value": "Connect to your MongoDB instance.",
+              },
+            ],
+          },
+        },
+      }
+    }
+    nodeData={
+      Object {
+        "children": Array [
+          Object {
+            "argument": Array [
+              Object {
+                "type": "text",
+                "value": "CRUD",
+              },
+            ],
+            "children": Array [
+              Object {
+                "argument": Array [
+                  Object {
+                    "type": "text",
+                    "value": "/server/read.txt",
+                  },
+                ],
+                "name": "guide",
+                "type": "directive",
+              },
+            ],
+            "name": "chapter",
+            "options": Object {
+              "description": "Learn how to perform these core operations with
+your preferred language and associated MongoDB Driver.",
+              "image": "/images/chapter-image-crud.png",
+            },
+            "type": "directive",
+          },
+        ],
+        "name": "include",
+        "type": "directive",
+      }
+    }
+  />
+</Container>
+`;
