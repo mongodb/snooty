@@ -157,7 +157,7 @@ const getGuidesData = (guides) => {
       options: {
         cta: data['completion_time'] ? `${data['completion_time']} mins` : '',
         headline: getPlaintext(data['title']),
-        icon: withPrefix('assets/green-lightning-bolt.svg'),
+        icon: 'assets/green-lightning-bolt.svg',
         'icon-alt': 'Guides card icon',
         url: withPrefix(slug),
       },
