@@ -3,8 +3,9 @@ public/
 .cache/
 .DS_Store
 static/*
-# Don't ignore the assets directory
+# Don't ignore the assets or media directory
 !static/assets
+!static/media
 docs-tools/
 coverage/
 .coverage
