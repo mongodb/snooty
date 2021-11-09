@@ -54,7 +54,7 @@
               "line": 0
             }
           },
-          "value": "Login to Atlas"
+          "value": "Set Up Atlas Connectivity"
         }]
       },
       "cloud/migrate-from-aws-to-atlas": {
@@ -68,7 +68,7 @@
               "line": 0
             }
           },
-          "value": "Launch your target replica set in MongoDB Atlas."
+          "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas"
         }]
       },
       "server/read": {
@@ -82,7 +82,7 @@
               "line": 0
             }
           },
-          "value": "Connect to your MongoDB instance."
+          "value": "Read Data in MongoDB"
         }]
       }
     }

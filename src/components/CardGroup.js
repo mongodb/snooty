@@ -61,6 +61,7 @@ const StyledGrid = styled('div')`
 `;
 
 const CardGroup = ({
+  className,
   nodeData: {
     children,
     options: { columns, layout, style },
@@ -71,7 +72,12 @@ const CardGroup = ({
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
   return (
-    <StyledGrid className="card-group" columns={columns} noMargin={true} isCarousel={isCarousel}>
+    <StyledGrid
+      className={['card-group', className].join(' ')}
+      columns={columns}
+      noMargin={true}
+      isCarousel={isCarousel}
+    >
       {children.map((child, i) => (
         <ComponentFactory {...rest} key={i} nodeData={child} isCompact={isCompact} isExtraCompact={isExtraCompact} />
       ))}
