@@ -181,6 +181,7 @@ get your connection information.",
             "cloud/connectionstring",
             "cloud/migrate-from-aws-to-atlas",
           ],
+          "icon": "/images/chapter-icon-atlas.png",
         },
         "CRUD": Object {
           "chapter_number": 2,

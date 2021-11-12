@@ -4,6 +4,7 @@
       "Atlas": {
         "chapter_number": 1,
         "description": "Get up and running with MongoDB Atlas.\nLearn how to create a cluster, load a sample dataset, and\nget your connection information.",
+        "icon": "/images/chapter-icon-atlas.png",
         "guides": ["cloud/account", "cloud/connectionstring", "cloud/migrate-from-aws-to-atlas"]
       },
       "CRUD": {

@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'emotion-theming';
 import { mount } from 'enzyme';
 import mockData from './data/Chapters.test.json';
-import Chapters from '../../src/components/Chapters';
+import Chapters from '../../src/components/Chapters/Chapters';
 import { tick } from '../utils';
 import { SidenavContext } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';

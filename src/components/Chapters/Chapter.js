@@ -4,9 +4,9 @@ import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
-import Link from './Link';
-import { theme } from '../theme/docsTheme';
-import { getPlaintext } from '../utils/get-plaintext';
+import Link from '../Link';
+import { theme } from '../../theme/docsTheme';
+import { getPlaintext } from '../../utils/get-plaintext';
 
 // Height and width of image
 const IMAGE_SIZE = 200;

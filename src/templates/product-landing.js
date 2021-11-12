@@ -9,9 +9,8 @@ const CONTENT_MAX_WIDTH = 1200;
 
 const Wrapper = styled('main')`
   color: ${uiColors.black};
-  margin: 0 auto ${theme.size.xlarge} auto;
+  ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
   width: 100%;
-  overflow-x: auto;
 
   h1,
   h2,
