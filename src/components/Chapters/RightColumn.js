@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import Link from '../Link';
 import { SidenavContext } from '../Sidenav';
-import useStickyTopValues from '../../hooks/useStickyTopValues';
+import useVisibleOnScroll from '../../hooks/useVisibleOnScroll';
 import { theme } from '../../theme/docsTheme';
-import { isBrowser } from '../../utils/is-browser';
 
 const LearningCard = styled(LeafyGreenCard)`
   background-color: ${uiColors.white};
@@ -79,46 +78,8 @@ const LearningTitle = styled('div')`
 
 const RightColumn = () => {
   const { isCollapsed } = useContext(SidenavContext);
-  const { topLarge } = useStickyTopValues();
-  const [isVisible, setVisible] = useState(false);
-
   // Have children of the RightColumn appear as user scrolls past hero image on large screen sizes
-  useEffect(() => {
-    let sentinel;
-    let observer;
-    if (isBrowser) {
-      sentinel = document.querySelector('.hero-img');
-      if (sentinel) {
-        const { height } = sentinel.getBoundingClientRect();
-        const offsetFromHeader = theme.size.stripUnit(topLarge);
-        const thresholdRatio = offsetFromHeader / height;
-        // Added 0.8 as an additional threshold as a safety net
-        const options = {
-          threshold: [thresholdRatio, 0.8],
-        };
-
-        const callback = (entries) => {
-          // There should only be one entry
-          const entry = entries[0];
-          // The RightColumn content should be visible if the Header component goes over the hero image
-          if (entry.intersectionRatio <= thresholdRatio) {
-            setVisible(true);
-          } else {
-            setVisible(false);
-          }
-        };
-
-        let observer = new IntersectionObserver(callback, options);
-        observer.observe(sentinel);
-      }
-    }
-
-    return () => {
-      if (sentinel && observer) {
-        observer.unobserve(sentinel);
-      }
-    };
-  }, [topLarge]);
+  const isVisible = useVisibleOnScroll('.hero-img');
 
   return (
     <Container isSidenavCollapsed={isCollapsed} isVisible={isVisible}>

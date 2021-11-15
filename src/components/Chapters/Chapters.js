@@ -192,7 +192,9 @@ const Chapters = ({ metadata, nodeData: { children } }) => {
               </LeftColumn>
             </ChapterView>
           )}
-          {view === Views.Gallery.name && <CardGroup css={guidesCardsStyle} nodeData={galleryViewData} />}
+          {view === Views.Gallery.name && !!galleryViewData && (
+            <CardGroup css={guidesCardsStyle} nodeData={galleryViewData} />
+          )}
         </Content>
       </Grid>
     </Container>

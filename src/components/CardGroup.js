@@ -86,6 +86,7 @@ const CardGroup = ({
 };
 
 CardGroup.propTypes = {
+  className: PropTypes.string,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
     options: PropTypes.shape({
