@@ -15,7 +15,7 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <meta property="og:image" content="http://docs.mongodb.com/assets/meta_generic.png" />
       <meta property="og:image:secure_url" content="https://docs.mongodb.com/assets/meta_generic.png" />
       <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
-      <link rel="shortcut icon" href="https://media.mongodb.org/favicon.ico" />
+      <link rel="shortcut icon" href="https://docs.mongodb.com/assets/favicon.ico" />
       <link
         rel="search"
         type="application/opensearchdescription+xml"
