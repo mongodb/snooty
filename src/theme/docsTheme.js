@@ -63,7 +63,7 @@ const header = {
 const transitionSpeed = {
   iaExit: '100ms',
   iaEnter: '200ms',
-  contentFade: '500ms',
+  contentFade: '300ms',
 };
 
 export const theme = {

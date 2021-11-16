@@ -4,6 +4,7 @@
       "Atlas": {
         "chapter_number": 1,
         "description": "Get up and running with MongoDB Atlas.\nLearn how to create a cluster, load a sample dataset, and\nget your connection information.",
+        "icon": "/images/chapter-icon-atlas.png",
         "guides": ["cloud/account", "cloud/connectionstring", "cloud/migrate-from-aws-to-atlas"]
       },
       "CRUD": {
@@ -54,7 +55,7 @@
               "line": 0
             }
           },
-          "value": "Login to Atlas"
+          "value": "Set Up Atlas Connectivity"
         }]
       },
       "cloud/migrate-from-aws-to-atlas": {
@@ -68,7 +69,7 @@
               "line": 0
             }
           },
-          "value": "Launch your target replica set in MongoDB Atlas."
+          "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas"
         }]
       },
       "server/read": {
@@ -82,7 +83,7 @@
               "line": 0
             }
           },
-          "value": "Connect to your MongoDB instance."
+          "value": "Read Data in MongoDB"
         }]
       }
     }

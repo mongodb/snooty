@@ -2,19 +2,19 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
+import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
-import Link from './Link';
-import { theme } from '../theme/docsTheme';
-import { getPlaintext } from '../utils/get-plaintext';
+import Link from '../Link';
+import { theme } from '../../theme/docsTheme';
+import { getPlaintext } from '../../utils/get-plaintext';
 
 // Height and width of image
 const IMAGE_SIZE = 200;
 
-const Container = styled('div')`
+const Container = styled(Card)`
   background-color: ${uiColors.white};
   border-radius: ${theme.size.tiny};
   border: 1px solid ${uiColors.gray.light3};
-  margin: ${theme.size.small} 0;
   padding: ${theme.size.large} ${theme.size.medium};
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -107,8 +107,16 @@ const GuidesList = styled('ul')`
 const GuidesListItem = styled('li')`
   padding: 0 ${theme.size.small};
 
+  &:not(:last-child) {
+    margin-bottom: ${theme.size.default};
+  }
+
   @media ${theme.screenSize.mediumAndUp} {
     padding: 0 ${theme.size.tiny};
+
+    &:not(:last-child) {
+      margin-bottom: ${theme.size.small};
+    }
   }
 `;
 

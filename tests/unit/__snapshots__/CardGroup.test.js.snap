@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <StyledGrid
-  className="card-group"
+  className="card-group "
   columns={3}
   isCarousel={true}
   noMargin={true}
