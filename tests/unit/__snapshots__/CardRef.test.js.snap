@@ -145,7 +145,7 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-54 {
   font-weight: bold;
-  margin-top: 8px;
+  margin-top: auto;
 }
 
 .emotion-54 > a:hover {
@@ -472,13 +472,13 @@ exports[`card correctly with and without url 1`] = `
   }
 >
   <StyledGrid
-    className="card-group"
+    className="card-group "
     columns={3}
     isCarousel={false}
     noMargin={true}
   >
     <div
-      className="card-group emotion-66 emotion-67"
+      className="card-group  emotion-66 emotion-67"
     >
       <ComponentFactory
         isCompact={false}

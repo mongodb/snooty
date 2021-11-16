@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
+import { useSiteMetadata } from '../hooks/use-site-metadata.js';
 import { theme } from '../theme/docsTheme.js';
 
 const CONTENT_MAX_WIDTH = 1200;
 
 const Wrapper = styled('main')`
   color: ${uiColors.black};
-  margin: 0 auto ${theme.size.xlarge} auto;
+  ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
   width: 100%;
-  overflow-x: auto;
 
   h1,
   h2,
@@ -45,7 +45,6 @@ const Wrapper = styled('main')`
   }
 
   section p > a {
-    color: ${uiColors.blue.base};
     font-size: ${theme.fontSize.default};
     letter-spacing: 0.5px;
     :hover {
@@ -67,10 +66,21 @@ const Wrapper = styled('main')`
       grid-template-columns: 48px 1fr 48px;
     }
 
+    @media ${theme.screenSize.upToMedium} {
+      grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+    }
+
     h1 {
       align-self: end;
       grid-column: 2;
       grid-row: 1;
+      ${({ isGuides }) =>
+        isGuides &&
+        `
+        @media ${theme.screenSize.mediumAndUp} {
+          color: ${uiColors.white};
+        }
+      `}
     }
 
     & > img {
@@ -90,7 +100,7 @@ const Wrapper = styled('main')`
       grid-column: 1 / -1;
       grid-row: 1 / 3;
       height: 310px;
-      margin-bottom: ${theme.size.large};
+      ${({ isGuides }) => !isGuides && `margin-bottom: ${theme.size.large};`}
       max-width: 100%;
       object-fit: cover;
       z-index: -1;
@@ -109,6 +119,17 @@ const Wrapper = styled('main')`
     & > .introduction {
       grid-column: 2;
       grid-row: 2;
+      ${({ isGuides }) =>
+        isGuides &&
+        `
+        @media ${theme.screenSize.mediumAndUp} {
+          color: ${uiColors.white};
+        }
+      `}
+    }
+
+    & > .chapters {
+      grid-column: 1 / -1;
     }
 
     // Sub-sections should use all but the outer columns.
@@ -125,7 +146,9 @@ const Wrapper = styled('main')`
 `;
 
 const ProductLanding = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
+  const { project } = useSiteMetadata();
+  const isGuides = project === 'guides';
+  return <Wrapper isGuides={isGuides}>{children}</Wrapper>;
 };
 
 ProductLanding.propTypes = {

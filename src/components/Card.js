@@ -33,7 +33,7 @@ const H4 = styled('h4')`
 
 const CTA = styled('p')`
   font-weight: bold;
-  margin-top: ${theme.size.small};
+  margin-top: auto;
   & > a:hover {
     color: ${uiColors.blue.dark2};
   }

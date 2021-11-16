@@ -1,11 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.emotion-38 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+}
+
 .emotion-36 {
   background-color: #FFFFFF;
   border-radius: 4px;
   border: 1px solid #F9FBFA;
-  margin: 8px 0;
   padding: 32px 24px;
 }
 
@@ -109,9 +119,17 @@ exports[`renders correctly 1`] = `
   padding: 0 8px;
 }
 
+.emotion-16:not(:last-child) {
+  margin-bottom: 16px;
+}
+
 @media not all and (max-width:767px) {
   .emotion-16 {
     padding: 0 4px;
+  }
+
+  .emotion-16:not(:last-child) {
+    margin-bottom: 8px;
   }
 }
 
@@ -163,6 +181,7 @@ get your connection information.",
             "cloud/connectionstring",
             "cloud/migrate-from-aws-to-atlas",
           ],
+          "icon": "/images/chapter-icon-atlas.png",
         },
         "CRUD": Object {
           "chapter_number": 2,
@@ -223,7 +242,7 @@ guide for creating a MongoDB account.",
                 },
               },
               "type": "text",
-              "value": "Login to Atlas",
+              "value": "Set Up Atlas Connectivity",
             },
           ],
         },
@@ -239,7 +258,7 @@ guide for creating a MongoDB account.",
                 },
               },
               "type": "text",
-              "value": "Launch your target replica set in MongoDB Atlas.",
+              "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
             },
           ],
         },
@@ -255,7 +274,7 @@ guide for creating a MongoDB account.",
                 },
               },
               "type": "text",
-              "value": "Connect to your MongoDB instance.",
+              "value": "Read Data in MongoDB",
             },
           ],
         },
@@ -348,152 +367,160 @@ guide for creating a MongoDB account.",
   }
 >
   <Container>
-    <div
+    <Card
       className="emotion-36 emotion-37"
     >
-      <ChapterImage
-        altText="Chapter image for Atlas"
-        height={200}
-        src="/images/chapter-image-atlas.png"
-        width={200}
+      <Box
+        className="emotion-36 emotion-37 emotion-38"
       >
-        <img
-          className="emotion-0 emotion-1"
-          height={200}
-          src="/images/chapter-image-atlas.png"
-          width={200}
-        />
-      </ChapterImage>
-      <DescriptionContainer>
         <div
-          className="emotion-8 emotion-9"
+          className="emotion-36 emotion-37 emotion-38"
         >
-          <ChapterNumberLabel>
+          <ChapterImage
+            altText="Chapter image for Atlas"
+            height={200}
+            src="/images/chapter-image-atlas.png"
+            width={200}
+          >
+            <img
+              className="emotion-0 emotion-1"
+              height={200}
+              src="/images/chapter-image-atlas.png"
+              width={200}
+            />
+          </ChapterImage>
+          <DescriptionContainer>
             <div
-              className="emotion-2 emotion-3"
+              className="emotion-8 emotion-9"
             >
-              Chapter 
-              1
+              <ChapterNumberLabel>
+                <div
+                  className="emotion-2 emotion-3"
+                >
+                  Chapter 
+                  1
+                </div>
+              </ChapterNumberLabel>
+              <ChapterTitle>
+                <div
+                  className="emotion-4 emotion-5"
+                >
+                  Atlas
+                </div>
+              </ChapterTitle>
+              <ChapterDescription>
+                <div
+                  className="emotion-6 emotion-7"
+                >
+                  Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.
+                </div>
+              </ChapterDescription>
             </div>
-          </ChapterNumberLabel>
-          <ChapterTitle>
-            <div
-              className="emotion-4 emotion-5"
+          </DescriptionContainer>
+          <GuidesList>
+            <ul
+              className="emotion-34 emotion-35"
             >
-              Atlas
-            </div>
-          </ChapterTitle>
-          <ChapterDescription>
-            <div
-              className="emotion-6 emotion-7"
-            >
-              Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.
-            </div>
-          </ChapterDescription>
+              <GuidesListItem
+                key="Create and Manage a MongoDB Account-0"
+              >
+                <li
+                  className="emotion-16 emotion-17"
+                >
+                  <GuideLink
+                    to="cloud/account"
+                  >
+                    <Link
+                      className="emotion-10 emotion-11"
+                      to="cloud/account"
+                    >
+                      <mockConstructor
+                        className="emotion-10 emotion-11"
+                        to="/cloud/account/"
+                      >
+                        <a
+                          className="emotion-10 emotion-11"
+                          href="/cloud/account/"
+                        >
+                          <span>
+                            Create and Manage a MongoDB Account
+                          </span>
+                          <span>
+                            15 mins
+                          </span>
+                        </a>
+                      </mockConstructor>
+                    </Link>
+                  </GuideLink>
+                </li>
+              </GuidesListItem>
+              <GuidesListItem
+                key="Set Up Atlas Connectivity-1"
+              >
+                <li
+                  className="emotion-16 emotion-17"
+                >
+                  <GuideLink
+                    to="cloud/connectionstring"
+                  >
+                    <Link
+                      className="emotion-10 emotion-11"
+                      to="cloud/connectionstring"
+                    >
+                      <mockConstructor
+                        className="emotion-10 emotion-11"
+                        to="/cloud/connectionstring/"
+                      >
+                        <a
+                          className="emotion-10 emotion-11"
+                          href="/cloud/connectionstring/"
+                        >
+                          <span>
+                            Set Up Atlas Connectivity
+                          </span>
+                          <span />
+                        </a>
+                      </mockConstructor>
+                    </Link>
+                  </GuideLink>
+                </li>
+              </GuidesListItem>
+              <GuidesListItem
+                key="Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas-2"
+              >
+                <li
+                  className="emotion-16 emotion-17"
+                >
+                  <GuideLink
+                    to="cloud/migrate-from-aws-to-atlas"
+                  >
+                    <Link
+                      className="emotion-10 emotion-11"
+                      to="cloud/migrate-from-aws-to-atlas"
+                    >
+                      <mockConstructor
+                        className="emotion-10 emotion-11"
+                        to="/cloud/migrate-from-aws-to-atlas/"
+                      >
+                        <a
+                          className="emotion-10 emotion-11"
+                          href="/cloud/migrate-from-aws-to-atlas/"
+                        >
+                          <span>
+                            Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas
+                          </span>
+                          <span />
+                        </a>
+                      </mockConstructor>
+                    </Link>
+                  </GuideLink>
+                </li>
+              </GuidesListItem>
+            </ul>
+          </GuidesList>
         </div>
-      </DescriptionContainer>
-      <GuidesList>
-        <ul
-          className="emotion-34 emotion-35"
-        >
-          <GuidesListItem
-            key="Create and Manage a MongoDB Account-0"
-          >
-            <li
-              className="emotion-16 emotion-17"
-            >
-              <GuideLink
-                to="cloud/account"
-              >
-                <Link
-                  className="emotion-10 emotion-11"
-                  to="cloud/account"
-                >
-                  <mockConstructor
-                    className="emotion-10 emotion-11"
-                    to="/cloud/account/"
-                  >
-                    <a
-                      className="emotion-10 emotion-11"
-                      href="/cloud/account/"
-                    >
-                      <span>
-                        Create and Manage a MongoDB Account
-                      </span>
-                      <span>
-                        15 mins
-                      </span>
-                    </a>
-                  </mockConstructor>
-                </Link>
-              </GuideLink>
-            </li>
-          </GuidesListItem>
-          <GuidesListItem
-            key="Login to Atlas-1"
-          >
-            <li
-              className="emotion-16 emotion-17"
-            >
-              <GuideLink
-                to="cloud/connectionstring"
-              >
-                <Link
-                  className="emotion-10 emotion-11"
-                  to="cloud/connectionstring"
-                >
-                  <mockConstructor
-                    className="emotion-10 emotion-11"
-                    to="/cloud/connectionstring/"
-                  >
-                    <a
-                      className="emotion-10 emotion-11"
-                      href="/cloud/connectionstring/"
-                    >
-                      <span>
-                        Login to Atlas
-                      </span>
-                      <span />
-                    </a>
-                  </mockConstructor>
-                </Link>
-              </GuideLink>
-            </li>
-          </GuidesListItem>
-          <GuidesListItem
-            key="Launch your target replica set in MongoDB Atlas.-2"
-          >
-            <li
-              className="emotion-16 emotion-17"
-            >
-              <GuideLink
-                to="cloud/migrate-from-aws-to-atlas"
-              >
-                <Link
-                  className="emotion-10 emotion-11"
-                  to="cloud/migrate-from-aws-to-atlas"
-                >
-                  <mockConstructor
-                    className="emotion-10 emotion-11"
-                    to="/cloud/migrate-from-aws-to-atlas/"
-                  >
-                    <a
-                      className="emotion-10 emotion-11"
-                      href="/cloud/migrate-from-aws-to-atlas/"
-                    >
-                      <span>
-                        Launch your target replica set in MongoDB Atlas.
-                      </span>
-                      <span />
-                    </a>
-                  </mockConstructor>
-                </Link>
-              </GuideLink>
-            </li>
-          </GuidesListItem>
-        </ul>
-      </GuidesList>
-    </div>
+      </Box>
+    </Card>
   </Container>
 </Chapter>
 `;
