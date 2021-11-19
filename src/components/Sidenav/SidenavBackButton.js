@@ -27,8 +27,22 @@ const backButtonStyling = css`
   margin-bottom: 16px;
 `;
 
-const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, titleOverride, ...props }) => {
+const htmlBackIcon = css`
+  margin-right: ${theme.size.small};
+`;
+
+const SidenavBackButton = ({
+  border,
+  currentSlug,
+  enableGlyph = true,
+  handleClick,
+  project,
+  target,
+  titleOverride,
+  ...props
+}) => {
   const { completedFetch, parents } = useContext(NavigationContext);
+  const glyph = enableGlyph ? <Icon glyph="ArrowLeft" size="small" /> : null;
   let title = titleOverride;
   let url = target;
 
@@ -70,10 +84,11 @@ const SidenavBackButton = ({ border, currentSlug, handleClick, project, target, 
         as={Link}
         className={cx(sideNavItemBasePadding, backButtonStyling)}
         to={url}
-        glyph={<Icon glyph="ArrowLeft" size="small" />}
+        glyph={glyph}
         onClick={handleClick}
         {...props}
       >
+        {!enableGlyph && <span className={cx(htmlBackIcon)}>&#8592;</span>}
         Back to {formatText(title)}
       </SideNavItem>
       {border}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
 import { RedocStandalone } from 'redoc';
@@ -8,13 +8,25 @@ import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
 import { SidenavBackButton } from './Sidenav';
 import Spinner from './Spinner';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import useStickyTopValues from '../hooks/useStickyTopValues';
 import { theme } from '../theme/docsTheme';
+import { getPlaintext } from '../utils/get-plaintext';
+import { fetchOASFile } from '../utils/realm';
+
+// Important notes:
+// The contents of this file are (unfortunately) a hacky and brittle way of getting Redoc's React component to
+// look like our docs while maintaining the same workflow and processes for delivering docs.
+// CSS selectors were declared as specific as possible while also being flexible enough for reusable components.
+// Upgrading our version of Redoc may result in broken css rules, so please double-check afterwards.
 
 const badgeBorderRadius = '50px';
 const badgeBorderType = '1px solid';
 const codeFontFamily = 'Source Code Pro';
 const inlineCodeBackgroundColor = uiColors.gray.light3;
 const inlineCodeBorderColor = uiColors.gray.light1;
+const menuContentClass = 'menu-content';
+const menuTitleContainerClass = 'menu-title-container';
 const schemaDataTypeColor = uiColors.blue.dark3;
 const textFontFamily = 'Akzidenz';
 
@@ -135,9 +147,14 @@ const spanHttpCss = css`
   }
 `;
 
+const getTopAndHeight = (topValue) => css`
+  top: ${topValue} !important;
+  height: calc(100vh - ${topValue}) !important;
+`;
+
 // Overwrite css of Redoc's components that can be easily selected and that do not have
 // built-in theme options.
-const globalCSS = css`
+const getGlobalCss = ({ topLarge, topMedium }) => css`
   ${codeBlockCss}
   ${inlineCodeCss}
   ${leftSidebarCss}
@@ -151,8 +168,18 @@ const globalCSS = css`
     border-radius: ${badgeBorderRadius};
   }
 
-  .menu-title-container {
-    padding-top: 24px;
+  // Overwrite the menu/sidebar's top and height using css because Redoc's scrollYOffset
+  // option doesn't take into account React state changes associated with screen size and viewport hooks.
+  .${menuContentClass} {
+    ${getTopAndHeight(topLarge)}
+
+    @media ${theme.screenSize.upToLarge} {
+      ${getTopAndHeight(topMedium)}
+    }
+  }
+
+  .${menuTitleContainerClass} {
+    padding-top: ${theme.size.default};
 
     li {
       list-style: none inside none;
@@ -219,7 +246,9 @@ const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
 
   return (
     <>
-      <SidenavBackButton border={<Border />} target="/" titleOverride={docsTitle} />
+      {/* Disable LG left arrow glyph due to bug where additional copies of the LG icon would be rendered 
+          at the bottom of the page. */}
+      <SidenavBackButton border={<Border />} enableGlyph={false} target="/" titleOverride={docsTitle} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
@@ -227,8 +256,28 @@ const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
 
 const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
   const usesRST = options?.['uses-rst'];
-  // Keep track of if the Redoc component has already loaded once
-  const [load, setLoad] = useState(false);
+  const usesRealm = options?.['uses-realm'];
+  const { database } = useSiteMetadata();
+  const [realmSpec, setRealmSpec] = useState(null);
+  const topValues = useStickyTopValues();
+
+  // Attempt to fetch a spec from Realm
+  useEffect(() => {
+    const fetchData = async (apiName) => {
+      try {
+        if (usesRealm) {
+          const fileContent = await fetchOASFile(apiName, database);
+          setRealmSpec(fileContent);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    if (usesRealm) {
+      fetchData(getPlaintext(argument));
+    }
+  }, [argument, database, usesRealm]);
 
   // Use snooty openapi components, such as for docs-realm
   if (usesRST) {
@@ -241,49 +290,52 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
     );
   }
 
-  // Check for JSON string spec first
-  const spec = children[0]?.value;
-  const specOrUrl = spec ? JSON.parse(spec) : argument[0]?.refuri;
-  if (!specOrUrl) {
-    return null;
-  }
-  const pageTitle = page?.options?.title || '';
+  let spec = usesRealm ? realmSpec : JSON.parse(children[0]?.value);
+  // Create our loading widget
   const tempLoadingDivClassName = 'openapi-loading-container';
-  const siteTitle = metadata?.title;
+  if (!spec) {
+    return <LoadingWidget className={tempLoadingDivClassName} />;
+  }
 
   return (
     <>
-      <Global styles={globalCSS} />
+      <Global styles={getGlobalCss(topValues)} />
       {/* Temporary loading widget to be removed once the Redoc component loads */}
-      <LoadingWidget className={tempLoadingDivClassName} />
       <RedocStandalone
         onLoaded={() => {
-          if (load) {
-            return;
-          }
           // Remove temporary loading widget from DOM
           const tempLoadingDivEl = document.querySelector(`.${tempLoadingDivClassName}`);
           if (tempLoadingDivEl) {
             tempLoadingDivEl.remove();
           }
+          // Check if menu title container was already added
+          const menuTest = document.querySelector(`.${menuTitleContainerClass}`);
+          if (menuTest) {
+            return;
+          }
           // Insert back button and page title to redoc's sidenav
-          const sidebarEl = document.querySelector('.menu-content');
+          const sidebarEl = document.querySelector(`.${menuContentClass}`);
           if (sidebarEl) {
             const searchEl = document.querySelector('div[role="search"]');
             if (searchEl) {
               const menuTitleContainerEl = document.createElement('div');
-              menuTitleContainerEl.className = 'menu-title-container';
+              menuTitleContainerEl.className = menuTitleContainerClass;
               sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
+              const pageTitle = page?.options?.title || '';
+              const siteTitle = metadata?.title;
               render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
             }
           }
-          // Prevent showing the loading widget and side nav additions more than once
-          setLoad(true);
         }}
         options={{
           hideLoading: true,
           maxDisplayedEnumValues: 5,
           theme: {
+            breakpoints: {
+              small: '768px',
+              medium: '1024px',
+              large: '1200px',
+            },
             codeBlock: {
               backgroundColor: uiColors.black,
             },
@@ -358,8 +410,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
             },
           },
         }}
-        spec={specOrUrl}
-        specUrl={specOrUrl}
+        spec={spec}
       />
     </>
   );
