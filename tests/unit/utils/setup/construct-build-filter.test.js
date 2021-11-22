@@ -72,4 +72,16 @@ describe('constructBuildFilter', () => {
     filteredResults = mockMetadataDocs.filter(docsFilter(buildFilter));
     expect(filteredResults).toHaveLength(0);
   });
+
+  it('constructs a percy specific build filter when PERCY_BUILD is truthy', () => {
+    const expectedQuery = {
+      $regex: /^(realm\/docsworker-xlarge\/master(\/|$)|landing\/docsworker-xlarge\/master(\/|$)|manual\/docsworker-xlarge\/master(\/|$)|compass\/docsworker-xlarge\/master(\/|$))/,
+    };
+
+    process.env.PERCY_BUILD = true;
+
+    const buildFilter = constructBuildFilter({});
+    console.log(buildFilter);
+    expect(buildFilter.page_id.$regex).toEqual(expectedQuery.$regex);
+  });
 });

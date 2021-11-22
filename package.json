@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@percy/cli": "^1.0.0-beta.70",
     "auto-changelog": "^2.2.1",
     "babel-jest": "^26.6.3",
     "babel-plugin-emotion": "^10.0.33",
@@ -27,6 +28,7 @@
   "scripts": {
     "build": "gatsby build --prefix-paths",
     "build:clean": "npm run clean && npm run build",
+    "build:clean:serve": "npm run build:clean && npm run serve",
     "build:clean:stage": "npm run build:clean && make stage",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
@@ -35,6 +37,7 @@
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
+    "percy": "PERCY_BUILD=true npm run build:clean && npm exec percy snapshot ./public",
     "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
     "prettier": "prettier '**/*.{js,jsx,json,md}' '!docs-tools/**'",
