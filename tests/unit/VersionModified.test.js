@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import VersionModified from '../../src/components/VersionModified';
+import VersionModified from '../../src/components/ComponentFactory/VersionModified';
 
 // data for this component
 import { deprecated, versionadded, versionchanged } from './data/VersionModified.test.json';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, shallow } from 'enzyme';
 
-import RoleAbbr from '../../src/components/Roles/Abbr';
-import RoleGUILabel from '../../src/components/Roles/GUILabel';
-import RoleFile from '../../src/components/Roles/File';
+import RoleAbbr from '../../src/components/ComponentFactory/Roles/Abbr';
+import RoleGUILabel from '../../src/components/ComponentFactory/Roles/GUILabel';
+import RoleFile from '../../src/components/ComponentFactory/Roles/File';
 
 import mockDataGUILabel from './data/Role-guilabel.test.json';
 import mockDataFile from './data/Role-file.test.json';

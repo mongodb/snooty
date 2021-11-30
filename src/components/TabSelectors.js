@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
-import { TabContext } from './tab-context';
+import { TabContext } from './ComponentFactory/Tabs/tab-context';
 import Select from './Select';
 import { getPlaintext } from '../utils/get-plaintext';
 import { reportAnalytics } from '../utils/report-analytics';

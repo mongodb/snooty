@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@reach/router';
-import SearchResults from '../../src/components/SearchResults';
+import SearchResults from '../../src/components/ComponentFactory/SearchResults';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 
 // Check the search results include the property-filtered results

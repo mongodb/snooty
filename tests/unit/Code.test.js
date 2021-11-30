@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Code from '../../src/components/Code';
-import { CodeProvider } from '../../src/components/code-context';
-import { TabProvider } from '../../src/components/tab-context';
+import Code from '../../src/components/ComponentFactory/Code';
+import { CodeProvider } from '../../src/components/ComponentFactory/Code/code-context';
+import { TabProvider } from '../../src/components/ComponentFactory/Tabs/tab-context';
 import * as browserStorage from '../../src/utils/browser-storage';
 import { tick } from '../utils';
 

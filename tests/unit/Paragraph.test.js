@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Paragraph from '../../src/components/Paragraph';
+import Paragraph from '../../src/components/ComponentFactory/Paragraph';
 
 // data for this component
 import mockData from './data/Paragraph.test.json';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Line from '../../src/components/Line';
+import Line from '../../src/components/ComponentFactory/Line';
 
 // data for this component
 import mockData from './data/Line.test.json';

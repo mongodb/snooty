@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Tabs from '../../src/components/Tabs';
-import { TabProvider } from '../../src/components/tab-context';
+import Tabs from '../../src/components/ComponentFactory/Tabs';
+import { TabProvider } from '../../src/components/ComponentFactory/Tabs/tab-context';
 import { theme } from '../../src/theme/docsTheme';
 
 // data for this component

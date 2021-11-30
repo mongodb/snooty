@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Procedure from '../../src/components/Procedure';
+import Procedure from '../../src/components/ComponentFactory/Procedure';
 
 // data for this component
 import mockData from './data/Procedure.test.json';

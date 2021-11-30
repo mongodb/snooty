@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'enzyme';
-import ReleaseSpecification from '../../src/components/ReleaseSpecification';
+import ReleaseSpecification from '../../src/components/ComponentFactory/ReleaseSpecification';
 
 // data for this component
 import mockData from './data/ReleaseSpecification.test.json';

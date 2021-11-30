@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button from '../../src/components/Button';
+import Button from '../../src/components/ComponentFactory/Button';
 
 // data for this component
 import mockData from './data/Button.test.json';

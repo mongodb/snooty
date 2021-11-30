@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import StepYAML from '../../src/components/StepYAML';
+import StepYAML from '../../src/components/ComponentFactory/StepYAML';
 
 // data for this component
 import mockData from './data/StepYAML.test.json';

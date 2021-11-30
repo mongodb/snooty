@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from '../../src/components/Card';
+import Card from '../../src/components/ComponentFactory/Card';
 
 // data for this component
 import mockData from './data/Card.test.json';

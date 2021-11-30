@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Footnote from '../../src/components/Footnote';
-import FootnoteContext from '../../src/components/footnote-context';
+import Footnote from '../../src/components/ComponentFactory/Footnote';
+import FootnoteContext from '../../src/components/ComponentFactory/Footnote/footnote-context';
 
 // data for this component
 import mockData from './data/Footnote.test.json';

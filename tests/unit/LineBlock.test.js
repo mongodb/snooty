@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import LineBlock from '../../src/components/LineBlock';
+import LineBlock from '../../src/components/ComponentFactory/LineBlock';
 
 // data for this component
 import mockData from './data/Literal.test.json';

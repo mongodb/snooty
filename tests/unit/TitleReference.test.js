@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import TitleReference from '../../src/components/TitleReference';
+import TitleReference from '../../src/components/ComponentFactory/TitleReference';
 
 // data for this component
 import mockData from './data/TitleReference.test.json';

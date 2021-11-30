@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FieldList from '../../src/components/FieldList';
+import FieldList from '../../src/components/ComponentFactory/FieldList';
 
 // data for this component
 import mockData from './data/FieldList.test.json';

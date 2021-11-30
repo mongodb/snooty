@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Strong from '../../src/components/Strong';
+import Strong from '../../src/components/ComponentFactory/Strong';
 
 // data for this component
 import mockData from './data/Strong.test.json';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import BlockQuote from '../../src/components/BlockQuote';
+import BlockQuote from '../../src/components/ComponentFactory/BlockQuote';
 
 // data for this component
 import mockData from './data/BlockQuote.test.json';

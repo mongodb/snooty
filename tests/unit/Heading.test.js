@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'enzyme';
-import Heading from '../../src/components/Heading';
+import Heading from '../../src/components/ComponentFactory/Heading';
 
 // data for this component
 import mockData from './data/Heading.test.json';

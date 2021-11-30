@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { ThemeProvider } from 'emotion-theming';
-import CardGroup from '../../src/components/CardGroup';
+import CardGroup from '../../src/components/ComponentFactory/CardGroup';
 import { theme } from '../../src/theme/docsTheme';
 
 // data for this component

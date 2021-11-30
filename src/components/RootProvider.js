@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { HeaderContextProvider } from './header-context';
 import { NavigationProvider } from './navigation-context';
 import { SidenavContextProvider } from './Sidenav';
-import { TabProvider } from './tab-context';
+import { TabProvider } from './ComponentFactory/Tabs/tab-context';
 
 const RootProvider = ({ children, isSidenavEnabled, selectors }) => (
   <TabProvider selectors={selectors}>

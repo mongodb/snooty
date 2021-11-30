@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import * as reachRouter from '@reach/router';
-import Operation from '../../src/components/Operation';
+import Operation from '../../src/components/ComponentFactory/Operation';
 
 // data for this component
 import { onlyDescription, neitherSummaryNorDescription, bothSummaryAndDescription } from './data/Operation.test.json';

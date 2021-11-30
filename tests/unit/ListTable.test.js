@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount, render } from 'enzyme';
-import ListTable from '../../src/components/ListTable';
+import ListTable from '../../src/components/ComponentFactory/ListTable';
 import { matchers } from 'jest-emotion';
 
 import mockData from './data/ListTable.test.json';

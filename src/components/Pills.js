@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { stringifyTab } from '../constants';
 import { getNestedValue } from '../utils/get-nested-value';
 import { reportAnalytics } from '../utils/report-analytics';
-import { TabContext } from './tab-context';
+import { TabContext } from './ComponentFactory/Tabs/tab-context';
 import pillStyles from '../styles/pills.module.css';
 
 const Pills = ({ activeClass, dataTabPreference, isTruncated, liClass, pills, pillsetName, ulClass }) => {

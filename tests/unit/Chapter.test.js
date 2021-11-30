@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import mockData from './data/Chapters.test.json';
-import Chapter from '../../src/components/Chapters/Chapter';
+import Chapter from '../../src/components/ComponentFactory/Chapters/Chapter';
 
 it('renders correctly', () => {
   const chapterData = mockData.nodeData.children[0];

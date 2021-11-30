@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'enzyme';
-import MongoWebShell from '../../src/components/MongoWebShell';
+import MongoWebShell from '../../src/components/ComponentFactory/MongoWebShell';
 
 // data for this component
 import mockDataDefault from './data/MongoWebShell-default.test.json';

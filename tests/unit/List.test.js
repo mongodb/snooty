@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'enzyme';
-import List from '../../src/components/List';
+import List from '../../src/components/ComponentFactory/List';
 
 // data for this component
 import mockData from './data/List.test.json';

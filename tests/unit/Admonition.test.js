@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Admonition from '../../src/components/Admonition';
+import Admonition from '../../src/components/ComponentFactory/Admonition';
 
 // data for this component
 import mockData from './data/Admonition.test.json';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import LiteralInclude from '../../src/components/LiteralInclude';
+import LiteralInclude from '../../src/components/ComponentFactory/LiteralInclude';
 
 // data for this component
 import mockData from './data/LiteralInclude.test.json';

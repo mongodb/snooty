@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Pills from '../../src/components/Pills';
-import { TabContext } from '../../src/components/tab-context';
+import { TabContext } from '../../src/components/ComponentFactory/Tabs/tab-context';
 import { PLATFORMS } from '../../src/constants';
 
 const mountPills = ({ activeTabs, mockData, mockSetActiveTab }) =>

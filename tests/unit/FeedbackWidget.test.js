@@ -17,7 +17,7 @@ import {
   mockStitchFunctions,
   clearMockStitchFunctions,
 } from '../utils/feedbackWidgetStitchFunctions';
-import Heading from '../../src/components/Heading';
+import Heading from '../../src/components/ComponentFactory/Heading';
 import headingData from './data/Heading.test.json';
 import { theme } from '../../src/theme/docsTheme';
 
