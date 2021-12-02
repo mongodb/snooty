@@ -1,0 +1,44 @@
+import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { cx } from '@leafygreen-ui/emotion';
+import { SideNavItem } from '@leafygreen-ui/side-nav';
+import { sideNavItemBasePadding } from './styles/sideNavItem';
+import Link from '../Link';
+import { formatText } from '../../utils/format-text';
+
+const GuidesLandingTree = ({ chapters, handleClick }) => {
+  const processedNavItems = useMemo(() => {
+    const overviewHeading = { title: 'Overview', to: '/' };
+    let chapterHeadings = [overviewHeading];
+    let chaptersArr = Object.entries(chapters || {});
+    // Clicking on the chapter title in the side nav should bring user to the first
+    // guide of that chapter.
+    chaptersArr.forEach(([title, data]) => {
+      chapterHeadings.push({ title, to: data?.guides[0] });
+    });
+    return chapterHeadings;
+  }, [chapters]);
+
+  return (
+    <>
+      {processedNavItems.map(({ title, to }) => (
+        <SideNavItem
+          active={to === '/'}
+          as={Link}
+          className={cx(sideNavItemBasePadding)}
+          key={to}
+          onClick={handleClick}
+          to={to}
+        >
+          {formatText(title)}
+        </SideNavItem>
+      ))}
+    </>
+  );
+};
+
+GuidesLandingTree.propTypes = {
+  chapters: PropTypes.object,
+};
+
+export default GuidesLandingTree;

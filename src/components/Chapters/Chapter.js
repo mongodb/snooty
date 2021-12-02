@@ -7,6 +7,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
 import { getPlaintext } from '../../utils/get-plaintext';
+import ChapterNumberLabel from './ChapterNumberLabel';
 
 // Height and width of image
 const IMAGE_SIZE = 200;
@@ -71,16 +72,16 @@ const DescriptionContainer = styled('div')`
   }
 `;
 
-const ChapterNumberLabel = styled('div')`
-  background-color: ${uiColors.green.light3};
-  border-radius: ${theme.size.tiny};
-  color: ${uiColors.green.base};
-  font-size: ${theme.fontSize.small};
-  font-weight: bold;
-  height: ${theme.size.medium};
-  text-align: center;
-  width: 83px;
-`;
+// const ChapterNumberLabel = styled('div')`
+//   background-color: ${uiColors.green.light3};
+//   border-radius: ${theme.size.tiny};
+//   color: ${uiColors.green.base};
+//   font-size: ${theme.fontSize.small};
+//   font-weight: bold;
+//   height: ${theme.size.medium};
+//   text-align: center;
+//   width: 83px;
+// `;
 
 const ChapterTitle = styled('div')`
   font-size: 18px;
@@ -165,7 +166,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
   const guides = useMemo(() => getGuidesData(metadata, chapterTitle), [metadata, chapterTitle]);
 
   return (
-    <Container>
+    <Container id={options?.id}>
       {image ? (
         <ChapterImage
           src={withPrefix(image)}
@@ -177,7 +178,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
         <EmptyImage />
       )}
       <DescriptionContainer>
-        <ChapterNumberLabel>Chapter {chapterNumber}</ChapterNumberLabel>
+        <ChapterNumberLabel number={chapterNumber} />
         <ChapterTitle>{chapterTitle}</ChapterTitle>
         <ChapterDescription>{description}</ChapterDescription>
       </DescriptionContainer>
