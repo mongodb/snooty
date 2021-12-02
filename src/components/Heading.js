@@ -12,6 +12,7 @@ import Contents from './Contents';
 import { withPrefix } from 'gatsby';
 import Tooltip from '@leafygreen-ui/tooltip';
 import ClipboardJS from 'clipboard';
+import { isBrowser } from '../utils/is-browser';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
@@ -37,7 +38,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
 
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
-  const url = window.location.href.split('#')[0];
+  const url = isBrowser ? window.location.href.split('#')[0] : null;
 
   useEffect(() => {
     if (!headingNode) {
