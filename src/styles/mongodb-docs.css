@@ -11109,11 +11109,9 @@ a.headerlink {
   color: #13aa52;
   color: var(--mongodb-green);
   font-size: 0.8em;
-  padding: 0 4px;
   text-decoration: none;
 }
 a.headerlink:hover {
-  background-color: #c60f0f;
   color: #fff;
 }
 a.reference.external:after {

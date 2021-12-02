@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
@@ -9,8 +9,20 @@ import TabSelectors from './TabSelectors';
 import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
+import { withPrefix } from 'gatsby';
+import Tooltip from '@leafygreen-ui/tooltip';
+import ClipboardJS from 'clipboard';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
+
+const getHeadingStyle = () => {
+  const baseStyle = css`
+    align-self: center;
+    visibility: hidden;
+    padding: 0 10px;
+  `;
+  return baseStyle;
+};
 
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
@@ -22,6 +34,35 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader);
+
+  const [copied, setCopied] = useState(false);
+  const [headingNode, setHeadingNode] = useState(null);
+  const url = window.location.href.split('#')[0];
+
+  useEffect(() => {
+    if (!headingNode) {
+      return;
+    }
+
+    console.log(url);
+    const clipboard = new ClipboardJS(headingNode, {
+      text: () => url + '#' + id,
+    });
+
+    if (copied) {
+      const timeoutId = setTimeout(() => {
+        setCopied(false);
+      }, 1500);
+
+      return () => clearTimeout(timeoutId);
+    }
+    return () => clipboard.destroy();
+  }, [headingNode, url, id, copied]);
+
+  const handleClick = (e) => {
+    console.log('entered handle click');
+    setCopied(true);
+  };
 
   return (
     <>
@@ -42,8 +83,18 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
-          <a className="headerlink" href={`#${id}`} title="Permalink to this headline">
-            ¶
+          <a
+            className="headerlink"
+            ref={setHeadingNode}
+            css={getHeadingStyle}
+            href={`#${id}`}
+            onClick={handleClick}
+            title="Permalink to this headline"
+          >
+            <img src={withPrefix('assets/link.png')} alt="icons/link.png"></img>
+            <Tooltip triggerEvent="click" open={copied} align="top" justify="middle" darkMode={true}>
+              {'copied'}
+            </Tooltip>
           </a>
         </HeadingTag>
       </ConditionalWrapper>
