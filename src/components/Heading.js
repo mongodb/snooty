@@ -45,7 +45,6 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
       return;
     }
 
-    console.log(url);
     const clipboard = new ClipboardJS(headingNode, {
       text: () => url + '#' + id,
     });
@@ -61,7 +60,6 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   }, [headingNode, url, id, copied]);
 
   const handleClick = (e) => {
-    console.log('entered handle click');
     setCopied(true);
   };
 
