@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
+import Tooltip from '@leafygreen-ui/tooltip';
+import ClipboardJS from 'clipboard';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -9,21 +12,15 @@ import TabSelectors from './TabSelectors';
 import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
-import { withPrefix } from 'gatsby';
-import Tooltip from '@leafygreen-ui/tooltip';
-import ClipboardJS from 'clipboard';
 import { isBrowser } from '../utils/is-browser';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
-const getHeadingStyle = () => {
-  const baseStyle = css`
-    align-self: center;
-    visibility: hidden;
-    padding: 0 10px;
-  `;
-  return baseStyle;
-};
+const headingStyle = css`
+  align-self: center;
+  visibility: hidden;
+  padding: 0 10px;
+`;
 
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
@@ -38,7 +35,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
 
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
-  const url = isBrowser ? window.location.href.split('#')[0] : null;
+  const url = isBrowser ? window.location.href.split('#')[0] : '';
 
   useEffect(() => {
     if (!headingNode) {
@@ -85,7 +82,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           <a
             className="headerlink"
             ref={setHeadingNode}
-            css={getHeadingStyle}
+            css={headingStyle}
             href={`#${id}`}
             onClick={handleClick}
             title="Permalink to this headline"
