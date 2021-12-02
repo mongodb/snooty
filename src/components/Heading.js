@@ -13,6 +13,7 @@ import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import { isBrowser } from '../utils/is-browser';
+import useCopyClipboard from '../hooks/useCopyClipboard';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
@@ -37,24 +38,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const [headingNode, setHeadingNode] = useState(null);
   const url = isBrowser ? window.location.href.split('#')[0] : '';
 
-  useEffect(() => {
-    if (!headingNode) {
-      return;
-    }
-
-    const clipboard = new ClipboardJS(headingNode, {
-      text: () => url + '#' + id,
-    });
-
-    if (copied) {
-      const timeoutId = setTimeout(() => {
-        setCopied(false);
-      }, 1500);
-
-      return () => clearTimeout(timeoutId);
-    }
-    return () => clipboard.destroy();
-  }, [headingNode, url, id, copied]);
+  useCopyClipboard(copied, setCopied, headingNode, url + '#' + id);
 
   const handleClick = (e) => {
     setCopied(true);
