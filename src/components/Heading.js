@@ -35,9 +35,9 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
 
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
-  const url = isBrowser ? window.location.href.split('#')[0] : '';
+  const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
 
-  useCopyClipboard(copied, setCopied, headingNode, url + '#' + id);
+  useCopyClipboard(copied, setCopied, headingNode, url);
 
   const handleClick = (e) => {
     setCopied(true);
@@ -84,7 +84,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
 };
 
 const HeaderBuffer = styled.div`
-  margin-top: -170px;
+  margin-top: -225px;
   position: absolute;
 `;
 

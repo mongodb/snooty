@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 const useCopyClipboard = (copied, setCopied, component, contents) => {
   useEffect(() => {
+    // The component should be a ref
     if (!component) {
       return;
     }
