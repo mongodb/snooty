@@ -9,9 +9,13 @@ exports[`renders correctly 1`] = `
   padding: 0 10px;
 }
 
+.emotion-1 {
+  margin-top: -170px;
+  position: absolute;
+}
+
 <h3
   class="contains-headerlink"
-  id="create-an-administrative-username-and-password"
 >
   Create an administrative username and password
   <a
@@ -24,5 +28,9 @@ exports[`renders correctly 1`] = `
       src="/assets/link.png"
     />
   </a>
+  <div
+    class="emotion-1 emotion-2"
+    id="create-an-administrative-username-and-password"
+  />
 </h3>
 `;

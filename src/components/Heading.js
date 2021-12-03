@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import Tooltip from '@leafygreen-ui/tooltip';
-import ClipboardJS from 'clipboard';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -59,7 +58,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           </>
         )}
       >
-        <HeadingTag className="contains-headerlink" id={id}>
+        <HeadingTag className="contains-headerlink">
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
@@ -76,12 +75,18 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
               {'copied'}
             </Tooltip>
           </a>
+          <HeaderBuffer id={id}></HeaderBuffer>
         </HeadingTag>
       </ConditionalWrapper>
       {isPageTitle && <Contents />}
     </>
   );
 };
+
+const HeaderBuffer = styled.div`
+  margin-top: -170px;
+  position: absolute;
+`;
 
 const HeadingContainer = styled.div`
   display: flex;
