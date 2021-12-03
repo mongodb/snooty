@@ -38,7 +38,8 @@ const GuidesLandingTree = ({ chapters, handleClick }) => {
 };
 
 GuidesLandingTree.propTypes = {
-  chapters: PropTypes.object,
+  chapters: PropTypes.object.isRequired,
+  handleClick: PropTypes.func,
 };
 
 export default GuidesLandingTree;

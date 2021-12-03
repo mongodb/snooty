@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
@@ -8,7 +9,7 @@ import { formatText } from '../../utils/format-text';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { isCurrentPage } from '../../utils/is-current-page';
 
-const GuidesTOCTree = ({ chapters, guides, slug }) => {
+const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
   const currentChapterName = guides?.[slug]?.['chapter_name'];
   const guidesInChapter = chapters?.[currentChapterName]?.guides;
   const { activeHeadingId, headingNodes } = useContext(ContentsContext);
@@ -26,6 +27,7 @@ const GuidesTOCTree = ({ chapters, guides, slug }) => {
                 active={isActiveGuide && !activeHeadingId}
                 as={Link}
                 className={cx(sideNavItemTOCStyling({ level: 1 }))}
+                onClick={handleClick}
                 to={guide}
               >
                 {guideName}
@@ -37,6 +39,7 @@ const GuidesTOCTree = ({ chapters, guides, slug }) => {
                     as={Link}
                     className={cx(sideNavItemTOCStyling({ level: 2 }))}
                     key={id}
+                    onClick={handleClick}
                     to={`#${id}`}
                   >
                     {formatText(title)}
@@ -47,6 +50,13 @@ const GuidesTOCTree = ({ chapters, guides, slug }) => {
         })}
     </>
   );
+};
+
+GuidesTOCTree.propTypes = {
+  chapters: PropTypes.object.isRequired,
+  guides: PropTypes.object.isRequired,
+  handleClick: PropTypes.func,
+  slug: PropTypes.string.isRequired,
 };
 
 export default GuidesTOCTree;
