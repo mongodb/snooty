@@ -10,7 +10,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1 {
-  margin-top: -170px;
+  margin-top: -225px;
   position: absolute;
 }
 
