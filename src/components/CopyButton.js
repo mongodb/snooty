@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ClipboardJS from 'clipboard';
 import { css } from '@emotion/core';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
+import useCopyClipboard from '../hooks/useCopyClipboard';
 
 const getCopyButtonStyle = (copied) => {
   const baseStyle = css`
@@ -36,25 +36,7 @@ const CopyButton = ({ contents, onCopy }) => {
   const [copied, setCopied] = useState(false);
   const [buttonNode, setButtonNode] = useState(null);
 
-  useEffect(() => {
-    if (!buttonNode) {
-      return;
-    }
-
-    const clipboard = new ClipboardJS(buttonNode, {
-      text: () => contents,
-    });
-
-    if (copied) {
-      const timeoutId = setTimeout(() => {
-        setCopied(false);
-      }, 1500);
-
-      return () => clearTimeout(timeoutId);
-    }
-
-    return () => clipboard.destroy();
-  }, [buttonNode, contents, copied]);
+  useCopyClipboard(copied, setCopied, buttonNode, contents);
 
   const handleClick = (e) => {
     e.preventDefault();
