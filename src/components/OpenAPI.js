@@ -263,19 +263,11 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
 
   // Attempt to fetch a spec from Realm
   useEffect(() => {
-    const fetchData = async (apiName) => {
-      try {
-        if (usesRealm) {
-          const fileContent = await fetchOASFile(apiName, database);
-          setRealmSpec(fileContent);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    };
-
     if (usesRealm) {
-      fetchData(getPlaintext(argument));
+      const apiName = getPlaintext(argument);
+      fetchOASFile(apiName, database)
+        .then((response) => setRealmSpec(response))
+        .catch((e) => console.error(e));
     }
   }, [argument, database, usesRealm]);
 

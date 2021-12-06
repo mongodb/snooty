@@ -88,6 +88,10 @@ const SidenavBackButton = ({
         onClick={handleClick}
         {...props}
       >
+        {/*
+         * Uses HTML/text-based arrow instead of LG icon as a workaround for a bug where the
+         * icon can be rendered twice (see: OpenAPI component)
+         */}
         {!enableGlyph && <span className={cx(htmlBackIcon)}>&#8592;</span>}
         Back to {formatText(title)}
       </SideNavItem>
