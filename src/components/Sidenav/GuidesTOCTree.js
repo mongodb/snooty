@@ -24,7 +24,7 @@ const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
           return (
             <React.Fragment key={guide}>
               <SideNavItem
-                active={isActiveGuide && !activeHeadingId}
+                active={isActiveGuide}
                 as={Link}
                 className={cx(sideNavItemTOCStyling({ level: 1 }))}
                 onClick={handleClick}

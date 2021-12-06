@@ -79,6 +79,7 @@ const titleStyle = LeafyCss`
   :hover {
     background-color: inherit;
   }
+  text-transform: none;
 `;
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
