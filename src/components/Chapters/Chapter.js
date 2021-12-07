@@ -4,10 +4,10 @@ import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
+import ChapterNumberLabel from './ChapterNumberLabel';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
 import { getPlaintext } from '../../utils/get-plaintext';
-import ChapterNumberLabel from './ChapterNumberLabel';
 
 // Height and width of image
 const IMAGE_SIZE = 200;
@@ -71,17 +71,6 @@ const DescriptionContainer = styled('div')`
     grid-area: description;
   }
 `;
-
-// const ChapterNumberLabel = styled('div')`
-//   background-color: ${uiColors.green.light3};
-//   border-radius: ${theme.size.tiny};
-//   color: ${uiColors.green.base};
-//   font-size: ${theme.fontSize.small};
-//   font-weight: bold;
-//   height: ${theme.size.medium};
-//   text-align: center;
-//   width: 83px;
-// `;
 
 const ChapterTitle = styled('div')`
   font-size: 18px;

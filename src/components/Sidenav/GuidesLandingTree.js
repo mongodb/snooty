@@ -9,8 +9,8 @@ import { formatText } from '../../utils/format-text';
 const GuidesLandingTree = ({ chapters, handleClick }) => {
   const processedNavItems = useMemo(() => {
     const overviewHeading = { title: 'Overview', to: '/' };
-    let chapterHeadings = [overviewHeading];
-    let chaptersArr = Object.entries(chapters || {});
+    const chapterHeadings = [overviewHeading];
+    const chaptersArr = Object.entries(chapters || {});
     // Clicking on the chapter title in the side nav should bring user to the first
     // guide of that chapter.
     chaptersArr.forEach(([title, data]) => {

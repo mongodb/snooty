@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 const observeHeadings = (headingNodes, observer) =>
   headingNodes.flatMap((heading) => {
-    console.log('heading', heading);
     const el = document.getElementById(heading.id);
     if (el) {
       observer.observe(el);

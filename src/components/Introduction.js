@@ -5,8 +5,6 @@ import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
 const StyledIntroduction = styled('div')`
-  scroll-margin-top: 200px;
-
   .button {
     font-size: ${theme.fontSize.default};
     margin: ${theme.size.medium} ${theme.size.default} ${theme.size.default} 0;
@@ -33,7 +31,7 @@ const StyledIntroduction = styled('div')`
 
 const Introduction = ({ nodeData: { children }, ...rest }) => {
   return (
-    <StyledIntroduction className="introduction" id="introduction">
+    <StyledIntroduction className="introduction">
       {children.map((child, i) => (
         <ComponentFactory nodeData={child} key={i} {...rest} />
       ))}

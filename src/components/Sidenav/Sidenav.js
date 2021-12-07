@@ -18,6 +18,7 @@ import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
+import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useScreenSize from '../../hooks/useScreenSize';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -25,7 +26,6 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { DOCS_URL } from '../../constants';
-import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 
 const SIDENAV_WIDTH = 268;
 
@@ -76,10 +76,10 @@ const titleStyle = LeafyCss`
   font-size: ${theme.fontSize.default};
   font-weight: bold;
   line-height: 20px;
+  text-transform: none;
   :hover {
     background-color: inherit;
   }
-  text-transform: none;
 `;
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
