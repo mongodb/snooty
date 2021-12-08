@@ -34,7 +34,7 @@
     "format": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ext .js,.jsx .",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix --max-warnings 0",
     "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
     "prettier": "prettier '**/*.{js,jsx,json,md}' '!docs-tools/**'",
