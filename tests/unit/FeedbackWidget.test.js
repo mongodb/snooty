@@ -6,17 +6,13 @@ import {
   FeedbackTab,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
-import { BSON } from 'mongodb-stitch-server-sdk';
+import { BSON } from 'realm-web';
 import { matchers } from 'jest-emotion';
 
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
-import {
-  stitchFunctionMocks,
-  mockStitchFunctions,
-  clearMockStitchFunctions,
-} from '../utils/feedbackWidgetStitchFunctions';
+import { realmFunctionMocks, mockRealmFunctions, clearMockRealmFunctions } from '../utils/feedbackWidgetRealmFunctions';
 import Heading from '../../src/components/Heading';
 import headingData from './data/Heading.test.json';
 import { theme } from '../../src/theme/docsTheme';
@@ -59,8 +55,8 @@ describe('FeedbackWidget', () => {
   beforeAll(mockMutationObserver);
   beforeAll(mockSegmentAnalytics);
   beforeEach(setDesktop);
-  beforeEach(mockStitchFunctions);
-  afterEach(clearMockStitchFunctions);
+  beforeEach(mockRealmFunctions);
+  afterEach(clearMockRealmFunctions);
 
   describe('FeedbackTab', () => {
     it('shows the rating view when clicked', async () => {
@@ -191,7 +187,7 @@ describe('FeedbackWidget', () => {
       // Click the close button
       wrapper.find('FeedbackCard').find('CloseButton').simulate('click');
       await tick({ wrapper });
-      expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
+      expect(realmFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
       expect(wrapper.exists('FeedbackCard')).toBe(false);
     });
 
@@ -267,7 +263,7 @@ describe('FeedbackWidget', () => {
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(2))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(3))).toBe(false);
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
+        expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
 
         // Check the second qualifier
         wrapper.find('Qualifier').at(1).simulate('click');
@@ -276,7 +272,7 @@ describe('FeedbackWidget', () => {
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(2))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(3))).toBe(false);
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
+        expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
 
         // Uncheck the first qualifier
         wrapper.find('Qualifier').at(0).simulate('click');
@@ -285,7 +281,7 @@ describe('FeedbackWidget', () => {
         expect(isChecked(wrapper.find('Qualifier').at(1))).toBe(true);
         expect(isChecked(wrapper.find('Qualifier').at(2))).toBe(false);
         expect(isChecked(wrapper.find('Qualifier').at(3))).toBe(false);
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(3);
+        expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(3);
       });
 
       describe('when the Continue button is clicked', () => {
@@ -382,7 +378,7 @@ describe('FeedbackWidget', () => {
 
           wrapper.find('CommentView').find('SubmitButton').simulate('click');
           await tick({ wrapper });
-          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
+          expect(realmFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
           expect(wrapper.exists('CommentView')).toBe(false);
           expect(wrapper.exists('SubmittedView')).toBe(false);
           expect(wrapper.exists('SupportView')).toBe(true);
@@ -401,7 +397,7 @@ describe('FeedbackWidget', () => {
           wrapper.find('CommentView').find('SubmitButton').simulate('click');
           await tick({ wrapper });
 
-          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
+          expect(realmFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
           expect(wrapper.exists('CommentView')).toBe(false);
           expect(wrapper.exists('SubmittedView')).toBe(true);
         });

@@ -8,7 +8,7 @@ const validateEnvVariables = () => {
       message: `${process.env.NODE_ENV} requires the variables GATSBY_SITE, GATSBY_PARSER_USER, and GATSBY_PARSER_BRANCH`,
     };
   }
-  // create split prefix for use in stitch function
+  // create split prefix for use in realm function
   return {
     error: false,
   };

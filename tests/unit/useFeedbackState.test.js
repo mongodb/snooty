@@ -5,11 +5,7 @@ import { FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 import screenshot from './data/screenshot.test.json';
 
 import { tick, mockSegmentAnalytics } from '../utils';
-import {
-  stitchFunctionMocks,
-  mockStitchFunctions,
-  clearMockStitchFunctions,
-} from '../utils/feedbackWidgetStitchFunctions';
+import { realmFunctionMocks, mockRealmFunctions, clearMockRealmFunctions } from '../utils/feedbackWidgetRealmFunctions';
 
 const FeedbackStateTest = () => {
   const {
@@ -107,8 +103,8 @@ async function mountTest(data = {}) {
 describe('useFeedbackState', () => {
   jest.useFakeTimers();
   beforeAll(mockSegmentAnalytics);
-  beforeEach(mockStitchFunctions);
-  afterEach(clearMockStitchFunctions);
+  beforeEach(mockRealmFunctions);
+  afterEach(clearMockRealmFunctions);
 
   it('starts in the "waiting" view with no feedback initialized', async () => {
     const wrapper = await mountTest({});
@@ -122,7 +118,7 @@ describe('useFeedbackState', () => {
     await tick({ wrapper });
     expect(wrapper.find('#view').prop('value')).toBe('rating');
     expect(wrapper.exists('#feedback')).toBe(true);
-    expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
+    expect(realmFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('sets the feedback rating and transitions to the "qualifiers" view', async () => {
@@ -135,7 +131,7 @@ describe('useFeedbackState', () => {
     await tick({ wrapper });
     expect(wrapper.find('#rating').prop('value')).toBe(3);
     expect(wrapper.find('#view').prop('value')).toBe('qualifiers');
-    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('selects and unselects qualifiers', async () => {
@@ -155,7 +151,7 @@ describe('useFeedbackState', () => {
     await tick({ wrapper });
     expect(wrapper.find('#qualifier-1').prop('value')).toBe(true);
     // The qualifiers auto-save when they're set
-    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
 
     wrapper.find('button#setQualifier').prop('onClick')(
       wrapper.find('#qualifier-1').prop('qualifier_id'),
@@ -164,7 +160,7 @@ describe('useFeedbackState', () => {
     await tick({ wrapper });
     expect(wrapper.find('#qualifier-1').prop('value')).toBe(false);
     // The qualifiers auto-save when they're set
-    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
+    expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
   });
 
   it('submits qualifiers and transitions to the "comments" view', async () => {
@@ -178,7 +174,7 @@ describe('useFeedbackState', () => {
     await tick({ wrapper });
     expect(wrapper.find('#view').prop('value')).toBe('comment');
     // The qualifiers auto-save when they're set, so this doesn't actually update the feedback
-    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(0);
+    expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(0);
   });
 
   it('submits a comment', async () => {
@@ -192,7 +188,7 @@ describe('useFeedbackState', () => {
     wrapper.find('button#submitComment').prop('onClick')({ comment: 'Test Comment' });
     await tick({ wrapper });
     expect(wrapper.find('#comment').prop('value')).toBe('Test Comment');
-    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('submits a user email', async () => {
@@ -206,7 +202,7 @@ describe('useFeedbackState', () => {
     wrapper.find('button#submitComment').prop('onClick')({ comment: '', email: 'test@example.com' });
     await tick({ wrapper });
     expect(wrapper.find('#user-email').prop('value')).toBe('test@example.com');
-    expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
+    expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
   });
 
   it('attaches a screenshot', async () => {
@@ -218,7 +214,7 @@ describe('useFeedbackState', () => {
     });
     wrapper.find('button#submitScreenshot').prop('onClick')(screenshot);
     await tick({ wrapper });
-    expect(stitchFunctionMocks['addAttachment']).toHaveBeenCalledTimes(1);
+    expect(realmFunctionMocks['addAttachment']).toHaveBeenCalledTimes(1);
   });
 
   it('marks feedback as abandoned and resets state', async () => {
@@ -232,6 +228,6 @@ describe('useFeedbackState', () => {
     wrapper.find('button#abandon').prop('onClick')();
     await tick({ wrapper });
     expect(wrapper.find('#view').prop('value')).toBe('waiting');
-    expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
+    expect(realmFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
   });
 });

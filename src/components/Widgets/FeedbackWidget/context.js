@@ -4,9 +4,9 @@ import {
   updateFeedback,
   submitFeedback,
   abandonFeedback,
-  useStitchUser,
+  useRealmUser,
   addAttachment,
-} from './stitch';
+} from './realm';
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
 
@@ -16,7 +16,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
   const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
   const [view, setView] = React.useState(test.view || 'waiting');
-  const user = useStitchUser();
+  const user = useRealmUser();
 
   // Create a new feedback document
   async function initializeFeedback(nextView = 'rating') {
