@@ -1,10 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
-import * as RealmUtil from '../../src/utils/realm';
-import SiteBanner from '../../src/components/Banner/SiteBanner';
+import * as SiteBannerModule from '../../src/components/SiteBanner';
 import { HeaderContext } from '../../src/components/header-context';
 import { tick } from '../utils';
+
+const SiteBanner = SiteBannerModule.default;
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 const mockSnootyEnv = (snootyEnv) => {
@@ -37,7 +38,7 @@ describe('Banner component', () => {
 
   it('renders with a banner image', async () => {
     jest.useFakeTimers();
-    jest.spyOn(RealmUtil, 'fetchBanner').mockImplementation(() => mockBannerContent);
+    jest.spyOn(SiteBannerModule, 'fetchBanner').mockImplementation(() => mockBannerContent);
     const setBannerContent = jest.fn();
     const wrapper = render(
       <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent }}>

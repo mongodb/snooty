@@ -7,17 +7,13 @@ import {
   FeedbackTab,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
-import { BSON } from 'mongodb-stitch-server-sdk';
+import { BSON } from 'realm-web';
 import { matchers } from 'jest-emotion';
 
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
-import {
-  stitchFunctionMocks,
-  mockStitchFunctions,
-  clearMockStitchFunctions,
-} from '../utils/feedbackWidgetStitchFunctions';
+import { realmFunctionMocks, mockRealmFunctions, clearMockRealmFunctions } from '../utils/feedbackWidgetRealmFunctions';
 import Heading from '../../src/components/Heading';
 import headingData from './data/Heading.test.json';
 import { theme } from '../../src/theme/docsTheme';
@@ -60,8 +56,8 @@ describe('FeedbackWidget', () => {
   beforeAll(mockMutationObserver);
   beforeAll(mockSegmentAnalytics);
   beforeEach(setDesktop);
-  beforeEach(mockStitchFunctions);
-  afterEach(clearMockStitchFunctions);
+  beforeEach(mockRealmFunctions);
+  afterEach(clearMockRealmFunctions);
 
   describe('FeedbackTab (Desktop Viewport)', () => {
     it('shows the rating view when clicked', async () => {
@@ -158,7 +154,7 @@ describe('FeedbackWidget', () => {
       // Click the close button
       userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
       await tick();
-      expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
+      expect(realmFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
       expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
     });
 
@@ -207,7 +203,7 @@ describe('FeedbackWidget', () => {
         expect(wrapper.queryByText('What seems to be the issue?')).toBeTruthy();
       });
 
-      it('calls updateFeedback in stitch when qualifier clicked', async () => {
+      it('calls updateFeedback in Realm when qualifier clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'qualifiers',
           rating: 4,
@@ -220,16 +216,16 @@ describe('FeedbackWidget', () => {
         // Check the first qualifier
         userEvent.click(wrapper.queryAllByRole('checkbox')[0].closest('div'));
         await tick();
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
+        expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
 
         // Check the second qualifier
         userEvent.click(wrapper.queryAllByRole('checkbox')[1].closest('div'));
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
+        expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
 
         // Uncheck the first qualifier
         userEvent.click(wrapper.queryAllByRole('checkbox')[0].closest('div'));
         await tick();
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(3);
+        expect(realmFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(3);
       });
 
       describe('when the Continue button is clicked', () => {
@@ -303,7 +299,7 @@ describe('FeedbackWidget', () => {
           });
           userEvent.click(wrapper.getByText('Continue for Support').closest('button'));
           await tick();
-          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
+          expect(realmFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
           expect(wrapper.getByText('Create a case on the Support Portal')).toBeTruthy();
         });
       });
@@ -321,7 +317,7 @@ describe('FeedbackWidget', () => {
           userEvent.click(wrapper.getByText('Send').closest('button'));
           await tick();
 
-          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
+          expect(realmFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
         });
         it('raises an input error if an invalid email is specified', async () => {
           wrapper = await mountFormWithFeedbackState({

@@ -1,7 +1,7 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
-const { initStitch } = require('./src/utils/setup/init-stitch');
 const { isDotCom, dotcomifyUrl } = require('./src/utils/dotcom');
+const { callAuthenticatedFunction } = require('./src/utils/realm-node.js');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
@@ -24,9 +24,6 @@ const GUIDES_METADATA = {};
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
 
-// stich client connection
-let stitchClient;
-
 const assets = new Map();
 
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
@@ -39,10 +36,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     throw Error(envResults.message);
   }
 
-  // wait to connect to stitch
-  stitchClient = await initStitch();
-
-  const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, buildFilter]);
+  const documents = await callAuthenticatedFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, buildFilter]);
 
   if (documents.length === 0) {
     console.error('No documents matched your query.');
@@ -79,7 +73,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   // Get all MongoDB products for the sidenav
-  const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
+  const products = await callAuthenticatedFunction('fetchAllProducts', [siteMetadata.database]);
   products.forEach((product) => {
     // TODO: REMOVE AFTER DOP 2705
     let url = product.baseUrl + product.slug;
@@ -102,8 +96,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
   const [, { static_files: staticFiles, ...metadataMinusStatic }] = await Promise.all([
-    saveAssetFiles(assets, stitchClient),
-    stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
+    saveAssetFiles(assets, callAuthenticatedFunction),
+    callAuthenticatedFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
   ]);
 
   const { parentPaths, slugToTitle } = metadataMinusStatic;
