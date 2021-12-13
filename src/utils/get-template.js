@@ -14,6 +14,10 @@ const getTemplate = (templateName) => {
     case 'errorpage':
       template = NotFound;
       break;
+    case 'instruqt':
+      template = OpenAPITemplate;
+      sidenav = true;
+      break;
     case 'landing':
       template = Landing;
       sidenav = true;
