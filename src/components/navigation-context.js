@@ -9,7 +9,7 @@ const NavigationContext = React.createContext({
 });
 
 export async function fetchProjectParents(database, project) {
-  return await callAuthenticatedFunction('fetchProjectParents', database, project);
+  return await callAuthenticatedFunction('fetchProjectParents', [database, project]);
 }
 
 const NavigationProvider = ({ children }) => {

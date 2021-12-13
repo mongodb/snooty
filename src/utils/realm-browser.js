@@ -10,14 +10,14 @@ async function loginAnonymous() {
   return app.currentUser;
 }
 
-export async function callAuthenticatedFunction(funcName, ...argsList) {
+export async function callAuthenticatedFunction(funcName, argsList) {
   try {
     await loginAnonymous();
   } catch (err) {
     console.error(`Failed to authenticate`);
   }
   try {
-    return await app.currentUser.callFunction(funcName, ...argsList);
+    return await app.currentUser.functions[funcName](...argsList);
   } catch (err) {
     console.error(`Failed to call function: ${funcName}`);
   }

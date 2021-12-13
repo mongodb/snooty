@@ -15,7 +15,7 @@ const getBannerSource = (src) => {
 };
 
 export async function fetchBanner(snootyEnv) {
-  return await callAuthenticatedFunction('getBanner', snootyEnv === 'development');
+  return await callAuthenticatedFunction('getBanner', [snootyEnv === 'development']);
 }
 
 const StyledBannerContainer = styled.a`
