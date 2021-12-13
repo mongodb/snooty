@@ -13,10 +13,10 @@ const saveFile = async (file, data) => {
 };
 
 // Write all assets to static directory
-const saveAssetFiles = async (assets, callFunction) => {
+const saveAssetFiles = async (assets, fetchDocuments) => {
   if (assets.size) {
     const assetQuery = { _id: { $in: Array.from(assets.keys()) } };
-    const assetDataDocuments = await callFunction('fetchDocuments', [database, ASSETS_COLLECTION, assetQuery]);
+    const assetDataDocuments = await fetchDocuments(database, ASSETS_COLLECTION, assetQuery);
 
     const imageWrites = [];
     assetDataDocuments.forEach(({ _id, data: { buffer } }) => {

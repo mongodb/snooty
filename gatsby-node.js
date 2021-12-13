@@ -26,6 +26,17 @@ let RESOLVED_REF_DOC_MAPPING = {};
 
 const assets = new Map();
 
+// Realm function wrappers
+async function fetchDocument(db, collection, query) {
+  return await callAuthenticatedFunction('fetchDocument', [db, collection, query]);
+}
+async function fetchDocuments(db, collection, query) {
+  return await callAuthenticatedFunction('fetchDocuments', [db, collection, query]);
+}
+async function fetchAllProducts() {
+  return await callAuthenticatedFunction('fetchAllProducts', [siteMetadata.database]);
+}
+
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
 
@@ -36,7 +47,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     throw Error(envResults.message);
   }
 
-  const documents = await callAuthenticatedFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, buildFilter]);
+  const documents = await fetchDocuments(DB, DOCUMENTS_COLLECTION, buildFilter);
 
   if (documents.length === 0) {
     console.error('No documents matched your query.');
@@ -73,7 +84,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   // Get all MongoDB products for the sidenav
-  const products = await callAuthenticatedFunction('fetchAllProducts', [siteMetadata.database]);
+  const products = await fetchAllProducts();
   products.forEach((product) => {
     // TODO: REMOVE AFTER DOP 2705
     let url = product.baseUrl + product.slug;
@@ -96,8 +107,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
   const [, { static_files: staticFiles, ...metadataMinusStatic }] = await Promise.all([
-    saveAssetFiles(assets, callAuthenticatedFunction),
-    callAuthenticatedFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
+    saveAssetFiles(assets, fetchDocuments),
+    fetchDocument(DB, METADATA_COLLECTION, buildFilter),
   ]);
 
   const { parentPaths, slugToTitle } = metadataMinusStatic;
