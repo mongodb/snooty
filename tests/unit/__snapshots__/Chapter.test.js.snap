@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-.emotion-38 {
+.emotion-32 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -12,7 +12,7 @@ exports[`renders correctly 1`] = `
   color: #21313C;
 }
 
-.emotion-36 {
+.emotion-30 {
   background-color: #FFFFFF;
   border-radius: 4px;
   border: 1px solid #F9FBFA;
@@ -20,7 +20,7 @@ exports[`renders correctly 1`] = `
 }
 
 @media not all and (max-width:767px) {
-  .emotion-36 {
+  .emotion-30 {
     display: grid;
     grid-template-areas: 'description image' 'guides guides';
     padding: 48px 40px;
@@ -29,19 +29,19 @@ exports[`renders correctly 1`] = `
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-36 {
+  .emotion-30 {
     grid-column-gap: 40px;
   }
 }
 
 @media not all and (max-width:1440px) {
-  .emotion-36 {
+  .emotion-30 {
     grid-column-gap: 50px;
   }
 }
 
 @media not all and (max-width:1920px) {
-  .emotion-36 {
+  .emotion-30 {
     grid-column-gap: 108px;
   }
 }
@@ -101,7 +101,7 @@ exports[`renders correctly 1`] = `
   margin-top: 8px;
 }
 
-.emotion-34 {
+.emotion-28 {
   list-style-type: none;
   list-style-image: url(/assets/lightning-bolt.svg);
   margin-bottom: 0;
@@ -110,30 +110,13 @@ exports[`renders correctly 1`] = `
 }
 
 @media not all and (max-width:767px) {
-  .emotion-34 {
+  .emotion-28 {
     grid-area: guides;
   }
 }
 
-.emotion-16 {
-  padding: 0 8px;
-}
-
-.emotion-16:not(:last-child) {
-  margin-bottom: 16px;
-}
-
-@media not all and (max-width:767px) {
-  .emotion-16 {
-    padding: 0 4px;
-  }
-
-  .emotion-16:not(:last-child) {
-    margin-bottom: 8px;
-  }
-}
-
 .emotion-10 {
+  border-radius: 4px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -142,10 +125,12 @@ exports[`renders correctly 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  padding: 8px;
   position: relative;
 }
 
 .emotion-10:hover {
+  background-color: #E7EEEC;
   color: unset;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -164,6 +149,7 @@ exports[`renders correctly 1`] = `
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    padding: 4px 8px;
   }
 }
 
@@ -368,13 +354,13 @@ guide for creating a MongoDB account.",
 >
   <Container>
     <Card
-      className="emotion-36 emotion-37"
+      className="emotion-30 emotion-31"
     >
       <Box
-        className="emotion-36 emotion-37 emotion-38"
+        className="emotion-30 emotion-31 emotion-32"
       >
         <div
-          className="emotion-36 emotion-37 emotion-38"
+          className="emotion-30 emotion-31 emotion-32"
         >
           <ChapterImage
             altText="Chapter image for Atlas"
@@ -419,103 +405,91 @@ guide for creating a MongoDB account.",
           </DescriptionContainer>
           <GuidesList>
             <ul
-              className="emotion-34 emotion-35"
+              className="emotion-28 emotion-29"
             >
-              <GuidesListItem
+              <li
                 key="Create and Manage a MongoDB Account-0"
               >
-                <li
-                  className="emotion-16 emotion-17"
+                <GuideLink
+                  to="cloud/account"
                 >
-                  <GuideLink
+                  <Link
+                    className="emotion-10 emotion-11"
                     to="cloud/account"
                   >
-                    <Link
+                    <mockConstructor
                       className="emotion-10 emotion-11"
-                      to="cloud/account"
+                      to="/cloud/account/"
                     >
-                      <mockConstructor
+                      <a
                         className="emotion-10 emotion-11"
-                        to="/cloud/account/"
+                        href="/cloud/account/"
                       >
-                        <a
-                          className="emotion-10 emotion-11"
-                          href="/cloud/account/"
-                        >
-                          <span>
-                            Create and Manage a MongoDB Account
-                          </span>
-                          <span>
-                            15 mins
-                          </span>
-                        </a>
-                      </mockConstructor>
-                    </Link>
-                  </GuideLink>
-                </li>
-              </GuidesListItem>
-              <GuidesListItem
+                        <span>
+                          Create and Manage a MongoDB Account
+                        </span>
+                        <span>
+                          15 mins
+                        </span>
+                      </a>
+                    </mockConstructor>
+                  </Link>
+                </GuideLink>
+              </li>
+              <li
                 key="Set Up Atlas Connectivity-1"
               >
-                <li
-                  className="emotion-16 emotion-17"
+                <GuideLink
+                  to="cloud/connectionstring"
                 >
-                  <GuideLink
+                  <Link
+                    className="emotion-10 emotion-11"
                     to="cloud/connectionstring"
                   >
-                    <Link
+                    <mockConstructor
                       className="emotion-10 emotion-11"
-                      to="cloud/connectionstring"
+                      to="/cloud/connectionstring/"
                     >
-                      <mockConstructor
+                      <a
                         className="emotion-10 emotion-11"
-                        to="/cloud/connectionstring/"
+                        href="/cloud/connectionstring/"
                       >
-                        <a
-                          className="emotion-10 emotion-11"
-                          href="/cloud/connectionstring/"
-                        >
-                          <span>
-                            Set Up Atlas Connectivity
-                          </span>
-                          <span />
-                        </a>
-                      </mockConstructor>
-                    </Link>
-                  </GuideLink>
-                </li>
-              </GuidesListItem>
-              <GuidesListItem
+                        <span>
+                          Set Up Atlas Connectivity
+                        </span>
+                        <span />
+                      </a>
+                    </mockConstructor>
+                  </Link>
+                </GuideLink>
+              </li>
+              <li
                 key="Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas-2"
               >
-                <li
-                  className="emotion-16 emotion-17"
+                <GuideLink
+                  to="cloud/migrate-from-aws-to-atlas"
                 >
-                  <GuideLink
+                  <Link
+                    className="emotion-10 emotion-11"
                     to="cloud/migrate-from-aws-to-atlas"
                   >
-                    <Link
+                    <mockConstructor
                       className="emotion-10 emotion-11"
-                      to="cloud/migrate-from-aws-to-atlas"
+                      to="/cloud/migrate-from-aws-to-atlas/"
                     >
-                      <mockConstructor
+                      <a
                         className="emotion-10 emotion-11"
-                        to="/cloud/migrate-from-aws-to-atlas/"
+                        href="/cloud/migrate-from-aws-to-atlas/"
                       >
-                        <a
-                          className="emotion-10 emotion-11"
-                          href="/cloud/migrate-from-aws-to-atlas/"
-                        >
-                          <span>
-                            Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas
-                          </span>
-                          <span />
-                        </a>
-                      </mockConstructor>
-                    </Link>
-                  </GuideLink>
-                </li>
-              </GuidesListItem>
+                        <span>
+                          Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas
+                        </span>
+                        <span />
+                      </a>
+                    </mockConstructor>
+                  </Link>
+                </GuideLink>
+              </li>
             </ul>
           </GuidesList>
         </div>
