@@ -29,7 +29,7 @@ const Header = ({ sidenav }) => {
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        <UnifiedNav position="relative" property={unifiedNavProperty} />
+        <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} />
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
