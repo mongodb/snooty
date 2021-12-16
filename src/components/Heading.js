@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import Tooltip from '@leafygreen-ui/tooltip';
+import Badge from '@leafygreen-ui/badge';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -22,6 +23,20 @@ const headingStyle = css`
   padding: 0 10px;
 `;
 
+const syncPillStyle = (sectionDepth) => css`
+  align-self: center;
+  margin-left: 15px;
+  position: relative;
+  display: ${sectionDepth === 1 ? 'inline-block' : 'none'};
+  top: -4px;
+  padding-bottom: 5px;
+`;
+
+const cloudSyncStyle = css`
+  padding-right: 8px;
+  padding-bottom: 4px;
+`;
+
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
@@ -36,6 +51,8 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
+
+  const [isHovered, setIsHovered] = React.useState(false);
 
   useCopyClipboard(copied, setCopied, headingNode, url);
 
@@ -62,6 +79,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
+
           <a
             className="headerlink"
             ref={setHeadingNode}
@@ -82,6 +100,24 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
     </>
   );
 };
+
+/*
+
+<Badge variant="lightgray" className="my-badge" css={syncPillStyle(sectionDepth)}>
+  <img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}></img>
+  APP SERVICES
+  <Tooltip triggerEvent="hover" align="top" justify="start" darkMode={true} open={isHovered}>
+    {'This involves Realm App Services.\nYou will need an Atlas account.'}
+  </Tooltip>
+</Badge>
+
+*/
+
+const PillSyncCloud = styled.div(
+  ({ sectionDepth }) => css`
+    visibility: ${sectionDepth === 1 ? 'visible' : 'hidden'};
+  `
+);
 
 const HeaderBuffer = styled.div`
   margin-top: -225px;
