@@ -63,10 +63,10 @@ const EmptyResults = () => {
         <MagnifyingGlass glyph="MagnifyingGlass" />
       </MagnifyingGlassButton>
       <TitleText>
-        <strong>Search MongoDB Documentation</strong>
+        <strong>No results found. Please search again.</strong>
       </TitleText>
       <SupportingText>
-        Find guides, examples, and best practices for working with the MongoDB data platform.
+        Sorry. We weren't able to find any results for your query. The page might have been moved or deleted.
       </SupportingText>
     </EmptyStateContainer>
   );
