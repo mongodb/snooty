@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
+import Tooltip from '@leafygreen-ui/tooltip';
+import Icon from '@leafygreen-ui/icon';
+import { withPrefix } from 'gatsby';
+import styled from '@emotion/styled';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
+import RoleIcon from '../Roles/Icon';
 
 const sideNavItemStyling = ({ level }) => css`
   color: ${uiColors.gray.dark3};
@@ -16,6 +21,10 @@ const sideNavItemStyling = ({ level }) => css`
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.small};
   text-transform: none;
+`;
+
+const cloudSyncStyle = css`
+  padding-right: 10px;
 `;
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
@@ -34,6 +43,8 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
 
+  const [iconShown, setIconShown] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(isActive);
 
   // If the active state of this node changes, change the open state to reflect it
@@ -58,6 +69,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
             setIsOpen(!isOpen);
           }}
         >
+          <SyncCloud>
+            <Icon glyph="Cloud" fill="#000000" />
+          </SyncCloud>
           {formattedTitle}
         </SideNavItem>
       );
@@ -70,6 +84,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         className={cx(sideNavItemStyling({ level }))}
         onClick={handleClick}
       >
+        <SyncCloud>
+          <Icon glyph="Cloud" fill="#000000" />
+        </SyncCloud>
         {formattedTitle}
       </SideNavItem>
     );
@@ -88,6 +105,30 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     </>
   );
 };
+
+const SyncCloud = styled.div`
+  padding-right: 10px;
+`;
+
+/*
+
+<SyncCloud>
+  <Icon glyph="Cloud" fill="#000000" />
+</SyncCloud>
+<Tooltip triggerEvent="hover" align="top" justify="start" darkMode={true} open={isHovered}>
+  {'showing tooltip'}
+</Tooltip>
+
+<SyncCloud>
+  <Icon glyph="Cloud" fill="#000000" />
+</SyncCloud>
+<Tooltip triggerEvent="hover" align="top" justify="start" darkMode={true} open={isHovered}>
+  {'showing tooltip'}
+</Tooltip>
+
+*/
+
+//<img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}></img>
 
 TOCNode.propTypes = {
   level: PropTypes.number,

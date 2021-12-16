@@ -81,6 +81,7 @@ import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
+import CloudSync from './Roles/CloudSync';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -118,6 +119,7 @@ const roleMap = {
   subscript: Subscript,
   sup: Superscript,
   superscript: Superscript,
+  cloudsync: CloudSync,
 };
 
 const componentMap = {
@@ -216,6 +218,12 @@ const ComponentFactory = (props) => {
     let ComponentType = componentMap[lookup];
 
     if (type === 'role') {
+      if (name === 'icon') {
+        const { target } = nodeData;
+        if (target === 'sync-pill') {
+          // now the cloud should be there
+        }
+      }
       ComponentType = roleMap[name];
     }
 
