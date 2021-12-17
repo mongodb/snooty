@@ -70,7 +70,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
             onClick={handleClick}
             title="Permalink to this headline"
           >
-            <img src={withPrefix('assets/link.png')} alt="icons/link.png"></img>
+            <LinkIcon src={withPrefix('assets/link.png')} alt="icons/link.png" />
             <Tooltip triggerEvent="click" open={copied} align="top" justify="middle" darkMode={true}>
               {'copied'}
             </Tooltip>
@@ -103,6 +103,12 @@ const ChildContainer = styled.div(
     align-items: ${isStacked ? 'flex-start' : 'center'};
   `
 );
+
+const LinkIcon = styled.img`
+  border-radius: 0 !important;
+  display: initial !important;
+  margin: initial !important;
+`;
 
 Heading.propTypes = {
   sectionDepth: PropTypes.number.isRequired,
