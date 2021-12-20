@@ -44,29 +44,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     if (isTocIcon && isDrawer && hasChildren) {
       return (
         <SideNavItem
-          className={cx(sideNavItemStyling({ level }))}
+          className={cx(sideNavItemTOCStyling({ level }))}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
         >
-          <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <Icon glyph="Cloud" fill="#000000" />
-            <Tooltip
-              usePortal={true}
-              className={cx(toolTipStyling)}
-              portalClassName={cx(toolTipStyling)}
-              triggerEvent="hover"
-              align="top"
-              justify="middle"
-              darkMode={true}
-              open={isHovered}
-              popoverZIndex={2}
-            >
-              This involves Realm App Services.
-              <br></br>
-              You will need an Atlas account.
-            </Tooltip>
-          </SyncCloud>
+          {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
       );
