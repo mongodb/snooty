@@ -5,13 +5,12 @@ import Badge from '@leafygreen-ui/badge';
 import { css } from '@emotion/core';
 
 const cloudSyncStyle = css`
-  padding-right: 8px;
-  padding-bottom: 2px;
+  padding-right: 7px;
 `;
 
 const syncPillStyle = css`
   align-self: center;
-  margin-left: 5px;
+  margin-left: 4px;
   position: relative;
   top: -3px;
 `;

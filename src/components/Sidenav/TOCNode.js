@@ -5,14 +5,12 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Tooltip from '@leafygreen-ui/tooltip';
 import Icon from '@leafygreen-ui/icon';
-import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
-import RoleIcon from '../Roles/Icon';
 
 const sideNavItemStyling = ({ level }) => css`
   color: ${uiColors.gray.dark3};
@@ -23,8 +21,8 @@ const sideNavItemStyling = ({ level }) => css`
   text-transform: none;
 `;
 
-const cloudSyncStyle = css`
-  padding-right: 10px;
+const toolTipStyling = css`
+  left: 35px;
 `;
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
@@ -42,8 +40,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
-
-  const [iconShown, setIconShown] = useState(false);
+  const isTocIcon = !!options.tocicon;
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(isActive);
 
@@ -61,7 +58,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
     const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
 
-    if (isDrawer && hasChildren) {
+    if (isTocIcon && isDrawer && hasChildren) {
       return (
         <SideNavItem
           className={cx(sideNavItemStyling({ level }))}
@@ -69,8 +66,64 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
             setIsOpen(!isOpen);
           }}
         >
-          <SyncCloud>
+          <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <Icon glyph="Cloud" fill="#000000" />
+            <Tooltip
+              usePortal={true}
+              className={cx(toolTipStyling)}
+              portalClassName={cx(toolTipStyling)}
+              triggerEvent="hover"
+              align="top"
+              justify="middle"
+              darkMode={true}
+              open={isHovered}
+              popoverZIndex={2}
+            >
+              This involves Realm App Services.
+              <br></br>
+              You will need an Atlas account.
+            </Tooltip>
+          </SyncCloud>
+          {formattedTitle}
+        </SideNavItem>
+      );
+    } else if (isDrawer && hasChildren) {
+      return (
+        <SideNavItem
+          className={cx(sideNavItemStyling({ level }))}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          {formattedTitle}
+        </SideNavItem>
+      );
+    } else if (isTocIcon) {
+      return (
+        <SideNavItem
+          as={Link}
+          to={target}
+          active={isSelected}
+          className={cx(sideNavItemStyling({ level }))}
+          onClick={handleClick}
+        >
+          <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <Icon glyph="Cloud" fill="#000000" />
+            <Tooltip
+              usePortal={true}
+              className={cx(toolTipStyling)}
+              portalClassName={cx(toolTipStyling)}
+              triggerEvent="hover"
+              align="top"
+              justify="middle"
+              darkMode={true}
+              open={isHovered}
+              popoverZIndex={2}
+            >
+              This involves Realm App Services.
+              <br></br>
+              You will need an Atlas account.
+            </Tooltip>
           </SyncCloud>
           {formattedTitle}
         </SideNavItem>
@@ -84,9 +137,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         className={cx(sideNavItemStyling({ level }))}
         onClick={handleClick}
       >
-        <SyncCloud>
-          <Icon glyph="Cloud" fill="#000000" />
-        </SyncCloud>
         {formattedTitle}
       </SideNavItem>
     );
@@ -108,27 +158,8 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
 
 const SyncCloud = styled.div`
   padding-right: 10px;
+  margin-top: 5px;
 `;
-
-/*
-
-<SyncCloud>
-  <Icon glyph="Cloud" fill="#000000" />
-</SyncCloud>
-<Tooltip triggerEvent="hover" align="top" justify="start" darkMode={true} open={isHovered}>
-  {'showing tooltip'}
-</Tooltip>
-
-<SyncCloud>
-  <Icon glyph="Cloud" fill="#000000" />
-</SyncCloud>
-<Tooltip triggerEvent="hover" align="top" justify="start" darkMode={true} open={isHovered}>
-  {'showing tooltip'}
-</Tooltip>
-
-*/
-
-//<img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}></img>
 
 TOCNode.propTypes = {
   level: PropTypes.number,
@@ -136,6 +167,7 @@ TOCNode.propTypes = {
     children: PropTypes.array.isRequired,
     options: PropTypes.shape({
       drawer: PropTypes.bool,
+      tocicon: PropTypes.bool,
       styles: PropTypes.objectOf(PropTypes.string),
     }),
     slug: PropTypes.string,
