@@ -21,10 +21,6 @@ const sideNavItemStyling = ({ level }) => css`
   text-transform: none;
 `;
 
-const toolTipStyling = css`
-  left: 35px;
-`;
-
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
 const BASE_NODE_LEVEL = 1;
@@ -69,9 +65,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <Icon glyph="Cloud" fill="#000000" />
             <Tooltip
-              usePortal={true}
-              className={cx(toolTipStyling)}
-              portalClassName={cx(toolTipStyling)}
               triggerEvent="hover"
               align="top"
               justify="middle"
@@ -110,9 +103,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <Icon glyph="Cloud" fill="#000000" />
             <Tooltip
-              usePortal={true}
-              className={cx(toolTipStyling)}
-              portalClassName={cx(toolTipStyling)}
               triggerEvent="hover"
               align="top"
               justify="middle"
@@ -157,7 +147,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
 };
 
 const SyncCloud = styled.div`
-  padding-right: 10px;
+  margin-right: 10px;
   margin-top: 5px;
 `;
 
