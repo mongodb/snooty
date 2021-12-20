@@ -41,7 +41,36 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
     const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
 
-    if (isDrawer && hasChildren) {
+    if (isTocIcon && isDrawer && hasChildren) {
+      return (
+        <SideNavItem
+          className={cx(sideNavItemStyling({ level }))}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <Icon glyph="Cloud" fill="#000000" />
+            <Tooltip
+              usePortal={true}
+              className={cx(toolTipStyling)}
+              portalClassName={cx(toolTipStyling)}
+              triggerEvent="hover"
+              align="top"
+              justify="middle"
+              darkMode={true}
+              open={isHovered}
+              popoverZIndex={2}
+            >
+              This involves Realm App Services.
+              <br></br>
+              You will need an Atlas account.
+            </Tooltip>
+          </SyncCloud>
+          {formattedTitle}
+        </SideNavItem>
+      );
+    } else if (isDrawer && hasChildren) {
       return (
         <SideNavItem
           className={cx(sideNavItemTOCStyling({ level }))}
