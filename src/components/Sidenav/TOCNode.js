@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import Tooltip from '@leafygreen-ui/tooltip';
-import Icon from '@leafygreen-ui/icon';
-import styled from '@emotion/styled';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
+import SyncCloud from '../SyncCloud';
 
 const sideNavItemStyling = ({ level }) => css`
   color: ${uiColors.gray.dark3};
@@ -37,7 +35,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
   const isTocIcon = !!options.tocicon;
-  const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(isActive);
 
   // If the active state of this node changes, change the open state to reflect it
@@ -54,7 +51,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
     const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
 
-    if (isTocIcon && isDrawer && hasChildren) {
+    if (isDrawer && hasChildren) {
       return (
         <SideNavItem
           className={cx(sideNavItemStyling({ level }))}
@@ -62,59 +59,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
             setIsOpen(!isOpen);
           }}
         >
-          <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <Icon glyph="Cloud" fill="#000000" />
-            <Tooltip
-              triggerEvent="hover"
-              align="top"
-              justify="middle"
-              darkMode={true}
-              open={isHovered}
-              popoverZIndex={2}
-            >
-              This involves Realm App Services.
-              <br></br>
-              You will need an Atlas account.
-            </Tooltip>
-          </SyncCloud>
-          {formattedTitle}
-        </SideNavItem>
-      );
-    } else if (isDrawer && hasChildren) {
-      return (
-        <SideNavItem
-          className={cx(sideNavItemStyling({ level }))}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          {formattedTitle}
-        </SideNavItem>
-      );
-    } else if (isTocIcon) {
-      return (
-        <SideNavItem
-          as={Link}
-          to={target}
-          active={isSelected}
-          className={cx(sideNavItemStyling({ level }))}
-          onClick={handleClick}
-        >
-          <SyncCloud onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <Icon glyph="Cloud" fill="#000000" />
-            <Tooltip
-              triggerEvent="hover"
-              align="top"
-              justify="middle"
-              darkMode={true}
-              open={isHovered}
-              popoverZIndex={2}
-            >
-              This involves Realm App Services.
-              <br></br>
-              You will need an Atlas account.
-            </Tooltip>
-          </SyncCloud>
+          {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
       );
@@ -127,6 +72,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         className={cx(sideNavItemStyling({ level }))}
         onClick={handleClick}
       >
+        {isTocIcon && <SyncCloud />}
         {formattedTitle}
       </SideNavItem>
     );
@@ -145,11 +91,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     </>
   );
 };
-
-const SyncCloud = styled.div`
-  margin-right: 10px;
-  margin-top: 5px;
-`;
 
 TOCNode.propTypes = {
   level: PropTypes.number,
