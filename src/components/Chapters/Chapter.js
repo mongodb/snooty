@@ -94,29 +94,16 @@ const GuidesList = styled('ul')`
   }
 `;
 
-const GuidesListItem = styled('li')`
-  padding: 0 ${theme.size.small};
-
-  &:not(:last-child) {
-    margin-bottom: ${theme.size.default};
-  }
-
-  @media ${theme.screenSize.mediumAndUp} {
-    padding: 0 ${theme.size.tiny};
-
-    &:not(:last-child) {
-      margin-bottom: ${theme.size.small};
-    }
-  }
-`;
-
 const GuideLink = styled(Link)`
+  border-radius: ${theme.size.tiny};
   display: flex;
   color: unset;
   flex-direction: column;
+  padding: ${theme.size.small};
   position: relative;
 
   :hover {
+    background-color: ${uiColors.gray.light2};
     color: unset;
     text-decoration: none;
   }
@@ -125,6 +112,7 @@ const GuideLink = styled(Link)`
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
+    padding: ${theme.size.tiny} ${theme.size.small};
   }
 `;
 
@@ -177,12 +165,12 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
           const guideTitle = getPlaintext(guide.title);
 
           return (
-            <GuidesListItem key={`${guideTitle}-${i}`}>
+            <li key={`${guideTitle}-${i}`}>
               <GuideLink to={guide.path}>
                 <span>{guideTitle}</span>
                 <span>{time}</span>
               </GuideLink>
-            </GuidesListItem>
+            </li>
           );
         })}
       </GuidesList>
