@@ -62,7 +62,6 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
-
           <a
             className="headerlink"
             ref={setHeadingNode}
