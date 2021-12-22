@@ -10,7 +10,7 @@ export const formatText = (text, options) => {
     ? text
     : text.map((e, index) => {
         if (e.name === 'icon') {
-          return '';
+          return null;
         }
         return <ComponentFactory key={index} nodeData={e} formatTextOptions={options} />;
       });

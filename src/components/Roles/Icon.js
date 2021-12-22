@@ -19,7 +19,7 @@ const RoleIcon = ({ nodeData: { target, name } }) => {
   if (target === 'sync-pill') {
     return (
       <Badge variant="lightgray" css={syncPillStyle}>
-        <img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle}></img>
+        <img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle} />
         APP SERVICES
       </Badge>
     );

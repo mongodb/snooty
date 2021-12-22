@@ -11,7 +11,7 @@ const SyncCloud = ({ content }) => {
       <Icon glyph="Cloud" fill="#000000" />
       <Tooltip triggerEvent="hover" align="top" justify="middle" darkMode={true} open={isHovered} popoverZIndex={2}>
         This involves Realm App Services.
-        <br></br>
+        <br />
         You will need an Atlas account.
       </Tooltip>
     </Sync>

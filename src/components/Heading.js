@@ -70,7 +70,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
             onClick={handleClick}
             title="Permalink to this headline"
           >
-            <img src={withPrefix('assets/link.png')} alt="icons/link.png"></img>
+            <img src={withPrefix('assets/link.png')} alt="icons/link.png" />
             <Tooltip triggerEvent="click" open={copied} align="top" justify="middle" darkMode={true}>
               {'copied'}
             </Tooltip>
