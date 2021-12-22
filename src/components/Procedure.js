@@ -29,7 +29,7 @@ const Procedure = ({ nodeData: { children, options }, ...rest }) => {
           {...rest}
           nodeData={child}
           stepNumber={i + 1}
-          style={style}
+          stepStyle={style}
           isLastStep={i === children.length - 1}
           key={i}
         />

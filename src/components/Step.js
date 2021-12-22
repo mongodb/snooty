@@ -14,8 +14,12 @@ const Circle = styled('div')`
   justify-content: center;
 `;
 
-const LandingStep = styled('div')`
+const StyledStep = styled('div')`
   display: flex;
+
+  section > p > a {
+    font-weight: 600;
+  }
 `;
 
 const StepBlock = styled('div')`
@@ -23,8 +27,8 @@ const StepBlock = styled('div')`
 `;
 
 const Content = styled.div`
-  // Remove the top margin of immediate child (especially for headings)
-  & > * {
+  // Remove the top margin of nested heading
+  & > section > :first-of-type {
     margin-top: 0;
   }
 `;
@@ -72,36 +76,30 @@ const contentStyles = {
   connected: css`
     margin-top: 5px;
     padding-bottom: ${theme.size.xlarge};
-
     @media ${theme.screenSize.upToMedium} {
       padding-bottom: 40px;
     }
-
     @media ${theme.screenSize.upToSmall} {
       padding-bottom: ${theme.size.large};
     }
   `,
-  normal: null,
+  normal: css`
+    margin-bottom: ${theme.size.medium};
+  `,
 };
 
-const Step = ({ nodeData: { children, argument }, isLastStep, sectionDepth, stepNumber, style, ...rest }) => {
-  // PLP's connected style expects H2 headings
-  const headingSize = style === 'connected' ? 2 : sectionDepth + 1;
-
+const Step = ({ nodeData: { children }, isLastStep, stepNumber, stepStyle, ...rest }) => {
   return (
-    <LandingStep css={landingStepStyles[style]}>
-      <StepBlock css={!isLastStep && stepBlockStyles[style]}>
-        <Circle css={circleStyles[style]}>{stepNumber}</Circle>
+    <StyledStep css={landingStepStyles[stepStyle]}>
+      <StepBlock css={!isLastStep && stepBlockStyles[stepStyle]}>
+        <Circle css={circleStyles[stepStyle]}>{stepNumber}</Circle>
       </StepBlock>
-      <Content css={contentStyles[style]}>
-        {argument.map((child, i) => (
-          <ComponentFactory {...rest} nodeData={child} sectionDepth={headingSize} key={i} />
-        ))}
+      <Content css={contentStyles[stepStyle]}>
         {children.map((child, i) => (
-          <ComponentFactory {...rest} nodeData={child} sectionDepth={sectionDepth} key={i} />
+          <ComponentFactory {...rest} nodeData={child} key={i} />
         ))}
       </Content>
-    </LandingStep>
+    </StyledStep>
   );
 };
 
@@ -111,9 +109,8 @@ Step.propTypes = {
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
   isLastStep: PropTypes.bool,
-  sectionDepth: PropTypes.number.isRequired,
   stepNumber: PropTypes.number.isRequired,
-  style: PropTypes.string.isRequired,
+  stepStyle: PropTypes.string.isRequired,
 };
 
 export default Step;

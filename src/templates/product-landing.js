@@ -26,7 +26,8 @@ const Wrapper = styled('main')`
     margin-bottom: ${theme.size.default};
   }
 
-  h2 {
+  h2,
+  h3 {
     font-size: 21px;
     margin-top: 0px;
     margin-bottom: ${theme.size.default};
