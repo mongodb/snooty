@@ -41,19 +41,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
     const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
 
-    if (isTocIcon && isDrawer && hasChildren) {
-      return (
-        <SideNavItem
-          className={cx(sideNavItemTOCStyling({ level }))}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          {isTocIcon && <SyncCloud />}
-          {formattedTitle}
-        </SideNavItem>
-      );
-    } else if (isDrawer && hasChildren) {
+    if (isDrawer && hasChildren) {
       return (
         <SideNavItem
           className={cx(sideNavItemTOCStyling({ level }))}
