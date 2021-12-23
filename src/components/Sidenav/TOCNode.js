@@ -17,6 +17,7 @@ const sideNavItemStyling = ({ level }) => css`
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.small};
   text-transform: none;
+  align-items: flex-start;
 `;
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase

@@ -20,7 +20,7 @@ const SyncCloud = ({ content }) => {
 
 const Sync = styled.div`
   margin-right: 10px;
-  margin-top: 5px;
+  margin-top: 2px;
 `;
 
 export default SyncCloud;
