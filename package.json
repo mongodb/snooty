@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.11.19",
+  "version": "0.11.20",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^14",
@@ -34,7 +34,7 @@
     "format": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ext .js,.jsx .",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix --max-warnings 0",
     "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
     "prettier": "prettier '**/*.{js,jsx,json,md}' '!docs-tools/**'",
@@ -78,8 +78,8 @@
     "@leafygreen-ui/tooltip": "^6.1.7",
     "@leafygreen-ui/typography": "^7.5.0",
     "@loadable/component": "^5.14.1",
-    "@mdb/consistent-nav": "^1.1.0",
-    "@mdb/flora": "^0.8.0",
+    "@mdb/consistent-nav": "^1.2.7",
+    "@mdb/flora": "^0.11.0",
     "clipboard": "^2.0.8",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",

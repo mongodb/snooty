@@ -11,5 +11,5 @@ it('renders correctly', () => {
   // Make sure that the logic used to get the component's rendered data is correct
   expect(wrapper.find('ChapterNumberLabel').text()).toEqual('Chapter 1');
   expect(wrapper.find('ChapterTitle').text()).toEqual('Atlas');
-  expect(wrapper.find('GuidesListItem')).toHaveLength(3);
+  expect(wrapper.find('li')).toHaveLength(3);
 });

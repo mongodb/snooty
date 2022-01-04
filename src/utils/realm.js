@@ -30,3 +30,7 @@ export const fetchBanner = async (snootyEnv) => {
 export const fetchProjectParents = async (database, project) => {
   return await fetchData('fetchProjectParents', database, project);
 };
+
+export const fetchOASFile = async (apiName, database) => {
+  return await fetchData('fetchOASFile', apiName, database);
+};
