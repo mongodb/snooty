@@ -35,7 +35,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
-  const isTocIcon = !!options.tocicon;
+  const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
 
   // If the active state of this node changes, change the open state to reflect it
