@@ -84,7 +84,7 @@ const GlobalGrid = styled('div')`
 const DefaultLayout = ({
   children,
   pageContext: {
-    metadata: { publishedBranches, slugToTitle, title, toctree },
+    metadata: { chapters, guides, publishedBranches, slugToTitle, title, toctree },
     page,
     slug,
     template,
@@ -98,11 +98,17 @@ const DefaultLayout = ({
     <>
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <RootProvider isSidenavEnabled={sidenav} selectors={page?.options?.selectors}>
+      <RootProvider
+        headingNodes={page?.options?.headings}
+        isSidenavEnabled={sidenav}
+        selectors={page?.options?.selectors}
+      >
         <GlobalGrid>
           <Header sidenav={sidenav} />
           {sidenav && (
             <Sidenav
+              chapters={chapters}
+              guides={guides}
               page={page}
               pageTitle={pageTitle}
               publishedBranches={publishedBranches}
@@ -121,6 +127,8 @@ const DefaultLayout = ({
 DefaultLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
+    chapters: PropTypes.object,
+    guides: PropTypes.object,
     page: PropTypes.shape({
       options: PropTypes.object,
     }).isRequired,

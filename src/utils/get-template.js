@@ -25,6 +25,7 @@ const getTemplate = (templateName) => {
       template = ProductLanding;
       sidenav = true;
       break;
+    // Default template and guide template share very similar layouts
     default:
       template = Document;
       sidenav = true;

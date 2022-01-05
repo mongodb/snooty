@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.emotion-0 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+<Fragment>
+  <SideNavItem
+    active={true}
+    as={[Function]}
+    className="emotion-0"
+    key="/"
+    to="/"
+  >
+    Overview
+  </SideNavItem>
+  <SideNavItem
+    active={false}
+    as={[Function]}
+    className="emotion-0"
+    key="cloud/account"
+    to="cloud/account"
+  >
+    Atlas
+  </SideNavItem>
+  <SideNavItem
+    active={false}
+    as={[Function]}
+    className="emotion-0"
+    key="server/read"
+    to="server/read"
+  >
+    CRUD
+  </SideNavItem>
+</Fragment>
+`;
