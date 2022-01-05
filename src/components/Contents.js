@@ -79,9 +79,9 @@ const formatTextOptions = {
 };
 
 const Contents = ({ displayOnDesktopOnly }) => {
-  const { headingNodes, activeHeadingId } = useContext(ContentsContext);
+  const { activeHeadingId, headingNodes, showContentsComponent } = useContext(ContentsContext);
 
-  if (headingNodes.length === 0) {
+  if (headingNodes.length === 0 || showContentsComponent) {
     return null;
   }
   return (
