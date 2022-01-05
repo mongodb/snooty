@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -7,6 +7,8 @@ import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
+import GuidesLandingTree from './GuidesLandingTree';
+import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
 import IATransition from './IATransition';
 import Link from '../Link';
@@ -16,6 +18,7 @@ import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
+import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useScreenSize from '../../hooks/useScreenSize';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -73,7 +76,7 @@ const titleStyle = LeafyCss`
   font-size: ${theme.fontSize.default};
   font-weight: bold;
   line-height: 20px;
-  text-transform: capitalize;
+  text-transform: none;
   :hover {
     background-color: inherit;
   }
@@ -155,13 +158,17 @@ const NavTopContainer = styled('div')`
   z-index: 1;
 `;
 
+const StyledChapterNumberLabel = styled(ChapterNumberLabel)`
+  margin-left: ${theme.size.medium};
+`;
+
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
   { glyph: 'Person', title: 'Join our community', url: 'https://community.mongodb.com/' },
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
@@ -179,6 +186,10 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
 
+  const template = page?.options?.template;
+  const isGuidesLanding = project === 'guides' && template === 'product-landing';
+  const isGuidesTemplate = template === 'guide';
+
   useEffect(() => {
     setCollapsed(!!isTablet);
   }, [isTablet, setCollapsed]);
@@ -190,6 +201,36 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
   const hideMobileSidenav = useCallback(() => {
     setHideMobile(true);
   }, [setHideMobile]);
+
+  // Renders side nav content based on the current project and template.
+  // The guides docs typically have a different TOC compared to other docs.
+  const navContent = useMemo(() => {
+    if (isGuidesLanding) {
+      return <GuidesLandingTree chapters={chapters} handleClick={() => hideMobileSidenav()} />;
+    } else if (isGuidesTemplate) {
+      return (
+        <GuidesTOCTree
+          chapters={chapters}
+          guides={guides}
+          handleClick={() => hideMobileSidenav()}
+          page={page}
+          slug={slug}
+        />
+      );
+    }
+    return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />;
+  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree]);
+
+  const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : siteTitle;
+
+  const guidesChapterNumber = useMemo(() => {
+    if (!isGuidesTemplate) {
+      return 0;
+    }
+
+    const chapterName = guides?.[slug]?.['chapter_name'];
+    return chapters[chapterName]?.['chapter_number'];
+  }, [chapters, guides, isGuidesTemplate, slug]);
 
   return (
     <>
@@ -217,6 +258,8 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
                   }}
                   project={project}
                   currentSlug={slug}
+                  target={isGuidesTemplate ? '/' : ''}
+                  titleOverride={isGuidesTemplate ? siteTitle : ''}
                 />
                 {ia && (
                   <IA
@@ -240,12 +283,19 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
             </IATransition>
 
             {!ia && !showAllProducts && (
-              <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to="/">
-                {siteTitle}
-              </SideNavItem>
+              <>
+                {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
+                <SideNavItem
+                  className={cx(titleStyle, sideNavItemBasePadding)}
+                  as={Link}
+                  to={isGuidesTemplate ? slug : '/'}
+                >
+                  {navTitle}
+                </SideNavItem>
+              </>
             )}
             {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
-            {!ia && <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />}
+            {!ia && navContent}
 
             {isDocsLanding && (
               <>
@@ -272,6 +322,8 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
 };
 
 Sidenav.propTypes = {
+  chapters: PropTypes.object,
+  guides: PropTypes.object,
   page: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,

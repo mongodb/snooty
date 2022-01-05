@@ -37,11 +37,12 @@ const useActiveHeading = (headingNodes) => {
         return;
       }
 
-      entries.forEach((entry) => {
+      for (let entry of entries) {
         if (entry.isIntersecting) {
           setActiveHeadingId(entry.target.id);
+          break;
         }
-      });
+      }
     };
 
     const observer = new IntersectionObserver(callback, options);

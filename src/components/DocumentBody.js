@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import ComponentFactory from './ComponentFactory';
-import { ContentsProvider } from './contents-context';
 import FootnoteContext from './footnote-context';
 import SEO from './SEO';
 import Widgets from './Widgets';
@@ -108,13 +107,11 @@ export default class DocumentBody extends Component {
           slug={slug}
         >
           <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
-            <ContentsProvider headingNodes={page?.options?.headings}>
-              <Template {...this.props}>
-                {this.pageNodes.map((child, index) => (
-                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                ))}
-              </Template>
-            </ContentsProvider>
+            <Template {...this.props}>
+              {this.pageNodes.map((child, index) => (
+                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+              ))}
+            </Template>
           </FootnoteContext.Provider>
         </Widgets>
         <UnifiedFooter hideLocale={true} />

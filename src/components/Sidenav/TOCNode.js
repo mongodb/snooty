@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { cx, css } from '@leafygreen-ui/emotion';
-import { uiColors } from '@leafygreen-ui/palette';
+import { cx } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
+import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
-import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
-
-const sideNavItemStyling = ({ level }) => css`
-  color: ${uiColors.gray.dark3};
-  padding-bottom: ${theme.size.small};
-  padding-left: calc(${theme.size.small} + (${level} * ${theme.size.default}));
-  padding-right: ${theme.size.medium};
-  padding-top: ${theme.size.small};
-  text-transform: none;
-`;
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
@@ -53,7 +43,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     if (isDrawer && hasChildren) {
       return (
         <SideNavItem
-          className={cx(sideNavItemStyling({ level }))}
+          className={cx(sideNavItemTOCStyling({ level }))}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
@@ -67,7 +57,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         as={Link}
         to={target}
         active={isSelected}
-        className={cx(sideNavItemStyling({ level }))}
+        className={cx(sideNavItemTOCStyling({ level }))}
         onClick={handleClick}
       >
         {formattedTitle}
