@@ -41,7 +41,6 @@ const SelectedText = styled('p')`
   margin: 0 !important;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
 const Option = styled('li')`
