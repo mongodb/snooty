@@ -8,5 +8,10 @@ export const formatText = (text, options) => {
   if (!text) return '';
   return typeof text === 'string'
     ? text
-    : text.map((e, index) => <ComponentFactory key={index} nodeData={e} formatTextOptions={options} />);
+    : text.map((e, index) => {
+        if (e.name === 'icon') {
+          return null;
+        }
+        return <ComponentFactory key={index} nodeData={e} formatTextOptions={options} />;
+      });
 };
