@@ -7,6 +7,7 @@ import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
+import SyncCloud from '../SyncCloud';
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
@@ -23,7 +24,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
-
+  const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
 
   // If the active state of this node changes, change the open state to reflect it
@@ -48,6 +49,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
             setIsOpen(!isOpen);
           }}
         >
+          {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
       );
@@ -60,6 +62,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         className={cx(sideNavItemTOCStyling({ level }))}
         onClick={handleClick}
       >
+        {isTocIcon && <SyncCloud />}
         {formattedTitle}
       </SideNavItem>
     );
@@ -85,6 +88,7 @@ TOCNode.propTypes = {
     children: PropTypes.array.isRequired,
     options: PropTypes.shape({
       drawer: PropTypes.bool,
+      tocicon: PropTypes.bool,
       styles: PropTypes.objectOf(PropTypes.string),
     }),
     slug: PropTypes.string,

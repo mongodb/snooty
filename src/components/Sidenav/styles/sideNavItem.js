@@ -14,4 +14,5 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.small};
   text-transform: none;
+  align-items: flex-start;
 `;
