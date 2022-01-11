@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'emotion-theming';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import mockData from './data/Chapters.test.json';
 import Chapters from '../../src/components/Chapters/Chapters';
 import { tick } from '../utils';
@@ -10,7 +11,7 @@ import { getPlaintext } from '../../src/utils/get-plaintext';
 
 const mountChapters = () => {
   const { nodeData, metadata } = mockData;
-  return mount(
+  return render(
     <ThemeProvider theme={theme}>
       <SidenavContext.Provider value={{ isCollapsed: false }}>
         <Chapters nodeData={nodeData} metadata={metadata} />
@@ -24,30 +25,30 @@ describe('Chapters', () => {
 
   it('renders chapters', () => {
     const wrapper = mountChapters();
-    expect(wrapper.find('Chapter')).toHaveLength(2);
-    expect(wrapper.find('LearningCard')).toHaveLength(1);
+    // screen.debug()
+
+    // We expect 2 chapter entries and 1 chapter view selector, per test data.
+    expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(3);
   });
 
   it('renders guides in gallery view', async () => {
     const wrapper = mountChapters();
-    const viewOptions = wrapper.find('ViewOption');
-    expect(viewOptions).toHaveLength(2);
+    const galleryView = wrapper.getByText('Gallery', { exact: false });
 
-    const galleryView = viewOptions.at(1);
-    galleryView.simulate('click');
-    await tick({ wrapper });
+    userEvent.click(galleryView);
+    await tick();
 
-    expect(wrapper.find('Chapter')).toHaveLength(0);
-    const cardGroup = wrapper.find('div.card-group');
-    expect(cardGroup.children()).toHaveLength(4);
+    // Only the Chapter view selector should be rendered.
+    expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(1);
+    // screen.debug()
+
+    // Three cards should render with Atlas chapter icons, per test data.
+    const cardImages = wrapper.queryAllByAltText('Atlas chapter icon');
+    expect(cardImages).toHaveLength(3);
 
     // Make sure that the data passed to a card is correct
-    const testCard = cardGroup.children().at(0);
     const data = mockData.metadata.guides['cloud/account'];
-    expect(testCard.find('img')).toHaveLength(1);
-    expect(testCard.find('h4').text()).toEqual(getPlaintext(data.title));
-    expect(testCard.find('Text').text()).toEqual(getPlaintext(data.description));
-    expect(testCard.find('a').props()).toHaveProperty('href', '/cloud/account/');
-    expect(testCard.find('a').text()).toEqual('15 mins');
+    expect(wrapper.getByText(getPlaintext(data.title))).toBeTruthy();
+    expect(wrapper.getByText('15 mins')).toHaveProperty('href', 'http://localhost/cloud/account/');
   });
 });

@@ -1,90 +1,131 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with pageTitle 1`] = `
-<Fragment>
-  <BreadcrumbSchema
-    breadcrumb={Array []}
-    siteTitle="MongoDB Documentation"
-    slug="view-analyze"
-  />
-  <Wrapper>
+<DocumentFragment>
+  .emotion-6 {
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.emotion-6 * {
+  color: #5D6C74;
+}
+
+.emotion-6 > p {
+  margin-top: 0;
+  min-height: 24px;
+}
+
+.emotion-0:last-of-type {
+  color: #21313C;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0:hover:not(:last-of-type),
+.emotion-0:focus:not(:last-of-type) {
+  color: #21313C;
+}
+
+.emotion-2 {
+  cursor: default;
+}
+
+.emotion-2:last-of-type {
+  color: #21313C;
+}
+
+<nav
+    class="emotion-6 emotion-7"
+  >
     <p>
-      <BreadcrumbContainer
-        homeCrumb={
-          Object {
-            "title": "Docs Home",
-            "url": "https://docs.mongodb.com/",
-          }
-        }
-        lastCrumb={
-          Object {
-            "title": "View & Analyze Data",
-            "url": "view-analyze",
-          }
-        }
-      />
+      <a
+        class="emotion-0 emotion-1"
+        href="https://docs.mongodb.com/"
+      >
+        Docs Home
+      </a>
+      <span
+        class="emotion-2 emotion-3"
+      >
+         → 
+      </span>
+      <a
+        class="emotion-0 emotion-1"
+        href="/view-analyze/"
+      >
+        View & Analyze Data
+      </a>
     </p>
-  </Wrapper>
-</Fragment>
+  </nav>
+</DocumentFragment>
 `;
 
 exports[`renders correctly with siteTitle 1`] = `
-<Fragment>
-  <BreadcrumbSchema
-    breadcrumb={
-      Array [
-        Object {
-          "path": "manage-data",
-          "plaintext": "Interact with Your Data",
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 2,
-                },
-              },
-              "type": "text",
-              "value": "Interact with Your Data",
-            },
-          ],
-        },
-        Object {
-          "path": "documents",
-          "plaintext": "Manage Documents",
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 4,
-                },
-              },
-              "type": "text",
-              "value": "Manage Documents",
-            },
-          ],
-        },
-      ]
-    }
-    siteTitle="MongoDB Compass"
-    slug="documents/view"
-  />
-  <Wrapper>
+<DocumentFragment>
+  .emotion-6 {
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.emotion-6 * {
+  color: #5D6C74;
+}
+
+.emotion-6 > p {
+  margin-top: 0;
+  min-height: 24px;
+}
+
+.emotion-0:last-of-type {
+  color: #21313C;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0:hover:not(:last-of-type),
+.emotion-0:focus:not(:last-of-type) {
+  color: #21313C;
+}
+
+.emotion-2 {
+  cursor: default;
+}
+
+.emotion-2:last-of-type {
+  color: #21313C;
+}
+
+<nav
+    class="emotion-6 emotion-7"
+  >
     <p>
-      <BreadcrumbContainer
-        homeCrumb={
-          Object {
-            "title": "Docs Home",
-            "url": "https://docs.mongodb.com/",
-          }
-        }
-        lastCrumb={
-          Object {
-            "title": "MongoDB Compass",
-            "url": "/",
-          }
-        }
-      />
+      <a
+        class="emotion-0 emotion-1"
+        href="https://docs.mongodb.com/"
+      >
+        Docs Home
+      </a>
+      <span
+        class="emotion-2 emotion-3"
+      >
+         → 
+      </span>
+      <a
+        class="emotion-0 emotion-1"
+        href="/"
+      >
+        MongoDB Compass
+      </a>
     </p>
-  </Wrapper>
-</Fragment>
+  </nav>
+</DocumentFragment>
 `;

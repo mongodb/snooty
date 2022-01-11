@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Abbr correctly renders a "Abbr" role 1`] = `
-.emotion-0 {
+<DocumentFragment>
+  .emotion-0 {
   position: relative;
   background-repeat: repeat-x;
   background-position: center bottom;
@@ -14,28 +15,33 @@ exports[`Abbr correctly renders a "Abbr" role 1`] = `
 }
 
 <span
-  class="emotion-0"
->
-  Display
-</span>
+    class="emotion-0"
+  >
+    Display
+  </span>
+</DocumentFragment>
 `;
 
 exports[`File correctly renders a "file" role 1`] = `
-<code
-  class="file docutils literal"
->
-  <span
-    class="pre"
+<DocumentFragment>
+  <code
+    class="file docutils literal"
   >
-    examples/treasury_yield/src/main/resources/yield_historical_in.json
-  </span>
-</code>
+    <span
+      class="pre"
+    >
+      examples/treasury_yield/src/main/resources/yield_historical_in.json
+    </span>
+  </code>
+</DocumentFragment>
 `;
 
 exports[`GUI Label correctly renders a "guilabel" role 1`] = `
-<span
-  class="guilabel"
->
-  Yes
-</span>
+<DocumentFragment>
+  <span
+    class="guilabel"
+  >
+    Yes
+  </span>
+</DocumentFragment>
 `;

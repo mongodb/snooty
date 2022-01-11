@@ -1,22 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders a Banner correctly 1`] = `
-<StyledBanner
-  variant="info"
->
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "position": Object {
-          "start": Object {
-            "line": 6,
-          },
-        },
-        "type": "text",
-        "value": "These instructions are for installing MongoDB directly from",
-      }
-    }
-  />
-</StyledBanner>
+<DocumentFragment>
+  .emotion-4 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 40px;
+  padding: 9px 12px 9px 20px;
+  border-width: 1px 1px 1px 0px;
+  border-style: solid;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1A567E;
+  border-color: #C5E4F2;
+  border-left-color: #007CAD;
+  background-color: #E1F2F6;
+}
+
+.emotion-4:before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  top: -1px;
+  bottom: -1px;
+  left: 0px;
+  border-radius: 6px 0px 0px 6px;
+}
+
+.emotion-4:after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: -1px;
+  bottom: -1px;
+  width: 2px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0.5px 0px 0px 0.5px;
+}
+
+.emotion-4:before {
+  background-color: #007CAD;
+}
+
+.emotion-4:after {
+  border-color: #C5E4F2;
+  background-color: #E1F2F6;
+}
+
+.emotion-1 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.emotion-0 {
+  color: #007CAD;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.emotion-2 > div > div > * {
+  margin: 0 0 12px;
+}
+
+.emotion-2 > div > div > *:last-child {
+  margin: 0;
+}
+
+.emotion-2 p {
+  margin: 0;
+}
+
+<div
+    class="emotion-2 emotion-3 emotion-4"
+    role="alert"
+  >
+    <svg
+      aria-label="Info With Circle Icon"
+      class="emotion-0"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
+    >
+      <path
+        clip-rule="evenodd"
+        d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9 4C9 4.55228 8.55228 5 8 5C7.44772 5 7 4.55228 7 4C7 3.44772 7.44772 3 8 3C8.55228 3 9 3.44772 9 4ZM8 6C8.55228 6 9 6.44772 9 7V11H9.5C9.77614 11 10 11.2239 10 11.5C10 11.7761 9.77614 12 9.5 12H6.5C6.22386 12 6 11.7761 6 11.5C6 11.2239 6.22386 11 6.5 11H7V7H6.5C6.22386 7 6 6.77614 6 6.5C6 6.22386 6.22386 6 6.5 6H8Z"
+        fill="currentColor"
+        fill-rule="evenodd"
+      />
+    </svg>
+    <div
+      class="emotion-1"
+    >
+      These instructions are for installing MongoDB directly from
+    </div>
+  </div>
+</DocumentFragment>
 `;

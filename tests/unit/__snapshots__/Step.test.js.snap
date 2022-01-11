@@ -1,91 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<LandingStep>
-  <Circle>
-    <StepNumber />
-  </Circle>
-  <h2>
-    <ComponentFactory
-      key="0"
-      nodeData={
-        Object {
-          "position": Object {
-            "start": Object {
-              "line": 42,
-            },
-          },
-          "type": "text",
-          "value": "Import your data",
-        }
-      }
-    />
-  </h2>
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 44,
-              },
-            },
-            "type": "text",
-            "value": "Import data from CSV or JSON files into your MongoDB database.",
-          },
-        ],
-        "position": Object {
-          "start": Object {
-            "line": 44,
-          },
-        },
-        "type": "paragraph",
-      }
-    }
-  />
-  <ComponentFactory
-    key="1"
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 46,
-                  },
-                },
-                "type": "text",
-                "value": "To learn more, see Import and Export Data",
-              },
-            ],
-            "domain": "std",
-            "fileid": Array [
-              "import-export",
-              "std-label-compass-import-export",
-            ],
-            "flag": "",
-            "name": "label",
-            "position": Object {
-              "start": Object {
-                "line": 46,
-              },
-            },
-            "target": "compass-import-export",
-            "type": "ref_role",
-          },
-        ],
-        "position": Object {
-          "start": Object {
-            "line": 46,
-          },
-        },
-        "type": "paragraph",
-      }
-    }
-  />
-</LandingStep>
+<DocumentFragment>
+  .emotion-4 {
+  padding-left: 50px;
+}
+
+.emotion-4:not(.emotion-4:last-child) {
+  border-left: dashed;
+  border-color: #E7EEEC;
+  border-width: 2px;
+  padding-bottom: 64px;
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-4:not(.emotion-4:last-child) {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-4:not(.emotion-4:last-child) {
+    padding-bottom: 32px;
+  }
+}
+
+.emotion-4 > p > a {
+  font-weight: 600;
+}
+
+.emotion-2 {
+  background: #E4F4E4;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  margin-bottom: -29px;
+  margin-left: -67px;
+  text-align: center;
+}
+
+.emotion-0 {
+  font-weight: bold;
+  font-size: 16px;
+  color: #116149;
+  margin: auto;
+  padding-top: 6px;
+}
+
+<div
+    class="emotion-4 emotion-5"
+  >
+    <div
+      class="emotion-2 emotion-3"
+    >
+      <div
+        class="emotion-0 emotion-1"
+      />
+    </div>
+    <h2>
+      Import your data
+    </h2>
+    <p>
+      Import data from CSV or JSON files into your MongoDB database.
+    </p>
+    <p>
+      <a
+        href="/import-export/#std-label-compass-import-export"
+      >
+        To learn more, see Import and Export Data
+      </a>
+    </p>
+  </div>
+</DocumentFragment>
 `;

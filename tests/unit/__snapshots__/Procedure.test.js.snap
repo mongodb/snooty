@@ -1,176 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<StyledProcedure>
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "argument": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 36,
-              },
-            },
-            "type": "text",
-            "value": "Connect to your deployment",
-          },
-        ],
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 38,
-                  },
-                },
-                "type": "text",
-                "value": "Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 38,
-              },
-            },
-            "type": "paragraph",
-          },
-          Object {
-            "children": Array [
-              Object {
-                "children": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 40,
-                      },
-                    },
-                    "type": "text",
-                    "value": "To learn more, see Connect to MongoDB",
-                  },
-                ],
-                "domain": "std",
-                "fileid": Array [
-                  "connect",
-                  "std-label-connect-run-compass",
-                ],
-                "flag": "",
-                "name": "label",
-                "position": Object {
-                  "start": Object {
-                    "line": 40,
-                  },
-                },
-                "target": "connect-run-compass",
-                "type": "ref_role",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 40,
-              },
-            },
-            "type": "paragraph",
-          },
-        ],
-        "domain": "landing",
-        "name": "step",
-        "position": Object {
-          "start": Object {
-            "line": 36,
-          },
-        },
-        "type": "directive",
-      }
-    }
-    stepNumber={1}
-  />
-  <ComponentFactory
-    key="1"
-    nodeData={
-      Object {
-        "argument": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 42,
-              },
-            },
-            "type": "text",
-            "value": "Import your data",
-          },
-        ],
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 44,
-                  },
-                },
-                "type": "text",
-                "value": "Import data from CSV or JSON files into your MongoDB database.",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 44,
-              },
-            },
-            "type": "paragraph",
-          },
-          Object {
-            "children": Array [
-              Object {
-                "children": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 46,
-                      },
-                    },
-                    "type": "text",
-                    "value": "To learn more, see Import and Export Data",
-                  },
-                ],
-                "domain": "std",
-                "fileid": Array [
-                  "import-export",
-                  "std-label-compass-import-export",
-                ],
-                "flag": "",
-                "name": "label",
-                "position": Object {
-                  "start": Object {
-                    "line": 46,
-                  },
-                },
-                "target": "compass-import-export",
-                "type": "ref_role",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 46,
-              },
-            },
-            "type": "paragraph",
-          },
-        ],
-        "domain": "landing",
-        "name": "step",
-        "position": Object {
-          "start": Object {
-            "line": 42,
-          },
-        },
-        "type": "directive",
-      }
-    }
-    stepNumber={2}
-  />
-</StyledProcedure>
+<DocumentFragment>
+  .emotion-12 {
+  max-width: 500px;
+  padding-left: 32px;
+}
+
+@media only screen and (max-width:1023px) {
+  .emotion-12 {
+    padding-bottom: 32px;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-12 {
+    padding-bottom: 24px;
+  }
+}
+
+.emotion-4 {
+  padding-left: 50px;
+}
+
+.emotion-4:not(.emotion-4:last-child) {
+  border-left: dashed;
+  border-color: #E7EEEC;
+  border-width: 2px;
+  padding-bottom: 64px;
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-4:not(.emotion-4:last-child) {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-4:not(.emotion-4:last-child) {
+    padding-bottom: 32px;
+  }
+}
+
+.emotion-4 > p > a {
+  font-weight: 600;
+}
+
+.emotion-2 {
+  background: #E4F4E4;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  margin-bottom: -29px;
+  margin-left: -67px;
+  text-align: center;
+}
+
+.emotion-0 {
+  font-weight: bold;
+  font-size: 16px;
+  color: #116149;
+  margin: auto;
+  padding-top: 6px;
+}
+
+<div
+    class="emotion-12 emotion-13"
+  >
+    <div
+      class="emotion-4 emotion-5"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          1
+        </div>
+      </div>
+      <h2>
+        Connect to your deployment
+      </h2>
+      <p>
+        Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.
+      </p>
+      <p>
+        <a
+          href="/connect/#std-label-connect-run-compass"
+        >
+          To learn more, see Connect to MongoDB
+        </a>
+      </p>
+    </div>
+    <div
+      class="emotion-4 emotion-5"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          2
+        </div>
+      </div>
+      <h2>
+        Import your data
+      </h2>
+      <p>
+        Import data from CSV or JSON files into your MongoDB database.
+      </p>
+      <p>
+        <a
+          href="/import-export/#std-label-compass-import-export"
+        >
+          To learn more, see Import and Export Data
+        </a>
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
 `;

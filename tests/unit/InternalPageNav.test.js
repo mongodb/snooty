@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { render } from '@testing-library/react';
 import InternalPageNav from '../../src/components/InternalPageNav';
 import slugTitleMapping from './data/ecosystem/slugTitleMapping.json';
 
@@ -10,15 +10,15 @@ const renderNav = (slug) =>
 
 it('renders a page with next and previous links correctly', () => {
   const tree = renderNav('drivers/go');
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });
 
 it('renders a page with no previous link correctly', () => {
   const tree = renderNav('drivers/csharp');
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });
 
 it('renders a page with no next link correctly', () => {
   const tree = renderNav('drivers/java');
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });
