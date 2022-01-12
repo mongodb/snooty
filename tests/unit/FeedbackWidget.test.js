@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {
   FeedbackProvider,
   FeedbackForm,
@@ -23,7 +24,7 @@ import { theme } from '../../src/theme/docsTheme';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   const { view, isSupportRequest, hideHeader, ...feedback } = feedbackState;
-  const wrapper = mount(
+  const wrapper = render(
     <FeedbackProvider
       test={{
         view,
@@ -47,7 +48,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
     </FeedbackProvider>
   );
   // Need to wait for the next tick to let Loadable components load
-  await tick({ wrapper });
+  await tick();
   return wrapper;
 }
 
@@ -62,26 +63,22 @@ describe('FeedbackWidget', () => {
   beforeEach(mockStitchFunctions);
   afterEach(clearMockStitchFunctions);
 
-  describe('FeedbackTab', () => {
+  describe('FeedbackTab (Desktop Viewport)', () => {
     it('shows the rating view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.find('FeedbackTab').children()).toHaveLength(1);
       // Before the click, the form is hidden
-      expect(wrapper.exists('FeedbackForm')).toEqual(true);
-      expect(wrapper.find('FeedbackForm').children()).toHaveLength(0);
+      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
       // Click the tab
-      wrapper.find('FeedbackTab').childAt(0).simulate('click');
-      await tick({ wrapper });
+      userEvent.click(wrapper.getByText('Give Feedback'));
+
+      await tick();
       // After the click new feedback is initialized
-      expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
-      expect(wrapper.exists('FeedbackForm')).toEqual(true);
-      expect(wrapper.exists('RatingView')).toEqual(true);
+      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.exists('FeedbackTab')).toBe(true);
-      expect(wrapper.find('FeedbackTab').children()).toHaveLength(1);
+      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
     });
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
@@ -90,31 +87,31 @@ describe('FeedbackWidget', () => {
         comment: '',
         rating: null,
       });
-      expect(wrapper.exists('RatingView')).toEqual(true);
-      expect(wrapper.exists('FeedbackTab')).toBe(true);
-      expect(wrapper.find('FeedbackTab')).toHaveLength(1);
-      expect(wrapper.find('FeedbackTab').children()).toHaveLength(0);
+      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
     });
 
     it('is hidden on small/mobile and medium/tablet screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.exists('FeedbackTab')).toBe(true);
-      expect(wrapper.find('FeedbackTab').children()).toHaveLength(1);
-      expect(wrapper).toHaveStyleRule('display', 'none', {
+      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
     });
   });
 
-  describe('FeedbackHeading', () => {
+  describe('FeedbackHeading (Mobile Viewport)', () => {
     it('is hidden on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.exists('FeedbackHeading')).toBe(false);
+      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
+        media: `${theme.screenSize.upToLarge}`,
+      });
     });
 
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
+      screen.debug();
       expect(wrapper.exists('FeedbackHeading')).toBe(true);
       expect(wrapper.find('FeedbackHeading').children()).toHaveLength(2);
     });
@@ -129,8 +126,8 @@ describe('FeedbackWidget', () => {
     it('is hidden on small/mobile screens when configured with page option', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({ hideHeader: true });
-      expect(wrapper.exists('FeedbackHeading')).toBe(true);
-      expect(wrapper.find('FeedbackHeading').children()).toHaveLength(0);
+      screen.debug();
+      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(0);
     });
   });
 
