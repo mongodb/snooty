@@ -26,6 +26,7 @@ import Figure from './Figure';
 import Footnote from './Footnote';
 import FootnoteReference from './FootnoteReference';
 import Glossary from './Glossary';
+import GuideNext from './GuideNext/GuideNext';
 import Heading from './Heading';
 import HorizontalList from './HorizontalList';
 import Image from './Image';
@@ -147,6 +148,7 @@ const componentMap = {
   footnote: Footnote,
   footnote_reference: FootnoteReference,
   glossary: Glossary,
+  'guide-next': GuideNext,
   heading: Heading,
   hlist: HorizontalList,
   image: Image,
