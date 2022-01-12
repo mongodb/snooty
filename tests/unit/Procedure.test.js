@@ -8,7 +8,6 @@ import mockData from './data/Procedure.test.json';
 it('renders correctly', () => {
   const tree = shallow(<Procedure nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
-  expect(tree.find('StyledProcedure').props()).toHaveProperty('procedureStyle', 'connected');
 });
 
 it('renders with "normal" or YAML steps styling', () => {
@@ -18,5 +17,4 @@ it('renders with "normal" or YAML steps styling', () => {
   };
   const tree = shallow(<Procedure nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
-  expect(tree.find('StyledProcedure').props()).toHaveProperty('procedureStyle', 'normal');
 });

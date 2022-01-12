@@ -88,7 +88,7 @@ const contentStyles = {
   `,
 };
 
-const Step = ({ nodeData: { children }, isLastStep, stepNumber, stepStyle, ...rest }) => {
+const Step = ({ nodeData: { children }, isLastStep, stepNumber, stepStyle = 'connected', ...rest }) => {
   return (
     <StyledStep css={landingStepStyles[stepStyle]}>
       <StepBlock css={!isLastStep && stepBlockStyles[stepStyle]}>
