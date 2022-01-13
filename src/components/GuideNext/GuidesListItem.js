@@ -6,6 +6,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { ReadGuidesContext } from './read-guides-context';
 import IconLightningBolt from '../icons/LightningBolt';
 import Link from '../Link';
+import { theme } from '../../theme/docsTheme';
 
 const CIRCLE_SIZE = 20;
 
@@ -14,16 +15,19 @@ const ListItem = styled('li')`
   display: flex;
   min-height: 40px;
   padding-top: 0 !important;
-  padding-bottom: 16px;
   position: relative;
 
-  &:not(:last-child):before {
-    content: '';
-    position: absolute;
-    left: ${CIRCLE_SIZE / 2}px;
-    top: ${CIRCLE_SIZE}px;
-    height: calc(100% - ${CIRCLE_SIZE}px);
-    border-left: solid 1px ${({ color }) => color};
+  &:not(:last-child) {
+    padding-bottom: ${theme.size.default};
+
+    :before {
+      content: '';
+      position: absolute;
+      left: ${CIRCLE_SIZE / 2}px;
+      top: ${CIRCLE_SIZE}px;
+      height: calc(100% - ${CIRCLE_SIZE}px);
+      border-left: solid 1px ${({ color }) => color};
+    }
   }
 `;
 

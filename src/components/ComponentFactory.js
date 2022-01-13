@@ -84,14 +84,15 @@ import RoleRequired from './Roles/Required';
 const IGNORED_NAMES = new Set([
   'contents',
   'default-domain',
+  'entry',
+  'ia',
   'raw',
-  'toctree',
+  'short-description',
   'tabs-pillstrip',
   'tabs-selector',
-  'ia',
-  'entry',
+  'toctree',
 ]);
-const IGNORED_TYPES = new Set(['comment', 'substitution_definition', 'inline_target', 'named_reference']);
+const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
 
 const roleMap = {
