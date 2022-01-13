@@ -3,5 +3,5 @@ module.exports = {
   ASSETS_COLLECTION: 'assets',
   METADATA_COLLECTION: 'metadata',
   SNOOTY_STITCH_ID: 'snooty-koueq',
-  BRANCHES_COLLECTION: 'claire_repos_branches',
+  BRANCHES_COLLECTION: 'repos_branches',
 };
