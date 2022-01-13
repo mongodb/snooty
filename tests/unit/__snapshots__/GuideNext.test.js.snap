@@ -295,8 +295,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   display: flex;
   min-height: 40px;
   padding-top: 0 !important;
-  padding-bottom: 16px;
   position: relative;
+}
+
+.emotion-33:not(:last-child) {
+  padding-bottom: 16px;
 }
 
 .emotion-33:not(:last-child):before {
@@ -1097,8 +1100,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   display: flex;
   min-height: 40px;
   padding-top: 0 !important;
-  padding-bottom: 16px;
   position: relative;
+}
+
+.emotion-34:not(:last-child) {
+  padding-bottom: 16px;
 }
 
 .emotion-34:not(:last-child):before {
@@ -1970,8 +1976,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   display: flex;
   min-height: 40px;
   padding-top: 0 !important;
-  padding-bottom: 16px;
   position: relative;
+}
+
+.emotion-46:not(:last-child) {
+  padding-bottom: 16px;
 }
 
 .emotion-46:not(:last-child):before {
@@ -2055,8 +2064,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   display: flex;
   min-height: 40px;
   padding-top: 0 !important;
-  padding-bottom: 16px;
   position: relative;
+}
+
+.emotion-34:not(:last-child) {
+  padding-bottom: 16px;
 }
 
 .emotion-34:not(:last-child):before {
