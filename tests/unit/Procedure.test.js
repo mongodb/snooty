@@ -9,3 +9,12 @@ it('renders correctly', () => {
   const tree = shallow(<Procedure nodeData={mockData} />);
   expect(tree).toMatchSnapshot();
 });
+
+it('renders with "normal" or YAML steps styling', () => {
+  // Add styling to mock data
+  mockData.options = {
+    style: 'normal',
+  };
+  const tree = shallow(<Procedure nodeData={mockData} />);
+  expect(tree).toMatchSnapshot();
+});
