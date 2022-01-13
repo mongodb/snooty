@@ -56,8 +56,6 @@ import Rubric from './Rubric';
 import SearchResults from './SearchResults';
 import Section from './Section';
 import Step from './Step';
-import StepsYAML from './StepsYAML';
-import StepYAML from './StepYAML';
 import Strong from './Strong';
 import Subscript from './Subscript';
 import SubstitutionReference from './SubstitutionReference';
@@ -181,8 +179,6 @@ const componentMap = {
   section: Section,
   sharedinclude: Include,
   step: Step,
-  'step-yaml': StepYAML,
-  'steps-yaml': StepsYAML,
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
