@@ -80,6 +80,7 @@ import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
+import Time from './Time';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -187,6 +188,7 @@ const componentMap = {
   tabs: Tabs,
   target: Target,
   text: Text,
+  time: Time,
   title_reference: TitleReference,
   topic: Topic,
   transition: Transition,
