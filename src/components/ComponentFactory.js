@@ -64,6 +64,7 @@ import Superscript from './Superscript';
 import Tabs from './Tabs';
 import Target from './Target';
 import Text from './Text';
+import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
@@ -80,7 +81,6 @@ import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
-import Time from './Time';
 
 const IGNORED_NAMES = new Set([
   'contents',
