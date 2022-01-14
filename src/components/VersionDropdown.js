@@ -49,10 +49,16 @@ const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
     console.warn('Unable to create version label - neither gitBranchName nor urlSlug defined');
     return 'Version Name Unknown';
   }
-  const label = urlSlug || gitBranchName;
-  const numeric_label = label.replace(/^\D+/g, '');
 
-  return numeric_label ? `Version ${numeric_label}` : label;
+  const label = urlSlug || gitBranchName;
+  // If the label is numeric (e.g. "2.0" or "v2.0"), we display "Version 2.0"
+  if (!isNaN(label)) {
+    return `Version ${label}`;
+  } else if (label.startsWith('v') && !isNaN(label.slice(1))) {
+    return `Version ${label.slice(1)}`;
+  }
+
+  return label;
 };
 
 // Returns all branches that are neither in 'groups' nor inactive
@@ -76,8 +82,7 @@ const getBranch = (branchName = '', branches = []) => {
     return null;
   }
 
-  // TODO: less unsafe return
-  return branchCandidates[0];
+  return branchCandidates?.[0] || null;
 };
 
 const createOption = (branch) => {
@@ -198,7 +203,7 @@ VersionDropdown.propTypes = {
         gitBranchName: PropTypes.string.isRequired,
         versionSelectorLabel: PropTypes.string,
         urlSlug: PropTypes.string,
-        active: PropTypes.bool.isRequired,
+        active: PropTypes.string.isRequired,
       })
     ).isRequired,
     groups: PropTypes.arrayOf(
