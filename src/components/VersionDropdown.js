@@ -103,7 +103,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   // on the current page selection. For example, on the Android SDK page, we only
   // show Android SDK versions in the version dropdown box.
   if (project === 'realm' && slug.startsWith('sdk/')) {
-    groups = groups.filter((g) => slug.startsWith(g['sharedSlugPrefix'])) || groups;
+    groups = groups.filter((g) => slug.startsWith(g?.['sharedSlugPrefix'])) || groups;
     if (groups && groups.length === 1) {
       // Get the branchNames from the indicated group, e.g. ['android-v1.0', 'android-v2.0', ...]
       const sdkBranchNames = groups[0]['includedBranches'];
