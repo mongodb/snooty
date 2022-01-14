@@ -117,14 +117,15 @@ exports.createPages = async ({ actions }) => {
   if (parentPaths) {
     transformBreadcrumbs(parentPaths, slugToTitle);
   }
-  let repoBranches = null
-  try{
+
+  let repoBranches = null;
+  try {
     repoBranches = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
-  } catch(err) {
-    console.log(err)
-    throw err
+  } catch (err) {
+    console.log(err);
+    throw err;
   }
- 
+
   if (!repoBranches || repoBranches.length === 0) {
     console.error('No version information found for', siteMetadata.project);
   }
