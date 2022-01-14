@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -67,6 +68,10 @@ const Content = ({ guideData }) => {
       </Button>
     </Container>
   );
+};
+
+Content.propTypes = {
+  guideData: PropTypes.array.isRequired,
 };
 
 export default Content;

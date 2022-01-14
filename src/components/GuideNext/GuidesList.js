@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import GuidesListItem from './GuidesListItem';
 import { getPlaintext } from '../../utils/get-plaintext';
@@ -21,6 +22,12 @@ const GuidesList = ({ guidesMetadata, guideSlugs, targetSlug }) => {
       })}
     </List>
   );
+};
+
+GuidesList.propTypes = {
+  guidesMetadata: PropTypes.object.isRequired,
+  guideSlugs: PropTypes.array.isRequired,
+  targetSlug: PropTypes.string.isRequired,
 };
 
 export default GuidesList;

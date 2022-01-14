@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
@@ -99,6 +100,12 @@ const GuidesListItem = ({ children, isNext, slug }) => {
       <GuideTitle to={slug}>{children}</GuideTitle>
     </ListItem>
   );
+};
+
+GuidesListItem.propTypes = {
+  children: PropTypes.node,
+  isNext: PropTypes.bool.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default GuidesListItem;

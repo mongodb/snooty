@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import Card from '@leafygreen-ui/card';
@@ -57,6 +58,12 @@ const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }) => {
       <GuidesList guidesMetadata={guidesMetadata} guideSlugs={data.guides} targetSlug={targetSlug} />
     </Card>
   );
+};
+
+ChapterInfo.propTypes = {
+  chapterData: PropTypes.array.isRequired,
+  guidesMetadata: PropTypes.object.isRequired,
+  targetSlug: PropTypes.string.isRequired,
 };
 
 export default ChapterInfo;
