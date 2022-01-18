@@ -1,35 +1,261 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Pagination renders pagination correctly 1`] = `
-<PaginationContainer>
-  <PaginationButton
-    aria-label="Back Page"
-    disabled={true}
-    onClick={[Function]}
-    title="Back Page"
+<DocumentFragment>
+  .emotion-0 {
+  color: #B8C4C2;
+}
+
+.emotion-7 {
+  color: #3D4F58;
+}
+
+.emotion-1 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-4 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255,255,255,0);
+  height: 28px;
+  width: 28px;
+  color: #E7EEEC;
+  pointer-events: none;
+}
+
+.emotion-4:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before,
+.emotion-4:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-4:focus {
+  outline: none;
+}
+
+.emotion-4:active,
+.emotion-4:hover {
+  color: #3D4F58;
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-4:focus {
+  color: #1A567E;
+}
+
+.emotion-4:focus:before {
+  background-color: #C5E4F2;
+}
+
+.emotion-11 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255,255,255,0);
+  height: 28px;
+  width: 28px;
+}
+
+.emotion-11:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-11:active:before,
+.emotion-11:hover:before,
+.emotion-11:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-11:focus {
+  outline: none;
+}
+
+.emotion-11:active,
+.emotion-11:hover {
+  color: #3D4F58;
+}
+
+.emotion-11:active:before,
+.emotion-11:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-11:focus {
+  color: #1A567E;
+}
+
+.emotion-11:focus:before {
+  background-color: #C5E4F2;
+}
+
+.emotion-12 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-2 {
+  background-color: #fff;
+  height: 20px;
+  padding: 0;
+  width: 20px;
+  z-index: 1;
+}
+
+.emotion-5 {
+  font-size: 16px;
+  margin: 0 4px;
+}
+
+<div
+    class="emotion-12 emotion-13"
   >
-    <Icon
-      fill="#B8C4C2"
-      glyph="ChevronLeft"
-    />
-  </PaginationButton>
-  <PaginationText>
-    <strong>
-      1
-      /
-      10
-    </strong>
-  </PaginationText>
-  <PaginationButton
-    aria-label="Forward Page"
-    disabled={false}
-    onClick={[Function]}
-    title="Forward Page"
-  >
-    <Icon
-      fill="#3D4F58"
-      glyph="ChevronRight"
-    />
-  </PaginationButton>
-</PaginationContainer>
+    <button
+      aria-disabled="true"
+      aria-label="Back Page"
+      class="emotion-2 emotion-3 emotion-4"
+      tabindex="-1"
+      title="Back Page"
+    >
+      <div
+        class="emotion-1"
+      >
+        <svg
+          aria-label="Chevron Left Icon"
+          class="emotion-0"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M10.778 1.636a1 1 0 00-1.414 0l-4.95 4.95-.707.707a1 1 0 000 1.414l.707.707 4.95 4.95a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L7.243 8l4.242-4.243a1 1 0 000-1.414l-.707-.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
+    <p
+      class="emotion-5 emotion-6"
+    >
+      <strong>
+        1/10
+      </strong>
+    </p>
+    <button
+      aria-disabled="false"
+      aria-label="Forward Page"
+      class="emotion-2 emotion-3 emotion-11"
+      tabindex="0"
+      title="Forward Page"
+    >
+      <div
+        class="emotion-1"
+      >
+        <svg
+          aria-label="Chevron Right Icon"
+          class="emotion-7"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
+  </div>
+</DocumentFragment>
 `;
