@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
-import { CodeContext } from './code-context';
-import { TabContext } from './tab-context';
-import { theme } from '../theme/docsTheme';
-import { reportAnalytics } from '../utils/report-analytics';
+import { CodeContext } from '../code-context';
+import { TabContext } from '../tab-context';
+import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 
 const captionStyle = css`
   padding: 10px;
@@ -36,9 +36,6 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   const language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
   const captionSpecified = !!caption;
   const captionExists = captionSpecified ? '0px' : '4px';
-  console.log(captionSpecified);
-  console.log(captionExists);
-  console.log(value);
 
   const reportCodeCopied = useCallback(() => {
     reportAnalytics('CodeblockCopied', { code });

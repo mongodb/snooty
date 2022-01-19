@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 import { cx, css as LeafyCss } from '@leafygreen-ui/emotion';
 import { css } from '@emotion/core';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import styled from '@emotion/styled';
-import { theme } from '../theme/docsTheme';
+import { theme } from '../../theme/docsTheme';
 
 const outputButtonStyling = LeafyCss`
   padding: 0px;
