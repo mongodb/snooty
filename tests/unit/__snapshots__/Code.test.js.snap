@@ -1,14 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+<div>
+  <CaptionContainer>
+    "Test Caption"
+  </CaptionContainer>
+</div>
 <Code
-  chromeTitle="Test Caption"
   copyable={true}
   language="javascript"
   languageOptions={Array []}
   onChange={[Function]}
   onCopy={[Function]}
-  showWindowChrome={true}
 >
   mongoimport --db test --collection inventory ^
           --authenticationDatabase admin --username &lt;user&gt; --password &lt;password&gt; ^

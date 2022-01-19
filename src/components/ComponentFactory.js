@@ -9,6 +9,7 @@ import CardGroup from './CardGroup';
 import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters/Chapters';
 import Code from './Code';
+import CodeIO from './CodeIO';
 import Cond from './Cond';
 import Container from './Container';
 import CSSClass from './CSSClass';
@@ -30,6 +31,7 @@ import Heading from './Heading';
 import HorizontalList from './HorizontalList';
 import Image from './Image';
 import Include from './Include';
+import Input from './Input';
 import Introduction from './Introduction';
 import Kicker from './Kicker';
 import Line from './Line';
@@ -44,6 +46,7 @@ import Meta from './Meta';
 import MongoWebShell from './MongoWebShell';
 import OpenAPI from './OpenAPI';
 import Operation from './Operation';
+import Output from './Output';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
 import QuizChoice from './Widgets/QuizWidget/QuizChoice';
@@ -129,6 +132,7 @@ const componentMap = {
   chapters: Chapters,
   class: CSSClass,
   code: Code,
+  'io-code-block': CodeIO,
   cond: Cond,
   container: Container,
   cssclass: CSSClass,
@@ -151,6 +155,7 @@ const componentMap = {
   hlist: HorizontalList,
   image: Image,
   include: Include,
+  input: Input,
   introduction: Introduction,
   kicker: Kicker,
   line: Line,
@@ -166,6 +171,7 @@ const componentMap = {
   only: Cond,
   openapi: OpenAPI,
   operation: Operation,
+  output: Output,
   paragraph: Paragraph,
   procedure: Procedure,
   quiz: QuizWidget,
