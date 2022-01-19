@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
+import ContentsList from '../ContentsList/ContentsList';
+import ContentsListItem from '../ContentsList/ContentsListItem';
 import Link from '../Link';
 import { SidenavContext } from '../Sidenav';
 import useVisibleOnScroll from '../../hooks/useVisibleOnScroll';
@@ -22,6 +25,16 @@ const LearningCard = styled(LeafyGreenCard)`
 
   @media ${theme.screenSize.mediumAndUp} {
     padding: 40px ${theme.size.large};
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    ${({ isVisible }) =>
+      !isVisible &&
+      `
+      opacity: 0;
+      pointer-events: none;
+    `}
+    transition: opacity 200ms ease-in-out;
   }
 `;
 
@@ -45,15 +58,8 @@ const Container = styled('div')`
 
 const Sticky = styled('div')`
   @media ${theme.screenSize.largeAndUp} {
-    ${({ isVisible }) =>
-      !isVisible &&
-      `
-      opacity: 0;
-      pointer-events: none;
-    `}
     position: sticky;
     top: 220px;
-    transition: opacity 200ms ease-in-out;
   }
 `;
 
@@ -76,15 +82,23 @@ const LearningTitle = styled('div')`
   margin-bottom: ${theme.size.small};
 `;
 
-const RightColumn = () => {
+const RightColumn = ({ chapters }) => {
   const { isCollapsed } = useContext(SidenavContext);
   // Have children of the RightColumn appear as user scrolls past hero image on large screen sizes
   const isVisible = useVisibleOnScroll('.hero-img');
+  const chapterEntries = Object.entries(chapters);
 
   return (
     <Container isSidenavCollapsed={isCollapsed} isVisible={isVisible}>
-      <Sticky isVisible={isVisible}>
-        <LearningCard>
+      <Sticky>
+        <ContentsList label="Chapters">
+          {chapterEntries.map((entry) => {
+            const [chapterName, chapterData] = entry;
+            const chapterId = chapterData.id;
+            return <ContentsListItem id={chapterId}>{chapterName}</ContentsListItem>;
+          })}
+        </ContentsList>
+        <LearningCard isVisible={isVisible}>
           <LearningTitle>Still Learning MongoDB?</LearningTitle>
           <p>Explore these resources to learn some fundamental MongoDB concepts.</p>
           <StyledLink to="https://university.mongodb.com/courses/M001/about">
@@ -95,6 +109,10 @@ const RightColumn = () => {
       </Sticky>
     </Container>
   );
+};
+
+RightColumn.propTypes = {
+  chapters: PropTypes.object.isRequired,
 };
 
 export default RightColumn;

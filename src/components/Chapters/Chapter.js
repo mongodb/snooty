@@ -117,8 +117,8 @@ const GuideLink = styled(Link)`
 `;
 
 // Uses guides metadata to obtain the title and completion time of each guide in the chapter
-const getGuidesData = (metadata, chapterTitle) => {
-  const guidePaths = metadata?.chapters[chapterTitle]?.guides;
+const getGuidesData = (metadata, currentChapter) => {
+  const guidePaths = currentChapter?.guides;
   let guides = [];
 
   if (guidePaths) {
@@ -139,11 +139,12 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
   const description = options?.description;
   const image = options?.image;
   const chapterTitle = getPlaintext(argument);
-  const chapterNumber = metadata?.chapters?.[chapterTitle]?.chapter_number;
-  const guides = useMemo(() => getGuidesData(metadata, chapterTitle), [metadata, chapterTitle]);
+  const currentChapter = metadata?.chapters?.[chapterTitle];
+  const chapterNumber = currentChapter.chapter_number;
+  const guides = useMemo(() => getGuidesData(metadata, currentChapter), [metadata, currentChapter]);
 
   return (
-    <Container id={options?.id}>
+    <Container id={currentChapter?.id}>
       {image ? (
         <ChapterImage
           src={withPrefix(image)}
