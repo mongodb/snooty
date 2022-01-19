@@ -16,6 +16,14 @@ const captionStyle = css`
   border-bottom: none;
 `;
 
+const captionStyle = css`
+  padding: 10px;
+  color: #5d6c74;
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
+`;
+
 const getLanguage = (lang) => {
   if (Object.values(Language).includes(lang)) {
     return lang;
