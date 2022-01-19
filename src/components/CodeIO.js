@@ -47,9 +47,11 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
         // override for docs when the language switcher is being used.
         > div > div {
           width: unset;
-          border-radius: 0px;
+          border-bottom-right-radius: 0px;
+          border-bottom-left-radius: 0px;
         }
 
+        // Controls output code block style
         > div {
           border-top-right-radius: 0px;
           border-top-left-radius: 0px;
