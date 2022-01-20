@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
+import { uiColors } from '@leafygreen-ui/palette';
 import { CodeContext } from '../code-context';
 import { TabContext } from '../tab-context';
-import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { baseCodeStyle } from './styles/codeStyle';
 
 const captionStyle = css`
   padding: 10px;
@@ -44,26 +45,11 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   return (
     <div
       css={css`
-        display: table;
-        margin: ${theme.size.default} 0;
-        min-width: 150px;
-        table-layout: fixed;
-        width: 100%;
-
-        // Inner div of LG component has a width set to 700px. Unset this as part of our
-        // override for docs when the language switcher is being used.
-        > div > div {
-          width: unset;
-        }
+        ${baseCodeStyle}
 
         > div {
           border-top-left-radius: ${captionExists};
           border-top-right-radius: ${captionExists};
-        }
-
-        // Override default LG Code language switcher font size
-        button > div > div {
-          font-size: ${theme.fontSize.default};
         }
       `}
     >
@@ -93,7 +79,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
 };
 
 const CaptionContainer = styled.div`
-  border: 1px solid #e7eeec;
+  border: 1px solid ${uiColors.gray.light2};
   border-bottom: none;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
