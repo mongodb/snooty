@@ -1,8 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
+import Badge from '@leafygreen-ui/badge';
+import { css } from '@emotion/core';
+
+const cloudSyncStyle = css`
+  padding-right: 7px;
+`;
+
+const syncPillStyle = css`
+  align-self: center;
+  margin-left: 4px;
+  position: relative;
+  top: -3px;
+`;
 
 const RoleIcon = ({ nodeData: { target, name } }) => {
-  if ((name === 'icon') | (name === 'icon-fa5')) {
+  if (target === 'sync-pill') {
+    return (
+      <Badge variant="lightgray" css={syncPillStyle}>
+        <img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle} />
+        APP SERVICES
+      </Badge>
+    );
+  } else if ((name === 'icon') | (name === 'icon-fa5')) {
     return <i className={`fa-${target} fas`}></i>;
   } else if (name === 'icon-fa5-brands') {
     return <i className={`fab fa-${target}`}></i>;

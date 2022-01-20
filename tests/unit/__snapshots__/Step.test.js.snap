@@ -1,65 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
-<DocumentFragment>
-  .emotion-4 {
-  padding-left: 50px;
+exports[`renders with "connected" styling 1`] = `
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 33px;
 }
 
-.emotion-4:not(.emotion-4:last-child) {
-  border-left: dashed;
-  border-color: #E7EEEC;
-  border-width: 2px;
+.emotion-6 section > p > a {
+  font-weight: 600;
+}
+
+.emotion-2 {
+  position: relative;
+}
+
+.emotion-2:after {
+  content: '';
+  border-left: 2px dashed #E7EEEC;
+  bottom: 0;
+  left: calc(50% - 1px);
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: bold;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #E4F4E4;
+  color: #116149;
+  height: 34px;
+  width: 34px;
+}
+
+.emotion-4 {
+  margin-top: 5px;
   padding-bottom: 64px;
 }
 
+.emotion-4 > section >:first-of-type {
+  margin-top: 0;
+}
+
 @media only screen and (max-width:767px) {
-  .emotion-4:not(.emotion-4:last-child) {
+  .emotion-4 {
     padding-bottom: 40px;
   }
 }
 
 @media only screen and (max-width:420px) {
-  .emotion-4:not(.emotion-4:last-child) {
+  .emotion-4 {
     padding-bottom: 32px;
   }
 }
 
-.emotion-4 > p > a {
-  font-weight: 600;
-}
-
-.emotion-2 {
-  background: #E4F4E4;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  margin-bottom: -29px;
-  margin-left: -67px;
-  text-align: center;
-}
-
-.emotion-0 {
-  font-weight: bold;
-  font-size: 16px;
-  color: #116149;
-  margin: auto;
-  padding-top: 6px;
-}
-
 <div
-    class="emotion-4 emotion-5"
+  class="emotion-6 emotion-7"
+>
+  <div
+    class="emotion-2 emotion-3"
   >
     <div
-      class="emotion-2 emotion-3"
+      class="emotion-0 emotion-1"
     >
-      <div
-        class="emotion-0 emotion-1"
-      />
+      1
     </div>
-    <h2>
-      Import your data
-    </h2>
+  </div>
+  <div
+    class="emotion-4 emotion-5"
+  >
     <p>
       Import data from CSV or JSON files into your MongoDB database.
     </p>
@@ -71,5 +95,182 @@ exports[`renders correctly 1`] = `
       </a>
     </p>
   </div>
+</div>
+`;
+
+exports[`renders with "connected" styling by default 1`] = `
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 33px;
+}
+
+.emotion-6 section > p > a {
+  font-weight: 600;
+}
+
+.emotion-2 {
+  position: relative;
+}
+
+.emotion-2:after {
+  content: '';
+  border-left: 2px dashed #E7EEEC;
+  bottom: 0;
+  left: calc(50% - 1px);
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: bold;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #E4F4E4;
+  color: #116149;
+  height: 34px;
+  width: 34px;
+}
+
+.emotion-4 {
+  margin-top: 5px;
+  padding-bottom: 64px;
+}
+
+.emotion-4 > section >:first-of-type {
+  margin-top: 0;
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-4 {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-4 {
+    padding-bottom: 32px;
+  }
+}
+
+<div
+  class="emotion-6 emotion-7"
+>
+  <div
+    class="emotion-2 emotion-3"
+  >
+    <div
+      class="emotion-0 emotion-1"
+    >
+      1
+    </div>
+  </div>
+  <div
+    class="emotion-4 emotion-5"
+  >
+    <p>
+      Import data from CSV or JSON files into your MongoDB database.
+    </p>
+    <p>
+      <a
+        href="/import-export/#std-label-compass-import-export"
+      >
+        To learn more, see Import and Export Data
+      </a>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`renders with "normal" or YAML steps styling 1`] = `
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 16px;
+}
+
+.emotion-6 section > p > a {
+  font-weight: 600;
+}
+
+.emotion-2 {
+  position: relative;
+}
+
+.emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: bold;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #333;
+  color: #FFFFFF;
+  height: 24px;
+  width: 24px;
+}
+
+.emotion-4 {
+  margin-bottom: 24px;
+}
+
+.emotion-4 > section >:first-of-type {
+  margin-top: 0;
+}
+
+<div
+  class="emotion-6 emotion-7"
+>
+  <div
+    class="emotion-2 emotion-3"
+  >
+    <div
+      class="emotion-0 emotion-1"
+    >
+      1
+    </div>
+  </div>
+  <div
+    class="emotion-4 emotion-5"
+  >
+    <p>
+      Import data from CSV or JSON files into your MongoDB database.
+    </p>
+    <p>
+      <a
+        href="/import-export/#std-label-compass-import-export"
+      >
+        To learn more, see Import and Export Data
+      </a>
+    </p>
+  </div>
+<<<<<<< HEAD
 </DocumentFragment>
+=======
+</div>
+>>>>>>> master
 `;

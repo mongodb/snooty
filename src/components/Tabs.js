@@ -49,6 +49,10 @@ const landingTabsStyling = css`
       margin-bottom: 40px;
     }
   }
+
+  div[role='tabpanel'] {
+    padding: 0 ${theme.size.default};
+  }
 `;
 
 const getTabsStyling = ({ isHidden, isProductLanding }) => css`

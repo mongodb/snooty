@@ -5,23 +5,38 @@ import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
 const StyledProcedure = styled('div')`
-  max-width: 500px;
-  padding-left: ${theme.size.large};
-  @media ${theme.screenSize.upToLarge} {
-    padding-bottom: ${theme.size.large};
-  }
-  @media ${theme.screenSize.upToSmall} {
-    padding-bottom: ${theme.size.medium};
-  }
+  ${({ procedureStyle }) =>
+    procedureStyle === 'connected' &&
+    `
+    @media ${theme.screenSize.upToLarge} {
+      padding-bottom: ${theme.size.large};
+    }
+    @media ${theme.screenSize.upToSmall} {
+      padding-bottom: ${theme.size.medium};
+    }
+  `}
 `;
 
-const Procedure = ({ nodeData: { children }, ...rest }) => (
-  <StyledProcedure>
-    {children.map((child, i) => (
-      <ComponentFactory {...rest} nodeData={child} stepNumber={i + 1} key={i} />
-    ))}
-  </StyledProcedure>
-);
+const Procedure = ({ nodeData: { children, options }, ...rest }) => {
+  // Make the style 'connected' by default for now to give time for PLPs that use this directive to
+  // add the "style" option
+  const style = options?.style || 'connected';
+
+  return (
+    <StyledProcedure procedureStyle={style}>
+      {children.map((child, i) => (
+        <ComponentFactory
+          {...rest}
+          nodeData={child}
+          stepNumber={i + 1}
+          stepStyle={style}
+          isLastStep={i === children.length - 1}
+          key={i}
+        />
+      ))}
+    </StyledProcedure>
+  );
+};
 
 Procedure.propTypes = {
   nodeData: PropTypes.shape({

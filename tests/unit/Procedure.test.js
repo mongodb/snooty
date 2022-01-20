@@ -9,3 +9,12 @@ it('renders correctly', () => {
   const tree = render(<Procedure nodeData={mockData} />);
   expect(tree.asFragment()).toMatchSnapshot();
 });
+
+it('renders with "normal" or YAML steps styling', () => {
+  // Add styling to mock data
+  mockData.options = {
+    style: 'normal',
+  };
+  const tree = render(<Procedure nodeData={mockData} />);
+  expect(tree.asFragment()).toMatchSnapshot();
+});

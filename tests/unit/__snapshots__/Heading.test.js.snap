@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<DocumentFragment>
-  .emotion-0 {
+.emotion-2 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -10,29 +9,35 @@ exports[`renders correctly 1`] = `
   padding: 0 10px;
 }
 
-.emotion-1 {
+.emotion-0 {
+  border-radius: 0 !important;
+  display: initial !important;
+  margin: initial !important;
+}
+
+.emotion-3 {
   margin-top: -225px;
   position: absolute;
 }
 
 <h3
-    class="contains-headerlink"
+  class="contains-headerlink"
+>
+  Create an administrative username and password
+  <a
+    class="headerlink emotion-2"
+    href="#create-an-administrative-username-and-password"
+    title="Permalink to this headline"
   >
-    Create an administrative username and password
-    <a
-      class="headerlink emotion-0"
-      href="#create-an-administrative-username-and-password"
-      title="Permalink to this headline"
-    >
-      <img
-        alt="icons/link.png"
-        src="/assets/link.png"
-      />
-    </a>
-    <div
-      class="emotion-1 emotion-2"
-      id="create-an-administrative-username-and-password"
+    <img
+      alt="icons/link.png"
+      class="emotion-0 emotion-1"
+      src="/assets/link.png"
     />
-  </h3>
-</DocumentFragment>
+  </a>
+  <div
+    class="emotion-3 emotion-4"
+    id="create-an-administrative-username-and-password"
+  />
+</h3>
 `;
