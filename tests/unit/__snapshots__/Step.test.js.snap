@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders with "connected" styling 1`] = `
-.emotion-6 {
+<DocumentFragment>
+  .emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -70,36 +71,38 @@ exports[`renders with "connected" styling 1`] = `
 }
 
 <div
-  class="emotion-6 emotion-7"
->
-  <div
-    class="emotion-2 emotion-3"
+    class="emotion-6 emotion-7"
   >
     <div
-      class="emotion-0 emotion-1"
+      class="emotion-2 emotion-3"
     >
-      1
+      <div
+        class="emotion-0 emotion-1"
+      >
+        1
+      </div>
+    </div>
+    <div
+      class="emotion-4 emotion-5"
+    >
+      <p>
+        Import data from CSV or JSON files into your MongoDB database.
+      </p>
+      <p>
+        <a
+          href="/import-export/#std-label-compass-import-export"
+        >
+          To learn more, see Import and Export Data
+        </a>
+      </p>
     </div>
   </div>
-  <div
-    class="emotion-4 emotion-5"
-  >
-    <p>
-      Import data from CSV or JSON files into your MongoDB database.
-    </p>
-    <p>
-      <a
-        href="/import-export/#std-label-compass-import-export"
-      >
-        To learn more, see Import and Export Data
-      </a>
-    </p>
-  </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`renders with "connected" styling by default 1`] = `
-.emotion-6 {
+<DocumentFragment>
+  .emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -168,36 +171,38 @@ exports[`renders with "connected" styling by default 1`] = `
 }
 
 <div
-  class="emotion-6 emotion-7"
->
-  <div
-    class="emotion-2 emotion-3"
+    class="emotion-6 emotion-7"
   >
     <div
-      class="emotion-0 emotion-1"
+      class="emotion-2 emotion-3"
     >
-      1
+      <div
+        class="emotion-0 emotion-1"
+      >
+        1
+      </div>
+    </div>
+    <div
+      class="emotion-4 emotion-5"
+    >
+      <p>
+        Import data from CSV or JSON files into your MongoDB database.
+      </p>
+      <p>
+        <a
+          href="/import-export/#std-label-compass-import-export"
+        >
+          To learn more, see Import and Export Data
+        </a>
+      </p>
     </div>
   </div>
-  <div
-    class="emotion-4 emotion-5"
-  >
-    <p>
-      Import data from CSV or JSON files into your MongoDB database.
-    </p>
-    <p>
-      <a
-        href="/import-export/#std-label-compass-import-export"
-      >
-        To learn more, see Import and Export Data
-      </a>
-    </p>
-  </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`renders with "normal" or YAML steps styling 1`] = `
-.emotion-6 {
+<DocumentFragment>
+  .emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -243,34 +248,31 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 <div
-  class="emotion-6 emotion-7"
->
-  <div
-    class="emotion-2 emotion-3"
+    class="emotion-6 emotion-7"
   >
     <div
-      class="emotion-0 emotion-1"
+      class="emotion-2 emotion-3"
     >
-      1
+      <div
+        class="emotion-0 emotion-1"
+      >
+        1
+      </div>
+    </div>
+    <div
+      class="emotion-4 emotion-5"
+    >
+      <p>
+        Import data from CSV or JSON files into your MongoDB database.
+      </p>
+      <p>
+        <a
+          href="/import-export/#std-label-compass-import-export"
+        >
+          To learn more, see Import and Export Data
+        </a>
+      </p>
     </div>
   </div>
-  <div
-    class="emotion-4 emotion-5"
-  >
-    <p>
-      Import data from CSV or JSON files into your MongoDB database.
-    </p>
-    <p>
-      <a
-        href="/import-export/#std-label-compass-import-export"
-      >
-        To learn more, see Import and Export Data
-      </a>
-    </p>
-  </div>
-<<<<<<< HEAD
 </DocumentFragment>
-=======
-</div>
->>>>>>> master
 `;

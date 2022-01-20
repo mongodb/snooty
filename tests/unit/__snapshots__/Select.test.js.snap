@@ -45,7 +45,6 @@ exports[`Select renders select correctly 1`] = `
   margin: 0 !important;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 <div

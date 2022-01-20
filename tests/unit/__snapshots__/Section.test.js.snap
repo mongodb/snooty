@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-0 {
+  .emotion-2 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -10,7 +10,13 @@ exports[`renders correctly 1`] = `
   padding: 0 10px;
 }
 
-.emotion-1 {
+.emotion-0 {
+  border-radius: 0 !important;
+  display: initial !important;
+  margin: initial !important;
+}
+
+.emotion-3 {
   margin-top: -225px;
   position: absolute;
 }
@@ -21,17 +27,18 @@ exports[`renders correctly 1`] = `
     >
       Connect to your MongoDB instance
       <a
-        class="headerlink emotion-0"
+        class="headerlink emotion-2"
         href="#"
         title="Permalink to this headline"
       >
         <img
           alt="icons/link.png"
+          class="emotion-0 emotion-1"
           src="/assets/link.png"
         />
       </a>
       <div
-        class="emotion-1 emotion-2"
+        class="emotion-3 emotion-4"
         id=""
       />
     </h1>
