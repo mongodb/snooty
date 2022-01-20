@@ -27,8 +27,17 @@ const getTargetGuide = (targetGuideIdx, targetChapter, chapters, guides) => {
 
 const getNextGuideData = (chapters, guides, slug) => {
   // Get current chapter name and guides in said chapter
-  const currentChapterName = guides[slug]?.['chapter_name'];
-  const guidesInChapter = chapters[currentChapterName]?.guides;
+  const currentChapterName = guides?.[slug]?.['chapter_name'];
+  const currentChapter = chapters?.[currentChapterName];
+  const guidesInChapter = currentChapter?.guides;
+
+  // Error check in case of malformed data
+  if (!(currentChapter && guidesInChapter?.length > 0)) {
+    return {
+      targetGuide: null,
+      targetChapter: null,
+    };
+  }
 
   // Determine if final guide in chapter
   const currentGuideIdx = guidesInChapter.indexOf(slug);
@@ -36,10 +45,10 @@ const getNextGuideData = (chapters, guides, slug) => {
   const targetGuideIdx = isFinalGuideInChapter ? 0 : currentGuideIdx + 1;
 
   const chaptersArray = Object.entries(chapters);
-  const currentChapterNumber = chapters[currentChapterName]?.chapter_number;
+  const currentChapterNumber = currentChapter?.chapter_number;
   const isFinalChapter = currentChapterNumber === chaptersArray.length;
 
-  let targetChapter = [currentChapterName, chapters[currentChapterName]];
+  let targetChapter = [currentChapterName, currentChapter];
   if (!isFinalChapter && isFinalGuideInChapter) {
     targetChapter = chaptersArray.find((chapter) => {
       const data = chapter[1];
@@ -66,6 +75,10 @@ const GuideNext = ({ metadata, slug }) => {
     guides,
     slug,
   ]);
+
+  if (!(targetGuide && targetChapter)) {
+    return null;
+  }
 
   return (
     <ReadGuidesContextProvider slug={slug}>
