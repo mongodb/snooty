@@ -66,18 +66,22 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
         }
       `}
     >
-      <ComponentFactory {...rest} nodeData={children[0]} />
-      <IOToggle>
-        <Button
-          className={cx(outputButtonStyling)}
-          darkMode={false}
-          disabled={false}
-          onClick={handleClick}
-          leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
-        >
-          {buttonText}
-        </Button>
-      </IOToggle>
+      {children.length === 2 && (
+        <>
+          <ComponentFactory {...rest} nodeData={children[0]} />
+          <IOToggle>
+            <Button
+              className={cx(outputButtonStyling)}
+              darkMode={false}
+              disabled={false}
+              onClick={handleClick}
+              leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
+            >
+              {buttonText}
+            </Button>
+          </IOToggle>
+        </>
+      )}
       {showOutput === 'inline' && <ComponentFactory {...rest} nodeData={children[1]} />}
       {children.length !== 2 && children.map((child, i) => <ComponentFactory {...rest} key={i} nodeData={child} />)}
     </div>
