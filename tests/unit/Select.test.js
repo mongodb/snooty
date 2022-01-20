@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { shallow, mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import Select from '../../src/components/Select';
+import userEvent from '@testing-library/user-event';
 
 const DEFAULT_ATLAS_CHOICE = { text: 'MongoDB Atlas', value: 'atlas' };
 const DEFAULT_SERVER_CHOICE = { text: 'MongoDB Server', value: 'server' };
@@ -34,35 +35,38 @@ const SelectController = ({
 
 describe('Select', () => {
   // Helper to open the dropdown passed a series of simulate args (click, keypress)
-  const dropdownOpen = (args = ['click'], props = {}) => {
-    const wrapper = mount(<SelectController {...props} />);
+  const dropdownOpen = (props = {}, openWithKeyboard = false) => {
+    const wrapper = render(<SelectController {...props} />);
     // Dropdown should be closed by default
-    expect(!wrapper.find('Options').exists());
-    const selectParent = wrapper.find('StyledCustomSelect');
-    selectParent.simulate(...args);
+    const dropdown = wrapper.getByRole('listbox');
+    expect(dropdown).toHaveAttribute('aria-expanded', 'false');
+    if (openWithKeyboard) {
+      userEvent.tab();
+      userEvent.keyboard('{Enter}');
+    } else {
+      userEvent.click(dropdown);
+    }
     // Now it should be open
-    expect(wrapper.find('Options').exists());
+    expect(dropdown).toHaveAttribute('aria-expanded', 'true');
     return wrapper;
   };
 
   it('renders select correctly', () => {
-    const wrapper = shallow(<SelectController />);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = render(<SelectController />);
+    expect(wrapper.asFragment()).toMatchSnapshot();
   });
 
   it('displays default text', () => {
     const defaultText = 'Some default text';
-    const wrapper = mount(<SelectController defaultText={defaultText} />);
-    const renderedText = wrapper.find('SelectedText').text();
-    expect(renderedText).toBe(defaultText);
+    const wrapper = render(<SelectController defaultText={defaultText} />);
+    const renderedText = wrapper.getByText(defaultText);
+    expect(renderedText).toBeTruthy();
   });
 
   it('conditionally should render a label', () => {
-    const wrapperWithoutLabel = mount(<SelectController />);
-    expect(!wrapperWithoutLabel.find('Label').exists());
     const labelText = 'Select Label';
-    const wrapperWithLabel = mount(<SelectController label={labelText} />);
-    expect(wrapperWithLabel.find('Label').text()).toBe(labelText);
+    const wrapperWithLabel = render(<SelectController label={labelText} />);
+    expect(wrapperWithLabel.getByText(labelText)).toBeTruthy();
   });
 
   it('opens a dropdown with options when clicked', () => {
@@ -70,59 +74,58 @@ describe('Select', () => {
   });
 
   it('opens a dropdown with options with the enter key for accessibility', () => {
-    dropdownOpen(['keypress', { key: 'Enter' }]);
+    dropdownOpen({ key: 'Enter' }, true);
   });
 
-  it('prevents interaction when disabled', () => {
-    const wrapper = mount(<SelectController disabled />);
+  it('passes disabled prop through to select implementation when given', () => {
+    const wrapper = render(<SelectController disabled />);
     // Dropdown should be closed by default
-    expect(!wrapper.find('Options').exists());
-    const selectParent = wrapper.find('StyledCustomSelect');
-    selectParent.simulate('click');
-    selectParent.simulate('keypress', { key: 'Enter' });
-    // It should still be closed
-    expect(!wrapper.find('Options').exists());
+    // parent element access is limitation of implementation
+    // TODO: look at select implementation to see if disabled div and listbox role div can be coalesced
+    expect(wrapper.getByRole('listbox').parentElement).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('closes the dropdown by clicking again on the toggle parent', () => {
     const wrapper = dropdownOpen();
-    const selectParent = wrapper.find('StyledCustomSelect');
-    selectParent.simulate('click');
+    const dropdown = wrapper.getByRole('listbox');
+    userEvent.click(dropdown);
     // Dropdown was previously open, it should now be closed
-    expect(!wrapper.find('Options').exists());
+    expect(dropdown).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('updates the selected text when an item is clicked', () => {
     const defaultText = 'Default Text';
-    const wrapper = dropdownOpen(['click'], { defaultText });
-    let renderedText = wrapper.find('SelectedText').text();
-    expect(renderedText).toBe(defaultText);
-    const firstOption = wrapper.find('Option').at(0);
-    expect(firstOption.text()).toBe(DEFAULT_CHOICES[0].text);
-    firstOption.simulate('click');
-    renderedText = wrapper.find('SelectedText').text();
-    expect(renderedText).toBe(DEFAULT_CHOICES[0].text);
+    const wrapper = dropdownOpen({ defaultText });
+    let renderedText = wrapper.getByText(defaultText);
+    expect(renderedText).toBeTruthy();
+    //Implementation stores the 'select' in the first option field, as rendered html
+    const firstOption = wrapper.queryAllByRole('option')[1];
+    expect(firstOption.textContent).toBe(DEFAULT_CHOICES[0].text);
+    userEvent.click(firstOption);
+    //check the first option field to make sure it updated
+    renderedText = wrapper.queryAllByRole('option')[0];
+    expect(renderedText.textContent).toBe(DEFAULT_CHOICES[0].text);
   });
 
   it('passes the entire choice to the onChange callback', () => {
     const customOnChange = jest.fn();
-    const wrapper = dropdownOpen(['click'], { customOnChange });
-    const firstOption = wrapper.find('Option').at(0);
-    expect(firstOption.text()).toBe(DEFAULT_CHOICES[0].text);
-    firstOption.simulate('click');
+    const wrapper = dropdownOpen({ customOnChange });
+    const firstOption = wrapper.queryAllByRole('option')[1];
+    expect(firstOption.textContent).toBe(DEFAULT_CHOICES[0].text);
+    userEvent.click(firstOption);
     expect(customOnChange.mock.calls.length).toBe(1);
     expect(customOnChange.mock.calls[0][0]).toStrictEqual(DEFAULT_CHOICES[0]);
   });
 
   it('should update selected text given a value', () => {
-    const wrapper = mount(<SelectController value={DEFAULT_CHOICES[0].value} />);
-    expect(wrapper.find('SelectedText').text()).toBe(DEFAULT_CHOICES[0].text);
+    const wrapper = render(<SelectController value={DEFAULT_CHOICES[0].value} />);
+    expect(wrapper.getByText(DEFAULT_CHOICES[0].text)).toBeTruthy();
   });
 
   it('should reset the form when null/empty string is passed as value', () => {
     const defaultText = 'Reset text';
-    // Bypass SelectController so we can directly modify the value prop
-    const wrapper = mount(
+    // Bypass SelectController so we can directly rerender with equivalent component + state
+    const wrapper = render(
       <Select
         defaultText={defaultText}
         choices={DEFAULT_CHOICES}
@@ -130,8 +133,8 @@ describe('Select', () => {
         value={DEFAULT_CHOICES[0].value}
       />
     );
-    expect(wrapper.find('SelectedText').text()).toBe(DEFAULT_CHOICES[0].text);
-    wrapper.setProps({ value: '' });
-    expect(wrapper.find('SelectedText').text()).toBe('Reset text');
+    expect(wrapper.getByText(DEFAULT_CHOICES[0].text)).toBeTruthy();
+    wrapper.rerender(<Select defaultText={defaultText} choices={DEFAULT_CHOICES} onChange={() => {}} value={''} />);
+    expect(wrapper.getByText(defaultText)).toBeTruthy();
   });
 });

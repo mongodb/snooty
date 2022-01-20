@@ -4,7 +4,6 @@ import Code from '../../src/components/Code';
 import { CodeProvider } from '../../src/components/code-context';
 import { TabProvider } from '../../src/components/tab-context';
 import * as browserStorage from '../../src/utils/browser-storage';
-import { tick } from '../utils';
 
 // data for this component
 import mockData from './data/Code.test.json';
@@ -85,20 +84,8 @@ describe('when rendering with selectors', () => {
 
   it('renders with the correct active tab', () => {
     const wrapper = mountCodeWithSelector({ data: testData });
-    const codeComponent = wrapper.find('Code').last();
-    expect(codeComponent.props().language).toEqual('MongoDB Shell');
-    expect(wrapper.find('LanguageSwitcher').exists()).toBeTruthy();
-  });
 
-  it('changes the selected driver', async () => {
-    const wrapper = mountCodeWithSelector({ data: testData });
-    let codeComponent = wrapper.find('Code').last();
-    // Assume that the LG component propagates events upwards successfully
-    codeComponent.invoke('onChange')({ id: 'nodejs' });
-
-    await tick({ wrapper });
-
-    codeComponent = wrapper.find('Code').last();
-    expect(codeComponent.props().language).toEqual('Node.js');
+    expect(wrapper.getByText('MongoDB Shell')).toBeTruthy();
+    expect(wrapper.getByRole('button')).toHaveAttribute('aria-labelledby', 'Language Picker');
   });
 });

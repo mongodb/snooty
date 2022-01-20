@@ -1,25 +1,195 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Search Results Page renders correctly without browser 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "searchFilter": null,
-      "searchTerm": null,
-      "setSearchFilter": [Function],
-    }
-  }
->
-  <HelmetWrapper
-    defer={true}
-    encodeSpecialCharacters={true}
+<DocumentFragment>
+  .emotion-2 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-5 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255,255,255,0);
+  height: 28px;
+  width: 28px;
+}
+
+.emotion-5:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before,
+.emotion-5:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-5:focus {
+  outline: none;
+}
+
+.emotion-5:active,
+.emotion-5:hover {
+  color: #3D4F58;
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-5:focus {
+  color: #1A567E;
+}
+
+.emotion-5:focus:before {
+  background-color: #C5E4F2;
+}
+
+.emotion-12 {
+  margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
+  margin-top: calc(50vh - 28px - 40px - 166px / 2);
+}
+
+.emotion-10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-family: Akzidenz;
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  margin: 0 auto;
+  max-width: 337px;
+  text-align: center;
+}
+
+.emotion-3 {
+  height: calc(40px + 16px);
+  width: calc(40px + 16px);
+}
+
+.emotion-3 span {
+  height: 40px;
+  width: 40px;
+}
+
+.emotion-0 {
+  color: #061621;
+  height: 40px;
+  width: 40px;
+}
+
+.emotion-6 {
+  color: #061621;
+  font-size: 18px;
+  line-height: 21px;
+  margin-bottom: 16px;
+}
+
+.emotion-8 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+<div
+    class="emotion-12 emotion-13"
   >
-    <title>
-      Search Results
-    </title>
-  </HelmetWrapper>
-  <EmptyResultsContainer>
-    <EmptyResults />
-  </EmptyResultsContainer>
-</ContextProvider>
+    <div
+      class="emotion-10 emotion-11"
+    >
+      <button
+        aria-disabled="false"
+        aria-label="Search MongoDB Documentation"
+        class="emotion-3 emotion-4 emotion-5"
+        tabindex="0"
+      >
+        <div
+          class="emotion-2"
+        >
+          <svg
+            aria-label="Magnifying Glass Icon"
+            class="emotion-0 emotion-1"
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M2.323 9.819a5.302 5.302 0 006.463.805l4.144 4.144a1.3 1.3 0 101.838-1.838l-4.144-4.144a5.302 5.302 0 00-8.3-6.463 5.3 5.3 0 000 7.496zM7.98 4.162A2.7 2.7 0 114.162 7.98 2.7 2.7 0 017.98 4.162z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+      <h3
+        class="emotion-6 emotion-7"
+      >
+        <strong>
+          No results found. Please search again.
+        </strong>
+      </h3>
+      <p
+        class="emotion-8 emotion-9"
+      >
+        Sorry. We weren't able to find any results for your query. The page might have been moved or deleted.
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
 `;
