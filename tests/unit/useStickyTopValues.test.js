@@ -1,7 +1,7 @@
 import React from 'react';
 import useStickyTopValues from '../../src/hooks/useStickyTopValues';
 import { HeaderContext } from '../../src/components/header-context';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 const HelperComponent = () => {
   const { topLarge, topMedium, topSmall } = useStickyTopValues();
@@ -24,16 +24,16 @@ const TestComponent = ({ mockBannerContent }) => {
 
 describe('useStickyTopValues()', () => {
   it('provides the correct top values without any banner content', () => {
-    const wrapper = mount(<TestComponent mockBannerContent={null} />);
-    expect(wrapper.find('div.topLarge').text()).toEqual('88px');
-    expect(wrapper.find('div.topMedium').text()).toEqual('56px');
-    expect(wrapper.find('div.topSmall').text()).toEqual('108px');
+    const wrapper = render(<TestComponent mockBannerContent={null} />);
+    expect(wrapper.queryByText('88px')).toBeTruthy();
+    expect(wrapper.queryByText('56px')).toBeTruthy();
+    expect(wrapper.queryByText('108px')).toBeTruthy();
   });
 
   it('provides the correct top values with banner content', () => {
-    const wrapper = mount(<TestComponent mockBannerContent={{ isEnabled: true }} />);
-    expect(wrapper.find('div.topLarge').text()).toEqual('128px');
-    expect(wrapper.find('div.topMedium').text()).toEqual('96px');
-    expect(wrapper.find('div.topSmall').text()).toEqual('148px');
+    const wrapper = render(<TestComponent mockBannerContent={{ isEnabled: true }} />);
+    expect(wrapper.queryByText('128px')).toBeTruthy();
+    expect(wrapper.queryByText('96px')).toBeTruthy();
+    expect(wrapper.queryByText('148px')).toBeTruthy();
   });
 });

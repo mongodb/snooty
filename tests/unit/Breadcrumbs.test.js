@@ -1,16 +1,26 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import * as Gatsby from 'gatsby';
+import { render } from '@testing-library/react';
 import Breadcrumbs from '../../src/components/Breadcrumbs';
 
 import mockData from './data/Breadcrumbs.test.json';
 
 it('renders correctly with siteTitle', () => {
-  const tree = shallow(<Breadcrumbs parentPaths={mockData} siteTitle="MongoDB Compass" slug="documents/view" />);
-  expect(tree).toMatchSnapshot();
+  const tree = render(<Breadcrumbs parentPaths={mockData} siteTitle="MongoDB Compass" slug="documents/view" />);
+  expect(tree.asFragment()).toMatchSnapshot();
 });
 
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+useStaticQuery.mockImplementation(() => ({
+  site: {
+    siteMetadata: {
+      project: '',
+    },
+  },
+}));
+
 it('renders correctly with pageTitle', () => {
-  const tree = shallow(
+  const tree = render(
     <Breadcrumbs
       pageTitle={'View & Analyze Data'}
       parentPaths={[]}
@@ -18,5 +28,5 @@ it('renders correctly with pageTitle', () => {
       slug={'view-analyze'}
     />
   );
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });

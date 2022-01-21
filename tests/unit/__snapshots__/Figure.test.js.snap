@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders border correctly when specified as an option 1`] = `
-.emotion-1 {
+<DocumentFragment>
+  .emotion-1 {
   max-width: 100%;
 }
 
@@ -13,19 +14,21 @@ exports[`renders border correctly when specified as an option 1`] = `
 }
 
 <div
-  class="figure emotion-1"
-  style="width:700px"
->
-  <img
-    alt="/images/firstcluster.png"
-    class="   emotion-0"
-    src="/images/firstcluster.png"
-  />
-</div>
+    class="figure emotion-1"
+    style="width: 700px;"
+  >
+    <img
+      alt="/images/firstcluster.png"
+      class="   emotion-0"
+      src="/images/firstcluster.png"
+    />
+  </div>
+</DocumentFragment>
 `;
 
 exports[`renders correctly 1`] = `
-.emotion-1 {
+<DocumentFragment>
+  .emotion-1 {
   max-width: 100%;
 }
 
@@ -34,19 +37,21 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-  class="figure emotion-1"
-  style="width:700px"
->
-  <img
-    alt="/images/firstcluster.png"
-    class="   emotion-0"
-    src="/images/firstcluster.png"
-  />
-</div>
+    class="figure emotion-1"
+    style="width: 700px;"
+  >
+    <img
+      alt="/images/firstcluster.png"
+      class="   emotion-0"
+      src="/images/firstcluster.png"
+    />
+  </div>
+</DocumentFragment>
 `;
 
 exports[`renders lightbox correctly when specified as an option 1`] = `
-.emotion-0 {
+<DocumentFragment>
+  .emotion-0 {
   max-width: 100%;
 }
 
@@ -67,22 +72,23 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
 }
 
 <div
-  class="emotion-3 emotion-4"
->
-  <div
-    role="button"
-    tabindex="-1"
+    class="emotion-3 emotion-4"
   >
-    <img
-      alt="/images/firstcluster.png"
-      class="   emotion-0"
-      src="/images/firstcluster.png"
-    />
     <div
-      class="emotion-1 emotion-2"
+      role="button"
+      tabindex="-1"
     >
-      click to enlarge
+      <img
+        alt="/images/firstcluster.png"
+        class="   emotion-0"
+        src="/images/firstcluster.png"
+      />
+      <div
+        class="emotion-1 emotion-2"
+      >
+        click to enlarge
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;
