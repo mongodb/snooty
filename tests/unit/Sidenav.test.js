@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
 import { tick, setMatchMedia, setMobile } from '../utils';
+import { matchers } from 'jest-emotion';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 const setProject = (project) => {
@@ -37,6 +38,8 @@ const resizeWindowWidth = (width) => {
 const findCollapseButton = (wrapper) => {
   return wrapper.getByTestId('side-nav-collapse-toggle');
 };
+
+expect.extend(matchers);
 
 describe('Sidenav', () => {
   jest.useFakeTimers();
@@ -76,18 +79,22 @@ describe('Sidenav', () => {
     // js-dom isn't properly reflecting styled components updating active css across media queries
     // TODO: replace this or otherwise fix if ever a fix is released
     // commented expect statements *should* work, but styles are not rendering properly in this test.
-    // expect(wrapper.getByTestId('side-nav-container')).toHaveStyle('display: none')
+    expect(wrapper.getByTestId('side-nav-container')).toHaveStyleRule('display', 'none', {
+      media: `${theme.screenSize.upToSmall}`,
+    });
 
     // Clicking menu button displays Sidenav
     userEvent.click(findCollapseButton(wrapper));
     await tick();
     expect(findCollapseButton(wrapper)).toHaveAttribute('aria-expanded', 'false');
-    // expect(wrapper.getByTestId('side-nav-container')).toBeVisible();
+    expect(wrapper.getByTestId('side-nav-container')).toBeVisible();
 
     // Clicking menu button again closes Sidenav
     userEvent.click(findCollapseButton(wrapper));
     await tick();
-    // expect(wrapper.getByTestId('side-nav-container')).not.toBeVisible();
+    expect(wrapper.getByTestId('side-nav-container')).toHaveStyleRule('display', 'none', {
+      media: `${theme.screenSize.upToSmall}`,
+    });
     expect(findCollapseButton(wrapper)).toHaveAttribute('aria-expanded', 'true');
   });
 });
