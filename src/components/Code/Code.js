@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
-import { uiColors } from '@leafygreen-ui/palette';
 import { CodeContext } from '../code-context';
 import { TabContext } from '../tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { baseCodeStyle } from './styles/codeStyle';
+import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const captionStyle = css`
   padding: 10px;
@@ -79,7 +78,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
 };
 
 const CaptionContainer = styled.div`
-  border: 1px solid ${uiColors.gray.light2};
+  ${borderCodeStyle}
   border-bottom: none;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;

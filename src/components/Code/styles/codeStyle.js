@@ -1,4 +1,5 @@
 import { css } from '@emotion/core';
+import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const baseCodeStyle = css`
@@ -18,4 +19,8 @@ export const baseCodeStyle = css`
   button > div > div {
     font-size: ${theme.fontSize.default};
   }
+`;
+
+export const borderCodeStyle = css`
+  border: 1px solid ${uiColors.gray.light2};
 `;

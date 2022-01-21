@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 import { cx, css as LeafyCss } from '@leafygreen-ui/emotion';
-import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { baseCodeStyle } from './styles/codeStyle';
+import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const outputButtonStyling = LeafyCss`
   padding: 0px;
@@ -80,7 +79,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 };
 
 const IOToggle = styled.div`
-  border: 1px solid ${uiColors.gray.light2};
+  ${borderCodeStyle}
   border-top: none;
 `;
 
