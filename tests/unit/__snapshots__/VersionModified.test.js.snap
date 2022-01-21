@@ -1,149 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when rendering a deprecated directive with 0 arguments renders correctly  1`] = `
+<DocumentFragment>
+  .emotion-2 {
+  background-color: #F9FBFA;
+  border: 1px solid #B8C4C2;
+  border-radius: 3px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  white-space: nowrap;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-2 {
+  box-shadow: 0 0 0 3px #E7EEEC;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-2 {
+  box-shadow: 0 0 0 3px #C5E4F2;
+}
+
+.emotion-0 {
+  font-size: unset;
+}
+
 <div>
-  <p>
-    <em>
-      Deprecated
-    </em>
-    : 
-    <ComponentFactory
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 679,
-                    },
-                  },
-                  "type": "text",
-                  "value": "replicationFactor",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 679,
-                },
-              },
-              "type": "literal",
-            },
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 679,
-                },
-              },
-              "type": "text",
-              "value": " is deprecated. Use
-",
-            },
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 679,
-                    },
-                  },
-                  "type": "text",
-                  "value": "replicationSpecs",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 679,
-                },
-              },
-              "type": "literal",
-            },
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 679,
-                },
-              },
-              "type": "text",
-              "value": ".",
-            },
-          ],
-          "position": Object {
-            "start": Object {
-              "line": 679,
-            },
-          },
-          "type": "paragraph",
-        }
-      }
-      skipPTag={true}
-    />
-  </p>
-</div>
+    <p>
+      <em>
+        Deprecated
+      </em>
+      : 
+      <code
+        class="emotion-0 emotion-1 emotion-2"
+      >
+        replicationFactor
+      </code>
+       is deprecated. Use
+
+      <code
+        class="emotion-0 emotion-1 emotion-2"
+      >
+        replicationSpecs
+      </code>
+      .
+    </p>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`when rendering a versionadded directive with one argument renders correctly  1`] = `
-<div>
-  <p>
-    <em>
-      New
-       in version 
-      <ComponentFactory
-        nodeData={
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 2,
-              },
-            },
-            "type": "text",
-            "value": "2.2",
-          }
-        }
-      />
-    </em>
-    .
-  </p>
-</div>
+<DocumentFragment>
+  <div>
+    <p>
+      <em>
+        New in version 2.2
+      </em>
+      .
+    </p>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`when rendering a versionchanged directive with two arguments renders correctly  1`] = `
-<div>
-  <p>
-    <em>
-      Changed
-       in version 
-      <ComponentFactory
-        nodeData={
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 468,
-              },
-            },
-            "type": "text",
-            "value": "2.2",
-          }
-        }
-      />
-    </em>
-    :
-     
-    <ComponentFactory
-      key="0"
-      nodeData={
-        Object {
-          "position": Object {
-            "start": Object {
-              "line": 468,
-            },
-          },
-          "type": "text",
-          "value": "To bind to multiple IP addresses, enter a list of comma separated values.",
-        }
-      }
-    />
-  </p>
-</div>
+<DocumentFragment>
+  <div>
+    <p>
+      <em>
+        Changed in version 2.2
+      </em>
+      : To bind to multiple IP addresses, enter a list of comma separated values.
+    </p>
+  </div>
+</DocumentFragment>
 `;

@@ -1,17 +1,231 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<Code
-  chromeTitle="Test Caption"
-  copyable={true}
-  language="javascript"
-  languageOptions={Array []}
-  onChange={[Function]}
-  onCopy={[Function]}
-  showWindowChrome={true}
->
-  mongoimport --db test --collection inventory ^
-          --authenticationDatabase admin --username &lt;user&gt; --password &lt;password&gt; ^
-          --drop --file ~\\downloads\\inventory.crud.json
-</Code>
+<DocumentFragment>
+  .emotion-7 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+}
+
+.emotion-11 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 12px;
+}
+
+.emotion-5 {
+  height: 12px;
+  width: 60px;
+}
+
+.emotion-4 {
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 14px;
+}
+
+.emotion-12 {
+  border: 2px solid;
+  overflow-x: auto;
+  border-radius: 0;
+  border: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 0;
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  white-space: pre;
+  border-color: #E7EEEC;
+  background-color: #F9FBFA;
+  color: #061621;
+  border-left: 0;
+}
+
+@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-12 {
+    white-space: pre-wrap;
+  }
+}
+
+@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-12 {
+    white-space: pre;
+  }
+}
+
+.emotion-14 {
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 28px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 4px 4px 0 0;
+  background-color: #E7EEEC;
+  color: #5D6C74;
+}
+
+.emotion-0 {
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  margin-right: 8px;
+  background-color: #FF5952;
+  border: 1px solid #ff4a43;
+}
+
+.emotion-1 {
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  margin-right: 8px;
+  background-color: #E7BF2A;
+  border: 1px solid #e5bb1c;
+}
+
+.emotion-2 {
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  margin-right: 8px;
+  background-color: #54C22C;
+  border: 1px solid #4fb629;
+}
+
+.emotion-10 {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.emotion-15 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-15 > div > div {
+  width: unset;
+}
+
+.emotion-15 button > div > div {
+  font-size: 16px;
+}
+
+<div
+    class="emotion-15"
+  >
+    <div
+      class="emotion-14"
+    >
+      <div
+        class="emotion-6"
+      >
+        <div
+          class="emotion-3"
+        >
+          <div
+            class="emotion-0"
+          />
+          <div
+            class="emotion-1"
+          />
+          <div
+            class="emotion-2"
+          />
+        </div>
+        <div
+          class="emotion-4"
+        >
+          Test Caption
+        </div>
+        <div
+          class="emotion-5"
+        />
+      </div>
+      <div
+        class="emotion-13"
+      >
+        <pre
+          class="emotion-12"
+          tabindex="-1"
+        >
+          <code
+            class="lg-highlight-hljs-light emotion-11 javascript"
+          >
+            <table
+              class="emotion-10"
+            >
+              <tbody>
+                <tr
+                  class=""
+                >
+                  <td
+                    class="emotion-7"
+                  >
+                    mongoimport --db test --collection inventory ^
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                >
+                  <td
+                    class="emotion-7"
+                  >
+                              --authenticationDatabase admin --username &lt;user&gt; --password &lt;password&gt; ^
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                >
+                  <td
+                    class="emotion-7"
+                  >
+                              --drop --file ~\\downloads\\inventory.crud.json
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </code>
+        </pre>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
 `;

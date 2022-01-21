@@ -1,51 +1,30 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Lightbox from '../../src/components/Lightbox';
 // data for this component
 import mockData from './data/Figure.test.json';
 
-const mountLightbox = (nodeData) => mount(<Lightbox nodeData={nodeData} />);
-const shallowLightbox = (nodeData) => shallow(<Lightbox nodeData={nodeData} />);
-
 describe('Lightbox', () => {
-  let wrapper;
-  let shallowWrapper;
-
-  beforeAll(() => {
-    wrapper = mountLightbox(mockData);
-    shallowWrapper = shallowLightbox(mockData);
-  });
-
   it('renders correctly', () => {
-    expect(shallowWrapper).toMatchSnapshot();
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = render(<Lightbox nodeData={mockData} />);
+    expect(wrapper.asFragment()).toMatchSnapshot();
   });
 
-  it('displays lightbox', () => {
-    expect(wrapper.find('Lightbox')).toHaveLength(1);
-    expect(wrapper.find('Image')).toHaveLength(1);
+  it('displays lightbox image and prompt', () => {
+    const wrapper = render(<Lightbox nodeData={mockData} />);
+    expect(wrapper.getByText('click to enlarge')).toBeTruthy();
+    expect(wrapper.getByAltText('/images/firstcluster.png')).toBeTruthy();
   });
 
   it('does not display the modal', () => {
-    expect(wrapper.exists('Modal')).toBe(true);
-    expect(wrapper.find('Modal').prop('open')).toBe(false);
+    const wrapper = render(<Lightbox nodeData={mockData} />);
+    expect(wrapper.queryAllByRole('dialog').length).toBe(0);
   });
 
   it('clicking the photo opens the modal', () => {
-    expect(wrapper.find('LightboxCaption')).toHaveLength(1);
-    expect(wrapper.find('LightboxCaption').text()).toEqual('click to enlarge');
-  });
-
-  it('clicking the photo', () => {
-    const modalOpener = wrapper.find('Image');
-    modalOpener.simulate('click');
-    expect(wrapper.exists('Modal')).toBe(true);
-    expect(wrapper.find('Modal').prop('open')).toBe(true);
-  });
-
-  it('clicking anywhere outside of the modal', () => {
-    const lightboxWrapper = wrapper.find('LightboxCaption');
-    lightboxWrapper.simulate('click');
-    expect(wrapper.find('Modal').prop('open')).toBe(false);
+    const wrapper = render(<Lightbox nodeData={mockData} />);
+    userEvent.click(wrapper.getByRole('button'));
+    expect(wrapper.getByRole('dialog')).toBeTruthy();
   });
 });

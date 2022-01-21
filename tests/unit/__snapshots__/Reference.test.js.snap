@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<a
-  class="reference external"
-  href="https://docs.mlab.com/subscriptions/#change-plans-using-rnr"
->
-  mLab documentation
-</a>
+<DocumentFragment>
+  <a
+    class="reference external"
+    href="https://docs.mlab.com/subscriptions/#change-plans-using-rnr"
+  >
+    mLab documentation
+  </a>
+</DocumentFragment>
 `;

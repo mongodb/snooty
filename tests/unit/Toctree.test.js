@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Toctree from '../../src/components/Sidenav/Toctree';
 import mockData from './data/Toctree.test.json';
 import { tick } from '../utils';
@@ -15,7 +16,7 @@ import { tick } from '../utils';
 //   /sdk/ios
 
 const mountToctree = (slug) => {
-  return mount(<Toctree slug={slug} toctree={mockData?.toctree} />);
+  return render(<Toctree slug={slug} toctree={mockData?.toctree} />);
 };
 
 describe('Toctree', () => {
@@ -23,31 +24,28 @@ describe('Toctree', () => {
 
   it('renders parent nodes', () => {
     const wrapper = mountToctree('/');
-    expect(wrapper.children()).toHaveLength(2);
+    expect(wrapper.getByText('Get Started')).toBeTruthy();
+    expect(wrapper.getByText('Realm Database SDKs')).toBeTruthy();
   });
 
   it('clicking on a drawer shows nested children', async () => {
     const wrapper = mountToctree('/');
-    const parentDrawer = wrapper.childAt(0);
-
-    expect(parentDrawer.find('button')).toHaveLength(1);
-    parentDrawer.find('button').simulate('click');
-    await tick({ wrapper });
-
-    expect(parentDrawer.prop('level')).toBe(1);
-    expect(wrapper.childAt(0).findWhere((n) => n.is('TOCNode') && n.prop('level') === 2)).toHaveLength(2);
+    const parentDrawer = wrapper.queryAllByRole('button');
+    expect(parentDrawer).toBeTruthy();
+    userEvent.click(parentDrawer[0]);
+    await tick();
+    expect(wrapper.getByText('Introduction for Mobile Developers')).toBeTruthy();
   });
 
   it('correct item set as active based off current page', () => {
-    const testActivePage = (testPage, expectedLevel) => {
-      const wrapper = mountToctree(testPage);
-      let activeItem = wrapper.findWhere((n) => n.is('SideNavItem') && n.prop('active') === true);
-      expect(activeItem).toHaveLength(1);
-      expect(activeItem.prop('to')).toEqual(testPage);
-      expect(activeItem.parents().at(1).prop('level')).toEqual(expectedLevel);
+    const wrapper = render(<Toctree slug={'/'} toctree={mockData?.toctree} />);
+    const testActivePage = (testPage, testText) => {
+      wrapper.rerender(<Toctree slug={testPage} toctree={mockData?.toctree} />);
+      expect(wrapper.getByText(testText).closest('a')).toHaveAttribute('aria-current', 'page');
+      expect(wrapper.getByText(testText).closest('a')).toHaveAttribute('href', `/${testPage}/`);
     };
 
-    testActivePage('sdk/android/fundamentals/async-api', 4);
-    testActivePage('sdk/ios', 2);
+    testActivePage('sdk/android/fundamentals/async-api', 'Asynchronous API');
+    testActivePage('sdk/ios', 'iOS SDK');
   });
 });

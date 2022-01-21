@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { render } from '@testing-library/react';
 import Figure from '../../src/components/Figure';
 
 // data for this component
@@ -9,15 +9,15 @@ import lightboxData from './data/FigureLightbox.test.json';
 
 it('renders correctly', () => {
   const tree = render(<Figure nodeData={mockData} />);
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });
 
 it('renders border correctly when specified as an option', () => {
   const tree = render(<Figure nodeData={borderData} />);
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });
 
 it('renders lightbox correctly when specified as an option', () => {
   const tree = render(<Figure nodeData={lightboxData} />);
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });

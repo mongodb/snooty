@@ -1,7 +1,9 @@
 // Tests for the search results page
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
+import { tick } from '../utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@reach/router';
 import SearchResults from '../../src/components/SearchResults';
@@ -9,44 +11,45 @@ import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/moc
 
 // Check the search results include the property-filtered results
 const expectFilteredResults = (wrapper) => {
-  expect(wrapper.find('StyledSearchResult').length).toBe(1);
-  const searchResult = wrapper.find('StyledSearchResult').at(0);
+  wrapper.getByText('Realm results for "stitch"');
+
+  expect(wrapper.queryAllByText('Realm').length).toBe(1);
 
   // Check the search result card displays content according to the response
-  expect(searchResult.exists());
-  expect(searchResult.text()).toContain(FILTERED_RESULT.title);
-  expect(searchResult.text()).toContain(FILTERED_RESULT.preview);
-  expect(searchResult.text()).not.toContain(UNFILTERED_RESULT.title);
+  expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();
+  expect(wrapper.queryAllByText(FILTERED_RESULT.preview)).toBeTruthy();
+  expect(wrapper.queryAllByText(UNFILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  const searchResultLink = searchResult.find('SearchResultLink').at(0);
-  expect(searchResultLink.props()).toHaveProperty('href', FILTERED_RESULT.url);
-  expect(wrapper.text()).toContain('Realm results for "stitch"');
+  expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
+  expect(wrapper.queryAllByText('Realm results for "stitch"').length).toBe(1);
 
   // Check the dropdowns are filled in
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
 };
 
 const expectValuesForFilters = (wrapper, product, branch) => {
-  expect(wrapper.find('Select').at(0).text()).toContain(product);
-  expect(wrapper.find('Select').at(1).text()).toContain(branch);
+  expect(wrapper.queryByText(product)).toBeTruthy();
+  expect(wrapper.queryByText(branch)).toBeTruthy();
 };
 
 // Check the search results match the expected unfiltered results
 const expectUnfilteredResults = (wrapper) => {
-  expect(wrapper.find('StyledSearchResult').length).toBe(1);
-  const searchResult = wrapper.find('StyledSearchResult').at(0);
+  wrapper.getByText(`All search results for "stitch"`);
+
+  expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
 
   // Check the search result card displays content according to the response
-  expect(searchResult.exists());
-  expect(searchResult.text()).toContain(UNFILTERED_RESULT.title);
-  expect(searchResult.text()).toContain(UNFILTERED_RESULT.preview);
-  expect(searchResult.text()).not.toContain(FILTERED_RESULT.title);
+  expect(wrapper.queryAllByText(UNFILTERED_RESULT.title)).toBeTruthy();
+  expect(wrapper.queryAllByText(UNFILTERED_RESULT.preview)).toBeTruthy();
+  expect(wrapper.queryAllByText(FILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  const searchResultLink = searchResult.find('SearchResultLink').at(0);
-  expect(searchResultLink.props()).toHaveProperty('href', UNFILTERED_RESULT.url);
-  expect(wrapper.text()).not.toContain('Realm');
+  expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty(
+    'href',
+    `http://localhost/${UNFILTERED_RESULT.url}`
+  );
+  expect(wrapper.queryAllByText('Realm results for "stitch"').length).toBe(0);
 
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Select a Product', 'Select a Version');
@@ -56,6 +59,8 @@ const expectUnfilteredResults = (wrapper) => {
 const mockLocation = (search) => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ search }));
 
 describe('Search Results Page', () => {
+  jest.useFakeTimers();
+
   beforeAll(() => {
     window.fetch = mockMarianFetch;
   });
@@ -66,17 +71,16 @@ describe('Search Results Page', () => {
 
   it('renders correctly without browser', () => {
     mockLocation(null);
-    const tree = shallow(<SearchResults />);
-    expect(tree).toMatchSnapshot();
+    const tree = render(<SearchResults />);
+    expect(tree.asFragment()).toMatchSnapshot();
   });
 
   it('renders results from a given search term query param', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = mount(<SearchResults />);
+      renderStitchResults = render(<SearchResults />);
     });
-    await renderStitchResults.update();
     expectUnfilteredResults(renderStitchResults);
   });
 
@@ -84,10 +88,8 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch&searchProperty=realm-master');
     await act(async () => {
-      renderStitchResults = mount(<SearchResults />);
+      renderStitchResults = render(<SearchResults />);
     });
-
-    await renderStitchResults.update();
     expectFilteredResults(renderStitchResults);
   });
 
@@ -95,20 +97,19 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = mount(<SearchResults />);
+      renderStitchResults = render(<SearchResults />);
     });
-    await renderStitchResults.update();
     expectUnfilteredResults(renderStitchResults);
 
     // Change the filters, which should change the shown results
-    let firstDropdown = renderStitchResults.find('StyledCustomSelect').at(0);
-    firstDropdown.simulate('click');
-    const firstChoice = renderStitchResults.find('Option').at(0);
-    await act(async () => {
-      firstChoice.simulate('click');
-    });
-    await renderStitchResults.update();
 
+    await act(async () => {
+      const dropdown = renderStitchResults.queryAllByRole('listbox')[0];
+      expect(dropdown).toHaveAttribute('aria-expanded', 'false');
+      userEvent.click(dropdown);
+      tick();
+      userEvent.click(renderStitchResults.getByText('Realm'));
+    });
     expectFilteredResults(renderStitchResults);
   });
 });

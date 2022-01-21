@@ -1,48 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Pills component renders correctly 1`] = `
-<ul
-  className="guide__pills pillstrip-declaration "
-  role="tablist"
->
-  <li
-    data-tabid="windows"
-    key="0"
+<DocumentFragment>
+  <ul
+    class="guide__pills pillstrip-declaration "
+    role="tablist"
   >
-    <span
-      className="guide__pill   guide__pill"
-      onClick={[Function]}
-      role="button"
-      tabIndex={0}
+    <li
+      data-tabid="windows"
     >
-      Windows
-    </span>
-  </li>
-  <li
-    data-tabid="macos"
-    key="1"
-  >
-    <span
-      className="guide__pill   guide__pill"
-      onClick={[Function]}
-      role="button"
-      tabIndex={1}
+      <span
+        class="guide__pill   guide__pill"
+        role="button"
+        tabindex="0"
+      >
+        Windows
+      </span>
+    </li>
+    <li
+      data-tabid="macos"
     >
-      macOS
-    </span>
-  </li>
-  <li
-    data-tabid="linux"
-    key="2"
-  >
-    <span
-      className="guide__pill   guide__pill"
-      onClick={[Function]}
-      role="button"
-      tabIndex={2}
+      <span
+        class="guide__pill   guide__pill"
+        role="button"
+        tabindex="1"
+      >
+        macOS
+      </span>
+    </li>
+    <li
+      data-tabid="linux"
     >
-      Linux
-    </span>
-  </li>
-</ul>
+      <span
+        class="guide__pill   guide__pill"
+        role="button"
+        tabindex="2"
+      >
+        Linux
+      </span>
+    </li>
+  </ul>
+</DocumentFragment>
 `;
