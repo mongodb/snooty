@@ -1,149 +1,262 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<StyledGrid
-  className="card-group "
-  columns={3}
-  isCarousel={true}
-  noMargin={true}
->
-  <ComponentFactory
-    isCompact={true}
-    isExtraCompact={false}
-    key="0"
-    nodeData={
-      Object {
-        "argument": Array [],
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 128,
-                  },
-                },
-                "type": "text",
-                "value": "Use Compass to connect to your Atlas cluster",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 128,
-              },
-            },
-            "type": "paragraph",
-          },
-        ],
-        "domain": "landing",
-        "name": "card",
-        "options": Object {
-          "checksum": "522319e9710c845a5fe15076ac78d2577a6cdef26b301dee66077ca5b02b289a",
-          "cta": "Read Atlas docs",
-          "icon": "/images/icons/atlas.svg",
-          "icon-alt": "MongoDB Atlas icon",
-          "url": "https://docs.atlas.mongodb.com/getting-started/",
-        },
-        "position": Object {
-          "start": Object {
-            "line": 122,
-          },
-        },
-        "type": "directive",
-      }
-    }
-  />
-  <ComponentFactory
-    isCompact={true}
-    isExtraCompact={false}
-    key="1"
-    nodeData={
-      Object {
-        "argument": Array [],
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 136,
-                  },
-                },
-                "type": "text",
-                "value": "Learn MongoDB Basics with MongoDB University",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 136,
-              },
-            },
-            "type": "paragraph",
-          },
-        ],
-        "domain": "landing",
-        "name": "card",
-        "options": Object {
-          "checksum": "5a77a5f2c1d7ceec1423bad1f60110583c6c4a9a9c6e683c8f98d95b7b250c02",
-          "cta": "Learn MongoDB Basics",
-          "icon": "/images/icons/university.svg",
-          "icon-alt": "MongoDB University icon",
-          "url": "https://university.mongodb.com/courses/M001/about",
-        },
-        "position": Object {
-          "start": Object {
-            "line": 130,
-          },
-        },
-        "type": "directive",
-      }
-    }
-  />
-  <ComponentFactory
-    isCompact={true}
-    isExtraCompact={false}
-    key="2"
-    nodeData={
-      Object {
-        "argument": Array [],
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 144,
-                  },
-                },
-                "type": "text",
-                "value": "Access more in-depth examples of querying data",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 144,
-              },
-            },
-            "type": "paragraph",
-          },
-        ],
-        "domain": "landing",
-        "name": "card",
-        "options": Object {
-          "checksum": "4435ec408acdbe18f57504d707eaa087d6d055b9dc073fe512d8f241573947c5",
-          "cta": "Read Server docs",
-          "icon": "/images/icons/server.svg",
-          "icon-alt": "MongoDB Server icon",
-          "url": "https://docs.mongodb.com/manual/tutorial/getting-started/",
-        },
-        "position": Object {
-          "start": Object {
-            "line": 138,
-          },
-        },
-        "type": "directive",
-      }
-    }
-  />
-</StyledGrid>
+<DocumentFragment>
+  .emotion-12 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+  cursor: pointer;
+}
+
+.emotion-12:focus {
+  outline: none;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+}
+
+.emotion-12:hover {
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+}
+
+.emotion-12:hover:focus {
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+}
+
+.emotion-39 {
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  display: grid;
+  grid-column: 1 / -1 !important;
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+  grid-template-columns: repeat(3,1fr);
+  margin: 32px 0;
+}
+
+@media only screen and (max-width:1200px) {
+  .emotion-39 {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-39 {
+    grid-gap: calc(24px * 0.75);
+    grid-template-columns: calc(24px / 2) repeat(3,calc(75% - calc(2 * 24px))) calc(24px / 2);
+    grid-template-rows: minmax(150px,1fr);
+    margin: 24px 0;
+    overflow-x: scroll;
+    padding-bottom: calc(24px / 2);
+    -webkit-scroll-snap-type: x proximity;
+    -moz-scroll-snap-type: x proximity;
+    -ms-scroll-snap-type: x proximity;
+    scroll-snap-type: x proximity;
+  }
+
+  .emotion-39:before,
+  .emotion-39:after {
+    content: '';
+  }
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding: 32px 24px;
+}
+
+.emotion-10 p:last-of-type {
+  margin-bottom: 0;
+}
+
+.emotion-2 {
+  background: #E4F4E4;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-shrink: 0 !important;
+  -ms-flex-negative: 0 !important;
+  flex-shrink: 0 !important;
+  height: 48px;
+  width: 48px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-2 {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.emotion-0 {
+  margin: auto;
+  width: 24px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-0 {
+    width: 20px;
+  }
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 24px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-8 {
+    margin-left: 16px;
+  }
+}
+
+.emotion-4 {
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+}
+
+.emotion-6 {
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.emotion-6 > a:hover {
+  color: #1A567E;
+}
+
+<div
+    class="card-group  emotion-39 emotion-40"
+  >
+    <div
+      class="emotion-10 emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <img
+          alt="MongoDB Atlas icon"
+          class="emotion-0 emotion-1"
+          src="/images/icons/atlas.svg"
+        />
+      </div>
+      <div
+        class="emotion-8 emotion-9"
+      >
+        <h4
+          class="emotion-4 emotion-5"
+        />
+        <p>
+          Use Compass to connect to your Atlas cluster
+        </p>
+        <p
+          class="emotion-6 emotion-7"
+        >
+          <a
+            href="https://docs.atlas.mongodb.com/getting-started/"
+          >
+            Read Atlas docs
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      class="emotion-10 emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <img
+          alt="MongoDB University icon"
+          class="emotion-0 emotion-1"
+          src="/images/icons/university.svg"
+        />
+      </div>
+      <div
+        class="emotion-8 emotion-9"
+      >
+        <h4
+          class="emotion-4 emotion-5"
+        />
+        <p>
+          Learn MongoDB Basics with MongoDB University
+        </p>
+        <p
+          class="emotion-6 emotion-7"
+        >
+          <a
+            href="https://university.mongodb.com/courses/M001/about"
+          >
+            Learn MongoDB Basics
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      class="emotion-10 emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <img
+          alt="MongoDB Server icon"
+          class="emotion-0 emotion-1"
+          src="/images/icons/server.svg"
+        />
+      </div>
+      <div
+        class="emotion-8 emotion-9"
+      >
+        <h4
+          class="emotion-4 emotion-5"
+        />
+        <p>
+          Access more in-depth examples of querying data
+        </p>
+        <p
+          class="emotion-6 emotion-7"
+        >
+          <a
+            href="https://docs.mongodb.com/manual/tutorial/getting-started/"
+          >
+            Read Server docs
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
 `;

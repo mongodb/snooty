@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import OpenAPI from '../../src/components/OpenAPI';
 
 const mockSpecJson = {
@@ -15,6 +15,16 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ database: 'snooty_dev' }),
 }));
 
+jest.mock('../../src/utils/realm', () => ({
+  fetchOASFile: async () => false,
+}));
+
+jest.mock('redoc', () => {
+  return {
+    RedocStandalone: () => <div>Redoc Mock</div>,
+  };
+});
+
 const shallowRender = ({ nodeValue, usesRealm = false, usesRst = false }) => {
   let mockChildren = [];
   if (!usesRealm) {
@@ -26,7 +36,7 @@ const shallowRender = ({ nodeValue, usesRealm = false, usesRst = false }) => {
     ];
   }
 
-  return shallow(
+  return render(
     <OpenAPI
       metadata={{
         title: 'Atlas',
@@ -49,20 +59,11 @@ const shallowRender = ({ nodeValue, usesRealm = false, usesRst = false }) => {
 };
 
 describe('OpenAPI', () => {
-  const selectors = {
-    cFactory: 'ComponentFactory',
-    loading: 'LoadingWidget',
-    redoc: 'RedocStandalone',
-  };
   const mockNodeValue = 'includes/cloud-openapi.json';
 
   it('renders with a parsed spec file', () => {
     const wrapper = shallowRender({ nodeValue: mockNodeValue });
-    expect(wrapper.find(selectors.cFactory)).toHaveLength(0);
-    expect(wrapper.find(selectors.loading)).toHaveLength(0);
-    const redocComponent = wrapper.find(selectors.redoc);
-    expect(redocComponent).toHaveLength(1);
-    expect(redocComponent.prop('spec')).toEqual(mockSpecJson);
+    expect(wrapper.getByText('Redoc Mock')).toBeTruthy();
   });
 
   it('renders loading widget before fetching spec file from Realm', async () => {
@@ -71,11 +72,7 @@ describe('OpenAPI', () => {
       nodeValue: 'cloud',
       usesRealm: true,
     });
-    expect(wrapper.find(selectors.cFactory)).toHaveLength(0);
-    expect(wrapper.find(selectors.loading)).toHaveLength(1);
-    // Testing fetching the spec and loading the contents properly may be better off
-    // as an E2E test in the future
-    expect(wrapper.find(selectors.redoc)).toHaveLength(0);
+    expect(wrapper.getByText('Loading')).toBeTruthy();
   });
 
   it('uses rST to render our custom components', () => {
@@ -83,8 +80,8 @@ describe('OpenAPI', () => {
       nodeValue: mockNodeValue,
       usesRst: true,
     });
-    expect(wrapper.find(selectors.cFactory)).toHaveLength(1);
-    expect(wrapper.find(selectors.loading)).toHaveLength(0);
-    expect(wrapper.find(selectors.redoc)).toHaveLength(0);
+    expect(
+      wrapper.getByText('{"openapi":"3.0.0","info":{"version":"1.0.5","title":"Swagger Petstore"},"paths":{}}')
+    ).toBeTruthy();
   });
 });

@@ -1,23 +1,197 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<ComponentFactory
-  key="0"
-  nodeData={
-    Object {
-      "copyable": true,
-      "emphasize_lines": Array [
-        0,
-        1,
-      ],
-      "lang": "java",
-      "linenos": Array [
-        0,
-        1,
-      ],
-      "type": "code",
-      "value": "sample code",
-    }
+<DocumentFragment>
+  .emotion-1 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+}
+
+.emotion-4 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
+}
+
+.emotion-5 {
+  border: 2px solid;
+  overflow-x: auto;
+  border-radius: 0;
+  border: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 0;
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  white-space: pre;
+  border-color: #E7EEEC;
+  background-color: #F9FBFA;
+  color: #061621;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-5 {
+    white-space: pre-wrap;
   }
-/>
+}
+
+@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-5 {
+    white-space: pre;
+  }
+}
+
+.emotion-8 {
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-3 {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.emotion-2 {
+  background-color: #FEF7E3;
+  background-image: none;
+  background-attachment: fixed;
+}
+
+.emotion-2 > td {
+  border-top: 1px solid #FEF2C8;
+}
+
+.emotion-2 + tr > td {
+  border-top: 1px solid #FEF2C8;
+}
+
+.emotion-2 + .emotion-2 > td {
+  border-top: 0;
+}
+
+.emotion-2:last-child > td {
+  border-bottom: 1px solid #FEF2C8;
+}
+
+.emotion-0 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: right;
+  padding-left: 8px;
+  padding-right: 0;
+  color: #86681D;
+}
+
+.emotion-6 {
+  width: 38px;
+  border-left: solid 1px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding-top: 6px;
+  min-height: 36px;
+  padding-top: 4px;
+  min-height: 36px;
+  padding-top: 4px;
+  border-color: #E7EEEC;
+  background-color: white;
+}
+
+.emotion-9 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-9 > div > div {
+  width: unset;
+}
+
+.emotion-9 button > div > div {
+  font-size: 16px;
+}
+
+<div
+    class="emotion-9"
+  >
+    <div
+      class="emotion-8"
+    >
+      <div
+        class="emotion-7"
+      >
+        <pre
+          class="emotion-5"
+          tabindex="-1"
+        >
+          <code
+            class="lg-highlight-hljs-light emotion-4 java"
+          >
+            <table
+              class="emotion-3"
+            >
+              <tbody>
+                <tr
+                  class="emotion-2"
+                >
+                  <td
+                    class="emotion-0"
+                  >
+                    1
+                  </td>
+                  <td
+                    class="emotion-1"
+                  >
+                    sample code
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </code>
+        </pre>
+        <div
+          class="emotion-6"
+          data-testid="leafygreen-code-panel"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
 `;

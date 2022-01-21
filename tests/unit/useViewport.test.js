@@ -1,6 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import useViewport, { getViewport } from '../../src/hooks/useViewport';
 import { tick } from '../utils';
 
@@ -8,10 +8,10 @@ const TestComponent = () => {
   const { width, height, scrollX, scrollY } = useViewport();
   return (
     <>
-      <div id="width" value={width} />
-      <div id="height" value={height} />
-      <div id="scrollX" value={scrollX} />
-      <div id="scrollY" value={scrollY} />
+      <input type="number" data-testid="#width" value={width} />
+      <input type="number" data-testid="#height" value={height} />
+      <input type="number" data-testid="#scrollX" value={scrollX} />
+      <input type="number" data-testid="#scrollY" value={scrollY} />
     </>
   );
 };
@@ -85,7 +85,7 @@ describe('useViewport()', () => {
     expect(getAddResizeListenerCalls().length).toBe(0);
     expect(getAddScrollListenerCalls().length).toBe(0);
 
-    const wrapper = mount(<TestComponent />);
+    const wrapper = render(<TestComponent />);
     expect(getAddResizeListenerCalls().length).toBe(1);
     expect(getAddScrollListenerCalls().length).toBe(1);
     expect(getRemoveResizeListenerCalls().length).toBe(0);
@@ -99,67 +99,67 @@ describe('useViewport()', () => {
   });
 
   it('updates the viewport on scroll', async () => {
-    const wrapper = mount(<TestComponent />);
+    const wrapper = render(<TestComponent />);
 
-    expect(wrapper.find('#scrollX').prop('value')).toEqual(0);
-    expect(wrapper.find('#scrollY').prop('value')).toEqual(0);
+    expect(wrapper.getByTestId('#scrollX')).toHaveValue(0);
+    expect(wrapper.getByTestId('#scrollY')).toHaveValue(0);
 
     scroll(40, 10);
-    await tick({ wrapper, waitFor: 200 });
+    await tick({ waitFor: 200 });
 
-    expect(wrapper.find('#scrollX').prop('value')).toEqual(10);
-    expect(wrapper.find('#scrollY').prop('value')).toEqual(40);
+    expect(wrapper.getByTestId('#scrollX')).toHaveValue(10);
+    expect(wrapper.getByTestId('#scrollY')).toHaveValue(40);
   });
 
   it('updates the viewport on resize', async () => {
-    const wrapper = mount(<TestComponent />);
+    const wrapper = render(<TestComponent />);
 
-    expect(wrapper.find('#width').prop('value')).toEqual(1024);
-    expect(wrapper.find('#height').prop('value')).toEqual(768);
+    expect(wrapper.getByTestId('#width')).toHaveValue(1024);
+    expect(wrapper.getByTestId('#height')).toHaveValue(768);
 
     resize(800, 670);
-    await tick({ wrapper, waitFor: 200 });
+    await tick({ waitFor: 200 });
 
-    expect(wrapper.find('#width').prop('value')).toEqual(800);
-    expect(wrapper.find('#height').prop('value')).toEqual(670);
+    expect(wrapper.getByTestId('#width')).toHaveValue(800);
+    expect(wrapper.getByTestId('#height')).toHaveValue(670);
   });
 
   it('debounces the event listeners for 200ms', async () => {
-    const wrapper = mount(<TestComponent />);
+    const wrapper = render(<TestComponent />);
 
-    expect(wrapper.find('#width').prop('value')).toEqual(1024);
-    expect(wrapper.find('#height').prop('value')).toEqual(768);
+    expect(wrapper.getByTestId('#width')).toHaveValue(1024);
+    expect(wrapper.getByTestId('#height')).toHaveValue(768);
 
     // Resize the window
     resize(800, 670);
 
     // Before 200ms the viewport values shouldn't update
-    await tick({ wrapper, waitFor: 199 });
-    expect(wrapper.find('#width').prop('value')).toEqual(1024);
-    expect(wrapper.find('#height').prop('value')).toEqual(768);
+    await tick({ waitFor: 199 });
+    expect(wrapper.getByTestId('#width')).toHaveValue(1024);
+    expect(wrapper.getByTestId('#height')).toHaveValue(768);
 
     // After 200ms the viewport values should update
-    await tick({ wrapper, waitFor: 1 });
-    expect(wrapper.find('#width').prop('value')).toEqual(800);
-    expect(wrapper.find('#height').prop('value')).toEqual(670);
+    await tick({ waitFor: 1 });
+    expect(wrapper.getByTestId('#width')).toHaveValue(800);
+    expect(wrapper.getByTestId('#height')).toHaveValue(670);
 
     // Now let's make sure that the debounce waits 200ms from the most recent scroll event
     resize(900, 535);
-    await tick({ wrapper, waitFor: 100 });
+    await tick({ waitFor: 100 });
 
     resize(1000, 400);
-    await tick({ wrapper, waitFor: 100 });
+    await tick({ waitFor: 100 });
 
     // 200ms have passed since the original resize
     // The second resize reset the debounce interval, so nothing should change yet
-    expect(wrapper.find('#width').prop('value')).toEqual(800);
-    expect(wrapper.find('#height').prop('value')).toEqual(670);
+    expect(wrapper.getByTestId('#width')).toHaveValue(800);
+    expect(wrapper.getByTestId('#height')).toHaveValue(670);
 
-    await tick({ wrapper, waitFor: 100 });
+    await tick({ waitFor: 100 });
 
     // It's now 300ms since the first resize and 200ms since the second resize
     // After 200ms without another resize event, the second resize updates the viewport values
-    expect(wrapper.find('#width').prop('value')).toEqual(1000);
-    expect(wrapper.find('#height').prop('value')).toEqual(400);
+    expect(wrapper.getByTestId('#width')).toHaveValue(1000);
+    expect(wrapper.getByTestId('#height')).toHaveValue(400);
   });
 });

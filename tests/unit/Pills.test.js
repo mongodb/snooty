@@ -1,38 +1,37 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Pills from '../../src/components/Pills';
 import { TabContext } from '../../src/components/tab-context';
 import { PLATFORMS } from '../../src/constants';
 
-const mountPills = ({ activeTabs, mockData, mockSetActiveTab }) =>
-  mount(
+const renderPills = ({ activeTabs, mockData, mockSetActiveTab }) =>
+  render(
     <TabContext.Provider value={{ activeTabs, setActiveTab: mockSetActiveTab }}>
       <Pills pills={mockData} />
     </TabContext.Provider>
   );
-const shallowPills = ({ mockData }) => shallow(<Pills pills={mockData} />);
 
 describe('Pills component', () => {
-  let wrapper;
-  let shallowWrapper;
   const mockData = ['windows', 'macos', 'linux'];
   const mockSetActiveTab = jest.fn();
 
-  beforeAll(() => {
-    wrapper = mountPills({
+  it('renders correctly', () => {
+    const wrapper = renderPills({
       activeTabs: { platforms: PLATFORMS[1] },
       mockData,
       mockSetActiveTab,
     });
-    shallowWrapper = shallowPills({ mockData });
-  });
-
-  it('renders correctly', () => {
-    expect(shallowWrapper).toMatchSnapshot();
+    expect(wrapper.asFragment()).toMatchSnapshot();
   });
 
   it('clicking a pill calls the event handler', () => {
-    wrapper.find('.guide__pill').first().simulate('click');
+    const wrapper = renderPills({
+      activeTabs: { platforms: PLATFORMS[1] },
+      mockData,
+      mockSetActiveTab,
+    });
+    userEvent.click(wrapper.queryAllByRole('button')[0]);
     expect(mockSetActiveTab.mock.calls.length).toBe(1);
   });
 });

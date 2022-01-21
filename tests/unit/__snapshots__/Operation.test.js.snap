@@ -1,136 +1,863 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when no summary is present renders correctly  1`] = `
-<OperationHeader>
-  <Badge
-    variant="blue"
+<DocumentFragment>
+  .emotion-3 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-15 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+}
+
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 20px;
+  border-radius: 50px;
+  height: 20px;
+  padding-left: 9px;
+  padding-right: 9px;
+  text-transform: uppercase;
+  border: 1px solid;
+  background-color: #E1F2F6;
+  border-color: #C5E4F2;
+  color: #1A567E;
+}
+
+.emotion-5 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255,255,255,0);
+  height: 28px;
+  width: 28px;
+}
+
+.emotion-5:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before,
+.emotion-5:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-5:focus {
+  outline: none;
+}
+
+.emotion-5:active,
+.emotion-5:hover {
+  color: #3D4F58;
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-5:focus {
+  color: #1A567E;
+}
+
+.emotion-5:focus:before {
+  background-color: #C5E4F2;
+}
+
+.emotion-14 {
+  margin-bottom: 16px;
+}
+
+.emotion-10 {
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  background-color: #F9FBFA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 16px 32px;
+}
+
+.emotion-10 > *:not(:last-child) {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-10 {
+    padding: 16px;
+  }
+}
+
+.emotion-1 {
+  color: #061621;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-1 {
+    word-break: break-all;
+  }
+}
+
+.emotion-6 {
+  top: -5px;
+  margin-left: 4px;
+  position: relative;
+}
+
+.emotion-4 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #89979B;
+}
+
+.emotion-8 {
+  top: -5px;
+  margin-left: auto;
+}
+
+.emotion-12 {
+  margin: 24px 32px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-12 {
+    margin: 16px;
+  }
+}
+
+.emotion-12 > p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+<div
+    class="emotion-14 emotion-15"
+    id="get-/auth/providers"
   >
-    GET
-  </Badge>
-  <div>
-    <Path
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "/&#8203;auth/&#8203;providers",
-        }
-      }
-    />
-    <CopyButton
-      contents="/auth/providers"
-    />
-  </div>
-  <Icon
-    glyph="ChevronDown"
-  />
-</OperationHeader>
-<Description
-  showDetails={false}
->
-  <ComponentFactory
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 23,
-              },
-            },
-            "type": "text",
-            "value": "This is a description. Lorem ipsum dolor sit amet, consectetur adipiscing
+    <div
+      class="emotion-10 emotion-11"
+    >
+      <div
+        class="emotion-0"
+      >
+        GET
+      </div>
+      <div>
+        <code
+          class="emotion-1 emotion-2"
+        >
+          /​auth/​providers
+        </code>
+        <span
+          class="emotion-6"
+        >
+          <button
+            aria-disabled="false"
+            aria-label="Copy"
+            class="emotion-4 emotion-5"
+            tabindex="0"
+          >
+            <div
+              class="emotion-3"
+            >
+              <svg
+                aria-label="Copy Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+        </span>
+      </div>
+      <button
+        aria-disabled="false"
+        aria-label="Show operation details"
+        class="emotion-8 emotion-5"
+        tabindex="0"
+      >
+        <div
+          class="emotion-3"
+        >
+          <svg
+            aria-label="Chevron Down Icon"
+            class=""
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div
+      class="emotion-12 emotion-13"
+    >
+      <p>
+        This is a description. Lorem ipsum dolor sit amet, consectetur adipiscing
 elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
 ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
 in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
 sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-mollit anim id est laborum.",
-          },
-        ],
-        "position": Object {
-          "start": Object {
-            "line": 23,
-          },
-        },
-        "type": "paragraph",
-      }
-    }
-  />
-</Description>
+mollit anim id est laborum.
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`when no summary or description is present renders correctly  1`] = `
-<OperationHeader>
-  <Badge
-    variant="green"
+<DocumentFragment>
+  .emotion-3 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-13 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+}
+
+.emotion-5 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255,255,255,0);
+  height: 28px;
+  width: 28px;
+}
+
+.emotion-5:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before,
+.emotion-5:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-5:focus {
+  outline: none;
+}
+
+.emotion-5:active,
+.emotion-5:hover {
+  color: #3D4F58;
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-5:focus {
+  color: #1A567E;
+}
+
+.emotion-5:focus:before {
+  background-color: #C5E4F2;
+}
+
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 20px;
+  border-radius: 50px;
+  height: 20px;
+  padding-left: 9px;
+  padding-right: 9px;
+  text-transform: uppercase;
+  border: 1px solid;
+  background-color: #E4F4E4;
+  border-color: #C3E7CA;
+  color: #116149;
+}
+
+.emotion-12 {
+  margin-bottom: 16px;
+}
+
+.emotion-10 {
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  background-color: #F9FBFA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 16px 32px;
+}
+
+.emotion-10 > *:not(:last-child) {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-10 {
+    padding: 16px;
+  }
+}
+
+.emotion-1 {
+  color: #061621;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-1 {
+    word-break: break-all;
+  }
+}
+
+.emotion-6 {
+  top: -5px;
+  margin-left: 4px;
+  position: relative;
+}
+
+.emotion-4 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #89979B;
+}
+
+.emotion-8 {
+  top: -5px;
+  margin-left: auto;
+}
+
+<div
+    class="emotion-12 emotion-13"
+    id="post-/auth/providers/{provider}/login"
   >
-    POST
-  </Badge>
-  <div>
-    <Path
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "/&#8203;auth/&#8203;providers/&#8203;<strong>{provider}</strong>/&#8203;login",
-        }
-      }
-    />
-    <CopyButton
-      contents="/auth/providers/{provider}/login"
-    />
+    <div
+      class="emotion-10 emotion-11"
+    >
+      <div
+        class="emotion-0"
+      >
+        POST
+      </div>
+      <div>
+        <code
+          class="emotion-1 emotion-2"
+        >
+          /​auth/​providers/​
+          <strong>
+            {provider}
+          </strong>
+          /​login
+        </code>
+        <span
+          class="emotion-6"
+        >
+          <button
+            aria-disabled="false"
+            aria-label="Copy"
+            class="emotion-4 emotion-5"
+            tabindex="0"
+          >
+            <div
+              class="emotion-3"
+            >
+              <svg
+                aria-label="Copy Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+        </span>
+      </div>
+      <button
+        aria-disabled="false"
+        aria-label="Show operation details"
+        class="emotion-8 emotion-5"
+        tabindex="0"
+      >
+        <div
+          class="emotion-3"
+        >
+          <svg
+            aria-label="Chevron Down Icon"
+            class=""
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
   </div>
-  <Icon
-    glyph="ChevronDown"
-  />
-</OperationHeader>
+</DocumentFragment>
 `;
 
 exports[`when rendering all fields renders correctly  1`] = `
-<OperationHeader>
-  <Badge
-    variant="blue"
+<DocumentFragment>
+  .emotion-3 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-15 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+}
+
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 20px;
+  border-radius: 50px;
+  height: 20px;
+  padding-left: 9px;
+  padding-right: 9px;
+  text-transform: uppercase;
+  border: 1px solid;
+  background-color: #E1F2F6;
+  border-color: #C5E4F2;
+  color: #1A567E;
+}
+
+.emotion-5 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255,255,255,0);
+  height: 28px;
+  width: 28px;
+}
+
+.emotion-5:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before,
+.emotion-5:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-5:focus {
+  outline: none;
+}
+
+.emotion-5:active,
+.emotion-5:hover {
+  color: #3D4F58;
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-5:focus {
+  color: #1A567E;
+}
+
+.emotion-5:focus:before {
+  background-color: #C5E4F2;
+}
+
+.emotion-14 {
+  margin-bottom: 16px;
+}
+
+.emotion-10 {
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  background-color: #F9FBFA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 16px 32px;
+}
+
+.emotion-10 > *:not(:last-child) {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-10 {
+    padding: 16px;
+  }
+}
+
+.emotion-1 {
+  color: #061621;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-1 {
+    word-break: break-all;
+  }
+}
+
+.emotion-6 {
+  top: -5px;
+  margin-left: 4px;
+  position: relative;
+}
+
+.emotion-4 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #89979B;
+}
+
+.emotion-8 {
+  top: -5px;
+  margin-left: auto;
+}
+
+.emotion-12 {
+  margin: 24px 32px;
+}
+
+@media only screen and (max-width:420px) {
+  .emotion-12 {
+    margin: 16px;
+  }
+}
+
+.emotion-12 > p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+<div
+    class="emotion-14 emotion-15"
+    id="get-/auth/profile"
   >
-    GET
-  </Badge>
-  <div>
-    <Path
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "/&#8203;auth/&#8203;profile",
-        }
-      }
-    />
-    <CopyButton
-      contents="/auth/profile"
-    />
+    <div
+      class="emotion-10 emotion-11"
+    >
+      <div
+        class="emotion-0"
+      >
+        GET
+      </div>
+      <div>
+        <code
+          class="emotion-1 emotion-2"
+        >
+          /​auth/​profile
+        </code>
+        <span
+          class="emotion-6"
+        >
+          <button
+            aria-disabled="false"
+            aria-label="Copy"
+            class="emotion-4 emotion-5"
+            tabindex="0"
+          >
+            <div
+              class="emotion-3"
+            >
+              <svg
+                aria-label="Copy Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+        </span>
+      </div>
+      <button
+        aria-disabled="false"
+        aria-label="Show operation details"
+        class="emotion-8 emotion-5"
+        tabindex="0"
+      >
+        <div
+          class="emotion-3"
+        >
+          <svg
+            aria-label="Chevron Down Icon"
+            class=""
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div
+      class="emotion-12 emotion-13"
+    >
+      <p>
+        Get information about the currently logged in user.
+      </p>
+    </div>
   </div>
-  <Icon
-    glyph="ChevronDown"
-  />
-</OperationHeader>
-<Description
-  showDetails={false}
->
-  <ComponentFactory
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 216,
-              },
-            },
-            "type": "text",
-            "value": "Get information about the currently logged in user.",
-          },
-        ],
-        "position": Object {
-          "start": Object {
-            "line": 216,
-          },
-        },
-        "type": "paragraph",
-      }
-    }
-  />
-</Description>
+</DocumentFragment>
 `;

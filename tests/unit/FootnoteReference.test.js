@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import FootnoteReference from '../../src/components/FootnoteReference';
 
 // data for this component
 import mockData from './data/FootnoteReference.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<FootnoteReference nodeData={mockData} />);
-  expect(tree).toMatchSnapshot();
+  const tree = render(<FootnoteReference nodeData={mockData} />);
+  expect(tree.asFragment()).toMatchSnapshot();
 });

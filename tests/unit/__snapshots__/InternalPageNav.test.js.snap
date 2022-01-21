@@ -1,78 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders a page with next and previous links correctly 1`] = `
-<div
-  id="btnv"
->
-  <span
-    class="btn-arrow-left"
+<DocumentFragment>
+  <div
+    id="btnv"
   >
-    ←  
-  </span>
-  <a
-    class="btn-prev-text"
-    href="/drivers/csharp/"
-    title="Previous Section"
-  >
-    <span>
-      MongoDB C#/.NET Driver
+    <span
+      class="btn-arrow-left"
+    >
+      ←  
     </span>
-  </a>
-  <a
-    class="btn-next-text"
-    href="/drivers/java/"
-    title="Next Section"
-  >
-    <span>
-      Java MongoDB Driver
+    <a
+      class="btn-prev-text"
+      href="/drivers/csharp/"
+      title="Previous Section"
+    >
+      <span>
+        MongoDB C#/.NET Driver
+      </span>
+    </a>
+    <a
+      class="btn-next-text"
+      href="/drivers/java/"
+      title="Next Section"
+    >
+      <span>
+        Java MongoDB Driver
+      </span>
+    </a>
+    <span
+      class="btn-arrow-right"
+    >
+       →
     </span>
-  </a>
-  <span
-    class="btn-arrow-right"
-  >
-     →
-  </span>
-</div>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`renders a page with no next link correctly 1`] = `
-<div
-  id="btnv"
->
-  <span
-    class="btn-arrow-left"
+<DocumentFragment>
+  <div
+    id="btnv"
   >
-    ←  
-  </span>
-  <a
-    class="btn-prev-text"
-    href="/drivers/go/"
-    title="Previous Section"
-  >
-    <span>
-      MongoDB Go Driver
+    <span
+      class="btn-arrow-left"
+    >
+      ←  
     </span>
-  </a>
-</div>
+    <a
+      class="btn-prev-text"
+      href="/drivers/go/"
+      title="Previous Section"
+    >
+      <span>
+        MongoDB Go Driver
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`renders a page with no previous link correctly 1`] = `
-<div
-  id="btnv"
->
-  <a
-    class="btn-next-text"
-    href="/drivers/go/"
-    title="Next Section"
+<DocumentFragment>
+  <div
+    id="btnv"
   >
-    <span>
-      MongoDB Go Driver
+    <a
+      class="btn-next-text"
+      href="/drivers/go/"
+      title="Next Section"
+    >
+      <span>
+        MongoDB Go Driver
+      </span>
+    </a>
+    <span
+      class="btn-arrow-right"
+    >
+       →
     </span>
-  </a>
-  <span
-    class="btn-arrow-right"
-  >
-     →
-  </span>
-</div>
+  </div>
+</DocumentFragment>
 `;

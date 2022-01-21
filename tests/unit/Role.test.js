@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import RoleAbbr from '../../src/components/Roles/Abbr';
 import RoleGUILabel from '../../src/components/Roles/GUILabel';
@@ -12,21 +12,21 @@ import mockDataAbbr from './data/Role-abbr.test.json';
 describe('GUI Label', () => {
   it('correctly renders a "guilabel" role', () => {
     const tree = render(<RoleGUILabel nodeData={mockDataGUILabel} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.asFragment()).toMatchSnapshot();
   });
 });
 
 describe('File', () => {
   it('correctly renders a "file" role', () => {
     const tree = render(<RoleFile nodeData={mockDataFile} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.asFragment()).toMatchSnapshot();
   });
 });
 
 describe('Abbr', () => {
   it('correctly renders a "Abbr" role', () => {
     const abbr = render(<RoleAbbr nodeData={mockDataAbbr} />);
-    expect(abbr).toMatchSnapshot();
+    expect(abbr.asFragment()).toMatchSnapshot();
   });
 
   describe('when passed a value with format "ABBR (Full Name Here)"', () => {
@@ -34,8 +34,8 @@ describe('Abbr', () => {
     mockValidAbbr.children[0].value = 'Display (Extended)';
 
     it('parses and strips whitespace from the display value', () => {
-      const abbr = shallow(<RoleAbbr nodeData={mockValidAbbr} />);
-      expect(abbr.childAt(0).text()).toBe('Display');
+      const abbr = render(<RoleAbbr nodeData={mockValidAbbr} />);
+      expect(abbr.getByText('Display')).toBeTruthy();
     });
   });
 });
