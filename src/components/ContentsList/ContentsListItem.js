@@ -60,7 +60,7 @@ const ContentsListItem = ({ children, depth = 0, id, isActive = false }) => {
 
 ContentsListItem.propTypes = {
   children: PropTypes.node,
-  depth: PropTypes.number.isRequired,
+  depth: PropTypes.number,
   id: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
 };

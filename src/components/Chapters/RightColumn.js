@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
+import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import ContentsList from '../ContentsList/ContentsList';
@@ -12,7 +13,7 @@ import useActiveHeading from '../../hooks/useActiveHeading';
 import useVisibleOnScroll from '../../hooks/useVisibleOnScroll';
 import { theme } from '../../theme/docsTheme';
 
-const LearningCard = styled(LeafyGreenCard)`
+const learningCardStyle = ({ isVisible }) => css`
   background-color: ${uiColors.white};
   display: flex;
   flex-direction: column;
@@ -29,9 +30,8 @@ const LearningCard = styled(LeafyGreenCard)`
   }
 
   @media ${theme.screenSize.largeAndUp} {
-    ${({ isVisible }) =>
-      !isVisible &&
-      `
+    ${!isVisible &&
+    `
       opacity: 0;
       pointer-events: none;
     `}
@@ -109,21 +109,21 @@ const RightColumn = ({ chapters }) => {
               const [chapterName, chapterData] = entry;
               const chapterId = chapterData.id;
               return (
-                <ContentsListItem id={chapterId} isActive={chapterId === activeChapterId}>
+                <ContentsListItem key={chapterId} id={chapterId} isActive={chapterId === activeChapterId}>
                   {chapterName}
                 </ContentsListItem>
               );
             })}
           </ContentsList>
         </ListContainer>
-        <LearningCard isVisible={isVisible}>
+        <LeafyGreenCard className={cx(learningCardStyle({ isVisible }))}>
           <LearningTitle>Still Learning MongoDB?</LearningTitle>
           <p>Explore these resources to learn some fundamental MongoDB concepts.</p>
           <StyledLink to="https://university.mongodb.com/courses/M001/about">
             <Icon glyph="University" />
             Take M001 MongoDB Basics →
           </StyledLink>
-        </LearningCard>
+        </LeafyGreenCard>
       </Sticky>
     </Container>
   );
