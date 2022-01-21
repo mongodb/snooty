@@ -1,50 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<Footnote
-  nodeData={
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 108,
-                },
-              },
-              "type": "text",
-              "value": "Numerical footnote.",
-            },
-          ],
-          "position": Object {
-            "start": Object {
-              "line": 108,
-            },
-          },
-          "type": "paragraph",
-        },
-      ],
-      "id": "id8",
-      "name": "1",
-      "position": Object {
-        "start": Object {
-          "line": 108,
-        },
-      },
-      "type": "footnote",
-    }
-  }
->
+<DocumentFragment>
   <table
-    className="docutils footnote"
+    class="docutils footnote"
     frame="void"
     id="footnote-1"
     rules="none"
   >
     <colgroup>
       <col
-        className="label"
+        class="label"
       />
     </colgroup>
     <tbody
@@ -52,11 +18,11 @@ exports[`renders correctly 1`] = `
     >
       <tr>
         <td
-          className="label"
+          class="label"
         >
           [
           <a
-            className="fn-backref"
+            class="fn-backref"
             href="#ref-1-id1"
           >
             1
@@ -64,91 +30,10 @@ exports[`renders correctly 1`] = `
           ]
         </td>
         <td>
-           
-          <ComponentFactory
-            key="0"
-            nodeData={
-              Object {
-                "children": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 108,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Numerical footnote.",
-                  },
-                ],
-                "position": Object {
-                  "start": Object {
-                    "line": 108,
-                  },
-                },
-                "type": "paragraph",
-              }
-            }
-            parentNode="footnote"
-          >
-            <Paragraph
-              nodeData={
-                Object {
-                  "children": Array [
-                    Object {
-                      "position": Object {
-                        "start": Object {
-                          "line": 108,
-                        },
-                      },
-                      "type": "text",
-                      "value": "Numerical footnote.",
-                    },
-                  ],
-                  "position": Object {
-                    "start": Object {
-                      "line": 108,
-                    },
-                  },
-                  "type": "paragraph",
-                }
-              }
-              parentNode="footnote"
-            >
-              <ComponentFactory
-                key="0"
-                nodeData={
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 108,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Numerical footnote.",
-                  }
-                }
-              >
-                <Text
-                  nodeData={
-                    Object {
-                      "position": Object {
-                        "start": Object {
-                          "line": 108,
-                        },
-                      },
-                      "type": "text",
-                      "value": "Numerical footnote.",
-                    }
-                  }
-                >
-                  Numerical footnote.
-                </Text>
-              </ComponentFactory>
-            </Paragraph>
-          </ComponentFactory>
+           Numerical footnote.
         </td>
       </tr>
     </tbody>
   </table>
-</Footnote>
+</DocumentFragment>
 `;

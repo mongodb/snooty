@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { render } from '@testing-library/react';
 import Heading from '../../src/components/Heading';
 
 // data for this component
@@ -7,5 +7,5 @@ import mockData from './data/Heading.test.json';
 
 it('renders correctly', () => {
   const tree = render(<Heading nodeData={mockData} sectionDepth={3} />);
-  expect(tree).toMatchSnapshot();
+  expect(tree.asFragment()).toMatchSnapshot();
 });

@@ -1,21 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<p>
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "position": Object {
-          "start": Object {
-            "line": 0,
-          },
-        },
-        "type": "text",
-        "value": "Verify that MongoDB has started successfully by
-checking the process output for the following line:",
-      }
-    }
-  />
-</p>
+<DocumentFragment>
+  <p>
+    Verify that MongoDB has started successfully by
+checking the process output for the following line:
+  </p>
+</DocumentFragment>
 `;

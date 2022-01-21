@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-.emotion-0 {
+<DocumentFragment>
+  .emotion-0 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -117,43 +118,44 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-  class="emotion-7"
->
-  <div
-    class="emotion-6"
+    class="emotion-7"
   >
     <div
-      class="emotion-5"
+      class="emotion-6"
     >
-      <pre
-        class="emotion-3"
-        tabindex="-1"
-      >
-        <code
-          class="lg-highlight-hljs-light emotion-2 none"
-        >
-          <table
-            class="emotion-1"
-          >
-            <tbody>
-              <tr
-                class=""
-              >
-                <td
-                  class="emotion-0"
-                >
-                  test code
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </code>
-      </pre>
       <div
-        class="emotion-4"
-        data-testid="leafygreen-code-panel"
-      />
+        class="emotion-5"
+      >
+        <pre
+          class="emotion-3"
+          tabindex="-1"
+        >
+          <code
+            class="lg-highlight-hljs-light emotion-2 none"
+          >
+            <table
+              class="emotion-1"
+            >
+              <tbody>
+                <tr
+                  class=""
+                >
+                  <td
+                    class="emotion-0"
+                  >
+                    test code
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </code>
+        </pre>
+        <div
+          class="emotion-4"
+          data-testid="leafygreen-code-panel"
+        />
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;

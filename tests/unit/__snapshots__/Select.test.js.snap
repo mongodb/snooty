@@ -1,23 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select renders select correctly 1`] = `
-<Select
-  choices={
-    Array [
-      Object {
-        "text": "MongoDB Server",
-        "value": "server",
-      },
-      Object {
-        "text": "MongoDB Atlas",
-        "value": "atlas",
-      },
-    ]
-  }
-  defaultText=""
-  disabled={false}
-  label={null}
-  onChange={[Function]}
-  value={null}
-/>
+<DocumentFragment>
+  .emotion-6 {
+  font-size: 14px;
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  line-height: 16px;
+  opacity: 1;
+}
+
+.emotion-4 {
+  background-color: #fff;
+  border: 1px solid rgba(184,196,194,0.4);
+  border-radius: 2px;
+  box-shadow: 0 0 4px 0 rgba(233,233,233,0.3);
+  color: #000;
+  cursor: pointer;
+  position: relative;
+}
+
+.emotion-2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 10px 16px;
+}
+
+.emotion-0 {
+  display: inline-block;
+  font-family: Akzidenz;
+  font-size: 14px;
+  margin: 0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+<div
+    aria-disabled="false"
+    class="emotion-6 emotion-7"
+  >
+    <div
+      aria-expanded="false"
+      class="emotion-4 emotion-5"
+      role="listbox"
+      tabindex="0"
+    >
+      <div
+        class="emotion-2 emotion-3"
+        role="option"
+      >
+        <p
+          class="emotion-0 emotion-1"
+        />
+        <svg
+          aria-label="Caret Down Icon"
+          class=""
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
 `;

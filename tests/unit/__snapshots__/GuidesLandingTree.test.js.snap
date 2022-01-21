@@ -1,38 +1,325 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  width: 100%;
+}
+
 .emotion-0 {
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  min-height: 32px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #3D4F58;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 14px;
+  line-height: 1em;
+  cursor: default;
+  font-weight: bold;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  position: relative;
   padding-left: 24px;
   padding-right: 24px;
 }
 
-<Fragment>
-  <SideNavItem
-    active={true}
-    as={[Function]}
-    className="emotion-0"
-    key="/"
-    to="/"
+.emotion-0:hover {
+  background-color: #E7EEEC;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-0::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-0,
+.emotion-0:hover {
+  color: #0B3B35;
+  background-color: #E4F4E4;
+}
+
+.emotion-0:before {
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  content: '';
+  -webkit-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  height: 20px;
+  margin: auto;
+  background-color: #019EE2;
+  opacity: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0D324F;
+  background-color: #C5E4F2;
+}
+
+.emotion-0:focus:before {
+  opacity: 1;
+  -webkit-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+}
+
+<li
+    class="emotion-1"
   >
-    Overview
-  </SideNavItem>
-  <SideNavItem
-    active={false}
-    as={[Function]}
-    className="emotion-0"
-    key="cloud/account"
-    to="cloud/account"
+    <a
+      aria-current="page"
+      aria-disabled="false"
+      class="emotion-0"
+      data-leafygreen-ui="side-nav-item-container"
+      href="/"
+    >
+      Overview
+    </a>
+  </li>
+  .emotion-1 {
+  width: 100%;
+}
+
+.emotion-0 {
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  min-height: 32px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #3D4F58;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 14px;
+  line-height: 1em;
+  position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.emotion-0:hover {
+  background-color: #E7EEEC;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-0::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-0:before {
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  content: '';
+  -webkit-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  height: 20px;
+  margin: auto;
+  background-color: #019EE2;
+  opacity: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0D324F;
+  background-color: #C5E4F2;
+}
+
+.emotion-0:focus:before {
+  opacity: 1;
+  -webkit-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+}
+
+<li
+    class="emotion-1"
   >
-    Atlas
-  </SideNavItem>
-  <SideNavItem
-    active={false}
-    as={[Function]}
-    className="emotion-0"
-    key="server/read"
-    to="server/read"
+    <a
+      aria-current="false"
+      aria-disabled="false"
+      class="emotion-0"
+      data-leafygreen-ui="side-nav-item-container"
+      href="/cloud/account/"
+    >
+      Atlas
+    </a>
+  </li>
+  .emotion-1 {
+  width: 100%;
+}
+
+.emotion-0 {
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  min-height: 32px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #3D4F58;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 14px;
+  line-height: 1em;
+  position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.emotion-0:hover {
+  background-color: #E7EEEC;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-0::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-0:before {
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  content: '';
+  -webkit-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  height: 20px;
+  margin: auto;
+  background-color: #019EE2;
+  opacity: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0D324F;
+  background-color: #C5E4F2;
+}
+
+.emotion-0:focus:before {
+  opacity: 1;
+  -webkit-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+}
+
+<li
+    class="emotion-1"
   >
-    CRUD
-  </SideNavItem>
-</Fragment>
+    <a
+      aria-current="false"
+      aria-disabled="false"
+      class="emotion-0"
+      data-leafygreen-ui="side-nav-item-container"
+      href="/server/read/"
+    >
+      CRUD
+    </a>
+  </li>
+</DocumentFragment>
 `;

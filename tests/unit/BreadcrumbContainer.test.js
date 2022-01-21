@@ -1,14 +1,15 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import BreadcrumbContainer from '../../src/components/BreadcrumbContainer';
 import { NavigationContext } from '../../src/components/navigation-context';
 
-const mountBreadcrumbContainer = (homeCrumb, lastCrumb, parents) =>
-  mount(
+const mountBreadcrumbContainer = (homeCrumb, lastCrumb, parents) => {
+  return render(
     <NavigationContext.Provider value={{ parents }}>
       <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
     </NavigationContext.Provider>
   );
+};
 
 describe('BreadcrumbContainer', () => {
   const mockHomeCrumb = {
@@ -30,7 +31,7 @@ describe('BreadcrumbContainer', () => {
     ];
 
     const tree = mountBreadcrumbContainer(mockHomeCrumb, mockLastCrumb, mockParents);
-    expect(tree).toMatchSnapshot();
+    expect(tree.asFragment()).toMatchSnapshot();
   });
 
   it('renders correctly without project parent', () => {
@@ -40,6 +41,6 @@ describe('BreadcrumbContainer', () => {
     };
 
     const tree = mountBreadcrumbContainer(mockHomeCrumb, mockLastCrumb, []);
-    expect(tree).toMatchSnapshot();
+    expect(tree.asFragment()).toMatchSnapshot();
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import useVisibleOnScroll from '../../src/hooks/useVisibleOnScroll';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 const TestComponent = () => {
   const isVisible = useVisibleOnScroll('.sentinel');
@@ -8,7 +8,7 @@ const TestComponent = () => {
   return (
     <>
       <div className="sentinel">Sentinel</div>
-      <div className="result" data-result={isVisible} />
+      <div className="result" data-testid={isVisible} />
     </>
   );
 };
@@ -58,15 +58,13 @@ describe('useVisibleOnScroll', () => {
 
   it('returns false when sentinel is in view', async () => {
     mockIntsersectionRatio(1);
-    const wrapper = mount(<TestComponent />);
-    const result = wrapper.find(`.result`);
-    expect(result.prop('data-result')).toBeFalsy();
+    const wrapper = render(<TestComponent />);
+    expect(wrapper.getByTestId('false')).toBeTruthy();
   });
 
   it('returns true when sentinel is out of view', () => {
     mockIntsersectionRatio(0);
-    const wrapper = mount(<TestComponent />);
-    const result = wrapper.find(`.result`);
-    expect(result.prop('data-result')).toBeTruthy();
+    const wrapper = render(<TestComponent />);
+    expect(wrapper.getByTestId('true')).toBeTruthy();
   });
 });

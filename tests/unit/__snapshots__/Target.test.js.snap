@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with a directive_argument node 1`] = `
-.emotion-2 {
+<DocumentFragment>
+  .emotion-2 {
   background-color: #F9FBFA;
   border: 1px solid #B8C4C2;
   border-radius: 3px;
@@ -28,70 +29,73 @@ exports[`renders correctly with a directive_argument node 1`] = `
 }
 
 <dl
-  class="option"
->
-  <dt
-    id="std-option-mongos.--config"
+    class="option"
   >
-    <code
-      class="emotion-0 emotion-1 emotion-2"
+    <dt
+      id="std-option-mongos.--config"
     >
-      --config &lt;filename&gt;, -f &lt;filename&gt;
-    </code>
-    <a
-      class="headerlink"
-      href="#std-option-mongos.--config"
-      title="Permalink to this definition"
-    >
-      ¶
-    </a>
-  </dt>
-  <dd>
-    <p>
-      Specifies a configuration file for runtime configuration options. The
+      <code
+        class="emotion-0 emotion-1 emotion-2"
+      >
+        --config &lt;filename&gt;, -f &lt;filename&gt;
+      </code>
+      <a
+        class="headerlink"
+        href="#std-option-mongos.--config"
+        title="Permalink to this definition"
+      >
+        ¶
+      </a>
+    </dt>
+    <dd>
+      <p>
+        Specifies a configuration file for runtime configuration options. The
 configuration file is the preferred method for runtime configuration of
 
-      <a
-        href="/reference/program/mongos/#std-program-mongos"
-      >
-        <code
-          class="emotion-0 emotion-1 emotion-2"
+        <a
+          href="/reference/program/mongos/#std-program-mongos"
         >
-          mongos
-        </code>
-      </a>
-      . The options are equivalent to the command-line
+          <code
+            class="emotion-0 emotion-1 emotion-2"
+          >
+            mongos
+          </code>
+        </a>
+        . The options are equivalent to the command-line
 configuration options. See 
-      <a
-        href="/reference/configuration-options/"
-      >
-        Configuration File Options
-      </a>
-       for
-more information.
-    </p>
-    <p>
-      Ensure the configuration file uses ASCII encoding. The 
-      <a
-        href="/reference/program/mongos/#std-program-mongos"
-      >
-        <code
-          class="emotion-0 emotion-1 emotion-2"
+        <a
+          href="/reference/configuration-options/"
         >
-          mongos
-        </code>
-      </a>
-      
+          Configuration File Options
+        </a>
+         for
+more information.
+      </p>
+      <p>
+        Ensure the configuration file uses ASCII encoding. The 
+        <a
+          href="/reference/program/mongos/#std-program-mongos"
+        >
+          <code
+            class="emotion-0 emotion-1 emotion-2"
+          >
+            mongos
+          </code>
+        </a>
+        
 instance does not support configuration files with non-ASCII encoding,
 including UTF-8.
-    </p>
-  </dd>
-</dl>
+      </p>
+    </dd>
+  </dl>
+</DocumentFragment>
 `;
 
 exports[`renders correctly with no directive_argument nodes 1`] = `
-<span
-  class="contains-headerlink"
-  id="std-label-php-language-center"
-/>
+<DocumentFragment>
+  <span
+    class="contains-headerlink"
+    id="std-label-php-language-center"
+  />
+</DocumentFragment>
 `;

@@ -1,187 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<blockquote>
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 27,
-              },
-            },
-            "type": "text",
-            "value": "There are several ways to connect to your MongoDB instance.",
-          },
-        ],
-        "position": Object {
-          "start": Object {
-            "line": 27,
-          },
-        },
-        "type": "paragraph",
-      }
-    }
-  />
-  <ComponentFactory
-    key="1"
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "children": Array [
-                  Object {
-                    "children": Array [],
-                    "label": Object {
-                      "position": Object {
-                        "start": Object {
-                          "line": 31,
-                        },
-                      },
-                      "type": "text",
-                      "value": "MongoDB Compass",
-                    },
-                    "name": "ref",
-                    "position": Object {
-                      "start": Object {
-                        "line": 29,
-                      },
-                    },
-                    "raw": "MongoDB Compass <compass-index>",
-                    "target": "compass-index",
-                    "type": "role",
-                  },
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 29,
-                      },
-                    },
-                    "type": "text",
-                    "value": " for access through a downloadable user interface",
-                  },
-                ],
-                "position": Object {
-                  "start": Object {
-                    "line": 29,
-                  },
-                },
-                "type": "paragraph",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 29,
-              },
-            },
-            "type": "listItem",
-          },
-          Object {
-            "children": Array [
-              Object {
-                "children": Array [
-                  Object {
-                    "children": Array [],
-                    "label": "~bin.mongo",
-                    "name": "binary",
-                    "position": Object {
-                      "start": Object {
-                        "line": 30,
-                      },
-                    },
-                    "raw": "~bin.mongo",
-                    "target": "~bin.mongo",
-                    "type": "role",
-                  },
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 30,
-                      },
-                    },
-                    "type": "text",
-                    "value": " interactive shell",
-                  },
-                ],
-                "position": Object {
-                  "start": Object {
-                    "line": 30,
-                  },
-                },
-                "type": "paragraph",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 29,
-              },
-            },
-            "type": "listItem",
-          },
-          Object {
-            "children": Array [
-              Object {
-                "children": Array [
-                  Object {
-                    "children": Array [
-                      Object {
-                        "position": Object {
-                          "start": Object {
-                            "line": 31,
-                          },
-                        },
-                        "type": "text",
-                        "value": "programmatic access",
-                      },
-                    ],
-                    "position": Object {
-                      "start": Object {
-                        "line": 31,
-                      },
-                    },
-                    "type": "reference",
-                  },
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 31,
-                      },
-                    },
-                    "type": "text",
-                    "value": "
-through a number of programming APIs.",
-                  },
-                ],
-                "position": Object {
-                  "start": Object {
-                    "line": 31,
-                  },
-                },
-                "type": "paragraph",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 29,
-              },
-            },
-            "type": "listItem",
-          },
-        ],
-        "ordered": false,
-        "position": Object {
-          "start": Object {
-            "line": 29,
-          },
-        },
-        "type": "list",
-      }
-    }
-  />
-</blockquote>
+<DocumentFragment>
+  <blockquote>
+    <p>
+      There are several ways to connect to your MongoDB instance.
+    </p>
+    <ol>
+      <li>
+         for access through a downloadable user interface
+      </li>
+      <li>
+         interactive shell
+      </li>
+      <li>
+        <a
+          class="reference external"
+          href=""
+        >
+          programmatic access
+        </a>
+        
+through a number of programming APIs.
+      </li>
+    </ol>
+  </blockquote>
+</DocumentFragment>
 `;
