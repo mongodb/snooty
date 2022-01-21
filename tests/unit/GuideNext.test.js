@@ -1,11 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import mockData from './data/Chapters.test.json';
 import GuideNext from '../../src/components/GuideNext/GuideNext';
 import * as browserStorage from '../../src/utils/browser-storage';
 
-const mountGuideNext = (slug) => {
-  return mount(<GuideNext metadata={mockData.metadata} slug={slug} />);
+const renderGuideNext = (slug) => {
+  return render(<GuideNext metadata={mockData.metadata} slug={slug} />);
 };
 
 describe('GuideNext', () => {
@@ -32,22 +32,22 @@ describe('GuideNext', () => {
 
   it('renders the next guide in the same chapter', () => {
     const currentSlug = 'cloud/account';
-    const wrapper = mountGuideNext(currentSlug);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = renderGuideNext(currentSlug);
+    expect(wrapper.asFragment()).toMatchSnapshot();
     checkLocalStorage(currentSlug);
   });
 
   it('renders the first guide in the next chapter', () => {
     const currentSlug = 'cloud/migrate-from-aws-to-atlas';
-    const wrapper = mountGuideNext(currentSlug);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = renderGuideNext(currentSlug);
+    expect(wrapper.asFragment()).toMatchSnapshot();
     checkLocalStorage(currentSlug);
   });
 
   it('renders the default copy on the final guide', () => {
     const currentSlug = 'server/read';
-    const wrapper = mountGuideNext(currentSlug);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = renderGuideNext(currentSlug);
+    expect(wrapper.asFragment()).toMatchSnapshot();
     checkLocalStorage(currentSlug);
   });
 });

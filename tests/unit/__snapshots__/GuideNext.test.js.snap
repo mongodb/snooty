@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GuideNext renders the default copy on the final guide 1`] = `
-.emotion-23 {
+<DocumentFragment>
+  .emotion-16 {
   color: #13AA52;
 }
 
@@ -13,34 +14,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.emotion-9 {
-  margin-bottom: 40px;
-}
-
-.emotion-39 {
-  padding: 40px 24px;
-}
-
-@media not all and (max-width:767px) {
-  .emotion-39 {
-    padding: 48px;
-  }
-}
-
-@media not all and (max-width:1023px) {
-  .emotion-39 {
-    -webkit-flex-basis: 0;
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    min-width: 300px;
-    max-width: 510px;
-  }
 }
 
 .emotion-6 {
@@ -132,7 +105,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   padding-right: 12px;
 }
 
-.emotion-37 {
+.emotion-25 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -145,13 +118,13 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 @media not all and (max-width:767px) {
-  .emotion-37 {
+  .emotion-25 {
     padding: 48px;
   }
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-37 {
+  .emotion-25 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -164,13 +137,13 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-.emotion-40 {
+.emotion-26 {
   border-top: 1px solid #E7EEEC;
   padding-top: 56px;
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-40 {
+  .emotion-26 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -183,12 +156,12 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-.emotion-10 p {
+.emotion-7 p {
   margin-top: 8px;
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-10 {
+  .emotion-7 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -210,12 +183,12 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   font-weight: bold;
 }
 
-.emotion-21 {
+.emotion-14 {
   margin-bottom: 24px;
 }
 
 @media not all and (max-width:767px) {
-  .emotion-21 {
+  .emotion-14 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -225,11 +198,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-.emotion-15 {
-  margin-bottom: 8px;
-}
-
-.emotion-13 {
+.emotion-10 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
@@ -239,52 +208,52 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-align: center;
   width: 83px;
   margin-bottom: 8px;
+}
+
+.emotion-12 {
+  color: #061621;
+  font-weight: bold;
+}
+
+.emotion-23 {
+  list-style: none;
+  padding-left: 0;
+}
+
+.emotion-17 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  border: solid 1px transparent;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-right: 12px;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 .emotion-19 {
   color: #061621;
-  font-weight: bold;
-}
-
-.emotion-35 {
-  list-style: none;
-  padding-left: 0;
-}
-
-.emotion-25 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 50%;
-  border: solid 1px transparent;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  margin-right: 12px;
-  min-width: 20px;
-  min-height: 20px;
-}
-
-.emotion-27 {
-  color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-27:hover,
-.emotion-27:active {
+.emotion-19:hover,
+.emotion-19:active {
   color: currentColor;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-33 {
+.emotion-21 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -298,11 +267,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   position: relative;
 }
 
-.emotion-33:not(:last-child) {
+.emotion-21:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-33:not(:last-child):before {
+.emotion-21:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -311,539 +280,102 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   border-left: solid 1px #13AA52;
 }
 
-<GuideNext
-  metadata={
-    Object {
-      "chapters": Object {
-        "Atlas": Object {
-          "chapter_number": 1,
-          "description": "Get up and running with MongoDB Atlas.
-Learn how to create a cluster, load a sample dataset, and
-get your connection information.",
-          "guides": Array [
-            "cloud/account",
-            "cloud/connectionstring",
-            "cloud/migrate-from-aws-to-atlas",
-          ],
-          "icon": "/images/chapter-icon-atlas.png",
-        },
-        "CRUD": Object {
-          "chapter_number": 2,
-          "description": "Learn how to perform these core operations with
-your preferred language and associated MongoDB Driver.",
-          "guides": Array [
-            "server/read",
-          ],
-        },
-      },
-      "guides": Object {
-        "cloud/account": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 15,
-          "description": Array [
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 8,
-                    },
-                  },
-                  "type": "text",
-                  "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 8,
-                },
-              },
-              "type": "paragraph",
-            },
-          ],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 4,
-                },
-              },
-              "type": "text",
-              "value": "Create and Manage a MongoDB Account",
-            },
-          ],
-        },
-        "cloud/connectionstring": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Set Up Atlas Connectivity",
-            },
-          ],
-        },
-        "cloud/migrate-from-aws-to-atlas": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-            },
-          ],
-        },
-        "server/read": Object {
-          "chapter_name": "CRUD",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Read Data in MongoDB",
-            },
-          ],
-        },
-      },
-    }
-  }
-  slug="server/read"
->
-  <ReadGuidesContextProvider
-    slug="server/read"
+<div
+    class="emotion-26 emotion-27"
   >
-    <Container>
+    <div
+      class="emotion-7 emotion-8"
+    >
       <div
-        className="emotion-40 emotion-41"
+        class="emotion-0 emotion-1"
       >
-        <Content
-          guideData={
-            Array [
-              null,
-              null,
-            ]
-          }
-        >
-          <Container>
-            <div
-              className="emotion-10 emotion-11"
-            >
-              <Heading>
-                <div
-                  className="emotion-0 emotion-1"
-                >
-                  What's Next
-                </div>
-              </Heading>
-              <Title>
-                <div
-                  className="emotion-2 emotion-3"
-                >
-                  Become a MongoDB Professional
-                </div>
-              </Title>
-              <p>
-                Congrats. You’ve completed all the guides. Want to take the next step? Register for the developer exam.
-              </p>
-              <Button
-                as={[Function]}
-                baseFontSize={16}
-                className="emotion-9"
-                to="https://university.mongodb.com/certification/developer/about"
-                variant="primary"
-              >
-                <Box
-                  aria-disabled={false}
-                  as={[Function]}
-                  className="emotion-6"
-                  disabled={false}
-                  to="https://university.mongodb.com/certification/developer/about"
-                >
-                  <Link
-                    aria-disabled={false}
-                    className="emotion-6"
-                    disabled={false}
-                    to="https://university.mongodb.com/certification/developer/about"
-                  >
-                    <a
-                      aria-disabled={false}
-                      className="emotion-6"
-                      disabled={false}
-                      href="https://university.mongodb.com/certification/developer/about"
-                    >
-                      <div
-                        className="emotion-4"
-                      />
-                      <div
-                        className="emotion-5"
-                      >
-                        Learn More
-                      </div>
-                    </a>
-                  </Link>
-                </Box>
-              </Button>
-            </div>
-          </Container>
-        </Content>
-        <ChapterInfo
-          chapterData={
-            Array [
-              "CRUD",
-              Object {
-                "chapter_number": 2,
-                "description": "Learn how to perform these core operations with
-your preferred language and associated MongoDB Driver.",
-                "guides": Array [
-                  "server/read",
-                ],
-              },
-            ]
-          }
-          guidesMetadata={
-            Object {
-              "cloud/account": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 15,
-                "description": Array [
-                  Object {
-                    "children": Array [
-                      Object {
-                        "position": Object {
-                          "start": Object {
-                            "line": 8,
-                          },
-                        },
-                        "type": "text",
-                        "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                      },
-                    ],
-                    "position": Object {
-                      "start": Object {
-                        "line": 8,
-                      },
-                    },
-                    "type": "paragraph",
-                  },
-                ],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 4,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Create and Manage a MongoDB Account",
-                  },
-                ],
-              },
-              "cloud/connectionstring": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Set Up Atlas Connectivity",
-                  },
-                ],
-              },
-              "cloud/migrate-from-aws-to-atlas": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-                  },
-                ],
-              },
-              "server/read": Object {
-                "chapter_name": "CRUD",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Read Data in MongoDB",
-                  },
-                ],
-              },
-            }
-          }
-          targetSlug={null}
-        >
-          <Card
-            className="emotion-39"
-          >
-            <Box
-              className="emotion-37"
-            >
-              <div
-                className="emotion-37"
-              >
-                <TopWrapper>
-                  <div
-                    className="emotion-21 emotion-22"
-                  >
-                    <StyledChapterNumberLabel
-                      number={2}
-                    >
-                      <ChapterNumberLabel
-                        className="emotion-15 emotion-12"
-                        number={2}
-                      >
-                        <Label
-                          className="emotion-15 emotion-12"
-                        >
-                          <div
-                            className="emotion-12 emotion-13 emotion-14"
-                          >
-                            Chapter 
-                            2
-                          </div>
-                        </Label>
-                      </ChapterNumberLabel>
-                    </StyledChapterNumberLabel>
-                    <ChapterTitle>
-                      <div
-                        className="emotion-19 emotion-20"
-                      >
-                        CRUD
-                      </div>
-                    </ChapterTitle>
-                  </div>
-                </TopWrapper>
-                <GuidesList
-                  guideSlugs={
-                    Array [
-                      "server/read",
-                    ]
-                  }
-                  guidesMetadata={
-                    Object {
-                      "cloud/account": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 15,
-                        "description": Array [
-                          Object {
-                            "children": Array [
-                              Object {
-                                "position": Object {
-                                  "start": Object {
-                                    "line": 8,
-                                  },
-                                },
-                                "type": "text",
-                                "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                              },
-                            ],
-                            "position": Object {
-                              "start": Object {
-                                "line": 8,
-                              },
-                            },
-                            "type": "paragraph",
-                          },
-                        ],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 4,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Create and Manage a MongoDB Account",
-                          },
-                        ],
-                      },
-                      "cloud/connectionstring": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Set Up Atlas Connectivity",
-                          },
-                        ],
-                      },
-                      "cloud/migrate-from-aws-to-atlas": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-                          },
-                        ],
-                      },
-                      "server/read": Object {
-                        "chapter_name": "CRUD",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Read Data in MongoDB",
-                          },
-                        ],
-                      },
-                    }
-                  }
-                  targetSlug={null}
-                >
-                  <List>
-                    <ul
-                      className="emotion-35 emotion-36"
-                    >
-                      <GuidesListItem
-                        isNext={false}
-                        key="server/read"
-                        slug="server/read"
-                      >
-                        <ListItem
-                          color="#13AA52"
-                        >
-                          <li
-                            className="emotion-33 emotion-34"
-                            color="#13AA52"
-                          >
-                            <Circle
-                              color="transparent"
-                            >
-                              <div
-                                className="emotion-25 emotion-26"
-                                color="transparent"
-                              >
-                                <Icon
-                                  fill="#13AA52"
-                                  glyph="Checkmark"
-                                >
-                                  <Checkmark
-                                    fill="#13AA52"
-                                  >
-                                    <Checkmark
-                                      aria-label="Checkmark Icon"
-                                      className="emotion-23"
-                                      height={16}
-                                      role="img"
-                                      width={16}
-                                    >
-                                      <svg
-                                        aria-label="Checkmark Icon"
-                                        className="emotion-23"
-                                        fill="none"
-                                        height={16}
-                                        role="img"
-                                        viewBox="0 0 16 16"
-                                        width={16}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          clipRule="evenodd"
-                                          d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
-                                          fill="currentColor"
-                                          fillRule="evenodd"
-                                        />
-                                      </svg>
-                                    </Checkmark>
-                                  </Checkmark>
-                                </Icon>
-                              </div>
-                            </Circle>
-                            <GuideTitle
-                              to="server/read"
-                            >
-                              <Link
-                                className="emotion-27 emotion-28"
-                                to="server/read"
-                              >
-                                <mockConstructor
-                                  className="emotion-27 emotion-28"
-                                  to="/server/read/"
-                                >
-                                  <a
-                                    className="emotion-27 emotion-28"
-                                    href="/server/read/"
-                                  >
-                                    Read Data in MongoDB
-                                  </a>
-                                </mockConstructor>
-                              </Link>
-                            </GuideTitle>
-                          </li>
-                        </ListItem>
-                      </GuidesListItem>
-                    </ul>
-                  </List>
-                </GuidesList>
-              </div>
-            </Box>
-          </Card>
-        </ChapterInfo>
+        What's Next
       </div>
-    </Container>
-  </ReadGuidesContextProvider>
-</GuideNext>
+      <div
+        class="emotion-2 emotion-3"
+      >
+        Become a MongoDB Professional
+      </div>
+      <p>
+        Congrats. You’ve completed all the guides. Want to take the next step? Register for the developer exam.
+      </p>
+      <a
+        aria-disabled="false"
+        class="emotion-6"
+        href="https://university.mongodb.com/certification/developer/about"
+      >
+        <div
+          class="emotion-4"
+        />
+        <div
+          class="emotion-5"
+        >
+          Learn More
+        </div>
+      </a>
+    </div>
+    <div
+      class="emotion-25"
+    >
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <div
+          class="emotion-9 emotion-10 emotion-11"
+        >
+          Chapter 2
+        </div>
+        <div
+          class="emotion-12 emotion-13"
+        >
+          CRUD
+        </div>
+      </div>
+      <ul
+        class="emotion-23 emotion-24"
+      >
+        <li
+          class="emotion-21 emotion-22"
+          color="#13AA52"
+        >
+          <div
+            class="emotion-17 emotion-18"
+            color="transparent"
+          >
+            <svg
+              aria-label="Checkmark Icon"
+              class="emotion-16"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <a
+            class="emotion-19 emotion-20"
+            href="/server/read/"
+          >
+            Read Data in MongoDB
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`GuideNext renders the first guide in the next chapter 1`] = `
-.emotion-4 {
+<DocumentFragment>
+  .emotion-4 {
   overflow: hidden;
   border-radius: 3px;
   position: absolute;
@@ -851,34 +383,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.emotion-10 {
-  margin-bottom: 40px;
-}
-
-.emotion-40 {
-  padding: 40px 24px;
-}
-
-@media not all and (max-width:767px) {
-  .emotion-40 {
-    padding: 48px;
-  }
-}
-
-@media not all and (max-width:1023px) {
-  .emotion-40 {
-    -webkit-flex-basis: 0;
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    min-width: 300px;
-    max-width: 510px;
-  }
 }
 
 .emotion-6 {
@@ -970,7 +474,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   padding-right: 12px;
 }
 
-.emotion-38 {
+.emotion-25 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -983,13 +487,13 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 @media not all and (max-width:767px) {
-  .emotion-38 {
+  .emotion-25 {
     padding: 48px;
   }
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-38 {
+  .emotion-25 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -1002,13 +506,13 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   }
 }
 
-.emotion-41 {
+.emotion-26 {
   border-top: 1px solid #E7EEEC;
   padding-top: 56px;
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-41 {
+  .emotion-26 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -1021,12 +525,12 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   }
 }
 
-.emotion-11 p {
+.emotion-7 p {
   margin-top: 8px;
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-11 {
+  .emotion-7 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -1048,12 +552,12 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   font-weight: bold;
 }
 
-.emotion-22 {
+.emotion-14 {
   margin-bottom: 24px;
 }
 
 @media not all and (max-width:767px) {
-  .emotion-22 {
+  .emotion-14 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -1063,11 +567,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   }
 }
 
-.emotion-16 {
-  margin-bottom: 8px;
-}
-
-.emotion-14 {
+.emotion-10 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
@@ -1079,17 +579,17 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   margin-bottom: 8px;
 }
 
-.emotion-20 {
+.emotion-12 {
   color: #061621;
   font-weight: bold;
 }
 
-.emotion-36 {
+.emotion-23 {
   list-style: none;
   padding-left: 0;
 }
 
-.emotion-34 {
+.emotion-21 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -1103,11 +603,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   position: relative;
 }
 
-.emotion-34:not(:last-child) {
+.emotion-21:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-34:not(:last-child):before {
+.emotion-21:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -1116,20 +616,20 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   border-left: solid 1px #E7EEEC;
 }
 
-.emotion-28 {
+.emotion-19 {
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-28:hover,
-.emotion-28:active {
+.emotion-19:hover,
+.emotion-19:active {
   color: currentColor;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-26 {
+.emotion-17 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1149,573 +649,98 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   min-height: 20px;
 }
 
-.emotion-24 {
+.emotion-16 {
   color: #13AA52;
 }
 
-<GuideNext
-  metadata={
-    Object {
-      "chapters": Object {
-        "Atlas": Object {
-          "chapter_number": 1,
-          "description": "Get up and running with MongoDB Atlas.
-Learn how to create a cluster, load a sample dataset, and
-get your connection information.",
-          "guides": Array [
-            "cloud/account",
-            "cloud/connectionstring",
-            "cloud/migrate-from-aws-to-atlas",
-          ],
-          "icon": "/images/chapter-icon-atlas.png",
-        },
-        "CRUD": Object {
-          "chapter_number": 2,
-          "description": "Learn how to perform these core operations with
-your preferred language and associated MongoDB Driver.",
-          "guides": Array [
-            "server/read",
-          ],
-        },
-      },
-      "guides": Object {
-        "cloud/account": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 15,
-          "description": Array [
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 8,
-                    },
-                  },
-                  "type": "text",
-                  "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 8,
-                },
-              },
-              "type": "paragraph",
-            },
-          ],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 4,
-                },
-              },
-              "type": "text",
-              "value": "Create and Manage a MongoDB Account",
-            },
-          ],
-        },
-        "cloud/connectionstring": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Set Up Atlas Connectivity",
-            },
-          ],
-        },
-        "cloud/migrate-from-aws-to-atlas": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-            },
-          ],
-        },
-        "server/read": Object {
-          "chapter_name": "CRUD",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Read Data in MongoDB",
-            },
-          ],
-        },
-      },
-    }
-  }
-  slug="cloud/migrate-from-aws-to-atlas"
->
-  <ReadGuidesContextProvider
-    slug="cloud/migrate-from-aws-to-atlas"
+<div
+    class="emotion-26 emotion-27"
   >
-    <Container>
+    <div
+      class="emotion-7 emotion-8"
+    >
       <div
-        className="emotion-41 emotion-42"
+        class="emotion-0 emotion-1"
       >
-        <Content
-          guideData={
-            Array [
-              "server/read",
-              Object {
-                "chapter_name": "CRUD",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Read Data in MongoDB",
-                  },
-                ],
-              },
-            ]
-          }
-        >
-          <Container>
-            <div
-              className="emotion-11 emotion-12"
-            >
-              <Heading>
-                <div
-                  className="emotion-0 emotion-1"
-                >
-                  What's Next
-                </div>
-              </Heading>
-              <Title>
-                <div
-                  className="emotion-2 emotion-3"
-                >
-                  <ComponentFactory
-                    key="0"
-                    nodeData={
-                      Object {
-                        "position": Object {
-                          "start": Object {
-                            "line": 0,
-                          },
-                        },
-                        "type": "text",
-                        "value": "Read Data in MongoDB",
-                      }
-                    }
-                  >
-                    <Text
-                      nodeData={
-                        Object {
-                          "position": Object {
-                            "start": Object {
-                              "line": 0,
-                            },
-                          },
-                          "type": "text",
-                          "value": "Read Data in MongoDB",
-                        }
-                      }
-                    >
-                      Read Data in MongoDB
-                    </Text>
-                  </ComponentFactory>
-                </div>
-              </Title>
-              <Button
-                as={[Function]}
-                baseFontSize={16}
-                className="emotion-10"
-                to="server/read"
-                variant="primary"
-              >
-                <Box
-                  aria-disabled={false}
-                  as={[Function]}
-                  className="emotion-6"
-                  disabled={false}
-                  to="server/read"
-                >
-                  <Link
-                    aria-disabled={false}
-                    className="emotion-6"
-                    disabled={false}
-                    to="server/read"
-                  >
-                    <mockConstructor
-                      aria-disabled={false}
-                      className="emotion-6"
-                      disabled={false}
-                      to="/server/read/"
-                    >
-                      <a
-                        aria-disabled={false}
-                        className="emotion-6"
-                        disabled={false}
-                        href="/server/read/"
-                      >
-                        <div
-                          className="emotion-4"
-                        />
-                        <div
-                          className="emotion-5"
-                        >
-                          Start Guide
-                        </div>
-                      </a>
-                    </mockConstructor>
-                  </Link>
-                </Box>
-              </Button>
-            </div>
-          </Container>
-        </Content>
-        <ChapterInfo
-          chapterData={
-            Array [
-              "CRUD",
-              Object {
-                "chapter_number": 2,
-                "description": "Learn how to perform these core operations with
-your preferred language and associated MongoDB Driver.",
-                "guides": Array [
-                  "server/read",
-                ],
-              },
-            ]
-          }
-          guidesMetadata={
-            Object {
-              "cloud/account": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 15,
-                "description": Array [
-                  Object {
-                    "children": Array [
-                      Object {
-                        "position": Object {
-                          "start": Object {
-                            "line": 8,
-                          },
-                        },
-                        "type": "text",
-                        "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                      },
-                    ],
-                    "position": Object {
-                      "start": Object {
-                        "line": 8,
-                      },
-                    },
-                    "type": "paragraph",
-                  },
-                ],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 4,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Create and Manage a MongoDB Account",
-                  },
-                ],
-              },
-              "cloud/connectionstring": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Set Up Atlas Connectivity",
-                  },
-                ],
-              },
-              "cloud/migrate-from-aws-to-atlas": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-                  },
-                ],
-              },
-              "server/read": Object {
-                "chapter_name": "CRUD",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Read Data in MongoDB",
-                  },
-                ],
-              },
-            }
-          }
-          targetSlug="server/read"
-        >
-          <Card
-            className="emotion-40"
-          >
-            <Box
-              className="emotion-38"
-            >
-              <div
-                className="emotion-38"
-              >
-                <TopWrapper>
-                  <div
-                    className="emotion-22 emotion-23"
-                  >
-                    <StyledChapterNumberLabel
-                      number={2}
-                    >
-                      <ChapterNumberLabel
-                        className="emotion-16 emotion-13"
-                        number={2}
-                      >
-                        <Label
-                          className="emotion-16 emotion-13"
-                        >
-                          <div
-                            className="emotion-13 emotion-14 emotion-15"
-                          >
-                            Chapter 
-                            2
-                          </div>
-                        </Label>
-                      </ChapterNumberLabel>
-                    </StyledChapterNumberLabel>
-                    <ChapterTitle>
-                      <div
-                        className="emotion-20 emotion-21"
-                      >
-                        CRUD
-                      </div>
-                    </ChapterTitle>
-                  </div>
-                </TopWrapper>
-                <GuidesList
-                  guideSlugs={
-                    Array [
-                      "server/read",
-                    ]
-                  }
-                  guidesMetadata={
-                    Object {
-                      "cloud/account": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 15,
-                        "description": Array [
-                          Object {
-                            "children": Array [
-                              Object {
-                                "position": Object {
-                                  "start": Object {
-                                    "line": 8,
-                                  },
-                                },
-                                "type": "text",
-                                "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                              },
-                            ],
-                            "position": Object {
-                              "start": Object {
-                                "line": 8,
-                              },
-                            },
-                            "type": "paragraph",
-                          },
-                        ],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 4,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Create and Manage a MongoDB Account",
-                          },
-                        ],
-                      },
-                      "cloud/connectionstring": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Set Up Atlas Connectivity",
-                          },
-                        ],
-                      },
-                      "cloud/migrate-from-aws-to-atlas": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-                          },
-                        ],
-                      },
-                      "server/read": Object {
-                        "chapter_name": "CRUD",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Read Data in MongoDB",
-                          },
-                        ],
-                      },
-                    }
-                  }
-                  targetSlug="server/read"
-                >
-                  <List>
-                    <ul
-                      className="emotion-36 emotion-37"
-                    >
-                      <GuidesListItem
-                        isNext={true}
-                        key="server/read"
-                        slug="server/read"
-                      >
-                        <ListItem
-                          color="#E7EEEC"
-                        >
-                          <li
-                            className="emotion-34 emotion-35"
-                            color="#E7EEEC"
-                          >
-                            <Circle
-                              color="#13AA52"
-                            >
-                              <div
-                                className="emotion-26 emotion-27"
-                                color="#13AA52"
-                              >
-                                <IconLightningBolt
-                                  className="emotion-24"
-                                >
-                                  <svg
-                                    className="emotion-24"
-                                    fill="currentColor"
-                                    height="12"
-                                    viewBox="0 0 7 12"
-                                    width="7"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M6.47516 3.75H3.95081L4.88268 0.707813C4.97017 0.351563 4.71862 0 4.37518 0H1.22522C0.96272 0 0.739598 0.208594 0.704598 0.4875L0.00460634 6.1125C-0.0369557 6.45 0.208042 6.75 0.525225 6.75H3.12176L2.11333 11.3086C2.03458 11.6648 2.28833 12 2.62301 12C2.80676 12 2.98176 11.8969 3.07801 11.7188L6.92797 4.59375C7.1314 4.22109 6.87984 3.75 6.47516 3.75Z"
-                                    />
-                                  </svg>
-                                </IconLightningBolt>
-                              </div>
-                            </Circle>
-                            <GuideTitle
-                              to="server/read"
-                            >
-                              <Link
-                                className="emotion-28 emotion-29"
-                                to="server/read"
-                              >
-                                <mockConstructor
-                                  className="emotion-28 emotion-29"
-                                  to="/server/read/"
-                                >
-                                  <a
-                                    className="emotion-28 emotion-29"
-                                    href="/server/read/"
-                                  >
-                                    Read Data in MongoDB
-                                  </a>
-                                </mockConstructor>
-                              </Link>
-                            </GuideTitle>
-                          </li>
-                        </ListItem>
-                      </GuidesListItem>
-                    </ul>
-                  </List>
-                </GuidesList>
-              </div>
-            </Box>
-          </Card>
-        </ChapterInfo>
+        What's Next
       </div>
-    </Container>
-  </ReadGuidesContextProvider>
-</GuideNext>
+      <div
+        class="emotion-2 emotion-3"
+      >
+        Read Data in MongoDB
+      </div>
+      <a
+        aria-disabled="false"
+        class="emotion-6"
+        href="/server/read/"
+      >
+        <div
+          class="emotion-4"
+        />
+        <div
+          class="emotion-5"
+        >
+          Start Guide
+        </div>
+      </a>
+    </div>
+    <div
+      class="emotion-25"
+    >
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <div
+          class="emotion-9 emotion-10 emotion-11"
+        >
+          Chapter 2
+        </div>
+        <div
+          class="emotion-12 emotion-13"
+        >
+          CRUD
+        </div>
+      </div>
+      <ul
+        class="emotion-23 emotion-24"
+      >
+        <li
+          class="emotion-21 emotion-22"
+          color="#E7EEEC"
+        >
+          <div
+            class="emotion-17 emotion-18"
+            color="#13AA52"
+          >
+            <svg
+              class="emotion-16"
+              fill="currentColor"
+              height="12"
+              viewBox="0 0 7 12"
+              width="7"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.47516 3.75H3.95081L4.88268 0.707813C4.97017 0.351563 4.71862 0 4.37518 0H1.22522C0.96272 0 0.739598 0.208594 0.704598 0.4875L0.00460634 6.1125C-0.0369557 6.45 0.208042 6.75 0.525225 6.75H3.12176L2.11333 11.3086C2.03458 11.6648 2.28833 12 2.62301 12C2.80676 12 2.98176 11.8969 3.07801 11.7188L6.92797 4.59375C7.1314 4.22109 6.87984 3.75 6.47516 3.75Z"
+              />
+            </svg>
+          </div>
+          <a
+            class="emotion-19 emotion-20"
+            href="/server/read/"
+          >
+            Read Data in MongoDB
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`GuideNext renders the next guide in the same chapter 1`] = `
-.emotion-24 {
+<DocumentFragment>
+  .emotion-16 {
   color: #13AA52;
 }
 
@@ -1727,34 +752,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.emotion-10 {
-  margin-bottom: 40px;
-}
-
-.emotion-64 {
-  padding: 40px 24px;
-}
-
-@media not all and (max-width:767px) {
-  .emotion-64 {
-    padding: 48px;
-  }
-}
-
-@media not all and (max-width:1023px) {
-  .emotion-64 {
-    -webkit-flex-basis: 0;
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    min-width: 300px;
-    max-width: 510px;
-  }
 }
 
 .emotion-6 {
@@ -1846,7 +843,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   padding-right: 12px;
 }
 
-.emotion-62 {
+.emotion-39 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -1859,13 +856,13 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 @media not all and (max-width:767px) {
-  .emotion-62 {
+  .emotion-39 {
     padding: 48px;
   }
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-62 {
+  .emotion-39 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -1878,13 +875,13 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   }
 }
 
-.emotion-65 {
+.emotion-40 {
   border-top: 1px solid #E7EEEC;
   padding-top: 56px;
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-65 {
+  .emotion-40 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -1897,12 +894,12 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   }
 }
 
-.emotion-11 p {
+.emotion-7 p {
   margin-top: 8px;
 }
 
 @media not all and (max-width:1023px) {
-  .emotion-11 {
+  .emotion-7 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -1924,12 +921,12 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   font-weight: bold;
 }
 
-.emotion-22 {
+.emotion-14 {
   margin-bottom: 24px;
 }
 
 @media not all and (max-width:767px) {
-  .emotion-22 {
+  .emotion-14 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -1939,11 +936,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   }
 }
 
-.emotion-16 {
-  margin-bottom: 8px;
-}
-
-.emotion-14 {
+.emotion-10 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
@@ -1955,17 +948,17 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   margin-bottom: 8px;
 }
 
-.emotion-20 {
+.emotion-12 {
   color: #061621;
   font-weight: bold;
 }
 
-.emotion-60 {
+.emotion-37 {
   list-style: none;
   padding-left: 0;
 }
 
-.emotion-46 {
+.emotion-28 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -1979,11 +972,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   position: relative;
 }
 
-.emotion-46:not(:last-child) {
+.emotion-28:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-46:not(:last-child):before {
+.emotion-28:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -1992,7 +985,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   border-left: solid 1px #E7EEEC;
 }
 
-.emotion-26 {
+.emotion-17 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -2012,24 +1005,24 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   min-height: 20px;
 }
 
-.emotion-48 {
+.emotion-30 {
   color: #3D4F58;
 }
 
-.emotion-28 {
+.emotion-19 {
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-28:hover,
-.emotion-28:active {
+.emotion-19:hover,
+.emotion-19:active {
   color: currentColor;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-38 {
+.emotion-24 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -2049,11 +1042,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   min-height: 20px;
 }
 
-.emotion-36 {
+.emotion-23 {
   color: #13AA52;
 }
 
-.emotion-34 {
+.emotion-21 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -2067,11 +1060,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   position: relative;
 }
 
-.emotion-34:not(:last-child) {
+.emotion-21:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-34:not(:last-child):before {
+.emotion-21:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -2080,707 +1073,148 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   border-left: solid 1px #13AA52;
 }
 
-<GuideNext
-  metadata={
-    Object {
-      "chapters": Object {
-        "Atlas": Object {
-          "chapter_number": 1,
-          "description": "Get up and running with MongoDB Atlas.
-Learn how to create a cluster, load a sample dataset, and
-get your connection information.",
-          "guides": Array [
-            "cloud/account",
-            "cloud/connectionstring",
-            "cloud/migrate-from-aws-to-atlas",
-          ],
-          "icon": "/images/chapter-icon-atlas.png",
-        },
-        "CRUD": Object {
-          "chapter_number": 2,
-          "description": "Learn how to perform these core operations with
-your preferred language and associated MongoDB Driver.",
-          "guides": Array [
-            "server/read",
-          ],
-        },
-      },
-      "guides": Object {
-        "cloud/account": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 15,
-          "description": Array [
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 8,
-                    },
-                  },
-                  "type": "text",
-                  "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 8,
-                },
-              },
-              "type": "paragraph",
-            },
-          ],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 4,
-                },
-              },
-              "type": "text",
-              "value": "Create and Manage a MongoDB Account",
-            },
-          ],
-        },
-        "cloud/connectionstring": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Set Up Atlas Connectivity",
-            },
-          ],
-        },
-        "cloud/migrate-from-aws-to-atlas": Object {
-          "chapter_name": "Atlas",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-            },
-          ],
-        },
-        "server/read": Object {
-          "chapter_name": "CRUD",
-          "completion_time": 0,
-          "description": Array [],
-          "title": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 0,
-                },
-              },
-              "type": "text",
-              "value": "Read Data in MongoDB",
-            },
-          ],
-        },
-      },
-    }
-  }
-  slug="cloud/account"
->
-  <ReadGuidesContextProvider
-    slug="cloud/account"
+<div
+    class="emotion-40 emotion-41"
   >
-    <Container>
+    <div
+      class="emotion-7 emotion-8"
+    >
       <div
-        className="emotion-65 emotion-66"
+        class="emotion-0 emotion-1"
       >
-        <Content
-          guideData={
-            Array [
-              "cloud/connectionstring",
-              Object {
-                "chapter_name": "Atlas",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Set Up Atlas Connectivity",
-                  },
-                ],
-              },
-            ]
-          }
-        >
-          <Container>
-            <div
-              className="emotion-11 emotion-12"
-            >
-              <Heading>
-                <div
-                  className="emotion-0 emotion-1"
-                >
-                  What's Next
-                </div>
-              </Heading>
-              <Title>
-                <div
-                  className="emotion-2 emotion-3"
-                >
-                  <ComponentFactory
-                    key="0"
-                    nodeData={
-                      Object {
-                        "position": Object {
-                          "start": Object {
-                            "line": 0,
-                          },
-                        },
-                        "type": "text",
-                        "value": "Set Up Atlas Connectivity",
-                      }
-                    }
-                  >
-                    <Text
-                      nodeData={
-                        Object {
-                          "position": Object {
-                            "start": Object {
-                              "line": 0,
-                            },
-                          },
-                          "type": "text",
-                          "value": "Set Up Atlas Connectivity",
-                        }
-                      }
-                    >
-                      Set Up Atlas Connectivity
-                    </Text>
-                  </ComponentFactory>
-                </div>
-              </Title>
-              <Button
-                as={[Function]}
-                baseFontSize={16}
-                className="emotion-10"
-                to="cloud/connectionstring"
-                variant="primary"
-              >
-                <Box
-                  aria-disabled={false}
-                  as={[Function]}
-                  className="emotion-6"
-                  disabled={false}
-                  to="cloud/connectionstring"
-                >
-                  <Link
-                    aria-disabled={false}
-                    className="emotion-6"
-                    disabled={false}
-                    to="cloud/connectionstring"
-                  >
-                    <mockConstructor
-                      aria-disabled={false}
-                      className="emotion-6"
-                      disabled={false}
-                      to="/cloud/connectionstring/"
-                    >
-                      <a
-                        aria-disabled={false}
-                        className="emotion-6"
-                        disabled={false}
-                        href="/cloud/connectionstring/"
-                      >
-                        <div
-                          className="emotion-4"
-                        />
-                        <div
-                          className="emotion-5"
-                        >
-                          Start Guide
-                        </div>
-                      </a>
-                    </mockConstructor>
-                  </Link>
-                </Box>
-              </Button>
-            </div>
-          </Container>
-        </Content>
-        <ChapterInfo
-          chapterData={
-            Array [
-              "Atlas",
-              Object {
-                "chapter_number": 1,
-                "description": "Get up and running with MongoDB Atlas.
-Learn how to create a cluster, load a sample dataset, and
-get your connection information.",
-                "guides": Array [
-                  "cloud/account",
-                  "cloud/connectionstring",
-                  "cloud/migrate-from-aws-to-atlas",
-                ],
-                "icon": "/images/chapter-icon-atlas.png",
-              },
-            ]
-          }
-          guidesMetadata={
-            Object {
-              "cloud/account": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 15,
-                "description": Array [
-                  Object {
-                    "children": Array [
-                      Object {
-                        "position": Object {
-                          "start": Object {
-                            "line": 8,
-                          },
-                        },
-                        "type": "text",
-                        "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                      },
-                    ],
-                    "position": Object {
-                      "start": Object {
-                        "line": 8,
-                      },
-                    },
-                    "type": "paragraph",
-                  },
-                ],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 4,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Create and Manage a MongoDB Account",
-                  },
-                ],
-              },
-              "cloud/connectionstring": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Set Up Atlas Connectivity",
-                  },
-                ],
-              },
-              "cloud/migrate-from-aws-to-atlas": Object {
-                "chapter_name": "Atlas",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-                  },
-                ],
-              },
-              "server/read": Object {
-                "chapter_name": "CRUD",
-                "completion_time": 0,
-                "description": Array [],
-                "title": Array [
-                  Object {
-                    "position": Object {
-                      "start": Object {
-                        "line": 0,
-                      },
-                    },
-                    "type": "text",
-                    "value": "Read Data in MongoDB",
-                  },
-                ],
-              },
-            }
-          }
-          targetSlug="cloud/connectionstring"
-        >
-          <Card
-            className="emotion-64"
-          >
-            <Box
-              className="emotion-62"
-            >
-              <div
-                className="emotion-62"
-              >
-                <TopWrapper>
-                  <div
-                    className="emotion-22 emotion-23"
-                  >
-                    <StyledChapterNumberLabel
-                      number={1}
-                    >
-                      <ChapterNumberLabel
-                        className="emotion-16 emotion-13"
-                        number={1}
-                      >
-                        <Label
-                          className="emotion-16 emotion-13"
-                        >
-                          <div
-                            className="emotion-13 emotion-14 emotion-15"
-                          >
-                            Chapter 
-                            1
-                          </div>
-                        </Label>
-                      </ChapterNumberLabel>
-                    </StyledChapterNumberLabel>
-                    <ChapterTitle>
-                      <div
-                        className="emotion-20 emotion-21"
-                      >
-                        Atlas
-                      </div>
-                    </ChapterTitle>
-                  </div>
-                </TopWrapper>
-                <GuidesList
-                  guideSlugs={
-                    Array [
-                      "cloud/account",
-                      "cloud/connectionstring",
-                      "cloud/migrate-from-aws-to-atlas",
-                    ]
-                  }
-                  guidesMetadata={
-                    Object {
-                      "cloud/account": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 15,
-                        "description": Array [
-                          Object {
-                            "children": Array [
-                              Object {
-                                "position": Object {
-                                  "start": Object {
-                                    "line": 8,
-                                  },
-                                },
-                                "type": "text",
-                                "value": "A brief description or preview of what to expect in this
-guide for creating a MongoDB account.",
-                              },
-                            ],
-                            "position": Object {
-                              "start": Object {
-                                "line": 8,
-                              },
-                            },
-                            "type": "paragraph",
-                          },
-                        ],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 4,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Create and Manage a MongoDB Account",
-                          },
-                        ],
-                      },
-                      "cloud/connectionstring": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Set Up Atlas Connectivity",
-                          },
-                        ],
-                      },
-                      "cloud/migrate-from-aws-to-atlas": Object {
-                        "chapter_name": "Atlas",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas",
-                          },
-                        ],
-                      },
-                      "server/read": Object {
-                        "chapter_name": "CRUD",
-                        "completion_time": 0,
-                        "description": Array [],
-                        "title": Array [
-                          Object {
-                            "position": Object {
-                              "start": Object {
-                                "line": 0,
-                              },
-                            },
-                            "type": "text",
-                            "value": "Read Data in MongoDB",
-                          },
-                        ],
-                      },
-                    }
-                  }
-                  targetSlug="cloud/connectionstring"
-                >
-                  <List>
-                    <ul
-                      className="emotion-60 emotion-61"
-                    >
-                      <GuidesListItem
-                        isNext={false}
-                        key="cloud/account"
-                        slug="cloud/account"
-                      >
-                        <ListItem
-                          color="#13AA52"
-                        >
-                          <li
-                            className="emotion-34 emotion-35"
-                            color="#13AA52"
-                          >
-                            <Circle
-                              color="transparent"
-                            >
-                              <div
-                                className="emotion-26 emotion-27"
-                                color="transparent"
-                              >
-                                <Icon
-                                  fill="#13AA52"
-                                  glyph="Checkmark"
-                                >
-                                  <Checkmark
-                                    fill="#13AA52"
-                                  >
-                                    <Checkmark
-                                      aria-label="Checkmark Icon"
-                                      className="emotion-24"
-                                      height={16}
-                                      role="img"
-                                      width={16}
-                                    >
-                                      <svg
-                                        aria-label="Checkmark Icon"
-                                        className="emotion-24"
-                                        fill="none"
-                                        height={16}
-                                        role="img"
-                                        viewBox="0 0 16 16"
-                                        width={16}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          clipRule="evenodd"
-                                          d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
-                                          fill="currentColor"
-                                          fillRule="evenodd"
-                                        />
-                                      </svg>
-                                    </Checkmark>
-                                  </Checkmark>
-                                </Icon>
-                              </div>
-                            </Circle>
-                            <GuideTitle
-                              to="cloud/account"
-                            >
-                              <Link
-                                className="emotion-28 emotion-29"
-                                to="cloud/account"
-                              >
-                                <mockConstructor
-                                  className="emotion-28 emotion-29"
-                                  to="/cloud/account/"
-                                >
-                                  <a
-                                    className="emotion-28 emotion-29"
-                                    href="/cloud/account/"
-                                  >
-                                    Create and Manage a MongoDB Account
-                                  </a>
-                                </mockConstructor>
-                              </Link>
-                            </GuideTitle>
-                          </li>
-                        </ListItem>
-                      </GuidesListItem>
-                      <GuidesListItem
-                        isNext={true}
-                        key="cloud/connectionstring"
-                        slug="cloud/connectionstring"
-                      >
-                        <ListItem
-                          color="#E7EEEC"
-                        >
-                          <li
-                            className="emotion-46 emotion-35"
-                            color="#E7EEEC"
-                          >
-                            <Circle
-                              color="#13AA52"
-                            >
-                              <div
-                                className="emotion-38 emotion-27"
-                                color="#13AA52"
-                              >
-                                <IconLightningBolt
-                                  className="emotion-36"
-                                >
-                                  <svg
-                                    className="emotion-36"
-                                    fill="currentColor"
-                                    height="12"
-                                    viewBox="0 0 7 12"
-                                    width="7"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M6.47516 3.75H3.95081L4.88268 0.707813C4.97017 0.351563 4.71862 0 4.37518 0H1.22522C0.96272 0 0.739598 0.208594 0.704598 0.4875L0.00460634 6.1125C-0.0369557 6.45 0.208042 6.75 0.525225 6.75H3.12176L2.11333 11.3086C2.03458 11.6648 2.28833 12 2.62301 12C2.80676 12 2.98176 11.8969 3.07801 11.7188L6.92797 4.59375C7.1314 4.22109 6.87984 3.75 6.47516 3.75Z"
-                                    />
-                                  </svg>
-                                </IconLightningBolt>
-                              </div>
-                            </Circle>
-                            <GuideTitle
-                              to="cloud/connectionstring"
-                            >
-                              <Link
-                                className="emotion-28 emotion-29"
-                                to="cloud/connectionstring"
-                              >
-                                <mockConstructor
-                                  className="emotion-28 emotion-29"
-                                  to="/cloud/connectionstring/"
-                                >
-                                  <a
-                                    className="emotion-28 emotion-29"
-                                    href="/cloud/connectionstring/"
-                                  >
-                                    Set Up Atlas Connectivity
-                                  </a>
-                                </mockConstructor>
-                              </Link>
-                            </GuideTitle>
-                          </li>
-                        </ListItem>
-                      </GuidesListItem>
-                      <GuidesListItem
-                        isNext={false}
-                        key="cloud/migrate-from-aws-to-atlas"
-                        slug="cloud/migrate-from-aws-to-atlas"
-                      >
-                        <ListItem
-                          color="#E7EEEC"
-                        >
-                          <li
-                            className="emotion-46 emotion-35"
-                            color="#E7EEEC"
-                          >
-                            <Circle
-                              color="transparent"
-                            >
-                              <div
-                                className="emotion-26 emotion-27"
-                                color="transparent"
-                              >
-                                <IconLightningBolt
-                                  className="emotion-48"
-                                >
-                                  <svg
-                                    className="emotion-48"
-                                    fill="currentColor"
-                                    height="12"
-                                    viewBox="0 0 7 12"
-                                    width="7"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M6.47516 3.75H3.95081L4.88268 0.707813C4.97017 0.351563 4.71862 0 4.37518 0H1.22522C0.96272 0 0.739598 0.208594 0.704598 0.4875L0.00460634 6.1125C-0.0369557 6.45 0.208042 6.75 0.525225 6.75H3.12176L2.11333 11.3086C2.03458 11.6648 2.28833 12 2.62301 12C2.80676 12 2.98176 11.8969 3.07801 11.7188L6.92797 4.59375C7.1314 4.22109 6.87984 3.75 6.47516 3.75Z"
-                                    />
-                                  </svg>
-                                </IconLightningBolt>
-                              </div>
-                            </Circle>
-                            <GuideTitle
-                              to="cloud/migrate-from-aws-to-atlas"
-                            >
-                              <Link
-                                className="emotion-28 emotion-29"
-                                to="cloud/migrate-from-aws-to-atlas"
-                              >
-                                <mockConstructor
-                                  className="emotion-28 emotion-29"
-                                  to="/cloud/migrate-from-aws-to-atlas/"
-                                >
-                                  <a
-                                    className="emotion-28 emotion-29"
-                                    href="/cloud/migrate-from-aws-to-atlas/"
-                                  >
-                                    Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas
-                                  </a>
-                                </mockConstructor>
-                              </Link>
-                            </GuideTitle>
-                          </li>
-                        </ListItem>
-                      </GuidesListItem>
-                    </ul>
-                  </List>
-                </GuidesList>
-              </div>
-            </Box>
-          </Card>
-        </ChapterInfo>
+        What's Next
       </div>
-    </Container>
-  </ReadGuidesContextProvider>
-</GuideNext>
+      <div
+        class="emotion-2 emotion-3"
+      >
+        Set Up Atlas Connectivity
+      </div>
+      <a
+        aria-disabled="false"
+        class="emotion-6"
+        href="/cloud/connectionstring/"
+      >
+        <div
+          class="emotion-4"
+        />
+        <div
+          class="emotion-5"
+        >
+          Start Guide
+        </div>
+      </a>
+    </div>
+    <div
+      class="emotion-39"
+    >
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <div
+          class="emotion-9 emotion-10 emotion-11"
+        >
+          Chapter 1
+        </div>
+        <div
+          class="emotion-12 emotion-13"
+        >
+          Atlas
+        </div>
+      </div>
+      <ul
+        class="emotion-37 emotion-38"
+      >
+        <li
+          class="emotion-21 emotion-22"
+          color="#13AA52"
+        >
+          <div
+            class="emotion-17 emotion-18"
+            color="transparent"
+          >
+            <svg
+              aria-label="Checkmark Icon"
+              class="emotion-16"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <a
+            class="emotion-19 emotion-20"
+            href="/cloud/account/"
+          >
+            Create and Manage a MongoDB Account
+          </a>
+        </li>
+        <li
+          class="emotion-28 emotion-22"
+          color="#E7EEEC"
+        >
+          <div
+            class="emotion-24 emotion-18"
+            color="#13AA52"
+          >
+            <svg
+              class="emotion-23"
+              fill="currentColor"
+              height="12"
+              viewBox="0 0 7 12"
+              width="7"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.47516 3.75H3.95081L4.88268 0.707813C4.97017 0.351563 4.71862 0 4.37518 0H1.22522C0.96272 0 0.739598 0.208594 0.704598 0.4875L0.00460634 6.1125C-0.0369557 6.45 0.208042 6.75 0.525225 6.75H3.12176L2.11333 11.3086C2.03458 11.6648 2.28833 12 2.62301 12C2.80676 12 2.98176 11.8969 3.07801 11.7188L6.92797 4.59375C7.1314 4.22109 6.87984 3.75 6.47516 3.75Z"
+              />
+            </svg>
+          </div>
+          <a
+            class="emotion-19 emotion-20"
+            href="/cloud/connectionstring/"
+          >
+            Set Up Atlas Connectivity
+          </a>
+        </li>
+        <li
+          class="emotion-28 emotion-22"
+          color="#E7EEEC"
+        >
+          <div
+            class="emotion-17 emotion-18"
+            color="transparent"
+          >
+            <svg
+              class="emotion-30"
+              fill="currentColor"
+              height="12"
+              viewBox="0 0 7 12"
+              width="7"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.47516 3.75H3.95081L4.88268 0.707813C4.97017 0.351563 4.71862 0 4.37518 0H1.22522C0.96272 0 0.739598 0.208594 0.704598 0.4875L0.00460634 6.1125C-0.0369557 6.45 0.208042 6.75 0.525225 6.75H3.12176L2.11333 11.3086C2.03458 11.6648 2.28833 12 2.62301 12C2.80676 12 2.98176 11.8969 3.07801 11.7188L6.92797 4.59375C7.1314 4.22109 6.87984 3.75 6.47516 3.75Z"
+              />
+            </svg>
+          </div>
+          <a
+            class="emotion-19 emotion-20"
+            href="/cloud/migrate-from-aws-to-atlas/"
+          >
+            Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
 `;
