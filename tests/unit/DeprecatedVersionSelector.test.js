@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
 
 const deprecatedVersions = {
@@ -12,136 +13,74 @@ const metadata = {
 };
 
 describe('when rendered', () => {
-  let wrapper;
-  let productDropdown;
-  let versionDropdown;
-
-  beforeAll(() => {
-    wrapper = mount(<DeprecatedVersionSelector metadata={metadata} />);
-    productDropdown = wrapper.find('StyledCustomSelect').at(0);
-    versionDropdown = wrapper.find('StyledCustomSelect').at(1);
-  });
+  jest.useFakeTimers();
 
   it('shows two dropdowns', () => {
-    expect(wrapper.find('Select')).toHaveLength(2);
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+    const productDropdown = wrapper.queryAllByText('Select a Product');
+    const versionDropdown = wrapper.queryAllByText('Select a Version');
+
+    expect(productDropdown).toBeTruthy();
+    expect(versionDropdown).toBeTruthy();
   });
 
   it('shows a disabled submit button', () => {
-    const button = wrapper.find('Button');
-    expect(button).toHaveLength(1);
-    expect(button.prop('disabled')).toBe(true);
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+
+    const button = wrapper.getByTitle('View Documentation');
+    expect(button).toBeTruthy();
+    expect(button).toBeDisabled();
   });
 
   it('shows a disabled version selector', () => {
-    expect(wrapper.find('Select').at(1).prop('disabled')).toBe(true);
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+    const versionDropdown = wrapper.getByText('Select a Version');
+
+    // Limitation of implementation here - may be desirable to move text from the <p> tag
+    // to the actual dropdown div
+    expect(versionDropdown.parentElement).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('does not show either dropdown menu', () => {
-    expect(wrapper.find('ul')).toHaveLength(0);
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+
+    expect(wrapper.queryAllByText('mms')).toHaveLength(0);
+    expect(wrapper.queryAllByText(deprecatedVersions.mms[0])).toHaveLength(0);
   });
 
   // Test product dropdown
   describe('when the product button is clicked', () => {
-    beforeAll(() => {
-      productDropdown.simulate('click');
-    });
+    it('shows the dropdown menu with elements per metadata node', () => {
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
-    it('shows the dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(1);
-    });
+      //see TODO above re: limitation of having text in a <p> tag
+      const productDropdown = wrapper.queryAllByRole('listbox')[0];
+      userEvent.click(productDropdown);
 
-    it('product dropdown text is correct', () => {
-      expect(wrapper.find('SelectedText').at(0).text()).toBe('Product');
-    });
-
-    it('has 2 list elements', () => {
-      expect(wrapper.find('ul').children()).toHaveLength(2);
-    });
-
-    it('shows the proper name for product', () => {
-      expect(wrapper.find('li').first().text()).toBe('MongoDB Server');
-    });
-  });
-
-  describe('when the button is clicked again', () => {
-    beforeAll(() => {
-      productDropdown.simulate('click');
-    });
-
-    it('hides the dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(0);
-    });
-  });
-
-  // Test version dropdown
-  describe('when the version button is clicked', () => {
-    beforeAll(() => {
-      versionDropdown.simulate('click');
-    });
-
-    // Version dropdown is disabled until a product is selected
-    it('does not show the dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(0);
+      expect(wrapper.getByText('MongoDB Server')).toBeTruthy();
+      expect(wrapper.getByText('MongoDB Ops Manager')).toBeTruthy();
     });
 
     it('version dropdown text is correct', () => {
-      expect(wrapper.find('SelectedText').at(1).text()).toBe('Version');
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+
+      //see TODO above re: limitation of having text in a <p> tag
+      const productDropdown = wrapper.queryAllByRole('listbox')[0];
+      userEvent.click(productDropdown);
+      expect(wrapper.getByText('Version')).toBeTruthy();
     });
   });
 
-  describe('when the first option is selected', () => {
-    beforeAll(() => {
-      productDropdown.simulate('click');
-      wrapper.find('ul').childAt(0).simulate('click');
-    });
-
+  describe('when the product button is clicked again', () => {
     it('hides the dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(0);
-    });
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
-    it('shows the correct text', () => {
-      expect(wrapper.find('SelectedText').at(0).text()).toBe('MongoDB Server');
-    });
-  });
+      //see TODO above re: limitation of having text in a <p> tag
+      const productDropdown = wrapper.queryAllByRole('listbox')[0];
+      userEvent.click(productDropdown);
+      userEvent.click(productDropdown);
 
-  // Test version dropdown
-  describe('when the version button is clicked', () => {
-    beforeAll(() => {
-      versionDropdown.simulate('click');
-    });
-
-    it('shows the version dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(1);
-    });
-
-    it('has 6 list elements', () => {
-      expect(wrapper.find('ul').children()).toHaveLength(6);
-    });
-  });
-
-  describe('when a version is selected', () => {
-    beforeAll(() => {
-      wrapper.find('ul').childAt(2).simulate('click');
-    });
-
-    it('hides the dropdown menu', () => {
-      expect(wrapper.find('ul')).toHaveLength(0);
-    });
-
-    it('enables the link button', () => {
-      const button = wrapper.find('Button').first();
-      expect(button.prop('disabled')).toBe(false);
-    });
-  });
-
-  describe('when the product is changed', () => {
-    beforeAll(() => {
-      productDropdown.simulate('click');
-      wrapper.find('ul').childAt(1).simulate('click');
-    });
-
-    it('version dropdown text is reset', () => {
-      expect(wrapper.find('SelectedText').at(1).text()).toBe('Version');
+      expect(wrapper.queryAllByText('MongoDB Server')).toHaveLength(0);
     });
   });
 });

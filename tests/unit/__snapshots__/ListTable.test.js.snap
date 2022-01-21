@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`when rendering a list table with fixed widths renders correctly 1`] = `
-.emotion-36 {
+<DocumentFragment>
+  .emotion-36 {
   position: relative;
   max-width: 100%;
 }
@@ -109,22 +110,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   color: #3D4F58;
 }
 
-.emotion-33 {
-  border-top: 1px solid #E7EEEC;
-  color: #3D4F58;
-  opacity: 0;
-}
-
-.emotion-33 > td > [data-leafygreen-ui="td-inner-div"] {
-  min-height: 40px;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-}
-
-.emotion-33 > td:nth-child(1) {
-  padding-left: 8px;
-}
-
 .emotion-22 {
   min-width: 40px;
   padding: 8px 8px;
@@ -145,6 +130,63 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-22 > div > span > *:last-child {
   margin-bottom: 0;
+}
+
+.emotion-33 {
+  border-top: 1px solid #E7EEEC;
+  color: #3D4F58;
+}
+
+.emotion-33 > td > [data-leafygreen-ui="td-inner-div"] {
+  min-height: 40px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+
+.emotion-33 > td:nth-child(1) {
+  padding-left: 8px;
+}
+
+.emotion-33 td:nth-child(1) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-33 td:nth-child(2) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-33 td:nth-child(3) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-33 td:nth-child(4) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-33 td:nth-child(5) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-33 td:nth-child(6) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .emotion-4 {
@@ -213,200 +255,202 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 <div
-  class="emotion-36"
->
-  <div
-    class="emotion-0"
-  />
-  <div
-    class="emotion-1"
-  />
-  <div
-    class="emotion-35"
+    class="emotion-36"
   >
-    <table
-      cellpadding="0"
-      cellspacing="0"
-      class="emotion-34"
+    <div
+      class="emotion-0"
+    />
+    <div
+      class="emotion-1"
+    />
+    <div
+      class="emotion-35"
     >
-      <thead>
-        <tr
-          class="emotion-20"
-          data-testid="leafygreen-ui-header-row"
-        >
-          <th
-            aria-sort="none"
-            class="emotion-4"
-            role="columnheader"
-            scope="col"
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        class="emotion-34"
+      >
+        <thead>
+          <tr
+            class="emotion-20"
+            data-testid="leafygreen-ui-header-row"
           >
-            <div
-              class="emotion-3"
+            <th
+              aria-sort="none"
+              class="emotion-4"
+              role="columnheader"
+              scope="col"
             >
-              <span
-                class="emotion-2"
-              />
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-7"
-            role="columnheader"
-            scope="col"
+              <div
+                class="emotion-3"
+              >
+                <span
+                  class="emotion-2"
+                />
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-7"
+              role="columnheader"
+              scope="col"
+            >
+              <div
+                class="emotion-3"
+              >
+                <span
+                  class="emotion-2"
+                />
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-10"
+              role="columnheader"
+              scope="col"
+            >
+              <div
+                class="emotion-3"
+              >
+                <span
+                  class="emotion-2"
+                />
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-13"
+              role="columnheader"
+              scope="col"
+            >
+              <div
+                class="emotion-3"
+              >
+                <span
+                  class="emotion-2"
+                />
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-16"
+              role="columnheader"
+              scope="col"
+            >
+              <div
+                class="emotion-3"
+              >
+                <span
+                  class="emotion-2"
+                />
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-13"
+              role="columnheader"
+              scope="col"
+            >
+              <div
+                class="emotion-3"
+              >
+                <span
+                  class="emotion-2"
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            aria-disabled="false"
+            class="emotion-33"
+            role="row"
           >
-            <div
-              class="emotion-3"
+            <td
+              class="emotion-22"
             >
-              <span
-                class="emotion-2"
-              />
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-10"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+              <div
+                class="emotion-21"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  notebook
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-22"
             >
-              <span
-                class="emotion-2"
-              />
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-13"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+              <div
+                class="emotion-21"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  50
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-22"
             >
-              <span
-                class="emotion-2"
-              />
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-16"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+              <div
+                class="emotion-21"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  8.5x11,in
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-22"
             >
-              <span
-                class="emotion-2"
-              />
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-13"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+              <div
+                class="emotion-21"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  A
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-22"
             >
-              <span
-                class="emotion-2"
-              />
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          aria-disabled="false"
-          class="emotion-33"
-          role="row"
-        >
-          <td
-            class="emotion-22"
-          >
-            <div
-              class="emotion-21"
-              data-leafygreen-ui="td-inner-div"
+              <div
+                class="emotion-21"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  college-ruled,perforated
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-22"
             >
-              <span>
-                notebook
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-22"
-          >
-            <div
-              class="emotion-21"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                50
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-22"
-          >
-            <div
-              class="emotion-21"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                8.5x11,in
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-22"
-          >
-            <div
-              class="emotion-21"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                A
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-22"
-          >
-            <div
-              class="emotion-21"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                college-ruled,perforated
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-22"
-          >
-            <div
-              class="emotion-21"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                8
-              </span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <div
+                class="emotion-21"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  8
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`when rendering a list-table directive renders correctly 1`] = `
-.emotion-87 {
+<DocumentFragment>
+  .emotion-87 {
   position: relative;
   max-width: 100%;
 }
@@ -520,22 +564,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   color: #3D4F58;
 }
 
-.emotion-32 {
-  border-top: 1px solid #E7EEEC;
-  color: #3D4F58;
-  opacity: 0;
-}
-
-.emotion-32 > td > [data-leafygreen-ui="td-inner-div"] {
-  min-height: 40px;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-}
-
-.emotion-32 > td:nth-child(1) {
-  padding-left: 8px;
-}
-
 .emotion-21 {
   min-width: 40px;
   padding: 8px 8px;
@@ -583,529 +611,587 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   margin-bottom: 0;
 }
 
+.emotion-32 {
+  border-top: 1px solid #E7EEEC;
+  color: #3D4F58;
+}
+
+.emotion-32 > td > [data-leafygreen-ui="td-inner-div"] {
+  min-height: 40px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+
+.emotion-32 > td:nth-child(1) {
+  padding-left: 8px;
+}
+
+.emotion-32 td:nth-child(1) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-32 td:nth-child(2) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-32 td:nth-child(3) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-32 td:nth-child(4) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-32 td:nth-child(5) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.emotion-32 td:nth-child(6) > div {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
 <div
-  class="emotion-87"
->
-  <div
-    class="emotion-0"
-  />
-  <div
-    class="emotion-1"
-  />
-  <div
-    class="emotion-86"
+    class="emotion-87"
   >
-    <table
-      cellpadding="0"
-      cellspacing="0"
-      class="emotion-85"
+    <div
+      class="emotion-0"
+    />
+    <div
+      class="emotion-1"
+    />
+    <div
+      class="emotion-86"
     >
-      <thead>
-        <tr
-          class=""
-          data-testid="leafygreen-ui-header-row"
-        >
-          <th
-            aria-sort="none"
-            class="emotion-4"
-            role="columnheader"
-            scope="col"
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        class="emotion-85"
+      >
+        <thead>
+          <tr
+            class=""
+            data-testid="leafygreen-ui-header-row"
           >
-            <div
-              class="emotion-3"
+            <th
+              aria-sort="none"
+              class="emotion-4"
+              role="columnheader"
+              scope="col"
             >
-              <span
-                class="emotion-2"
+              <div
+                class="emotion-3"
               >
-                name
-              </span>
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-4"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+                <span
+                  class="emotion-2"
+                >
+                  name
+                </span>
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-4"
+              role="columnheader"
+              scope="col"
             >
-              <span
-                class="emotion-2"
+              <div
+                class="emotion-3"
               >
-                quantity
-              </span>
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-4"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+                <span
+                  class="emotion-2"
+                >
+                  quantity
+                </span>
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-4"
+              role="columnheader"
+              scope="col"
             >
-              <span
-                class="emotion-2"
+              <div
+                class="emotion-3"
               >
-                size
-              </span>
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-4"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+                <span
+                  class="emotion-2"
+                >
+                  size
+                </span>
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-4"
+              role="columnheader"
+              scope="col"
             >
-              <span
-                class="emotion-2"
+              <div
+                class="emotion-3"
               >
-                status
-              </span>
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-4"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+                <span
+                  class="emotion-2"
+                >
+                  status
+                </span>
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-4"
+              role="columnheader"
+              scope="col"
             >
-              <span
-                class="emotion-2"
+              <div
+                class="emotion-3"
               >
-                tags
-              </span>
-            </div>
-          </th>
-          <th
-            aria-sort="none"
-            class="emotion-4"
-            role="columnheader"
-            scope="col"
-          >
-            <div
-              class="emotion-3"
+                <span
+                  class="emotion-2"
+                >
+                  tags
+                </span>
+              </div>
+            </th>
+            <th
+              aria-sort="none"
+              class="emotion-4"
+              role="columnheader"
+              scope="col"
             >
-              <span
-                class="emotion-2"
+              <div
+                class="emotion-3"
               >
-                rating
-              </span>
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          aria-disabled="false"
-          class="emotion-32"
-          role="row"
-        >
-          <th
-            class="emotion-21"
-            role="rowheader"
-            scope="row"
+                <span
+                  class="emotion-2"
+                >
+                  rating
+                </span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            aria-disabled="false"
+            class="emotion-32"
+            role="row"
           >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+            <th
+              class="emotion-21"
+              role="rowheader"
+              scope="row"
             >
-              <span>
-                journal
-              </span>
-            </div>
-          </th>
-          <td
-            class="emotion-23"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  journal
+                </span>
+              </div>
+            </th>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  25
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  14x21,cm
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  A
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  brown, lined
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  9
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-disabled="false"
+            class="emotion-32"
+            role="row"
           >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+            <th
+              class="emotion-21"
+              role="rowheader"
+              scope="row"
             >
-              <span>
-                25
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  notebook
+                </span>
+              </div>
+            </th>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  50
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  8.5x11,in
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  A
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  college-ruled,perforated
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  8
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-disabled="false"
+            class="emotion-32"
+            role="row"
           >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+            <th
+              class="emotion-21"
+              role="rowheader"
+              scope="row"
             >
-              <span>
-                14x21,cm
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  paper
+                </span>
+              </div>
+            </th>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  100
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  8.5x11,in
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  D
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  watercolor
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  10
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-disabled="false"
+            class="emotion-32"
+            role="row"
           >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+            <th
+              class="emotion-21"
+              role="rowheader"
+              scope="row"
             >
-              <span>
-                A
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  planner
+                </span>
+              </div>
+            </th>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  75
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  22.85x30,cm
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  D
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  2019
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
+            >
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  10
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-disabled="false"
+            class="emotion-32"
+            role="row"
           >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+            <th
+              class="emotion-21"
+              role="rowheader"
+              scope="row"
             >
-              <span>
-                brown, lined
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  postcard
+                </span>
+              </div>
+            </th>
+            <td
+              class="emotion-23"
             >
-              <span>
-                9
-              </span>
-            </div>
-          </td>
-        </tr>
-        <tr
-          aria-disabled="false"
-          class="emotion-32"
-          role="row"
-        >
-          <th
-            class="emotion-21"
-            role="rowheader"
-            scope="row"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  45
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
             >
-              <span>
-                notebook
-              </span>
-            </div>
-          </th>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  10x,cm
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
             >
-              <span>
-                50
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  D
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
             >
-              <span>
-                8.5x11,in
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  double-sided,white
+                </span>
+              </div>
+            </td>
+            <td
+              class="emotion-23"
             >
-              <span>
-                A
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                college-ruled,perforated
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                8
-              </span>
-            </div>
-          </td>
-        </tr>
-        <tr
-          aria-disabled="false"
-          class="emotion-32"
-          role="row"
-        >
-          <th
-            class="emotion-21"
-            role="rowheader"
-            scope="row"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                paper
-              </span>
-            </div>
-          </th>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                100
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                8.5x11,in
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                D
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                watercolor
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                10
-              </span>
-            </div>
-          </td>
-        </tr>
-        <tr
-          aria-disabled="false"
-          class="emotion-32"
-          role="row"
-        >
-          <th
-            class="emotion-21"
-            role="rowheader"
-            scope="row"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                planner
-              </span>
-            </div>
-          </th>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                75
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                22.85x30,cm
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                D
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                2019
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                10
-              </span>
-            </div>
-          </td>
-        </tr>
-        <tr
-          aria-disabled="false"
-          class="emotion-32"
-          role="row"
-        >
-          <th
-            class="emotion-21"
-            role="rowheader"
-            scope="row"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                postcard
-              </span>
-            </div>
-          </th>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                45
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                10x,cm
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                D
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                double-sided,white
-              </span>
-            </div>
-          </td>
-          <td
-            class="emotion-23"
-          >
-            <div
-              class="emotion-20"
-              data-leafygreen-ui="td-inner-div"
-            >
-              <span>
-                2
-              </span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <div
+                class="emotion-20"
+                data-leafygreen-ui="td-inner-div"
+              >
+                <span>
+                  2
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</DocumentFragment>
 `;

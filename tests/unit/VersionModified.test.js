@@ -1,18 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import VersionModified from '../../src/components/VersionModified';
 
 // data for this component
 import { deprecated, versionadded, versionchanged } from './data/VersionModified.test.json';
 
-const shallowRender = (data) => shallow(<VersionModified nodeData={data} />);
+const shallowRender = (data) => render(<VersionModified nodeData={data} />);
 
 describe('when rendering a deprecated directive with 0 arguments', () => {
   let wrapper;
 
   it('renders correctly ', () => {
     wrapper = shallowRender(deprecated);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.asFragment()).toMatchSnapshot();
   });
 });
 
@@ -21,7 +21,7 @@ describe('when rendering a versionadded directive with one argument', () => {
 
   it('renders correctly ', () => {
     wrapper = shallowRender(versionadded);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.asFragment()).toMatchSnapshot();
   });
 });
 
@@ -30,6 +30,6 @@ describe('when rendering a versionchanged directive with two arguments', () => {
 
   it('renders correctly ', () => {
     wrapper = shallowRender(versionchanged);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.asFragment()).toMatchSnapshot();
   });
 });

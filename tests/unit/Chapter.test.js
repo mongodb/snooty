@@ -1,15 +1,15 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import mockData from './data/Chapters.test.json';
 import Chapter from '../../src/components/Chapters/Chapter';
 
 it('renders correctly', () => {
   const chapterData = mockData.nodeData.children[0];
-  const wrapper = mount(<Chapter nodeData={chapterData} metadata={mockData.metadata} />);
-  expect(wrapper).toMatchSnapshot();
+  const wrapper = render(<Chapter nodeData={chapterData} metadata={mockData.metadata} />);
+  expect(wrapper.asFragment()).toMatchSnapshot();
 
   // Make sure that the logic used to get the component's rendered data is correct
-  expect(wrapper.find('ChapterNumberLabel').text()).toEqual('Chapter 1');
-  expect(wrapper.find('ChapterTitle').text()).toEqual('Atlas');
-  expect(wrapper.find('li')).toHaveLength(3);
+  expect(wrapper.getByText('Chapter 1')).toBeTruthy();
+  expect(wrapper.getByText('Atlas')).toBeTruthy();
+  expect(wrapper.container.querySelectorAll('li')).toHaveLength(3);
 });

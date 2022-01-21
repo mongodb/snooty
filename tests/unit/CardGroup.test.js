@@ -1,11 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import CardGroup from '../../src/components/CardGroup';
-
+import { theme } from '../../src/theme/docsTheme';
+import { ThemeProvider } from 'emotion-theming';
 // data for this component
 import mockData from './data/CardGroup.test.json';
 
 it('renders correctly', () => {
-  const tree = shallow(<CardGroup nodeData={mockData} />);
-  expect(tree).toMatchSnapshot();
+  const tree = render(
+    <ThemeProvider theme={theme}>
+      <CardGroup nodeData={mockData} />
+    </ThemeProvider>
+  );
+  expect(tree.asFragment()).toMatchSnapshot();
 });

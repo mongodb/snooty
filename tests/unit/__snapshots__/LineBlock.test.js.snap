@@ -1,22 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div
-  className="line-block"
->
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "position": Object {
-          "start": Object {
-            "line": 3,
-          },
-        },
-        "type": "text",
-        "value": "N. Virginia (us-east-1)",
-      }
-    }
-  />
-</div>
+<DocumentFragment>
+  <div
+    class="line-block"
+  >
+    N. Virginia (us-east-1)
+  </div>
+</DocumentFragment>
 `;

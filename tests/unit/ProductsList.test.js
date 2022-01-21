@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { matchers } from 'jest-emotion';
 import ProductsList from '../../src/components/Sidenav/ProductsList';
 import { tick } from '../utils';
@@ -21,27 +22,24 @@ jest.mock('../../src/hooks/useAllProducts', () => ({
 
 expect.extend(matchers);
 
-const expectComponentIsOpen = (wrapper, value) => {
-  expect(wrapper.find('ProductsListHeading').prop('isOpen')).toEqual(value);
-};
-
 describe('ProductsList', () => {
   jest.useFakeTimers();
 
   it('renders closed', async () => {
-    const wrapper = mount(<ProductsList />);
-    expectComponentIsOpen(wrapper, false);
+    const wrapper = render(<ProductsList />);
     // Products still technically render, but should be displayed as none
-    const productsList = wrapper.find('Products');
-    expect(productsList.childAt(0).children()).toHaveLength(2);
-    expect(productsList).toHaveStyleRule('display', 'none');
+    const productsListEntry = wrapper.getByText(mockProducts[0].title);
+    expect(productsListEntry).toBeTruthy();
+    expect(productsListEntry).not.toBeVisible();
   });
 
   it('opens on click', async () => {
-    const wrapper = mount(<ProductsList />);
-    wrapper.find('ProductsListHeading').simulate('click');
-    await tick({ wrapper });
+    const wrapper = render(<ProductsList />);
+    userEvent.click(wrapper.getByText('View all products'));
+    await tick();
+    const productsListEntry = wrapper.getByText(mockProducts[0].title);
     // Check for the state since this should control which css is applied at which state
-    expectComponentIsOpen(wrapper, true);
+    expect(productsListEntry).toBeTruthy();
+    expect(productsListEntry).toBeVisible();
   });
 });

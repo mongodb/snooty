@@ -1,58 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<StyledCard
-  onClick={[Function]}
->
-  <ConditionalWrapper
-    wrapper={[Function]}
+<DocumentFragment>
+  .emotion-10 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+  cursor: pointer;
+}
+
+.emotion-10:focus {
+  outline: none;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+}
+
+.emotion-10:hover {
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+}
+
+.emotion-10:hover:focus {
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px;
+}
+
+.emotion-8 p:last-of-type {
+  margin-bottom: 0;
+}
+
+.emotion-0 {
+  width: 24px;
+}
+
+.emotion-3 {
+  background-color: #E4F4E4;
+  border-radius: 4px;
+  color: #13AA52;
+  font-weight: bold;
+  padding: 4px 8px;
+  margin-right: auto;
+}
+
+.emotion-4 {
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  margin: 24px 0 8px 0;
+}
+
+.emotion-6 {
+  font-weight: bold;
+  margin-top: auto;
+}
+
+.emotion-6 > a:hover {
+  color: #1A567E;
+}
+
+<div
+    class="emotion-8 emotion-9 emotion-10"
   >
-    <CardIcon
+    <img
       alt="MongoDB University icon"
+      class="emotion-0 emotion-1"
       src="/images/icons/university.svg"
     />
-  </ConditionalWrapper>
-  <ConditionalWrapper
-    wrapper={[Function]}
-  >
-    <FlexTag
-      text="Test card tag"
-    />
-    <H4>
+    <span
+      class="emotion-2 emotion-3"
+    >
+      Test card tag
+    </span>
+    <h4
+      class="emotion-4 emotion-5"
+    >
       Test card headline
-    </H4>
-    <ComponentFactory
-      cardRef={true}
-      key="0"
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "position": Object {
-                "start": Object {
-                  "line": 136,
-                },
-              },
-              "type": "text",
-              "value": "Test card paragraph",
-            },
-          ],
-          "position": Object {
-            "start": Object {
-              "line": 136,
-            },
-          },
-          "type": "paragraph",
-        }
-      }
-    />
-    <CTA>
-      <Link
-        to="https://university.mongodb.com/courses/M001/about"
+    </h4>
+    <p>
+      Test card paragraph
+    </p>
+    <p
+      class="emotion-6 emotion-7"
+    >
+      <a
+        href="https://university.mongodb.com/courses/M001/about"
       >
         Test card CTA
-      </Link>
-    </CTA>
-  </ConditionalWrapper>
-</StyledCard>
+      </a>
+    </p>
+  </div>
+</DocumentFragment>
 `;

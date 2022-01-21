@@ -1,63 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<th>
-  Returns
-  :
-</th>
-<td>
-  <ComponentFactory
-    key="0"
-    nodeData={
-      Object {
-        "children": Array [
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 137,
-              },
-            },
-            "type": "text",
-            "value": "A JSON Web Token string encoded for the provided ",
-          },
-          Object {
-            "children": Array [
-              Object {
-                "position": Object {
-                  "start": Object {
-                    "line": 137,
-                  },
-                },
-                "type": "text",
-                "value": "payload",
-              },
-            ],
-            "position": Object {
-              "start": Object {
-                "line": 137,
-              },
-            },
-            "type": "literal",
-          },
-          Object {
-            "position": Object {
-              "start": Object {
-                "line": 137,
-              },
-            },
-            "type": "text",
-            "value": ".",
-          },
-        ],
-        "position": Object {
-          "start": Object {
-            "line": 137,
-          },
-        },
-        "type": "paragraph",
-      }
-    }
-    parentNode="field"
-  />
-</td>
+<DocumentFragment>
+  Returns:A JSON Web Token string encoded for the provided 
+  .emotion-2 {
+  background-color: #F9FBFA;
+  border: 1px solid #B8C4C2;
+  border-radius: 3px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  white-space: nowrap;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-2 {
+  box-shadow: 0 0 0 3px #E7EEEC;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-2 {
+  box-shadow: 0 0 0 3px #C5E4F2;
+}
+
+.emotion-0 {
+  font-size: unset;
+}
+
+<code
+    class="emotion-0 emotion-1 emotion-2"
+  >
+    payload
+  </code>
+  .
+</DocumentFragment>
 `;

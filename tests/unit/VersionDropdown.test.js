@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as Gatsby from 'gatsby';
 
@@ -14,21 +14,6 @@ const publishedBranches = {
     branches: {
       manual: 'master',
       published: ['master', 'v2.11', 'v2.10', 'v2.9', 'v2.8', 'v2.7', 'v2.6', 'v2.5', 'v2.4', 'v2.2'],
-    },
-  },
-};
-
-const publishedBranchesNoLegacy = {
-  version: {
-    published: ['2.12', '2.11', '2.10', '2.9', '2.8', '2.7', '2.6', '2.5'],
-    active: ['2.12', '2.11', '2.10', '2.9', '2.8', '2.7', '2.6', '2.5'],
-    stable: null,
-    upcoming: null,
-  },
-  git: {
-    branches: {
-      manual: 'master',
-      published: ['master', 'v2.11', 'v2.10', 'v2.9', 'v2.8', 'v2.7', 'v2.6', 'v2.5'],
     },
   },
 };
@@ -63,57 +48,25 @@ useStaticQuery.mockImplementation(() => ({
 
 // Testing a property with legacy docs
 describe('when rendered', () => {
-  let wrapper;
-
-  beforeAll(() => {
-    wrapper = shallow(<VersionDropdown slug="installation" publishedBranches={publishedBranches} />);
-  });
-
   it('shows the dropdown menu', () => {
-    expect(wrapper.find('StyledSelect')).toHaveLength(1);
+    const wrapper = render(<VersionDropdown slug="installation" publishedBranches={publishedBranches} />);
+    expect(wrapper.getByRole('button')).toBeTruthy();
   });
 
   it('shows the "master" list item is active', () => {
-    expect(wrapper.find('StyledSelect').prop('value')).toBe('master');
-  });
-
-  it('has 9 list elements', () => {
-    expect(wrapper.find('Option')).toHaveLength(9);
-  });
-
-  it('shows `Legacy Docs` as the last list element', () => {
-    expect(wrapper.find('Option').last().prop('value')).toBe('legacy');
+    const wrapper = render(<VersionDropdown slug="installation" publishedBranches={publishedBranches} />);
+    expect(wrapper.getByText('Version 2.12')).toBeTruthy();
   });
 
   it('shows the proper name for master', () => {
-    expect(wrapper.find('Option').first().text()).not.toBe('master');
-  });
-});
-
-describe('when rendering a property without legacy docs', () => {
-  let wrapper;
-
-  beforeAll(() => {
-    wrapper = shallow(<VersionDropdown slug="installation" publishedBranches={publishedBranchesNoLegacy} />);
-  });
-
-  it('has 8 list elements', () => {
-    expect(wrapper.find('Option').children()).toHaveLength(8);
-  });
-
-  it('does not show `Legacy Docs` as the last list element', () => {
-    expect(wrapper.find('Option').last().prop('value')).not.toBe('legacy');
+    const wrapper = render(<VersionDropdown slug="installation" publishedBranches={publishedBranches} />);
+    expect(wrapper.getByText('Version 2.12')).toBeTruthy();
   });
 });
 
 describe('when rendering an unversioned property', () => {
-  let wrapper;
-
-  beforeAll(() => {
-    wrapper = shallow(<VersionDropdown slug="installation" publishedBranches={publishedBranchesUnversioned} />);
-  });
-
   it('does not render', () => {
-    expect(wrapper.find('StyledSelect')).toHaveLength(0);
+    const wrapper = render(<VersionDropdown slug="installation" publishedBranches={publishedBranchesUnversioned} />);
+    expect(wrapper.queryAllByText('Version 2.12')).toHaveLength(0);
   });
 });

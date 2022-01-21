@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import QuizWidget from '../../src/components/Widgets/QuizWidget/QuizWidget';
 
 // data for this component
@@ -8,23 +8,28 @@ import { completeQuiz, noQuestion } from './data/QuizWidget.test.json';
 const siteUrl = 'https://docs.mongodb.com';
 const project = 'cloud-docs';
 
-const mockDate = new Date(1466424490000);
-const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
+const timestamp = 1466424490000;
+const mockDate = new Date(timestamp);
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ siteUrl, project }),
 }));
 
-it('renders quiz widget correctly', () => {
-  const tree = shallow(<QuizWidget nodeData={completeQuiz} />);
-  expect(tree).toMatchSnapshot();
-});
+describe('quiz widget snapshots', () => {
+  const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
+  Date.now = jest.fn(() => timestamp);
 
-it('doesnt render quiz widget without a specified question', () => {
-  const tree = shallow(<QuizWidget nodeData={noQuestion} />);
-  expect(tree).toMatchSnapshot();
-});
+  it('renders quiz widget correctly', () => {
+    const tree = render(<QuizWidget nodeData={completeQuiz} />);
+    expect(tree.asFragment()).toMatchSnapshot();
+  });
 
-afterAll(() => {
-  spy.mockRestore();
+  it('doesnt render quiz widget without a specified question', () => {
+    const tree = render(<QuizWidget nodeData={noQuestion} />);
+    expect(tree.asFragment()).toMatchSnapshot();
+  });
+
+  afterAll(() => {
+    spy.mockRestore();
+  });
 });
