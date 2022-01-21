@@ -8,6 +8,7 @@ import ContentsList from '../ContentsList/ContentsList';
 import ContentsListItem from '../ContentsList/ContentsListItem';
 import Link from '../Link';
 import { SidenavContext } from '../Sidenav';
+import useActiveHeading from '../../hooks/useActiveHeading';
 import useVisibleOnScroll from '../../hooks/useVisibleOnScroll';
 import { theme } from '../../theme/docsTheme';
 
@@ -77,6 +78,15 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const ListContainer = styled('div')`
+  display: none;
+
+  @media ${theme.screenSize.largeAndUp} {
+    display: block;
+    margin-bottom: 56px;
+  }
+`;
+
 const LearningTitle = styled('div')`
   font-size: ${theme.fontSize.h3};
   margin-bottom: ${theme.size.small};
@@ -87,17 +97,25 @@ const RightColumn = ({ chapters }) => {
   // Have children of the RightColumn appear as user scrolls past hero image on large screen sizes
   const isVisible = useVisibleOnScroll('.hero-img');
   const chapterEntries = Object.entries(chapters);
+  const chapterValues = Object.values(chapters);
+  const activeChapterId = useActiveHeading(chapterValues);
 
   return (
     <Container isSidenavCollapsed={isCollapsed} isVisible={isVisible}>
       <Sticky>
-        <ContentsList label="Chapters">
-          {chapterEntries.map((entry) => {
-            const [chapterName, chapterData] = entry;
-            const chapterId = chapterData.id;
-            return <ContentsListItem id={chapterId}>{chapterName}</ContentsListItem>;
-          })}
-        </ContentsList>
+        <ListContainer>
+          <ContentsList label="Chapters">
+            {chapterEntries.map((entry) => {
+              const [chapterName, chapterData] = entry;
+              const chapterId = chapterData.id;
+              return (
+                <ContentsListItem id={chapterId} isActive={chapterId === activeChapterId}>
+                  {chapterName}
+                </ContentsListItem>
+              );
+            })}
+          </ContentsList>
+        </ListContainer>
         <LearningCard isVisible={isVisible}>
           <LearningTitle>Still Learning MongoDB?</LearningTitle>
           <p>Explore these resources to learn some fundamental MongoDB concepts.</p>

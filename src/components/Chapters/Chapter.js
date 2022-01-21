@@ -29,6 +29,7 @@ const Container = styled(Card)`
 
   @media ${theme.screenSize.largeAndUp} {
     grid-column-gap: 40px;
+    scroll-margin-top: 180px;
   }
 
   @media ${theme.screenSize['2XLargeAndUp']} {

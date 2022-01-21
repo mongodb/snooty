@@ -26,21 +26,11 @@ const useActiveHeading = (headingNodes) => {
       threshold: 1.0,
     };
 
-    // Callback is first performed upon page load. Ignore checking entries on first load to allow
-    // headings[0] to be counted first when headings[0] and headings[1] are both intersecting
-    let firstLoad = true;
-    let defaultActiveHeadingId = window.location.hash.slice(1) || headingNodes?.[0]?.id;
     const callback = (entries) => {
-      if (firstLoad) {
-        firstLoad = false;
-        setActiveHeadingId(defaultActiveHeadingId);
-        return;
-      }
-
       for (let entry of entries) {
         if (entry.isIntersecting) {
           setActiveHeadingId(entry.target.id);
-          break;
+          return;
         }
       }
     };
@@ -49,7 +39,6 @@ const useActiveHeading = (headingNodes) => {
     const headings = observeHeadings(headingNodes, observer);
     return () => {
       unobserveHeadings(headings, observer);
-      setActiveHeadingId(defaultActiveHeadingId);
     };
   }, [headingNodes]);
 
