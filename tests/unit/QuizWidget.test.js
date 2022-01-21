@@ -17,7 +17,7 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
 
 describe('quiz widget snapshots', () => {
   const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
-  Date.now = jest.fn(() => 1466424490000);
+  Date.now = jest.fn(() => timestamp);
 
   it('renders quiz widget correctly', () => {
     const tree = render(<QuizWidget nodeData={completeQuiz} />);

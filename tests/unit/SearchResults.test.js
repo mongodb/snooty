@@ -51,7 +51,7 @@ const expectUnfilteredResults = (wrapper) => {
   );
   expect(wrapper.queryAllByText('Realm results for "stitch"').length).toBe(0);
 
-  // // Check the dropdowns are not filled in
+  // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Select a Product', 'Select a Version');
 };
 

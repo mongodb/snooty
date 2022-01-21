@@ -16,8 +16,6 @@ describe('Pills component', () => {
   const mockData = ['windows', 'macos', 'linux'];
   const mockSetActiveTab = jest.fn();
 
-  beforeAll(() => {});
-
   it('renders correctly', () => {
     const wrapper = renderPills({
       activeTabs: { platforms: PLATFORMS[1] },

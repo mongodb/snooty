@@ -30,7 +30,6 @@ describe('ProductsList', () => {
     // Products still technically render, but should be displayed as none
     const productsListEntry = wrapper.getByText(mockProducts[0].title);
     expect(productsListEntry).toBeTruthy();
-    // expect(productsList.childAt(0).children()).toHaveLength(2);
     expect(productsListEntry).not.toBeVisible();
   });
 

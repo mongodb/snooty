@@ -25,7 +25,6 @@ describe('Chapters', () => {
 
   it('renders chapters', () => {
     const wrapper = mountChapters();
-    // screen.debug()
 
     // We expect 2 chapter entries and 1 chapter view selector, per test data.
     expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(3);
@@ -40,7 +39,6 @@ describe('Chapters', () => {
 
     // Only the Chapter view selector should be rendered.
     expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(1);
-    // screen.debug()
 
     // Three cards should render with Atlas chapter icons, per test data.
     const cardImages = wrapper.queryAllByAltText('Atlas chapter icon');

@@ -36,11 +36,8 @@ describe('when rendered', () => {
     const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
     const versionDropdown = wrapper.getByText('Select a Version');
 
-    // Limitation of implementation here - may be questionable to have the dropdown text in a <p> tag
-    // and not in the actual dropdown div
-    // div is also likely not tab navigable.
-    // TODO: refactor for accessibility in the future,
-    // moving from a div to a <select> if time permits
+    // Limitation of implementation here - may be desirable to move text from the <p> tag
+    // to the actual dropdown div
     expect(versionDropdown.parentElement).toHaveAttribute('aria-disabled', 'true');
   });
 

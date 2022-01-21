@@ -18,7 +18,6 @@ describe('Pagination', () => {
   it('should not allow page 1 to be decremented', () => {
     const wrapper = render(<Pagination currentPage={1} totalPages={10} setCurrentPage={jest.fn} />);
     let paginationText = wrapper.getByText('1/10');
-    // let paginationText = wrapper.find('PaginationText').text();
     expect(paginationText).toBeTruthy();
     const decrementButton = wrapper.getByTitle('Back Page');
     expect(decrementButton).toHaveAttribute('aria-disabled', 'true');

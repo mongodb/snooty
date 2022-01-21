@@ -75,6 +75,7 @@ describe('Sidenav', () => {
 
     // js-dom isn't properly reflecting styled components updating active css across media queries
     // TODO: replace this or otherwise fix if ever a fix is released
+    // commented expect statements *should* work, but styles are not rendering properly in this test.
     // expect(wrapper.getByTestId('side-nav-container')).toHaveStyle('display: none')
 
     // Clicking menu button displays Sidenav
