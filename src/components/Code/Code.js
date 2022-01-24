@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
+import { uiColors } from '@leafygreen-ui/palette';
 import { CodeContext } from '../code-context';
 import { TabContext } from '../tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -10,7 +11,7 @@ import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const captionStyle = css`
   padding: 10px;
-  color: #5d6c74;
+  color: ${uiColors.gray.dark1};
   font-size: 14px;
   margin-left: 5px;
   border-bottom: none;

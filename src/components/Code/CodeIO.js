@@ -30,6 +30,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   const [buttonText, setButtonText] = useState('VIEW OUTPUT');
   const [arrow, setArrow] = useState('ChevronDown');
   const outputExists = !showOutput ? '4px' : '0px';
+  const needsIOToggle = children.length === 2;
 
   const handleClick = (e) => {
     if (showOutput) {
@@ -95,11 +96,12 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 <<<<<<< HEAD
       `}
     >
-      {children.length === 2 && (
+      {needsIOToggle && (
         <>
           <ComponentFactory {...rest} nodeData={children[0]} />
           <IOToggle>
             <Button
+              role="button"
               className={cx(outputButtonStyling)}
               darkMode={false}
               disabled={false}
