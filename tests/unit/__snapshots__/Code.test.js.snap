@@ -32,8 +32,7 @@ exports[`renders correctly 1`] = `
   border-color: #E7EEEC;
   background-color: #F9FBFA;
   color: #061621;
-}
-
+  
 @media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
   .emotion-8 {
     white-space: pre-wrap;
