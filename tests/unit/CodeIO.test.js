@@ -12,9 +12,12 @@ describe('CodeIO', () => {
     expect(wrapper.asFragment()).toMatchSnapshot();
   });
 
-  it('opens output code snippet when io toggle button is clicked', () => {
+  it('opens and closes output code snippet when io toggle button is clicked', () => {
     const wrapper = render(<CodeIO nodeData={mockData} />);
     userEvent.click(wrapper.getByRole('button'));
     expect(wrapper.getByRole('outputShown')).toBeTruthy();
+    userEvent.click(wrapper.getByRole('button'));
+    const x = wrapper.queryAllByRole('outputShown');
+    expect(x.length === 0);
   });
 });
