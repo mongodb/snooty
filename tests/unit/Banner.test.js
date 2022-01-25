@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Banner from '../../src/components/Banner';
+import Banner from '../../src/components/Banner/Banner';
 
 // data for this component
 import mockData from './data/Banner.test.json';

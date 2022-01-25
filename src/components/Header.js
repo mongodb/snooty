@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { isBrowser } from '../utils/is-browser';
 import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from './Sidenav';
-import SiteBanner from './SiteBanner';
+import SiteBanner from './Banner/SiteBanner';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const StyledHeaderContainer = styled.header`
