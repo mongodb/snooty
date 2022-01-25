@@ -27,6 +27,7 @@ import Figure from './Figure';
 import Footnote from './Footnote';
 import FootnoteReference from './FootnoteReference';
 import Glossary from './Glossary';
+import GuideNext from './GuideNext/GuideNext';
 import Heading from './Heading';
 import HorizontalList from './HorizontalList';
 import Image from './Image';
@@ -64,6 +65,7 @@ import Superscript from './Superscript';
 import Tabs from './Tabs';
 import Target from './Target';
 import Text from './Text';
+import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
@@ -84,14 +86,15 @@ import RoleRequired from './Roles/Required';
 const IGNORED_NAMES = new Set([
   'contents',
   'default-domain',
+  'entry',
+  'ia',
   'raw',
-  'toctree',
+  'short-description',
   'tabs-pillstrip',
   'tabs-selector',
-  'ia',
-  'entry',
+  'toctree',
 ]);
-const IGNORED_TYPES = new Set(['comment', 'substitution_definition', 'inline_target', 'named_reference']);
+const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
 
 const roleMap = {
@@ -149,6 +152,7 @@ const componentMap = {
   footnote: Footnote,
   footnote_reference: FootnoteReference,
   glossary: Glossary,
+  'guide-next': GuideNext,
   heading: Heading,
   hlist: HorizontalList,
   image: Image,
@@ -186,6 +190,7 @@ const componentMap = {
   tabs: Tabs,
   target: Target,
   text: Text,
+  time: Time,
   title_reference: TitleReference,
   topic: Topic,
   transition: Transition,

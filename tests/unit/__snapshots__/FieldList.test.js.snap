@@ -1,80 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<Table>
-  <colgroup>
-    <col
-      className="field-name"
-    />
-    <col
-      className="field-body"
-    />
-  </colgroup>
-  <tbody>
-    <ComponentFactory
-      key="0"
-      nodeData={
-        Object {
-          "children": Array [
-            Object {
-              "children": Array [
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 137,
-                    },
-                  },
-                  "type": "text",
-                  "value": "A JSON Web Token string encoded for the provided ",
-                },
-                Object {
-                  "children": Array [
-                    Object {
-                      "position": Object {
-                        "start": Object {
-                          "line": 137,
-                        },
-                      },
-                      "type": "text",
-                      "value": "payload",
-                    },
-                  ],
-                  "position": Object {
-                    "start": Object {
-                      "line": 137,
-                    },
-                  },
-                  "type": "literal",
-                },
-                Object {
-                  "position": Object {
-                    "start": Object {
-                      "line": 137,
-                    },
-                  },
-                  "type": "text",
-                  "value": ".",
-                },
-              ],
-              "position": Object {
-                "start": Object {
-                  "line": 137,
-                },
-              },
-              "type": "paragraph",
-            },
-          ],
-          "label": "Returns",
-          "name": "returns",
-          "position": Object {
-            "start": Object {
-              "line": 136,
-            },
-          },
-          "type": "field",
-        }
-      }
-    />
-  </tbody>
-</Table>
+<DocumentFragment>
+  .emotion-2 {
+  background-color: #F9FBFA;
+  border: 1px solid #B8C4C2;
+  border-radius: 3px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  white-space: nowrap;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-2 {
+  box-shadow: 0 0 0 3px #E7EEEC;
+}
+
+[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-2 {
+  box-shadow: 0 0 0 3px #C5E4F2;
+}
+
+.emotion-4 {
+  border-spacing: 0;
+  font-size: 14px;
+  line-height: 24px;
+  margin: 24px 0;
+  max-width: 100%;
+}
+
+.emotion-4 tbody {
+  vertical-align: top;
+}
+
+.emotion-3 > th,
+.emotion-3 > td {
+  padding: 11px 5px 12px;
+  text-align: left;
+}
+
+.emotion-0 {
+  font-size: unset;
+}
+
+<table
+    class="emotion-4 emotion-5"
+  >
+    <colgroup>
+      <col
+        class="field-name"
+      />
+      <col
+        class="field-body"
+      />
+    </colgroup>
+    <tbody>
+      <tr
+        class="emotion-3"
+      >
+        <th>
+          Returns:
+        </th>
+        <td>
+          A JSON Web Token string encoded for the provided 
+          <code
+            class="emotion-0 emotion-1 emotion-2"
+          >
+            payload
+          </code>
+          .
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
 `;
