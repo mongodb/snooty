@@ -36,7 +36,7 @@ const Document = ({
 }) => {
   const { project } = useSiteMetadata();
   const pageOptions = page?.options;
-  const showPrevNext = !(pageOptions && pageOptions.noprevnext === '');
+  const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const isLanding = project === 'landing';
   const breadcrumbsPageTitle = isLanding ? slugTitleMapping[slug] : null;
   const breadcrumbsHomeUrl = isLanding ? '/' : null;
