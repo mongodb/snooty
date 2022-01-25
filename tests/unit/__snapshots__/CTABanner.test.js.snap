@@ -6,10 +6,6 @@ exports[`renders a CTABanner correctly 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
-  color: #007CAD;
-}
-
-.emotion-1 {
   margin-top: 3px;
   margin-bottom: 3px;
   width: 32px;
@@ -19,11 +15,7 @@ exports[`renders a CTABanner correctly 1`] = `
   flex-shrink: 0;
 }
 
-.emotion-0 {
-  color: #007CAD;
-}
-
-.emotion-6 {
+.emotion-5 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -43,7 +35,7 @@ exports[`renders a CTABanner correctly 1`] = `
   border-left-width: 1px;
 }
 
-.emotion-6:before {
+.emotion-5:before {
   content: '';
   position: absolute;
   width: 6px;
@@ -53,7 +45,7 @@ exports[`renders a CTABanner correctly 1`] = `
   border-radius: 6px 0px 0px 6px;
 }
 
-.emotion-6:after {
+.emotion-5:after {
   content: '';
   position: absolute;
   left: 4px;
@@ -65,26 +57,26 @@ exports[`renders a CTABanner correctly 1`] = `
   border-radius: 0.5px 0px 0px 0.5px;
 }
 
-.emotion-6:before {
+.emotion-5:before {
   background-color: #007CAD;
 }
 
-.emotion-6:after {
+.emotion-5:after {
   border-color: #C5E4F2;
   background-color: #E1F2F6;
 }
 
-.emotion-6 svg {
+.emotion-5 svg {
   height: 15px;
   margin-left: 3px;
   margin-bottom: -5px;
 }
 
-.emotion-6:before {
+.emotion-5:before {
   background-color: transparent;
 }
 
-.emotion-3 {
+.emotion-2 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -96,24 +88,24 @@ exports[`renders a CTABanner correctly 1`] = `
   margin-right: 4px;
 }
 
-.emotion-4 {
+.emotion-3 {
   border-left-color: #C5E4F2;
 }
 
-.emotion-4 > div > div > * {
+.emotion-3 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-4 > div > div > *:last-child {
+.emotion-3 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-4 p {
+.emotion-3 p {
   margin: 0;
 }
 
-.emotion-2 {
-  border: 1px solid #007cad;
+.emotion-1 {
+  border: 1px solid #007CAD;
   border-radius: 20px;
   border-width: 1px;
   margin-left: -5px;
@@ -124,19 +116,23 @@ exports[`renders a CTABanner correctly 1`] = `
   margin-bottom: 0px;
 }
 
+.emotion-1 > div {
+  fill: #007CAD;
+}
+
 <div
-    class="emotion-4 emotion-5 emotion-6"
+    class="emotion-3 emotion-4 emotion-5"
     role="alert"
   >
     <a
       href="https://university.mongodb.com/"
     >
       <div
-        class="emotion-1 emotion-2"
+        class="emotion-0 emotion-1"
       >
         <svg
           aria-label="Play Icon"
-          class="emotion-0"
+          class=""
           fill="none"
           height="16"
           role="img"
@@ -152,7 +148,7 @@ exports[`renders a CTABanner correctly 1`] = `
       </div>
     </a>
     <div
-      class="emotion-3"
+      class="emotion-2"
     >
       <a
         href="https://university.mongodb.com/"
