@@ -29,7 +29,7 @@ const videoBannerStyling = LeafyCSS`
 `;
 
 const playIconStyling = css`
-  border: 1px solid #007cad;
+  border: 1px solid ${uiColors.blue.base};
   border-radius: 20px;
   border-width: 1px;
   margin-left: -5px;
@@ -38,27 +38,28 @@ const playIconStyling = css`
   background-color: ${uiColors.blue.light2};
   margin-top: 0px;
   margin-bottom: 0px;
+  > div {
+    fill: ${uiColors.blue.base};
+  }
 `;
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
   return (
-    <>
-      <a href={options.url}>
-        <StyledBanner
-          className={cx(videoBannerStyling)}
-          variant={LeafyVariant.Info}
-          image={
-            <div css={playIconStyling}>
-              <Icon glyph="Play" fill="#007CAD" />
-            </div>
-          }
-        >
-          {children.map((child, i) => (
-            <ComponentFactory {...rest} key={i} nodeData={child} />
-          ))}
-        </StyledBanner>
-      </a>
-    </>
+    <a href={options.url}>
+      <StyledBanner
+        className={cx(videoBannerStyling)}
+        variant={LeafyVariant.Info}
+        image={
+          <div css={playIconStyling}>
+            <Icon glyph="Play" />
+          </div>
+        }
+      >
+        {children.map((child, i) => (
+          <ComponentFactory {...rest} key={i} nodeData={child} />
+        ))}
+      </StyledBanner>
+    </a>
   );
 };
 
