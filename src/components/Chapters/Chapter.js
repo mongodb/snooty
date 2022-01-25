@@ -141,7 +141,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
   const image = options?.image;
   const chapterTitle = getPlaintext(argument);
   const currentChapter = metadata?.chapters?.[chapterTitle];
-  const chapterNumber = currentChapter.chapter_number;
+  const chapterNumber = currentChapter?.chapter_number;
   const guides = useMemo(() => getGuidesData(metadata, currentChapter), [metadata, currentChapter]);
 
   return (

@@ -27,7 +27,7 @@ const useActiveHeading = (headingNodes) => {
     };
 
     const callback = (entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {
         if (entry.isIntersecting) {
           setActiveHeadingId(entry.target.id);
           return;
