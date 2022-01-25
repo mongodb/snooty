@@ -13,7 +13,6 @@ const Output = ({ nodeData: { children }, ...rest }) => {
 
   return (
     <CodeBlock
-      role="outputShown"
       className={cx(outputCodeStyle)}
       highlightLines={emphasize_lines}
       language={'none'}

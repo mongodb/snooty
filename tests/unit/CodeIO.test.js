@@ -15,9 +15,8 @@ describe('CodeIO', () => {
   it('opens and closes output code snippet when io toggle button is clicked', () => {
     const wrapper = render(<CodeIO nodeData={mockData} />);
     userEvent.click(wrapper.getByRole('button'));
-    expect(wrapper.getByRole('outputShown')).toBeTruthy();
+    expect(wrapper.getByText('hello world')).toBeTruthy();
     userEvent.click(wrapper.getByRole('button'));
-    const x = wrapper.queryAllByRole('outputShown');
-    expect(x.length === 0);
+    expect(wrapper.queryAllByText('hello world').length === 0);
   });
 });
