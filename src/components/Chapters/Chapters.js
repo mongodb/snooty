@@ -184,7 +184,7 @@ const Chapters = ({ metadata, nodeData: { children } }) => {
         <Content>
           {view === Views.Chapter.name && (
             <ChapterView>
-              <RightColumn />
+              <RightColumn chapters={metadata?.chapters} />
               <LeftColumn>
                 {children.map((child, i) => (
                   <ComponentFactory key={i} metadata={metadata} nodeData={child} />
