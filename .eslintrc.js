@@ -5,7 +5,11 @@ module.exports = {
   },
   extends: ['react-app', 'plugin:import/errors'],
   ignorePatterns: ['docs-tools/', 'node_modules/', 'public/'],
-  plugins: ['jest'],
+  plugins: ['jest', '@emotion'],
+  rules: {
+    '@emotion/jsx-import': 'error',
+    '@emotion/pkg-renaming': 'error'
+  },
   settings: {
     'import/resolver': {
       node: {

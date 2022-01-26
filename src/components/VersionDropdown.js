@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Option, Select, Size } from '@leafygreen-ui/select';
-import { navigate as reachNavigate } from '@reach/router';
+import { navigate as reachNavigate } from '@gatsbyjs/reach-router';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';

@@ -1,6 +1,8 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 import React from 'react';
 import { withPrefix } from 'gatsby';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { uiColors } from '@leafygreen-ui/palette';

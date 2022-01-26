@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as reachRouter from '@reach/router';
+import * as reachRouter from '@gatsbyjs/reach-router';
 import Operation from '../../src/components/Operation';
 
 // data for this component

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { uiColors } from '@leafygreen-ui/palette';
-import { useLocation } from '@reach/router';
 import queryString from 'query-string';
 import { theme } from '../../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';

@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
 
 const mediaQuery = (size) => css`

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Global, css } from '@emotion/core';
+import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';

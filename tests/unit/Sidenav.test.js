@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
 import { tick, setMatchMedia, setMobile } from '../utils';
-import { matchers } from 'jest-emotion';
+import { matchers } from '@emotion/jest';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 const setProject = (project) => {

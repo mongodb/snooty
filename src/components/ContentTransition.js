@@ -1,7 +1,9 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { css, Global } from '@emotion/core';
+import { css, Global } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
 
 const fadeOut = css`

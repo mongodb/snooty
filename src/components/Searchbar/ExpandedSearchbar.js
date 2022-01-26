@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo, useRef } from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEventListener } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';

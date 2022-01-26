@@ -1,6 +1,7 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import ComponentFactory from './ComponentFactory';
 
 const CTA = ({ nodeData: { children }, ...rest }) => (

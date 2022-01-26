@@ -1,7 +1,9 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { getNestedValue } from '../utils/get-nested-value';
 import { uiColors } from '@leafygreen-ui/palette';
 
