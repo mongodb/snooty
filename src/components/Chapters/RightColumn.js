@@ -92,12 +92,12 @@ const LearningTitle = styled('div')`
   margin-bottom: ${theme.size.small};
 `;
 
-const RightColumn = ({ chapters }) => {
+const RightColumn = ({ chapters = {} }) => {
   const { isCollapsed } = useContext(SidenavContext);
   // Have children of the RightColumn appear as user scrolls past hero image on large screen sizes
   const isVisible = useVisibleOnScroll('.hero-img');
-  const chapterEntries = Object.entries(chapters);
-  const chapterValues = Object.values(chapters);
+  const chapterEntries = Object.entries(chapters || {});
+  const chapterValues = Object.values(chapters || {});
   const activeChapterId = useActiveHeading(chapterValues);
 
   return (
