@@ -7,6 +7,7 @@ import Chapters from '../../src/components/Chapters/Chapters';
 import { tick } from '../utils';
 import { SidenavContext } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
+import * as useActiveHeading from '../../src/hooks/useActiveHeading';
 import { getPlaintext } from '../../src/utils/get-plaintext';
 
 const mountChapters = () => {
@@ -23,11 +24,19 @@ const mountChapters = () => {
 describe('Chapters', () => {
   jest.useFakeTimers();
 
+  beforeAll(() => {
+    jest.spyOn(useActiveHeading, 'default').mockImplementation(() => 'atlas');
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders chapters', () => {
     const wrapper = mountChapters();
 
-    // We expect 2 chapter entries and 1 chapter view selector, per test data.
-    expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(3);
+    // We expect 2 chapter entries, 1 chapter view selector, and the Chapters ContentsList per test data.
+    expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(4);
   });
 
   it('renders guides in gallery view', async () => {
