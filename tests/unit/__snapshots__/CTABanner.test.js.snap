@@ -6,133 +6,71 @@ exports[`renders a CTABanner correctly 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
-  margin-top: 3px;
-  margin-bottom: 3px;
-  width: 32px;
-  height: 32px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+  color: #007CAD;
 }
 
-.emotion-5 {
-  position: relative;
+.emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-2 {
+  background-color: #E1F2F6;
+  border: 1px solid #C5E4F2;
+  border-radius: 6px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  min-height: 40px;
-  padding: 9px 12px 9px 20px;
-  border-width: 1px 1px 1px 0px;
-  border-style: solid;
-  border-radius: 6px;
+  position: relative;
   font-size: 14px;
-  line-height: 20px;
+  padding: 9px 12px 9px 20px;
   color: #1A567E;
-  border-color: #C5E4F2;
-  border-left-color: #007CAD;
-  background-color: #E1F2F6;
-  border-left-width: 1px;
 }
 
-.emotion-5:before {
-  content: '';
-  position: absolute;
-  width: 6px;
-  top: -1px;
-  bottom: -1px;
-  left: 0px;
-  border-radius: 6px 0px 0px 6px;
-}
-
-.emotion-5:after {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: -1px;
-  bottom: -1px;
-  width: 2px;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  border-radius: 0.5px 0px 0px 0.5px;
-}
-
-.emotion-5:before {
-  background-color: #007CAD;
-}
-
-.emotion-5:after {
-  border-color: #C5E4F2;
-  background-color: #E1F2F6;
-}
-
-.emotion-5 svg {
-  height: 15px;
-  margin-left: 3px;
-  margin-bottom: -5px;
-}
-
-.emotion-5:before {
-  background-color: transparent;
-}
-
-.emotion-2 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  margin-left: 15px;
-  margin-right: 4px;
-}
-
-.emotion-3 {
-  border-left-color: #C5E4F2;
-}
-
-.emotion-3 > div > div > * {
+.emotion-2 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-3 > div > div > *:last-child {
+.emotion-2 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-3 p {
+.emotion-2 p {
   margin: 0;
+}
+
+.emotion-2 > p {
+  margin-left: 35px;
+}
+
+.emotion-2 svg {
+  height: 15px;
+  margin-left: 3px;
+  margin-bottom: -3px;
 }
 
 .emotion-1 {
   border: 1px solid #007CAD;
   border-radius: 20px;
-  border-width: 1px;
-  margin-left: -5px;
   width: 25px;
   height: 25px;
   background-color: #C5E4F2;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.emotion-1 > div {
-  fill: #007CAD;
+  margin-left: -5px;
+  position: absolute;
 }
 
 <div
-    class="emotion-3 emotion-4 emotion-5"
-    role="alert"
+    class="emotion-2"
   >
     <a
       href="https://university.mongodb.com/"
     >
       <div
-        class="emotion-0 emotion-1"
+        class="emotion-1"
       >
         <svg
           aria-label="Play Icon"
-          class=""
+          class="emotion-0"
           fill="none"
           height="16"
           role="img"
@@ -147,26 +85,19 @@ exports[`renders a CTABanner correctly 1`] = `
         </svg>
       </div>
     </a>
-    <div
-      class="emotion-2"
-    >
+    <p>
       <a
         href="https://university.mongodb.com/"
-      />
-      <p>
-        <a
-          href="https://university.mongodb.com/"
-        >
-          If you prefer learning through videos, try this lesson on 
-        </a>
-        <a
-          class="reference external"
-          href="https://university.mongodb.com/"
-        >
-          MongoDB University
-        </a>
-      </p>
-    </div>
+      >
+        If you prefer learning through videos, try this lesson on 
+      </a>
+      <a
+        class="reference external"
+        href="https://university.mongodb.com/"
+      >
+        MongoDB University
+      </a>
+    </p>
   </div>
 </DocumentFragment>
 `;
