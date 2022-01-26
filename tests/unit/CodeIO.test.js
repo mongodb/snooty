@@ -17,6 +17,6 @@ describe('CodeIO', () => {
     userEvent.click(wrapper.getByRole('button'));
     expect(wrapper.getByText('hello world')).toBeTruthy();
     userEvent.click(wrapper.getByRole('button'));
-    expect(wrapper.queryAllByText('hello world').length === 0);
+    expect(wrapper.queryAllByText('hello world')).toHaveLength(0);
   });
 });
