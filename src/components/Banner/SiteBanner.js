@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { HeaderContext } from './header-context';
-import { SNOOTY_STITCH_ID } from '../build-constants';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { theme } from '../theme/docsTheme';
-import { isBrowser } from '../utils/is-browser';
-import { normalizePath } from '../utils/normalize-path';
-import { fetchBanner } from '../utils/realm';
+import { HeaderContext } from '../header-context';
+import { SNOOTY_STITCH_ID } from '../../build-constants';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { theme } from '../../theme/docsTheme';
+import { isBrowser } from '../../utils/is-browser';
+import { normalizePath } from '../../utils/normalize-path';
+import { fetchBanner } from '../../utils/realm';
 
 const getBannerSource = (src) => {
   if (src == null || src === '') return null;
