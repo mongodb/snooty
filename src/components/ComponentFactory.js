@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Admonition, { admonitionMap } from './Admonition';
-import Banner from './Banner';
+import Banner from './Banner/Banner';
 import BlockQuote from './BlockQuote';
 import Button from './Button';
 import Card from './Card';
@@ -13,6 +13,7 @@ import Cond from './Cond';
 import Container from './Container';
 import CSSClass from './CSSClass';
 import CTA from './CTA';
+import CTABanner from './Banner/CTABanner';
 import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionListItem';
 import DeprecatedVersionSelector from './DeprecatedVersionSelector';
@@ -136,6 +137,7 @@ const componentMap = {
   container: Container,
   cssclass: CSSClass,
   cta: CTA,
+  'cta-banner': CTABanner,
   definitionList: DefinitionList,
   definitionListItem: DefinitionListItem,
   deprecated: VersionModified,
