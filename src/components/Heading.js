@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
-import Tooltip from '@leafygreen-ui/tooltip';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -11,16 +9,11 @@ import TabSelectors from './TabSelectors';
 import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
+import Permalink from './Permalink';
 import { isBrowser } from '../utils/is-browser';
 import useCopyClipboard from '../hooks/useCopyClipboard';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
-
-const headingStyle = css`
-  align-self: center;
-  visibility: hidden;
-  padding: 0 10px;
-`;
 
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
@@ -62,20 +55,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
-
-          <a
-            className="headerlink"
-            ref={setHeadingNode}
-            css={headingStyle}
-            href={`#${id}`}
-            onClick={handleClick}
-            title="Permalink to this headline"
-          >
-            <LinkIcon src={withPrefix('assets/link.png')} alt="icons/link.png" />
-            <Tooltip triggerEvent="click" open={copied} align="top" justify="middle" darkMode={true}>
-              {'copied'}
-            </Tooltip>
-          </a>
+          <Permalink copied={copied} setHeadingNode={setHeadingNode} id={id} handleClick={handleClick} />
           <HeaderBuffer id={id}></HeaderBuffer>
         </HeadingTag>
       </ConditionalWrapper>
@@ -85,7 +65,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
 };
 
 const HeaderBuffer = styled.div`
-  margin-top: -225px;
+  margin-top: -180px;
   position: absolute;
 `;
 
@@ -104,12 +84,6 @@ const ChildContainer = styled.div(
     align-items: ${isStacked ? 'flex-start' : 'center'};
   `
 );
-
-const LinkIcon = styled.img`
-  border-radius: 0 !important;
-  display: initial !important;
-  margin: initial !important;
-`;
 
 Heading.propTypes = {
   sectionDepth: PropTypes.number.isRequired,

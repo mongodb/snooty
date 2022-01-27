@@ -17,7 +17,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-3 {
-  margin-top: -225px;
+  margin-top: -180px;
   position: absolute;
 }
 
@@ -29,12 +29,11 @@ exports[`renders correctly 1`] = `
       <a
         class="headerlink emotion-2"
         href="#"
-        title="Permalink to this headline"
+        title="Permalink to this definition"
       >
         <img
-          alt="icons/link.png"
           class="emotion-0 emotion-1"
-          src="/assets/link.png"
+          src="/assets/link.svg"
         />
       </a>
       <div

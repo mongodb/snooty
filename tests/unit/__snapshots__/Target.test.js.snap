@@ -28,24 +28,48 @@ exports[`renders correctly with a directive_argument node 1`] = `
   font-size: unset;
 }
 
+.emotion-5 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  visibility: hidden;
+  padding: 0 10px;
+}
+
+.emotion-3 {
+  border-radius: 0 !important;
+  display: initial !important;
+  margin: initial !important;
+}
+
+.emotion-6 {
+  margin-top: -150px;
+  position: absolute;
+}
+
 <dl
     class="option"
   >
-    <dt
-      id="std-option-mongos.--config"
-    >
+    <dt>
       <code
         class="emotion-0 emotion-1 emotion-2"
       >
         --config &lt;filename&gt;, -f &lt;filename&gt;
       </code>
       <a
-        class="headerlink"
+        class="headerlink emotion-5"
         href="#std-option-mongos.--config"
         title="Permalink to this definition"
       >
-        ¶
+        <img
+          class="emotion-3 emotion-4"
+          src="/assets/link.svg"
+        />
       </a>
+      <div
+        class="emotion-6 emotion-7"
+        id="std-option-mongos.--config"
+      />
     </dt>
     <dd>
       <p>

@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import ComponentFactory from './ComponentFactory';
+import Permalink from './Permalink';
+import { isBrowser } from '../utils/is-browser';
+import useCopyClipboard from '../hooks/useCopyClipboard';
 
 // Based on condition isValid, split array into two arrays: [[valid, invalid]]
 const partition = (array, isValid) => {
@@ -13,17 +17,31 @@ const partition = (array, isValid) => {
 };
 
 const DescriptionTerm = ({ children, html_id, ...rest }) => {
+  const [copied, setCopied] = useState(false);
+  const [headingNode, setHeadingNode] = useState(null);
+  const url = isBrowser ? window.location.href.split('#')[0] + '#' + html_id : '';
+
+  useCopyClipboard(copied, setCopied, headingNode, url);
+
+  const handleClick = (e) => {
+    setCopied(true);
+  };
+
   return (
-    <dt id={html_id}>
+    <dt>
       {children.map((child, j) => (
         <ComponentFactory key={j} {...rest} nodeData={child} />
       ))}
-      <a href={`#${html_id}`} className="headerlink" title="Permalink to this definition">
-        ¶
-      </a>
+      <Permalink copied={copied} setHeadingNode={setHeadingNode} id={html_id} handleClick={handleClick} />
+      <HeaderBuffer id={html_id}></HeaderBuffer>
     </dt>
   );
 };
+
+const HeaderBuffer = styled.div`
+  margin-top: -150px;
+  position: absolute;
+`;
 
 DescriptionTerm.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
