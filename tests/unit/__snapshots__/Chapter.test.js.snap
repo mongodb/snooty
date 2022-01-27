@@ -32,6 +32,10 @@ exports[`renders correctly 1`] = `
 @media not all and (max-width:1023px) {
   .emotion-18 {
     grid-column-gap: 40px;
+    -webkit-scroll-margin-top: 180px;
+    -moz-scroll-margin-top: 180px;
+    -ms-scroll-margin-top: 180px;
+    scroll-margin-top: 180px;
   }
 }
 
@@ -156,6 +160,7 @@ exports[`renders correctly 1`] = `
 
 <div
     class="emotion-18 emotion-19 emotion-20"
+    id="atlas"
   >
     <img
       class="emotion-0 emotion-1"
