@@ -45,7 +45,7 @@ exports[`renders correctly with pageTitle 1`] = `
     <p>
       <a
         class="emotion-0 emotion-1"
-        href="https://docs.mongodb.com/"
+        href="https://docs.mongodb.com"
       >
         Docs Home
       </a>
@@ -110,7 +110,7 @@ exports[`renders correctly with siteTitle 1`] = `
     <p>
       <a
         class="emotion-0 emotion-1"
-        href="https://docs.mongodb.com/"
+        href="https://docs.mongodb.com"
       >
         Docs Home
       </a>
