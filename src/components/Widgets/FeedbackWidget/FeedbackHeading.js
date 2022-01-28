@@ -2,7 +2,7 @@ import React from 'react';
 import StarRating, { StarRatingLabel } from './components/StarRating';
 import { useFeedbackState } from './context';
 
-export default function FeedbackHeading({ isVisible = true }) {
+export default function FeedbackHeading({ isVisible = false }) {
   const { hideHeader } = useFeedbackState();
   return (
     isVisible &&
