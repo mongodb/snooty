@@ -121,11 +121,21 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   position: relative;
   overflow-wrap: anywhere;
   word-break: break-word;
+  font-size: 14px;
   vertical-align: top;
 }
 
 .emotion-22 > div > span > * {
   margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.emotion-22 > div > span > div > * {
+  font-size: 14px;
+}
+
+.emotion-22 > div > span > div > div > * {
+  font-size: 14px;
 }
 
 .emotion-22 > div > span > *:last-child {
@@ -202,6 +212,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 5%;
 }
 
+.emotion-4 > * {
+  font-size: 14px;
+}
+
 .emotion-7 {
   border-width: 0px 1px 3px 1px;
   border-style: solid;
@@ -213,6 +227,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   line-height: 20px;
   border-color: #E7EEEC;
   width: 10%;
+}
+
+.emotion-7 > * {
+  font-size: 14px;
 }
 
 .emotion-10 {
@@ -228,6 +246,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 15%;
 }
 
+.emotion-10 > * {
+  font-size: 14px;
+}
+
 .emotion-13 {
   border-width: 0px 1px 3px 1px;
   border-style: solid;
@@ -241,6 +263,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 20%;
 }
 
+.emotion-13 > * {
+  font-size: 14px;
+}
+
 .emotion-16 {
   border-width: 0px 1px 3px 1px;
   border-style: solid;
@@ -252,6 +278,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   line-height: 20px;
   border-color: #E7EEEC;
   width: 30%;
+}
+
+.emotion-16 > * {
+  font-size: 14px;
 }
 
 <div
@@ -559,6 +589,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   border-color: #E7EEEC;
 }
 
+.emotion-4 > * {
+  font-size: 14px;
+}
+
 .emotion-2 {
   padding-right: 4px;
   color: #3D4F58;
@@ -576,6 +610,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   font-weight: bold;
   overflow-wrap: anywhere;
   word-break: break-word;
+  font-size: 14px;
   vertical-align: top;
   background-clip: padding-box;
   background-color: #F9FBFA;
@@ -583,6 +618,15 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-21 > div > span > * {
   margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.emotion-21 > div > span > div > * {
+  font-size: 14px;
+}
+
+.emotion-21 > div > span > div > div > * {
+  font-size: 14px;
 }
 
 .emotion-21 > div > span > *:last-child {
@@ -600,11 +644,21 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   position: relative;
   overflow-wrap: anywhere;
   word-break: break-word;
+  font-size: 14px;
   vertical-align: top;
 }
 
 .emotion-23 > div > span > * {
   margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.emotion-23 > div > span > div > * {
+  font-size: 14px;
+}
+
+.emotion-23 > div > span > div > div > * {
+  font-size: 14px;
 }
 
 .emotion-23 > div > span > *:last-child {

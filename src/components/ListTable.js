@@ -45,6 +45,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
           className={cx(css`
             overflow-wrap: anywhere;
             word-break: break-word;
+            font-size: 14px;
 
             /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
             vertical-align: top;
@@ -54,6 +55,15 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
 
             & > div > span > * {
               margin: 0 0 12px;
+              font-size: 14px;
+            }
+
+            & > div > span > div > * {
+              font-size: 14px;
+            }
+
+            & > div > span > div > div > * {
+              font-size: 14px;
             }
 
             /* Prevent extra margin below last element */
@@ -113,6 +123,9 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             return (
               <TableHeader
                 className={cx(css`
+                  > * {
+                    font-size: 14px;
+                  }
                   ${widths && `width: ${widths[colIndex]}%`}
                 `)}
                 key={`${rowIndex}-${colIndex}`}
