@@ -117,7 +117,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             return (
               <TableHeader
                 className={cx(css`
-                  > * {
+                  * {
                     font-size: 14px;
                   }
                   ${widths && `width: ${widths[colIndex]}%`}

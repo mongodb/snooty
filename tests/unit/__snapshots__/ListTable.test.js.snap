@@ -206,7 +206,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 5%;
 }
 
-.emotion-4 > * {
+.emotion-4 * {
   font-size: 14px;
 }
 
@@ -223,7 +223,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 10%;
 }
 
-.emotion-7 > * {
+.emotion-7 * {
   font-size: 14px;
 }
 
@@ -240,7 +240,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 15%;
 }
 
-.emotion-10 > * {
+.emotion-10 * {
   font-size: 14px;
 }
 
@@ -257,7 +257,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 20%;
 }
 
-.emotion-13 > * {
+.emotion-13 * {
   font-size: 14px;
 }
 
@@ -274,7 +274,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 30%;
 }
 
-.emotion-16 > * {
+.emotion-16 * {
   font-size: 14px;
 }
 
@@ -583,7 +583,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   border-color: #E7EEEC;
 }
 
-.emotion-4 > * {
+.emotion-4 * {
   font-size: 14px;
 }
 
