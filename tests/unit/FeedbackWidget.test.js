@@ -99,6 +99,7 @@ describe('FeedbackWidget', () => {
     });
   });
 
+  //Temporarily disabling Feedback header on mobile due to CLS. DOP-2511
   describe('FeedbackHeading (Mobile Viewport)', () => {
     it('is hidden on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
@@ -111,7 +112,7 @@ describe('FeedbackWidget', () => {
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
       expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
@@ -120,7 +121,7 @@ describe('FeedbackWidget', () => {
     it('is visible on small/mobile screens', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
     });
 
     it('is hidden on small/mobile screens when configured with page option', async () => {
