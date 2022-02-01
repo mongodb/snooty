@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
+import { isBrowser } from '../utils/is-browser';
+import useCopyClipboard from '../hooks/useCopyClipboard';
 
 const tooltipStyle = LeafyCSS` 
   padding: 2px 8px;
@@ -14,41 +16,60 @@ const tooltipStyle = LeafyCSS`
   }
 `;
 
-const headingStyle = css`
-  align-self: center;
-  visibility: hidden;
-  padding: 0 10px;
-`;
-
 const LinkIcon = styled.img`
   border-radius: 0 !important;
   display: initial !important;
   margin: initial !important;
 `;
 
-const Permalink = ({ copied, setHeadingNode, id, handleClick }) => (
-  <>
-    <a
-      className="headerlink"
-      ref={setHeadingNode}
-      css={headingStyle}
-      href={`#${id}`}
-      title="Permalink to this definition"
-      onClick={handleClick}
-    >
-      <LinkIcon src={withPrefix('assets/link.svg')} />
-      <Tooltip
-        className={cx(tooltipStyle)}
-        triggerEvent="click"
-        open={copied}
-        align="top"
-        justify="middle"
-        darkMode={true}
+const headingStyle = (copied) => css`
+  ${!!copied && 'visibility: visible !important;'}
+  align-self: center;
+  padding: 0 10px;
+`;
+
+const Permalink = ({ id, description }) => {
+  const [copied, setCopied] = useState(false);
+  const [headingNode, setHeadingNode] = useState(null);
+  const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
+  const buffer = description === 'definition' ? '-150px' : '-175px';
+
+  useCopyClipboard(copied, setCopied, headingNode, url);
+
+  const handleClick = (e) => {
+    setCopied(true);
+  };
+
+  const HeaderBuffer = styled.div`
+    margin-top: ${buffer};
+    position: absolute;
+  `;
+
+  return (
+    <>
+      <a
+        className="headerlink"
+        ref={setHeadingNode}
+        css={headingStyle(copied)}
+        href={`#${id}`}
+        title={'Permalink to this ' + description}
+        onClick={handleClick}
       >
-        {'copied'}
-      </Tooltip>
-    </a>
-  </>
-);
+        <LinkIcon src={withPrefix('assets/link.svg')} />
+        <Tooltip
+          className={cx(tooltipStyle)}
+          triggerEvent="click"
+          open={copied}
+          align="top"
+          justify="middle"
+          darkMode={true}
+        >
+          {'copied'}
+        </Tooltip>
+      </a>
+      <HeaderBuffer id={id} />
+    </>
+  );
+};
 
 export default Permalink;

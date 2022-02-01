@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
@@ -10,8 +10,6 @@ import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
-import { isBrowser } from '../utils/is-browser';
-import useCopyClipboard from '../hooks/useCopyClipboard';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
@@ -26,48 +24,30 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader);
 
-  const [copied, setCopied] = useState(false);
-  const [headingNode, setHeadingNode] = useState(null);
-  const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
-
-  useCopyClipboard(copied, setCopied, headingNode, url);
-
-  const handleClick = (e) => {
-    setCopied(true);
-  };
-
   return (
     <>
       <ConditionalWrapper
         condition={shouldShowMobileHeader}
         wrapper={(children) => (
-          <>
-            <HeadingContainer stackVertically={isMobile}>
-              {children}
-              <ChildContainer isStacked={isMobile}>
-                {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
-              </ChildContainer>
-            </HeadingContainer>
-          </>
+          <HeadingContainer stackVertically={isMobile}>
+            {children}
+            <ChildContainer isStacked={isMobile}>
+              {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
+            </ChildContainer>
+          </HeadingContainer>
         )}
       >
         <HeadingTag className="contains-headerlink">
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
-          <Permalink copied={copied} setHeadingNode={setHeadingNode} id={id} handleClick={handleClick} />
-          <HeaderBuffer id={id}></HeaderBuffer>
+          <Permalink id={id} description="heading" />
         </HeadingTag>
       </ConditionalWrapper>
       {isPageTitle && <Contents />}
     </>
   );
 };
-
-const HeaderBuffer = styled.div`
-  margin-top: -180px;
-  position: absolute;
-`;
 
 const HeadingContainer = styled.div`
   display: flex;
