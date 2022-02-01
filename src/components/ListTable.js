@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
 import { uiColors } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
 const align = (key) => {
@@ -53,7 +54,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
             ${isStub && `background-clip: padding-box; background-color: ${uiColors.gray.light3};`}
 
             * {
-              font-size: 14px !important;
+              font-size: ${theme.fontSize.small} !important;
             }
 
             & > div > span > * {
@@ -118,7 +119,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
               <TableHeader
                 className={cx(css`
                   * {
-                    font-size: 14px;
+                    font-size: ${theme.fontSize.small};
                   }
                   ${widths && `width: ${widths[colIndex]}%`}
                 `)}
