@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { baseUrl } from './utils/dotcom';
 
-const metaUrl = `${baseUrl(true)}/assets/meta_generic.png`;
-const metaSecureUrl = `http://${baseUrl()}/assets/meta_generic.png`;
+const metaUrl = `http://${baseUrl()}/assets/meta_generic.png`;
+const metaSecureUrl = `${baseUrl(true)}/assets/meta_generic.png`;
 const faviconUrl = `${baseUrl(true)}/assets/favicon.ico`;
 const osdUrl = `${baseUrl(true)}/osd.xml`;
 
