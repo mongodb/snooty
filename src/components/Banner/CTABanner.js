@@ -39,11 +39,12 @@ const playIconStyling = css`
 `;
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
+  const lgIcon = options?.icon ? options.icon : 'Play';
   return (
     <a href={options?.url}>
       <div css={videoBannerStyling}>
         <div css={playIconStyling}>
-          <Icon glyph="Play" fill={uiColors.blue.base} />
+          <Icon glyph={lgIcon} fill={uiColors.blue.base} />
         </div>
         {children.map((child, i) => (
           <ComponentFactory {...rest} key={i} nodeData={child} />
@@ -58,6 +59,7 @@ CTABanner.propTypes = {
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
     options: PropTypes.shape({
       url: PropTypes.string.isRequired,
+      icon: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
