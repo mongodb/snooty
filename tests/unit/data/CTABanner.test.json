@@ -60,6 +60,7 @@
   "name": "cta-banner",
   "argument": [],
   "options": {
-    "url": "https://university.mongodb.com/"
+    "url": "https://university.mongodb.com/",
+    "icon": "University"
   }
 }
