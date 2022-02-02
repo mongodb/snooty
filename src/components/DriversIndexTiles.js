@@ -4,6 +4,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import Link from './Link';
 import { theme } from '../theme/docsTheme';
+import { baseUrl } from '../utils/dotcom';
 
 import IconC from './icons/C';
 import IconCpp from './icons/Cpp';
@@ -18,7 +19,7 @@ import IconRust from './icons/Rust';
 import IconScala from './icons/Scala';
 import IconSwift from './icons/Swift';
 
-// DriversIndexTiles is used to display the drivers as Cards on docs.mongodb.com/drivers
+// DriversIndexTiles is used to display the drivers as Cards on drivers landing page
 
 // TODO: Unhardcode this. Ideally, the SVG resources would just be plain SVG, not components
 const tiles = [
@@ -38,7 +39,7 @@ const tiles = [
     icon: <IconCsharp />,
   },
   {
-    slug: 'https://docs.mongodb.com/drivers/go/current/',
+    slug: `${baseUrl(true)}/drivers/go/current/`,
     title: 'Go',
     icon: <IconGo />,
   },
@@ -48,7 +49,7 @@ const tiles = [
     icon: <IconJava />,
   },
   {
-    slug: 'https://docs.mongodb.com/drivers/node/current/',
+    slug: `${baseUrl(true)}/drivers/node/current/`,
     title: 'Node.js',
     icon: <IconNode />,
   },
@@ -63,7 +64,7 @@ const tiles = [
     icon: <IconPython />,
   },
   {
-    slug: 'https://docs.mongodb.com/ruby-driver/current/',
+    slug: `${baseUrl(true)}/ruby-driver/current/`,
     title: 'Ruby',
     icon: <IconRuby />,
   },
