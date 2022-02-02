@@ -1,6 +1,7 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { initStitch } = require('./src/utils/setup/init-stitch');
+const { isDotCom, dotcomifyUrl } = require('./src/utils/dotcom');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
@@ -80,6 +81,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   // Get all MongoDB products for the sidenav
   const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   products.forEach((product) => {
+    // TODO: REMOVE AFTER DOP 2705
+    let url = product.baseUrl + product.slug;
+    if (isDotCom()) url = dotcomifyUrl(url, true);
+
     createNode({
       children: [],
       id: createNodeId(`Product-${product.title}`),
@@ -89,7 +94,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       },
       parent: null,
       title: product.title,
-      url: product.baseUrl + product.slug,
+      url,
     });
   });
 };
