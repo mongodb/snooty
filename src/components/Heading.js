@@ -1,7 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
-import Tooltip from '@leafygreen-ui/tooltip';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -11,16 +9,9 @@ import TabSelectors from './TabSelectors';
 import { TabContext } from './tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
-import { isBrowser } from '../utils/is-browser';
-import useCopyClipboard from '../hooks/useCopyClipboard';
+import Permalink from './Permalink';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
-
-const headingStyle = css`
-  align-self: center;
-  visibility: hidden;
-  padding: 0 10px;
-`;
 
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
@@ -33,61 +24,30 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader);
 
-  const [copied, setCopied] = useState(false);
-  const [headingNode, setHeadingNode] = useState(null);
-  const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
-
-  useCopyClipboard(copied, setCopied, headingNode, url);
-
-  const handleClick = (e) => {
-    setCopied(true);
-  };
-
   return (
     <>
       <ConditionalWrapper
         condition={shouldShowMobileHeader}
         wrapper={(children) => (
-          <>
-            <HeadingContainer stackVertically={isMobile}>
-              {children}
-              <ChildContainer isStacked={isMobile}>
-                {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
-              </ChildContainer>
-            </HeadingContainer>
-          </>
+          <HeadingContainer stackVertically={isMobile}>
+            {children}
+            <ChildContainer isStacked={isMobile}>
+              {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
+            </ChildContainer>
+          </HeadingContainer>
         )}
       >
         <HeadingTag className="contains-headerlink">
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
-
-          <a
-            className="headerlink"
-            ref={setHeadingNode}
-            css={headingStyle}
-            href={`#${id}`}
-            onClick={handleClick}
-            title="Permalink to this headline"
-          >
-            <LinkIcon src={withPrefix('assets/link.png')} alt="icons/link.png" />
-            <Tooltip triggerEvent="click" open={copied} align="top" justify="middle" darkMode={true}>
-              {'copied'}
-            </Tooltip>
-          </a>
-          <HeaderBuffer id={id}></HeaderBuffer>
+          <Permalink id={id} description="heading" />
         </HeadingTag>
       </ConditionalWrapper>
       {isPageTitle && <Contents />}
     </>
   );
 };
-
-const HeaderBuffer = styled.div`
-  margin-top: -225px;
-  position: absolute;
-`;
 
 const HeadingContainer = styled.div`
   display: flex;
@@ -104,12 +64,6 @@ const ChildContainer = styled.div(
     align-items: ${isStacked ? 'flex-start' : 'center'};
   `
 );
-
-const LinkIcon = styled.img`
-  border-radius: 0 !important;
-  display: initial !important;
-  margin: initial !important;
-`;
 
 Heading.propTypes = {
   sectionDepth: PropTypes.number.isRequired,
