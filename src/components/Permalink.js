@@ -34,7 +34,7 @@ const Permalink = ({ id, description, buffer }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
-  const bufferSpace = buffer ? buffer : '-175px';
+  const bufferSpace = buffer || '-175px';
 
   useCopyClipboard(copied, setCopied, headingNode, url);
 
