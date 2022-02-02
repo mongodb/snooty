@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { uiColors } from '@leafygreen-ui/palette';
-import Icon from '@leafygreen-ui/icon';
+import Icon, { glyphs } from '@leafygreen-ui/icon';
 import ComponentFactory from '../ComponentFactory';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
@@ -39,7 +39,8 @@ const playIconStyling = css`
 `;
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
-  const lgIcon = options?.icon ? options.icon : 'Play';
+  const lgIcon = options?.icon && options.icon in glyphs ? options.icon : 'Play';
+
   return (
     <a href={options?.url}>
       <div css={videoBannerStyling}>
