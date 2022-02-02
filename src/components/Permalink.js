@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { isBrowser } from '../utils/is-browser';
+import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
 
 const tooltipStyle = LeafyCSS` 
   padding: 2px 8px;
-  font-size: 10px;
+  font-size: ${theme.fontSize.xsmall};
 
   > div {
-    font-size: 12px;
+    font-size: ${theme.fontSize.tiny};
   }
 `;
 
@@ -28,11 +30,11 @@ const headingStyle = (copied) => css`
   padding: 0 10px;
 `;
 
-const Permalink = ({ id, description }) => {
+const Permalink = ({ id, description, buffer }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
-  const buffer = description === 'definition' ? '-150px' : '-175px';
+  const bufferSpace = buffer ? buffer : '-175px';
 
   useCopyClipboard(copied, setCopied, headingNode, url);
 
@@ -41,7 +43,7 @@ const Permalink = ({ id, description }) => {
   };
 
   const HeaderBuffer = styled.div`
-    margin-top: ${buffer};
+    margin-top: ${bufferSpace};
     position: absolute;
   `;
 
@@ -70,6 +72,12 @@ const Permalink = ({ id, description }) => {
       <HeaderBuffer id={id} />
     </>
   );
+};
+
+Permalink.propTypes = {
+  id: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  buffer: PropTypes.string,
 };
 
 export default Permalink;
