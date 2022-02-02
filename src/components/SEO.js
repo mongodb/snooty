@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import { baseUrl } from '../utils/dotcom';
 
 const DEFAULT_TWITTER_SITE = '@mongodb';
+const metaUrl = `${baseUrl(true)}/assets/meta_generic.png`;
 
 const SEO = ({ pageTitle, siteTitle }) => (
   <Helmet>
@@ -14,11 +16,8 @@ const SEO = ({ pageTitle, siteTitle }) => (
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={DEFAULT_TWITTER_SITE} />
     <meta property="twitter:title" content={pageTitle} />
-    <meta name="twitter:image" content="http://docs.mongodb.com/assets/meta_generic.png" />
-    <meta
-      name="twitter:image:alt"
-      content="MongoDB logo featuring a green leaf on a dark gray background. Slogan reads 'For giant ideas'."
-    />
+    <meta name="twitter:image" content={metaUrl} />
+    <meta name="twitter:image:alt" content="MongoDB logo featuring a green leaf on a dark green background." />
   </Helmet>
 );
 
