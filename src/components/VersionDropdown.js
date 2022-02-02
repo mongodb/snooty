@@ -8,6 +8,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
+import { baseUrl } from '../utils/dotcom';
 
 const zip = (a, b) => {
   // Zip arrays a and b into an object where a is used for keys and b for values
@@ -89,7 +90,7 @@ const VersionDropdown = ({
   };
 
   const getUrl = (value) => {
-    const legacyDocsURL = `https://docs.mongodb.com/legacy/?site=${project}`;
+    const legacyDocsURL = `${baseUrl(true)}/legacy/?site=${project}`;
     return value === 'legacy' ? legacyDocsURL : normalizePath(`${generatePrefix(value)}/${slug}`);
   };
 

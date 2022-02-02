@@ -1,3 +1,5 @@
+import { baseUrl, dotcomifyUrl, isDotCom } from './utils/dotcom';
+
 export const DEPLOYMENTS = ['cloud', 'local'];
 
 export const PLATFORMS = ['windows', 'macos', 'linux', 'debian', 'rhel'];
@@ -34,7 +36,7 @@ export const stringifyTab = (tabName) => {
 
 // hardcoded for now because this target lookup will be complex
 // as it relies on other sites (e.g. manual) cc. Andrew
-export const REF_TARGETS = {
+const dotcomHandlingForREF_TARGETS = {
   'compass-index': 'https://docs.mongodb.com/compass/current/#compass-index',
   'document-dot-notation': 'https://docs.mongodb.com/manual/core/document/#document-dot-notation',
   glossary: 'https://docs.mongodb.com/manual/reference/glossary',
@@ -48,7 +50,16 @@ export const REF_TARGETS = {
   'configuration-options': 'https://docs.mongodb.com/manual/reference/configuration-options/#configuration-options',
 };
 
-export const DOCS_URL = 'https://docs.mongodb.com';
+// Changed to apply dotcom logic across each ref target, conditionally if we determine that we are building for dotcom.
+// TODO: remove after dotcom go live and update hardcoded links.
+export const REF_TARGETS = Object.fromEntries(
+  Object.entries(dotcomHandlingForREF_TARGETS).map(([key, value]) => {
+    if (isDotCom()) value = dotcomifyUrl(value, true);
+    return [key, value];
+  })
+);
+
+export const DOCS_URL = baseUrl(true);
 export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
 
 export const SECTION_NAME_MAPPING = {

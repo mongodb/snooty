@@ -5,6 +5,8 @@ import { Global, css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
+import { baseUrl } from '../utils/dotcom';
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 
 const CONTENT_MAX_WIDTH = 1440;
 
@@ -58,7 +60,7 @@ const Landing = ({ children }) => {
             '@context': 'http://schema.org',
             '@type': 'WebSite',
             name: 'MongoDB Documentation',
-            url: 'https://docs.mongodb.com/',
+            url: assertTrailingSlash(baseUrl(true)),
             publisher: {
               '@type': 'Organization',
               name: 'MongoDB',
