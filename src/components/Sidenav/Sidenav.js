@@ -149,7 +149,7 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
@@ -158,7 +158,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues();
-  const showVersions = publishedBranches?.branches?.length > 1;
+  const showVersions = repoBranches?.branches?.length > 1;
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -266,7 +266,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
                 </SideNavItem>
               </>
             )}
-            {showVersions && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} />}
             {!ia && navContent}
 
             {isDocsLanding && (
@@ -298,7 +298,7 @@ Sidenav.propTypes = {
   page: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
-  publishedBranches: PropTypes.object,
+  repoBranches: PropTypes.object,
   siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
 };

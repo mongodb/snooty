@@ -99,7 +99,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
 
-  if (branches.length < 2) {
+  if ((branches?.length ?? 0) < 2) {
     console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
     return null;
   }
@@ -109,7 +109,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   // show Android SDK versions in the version dropdown box.
   if (project === 'realm' && slug.startsWith('sdk/')) {
     groups = groups.filter((g) => slug.startsWith(g?.['sharedSlugPrefix'])) || groups;
-    if (groups && groups.length === 1) {
+    if ((groups?.length ?? 0) === 1) {
       // Get the branchNames from the indicated group, e.g. ['android-v1.0', 'android-v2.0', ...]
       const sdkBranchNames = groups[0]['includedBranches'];
       branches = branches.filter((b) => sdkBranchNames.includes(b['gitBranchName']));
@@ -181,16 +181,15 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       value={parserBranch}
       usePortal={false}
     >
-      {activeUngroupedBranches && activeUngroupedBranches.map((b) => createOption(b))}
-      {groups &&
-        groups.map((group) => {
-          const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
-          return (
-            <OptionGroup key={groupLabel} label={groupLabel}>
-              <>{groupedBranchNames && groupedBranchNames.map((bn) => createOption(getBranch(bn, branches)))}</>
-            </OptionGroup>
-          );
-        })}
+      {activeUngroupedBranches?.map((b) => createOption(b))}
+      {groups?.map((group) => {
+        const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
+        return (
+          <OptionGroup key={groupLabel} label={groupLabel}>
+            <>{groupedBranchNames?.map((bn) => createOption(getBranch(bn, branches)))}</>
+          </OptionGroup>
+        );
+      })}
       {needsLegacyDropdown(branches) && <Option value="legacy">Legacy Docs</Option>}
     </StyledSelect>
   );
