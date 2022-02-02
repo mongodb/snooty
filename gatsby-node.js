@@ -126,7 +126,7 @@ exports.createPages = async ({ actions }) => {
     throw err;
   }
 
-  if (!repoBranches || repoBranches.length === 0) {
+  if (repoBranches?.length ?? 0) {
     console.error('No version information found for', siteMetadata.project);
   }
 
