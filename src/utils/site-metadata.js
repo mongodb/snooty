@@ -17,7 +17,7 @@ const getDatabase = (env) => {
     case 'dotcomstg':
       return 'snooty_dotcomstg';
     case 'dotcomprd':
-      return 'snooty_dotcomstg';
+      return 'snooty_dotcomprd';
     default:
       return 'snooty_dev';
   }
