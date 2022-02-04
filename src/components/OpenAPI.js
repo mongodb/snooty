@@ -407,6 +407,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
               },
             },
           },
+          untrustedDefinition: !!specUrl,
         }}
         spec={spec}
         specUrl={specUrl}
