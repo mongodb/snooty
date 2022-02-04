@@ -16,35 +16,40 @@ const videoBannerStyling = css`
   font-size: 14px;
   padding: 9px 12px 9px 20px;
   color: ${uiColors.blue.dark2};
+  margin: 24px 0px;
 
   > p {
     margin-left: 35px;
   }
-
-  svg {
-    height: 15px;
-    margin-left: 3px;
-    margin-bottom: -3px;
-  }
 `;
 
-const playIconStyling = css`
+const lgIconStyling = css`
+  width: 26px;
+  height: 26px;
+  background-color: ${uiColors.blue.light2};
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid ${uiColors.blue.base};
   border-radius: 20px;
-  width: 25px;
-  height: 25px;
-  background-color: ${uiColors.blue.light2};
   margin-left: -5px;
-  position: absolute;
 `;
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
-  const lgIcon = options?.icon && options.icon in glyphs ? options.icon : 'Play';
+  // Handles case sensitivity for specified icons
+  let lgIcon = 'Play';
+  if (options?.icon) {
+    const standardizeCaseLGIcon = options.icon.charAt(0).toUpperCase() + options.icon.slice(1).toLowerCase();
+    if (standardizeCaseLGIcon in glyphs) {
+      lgIcon = standardizeCaseLGIcon;
+    }
+  }
 
   return (
     <a href={options?.url}>
       <div css={videoBannerStyling}>
-        <div css={playIconStyling}>
+        <div css={lgIconStyling}>
           <Icon glyph={lgIcon} fill={uiColors.blue.base} />
         </div>
         {children.map((child, i) => (
