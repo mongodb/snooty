@@ -6,11 +6,12 @@ import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { theme } from '../../theme/docsTheme';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const outputButtonStyling = LeafyCss`
   padding: 0px;
-  font-size: 12px;
+  font-size: ${theme.fontSize.tiny};
   height: 24px;
   margin: 8px;
   font-weight: bold;
