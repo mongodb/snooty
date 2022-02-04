@@ -11,7 +11,6 @@ const outputCodeStyle = css`
 const Output = ({ nodeData: { children }, ...rest }) => {
   const { emphasize_lines, value, linenos, lang } = children[0];
   const language = lang || 'none';
-  console.log(language);
   return (
     <CodeBlock
       className={cx(outputCodeStyle)}

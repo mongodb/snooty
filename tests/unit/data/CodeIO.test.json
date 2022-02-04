@@ -36,7 +36,8 @@
       "argument": [],
       "options": {
         "linenos": true,
-        "emphasize-lines": "1-1"
+        "emphasize-lines": "1-1",
+        "language": "python"
       }
     },
     {
@@ -69,23 +70,14 @@
       "argument": [],
       "options": {
         "linenos": true,
-        "emphasize-lines": "1-2"
+        "emphasize-lines": "1-2",
+        "language": "python"
       }
     }
   ],
   "domain": "",
   "name": "io-code-block",
-  "argument": [
-    {
-      "type": "text",
-      "position": {
-        "start": {
-          "line": 0
-        }
-      },
-      "value": "python"
-    }
-  ],
+  "argument": [],
   "options": {
     "copyable": true,
     "caption": "Title of Example",
