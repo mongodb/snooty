@@ -24,6 +24,11 @@ const LinkIcon = styled.img`
   margin: initial !important;
 `;
 
+const HeaderBuffer = styled.div`
+  margin-top: ${({ bufferSpace }) => bufferSpace};
+  position: absolute;
+`;
+
 const headingStyle = (copied) => css`
   ${!!copied && 'visibility: visible !important;'}
   align-self: center;
@@ -41,11 +46,6 @@ const Permalink = ({ id, description, buffer }) => {
   const handleClick = (e) => {
     setCopied(true);
   };
-
-  const HeaderBuffer = styled.div`
-    margin-top: ${bufferSpace};
-    position: absolute;
-  `;
 
   return (
     <>
@@ -69,7 +69,7 @@ const Permalink = ({ id, description, buffer }) => {
           {'copied'}
         </Tooltip>
       </a>
-      <HeaderBuffer id={id} />
+      <HeaderBuffer id={id} bufferSpace={bufferSpace} />
     </>
   );
 };
