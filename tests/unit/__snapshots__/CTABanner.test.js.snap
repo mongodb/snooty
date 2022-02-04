@@ -1,114 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a CTABanner correctly when icon is specified 1`] = `
-<DocumentFragment>
-  <a
-    href="https://university.mongodb.com/"
-  />
-  .emotion-0 {
-  color: #007CAD;
-}
-
-.emotion-0 {
-  color: #007CAD;
-}
-
-.emotion-2 {
-  background-color: #E1F2F6;
-  border: 1px solid #C5E4F2;
-  border-radius: 6px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  font-size: 14px;
-  padding: 9px 12px 9px 20px;
-  color: #1A567E;
-  margin: 24px 0px;
-}
-
-.emotion-2 > div > div > * {
-  margin: 0 0 12px;
-}
-
-.emotion-2 > div > div > *:last-child {
-  margin: 0;
-}
-
-.emotion-2 p {
-  margin: 0;
-}
-
-.emotion-2 > p {
-  margin-left: 35px;
-}
-
-.emotion-1 {
-  width: 26px;
-  height: 26px;
-  background-color: #C5E4F2;
-  position: absolute;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border: 1px solid #007CAD;
-  border-radius: 20px;
-  margin-left: -5px;
-}
-
-<div
-    class="emotion-2"
-  >
-    <a
-      href="https://university.mongodb.com/"
-    >
-      <div
-        class="emotion-1"
-      >
-        <svg
-          aria-label="University Icon"
-          class="emotion-0"
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8.5 4.613c0-.383.191-.74.51-.953a6.87 6.87 0 012.145-.949l2.406-.601a.353.353 0 01.439.342v7.88c0 .238 0 .357-.043.453a.5.5 0 01-.176.211c-.087.06-.204.081-.438.123l-3.9.71c-.324.058-.486.088-.612.042a.5.5 0 01-.264-.22c-.067-.116-.067-.28-.067-.61V4.613zM2 2.452c0-.23.216-.398.439-.342l2.407.601a6.87 6.87 0 012.144.95c.319.211.51.569.51.952v6.428c0 .33 0 .494-.067.61a.5.5 0 01-.264.22c-.126.046-.288.016-.612-.043l-3.9-.709c-.234-.042-.35-.063-.438-.123a.5.5 0 01-.176-.21C2 10.688 2 10.57 2 10.331v-7.88zM2.008 12.41a.5.5 0 01.581-.402l5.143.935c.177.032.359.032.536 0l5.143-.935a.5.5 0 01.178.984l-4.134.752c-.163.434-.753.756-1.455.756-.702 0-1.292-.322-1.455-.756l-4.134-.752a.5.5 0 01-.403-.581z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-    </a>
-    <p>
-      <a
-        href="https://university.mongodb.com/"
-      >
-        If you prefer learning through videos, try this lesson on 
-      </a>
-      <a
-        class="reference external"
-        href="https://university.mongodb.com/"
-      >
-        MongoDB University
-      </a>
-    </p>
-  </div>
-</DocumentFragment>
-`;
-
 exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 <DocumentFragment>
   <a
@@ -416,6 +307,115 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         >
           <path
             d="M13.779 6.704a1.5 1.5 0 010 2.592l-7.523 4.388A1.5 1.5 0 014 12.388V3.612a1.5 1.5 0 012.256-1.296l7.523 4.388z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </a>
+    <p>
+      <a
+        href="https://university.mongodb.com/"
+      >
+        If you prefer learning through videos, try this lesson on 
+      </a>
+      <a
+        class="reference external"
+        href="https://university.mongodb.com/"
+      >
+        MongoDB University
+      </a>
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders a CTABanner correctly when non-default icon is specified 1`] = `
+<DocumentFragment>
+  <a
+    href="https://university.mongodb.com/"
+  />
+  .emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-2 {
+  background-color: #E1F2F6;
+  border: 1px solid #C5E4F2;
+  border-radius: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  font-size: 14px;
+  padding: 9px 12px 9px 20px;
+  color: #1A567E;
+  margin: 24px 0px;
+}
+
+.emotion-2 > div > div > * {
+  margin: 0 0 12px;
+}
+
+.emotion-2 > div > div > *:last-child {
+  margin: 0;
+}
+
+.emotion-2 p {
+  margin: 0;
+}
+
+.emotion-2 > p {
+  margin-left: 35px;
+}
+
+.emotion-1 {
+  width: 26px;
+  height: 26px;
+  background-color: #C5E4F2;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: 1px solid #007CAD;
+  border-radius: 20px;
+  margin-left: -5px;
+}
+
+<div
+    class="emotion-2"
+  >
+    <a
+      href="https://university.mongodb.com/"
+    >
+      <div
+        class="emotion-1"
+      >
+        <svg
+          aria-label="University Icon"
+          class="emotion-0"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.5 4.613c0-.383.191-.74.51-.953a6.87 6.87 0 012.145-.949l2.406-.601a.353.353 0 01.439.342v7.88c0 .238 0 .357-.043.453a.5.5 0 01-.176.211c-.087.06-.204.081-.438.123l-3.9.71c-.324.058-.486.088-.612.042a.5.5 0 01-.264-.22c-.067-.116-.067-.28-.067-.61V4.613zM2 2.452c0-.23.216-.398.439-.342l2.407.601a6.87 6.87 0 012.144.95c.319.211.51.569.51.952v6.428c0 .33 0 .494-.067.61a.5.5 0 01-.264.22c-.126.046-.288.016-.612-.043l-3.9-.709c-.234-.042-.35-.063-.438-.123a.5.5 0 01-.176-.21C2 10.688 2 10.57 2 10.331v-7.88zM2.008 12.41a.5.5 0 01.581-.402l5.143.935c.177.032.359.032.536 0l5.143-.935a.5.5 0 01.178.984l-4.134.752c-.163.434-.753.756-1.455.756-.702 0-1.292-.322-1.455-.756l-4.134-.752a.5.5 0 01-.403-.581z"
             fill="currentColor"
           />
         </svg>
