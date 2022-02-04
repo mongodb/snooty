@@ -10,10 +10,10 @@ import { SidenavBackButton } from './Sidenav';
 import Spinner from './Spinner';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import useStickyTopValues from '../hooks/useStickyTopValues';
+import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { getPlaintext } from '../utils/get-plaintext';
 import { fetchOASFile } from '../utils/realm';
-
 // Important notes:
 // The contents of this file are (unfortunately) a hacky and brittle way of getting Redoc's React component to
 // look like our docs while maintaining the same workflow and processes for delivering docs.
@@ -243,7 +243,6 @@ const LoadingWidget = ({ className }) => (
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   const docsTitle = siteTitle ? `${siteTitle} Docs` : 'Docs';
-
   return (
     <>
       {/* Disable LG left arrow glyph due to bug where additional copies of the LG icon would be rendered 
@@ -260,6 +259,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   const { database } = useSiteMetadata();
   const [realmSpec, setRealmSpec] = useState(null);
   const topValues = useStickyTopValues();
+  let specUrl, spec, urlParams;
 
   // Attempt to fetch a spec from Realm
   useEffect(() => {
@@ -282,10 +282,16 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
     );
   }
 
-  let spec = usesRealm ? realmSpec : JSON.parse(children[0]?.value);
+  if (isBrowser) urlParams = new URLSearchParams(window.location.search);
+  specUrl = urlParams?.get('openApiSrc');
+
+  spec = usesRealm ? realmSpec : JSON.parse(children[0]?.value || '{}');
+  spec = !specUrl ? spec : null;
+
   // Create our loading widget
   const tempLoadingDivClassName = 'openapi-loading-container';
-  if (!spec) {
+  const isLoading = !specUrl && !spec;
+  if (isLoading) {
     return <LoadingWidget className={tempLoadingDivClassName} />;
   }
 
@@ -320,7 +326,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
           }
         }}
         options={{
-          hideLoading: true,
+          hideLoading: !specUrl,
           maxDisplayedEnumValues: 5,
           theme: {
             breakpoints: {
@@ -403,6 +409,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
           },
         }}
         spec={spec}
+        specUrl={specUrl}
       />
     </>
   );
