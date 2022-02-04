@@ -2,7 +2,13 @@
 
 exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 <DocumentFragment>
-  <a
+  .emotion-0 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+<a
+    class="emotion-0"
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
@@ -14,6 +20,11 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 }
 
 .emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-4 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -28,19 +39,19 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   margin: 24px 0px;
 }
 
-.emotion-2 > div > div > * {
+.emotion-4 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-2 > div > div > *:last-child {
+.emotion-4 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-2 p {
+.emotion-4 p {
   margin: 0;
 }
 
-.emotion-2 > p {
+.emotion-4 > p {
   margin-left: 35px;
 }
 
@@ -67,9 +78,10 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 }
 
 <div
-    class="emotion-2"
+    class="emotion-4"
   >
     <a
+      class="emotion-2"
       href="https://university.mongodb.com/"
     >
       <div
@@ -94,6 +106,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
     </a>
     <p>
       <a
+        class="emotion-2"
         href="https://university.mongodb.com/"
       >
         If you prefer learning through videos, try this lesson on 
@@ -111,7 +124,13 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 
 exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 <DocumentFragment>
-  <a
+  .emotion-0 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+<a
+    class="emotion-0"
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
@@ -123,6 +142,11 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 }
 
 .emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-4 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -137,19 +161,19 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   margin: 24px 0px;
 }
 
-.emotion-2 > div > div > * {
+.emotion-4 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-2 > div > div > *:last-child {
+.emotion-4 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-2 p {
+.emotion-4 p {
   margin: 0;
 }
 
-.emotion-2 > p {
+.emotion-4 > p {
   margin-left: 35px;
 }
 
@@ -176,9 +200,10 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 }
 
 <div
-    class="emotion-2"
+    class="emotion-4"
   >
     <a
+      class="emotion-2"
       href="https://university.mongodb.com/"
     >
       <div
@@ -205,6 +230,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
     </a>
     <p>
       <a
+        class="emotion-2"
         href="https://university.mongodb.com/"
       >
         If you prefer learning through videos, try this lesson on 
@@ -222,7 +248,13 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 
 exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 <DocumentFragment>
-  <a
+  .emotion-0 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+<a
+    class="emotion-0"
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
@@ -234,6 +266,11 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 }
 
 .emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-4 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -248,19 +285,19 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   margin: 24px 0px;
 }
 
-.emotion-2 > div > div > * {
+.emotion-4 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-2 > div > div > *:last-child {
+.emotion-4 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-2 p {
+.emotion-4 p {
   margin: 0;
 }
 
-.emotion-2 > p {
+.emotion-4 > p {
   margin-left: 35px;
 }
 
@@ -287,9 +324,10 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 }
 
 <div
-    class="emotion-2"
+    class="emotion-4"
   >
     <a
+      class="emotion-2"
       href="https://university.mongodb.com/"
     >
       <div
@@ -314,6 +352,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
     </a>
     <p>
       <a
+        class="emotion-2"
         href="https://university.mongodb.com/"
       >
         If you prefer learning through videos, try this lesson on 
@@ -331,7 +370,13 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 
 exports[`renders a CTABanner correctly when non-default icon is specified 1`] = `
 <DocumentFragment>
-  <a
+  .emotion-0 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+<a
+    class="emotion-0"
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
@@ -343,6 +388,11 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 }
 
 .emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-4 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -357,19 +407,19 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   margin: 24px 0px;
 }
 
-.emotion-2 > div > div > * {
+.emotion-4 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-2 > div > div > *:last-child {
+.emotion-4 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-2 p {
+.emotion-4 p {
   margin: 0;
 }
 
-.emotion-2 > p {
+.emotion-4 > p {
   margin-left: 35px;
 }
 
@@ -396,9 +446,10 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 }
 
 <div
-    class="emotion-2"
+    class="emotion-4"
   >
     <a
+      class="emotion-2"
       href="https://university.mongodb.com/"
     >
       <div
@@ -423,6 +474,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
     </a>
     <p>
       <a
+        class="emotion-2"
         href="https://university.mongodb.com/"
       >
         If you prefer learning through videos, try this lesson on 

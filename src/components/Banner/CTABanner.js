@@ -36,6 +36,10 @@ const lgIconStyling = css`
   margin-left: -5px;
 `;
 
+const linkStyling = css`
+  text-decoration: none !important;
+`;
+
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
   // Handles case sensitivity for specified icons
   let lgIcon = 'Play';
@@ -47,7 +51,7 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
   }
 
   return (
-    <a href={options?.url}>
+    <a href={options?.url} css={linkStyling}>
       <div css={videoBannerStyling}>
         <div css={lgIconStyling}>
           <Icon glyph={lgIcon} fill={uiColors.blue.base} />
