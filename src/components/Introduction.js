@@ -29,6 +29,9 @@ const StyledIntroduction = styled('div')`
       margin-top: ${theme.size.default};
       margin-bottom: 0;
     }
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
