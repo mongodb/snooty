@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { uiColors } from '@leafygreen-ui/palette';
-import Icon from '@leafygreen-ui/icon';
+import Icon, { glyphs } from '@leafygreen-ui/icon';
 import ComponentFactory from '../ComponentFactory';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
@@ -16,34 +16,45 @@ const videoBannerStyling = css`
   font-size: 14px;
   padding: 9px 12px 9px 20px;
   color: ${uiColors.blue.dark2};
+  margin: 24px 0px;
 
   > p {
     margin-left: 35px;
   }
-
-  svg {
-    height: 15px;
-    margin-left: 3px;
-    margin-bottom: -3px;
-  }
 `;
 
-const playIconStyling = css`
+const lgIconStyling = css`
+  width: 26px;
+  height: 26px;
+  background-color: ${uiColors.blue.light2};
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid ${uiColors.blue.base};
   border-radius: 20px;
-  width: 25px;
-  height: 25px;
-  background-color: ${uiColors.blue.light2};
   margin-left: -5px;
-  position: absolute;
+`;
+
+const linkStyling = css`
+  text-decoration: none !important;
 `;
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
+  // Handles case sensitivity for specified icons
+  let lgIcon = 'Play';
+  if (options?.icon) {
+    const standardizeCaseLGIcon = options.icon.charAt(0).toUpperCase() + options.icon.slice(1).toLowerCase();
+    if (standardizeCaseLGIcon in glyphs) {
+      lgIcon = standardizeCaseLGIcon;
+    }
+  }
+
   return (
-    <a href={options?.url}>
+    <a href={options?.url} css={linkStyling}>
       <div css={videoBannerStyling}>
-        <div css={playIconStyling}>
-          <Icon glyph="Play" fill={uiColors.blue.base} />
+        <div css={lgIconStyling}>
+          <Icon glyph={lgIcon} fill={uiColors.blue.base} />
         </div>
         {children.map((child, i) => (
           <ComponentFactory {...rest} key={i} nodeData={child} />
@@ -58,6 +69,7 @@ CTABanner.propTypes = {
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
     options: PropTypes.shape({
       url: PropTypes.string.isRequired,
+      icon: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
