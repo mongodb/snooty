@@ -18,13 +18,16 @@ const StyledIntroduction = styled('div')`
     }
   }
   @media ${theme.screenSize.upToMedium} {
+    margin-bottom: ${theme.size.default};
+
     .button {
       margin-bottom: 0px;
       margin-right: 0px;
     }
     .button + p {
       display: block;
-      margin: ${theme.size.default} 0px;
+      margin-top: ${theme.size.default};
+      margin-bottom: 0;
     }
   }
 `;
