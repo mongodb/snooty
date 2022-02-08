@@ -36,7 +36,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   const code = value;
   const language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
   const captionSpecified = !!caption;
-  const captionExists = captionSpecified ? '0px' : '4px';
+  const captionBorderRadius = captionSpecified ? '0px' : '4px';
 
   const reportCodeCopied = useCallback(() => {
     reportAnalytics('CodeblockCopied', { code });
@@ -48,8 +48,8 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
         ${baseCodeStyle}
 
         > div {
-          border-top-left-radius: ${captionExists};
-          border-top-right-radius: ${captionExists};
+          border-top-left-radius: ${captionBorderRadius};
+          border-top-right-radius: ${captionBorderRadius};
         }
       `}
     >

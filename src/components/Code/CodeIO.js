@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from '../ComponentFactory';
 import { cx, css as LeafyCss } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
@@ -8,6 +7,8 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
+import Input from '../Code/Input';
+import Output from '../Code/Output';
 
 const outputButtonStyling = LeafyCss`
   padding: 0px;
@@ -21,7 +22,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   const [showOutput, setShowOutput] = useState(false);
   const [buttonText, setButtonText] = useState('VIEW OUTPUT');
   const [arrow, setArrow] = useState('ChevronDown');
-  const outputExists = !showOutput ? '4px' : '0px';
+  const outputBorderRadius = !showOutput ? '4px' : '0px';
   const needsIOToggle = children.length === 2;
 
   const handleClick = (e) => {
@@ -37,47 +38,52 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   };
 
   return (
-    <div
-      css={css`
-        ${baseCodeStyle}
+    <>
+      {children.length === 0 && <></>}
+      {children.length > 0 && (
+        <div
+          css={css`
+            ${baseCodeStyle}
 
-        // Inner div of LG component has a width set to 700px. Unset this as part of our
-        // override for docs when the language switcher is being used.
-        > div > div {
-          border-bottom-right-radius: 0px;
-          border-bottom-left-radius: 0px;
-        }
+            // Inner div of LG component has a width set to 700px. Unset this as part of our
+            // override for docs when the language switcher is being used.
+            > div > div {
+              border-bottom-right-radius: 0px;
+              border-bottom-left-radius: 0px;
+            }
 
-        // Controls output code block style
-        > div {
-          border-top-right-radius: 0px;
-          border-top-left-radius: 0px;
-          border-bottom-right-radius: ${outputExists};
-          border-bottom-left-radius: ${outputExists};
-          margin: 0px;
-        }
-      `}
-    >
-      {needsIOToggle && (
-        <>
-          <ComponentFactory {...rest} nodeData={children[0]} />
-          <IOToggle>
-            <Button
-              role="button"
-              className={cx(outputButtonStyling)}
-              darkMode={false}
-              disabled={false}
-              onClick={handleClick}
-              leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
-            >
-              {buttonText}
-            </Button>
-          </IOToggle>
-        </>
+            // Controls output code block style
+            > div {
+              border-top-right-radius: 0px;
+              border-top-left-radius: 0px;
+              border-bottom-right-radius: ${outputBorderRadius};
+              border-bottom-left-radius: ${outputBorderRadius};
+              margin: 0px;
+            }
+          `}
+        >
+          {needsIOToggle && (
+            <>
+              <Input nodeData={children[0]} />
+              <IOToggle>
+                <Button
+                  role="button"
+                  className={cx(outputButtonStyling)}
+                  darkMode={false}
+                  disabled={false}
+                  onClick={handleClick}
+                  leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
+                >
+                  {buttonText}
+                </Button>
+              </IOToggle>
+              {showOutput && <Output nodeData={children[1]} />}
+            </>
+          )}
+          {children.length === 1 && <Input nodeData={children[0]} />}
+        </div>
       )}
-      {showOutput && <ComponentFactory {...rest} nodeData={children[1]} />}
-      {children.length !== 2 && children.map((child, i) => <ComponentFactory {...rest} key={i} nodeData={child} />)}
-    </div>
+    </>
   );
 };
 

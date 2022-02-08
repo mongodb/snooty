@@ -32,7 +32,6 @@ import Heading from './Heading';
 import HorizontalList from './HorizontalList';
 import Image from './Image';
 import Include from './Include';
-import Input from './Code/Input';
 import Introduction from './Introduction';
 import Kicker from './Kicker';
 import Line from './Line';
@@ -47,7 +46,6 @@ import Meta from './Meta';
 import MongoWebShell from './MongoWebShell';
 import OpenAPI from './OpenAPI';
 import Operation from './Operation';
-import Output from './Code/Output';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
 import QuizChoice from './Widgets/QuizWidget/QuizChoice';
@@ -159,7 +157,6 @@ const componentMap = {
   hlist: HorizontalList,
   image: Image,
   include: Include,
-  input: Input,
   introduction: Introduction,
   kicker: Kicker,
   line: Line,
@@ -175,7 +172,6 @@ const componentMap = {
   only: Cond,
   openapi: OpenAPI,
   operation: Operation,
-  output: Output,
   paragraph: Paragraph,
   procedure: Procedure,
   quiz: QuizWidget,
