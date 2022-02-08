@@ -283,7 +283,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   }
 
   if (isBrowser) urlParams = new URLSearchParams(window.location.search);
-  specUrl = urlParams?.get('openApiSrc');
+  specUrl = urlParams?.get('src');
 
   spec = usesRealm ? realmSpec : JSON.parse(children[0]?.value || '{}');
   spec = !specUrl ? spec : null;
