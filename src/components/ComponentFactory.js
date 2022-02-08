@@ -8,7 +8,8 @@ import Card from './Card';
 import CardGroup from './CardGroup';
 import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters/Chapters';
-import Code from './Code';
+import Code from './Code/Code';
+import CodeIO from './Code/CodeIO';
 import Cond from './Cond';
 import Container from './Container';
 import CSSClass from './CSSClass';
@@ -133,6 +134,7 @@ const componentMap = {
   chapters: Chapters,
   class: CSSClass,
   code: Code,
+  'io-code-block': CodeIO,
   cond: Cond,
   container: Container,
   cssclass: CSSClass,

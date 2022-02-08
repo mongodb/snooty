@@ -148,6 +148,11 @@ exports[`renders correctly 1`] = `
   font-size: 16px;
 }
 
+.emotion-9 > div {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
 <div
     class="emotion-9"
   >
