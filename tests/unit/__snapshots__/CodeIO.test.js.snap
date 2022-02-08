@@ -1,0 +1,424 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodeIO renders correctly 1`] = `
+<DocumentFragment>
+  .emotion-14 {
+  color: #FF0000;
+}
+
+.emotion-13 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-4 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+}
+
+.emotion-7 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
+}
+
+.emotion-8 {
+  border: 2px solid;
+  overflow-x: auto;
+  border-radius: 0;
+  border: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 0;
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  white-space: pre;
+  border-color: #E7EEEC;
+  background-color: #F9FBFA;
+  color: #061621;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-8 {
+    white-space: pre-wrap;
+  }
+}
+
+@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-8 {
+    white-space: pre;
+  }
+}
+
+.emotion-11 {
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-6 {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.emotion-5 {
+  background-color: #FEF7E3;
+  background-image: none;
+  background-attachment: fixed;
+}
+
+.emotion-5 > td {
+  border-top: 1px solid #FEF2C8;
+}
+
+.emotion-5 + tr > td {
+  border-top: 1px solid #FEF2C8;
+}
+
+.emotion-5 + .emotion-5 > td {
+  border-top: 0;
+}
+
+.emotion-5:last-child > td {
+  border-bottom: 1px solid #FEF2C8;
+}
+
+.emotion-3 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: right;
+  padding-left: 8px;
+  padding-right: 0;
+  color: #86681D;
+}
+
+.emotion-9 {
+  width: 38px;
+  border-left: solid 1px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding-top: 6px;
+  min-height: 36px;
+  padding-top: 4px;
+  min-height: 36px;
+  padding-top: 4px;
+  border-color: #E7EEEC;
+  background-color: white;
+}
+
+.emotion-17 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #F9FBFA;
+  border: 1px solid #89979B;
+  box-shadow: 0px 1px 2px rgba(6,22,33,0.3);
+  color: #3D4F58;
+  font-size: 14px;
+  height: 36px;
+  padding: 0px;
+  font-size: 12px;
+  height: 24px;
+  margin: 8px;
+  font-weight: bold;
+}
+
+.emotion-17:focus {
+  outline: none;
+}
+
+.emotion-17:disabled {
+  pointer-events: none;
+}
+
+.emotion-17:active,
+.emotion-17:focus,
+.emotion-17:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-17:focus {
+  color: #3D4F58;
+}
+
+.emotion-17:hover,
+.emotion-17:active {
+  color: #3D4F58;
+  background-color: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.3), 0px 0px 0px 3px #E7EEEC;
+}
+
+.emotion-17:focus {
+  background: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0,124,173,0.4), 0px 0px 0px 3px #019EE2;
+}
+
+.emotion-16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-15 {
+  color: #5D6C74;
+  height: 16px;
+  width: 16px;
+  margin-right: 6px;
+  vertical-align: text-top;
+}
+
+.emotion-20 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-20 > div > div {
+  width: unset;
+}
+
+.emotion-20 button > div > div {
+  font-size: 16px;
+}
+
+.emotion-20 > div > div {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.emotion-20 > div {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  margin: 0px;
+}
+
+.emotion-12 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-12 > div > div {
+  width: unset;
+}
+
+.emotion-12 button > div > div {
+  font-size: 16px;
+}
+
+.emotion-12 > div {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.emotion-1 {
+  border: 1px solid #E7EEEC;
+  border-bottom: none;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.emotion-0 {
+  padding: 10px;
+  color: #5D6C74;
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
+}
+
+.emotion-18 {
+  border: 1px solid #E7EEEC;
+  border-top: none;
+}
+
+<div
+    class="emotion-20"
+  >
+    <div
+      class="emotion-12"
+    >
+      <div>
+        <div
+          class="emotion-1 emotion-2"
+        >
+          <div
+            class="emotion-0"
+          >
+            Title of Example
+          </div>
+        </div>
+      </div>
+      <div
+        class="emotion-11"
+      >
+        <div
+          class="emotion-10"
+        >
+          <pre
+            class="emotion-8"
+            tabindex="-1"
+          >
+            <code
+              class="lg-highlight-hljs-light emotion-7 python"
+            >
+              <table
+                class="emotion-6"
+              >
+                <tbody>
+                  <tr
+                    class="emotion-5"
+                  >
+                    <td
+                      class="emotion-3"
+                    >
+                      1
+                    </td>
+                    <td
+                      class="emotion-4"
+                    >
+                      print(
+                      <span
+                        class="lg-highlight-string"
+                      >
+                        'hello world'
+                      </span>
+                      )
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </code>
+          </pre>
+          <div
+            class="emotion-9"
+            data-testid="leafygreen-code-panel"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="emotion-18 emotion-19"
+    >
+      <button
+        aria-disabled="false"
+        class="emotion-17"
+        role="button"
+        type="button"
+      >
+        <div
+          class="emotion-13"
+        />
+        <div
+          class="emotion-16"
+        >
+          <svg
+            alt=""
+            aria-hidden="true"
+            class="emotion-14 emotion-15"
+            fill="none"
+            height="16"
+            role="presentation"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+          VIEW OUTPUT
+        </div>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
