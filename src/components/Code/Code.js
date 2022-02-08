@@ -1,11 +1,21 @@
 import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
-import { CodeContext } from './code-context';
-import { TabContext } from './tab-context';
-import { theme } from '../theme/docsTheme';
-import { reportAnalytics } from '../utils/report-analytics';
+import { uiColors } from '@leafygreen-ui/palette';
+import { CodeContext } from '../code-context';
+import { TabContext } from '../tab-context';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
+
+const captionStyle = css`
+  padding: 10px;
+  color: ${uiColors.gray.dark1};
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
+`;
 
 const getLanguage = (lang) => {
   if (Object.values(Language).includes(lang)) {
@@ -25,6 +35,8 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const code = value;
   const language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
+  const captionSpecified = !!caption;
+  const captionBorderRadius = captionSpecified ? '0px' : '4px';
 
   const reportCodeCopied = useCallback(() => {
     reportAnalytics('CodeblockCopied', { code });
@@ -33,26 +45,22 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   return (
     <div
       css={css`
-        display: table;
-        margin: ${theme.size.default} 0;
-        min-width: 150px;
-        table-layout: fixed;
-        width: 100%;
+        ${baseCodeStyle}
 
-        // Inner div of LG component has a width set to 700px. Unset this as part of our
-        // override for docs when the language switcher is being used.
-        > div > div {
-          width: unset;
-        }
-
-        // Override default LG Code language switcher font size
-        button > div > div {
-          font-size: ${theme.fontSize.default};
+        > div {
+          border-top-left-radius: ${captionBorderRadius};
+          border-top-right-radius: ${captionBorderRadius};
         }
       `}
     >
+      {captionSpecified && (
+        <div>
+          <CaptionContainer>
+            <div css={captionStyle}>{caption}</div>
+          </CaptionContainer>
+        </div>
+      )}
       <CodeBlock
-        chromeTitle={caption}
         copyable={copyable}
         highlightLines={emphasizeLines}
         language={language}
@@ -63,13 +71,19 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
         }}
         onCopy={reportCodeCopied}
         showLineNumbers={linenos}
-        showWindowChrome={caption ? true : false}
       >
         {code}
       </CodeBlock>
     </div>
   );
 };
+
+const CaptionContainer = styled.div`
+  ${borderCodeStyle}
+  border-bottom: none;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+`;
 
 Code.propTypes = {
   nodeData: PropTypes.shape({
