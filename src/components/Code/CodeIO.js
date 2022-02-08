@@ -37,53 +37,51 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
     }
   };
 
+  if (children.length === 0) {
+    return null;
+  }
   return (
-    <>
-      {children.length === 0 && <></>}
-      {children.length > 0 && (
-        <div
-          css={css`
-            ${baseCodeStyle}
+    <div
+      css={css`
+        ${baseCodeStyle}
 
-            // Inner div of LG component has a width set to 700px. Unset this as part of our
-            // override for docs when the language switcher is being used.
-            > div > div {
-              border-bottom-right-radius: 0px;
-              border-bottom-left-radius: 0px;
-            }
+        // Inner div of LG component has a width set to 700px. Unset this as part of our
+        // override for docs when the language switcher is being used.
+        > div > div {
+          border-bottom-right-radius: 0px;
+          border-bottom-left-radius: 0px;
+        }
 
-            // Controls output code block style
-            > div {
-              border-top-right-radius: 0px;
-              border-top-left-radius: 0px;
-              border-bottom-right-radius: ${outputBorderRadius};
-              border-bottom-left-radius: ${outputBorderRadius};
-              margin: 0px;
-            }
-          `}
-        >
-          {needsIOToggle && (
-            <>
-              <Input nodeData={children[0]} />
-              <IOToggle>
-                <Button
-                  role="button"
-                  className={cx(outputButtonStyling)}
-                  darkMode={false}
-                  disabled={false}
-                  onClick={handleClick}
-                  leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
-                >
-                  {buttonText}
-                </Button>
-              </IOToggle>
-              {showOutput && <Output nodeData={children[1]} />}
-            </>
-          )}
-          {children.length === 1 && <Input nodeData={children[0]} />}
-        </div>
+        // Controls output code block style
+        > div {
+          border-top-right-radius: 0px;
+          border-top-left-radius: 0px;
+          border-bottom-right-radius: ${outputBorderRadius};
+          border-bottom-left-radius: ${outputBorderRadius};
+          margin: 0px;
+        }
+      `}
+    >
+      {needsIOToggle && (
+        <>
+          <Input nodeData={children[0]} />
+          <IOToggle>
+            <Button
+              role="button"
+              className={cx(outputButtonStyling)}
+              darkMode={false}
+              disabled={false}
+              onClick={handleClick}
+              leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
+            >
+              {buttonText}
+            </Button>
+          </IOToggle>
+          {showOutput && <Output nodeData={children[1]} />}
+        </>
       )}
-    </>
+      {children.length === 1 && <Input nodeData={children[0]} />}
+    </div>
   );
 };
 
