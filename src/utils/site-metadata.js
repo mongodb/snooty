@@ -14,6 +14,10 @@ const getDatabase = (env) => {
       return 'snooty_stage';
     case 'production':
       return 'snooty_prod';
+    case 'dotcomstg':
+      return 'snooty_dotcomstg';
+    case 'dotcomprd':
+      return 'snooty_dotcomprd';
     default:
       return 'snooty_dev';
   }

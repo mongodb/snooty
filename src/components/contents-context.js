@@ -14,7 +14,7 @@ const ContentsProvider = ({ children, headingNodes = [] }) => {
   const activeHeadingId = useActiveHeading(headingNodes);
   const { project } = useSiteMetadata();
   // The guides site is the only site that takes advantage of headings, but never uses the Contents component
-  const showContentsComponent = project === 'guides';
+  const showContentsComponent = project !== 'guides';
 
   return (
     <ContentsContext.Provider value={{ activeHeadingId, headingNodes, showContentsComponent }}>

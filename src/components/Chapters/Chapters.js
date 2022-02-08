@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
 import Icon from '@leafygreen-ui/icon';
 import { css } from '@emotion/core';
@@ -9,6 +8,7 @@ import ComponentFactory from '../ComponentFactory';
 import CardGroup from '../CardGroup';
 import BookIcon from '../icons/Book';
 import { theme } from '../../theme/docsTheme';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { getPlaintext } from '../../utils/get-plaintext';
 import RightColumn from './RightColumn';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -131,7 +131,7 @@ const getGuidesData = (chapters, guides) => {
         headline: getPlaintext(data['title']),
         icon: chapters[chapterName]?.['icon'],
         'icon-alt': `${chapterName} chapter icon`,
-        url: withPrefix(slug),
+        url: assertTrailingSlash(slug),
       },
     };
   });
@@ -184,7 +184,7 @@ const Chapters = ({ metadata, nodeData: { children } }) => {
         <Content>
           {view === Views.Chapter.name && (
             <ChapterView>
-              <RightColumn />
+              <RightColumn chapters={metadata?.chapters} />
               <LeftColumn>
                 {children.map((child, i) => (
                   <ComponentFactory key={i} metadata={metadata} nodeData={child} />
