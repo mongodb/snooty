@@ -24,8 +24,8 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   const [arrow, setArrow] = useState('ChevronDown');
   const needsIOToggle = children.length === 2;
   const onlyInputSpecified = children.length === 1;
-  const outputBorderRadius = !showOutput ? '4px' : '0px';
-  const singleInputBorderRadius = onlyInputSpecified ? '4px' : '0px';
+  const outputBorderRadius = !showOutput ? theme.size.tiny : '0px';
+  const singleInputBorderRadius = onlyInputSpecified ? theme.size.tiny : '0px';
 
   const handleClick = (e) => {
     if (showOutput) {
