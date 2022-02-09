@@ -260,6 +260,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   const [realmSpec, setRealmSpec] = useState(null);
   const topValues = useStickyTopValues();
   let specUrl, spec, urlParams;
+  const [isLoading, setIsLoading] = useState(true);
 
   // Attempt to fetch a spec from Realm
   useEffect(() => {
@@ -290,23 +291,14 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
 
   // Create our loading widget
   const tempLoadingDivClassName = 'openapi-loading-container';
-  const isLoading = !specUrl && !spec;
-  if (isLoading) {
-    return <LoadingWidget className={tempLoadingDivClassName} />;
-  }
-
   return (
     <>
       <Global styles={getGlobalCss(topValues)} />
       {/* Temporary loading widget to be removed once the Redoc component loads */}
+      {isLoading && <LoadingWidget className={tempLoadingDivClassName} />}
       <RedocStandalone
         onLoaded={() => {
-          // Remove temporary loading widget from DOM
-          const tempLoadingDivEl = document.querySelector(`.${tempLoadingDivClassName}`);
-          if (tempLoadingDivEl) {
-            tempLoadingDivEl.remove();
-          }
-          // Check if menu title container was already added
+          setIsLoading(false);
           const menuTest = document.querySelector(`.${menuTitleContainerClass}`);
           if (menuTest) {
             return;
@@ -326,7 +318,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
           }
         }}
         options={{
-          hideLoading: !specUrl,
+          hideLoading: true,
           maxDisplayedEnumValues: 5,
           theme: {
             breakpoints: {
