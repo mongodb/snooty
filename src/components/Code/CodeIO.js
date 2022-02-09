@@ -24,6 +24,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   const [arrow, setArrow] = useState('ChevronDown');
   const outputBorderRadius = !showOutput ? '4px' : '0px';
   const needsIOToggle = children.length === 2;
+  const onlyInputSpecified = children.length === 1;
 
   const handleClick = (e) => {
     if (showOutput) {
@@ -48,11 +49,11 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
         // Inner div of LG component has a width set to 700px. Unset this as part of our
         // override for docs when the language switcher is being used.
         > div > div {
-          border-bottom-right-radius: 0px;
-          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: ${onlyInputSpecified ? '4px' : '0px'};
+          border-bottom-left-radius: ${onlyInputSpecified ? '4px' : '0px'};
         }
 
-        // Controls output code block style
+        // Controls output code block and toggle view bar style
         > div {
           border-top-right-radius: 0px;
           border-top-left-radius: 0px;
@@ -80,7 +81,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
           {showOutput && <Output nodeData={children[1]} />}
         </>
       )}
-      {children.length === 1 && <Input nodeData={children[0]} />}
+      {onlyInputSpecified && <Input nodeData={children[0]} />}
     </div>
   );
 };
