@@ -57,5 +57,7 @@ describe('GuideNext', () => {
     const wrapper = renderGuideNext(currentSlug, mockNodeData.customContent);
     expect(wrapper.getByText('Custom title with content and button')).toBeTruthy();
     expect(wrapper.getByText('Hello this is my custom content. Description here!')).toBeTruthy();
+    // Default copy title should not be present
+    expect(wrapper.queryAllByText('Become a MongoDB Professional')).toHaveLength(0);
   });
 });
