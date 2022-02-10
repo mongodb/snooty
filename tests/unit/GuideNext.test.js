@@ -50,4 +50,6 @@ describe('GuideNext', () => {
     expect(wrapper.asFragment()).toMatchSnapshot();
     checkLocalStorage(currentSlug);
   });
+
+  // it('renders custom copy')
 });

@@ -9,6 +9,7 @@ import { theme } from '../../theme/docsTheme';
 
 const Container = styled('div')`
   border-top: 1px solid ${uiColors.gray.light2};
+  margin-bottom: 24px;
   padding-top: 56px;
 
   @media ${theme.screenSize.largeAndUp} {
@@ -68,7 +69,7 @@ const getNextGuideData = (chapters, guides, slug) => {
   };
 };
 
-const GuideNext = ({ metadata, slug }) => {
+const GuideNext = ({ nodeData: { argument, children }, metadata, slug }) => {
   const { chapters, guides } = metadata;
   const { targetGuide, targetChapter } = useMemo(() => getNextGuideData(chapters, guides, slug), [
     chapters,
@@ -83,7 +84,7 @@ const GuideNext = ({ metadata, slug }) => {
   return (
     <ReadGuidesContextProvider slug={slug}>
       <Container>
-        <Content guideData={targetGuide} />
+        <Content argument={argument} children={children} guideData={targetGuide} />
         <ChapterInfo chapterData={targetChapter} guidesMetadata={guides} targetSlug={targetGuide?.[0]} />
       </Container>
     </ReadGuidesContextProvider>
