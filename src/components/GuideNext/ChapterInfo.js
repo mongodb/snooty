@@ -65,7 +65,7 @@ const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }) => {
 ChapterInfo.propTypes = {
   chapterData: PropTypes.array.isRequired,
   guidesMetadata: PropTypes.object.isRequired,
-  targetSlug: PropTypes.string.isRequired,
+  targetSlug: PropTypes.string,
 };
 
 export default ChapterInfo;
