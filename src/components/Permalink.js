@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { isBrowser } from '../utils/is-browser';
