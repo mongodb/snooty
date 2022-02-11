@@ -152,6 +152,12 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
           },
         ],
       },
+      resolve: {
+        fallback: { "tty": require.resolve("tty-browserify") },
+        fallback: { "stream": require.resolve("stream-browserify") },
+        fallback: { "path": require.resolve("path-browserify") },
+        fallback: { "os": require.resolve("os-browserify/browser") },
+      }
     });
   }
 };
