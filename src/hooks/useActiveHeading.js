@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 const observeHeadings = (headingNodes, observer) =>
   headingNodes.flatMap((heading) => {
@@ -16,22 +16,32 @@ const unobserveHeadings = (headings, observer) => {
   });
 };
 
+// Returns the id of the first (topmost) heading that is in the viewport.
 const useActiveHeading = (headingNodes) => {
   const [activeHeadingId, setActiveHeadingId] = useState(headingNodes?.[0]?.id);
 
+  // Create array to keep track of all headings and if they are currently seen within the viewport.
+  // The order of the headings matter.
+  const headingsMemo = useMemo(() => headingNodes.map(({ id }) => ({ id, isInViewport: false })), [headingNodes]);
+
   useEffect(() => {
     const options = {
-      root: document.querySelector('.content'),
-      rootMargin: '0px',
-      threshold: 1.0,
+      threshold: [0, 0.25, 0.5, 0.75, 1.0],
     };
 
     const callback = (entries) => {
       for (const entry of entries) {
-        if (entry.isIntersecting) {
-          setActiveHeadingId(entry.target.id);
-          return;
+        const heading = headingsMemo.find(({ id }) => id === entry.target.id);
+        if (!heading) {
+          continue;
         }
+        heading.isInViewport = entry.intersectionRatio > 0;
+      }
+
+      // Find first heading that is in the viewport
+      const headingInViewport = headingsMemo.find(({ isInViewport }) => isInViewport);
+      if (headingInViewport?.isInViewport) {
+        setActiveHeadingId(headingInViewport.id);
       }
     };
 
@@ -40,7 +50,7 @@ const useActiveHeading = (headingNodes) => {
     return () => {
       unobserveHeadings(headings, observer);
     };
-  }, [headingNodes]);
+  }, [headingNodes, headingsMemo]);
 
   return activeHeadingId;
 };
