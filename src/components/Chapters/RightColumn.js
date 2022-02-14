@@ -98,7 +98,7 @@ const RightColumn = ({ chapters = {} }) => {
   const isVisible = useVisibleOnScroll('.hero-img');
   const chapterEntries = Object.entries(chapters || {});
   const chapterValues = Object.values(chapters || {});
-  const activeChapterId = useActiveHeading(chapterValues);
+  const activeChapterId = useActiveHeading(chapterValues, 0.6);
 
   return (
     <Container isSidenavCollapsed={isCollapsed} isVisible={isVisible}>
