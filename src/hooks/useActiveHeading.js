@@ -20,9 +20,14 @@ const unobserveHeadings = (headings, observer) => {
 const useActiveHeading = (headingNodes, intersectionRatio) => {
   const [activeHeadingId, setActiveHeadingId] = useState(headingNodes?.[0]?.id);
 
-  // Create array to keep track of all headings and if they are currently seen within the viewport.
-  // The order of the headings matter.
-  const headingsMemo = useMemo(() => headingNodes.map(({ id }) => ({ id, isInViewport: false })), [headingNodes]);
+  // Create map to keep track of all headings and if they are currently seen within the viewport.
+  const headingsMap = useMemo(() => {
+    const map = new Map();
+    headingNodes.forEach(({ id }) => {
+      map.set(id, false);
+    });
+    return map;
+  }, [headingNodes]);
   const targetRatio = intersectionRatio >= 0 ? intersectionRatio : 0;
 
   useEffect(() => {
@@ -32,17 +37,19 @@ const useActiveHeading = (headingNodes, intersectionRatio) => {
 
     const callback = (entries) => {
       for (const entry of entries) {
-        const heading = headingsMemo.find(({ id }) => id === entry.target.id);
-        if (!heading) {
+        if (!headingsMap.has(entry.target.id)) {
           continue;
         }
-        heading.isInViewport = entry.intersectionRatio > targetRatio;
+        headingsMap.set(entry.target.id, entry.intersectionRatio > targetRatio);
       }
 
       // Find first heading that is in the viewport
-      const headingInViewport = headingsMemo.find(({ isInViewport }) => isInViewport);
-      if (headingInViewport?.isInViewport) {
-        setActiveHeadingId(headingInViewport.id);
+      for (const entry of headingsMap) {
+        const [id, isInViewport] = entry;
+        if (isInViewport) {
+          setActiveHeadingId(id);
+          break;
+        }
       }
     };
 
@@ -51,7 +58,7 @@ const useActiveHeading = (headingNodes, intersectionRatio) => {
     return () => {
       unobserveHeadings(headings, observer);
     };
-  }, [headingNodes, headingsMemo, targetRatio]);
+  }, [headingNodes, headingsMap, targetRatio]);
 
   return activeHeadingId;
 };
