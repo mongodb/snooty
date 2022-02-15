@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -20,7 +20,6 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
-import useScreenSize from '../../hooks/useScreenSize';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -33,8 +32,8 @@ const SIDENAV_WIDTH = 268;
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
   height: 100%;
 
-  // Mobile sidenav
-  @media ${theme.screenSize.upToSmall} {
+  // Mobile & Tablet nav
+  @media ${theme.screenSize.upToLarge} {
     ${hideMobile && 'display: none;'}
 
     button[data-testid="side-nav-collapse-toggle"] {
@@ -118,12 +117,6 @@ const SidenavContainer = styled.div(
       ${getTopAndHeight(topMedium)};
     }
 
-    // Since we want the SideNav to open on top of the content on medium screen size,
-    // keep a width as a placeholder for the collapsed SideNav while its position is absolute
-    @media ${theme.screenSize.tablet} {
-      width: 48px;
-    }
-
     @media ${theme.screenSize.upToSmall} {
       ${getTopAndHeight(topSmall)};
     }
@@ -172,10 +165,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
-  const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
-  const isMobile = viewportSize?.width <= 420;
-  const showContentOverlay = isTablet && !isCollapsed;
+  const isMobile = viewportSize?.width <= theme.breakpoints.large;
+  const showContentOverlay = false;
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues();
@@ -189,10 +181,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
   const template = page?.options?.template;
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
-
-  useEffect(() => {
-    setCollapsed(!!isTablet);
-  }, [isTablet, setCollapsed]);
 
   const handleOverlayClick = useCallback(() => {
     setCollapsed(true);
