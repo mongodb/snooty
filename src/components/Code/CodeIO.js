@@ -19,11 +19,19 @@ const outputButtonStyling = LeafyCss`
 `;
 
 const CodeIO = ({ nodeData: { children }, ...rest }) => {
-  const [showOutput, setShowOutput] = useState(false);
-  const [buttonText, setButtonText] = useState('VIEW OUTPUT');
-  const [arrow, setArrow] = useState('ChevronDown');
   const needsIOToggle = children.length === 2;
   const onlyInputSpecified = children.length === 1;
+
+  let initialOutputVisibility = true;
+  if (needsIOToggle && children[1]?.options?.visible !== undefined) {
+    initialOutputVisibility = !!children[1]?.options?.visible;
+  }
+  const initialButtonText = initialOutputVisibility ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
+  const initialArrow = initialOutputVisibility ? 'ChevronUp' : 'ChevronDown';
+
+  const [showOutput, setShowOutput] = useState(initialOutputVisibility);
+  const [buttonText, setButtonText] = useState(initialButtonText);
+  const [arrow, setArrow] = useState(initialArrow);
   const outputBorderRadius = !showOutput ? theme.size.tiny : '0px';
   const singleInputBorderRadius = onlyInputSpecified ? theme.size.tiny : '0px';
 
