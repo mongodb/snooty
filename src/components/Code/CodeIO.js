@@ -24,7 +24,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 
   let initialOutputVisibility = true;
   if (needsIOToggle && children[1]?.options?.visible !== undefined) {
-    initialOutputVisibility = !!children[1]?.options?.visible;
+    initialOutputVisibility = !!children[1].options.visible;
   }
   const initialButtonText = initialOutputVisibility ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
   const initialArrow = initialOutputVisibility ? 'ChevronUp' : 'ChevronDown';
