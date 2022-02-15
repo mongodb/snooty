@@ -65,7 +65,7 @@ exports[`card correctly with and without url 1`] = `
   }
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-32 {
     grid-column-gap: 16px;
     grid-template-columns: 'auto';
@@ -113,7 +113,7 @@ exports[`card correctly with and without url 1`] = `
   margin-left: 24px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-16 {
     margin-left: 16px;
   }

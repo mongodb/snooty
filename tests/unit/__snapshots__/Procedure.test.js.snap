@@ -8,7 +8,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-16 {
     padding-bottom: 24px;
   }
@@ -76,7 +76,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-4 {
     padding-bottom: 32px;
   }
