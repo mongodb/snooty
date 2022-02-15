@@ -44,6 +44,7 @@ exports[`renders correctly with a directive_argument node 1`] = `
 .emotion-6 {
   margin-top: -150px;
   position: absolute;
+  padding-bottom: 2px;
 }
 
 <dl
