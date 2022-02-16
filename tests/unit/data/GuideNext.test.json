@@ -1,0 +1,77 @@
+{
+  "noContent": {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 118
+      }
+    },
+    "children": [],
+    "domain": "mongodb",
+    "name": "guide-next",
+    "argument": []
+  },
+  "customContent": {
+    "type": "directive",
+    "position": {
+      "start": {
+        "line": 118
+      }
+    },
+    "children": [
+      {
+        "type": "paragraph",
+        "position": {
+          "start": {
+            "line": 120
+          }
+        },
+        "children": [{
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 120
+            }
+          },
+          "value": "Hello this is my custom content. Description here!"
+        }]
+      }, 
+      {
+        "type": "directive",
+        "position": {
+          "start": {
+            "line": 122
+          }
+        },
+        "children": [],
+        "domain": "mongodb",
+        "name": "button",
+        "argument": [
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 122
+              }
+            },
+            "value": "Click This"
+          }
+        ],
+        "options": {
+          "uri": "https://mongodb.com/"
+        }
+      }
+    ],
+    "domain": "mongodb",
+    "name": "guide-next",
+    "argument": [{
+      "type": "text",
+      "position": {
+        "start": {
+          "line": 118
+        }
+      },
+      "value": "Custom title with content and button"
+    }]
+  }
+}

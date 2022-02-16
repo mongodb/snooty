@@ -12,7 +12,7 @@ const Button = ({
   ...rest
 }) => {
   return (
-    <LeafyButton className="button" as={Link} variant="primary" to={uri}>
+    <LeafyButton baseFontSize={16} className="button" as={Link} variant="primary" to={uri}>
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}

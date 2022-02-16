@@ -9,6 +9,7 @@ import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import { theme } from '../../theme/docsTheme';
 
 const cardStyling = css`
+  margin-top: 40px;
   padding: 40px ${theme.size.medium};
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -19,6 +20,7 @@ const cardStyling = css`
     flex-basis: 0;
     flex-grow: 1;
     min-width: 300px;
+    margin-top: 0;
     max-width: 510px;
   }
 `;
@@ -63,7 +65,7 @@ const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }) => {
 ChapterInfo.propTypes = {
   chapterData: PropTypes.array.isRequired,
   guidesMetadata: PropTypes.object.isRequired,
-  targetSlug: PropTypes.string.isRequired,
+  targetSlug: PropTypes.string,
 };
 
 export default ChapterInfo;
