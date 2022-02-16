@@ -174,10 +174,8 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   const slugFromParserBranch = (parserBranch, branches) => {
     let slug = parserBranch;
     for (let branch of branches) {
-      let optionValue = setOptionSlug(branch);
-      if (optionValue !== parserBranch) {
-        slug = optionValue;
-        break;
+      if (branch.gitBranchName === parserBranch) {
+        return setOptionSlug(branch);
       }
     }
     return slug;
