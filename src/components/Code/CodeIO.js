@@ -26,24 +26,17 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   if (needsIOToggle && children[1]?.options?.visible !== undefined) {
     initialOutputVisibility = !!children[1].options.visible;
   }
-  const initialButtonText = initialOutputVisibility ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
-  const initialArrow = initialOutputVisibility ? 'ChevronUp' : 'ChevronDown';
-
   const [showOutput, setShowOutput] = useState(initialOutputVisibility);
-  const [buttonText, setButtonText] = useState(initialButtonText);
-  const [arrow, setArrow] = useState(initialArrow);
+  const buttonText = showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
+  const arrow = showOutput ? 'ChevronUp' : 'ChevronDown';
   const outputBorderRadius = !showOutput ? theme.size.tiny : '0px';
   const singleInputBorderRadius = onlyInputSpecified ? theme.size.tiny : '0px';
 
   const handleClick = (e) => {
     if (showOutput) {
       setShowOutput(false);
-      setButtonText('VIEW OUTPUT');
-      setArrow('ChevronDown');
     } else {
       setShowOutput(true);
-      setButtonText('HIDE OUTPUT');
-      setArrow('ChevronUp');
     }
   };
 
