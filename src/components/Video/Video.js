@@ -47,8 +47,8 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
         width="100%"
         height="100%"
         playing
-        playIcon={<VideoPlayButton play />}
-        light={<VideoPlayButton play />}
+        playIcon={<VideoPlayButton />}
+        light={<VideoPlayButton />}
       />
     </ReactPlayerWrapper>
   );

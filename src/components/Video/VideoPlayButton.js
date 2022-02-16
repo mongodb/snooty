@@ -31,7 +31,7 @@ const playButtonBorderStyling = css`
   }
 `;
 
-const VideoPlayButton = ({ children, href, play, to, hasArrow = true, ...props }) => {
+const VideoPlayButton = () => {
   return (
     <div css={playButtonBorderStyling}>
       <StyledButton>
