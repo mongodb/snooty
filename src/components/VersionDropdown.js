@@ -87,9 +87,9 @@ const getBranch = (branchName = '', branches = []) => {
 
 const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
-  const slug = branch['urlSlug'] || branch['gitBranchName'];
+  const key = branch['gitBranchName'];
   return (
-    <Option key={slug} value={slug}>
+    <Option key={key} value={key}>
       {UIlabel}
     </Option>
   );
