@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 const observeHeadings = (headingNodes, observer) =>
   headingNodes.flatMap((heading) => {
@@ -16,22 +16,26 @@ const unobserveHeadings = (headings, observer) => {
   });
 };
 
-// Returns the id of the first (topmost) heading that is in the viewport.
+/**
+ * Returns the id of the first (topmost) heading that is in the viewport.
+ * @param headingNodes An array of headings nodes to be observed. Headings are typically
+ * expected to be AST nodes or objects with an id field.
+ * @param intersectionRatio The ratio to compare element intersection visibility with. If the element
+ * is observed to be above this ratio, it will be eligible as active.
+ */
 const useActiveHeading = (headingNodes, intersectionRatio) => {
   const [activeHeadingId, setActiveHeadingId] = useState(headingNodes?.[0]?.id);
 
-  // Create map to keep track of all headings and if they are currently seen within the viewport.
-  const headingsMap = useMemo(() => {
-    const map = new Map();
-    headingNodes.forEach(({ id }) => {
-      map.set(id, false);
-    });
-    return map;
-  }, [headingNodes]);
-  const targetRatio = intersectionRatio >= 0 ? intersectionRatio : 0;
-
   useEffect(() => {
+    // Create map to keep track of all headings and if they are currently seen within the viewport.
+    const headingsMap = new Map();
+    headingNodes.forEach(({ id }) => {
+      headingsMap.set(id, false);
+    });
+    const targetRatio = intersectionRatio >= 0 ? intersectionRatio : 0;
+
     const options = {
+      // Check elements after every 25% of visibility, if possible
       threshold: [0, 0.25, 0.5, 0.75, 1.0],
     };
 
@@ -58,7 +62,7 @@ const useActiveHeading = (headingNodes, intersectionRatio) => {
     return () => {
       unobserveHeadings(headings, observer);
     };
-  }, [headingNodes, headingsMap, targetRatio]);
+  }, [headingNodes, intersectionRatio]);
 
   return activeHeadingId;
 };
