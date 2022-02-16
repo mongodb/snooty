@@ -85,9 +85,13 @@ const getBranch = (branchName = '', branches = []) => {
   return branchCandidates?.[0] || null;
 };
 
+const setOptionSlug = (branch) => {
+  return branch['urlSlug'] || branch['gitBranchName'];
+};
+
 const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
-  const slug = branch['urlSlug'] || branch['gitBranchName'];
+  const slug = setOptionSlug(branch);
   return (
     <Option key={slug} value={slug}>
       {UIlabel}
@@ -170,13 +174,12 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   const slugFromParserBranch = (parserBranch, branches) => {
     let slug = parserBranch;
     for (let branch of branches) {
-      const slugDiff = branch.gitBranchName === parserBranch && branch.urlSlug !== parserBranch;
-      if (slugDiff) {
-        slug = branch.urlSlug;
+      let optionValue = setOptionSlug(branch);
+      if (optionValue !== parserBranch) {
+        slug = optionValue;
         break;
       }
     }
-
     return slug;
   };
 
