@@ -96,6 +96,10 @@ GuideNext.propTypes = {
     chapters: PropTypes.object.isRequired,
     guides: PropTypes.object.isRequired,
   }).isRequired,
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
   slug: PropTypes.string.isRequired,
 };
 
