@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { cx } from '@leafygreen-ui/emotion';
+import { cx, css } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
+import { uiColors } from '@leafygreen-ui/palette';
+import Icon from '@leafygreen-ui/icon';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
@@ -12,6 +14,19 @@ import SyncCloud from '../SyncCloud';
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
 const BASE_NODE_LEVEL = 1;
+
+const caretStyle = css`
+  margin-top: 3px;
+  margin-right: 5px;
+  min-width: 16px;
+`;
+
+const sideNavStyle = (level, hasChildren) => css`
+  ${sideNavItemTOCStyling({ level })}
+  > div {
+    margin-left: ${hasChildren ? '0px' : '20px'};
+  }
+`;
 
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
@@ -41,15 +56,19 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
     const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
 
+    const iconType = isOpen ? 'CaretDown' : 'CaretRight';
+
     if (isDrawer && hasChildren) {
       return (
         <SideNavItem
-          className={cx(sideNavItemTOCStyling({ level }))}
+          className={cx(sideNavStyle(level, hasChildren))}
           onClick={() => {
+            console.log(isDrawer);
             setIsOpen(!isOpen);
           }}
         >
           {isTocIcon && <SyncCloud />}
+          {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
           {formattedTitle}
         </SideNavItem>
       );
@@ -59,10 +78,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         as={Link}
         to={target}
         active={isSelected}
-        className={cx(sideNavItemTOCStyling({ level }))}
+        className={cx(sideNavStyle(level, hasChildren))}
         onClick={handleClick}
       >
         {isTocIcon && <SyncCloud />}
+        {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
         {formattedTitle}
       </SideNavItem>
     );

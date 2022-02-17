@@ -37,6 +37,15 @@ describe('Toctree', () => {
     expect(wrapper.getByText('Introduction for Mobile Developers')).toBeTruthy();
   });
 
+  it('clicking on a drawer changes carat arrow', async () => {
+    const wrapper = mountToctree('/');
+    const parentDrawer = wrapper.queryAllByRole('button');
+    expect(wrapper.getAllByRole('img')[0]).toHaveAttribute('aria-label', 'Caret Right Icon');
+    userEvent.click(parentDrawer[0]);
+    await tick();
+    expect(wrapper.getAllByRole('img')[0]).toHaveAttribute('aria-label', 'Caret Down Icon');
+  });
+
   it('correct item set as active based off current page', () => {
     const wrapper = render(<Toctree slug={'/'} toctree={mockData?.toctree} />);
     const testActivePage = (testPage, testText) => {
