@@ -72,6 +72,7 @@ import Topic from './Topic';
 import Transition from './Transition';
 import Twitter from './Twitter';
 import VersionModified from './VersionModified';
+import Video from './Video/Video';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -199,6 +200,7 @@ const componentMap = {
   twitter: Twitter,
   versionadded: VersionModified,
   versionchanged: VersionModified,
+  video: Video,
 };
 
 const ComponentFactory = (props) => {
