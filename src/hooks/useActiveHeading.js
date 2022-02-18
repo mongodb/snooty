@@ -18,21 +18,23 @@ const unobserveHeadings = (headings, observer) => {
 
 /**
  * Returns the id of the first (topmost) heading that is in the viewport.
- * @param headingNodes An array of headings nodes to be observed. Headings are typically
+ * @param {object[]} headingNodes An array of headings nodes to be observed. Headings are typically
  * expected to be AST nodes or objects with an id field.
- * @param intersectionRatio The ratio to compare element intersection visibility with. If the element
+ * @param {number} intersectionRatio The ratio to compare element intersection visibility with. If the element
  * is observed to be above this ratio, it will be eligible as active.
  */
 const useActiveHeading = (headingNodes, intersectionRatio) => {
   const [activeHeadingId, setActiveHeadingId] = useState(headingNodes?.[0]?.id);
 
   useEffect(() => {
-    // Create map to keep track of all headings and if they are currently seen within the viewport.
-    const headingsMap = new Map();
-    headingNodes.forEach(({ id }) => {
-      headingsMap.set(id, false);
+    // Map indexes/order of headings to their ids
+    // to avoid having to find it for each active heading id later
+    const headingsIndexMap = {};
+    headingNodes.forEach(({ id }, index) => {
+      headingsIndexMap[id] = index;
     });
     const targetRatio = intersectionRatio >= 0 ? intersectionRatio : 0;
+    const headingsInViewport = new Set();
 
     const options = {
       // Check elements after every 25% of visibility, if possible
@@ -41,19 +43,27 @@ const useActiveHeading = (headingNodes, intersectionRatio) => {
 
     const callback = (entries) => {
       for (const entry of entries) {
-        if (!headingsMap.has(entry.target.id)) {
-          continue;
+        if (entry.intersectionRatio > targetRatio) {
+          headingsInViewport.add(entry.target.id);
+        } else {
+          headingsInViewport.delete(entry.target.id);
         }
-        headingsMap.set(entry.target.id, entry.intersectionRatio > targetRatio);
       }
 
-      // Find first heading that is in the viewport
-      for (const entry of headingsMap) {
-        const [id, isInViewport] = entry;
-        if (isInViewport) {
-          setActiveHeadingId(id);
-          break;
+      // Track highest visible heading and its index
+      let highestVisibleHeading = [null, Number.MAX_SAFE_INTEGER];
+      // Find first/topmost heading that is in the viewport
+      for (const headingId of headingsInViewport) {
+        const currIdx = headingsIndexMap[headingId];
+        const smallestIdxSoFar = highestVisibleHeading[1];
+        if (currIdx < smallestIdxSoFar) {
+          highestVisibleHeading = [headingId, currIdx];
         }
+      }
+
+      const [newActiveHeadingId] = highestVisibleHeading;
+      if (newActiveHeadingId) {
+        setActiveHeadingId(newActiveHeadingId);
       }
     };
 
