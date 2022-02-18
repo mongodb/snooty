@@ -257,7 +257,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   const usesRST = options?.['uses-rst'];
   const usesRealm = options?.['uses-realm'];
   const { database } = useSiteMetadata();
-  const [realmSpec, setRealmSpec] = useState({});
+  const [realmSpec, setRealmSpec] = useState(null);
   const topValues = useStickyTopValues();
   let specUrl, spec, urlParams;
   const [isLoading, setIsLoading] = useState(true);
@@ -296,114 +296,116 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
       <Global styles={getGlobalCss(topValues)} />
       {/* Temporary loading widget to be removed once the Redoc component loads */}
       {isLoading && <LoadingWidget className={tempLoadingDivClassName} />}
-      <RedocStandalone
-        onLoaded={() => {
-          setIsLoading(false);
-          const menuTest = document.querySelector(`.${menuTitleContainerClass}`);
-          if (menuTest) {
-            return;
-          }
-          // Insert back button and page title to redoc's sidenav
-          const sidebarEl = document.querySelector(`.${menuContentClass}`);
-          if (sidebarEl) {
-            const searchEl = document.querySelector('div[role="search"]');
-            if (searchEl) {
-              const menuTitleContainerEl = document.createElement('div');
-              menuTitleContainerEl.className = menuTitleContainerClass;
-              sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
-              const pageTitle = page?.options?.title || '';
-              const siteTitle = metadata?.title;
-              render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
+      {(specUrl || spec) && (
+        <RedocStandalone
+          onLoaded={() => {
+            setIsLoading(false);
+            const menuTest = document.querySelector(`.${menuTitleContainerClass}`);
+            if (menuTest) {
+              return;
             }
-          }
-        }}
-        options={{
-          hideLoading: true,
-          maxDisplayedEnumValues: 5,
-          theme: {
-            breakpoints: {
-              small: '768px',
-              medium: '1024px',
-              large: '1200px',
-            },
-            codeBlock: {
-              backgroundColor: uiColors.black,
-            },
-            colors: {
-              error: {
-                main: uiColors.red.dark1,
+            // Insert back button and page title to redoc's sidenav
+            const sidebarEl = document.querySelector(`.${menuContentClass}`);
+            if (sidebarEl) {
+              const searchEl = document.querySelector('div[role="search"]');
+              if (searchEl) {
+                const menuTitleContainerEl = document.createElement('div');
+                menuTitleContainerEl.className = menuTitleContainerClass;
+                sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
+                const pageTitle = page?.options?.title || '';
+                const siteTitle = metadata?.title;
+                render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
+              }
+            }
+          }}
+          options={{
+            hideLoading: true,
+            maxDisplayedEnumValues: 5,
+            theme: {
+              breakpoints: {
+                small: '768px',
+                medium: '1024px',
+                large: '1200px',
               },
-              // Only applies to background color; color and border color touched by css
-              http: {
-                get: uiColors.blue.light3,
-                post: uiColors.green.light3,
-                put: uiColors.yellow.light3,
-                patch: uiColors.yellow.light3,
-                delete: uiColors.red.light3,
+              codeBlock: {
+                backgroundColor: uiColors.black,
               },
-              primary: {
-                main: uiColors.gray.dark3,
-              },
-              responses: {
-                success: {
-                  color: uiColors.green.dark1,
-                  backgroundColor: uiColors.green.light3,
-                  tabTextColor: uiColors.green.base,
-                },
+              colors: {
                 error: {
-                  color: uiColors.red.dark1,
-                  backgroundColor: uiColors.red.light3,
-                  tabTextColor: uiColors.red.base,
+                  main: uiColors.red.dark1,
+                },
+                // Only applies to background color; color and border color touched by css
+                http: {
+                  get: uiColors.blue.light3,
+                  post: uiColors.green.light3,
+                  put: uiColors.yellow.light3,
+                  patch: uiColors.yellow.light3,
+                  delete: uiColors.red.light3,
+                },
+                primary: {
+                  main: uiColors.gray.dark3,
+                },
+                responses: {
+                  success: {
+                    color: uiColors.green.dark1,
+                    backgroundColor: uiColors.green.light3,
+                    tabTextColor: uiColors.green.base,
+                  },
+                  error: {
+                    color: uiColors.red.dark1,
+                    backgroundColor: uiColors.red.light3,
+                    tabTextColor: uiColors.red.base,
+                  },
+                },
+                text: {
+                  primary: uiColors.gray.dark3,
+                },
+                warning: {
+                  main: uiColors.yellow.light3,
+                  contrastText: uiColors.yellow.dark2,
                 },
               },
-              text: {
-                primary: uiColors.gray.dark3,
+              rightPanel: {
+                backgroundColor: uiColors.gray.dark3,
               },
-              warning: {
-                main: uiColors.yellow.light3,
-                contrastText: uiColors.yellow.dark2,
+              schema: {
+                requireLabelColor: uiColors.red.base,
               },
-            },
-            rightPanel: {
-              backgroundColor: uiColors.gray.dark3,
-            },
-            schema: {
-              requireLabelColor: uiColors.red.base,
-            },
-            sidebar: {
-              activeTextColor: `${uiColors.green.dark3} !important`,
-              backgroundColor: uiColors.gray.light3,
-              textColor: uiColors.gray.dark3,
-              width: '268px',
-            },
-            spacing: {
-              unit: 4,
-              sectionVertical: 16,
-            },
-            typography: {
-              fontSize: theme.fontSize.default,
-              fontFamily: textFontFamily,
-              headings: {
+              sidebar: {
+                activeTextColor: `${uiColors.green.dark3} !important`,
+                backgroundColor: uiColors.gray.light3,
+                textColor: uiColors.gray.dark3,
+                width: '268px',
+              },
+              spacing: {
+                unit: 4,
+                sectionVertical: 16,
+              },
+              typography: {
+                fontSize: theme.fontSize.default,
                 fontFamily: textFontFamily,
-              },
-              code: {
-                backgroundColor: inlineCodeBackgroundColor,
-                color: uiColors.black,
-                fontFamily: codeFontFamily,
-                fontSize: theme.fontSize.small,
-              },
-              links: {
-                color: uiColors.blue.base,
-                hover: uiColors.blue.dark2,
-                visited: uiColors.blue.base,
+                headings: {
+                  fontFamily: textFontFamily,
+                },
+                code: {
+                  backgroundColor: inlineCodeBackgroundColor,
+                  color: uiColors.black,
+                  fontFamily: codeFontFamily,
+                  fontSize: theme.fontSize.small,
+                },
+                links: {
+                  color: uiColors.blue.base,
+                  hover: uiColors.blue.dark2,
+                  visited: uiColors.blue.base,
+                },
               },
             },
-          },
-          untrustedDefinition: !!specUrl,
-        }}
-        spec={spec}
-        specUrl={specUrl}
-      />
+            untrustedDefinition: !!specUrl,
+          }}
+          spec={spec}
+          specUrl={specUrl}
+        />
+      )}
     </>
   );
 };
