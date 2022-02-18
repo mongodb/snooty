@@ -85,9 +85,13 @@ const getBranch = (branchName = '', branches = []) => {
   return branchCandidates?.[0] || null;
 };
 
+const setOptionSlug = (branch) => {
+  return branch['urlSlug'] || branch['gitBranchName'];
+};
+
 const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
-  const slug = branch['urlSlug'] || branch['gitBranchName'];
+  const slug = setOptionSlug(branch);
   return (
     <Option key={slug} value={slug}>
       {UIlabel}
@@ -165,6 +169,18 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
 
   const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
 
+  // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
+  // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
+  const slugFromParserBranch = (parserBranch, branches) => {
+    let slug = parserBranch;
+    for (let branch of branches) {
+      if (branch.gitBranchName === parserBranch) {
+        return setOptionSlug(branch);
+      }
+    }
+    return slug;
+  };
+
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
   // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
   // OR have the OptionGroup not take up space when a label is empty-string. For now,
@@ -178,7 +194,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       placeholder={'Select a version'}
       popoverZIndex={3}
       size={Size.Large}
-      value={parserBranch}
+      value={slugFromParserBranch(parserBranch, branches)}
       usePortal={false}
     >
       {activeUngroupedBranches?.map((b) => createOption(b))}
