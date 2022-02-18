@@ -257,7 +257,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   const usesRST = options?.['uses-rst'];
   const usesRealm = options?.['uses-realm'];
   const { database } = useSiteMetadata();
-  const [realmSpec, setRealmSpec] = useState(null);
+  const [realmSpec, setRealmSpec] = useState({});
   const topValues = useStickyTopValues();
   let specUrl, spec, urlParams;
   const [isLoading, setIsLoading] = useState(true);
