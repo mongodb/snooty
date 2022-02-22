@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Step from './Step';
-import { theme } from '../theme/docsTheme';
+import { theme } from '../../theme/docsTheme';
 
 const StyledProcedure = styled('div')`
   ${({ procedureStyle }) =>
