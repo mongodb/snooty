@@ -48,7 +48,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   -ms-transform: translateY(1px);
   transform: translateY(1px);
   height: 36px;
-  margin-bottom: 40px;
 }
 
 .emotion-6:focus {
@@ -114,6 +113,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
   color: #21313C;
+  margin-top: 40px;
   padding: 40px 24px;
 }
 
@@ -133,12 +133,14 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
     -ms-flex-positive: 1;
     flex-grow: 1;
     min-width: 300px;
+    margin-top: 0;
     max-width: 510px;
   }
 }
 
 .emotion-26 {
   border-top: 1px solid #E7EEEC;
+  margin-bottom: 24px;
   padding-top: 56px;
 }
 
@@ -173,8 +175,8 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-0 {
-  color: #5D6C74 !important;
-  font-size: 16px !important;
+  color: #5D6C74;
+  font-size: 16px;
   margin-bottom: 16px;
 }
 
@@ -417,7 +419,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   -ms-transform: translateY(1px);
   transform: translateY(1px);
   height: 36px;
-  margin-bottom: 40px;
 }
 
 .emotion-6:focus {
@@ -483,6 +484,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
   color: #21313C;
+  margin-top: 40px;
   padding: 40px 24px;
 }
 
@@ -502,12 +504,14 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
     -ms-flex-positive: 1;
     flex-grow: 1;
     min-width: 300px;
+    margin-top: 0;
     max-width: 510px;
   }
 }
 
 .emotion-26 {
   border-top: 1px solid #E7EEEC;
+  margin-bottom: 24px;
   padding-top: 56px;
 }
 
@@ -542,8 +546,8 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-0 {
-  color: #5D6C74 !important;
-  font-size: 16px !important;
+  color: #5D6C74;
+  font-size: 16px;
   margin-bottom: 16px;
 }
 
@@ -786,7 +790,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   -ms-transform: translateY(1px);
   transform: translateY(1px);
   height: 36px;
-  margin-bottom: 40px;
 }
 
 .emotion-6:focus {
@@ -852,6 +855,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
   color: #21313C;
+  margin-top: 40px;
   padding: 40px 24px;
 }
 
@@ -871,12 +875,14 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
     -ms-flex-positive: 1;
     flex-grow: 1;
     min-width: 300px;
+    margin-top: 0;
     max-width: 510px;
   }
 }
 
 .emotion-40 {
   border-top: 1px solid #E7EEEC;
+  margin-bottom: 24px;
   padding-top: 56px;
 }
 
@@ -911,8 +917,8 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-0 {
-  color: #5D6C74 !important;
-  font-size: 16px !important;
+  color: #5D6C74;
+  font-size: 16px;
   margin-bottom: 16px;
 }
 
