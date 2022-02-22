@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { cx, css as LeafyCss } from '@leafygreen-ui/emotion';
+import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/core';
@@ -10,7 +10,7 @@ import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 import Input from '../Code/Input';
 import Output from '../Code/Output';
 
-const outputButtonStyling = LeafyCss`
+const outputButtonStyling = LeafyCSS`
   padding: 0px;
   font-size: ${theme.fontSize.tiny};
   height: 24px;

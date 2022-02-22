@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { cx, css } from '@leafygreen-ui/emotion';
+import { css } from '@emotion/core';
+import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { uiColors } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
@@ -15,16 +16,10 @@ import SyncCloud from '../SyncCloud';
 // with recursive depth
 const BASE_NODE_LEVEL = 1;
 
-const caretStyle = css`
+const caretStyle = LeafyCSS`
   margin-top: 3px;
   margin-right: 5px;
   min-width: 16px;
-`;
-
-const sideNavStyle = (hasChildren, isTocIcon) => css`
-  > div {
-    margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
-  }
 `;
 
 /**
@@ -53,14 +48,22 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       literalEnableInline: true,
     };
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
-    const formattedTitle = <div>{formatText(title, formatTextOptions)}</div>;
+    const formattedTitle = (
+      <div
+        css={css`
+          margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
+        `}
+      >
+        {formatText(title, formatTextOptions)}
+      </div>
+    );
 
     const iconType = isOpen ? 'CaretDown' : 'CaretRight';
 
     if (isDrawer && hasChildren) {
       return (
         <SideNavItem
-          className={cx(sideNavStyle(hasChildren, isTocIcon), sideNavItemTOCStyling({ level }))}
+          className={cx(sideNavItemTOCStyling({ level }))}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
@@ -76,7 +79,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         as={Link}
         to={target}
         active={isSelected}
-        className={cx(sideNavStyle(hasChildren, isTocIcon), sideNavItemTOCStyling({ level }))}
+        className={cx(sideNavItemTOCStyling({ level }))}
         onClick={handleClick}
       >
         {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
