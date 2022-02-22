@@ -210,6 +210,7 @@ exports[`renders steps nested in include nodes 1`] = `
 .emotion-7 {
   margin-top: -175px;
   position: absolute;
+  padding-bottom: 2px;
 }
 
 <div
