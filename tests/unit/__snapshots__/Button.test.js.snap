@@ -39,7 +39,10 @@ exports[`renders correctly 1`] = `
   background-color: #09804C;
   box-shadow: 0px 2px 3px rgba(19,170,82,0.4);
   color: #FFFFFF;
-  font-size: 14px;
+  font-size: 16px;
+  -webkit-transform: translateY(1px);
+  -ms-transform: translateY(1px);
+  transform: translateY(1px);
   height: 36px;
 }
 

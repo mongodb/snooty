@@ -21,7 +21,12 @@ jest.mock('../../src/utils/realm', () => ({
 
 jest.mock('redoc', () => {
   return {
-    RedocStandalone: () => <div>Redoc Mock</div>,
+    RedocStandalone: (props) => (
+      <div>
+        <span>Redoc Mock</span>
+        <span>{props.specUrl}</span>
+      </div>
+    ),
   };
 });
 
@@ -83,5 +88,21 @@ describe('OpenAPI', () => {
     expect(
       wrapper.getByText('{"openapi":"3.0.0","info":{"version":"1.0.5","title":"Swagger Petstore"},"paths":{}}')
     ).toBeTruthy();
+  });
+
+  it('passes `src` param into the specUrl prop for the Redoc standalone component', () => {
+    global.window = Object.create(window);
+    Object.defineProperty(window, 'location', {
+      value: {
+        search: `?src=this_is_a_test_url`,
+      },
+      writable: true,
+    });
+
+    const wrapper = shallowRender({
+      nodeValue: mockNodeValue,
+    });
+
+    expect(wrapper.getByText('this_is_a_test_url')).toBeTruthy();
   });
 });

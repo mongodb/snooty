@@ -27,7 +27,7 @@ const GuidesList = ({ guidesMetadata, guideSlugs, targetSlug }) => {
 GuidesList.propTypes = {
   guidesMetadata: PropTypes.object.isRequired,
   guideSlugs: PropTypes.array.isRequired,
-  targetSlug: PropTypes.string.isRequired,
+  targetSlug: PropTypes.string,
 };
 
 export default GuidesList;

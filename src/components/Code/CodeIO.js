@@ -19,23 +19,24 @@ const outputButtonStyling = LeafyCss`
 `;
 
 const CodeIO = ({ nodeData: { children }, ...rest }) => {
-  const [showOutput, setShowOutput] = useState(false);
-  const [buttonText, setButtonText] = useState('VIEW OUTPUT');
-  const [arrow, setArrow] = useState('ChevronDown');
   const needsIOToggle = children.length === 2;
   const onlyInputSpecified = children.length === 1;
+
+  let initialOutputVisibility = true;
+  if (needsIOToggle && children[1]?.options?.visible !== undefined) {
+    initialOutputVisibility = !!children[1].options.visible;
+  }
+  const [showOutput, setShowOutput] = useState(initialOutputVisibility);
+  const buttonText = showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
+  const arrow = showOutput ? 'ChevronUp' : 'ChevronDown';
   const outputBorderRadius = !showOutput ? theme.size.tiny : '0px';
   const singleInputBorderRadius = onlyInputSpecified ? theme.size.tiny : '0px';
 
   const handleClick = (e) => {
     if (showOutput) {
       setShowOutput(false);
-      setButtonText('VIEW OUTPUT');
-      setArrow('ChevronDown');
     } else {
       setShowOutput(true);
-      setButtonText('HIDE OUTPUT');
-      setArrow('ChevronUp');
     }
   };
 
