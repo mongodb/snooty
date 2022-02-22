@@ -64,7 +64,7 @@ exports[`renders with "connected" styling 1`] = `
   }
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-4 {
     padding-bottom: 32px;
   }
@@ -164,7 +164,7 @@ exports[`renders with "connected" styling by default 1`] = `
   }
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-4 {
     padding-bottom: 32px;
   }

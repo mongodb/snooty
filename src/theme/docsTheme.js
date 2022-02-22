@@ -31,26 +31,41 @@ const size = {
     return parseInt(unit, 10);
   },
 };
+
+/**
+ * store common responsive sizes as numbers
+ * @type {Object.<string, number>}
+ */
+const breakpoints = {
+  xSmall: 320,
+  small: 480,
+  medium: 767,
+  large: 1023,
+  xLarge: 1200,
+  xxLarge: 1440,
+  xxxLarge: 1920,
+};
+
 /**
  * store common responsive sizes
  * @type {Object.<string, string>}
  */
 const screenSize = {
-  upToXSmall: 'only screen and (max-width: 320px)',
-  xSmallAndUp: 'not all and (max-width: 320px)',
-  upToSmall: 'only screen and (max-width: 420px)',
-  smallAndUp: 'not all and (max-width: 420px)',
-  upToMedium: 'only screen and (max-width: 767px)',
-  mediumAndUp: 'not all and (max-width: 767px)',
-  upToLarge: 'only screen and (max-width: 1023px)',
-  largeAndUp: 'not all and (max-width: 1023px)',
-  upToXLarge: 'only screen and (max-width: 1200px)',
-  xLargeAndUp: 'not all and (max-width: 1200px)',
-  upTo2XLarge: 'only screen and (max-width: 1440px)',
-  '2XLargeAndUp': 'not all and (max-width: 1440px)',
-  upTo3XLarge: 'only screen and (max-width: 1920px)',
-  '3XLargeAndUp': 'not all and (max-width: 1920px)',
-  tablet: 'only screen and (min-width: 421px) and (max-width: 1023px)',
+  upToXSmall: `only screen and (max-width: ${breakpoints.xSmall}px)`,
+  xSmallAndUp: `not all and (max-width: ${breakpoints.xSmall}px)`,
+  upToSmall: `only screen and (max-width: ${breakpoints.small}px)`,
+  smallAndUp: `not all and (max-width: ${breakpoints.small}px)`,
+  upToMedium: `only screen and (max-width: ${breakpoints.medium}px)`,
+  mediumAndUp: `not all and (max-width: ${breakpoints.medium}px)`,
+  upToLarge: `only screen and (max-width: ${breakpoints.large}px)`,
+  largeAndUp: `not all and (max-width: ${breakpoints.large}px)`,
+  upToXLarge: `only screen and (max-width: ${breakpoints.xLarge}px)`,
+  xLargeAndUp: `not all and (max-width: ${breakpoints.xLarge}px)`,
+  upTo2XLarge: `only screen and (max-width: ${breakpoints.xxLarge}px)`,
+  '2XLargeAndUp': `not all and (max-width: ${breakpoints.xxLarge}px)`,
+  upTo3XLarge: `only screen and (max-width: ${breakpoints.xxxLarge}px)`,
+  '3XLargeAndUp': `not all and (max-width: ${breakpoints.xxxLarge}px)`,
+  tablet: `only screen and (min-width: ${breakpoints.small + 1}px) and (max-width: ${breakpoints.large}px)`,
 };
 
 const header = {
@@ -67,6 +82,7 @@ const transitionSpeed = {
 };
 
 export const theme = {
+  breakpoints,
   fontSize,
   header,
   screenSize,
