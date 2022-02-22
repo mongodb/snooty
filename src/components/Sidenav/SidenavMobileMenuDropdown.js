@@ -15,7 +15,7 @@ const Container = styled('div')`
   justify-content: space-between;
   width: 100vw;
 
-  ${displayNone.onLargerThanMobile}
+  ${displayNone.onLargerThanTablet}
 `;
 
 const Text = styled('div')`

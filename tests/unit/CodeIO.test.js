@@ -8,12 +8,20 @@ import mockData from './data/CodeIO.test.json';
 
 describe('CodeIO', () => {
   it('renders correctly', () => {
-    const wrapper = render(<CodeIO nodeData={mockData} />);
+    const wrapper = render(<CodeIO nodeData={mockData.outputVisibleByDefault} />);
     expect(wrapper.asFragment()).toMatchSnapshot();
   });
 
-  it('opens and closes output code snippet when io toggle button is clicked', () => {
-    const wrapper = render(<CodeIO nodeData={mockData} />);
+  it('closes and opens output code snippet on io button click when output is visible by default', () => {
+    const wrapper = render(<CodeIO nodeData={mockData.outputVisibleByDefault} />);
+    userEvent.click(wrapper.getByRole('button'));
+    expect(wrapper.queryAllByText('hello world')).toHaveLength(0);
+    userEvent.click(wrapper.getByRole('button'));
+    expect(wrapper.getByText('hello world')).toBeTruthy();
+  });
+
+  it('opens and closes output code snippet on io button click when output is hidden by default', () => {
+    const wrapper = render(<CodeIO nodeData={mockData.outputHiddenByDefault} />);
     userEvent.click(wrapper.getByRole('button'));
     expect(wrapper.getByText('hello world')).toBeTruthy();
     userEvent.click(wrapper.getByRole('button'));

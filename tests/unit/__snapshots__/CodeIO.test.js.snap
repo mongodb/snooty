@@ -247,7 +247,92 @@ exports[`CodeIO renders correctly 1`] = `
   vertical-align: text-top;
 }
 
+.emotion-25 {
+  border: 2px solid;
+  overflow-x: auto;
+  border-radius: 0;
+  border: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 0;
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  white-space: pre;
+  border: 0;
+  background-color: #061621;
+  color: #F9FBFA;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-25 {
+    white-space: pre-wrap;
+  }
+}
+
+@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
+  .emotion-25 {
+    white-space: pre;
+  }
+}
+
+.emotion-27 {
+  border: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-22 {
+  background-color: transparent;
+  background-image: linear-gradient(90deg,#21313C,rgba(33,49,60,0));
+  background-attachment: fixed;
+}
+
+.emotion-22 > td {
+  border-top: 1px solid #21313C;
+}
+
+.emotion-22 + tr > td {
+  border-top: 1px solid #21313C;
+}
+
+.emotion-22 + .emotion-22 > td {
+  border-top: 0;
+}
+
+.emotion-22:last-child > td {
+  border-bottom: 1px solid #21313C;
+}
+
 .emotion-20 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: right;
+  padding-left: 8px;
+  padding-right: 0;
+  color: #E7EEEC;
+}
+
+.emotion-28 {
   display: table;
   margin: 16px 0;
   min-width: 150px;
@@ -255,24 +340,24 @@ exports[`CodeIO renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-20 > div > div {
+.emotion-28 > div > div {
   width: unset;
 }
 
-.emotion-20 button > div > div {
+.emotion-28 button > div > div {
   font-size: 16px;
 }
 
-.emotion-20 > div > div {
+.emotion-28 > div > div {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
 }
 
-.emotion-20 > div {
+.emotion-28 > div {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
   margin: 0px;
 }
 
@@ -318,7 +403,7 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 <div
-    class="emotion-20"
+    class="emotion-28"
   >
     <div
       class="emotion-12"
@@ -410,14 +495,51 @@ exports[`CodeIO renders correctly 1`] = `
           >
             <path
               clip-rule="evenodd"
-              d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
+              d="M14.364 10.778a1 1 0 000-1.414l-4.95-4.95-.707-.707a1 1 0 00-1.414 0l-.707.707-4.95 4.95a1 1 0 000 1.414l.707.707a1 1 0 001.414 0L8 7.243l4.243 4.242a1 1 0 001.414 0l.707-.707z"
               fill="currentColor"
               fill-rule="evenodd"
             />
           </svg>
-          VIEW OUTPUT
+          HIDE OUTPUT
         </div>
       </button>
+    </div>
+    <div
+      class="emotion-27"
+    >
+      <div
+        class="emotion-10"
+      >
+        <pre
+          class="emotion-25"
+          tabindex="-1"
+        >
+          <code
+            class="lg-highlight-hljs-dark emotion-7 python"
+          >
+            <table
+              class="emotion-6"
+            >
+              <tbody>
+                <tr
+                  class="emotion-22"
+                >
+                  <td
+                    class="emotion-20"
+                  >
+                    1
+                  </td>
+                  <td
+                    class="emotion-4"
+                  >
+                    hello world
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </code>
+        </pre>
+      </div>
     </div>
   </div>
 </DocumentFragment>

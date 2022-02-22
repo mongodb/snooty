@@ -11,5 +11,6 @@ const mediaQuery = (size) => css`
 export const displayNone = {
   onMobile: mediaQuery(theme.screenSize.upToSmall),
   onLargerThanMobile: mediaQuery(theme.screenSize.smallAndUp),
+  onLargerThanTablet: mediaQuery(theme.screenSize.largeAndUp),
   onMobileAndTablet: mediaQuery(theme.screenSize.upToLarge),
 };

@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
-import { css, cx } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
-import { formatText } from '../../utils/format-text';
+import ConditionalWrapper from '../ConditionalWrapper';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
+import { formatText } from '../../utils/format-text';
 
 const Container = styled('div')`
   p {
@@ -20,8 +20,8 @@ const Container = styled('div')`
 `;
 
 const Heading = styled('div')`
-  color: ${uiColors.gray.dark1} !important;
-  font-size: ${theme.fontSize.default} !important;
+  color: ${uiColors.gray.dark1};
+  font-size: ${theme.fontSize.default};
   margin-bottom: ${theme.size.default};
 `;
 
@@ -30,15 +30,9 @@ const Title = styled('div')`
   font-weight: bold;
 `;
 
-const Time = styled('span')`
-  display: inline-block;
+const Time = styled('div')`
   font-size: ${theme.fontSize.small};
   font-weight: normal;
-  margin-left: ${theme.size.small};
-`;
-
-const buttonStyling = css`
-  margin-bottom: 40px;
 `;
 
 const defaultTarget = [
@@ -50,27 +44,42 @@ const defaultTarget = [
   },
 ];
 
-const Content = ({ guideData }) => {
-  const isValidGuide = !!guideData[0] && !!guideData[1];
-  const [targetSlug, targetData] = isValidGuide ? guideData : defaultTarget;
-  const buttonText = isValidGuide ? 'Start Guide' : 'Learn More';
+const Content = ({ argument, children, guideData }) => {
+  const hasCustomContent = argument?.length > 0 || children?.length > 0;
+  const hasNextGuide = !!guideData[0] && !!guideData[1];
+
+  let [buttonUrl, content] = hasNextGuide ? guideData : defaultTarget;
+  if (hasCustomContent) {
+    content = {
+      title: argument,
+      description: children,
+    };
+  }
+  const buttonText = hasNextGuide ? 'Start Guide' : 'Learn More';
 
   return (
     <Container>
       <Heading>What's Next</Heading>
       <Title>
-        {formatText(targetData.title)}
-        {!!targetData.completion_time && <Time>{targetData.completion_time} mins</Time>}
+        {formatText(content.title)}
+        {!!content.completion_time && <Time>{content.completion_time} mins</Time>}
       </Title>
-      {isValidGuide ? formatText(targetData.description) : <p>{targetData.description}</p>}
-      <Button as={Link} baseFontSize={16} className={cx(buttonStyling)} to={targetSlug} variant="primary">
-        {buttonText}
-      </Button>
+      <ConditionalWrapper condition={typeof content.description === 'string'} wrapper={(children) => <p>{children}</p>}>
+        {formatText(content.description)}
+      </ConditionalWrapper>
+      {/* We only want to show the button if argument/children are empty */}
+      {!hasCustomContent && buttonUrl && (
+        <Button as={Link} baseFontSize={16} to={buttonUrl} variant="primary">
+          {buttonText}
+        </Button>
+      )}
     </Container>
   );
 };
 
 Content.propTypes = {
+  argument: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.arrayOf(PropTypes.object),
   guideData: PropTypes.array.isRequired,
 };
 
