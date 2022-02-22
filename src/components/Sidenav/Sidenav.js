@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
-import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
+import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
@@ -29,7 +29,7 @@ import { DOCS_URL } from '../../constants';
 const SIDENAV_WIDTH = 268;
 
 // Use LG's css here to style the component without passing props
-const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
+const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   height: 100%;
 
   // Mobile & Tablet nav
@@ -70,7 +70,7 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
   }
 `;
 
-const titleStyle = LeafyCss`
+const titleStyle = LeafyCSS`
   color: ${uiColors.gray.dark3};
   font-size: ${theme.fontSize.default};
   font-weight: bold;

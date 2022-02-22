@@ -10,7 +10,7 @@ export const sideNavItemBasePadding = css`
 export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   color: ${uiColors.gray.dark3};
   padding-bottom: ${theme.size.small};
-  padding-left: calc(${theme.size.small} + (${level} * ${theme.size.default}));
+  padding-left: calc(${theme.size.tiny} + (${level} * ${theme.size.default}));
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.small};
   text-transform: none;
