@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack')
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { initStitch } = require('./src/utils/setup/init-stitch');
 const { isDotCom, dotcomifyUrl } = require('./src/utils/dotcom');
@@ -142,7 +143,8 @@ exports.createPages = async ({ actions }) => {
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html') {
+  // Set ssr excepted modules
+  if (stage === 'build-html' || stage === 'develop-html') {
     actions.setWebpackConfig({
       module: {
         rules: [
@@ -150,16 +152,37 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
             test: /mongodb-stitch-browser-sdk/,
             use: loaders.null(),
           },
+          {
+            test: /redoc/,
+            use: loaders.null(),
+          },
         ],
       },
-      resolve: {
-        fallback: { "tty": require.resolve("tty-browserify") },
-        fallback: { "stream": require.resolve("stream-browserify") },
-        fallback: { "path": require.resolve("path-browserify") },
-        fallback: { "os": require.resolve("os-browserify/browser") },
-      }
     });
   }
+
+  // Set polyfills (see Webpack 4 > 5 behavior, specifically exclusion of polyfills)
+  actions.setWebpackConfig({
+    resolve: {
+      fallback: { 
+        tty: require.resolve("tty-browserify"),
+        stream: require.resolve("stream-browserify"),
+        path: require.resolve("path-browserify"),
+        os: require.resolve("os-browserify/browser"),
+        crypto: require.resolve("crypto-browserify"),
+        process: require.resolve("process/browser"),
+      },
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        Buffer: ["buffer", "Buffer"],
+      }),
+      new webpack.ProvidePlugin({
+        process: 'process'
+      }),
+    ]
+  })
+
 };
 
 // Remove type inference, as our schema is too ambiguous for this to be useful.
