@@ -13,12 +13,16 @@ import useStickyTopValues from '../hooks/useStickyTopValues';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { getPlaintext } from '../utils/get-plaintext';
-import { fetchOASFile } from '../utils/realm';
+import { callAuthenticatedFunction } from '../utils/realm-browser';
 // Important notes:
 // The contents of this file are (unfortunately) a hacky and brittle way of getting Redoc's React component to
 // look like our docs while maintaining the same workflow and processes for delivering docs.
 // CSS selectors were declared as specific as possible while also being flexible enough for reusable components.
 // Upgrading our version of Redoc may result in broken css rules, so please double-check afterwards.
+
+export const fetchOASFile = async (apiName, database) => {
+  return await callAuthenticatedFunction('fetchOASFile', [apiName, database]);
+};
 
 const badgeBorderRadius = '50px';
 const badgeBorderType = '1px solid';

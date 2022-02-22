@@ -5,9 +5,8 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
 import { normalizePath } from '../../utils/normalize-path';
-import { fetchBanner } from '../../utils/realm';
-import { SNOOTY_REALM_APP_ID } from '../build-constants';
-import { callAuthenticatedFunction } from '../utils/realm-browser.js';
+import { SNOOTY_REALM_APP_ID } from '../../build-constants';
+import { callAuthenticatedFunction } from '../../utils/realm-browser';
 
 const getBannerSource = (src) => {
   if (src == null || src === '') return null;

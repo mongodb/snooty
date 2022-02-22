@@ -15,7 +15,7 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ database: 'snooty_dev' }),
 }));
 
-jest.mock('../../src/utils/realm', () => ({
+jest.mock('../../src/components/OpenAPI', () => ({
   fetchOASFile: async () => false,
 }));
 

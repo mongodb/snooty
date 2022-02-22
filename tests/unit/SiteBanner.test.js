@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
-import * as SiteBannerModule from '../../src/components/SiteBanner';
+import * as SiteBannerModule from '../../src/components/Banner/SiteBanner';
 import { HeaderContext } from '../../src/components/header-context';
 import { tick } from '../utils';
 
