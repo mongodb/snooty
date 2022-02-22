@@ -98,7 +98,10 @@ const RightColumn = ({ chapters = {} }) => {
   const isVisible = useVisibleOnScroll('.hero-img');
   const chapterEntries = Object.entries(chapters || {});
   const chapterValues = Object.values(chapters || {});
-  const activeChapterId = useActiveHeading(chapterValues, 0.6);
+  // Set active chapter id if its chapter card is more than 60% visible on the page to account for
+  // top nav and chapters/gallery view controller
+  const targetIntersectionRatio = 0.6;
+  const activeChapterId = useActiveHeading(chapterValues, targetIntersectionRatio);
 
   return (
     <Container isSidenavCollapsed={isCollapsed} isVisible={isVisible}>
