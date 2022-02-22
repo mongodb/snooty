@@ -88,18 +88,6 @@ const disableScroll = (shouldDisableScroll) => css`
   }
 `;
 
-const ContentOverlay = styled('div')`
-  background-color: ${uiColors.white};
-  bottom: 0;
-  left: 0;
-  opacity: 0.5;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100vw;
-  z-index: 1;
-`;
-
 const getTopAndHeight = (topValue) => css`
   top: ${topValue};
   height: calc(100vh - ${topValue});
@@ -167,7 +155,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
-  const showContentOverlay = false;
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues();
@@ -181,10 +168,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
   const template = page?.options?.template;
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
-
-  const handleOverlayClick = useCallback(() => {
-    setCollapsed(true);
-  }, [setCollapsed]);
 
   const hideMobileSidenav = useCallback(() => {
     setHideMobile(true);
@@ -222,7 +205,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
 
   return (
     <>
-      <Global styles={disableScroll(showContentOverlay || !hideMobile)} />
+      <Global styles={disableScroll(!hideMobile)} />
       <SidenavContainer {...topValues}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
@@ -304,7 +287,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
           </LeafygreenSideNav>
         </SidenavMobileTransition>
       </SidenavContainer>
-      {showContentOverlay && <ContentOverlay onClick={handleOverlayClick} />}
     </>
   );
 };
