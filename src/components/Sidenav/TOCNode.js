@@ -21,10 +21,9 @@ const caretStyle = css`
   min-width: 16px;
 `;
 
-const sideNavStyle = (level, hasChildren, isTocIcon) => css`
-  ${sideNavItemTOCStyling({ level })}
+const sideNavStyle = (hasChildren, isTocIcon) => css`
   > div {
-    margin-left: ${hasChildren || isTocIcon ? '0px' : '20px'};
+    margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
   }
 `;
 
@@ -61,14 +60,13 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     if (isDrawer && hasChildren) {
       return (
         <SideNavItem
-          className={cx(sideNavStyle(level, hasChildren, isTocIcon))}
+          className={cx(sideNavStyle(hasChildren, isTocIcon), sideNavItemTOCStyling({ level }))}
           onClick={() => {
-            console.log(isDrawer);
             setIsOpen(!isOpen);
           }}
         >
+          <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />
           {isTocIcon && <SyncCloud />}
-          {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
           {formattedTitle}
         </SideNavItem>
       );
@@ -78,11 +76,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         as={Link}
         to={target}
         active={isSelected}
-        className={cx(sideNavStyle(level, hasChildren, isTocIcon))}
+        className={cx(sideNavStyle(hasChildren, isTocIcon), sideNavItemTOCStyling({ level }))}
         onClick={handleClick}
       >
-        {isTocIcon && <SyncCloud />}
         {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
+        {isTocIcon && <SyncCloud />}
         {formattedTitle}
       </SideNavItem>
     );
