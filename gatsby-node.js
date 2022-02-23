@@ -12,12 +12,12 @@ const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, BRANCHES_COLLECTION } = require('./src/build-constants');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const { constructBuildFilter } = require('./src/utils/setup/construct-build-filter');
+const { constructReposFilter } = require('./src/utils/setup/construct-repos-filter.js');
 
 const DB = siteMetadata.database;
 const reposDB = siteMetadata.reposDatabase;
 
-const reposFilter = { project: siteMetadata.project };
-
+const reposFilter = constructReposFilter(siteMetadata.project);
 const buildFilter = constructBuildFilter(siteMetadata);
 
 // different types of references
