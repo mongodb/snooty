@@ -88,12 +88,7 @@ describe('baseUrl', () => {
   });
 
   describe('is a function which attempts return an appropriate baseUrl at invocation time based on environment state.', () => {
-    it('always prefers process.env.GATSBY_BASE_URL if present', () => {
-      process.env.GATSBY_BASE_URL = 'www.mongodb.com';
-      expect(baseUrl()).toBe('www.mongodb.com');
-    });
-
-    it('determines dotcom vs. docs. based on subdomain when invoked, if no process.env.GATSBY_BASE_URL is present', () => {
+    it('determines dotcom vs. docs. based on subdomain when invoked', () => {
       process.env = {};
       Object.defineProperty(window, 'location', {
         value: {
@@ -122,11 +117,6 @@ describe('baseUrl', () => {
         writable: true,
       });
       expect(baseUrl(true)).toBe('https://docs.mongodb.com');
-    });
-
-    it('ignores the protocol flag if process.env.GATSBY_BASE_URL is defined', () => {
-      process.env.GATSBY_BASE_URL = 'www.mongodb.com';
-      expect(baseUrl(true)).toBe('www.mongodb.com');
     });
   });
 });
