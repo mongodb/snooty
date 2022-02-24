@@ -21,10 +21,8 @@ it('DailyMotion video renders correctly', () => {
 });
 
 describe('Console warning messages', () => {
-  const originalWarn = console.warn;
-  afterEach(() => (console.warn = originalWarn));
-
   let consoleOutput = [];
+
   const mockedWarn = (output) => consoleOutput.push(output);
   beforeEach(() => (console.warn = mockedWarn));
 
