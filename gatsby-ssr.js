@@ -7,6 +7,8 @@ import { theme } from './src/theme/docsTheme';
 
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
+    // Optimizely
+    <script src="https://cdn.optimizely.com/js/20988630008.js"/>,
     // Delighted
     <script
       type="text/javascript"
