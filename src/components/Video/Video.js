@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player/youtube';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import VideoPlayButton from './VideoPlayButton';
 
@@ -29,39 +30,43 @@ const videoStyling = css`
 `;
 
 const Video = ({ nodeData: { argument }, ...rest }) => {
-  const playable = ReactPlayer.canPlay(argument[0]['refuri']);
+  const url = `${argument[0]['refuri']}`;
+  const playable = ReactPlayer.canPlay(url);
 
   if (!playable) {
-    console.warn(`Invalid URL: ${argument[0]['refuri']} has been passed into the Video component`);
+    console.warn(`Invalid URL: ${url} has been passed into the Video component`);
     return null;
   }
 
+  // if YT video, use default thumbnail. Otherwise, use a placeholder image
+  let previewImage = withPrefix('assets/meta_generic.png');
+
+  if (url.includes('youtube') || url.includes('youtu.be')) {
+    previewImage = true;
+  }
+
   return (
-    <>
-      {playable && (
-        <ReactPlayerWrapper>
-          <StyledReactPlayer
-            css={videoStyling}
-            config={{
-              youtube: {
-                playerVars: {
-                  autohide: 1,
-                  modestbranding: 1,
-                  rel: 0,
-                },
-              },
-            }}
-            controls
-            url={argument[0]['refuri']}
-            width="100%"
-            height="100%"
-            playing
-            playIcon={<VideoPlayButton />}
-            light={<VideoPlayButton />}
-          />
-        </ReactPlayerWrapper>
-      )}
-    </>
+    <ReactPlayerWrapper>
+      <StyledReactPlayer
+        css={videoStyling}
+        config={{
+          youtube: {
+            playerVars: {
+              autohide: 1,
+              modestbranding: 1,
+              rel: 0,
+            },
+          },
+        }}
+        controls
+        url={url}
+        width="100%"
+        height="100%"
+        playing
+        playIcon={<VideoPlayButton />}
+        light={previewImage}
+      />
+    </ReactPlayerWrapper>
   );
 };
 
