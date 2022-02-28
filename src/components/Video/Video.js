@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
@@ -32,17 +32,35 @@ const videoStyling = css`
 const Video = ({ nodeData: { argument }, ...rest }) => {
   const url = `${argument[0]['refuri']}`;
   const playable = ReactPlayer.canPlay(url);
+  // if valid YT video, use default thumbnail. Otherwise, use a placeholder image
+  const [previewImage, setPreviewwImage] = useState(withPrefix('assets/meta_generic.png'));
 
   if (!playable) {
     console.warn(`Invalid URL: ${url} has been passed into the Video component`);
     return null;
   }
 
-  // if YT video, use default thumbnail. Otherwise, use a placeholder image
-  let previewImage = withPrefix('assets/meta_generic.png');
-
+  // get video ID for youtube videos to check validity
   if (url.includes('youtube') || url.includes('youtu.be')) {
-    previewImage = true;
+    let videoId = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+    if (videoId == null) {
+      console.warn(`Invalid URL: ${url} has been passed into the Video component`);
+      return null;
+    }
+    videoId = videoId[1];
+    // check for timestamps
+    videoId = videoId.split('?t=');
+    videoId = videoId[0];
+
+    // check if the YT video id is valid
+    let img = new Image();
+    img.src = 'http://img.youtube.com/vi/' + videoId + '/mqdefault.jpg';
+    img.onload = function () {
+      // an mq thumbnail has width 320, but if video does not exist, a default thumbnail width of 120 is returned
+      if (this.width !== 120) {
+        setPreviewwImage(true);
+      }
+    };
   }
 
   return (
