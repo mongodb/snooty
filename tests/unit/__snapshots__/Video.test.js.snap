@@ -1,8 +1,414 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DailyMotion video renders correctly 1`] = `<DocumentFragment />`;
+exports[`DailyMotion video renders correctly 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
 
-exports[`Vimeo video renders correctly 1`] = `<DocumentFragment />`;
+.emotion-0 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-3 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #F9FBFA;
+  border: 1px solid #89979B;
+  box-shadow: 0px 1px 2px rgba(6,22,33,0.3);
+  color: #3D4F58;
+  font-size: 14px;
+  height: 36px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-3:disabled {
+  pointer-events: none;
+}
+
+.emotion-3:active,
+.emotion-3:focus,
+.emotion-3:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-3:focus {
+  color: #3D4F58;
+}
+
+.emotion-3:hover,
+.emotion-3:active {
+  color: #3D4F58;
+  background-color: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.3), 0px 0px 0px 3px #E7EEEC;
+}
+
+.emotion-3:focus {
+  background: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0,124,173,0.4), 0px 0px 0px 3px #019EE2;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-9 {
+  position: relative;
+  padding-top: 56.25%;
+  margin: 24px 0px;
+}
+
+.emotion-7 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-7 > div {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.emotion-7 * {
+  border-radius: 16px !important;
+}
+
+.emotion-6 {
+  border: 8px solid transparent;
+  border-radius: 50% !important;
+  box-shadow: 0px 0px 0px 8px transparent;
+}
+
+.emotion-6:hover {
+  background-color: #B8C4C2AA;
+  box-shadow: 0px 0px 0px 8px #3D4F5880;
+  -webkit-transition: box-shadow 0.6s,background-color 0.6s;
+  transition: box-shadow 0.6s,background-color 0.6s;
+}
+
+.emotion-4 {
+  color: #FFFFFF;
+  background-color: #0c1c27;
+  border: 1px solid #F9FBFA;
+  border-radius: 50% !important;
+  height: 80px;
+  width: 80px;
+}
+
+.emotion-4:hover,
+.emotion-4:active {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+<div
+    class="emotion-9 emotion-10"
+  >
+    <div
+      class="emotion-7 emotion-8"
+      style="width: 100%; height: 100%;"
+    >
+      <div
+        class="react-player__preview"
+        style="width: 100%; height: 100%; background-size: cover; background-position: center; cursor: pointer; display: flex; align-items: center; justify-content: center; background-image: url(/assets/meta_generic.png);"
+        tabindex="0"
+      >
+        <div
+          class="emotion-6"
+        >
+          <button
+            aria-disabled="false"
+            class="emotion-3 emotion-4 emotion-5"
+            type="button"
+          >
+            <div
+              class="emotion-0"
+            />
+            <div
+              class="emotion-2"
+            >
+              <svg
+                aria-label="Play Icon"
+                class="emotion-1"
+                height="24"
+                role="img"
+                viewBox="0 0 16 16"
+                width="24"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.7789 6.70433C14.7711 7.28315 14.7711 8.71685 13.7789 9.29567L6.25581 13.6841C5.25582 14.2674 4 13.5461 4 12.3884L4 3.61155C4 2.45387 5.25582 1.73256 6.25581 2.31589L13.7789 6.70433Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Vimeo video renders correctly 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-0 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-3 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #F9FBFA;
+  border: 1px solid #89979B;
+  box-shadow: 0px 1px 2px rgba(6,22,33,0.3);
+  color: #3D4F58;
+  font-size: 14px;
+  height: 36px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-3:disabled {
+  pointer-events: none;
+}
+
+.emotion-3:active,
+.emotion-3:focus,
+.emotion-3:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-3:focus {
+  color: #3D4F58;
+}
+
+.emotion-3:hover,
+.emotion-3:active {
+  color: #3D4F58;
+  background-color: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.3), 0px 0px 0px 3px #E7EEEC;
+}
+
+.emotion-3:focus {
+  background: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0,124,173,0.4), 0px 0px 0px 3px #019EE2;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-9 {
+  position: relative;
+  padding-top: 56.25%;
+  margin: 24px 0px;
+}
+
+.emotion-7 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emotion-7 > div {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.emotion-7 * {
+  border-radius: 16px !important;
+}
+
+.emotion-6 {
+  border: 8px solid transparent;
+  border-radius: 50% !important;
+  box-shadow: 0px 0px 0px 8px transparent;
+}
+
+.emotion-6:hover {
+  background-color: #B8C4C2AA;
+  box-shadow: 0px 0px 0px 8px #3D4F5880;
+  -webkit-transition: box-shadow 0.6s,background-color 0.6s;
+  transition: box-shadow 0.6s,background-color 0.6s;
+}
+
+.emotion-4 {
+  color: #FFFFFF;
+  background-color: #0c1c27;
+  border: 1px solid #F9FBFA;
+  border-radius: 50% !important;
+  height: 80px;
+  width: 80px;
+}
+
+.emotion-4:hover,
+.emotion-4:active {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+<div
+    class="emotion-9 emotion-10"
+  >
+    <div
+      class="emotion-7 emotion-8"
+      style="width: 100%; height: 100%;"
+    >
+      <div
+        class="react-player__preview"
+        style="width: 100%; height: 100%; background-size: cover; background-position: center; cursor: pointer; display: flex; align-items: center; justify-content: center; background-image: url(/assets/meta_generic.png);"
+        tabindex="0"
+      >
+        <div
+          class="emotion-6"
+        >
+          <button
+            aria-disabled="false"
+            class="emotion-3 emotion-4 emotion-5"
+            type="button"
+          >
+            <div
+              class="emotion-0"
+            />
+            <div
+              class="emotion-2"
+            >
+              <svg
+                aria-label="Play Icon"
+                class="emotion-1"
+                height="24"
+                role="img"
+                viewBox="0 0 16 16"
+                width="24"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.7789 6.70433C14.7711 7.28315 14.7711 8.71685 13.7789 9.29567L6.25581 13.6841C5.25582 14.2674 4 13.5461 4 12.3884L4 3.61155C4 2.45387 5.25582 1.73256 6.25581 2.31589L13.7789 6.70433Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
 exports[`YouTube video renders correctly 1`] = `
 <DocumentFragment>
