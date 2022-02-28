@@ -33,7 +33,7 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
   const url = `${argument[0]['refuri']}`;
   const playable = ReactPlayer.canPlay(url);
   // if valid YT video, use default thumbnail. Otherwise, use a placeholder image
-  const [previewImage, setPreviewwImage] = useState(withPrefix('assets/meta_generic.png'));
+  const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
 
   if (!playable) {
     console.warn(`Invalid URL: ${url} has been passed into the Video component`);
@@ -47,7 +47,7 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
       console.warn(`Invalid URL: ${url} has been passed into the Video component`);
       return null;
     }
-    videoId = videoId[1];
+    videoId = videoId?.[1];
     // check for timestamps
     videoId = videoId.split('?t=');
     videoId = videoId[0];
@@ -58,7 +58,7 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
     img.onload = function () {
       // an mq thumbnail has width 320, but if video does not exist, a default thumbnail width of 120 is returned
       if (this.width !== 120) {
-        setPreviewwImage(true);
+        setPreviewImage(true);
       }
     };
   }
