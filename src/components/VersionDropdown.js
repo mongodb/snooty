@@ -2,20 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import { Option, Select, Size } from '@leafygreen-ui/select';
+import { Option, OptionGroup, Select, Size } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
-
-const zip = (a, b) => {
-  // Zip arrays a and b into an object where a is used for keys and b for values
-  const shorter = a.length > b.length ? b : a;
-  const dict = {};
-  shorter.forEach((key, i) => (dict[a[i]] = b[i]));
-  return dict;
-};
+import { baseUrl } from '../utils/dotcom';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -25,56 +18,114 @@ const StyledSelect = styled(Select)`
   }
 
   span {
-    font-size: 16px;
+    font-size: ${theme.fontSize.default};
   }
-
+  ${'' /* Render version dropdown text in front of the Sidebar text */}
   button {
     z-index: 2;
   }
 `;
 
-const OptionLink = styled('a')`
-  color: unset;
+// Returns true if there are any inactive (EOL'd/'legacy') branches
+const needsLegacyDropdown = (branches = []) => {
+  const isLegacy = (branch = {}) => !branch['active'];
+  return branches.some(isLegacy);
+};
 
-  :hover {
-    color: unset;
-    text-decoration: none;
+// Gets UI labels for supplied active branch names
+const getUILabel = (branch) => {
+  if (!branch['active']) {
+    console.warn(
+      `Retrieving branch UI label for legacy/EOL'd/inactive branch: ${branch['gitBranchName']}. This should probably not be happening.`
+    );
   }
-`;
+  return branch['versionSelectorLabel'] || createVersionLabel(branch['urlSlug'], branch['gitBranchName']);
+};
 
-const VersionDropdown = ({
-  publishedBranches: {
-    version: { published, active },
-    git: {
-      branches: { published: gitBranches },
-    },
-  },
-  slug,
-}) => {
-  const siteMetadata = useSiteMetadata();
-  const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
+// If a UI label is not specified for raw versions (e.g. v1.0), create one
+// Example: [1.0 or v1.0 or android-v1.0] -> Version 1.0
+const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
+  if (!urlSlug && !gitBranchName) {
+    console.warn('Unable to create version label - neither gitBranchName nor urlSlug defined');
+    return 'Version Name Unknown';
+  }
 
-  const prefixVersion = (version) => {
-    // Display as "Version X" on menu if numeric version
-    const isNumeric = (version = '') => {
-      const [firstWord] = version.split();
-      return !isNaN(firstWord);
-    };
-    return `${isNumeric(version) ? 'Version ' : ''}${version}`;
-  };
+  const label = urlSlug || gitBranchName;
+  // If the label is numeric (e.g. "2.0" or "v2.0"), we display "Version 2.0"
+  if (!isNaN(label)) {
+    return `Version ${label}`;
+  } else if (label.startsWith('v') && !isNaN(label.slice(1))) {
+    return `Version ${label.slice(1)}`;
+  }
 
-  // Zip two sections of data to map git branches to their "pretty" names
-  const gitNamedMapping = zip(gitBranches, active);
+  return label;
+};
 
-  // Don't render dropdown if there is only 1 version of the repo
-  if (!active || active.length <= 1) {
+// Returns all branches that are neither in 'groups' nor inactive
+const getActiveUngroupedBranches = (branches = [], groups = []) => {
+  const groupedBranchNames = groups.map((g) => g['includedBranches']).flat() || [];
+  return branches.filter((b) => !groupedBranchNames.includes(b['gitBranchName']) && !!b['active']);
+};
+
+// Return a branch object from branches that matches supplied branchName
+// Typically used to associate a branchName from 'groups' with a branchName in 'branches'
+const getBranch = (branchName = '', branches = []) => {
+  const branchCandidates = branches.filter((b) => b['gitBranchName'] === branchName);
+
+  if (branchCandidates.length === 0) {
+    console.warn(`Could not find branch in 'branches' with gitBranchName: ${branchName}. Check 'groups'.`);
     return null;
   }
 
+  if (branchCandidates.length > 1) {
+    console.warn(`Too many branches with name ${branchName}.`);
+    return null;
+  }
+
+  return branchCandidates?.[0] || null;
+};
+
+const setOptionSlug = (branch) => {
+  return branch['urlSlug'] || branch['gitBranchName'];
+};
+
+const createOption = (branch) => {
+  const UIlabel = getUILabel(branch);
+  const slug = setOptionSlug(branch);
+  return (
+    <Option key={slug} value={slug}>
+      {UIlabel}
+    </Option>
+  );
+};
+
+const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
+  const siteMetadata = useSiteMetadata();
+  const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
+
+  if ((branches?.length ?? 0) < 2) {
+    console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
+    return null;
+  }
+
+  // For exclusively Realm SDK pages, we show a subset of the versions depending
+  // on the current page selection. For example, on the Android SDK page, we only
+  // show Android SDK versions in the version dropdown box.
+  if (project === 'realm' && slug.startsWith('sdk/')) {
+    groups = groups.filter((g) => slug.startsWith(g?.['sharedSlugPrefix'])) || groups;
+    if ((groups?.length ?? 0) === 1) {
+      // Get the branchNames from the indicated group, e.g. ['android-v1.0', 'android-v2.0', ...]
+      const sdkBranchNames = groups[0]['includedBranches'];
+      branches = branches.filter((b) => sdkBranchNames.includes(b['gitBranchName']));
+    } else {
+      console.warn(`Unexpected behavior with Realm SDK version grouping. Check 'groups' and 'sharedSlugPrefix'.`);
+    }
+  }
+
   const generatePrefix = (version) => {
-    // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
-    const isManualProduction = project === 'docs' && snootyEnv === 'production';
-    if (isManualProduction) {
+    // Manual production is a special case because it does not use a path
+    // prefix (found at root of docs.mongodb.com)
+    if (project === 'docs' && snootyEnv === 'production') {
       return `/${version}`;
     }
 
@@ -84,59 +135,99 @@ const VersionDropdown = ({
       return `${noVersion}/${version}`;
     }
 
+    // For development
+    if (snootyEnv === 'development') {
+      console.warn(
+        `Applying experimental development environment-specific routing for versions.
+         Behavior may differ in both staging and production. See VersionDropdown.js for more detail.`
+      );
+      return `/${version}`;
+    }
+
     // For staging, replace current version in dynamically generated path prefix
     return generatePathPrefix({ ...siteMetadata, parserBranch: version });
   };
 
-  const getUrl = (value) => {
-    const legacyDocsURL = `https://docs.mongodb.com/legacy/?site=${project}`;
-    return value === 'legacy' ? legacyDocsURL : normalizePath(`${generatePrefix(value)}/${slug}`);
+  const getUrl = (optionValue) => {
+    if (optionValue === 'legacy') {
+      return `${baseUrl(true)}/legacy/?site=${project}`;
+    }
+    const prefix = generatePrefix(optionValue);
+    if (project === 'realm' && optionValue.startsWith('sdk/')) {
+      console.warn(`Applying routing logic that is specific to Realm SDKs.`);
+      return normalizePath(prefix);
+    }
+    return normalizePath(`${prefix}/${slug}`);
   };
 
-  const navigate = (value) => {
-    const destination = getUrl(value);
+  // Used exclusively by the LG Select component's onChange function, which receives
+  // the 'value' prop from the selected Option component
+  const navigate = (optionValue) => {
+    const destination = getUrl(optionValue);
     reachNavigate(destination);
   };
 
+  const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
+
+  // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
+  // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
+  const slugFromParserBranch = (parserBranch, branches) => {
+    let slug = parserBranch;
+    for (let branch of branches) {
+      if (branch.gitBranchName === parserBranch) {
+        return setOptionSlug(branch);
+      }
+    }
+    return slug;
+  };
+
+  // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
+  // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
+  // OR have the OptionGroup not take up space when a label is empty-string. For now,
+  // ungrouped branches are handled in a separate array.
   return (
     <StyledSelect
       allowDeselect={false}
       aria-labelledby="View a different version of documentation."
+      defaultValue="master"
       onChange={navigate}
-      placeholder={null}
-      size={Size.Large}
+      placeholder={'Select a version'}
       popoverZIndex={3}
-      value={parserBranch}
+      size={Size.Large}
+      value={slugFromParserBranch(parserBranch, branches)}
       usePortal={false}
     >
-      {Object.entries(gitNamedMapping).map(([branch, name]) => {
-        const url = getUrl(branch);
+      {activeUngroupedBranches?.map((b) => createOption(b))}
+      {groups?.map((group) => {
+        const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
         return (
-          <Option key={branch} value={branch}>
-            <OptionLink href={url}>{prefixVersion(name)}</OptionLink>
-          </Option>
+          <OptionGroup key={groupLabel} label={groupLabel}>
+            <>{groupedBranchNames?.map((bn) => createOption(getBranch(bn, branches)))}</>
+          </OptionGroup>
         );
       })}
-      {published.length > active.length && (
-        <Option value="legacy">
-          <OptionLink href={getUrl('legacy')}>Legacy Docs</OptionLink>
-        </Option>
-      )}
+      {needsLegacyDropdown(branches) && <Option value="legacy">Legacy Docs</Option>}
     </StyledSelect>
   );
 };
 
 VersionDropdown.propTypes = {
-  publishedBranches: PropTypes.shape({
-    version: PropTypes.shape({
-      published: PropTypes.arrayOf(PropTypes.string).isRequired,
-      active: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }).isRequired,
-    git: PropTypes.shape({
-      branches: PropTypes.shape({
-        published: PropTypes.arrayOf(PropTypes.string).isRequired,
-      }).isRequired,
-    }).isRequired,
+  repoBranches: PropTypes.shape({
+    branches: PropTypes.arrayOf(
+      PropTypes.shape({
+        gitBranchName: PropTypes.string.isRequired,
+        versionSelectorLabel: PropTypes.string,
+        urlSlug: PropTypes.string,
+        active: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        groupLabel: PropTypes.string,
+        groupDisplayURLPrefix: PropTypes.string,
+        includedBranches: PropTypes.array,
+      })
+    ),
   }).isRequired,
   slug: PropTypes.string.isRequired,
 };

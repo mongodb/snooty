@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import Permalink from './Permalink';
 
 // Based on condition isValid, split array into two arrays: [[valid, invalid]]
 const partition = (array, isValid) => {
@@ -14,13 +15,11 @@ const partition = (array, isValid) => {
 
 const DescriptionTerm = ({ children, html_id, ...rest }) => {
   return (
-    <dt id={html_id}>
+    <dt>
       {children.map((child, j) => (
         <ComponentFactory key={j} {...rest} nodeData={child} />
       ))}
-      <a href={`#${html_id}`} className="headerlink" title="Permalink to this definition">
-        ¶
-      </a>
+      <Permalink id={html_id} description="definition" buffer="-150px" />
     </dt>
   );
 };

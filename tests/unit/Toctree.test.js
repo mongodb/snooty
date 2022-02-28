@@ -28,13 +28,26 @@ describe('Toctree', () => {
     expect(wrapper.getByText('Realm Database SDKs')).toBeTruthy();
   });
 
-  it('clicking on a drawer shows nested children', async () => {
+  it('clicking on a drawer twice expands and collapses nested children', async () => {
+    const wrapper = mountToctree('/');
+    const parentDrawer = wrapper.getByText('Realm Database SDKs');
+    expect(parentDrawer).toBeTruthy();
+    expect(wrapper.queryByText('Android SDK')).toBeFalsy();
+    userEvent.click(wrapper.getByText('Realm Database SDKs'));
+    await tick();
+    expect(wrapper.queryByText('Android SDK')).toBeTruthy();
+    userEvent.click(wrapper.getByText('Realm Database SDKs'));
+    await tick();
+    expect(wrapper.queryByText('Android SDK')).toBeFalsy();
+  });
+
+  it('clicking on a drawer changes carat arrow', async () => {
     const wrapper = mountToctree('/');
     const parentDrawer = wrapper.queryAllByRole('button');
-    expect(parentDrawer).toBeTruthy();
+    expect(wrapper.getAllByRole('img')[0]).toHaveAttribute('aria-label', 'Caret Right Icon');
     userEvent.click(parentDrawer[0]);
     await tick();
-    expect(wrapper.getByText('Introduction for Mobile Developers')).toBeTruthy();
+    expect(wrapper.getAllByRole('img')[0]).toHaveAttribute('aria-label', 'Caret Down Icon');
   });
 
   it('correct item set as active based off current page', () => {

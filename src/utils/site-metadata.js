@@ -14,8 +14,23 @@ const getDatabase = (env) => {
       return 'snooty_stage';
     case 'production':
       return 'snooty_prod';
+    case 'dotcomstg':
+      return 'snooty_dotcomstg';
+    case 'dotcomprd':
+      return 'snooty_dotcomprd';
     default:
       return 'snooty_dev';
+  }
+};
+
+const getReposDatabase = (env) => {
+  switch (env) {
+    case 'staging':
+      return 'pool_test';
+    case 'production':
+      return 'pool';
+    default:
+      return 'pool_test';
   }
 };
 
@@ -39,6 +54,7 @@ const getPathPrefix = (pathPrefix) => {
 const siteMetadata = {
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
+  reposDatabase: getReposDatabase(process.env.SNOOTY_ENV),
   parserBranch: process.env.GATSBY_PARSER_BRANCH,
   parserUser: process.env.GATSBY_PARSER_USER,
   patchId: process.env.PATCH_ID || '',

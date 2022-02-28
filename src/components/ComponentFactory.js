@@ -8,7 +8,8 @@ import Card from './Card';
 import CardGroup from './CardGroup';
 import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters/Chapters';
-import Code from './Code';
+import Code from './Code/Code';
+import CodeIO from './Code/CodeIO';
 import Cond from './Cond';
 import Container from './Container';
 import CSSClass from './CSSClass';
@@ -47,7 +48,7 @@ import MongoWebShell from './MongoWebShell';
 import OpenAPI from './OpenAPI';
 import Operation from './Operation';
 import Paragraph from './Paragraph';
-import Procedure from './Procedure';
+import Procedure from './Procedure/Procedure';
 import QuizChoice from './Widgets/QuizWidget/QuizChoice';
 import QuizWidget from './Widgets/QuizWidget/QuizWidget';
 import Reference from './Reference';
@@ -57,7 +58,6 @@ import Root from './Root';
 import Rubric from './Rubric';
 import SearchResults from './SearchResults';
 import Section from './Section';
-import Step from './Step';
 import Strong from './Strong';
 import Subscript from './Subscript';
 import SubstitutionReference from './SubstitutionReference';
@@ -71,6 +71,7 @@ import Topic from './Topic';
 import Transition from './Transition';
 import Twitter from './Twitter';
 import VersionModified from './VersionModified';
+import Video from './Video/Video';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -133,6 +134,7 @@ const componentMap = {
   chapters: Chapters,
   class: CSSClass,
   code: Code,
+  'io-code-block': CodeIO,
   cond: Cond,
   container: Container,
   cssclass: CSSClass,
@@ -184,7 +186,6 @@ const componentMap = {
   'search-results': SearchResults,
   section: Section,
   sharedinclude: Include,
-  step: Step,
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
@@ -197,6 +198,7 @@ const componentMap = {
   twitter: Twitter,
   versionadded: VersionModified,
   versionchanged: VersionModified,
+  video: Video,
 };
 
 const ComponentFactory = (props) => {
