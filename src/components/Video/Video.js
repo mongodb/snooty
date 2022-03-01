@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
@@ -32,35 +32,28 @@ const videoStyling = css`
 const Video = ({ nodeData: { argument }, ...rest }) => {
   const url = `${argument[0]['refuri']}`;
   const playable = ReactPlayer.canPlay(url);
-  // if valid YT video, use default thumbnail. Otherwise, use a placeholder image
+  // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
 
+  useEffect(() => {
+    // handles URL validity checking for well-formed YT links
+    if (url.includes('youtube') || url.includes('youtu.be')) {
+      const https = require('https');
+      let testUrlValidity = 'https://www.youtube.com/oembed?url=' + url + '&format=json';
+
+      https.get(testUrlValidity, (res) => {
+        // if valid URL, display default YT thumbnail
+        if (res.statusCode === 200) {
+          setPreviewImage(true);
+        }
+      });
+    }
+  }, [previewImage, url]);
+
+  // handles remaining cases for invalid video URLs
   if (!playable) {
     console.warn(`Invalid URL: ${url} has been passed into the Video component`);
     return null;
-  }
-
-  // get video ID for youtube videos to check validity
-  if (url.includes('youtube') || url.includes('youtu.be')) {
-    let videoId = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
-    if (videoId == null) {
-      console.warn(`Invalid URL: ${url} has been passed into the Video component`);
-      return null;
-    }
-    videoId = videoId?.[1];
-    // check for timestamps
-    videoId = videoId.split('?t=');
-    videoId = videoId[0];
-
-    // check if the YT video id is valid
-    let img = new Image();
-    img.src = 'http://img.youtube.com/vi/' + videoId + '/mqdefault.jpg';
-    img.onload = function () {
-      // an mq thumbnail has width 320, but if video does not exist, a default thumbnail width of 120 is returned
-      if (this.width !== 120) {
-        setPreviewImage(true);
-      }
-    };
   }
 
   return (
