@@ -3933,7 +3933,6 @@ th.hidden-xs {
 }
 .admonition .admonition-title,
 .deluge-vote a,
-.guide__pill,
 .nav-panel .nav-panel-top__li,
 div.sphinxsidebar h3 a.index-link {
   text-transform: uppercase;
@@ -10230,8 +10229,7 @@ div td pre {
   text-transform: uppercase;
   letter-spacing: 1.25px;
 }
-.card-large .card-image > img,
-.guide__pill {
+.card-large .card-image > img {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -10522,7 +10520,6 @@ div td pre {
   color: #000;
 }
 #showNav,
-.guide__pill,
 .searchButton,
 .sequence-step {
   text-align: center;
@@ -10913,35 +10910,6 @@ div td pre {
 .sphinxsidebarwrapper .toctree-l1 li.current.selected-item > a > tt,
 .sphinxsidebarwrapper > ul > .toctree-l1 > a.current {
   font-weight: 700;
-}
-.guide__pills {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.guide__pill {
-  background-color: #e7ebeb;
-  border-radius: 20px;
-  color: #658d95;
-  cursor: pointer;
-  font-size: 12px;
-  line-height: 22px;
-  margin-right: 8px;
-  margin-bottom: 9px;
-  padding: 0 15px;
-  user-select: none;
-  transition: background-color 0.25s, color 0.25s;
-}
-.guide__pill--active,
-.guide__pill--seeall,
-.guide__pill:hover {
-  background-color: #13aa52;
-  background-color: var(--mongodb-green);
-  color: #fff;
 }
 .accordion {
   border: 2px solid #eee;

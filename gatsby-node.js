@@ -5,7 +5,6 @@ const { isDotCom, dotcomifyUrl } = require('./src/utils/dotcom');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
@@ -22,7 +21,6 @@ const buildFilter = constructBuildFilter(siteMetadata);
 
 // different types of references
 const PAGES = [];
-const GUIDES_METADATA = {};
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -79,9 +77,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
     if (filename.endsWith('.txt')) {
       PAGES.push(key);
-      if (process.env.GATSBY_SITE === 'guides') {
-        GUIDES_METADATA[key] = getGuideMetadata(val);
-      }
     }
   });
 
@@ -150,7 +145,6 @@ exports.createPages = async ({ actions }) => {
             repoBranches: repoBranches,
             template: pageNodes?.options?.template,
             page: pageNodes,
-            guidesMetadata: GUIDES_METADATA,
           },
         });
       }
