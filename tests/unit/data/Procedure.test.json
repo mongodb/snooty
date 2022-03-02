@@ -789,7 +789,7 @@
     "name": "procedure",
     "argument": [],
     "options": {
-      "style": "normal"
+      "style": "connected"
     }
   }
 }
