@@ -28,13 +28,17 @@ describe('Toctree', () => {
     expect(wrapper.getByText('Realm Database SDKs')).toBeTruthy();
   });
 
-  it('clicking on a drawer shows nested children', async () => {
+  it('clicking on a drawer twice expands and collapses nested children', async () => {
     const wrapper = mountToctree('/');
-    const parentDrawer = wrapper.queryAllByRole('button');
+    const parentDrawer = wrapper.getByText('Realm Database SDKs');
     expect(parentDrawer).toBeTruthy();
-    userEvent.click(parentDrawer[0]);
+    expect(wrapper.queryByText('Android SDK')).toBeFalsy();
+    userEvent.click(wrapper.getByText('Realm Database SDKs'));
     await tick();
-    expect(wrapper.getByText('Introduction for Mobile Developers')).toBeTruthy();
+    expect(wrapper.queryByText('Android SDK')).toBeTruthy();
+    userEvent.click(wrapper.getByText('Realm Database SDKs'));
+    await tick();
+    expect(wrapper.queryByText('Android SDK')).toBeFalsy();
   });
 
   it('clicking on a drawer changes carat arrow', async () => {
