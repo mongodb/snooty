@@ -28,12 +28,9 @@ const isDotCom = () => {
 // Used for accessing what our base url should be, differentiating between environs
 // and adding sensible defaults in the event the base variable is not present.
 const baseUrl = (needsProtocol = false) => {
-  if (process.env.GATSBY_BASE_URL) return process.env.GATSBY_BASE_URL;
-
-  const intendedFallback = isDotCom()
+  return isDotCom()
     ? dotcomifyUrl(window.location.hostname, needsProtocol)
     : `${needsProtocol ? 'https://' : ''}docs.mongodb.com`;
-  return intendedFallback;
 };
 
 module.exports = { dotcomifyUrl, isDotCom, baseUrl };

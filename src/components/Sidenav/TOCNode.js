@@ -80,7 +80,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         to={target}
         active={isSelected}
         className={cx(sideNavItemTOCStyling({ level }))}
-        onClick={handleClick}
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
       >
         {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
         {isTocIcon && <SyncCloud />}
