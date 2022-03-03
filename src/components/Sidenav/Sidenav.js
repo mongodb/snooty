@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react'
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
-import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
+import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
@@ -22,7 +22,6 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
-import useScreenSize from '../../hooks/useScreenSize';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -32,11 +31,11 @@ import { DOCS_URL } from '../../constants';
 const SIDENAV_WIDTH = 268;
 
 // Use LG's css here to style the component without passing props
-const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
+const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   height: 100%;
 
-  // Mobile sidenav
-  @media ${theme.screenSize.upToSmall} {
+  // Mobile & Tablet nav
+  @media ${theme.screenSize.upToLarge} {
     ${hideMobile && 'display: none;'}
 
     button[data-testid="side-nav-collapse-toggle"] {
@@ -73,7 +72,7 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCss`
   }
 `;
 
-const titleStyle = LeafyCss`
+const titleStyle = LeafyCSS`
   color: ${uiColors.gray.dark3};
   font-size: ${theme.fontSize.default};
   font-weight: bold;
@@ -91,18 +90,6 @@ const disableScroll = (shouldDisableScroll) => css`
   }
 `;
 
-const ContentOverlay = styled('div')`
-  background-color: ${uiColors.white};
-  bottom: 0;
-  left: 0;
-  opacity: 0.5;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100vw;
-  z-index: 1;
-`;
-
 const getTopAndHeight = (topValue) => css`
   top: ${topValue};
   height: calc(100vh - ${topValue});
@@ -118,12 +105,6 @@ const SidenavContainer = styled.div(
 
     @media ${theme.screenSize.upToLarge} {
       ${getTopAndHeight(topMedium)};
-    }
-
-    // Since we want the SideNav to open on top of the content on medium screen size,
-    // keep a width as a placeholder for the collapsed SideNav while its position is absolute
-    @media ${theme.screenSize.tablet} {
-      width: 48px;
     }
 
     @media ${theme.screenSize.upToSmall} {
@@ -170,17 +151,16 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
-  const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
-  const isMobile = viewportSize?.width <= 420;
-  const showContentOverlay = isTablet && !isCollapsed;
+  const isMobile = viewportSize?.width <= theme.breakpoints.large;
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues();
+  const showVersions = repoBranches?.branches?.length > 1;
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -191,14 +171,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
   const template = page?.options?.template;
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
-
-  useEffect(() => {
-    setCollapsed(!!isTablet);
-  }, [isTablet, setCollapsed]);
-
-  const handleOverlayClick = useCallback(() => {
-    setCollapsed(true);
-  }, [setCollapsed]);
 
   const hideMobileSidenav = useCallback(() => {
     setHideMobile(true);
@@ -236,7 +208,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
 
   return (
     <>
-      <Global styles={disableScroll(showContentOverlay || !hideMobile)} />
+      <Global styles={disableScroll(!hideMobile)} />
       <SidenavContainer {...topValues}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
@@ -296,7 +268,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
                 </SideNavItem>
               </>
             )}
-            {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} />}
             {!ia && navContent}
 
             {isDocsLanding && (
@@ -318,7 +290,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, publishedBranches, siteTit
           </LeafygreenSideNav>
         </SidenavMobileTransition>
       </SidenavContainer>
-      {showContentOverlay && <ContentOverlay onClick={handleOverlayClick} />}
     </>
   );
 };
@@ -329,7 +300,7 @@ Sidenav.propTypes = {
   page: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
-  publishedBranches: PropTypes.object,
+  repoBranches: PropTypes.object,
   siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
 };

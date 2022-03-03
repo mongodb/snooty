@@ -87,11 +87,12 @@ const DefaultLayout = ({
     metadata: { chapters, guides, publishedBranches, slugToTitle, title, toctree },
     page,
     slug,
+    repoBranches,
     template,
   },
 }) => {
   const { sidenav } = getTemplate(template);
-  const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
+  const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 
   return (
@@ -112,6 +113,7 @@ const DefaultLayout = ({
               page={page}
               pageTitle={pageTitle}
               publishedBranches={publishedBranches}
+              repoBranches={repoBranches}
               siteTitle={title}
               slug={slug}
               toctree={toctree}

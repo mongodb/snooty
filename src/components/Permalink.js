@@ -27,6 +27,8 @@ const LinkIcon = styled.img`
 const HeaderBuffer = styled.div`
   margin-top: ${({ bufferSpace }) => bufferSpace};
   position: absolute;
+  // Add a bit of padding to help headings be more accurately set as "active" on FF and Safari
+  padding-bottom: 2px;
 `;
 
 const headingStyle = (copied) => css`

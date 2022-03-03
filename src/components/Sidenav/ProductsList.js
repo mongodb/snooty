@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
+import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import Link from '../Link';
@@ -89,7 +89,7 @@ const ProductLink = styled(Link)`
   }
 `;
 
-const iconStyle = ({ isOpen }) => LeafyCss`
+const iconStyle = ({ isOpen }) => LeafyCSS`
   height: 12px;
   width: 12px;
 

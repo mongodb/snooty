@@ -7,7 +7,11 @@ const ReadGuidesContext = createContext({
 
 const ReadGuidesContextProvider = ({ children, slug }) => {
   const localStorageKey = 'readGuides';
-  const [readGuides, setReadGuides] = useState(getLocalValue(localStorageKey) || {});
+  const [readGuides, setReadGuides] = useState({});
+
+  useEffect(() => {
+    setReadGuides(getLocalValue(localStorageKey));
+  }, []);
 
   useEffect(() => {
     if (!readGuides[slug]) {

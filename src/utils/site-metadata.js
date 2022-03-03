@@ -23,6 +23,17 @@ const getDatabase = (env) => {
   }
 };
 
+const getReposDatabase = (env) => {
+  switch (env) {
+    case 'staging':
+      return 'pool_test';
+    case 'production':
+      return 'pool';
+    default:
+      return 'pool_test';
+  }
+};
+
 const gitBranch = execSync('git rev-parse --abbrev-ref HEAD')
   .toString('utf8')
   .replace(/[\n\r\s]+$/, '');
@@ -43,6 +54,7 @@ const getPathPrefix = (pathPrefix) => {
 const siteMetadata = {
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
+  reposDatabase: getReposDatabase(process.env.SNOOTY_ENV),
   parserBranch: process.env.GATSBY_PARSER_BRANCH,
   parserUser: process.env.GATSBY_PARSER_USER,
   patchId: process.env.PATCH_ID || '',

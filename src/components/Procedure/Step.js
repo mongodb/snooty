@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import { theme } from '../theme/docsTheme';
-import ComponentFactory from './ComponentFactory';
+import { theme } from '../../theme/docsTheme';
+import ComponentFactory from '../ComponentFactory';
 
 const Circle = styled('div')`
   align-items: center;

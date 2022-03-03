@@ -156,7 +156,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   padding: 40px;
 }
 
-@media not all and (max-width:420px) {
+@media not all and (max-width:480px) {
   .emotion-3 {
     text-align: center;
   }

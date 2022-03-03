@@ -150,7 +150,7 @@ exports[`when no summary is present renders correctly  1`] = `
   margin-right: 16px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-10 {
     padding: 16px;
   }
@@ -160,7 +160,7 @@ exports[`when no summary is present renders correctly  1`] = `
   color: #061621;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-1 {
     word-break: break-all;
   }
@@ -188,7 +188,7 @@ exports[`when no summary is present renders correctly  1`] = `
   margin: 24px 32px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-12 {
     margin: 16px;
   }
@@ -448,7 +448,7 @@ exports[`when no summary or description is present renders correctly  1`] = `
   margin-right: 16px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-10 {
     padding: 16px;
   }
@@ -458,7 +458,7 @@ exports[`when no summary or description is present renders correctly  1`] = `
   color: #061621;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-1 {
     word-break: break-all;
   }
@@ -720,7 +720,7 @@ exports[`when rendering all fields renders correctly  1`] = `
   margin-right: 16px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-10 {
     padding: 16px;
   }
@@ -730,7 +730,7 @@ exports[`when rendering all fields renders correctly  1`] = `
   color: #061621;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-1 {
     word-break: break-all;
   }
@@ -758,7 +758,7 @@ exports[`when rendering all fields renders correctly  1`] = `
   margin: 24px 32px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-12 {
     margin: 16px;
   }

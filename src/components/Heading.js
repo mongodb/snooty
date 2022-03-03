@@ -24,7 +24,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const hidefeedbackheader = page?.options?.hidefeedback === 'header';
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
-  const shouldShowMobileHeader = isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader);
+  const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader));
 
   return (
     <>
