@@ -48,7 +48,7 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
         }
       });
     }
-  }, [previewImage, url]);
+  }, [url]);
 
   // handles remaining cases for invalid video URLs
   if (!playable) {
