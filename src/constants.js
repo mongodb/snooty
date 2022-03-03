@@ -1,39 +1,5 @@
 import { baseUrl, dotcomifyUrl, isDotCom } from './utils/dotcom';
 
-export const DEPLOYMENTS = ['cloud', 'local'];
-
-export const PLATFORMS = ['windows', 'macos', 'linux', 'debian', 'rhel'];
-
-export const SLUG_TO_STRING = {
-  shell: 'Mongo Shell',
-  compass: 'Compass',
-  python: 'Python',
-  javasync: 'Java (Sync)',
-  'java-sync': 'Java (Sync)',
-  nodejs: 'Node.js',
-  php: 'PHP',
-  motor: 'Motor',
-  'java-async': 'Java (Async)',
-  c: 'C',
-  cpp: 'C++11',
-  csharp: 'C#',
-  perl: 'Perl',
-  ruby: 'Ruby',
-  scala: 'Scala',
-  go: 'Go',
-  cloud: 'Cloud',
-  local: 'Local',
-  macos: 'macOS',
-  linux: 'Linux',
-  windows: 'Windows',
-  debian: 'Debian',
-  rhel: 'RHEL',
-};
-
-export const stringifyTab = (tabName) => {
-  return SLUG_TO_STRING[tabName] || tabName;
-};
-
 // hardcoded for now because this target lookup will be complex
 // as it relies on other sites (e.g. manual) cc. Andrew
 const dotcomHandlingForREF_TARGETS = {
@@ -61,27 +27,3 @@ export const REF_TARGETS = Object.fromEntries(
 
 export const DOCS_URL = baseUrl(true);
 export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
-
-export const SECTION_NAME_MAPPING = {
-  prerequisites: {
-    id: 'what-you-ll-need',
-    title: 'What You’ll Need',
-  },
-  check_your_environment: {
-    id: 'check-your-environment',
-    title: 'Check Your Environment',
-  },
-  procedure: {
-    id: 'procedure',
-    title: 'Procedure',
-  },
-  summary: { id: 'summary', title: 'Summary' },
-  whats_next: {
-    id: 'what-s-next',
-    title: 'What’s Next',
-  },
-  seealso: {
-    id: 'see-also',
-    title: 'See Also',
-  },
-};
