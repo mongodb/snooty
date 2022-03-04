@@ -1,10 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Video renders correctly 1`] = `
+exports[`DailyMotion video renders correctly 1`] = `<DocumentFragment />`;
+
+exports[`Vimeo video renders correctly 1`] = `<DocumentFragment />`;
+
+exports[`YouTube video renders correctly 1`] = `
 <DocumentFragment>
   .emotion-2 {
   position: relative;
   padding-top: 56.25%;
+  margin: 24px 0px;
 }
 
 .emotion-0 {
