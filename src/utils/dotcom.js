@@ -9,7 +9,7 @@ const dotcomifyUrl = (url, needsProtocol = false) => {
   const decomposedUrl = url.split('.');
   const subdomainProduct = decomposedUrl[1] !== 'mongodb' ? decomposedUrl[1] : '';
   let pathname = url.split('.mongodb.com')[1];
-  let dotcomBaseUrl = `www.mongodb.com/docs`;
+  let dotcomBaseUrl = `www.mongodb.com/docs-qa`;
 
   if (needsProtocol) dotcomBaseUrl = `https://${dotcomBaseUrl}`;
   if (subdomainProduct) {
