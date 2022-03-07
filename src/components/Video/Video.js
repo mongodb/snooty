@@ -2,7 +2,7 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { theme } from '../../theme/docsTheme';
 import VideoPlayButton from './VideoPlayButton';
 

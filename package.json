@@ -100,6 +100,8 @@
     "hex-rgb": "^5.0.0",
     "highlight.js": "~10.6.0",
     "html-screen-capture-js": "^1.0.50",
+    "load-script": "^1.0.0",
+    "memoize-one": "^5.2.1",
     "mobx": "^6.1.5",
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-server-sdk": "^4.8.0",
