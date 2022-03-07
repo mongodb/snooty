@@ -47,6 +47,10 @@ const prefixVersion = (version) => {
   // Display as "Version X" on menu if numeric version and remove v from version name
   const versionNumber = version.replace('v', '').split()[0];
   const isNumeric = (version) => !isNaN(versionNumber);
+  // if branch is 'master', show as Version 1.0
+  if (isNaN(versionNumber)) {
+    return 'Version 1.0';
+  }
   return `${isNumeric(version) ? 'Version ' : ''}${versionNumber}`;
 };
 
