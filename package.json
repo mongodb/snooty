@@ -48,12 +48,6 @@
     "test:unit": "jest unit",
     "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md"
   },
-  "lint-staged": {
-    "*.js": [
-      "npm run format:fix",
-      "npm run lint:fix"
-    ]
-  },
   "dependencies": {
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^10.0.27",
