@@ -57,6 +57,15 @@ exports[`CodeIO renders correctly 1`] = `
   border-bottom: none;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+
+  .emotion-13 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .emotion-4 {
@@ -110,13 +119,13 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-7 {
+  .emotion-8 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-7 {
+  .emotion-8 {
     white-space: pre;
   }
 }
@@ -189,6 +198,11 @@ exports[`CodeIO renders correctly 1`] = `
   -ms-flex-negative: 0;
   flex-shrink: 0;
   padding-top: 6px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
   min-height: 36px;
   padding-top: 4px;
   min-height: 36px;
@@ -320,7 +334,7 @@ exports[`CodeIO renders correctly 1`] = `
   overflow: hidden;
 }
 
-.emotion-22 {
+.emotion-24 {
   border: 2px solid;
   overflow-x: auto;
   border-radius: 0;
@@ -352,18 +366,24 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-22 {
+  .emotion-24 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-22 {
+  .emotion-24 {
     white-space: pre;
   }
 }
 
-.emotion-25 {
+.emotion-26 {
+  border: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-21 {
   background-color: transparent;
   background-image: linear-gradient(90deg, #21313C, rgba(33,49,60,0));
   background-attachment: fixed;
@@ -399,8 +419,78 @@ exports[`CodeIO renders correctly 1`] = `
   color: #E7EEEC;
 }
 
+.emotion-27 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-27 > div > div {
+  width: unset;
+}
+
+.emotion-27 button > div > div {
+  font-size: 16px;
+}
+
+.emotion-27 > div > div {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.emotion-27 > div {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  margin: 0px;
+}
+
+.emotion-1 {
+  border: 1px solid #E7EEEC;
+  border-bottom: none;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.emotion-17 {
+  border: 1px solid #E7EEEC;
+  border-top: none;
+}
+
+.emotion-12 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-12 >div>div {
+  width: unset;
+}
+
+.emotion-12 button>div>div {
+  font-size: 16px;
+}
+
+.emotion-12 >div {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.emotion-0 {
+  padding: 10px;
+  color: #5D6C74;
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
+}
+
 <div
-    class="emotion-0"
+    class="emotion-27"
   >
     <div
       class="emotion-1"
@@ -444,7 +534,12 @@ exports[`CodeIO renders correctly 1`] = `
                     <td
                       class="emotion-12"
                     >
-                      print(
+                      <span
+                        class="lg-highlight-built_in"
+                      >
+                        print
+                      </span>
+                      (
                       <span
                         class="lg-highlight-string"
                       >
@@ -465,7 +560,7 @@ exports[`CodeIO renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-14 emotion-15"
+      class="emotion-17 emotion-18"
     >
       <button
         aria-disabled="false"
@@ -502,13 +597,13 @@ exports[`CodeIO renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="emotion-20"
+      class="emotion-26"
     >
       <div
         class="emotion-6"
       >
         <pre
-          class="emotion-22"
+          class="emotion-24"
           tabindex="-1"
         >
           <code

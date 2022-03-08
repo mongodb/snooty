@@ -3,6 +3,11 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.emotion-2 {
   width: 100%;
 }
 
@@ -108,7 +113,7 @@ exports[`renders correctly 1`] = `
 }
 
 <li
-    class="emotion-0"
+    class="emotion-2"
   >
     <a
       aria-current="page"
@@ -121,6 +126,11 @@ exports[`renders correctly 1`] = `
     </a>
   </li>
   .emotion-0 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.emotion-2 {
   width: 100%;
 }
 
@@ -216,7 +226,7 @@ exports[`renders correctly 1`] = `
 }
 
 <li
-    class="emotion-0"
+    class="emotion-2"
   >
     <a
       aria-current="false"
@@ -229,6 +239,11 @@ exports[`renders correctly 1`] = `
     </a>
   </li>
   .emotion-0 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.emotion-2 {
   width: 100%;
 }
 
@@ -324,7 +339,7 @@ exports[`renders correctly 1`] = `
 }
 
 <li
-    class="emotion-0"
+    class="emotion-2"
   >
     <a
       aria-current="false"

@@ -34,6 +34,10 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 .emotion-4 span {
   height: 40px;
   width: 40px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .emotion-6 {

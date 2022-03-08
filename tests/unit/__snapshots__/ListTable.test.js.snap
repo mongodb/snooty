@@ -2,12 +2,118 @@
 
 exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-0 {
+  .emotion-27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+
+
+.emotion-26 * {
+  border: 0!important;
+  min-height: unset!important;
+  padding: 0!important;
+}
+
+
+
+.emotion-28 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.emotion-28 * {
+  font-size: 14px!important;
+}
+
+.emotion-28>div>span>* {
+  margin: 0 0 12px;
+}
+
+.emotion-28>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-4 {
+  width: 5%;
+}
+
+.emotion-4 * {
+  font-size: 14px;
+}
+
+.emotion-8 {
+  width: 10%;
+}
+
+.emotion-8 * {
+  font-size: 14px;
+}
+
+.emotion-12 {
+  width: 15%;
+}
+
+.emotion-12 * {
+  font-size: 14px;
+}
+
+.emotion-16 {
+  width: 20%;
+}
+
+.emotion-16 * {
+  font-size: 14px;
+}
+
+.emotion-20 {
+  width: 30%;
+}
+
+.emotion-20 * {
+  font-size: 14px;
+}
+
+.emotion-49 {
   position: relative;
   max-width: 100%;
 }
 
-.emotion-1 {
+.emotion-27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 32px;
+}
+
+.emotion-0 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -61,11 +167,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   box-shadow: -4px 0 4px rgba(6,22,33,0.3);
 }
 
-.emotion-3 {
+.emotion-48 {
   overflow-x: auto;
 }
 
-.emotion-5 {
+.emotion-47 {
   border-collapse: collapse;
   box-sizing: border-box;
   width: 100%;
@@ -89,6 +195,21 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 .emotion-8 {
   border-width: 0px 1px 3px 1px;
   border-style: solid;
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 20px;
+  border-color: #E7EEEC;
+}
+
+.emotion-2 {
+  padding-right: 4px;
+  color: #3D4F58;
+}
+
+.emotion-29 {
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -152,56 +273,61 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-31 {
+  line-height: 20px;
+  position: relative;
+}
+
+.emotion-45 {
   border-top: 1px solid #E7EEEC;
   color: #3D4F58;
 }
 
-.emotion-31>td>[data-leafygreen-ui="td-inner-div"] {
+.emotion-45 > td > [data-leafygreen-ui="td-inner-div"] {
   min-height: 40px;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
 }
 
-.emotion-31>td:nth-child(1) {
+.emotion-45 > td:nth-child(1) {
   padding-left: 8px;
 }
 
-.emotion-31 td:nth-child(1)>div {
+.emotion-45 td:nth-child(1) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-31 td:nth-child(2)>div {
+.emotion-45 td:nth-child(2) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-31 td:nth-child(3)>div {
+.emotion-45 td:nth-child(3) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-31 td:nth-child(4)>div {
+.emotion-45 td:nth-child(4) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-31 td:nth-child(5)>div {
+.emotion-45 td:nth-child(5) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-31 td:nth-child(6)>div {
+.emotion-45 td:nth-child(6) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
@@ -264,7 +390,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 <div
-    class="emotion-0"
+    class="emotion-49"
   >
     <div
       class="emotion-1"
@@ -273,16 +399,16 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
       class="emotion-2"
     />
     <div
-      class="emotion-3"
+      class="emotion-48"
     >
       <table
         cellpadding="0"
         cellspacing="0"
-        class="emotion-4 emotion-5"
+        class="emotion-46 emotion-47"
       >
         <thead>
           <tr
-            class="emotion-6"
+            class="emotion-26"
             data-testid="leafygreen-ui-header-row"
           >
             <th
@@ -301,7 +427,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
             </th>
             <th
               aria-sort="none"
-              class="emotion-11 emotion-8"
+              class="emotion-8 emotion-5"
               role="columnheader"
               scope="col"
             >
@@ -329,7 +455,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
             </th>
             <th
               aria-sort="none"
-              class="emotion-19 emotion-8"
+              class="emotion-16 emotion-5"
               role="columnheader"
               scope="col"
             >
@@ -374,14 +500,14 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
         <tbody>
           <tr
             aria-disabled="false"
-            class="emotion-31"
+            class="emotion-45"
             role="row"
           >
             <td
-              class="emotion-32 emotion-33"
+              class="emotion-28 emotion-29"
             >
               <div
-                class="emotion-34"
+                class="emotion-27"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -459,12 +585,93 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 exports[`when rendering a list-table directive renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-0 {
+  .emotion-26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-4 * {
+  font-size: 14px;
+}
+
+.emotion-27 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #F9FBFA;
+}
+
+.emotion-27 * {
+  font-size: 14px!important;
+}
+
+.emotion-27>div>span>* {
+  margin: 0 0 12px;
+}
+
+.emotion-27>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-30 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.emotion-30 * {
+  font-size: 14px!important;
+}
+
+.emotion-30>div>span>* {
+  margin: 0 0 12px;
+}
+
+.emotion-30>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-124 {
   position: relative;
   max-width: 100%;
 }
 
-.emotion-1 {
+.emotion-26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 32px;
+}
+
+.emotion-0 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -518,11 +725,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   box-shadow: -4px 0 4px rgba(6,22,33,0.3);
 }
 
-.emotion-3 {
+.emotion-123 {
   overflow-x: auto;
 }
 
-.emotion-5 {
+.emotion-122 {
   border-collapse: collapse;
   box-sizing: border-box;
   width: 100%;
@@ -567,56 +774,79 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-30 {
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 20px;
+  line-height: 20px;
+  position: relative;
+  font-weight: bold;
+}
+
+.emotion-31 {
+  min-width: 40px;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 20px;
+  line-height: 20px;
+  position: relative;
+}
+
+.emotion-44 {
   border-top: 1px solid #E7EEEC;
   color: #3D4F58;
 }
 
-.emotion-30>td>[data-leafygreen-ui="td-inner-div"] {
+.emotion-44 > td > [data-leafygreen-ui="td-inner-div"] {
   min-height: 40px;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
 }
 
-.emotion-30>td:nth-child(1) {
+.emotion-44 > td:nth-child(1) {
   padding-left: 8px;
 }
 
-.emotion-30 td:nth-child(1)>div {
+.emotion-44 td:nth-child(1) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-30 td:nth-child(2)>div {
+.emotion-44 td:nth-child(2) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-30 td:nth-child(3)>div {
+.emotion-44 td:nth-child(3) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-30 td:nth-child(4)>div {
+.emotion-44 td:nth-child(4) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-30 td:nth-child(5)>div {
+.emotion-44 td:nth-child(5) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-30 td:nth-child(6)>div {
+.emotion-44 td:nth-child(6) > div {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
@@ -716,7 +946,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 <div
-    class="emotion-0"
+    class="emotion-124"
   >
     <div
       class="emotion-1"
@@ -725,12 +955,12 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
       class="emotion-2"
     />
     <div
-      class="emotion-3"
+      class="emotion-123"
     >
       <table
         cellpadding="0"
         cellspacing="0"
-        class="emotion-4 emotion-5"
+        class="emotion-121 emotion-122"
       >
         <thead>
           <tr
@@ -918,11 +1148,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-30"
+            class="emotion-44"
             role="row"
           >
             <th
-              class="emotion-31 emotion-32"
+              class="emotion-27 emotion-28"
               role="rowheader"
               scope="row"
             >
@@ -998,11 +1228,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-30"
+            class="emotion-44"
             role="row"
           >
             <th
-              class="emotion-31 emotion-32"
+              class="emotion-27 emotion-28"
               role="rowheader"
               scope="row"
             >

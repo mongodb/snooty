@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
+import Icon from '@leafygreen-ui/icon';
+import IconButton from '@leafygreen-ui/icon-button';
+import Tooltip from '@leafygreen-ui/tooltip';
 import { uiColors } from '@leafygreen-ui/palette';
 import { CodeContext } from '../code-context';
 import { TabContext } from '../tab-context';
@@ -30,7 +33,7 @@ const getLanguage = (lang) => {
   return 'none';
 };
 
-const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value } }) => {
+const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source } }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const code = value;
@@ -40,7 +43,28 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
     language = getLanguage(lang);
   }
   const captionSpecified = !!caption;
+  const sourceSpecified = !!source;
   const captionBorderRadius = captionSpecified ? '0px' : '4px';
+  const [isHovered, setIsHovered] = useState(false);
+
+  let customActionButtonList = [];
+  if (sourceSpecified) {
+    customActionButtonList = [
+      <IconButton href={source} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <Icon glyph="OpenNewTab" />
+        <Tooltip
+          triggerEvent="hover"
+          align="bottom"
+          justify="middle"
+          darkMode={true}
+          popoverZIndex={2}
+          open={isHovered}
+        >
+          View full source
+        </Tooltip>
+      </IconButton>,
+    ];
+  }
 
   const reportCodeCopied = useCallback(() => {
     reportAnalytics('CodeblockCopied', { code });
@@ -75,6 +99,8 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
         }}
         onCopy={reportCodeCopied}
         showLineNumbers={linenos}
+        showCustomActionButtons={sourceSpecified}
+        customActionButtons={customActionButtonList}
       >
         {code}
       </CodeBlock>
@@ -97,6 +123,7 @@ Code.propTypes = {
     lang: PropTypes.string,
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
+    source: PropTypes.string,
   }).isRequired,
 };
 

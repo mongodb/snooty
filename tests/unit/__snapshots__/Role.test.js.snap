@@ -17,6 +17,10 @@ exports[`Abbr correctly renders a "Abbr" role 1`] = `
   background-image: radial-gradient( circle closest-side, currentColor 75%, transparent 25% );
 }
 
+.emotion-0 {
+  position: relative;
+}
+
 <span
     class="emotion-0 emotion-1"
   >

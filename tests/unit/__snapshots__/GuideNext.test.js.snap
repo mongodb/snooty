@@ -36,12 +36,48 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
     -ms-flex-positive: 1;
     flex-grow: 1;
   }
+
+  .emotion-26 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
 }
 
 .emotion-4 {
   color: #5D6C74;
   font-size: 16px;
   margin-bottom: 16px;
+}
+
+.emotion-25 {
+  margin-top: 40px;
+  padding: 40px 24px;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-25 {
+    padding: 48px;
+  }
+}
+
+@media not all and (max-width: 1023px) {
+  .emotion-25 {
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    min-width: 300px;
+    margin-top: 0;
+    max-width: 510px;
+  }
 }
 
 .emotion-6 {
@@ -55,6 +91,14 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-9 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -73,6 +117,16 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   -moz-letter-spacing: 0px;
   -ms-letter-spacing: 0px;
   letter-spacing: 0px;
+  z-index: 0;
+  background-color: #09804C;
+  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4);
+  color: #FFFFFF;
+  font-size: 16px;
+  -webkit-transform: translateY(1px);
+  -moz-transform: translateY(1px);
+  -ms-transform: translateY(1px);
+  transform: translateY(1px);
+  height: 36px;
 }
 
 .emotion-9:focus {
@@ -115,6 +169,17 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
+
+.emotion-6:hover,
+.emotion-6:active {
+  color: #FFFFFF;
+  background-color: #116149;
+  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4),0px 0px 0px 3px #c3e7ca;
+}
+
+.emotion-6:focus {
+  background-color: #116149;
+  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
 }
 
 .emotion-12 {
@@ -140,29 +205,36 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   padding-right: 12px;
 }
 
-.emotion-13 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
+.emotion-16 {
+  color: #13AA52;
 }
 
-.emotion-14 {
-  margin-top: 40px;
-  padding: 40px 24px;
+.emotion-27 {
+  border-top: 1px solid #E7EEEC;
+  margin-bottom: 24px;
+  padding-top: 56px;
 }
 
-@media not all and (max-width: 767px) {
-  .emotion-14 {
-    padding: 48px;
+@media not all and (max-width:1023px) {
+  .emotion-27 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 0 34px;
   }
 }
 
-@media not all and (max-width: 1023px) {
-  .emotion-14 {
+.emotion-7 p {
+  margin-top: 8px;
+}
+
+@media not all and (max-width:1023px) {
+  .emotion-7 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -170,21 +242,18 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    min-width: 300px;
-    margin-top: 0;
-    max-width: 510px;
   }
 }
 
-.emotion-15 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
+.emotion-0 {
+  color: #5D6C74;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.emotion-2 {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .emotion-16 {
@@ -289,7 +358,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-27 emotion-28"
   >
     <div
       class="emotion-2 emotion-3"
@@ -347,7 +416,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       </a>
     </div>
     <div
-      class="emotion-14 emotion-15"
+      class="emotion-25 emotion-26"
     >
       <div
         class="emotion-16 emotion-17"
@@ -407,32 +476,40 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 
 exports[`GuideNext renders the first guide in the next chapter 1`] = `
 <DocumentFragment>
-  .emotion-0 {
-  border-top: 1px solid #E7EEEC;
-  margin-bottom: 24px;
-  padding-top: 56px;
+  .emotion-26 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
 }
 
-@media not all and (max-width: 1023px) {
-  .emotion-0 {
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 0 34px;
+.emotion-4 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-25 {
+  margin-top: 40px;
+  padding: 40px 24px;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-25 {
+    padding: 48px;
   }
 }
 
-.emotion-2 p {
-  margin-top: 8px;
-}
-
 @media not all and (max-width: 1023px) {
-  .emotion-2 {
+  .emotion-25 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -440,13 +517,10 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
+    min-width: 300px;
+    margin-top: 0;
+    max-width: 510px;
   }
-}
-
-.emotion-4 {
-  color: #5D6C74;
-  font-size: 16px;
-  margin-bottom: 16px;
 }
 
 .emotion-6 {
@@ -554,14 +628,23 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   padding-right: 12px;
 }
 
-.emotion-11 {
-  margin-top: 40px;
-  padding: 40px 24px;
+.emotion-27 {
+  border-top: 1px solid #E7EEEC;
+  margin-bottom: 24px;
+  padding-top: 56px;
 }
 
-@media not all and (max-width: 767px) {
-  .emotion-11 {
-    padding: 48px;
+@media not all and (max-width:1023px) {
+  .emotion-27 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 0 34px;
   }
 }
 
@@ -693,7 +776,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-27 emotion-28"
   >
     <div
       class="emotion-2 emotion-3"
@@ -724,7 +807,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       </a>
     </div>
     <div
-      class="emotion-11 emotion-12"
+      class="emotion-25 emotion-26"
     >
       <div
         class="emotion-13 emotion-14"
@@ -813,12 +896,47 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
     -ms-flex-positive: 1;
     flex-grow: 1;
   }
+  .emotion-40 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
 }
 
 .emotion-4 {
   color: #5D6C74;
   font-size: 16px;
   margin-bottom: 16px;
+}
+
+.emotion-39 {
+  margin-top: 40px;
+  padding: 40px 24px;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-39 {
+    padding: 48px;
+  }
+}
+
+@media not all and (max-width: 1023px) {
+  .emotion-39 {
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    min-width: 300px;
+    margin-top: 0;
+    max-width: 510px;
+  }
 }
 
 .emotion-6 {
@@ -926,19 +1044,36 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   padding-right: 12px;
 }
 
-.emotion-11 {
-  margin-top: 40px;
-  padding: 40px 24px;
+.emotion-16 {
+  color: #13AA52;
 }
 
-@media not all and (max-width: 767px) {
-  .emotion-11 {
-    padding: 48px;
+.emotion-41 {
+  border-top: 1px solid #E7EEEC;
+  margin-bottom: 24px;
+  padding-top: 56px;
+}
+
+@media not all and (max-width:1023px) {
+  .emotion-41 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 0 34px;
   }
 }
 
-@media not all and (max-width: 1023px) {
-  .emotion-11 {
+.emotion-7 p {
+  margin-top: 8px;
+}
+
+@media not all and (max-width:1023px) {
+  .emotion-7 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -946,21 +1081,18 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    min-width: 300px;
-    margin-top: 0;
-    max-width: 510px;
   }
 }
 
-.emotion-12 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
+.emotion-0 {
+  color: #5D6C74;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.emotion-2 {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .emotion-13 {
@@ -1120,7 +1252,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-41 emotion-42"
   >
     <div
       class="emotion-2 emotion-3"
@@ -1151,7 +1283,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       </a>
     </div>
     <div
-      class="emotion-11 emotion-12"
+      class="emotion-39 emotion-40"
     >
       <div
         class="emotion-13 emotion-14"
