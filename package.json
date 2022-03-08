@@ -41,7 +41,7 @@
     "lint:fix": "npm run lint -- --fix --max-warnings 0",
     "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
-    "prettier": "prettier '**/*.{js,jsx,json,md}' '!docs-tools/**'",
+    "prettier": "prettier '**/*.{js,jsx,json,md}'",
     "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",

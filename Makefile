@@ -27,9 +27,3 @@ stage: prefix
 		mut-publish public ${STAGING_BUCKET} --prefix=${PREFIX} --stage ${ARGS}; \
 		echo "Hosted at ${STAGING_URL}/${PREFIX}/${USER}/${GIT_BRANCH}/"; \
 	fi
-
-static:
-	-rm -r ./static/docs-tools/
-	-rm -r ./docs-tools/
-	git submodule add --force https://github.com/mongodb/docs-tools
-	-mkdir -p ./static/docs-tools
