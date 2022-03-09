@@ -4,7 +4,7 @@ STAGING_BUCKET=docs-mongodb-org-stg
 STAGING_URL="https://docs-mongodbcom-integration.corp.mongodb.com"
 -include .env.production
 
-.PHONY: stage static
+.PHONY: stage
 
 # To stage a specific build, include the commit hash as environment variable when staging
 # 	example: COMMIT_HASH=123456 make stage
