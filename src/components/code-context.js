@@ -15,7 +15,7 @@ const LANGUAGES = new Set(Object.values(Language));
 
 // Custom mapping for unique drivers that don't have an exact 1:1 name to LG language mapping
 const DRIVER_LANGUAGE_MAPPING = {
-  clike: new Set(['c', 'cpp', 'c#']),
+  cs: new Set(['c', 'cpp']),
   javascript: new Set(['compass', 'nodejs', 'shell']),
   python: new Set(['motor']),
 };
@@ -27,7 +27,7 @@ const getDriverLanguage = (driverArg) => {
 
   for (const language in DRIVER_LANGUAGE_MAPPING) {
     const driversSet = DRIVER_LANGUAGE_MAPPING[language];
-    if (driversSet.has(driver)) {
+    if (driversSet.has(driver) && LANGUAGES.has(language)) {
       return language;
     }
   }

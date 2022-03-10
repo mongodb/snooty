@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
@@ -20,15 +20,21 @@ const captionStyle = css`
   border-bottom: none;
 `;
 
+const sourceCodeStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const getLanguage = (lang) => {
   if (Object.values(Language).includes(lang)) {
     return lang;
   } else if (lang === 'sh') {
     // Writers commonly use 'sh' to represent shell scripts, but LeafyGreen and Highlight.js use the key 'shell'
     return 'shell';
-  } else if (['c', 'cpp', 'csharp'].includes(lang)) {
-    // LeafyGreen renders all C-family languages with "clike"
-    return 'clike';
+  } else if (['c', 'cpp'].includes(lang)) {
+    // LeafyGreen renders C and C++ languages with "cs"
+    return 'cs';
   }
   return 'none';
 };
@@ -45,20 +51,22 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   const captionSpecified = !!caption;
   const sourceSpecified = !!source;
   const captionBorderRadius = captionSpecified ? '0px' : '4px';
-  const [isHovered, setIsHovered] = useState(false);
 
   let customActionButtonList = [];
   if (sourceSpecified) {
     customActionButtonList = [
-      <IconButton href={source} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-        <Icon glyph="OpenNewTab" />
+      <IconButton href={source}>
         <Tooltip
           triggerEvent="hover"
           align="bottom"
           justify="middle"
+          trigger={
+            <div css={sourceCodeStyle}>
+              <Icon glyph="OpenNewTab" />
+            </div>
+          }
           darkMode={true}
           popoverZIndex={2}
-          open={isHovered}
         >
           View full source
         </Tooltip>
