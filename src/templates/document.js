@@ -9,6 +9,7 @@ import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/TabSelectors';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 const DocumentContainer = styled('div')`
   display: grid;
@@ -26,15 +27,9 @@ const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
 `;
 
-const Document = ({
-  children,
-  pageContext: {
-    slug,
-    page,
-    metadata: { parentPaths, slugToTitle: slugTitleMapping, title, toctreeOrder },
-  },
-}) => {
+const Document = ({ children, pageContext: { slug, page } }) => {
   const { project } = useSiteMetadata();
+  const { parentPaths, slugTitleMapping, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const isLanding = project === 'landing';
@@ -72,13 +67,7 @@ Document.propTypes = {
       children: PropTypes.array,
       options: PropTypes.object,
     }).isRequired,
-    parentPaths: PropTypes.object,
     slug: PropTypes.string.isRequired,
-    slugTitleMapping: PropTypes.shape({
-      [PropTypes.string]: PropTypes.string,
-    }),
-    toctree: PropTypes.object,
-    toctreeOrder: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
 
