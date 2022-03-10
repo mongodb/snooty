@@ -2,6 +2,8 @@
 // Contents of this file are temporal regardless, and logic is somewhat universal regardless.
 const isBrowser = typeof window !== 'undefined';
 
+const dotcomBaseUrl = 'www.mongodb.com/docs-qa';
+
 // Used to convert a 'docs.mongodb.com' or 'docs.<product>.mongodb.com' url to the new dotcom format
 // this *should* be removed post consolidation, or alternatively, made to use `new URL(url)` and polyfilled for safari
 // with relevant string split-slice-join logic turned into URL.pathname, and etc.
@@ -9,15 +11,15 @@ const dotcomifyUrl = (url, needsProtocol = false) => {
   const decomposedUrl = url.split('.');
   const subdomainProduct = decomposedUrl[1] !== 'mongodb' ? decomposedUrl[1] : '';
   let pathname = url.split('.mongodb.com')[1];
-  let dotcomBaseUrl = `www.mongodb.com/docs-qa`;
+  let baseUrl = dotcomBaseUrl;
 
-  if (needsProtocol) dotcomBaseUrl = `https://${dotcomBaseUrl}`;
+  if (needsProtocol) baseUrl = `https://${baseUrl}`;
   if (subdomainProduct) {
-    dotcomBaseUrl = `${dotcomBaseUrl}/${subdomainProduct}`;
+    baseUrl = `${baseUrl}/${subdomainProduct}`;
   }
 
   pathname = pathname.split('/').slice(1).join('/');
-  return pathname.length >= 1 ? `${dotcomBaseUrl}/${pathname}` : `${dotcomBaseUrl}`;
+  return pathname.length >= 1 ? `${baseUrl}/${pathname}` : `${baseUrl}`;
 };
 
 const isDotCom = () => {
@@ -32,4 +34,4 @@ const baseUrl = (needsProtocol = false) => {
   return isDotCom() ? dotcomifyUrl(url, needsProtocol) : `${needsProtocol ? 'https://' : ''}${url}`;
 };
 
-module.exports = { dotcomifyUrl, isDotCom, baseUrl };
+module.exports = { dotcomifyUrl, isDotCom, baseUrl, dotcomBaseUrl };
