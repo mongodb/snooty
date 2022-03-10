@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import ComponentFactory from './ComponentFactory';
@@ -9,6 +9,7 @@ import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
 // Delete this modified node from its original location.
@@ -76,57 +77,60 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-export default class DocumentBody extends Component {
-  constructor(props) {
-    super(props);
-    const { pageContext } = this.props;
-    this.pageNodes = getNestedValue(['page', 'children'], pageContext) || [];
+const DocumentBody = (props) => {
+  const {
+    location,
+    pageContext: { page, slug, template },
+  } = props;
+  const initialization = () => {
+    const pageNodes = getNestedValue(['children'], page) || [];
     // Standardize cssclass nodes that appear on the page
-    normalizeCssClassNodes(this.pageNodes, 'name', 'cssclass');
-    this.footnotes = getFootnotes(this.pageNodes);
-  }
+    normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
+    const footnotes = getFootnotes(pageNodes);
 
-  render() {
-    const {
-      location,
-      pageContext: { metadata, page, slug, template },
-    } = this.props;
-    const lookup = slug === '/' ? 'index' : slug;
-    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
-    const siteTitle = getNestedValue(['title'], metadata) || '';
-    const { Template } = getTemplate(template);
+    return { pageNodes, footnotes };
+  };
 
-    return (
-      <>
-        <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-        <Widgets
-          location={location}
-          pageOptions={page?.options}
-          pageTitle={pageTitle}
-          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-          slug={slug}
-        >
-          <FootnoteContext.Provider value={{ footnotes: this.footnotes }}>
-            <Template {...this.props}>
-              {this.pageNodes.map((child, index) => (
-                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-              ))}
-            </Template>
-          </FootnoteContext.Provider>
-        </Widgets>
-        <UnifiedFooter hideLocale={true} />
-      </>
-    );
-  }
-}
+  const [{ pageNodes, footnotes }] = useState(initialization);
+
+  const metadata = useSnootyMetadata();
+
+  const lookup = slug === '/' ? 'index' : slug;
+  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
+  const siteTitle = getNestedValue(['title'], metadata) || '';
+  const { Template } = getTemplate(template);
+
+  return (
+    <>
+      <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
+      <Widgets
+        location={location}
+        pageOptions={page?.options}
+        pageTitle={pageTitle}
+        publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+        slug={slug}
+      >
+        <FootnoteContext.Provider value={{ footnotes }}>
+          <Template {...props}>
+            {pageNodes.map((child, index) => (
+              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+            ))}
+          </Template>
+        </FootnoteContext.Provider>
+      </Widgets>
+      <UnifiedFooter hideLocale={true} />
+    </>
+  );
+};
 
 DocumentBody.propTypes = {
   location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
-    metadata: PropTypes.object.isRequired,
     page: PropTypes.shape({
       children: PropTypes.array,
     }).isRequired,
     slug: PropTypes.string.isRequired,
   }),
 };
+
+export default DocumentBody;
