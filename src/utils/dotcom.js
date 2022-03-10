@@ -2,7 +2,7 @@
 // Contents of this file are temporal regardless, and logic is somewhat universal regardless.
 const isBrowser = typeof window !== 'undefined';
 
-const dotcomBaseUrl = 'www.mongodb.com/docs-qa';
+const DOTCOM_BASE_URL = 'www.mongodb.com/docs-qa';
 
 // Used to convert a 'docs.mongodb.com' or 'docs.<product>.mongodb.com' url to the new dotcom format
 // this *should* be removed post consolidation, or alternatively, made to use `new URL(url)` and polyfilled for safari
@@ -11,7 +11,7 @@ const dotcomifyUrl = (url, needsProtocol = false) => {
   const decomposedUrl = url.split('.');
   const subdomainProduct = decomposedUrl[1] !== 'mongodb' ? decomposedUrl[1] : '';
   let pathname = url.split('.mongodb.com')[1];
-  let baseUrl = dotcomBaseUrl;
+  let baseUrl = DOTCOM_BASE_URL;
 
   if (needsProtocol) baseUrl = `https://${baseUrl}`;
   if (subdomainProduct) {
@@ -34,4 +34,4 @@ const baseUrl = (needsProtocol = false) => {
   return isDotCom() ? dotcomifyUrl(url, needsProtocol) : `${needsProtocol ? 'https://' : ''}${url}`;
 };
 
-module.exports = { dotcomifyUrl, isDotCom, baseUrl, dotcomBaseUrl };
+module.exports = { dotcomifyUrl, isDotCom, baseUrl, DOTCOM_BASE_URL };
