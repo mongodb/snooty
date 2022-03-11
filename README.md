@@ -5,7 +5,7 @@ Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 ## Installation
 
 ```shell
-npm install
+npm install --legacy-peer-deps
 ```
 
 If this is your first time running the site you'll need the static directory:
