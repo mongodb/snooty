@@ -81,10 +81,12 @@ const GlobalGrid = styled('div')`
   grid-template-rows: auto 1fr;
 `;
 
+let deprecated = false;
+
 const DefaultLayout = ({
   children,
   pageContext: {
-    metadata: { chapters, guides, publishedBranches, slugToTitle, title, toctree },
+    metadata: { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol },
     page,
     slug,
     repoBranches,
@@ -94,6 +96,7 @@ const DefaultLayout = ({
   const { sidenav } = getTemplate(template);
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
+  deprecated = eol;
 
   return (
     <>
@@ -141,3 +144,4 @@ DefaultLayout.propTypes = {
 };
 
 export default DefaultLayout;
+export { deprecated };

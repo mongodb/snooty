@@ -6,6 +6,7 @@ import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from './Sidenav';
 import SiteBanner from './Banner/SiteBanner';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { deprecated } from '../layouts/index';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
@@ -29,7 +30,7 @@ const Header = ({ sidenav }) => {
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} />
+        {!deprecated && <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} />}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>

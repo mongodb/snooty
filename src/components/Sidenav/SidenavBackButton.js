@@ -10,6 +10,7 @@ import { NavigationContext } from '../navigation-context';
 import { DOCS_URL } from '../../constants';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
+import { deprecated } from '../../layouts/index';
 
 // Empty SideNavItem used as a placeholder while parent category page is fetched.
 // Look into implementing a loading skeleton for this when time permits
@@ -78,6 +79,12 @@ const SidenavBackButton = ({
     return null;
   }
 
+  let textShown = 'Back to ';
+  if (deprecated) {
+    url = 'https://docs.mongodb.com/legacy/';
+    textShown = 'Return to Documentation';
+  }
+
   return (
     <>
       <SideNavItem
@@ -93,7 +100,7 @@ const SidenavBackButton = ({
          * icon can be rendered twice (see: OpenAPI component)
          */}
         {!enableGlyph && <span className={cx(htmlBackIcon)}>&#8592;</span>}
-        Back to {formatText(title)}
+        {textShown} {!deprecated && formatText(title)}
       </SideNavItem>
       {border}
     </>
