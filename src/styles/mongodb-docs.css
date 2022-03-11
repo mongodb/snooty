@@ -16,7 +16,6 @@ figure {
 .fa4-ul > li,
 .glyphicon,
 .input-group-btn > .btn,
-.modal-body,
 sub,
 sup {
   position: relative;
@@ -33,7 +32,6 @@ sup {
   vertical-align: middle;
 }
 .dropdown-menu,
-.modal-content,
 .popover {
   background-clip: padding-box;
 }
@@ -257,7 +255,6 @@ sub {
   bottom: -0.25em;
 }
 .card-large .card-image,
-.modal-open,
 body.no-scroll,
 svg:not(:root) {
   overflow: hidden;
@@ -527,7 +524,6 @@ div.body td {
 #btnv .btn-arrow-left,
 #btnv .btn-next-text,
 .align-right,
-.modal-footer,
 .text-right,
 blockquote.pull-right p,
 blockquote.pull-right small {
@@ -717,8 +713,6 @@ q:before {
 .container:before,
 .form-horizontal .form-group:after,
 .form-horizontal .form-group:before,
-.modal-footer:after,
-.modal-footer:before,
 .nav:after,
 .nav:before,
 .pager:after,
@@ -737,7 +731,6 @@ q:before {
 .clearfix:after,
 .container:after,
 .form-horizontal .form-group:after,
-.modal-footer:after,
 .nav:after,
 .pager:after,
 .panel-body:after,
@@ -1976,9 +1969,7 @@ fieldset[disabled] .btn-link:hover {
   border-radius: 4px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
-.dropdown-backdrop,
-.modal,
-.modal-backdrop {
+.dropdown-backdrop {
   top: 0;
   right: 0;
   bottom: 0;
@@ -2109,8 +2100,7 @@ h4 + div.section {
 .btn-group .btn + .btn,
 .btn-group .btn + .btn-group,
 .btn-group .btn-group + .btn,
-.btn-group .btn-group + .btn-group,
-.modal-footer .btn-group .btn + .btn {
+.btn-group .btn-group + .btn-group {
   margin-left: -1px;
 }
 .btn-toolbar > .btn + .btn,
@@ -2130,7 +2120,6 @@ h4 + div.section {
 }
 .btn .caret,
 .btn-group > .btn:first-child,
-.modal-footer .btn-block + .btn-block,
 dd > div.admonition,
 li > div.admonition,
 p > div.admonition {
@@ -3027,7 +3016,6 @@ a.list-group-item:hover {
   opacity: 0.5;
 }
 .is-closed,
-.modal-backdrop.fade,
 .tooltip {
   opacity: 0;
 }
@@ -3038,63 +3026,10 @@ button.close {
   border: 0;
   -webkit-appearance: none;
 }
-.modal {
-  display: none;
-  overflow: auto;
-  overflow-y: scroll;
-  position: fixed;
-  z-index: 1040;
-}
-.modal.fade .modal-dialog {
-  -webkit-transform: translate(0, -25%);
-  transform: translate(0, -25%);
-  transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
-}
-.modal.in .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-.modal-dialog {
-  margin-left: auto;
-  margin-right: auto;
-  width: auto;
-  padding: 10px;
-  z-index: 1050;
-}
-.modal-content {
-  position: relative;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  outline: 0;
-}
-.modal-backdrop {
-  position: fixed;
-  z-index: 1030;
-  background-color: #000;
-}
 .popover,
 .tooltip,
 .tooltip-arrow {
   position: absolute;
-}
-.modal-backdrop.in {
-  opacity: 0.5;
-}
-.modal-header {
-  min-height: 16.428571429px;
-}
-.modal-header .close {
-  margin-top: -2px;
-}
-.modal-title {
-  margin: 0;
-  line-height: 1.428571429;
-}
-.modal-footer .btn + .btn {
-  margin-left: 5px;
-  margin-bottom: 0;
 }
 .tooltip {
   z-index: 1030;
@@ -3444,16 +3379,6 @@ th {
   }
   .jumbotron h1 {
     font-size: 63px;
-  }
-  .modal-dialog {
-    left: 50%;
-    right: auto;
-    width: 600px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-  .modal-content {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
   .carousel-control .icon-next,
   .carousel-control .icon-prev {
@@ -11494,59 +11419,6 @@ div.admonition {
   .document {
     margin-left: 25px;
   }
-}
-.modal-content {
-  border-radius: 0;
-  padding: 24px 18px 18px;
-  color: #494747;
-}
-.modal-content h4,
-.modal-header .close:focus,
-.modal-header .close:hover {
-  color: #494747;
-}
-.modal-body {
-  padding: 0;
-  margin-top: 25px;
-}
-.modal-header {
-  border-bottom: 1px solid #ebebed;
-  padding: 0 0 18px;
-  text-align: center;
-  margin-bottom: 18px;
-}
-.modal-header h3,
-h4.modal-title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 400;
-  color: #6e7c9f;
-}
-.modal-header .close {
-  font-size: 24px;
-  color: #615f5f;
-  position: relative;
-  top: -6px;
-}
-.modal-footer {
-  border-top: 1px solid #ebebed;
-  padding: 18px 0 0;
-  margin-top: 0;
-  background-color: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-.action-buttons .modal-column-1 {
-  position: relative;
-  border-right: 1px solid #ebebed;
-}
-.action-buttons .modal-column-2 > .btn-group {
-  margin-left: -9px;
-}
-.action-buttons .modal-column-1,
-.action-buttons .modal-column-2 {
-  padding-top: 25px;
-  padding-bottom: 40px;
 }
 .action-buttons .circle {
   position: absolute;
