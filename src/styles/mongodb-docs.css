@@ -10612,8 +10612,19 @@ div td pre {
 div#top-right {
   position: absolute;
 }
-.accordion--collapsed>.accordion__content,.expand-toc-icon,.right-column .toc>ul>li>a,.right-column .toc>ul>li>ul>li>ul>li>ul,a.external[href^='https://docs.mongodb.com']:after,div#main-db.hidden,div.hidden,div.section>h1+dl.dbcommand>dt,div.section>h1+dl.expression>dt,div.section>h1+dl.group>dt,div.section>h1+dl.method>dt,div.section>h1+dl.operator>dt,div.section>h1+dl.pipeline>dt,div.section>h1+dl.projection>dt,dl.binary
-{
+.accordion--collapsed>.accordion__content,
+.expand-toc-icon,
+a.external[href^='https://docs.mongodb.com']:after,
+div#main-db.hidden,
+div.hidden,
+div.section>h1+dl.dbcommand>dt,
+div.section>h1+dl.expression>dt,
+div.section>h1+dl.group>dt,
+div.section>h1+dl.method>dt,
+div.section>h1+dl.operator>dt,
+div.section>h1+dl.pipeline>dt,
+div.section>h1+dl.projection>dt,
+dl.binary {
   display: none;
 }
 .screenreader {
@@ -10701,7 +10712,6 @@ div.body h4 {
   font-size: 16px;
   font-weight: 700;
 }
-.right-column .toc .toc-header,
 div.body h5 {
   font-size: 14px;
   font-weight: 700;
@@ -10993,7 +11003,6 @@ div.body div.bc li.jr {
   float: right;
   display: none;
 }
-.right-column .toc ul,
 div.body div.bc ul {
   padding: 0;
   margin: 0;
@@ -11154,23 +11163,6 @@ a.youtube-icon {
   color: #615f5f;
   width: 21px;
 }
-.right-column .wrapper {
-  min-height: calc(100% - 50px);
-  position: fixed;
-  margin-top: 10px;
-}
-.right-column .social .img {
-  background-repeat: no-repeat;
-  background-size: 21px 21px;
-  width: 21px;
-  height: 21px;
-  display: inline-block;
-}
-.right-column .social a {
-  margin-right: 2px;
-  font-size: 22px;
-  color: #615f5f;
-}
 @media print {
   #btnv,
   #header-db,
@@ -11279,51 +11271,9 @@ li.current > a > .docs-expand-arrow.expand-icon {
   float: right;
   margin-top: 8px;
 }
-.content .right-column {
-  width: 161px;
-  -ms-flex: 1 0 161px;
-  flex: 1 0 161px;
-  margin: 10px;
-  -webkit-transform: translateZ(0);
-  -ms-flex-order: 2;
-  order: 2;
-  overflow-y: hidden !important;
-  overflow-x: hidden;
-}
-.right-column .toc {
-  padding: 24px 20px;
-  background-color: #f5f6f7;
-  margin-bottom: 24px;
-}
-.right-column .toc a {
-  font-size: 13px;
-  text-indent: -11px;
-}
-.right-column .toc li {
-  line-height: 23px;
-  list-style: none;
-}
-.right-column .toc li a {
-  line-height: 24px;
-}
-.right-column .toc > ul > li > ul {
-  padding-left: 1px;
-}
-.right-column .toc > ul > li > ul > li > ul {
-  padding-left: 13px;
-}
-.right-column .toc li > a:before {
-  content: '\2022';
-  color: #333;
-  opacity: 0.5;
-  display: inline-block;
-}
 @media (max-width: 1340px) {
   #header-db .header-content {
     width: 100%;
-  }
-  .content .right-column {
-    display: none;
   }
   .document {
     margin-left: 25px;
@@ -11333,9 +11283,6 @@ li.current > a > .docs-expand-arrow.expand-icon {
   #header-db .nav-items {
     margin-right: 15px;
     float: none;
-  }
-  .content .right-column {
-    display: none;
   }
   .document {
     margin-left: 25px;
