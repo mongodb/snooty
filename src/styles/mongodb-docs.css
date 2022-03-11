@@ -69,7 +69,6 @@ table.highlighttable {
 }
 .fa-ul,
 .fa4-ul,
-.footer ul,
 .nav-panel ul li {
   list-style-type: none;
 }
@@ -121,7 +120,6 @@ table.no-outer-border {
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */ /*! normalize.css v2.1.0 | MIT License | git.io/normalize */
-.accordion__content,
 .carousel-inner > .active,
 .carousel-inner > .next,
 .carousel-inner > .prev,
@@ -202,7 +200,6 @@ a:hover {
 h1 {
   margin: 0.67em 0;
 }
-.alert .alert-link,
 b,
 dt,
 p.sidebar-title,
@@ -530,7 +527,6 @@ blockquote.pull-right small {
 }
 .align-center,
 .btn,
-.footer .copyright,
 .nav-justified > li > a,
 .text-center,
 div.body div.math p,
@@ -621,8 +617,6 @@ ol,
 ul {
   margin-top: 0;
 }
-.alert > p,
-.alert > ul,
 .auth-table td p.first,
 .auth-table td p.last,
 .panel > .list-group,
@@ -847,8 +841,6 @@ div.clearer {
 .col-xs-11 {
   width: 91.66666666666666%;
 }
-.action-buttons .btn-group,
-.action-buttons .btn-group > button,
 .col-xs-12,
 .figure img,
 .nav-justified,
@@ -1635,8 +1627,7 @@ dd ul {
   user-select: none;
 }
 .btn:focus,
-.btn:hover,
-.footer .box a {
+.btn:hover {
   color: #333;
   text-decoration: none;
 }
@@ -1918,7 +1909,6 @@ fieldset[disabled] .btn-link:hover {
 .glyphicon {
   display: inline-block;
 }
-.alert > p + p,
 .btn-block + .btn-block,
 .panel-group .panel + .panel {
   margin-top: 5px;
@@ -1984,7 +1974,6 @@ fieldset[disabled] .btn-link:hover {
   overflow: hidden;
   background-color: #e5e5e5;
 }
-.alert h4,
 .body h3 + p,
 .body h4 + p,
 .body p.caption,
@@ -2623,7 +2612,6 @@ a.list-group-item.active > .badge {
   color: inherit;
   background-color: #eee;
 }
-.alert,
 .progress {
   margin-bottom: 20px;
 }
@@ -2656,67 +2644,6 @@ a.thumbnail:hover {
 .thumbnail .caption {
   padding: 9px;
   color: #333;
-}
-.alert {
-  padding: 15px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert h4 {
-  color: inherit;
-}
-.alert-dismissable {
-  padding-right: 35px;
-}
-.alert-dismissable .close {
-  position: relative;
-  top: -2px;
-  right: -21px;
-  color: inherit;
-}
-.alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #468847;
-}
-.alert-success hr {
-  border-top-color: #c9e2b3;
-}
-.alert-success .alert-link {
-  color: #356635;
-}
-.alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-  color: #3a87ad;
-}
-.alert-info hr {
-  border-top-color: #a6e1ec;
-}
-.alert-info .alert-link {
-  color: #2d6987;
-}
-.alert-warning {
-  background-color: #fcf8e3;
-  border-color: #fbeed5;
-  color: #c09853;
-}
-.alert-warning hr {
-  border-top-color: #f8e5be;
-}
-.alert-warning .alert-link {
-  color: #a47e3c;
-}
-.alert-danger {
-  background-color: #f2dede;
-  border-color: #eed3d7;
-  color: #b94a48;
-}
-.alert-danger hr {
-  border-top-color: #e6c1c7;
-}
-.alert-danger .alert-link {
-  color: #953b39;
 }
 @-webkit-keyframes progress-bar-stripes {
   from {
@@ -9549,7 +9476,6 @@ dd {
   margin-left: 1.5em;
 }
 .accelerator,
-.footer .box a:hover,
 .nav-panel a:hover,
 a:hover {
   text-decoration: underline;
@@ -9603,7 +9529,6 @@ table.highlighttable td {
   }
   #top-link,
   .button-row,
-  div.footer,
   div.related {
     display: none;
   }
@@ -10560,59 +10485,11 @@ div td pre {
 .apiref-resource__path-parameter {
   font-weight: 700;
 }
-.accordion {
-  border: 2px solid #eee;
-  padding: 20px;
-  position: relative;
-}
-.accordion__action {
-  color: #000;
-  float: right;
-  font-family: Akzidenz, 'Helvetica Neue', sans-serif;
-  font-family: var(--sans-serif);
-  font-size: 20px;
-  position: relative;
-}
-.accordion__button {
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.accordion__button::before {
-  border-radius: 1px;
-  border-right: 3px solid #000;
-  border-top: 3px solid #000;
-  content: '';
-  height: 13px;
-  left: 20px;
-  position: absolute;
-  top: 23px;
-  -webkit-transform: rotate(135deg);
-  transform: rotate(135deg);
-  transition: transform 0.2s ease-in-out;
-  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
-  width: 13px;
-}
-.accordion--collapsed > .accordion__button::before {
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.accordion__title {
-  color: #000;
-  font-family: Akzidenz, 'Helvetica Neue', sans-serif;
-  font-family: var(--sans-serif);
-  font-size: 20px;
-  margin-left: 35px;
-  position: relative;
-}
 .screenreader,
 .social,
 div#top-right {
   position: absolute;
 }
-.accordion--collapsed>.accordion__content,
 .expand-toc-icon,
 a.external[href^='https://docs.mongodb.com']:after,
 div#main-db.hidden,
@@ -10675,9 +10552,6 @@ div.related {
 }
 div.related a {
   color: #e2f3cc;
-}
-div.footer-nav div.related ul {
-  padding: 5px 10px 0;
 }
 p.searchtip {
   font-size: 93%;
@@ -11099,55 +10973,6 @@ div.body div.contents.long-toc {
 #header-db .search-db.wide {
   width: 226px;
 }
-.footer {
-  width: auto;
-  font-size: 80%;
-  border: none;
-  padding: 20px 0;
-}
-.footer p {
-  margin: 1em 0;
-  padding: 0;
-  line-height: 1.5;
-}
-.footer a {
-  color: #989898;
-  text-decoration: underline;
-}
-.footer h3 {
-  margin-top: 10px;
-  font-size: 16px;
-}
-.footer .box {
-  background-color: #f5f6f7;
-  min-height: 20px;
-  padding: 15px;
-  margin-bottom: 20px;
-  text-align: left;
-}
-.footer ul {
-  padding-left: 20px;
-}
-.footer .section-0 {
-  padding-left: 100px;
-}
-.footer .section-1 {
-  padding-left: 46px;
-}
-.footer .section-2 {
-  padding-left: 64px;
-}
-.footer .section-3 {
-  padding-left: 49px;
-}
-@media (max-width: 992px) {
-  .footer .section-0,
-  .footer .section-1,
-  .footer .section-2,
-  .footer .section-3 {
-    padding-left: 15px;
-  }
-}
 .social {
   height: 21px;
   right: 0;
@@ -11293,24 +11118,6 @@ li.current > a > .docs-expand-arrow.expand-icon {
     margin-left: 25px;
   }
 }
-.action-buttons .circle {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  right: -12px;
-  top: 29px;
-  border-radius: 14px;
-  border: 1px solid #dee0e3;
-  background-color: #fff;
-}
-.action-buttons .divider-text {
-  cursor: default;
-  position: absolute;
-  right: -5px;
-  top: 32px;
-  font-size: 13px;
-  color: #333;
-}
 .redirect-copy,
 .saving-copy {
   height: 100px;
@@ -11365,7 +11172,4 @@ table.compatibility-large td,
 table.compatibility-large th {
   border: 1px solid #f5f6f7;
   vertical-align: middle;
-}
-.alert-info {
-  margin-bottom: 40px;
 }
