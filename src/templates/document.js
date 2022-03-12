@@ -29,11 +29,11 @@ const StyledRightColumn = styled(RightColumn)`
 
 const Document = ({ children, pageContext: { slug, page } }) => {
   const { project } = useSiteMetadata();
-  const { parentPaths, slugTitleMapping, title, toctreeOrder } = useSnootyMetadata();
+  const { parentPaths, slugToTitle, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const isLanding = project === 'landing';
-  const breadcrumbsPageTitle = isLanding ? slugTitleMapping[slug] : null;
+  const breadcrumbsPageTitle = isLanding ? slugToTitle[slug] : null;
   const breadcrumbsHomeUrl = isLanding ? '/' : null;
 
   return (
@@ -48,9 +48,7 @@ const Document = ({ children, pageContext: { slug, page } }) => {
             slug={slug}
           />
           {children}
-          {showPrevNext && (
-            <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={toctreeOrder} />
-          )}
+          {showPrevNext && <InternalPageNav slug={slug} slugTitleMapping={slugToTitle} toctreeOrder={toctreeOrder} />}
         </div>
       </StyledMainColumn>
       <StyledRightColumn>
