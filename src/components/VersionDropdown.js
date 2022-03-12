@@ -9,12 +9,15 @@ import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
 import { baseUrl } from '../utils/dotcom';
+import { deprecated } from '../layouts/index';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
   & > button {
     background-color: ${uiColors.white};
+    ${!deprecated && `background-color: ${uiColors.gray.light2} !important`};
+    ${!deprecated && `color: ${uiColors.gray.base} !important`};
   }
 
   span {
@@ -196,6 +199,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       size={Size.Large}
       value={slugFromParserBranch(parserBranch, branches)}
       usePortal={false}
+      disabled={deprecated}
     >
       {activeUngroupedBranches?.map((b) => createOption(b))}
       {groups?.map((group) => {
