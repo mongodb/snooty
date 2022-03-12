@@ -18,6 +18,8 @@ const StyledSelect = styled(Select)`
 
   & > button {
     background-color: ${uiColors.white};
+    ${!deprecated && `background-color: ${uiColors.gray.light2} !important`};
+    ${!deprecated && `color: ${uiColors.gray.base} !important`};
   }
 
   span {
