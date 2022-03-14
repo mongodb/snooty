@@ -124,8 +124,6 @@ audio:not([controls]) {
 .img-thumbnail,
 select[multiple],
 select[size],
-textarea.input-group-lg > .input-group-addon,
-textarea.input-group-sm > .input-group-addon,
 textarea.input-lg,
 textarea.input-sm {
   height: auto;
@@ -869,7 +867,6 @@ input[type='checkbox'][disabled],
 input[type='radio'][disabled] {
   cursor: not-allowed;
 }
-.input-group-sm > .input-group-addon,
 .input-sm {
   height: 30px;
   padding: 5px 10px;
@@ -877,12 +874,10 @@ input[type='radio'][disabled] {
   line-height: 1.5;
   border-radius: 3px;
 }
-select.input-group-sm > .input-group-addon,
 select.input-sm {
   height: 30px;
   line-height: 30px;
 }
-.input-group-lg > .input-group-addon,
 .input-lg {
   height: 45px;
   padding: 10px 16px;
@@ -890,7 +885,6 @@ select.input-sm {
   line-height: 1.33;
   border-radius: 6px;
 }
-select.input-group-lg > .input-group-addon,
 select.input-lg {
   height: 45px;
   line-height: 45px;
@@ -948,8 +942,6 @@ dd ul {
 .body h3 + p,
 .body h4 + p,
 .body p.caption,
-.input-group-addon input[type='checkbox'],
-.input-group-addon input[type='radio'],
 .media:first-child,
 dd p,
 h2 + div.section,
@@ -960,53 +952,9 @@ h4 + div.section {
 .breadcrumb > .active {
   color: #999;
 }
-.input-group {
-  display: table;
-  border-collapse: separate;
-}
-.input-group-addon:not(:first-child):not(:last-child),
-.input-group-btn:not(:first-child):not(:last-child) {
-  border-radius: 0;
-}
-.input-group-addon:first-child {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-}
-.input-group-addon:last-child {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
 .panel > .list-group .list-group-item:first-child {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-}
-.input-group {
-  position: relative;
-}
-.input-group.col {
-  float: none;
-  padding-left: 0;
-  padding-right: 0;
-}
-.input-group-addon,
-.input-group-btn {
-  display: table-cell;
-}
-.input-group-addon,
-.input-group-btn {
-  width: 1%;
-  white-space: nowrap;
-  vertical-align: middle;
-}
-.input-group-addon {
-  padding: 6px 12px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1;
-  text-align: center;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 .badge {
   font-weight: 700;
@@ -1014,26 +962,6 @@ h4 + div.section {
   white-space: nowrap;
   line-height: 1;
   text-align: center;
-}
-.input-group-addon.input-sm {
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 3px;
-}
-.input-group-addon.input-lg {
-  padding: 10px 16px;
-  font-size: 18px;
-  border-radius: 6px;
-}
-.input-group-addon:first-child {
-  border-right: 0;
-}
-.input-group-addon:last-child {
-  border-left: 0;
-}
-.input-group-btn {
-  position: relative;
-  white-space: nowrap;
 }
 .panel-group .panel-footer + .panel-collapse .panel-body {
   border-bottom: 1px solid #ddd;
