@@ -14,12 +14,6 @@ sub,
 sup {
   position: relative;
 }
-.checkbox,
-.checkbox-inline,
-.radio,
-.radio-inline {
-  vertical-align: middle;
-}
 [class*='icon-'],
 button,
 select {
@@ -242,8 +236,7 @@ button[disabled],
 html input[disabled] {
   cursor: default;
 }
-input[type='checkbox'],
-input[type='radio'] {
+input[type='checkbox'] {
   box-sizing: border-box;
   padding: 0;
 }
@@ -353,8 +346,7 @@ a:hover {
 }
 a:focus,
 input[type='checkbox']:focus,
-input[type='file']:focus,
-input[type='radio']:focus {
+input[type='file']:focus {
   outline: #333 dotted thin;
   outline: -webkit-focus-ring-color auto 5px;
   outline-offset: -2px;
@@ -786,8 +778,7 @@ label {
   margin-bottom: 5px;
   font-weight: 700;
 }
-input[type='checkbox'],
-input[type='radio'] {
+input[type='checkbox'] {
   margin: 4px 0 0;
   line-height: normal;
 }
@@ -803,56 +794,8 @@ input[type='number']::-webkit-outer-spin-button {
 dl {
   margin-bottom: 15px;
 }
-.checkbox,
-.radio {
-  min-height: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-left: 20px;
-}
-.checkbox label,
-.radio label {
-  display: inline;
-  margin-bottom: 0;
-  font-weight: 400;
-  cursor: pointer;
-}
-.checkbox input[type='checkbox'],
-.checkbox-inline input[type='checkbox'],
-.radio input[type='radio'],
-.radio-inline input[type='radio'] {
-  float: left;
-  margin-left: -20px;
-}
-.checkbox + .checkbox,
-.radio + .radio {
-  margin-top: -5px;
-}
-.checkbox-inline,
-.radio-inline {
-  display: inline-block;
-  padding-left: 20px;
-  margin-bottom: 0;
-  font-weight: 400;
-  cursor: pointer;
-}
-.checkbox-inline + .checkbox-inline,
-.radio-inline + .radio-inline {
-  margin-top: 0;
-  margin-left: 10px;
-}
-.checkbox-inline[disabled],
-.checkbox[disabled],
-.radio-inline[disabled],
-.radio[disabled],
-fieldset[disabled] .checkbox,
-fieldset[disabled] .checkbox-inline,
-fieldset[disabled] .radio,
-fieldset[disabled] .radio-inline,
 fieldset[disabled] input[type='checkbox'],
-fieldset[disabled] input[type='radio'],
-input[type='checkbox'][disabled],
-input[type='radio'][disabled] {
+input[type='checkbox'][disabled] {
   cursor: not-allowed;
 }
 .input-sm {
