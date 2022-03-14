@@ -12,7 +12,7 @@ const getSiteUrl = (project) => {
       break;
     default:
   }
-  return isDotCom() ? dotcomifyUrl(url, true) : url;
+  return isDotCom() ? dotcomifyUrl(url, { needsPrefix: false }) : url;
 };
 
 module.exports.getSiteUrl = getSiteUrl;
