@@ -8,8 +8,8 @@ const DOTCOM_BASE_PREFIX = `docs-qa`;
 // Used to convert a 'docs.mongodb.com' or 'docs.<product>.mongodb.com' url to the new dotcom format
 // this *should* be removed post consolidation, or alternatively, made to use `new URL(url)` and polyfilled for safari
 // with relevant string split-slice-join logic turned into URL.pathname, and etc.
-const dotcomifyUrl = (url, options = { needsProtocol: true, needsPrefix: true }) => {
-  const { needsProtocol, needsPrefix } = options;
+const dotcomifyUrl = (url, options = {}) => {
+  const { needsProtocol = true, needsPrefix = true } = options;
   const decomposedUrl = url.split('.');
   const subdomainProduct = decomposedUrl[1] !== 'mongodb' ? decomposedUrl[1] : '';
   let pathname = url.split('.mongodb.com')[1];
