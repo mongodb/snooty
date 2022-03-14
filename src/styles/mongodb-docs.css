@@ -2,7 +2,6 @@ hr,
 input[type='search'] {
   box-sizing: content-box;
 }
-.field-list p,
 fieldset,
 figure {
   margin: 0;
@@ -46,9 +45,6 @@ th {
 html {
   -webkit-tap-highlight-color: transparent;
 }
-table.highlighttable {
-  table-layout: fixed;
-}
 .fa-ul,
 .fa4-ul {
   list-style-type: none;
@@ -60,8 +56,7 @@ table.highlighttable {
   box-sizing: border-box;
 }
 table,
-table.docutils,
-table.no-outer-border {
+table.docutils {
   border-collapse: collapse;
 }
 @font-face {
@@ -196,7 +191,6 @@ sup {
   line-height: 0;
   vertical-align: baseline;
 }
-table.indextable td,
 textarea {
   vertical-align: top;
 }
@@ -591,8 +585,7 @@ div.clearer {
 .fa4-pull-left {
   float: left;
 }
-.figure img,
-table.indextable {
+.figure img {
   width: 100%;
 }
 @media (min-width: 768px) {
@@ -1032,10 +1025,7 @@ h4 + div.section {
   font-size: 18px;
   border-radius: 6px;
 }
-.input-group-addon:first-child,
-table.border-table td:last-child,
-table.border-table > thead th.head:last-child,
-table.index-table td:last-child {
+.input-group-addon:first-child {
   border-right: 0;
 }
 .input-group-addon:last-child {
@@ -1450,7 +1440,6 @@ button.close {
   border: 0;
   -webkit-appearance: none;
 }
-table.indextable td,
 th {
   text-align: left;
 }
@@ -1462,9 +1451,7 @@ th {
 .fa4-li {
   text-align: center;
 }
-.line-block .line-block,
-table.indextable dd,
-table.indextable dl {
+.line-block .line-block {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -7173,13 +7160,6 @@ p.topic-title {
   font-size: 1.1em;
   font-weight: 700;
 }
-table.indextable tr.pcap {
-  height: 10px;
-}
-table.indextable tr.cap {
-  margin-top: 10px;
-  background-color: #f2f2f2;
-}
 img.toggler {
   margin-right: 3px;
   cursor: pointer;
@@ -7256,18 +7236,9 @@ table.docutils th {
   border-right: 0;
   border-bottom: 1px solid #aaa;
 }
-table.field-list td,
-table.field-list th,
 table.footnote td,
 table.footnote th {
   border: 0 !important;
-}
-table.citation {
-  border-left: 1px solid gray;
-  margin-left: 1px;
-}
-table.citation td {
-  border-bottom: none;
 }
 ul.checklist {
   list-style: outside;
@@ -7290,16 +7261,6 @@ ol.upperroman {
 dd {
   margin-left: 30px;
 }
-.highlighted {
-  background-color: #fbe54e;
-}
-.field-list ul {
-  margin: 0;
-  padding-left: 1em;
-}
-.refcount {
-  color: #060;
-}
 .footnote:target {
   background-color: #ffa;
 }
@@ -7319,15 +7280,8 @@ a:hover {
   width: 2em;
   padding-top: 24px;
 }
-.highlighttable {
-  overflow: scroll;
-  width: 100%;
-}
 img.math {
   vertical-align: middle;
-}
-table.highlighttable td {
-  padding: 0;
 }
 @media print {
   .hidden-print,
@@ -7647,19 +7601,6 @@ dl.binary {
   background-color: rgba(0, 0, 0, 0.5);
   height: 0;
 }
-#baselineOverlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2000;
-  opacity: 0.5;
-  background: url(https://media.mongodb.org/24px-baseline-overlay.png);
-}
 body {
   font-family: Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 0;
@@ -7673,9 +7614,6 @@ div.body div.bc ul li a {
 }
 hr {
   border: 1px solid #b1b4b6;
-}
-p.searchtip {
-  font-size: 93%;
 }
 a {
   text-decoration: none;
@@ -7765,10 +7703,6 @@ code.xref,
 tt.xref {
   font-weight: 400;
 }
-table.docutils.field-list ul.first.last.simple > li,
-table.docutils.field-list ul.first.last.simple > li > p {
-  padding-top: 1em;
-}
 .hll {
   display: inherit;
 }
@@ -7781,12 +7715,6 @@ table.docutils {
   font-size: 14px;
   line-height: 24px;
 }
-table.border-table,
-table.index-table,
-table.no-outer-border {
-  margin: auto;
-  width: 98%;
-}
 table.docutils > thead th.head {
   padding: 0 5px 12px;
 }
@@ -7795,46 +7723,12 @@ table.docutils th {
   border-color: #ebebed;
   padding: 11px 5px 12px;
 }
-table.border-table td,
-table.border-table > thead th.head,
-table.index-table td {
-  border-bottom: none;
-  border-right: 1px solid #ebebed;
-  text-align: left;
-}
-table.index-table td {
-  line-height: 15px;
-  margin-bottom: 0;
-  padding: 5px 0 0 25px;
-}
-#search,
-table.index-table-less-padding td {
+#search {
   padding-left: 10px;
-}
-table.index-table > thead th.head {
-  text-align: left;
-  padding: 0 0 5px 24px;
-  border-bottom: none;
-}
-table.index-table-less-padding > thead th.head {
-  padding: 0 0 5px 10px;
-}
-table.border-table > thead th.head {
-  padding: 0 0 5px 10px;
-}
-table.border-table td {
-  border-top: 1px solid #ebebed;
-  line-height: 15px;
-  margin-bottom: 0;
-  padding: 5px 0 0 10px;
 }
 div.body div.bc,
 dl.method dt {
   margin-bottom: 24px;
-}
-table.no-outer-border {
-  text-align: left;
-  border-style: hidden;
 }
 div#mongodb ul {
   list-style: none;
