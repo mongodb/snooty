@@ -10,5 +10,3 @@ docs-tools/
 coverage/
 .coverage
 .env.*
-# Temporarily ignore this while working on DOP-2805
-example/
