@@ -1109,31 +1109,6 @@ a.thumbnail:hover {
 input[type='text']:disabled {
   color: #333;
 }
-.suggestion-card a {
-  color: inherit;
-}
-.well {
-  background-color: #f5f5f5;
-}
-.well {
-  min-height: 20px;
-  padding: 19px;
-  margin-bottom: 20px;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-}
-.well blockquote {
-  border-color: rgba(0, 0, 0, 0.15);
-}
-.well-lg {
-  padding: 24px;
-  border-radius: 6px;
-}
-.well-sm {
-  padding: 9px;
-  border-radius: 3px;
-}
 .close {
   float: right;
   font-size: 21px;
@@ -7102,75 +7077,6 @@ div td pre {
   font-style: italic;
   font-weight: 200;
 }
-.flex--wrap {
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-.flex--center-x {
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-.flex--center-y {
-  -ms-flex-align: center;
-  align-items: center;
-}
-.flex--center-all {
-  -ms-flex-pack: center;
-  justify-content: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-}
-.flex--right {
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-.flex--space-between {
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-.flex--space-around {
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-}
-.flex--vertical {
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-.mws-root {
-  border: 0;
-}
-.intro-section {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 0;
-  width: 100%;
-}
-.intro-section-paragraph {
-  line-height: 22px;
-  font-size: 1em;
-  margin: 0 16px 24px 0 !important;
-  padding: 0 14px 0 0;
-  max-width: 380px;
-}
-.wide-container .container {
-  padding: inherit;
-}
-@media (max-width: 760px) {
-  .intro-section {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-  .intro-section-paragraph {
-    padding: 0;
-    margin: 0 0 16px;
-  }
-}
 
 .marian,
 div.document {
@@ -7181,65 +7087,6 @@ h2,
 h3,
 h4 {
   margin: 24px 0;
-}
-.suggestion {
-  background-color: #13aa52;
-  background-color: var(--mongodb-green);
-  bottom: 30%;
-  font-family: inherit;
-  overflow-x: hidden;
-  padding: 1rem;
-  position: fixed;
-  right: 20px;
-  -webkit-transform: translateX(120%);
-  transform: translateX(120%);
-  transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s;
-  transition-property: all;
-  width: 195px;
-  z-index: 100;
-}
-.suggestion h1 {
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 0;
-}
-.suggestion p {
-  color: #fff;
-  line-height: 1;
-}
-.is-open {
-  -webkit-transform: none;
-  transform: none;
-}
-.suggestion-card {
-  background-color: #fff;
-  margin-top: 1rem;
-  padding: 0.75rem;
-  transition-property: all;
-  transition-duration: 150ms;
-}
-.suggestion-card:hover {
-  box-shadow: 0 16px 60px 0 rgba(86, 91, 115, 0.2);
-  -webkit-transform: translateY(-2px);
-  transform: translateY(-2px);
-}
-.suggestion-card h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-.suggestion-card p {
-  color: inherit;
-  line-height: 1;
-  margin-bottom: 0;
-  margin-top: 1rem;
-}
-.suggestion-close-button {
-  color: #fff;
-  float: right;
 }
 .tab-strip {
   list-style: none;
