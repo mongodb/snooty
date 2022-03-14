@@ -7159,12 +7159,6 @@ ul.search li div.context {
   margin: 2px 0 0 30px;
   text-align: left;
 }
-table.contentstable {
-  width: 90%;
-}
-table.contentstable p.biglink {
-  line-height: 150%;
-}
 .optional,
 a.biglink {
   font-size: 1.3em;
@@ -7299,8 +7293,6 @@ dd {
 .highlighted {
   background-color: #fbe54e;
 }
-.contents.singlecol ul,
-.contents.twocols-rootonly ul,
 .field-list ul {
   margin: 0;
   padding-left: 1em;
@@ -7929,43 +7921,6 @@ div.dc span.bcpoint {
   font-size: 0.9em;
   color: #343434;
 }
-div.body div.contents {
-  padding: 0 0.5em 0.5em;
-}
-div.body div.contents.long-toc {
-  max-width: 100%;
-  float: none;
-  margin-left: 0;
-}
-.contents li {
-  padding-top: 0.25em;
-  column-break-inside: avoid;
-  list-style-position: inside;
-}
-.contents.twocols ul,
-.contents.twocols-rootonly > ul {
-  margin: 0;
-  padding-left: 1em;
-  -webkit-column-count: 2;
-  column-count: 2;
-  grid-column-gap: 10px;
-  -webkit-column-gap: 10px;
-  column-gap: 10px;
-  -webkit-columns: 2;
-  columns: 2;
-}
-#vn {
-  font-size: 0.85em;
-}
-.document .body .edit-link,
-.document .body .edit-link:hover {
-  position: relative;
-  float: right;
-  bottom: -9px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #313030;
-}
 .content {
   font-size: 16px;
   line-height: 24px;
@@ -8001,8 +7956,7 @@ a.youtube-icon {
   width: 21px;
 }
 @media print {
-  #btnv,
-  .document .body .edit-link {
+  #btnv {
     display: none;
   }
   .content .main-column {
