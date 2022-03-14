@@ -934,32 +934,6 @@ a.thumbnail:hover {
 input[type='text']:disabled {
   color: #333;
 }
-.close {
-  float: right;
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: 0.2;
-}
-.close:focus,
-.close:hover {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0.5;
-}
-.is-closed {
-  opacity: 0;
-}
-button.close {
-  padding: 0;
-  cursor: pointer;
-  background: 0 0;
-  border: 0;
-  -webkit-appearance: none;
-}
 th {
   text-align: left;
 }
@@ -6652,8 +6626,7 @@ ul.search {
   margin: 10px 0 0 20px;
   padding: 0;
 }
-dd,
-img.toggler {
+dd {
   margin-top: 3px;
 }
 ul.search li {
@@ -6675,14 +6648,9 @@ span.linkdescr {
   padding-top: 5px;
   font-size: 90%;
 }
-dl.glossary dt,
 p.topic-title {
   font-size: 1.1em;
   font-weight: 700;
-}
-img.toggler {
-  margin-right: 3px;
-  cursor: pointer;
 }
 div.genindex-jumpbox,
 div.modindex-jumpbox {
@@ -6741,10 +6709,6 @@ div.topic {
 }
 p.topic-title {
   margin-top: 10px;
-}
-div.body p.centered {
-  text-align: center;
-  margin-top: 25px;
 }
 table.docutils {
   border: 0;
