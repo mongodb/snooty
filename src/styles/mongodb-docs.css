@@ -29,7 +29,6 @@ h5:hover > a.headerlink,
 h6:hover > a.headerlink {
   visibility: visible;
 }
-.list-inline > li,
 th {
   padding-right: 5px;
 }
@@ -325,7 +324,6 @@ input[type='file']:focus {
   outline: -webkit-focus-ring-color auto 5px;
   outline-offset: -2px;
 }
-.list-inline > li,
 label {
   display: inline-block;
 }
@@ -437,25 +435,12 @@ ul ul {
   margin-bottom: 0;
 }
 address,
-legend,
-pre.prettyprint {
+legend {
   margin-bottom: 20px;
-}
-.list-inline,
-.list-unstyled {
-  padding-left: 0;
-  list-style: none;
-}
-.list-inline > li {
-  padding-left: 5px;
 }
 dd,
 dt {
   line-height: 1.428571429;
-}
-abbr.initialism {
-  font-size: 90%;
-  text-transform: uppercase;
 }
 blockquote {
   padding: 10px 20px;
@@ -486,21 +471,15 @@ q:before {
   padding-left: 15px;
   padding-right: 15px;
 }
-.clearfix:after,
-.clearfix:before,
 .container:after,
 .container:before,
 .row:after,
-.row:before,
-.tabbable:after,
-.tabbable:before {
+.row:before {
   content: ' ';
   display: table;
 }
-.clearfix:after,
 .container:after,
 .row:after,
-.tabbable:after,
 div.clearer {
   clear: both;
 }
