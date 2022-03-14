@@ -2,7 +2,6 @@ hr,
 input[type='search'] {
   box-sizing: content-box;
 }
-fieldset,
 figure {
   margin: 0;
 }
@@ -114,9 +113,7 @@ audio:not([controls]) {
 }
 .img-thumbnail,
 select[multiple],
-select[size],
-textarea.input-lg,
-textarea.input-sm {
+select[size] {
   height: auto;
 }
 .badge:empty,
@@ -647,7 +644,6 @@ div.clearer {
 .table-bordered > thead > tr > th {
   border-bottom-width: 2px;
 }
-fieldset,
 legend {
   border: 0;
   padding: 0;
@@ -794,42 +790,13 @@ input[type='number']::-webkit-outer-spin-button {
 dl {
   margin-bottom: 15px;
 }
-fieldset[disabled] input[type='checkbox'],
 input[type='checkbox'][disabled] {
   cursor: not-allowed;
 }
-.input-sm {
-  height: 30px;
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
-}
-select.input-sm {
-  height: 30px;
-  line-height: 30px;
-}
-.input-lg {
-  height: 45px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 6px;
-}
-select.input-lg {
-  height: 45px;
-  line-height: 45px;
-}
-.help-block,
 dd,
 dd table,
 dd ul {
   margin-bottom: 10px;
-}
-.help-block {
-  display: block;
-  margin-top: 5px;
-  color: #737373;
 }
 .progress-striped .progress-bar,
 .progress-striped .progress-bar-danger,
