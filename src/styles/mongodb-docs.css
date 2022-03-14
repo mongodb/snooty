@@ -417,9 +417,7 @@ div.body td {
 .align-right {
   text-align: right;
 }
-div.body div.math p,
-table.compatibility td,
-table.compatibility-large td {
+div.body div.math p {
   text-align: center;
 }
 .h1,
@@ -8038,51 +8036,4 @@ a.youtube-icon {
 .guilabel {
   font-style: normal;
   font-weight: 700;
-}
-table.compatibility,
-table.compatibility-large {
-  border-collapse: collapse;
-  color: #494747;
-  display: table-cell;
-  font-family: Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  width: 100%;
-  vertical-align: middle;
-}
-table.docutils.compatibility,
-table.docutils.compatibility-large {
-  line-height: 12px;
-  vertical-align: middle;
-}
-table.docutils.compatibility-large > thead th.head,
-table.docutils.compatibility > thead th.head {
-  padding: 12px;
-  text-align: center;
-  background-color: #7f7f7f;
-  color: #fff;
-}
-table.compatibility th:nth-child(1),
-table.compatibility-large th:nth-child(1),
-table.docutils.compatibility-large > thead th:nth-child(1),
-table.docutils.compatibility > thead th:nth-child(1) {
-  text-align: left;
-  padding: 10px 12px;
-  background-color: #eee;
-  color: #7f7f7f;
-}
-table.docutils.compatibility td {
-  padding: 11px 55px 12px;
-}
-table.docutils.compatibility-large td {
-  padding: 11px 35px 12px;
-}
-table.docutils.compatibility-large.no-padding td {
-  padding: unset;
-}
-table.compatibility td,
-table.compatibility th,
-table.compatibility-large td,
-table.compatibility-large th {
-  border: 1px solid #f5f6f7;
-  vertical-align: middle;
 }
