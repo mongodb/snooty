@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select, Size } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
@@ -16,8 +17,6 @@ const StyledSelect = styled(Select)`
 
   & > button {
     background-color: ${uiColors.white};
-    ${!deprecated && `background-color: ${uiColors.gray.light2} !important`};
-    ${!deprecated && `color: ${uiColors.gray.base} !important`};
   }
 
   span {
@@ -184,6 +183,13 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
     return slug;
   };
 
+  const eolVersionFlipperStyle = LeafyCSS`
+  & > button {
+    background-color: ${uiColors.gray.light2} !important;
+    color: ${uiColors.gray.base} !important;
+  }
+`;
+
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
   // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
   // OR have the OptionGroup not take up space when a label is empty-string. For now,
@@ -191,6 +197,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   return (
     <StyledSelect
       allowDeselect={false}
+      className={cx(deprecated ? eolVersionFlipperStyle : '')}
       aria-labelledby="View a different version of documentation."
       defaultValue="master"
       onChange={navigate}
