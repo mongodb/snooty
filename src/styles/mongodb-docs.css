@@ -129,8 +129,7 @@ h1 {
 b,
 dt,
 strong,
-ul.keywordmatches li.goodmatch a,
-ul.search li a {
+ul.keywordmatches li.goodmatch a {
   font-weight: 700;
 }
 .versionmodified,
@@ -150,10 +149,6 @@ a > em,
 address,
 cite {
   font-style: normal;
-}
-mark {
-  background: #ff0;
-  color: #000;
 }
 q {
   quotes: '\201C''\201D''\2018''\2019';
@@ -434,8 +429,7 @@ ul ol,
 ul ul {
   margin-bottom: 0;
 }
-address,
-legend {
+address {
   margin-bottom: 20px;
 }
 dd,
@@ -523,17 +517,6 @@ div.clearer {
   .container {
     max-width: 970px;
   }
-}
-legend {
-  border: 0;
-  padding: 0;
-}
-legend {
-  width: 100%;
-  font-size: 21px;
-  line-height: inherit;
-  color: #333;
-  border-bottom: 1px solid #e5e5e5;
 }
 label {
   margin-bottom: 5px;
@@ -6127,7 +6110,6 @@ img {
   line-height: 1;
   font-family: ChartsIcons;
 }
-#search,
 .guilabel {
   font-family: sans-serif;
 }
@@ -6137,25 +6119,8 @@ img {
 img {
   border: 0;
 }
-ul.search {
-  margin: 10px 0 0 20px;
-  padding: 0;
-}
 dd {
   margin-top: 3px;
-}
-ul.search li {
-  padding: 5px 0 5px 20px;
-  background-repeat: no-repeat;
-  background-position: 0 7px;
-}
-ul.search li div.context {
-  color: #888;
-  margin: 2px 0 0 30px;
-  text-align: left;
-}
-.optional {
-  font-size: 1.3em;
 }
 p.topic-title {
   font-size: 1.1em;
@@ -6471,9 +6436,6 @@ table.docutils th {
   border-color: #ebebed;
   padding: 11px 5px 12px;
 }
-#search {
-  padding-left: 10px;
-}
 dl.method dt {
   margin-bottom: 24px;
 }
@@ -6545,14 +6507,6 @@ dl.method > dt em {
     margin-left: 0;
     margin-top: 0;
   }
-}
-#search {
-  font-size: 1em;
-  border: 1px solid #ccc;
-  float: left;
-  height: 100%;
-  width: 250px;
-  margin-left: 5px;
 }
 @media (max-width: 1340px) {
   .document {
