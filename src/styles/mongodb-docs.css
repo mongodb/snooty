@@ -109,7 +109,6 @@ audio:not([controls]) {
   display: none;
   height: 0;
 }
-.img-thumbnail,
 select[multiple],
 select[size] {
   height: auto;
@@ -215,7 +214,6 @@ button,
 input {
   line-height: normal;
 }
-.img-thumbnail,
 body {
   line-height: 1.428571429;
 }
@@ -309,7 +307,6 @@ table {
     border: 1px solid #ddd !important;
   }
 }
-.img-thumbnail,
 .table .table,
 body,
 div.highlight,
@@ -345,28 +342,9 @@ input[type='file']:focus {
   outline: -webkit-focus-ring-color auto 5px;
   outline-offset: -2px;
 }
-.img-responsive {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-.img-thumbnail,
 .list-inline > li,
 label {
   display: inline-block;
-}
-.img-rounded {
-  border-radius: 6px;
-}
-.img-thumbnail {
-  padding: 4px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: 0.2s ease-in-out;
-  max-width: 100%;
-}
-.img-circle {
-  border-radius: 50%;
 }
 hr {
   height: 0;
@@ -380,13 +358,11 @@ small {
 }
 #btnv .btn-arrow-right,
 #btnv .btn-prev-text,
-.align-left,
 div.body td {
   text-align: left;
 }
 #btnv .btn-arrow-left,
-#btnv .btn-next-text,
-.align-right {
+#btnv .btn-next-text {
   text-align: right;
 }
 div.body div.math p {
@@ -809,11 +785,6 @@ dd ul {
   overflow: hidden;
   transition: height 0.35s;
 }
-.thumbnail,
-.thumbnail > img {
-  height: auto;
-  display: block;
-}
 .body h3 + p,
 .body h4 + p,
 .body p.caption,
@@ -869,28 +840,6 @@ span.eqno {
 .label-danger[href]:focus,
 .label-danger[href]:hover {
   background-color: #c9302c;
-}
-.thumbnail {
-  padding: 4px;
-  line-height: 1.428571429;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: 0.2s ease-in-out;
-  max-width: 100%;
-}
-.thumbnail > img {
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-a.thumbnail:focus,
-a.thumbnail:hover {
-  border-color: #428bca;
-}
-.thumbnail .caption {
-  padding: 9px;
-  color: #333;
 }
 input[type='text']:disabled {
   color: #333;
@@ -6635,20 +6584,6 @@ div.body p.caption {
 p.rubric {
   margin-top: 30px;
   font-weight: 700;
-}
-.figure.align-left,
-img.align-left,
-object.align-left {
-  clear: left;
-  float: left;
-  margin-right: 1em;
-}
-.figure.align-right,
-img.align-right,
-object.align-right {
-  clear: right;
-  float: right;
-  margin-left: 1em;
 }
 .linenos pre,
 a tt,
