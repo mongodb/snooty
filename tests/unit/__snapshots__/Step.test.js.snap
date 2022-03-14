@@ -7,6 +7,7 @@ exports[`renders with "connected" styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   gap: 33px;
 }
 
@@ -14,18 +15,18 @@ exports[`renders with "connected" styling 1`] = `
   font-weight: 600;
 }
 
-.emotion-2 {
-  position: relative;
-}
-
-.emotion-2:after {
+.emotion-6:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
-  left: calc(50% - 1px);
+  left: 16px;
   position: absolute;
   top: 0;
   z-index: -1;
+}
+
+.emotion-2 {
+  position: relative;
 }
 
 .emotion-0 {
@@ -107,6 +108,7 @@ exports[`renders with "connected" styling by default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   gap: 33px;
 }
 
@@ -114,18 +116,18 @@ exports[`renders with "connected" styling by default 1`] = `
   font-weight: 600;
 }
 
-.emotion-2 {
-  position: relative;
-}
-
-.emotion-2:after {
+.emotion-6:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
-  left: calc(50% - 1px);
+  left: 16px;
   position: absolute;
   top: 0;
   z-index: -1;
+}
+
+.emotion-2 {
+  position: relative;
 }
 
 .emotion-0 {
@@ -202,7 +204,11 @@ exports[`renders with "connected" styling by default 1`] = `
 
 exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
-  .emotion-6 {
+  .emotion-2 {
+  position: relative;
+}
+
+.emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -212,10 +218,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 
 .emotion-6 section > p > a {
   font-weight: 600;
-}
-
-.emotion-2 {
-  position: relative;
 }
 
 .emotion-0 {

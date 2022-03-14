@@ -2,52 +2,52 @@ import { dotcomifyUrl, isDotCom, baseUrl } from '../../../src/utils/dotcom';
 
 describe('dotcomifyUrl', () => {
   it('by default does not return a url with protocols', () => {
-    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs');
+    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs-qa');
   });
 
   it('supports adding https:// protocol to url when given boolean flag', () => {
-    expect(dotcomifyUrl('https://docs.mongodb.com', true)).toBe('https://www.mongodb.com/docs');
+    expect(dotcomifyUrl('https://docs.mongodb.com', true)).toBe('https://www.mongodb.com/docs-qa');
   });
 
   it('supports both regular subdomain and product subdomain conversions', () => {
-    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs');
-    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('www.mongodb.com/docs/opsmanager');
-    expect(dotcomifyUrl('https://docs.atlas.mongodb.com')).toBe('www.mongodb.com/docs/atlas');
+    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs-qa');
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('www.mongodb.com/docs-qa/opsmanager');
+    expect(dotcomifyUrl('https://docs.atlas.mongodb.com')).toBe('www.mongodb.com/docs-qa/atlas');
   });
 
   it('supports conversions with pathname combinations, and handles `com` in pathname', () => {
     // single level subdomain
-    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs');
+    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs-qa');
     expect(dotcomifyUrl('https://docs.mongodb.com/long-path/name/divided/by-many-paths')).toBe(
-      'www.mongodb.com/docs/long-path/name/divided/by-many-paths'
+      'www.mongodb.com/docs-qa/long-path/name/divided/by-many-paths'
     );
-    expect(dotcomifyUrl('https://docs.mongodb.com/compound-indexes')).toBe('www.mongodb.com/docs/compound-indexes');
+    expect(dotcomifyUrl('https://docs.mongodb.com/compound-indexes')).toBe('www.mongodb.com/docs-qa/compound-indexes');
 
     // product subdomains
-    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('www.mongodb.com/docs/opsmanager');
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('www.mongodb.com/docs-qa/opsmanager');
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/this-is/a-long/pathname')).toBe(
-      'www.mongodb.com/docs/opsmanager/this-is/a-long/pathname'
+      'www.mongodb.com/docs-qa/opsmanager/this-is/a-long/pathname'
     );
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/combine-results')).toBe(
-      'www.mongodb.com/docs/opsmanager/combine-results'
+      'www.mongodb.com/docs-qa/opsmanager/combine-results'
     );
   });
 
   it('supports conversions with versions and aliases', () => {
     // single level subdomain
     expect(dotcomifyUrl('https://docs.mongodb.com/v1.2.3/compound-indexes')).toBe(
-      'www.mongodb.com/docs/v1.2.3/compound-indexes'
+      'www.mongodb.com/docs-qa/v1.2.3/compound-indexes'
     );
     expect(dotcomifyUrl('https://docs.mongodb.com/upcoming/compound-indexes')).toBe(
-      'www.mongodb.com/docs/upcoming/compound-indexes'
+      'www.mongodb.com/docs-qa/upcoming/compound-indexes'
     );
 
     // product subdomains
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/upcoming/compound-indexes')).toBe(
-      'www.mongodb.com/docs/opsmanager/upcoming/compound-indexes'
+      'www.mongodb.com/docs-qa/opsmanager/upcoming/compound-indexes'
     );
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/v1.5/compound-indexes')).toBe(
-      'www.mongodb.com/docs/opsmanager/v1.5/compound-indexes'
+      'www.mongodb.com/docs-qa/opsmanager/v1.5/compound-indexes'
     );
   });
 });
@@ -97,7 +97,7 @@ describe('baseUrl', () => {
         writeable: true,
       });
 
-      expect(baseUrl()).toBe('www.mongodb.com/docs');
+      expect(baseUrl()).toBe('www.mongodb.com/docs-qa');
 
       Object.defineProperty(window, 'location', {
         value: {
