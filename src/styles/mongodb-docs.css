@@ -395,11 +395,6 @@ h5 {
 h6 {
   font-size: 12px;
 }
-.page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #eee;
-}
 ol,
 ul {
   margin-top: 0;
@@ -457,8 +452,7 @@ q:before {
   display: table;
 }
 .container:after,
-.row:after,
-div.clearer {
+.row:after {
   clear: both;
 }
 .row {
@@ -478,26 +472,6 @@ div.clearer {
   }
 }
 @media (min-width: 992px) {
-  .dl-horizontal dt {
-    float: left;
-    width: 160px;
-    clear: left;
-    text-align: right;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .dl-horizontal dd {
-    margin-left: 180px;
-  }
-  .dl-horizontal dd:after,
-  .dl-horizontal dd:before {
-    content: ' ';
-    display: table;
-  }
-  .dl-horizontal dd:after {
-    clear: both;
-  }
   .container {
     max-width: 970px;
   }
@@ -571,9 +545,6 @@ th {
 [class*='icon-'] {
   font-weight: 400;
 }
-.affix {
-  position: fixed;
-}
 @-ms-viewport {
   width: device-width;
 }
@@ -606,24 +577,6 @@ th {
   speak: none;
   -webkit-font-feature-settings: normal;
   font-feature-settings: normal;
-}
-.icon-file-pdf:before {
-  content: '\e600';
-}
-.icon-file-xml:before {
-  content: '\e601';
-}
-.icon-book:before {
-  content: '\e602';
-}
-.icon-edit:before {
-  content: '\e603';
-}
-.icon-translation:before {
-  content: '\e604';
-}
-.icon-feedback:before {
-  content: '\e606';
 }
 :root {
   --gray-dark3: #21313c;
@@ -6140,9 +6093,6 @@ table.footnote td,
 table.footnote th {
   border: 0 !important;
 }
-ul.checklist {
-  list-style: outside;
-}
 ol.arabic {
   list-style: decimal;
 }
@@ -6389,8 +6339,7 @@ div.body li {
 table.docutils tbody tr td div.highlight pre {
   background-color: inherit;
 }
-abbr,
-acronym {
+abbr {
   -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
   cursor: help;
@@ -6461,30 +6410,9 @@ dl.method > dt em {
   display: flex;
   margin: 45px auto 0;
 }
-.content .main-column {
-  -ms-flex-order: 1;
-  order: 1;
-  min-height: 600px;
-  width: 68%;
-  max-width: 800px;
-  -ms-flex-positive: 2;
-  flex-grow: 2;
-  margin: 40px 15px;
-  transition: margin-left 0.4s cubic-bezier(0.02, 0.01, 0.47, 1);
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  display: inline-block;
-  overflow-x: scroll;
-}
 @media print {
   #btnv {
     display: none;
-  }
-  .content .main-column {
-    margin-left: 0;
-    margin-top: 0;
   }
 }
 @media (max-width: 1340px) {
