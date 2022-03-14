@@ -7,7 +7,6 @@ figure {
 }
 .fa-ul > li,
 .fa4-ul > li,
-.glyphicon,
 sub,
 sup {
   position: relative;
@@ -87,7 +86,6 @@ table.docutils {
 article,
 aside,
 details,
-figcaption,
 figure,
 footer,
 header,
@@ -131,7 +129,6 @@ h1 {
 }
 b,
 dt,
-p.sidebar-title,
 strong,
 ul.keywordmatches li.goodmatch a,
 ul.search li a {
@@ -150,7 +147,6 @@ h5 .guilabel,
 h6 .guilabel {
   font-style: italic;
 }
-.glyphicon,
 a > em,
 address,
 cite {
@@ -769,19 +765,8 @@ dd table,
 dd ul {
   margin-bottom: 10px;
 }
-.glyphicon {
-  display: inline-block;
-}
-.fade {
-  opacity: 0;
-  transition: opacity 0.15s linear;
-}
-.fade.in {
-  opacity: 1;
-}
 .body h3 + p,
 .body h4 + p,
-.body p.caption,
 dd p,
 h2 + div.section,
 h3 + div.section,
@@ -1156,8 +1141,7 @@ th {
   vertical-align: middle;
   width: 2em;
 }
-.fa4-li,
-.sr-only {
+.fa4-li {
   position: absolute;
 }
 .fa-stack-1x,
@@ -5445,25 +5429,6 @@ th {
 .fa-zhihu:before {
   content: '\f63f';
 }
-.sr-only {
-  clip: rect(0 0 0 0);
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  width: 1px;
-}
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
-}
 @font-face {
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
@@ -6447,21 +6412,8 @@ p.topic-title {
   font-size: 1.1em;
   font-weight: 700;
 }
-div.genindex-jumpbox,
-div.modindex-jumpbox {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  margin: 1em 0;
-  padding: 0.4em;
-}
 div.body {
   transition: opacity 0.25s linear;
-}
-div.body.loading {
-  opacity: 0.25;
-}
-div.body p.caption {
-  text-align: inherit;
 }
 .first {
   margin-top: 0 !important;
