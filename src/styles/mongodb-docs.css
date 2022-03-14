@@ -100,7 +100,6 @@ section,
 summary {
   display: block;
 }
-.breadcrumb > li,
 audio,
 canvas,
 video {
@@ -115,7 +114,6 @@ select[multiple],
 select[size] {
   height: auto;
 }
-.badge:empty,
 .collapse,
 [hidden] {
   display: none;
@@ -825,38 +823,10 @@ h3 + div.section,
 h4 + div.section {
   margin-top: 0;
 }
-.breadcrumb > .active {
-  color: #999;
-}
-.badge {
-  font-weight: 700;
-  vertical-align: baseline;
-  white-space: nowrap;
-  line-height: 1;
-  text-align: center;
-}
-.breadcrumb {
-  padding: 8px 15px;
-  margin-bottom: 20px;
-  list-style: none;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-}
-.breadcrumb > li + li:before {
-  content: '/\00a0';
-  padding: 0 5px;
-  color: #ccc;
-}
 .fa-pull-right,
 .fa4-pull-right,
 span.eqno {
   float: right;
-}
-a.badge:focus,
-a.badge:hover {
-  color: #fff;
-  text-decoration: none;
-  cursor: pointer;
 }
 .label-default {
   background-color: #999;
@@ -899,15 +869,6 @@ a.badge:hover {
 .label-danger[href]:focus,
 .label-danger[href]:hover {
   background-color: #c9302c;
-}
-.badge {
-  display: inline-block;
-  min-width: 10px;
-  padding: 3px 7px;
-  font-size: 12px;
-  color: #fff;
-  background-color: #999;
-  border-radius: 10px;
 }
 .thumbnail {
   padding: 4px;
@@ -6912,8 +6873,7 @@ body {
 }
 a,
 a > code,
-a > tt,
-div.body div.bc ul li a {
+a > tt {
   color: #007CAD;
 }
 hr {
@@ -7030,7 +6990,6 @@ table.docutils th {
 #search {
   padding-left: 10px;
 }
-div.body div.bc,
 dl.method dt {
   margin-bottom: 24px;
 }
@@ -7092,32 +7051,6 @@ table.docutils .button-row {
 #btnv .btn-prev-text > span {
   display: inline-block;
   width: 270px;
-}
-div.body div.bc {
-  background: #fff;
-  cursor: default;
-}
-div.body div.bc .fa-home {
-  font-size: 24px;
-  margin-top: 2px;
-}
-div.body div.bc li.jr {
-  float: right;
-  display: none;
-}
-div.body div.bc ul {
-  padding: 0;
-  margin: 0;
-}
-div.body div.bc ul li {
-  list-style: none;
-  font-size: 13px;
-  display: inline;
-}
-div.dc span.bcpoint {
-  font-weight: 700;
-  font-size: 0.9em;
-  color: #343434;
 }
 .content {
   font-size: 16px;
