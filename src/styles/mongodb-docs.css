@@ -6327,8 +6327,7 @@ img {
   font-family: ChartsIcons;
 }
 #search,
-.guilabel,
-.menuselection {
+.guilabel {
   font-family: sans-serif;
 }
 .charts-icon-geoglobe::before {
@@ -6354,8 +6353,7 @@ ul.search li div.context {
   margin: 2px 0 0 30px;
   text-align: left;
 }
-.optional,
-a.biglink {
+.optional {
   font-size: 1.3em;
 }
 p.topic-title {
@@ -6372,17 +6370,7 @@ p.rubric {
   margin-top: 30px;
   font-weight: 700;
 }
-.linenos pre,
-a tt,
-h1 tt,
-h2 tt,
-h3 tt,
-h4 tt,
-h5 tt,
-h6 tt,
-tt.descclassname,
-tt.descname,
-tt.xref {
+.linenos pre {
   background-color: transparent;
 }
 div.topic {
@@ -6448,9 +6436,7 @@ a:hover {
   padding-top: 24px;
 }
 @media print {
-  div.bodywrapper,
-  div.document,
-  div.documentwrapper {
+  div.document {
     margin: 0 !important;
     width: 100%;
   }
@@ -6579,8 +6565,7 @@ body {
   color: #21313C;
 }
 a,
-a > code,
-a > tt {
+a > code {
   color: #007CAD;
 }
 hr {
@@ -6665,10 +6650,7 @@ acronym {
   text-decoration: underline dotted;
   cursor: help;
 }
-a code,
-a tt,
-code.xref,
-tt.xref {
+a code {
   font-weight: 400;
 }
 table.footnote {
@@ -6703,13 +6685,6 @@ div#mongodb ul.simple {
   list-style: circle;
   margin-top: 0;
   padding-left: 0;
-}
-code.descclassname,
-code.descname,
-tt.descclassname,
-tt.descname {
-  font-size: 16px;
-  font-weight: 400;
 }
 dl.method > dt big {
   font-weight: 300;
