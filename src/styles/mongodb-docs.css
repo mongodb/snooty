@@ -360,9 +360,6 @@ div.body td {
 #btnv .btn-next-text {
   text-align: right;
 }
-div.body div.math p {
-  text-align: center;
-}
 .h1,
 .h2,
 .h3,
@@ -776,48 +773,6 @@ h4 + div.section {
 .fa-pull-right,
 .fa4-pull-right {
   float: right;
-}
-.label-default {
-  background-color: #999;
-}
-.label-default[href]:focus,
-.label-default[href]:hover {
-  background-color: grey;
-}
-.label-primary {
-  background-color: #428bca;
-}
-.label-primary[href]:focus,
-.label-primary[href]:hover {
-  background-color: #3071a9;
-}
-.label-success {
-  background-color: #5cb85c;
-}
-.label-success[href]:focus,
-.label-success[href]:hover {
-  background-color: #449d44;
-}
-.label-info {
-  background-color: #5bc0de;
-}
-.label-info[href]:focus,
-.label-info[href]:hover {
-  background-color: #31b0d5;
-}
-.label-warning {
-  background-color: #f0ad4e;
-}
-.label-warning[href]:focus,
-.label-warning[href]:hover {
-  background-color: #ec971f;
-}
-.label-danger {
-  background-color: #d9534f;
-}
-.label-danger[href]:focus,
-.label-danger[href]:hover {
-  background-color: #c9302c;
 }
 input[type='text']:disabled {
   color: #333;
@@ -6403,11 +6358,6 @@ ul.search li div.context {
 a.biglink {
   font-size: 1.3em;
 }
-span.linkdescr {
-  font-style: italic;
-  padding-top: 5px;
-  font-size: 90%;
-}
 p.topic-title {
   font-size: 1.1em;
   font-weight: 700;
@@ -6497,19 +6447,12 @@ a:hover {
   width: 2em;
   padding-top: 24px;
 }
-img.math {
-  vertical-align: middle;
-}
 @media print {
   div.bodywrapper,
   div.document,
   div.documentwrapper {
     margin: 0 !important;
     width: 100%;
-  }
-  #top-link,
-  .button-row {
-    display: none;
   }
 }
 div td pre {
@@ -6716,9 +6659,6 @@ div.body li {
 table.docutils tbody tr td div.highlight pre {
   background-color: inherit;
 }
-div.seealso {
-  padding-bottom: 7px;
-}
 abbr,
 acronym {
   -webkit-text-decoration: underline dotted;
@@ -6730,9 +6670,6 @@ a tt,
 code.xref,
 tt.xref {
   font-weight: 400;
-}
-.hll {
-  display: inherit;
 }
 table.footnote {
   font-size: 0.95em;
@@ -6767,18 +6704,6 @@ div#mongodb ul.simple {
   margin-top: 0;
   padding-left: 0;
 }
-#main-db {
-  padding-top: 2.5em;
-  padding-bottom: 2em;
-  background-image: url(https://media.mongodb.org/back-body.png);
-  background-repeat: repeat-x;
-}
-input.blur {
-  color: #666;
-}
-div#docs-header {
-  width: 950px;
-}
 code.descclassname,
 code.descname,
 tt.descclassname,
@@ -6793,10 +6718,6 @@ dl.method > dt big {
 dl.method > dt em {
   font-weight: 700;
   font-style: normal;
-}
-table.docutils .button-row {
-  border: none;
-  background: 0 0;
 }
 #btnv {
   padding-top: 2em;
@@ -6839,16 +6760,6 @@ table.docutils .button-row {
   justify-content: center;
   display: inline-block;
   overflow-x: scroll;
-}
-a.facebook-icon,
-a.slack-icon,
-a.stack-overflow-icon,
-a.twitter-icon,
-a.youtube-icon {
-  margin-right: 2px;
-  font-size: 18px;
-  color: #615f5f;
-  width: 21px;
 }
 @media print {
   #btnv {
