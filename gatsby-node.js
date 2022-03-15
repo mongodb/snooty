@@ -85,7 +85,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   products.forEach((product) => {
     // TODO: REMOVE AFTER DOP 2705
     let url = product.baseUrl + product.slug;
-    if (isDotCom()) url = dotcomifyUrl(url, true);
+    if (isDotCom()) url = dotcomifyUrl(url);
 
     createNode({
       children: [],

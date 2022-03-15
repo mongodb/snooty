@@ -20,7 +20,7 @@ const dotcomHandlingForREF_TARGETS = {
 // TODO: remove after dotcom go live and update hardcoded links.
 export const REF_TARGETS = Object.fromEntries(
   Object.entries(dotcomHandlingForREF_TARGETS).map(([key, value]) => {
-    if (isDotCom()) value = dotcomifyUrl(value, true);
+    if (isDotCom()) value = dotcomifyUrl(value);
     return [key, value];
   })
 );
