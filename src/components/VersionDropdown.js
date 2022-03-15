@@ -8,6 +8,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { baseUrl } from '../utils/dotcom';
 
 const StyledSelect = styled(Select)`
@@ -157,7 +158,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       console.warn(`Applying routing logic that is specific to Realm SDKs.`);
       return normalizePath(prefix);
     }
-    return normalizePath(`${prefix}/${slug}`);
+    return assertTrailingSlash(normalizePath(`${prefix}/${slug}`));
   };
 
   // Used exclusively by the LG Select component's onChange function, which receives
