@@ -16,7 +16,7 @@ const dotcomifyUrl = (url, options = {}) => {
   let baseUrl = needsPrefix ? `${DOTCOM_BASE_URL}/${DOTCOM_BASE_PREFIX}` : `${DOTCOM_BASE_URL}`;
 
   if (needsProtocol) baseUrl = `https://${baseUrl}`;
-  if (subdomainProduct) {
+  if (subdomainProduct && needsPrefix) {
     baseUrl = `${baseUrl}/${subdomainProduct}`;
   }
 
