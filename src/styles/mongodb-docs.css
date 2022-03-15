@@ -242,9 +242,6 @@ table {
   a:visited {
     text-decoration: underline;
   }
-  abbr[title]:after {
-    content: ' (' attr(title) ')';
-  }
   blockquote,
   pre {
     border: 1px solid #999;
@@ -6338,11 +6335,6 @@ div.body li {
 }
 table.docutils tbody tr td div.highlight pre {
   background-color: inherit;
-}
-abbr {
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-  cursor: help;
 }
 a code {
   font-weight: 400;
