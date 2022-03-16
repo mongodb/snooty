@@ -25,6 +25,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { DOCS_URL } from '../../constants';
+import { deprecated } from '../../layouts/index';
 
 const SIDENAV_WIDTH = 268;
 
@@ -89,8 +90,8 @@ const disableScroll = (shouldDisableScroll) => css`
 `;
 
 const getTopAndHeight = (topValue) => css`
-  top: ${topValue};
-  height: calc(100vh - ${topValue});
+  top: ${deprecated ? '0px' : topValue};
+  height: calc(100vh - ${deprecated ? '0px' : topValue});
 `;
 
 // Keep the side nav container sticky to allow LG's side nav to push content seemlessly

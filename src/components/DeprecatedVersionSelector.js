@@ -49,7 +49,7 @@ const prefixVersion = (version) => {
   const isNumeric = (version) => !isNaN(versionNumber);
   // if branch is 'master', show as Version 1.0
   if (isNaN(versionNumber)) {
-    return 'Version 1.0';
+    return 'latest';
   }
   return `${isNumeric(version) ? 'Version ' : ''}${versionNumber}`;
 };

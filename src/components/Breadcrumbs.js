@@ -7,7 +7,6 @@ import { theme } from '../theme/docsTheme';
 import BreadcrumbContainer from './BreadcrumbContainer';
 import { baseUrl } from '../utils/dotcom';
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
-import { deprecated } from '../layouts/index';
 
 const Wrapper = styled('nav')`
   font-size: ${theme.fontSize.small};
@@ -37,13 +36,11 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle,
   return (
     <>
       <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-      {!deprecated && (
-        <Wrapper>
-          <p>
-            <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
-          </p>
-        </Wrapper>
-      )}
+      <Wrapper>
+        <p>
+          <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+        </p>
+      </Wrapper>
     </>
   );
 };
