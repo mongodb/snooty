@@ -313,14 +313,8 @@ p {
 small {
   font-size: 85%;
 }
-#btnv .btn-arrow-right,
-#btnv .btn-prev-text,
 div.body td {
   text-align: left;
-}
-#btnv .btn-arrow-left,
-#btnv .btn-next-text {
-  text-align: right;
 }
 .h1,
 .h2,
@@ -6377,35 +6371,12 @@ dl.method > dt em {
   font-weight: 700;
   font-style: normal;
 }
-#btnv {
-  padding-top: 2em;
-  padding-bottom: 2.5em;
-  display: table;
-  width: 100%;
-}
-#btnv .btn-arrow-left,
-#btnv .btn-arrow-right,
-#btnv .btn-next-text,
-#btnv .btn-prev-text {
-  display: table-cell;
-  vertical-align: middle;
-}
-#btnv .btn-next-text > span,
-#btnv .btn-prev-text > span {
-  display: inline-block;
-  width: 270px;
-}
 .content {
   font-size: 16px;
   line-height: 24px;
   display: -ms-flexbox;
   display: flex;
   margin: 45px auto 0;
-}
-@media print {
-  #btnv {
-    display: none;
-  }
 }
 @media (max-width: 1340px) {
   .document {
