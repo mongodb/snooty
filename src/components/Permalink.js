@@ -35,6 +35,7 @@ const headingStyle = (copied) => css`
   ${!!copied && 'visibility: visible !important;'}
   align-self: center;
   padding: 0 10px;
+  visibility: hidden;
 `;
 
 const Permalink = ({ id, description, buffer }) => {
