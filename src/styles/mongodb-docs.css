@@ -45,8 +45,7 @@ html {
 :before {
   box-sizing: border-box;
 }
-table,
-table.docutils {
+table {
   border-collapse: collapse;
 }
 @font-face {
@@ -6070,20 +6069,6 @@ div.topic {
 p.topic-title {
   margin-top: 10px;
 }
-table.docutils {
-  border: 0;
-}
-table.docutils td,
-table.docutils th {
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom: 1px solid #aaa;
-}
-table.footnote td,
-table.footnote th {
-  border: 0 !important;
-}
 ol.arabic {
   list-style: decimal;
 }
@@ -6101,9 +6086,6 @@ ol.upperroman {
 }
 dd {
   margin-left: 30px;
-}
-.footnote:target {
-  background-color: #ffa;
 }
 .line-block {
   display: block;
@@ -6327,28 +6309,8 @@ a.reference.external:after {
 div.body li {
   padding-top: 0.2em;
 }
-table.docutils tbody tr td div.highlight pre {
-  background-color: inherit;
-}
 a code {
   font-weight: 400;
-}
-table.footnote {
-  font-size: 0.95em;
-  line-height: 1.3em;
-}
-table.docutils {
-  margin: 24px 0;
-  font-size: 14px;
-  line-height: 24px;
-}
-table.docutils > thead th.head {
-  padding: 0 5px 12px;
-}
-table.docutils td,
-table.docutils th {
-  border-color: #ebebed;
-  padding: 11px 5px 12px;
 }
 dl.method dt {
   margin-bottom: 24px;
