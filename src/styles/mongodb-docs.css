@@ -6032,9 +6032,6 @@ img {
   line-height: 1;
   font-family: ChartsIcons;
 }
-.guilabel {
-  font-family: sans-serif;
-}
 .charts-icon-geoglobe::before {
   content: '\0041';
 }
@@ -6354,8 +6351,4 @@ dl.method > dt em {
   .document {
     margin-left: 25px;
   }
-}
-.guilabel {
-  font-style: normal;
-  font-weight: 700;
 }
