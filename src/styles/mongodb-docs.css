@@ -6051,10 +6051,6 @@ div.body {
 .first {
   margin-top: 0 !important;
 }
-p.rubric {
-  margin-top: 30px;
-  font-weight: 700;
-}
 .linenos pre {
   background-color: transparent;
 }
