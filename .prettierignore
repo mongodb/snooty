@@ -1,6 +1,5 @@
 .cache
 CHANGELOG.md
-docs-tools
 package.json
 package-lock.json
 public
