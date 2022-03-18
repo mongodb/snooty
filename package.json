@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^14",
@@ -41,18 +41,12 @@
     "lint:fix": "npm run lint -- --fix --max-warnings 0",
     "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
-    "prettier": "prettier '**/*.{js,jsx,json,md}' '!docs-tools/**'",
+    "prettier": "prettier '**/*.{js,jsx,json,md}'",
     "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test",
     "serve": "gatsby serve --prefix-paths",
     "test": "jest",
     "test:unit": "jest unit",
     "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md"
-  },
-  "lint-staged": {
-    "*.js": [
-      "npm run format:fix",
-      "npm run lint:fix"
-    ]
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",

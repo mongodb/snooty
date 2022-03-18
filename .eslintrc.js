@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
   },
   extends: ['react-app', 'plugin:import/errors'],
-  ignorePatterns: ['docs-tools/', 'node_modules/', 'public/'],
+  ignorePatterns: ['node_modules/', 'public/'],
   plugins: ['jest'],
   settings: {
     'import/resolver': {
