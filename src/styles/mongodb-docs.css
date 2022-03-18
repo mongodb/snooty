@@ -6140,7 +6140,6 @@ div td pre {
   font-weight: 200;
 }
 
-.marian,
 div.document {
   margin-left: 25px;
 }
@@ -6253,16 +6252,6 @@ a code {
 }
 dl.method dt {
   margin-bottom: 24px;
-}
-div#mongodb ul {
-  list-style: none;
-  padding-left: 0;
-  padding-right: 1em;
-}
-div#mongodb ul.simple {
-  list-style: circle;
-  margin-top: 0;
-  padding-left: 0;
 }
 dl.method > dt big {
   font-weight: 300;
