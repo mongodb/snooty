@@ -10,6 +10,7 @@ import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -81,17 +82,11 @@ const GlobalGrid = styled('div')`
   grid-template-rows: auto 1fr;
 `;
 
-const DefaultLayout = ({
-  children,
-  pageContext: {
-    metadata: { chapters, guides, publishedBranches, slugToTitle, title, toctree },
-    page,
-    slug,
-    repoBranches,
-    template,
-  },
-}) => {
+const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
+
+  const { chapters, guides, publishedBranches, slugToTitle, title, toctree } = useSnootyMetadata();
+
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 
