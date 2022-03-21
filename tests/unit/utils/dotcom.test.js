@@ -15,8 +15,13 @@ describe('dotcomifyUrl', () => {
 
   it('supports both regular subdomain and product subdomain conversions', () => {
     expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('https://www.mongodb.com/docs');
-    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/opsmanager');
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager');
     expect(dotcomifyUrl('https://docs.atlas.mongodb.com')).toBe('https://www.mongodb.com/docs/atlas');
+  });
+
+  it('supports mapping products to prefixes in special cases, ala opsmanager -> ops-manager ', () => {
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager');
+    expect(dotcomifyUrl('https://docs.cloudmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/cloud-manager');
   });
 
   it('supports conversions with pathname combinations, and handles `com` in pathname', () => {
@@ -30,12 +35,12 @@ describe('dotcomifyUrl', () => {
     );
 
     // product subdomains
-    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/opsmanager');
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager');
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/this-is/a-long/pathname')).toBe(
-      'https://www.mongodb.com/docs/opsmanager/this-is/a-long/pathname'
+      'https://www.mongodb.com/docs/ops-manager/this-is/a-long/pathname'
     );
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/combine-results')).toBe(
-      'https://www.mongodb.com/docs/opsmanager/combine-results'
+      'https://www.mongodb.com/docs/ops-manager/combine-results'
     );
   });
 
@@ -50,10 +55,10 @@ describe('dotcomifyUrl', () => {
 
     // product subdomains
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/upcoming/compound-indexes')).toBe(
-      'https://www.mongodb.com/docs/opsmanager/upcoming/compound-indexes'
+      'https://www.mongodb.com/docs/ops-manager/upcoming/compound-indexes'
     );
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/v1.5/compound-indexes')).toBe(
-      'https://www.mongodb.com/docs/opsmanager/v1.5/compound-indexes'
+      'https://www.mongodb.com/docs/ops-manager/v1.5/compound-indexes'
     );
   });
 });
