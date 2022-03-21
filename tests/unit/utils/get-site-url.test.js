@@ -54,7 +54,7 @@ describe('getSiteUrl', () => {
     });
 
     expect(getSiteUrl('manual', true)).toBe('https://www.mongodb.com/docs');
-    expect(getSiteUrl('mms', true)).toBe('https://www.mongodb.com/docs/opsmanager');
+    expect(getSiteUrl('mms', true)).toBe('https://www.mongodb.com/docs/ops-manager');
     expect(getSiteUrl('cloud-docs', true)).toBe('https://www.mongodb.com/docs/atlas');
   });
 });
