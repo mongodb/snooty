@@ -3,7 +3,7 @@
 const isBrowser = typeof window !== 'undefined';
 
 const DOTCOM_BASE_URL = 'www.mongodb.com';
-const DOTCOM_BASE_PREFIX = `docs-qa`;
+const DOTCOM_BASE_PREFIX = `docs`;
 
 // Used to convert a 'docs.mongodb.com' or 'docs.<product>.mongodb.com' url to the new dotcom format
 // this *should* be removed post consolidation, or alternatively, made to use `new URL(url)` and polyfilled for safari
