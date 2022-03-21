@@ -9,6 +9,7 @@ const DOTCOM_BASE_PREFIX = `docs`;
 const productToPrefixMapping = (product) => {
   const mapping = {
     opsmanager: 'ops-manager',
+    cloudmanager: 'cloud-manager',
   };
   return mapping[product] ? mapping[product] : product;
 };

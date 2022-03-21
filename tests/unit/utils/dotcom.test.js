@@ -21,6 +21,7 @@ describe('dotcomifyUrl', () => {
 
   it('supports mapping products to prefixes in special cases, ala opsmanager -> ops-manager ', () => {
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager');
+    expect(dotcomifyUrl('https://docs.cloudmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/cloud-manager');
   });
 
   it('supports conversions with pathname combinations, and handles `com` in pathname', () => {
