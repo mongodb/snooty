@@ -45,4 +45,4 @@ const baseUrl = (needsProtocol = false) => {
   return isDotCom() ? dotcomifyUrl(url, { needsProtocol }) : `${needsProtocol ? 'https://' : ''}${url}`;
 };
 
-module.exports = { dotcomifyUrl, isDotCom, baseUrl, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX };
+module.exports = { dotcomifyUrl, isDotCom, baseUrl, productToPrefixMapping, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX };
