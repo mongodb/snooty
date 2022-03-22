@@ -130,11 +130,11 @@ describe('Search Results Page', () => {
       ],
       [
         'https://docs.cloudmanager.mongodb.com/tutorial/edit-host-authentication-credentials/',
-        'https://www.mongodb.com/docs/cloudmanager/tutorial/edit-host-authentication-credentials/',
+        'https://www.mongodb.com/docs/cloud-manager/tutorial/edit-host-authentication-credentials/',
       ],
       [
         'https://docs.opsmanager.mongodb.com/tutorial/edit-host-authentication-credentials/',
-        'https://www.mongodb.com/docs/opsmanager/tutorial/edit-host-authentication-credentials/',
+        'https://www.mongodb.com/docs/ops-manager/tutorial/edit-host-authentication-credentials/',
       ],
       [
         'https://docs.atlas.mongodb.com/reference/atlas-search/analyzers/language/#std-label-ref-language-analyzers',
