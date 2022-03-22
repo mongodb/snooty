@@ -1,24 +1,26 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { initStitch } = require('./src/utils/setup/init-stitch');
+const { isDotCom, dotcomifyUrl } = require('./src/utils/dotcom');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-const { getGuideMetadata } = require('./src/utils/get-guide-metadata');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
-const { DOCUMENTS_COLLECTION, METADATA_COLLECTION } = require('./src/build-constants');
+const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, BRANCHES_COLLECTION } = require('./src/build-constants');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const { constructBuildFilter } = require('./src/utils/setup/construct-build-filter');
+const { constructReposFilter } = require('./src/utils/setup/construct-repos-filter');
 
 const DB = siteMetadata.database;
+const reposDB = siteMetadata.reposDatabase;
 
+const reposFilter = constructReposFilter(siteMetadata.project);
 const buildFilter = constructBuildFilter(siteMetadata);
 
 // different types of references
 const PAGES = [];
-const GUIDES_METADATA = {};
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
@@ -44,10 +46,14 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, buildFilter]);
 
   if (documents.length === 0) {
-    console.error('No documents matched your query.');
+    console.error(
+      'Snooty could not find AST entries for the',
+      siteMetadata.parserBranch,
+      'branch of',
+      siteMetadata.project
+    );
     process.exit(1);
   }
-
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
@@ -71,15 +77,16 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
     if (filename.endsWith('.txt')) {
       PAGES.push(key);
-      if (process.env.GATSBY_SITE === 'guides') {
-        GUIDES_METADATA[key] = getGuideMetadata(val);
-      }
     }
   });
 
   // Get all MongoDB products for the sidenav
   const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   products.forEach((product) => {
+    // TODO: REMOVE AFTER DOP 2705
+    let url = product.baseUrl + product.slug;
+    if (isDotCom()) url = dotcomifyUrl(url);
+
     createNode({
       children: [],
       id: createNodeId(`Product-${product.title}`),
@@ -89,13 +96,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       },
       parent: null,
       title: product.title,
-      url: product.baseUrl + product.slug,
+      url,
     });
   });
-};
 
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions;
   const [, { static_files: staticFiles, ...metadataMinusStatic }] = await Promise.all([
     saveAssetFiles(assets, stitchClient),
     stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
@@ -106,9 +110,36 @@ exports.createPages = async ({ actions }) => {
     transformBreadcrumbs(parentPaths, slugToTitle);
   }
 
-  // Save files in the static_files field of metadata document, including intersphinx inventories
+  //Save files in the static_files field of metadata document, including intersphinx inventories
   if (staticFiles) {
     await saveStaticFiles(staticFiles);
+  }
+
+  createNode({
+    children: [],
+    id: createNodeId('metadata'),
+    internal: {
+      contentDigest: createContentDigest(metadataMinusStatic),
+      type: 'SnootyMetadata',
+    },
+    parent: null,
+    metadata: metadataMinusStatic,
+  });
+};
+
+exports.createPages = async ({ actions }) => {
+  const { createPage } = actions;
+
+  let repoBranches = null;
+  try {
+    repoBranches = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+
+  if (repoBranches?.length ?? 0) {
+    console.error('No version information found for', siteMetadata.project);
   }
 
   return new Promise((resolve, reject) => {
@@ -122,10 +153,9 @@ exports.createPages = async ({ actions }) => {
           component: path.resolve(__dirname, './src/components/DocumentBody.js'),
           context: {
             slug,
-            metadata: metadataMinusStatic,
+            repoBranches: repoBranches,
             template: pageNodes?.options?.template,
             page: pageNodes,
-            guidesMetadata: GUIDES_METADATA,
           },
         });
       }
@@ -157,6 +187,10 @@ exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type SitePage implements Node @dontInfer {
       path: String!
+    }
+
+    type SnootyMetadata implements Node @dontInfer {
+        metadata: JSON!
     }
   `);
 };

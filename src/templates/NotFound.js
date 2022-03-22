@@ -6,6 +6,7 @@ import Button from '@leafygreen-ui/button';
 import { uiColors } from '@leafygreen-ui/palette';
 import Footer from '../components/Footer';
 import { theme } from '../theme/docsTheme';
+import { baseUrl } from '../utils/dotcom';
 
 const ErrorBox = styled('div')`
   padding: 0px ${theme.size.default};
@@ -87,7 +88,7 @@ const ErrorBoxContainer = () => {
         `}
       >
         <Button
-          href="https://docs.mongodb.com"
+          href={baseUrl(true)}
           variant="primary"
           css={css`
             @media ${theme.screenSize.upToSmall} {

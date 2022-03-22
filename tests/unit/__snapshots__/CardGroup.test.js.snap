@@ -105,7 +105,7 @@ exports[`renders correctly 1`] = `
   width: 48px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-2 {
     height: 40px;
     width: 40px;
@@ -117,7 +117,7 @@ exports[`renders correctly 1`] = `
   width: 24px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-0 {
     width: 20px;
   }
@@ -135,7 +135,7 @@ exports[`renders correctly 1`] = `
   margin-left: 24px;
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-8 {
     margin-left: 16px;
   }

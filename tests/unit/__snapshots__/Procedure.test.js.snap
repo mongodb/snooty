@@ -8,7 +8,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-16 {
     padding-bottom: 24px;
   }
@@ -19,6 +19,7 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   gap: 33px;
 }
 
@@ -26,18 +27,18 @@ exports[`renders correctly 1`] = `
   font-weight: 600;
 }
 
-.emotion-2 {
-  position: relative;
-}
-
-.emotion-2:after {
+.emotion-6:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
-  left: calc(50% - 1px);
+  left: 16px;
   position: absolute;
   top: 0;
   z-index: -1;
+}
+
+.emotion-2 {
+  position: relative;
 }
 
 .emotion-0 {
@@ -76,14 +77,10 @@ exports[`renders correctly 1`] = `
   }
 }
 
-@media only screen and (max-width:420px) {
+@media only screen and (max-width:480px) {
   .emotion-4 {
     padding-bottom: 32px;
   }
-}
-
-.emotion-10 {
-  position: relative;
 }
 
 <div
@@ -120,7 +117,7 @@ exports[`renders correctly 1`] = `
       class="emotion-6 emotion-7"
     >
       <div
-        class="emotion-10 emotion-3"
+        class="emotion-2 emotion-3"
       >
         <div
           class="emotion-0 emotion-1"
@@ -141,6 +138,402 @@ exports[`renders correctly 1`] = `
             To learn more, see Import and Export Data
           </a>
         </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders steps nested in include nodes 1`] = `
+<DocumentFragment>
+  @media only screen and (max-width:1023px) {
+  .emotion-91 {
+    padding-bottom: 32px;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .emotion-91 {
+    padding-bottom: 24px;
+  }
+}
+
+.emotion-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  gap: 33px;
+}
+
+.emotion-11 section > p > a {
+  font-weight: 600;
+}
+
+.emotion-11:not(:last-child):after {
+  content: '';
+  border-left: 2px dashed #E7EEEC;
+  bottom: 0;
+  left: 16px;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.emotion-2 {
+  position: relative;
+}
+
+.emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: bold;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #E4F4E4;
+  color: #116149;
+  height: 34px;
+  width: 34px;
+}
+
+.emotion-9 {
+  margin-top: 5px;
+  padding-bottom: 64px;
+}
+
+.emotion-9 > section >:first-of-type {
+  margin-top: 0;
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-9 {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .emotion-9 {
+    padding-bottom: 32px;
+  }
+}
+
+.emotion-6 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  padding: 0 10px;
+}
+
+.emotion-4 {
+  border-radius: 0 !important;
+  display: initial !important;
+  margin: initial !important;
+}
+
+.emotion-7 {
+  margin-top: -175px;
+  position: absolute;
+  padding-bottom: 2px;
+}
+
+<div
+    class="emotion-91 emotion-92"
+  >
+    <div
+      class="emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          1
+        </div>
+      </div>
+      <div
+        class="emotion-9 emotion-10"
+      >
+        <section>
+          <h1
+            class="contains-headerlink"
+          >
+            Step 1
+            <a
+              class="headerlink emotion-6"
+              href="#step-1"
+              title="Permalink to this heading"
+            >
+              <img
+                class="emotion-4 emotion-5"
+                src="/assets/link.svg"
+              />
+            </a>
+            <div
+              class="emotion-7 emotion-8"
+              id="step-1"
+            />
+          </h1>
+          <p>
+            Content for step 1
+          </p>
+        </section>
+      </div>
+    </div>
+    <div
+      class="emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          2
+        </div>
+      </div>
+      <div
+        class="emotion-9 emotion-10"
+      >
+        <section>
+          <h1
+            class="contains-headerlink"
+          >
+            Step 2
+            <a
+              class="headerlink emotion-6"
+              href="#step-2"
+              title="Permalink to this heading"
+            >
+              <img
+                class="emotion-4 emotion-5"
+                src="/assets/link.svg"
+              />
+            </a>
+            <div
+              class="emotion-7 emotion-8"
+              id="step-2"
+            />
+          </h1>
+          <p>
+            Content for step 2
+          </p>
+        </section>
+      </div>
+    </div>
+    <div
+      class="emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          3
+        </div>
+      </div>
+      <div
+        class="emotion-9 emotion-10"
+      >
+        <section>
+          <h1
+            class="contains-headerlink"
+          >
+            Step 3
+            <a
+              class="headerlink emotion-6"
+              href="#step-3"
+              title="Permalink to this heading"
+            >
+              <img
+                class="emotion-4 emotion-5"
+                src="/assets/link.svg"
+              />
+            </a>
+            <div
+              class="emotion-7 emotion-8"
+              id="step-3"
+            />
+          </h1>
+          <p>
+            Content for step 3
+          </p>
+        </section>
+      </div>
+    </div>
+    <div
+      class="emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          4
+        </div>
+      </div>
+      <div
+        class="emotion-9 emotion-10"
+      >
+        <section>
+          <h1
+            class="contains-headerlink"
+          >
+            Step 4
+            <a
+              class="headerlink emotion-6"
+              href="#step-4"
+              title="Permalink to this heading"
+            >
+              <img
+                class="emotion-4 emotion-5"
+                src="/assets/link.svg"
+              />
+            </a>
+            <div
+              class="emotion-7 emotion-8"
+              id="step-4"
+            />
+          </h1>
+          <p>
+            Content for step 4
+          </p>
+        </section>
+      </div>
+    </div>
+    <div
+      class="emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          5
+        </div>
+      </div>
+      <div
+        class="emotion-9 emotion-10"
+      >
+        <section>
+          <h1
+            class="contains-headerlink"
+          >
+            Step 5
+            <a
+              class="headerlink emotion-6"
+              href="#step-5"
+              title="Permalink to this heading"
+            >
+              <img
+                class="emotion-4 emotion-5"
+                src="/assets/link.svg"
+              />
+            </a>
+            <div
+              class="emotion-7 emotion-8"
+              id="step-5"
+            />
+          </h1>
+          <p>
+            Content for step 5
+          </p>
+        </section>
+      </div>
+    </div>
+    <div
+      class="emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          6
+        </div>
+      </div>
+      <div
+        class="emotion-9 emotion-10"
+      >
+        <section>
+          <h1
+            class="contains-headerlink"
+          >
+            Step 6
+            <a
+              class="headerlink emotion-6"
+              href="#step-6"
+              title="Permalink to this heading"
+            >
+              <img
+                class="emotion-4 emotion-5"
+                src="/assets/link.svg"
+              />
+            </a>
+            <div
+              class="emotion-7 emotion-8"
+              id="step-6"
+            />
+          </h1>
+          <p>
+            Content for step 6
+          </p>
+        </section>
+      </div>
+    </div>
+    <div
+      class="emotion-11 emotion-12"
+    >
+      <div
+        class="emotion-2 emotion-3"
+      >
+        <div
+          class="emotion-0 emotion-1"
+        >
+          7
+        </div>
+      </div>
+      <div
+        class="emotion-9 emotion-10"
+      >
+        <section>
+          <h1
+            class="contains-headerlink"
+          >
+            Step 7
+            <a
+              class="headerlink emotion-6"
+              href="#step-7"
+              title="Permalink to this heading"
+            >
+              <img
+                class="emotion-4 emotion-5"
+                src="/assets/link.svg"
+              />
+            </a>
+            <div
+              class="emotion-7 emotion-8"
+              id="step-7"
+            />
+          </h1>
+          <p>
+            Content for step 7
+          </p>
+        </section>
       </div>
     </div>
   </div>

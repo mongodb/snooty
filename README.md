@@ -8,12 +8,6 @@ Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 npm install
 ```
 
-If this is your first time running the site you'll need the static directory:
-
-```shell
-make static
-```
-
 ### .env file setup
 
 You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments.

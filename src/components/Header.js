@@ -6,6 +6,7 @@ import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from './Sidenav';
 import SiteBanner from './Banner/SiteBanner';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { isDotCom, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX } from '../utils/dotcom';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
@@ -25,11 +26,13 @@ const Header = ({ sidenav }) => {
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
+  const docsBaseUrl = isDotCom() ? `https://${DOTCOM_BASE_URL}/${DOTCOM_BASE_PREFIX}` : null;
+
   return (
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} />
+        <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} docsBaseUrl={docsBaseUrl} />
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>

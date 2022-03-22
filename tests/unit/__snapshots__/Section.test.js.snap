@@ -6,7 +6,6 @@ exports[`renders correctly 1`] = `
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  visibility: hidden;
   padding: 0 10px;
 }
 
@@ -17,8 +16,9 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-3 {
-  margin-top: -225px;
+  margin-top: -175px;
   position: absolute;
+  padding-bottom: 2px;
 }
 
 <section>
@@ -29,12 +29,11 @@ exports[`renders correctly 1`] = `
       <a
         class="headerlink emotion-2"
         href="#"
-        title="Permalink to this headline"
+        title="Permalink to this heading"
       >
         <img
-          alt="icons/link.png"
           class="emotion-0 emotion-1"
-          src="/assets/link.png"
+          src="/assets/link.svg"
         />
       </a>
       <div

@@ -1,40 +1,8 @@
-export const DEPLOYMENTS = ['cloud', 'local'];
-
-export const PLATFORMS = ['windows', 'macos', 'linux', 'debian', 'rhel'];
-
-export const SLUG_TO_STRING = {
-  shell: 'Mongo Shell',
-  compass: 'Compass',
-  python: 'Python',
-  javasync: 'Java (Sync)',
-  'java-sync': 'Java (Sync)',
-  nodejs: 'Node.js',
-  php: 'PHP',
-  motor: 'Motor',
-  'java-async': 'Java (Async)',
-  c: 'C',
-  cpp: 'C++11',
-  csharp: 'C#',
-  perl: 'Perl',
-  ruby: 'Ruby',
-  scala: 'Scala',
-  go: 'Go',
-  cloud: 'Cloud',
-  local: 'Local',
-  macos: 'macOS',
-  linux: 'Linux',
-  windows: 'Windows',
-  debian: 'Debian',
-  rhel: 'RHEL',
-};
-
-export const stringifyTab = (tabName) => {
-  return SLUG_TO_STRING[tabName] || tabName;
-};
+import { baseUrl, dotcomifyUrl, isDotCom } from './utils/dotcom';
 
 // hardcoded for now because this target lookup will be complex
 // as it relies on other sites (e.g. manual) cc. Andrew
-export const REF_TARGETS = {
+const dotcomHandlingForREF_TARGETS = {
   'compass-index': 'https://docs.mongodb.com/compass/current/#compass-index',
   'document-dot-notation': 'https://docs.mongodb.com/manual/core/document/#document-dot-notation',
   glossary: 'https://docs.mongodb.com/manual/reference/glossary',
@@ -48,29 +16,14 @@ export const REF_TARGETS = {
   'configuration-options': 'https://docs.mongodb.com/manual/reference/configuration-options/#configuration-options',
 };
 
-export const DOCS_URL = 'https://docs.mongodb.com';
-export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
+// Changed to apply dotcom logic across each ref target, conditionally if we determine that we are building for dotcom.
+// TODO: remove after dotcom go live and update hardcoded links.
+export const REF_TARGETS = Object.fromEntries(
+  Object.entries(dotcomHandlingForREF_TARGETS).map(([key, value]) => {
+    if (isDotCom()) value = dotcomifyUrl(value);
+    return [key, value];
+  })
+);
 
-export const SECTION_NAME_MAPPING = {
-  prerequisites: {
-    id: 'what-you-ll-need',
-    title: 'What You’ll Need',
-  },
-  check_your_environment: {
-    id: 'check-your-environment',
-    title: 'Check Your Environment',
-  },
-  procedure: {
-    id: 'procedure',
-    title: 'Procedure',
-  },
-  summary: { id: 'summary', title: 'Summary' },
-  whats_next: {
-    id: 'what-s-next',
-    title: 'What’s Next',
-  },
-  seealso: {
-    id: 'see-also',
-    title: 'See Also',
-  },
-};
+export const DOCS_URL = baseUrl(true);
+export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
