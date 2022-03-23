@@ -84,7 +84,6 @@ const GlobalGrid = styled('div')`
 
 const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
-
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
