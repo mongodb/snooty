@@ -82,16 +82,13 @@ const GlobalGrid = styled('div')`
   grid-template-rows: auto 1fr;
 `;
 
-
 const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
 
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
-  deprecated = eol;
   useDelightedSurvey(slug);
- 
 
   return (
     <>
@@ -103,7 +100,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
         selectors={page?.options?.selectors}
       >
         <GlobalGrid>
-          <Header sidenav={sidenav} />
+          <Header sidenav={sidenav} eol={eol} />
           {sidenav && (
             <Sidenav
               chapters={chapters}
@@ -115,6 +112,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
               siteTitle={title}
               slug={slug}
               toctree={toctree}
+              eol={eol}
             />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>

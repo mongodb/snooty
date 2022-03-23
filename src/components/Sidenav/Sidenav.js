@@ -25,7 +25,6 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { DOCS_URL } from '../../constants';
-import { deprecated } from '../../layouts/index';
 
 const SIDENAV_WIDTH = 268;
 
@@ -89,25 +88,26 @@ const disableScroll = (shouldDisableScroll) => css`
   }
 `;
 
-const getTopAndHeight = (topValue) => css`
-  top: ${deprecated ? '0px' : topValue};
-  height: calc(100vh - ${deprecated ? '0px' : topValue});
+// use eol status to determine side nav styling
+const getTopAndHeight = (topValue, eol) => css`
+  top: ${eol ? '38px' : topValue};
+  height: calc(100vh - ${eol ? '38px' : topValue});
 `;
 
 // Keep the side nav container sticky to allow LG's side nav to push content seemlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall }) => css`
+  ({ topLarge, topMedium, topSmall, eol }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: 2;
-    ${getTopAndHeight(topLarge)};
+    ${getTopAndHeight(topLarge, eol)};
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium)};
+      ${getTopAndHeight(topMedium, eol)};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall)};
+      ${getTopAndHeight(topSmall, eol)};
     }
   `
 );
@@ -150,7 +150,7 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree }) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree, eol }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
@@ -159,6 +159,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues();
+  topValues['eol'] = eol;
+
   const showVersions = repoBranches?.branches?.length > 1;
 
   // Checks if user is navigating back to the homepage on docs landing
@@ -233,6 +235,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   currentSlug={slug}
                   target={isGuidesTemplate ? '/' : ''}
                   titleOverride={isGuidesTemplate ? siteTitle : ''}
+                  eol={eol}
                 />
                 {ia && (
                   <IA
@@ -267,7 +270,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 </SideNavItem>
               </>
             )}
-            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} />}
+            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} eol={eol} />}
             {!ia && navContent}
 
             {isDocsLanding && (
@@ -302,6 +305,7 @@ Sidenav.propTypes = {
   repoBranches: PropTypes.object,
   siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
+  eol: PropTypes.bool.isRequired,
 };
 
 export default Sidenav;

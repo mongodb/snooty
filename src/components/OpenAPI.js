@@ -9,6 +9,7 @@ import ComponentFactory from './ComponentFactory';
 import { SidenavBackButton } from './Sidenav';
 import Spinner from './Spinner';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 import useStickyTopValues from '../hooks/useStickyTopValues';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
@@ -243,11 +244,12 @@ const LoadingWidget = ({ className }) => (
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   const docsTitle = siteTitle ? `${siteTitle} Docs` : 'Docs';
+  const { eol } = useSnootyMetadata();
   return (
     <>
       {/* Disable LG left arrow glyph due to bug where additional copies of the LG icon would be rendered 
           at the bottom of the page. */}
-      <SidenavBackButton border={<Border />} enableGlyph={false} target="/" titleOverride={docsTitle} />
+      <SidenavBackButton border={<Border />} enableGlyph={false} target="/" titleOverride={docsTitle} eol={eol} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );

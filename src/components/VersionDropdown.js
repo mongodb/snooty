@@ -11,15 +11,12 @@ import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { baseUrl } from '../utils/dotcom';
-import { deprecated } from '../layouts/index';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
   & > button {
     background-color: ${uiColors.white};
-    ${!deprecated && `background-color: ${uiColors.gray.light2} !important`};
-    ${!deprecated && `color: ${uiColors.gray.base} !important`};
   }
 
   span {
@@ -104,7 +101,7 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
+const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
 
@@ -200,7 +197,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
   return (
     <StyledSelect
       allowDeselect={false}
-      className={cx(deprecated ? eolVersionFlipperStyle : '')}
+      className={cx(eol ? eolVersionFlipperStyle : '')}
       aria-labelledby="View a different version of documentation."
       defaultValue="master"
       onChange={navigate}
@@ -209,7 +206,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       size={Size.Large}
       value={slugFromParserBranch(parserBranch, branches)}
       usePortal={false}
-      disabled={deprecated}
+      disabled={eol}
     >
       {activeUngroupedBranches?.map((b) => createOption(b))}
       {groups?.map((group) => {
@@ -244,6 +241,7 @@ VersionDropdown.propTypes = {
     ),
   }).isRequired,
   slug: PropTypes.string.isRequired,
+  eol: PropTypes.bool.isRequired,
 };
 
 export default VersionDropdown;

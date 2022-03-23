@@ -6,7 +6,6 @@ import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from './Sidenav';
 import SiteBanner from './Banner/SiteBanner';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { deprecated } from '../layouts/index';
 import { isDotCom, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX } from '../utils/dotcom';
 
 const StyledHeaderContainer = styled.header`
@@ -16,7 +15,7 @@ const StyledHeaderContainer = styled.header`
   z-index: 10;
 `;
 
-const Header = ({ sidenav }) => {
+const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
 
   let searchProperty;
@@ -33,9 +32,7 @@ const Header = ({ sidenav }) => {
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        {!deprecated && (
-          <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} docsBaseUrl={docsBaseUrl} />
-        )}
+        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} docsBaseUrl={docsBaseUrl} />}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
@@ -44,6 +41,7 @@ const Header = ({ sidenav }) => {
 
 Header.propTypes = {
   sidenav: PropTypes.bool,
+  eol: PropTypes.bool.isRequired,
 };
 
 export default Header;
