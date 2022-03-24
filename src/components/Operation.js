@@ -1,13 +1,15 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useLocation } from '@gatsbyjs/reach-router';
 import Badge from '@leafygreen-ui/badge';
 import Card from '@leafygreen-ui/card';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';
-import { useLocation } from '@reach/router';
 import ComponentFactory from './ComponentFactory';
 import CopyButton from './CopyButton';
 import { getNestedValue } from '../utils/get-nested-value';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';

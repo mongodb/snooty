@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { Global, css } from '@emotion/core';
+import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';

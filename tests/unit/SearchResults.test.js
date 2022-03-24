@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { tick } from '../utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
-import * as reachRouter from '@reach/router';
+import * as reachRouter from '@gatsbyjs/reach-router';
 import SearchResults from '../../src/components/SearchResults';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 

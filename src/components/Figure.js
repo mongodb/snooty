@@ -1,6 +1,8 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import CaptionLegend from './CaptionLegend';
 import Image from './Image';
 import Lightbox from './Lightbox';

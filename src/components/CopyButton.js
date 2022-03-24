@@ -1,6 +1,8 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { uiColors } from '@leafygreen-ui/palette';

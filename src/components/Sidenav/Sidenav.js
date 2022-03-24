@@ -1,6 +1,8 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react'
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { css, Global } from '@emotion/core';
+import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
