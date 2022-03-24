@@ -159,7 +159,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues();
-  topValues['eol'] = eol;
 
   const showVersions = repoBranches?.branches?.length > 1;
 
@@ -210,7 +209,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   return (
     <>
       <Global styles={disableScroll(!hideMobile)} />
-      <SidenavContainer {...topValues}>
+      <SidenavContainer {...topValues} eol={eol}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
