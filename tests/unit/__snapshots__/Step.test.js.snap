@@ -15,7 +15,7 @@ exports[`renders with "connected" styling 1`] = `
   font-weight: 600;
 }
 
-.emotion-6:not(:last-child):after {
+.emotion-0:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
@@ -29,7 +29,7 @@ exports[`renders with "connected" styling 1`] = `
   position: relative;
 }
 
-.emotion-0 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -116,7 +116,7 @@ exports[`renders with "connected" styling by default 1`] = `
   font-weight: 600;
 }
 
-.emotion-6:not(:last-child):after {
+.emotion-0:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
@@ -130,7 +130,7 @@ exports[`renders with "connected" styling by default 1`] = `
   position: relative;
 }
 
-.emotion-0 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -204,11 +204,7 @@ exports[`renders with "connected" styling by default 1`] = `
 
 exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
-  .emotion-2 {
-  position: relative;
-}
-
-.emotion-6 {
+  .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -220,7 +216,11 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   font-weight: 600;
 }
 
-.emotion-0 {
+.emotion-2 {
+  position: relative;
+}
+
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;

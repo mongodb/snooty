@@ -1,5 +1,7 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react';
+import { jsx } from '@emotion/react';
+import React from 'react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import LeafyButton from '@leafygreen-ui/button';
