@@ -85,7 +85,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   products.forEach((product) => {
     // TODO: REMOVE AFTER DOP 2705
     let url = product.baseUrl + product.slug;
-    if (isDotCom()) url = dotcomifyUrl(url, true);
+    if (isDotCom()) url = dotcomifyUrl(url);
 
     createNode({
       children: [],
@@ -99,10 +99,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       url,
     });
   });
-};
 
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions;
   const [, { static_files: staticFiles, ...metadataMinusStatic }] = await Promise.all([
     saveAssetFiles(assets, stitchClient),
     stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
@@ -112,6 +109,26 @@ exports.createPages = async ({ actions }) => {
   if (parentPaths) {
     transformBreadcrumbs(parentPaths, slugToTitle);
   }
+
+  //Save files in the static_files field of metadata document, including intersphinx inventories
+  if (staticFiles) {
+    await saveStaticFiles(staticFiles);
+  }
+
+  createNode({
+    children: [],
+    id: createNodeId('metadata'),
+    internal: {
+      contentDigest: createContentDigest(metadataMinusStatic),
+      type: 'SnootyMetadata',
+    },
+    parent: null,
+    metadata: metadataMinusStatic,
+  });
+};
+
+exports.createPages = async ({ actions }) => {
+  const { createPage } = actions;
 
   let repoBranches = null;
   try {
@@ -125,11 +142,6 @@ exports.createPages = async ({ actions }) => {
     console.error('No version information found for', siteMetadata.project);
   }
 
-  //Save files in the static_files field of metadata document, including intersphinx inventories
-  if (staticFiles) {
-    await saveStaticFiles(staticFiles);
-  }
-
   return new Promise((resolve, reject) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
@@ -141,7 +153,6 @@ exports.createPages = async ({ actions }) => {
           component: path.resolve(__dirname, './src/components/DocumentBody.js'),
           context: {
             slug,
-            metadata: metadataMinusStatic,
             repoBranches: repoBranches,
             template: pageNodes?.options?.template,
             page: pageNodes,
@@ -176,6 +187,10 @@ exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type SitePage implements Node @dontInfer {
       path: String!
+    }
+
+    type SnootyMetadata implements Node @dontInfer {
+        metadata: JSON!
     }
   `);
 };

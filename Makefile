@@ -4,7 +4,7 @@ STAGING_BUCKET=docs-mongodb-org-stg
 STAGING_URL="https://docs-mongodbcom-integration.corp.mongodb.com"
 -include .env.production
 
-.PHONY: stage static
+.PHONY: stage
 
 # To stage a specific build, include the commit hash as environment variable when staging
 # 	example: COMMIT_HASH=123456 make stage
@@ -27,9 +27,3 @@ stage: prefix
 		mut-publish public ${STAGING_BUCKET} --prefix=${PREFIX} --stage ${ARGS}; \
 		echo "Hosted at ${STAGING_URL}/${PREFIX}/${USER}/${GIT_BRANCH}/"; \
 	fi
-
-static:
-	-rm -r ./static/docs-tools/
-	-rm -r ./docs-tools/
-	git submodule add --force https://github.com/mongodb/docs-tools
-	-mkdir -p ./static/docs-tools

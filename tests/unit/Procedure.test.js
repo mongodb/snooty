@@ -22,4 +22,5 @@ it('renders with "normal" or YAML steps styling', () => {
 it('renders steps nested in include nodes', () => {
   const tree = render(<Procedure nodeData={mockData.nestedSteps} />);
   expect(tree.asFragment()).toMatchSnapshot();
+  expect(tree.getAllByText(/Step/)).toHaveLength(7);
 });

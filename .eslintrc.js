@@ -4,11 +4,11 @@ module.exports = {
     browser: true,
   },
   extends: ['react-app', 'plugin:import/errors'],
-  ignorePatterns: ['docs-tools/', 'node_modules/', 'public/'],
+  ignorePatterns: ['node_modules/', 'public/'],
   plugins: ['jest', '@emotion'],
   rules: {
     '@emotion/jsx-import': 'error',
-    '@emotion/pkg-renaming': 'error'
+    '@emotion/pkg-renaming': 'error',
   },
   settings: {
     'import/resolver': {

@@ -15,6 +15,7 @@ import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import { displayNone } from '../../utils/display-none';
+import transformUrlBasedOnOrigin from '../../utils/transform-url-based-on-origin';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
@@ -36,7 +37,7 @@ const commonTextStyling = css`
 
 const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
-  must account for any margins added from using the blank landing template, 
+  must account for any margins added from using the blank landing template,
   and half of the height of the empty state component */
   margin-bottom: ${CALC_MARGIN};
   margin-top: ${CALC_MARGIN};
@@ -232,7 +233,7 @@ const SearchResults = () => {
                 }
                 title={title}
                 preview={preview}
-                url={url}
+                url={transformUrlBasedOnOrigin(url)}
                 useLargeTitle
               />
             ))}
