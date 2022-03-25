@@ -49,14 +49,7 @@ const Procedure = ({ nodeData: { children, options }, ...rest }) => {
   return (
     <StyledProcedure procedureStyle={style}>
       {steps.map((child, i) => (
-        <Step
-          {...rest}
-          nodeData={child}
-          stepNumber={i + 1}
-          stepStyle={style}
-          isLastStep={i === children.length - 1}
-          key={i}
-        />
+        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} />
       ))}
     </StyledProcedure>
   );

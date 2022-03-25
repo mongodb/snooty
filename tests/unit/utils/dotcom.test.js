@@ -1,53 +1,64 @@
 import { dotcomifyUrl, isDotCom, baseUrl } from '../../../src/utils/dotcom';
 
 describe('dotcomifyUrl', () => {
-  it('by default does not return a url with protocols', () => {
-    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs-qa');
+  it('by default returns a url with protocols and prefix', () => {
+    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('https://www.mongodb.com/docs');
   });
 
-  it('supports adding https:// protocol to url when given boolean flag', () => {
-    expect(dotcomifyUrl('https://docs.mongodb.com', true)).toBe('https://www.mongodb.com/docs-qa');
+  it('supports returning a url without the https:// protocol when options.needsProtocol is falsey', () => {
+    expect(dotcomifyUrl('https://docs.mongodb.com', { needsProtocol: false })).toBe('www.mongodb.com/docs');
+  });
+
+  it('supports returning a url without a prefix when options.needsPrefix is falsey', () => {
+    expect(dotcomifyUrl('https://docs.mongodb.com', { needsPrefix: false })).toBe('https://www.mongodb.com');
   });
 
   it('supports both regular subdomain and product subdomain conversions', () => {
-    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs-qa');
-    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('www.mongodb.com/docs-qa/opsmanager');
-    expect(dotcomifyUrl('https://docs.atlas.mongodb.com')).toBe('www.mongodb.com/docs-qa/atlas');
+    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('https://www.mongodb.com/docs');
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager');
+    expect(dotcomifyUrl('https://docs.atlas.mongodb.com')).toBe('https://www.mongodb.com/docs/atlas');
+  });
+
+  it('supports mapping products to prefixes in special cases, ala opsmanager -> ops-manager ', () => {
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager');
+    expect(dotcomifyUrl('https://docs.cloudmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/cloud-manager');
   });
 
   it('supports conversions with pathname combinations, and handles `com` in pathname', () => {
     // single level subdomain
-    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('www.mongodb.com/docs-qa');
+    expect(dotcomifyUrl('https://docs.mongodb.com')).toBe('https://www.mongodb.com/docs');
     expect(dotcomifyUrl('https://docs.mongodb.com/long-path/name/divided/by-many-paths')).toBe(
-      'www.mongodb.com/docs-qa/long-path/name/divided/by-many-paths'
+      'https://www.mongodb.com/docs/long-path/name/divided/by-many-paths'
     );
-    expect(dotcomifyUrl('https://docs.mongodb.com/compound-indexes')).toBe('www.mongodb.com/docs-qa/compound-indexes');
+    expect(dotcomifyUrl('https://docs.mongodb.com/compound-indexes')).toBe(
+      'https://www.mongodb.com/docs/compound-indexes'
+    );
 
     // product subdomains
-    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('www.mongodb.com/docs-qa/opsmanager');
+    expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager');
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/this-is/a-long/pathname')).toBe(
-      'www.mongodb.com/docs-qa/opsmanager/this-is/a-long/pathname'
+      'https://www.mongodb.com/docs/ops-manager/this-is/a-long/pathname'
     );
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/combine-results')).toBe(
-      'www.mongodb.com/docs-qa/opsmanager/combine-results'
+      'https://www.mongodb.com/docs/ops-manager/combine-results'
     );
   });
 
   it('supports conversions with versions and aliases', () => {
     // single level subdomain
     expect(dotcomifyUrl('https://docs.mongodb.com/v1.2.3/compound-indexes')).toBe(
-      'www.mongodb.com/docs-qa/v1.2.3/compound-indexes'
+      'https://www.mongodb.com/docs/v1.2.3/compound-indexes'
     );
     expect(dotcomifyUrl('https://docs.mongodb.com/upcoming/compound-indexes')).toBe(
-      'www.mongodb.com/docs-qa/upcoming/compound-indexes'
+      'https://www.mongodb.com/docs/upcoming/compound-indexes'
     );
 
     // product subdomains
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/upcoming/compound-indexes')).toBe(
-      'www.mongodb.com/docs-qa/opsmanager/upcoming/compound-indexes'
+      'https://www.mongodb.com/docs/ops-manager/upcoming/compound-indexes'
     );
     expect(dotcomifyUrl('https://docs.opsmanager.mongodb.com/v1.5/compound-indexes')).toBe(
-      'www.mongodb.com/docs-qa/opsmanager/v1.5/compound-indexes'
+      'https://www.mongodb.com/docs/ops-manager/v1.5/compound-indexes'
     );
   });
 });
@@ -97,7 +108,7 @@ describe('baseUrl', () => {
         writeable: true,
       });
 
-      expect(baseUrl()).toBe('www.mongodb.com/docs-qa');
+      expect(baseUrl()).toBe('www.mongodb.com/docs');
 
       Object.defineProperty(window, 'location', {
         value: {

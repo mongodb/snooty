@@ -34,21 +34,6 @@ const Content = styled.div`
   }
 `;
 
-const stepBlockStyles = {
-  connected: css`
-    :after {
-      content: '';
-      border-left: 2px dashed ${uiColors.gray.light2};
-      bottom: 0;
-      left: calc(50% - 1px);
-      position: absolute;
-      top: 0;
-      z-index: -1;
-    }
-  `,
-  normal: null,
-};
-
 const circleStyles = {
   connected: css`
     background-color: ${uiColors.green.light3};
@@ -66,7 +51,18 @@ const circleStyles = {
 
 const landingStepStyles = {
   connected: css`
+    position: relative;
     gap: 33px;
+
+    :not(:last-child):after {
+      content: '';
+      border-left: 2px dashed ${uiColors.gray.light2};
+      bottom: 0;
+      left: 16px;
+      position: absolute;
+      top: 0;
+      z-index: -1;
+    }
   `,
   normal: css`
     gap: ${theme.size.default};
@@ -89,10 +85,10 @@ const contentStyles = {
   `,
 };
 
-const Step = ({ nodeData: { children }, isLastStep, stepNumber, stepStyle = 'connected', ...rest }) => {
+const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', ...rest }) => {
   return (
     <StyledStep css={landingStepStyles[stepStyle]}>
-      <StepBlock css={!isLastStep && stepBlockStyles[stepStyle]}>
+      <StepBlock>
         <Circle css={circleStyles[stepStyle]}>{stepNumber}</Circle>
       </StepBlock>
       <Content css={contentStyles[stepStyle]}>
@@ -109,9 +105,8 @@ Step.propTypes = {
     argument: PropTypes.arrayOf(PropTypes.object).isRequired,
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  isLastStep: PropTypes.bool,
   stepNumber: PropTypes.number.isRequired,
-  stepStyle: PropTypes.string.isRequired,
+  stepStyle: PropTypes.string,
 };
 
 export default Step;

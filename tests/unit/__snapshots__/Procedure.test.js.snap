@@ -19,6 +19,7 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   gap: 33px;
 }
 
@@ -26,21 +27,21 @@ exports[`renders correctly 1`] = `
   font-weight: 600;
 }
 
-.emotion-4 {
-  position: relative;
-}
-
-.emotion-4:after {
+.emotion-6:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
-  left: calc(50% - 1px);
+  left: 16px;
   position: absolute;
   top: 0;
   z-index: -1;
 }
 
-.emotion-6 {
+.emotion-2 {
+  position: relative;
+}
+
+.emotion-0 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -82,10 +83,6 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-12 {
-  position: relative;
-}
-
 <div
     class="emotion-0 emotion-1"
   >
@@ -120,7 +117,7 @@ exports[`renders correctly 1`] = `
       class="emotion-2 emotion-3"
     >
       <div
-        class="emotion-12 emotion-5"
+        class="emotion-2 emotion-3"
       >
         <div
           class="emotion-6 emotion-7"
@@ -149,8 +146,16 @@ exports[`renders correctly 1`] = `
 
 exports[`renders steps nested in include nodes 1`] = `
 <DocumentFragment>
-  .emotion-2 {
-  position: relative;
+  @media only screen and (max-width:1023px) {
+  .emotion-91 {
+    padding-bottom: 32px;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .emotion-91 {
+    padding-bottom: 24px;
+  }
 }
 
 .emotion-11 {
@@ -158,11 +163,26 @@ exports[`renders steps nested in include nodes 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 16px;
+  position: relative;
+  gap: 33px;
 }
 
 .emotion-11 section > p > a {
   font-weight: 600;
+}
+
+.emotion-11:not(:last-child):after {
+  content: '';
+  border-left: 2px dashed #E7EEEC;
+  bottom: 0;
+  left: 16px;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.emotion-2 {
+  position: relative;
 }
 
 .emotion-0 {
@@ -180,18 +200,31 @@ exports[`renders steps nested in include nodes 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  background-color: #333;
-  color: #FFFFFF;
-  height: 24px;
-  width: 24px;
+  background-color: #E4F4E4;
+  color: #116149;
+  height: 34px;
+  width: 34px;
 }
 
 .emotion-9 {
-  margin-bottom: 24px;
+  margin-top: 5px;
+  padding-bottom: 64px;
 }
 
 .emotion-9 > section >:first-of-type {
   margin-top: 0;
+}
+
+@media only screen and (max-width:767px) {
+  .emotion-9 {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .emotion-9 {
+    padding-bottom: 32px;
+  }
 }
 
 .emotion-6 {
