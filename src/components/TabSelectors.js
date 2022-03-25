@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react'
-import React, { useContext, useMemo } from 'react';
+import { jsx } from '@emotion/react';
+import { useContext, useMemo } from 'react';
 import { css } from '@emotion/react';
 import { useTheme } from '@emotion/react';
 import { TabContext } from './tab-context';

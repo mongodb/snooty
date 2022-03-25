@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';

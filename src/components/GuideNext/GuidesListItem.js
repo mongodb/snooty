@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react'
-import React, { useContext } from 'react';
+import { jsx } from '@emotion/react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';

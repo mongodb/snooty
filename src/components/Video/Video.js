@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
+import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';

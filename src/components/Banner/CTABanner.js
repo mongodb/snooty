@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { uiColors } from '@leafygreen-ui/palette';
