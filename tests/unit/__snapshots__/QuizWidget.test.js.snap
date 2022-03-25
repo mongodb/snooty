@@ -5,20 +5,12 @@ exports[`quiz widget snapshots doesnt render quiz widget without a specified que
 exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  color: #13AA52;
+  background-color: #F9FBFA;
+  width: 100%;
+  padding: 40px;
 }
 
-.emotion-18 {
-  overflow: hidden;
-  border-radius: 3px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.emotion-25 {
+.emotion-2 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -29,7 +21,45 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   color: #21313C;
 }
 
-.emotion-11 {
+@media not all and (max-width: 480px) {
+  .emotion-3 {
+    text-align: center;
+  }
+}
+
+.emotion-5 {
+  color: #13AA52;
+}
+
+.emotion-6 {
+  margin: 0 0 32px 0!important;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.emotion-8 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.59px;
+  color: #89979B;
+  margin: 0!important;
+}
+
+.emotion-10 {
+  margin: 8px 0 24px 0!important;
+}
+
+.emotion-12 {
+  box-shadow: none!important;
+  margin: auto auto 16px auto;
+  padding: 16px;
+}
+
+.emotion-12:hover {
+  border-color: #061621!important;
+}
+
+.emotion-13 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -39,32 +69,38 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   background-color: white;
   color: #21313C;
   cursor: pointer;
-  box-shadow: none !important;
-  margin: auto auto 16px auto;
-  padding: 16px;
 }
 
-.emotion-11:focus {
+.emotion-13:focus {
   outline: none;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
 }
 
-.emotion-11:hover {
+.emotion-13:hover {
   border: 1px solid #E7EEEC;
   box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
 }
 
-.emotion-11:hover:focus {
+.emotion-13:hover:focus {
   box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
 }
 
-.emotion-11:hover {
-  border-color: #061621 !important;
+.emotion-14 {
+  height: 10px;
+  width: 10px;
+  background-color: white;
+  border-color: black;
+  border-radius: 50%;
+  display: inline-block;
+  border-style: solid;
+  border-width: thin;
+  margin-right: 16px;
 }
 
-.emotion-20 {
+.emotion-24 {
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
   appearance: none;
   padding: 0;
   margin: 0;
@@ -88,46 +124,60 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   z-index: 0;
   background-color: #F9FBFA;
   border: 1px solid #89979B;
-  box-shadow: 0px 1px 2px rgba(6,22,33,0.3);
+  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
   color: #3D4F58;
   font-size: 14px;
   height: 36px;
 }
 
-.emotion-20:focus {
+.emotion-24:focus {
   outline: none;
 }
 
-.emotion-20:disabled {
+.emotion-24:disabled {
   pointer-events: none;
 }
 
-.emotion-20:active,
-.emotion-20:focus,
-.emotion-20:hover {
+.emotion-24:active,
+.emotion-24:focus,
+.emotion-24:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-20:focus {
+.emotion-24:focus {
   color: #3D4F58;
 }
 
-.emotion-20:hover,
-.emotion-20:active {
+.emotion-24:hover,
+.emotion-24:active {
   color: #3D4F58;
   background-color: #FFFFFF;
   border: 1px solid #5D6C74;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.3), 0px 0px 0px 3px #E7EEEC;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),0px 0px 0px 3px #E7EEEC;
 }
 
-.emotion-20:focus {
+.emotion-24:focus {
   background: #FFFFFF;
   border: 1px solid #5D6C74;
-  box-shadow: 0px 4px 4px rgba(0,124,173,0.4), 0px 0px 0px 3px #019EE2;
+  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
 }
 
-.emotion-19 {
+.emotion-25 {
+  font-size: 16px;
+}
+
+.emotion-27 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -143,68 +193,22 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   z-index: 0;
   font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   padding-left: 12px;
   padding-right: 12px;
 }
 
-.emotion-23 {
-  background-color: #F9FBFA;
-  width: 100%;
-  padding: 40px;
-}
-
-@media not all and (max-width:480px) {
-  .emotion-3 {
-    text-align: center;
-  }
-}
-
-.emotion-1 {
-  margin: 0 0 32px 0 !important;
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.emotion-5 {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16.59px;
-  color: #89979B;
-  margin: 0 !important;
-}
-
-.emotion-7 {
-  margin: 8px 0 24px 0 !important;
-}
-
-.emotion-9 {
-  height: 10px;
-  width: 10px;
-  background-color: white;
-  border-color: black;
-  border-radius: 50%;
-  display: inline-block;
-  border-style: solid;
-  border-width: thin;
-  margin-right: 16px;
-}
-
-.emotion-21 {
-  font-size: 16px;
-}
-
 <div
-    class="emotion-23 emotion-24 emotion-25"
+    class="emotion-0 emotion-1 emotion-2"
   >
     <div
       class="emotion-3 emotion-4"
     >
       <svg
         aria-label="Checkmark With Circle Icon"
-        class="emotion-0"
+        class="emotion-5"
         fill="none"
         height="24"
         role="img"
@@ -220,55 +224,55 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
         />
       </svg>
       <p
-        class="emotion-1 emotion-2"
+        class="emotion-6 emotion-7"
       >
         Check your understanding
       </p>
     </div>
     <p
-      class="emotion-5 emotion-6"
+      class="emotion-8 emotion-9"
     >
       Question
     </p>
     <p
-      class="emotion-7 emotion-8"
+      class="emotion-10 emotion-11"
     >
       With my MongoDB account, I can now access?
     </p>
     <div
-      class="emotion-11"
+      class="emotion-12 emotion-13"
     >
       <span
-        class="emotion-9 emotion-10"
+        class="emotion-14 emotion-15"
       />
       MongoDB Atlas
     </div>
     <div
-      class="emotion-11"
+      class="emotion-12 emotion-13"
     >
       <span
-        class="emotion-9 emotion-10"
+        class="emotion-14 emotion-15"
       />
       MongoDB University
     </div>
     <div
-      class="emotion-11"
+      class="emotion-12 emotion-13"
     >
       <span
-        class="emotion-9 emotion-10"
+        class="emotion-14 emotion-15"
       />
       All of the Above
     </div>
     <button
       aria-disabled="false"
-      class="emotion-20 emotion-21 emotion-22"
+      class="emotion-24 emotion-25 emotion-26"
       type="button"
     >
       <div
-        class="emotion-18"
+        class="emotion-27"
       />
       <div
-        class="emotion-19"
+        class="emotion-28"
       >
         Submit
       </div>

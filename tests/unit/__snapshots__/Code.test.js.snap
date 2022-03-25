@@ -2,20 +2,56 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-3 {
-  border-spacing: 0;
-  vertical-align: top;
-  padding: 0 16px;
+  .emotion-0 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
 }
 
-.emotion-7 {
-  color: inherit;
-  font-size: 13px;
-  font-family: 'Source Code Pro',Menlo,monospace;
-  line-height: 24px;
+.emotion-0>div>div {
+  width: unset;
 }
 
-.emotion-8 {
+.emotion-0 button>div>div {
+  font-size: 16px;
+}
+
+.emotion-0>div {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.emotion-1 {
+  border: 1px solid #E7EEEC;
+  border-bottom: none;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.emotion-3 {
+  padding: 10px;
+  color: #5D6C74;
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
+}
+
+.emotion-4 {
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-6 {
   border: 2px solid;
   overflow-x: auto;
   border-radius: 0;
@@ -34,37 +70,37 @@ exports[`renders correctly 1`] = `
   color: #061621;
 }
 
-@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-8 {
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-6 {
     white-space: pre-wrap;
   }
 }
 
-@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-8 {
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-6 {
     white-space: pre;
   }
 }
 
-.emotion-11 {
-  border: 1px solid #E7EEEC;
-  border-radius: 4px;
-  overflow: hidden;
+.emotion-7 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
 }
 
-.emotion-10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-6 {
+.emotion-8 {
   border-spacing: 0;
   width: 100%;
 }
 
 .emotion-9 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+}
+
+.emotion-12 {
   width: 38px;
   border-left: solid 1px;
   display: -webkit-box;
@@ -84,78 +120,42 @@ exports[`renders correctly 1`] = `
   background-color: white;
 }
 
-.emotion-12 {
-  display: table;
-  margin: 16px 0;
-  min-width: 150px;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.emotion-12 > div > div {
-  width: unset;
-}
-
-.emotion-12 button > div > div {
-  font-size: 16px;
-}
-
-.emotion-12 > div {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
-
-.emotion-1 {
-  border: 1px solid #E7EEEC;
-  border-bottom: none;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-}
-
-.emotion-0 {
-  padding: 10px;
-  color: #5D6C74;
-  font-size: 14px;
-  margin-left: 5px;
-  border-bottom: none;
-}
-
 <div
-    class="emotion-12"
+    class="emotion-0"
   >
     <div>
       <div
         class="emotion-1 emotion-2"
       >
         <div
-          class="emotion-0"
+          class="emotion-3"
         >
           Test Caption
         </div>
       </div>
     </div>
     <div
-      class="emotion-11"
+      class="emotion-4"
     >
       <div
-        class="emotion-10"
+        class="emotion-5"
       >
         <pre
-          class="emotion-8"
+          class="emotion-6"
           tabindex="-1"
         >
           <code
             class="lg-highlight-hljs-light emotion-7 javascript"
           >
             <table
-              class="emotion-6"
+              class="emotion-8"
             >
               <tbody>
                 <tr
                   class=""
                 >
                   <td
-                    class="emotion-3"
+                    class="emotion-9"
                   >
                     mongoimport --db test --collection inventory ^
                   </td>
@@ -164,7 +164,7 @@ exports[`renders correctly 1`] = `
                   class=""
                 >
                   <td
-                    class="emotion-3"
+                    class="emotion-9"
                   >
                               --authenticationDatabase admin --username &lt;user&gt; --password &lt;password&gt; ^
                   </td>
@@ -173,7 +173,7 @@ exports[`renders correctly 1`] = `
                   class=""
                 >
                   <td
-                    class="emotion-3"
+                    class="emotion-9"
                   >
                               --drop --file ~\\downloads\\inventory.crud.json
                   </td>
@@ -183,7 +183,7 @@ exports[`renders correctly 1`] = `
           </code>
         </pre>
         <div
-          class="emotion-9"
+          class="emotion-12"
           data-testid="leafygreen-code-panel"
         />
       </div>

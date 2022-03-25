@@ -2,21 +2,22 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-1 {
+  .emotion-0 {
   width: 100%;
 }
 
-.emotion-0 {
+.emotion-1 {
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
   appearance: none;
   background: none;
   border: none;
   cursor: pointer;
   width: 100%;
   min-height: 32px;
-  padding: 8px 16px;
+  padding: 4px 16px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -37,7 +38,7 @@ exports[`renders correctly 1`] = `
   transition: background-color 150ms ease-in-out;
   background-color: rgba(249,251,250,0);
   font-size: 14px;
-  line-height: 1em;
+  line-height: 20px;
   cursor: default;
   font-weight: bold;
   -webkit-text-decoration: none;
@@ -47,33 +48,34 @@ exports[`renders correctly 1`] = `
   padding-right: 24px;
 }
 
-.emotion-0:hover {
+.emotion-1:hover {
   background-color: #E7EEEC;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   outline: none;
 }
 
-.emotion-0::-moz-focus-inner {
+.emotion-1::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-0,
-.emotion-0:hover {
+.emotion-1,
+.emotion-1:hover {
   color: #0B3B35;
   background-color: #E4F4E4;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   content: '';
   -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
   -ms-transform: scaleY(0.3);
   transform: scaleY(0.3);
   position: absolute;
@@ -88,48 +90,50 @@ exports[`renders correctly 1`] = `
   border-radius: 0 3px 3px 0;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: #0D324F;
   background-color: #C5E4F2;
 }
 
-.emotion-0:focus:before {
+.emotion-1:focus:before {
   opacity: 1;
   -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
 }
 
 <li
-    class="emotion-1"
+    class="emotion-0"
   >
     <a
       aria-current="page"
       aria-disabled="false"
-      class="emotion-0"
+      class="emotion-1"
       data-leafygreen-ui="side-nav-item-container"
       href="/"
     >
       Overview
     </a>
   </li>
-  .emotion-1 {
+  .emotion-0 {
   width: 100%;
 }
 
-.emotion-0 {
+.emotion-1 {
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
   appearance: none;
   background: none;
   border: none;
   cursor: pointer;
   width: 100%;
   min-height: 32px;
-  padding: 8px 16px;
+  padding: 4px 16px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -150,33 +154,34 @@ exports[`renders correctly 1`] = `
   transition: background-color 150ms ease-in-out;
   background-color: rgba(249,251,250,0);
   font-size: 14px;
-  line-height: 1em;
+  line-height: 20px;
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
 }
 
-.emotion-0:hover {
+.emotion-1:hover {
   background-color: #E7EEEC;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   outline: none;
 }
 
-.emotion-0::-moz-focus-inner {
+.emotion-1::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   content: '';
   -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
   -ms-transform: scaleY(0.3);
   transform: scaleY(0.3);
   position: absolute;
@@ -191,48 +196,50 @@ exports[`renders correctly 1`] = `
   border-radius: 0 3px 3px 0;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: #0D324F;
   background-color: #C5E4F2;
 }
 
-.emotion-0:focus:before {
+.emotion-1:focus:before {
   opacity: 1;
   -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
 }
 
 <li
-    class="emotion-1"
+    class="emotion-0"
   >
     <a
       aria-current="false"
       aria-disabled="false"
-      class="emotion-0"
+      class="emotion-1"
       data-leafygreen-ui="side-nav-item-container"
       href="/cloud/account/"
     >
       Atlas
     </a>
   </li>
-  .emotion-1 {
+  .emotion-0 {
   width: 100%;
 }
 
-.emotion-0 {
+.emotion-1 {
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
   appearance: none;
   background: none;
   border: none;
   cursor: pointer;
   width: 100%;
   min-height: 32px;
-  padding: 8px 16px;
+  padding: 4px 16px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -253,33 +260,34 @@ exports[`renders correctly 1`] = `
   transition: background-color 150ms ease-in-out;
   background-color: rgba(249,251,250,0);
   font-size: 14px;
-  line-height: 1em;
+  line-height: 20px;
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
 }
 
-.emotion-0:hover {
+.emotion-1:hover {
   background-color: #E7EEEC;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   outline: none;
 }
 
-.emotion-0::-moz-focus-inner {
+.emotion-1::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   content: '';
   -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
   -ms-transform: scaleY(0.3);
   transform: scaleY(0.3);
   position: absolute;
@@ -294,27 +302,28 @@ exports[`renders correctly 1`] = `
   border-radius: 0 3px 3px 0;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: #0D324F;
   background-color: #C5E4F2;
 }
 
-.emotion-0:focus:before {
+.emotion-1:focus:before {
   opacity: 1;
   -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
 }
 
 <li
-    class="emotion-1"
+    class="emotion-0"
   >
     <a
       aria-current="false"
       aria-disabled="false"
-      class="emotion-0"
+      class="emotion-1"
       data-leafygreen-ui="side-nav-item-container"
       href="/server/read/"
     >

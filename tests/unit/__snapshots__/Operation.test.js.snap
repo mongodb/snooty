@@ -2,27 +2,11 @@
 
 exports[`when no summary is present renders correctly  1`] = `
 <DocumentFragment>
-  .emotion-3 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  .emotion-0 {
+  margin-bottom: 16px;
 }
 
-.emotion-15 {
+.emotion-1 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -33,7 +17,36 @@ exports[`when no summary is present renders correctly  1`] = `
   color: #21313C;
 }
 
-.emotion-0 {
+.emotion-2 {
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  background-color: #F9FBFA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 16px 32px;
+}
+
+.emotion-2>*:not(:last-child) {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-2 {
+    padding: 16px;
+  }
+}
+
+.emotion-4 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -57,6 +70,29 @@ exports[`when no summary is present renders correctly  1`] = `
 }
 
 .emotion-5 {
+  color: #061621;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-5 {
+    word-break: break-all;
+  }
+}
+
+.emotion-7 {
+  top: -5px;
+  margin-left: 4px;
+  position: relative;
+}
+
+.emotion-8 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #89979B;
+}
+
+.emotion-9 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -70,12 +106,12 @@ exports[`when no summary is present renders correctly  1`] = `
   flex-shrink: 0;
   -webkit-transition: color 150ms ease-in-out;
   transition: color 150ms ease-in-out;
-  background-color: rgba(255,255,255,0);
+  background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
 }
 
-.emotion-5:before {
+.emotion-9:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -87,114 +123,79 @@ exports[`when no summary is present renders correctly  1`] = `
   border-radius: 100%;
   opacity: 0;
   -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
   transform: scale(0.8);
 }
 
-.emotion-5:active:before,
-.emotion-5:hover:before,
-.emotion-5:focus:before {
+.emotion-9:active:before,
+.emotion-9:hover:before,
+.emotion-9:focus:before {
   opacity: 1;
   -webkit-transform: scale(1);
+  -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-5:focus {
+.emotion-9:focus {
   outline: none;
 }
 
-.emotion-5:active,
-.emotion-5:hover {
+.emotion-9:active,
+.emotion-9:hover {
   color: #3D4F58;
 }
 
-.emotion-5:active:before,
-.emotion-5:hover:before {
+.emotion-9:active:before,
+.emotion-9:hover:before {
   background-color: #E7EEEC;
 }
 
-.emotion-5:focus {
+.emotion-9:focus {
   color: #1A567E;
 }
 
-.emotion-5:focus:before {
+.emotion-9:focus:before {
   background-color: #C5E4F2;
 }
 
-.emotion-14 {
-  margin-bottom: 16px;
-}
-
 .emotion-10 {
-  -webkit-align-items: baseline;
-  -webkit-box-align: baseline;
-  -ms-flex-align: baseline;
-  align-items: baseline;
-  background-color: #F9FBFA;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 16px 32px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
-.emotion-10 > *:not(:last-child) {
-  margin-right: 16px;
-}
-
-@media only screen and (max-width:480px) {
-  .emotion-10 {
-    padding: 16px;
-  }
-}
-
-.emotion-1 {
-  color: #061621;
-}
-
-@media only screen and (max-width:480px) {
-  .emotion-1 {
-    word-break: break-all;
-  }
-}
-
-.emotion-6 {
-  top: -5px;
-  margin-left: 4px;
-  position: relative;
-}
-
-.emotion-4 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  color: #89979B;
-}
-
-.emotion-8 {
+.emotion-11 {
   top: -5px;
   margin-left: auto;
 }
 
-.emotion-12 {
+.emotion-14 {
   margin: 24px 32px;
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-12 {
+@media only screen and (max-width: 480px) {
+  .emotion-14 {
     margin: 16px;
   }
 }
 
-.emotion-12 > p {
+.emotion-14>p {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -202,34 +203,34 @@ exports[`when no summary is present renders correctly  1`] = `
 }
 
 <div
-    class="emotion-14 emotion-15"
+    class="emotion-0 emotion-1"
     id="get-/auth/providers"
   >
     <div
-      class="emotion-10 emotion-11"
+      class="emotion-2 emotion-3"
     >
       <div
-        class="emotion-0"
+        class="emotion-4"
       >
         GET
       </div>
       <div>
         <code
-          class="emotion-1 emotion-2"
+          class="emotion-5 emotion-6"
         >
           /​auth/​providers
         </code>
         <span
-          class="emotion-6"
+          class="emotion-7"
         >
           <button
             aria-disabled="false"
             aria-label="Copy"
-            class="emotion-4 emotion-5"
+            class="emotion-8 emotion-9"
             tabindex="0"
           >
             <div
-              class="emotion-3"
+              class="emotion-10"
             >
               <svg
                 aria-label="Copy Icon"
@@ -255,11 +256,11 @@ exports[`when no summary is present renders correctly  1`] = `
       <button
         aria-disabled="false"
         aria-label="Show operation details"
-        class="emotion-8 emotion-5"
+        class="emotion-11 emotion-9"
         tabindex="0"
       >
         <div
-          class="emotion-3"
+          class="emotion-10"
         >
           <svg
             aria-label="Chevron Down Icon"
@@ -282,7 +283,7 @@ exports[`when no summary is present renders correctly  1`] = `
       </button>
     </div>
     <div
-      class="emotion-12 emotion-13"
+      class="emotion-14 emotion-15"
     >
       <p>
         This is a description. Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -300,27 +301,11 @@ mollit anim id est laborum.
 
 exports[`when no summary or description is present renders correctly  1`] = `
 <DocumentFragment>
-  .emotion-3 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  .emotion-0 {
+  margin-bottom: 16px;
 }
 
-.emotion-13 {
+.emotion-1 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -331,73 +316,36 @@ exports[`when no summary or description is present renders correctly  1`] = `
   color: #21313C;
 }
 
-.emotion-5 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  color: #89979B;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
-  background-color: rgba(255,255,255,0);
-  height: 28px;
-  width: 28px;
+.emotion-2 {
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  background-color: #F9FBFA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 16px 32px;
 }
 
-.emotion-5:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  opacity: 0;
-  -webkit-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
+.emotion-2>*:not(:last-child) {
+  margin-right: 16px;
 }
 
-.emotion-5:active:before,
-.emotion-5:hover:before,
-.emotion-5:focus:before {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
+@media only screen and (max-width: 480px) {
+  .emotion-2 {
+    padding: 16px;
+  }
 }
 
-.emotion-5:focus {
-  outline: none;
-}
-
-.emotion-5:active,
-.emotion-5:hover {
-  color: #3D4F58;
-}
-
-.emotion-5:active:before,
-.emotion-5:hover:before {
-  background-color: #E7EEEC;
-}
-
-.emotion-5:focus {
-  color: #1A567E;
-}
-
-.emotion-5:focus:before {
-  background-color: #C5E4F2;
-}
-
-.emotion-0 {
+.emotion-4 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -420,83 +368,137 @@ exports[`when no summary or description is present renders correctly  1`] = `
   color: #116149;
 }
 
-.emotion-12 {
-  margin-bottom: 16px;
-}
-
-.emotion-10 {
-  -webkit-align-items: baseline;
-  -webkit-box-align: baseline;
-  -ms-flex-align: baseline;
-  align-items: baseline;
-  background-color: #F9FBFA;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 16px 32px;
-}
-
-.emotion-10 > *:not(:last-child) {
-  margin-right: 16px;
-}
-
-@media only screen and (max-width:480px) {
-  .emotion-10 {
-    padding: 16px;
-  }
-}
-
-.emotion-1 {
+.emotion-5 {
   color: #061621;
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-1 {
+@media only screen and (max-width: 480px) {
+  .emotion-5 {
     word-break: break-all;
   }
 }
 
-.emotion-6 {
+.emotion-7 {
   top: -5px;
   margin-left: 4px;
   position: relative;
 }
 
-.emotion-4 {
+.emotion-8 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
   color: #89979B;
 }
 
-.emotion-8 {
+.emotion-9 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+}
+
+.emotion-9:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-9:active:before,
+.emotion-9:hover:before,
+.emotion-9:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-9:focus {
+  outline: none;
+}
+
+.emotion-9:active,
+.emotion-9:hover {
+  color: #3D4F58;
+}
+
+.emotion-9:active:before,
+.emotion-9:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-9:focus {
+  color: #1A567E;
+}
+
+.emotion-9:focus:before {
+  background-color: #C5E4F2;
+}
+
+.emotion-10 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-11 {
   top: -5px;
   margin-left: auto;
 }
 
 <div
-    class="emotion-12 emotion-13"
+    class="emotion-0 emotion-1"
     id="post-/auth/providers/{provider}/login"
   >
     <div
-      class="emotion-10 emotion-11"
+      class="emotion-2 emotion-3"
     >
       <div
-        class="emotion-0"
+        class="emotion-4"
       >
         POST
       </div>
       <div>
         <code
-          class="emotion-1 emotion-2"
+          class="emotion-5 emotion-6"
         >
           /​auth/​providers/​
           <strong>
@@ -505,16 +507,16 @@ exports[`when no summary or description is present renders correctly  1`] = `
           /​login
         </code>
         <span
-          class="emotion-6"
+          class="emotion-7"
         >
           <button
             aria-disabled="false"
             aria-label="Copy"
-            class="emotion-4 emotion-5"
+            class="emotion-8 emotion-9"
             tabindex="0"
           >
             <div
-              class="emotion-3"
+              class="emotion-10"
             >
               <svg
                 aria-label="Copy Icon"
@@ -540,11 +542,11 @@ exports[`when no summary or description is present renders correctly  1`] = `
       <button
         aria-disabled="false"
         aria-label="Show operation details"
-        class="emotion-8 emotion-5"
+        class="emotion-11 emotion-9"
         tabindex="0"
       >
         <div
-          class="emotion-3"
+          class="emotion-10"
         >
           <svg
             aria-label="Chevron Down Icon"
@@ -572,27 +574,11 @@ exports[`when no summary or description is present renders correctly  1`] = `
 
 exports[`when rendering all fields renders correctly  1`] = `
 <DocumentFragment>
-  .emotion-3 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  .emotion-0 {
+  margin-bottom: 16px;
 }
 
-.emotion-15 {
+.emotion-1 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -603,7 +589,36 @@ exports[`when rendering all fields renders correctly  1`] = `
   color: #21313C;
 }
 
-.emotion-0 {
+.emotion-2 {
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  background-color: #F9FBFA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 16px 32px;
+}
+
+.emotion-2>*:not(:last-child) {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-2 {
+    padding: 16px;
+  }
+}
+
+.emotion-4 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -627,6 +642,29 @@ exports[`when rendering all fields renders correctly  1`] = `
 }
 
 .emotion-5 {
+  color: #061621;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-5 {
+    word-break: break-all;
+  }
+}
+
+.emotion-7 {
+  top: -5px;
+  margin-left: 4px;
+  position: relative;
+}
+
+.emotion-8 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #89979B;
+}
+
+.emotion-9 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -640,12 +678,12 @@ exports[`when rendering all fields renders correctly  1`] = `
   flex-shrink: 0;
   -webkit-transition: color 150ms ease-in-out;
   transition: color 150ms ease-in-out;
-  background-color: rgba(255,255,255,0);
+  background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
 }
 
-.emotion-5:before {
+.emotion-9:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -657,114 +695,79 @@ exports[`when rendering all fields renders correctly  1`] = `
   border-radius: 100%;
   opacity: 0;
   -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
   transform: scale(0.8);
 }
 
-.emotion-5:active:before,
-.emotion-5:hover:before,
-.emotion-5:focus:before {
+.emotion-9:active:before,
+.emotion-9:hover:before,
+.emotion-9:focus:before {
   opacity: 1;
   -webkit-transform: scale(1);
+  -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-5:focus {
+.emotion-9:focus {
   outline: none;
 }
 
-.emotion-5:active,
-.emotion-5:hover {
+.emotion-9:active,
+.emotion-9:hover {
   color: #3D4F58;
 }
 
-.emotion-5:active:before,
-.emotion-5:hover:before {
+.emotion-9:active:before,
+.emotion-9:hover:before {
   background-color: #E7EEEC;
 }
 
-.emotion-5:focus {
+.emotion-9:focus {
   color: #1A567E;
 }
 
-.emotion-5:focus:before {
+.emotion-9:focus:before {
   background-color: #C5E4F2;
 }
 
-.emotion-14 {
-  margin-bottom: 16px;
-}
-
 .emotion-10 {
-  -webkit-align-items: baseline;
-  -webkit-box-align: baseline;
-  -ms-flex-align: baseline;
-  align-items: baseline;
-  background-color: #F9FBFA;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 16px 32px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
-.emotion-10 > *:not(:last-child) {
-  margin-right: 16px;
-}
-
-@media only screen and (max-width:480px) {
-  .emotion-10 {
-    padding: 16px;
-  }
-}
-
-.emotion-1 {
-  color: #061621;
-}
-
-@media only screen and (max-width:480px) {
-  .emotion-1 {
-    word-break: break-all;
-  }
-}
-
-.emotion-6 {
-  top: -5px;
-  margin-left: 4px;
-  position: relative;
-}
-
-.emotion-4 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  color: #89979B;
-}
-
-.emotion-8 {
+.emotion-11 {
   top: -5px;
   margin-left: auto;
 }
 
-.emotion-12 {
+.emotion-14 {
   margin: 24px 32px;
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-12 {
+@media only screen and (max-width: 480px) {
+  .emotion-14 {
     margin: 16px;
   }
 }
 
-.emotion-12 > p {
+.emotion-14>p {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -772,34 +775,34 @@ exports[`when rendering all fields renders correctly  1`] = `
 }
 
 <div
-    class="emotion-14 emotion-15"
+    class="emotion-0 emotion-1"
     id="get-/auth/profile"
   >
     <div
-      class="emotion-10 emotion-11"
+      class="emotion-2 emotion-3"
     >
       <div
-        class="emotion-0"
+        class="emotion-4"
       >
         GET
       </div>
       <div>
         <code
-          class="emotion-1 emotion-2"
+          class="emotion-5 emotion-6"
         >
           /​auth/​profile
         </code>
         <span
-          class="emotion-6"
+          class="emotion-7"
         >
           <button
             aria-disabled="false"
             aria-label="Copy"
-            class="emotion-4 emotion-5"
+            class="emotion-8 emotion-9"
             tabindex="0"
           >
             <div
-              class="emotion-3"
+              class="emotion-10"
             >
               <svg
                 aria-label="Copy Icon"
@@ -825,11 +828,11 @@ exports[`when rendering all fields renders correctly  1`] = `
       <button
         aria-disabled="false"
         aria-label="Show operation details"
-        class="emotion-8 emotion-5"
+        class="emotion-11 emotion-9"
         tabindex="0"
       >
         <div
-          class="emotion-3"
+          class="emotion-10"
         >
           <svg
             aria-label="Chevron Down Icon"
@@ -852,7 +855,7 @@ exports[`when rendering all fields renders correctly  1`] = `
       </button>
     </div>
     <div
-      class="emotion-12 emotion-13"
+      class="emotion-14 emotion-15"
     >
       <p>
         Get information about the currently logged in user.

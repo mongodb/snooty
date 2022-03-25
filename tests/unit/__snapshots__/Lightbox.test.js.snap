@@ -2,18 +2,18 @@
 
 exports[`Lightbox renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-3 {
+  .emotion-0 {
   width: 700px;
   cursor: pointer;
   margin: 0;
   display: block;
 }
 
-.emotion-0 {
+.emotion-2 {
   max-width: 100%;
 }
 
-.emotion-1 {
+.emotion-3 {
   color: #444;
   font-size: 80%;
   margin-left: auto;
@@ -23,7 +23,7 @@ exports[`Lightbox renders correctly 1`] = `
 }
 
 <div
-    class="emotion-3 emotion-4"
+    class="emotion-0 emotion-1"
   >
     <div
       role="button"
@@ -31,11 +31,11 @@ exports[`Lightbox renders correctly 1`] = `
     >
       <img
         alt="/images/firstcluster.png"
-        class="   emotion-0"
+        class="   emotion-2"
         src="/images/firstcluster.png"
       />
       <div
-        class="emotion-1 emotion-2"
+        class="emotion-3 emotion-4"
       >
         click to enlarge
       </div>
