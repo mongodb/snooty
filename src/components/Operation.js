@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useLocation } from '@gatsbyjs/reach-router';
+import { useLocation } from '@reach/router';
 import Badge from '@leafygreen-ui/badge';
 import Card from '@leafygreen-ui/card';
 import Icon from '@leafygreen-ui/icon';
