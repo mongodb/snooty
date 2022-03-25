@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react'
+import { jsx } from '@emotion/react';
 import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@leafygreen-ui/icon';

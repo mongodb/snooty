@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/react';
 import { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';

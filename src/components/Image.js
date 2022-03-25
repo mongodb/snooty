@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react'
+import { jsx } from '@emotion/react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
