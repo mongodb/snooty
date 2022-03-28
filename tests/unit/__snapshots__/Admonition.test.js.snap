@@ -15,6 +15,7 @@ exports[`admonitions render correctly 1`] = `
 }
 
 .emotion-2 {
+  background-color: #FFFFFF;
   border-radius: 6px;
   box-shadow: 0px 2px 5px 0 rgba(33,49,60,0.1);
   overflow: hidden;
@@ -40,9 +41,6 @@ exports[`admonitions render correctly 1`] = `
   font-family: Akzidenz,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   font-size: 12px;
   font-weight: bold;
-  -webkit-letter-spacing: 0.8px;
-  -moz-letter-spacing: 0.8px;
-  -ms-letter-spacing: 0.8px;
   letter-spacing: 0.8px;
   line-height: 16px;
   padding: 12px 24px 12px 52px;
@@ -78,11 +76,6 @@ exports[`admonitions render correctly 1`] = `
   line-height: 20px;
 }
 
-.emotion-6 {
-  font-size: 14px;
-  line-height: 20px;
-}
-
 <div
     class="emotion-0 emotion-1 emotion-2"
     role="note"
@@ -91,10 +84,11 @@ exports[`admonitions render correctly 1`] = `
       class="emotion-3"
     >
       <svg
-        aria-label="Info With Circle Icon"
+        alt=""
+        aria-hidden="true"
         class="emotion-4"
         height="16"
-        role="img"
+        role="presentation"
         viewBox="0 0 16 16"
         width="16"
       >
