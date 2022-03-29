@@ -9,9 +9,13 @@ const getTopValue = (bannerEnabled, eol, heights) => {
     topValue += theme.size.stripUnit(height);
   });
 
+  const bannerHeight = theme.size.stripUnit(theme.header.bannerHeight);
   if (bannerEnabled) {
-    const bannerHeight = theme.size.stripUnit(theme.header.bannerHeight);
     topValue = eol ? bannerHeight : bannerHeight + topValue;
+  } else {
+    if (eol) {
+      topValue = 0;
+    }
   }
 
   return `${topValue}px`;
