@@ -7,7 +7,6 @@ module.exports = {
   ignorePatterns: ['node_modules/', 'public/'],
   plugins: ['jest', '@emotion'],
   rules: {
-    '@emotion/jsx-import': 'error',
     '@emotion/pkg-renaming': 'error',
     'no-unused-vars': [1, { varsIgnorePattern: 'React', args: 'none', ignoreRestSiblings: true }],
   },

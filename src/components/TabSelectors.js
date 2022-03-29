@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/react';
 import React, { useContext, useMemo } from 'react';
 import { css } from '@emotion/react';
 import { useTheme } from '@emotion/react';

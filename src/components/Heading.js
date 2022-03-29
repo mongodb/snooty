@@ -1,9 +1,8 @@
-/** @jsx jsx */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
 import TabSelectors from './TabSelectors';
