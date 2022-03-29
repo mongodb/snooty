@@ -3,7 +3,16 @@
 const isBrowser = typeof window !== 'undefined';
 
 const DOTCOM_BASE_URL = 'www.mongodb.com';
-const DOTCOM_BASE_PREFIX = `docs-qa`;
+const DOTCOM_BASE_PREFIX = `docs`;
+
+// Used for any product mappings that won't match prefix pathing 1:1
+const productToPrefixMapping = (product) => {
+  const mapping = {
+    opsmanager: 'ops-manager',
+    cloudmanager: 'cloud-manager',
+  };
+  return mapping[product] ? mapping[product] : product;
+};
 
 // Used to convert a 'docs.mongodb.com' or 'docs.<product>.mongodb.com' url to the new dotcom format
 // this *should* be removed post consolidation, or alternatively, made to use `new URL(url)` and polyfilled for safari
@@ -17,7 +26,7 @@ const dotcomifyUrl = (url, options = {}) => {
 
   if (needsProtocol) baseUrl = `https://${baseUrl}`;
   if (subdomainProduct && needsPrefix) {
-    baseUrl = `${baseUrl}/${subdomainProduct}`;
+    baseUrl = `${baseUrl}/${productToPrefixMapping(subdomainProduct)}`;
   }
 
   pathname = pathname.split('/').slice(1).join('/');
@@ -36,4 +45,4 @@ const baseUrl = (needsProtocol = false) => {
   return isDotCom() ? dotcomifyUrl(url, { needsProtocol }) : `${needsProtocol ? 'https://' : ''}${url}`;
 };
 
-module.exports = { dotcomifyUrl, isDotCom, baseUrl, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX };
+module.exports = { dotcomifyUrl, isDotCom, baseUrl, productToPrefixMapping, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX };

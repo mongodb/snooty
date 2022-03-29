@@ -21,5 +21,17 @@
     "lang": "javascript",
     "copyable": true,
     "value": "Testing code"
+  },
+  "testNoneLanguage" : {
+    "type": "code",
+    "position": {
+      "start": {
+        "line": 0
+      }
+    },
+    "lang": "none",
+    "copyable": true,
+    "emphasize_lines":[],
+    "value": "[{plot A trio of guys try and make up for missed opportunities in childhood by forming a three-player baseball team to compete against standard children baseball squads.}]"
   }
 }
