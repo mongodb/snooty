@@ -89,25 +89,25 @@ const disableScroll = (shouldDisableScroll) => css`
 `;
 
 // use eol status to determine side nav styling
-const getTopAndHeight = (topValue, eol) => css`
-  top: ${eol ? '38px' : topValue};
-  height: calc(100vh - ${eol ? '38px' : topValue});
+const getTopAndHeight = (topValue) => css`
+  top: ${topValue};
+  height: calc(100vh - ${topValue});
 `;
 
 // Keep the side nav container sticky to allow LG's side nav to push content seemlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall, eol }) => css`
+  ({ topLarge, topMedium, topSmall }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: 2;
-    ${getTopAndHeight(topLarge, eol)};
+    ${getTopAndHeight(topLarge)};
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium, eol)};
+      ${getTopAndHeight(topMedium)};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall, eol)};
+      ${getTopAndHeight(topSmall)};
     }
   `
 );
@@ -158,7 +158,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
 
   // CSS top property values for sticky side nav based on header height
-  const topValues = useStickyTopValues();
+  const topValues = useStickyTopValues(eol);
 
   const showVersions = repoBranches?.branches?.length > 1;
 
@@ -209,7 +209,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   return (
     <>
       <Global styles={disableScroll(!hideMobile)} />
-      <SidenavContainer {...topValues} eol={eol}>
+      <SidenavContainer {...topValues}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
