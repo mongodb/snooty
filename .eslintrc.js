@@ -8,7 +8,6 @@ module.exports = {
   plugins: ['jest', '@emotion'],
   rules: {
     '@emotion/pkg-renaming': 'error',
-    'no-unused-vars': [1, { varsIgnorePattern: 'React', args: 'none', ignoreRestSiblings: true }],
   },
   settings: {
     'import/resolver': {

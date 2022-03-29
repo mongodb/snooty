@@ -46,6 +46,8 @@ exports[`renders correctly 1`] = `
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .emotion-1:hover {
@@ -158,6 +160,8 @@ exports[`renders correctly 1`] = `
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .emotion-1:hover {
@@ -264,6 +268,8 @@ exports[`renders correctly 1`] = `
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .emotion-1:hover {
