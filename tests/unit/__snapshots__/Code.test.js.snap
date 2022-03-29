@@ -195,34 +195,37 @@ exports[`renders correctly 1`] = `
 exports[`renders correctly when none is passed in as a language 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  border-spacing: 0;
-  vertical-align: top;
-  padding: 0 16px;
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
 }
 
-.emotion-2 {
-  color: inherit;
-  font-size: 13px;
-  font-family: 'Source Code Pro',Menlo,monospace;
-  line-height: 24px;
+.emotion-0>div>div {
+  width: unset;
 }
 
-.emotion-6 {
+.emotion-0 button>div>div {
+  font-size: 16px;
+}
+
+.emotion-0>div {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.emotion-1 {
   border: 1px solid #E7EEEC;
   border-radius: 4px;
   overflow: hidden;
 }
 
-.emotion-5 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-}
-
-.emotion-1 {
-  border-spacing: 0;
-  width: 100%;
 }
 
 .emotion-3 {
@@ -254,19 +257,37 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   padding-bottom: 6px;
 }
 
-@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
   .emotion-3 {
     white-space: pre-wrap;
   }
 }
 
-@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
   .emotion-3 {
     white-space: pre;
   }
 }
 
 .emotion-4 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
+}
+
+.emotion-5 {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.emotion-6 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+}
+
+.emotion-7 {
   width: 38px;
   border-left: solid 1px;
   display: -webkit-box;
@@ -288,52 +309,31 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   background-color: white;
 }
 
-.emotion-7 {
-  display: table;
-  margin: 16px 0;
-  min-width: 150px;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.emotion-7 > div > div {
-  width: unset;
-}
-
-.emotion-7 button > div > div {
-  font-size: 16px;
-}
-
-.emotion-7 > div {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
 <div
-    class="emotion-7"
+    class="emotion-0"
   >
     <div
-      class="emotion-6"
+      class="emotion-1"
     >
       <div
-        class="emotion-5"
+        class="emotion-2"
       >
         <pre
           class="emotion-3"
           tabindex="-1"
         >
           <code
-            class="lg-highlight-hljs-light emotion-2 none"
+            class="lg-highlight-hljs-light emotion-4 none"
           >
             <table
-              class="emotion-1"
+              class="emotion-5"
             >
               <tbody>
                 <tr
                   class=""
                 >
                   <td
-                    class="emotion-0"
+                    class="emotion-6"
                   >
                     [{plot A trio of guys try and make up for missed opportunities in childhood by forming a three-player baseball team to compete against standard children baseball squads.}]
                   </td>
@@ -343,7 +343,7 @@ exports[`renders correctly when none is passed in as a language 1`] = `
           </code>
         </pre>
         <div
-          class="emotion-4"
+          class="emotion-7"
           data-testid="leafygreen-code-panel"
         />
       </div>

@@ -216,6 +216,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-32 * {
   font-size: 14px!important;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
 }
 
 .emotion-32>div>span>* {
@@ -630,6 +634,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-31 * {
   font-size: 14px!important;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
 }
 
 .emotion-31>div>span>* {
@@ -682,6 +690,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-34 * {
   font-size: 14px!important;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
 }
 
 .emotion-34>div>span>* {
