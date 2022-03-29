@@ -65,6 +65,11 @@ it('renders correctly', () => {
   expect(wrapper.asFragment()).toMatchSnapshot();
 });
 
+it('renders correctly when none is passed in as a language', () => {
+  const wrapper = render(<Code nodeData={mockData.testNoneLanguage} />);
+  expect(wrapper.asFragment()).toMatchSnapshot();
+});
+
 describe('when rendering with selectors', () => {
   jest.useFakeTimers();
 
