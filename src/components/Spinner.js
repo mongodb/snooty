@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 

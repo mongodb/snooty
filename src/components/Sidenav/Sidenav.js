@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { css, Global } from '@emotion/core';
+import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
@@ -88,6 +88,7 @@ const disableScroll = (shouldDisableScroll) => css`
   }
 `;
 
+// use eol status to determine side nav styling
 const getTopAndHeight = (topValue) => css`
   top: ${topValue};
   height: calc(100vh - ${topValue});
@@ -149,7 +150,7 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree }) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree, eol }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
@@ -157,7 +158,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
 
   // CSS top property values for sticky side nav based on header height
-  const topValues = useStickyTopValues();
+  const topValues = useStickyTopValues(eol);
+
   const showVersions = repoBranches?.branches?.length > 1;
 
   // Checks if user is navigating back to the homepage on docs landing
@@ -232,6 +234,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   currentSlug={slug}
                   target={isGuidesTemplate ? '/' : ''}
                   titleOverride={isGuidesTemplate ? siteTitle : ''}
+                  eol={eol}
                 />
                 {ia && (
                   <IA
@@ -266,7 +269,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 </SideNavItem>
               </>
             )}
-            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} />}
+            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} eol={eol} />}
             {!ia && navContent}
 
             {isDocsLanding && (
@@ -301,6 +304,7 @@ Sidenav.propTypes = {
   repoBranches: PropTypes.object,
   siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
+  eol: PropTypes.bool.isRequired,
 };
 
 export default Sidenav;

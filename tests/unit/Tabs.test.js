@@ -9,7 +9,7 @@ import mockDataPlatforms from './data/Tabs-platform.test.json';
 import mockDataLanguages from './data/Tabs-languages.test.json';
 import mockDataHidden from './data/Tabs-hidden.test.json';
 import mockDataAnonymous from './data/Tabs-anonymous.test.json';
-import { ThemeProvider } from 'emotion-theming';
+import { ThemeProvider } from '@emotion/react';
 
 const mountTabs = ({ mockData }) => {
   return render(

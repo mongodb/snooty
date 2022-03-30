@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import ListTable from '../../src/components/ListTable';
-import { matchers } from 'jest-emotion';
+import { matchers } from '@emotion/jest';
 
 import mockData from './data/ListTable.test.json';
 import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';

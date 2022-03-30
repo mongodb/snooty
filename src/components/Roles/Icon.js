@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import Badge from '@leafygreen-ui/badge';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 
 const cloudSyncStyle = css`
   padding-right: 7px;

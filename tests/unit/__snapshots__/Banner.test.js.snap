@@ -2,7 +2,19 @@
 
 exports[`renders a Banner correctly 1`] = `
 <DocumentFragment>
-  .emotion-4 {
+  .emotion-0>div>div>* {
+  margin: 0 0 12px;
+}
+
+.emotion-0>div>div>*:last-child {
+  margin: 0;
+}
+
+.emotion-0 p {
+  margin: 0;
+}
+
+.emotion-2 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -21,7 +33,7 @@ exports[`renders a Banner correctly 1`] = `
   background-color: #E1F2F6;
 }
 
-.emotion-4:before {
+.emotion-2:before {
   content: '';
   position: absolute;
   width: 6px;
@@ -31,7 +43,7 @@ exports[`renders a Banner correctly 1`] = `
   border-radius: 6px 0px 0px 6px;
 }
 
-.emotion-4:after {
+.emotion-2:after {
   content: '';
   position: absolute;
   left: 4px;
@@ -43,16 +55,27 @@ exports[`renders a Banner correctly 1`] = `
   border-radius: 0.5px 0px 0px 0.5px;
 }
 
-.emotion-4:before {
+.emotion-2:before {
   background-color: #007CAD;
 }
 
-.emotion-4:after {
+.emotion-2:after {
   border-color: #C5E4F2;
   background-color: #E1F2F6;
 }
 
-.emotion-1 {
+.emotion-3 {
+  color: #007CAD;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.emotion-4 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -64,36 +87,13 @@ exports[`renders a Banner correctly 1`] = `
   margin-right: 10px;
 }
 
-.emotion-0 {
-  color: #007CAD;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.emotion-2 > div > div > * {
-  margin: 0 0 12px;
-}
-
-.emotion-2 > div > div > *:last-child {
-  margin: 0;
-}
-
-.emotion-2 p {
-  margin: 0;
-}
-
 <div
-    class="emotion-2 emotion-3 emotion-4"
+    class="emotion-0 emotion-1 emotion-2"
     role="alert"
   >
     <svg
       aria-label="Info With Circle Icon"
-      class="emotion-0"
+      class="emotion-3"
       height="16"
       role="img"
       viewBox="0 0 16 16"
@@ -107,7 +107,7 @@ exports[`renders a Banner correctly 1`] = `
       />
     </svg>
     <div
-      class="emotion-1"
+      class="emotion-4"
     >
       These instructions are for installing MongoDB directly from
     </div>

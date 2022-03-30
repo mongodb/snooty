@@ -15,7 +15,7 @@ const StyledHeaderContainer = styled.header`
   z-index: 10;
 `;
 
-const Header = ({ sidenav }) => {
+const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
 
   let searchProperty;
@@ -32,7 +32,7 @@ const Header = ({ sidenav }) => {
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} docsBaseUrl={docsBaseUrl} />
+        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} docsBaseUrl={docsBaseUrl} />}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
@@ -41,6 +41,7 @@ const Header = ({ sidenav }) => {
 
 Header.propTypes = {
   sidenav: PropTypes.bool,
+  eol: PropTypes.bool.isRequired,
 };
 
 export default Header;

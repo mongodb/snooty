@@ -2,7 +2,7 @@
 
 exports[`renders with "connected" styling 1`] = `
 <DocumentFragment>
-  .emotion-6 {
+  .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11,11 +11,11 @@ exports[`renders with "connected" styling 1`] = `
   gap: 33px;
 }
 
-.emotion-6 section > p > a {
+.emotion-0 section>p>a {
   font-weight: 600;
 }
 
-.emotion-6:not(:last-child):after {
+.emotion-0:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
@@ -29,7 +29,7 @@ exports[`renders with "connected" styling 1`] = `
   position: relative;
 }
 
-.emotion-0 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -41,8 +41,8 @@ exports[`renders with "connected" styling 1`] = `
   display: flex;
   font-weight: bold;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background-color: #E4F4E4;
   color: #116149;
@@ -50,41 +50,41 @@ exports[`renders with "connected" styling 1`] = `
   width: 34px;
 }
 
-.emotion-4 {
+.emotion-6 {
   margin-top: 5px;
   padding-bottom: 64px;
 }
 
-.emotion-4 > section >:first-of-type {
+.emotion-6>section>:first-of-type {
   margin-top: 0;
 }
 
-@media only screen and (max-width:767px) {
-  .emotion-4 {
+@media only screen and (max-width: 767px) {
+  .emotion-6 {
     padding-bottom: 40px;
   }
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-4 {
+@media only screen and (max-width: 480px) {
+  .emotion-6 {
     padding-bottom: 32px;
   }
 }
 
 <div
-    class="emotion-6 emotion-7"
+    class="emotion-0 emotion-1"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
-        class="emotion-0 emotion-1"
+        class="emotion-4 emotion-5"
       >
         1
       </div>
     </div>
     <div
-      class="emotion-4 emotion-5"
+      class="emotion-6 emotion-7"
     >
       <p>
         Import data from CSV or JSON files into your MongoDB database.
@@ -103,7 +103,7 @@ exports[`renders with "connected" styling 1`] = `
 
 exports[`renders with "connected" styling by default 1`] = `
 <DocumentFragment>
-  .emotion-6 {
+  .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -112,11 +112,11 @@ exports[`renders with "connected" styling by default 1`] = `
   gap: 33px;
 }
 
-.emotion-6 section > p > a {
+.emotion-0 section>p>a {
   font-weight: 600;
 }
 
-.emotion-6:not(:last-child):after {
+.emotion-0:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E7EEEC;
   bottom: 0;
@@ -130,7 +130,7 @@ exports[`renders with "connected" styling by default 1`] = `
   position: relative;
 }
 
-.emotion-0 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -142,8 +142,8 @@ exports[`renders with "connected" styling by default 1`] = `
   display: flex;
   font-weight: bold;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background-color: #E4F4E4;
   color: #116149;
@@ -151,41 +151,41 @@ exports[`renders with "connected" styling by default 1`] = `
   width: 34px;
 }
 
-.emotion-4 {
+.emotion-6 {
   margin-top: 5px;
   padding-bottom: 64px;
 }
 
-.emotion-4 > section >:first-of-type {
+.emotion-6>section>:first-of-type {
   margin-top: 0;
 }
 
-@media only screen and (max-width:767px) {
-  .emotion-4 {
+@media only screen and (max-width: 767px) {
+  .emotion-6 {
     padding-bottom: 40px;
   }
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-4 {
+@media only screen and (max-width: 480px) {
+  .emotion-6 {
     padding-bottom: 32px;
   }
 }
 
 <div
-    class="emotion-6 emotion-7"
+    class="emotion-0 emotion-1"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
-        class="emotion-0 emotion-1"
+        class="emotion-4 emotion-5"
       >
         1
       </div>
     </div>
     <div
-      class="emotion-4 emotion-5"
+      class="emotion-6 emotion-7"
     >
       <p>
         Import data from CSV or JSON files into your MongoDB database.
@@ -204,11 +204,7 @@ exports[`renders with "connected" styling by default 1`] = `
 
 exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
-  .emotion-2 {
-  position: relative;
-}
-
-.emotion-6 {
+  .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -216,11 +212,15 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   gap: 16px;
 }
 
-.emotion-6 section > p > a {
+.emotion-0 section>p>a {
   font-weight: 600;
 }
 
-.emotion-0 {
+.emotion-2 {
+  position: relative;
+}
+
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -232,8 +232,8 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   display: flex;
   font-weight: bold;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background-color: #333;
   color: #FFFFFF;
@@ -241,28 +241,28 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   width: 24px;
 }
 
-.emotion-4 {
+.emotion-6 {
   margin-bottom: 24px;
 }
 
-.emotion-4 > section >:first-of-type {
+.emotion-6>section>:first-of-type {
   margin-top: 0;
 }
 
 <div
-    class="emotion-6 emotion-7"
+    class="emotion-0 emotion-1"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
-        class="emotion-0 emotion-1"
+        class="emotion-4 emotion-5"
       >
         1
       </div>
     </div>
     <div
-      class="emotion-4 emotion-5"
+      class="emotion-6 emotion-7"
     >
       <p>
         Import data from CSV or JSON files into your MongoDB database.

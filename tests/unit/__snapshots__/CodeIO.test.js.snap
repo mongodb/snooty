@@ -2,34 +2,85 @@
 
 exports[`CodeIO renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-14 {
-  color: #FF0000;
+  .emotion-0 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
 }
 
-.emotion-13 {
-  overflow: hidden;
-  border-radius: 3px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.emotion-0>div>div {
+  width: unset;
+}
+
+.emotion-0 button>div>div {
+  font-size: 16px;
+}
+
+.emotion-0>div>div {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.emotion-0>div {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  margin: 0px;
+}
+
+.emotion-1 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.emotion-1>div>div {
+  width: unset;
+}
+
+.emotion-1 button>div>div {
+  font-size: 16px;
+}
+
+.emotion-1>div {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.emotion-2 {
+  border: 1px solid #E7EEEC;
+  border-bottom: none;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
 }
 
 .emotion-4 {
-  border-spacing: 0;
-  vertical-align: top;
-  padding: 0 16px;
+  padding: 10px;
+  color: #5D6C74;
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
+}
+
+.emotion-5 {
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .emotion-7 {
-  color: inherit;
-  font-size: 13px;
-  font-family: 'Source Code Pro',Menlo,monospace;
-  line-height: 24px;
-}
-
-.emotion-8 {
   border: 2px solid;
   overflow-x: auto;
   border-radius: 0;
@@ -58,59 +109,53 @@ exports[`CodeIO renders correctly 1`] = `
   padding-bottom: 6px;
 }
 
-@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-8 {
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-7 {
     white-space: pre-wrap;
   }
 }
 
-@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-8 {
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-7 {
     white-space: pre;
   }
 }
 
-.emotion-11 {
-  border: 1px solid #E7EEEC;
-  border-radius: 4px;
-  overflow: hidden;
+.emotion-8 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
 }
 
-.emotion-10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-6 {
+.emotion-9 {
   border-spacing: 0;
   width: 100%;
 }
 
-.emotion-5 {
+.emotion-10 {
   background-color: #FEF7E3;
   background-image: none;
   background-attachment: fixed;
 }
 
-.emotion-5 > td {
+.emotion-10>td {
   border-top: 1px solid #FEF2C8;
 }
 
-.emotion-5 + tr > td {
+.emotion-10+tr>td {
   border-top: 1px solid #FEF2C8;
 }
 
-.emotion-5 + .emotion-5 > td {
+.emotion-10+.emotion-10>td {
   border-top: 0;
 }
 
-.emotion-5:last-child > td {
+.emotion-10:last-child>td {
   border-bottom: 1px solid #FEF2C8;
 }
 
-.emotion-3 {
+.emotion-11 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -124,7 +169,13 @@ exports[`CodeIO renders correctly 1`] = `
   color: #86681D;
 }
 
-.emotion-9 {
+.emotion-12 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+}
+
+.emotion-13 {
   width: 38px;
   border-left: solid 1px;
   display: -webkit-box;
@@ -146,9 +197,15 @@ exports[`CodeIO renders correctly 1`] = `
   background-color: white;
 }
 
-.emotion-17 {
+.emotion-14 {
+  border: 1px solid #E7EEEC;
+  border-top: none;
+}
+
+.emotion-16 {
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
   appearance: none;
   padding: 0;
   margin: 0;
@@ -172,7 +229,7 @@ exports[`CodeIO renders correctly 1`] = `
   z-index: 0;
   background-color: #F9FBFA;
   border: 1px solid #89979B;
-  box-shadow: 0px 1px 2px rgba(6,22,33,0.3);
+  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
   color: #3D4F58;
   font-size: 14px;
   height: 36px;
@@ -183,40 +240,50 @@ exports[`CodeIO renders correctly 1`] = `
   font-weight: bold;
 }
 
-.emotion-17:focus {
+.emotion-16:focus {
   outline: none;
 }
 
-.emotion-17:disabled {
+.emotion-16:disabled {
   pointer-events: none;
 }
 
-.emotion-17:active,
-.emotion-17:focus,
-.emotion-17:hover {
+.emotion-16:active,
+.emotion-16:focus,
+.emotion-16:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-17:focus {
+.emotion-16:focus {
   color: #3D4F58;
 }
 
-.emotion-17:hover,
-.emotion-17:active {
+.emotion-16:hover,
+.emotion-16:active {
   color: #3D4F58;
   background-color: #FFFFFF;
   border: 1px solid #5D6C74;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.3), 0px 0px 0px 3px #E7EEEC;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),0px 0px 0px 3px #E7EEEC;
 }
 
-.emotion-17:focus {
+.emotion-16:focus {
   background: #FFFFFF;
   border: 1px solid #5D6C74;
-  box-shadow: 0px 4px 4px rgba(0,124,173,0.4), 0px 0px 0px 3px #019EE2;
+  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
 }
 
-.emotion-16 {
+.emotion-17 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -232,22 +299,28 @@ exports[`CodeIO renders correctly 1`] = `
   z-index: 0;
   font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   padding-left: 12px;
   padding-right: 12px;
 }
 
-.emotion-15 {
+.emotion-19 {
+  color: #FF0000;
   color: #5D6C74;
   height: 16px;
   width: 16px;
   margin-right: 6px;
-  vertical-align: text-top;
 }
 
-.emotion-25 {
+.emotion-20 {
+  border: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-22 {
   border: 2px solid;
   overflow-x: auto;
   border-radius: 0;
@@ -278,47 +351,41 @@ exports[`CodeIO renders correctly 1`] = `
   padding-bottom: 6px;
 }
 
-@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-25 {
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-22 {
     white-space: pre-wrap;
   }
 }
 
-@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-25 {
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-22 {
     white-space: pre;
   }
 }
 
-.emotion-27 {
-  border: 0;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.emotion-22 {
+.emotion-25 {
   background-color: transparent;
-  background-image: linear-gradient(90deg,#21313C,rgba(33,49,60,0));
+  background-image: linear-gradient(90deg, #21313C, rgba(33,49,60,0));
   background-attachment: fixed;
 }
 
-.emotion-22 > td {
+.emotion-25>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-22 + tr > td {
+.emotion-25+tr>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-22 + .emotion-22 > td {
+.emotion-25+.emotion-25>td {
   border-top: 0;
 }
 
-.emotion-22:last-child > td {
+.emotion-25:last-child>td {
   border-bottom: 1px solid #21313C;
 }
 
-.emotion-20 {
+.emotion-26 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -332,120 +399,50 @@ exports[`CodeIO renders correctly 1`] = `
   color: #E7EEEC;
 }
 
-.emotion-28 {
-  display: table;
-  margin: 16px 0;
-  min-width: 150px;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.emotion-28 > div > div {
-  width: unset;
-}
-
-.emotion-28 button > div > div {
-  font-size: 16px;
-}
-
-.emotion-28 > div > div {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-
-.emotion-28 > div {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-  margin: 0px;
-}
-
-.emotion-12 {
-  display: table;
-  margin: 16px 0;
-  min-width: 150px;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.emotion-12 > div > div {
-  width: unset;
-}
-
-.emotion-12 button > div > div {
-  font-size: 16px;
-}
-
-.emotion-12 > div {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
-
-.emotion-1 {
-  border: 1px solid #E7EEEC;
-  border-bottom: none;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-}
-
-.emotion-0 {
-  padding: 10px;
-  color: #5D6C74;
-  font-size: 14px;
-  margin-left: 5px;
-  border-bottom: none;
-}
-
-.emotion-18 {
-  border: 1px solid #E7EEEC;
-  border-top: none;
-}
-
 <div
-    class="emotion-28"
+    class="emotion-0"
   >
     <div
-      class="emotion-12"
+      class="emotion-1"
     >
       <div>
         <div
-          class="emotion-1 emotion-2"
+          class="emotion-2 emotion-3"
         >
           <div
-            class="emotion-0"
+            class="emotion-4"
           >
             Title of Example
           </div>
         </div>
       </div>
       <div
-        class="emotion-11"
+        class="emotion-5"
       >
         <div
-          class="emotion-10"
+          class="emotion-6"
         >
           <pre
-            class="emotion-8"
+            class="emotion-7"
             tabindex="-1"
           >
             <code
-              class="lg-highlight-hljs-light emotion-7 python"
+              class="lg-highlight-hljs-light emotion-8 python"
             >
               <table
-                class="emotion-6"
+                class="emotion-9"
               >
                 <tbody>
                   <tr
-                    class="emotion-5"
+                    class="emotion-10"
                   >
                     <td
-                      class="emotion-3"
+                      class="emotion-11"
                     >
                       1
                     </td>
                     <td
-                      class="emotion-4"
+                      class="emotion-12"
                     >
                       print(
                       <span
@@ -461,31 +458,31 @@ exports[`CodeIO renders correctly 1`] = `
             </code>
           </pre>
           <div
-            class="emotion-9"
+            class="emotion-13"
             data-testid="leafygreen-code-panel"
           />
         </div>
       </div>
     </div>
     <div
-      class="emotion-18 emotion-19"
+      class="emotion-14 emotion-15"
     >
       <button
         aria-disabled="false"
-        class="emotion-17"
+        class="emotion-16"
         role="button"
         type="button"
       >
         <div
-          class="emotion-13"
+          class="emotion-17"
         />
         <div
-          class="emotion-16"
+          class="emotion-18"
         >
           <svg
             alt=""
             aria-hidden="true"
-            class="emotion-14 emotion-15"
+            class="emotion-19"
             fill="none"
             height="16"
             role="presentation"
@@ -505,32 +502,32 @@ exports[`CodeIO renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="emotion-27"
+      class="emotion-20"
     >
       <div
-        class="emotion-10"
+        class="emotion-6"
       >
         <pre
-          class="emotion-25"
+          class="emotion-22"
           tabindex="-1"
         >
           <code
-            class="lg-highlight-hljs-dark emotion-7 python"
+            class="lg-highlight-hljs-dark emotion-8 python"
           >
             <table
-              class="emotion-6"
+              class="emotion-9"
             >
               <tbody>
                 <tr
-                  class="emotion-22"
+                  class="emotion-25"
                 >
                   <td
-                    class="emotion-20"
+                    class="emotion-26"
                   >
                     1
                   </td>
                   <td
-                    class="emotion-4"
+                    class="emotion-12"
                   >
                     hello world
                   </td>

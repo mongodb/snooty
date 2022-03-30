@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';

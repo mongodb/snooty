@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Global, css } from '@emotion/core';
+import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
@@ -84,8 +84,7 @@ const GlobalGrid = styled('div')`
 
 const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
-
-  const { chapters, guides, publishedBranches, slugToTitle, title, toctree } = useSnootyMetadata();
+  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
@@ -100,7 +99,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
         selectors={page?.options?.selectors}
       >
         <GlobalGrid>
-          <Header sidenav={sidenav} />
+          <Header sidenav={sidenav} eol={eol} />
           {sidenav && (
             <Sidenav
               chapters={chapters}
@@ -112,6 +111,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
               siteTitle={title}
               slug={slug}
               toctree={toctree}
+              eol={eol}
             />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>

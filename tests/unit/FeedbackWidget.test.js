@@ -8,7 +8,7 @@ import {
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
 import { BSON } from 'mongodb-stitch-server-sdk';
-import { matchers } from 'jest-emotion';
+import { matchers } from '@emotion/jest';
 
 import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 

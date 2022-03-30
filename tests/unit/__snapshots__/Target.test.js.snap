@@ -2,7 +2,11 @@
 
 exports[`renders correctly with a directive_argument node 1`] = `
 <DocumentFragment>
-  .emotion-2 {
+  .emotion-0 {
+  font-size: unset;
+}
+
+.emotion-2 {
   background-color: #F9FBFA;
   border: 1px solid #B8C4C2;
   border-radius: 3px;
@@ -16,19 +20,15 @@ exports[`renders correctly with a directive_argument node 1`] = `
   white-space: nowrap;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-2 {
+[data-leafygreen-ui="anchor-inline-code"]:hover>.emotion-2 {
   box-shadow: 0 0 0 3px #E7EEEC;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-2 {
+[data-leafygreen-ui="anchor-inline-code"]:focus>.emotion-2 {
   box-shadow: 0 0 0 3px #C5E4F2;
 }
 
-.emotion-0 {
-  font-size: unset;
-}
-
-.emotion-5 {
+.emotion-3 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -36,10 +36,10 @@ exports[`renders correctly with a directive_argument node 1`] = `
   visibility: hidden;
 }
 
-.emotion-3 {
-  border-radius: 0 !important;
-  display: initial !important;
-  margin: initial !important;
+.emotion-4 {
+  border-radius: 0!important;
+  display: initial!important;
+  margin: initial!important;
 }
 
 .emotion-6 {
@@ -58,12 +58,12 @@ exports[`renders correctly with a directive_argument node 1`] = `
         --config &lt;filename&gt;, -f &lt;filename&gt;
       </code>
       <a
-        class="headerlink emotion-5"
+        class="headerlink emotion-3"
         href="#std-option-mongos.--config"
         title="Permalink to this definition"
       >
         <img
-          class="emotion-3 emotion-4"
+          class="emotion-4 emotion-5"
           src="/assets/link.svg"
         />
       </a>

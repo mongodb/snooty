@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from 'emotion-theming';
+import { ThemeProvider } from '@emotion/react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import mockData from './data/Chapters.test.json';

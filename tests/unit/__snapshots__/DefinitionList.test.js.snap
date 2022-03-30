@@ -2,7 +2,11 @@
 
 exports[`DefinitionList renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-2 {
+  .emotion-0 {
+  font-size: unset;
+}
+
+.emotion-2 {
   background-color: #F9FBFA;
   border: 1px solid #B8C4C2;
   border-radius: 3px;
@@ -16,20 +20,16 @@ exports[`DefinitionList renders correctly 1`] = `
   white-space: nowrap;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-2 {
+[data-leafygreen-ui="anchor-inline-code"]:hover>.emotion-2 {
   box-shadow: 0 0 0 3px #E7EEEC;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-2 {
+[data-leafygreen-ui="anchor-inline-code"]:focus>.emotion-2 {
   box-shadow: 0 0 0 3px #C5E4F2;
 }
 
-.emotion-0 {
-  font-size: unset;
-}
-
 .emotion-3 p:first-of-type {
-  margin-top: 0 !important;
+  margin-top: 0!important;
 }
 
 <dl>
