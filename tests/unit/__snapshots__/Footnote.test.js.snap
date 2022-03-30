@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-2 {
+  .emotion-0 {
   border: 0;
   border-collapse: collapse;
   margin: 24px 0;
@@ -10,21 +10,21 @@ exports[`renders correctly 1`] = `
   line-height: 24px;
 }
 
-.emotion-2 tbody tr td div.highlight pre {
+.emotion-0 tbody tr td div.highlight pre {
   background-color: inherit;
 }
 
-.emotion-2:target {
+.emotion-0:target {
   background-color: #ffa;
 }
 
-.emotion-0 {
+.emotion-1 {
   border: 0;
   padding: 11px 5px 12px;
 }
 
 <table
-    class="emotion-2"
+    class="emotion-0"
     frame="void"
     id="footnote-1"
     rules="none"
@@ -37,7 +37,7 @@ exports[`renders correctly 1`] = `
     >
       <tr>
         <td
-          class="emotion-0"
+          class="emotion-1"
         >
           [
           <a
@@ -48,7 +48,7 @@ exports[`renders correctly 1`] = `
           ]
         </td>
         <td
-          class="emotion-0"
+          class="emotion-1"
         >
            Numerical footnote.
         </td>
