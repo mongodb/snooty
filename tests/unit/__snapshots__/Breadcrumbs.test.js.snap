@@ -3,6 +3,45 @@
 exports[`renders correctly with pageTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-0 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-0 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-1:focus {
+  outline: none;
+}
+
+.emotion-6 {
   font-size: 14px;
   margin-bottom: 24px;
 }
@@ -16,18 +55,18 @@ exports[`renders correctly with pageTitle 1`] = `
   min-height: 24px;
 }
 
-.emotion-2:last-of-type {
+.emotion-4:last-of-type {
   color: #21313C;
 }
 
-.emotion-2:hover,
-.emotion-2:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-2:hover:not(:last-of-type),
-.emotion-2:focus:not(:last-of-type) {
+.emotion-4:hover:not(:last-of-type),
+.emotion-4:focus:not(:last-of-type) {
   color: #21313C;
 }
 
@@ -44,10 +83,16 @@ exports[`renders correctly with pageTitle 1`] = `
   >
     <p>
       <a
-        class="emotion-2 emotion-3"
+        class="emotion-1"
+        data-leafygreen-ui="anchor-container"
         href="https://localhost/"
+        target="_self"
       >
-        Docs Home
+        <span
+          class="emotion-0"
+        >
+          Docs Home
+        </span>
       </a>
       <span
         class="emotion-4 emotion-5"
@@ -55,7 +100,7 @@ exports[`renders correctly with pageTitle 1`] = `
          → 
       </span>
       <a
-        class="emotion-2 emotion-3"
+        class="emotion-4 emotion-5"
         href="/view-analyze/"
       >
         View & Analyze Data
@@ -68,6 +113,45 @@ exports[`renders correctly with pageTitle 1`] = `
 exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-0 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-0 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-1:focus {
+  outline: none;
+}
+
+.emotion-6 {
   font-size: 14px;
   margin-bottom: 24px;
 }
@@ -81,18 +165,18 @@ exports[`renders correctly with siteTitle 1`] = `
   min-height: 24px;
 }
 
-.emotion-2:last-of-type {
+.emotion-4:last-of-type {
   color: #21313C;
 }
 
-.emotion-2:hover,
-.emotion-2:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-2:hover:not(:last-of-type),
-.emotion-2:focus:not(:last-of-type) {
+.emotion-4:hover:not(:last-of-type),
+.emotion-4:focus:not(:last-of-type) {
   color: #21313C;
 }
 
@@ -109,10 +193,16 @@ exports[`renders correctly with siteTitle 1`] = `
   >
     <p>
       <a
-        class="emotion-2 emotion-3"
+        class="emotion-1"
+        data-leafygreen-ui="anchor-container"
         href="https://localhost/"
+        target="_self"
       >
-        Docs Home
+        <span
+          class="emotion-0"
+        >
+          Docs Home
+        </span>
       </a>
       <span
         class="emotion-4 emotion-5"
@@ -120,7 +210,7 @@ exports[`renders correctly with siteTitle 1`] = `
          → 
       </span>
       <a
-        class="emotion-2 emotion-3"
+        class="emotion-4 emotion-5"
         href="/"
       >
         MongoDB Compass

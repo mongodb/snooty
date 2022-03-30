@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
+import { Link as LGLink } from '@leafygreen-ui/typography';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -27,6 +28,8 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
         {children}
       </GatsbyLink>
     );
+  } else if (!anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/))) {
+    return <LGLink href={to}>{children}</LGLink>;
   }
   return (
     <a href={to} {...other}>

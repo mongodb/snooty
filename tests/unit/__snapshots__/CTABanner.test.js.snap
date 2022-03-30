@@ -12,6 +12,68 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-4 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-4 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-4 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-6 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-6:focus {
+  outline: none;
+}
+
+.emotion-5 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-7 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -26,19 +88,19 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   margin: 24px 0px;
 }
 
-.emotion-0>div>div>* {
+.emotion-7 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-0>div>div>*:last-child {
+.emotion-7 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-0 p {
+.emotion-7 p {
   margin: 0;
 }
 
-.emotion-0>p {
+.emotion-7 > p {
   margin-left: 35px;
 }
 
@@ -78,7 +140,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 }
 
 <div
-    class="emotion-0"
+    class="emotion-7"
   >
     <a
       class="emotion-1"
@@ -112,10 +174,35 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="reference external"
+        class="emotion-6"
+        data-leafygreen-ui="anchor-container"
         href="https://university.mongodb.com/"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        MongoDB University
+        <span
+          class="emotion-4"
+        >
+          MongoDB University
+        </span>
+        <svg
+          alt=""
+          aria-hidden="true"
+          class="emotion-5"
+          height="16"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M13.823 2.4491C13.8201 2.30008 13.6999 2.17994 13.5509 2.17704L9.5062 2.09836C9.25654 2.09351 9.12821 2.39519 9.30482 2.5718L10.3856 3.65257L7.93433 6.10383C7.87964 6.15852 7.83047 6.21665 7.78683 6.27752L5.99909 8.06525C5.46457 8.59977 5.46457 9.4664 5.99909 10.0009C6.53361 10.5354 7.40023 10.5354 7.93475 10.0009L9.72249 8.21317C9.78336 8.16953 9.84148 8.12037 9.89618 8.06567L12.3474 5.61441L13.4282 6.69518C13.6048 6.87179 13.9065 6.74347 13.9016 6.4938L13.823 2.4491Z"
+            fill="currentColor"
+          />
+          <path
+            d="M7.25 3.12893C7.66421 3.12893 8 3.46472 8 3.87893C8 4.29315 7.66421 4.62893 7.25 4.62893H4C3.72386 4.62893 3.5 4.85279 3.5 5.12893V11.9929C3.5 12.2691 3.72386 12.4929 4 12.4929H10.864C11.1401 12.4929 11.364 12.2691 11.364 11.9929V8.75C11.364 8.33579 11.6998 8 12.114 8C12.5282 8 12.864 8.33579 12.864 8.75V11.9929C12.864 13.0975 11.9686 13.9929 10.864 13.9929H4C2.89543 13.9929 2 13.0975 2 11.9929V5.12893C2 4.02436 2.89543 3.12893 4 3.12893H7.25Z"
+            fill="currentColor"
+          />
+        </svg>
       </a>
     </p>
   </div>
@@ -134,6 +221,68 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-4 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-4 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-4 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-6 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-6:focus {
+  outline: none;
+}
+
+.emotion-5 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-7 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -148,19 +297,19 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   margin: 24px 0px;
 }
 
-.emotion-0>div>div>* {
+.emotion-7 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-0>div>div>*:last-child {
+.emotion-7 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-0 p {
+.emotion-7 p {
   margin: 0;
 }
 
-.emotion-0>p {
+.emotion-7 > p {
   margin-left: 35px;
 }
 
@@ -200,7 +349,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 }
 
 <div
-    class="emotion-0"
+    class="emotion-7"
   >
     <a
       class="emotion-1"
@@ -236,10 +385,35 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="reference external"
+        class="emotion-6"
+        data-leafygreen-ui="anchor-container"
         href="https://university.mongodb.com/"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        MongoDB University
+        <span
+          class="emotion-4"
+        >
+          MongoDB University
+        </span>
+        <svg
+          alt=""
+          aria-hidden="true"
+          class="emotion-5"
+          height="16"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M13.823 2.4491C13.8201 2.30008 13.6999 2.17994 13.5509 2.17704L9.5062 2.09836C9.25654 2.09351 9.12821 2.39519 9.30482 2.5718L10.3856 3.65257L7.93433 6.10383C7.87964 6.15852 7.83047 6.21665 7.78683 6.27752L5.99909 8.06525C5.46457 8.59977 5.46457 9.4664 5.99909 10.0009C6.53361 10.5354 7.40023 10.5354 7.93475 10.0009L9.72249 8.21317C9.78336 8.16953 9.84148 8.12037 9.89618 8.06567L12.3474 5.61441L13.4282 6.69518C13.6048 6.87179 13.9065 6.74347 13.9016 6.4938L13.823 2.4491Z"
+            fill="currentColor"
+          />
+          <path
+            d="M7.25 3.12893C7.66421 3.12893 8 3.46472 8 3.87893C8 4.29315 7.66421 4.62893 7.25 4.62893H4C3.72386 4.62893 3.5 4.85279 3.5 5.12893V11.9929C3.5 12.2691 3.72386 12.4929 4 12.4929H10.864C11.1401 12.4929 11.364 12.2691 11.364 11.9929V8.75C11.364 8.33579 11.6998 8 12.114 8C12.5282 8 12.864 8.33579 12.864 8.75V11.9929C12.864 13.0975 11.9686 13.9929 10.864 13.9929H4C2.89543 13.9929 2 13.0975 2 11.9929V5.12893C2 4.02436 2.89543 3.12893 4 3.12893H7.25Z"
+            fill="currentColor"
+          />
+        </svg>
       </a>
     </p>
   </div>
@@ -258,6 +432,68 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-4 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-4 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-4 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-6 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-6:focus {
+  outline: none;
+}
+
+.emotion-5 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-7 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -272,19 +508,19 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   margin: 24px 0px;
 }
 
-.emotion-0>div>div>* {
+.emotion-7 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-0>div>div>*:last-child {
+.emotion-7 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-0 p {
+.emotion-7 p {
   margin: 0;
 }
 
-.emotion-0>p {
+.emotion-7 > p {
   margin-left: 35px;
 }
 
@@ -324,7 +560,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 }
 
 <div
-    class="emotion-0"
+    class="emotion-7"
   >
     <a
       class="emotion-1"
@@ -358,10 +594,35 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="reference external"
+        class="emotion-6"
+        data-leafygreen-ui="anchor-container"
         href="https://university.mongodb.com/"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        MongoDB University
+        <span
+          class="emotion-4"
+        >
+          MongoDB University
+        </span>
+        <svg
+          alt=""
+          aria-hidden="true"
+          class="emotion-5"
+          height="16"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M13.823 2.4491C13.8201 2.30008 13.6999 2.17994 13.5509 2.17704L9.5062 2.09836C9.25654 2.09351 9.12821 2.39519 9.30482 2.5718L10.3856 3.65257L7.93433 6.10383C7.87964 6.15852 7.83047 6.21665 7.78683 6.27752L5.99909 8.06525C5.46457 8.59977 5.46457 9.4664 5.99909 10.0009C6.53361 10.5354 7.40023 10.5354 7.93475 10.0009L9.72249 8.21317C9.78336 8.16953 9.84148 8.12037 9.89618 8.06567L12.3474 5.61441L13.4282 6.69518C13.6048 6.87179 13.9065 6.74347 13.9016 6.4938L13.823 2.4491Z"
+            fill="currentColor"
+          />
+          <path
+            d="M7.25 3.12893C7.66421 3.12893 8 3.46472 8 3.87893C8 4.29315 7.66421 4.62893 7.25 4.62893H4C3.72386 4.62893 3.5 4.85279 3.5 5.12893V11.9929C3.5 12.2691 3.72386 12.4929 4 12.4929H10.864C11.1401 12.4929 11.364 12.2691 11.364 11.9929V8.75C11.364 8.33579 11.6998 8 12.114 8C12.5282 8 12.864 8.33579 12.864 8.75V11.9929C12.864 13.0975 11.9686 13.9929 10.864 13.9929H4C2.89543 13.9929 2 13.0975 2 11.9929V5.12893C2 4.02436 2.89543 3.12893 4 3.12893H7.25Z"
+            fill="currentColor"
+          />
+        </svg>
       </a>
     </p>
   </div>
@@ -380,6 +641,68 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-4 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-4 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-4 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-0 {
+  color: #007CAD;
+}
+
+.emotion-6 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-6:focus {
+  outline: none;
+}
+
+.emotion-5 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-2 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+.emotion-7 {
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
   border-radius: 6px;
@@ -394,19 +717,19 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   margin: 24px 0px;
 }
 
-.emotion-0>div>div>* {
+.emotion-7 > div > div > * {
   margin: 0 0 12px;
 }
 
-.emotion-0>div>div>*:last-child {
+.emotion-7 > div > div > *:last-child {
   margin: 0;
 }
 
-.emotion-0 p {
+.emotion-7 p {
   margin: 0;
 }
 
-.emotion-0>p {
+.emotion-7 > p {
   margin-left: 35px;
 }
 
@@ -446,7 +769,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 }
 
 <div
-    class="emotion-0"
+    class="emotion-7"
   >
     <a
       class="emotion-1"
@@ -480,10 +803,35 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="reference external"
+        class="emotion-6"
+        data-leafygreen-ui="anchor-container"
         href="https://university.mongodb.com/"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        MongoDB University
+        <span
+          class="emotion-4"
+        >
+          MongoDB University
+        </span>
+        <svg
+          alt=""
+          aria-hidden="true"
+          class="emotion-5"
+          height="16"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M13.823 2.4491C13.8201 2.30008 13.6999 2.17994 13.5509 2.17704L9.5062 2.09836C9.25654 2.09351 9.12821 2.39519 9.30482 2.5718L10.3856 3.65257L7.93433 6.10383C7.87964 6.15852 7.83047 6.21665 7.78683 6.27752L5.99909 8.06525C5.46457 8.59977 5.46457 9.4664 5.99909 10.0009C6.53361 10.5354 7.40023 10.5354 7.93475 10.0009L9.72249 8.21317C9.78336 8.16953 9.84148 8.12037 9.89618 8.06567L12.3474 5.61441L13.4282 6.69518C13.6048 6.87179 13.9065 6.74347 13.9016 6.4938L13.823 2.4491Z"
+            fill="currentColor"
+          />
+          <path
+            d="M7.25 3.12893C7.66421 3.12893 8 3.46472 8 3.87893C8 4.29315 7.66421 4.62893 7.25 4.62893H4C3.72386 4.62893 3.5 4.85279 3.5 5.12893V11.9929C3.5 12.2691 3.72386 12.4929 4 12.4929H10.864C11.1401 12.4929 11.364 12.2691 11.364 11.9929V8.75C11.364 8.33579 11.6998 8 12.114 8C12.5282 8 12.864 8.33579 12.864 8.75V11.9929C12.864 13.0975 11.9686 13.9929 10.864 13.9929H4C2.89543 13.9929 2 13.0975 2 11.9929V5.12893C2 4.02436 2.89543 3.12893 4 3.12893H7.25Z"
+            fill="currentColor"
+          />
+        </svg>
       </a>
     </p>
   </div>
