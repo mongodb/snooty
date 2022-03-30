@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useRef } from 'react';
 import sanitizeHtml from 'sanitize-html';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';

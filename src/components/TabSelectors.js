@@ -1,6 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { css } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme, css } from '@emotion/react';
 import { TabContext } from './tab-context';
 import Select from './Select';
 import { getPlaintext } from '../utils/get-plaintext';

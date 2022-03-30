@@ -2,7 +2,42 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-20 {
+  .emotion-0 {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  border: 1px solid #F9FBFA;
+  padding: 32px 24px;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-0 {
+    display: grid;
+    grid-template-areas: 'description image' 'guides guides';
+    padding: 48px 40px;
+    grid-column-gap: 32px;
+  }
+}
+
+@media not all and (max-width: 1023px) {
+  .emotion-0 {
+    grid-column-gap: 40px;
+    scroll-margin-top: 180px;
+  }
+}
+
+@media not all and (max-width: 1440px) {
+  .emotion-0 {
+    grid-column-gap: 50px;
+  }
+}
+
+@media not all and (max-width: 1920px) {
+  .emotion-0 {
+    grid-column-gap: 108px;
+  }
+}
+
+.emotion-2 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -13,59 +48,21 @@ exports[`renders correctly 1`] = `
   color: #21313C;
 }
 
-.emotion-18 {
-  background-color: #FFFFFF;
-  border-radius: 4px;
-  border: 1px solid #F9FBFA;
-  padding: 32px 24px;
-}
-
-@media not all and (max-width:767px) {
-  .emotion-18 {
-    display: grid;
-    grid-template-areas: 'description image' 'guides guides';
-    padding: 48px 40px;
-    grid-column-gap: 32px;
-  }
-}
-
-@media not all and (max-width:1023px) {
-  .emotion-18 {
-    grid-column-gap: 40px;
-    -webkit-scroll-margin-top: 180px;
-    -moz-scroll-margin-top: 180px;
-    -ms-scroll-margin-top: 180px;
-    scroll-margin-top: 180px;
-  }
-}
-
-@media not all and (max-width:1440px) {
-  .emotion-18 {
-    grid-column-gap: 50px;
-  }
-}
-
-@media not all and (max-width:1920px) {
-  .emotion-18 {
-    grid-column-gap: 108px;
-  }
-}
-
-.emotion-0 {
+.emotion-3 {
   display: block;
   margin: 0 auto 24px auto;
   height: auto;
   max-width: 100%;
 }
 
-@media not all and (max-width:767px) {
-  .emotion-0 {
+@media not all and (max-width: 767px) {
+  .emotion-3 {
     grid-area: image;
     margin-bottom: 0;
   }
 }
 
-.emotion-8 {
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -74,18 +71,18 @@ exports[`renders correctly 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
-@media not all and (max-width:767px) {
-  .emotion-8 {
+@media not all and (max-width: 767px) {
+  .emotion-5 {
     grid-area: description;
   }
 }
 
-.emotion-2 {
+.emotion-7 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
@@ -96,31 +93,32 @@ exports[`renders correctly 1`] = `
   width: 83px;
 }
 
-.emotion-4 {
+.emotion-9 {
   font-size: 18px;
   font-weight: bold;
   margin-top: 8px;
 }
 
-.emotion-6 {
+.emotion-11 {
   margin-top: 8px;
 }
 
-.emotion-16 {
+.emotion-13 {
   list-style-type: none;
   list-style-image: url(/assets/lightning-bolt.svg);
   margin-bottom: 0;
   margin-top: 24px;
+  -webkit-padding-start: 14px;
   padding-inline-start: 14px;
 }
 
-@media not all and (max-width:767px) {
-  .emotion-16 {
+@media not all and (max-width: 767px) {
+  .emotion-13 {
     grid-area: guides;
   }
 }
 
-.emotion-10 {
+.emotion-15 {
   border-radius: 4px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -134,15 +132,15 @@ exports[`renders correctly 1`] = `
   position: relative;
 }
 
-.emotion-10:hover {
+.emotion-15:hover {
   background-color: #E7EEEC;
   color: unset;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-@media not all and (max-width:767px) {
-  .emotion-10 {
+@media not all and (max-width: 767px) {
+  .emotion-15 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -152,47 +150,46 @@ exports[`renders correctly 1`] = `
     flex-direction: row;
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 4px 8px;
   }
 }
 
 <div
-    class="emotion-18 emotion-19 emotion-20"
+    class="emotion-0 emotion-1 emotion-2"
     id="atlas"
   >
     <img
-      class="emotion-0 emotion-1"
+      class="emotion-3 emotion-4"
       height="200"
       src="/images/chapter-image-atlas.png"
       width="200"
     />
     <div
-      class="emotion-8 emotion-9"
+      class="emotion-5 emotion-6"
     >
       <div
-        class="emotion-2 emotion-3"
+        class="emotion-7 emotion-8"
       >
         Chapter 1
       </div>
       <div
-        class="emotion-4 emotion-5"
+        class="emotion-9 emotion-10"
       >
         Atlas
       </div>
       <div
-        class="emotion-6 emotion-7"
+        class="emotion-11 emotion-12"
       >
         Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.
       </div>
     </div>
     <ul
-      class="emotion-16 emotion-17"
+      class="emotion-13 emotion-14"
     >
       <li>
         <a
-          class="emotion-10 emotion-11"
+          class="emotion-15 emotion-16"
           href="/cloud/account/"
         >
           <span>
@@ -205,7 +202,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="emotion-10 emotion-11"
+          class="emotion-15 emotion-16"
           href="/cloud/connectionstring/"
         >
           <span>
@@ -216,7 +213,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="emotion-10 emotion-11"
+          class="emotion-15 emotion-16"
           href="/cloud/migrate-from-aws-to-atlas/"
         >
           <span>

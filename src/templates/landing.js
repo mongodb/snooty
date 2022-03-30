@@ -1,8 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import styled from '@emotion/styled';
-import { Global, css } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme, Global, css } from '@emotion/react';
 import { uiColors } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import { baseUrl } from '../utils/dotcom';

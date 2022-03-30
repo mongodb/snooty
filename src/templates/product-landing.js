@@ -84,7 +84,7 @@ const Wrapper = styled('main')`
       `}
     }
 
-    & > img {
+    > img {
       display: block;
       grid-column: 2;
       margin: auto;
@@ -97,7 +97,7 @@ const Wrapper = styled('main')`
       }
     }
 
-    & > .hero-img {
+    > .hero-img {
       grid-column: 1 / -1;
       grid-row: 1 / 3;
       height: 310px;
@@ -117,7 +117,7 @@ const Wrapper = styled('main')`
       }
     }
 
-    & > .introduction {
+    > .introduction {
       grid-column: 2;
       grid-row: 2;
       ${({ isGuides }) =>
@@ -129,12 +129,12 @@ const Wrapper = styled('main')`
       `}
     }
 
-    & > .chapters {
+    > .chapters {
       grid-column: 1 / -1;
     }
 
     // Sub-sections should use all but the outer columns.
-    & > section {
+    > section {
       grid-column: 2 / -2 !important;
       overflow: hidden;
     }

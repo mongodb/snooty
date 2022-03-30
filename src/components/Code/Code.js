@@ -1,6 +1,6 @@
+import { css } from '@emotion/react';
 import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -34,7 +34,11 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const code = value;
-  const language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
+  let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
+  // none should take precedence over language switcher
+  if (getLanguage(lang) === 'none') {
+    language = getLanguage(lang);
+  }
   const captionSpecified = !!caption;
   const captionBorderRadius = captionSpecified ? '0px' : '4px';
 

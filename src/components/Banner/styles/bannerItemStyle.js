@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 
 export const baseBannerStyle = css`
   /* Add margins below all child elements in the banner */
