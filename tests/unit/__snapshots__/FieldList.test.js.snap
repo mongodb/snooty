@@ -2,7 +2,29 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-2 {
+  .emotion-0 {
+  border-spacing: 0;
+  font-size: 14px;
+  line-height: 24px;
+  margin: 24px 0;
+  max-width: 100%;
+}
+
+.emotion-0 tbody {
+  vertical-align: top;
+}
+
+.emotion-2>th,
+.emotion-2>td {
+  padding: 11px 5px 12px;
+  text-align: left;
+}
+
+.emotion-3 {
+  font-size: unset;
+}
+
+.emotion-5 {
   background-color: #F9FBFA;
   border: 1px solid #B8C4C2;
   border-radius: 3px;
@@ -16,38 +38,16 @@ exports[`renders correctly 1`] = `
   white-space: nowrap;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:hover > .emotion-2 {
+[data-leafygreen-ui="anchor-inline-code"]:hover>.emotion-5 {
   box-shadow: 0 0 0 3px #E7EEEC;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:focus > .emotion-2 {
+[data-leafygreen-ui="anchor-inline-code"]:focus>.emotion-5 {
   box-shadow: 0 0 0 3px #C5E4F2;
 }
 
-.emotion-4 {
-  border-spacing: 0;
-  font-size: 14px;
-  line-height: 24px;
-  margin: 24px 0;
-  max-width: 100%;
-}
-
-.emotion-4 tbody {
-  vertical-align: top;
-}
-
-.emotion-3 > th,
-.emotion-3 > td {
-  padding: 11px 5px 12px;
-  text-align: left;
-}
-
-.emotion-0 {
-  font-size: unset;
-}
-
 <table
-    class="emotion-4 emotion-5"
+    class="emotion-0 emotion-1"
   >
     <colgroup>
       <col
@@ -59,7 +59,7 @@ exports[`renders correctly 1`] = `
     </colgroup>
     <tbody>
       <tr
-        class="emotion-3"
+        class="emotion-2"
       >
         <th>
           Returns:
@@ -67,7 +67,7 @@ exports[`renders correctly 1`] = `
         <td>
           A JSON Web Token string encoded for the provided 
           <code
-            class="emotion-0 emotion-1 emotion-2"
+            class="emotion-3 emotion-4 emotion-5"
           >
             payload
           </code>

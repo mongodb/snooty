@@ -5,6 +5,8 @@ import { theme } from '../../../theme/docsTheme';
 export const sideNavItemBasePadding = css`
   padding-left: ${theme.size.medium};
   padding-right: ${theme.size.medium};
+  padding-top: ${theme.size.small};
+  padding-bottom: ${theme.size.small};
 `;
 
 export const sideNavItemTOCStyling = ({ level = 1 }) => css`

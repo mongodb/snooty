@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';

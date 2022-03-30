@@ -2,20 +2,41 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-1 {
-  border-spacing: 0;
-  vertical-align: top;
-  padding: 0 16px;
+  .emotion-0 {
+  display: table;
+  margin: 16px 0;
+  min-width: 150px;
+  table-layout: fixed;
+  width: 100%;
 }
 
-.emotion-4 {
-  color: inherit;
-  font-size: 13px;
-  font-family: 'Source Code Pro',Menlo,monospace;
-  line-height: 24px;
+.emotion-0>div>div {
+  width: unset;
 }
 
-.emotion-5 {
+.emotion-0 button>div>div {
+  font-size: 16px;
+}
+
+.emotion-0>div {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.emotion-1 {
+  border: 1px solid #E7EEEC;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-3 {
   border: 2px solid;
   overflow-x: auto;
   border-radius: 0;
@@ -44,59 +65,53 @@ exports[`renders correctly 1`] = `
   padding-bottom: 6px;
 }
 
-@media only screen and (max-device-width:812px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-5 {
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-3 {
     white-space: pre-wrap;
   }
 }
 
-@media only screen and (min-device-width:813px) and (-webkit-min-device-pixel-ratio:2) {
-  .emotion-5 {
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
+  .emotion-3 {
     white-space: pre;
   }
 }
 
-.emotion-8 {
-  border: 1px solid #E7EEEC;
-  border-radius: 4px;
-  overflow: hidden;
+.emotion-4 {
+  color: inherit;
+  font-size: 13px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
 }
 
-.emotion-7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-3 {
+.emotion-5 {
   border-spacing: 0;
   width: 100%;
 }
 
-.emotion-2 {
+.emotion-6 {
   background-color: #FEF7E3;
   background-image: none;
   background-attachment: fixed;
 }
 
-.emotion-2 > td {
+.emotion-6>td {
   border-top: 1px solid #FEF2C8;
 }
 
-.emotion-2 + tr > td {
+.emotion-6+tr>td {
   border-top: 1px solid #FEF2C8;
 }
 
-.emotion-2 + .emotion-2 > td {
+.emotion-6+.emotion-6>td {
   border-top: 0;
 }
 
-.emotion-2:last-child > td {
+.emotion-6:last-child>td {
   border-bottom: 1px solid #FEF2C8;
 }
 
-.emotion-0 {
+.emotion-7 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -110,7 +125,13 @@ exports[`renders correctly 1`] = `
   color: #86681D;
 }
 
-.emotion-6 {
+.emotion-8 {
+  border-spacing: 0;
+  vertical-align: top;
+  padding: 0 16px;
+}
+
+.emotion-9 {
   width: 38px;
   border-left: solid 1px;
   display: -webkit-box;
@@ -132,57 +153,36 @@ exports[`renders correctly 1`] = `
   background-color: white;
 }
 
-.emotion-9 {
-  display: table;
-  margin: 16px 0;
-  min-width: 150px;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.emotion-9 > div > div {
-  width: unset;
-}
-
-.emotion-9 button > div > div {
-  font-size: 16px;
-}
-
-.emotion-9 > div {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
 <div
-    class="emotion-9"
+    class="emotion-0"
   >
     <div
-      class="emotion-8"
+      class="emotion-1"
     >
       <div
-        class="emotion-7"
+        class="emotion-2"
       >
         <pre
-          class="emotion-5"
+          class="emotion-3"
           tabindex="-1"
         >
           <code
             class="lg-highlight-hljs-light emotion-4 java"
           >
             <table
-              class="emotion-3"
+              class="emotion-5"
             >
               <tbody>
                 <tr
-                  class="emotion-2"
+                  class="emotion-6"
                 >
                   <td
-                    class="emotion-0"
+                    class="emotion-7"
                   >
                     1
                   </td>
                   <td
-                    class="emotion-1"
+                    class="emotion-8"
                   >
                     sample code
                   </td>
@@ -192,7 +192,7 @@ exports[`renders correctly 1`] = `
           </code>
         </pre>
         <div
-          class="emotion-6"
+          class="emotion-9"
           data-testid="leafygreen-code-panel"
         />
       </div>

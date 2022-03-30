@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useFeedbackState } from '../context';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { isBrowser } from '../../../../utils/is-browser';
 import { uiColors } from '@leafygreen-ui/palette';
 import loadable from '@loadable/component';

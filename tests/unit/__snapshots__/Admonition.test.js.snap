@@ -2,23 +2,20 @@
 
 exports[`admonitions render correctly 1`] = `
 <DocumentFragment>
-  .emotion-3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 18px 24px 18px 52px;
+  .emotion-0 {
+  margin: 24px 3px 24px 0;
+}
+
+.emotion-0>div>div>* {
+  margin: 0 0 12px;
+}
+
+.emotion-0>div>div>*:last-child {
+  margin: 0;
 }
 
 .emotion-2 {
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.emotion-6 {
+  background-color: #FFFFFF;
   border-radius: 6px;
   box-shadow: 0px 2px 5px 0 rgba(33,49,60,0.1);
   overflow: hidden;
@@ -26,7 +23,7 @@ exports[`admonitions render correctly 1`] = `
   color: #0D324F;
 }
 
-.emotion-6:after {
+.emotion-2:after {
   content: '';
   position: absolute;
   width: 4px;
@@ -36,17 +33,14 @@ exports[`admonitions render correctly 1`] = `
   border-radius: 6px 0px 0px 6px;
 }
 
-.emotion-6:after {
+.emotion-2:after {
   background-color: #007CAD;
 }
 
-.emotion-1 {
+.emotion-3 {
   font-family: Akzidenz,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   font-size: 12px;
   font-weight: bold;
-  -webkit-letter-spacing: 0.8px;
-  -moz-letter-spacing: 0.8px;
-  -ms-letter-spacing: 0.8px;
   letter-spacing: 0.8px;
   line-height: 16px;
   padding: 12px 24px 12px 52px;
@@ -57,7 +51,7 @@ exports[`admonitions render correctly 1`] = `
   color: #1A567E;
 }
 
-.emotion-0 {
+.emotion-4 {
   color: #007CAD;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -66,30 +60,35 @@ exports[`admonitions render correctly 1`] = `
   position: absolute;
 }
 
-.emotion-4 {
-  margin: 24px 3px 24px 0;
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 18px 24px 18px 52px;
 }
 
-.emotion-4 > div > div > * {
-  margin: 0 0 12px;
-}
-
-.emotion-4 > div > div > *:last-child {
-  margin: 0;
+.emotion-6 {
+  font-size: 14px;
+  line-height: 20px;
 }
 
 <div
-    class="emotion-4 emotion-5 emotion-6"
+    class="emotion-0 emotion-1 emotion-2"
     role="note"
   >
     <div
-      class="emotion-1"
+      class="emotion-3"
     >
       <svg
-        aria-label="Info With Circle Icon"
-        class="emotion-0"
+        alt=""
+        aria-hidden="true"
+        class="emotion-4"
         height="16"
-        role="img"
+        role="presentation"
         viewBox="0 0 16 16"
         width="16"
       >
@@ -103,10 +102,10 @@ exports[`admonitions render correctly 1`] = `
       Note
     </div>
     <div
-      class="emotion-3"
+      class="emotion-5"
     >
       <div
-        class="emotion-2"
+        class="emotion-6"
       >
         These instructions are for installing MongoDB directly from
       </div>
