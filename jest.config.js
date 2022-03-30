@@ -13,7 +13,7 @@ module.exports = {
         '^.+\\.(css)$': 'identity-obj-proxy',
       },
       setupFilesAfterEnv: ['<rootDir>/tests/testSetup.js'],
-      snapshotSerializers: ['jest-emotion'],
+      snapshotSerializers: ['@emotion/jest/serializer'],
       testMatch: ['<rootDir>/tests/unit/**/*.test.js'],
       transform: {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,

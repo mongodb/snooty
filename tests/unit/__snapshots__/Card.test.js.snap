@@ -2,33 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-10 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-  cursor: pointer;
-}
-
-.emotion-10:focus {
-  outline: none;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
-}
-
-.emotion-10:hover {
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
-}
-
-.emotion-10:hover:focus {
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
-}
-
-.emotion-8 {
+  .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -40,15 +14,41 @@ exports[`renders correctly 1`] = `
   padding: 32px;
 }
 
-.emotion-8 p:last-of-type {
+.emotion-0 p:last-of-type {
   margin-bottom: 0;
 }
 
-.emotion-0 {
-  width: 24px;
+.emotion-2 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+  cursor: pointer;
+}
+
+.emotion-2:focus {
+  outline: none;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+}
+
+.emotion-2:hover {
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+}
+
+.emotion-2:hover:focus {
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
 }
 
 .emotion-3 {
+  width: 24px;
+}
+
+.emotion-6 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
@@ -57,38 +57,35 @@ exports[`renders correctly 1`] = `
   margin-right: auto;
 }
 
-.emotion-4 {
-  -webkit-letter-spacing: 0.5px;
-  -moz-letter-spacing: 0.5px;
-  -ms-letter-spacing: 0.5px;
+.emotion-7 {
   letter-spacing: 0.5px;
   margin: 24px 0 8px 0;
 }
 
-.emotion-6 {
+.emotion-9 {
   font-weight: bold;
   margin-top: auto;
 }
 
-.emotion-6 > a:hover {
+.emotion-9>a:hover {
   color: #1A567E;
 }
 
 <div
-    class="emotion-8 emotion-9 emotion-10"
+    class="emotion-0 emotion-1 emotion-2"
   >
     <img
       alt="MongoDB University icon"
-      class="emotion-0 emotion-1"
+      class="emotion-3 emotion-4"
       src="/images/icons/university.svg"
     />
     <span
-      class="emotion-2 emotion-3"
+      class="emotion-5 emotion-6"
     >
       Test card tag
     </span>
     <h4
-      class="emotion-4 emotion-5"
+      class="emotion-7 emotion-8"
     >
       Test card headline
     </h4>
@@ -96,7 +93,7 @@ exports[`renders correctly 1`] = `
       Test card paragraph
     </p>
     <p
-      class="emotion-6 emotion-7"
+      class="emotion-9 emotion-10"
     >
       <a
         href="https://university.mongodb.com/courses/M001/about"

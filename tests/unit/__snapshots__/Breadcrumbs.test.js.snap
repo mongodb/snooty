@@ -2,60 +2,60 @@
 
 exports[`renders correctly with pageTitle 1`] = `
 <DocumentFragment>
-  .emotion-6 {
+  .emotion-0 {
   font-size: 14px;
   margin-bottom: 24px;
 }
 
-.emotion-6 * {
+.emotion-0 * {
   color: #5D6C74;
 }
 
-.emotion-6 > p {
+.emotion-0>p {
   margin-top: 0;
   min-height: 24px;
-}
-
-.emotion-0:last-of-type {
-  color: #21313C;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #21313C;
-}
-
-.emotion-2 {
-  cursor: default;
 }
 
 .emotion-2:last-of-type {
   color: #21313C;
 }
 
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-2:hover:not(:last-of-type),
+.emotion-2:focus:not(:last-of-type) {
+  color: #21313C;
+}
+
+.emotion-4 {
+  cursor: default;
+}
+
+.emotion-4:last-of-type {
+  color: #21313C;
+}
+
 <nav
-    class="emotion-6 emotion-7"
+    class="emotion-0 emotion-1"
   >
     <p>
       <a
-        class="emotion-0 emotion-1"
+        class="emotion-2 emotion-3"
         href="https://localhost/"
       >
         Docs Home
       </a>
       <span
-        class="emotion-2 emotion-3"
+        class="emotion-4 emotion-5"
       >
          → 
       </span>
       <a
-        class="emotion-0 emotion-1"
+        class="emotion-2 emotion-3"
         href="/view-analyze/"
       >
         View & Analyze Data
@@ -67,60 +67,60 @@ exports[`renders correctly with pageTitle 1`] = `
 
 exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
-  .emotion-6 {
+  .emotion-0 {
   font-size: 14px;
   margin-bottom: 24px;
 }
 
-.emotion-6 * {
+.emotion-0 * {
   color: #5D6C74;
 }
 
-.emotion-6 > p {
+.emotion-0>p {
   margin-top: 0;
   min-height: 24px;
-}
-
-.emotion-0:last-of-type {
-  color: #21313C;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #21313C;
-}
-
-.emotion-2 {
-  cursor: default;
 }
 
 .emotion-2:last-of-type {
   color: #21313C;
 }
 
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-2:hover:not(:last-of-type),
+.emotion-2:focus:not(:last-of-type) {
+  color: #21313C;
+}
+
+.emotion-4 {
+  cursor: default;
+}
+
+.emotion-4:last-of-type {
+  color: #21313C;
+}
+
 <nav
-    class="emotion-6 emotion-7"
+    class="emotion-0 emotion-1"
   >
     <p>
       <a
-        class="emotion-0 emotion-1"
+        class="emotion-2 emotion-3"
         href="https://localhost/"
       >
         Docs Home
       </a>
       <span
-        class="emotion-2 emotion-3"
+        class="emotion-4 emotion-5"
       >
          → 
       </span>
       <a
-        class="emotion-0 emotion-1"
+        class="emotion-2 emotion-3"
         href="/"
       >
         MongoDB Compass

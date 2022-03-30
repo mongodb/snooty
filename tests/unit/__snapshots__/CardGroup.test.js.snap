@@ -2,72 +2,43 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-12 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-  cursor: pointer;
-}
-
-.emotion-12:focus {
-  outline: none;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
-}
-
-.emotion-12:hover {
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
-}
-
-.emotion-12:hover:focus {
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
-}
-
-.emotion-39 {
+  .emotion-0 {
   -webkit-align-items: stretch;
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
   display: grid;
-  grid-column: 1 / -1 !important;
+  grid-column: 1/-1!important;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin: 32px 0;
 }
 
-@media only screen and (max-width:1200px) {
-  .emotion-39 {
-    grid-template-columns: repeat(2,1fr);
+@media only screen and (max-width: 1200px) {
+  .emotion-0 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media only screen and (max-width:767px) {
-  .emotion-39 {
+@media only screen and (max-width: 767px) {
+  .emotion-0 {
     grid-gap: calc(24px * 0.75);
-    grid-template-columns: calc(24px / 2) repeat(3,calc(75% - calc(2 * 24px))) calc(24px / 2);
-    grid-template-rows: minmax(150px,1fr);
+    grid-template-columns: calc(24px / 2) repeat(3, calc(75% - calc(2 * 24px))) calc(24px / 2);
+    grid-template-rows: minmax(150px, 1fr);
     margin: 24px 0;
     overflow-x: scroll;
     padding-bottom: calc(24px / 2);
-    -webkit-scroll-snap-type: x proximity;
-    -moz-scroll-snap-type: x proximity;
-    -ms-scroll-snap-type: x proximity;
     scroll-snap-type: x proximity;
   }
 
-  .emotion-39:before,
-  .emotion-39:after {
+  .emotion-0:before,
+  .emotion-0:after {
     content: '';
   }
 }
 
-.emotion-10 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -87,43 +58,69 @@ exports[`renders correctly 1`] = `
   padding: 32px 24px;
 }
 
-.emotion-10 p:last-of-type {
+.emotion-2 p:last-of-type {
   margin-bottom: 0;
 }
 
-.emotion-2 {
+.emotion-4 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+  cursor: pointer;
+}
+
+.emotion-4:focus {
+  outline: none;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+}
+
+.emotion-4:hover {
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+}
+
+.emotion-4:hover:focus {
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+}
+
+.emotion-5 {
   background: #E4F4E4;
   border-radius: 50%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-shrink: 0 !important;
-  -ms-flex-negative: 0 !important;
-  flex-shrink: 0 !important;
+  -webkit-flex-shrink: 0!important;
+  -ms-flex-negative: 0!important;
+  flex-shrink: 0!important;
   height: 48px;
   width: 48px;
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-2 {
+@media only screen and (max-width: 480px) {
+  .emotion-5 {
     height: 40px;
     width: 40px;
   }
 }
 
-.emotion-0 {
+.emotion-7 {
   margin: auto;
   width: 24px;
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-0 {
+@media only screen and (max-width: 480px) {
+  .emotion-7 {
     width: 20px;
   }
 }
 
-.emotion-8 {
+.emotion-9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -135,55 +132,52 @@ exports[`renders correctly 1`] = `
   margin-left: 24px;
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-8 {
+@media only screen and (max-width: 480px) {
+  .emotion-9 {
     margin-left: 16px;
   }
 }
 
-.emotion-4 {
-  -webkit-letter-spacing: 0.5px;
-  -moz-letter-spacing: 0.5px;
-  -ms-letter-spacing: 0.5px;
+.emotion-11 {
   letter-spacing: 0.5px;
   margin: 0 0 8px;
 }
 
-.emotion-6 {
+.emotion-13 {
   font-weight: bold;
   margin-top: auto;
 }
 
-.emotion-6 > a:hover {
+.emotion-13>a:hover {
   color: #1A567E;
 }
 
 <div
-    class="card-group  emotion-39 emotion-40"
+    class="card-group  emotion-0 emotion-1"
   >
     <div
-      class="emotion-10 emotion-11 emotion-12"
+      class="emotion-2 emotion-3 emotion-4"
     >
       <div
-        class="emotion-2 emotion-3"
+        class="emotion-5 emotion-6"
       >
         <img
           alt="MongoDB Atlas icon"
-          class="emotion-0 emotion-1"
+          class="emotion-7 emotion-8"
           src="/images/icons/atlas.svg"
         />
       </div>
       <div
-        class="emotion-8 emotion-9"
+        class="emotion-9 emotion-10"
       >
         <h4
-          class="emotion-4 emotion-5"
+          class="emotion-11 emotion-12"
         />
         <p>
           Use Compass to connect to your Atlas cluster
         </p>
         <p
-          class="emotion-6 emotion-7"
+          class="emotion-13 emotion-14"
         >
           <a
             href="https://docs.atlas.mongodb.com/getting-started/"
@@ -194,28 +188,28 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-10 emotion-11 emotion-12"
+      class="emotion-2 emotion-3 emotion-4"
     >
       <div
-        class="emotion-2 emotion-3"
+        class="emotion-5 emotion-6"
       >
         <img
           alt="MongoDB University icon"
-          class="emotion-0 emotion-1"
+          class="emotion-7 emotion-8"
           src="/images/icons/university.svg"
         />
       </div>
       <div
-        class="emotion-8 emotion-9"
+        class="emotion-9 emotion-10"
       >
         <h4
-          class="emotion-4 emotion-5"
+          class="emotion-11 emotion-12"
         />
         <p>
           Learn MongoDB Basics with MongoDB University
         </p>
         <p
-          class="emotion-6 emotion-7"
+          class="emotion-13 emotion-14"
         >
           <a
             href="https://university.mongodb.com/courses/M001/about"
@@ -226,28 +220,28 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-10 emotion-11 emotion-12"
+      class="emotion-2 emotion-3 emotion-4"
     >
       <div
-        class="emotion-2 emotion-3"
+        class="emotion-5 emotion-6"
       >
         <img
           alt="MongoDB Server icon"
-          class="emotion-0 emotion-1"
+          class="emotion-7 emotion-8"
           src="/images/icons/server.svg"
         />
       </div>
       <div
-        class="emotion-8 emotion-9"
+        class="emotion-9 emotion-10"
       >
         <h4
-          class="emotion-4 emotion-5"
+          class="emotion-11 emotion-12"
         />
         <p>
           Access more in-depth examples of querying data
         </p>
         <p
-          class="emotion-6 emotion-7"
+          class="emotion-13 emotion-14"
         >
           <a
             href="https://docs.mongodb.com/manual/tutorial/getting-started/"

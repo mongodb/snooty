@@ -2,11 +2,11 @@
 
 exports[`renders border correctly when specified as an option 1`] = `
 <DocumentFragment>
-  .emotion-1 {
+  .emotion-0 {
   max-width: 100%;
 }
 
-.emotion-0 {
+.emotion-1 {
   border: 0.5px solid #B8C4C2;
   width: 100%;
   border-radius: 4px;
@@ -14,12 +14,12 @@ exports[`renders border correctly when specified as an option 1`] = `
 }
 
 <div
-    class="figure emotion-1"
+    class="figure emotion-0"
     style="width: 700px;"
   >
     <img
       alt="/images/firstcluster.png"
-      class="   emotion-0"
+      class="   emotion-1"
       src="/images/firstcluster.png"
     />
   </div>
@@ -28,21 +28,21 @@ exports[`renders border correctly when specified as an option 1`] = `
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-1 {
+  .emotion-0 {
   max-width: 100%;
 }
 
-.emotion-0 {
+.emotion-1 {
   max-width: 100%;
 }
 
 <div
-    class="figure emotion-1"
+    class="figure emotion-0"
     style="width: 700px;"
   >
     <img
       alt="/images/firstcluster.png"
-      class="   emotion-0"
+      class="   emotion-1"
       src="/images/firstcluster.png"
     />
   </div>
@@ -52,17 +52,17 @@ exports[`renders correctly 1`] = `
 exports[`renders lightbox correctly when specified as an option 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  max-width: 100%;
-}
-
-.emotion-3 {
   width: 700px;
   cursor: pointer;
   margin: 0;
   display: block;
 }
 
-.emotion-1 {
+.emotion-2 {
+  max-width: 100%;
+}
+
+.emotion-3 {
   color: #444;
   font-size: 80%;
   margin-left: auto;
@@ -72,7 +72,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
 }
 
 <div
-    class="emotion-3 emotion-4"
+    class="emotion-0 emotion-1"
   >
     <div
       role="button"
@@ -80,11 +80,11 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
     >
       <img
         alt="/images/firstcluster.png"
-        class="   emotion-0"
+        class="   emotion-2"
         src="/images/firstcluster.png"
       />
       <div
-        class="emotion-1 emotion-2"
+        class="emotion-3 emotion-4"
       >
         click to enlarge
       </div>

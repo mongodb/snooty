@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { css, keyframes } from '@emotion/core';
+import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { uiColors } from '@leafygreen-ui/palette';

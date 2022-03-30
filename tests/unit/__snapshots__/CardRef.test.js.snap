@@ -2,78 +2,41 @@
 
 exports[`card correctly with and without url 1`] = `
 <DocumentFragment>
-  .emotion-20 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-}
-
-.emotion-31 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-  cursor: pointer;
-}
-
-.emotion-31:focus {
-  outline: none;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
-}
-
-.emotion-31:hover {
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
-}
-
-.emotion-31:hover:focus {
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
-}
-
-.emotion-32 {
+  .emotion-0 {
   -webkit-align-items: stretch;
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
   display: grid;
-  grid-column: 1 / -1 !important;
+  grid-column: 1/-1!important;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin: 32px 0;
 }
 
-@media only screen and (max-width:1200px) {
-  .emotion-32 {
-    grid-template-columns: repeat(2,1fr);
+@media only screen and (max-width: 1200px) {
+  .emotion-0 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media only screen and (max-width:767px) {
-  .emotion-32 {
-    grid-template-columns: repeat(1,1fr);
+@media only screen and (max-width: 767px) {
+  .emotion-0 {
+    grid-template-columns: repeat(1, 1fr);
     grid-column-gap: 16px;
   }
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-32 {
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
     grid-column-gap: 16px;
     grid-template-columns: 'auto';
     grid-row-gap: '16px';
   }
 }
 
-.emotion-18 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -93,15 +56,26 @@ exports[`card correctly with and without url 1`] = `
   padding: 32px 24px;
 }
 
-.emotion-18 p:last-of-type {
+.emotion-2 p:last-of-type {
   margin-bottom: 0;
 }
 
-.emotion-0 {
+.emotion-4 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+}
+
+.emotion-5 {
   width: 24px;
 }
 
-.emotion-16 {
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -113,61 +87,84 @@ exports[`card correctly with and without url 1`] = `
   margin-left: 24px;
 }
 
-@media only screen and (max-width:480px) {
-  .emotion-16 {
+@media only screen and (max-width: 480px) {
+  .emotion-7 {
     margin-left: 16px;
   }
 }
 
-.emotion-2 {
-  -webkit-letter-spacing: 0.5px;
-  -moz-letter-spacing: 0.5px;
-  -ms-letter-spacing: 0.5px;
+.emotion-9 {
   letter-spacing: 0.5px;
   margin: 0 0 8px;
 }
 
-.emotion-4 {
+.emotion-11 {
   background: #F9FBFA;
   border-radius: 4px;
   border: 1px solid #B8C4C2;
   box-sizing: border-box;
   display: inline-block;
-  font-size: 14px !important;
+  font-size: 14px!important;
   font-weight: 600;
   margin-bottom: 4px;
   margin-right: 4px;
   padding: 4px;
 }
 
-.emotion-4:after {
+.emotion-11:after {
   content: ' ➔';
 }
 
 .emotion-25 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+  cursor: pointer;
+}
+
+.emotion-25:focus {
+  outline: none;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+}
+
+.emotion-25:hover {
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+}
+
+.emotion-25:hover:focus {
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+}
+
+.emotion-32 {
   font-weight: bold;
   margin-top: auto;
 }
 
-.emotion-25 > a:hover {
+.emotion-32>a:hover {
   color: #1A567E;
 }
 
 <div
-    class="card-group  emotion-32 emotion-33"
+    class="card-group  emotion-0 emotion-1"
   >
     <div
-      class="emotion-18 emotion-19 emotion-20"
+      class="emotion-2 emotion-3 emotion-4"
     >
       <img
-        class="emotion-0 emotion-1"
+        class="emotion-5 emotion-6"
         src="/images/icons/realm_sdk.svg"
       />
       <div
-        class="emotion-16 emotion-17"
+        class="emotion-7 emotion-8"
       >
         <h4
-          class="emotion-2 emotion-3"
+          class="emotion-9 emotion-10"
         >
           Realm SDKs
         </h4>
@@ -176,7 +173,7 @@ exports[`card correctly with and without url 1`] = `
         </p>
         <p>
           <a
-            class="emotion-4 emotion-5"
+            class="emotion-11 emotion-12"
             href="/sdk/android/#std-label-android-intro"
           >
             Android
@@ -184,7 +181,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-4 emotion-5"
+            class="emotion-11 emotion-12"
             href="/sdk/ios/#std-label-ios-intro"
           >
             iOS
@@ -192,7 +189,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-4 emotion-5"
+            class="emotion-11 emotion-12"
             href="/sdk/dotnet/#std-label-dotnet-intro"
           >
             .Net
@@ -200,7 +197,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-4 emotion-5"
+            class="emotion-11 emotion-12"
             href="/web/#std-label-web-intro"
           >
             Web
@@ -208,7 +205,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-4 emotion-5"
+            class="emotion-11 emotion-12"
             href="/sdk/react-native/#std-label-react-native-intro"
           >
             React Native
@@ -216,7 +213,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-4 emotion-5"
+            class="emotion-11 emotion-12"
             href="/sdk/node/#std-label-node-intro"
           >
             Node.js
@@ -225,17 +222,17 @@ exports[`card correctly with and without url 1`] = `
       </div>
     </div>
     <div
-      class="emotion-18 emotion-19 emotion-31"
+      class="emotion-2 emotion-3 emotion-25"
     >
       <img
-        class="emotion-0 emotion-1"
+        class="emotion-5 emotion-6"
         src="/images/icons/realm.svg"
       />
       <div
-        class="emotion-16 emotion-17"
+        class="emotion-7 emotion-8"
       >
         <h4
-          class="emotion-2 emotion-3"
+          class="emotion-9 emotion-10"
         >
           MongoDB Realm
         </h4>
@@ -243,7 +240,7 @@ exports[`card correctly with and without url 1`] = `
           Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas.
         </p>
         <p
-          class="emotion-25 emotion-26"
+          class="emotion-32 emotion-33"
         >
           <a
             href="https://docs.mongodb.com/realm/services/"
