@@ -39,6 +39,7 @@ const SidenavBackButton = ({
   project,
   target,
   titleOverride,
+  eol,
   ...props
 }) => {
   const { completedFetch, parents } = useContext(NavigationContext);
@@ -78,6 +79,12 @@ const SidenavBackButton = ({
     return null;
   }
 
+  let textShown = 'Back to ';
+  if (eol) {
+    url = 'https://docs.mongodb.com/legacy/';
+    textShown = 'Return to Documentation';
+  }
+
   return (
     <>
       <SideNavItem
@@ -93,7 +100,7 @@ const SidenavBackButton = ({
          * icon can be rendered twice (see: OpenAPI component)
          */}
         {!enableGlyph && <span className={cx(htmlBackIcon)}>&#8592;</span>}
-        Back to {formatText(title)}
+        {textShown} {!eol && formatText(title)}
       </SideNavItem>
       {border}
     </>
@@ -107,6 +114,7 @@ SidenavBackButton.propTypes = {
   project: PropTypes.string,
   target: PropTypes.string,
   titleOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
+  eol: PropTypes.bool.isRequired,
 };
 
 export default SidenavBackButton;
