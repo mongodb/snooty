@@ -2,82 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  .emotion-6 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-6 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-6 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-13 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-  cursor: pointer;
-}
-
-.emotion-13:focus {
-  outline: none;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
-}
-
-.emotion-13:hover {
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
-}
-
-.emotion-13:hover:focus {
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
-}
-
-.emotion-8 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  color: #007CAD;
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
-}
-
-.emotion-8:focus {
-  outline: none;
-}
-
-.emotion-7 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-11 {
+  .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -89,11 +14,37 @@ exports[`renders correctly 1`] = `
   padding: 32px;
 }
 
-.emotion-11 p:last-of-type {
+.emotion-0 p:last-of-type {
   margin-bottom: 0;
 }
 
-.emotion-0 {
+.emotion-2 {
+  position: relative;
+  border-radius: 7px;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  background-color: white;
+  color: #21313C;
+  cursor: pointer;
+}
+
+.emotion-2:focus {
+  outline: none;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+}
+
+.emotion-2:hover {
+  border: 1px solid #E7EEEC;
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+}
+
+.emotion-2:hover:focus {
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+}
+
+.emotion-3 {
   width: 24px;
 }
 
@@ -116,12 +67,75 @@ exports[`renders correctly 1`] = `
   margin-top: auto;
 }
 
-.emotion-9 > a:hover {
+.emotion-9>a:hover {
   color: #1A567E;
 }
 
+.emotion-11 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #007CAD;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-11:focus {
+  outline: none;
+}
+
+.emotion-12 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-12 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-12 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-12 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-12 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-12 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-13 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
 <div
-    class="emotion-11 emotion-12 emotion-13"
+    class="emotion-0 emotion-1 emotion-2"
   >
     <img
       alt="MongoDB University icon"
@@ -145,21 +159,21 @@ exports[`renders correctly 1`] = `
       class="emotion-9 emotion-10"
     >
       <a
-        class="emotion-8"
+        class="emotion-11"
         data-leafygreen-ui="anchor-container"
         href="https://university.mongodb.com/courses/M001/about"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-6"
+          class="emotion-12"
         >
           Test card CTA
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-7"
+          class="emotion-13"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
