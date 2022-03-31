@@ -72,6 +72,11 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-11 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-12 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -92,39 +97,39 @@ exports[`renders correctly 1`] = `
   letter-spacing: 0px;
 }
 
-.emotion-11:focus {
+.emotion-12:focus {
   outline: none;
 }
 
-.emotion-12 {
+.emotion-13 {
   background-repeat: repeat-x;
   background-size: 2px 2px;
   background-position: center bottom;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-12 {
+[data-leafygreen-ui="anchor-container"]:hover .emotion-13 {
   background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-12 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-12 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-12 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-12 {
+[data-leafygreen-ui="anchor-container"]:focus .emotion-13 {
   background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
 }
 
 .emotion-13 {
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  background-position: center bottom;
+}
+
+[data-leafygreen-ui="anchor-container"]:hover .emotion-13 {
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+}
+
+[data-leafygreen-ui="anchor-container"]:focus .emotion-13 {
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+}
+
+.emotion-14 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -159,21 +164,21 @@ exports[`renders correctly 1`] = `
       class="emotion-9 emotion-10"
     >
       <a
-        class="emotion-11"
+        class="emotion-11 emotion-12"
         data-leafygreen-ui="anchor-container"
         href="https://university.mongodb.com/courses/M001/about"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-12"
+          class="emotion-13"
         >
           Test card CTA
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-13"
+          class="emotion-14"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"

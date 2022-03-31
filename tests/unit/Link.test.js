@@ -13,25 +13,25 @@ describe('Link component renders a variety of strings correctly', () => {
   it('external URL', () => {
     const tree = setup({ to: 'http://mongodb.com', text: 'MongoDB Company' });
     expect(tree.asFragment()).toMatchSnapshot();
-    expect(tree.container.getElementsByClassName('leafygreen-ui-16bw3aj').length).toBe(1);
+    expect(tree.getByRole('link')).toHaveAttribute('data-leafygreen-ui', 'anchor-container');
   });
 
   it('external MDB docs URL', () => {
     const tree = setup({ to: 'https://www.mongodb.com/docs/atlas/', text: 'MongoDB Atlas Docs' });
     expect(tree.asFragment()).toMatchSnapshot();
-    expect(tree.container.getElementsByClassName('leafygreen-ui-16bw3aj').length).toBe(0);
+    expect(tree.getByRole('link')).not.toHaveAttribute('data-leafygreen-ui', 'anchor-container');
   });
 
   it('external MDB non-docs URL', () => {
     const tree = setup({ to: 'https://account.mongodb.com/account/', text: 'MongoDB Atlas Registration Page' });
     expect(tree.asFragment()).toMatchSnapshot();
-    expect(tree.container.getElementsByClassName('leafygreen-ui-16bw3aj').length).toBe(1);
+    expect(tree.getByRole('link')).toHaveAttribute('data-leafygreen-ui', 'anchor-container');
   });
 
   it('external non-MDB docs URL', () => {
     const tree = setup({ to: 'https://safety.google/authentication/', text: 'Google 2-Step Verification' });
     expect(tree.asFragment()).toMatchSnapshot();
-    expect(tree.container.getElementsByClassName('leafygreen-ui-16bw3aj').length).toBe(1);
+    expect(tree.getByRole('link')).toHaveAttribute('data-leafygreen-ui', 'anchor-container');
   });
 
   it('internal link', () => {
