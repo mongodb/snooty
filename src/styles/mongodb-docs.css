@@ -1736,9 +1736,6 @@ img {
   line-height: 1;
   font-family: ChartsIcons;
 }
-.charts-icon-geoglobe::before {
-  content: '\0041';
-}
 img {
   border: 0;
 }
