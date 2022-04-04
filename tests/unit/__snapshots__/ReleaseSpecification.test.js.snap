@@ -122,30 +122,9 @@ exports[`renders correctly 1`] = `
   background-color: white;
 }
 
-.emotion-4 svg {
+.emotion-7 svg {
   width: 16px;
   height: 16px;
-}
-
-.emotion-7 {
-  display: table;
-  margin: 16px 0;
-  min-width: 150px;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.emotion-7 >div>div {
-  width: unset;
-}
-
-.emotion-7 button>div>div {
-  font-size: 16px;
-}
-
-.emotion-7 >div {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
 }
 
 <div

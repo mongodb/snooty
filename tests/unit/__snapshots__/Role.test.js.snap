@@ -4,25 +4,28 @@ exports[`Abbr correctly renders a "Abbr" role 1`] = `
 <DocumentFragment>
   .emotion-0 {
   position: relative;
-}
-
-.emotion-1 {
   background-repeat: repeat-x;
+  -webkit-background-position: center bottom;
   background-position: center bottom;
+  -webkit-background-size: 3px 2px;
   background-size: 3px 2px;
-  background-image: radial-gradient( circle closest-side, #5D6C74 75%, transparent 25% );
+  background-image: radial-gradient(
+      circle closest-side,
+      #5D6C74 75%,
+      transparent 25%
+    );
 }
 
-.emotion-1:hover {
-  background-image: radial-gradient( circle closest-side, currentColor 75%, transparent 25% );
-}
-
-.emotion-0 {
-  position: relative;
+.emotion-0:hover {
+  background-image: radial-gradient(
+        circle closest-side,
+        currentColor 75%,
+        transparent 25%
+      );
 }
 
 <span
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     Display
   </span>

@@ -71,13 +71,13 @@ exports[`renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-8 {
+  .emotion-6 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-8 {
+  .emotion-6 {
     white-space: pre;
   }
 }
@@ -125,45 +125,9 @@ exports[`renders correctly 1`] = `
   background-color: white;
 }
 
-.emotion-9 svg {
+.emotion-12 svg {
   width: 16px;
   height: 16px;
-}
-
-.emotion-12 {
-  display: table;
-  margin: 16px 0;
-  min-width: 150px;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.emotion-12 >div>div {
-  width: unset;
-}
-
-.emotion-12 button>div>div {
-  font-size: 16px;
-}
-
-.emotion-12 >div {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
-
-.emotion-0 {
-  padding: 10px;
-  color: #5D6C74;
-  font-size: 14px;
-  margin-left: 5px;
-  border-bottom: none;
-}
-
-.emotion-1 {
-  border: 1px solid #E7EEEC;
-  border-bottom: none;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
 }
 
 <div
@@ -358,12 +322,22 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   -ms-flex-negative: 0;
   flex-shrink: 0;
   padding-top: 6px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
   min-height: 36px;
   padding-top: 4px;
   min-height: 36px;
   padding-top: 4px;
   border-color: #E7EEEC;
   background-color: white;
+}
+
+.emotion-7 svg {
+  width: 16px;
+  height: 16px;
 }
 
 <div

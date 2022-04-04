@@ -2,16 +2,7 @@
 
 exports[`Pagination renders pagination correctly 1`] = `
 <DocumentFragment>
-  .emotion-1 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  .emotion-0 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -28,10 +19,6 @@ exports[`Pagination renders pagination correctly 1`] = `
   padding: 0;
   width: 20px;
   z-index: 1;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
 }
 
 .emotion-4 {
@@ -212,29 +199,6 @@ exports[`Pagination renders pagination correctly 1`] = `
 
 .emotion-13 {
   color: #3D4F58;
-
-.emotion-12 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-2 {
-  background-color: #fff;
-  height: 20px;
-  padding: 0;
-  width: 20px;
-  z-index: 1;
-}
-
-.emotion-5 {
-  font-size: 16px;
-  margin: 0 4px;
 }
 
 <div

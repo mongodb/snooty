@@ -65,8 +65,8 @@ exports[`renders correctly 1`] = `
 .emotion-4 {
   position: relative;
   border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  -webkit-transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
+  transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
   border: 1px solid #E7EEEC;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
@@ -76,7 +76,7 @@ exports[`renders correctly 1`] = `
 
 .emotion-4:focus {
   outline: none;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #019EE2;
 }
 
 .emotion-4:hover {
@@ -85,7 +85,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-4:hover:focus {
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #019EE2;
 }
 
 .emotion-5 {
@@ -198,16 +198,25 @@ exports[`renders correctly 1`] = `
 
 .emotion-30 {
   background-repeat: repeat-x;
+  -webkit-background-size: 2px 2px;
   background-size: 2px 2px;
+  -webkit-background-position: center bottom;
   background-position: center bottom;
 }
 
 [data-leafygreen-ui="anchor-container"]:hover .emotion-30 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+  background-image: linear-gradient(
+        #E7EEEC 100%,
+        #E7EEEC 0
+      );
 }
 
 [data-leafygreen-ui="anchor-container"]:focus .emotion-30 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+  background-image: linear-gradient(
+        to right,
+        #9DD0E7 100%,
+        #9DD0E7 0
+      );
 }
 
 .emotion-31 {

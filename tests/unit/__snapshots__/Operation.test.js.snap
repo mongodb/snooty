@@ -9,8 +9,8 @@ exports[`when no summary is present renders correctly  1`] = `
 .emotion-1 {
   position: relative;
   border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  -webkit-transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
+  transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
   border: 1px solid #E7EEEC;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
@@ -67,26 +67,6 @@ exports[`when no summary is present renders correctly  1`] = `
   background-color: #E1F2F6;
   border-color: #C5E4F2;
   color: #1A567E;
-}
-
-  .emotion-3 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
 }
 
 .emotion-5 {
@@ -178,44 +158,6 @@ exports[`when no summary is present renders correctly  1`] = `
 
 .emotion-9:focus:before {
   background-color: #C5E4F2;
-}
-
-.emotion-15 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-}
-
-.emotion-0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 20px;
-  border-radius: 50px;
-  height: 20px;
-  padding-left: 9px;
-  padding-right: 9px;
-  text-transform: uppercase;
-  border: 1px solid;
-  background-color: #E1F2F6;
-  border-color: #C5E4F2;
-  color: #1A567E;
-}
-
-.emotion-14 {
-  margin-bottom: 16px;
 }
 
 .emotion-10 {
@@ -366,8 +308,8 @@ exports[`when no summary or description is present renders correctly  1`] = `
 .emotion-1 {
   position: relative;
   border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  -webkit-transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
+  transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
   border: 1px solid #E7EEEC;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
@@ -424,26 +366,6 @@ exports[`when no summary or description is present renders correctly  1`] = `
   background-color: #E4F4E4;
   border-color: #C3E7CA;
   color: #116149;
-}
-
-  .emotion-3 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
 }
 
 .emotion-5 {
@@ -535,44 +457,6 @@ exports[`when no summary or description is present renders correctly  1`] = `
 
 .emotion-9:focus:before {
   background-color: #C5E4F2;
-}
-
-.emotion-13 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-}
-
-.emotion-0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 20px;
-  border-radius: 50px;
-  height: 20px;
-  padding-left: 9px;
-  padding-right: 9px;
-  text-transform: uppercase;
-  border: 1px solid;
-  background-color: #E4F4E4;
-  border-color: #C3E7CA;
-  color: #116149;
-}
-
-.emotion-12 {
-  margin-bottom: 16px;
 }
 
 .emotion-10 {
@@ -697,8 +581,8 @@ exports[`when rendering all fields renders correctly  1`] = `
 .emotion-1 {
   position: relative;
   border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  -webkit-transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
+  transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
   border: 1px solid #E7EEEC;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
@@ -755,26 +639,6 @@ exports[`when rendering all fields renders correctly  1`] = `
   background-color: #E1F2F6;
   border-color: #C5E4F2;
   color: #1A567E;
-}
-
-  .emotion-3 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
 }
 
 .emotion-5 {
@@ -866,44 +730,6 @@ exports[`when rendering all fields renders correctly  1`] = `
 
 .emotion-9:focus:before {
   background-color: #C5E4F2;
-}
-
-.emotion-15 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-}
-
-.emotion-0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 20px;
-  border-radius: 50px;
-  height: 20px;
-  padding-left: 9px;
-  padding-right: 9px;
-  text-transform: uppercase;
-  border: 1px solid;
-  background-color: #E1F2F6;
-  border-color: #C5E4F2;
-  color: #1A567E;
-}
-
-.emotion-14 {
-  margin-bottom: 16px;
 }
 
 .emotion-10 {
