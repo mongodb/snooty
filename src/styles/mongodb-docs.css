@@ -1180,9 +1180,7 @@ img {
   position: relative;
   font-size: 16px;
 }
-.mms-icon .mms-emblem,
 .mms-icon::after,
-.mms-org-icon .mms-emblem,
 .mms-org-icon::after {
   position: absolute;
   top: 0;
@@ -1194,15 +1192,10 @@ img {
 .mms-org-icon {
   font-family: MMSOrgIcons-Regular;
 }
-.mms-emblem-add,
 .mms-icon-addcenter {
   color: #13aa52;
   color: var(--mms-green2);
 }
-.mms-emblem-add::before {
-  content: '\E085';
-}
-.mms-emblem-remove,
 .mms-icon-configsvr-down,
 .mms-icon-configsvr-fatal,
 .mms-icon-configsvr-shunned,
@@ -1215,11 +1208,6 @@ img {
   color: #ef4c4c;
   color: var(--mms-alert-red);
 }
-.mms-emblem-remove::before {
-  content: '\E086';
-}
-.mms-emblem-edit,
-.mms-emblem-exclamation,
 .mms-icon-configsvr-recovering,
 .mms-icon-configsvr-rollback,
 .mms-icon-configsvr-startup,
@@ -1231,21 +1219,6 @@ img {
 .mms-icon-surprisedface {
   color: #ffb618;
   color: var(--mms-warning-text);
-}
-.mms-emblem-edit::before {
-  content: '\E087';
-}
-.mms-emblem-exclamation::before,
-.mms-icon-configsvr > .mms-emblem-exclamation::before,
-.mms-icon-mongos > .mms-emblem-exclamation::before {
-  content: '\E098';
-}
-.mms-emblem-restart {
-  color: #43b1e5;
-  color: var(--mms-alert-blue);
-}
-.mms-emblem-restart::before {
-  content: '\E089';
 }
 .mms-icon-configsvr-arbiter::after,
 .mms-icon-configsvr-delayed::after,
@@ -1263,49 +1236,6 @@ img {
 .mms-icon-configsvr-unknown::after,
 .mms-icon-replica-set-configsvr::after {
   content: '\E084';
-}
-.mms-icon-group > .mms-emblem-add::before {
-  content: '\E090';
-}
-.mms-icon-group > .mms-emblem-remove::before {
-  content: '\E091';
-}
-.mms-icon-group > .mms-emblem-edit::before {
-  content: '\E092';
-}
-.mms-icon-group > .mms-emblem-restart::before {
-  content: '\E094';
-}
-.mms-icon-configsvr > .mms-emblem-add::before,
-.mms-icon-mongos > .mms-emblem-add::before {
-  content: '\E095';
-}
-.mms-icon-configsvr > .mms-emblem-remove::before,
-.mms-icon-mongos > .mms-emblem-remove::before {
-  content: '\E096';
-}
-.mms-icon-configsvr > .mms-emblem-edit::before,
-.mms-icon-mongos > .mms-emblem-edit::before {
-  content: '\E097';
-}
-.mms-icon-configsvr > .mms-emblem-restart::before,
-.mms-icon-mongos > .mms-emblem-restart::before {
-  content: '\E099';
-}
-.mms-icon-wrench > .mms-emblem-add::before {
-  content: '\E078';
-}
-.mms-icon-wrench > .mms-emblem-remove::before {
-  content: '\E079';
-}
-.mms-icon-wrench > .mms-emblem-edit::before {
-  content: '\E080';
-}
-.mms-icon-wrench > .mms-emblem-exclamation::before {
-  content: '\E081';
-}
-.mms-icon-wrench > .mms-emblem-restart::before {
-  content: '\E082';
 }
 .mms-icon-wrench-exclamation {
   color: #babdbe;
