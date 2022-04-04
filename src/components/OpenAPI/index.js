@@ -5,16 +5,16 @@ import { RedocStandalone } from 'redoc';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-import ComponentFactory from './ComponentFactory';
-import { SidenavBackButton } from './Sidenav';
-import Spinner from './Spinner';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
-import useStickyTopValues from '../hooks/useStickyTopValues';
-import { isBrowser } from '../utils/is-browser';
-import { theme } from '../theme/docsTheme';
-import { getPlaintext } from '../utils/get-plaintext';
-import { fetchOASFile } from '../utils/realm';
+import ComponentFactory from '../ComponentFactory';
+import { SidenavBackButton } from '../Sidenav';
+import Spinner from '../Spinner';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import useStickyTopValues from '../../hooks/useStickyTopValues';
+import { isBrowser } from '../../utils/is-browser';
+import { theme } from '../../theme/docsTheme';
+import { getPlaintext } from '../../utils/get-plaintext';
+import { fetchOASFile } from '../../utils/realm';
 // Important notes:
 // The contents of this file are (unfortunately) a hacky and brittle way of getting Redoc's React component to
 // look like our docs while maintaining the same workflow and processes for delivering docs.
