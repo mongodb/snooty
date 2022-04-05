@@ -94,7 +94,7 @@ describe('OpenAPI', () => {
     global.window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {
-        search: `?src=this_is_a_test_url`,
+        search: `?src=https://this_is_a_test_url.com`,
       },
       writable: true,
     });
