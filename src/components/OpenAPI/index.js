@@ -10,7 +10,6 @@ import { SidenavBackButton } from '../Sidenav';
 import Spinner from '../Spinner';
 import { isLinkInWhitelist, WhitelistErrorCallout } from './whitelist';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
@@ -236,6 +235,11 @@ const MenuTitle = styled('div')`
   text-transform: capitalize;
 `;
 
+const JustifiedWhitelistWarning = styled(WhitelistErrorCallout)`
+  margin: 20px auto;
+  max-width: 840px;
+`;
+
 const LoadingWidget = ({ className }) => (
   <LoadingContainer className={className}>
     <LoadingMessage>Loading</LoadingMessage>
@@ -245,12 +249,11 @@ const LoadingWidget = ({ className }) => (
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   const docsTitle = siteTitle ? `${siteTitle} Docs` : 'Docs';
-  const { eol } = useSnootyMetadata();
   return (
     <>
       {/* Disable LG left arrow glyph due to bug where additional copies of the LG icon would be rendered 
           at the bottom of the page. */}
-      <SidenavBackButton border={<Border />} enableGlyph={false} target="/" titleOverride={docsTitle} eol={eol} />
+      <SidenavBackButton border={<Border />} enableGlyph={false} target="/" titleOverride={docsTitle} />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
@@ -296,12 +299,13 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
 
   // Create our loading widget
   const tempLoadingDivClassName = 'openapi-loading-container';
+  const needsWhitelistWarning = specUrl && !hasValidSpecUrl;
   return (
     <>
       <Global styles={getGlobalCss(topValues)} />
-      {specUrl && !hasValidSpecUrl && <WhitelistErrorCallout />}
+      {needsWhitelistWarning && <JustifiedWhitelistWarning />}
       {/* Temporary loading widget to be removed once the Redoc component loads */}
-      {isLoading && <LoadingWidget className={tempLoadingDivClassName} />}
+      {isLoading && !needsWhitelistWarning && <LoadingWidget className={tempLoadingDivClassName} />}
       {((specUrl && hasValidSpecUrl) || spec) && (
         <RedocStandalone
           onLoaded={() => {
