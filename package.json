@@ -29,7 +29,7 @@
     "build": "gatsby build --prefix-paths",
     "build:clean": "npm run clean && npm run build",
     "build:clean:stage": "npm run build:clean && make stage",
-    "clean": "gatsby clean",
+    "clean": "gatsby clean &&  git clean static/* -x -f",
     "develop": "gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
     "format": "npm run prettier -- --check",
