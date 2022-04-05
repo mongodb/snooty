@@ -25,10 +25,10 @@ const useStickyTopValues = (eol) => {
   const { bannerContent } = useContext(HeaderContext);
   const bannerEnabled = bannerContent?.isEnabled;
   const topLarge = useMemo(() => getTopValue(bannerEnabled, eol, [theme.header.navbarHeight]), [bannerEnabled, eol]);
-  const topMedium = useMemo(() => getTopValue(bannerEnabled, eol, [theme.header.navbarMobileHeight]), [
-    bannerEnabled,
-    eol,
-  ]);
+  const topMedium = useMemo(
+    () => getTopValue(bannerEnabled, eol, [theme.header.navbarMobileHeight]),
+    [bannerEnabled, eol]
+  );
   const topSmall = useMemo(
     () => getTopValue(bannerEnabled, eol, [theme.header.navbarMobileHeight, theme.header.docsMobileMenuHeight]),
     [bannerEnabled, eol]
