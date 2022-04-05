@@ -2,9 +2,9 @@ import React from 'react';
 import Callout from '@leafygreen-ui/callout';
 
 const HOST_WHITELIST = ['mongodb-mms-build-server.s3.amazonaws.com, raw.githubusercontent.com'];
-const isLinkInWhitelist = (link) => HOST_WHITELIST.includes(new URL(link).hostname);
+export const isLinkInWhitelist = (link) => HOST_WHITELIST.includes(new URL(link).hostname);
 
-const whitelistErrorCallout = () => {
+export const WhitelistErrorCallout = () => {
   return (
     <Callout variant="warning">
       The link you're trying to preview isn't currently whitelisted - please raise a pull request to add this source{' '}
@@ -13,5 +13,3 @@ const whitelistErrorCallout = () => {
     </Callout>
   );
 };
-
-export { isLinkInWhitelist, whitelistErrorCallout };

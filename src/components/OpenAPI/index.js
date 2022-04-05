@@ -8,6 +8,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 import { SidenavBackButton } from '../Sidenav';
 import Spinner from '../Spinner';
+import { isLinkInWhitelist, WhitelistErrorCallout } from './whitelist';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -286,7 +287,9 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   }
 
   if (isBrowser) urlParams = new URLSearchParams(window.location.search);
-  specUrl = urlParams?.get('src');
+  const src = urlParams?.get('src');
+  const hasValidSpecUrl = !!src && isLinkInWhitelist(src);
+  specUrl = src;
 
   spec = usesRealm ? realmSpec : JSON.parse(children[0]?.value || '{}');
   spec = !specUrl ? spec : null;
@@ -296,9 +299,10 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   return (
     <>
       <Global styles={getGlobalCss(topValues)} />
+      {specUrl && !hasValidSpecUrl && <WhitelistErrorCallout />}
       {/* Temporary loading widget to be removed once the Redoc component loads */}
       {isLoading && <LoadingWidget className={tempLoadingDivClassName} />}
-      {(specUrl || spec) && (
+      {((specUrl && hasValidSpecUrl) || spec) && (
         <RedocStandalone
           onLoaded={() => {
             setIsLoading(false);
