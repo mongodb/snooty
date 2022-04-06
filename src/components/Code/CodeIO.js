@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
+import { cx, css as LeafyCss } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/react';
@@ -10,7 +10,7 @@ import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 import Input from '../Code/Input';
 import Output from '../Code/Output';
 
-const outputButtonStyling = LeafyCSS`
+const outputButtonStyling = LeafyCss`
   padding: 0px;
   font-size: ${theme.fontSize.tiny};
   height: 24px;
@@ -47,14 +47,12 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
     <div
       css={css`
         ${baseCodeStyle}
-
         // Inner div of LG component has a width set to 700px. Unset this as part of our
         // override for docs when the language switcher is being used.
         > div > div {
           border-bottom-right-radius: ${singleInputBorderRadius};
           border-bottom-left-radius: ${singleInputBorderRadius};
         }
-
         // Controls output code block and toggle view bar style
         > div {
           border-top-right-radius: 0px;
