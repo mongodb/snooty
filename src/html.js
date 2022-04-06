@@ -5,7 +5,6 @@ import { baseUrl } from './utils/dotcom';
 const metaUrl = `http://${baseUrl()}/assets/meta_generic.png`;
 const metaSecureUrl = `${baseUrl(true)}/assets/meta_generic.png`;
 const faviconUrl = `${baseUrl(true)}/assets/favicon.ico`;
-const osdUrl = `${baseUrl(true)}/osd.xml`;
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => (
   <html lang="en" {...htmlAttributes}>
@@ -17,12 +16,10 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <meta name="robots" content="index" />
       <meta name="release" content="1.0" />
       <meta name="version" content="master" />
-      <meta name="DC.Source" content="https://github.com/mongodb/docs-bi-connector/blob/DOCSP-3279/source/index.txt" />
       <meta property="og:image" content={metaUrl} />
       <meta property="og:image:secure_url" content={metaSecureUrl} />
       <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
       <link rel="shortcut icon" href={faviconUrl} />
-      <link rel="search" type="application/opensearchdescription+xml" href={osdUrl} title="MongoDB Help" />
       {headComponents}
     </head>
     <body {...bodyAttributes}>
