@@ -71,10 +71,11 @@ const getNextGuideData = (chapters, guides, slug) => {
 
 const GuideNext = ({ nodeData: { argument, children }, metadata, slug }) => {
   const { chapters, guides } = metadata;
-  const { targetGuide, targetChapter } = useMemo(
-    () => getNextGuideData(chapters, guides, slug),
-    [chapters, guides, slug]
-  );
+  const { targetGuide, targetChapter } = useMemo(() => getNextGuideData(chapters, guides, slug), [
+    chapters,
+    guides,
+    slug,
+  ]);
 
   if (!(targetGuide && targetChapter)) {
     return null;

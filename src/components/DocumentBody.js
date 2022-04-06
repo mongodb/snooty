@@ -36,9 +36,8 @@ const normalizeCssClassNodes = (nodes, key, value) => {
 const getFootnotes = (nodes) => {
   const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
   const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
-  const numAnonRefs = footnoteReferences.filter(
-    (node) => !Object.prototype.hasOwnProperty.call(node, 'refname')
-  ).length;
+  const numAnonRefs = footnoteReferences.filter((node) => !Object.prototype.hasOwnProperty.call(node, 'refname'))
+    .length;
   // We label our footnotes by their index, regardless of their names to
   // circumvent cases such as [[1], [#], [2], ...]
   return footnotes.reduce((map, footnote, index) => {
