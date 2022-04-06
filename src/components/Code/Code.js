@@ -3,6 +3,9 @@ import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { default as CodeBlock, Language } from '@leafygreen-ui/code';
+import Icon from '@leafygreen-ui/icon';
+import IconButton from '@leafygreen-ui/icon-button';
+import Tooltip from '@leafygreen-ui/tooltip';
 import { uiColors } from '@leafygreen-ui/palette';
 import { CodeContext } from '../code-context';
 import { TabContext } from '../tab-context';
@@ -17,20 +20,26 @@ const captionStyle = css`
   border-bottom: none;
 `;
 
+const sourceCodeStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const getLanguage = (lang) => {
   if (Object.values(Language).includes(lang)) {
     return lang;
   } else if (lang === 'sh') {
     // Writers commonly use 'sh' to represent shell scripts, but LeafyGreen and Highlight.js use the key 'shell'
     return 'shell';
-  } else if (['c', 'cpp', 'csharp'].includes(lang)) {
-    // LeafyGreen renders all C-family languages with "clike"
-    return 'clike';
+  } else if (['c', 'cpp'].includes(lang)) {
+    // LeafyGreen renders C and C++ languages with "cs"
+    return 'cs';
   }
   return 'none';
 };
 
-const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value } }) => {
+const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source } }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const code = value;
@@ -40,7 +49,30 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
     language = getLanguage(lang);
   }
   const captionSpecified = !!caption;
+  const sourceSpecified = !!source;
   const captionBorderRadius = captionSpecified ? '0px' : '4px';
+
+  let customActionButtonList = [];
+  if (sourceSpecified) {
+    customActionButtonList = [
+      <IconButton href={source}>
+        <Tooltip
+          triggerEvent="hover"
+          align="bottom"
+          justify="middle"
+          trigger={
+            <div css={sourceCodeStyle}>
+              <Icon glyph="OpenNewTab" />
+            </div>
+          }
+          darkMode={true}
+          popoverZIndex={2}
+        >
+          View full source
+        </Tooltip>
+      </IconButton>,
+    ];
+  }
 
   const reportCodeCopied = useCallback(() => {
     reportAnalytics('CodeblockCopied', { code });
@@ -75,6 +107,8 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
         }}
         onCopy={reportCodeCopied}
         showLineNumbers={linenos}
+        showCustomActionButtons={sourceSpecified}
+        customActionButtons={customActionButtonList}
       >
         {code}
       </CodeBlock>
@@ -97,6 +131,7 @@ Code.propTypes = {
     lang: PropTypes.string,
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
+    source: PropTypes.string,
   }).isRequired,
 };
 
