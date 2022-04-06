@@ -9,8 +9,8 @@ exports[`when no summary is present renders correctly  1`] = `
 .emotion-1 {
   position: relative;
   border-radius: 7px;
-  -webkit-transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
-  transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
   border: 1px solid #E7EEEC;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
@@ -308,8 +308,8 @@ exports[`when no summary or description is present renders correctly  1`] = `
 .emotion-1 {
   position: relative;
   border-radius: 7px;
-  -webkit-transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
-  transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
   border: 1px solid #E7EEEC;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;
@@ -581,8 +581,8 @@ exports[`when rendering all fields renders correctly  1`] = `
 .emotion-1 {
   position: relative;
   border-radius: 7px;
-  -webkit-transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
-  transition: border 150ms ease-in-out,box-shadow 150ms ease-in-out;
+  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
+  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
   border: 1px solid #E7EEEC;
   box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
   background-color: white;

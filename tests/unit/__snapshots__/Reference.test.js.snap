@@ -48,25 +48,16 @@ exports[`renders correctly 1`] = `
 
 .emotion-2 {
   background-repeat: repeat-x;
-  -webkit-background-size: 2px 2px;
   background-size: 2px 2px;
-  -webkit-background-position: center bottom;
   background-position: center bottom;
 }
 
 [data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
-  background-image: linear-gradient(
-        #E7EEEC 100%,
-        #E7EEEC 0
-      );
+  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
 }
 
 [data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
-  background-image: linear-gradient(
-        to right,
-        #9DD0E7 100%,
-        #9DD0E7 0
-      );
+  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
 }
 
 .emotion-3 {

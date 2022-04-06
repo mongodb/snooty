@@ -65,20 +65,28 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   overflow-x: auto;
 }
 
-.emotion-4 {
+.emotion-5 {
   border-collapse: collapse;
   box-sizing: border-box;
   width: 100%;
   border-bottom: 1px solid #E7EEEC;
 }
 
-.emotion-5 * {
+.emotion-6 * {
   border: 0!important;
   min-height: unset!important;
   padding: 0!important;
 }
 
-.emotion-6 {
+.emotion-7 {
+  width: 5%;
+}
+
+.emotion-7 * {
+  font-size: 14px;
+}
+
+.emotion-8 {
   border-width: 0px 1px 3px 1px;
   border-style: solid;
   min-width: 40px;
@@ -88,20 +96,16 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   font-size: 14px;
   line-height: 20px;
   border-color: #E7EEEC;
-  width: 5%;
 }
 
-.emotion-6 * {
-  font-size: 14px;
-}
-
-.emotion-7 {
+.emotion-9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -110,138 +114,123 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   min-height: 32px;
 }
 
-.emotion-8 {
+.emotion-10 {
   padding-right: 4px;
   color: #3D4F58;
 }
 
-.emotion-9 {
-  border-width: 0px 1px 3px 1px;
-  border-style: solid;
-  min-width: 40px;
-  padding: 8px 8px;
-  box-sizing: border-box;
-  vertical-align: middle;
-  font-size: 14px;
-  line-height: 20px;
-  border-color: #E7EEEC;
+.emotion-11 {
   width: 10%;
 }
 
-.emotion-9 * {
-  font-size: 14px;
-}
-
-.emotion-12 {
-  border-width: 0px 1px 3px 1px;
-  border-style: solid;
-  min-width: 40px;
-  padding: 8px 8px;
-  box-sizing: border-box;
-  vertical-align: middle;
-  font-size: 14px;
-  line-height: 20px;
-  border-color: #E7EEEC;
-  width: 15%;
-}
-
-.emotion-12 * {
+.emotion-11 * {
   font-size: 14px;
 }
 
 .emotion-15 {
-  border-width: 0px 1px 3px 1px;
-  border-style: solid;
-  min-width: 40px;
-  padding: 8px 8px;
-  box-sizing: border-box;
-  vertical-align: middle;
-  font-size: 14px;
-  line-height: 20px;
-  border-color: #E7EEEC;
-  width: 20%;
+  width: 15%;
 }
 
 .emotion-15 * {
   font-size: 14px;
 }
 
-.emotion-18 {
-  border-width: 0px 1px 3px 1px;
-  border-style: solid;
-  min-width: 40px;
-  padding: 8px 8px;
-  box-sizing: border-box;
-  vertical-align: middle;
+.emotion-19 {
+  width: 20%;
+}
+
+.emotion-19 * {
   font-size: 14px;
-  line-height: 20px;
-  border-color: #E7EEEC;
+}
+
+.emotion-23 {
   width: 30%;
 }
 
-.emotion-18 * {
+.emotion-23 * {
   font-size: 14px;
 }
 
-.emotion-24 {
-  --lg-min-cell-height: 40px;
-  border-top: 1px solid var(--lg-table-row-border-color);
-  --lg-table-row-border-color: #E7EEEC;
+.emotion-31 {
+  border-top: 1px solid #E7EEEC;
   color: #3D4F58;
 }
 
-.emotion-24>td>[data-leafygreen-ui="td-inner-div"] {
-  min-height: var(--lg-min-cell-height);
-  max-height: unset;
+.emotion-31>td>[data-leafygreen-ui="td-inner-div"] {
+  min-height: 40px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 
-.emotion-24>td:nth-child(1) {
+.emotion-31>td:nth-child(1) {
   padding-left: 8px;
 }
 
-.emotion-24 td:nth-child(1)>div {
+.emotion-31 td:nth-child(1)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-24 td:nth-child(2)>div {
+.emotion-31 td:nth-child(2)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-24 td:nth-child(3)>div {
+.emotion-31 td:nth-child(3)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-24 td:nth-child(4)>div {
+.emotion-31 td:nth-child(4)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-24 td:nth-child(5)>div {
+.emotion-31 td:nth-child(5)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-24 td:nth-child(6)>div {
+.emotion-31 td:nth-child(6)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-25 {
+.emotion-32 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.emotion-32 * {
+  font-size: 14px!important;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.emotion-32>div>span>* {
+  margin: 0 0 12px;
+}
+
+.emotion-32>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-33 {
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -250,28 +239,20 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   line-height: 20px;
   line-height: 20px;
   position: relative;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  vertical-align: top;
 }
 
-.emotion-25 * {
-  font-size: 14px!important;
-  -webkit-align-items: start;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
+.emotion-34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.emotion-25>div>span>* {
-  margin: 0 0 12px;
-}
-
-.emotion-25>div>span>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-26 {
+.emotion-34 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -297,94 +278,94 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
       <table
         cellpadding="0"
         cellspacing="0"
-        class="emotion-4"
+        class="emotion-4 emotion-5"
       >
         <thead>
           <tr
-            class="emotion-5"
+            class="emotion-6"
             data-testid="leafygreen-ui-header-row"
           >
             <th
               aria-sort="none"
-              class="emotion-6"
+              class="emotion-7 emotion-8"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-7"
+                class="emotion-9"
               >
                 <span
-                  class="emotion-8"
+                  class="emotion-10"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-9"
+              class="emotion-11 emotion-8"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-7"
+                class="emotion-9"
               >
                 <span
-                  class="emotion-8"
+                  class="emotion-10"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-12"
+              class="emotion-15 emotion-8"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-7"
+                class="emotion-9"
               >
                 <span
-                  class="emotion-8"
+                  class="emotion-10"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-15"
+              class="emotion-19 emotion-8"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-7"
+                class="emotion-9"
               >
                 <span
-                  class="emotion-8"
+                  class="emotion-10"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-18"
+              class="emotion-23 emotion-8"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-7"
+                class="emotion-9"
               >
                 <span
-                  class="emotion-8"
+                  class="emotion-10"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-15"
+              class="emotion-19 emotion-8"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-7"
+                class="emotion-9"
               >
                 <span
-                  class="emotion-8"
+                  class="emotion-10"
                 />
               </div>
             </th>
@@ -393,14 +374,14 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
         <tbody>
           <tr
             aria-disabled="false"
-            class="emotion-24"
+            class="emotion-31"
             role="row"
           >
             <td
-              class="emotion-25"
+              class="emotion-32 emotion-33"
             >
               <div
-                class="emotion-26"
+                class="emotion-34"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -409,10 +390,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-25"
+              class="emotion-32 emotion-33"
             >
               <div
-                class="emotion-26"
+                class="emotion-34"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -421,10 +402,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-25"
+              class="emotion-32 emotion-33"
             >
               <div
-                class="emotion-26"
+                class="emotion-34"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -433,10 +414,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-25"
+              class="emotion-32 emotion-33"
             >
               <div
-                class="emotion-26"
+                class="emotion-34"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -445,10 +426,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-25"
+              class="emotion-32 emotion-33"
             >
               <div
-                class="emotion-26"
+                class="emotion-34"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -457,10 +438,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-25"
+              class="emotion-32 emotion-33"
             >
               <div
-                class="emotion-26"
+                class="emotion-34"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -541,14 +522,18 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   overflow-x: auto;
 }
 
-.emotion-4 {
+.emotion-5 {
   border-collapse: collapse;
   box-sizing: border-box;
   width: 100%;
   border-bottom: 1px solid #E7EEEC;
 }
 
-.emotion-5 {
+.emotion-6 * {
+  font-size: 14px;
+}
+
+.emotion-7 {
   border-width: 0px 1px 3px 1px;
   border-style: solid;
   min-width: 40px;
@@ -560,17 +545,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   border-color: #E7EEEC;
 }
 
-.emotion-5 * {
-  font-size: 14px;
-}
-
-.emotion-6 {
+.emotion-8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -579,70 +561,94 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   min-height: 32px;
 }
 
-.emotion-7 {
+.emotion-9 {
   padding-right: 4px;
   color: #3D4F58;
 }
 
-.emotion-23 {
-  --lg-min-cell-height: 40px;
-  border-top: 1px solid var(--lg-table-row-border-color);
-  --lg-table-row-border-color: #E7EEEC;
+.emotion-30 {
+  border-top: 1px solid #E7EEEC;
   color: #3D4F58;
 }
 
-.emotion-23>td>[data-leafygreen-ui="td-inner-div"] {
-  min-height: var(--lg-min-cell-height);
-  max-height: unset;
+.emotion-30>td>[data-leafygreen-ui="td-inner-div"] {
+  min-height: 40px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 
-.emotion-23>td:nth-child(1) {
+.emotion-30>td:nth-child(1) {
   padding-left: 8px;
 }
 
-.emotion-23 td:nth-child(1)>div {
+.emotion-30 td:nth-child(1)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-23 td:nth-child(2)>div {
+.emotion-30 td:nth-child(2)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-23 td:nth-child(3)>div {
+.emotion-30 td:nth-child(3)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-23 td:nth-child(4)>div {
+.emotion-30 td:nth-child(4)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-23 td:nth-child(5)>div {
+.emotion-30 td:nth-child(5)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-23 td:nth-child(6)>div {
+.emotion-30 td:nth-child(6)>div {
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.emotion-24 {
+.emotion-31 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #F9FBFA;
+}
+
+.emotion-31 * {
+  font-size: 14px!important;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.emotion-31>div>span>* {
+  margin: 0 0 12px;
+}
+
+.emotion-31>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-32 {
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -652,31 +658,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   line-height: 20px;
   position: relative;
   font-weight: bold;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  vertical-align: top;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background-color: #F9FBFA;
 }
 
-.emotion-24 * {
-  font-size: 14px!important;
-  -webkit-align-items: start;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-}
-
-.emotion-24>div>span>* {
-  margin: 0 0 12px;
-}
-
-.emotion-24>div>span>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-25 {
+.emotion-33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -687,7 +671,40 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   align-items: center;
 }
 
-.emotion-26 {
+.emotion-33 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-34 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.emotion-34 * {
+  font-size: 14px!important;
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.emotion-34>div>span>* {
+  margin: 0 0 12px;
+}
+
+.emotion-34>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-35 {
   min-width: 40px;
   padding: 8px 8px;
   box-sizing: border-box;
@@ -696,25 +713,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   line-height: 20px;
   line-height: 20px;
   position: relative;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  vertical-align: top;
-}
-
-.emotion-26 * {
-  font-size: 14px!important;
-  -webkit-align-items: start;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-}
-
-.emotion-26>div>span>* {
-  margin: 0 0 12px;
-}
-
-.emotion-26>div>span>*:last-child {
-  margin-bottom: 0;
 }
 
 <div
@@ -732,7 +730,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
       <table
         cellpadding="0"
         cellspacing="0"
-        class="emotion-4"
+        class="emotion-4 emotion-5"
       >
         <thead>
           <tr
@@ -741,15 +739,15 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           >
             <th
               aria-sort="none"
-              class="emotion-5"
+              class="emotion-6 emotion-7"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-6"
+                class="emotion-8"
               >
                 <span
-                  class="emotion-7"
+                  class="emotion-9"
                 >
                   name
                 </span>
@@ -757,15 +755,15 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </th>
             <th
               aria-sort="none"
-              class="emotion-5"
+              class="emotion-6 emotion-7"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-6"
+                class="emotion-8"
               >
                 <span
-                  class="emotion-7"
+                  class="emotion-9"
                 >
                   quantity
                 </span>
@@ -773,15 +771,15 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </th>
             <th
               aria-sort="none"
-              class="emotion-5"
+              class="emotion-6 emotion-7"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-6"
+                class="emotion-8"
               >
                 <span
-                  class="emotion-7"
+                  class="emotion-9"
                 >
                   size
                 </span>
@@ -789,15 +787,15 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </th>
             <th
               aria-sort="none"
-              class="emotion-5"
+              class="emotion-6 emotion-7"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-6"
+                class="emotion-8"
               >
                 <span
-                  class="emotion-7"
+                  class="emotion-9"
                 >
                   status
                 </span>
@@ -805,15 +803,15 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </th>
             <th
               aria-sort="none"
-              class="emotion-5"
+              class="emotion-6 emotion-7"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-6"
+                class="emotion-8"
               >
                 <span
-                  class="emotion-7"
+                  class="emotion-9"
                 >
                   tags
                 </span>
@@ -821,15 +819,15 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </th>
             <th
               aria-sort="none"
-              class="emotion-5"
+              class="emotion-6 emotion-7"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-6"
+                class="emotion-8"
               >
                 <span
-                  class="emotion-7"
+                  class="emotion-9"
                 >
                   rating
                 </span>
@@ -840,16 +838,16 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tbody>
           <tr
             aria-disabled="false"
-            class="emotion-23"
+            class="emotion-30"
             role="row"
           >
             <th
-              class="emotion-24"
+              class="emotion-31 emotion-32"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -858,10 +856,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </th>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -870,10 +868,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -882,10 +880,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -894,10 +892,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -906,10 +904,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -920,16 +918,16 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-23"
+            class="emotion-30"
             role="row"
           >
             <th
-              class="emotion-24"
+              class="emotion-31 emotion-32"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -938,10 +936,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </th>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -950,10 +948,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -962,10 +960,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -974,10 +972,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -986,10 +984,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1000,16 +998,16 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-23"
+            class="emotion-30"
             role="row"
           >
             <th
-              class="emotion-24"
+              class="emotion-31 emotion-32"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1018,10 +1016,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </th>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1030,10 +1028,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1042,10 +1040,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1054,10 +1052,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1066,10 +1064,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1080,16 +1078,16 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-23"
+            class="emotion-30"
             role="row"
           >
             <th
-              class="emotion-24"
+              class="emotion-31 emotion-32"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1098,10 +1096,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </th>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1110,10 +1108,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1122,10 +1120,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1134,10 +1132,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1146,10 +1144,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1160,16 +1158,16 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-23"
+            class="emotion-30"
             role="row"
           >
             <th
-              class="emotion-24"
+              class="emotion-31 emotion-32"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1178,10 +1176,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </th>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1190,10 +1188,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1202,10 +1200,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1214,10 +1212,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
@@ -1226,10 +1224,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               </div>
             </td>
             <td
-              class="emotion-26"
+              class="emotion-34 emotion-35"
             >
               <div
-                class="emotion-25"
+                class="emotion-33"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span>
