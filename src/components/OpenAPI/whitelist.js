@@ -1,7 +1,7 @@
 import React from 'react';
 import Callout from '@leafygreen-ui/callout';
 
-const HOST_WHITELIST = ['mongodb-mms-build-server.s3.amazonaws.com, raw.githubusercontent.com'];
+const HOST_WHITELIST = ['mongodb-mms-build-server.s3.amazonaws.com', 'raw.githubusercontent.com'];
 export const isLinkInWhitelist = (link) => HOST_WHITELIST.includes(new URL(link).hostname);
 
 export const WhitelistErrorCallout = (props) => {

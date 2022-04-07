@@ -94,7 +94,7 @@ describe('OpenAPI', () => {
     global.window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {
-        search: `?src=https://this_is_a_test_url.com`,
+        search: `?src=https://raw.githubusercontent.com`,
       },
       writable: true,
     });
@@ -103,6 +103,6 @@ describe('OpenAPI', () => {
       nodeValue: mockNodeValue,
     });
 
-    expect(wrapper.getByText('this_is_a_test_url')).toBeTruthy();
+    expect(wrapper.getByText('https://raw.githubusercontent.com')).toBeTruthy();
   });
 });
