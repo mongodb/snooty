@@ -2,14 +2,20 @@
 
 exports[`List renders correctly 1`] = `
 <DocumentFragment>
-  <ol
+  .emotion-0 {
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+<ol
     start="2"
     type="a"
   >
     <li>
       In , click 
       <span
-        class="guilabel"
+        class="guilabel emotion-0"
       >
         Charts
       </span>
@@ -19,7 +25,7 @@ exports[`List renders correctly 1`] = `
       If this is the first time you are launching , click
 
       <span
-        class="guilabel"
+        class="guilabel emotion-0"
       >
         Activate MongoDB Charts
       </span>
