@@ -2,34 +2,68 @@
 
 exports[`renders a page with next and previous links correctly 1`] = `
 <DocumentFragment>
-  <div
-    id="btnv"
+  .emotion-0 {
+  padding-top: 2em;
+  padding-bottom: 2.5em;
+  display: table;
+  width: 100%;
+}
+
+@media print {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.emotion-2 {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.emotion-3 {
+  display: inline-block;
+  width: 270px;
+}
+
+<div
+    class="emotion-0"
   >
     <span
-      class="btn-arrow-left"
+      class="emotion-1"
     >
       ←  
     </span>
     <a
-      class="btn-prev-text"
+      class="emotion-2"
       href="/drivers/csharp/"
       title="Previous Section"
     >
-      <span>
+      <span
+        class="emotion-3"
+      >
         MongoDB C#/.NET Driver
       </span>
     </a>
     <a
-      class="btn-next-text"
+      class="emotion-1"
       href="/drivers/java/"
       title="Next Section"
     >
-      <span>
+      <span
+        class="emotion-3"
+      >
         Java MongoDB Driver
       </span>
     </a>
     <span
-      class="btn-arrow-right"
+      class="emotion-2"
     >
        →
     </span>
@@ -39,20 +73,52 @@ exports[`renders a page with next and previous links correctly 1`] = `
 
 exports[`renders a page with no next link correctly 1`] = `
 <DocumentFragment>
-  <div
-    id="btnv"
+  .emotion-0 {
+  padding-top: 2em;
+  padding-bottom: 2.5em;
+  display: table;
+  width: 100%;
+}
+
+@media print {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.emotion-2 {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.emotion-3 {
+  display: inline-block;
+  width: 270px;
+}
+
+<div
+    class="emotion-0"
   >
     <span
-      class="btn-arrow-left"
+      class="emotion-1"
     >
       ←  
     </span>
     <a
-      class="btn-prev-text"
+      class="emotion-2"
       href="/drivers/go/"
       title="Previous Section"
     >
-      <span>
+      <span
+        class="emotion-3"
+      >
         MongoDB Go Driver
       </span>
     </a>
@@ -62,20 +128,52 @@ exports[`renders a page with no next link correctly 1`] = `
 
 exports[`renders a page with no previous link correctly 1`] = `
 <DocumentFragment>
-  <div
-    id="btnv"
+  .emotion-0 {
+  padding-top: 2em;
+  padding-bottom: 2.5em;
+  display: table;
+  width: 100%;
+}
+
+@media print {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.emotion-2 {
+  display: inline-block;
+  width: 270px;
+}
+
+.emotion-3 {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+}
+
+<div
+    class="emotion-0"
   >
     <a
-      class="btn-next-text"
+      class="emotion-1"
       href="/drivers/go/"
       title="Next Section"
     >
-      <span>
+      <span
+        class="emotion-2"
+      >
         MongoDB Go Driver
       </span>
     </a>
     <span
-      class="btn-arrow-right"
+      class="emotion-3"
     >
        →
     </span>
