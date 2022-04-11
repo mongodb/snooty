@@ -8,6 +8,7 @@ import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
 import queryString from 'query-string';
 import MobileFilters from './MobileFilters';
+import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -205,6 +206,7 @@ const MobileSearchButtonWrapper = styled('div')`
 
 const SearchResults = () => {
   const { search } = useLocation();
+  const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
   const [searchFilter, setSearchFilter] = useState(null);
@@ -319,7 +321,7 @@ const SearchResults = () => {
             <FilterHeader>{specifySearchText}</FilterHeader>
             <StyledSearchFilters hasSideLabels={false} />
           </FiltersContainer>
-          {showMobileFilters && <MobileFilters />}
+          {showMobileFilters && isTabletOrMobile && <MobileFilters />}
         </SearchResultsContainer>
       ) : (
         <EmptyResultsContainer>
