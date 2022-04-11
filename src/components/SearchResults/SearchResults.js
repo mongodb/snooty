@@ -226,7 +226,7 @@ const SearchResults = () => {
   let mobileFilterButton = {
     glyph: 'X',
     onClick: resetFilters,
-    text: 'Clear filters',
+    text: 'Clear all filters',
   };
   if (!searchFilter) {
     mobileFilterButton = {
