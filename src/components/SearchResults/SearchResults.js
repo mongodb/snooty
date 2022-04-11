@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation } from '@reach/router';
-import Badge from '@leafygreen-ui/badge';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -18,6 +17,7 @@ import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import transformUrlBasedOnOrigin from '../../utils/transform-url-based-on-origin';
+import Tag from '../Tag';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_COLUMN_WIDTH = '173px';
@@ -187,9 +187,10 @@ const FilterBadgesWrapper = styled('div')`
   margin-top: ${theme.size.small};
 `;
 
-const StyledBadge = styled(Badge)`
+const StyledTag = styled(Tag)`
   cursor: pointer;
   height: 26px;
+  font-size: ${theme.fontSize.small};
   margin-right: ${theme.size.small};
 `;
 
@@ -286,12 +287,12 @@ const SearchResults = () => {
             {!!searchFilter && (
               <FilterBadgesWrapper>
                 {selectedProduct && (
-                  <StyledBadge variant="green" onClick={resetFilters}>
+                  <StyledTag variant="green" onClick={resetFilters}>
                     {selectedProduct}
                     <Icon glyph="X" />
-                  </StyledBadge>
+                  </StyledTag>
                 )}
-                {selectedBranch && <StyledBadge variant="blue">{selectedBranch}</StyledBadge>}
+                {selectedBranch && <StyledTag variant="blue">{selectedBranch}</StyledTag>}
               </FilterBadgesWrapper>
             )}
             <MobileSearchButtonWrapper>
