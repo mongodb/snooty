@@ -3,7 +3,7 @@ import React from 'react';
 import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { tick } from '../utils';
+import { tick, setMobile } from '../utils';
 import transformUrlBasedOnOrigin from '../../src/utils/transform-url-based-on-origin';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@reach/router';
@@ -166,6 +166,7 @@ describe('Search Results Page', () => {
 
   it('specifies search filters through mobile', async () => {
     let renderStitchResults;
+    setMobile();
     mockLocation('?q=stitch');
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
@@ -204,6 +205,7 @@ describe('Search Results Page', () => {
 
   it('cancels search filter application on mobile', async () => {
     let renderStitchResults;
+    setMobile();
     mockLocation('?q=stitch');
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
