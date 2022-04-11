@@ -1,6 +1,6 @@
 // Tests for the search results page
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { tick } from '../utils';
@@ -12,9 +12,11 @@ import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/moc
 
 // Check the search results include the property-filtered results
 const expectFilteredResults = (wrapper) => {
-  wrapper.getByText('Realm results for "stitch"');
+  wrapper.getByText('Search results for "stitch"');
 
-  expect(wrapper.queryAllByText('Realm').length).toBe(1);
+  // Filtered property "Realm" should be shown twice:
+  // (1) as the selected text in the dropdown and (2) as a badge below the search header
+  expect(wrapper.queryAllByText('Realm').length).toBe(2);
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();
@@ -23,20 +25,21 @@ const expectFilteredResults = (wrapper) => {
 
   // Check the result does link to the provided doc
   expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
-  expect(wrapper.queryAllByText('Realm results for "stitch"').length).toBe(1);
+  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
 
   // Check the dropdowns are filled in
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
 };
 
 const expectValuesForFilters = (wrapper, product, branch) => {
-  expect(wrapper.queryByText(product)).toBeTruthy();
-  expect(wrapper.queryByText(branch)).toBeTruthy();
+  const dropdowns = wrapper.queryAllByRole('listbox');
+  expect(within(dropdowns[0]).queryByText(product)).toBeTruthy();
+  expect(within(dropdowns[1]).queryByText(branch)).toBeTruthy();
 };
 
 // Check the search results match the expected unfiltered results
 const expectUnfilteredResults = (wrapper) => {
-  wrapper.getByText(`All search results for "stitch"`);
+  wrapper.getByText(`Search results for "stitch"`);
 
   expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
 
@@ -50,7 +53,9 @@ const expectUnfilteredResults = (wrapper) => {
     'href',
     `http://localhost/${UNFILTERED_RESULT.url}`
   );
-  expect(wrapper.queryAllByText('Realm results for "stitch"').length).toBe(0);
+
+  // We always show this text, regardless of filter
+  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
 
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Select a Product', 'Select a Version');
@@ -109,7 +114,7 @@ describe('Search Results Page', () => {
       expect(dropdown).toHaveAttribute('aria-expanded', 'false');
       userEvent.click(dropdown);
       tick();
-      userEvent.click(renderStitchResults.getByText('Realm'));
+      userEvent.click(within(dropdown).getByText('Realm'));
     });
     expectFilteredResults(renderStitchResults);
   });
