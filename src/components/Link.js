@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link as GatsbyLink } from 'gatsby';
+import { Link as GatsbyLink, withPrefix } from 'gatsby';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { cx, css } from '@leafygreen-ui/emotion';
 
@@ -33,7 +33,10 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
         {children}
       </GatsbyLink>
     );
-  } else if (!anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/))) {
+  } else if (
+    !anchor &&
+    !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/) || to.includes(withPrefix('/')))
+  ) {
     return (
       <LGLink className={cx(LGlinkStyling)} href={to}>
         {children}

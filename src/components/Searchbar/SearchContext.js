@@ -5,7 +5,12 @@ const SearchContext = createContext({
   searchContainerRef: null,
   searchFilter: null,
   searchTerm: '',
+  selectedBranch: null,
+  selectedProduct: null,
   setSearchFilter: null,
+  setSelectedBranch: () => {},
+  setSelectedProduct: () => {},
+  setShowMobileFilters: () => {},
   shouldAutofocus: false,
 });
 

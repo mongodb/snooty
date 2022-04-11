@@ -1,5 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
+import Button from '@leafygreen-ui/button';
+import XIcon from '@leafygreen-ui/icon/dist/X';
 import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
 import { getSortedBranchesForProperty, parseMarianManifest } from '../../utils/parse-marian-manifests';
@@ -19,18 +21,26 @@ const SelectWrapper = styled('div')`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  :first-of-type {
-    margin-bottom: ${theme.size.medium};
-  }
+  margin-bottom: ${theme.size.default};
 `;
 
 const MaxWidthSelect = styled(Select)`
   width: ${FILTER_WIDTH};
 `;
 
-const SearchFilters = ({ hasSideLabels, ...props }) => {
+const SearchFilters = ({ hasSideLabels, manuallyApplyFilters = false, onApplyFilters, ...props }) => {
   const { filters } = useMarianManifests();
-  const { searchFilter, setSearchFilter } = useContext(SearchContext);
+  const {
+    searchFilter,
+    setSearchFilter,
+    selectedBranch,
+    selectedProduct,
+    setSelectedBranch,
+    setSelectedProduct,
+  } = useContext(SearchContext);
+
+  // Current product and branch for dropdown. If manuallyApplyFilter === true, selectedProduct + selectedBranch
+  // will not be set automatically.
   const [productChoices, setProductChoices] = useState([]);
   const [product, setProduct] = useState(null);
   const [branchChoices, setBranchChoices] = useState([]);
@@ -52,8 +62,8 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
   );
 
   const onBranchChange = useCallback(({ value }) => {
-    setBranch(value);
-  }, []);
+    setSelectedBranch(value);
+  }, [setSelectedBranch]);
 
   const onProductChange = useCallback(
     ({ value }) => {
@@ -62,6 +72,31 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
     },
     [updateBranchChoices]
   );
+
+  const applyFilters = useCallback(() => {
+    setSelectedProduct(product);
+    setSelectedBranch(branch);
+
+    if (onApplyFilters) {
+      onApplyFilters();
+    }
+  }, [branch, onApplyFilters, product, setSelectedBranch, setSelectedProduct]);
+
+  const resetFilters = useCallback(() => {
+    setSearchFilter(null);
+    setProduct(null);
+    setBranch(null);
+    setSelectedProduct(null);
+    setSelectedBranch(null);
+  }, [setSearchFilter, setSelectedBranch, setSelectedProduct]);
+
+  // Update selected branch and product automatically, if we're not manually applying filters
+  useEffect(() => {
+    if (!manuallyApplyFilters) {
+      setSelectedBranch(branch);
+      setSelectedProduct(product);
+    }
+  }, [branch, manuallyApplyFilters, product, setSelectedBranch, setSelectedProduct]);
 
   // Update filters to match an existing filter should it exist
   useEffect(() => {
@@ -85,10 +120,10 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
 
   // Update search filter once a property and branch are chosen
   useEffect(() => {
-    if (filters && product && filters[product] && branch) {
-      setSearchFilter(filters[product][branch]);
+    if (filters && selectedProduct && filters[selectedProduct] && selectedBranch && !manuallyApplyFilters) {
+      setSearchFilter(filters[selectedProduct][selectedBranch]);
     }
-  }, [branch, filters, product, setSearchFilter]);
+  }, [filters, manuallyApplyFilters, selectedBranch, selectedProduct, setSearchFilter]);
 
   return (
     <div {...props}>
@@ -112,6 +147,13 @@ const SearchFilters = ({ hasSideLabels, ...props }) => {
           value={branch}
         />
       </SelectWrapper>
+      {manuallyApplyFilters ? (
+        <Button onClick={applyFilters}>Apply filters</Button>
+      ) : (
+        <Button leftGlyph={<XIcon />} onClick={resetFilters}>
+          Clear all filters
+        </Button>
+      )}
     </div>
   );
 };
