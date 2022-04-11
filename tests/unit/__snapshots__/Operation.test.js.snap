@@ -47,6 +47,7 @@ exports[`when no summary is present renders correctly  1`] = `
 }
 
 .emotion-4 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -55,18 +56,19 @@ exports[`when no summary is present renders correctly  1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 20px;
-  border-radius: 50px;
-  height: 20px;
-  padding-left: 9px;
-  padding-right: 9px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
   text-transform: uppercase;
   border: 1px solid;
-  background-color: #E1F2F6;
-  border-color: #C5E4F2;
-  color: #1A567E;
+  letter-spacing: 1px;
+  background-color: #E1F7FF;
+  border-color: #C3E7FE;
+  color: #1254B7;
 }
 
 .emotion-5 {
@@ -346,6 +348,7 @@ exports[`when no summary or description is present renders correctly  1`] = `
 }
 
 .emotion-4 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -354,18 +357,19 @@ exports[`when no summary or description is present renders correctly  1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 20px;
-  border-radius: 50px;
-  height: 20px;
-  padding-left: 9px;
-  padding-right: 9px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
   text-transform: uppercase;
   border: 1px solid;
-  background-color: #E4F4E4;
-  border-color: #C3E7CA;
-  color: #116149;
+  letter-spacing: 1px;
+  background-color: #E3FCF7;
+  border-color: #C0FAE6;
+  color: #00684A;
 }
 
 .emotion-5 {
@@ -619,6 +623,7 @@ exports[`when rendering all fields renders correctly  1`] = `
 }
 
 .emotion-4 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -627,18 +632,19 @@ exports[`when rendering all fields renders correctly  1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 20px;
-  border-radius: 50px;
-  height: 20px;
-  padding-left: 9px;
-  padding-right: 9px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
   text-transform: uppercase;
   border: 1px solid;
-  background-color: #E1F2F6;
-  border-color: #C5E4F2;
-  color: #1A567E;
+  letter-spacing: 1px;
+  background-color: #E1F7FF;
+  border-color: #C3E7FE;
+  color: #1254B7;
 }
 
 .emotion-5 {
