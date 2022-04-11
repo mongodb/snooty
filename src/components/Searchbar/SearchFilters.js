@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
-import XIcon from '@leafygreen-ui/icon/dist/X';
+import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
 import { getSortedBranchesForProperty, parseMarianManifest } from '../../utils/parse-marian-manifests';
@@ -153,7 +153,7 @@ const SearchFilters = ({ hasSideLabels, manuallyApplyFilters = false, onApplyFil
       {manuallyApplyFilters ? (
         <Button onClick={applyFilters}>Apply filters</Button>
       ) : (
-        <Button leftGlyph={<XIcon />} onClick={resetFilters}>
+        <Button leftGlyph={<Icon glyph="X" />} onClick={resetFilters}>
           Clear all filters
         </Button>
       )}
