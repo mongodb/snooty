@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState, useContext } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Link from './Link';
 import Searchbar from './Searchbar';
-import { SidenavContext, SidenavMobileMenuButton } from './Sidenav';
 import DocsLogo from './SVGs/DocsLogo';
 import { DOCS_URL } from '../constants';
 import useMedia from '../hooks/use-media';
@@ -40,7 +39,6 @@ const Navbar = () => {
   // We want to expand the searchbar on default when it won't collide with any other nav elements
   // Specifically, the upper limit works around the Get MongoDB link
   const isSearchbarDefaultExpanded = useMedia('not all and (max-width: 670px)');
-  const { isSidenavEnabled } = useContext(SidenavContext);
   const [isSearchbarExpanded, setIsSearchbarExpanded] = useState(isSearchbarDefaultExpanded);
   const [isTransparent, setIsTransparent] = useState(false);
 
@@ -64,7 +62,6 @@ const Navbar = () => {
 
   return (
     <NavbarContainer tabIndex="0" isTransparent={isTransparent}>
-      {isSidenavEnabled && <SidenavMobileMenuButton />}
       <NavbarLeft isTransparent={isTransparent}>
         <Link to={`${DOCS_URL}/`}>
           <DocsLogo />

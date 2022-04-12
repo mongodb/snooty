@@ -93,11 +93,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
     <>
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <RootProvider
-        headingNodes={page?.options?.headings}
-        isSidenavEnabled={sidenav}
-        selectors={page?.options?.selectors}
-      >
+      <RootProvider headingNodes={page?.options?.headings} selectors={page?.options?.selectors}>
         <GlobalGrid>
           <Header sidenav={sidenav} eol={eol} />
           {sidenav && (
