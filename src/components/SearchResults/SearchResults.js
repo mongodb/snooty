@@ -282,7 +282,7 @@ const SearchResults = () => {
       <Helmet>
         <title>Search Results</title>
       </Helmet>
-      {searchResults && searchResults.length ? (
+      {!!searchTerm ? (
         <SearchResultsContainer>
           <HeaderContainer>
             <HeaderText>Search results for "{searchTerm}"</HeaderText>
@@ -303,20 +303,31 @@ const SearchResults = () => {
               </Button>
             </MobileSearchButtonWrapper>
           </HeaderContainer>
-          <StyledSearchResults>
-            {searchResults.map(({ title, preview, url }, index) => (
-              <StyledSearchResult
-                key={`${url}${index}`}
-                onClick={() =>
-                  reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
-                }
-                title={title}
-                preview={preview}
-                url={transformUrlBasedOnOrigin(url)}
-                useLargeTitle
-              />
-            ))}
-          </StyledSearchResults>
+          {searchResults?.length ? (
+            <StyledSearchResults>
+              {searchResults.map(({ title, preview, url }, index) => (
+                <StyledSearchResult
+                  key={`${url}${index}`}
+                  onClick={() =>
+                    reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                  }
+                  title={title}
+                  preview={preview}
+                  url={transformUrlBasedOnOrigin(url)}
+                  useLargeTitle
+                />
+              ))}
+            </StyledSearchResults>
+          ) : (
+            <EmptyResultsContainer
+              css={css`
+                grid-area: results;
+                margin-top: 80px;
+              `}
+            >
+              <EmptyResults />
+            </EmptyResultsContainer>
+          )}
           <FiltersContainer>
             <FilterHeader>{specifySearchText}</FilterHeader>
             <StyledSearchFilters hasSideLabels={false} />
