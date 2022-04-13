@@ -14,7 +14,7 @@ const PaddedDocsLogo = styled(DocsLogo)`
 const SidenavDocsLogo = ({ border, ...props }) => {
   return (
     <>
-      <Link to={`${DOCS_URL}/`}>
+      <Link to={DOCS_URL}>
         <PaddedDocsLogo height={20} width={184} {...props} />
       </Link>
       {border}
