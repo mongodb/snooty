@@ -25,5 +25,5 @@ export const REF_TARGETS = Object.fromEntries(
   })
 );
 
-export const DOCS_URL = 'https://mongodb.com/docs/';
+export const DOCS_URL = 'https://www.mongodb.com/docs/';
 export const MARIAN_URL = 'https://docs-search-transport.mongodb.com/';
