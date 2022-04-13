@@ -265,8 +265,11 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   const { database } = useSiteMetadata();
   const [realmSpec, setRealmSpec] = useState(null);
   const topValues = useStickyTopValues();
-  let specUrl, spec, urlParams;
   const [isLoading, setIsLoading] = useState(true);
+  const [hasValidSpecUrl, setHasValidSpecUrl] = useState(true);
+  const [src, setSrc] = useState(null);
+  const urlParams = isBrowser ? new URLSearchParams(window.location.search) : null;
+  let specUrl, spec;
 
   // Attempt to fetch a spec from Realm
   useEffect(() => {
@@ -277,6 +280,11 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
         .catch((e) => console.error(e));
     }
   }, [argument, database, usesRealm]);
+
+  useEffect(() => {
+    setSrc(urlParams?.get('src'));
+    setHasValidSpecUrl(!!src && isLinkInWhitelist(src));
+  }, [src, urlParams]);
 
   // Use snooty openapi components, such as for docs-realm
   if (usesRST) {
@@ -289,24 +297,19 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
     );
   }
 
-  if (isBrowser) urlParams = new URLSearchParams(window.location.search);
-  const src = urlParams?.get('src');
-  const hasValidSpecUrl = !!src && isLinkInWhitelist(src);
-  specUrl = src;
-
   spec = usesRealm ? realmSpec : JSON.parse(children[0]?.value || '{}');
-  spec = !specUrl ? spec : null;
+  spec = !src ? spec : null;
 
   // Create our loading widget
   const tempLoadingDivClassName = 'openapi-loading-container';
-  const needsWhitelistWarning = specUrl && !hasValidSpecUrl;
+  const needsWhitelistWarning = src && !hasValidSpecUrl;
   return (
     <>
       <Global styles={getGlobalCss(topValues)} />
       {needsWhitelistWarning && <JustifiedWhitelistWarning />}
       {/* Temporary loading widget to be removed once the Redoc component loads */}
       {isLoading && !needsWhitelistWarning && <LoadingWidget className={tempLoadingDivClassName} />}
-      {((specUrl && hasValidSpecUrl) || spec) && (
+      {((src && hasValidSpecUrl) || spec) && (
         <RedocStandalone
           onLoaded={() => {
             setIsLoading(false);
@@ -413,7 +416,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
             untrustedDefinition: !!specUrl,
           }}
           spec={spec}
-          specUrl={specUrl}
+          specUrl={src}
         />
       )}
     </>
