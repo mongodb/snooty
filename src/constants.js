@@ -1,4 +1,4 @@
-import { baseUrl, dotcomifyUrl, isDotCom } from './utils/dotcom';
+import { dotcomifyUrl, isDotCom } from './utils/dotcom';
 
 // hardcoded for now because this target lookup will be complex
 // as it relies on other sites (e.g. manual) cc. Andrew
@@ -25,5 +25,5 @@ export const REF_TARGETS = Object.fromEntries(
   })
 );
 
-export const DOCS_URL = baseUrl(true);
-export const MARIAN_URL = 'https://docs-search-transport.mongodb.com';
+export const DOCS_URL = 'https://www.mongodb.com/docs/';
+export const MARIAN_URL = 'https://docs-search-transport.mongodb.com/';

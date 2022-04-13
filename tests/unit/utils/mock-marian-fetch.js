@@ -17,7 +17,7 @@ export const UNFILTERED_RESULT = {
 export const mockMarianFetch = (url) => {
   let endpoint = url;
   if (endpoint.includes(MARIAN_URL)) {
-    endpoint = endpoint.split(`${MARIAN_URL}/`)[1];
+    endpoint = endpoint.split(`${MARIAN_URL}`)[1];
   }
   switch (endpoint) {
     case 'status':
