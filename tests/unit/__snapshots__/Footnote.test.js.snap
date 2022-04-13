@@ -2,34 +2,54 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  <table
-    class="docutils footnote"
+  .emotion-0 {
+  border: 0;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.emotion-0 tbody tr td div.highlight pre {
+  background-color: inherit;
+}
+
+.emotion-0:target {
+  background-color: #ffa;
+}
+
+.emotion-1 {
+  border: 0;
+  padding: 11px 5px 12px;
+}
+
+<table
+    class="emotion-0"
     frame="void"
     id="footnote-1"
     rules="none"
   >
     <colgroup>
-      <col
-        class="label"
-      />
+      <col />
     </colgroup>
     <tbody
       valign="top"
     >
       <tr>
         <td
-          class="label"
+          class="emotion-1"
         >
           [
           <a
-            class="fn-backref"
             href="#ref-1-id1"
           >
             1
           </a>
           ]
         </td>
-        <td>
+        <td
+          class="emotion-1"
+        >
            Numerical footnote.
         </td>
       </tr>
