@@ -114,7 +114,7 @@ SidenavBackButton.propTypes = {
   project: PropTypes.string,
   target: PropTypes.string,
   titleOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
-  eol: PropTypes.bool.isRequired,
+  eol: PropTypes.bool,
 };
 
 export default SidenavBackButton;
