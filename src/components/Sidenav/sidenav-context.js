@@ -3,13 +3,12 @@ import useScreenSize from '../../hooks/useScreenSize';
 
 const SidenavContext = createContext({
   hideMobile: true,
-  isSideNavEnabled: true,
   isCollapsed: true,
   setCollapsed: () => {},
   setHideMobile: () => {},
 });
 
-const SidenavContextProvider = ({ children, isSidenavEnabled = true }) => {
+const SidenavContextProvider = ({ children }) => {
   const { isTablet } = useScreenSize();
   const [isCollapsed, setCollapsed] = useState(isTablet);
   // Hide the Sidenav with css while keeping state as open/not collapsed.
@@ -20,7 +19,6 @@ const SidenavContextProvider = ({ children, isSidenavEnabled = true }) => {
     <SidenavContext.Provider
       value={{
         hideMobile,
-        isSidenavEnabled,
         isCollapsed,
         setCollapsed,
         setHideMobile,
