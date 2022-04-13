@@ -79,7 +79,7 @@ const FilterHeader = styled('h2')`
 const SearchResultsContainer = styled('div')`
   column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
-  grid-template-areas: 'header filter-header' 'results filters';
+  grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
   margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
   max-width: 1150px;

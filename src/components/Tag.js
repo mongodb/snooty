@@ -36,7 +36,7 @@ const Tag = ({ children, variant, ...rest }) => {
 };
 
 Tag.propTypes = {
-  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Tag;

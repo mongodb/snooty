@@ -61,12 +61,9 @@ const SearchFilters = ({ hasSideLabels, manuallyApplyFilters = false, onApplyFil
     [filters]
   );
 
-  const onBranchChange = useCallback(
-    ({ value }) => {
-      setBranch(value);
-    },
-    [setBranch]
-  );
+  const onBranchChange = useCallback(({ value }) => {
+    setBranch(value);
+  }, []);
 
   const onProductChange = useCallback(
     ({ value }) => {
