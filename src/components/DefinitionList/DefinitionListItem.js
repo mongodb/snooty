@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import ComponentFactory from './ComponentFactory';
-import { findKeyValuePair } from '../utils/find-key-value-pair';
+import ComponentFactory from '../ComponentFactory';
+import { findKeyValuePair } from '../../utils/find-key-value-pair';
 
 const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
   const termProps = {};
