@@ -6,7 +6,7 @@ import Contents from '../components/Contents/Contents';
 import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
-import TabSelectors from '../components/TabSelectors';
+import TabSelectors from '../components/Tabs/TabSelectors';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
 import useSnootyMetadata from '../utils/use-snooty-metadata';

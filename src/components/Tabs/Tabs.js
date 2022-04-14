@@ -2,13 +2,13 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
-import { CodeProvider } from './code-context';
-import ComponentFactory from './ComponentFactory';
 import { TabContext } from './tab-context';
-import { theme } from '../theme/docsTheme';
-import { reportAnalytics } from '../utils/report-analytics';
-import { getNestedValue } from '../utils/get-nested-value';
-import { isBrowser } from '../utils/is-browser';
+import { CodeProvider } from '../code-context';
+import ComponentFactory from '../ComponentFactory';
+import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { getNestedValue } from '../../utils/get-nested-value';
+import { isBrowser } from '../../utils/is-browser';
 
 const getTabId = (node) => getNestedValue(['options', 'tabid'], node);
 

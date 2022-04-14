@@ -62,7 +62,7 @@ import Strong from './Strong';
 import Subscript from './Subscript';
 import SubstitutionReference from './SubstitutionReference';
 import Superscript from './Superscript';
-import Tabs from './Tabs';
+import Tabs from './Tabs/Tabs';
 import Target from './Target';
 import Text from './Text';
 import Time from './Time';

@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { Language } from '@leafygreen-ui/code';
 import LeafyIcon from '@leafygreen-ui/icon';
-import { TabContext } from './tab-context';
+import { TabContext } from './Tabs/tab-context';
 import { getPlaintext } from '../utils/get-plaintext';
 
 const defaultContextValue = {

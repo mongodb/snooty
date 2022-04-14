@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { HeaderContextProvider } from './header-context';
 import { NavigationProvider } from './navigation-context';
 import { SidenavContextProvider } from './Sidenav';
-import { TabProvider } from './tab-context';
+import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 
 const RootProvider = ({ children, headingNodes, selectors }) => (

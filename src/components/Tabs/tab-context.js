@@ -1,19 +1,19 @@
 import React, { useEffect, useReducer } from 'react';
-import IconC from './icons/C';
-import IconCompass from './icons/Compass';
-import IconCpp from './icons/Cpp';
-import IconCsharp from './icons/Csharp';
-import IconGo from './icons/Go';
-import IconJava from './icons/Java';
-import IconNode from './icons/Node';
-import IconPHP from './icons/Php';
-import IconPython from './icons/Python';
-import IconRuby from './icons/Ruby';
-import IconRust from './icons/Rust';
-import IconScala from './icons/Scala';
-import IconShell from './icons/Shell';
-import IconSwift from './icons/Swift';
-import { getLocalValue, setLocalValue } from '../utils/browser-storage';
+import IconC from '../icons/C';
+import IconCompass from '../icons/Compass';
+import IconCpp from '../icons/Cpp';
+import IconCsharp from '../icons/Csharp';
+import IconGo from '../icons/Go';
+import IconJava from '../icons/Java';
+import IconNode from '../icons/Node';
+import IconPHP from '../icons/Php';
+import IconPython from '../icons/Python';
+import IconRuby from '../icons/Ruby';
+import IconRust from '../icons/Rust';
+import IconScala from '../icons/Scala';
+import IconShell from '../icons/Shell';
+import IconSwift from '../icons/Swift';
+import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 
 const DRIVER_ICON_MAP = {
   c: IconC,
