@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 
 const ListItem = ({ nodeData, ...rest }) => (
   <li>
