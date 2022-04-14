@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
-import Breadcrumbs from '../../src/components/Breadcrumbs';
+import Breadcrumbs from '../../src/components/Breadcrumbs/index';
 
 import mockData from './data/Breadcrumbs.test.json';
 

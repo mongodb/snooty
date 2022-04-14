@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
-import Breadcrumbs from '../components/Breadcrumbs';
+import Breadcrumbs from '../components/Breadcrumbs/index';
 import MainColumn from '../components/MainColumn';
 
 const DocumentContainer = styled('div')`

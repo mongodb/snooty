@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import BreadcrumbContainer from '../../src/components/BreadcrumbContainer';
+import BreadcrumbContainer from '../../src/components/Breadcrumbs/BreadcrumbContainer';
 import { NavigationContext } from '../../src/components/navigation-context';
 
 const mountBreadcrumbContainer = (homeCrumb, lastCrumb, parents) => {
@@ -14,7 +14,7 @@ const mountBreadcrumbContainer = (homeCrumb, lastCrumb, parents) => {
 describe('BreadcrumbContainer', () => {
   const mockHomeCrumb = {
     title: 'Docs Home',
-    url: 'https://docs.mongodb.com/',
+    url: 'https://www.mongodb.com/docs/',
   };
 
   it('renders correctly with project parent', () => {
@@ -26,7 +26,7 @@ describe('BreadcrumbContainer', () => {
     const mockParents = [
       {
         title: 'View & Analyze',
-        url: 'https://docs.mongodb.com/view-analyze',
+        url: 'https://www.mongodb.com/docs/view-analyze',
       },
     ];
 
