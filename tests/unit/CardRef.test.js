@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import CardGroup from '../../src/components/CardGroup';
+import CardGroup from '../../src/components/Card/CardGroup';
 import { theme } from '../../src/theme/docsTheme';
 
 // data for this component

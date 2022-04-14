@@ -2,8 +2,8 @@ import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
-import { theme } from '../theme/docsTheme';
+import ComponentFactory from '../ComponentFactory';
+import { theme } from '../../theme/docsTheme';
 
 const getColumnValue = (props) => props.columns || React.Children.count(props.children);
 

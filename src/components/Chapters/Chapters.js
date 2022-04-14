@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
-import CardGroup from '../CardGroup';
+import CardGroup from '../Card/CardGroup';
 import BookIcon from '../icons/Book';
 import { theme } from '../../theme/docsTheme';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
