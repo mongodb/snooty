@@ -1,6 +1,6 @@
 import React from 'react';
-import useActiveHeading from '../hooks/useActiveHeading';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
+import useActiveHeading from '../../hooks/useActiveHeading';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 
 const defaultContextValue = {
   activeHeadingId: null,

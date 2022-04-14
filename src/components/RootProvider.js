@@ -4,7 +4,7 @@ import { HeaderContextProvider } from './header-context';
 import { NavigationProvider } from './navigation-context';
 import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './tab-context';
-import { ContentsProvider } from './contents-context';
+import { ContentsProvider } from './Contents/contents-context';
 
 const RootProvider = ({ children, headingNodes, selectors }) => (
   <TabProvider selectors={selectors}>

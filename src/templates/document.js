@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs/index';
-import Contents from '../components/Contents';
+import Contents from '../components/Contents/Contents';
 import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
