@@ -211,14 +211,14 @@ const SearchResults = () => {
   const [searchTerm, setSearchTerm] = useState(null);
   const [searchFilter, setSearchFilter] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedBranch, setSelectedBranch] = useState(null);
+  const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const specifySearchText = 'Specify your search';
 
   const resetFilters = useCallback(() => {
     setSelectedProduct(null);
     // Reset branch and search filter since they require a product
-    setSelectedBranch(null);
+    setSelectedVersion(null);
     setSearchFilter(null);
   }, []);
 
@@ -271,10 +271,10 @@ const SearchResults = () => {
       value={{
         searchFilter,
         searchTerm,
-        selectedBranch,
+        selectedVersion,
         selectedProduct,
         setSearchFilter,
-        setSelectedBranch,
+        setSelectedVersion,
         setSelectedProduct,
         setShowMobileFilters,
       }}
@@ -294,7 +294,7 @@ const SearchResults = () => {
                     <Icon glyph="X" />
                   </StyledTag>
                 )}
-                {selectedBranch && <StyledTag variant="blue">{selectedBranch}</StyledTag>}
+                {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
               </FilterBadgesWrapper>
             )}
             <MobileSearchButtonWrapper>
