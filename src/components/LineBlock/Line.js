@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 
 const Line = ({ nodeData: { children }, ...rest }) => {
   if (children.length !== 0) {
