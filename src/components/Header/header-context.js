@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { theme } from '../theme/docsTheme';
+import { theme } from '../../theme/docsTheme';
 
 const HeaderContext = createContext({
   bannerContent: null,

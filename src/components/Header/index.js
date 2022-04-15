@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { isBrowser } from '../utils/is-browser';
 import { UnifiedNav } from '@mdb/consistent-nav';
-import { SidenavMobileMenuDropdown } from './Sidenav';
-import SiteBanner from './Banner/SiteBanner';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { isDotCom, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX } from '../utils/dotcom';
+import { SidenavMobileMenuDropdown } from '../Sidenav';
+import SiteBanner from '../Banner/SiteBanner';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { isDotCom, DOTCOM_BASE_URL, DOTCOM_BASE_PREFIX } from '../../utils/dotcom';
+import { isBrowser } from '../../utils/is-browser';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;

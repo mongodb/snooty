@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HeaderContextProvider } from './header-context';
+import { HeaderContextProvider } from './Header/header-context';
 import { NavigationProvider } from './navigation-context';
 import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
