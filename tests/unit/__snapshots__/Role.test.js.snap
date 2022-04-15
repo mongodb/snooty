@@ -41,8 +41,14 @@ exports[`File correctly renders a "file" role 1`] = `
 
 exports[`GUI Label correctly renders a "guilabel" role 1`] = `
 <DocumentFragment>
-  <span
-    class="guilabel"
+  .emotion-0 {
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+<span
+    class="guilabel emotion-0"
   >
     Yes
   </span>
