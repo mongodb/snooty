@@ -112,7 +112,7 @@ const Card = ({
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
-        {tag && <FlexTag text={tag} />}
+        {tag && <FlexTag>{tag}</FlexTag>}
         <H4 compact={isCompact || isExtraCompact}>{headline}</H4>
         {children.map((child, i) => (
           // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)

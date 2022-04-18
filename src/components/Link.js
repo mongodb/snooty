@@ -35,7 +35,7 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     );
   } else if (!anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/))) {
     return (
-      <LGLink className={cx(LGlinkStyling)} href={to}>
+      <LGLink className={cx(LGlinkStyling)} href={to} {...other}>
         {children}
       </LGLink>
     );
