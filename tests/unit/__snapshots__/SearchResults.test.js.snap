@@ -316,22 +316,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -340,22 +340,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -364,22 +364,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -388,22 +388,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -412,22 +412,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -436,22 +436,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -460,22 +460,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -484,22 +484,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -508,22 +508,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
       <div
@@ -532,22 +532,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <img
           alt=""
           id="item1"
-          src="/assets/topboxmed.svg"
+          src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
           id="item2"
-          src="/assets/topboxlong.svg"
+          src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
           id="item3"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
           id="item4"
-          src="/assets/botboxshort.svg"
+          src="/assets/loadingboxshort.svg"
         />
       </div>
     </div>
