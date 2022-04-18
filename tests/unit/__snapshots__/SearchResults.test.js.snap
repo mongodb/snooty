@@ -137,12 +137,6 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   grid-area: g2;
 }
 
-@media not all and (max-width: 1023px) {
-  .emotion-6>img#item2 {
-    width: 1500px;
-  }
-}
-
 @media not all and (max-width: 767px) {
   .emotion-6>img#item2 {
     width: 500px;
