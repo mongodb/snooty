@@ -13,10 +13,16 @@ import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/moc
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
+<<<<<<< HEAD
 const expectFilteredResults = (wrapper) => {
   // Filtered property "Realm" should be shown twice:
   // (1) as the selected text in the dropdown and (2) as a badge below the search header
   expect(wrapper.queryAllByText('Realm').length).toBe(2);
+=======
+const expectFilteredResults = async (wrapper) => {
+  await tick();
+  wrapper.getByText('Search results for "stitch"');
+>>>>>>> 93e3b7d (add and modify tests)
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();
@@ -38,7 +44,14 @@ const expectValuesForFilters = (wrapper, category, version) => {
 };
 
 // Check the search results match the expected unfiltered results
+<<<<<<< HEAD
 const expectUnfilteredResults = (wrapper) => {
+=======
+const expectUnfilteredResults = async (wrapper) => {
+  await tick();
+  wrapper.getByText(`Search results for "stitch"`);
+
+>>>>>>> 93e3b7d (add and modify tests)
   expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
 
   // Check the search result card displays content according to the response
@@ -51,9 +64,13 @@ const expectUnfilteredResults = (wrapper) => {
     'href',
     `http://localhost/${UNFILTERED_RESULT.url}`
   );
+<<<<<<< HEAD
 
   // We always show this text, regardless of filter
   expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
+=======
+  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(0);
+>>>>>>> 93e3b7d (add and modify tests)
 
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
@@ -109,6 +126,46 @@ describe('Search Results Page', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
+  it('renders no results found correctly if query returns nothing', async () => {
+    let renderStitchResults;
+    mockLocation('?q=thisdoesnotreturnanything');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expect(renderStitchResults.queryAllByText('No results found')).toBeTruthy();
+  });
+
+  it('renders search landing page when no query made', async () => {
+    let renderStitchResults;
+    mockLocation('');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expect(renderStitchResults.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
+  });
+
+  it('renders loading images before returning nonempty results', async () => {
+    let renderStitchResults;
+    mockLocation('?q=mongodb');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+      expect(renderStitchResults.getAllByRole('img')[0]).toHaveAttribute('src', '/assets/loadingboxmed.svg');
+      expect(renderStitchResults.getAllByRole('img')[1]).toHaveAttribute('src', '/assets/loadingboxlong.svg');
+      expect(renderStitchResults.getAllByRole('img')[2]).toHaveAttribute('src', '/assets/loadingboxshort.svg');
+    });
+  });
+
+  it('renders loading images before returning no results', async () => {
+    let renderStitchResults;
+    mockLocation('?q=thisdoesnotreturnanything');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+      expect(renderStitchResults.getAllByRole('img')[0]).toHaveAttribute('src', '/assets/loadingboxmed.svg');
+      expect(renderStitchResults.getAllByRole('img')[1]).toHaveAttribute('src', '/assets/loadingboxlong.svg');
+      expect(renderStitchResults.getAllByRole('img')[2]).toHaveAttribute('src', '/assets/loadingboxshort.svg');
+    });
+  });
+
   it('renders results from a given search term query param', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
@@ -138,6 +195,7 @@ describe('Search Results Page', () => {
     // Change the filters, which should change the shown results
 
     await act(async () => {
+<<<<<<< HEAD
       await filterByRealm(renderStitchResults);
     });
     expectFilteredResults(renderStitchResults);
@@ -192,6 +250,13 @@ describe('Search Results Page', () => {
       const applyFiltersButton = renderStitchResults.getByText('Apply filters').closest('button');
       userEvent.click(applyFiltersButton);
       tick();
+=======
+      const dropdown = renderStitchResults.queryAllByRole('listbox')[0];
+      expect(dropdown).toHaveAttribute('aria-expanded', 'false');
+      userEvent.click(dropdown);
+      // tick();
+      // userEvent.click(renderStitchResults.getByText('Realm'));
+>>>>>>> 93e3b7d (add and modify tests)
     });
     expectFilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();

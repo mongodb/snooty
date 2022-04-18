@@ -97,6 +97,21 @@ const SearchResultsContainer = styled('div')`
     grid-template-columns: auto;
     margin: ${theme.size.large} ${theme.size.medium} ${theme.size.xlarge} ${theme.size.medium};
   }
+
+  @media ${theme.screenSize.upToLarge} {
+    align-items: center;
+    column-gap: ${theme.size.default};
+    grid-template-areas: 'header header' 'filter-header filter-header' 'filters filters' 'results results';
+    /* For the middle breakpoint, we want a column for width on specifically this text */
+    margin: 0 auto;
+    padding-left: ${theme.size.default};
+    padding-right: ${theme.size.default};
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    grid-template-columns: auto;
+    margin: ${theme.size.large} ${theme.size.medium} ${theme.size.xlarge} ${theme.size.medium};
+  }
 `;
 
 const StyledSearchFilters = styled(SearchFilters)`
@@ -301,7 +316,9 @@ const SearchResults = () => {
       if (searchTerm) {
         const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
         const resultJson = await result.json();
-        setSearchResults(getSearchbarResultsFromJSON(resultJson));
+        if (!!resultJson?.results) {
+          setSearchResults(getSearchbarResultsFromJSON(resultJson));
+        }
         setSearchFinished(true);
       }
     };

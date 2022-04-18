@@ -22,7 +22,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
     align-items: center;
     -webkit-column-gap: 16px;
     column-gap: 16px;
-    grid-template-areas: 'header header' 'filter-header filters' 'results results';
+    grid-template-areas: 'header header' 'filter-header filter-header' 'filters filters' 'results results';
     grid-template-columns: 62px auto;
     margin: 0 auto;
     max-width: 616px;
@@ -33,7 +33,6 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 
 @media only screen and (max-width: 480px) {
   .emotion-0 {
-    grid-template-areas: 'header' 'filters' 'results';
     grid-template-columns: auto;
   }
 }
@@ -137,7 +136,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   grid-area: g2;
 }
 
-@media not all and (max-width: 767px) {
+@media only screen and (max-width: 1200px) {
   .emotion-6>img#item2 {
     width: 500px;
   }
