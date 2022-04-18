@@ -6,10 +6,10 @@ const SearchContext = createContext({
   searchFilter: null,
   searchTerm: '',
   selectedVersion: null,
-  selectedProduct: null,
+  selectedCategory: null,
   setSearchFilter: null,
   setSelectedVersion: () => {},
-  setSelectedProduct: () => {},
+  setSelectedCategory: () => {},
   setShowMobileFilters: () => {},
   shouldAutofocus: false,
 });

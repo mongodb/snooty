@@ -10,13 +10,6 @@ import SearchContext from './SearchContext';
 
 const FILTER_WIDTH = '175px';
 
-const SideLabelText = styled('p')`
-  font-family: Akzidenz;
-  font-size: ${theme.fontSize.small};
-  letter-spacing: 0.5px;
-  margin: 0;
-`;
-
 const SelectWrapper = styled('div')`
   align-items: center;
   display: flex;
@@ -28,30 +21,30 @@ const MaxWidthSelect = styled(Select)`
   width: ${FILTER_WIDTH};
 `;
 
-const SearchFilters = ({ hasSideLabels, manuallyApplyFilters = false, onApplyFilters, ...props }) => {
+const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props }) => {
   const { filters } = useMarianManifests();
   const {
     searchFilter,
     setSearchFilter,
     selectedVersion,
-    selectedProduct,
+    selectedCategory,
     setSelectedVersion,
-    setSelectedProduct,
+    setSelectedCategory,
   } = useContext(SearchContext);
 
-  // Current product and version for dropdown. If manuallyApplyFilter === true, selectedProduct + selectedVersion
+  // Current category and version for dropdown. If manuallyApplyFilter === true, selectedCategory + selectedVersion
   // will not be set automatically.
-  const [productChoices, setProductChoices] = useState([]);
-  const [product, setProduct] = useState(null);
+  const [categoryChoices, setCategoryChoices] = useState([]);
+  const [category, setCategory] = useState(null);
   const [versionChoices, setVersionChoices] = useState([]);
   const [version, setVersion] = useState(null);
 
   const hasOneVersion = useMemo(() => versionChoices && versionChoices.length === 1, [versionChoices]);
 
   const updateVersionChoices = useCallback(
-    (product, setDefaultVersion = false) => {
-      if (filters && filters[product]) {
-        const versions = getSortedBranchesForProperty(filters, product);
+    (category, setDefaultVersion = false) => {
+      if (filters && filters[category]) {
+        const versions = getSortedBranchesForProperty(filters, category);
         if (setDefaultVersion) {
           setVersion(versions[0]);
         }
@@ -65,48 +58,48 @@ const SearchFilters = ({ hasSideLabels, manuallyApplyFilters = false, onApplyFil
     setVersion(value);
   }, []);
 
-  const onProductChange = useCallback(
+  const onCategoryChange = useCallback(
     ({ value }) => {
-      setProduct(value);
+      setCategory(value);
       updateVersionChoices(value, true);
     },
     [updateVersionChoices]
   );
 
   const applyFilters = useCallback(() => {
-    setSelectedProduct(product);
+    setSelectedCategory(category);
     setSelectedVersion(version);
 
     if (onApplyFilters) {
       onApplyFilters();
     }
-  }, [version, onApplyFilters, product, setSelectedVersion, setSelectedProduct]);
+  }, [version, onApplyFilters, category, setSelectedVersion, setSelectedCategory]);
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
-    setProduct(null);
+    setCategory(null);
     setVersion(null);
-    setSelectedProduct(null);
+    setSelectedCategory(null);
     setSelectedVersion(null);
-  }, [setSearchFilter, setSelectedVersion, setSelectedProduct]);
+  }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
 
-  // Update selected version and product automatically, if we're not manually applying filters
+  // Update selected version and category automatically, if we're not manually applying filters
   useEffect(() => {
     if (!manuallyApplyFilters) {
       setSelectedVersion(version);
-      setSelectedProduct(product);
+      setSelectedCategory(category);
     }
-  }, [version, manuallyApplyFilters, product, setSelectedVersion, setSelectedProduct]);
+  }, [version, manuallyApplyFilters, category, setSelectedVersion, setSelectedCategory]);
 
   // Update filters to match an existing filter should it exist
   useEffect(() => {
     if (filters && searchFilter) {
       const { branch, property } = parseMarianManifest(searchFilter);
-      setProduct(property);
+      setCategory(property);
       updateVersionChoices(property);
       setVersion(branch);
     } else {
-      setProduct(null);
+      setCategory(null);
       setVersion(null);
     }
   }, [filters, searchFilter, updateVersionChoices]);
@@ -115,35 +108,33 @@ const SearchFilters = ({ hasSideLabels, manuallyApplyFilters = false, onApplyFil
   useEffect(() => {
     const properties = Object.keys(filters);
     properties.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-    setProductChoices(properties.map((p) => ({ text: p, value: p })));
+    setCategoryChoices(properties.map((p) => ({ text: p, value: p })));
   }, [filters]);
 
   // Update search filter once a property and version are chosen
   useEffect(() => {
-    if (filters && selectedProduct && filters[selectedProduct] && selectedVersion && !manuallyApplyFilters) {
-      setSearchFilter(filters[selectedProduct][selectedVersion]);
+    if (filters && selectedCategory && filters[selectedCategory] && selectedVersion && !manuallyApplyFilters) {
+      setSearchFilter(filters[selectedCategory][selectedVersion]);
     }
-  }, [filters, manuallyApplyFilters, selectedVersion, selectedProduct, setSearchFilter]);
+  }, [filters, manuallyApplyFilters, selectedVersion, selectedCategory, setSearchFilter]);
 
   return (
     <div {...props}>
       <SelectWrapper>
-        {hasSideLabels && <SideLabelText>Product</SideLabelText>}
         <MaxWidthSelect
-          choices={productChoices}
-          onChange={onProductChange}
-          defaultText="Select a Product"
-          value={product}
+          choices={categoryChoices}
+          onChange={onCategoryChange}
+          defaultText="Filter by Category"
+          value={category}
         />
       </SelectWrapper>
       <SelectWrapper>
-        {hasSideLabels && <SideLabelText>Version</SideLabelText>}
         <MaxWidthSelect
           choices={versionChoices}
           onChange={onVersionChange}
           // We disable this select if there is only one option
-          disabled={!product || hasOneVersion}
-          defaultText="Select a Version"
+          disabled={!category || hasOneVersion}
+          defaultText="Filter by Version"
           value={version}
         />
       </SelectWrapper>

@@ -31,10 +31,10 @@ const expectFilteredResults = (wrapper) => {
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
 };
 
-const expectValuesForFilters = (wrapper, product, branch) => {
+const expectValuesForFilters = (wrapper, category, version) => {
   const dropdowns = wrapper.queryAllByRole('listbox');
-  expect(within(dropdowns[0]).queryByText(product)).toBeTruthy();
-  expect(within(dropdowns[1]).queryByText(branch)).toBeTruthy();
+  expect(within(dropdowns[0]).queryByText(category)).toBeTruthy();
+  expect(within(dropdowns[1]).queryByText(version)).toBeTruthy();
 };
 
 // Check the search results match the expected unfiltered results
@@ -56,7 +56,7 @@ const expectUnfilteredResults = (wrapper) => {
   expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
 
   // Check the dropdowns are not filled in
-  expectValuesForFilters(wrapper, 'Select a Product', 'Select a Version');
+  expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
 };
 
 // Mock the reach router useLocation hook

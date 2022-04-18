@@ -210,14 +210,14 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
   const [searchFilter, setSearchFilter] = useState(null);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const specifySearchText = 'Specify your search';
 
   const resetFilters = useCallback(() => {
-    setSelectedProduct(null);
-    // Reset branch and search filter since they require a product
+    setSelectedCategory(null);
+    // Reset version and search filter since a search filter requires both a category and version
     setSelectedVersion(null);
     setSearchFilter(null);
   }, []);
@@ -272,10 +272,10 @@ const SearchResults = () => {
         searchFilter,
         searchTerm,
         selectedVersion,
-        selectedProduct,
+        selectedCategory,
         setSearchFilter,
         setSelectedVersion,
-        setSelectedProduct,
+        setSelectedCategory,
         setShowMobileFilters,
       }}
     >
@@ -288,9 +288,9 @@ const SearchResults = () => {
             <HeaderText>Search results for "{searchTerm}"</HeaderText>
             {!!searchFilter && (
               <FilterBadgesWrapper>
-                {selectedProduct && (
+                {selectedCategory && (
                   <StyledTag variant="green" onClick={resetFilters}>
-                    {selectedProduct}
+                    {selectedCategory}
                     <Icon glyph="X" />
                   </StyledTag>
                 )}
@@ -330,7 +330,7 @@ const SearchResults = () => {
           )}
           <FiltersContainer>
             <FilterHeader>{specifySearchText}</FilterHeader>
-            <StyledSearchFilters hasSideLabels={false} />
+            <StyledSearchFilters />
           </FiltersContainer>
           {showMobileFilters && isTabletOrMobile && <MobileFilters />}
         </SearchResultsContainer>
