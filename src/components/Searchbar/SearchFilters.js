@@ -1,5 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
+import Button from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
 import { getSortedBranchesForProperty, parseMarianManifest } from '../../utils/parse-marian-manifests';
@@ -8,110 +10,141 @@ import SearchContext from './SearchContext';
 
 const FILTER_WIDTH = '175px';
 
-const SideLabelText = styled('p')`
-  font-family: Akzidenz;
-  font-size: ${theme.fontSize.small};
-  letter-spacing: 0.5px;
-  margin: 0;
-`;
-
 const SelectWrapper = styled('div')`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  :first-of-type {
-    margin-bottom: ${theme.size.medium};
-  }
+  margin-bottom: ${theme.size.default};
 `;
 
 const MaxWidthSelect = styled(Select)`
   width: ${FILTER_WIDTH};
 `;
 
-const SearchFilters = ({ hasSideLabels, ...props }) => {
+const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props }) => {
   const { filters } = useMarianManifests();
-  const { searchFilter, setSearchFilter } = useContext(SearchContext);
-  const [productChoices, setProductChoices] = useState([]);
-  const [product, setProduct] = useState(null);
-  const [branchChoices, setBranchChoices] = useState([]);
-  const [branch, setBranch] = useState(null);
+  const {
+    searchFilter,
+    setSearchFilter,
+    selectedVersion,
+    selectedCategory,
+    setSelectedVersion,
+    setSelectedCategory,
+  } = useContext(SearchContext);
 
-  const hasOneBranch = useMemo(() => branchChoices && branchChoices.length === 1, [branchChoices]);
+  // Current category and version for dropdown. If manuallyApplyFilter === true, selectedCategory + selectedVersion
+  // will not be set automatically.
+  const [categoryChoices, setCategoryChoices] = useState([]);
+  const [category, setCategory] = useState(null);
+  const [versionChoices, setVersionChoices] = useState([]);
+  const [version, setVersion] = useState(null);
 
-  const updateBranchChoices = useCallback(
-    (product, setDefaultBranch = false) => {
-      if (filters && filters[product]) {
-        const branches = getSortedBranchesForProperty(filters, product);
-        if (setDefaultBranch) {
-          setBranch(branches[0]);
+  const hasOneVersion = useMemo(() => versionChoices && versionChoices.length === 1, [versionChoices]);
+
+  const updateVersionChoices = useCallback(
+    (category, setDefaultVersion = false) => {
+      if (filters && filters[category]) {
+        const versions = getSortedBranchesForProperty(filters, category);
+        if (setDefaultVersion) {
+          setVersion(versions[0]);
         }
-        setBranchChoices(branches.map((b) => ({ text: b, value: b })));
+        setVersionChoices(versions.map((b) => ({ text: b, value: b })));
       }
     },
     [filters]
   );
 
-  const onBranchChange = useCallback(({ value }) => {
-    setBranch(value);
+  const onVersionChange = useCallback(({ value }) => {
+    setVersion(value);
   }, []);
 
-  const onProductChange = useCallback(
+  const onCategoryChange = useCallback(
     ({ value }) => {
-      setProduct(value);
-      updateBranchChoices(value, true);
+      setCategory(value);
+      updateVersionChoices(value, true);
     },
-    [updateBranchChoices]
+    [updateVersionChoices]
   );
+
+  const applyFilters = useCallback(() => {
+    setSelectedCategory(category);
+    setSelectedVersion(version);
+
+    if (onApplyFilters) {
+      onApplyFilters();
+    }
+  }, [version, onApplyFilters, category, setSelectedVersion, setSelectedCategory]);
+
+  const resetFilters = useCallback(() => {
+    setSearchFilter(null);
+    setCategory(null);
+    setVersion(null);
+    setSelectedCategory(null);
+    setSelectedVersion(null);
+  }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
+
+  // Update selected version and category automatically, if we're not manually applying filters
+  useEffect(() => {
+    if (!manuallyApplyFilters) {
+      setSelectedVersion(version);
+      setSelectedCategory(category);
+    }
+  }, [version, manuallyApplyFilters, category, setSelectedVersion, setSelectedCategory]);
 
   // Update filters to match an existing filter should it exist
   useEffect(() => {
     if (filters && searchFilter) {
       const { branch, property } = parseMarianManifest(searchFilter);
-      setProduct(property);
-      updateBranchChoices(property);
-      setBranch(branch);
+      setCategory(property);
+      updateVersionChoices(property);
+      setVersion(branch);
     } else {
-      setProduct(null);
-      setBranch(null);
+      setCategory(null);
+      setVersion(null);
     }
-  }, [filters, searchFilter, updateBranchChoices]);
+  }, [filters, searchFilter, updateVersionChoices]);
 
   // Update property choices when the filter results from Marian are loaded
   useEffect(() => {
     const properties = Object.keys(filters);
     properties.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-    setProductChoices(properties.map((p) => ({ text: p, value: p })));
+    setCategoryChoices(properties.map((p) => ({ text: p, value: p })));
   }, [filters]);
 
-  // Update search filter once a property and branch are chosen
+  // Update search filter once a property and version are chosen
   useEffect(() => {
-    if (filters && product && filters[product] && branch) {
-      setSearchFilter(filters[product][branch]);
+    if (filters && selectedCategory && filters[selectedCategory] && selectedVersion && !manuallyApplyFilters) {
+      setSearchFilter(filters[selectedCategory][selectedVersion]);
     }
-  }, [branch, filters, product, setSearchFilter]);
+  }, [filters, manuallyApplyFilters, selectedVersion, selectedCategory, setSearchFilter]);
 
   return (
     <div {...props}>
       <SelectWrapper>
-        {hasSideLabels && <SideLabelText>Product</SideLabelText>}
         <MaxWidthSelect
-          choices={productChoices}
-          onChange={onProductChange}
-          defaultText="Select a Product"
-          value={product}
+          choices={categoryChoices}
+          onChange={onCategoryChange}
+          defaultText="Filter by Category"
+          value={category}
         />
       </SelectWrapper>
       <SelectWrapper>
-        {hasSideLabels && <SideLabelText>Version</SideLabelText>}
         <MaxWidthSelect
-          choices={branchChoices}
-          onChange={onBranchChange}
+          choices={versionChoices}
+          onChange={onVersionChange}
           // We disable this select if there is only one option
-          disabled={!product || hasOneBranch}
-          defaultText="Select a Version"
-          value={branch}
+          disabled={!category || hasOneVersion}
+          defaultText="Filter by Version"
+          value={version}
         />
       </SelectWrapper>
+      {manuallyApplyFilters ? (
+        <Button onClick={applyFilters}>Apply filters</Button>
+      ) : (
+        <Button leftGlyph={<Icon glyph="X" />} onClick={resetFilters}>
+          Clear all filters
+        </Button>
+      )}
     </div>
   );
 };
