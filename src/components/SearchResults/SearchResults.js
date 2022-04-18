@@ -231,7 +231,6 @@ const loadingFilterStyling = css`
   grid-area: filters;
 `;
 
-
 const EmptyPlaceholder = styled('div')`
   height: 1000px;
   width: 100%;

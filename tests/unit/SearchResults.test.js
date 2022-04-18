@@ -196,6 +196,7 @@ describe('Search Results Page', () => {
 
     await act(async () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
       await filterByRealm(renderStitchResults);
     });
     expectFilteredResults(renderStitchResults);
@@ -251,6 +252,9 @@ describe('Search Results Page', () => {
       userEvent.click(applyFiltersButton);
       tick();
 =======
+=======
+      await tick();
+>>>>>>> c58a1a4 (add loading filter ui)
       const dropdown = renderStitchResults.queryAllByRole('listbox')[0];
       expect(dropdown).toHaveAttribute('aria-expanded', 'false');
       userEvent.click(dropdown);

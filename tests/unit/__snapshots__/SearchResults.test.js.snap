@@ -178,126 +178,6 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   }
 }
 
-.emotion-28 {
-  grid-area: filters;
-}
-
-@media only screen and (max-width: 1023px) {
-  .emotion-28 {
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-  }
-
-  .emotion-28>div:first-of-type {
-    margin-bottom: 0;
-    margin-right: 8px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-28 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-
-  .emotion-28>div {
-    width: 100%;
-  }
-
-  .emotion-28>div:first-of-type {
-    margin-bottom: 8px;
-    margin-right: 0;
-  }
-}
-
-.emotion-30 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-}
-
-.emotion-30:first-of-type {
-  margin-bottom: 24px;
-}
-
-.emotion-33 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 1;
-  width: 175px;
-}
-
-.emotion-35 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: pointer;
-  position: relative;
-}
-
-.emotion-37 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  padding: 10px 16px;
-}
-
-.emotion-39 {
-  display: inline-block;
-  font-family: Akzidenz;
-  font-size: 14px;
-  margin: 0!important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.emotion-44 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 0.3;
-  width: 175px;
-}
-
-.emotion-46 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: not-allowed;
-  position: relative;
-}
-
 <div
     class="emotion-0 emotion-1"
   >
@@ -555,90 +435,17 @@ exports[`Search Results Page renders correctly without browser 1`] = `
     >
       Specify Your Search
     </h2>
-    <div
-      class="emotion-28 emotion-29"
-    >
-      <div
-        class="emotion-30 emotion-31"
-      >
-        <div
-          aria-disabled="false"
-          class="emotion-32 emotion-33 emotion-34"
-        >
-          <div
-            aria-expanded="false"
-            class="emotion-35 emotion-36"
-            role="listbox"
-            tabindex="0"
-          >
-            <div
-              class="emotion-37 emotion-38"
-              role="option"
-            >
-              <p
-                class="emotion-39 emotion-40"
-              >
-                Select a Product
-              </p>
-              <svg
-                aria-label="Caret Down Icon"
-                class=""
-                fill="none"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="emotion-30 emotion-31"
-      >
-        <div
-          aria-disabled="true"
-          class="emotion-32 emotion-44 emotion-34"
-        >
-          <div
-            aria-expanded="false"
-            class="emotion-46 emotion-36"
-            role="listbox"
-          >
-            <div
-              class="emotion-37 emotion-38"
-              role="option"
-            >
-              <p
-                class="emotion-39 emotion-40"
-              >
-                Select a Version
-              </p>
-              <svg
-                aria-label="Caret Down Icon"
-                class=""
-                fill="none"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div>
+      <img
+        alt=""
+        id="item1"
+        src="/assets/loadingboxmed.svg"
+      />
+      <img
+        alt=""
+        id="item1"
+        src="/assets/loadingboxmed.svg"
+      />
     </div>
   </div>
 </DocumentFragment>
