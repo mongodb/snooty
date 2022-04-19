@@ -1186,8 +1186,6 @@ div.body h4 + p {
 a.reference.external:after {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
-  content: '\f35d';
-  content: var(--external-link);
   padding-left: 3px;
   vertical-align: middle;
 }
