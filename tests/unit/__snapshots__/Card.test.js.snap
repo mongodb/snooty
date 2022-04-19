@@ -49,11 +49,19 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-6 {
-  background-color: #E4F4E4;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   border-radius: 4px;
-  color: #13AA52;
-  font-weight: bold;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   padding: 4px 8px;
+  background-color: #E4F4E4;
+  border: 1px solid #C3E7CA;
+  color: #116149;
   margin-right: auto;
 }
 

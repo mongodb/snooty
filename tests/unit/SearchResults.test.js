@@ -1,20 +1,22 @@
 // Tests for the search results page
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { tick } from '../utils';
+import { tick, setMobile } from '../utils';
 import transformUrlBasedOnOrigin from '../../src/utils/transform-url-based-on-origin';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@reach/router';
 import SearchResults from '../../src/components/SearchResults';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 
+const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
+
 // Check the search results include the property-filtered results
 const expectFilteredResults = (wrapper) => {
-  wrapper.getByText('Realm results for "stitch"');
-
-  expect(wrapper.queryAllByText('Realm').length).toBe(1);
+  // Filtered property "Realm" should be shown twice:
+  // (1) as the selected text in the dropdown and (2) as a badge below the search header
+  expect(wrapper.queryAllByText('Realm').length).toBe(2);
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();
@@ -23,21 +25,20 @@ const expectFilteredResults = (wrapper) => {
 
   // Check the result does link to the provided doc
   expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
-  expect(wrapper.queryAllByText('Realm results for "stitch"').length).toBe(1);
+  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
 
   // Check the dropdowns are filled in
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
 };
 
-const expectValuesForFilters = (wrapper, product, branch) => {
-  expect(wrapper.queryByText(product)).toBeTruthy();
-  expect(wrapper.queryByText(branch)).toBeTruthy();
+const expectValuesForFilters = (wrapper, category, version) => {
+  const dropdowns = wrapper.queryAllByRole('listbox');
+  expect(within(dropdowns[0]).queryByText(category)).toBeTruthy();
+  expect(within(dropdowns[1]).queryByText(version)).toBeTruthy();
 };
 
 // Check the search results match the expected unfiltered results
 const expectUnfilteredResults = (wrapper) => {
-  wrapper.getByText(`All search results for "stitch"`);
-
   expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
 
   // Check the search result card displays content according to the response
@@ -50,14 +51,46 @@ const expectUnfilteredResults = (wrapper) => {
     'href',
     `http://localhost/${UNFILTERED_RESULT.url}`
   );
-  expect(wrapper.queryAllByText('Realm results for "stitch"').length).toBe(0);
+
+  // We always show this text, regardless of filter
+  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
 
   // Check the dropdowns are not filled in
-  expectValuesForFilters(wrapper, 'Select a Product', 'Select a Version');
+  expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
 };
 
 // Mock the reach router useLocation hook
 const mockLocation = (search) => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ search }));
+
+const filterByRealm = async (wrapper, screenSize) => {
+  let listboxIndex = 0;
+  if (screenSize === 'mobile') {
+    listboxIndex = 2;
+  }
+  const dropdown = wrapper.queryAllByRole('listbox')[listboxIndex];
+  expect(dropdown).toHaveAttribute('aria-expanded', 'false');
+  userEvent.click(dropdown);
+  tick();
+  userEvent.click(within(dropdown).getByText('Realm'));
+};
+
+const openMobileSearch = async (wrapper) => {
+  const specifySearchButton = wrapper.queryAllByText('Specify your search')[0].closest('button');
+  userEvent.click(specifySearchButton);
+  tick();
+};
+
+const clearAllFilters = async (wrapper, screenSize) => {
+  // Default to desktop; desktop button appears in index 1
+  let queryIndex = 1;
+  if (screenSize === 'mobile') {
+    queryIndex = 0;
+  }
+
+  const clearAllFiltersButton = wrapper.queryAllByText('Clear all filters')[queryIndex].closest('button');
+  userEvent.click(clearAllFiltersButton);
+  tick();
+};
 
 describe('Search Results Page', () => {
   jest.useFakeTimers();
@@ -105,13 +138,101 @@ describe('Search Results Page', () => {
     // Change the filters, which should change the shown results
 
     await act(async () => {
-      const dropdown = renderStitchResults.queryAllByRole('listbox')[0];
-      expect(dropdown).toHaveAttribute('aria-expanded', 'false');
-      userEvent.click(dropdown);
-      tick();
-      userEvent.click(renderStitchResults.getByText('Realm'));
+      await filterByRealm(renderStitchResults);
     });
     expectFilteredResults(renderStitchResults);
+  });
+
+  it('resets search filters when hitting the "clear all filters" button', async () => {
+    let renderStitchResults;
+    mockLocation('?q=stitch');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expectUnfilteredResults(renderStitchResults);
+
+    // Change filters
+    await act(async () => {
+      await filterByRealm(renderStitchResults);
+    });
+    expectFilteredResults(renderStitchResults);
+
+    // Remove filters
+    await act(async () => {
+      await clearAllFilters(renderStitchResults);
+    });
+    expectUnfilteredResults(renderStitchResults);
+  });
+
+  it('specifies search filters through mobile', async () => {
+    let renderStitchResults;
+    setMobile();
+    mockLocation('?q=stitch');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expectUnfilteredResults(renderStitchResults);
+
+    // Open mobile search options
+    await act(async () => {
+      await openMobileSearch(renderStitchResults);
+    });
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
+
+    // Set filters but don't apply them
+    await act(async () => {
+      // Filter using listbox at index 2, which should appear on mobile
+      await filterByRealm(renderStitchResults, 'mobile');
+    });
+    expectUnfilteredResults(renderStitchResults);
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
+
+    // Apply filters
+    await act(async () => {
+      const applyFiltersButton = renderStitchResults.getByText('Apply filters').closest('button');
+      userEvent.click(applyFiltersButton);
+      tick();
+    });
+    expectFilteredResults(renderStitchResults);
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
+
+    // Remove filters
+    await act(async () => {
+      await clearAllFilters(renderStitchResults, 'mobile');
+    });
+    expectUnfilteredResults(renderStitchResults);
+  });
+
+  it('cancels search filter application on mobile', async () => {
+    let renderStitchResults;
+    setMobile();
+    mockLocation('?q=stitch');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expectUnfilteredResults(renderStitchResults);
+
+    // Open mobile search options
+    await act(async () => {
+      await openMobileSearch(renderStitchResults);
+    });
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
+
+    // Set filters but don't apply them
+    await act(async () => {
+      await filterByRealm(renderStitchResults, 'mobile');
+    });
+    expectUnfilteredResults(renderStitchResults);
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
+
+    // Hit back button
+    await act(async () => {
+      const backButton = renderStitchResults.getByText(MOBILE_SEARCH_BACK_BUTTON_TEXT);
+      userEvent.click(backButton);
+      tick();
+    });
+    expectUnfilteredResults(renderStitchResults);
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
   });
 
   it('rewrites old urls to new ones and vice versa', async () => {
