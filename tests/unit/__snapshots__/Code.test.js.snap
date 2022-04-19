@@ -131,20 +131,10 @@ exports[`renders correctly 1`] = `
   -ms-flex-negative: 0;
   flex-shrink: 0;
   padding-top: 6px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 4px;
   min-height: 36px;
   padding-top: 4px;
   border-color: #E7EEEC;
   background-color: white;
-}
-
-.emotion-12 svg {
-  width: 16px;
-  height: 16px;
 }
 
 <div
@@ -169,6 +159,7 @@ exports[`renders correctly 1`] = `
       >
         <pre
           class="emotion-6"
+          customactionbuttons=""
           tabindex="-1"
         >
           <code
@@ -202,18 +193,7 @@ exports[`renders correctly 1`] = `
                   <td
                     class="emotion-9"
                   >
-                              --drop --file ~\\downloads\\inventory.
-                    <span
-                      class="lg-highlight-property"
-                    >
-                      crud
-                    </span>
-                    .
-                    <span
-                      class="lg-highlight-property"
-                    >
-                      json
-                    </span>
+                              --drop --file ~\\downloads\\inventory.crud.json
                   </td>
                 </tr>
               </tbody>
@@ -356,22 +336,12 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   -ms-flex-negative: 0;
   flex-shrink: 0;
   padding-top: 6px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 4px;
   min-height: 36px;
   padding-top: 4px;
   min-height: 36px;
   padding-top: 4px;
   border-color: #E7EEEC;
   background-color: white;
-}
-
-.emotion-7 svg {
-  width: 16px;
-  height: 16px;
 }
 
 <div
@@ -385,6 +355,7 @@ exports[`renders correctly when none is passed in as a language 1`] = `
       >
         <pre
           class="emotion-3"
+          customactionbuttons=""
           tabindex="-1"
         >
           <code

@@ -7,6 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import SearchContext from './SearchContext';
 import { StyledTextInput } from './SearchTextInput';
+import Tag, { tagStyle } from '../Tag';
 
 const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
@@ -51,6 +52,7 @@ const SearchResultContainer = styled('div')`
     flex-direction: column;
     height: 100%;
   }
+  position: relative;
 `;
 
 const SearchResultLink = styled('a')`
@@ -93,6 +95,16 @@ const StyledResultTitle = styled('p')`
   }
 `;
 
+const StyledTag = styled(Tag)`
+  ${tagStyle}
+`;
+
+const StylingTagContainer = styled('div')`
+  position: absolute;
+  bottom: 0;
+  margin-bottom: ${theme.size.medium};
+`;
+
 const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const highlightSearchTerm = (text, searchTerm) =>
@@ -110,7 +122,18 @@ const sanitizePreviewHtml = (text) =>
   });
 
 const SearchResult = React.memo(
-  ({ learnMoreLink = false, maxLines = 2, useLargeTitle = false, onClick, preview, title, url, ...props }) => {
+  ({
+    learnMoreLink = false,
+    maxLines = 2,
+    useLargeTitle = false,
+    onClick,
+    preview,
+    title,
+    categoryTag,
+    versionTag,
+    url,
+    ...props
+  }) => {
     const { searchContainerRef, searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
@@ -164,6 +187,7 @@ const SearchResult = React.memo(
       },
       [onArrowDown, searchContainerRef]
     );
+
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} onKeyDown={onKeyDown} {...props}>
         <SearchResultContainer>
@@ -179,6 +203,11 @@ const SearchResult = React.memo(
               __html: sanitizePreviewHtml(highlightedPreviewText),
             }}
           />
+          <StylingTagContainer>
+            {categoryTag && <StyledTag variant="green">{categoryTag}</StyledTag>}
+            {versionTag && <StyledTag variant="blue">{versionTag}</StyledTag>}
+            {url.includes('/api/') && <StyledTag variant="green">{'API'}</StyledTag>}
+          </StylingTagContainer>
           {learnMoreLink && (
             <MobileFooterContainer>
               <LearnMoreLink href={url}>

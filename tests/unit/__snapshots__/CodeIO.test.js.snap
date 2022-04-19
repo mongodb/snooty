@@ -223,22 +223,12 @@ exports[`CodeIO renders correctly 1`] = `
   -ms-flex-negative: 0;
   flex-shrink: 0;
   padding-top: 6px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 4px;
   min-height: 36px;
   padding-top: 4px;
   min-height: 36px;
   padding-top: 4px;
   border-color: #E7EEEC;
   background-color: white;
-}
-
-.emotion-13 svg {
-  width: 16px;
-  height: 16px;
 }
 
 .emotion-14 {
@@ -459,6 +449,7 @@ exports[`CodeIO renders correctly 1`] = `
         >
           <pre
             class="emotion-7"
+            customactionbuttons=""
             tabindex="-1"
           >
             <code
@@ -479,12 +470,7 @@ exports[`CodeIO renders correctly 1`] = `
                     <td
                       class="emotion-12"
                     >
-                      <span
-                        class="lg-highlight-built_in"
-                      >
-                        print
-                      </span>
-                      (
+                      print(
                       <span
                         class="lg-highlight-string"
                       >

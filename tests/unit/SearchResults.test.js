@@ -14,9 +14,9 @@ const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
 const expectFilteredResults = (wrapper) => {
-  // Filtered property "Realm" should be shown twice:
-  // (1) as the selected text in the dropdown and (2) as a badge below the search header
-  expect(wrapper.queryAllByText('Realm').length).toBe(2);
+  // Filtered property "Realm" should be shown 3x:
+  // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
+  expect(wrapper.queryAllByText('Realm').length).toBe(3);
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();

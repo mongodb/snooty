@@ -11,6 +11,13 @@ const baseStyle = css`
   padding: ${theme.size.tiny} ${theme.size.small};
 `;
 
+export const tagStyle = css`
+  cursor: pointer;
+  height: 26px;
+  font-size: ${theme.fontSize.small};
+  margin-right: ${theme.size.small};
+`;
+
 const VARIANTS = {
   blue: css`
     background-color: ${uiColors.blue.light3};
