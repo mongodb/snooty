@@ -258,9 +258,14 @@ describe('Search Results Page', () => {
       const dropdown = renderStitchResults.queryAllByRole('listbox')[0];
       expect(dropdown).toHaveAttribute('aria-expanded', 'false');
       userEvent.click(dropdown);
+<<<<<<< HEAD
       // tick();
       // userEvent.click(renderStitchResults.getByText('Realm'));
 >>>>>>> 93e3b7d (add and modify tests)
+=======
+      tick();
+      userEvent.click(renderStitchResults.getByText('Realm'));
+>>>>>>> bccda02 (change ids to classes and refactor)
     });
     expectFilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();

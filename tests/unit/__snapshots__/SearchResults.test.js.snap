@@ -121,38 +121,38 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   padding: 2px;
 }
 
-.emotion-6>img#item1,
-.emotion-6 img#item2,
-.emotion-6 img#item3,
-.emotion-6 img#item4 {
+.emotion-6>img.item1,
+.emotion-6 img.item2,
+.emotion-6 img.item3,
+.emotion-6 img.item4 {
   height: 20px;
 }
 
-.emotion-6>img#item1 {
+.emotion-6>img.item1 {
   grid-area: g1;
 }
 
-.emotion-6>img#item2 {
+.emotion-6>img.item2 {
   grid-area: g2;
 }
 
 @media only screen and (max-width: 1200px) {
-  .emotion-6>img#item2 {
+  .emotion-6>img.item2 {
     width: 500px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-6>img#item2 {
+  .emotion-6>img.item2 {
     width: 300px;
   }
 }
 
-.emotion-6>img#item3 {
+.emotion-6>img.item3 {
   grid-area: g3;
 }
 
-.emotion-6>img#item4 {
+.emotion-6>img.item4 {
   grid-area: g4;
 }
 
@@ -194,22 +194,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -218,22 +218,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -242,22 +242,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -266,22 +266,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -290,22 +290,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -314,22 +314,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -338,22 +338,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -362,22 +362,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -386,22 +386,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -410,22 +410,22 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <img
           alt=""
-          id="item1"
+          class="item1"
           src="/assets/loadingboxmed.svg"
         />
         <img
           alt=""
-          id="item2"
+          class="item2"
           src="/assets/loadingboxlong.svg"
         />
         <img
           alt=""
-          id="item3"
+          class="item3"
           src="/assets/loadingboxshort.svg"
         />
         <img
           alt=""
-          id="item4"
+          class="item4"
           src="/assets/loadingboxshort.svg"
         />
       </div>
@@ -438,12 +438,12 @@ exports[`Search Results Page renders correctly without browser 1`] = `
     <div>
       <img
         alt=""
-        id="item1"
+        class="item1"
         src="/assets/loadingboxmed.svg"
       />
       <img
         alt=""
-        id="item1"
+        class="item1"
         src="/assets/loadingboxmed.svg"
       />
     </div>
