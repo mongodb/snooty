@@ -62,7 +62,7 @@ const ViewController = styled('div')`
 
 const ViewOptions = styled('div')`
   display: flex;
-  gap 0 ${theme.size.medium};
+  gap: 0 ${theme.size.medium};
   grid-column: 2;
 `;
 
