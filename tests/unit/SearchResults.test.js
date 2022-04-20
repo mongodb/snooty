@@ -149,9 +149,7 @@ describe('Search Results Page', () => {
     mockLocation('?q=mongodb');
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
-      expect(renderStitchResults.getAllByRole('img')[0]).toHaveAttribute('src', '/assets/loadingboxmed.svg');
-      expect(renderStitchResults.getAllByRole('img')[1]).toHaveAttribute('src', '/assets/loadingboxlong.svg');
-      expect(renderStitchResults.getAllByRole('img')[2]).toHaveAttribute('src', '/assets/loadingboxshort.svg');
+      expect(renderStitchResults.asFragment()).toMatchSnapshot();
     });
   });
 
@@ -160,9 +158,7 @@ describe('Search Results Page', () => {
     mockLocation('?q=thisdoesnotreturnanything');
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
-      expect(renderStitchResults.getAllByRole('img')[0]).toHaveAttribute('src', '/assets/loadingboxmed.svg');
-      expect(renderStitchResults.getAllByRole('img')[1]).toHaveAttribute('src', '/assets/loadingboxlong.svg');
-      expect(renderStitchResults.getAllByRole('img')[2]).toHaveAttribute('src', '/assets/loadingboxshort.svg');
+      expect(renderStitchResults.asFragment()).toMatchSnapshot();
     });
   });
 

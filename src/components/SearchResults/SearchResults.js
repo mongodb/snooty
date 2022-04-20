@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
+import Skeleton from 'react-loading-skeleton';
 import { css } from '@emotion/react';
 import Skeleton from 'react-loading-skeleton';
 import styled from '@emotion/styled';
@@ -11,6 +12,7 @@ import queryString from 'query-string';
 import MobileFilters from './MobileFilters';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { searchParamsToURL } from '../../utils/search-params-to-url';

@@ -85,10 +85,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   box-sizing: border-box;
   padding: 15px;
   display: grid;
-  grid-template-columns: repeat(2, 35px);
   grid-template-rows: 1fr 2fr 1fr;
-  grid-template-areas: 'g1 g1' 'g2 g2' 'g3 g4';
-  grid-column-gap: 32px;
 }
 
 .emotion-6>div {
@@ -119,41 +116,11 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 
 .emotion-6 * {
   padding: 2px;
+  height: 15px!important;
 }
 
-.emotion-6>img.item1,
-.emotion-6 img.item2,
-.emotion-6 img.item3,
-.emotion-6 img.item4 {
-  height: 20px;
-}
-
-.emotion-6>img.item1 {
-  grid-area: g1;
-}
-
-.emotion-6>img.item2 {
-  grid-area: g2;
-}
-
-@media only screen and (max-width: 1200px) {
-  .emotion-6>img.item2 {
-    width: 500px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-6>img.item2 {
-    width: 300px;
-  }
-}
-
-.emotion-6>img.item3 {
-  grid-area: g3;
-}
-
-.emotion-6>img.item4 {
-  grid-area: g4;
+.emotion-6 * .item3 {
+  margin-right: 10px!important;
 }
 
 .emotion-26 {
@@ -192,242 +159,452 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
       <div
         class="emotion-6 emotion-7"
       >
-        <img
-          alt=""
-          class="item1"
-          src="/assets/loadingboxmed.svg"
-        />
-        <img
-          alt=""
-          class="item2"
-          src="/assets/loadingboxlong.svg"
-        />
-        <img
-          alt=""
-          class="item3"
-          src="/assets/loadingboxshort.svg"
-        />
-        <img
-          alt=""
-          class="item4"
-          src="/assets/loadingboxshort.svg"
-        />
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
     </div>
     <h2
@@ -436,16 +613,1314 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       Specify Your Search
     </h2>
     <div>
-      <img
-        alt=""
-        class="item1"
-        src="/assets/loadingboxmed.svg"
-      />
-      <img
-        alt=""
-        class="item1"
-        src="/assets/loadingboxmed.svg"
-      />
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Search Results Page renders loading images before returning no results 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-column-gap: 46px;
+  column-gap: 46px;
+  display: grid;
+  grid-template-areas: 'header filter-header' 'results filters';
+  grid-template-columns: auto 173px;
+  margin: 32px auto 64px auto;
+  max-width: 1150px;
+  row-gap: 32px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1023px) {
+  .emotion-0 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-column-gap: 16px;
+    column-gap: 16px;
+    grid-template-areas: 'header header' 'filter-header filter-header' 'filters filters' 'results results';
+    grid-template-columns: 62px auto;
+    margin: 0 auto;
+    max-width: 616px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    grid-template-columns: auto;
+  }
+}
+
+.emotion-2 {
+  font-size: 18px;
+  line-height: 21px;
+  grid-area: header;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  letter-spacing: 0.8px;
+}
+
+.emotion-4 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(128px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-4:hover>.e1yoi6mj2 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-4:hover>.e1yoi6mj2:hover {
+  opacity: 1;
+}
+
+.emotion-4:not(:hover)>.e1yoi6mj2 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-6 {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  height: 128px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-6>div {
+  padding: 24px;
+}
+
+.emotion-6:hover,
+.emotion-6:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-6:hover>div,
+.emotion-6:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-6:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-6 * {
+  padding: 2px;
+  height: 15px!important;
+}
+
+.emotion-6 * .item3 {
+  margin-right: 10px!important;
+}
+
+.emotion-26 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  grid-area: filter-header;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-26 {
+    display: none;
+  }
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <h1
+      class="emotion-2 emotion-3"
+    >
+      Search results for ""
+    </h1>
+    <div
+      class="emotion-4 emotion-5"
+    >
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+    </div>
+    <h2
+      class="emotion-26 emotion-27"
+    >
+      Specify Your Search
+    </h2>
+    <div>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Search Results Page renders loading images before returning nonempty results 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-column-gap: 46px;
+  column-gap: 46px;
+  display: grid;
+  grid-template-areas: 'header filter-header' 'results filters';
+  grid-template-columns: auto 173px;
+  margin: 32px auto 64px auto;
+  max-width: 1150px;
+  row-gap: 32px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1023px) {
+  .emotion-0 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-column-gap: 16px;
+    column-gap: 16px;
+    grid-template-areas: 'header header' 'filter-header filter-header' 'filters filters' 'results results';
+    grid-template-columns: 62px auto;
+    margin: 0 auto;
+    max-width: 616px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    grid-template-columns: auto;
+  }
+}
+
+.emotion-2 {
+  font-size: 18px;
+  line-height: 21px;
+  grid-area: header;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  letter-spacing: 0.8px;
+}
+
+.emotion-4 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(128px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-4:hover>.e1yoi6mj2 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-4:hover>.e1yoi6mj2:hover {
+  opacity: 1;
+}
+
+.emotion-4:not(:hover)>.e1yoi6mj2 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-6 {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  height: 128px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-6>div {
+  padding: 24px;
+}
+
+.emotion-6:hover,
+.emotion-6:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-6:hover>div,
+.emotion-6:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-6:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-6 * {
+  padding: 2px;
+  height: 15px!important;
+}
+
+.emotion-6 * .item3 {
+  margin-right: 10px!important;
+}
+
+.emotion-26 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  grid-area: filter-header;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-26 {
+    display: none;
+  }
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <h1
+      class="emotion-2 emotion-3"
+    >
+      Search results for ""
+    </h1>
+    <div
+      class="emotion-4 emotion-5"
+    >
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+    </div>
+    <h2
+      class="emotion-26 emotion-27"
+    >
+      Specify Your Search
+    </h2>
+    <div>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
     </div>
   </div>
 </DocumentFragment>
