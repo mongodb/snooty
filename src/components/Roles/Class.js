@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 
 const RoleClass = ({ nodeData: { children, target } }) => (
-  <a href={`${target}`} className="reference external">
+  <a href={`${target}`}>
     {children.map((node, i) => (
       <ComponentFactory key={i} nodeData={node} />
     ))}
