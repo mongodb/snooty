@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import ComponentFactory from './ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 
 const Table = styled('table')`
   border-spacing: 0;
@@ -17,6 +17,8 @@ const Table = styled('table')`
 
 const FieldList = ({ nodeData: { children }, ...rest }) => (
   <Table>
+    {console.log('FieldList')}
+    {console.log(rest.slug)}
     <colgroup>
       <col className="field-name" />
       <col className="field-body" />

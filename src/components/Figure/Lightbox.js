@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Modal from '@leafygreen-ui/modal';
 import styled from '@emotion/styled';
 import CaptionLegend from './CaptionLegend';
-import Image from './Image';
-import { theme } from '../theme/docsTheme.js';
+import Image from '../Image';
+import { theme } from '../../theme/docsTheme.js';
 
 const CAPTION_TEXT = 'click to enlarge';
 const StyledModal = styled(Modal)`

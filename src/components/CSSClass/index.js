@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
 import CSSWrapper from './CSSWrapper';
-import { getNestedValue } from '../utils/get-nested-value';
+import ComponentFactory from '../ComponentFactory';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 const CSSClass = ({ nodeData, ...rest }) => {
   const className = getNestedValue(['argument', 0, 'value'], nodeData);

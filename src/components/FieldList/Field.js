@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import ComponentFactory from './ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 
 const Field = ({ nodeData: { children, label, name }, ...rest }) => (
   <tr

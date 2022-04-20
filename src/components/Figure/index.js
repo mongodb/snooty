@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import CaptionLegend from './CaptionLegend';
-import Image from './Image';
 import Lightbox from './Lightbox';
-import { getNestedValue } from '../utils/get-nested-value';
+import Image from '../Image';
+import { getNestedValue } from '../../utils/get-nested-value';
 
 export default class Figure extends Component {
   constructor(props) {
