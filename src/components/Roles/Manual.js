@@ -5,7 +5,7 @@ import { REF_TARGETS } from '../../constants';
 
 const RoleManual = ({ nodeData: { children, target } }) => {
   return (
-    <a href={`${REF_TARGETS.manual}${target.replace('/manual', '')}`} className="reference external">
+    <a href={`${REF_TARGETS.manual}${target.replace('/manual', '')}`}>
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
