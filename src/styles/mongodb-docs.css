@@ -1100,6 +1100,18 @@ body,
 div td pre {
   margin: 0;
 }
+
+div.section>h1+dl.dbcommand>dt,
+div.section>h1+dl.expression>dt,
+div.section>h1+dl.group>dt,
+div.section>h1+dl.method>dt,
+div.section>h1+dl.operator>dt,
+div.section>h1+dl.pipeline>dt,
+div.section>h1+dl.projection>dt,
+dl.binary {
+  display: none;
+}
+
 .highlight ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 7px;
