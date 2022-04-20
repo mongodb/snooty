@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import BreadcrumbContainer from '../../src/components/Breadcrumbs/BreadcrumbContainer';
-import { NavigationContext } from '../../src/components/navigation-context';
+import { NavigationContext } from '../../src/context/navigation-context';
 
 const mountBreadcrumbContainer = (homeCrumb, lastCrumb, parents) => {
   return render(
