@@ -17,8 +17,6 @@ const Table = styled('table')`
 
 const FieldList = ({ nodeData: { children }, ...rest }) => (
   <Table>
-    {console.log('FieldList')}
-    {console.log(rest.slug)}
     <colgroup>
       <col className="field-name" />
       <col className="field-body" />
