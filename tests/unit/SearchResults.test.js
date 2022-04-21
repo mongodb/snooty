@@ -255,6 +255,7 @@ describe('Search Results Page', () => {
       expect(dropdown).toHaveAttribute('aria-expanded', 'false');
       userEvent.click(dropdown);
 <<<<<<< HEAD
+<<<<<<< HEAD
       // tick();
       // userEvent.click(renderStitchResults.getByText('Realm'));
 >>>>>>> 93e3b7d (add and modify tests)
@@ -262,6 +263,8 @@ describe('Search Results Page', () => {
       tick();
       userEvent.click(renderStitchResults.getByText('Realm'));
 >>>>>>> bccda02 (change ids to classes and refactor)
+=======
+>>>>>>> 2f8f018 (fix loading skeleton appearing before landing page)
     });
     expectFilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();

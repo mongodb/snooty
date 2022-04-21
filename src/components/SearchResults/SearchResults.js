@@ -348,7 +348,7 @@ const SearchResults = () => {
           <title>Search Results</title>
         </Helmet>
         <SearchResultsContainer>
-          <HeaderText>Search results for "{searchTerm}"</HeaderText>
+          <HeaderText>- Search results for "{searchTerm}"</HeaderText>
           <StyledSearchResults>
             {[...Array(10).keys()].map(() => (
               <StyledLoadingSkeletonContainer>
