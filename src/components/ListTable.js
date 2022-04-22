@@ -55,6 +55,9 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
 
             * {
               font-size: ${theme.fontSize.small} !important;
+            }
+
+            & > div {
               align-items: start;
             }
 

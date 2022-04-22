@@ -13,6 +13,12 @@ export const baseCodeStyle = css`
   // override for docs when the language switcher is being used.
   > div > div {
     width: unset;
+
+    // TODO: (DOP-2576) Remove this when we upgrade LG Code component.
+    // Keep this within the context of the language switcher
+    button > div {
+      grid-template-columns: 16px 1fr 16px;
+    }
   }
 
   // Override default LG Code language switcher font size
