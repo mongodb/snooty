@@ -57,7 +57,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   padding: 0;
   margin: 0;
   background-color: transparent;
-  border: 0px solid transparent;
+  border: 1px solid transparent;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -66,7 +66,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  border-radius: 4px;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   position: relative;
@@ -74,14 +73,17 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  background-color: #09804C;
-  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4);
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #00684A;
+  border-color: #00684A;
   color: #FFFFFF;
   font-size: 16px;
   -webkit-transform: translateY(1px);
   -moz-transform: translateY(1px);
   -ms-transform: translateY(1px);
   transform: translateY(1px);
+  font-weight: 500;
   height: 36px;
 }
 
@@ -100,20 +102,18 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration: none;
 }
 
-.emotion-8:focus {
-  color: #FFFFFF;
-}
-
 .emotion-8:hover,
 .emotion-8:active {
   color: #FFFFFF;
-  background-color: #116149;
-  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4),0px 0px 0px 3px #c3e7ca;
+  background-color: #00593f;
+  border-color: #00593f;
+  box-shadow: 0 0 0 3px #C0FAE6;
 }
 
 .emotion-8:focus {
-  background-color: #116149;
-  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
+  color: #FFFFFF;
+  background-color: #00593f;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
 .emotion-9 {
@@ -171,19 +171,21 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 
 .emotion-11 {
   overflow: hidden;
-  border-radius: 3px;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  border-radius: 6px;
 }
 
 .emotion-12 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -193,38 +195,23 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 0 12px;
+  gap: 6px;
 }
 
 .emotion-13 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-14 {
   margin-top: 40px;
   padding: 40px 24px;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-14 {
+  .emotion-13 {
     padding: 48px;
   }
 }
 
 @media not all and (max-width: 1023px) {
-  .emotion-14 {
+  .emotion-13 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -238,7 +225,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-.emotion-15 {
+.emotion-14 {
   position: relative;
   border-radius: 7px;
   -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
@@ -249,12 +236,12 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   color: #21313C;
 }
 
-.emotion-16 {
+.emotion-15 {
   margin-bottom: 24px;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-16 {
+  .emotion-15 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -264,7 +251,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-.emotion-19 {
+.emotion-18 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
@@ -276,17 +263,17 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   margin-bottom: 8px;
 }
 
-.emotion-21 {
+.emotion-20 {
   color: #061621;
   font-weight: bold;
 }
 
-.emotion-23 {
+.emotion-22 {
   list-style: none;
   padding-left: 0;
 }
 
-.emotion-25 {
+.emotion-24 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -300,11 +287,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   position: relative;
 }
 
-.emotion-25:not(:last-child) {
+.emotion-24:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-25:not(:last-child):before {
+.emotion-24:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -313,7 +300,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   border-left: solid 1px #13AA52;
 }
 
-.emotion-27 {
+.emotion-26 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -333,18 +320,18 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   min-height: 20px;
 }
 
-.emotion-29 {
+.emotion-28 {
   color: #13AA52;
 }
 
-.emotion-30 {
+.emotion-29 {
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-30:hover,
-.emotion-30:active {
+.emotion-29:hover,
+.emotion-29:active {
   color: currentColor;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -372,7 +359,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       <a
         aria-disabled="false"
         class="emotion-8 emotion-9"
-        data-leafygreen-ui="anchor-container"
+        data-leafygreen-ui="button"
         href="https://university.mongodb.com/certification/developer/about"
         rel="noopener noreferrer"
         target="_blank"
@@ -389,57 +376,39 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
             Learn More
           </div>
         </span>
-        <svg
-          alt=""
-          aria-hidden="true"
-          class="emotion-13"
-          height="16"
-          role="presentation"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M13.823 2.4491C13.8201 2.30008 13.6999 2.17994 13.5509 2.17704L9.5062 2.09836C9.25654 2.09351 9.12821 2.39519 9.30482 2.5718L10.3856 3.65257L7.93433 6.10383C7.87964 6.15852 7.83047 6.21665 7.78683 6.27752L5.99909 8.06525C5.46457 8.59977 5.46457 9.4664 5.99909 10.0009C6.53361 10.5354 7.40023 10.5354 7.93475 10.0009L9.72249 8.21317C9.78336 8.16953 9.84148 8.12037 9.89618 8.06567L12.3474 5.61441L13.4282 6.69518C13.6048 6.87179 13.9065 6.74347 13.9016 6.4938L13.823 2.4491Z"
-            fill="currentColor"
-          />
-          <path
-            d="M7.25 3.12893C7.66421 3.12893 8 3.46472 8 3.87893C8 4.29315 7.66421 4.62893 7.25 4.62893H4C3.72386 4.62893 3.5 4.85279 3.5 5.12893V11.9929C3.5 12.2691 3.72386 12.4929 4 12.4929H10.864C11.1401 12.4929 11.364 12.2691 11.364 11.9929V8.75C11.364 8.33579 11.6998 8 12.114 8C12.5282 8 12.864 8.33579 12.864 8.75V11.9929C12.864 13.0975 11.9686 13.9929 10.864 13.9929H4C2.89543 13.9929 2 13.0975 2 11.9929V5.12893C2 4.02436 2.89543 3.12893 4 3.12893H7.25Z"
-            fill="currentColor"
-          />
-        </svg>
       </a>
     </div>
     <div
-      class="emotion-14 emotion-15"
+      class="emotion-13 emotion-14"
     >
       <div
-        class="emotion-16 emotion-17"
+        class="emotion-15 emotion-16"
       >
         <div
-          class="emotion-18 emotion-19 emotion-20"
+          class="emotion-17 emotion-18 emotion-19"
         >
           Chapter 2
         </div>
         <div
-          class="emotion-21 emotion-22"
+          class="emotion-20 emotion-21"
         >
           CRUD
         </div>
       </div>
       <ul
-        class="emotion-23 emotion-24"
+        class="emotion-22 emotion-23"
       >
         <li
-          class="emotion-25 emotion-26"
+          class="emotion-24 emotion-25"
           color="#13AA52"
         >
           <div
-            class="emotion-27 emotion-28"
+            class="emotion-26 emotion-27"
             color="transparent"
           >
             <svg
               aria-label="Checkmark Icon"
-              class="emotion-29"
+              class="emotion-28"
               fill="none"
               height="16"
               role="img"
@@ -456,7 +425,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-30 emotion-31"
+            class="emotion-29 emotion-30"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -525,7 +494,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   padding: 0;
   margin: 0;
   background-color: transparent;
-  border: 0px solid transparent;
+  border: 1px solid transparent;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -534,7 +503,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  border-radius: 4px;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   position: relative;
@@ -542,14 +510,17 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  background-color: #09804C;
-  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4);
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #00684A;
+  border-color: #00684A;
   color: #FFFFFF;
   font-size: 16px;
   -webkit-transform: translateY(1px);
   -moz-transform: translateY(1px);
   -ms-transform: translateY(1px);
   transform: translateY(1px);
+  font-weight: 500;
   height: 36px;
 }
 
@@ -568,37 +539,37 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration: none;
 }
 
-.emotion-8:focus {
-  color: #FFFFFF;
-}
-
 .emotion-8:hover,
 .emotion-8:active {
   color: #FFFFFF;
-  background-color: #116149;
-  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4),0px 0px 0px 3px #c3e7ca;
+  background-color: #00593f;
+  border-color: #00593f;
+  box-shadow: 0 0 0 3px #C0FAE6;
 }
 
 .emotion-8:focus {
-  background-color: #116149;
-  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
+  color: #FFFFFF;
+  background-color: #00593f;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
 .emotion-9 {
   overflow: hidden;
-  border-radius: 3px;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  border-radius: 6px;
 }
 
 .emotion-10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -608,13 +579,8 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 0 12px;
+  gap: 6px;
 }
 
 .emotion-11 {
@@ -774,6 +740,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       <a
         aria-disabled="false"
         class="emotion-8"
+        data-leafygreen-ui="button"
         href="/server/read/"
       >
         <div
@@ -897,7 +864,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   padding: 0;
   margin: 0;
   background-color: transparent;
-  border: 0px solid transparent;
+  border: 1px solid transparent;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -906,7 +873,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  border-radius: 4px;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   position: relative;
@@ -914,14 +880,17 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  background-color: #09804C;
-  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4);
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #00684A;
+  border-color: #00684A;
   color: #FFFFFF;
   font-size: 16px;
   -webkit-transform: translateY(1px);
   -moz-transform: translateY(1px);
   -ms-transform: translateY(1px);
   transform: translateY(1px);
+  font-weight: 500;
   height: 36px;
 }
 
@@ -940,37 +909,37 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
 }
 
-.emotion-8:focus {
-  color: #FFFFFF;
-}
-
 .emotion-8:hover,
 .emotion-8:active {
   color: #FFFFFF;
-  background-color: #116149;
-  box-shadow: 0px 2px 3px rgba(19, 170, 82, 0.4),0px 0px 0px 3px #c3e7ca;
+  background-color: #00593f;
+  border-color: #00593f;
+  box-shadow: 0 0 0 3px #C0FAE6;
 }
 
 .emotion-8:focus {
-  background-color: #116149;
-  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
+  color: #FFFFFF;
+  background-color: #00593f;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
 .emotion-9 {
   overflow: hidden;
-  border-radius: 3px;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  border-radius: 6px;
 }
 
 .emotion-10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -980,13 +949,8 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 0 12px;
+  gap: 6px;
 }
 
 .emotion-11 {
@@ -1201,6 +1165,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       <a
         aria-disabled="false"
         class="emotion-8"
+        data-leafygreen-ui="button"
         href="/cloud/connectionstring/"
       >
         <div
