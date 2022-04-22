@@ -13,16 +13,10 @@ import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/moc
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
-<<<<<<< HEAD
 const expectFilteredResults = (wrapper) => {
   // Filtered property "Realm" should be shown twice:
   // (1) as the selected text in the dropdown and (2) as a badge below the search header
   expect(wrapper.queryAllByText('Realm').length).toBe(2);
-=======
-const expectFilteredResults = async (wrapper) => {
-  await tick();
-  wrapper.getByText('Search results for "stitch"');
->>>>>>> 93e3b7d (add and modify tests)
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();
@@ -44,14 +38,7 @@ const expectValuesForFilters = (wrapper, category, version) => {
 };
 
 // Check the search results match the expected unfiltered results
-<<<<<<< HEAD
 const expectUnfilteredResults = (wrapper) => {
-=======
-const expectUnfilteredResults = async (wrapper) => {
-  await tick();
-  wrapper.getByText(`Search results for "stitch"`);
-
->>>>>>> 93e3b7d (add and modify tests)
   expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
 
   // Check the search result card displays content according to the response
@@ -64,13 +51,9 @@ const expectUnfilteredResults = async (wrapper) => {
     'href',
     `http://localhost/${UNFILTERED_RESULT.url}`
   );
-<<<<<<< HEAD
 
   // We always show this text, regardless of filter
   expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
-=======
-  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(0);
->>>>>>> 93e3b7d (add and modify tests)
 
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
@@ -126,40 +109,36 @@ describe('Search Results Page', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
-  it('renders no results found correctly if query returns nothing', async () => {
-    let renderStitchResults;
-    mockLocation('?q=thisdoesnotreturnanything');
-    await act(async () => {
-      renderStitchResults = render(<SearchResults />);
-    });
-    expect(renderStitchResults.queryAllByText('No results found')).toBeTruthy();
-  });
-
-  it('renders search landing page when no query made', async () => {
-    let renderStitchResults;
-    mockLocation('');
-    await act(async () => {
-      renderStitchResults = render(<SearchResults />);
-    });
-    expect(renderStitchResults.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
-  });
-
   it('renders loading images before returning nonempty results', async () => {
-    let renderStitchResults;
+    let renderLoadingSkeletonImgs;
     mockLocation('?q=mongodb');
-    await act(async () => {
-      renderStitchResults = render(<SearchResults />);
-      expect(renderStitchResults.asFragment()).toMatchSnapshot();
-    });
+    renderLoadingSkeletonImgs = render(<SearchResults />);
+    expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
 
   it('renders loading images before returning no results', async () => {
-    let renderStitchResults;
-    mockLocation('?q=thisdoesnotreturnanything');
+    let renderLoadingSkeletonImgs;
+    mockLocation('?q=noresultsreturned');
+    renderLoadingSkeletonImgs = render(<SearchResults />);
+    expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders no results found correctly if query returns nothing', async () => {
+    let renderEmptyResults;
+    mockLocation('?q=noresultsreturned');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
-      expect(renderStitchResults.asFragment()).toMatchSnapshot();
+      renderEmptyResults = render(<SearchResults />);
     });
+    expect(renderEmptyResults.queryAllByText('No results found')).toBeTruthy();
+  });
+
+  it('renders search landing page if no query made', async () => {
+    let renderSearchLanding;
+    mockLocation('');
+    await act(async () => {
+      renderSearchLanding = render(<SearchResults />);
+    });
+    expect(renderSearchLanding.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
   });
 
   it('renders results from a given search term query param', async () => {
@@ -191,8 +170,6 @@ describe('Search Results Page', () => {
     // Change the filters, which should change the shown results
 
     await act(async () => {
-<<<<<<< HEAD
-<<<<<<< HEAD
       await filterByRealm(renderStitchResults);
     });
     expectFilteredResults(renderStitchResults);
@@ -247,24 +224,6 @@ describe('Search Results Page', () => {
       const applyFiltersButton = renderStitchResults.getByText('Apply filters').closest('button');
       userEvent.click(applyFiltersButton);
       tick();
-=======
-=======
-      await tick();
->>>>>>> c58a1a4 (add loading filter ui)
-      const dropdown = renderStitchResults.queryAllByRole('listbox')[0];
-      expect(dropdown).toHaveAttribute('aria-expanded', 'false');
-      userEvent.click(dropdown);
-<<<<<<< HEAD
-<<<<<<< HEAD
-      // tick();
-      // userEvent.click(renderStitchResults.getByText('Realm'));
->>>>>>> 93e3b7d (add and modify tests)
-=======
-      tick();
-      userEvent.click(renderStitchResults.getByText('Realm'));
->>>>>>> bccda02 (change ids to classes and refactor)
-=======
->>>>>>> 2f8f018 (fix loading skeleton appearing before landing page)
     });
     expectFilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();

@@ -49,7 +49,19 @@ const EmptyStateContainer = styled('div')`
   text-align: center;
 `;
 
-const EmptyResults = ({ title, description }) => {
+const EMPTY_RESULT_TYPES = {
+  noResultsFound: {
+    title: 'No results found. Please search again.',
+    description:
+      "Sorry. We weren't able to find any results for your query. The page might have been moved or deleted.",
+  },
+  searchLandingPage: {
+    title: 'Search MongoDB Documentation',
+    description: 'Find guides, examples, and best practices for working with the MongoDB data platform.',
+  },
+};
+
+const EmptyResults = ({ type }) => {
   const focusOnSearchbar = useCallback(() => {
     document.querySelector('button[aria-label="Open Search"]').click();
     const searchbar = document.querySelector(`form[role="search"] input[type="text"]`);
@@ -57,6 +69,9 @@ const EmptyResults = ({ title, description }) => {
       searchbar.focus();
     }
   }, []);
+
+  const title = EMPTY_RESULT_TYPES?.[type]?.title || EMPTY_RESULT_TYPES.noResultsFound.title;
+  const description = EMPTY_RESULT_TYPES?.[type]?.description || EMPTY_RESULT_TYPES.noResultsFound.description;
 
   return (
     <EmptyStateContainer>
@@ -72,8 +87,7 @@ const EmptyResults = ({ title, description }) => {
 };
 
 EmptyResults.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
 
 export default EmptyResults;

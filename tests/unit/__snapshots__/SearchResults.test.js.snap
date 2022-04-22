@@ -196,13 +196,262 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 exports[`Search Results Page renders loading images before returning no results 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
-  margin-top: calc(50vh - 28px - 40px - 166px / 2);
+  -webkit-column-gap: 46px;
+  column-gap: 46px;
+  display: grid;
+  grid-template-areas: 'header .' 'results filters';
+  grid-template-columns: auto 173px;
+  margin: 32px 108px 64px 32px;
+  max-width: 1150px;
+  row-gap: 32px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .emotion-0 {
+    margin: 32px 40px 64px 40px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-0 {
+    -webkit-column-gap: 0;
+    column-gap: 0;
+    grid-template-areas: 'header' 'results';
+    grid-template-columns: auto;
+    margin: 32px 24px 64px 24px;
+  }
 }
 
 .emotion-2 {
-  height: 1000px;
+  grid-area: header;
+}
+
+.emotion-4 {
+  font-size: 18px;
+  line-height: 21px;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  letter-spacing: 0.8px;
+}
+
+.emotion-6 {
+  display: none;
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-6 {
+    display: block;
+  }
+}
+
+.emotion-8 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #F9FBFA;
+  border: 1px solid #89979B;
+  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
+  color: #3D4F58;
+  font-size: 14px;
+  height: 36px;
+}
+
+.emotion-8:focus {
+  outline: none;
+}
+
+.emotion-8:disabled {
+  pointer-events: none;
+}
+
+.emotion-8:active,
+.emotion-8:focus,
+.emotion-8:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8:focus {
+  color: #3D4F58;
+}
+
+.emotion-8:hover,
+.emotion-8:active {
+  color: #3D4F58;
+  background-color: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),0px 0px 0px 3px #E7EEEC;
+}
+
+.emotion-8:focus {
+  background: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
+}
+
+.emotion-9 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-11 {
+  color: #5D6C74;
+  height: 16px;
+  width: 16px;
+  margin-right: 6px;
+}
+
+.emotion-12 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(128px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-12:hover>.e1yoi6mj6 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-12:hover>.e1yoi6mj6:hover {
+  opacity: 1;
+}
+
+.emotion-12:not(:hover)>.e1yoi6mj6 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-14 {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  height: 128px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-14>div {
+  padding: 24px;
+}
+
+.emotion-14:hover,
+.emotion-14:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-14:hover>div,
+.emotion-14:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-14:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-14 * {
+  padding: 2px;
+  height: 15px!important;
+}
+
+.emotion-14 * .item3 {
+  margin-right: 10px!important;
+}
+
+.emotion-34 {
+  grid-area: filters;
+}
+
+.emotion-36 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-36 {
+    display: none;
+  }
 }
 
 <div
@@ -210,7 +459,536 @@ exports[`Search Results Page renders loading images before returning no results 
   >
     <div
       class="emotion-2 emotion-3"
-    />
+    >
+      <h1
+        class="emotion-4 emotion-5"
+      >
+        Search results for "noresultsreturned"
+      </h1>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <button
+          aria-disabled="false"
+          class="emotion-8"
+          type="button"
+        >
+          <div
+            class="emotion-9"
+          />
+          <div
+            class="emotion-10"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-11"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Specify your search
+          </div>
+        </button>
+      </div>
+    </div>
+    <div
+      class="emotion-12 emotion-13"
+    >
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="emotion-34 emotion-35"
+    >
+      <h2
+        class="emotion-36 emotion-37"
+      >
+        Specify your search
+      </h2>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -218,13 +996,262 @@ exports[`Search Results Page renders loading images before returning no results 
 exports[`Search Results Page renders loading images before returning nonempty results 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
-  margin-top: calc(50vh - 28px - 40px - 166px / 2);
+  -webkit-column-gap: 46px;
+  column-gap: 46px;
+  display: grid;
+  grid-template-areas: 'header .' 'results filters';
+  grid-template-columns: auto 173px;
+  margin: 32px 108px 64px 32px;
+  max-width: 1150px;
+  row-gap: 32px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .emotion-0 {
+    margin: 32px 40px 64px 40px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-0 {
+    -webkit-column-gap: 0;
+    column-gap: 0;
+    grid-template-areas: 'header' 'results';
+    grid-template-columns: auto;
+    margin: 32px 24px 64px 24px;
+  }
 }
 
 .emotion-2 {
-  height: 1000px;
+  grid-area: header;
+}
+
+.emotion-4 {
+  font-size: 18px;
+  line-height: 21px;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  letter-spacing: 0.8px;
+}
+
+.emotion-6 {
+  display: none;
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-6 {
+    display: block;
+  }
+}
+
+.emotion-8 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #F9FBFA;
+  border: 1px solid #89979B;
+  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
+  color: #3D4F58;
+  font-size: 14px;
+  height: 36px;
+}
+
+.emotion-8:focus {
+  outline: none;
+}
+
+.emotion-8:disabled {
+  pointer-events: none;
+}
+
+.emotion-8:active,
+.emotion-8:focus,
+.emotion-8:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8:focus {
+  color: #3D4F58;
+}
+
+.emotion-8:hover,
+.emotion-8:active {
+  color: #3D4F58;
+  background-color: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),0px 0px 0px 3px #E7EEEC;
+}
+
+.emotion-8:focus {
+  background: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
+}
+
+.emotion-9 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-11 {
+  color: #5D6C74;
+  height: 16px;
+  width: 16px;
+  margin-right: 6px;
+}
+
+.emotion-12 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(128px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-12:hover>.e1yoi6mj6 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-12:hover>.e1yoi6mj6:hover {
+  opacity: 1;
+}
+
+.emotion-12:not(:hover)>.e1yoi6mj6 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-14 {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  height: 128px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-14>div {
+  padding: 24px;
+}
+
+.emotion-14:hover,
+.emotion-14:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-14:hover>div,
+.emotion-14:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-14:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-14 * {
+  padding: 2px;
+  height: 15px!important;
+}
+
+.emotion-14 * .item3 {
+  margin-right: 10px!important;
+}
+
+.emotion-34 {
+  grid-area: filters;
+}
+
+.emotion-36 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-36 {
+    display: none;
+  }
 }
 
 <div
@@ -232,7 +1259,536 @@ exports[`Search Results Page renders loading images before returning nonempty re
   >
     <div
       class="emotion-2 emotion-3"
-    />
+    >
+      <h1
+        class="emotion-4 emotion-5"
+      >
+        Search results for "mongodb"
+      </h1>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <button
+          aria-disabled="false"
+          class="emotion-8"
+          type="button"
+        >
+          <div
+            class="emotion-9"
+          />
+          <div
+            class="emotion-10"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-11"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Specify your search
+          </div>
+        </button>
+      </div>
+    </div>
+    <div
+      class="emotion-12 emotion-13"
+    >
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item1"
+            style="width: 200px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item2"
+            style="border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton item3"
+            style="width: 60px; border-radius: 0.75rem;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="emotion-34 emotion-35"
+    >
+      <h2
+        class="emotion-36 emotion-37"
+      >
+        Specify your search
+      </h2>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton item1"
+          style="width: 200px; border-radius: 0.75rem;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+    </div>
   </div>
 </DocumentFragment>
 `;

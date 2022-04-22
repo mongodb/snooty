@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import Skeleton from 'react-loading-skeleton';
 import { css } from '@emotion/react';
-import Skeleton from 'react-loading-skeleton';
 import styled from '@emotion/styled';
 import { useLocation } from '@reach/router';
 import Button from '@leafygreen-ui/button';
@@ -14,7 +13,6 @@ import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
-import { reportAnalytics } from '../../utils/report-analytics';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
@@ -96,21 +94,6 @@ const SearchResultsContainer = styled('div')`
   @media ${theme.screenSize.upToMedium} {
     column-gap: 0;
     grid-template-areas: 'header' 'results';
-    grid-template-columns: auto;
-    margin: ${theme.size.large} ${theme.size.medium} ${theme.size.xlarge} ${theme.size.medium};
-  }
-
-  @media ${theme.screenSize.upToLarge} {
-    align-items: center;
-    column-gap: ${theme.size.default};
-    grid-template-areas: 'header header' 'filter-header filter-header' 'filters filters' 'results results';
-    /* For the middle breakpoint, we want a column for width on specifically this text */
-    margin: 0 auto;
-    padding-left: ${theme.size.default};
-    padding-right: ${theme.size.default};
-  }
-
-  @media ${theme.screenSize.upToSmall} {
     grid-template-columns: auto;
     margin: ${theme.size.large} ${theme.size.medium} ${theme.size.xlarge} ${theme.size.medium};
   }
@@ -229,10 +212,6 @@ const StyledSearchResults = styled('div')`
   }
 `;
 
-const loadingFilterStyling = css`
-  grid-area: filters;
-`;
-
 const EmptyPlaceholder = styled('div')`
   height: 1000px;
   width: 100%;
@@ -326,83 +305,112 @@ const SearchResults = () => {
     fetchNewSearchResults();
   }, [searchFilter, searchTerm, searchFinished]);
 
-  if (!searchTerm && searchResults?.length === 0) {
-    return (
-      <EmptyResultsContainer>
-        {firstRenderComplete ? (
-          <EmptyResults
-            title={'Search MongoDB Documentation'}
-            description={'Find guides, examples, and best practices for working with the MongoDB data platform.'}
-          />
-        ) : (
-          <EmptyPlaceholder />
-        )}
-      </EmptyResultsContainer>
-    );
-  }
-
-  if (!searchFinished) {
-    return (
-      <SearchContext.Provider value={{ searchFilter, searchTerm, setSearchFilter }}>
-        <Helmet>
-          <title>Search Results</title>
-        </Helmet>
-        <SearchResultsContainer>
-          <HeaderText>Search results for "{searchTerm}"</HeaderText>
-          <StyledSearchResults>
-            {[...Array(10).keys()].map(() => (
-              <StyledLoadingSkeletonContainer>
-                <Skeleton className="item1" borderRadius="0.75rem" width={200} />
-                <Skeleton className="item2" borderRadius="0.75rem" />
-                <Skeleton className="item3" count={2} borderRadius="0.75rem" inline width={60} />
-              </StyledLoadingSkeletonContainer>
-            ))}
-          </StyledSearchResults>
-          <FilterHeader>Specify Your Search</FilterHeader>
-          <div style={loadingFilterStyling}>
-            <Skeleton className="item1" borderRadius="0.75rem" width={200} />
-            <Skeleton className="item1" borderRadius="0.75rem" width={200} />
-          </div>
-        </SearchResultsContainer>
-      </SearchContext.Provider>
-    );
-  }
-  if (searchResults?.length === 0) {
-    return (
-      <EmptyResultsContainer>
-        <EmptyResults
-          title={'No results found. Please search again.'}
-          description={
-            "Sorry. We weren't able to find any results for your query. The page might have been moved or deleted."
-          }
-        />
-      </EmptyResultsContainer>
-    );
-  }
   return (
-    <SearchContext.Provider value={{ searchFilter, searchTerm, setSearchFilter }}>
+    <SearchContext.Provider
+      value={{
+        searchFilter,
+        searchTerm,
+        selectedVersion,
+        selectedCategory,
+        setSearchFilter,
+        setSelectedVersion,
+        setSelectedCategory,
+        setShowMobileFilters,
+      }}
+    >
       <Helmet>
         <title>Search Results</title>
       </Helmet>
-      <SearchResultsContainer>
-        <HeaderText>Search results for "{searchTerm}"</HeaderText>
-        <StyledSearchResults>
-          {searchResults.map(({ title, preview, url }, index) => (
-            <StyledSearchResult
-              key={`${url}${index}`}
-              onClick={() =>
-                reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
-              }
-              title={title}
-              preview={preview}
-              url={transformUrlBasedOnOrigin(url)}
-              useLargeTitle
-            />
-          ))}
-        </StyledSearchResults>
-        <FilterHeader>Specify Your Search</FilterHeader>
-        <StyledSearchFilters hasSideLabels={false} />
-      </SearchResultsContainer>
+      {!!searchTerm ? (
+        <SearchResultsContainer>
+          <HeaderContainer>
+            <HeaderText>Search results for "{searchTerm}"</HeaderText>
+            {!!searchFilter && (
+              <FilterBadgesWrapper>
+                {selectedCategory && (
+                  <StyledTag variant="green" onClick={resetFilters}>
+                    {selectedCategory}
+                    <Icon glyph="X" />
+                  </StyledTag>
+                )}
+                {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+              </FilterBadgesWrapper>
+            )}
+            <MobileSearchButtonWrapper>
+              <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+                {mobileFilterButton.text}
+              </Button>
+            </MobileSearchButtonWrapper>
+          </HeaderContainer>
+          {searchResults?.length ? (
+            <>
+              <StyledSearchResults>
+                {searchResults.map(({ title, preview, url }, index) => (
+                  <StyledSearchResult
+                    key={`${url}${index}`}
+                    onClick={() =>
+                      reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                    }
+                    title={title}
+                    preview={preview}
+                    url={transformUrlBasedOnOrigin(url)}
+                    useLargeTitle
+                  />
+                ))}
+              </StyledSearchResults>
+              <FiltersContainer>
+                <FilterHeader>{specifySearchText}</FilterHeader>
+                <StyledSearchFilters />
+              </FiltersContainer>
+            </>
+          ) : (
+            <>
+              {!searchFinished ? (
+                <>
+                  <StyledSearchResults>
+                    {[...Array(10).keys()].map(() => (
+                      <StyledLoadingSkeletonContainer>
+                        <Skeleton className="item1" borderRadius="0.75rem" width={200} />
+                        <Skeleton className="item2" borderRadius="0.75rem" />
+                        <Skeleton className="item3" count={2} borderRadius="0.75rem" inline width={60} />
+                      </StyledLoadingSkeletonContainer>
+                    ))}
+                  </StyledSearchResults>
+                  <FiltersContainer>
+                    <FilterHeader>{specifySearchText}</FilterHeader>
+                    <Skeleton className="item1" borderRadius="0.75rem" width={200} />
+                    <Skeleton className="item1" borderRadius="0.75rem" width={200} />
+                  </FiltersContainer>
+                </>
+              ) : (
+                <>
+                  <EmptyResultsContainer
+                    css={css`
+                      grid-area: results;
+                      margin-top: 80px;
+                    `}
+                  >
+                    <EmptyResults />
+                  </EmptyResultsContainer>
+                  <FiltersContainer>
+                    <FilterHeader>{specifySearchText}</FilterHeader>
+                    <StyledSearchFilters />
+                  </FiltersContainer>
+                </>
+              )}
+            </>
+          )}
+          {showMobileFilters && isTabletOrMobile && <MobileFilters />}
+        </SearchResultsContainer>
+      ) : (
+        <>
+          {!searchResults?.length && (
+            <EmptyResultsContainer>
+              {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
+            </EmptyResultsContainer>
+          )}
+        </>
+      )}
     </SearchContext.Provider>
   );
 };
