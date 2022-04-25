@@ -422,9 +422,6 @@ exports[`Search Results Page renders loading images before returning no results 
 .emotion-14 * {
   padding: 2px;
   height: 15px!important;
-}
-
-.emotion-14 * .item3 {
   margin-right: 10px!important;
 }
 
@@ -513,8 +510,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -525,8 +522,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -537,14 +534,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -558,8 +555,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -570,8 +567,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -582,14 +579,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -603,8 +600,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -615,8 +612,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -627,14 +624,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -648,8 +645,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -660,8 +657,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -672,14 +669,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -693,8 +690,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -705,8 +702,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -717,14 +714,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -738,8 +735,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -750,8 +747,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -762,14 +759,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -783,8 +780,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -795,8 +792,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -807,14 +804,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -828,8 +825,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -840,8 +837,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -852,14 +849,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -873,8 +870,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -885,8 +882,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -897,14 +894,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -918,8 +915,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -930,8 +927,8 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -942,14 +939,14 @@ exports[`Search Results Page renders loading images before returning no results 
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -969,20 +966,15 @@ exports[`Search Results Page renders loading images before returning no results 
         aria-live="polite"
       >
         <span
-          class="react-loading-skeleton item1"
-          style="width: 200px; border-radius: 0.75rem;"
+          class="react-loading-skeleton"
+          style="width: 200px; border-radius: 12px;"
         >
           ‌
         </span>
         <br />
-      </span>
-      <span
-        aria-busy="true"
-        aria-live="polite"
-      >
         <span
-          class="react-loading-skeleton item1"
-          style="width: 200px; border-radius: 0.75rem;"
+          class="react-loading-skeleton"
+          style="width: 200px; border-radius: 12px;"
         >
           ‌
         </span>
@@ -1222,9 +1214,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
 .emotion-14 * {
   padding: 2px;
   height: 15px!important;
-}
-
-.emotion-14 * .item3 {
   margin-right: 10px!important;
 }
 
@@ -1313,8 +1302,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1325,8 +1314,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1337,14 +1326,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1358,8 +1347,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1370,8 +1359,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1382,14 +1371,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1403,8 +1392,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1415,8 +1404,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1427,14 +1416,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1448,8 +1437,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1460,8 +1449,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1472,14 +1461,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1493,8 +1482,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1505,8 +1494,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1517,14 +1506,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1538,8 +1527,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1550,8 +1539,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1562,14 +1551,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1583,8 +1572,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1595,8 +1584,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1607,14 +1596,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1628,8 +1617,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1640,8 +1629,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1652,14 +1641,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1673,8 +1662,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1685,8 +1674,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1697,14 +1686,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1718,8 +1707,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item1"
-            style="width: 200px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1730,8 +1719,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item2"
-            style="border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
           >
             ‌
           </span>
@@ -1742,14 +1731,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-live="polite"
         >
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
           <span
-            class="react-loading-skeleton item3"
-            style="width: 60px; border-radius: 0.75rem;"
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
           >
             ‌
           </span>
@@ -1769,20 +1758,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
         aria-live="polite"
       >
         <span
-          class="react-loading-skeleton item1"
-          style="width: 200px; border-radius: 0.75rem;"
+          class="react-loading-skeleton"
+          style="width: 200px; border-radius: 12px;"
         >
           ‌
         </span>
         <br />
-      </span>
-      <span
-        aria-busy="true"
-        aria-live="polite"
-      >
         <span
-          class="react-loading-skeleton item1"
-          style="width: 200px; border-radius: 0.75rem;"
+          class="react-loading-skeleton"
+          style="width: 200px; border-radius: 12px;"
         >
           ‌
         </span>

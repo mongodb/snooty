@@ -28,6 +28,7 @@ const LANDING_MODULE_MARGIN = '28px';
 const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
 const SEARCH_RESULT_HEIGHT = '128px';
+const SKELETON_BORDER_RADIUS = '12px';
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
@@ -175,15 +176,12 @@ const StyledLoadingSkeletonContainer = styled('div')`
   * {
     padding: 2px;
     height: 15px !important;
+    margin-right: 10px !important;
   }
 
   /* grid to handle loading skeleton structure */
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
-
-  * .item3 {
-    margin-right: 10px !important;
-  }
 `;
 
 const StyledSearchResults = styled('div')`
@@ -368,18 +366,17 @@ const SearchResults = () => {
               {!searchFinished ? (
                 <>
                   <StyledSearchResults>
-                    {[...Array(10).keys()].map(() => (
-                      <StyledLoadingSkeletonContainer>
-                        <Skeleton className="item1" borderRadius="0.75rem" width={200} />
-                        <Skeleton className="item2" borderRadius="0.75rem" />
-                        <Skeleton className="item3" count={2} borderRadius="0.75rem" inline width={60} />
+                    {[...Array(10)].map((_, index) => (
+                      <StyledLoadingSkeletonContainer key={index}>
+                        <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={200} />
+                        <Skeleton borderRadius={SKELETON_BORDER_RADIUS} />
+                        <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} inline width={60} />
                       </StyledLoadingSkeletonContainer>
                     ))}
                   </StyledSearchResults>
                   <FiltersContainer>
                     <FilterHeader>{specifySearchText}</FilterHeader>
-                    <Skeleton className="item1" borderRadius="0.75rem" width={200} />
-                    <Skeleton className="item1" borderRadius="0.75rem" width={200} />
+                    <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} width={200} />
                   </FiltersContainer>
                 </>
               ) : (
