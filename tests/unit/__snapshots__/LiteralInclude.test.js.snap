@@ -162,12 +162,22 @@ exports[`renders correctly 1`] = `
   -ms-flex-negative: 0;
   flex-shrink: 0;
   padding-top: 6px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
   min-height: 36px;
   padding-top: 4px;
   min-height: 36px;
   padding-top: 4px;
   border-color: #E7EEEC;
   background-color: white;
+}
+
+.emotion-9 svg {
+  width: 16px;
+  height: 16px;
 }
 
 <div
@@ -181,7 +191,6 @@ exports[`renders correctly 1`] = `
       >
         <pre
           class="emotion-3"
-          customactionbuttons=""
           tabindex="-1"
         >
           <code

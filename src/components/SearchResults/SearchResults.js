@@ -293,6 +293,7 @@ const SearchResults = () => {
     fetchNewSearchResults();
   }, [searchFilter, searchTerm]);
 
+
   return (
     <>
       <Global

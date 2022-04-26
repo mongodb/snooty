@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { uiColors, palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 
 const baseStyle = css`
@@ -29,6 +29,11 @@ const VARIANTS = {
     background-color: ${uiColors.green.light3};
     border: 1px solid ${uiColors.green.light2};
     color: ${uiColors.green.dark2};
+  `,
+  purple: css`
+    background-color: ${palette.purple.light3};
+    border: 1px solid ${palette.purple.light2};
+    color: ${palette.purple.dark2};
   `,
 };
 

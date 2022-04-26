@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
+import { useMarianManifests } from '../../hooks/use-marian-manifests';
 import SearchContext from './SearchContext';
 import { StyledTextInput } from './SearchTextInput';
 import Tag, { tagStyle } from '../Tag';
@@ -131,6 +132,7 @@ const SearchResult = React.memo(
     title,
     categoryTag,
     versionTag,
+    searchProperty,
     url,
     ...props
   }) => {
@@ -138,6 +140,10 @@ const SearchResult = React.memo(
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
+
+    const { filters } = useMarianManifests(true);
+    const category = !!categoryTag ? categoryTag : filters?.[searchProperty]?.['category'];
+    const version = !!versionTag ? versionTag : filters?.[searchProperty]?.['version'];
 
     const onArrowDown = useCallback(
       (resultLinkRef) => {
@@ -204,9 +210,9 @@ const SearchResult = React.memo(
             }}
           />
           <StylingTagContainer>
-            {categoryTag && <StyledTag variant="green">{categoryTag}</StyledTag>}
-            {versionTag && <StyledTag variant="blue">{versionTag}</StyledTag>}
-            {url.includes('/api/') && <StyledTag variant="green">{'API'}</StyledTag>}
+            {!!category && <StyledTag variant="green">{category}</StyledTag>}
+            {!!version && <StyledTag variant="blue">{version}</StyledTag>}
+            {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
           </StylingTagContainer>
           {learnMoreLink && (
             <MobileFooterContainer>
