@@ -39,8 +39,6 @@ const expectValuesForFilters = (wrapper, category, version) => {
 
 // Check the search results match the expected unfiltered results
 const expectUnfilteredResults = (wrapper) => {
-  expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
-
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.title)).toBeTruthy();
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.preview)).toBeTruthy();
