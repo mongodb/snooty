@@ -31,11 +31,7 @@ exports[`renders correctly 1`] = `
   background-color: #00684A;
   border-color: #00684A;
   color: #FFFFFF;
-  font-size: 16px;
-  -webkit-transform: translateY(1px);
-  -moz-transform: translateY(1px);
-  -ms-transform: translateY(1px);
-  transform: translateY(1px);
+  font-size: 13px;
   font-weight: 500;
   height: 36px;
 }
