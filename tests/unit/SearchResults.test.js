@@ -14,9 +14,10 @@ const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
 const expectFilteredResults = (wrapper) => {
-  // Filtered property "Realm" should be shown 3x:
+  // Filtered property "Realm" and version "Latest" should be shown 3x:
   // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
   expect(wrapper.queryAllByText('Realm').length).toBe(3);
+  expect(wrapper.queryAllByText('Latest').length).toBe(3);
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();
@@ -37,8 +38,16 @@ const expectValuesForFilters = (wrapper, category, version) => {
   expect(within(dropdowns[1]).queryByText(version)).toBeTruthy();
 };
 
+// Unfiltered search results should still display tags for category and version on card
+const expectUnfilteredSearchResultTags = (wrapper) => {
+  expect(wrapper.queryAllByText('Realm').length).toBe(1);
+  expect(wrapper.queryAllByText('Latest').length).toBe(1);
+};
+
 // Check the search results match the expected unfiltered results
 const expectUnfilteredResults = (wrapper) => {
+  expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
+
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.title)).toBeTruthy();
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.preview)).toBeTruthy();
@@ -145,6 +154,8 @@ describe('Search Results Page', () => {
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
     });
+    expect(renderStitchResults.asFragment()).toMatchSnapshot();
+    expectUnfilteredSearchResultTags(renderStitchResults);
     expectUnfilteredResults(renderStitchResults);
   });
 
@@ -154,7 +165,18 @@ describe('Search Results Page', () => {
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
     });
+    expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectFilteredResults(renderStitchResults);
+  });
+
+  it('does not return results for a given search term with an ill-formed searchProperty', async () => {
+    let renderStitchResults;
+    mockLocation('?q=realm');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expect(renderStitchResults.asFragment()).toMatchSnapshot();
+    expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
   });
 
   it('updates the page UI when a property is changed', async () => {
