@@ -109,6 +109,38 @@ describe('Search Results Page', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
+  it('renders loading images before returning nonempty results', async () => {
+    let renderLoadingSkeletonImgs;
+    mockLocation('?q=mongodb');
+    renderLoadingSkeletonImgs = render(<SearchResults />);
+    expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders loading images before returning no results', async () => {
+    let renderLoadingSkeletonImgs;
+    mockLocation('?q=noresultsreturned');
+    renderLoadingSkeletonImgs = render(<SearchResults />);
+    expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders no results found correctly if query returns nothing', async () => {
+    let renderEmptyResults;
+    mockLocation('?q=noresultsreturned');
+    await act(async () => {
+      renderEmptyResults = render(<SearchResults />);
+    });
+    expect(renderEmptyResults.queryAllByText('No results found')).toBeTruthy();
+  });
+
+  it('renders search landing page if no query made', async () => {
+    let renderSearchLanding;
+    mockLocation('');
+    await act(async () => {
+      renderSearchLanding = render(<SearchResults />);
+    });
+    expect(renderSearchLanding.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
+  });
+
   it('renders results from a given search term query param', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
