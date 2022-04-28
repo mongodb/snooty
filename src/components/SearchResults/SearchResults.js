@@ -294,7 +294,7 @@ const SearchResults = () => {
       }
     };
     fetchNewSearchResults();
-  }, [searchFilter, searchTerm, searchFinished]);
+  }, [searchFilter, searchTerm]);
 
   return (
     <>
