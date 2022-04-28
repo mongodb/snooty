@@ -11,7 +11,7 @@ const baseStyle = css`
   padding: ${theme.size.tiny} ${theme.size.small};
 `;
 
-export const tagStyle = css`
+export const searchTagStyle = css`
   cursor: pointer;
   height: 26px;
   font-size: ${theme.fontSize.small};
@@ -23,7 +23,7 @@ const VARIANTS = {
     background-color: ${uiColors.blue.light3};
     border: 1px solid ${uiColors.blue.light2};
     // TODO: Update this to be blue.dark1 when we upgrade our Palette
-    color: ${uiColors.blue.dark2};
+    color: ${uiColors.blue.dark1};
   `,
   green: css`
     background-color: ${uiColors.green.light3};

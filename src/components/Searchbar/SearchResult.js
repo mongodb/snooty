@@ -5,10 +5,9 @@ import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
-import { useMarianManifests } from '../../hooks/use-marian-manifests';
 import SearchContext from './SearchContext';
 import { StyledTextInput } from './SearchTextInput';
-import Tag, { tagStyle } from '../Tag';
+import Tag, { searchTagStyle } from '../Tag';
 
 const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
@@ -97,7 +96,7 @@ const StyledResultTitle = styled('p')`
 `;
 
 const StyledTag = styled(Tag)`
-  ${tagStyle}
+  ${searchTagStyle}
 `;
 
 const StylingTagContainer = styled('div')`
@@ -130,20 +129,18 @@ const SearchResult = React.memo(
     onClick,
     preview,
     title,
-    categoryTag,
-    versionTag,
+    parsedManifests,
     searchProperty,
     url,
     ...props
   }) => {
-    const { searchContainerRef, searchTerm } = useContext(SearchContext);
+    const { searchContainerRef, searchTerm, selectedCategory, selectedVersion } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
 
-    const { filters } = useMarianManifests(true);
-    const category = !!categoryTag ? categoryTag : filters?.[searchProperty]?.['category'];
-    const version = !!versionTag ? versionTag : filters?.[searchProperty]?.['version'];
+    const category = !!selectedCategory ? selectedCategory : parsedManifests?.[searchProperty]?.['category'];
+    const version = !!selectedVersion ? selectedVersion : parsedManifests?.[searchProperty]?.['version'];
 
     const onArrowDown = useCallback(
       (resultLinkRef) => {

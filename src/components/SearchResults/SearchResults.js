@@ -19,7 +19,8 @@ import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import transformUrlBasedOnOrigin from '../../utils/transform-url-based-on-origin';
-import Tag, { tagStyle } from '../Tag';
+import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import Tag, { searchTagStyle } from '../Tag';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const DESKTOP_COLUMN_GAP = '46px';
@@ -220,7 +221,7 @@ const FilterBadgesWrapper = styled('div')`
 `;
 
 const StyledTag = styled(Tag)`
-  ${tagStyle}
+  ${searchTagStyle}
 `;
 
 const MobileSearchButtonWrapper = styled('div')`
@@ -244,6 +245,7 @@ const SearchResults = () => {
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const specifySearchText = 'Specify your search';
+  const { filters } = useMarianManifests(true);
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
@@ -351,8 +353,7 @@ const SearchResults = () => {
                       preview={preview}
                       url={transformUrlBasedOnOrigin(url)}
                       useLargeTitle
-                      categoryTag={selectedCategory}
-                      versionTag={selectedVersion}
+                      parsedManifests={filters}
                       searchProperty={searchProperty?.[0]}
                     />
                   ))}
