@@ -118,7 +118,7 @@ describe('Search Results Page', () => {
 
   it('renders loading images before returning nonempty results', async () => {
     let renderLoadingSkeletonImgs;
-    mockLocation('?q=mongodb');
+    mockLocation('?q=stitch');
     renderLoadingSkeletonImgs = render(<SearchResults />);
     expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
@@ -148,7 +148,7 @@ describe('Search Results Page', () => {
     expect(renderSearchLanding.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
   });
 
-  it('renders results from a given search term query param', async () => {
+  it('renders results from a given search term query param and displays category and version tags', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
@@ -159,7 +159,7 @@ describe('Search Results Page', () => {
     expectUnfilteredResults(renderStitchResults);
   });
 
-  it('considers a given search filter query param', async () => {
+  it('considers a given search filter query param and displays category and version tags', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch&searchProperty=realm-master');
     await act(async () => {

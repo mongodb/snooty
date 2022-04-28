@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Search Results Page considers a given search filter query param 1`] = `
+exports[`Search Results Page considers a given search filter query param and displays category and version tags 1`] = `
 <DocumentFragment>
   .emotion-0 {
   -webkit-column-gap: 46px;
@@ -617,7 +617,7 @@ exports[`Search Results Page considers a given search filter query param 1`] = `
       </a>
     </div>
     <div
-      class="emotion-35 emotion-36"
+      class="emotion-35 emotion-80"
     >
       <h2
         class="emotion-37 emotion-38"
@@ -1607,7 +1607,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Search Results Page renders results from a given search term query param 1`] = `
+exports[`Search Results Page renders loading images before returning no results 1`] = `
 <DocumentFragment>
   .emotion-0 {
   -webkit-column-gap: 46px;
@@ -1767,27 +1767,23 @@ exports[`Search Results Page renders results from a given search term query para
   width: 100%;
 }
 
-.emotion-12:hover>.emotion-14 {
+.emotion-12:hover>.e1yoi6mj6 {
   opacity: 0.2;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-12:hover>.emotion-14:hover {
+.emotion-12:hover>.e1yoi6mj6:hover {
   opacity: 1;
 }
 
-.emotion-12:not(:hover)>.emotion-14 {
+.emotion-12:not(:hover)>.e1yoi6mj6 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-15 {
-  color: #494747;
-  height: 100%;
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-14 {
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
@@ -1795,39 +1791,30 @@ exports[`Search Results Page renders results from a given search term query para
   position: relative;
   place-self: center;
   width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
 }
 
-.emotion-15:hover,
-.emotion-15:focus {
-  color: #494747;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-15:hover .emotion-18,
-.emotion-15:focus .emotion-18 {
-  background-color: rgba(231, 238, 236, 0.4);
-  -webkit-transition: background-color 150ms ease-in;
-  transition: background-color 150ms ease-in;
-}
-
-.emotion-15>div {
+.emotion-14>div {
   padding: 24px;
 }
 
-.emotion-15:hover,
-.emotion-15:focus {
+.emotion-14:hover,
+.emotion-14:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-15:hover>div,
-.emotion-15:focus>div {
+.emotion-14:hover>div,
+.emotion-14:focus>div {
   background-color: unset!important;
 }
 
-.emotion-15:before {
+.emotion-14:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -1837,123 +1824,17 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: transparent;
 }
 
-.emotion-17 {
-  height: 100%;
-  position: relative;
+.emotion-14 * {
+  padding: 2px;
+  height: 15px!important;
+  margin-right: 10px!important;
 }
 
-@media only screen and (max-width: 480px) {
-  .emotion-17 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-  }
-}
-
-.emotion-19 {
-  font-family: Akzidenz;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0.5px;
-  height: 24px;
-  margin-bottom: 6px;
-  margin-top: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-@media not all and (max-width: 480px) {
-  .emotion-19 {
-    font-weight: bolder;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-19 {
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-  @media not all and (max-width: 480px) {
-    .emotion-19 {
-      font-weight: bolder;
-    }
-  }
-}
-
-.emotion-21 {
-  font-family: 'Akzidenz Grotesk BQ Light';
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 20px;
-  margin-bottom: 0;
-  margin-top: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.emotion-23 {
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 24px;
-}
-
-.emotion-26 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 4px 8px;
-  background-color: #E4F4E4;
-  border: 1px solid #C3E7CA;
-  color: #116149;
-  cursor: pointer;
-  height: 26px;
-  font-size: 14px;
-  margin-right: 8px;
-}
-
-.emotion-28 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 4px 8px;
-  background-color: #E1F2F6;
-  border: 1px solid #C5E4F2;
-  color: #1A567E;
-  cursor: pointer;
-  height: 26px;
-  font-size: 14px;
-  margin-right: 8px;
-}
-
-.emotion-29 {
+.emotion-34 {
   grid-area: filters;
 }
 
-.emotion-31 {
+.emotion-36 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -1970,123 +1851,9 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-31 {
+  .emotion-36 {
     display: none;
   }
-}
-
-.emotion-33 {
-  grid-area: filters;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-33 {
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: none;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-  }
-
-  .emotion-33>div {
-    margin-bottom: 0;
-    margin-right: 8px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-33 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-
-  .emotion-33>div {
-    width: 100%;
-  }
-
-  .emotion-33>div:first-of-type {
-    margin-bottom: 8px;
-    margin-right: 0;
-  }
-}
-
-.emotion-35 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.emotion-38 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 1;
-  width: 175px;
-}
-
-.emotion-40 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: pointer;
-  position: relative;
-}
-
-.emotion-42 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  padding: 10px 16px;
-}
-
-.emotion-44 {
-  display: inline-block;
-  font-family: Akzidenz;
-  font-size: 14px;
-  margin: 0!important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.emotion-49 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 0.3;
-  width: 175px;
-}
-
-.emotion-51 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: not-allowed;
-  position: relative;
 }
 
 <div
@@ -2098,7 +1865,7 @@ exports[`Search Results Page renders results from a given search term query para
       <h1
         class="emotion-4 emotion-5"
       >
-        Search results for "stitch"
+        Search results for "noresultsreturned"
       </h1>
       <div
         class="emotion-6 emotion-7"
@@ -2134,179 +1901,6 @@ exports[`Search Results Page renders results from a given search term query para
               />
             </svg>
             Specify your search
-          </div>
-        </button>
-      </div>
-    </div>
-    <div
-      class="emotion-12 emotion-13"
-    >
-      <a
-        class="emotion-14 emotion-15 emotion-16"
-        href="stitch.nofilters"
-      >
-        <div
-          class="emotion-17 emotion-18"
-        >
-          <p
-            class="emotion-19 emotion-20"
-          >
-            <span
-              style="background-color:#FEF2C8"
-            >
-              stitch
-            </span>
-             (no filters)
-          </p>
-          <p
-            class="emotion-21 emotion-22"
-          >
-            <span
-              style="background-color:#FEF2C8"
-            >
-              Stitch
-            </span>
-             preview (no filters)
-          </p>
-          <div
-            class="emotion-23 emotion-24"
-          >
-            <span
-              class="emotion-25 emotion-26"
-            >
-              Realm
-            </span>
-            <span
-              class="emotion-25 emotion-28"
-            >
-              Latest
-            </span>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div
-      class="emotion-29 emotion-30"
-    >
-      <h2
-        class="emotion-31 emotion-32"
-      >
-        Specify your search
-      </h2>
-      <div
-        class="emotion-33 emotion-34"
-      >
-        <div
-          class="emotion-35 emotion-36"
-        >
-          <div
-            aria-disabled="false"
-            class="emotion-37 emotion-38 emotion-39"
-          >
-            <div
-              aria-expanded="false"
-              class="emotion-40 emotion-41"
-              role="listbox"
-              tabindex="0"
-            >
-              <div
-                class="emotion-42 emotion-43"
-                role="option"
-              >
-                <p
-                  class="emotion-44 emotion-45"
-                >
-                  Filter by Category
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="emotion-35 emotion-36"
-        >
-          <div
-            aria-disabled="true"
-            class="emotion-37 emotion-49 emotion-39"
-          >
-            <div
-              aria-expanded="false"
-              class="emotion-51 emotion-41"
-              role="listbox"
-            >
-              <div
-                class="emotion-42 emotion-43"
-                role="option"
-              >
-                <p
-                  class="emotion-44 emotion-45"
-                >
-                  Filter by Version
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button
-          aria-disabled="false"
-          class="emotion-8"
-          type="button"
-        >
-          <div
-            class="emotion-9"
-          />
-          <div
-            class="emotion-10"
-          >
-            <svg
-              alt=""
-              aria-hidden="true"
-              class="emotion-11"
-              fill="none"
-              height="16"
-              role="presentation"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
-                fill="currentColor"
-                fill-rule="evenodd"
-              />
-            </svg>
-            Clear all filters
           </div>
         </button>
       </div>
@@ -2792,6 +2386,1514 @@ exports[`Search Results Page renders results from a given search term query para
         </span>
         <br />
       </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Search Results Page renders loading images before returning nonempty results 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-column-gap: 46px;
+  column-gap: 46px;
+  display: grid;
+  grid-template-areas: 'header .' 'results filters';
+  grid-template-columns: auto 173px;
+  margin: 32px 108px 64px 32px;
+  max-width: 1150px;
+  row-gap: 32px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .emotion-0 {
+    margin: 32px 40px 64px 40px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-0 {
+    -webkit-column-gap: 0;
+    column-gap: 0;
+    grid-template-areas: 'header' 'results';
+    grid-template-columns: auto;
+    margin: 32px 24px 64px 24px;
+  }
+}
+
+.emotion-2 {
+  grid-area: header;
+}
+
+.emotion-4 {
+  font-size: 18px;
+  line-height: 21px;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  letter-spacing: 0.8px;
+}
+
+.emotion-6 {
+  display: none;
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-6 {
+    display: block;
+  }
+}
+
+.emotion-8 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #F9FBFA;
+  border: 1px solid #89979B;
+  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
+  color: #3D4F58;
+  font-size: 14px;
+  height: 36px;
+}
+
+.emotion-8:focus {
+  outline: none;
+}
+
+.emotion-8:disabled {
+  pointer-events: none;
+}
+
+.emotion-8:active,
+.emotion-8:focus,
+.emotion-8:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8:focus {
+  color: #3D4F58;
+}
+
+.emotion-8:hover,
+.emotion-8:active {
+  color: #3D4F58;
+  background-color: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),0px 0px 0px 3px #E7EEEC;
+}
+
+.emotion-8:focus {
+  background: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
+}
+
+.emotion-9 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-11 {
+  color: #5D6C74;
+  height: 16px;
+  width: 16px;
+  margin-right: 6px;
+}
+
+.emotion-12 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(152px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-12:hover>.e1yoi6mj6 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-12:hover>.e1yoi6mj6:hover {
+  opacity: 1;
+}
+
+.emotion-12:not(:hover)>.e1yoi6mj6 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-14 {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  height: 152px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-14>div {
+  padding: 24px;
+}
+
+.emotion-14:hover,
+.emotion-14:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-14:hover>div,
+.emotion-14:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-14:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-14 * {
+  padding: 2px;
+  height: 15px!important;
+  margin-right: 10px!important;
+}
+
+.emotion-34 {
+  grid-area: filters;
+}
+
+.emotion-36 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-36 {
+    display: none;
+  }
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2 emotion-3"
+    >
+      <h1
+        class="emotion-4 emotion-5"
+      >
+        Search results for "stitch"
+      </h1>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <button
+          aria-disabled="false"
+          class="emotion-8"
+          type="button"
+        >
+          <div
+            class="emotion-9"
+          />
+          <div
+            class="emotion-10"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-11"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Specify your search
+          </div>
+        </button>
+      </div>
+    </div>
+    <div
+      class="emotion-12 emotion-13"
+    >
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-14 emotion-15"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="emotion-34 emotion-35"
+    >
+      <h2
+        class="emotion-36 emotion-37"
+      >
+        Specify your search
+      </h2>
+      <span
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span
+          class="react-loading-skeleton"
+          style="width: 200px; border-radius: 12px;"
+        >
+          ‌
+        </span>
+        <br />
+        <span
+          class="react-loading-skeleton"
+          style="width: 200px; border-radius: 12px;"
+        >
+          ‌
+        </span>
+        <br />
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Search Results Page renders results from a given search term query param and displays category and version tags 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  -webkit-column-gap: 46px;
+  column-gap: 46px;
+  display: grid;
+  grid-template-areas: 'header .' 'results filters';
+  grid-template-columns: auto 173px;
+  margin: 32px 108px 64px 32px;
+  max-width: 1150px;
+  row-gap: 32px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .emotion-0 {
+    margin: 32px 40px 64px 40px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-0 {
+    -webkit-column-gap: 0;
+    column-gap: 0;
+    grid-template-areas: 'header' 'results';
+    grid-template-columns: auto;
+    margin: 32px 24px 64px 24px;
+  }
+}
+
+.emotion-2 {
+  grid-area: header;
+}
+
+.emotion-4 {
+  font-size: 18px;
+  line-height: 21px;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  letter-spacing: 0.8px;
+}
+
+.emotion-6 {
+  display: none;
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-6 {
+    display: block;
+  }
+}
+
+.emotion-8 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border-radius: 4px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #F9FBFA;
+  border: 1px solid #89979B;
+  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
+  color: #3D4F58;
+  font-size: 14px;
+  height: 36px;
+}
+
+.emotion-8:focus {
+  outline: none;
+}
+
+.emotion-8:disabled {
+  pointer-events: none;
+}
+
+.emotion-8:active,
+.emotion-8:focus,
+.emotion-8:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8:focus {
+  color: #3D4F58;
+}
+
+.emotion-8:hover,
+.emotion-8:active {
+  color: #3D4F58;
+  background-color: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3),0px 0px 0px 3px #E7EEEC;
+}
+
+.emotion-8:focus {
+  background: #FFFFFF;
+  border: 1px solid #5D6C74;
+  box-shadow: 0px 4px 4px rgba(0, 124, 173, 0.4),0px 0px 0px 3px #019EE2;
+}
+
+.emotion-9 {
+  overflow: hidden;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-11 {
+  color: #5D6C74;
+  height: 16px;
+  width: 16px;
+  margin-right: 6px;
+}
+
+.emotion-12 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(152px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-12:hover>.emotion-14 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-12:hover>.emotion-14:hover {
+  opacity: 1;
+}
+
+.emotion-12:not(:hover)>.emotion-14 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-15 {
+  color: #494747;
+  height: 100%;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  height: 152px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+}
+
+.emotion-15:hover,
+.emotion-15:focus {
+  color: #494747;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-15:hover .emotion-18,
+.emotion-15:focus .emotion-18 {
+  background-color: rgba(231, 238, 236, 0.4);
+  -webkit-transition: background-color 150ms ease-in;
+  transition: background-color 150ms ease-in;
+}
+
+.emotion-15>div {
+  padding: 24px;
+}
+
+.emotion-15:hover,
+.emotion-15:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-15:hover>div,
+.emotion-15:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-15:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-17 {
+  height: 100%;
+  position: relative;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-17 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.emotion-19 {
+  font-family: Akzidenz;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  height: 24px;
+  margin-bottom: 6px;
+  margin-top: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-19 {
+    font-weight: bolder;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-19 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  @media not all and (max-width: 480px) {
+    .emotion-19 {
+      font-weight: bolder;
+    }
+  }
+}
+
+.emotion-21 {
+  font-family: 'Akzidenz Grotesk BQ Light';
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+  margin-bottom: 0;
+  margin-top: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.emotion-23 {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 24px;
+}
+
+.emotion-26 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 4px 8px;
+  background-color: #E4F4E4;
+  border: 1px solid #C3E7CA;
+  color: #116149;
+  cursor: pointer;
+  height: 26px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.emotion-28 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 4px 8px;
+  background-color: #E1F2F6;
+  border: 1px solid #C5E4F2;
+  color: #1A567E;
+  cursor: pointer;
+  height: 26px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.emotion-29 {
+  grid-area: filters;
+}
+
+.emotion-31 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: Akzidenz;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-31 {
+    display: none;
+  }
+}
+
+.emotion-33 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-33 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .emotion-33>div {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-33 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .emotion-33>div {
+    width: 100%;
+  }
+
+  .emotion-33>div:first-of-type {
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+}
+
+.emotion-35 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.emotion-38 {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 16px;
+  opacity: 1;
+  width: 175px;
+}
+
+.emotion-40 {
+  background-color: #fff;
+  border: 1px solid rgba(184, 196, 194, 0.4);
+  border-radius: 2px;
+  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
+  color: #000;
+  cursor: pointer;
+  position: relative;
+}
+
+.emotion-42 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding: 10px 16px;
+}
+
+.emotion-44 {
+  display: inline-block;
+  font-family: Akzidenz;
+  font-size: 14px;
+  margin: 0!important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emotion-49 {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  line-height: 16px;
+  opacity: 0.3;
+  width: 175px;
+}
+
+.emotion-51 {
+  background-color: #fff;
+  border: 1px solid rgba(184, 196, 194, 0.4);
+  border-radius: 2px;
+  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
+  color: #000;
+  cursor: not-allowed;
+  position: relative;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2 emotion-3"
+    >
+      <h1
+        class="emotion-4 emotion-5"
+      >
+        Search results for "stitch"
+      </h1>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <button
+          aria-disabled="false"
+          class="emotion-8"
+          type="button"
+        >
+          <div
+            class="emotion-9"
+          />
+          <div
+            class="emotion-10"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-11"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Specify your search
+          </div>
+        </button>
+      </div>
+    </div>
+    <div
+      class="emotion-12 emotion-13"
+    >
+      <a
+        class="emotion-14 emotion-15 emotion-16"
+        href="stitch.nofilters"
+      >
+        <div
+          class="emotion-17 emotion-18"
+        >
+          <p
+            class="emotion-19 emotion-20"
+          >
+            <span
+              style="background-color:#FEF2C8"
+            >
+              stitch
+            </span>
+             (no filters)
+          </p>
+          <p
+            class="emotion-21 emotion-22"
+          >
+            <span
+              style="background-color:#FEF2C8"
+            >
+              Stitch
+            </span>
+             preview (no filters)
+          </p>
+          <div
+            class="emotion-23 emotion-24"
+          >
+            <span
+              class="emotion-25 emotion-26"
+            >
+              Realm
+            </span>
+            <span
+              class="emotion-25 emotion-28"
+            >
+              Latest
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div
+      class="emotion-29 emotion-30"
+    >
+      <h2
+        class="emotion-31 emotion-32"
+      >
+        Specify your search
+      </h2>
+      <div
+        class="emotion-33 emotion-34"
+      >
+        <div
+          class="emotion-35 emotion-36"
+        >
+          <div
+            aria-disabled="false"
+            class="emotion-37 emotion-38 emotion-39"
+          >
+            <div
+              aria-expanded="false"
+              class="emotion-40 emotion-41"
+              role="listbox"
+              tabindex="0"
+            >
+              <div
+                class="emotion-42 emotion-43"
+                role="option"
+              >
+                <p
+                  class="emotion-44 emotion-45"
+                >
+                  Filter by Category
+                </p>
+                <svg
+                  aria-label="Caret Down Icon"
+                  class=""
+                  fill="none"
+                  height="16"
+                  role="img"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="emotion-35 emotion-36"
+        >
+          <div
+            aria-disabled="true"
+            class="emotion-37 emotion-49 emotion-39"
+          >
+            <div
+              aria-expanded="false"
+              class="emotion-51 emotion-41"
+              role="listbox"
+            >
+              <div
+                class="emotion-42 emotion-43"
+                role="option"
+              >
+                <p
+                  class="emotion-44 emotion-45"
+                >
+                  Filter by Version
+                </p>
+                <svg
+                  aria-label="Caret Down Icon"
+                  class=""
+                  fill="none"
+                  height="16"
+                  role="img"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-disabled="false"
+          class="emotion-8"
+          type="button"
+        >
+          <div
+            class="emotion-9"
+          />
+          <div
+            class="emotion-10"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-11"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Clear all filters
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </DocumentFragment>
