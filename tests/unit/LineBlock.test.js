@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import LineBlock from '../../src/components/LineBlock/LineBlock';
+import LineBlock from '../../src/components/LineBlock';
 
 // data for this component
 import mockData from './data/Literal.test.json';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Tabs from '../../src/components/Tabs/Tabs';
+import Tabs from '../../src/components/Tabs';
 import { TabProvider } from '../../src/components/Tabs/tab-context';
 import { theme } from '../../src/theme/docsTheme';
 
