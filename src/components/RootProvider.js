@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HeaderContextProvider } from './header-context';
-import { NavigationProvider } from './navigation-context';
+import { HeaderContextProvider } from './Header/header-context';
 import { SidenavContextProvider } from './Sidenav';
-import { TabProvider } from './tab-context';
-import { ContentsProvider } from './contents-context';
+import { TabProvider } from './Tabs/tab-context';
+import { ContentsProvider } from './Contents/contents-context';
+import { NavigationProvider } from '../context/navigation-context';
 
 const RootProvider = ({ children, headingNodes, selectors }) => (
   <TabProvider selectors={selectors}>

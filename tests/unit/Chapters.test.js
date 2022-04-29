@@ -3,7 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import mockData from './data/Chapters.test.json';
-import Chapters from '../../src/components/Chapters/Chapters';
+import Chapters from '../../src/components/Chapters';
 import { tick } from '../utils';
 import { SidenavContext } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';

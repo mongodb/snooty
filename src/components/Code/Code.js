@@ -7,8 +7,8 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { uiColors } from '@leafygreen-ui/palette';
-import { CodeContext } from '../code-context';
-import { TabContext } from '../tab-context';
+import { CodeContext } from './code-context';
+import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 

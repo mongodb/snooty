@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import ComponentFactory from './ComponentFactory';
-import FootnoteContext from './footnote-context';
+import FootnoteContext from './Footnote/footnote-context';
 import SEO from './SEO';
 import Widgets from './Widgets';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
