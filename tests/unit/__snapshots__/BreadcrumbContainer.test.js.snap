@@ -19,7 +19,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 
 <a
     class="emotion-0 emotion-1"
-    href="https://docs.mongodb.com/"
+    href="https://www.mongodb.com/docs/"
   >
     Docs Home
   </a>
@@ -53,7 +53,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 
 <a
     class="emotion-0 emotion-1"
-    href="https://docs.mongodb.com/view-analyze"
+    href="https://www.mongodb.com/docs/view-analyze"
   >
     View & Analyze
   </a>
@@ -113,7 +113,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 
 <a
     class="emotion-0 emotion-1"
-    href="https://docs.mongodb.com/"
+    href="https://www.mongodb.com/docs/"
   >
     Docs Home
   </a>
