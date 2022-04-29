@@ -134,13 +134,12 @@ const SearchResult = React.memo(
     url,
     ...props
   }) => {
-    const { searchContainerRef, searchTerm, selectedCategory, selectedVersion } = useContext(SearchContext);
+    const { searchContainerRef, searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
-
-    const category = !!selectedCategory ? selectedCategory : parsedManifests?.[searchProperty]?.['category'];
-    const version = !!selectedVersion ? selectedVersion : parsedManifests?.[searchProperty]?.['version'];
+    const category = parsedManifests?.[searchProperty]?.['category'];
+    const version = parsedManifests?.[searchProperty]?.['version'];
 
     const onArrowDown = useCallback(
       (resultLinkRef) => {
@@ -209,7 +208,7 @@ const SearchResult = React.memo(
           <StylingTagContainer>
             {!!category && <StyledTag variant="green">{category}</StyledTag>}
             {!!version && <StyledTag variant="blue">{version}</StyledTag>}
-            {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
+            {(url.includes('/api/') || url.includes('/graphql/')) && <StyledTag variant="purple">{'API'}</StyledTag>}
           </StylingTagContainer>
           {learnMoreLink && (
             <MobileFooterContainer>
