@@ -19,7 +19,8 @@ import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import transformUrlBasedOnOrigin from '../../utils/transform-url-based-on-origin';
-import Tag from '../Tag';
+import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import Tag, { searchTagStyle } from '../Tag';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const DESKTOP_COLUMN_GAP = '46px';
@@ -27,8 +28,8 @@ const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
 const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
-const SEARCH_RESULT_HEIGHT = '128px';
 const SKELETON_BORDER_RADIUS = '12px';
+const SEARCH_RESULT_HEIGHT = '152px';
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
@@ -220,10 +221,7 @@ const FilterBadgesWrapper = styled('div')`
 `;
 
 const StyledTag = styled(Tag)`
-  cursor: pointer;
-  height: 26px;
-  font-size: ${theme.fontSize.small};
-  margin-right: ${theme.size.small};
+  ${searchTagStyle}
 `;
 
 const MobileSearchButtonWrapper = styled('div')`
@@ -247,6 +245,7 @@ const SearchResults = () => {
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const specifySearchText = 'Specify your search';
+  const { filters } = useMarianManifests(true);
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
@@ -344,7 +343,7 @@ const SearchResults = () => {
             {searchResults?.length ? (
               <>
                 <StyledSearchResults>
-                  {searchResults.map(({ title, preview, url }, index) => (
+                  {searchResults.map(({ title, preview, url, searchProperty }, index) => (
                     <StyledSearchResult
                       key={`${url}${index}`}
                       onClick={() =>
@@ -354,6 +353,8 @@ const SearchResults = () => {
                       preview={preview}
                       url={transformUrlBasedOnOrigin(url)}
                       useLargeTitle
+                      parsedManifests={filters}
+                      searchProperty={searchProperty?.[0]}
                     />
                   ))}
                 </StyledSearchResults>
