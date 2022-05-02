@@ -208,7 +208,7 @@ const SearchResult = React.memo(
           <StylingTagContainer>
             {!!category && <StyledTag variant="green">{category}</StyledTag>}
             {!!version && <StyledTag variant="blue">{version}</StyledTag>}
-            {(url.includes('/api/') || url.includes('/graphql/')) && <StyledTag variant="purple">{'API'}</StyledTag>}
+            {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
           </StylingTagContainer>
           {learnMoreLink && (
             <MobileFooterContainer>
