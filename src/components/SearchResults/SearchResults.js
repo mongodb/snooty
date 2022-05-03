@@ -61,6 +61,9 @@ const HeaderText = styled('h1')`
 
 const FiltersContainer = styled('div')`
   grid-area: filters;
+  @media ${theme.screenSize.upToMedium} {
+    display: none;
+  }
 `;
 
 const FilterHeader = styled('h2')`
@@ -74,10 +77,6 @@ const FilterHeader = styled('h2')`
 
   // Override
   margin-bottom: ${theme.size.default};
-
-  @media ${theme.screenSize.upToMedium} {
-    display: none;
-  }
 `;
 
 const SearchResultsContainer = styled('div')`
