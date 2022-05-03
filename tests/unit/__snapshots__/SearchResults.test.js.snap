@@ -350,6 +350,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   grid-area: filters;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-35 {
+    display: none;
+  }
+}
+
 .emotion-37 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -1039,6 +1045,12 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-26 {
   grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-26 {
+    display: none;
+  }
 }
 
 .emotion-28 {
@@ -1825,6 +1837,12 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-area: filters;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-34 {
+    display: none;
+  }
+}
+
 .emotion-36 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -2607,6 +2625,12 @@ exports[`Search Results Page renders loading images before returning nonempty re
 
 .emotion-34 {
   grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-34 {
+    display: none;
+  }
 }
 
 .emotion-36 {
@@ -3510,6 +3534,12 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-29 {
   grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-29 {
+    display: none;
+  }
 }
 
 .emotion-31 {
