@@ -372,12 +372,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-@media only screen and (max-width: 767px) {
-  .emotion-37 {
-    display: none;
-  }
-}
-
 .emotion-39 {
   grid-area: filters;
 }
@@ -1067,12 +1061,6 @@ exports[`Search Results Page does not return results for a given search term wit
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-28 {
-    display: none;
-  }
 }
 
 .emotion-30 {
@@ -1859,12 +1847,6 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 16px;
 }
 
-@media only screen and (max-width: 767px) {
-  .emotion-36 {
-    display: none;
-  }
-}
-
 <div
     class="emotion-0 emotion-1"
   >
@@ -2647,12 +2629,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-36 {
-    display: none;
-  }
 }
 
 <div
@@ -3556,12 +3532,6 @@ exports[`Search Results Page renders results from a given search term query para
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-31 {
-    display: none;
-  }
 }
 
 .emotion-33 {
