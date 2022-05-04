@@ -350,6 +350,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   grid-area: filters;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-35 {
+    display: none;
+  }
+}
+
 .emotion-37 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -364,12 +370,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-37 {
-    display: none;
-  }
 }
 
 .emotion-39 {
@@ -1041,6 +1041,12 @@ exports[`Search Results Page does not return results for a given search term wit
   grid-area: filters;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-26 {
+    display: none;
+  }
+}
+
 .emotion-28 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -1055,12 +1061,6 @@ exports[`Search Results Page does not return results for a given search term wit
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-28 {
-    display: none;
-  }
 }
 
 .emotion-30 {
@@ -1825,6 +1825,12 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-area: filters;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-34 {
+    display: none;
+  }
+}
+
 .emotion-36 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -1839,12 +1845,6 @@ exports[`Search Results Page renders loading images before returning no results 
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-36 {
-    display: none;
-  }
 }
 
 <div
@@ -2609,6 +2609,12 @@ exports[`Search Results Page renders loading images before returning nonempty re
   grid-area: filters;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-34 {
+    display: none;
+  }
+}
+
 .emotion-36 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -2623,12 +2629,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-36 {
-    display: none;
-  }
 }
 
 <div
@@ -3512,6 +3512,12 @@ exports[`Search Results Page renders results from a given search term query para
   grid-area: filters;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-29 {
+    display: none;
+  }
+}
+
 .emotion-31 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -3526,12 +3532,6 @@ exports[`Search Results Page renders results from a given search term query para
   letter-spacing: 0.5px;
   margin: 0;
   margin-bottom: 16px;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-31 {
-    display: none;
-  }
 }
 
 .emotion-33 {
