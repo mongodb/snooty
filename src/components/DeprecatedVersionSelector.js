@@ -118,7 +118,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         onChange={updateVersion}
         value={version}
       />
-      <Button variant="primary" title="View Documentation" size="large" href={generateUrl()} disabled={buttonDisabled}>
+      <Button variant="primary" title="View Documentation" href={generateUrl()} disabled={buttonDisabled}>
         View Documentation
       </Button>
     </>

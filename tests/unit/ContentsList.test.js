@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ContentsList from '../../src/components/ContentsList/ContentsList';
+import ContentsList from '../../src/components/Contents/ContentsList';
 
 const renderContentsList = (label) => {
   return render(

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 import Breadcrumbs from '../components/Breadcrumbs';
 import MainColumn from '../components/MainColumn';
 
@@ -16,22 +17,19 @@ const StyledMainColumn = styled(MainColumn)`
   padding-top: 40px;
 `;
 
-const DriversIndex = ({
-  children,
-  pageContext: {
-    metadata: { title, parentPaths },
-    slug,
-  },
-}) => (
-  <DocumentContainer>
-    <StyledMainColumn>
-      <div className="body">
-        <Breadcrumbs parentPaths={parentPaths.slug} siteTitle={title} slug={slug} />
-        {children}
-      </div>
-    </StyledMainColumn>
-  </DocumentContainer>
-);
+const DriversIndex = ({ children, pageContext: { slug } }) => {
+  const { title, parentPaths } = useSnootyMetadata();
+  return (
+    <DocumentContainer>
+      <StyledMainColumn>
+        <div className="body">
+          <Breadcrumbs parentPaths={parentPaths?.slug} siteTitle={title} slug={slug} />
+          {children}
+        </div>
+      </StyledMainColumn>
+    </DocumentContainer>
+  );
+};
 
 DriversIndex.propTypes = {
   pageContext: PropTypes.shape({

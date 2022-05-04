@@ -6,7 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import Link from '../Link';
-import { NavigationContext } from '../navigation-context';
+import { NavigationContext } from '../../context/navigation-context';
 import { DOCS_URL } from '../../constants';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
@@ -114,7 +114,7 @@ SidenavBackButton.propTypes = {
   project: PropTypes.string,
   target: PropTypes.string,
   titleOverride: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]),
-  eol: PropTypes.bool.isRequired,
+  eol: PropTypes.bool,
 };
 
 export default SidenavBackButton;

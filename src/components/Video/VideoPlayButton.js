@@ -16,6 +16,7 @@ const StyledButton = styled(LeafyButton)`
   &:active {
     border: none !important;
     box-shadow: none !important;
+    color: ${uiColors.gray.dark2};
   }
 `;
 

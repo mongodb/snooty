@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import mockChaptersData from './data/Chapters.test.json';
 import mockNodeData from './data/GuideNext.test.json';
-import GuideNext from '../../src/components/GuideNext/GuideNext';
+import GuideNext from '../../src/components/GuideNext';
 import * as browserStorage from '../../src/utils/browser-storage';
 
 const renderGuideNext = (slug, mockNodeData = {}) => {

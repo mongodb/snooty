@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Code from '../../src/components/Code/Code';
-import { CodeProvider } from '../../src/components/code-context';
-import { TabProvider } from '../../src/components/tab-context';
+import { CodeProvider } from '../../src/components/Code/code-context';
+import { TabProvider } from '../../src/components/Tabs/tab-context';
 import * as browserStorage from '../../src/utils/browser-storage';
 
 // data for this component
