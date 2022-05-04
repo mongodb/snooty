@@ -68,6 +68,7 @@ const siteMetadata = {
   snootyBranch: gitBranch,
   snootyEnv: process.env.SNOOTY_ENV || 'development',
   user: userInfo().username,
+  manifestPath: process.env.GATSBY_MANIFEST_PATH,
 };
 
 module.exports.siteMetadata = siteMetadata;

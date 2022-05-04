@@ -1,4 +1,6 @@
 const path = require('path');
+const AdmZip = require('adm-zip');
+const BSON = require('bson');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { initStitch } = require('./src/utils/setup/init-stitch');
 const { baseUrl } = require('./src/utils/base-url');
@@ -8,16 +10,13 @@ const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
-const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, BRANCHES_COLLECTION } = require('./src/build-constants');
+const { BRANCHES_COLLECTION } = require('./src/build-constants');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { constructBuildFilter } = require('./src/utils/setup/construct-build-filter');
 const { constructReposFilter } = require('./src/utils/setup/construct-repos-filter');
 
-const DB = siteMetadata.database;
 const reposDB = siteMetadata.reposDatabase;
 
 const reposFilter = constructReposFilter(siteMetadata.project);
-const buildFilter = constructBuildFilter(siteMetadata);
 
 // different types of references
 const PAGES = [];
@@ -29,6 +28,43 @@ let RESOLVED_REF_DOC_MAPPING = {};
 let stitchClient;
 
 const assets = new Map();
+
+let db;
+class DocumentDatabase {
+  constructor(path) {
+    this.zip = new AdmZip(path);
+  }
+
+  getDocuments() {
+    const result = [];
+    const zipEntries = this.zip.getEntries();
+    for (const entry of zipEntries) {
+      if (entry.entryName.startsWith('documents/')) {
+        const doc = BSON.deserialize(entry.getData());
+        result.push(doc);
+      }
+    }
+    return result;
+  }
+
+  getMetadata() {
+    const zipEntries = this.zip.getEntries();
+    for (const entry of zipEntries) {
+      if (entry.entryName === 'site.bson') {
+        const doc = BSON.deserialize(entry.getData());
+        return doc;
+      }
+    }
+  }
+
+  getAsset(checksum) {
+    const result = this.zip.getEntry(`assets/${checksum}`);
+    if (result) {
+      return result.getData();
+    }
+    return null;
+  }
+}
 
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
@@ -42,8 +78,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   // wait to connect to stitch
   stitchClient = await initStitch();
+  db = new DocumentDatabase(siteMetadata.manifestPath);
 
-  const documents = await stitchClient.callFunction('fetchDocuments', [DB, DOCUMENTS_COLLECTION, buildFilter]);
+  const documents = db.getDocuments();
 
   if (documents.length === 0) {
     console.error(
@@ -98,10 +135,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     });
   });
 
-  const [, { static_files: staticFiles, ...metadataMinusStatic }] = await Promise.all([
-    saveAssetFiles(assets, stitchClient),
-    stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]),
-  ]);
+  await saveAssetFiles(assets, db);
+  const { static_files: staticFiles, ...metadataMinusStatic } = db.getMetadata();
 
   const { parentPaths, slugToTitle } = metadataMinusStatic;
   if (parentPaths) {
