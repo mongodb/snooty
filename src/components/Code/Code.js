@@ -39,7 +39,9 @@ const getLanguage = (lang) => {
   return 'none';
 };
 
-const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source } }) => {
+const Code = ({
+  nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
+}) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const code = value;
@@ -109,6 +111,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
         showLineNumbers={linenos}
         showCustomActionButtons={sourceSpecified}
         customActionButtons={customActionButtonList}
+        lineNumberStart={lineno_start}
       >
         {code}
       </CodeBlock>
@@ -132,6 +135,7 @@ Code.propTypes = {
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
     source: PropTypes.string,
+    lineno_start: PropTypes.number,
   }).isRequired,
 };
 
