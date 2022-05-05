@@ -10,7 +10,7 @@ const outputCodeStyle = css`
 `;
 
 const Output = ({ nodeData: { children }, ...rest }) => {
-  const { emphasize_lines, value, linenos, lang } = children[0];
+  const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
   const language = lang || 'none';
   return (
     <CodeBlock
@@ -21,6 +21,7 @@ const Output = ({ nodeData: { children }, ...rest }) => {
       darkMode={true}
       copyable={false}
       linenos={linenos}
+      lineNumberStart={lineno_start}
     >
       {value}
     </CodeBlock>
