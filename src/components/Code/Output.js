@@ -7,6 +7,8 @@ import { theme } from '../../theme/docsTheme';
 const outputCodeStyle = css`
   border-bottom-right-radius: ${theme.size.tiny};
   border-bottom-left-radius: ${theme.size.tiny};
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
 `;
 
 const Output = ({ nodeData: { children }, ...rest }) => {

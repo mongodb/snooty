@@ -55,8 +55,6 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
         }
         // Controls output code block and toggle view bar style
         > div {
-          border-top-right-radius: 0px;
-          border-top-left-radius: 0px;
           border-bottom-right-radius: ${outputBorderRadius};
           border-bottom-left-radius: ${outputBorderRadius};
           margin: 0px;
@@ -78,7 +76,21 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
               {buttonText}
             </Button>
           </IOToggle>
-          {showOutput && <Output nodeData={children[1]} />}
+          {showOutput && (
+            <div
+              css={css`
+                .leafygreen-ui-1g8q0tn,
+                .leafygreen-ui-1ryj72u,
+                .leafygreen-ui-1th51br,
+                .leafygreen-ui-1fyye0e,
+                .leafygreen-ui-olcyvn {
+                  display: inline;
+                }
+              `}
+            >
+              <Output className="OutputClass" nodeData={children[1]} />
+            </div>
+          )}
         </>
       )}
       {onlyInputSpecified && <Input nodeData={children[0]} />}

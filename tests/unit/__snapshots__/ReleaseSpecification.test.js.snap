@@ -11,24 +11,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-0>div>div {
-  width: unset;
-}
-
-.emotion-0>div>div>div[data-testid='leafygreen-code-panel'] {
-  padding-left: 0;
-}
-
-.emotion-0>div>div>div[data-testid='leafygreen-code-panel']>div>div {
-  width: unset;
-  min-width: 144px;
-}
-
-.emotion-0>div>div button[aria-labelledby='Language Picker'] {
-  margin-left: 0;
-}
-
-.emotion-0>div>div button[aria-labelledby='Language Picker']>div {
-  grid-template-columns: 16px 1fr 16px;
+  grid-template-columns: auto!important;
 }
 
 .emotion-0 button>div>div {

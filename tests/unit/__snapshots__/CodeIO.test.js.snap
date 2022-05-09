@@ -11,24 +11,7 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 .emotion-0>div>div {
-  width: unset;
-}
-
-.emotion-0>div>div>div[data-testid='leafygreen-code-panel'] {
-  padding-left: 0;
-}
-
-.emotion-0>div>div>div[data-testid='leafygreen-code-panel']>div>div {
-  width: unset;
-  min-width: 144px;
-}
-
-.emotion-0>div>div button[aria-labelledby='Language Picker'] {
-  margin-left: 0;
-}
-
-.emotion-0>div>div button[aria-labelledby='Language Picker']>div {
-  grid-template-columns: 16px 1fr 16px;
+  grid-template-columns: auto!important;
 }
 
 .emotion-0 button>div>div {
@@ -41,8 +24,6 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 .emotion-0>div {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   margin: 0px;
@@ -57,24 +38,7 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 .emotion-1>div>div {
-  width: unset;
-}
-
-.emotion-1>div>div>div[data-testid='leafygreen-code-panel'] {
-  padding-left: 0;
-}
-
-.emotion-1>div>div>div[data-testid='leafygreen-code-panel']>div>div {
-  width: unset;
-  min-width: 144px;
-}
-
-.emotion-1>div>div button[aria-labelledby='Language Picker'] {
-  margin-left: 0;
-}
-
-.emotion-1>div>div button[aria-labelledby='Language Picker']>div {
-  grid-template-columns: 16px 1fr 16px;
+  grid-template-columns: auto!important;
 }
 
 .emotion-1 button>div>div {
@@ -405,13 +369,21 @@ exports[`CodeIO renders correctly 1`] = `
   justify-self: right;
 }
 
-.emotion-20 {
+.emotion-20 .emotion-21,
+.emotion-20 .leafygreen-ui-1ryj72u,
+.emotion-20 .emotion-6,
+.emotion-20 .leafygreen-ui-1fyye0e,
+.emotion-20 .leafygreen-ui-olcyvn {
+  display: inline;
+}
+
+.emotion-21 {
   border: 0;
   border-radius: 6px;
   overflow: hidden;
 }
 
-.emotion-22 {
+.emotion-23 {
   grid-area: code;
   overflow-x: auto;
   border-radius: inherit;
@@ -440,51 +412,53 @@ exports[`CodeIO renders correctly 1`] = `
   padding-bottom: 6px;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-22 {
+  .emotion-23 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-22 {
+  .emotion-23 {
     white-space: pre;
   }
 }
 
-.emotion-22:focus,
-.emotion-22:active,
-.emotion-22:focus-visible,
-.emotion-22:focus-within {
+.emotion-23:focus,
+.emotion-23:active,
+.emotion-23:focus-visible,
+.emotion-23:focus-within {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
-.emotion-25 {
+.emotion-26 {
   background-color: transparent;
   background-image: linear-gradient(90deg, #21313C, rgba(33,49,60,0));
   background-attachment: fixed;
 }
 
-.emotion-25>td {
+.emotion-26>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-25+tr>td {
+.emotion-26+tr>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-25+.emotion-25>td {
+.emotion-26+.emotion-26>td {
   border-top: 0;
 }
 
-.emotion-25:last-child>td {
+.emotion-26:last-child>td {
   border-bottom: 1px solid #21313C;
 }
 
-.emotion-26 {
+.emotion-27 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -610,37 +584,41 @@ exports[`CodeIO renders correctly 1`] = `
       class="emotion-20"
     >
       <div
-        class="emotion-6"
+        class="emotion-21"
       >
-        <pre
-          class="emotion-22"
-          tabindex="-1"
+        <div
+          class="emotion-6"
         >
-          <code
-            class="lg-highlight-hljs-dark python emotion-8"
+          <pre
+            class="emotion-23"
+            tabindex="-1"
           >
-            <table
-              class="emotion-9"
+            <code
+              class="lg-highlight-hljs-dark python emotion-8"
             >
-              <tbody>
-                <tr
-                  class="emotion-25"
-                >
-                  <td
+              <table
+                class="emotion-9"
+              >
+                <tbody>
+                  <tr
                     class="emotion-26"
                   >
-                    1
-                  </td>
-                  <td
-                    class="emotion-12"
-                  >
-                    hello world
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </code>
-        </pre>
+                    <td
+                      class="emotion-27"
+                    >
+                      1
+                    </td>
+                    <td
+                      class="emotion-12"
+                    >
+                      hello world
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </code>
+          </pre>
+        </div>
       </div>
     </div>
   </div>
