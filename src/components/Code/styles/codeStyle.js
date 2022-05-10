@@ -10,8 +10,8 @@ export const baseCodeStyle = css`
   width: 100%;
 
   // Remove whitespace when copyable false
-  > div > div {
-    grid-template-columns: auto !important;
+  > div > :after {
+    box-shadow: none !important;
   }
 
   // Override default LG Code language switcher font size

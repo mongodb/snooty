@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
 import { cx, css } from '@leafygreen-ui/emotion';
-import { theme } from '../../theme/docsTheme';
 
 const outputCodeStyle = css`
-  border-bottom-right-radius: ${theme.size.tiny};
-  border-bottom-left-radius: ${theme.size.tiny};
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
 `;

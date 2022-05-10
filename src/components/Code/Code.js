@@ -52,7 +52,7 @@ const Code = ({
   }
   const captionSpecified = !!caption;
   const sourceSpecified = !!source;
-  const captionBorderRadius = captionSpecified ? '0px' : '4px';
+  const captionBorderRadius = captionSpecified ? '0px' : '12px';
 
   let customActionButtonList = [];
   if (sourceSpecified) {
@@ -122,8 +122,8 @@ const Code = ({
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
   border-bottom: none;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
 `;
 
 Code.propTypes = {

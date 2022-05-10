@@ -29,8 +29,8 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   const [showOutput, setShowOutput] = useState(initialOutputVisibility);
   const buttonText = showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
   const arrow = showOutput ? 'ChevronUp' : 'ChevronDown';
-  const outputBorderRadius = !showOutput ? theme.size.tiny : '0px';
-  const singleInputBorderRadius = onlyInputSpecified ? theme.size.tiny : '0px';
+  const outputBorderRadius = !showOutput ? '12px' : '0px';
+  const singleInputBorderRadius = onlyInputSpecified ? '12px' : '0px';
 
   const handleClick = (e) => {
     if (showOutput) {
@@ -43,6 +43,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   if (children.length === 0) {
     return null;
   }
+
   return (
     <div
       css={css`
@@ -53,6 +54,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
           border-bottom-right-radius: ${singleInputBorderRadius};
           border-bottom-left-radius: ${singleInputBorderRadius};
         }
+
         // Controls output code block and toggle view bar style
         > div {
           border-bottom-right-radius: ${outputBorderRadius};
