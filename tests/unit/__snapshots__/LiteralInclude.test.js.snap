@@ -10,17 +10,19 @@ exports[`renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-0>div>:after {
-  box-shadow: none!important;
-}
-
 .emotion-0 button>div>div {
   font-size: 16px;
+}
+
+.emotion-0>div>div {
+  display: grid;
+  grid-template-columns: code panel;
 }
 
 .emotion-0>div {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  display: grid;
 }
 
 .emotion-1 {

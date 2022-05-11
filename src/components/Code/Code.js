@@ -85,9 +85,16 @@ const Code = ({
       css={css`
         ${baseCodeStyle}
 
+        // Remove whitespace when copyable false
+        > div > div {
+          display: ${!copyable && languageOptions?.length === 0 ? 'inline' : 'grid'};
+          grid-template-columns: ${!copyable && language === 'none' ? 'auto' : 'code panel'};
+        }
+
         > div {
           border-top-left-radius: ${captionBorderRadius};
           border-top-right-radius: ${captionBorderRadius};
+          display: grid;
         }
       `}
     >

@@ -10,10 +10,6 @@ exports[`CodeIO renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-0>div>:after {
-  box-shadow: none!important;
-}
-
 .emotion-0 button>div>div {
   font-size: 16px;
 }
@@ -37,17 +33,19 @@ exports[`CodeIO renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-1>div>:after {
-  box-shadow: none!important;
-}
-
 .emotion-1 button>div>div {
   font-size: 16px;
+}
+
+.emotion-1>div>div {
+  display: grid;
+  grid-template-columns: code panel;
 }
 
 .emotion-1>div {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  display: grid;
 }
 
 .emotion-2 {
@@ -369,12 +367,15 @@ exports[`CodeIO renders correctly 1`] = `
   justify-self: right;
 }
 
-.emotion-20 .emotion-21,
-.emotion-20 .leafygreen-ui-1ryj72u,
-.emotion-20 .emotion-6,
-.emotion-20 .leafygreen-ui-1fyye0e,
-.emotion-20 .leafygreen-ui-olcyvn {
-  display: inline;
+.emotion-20>div>* {
+  display: inline!important;
+}
+
+.emotion-20 * {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .emotion-21 {
@@ -410,10 +411,6 @@ exports[`CodeIO renders correctly 1`] = `
   align-items: center;
   padding-top: 6px;
   padding-bottom: 6px;
-  border-bottom-right-radius: 12px;
-  border-bottom-left-radius: 12px;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {

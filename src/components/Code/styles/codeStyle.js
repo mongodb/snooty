@@ -9,11 +9,6 @@ export const baseCodeStyle = css`
   table-layout: fixed;
   width: 100%;
 
-  // Remove whitespace when copyable false
-  > div > :after {
-    box-shadow: none !important;
-  }
-
   // Override default LG Code language switcher font size
   button > div > div {
     font-size: ${theme.fontSize.default};
