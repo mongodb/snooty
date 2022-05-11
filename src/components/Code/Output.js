@@ -26,7 +26,6 @@ const Output = ({ nodeData: { children }, ...rest }) => {
         showLineNumbers={linenos}
         darkMode={true}
         copyable={false}
-        linenos={linenos}
         lineNumberStart={lineno_start}
       >
         {value}

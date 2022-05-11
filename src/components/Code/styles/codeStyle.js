@@ -11,7 +11,11 @@ export const baseCodeStyle = css`
 
   // Override default LG Code language switcher font size
   button > div > div {
-    font-size: ${theme.fontSize.default};
+    font-size: ${theme.fontSize.small};
+    margin-top: 2px;
+  }
+  button > div > svg {
+    margin-top: 1px;
   }
 `;
 
