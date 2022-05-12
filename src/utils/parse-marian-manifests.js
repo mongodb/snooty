@@ -47,28 +47,25 @@ export const parseMarianManifest = (manifest) => {
   return { branch: BRANCH_MAPPING[branch] || branch, property };
 };
 
-// Parses a list of manifest strings from Marian categorized by property or manifest string
-export const parseMarianManifests = (manifests, organizeByManifest) => {
+// Parses a list of manifest strings from Marian
+export const parseMarianManifests = (manifests, searchPropertyMapping) => {
   const result = {};
-  manifests.forEach((m) => {
-    // exclude ill-formed manifests
-    if (m.slice(-1) !== '-') {
-      const { branch, property } = parseMarianManifest(m);
-      // organize by manifest (ex. { atlas-master : { category : 'Atlas', version: 'Latest' }})
-      if (!!organizeByManifest) {
-        if (!(m in result)) {
-          result[m] = {};
-        }
-        result[m] = { category: property, version: branch };
-      } else {
-        // organize by property / category (ex. { Atlas : { Latest : atlas-master }})
-        if (!(property in result)) {
-          result[property] = {};
-        }
-        result[property][branch] = m;
-      }
+
+  manifests.forEach((manifest) => {
+    // We should only include categories and versions in the filter dropdowns if they
+    // have category/version data associated with them. This will prevent unexpected
+    // or new manifests without proper titles from appearing in the dropdowns.
+    if (!searchPropertyMapping[manifest]) {
+      return;
     }
+
+    const { categoryTitle: category, versionSelectorLabel: version } = searchPropertyMapping[manifest];
+    // organize by property / category (ex. { Atlas : { Latest : atlas-master }})
+    if (!(category in result)) {
+      result[category] = {};
+    }
+    result[category][version] = manifest;
   });
-  delete result['Charts 19'];
+
   return result;
 };
