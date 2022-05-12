@@ -12,11 +12,6 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-0 button>div>div {
   font-size: 14px;
-  margin-top: 2px;
-}
-
-.emotion-0 button>div>svg {
-  margin-top: 1px;
 }
 
 .emotion-0>div>div {
@@ -40,11 +35,6 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-1 button>div>div {
   font-size: 14px;
-  margin-top: 2px;
-}
-
-.emotion-1 button>div>svg {
-  margin-top: 1px;
 }
 
 .emotion-1>div>div {
