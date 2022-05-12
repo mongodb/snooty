@@ -1,8 +1,5 @@
 const path = require('path');
-const AdmZip = require('adm-zip');
-const BSON = require('bson');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
-const { initStitch } = require('./src/utils/setup/init-stitch');
 const { baseUrl } = require('./src/utils/base-url');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
@@ -10,13 +7,8 @@ const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
-const { BRANCHES_COLLECTION } = require('./src/build-constants');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { constructReposFilter } = require('./src/utils/setup/construct-repos-filter');
-
-const reposDB = siteMetadata.reposDatabase;
-
-const reposFilter = constructReposFilter(siteMetadata.project);
+const { ManifestDocumentDatabase, StitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
 
 // different types of references
 const PAGES = [];
@@ -24,47 +16,9 @@ const PAGES = [];
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
 
-// stich client connection
-let stitchClient;
-
 const assets = new Map();
 
 let db;
-class DocumentDatabase {
-  constructor(path) {
-    this.zip = new AdmZip(path);
-  }
-
-  getDocuments() {
-    const result = [];
-    const zipEntries = this.zip.getEntries();
-    for (const entry of zipEntries) {
-      if (entry.entryName.startsWith('documents/')) {
-        const doc = BSON.deserialize(entry.getData());
-        result.push(doc);
-      }
-    }
-    return result;
-  }
-
-  getMetadata() {
-    const zipEntries = this.zip.getEntries();
-    for (const entry of zipEntries) {
-      if (entry.entryName === 'site.bson') {
-        const doc = BSON.deserialize(entry.getData());
-        return doc;
-      }
-    }
-  }
-
-  getAsset(checksum) {
-    const result = this.zip.getEntry(`assets/${checksum}`);
-    if (result) {
-      return result.getData();
-    }
-    return null;
-  }
-}
 
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
@@ -77,10 +31,18 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   }
 
   // wait to connect to stitch
-  stitchClient = await initStitch();
-  db = new DocumentDatabase(siteMetadata.manifestPath);
 
-  const documents = db.getDocuments();
+  if (siteMetadata.manifestPath) {
+    console.log('Loading documents from manifest');
+    db = new ManifestDocumentDatabase(siteMetadata.manifestPath);
+  } else {
+    console.log('Loading documents from stitch');
+    db = new StitchDocumentDatabase();
+  }
+
+  await db.connect();
+
+  const documents = await db.getDocuments();
 
   if (documents.length === 0) {
     console.error(
@@ -118,7 +80,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   // Get all MongoDB products for the sidenav
-  const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
+  const products = await db.fetchAllProducts(siteMetadata.database);
   products.forEach((product) => {
     const url = baseUrl(product.baseUrl + product.slug);
 
@@ -136,7 +98,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   await saveAssetFiles(assets, db);
-  const { static_files: staticFiles, ...metadataMinusStatic } = db.getMetadata();
+  const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
   const { parentPaths, slugToTitle } = metadataMinusStatic;
   if (parentPaths) {
@@ -165,8 +127,8 @@ exports.createPages = async ({ actions }) => {
 
   let repoBranches = null;
   try {
-    const repoInfo = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
-    let errMsg = null;
+    const repoInfo = await db.stitchInterface.fetchRepoBranches();
+    let errMsg;
 
     if (!repoInfo) {
       errMsg = `Repo data for ${siteMetadata.project} could not be found.`;

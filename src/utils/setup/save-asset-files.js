@@ -13,7 +13,7 @@ const saveAssetFiles = async (assets, db) => {
   const imageWrites = [];
   for (const [id, filenames] of assets) {
     if (filenames) {
-      const buffer = db.getAsset(id);
+      const buffer = db.getAssets([id]);
       filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
     }
   }
