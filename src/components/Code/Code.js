@@ -39,7 +39,9 @@ const getLanguage = (lang) => {
   return 'none';
 };
 
-const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source } }) => {
+const Code = ({
+  nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
+}) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const code = value;
@@ -50,7 +52,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   }
   const captionSpecified = !!caption;
   const sourceSpecified = !!source;
-  const captionBorderRadius = captionSpecified ? '0px' : '4px';
+  const captionBorderRadius = captionSpecified ? '0px' : '12px';
 
   let customActionButtonList = [];
   if (sourceSpecified) {
@@ -83,9 +85,16 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
       css={css`
         ${baseCodeStyle}
 
+        // Remove whitespace when copyable false
+        > div > div {
+          display: ${!copyable && languageOptions?.length === 0 ? 'inline' : 'grid'};
+          grid-template-columns: ${!copyable && language === 'none' ? 'auto' : 'code panel'};
+        }
+
         > div {
           border-top-left-radius: ${captionBorderRadius};
           border-top-right-radius: ${captionBorderRadius};
+          display: grid;
         }
       `}
     >
@@ -109,6 +118,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
         showLineNumbers={linenos}
         showCustomActionButtons={sourceSpecified}
         customActionButtons={customActionButtonList}
+        lineNumberStart={lineno_start}
       >
         {code}
       </CodeBlock>
@@ -119,8 +129,8 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
   border-bottom: none;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
 `;
 
 Code.propTypes = {
@@ -132,6 +142,7 @@ Code.propTypes = {
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
     source: PropTypes.string,
+    lineno_start: PropTypes.number,
   }).isRequired,
 };
 
