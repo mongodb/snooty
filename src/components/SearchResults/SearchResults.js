@@ -15,7 +15,7 @@ import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import { displayNone } from '../../utils/display-none';
-import transformUrlBasedOnOrigin from '../../utils/transform-url-based-on-origin';
+import { baseUrl } from '../../utils/base-url';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_BY_TEXT_WIDTH = '62px';
@@ -233,7 +233,7 @@ const SearchResults = () => {
                 }
                 title={title}
                 preview={preview}
-                url={transformUrlBasedOnOrigin(url)}
+                url={baseUrl(url)}
                 useLargeTitle
               />
             ))}

@@ -5,7 +5,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import BreadcrumbSchema from './BreadcrumbSchema';
 import { theme } from '../theme/docsTheme';
 import BreadcrumbContainer from './BreadcrumbContainer';
-import { baseUrl } from '../utils/dotcom';
+import { baseUrl } from '../utils/base-url';
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 
 const Wrapper = styled('nav')`
@@ -25,7 +25,7 @@ const Wrapper = styled('nav')`
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
   const homeCrumb = {
     title: 'Docs Home',
-    url: homeUrl || assertTrailingSlash(baseUrl(true)),
+    url: homeUrl || assertTrailingSlash(baseUrl()),
   };
   // If a pageTitle prop is passed, use that as the last breadcrumb instead
   const lastCrumb = {

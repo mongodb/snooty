@@ -1,4 +1,4 @@
-const { isDotCom, dotcomifyUrl } = require('./dotcom');
+const { baseUrl } = require('./base-url');
 
 // Given a project's `name`, return its base URL.
 const getSiteUrl = (project, needsPrefix = false) => {
@@ -12,7 +12,7 @@ const getSiteUrl = (project, needsPrefix = false) => {
       break;
     default:
   }
-  return isDotCom() ? dotcomifyUrl(url, { needsPrefix }) : url;
+  return baseUrl(url, { needsPrefix });
 };
 
 module.exports.getSiteUrl = getSiteUrl;

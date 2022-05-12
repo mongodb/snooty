@@ -4,7 +4,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import Link from './Link';
 import { theme } from '../theme/docsTheme';
-import { baseUrl } from '../utils/dotcom';
+import { baseUrl } from '../utils/base-url';
 
 import IconC from './icons/C';
 import IconCpp from './icons/Cpp';
@@ -39,7 +39,7 @@ const tiles = [
     icon: <IconCsharp />,
   },
   {
-    slug: `${baseUrl(true)}/drivers/go/current/`,
+    slug: `${baseUrl()}/drivers/go/current/`,
     title: 'Go',
     icon: <IconGo />,
   },
@@ -49,7 +49,7 @@ const tiles = [
     icon: <IconJava />,
   },
   {
-    slug: `${baseUrl(true)}/drivers/node/current/`,
+    slug: `${baseUrl()}/drivers/node/current/`,
     title: 'Node.js',
     icon: <IconNode />,
   },
@@ -64,7 +64,7 @@ const tiles = [
     icon: <IconPython />,
   },
   {
-    slug: `${baseUrl(true)}/ruby-driver/current/`,
+    slug: `${baseUrl()}/ruby-driver/current/`,
     title: 'Ruby',
     icon: <IconRuby />,
   },
