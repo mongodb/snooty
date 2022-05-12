@@ -48,7 +48,7 @@ export const parseMarianManifest = (manifest) => {
 };
 
 // Parses a list of manifest strings from Marian
-export const parseMarianManifests = (manifests, searchPropertyMapping) => {
+export const parseMarianManifests = (manifests, searchPropertyMapping = {}) => {
   const result = {};
 
   manifests.forEach((manifest) => {

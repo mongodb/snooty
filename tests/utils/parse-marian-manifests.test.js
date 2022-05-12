@@ -7,21 +7,17 @@ import mockInputData from './data/marian-manifests.json';
 import mockResponseData from './data/parsed-marian-manifests.json';
 
 it('should parse marian manifests', () => {
-  expect(parseMarianManifests(mockInputData.manifests)).toStrictEqual(mockResponseData);
+  expect(parseMarianManifests(mockInputData.manifests, mockInputData.searchPropertyMapping)).toStrictEqual(
+    mockResponseData
+  );
 });
 
 it('should properly sort branches for a property with version numbers', () => {
-  const parsedSampleData = parseMarianManifests(mockInputData.manifests);
-  expect(getSortedBranchesForProperty(parsedSampleData, 'Charts')).toStrictEqual([
-    'Stable',
+  const parsedSampleData = parseMarianManifests(mockInputData.manifests, mockInputData.searchPropertyMapping);
+  expect(getSortedBranchesForProperty(parsedSampleData, 'Mongoid')).toStrictEqual([
     'Latest',
-    '19.12',
-    '19.09',
-    '19.06',
-    'v0.12',
-    'v0.11',
-    'v0.10',
-    'v0.9',
+    'Version 7.4 (current)',
+    'Version 7.3',
   ]);
 });
 
