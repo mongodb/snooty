@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.13.9",
+  "version": "0.13.12",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^14",
@@ -9,6 +9,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@emotion/jest": "^11.8.0",
+    "@percy/cli": "^1.0.1",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -36,6 +37,7 @@
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix --max-warnings 0",
+    "percy": "npm run build:clean && npm exec percy snapshot ./public",
     "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
     "prettier": "prettier '**/*.{js,jsx,json,md}'",
@@ -53,7 +55,7 @@
     "@leafygreen-ui/badge": "^4.0.3",
     "@leafygreen-ui/banner": "^3.0.6",
     "@leafygreen-ui/box": "^3.0.6",
-    "@leafygreen-ui/button": "^12.0.2",
+    "@leafygreen-ui/button": "^13.0.0",
     "@leafygreen-ui/callout": "^3.0.6",
     "@leafygreen-ui/card": "^5.1.1",
     "@leafygreen-ui/checkbox": "^6.0.3",
@@ -66,7 +68,7 @@
     "@leafygreen-ui/leafygreen-provider": "^2.0.2",
     "@leafygreen-ui/logo": "^4.0.2",
     "@leafygreen-ui/modal": "^6.1.2",
-    "@leafygreen-ui/palette": "^3.1.1",
+    "@leafygreen-ui/palette": "^3.3.1",
     "@leafygreen-ui/select": "^3.0.1",
     "@leafygreen-ui/side-nav": "^7.2.1",
     "@leafygreen-ui/table": "^2.0.2",
@@ -75,8 +77,9 @@
     "@leafygreen-ui/tooltip": "^6.1.7",
     "@leafygreen-ui/typography": "^7.5.0",
     "@loadable/component": "^5.14.1",
-    "@mdb/consistent-nav": "^1.2.10-rc.0",
-    "@mdb/flora": "^0.11.0",
+    "@mdb/consistent-nav": "^1.2.13",
+    "@mdb/flora": "^0.20.1",
+    "@mdx-js/react": "^1.6.22",
     "clipboard": "^2.0.8",
     "dotenv": "^8.2.0",
     "gatsby": "^2.29.3",
@@ -86,6 +89,7 @@
     "gatsby-plugin-layout": "^1.7.0",
     "gatsby-plugin-react-helmet": "^3.7.0",
     "gatsby-plugin-sitemap": "^2.11.0",
+    "hex-rgb": "^5.0.0",
     "highlight.js": "~10.6.0",
     "html-screen-capture-js": "^1.0.50",
     "mobx": "^6.1.5",
@@ -99,12 +103,13 @@
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-loadable": "^5.5.0",
+    "react-loading-skeleton": "^3.1.0",
     "react-player": "^2.9.0",
     "react-transition-group": "^4.4.1",
     "realm-web": "^1.3.0",
     "redoc": "^2.0.0-rc.48",
     "sanitize-html": "^2.2.0",
     "styled-components": "^5.2.1",
-    "theme-ui": "^0.10.0"
+    "theme-ui": "^0.13.1"
   }
 }

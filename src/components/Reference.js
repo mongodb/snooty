@@ -5,7 +5,7 @@ import Link from './Link';
 
 const Reference = ({ nodeData }) => {
   return (
-    <Link className="reference external" to={nodeData.refuri}>
+    <Link to={nodeData.refuri}>
       {nodeData.children.map((element, index) => (
         <ComponentFactory key={index} nodeData={element} />
       ))}

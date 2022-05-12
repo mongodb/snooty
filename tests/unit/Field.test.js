@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Field from '../../src/components/Field';
+import Field from '../../src/components/FieldList/Field';
 
 // data for this component
 import mockData from './data/FieldList.test.json';
