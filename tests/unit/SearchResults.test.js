@@ -4,7 +4,6 @@ import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { tick, setMobile } from '../utils';
-import transformUrlBasedOnOrigin from '../../src/utils/transform-url-based-on-origin';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@reach/router';
 import SearchResults from '../../src/components/SearchResults';
@@ -285,54 +284,5 @@ describe('Search Results Page', () => {
     });
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
-  });
-
-  it('rewrites old urls to new ones and vice versa', async () => {
-    const oldHosts = [
-      'docs.mongodb.com',
-      'docs.cloudmanager.mongodb.com',
-      'docs.opsmanager.mongodb.com',
-      'docs.cloudmanager.mongodb.com',
-    ];
-    const newHost = 'www.mongodb.com';
-
-    const mapping = [
-      [
-        'https://docs.mongodb.com/manual/reference/parameters/#wiredtiger-parameters',
-        'https://www.mongodb.com/docs/manual/reference/parameters/#wiredtiger-parameters',
-      ],
-      [
-        'https://docs.cloudmanager.mongodb.com/tutorial/edit-host-authentication-credentials/',
-        'https://www.mongodb.com/docs/cloud-manager/tutorial/edit-host-authentication-credentials/',
-      ],
-      [
-        'https://docs.opsmanager.mongodb.com/tutorial/edit-host-authentication-credentials/',
-        'https://www.mongodb.com/docs/ops-manager/tutorial/edit-host-authentication-credentials/',
-      ],
-      [
-        'https://docs.atlas.mongodb.com/reference/atlas-search/analyzers/language/#std-label-ref-language-analyzers',
-        'https://www.mongodb.com/docs/atlas/reference/atlas-search/analyzers/language/#std-label-ref-language-analyzers',
-      ],
-    ];
-
-    // New to old
-    for (const host of oldHosts) {
-      for (const pair of mapping) {
-        expect(transformUrlBasedOnOrigin(pair[1], host)).toStrictEqual(pair[0]);
-        expect(transformUrlBasedOnOrigin(pair[0], host)).toStrictEqual(pair[0]);
-      }
-    }
-
-    // Old to new
-    for (const pair of mapping) {
-      expect(transformUrlBasedOnOrigin(pair[0], newHost)).toStrictEqual(pair[1]);
-      expect(transformUrlBasedOnOrigin(pair[1], newHost)).toStrictEqual(pair[1]);
-    }
-
-    // Errors and unknown hosts should be an identity function
-    expect(transformUrlBasedOnOrigin('https://example.com', 'https://example.com')).toStrictEqual(
-      'https://example.com/'
-    );
-    expect(transformUrlBasedOnOrigin('foo-bar', newHost)).toStrictEqual('foo-bar');
   });
 });
