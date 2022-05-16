@@ -81,7 +81,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       return null;
     }
 
-    const hostName = getSiteUrl(product, true);
+    const hostName = getSiteUrl(product);
     return ['docs', 'mms', 'cloud-docs'].includes(product)
       ? `${hostName}/${version}`
       : `${hostName}/${product}/${version}`;
