@@ -18,7 +18,6 @@ import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
 import SearchResult from '../Searchbar/SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
-import transformUrlBasedOnOrigin from '../../utils/transform-url-based-on-origin';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
 import Tag, { searchTagStyle } from '../Tag';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -350,7 +349,7 @@ const SearchResults = () => {
                       }
                       title={title}
                       preview={preview}
-                      url={transformUrlBasedOnOrigin(url)}
+                      url={url}
                       useLargeTitle
                       parsedManifests={filters}
                       searchProperty={searchProperty?.[0]}
