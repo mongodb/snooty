@@ -13,8 +13,6 @@ export const REF_TARGETS = {
   'configuration-options': 'https://www.mongodb.com/docs/manual/reference/configuration-options/#configuration-options',
 };
 
-export const DOTCOM_BASE_URL = 'www.mongodb.com';
-export const DOTCOM_BASE_PREFIX = `docs`;
 export const MARIAN_URL = process.env.GATSBY_MARIAN_URL || 'https://docs-search-transport.mongodb.com/';
 
 // Class names to be used by mut for search indexing

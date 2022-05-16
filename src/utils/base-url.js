@@ -1,4 +1,5 @@
-import { DOTCOM_BASE_PREFIX, DOTCOM_BASE_URL } from '../constants';
+const DOTCOM_BASE_URL = 'www.mongodb.com';
+const DOTCOM_BASE_PREFIX = `docs`;
 
 // Used for any product mappings that won't match prefix pathing 1:1
 const productToPrefixMapping = (product) => {
@@ -26,7 +27,7 @@ const splitUrlBaseAndPath = (url) => {
 // Used to handle various needs to validate format of snooty-content urls, e.g.
 // ensuring protocol is present, or proper prefixing
 // Highly assumptive on being used only on `*.mongodb.com` domains.
-export const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
+const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
   const { needsProtocol = true, needsPrefix = true } = options;
   const { subdomainProduct, pathname } = splitUrlBaseAndPath(url);
 
@@ -43,3 +44,5 @@ export const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
 
   return pathname.length >= 1 ? joinUrlAndPath(baseUrl, pathname) : `${baseUrl}`;
 };
+
+module.exports = { baseUrl, DOTCOM_BASE_PREFIX, DOTCOM_BASE_URL };
