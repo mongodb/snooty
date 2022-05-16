@@ -1,5 +1,3 @@
-const { baseUrl } = require('./base-url');
-
 // Given a project's `name`, return its base URL.
 const getSiteUrl = (project) => {
   let url = 'https://www.mongodb.com/docs';
@@ -12,7 +10,7 @@ const getSiteUrl = (project) => {
       break;
     default:
   }
-  return baseUrl(url);
+  return url;
 };
 
 module.exports.getSiteUrl = getSiteUrl;
