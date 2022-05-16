@@ -1,5 +1,13 @@
 import { productToPrefixMapping } from './dotcom';
 
+const joinPrefixAndPathname = (prefix, pathname) => {
+  if (pathname.startsWith(prefix)) return pathname;
+  const needsTrim = prefix.endsWith('/') && pathname.startsWith('/');
+  const needsSlash = !prefix.endsWith('/') && !pathname.startsWith('/');
+
+  return needsTrim ? prefix.slice(-1) + pathname : needsSlash ? prefix + '/' + pathname : prefix + pathname;
+};
+
 /// DOP-2725: Temporary remapping of URL's based on the origin.
 /// Old urls get the new scheme, and new urls get the old scheme.
 /// This should be removed after rollout.
@@ -20,9 +28,12 @@ const transformUrlBasedOnOrigin = (url, host = null) => {
       // Change to www.mongodb.com and add a docs/ prefix on the path
       const domainSpecifier = parsedUrl.host.match(/^docs\.([^.]+)\.mongodb\.com/);
       if (domainSpecifier === null) {
-        parsedUrl.pathname = '/docs' + parsedUrl.pathname;
+        parsedUrl.pathname = joinPrefixAndPathname('/docs', parsedUrl.pathname);
       } else {
-        parsedUrl.pathname = '/docs/' + productToPrefixMapping(domainSpecifier[1]) + parsedUrl.pathname;
+        parsedUrl.pathname = joinPrefixAndPathname(
+          '/docs/',
+          productToPrefixMapping(domainSpecifier[1]) + parsedUrl.pathname
+        );
       }
 
       parsedUrl.host = 'www.mongodb.com';

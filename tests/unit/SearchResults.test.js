@@ -315,6 +315,30 @@ describe('Search Results Page', () => {
       ],
     ];
 
+    // Missing www handling
+    const postconsolidation = [
+      [
+        'https://mongodb.com/docs/master/introduction/index.html',
+        'https://www.mongodb.com/docs/master/introduction/index.html',
+      ],
+      [
+        'https://mongodb.com/docs/manual/reference/parameters/#wiredtiger-parameters',
+        'https://www.mongodb.com/docs/manual/reference/parameters/#wiredtiger-parameters',
+      ],
+      [
+        'https://mongodb.com/docs/cloud-manager/tutorial/edit-host-authentication-credentials/',
+        'https://www.mongodb.com/docs/cloud-manager/tutorial/edit-host-authentication-credentials/',
+      ],
+      [
+        'https://mongodb.com/docs/ops-manager/tutorial/edit-host-authentication-credentials/',
+        'https://www.mongodb.com/docs/ops-manager/tutorial/edit-host-authentication-credentials/',
+      ],
+      [
+        'https://mongodb.com/docs/atlas/reference/atlas-search/analyzers/language/#std-label-ref-language-analyzers',
+        'https://www.mongodb.com/docs/atlas/reference/atlas-search/analyzers/language/#std-label-ref-language-analyzers',
+      ],
+    ];
+
     // New to old
     for (const host of oldHosts) {
       for (const pair of mapping) {
@@ -327,6 +351,11 @@ describe('Search Results Page', () => {
     for (const pair of mapping) {
       expect(transformUrlBasedOnOrigin(pair[0], newHost)).toStrictEqual(pair[1]);
       expect(transformUrlBasedOnOrigin(pair[1], newHost)).toStrictEqual(pair[1]);
+    }
+
+    // New to ...new (missing www handling)?
+    for (const pair of postconsolidation) {
+      expect(transformUrlBasedOnOrigin(pair[0], newHost)).toStrictEqual(pair[1]);
     }
 
     // Errors and unknown hosts should be an identity function
