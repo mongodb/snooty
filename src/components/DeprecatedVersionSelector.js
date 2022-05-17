@@ -46,12 +46,12 @@ const prefixVersion = (version) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove v from version name
   const versionNumber = version.replace('v', '').split()[0];
-  const isNumeric = (version) => !isNaN(versionNumber);
-  // if branch is 'master', show as latest
-  if (isNaN(versionNumber)) {
+  const isNumeric = !(versionNumber === 'master' || versionNumber === 'main');
+  // if branch is 'master' or 'main', show as latest
+  if (!isNumeric) {
     return 'latest';
   }
-  return `${isNumeric(version) ? 'Version ' : ''}${versionNumber}`;
+  return `${isNumeric ? 'Version ' : ''}${versionNumber}`;
 };
 
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
