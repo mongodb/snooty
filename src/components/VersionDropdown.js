@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -105,6 +105,17 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
 
+  // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
+  // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
+  const currentUrlSlug = useMemo(() => {
+    for (let branch of branches) {
+      if (branch.gitBranchName === parserBranch) {
+        return setOptionSlug(branch);
+      }
+    }
+    return parserBranch;
+  }, [branches, parserBranch]);
+
   if ((branches?.length ?? 0) < 2) {
     console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
     return null;
@@ -113,14 +124,12 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
   // For exclusively Realm SDK pages, we show a subset of the versions depending
   // on the current page selection. For example, on the Android SDK page, we only
   // show Android SDK versions in the version dropdown box.
-  if (project === 'realm' && slug.startsWith('sdk/')) {
-    groups = groups.filter((g) => slug.startsWith(g?.['sharedSlugPrefix'])) || groups;
-    if ((groups?.length ?? 0) === 1) {
-      // Get the branchNames from the indicated group, e.g. ['android-v1.0', 'android-v2.0', ...]
-      const sdkBranchNames = groups[0]['includedBranches'];
+  if (project === 'realm' && currentUrlSlug?.startsWith('sdk/')) {
+    const sdkGroups = groups.filter((g) => currentUrlSlug.startsWith(g?.['sharedSlugPrefix']));
+    if (sdkGroups.length === 1) {
+      groups = sdkGroups;
+      const sdkBranchNames = sdkGroups[0]['includedBranches'];
       branches = branches.filter((b) => sdkBranchNames.includes(b['gitBranchName']));
-    } else {
-      console.warn(`Unexpected behavior with Realm SDK version grouping. Check 'groups' and 'sharedSlugPrefix'.`);
     }
   }
 
@@ -133,7 +142,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
 
     // For production builds, append version after project name
     if (pathPrefix) {
-      const noVersion = pathPrefix.substr(0, pathPrefix.lastIndexOf('/'));
+      const noVersion = pathPrefix.substr(0, pathPrefix.indexOf(currentUrlSlug));
       return `${noVersion}/${version}`;
     }
 
@@ -155,10 +164,6 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
       return `${baseUrl(true)}/legacy/?site=${project}`;
     }
     const prefix = generatePrefix(optionValue);
-    if (project === 'realm' && optionValue.startsWith('sdk/')) {
-      console.warn(`Applying routing logic that is specific to Realm SDKs.`);
-      return normalizePath(prefix);
-    }
     return assertTrailingSlash(normalizePath(`${prefix}/${slug}`));
   };
 
@@ -171,24 +176,12 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
 
   const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
 
-  // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
-  // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
-  const slugFromParserBranch = (parserBranch, branches) => {
-    let slug = parserBranch;
-    for (let branch of branches) {
-      if (branch.gitBranchName === parserBranch) {
-        return setOptionSlug(branch);
-      }
-    }
-    return slug;
-  };
-
   const eolVersionFlipperStyle = LeafyCSS`
-  & > button {
-    background-color: ${uiColors.gray.light2} !important;
-    color: ${uiColors.gray.base} !important;
-  }
-`;
+    & > button {
+      background-color: ${uiColors.gray.light2} !important;
+      color: ${uiColors.gray.base} !important;
+    }
+  `;
 
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
   // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
@@ -204,7 +197,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
       placeholder={'Select a version'}
       popoverZIndex={3}
       size={Size.Large}
-      value={slugFromParserBranch(parserBranch, branches)}
+      value={currentUrlSlug}
       usePortal={false}
       disabled={eol}
     >
