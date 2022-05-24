@@ -142,7 +142,8 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
 
     // For production builds, append version after project name
     if (pathPrefix) {
-      const noVersion = pathPrefix.substr(0, pathPrefix.indexOf(currentUrlSlug));
+      const projectEndIndex = pathPrefix.indexOf(project) + project.length;
+      const noVersion = pathPrefix.substr(0, projectEndIndex);
       return `${noVersion}/${version}`;
     }
 
@@ -222,7 +223,7 @@ VersionDropdown.propTypes = {
         gitBranchName: PropTypes.string.isRequired,
         versionSelectorLabel: PropTypes.string,
         urlSlug: PropTypes.string,
-        active: PropTypes.string.isRequired,
+        active: PropTypes.bool.isRequired,
       })
     ).isRequired,
     groups: PropTypes.arrayOf(
