@@ -2,10 +2,12 @@ import React from 'react';
 import { css } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
+import { getLanguage } from '../../utils/get-language';
 
 const Output = ({ nodeData: { children }, ...rest }) => {
   const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
-  const language = lang || 'none';
+  const language = getLanguage(lang) || 'none';
+
   return (
     <div
       css={css`
