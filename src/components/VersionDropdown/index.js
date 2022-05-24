@@ -5,12 +5,12 @@ import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select, Size } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { theme } from '../theme/docsTheme';
-import { generatePathPrefix } from '../utils/generate-path-prefix';
-import { normalizePath } from '../utils/normalize-path';
-import { assertTrailingSlash } from '../utils/assert-trailing-slash';
-import { baseUrl } from '../utils/dotcom';
+import { generatePrefix } from './utils';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { theme } from '../../theme/docsTheme';
+import { normalizePath } from '../../utils/normalize-path';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import { baseUrl } from '../../utils/dotcom';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -103,7 +103,7 @@ const createOption = (branch) => {
 
 const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
   const siteMetadata = useSiteMetadata();
-  const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
+  const { parserBranch, project } = siteMetadata;
 
   // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
   // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
@@ -133,38 +133,11 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
     }
   }
 
-  const generatePrefix = (version) => {
-    // Manual production is a special case because it does not use a path
-    // prefix (found at root of docs.mongodb.com)
-    if (project === 'docs' && snootyEnv === 'production') {
-      return `/${version}`;
-    }
-
-    // For production builds, append version after project name
-    if (pathPrefix) {
-      const projectEndIndex = pathPrefix.indexOf(project) + project.length;
-      const noVersion = pathPrefix.substr(0, projectEndIndex);
-      return `${noVersion}/${version}`;
-    }
-
-    // For development
-    if (snootyEnv === 'development') {
-      console.warn(
-        `Applying experimental development environment-specific routing for versions.
-         Behavior may differ in both staging and production. See VersionDropdown.js for more detail.`
-      );
-      return `/${version}`;
-    }
-
-    // For staging, replace current version in dynamically generated path prefix
-    return generatePathPrefix({ ...siteMetadata, parserBranch: version });
-  };
-
   const getUrl = (optionValue) => {
     if (optionValue === 'legacy') {
       return `${baseUrl(true)}/legacy/?site=${project}`;
     }
-    const prefix = generatePrefix(optionValue);
+    const prefix = generatePrefix(optionValue, siteMetadata);
     return assertTrailingSlash(normalizePath(`${prefix}/${slug}`));
   };
 
