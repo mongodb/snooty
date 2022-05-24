@@ -152,7 +152,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
 
   const getUrl = (optionValue) => {
     if (optionValue === 'legacy') {
-      return `${baseUrl()}/legacy/?site=${project}`;
+      return `${baseUrl()}legacy/?site=${project}`;
     }
     const prefix = generatePrefix(optionValue);
     if (project === 'realm' && optionValue.startsWith('sdk/')) {

@@ -21,7 +21,7 @@ const BreadcrumbSchema = ({ breadcrumb = [], siteTitle, slug }) => {
       '@type': 'ListItem',
       position: 1,
       name: 'MongoDB Documentation',
-      item: assertTrailingSlash(baseUrl()),
+      item: baseUrl(),
     },
     ...getBreadcrumbList(
       [...(slug !== '/' && project !== 'landing' ? [{ path: '/', plaintext: siteTitle }] : []), ...breadcrumb],

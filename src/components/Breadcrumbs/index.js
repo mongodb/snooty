@@ -6,7 +6,6 @@ import BreadcrumbSchema from './BreadcrumbSchema';
 import BreadcrumbContainer from './BreadcrumbContainer';
 import { theme } from '../../theme/docsTheme';
 import { baseUrl } from '../../utils/base-url';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 
 const Wrapper = styled('nav')`
   font-size: ${theme.fontSize.small};
@@ -25,7 +24,7 @@ const Wrapper = styled('nav')`
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
   const homeCrumb = {
     title: 'Docs Home',
-    url: homeUrl || assertTrailingSlash(baseUrl()),
+    url: homeUrl || baseUrl(),
   };
   // If a pageTitle prop is passed, use that as the last breadcrumb instead
   const lastCrumb = {

@@ -39,7 +39,7 @@ const tiles = [
     icon: <IconCsharp />,
   },
   {
-    slug: `${baseUrl()}/drivers/go/current/`,
+    slug: `${baseUrl()}drivers/go/current/`,
     title: 'Go',
     icon: <IconGo />,
   },
@@ -49,7 +49,7 @@ const tiles = [
     icon: <IconJava />,
   },
   {
-    slug: `${baseUrl()}/drivers/node/current/`,
+    slug: `${baseUrl()}drivers/node/current/`,
     title: 'Node.js',
     icon: <IconNode />,
   },
@@ -64,7 +64,7 @@ const tiles = [
     icon: <IconPython />,
   },
   {
-    slug: `${baseUrl()}/ruby-driver/current/`,
+    slug: `${baseUrl()}ruby-driver/current/`,
     title: 'Ruby',
     icon: <IconRuby />,
   },

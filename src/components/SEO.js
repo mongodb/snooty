@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { baseUrl } from '../utils/base-url';
 
 const DEFAULT_TWITTER_SITE = '@mongodb';
-const metaUrl = `${baseUrl()}/assets/meta_generic.png`;
+const metaUrl = `www.mongodb.com/docs/assets/meta_generic.png`;
 
 const SEO = ({ pageTitle, siteTitle }) => (
   <Helmet>
