@@ -129,7 +129,6 @@ const SearchResult = React.memo(
     onClick,
     preview,
     title,
-    parsedManifests,
     searchProperty,
     url,
     ...props

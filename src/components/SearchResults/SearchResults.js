@@ -242,9 +242,8 @@ const SearchResults = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const specifySearchText = 'Specify your search';
-
   const { filters, searchPropertyMapping } = useMarianManifests();
+  const specifySearchText = 'Specify your search';
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);

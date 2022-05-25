@@ -24,7 +24,7 @@ export const useMarianManifests = () => {
         // { 'atlas-master': { categoryTitle: 'Atlas', versionSelectorLabel: 'Latest' } }
         setSearchPropertyMapping(mapping);
       } catch (err) {
-        console.error(err);
+        console.error('Failed to fetch search property mapping.', err);
       }
       return mapping;
     };
