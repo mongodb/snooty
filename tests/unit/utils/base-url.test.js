@@ -15,11 +15,10 @@ describe('baseUrl', () => {
 
   it('supports both regular subdomain and product subdomain conversions', () => {
     expect(baseUrl('https://docs.mongodb.com')).toBe('https://www.mongodb.com/docs/');
-    expect(baseUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager/');
     expect(baseUrl('https://docs.atlas.mongodb.com')).toBe('https://www.mongodb.com/docs/atlas/');
   });
 
-  it('supports mapping products to prefixes in special cases, ala opsmanager -> ops-manager ', () => {
+  it('supports mapping products to prefixes in special cases, aka opsmanager -> ops-manager ', () => {
     expect(baseUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager/');
     expect(baseUrl('https://docs.cloudmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/cloud-manager/');
   });
@@ -33,7 +32,6 @@ describe('baseUrl', () => {
     expect(baseUrl('https://docs.mongodb.com/compound-indexes')).toBe('https://www.mongodb.com/docs/compound-indexes/');
 
     // product subdomains
-    expect(baseUrl('https://docs.opsmanager.mongodb.com')).toBe('https://www.mongodb.com/docs/ops-manager/');
     expect(baseUrl('https://docs.opsmanager.mongodb.com/this-is/a-long/pathname')).toBe(
       'https://www.mongodb.com/docs/ops-manager/this-is/a-long/pathname/'
     );
@@ -74,5 +72,17 @@ describe('baseUrl', () => {
     expect(baseUrl('https://www.mongodb.com/long-path/name/divided/by-many-paths')).toBe(
       'https://www.mongodb.com/docs/long-path/name/divided/by-many-paths/'
     );
+  });
+
+  it('handles no subdomain gracefully, and appends a www subdomain', () => {
+    expect(baseUrl('https://mongodb.com/docs/alas-I-have-no-subdomain')).toBe(
+      'https://www.mongodb.com/docs/alas-I-have-no-subdomain/'
+    );
+
+    expect(baseUrl('https://alas-I-am-not-mdb.com/docs')).toBe('https://www.mongodb.com/docs/');
+  });
+
+  it('fails gracefully if passed an invalid url', () => {
+    expect(baseUrl('alas I am but a random string')).toBe('https://www.mongodb.com/docs/');
   });
 });

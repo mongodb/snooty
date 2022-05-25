@@ -1,4 +1,3 @@
-// Changed to apply dotcom logic across each ref target, conditionally if we determine that we are building for dotcom
 export const REF_TARGETS = {
   'compass-index': 'https://www.mongodb.com/docs/compass/current/#compass-index',
   'document-dot-notation': 'https://www.mongodb.com/docs/manual/core/document/#document-dot-notation',

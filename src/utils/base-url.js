@@ -24,7 +24,7 @@ const joinUrlAndPath = (url, path) => {
 // e.g. docs.atlas.mongodb.com or docs.opsmanager.mongodb.com
 const decomposeProductPrefixAndPath = (url) => {
   const decomposedUrl = url.toString().split('.');
-  const subdomainProduct = decomposedUrl[1] !== 'mongodb' ? decomposedUrl[1] : '';
+  const subdomainProduct = decomposedUrl.length > 2 && decomposedUrl[1] !== 'mongodb' ? decomposedUrl[1] : '';
   const productPrefix = productToPrefixMapping(subdomainProduct);
   const { pathname } = url;
   return { productPrefix, pathname };
@@ -34,6 +34,13 @@ const decomposeProductPrefixAndPath = (url) => {
 // ensuring protocol is present, or proper prefixing
 // Highly assumptive on being used only on `*.mongodb.com` domains.
 const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
+  // Any invalid inputs get assigned to DOTCOM_BASE_URL
+  try {
+    new URL(url);
+  } catch (err) {
+    url = DOTCOM_BASE_URL;
+  }
+
   const { needsProtocol = true, needsPrefix = true } = options;
   const { productPrefix, pathname } = decomposeProductPrefixAndPath(new URL(url));
 

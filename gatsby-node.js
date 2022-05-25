@@ -83,7 +83,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   // Get all MongoDB products for the sidenav
   const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   products.forEach((product) => {
-    let url = baseUrl(product.baseUrl + product.slug);
+    const url = baseUrl(product.baseUrl + product.slug);
 
     createNode({
       children: [],
