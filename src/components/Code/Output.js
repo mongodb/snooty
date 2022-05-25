@@ -6,7 +6,7 @@ import { getLanguage } from '../../utils/get-language';
 
 const Output = ({ nodeData: { children }, ...rest }) => {
   const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
-  const language = getLanguage(lang) || 'none';
+  const language = getLanguage(lang);
 
   return (
     <div
