@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { HeaderContext } from '../header-context';
+import { HeaderContext } from '../Header/header-context';
 import { SNOOTY_STITCH_ID } from '../../build-constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';

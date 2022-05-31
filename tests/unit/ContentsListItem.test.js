@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ContentsListItem from '../../src/components/ContentsList/ContentsListItem';
+import ContentsListItem from '../../src/components/Contents/ContentsListItem';
 
 describe('ContentsListItem', () => {
   it('renders correctly when active or inactive', () => {

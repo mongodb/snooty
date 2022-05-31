@@ -2,14 +2,15 @@ import { css } from '@emotion/react';
 import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { default as CodeBlock, Language } from '@leafygreen-ui/code';
+import { default as CodeBlock } from '@leafygreen-ui/code';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { uiColors } from '@leafygreen-ui/palette';
-import { CodeContext } from '../code-context';
-import { TabContext } from '../tab-context';
+import { CodeContext } from './code-context';
+import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { getLanguage } from '../../utils/get-language';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const captionStyle = css`
@@ -26,20 +27,9 @@ const sourceCodeStyle = css`
   justify-content: center;
 `;
 
-const getLanguage = (lang) => {
-  if (Object.values(Language).includes(lang)) {
-    return lang;
-  } else if (lang === 'sh') {
-    // Writers commonly use 'sh' to represent shell scripts, but LeafyGreen and Highlight.js use the key 'shell'
-    return 'shell';
-  } else if (['c', 'cpp'].includes(lang)) {
-    // LeafyGreen renders C and C++ languages with "cs"
-    return 'cs';
-  }
-  return 'none';
-};
-
-const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source } }) => {
+const Code = ({
+  nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
+}) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const code = value;
@@ -50,7 +40,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
   }
   const captionSpecified = !!caption;
   const sourceSpecified = !!source;
-  const captionBorderRadius = captionSpecified ? '0px' : '4px';
+  const captionBorderRadius = captionSpecified ? '0px' : '12px';
 
   let customActionButtonList = [];
   if (sourceSpecified) {
@@ -83,9 +73,16 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
       css={css`
         ${baseCodeStyle}
 
+        // Remove whitespace when copyable false
+        > div > div {
+          display: ${!copyable && languageOptions?.length === 0 ? 'inline' : 'grid'};
+          grid-template-columns: ${!copyable && language === 'none' ? 'auto' : 'code panel'};
+        }
+
         > div {
           border-top-left-radius: ${captionBorderRadius};
           border-top-right-radius: ${captionBorderRadius};
+          display: grid;
         }
       `}
     >
@@ -109,6 +106,7 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
         showLineNumbers={linenos}
         showCustomActionButtons={sourceSpecified}
         customActionButtons={customActionButtonList}
+        lineNumberStart={lineno_start}
       >
         {code}
       </CodeBlock>
@@ -119,8 +117,8 @@ const Code = ({ nodeData: { caption, copyable, emphasize_lines: emphasizeLines, 
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
   border-bottom: none;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
 `;
 
 Code.propTypes = {
@@ -132,6 +130,7 @@ Code.propTypes = {
     linenos: PropTypes.bool,
     value: PropTypes.string.isRequired,
     source: PropTypes.string,
+    lineno_start: PropTypes.number,
   }).isRequired,
 };
 

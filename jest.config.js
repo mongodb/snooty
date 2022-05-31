@@ -3,6 +3,7 @@ module.exports = {
     __PATH_PREFIX__: ``,
   },
   verbose: true,
+  testTimeout: 10000,
   projects: [
     {
       displayName: 'unit',

@@ -10,49 +10,101 @@ exports[`renders correctly 1`] = `
   width: 100%;
 }
 
-.emotion-0>div>div {
-  width: unset;
+.emotion-0 button>div>div {
+  font-size: 14px;
 }
 
-.emotion-0 button>div>div {
-  font-size: 16px;
+.emotion-0>div>div {
+  display: grid;
+  grid-template-columns: code panel;
 }
 
 .emotion-0>div {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  display: grid;
 }
 
 .emotion-1 {
-  border: 1px solid #E7EEEC;
-  border-radius: 4px;
+  border: 1px solid #E8EDEB;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .emotion-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-areas: 'code panel';
+  grid-template-columns: auto 38px;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.emotion-2:before,
+.emotion-2:after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  height: 100%;
+  width: 8px;
+  border-radius: 100%;
+  box-shadow: unset;
+  -webkit-transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 100ms ease-in-out;
+}
+
+.emotion-2:before {
+  grid-column: 1;
+  left: -8px;
+}
+
+.emotion-2:after {
+  grid-column: 2;
+}
+
+.emotion-2:before,
+.emotion-2:after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  height: 100%;
+  width: 8px;
+  border-radius: 100%;
+  box-shadow: unset;
+  -webkit-transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 100ms ease-in-out;
+}
+
+.emotion-2:before {
+  grid-column: 1;
+  left: -8px;
+}
+
+.emotion-2:after {
+  grid-column: 2;
 }
 
 .emotion-3 {
-  border: 2px solid;
+  grid-area: code;
   overflow-x: auto;
-  border-radius: 0;
+  border-radius: inherit;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   border: 0;
   padding-top: 8px;
   padding-bottom: 8px;
   margin: 0;
   position: relative;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
+  -webkit-transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 100ms ease-in-out;
   white-space: pre;
-  border-color: #E7EEEC;
+  border-color: #E8EDEB;
   background-color: #F9FBFA;
-  color: #061621;
+  color: #001E2B;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -77,11 +129,20 @@ exports[`renders correctly 1`] = `
   }
 }
 
+.emotion-3:focus,
+.emotion-3:active,
+.emotion-3:focus-visible,
+.emotion-3:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 2px #0498EC inset;
+}
+
 .emotion-4 {
   color: inherit;
   font-size: 13px;
   font-family: 'Source Code Pro',Menlo,monospace;
   line-height: 24px;
+  font-size: 13px;
 }
 
 .emotion-5 {
@@ -122,7 +183,7 @@ exports[`renders correctly 1`] = `
   text-align: right;
   padding-left: 8px;
   padding-right: 0;
-  color: #86681D;
+  color: #944F01;
 }
 
 .emotion-8 {
@@ -132,30 +193,27 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-9 {
-  width: 38px;
-  border-left: solid 1px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  padding-top: 6px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   gap: 4px;
-  min-height: 36px;
-  padding-top: 4px;
-  min-height: 36px;
-  padding-top: 4px;
-  border-color: #E7EEEC;
-  background-color: white;
+  padding: 6px;
+  border-left: solid 1px;
+  background-color: #FFFFFF;
+  border-color: #E8EDEB;
+  z-index: 2;
+  grid-area: panel;
 }
 
 .emotion-9 svg {
@@ -177,7 +235,7 @@ exports[`renders correctly 1`] = `
           tabindex="-1"
         >
           <code
-            class="lg-highlight-hljs-light emotion-4 java"
+            class="lg-highlight-hljs-light java emotion-4"
           >
             <table
               class="emotion-5"

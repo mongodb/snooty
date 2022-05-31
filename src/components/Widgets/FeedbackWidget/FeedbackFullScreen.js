@@ -7,7 +7,7 @@ import useNoScroll from './hooks/useNoScroll';
 import { useFeedbackState } from './context';
 import CloseButton from './components/CloseButton';
 import StarRating, { RATING_TOOLTIPS, StarRatingLabel } from './components/StarRating';
-import { HeaderContext } from '../../header-context';
+import { HeaderContext } from '../../Header/header-context';
 
 export default function FeedbackFullScreen({ isOpen, children }) {
   const { feedback, abandon } = useFeedbackState();
