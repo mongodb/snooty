@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select, Size } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { theme } from '../theme/docsTheme';
-import { generatePathPrefix } from '../utils/generate-path-prefix';
-import { normalizePath } from '../utils/normalize-path';
-import { assertTrailingSlash } from '../utils/assert-trailing-slash';
-import { baseUrl } from '../utils/base-url';
+import { generatePrefix } from './utils';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { theme } from '../../theme/docsTheme';
+import { normalizePath } from '../../utils/normalize-path';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import { baseUrl } from '../../utils/base-url';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -103,7 +103,18 @@ const createOption = (branch) => {
 
 const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
   const siteMetadata = useSiteMetadata();
-  const { parserBranch, pathPrefix, project, snootyEnv } = siteMetadata;
+  const { parserBranch, project } = siteMetadata;
+
+  // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
+  // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
+  const currentUrlSlug = useMemo(() => {
+    for (let branch of branches) {
+      if (branch.gitBranchName === parserBranch) {
+        return setOptionSlug(branch);
+      }
+    }
+    return parserBranch;
+  }, [branches, parserBranch]);
 
   if ((branches?.length ?? 0) < 2) {
     console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
@@ -113,52 +124,20 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
   // For exclusively Realm SDK pages, we show a subset of the versions depending
   // on the current page selection. For example, on the Android SDK page, we only
   // show Android SDK versions in the version dropdown box.
-  if (project === 'realm' && slug.startsWith('sdk/')) {
-    groups = groups.filter((g) => slug.startsWith(g?.['sharedSlugPrefix'])) || groups;
-    if ((groups?.length ?? 0) === 1) {
-      // Get the branchNames from the indicated group, e.g. ['android-v1.0', 'android-v2.0', ...]
-      const sdkBranchNames = groups[0]['includedBranches'];
-      branches = branches.filter((b) => sdkBranchNames.includes(b['gitBranchName']));
-    } else {
-      console.warn(`Unexpected behavior with Realm SDK version grouping. Check 'groups' and 'sharedSlugPrefix'.`);
+  if (project === 'realm' && currentUrlSlug?.startsWith('sdk/')) {
+    const currentSdkGroup = groups.find((g) => currentUrlSlug.startsWith(g?.['sharedSlugPrefix']));
+    if (currentSdkGroup) {
+      groups = [currentSdkGroup];
+      const includedBranches = currentSdkGroup['includedBranches'];
+      branches = branches.filter((b) => includedBranches.includes(b['gitBranchName']));
     }
   }
-
-  const generatePrefix = (version) => {
-    // Manual production is a special case because it does not use a path
-    // prefix (found at root of docs.mongodb.com)
-    if (project === 'docs' && snootyEnv === 'production') {
-      return `/${version}`;
-    }
-
-    // For production builds, append version after project name
-    if (pathPrefix) {
-      const noVersion = pathPrefix.substr(0, pathPrefix.lastIndexOf('/'));
-      return `${noVersion}/${version}`;
-    }
-
-    // For development
-    if (snootyEnv === 'development') {
-      console.warn(
-        `Applying experimental development environment-specific routing for versions.
-         Behavior may differ in both staging and production. See VersionDropdown.js for more detail.`
-      );
-      return `/${version}`;
-    }
-
-    // For staging, replace current version in dynamically generated path prefix
-    return generatePathPrefix({ ...siteMetadata, parserBranch: version });
-  };
 
   const getUrl = (optionValue) => {
     if (optionValue === 'legacy') {
       return `${baseUrl()}legacy/?site=${project}`;
     }
-    const prefix = generatePrefix(optionValue);
-    if (project === 'realm' && optionValue.startsWith('sdk/')) {
-      console.warn(`Applying routing logic that is specific to Realm SDKs.`);
-      return normalizePath(prefix);
-    }
+    const prefix = generatePrefix(optionValue, siteMetadata);
     return assertTrailingSlash(normalizePath(`${prefix}/${slug}`));
   };
 
@@ -171,24 +150,12 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
 
   const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
 
-  // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
-  // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
-  const slugFromParserBranch = (parserBranch, branches) => {
-    let slug = parserBranch;
-    for (let branch of branches) {
-      if (branch.gitBranchName === parserBranch) {
-        return setOptionSlug(branch);
-      }
-    }
-    return slug;
-  };
-
   const eolVersionFlipperStyle = LeafyCSS`
-  & > button {
-    background-color: ${uiColors.gray.light2} !important;
-    color: ${uiColors.gray.base} !important;
-  }
-`;
+    & > button {
+      background-color: ${uiColors.gray.light2} !important;
+      color: ${uiColors.gray.base} !important;
+    }
+  `;
 
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
   // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
@@ -204,7 +171,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
       placeholder={'Select a version'}
       popoverZIndex={3}
       size={Size.Large}
-      value={slugFromParserBranch(parserBranch, branches)}
+      value={currentUrlSlug}
       usePortal={false}
       disabled={eol}
     >
@@ -229,7 +196,7 @@ VersionDropdown.propTypes = {
         gitBranchName: PropTypes.string.isRequired,
         versionSelectorLabel: PropTypes.string,
         urlSlug: PropTypes.string,
-        active: PropTypes.string.isRequired,
+        active: PropTypes.bool.isRequired,
       })
     ).isRequired,
     groups: PropTypes.arrayOf(
