@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { baseUrl } from './utils/dotcom';
 
-const metaUrl = `http://${baseUrl()}/assets/meta_generic.png`;
-const metaSecureUrl = `${baseUrl(true)}/assets/meta_generic.png`;
-const faviconUrl = `${baseUrl(true)}/assets/favicon.ico`;
+const metaUrl = `http://www.mongodb.com/docs/assets/meta_generic.png`;
+const metaSecureUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
+const faviconUrl = `https://www.mongodb.com/docs/assets/favicon.ico`;
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => (
   <html lang="en" {...htmlAttributes}>

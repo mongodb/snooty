@@ -4,7 +4,7 @@ import { withPrefix } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { baseUrl } from '../../utils/dotcom';
+import { baseUrl } from '../../utils/base-url';
 
 const getBreadcrumbList = (breadcrumb, siteUrl) =>
   breadcrumb.map(({ path, plaintext }, index) => ({
@@ -21,7 +21,7 @@ const BreadcrumbSchema = ({ breadcrumb = [], siteTitle, slug }) => {
       '@type': 'ListItem',
       position: 1,
       name: 'MongoDB Documentation',
-      item: assertTrailingSlash(baseUrl(true)),
+      item: baseUrl(),
     },
     ...getBreadcrumbList(
       [...(slug !== '/' && project !== 'landing' ? [{ path: '/', plaintext: siteTitle }] : []), ...breadcrumb],
