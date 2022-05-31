@@ -51,10 +51,10 @@ const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
   );
 
   if (productPrefix && needsPrefix) {
-    baseUrl = new URL(joinUrlAndPath(baseUrl.toString(), productPrefix));
+    baseUrl.pathname = joinUrlAndPath(baseUrl.pathname, productPrefix);
   }
 
-  if (pathname.length >= 1) baseUrl = new URL(joinUrlAndPath(baseUrl.toString(), pathname));
+  if (pathname.length >= 1) baseUrl.pathname = joinUrlAndPath(baseUrl.pathname, pathname);
 
   return assertTrailingSlash(needsProtocol ? baseUrl.toString() : baseUrl.toString().split('//')[1]);
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
 const DEFAULT_TWITTER_SITE = '@mongodb';
-const metaUrl = `www.mongodb.com/docs/assets/meta_generic.png`;
+const metaUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 
 const SEO = ({ pageTitle, siteTitle }) => (
   <Helmet>
