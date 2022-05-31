@@ -15,8 +15,8 @@ export const generatePrefix = (version, siteMetadata) => {
     // Manual production is a special case because its pathPrefix does not use a project name
     const versionStartIndex =
       project === 'docs' ? pathPrefix.indexOf('/', 1) : pathPrefix.indexOf(project) + project.length;
-    const noVersion = pathPrefix.substr(0, versionStartIndex);
-    return `${noVersion}/${version}`;
+    const projectPrefix = pathPrefix.substr(0, versionStartIndex);
+    return `${projectPrefix}/${version}`;
   }
 
   // For development
