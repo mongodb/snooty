@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { default as CodeBlock, Language } from '@leafygreen-ui/code';
+import { default as CodeBlock } from '@leafygreen-ui/code';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
@@ -10,6 +10,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { CodeContext } from './code-context';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { getLanguage } from '../../utils/get-language';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const captionStyle = css`
@@ -25,19 +26,6 @@ const sourceCodeStyle = css`
   align-items: center;
   justify-content: center;
 `;
-
-const getLanguage = (lang) => {
-  if (Object.values(Language).includes(lang)) {
-    return lang;
-  } else if (lang === 'sh') {
-    // Writers commonly use 'sh' to represent shell scripts, but LeafyGreen and Highlight.js use the key 'shell'
-    return 'shell';
-  } else if (['c', 'cpp'].includes(lang)) {
-    // LeafyGreen renders C and C++ languages with "cs"
-    return 'cs';
-  }
-  return 'none';
-};
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
@@ -87,8 +75,10 @@ const Code = ({
 
         // Remove whitespace when copyable false
         > div > div {
-          display: ${!copyable && languageOptions?.length === 0 ? 'inline' : 'grid'};
-          grid-template-columns: ${!copyable && language === 'none' ? 'auto' : 'code panel'};
+          display: grid;
+          grid-template-columns: ${!copyable && (languageOptions?.length === 0 || language === 'none')
+            ? 'auto 0px !important'
+            : 'code panel'};
         }
 
         > div {
