@@ -30,3 +30,42 @@ jobs:
       run: npm test
       env:
         CI: true
+  percy:
+      strategy:
+        matrix:
+          include:
+            - project: Atlas
+              percy_token: secrets.PERCY_SECRET_ATLAS
+              site: atlas
+            - project: Drivers
+              percy_token: secrets.PERCY_SECRET_DRIVERS
+              site: drivers
+            - project: Manual
+              percy_token: secrets.PERCY_SECRET_MANUAL
+              site: docs
+            - project: Realm
+              percy_token: PERCY_SECRET_REALM
+              site: realm
+            - project: Charts
+              percy_token: PERCY_SECRET_CHARTS
+              site: charts
+            - project: Guides
+              percy_token: PERCY_SECRET_GUIDES
+              site: guides
+      runs-on: ubuntu-latest
+      env:
+        GATSBY_SITE: ${{ matrix.site }}
+        GATSBY_USER: docsworker-xlarge
+        NODE_ENV: production
+        NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
+        NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+        PERCY_TOKEN: ${{ secrets[matrix.percy_token] }}
+      steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install
+        run: npm ci
+      - name: Percy
+        run: npm run percy
