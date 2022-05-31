@@ -10,7 +10,7 @@ import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { normalizePath } from '../utils/normalize-path';
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
-import { baseUrl } from '../utils/dotcom';
+import { baseUrl } from '../utils/base-url';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -152,7 +152,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug, eol }) => {
 
   const getUrl = (optionValue) => {
     if (optionValue === 'legacy') {
-      return `${baseUrl(true)}/legacy/?site=${project}`;
+      return `${baseUrl()}legacy/?site=${project}`;
     }
     const prefix = generatePrefix(optionValue);
     if (project === 'realm' && optionValue.startsWith('sdk/')) {
