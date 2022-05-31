@@ -111,5 +111,8 @@
     "sanitize-html": "^2.2.0",
     "styled-components": "^5.2.1",
     "theme-ui": "^0.13.1"
+  },
+  "resolutions": {
+    "minimist": "1.2.6"
   }
 }
