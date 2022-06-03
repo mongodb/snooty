@@ -2,6 +2,8 @@ import { compareBranchesWithVersionNumbers } from './compare-branches-with-versi
 
 const PROPERTY_MAPPING = {
   atlas: 'Atlas',
+  'atlas-cli': 'Atlas CLI',
+  AtlasGov: 'Atlas for Government',
   'bi-connector': 'BI Connector',
   charts: 'Charts',
   compass: 'Compass',
@@ -11,15 +13,19 @@ const PROPERTY_MAPPING = {
   'docs-ruby': 'Ruby Driver',
   drivers: 'Drivers',
   ecosystem: 'Ecosystem',
+  golang: 'Go Driver',
   guides: 'Guides',
+  java: 'Java Driver',
   'kafka-connector': 'Kafka Connector',
   'kubernetes-operator': 'Kubernetes Operator',
   manual: 'MongoDB Manual',
   'mms-cloud': 'Cloud Manager',
   'mms-onprem': 'Ops Manager',
   mongocli: 'MongoDB CLI',
+  'mongodb-shell': 'MongoDB Shell',
   'mongodb-vscode': 'MongoDB for VSCode',
   mongoid: 'mongoid',
+  node: 'Node Driver',
   realm: 'Realm',
   'spark-connector': 'Spark Connector',
 };
