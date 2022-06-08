@@ -11,18 +11,10 @@ import { generatePathPrefix } from '../../utils/generate-path-prefix';
 export const generatePrefix = (version, siteMetadata, siteBasePrefix) => {
   const { pathPrefix, snootyEnv } = siteMetadata;
 
-  // For production builds, append version after project name
-  if (pathPrefix) {
+  // pathPrefix is typically passed in for deploy jobs. For development purposes,
+  // the returned prefix should follow the same pattern (even though the resulting URL might 404).
+  if (!!pathPrefix || snootyEnv === 'development') {
     return `/${siteBasePrefix}/${version}`;
-  }
-
-  // For development
-  if (snootyEnv === 'development') {
-    console.warn(
-      `Applying experimental development environment-specific routing for versions.
-       Behavior may differ in both staging and production. See VersionDropdown.js for more detail.`
-    );
-    return `/${version}`;
   }
 
   // For staging, replace current version in dynamically generated path prefix
