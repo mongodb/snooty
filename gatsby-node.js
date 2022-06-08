@@ -167,7 +167,7 @@ exports.createPages = async ({ actions }) => {
       repoBranches.groups = repoInfo.groups;
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 
   return new Promise((resolve, reject) => {
