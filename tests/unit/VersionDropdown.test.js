@@ -53,14 +53,14 @@ describe('VersionDropdown utils', () => {
       );
     });
 
-    it('returns a default prefix when in development with no pathPrefix', () => {
+    it('returns a prefix when in development with no pathPrefix', () => {
       const mockSiteMetadata = {
         project: 'bi-connector',
         snootyEnv: 'development',
       };
       const mockSiteBasePrefix = 'docs/bi-connector';
 
-      expect(generatePrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe('/v2.15');
+      expect(generatePrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/bi-connector/v2.15');
     });
   });
 });
