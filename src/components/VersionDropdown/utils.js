@@ -6,17 +6,14 @@ import { generatePathPrefix } from '../../utils/generate-path-prefix';
  * prefixes because of what's passed into the frontend.
  * @param {string} version The version to include at the end of the prefix.
  * @param {Object} siteMetadata Metadata about the site, including its pathPrefix, project, and snootyEnv.
+ * @param {string} siteBasePrefix The current docs site's base prefix to append the version to.
  */
-export const generatePrefix = (version, siteMetadata) => {
-  const { pathPrefix, project, snootyEnv } = siteMetadata;
+export const generatePrefix = (version, siteMetadata, siteBasePrefix) => {
+  const { pathPrefix, snootyEnv } = siteMetadata;
 
   // For production builds, append version after project name
   if (pathPrefix) {
-    // Manual production is a special case because its pathPrefix does not use a project name
-    const versionStartIndex =
-      project === 'docs' ? pathPrefix.indexOf('/', 1) : pathPrefix.indexOf(project) + project.length;
-    const projectPrefix = pathPrefix.substr(0, versionStartIndex);
-    return `${projectPrefix}/${version}`;
+    return `/${siteBasePrefix}/${version}`;
   }
 
   // For development
