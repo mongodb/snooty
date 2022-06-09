@@ -6,7 +6,7 @@ import Button from '@leafygreen-ui/button';
 import { uiColors } from '@leafygreen-ui/palette';
 import Footer from '../components/Footer';
 import { theme } from '../theme/docsTheme';
-import { baseUrl } from '../utils/dotcom';
+import { baseUrl } from '../utils/base-url';
 
 const ErrorBox = styled('div')`
   padding: 0px ${theme.size.default};
@@ -88,7 +88,7 @@ const ErrorBoxContainer = () => {
         `}
       >
         <Button
-          href={baseUrl(true)}
+          href={baseUrl()}
           variant="primary"
           css={css`
             @media ${theme.screenSize.upToSmall} {

@@ -1,18 +1,16 @@
-const { isDotCom, dotcomifyUrl } = require('./dotcom');
-
 // Given a project's `name`, return its base URL.
-const getSiteUrl = (project, needsPrefix = false) => {
-  let url = 'https://docs.mongodb.com';
+const getSiteUrl = (project) => {
+  let url = 'https://www.mongodb.com/docs';
   switch (project) {
     case 'cloud-docs':
-      url = 'https://docs.atlas.mongodb.com';
+      url = 'https://www.mongodb.com/docs/atlas';
       break;
     case 'mms':
-      url = 'https://docs.opsmanager.mongodb.com';
+      url = 'https://www.mongodb.com/docs/ops-manager';
       break;
     default:
   }
-  return isDotCom() ? dotcomifyUrl(url, { needsPrefix }) : url;
+  return url;
 };
 
 module.exports.getSiteUrl = getSiteUrl;

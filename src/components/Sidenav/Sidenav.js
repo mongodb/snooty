@@ -24,7 +24,7 @@ import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
-import { DOCS_URL } from '../../constants';
+import { baseUrl } from '../../utils/base-url';
 
 const SIDENAV_WIDTH = 268;
 
@@ -221,7 +221,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={DOCS_URL}>
+                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
                   MongoDB Documentation
                 </SideNavItem>
                 <Border />

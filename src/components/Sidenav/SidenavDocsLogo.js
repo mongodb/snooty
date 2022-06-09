@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { DOCS_URL } from '../../constants';
+import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
 
 import DocsLogo from '../SVGs/DocsLogo';
@@ -14,7 +14,7 @@ const PaddedDocsLogo = styled(DocsLogo)`
 const SidenavDocsLogo = ({ border, ...props }) => {
   return (
     <>
-      <Link to={DOCS_URL}>
+      <Link to={baseUrl()}>
         <PaddedDocsLogo height={20} width={184} {...props} />
       </Link>
       {border}

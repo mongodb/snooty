@@ -7,7 +7,7 @@ import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
-import { DOCS_URL } from '../../constants';
+import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 
@@ -63,7 +63,7 @@ const SidenavBackButton = ({
       [{ title, url }] = parents.slice(-1);
     } else if (completedFetch) {
       title = 'docs home';
-      url = DOCS_URL;
+      url = baseUrl();
     } else {
       // Show placeholder since the data is likely being fetched
       return (
