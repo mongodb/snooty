@@ -160,7 +160,7 @@ exports.createPages = async ({ actions }) => {
     // We're overfetching data here. We only need branches and prefix at the least
     repoBranches = {
       branches: repoInfo.branches,
-      prefix: repoInfo.prefix[envKey],
+      siteBasePrefix: repoInfo.prefix[envKey],
     };
 
     if (repoInfo.groups?.length > 0) {
@@ -168,6 +168,7 @@ exports.createPages = async ({ actions }) => {
     }
   } catch (err) {
     console.error(err);
+    throw err;
   }
 
   return new Promise((resolve, reject) => {

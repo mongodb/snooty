@@ -101,10 +101,9 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ repoBranches: { branches, groups, prefix }, slug, eol }) => {
+const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, slug, eol }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, project } = siteMetadata;
-  const siteBasePrefix = prefix;
 
   // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
   // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
@@ -138,8 +137,8 @@ const VersionDropdown = ({ repoBranches: { branches, groups, prefix }, slug, eol
     if (optionValue === 'legacy') {
       return `${baseUrl()}legacy/?site=${project}`;
     }
-    const prefix = generatePrefix(optionValue, siteMetadata, siteBasePrefix);
-    return assertTrailingSlash(normalizePath(`${prefix}/${slug}`));
+    const prefixWithVersion = generatePrefix(optionValue, siteMetadata, siteBasePrefix);
+    return assertTrailingSlash(normalizePath(`${prefixWithVersion}/${slug}`));
   };
 
   // Used exclusively by the LG Select component's onChange function, which receives
@@ -207,7 +206,7 @@ VersionDropdown.propTypes = {
         includedBranches: PropTypes.array,
       })
     ),
-    prefix: PropTypes.string.isRequired,
+    siteBasePrefix: PropTypes.string.isRequired,
   }).isRequired,
   slug: PropTypes.string.isRequired,
   eol: PropTypes.bool.isRequired,
