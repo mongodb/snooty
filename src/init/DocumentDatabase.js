@@ -24,7 +24,6 @@ class StitchInterface {
   }
 
   fetchAllProducts() {
-    console.log(this.stitchClient);
     return this.stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   }
 
@@ -36,11 +35,11 @@ class StitchInterface {
     ]);
   }
 
-  fetchDocuments(collection, buildFilter) {
+  async fetchDocuments(collection, buildFilter) {
     return this.stitchClient.callFunction('fetchDocuments', [DB, collection, buildFilter]);
   }
 
-  getMetadata(buildFilter) {
+  async getMetadata(buildFilter) {
     return this.stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]);
   }
 }
@@ -87,7 +86,7 @@ class ManifestDocumentDatabase {
   }
 
   async fetchAllProducts() {
-    return await this.stitchInterface.fetchAllProducts();
+    return this.stitchInterface.fetchAllProducts();
   }
 }
 
@@ -101,11 +100,11 @@ class StitchDocumentDatabase {
   }
 
   async getDocuments() {
-    return await this.stitchInterface.fetchDocuments(DOCUMENTS_COLLECTION, buildFilter);
+    return this.stitchInterface.fetchDocuments(DOCUMENTS_COLLECTION, buildFilter);
   }
 
   async getMetadata() {
-    return await this.stitchInterface.getMetadata(buildFilter);
+    return this.stitchInterface.getMetadata(buildFilter);
   }
 
   async *getAssets(checksums) {
@@ -118,7 +117,7 @@ class StitchDocumentDatabase {
   }
 
   async fetchAllProducts() {
-    return await this.stitchInterface.fetchAllProducts();
+    return this.stitchInterface.fetchAllProducts();
   }
 }
 
