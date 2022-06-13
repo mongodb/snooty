@@ -98,6 +98,7 @@ const Card = ({
 }) => {
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
   const Icon = isCompact ? CompactIcon : CardIcon;
+  console.log(isCompact);
   return (
     <Card onClick={() => onCardClick(url)}>
       {icon && (

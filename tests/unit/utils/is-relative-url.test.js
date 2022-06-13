@@ -7,6 +7,6 @@ it('should return false for any absolute or external links', () => {
 });
 
 it('should return true for any relative links', () => {
+  expect(isRelativeUrl('/foo')).toBe(true);
   expect(isRelativeUrl('/foo/bar')).toBe(true);
-  expect(isRelativeUrl('foo/bar')).toBe(true);
 });
