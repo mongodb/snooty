@@ -242,8 +242,8 @@ const SearchResults = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
-  const { filters } = useMarianManifests(true);
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
@@ -285,13 +285,13 @@ const SearchResults = () => {
         const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
         const resultJson = await result.json();
         if (!!resultJson?.results) {
-          setSearchResults(getSearchbarResultsFromJSON(resultJson));
+          setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
         }
         setSearchFinished(true);
       }
     };
     fetchNewSearchResults();
-  }, [searchFilter, searchTerm]);
+  }, [searchFilter, searchPropertyMapping, searchTerm]);
 
   return (
     <>
@@ -304,7 +304,9 @@ const SearchResults = () => {
       />
       <SearchContext.Provider
         value={{
+          filters,
           searchFilter,
+          searchPropertyMapping,
           searchTerm,
           selectedVersion,
           selectedCategory,
@@ -351,7 +353,6 @@ const SearchResults = () => {
                       preview={preview}
                       url={url}
                       useLargeTitle
-                      parsedManifests={filters}
                       searchProperty={searchProperty?.[0]}
                     />
                   ))}

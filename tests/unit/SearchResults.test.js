@@ -8,6 +8,9 @@ import { tick, setMobile } from '../utils';
 import * as reachRouter from '@reach/router';
 import SearchResults from '../../src/components/SearchResults';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
+import mockStaticQuery from '../utils/mockStaticQuery';
+import * as RealmUtil from '../../src/utils/realm';
+import mockInputData from '../utils/data/marian-manifests.json';
 
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
@@ -100,6 +103,8 @@ const clearAllFilters = async (wrapper, screenSize) => {
 
 describe('Search Results Page', () => {
   jest.useFakeTimers();
+  mockStaticQuery();
+  jest.spyOn(RealmUtil, 'fetchSearchPropertyMapping').mockImplementation(() => mockInputData.searchPropertyMapping);
 
   beforeAll(() => {
     window.fetch = mockMarianFetch;
