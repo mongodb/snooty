@@ -31,6 +31,10 @@ export const fetchProjectParents = async (database, project) => {
   return await fetchData('fetchProjectParents', database, project);
 };
 
+export const fetchSearchPropertyMapping = async (snootyEnv) => {
+  return await fetchData('fetchSearchPropertyMapping', snootyEnv);
+};
+
 export const fetchOASFile = async (apiName, database) => {
   return await fetchData('fetchOASFile', apiName, database);
 };
