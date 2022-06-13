@@ -17,13 +17,19 @@ it('renders correctly', () => {
   expect(tree.asFragment()).toMatchSnapshot();
 });
 
-it('uses Gatsby navigate function when given a relative URL', () => {
-  mockData['options']['url'] = '/foo';
-  const { getByText } = render(
-    <ThemeProvider theme={theme}>
-      <Card nodeData={mockData} isCompact={true} />
-    </ThemeProvider>
-  );
-  getByText('Test card headline').click();
-  expect(navigate).toHaveBeenCalledTimes(1);
+describe('relative urls passed to Card', () => {
+  test.each([
+    ['/foo', 1],
+    ['/foo/', 2],
+    ['foo', 3],
+  ])('should use Gatsby navigate function to render a link to %s', (url, expected) => {
+    mockData['options']['url'] = url;
+    const { getByText } = render(
+      <ThemeProvider theme={theme}>
+        <Card nodeData={mockData} isCompact={true} />
+      </ThemeProvider>
+    );
+    getByText('Test card headline').click();
+    expect(navigate).toHaveBeenCalledTimes(expected);
+  });
 });
