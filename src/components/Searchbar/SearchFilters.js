@@ -4,8 +4,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
-import { getSortedBranchesForProperty, parseMarianManifest } from '../../utils/parse-marian-manifests';
-import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import { getSortedBranchesForProperty } from '../../utils/parse-marian-manifests';
 import SearchContext from './SearchContext';
 
 const FILTER_WIDTH = '175px';
@@ -22,9 +21,10 @@ const MaxWidthSelect = styled(Select)`
 `;
 
 const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props }) => {
-  const { filters } = useMarianManifests();
   const {
+    filters,
     searchFilter,
+    searchPropertyMapping,
     setSearchFilter,
     selectedVersion,
     selectedCategory,
@@ -94,15 +94,20 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
   // Update filters to match an existing filter should it exist
   useEffect(() => {
     if (filters && searchFilter) {
-      const { branch, property } = parseMarianManifest(searchFilter);
-      setCategory(property);
-      updateVersionChoices(property);
-      setVersion(branch);
+      const currentFilter = searchPropertyMapping[searchFilter];
+      if (!currentFilter) {
+        return;
+      }
+
+      const { categoryTitle, versionSelectorLabel } = currentFilter;
+      setCategory(categoryTitle);
+      updateVersionChoices(categoryTitle);
+      setVersion(versionSelectorLabel);
     } else {
       setCategory(null);
       setVersion(null);
     }
-  }, [filters, searchFilter, updateVersionChoices]);
+  }, [filters, searchFilter, searchPropertyMapping, updateVersionChoices]);
 
   // Update property choices when the filter results from Marian are loaded
   useEffect(() => {

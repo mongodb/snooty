@@ -129,17 +129,16 @@ const SearchResult = React.memo(
     onClick,
     preview,
     title,
-    parsedManifests,
     searchProperty,
     url,
     ...props
   }) => {
-    const { searchContainerRef, searchTerm } = useContext(SearchContext);
+    const { searchContainerRef, searchPropertyMapping, searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
-    const category = parsedManifests?.[searchProperty]?.['category'];
-    const version = parsedManifests?.[searchProperty]?.['version'];
+    const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
+    const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
 
     const onArrowDown = useCallback(
       (resultLinkRef) => {
