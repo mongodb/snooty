@@ -83,9 +83,7 @@ const CompactTextWrapper = styled('div')`
 `;
 
 const onCardClick = (url) => {
-  if (url) {
-    isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
-  }
+  isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
 };
 
 const Card = ({
@@ -99,7 +97,7 @@ const Card = ({
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
   const Icon = isCompact ? CompactIcon : CardIcon;
   return (
-    <Card onClick={() => onCardClick(url)}>
+    <Card onClick={url ? () => onCardClick(url) : undefined}>
       {icon && (
         <ConditionalWrapper
           condition={isCompact}
