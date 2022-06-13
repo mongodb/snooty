@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import { withPrefix, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -9,7 +9,6 @@ import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
 import Link from '../Link';
 import Tag from '../Tag';
-import { navigate } from 'gatsby';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 
 const StyledCard = styled(LeafyGreenCard)`
