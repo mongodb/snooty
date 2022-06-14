@@ -5,6 +5,7 @@ const gatsby = jest.requireActual('gatsby');
 module.exports = {
   ...gatsby,
   graphql: jest.fn(),
+  navigate: jest.fn(),
   StaticQuery: jest.fn(),
   withPrefix: jest.fn().mockImplementation((path) => (path.startsWith(`/`) ? path : `/${path}`)),
   useStaticQuery: jest.fn(),
