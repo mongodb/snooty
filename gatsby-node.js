@@ -130,14 +130,45 @@ exports.createPages = async ({ actions }) => {
 
   let repoBranches = null;
   try {
-    repoBranches = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
+    const repoInfo = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
+    let errMsg = null;
 
-  if (repoBranches?.length ?? 0) {
-    console.error('No version information found for', siteMetadata.project);
+    if (!repoInfo) {
+      errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+    }
+
+    // We should expect the number of branches for a docs repo to be 1 or more.
+    if (!repoInfo.branches?.length) {
+      errMsg = `No version information found for ${siteMetadata.project}`;
+    }
+
+    if (errMsg) {
+      throw errMsg;
+    }
+
+    // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+    // dotcom environments seem to be consistent.
+    let envKey = siteMetadata.snootyEnv;
+    if (!envKey || envKey === 'development') {
+      envKey = 'dotcomprd';
+    } else if (envKey === 'production') {
+      envKey = 'prd';
+    } else if (envKey === 'staging') {
+      envKey = 'stg';
+    }
+
+    // We're overfetching data here. We only need branches and prefix at the least
+    repoBranches = {
+      branches: repoInfo.branches,
+      siteBasePrefix: repoInfo.prefix[envKey],
+    };
+
+    if (repoInfo.groups?.length > 0) {
+      repoBranches.groups = repoInfo.groups;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
   }
 
   return new Promise((resolve, reject) => {
