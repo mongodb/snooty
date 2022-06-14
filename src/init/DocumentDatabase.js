@@ -76,13 +76,12 @@ class ManifestDocumentDatabase {
     }
   }
 
-  async *getAssets(checksums) {
-    for (const checksum of checksums) {
-      const result = this.zip.getEntry(`assets/${checksum}`);
-      if (result) {
-        yield result.getData();
-      }
+  async getAsset(checksum) {
+    const result = this.zip.getEntry(`assets/${checksum}`);
+    if (result) {
+      return result.getData();
     }
+    return null;
   }
 
   async fetchAllProducts() {
@@ -107,13 +106,14 @@ class StitchDocumentDatabase {
     return this.stitchInterface.getMetadata(buildFilter);
   }
 
-  async *getAssets(checksums) {
-    const assetQuery = { _id: { $in: Array.from(checksums) } };
+  async getAsset(checksum) {
+    const assetQuery = { _id: checksum };
     const assetDataDocuments = await this.stitchInterface.fetchDocuments(ASSETS_COLLECTION, assetQuery);
 
     for (const result of assetDataDocuments) {
-      yield result.data.buffer;
+      return result.data.buffer;
     }
+    return null;
   }
 
   async fetchAllProducts() {

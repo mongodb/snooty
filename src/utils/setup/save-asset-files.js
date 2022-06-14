@@ -11,9 +11,16 @@ const saveFile = async (file, data) => {
 // Write all assets to static directory
 const saveAssetFiles = async (assets, db) => {
   const imageWrites = [];
+
   for (const [id, filenames] of assets) {
     if (filenames) {
-      const buffer = db.getAssets([id]);
+      const buffer = await db.getAsset(id);
+      if (!buffer) {
+        console.error(
+          `Failed to fetch asset with checksum ${id}. This should not be possible and indicates an internal problem with the document source.`
+        );
+        process.exit(1);
+      }
       filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
     }
   }
