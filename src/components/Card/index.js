@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import { withPrefix, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
@@ -9,6 +9,7 @@ import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
 import Link from '../Link';
 import Tag from '../Tag';
+import { isRelativeUrl } from '../../utils/is-relative-url';
 
 const StyledCard = styled(LeafyGreenCard)`
   display: flex;
@@ -80,6 +81,10 @@ const CompactTextWrapper = styled('div')`
   }
 `;
 
+const onCardClick = (url) => {
+  isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
+};
+
 const Card = ({
   isCompact,
   isExtraCompact,
@@ -91,15 +96,7 @@ const Card = ({
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
   const Icon = isCompact ? CompactIcon : CardIcon;
   return (
-    <Card
-      onClick={
-        url
-          ? () => {
-              window.location.href = url;
-            }
-          : undefined
-      }
-    >
+    <Card onClick={url ? () => onCardClick(url) : undefined}>
       {icon && (
         <ConditionalWrapper
           condition={isCompact}
