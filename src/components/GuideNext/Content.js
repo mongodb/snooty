@@ -69,7 +69,7 @@ const Content = ({ argument, children, guideData }) => {
       </ConditionalWrapper>
       {/* We only want to show the button if argument/children are empty */}
       {!hasCustomContent && buttonUrl && (
-        <Button as={Link} baseFontSize={16} to={buttonUrl} variant="primary">
+        <Button as={Link} to={buttonUrl} hideExternalIcon={true} variant="primary">
           {buttonText}
         </Button>
       )}

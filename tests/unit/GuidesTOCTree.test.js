@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import mockData from './data/Chapters.test.json';
-import { ContentsContext } from '../../src/components/contents-context';
+import { ContentsContext } from '../../src/components/Contents/contents-context';
 import GuidesTOCTree from '../../src/components/Sidenav/GuidesTOCTree';
 
 const mockHeadingNodes = [

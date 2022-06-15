@@ -1,5 +1,5 @@
 import { useMemo, useContext } from 'react';
-import { HeaderContext } from '../components/header-context';
+import { HeaderContext } from '../components/Header/header-context';
 import { theme } from '../theme/docsTheme';
 
 // Returns the sum of the Header component's children's heights to give the appropriate amount of space for a component

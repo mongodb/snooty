@@ -1,29 +1,38 @@
 import React from 'react';
+import { css } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
-import { cx, css } from '@leafygreen-ui/emotion';
-import { theme } from '../../theme/docsTheme';
-
-const outputCodeStyle = css`
-  border-bottom-right-radius: ${theme.size.tiny};
-  border-bottom-left-radius: ${theme.size.tiny};
-`;
+import { getLanguage } from '../../utils/get-language';
 
 const Output = ({ nodeData: { children }, ...rest }) => {
-  const { emphasize_lines, value, linenos, lang } = children[0];
-  const language = lang || 'none';
+  const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
+  const language = getLanguage(lang);
+
   return (
-    <CodeBlock
-      className={cx(outputCodeStyle)}
-      highlightLines={emphasize_lines}
-      language={language}
-      showLineNumbers={linenos}
-      darkMode={true}
-      copyable={false}
-      linenos={linenos}
+    <div
+      css={css`
+        > div > * {
+          display: inline !important;
+        }
+        * {
+          border-top-right-radius: 0px;
+          border-top-left-radius: 0px;
+          border-bottom-right-radius: 12px;
+          border-bottom-left-radius: 12px;
+        }
+      `}
     >
-      {value}
-    </CodeBlock>
+      <CodeBlock
+        highlightLines={emphasize_lines}
+        language={language}
+        showLineNumbers={linenos}
+        darkMode={true}
+        copyable={false}
+        lineNumberStart={lineno_start}
+      >
+        {value}
+      </CodeBlock>
+    </div>
   );
 };
 

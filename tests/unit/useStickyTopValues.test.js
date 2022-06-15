@@ -1,7 +1,7 @@
 import React from 'react';
-import useStickyTopValues from '../../src/hooks/useStickyTopValues';
-import { HeaderContext } from '../../src/components/header-context';
 import { render } from '@testing-library/react';
+import useStickyTopValues from '../../src/hooks/useStickyTopValues';
+import { HeaderContext } from '../../src/components/Header/header-context';
 
 const HelperComponent = () => {
   const { topLarge, topMedium, topSmall } = useStickyTopValues(false);

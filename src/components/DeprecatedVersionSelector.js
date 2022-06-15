@@ -46,12 +46,11 @@ const prefixVersion = (version) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove v from version name
   const versionNumber = version.replace('v', '').split()[0];
-  const isNumeric = (version) => !isNaN(versionNumber);
-  // if branch is 'master', show as latest
-  if (isNaN(versionNumber)) {
+  // if branch is 'master' or 'main', show as latest
+  if (versionNumber === 'master' || versionNumber === 'main') {
     return 'latest';
   }
-  return `${isNumeric(version) ? 'Version ' : ''}${versionNumber}`;
+  return `Version ${versionNumber}`;
 };
 
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
@@ -81,7 +80,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       return null;
     }
 
-    const hostName = getSiteUrl(product, true);
+    const hostName = getSiteUrl(product);
     return ['docs', 'mms', 'cloud-docs'].includes(product)
       ? `${hostName}/${version}`
       : `${hostName}/${product}/${version}`;
@@ -118,7 +117,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         onChange={updateVersion}
         value={version}
       />
-      <Button variant="primary" title="View Documentation" size="large" href={generateUrl()} disabled={buttonDisabled}>
+      <Button variant="primary" title="View Documentation" href={generateUrl()} disabled={buttonDisabled}>
         View Documentation
       </Button>
     </>

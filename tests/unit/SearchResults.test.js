@@ -4,19 +4,22 @@ import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { tick, setMobile } from '../utils';
-import transformUrlBasedOnOrigin from '../../src/utils/transform-url-based-on-origin';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@reach/router';
 import SearchResults from '../../src/components/SearchResults';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
+import mockStaticQuery from '../utils/mockStaticQuery';
+import * as RealmUtil from '../../src/utils/realm';
+import mockInputData from '../utils/data/marian-manifests.json';
 
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
 const expectFilteredResults = (wrapper) => {
-  // Filtered property "Realm" should be shown twice:
-  // (1) as the selected text in the dropdown and (2) as a badge below the search header
-  expect(wrapper.queryAllByText('Realm').length).toBe(2);
+  // Filtered property "Realm" and version "Latest" should be shown 3x:
+  // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
+  expect(wrapper.queryAllByText('Realm').length).toBe(3);
+  expect(wrapper.queryAllByText('Latest').length).toBe(3);
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(FILTERED_RESULT.title)).toBeTruthy();
@@ -35,6 +38,12 @@ const expectValuesForFilters = (wrapper, category, version) => {
   const dropdowns = wrapper.queryAllByRole('listbox');
   expect(within(dropdowns[0]).queryByText(category)).toBeTruthy();
   expect(within(dropdowns[1]).queryByText(version)).toBeTruthy();
+};
+
+// Unfiltered search results should still display tags for category and version on card
+const expectUnfilteredSearchResultTags = (wrapper) => {
+  expect(wrapper.queryAllByText('Realm').length).toBe(1);
+  expect(wrapper.queryAllByText('Latest').length).toBe(1);
 };
 
 // Check the search results match the expected unfiltered results
@@ -94,6 +103,8 @@ const clearAllFilters = async (wrapper, screenSize) => {
 
 describe('Search Results Page', () => {
   jest.useFakeTimers();
+  mockStaticQuery();
+  jest.spyOn(RealmUtil, 'fetchSearchPropertyMapping').mockImplementation(() => mockInputData.searchPropertyMapping);
 
   beforeAll(() => {
     window.fetch = mockMarianFetch;
@@ -109,22 +120,67 @@ describe('Search Results Page', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
-  it('renders results from a given search term query param', async () => {
+  it('renders loading images before returning nonempty results', async () => {
+    let renderLoadingSkeletonImgs;
+    mockLocation('?q=stitch');
+    renderLoadingSkeletonImgs = render(<SearchResults />);
+    expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders loading images before returning no results', async () => {
+    let renderLoadingSkeletonImgs;
+    mockLocation('?q=noresultsreturned');
+    renderLoadingSkeletonImgs = render(<SearchResults />);
+    expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders no results found correctly if query returns nothing', async () => {
+    let renderEmptyResults;
+    mockLocation('?q=noresultsreturned');
+    await act(async () => {
+      renderEmptyResults = render(<SearchResults />);
+    });
+    expect(renderEmptyResults.queryAllByText('No results found')).toBeTruthy();
+  });
+
+  it('renders search landing page if no query made', async () => {
+    let renderSearchLanding;
+    mockLocation('');
+    await act(async () => {
+      renderSearchLanding = render(<SearchResults />);
+    });
+    expect(renderSearchLanding.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
+  });
+
+  it('renders results from a given search term query param and displays category and version tags', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
     });
+    expect(renderStitchResults.asFragment()).toMatchSnapshot();
+    expectUnfilteredSearchResultTags(renderStitchResults);
     expectUnfilteredResults(renderStitchResults);
   });
 
-  it('considers a given search filter query param', async () => {
+  it('considers a given search filter query param and displays category and version tags', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch&searchProperty=realm-master');
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
     });
+    expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectFilteredResults(renderStitchResults);
+  });
+
+  it('does not return results for a given search term with an ill-formed searchProperty', async () => {
+    let renderStitchResults;
+    mockLocation('?q=realm');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expect(renderStitchResults.asFragment()).toMatchSnapshot();
+    expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
   });
 
   it('updates the page UI when a property is changed', async () => {
@@ -233,54 +289,5 @@ describe('Search Results Page', () => {
     });
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
-  });
-
-  it('rewrites old urls to new ones and vice versa', async () => {
-    const oldHosts = [
-      'docs.mongodb.com',
-      'docs.cloudmanager.mongodb.com',
-      'docs.opsmanager.mongodb.com',
-      'docs.cloudmanager.mongodb.com',
-    ];
-    const newHost = 'www.mongodb.com';
-
-    const mapping = [
-      [
-        'https://docs.mongodb.com/manual/reference/parameters/#wiredtiger-parameters',
-        'https://www.mongodb.com/docs/manual/reference/parameters/#wiredtiger-parameters',
-      ],
-      [
-        'https://docs.cloudmanager.mongodb.com/tutorial/edit-host-authentication-credentials/',
-        'https://www.mongodb.com/docs/cloud-manager/tutorial/edit-host-authentication-credentials/',
-      ],
-      [
-        'https://docs.opsmanager.mongodb.com/tutorial/edit-host-authentication-credentials/',
-        'https://www.mongodb.com/docs/ops-manager/tutorial/edit-host-authentication-credentials/',
-      ],
-      [
-        'https://docs.atlas.mongodb.com/reference/atlas-search/analyzers/language/#std-label-ref-language-analyzers',
-        'https://www.mongodb.com/docs/atlas/reference/atlas-search/analyzers/language/#std-label-ref-language-analyzers',
-      ],
-    ];
-
-    // New to old
-    for (const host of oldHosts) {
-      for (const pair of mapping) {
-        expect(transformUrlBasedOnOrigin(pair[1], host)).toStrictEqual(pair[0]);
-        expect(transformUrlBasedOnOrigin(pair[0], host)).toStrictEqual(pair[0]);
-      }
-    }
-
-    // Old to new
-    for (const pair of mapping) {
-      expect(transformUrlBasedOnOrigin(pair[0], newHost)).toStrictEqual(pair[1]);
-      expect(transformUrlBasedOnOrigin(pair[1], newHost)).toStrictEqual(pair[1]);
-    }
-
-    // Errors and unknown hosts should be an identity function
-    expect(transformUrlBasedOnOrigin('https://example.com', 'https://example.com')).toStrictEqual(
-      'https://example.com/'
-    );
-    expect(transformUrlBasedOnOrigin('foo-bar', newHost)).toStrictEqual('foo-bar');
   });
 });

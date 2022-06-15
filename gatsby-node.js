@@ -1,7 +1,7 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { initStitch } = require('./src/utils/setup/init-stitch');
-const { isDotCom, dotcomifyUrl } = require('./src/utils/dotcom');
+const { baseUrl } = require('./src/utils/base-url');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
@@ -83,9 +83,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   // Get all MongoDB products for the sidenav
   const products = await stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   products.forEach((product) => {
-    // TODO: REMOVE AFTER DOP 2705
-    let url = product.baseUrl + product.slug;
-    if (isDotCom()) url = dotcomifyUrl(url);
+    const url = baseUrl(product.baseUrl + product.slug);
 
     createNode({
       children: [],
@@ -132,14 +130,45 @@ exports.createPages = async ({ actions }) => {
 
   let repoBranches = null;
   try {
-    repoBranches = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
+    const repoInfo = await stitchClient.callFunction('fetchDocument', [reposDB, BRANCHES_COLLECTION, reposFilter]);
+    let errMsg = null;
 
-  if (repoBranches?.length ?? 0) {
-    console.error('No version information found for', siteMetadata.project);
+    if (!repoInfo) {
+      errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+    }
+
+    // We should expect the number of branches for a docs repo to be 1 or more.
+    if (!repoInfo.branches?.length) {
+      errMsg = `No version information found for ${siteMetadata.project}`;
+    }
+
+    if (errMsg) {
+      throw errMsg;
+    }
+
+    // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+    // dotcom environments seem to be consistent.
+    let envKey = siteMetadata.snootyEnv;
+    if (!envKey || envKey === 'development') {
+      envKey = 'dotcomprd';
+    } else if (envKey === 'production') {
+      envKey = 'prd';
+    } else if (envKey === 'staging') {
+      envKey = 'stg';
+    }
+
+    // We're overfetching data here. We only need branches and prefix at the least
+    repoBranches = {
+      branches: repoInfo.branches,
+      siteBasePrefix: repoInfo.prefix[envKey],
+    };
+
+    if (repoInfo.groups?.length > 0) {
+      repoBranches.groups = repoInfo.groups;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
   }
 
   return new Promise((resolve, reject) => {

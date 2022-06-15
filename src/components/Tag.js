@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 
 const baseStyle = css`
@@ -11,17 +11,28 @@ const baseStyle = css`
   padding: ${theme.size.tiny} ${theme.size.small};
 `;
 
+export const searchTagStyle = css`
+  cursor: pointer;
+  height: 26px;
+  font-size: ${theme.fontSize.small};
+  margin-right: ${theme.size.small};
+`;
+
 const VARIANTS = {
   blue: css`
-    background-color: ${uiColors.blue.light3};
-    border: 1px solid ${uiColors.blue.light2};
-    // TODO: Update this to be blue.dark1 when we upgrade our Palette
-    color: ${uiColors.blue.dark2};
+    background-color: ${palette.blue.light3};
+    border: 1px solid ${palette.blue.light2};
+    color: ${palette.blue.dark1};
   `,
   green: css`
-    background-color: ${uiColors.green.light3};
-    border: 1px solid ${uiColors.green.light2};
-    color: ${uiColors.green.dark2};
+    background-color: ${palette.green.light3};
+    border: 1px solid ${palette.green.light2};
+    color: ${palette.green.dark2};
+  `,
+  purple: css`
+    background-color: ${palette.purple.light3};
+    border: 1px solid ${palette.purple.light2};
+    color: ${palette.purple.dark2};
   `,
 };
 

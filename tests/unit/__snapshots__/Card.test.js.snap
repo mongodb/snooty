@@ -59,9 +59,9 @@ exports[`renders correctly 1`] = `
   display: -ms-inline-flexbox;
   display: inline-flex;
   padding: 4px 8px;
-  background-color: #E4F4E4;
-  border: 1px solid #C3E7CA;
-  color: #116149;
+  background-color: #E3FCF7;
+  border: 1px solid #C0FAE6;
+  color: #00684A;
   margin-right: auto;
 }
 

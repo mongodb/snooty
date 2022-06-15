@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Footnote from '../../src/components/Footnote';
-import FootnoteContext from '../../src/components/footnote-context';
+import FootnoteContext from '../../src/components/Footnote/footnote-context';
 
 // data for this component
 import mockData from './data/Footnote.test.json';
