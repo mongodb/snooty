@@ -15,6 +15,14 @@ export default class Image extends Component {
     };
   }
 
+  // For statically generated site, manually trigger the onLoad event for initial page load
+  componentDidMount() {
+    const img = this.imgRef.current;
+    if (img && img.complete) {
+      this.handleLoad(img);
+    }
+  }
+
   handleLoad = ({ target: img }) => {
     const { handleImageLoaded, nodeData } = this.props;
     handleImageLoaded(this.imgRef.current);
