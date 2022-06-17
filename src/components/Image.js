@@ -12,7 +12,7 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
 
   useEffect(() => {
     if (imgRef.current && imgRef.current.complete) {
-      handleLoad(imgRef.current);
+      handleLoad();
     }
   });
 
@@ -39,9 +39,8 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
 
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
-  const customAlign = getNestedValue(['options', 'align'], nodeData)
-    ? `align-${getNestedValue(['options', 'align'], nodeData)}`
-    : '';
+  const imgAlignment = getNestedValue(['options', 'align'], nodeData);
+  const customAlign = imgAlignment ? `align-${imgAlignment}` : '';
 
   const hasBorder = getNestedValue(['options', 'border'], nodeData);
   const borderStyling = css`
