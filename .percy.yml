@@ -4,10 +4,11 @@ snapshot:
     - 375
     - 1280
   minHeight: 1024
-  percyCSS: ""
+  enable-javascript: true
 discovery:
   allowedHostnames: []
   networkIdleTimeout: 100
+  concurrency: 20
 static:
   cleanUrls: false
 upload:
