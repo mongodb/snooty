@@ -81,6 +81,8 @@
     "@mdb/consistent-nav": "1.2.16",
     "@mdb/flora": "^0.20.5",
     "@mdx-js/react": "^1.6.22",
+    "adm-zip": "^0.5.9",
+    "bson": "^4.6.3",
     "clipboard": "^2.0.8",
     "dotenv": "^8.2.0",
     "eventsource": "^2.0.2",
