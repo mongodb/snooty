@@ -53,6 +53,10 @@ const prefixVersion = (version) => {
   return `Version ${versionNumber}`;
 };
 
+const isVersioned = (selectedOption) => {
+  return selectedOption[0] === 'v';
+};
+
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
   const [product, setProduct] = useState('');
   const [version, setVersion] = useState('');
@@ -81,9 +85,10 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     }
 
     const hostName = getSiteUrl(product);
+    const versionName = isVersioned(version) ? version : '';
     return ['docs', 'mms', 'cloud-docs'].includes(product)
-      ? `${hostName}/${version}`
-      : `${hostName}/${product}/${version}`;
+      ? `${hostName}/${versionName}`
+      : `${hostName}/${product}/${versionName}`;
   };
 
   const productChoices = deprecatedVersions

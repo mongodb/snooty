@@ -6,6 +6,7 @@ import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSel
 const deprecatedVersions = {
   docs: ['v2.2', 'v2.4', 'v2.6', 'v3.0', 'v3.2', 'v3.4'],
   mms: ['v1.1', 'v1.2', 'v1.3'],
+  'atlas_open-service-broker': ['master'],
 };
 
 const metadata = {
@@ -59,6 +60,7 @@ describe('when rendered', () => {
 
       expect(wrapper.getByText('MongoDB Server')).toBeTruthy();
       expect(wrapper.getByText('MongoDB Ops Manager')).toBeTruthy();
+      expect(wrapper.getByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
     });
 
     it('version dropdown text is correct', () => {
@@ -81,6 +83,23 @@ describe('when rendered', () => {
       userEvent.click(productDropdown);
 
       expect(wrapper.queryAllByText('MongoDB Server')).toHaveLength(0);
+    });
+  });
+
+  describe('when the selected product is unversioned', () => {
+    it('generates an unversioned URL', () => {
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+      const productDropdown = wrapper.queryAllByRole('listbox')[0];
+      userEvent.click(productDropdown);
+      userEvent.click(wrapper.getByText('MongoDB Atlas Open Service Broker on Kubernetes'));
+
+      const versionDropdown = wrapper.queryAllByRole('listbox')[1];
+      userEvent.click(versionDropdown);
+      userEvent.click(wrapper.getByText('latest'));
+
+      const button = wrapper.getByTitle('View Documentation');
+      expect(button).toHaveAttribute('aria-disabled', 'false');
+      expect(button.href).toEqual('https://www.mongodb.com/docs/atlas_open-service-broker/');
     });
   });
 });
