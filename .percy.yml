@@ -1,17 +1,21 @@
 version: 2
+discovery:
+  concurrency: 30
+  launch-options:
+    timeout: 90000
 snapshot:
   widths:
     - 375
     - 1280
   minHeight: 1024
   enable-javascript: true
-discovery:
-  allowedHostnames: []
-  networkIdleTimeout: 100
-  concurrency: 50
 static:
-  cleanUrls: false
+  include: "**/*.html"
+  exclude: "/includes/**"
+  options:
+    - include: "**/*.html"
+      waitForTimeout: 2000
+      waitForSelector: body
 upload:
   files: "**/*.{png,jpg,jpeg}"
   ignore: ""
-  stripExtensions: false
