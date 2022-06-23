@@ -4,14 +4,21 @@
  * - "current" is the first entry, if applicable
  * - "master" is the second entry, if applicable
  * - Branch version numbers are then provided in most-recent-first order
- * @param {string} branchA the first branch
- * @param {string} branchB
+ * @param {string} branchTitleA the first branch
+ * @param {string} branchTitleB
  */
-export const compareBranchesWithVersionNumbers = (branchA, branchB) => {
+export const compareBranchesWithVersionNumbers = (branchTitleA, branchTitleB) => {
+  const branchA = branchTitleA.toLocaleLowerCase();
+  const branchB = branchTitleB.toLocaleLowerCase();
+
   if (branchA === 'current') return -1;
   if (branchB === 'current') return 1;
-  if (branchA === 'master') return -1;
-  if (branchB === 'master') return 1;
+
+  const latestNames = new Set(['master', 'latest', 'upcoming']);
+
+  if (latestNames.has(branchA)) return -1;
+  if (latestNames.has(branchB)) return 1;
+
   // We want to account for these strings not having the same number of characters
   // per part of the version number
   return parseVersionBranchForSort(branchB).localeCompare(parseVersionBranchForSort(branchA));

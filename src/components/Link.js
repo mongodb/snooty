@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { cx, css } from '@leafygreen-ui/emotion';
+import { isRelativeUrl } from '../utils/is-relative-url';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -17,12 +18,10 @@ const LGlinkStyling = css`
 // destructure the prop here and pass it only to GatsbyLink.
 const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
   if (!to) to = '';
-  // Assume that external links begin with http:// or https://
-  const external = /^http(s)?:\/\//.test(to) || to.startsWith('mailto:');
   const anchor = to.startsWith('#');
 
   // Use Gatsby Link for internal links, and <a> for others
-  if (to && !external && !anchor) {
+  if (to && isRelativeUrl(to) && !anchor) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash

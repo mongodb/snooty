@@ -1,7 +1,6 @@
 {
   "manifests": [
     "atlas-master",
-    "atlas-open-service-broker-current",
     "bi-connector-current",
     "bi-connector-master",
     "bi-connector-v1.1",
@@ -19,10 +18,6 @@
     "bi-connector-v2.7",
     "bi-connector-v2.8",
     "bi-connector-v2.9",
-    "charts-19-06",
-    "charts-19.06",
-    "charts-19.09",
-    "charts-19.12",
     "charts-current",
     "charts-master",
     "charts-v0.10",
@@ -88,6 +83,7 @@
     "manual-v3.4",
     "manual-v3.6",
     "manual-v4.0",
+    "manual-v5.3",
     "mms-cloud-master",
     "mms-onprem-current",
     "mms-onprem-master",
@@ -121,6 +117,8 @@
     "mongoid-6.4",
     "mongoid-7.0",
     "mongoid-7.1",
+    "mongoid-7.3",
+    "mongoid-7.4",
     "mongoid-master",
     "realm-master",
     "spark-connector-current",
@@ -128,7 +126,64 @@
     "spark-connector-v2.0",
     "spark-connector-v2.1",
     "spark-connector-v2.2",
-    "spark-connector-v2.3",
-    "stitch-master"
-  ]
+    "spark-connector-v2.3"
+  ],
+  "searchPropertyMapping": {
+    "atlas-master": {
+      "categoryTitle": "Atlas",
+      "versionSelectorLabel": "Latest"
+    },
+    "bi-connector-current": {
+      "categoryTitle": "BI Connector",
+      "versionSelectorLabel": "2.14"
+    },
+    "bi-connector-v2.13": {
+      "categoryTitle": "BI Connector",
+      "versionSelectorLabel": "2.13"
+    },
+    "bi-connector-v2.12": {
+      "categoryTitle": "BI Connector",
+      "versionSelectorLabel": "2.12"
+    },
+    "manual-v5.3": {
+      "categoryTitle": "MongoDB Server",
+      "versionSelectorLabel": "5.3 (current)"
+    },
+    "manual-v5.2": {
+      "categoryTitle": "MongoDB Server",
+      "versionSelectorLabel": "5.2 (non-existent)"
+    },
+    "mms-cloud-master": {
+      "categoryTitle": "Cloud Manager",
+      "versionSelectorLabel": "Latest"
+    },
+    "mms-onprem-master": {
+      "categoryTitle": "Ops Manager",
+      "versionSelectorLabel": "upcoming"
+    },
+    "mms-onprem-current": {
+      "categoryTitle": "Ops Manager",
+      "versionSelectorLabel": "Version 5.0 (current)"
+    },
+    "mongoid-master": {
+      "categoryTitle": "Mongoid",
+      "versionSelectorLabel": "Latest"
+    },
+    "mongoid-7.4": {
+      "categoryTitle": "Mongoid",
+      "versionSelectorLabel": "Version 7.4 (current)"
+    },
+    "mongoid-7.3": {
+      "categoryTitle": "Mongoid",
+      "versionSelectorLabel": "Version 7.3"
+    },
+    "realm-master": {
+      "categoryTitle": "Realm",
+      "versionSelectorLabel": "Latest"
+    },
+    "stitch-master": {
+      "categoryTitle": "Stitch",
+      "versionSelectorLabel": "Latest"
+    }
+  }
 }

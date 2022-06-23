@@ -75,8 +75,10 @@ const Code = ({
 
         // Remove whitespace when copyable false
         > div > div {
-          display: ${!copyable && languageOptions?.length === 0 ? 'inline' : 'grid'};
-          grid-template-columns: ${!copyable && language === 'none' ? 'auto' : 'code panel'};
+          display: grid;
+          grid-template-columns: ${!copyable && (languageOptions?.length === 0 || language === 'none')
+            ? 'auto 0px !important'
+            : 'code panel'};
         }
 
         > div {
