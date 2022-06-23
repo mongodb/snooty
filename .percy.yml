@@ -8,7 +8,7 @@ snapshot:
 discovery:
   allowedHostnames: []
   networkIdleTimeout: 100
-  concurrency: 20
+  concurrency: 50
 static:
   cleanUrls: false
 upload:
