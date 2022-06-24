@@ -1,6 +1,6 @@
 version: 2
 discovery:
-  concurrency: 30
+  concurrency: 5
   launch-options:
     timeout: 90000
 snapshot:
@@ -9,6 +9,10 @@ snapshot:
     - 1280
   minHeight: 1024
   enable-javascript: true
+  percy-css: |
+    .intercom-container {
+      display: none;
+    }
 static:
   include: "**/*.html"
   exclude: "/includes/**"
