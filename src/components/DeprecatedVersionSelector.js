@@ -42,15 +42,25 @@ const fullProductName = (property) => {
   return PROPERTY_NAME_MAPPING[property.replace('_', '-')] || property;
 };
 
+const isPrimaryBranch = (version) => {
+  return version === 'main' || version === 'master';
+};
+
 const prefixVersion = (version) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove v from version name
   const versionNumber = version.replace('v', '').split()[0];
   // if branch is 'master' or 'main', show as latest
-  if (versionNumber === 'master' || versionNumber === 'main') {
+  if (isPrimaryBranch(versionNumber)) {
     return 'latest';
   }
   return `Version ${versionNumber}`;
+};
+
+// An unversioned docs site defined as a product with a single
+// option of 'master' or 'main'
+const isVersioned = (versionOptions) => {
+  return !(versionOptions.length === 1 && isPrimaryBranch(versionOptions[0]));
 };
 
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
@@ -80,10 +90,12 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       return null;
     }
 
+    const versionOptions = deprecatedVersions[product];
     const hostName = getSiteUrl(product);
+    const versionName = isVersioned(versionOptions) ? version : '';
     return ['docs', 'mms', 'cloud-docs'].includes(product)
-      ? `${hostName}/${version}`
-      : `${hostName}/${product}/${version}`;
+      ? `${hostName}/${versionName}`
+      : `${hostName}/${product}/${versionName}`;
   };
 
   const productChoices = deprecatedVersions
