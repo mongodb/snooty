@@ -8,7 +8,6 @@ snapshot:
     - 375
     - 1280
   minHeight: 1024
-  enable-javascript: true
   percy-css: |
     #intercom-container {
       display: none;
