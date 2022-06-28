@@ -7,48 +7,48 @@ on:
 
 jobs:
   percy:
-        strategy:
-          matrix:
-            include:
-              - project: Atlas
-                percy_token: PERCY_SECRET_ATLAS
-                site: cloud-docs
-                parser_branch: master
-              - project: Drivers
-                percy_token: PERCY_SECRET_DRIVERS
-                site: drivers
-                parser_branch: master
-              - project: Manual
-                percy_token: PERCY_SECRET_MANUAL
-                site: docs
-                parser_branch: master
-              - project: Realm
-                percy_token: PERCY_SECRET_REALM
-                site: realm
-                parser_branch: master
-              - project: Guides
-                percy_token: PERCY_SECRET_GUIDES
-                site: guides
-                parser_branch: master
-        name: Percy Build - ${{ matrix.project }}
-        continue-on-error: true
-        runs-on: ubuntu-latest
-        env:
-          GATSBY_SITE: ${{ matrix.site }}
-          GATSBY_PARSER_USER: "docsworker-xlarge"
-          GATSBY_PARSER_BRANCH: ${{ matrix.parser_branch }}
-          NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
-          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
-          PERCY_TOKEN: ${{ secrets[matrix.percy_token] }}
-          SNOOTY_ENV: "dotcomprd"
-        steps:
-        - uses: actions/checkout@v1
-        - uses: actions/setup-node@v1
-          with:
-            node-version: v14.16.0
-        - name: NPM Setup
-          run: npm i -g npm@7.23.0 --registry=https://registry.npmjs.org
-        - name: Install
-          run: npm ci
-        - name: Percy
-          run: npm run percy
+      strategy:
+        matrix:
+          include:
+            - project: Atlas
+              percy_token: PERCY_SECRET_ATLAS
+              site: cloud-docs
+              parser_branch: master
+            - project: Drivers
+              percy_token: PERCY_SECRET_DRIVERS
+              site: drivers
+              parser_branch: master
+            - project: Manual
+              percy_token: PERCY_SECRET_MANUAL
+              site: docs
+              parser_branch: master
+            - project: Realm
+              percy_token: PERCY_SECRET_REALM
+              site: realm
+              parser_branch: master
+            - project: Guides
+              percy_token: PERCY_SECRET_GUIDES
+              site: guides
+              parser_branch: master
+      name: Percy Build - ${{ matrix.project }}
+      continue-on-error: true
+      runs-on: ubuntu-latest
+      env:
+        GATSBY_SITE: ${{ matrix.site }}
+        GATSBY_PARSER_USER: "docsworker-xlarge"
+        GATSBY_PARSER_BRANCH: ${{ matrix.parser_branch }}
+        NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
+        NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+        PERCY_TOKEN: ${{ secrets[matrix.percy_token] }}
+        SNOOTY_ENV: "dotcomprd"
+      steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: v14.16.0
+      - name: NPM Setup
+        run: npm i -g npm@7.23.0 --registry=https://registry.npmjs.org
+      - name: Install
+        run: npm ci
+      - name: Percy
+        run: npm run percy

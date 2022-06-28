@@ -10,12 +10,12 @@ snapshot:
   minHeight: 1024
   enable-javascript: true
   percy-css: |
-    .intercom-lightweight-app {
+    #intercom-container {
       display: none;
     }
 static:
   include: "**/*.html"
-  exclude: "/includes/**"
+  exclude: ["/includes/**", "/reference/**"]
   options:
     - include: "**/*.html"
       waitForTimeout: 2000
