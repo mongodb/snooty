@@ -29,7 +29,7 @@ DescriptionTerm.propTypes = {
   html_id: PropTypes.string.isRequired,
 };
 
-const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
+const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => {
   // If directive_argument node is not present, render an empty span with the target ID
   // Otherwise, render directive_argument as a dictionary node and attach the
   // ID to the description term field
@@ -40,7 +40,7 @@ const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
     <React.Fragment>
       {/* Render binary and program targets as empty spans such that their IDs are rendered on the page. */}
       {dictList.length > 0 && !['binary', 'program'].includes(name) ? (
-        <dl className={name}>
+        <dl className={`${name} ${options?.class || ''}`}>
           {descriptionTerm && <DescriptionTerm {...rest} {...descriptionTerm} html_id={html_id} />}
           <dd>
             {descriptionDetails.map((node, i) => (
@@ -60,6 +60,7 @@ Target.propTypes = {
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
     html_id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    options: PropTypes.shape({ class: PropTypes.string }),
   }).isRequired,
 };
 
