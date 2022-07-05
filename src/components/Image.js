@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { css } from '@emotion/react';
@@ -10,13 +10,7 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
   const [width, setWidth] = useState(null);
   const imgRef = useRef();
 
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      handleLoad();
-    }
-  });
-
-  const handleLoad = () => {
+  const handleLoad = useCallback(() => {
     const img = imgRef.current;
     handleImageLoaded(img);
 
@@ -29,7 +23,13 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
       if (height) setHeight(height);
       if (width) setWidth(height);
     }
-  };
+  }, [handleImageLoaded, nodeData]);
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      handleLoad();
+    }
+  }, [handleLoad]);
 
   const scaleSize = (width, height, scale) => {
     const scaleValue = parseInt(scale, 10) / 100.0;
