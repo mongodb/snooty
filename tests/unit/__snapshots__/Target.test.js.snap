@@ -49,7 +49,7 @@ exports[`renders correctly with a directive_argument node 1`] = `
 }
 
 <dl
-    class="option"
+    class="option "
   >
     <dt>
       <code
