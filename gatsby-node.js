@@ -49,7 +49,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       'Snooty could not find AST entries for the',
       siteMetadata.parserBranch,
       'branch of',
-      siteMetadata.project
+      siteMetadata.project,
+      'within',
+      siteMetadata.database
     );
     process.exit(1);
   }
