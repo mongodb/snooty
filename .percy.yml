@@ -1,16 +1,25 @@
 version: 2
+discovery:
+  concurrency: 16
+  launch-options:
+    timeout: 90000
 snapshot:
   widths:
     - 375
     - 1280
   minHeight: 1024
-  percyCSS: ""
-discovery:
-  allowedHostnames: []
-  networkIdleTimeout: 100
+  enable-javascript: false
+  percy-css: |
+    #intercom-container {
+      display: none;
+    }
 static:
-  cleanUrls: false
+  include: "**/*.html"
+  exclude: ["/includes/**", "/reference/**"]
+  options:
+    - include: "**/*.html"
+      waitForTimeout: 2000
+      waitForSelector: body
 upload:
   files: "**/*.{png,jpg,jpeg}"
   ignore: ""
-  stripExtensions: false
