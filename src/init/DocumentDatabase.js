@@ -6,7 +6,7 @@ const {
   ASSETS_COLLECTION,
   BRANCHES_COLLECTION,
 } = require('../build-constants');
-const { siteMetadata } = require('../utils/site-metadata');
+const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
 const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
@@ -67,13 +67,7 @@ class ManifestDocumentDatabase {
   }
 
   async getMetadata() {
-    const zipEntries = this.zip.getEntries();
-    for (const entry of zipEntries) {
-      if (entry.entryName === 'site.bson') {
-        const doc = BSON.deserialize(entry.getData());
-        return doc;
-      }
-    }
+    return manifestMetadata;
   }
 
   async getAsset(checksum) {
@@ -121,5 +115,5 @@ class StitchDocumentDatabase {
   }
 }
 
-exports.ManifestDocumentDatabase = ManifestDocumentDatabase;
-exports.StitchDocumentDatabase = StitchDocumentDatabase;
+exports.ManifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
+exports.StitchDocumentDatabase = new StitchDocumentDatabase();
