@@ -17,7 +17,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <meta name="version" content="master" />
       <meta property="og:image" content={metaUrl} />
       <meta property="og:image:secure_url" content={metaSecureUrl} />
-      <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
       <link rel="shortcut icon" href={faviconUrl} />
       {headComponents}
     </head>
