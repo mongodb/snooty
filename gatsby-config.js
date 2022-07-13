@@ -13,6 +13,7 @@ module.exports = {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
         siteUrl: `${siteMetadata.siteUrl}${pathPrefix}`,
+        stripQueryString: true,
       },
     },
     {
