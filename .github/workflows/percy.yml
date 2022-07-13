@@ -18,14 +18,6 @@ jobs:
               percy_token: PERCY_SECRET_DRIVERS
               site: drivers
               parser_branch: master
-            - project: Manual
-              percy_token: PERCY_SECRET_MANUAL
-              site: docs
-              parser_branch: master
-            - project: Realm
-              percy_token: PERCY_SECRET_REALM
-              site: realm
-              parser_branch: master
             - project: Guides
               percy_token: PERCY_SECRET_GUIDES
               site: guides
