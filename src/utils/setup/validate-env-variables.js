@@ -2,18 +2,18 @@ const fs = require('fs');
 
 // env variables for building site along with use in front-end
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
-const validateEnvVariables = (manifestPath, manifestMetadata) => {
+const validateEnvVariables = (manifestMetadata) => {
   // only require env vars when no manifest path is specified
   if (
-    !manifestPath &&
+    !process.env.GATSBY_MANIFEST_PATH &&
     (!process.env.GATSBY_SITE || !process.env.GATSBY_PARSER_USER || !process.env.GATSBY_PARSER_BRANCH)
   ) {
     return {
       error: true,
       message: `${process.env.NODE_ENV} requires the variables GATSBY_SITE, GATSBY_PARSER_USER, and GATSBY_PARSER_BRANCH, found: ${process.env.GATSBY_SITE}, ${process.env.GATSBY_PARSER_USER}, ${process.env.GATSBY_PARSER_BRANCH}`,
     };
-  } else if (manifestPath) {
-    validateEnvVarsForManifest(manifestMetadata);
+  } else if (process.env.GATSBY_MANIFEST_PATH) {
+    validateManifestEnvVars(manifestMetadata);
   }
   // create split prefix for use in stitch function
   return {
@@ -22,7 +22,7 @@ const validateEnvVariables = (manifestPath, manifestMetadata) => {
 };
 
 // set env vars accordingly if none are provided
-const validateEnvVarsForManifest = (manifestMetadata) => {
+const validateManifestEnvVars = (manifestMetadata) => {
   let envVars = '';
   const site = `\nGATSBY_SITE=${manifestMetadata['project']}`;
   const branch = `\nGATSBY_PARSER_BRANCH=${manifestMetadata['branch']}`;

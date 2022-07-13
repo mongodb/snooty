@@ -23,8 +23,8 @@ let db;
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
 
-  // setup env variables
-  const envResults = validateEnvVariables(siteMetadata.manifestPath, manifestMetadata);
+  // setup and validate env variables
+  const envResults = validateEnvVariables(manifestMetadata);
   if (envResults.error) {
     throw Error(envResults.message);
   }
