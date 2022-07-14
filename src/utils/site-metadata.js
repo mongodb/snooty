@@ -64,7 +64,7 @@ const siteMetadata = {
   database: getDatabase(process.env.SNOOTY_ENV),
   reposDatabase: getReposDatabase(process.env.SNOOTY_ENV),
   parserBranch: manifestMetadata['branch'] || process.env.GATSBY_PARSER_BRANCH,
-  parserUser: userInfo().username,
+  parserUser: process.env.GATSBY_PARSER_USER || userInfo().username,
   patchId: process.env.PATCH_ID || '',
   pathPrefix: getPathPrefix(process.env.PATH_PREFIX),
   project: manifestMetadata['project'] || process.env.GATSBY_SITE,

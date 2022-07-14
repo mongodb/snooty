@@ -91,7 +91,6 @@ const replaceIncorrectEnvVars = (incorrectEnvVars, envVars) => {
   } catch (err) {
     console.error(err);
   }
-  return;
 };
 
 module.exports.validateEnvVariables = validateEnvVariables;
