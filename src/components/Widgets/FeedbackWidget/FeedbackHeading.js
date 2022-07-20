@@ -9,7 +9,7 @@ export default function FeedbackHeading({ isVisible = true }) {
     !hideHeader && (
       <>
         <StarRating size="lg" />
-        <StarRatingLabel>Give Feedback</StarRatingLabel>
+        <StarRatingLabel>Share Feedback</StarRatingLabel>
       </>
     )
   );

@@ -3,13 +3,14 @@ import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useFeedbackState } from './context';
 import { displayNone } from '../../../utils/display-none';
+import { uiColors } from '@leafygreen-ui/palette';
 
 export default function FeedbackTab(props) {
   const { feedback, initializeFeedback } = useFeedbackState();
   return (
     !feedback && (
       <Container css={displayNone.onMobileAndTablet} onClick={() => initializeFeedback()}>
-        Give Feedback
+        Share Feedback
       </Container>
     )
   );
@@ -20,7 +21,9 @@ const Container = styled(LeafygreenCard)`
   cursor: pointer;
   padding: 12px;
   position: fixed;
-  right: 42px;
+  right: 15px;
   user-select: none;
   z-index: 9;
+  font-weight: 500;
+  color: ${uiColors.green.dark1};
 `;

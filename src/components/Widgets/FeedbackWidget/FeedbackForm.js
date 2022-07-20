@@ -6,6 +6,7 @@ import FeedbackFullScreen from './FeedbackFullScreen';
 import FeedbackCard from './FeedbackCard';
 import FeedbackModal from './FeedbackModal';
 import RatingView from './views/RatingView';
+import SentimentView from './views/SentimentView';
 import QualifiersView from './views/QualifiersView';
 import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
@@ -18,6 +19,7 @@ export function FeedbackContent({ view }) {
     comment: CommentView,
     support: SupportView,
     submitted: SubmittedView,
+    sentiment: SentimentView,
   }[view];
   return <View className={`view-${view}`} />;
 }
