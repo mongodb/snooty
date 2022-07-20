@@ -17,6 +17,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [isSupportRequest, setIsSupportRequest] = useState(test.isSupportRequest || false);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
+  const [progress, setProgress] = useState([true, false, false]);
   const user = useStitchUser();
 
   // Create a new feedback document
@@ -152,6 +153,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   const value = {
     feedback,
+    progress,
     view,
     setScreenshotTaken,
     screenshotTaken,
@@ -159,6 +161,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     initializeFeedback,
     setRating,
     setQualifier,
+    setProgress,
     submitQualifiers,
     submitComment,
     submitScreenshot,
