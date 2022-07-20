@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { theme } from '../../../../theme/docsTheme';
 // import { useFeedbackState } from '../context';
 import { uiColors } from '@leafygreen-ui/palette';
+import Emoji from '../components/Emoji';
 
 const sentimentChoices = ['positive', 'negative', 'suggestion'];
 
@@ -47,7 +48,10 @@ const StyledSentimentOption = styled('h4')`
 const SentimentOption = ({ sentiment }) => {
   return (
     <StyledSentiment>
-      <StyledSentimentOption>{getCopy(sentiment)}</StyledSentimentOption>
+      <StyledSentimentOption>
+        <Emoji sentiment={sentiment} />
+        {getCopy(sentiment)}
+      </StyledSentimentOption>
     </StyledSentiment>
   );
 };
