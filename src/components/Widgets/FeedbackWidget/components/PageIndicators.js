@@ -4,16 +4,16 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { useFeedbackState } from '../context';
 
 const Dot = styled('span')`
-  height: 5px;
-  width: 5px;
+  height: 4px;
+  width: 4px;
   background-color: ${(props) => (props.isActive ? `${uiColors.green.base}` : `${uiColors.gray.light2}`)};
   border-radius: 50%;
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 3px;
 `;
 
 const DotSpan = styled('span')`
-  padding-right: 102px;
+  padding-right: 72px;
 `;
 
 const StyledBar = styled('div')`
