@@ -61,13 +61,15 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   a,
   p {
     letter-spacing: unset;
+    line-height: 16px;
+  },
+  
+  // avoid GatsbyLink underline styling being applied to side nav
+  // may need to remove during DOP-2880
+  a:hover::after {
+    background-color: unset;
   }
 
-  // TODO: Remove when mongodb-docs.css is removed
-  a:hover,
-  a:focus {
-    color: unset;
-  }
 `;
 
 const titleStyle = LeafyCSS`

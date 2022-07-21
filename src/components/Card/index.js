@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
@@ -33,11 +33,10 @@ const H4 = styled('h4')`
 `;
 
 const CTA = styled('p')`
-  font-weight: bold;
   margin-top: auto;
-  & > a:hover {
-    color: ${uiColors.blue.dark2};
-  }
+  //   & > a:hover {
+  //     color: ${palette.blue.dark2};
+  //   }
 `;
 
 const FlexTag = styled(Tag)`
@@ -59,7 +58,7 @@ const CompactIcon = styled('img')`
 `;
 
 const CompactIconCircle = styled('div')`
-  background: ${uiColors.green.light3};
+  background: ${palette.green.light3};
   border-radius: 50%;
   display: flex;
   flex-shrink: 0 !important;

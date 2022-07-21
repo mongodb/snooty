@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
+import { Body } from '@leafygreen-ui/typography';
 
 const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
 
@@ -16,9 +17,11 @@ const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
   return (
     <p>
       {children.map((element, index) => (
+    <Body>
+      {nodeData.children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} />
       ))}
-    </p>
+    </Body>
   );
 };
 
