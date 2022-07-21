@@ -4,6 +4,8 @@ import { Link as GatsbyLink } from 'gatsby';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { isRelativeUrl } from '../utils/is-relative-url';
+import { palette } from '@leafygreen-ui/palette';
+import styled from '@emotion/styled';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -12,6 +14,42 @@ import { isRelativeUrl } from '../utils/is-relative-url';
 
 const LGlinkStyling = css`
   text-decoration: none !important;
+`;
+
+// CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
+const StyledGatsbyLink = styled(GatsbyLink)`
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  &:focus {
+    outline: none;
+  }
+  position: relative;
+  text-decoration: none !important;
+  line-height: 13px;
+  outline: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    border-radius: 2px;
+  }
+  &:focus & {
+    &::after {
+      background-color: ${palette.blue.light1};
+    }
+  }
+  &:hover {
+    &::after {
+      background-color: ${palette.gray.light2};
+    }
+  }
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -28,22 +66,20 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
     return (
-      <GatsbyLink activeClassName={activeClassName} partiallyActive={partiallyActive} to={to} {...other}>
+      <StyledGatsbyLink activeClassName={activeClassName} partiallyActive={partiallyActive} to={to} {...other}>
         {children}
-      </GatsbyLink>
+      </StyledGatsbyLink>
     );
-  } else if (!anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/))) {
+  } else {
+    const hideExternalIcon =
+      !anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/)) ? false : true;
+
     return (
-      <LGLink className={cx(LGlinkStyling)} href={to} {...other}>
+      <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
         {children}
       </LGLink>
     );
   }
-  return (
-    <a href={to} {...other}>
-      {children}
-    </a>
-  );
 };
 
 Link.propTypes = {

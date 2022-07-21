@@ -17,9 +17,9 @@ const Circle = styled('div')`
 const StyledStep = styled('div')`
   display: flex;
 
-  section > p > a {
-    font-weight: 600;
-  }
+  // section > p > a {
+  //   font-weight: 600;
+  // }
 `;
 
 const StepBlock = styled('div')`
@@ -85,6 +85,7 @@ const contentStyles = {
 };
 
 const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', ...rest }) => {
+  console.log(children);
   return (
     <StyledStep css={landingStepStyles[stepStyle]}>
       <StepBlock>
