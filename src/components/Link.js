@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import { Link as GatsbyLink } from 'gatsby';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { isRelativeUrl } from '../utils/is-relative-url';
+import { palette } from '@leafygreen-ui/palette';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -12,6 +14,33 @@ import { isRelativeUrl } from '../utils/is-relative-url';
 
 const LGlinkStyling = css`
   text-decoration: none !important;
+`;
+
+const StyledGatsbyLink = styled(GatsbyLink)`
+  //somehow just make this be styled the same as a LGLink
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  &:focus {
+    outline: none;
+  }
+  color: ${palette.blue.base};
+  font-weight: 400;
+`;
+
+const StyledLink = css`
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  &:focus {
+    outline: none;
+  }
+  color: ${palette.blue.base};
+  font-weight: 400;
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -28,9 +57,9 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
     return (
-      <GatsbyLink activeClassName={activeClassName} partiallyActive={partiallyActive} to={to} {...other}>
+      <StyledGatsbyLink activeClassName={activeClassName} partiallyActive={partiallyActive} to={to} {...other}>
         {children}
-      </GatsbyLink>
+      </StyledGatsbyLink>
     );
   } else if (!anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/))) {
     return (
@@ -40,7 +69,7 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     );
   }
   return (
-    <a href={to} {...other}>
+    <a className={StyledLink} href={to} {...other}>
       {children}
     </a>
   );

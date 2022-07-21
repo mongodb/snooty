@@ -17,9 +17,9 @@ const Circle = styled('div')`
 const StyledStep = styled('div')`
   display: flex;
 
-  section > p > a {
-    font-weight: 600;
-  }
+  //   section > p > a {
+  //     font-weight: 600;
+  //   }
 `;
 
 const StepBlock = styled('div')`

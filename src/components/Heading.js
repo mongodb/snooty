@@ -10,12 +10,25 @@ import { TabContext } from './Tabs/tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
+import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
+const determineHeading = (sectionDepth) => {
+  if (sectionDepth === 1) {
+    return H2;
+  } else if (sectionDepth === 2) {
+    return H3;
+  } else if (sectionDepth === 3) {
+    return Subtitle;
+  } else {
+    return Body;
+  }
+};
+
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
-  const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
+  const HeadingTag = determineHeading(sectionDepth);
 
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
