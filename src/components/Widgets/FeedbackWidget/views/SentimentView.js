@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from '../components/view-components';
 import styled from '@emotion/styled';
 import { theme } from '../../../../theme/docsTheme';
-// import { useFeedbackState } from '../context';
+import { useFeedbackState } from '../context';
 import { uiColors } from '@leafygreen-ui/palette';
 import Emoji from '../components/Emoji';
 
@@ -46,8 +46,9 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 const SentimentOption = ({ sentiment }) => {
+  const { setSentiment } = useFeedbackState();
   return (
-    <StyledSentiment>
+    <StyledSentiment onClick={() => setSentiment()}>
       <StyledSentimentOption>
         <Emoji sentiment={sentiment} />
         {getCopy(sentiment)}

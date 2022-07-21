@@ -46,6 +46,12 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     return { _id, ...newFeedback };
   }
 
+  // Once a user has selected the sentiment category, show them the comment/email input boxes.
+  async function setSentiment(sentiment) {
+    setView('comment');
+    setProgress([false, true, false]);
+  }
+
   // Sets the user's star rating for the page
   async function setRating(ratingValue) {
     // Once a user has set a rating, they cannot change it unless they
@@ -129,6 +135,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       setView('support');
     } else {
       setView('submitted');
+      setProgress([false, false, true]);
     }
   }
 
@@ -136,6 +143,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   async function submitSupport() {
     if (!feedback) return;
     setView('submitted');
+    setProgress([false, false, true]);
   }
 
   // Stop giving feedback (if in progress) and reset the widget to the
@@ -160,6 +168,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     isSupportRequest,
     initializeFeedback,
     setRating,
+    setSentiment,
     setQualifier,
     setProgress,
     submitQualifiers,
