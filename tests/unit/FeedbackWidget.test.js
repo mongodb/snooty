@@ -10,7 +10,7 @@ import {
 import { BSON } from 'mongodb-stitch-server-sdk';
 import { matchers } from '@emotion/jest';
 
-import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
+import { FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
 import {
@@ -75,21 +75,21 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackTab (Desktop Viewport)', () => {
-    it('shows the rating view when clicked', async () => {
+    it('shows the sentiment category view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
       // Click the tab
-      userEvent.click(wrapper.getByText('Give Feedback'));
+      userEvent.click(wrapper.getByText('Share Feedback'));
 
       await tick();
       // After the click new feedback is initialized
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
@@ -98,13 +98,13 @@ describe('FeedbackWidget', () => {
         comment: '',
         rating: null,
       });
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
 
     it('is hidden on small/mobile and medium/tablet screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
     });
@@ -113,8 +113,8 @@ describe('FeedbackWidget', () => {
   describe('FeedbackHeading (Mobile Viewport)', () => {
     it('is hidden on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
     });
@@ -122,8 +122,8 @@ describe('FeedbackWidget', () => {
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(2);
-      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
     });
@@ -131,32 +131,32 @@ describe('FeedbackWidget', () => {
     it('is visible on small/mobile screens', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(2);
     });
 
     it('is hidden on small/mobile screens when configured with page option', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({ hideHeader: true });
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
   });
 
   describe('FeedbackFooter', () => {
     it('is hidden on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
     });
 
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
 
     it('is visible on small/mobile screens', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
   });
 
@@ -170,93 +170,30 @@ describe('FeedbackWidget', () => {
       userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
       await tick();
       expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
     });
 
-    describe('RatingView', () => {
-      it('shows a 5-star rating', async () => {
+    describe('SentimentView', () => {
+      it('shows 3 sentiment categories', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'rating',
+          view: 'sentiment',
           _id: new BSON.ObjectId(),
         });
-        expect(wrapper.container.getElementsByClassName('fa-star').length).toBe(5);
+        expect(wrapper.queryAllByText('Yes it did!')).toHaveLength(1);
+        expect(wrapper.queryAllByText('No, I have feedback.')).toHaveLength(1);
+        expect(wrapper.queryAllByText('I have a suggetion.')).toHaveLength(1);
       });
 
-      it('transitions to the qualifiers view when a star is clicked', async () => {
+      it('transitions to the comment view when a category is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'rating',
+          view: 'sentiment',
           _id: new BSON.ObjectId(),
         });
-
-        // Simulate a 1-star rating
-        userEvent.click(wrapper.container.getElementsByClassName('fa-star')[0]);
+        /** 
+        userEvent.click(wrapper.container.getElementsByClassName(StyledSentiment));
         await tick();
         expect(wrapper.getByText('What seems to be the issue?')).toBeTruthy();
-      });
-    });
-
-    describe('QualifiersView', () => {
-      it('shows positive qualifiers for a positive rating', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'qualifiers',
-          rating: 4,
-          qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
-          comment: '',
-        });
-        expect(wrapper.queryByText("We're glad to hear that!")).toBeTruthy();
-        expect(wrapper.queryByText('Tell us more.')).toBeTruthy();
-      });
-
-      it('shows negative qualifiers for a negative rating', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'qualifiers',
-          rating: 2,
-          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-          comment: '',
-        });
-        expect(wrapper.queryByText("We're sorry to hear that.")).toBeTruthy();
-        expect(wrapper.queryByText('What seems to be the issue?')).toBeTruthy();
-      });
-
-      it('calls updateFeedback in stitch when qualifier clicked', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'qualifiers',
-          rating: 4,
-          qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
-          comment: '',
-        });
-        expect(wrapper.queryAllByRole('checkbox').length).toBe(4);
-        expect(wrapper.queryAllByRole('checkbox', { checked: true }).length).toBe(0);
-
-        // Check the first qualifier
-        userEvent.click(wrapper.queryAllByRole('checkbox')[0].closest('div'));
-        await tick();
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
-
-        // Check the second qualifier
-        userEvent.click(wrapper.queryAllByRole('checkbox')[1].closest('div'));
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
-
-        // Uncheck the first qualifier
-        userEvent.click(wrapper.queryAllByRole('checkbox')[0].closest('div'));
-        await tick();
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(3);
-      });
-
-      describe('when the Continue button is clicked', () => {
-        it('transitions to the comment view', async () => {
-          wrapper = await mountFormWithFeedbackState({
-            view: 'qualifiers',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            comment: '',
-          });
-
-          userEvent.click(wrapper.getByText('Continue').closest('button'));
-
-          await tick();
-          expect(wrapper.getByText('What seems to be the issue?')).toBeTruthy();
-        });
+        */
       });
     });
 
