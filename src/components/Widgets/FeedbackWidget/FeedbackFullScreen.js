@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
-
 import useNoScroll from './hooks/useNoScroll';
-
 import { useFeedbackState } from './context';
 import CloseButton from './components/CloseButton';
 import StarRating, { RATING_TOOLTIPS, StarRatingLabel } from './components/StarRating';

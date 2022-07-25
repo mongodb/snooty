@@ -11,7 +11,7 @@ const feedbackStyle = css`
   z-index: 14;
 `;
 
-export default function FeedbackCard({ isOpen, children }) {
+export default function FloatingContainer({ isOpen, children }) {
   const { abandon } = useFeedbackState();
 
   return (

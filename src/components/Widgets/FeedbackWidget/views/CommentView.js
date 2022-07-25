@@ -57,7 +57,7 @@ export default function CommentView({ ...props }) {
       <CommentTextArea
         id="feedback-comment"
         placeholder="Describe your experience."
-        rows={8}
+        rows={4}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
@@ -82,7 +82,7 @@ const InputStyle = css`
   padding: 14px;
   border: 0.5px solid ${uiColors.gray.base};
   border-radius: 2px;
-  flex-grow: 1;
+  flex-grow: 10;
   line-height: 24px;
   font-size: 16px;
   max-height: 100%;
@@ -95,7 +95,6 @@ const InputStyle = css`
 `;
 const CommentTextArea = styled.textarea`
   ${InputStyle}
-  resize: none;
 `;
 const EmailInput = styled.input`
   ${InputStyle}

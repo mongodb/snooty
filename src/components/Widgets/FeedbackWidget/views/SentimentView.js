@@ -1,9 +1,9 @@
 import React from 'react';
-import { Layout } from '../components/view-components';
 import styled from '@emotion/styled';
+import { uiColors } from '@leafygreen-ui/palette';
+import { Layout } from '../components/view-components';
 import { theme } from '../../../../theme/docsTheme';
 import { useFeedbackState } from '../context';
-import { uiColors } from '@leafygreen-ui/palette';
 import Emoji from '../components/Emoji';
 
 const sentimentChoices = ['positive', 'negative', 'suggestion'];

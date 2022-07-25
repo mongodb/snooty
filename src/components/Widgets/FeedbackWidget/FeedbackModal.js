@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-
 import { useFeedbackState } from './context';
-
 import LeafygreenModal from '@leafygreen-ui/modal';
 
 export default function FeedbackModal({ isOpen, children }) {

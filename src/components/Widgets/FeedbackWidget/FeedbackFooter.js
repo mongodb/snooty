@@ -8,10 +8,10 @@ export default function FeedbackFooter() {
   return (
     isTabletOrMobile && (
       <Container>
-        <StarRatingContainer>
+        <SentimentContainer>
           Did this page help?
           <StarRating size="2x" />
-        </StarRatingContainer>
+        </SentimentContainer>
       </Container>
     )
   );
@@ -23,7 +23,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const StarRatingContainer = styled.div`
+const SentimentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
