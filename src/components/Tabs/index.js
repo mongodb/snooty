@@ -35,9 +35,11 @@ const landingTabsStyling = css`
     button {
       display: block;
       flex-grow: 1;
+      font-size: ${theme.size.default};
+      align-items: center;
     }
 
-    @media ${theme.screenSize.upToLarge} {
+    @media ${theme.screenSize.upToXLarge} {
       button {
         overflow: initial;
         max-width: initial;
@@ -151,17 +153,13 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
               tab.argument.length > 0
                 ? tab.argument.map((arg, i) => <ComponentFactory {...rest} key={`${tabId}-arg-${i}`} nodeData={arg} />)
                 : tabId;
-            const children = tab.children.map((child, i) => (
-              <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
-            ));
 
             return (
-              <LeafyTab
-                className={cx(getTabStyling({ isProductLanding }))}
-                key={tabId}
-                name={tabTitle}
-                children={children}
-              />
+              <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
+                {tab.children.map((child, i) => (
+                  <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
+                ))}
+              </LeafyTab>
             );
           })}
         </LeafyTabs>
