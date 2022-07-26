@@ -43,6 +43,7 @@ const validateManifestEnvVars = (manifestMetadata) => {
     });
   } catch (err) {
     console.error(err);
+    throw err;
   }
 
   // if env variables are present, check that they are set to the correct values. Otherwise, override them.
@@ -67,6 +68,7 @@ const replaceIncorrectEnvVars = (incorrectEnvVars, envVars) => {
       fs.readFile(file, 'utf8', (err, data) => {
         if (err) {
           console.error(err);
+          throw err;
         }
 
         const dataArray = data.split('\n');
@@ -84,12 +86,14 @@ const replaceIncorrectEnvVars = (incorrectEnvVars, envVars) => {
         fs.writeFile(file, dataArray.join('\n').concat(envVars), (err) => {
           if (err) {
             console.error(err);
+            throw err;
           }
         });
       });
     });
   } catch (err) {
     console.error(err);
+    throw err;
   }
 };
 
