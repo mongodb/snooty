@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { Body } from '@leafygreen-ui/typography';
 import { useFeedbackState } from '../context';
-import { Layout, CommentHeader, Footer } from '../components/view-components';
+import { Layout, Footer, CommentHeader } from '../components/view-components';
 
 export default function SupportView(props) {
   const { submitSupport } = useFeedbackState();

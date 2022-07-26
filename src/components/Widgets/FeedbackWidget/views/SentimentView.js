@@ -8,7 +8,7 @@ import Emoji from '../components/Emoji';
 
 export const sentimentChoices = ['positive', 'negative', 'suggestion'];
 
-const getCopy = (sentiment) => {
+export const getCopy = (sentiment) => {
   switch (sentiment) {
     case 'positive':
       return 'Yes, it did!';

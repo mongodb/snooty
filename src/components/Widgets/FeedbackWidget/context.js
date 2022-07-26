@@ -50,7 +50,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   // Once a user has selected the sentiment category, show them the comment/email input boxes.
   async function setSentiment(sentiment) {
     selectSentiment(sentiment);
-    if (sentiment && view !== 'comment') {
+    if (sentiment) {
       setView('comment');
       setProgress([true, true, false]);
     }
@@ -80,10 +80,10 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       rating: ratingValue,
     });
     setFeedback(updatedFeedback);
-    setView('qualifiers');
   }
 
   // Sets the value of a single qualifier checkbox
+  /** 
   async function setQualifier(id, value) {
     if (!feedback) return;
     if (typeof id !== 'string') {
@@ -98,8 +98,10 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     });
     setFeedback(updatedFeedback);
   }
+  */
 
   // Once a user has selected qualifiers, show them the comment/email input boxes.
+  /** 
   function submitQualifiers() {
     if (!feedback) return;
     // The widget flow changes if the user selected the "need support" qualifier
@@ -107,6 +109,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setIsSupportRequest(Boolean(selectedSupportQualifier));
     setView('comment');
   }
+  */
 
   // Upload a screenshot to S3 and attach it to the feedback
   async function submitScreenshot({ dataUri, viewport }) {
@@ -175,9 +178,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setRating,
     selectSentiment,
     setSentiment,
-    setQualifier,
+    //setQualifier,
     setProgress,
-    submitQualifiers,
+    //submitQualifiers,
     submitComment,
     submitScreenshot,
     submitSupport,
@@ -189,10 +192,12 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
 }
 
+/**
 function updateQualifier(qualifiers, id, value) {
   const index = qualifiers.findIndex((q) => q.id === id);
   return [...qualifiers.slice(0, index), { ...qualifiers[index], value }, ...qualifiers.slice(index + 1)];
 }
+*/
 
 export function useFeedbackState() {
   const feedback = useContext(FeedbackContext);

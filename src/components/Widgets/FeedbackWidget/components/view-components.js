@@ -4,12 +4,24 @@ import { sentimentChoices } from '../views/SentimentView';
 import { useFeedbackState } from '../context';
 import Emoji from '../components/Emoji';
 
+const getPath = (sentiment) => {
+  switch (sentiment) {
+    case 'positive':
+      return 'Helpful';
+    case 'negative':
+      return 'Unhelpful';
+    case 'suggestion':
+      return 'Idea';
+    default:
+      return 'none';
+  }
+};
+
 //header for the comment view
 //emoji icons and corresponding path labels
 export const CommentHeader = ({ isPositive }) => {
   return (
     <Heading>
-      {' '}
       {sentimentChoices.map((sentiment) => (
         <SentimentEmoji sentiment={sentiment} />
       ))}
@@ -17,11 +29,21 @@ export const CommentHeader = ({ isPositive }) => {
   );
 };
 
-const ResponsiveEmoji = styled.span`
-  text-align: center important!;
+const ResponsiveEmoji = styled('div')`
   cursor: pointer;
-  margin-left: 25px;
-  font-size: 50px important;
+  display: inline-block;
+  vertical-align: left;
+  width: 30%;
+`;
+
+const StyledSentimentPath = styled('span')`
+  font-weight: 15;
+  font-size: 15px !important;
+  text-align: center;
+  margin: 0px -10px;
+  margin-right: 2px;
+  padding: 3px;
+  display: block;
 `;
 
 //renders each emoji icon in comment view
@@ -37,9 +59,32 @@ const SentimentEmoji = ({ sentiment }) => {
       }}
     >
       <Emoji sentiment={sentiment} />
+      <StyledSentimentPath
+        style={{
+          opacity: sentiment === selectedSentiment ? '0.7' : '0.0',
+          transition: '0.2s',
+        }}
+      >
+        {getPath(sentiment)}
+      </StyledSentimentPath>
     </ResponsiveEmoji>
   );
 };
+
+/** 
+const SentimentPath = ({ sentiment }) => {
+  const { selectedSentiment } = useFeedbackState();
+  return (
+        <StyledSentimentPath style={{
+        opacity: sentiment === selectedSentiment ? '0.7' : '0.0',
+        transition: '0.2s',
+      }}>
+        {getPath(sentiment)}
+      </StyledSentimentPath>
+        
+  );
+};
+*/
 
 export const Layout = styled.div`
   display: flex;
@@ -51,7 +96,7 @@ export const Heading = styled.h2`
   margin-top: 0;
   margin-bottom: 16px;
   width: 100%;
-  text-align: left;
+  text-align: center;
   font-weight: regular;
   font-size: 16px;
 `;
