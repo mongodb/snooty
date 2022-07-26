@@ -64,28 +64,36 @@ exports[`renders correctly 1`] = `
 
 .emotion-4 {
   position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
   background-color: white;
-  color: #21313C;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
   cursor: pointer;
 }
 
 .emotion-4:focus {
   outline: none;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-4:hover {
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+.emotion-4:hover,
+.emotion-4:active {
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-4:hover:focus {
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+.emotion-4:hover:focus,
+.emotion-4:active:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
 .emotion-5 {
