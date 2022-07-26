@@ -38,7 +38,10 @@ const validateManifestEnvVars = (manifestMetadata) => {
   try {
     ['.env.production', '.env.development'].forEach((file) => {
       fs.appendFile(file, envVars, function (err) {
-        if (err) throw err;
+        if (err) {
+          console.error(err);
+          throw err;
+        }
       });
     });
   } catch (err) {
