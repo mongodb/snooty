@@ -115,5 +115,5 @@ class StitchDocumentDatabase {
   }
 }
 
-exports.ManifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
-exports.StitchDocumentDatabase = new StitchDocumentDatabase();
+exports.manifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
+exports.stitchDocumentDatabase = new StitchDocumentDatabase();

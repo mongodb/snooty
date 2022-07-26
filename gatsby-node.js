@@ -8,7 +8,7 @@ const { getPageSlug } = require('./src/utils/get-page-slug');
 const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { ManifestDocumentDatabase, StitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
 
 // different types of references
 const PAGES = [];
@@ -33,10 +33,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   if (siteMetadata.manifestPath) {
     console.log('Loading documents from manifest');
-    db = ManifestDocumentDatabase;
+    db = manifestDocumentDatabase;
   } else {
     console.log('Loading documents from stitch');
-    db = StitchDocumentDatabase;
+    db = stitchDocumentDatabase;
   }
 
   await db.connect();
