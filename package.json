@@ -70,13 +70,15 @@
     "@leafygreen-ui/logo": "^4.0.2",
     "@leafygreen-ui/modal": "^6.1.2",
     "@leafygreen-ui/palette": "^3.3.1",
+    "@leafygreen-ui/segmented-control": "^3.0.0",
     "@leafygreen-ui/select": "^3.0.1",
     "@leafygreen-ui/side-nav": "^7.2.1",
     "@leafygreen-ui/table": "^2.0.2",
     "@leafygreen-ui/tabs": "^5.1.1",
+    "@leafygreen-ui/text-area": "^6.0.2",
     "@leafygreen-ui/text-input": "^6.0.1",
     "@leafygreen-ui/tooltip": "^6.1.7",
-    "@leafygreen-ui/typography": "^7.5.0",
+    "@leafygreen-ui/typography": "^7.6.0",
     "@loadable/component": "^5.14.1",
     "@mdb/consistent-nav": "1.2.16",
     "@mdb/flora": "^0.20.5",
@@ -121,8 +123,8 @@
     "shell-quote": "^1.7.3",
     "styled-components": "^5.2.1",
     "theme-ui": "^0.13.1",
-    "url-parse": "^1.5.8",
     "underscore": "^1.12.1",
+    "url-parse": "^1.5.8",
     "xmlhttprequest-ssl": ">=1.6.2"
   }
 }

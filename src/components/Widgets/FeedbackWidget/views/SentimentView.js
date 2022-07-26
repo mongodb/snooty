@@ -6,7 +6,7 @@ import { theme } from '../../../../theme/docsTheme';
 import { useFeedbackState } from '../context';
 import Emoji from '../components/Emoji';
 
-const sentimentChoices = ['positive', 'negative', 'suggestion'];
+export const sentimentChoices = ['positive', 'negative', 'suggestion'];
 
 const getCopy = (sentiment) => {
   switch (sentiment) {
@@ -46,17 +46,6 @@ const StyledSentimentOption = styled('h4')`
     background-color: rgba(0, 0, 0, 0.1);
   }
 `;
-const SentimentOption = ({ sentiment }) => {
-  const { setSentiment } = useFeedbackState();
-  return (
-    <StyledSentiment onClick={() => setSentiment()}>
-      <StyledSentimentOption>
-        <Emoji sentiment={sentiment} />
-        {getCopy(sentiment)}
-      </StyledSentimentOption>
-    </StyledSentiment>
-  );
-};
 
 const SentimentView = (props) => {
   return (
@@ -66,6 +55,18 @@ const SentimentView = (props) => {
         <SentimentOption sentiment={sentiment} />
       ))}
     </Layout>
+  );
+};
+
+const SentimentOption = ({ sentiment, onClick }) => {
+  const { setSentiment } = useFeedbackState();
+  return (
+    <StyledSentiment>
+      <StyledSentimentOption onClick={() => setSentiment(sentiment)}>
+        <Emoji sentiment={sentiment} />
+        {getCopy(sentiment)}
+      </StyledSentimentOption>
+    </StyledSentiment>
   );
 };
 
