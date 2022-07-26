@@ -14,6 +14,7 @@ const FeedbackContext = createContext();
 
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
+  const [selectedSentiment, selectSentiment] = useState(test.feedback?.sentiment || null);
   const [isSupportRequest, setIsSupportRequest] = useState(test.isSupportRequest || false);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
@@ -48,8 +49,11 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   // Once a user has selected the sentiment category, show them the comment/email input boxes.
   async function setSentiment(sentiment) {
-    setView('comment');
-    setProgress([true, true, false]);
+    selectSentiment(sentiment);
+    if (sentiment && view !== 'comment') {
+      setView('comment');
+      setProgress([true, true, false]);
+    }
   }
 
   // Sets the user's star rating for the page
@@ -143,7 +147,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   async function submitSupport() {
     if (!feedback) return;
     setView('submitted');
-    setProgress([false, false, true]);
+    setProgress([true, true, true]);
   }
 
   // Stop giving feedback (if in progress) and reset the widget to the
@@ -166,8 +170,10 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setScreenshotTaken,
     screenshotTaken,
     isSupportRequest,
+    selectedSentiment,
     initializeFeedback,
     setRating,
+    selectSentiment,
     setSentiment,
     setQualifier,
     setProgress,
@@ -195,3 +201,20 @@ export function useFeedbackState() {
   }
   return feedback;
 }
+
+/** 
+export function changeSentiment(sentiment){
+  await selectSentiment(sentiment);
+
+}
+
+
+export function selectSentiment(selectedSentiment){
+  const feedback = React.useState();
+  if (!sen && sen!= 'positive'&&sen!= 'negative'&&sen!= 'sugestion') {
+    throw new Error(' You must select a sentiment that is one of the three categories.');
+  }
+  setFeedback({selectedSentiment});
+  
+}
+*/

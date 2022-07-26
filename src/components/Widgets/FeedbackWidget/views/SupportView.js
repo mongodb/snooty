@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
+import { Body } from '@leafygreen-ui/typography';
 import { useFeedbackState } from '../context';
-import { Layout, RatingHeader, Footer } from '../components/view-components';
+import { Layout, CommentHeader, Footer } from '../components/view-components';
 
 export default function SupportView(props) {
   const { submitSupport } = useFeedbackState();
 
   return (
     <Layout>
-      <RatingHeader isPositive={false} subheadingText={'Check out the following resources for support.'} />
-      <Resource link="https://support.mongodb.com/">Create a case on the Support Portal</Resource>
-      <Resource link="https://developer.mongodb.com/community/forums/">Visit MongoDB Community</Resource>
+      <CommentHeader isPositive={false} subheadingText={"We're sorry to hear that"} />
+      <Body>{"Your input improves MongoDB's documentation."}</Body>
+      <Body>{'To learn more about MondoDB:'}</Body>
+      <Body>{'Looking for more help?'}</Body>
+      <Resource link="https://developer.mongodb.com/community">Visit the MongoDB Community</Resource>
+      <Body>{'Have a support contract?'}</Body>
+      <Resource link="https://support.mongodb.com/">Create a Support Case</Resource>
       <Footer>
         <Button onClick={() => submitSupport()}>Send</Button>
       </Footer>

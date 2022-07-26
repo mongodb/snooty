@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import { useFeedbackState } from '../context';
 import Checkbox from '@leafygreen-ui/checkbox';
 import Button from '@leafygreen-ui/button';
-import { Layout, RatingHeader, Footer } from '../components/view-components';
+
+import { Layout, CommentHeader, Footer } from '../components/view-components';
 
 const sortQualifiers = (qualifiers) => qualifiers.sort((q1, q2) => (q1.displayOrder > q2.displayOrder ? 1 : -1));
 
@@ -14,7 +15,7 @@ export default function QualifiersView({ ...props }) {
 
   return (
     <Layout>
-      <RatingHeader isPositive={isPositiveRating} />
+      <CommentHeader isPositive={isPositiveRating} />
       <Qualifiers>
         {sortQualifiers(feedback.qualifiers).map(({ id, text, value }) => (
           <Qualifier key={id} id={id} text={text} value={value} />

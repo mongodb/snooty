@@ -1,22 +1,43 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { sentimentChoices } from '../views/SentimentView';
+import { useFeedbackState } from '../context';
+import Emoji from '../components/Emoji';
 
-const NEGATIVE_RATING_HEADING = "We're sorry to hear that.";
-const NEGATIVE_RATING_SUBHEADING = 'What seems to be the issue?';
-const POSITIVE_RATING_HEADING = "We're glad to hear that!";
-const POSITIVE_RATING_SUBHEADING = 'Tell us more.';
-export const RatingHeader = ({ isPositive, headingText, subheadingText }) => {
-  const heading = headingText ? headingText : isPositive ? POSITIVE_RATING_HEADING : NEGATIVE_RATING_HEADING;
-  const subheading = subheadingText
-    ? subheadingText
-    : isPositive
-    ? POSITIVE_RATING_SUBHEADING
-    : NEGATIVE_RATING_SUBHEADING;
+//header for the comment view
+//emoji icons and corresponding path labels
+export const CommentHeader = ({ isPositive }) => {
   return (
-    <>
-      <Heading>{heading}</Heading>
-      <Subheading>{subheading}</Subheading>
-    </>
+    <Heading>
+      {' '}
+      {sentimentChoices.map((sentiment) => (
+        <SentimentEmoji sentiment={sentiment} />
+      ))}
+    </Heading>
+  );
+};
+
+const ResponsiveEmoji = styled.span`
+  text-align: center important!;
+  cursor: pointer;
+  margin-left: 25px;
+  font-size: 50px important;
+`;
+
+//renders each emoji icon in comment view
+//icon corresponding to the selected path highlighted, others are faded
+const SentimentEmoji = ({ sentiment }) => {
+  const { selectedSentiment, setSentiment } = useFeedbackState();
+  return (
+    <ResponsiveEmoji
+      onClick={(sentiment) => setSentiment(sentiment)}
+      style={{
+        opacity: sentiment === selectedSentiment ? '1' : '0.5',
+        transition: '0.2s',
+      }}
+    >
+      <Emoji sentiment={sentiment} />
+    </ResponsiveEmoji>
   );
 };
 
