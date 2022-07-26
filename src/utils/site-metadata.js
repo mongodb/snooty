@@ -1,12 +1,16 @@
 const { execSync } = require('child_process');
 const userInfo = require('os').userInfo;
 const { DOTCOM_BASE_URL } = require('./base-url');
+const { fetchManifestMetadata } = require('../utils/setup/fetch-manifest-metadata');
 
+// loads vars from the .env file into process.env object
 const runningEnv = process.env.NODE_ENV || 'production';
 
 require('dotenv').config({
   path: `.env.${runningEnv}`,
 });
+
+const manifestMetadata = fetchManifestMetadata();
 
 const getDatabase = (env) => {
   switch (env) {
@@ -59,11 +63,11 @@ const siteMetadata = {
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
   reposDatabase: getReposDatabase(process.env.SNOOTY_ENV),
-  parserBranch: process.env.GATSBY_PARSER_BRANCH,
-  parserUser: process.env.GATSBY_PARSER_USER,
+  parserBranch: manifestMetadata['branch'] || process.env.GATSBY_PARSER_BRANCH,
+  parserUser: process.env.GATSBY_PARSER_USER || userInfo().username,
   patchId: process.env.PATCH_ID || '',
   pathPrefix: getPathPrefix(process.env.PATH_PREFIX),
-  project: process.env.GATSBY_SITE,
+  project: manifestMetadata['project'] || process.env.GATSBY_SITE,
   siteUrl: DOTCOM_BASE_URL,
   snootyBranch: gitBranch,
   snootyEnv: process.env.SNOOTY_ENV || 'development',
@@ -72,3 +76,4 @@ const siteMetadata = {
 };
 
 module.exports.siteMetadata = siteMetadata;
+module.exports.manifestMetadata = manifestMetadata;
