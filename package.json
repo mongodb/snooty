@@ -58,7 +58,7 @@
     "@leafygreen-ui/box": "^3.0.6",
     "@leafygreen-ui/button": "^13.0.0",
     "@leafygreen-ui/callout": "^3.0.6",
-    "@leafygreen-ui/card": "^5.1.1",
+    "@leafygreen-ui/card": "^6.0.1",
     "@leafygreen-ui/checkbox": "^6.0.3",
     "@leafygreen-ui/code": "^11.0.0",
     "@leafygreen-ui/emotion": "^4.0.0",
