@@ -5,10 +5,10 @@ const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asse
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getPageSlug } = require('./src/utils/get-page-slug');
-const { siteMetadata } = require('./src/utils/site-metadata');
+const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { ManifestDocumentDatabase, StitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
 
 // different types of references
 const PAGES = [];
@@ -23,9 +23,8 @@ let db;
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
 
-  // setup env variables
-  const envResults = validateEnvVariables();
-
+  // setup and validate env variables
+  const envResults = validateEnvVariables(manifestMetadata);
   if (envResults.error) {
     throw Error(envResults.message);
   }
@@ -34,10 +33,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   if (siteMetadata.manifestPath) {
     console.log('Loading documents from manifest');
-    db = new ManifestDocumentDatabase(siteMetadata.manifestPath);
+    db = manifestDocumentDatabase;
   } else {
     console.log('Loading documents from stitch');
-    db = new StitchDocumentDatabase();
+    db = stitchDocumentDatabase;
   }
 
   await db.connect();
