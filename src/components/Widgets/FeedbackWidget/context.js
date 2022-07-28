@@ -113,7 +113,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   // Upload a screenshot to S3 and attach it to the feedback
   async function submitScreenshot({ dataUri, viewport }) {
-    if (!feedback) return;
+    if (!selectedSentiment) return;
     const updatedFeedback = await addAttachment({
       feedback_id: feedback._id,
       attachment: { type: 'screenshot', dataUri, viewport },
@@ -122,8 +122,8 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   }
 
   // Submit the feedback and direct the user to the most appropriate "next steps" screen.
-  async function submitComment({ comment = '', email = '' }) {
-    if (!feedback) return;
+  /** async function submitComment({ comment = '', email = '' }) {
+    if (!selectedSentiment) return;
     // Update the document with the user's comment and email (if provided)
     const updatedFeedback = await updateFeedback({
       feedback_id: feedback._id,
@@ -132,23 +132,39 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     });
     setFeedback(updatedFeedback);
   }
+  */
 
-  async function submitAllFeedback() {
+  async function submitAllFeedback({ comment = '', email = '' }) {
+    setView('submitted');
+    if (!selectedSentiment) return;
     // Submit the full feedback document
-    const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
+    const segment = getSegmentUserId();
+    const newFeedback = {
+      page: {
+        title: page.title,
+        slug: page.slug,
+        url: page.url,
+        docs_property: page.docs_property,
+        docs_version: null,
+      },
+      user: {
+        stitch_id: user && user.id,
+        segment_id: segment.id,
+        isAnonymous: segment.isAnonymous,
+      },
+      viewport: getViewport(),
+      ...test.feedback,
+    };
+    await createNewFeedback(newFeedback);
+
+    const submittedFeedback = await submitFeedback({
+      feedback_id: feedback._id,
+      comment,
+      user: { email },
+    });
+
     setFeedback(submittedFeedback);
     // Route the user to their "next steps"
-    if (isSupportRequest) {
-      setView('support');
-    } else {
-      setView('submitted');
-      setProgress([true, true, true]);
-    }
-  }
-
-  // Show the user a thank you screen after they've seen support links
-  async function submitSupport() {
-    if (!feedback) return;
     setView('submitted');
     setProgress([true, true, true]);
   }
@@ -163,6 +179,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       // we've marked the document as abandoned
       await abandonFeedback({ feedback_id: feedback._id });
       setFeedback(null);
+      selectSentiment(null);
     }
   }
 
@@ -181,12 +198,12 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     //setQualifier,
     setProgress,
     //submitQualifiers,
-    submitComment,
+    //submitComment,
     submitScreenshot,
-    submitSupport,
+    //submitSupport,
     submitAllFeedback,
     abandon,
-    hideHeader,
+    //hideHeader,
   };
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;

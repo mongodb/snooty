@@ -64,6 +64,7 @@ export default function CommentView({ ...props }) {
         id="feedback-comment"
         placeholder={placeholderText}
         value={comment}
+        rows={4}
         onChange={(e) => setComment(e.target.value)}
       ></StyledCommentInput>
       <StyledEmailInput
