@@ -73,7 +73,7 @@
     "@leafygreen-ui/select": "^3.0.1",
     "@leafygreen-ui/side-nav": "^7.2.1",
     "@leafygreen-ui/table": "^2.0.2",
-    "@leafygreen-ui/tabs": "^5.1.1",
+    "@leafygreen-ui/tabs": "^8.0.0",
     "@leafygreen-ui/text-input": "^6.0.1",
     "@leafygreen-ui/tooltip": "^6.1.7",
     "@leafygreen-ui/typography": "^7.5.0",
