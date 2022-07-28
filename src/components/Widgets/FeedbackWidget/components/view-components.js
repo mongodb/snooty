@@ -31,19 +31,23 @@ export const CommentHeader = ({ isPositive }) => {
 
 const ResponsiveEmoji = styled('div')`
   cursor: pointer;
+  margin-top: 3px;
   display: inline-block;
   vertical-align: left;
   width: 30%;
 `;
 
 const StyledSentimentPath = styled('span')`
-  font-weight: 15;
-  font-size: 15px !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
   text-align: center;
   margin: 0px -10px;
+  line-height: 20px;
   margin-right: 2px;
   padding: 3px;
   display: block;
+  text-align: center;
+  letter-spacing: 0.2px;
 `;
 
 //renders each emoji icon in comment view

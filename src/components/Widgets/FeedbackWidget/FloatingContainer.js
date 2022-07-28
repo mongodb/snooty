@@ -35,9 +35,22 @@ const Floating = styled.div`
   right: 16px;
   z-index: 20;
 `;
+
 const Card = styled(LeafygreenCard)`
-  width: 235px;
-  height: 280px;
+  width: 234px;
+  min-height: 281px;
+  max-height: 338px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+  align-items: center;
+
+  /* White */
+  background: #ffffff;
+  box-shadow: 0px 8px 20px -8px rgba(6, 22, 33, 0.6);
+  border-radius: 7px;
 `;
 const CardHeader = styled.div`
   display: flex;
