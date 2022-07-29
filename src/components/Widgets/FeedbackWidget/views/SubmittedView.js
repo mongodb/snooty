@@ -8,35 +8,26 @@ export default function SubmittedView() {
   const { abandon } = useFeedbackState();
   const { isMobile } = useScreenSize();
   const { selectedSentiment } = useFeedbackState();
-  if (selectedSentiment === 'negative') {
-    return (
-      <Layout>
-        <Heading>{"We're sorry to hear that."}</Heading>
-        <Subheading>Your input improves MongoDB's Documentation.</Subheading>
-        <Subheading>
-          <div>Looking for more help? </div>
-          <a href="https://developer.mongodb.com/community/forums/">Visit the MongoDB Community</a>
-          <Subheading></Subheading>
-          <div>Have a support contract?</div>
+  const finalHeading = selectedSentiment === 'Negative' ? "We're sorry to hear that." : 'Thanks for your help!';
+  return (
+    <Layout>
+      <Heading>{finalHeading}</Heading>
+      <Subheading>Your input improves MongoDB's Documentation.</Subheading>
+      <Subheading>
+        <div>Looking for more resources? </div>
+        <a href="https://developer.mongodb.com/community/forums/">MongoDB Community </a>
+        <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
+        <Subheading></Subheading>
+        <supportCase
+          style={{
+            display: selectedSentiment === 'Negative' ? '' : 'none',
+          }}
+        >
+          {'Have a support contract?'}
           <a href="https://support.mongodb.com/">Create a Support Case</a>
-        </Subheading>
-        {isMobile && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
-      </Layout>
-    );
-  } else {
-    return (
-      <Layout>
-        <Heading>{'Thanks for your help!'}</Heading>
-        <Subheading>Your input improves MongoDB's Documentation.</Subheading>
-        <Subheading>
-          <div>To learn more about MongoDB: </div>
-          <a href="https://university.mongodb.com/">Visit MongoDB University</a>
-          <div>
-            <a href="https://developer.mongodb.com/community/forums/">Visit the MongoDB Community</a>
-          </div>
-        </Subheading>
-        {isMobile && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
-      </Layout>
-    );
-  }
+        </supportCase>
+      </Subheading>
+      {isMobile && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
+    </Layout>
+  );
 }
