@@ -9,11 +9,11 @@ const StyledEmoji = styled('span')`
 
 const getEmoji = (sentiment) => {
   switch (sentiment) {
-    case 'positive':
+    case 'Positive':
       return '🙂';
-    case 'negative':
+    case 'Negative':
       return '😞';
-    case 'suggestion':
+    case 'Suggestion':
       return '💡';
     default:
       return 'noemoji';

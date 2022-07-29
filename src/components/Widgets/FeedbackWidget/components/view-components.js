@@ -40,17 +40,17 @@ const StyledSentimentPath = styled('span')`
 //renders each emoji icon in comment view
 //icon corresponding to the selected path highlighted, others are faded
 const SentimentEmoji = ({ path }) => {
-  const { selectedSentiment, setSentiment } = useFeedbackState();
+  const { selectedSentiment, selectSentiment } = useFeedbackState();
   const sentiment = path.sentiment;
   return (
     <ResponsiveEmoji
-      onClick={(sentiment) => setSentiment(sentiment)}
+      onClick={() => selectSentiment(path.sentiment)}
       style={{
         opacity: sentiment === selectedSentiment ? '1' : '0.5',
         transition: '0.2s',
       }}
     >
-      <Emoji sentiment={sentiment} />
+      <Emoji sentiment={path.sentiment} />
       <StyledSentimentPath
         style={{
           opacity: sentiment === selectedSentiment ? '0.7' : '0.0',

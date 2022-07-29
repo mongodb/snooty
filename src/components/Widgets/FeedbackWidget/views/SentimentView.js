@@ -7,9 +7,9 @@ import { useFeedbackState } from '../context';
 import Emoji from '../components/Emoji';
 
 export const sentimentChoices = [
-  { sentiment: 'positive', copy: 'Yes, it did!', category: 'Helpful' },
-  { sentiment: 'negative', copy: 'No, I have feedback', category: 'Unhelpful' },
-  { sentiment: 'suggestion', copy: 'I have a suggestion', category: 'Idea' },
+  { sentiment: 'Positive', copy: 'Yes, it did!', category: 'Helpful' },
+  { sentiment: 'Negative', copy: 'No, I have feedback', category: 'Unhelpful' },
+  { sentiment: 'Suggestion', copy: 'I have a suggestion', category: 'Idea' },
 ];
 
 const ViewHeader = styled('h3')`

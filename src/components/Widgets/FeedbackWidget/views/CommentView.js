@@ -33,9 +33,9 @@ export default function CommentView({ ...props }) {
     screenshotTaken,
   } = useFeedbackState();
   const placeholderText =
-    selectedSentiment === 'positive'
+    selectedSentiment === 'Positive'
       ? 'How did this page help you?'
-      : selectedSentiment === 'negative'
+      : selectedSentiment === 'Negative'
       ? 'How could this page be more helpful?'
       : 'What change would you like to see?';
   const viewport = useViewport();

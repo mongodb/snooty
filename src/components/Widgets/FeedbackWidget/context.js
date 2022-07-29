@@ -50,7 +50,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   // Once a user has selected the sentiment category, show them the comment/email input boxes.
   async function setSentiment(sentiment) {
     selectSentiment(sentiment);
-    if (sentiment) {
+    if (view !== 'comment' && sentiment) {
       setView('comment');
       setProgress([true, true, false]);
     }
