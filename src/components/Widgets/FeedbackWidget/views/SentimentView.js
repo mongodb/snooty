@@ -6,20 +6,11 @@ import { theme } from '../../../../theme/docsTheme';
 import { useFeedbackState } from '../context';
 import Emoji from '../components/Emoji';
 
-export const sentimentChoices = ['positive', 'negative', 'suggestion'];
-
-export const getCopy = (sentiment) => {
-  switch (sentiment) {
-    case 'positive':
-      return 'Yes, it did!';
-    case 'negative':
-      return 'No, I have feedback.';
-    case 'suggestion':
-      return 'I have a suggestion.';
-    default:
-      return '';
-  }
-};
+export const sentimentChoices = [
+  { sentiment: 'positive', copy: 'Yes, it did!', category: 'Helpful' },
+  { sentiment: 'negative', copy: 'No, I have feedback', category: 'Unhelpful' },
+  { sentiment: 'suggestion', copy: 'I have a suggestion', category: 'Idea' },
+];
 
 const ViewHeader = styled('h3')`
   font-weight: 600;
@@ -47,24 +38,24 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 
-const SentimentView = (props) => {
+const SentimentView = () => {
   return (
     <Layout>
       <ViewHeader>Did this page help?</ViewHeader>
-      {sentimentChoices.map((sentiment) => (
-        <SentimentOption sentiment={sentiment} />
+      {sentimentChoices.map((path) => (
+        <SentimentOption path={path} />
       ))}
     </Layout>
   );
 };
 
-const SentimentOption = ({ sentiment, onClick }) => {
+const SentimentOption = ({ path }) => {
   const { setSentiment } = useFeedbackState();
   return (
     <StyledSentiment>
-      <StyledSentimentOption onClick={() => setSentiment(sentiment)}>
-        <Emoji sentiment={sentiment} />
-        {getCopy(sentiment)}
+      <StyledSentimentOption onClick={() => setSentiment(path.sentiment)}>
+        <Emoji sentiment={path.sentiment} />
+        {path.copy}
       </StyledSentimentOption>
     </StyledSentiment>
   );

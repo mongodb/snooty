@@ -4,26 +4,13 @@ import { sentimentChoices } from '../views/SentimentView';
 import { useFeedbackState } from '../context';
 import Emoji from '../components/Emoji';
 
-const getPath = (sentiment) => {
-  switch (sentiment) {
-    case 'positive':
-      return 'Helpful';
-    case 'negative':
-      return 'Unhelpful';
-    case 'suggestion':
-      return 'Idea';
-    default:
-      return 'none';
-  }
-};
-
 //header for the comment view
 //emoji icons and corresponding path labels
-export const CommentHeader = ({ isPositive }) => {
+export const CommentHeader = () => {
   return (
     <Heading>
-      {sentimentChoices.map((sentiment) => (
-        <SentimentEmoji sentiment={sentiment} />
+      {sentimentChoices.map((path) => (
+        <SentimentEmoji path={path} />
       ))}
     </Heading>
   );
@@ -52,8 +39,9 @@ const StyledSentimentPath = styled('span')`
 
 //renders each emoji icon in comment view
 //icon corresponding to the selected path highlighted, others are faded
-const SentimentEmoji = ({ sentiment }) => {
+const SentimentEmoji = ({ path }) => {
   const { selectedSentiment, setSentiment } = useFeedbackState();
+  const sentiment = path.sentiment;
   return (
     <ResponsiveEmoji
       onClick={(sentiment) => setSentiment(sentiment)}
@@ -69,7 +57,7 @@ const SentimentEmoji = ({ sentiment }) => {
           transition: '0.2s',
         }}
       >
-        {getPath(sentiment)}
+        {path.category}
       </StyledSentimentPath>
     </ResponsiveEmoji>
   );
