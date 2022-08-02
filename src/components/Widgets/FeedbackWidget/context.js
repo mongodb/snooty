@@ -82,35 +82,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setFeedback(updatedFeedback);
   }
 
-  // Sets the value of a single qualifier checkbox
-  /** 
-  async function setQualifier(id, value) {
-    if (!feedback) return;
-    if (typeof id !== 'string') {
-      throw new Error('id must be a string Qualifier ID.');
-    }
-    if (typeof value !== 'boolean') {
-      throw new Error('value must be a boolean.');
-    }
-    const updatedFeedback = await updateFeedback({
-      feedback_id: feedback._id,
-      qualifiers: updateQualifier(feedback.qualifiers, id, value),
-    });
-    setFeedback(updatedFeedback);
-  }
-  */
-
-  // Once a user has selected qualifiers, show them the comment/email input boxes.
-  /** 
-  function submitQualifiers() {
-    if (!feedback) return;
-    // The widget flow changes if the user selected the "need support" qualifier
-    const selectedSupportQualifier = feedback.qualifiers.find((q) => q.id === 'support' && q.value === true);
-    setIsSupportRequest(Boolean(selectedSupportQualifier));
-    setView('comment');
-  }
-  */
-
   // Upload a screenshot to S3 and attach it to the feedback
   async function submitScreenshot({ dataUri, viewport }) {
     if (!selectedSentiment) return;
@@ -194,12 +165,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setRating,
     selectSentiment,
     setSentiment,
-    //setQualifier,
     setProgress,
-    //submitQualifiers,
     //submitComment,
     submitScreenshot,
-    //submitSupport,
     submitAllFeedback,
     abandon,
     //hideHeader,
@@ -208,13 +176,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
 }
 
-/**
-function updateQualifier(qualifiers, id, value) {
-  const index = qualifiers.findIndex((q) => q.id === id);
-  return [...qualifiers.slice(0, index), { ...qualifiers[index], value }, ...qualifiers.slice(index + 1)];
-}
-*/
-
 export function useFeedbackState() {
   const feedback = useContext(FeedbackContext);
   if (!feedback && feedback !== null) {
@@ -222,20 +183,3 @@ export function useFeedbackState() {
   }
   return feedback;
 }
-
-/** 
-export function changeSentiment(sentiment){
-  await selectSentiment(sentiment);
-
-}
-
-
-export function selectSentiment(selectedSentiment){
-  const feedback = React.useState();
-  if (!sen && sen!= 'positive'&&sen!= 'negative'&&sen!= 'sugestion') {
-    throw new Error(' You must select a sentiment that is one of the three categories.');
-  }
-  setFeedback({selectedSentiment});
-  
-}
-*/

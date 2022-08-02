@@ -70,23 +70,49 @@ export default function CommentView({ ...props }) {
       <ScreenshotButton />
       <StyledEmailInput
         id="feedback-email"
-        placeholder="email@email.com"
+        placeholder="Email Address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         type={'email'}
       ></StyledEmailInput>
-      <OptionalText>{'Optional'}</OptionalText>
+      <EmailElement>
+        <OptionalText style={{ display: hasEmailError ? 'none' : '' }}>{'Optional'}</OptionalText>
+        <ErrorDisplay style={{ display: hasEmailError ? '' : 'none' }}>
+          <ErrorIcon></ErrorIcon>
+        </ErrorDisplay>
+      </EmailElement>
+      <InputErrorLabel htmlFor="feedback-email" style={{ display: hasEmailError ? '' : 'none' }}>
+        Please enter a valid email.
+      </InputErrorLabel>
       <Footer>
         <SubmitButton onClick={() => handleSubmit()}>{'Send'}</SubmitButton>
-        {hasEmailError && (
-          <InputErrorLabel htmlFor="feedback-email">Please enter a valid email address.</InputErrorLabel>
-        )}
       </Footer>
     </Layout>
   );
 }
 
+const ErrorIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M7.8639 1.01357C7.49039 0.328811 6.50961 0.328811 6.1361 1.01357L0.122178 12.0388C-0.236737 12.6968 0.238139 13.5 0.986079 13.5H13.0139C13.7619 13.5 14.2367 12.6968 13.8778 12.0388L7.8639 1.01357ZM6 4.5C6 3.94772 6.44772 3.5 7 3.5C7.55228 3.5 8 3.94772 8 4.5V8.5C8 9.05228 7.55228 9.5 7 9.5C6.44772 9.5 6 9.05228 6 8.5V4.5ZM8 11.5C8 12.0523 7.55228 12.5 7 12.5C6.44772 12.5 6 12.0523 6 11.5C6 10.9477 6.44772 10.5 7 10.5C7.55228 10.5 8 10.9477 8 11.5Z"
+      fill="#DB3030"
+    />
+  </svg>
+);
+
+const ErrorDisplay = styled.span`
+  margin-left: 30px;
+`;
+
 const OptionalText = styled.div`
+  font-family: 'Akzidenz-Grotesk Std';
+  font-style: italic;
+  font-weight: 300;
+  font-size: 13px;
+`;
+const EmailElement = styled.div`
   width: 44px;
   height: 20px;
   font-family: 'Akzidenz-Grotesk Std';
@@ -96,7 +122,7 @@ const OptionalText = styled.div`
   line-height: 20px;
   /* identical to box height, or 167% */
   color: #5d6c74;
-  margin-top: -29px !important;
+  margin-top: -25px !important;
   margin-left: 130px !important;
   margin-bottom: 5px;
   z-index: 10 !important;
@@ -104,17 +130,16 @@ const OptionalText = styled.div`
 `;
 
 const SubmitButton = styled(Button)`
-  margin-top: 10px !important;
-  margin-bottom: 16px;
+  margin-top: 20px !important;
   margin-right: -8px !important;
   height: 28px !important;
-  width: 61px;
+  width: 55px;
   box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
   :focus {
     box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
   }
-  tex-align: center;
-  font-size: 16px;
+  text-align: center;
+  font-size: ${theme.fontSize.default};
   font-weight: 399;
   font-family: 'Akzidenz-Grotesk Std';
   font-style: normal;
@@ -128,39 +153,13 @@ const SubmitButton = styled(Button)`
   border-radius: 4px;
 `;
 
-/**
-const InputStyle = css`
-  padding: 14px;
-  border: 0.5px solid ${uiColors.black.base};
-  border-radius: 2px;
-  flex-grow: 3;
-  line-height: 24px;
-  font-size: 16px;
-  max-height: 100%;
-  width: 100%;
-  margin-bottom: 16px;
-  &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-  }
-`;
-
-
-const CommentTextArea = styled.textarea`
-  ${InputStyle}
-`;
-const EmailInput = styled.input`
-  ${InputStyle}
-`;
-*/
-const InputLabel = styled.label`
-  width: 50%;
-  text-align: left;
-`;
-const InputErrorLabel = styled(InputLabel)`
+const InputErrorLabel = styled.label`
   color: red;
-  margin-top: -16px;
-  margin-bottom: 0px;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: -43px;
+  font-size: 13px;
+  margin-bottom: -5px;
 `;
 
 const StyledCommentInput = styled(TextArea)`
@@ -171,22 +170,21 @@ const StyledCommentInput = styled(TextArea)`
   textarea::placeholder {
     font-size: 15px !important;
     color: #b8c4c2;
-    min-height: 100px !important;
-  }
-  textarea:active {
-    border-color: ${uiColors.gray.base} !important;
+    min-height: 200px !important;
+    border-color: ${palette.gray.base} !important;
   }
 `;
 
 const StyledEmailInput = styled(TextInput)`
-  margin-top: 16px;
+  margin-top: 8px;
+  border-color: #89989b !important;
   div > input {
     width: 202px;
-    height: 40px;
-    border-color: ${uiColors.gray.base};
+    height: 30px;
+    border-color: ${palette.gray.base} !important;
     ::placeholder {
-      font-size: 16px;
-      color: #b8c4c2;
+      font-size: 13px;
+      color: #5c6c75;
       height: 40px;
     }
   }

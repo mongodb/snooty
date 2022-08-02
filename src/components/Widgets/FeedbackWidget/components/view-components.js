@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { sentimentChoices } from '../views/SentimentView';
 import { useFeedbackState } from '../context';
 import Emoji from '../components/Emoji';
+import { theme } from '../../../../theme/docsTheme';
 
 //header for the comment view
 //emoji icons and corresponding path labels
@@ -26,15 +27,14 @@ const ResponsiveEmoji = styled('div')`
 
 const StyledSentimentPath = styled('span')`
   font-weight: 400 !important;
-  font-size: 14px !important;
+  font-size: ${theme.fontSize.small} !important;
   text-align: center;
   margin: 0px -10px;
-  line-height: 20px;
   margin-right: 2px;
-  padding: 3px;
+  line-height: 20px;
   display: block;
-  text-align: center;
   letter-spacing: 0.2px;
+  padding: 3px;
 `;
 
 //renders each emoji icon in comment view
@@ -63,21 +63,6 @@ const SentimentEmoji = ({ path }) => {
   );
 };
 
-/** 
-const SentimentPath = ({ sentiment }) => {
-  const { selectedSentiment } = useFeedbackState();
-  return (
-        <StyledSentimentPath style={{
-        opacity: sentiment === selectedSentiment ? '0.7' : '0.0',
-        transition: '0.2s',
-      }}>
-        {getPath(sentiment)}
-      </StyledSentimentPath>
-        
-  );
-};
-*/
-
 export const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -90,7 +75,7 @@ export const Heading = styled.h2`
   width: 100%;
   text-align: center;
   font-weight: regular;
-  font-size: 16px;
+  font-size: ${theme.fontSize.default};
 `;
 
 export const Subheading = styled.p`
@@ -99,7 +84,7 @@ export const Subheading = styled.p`
   width: 100%;
   text-align: left;
   font-weight: regular;
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
 `;
 
 export const Footer = styled.div`
