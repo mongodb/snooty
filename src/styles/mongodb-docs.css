@@ -287,11 +287,6 @@ select[multiple],
 textarea {
   background-image: none;
 }
-/* a:focus,
-a:hover {
-  color: #1A567E;
-  text-decoration: underline;
-} */
 a:focus,
 input[type='checkbox']:focus,
 input[type='file']:focus {
@@ -1091,9 +1086,7 @@ a > code {
 hr {
   border: 1px solid #b1b4b6;
 }
-/* a {
-  text-decoration: none;
-} */
+
 div.body h1 + dl,
 div.body h1 + p,
 div.body h2 + dl,
