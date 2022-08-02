@@ -85,7 +85,6 @@ const contentStyles = {
 };
 
 const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', ...rest }) => {
-  console.log(children);
   return (
     <StyledStep css={landingStepStyles[stepStyle]}>
       <StepBlock>

@@ -30,13 +30,13 @@ const stopPropagation = function (e) {
   e.nativeEvent.stopImmediatePropagation();
 };
 
-const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef }) => {
+const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow }) => {
   // Render intersphinx target links
   const CurrRefRole = cardRef ? CardRef : Link;
-
+  const display = showLinkArrow ? true : false;
   if (url) {
     return (
-      <CurrRefRole to={url}>
+      <CurrRefRole to={url} showLinkArrow={display}>
         {children.map((node, i) => (
           <ComponentFactory key={i} nodeData={node} />
         ))}
@@ -62,7 +62,7 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, card
   }
 
   return (
-    <CurrRefRole to={normalizePath(link)} onClick={(e) => stopPropagation(e)}>
+    <CurrRefRole to={normalizePath(link)} onClick={(e) => stopPropagation(e)} showLinkArrow={display}>
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
