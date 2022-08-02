@@ -6,6 +6,7 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
+import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -54,7 +55,7 @@ const StyledGatsbyLink = styled(GatsbyLink)`
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
-const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
+const Link = ({ children, to, activeClassName, partiallyActive, showLinkArrow, ...other }) => {
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -65,15 +66,17 @@ const Link = ({ children, to, activeClassName, partiallyActive, ...other }) => {
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
+    const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
+
     return (
       <StyledGatsbyLink activeClassName={activeClassName} partiallyActive={partiallyActive} to={to} {...other}>
         {children}
+        {decoration}
       </StyledGatsbyLink>
     );
   } else {
     const hideExternalIcon =
       !anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/)) ? false : true;
-
     return (
       <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
         {children}

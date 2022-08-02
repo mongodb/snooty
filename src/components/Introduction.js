@@ -11,10 +11,6 @@ const StyledIntroduction = styled('div')`
   }
   .button + p {
     display: inline-block;
-
-    a:after {
-      content: ' ➔';
-    }
   }
   @media ${theme.screenSize.upToMedium} {
     margin-bottom: ${theme.size.default};
@@ -38,7 +34,7 @@ const Introduction = ({ nodeData: { children }, ...rest }) => {
   return (
     <StyledIntroduction className="introduction">
       {children.map((child, i) => (
-        <ComponentFactory nodeData={child} key={i} {...rest} />
+        <ComponentFactory nodeData={child} key={i} showLinkArrow={true} {...rest} />
       ))}
     </StyledIntroduction>
   );

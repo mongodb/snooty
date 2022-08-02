@@ -29,8 +29,6 @@ export const admonitionMap = {
 // `;
 
 const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
-  console.log(name);
-  console.log(children);
   let title = getPlaintext(argument);
   if (name === 'see') {
     title = `See: ${title}`;

@@ -19,8 +19,6 @@ const List = ({ nodeData: { children, enumtype, startat }, ...rest }) => {
   if (startat) {
     attributes.start = startat;
   }
-  console.log('THIS ORDERED LIST BE WACK');
-  console.log(children);
   return (
     <ListTag {...attributes}>
       {children.map((listChild, index) => (
