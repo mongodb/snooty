@@ -14,20 +14,6 @@ export const admonitionMap = {
   warning: Variant.Warning,
 };
 
-// const StyledCallout = styled(Callout)`
-//   /* Add margin to right so drop shadow is visible */
-//   margin: 24px 3px 24px 0;
-
-//   /* Add margins below all child elements in the callout */
-//   & > div > div > * {
-//     margin: 0 0 12px;
-//   }
-
-//   & > div > div > *:last-child {
-//     margin: 0;
-//   }
-// `;
-
 const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
   let title = getPlaintext(argument);
   if (name === 'see') {

@@ -34,9 +34,6 @@ const H4 = styled('h4')`
 
 const CTA = styled('p')`
   margin-top: auto;
-  //   & > a:hover {
-  //     color: ${palette.blue.dark2};
-  //   }
 `;
 
 const FlexTag = styled(Tag)`
