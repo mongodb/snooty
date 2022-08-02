@@ -8,8 +8,8 @@ import Emoji from '../components/Emoji';
 
 export const sentimentChoices = [
   { sentiment: 'Positive', copy: 'Yes, it did!', category: 'Helpful' },
-  { sentiment: 'Negative', copy: 'No, I have feedback', category: 'Unhelpful' },
-  { sentiment: 'Suggestion', copy: 'I have a suggestion', category: 'Idea' },
+  { sentiment: 'Negative', copy: 'No, I have feedback.', category: 'Unhelpful' },
+  { sentiment: 'Suggestion', copy: 'I have a suggestion.', category: 'Idea' },
 ];
 
 const ViewHeader = styled('h3')`

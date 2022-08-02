@@ -170,7 +170,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     submitScreenshot,
     submitAllFeedback,
     abandon,
-    //hideHeader,
+    hideHeader,
   };
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
