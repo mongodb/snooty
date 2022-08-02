@@ -4,7 +4,7 @@ import { theme } from '../../../../theme/docsTheme';
 
 const StyledEmoji = styled('span')`
   padding-right: ${theme.size.small};
-  font-size: 24px;
+  font-size: ${theme.fontSize.h2};
 `;
 
 const getEmoji = (sentiment) => {

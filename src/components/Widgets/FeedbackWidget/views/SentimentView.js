@@ -14,7 +14,7 @@ export const sentimentChoices = [
 
 const ViewHeader = styled('h3')`
   font-weight: 600;
-  font-size: 16px;
+  font-size: ${theme.fontSize.default};
   text-align: center;
   margin-left: -15px;
   margin-top: 15px;

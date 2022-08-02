@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useFeedbackState } from './context';
 import { displayNone } from '../../../utils/display-none';
@@ -25,5 +25,5 @@ const Container = styled(LeafygreenCard)`
   user-select: none;
   z-index: 9;
   font-weight: 500;
-  color: ${uiColors.green.dark1};
+  color: ${palette.green.dark1};
 `;

@@ -332,7 +332,7 @@ import React from 'react';
 //import Button from '@leafygreen-ui/button';
 //import Tooltip from './LeafygreenTooltip';
 //import { SpinnerIcon, CheckIcon } from '../icons';
-//import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import useScreenshot from '../hooks/useScreenshot';
 
@@ -352,12 +352,12 @@ const ArrowIcon = () => (
 );
 
 const ScreenshotSelect = styled('span')`
-  z-index: 5;
   margin-top: 155px;
-  position: fixed;
   margin-right: 153px;
-  background: #ffffff;
   height: 22px;
+  position: fixed;
+  background: ${palette.white};
+  z-index: 5;
 `;
 
 const StyledArrow = styled('div')`

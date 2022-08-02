@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import useNoScroll from './hooks/useNoScroll';
 import { useFeedbackState } from './context';
 import CloseButton from './components/CloseButton';
@@ -48,7 +48,7 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px;
-  background: ${uiColors.gray.light3};
+  background: ${palette.gray.light3};
   margin-bottom: 20px;
 `;
 const HeaderControls = styled.div`
@@ -63,6 +63,7 @@ const HeaderContent = styled.div`
   padding: 16px;
   margin: 20px 0 0 0;
 `;
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
