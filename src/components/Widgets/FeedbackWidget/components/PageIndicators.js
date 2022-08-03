@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { useFeedbackState } from '../context';
 
+//styling for individual dots in the progress bar
 const Dot = styled('span')`
   height: 4px;
   width: 4px;
-  background-color: ${(props) => (props.isActive ? `${uiColors.green.base}` : `${uiColors.gray.light2}`)};
+  background-color: ${(props) => (props.isActive ? `${palette.green.base}` : `${palette.gray.light2}`)};
   border-radius: 50%;
   display: inline-block;
   margin-right: 3px;

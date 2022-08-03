@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
+import { css } from '@emotion/react';
 import { useFeedbackState } from '../context';
 import useScreenSize from '../../../../hooks/useScreenSize';
 import { Layout, Heading, Subheading } from '../components/view-components';
@@ -18,16 +19,16 @@ export default function SubmittedView() {
         <a href="https://developer.mongodb.com/community/forums/">MongoDB Community </a>
         <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
         <Subheading></Subheading>
-        <supportCase
-          style={{
-            display: selectedSentiment === 'Negative' ? '' : 'none',
-          }}
-        >
+        <SupportCase selectedSentiment={selectedSentiment}>
           {'Have a support contract?'}
           <a href="https://support.mongodb.com/">Create a Support Case</a>
-        </supportCase>
+        </SupportCase>
       </Subheading>
       {isMobile && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
     </Layout>
   );
 }
+
+const SupportCase = ({ selectedSentiment }) => css`
+  display: ${selectedSentiment === 'Negative' ? '' : 'none'};
+`;

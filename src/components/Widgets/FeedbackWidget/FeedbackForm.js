@@ -6,19 +6,13 @@ import FeedbackFullScreen from './FeedbackFullScreen';
 import FloatingContainer from './FloatingContainer';
 import FeedbackModal from './FeedbackModal';
 import SentimentView from './views/SentimentView';
-import RatingView from './views/RatingView';
-import QualifiersView from './views/QualifiersView';
-import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
 const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
 
 export function FeedbackContent({ view }) {
   const View = {
     sentiment: SentimentView,
-    rating: RatingView,
-    qualifiers: QualifiersView,
     comment: CommentView,
-    support: SupportView,
     submitted: SubmittedView,
   }[view];
   return <View className={`view-${view}`} />;

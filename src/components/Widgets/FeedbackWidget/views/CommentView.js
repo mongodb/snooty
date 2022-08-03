@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
+=======
+import React from 'react';
+import TextArea from '@leafygreen-ui/text-area';
+///import { css } from '@emotion/react';
+>>>>>>> ec6331a (Delete unused code and email error message red border)
 import styled from '@emotion/styled';
 import TextArea from '@leafygreen-ui/text-area';
 import TextInput from '@leafygreen-ui/text-input';
@@ -8,7 +14,13 @@ import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
 import { Layout, CommentHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
+<<<<<<< HEAD
 import useViewport from '../../../../hooks/useViewport';
+=======
+import { palette } from '@leafygreen-ui/palette';
+import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
+import { theme } from '../../../../theme/docsTheme';
+>>>>>>> ec6331a (Delete unused code and email error message red border)
 import validateEmail from '../../../../utils/validate-email';
 import { retrieveDataUri } from '../handleScreenshot';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
@@ -44,6 +56,11 @@ export default function CommentView({ ...props }) {
   const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
 
+  const borderColor = ({ hasEmailError }) => LeafyCSS`
+   div > input {
+   border-color: ${hasEmailError ? palette.red.base : palette.gray.base} !important
+  }
+  `;
   const handleSubmit = async () => {
     if (isValidEmail) {
       if (screenshotTaken) {
@@ -74,6 +91,7 @@ export default function CommentView({ ...props }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         type={'email'}
+        className={cx(borderColor({ hasEmailError }))}
       ></StyledEmailInput>
       <EmailElement>
         <OptionalText style={{ display: hasEmailError ? 'none' : '' }}>{'Optional'}</OptionalText>
@@ -181,7 +199,6 @@ const StyledEmailInput = styled(TextInput)`
   div > input {
     width: 202px;
     height: 30px;
-    border-color: ${palette.gray.base} !important;
     ::placeholder {
       font-size: 13px;
       color: #5c6c75;

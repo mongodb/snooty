@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
+import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { withPrefix } from 'gatsby-link';
 import Button from '@leafygreen-ui/button';
@@ -68,6 +69,12 @@ const exitButtonStyle = (position, top, left) => css`
   border-radius: 80%;
   cursor: pointer;
   z-index: 12;
+`;
+
+//Screenshot icon arrow
+const StyledArrow = styled('div')`
+  margin-left: 12px !important;
+  margin-top: -20px;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
