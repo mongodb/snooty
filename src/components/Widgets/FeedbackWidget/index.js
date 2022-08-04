@@ -4,7 +4,6 @@ import FeedbackForm from './FeedbackForm';
 import FeedbackTab from './FeedbackTab';
 import FeedbackHeading from './FeedbackHeading';
 import FeedbackFooter from './FeedbackFooter';
-import StarRating from './components/StarRating';
 
 export {
   FeedbackProvider,
@@ -14,5 +13,4 @@ export {
   FeedbackTab,
   FeedbackHeading,
   FeedbackFooter,
-  StarRating,
 };

@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-=======
-import React from 'react';
-import TextArea from '@leafygreen-ui/text-area';
-///import { css } from '@emotion/react';
->>>>>>> ec6331a (Delete unused code and email error message red border)
+import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import TextArea from '@leafygreen-ui/text-area';
 import TextInput from '@leafygreen-ui/text-input';
@@ -14,13 +9,7 @@ import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
 import { Layout, CommentHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
-<<<<<<< HEAD
 import useViewport from '../../../../hooks/useViewport';
-=======
-import { palette } from '@leafygreen-ui/palette';
-import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
-import { theme } from '../../../../theme/docsTheme';
->>>>>>> ec6331a (Delete unused code and email error message red border)
 import validateEmail from '../../../../utils/validate-email';
 import { retrieveDataUri } from '../handleScreenshot';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
