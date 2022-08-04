@@ -70,7 +70,6 @@
     "@leafygreen-ui/logo": "^4.0.2",
     "@leafygreen-ui/modal": "^6.1.2",
     "@leafygreen-ui/palette": "^3.3.1",
-    "@leafygreen-ui/segmented-control": "^3.0.0",
     "@leafygreen-ui/select": "^3.0.1",
     "@leafygreen-ui/side-nav": "^7.2.1",
     "@leafygreen-ui/table": "^2.0.2",
