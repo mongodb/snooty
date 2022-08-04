@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
+import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { useFeedbackState } from '../context';
 import useScreenSize from '../../../../hooks/useScreenSize';
@@ -29,6 +30,8 @@ export default function SubmittedView() {
   );
 }
 
-const SupportCase = ({ selectedSentiment }) => css`
-  display: ${selectedSentiment === 'Negative' ? '' : 'none'};
-`;
+const SupportCase = styled.div(
+  ({ selectedSentiment }) => css`
+    display: ${selectedSentiment === 'Negative' ? '' : 'none'};
+  `
+);

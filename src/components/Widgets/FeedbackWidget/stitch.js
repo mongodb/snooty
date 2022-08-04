@@ -3,7 +3,7 @@ import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 import { isBrowser } from '../../../utils/is-browser';
 import { getStitchClient } from '../../../utils/stitch';
 
-const APP_ID = 'feedbackwidgetv3-dgcsv';
+const APP_ID = 'feedback-ibcyy';
 export const app = isBrowser ? getStitchClient(APP_ID) : { auth: {} };
 
 // User Authentication & Management
