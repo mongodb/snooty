@@ -52,7 +52,6 @@ export async function submitFeedback({ feedback_id }) {
   return feedback;
 }
 
-/** 
 export async function abandonFeedback({ feedback_id }) {
   if (!feedback_id) {
     throw new Error('Must specify a feedback item _id to abandon');
@@ -60,7 +59,6 @@ export async function abandonFeedback({ feedback_id }) {
   const result = await app.callFunction('feedback_abandon', [{ feedback_id }]);
   return result.modifiedCount === 1;
 }
-*/
 
 export async function addAttachment({ feedback_id, attachment }) {
   if (!feedback_id) {
