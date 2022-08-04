@@ -108,7 +108,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   async function submitAllFeedback({ comment = '', email = '' }) {
     setProgress([true, true, true]);
-
     setView('submitted');
     if (!selectedSentiment) return;
     // Submit the full feedback document
@@ -128,7 +127,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
         email: email,
       },
       viewport: getViewport(),
-      comment: comment,
+      comment,
       category: selectedSentiment,
       ...test.feedback,
     };
