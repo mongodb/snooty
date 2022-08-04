@@ -15,8 +15,10 @@ export default function FeedbackTab(props) {
   );
 }
 
+// TODO: DOP-2400 update styling for feedback tab.
+// mocked bottom for card change
 const Container = styled(LeafygreenCard)`
-  bottom: -6px;
+  bottom: -26px;
   cursor: pointer;
   padding: 12px;
   position: fixed;
