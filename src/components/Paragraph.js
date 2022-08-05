@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
-import { appendTrailingPunctuation } from '../utils/append-dangling-siblings';
+import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
 
 const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
 
