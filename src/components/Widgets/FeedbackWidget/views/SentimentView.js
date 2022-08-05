@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { Layout } from '../components/view-components';
 import { theme } from '../../../../theme/docsTheme';
 import { useFeedbackState } from '../context';
@@ -16,9 +16,9 @@ const ViewHeader = styled('h3')`
   font-weight: 600;
   font-size: ${theme.fontSize.default};
   text-align: center;
-  margin-left: -15px;
-  margin-top: 15px;
-  margin-bottom: 16px;
+  margin-left: -10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   positiion: absolute;
   display: flex;
   align-items: flex-end;
@@ -31,17 +31,15 @@ const StyledSentiment = styled('div')`
 const StyledSentimentOption = styled('h4')`
   font-weight: 400 !important;
   font-size: ${theme.fontSize.default} !important;
-
   line-height: 24px;
   align-items: center;
   display: flex;
   flex: none;
   order: 1;
   align-self: stretch;
-
   text-align: left;
-  color: ${uiColors.gray.dark1} !important;
-  margin: 0px -37px !important;
+  color: ${palette.gray.dark1} !important;
+  margin: 5px -37px !important;
   padding: 13px 32px !important;
   cursor: pointer;
   :hover {
@@ -49,6 +47,7 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 
+//first view of the FW
 const SentimentView = () => {
   return (
     <Layout>
@@ -60,6 +59,8 @@ const SentimentView = () => {
   );
 };
 
+//each of the three sentiment categories can be selected
+//emoji and corresponding text
 const SentimentOption = ({ path }) => {
   const { setSentiment } = useFeedbackState();
   return (

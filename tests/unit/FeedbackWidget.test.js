@@ -158,7 +158,7 @@ describe('FeedbackWidget', () => {
   });
 
   describe('FeedbackForm', () => {
-    it('abandons feedback when the form is closed', async () => {
+    it('waiting state when the form is closed', async () => {
       wrapper = await mountFormWithFeedbackState({
         view: 'sentiment',
         _id: new BSON.ObjectId(),

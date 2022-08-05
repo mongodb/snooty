@@ -13,7 +13,9 @@ export default function SubmittedView() {
   const finalHeading = selectedSentiment === 'Negative' ? "We're sorry to hear that." : 'Thanks for your help!';
   return (
     <Layout>
-      <Heading>{finalHeading}</Heading>
+      <StyledHeading>
+        <Heading>{finalHeading}</Heading>
+      </StyledHeading>
       <Subheading>Your input improves MongoDB's Documentation.</Subheading>
       <Subheading>
         <div>Looking for more resources? </div>
@@ -35,3 +37,8 @@ const SupportCase = styled.div(
     display: ${selectedSentiment === 'Negative' ? '' : 'none'};
   `
 );
+
+const StyledHeading = styled.div(css`
+  margin-top: 10px !important;
+  margin-left: -5px;
+`);

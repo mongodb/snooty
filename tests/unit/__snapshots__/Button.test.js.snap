@@ -95,11 +95,12 @@ exports[`renders correctly 1`] = `
   gap: 6px;
 }
 
-<a
+<button
     aria-disabled="false"
     class="emotion-0 button"
     data-leafygreen-ui="button"
-    href="/install/"
+    to="/install"
+    type="button"
   >
     <div
       class="emotion-1"
@@ -109,6 +110,6 @@ exports[`renders correctly 1`] = `
     >
       Download Compass
     </div>
-  </a>
+  </button>
 </DocumentFragment>
 `;

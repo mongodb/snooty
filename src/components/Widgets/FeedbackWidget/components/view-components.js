@@ -70,7 +70,7 @@ export const Layout = styled.div`
 `;
 
 export const Heading = styled.h2`
-  margin-top: 0;
+  margin-top: 5px;
   margin-bottom: 16px;
   width: 100%;
   text-align: center;
@@ -81,6 +81,7 @@ export const Heading = styled.h2`
 export const Subheading = styled.p`
   margin-top: 0;
   margin-bottom: 16px;
+  margin-left: 10px;
   width: 100%;
   text-align: left;
   font-weight: regular;
