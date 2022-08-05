@@ -1,12 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import {
-  createNewFeedback,
-  updateFeedback,
-  submitFeedback,
-  abandonFeedback,
-  useStitchUser,
-  addAttachment,
-} from './stitch';
+import { createNewFeedback, useStitchUser, addAttachment } from './stitch';
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
 
@@ -25,23 +18,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   async function initializeFeedback(nextView = 'sentiment') {
     //const segment = getSegmentUserId();
     const newFeedback = {};
-    /**{
-      page: {
-        title: page.title,
-        slug: page.slug,
-        url: page.url,
-        docs_property: page.docs_property,
-        docs_version: null,
-      },
-      user: {
-        stitch_id: user && user.id,
-        segment_id: segment.id,
-        isAnonymous: segment.isAnonymous,
-      },
-      viewport: getViewport(),
-      ...test.feedback,
-    };
-    const { _id } = await createNewFeedback(newFeedback);**/
     setFeedback({ newFeedback });
     setView(nextView);
     setProgress([true, false, false]);
@@ -57,30 +33,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     }
   }
 
-  // Sets the user's star rating for the page
+  // deprecated
   async function setRating(ratingValue) {
-    // Once a user has set a rating, they cannot change it unless they
-    // abandon or submit the current feedback.
-    if (feedback && feedback.rating) return;
-    // Users on small screens start giving feedback by clicking a star
-    // rating instead of the feedback tab. In this case, we need to
-    // initialize a new feedback document before we set the rating.
-    const feedback_id = feedback ? feedback._id : (await initializeFeedback('waiting'))._id;
-    // The star rating must be in range [1-5]
-    if (typeof ratingValue !== 'number') {
-      throw new Error('Rating value must be a number.');
-    }
-    if (ratingValue < 1 || ratingValue > 5) {
-      throw new Error('Rating value must be between 1 and 5, inclusive.');
-    }
-    // Update the feedback with the selected rating and then show the
-    // user the relevant qualifier checkboxes. The qualifiers depend on
-    // the rating so we need to await them from the server.
-    const updatedFeedback = await updateFeedback({
-      feedback_id: feedback ? feedback._id : feedback_id,
-      rating: ratingValue,
-    });
-    setFeedback(updatedFeedback);
+    return;
   }
 
   // Upload a screenshot to S3 and attach it to the feedback
@@ -92,19 +47,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     });
     setFeedback(updatedFeedback);
   }
-
-  // Submit the feedback and direct the user to the most appropriate "next steps" screen.
-  /** async function submitComment({ comment = '', email = '' }) {
-    if (!selectedSentiment) return;
-    // Update the document with the user's comment and email (if provided)
-    const updatedFeedback = await updateFeedback({
-      feedback_id: feedback._id,
-      comment,
-      user: { email },
-    });
-    setFeedback(updatedFeedback);
-  }
-  */
 
   async function submitAllFeedback({ comment = '', email = '' }) {
     // Route the user to their "next steps"

@@ -1,6 +1,5 @@
 import * as stitch from '../../src/components/Widgets/FeedbackWidget/stitch';
 import { BSON } from 'mongodb-stitch-server-sdk';
-import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from '../unit/data/FeedbackWidget';
 
 export const stitchFunctionMocks = {};
 export function mockStitchFunctions() {
@@ -13,26 +12,6 @@ export function mockStitchFunctions() {
         user,
         ...rest,
       };
-    });
-
-  stitchFunctionMocks['updateFeedback'] = jest
-    .spyOn(stitch, 'updateFeedback')
-    .mockImplementation(({ feedback_id, ...fields }) => {
-      let qualifiers = fields.qualifiers || [];
-      if (Object.keys(fields).includes('rating')) {
-        qualifiers = fields.rating > 3 ? FEEDBACK_QUALIFIERS_POSITIVE : FEEDBACK_QUALIFIERS_NEGATIVE;
-      }
-      return { _id: feedback_id, qualifiers, ...fields };
-    });
-
-  stitchFunctionMocks['submitFeedback'] = jest.spyOn(stitch, 'submitFeedback').mockImplementation(({ feedback_id }) => {
-    return { _id: feedback_id };
-  });
-
-  stitchFunctionMocks['abandonFeedback'] = jest
-    .spyOn(stitch, 'abandonFeedback')
-    .mockImplementation(({ feedback_id }) => {
-      return true;
     });
 
   stitchFunctionMocks['addAttachment'] = jest
