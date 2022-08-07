@@ -92,7 +92,9 @@ export default function CommentView({ ...props }) {
         Please enter a valid email.
       </InputErrorLabel>
       <Footer>
-        <SubmitButton onClick={() => handleSubmit()}>{'Send'}</SubmitButton>
+        <SubmitButton onClick={() => handleSubmit()} className={cx(SubmitButtonMargin({ hasEmailError }))}>
+          {'Send'}
+        </SubmitButton>
       </Footer>
     </Layout>
   );
@@ -131,8 +133,12 @@ const EmailElement = styled.div`
   background: #ffffff;
 `;
 
+const SubmitButtonMargin = ({ hasEmailError }) => LeafyCSS`
+margin-top: ${hasEmailError ? '5px' : '24px'} !important;
+transition: 0ms !important;
+`;
+
 const SubmitButton = styled(Button)`
-  margin-top: 20px !important;
   margin-right: -8px !important;
   height: 28px !important;
   width: 55px;
@@ -159,7 +165,6 @@ const InputErrorLabel = styled.label(
     display: ${hasEmailError ? '' : 'none'};
     color: red;
     text-align: center;
-    margin-top: 5px;
     margin-left: -35px;
     font-size: 13px;
     margin-bottom: -5px;
