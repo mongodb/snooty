@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -15,6 +16,19 @@ import useNoScroll from '../hooks/useNoScroll';
 const HIGHLIGHT_BORDER_SIZE = 5;
 
 const instructionsBorderStyling = css`
+=======
+import React, { useState } from 'react';
+import { palette } from '@leafygreen-ui/palette';
+import styled from '@emotion/styled';
+import useScreenshot from '../hooks/useScreenshot';
+import { ScreenshotIcon, ArrowIcon } from '../components/ScreenshotIcon';
+
+//styling for entire screenshot icon selector
+const ScreenshotSelect = styled('span')`
+  margin-top: 155px;
+  margin-right: 153px;
+  height: 22px;
+>>>>>>> 48d7852 (Update LG button and formatting)
   position: fixed;
   top: 0;
   left: 0;
@@ -77,6 +91,7 @@ const StyledArrow = styled('div')`
   margin-top: -20px;
 `;
 
+<<<<<<< HEAD
 const ScreenshotButton = ({ size = 'default', ...props }) => {
   const { setScreenshotTaken } = useFeedbackState();
   const label = 'Take a Screenshot';
@@ -229,6 +244,12 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   // lock the page when element is selected
   useNoScroll(!!currElem.current && domElementClickedRef.current === 'solid');
 
+=======
+export default function ScreenshotButton() {
+  const [setIsHovered] = useState(false);
+  const { takeScreenshot } = useScreenshot();
+  //const label = screenshot ? 'Screenshot Saved' : loading ? 'Taking Screenshot' : 'Take a Screenshot';
+>>>>>>> 48d7852 (Update LG button and formatting)
   return (
     <>
       {isScreenshotButtonClicked && (

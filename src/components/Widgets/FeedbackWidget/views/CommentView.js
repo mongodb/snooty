@@ -9,14 +9,14 @@ import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
 import { Layout, CommentHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
+import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
 import validateEmail from '../../../../utils/validate-email';
-import { retrieveDataUri } from '../handleScreenshot';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 function useValidation(inputValue, validator) {
-  const [isValid, setIsValid] = React.useState(null);
-  React.useEffect(() => {
+  const [isValid, setIsValid] = useState(null);
+  useEffect(() => {
     setIsValid(validator(inputValue));
   }, [inputValue, validator]);
 
@@ -47,7 +47,7 @@ export default function CommentView({ ...props }) {
 
   const borderColor = ({ hasEmailError }) => LeafyCSS`
    div > input {
-   border-color: ${hasEmailError ? palette.red.base : palette.gray.base} !important
+     border-color: ${hasEmailError ? palette.red.base : palette.gray.base} !important;
   }
   `;
   const handleSubmit = async () => {
@@ -72,7 +72,7 @@ export default function CommentView({ ...props }) {
         value={comment}
         rows={4}
         onChange={(e) => setComment(e.target.value)}
-      ></StyledCommentInput>
+      />
       <ScreenshotButton />
       <StyledEmailInput
         id="feedback-email"
@@ -81,7 +81,7 @@ export default function CommentView({ ...props }) {
         onChange={(e) => setEmail(e.target.value)}
         type={'email'}
         className={cx(borderColor({ hasEmailError }))}
-      ></StyledEmailInput>
+      />
       <EmailElement>
         <OptionalText hasEmailError={hasEmailError}>{'Optional'}</OptionalText>
         <ErrorDisplay hasEmailError={hasEmailError}>
@@ -97,17 +97,6 @@ export default function CommentView({ ...props }) {
     </Layout>
   );
 }
-
-const ErrorIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M7.8639 1.01357C7.49039 0.328811 6.50961 0.328811 6.1361 1.01357L0.122178 12.0388C-0.236737 12.6968 0.238139 13.5 0.986079 13.5H13.0139C13.7619 13.5 14.2367 12.6968 13.8778 12.0388L7.8639 1.01357ZM6 4.5C6 3.94772 6.44772 3.5 7 3.5C7.55228 3.5 8 3.94772 8 4.5V8.5C8 9.05228 7.55228 9.5 7 9.5C6.44772 9.5 6 9.05228 6 8.5V4.5ZM8 11.5C8 12.0523 7.55228 12.5 7 12.5C6.44772 12.5 6 12.0523 6 11.5C6 10.9477 6.44772 10.5 7 10.5C7.55228 10.5 8 10.9477 8 11.5Z"
-      fill="#DB3030"
-    />
-  </svg>
-);
 
 const ErrorDisplay = styled.span(
   ({ hasEmailError }) => css`
@@ -158,7 +147,6 @@ const SubmitButton = styled(Button)`
   font-style: normal;
 
   background: #f9fbfa;
-  //position: fixed;
   justify-content: center;
   align-items: center;
   padding: 1px 12px 3px;
@@ -172,7 +160,7 @@ const InputErrorLabel = styled.label(
     color: red;
     text-align: center;
     margin-top: 5px;
-    margin-left: -43px;
+    margin-left: -35px;
     font-size: 13px;
     margin-bottom: -5px;
   `
@@ -182,7 +170,6 @@ const StyledCommentInput = styled(TextArea)`
   width: 202px;
   margin-top: -16px;
   z-index: 4;
-
   textarea::placeholder {
     font-size: 15px !important;
     color: #b8c4c2;

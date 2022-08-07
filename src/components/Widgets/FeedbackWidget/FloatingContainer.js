@@ -43,7 +43,6 @@ const Card = styled(LeafygreenCard)`
   max-height: 320px;
   align-items: center;
   /* White */
-  background: #ffffff;
   box-shadow: 0px 8px 20px -8px rgba(6, 22, 33, 0.6);
   border-radius: 7px;
 `;

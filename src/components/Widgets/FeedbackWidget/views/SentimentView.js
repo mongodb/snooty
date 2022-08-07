@@ -19,7 +19,6 @@ const ViewHeader = styled('h3')`
   margin-left: -10px;
   margin-top: 20px;
   margin-bottom: 20px;
-  positiion: absolute;
   display: flex;
   align-items: flex-end;
 `;

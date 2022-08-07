@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { sentimentChoices } from '../views/SentimentView';
-import { useFeedbackState } from '../context';
-import Emoji from '../components/Emoji';
 import { theme } from '../../../../theme/docsTheme';
+import { useFeedbackState } from '../context';
+import { sentimentChoices } from '../views/SentimentView';
+import Emoji from '../components/Emoji';
 
 //header for the comment view
 //emoji icons and corresponding path labels
@@ -47,14 +47,12 @@ const SentimentEmoji = ({ path }) => {
       onClick={() => selectSentiment(path.sentiment)}
       style={{
         opacity: sentiment === selectedSentiment ? '1' : '0.5',
-        transition: '0.2s',
       }}
     >
       <Emoji sentiment={path.sentiment} />
       <StyledSentimentPath
         style={{
           opacity: sentiment === selectedSentiment ? '0.7' : '0.0',
-          transition: '0.2s',
         }}
       >
         {path.category}

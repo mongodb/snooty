@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useFeedbackState } from '../context';
 import { css } from '@emotion/react';
@@ -30,7 +30,7 @@ export const StarRatingLabel = styled.div`
 `;
 
 export default function StarRating({ size = '3x' }) {
-  const [hoveredRating, setHoveredRating] = React.useState(null);
+  const [hoveredRating, setHoveredRating] = useState(null);
   const { feedback, setRating } = useFeedbackState();
   const selectedRating = feedback && feedback.rating;
   return (

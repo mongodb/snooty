@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useContext, createContext } from 'react';
+=======
+import React, { useState } from 'react';
+>>>>>>> 48d7852 (Update LG button and formatting)
 import { createNewFeedback, useStitchUser, addAttachment } from './stitch';
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
@@ -7,11 +11,17 @@ const FeedbackContext = createContext();
 
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
+<<<<<<< HEAD
   const [selectedSentiment, selectSentiment] = useState(test.feedback?.sentiment || null);
   const [isSupportRequest, setIsSupportRequest] = useState(test.isSupportRequest || false);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
+=======
+  const [selectedSentiment, selectSentiment] = useState();
+  const [progress, setProgress] = useState([true, false, false]);
+  const [view, setView] = useState(test.view || 'waiting');
+>>>>>>> 48d7852 (Update LG button and formatting)
   const user = useStitchUser();
 
   // Create a new feedback document
