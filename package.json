@@ -74,7 +74,7 @@
     "@leafygreen-ui/table": "^2.0.2",
     "@leafygreen-ui/tabs": "^5.1.1",
     "@leafygreen-ui/text-area": "^6.0.2",
-    "@leafygreen-ui/text-input": "^6.2.1",
+    "@leafygreen-ui/text-input": "^10.0.0",
     "@leafygreen-ui/tooltip": "^6.1.7",
     "@leafygreen-ui/typography": "^7.6.0",
     "@loadable/component": "^5.14.1",
