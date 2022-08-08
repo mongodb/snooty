@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Callout, { Variant } from '@leafygreen-ui/callout';
 import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
+import { cx, css } from '@leafygreen-ui/emotion';
 
 export const admonitionMap = {
   example: Variant.Example,
@@ -14,6 +15,11 @@ export const admonitionMap = {
   warning: Variant.Warning,
 };
 
+const admonitionStyles = css`
+  margin-top: 24px;
+  margin-bottom: 24px;
+`;
+
 const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
   let title = getPlaintext(argument);
   if (name === 'see') {
@@ -23,7 +29,12 @@ const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
   }
 
   return (
-    <Callout title={title} variant={admonitionMap[name] || Variant.Note} baseFontSize={16}>
+    <Callout
+      className={cx(admonitionStyles)}
+      title={title}
+      variant={admonitionMap[name] || Variant.Note}
+      baseFontSize={16}
+    >
       {children.map((child, i) => (
         <ComponentFactory {...rest} key={i} nodeData={child} />
       ))}

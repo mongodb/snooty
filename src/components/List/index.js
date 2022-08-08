@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { css, cx } from '@leafygreen-ui/emotion';
 
 const enumtypeMap = {
   arabic: '1',
@@ -9,6 +10,10 @@ const enumtypeMap = {
   lowerroman: 'i',
   upperroman: 'I',
 };
+
+const listStyles = css`
+  margin-top: 0px;
+`;
 
 const List = ({ nodeData: { children, enumtype, startat }, ...rest }) => {
   const ListTag = enumtype === 'unordered' ? 'ul' : 'ol';
@@ -20,7 +25,7 @@ const List = ({ nodeData: { children, enumtype, startat }, ...rest }) => {
     attributes.start = startat;
   }
   return (
-    <ListTag {...attributes}>
+    <ListTag className={cx(listStyles)} {...attributes}>
       {children.map((listChild, index) => (
         <ComponentFactory {...rest} nodeData={listChild} key={index} />
       ))}

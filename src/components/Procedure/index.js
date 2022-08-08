@@ -5,10 +5,6 @@ import Step from './Step';
 import { theme } from '../../theme/docsTheme';
 
 const StyledProcedure = styled('div')`
-  h2 + &,
-  h3 + & {
-    margin-top: 24px;
-  }
   ${({ procedureStyle }) =>
     procedureStyle === 'connected' &&
     `
