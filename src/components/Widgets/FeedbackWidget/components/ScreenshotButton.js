@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -7,7 +6,6 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
 import Tooltip from './LeafygreenTooltip';
-import { CameraIcon } from '../icons';
 import { useFeedbackState } from '../context';
 import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
@@ -16,19 +14,6 @@ import useNoScroll from '../hooks/useNoScroll';
 const HIGHLIGHT_BORDER_SIZE = 5;
 
 const instructionsBorderStyling = css`
-=======
-import React, { useState } from 'react';
-import { palette } from '@leafygreen-ui/palette';
-import styled from '@emotion/styled';
-import useScreenshot from '../hooks/useScreenshot';
-import { ScreenshotIcon, ArrowIcon } from '../components/ScreenshotIcon';
-
-//styling for entire screenshot icon selector
-const ScreenshotSelect = styled('span')`
-  margin-top: 155px;
-  margin-right: 153px;
-  height: 22px;
->>>>>>> 48d7852 (Update LG button and formatting)
   position: fixed;
   top: 0;
   left: 0;
@@ -36,6 +21,15 @@ const ScreenshotSelect = styled('span')`
   height: 100%;
   border: #ffdd49 solid ${HIGHLIGHT_BORDER_SIZE}px;
   z-index: 11;
+`;
+
+//styling for entire screenshot icon selector
+const ScreenshotSelect = styled(Button)`
+  height: 28px;
+  z-index: 5;
+  width: 38px !important;
+  align-text: center;
+  margin-left: -8px;
 `;
 
 const instructionsPanelStyling = css`
@@ -91,7 +85,6 @@ const StyledArrow = styled('div')`
   margin-top: -20px;
 `;
 
-<<<<<<< HEAD
 const ScreenshotButton = ({ size = 'default', ...props }) => {
   const { setScreenshotTaken } = useFeedbackState();
   const label = 'Take a Screenshot';
@@ -244,12 +237,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   // lock the page when element is selected
   useNoScroll(!!currElem.current && domElementClickedRef.current === 'solid');
 
-=======
-export default function ScreenshotButton() {
-  const [setIsHovered] = useState(false);
-  const { takeScreenshot } = useScreenshot();
-  //const label = screenshot ? 'Screenshot Saved' : loading ? 'Taking Screenshot' : 'Take a Screenshot';
->>>>>>> 48d7852 (Update LG button and formatting)
   return (
     <>
       {isScreenshotButtonClicked && (
@@ -345,9 +332,9 @@ export default function ScreenshotButton() {
         justify="middle"
         triggerEvent="hover"
         trigger={
-          <Button variant="default" onClick={takeNewScreenshot} {...props}>
-            <CameraIcon />
-          </Button>
+          <ScreenshotSelect variant="default" onClick={takeNewScreenshot} {...props}>
+            <img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />
+          </ScreenshotSelect>
         }
         popoverZIndex={15}
       >
