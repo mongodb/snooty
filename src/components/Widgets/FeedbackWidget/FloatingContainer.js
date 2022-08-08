@@ -42,9 +42,6 @@ const Card = styled(LeafygreenCard)`
   min-height: 320px;
   max-height: 320px;
   align-items: center;
-  /* White */
-  box-shadow: 0px 8px 20px -8px rgba(6, 22, 33, 0.6);
-  border-radius: 7px;
 `;
 const CardHeader = styled.div`
   display: flex;
