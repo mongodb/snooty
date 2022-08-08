@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
 import { Body } from '@leafygreen-ui/typography';
+import styled from '@emotion/styled';
 
 const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
+
+const StyledParagraph = styled(Body)`
+  margin-bottom: 16px;
+`;
 
 const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
   const children = appendTrailingPunctuation(nodeData.children);
@@ -15,13 +20,11 @@ const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
   }
 
   return (
-    <p>
-      {children.map((element, index) => (
-    <Body>
+    <StyledParagraph>
       {nodeData.children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} />
       ))}
-    </Body>
+    </StyledParagraph>
   );
 };
 

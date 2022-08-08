@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { cx, css } from '@leafygreen-ui/emotion';
 import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
 import TabSelectors from './Tabs/TabSelectors';
@@ -14,9 +14,19 @@ import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
+const StyledH2 = styled(H2)`
+  margin-top: 16px;
+  margin-bottom: 24px;
+`;
+
+const headingStyles = css`
+  margin-top: 24px;
+  margin-bottom: 8px;
+`;
+
 const determineHeading = (sectionDepth) => {
   if (sectionDepth === 1) {
-    return H2;
+    return StyledH2;
   } else if (sectionDepth === 2) {
     return H3;
   } else if (sectionDepth === 3) {
@@ -50,7 +60,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        <HeadingTag as={asHeading} className="contains-headerlink" weight="medium">
+        <HeadingTag className={cx(headingStyles)} as={asHeading} weight="medium">
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}

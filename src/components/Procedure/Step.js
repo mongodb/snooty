@@ -16,6 +16,16 @@ const Circle = styled('div')`
 
 const StyledStep = styled('div')`
   display: flex;
+
+  :last-of-type h4,
+  :last-of-type h3 {
+    margin-bottom: 0px;
+  }
+
+  h3,
+  h4 {
+    margin-top: 0px;
+  }
 `;
 
 const StepBlock = styled('div')`
@@ -24,9 +34,6 @@ const StepBlock = styled('div')`
 
 const Content = styled.div`
   // Remove the top margin of nested heading
-  & > section > :first-of-type {
-    margin-top: 0;
-  }
 `;
 
 const circleStyles = {
@@ -66,7 +73,6 @@ const landingStepStyles = {
 
 const contentStyles = {
   connected: css`
-    margin-top: 5px;
     padding-bottom: ${theme.size.xlarge};
     @media ${theme.screenSize.upToMedium} {
       padding-bottom: 40px;
@@ -75,9 +81,7 @@ const contentStyles = {
       padding-bottom: ${theme.size.large};
     }
   `,
-  normal: css`
-    margin-bottom: ${theme.size.medium};
-  `,
+  normal: css``,
 };
 
 const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', ...rest }) => {

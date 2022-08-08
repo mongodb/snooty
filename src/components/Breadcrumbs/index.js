@@ -1,25 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
 import BreadcrumbSchema from './BreadcrumbSchema';
 import BreadcrumbContainer from './BreadcrumbContainer';
-import { theme } from '../../theme/docsTheme';
+import { Body } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
-
-const Wrapper = styled('nav')`
-  font-size: ${theme.fontSize.small};
-  margin-bottom: ${theme.size.medium};
-
-  * {
-    color: ${uiColors.gray.dark1};
-  }
-
-  & > p {
-    margin-top: 0;
-    min-height: ${theme.size.medium};
-  }
-`;
 
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
   const homeCrumb = {
@@ -35,11 +19,9 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle,
   return (
     <>
       <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-      <Wrapper>
-        <p>
-          <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
-        </p>
-      </Wrapper>
+      <Body>
+        <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+      </Body>
     </>
   );
 };

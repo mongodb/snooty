@@ -38,6 +38,8 @@ export default class Figure extends Component {
         className="figure"
         css={css`
           max-width: 100%;
+          margin-top: 24px;
+          margin-bottom: 24px;
         `}
         style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}
       >
