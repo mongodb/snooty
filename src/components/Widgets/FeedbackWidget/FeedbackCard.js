@@ -11,12 +11,12 @@ const feedbackStyle = css`
   z-index: 14;
 `;
 
-export default function FloatingContainer({ isOpen, children }) {
+export default function FeedbackCard({ isOpen, children }) {
   const { abandon } = useFeedbackState();
 
   return (
     isOpen && (
-      <Floating id={feedbackId} css={feedbackStyle}>
+      <FloatingContainer id={feedbackId} css={feedbackStyle}>
         <Card>
           <CardHeader>
             <ProgressBar />
@@ -24,12 +24,12 @@ export default function FloatingContainer({ isOpen, children }) {
           </CardHeader>
           <Content>{children}</Content>
         </Card>
-      </Floating>
+      </FloatingContainer>
     )
   );
 }
 
-const Floating = styled.div`
+const FloatingContainer = styled.div`
   position: fixed;
   bottom: 40px;
   right: 16px;

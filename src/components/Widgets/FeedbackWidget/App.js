@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { FeedbackProvider } from './context';
-import FloatingContainer from './FloatingContainer';
+import FeedbackCard from './FeedbackCard';
 import FeedbackTab from './FeedbackTab';
 import StarRating from './components/StarRating';
 
@@ -28,7 +28,7 @@ function App() {
         <br />
         <br />
         <br />
-        <FloatingContainer />
+        <FeedbackCard />
       </Centered>
     </div>
   );

@@ -63,7 +63,6 @@ export function Star({ ratingValue, isHighlighted, shouldShowTooltip, size, onCl
       <Tooltip
         key={`star-${size}-${ratingValue}`}
         id={`star-${size}-${ratingValue}`}
-        align="bottom"
         justify="middle"
         triggerEvent="hover"
         open={shouldShowTooltip}
