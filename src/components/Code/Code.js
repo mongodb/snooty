@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { default as CodeBlock } from '@leafygreen-ui/code';
@@ -9,7 +9,6 @@ import Tooltip from '@leafygreen-ui/tooltip';
 import { uiColors } from '@leafygreen-ui/palette';
 import { CodeContext } from './code-context';
 import { TabContext } from '../Tabs/tab-context';
-import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
@@ -64,10 +63,6 @@ const Code = ({
     ];
   }
 
-  const reportCodeCopied = useCallback(() => {
-    reportAnalytics('CodeblockCopied', { code });
-  }, [code]);
-
   return (
     <div
       css={css`
@@ -104,7 +99,6 @@ const Code = ({
           const tabsetName = 'drivers';
           setActiveTab({ name: tabsetName, value: selectedOption.id });
         }}
-        onCopy={reportCodeCopied}
         showLineNumbers={linenos}
         showCustomActionButtons={sourceSpecified}
         customActionButtons={customActionButtonList}

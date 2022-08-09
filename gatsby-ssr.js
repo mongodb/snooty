@@ -9,6 +9,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     // Optimizely
     <script src="https://cdn.optimizely.com/js/20988630008.js" />,
+    <script async src="https://pathway.mongodb.com/"></script>,
     // Delighted
     <script
       type="text/javascript"
