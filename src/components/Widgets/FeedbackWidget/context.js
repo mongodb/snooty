@@ -2,7 +2,7 @@ import React from 'react';
 import {
   createNewFeedback,
   updateFeedback,
-  submitFeedback,
+  // submitFeedback,
   abandonFeedback,
   useStitchUser,
   addAttachment,
@@ -110,18 +110,18 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   async function submitComment({ comment = '', email = '' }) {
     if (!feedback) return;
     // Update the document with the user's comment and email (if provided)
-    const updatedFeedback = await updateFeedback({
-      feedback_id: feedback._id,
-      comment,
-      user: { email },
-    });
-    setFeedback(updatedFeedback);
+    // const updatedFeedback = await updateFeedback({
+    //   feedback_id: feedback._id,
+    //   comment,
+    //   user: { email },
+    // });
+    // setFeedback(updatedFeedback);
   }
 
   async function submitAllFeedback() {
     // Submit the full feedback document
-    const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
-    setFeedback(submittedFeedback);
+    // const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
+    // setFeedback(submittedFeedback);
     // Route the user to their "next steps"
     if (isSupportRequest) {
       setView('support');

@@ -31,6 +31,7 @@ async function takeFeedbackScreenshot() {
         'feedback-form', // Don't include the feedback form
         'feedback-tooltip', // Don't include any button/star tooltips
         'navbar-brand', // Don't include the MongoDB logo (temporary for CORS)
+        'instructionoverlay', // Don't include instruction overlay
       ],
     }));
   return dataUri;
@@ -50,6 +51,13 @@ export default function useScreenshot() {
         dataUri,
         viewport,
       });
+
+      // download for testing purposes
+      const link = document.createElement('a');
+      link.download = 'myimage.jpeg';
+      link.href = dataUri;
+      link.click();
+
       setLoading(false);
     }
   };

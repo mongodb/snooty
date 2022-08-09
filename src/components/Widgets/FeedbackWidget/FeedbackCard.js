@@ -10,7 +10,7 @@ export default function FeedbackCard({ isOpen, children }) {
 
   return (
     isOpen && (
-      <Floating>
+      <Floating id="feedbackCard">
         <Card>
           <CardHeader>
             <CloseButton onClick={() => abandon()} />

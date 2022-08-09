@@ -13,6 +13,12 @@ import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
 import CommentView from './views/CommentView';
 
+import { css } from '@emotion/react';
+
+const feedbackStyle = css`
+  z-index: 3000;
+`;
+
 export function FeedbackContent({ view }) {
   const View = {
     rating: RatingView,
@@ -41,7 +47,7 @@ export default function FeedbackForm(props) {
 
   return (
     isOpen && (
-      <div className="feedback-form" hidden={!isOpen}>
+      <div className="feedback-form" hidden={!isOpen} css={feedbackStyle}>
         <Container isOpen={isOpen}>
           <FeedbackContent view={view} />
         </Container>
