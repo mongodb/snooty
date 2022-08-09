@@ -69,6 +69,12 @@ $ npm run build
 $ npm run serve
 ```
 
+To debug server side:
+```shell
+node --nolazy node_modules/.bin/gatsby develop --inspect-brk
+```
+and connect a node debugger (ie. chrome dev tools)
+
 ## Staging
 
 Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux 
