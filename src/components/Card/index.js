@@ -28,13 +28,14 @@ const CardIcon = styled('img')`
 `;
 
 const H4 = styled(Body)`
+  font-weight: 600;
   letter-spacing: 0.5px;
   margin: ${({ compact, theme }) =>
-    compact ? `0 0 ${theme.size.small}` : `${theme.size.medium} 0 ${theme.size.small} 0`};
+    compact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
 `;
 
 const CTA = styled('p')`
-  margin-top: 16px;
+  margin-top: 8px;
 `;
 
 const FlexTag = styled(Tag)`
@@ -92,8 +93,9 @@ const Card = ({
 }) => {
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
   const Icon = isCompact ? CompactIcon : CardIcon;
+  console.log('isCompact', isCompact);
   return (
-    <Card onClick={url ? () => onCardClick(url) : undefined}>
+    <Card className={isCompact ? 'compact-card' : 'styled-card'} onClick={url ? () => onCardClick(url) : undefined}>
       {icon && (
         <ConditionalWrapper
           condition={isCompact}
@@ -107,9 +109,11 @@ const Card = ({
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
         {tag && <FlexTag>{tag}</FlexTag>}
-        <H4 compact={isCompact || isExtraCompact} weight="medium">
-          {headline}
-        </H4>
+        {headline && (
+          <H4 className="check-h4" compact={isCompact || isExtraCompact} weight="medium">
+            {headline}
+          </H4>
+        )}
         {children.map((child, i) => (
           // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
           <ComponentFactory nodeData={child} key={i} cardRef={true} />
