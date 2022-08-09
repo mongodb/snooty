@@ -69,7 +69,9 @@ and connect a node debugger (ie. chrome developer tools)
 
 ### Testing with local manifest path (local AST zip files)
 
-Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for above mentioned variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`
+Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for previously mentioned env variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`
+
+`.env.development`:
 
 ```
 GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
