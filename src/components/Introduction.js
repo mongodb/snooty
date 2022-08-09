@@ -6,7 +6,7 @@ import ComponentFactory from './ComponentFactory';
 
 const StyledIntroduction = styled('div')`
   .button {
-    margin: ${theme.size.medium} ${theme.size.default} ${theme.size.default} 0;
+    margin: ${theme.size.small} ${theme.size.default} ${theme.size.default} 0;
     min-height: ${theme.size.large};
   }
   .button + p {
