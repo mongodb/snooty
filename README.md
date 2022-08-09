@@ -4,7 +4,7 @@ Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 
 ## Installation
 
-Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/master/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows %USERPROFILE%/.zshrc) to include the following
+Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/master/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows `%USERPROFILE%/.zshrc`) to include the following
 
 ```
 export NPM_BASE_64_AUTH=<BASE_64_API_KEY>
@@ -19,22 +19,11 @@ npm install --legacy-peer-deps
 
 ### .env file setup
 
-You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments.
-
-#### `.env.production`
-
-Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
-
-```
-GATSBY_SITE=<SITE>
-GATSBY_PARSER_USER=<USER>
-GATSBY_PARSER_BRANCH=<BRANCH>
-GATSBY_SNOOTY_DEV=true
-```
+You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments. These variables let Snooty know where to look for your AST zip files, within DOP team's database.
 
 #### `.env.development`
 
-Snooty's `develop` stage uses the `development` environment. These variables let Snooty know where to look for your AST zip files, within DOP team's database. Your `.env.development` file should be as follows:
+Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
 
 ```
 GATSBY_SITE=<SITE>
@@ -47,12 +36,14 @@ The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that when the app
 
 It should be set to `true` when working on snooty locally.
 
-#### Testing with local manifest path (local AST zip files)
+#### `.env.production`
 
-Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for above mentioned variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`
+Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 
 ```
-GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
+GATSBY_SITE=<SITE>
+GATSBY_PARSER_USER=<USER>
+GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
@@ -73,7 +64,17 @@ To debug server side:
 ```shell
 node --nolazy node_modules/.bin/gatsby develop --inspect-brk
 ```
-and connect a node debugger (ie. chrome dev tools)
+and connect a node debugger (ie. chrome developer tools)
+
+
+### Testing with local manifest path (local AST zip files)
+
+Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for above mentioned variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`
+
+```
+GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
+GATSBY_SNOOTY_DEV=true
+```
 
 ## Staging
 
