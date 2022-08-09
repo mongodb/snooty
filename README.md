@@ -4,6 +4,15 @@ Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 
 ## Installation
 
+Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/master/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows %USERPROFILE%/.zshrc) to include the following
+
+```
+export NPM_BASE_64_AUTH=<BASE_64_API_KEY>
+export NPM_EMAIL=<your.email@gmail.com>
+```
+
+Then, to install the package dependencies:
+
 ```shell
 npm install --legacy-peer-deps
 ```
@@ -25,7 +34,7 @@ GATSBY_SNOOTY_DEV=true
 
 #### `.env.development`
 
-Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
+Snooty's `develop` stage uses the `development` environment. These variables let Snooty know where to look for your AST zip files, within DOP team's database. Your `.env.development` file should be as follows:
 
 ```
 GATSBY_SITE=<SITE>
@@ -37,6 +46,15 @@ GATSBY_SNOOTY_DEV=true
 The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that when the application is built it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`.
 
 It should be set to `true` when working on snooty locally.
+
+#### Testing with local manifest path (local AST zip files)
+
+Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for above mentioned variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`
+
+```
+GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
+GATSBY_SNOOTY_DEV=true
+```
 
 ## Running locally
 
@@ -53,10 +71,12 @@ $ npm run serve
 
 ## Staging
 
-Install [mut](https://github.com/mongodb/mut) and ensure that you have properly configured your Giza/AWS keys. Then, from root, run:
+Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux 
+
+Install [mut](https://github.com/mongodb/mut) and ensure that you have properly configured your Giza/AWS keys as [defined here](https://github.com/mongodb/mut/blob/3df98c17b0c5ea0b6101fe2c0e1b36ebdf97412e/mut/AuthenticationInfo.py#L7). Then, from root, run:
 
 ```shell
-make stage
+npm run build:clean:stage
 ```
 
 :warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
@@ -121,3 +141,11 @@ npm run format:fix
 ```
 
 We have set up a precommit hook that will format staged files. Prettier also offers a variety of editor integrations to automatically format your code.
+
+### Useful Resources
+
+[React](https://reactjs.org/docs/getting-started.html)
+[Gatsby](https://www.gatsbyjs.com/docs/)
+[Emotion](https://emotion.sh/docs/introduction)
+[mongodb/stitch](http://stitch-sdks.s3-website-us-east-1.amazonaws.com/stitch-sdks/js/4/index.html)
+[LeafyGreen UI](https://www.mongodb.design/)
