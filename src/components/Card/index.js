@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withPrefix, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
-import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
@@ -57,8 +56,6 @@ const CompactIcon = styled('img')`
 `;
 
 const CompactIconCircle = styled('div')`
-  background: ${palette.green.light3};
-  border-radius: 50%;
   display: flex;
   flex-shrink: 0 !important;
   height: 48px;
@@ -94,7 +91,7 @@ const Card = ({
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
   const Icon = isCompact ? CompactIcon : CardIcon;
   return (
-    <Card className={isCompact ? 'compact-card' : 'styled-card'} onClick={url ? () => onCardClick(url) : undefined}>
+    <Card onClick={url ? () => onCardClick(url) : undefined}>
       {icon && (
         <ConditionalWrapper
           condition={isCompact}

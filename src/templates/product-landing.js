@@ -18,12 +18,12 @@ const Wrapper = styled('main')`
   h4,
   h5,
   h6 {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   h1 {
-    font-size: ${theme.fontSize.h2};
-    margin-bottom: ${theme.size.default};
+    margin-top: ${theme.size.medium};
+    margin-bottom: ${theme.size.small};
   }
 
   h2,

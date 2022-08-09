@@ -10,13 +10,14 @@ import { TabContext } from './Tabs/tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
-import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
+import { H3, Subtitle, Body } from '@leafygreen-ui/typography';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
-const StyledH2 = styled(H2)`
+const StyledH3 = styled(H3)`
   margin-top: 16px;
   margin-bottom: 24px;
+  font-weight: 500;
 `;
 
 const headingStyles = css`
@@ -26,7 +27,7 @@ const headingStyles = css`
 
 const determineHeading = (sectionDepth) => {
   if (sectionDepth === 1) {
-    return StyledH2;
+    return StyledH3;
   } else if (sectionDepth === 2) {
     return H3;
   } else if (sectionDepth === 3) {
