@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Callout, { Variant } from '@leafygreen-ui/callout';
+import { cx, css } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
-import { cx, css } from '@leafygreen-ui/emotion';
+
 
 export const admonitionMap = {
   example: Variant.Example,
@@ -19,6 +20,9 @@ const admonitionStyles = css`
   margin-top: 24px;
   margin-bottom: 24px;
 
+  p {
+    color: unset;
+  }
   // remove bottom margin off the final paragraph in a callout,
   // similarly remove the bottom margin off lists and list items so that
   // the spacing looks proper on those callouts
