@@ -61,11 +61,12 @@ $ npm run serve
 ```
 
 To debug server side:
+
 ```shell
 node --nolazy node_modules/.bin/gatsby develop --inspect-brk
 ```
-and connect a node debugger (ie. chrome developer tools)
 
+and connect a node debugger (ie. chrome developer tools)
 
 ### Testing with local manifest path (local AST zip files)
 
@@ -80,7 +81,7 @@ GATSBY_SNOOTY_DEV=true
 
 ## Staging
 
-Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux 
+Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux
 
 Install [mut](https://github.com/mongodb/mut) and ensure that you have properly configured your Giza/AWS keys as [defined here](https://github.com/mongodb/mut/blob/3df98c17b0c5ea0b6101fe2c0e1b36ebdf97412e/mut/AuthenticationInfo.py#L7). Then, from root, run:
 
