@@ -18,6 +18,16 @@ export const admonitionMap = {
 const admonitionStyles = css`
   margin-top: 24px;
   margin-bottom: 24px;
+
+  // remove bottom margin off the final paragraph in a callout,
+  // similarly remove the bottom margin off lists and list items so that
+  // the spacing looks proper on those callouts
+  ul:last-of-type,
+  ol:last-of-type,
+  li:last-of-type > p,
+  p:last-of-type {
+    margin-bottom: 0px;
+  }
 `;
 
 const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {

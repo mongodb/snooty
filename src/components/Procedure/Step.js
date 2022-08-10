@@ -17,9 +17,13 @@ const Circle = styled('div')`
 const StyledStep = styled('div')`
   display: flex;
 
-  :last-of-type h4,
-  :last-of-type h3 {
+  :last-of-type h3,
+  :last-of-type h4 {
     margin-bottom: 0px;
+  }
+
+  :first-of-type {
+    margin-top: 16px;
   }
 
   h3,

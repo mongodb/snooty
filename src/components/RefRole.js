@@ -62,7 +62,7 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, card
   }
 
   return (
-    <CurrRefRole to={normalizePath(link)} onClick={(e) => stopPropagation(e)} showLinkArrow={display}>
+    <CurrRefRole to={normalizePath(link)} onClick={(e) => stopPropagation(e)} showLinkArrow={showLinkArrow}>
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
@@ -79,6 +79,7 @@ RefRole.propTypes = {
     url: PropTypes.string,
   }).isRequired,
   slug: PropTypes.string.isRequired,
+  showLinkArrow: PropTypes.bool,
 };
 
 export default RefRole;

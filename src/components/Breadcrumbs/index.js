@@ -4,6 +4,11 @@ import BreadcrumbSchema from './BreadcrumbSchema';
 import BreadcrumbContainer from './BreadcrumbContainer';
 import { Body } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
+import { css, cx } from '@leafygreen-ui/emotion';
+
+const breadcrumbBodyStyle = css`
+  font-size: 13px;
+`;
 
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
   const homeCrumb = {
@@ -19,7 +24,7 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle,
   return (
     <>
       <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-      <Body>
+      <Body className={cx(breadcrumbBodyStyle)}>
         <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
       </Body>
     </>

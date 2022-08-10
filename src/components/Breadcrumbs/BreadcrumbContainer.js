@@ -33,6 +33,7 @@ const StyledLink = styled(Link)`
       ${activeColor}
     }
   }
+  font-size: 13px;
 `;
 
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {

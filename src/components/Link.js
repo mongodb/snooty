@@ -74,15 +74,14 @@ const Link = ({ children, to, activeClassName, partiallyActive, showLinkArrow, .
         {decoration}
       </StyledGatsbyLink>
     );
-  } else {
-    const hideExternalIcon =
-      !anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/)) ? false : true;
-    return (
-      <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
-        {children}
-      </LGLink>
-    );
   }
+  const hideExternalIcon =
+    !anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/)) ? false : true;
+  return (
+    <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
+      {children}
+    </LGLink>
+  );
 };
 
 Link.propTypes = {
