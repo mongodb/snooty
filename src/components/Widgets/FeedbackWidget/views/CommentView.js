@@ -164,8 +164,7 @@ const InputErrorLabel = styled.label(
   ({ hasEmailError }) => css`
     display: ${hasEmailError ? '' : 'none'};
     color: red;
-    text-align: center;
-    margin-left: -35px;
+    text-align: right;
     font-size: 13px;
     margin-bottom: -5px;
   `
@@ -188,6 +187,7 @@ const StyledEmailInput = styled(TextInput)`
   border-color: #89989b !important;
   div > input {
     width: 202px;
+    padding-right: 60px;
     height: 30px;
     ::placeholder {
       font-size: 13px;

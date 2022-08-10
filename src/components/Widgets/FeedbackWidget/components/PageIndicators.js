@@ -17,8 +17,9 @@ const DotSpan = styled('span')`
   padding-right: 72px;
 `;
 
-const StyledBar = styled('div')`
+const StyledBar = styled('span')`
   text-align: center !important;
+  margin-bottom: 5px;
 `;
 
 const ProgressBar = () => {

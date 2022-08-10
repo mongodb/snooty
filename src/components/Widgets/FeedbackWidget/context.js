@@ -2,6 +2,7 @@ import React, { useState, useContext, createContext } from 'react';
 import { createNewFeedback, useStitchUser, addAttachment } from './stitch';
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
+//import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 
 const FeedbackContext = createContext();
 
@@ -52,8 +53,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     // Route the user to their "next steps"
     setProgress([true, true, true]);
     setView('submitted');
-    if (!selectedSentiment) return;
+    //const dbName = snootyEnv === 'production' ? 'quiz_prod' : 'quiz_dev';
 
+    if (!selectedSentiment) return;
     // Submit the full feedback document
     const segment = getSegmentUserId();
     const newFeedback = {
@@ -75,7 +77,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       category: selectedSentiment,
       ...test.feedback,
     };
-    createNewFeedback(newFeedback);
+
+    await createNewFeedback(newFeedback);
+
     setFeedback(newFeedback);
   }
 

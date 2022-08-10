@@ -81,7 +81,7 @@ const exitButtonStyle = (position, top, left) => css`
 
 const StyledArrow = styled('div')`
   margin-left: 12px !important;
-  margin-top: -20px;
+  margin-top: -25px;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {

@@ -23,6 +23,7 @@ const ResponsiveEmoji = styled('div')`
   display: inline-block;
   vertical-align: left;
   width: 30%;
+  margin-top: -5px;
 `;
 
 const StyledSentimentPath = styled('span')`

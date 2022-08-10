@@ -32,6 +32,7 @@ export const useStitchUser = () => {
 
 // Feedback Widget Functions
 export async function createNewFeedback({ page, user, ...rest }) {
+  //const { snootyEnv } = useSiteMetadata();
   const feedback = await app.callFunction('feedback_create', [{ page, user, ...rest }]);
   return feedback;
 }

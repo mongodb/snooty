@@ -17,8 +17,8 @@ const ViewHeader = styled('h3')`
   font-size: ${theme.fontSize.default};
   text-align: center;
   margin-left: -10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 8px;
+  margin-bottom: 32px;
   display: flex;
   align-items: flex-end;
 `;
@@ -38,8 +38,10 @@ const StyledSentimentOption = styled('h4')`
   align-self: stretch;
   text-align: left;
   color: ${palette.gray.dark1} !important;
-  margin: 5px -37px !important;
+  margin: 0px -37px !important;
   padding: 13px 32px !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
   cursor: pointer;
   :hover {
     background-color: rgba(0, 0, 0, 0.1);

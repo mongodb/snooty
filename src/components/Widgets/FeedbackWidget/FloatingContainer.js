@@ -33,7 +33,11 @@ const Floating = styled.div`
   position: fixed;
   bottom: 40px;
   right: 16px;
+<<<<<<< HEAD
   z-index: 20;
+=======
+  z-index: 10;
+>>>>>>> 221af2a (Minor Formatting Changes)
 `;
 
 const Card = styled(LeafygreenCard)`
@@ -46,7 +50,7 @@ const Card = styled(LeafygreenCard)`
 const CardHeader = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 3px;
+  margin-top: 5px;
   margin-right: 10px;
 `;
 const Content = styled.div`

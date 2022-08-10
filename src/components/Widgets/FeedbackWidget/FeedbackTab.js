@@ -21,7 +21,7 @@ const Container = styled(LeafygreenCard)`
   cursor: pointer;
   padding: 12px;
   position: fixed;
-  right: 15px;
+  right: 16px;
   user-select: none;
   z-index: 9;
   font-weight: 500;
