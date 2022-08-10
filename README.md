@@ -19,7 +19,7 @@ npm install --legacy-peer-deps
 
 ### .env file setup
 
-You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments. These variables let Snooty know where to look for your AST zip files, within DOP team's database.
+You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments. These variables let Snooty know where to look for your AST zip files, within DOP team's database. (You can also use [local AST files](#running-with-local-manifest-path)))
 
 #### `.env.development`
 
@@ -60,6 +60,7 @@ $ npm run build
 $ npm run serve
 ```
 
+
 To debug server side:
 
 ```shell
@@ -68,11 +69,11 @@ node --nolazy node_modules/.bin/gatsby develop --inspect-brk
 
 and connect a node debugger (ie. chrome developer tools)
 
-### Testing with local manifest path (local AST zip files)
+### Running with local manifest path
 
 Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for previously mentioned env variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`
 
-`.env.development`:
+`.env.development` and `.env.production`:
 
 ```
 GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
@@ -127,6 +128,12 @@ npm test -- path/to/my-test.js
 ```
 
 For more information, see the [Jest CLI Options](https://jestjs.io/docs/en/cli) documentation, or run `npm test -- --help`.
+
+### Updating test snapshots
+Snapshots may require updates when making changes to snooty components
+```shell
+npm test -- -u
+```
 
 ## Linting & Style
 
