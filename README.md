@@ -60,7 +60,6 @@ $ npm run build
 $ npm run serve
 ```
 
-
 To debug server side:
 
 ```shell
@@ -130,7 +129,9 @@ npm test -- path/to/my-test.js
 For more information, see the [Jest CLI Options](https://jestjs.io/docs/en/cli) documentation, or run `npm test -- --help`.
 
 ### Updating test snapshots
+
 Snapshots may require updates when making changes to snooty components
+
 ```shell
 npm test -- -u
 ```
