@@ -54,6 +54,7 @@ npm run develop
 ```
 
 To build and serve the site, run the following commands:
+The serve command generates the site at a [prefix](https://github.com/mongodb/snooty/blob/master/src/utils/generate-path-prefix.js) ie. `localhost:9000/<branch>/<docs-name>/<user>/<branch-name>/`
 
 ```shell
 $ npm run build
