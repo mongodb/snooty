@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { cx, css } from '@leafygreen-ui/emotion';
-import { isRelativeUrl } from '../utils/is-relative-url';
 import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
+import { isRelativeUrl } from '../utils/is-relative-url';
 
 /*
  * Note: This component is not suitable for internal page navigation:

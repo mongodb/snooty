@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
@@ -17,18 +17,18 @@ const Circle = styled('div')`
 const StyledStep = styled('div')`
   display: flex;
 
-  :last-of-type h3,
-  :last-of-type h4 {
-    margin-bottom: 0px;
-  }
-
   :first-of-type {
-    margin-top: 16px;
+    margin-top: ${theme.size.default};
   }
 
   h3,
   h4 {
     margin-top: 0px;
+  }
+
+  :last-of-type h3,
+  :last-of-type h4 {
+    margin-bottom: 0px;
   }
 `;
 
@@ -42,14 +42,14 @@ const Content = styled.div`
 
 const circleStyles = {
   connected: css`
-    background-color: ${uiColors.green.light3};
-    color: ${uiColors.green.dark2};
+    background-color: ${palette.green.light3};
+    color: ${palette.green.dark2};
     height: 34px;
     width: 34px;
   `,
   normal: css`
     background-color: #333;
-    color: ${uiColors.white};
+    color: ${palette.white};
     height: ${theme.size.medium};
     width: ${theme.size.medium};
   `,
@@ -62,7 +62,7 @@ const landingStepStyles = {
 
     :not(:last-child):after {
       content: '';
-      border-left: 2px dashed ${uiColors.gray.light2};
+      border-left: 2px dashed ${palette.gray.light2};
       bottom: 0;
       left: 16px;
       position: absolute;

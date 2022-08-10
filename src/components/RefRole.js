@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 import { normalizePath } from '../utils/normalize-path';
@@ -9,9 +9,9 @@ import { theme } from '../theme/docsTheme';
 
 // TODO: <untangle card-ref and refrole, this styling has the side effect of changing all refroles on cards into card-refs>
 const CardRef = styled(Link)`
-  background: ${uiColors.gray.light3};
+  background: ${palette.gray.light3};
   border-radius: ${theme.size.tiny};
-  border: 1px solid ${uiColors.gray.light1};
+  border: 1px solid ${palette.gray.light1};
   box-sizing: border-box;
   display: inline-block;
   font-size: ${theme.fontSize.small} !important;

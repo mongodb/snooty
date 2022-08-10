@@ -4,7 +4,7 @@ import Callout, { Variant } from '@leafygreen-ui/callout';
 import { cx, css } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
-
+import { theme } from '../theme/docsTheme';
 
 export const admonitionMap = {
   example: Variant.Example,
@@ -17,8 +17,8 @@ export const admonitionMap = {
 };
 
 const admonitionStyles = css`
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: ${theme.size.medium};
+  margin-bottom: ${theme.size.medium};
 
   p {
     color: unset;
