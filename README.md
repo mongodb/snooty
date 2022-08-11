@@ -32,7 +32,7 @@ GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
-The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that when the application is built it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`.
+The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. See pathing [here](https://github.com/mongodb/snooty/blob/master/src/utils/generate-path-prefix.js#L22)
 
 It should be set to `true` when working on snooty locally.
 
@@ -67,11 +67,11 @@ To debug server side:
 node --nolazy node_modules/.bin/gatsby develop --inspect-brk
 ```
 
-and connect a node debugger (ie. chrome developer tools)
+and connect a node debugger (ie. [chrome developer tools](https://nodejs.org/en/docs/guides/debugging-getting-started/#inspector-clients))
 
 ### Running with local manifest path
 
-Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for previously mentioned env variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`
+Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for previously mentioned env variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`. Local zip file is an output of the [parser](https://github.com/mongodb/snooty-parser)
 
 `.env.development` and `.env.production`:
 
