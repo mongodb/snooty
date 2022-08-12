@@ -49,9 +49,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setFeedback(updatedFeedback);
   }
 
-  async function submitAllFeedback({ comment = '', email = '' }) {
-    // const publishedBranches = useSnootyMetadata();
+  async function submitAllFeedback({ comment = '', email = '', snootyEnv, publishedBranches }) {
     // Route the user to their "next steps"
+
     setProgress([true, true, true]);
     setView('submitted');
     //const dbName = snootyEnv === 'production' ? 'quiz_prod' : 'quiz_dev';
@@ -65,7 +65,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
         slug: page.slug,
         url: page.url,
         docs_property: page.docs_property,
-        docs_version: null,
+        docs_version: publishedBranches ? publishedBranches.version.published : null,
       },
       user: {
         segment_id: segment.id,

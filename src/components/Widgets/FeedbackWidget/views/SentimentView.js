@@ -44,7 +44,7 @@ const StyledSentimentOption = styled('h4')`
   padding-bottom: 16px !important;
   cursor: pointer;
   :hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: ${palette.gray.light2};
   }
 `;
 

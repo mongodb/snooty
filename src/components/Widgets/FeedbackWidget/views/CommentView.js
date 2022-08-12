@@ -11,6 +11,7 @@ import { Layout, CommentHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
 import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
+import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
 import validateEmail from '../../../../utils/validate-email';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
@@ -44,6 +45,7 @@ export default function CommentView({ ...props }) {
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
+  const { snootyEnv, parserBranch } = useSiteMetadata();
 
   const borderColor = ({ hasEmailError }) => LeafyCSS`
    div > input {
@@ -85,7 +87,7 @@ export default function CommentView({ ...props }) {
       <EmailElement>
         <OptionalText hasEmailError={hasEmailError}>{'Optional'}</OptionalText>
         <ErrorDisplay hasEmailError={hasEmailError}>
-          <ErrorIcon></ErrorIcon>
+          <ErrorIcon src={withPrefix('assets/erroricon.svg')} />
         </ErrorDisplay>
       </EmailElement>
       <InputErrorLabel hasEmailError={hasEmailError} htmlFor="feedback-email">
@@ -99,6 +101,8 @@ export default function CommentView({ ...props }) {
     </Layout>
   );
 }
+
+const ErrorIcon = styled.img``;
 
 const ErrorDisplay = styled.span(
   ({ hasEmailError }) => css`
@@ -114,8 +118,11 @@ const OptionalText = styled.div(
     font-style: italic;
     font-weight: 300;
     font-size: 13px;
+    line-height: 20px;
+    margin-top: 3px;
   `
 );
+
 const EmailElement = styled.div`
   width: 44px;
   height: 20px;
@@ -123,19 +130,16 @@ const EmailElement = styled.div`
   font-style: italic;
   font-weight: 300;
   font-size: 13px;
-  line-height: 20px;
   /* identical to box height, or 167% */
-  color: #5d6c74;
-  margin-top: -25px !important;
+  margin-top: -28px;
   margin-left: 130px !important;
   margin-bottom: 5px;
   z-index: 10 !important;
-  background: #ffffff;
 `;
 
 const SubmitButtonMargin = ({ hasEmailError }) => LeafyCSS`
 margin-top: ${hasEmailError ? '5px' : '24px'} !important;
-transition: 0ms !important;
+transition: 0ms;
 `;
 
 const SubmitButton = styled(Button)`
@@ -164,7 +168,8 @@ const InputErrorLabel = styled.label(
   ({ hasEmailError }) => css`
     display: ${hasEmailError ? '' : 'none'};
     color: red;
-    text-align: right;
+    text-align: center;
+    margin-left: -40px;
     font-size: 13px;
     margin-bottom: -5px;
   `
