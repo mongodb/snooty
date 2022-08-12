@@ -38,16 +38,8 @@ const globalCSS = css`
     width: 0;
   }
 
-  .contains-headerlink {
-    scroll-margin-top: ${theme.header.navbarHeight};
-
-    @media ${theme.screenSize.upToLarge} {
-      scroll-margin-top: ${theme.header.navbarMobileHeight};
-    }
-
-    @media ${theme.screenSize.upToSmall} {
-      scroll-margin-top: calc(${theme.header.navbarMobileHeight} + ${theme.header.docsMobileMenuHeight});
-    }
+  .header-buffer {
+    scroll-margin-top: ${theme.header.scrollBuffer};
   }
 
   ${'' /* Originally from docs-tools navbar.css */}
