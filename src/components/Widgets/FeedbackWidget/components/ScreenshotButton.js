@@ -6,13 +6,12 @@ import Icon from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
 import { palette } from '@leafygreen-ui/palette';
 import Tooltip from './LeafygreenTooltip';
-// TODO: make sure to replace these icons with LG icons later
 import { CameraIcon, SpinnerIcon, CheckIcon } from '../icons';
 import useScreenshot from '../hooks/useScreenshot';
 import { isBrowser } from '../../../../utils/is-browser';
 
-// this will be the styling for the "instruction screen".
-const instructionScreenStyling = css`
+// styling for component selection instructions border
+const selectionStateStyling = css`
   position: fixed;
   top: 0;
   left: 0;
@@ -20,65 +19,66 @@ const instructionScreenStyling = css`
   height: 100%;
   display: block;
   border: #ffdd49 solid 10px;
-  z-index: 101;
+  z-index: 11;
   cursor: pointer;
 `;
 
 const baseStyle = (position, top, left, width, height) => css`
-  position: ${position}; /* Sit on top of the page content */
+  position: ${position};
   top: ${top}px;
   left: ${left}px;
   width: ${width ? width + 'px' : `100%`};
   height: ${height}px;
-  cursor: pointer; /* Add a pointer on hover */
+  cursor: pointer;
 `;
 
 const overlayElementStyle = (position, top, left, width, height) => css`
   ${baseStyle(position, top, left, width, height)};
-  background-color: rgba(0, 0, 0, 0.3); /* Black background with opacity */
-  display: block; /* Hidden by default */
-  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: block;
+  z-index: 10;
 `;
 
 const hightlightedElementStyle = (position, top, left, width, height, lineStyle) => css`
   ${baseStyle(position, top, left, width, height)};
   outline: #ffdd49 ${lineStyle} 10px;
   outline-offset: 10px;
-  z-index: 102;
   float: left;
-  display: block; /* Hidden by default */
-`;
-
-const ctaElementSelection = css`
-  cursor: pointer;
   display: block;
-  width: 1000px;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  margin-left: -500px;
-  z-index: 500;
+  z-index: 13;
 `;
 
-const xbuttonstyle = css`
-  align-self: center;
+const xButtonStyle = (position, top, right) => css`
+  position: ${position};
+  top: ${Math.max(top - 5, 15)}px;
+  left: ${Math.min(right - 25, window.innerWidth - 45)}px;
+  display: block;
   color: #ffdd49;
   background-color: white;
   border-radius: 80%;
-  position: absolute;
-  right: -34px;
-  top: -34px;
-  z-index: 102;
+  cursor: pointer;
+  z-index: 14;
+`;
+
+const ctaElementSelection = css`
+  position: fixed;
+  display: block;
+  width: 1000px;
+  top: 0;
+  left: 50%;
+  margin-left: -500px;
+  cursor: pointer;
+  z-index: 15;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
-  const { screenshot, loading, takeScreenshot } = useScreenshot();
+  const [isHovered, setIsHovered] = useState(false);
+  const { screenshot, loading } = useScreenshot();
   const label = screenshot ? 'Screenshot Saved' : loading ? 'Taking Screenshot' : 'Take a Screenshot';
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [currDOMState, setCurrDOMState] = useState(null);
 
-  // TODO: change to boolean later
+  // border around highlighted element
   const [isDOMElementClicked, setIsDOMElementClicked] = useState('dashed');
   const domElementClickedRef = useRef('dashed');
 
@@ -93,15 +93,10 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const currDOMPosition = useRef('absolute');
   const screenshotButtonClicked = useRef(false);
 
-  // orientation of X button
-  // const cancelButtonOrientation = useRef('right');
-
-  // left, top, right, bottom
+  // state representing the left, top, right, bottom coordinates of the current selected element
   const [currElementBoundingBox, setCurrElementBoundingBox] = useState([0, 0, 0, 0]);
   const [currDOMWidthState, setCurrDOMWidthState] = useState(0);
   const [currDOMHeightState, setCurrDOMHeightState] = useState(0);
-
-  const labelNew = screenshot ? 'New screenshot Saved' : loading ? 'Taking new screenshot' : 'Take a new screenshot';
 
   useEffect(() => {
     setCurrDOMState(currDOM.current);
@@ -131,11 +126,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     currDOMTop.current = currDOMRect.top;
     currDOMBottom.current = currDOMRect.bottom;
 
-    // console.log('currDOMTop.current: ' +  currDOMTop.current);
-    // console.log('currDOMLeft.current: ' +  currDOMLeft.current);
-    // console.log('currDOMBottom.current: ' +  currDOMBottom.current);
-    // console.log('currDOMRight.current: ' +  currDOMRight.current);
-
     // adjust for scrolling if element selected is not part of the side or top nav
     if (currDOMPosition.current === 'absolute') {
       currDOMRight.current += window.scrollX;
@@ -145,7 +135,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     }
   }, []);
 
-  // event listener for checking whether anything is being hovered
+  // event listener to check whether elements are being hovered over
   const handleElementHighlight = ({ pageX, pageY }) => {
     // current position of mouse
     const pos = `(${pageX}, ${pageY})`;
@@ -180,7 +170,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         }
       }
 
-      // hovered element is different from current one
+      // hovered element is different from current element
       if (!!domElement && currDOM.current !== domElement) {
         currDOM.current = domElement;
         setCurrDOMState(domElement);
@@ -259,8 +249,8 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   return (
     <>
-      <Portal>
-        {isScreenshotButtonClicked && (
+      {isScreenshotButtonClicked && (
+        <Portal>
           <>
             <img
               className="instructionoverlay"
@@ -269,77 +259,81 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
               css={ctaElementSelection}
               onClick={handleInstructionClick}
             />
-            <div className="instructionoverlay" css={instructionScreenStyling} />
+            <div className="instructionoverlay" css={selectionStateStyling} />
           </>
-        )}
-        {isScreenshotButtonClicked && !currDOM.current && (
-          <div
-            className="overlay"
-            css={overlayElementStyle('fixed', 0, 0, document.body.scrollWidth, document.body.scrollHeight)}
-          />
-        )}
-        {isScreenshotButtonClicked && !!currDOM.current && (
-          <div id="groupAllElementsForScreenshot">
+          {!currDOM.current && (
             <div
               className="overlay"
-              onClick={handleDOMElementClick}
-              role="button"
-              css={hightlightedElementStyle(
-                currDOMPosition.current,
-                currElementBoundingBox[1],
-                currElementBoundingBox[0],
-                currDOMWidthState,
-                currDOMHeightState,
-                isDOMElementClicked
-              )}
-            >
+              css={overlayElementStyle('fixed', 0, 0, document.body.scrollWidth, document.body.scrollHeight)}
+            />
+          )}
+          {!!currDOM.current && (
+            <div id="elementSelectorOverlays">
+              <div
+                className="overlay"
+                onClick={handleDOMElementClick}
+                role="button"
+                css={hightlightedElementStyle(
+                  currDOMPosition.current,
+                  currElementBoundingBox[1],
+                  currElementBoundingBox[0],
+                  currDOMWidthState,
+                  currDOMHeightState,
+                  isDOMElementClicked
+                )}
+              />
               {domElementClickedRef.current === 'solid' && (
-                <Icon glyph="XWithCircle" css={xbuttonstyle} size={30} onClick={cancelButtonClick} />
+                <Icon
+                  glyph="XWithCircle"
+                  css={xButtonStyle(currDOMPosition.current, currElementBoundingBox[1], currElementBoundingBox[2])}
+                  size={30}
+                  onClick={cancelButtonClick}
+                />
               )}
+              <div
+                className="overlay"
+                css={overlayElementStyle(
+                  currDOMPosition.current,
+                  0,
+                  0,
+                  currElementBoundingBox[0] - 15,
+                  document.body.scrollHeight
+                )}
+              />
+              <div
+                className="overlay"
+                css={overlayElementStyle(
+                  currDOMPosition.current,
+                  0,
+                  currElementBoundingBox[0] - 15,
+                  currDOMWidthState + 30,
+                  currElementBoundingBox[1] - 15
+                )}
+              />
+              <div
+                className="overlay"
+                css={overlayElementStyle(
+                  currDOMPosition.current,
+                  currElementBoundingBox[3] + 15,
+                  currElementBoundingBox[0] - 15,
+                  currDOMWidth.current + 30,
+                  document.body.scrollHeight - currElementBoundingBox[3] - 15
+                )}
+              />
+              <div
+                className="overlay"
+                css={overlayElementStyle(
+                  currDOMPosition.current,
+                  0,
+                  currElementBoundingBox[0] + currDOMWidth.current + 15,
+                  document.body.scrollWidth - currElementBoundingBox[2],
+                  document.body.scrollHeight
+                )}
+              />
             </div>
-            <div
-              className="overlay"
-              css={overlayElementStyle(
-                currDOMPosition.current,
-                0,
-                0,
-                currElementBoundingBox[0] - 15,
-                document.body.scrollHeight
-              )}
-            />
-            <div
-              className="overlay"
-              css={overlayElementStyle(
-                currDOMPosition.current,
-                0,
-                currElementBoundingBox[0] - 15,
-                currDOMWidthState + 30,
-                currElementBoundingBox[1] - 15
-              )}
-            />
-            <div
-              className="overlay"
-              css={overlayElementStyle(
-                currDOMPosition.current,
-                currElementBoundingBox[3] + 15,
-                currElementBoundingBox[0] - 15,
-                currDOMWidth.current + 30,
-                document.body.scrollHeight - currElementBoundingBox[3] - 15
-              )}
-            />
-            <div
-              className="overlay"
-              css={overlayElementStyle(
-                currDOMPosition.current,
-                0,
-                currElementBoundingBox[0] + currDOMWidth.current + 15,
-                document.body.scrollWidth - currElementBoundingBox[2],
-                document.body.scrollHeight
-              )}
-            />
-          </div>
-        )}
-      </Portal>
+          )}
+        </Portal>
+      )}
 
       <div id="screenshot-button" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
         <Tooltip
@@ -348,7 +342,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
           triggerEvent="hover"
           open={isHovered}
           trigger={
-            <Button variant="default" label={labelNew} onClick={takeNewScreenshot} {...props}>
+            <Button variant="default" label={label} onClick={takeNewScreenshot} {...props}>
               {screenshot ? (
                 <CheckIcon style={{ color: palette.green.base }} />
               ) : loading ? (
@@ -361,7 +355,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         >
           {label}
         </Tooltip>
-        <Button onClick={takeScreenshot}>Download</Button>
       </div>
     </>
   );

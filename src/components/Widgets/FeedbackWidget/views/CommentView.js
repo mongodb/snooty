@@ -1,13 +1,13 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-
 import Button from '@leafygreen-ui/button';
+import { uiColors } from '@leafygreen-ui/palette';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
-import { uiColors } from '@leafygreen-ui/palette';
+// import useScreenshot from '../hooks/useScreenshot';
+import { isBrowser } from '../../../../utils/is-browser';
 import validateEmail from '../../../../utils/validate-email';
-// import ScreenshotButton from '../components/ScreenshotButton';
 import Loadable from '@loadable/component';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
@@ -24,6 +24,7 @@ export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
+  // const { takeScreenshot } = useScreenshot();
 
   const [comment, setComment] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -31,7 +32,8 @@ export default function CommentView({ ...props }) {
   const isValidEmail = useValidation(email, validateEmail);
 
   const handleSubmit = async () => {
-    if (isValidEmail) {
+    if (isValidEmail && isBrowser) {
+      // await takeScreenshot();
       await submitComment({ comment, email });
       await submitAllFeedback();
     } else {

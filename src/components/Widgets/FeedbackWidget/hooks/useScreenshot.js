@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useViewport from '../../../../hooks/useViewport';
 import { isBrowser } from '../../../../utils/is-browser';
 import { useFeedbackState } from '../context';
@@ -39,12 +39,12 @@ async function takeFeedbackScreenshot() {
 
 export default function useScreenshot() {
   const { submitScreenshot } = useFeedbackState();
-  const [screenshot, setScreenshot] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
+  const [screenshot, setScreenshot] = useState(null);
+  const [loading, setLoading] = useState(false);
   const viewport = useViewport();
 
   const takeScreenshot = async () => {
-    if (!screenshot && !loading) {
+    if (!screenshot && !loading && isBrowser) {
       setLoading(true);
       const dataUri = await takeFeedbackScreenshot();
       setScreenshot({
@@ -52,9 +52,9 @@ export default function useScreenshot() {
         viewport,
       });
 
-      // download for testing purposes
+      // TODO: remove this after testing, this downloads the image for to preview screenshot
       const link = document.createElement('a');
-      link.download = 'myimage.jpeg';
+      link.download = 'test.png';
       link.href = dataUri;
       link.click();
 
@@ -63,8 +63,8 @@ export default function useScreenshot() {
   };
 
   // Only save the screenshot one time
-  const savedScreenshot = React.useRef(null);
-  React.useEffect(() => {
+  const savedScreenshot = useRef(null);
+  useEffect(() => {
     const isAlreadySaved = screenshot && savedScreenshot.current === screenshot;
     if (screenshot && !isAlreadySaved) {
       savedScreenshot.current = screenshot;
