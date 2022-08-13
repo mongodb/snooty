@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -22,11 +23,19 @@ const instructionsBorderStyling = css`
   border: #ffdd49 solid ${HIGHLIGHT_BORDER_SIZE}px;
   z-index: 11;
 `;
+=======
+import React from 'react';
+import styled from '@emotion/styled';
+import useScreenshot from '../hooks/useScreenshot';
+import { withPrefix } from 'gatsby';
+import Button from '@leafygreen-ui/button';
+>>>>>>> 250f0e2 (Changed Screenshot icon to Button)
 
 //styling for entire screenshot icon selector
 const ScreenshotSelect = styled(Button)`
   height: 28px;
   z-index: 5;
+<<<<<<< HEAD
   width: 38px !important;
   align-text: center;
   margin-left: -8px;
@@ -77,11 +86,18 @@ const exitButtonStyle = (position, top, left) => css`
   border-radius: 80%;
   cursor: pointer;
   z-index: 12;
+=======
+  margin-top: 24px !important;
+  width: 44px !important;
+  align-text: center;
+  padding-left: 5px !important;
+  margin-left: -8px;
+>>>>>>> 250f0e2 (Changed Screenshot icon to Button)
 `;
 
-const StyledArrow = styled('div')`
-  margin-left: 12px !important;
-  margin-top: -25px;
+const StyledArrow = styled('span')`
+  margin-left: -24px !important; 
+  margin-top: 4px; !important;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {

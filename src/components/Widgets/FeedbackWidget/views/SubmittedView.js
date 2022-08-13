@@ -18,7 +18,7 @@ export default function SubmittedView() {
       </StyledHeading>
       <Subheading>Your input improves MongoDB's Documentation.</Subheading>
       <Subheading>
-        <div>Looking for more resources? </div>
+        <span>Looking for more resources? </span>
         <a href="https://developer.mongodb.com/community/forums/">MongoDB Community </a>
         <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
         <Subheading></Subheading>

@@ -4,7 +4,7 @@ import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import TextArea from '@leafygreen-ui/text-area';
 import TextInput from '@leafygreen-ui/text-input';
-import Button from '@leafygreen-ui/button';
+import button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
 import { Layout, CommentHeader, Footer } from '../components/view-components';
@@ -45,7 +45,7 @@ export default function CommentView({ ...props }) {
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
-  const { snootyEnv, parserBranch } = useSiteMetadata();
+  const { snootyEnv, publishedBranch } = useSiteMetadata();
 
   const borderColor = ({ hasEmailError }) => LeafyCSS`
    div > input {
@@ -74,8 +74,8 @@ export default function CommentView({ ...props }) {
         value={comment}
         rows={4}
         onChange={(e) => setComment(e.target.value)}
+        aria-labelledby="Text box for user comments"
       />
-      <ScreenshotButton />
       <StyledEmailInput
         id="feedback-email"
         placeholder="Email Address"
@@ -83,6 +83,8 @@ export default function CommentView({ ...props }) {
         onChange={(e) => setEmail(e.target.value)}
         type={'email'}
         className={cx(borderColor({ hasEmailError }))}
+        aria-labelledby="text input for user emails"
+        errorMessage="LG error message doesn't render, this is a placeholder"
       />
       <EmailElement>
         <OptionalText hasEmailError={hasEmailError}>{'Optional'}</OptionalText>
@@ -97,6 +99,7 @@ export default function CommentView({ ...props }) {
         <SubmitButton onClick={() => handleSubmit()} className={cx(SubmitButtonMargin({ hasEmailError }))}>
           {'Send'}
         </SubmitButton>
+        <ScreenshotButton />
       </Footer>
     </Layout>
   );
@@ -138,30 +141,32 @@ const EmailElement = styled.div`
 `;
 
 const SubmitButtonMargin = ({ hasEmailError }) => LeafyCSS`
-margin-top: ${hasEmailError ? '5px' : '24px'} !important;
+margin-top: ${hasEmailError ? '2px' : '24px'} !important;
 transition: 0ms;
 `;
-
-const SubmitButton = styled(Button)`
-  margin-right: -8px !important;
-  height: 28px !important;
-  width: 55px;
-  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
-  :focus {
-    box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
-  }
-  text-align: center;
-  font-size: ${theme.fontSize.default};
-  font-weight: 399;
+/** 
+font-weight: 399;
   font-family: 'Akzidenz-Grotesk Std';
   font-style: normal;
 
   background: #f9fbfa;
+  text-align: center;
+  font-size: ${theme.fontSize.default};
   justify-content: center;
   align-items: center;
   padding: 1px 12px 3px;
+  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
   gap: 6px;
   border-radius: 4px;
+
+  */
+const SubmitButton = styled(button)`
+  margin-right: -8px !important;
+  height: 28px !important;
+  width: 55px;
+  :focus {
+    box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
+  }
 `;
 
 const InputErrorLabel = styled.label(

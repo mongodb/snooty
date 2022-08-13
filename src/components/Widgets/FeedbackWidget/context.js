@@ -76,6 +76,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       viewport: getViewport(),
       comment,
       category: selectedSentiment,
+      snootyEnv,
       ...test.feedback,
     };
 
