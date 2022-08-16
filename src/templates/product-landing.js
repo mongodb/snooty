@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { useSiteMetadata } from '../hooks/use-site-metadata.js';
 import { theme } from '../theme/docsTheme.js';
 
@@ -70,7 +70,7 @@ const Wrapper = styled('main')`
         isGuides &&
         `
         @media ${theme.screenSize.mediumAndUp} {
-          color: ${uiColors.white};
+          color: ${palette.white};
         }
       `}
     }
@@ -111,13 +111,15 @@ const Wrapper = styled('main')`
     > .introduction {
       grid-column: 2;
       grid-row: 2;
-      ${({ isGuides }) =>
-        isGuides &&
-        `
-        @media ${theme.screenSize.mediumAndUp} {
-          color: ${uiColors.white};
-        }
-      `}
+      p {
+        ${({ isGuides }) =>
+          isGuides &&
+          `
+            @media ${theme.screenSize.mediumAndUp} {
+                color: ${palette.white};
+            }
+        `}
+      }
     }
 
     > .chapters {
