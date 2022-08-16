@@ -21,6 +21,7 @@ const StyledStep = styled('div')`
     margin-top: ${theme.size.default};
   }
 
+  h2,
   h3,
   h4 {
     margin-top: 0px;

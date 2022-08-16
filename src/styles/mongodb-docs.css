@@ -1057,10 +1057,10 @@ body {
   padding: 0;
   color: #21313C;
 }
-a,
+/* a,
 a > code {
   color: #016BF8;
-}
+} */
 hr {
   border: 1px solid #b1b4b6;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LeafyButton from '@leafygreen-ui/button';
 import ComponentFactory from './ComponentFactory';
-import Link from './Link';
 
 const Button = ({
   nodeData: {
@@ -12,7 +11,7 @@ const Button = ({
   ...rest
 }) => {
   return (
-    <LeafyButton className="button" as={Link} hideExternalIcon={true} variant="primary" to={uri}>
+    <LeafyButton className="button" as="a" hideExternalIcon={true} variant="primary" to={uri}>
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}

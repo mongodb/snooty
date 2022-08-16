@@ -10,14 +10,13 @@ import { TabContext } from './Tabs/tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
-import { H3, Subtitle, Body } from '@leafygreen-ui/typography';
+import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
-const StyledH3 = styled(H3)`
+const StyledH2 = styled(H2)`
   margin-top: 16px;
   margin-bottom: 24px;
-  font-weight: 500;
 `;
 
 const headingStyles = css`
@@ -27,14 +26,13 @@ const headingStyles = css`
 
 const determineHeading = (sectionDepth) => {
   if (sectionDepth === 1) {
-    return StyledH3;
+    return StyledH2;
   } else if (sectionDepth === 2) {
     return H3;
   } else if (sectionDepth === 3) {
     return Subtitle;
-  } else {
-    return Body; // use weight=medium prop to style appropriately
   }
+  return Body; // use weight=medium prop to style appropriately
 };
 
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
@@ -61,7 +59,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        <HeadingTag className={cx(headingStyles)} as={asHeading} weight="medium">
+        <HeadingTag className={cx(headingStyles, 'contains-headerlink')} as={asHeading} weight="medium">
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
@@ -100,6 +98,7 @@ Heading.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   page: PropTypes.object,
+  isProductLanding: PropTypes.bool,
 };
 
 export default Heading;

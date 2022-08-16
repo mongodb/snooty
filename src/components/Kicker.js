@@ -7,11 +7,10 @@ import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
 const StyledKicker = styled(Overline)`
+  color: ${palette.gray.base};
   grid-column: 2;
-  font-size: ${theme.fontSize.small};
-  color: ${palette.gray.dark1};
-  padding-top: 80px;
-  padding-bottom: ${theme.size.small};
+  margin-top: 48px;
+  margin-bottom: 0px;
   @media ${theme.screenSize.upToSmall} {
     padding-top: 56px;
   }

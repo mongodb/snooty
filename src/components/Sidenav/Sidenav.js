@@ -61,7 +61,9 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   a,
   p {
     letter-spacing: unset;
-    line-height: 16px;
+    color: unset;
+    font-size: ${theme.fontSize.small};
+    line-height: 20px;
   },
   
   // avoid GatsbyLink underline styling being applied to side nav

@@ -33,10 +33,9 @@ const stopPropagation = function (e) {
 const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow }) => {
   // Render intersphinx target links
   const CurrRefRole = cardRef ? CardRef : Link;
-  const display = showLinkArrow ? true : false;
   if (url) {
     return (
-      <CurrRefRole to={url} showLinkArrow={display}>
+      <CurrRefRole to={url} showLinkArrow={showLinkArrow}>
         {children.map((node, i) => (
           <ComponentFactory key={i} nodeData={node} />
         ))}

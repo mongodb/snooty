@@ -29,29 +29,8 @@ const hiddenTabsStyling = css`
 
 const landingTabsStyling = css`
   & > div:first-of-type {
-    margin-top: ${theme.size.large};
-    margin-bottom: ${theme.size.xlarge};
-
-    button {
-      display: block;
-      flex-grow: 1;
-    }
-
-    @media ${theme.screenSize.upToLarge} {
-      button {
-        overflow: initial;
-        max-width: initial;
-        text-overflow: initial;
-      }
-    }
-
-    @media ${theme.screenSize.upToSmall} {
-      margin-bottom: 40px;
-    }
-  }
-
-  div[role='tabpanel'] {
-    padding: 0 ${theme.size.default};
+    margin-top: ${theme.size.medium};
+    margin-bottom: ${theme.size.medium};
   }
 `;
 
@@ -69,7 +48,7 @@ const landingTabStyling = css`
   img {
     border-radius: ${theme.size.small};
     grid-column: 2;
-    margin: auto;
+    margin-top: 0px;
     display: block;
   }
 

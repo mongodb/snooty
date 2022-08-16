@@ -21,9 +21,7 @@ const LGlinkStyling = css`
 const StyledGatsbyLink = styled(GatsbyLink)`
   display: inline-flex;
   align-items: center;
-  text-decoration: none;
   cursor: pointer;
-  line-height: 13px;
   &:focus {
     outline: none;
   }
@@ -31,6 +29,7 @@ const StyledGatsbyLink = styled(GatsbyLink)`
   text-decoration: none !important;
   line-height: 13px;
   outline: none;
+  color: ${palette.blue.base};
 
   &::after {
     content: '';
