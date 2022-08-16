@@ -39,8 +39,7 @@ const FloatingContainer = styled.div`
 const Card = styled(LeafygreenCard)`
   /* Card Size */
   width: 234px;
-  min-height: 320px;
-  max-height: 320px;
+  height: 340px;
   align-items: center;
 `;
 const CardHeader = styled.div`

@@ -49,7 +49,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setFeedback(updatedFeedback);
   }
 
-  async function submitAllFeedback({ comment = '', email = '', snootyEnv, publishedBranches }) {
+  async function submitAllFeedback({ comment = '', email = '', snootyEnv }) {
     // Route the user to their "next steps"
 
     setProgress([true, true, true]);
@@ -65,7 +65,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
         slug: page.slug,
         url: page.url,
         docs_property: page.docs_property,
-        docs_version: publishedBranches ? publishedBranches.version.published : null,
       },
       user: {
         segment_id: segment.id,

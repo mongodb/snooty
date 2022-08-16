@@ -45,13 +45,8 @@ export default function CommentView({ ...props }) {
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
-  const { snootyEnv, publishedBranch } = useSiteMetadata();
+  const { snootyEnv } = useSiteMetadata();
 
-  const borderColor = ({ hasEmailError }) => LeafyCSS`
-   div > input {
-     border-color: ${hasEmailError ? palette.red.base : palette.gray.base} !important;
-  }
-  `;
   const handleSubmit = async () => {
     if (isValidEmail) {
       if (screenshotTaken) {
@@ -82,84 +77,24 @@ export default function CommentView({ ...props }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         type={'email'}
-        className={cx(borderColor({ hasEmailError }))}
         aria-labelledby="text input for user emails"
-        errorMessage="LG error message doesn't render, this is a placeholder"
+        errorMessage="Please enter a valid email"
+        state={hasEmailError ? 'error' : 'none'}
+        optional="true"
+        className={cx(FooterMargin({ hasEmailError }))}
       />
-      <EmailElement>
-        <OptionalText hasEmailError={hasEmailError}>{'Optional'}</OptionalText>
-        <ErrorDisplay hasEmailError={hasEmailError}>
-          <ErrorIcon src={withPrefix('assets/erroricon.svg')} />
-        </ErrorDisplay>
-      </EmailElement>
-      <InputErrorLabel hasEmailError={hasEmailError} htmlFor="feedback-email">
-        Please enter a valid email.
-      </InputErrorLabel>
       <Footer>
-        <SubmitButton onClick={() => handleSubmit()} className={cx(SubmitButtonMargin({ hasEmailError }))}>
-          {'Send'}
-        </SubmitButton>
+        <SubmitButton onClick={() => handleSubmit()}>{'Send'}</SubmitButton>
         <ScreenshotButton />
       </Footer>
     </Layout>
   );
 }
 
-const ErrorIcon = styled.img``;
-
-const ErrorDisplay = styled.span(
-  ({ hasEmailError }) => css`
-    display: ${hasEmailError ? '' : 'none'};
-    margin-left: 30px;
-  `
-);
-
-const OptionalText = styled.div(
-  ({ hasEmailError }) => css`
-    display: ${hasEmailError ? 'none' : ''};
-    font-family: 'Akzidenz-Grotesk Std';
-    font-style: italic;
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 20px;
-    margin-top: 3px;
-  `
-);
-
-const EmailElement = styled.div`
-  width: 44px;
-  height: 20px;
-  font-family: 'Akzidenz-Grotesk Std';
-  font-style: italic;
-  font-weight: 300;
-  font-size: 13px;
-  /* identical to box height, or 167% */
-  margin-top: -28px;
-  margin-left: 130px !important;
-  margin-bottom: 5px;
-  z-index: 10 !important;
+const FooterMargin = ({ hasEmailError }) => LeafyCSS`
+  margin-bottom: ${hasEmailError ? '0px' : '32px'} !important;
 `;
 
-const SubmitButtonMargin = ({ hasEmailError }) => LeafyCSS`
-margin-top: ${hasEmailError ? '2px' : '24px'} !important;
-transition: 0ms;
-`;
-/** 
-font-weight: 399;
-  font-family: 'Akzidenz-Grotesk Std';
-  font-style: normal;
-
-  background: #f9fbfa;
-  text-align: center;
-  font-size: ${theme.fontSize.default};
-  justify-content: center;
-  align-items: center;
-  padding: 1px 12px 3px;
-  box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
-  gap: 6px;
-  border-radius: 4px;
-
-  */
 const SubmitButton = styled(button)`
   margin-right: -8px !important;
   height: 28px !important;
@@ -168,17 +103,6 @@ const SubmitButton = styled(button)`
     box-shadow: 0px 1px 2px rgba(6, 22, 33, 0.3);
   }
 `;
-
-const InputErrorLabel = styled.label(
-  ({ hasEmailError }) => css`
-    display: ${hasEmailError ? '' : 'none'};
-    color: red;
-    text-align: center;
-    margin-left: -40px;
-    font-size: 13px;
-    margin-bottom: -5px;
-  `
-);
 
 const StyledCommentInput = styled(TextArea)`
   width: 202px;
@@ -194,15 +118,23 @@ const StyledCommentInput = styled(TextArea)`
 
 const StyledEmailInput = styled(TextInput)`
   margin-top: 8px;
+  font-size: 13px;
   border-color: #89989b !important;
+  ::optional {
+    font-size: 300px;
+  }
   div > input {
     width: 202px;
     padding-right: 60px;
     height: 30px;
     ::placeholder {
-      font-size: 13px;
       color: #5c6c75;
       height: 40px;
+      }
     }
+  div > div {
+    font-family: 'Euclid Circular A' !important;
+    margin-bottom: -5px;
+  }
   }
 `;

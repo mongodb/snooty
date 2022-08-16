@@ -530,7 +530,7 @@ th {
     url(//media.mongodb.org/fonts/icomoon.ttf?qcwgdc) format('truetype'),
     url(//media.mongodb.org/fonts/icomoon.woff?qcwgdc) format('woff'),
     url(//media.mongodb.org/fonts/icomoon.svg?qcwgdc#icomoon) format('svg');
-  font-weight: 400;
+  font-weight: 800;
   font-style: normal;
 }
 [class*='icon-'] {

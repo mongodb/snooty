@@ -17,7 +17,7 @@ const ViewHeader = styled('h3')`
   font-size: ${theme.fontSize.default};
   text-align: center;
   margin-left: -10px;
-  margin-top: 8px;
+  margin-top: 24px;
   margin-bottom: 32px;
   display: flex;
   align-items: flex-end;
@@ -39,6 +39,7 @@ const StyledSentimentOption = styled('h4')`
   text-align: left;
   color: ${palette.gray.dark1} !important;
   margin: 0px -37px !important;
+  margin-bottom: 8px;
   padding: 13px 32px !important;
   padding-top: 16px !important;
   padding-bottom: 16px !important;
