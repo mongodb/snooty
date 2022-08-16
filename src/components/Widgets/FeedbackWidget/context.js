@@ -2,7 +2,6 @@ import React, { useState, useContext, createContext } from 'react';
 import { createNewFeedback, useStitchUser, addAttachment } from './stitch';
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
-import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 
 const FeedbackContext = createContext();
 

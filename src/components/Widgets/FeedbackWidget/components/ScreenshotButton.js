@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -23,24 +22,11 @@ const instructionsBorderStyling = css`
   border: #ffdd49 solid ${HIGHLIGHT_BORDER_SIZE}px;
   z-index: 11;
 `;
-=======
-import React from 'react';
-import styled from '@emotion/styled';
-import useScreenshot from '../hooks/useScreenshot';
-import { withPrefix } from 'gatsby';
-import Button from '@leafygreen-ui/button';
-<<<<<<< HEAD
->>>>>>> 250f0e2 (Changed Screenshot icon to Button)
-=======
-import Tooltip from '@leafygreen-ui/tooltip';
->>>>>>> 092ba33 (Styling and button updates)
 
 //styling for entire screenshot icon selector
 const ScreenshotSelect = styled(Button)`
   height: 28px;
   z-index: 5;
-<<<<<<< HEAD
-<<<<<<< HEAD
   width: 38px !important;
   align-text: center;
   margin-left: -8px;
@@ -91,21 +77,6 @@ const exitButtonStyle = (position, top, left) => css`
   border-radius: 80%;
   cursor: pointer;
   z-index: 12;
-=======
-  margin-top: 24px !important;
-  width: 44px !important;
-=======
-  width: 38px !important;
->>>>>>> 092ba33 (Styling and button updates)
-  align-text: center;
-  margin-left: -8px;
->>>>>>> 250f0e2 (Changed Screenshot icon to Button)
-`;
-
-<<<<<<< HEAD
-const StyledArrow = styled('span')`
-  margin-left: -24px !important; 
-  margin-top: 4px; !important;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
@@ -259,12 +230,8 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // lock the page when element is selected
   useNoScroll(!!currElem.current && domElementClickedRef.current === 'solid');
-=======
-const ScreenshotIcon = styled.img``;
->>>>>>> 092ba33 (Styling and button updates)
 
   return (
-<<<<<<< HEAD
     <>
       {isScreenshotButtonClicked && (
         <Portal>
@@ -368,25 +335,6 @@ const ScreenshotIcon = styled.img``;
         {label}
       </Tooltip>
     </>
-=======
-    <Tooltip
-      align="top"
-      justify="middle"
-      triggerEvent="hover"
-      open="true"
-      enabled="true"
-      darkMode={false}
-      trigger={
-        <ScreenshotSelect id="screenshot-button" onClick={takeScreenshot}>
-          <ScreenshotIcon src={withPrefix('assets/screenshoticon.svg')} />
-        </ScreenshotSelect>
-      }
-      popoverZIndex={10}
-    >
-      {' '}
-      Attach a screenshot
-    </Tooltip>
->>>>>>> 092ba33 (Styling and button updates)
   );
 };
 

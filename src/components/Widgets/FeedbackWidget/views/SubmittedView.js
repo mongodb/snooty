@@ -21,7 +21,6 @@ export default function SubmittedView() {
         <span>Looking for more resources? </span>
         <a href="https://developer.mongodb.com/community/forums/">MongoDB Community </a>
         <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
-        <Subheading></Subheading>
         <SupportCase selectedSentiment={selectedSentiment}>
           {'Have a support contract?'}
           <a href="https://support.mongodb.com/">Create a Support Case</a>
@@ -35,11 +34,12 @@ export default function SubmittedView() {
 const SupportCase = styled.div(
   ({ selectedSentiment }) => css`
     display: ${selectedSentiment === 'Negative' ? '' : 'none'};
+    margin-top: 16px;
   `
 );
 
 const StyledHeading = styled.div(css`
   margin-top: 8px !important;
-  margin-bottom 16px !important;
+  margin-bottom: 16px !important;
   margin-left: -5px;
 `);
