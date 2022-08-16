@@ -5,7 +5,7 @@ import Button from '@leafygreen-ui/button';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
-// import useScreenshot from '../hooks/useScreenshot';
+import useScreenshot from '../hooks/useScreenshot';
 import { isBrowser } from '../../../../utils/is-browser';
 import validateEmail from '../../../../utils/validate-email';
 import Loadable from '@loadable/component';
@@ -24,7 +24,7 @@ export default function CommentView({ ...props }) {
   const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
-  // const { takeScreenshot } = useScreenshot();
+  const { takeScreenshot } = useScreenshot();
 
   const [comment, setComment] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -33,7 +33,7 @@ export default function CommentView({ ...props }) {
 
   const handleSubmit = async () => {
     if (isValidEmail && isBrowser) {
-      // await takeScreenshot();
+      await takeScreenshot();
       await submitComment({ comment, email });
       await submitAllFeedback();
     } else {

@@ -31,7 +31,8 @@ async function takeFeedbackScreenshot() {
         'feedback-form', // Don't include the feedback form
         'feedback-tooltip', // Don't include any button/star tooltips
         'navbar-brand', // Don't include the MongoDB logo (temporary for CORS)
-        'instructionoverlay', // Don't include instruction overlay
+        'overlayInstructions', // Don't include instruction overlay
+        'xButton', // Don't include the X button
       ],
     }));
   return dataUri;

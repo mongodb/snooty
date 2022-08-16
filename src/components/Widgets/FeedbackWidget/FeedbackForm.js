@@ -1,22 +1,19 @@
 import React from 'react';
-
+import { css } from '@emotion/react';
+import Loadable from '@loadable/component';
 import useScreenSize from '../../../hooks/useScreenSize';
 import { useFeedbackState } from './context';
-
 import FeedbackFullScreen from './FeedbackFullScreen';
 import FeedbackCard from './FeedbackCard';
 import FeedbackModal from './FeedbackModal';
-
 import RatingView from './views/RatingView';
 import QualifiersView from './views/QualifiersView';
 import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
-import CommentView from './views/CommentView';
-
-import { css } from '@emotion/react';
+const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
 
 const feedbackStyle = css`
-  z-index: 3000;
+  z-index: 12;
 `;
 
 export function FeedbackContent({ view }) {
