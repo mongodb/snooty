@@ -25,6 +25,8 @@ const Placeholder = styled(SideNavItem)`
 const backButtonStyling = css`
   font-size: ${theme.fontSize.small};
   margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 20px;
 `;
 
 const htmlBackIcon = css`

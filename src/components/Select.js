@@ -27,7 +27,7 @@ const activeSelectStyles = css`
 
 const Label = styled('p')`
   font-size: ${theme.fontSize.small};
-  line-height: ${theme.fintSize.default};
+  line-height: ${theme.fontSize.default};
   font-weight: bolder;
   letter-spacing: 0;
   /* TODO: Remove !important when mongodb-docs.css is removed */
