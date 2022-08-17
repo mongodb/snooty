@@ -4,6 +4,7 @@ import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
 import { uiColors } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
 import ChapterNumberLabel from './ChapterNumberLabel';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
@@ -78,7 +79,7 @@ const ChapterTitle = styled('div')`
   margin-top: ${theme.size.small};
 `;
 
-const ChapterDescription = styled('div')`
+const ChapterDescription = styled(Body)`
   margin-top: ${theme.size.small};
 `;
 
@@ -101,11 +102,16 @@ const GuideLink = styled(Link)`
   flex-direction: column;
   padding: ${theme.size.small};
   position: relative;
+  font-size: ${theme.size.default};
+  line-height: ${theme.size.medium};
 
   :hover {
     background-color: ${uiColors.gray.light2};
     color: unset;
-    text-decoration: none;
+
+    ::after {
+      content: none;
+    }
   }
 
   @media ${theme.screenSize.mediumAndUp} {
