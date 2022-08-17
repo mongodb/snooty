@@ -14,7 +14,6 @@ const IMAGE_SIZE = 200;
 
 const Container = styled(Card)`
   background-color: ${uiColors.white};
-  border-radius: ${theme.size.tiny};
   border: 1px solid ${uiColors.gray.light3};
   padding: ${theme.size.large} ${theme.size.medium};
 
@@ -145,6 +144,8 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
   const guides = useMemo(() => getGuidesData(metadata, currentChapter), [metadata, currentChapter]);
 
   return (
+    // TODO: have to return specific typography here. card is explicit size 13 font
+
     <Container id={currentChapter?.id}>
       {image ? (
         <ChapterImage

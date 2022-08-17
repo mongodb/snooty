@@ -33,10 +33,6 @@ const H4 = styled(Body)`
     compact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
 `;
 
-const CTA = styled('p')`
-  margin-top: 8px;
-`;
-
 const FlexTag = styled(Tag)`
   margin-right: auto;
 `;
@@ -73,6 +69,10 @@ const CompactTextWrapper = styled('div')`
   margin-left: ${theme.size.medium};
   @media ${theme.screenSize.upToSmall} {
     margin-left: ${theme.size.default};
+  }
+
+  p {
+    line-height: ${theme.size.medium};
   }
 `;
 
@@ -115,9 +115,9 @@ const Card = ({
           <ComponentFactory nodeData={child} key={i} cardRef={true} />
         ))}
         {cta && (
-          <CTA>
+          <Body>
             <Link to={url}>{cta}</Link>
-          </CTA>
+          </Body>
         )}
       </ConditionalWrapper>
     </Card>

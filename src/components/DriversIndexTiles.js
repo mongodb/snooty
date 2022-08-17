@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link as GatsbyLink } from 'gatsby';
 import styled from '@emotion/styled';
 import { uiColors } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
-import Link from './Link';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
+import Link from './Link';
 
 import IconC from './icons/C';
 import IconCpp from './icons/Cpp';
@@ -89,6 +90,11 @@ const StyledGrid = styled('div')`
   display: grid;
   grid-gap: ${theme.size.default};
   grid-template-columns: repeat(3, 1fr);
+  margin-bottom: ${theme.size.medium};
+
+  a {
+    text-decoration: none;
+  }
 
   @media ${theme.screenSize.upToMedium} {
     grid-gap: 12px;
@@ -102,15 +108,16 @@ const StyledGrid = styled('div')`
 `;
 
 const StyledCard = styled(LeafyGreenCard)`
-  border: 1px solid ${uiColors.gray.light2};
-  box-shadow: none;
   display: flex;
   flex-direction: row;
   padding: ${theme.size.default};
+  align-items: center;
+  border: 1px solid ${uiColors.gray.light2};
+  box-shadow: none;
 
   &:hover {
     box-shadow: 0 3px 6px -2px ${uiColors.gray.light1};
-    color: unset;
+    // color: unset;
     text-decoration: none;
   }
 `;
@@ -130,10 +137,12 @@ const DriversIndexTiles = () => {
   return (
     <StyledGrid>
       {tiles.map((t) => (
-        <StyledCard as={Link} contentStyle="clickable" key={t.title} to={t.slug}>
-          <StyledIcon>{t.icon}</StyledIcon>
-          {t.title}
-        </StyledCard>
+        <GatsbyLink key={t.title} to={t.slug}>
+          <StyledCard className="styled-card-from-driver-index-tiles">
+            <StyledIcon>{t.icon}</StyledIcon>
+            <Link to={t.slug}>{t.title}</Link>
+          </StyledCard>
+        </GatsbyLink>
       ))}
     </StyledGrid>
   );
