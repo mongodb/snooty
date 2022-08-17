@@ -35,6 +35,9 @@ const H4 = styled(Body)`
 
 const CTA = styled('p')`
   margin-top: 8px;
+  a {
+    line-height: 24px;
+  }
 `;
 
 const FlexTag = styled(Tag)`

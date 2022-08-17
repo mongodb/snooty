@@ -20,6 +20,7 @@ const align = (key) => {
 const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
+  margin: ${theme.size.medium} 0;
 `;
 
 /* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
