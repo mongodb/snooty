@@ -1,13 +1,12 @@
-/**
- * Component used to show a clickable reference to footnote on page
- * scrolls to referenced element by id property
- */
-
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import FootnoteContext from './footnote-context';
 import { getNestedValue } from '../../utils/get-nested-value';
 
+/**
+ * Component used to show a clickable reference to footnote on page
+ * scrolls to referenced element by id property
+ */
 const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const { footnotes } = useContext(FootnoteContext);
 

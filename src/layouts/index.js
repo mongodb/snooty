@@ -39,7 +39,7 @@ const globalCSS = css`
   }
 
   .header-buffer {
-    scroll-margin-top: ${theme.header.scrollBuffer};
+    scroll-margin-top: ${theme.header.navbarScrollOffset};
   }
 
   ${'' /* Originally from docs-tools navbar.css */}

@@ -74,7 +74,7 @@ const header = {
   navbarMobileHeight: '56px',
   docsMobileMenuHeight: '52px',
   // used for scrolling elements into place, considering sticky header
-  scrollBuffer: '175px',
+  navbarScrollOffset: '175px',
 };
 
 const transitionSpeed = {
