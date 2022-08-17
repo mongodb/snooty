@@ -16,7 +16,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   // Create a new feedback document
   async function initializeFeedback(nextView = 'sentiment') {
-    //const segment = getSegmentUserId();
     const newFeedback = {};
     setFeedback({ newFeedback });
     setView(nextView);
@@ -31,11 +30,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       setView('comment');
       setProgress([true, true, false]);
     }
-  }
-
-  // deprecated
-  async function setRating(ratingValue) {
-    return;
   }
 
   // Upload a screenshot to S3 and attach it to the feedback
@@ -53,7 +47,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
     setProgress([true, true, true]);
     setView('submitted');
-    //const dbName = snootyEnv === 'production' ? 'quiz_prod' : 'quiz_dev';
 
     if (!selectedSentiment) return;
     // Submit the full feedback document
@@ -104,7 +97,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     isSupportRequest,
     selectedSentiment,
     initializeFeedback,
-    setRating,
     selectSentiment,
     setSentiment,
     setProgress,

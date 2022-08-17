@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { useFeedbackState } from '../context';
 import { css } from '@emotion/react';
-import { isBrowser } from '../../../../utils/is-browser';
-import { uiColors } from '@leafygreen-ui/palette';
 import loadable from '@loadable/component';
+import { palette } from '@leafygreen-ui/palette';
+import { useFeedbackState } from '../context';
+import { isBrowser } from '../../../../utils/is-browser';
 
 import { StarIcon } from '../icons';
 const Tooltip = loadable(() => import('./LeafygreenTooltip'));
@@ -15,8 +15,8 @@ function convertSpacesToNbsp(someString) {
   return someString.replace(/\s/g, nbsp);
 }
 
-const FILLED_STAR_COLOR = uiColors.yellow.base;
-const UNFILLED_STAR_COLOR = uiColors.gray.light2;
+const FILLED_STAR_COLOR = palette.yellow.base;
+const UNFILLED_STAR_COLOR = palette.gray.light2;
 export const RATING_TOOLTIPS = {
   1: 'Not at all',
   2: 'A little',
@@ -31,7 +31,7 @@ export const StarRatingLabel = styled.div`
 
 export default function StarRating({ size = '3x' }) {
   const [hoveredRating, setHoveredRating] = useState(null);
-  const { feedback, setRating } = useFeedbackState();
+  const { feedback } = useFeedbackState();
   const selectedRating = feedback && feedback.rating;
   return (
     isBrowser && (
@@ -45,7 +45,6 @@ export default function StarRating({ size = '3x' }) {
               ratingValue={ratingValue}
               isHighlighted={isHighlighted}
               shouldShowTooltip={isHovered && !selectedRating}
-              onClick={() => setRating(ratingValue)}
               onMouseEnter={() => setHoveredRating(ratingValue)}
               onMouseLeave={() => setHoveredRating(null)}
               size={size}

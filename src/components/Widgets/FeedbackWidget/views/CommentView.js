@@ -4,7 +4,7 @@ import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import TextArea from '@leafygreen-ui/text-area';
 import TextInput from '@leafygreen-ui/text-input';
-import button from '@leafygreen-ui/button';
+import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
 import { Layout, CommentHeader, Footer } from '../components/view-components';
@@ -95,7 +95,7 @@ const FooterMargin = ({ hasEmailError }) => LeafyCSS`
   margin-bottom: ${hasEmailError ? '0px' : '32px'} !important;
 `;
 
-const SubmitButton = styled(button)`
+const SubmitButton = styled(Button)`
   margin-right: -8px !important;
   height: 28px !important;
   width: 55px;
