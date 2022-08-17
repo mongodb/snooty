@@ -266,9 +266,7 @@ exports[`renders steps nested in include nodes 1`] = `
         class="emotion-8 emotion-9"
       >
         <section>
-          <h1
-            class="contains-headerlink"
-          >
+          <h1>
             Step 1
             <a
               class="headerlink emotion-10"
@@ -307,9 +305,7 @@ exports[`renders steps nested in include nodes 1`] = `
         class="emotion-8 emotion-9"
       >
         <section>
-          <h1
-            class="contains-headerlink"
-          >
+          <h1>
             Step 2
             <a
               class="headerlink emotion-10"
@@ -348,9 +344,7 @@ exports[`renders steps nested in include nodes 1`] = `
         class="emotion-8 emotion-9"
       >
         <section>
-          <h1
-            class="contains-headerlink"
-          >
+          <h1>
             Step 3
             <a
               class="headerlink emotion-10"
@@ -389,9 +383,7 @@ exports[`renders steps nested in include nodes 1`] = `
         class="emotion-8 emotion-9"
       >
         <section>
-          <h1
-            class="contains-headerlink"
-          >
+          <h1>
             Step 4
             <a
               class="headerlink emotion-10"
@@ -430,9 +422,7 @@ exports[`renders steps nested in include nodes 1`] = `
         class="emotion-8 emotion-9"
       >
         <section>
-          <h1
-            class="contains-headerlink"
-          >
+          <h1>
             Step 5
             <a
               class="headerlink emotion-10"
@@ -471,9 +461,7 @@ exports[`renders steps nested in include nodes 1`] = `
         class="emotion-8 emotion-9"
       >
         <section>
-          <h1
-            class="contains-headerlink"
-          >
+          <h1>
             Step 6
             <a
               class="headerlink emotion-10"
@@ -512,9 +500,7 @@ exports[`renders steps nested in include nodes 1`] = `
         class="emotion-8 emotion-9"
       >
         <section>
-          <h1
-            class="contains-headerlink"
-          >
+          <h1>
             Step 7
             <a
               class="headerlink emotion-10"

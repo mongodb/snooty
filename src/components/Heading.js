@@ -37,7 +37,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        <HeadingTag className="contains-headerlink">
+        <HeadingTag>
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
