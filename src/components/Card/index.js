@@ -76,6 +76,12 @@ const CompactTextWrapper = styled('div')`
   }
 `;
 
+const StyledBody = styled(Body)`
+  a {
+    line-height: unset;
+  }
+`;
+
 const onCardClick = (url) => {
   isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
 };
@@ -115,9 +121,9 @@ const Card = ({
           <ComponentFactory nodeData={child} key={i} cardRef={true} />
         ))}
         {cta && (
-          <Body>
+          <StyledBody>
             <Link to={url}>{cta}</Link>
-          </Body>
+          </StyledBody>
         )}
       </ConditionalWrapper>
     </Card>
