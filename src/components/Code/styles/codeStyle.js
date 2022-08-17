@@ -4,7 +4,7 @@ import { theme } from '../../../theme/docsTheme';
 
 export const baseCodeStyle = css`
   display: table;
-  margin: 24px 0;
+  margin: ${theme.size.medium} 0;
   min-width: 150px;
   table-layout: fixed;
   width: 100%;

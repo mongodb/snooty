@@ -40,8 +40,8 @@ const LightboxCaption = styled('div')`
 const LightboxWrapper = styled('div')`
   width: ${(props) => props.figwidth};
   cursor: pointer;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: ${theme.size.medium};
+  margin-bottom: ${theme.size.medium};
   display: block;
 `;
 

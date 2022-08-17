@@ -7,6 +7,7 @@ import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { formatText } from '../../utils/format-text';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { theme } from '../../theme/docsTheme';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -33,7 +34,7 @@ const StyledLink = styled(Link)`
       ${activeColor}
     }
   }
-  font-size: 13px;
+  font-size: ${theme.fontSize.small};
 `;
 
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {

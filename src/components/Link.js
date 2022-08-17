@@ -15,6 +15,7 @@ import { isRelativeUrl } from '../utils/is-relative-url';
 
 const LGlinkStyling = css`
   text-decoration: none !important;
+  }
 `;
 
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
@@ -30,6 +31,10 @@ const StyledGatsbyLink = styled(GatsbyLink)`
   line-height: 13px;
   outline: none;
   color: ${palette.blue.base};
+
+  > code {
+    color: ${palette.blue.base};
+  }
 
   &::after {
     content: '';
