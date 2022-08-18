@@ -39,7 +39,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
     </a>
   ));
   return (
-    <table css={tableStyling} frame="void" id={`footnote-${ref}`} rules="none">
+    <table className="header-buffer" css={tableStyling} frame="void" id={`footnote-${ref}`} rules="none">
       <colgroup>
         <col />
       </colgroup>

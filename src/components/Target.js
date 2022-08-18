@@ -49,7 +49,7 @@ const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
           </dd>
         </dl>
       ) : (
-        <span className="contains-headerlink" id={html_id} />
+        <span className="header-buffer" id={html_id} />
       )}
     </React.Fragment>
   );

@@ -22,9 +22,7 @@ exports[`renders correctly 1`] = `
   padding-bottom: 2px;
 }
 
-<h3
-    class="contains-headerlink"
-  >
+<h3>
     Create an administrative username and password
     <a
       class="headerlink emotion-0"
