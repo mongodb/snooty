@@ -48,7 +48,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       literalEnableInline: true,
     };
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
-    console.log(isActive);
     const formattedTitle = (
       <div
         css={css`

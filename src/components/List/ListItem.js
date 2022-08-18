@@ -11,13 +11,7 @@ const listParagraphStyles = css`
 const ListItem = ({ nodeData, ...rest }) => (
   <li className={cx(listParagraphStyles)}>
     {nodeData.children.map((child, index) => (
-      <ComponentFactory
-        {...rest}
-        nodeData={child}
-        key={index}
-        // Include <p> tags in <li> if there is more than one paragraph
-        skipPTag={false} //{nodeData.children.length === 1}
-      />
+      <ComponentFactory {...rest} nodeData={child} key={index} skipPTag={false} />
     ))}
   </li>
 );
