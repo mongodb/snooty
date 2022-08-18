@@ -5,7 +5,6 @@ import { uiColors } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
-import Link from './Link';
 
 import IconC from './icons/C';
 import IconCpp from './icons/Cpp';
@@ -117,7 +116,6 @@ const StyledCard = styled(LeafyGreenCard)`
 
   &:hover {
     box-shadow: 0 3px 6px -2px ${uiColors.gray.light1};
-    // color: unset;
     text-decoration: none;
   }
 `;
@@ -140,7 +138,7 @@ const DriversIndexTiles = () => {
         <GatsbyLink key={t.title} to={t.slug}>
           <StyledCard className="styled-card-from-driver-index-tiles">
             <StyledIcon>{t.icon}</StyledIcon>
-            <Link to={t.slug}>{t.title}</Link>
+            {t.title}
           </StyledCard>
         </GatsbyLink>
       ))}
