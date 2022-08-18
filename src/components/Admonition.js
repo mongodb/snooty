@@ -26,11 +26,11 @@ const admonitionStyles = css`
   // remove bottom margin off the final paragraph in a callout,
   // similarly remove the bottom margin off lists and list items so that
   // the spacing looks proper on those callouts
-  li:last-of-type,
-  ul:last-of-type,
-  ol:last-of-type,
-  li:last-of-type > p,
-  p:last-of-type {
+  > li:last-of-type,
+  > ul:last-of-type,
+  > ol:last-of-type,
+  > li:last-of-type > p,
+  > p:last-of-type {
     margin-bottom: 0px;
   }
 `;

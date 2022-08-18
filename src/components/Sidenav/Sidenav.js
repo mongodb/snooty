@@ -74,7 +74,7 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
 
 const titleStyle = LeafyCSS`
   color: ${palette.gray.dark3};
-  font-size: ${theme.fontSize.default};
+  font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: 20px;
   text-transform: none;

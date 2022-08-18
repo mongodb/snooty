@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
+import { palette } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import Link from '../Link';
@@ -27,6 +28,9 @@ const backButtonStyling = css`
   margin-bottom: 16px;
   font-weight: 400;
   line-height: 20px;
+  > span {
+    color: ${palette.gray.dark1};
+  }
 `;
 
 const htmlBackIcon = css`

@@ -37,9 +37,7 @@ const StepBlock = styled('div')`
   position: relative;
 `;
 
-const Content = styled.div`
-  // Remove the top margin of nested heading
-`;
+const Content = 'div';
 
 const circleStyles = {
   connected: css`
@@ -86,7 +84,6 @@ const contentStyles = {
       padding-bottom: ${theme.size.large};
     }
   `,
-  normal: css``,
 };
 
 const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', ...rest }) => {
