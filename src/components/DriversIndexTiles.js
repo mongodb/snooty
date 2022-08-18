@@ -113,6 +113,7 @@ const StyledCard = styled(LeafyGreenCard)`
   align-items: center;
   border: 1px solid ${uiColors.gray.light2};
   box-shadow: none;
+  font-size: ${theme.fontSize.default};
 
   &:hover {
     box-shadow: 0 3px 6px -2px ${uiColors.gray.light1};

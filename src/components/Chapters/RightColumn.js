@@ -18,7 +18,6 @@ const learningCardStyle = ({ isVisible }) => css`
   display: flex;
   flex-direction: column;
   padding: ${theme.size.large};
-  border-radius: ${theme.size.tiny};
   margin-bottom: ${theme.size.default};
 
   > p {
