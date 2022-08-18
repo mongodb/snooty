@@ -21,6 +21,21 @@ const getPosition = (element) => {
   return { x, y };
 };
 
+const defaultTabsStyling = css`
+  button {
+    font-size: ${theme.size.default};
+    align-items: center;
+  }
+
+  @media ${theme.screenSize.upToXLarge} {
+    button {
+      overflow: initial;
+      max-width: initial;
+      text-overflow: initial;
+    }
+  }
+`;
+
 const hiddenTabsStyling = css`
   & > div:first-of-type {
     display: none;
@@ -30,11 +45,17 @@ const hiddenTabsStyling = css`
 const landingTabsStyling = css`
   & > div:first-of-type {
     margin-top: ${theme.size.medium};
-    margin-bottom: ${theme.size.medium};
+    margin-bottom: ${theme.size.large};
+
+    button[role='tab'] {
+      display: block;
+      flex-grow: 1;
+    }
   }
 `;
 
 const getTabsStyling = ({ isHidden, isProductLanding }) => css`
+  ${defaultTabsStyling};
   ${isHidden && hiddenTabsStyling};
   ${isProductLanding && landingTabsStyling};
 `;
