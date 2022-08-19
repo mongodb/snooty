@@ -8,13 +8,11 @@ import { theme } from '../theme/docsTheme.js';
 const CONTENT_MAX_WIDTH = 1200;
 
 const Wrapper = styled('main')`
-  color: ${palette.black};
   ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
   width: 100%;
 
   h1 {
-    margin-top: ${theme.size.medium};
-    margin-bottom: ${theme.size.small};
+    color: black;
   }
 
   h2 {
