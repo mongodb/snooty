@@ -11,7 +11,7 @@ export const CommentHeader = () => {
   return (
     <Heading>
       {sentimentChoices.map((path) => (
-        <SentimentEmoji path={path} />
+        <SentimentEmoji path={path} key={path.category} />
       ))}
     </Heading>
   );

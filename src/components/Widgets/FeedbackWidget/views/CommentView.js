@@ -80,7 +80,7 @@ export default function CommentView({ ...props }) {
         aria-labelledby="text input for user emails"
         errorMessage="Please enter a valid email"
         state={hasEmailError ? 'error' : 'none'}
-        optional="true"
+        optional={true}
         className={cx(FooterMargin({ hasEmailError }))}
       />
       <Footer>

@@ -27,8 +27,8 @@ const ProgressBar = () => {
   return (
     <StyledBar>
       <DotSpan>
-        {progress.map((value) => (
-          <Dot isActive={value} />
+        {progress.map((value, i) => (
+          <Dot isActive={value} key={i} />
         ))}
       </DotSpan>
     </StyledBar>

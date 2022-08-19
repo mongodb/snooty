@@ -55,7 +55,7 @@ const SentimentView = () => {
     <Layout>
       <ViewHeader>Did this page help?</ViewHeader>
       {sentimentChoices.map((path) => (
-        <SentimentOption path={path} />
+        <SentimentOption path={path} key={path.sentiment} />
       ))}
     </Layout>
   );
