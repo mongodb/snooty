@@ -931,9 +931,6 @@ dd {
 .line-block .line-block {
   margin-left: 1.5em;
 }
-a:hover {
-  text-decoration: underline;
-}
 .linenos {
   float: left;
   width: 2em;
