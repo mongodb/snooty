@@ -121,29 +121,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  -webkit-background-size: 2px 2px;
-  background-size: 2px 2px;
-  -webkit-background-position: center bottom;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient(
-        #E7EEEC 100%,
-        #E7EEEC 0
-      );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient(
-        to right,
-        #9DD0E7 100%,
-        #9DD0E7 0
-      );
-}
-
 .emotion-8 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -343,29 +320,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 
 [data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
   background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-7 {
-  background-repeat: repeat-x;
-  -webkit-background-size: 2px 2px;
-  background-size: 2px 2px;
-  -webkit-background-position: center bottom;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient(
-        #E7EEEC 100%,
-        #E7EEEC 0
-      );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient(
-        to right,
-        #9DD0E7 100%,
-        #9DD0E7 0
-      );
 }
 
 .emotion-8 {
@@ -571,29 +525,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  -webkit-background-size: 2px 2px;
-  background-size: 2px 2px;
-  -webkit-background-position: center bottom;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient(
-        #E7EEEC 100%,
-        #E7EEEC 0
-      );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient(
-        to right,
-        #9DD0E7 100%,
-        #9DD0E7 0
-      );
-}
-
 .emotion-8 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -793,29 +724,6 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 
 [data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
   background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-7 {
-  background-repeat: repeat-x;
-  -webkit-background-size: 2px 2px;
-  background-size: 2px 2px;
-  -webkit-background-position: center bottom;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient(
-        #E7EEEC 100%,
-        #E7EEEC 0
-      );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient(
-        to right,
-        #9DD0E7 100%,
-        #9DD0E7 0
-      );
 }
 
 .emotion-8 {
