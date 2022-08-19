@@ -55,6 +55,12 @@ const iconAdjust = css`
   top: -5px;
 `;
 
+const StyledCardContainer = styled(Card)`
+  padding: 0;
+  margin-bottom: ${theme.size.default};
+  overflow: hidden;
+`;
+
 const OperationHeader = styled('div')`
   align-items: baseline;
   background-color: ${uiColors.gray.light3};
@@ -137,12 +143,7 @@ const Operation = ({
   }, [hash, setShowDetails, showDetails]);
 
   return (
-    <Card
-      id={hash}
-      css={css`
-        margin-bottom: ${theme.size.default};
-      `}
-    >
+    <StyledCardContainer id={hash}>
       <OperationHeader>
         <Badge variant={methodBadgeMap[method]}>{method}</Badge>
         <div>
@@ -180,7 +181,7 @@ const Operation = ({
           ))}
         </Details>
       )}
-    </Card>
+    </StyledCardContainer>
   );
 };
 
