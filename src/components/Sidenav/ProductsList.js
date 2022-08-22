@@ -48,6 +48,9 @@ const Products = styled(`ul`)`
   display: none;
   list-style-type: none;
   padding: 0;
+  li > a {
+    line-height: ${theme.size.medium};
+  }
 `;
 
 const ProductsListContainer = styled('div')`
