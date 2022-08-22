@@ -17,7 +17,7 @@ import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
-import { sideNavItemBasePadding } from './styles/sideNavItem';
+import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -280,7 +280,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 {/* Represents the generic links at the bottom of the side nav (e.g. "Contact Support") */}
                 {additionalLinks.map(({ glyph, title, url }) => (
                   <SideNavItem
-                    className={cx(sideNavItemBasePadding)}
+                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
                     key={url}
                     glyph={<Icon glyph={glyph} />}
                     href={url}

@@ -18,3 +18,7 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   font-size: ${theme.fontSize.small};
   line-height: 20px !important;
 `;
+
+export const sideNavItemFontSize = css`
+  font-size: ${theme.fontSize.small};
+`;

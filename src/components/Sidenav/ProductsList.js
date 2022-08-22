@@ -41,6 +41,7 @@ const transitionClasses = css`
 
 const HeadingTitle = styled('span')`
   padding-left: ${theme.size.small};
+  font-size: ${theme.fontSize.small};
 `;
 
 const Products = styled(`ul`)`
