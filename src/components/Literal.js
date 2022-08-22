@@ -7,6 +7,7 @@ import ComponentFactory from './ComponentFactory';
 const StyledInlineCode = styled(InlineCode)`
   /* Unset font size so it inherits it from its context */
   font-size: unset;
+  display: inline;
 `;
 
 const StyledNavigationInlineCode = styled('code')`
@@ -18,6 +19,7 @@ const StyledNavigationInlineCode = styled('code')`
 const Literal = ({ nodeData: { children }, formatTextOptions }) => {
   const navigationStyle = formatTextOptions?.literalEnableInline;
   const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : StyledInlineCode;
+
   return (
     <CurrInlineCode>
       {children.map((node, i) => (

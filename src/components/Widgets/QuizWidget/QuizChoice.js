@@ -42,6 +42,8 @@ const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
   box-shadow: none !important;
   margin: auto auto ${theme.size.default} auto;
   padding: ${theme.size.default};
+  min-height: unset;
+  border-radius: 7px;
   ${isSelected && `border-color: ${uiColors.black} !important;`};
   ${isSubmitted ? submittedStyle({ isCorrect }) : `:hover{ border-color: ${uiColors.black} !important; }`}
 `;

@@ -5,6 +5,7 @@ import CaptionLegend from './CaptionLegend';
 import Lightbox from './Lightbox';
 import Image from '../Image';
 import { getNestedValue } from '../../utils/get-nested-value';
+import { theme } from '../../theme/docsTheme';
 
 export default class Figure extends Component {
   constructor(props) {
@@ -38,6 +39,8 @@ export default class Figure extends Component {
         className="figure"
         css={css`
           max-width: 100%;
+          margin-top: ${theme.size.medium};
+          margin-bottom: ${theme.size.medium};
         `}
         style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}
       >
