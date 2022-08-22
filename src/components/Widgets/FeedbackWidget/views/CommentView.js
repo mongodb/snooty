@@ -21,7 +21,7 @@ function useValidation(inputValue, validator) {
 }
 
 export default function CommentView({ ...props }) {
-  const { feedback, isSupportRequest, submitComment, submitAllFeedback } = useFeedbackState();
+  const { feedback, isSupportRequest, submitComment, submitAllFeedback, screenshotTaken } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
   const { takeScreenshot } = useScreenshot();
@@ -33,7 +33,9 @@ export default function CommentView({ ...props }) {
 
   const handleSubmit = async () => {
     if (isValidEmail && isBrowser) {
-      await takeScreenshot();
+      if (screenshotTaken) {
+        await takeScreenshot();
+      }
       await submitComment({ comment, email });
       await submitAllFeedback();
     } else {

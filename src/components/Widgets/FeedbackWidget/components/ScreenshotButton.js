@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
 import Tooltip from './LeafygreenTooltip';
 import { CameraIcon } from '../icons';
+import { useFeedbackState } from '../context';
 import { isBrowser } from '../../../../utils/is-browser';
 
 const instructionsBorderStyling = css`
@@ -65,6 +66,7 @@ const xButtonStyle = (position, top, right) => css`
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
+  const { setScreenshotTaken } = useFeedbackState();
   const [isHovered, setIsHovered] = useState(false);
   const label = 'Take a Screenshot';
   // TODO: incorporate tooltip for new screenshot icon from DOP-2400
@@ -180,6 +182,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // close out the instructions panel
   const handleInstructionClick = () => {
+    document.getElementById('feedbackCard').style.display = 'block';
     resetProperties();
     unlockScrolling();
   };
@@ -188,6 +191,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const resetProperties = () => {
     setIsScreenshotButtonClicked(false);
     screenshotButtonClicked.current = false;
+    setScreenshotTaken(false);
     setCurrDOMState(null);
     currDOM.current = null;
     currDOMWidth.current = 0;
@@ -204,11 +208,12 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     document.getElementById('feedbackCard').style.display = 'block';
     domElementClickedRef.current = 'solid';
     setIsDOMElementClicked(domElementClickedRef.current);
+    setScreenshotTaken(true);
 
     lockScrolling();
   };
 
-  const cancelButtonClick = useCallback((e) => {
+  const cancelButtonClick = (e) => {
     resetProperties();
 
     setIsScreenshotButtonClicked(true);
@@ -219,7 +224,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
     unlockScrolling();
     e.stopPropagation();
-  }, []);
+  };
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {

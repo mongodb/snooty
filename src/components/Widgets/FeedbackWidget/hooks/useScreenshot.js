@@ -7,7 +7,7 @@ import { useFeedbackState } from '../context';
 import { capture, OutputType } from 'html-screen-capture-js';
 import rasterizeHTML from 'rasterizehtml';
 
-async function takeScreenshot(subject, config = {}) {
+export async function takeScreenshot(subject, config = {}) {
   // Convert the page into a "clean" html document that inlines all styles, images, etc.
   const htmlDocument = capture(OutputType.OBJECT, subject, config);
   // Convert the "clean" document into a rasterized <img />. It has the same dimensions as the user's window.
@@ -23,7 +23,7 @@ async function takeScreenshot(subject, config = {}) {
   return dataUri;
 }
 
-async function takeFeedbackScreenshot() {
+export async function takeFeedbackScreenshot() {
   const dataUri =
     isBrowser &&
     (await takeScreenshot(document, {
@@ -53,7 +53,7 @@ export default function useScreenshot() {
         viewport,
       });
 
-      // TODO: remove this after testing, this downloads the image for to preview screenshot
+      // TODO: remove this after testing, this downloads the image to preview screenshot
       const link = document.createElement('a');
       link.download = 'test.png';
       link.href = dataUri;

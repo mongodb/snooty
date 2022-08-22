@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   createNewFeedback,
   updateFeedback,
-  // submitFeedback,
+  submitFeedback,
   abandonFeedback,
   useStitchUser,
   addAttachment,
@@ -13,9 +13,10 @@ import { getViewport } from '../../../hooks/useViewport';
 const FeedbackContext = React.createContext();
 
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
-  const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
-  const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
-  const [view, setView] = React.useState(test.view || 'waiting');
+  const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
+  const [isSupportRequest, setIsSupportRequest] = useState(test.isSupportRequest || false);
+  const [view, setView] = useState(test.view || 'waiting');
+  const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const user = useStitchUser();
 
   // Create a new feedback document
@@ -110,18 +111,20 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   async function submitComment({ comment = '', email = '' }) {
     if (!feedback) return;
     // Update the document with the user's comment and email (if provided)
-    // const updatedFeedback = await updateFeedback({
-    //   feedback_id: feedback._id,
-    //   comment,
-    //   user: { email },
-    // });
-    // setFeedback(updatedFeedback);
+    const updatedFeedback = await updateFeedback({
+      feedback_id: feedback._id,
+      comment,
+      user: { email },
+    });
+    setFeedback(updatedFeedback);
   }
 
   async function submitAllFeedback() {
     // Submit the full feedback document
+    // TODO: Uncomment out this line
     // const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
-    // setFeedback(submittedFeedback);
+    const submittedFeedback = await submitFeedback({ feedback_id: 'null_id_for_testing_purposes' });
+    setFeedback(submittedFeedback);
     // Route the user to their "next steps"
     if (isSupportRequest) {
       setView('support');
@@ -152,6 +155,8 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const value = {
     feedback,
     view,
+    setScreenshotTaken,
+    screenshotTaken,
     isSupportRequest,
     initializeFeedback,
     setRating,
