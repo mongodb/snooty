@@ -324,7 +324,11 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         </Portal>
       )}
 
-      <div id="screenshot-button" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <div
+        className="screenshot-button"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <Tooltip
           align="bottom"
           justify="middle"

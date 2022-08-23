@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, prettyDOM } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   FeedbackProvider,
@@ -21,9 +21,11 @@ import {
 import Heading from '../../src/components/Heading';
 import headingData from './data/Heading.test.json';
 import { theme } from '../../src/theme/docsTheme';
-import { fwFunctionMocks, mockFWFunctions, clearMockFWFunctions } from '../utils/data/feedbackWidgetFunctions';
-
-// import useScreenshot from '../../src/components/Widgets/FeedbackWidget/hooks/useScreenshot';
+import {
+  screenshotFunctionMocks,
+  mockScreenshotFunctions,
+  clearMockScreenshotFunctions,
+} from '../utils/data/feedbackWidgetScreenshotFunctions';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
@@ -69,9 +71,8 @@ describe('FeedbackWidget', () => {
   beforeEach(setDesktop);
   beforeEach(mockStitchFunctions);
   afterEach(clearMockStitchFunctions);
-
-  beforeEach(mockFWFunctions);
-  afterEach(clearMockFWFunctions);
+  beforeEach(mockScreenshotFunctions);
+  afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackTab (Desktop Viewport)', () => {
     it('shows the rating view when clicked', async () => {
@@ -304,7 +305,26 @@ describe('FeedbackWidget', () => {
       });
 
       describe('when the Screenshot button is clicked', () => {
-        it('shows the overlays', async () => {
+        it('shows the overlays and adds event listener', async () => {
+          wrapper = await mountFormWithFeedbackState({
+            view: 'comment',
+            rating: 2,
+            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+            comment: 'This is a test comment.',
+            user: { email: 'test@example.com' },
+          });
+
+          // click on screenshot button
+          userEvent.click(wrapper.getAllByRole('button')[2]);
+          await tick();
+
+          expect(screenshotFunctionMocks['addEventListener']).toHaveBeenCalled();
+
+          // shows overlays
+          expect(wrapper.getByRole('img').getElementsByClassName('overlayInstructions')).toBeTruthy();
+        });
+
+        it('adds the screenshot attachment on send', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
             rating: 2,
@@ -314,28 +334,11 @@ describe('FeedbackWidget', () => {
             screenshotTaken: true,
           });
 
-          // click on screenshot button
-          userEvent.click(wrapper.getAllByRole('button')[2]);
-          await tick();
-
-          // shows overlays
-          expect(fwFunctionMocks['addEventListener']).toHaveBeenCalled();
-          expect(wrapper.getByRole('img')).toHaveClass('overlayInstructions');
-          console.log(prettyDOM(wrapper.container));
-          // user select element on the page
-          // ?? - this doesn't update the selected element
-          userEvent.click(wrapper.container.getElementsByTagName('p')[0]);
-          await tick();
-
-          console.log(prettyDOM(wrapper.container));
-
-          // click on Send button, should trigger useScreenshot hook
           userEvent.click(wrapper.getByText('Send').closest('button'));
           await tick();
 
-          // expect(fwFunctionMocks['useScreenshot']).toHaveBeenCalled();
-          // expect(stitchFunctionMocks 'submitFeedback']).toHaveBeenCalledTimes(1);
-          // expect(stitchFunctionMocks['addAttachment']).toHaveBeenCalled();
+          expect(screenshotFunctionMocks['retrieveDataUri']).toHaveBeenCalled();
+          expect(stitchFunctionMocks['addAttachment']).toHaveBeenCalled();
         });
       });
 

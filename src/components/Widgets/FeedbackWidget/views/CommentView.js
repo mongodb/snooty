@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { uiColors } from '@leafygreen-ui/palette';
+import Loadable from '@loadable/component';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
-import useScreenshot from '../hooks/useScreenshot';
+import useViewport from '../../../../hooks/useViewport';
 import { isBrowser } from '../../../../utils/is-browser';
 import validateEmail from '../../../../utils/validate-email';
-import Loadable from '@loadable/component';
+import { retrieveDataUri } from '../handleScreenshot';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 function useValidation(inputValue, validator) {
@@ -21,20 +22,27 @@ function useValidation(inputValue, validator) {
 }
 
 export default function CommentView({ ...props }) {
-  const { feedback, isSupportRequest, submitComment, submitAllFeedback, screenshotTaken } = useFeedbackState();
+  const {
+    feedback,
+    isSupportRequest,
+    submitComment,
+    submitAllFeedback,
+    submitScreenshot,
+    screenshotTaken,
+  } = useFeedbackState();
   const { rating } = feedback || { rating: 3 };
   const isPositiveRating = rating > 3;
-  const { takeScreenshot } = useScreenshot();
-
-  const [comment, setComment] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [hasEmailError, setHasEmailError] = React.useState(false);
+  const viewport = useViewport();
+  const [comment, setComment] = useState('');
+  const [email, setEmail] = useState('');
+  const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
 
   const handleSubmit = async () => {
     if (isValidEmail && isBrowser) {
       if (screenshotTaken) {
-        await takeScreenshot();
+        const dataUri = retrieveDataUri();
+        await submitScreenshot({ dataUri, viewport });
       }
       await submitComment({ comment, email });
       await submitAllFeedback();
