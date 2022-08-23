@@ -23,9 +23,7 @@ exports[`renders correctly 1`] = `
 }
 
 <section>
-    <h1
-      class="contains-headerlink"
-    >
+    <h1>
       Connect to your MongoDB instance
       <a
         class="headerlink emotion-0"

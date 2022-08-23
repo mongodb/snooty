@@ -4,24 +4,22 @@ Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 
 ## Installation
 
+Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/master/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows `%USERPROFILE%/.zshrc`) to include the following
+
+```
+export NPM_BASE_64_AUTH=<BASE_64_API_KEY>
+export NPM_EMAIL=<your.email@gmail.com>
+```
+
+Then, to install the package dependencies:
+
 ```shell
 npm install --legacy-peer-deps
 ```
 
 ### .env file setup
 
-You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments.
-
-#### `.env.production`
-
-Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
-
-```
-GATSBY_SITE=<SITE>
-GATSBY_PARSER_USER=<USER>
-GATSBY_PARSER_BRANCH=<BRANCH>
-GATSBY_SNOOTY_DEV=true
-```
+You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments. These variables let Snooty know where to look for your AST zip files, within DOP team's database. (You can also use [local AST files](#running-with-local-manifest-path)))
 
 #### `.env.development`
 
@@ -34,9 +32,20 @@ GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
-The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that when the application is built it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`.
+The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. See pathing [here](https://github.com/mongodb/snooty/blob/master/src/utils/generate-path-prefix.js#L22)
 
 It should be set to `true` when working on snooty locally.
+
+#### `.env.production`
+
+Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
+
+```
+GATSBY_SITE=<SITE>
+GATSBY_PARSER_USER=<USER>
+GATSBY_PARSER_BRANCH=<BRANCH>
+GATSBY_SNOOTY_DEV=true
+```
 
 ## Running locally
 
@@ -45,18 +54,40 @@ npm run develop
 ```
 
 To build and serve the site, run the following commands:
+The serve command generates the site at a [prefix](https://github.com/mongodb/snooty/blob/master/src/utils/generate-path-prefix.js) ie. `localhost:9000/<branch>/<docs-name>/<user>/<branch-name>/`
 
 ```shell
 $ npm run build
 $ npm run serve
 ```
 
-## Staging
-
-Install [mut](https://github.com/mongodb/mut) and ensure that you have properly configured your Giza/AWS keys. Then, from root, run:
+To debug server side:
 
 ```shell
-make stage
+node --nolazy node_modules/.bin/gatsby develop --inspect-brk
+```
+
+and connect a node debugger (ie. [chrome developer tools](https://nodejs.org/en/docs/guides/debugging-getting-started/#inspector-clients))
+
+### Running with local manifest path
+
+Alternative to working with remote AST files, you can have a local zip file to build the site. This removes the need for previously mentioned env variables required for remote lookup `GATSBY_SITE` `GATSBY_PARSER_USER` and `GATSBY_PARSER_BRANCH`. Local zip file is an output of the [parser](https://github.com/mongodb/snooty-parser)
+
+`.env.development` and `.env.production`:
+
+```
+GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
+GATSBY_SNOOTY_DEV=true
+```
+
+## Staging
+
+Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux
+
+Install [mut](https://github.com/mongodb/mut) and ensure that you have properly configured your Giza/AWS keys as [defined here](https://github.com/mongodb/mut/blob/3df98c17b0c5ea0b6101fe2c0e1b36ebdf97412e/mut/AuthenticationInfo.py#L7). Then, from root, run:
+
+```shell
+npm run build:clean:stage
 ```
 
 :warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
@@ -98,6 +129,14 @@ npm test -- path/to/my-test.js
 
 For more information, see the [Jest CLI Options](https://jestjs.io/docs/en/cli) documentation, or run `npm test -- --help`.
 
+### Updating test snapshots
+
+Snapshots may require updates when making changes to snooty components
+
+```shell
+npm test -- -u
+```
+
 ## Linting & Style
 
 We use [ESLint](https://eslint.org) and [Prettier](https://prettier.io) to help with linting and style.
@@ -121,3 +160,11 @@ npm run format:fix
 ```
 
 We have set up a precommit hook that will format staged files. Prettier also offers a variety of editor integrations to automatically format your code.
+
+### Useful Resources
+
+[React](https://reactjs.org/docs/getting-started.html)
+[Gatsby](https://www.gatsbyjs.com/docs/)
+[Emotion](https://emotion.sh/docs/introduction)
+[mongodb/stitch](http://stitch-sdks.s3-website-us-east-1.amazonaws.com/stitch-sdks/js/4/index.html)
+[LeafyGreen UI](https://www.mongodb.design/)

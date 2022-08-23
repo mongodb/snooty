@@ -24,7 +24,7 @@ exports[`renders correctly 1`] = `
 }
 
 <table
-    class="emotion-0"
+    class="header-buffer emotion-0"
     frame="void"
     id="footnote-1"
     rules="none"
