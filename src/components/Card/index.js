@@ -54,7 +54,7 @@ const CompactTextWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-left: ${theme.size.medium};
+  margin-left: ${theme.size.small};
   @media ${theme.screenSize.upToSmall} {
     margin-left: ${theme.size.default};
   }
