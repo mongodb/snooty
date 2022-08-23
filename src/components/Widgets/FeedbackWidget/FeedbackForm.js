@@ -13,7 +13,7 @@ import SubmittedView from './views/SubmittedView';
 const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
 
 const feedbackStyle = css`
-  z-index: 12;
+  z-index: 20;
 `;
 
 export function FeedbackContent({ view }) {

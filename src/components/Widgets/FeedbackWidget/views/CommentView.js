@@ -41,7 +41,7 @@ export default function CommentView({ ...props }) {
   const handleSubmit = async () => {
     if (isValidEmail && isBrowser) {
       if (screenshotTaken) {
-        const dataUri = retrieveDataUri();
+        const dataUri = await retrieveDataUri();
         await submitScreenshot({ dataUri, viewport });
       }
       await submitComment({ comment, email });

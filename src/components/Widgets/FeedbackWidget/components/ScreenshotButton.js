@@ -102,6 +102,16 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     unlockScrolling();
   }, [currDOMState]);
 
+  // prevent FW from being selected
+  const isFWSelected = useCallback((listOfElements) => {
+    for (const elem in listOfElements) {
+      if (listOfElements[elem].id.includes('feedbackCard')) {
+        return true;
+      }
+    }
+    return false;
+  }, []);
+
   // set properties of selected DOM element based on bounding box
   const setSelectedElementProperties = useCallback((currDOMRect) => {
     currDOMWidth.current = currDOMRect.width;
@@ -133,11 +143,13 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
       let domElement = null;
 
       // get the topmost DOM element excluding overlays
-      domElement = listOfElements[0];
-      for (const elem in listOfElements) {
-        if (!listOfElements[elem]?.className?.includes('overlay')) {
-          domElement = listOfElements[elem];
-          break;
+      if (!isFWSelected(listOfElements)) {
+        domElement = listOfElements[0];
+        for (const elem in listOfElements) {
+          if (!listOfElements[elem]?.className?.includes('overlay')) {
+            domElement = listOfElements[elem];
+            break;
+          }
         }
       }
 

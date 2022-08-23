@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import {
   createNewFeedback,
   updateFeedback,
@@ -10,7 +10,7 @@ import {
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
 
-const FeedbackContext = React.createContext();
+const FeedbackContext = createContext();
 
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
@@ -121,9 +121,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   async function submitAllFeedback() {
     // Submit the full feedback document
-    // TODO: Uncomment out this line
-    // const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
+    // TODO: Uncomment out these lines to submit feedback and alert slack channels
     const submittedFeedback = await submitFeedback({ feedback_id: 'null_id_for_testing_purposes' });
+    // const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
     setFeedback(submittedFeedback);
     // Route the user to their "next steps"
     if (isSupportRequest) {
@@ -179,7 +179,7 @@ function updateQualifier(qualifiers, id, value) {
 }
 
 export function useFeedbackState() {
-  const feedback = React.useContext(FeedbackContext);
+  const feedback = useContext(FeedbackContext);
   if (!feedback && feedback !== null) {
     throw new Error('You must nest useFeedbackState() inside of a FeedbackProvider.');
   }

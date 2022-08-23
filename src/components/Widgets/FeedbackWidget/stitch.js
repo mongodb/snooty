@@ -64,6 +64,6 @@ export async function addAttachment({ feedback_id, attachment }) {
   if (!feedback_id) {
     throw new Error('Must specify a feedback item _id to add an attachment to');
   }
-  const result = await app.callFunction('feedback_addAttachment_updatedSDKs', [{ feedback_id, attachment }]);
+  const result = await app.callFunction('feedback_addAttachment', [{ feedback_id, attachment }]);
   return result;
 }
