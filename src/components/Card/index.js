@@ -23,7 +23,7 @@ const StyledCard = styled(LeafyGreenCard)`
 `;
 
 const CardIcon = styled('img')`
-  width: ${theme.size.medium};
+  width: ${theme.size.large};
 `;
 
 const H4 = styled(Body)`
