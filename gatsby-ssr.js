@@ -10,9 +10,12 @@ export const onRenderBody = ({ setHeadComponents }) => {
     // Optimizely
     <script defer src="https://cdn.optimizely.com/js/20988630008.js" />,
     // GTM Pathway
-    <script>
-      !function(e,n){var t=document.createElement("script"),o=null,x="pathway";t.async=!0,t.src='https://'+x+'.mongodb.com/'+(e?x+'-debug.js':''),document.head.append(t),t.addEventListener("load",function(){o=window.pathway.default,(n&&o.configure(n)),o.createProfile("mongodbcom").load(),window.segment=o})}();
-    </script>,
+    <script
+      type="text/javascript"
+      dangerouslySetInnerHtml={{
+        __html: `!function(e,n){var t=document.createElement("script"),o=null,x="pathway";t.async=!0,t.src='https://'+x+'.mongodb.com/'+(e?x+'-debug.js':''),document.head.append(t),t.addEventListener("load",function(){o=window.pathway.default,(n&&o.configure(n)),o.createProfile("mongodbcom").load(),window.segment=o})}();`
+      }}
+    />,
     // Delighted
     <script
       type="text/javascript"
