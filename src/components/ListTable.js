@@ -31,8 +31,6 @@ const unstyleThead = css`
   }
 `;
 
-const hiddenContainerStyle = css``;
-
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
 /**
@@ -142,11 +140,9 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
 
   return (
     <>
-      <div className={cx(hiddenContainerStyle)}>
-        {elmIdsForScroll.map((id) => (
-          <div className="header-buffer" key={id} id={id} />
-        ))}
-      </div>
+      {elmIdsForScroll.map((id) => (
+        <div className="header-buffer" key={id} id={id} />
+      ))}
       <Table
         className={cx(
           styleTable({
