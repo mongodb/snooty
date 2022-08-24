@@ -99,7 +99,7 @@ exports[`renders correctly 1`] = `
     aria-disabled="false"
     class="emotion-0 button"
     data-leafygreen-ui="button"
-    href="/install/"
+    href="/install"
   >
     <div
       class="emotion-1"

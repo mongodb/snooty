@@ -39,443 +39,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-4 {
-  color: #5D6C74;
-  font-size: 16px;
-  margin-bottom: 16px;
-}
-
-.emotion-6 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.emotion-8 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  border: 1px solid transparent;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  border-radius: 6px;
-  background-color: #00684A;
-  border-color: #00684A;
-  color: #FFFFFF;
-  font-size: 13px;
-  font-weight: 500;
-  height: 36px;
-}
-
-.emotion-8:focus {
-  outline: none;
-}
-
-.emotion-8:disabled {
-  pointer-events: none;
-}
-
-.emotion-8:active,
-.emotion-8:focus,
-.emotion-8:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-8:hover,
-.emotion-8:active {
-  color: #FFFFFF;
-  background-color: #00593f;
-  border-color: #00593f;
-  box-shadow: 0 0 0 3px #C0FAE6;
-}
-
-.emotion-8:focus {
-  color: #FFFFFF;
-  background-color: #00593f;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-9 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  color: #007CAD;
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
-}
-
-.emotion-9:focus {
-  outline: none;
-}
-
-.emotion-10 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-10 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-10 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-10 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-10 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-10 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-11 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 6px;
-}
-
-.emotion-12 {
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-  position: relative;
-  z-index: 0;
-  padding: 0 12px;
-  gap: 6px;
-}
-
-.emotion-13 {
-  position: relative;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
-  border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 24px;
-  min-height: 68px;
-  margin-top: 40px;
-  padding: 40px 24px;
-}
-
-@media not all and (max-width: 767px) {
-  .emotion-13 {
-    padding: 48px;
-  }
-}
-
-@media not all and (max-width: 1023px) {
-  .emotion-13 {
-    -webkit-flex-basis: 0;
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    min-width: 300px;
-    margin-top: 0;
-    max-width: 510px;
-  }
-}
-
-.emotion-14 {
-  margin-bottom: 24px;
-}
-
-@media not all and (max-width: 767px) {
-  .emotion-14 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 0 16px;
-    margin-bottom: 34px;
-  }
-}
-
-.emotion-17 {
-  background-color: #E4F4E4;
-  border-radius: 4px;
-  color: #13AA52;
-  font-size: 14px;
-  font-weight: bold;
-  height: 24px;
-  text-align: center;
-  width: 83px;
-  margin-bottom: 8px;
-}
-
-.emotion-19 {
-  color: #061621;
-  font-weight: bold;
-}
-
-.emotion-21 {
-  list-style: none;
-  padding-left: 0;
-}
-
-.emotion-23 {
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 40px;
-  padding-top: 0!important;
-  position: relative;
-}
-
-.emotion-23:not(:last-child) {
-  padding-bottom: 16px;
-}
-
-.emotion-23:not(:last-child):before {
-  content: '';
-  position: absolute;
-  left: 10px;
-  top: 20px;
-  height: calc(100% - 20px);
-  border-left: solid 1px #13AA52;
-}
-
-.emotion-25 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 50%;
-  border: solid 1px transparent;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  margin-right: 12px;
-  min-width: 20px;
-  min-height: 20px;
-}
-
-.emotion-27 {
-  color: #13AA52;
-}
-
-.emotion-28 {
-  color: #061621;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-28:hover,
-.emotion-28:active {
-  color: currentColor;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-<div
-    class="emotion-0 emotion-1"
-  >
-    <div
-      class="emotion-2 emotion-3"
-    >
-      <div
-        class="emotion-4 emotion-5"
-      >
-        What's Next
-      </div>
-      <div
-        class="emotion-6 emotion-7"
-      >
-        Become a MongoDB Professional
-      </div>
-      <p>
-        Congrats. You’ve completed all the guides. Want to take the next step? Register for the developer exam.
-      </p>
-      <a
-        aria-disabled="false"
-        class="emotion-8 emotion-9"
-        data-leafygreen-ui="button"
-        href="https://university.mongodb.com/certification/developer/about"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <span
-          class="emotion-10"
-        >
-          <div
-            class="emotion-11"
-          />
-          <div
-            class="emotion-12"
-          >
-            Learn More
-          </div>
-        </span>
-      </a>
-    </div>
-    <div
-      class="emotion-13"
-    >
-      <div
-        class="emotion-14 emotion-15"
-      >
-        <div
-          class="emotion-16 emotion-17 emotion-18"
-        >
-          Chapter 2
-        </div>
-        <div
-          class="emotion-19 emotion-20"
-        >
-          CRUD
-        </div>
-      </div>
-      <ul
-        class="emotion-21 emotion-22"
-      >
-        <li
-          class="emotion-23 emotion-24"
-          color="#13AA52"
-        >
-          <div
-            class="emotion-25 emotion-26"
-            color="transparent"
-          >
-            <svg
-              aria-label="Checkmark Icon"
-              class="emotion-27"
-              fill="none"
-              height="16"
-              role="img"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
-                fill="currentColor"
-                fill-rule="evenodd"
-              />
-            </svg>
-          </div>
-          <a
-            class="emotion-28 emotion-29"
-            href="/server/read/"
-          >
-            Read Data in MongoDB
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`GuideNext renders the first guide in the next chapter 1`] = `
-<DocumentFragment>
-  .emotion-0 {
-  border-top: 1px solid #E7EEEC;
-  margin-bottom: 24px;
-  padding-top: 56px;
-}
-
-@media not all and (max-width: 1023px) {
-  .emotion-0 {
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 0 34px;
-  }
-}
-
-.emotion-2 p {
-  margin-top: 8px;
-}
-
-@media not all and (max-width: 1023px) {
-  .emotion-2 {
-    -webkit-flex-basis: 0;
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-  }
-}
-
-.emotion-4 {
-  color: #5D6C74;
+  color: #5C6C75;
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -637,8 +201,428 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
+  line-height: 24px;
+  height: 24px;
+  text-align: center;
+  width: 83px;
+  margin-bottom: 8px;
+}
+
+.emotion-17 {
+  color: #061621;
+  font-weight: bold;
+}
+
+.emotion-19 {
+  list-style: none;
+  padding-left: 0;
+}
+
+.emotion-21 {
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 40px;
+  padding-top: 0!important;
+  position: relative;
+}
+
+.emotion-21:not(:last-child) {
+  padding-bottom: 16px;
+}
+
+.emotion-21:not(:last-child):before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  height: calc(100% - 20px);
+  border-left: solid 1px #13AA52;
+}
+
+.emotion-23 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  border: solid 1px transparent;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-right: 12px;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.emotion-25 {
+  color: #13AA52;
+}
+
+.emotion-27 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+  color: #061621;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-27:focus {
+  outline: none;
+}
+
+.emotion-27>code {
+  color: #016BF8;
+}
+
+.emotion-27::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-27:focus .emotion-27::after {
+  background-color: #0498EC;
+}
+
+.emotion-27:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-27:hover,
+.emotion-27:active {
+  color: currentColor;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2 emotion-3"
+    >
+      <div
+        class="emotion-4 emotion-5"
+      >
+        What's Next
+      </div>
+      <div
+        class="emotion-6 emotion-7"
+      >
+        Become a MongoDB Professional
+      </div>
+      <p>
+        Congrats. You’ve completed all the guides. Want to take the next step? Register for the developer exam.
+      </p>
+      <a
+        aria-disabled="false"
+        class="emotion-8"
+        data-leafygreen-ui="button"
+        href="https://university.mongodb.com/certification/developer/about"
+      >
+        <div
+          class="emotion-9"
+        />
+        <div
+          class="emotion-10"
+        >
+          Learn More
+        </div>
+      </a>
+    </div>
+    <div
+      class="emotion-11"
+    >
+      <div
+        class="emotion-12 emotion-13"
+      >
+        <div
+          class="emotion-14 emotion-15 emotion-16"
+        >
+          Chapter 2
+        </div>
+        <div
+          class="emotion-17 emotion-18"
+        >
+          CRUD
+        </div>
+      </div>
+      <ul
+        class="emotion-19 emotion-20"
+      >
+        <li
+          class="emotion-21 emotion-22"
+          color="#13AA52"
+        >
+          <div
+            class="emotion-23 emotion-24"
+            color="transparent"
+          >
+            <svg
+              aria-label="Checkmark Icon"
+              class="emotion-25"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <a
+            class="emotion-26 emotion-27 emotion-28"
+            href="/server/read/"
+          >
+            Read Data in MongoDB
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`GuideNext renders the first guide in the next chapter 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  border-top: 1px solid #E7EEEC;
+  margin-bottom: 24px;
+  padding-top: 56px;
+}
+
+@media not all and (max-width: 1023px) {
+  .emotion-0 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 0 34px;
+  }
+}
+
+.emotion-2 p {
+  margin-top: 8px;
+}
+
+@media not all and (max-width: 1023px) {
+  .emotion-2 {
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+  }
+}
+
+.emotion-4 {
+  color: #5C6C75;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.emotion-6 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.emotion-8 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #00684A;
+  border-color: #00684A;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 500;
+  height: 36px;
+}
+
+.emotion-8:focus {
+  outline: none;
+}
+
+.emotion-8:disabled {
+  pointer-events: none;
+}
+
+.emotion-8:active,
+.emotion-8:focus,
+.emotion-8:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8:hover,
+.emotion-8:active {
+  color: #FFFFFF;
+  background-color: #00593f;
+  border-color: #00593f;
+  box-shadow: 0 0 0 3px #C0FAE6;
+}
+
+.emotion-8:focus {
+  color: #FFFFFF;
+  background-color: #00593f;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-9 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 6px;
+}
+
+.emotion-10 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 12px;
+  gap: 6px;
+}
+
+.emotion-11 {
+  position: relative;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: white;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
+  margin-top: 40px;
+  padding: 40px 24px;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-11 {
+    padding: 48px;
+  }
+}
+
+@media not all and (max-width: 1023px) {
+  .emotion-11 {
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    min-width: 300px;
+    margin-top: 0;
+    max-width: 510px;
+  }
+}
+
+.emotion-12 {
+  margin-bottom: 24px;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-12 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 0 16px;
+    margin-bottom: 34px;
+  }
+}
+
+.emotion-15 {
+  background-color: #E4F4E4;
+  border-radius: 4px;
+  color: #13AA52;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 24px;
   height: 24px;
   text-align: center;
   width: 83px;
@@ -706,14 +690,55 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   color: #13AA52;
 }
 
-.emotion-26 {
+.emotion-27 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-26:hover,
-.emotion-26:active {
+.emotion-27:focus {
+  outline: none;
+}
+
+.emotion-27>code {
+  color: #016BF8;
+}
+
+.emotion-27::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-27:focus .emotion-27::after {
+  background-color: #0498EC;
+}
+
+.emotion-27:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-27:hover,
+.emotion-27:active {
   color: currentColor;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -739,7 +764,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
         aria-disabled="false"
         class="emotion-8"
         data-leafygreen-ui="button"
-        href="/server/read/"
+        href="server/read"
       >
         <div
           class="emotion-9"
@@ -793,7 +818,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27"
+            class="emotion-26 emotion-27 emotion-28"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -844,7 +869,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-4 {
-  color: #5D6C74;
+  color: #5C6C75;
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -1006,8 +1031,9 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
+  line-height: 24px;
   height: 24px;
   text-align: center;
   width: 83px;
@@ -1075,20 +1101,61 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   color: #13AA52;
 }
 
-.emotion-26 {
+.emotion-27 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-26:hover,
-.emotion-26:active {
+.emotion-27:focus {
+  outline: none;
+}
+
+.emotion-27>code {
+  color: #016BF8;
+}
+
+.emotion-27::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-27:focus .emotion-27::after {
+  background-color: #0498EC;
+}
+
+.emotion-27:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-27:hover,
+.emotion-27:active {
   color: currentColor;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-28 {
+.emotion-29 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -1102,11 +1169,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   position: relative;
 }
 
-.emotion-28:not(:last-child) {
+.emotion-29:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-28:not(:last-child):before {
+.emotion-29:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -1115,7 +1182,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   border-left: solid 1px #E7EEEC;
 }
 
-.emotion-30 {
+.emotion-31 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1135,11 +1202,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   min-height: 20px;
 }
 
-.emotion-32 {
+.emotion-33 {
   color: #13AA52;
 }
 
-.emotion-39 {
+.emotion-41 {
   color: #3D4F58;
 }
 
@@ -1163,7 +1230,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
         aria-disabled="false"
         class="emotion-8"
         data-leafygreen-ui="button"
-        href="/cloud/connectionstring/"
+        href="cloud/connectionstring"
       >
         <div
           class="emotion-9"
@@ -1222,22 +1289,22 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27"
+            class="emotion-26 emotion-27 emotion-28"
             href="/cloud/account/"
           >
             Create and Manage a MongoDB Account
           </a>
         </li>
         <li
-          class="emotion-28 emotion-22"
+          class="emotion-29 emotion-22"
           color="#E7EEEC"
         >
           <div
-            class="emotion-30 emotion-24"
+            class="emotion-31 emotion-24"
             color="#13AA52"
           >
             <svg
-              class="emotion-32"
+              class="emotion-33"
               fill="currentColor"
               height="12"
               viewBox="0 0 7 12"
@@ -1250,14 +1317,14 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27"
+            class="emotion-26 emotion-27 emotion-28"
             href="/cloud/connectionstring/"
           >
             Set Up Atlas Connectivity
           </a>
         </li>
         <li
-          class="emotion-28 emotion-22"
+          class="emotion-29 emotion-22"
           color="#E7EEEC"
         >
           <div
@@ -1265,7 +1332,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             color="transparent"
           >
             <svg
-              class="emotion-39"
+              class="emotion-41"
               fill="currentColor"
               height="12"
               viewBox="0 0 7 12"
@@ -1278,7 +1345,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27"
+            class="emotion-26 emotion-27 emotion-28"
             href="/cloud/migrate-from-aws-to-atlas/"
           >
             Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas

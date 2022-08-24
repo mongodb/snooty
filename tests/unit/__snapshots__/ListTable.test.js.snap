@@ -65,6 +65,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   overflow-x: auto;
 }
 
+.emotion-4 {
+  margin: 24px 0;
+}
+
 .emotion-5 {
   border-collapse: collapse;
   box-sizing: border-box;
@@ -83,7 +87,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-7 * {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-8 {
@@ -124,7 +128,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-11 * {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-15 {
@@ -132,7 +136,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-15 * {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-19 {
@@ -140,7 +144,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-19 * {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-23 {
@@ -148,7 +152,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-23 * {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-31 {
@@ -215,7 +219,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-32 * {
-  font-size: 14px!important;
+  font-size: 13px!important;
 }
 
 .emotion-32>div {
@@ -242,17 +246,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   line-height: 20px;
   line-height: 20px;
   position: relative;
-}
-
-.emotion-34 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .emotion-34 {
@@ -525,6 +518,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   overflow-x: auto;
 }
 
+.emotion-4 {
+  margin: 24px 0;
+}
+
 .emotion-5 {
   border-collapse: collapse;
   box-sizing: border-box;
@@ -533,7 +530,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-6 * {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-7 {
@@ -636,7 +633,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-31 * {
-  font-size: 14px!important;
+  font-size: 13px!important;
 }
 
 .emotion-31>div {
@@ -677,17 +674,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   align-items: center;
 }
 
-.emotion-33 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .emotion-34 {
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -695,7 +681,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-34 * {
-  font-size: 14px!important;
+  font-size: 13px!important;
 }
 
 .emotion-34>div {

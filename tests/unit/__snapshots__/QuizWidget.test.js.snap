@@ -45,7 +45,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
 
 .emotion-8 {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 16.59px;
   color: #89979B;
   margin: 0!important;
@@ -74,6 +74,8 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   box-shadow: none!important;
   margin: auto auto 16px auto;
   padding: 16px;
+  min-height: unset;
+  border-radius: 7px;
 }
 
 .emotion-12:focus {

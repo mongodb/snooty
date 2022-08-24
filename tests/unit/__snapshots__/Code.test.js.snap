@@ -4,14 +4,14 @@ exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: table;
-  margin: 16px 0;
+  margin: 24px 0;
   min-width: 150px;
   table-layout: fixed;
   width: 100%;
 }
 
 .emotion-0 button>div>div {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-0>div>div {
@@ -277,14 +277,14 @@ exports[`renders correctly when none is passed in as a language 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: table;
-  margin: 16px 0;
+  margin: 24px 0;
   min-width: 150px;
   table-layout: fixed;
   width: 100%;
 }
 
 .emotion-0 button>div>div {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .emotion-0>div>div {
