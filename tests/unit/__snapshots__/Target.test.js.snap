@@ -119,7 +119,7 @@ including UTF-8.
 exports[`renders correctly with no directive_argument nodes 1`] = `
 <DocumentFragment>
   <span
-    class="contains-headerlink"
+    class="header-buffer"
     id="std-label-php-language-center"
   />
 </DocumentFragment>
