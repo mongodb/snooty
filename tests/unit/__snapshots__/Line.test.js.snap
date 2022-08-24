@@ -32,17 +32,17 @@ exports[`renders correctly 1`] = `
   white-space: nowrap;
 }
 
-.lg-ui-93e48fd1:hover>.emotion-2 {
+.constant-classname:hover>.emotion-2 {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.lg-ui-93e48fd1:hover>.emotion-2 {
+.constant-classname:hover>.emotion-2 {
   box-shadow: 0 0 0 3px #E8EDEB;
   border: 1px solid #C1C7C6;
 }
 
-.lg-ui-93e48fd1:focus>.emotion-2 {
+.constant-classname:focus>.emotion-2 {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
   border: 1px solid #016BF8;
 }

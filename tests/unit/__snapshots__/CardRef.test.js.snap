@@ -279,11 +279,11 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-b649914a:focus .emotion-53::after {
+.constant-classname:focus .emotion-53::after {
   background-color: #0498EC;
 }
 
-.lg-ui-b649914a:hover .emotion-53::after {
+.constant-classname:hover .emotion-53::after {
   background-color: #E8EDEB;
 }
 
@@ -386,7 +386,7 @@ exports[`card correctly with and without url 1`] = `
           class="emotion-49 emotion-50 emotion-14"
         >
           <a
-            class="lg-ui-b649914a emotion-52"
+            class="constant-classname emotion-52"
             href="https://docs.mongodb.com/realm/services/"
             rel="noopener noreferrer"
             target="_blank"

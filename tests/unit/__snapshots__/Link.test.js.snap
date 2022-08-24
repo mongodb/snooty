@@ -42,11 +42,11 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   border-radius: 2px;
 }
 
-.lg-ui-1bac9d44:focus .emotion-1::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.lg-ui-1bac9d44:hover .emotion-1::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
@@ -61,7 +61,7 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 }
 
 <span
-    class="lg-ui-1bac9d44 emotion-0"
+    class="constant-classname emotion-0"
   >
     <span
       class="emotion-1"
@@ -132,16 +132,16 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   border-radius: 2px;
 }
 
-.lg-ui-1bac9d44:focus .emotion-1::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.lg-ui-1bac9d44:hover .emotion-1::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
 <a
-    class="lg-ui-1bac9d44 emotion-0"
+    class="constant-classname emotion-0"
     href="https://www.mongodb.com/docs/atlas/"
     rel="noopener noreferrer"
     target="_blank"
@@ -197,11 +197,11 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   border-radius: 2px;
 }
 
-.lg-ui-1bac9d44:focus .emotion-1::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.lg-ui-1bac9d44:hover .emotion-1::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
@@ -216,7 +216,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 }
 
 <a
-    class="lg-ui-1bac9d44 emotion-0"
+    class="constant-classname emotion-0"
     href="https://account.mongodb.com/account/"
     rel="noopener noreferrer"
     target="_blank"
@@ -290,11 +290,11 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   border-radius: 2px;
 }
 
-.lg-ui-1bac9d44:focus .emotion-1::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.lg-ui-1bac9d44:hover .emotion-1::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
@@ -309,7 +309,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 }
 
 <a
-    class="lg-ui-1bac9d44 emotion-0"
+    class="constant-classname emotion-0"
     href="http://mongodb.com"
     rel="noopener noreferrer"
     target="_blank"
@@ -383,11 +383,11 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   border-radius: 2px;
 }
 
-.lg-ui-1bac9d44:focus .emotion-1::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.lg-ui-1bac9d44:hover .emotion-1::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
@@ -402,7 +402,7 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 }
 
 <a
-    class="lg-ui-1bac9d44 emotion-0"
+    class="constant-classname emotion-0"
     href="https://safety.google/authentication/"
     rel="noopener noreferrer"
     target="_blank"
@@ -476,16 +476,16 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   border-radius: 2px;
 }
 
-.lg-ui-1bac9d44:focus .emotion-1::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.lg-ui-1bac9d44:hover .emotion-1::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
 <a
-    class="lg-ui-1bac9d44 emotion-0"
+    class="constant-classname emotion-0"
     href="mailto:docs@mongodb.com"
     target="_self"
   >

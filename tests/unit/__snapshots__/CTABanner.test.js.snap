@@ -136,11 +136,11 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-4714f8a8:focus .emotion-9::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.lg-ui-4714f8a8:hover .emotion-9::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
@@ -191,7 +191,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-4714f8a8 emotion-8"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
@@ -361,11 +361,11 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-4714f8a8:focus .emotion-9::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.lg-ui-4714f8a8:hover .emotion-9::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
@@ -418,7 +418,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-4714f8a8 emotion-8"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
@@ -588,11 +588,11 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-4714f8a8:focus .emotion-9::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.lg-ui-4714f8a8:hover .emotion-9::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
@@ -643,7 +643,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-4714f8a8 emotion-8"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
@@ -813,11 +813,11 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   border-radius: 2px;
 }
 
-.lg-ui-4714f8a8:focus .emotion-9::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.lg-ui-4714f8a8:hover .emotion-9::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
@@ -868,7 +868,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-4714f8a8 emotion-8"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"

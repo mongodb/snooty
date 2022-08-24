@@ -211,11 +211,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-bbb4cae2:focus .emotion-18::after {
+.constant-classname:focus .emotion-18::after {
   background-color: #0498EC;
 }
 
-.lg-ui-bbb4cae2:hover .emotion-18::after {
+.constant-classname:hover .emotion-18::after {
   background-color: #E8EDEB;
 }
 
@@ -256,7 +256,7 @@ exports[`renders correctly 1`] = `
           class="emotion-14 emotion-15 emotion-13"
         >
           <a
-            class="lg-ui-bbb4cae2 emotion-17"
+            class="constant-classname emotion-17"
             href="https://docs.atlas.mongodb.com/getting-started/"
             rel="noopener noreferrer"
             target="_blank"
@@ -294,7 +294,7 @@ exports[`renders correctly 1`] = `
           class="emotion-14 emotion-15 emotion-13"
         >
           <a
-            class="lg-ui-bbb4cae2 emotion-17"
+            class="constant-classname emotion-17"
             href="https://university.mongodb.com/courses/M001/about"
             rel="noopener noreferrer"
             target="_blank"
@@ -350,7 +350,7 @@ exports[`renders correctly 1`] = `
           class="emotion-14 emotion-15 emotion-13"
         >
           <a
-            class="lg-ui-bbb4cae2 emotion-17"
+            class="constant-classname emotion-17"
             href="https://docs.mongodb.com/manual/tutorial/getting-started/"
             rel="noopener noreferrer"
             target="_blank"

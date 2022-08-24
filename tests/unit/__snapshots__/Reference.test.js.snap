@@ -42,11 +42,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-ddf6952c:focus .emotion-1::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.lg-ui-ddf6952c:hover .emotion-1::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
@@ -61,7 +61,7 @@ exports[`renders correctly 1`] = `
 }
 
 <a
-    class="lg-ui-ddf6952c emotion-0"
+    class="constant-classname emotion-0"
     href="https://docs.mlab.com/subscriptions/#change-plans-using-rnr"
     rel="noopener noreferrer"
     target="_blank"

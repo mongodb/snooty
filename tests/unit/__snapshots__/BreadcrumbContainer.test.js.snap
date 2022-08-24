@@ -59,16 +59,16 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-34ff242c:focus .emotion-3::after {
+.constant-classname:focus .emotion-3::after {
   background-color: #0498EC;
 }
 
-.lg-ui-34ff242c:hover .emotion-3::after {
+.constant-classname:hover .emotion-3::after {
   background-color: #E8EDEB;
 }
 
 <a
-    class="lg-ui-34ff242c emotion-0 emotion-1 emotion-2"
+    class="constant-classname emotion-0 emotion-1 emotion-2"
     href="https://www.mongodb.com/docs/"
     rel="noopener noreferrer"
     target="_blank"
@@ -149,16 +149,16 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-34ff242c:focus .emotion-3::after {
+.constant-classname:focus .emotion-3::after {
   background-color: #0498EC;
 }
 
-.lg-ui-34ff242c:hover .emotion-3::after {
+.constant-classname:hover .emotion-3::after {
   background-color: #E8EDEB;
 }
 
 <a
-    class="lg-ui-34ff242c emotion-0 emotion-1 emotion-2"
+    class="constant-classname emotion-0 emotion-1 emotion-2"
     href="https://www.mongodb.com/docs/view-analyze"
     rel="noopener noreferrer"
     target="_blank"
@@ -310,16 +310,16 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-34ff242c:focus .emotion-3::after {
+.constant-classname:focus .emotion-3::after {
   background-color: #0498EC;
 }
 
-.lg-ui-34ff242c:hover .emotion-3::after {
+.constant-classname:hover .emotion-3::after {
   background-color: #E8EDEB;
 }
 
 <a
-    class="lg-ui-34ff242c emotion-0 emotion-1 emotion-2"
+    class="constant-classname emotion-0 emotion-1 emotion-2"
     href="https://www.mongodb.com/docs/"
     rel="noopener noreferrer"
     target="_blank"

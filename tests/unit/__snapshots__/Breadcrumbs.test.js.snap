@@ -79,11 +79,11 @@ exports[`renders correctly with pageTitle 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-caafdc5a:focus .emotion-4::after {
+.constant-classname:focus .emotion-4::after {
   background-color: #0498EC;
 }
 
-.lg-ui-caafdc5a:hover .emotion-4::after {
+.constant-classname:hover .emotion-4::after {
   background-color: #E8EDEB;
 }
 
@@ -159,7 +159,7 @@ exports[`renders correctly with pageTitle 1`] = `
     class="emotion-0"
   >
     <a
-      class="lg-ui-caafdc5a emotion-1 emotion-2 emotion-3"
+      class="constant-classname emotion-1 emotion-2 emotion-3"
       href="https://www.mongodb.com/docs/"
       rel="noopener noreferrer"
       target="_blank"
@@ -264,11 +264,11 @@ exports[`renders correctly with siteTitle 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-caafdc5a:focus .emotion-4::after {
+.constant-classname:focus .emotion-4::after {
   background-color: #0498EC;
 }
 
-.lg-ui-caafdc5a:hover .emotion-4::after {
+.constant-classname:hover .emotion-4::after {
   background-color: #E8EDEB;
 }
 
@@ -344,7 +344,7 @@ exports[`renders correctly with siteTitle 1`] = `
     class="emotion-0"
   >
     <a
-      class="lg-ui-caafdc5a emotion-1 emotion-2 emotion-3"
+      class="constant-classname emotion-1 emotion-2 emotion-3"
       href="https://www.mongodb.com/docs/"
       rel="noopener noreferrer"
       target="_blank"

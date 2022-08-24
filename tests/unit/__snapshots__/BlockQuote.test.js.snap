@@ -69,11 +69,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-258ba0c5:focus .emotion-17::after {
+.constant-classname:focus .emotion-17::after {
   background-color: #0498EC;
 }
 
-.lg-ui-258ba0c5:hover .emotion-17::after {
+.constant-classname:hover .emotion-17::after {
   background-color: #E8EDEB;
 }
 
@@ -121,7 +121,7 @@ exports[`renders correctly 1`] = `
           class="emotion-0 emotion-1 emotion-2"
         >
           <span
-            class="lg-ui-258ba0c5 emotion-16"
+            class="constant-classname emotion-16"
           >
             <span
               class="emotion-17"
