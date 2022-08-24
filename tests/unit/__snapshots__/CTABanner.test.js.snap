@@ -77,12 +77,29 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   color: #007CAD;
 }
 
-.emotion-5 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+.emotion-4 {
+  margin-bottom: 16px;
 }
 
 .emotion-6 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-6 strong,
+.emotion-6 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -93,49 +110,41 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-6:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.emotion-9 {
+  position: relative;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+.lg-ui-4714f8a8:focus .emotion-9::after {
+  background-color: #0498EC;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.lg-ui-4714f8a8:hover .emotion-9::after {
+  background-color: #E8EDEB;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-8 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -172,7 +181,9 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         </svg>
       </div>
     </a>
-    <p>
+    <p
+      class="emotion-4 emotion-5 emotion-6"
+    >
       <a
         class="emotion-1"
         href="https://university.mongodb.com/"
@@ -180,21 +191,20 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="emotion-5 emotion-6"
-        data-leafygreen-ui="anchor-container"
+        class="lg-ui-4714f8a8 emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-7"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-8"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -292,12 +302,29 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   color: #007CAD;
 }
 
-.emotion-5 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+.emotion-4 {
+  margin-bottom: 16px;
 }
 
 .emotion-6 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-6 strong,
+.emotion-6 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -308,49 +335,41 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-6:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.emotion-9 {
+  position: relative;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+.lg-ui-4714f8a8:focus .emotion-9::after {
+  background-color: #0498EC;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.lg-ui-4714f8a8:hover .emotion-9::after {
+  background-color: #E8EDEB;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-8 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -389,7 +408,9 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         </svg>
       </div>
     </a>
-    <p>
+    <p
+      class="emotion-4 emotion-5 emotion-6"
+    >
       <a
         class="emotion-1"
         href="https://university.mongodb.com/"
@@ -397,21 +418,20 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="emotion-5 emotion-6"
-        data-leafygreen-ui="anchor-container"
+        class="lg-ui-4714f8a8 emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-7"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-8"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -509,12 +529,29 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   color: #007CAD;
 }
 
-.emotion-5 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+.emotion-4 {
+  margin-bottom: 16px;
 }
 
 .emotion-6 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-6 strong,
+.emotion-6 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -525,49 +562,41 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-6:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.emotion-9 {
+  position: relative;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+.lg-ui-4714f8a8:focus .emotion-9::after {
+  background-color: #0498EC;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.lg-ui-4714f8a8:hover .emotion-9::after {
+  background-color: #E8EDEB;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-8 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -604,7 +633,9 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         </svg>
       </div>
     </a>
-    <p>
+    <p
+      class="emotion-4 emotion-5 emotion-6"
+    >
       <a
         class="emotion-1"
         href="https://university.mongodb.com/"
@@ -612,21 +643,20 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="emotion-5 emotion-6"
-        data-leafygreen-ui="anchor-container"
+        class="lg-ui-4714f8a8 emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-7"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-8"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -724,12 +754,29 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   color: #007CAD;
 }
 
-.emotion-5 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+.emotion-4 {
+  margin-bottom: 16px;
 }
 
 .emotion-6 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-6 strong,
+.emotion-6 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -740,49 +787,41 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-6:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.emotion-9 {
+  position: relative;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+.lg-ui-4714f8a8:focus .emotion-9::after {
+  background-color: #0498EC;
 }
 
-.emotion-7 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.lg-ui-4714f8a8:hover .emotion-9::after {
+  background-color: #E8EDEB;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-7 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-7 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-8 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -819,7 +858,9 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         </svg>
       </div>
     </a>
-    <p>
+    <p
+      class="emotion-4 emotion-5 emotion-6"
+    >
       <a
         class="emotion-1"
         href="https://university.mongodb.com/"
@@ -827,21 +868,20 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="emotion-5 emotion-6"
-        data-leafygreen-ui="anchor-container"
+        class="lg-ui-4714f8a8 emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-7"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-8"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"

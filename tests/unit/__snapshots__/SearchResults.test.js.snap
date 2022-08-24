@@ -63,7 +63,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #00684A;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -83,7 +83,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #1254B7;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -294,7 +294,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-25 {
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
   height: 24px;
@@ -329,7 +329,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-27 {
   font-family: 'Akzidenz Grotesk BQ Light';
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 20px;
   margin-bottom: 0;
@@ -427,7 +427,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-44 {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 16px;
   opacity: 1;
@@ -462,14 +462,14 @@ exports[`Search Results Page considers a given search filter query param and dis
 .emotion-50 {
   display: inline-block;
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0!important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .emotion-55 {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 16px;
   opacity: 0.3;
@@ -1118,7 +1118,7 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-35 {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 16px;
   opacity: 1;
@@ -1153,14 +1153,14 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-41 {
   display: inline-block;
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0!important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .emotion-46 {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 16px;
   opacity: 0.3;
@@ -3416,7 +3416,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-19 {
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
   height: 24px;
@@ -3451,7 +3451,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-21 {
   font-family: 'Akzidenz Grotesk BQ Light';
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 20px;
   margin-bottom: 0;
@@ -3484,7 +3484,7 @@ exports[`Search Results Page renders results from a given search term query para
   color: #00684A;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -3504,7 +3504,7 @@ exports[`Search Results Page renders results from a given search term query para
   color: #1254B7;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -3589,7 +3589,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-38 {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 16px;
   opacity: 1;
@@ -3624,14 +3624,14 @@ exports[`Search Results Page renders results from a given search term query para
 .emotion-44 {
   display: inline-block;
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0!important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .emotion-49 {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 16px;
   opacity: 0.3;

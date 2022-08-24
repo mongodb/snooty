@@ -3,34 +3,73 @@
 exports[`List renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-family: sans-serif;
+  margin-top: 0px;
+}
+
+.emotion-1>p {
+  margin-bottom: 8px;
+}
+
+.emotion-2 {
+  margin-bottom: 16px;
+}
+
+.emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-4 strong,
+.emotion-4 b {
+  font-weight: 700;
+}
+
+.emotion-5 {
   font-style: normal;
   font-weight: 700;
 }
 
 <ol
+    class="emotion-0"
     start="2"
     type="a"
   >
-    <li>
-      In , click 
-      <span
-        class="guilabel emotion-0"
+    <li
+      class="emotion-1"
+    >
+      <p
+        class="emotion-2 emotion-3 emotion-4"
       >
-        Charts
-      </span>
-       in the navigation bar.
+        In , click 
+        <span
+          class="guilabel emotion-5"
+        >
+          Charts
+        </span>
+         in the navigation bar.
+      </p>
     </li>
-    <li>
-      If this is the first time you are launching , click
-
-      <span
-        class="guilabel emotion-0"
+    <li
+      class="emotion-1"
+    >
+      <p
+        class="emotion-2 emotion-3 emotion-4"
       >
-        Activate MongoDB Charts
-      </span>
-      . This provisions a new
+        If this is the first time you are launching , click
+
+        <span
+          class="guilabel emotion-5"
+        >
+          Activate MongoDB Charts
+        </span>
+        . This provisions a new
  instance in the  project.
+      </p>
     </li>
   </ol>
 </DocumentFragment>
