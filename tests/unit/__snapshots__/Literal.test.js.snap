@@ -4,28 +4,37 @@ exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   font-size: unset;
+  display: inline;
 }
 
 .emotion-2 {
-  background-color: #F9FBFA;
-  border: 1px solid #B8C4C2;
+  font-size: 13px;
+  line-height: 20px;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   border-radius: 3px;
   font-family: 'Source Code Pro',Menlo,monospace;
-  font-size: 14px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  display: inherit;
+  background-color: #F9FBFA;
+  border: 1px solid #E8EDEB;
+  color: #1C2D38;
   white-space: nowrap;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:hover>.emotion-2 {
-  box-shadow: 0 0 0 3px #E7EEEC;
+.constant-classname:hover>.emotion-2 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:focus>.emotion-2 {
-  box-shadow: 0 0 0 3px #C5E4F2;
+.constant-classname:hover>.emotion-2 {
+  box-shadow: 0 0 0 3px #E8EDEB;
+  border: 1px solid #C1C7C6;
+}
+
+.constant-classname:focus>.emotion-2 {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+  border: 1px solid #016BF8;
 }
 
 <code

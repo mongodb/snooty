@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import FootnoteContext from './footnote-context';
 import { getNestedValue } from '../../utils/get-nested-value';
 
+/**
+ * Component used to show a clickable reference to footnote on page
+ * scrolls to referenced element by id property
+ */
 const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const { footnotes } = useContext(FootnoteContext);
 
@@ -13,7 +17,7 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const ref = refname || id.replace('id', '');
   const uid = refname ? `${refname}-${id}` : id;
   return (
-    <a className="footnote-reference" href={`#footnote-${ref}`} id={`ref-${uid}`}>
+    <a className="footnote-reference header-buffer" href={`#footnote-${ref}`} id={`ref-${uid}`}>
       [{getNestedValue([ref, 'label'], footnotes) || ref}]
     </a>
   );

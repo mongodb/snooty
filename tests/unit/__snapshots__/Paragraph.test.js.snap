@@ -2,7 +2,28 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  <p>
+  .emotion-0 {
+  margin-bottom: 16px;
+}
+
+.emotion-2 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
+}
+
+<p
+    class="emotion-0 emotion-1 emotion-2"
+  >
     Verify that MongoDB has started successfully by
 checking the process output for the following line:
   </p>

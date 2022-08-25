@@ -97,8 +97,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-5 {
-  background: #E4F4E4;
-  border-radius: 50%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -146,26 +144,37 @@ exports[`renders correctly 1`] = `
   }
 }
 
+.emotion-9 p {
+  line-height: 24px;
+}
+
 .emotion-11 {
-  letter-spacing: 0.5px;
-  margin: 0 0 8px;
+  margin-bottom: 16px;
 }
 
 .emotion-13 {
-  font-weight: bold;
-  margin-top: auto;
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
 }
 
-.emotion-13>a:hover {
-  color: #1A567E;
+.emotion-13 strong,
+.emotion-13 b {
+  font-weight: 700;
 }
 
-.emotion-28 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+.emotion-14 a {
+  line-height: unset;
 }
 
-.emotion-29 {
+.emotion-17 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -176,49 +185,41 @@ exports[`renders correctly 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-29:focus {
+.emotion-17:focus {
   outline: none;
 }
 
-.emotion-30 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.emotion-18 {
+  position: relative;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-30 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+.emotion-18::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-30 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+.constant-classname:focus .emotion-18::after {
+  background-color: #0498EC;
 }
 
-.emotion-30 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.constant-classname:hover .emotion-18::after {
+  background-color: #E8EDEB;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-30 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-30 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-31 {
+.emotion-36 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -246,19 +247,25 @@ exports[`renders correctly 1`] = `
       <div
         class="emotion-9 emotion-10"
       >
-        <h4
-          class="emotion-11 emotion-12"
-        />
-        <p>
+        <p
+          class="emotion-11 emotion-12 emotion-13"
+        >
           Use Compass to connect to your Atlas cluster
         </p>
         <p
-          class="emotion-13 emotion-14"
+          class="emotion-14 emotion-15 emotion-13"
         >
           <a
+            class="constant-classname emotion-17"
             href="https://docs.atlas.mongodb.com/getting-started/"
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            Read Atlas docs
+            <span
+              class="emotion-18"
+            >
+              Read Atlas docs
+            </span>
           </a>
         </p>
       </div>
@@ -278,31 +285,29 @@ exports[`renders correctly 1`] = `
       <div
         class="emotion-9 emotion-10"
       >
-        <h4
-          class="emotion-11 emotion-12"
-        />
-        <p>
+        <p
+          class="emotion-11 emotion-12 emotion-13"
+        >
           Learn MongoDB Basics with MongoDB University
         </p>
         <p
-          class="emotion-13 emotion-14"
+          class="emotion-14 emotion-15 emotion-13"
         >
           <a
-            class="emotion-28 emotion-29"
-            data-leafygreen-ui="anchor-container"
+            class="constant-classname emotion-17"
             href="https://university.mongodb.com/courses/M001/about"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-30"
+              class="emotion-18"
             >
               Learn MongoDB Basics
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-31"
+              class="emotion-36"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
@@ -336,19 +341,25 @@ exports[`renders correctly 1`] = `
       <div
         class="emotion-9 emotion-10"
       >
-        <h4
-          class="emotion-11 emotion-12"
-        />
-        <p>
+        <p
+          class="emotion-11 emotion-12 emotion-13"
+        >
           Access more in-depth examples of querying data
         </p>
         <p
-          class="emotion-13 emotion-14"
+          class="emotion-14 emotion-15 emotion-13"
         >
           <a
+            class="constant-classname emotion-17"
             href="https://docs.mongodb.com/manual/tutorial/getting-started/"
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            Read Server docs
+            <span
+              class="emotion-18"
+            >
+              Read Server docs
+            </span>
           </a>
         </p>
       </div>
