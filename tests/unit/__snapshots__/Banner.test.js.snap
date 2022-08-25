@@ -2,7 +2,11 @@
 
 exports[`renders a Banner correctly 1`] = `
 <DocumentFragment>
-  .emotion-0>div>div>* {
+  .emotion-0 {
+  font-size: 13px;
+}
+
+.emotion-0>div>div>* {
   margin: 0 0 12px;
 }
 
@@ -14,6 +18,11 @@ exports[`renders a Banner correctly 1`] = `
   margin: 0;
 }
 
+.emotion-0 p,
+.emotion-0 a {
+  font-size: 13px;
+}
+
 .emotion-2 {
   position: relative;
   display: -webkit-box;
@@ -21,58 +30,46 @@ exports[`renders a Banner correctly 1`] = `
   display: -ms-flexbox;
   display: flex;
   min-height: 40px;
-  padding: 9px 12px 9px 20px;
+  padding: 10px 12px 10px 20px;
   border-width: 1px 1px 1px 0px;
   border-style: solid;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 13px;
   line-height: 20px;
-  color: #1A567E;
-  border-color: #C5E4F2;
-  border-left-color: #007CAD;
-  background-color: #E1F2F6;
+  font-family: 'Euclid Circular A',Helvetica,Arial,sans-serif;
+  color: #083C90;
+  border-color: #C3E7FE;
+  border-left-color: #016BF8;
+  background-color: #E1F7FF;
 }
 
 .emotion-2:before {
   content: '';
   position: absolute;
-  width: 6px;
+  width: 13px;
   top: -1px;
   bottom: -1px;
   left: 0px;
-  border-radius: 6px 0px 0px 6px;
-}
-
-.emotion-2:after {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: -1px;
-  bottom: -1px;
-  width: 2px;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  border-radius: 0.5px 0px 0px 0.5px;
+  border-radius: 12px 0px 0px 12px;
 }
 
 .emotion-2:before {
-  background-color: #007CAD;
-}
-
-.emotion-2:after {
-  border-color: #C5E4F2;
-  background-color: #E1F2F6;
+  background: linear-gradient(
+            to left,
+            transparent 6px,
+            #016BF8 6px
+          );
 }
 
 .emotion-3 {
-  color: #007CAD;
+  color: #016BF8;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 3px;
 }
 
 .emotion-4 {
@@ -83,7 +80,7 @@ exports[`renders a Banner correctly 1`] = `
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  margin-left: 15px;
+  margin-left: 13px;
   margin-right: 10px;
 }
 
