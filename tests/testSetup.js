@@ -6,6 +6,14 @@ global.navigator = {
   userAgent: 'node.js',
 };
 
+jest.mock('@leafygreen-ui/lib', () => {
+  const lib = jest.requireActual('@leafygreen-ui/lib');
+  return {
+    ...lib,
+    createUniqueClassName: () => 'constant-classname',
+  };
+});
+
 const rejectionHandler = (err) => {
   console.error('Unhandled Promise Rejection'); // eslint-disable-line no-console
   throw err;

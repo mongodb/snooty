@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
@@ -52,6 +52,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       <div
         css={css`
           margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
+          color: ${isActive ? `${palette.green.dark3};` : `${palette.gray.dark3};`};
         `}
       >
         {formatText(title, formatTextOptions)}
@@ -68,7 +69,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
             setIsOpen(!isOpen);
           }}
         >
-          <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />
+          <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
@@ -79,12 +80,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         as={Link}
         to={target}
         active={isSelected}
-        className={cx(sideNavItemTOCStyling({ level }))}
+        className={cx(sideNavItemTOCStyling({ level, isActive }))}
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
-        {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
+        {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />}
         {isTocIcon && <SyncCloud />}
         {formattedTitle}
       </SideNavItem>

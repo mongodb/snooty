@@ -14,7 +14,8 @@ describe('ContentsListItem', () => {
     );
 
     // Ensure that id is transformed into correct href
-    const link = wrapper.getByText('Item 1');
+    console.log(wrapper);
+    const link = wrapper.getByText('Item 1').closest('a');
     expect(link).toBeTruthy();
     expect(link).toHaveProperty('href', 'http://localhost/#item-1');
     expect(wrapper.getAllByText('Item', { exact: false })).toHaveLength(2);
