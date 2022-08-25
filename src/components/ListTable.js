@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
@@ -20,6 +20,7 @@ const align = (key) => {
 const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
+  margin: ${theme.size.medium} 0;
 `;
 
 /* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
@@ -79,7 +80,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
             vertical-align: top;
 
             /* Apply grey background to stub <th> cells (PD-1216) */
-            ${isStub && `background-clip: padding-box; background-color: ${uiColors.gray.light3};`}
+            ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
 
             * {
               font-size: ${theme.fontSize.small} !important;

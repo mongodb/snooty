@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { cx, css } from '@leafygreen-ui/emotion';
 import Loadable from '@loadable/component';
 import useScreenSize from '../hooks/useScreenSize';
 import TabSelectors from './Tabs/TabSelectors';
@@ -10,13 +10,35 @@ import { TabContext } from './Tabs/tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
+import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
+const StyledH2 = styled(H2)`
+  margin-top: 16px;
+  margin-bottom: 24px;
+`;
+
+const headingStyles = css`
+  margin-top: 24px;
+  margin-bottom: 8px;
+`;
+
+const determineHeading = (sectionDepth) => {
+  if (sectionDepth === 1) {
+    return StyledH2;
+  } else if (sectionDepth === 2) {
+    return H3;
+  } else if (sectionDepth === 3) {
+    return Subtitle;
+  }
+  return Body; // use weight=medium prop to style appropriately
+};
+
 const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const id = nodeData.id || '';
-  const HeadingTag = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
-
+  const HeadingTag = determineHeading(sectionDepth);
+  const asHeading = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const hidefeedbackheader = page?.options?.hidefeedback === 'header';
@@ -37,7 +59,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        <HeadingTag>
+        <HeadingTag className={cx(headingStyles, 'contains-headerlink')} as={asHeading} weight="medium">
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
@@ -76,6 +98,7 @@ Heading.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   page: PropTypes.object,
+  isProductLanding: PropTypes.bool,
 };
 
 export default Heading;

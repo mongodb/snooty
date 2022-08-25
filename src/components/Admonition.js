@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import Callout, { Variant } from '@leafygreen-ui/callout';
+import { cx, css } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
+import { theme } from '../theme/docsTheme';
 
 export const admonitionMap = {
   example: Variant.Example,
@@ -15,17 +16,22 @@ export const admonitionMap = {
   warning: Variant.Warning,
 };
 
-const StyledCallout = styled(Callout)`
-  /* Add margin to right so drop shadow is visible */
-  margin: 24px 3px 24px 0;
+const admonitionStyles = css`
+  margin-top: ${theme.size.medium};
+  margin-bottom: ${theme.size.medium};
 
-  /* Add margins below all child elements in the callout */
-  & > div > div > * {
-    margin: 0 0 12px;
+  p {
+    color: unset;
   }
-
-  & > div > div > *:last-child {
-    margin: 0;
+  // remove bottom margin off the final paragraph in a callout,
+  // similarly remove the bottom margin off lists and list items so that
+  // the spacing looks proper on those callouts
+  > li:last-of-type,
+  > ul:last-of-type,
+  > ol:last-of-type,
+  > li:last-of-type > p,
+  > p:last-of-type {
+    margin-bottom: 0px;
   }
 `;
 
@@ -38,11 +44,16 @@ const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
   }
 
   return (
-    <StyledCallout title={title} variant={admonitionMap[name] || Variant.Note}>
+    <Callout
+      className={cx(admonitionStyles)}
+      title={title}
+      variant={admonitionMap[name] || Variant.Note}
+      baseFontSize={16}
+    >
       {children.map((child, i) => (
         <ComponentFactory {...rest} key={i} nodeData={child} />
       ))}
-    </StyledCallout>
+    </Callout>
   );
 };
 

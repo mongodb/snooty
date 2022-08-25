@@ -2,8 +2,12 @@
 
 exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 <DocumentFragment>
-  .emotion-0:last-of-type {
-  color: #21313C;
+  .emotion-0 {
+  font-size: 13px;
+}
+
+.emotion-0:last-of-type {
+  color: #1C2D38;
 }
 
 .emotion-0:hover,
@@ -14,21 +18,73 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 
 .emotion-0:hover:not(:last-of-type),
 .emotion-0:focus:not(:last-of-type) {
-  color: #21313C;
+  color: #1C2D38;
+}
+
+.emotion-2 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-3 {
+  position: relative;
+}
+
+.emotion-3::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-3::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-3::after {
+  background-color: #E8EDEB;
 }
 
 <a
-    class="emotion-0 emotion-1"
+    class="constant-classname emotion-0 emotion-1 emotion-2"
     href="https://www.mongodb.com/docs/"
+    rel="noopener noreferrer"
+    target="_blank"
   >
-    Docs Home
+    <span
+      class="emotion-3"
+    >
+      Docs Home
+    </span>
   </a>
   .emotion-0 {
   cursor: default;
 }
 
 .emotion-0:last-of-type {
-  color: #21313C;
+  color: #1C2D38;
 }
 
 <span
@@ -36,8 +92,12 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   >
      → 
   </span>
-  .emotion-0:last-of-type {
-  color: #21313C;
+  .emotion-0 {
+  font-size: 13px;
+}
+
+.emotion-0:last-of-type {
+  color: #1C2D38;
 }
 
 .emotion-0:hover,
@@ -48,21 +108,73 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 
 .emotion-0:hover:not(:last-of-type),
 .emotion-0:focus:not(:last-of-type) {
-  color: #21313C;
+  color: #1C2D38;
+}
+
+.emotion-2 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-3 {
+  position: relative;
+}
+
+.emotion-3::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-3::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-3::after {
+  background-color: #E8EDEB;
 }
 
 <a
-    class="emotion-0 emotion-1"
+    class="constant-classname emotion-0 emotion-1 emotion-2"
     href="https://www.mongodb.com/docs/view-analyze"
+    rel="noopener noreferrer"
+    target="_blank"
   >
-    View & Analyze
+    <span
+      class="emotion-3"
+    >
+      View & Analyze
+    </span>
   </a>
   .emotion-0 {
   cursor: default;
 }
 
 .emotion-0:last-of-type {
-  color: #21313C;
+  color: #1C2D38;
 }
 
 <span
@@ -70,23 +182,68 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   >
      → 
   </span>
-  .emotion-0:last-of-type {
-  color: #21313C;
+  .emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+  font-size: 13px;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-1:focus {
+  outline: none;
+}
+
+.emotion-1>code {
+  color: #016BF8;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-1:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.emotion-1:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-1:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-1:hover,
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #21313C;
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
+  color: #1C2D38;
 }
 
 <a
-    class="emotion-0 emotion-1"
+    class="emotion-0 emotion-1 emotion-2"
     href="/documents/view/"
   >
     MongoDB Compass
@@ -96,8 +253,12 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 
 exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 <DocumentFragment>
-  .emotion-0:last-of-type {
-  color: #21313C;
+  .emotion-0 {
+  font-size: 13px;
+}
+
+.emotion-0:last-of-type {
+  color: #1C2D38;
 }
 
 .emotion-0:hover,
@@ -108,21 +269,73 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 
 .emotion-0:hover:not(:last-of-type),
 .emotion-0:focus:not(:last-of-type) {
-  color: #21313C;
+  color: #1C2D38;
+}
+
+.emotion-2 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-3 {
+  position: relative;
+}
+
+.emotion-3::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-3::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-3::after {
+  background-color: #E8EDEB;
 }
 
 <a
-    class="emotion-0 emotion-1"
+    class="constant-classname emotion-0 emotion-1 emotion-2"
     href="https://www.mongodb.com/docs/"
+    rel="noopener noreferrer"
+    target="_blank"
   >
-    Docs Home
+    <span
+      class="emotion-3"
+    >
+      Docs Home
+    </span>
   </a>
   .emotion-0 {
   cursor: default;
 }
 
 .emotion-0:last-of-type {
-  color: #21313C;
+  color: #1C2D38;
 }
 
 <span
@@ -130,23 +343,68 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   >
      → 
   </span>
-  .emotion-0:last-of-type {
-  color: #21313C;
+  .emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+  font-size: 13px;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-1:focus {
+  outline: none;
+}
+
+.emotion-1>code {
+  color: #016BF8;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-1:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.emotion-1:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-1:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-1:hover,
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #21313C;
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
+  color: #1C2D38;
 }
 
 <a
-    class="emotion-0 emotion-1"
+    class="emotion-0 emotion-1 emotion-2"
     href="/view-analyze/"
   >
     View & Analyze Data

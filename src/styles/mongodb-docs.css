@@ -248,9 +248,6 @@ table {
   thead {
     display: table-header-group;
   }
-  img {
-    max-width: 100% !important;
-  }
   @page {
     margin: 2cm 0.5cm;
   }
@@ -288,11 +285,6 @@ textarea {
   background-image: none;
 }
 a:focus,
-a:hover {
-  color: #1A567E;
-  text-decoration: underline;
-}
-a:focus,
 input[type='checkbox']:focus,
 input[type='file']:focus {
   outline: #333 dotted thin;
@@ -306,25 +298,14 @@ hr {
   height: 0;
   border-top: 1px solid #eee;
 }
-p {
-  margin: 0 0 10px;
-}
+
 small {
   font-size: 85%;
 }
 div.body td {
   text-align: left;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  line-height: 1.1;
-}
+
 h1 small,
 h2 small,
 h3 small,
@@ -340,33 +321,7 @@ h5,
 h6 {
   margin-top: 10px;
 }
-h1 {
-  font-size: 36px;
-}
-h2 {
-  font-size: 30px;
-}
-div.body h2,
-h1 small,
-h3 {
-  font-size: 24px;
-}
-h2 small,
-h4 {
-  font-size: 18px;
-}
-h3 small,
-h4 small,
-h5 {
-  font-size: 14px;
-}
-h6 {
-  font-size: 12px;
-}
-ol,
-ul {
-  margin-top: 0;
-}
+
 blockquote p:last-child,
 div.body li > p.first,
 li div.line-block,
@@ -424,9 +379,6 @@ q:before {
 .fa4-pull-left {
   float: left;
 }
-.figure img {
-  width: 100%;
-}
 @media (min-width: 768px) {
   .container {
     max-width: 750px;
@@ -459,14 +411,6 @@ dd,
 dd table,
 dd ul {
   margin-bottom: 10px;
-}
-.body h3 + p,
-.body h4 + p,
-dd p,
-h2 + div.section,
-h3 + div.section,
-h4 + div.section {
-  margin-top: 0;
 }
 .fa-pull-right,
 .fa4-pull-right {
@@ -952,9 +896,6 @@ img {
   line-height: 1;
   font-family: ChartsIcons;
 }
-img {
-  border: 0;
-}
 dd {
   margin-top: 3px;
 }
@@ -989,9 +930,6 @@ dd {
 }
 .line-block .line-block {
   margin-left: 1.5em;
-}
-a:hover {
-  text-decoration: underline;
 }
 .linenos {
   float: left;
@@ -1089,17 +1027,6 @@ div td pre {
 div.document {
   margin-left: 25px;
 }
-.body p,
-h2,
-h3,
-h4 {
-  margin: 24px 0;
-}
-.body li > p,
-body,
-div td pre {
-  margin: 0;
-}
 
 div.section>h1+dl.dbcommand>dt,
 div.section>h1+dl.expression>dt,
@@ -1123,55 +1050,19 @@ dl.binary {
   height: 0;
 }
 body {
-  font-family: Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Euclid Circular A", Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 0;
   color: #21313C;
+  margin: 0;
 }
-a,
+/* a,
 a > code {
-  color: #007CAD;
-}
+  color: #016BF8;
+} */
 hr {
   border: 1px solid #b1b4b6;
 }
-a {
-  text-decoration: none;
-}
-div.body h1,
-div.body h2,
-div.body h3,
-div.body h4,
-div.body h5,
-div.body h6 {
-  font-family: Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 200;
-  line-height: 24px;
-  color: #21313C;
-  padding: 0;
-}
 
-div.body h1 {
-  border-top: none;
-  font-size: 36px;
-  line-height: 48px;
-  padding: 0;
-}
-div.body h3 {
-  font-size: 18px;
-  font-weight: 700;
-}
-div.body h4 {
-  font-size: 16px;
-  font-weight: 700;
-}
-div.body h5 {
-  font-size: 14px;
-  font-weight: 700;
-}
-div.body h6 {
-  font-size: 14px;
-  font-weight: 300;
-}
 div.body h1 + dl,
 div.body h1 + p,
 div.body h2 + dl,
@@ -1182,9 +1073,6 @@ div.body h4 + dl,
 div.body h4 + p {
   padding: 0;
   text-indent: 0;
-}
-div.body li {
-  padding-top: 0.2em;
 }
 a code {
   font-weight: 400;

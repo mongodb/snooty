@@ -1,36 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { useSiteMetadata } from '../hooks/use-site-metadata.js';
 import { theme } from '../theme/docsTheme.js';
 
 const CONTENT_MAX_WIDTH = 1200;
 
 const Wrapper = styled('main')`
-  color: ${uiColors.black};
   ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
   width: 100%;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 600;
-  }
-
   h1 {
-    font-size: ${theme.fontSize.h2};
-    margin-bottom: ${theme.size.default};
+    color: black;
   }
 
-  h2,
+  h2 {
+    margin-top: ${theme.size.small};
+    margin-bottom: ${theme.size.small};
+  }
+
   h3 {
-    font-size: 21px;
-    margin-top: 0px;
-    margin-bottom: ${theme.size.default};
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 8px;
   }
 
   section {
@@ -38,15 +32,11 @@ const Wrapper = styled('main')`
   }
 
   section p {
-    font-size: ${theme.fontSize.default};
     grid-column: 2;
-    letter-spacing: 0.5px;
-    margin-bottom: ${theme.size.small};
     max-width: 500px;
   }
 
   section p > a {
-    font-size: ${theme.fontSize.default};
     letter-spacing: 0.5px;
     :hover {
       text-decoration: none;
@@ -79,7 +69,7 @@ const Wrapper = styled('main')`
         isGuides &&
         `
         @media ${theme.screenSize.mediumAndUp} {
-          color: ${uiColors.white};
+          color: ${palette.white};
         }
       `}
     }
@@ -87,7 +77,7 @@ const Wrapper = styled('main')`
     > img {
       display: block;
       grid-column: 2;
-      margin: auto;
+      margin-top: auto;
       max-width: 600px;
       width: 100%;
 
@@ -120,13 +110,15 @@ const Wrapper = styled('main')`
     > .introduction {
       grid-column: 2;
       grid-row: 2;
-      ${({ isGuides }) =>
-        isGuides &&
-        `
-        @media ${theme.screenSize.mediumAndUp} {
-          color: ${uiColors.white};
-        }
-      `}
+      p {
+        ${({ isGuides }) =>
+          isGuides &&
+          `
+            @media ${theme.screenSize.mediumAndUp} {
+                color: ${palette.white};
+            }
+        `}
+      }
     }
 
     > .chapters {
