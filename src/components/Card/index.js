@@ -23,7 +23,14 @@ const StyledCard = styled(LeafyGreenCard)`
 `;
 
 const CardIcon = styled('img')`
+  width: ${theme.size.large};
+`;
+
+const CompactIcon = styled('img')`
   width: ${theme.size.medium};
+  @media ${theme.screenSize.upToSmall} {
+    width: 20px;
+  }
 `;
 
 const H4 = styled(Body)`
@@ -43,30 +50,11 @@ const CompactCard = styled(StyledCard)`
   padding: ${theme.size.large} ${theme.size.medium};
 `;
 
-const CompactIcon = styled('img')`
-  margin: auto;
-  width: ${theme.size.medium};
-  @media ${theme.screenSize.upToSmall} {
-    width: 20px;
-  }
-`;
-
-const CompactIconCircle = styled('div')`
-  display: flex;
-  flex-shrink: 0 !important;
-  height: 48px;
-  width: 48px;
-  @media ${theme.screenSize.upToSmall} {
-    height: 40px;
-    width: 40px;
-  }
-`;
-
 const CompactTextWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-left: ${theme.size.medium};
+  margin-left: ${theme.size.small};
   @media ${theme.screenSize.upToSmall} {
     margin-left: ${theme.size.default};
   }
@@ -89,23 +77,19 @@ const onCardClick = (url) => {
 const Card = ({
   isCompact,
   isExtraCompact,
+  page,
   nodeData: {
     children,
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
 }) => {
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
-  const Icon = isCompact ? CompactIcon : CardIcon;
+  const template = page?.options?.template;
+  const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
+
   return (
     <Card onClick={url ? () => onCardClick(url) : undefined}>
-      {icon && (
-        <ConditionalWrapper
-          condition={isCompact}
-          wrapper={(children) => <CompactIconCircle>{children}</CompactIconCircle>}
-        >
-          <Icon src={withPrefix(icon)} alt={iconAlt} />
-        </ConditionalWrapper>
-      )}
+      {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
@@ -142,6 +126,7 @@ Card.propTypes = {
       url: PropTypes.string,
     }),
   }).isRequired,
+  page: PropTypes.object,
 };
 
 export default Card;
