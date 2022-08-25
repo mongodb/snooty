@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { css } from '@emotion/react';
 import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { formatText } from '../../utils/format-text';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { theme } from '../../theme/docsTheme';
 
 const activeColor = css`
-  color: ${uiColors.gray.dark3};
+  color: ${palette.gray.dark3};
 `;
 
 const StyledArrow = styled('span')`
@@ -33,6 +34,7 @@ const StyledLink = styled(Link)`
       ${activeColor}
     }
   }
+  font-size: ${theme.fontSize.small};
 `;
 
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {

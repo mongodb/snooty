@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { sideNavItemBasePadding } from './styles/sideNavItem';
+import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 
@@ -25,7 +25,7 @@ const GuidesLandingTree = ({ chapters, handleClick }) => {
         <SideNavItem
           active={to === '/'}
           as={Link}
-          className={cx(sideNavItemBasePadding)}
+          className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
           key={to}
           onClick={handleClick}
           to={to}

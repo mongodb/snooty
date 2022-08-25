@@ -3,7 +3,7 @@
 exports[`Select renders select correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 16px;
   opacity: 1;
@@ -37,7 +37,7 @@ exports[`Select renders select correctly 1`] = `
 .emotion-6 {
   display: inline-block;
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0!important;
   overflow: hidden;
   text-overflow: ellipsis;
