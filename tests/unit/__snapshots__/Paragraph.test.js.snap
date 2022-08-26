@@ -91,7 +91,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
       <span
         class="emotion-4"
       >
-        Deploy a Free Tier Cluster
+        Deploy a Free Tier Cluster.
       </span>
       <svg
         alt=""
@@ -112,7 +112,6 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
         />
       </svg>
     </a>
-    .
   </p>
 </DocumentFragment>
 `;
@@ -208,7 +207,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
       <span
         class="emotion-4"
       >
-        Deploy a Free Tier Cluster
+        Deploy a Free Tier Cluster.
       </span>
       <svg
         alt=""
@@ -229,7 +228,6 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
         />
       </svg>
     </a>
-    .
   </p>
 </DocumentFragment>
 `;
