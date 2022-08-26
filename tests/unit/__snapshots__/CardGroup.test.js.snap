@@ -97,36 +97,16 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-shrink: 0!important;
-  -ms-flex-negative: 0!important;
-  flex-shrink: 0!important;
-  height: 48px;
-  width: 48px;
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-5 {
-    height: 40px;
-    width: 40px;
-  }
-}
-
-.emotion-7 {
-  margin: auto;
   width: 24px;
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-7 {
+  .emotion-5 {
     width: 20px;
   }
 }
 
-.emotion-9 {
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -135,24 +115,24 @@ exports[`renders correctly 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   height: 100%;
-  margin-left: 24px;
+  margin-left: 8px;
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-9 {
+  .emotion-7 {
     margin-left: 16px;
   }
 }
 
-.emotion-9 p {
+.emotion-7 p {
   line-height: 24px;
 }
 
-.emotion-11 {
+.emotion-9 {
   margin-bottom: 16px;
 }
 
-.emotion-13 {
+.emotion-11 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -162,16 +142,16 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-13 strong,
-.emotion-13 b {
+.emotion-11 strong,
+.emotion-11 b {
   font-weight: 700;
 }
 
-.emotion-14 a {
+.emotion-12 a {
   line-height: unset;
 }
 
-.emotion-17 {
+.emotion-15 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -193,15 +173,15 @@ exports[`renders correctly 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-17:focus {
+.emotion-15:focus {
   outline: none;
 }
 
-.emotion-18 {
+.emotion-16 {
   position: relative;
 }
 
-.emotion-18::after {
+.emotion-16::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -211,15 +191,15 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-18::after {
+.constant-classname:focus .emotion-16::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-18::after {
+.constant-classname:hover .emotion-16::after {
   background-color: #E8EDEB;
 }
 
-.emotion-36 {
+.emotion-32 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -235,34 +215,30 @@ exports[`renders correctly 1`] = `
     <div
       class="emotion-2 emotion-3 emotion-4"
     >
-      <div
+      <img
+        alt="MongoDB Atlas icon"
         class="emotion-5 emotion-6"
-      >
-        <img
-          alt="MongoDB Atlas icon"
-          class="emotion-7 emotion-8"
-          src="/images/icons/atlas.svg"
-        />
-      </div>
+        src="/images/icons/atlas.svg"
+      />
       <div
-        class="emotion-9 emotion-10"
+        class="emotion-7 emotion-8"
       >
         <p
-          class="emotion-11 emotion-12 emotion-13"
+          class="emotion-9 emotion-10 emotion-11"
         >
           Use Compass to connect to your Atlas cluster
         </p>
         <p
-          class="emotion-14 emotion-15 emotion-13"
+          class="emotion-12 emotion-13 emotion-11"
         >
           <a
-            class="constant-classname emotion-17"
+            class="constant-classname emotion-15"
             href="https://docs.atlas.mongodb.com/getting-started/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-18"
+              class="emotion-16"
             >
               Read Atlas docs
             </span>
@@ -273,41 +249,37 @@ exports[`renders correctly 1`] = `
     <div
       class="emotion-2 emotion-3 emotion-4"
     >
-      <div
+      <img
+        alt="MongoDB University icon"
         class="emotion-5 emotion-6"
-      >
-        <img
-          alt="MongoDB University icon"
-          class="emotion-7 emotion-8"
-          src="/images/icons/university.svg"
-        />
-      </div>
+        src="/images/icons/university.svg"
+      />
       <div
-        class="emotion-9 emotion-10"
+        class="emotion-7 emotion-8"
       >
         <p
-          class="emotion-11 emotion-12 emotion-13"
+          class="emotion-9 emotion-10 emotion-11"
         >
           Learn MongoDB Basics with MongoDB University
         </p>
         <p
-          class="emotion-14 emotion-15 emotion-13"
+          class="emotion-12 emotion-13 emotion-11"
         >
           <a
-            class="constant-classname emotion-17"
+            class="constant-classname emotion-15"
             href="https://university.mongodb.com/courses/M001/about"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-18"
+              class="emotion-16"
             >
               Learn MongoDB Basics
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-36"
+              class="emotion-32"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
@@ -329,34 +301,30 @@ exports[`renders correctly 1`] = `
     <div
       class="emotion-2 emotion-3 emotion-4"
     >
-      <div
+      <img
+        alt="MongoDB Server icon"
         class="emotion-5 emotion-6"
-      >
-        <img
-          alt="MongoDB Server icon"
-          class="emotion-7 emotion-8"
-          src="/images/icons/server.svg"
-        />
-      </div>
+        src="/images/icons/server.svg"
+      />
       <div
-        class="emotion-9 emotion-10"
+        class="emotion-7 emotion-8"
       >
         <p
-          class="emotion-11 emotion-12 emotion-13"
+          class="emotion-9 emotion-10 emotion-11"
         >
           Access more in-depth examples of querying data
         </p>
         <p
-          class="emotion-14 emotion-15 emotion-13"
+          class="emotion-12 emotion-13 emotion-11"
         >
           <a
-            class="constant-classname emotion-17"
+            class="constant-classname emotion-15"
             href="https://docs.mongodb.com/manual/tutorial/getting-started/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-18"
+              class="emotion-16"
             >
               Read Server docs
             </span>
