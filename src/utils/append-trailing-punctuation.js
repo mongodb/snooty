@@ -21,7 +21,7 @@ export const appendTrailingPunctuation = (nodes) => {
 
 // Make a copy of node with a deep copy of the new child node with added punctuation
 function deepCopyNodesChildren(refNode, additionalValue) {
-  if (!refNode.children || !refNode.children.length) return refNode;
+  if (!refNode.children || !refNode.children.length) return { ...refNode };
   const copyOfChildren = [...refNode.children];
   const lastChild = copyOfChildren.pop();
 
