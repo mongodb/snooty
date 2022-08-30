@@ -24,6 +24,8 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
       allowDeselect={false}
       placeholder={undefined}
       disabled={disabled}
+      usePortal={false}
+      popoverZIndex={5}
       defaultValue={value ? value : choices && choices.length && choices[0].value}
       onChange={(value) => {
         onChange(value);
