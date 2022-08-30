@@ -16,7 +16,7 @@ const Label = styled('p')`
 `;
 
 const Select = ({ choices, onChange, defaultText = '', disabled = false, label = null, value = null, ...props }) => {
-  const [selected, setSelected] = useState(choices && choices.length && choices[0].value);
+  const [selected, setSelected] = useState(value ? value : choices && choices.length && choices[0].value);
 
   return (
     <LGSelect
@@ -33,7 +33,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
       }}
     >
       {choices.map((choice) => (
-        <Option className="option-choice" key={choice.value} value={choice.value} role="option">
+        <Option className="option-item" key={choice.value} value={choice.value} role="option">
           {choice.icon && (
             <choice.icon
               css={css`

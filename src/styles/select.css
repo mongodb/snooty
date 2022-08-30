@@ -4,14 +4,16 @@
  *  - remove styling and pass styling props once this is resolved
  */
 
-.option-choice {
+.option-item {
   align-items: center;
 }
 
-.option-choice > span > svg {
+/* hide option item icons, but keep for selection */
+.option-item > span > svg {
   display: none;
 }
 
+/* styling button's content */
 .lg-select > button > div > div > div {
   display: flex;
   align-items: center;
