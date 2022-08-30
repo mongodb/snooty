@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
@@ -16,8 +16,6 @@ const Label = styled('p')`
 `;
 
 const Select = ({ choices, onChange, defaultText = '', disabled = false, label = null, value = null, ...props }) => {
-  const [selected, setSelected] = useState(value ? value : choices && choices.length && choices[0].value);
-
   return (
     <LGSelect
       className="lg-select"
@@ -26,9 +24,8 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
       allowDeselect={false}
       placeholder={undefined}
       disabled={disabled}
-      defaultValue={selected}
+      defaultValue={value ? value : choices && choices.length && choices[0].value}
       onChange={(value) => {
-        setSelected(value);
         onChange(value);
       }}
     >
