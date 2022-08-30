@@ -17,7 +17,7 @@ const Label = styled('p')`
 
 const PortalContainer = forwardRef(({ ...props }, ref) => (
   <div
-    className="portal-container"
+    className={props.className + ' portal-container'}
     ref={ref}
     css={css`
       position: relative;
@@ -27,19 +27,19 @@ const PortalContainer = forwardRef(({ ...props }, ref) => (
   </div>
 ));
 
-const Select = ({ choices, onChange, defaultText = '', disabled = false, label = null, value = null, ...props }) => {
+const Select = ({
+  className,
+  choices,
+  onChange,
+  defaultText = '',
+  disabled = false,
+  label = null,
+  value = null,
+  ...props
+}) => {
+  // show select after portal container has loaded for scroll + zindex consistency
   const portalContainer = useRef();
   const [showSelect, setShowSelect] = useState(false);
-  console.log(choices);
-  console.log(value);
-  // TODO: check why its not working with version selectors.
-  // is it from changes? revert to rebranding master and check
-  useEffect(() => {
-    console.log('check choices');
-    console.log(choices);
-  }, [choices]);
-
-  // show select after portal container has loaded for scroll + zindexconsistency
   useEffect(() => {
     if (portalContainer.current && !showSelect) {
       setShowSelect(true);
@@ -47,7 +47,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
   }, [showSelect]);
 
   return (
-    <PortalContainer ref={portalContainer}>
+    <PortalContainer className={className} ref={portalContainer}>
       {showSelect && (
         <LGSelect
           className="lg-select"
@@ -61,7 +61,7 @@ const Select = ({ choices, onChange, defaultText = '', disabled = false, label =
           placeholder={defaultText}
           defaultValue={value ? String(value) : (choices && choices.length && String(choices[0].value)) || ''}
           onChange={(value) => {
-            onChange(value);
+            onChange({ value });
           }}
         >
           {choices.map((choice) => (
