@@ -112,6 +112,9 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       }))
     : [];
 
+  console.log('versionChoices');
+  console.log(versionChoices);
+
   return (
     <>
       <StyledSelect

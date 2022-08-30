@@ -13,10 +13,6 @@
   display: none;
 }
 
-.lg-select > button {
-  z-index: 5;
-}
-
 /* styling button's content */
 .lg-select > button > div > div > div {
   display: flex;
