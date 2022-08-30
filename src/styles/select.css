@@ -1,0 +1,19 @@
+/**
+ *  LG/select@7 issues:
+ *  - cannot pass emotion/css attribute to select component, option components
+ *  - remove styling and pass styling props once this is resolved
+ */
+
+.option-choice {
+  align-items: center;
+}
+
+.option-choice > span > svg {
+  display: none;
+}
+
+.lg-select > button > div > div > div {
+  display: flex;
+  align-items: center;
+}
+
