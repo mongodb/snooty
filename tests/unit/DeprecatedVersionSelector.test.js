@@ -14,7 +14,7 @@ const metadata = {
   deprecated_versions: deprecatedVersions,
 };
 
-describe('DEPRECATEDVERSIONSELECTOR  when rendered', () => {
+describe('DeprecatedVersionSelector when rendered', () => {
   jest.useFakeTimers();
 
   it('shows two dropdowns', () => {

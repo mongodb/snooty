@@ -34,10 +34,17 @@ const expectFilteredResults = (wrapper) => {
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
 };
 
+// filters are not shown until dropdown is opened
+// open filters by clicking select buttons first
 const expectValuesForFilters = (wrapper, category, version) => {
-  const dropdowns = wrapper.queryAllByRole('listbox');
-  expect(within(dropdowns[0]).queryByText(category)).toBeTruthy();
-  expect(within(dropdowns[1]).queryByText(version)).toBeTruthy();
+  const selectElements = wrapper.container.getElementsByClassName('lg-select');
+  const dropdownButtons = [];
+  for (let selectElement of selectElements) {
+    dropdownButtons.push(selectElement.querySelector('button'));
+  }
+
+  expect(dropdownButtons[0].textContent).toBe(category);
+  expect(dropdownButtons[1].textContent).toBe(version);
 };
 
 // Unfiltered search results should still display tags for category and version on card
@@ -76,7 +83,12 @@ const filterByRealm = async (wrapper, screenSize) => {
   if (screenSize === 'mobile') {
     listboxIndex = 2;
   }
-  const dropdown = wrapper.queryAllByRole('listbox')[listboxIndex];
+  const selectElements = wrapper.container.getElementsByClassName('lg-select');
+  const dropdownButtons = [];
+  for (let selectElement of selectElements) {
+    dropdownButtons.push(selectElement.querySelector('button'));
+  }
+  const dropdown = dropdownButtons[listboxIndex];
   expect(dropdown).toHaveAttribute('aria-expanded', 'false');
   userEvent.click(dropdown);
   tick();
