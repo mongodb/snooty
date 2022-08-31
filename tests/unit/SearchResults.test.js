@@ -15,10 +15,14 @@ import mockInputData from '../utils/data/marian-manifests.json';
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
-const expectFilteredResults = (wrapper) => {
-  // Filtered property "Realm" and version "Latest" should be shown 3x:
+const expectFilteredResults = (wrapper, filteredByRealm) => {
+  // Filtered property "Realm" should be shown 3 or 4x:
   // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
-  expect(wrapper.queryAllByText('Realm').length).toBe(3);
+  // and (4) if it selected within the dropdown
+  const expectedRealmCount = filteredByRealm ? 4 : 3;
+  // Version "Latest" should be shown 3x:
+  // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
+  expect(wrapper.queryAllByText('Realm').length).toBe(expectedRealmCount);
   expect(wrapper.queryAllByText('Latest').length).toBe(3);
 
   // Check the search result card displays content according to the response
@@ -88,11 +92,12 @@ const filterByRealm = async (wrapper, screenSize) => {
   for (let selectElement of selectElements) {
     dropdownButtons.push(selectElement.querySelector('button'));
   }
-  const dropdown = dropdownButtons[listboxIndex];
-  expect(dropdown).toHaveAttribute('aria-expanded', 'false');
-  userEvent.click(dropdown);
+  const dropdownButton = dropdownButtons[listboxIndex];
+  expect(dropdownButton).toHaveAttribute('aria-expanded', 'false');
+  userEvent.click(dropdownButton);
   tick();
-  userEvent.click(within(dropdown).getByText('Realm'));
+  const dropdownList = wrapper.queryAllByRole('listbox')[0];
+  userEvent.click(within(dropdownList).getByText('Realm'));
 };
 
 const openMobileSearch = async (wrapper) => {
@@ -208,7 +213,7 @@ describe('Search Results Page', () => {
     await act(async () => {
       await filterByRealm(renderStitchResults);
     });
-    expectFilteredResults(renderStitchResults);
+    expectFilteredResults(renderStitchResults, true);
   });
 
   it('resets search filters when hitting the "clear all filters" button', async () => {
@@ -223,7 +228,7 @@ describe('Search Results Page', () => {
     await act(async () => {
       await filterByRealm(renderStitchResults);
     });
-    expectFilteredResults(renderStitchResults);
+    expectFilteredResults(renderStitchResults, true);
 
     // Remove filters
     await act(async () => {

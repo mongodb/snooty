@@ -53,6 +53,7 @@ const Select = ({
           className="lg-select"
           value={value || ''}
           label={label}
+          aria-labelledby={(!label && 'select') || null}
           size="default"
           allowDeselect={false}
           disabled={disabled}
