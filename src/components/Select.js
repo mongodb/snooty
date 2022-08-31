@@ -51,6 +51,7 @@ const Select = ({
       {showSelect && (
         <LGSelect
           className="lg-select"
+          value={value || ''}
           label={label}
           size="default"
           allowDeselect={false}
@@ -59,7 +60,7 @@ const Select = ({
           scrollContainer={portalContainer.current}
           popoverZIndex={2}
           placeholder={defaultText}
-          defaultValue={value ? String(value) : (choices && choices.length && String(choices[0].value)) || ''}
+          defaultValue={value ? String(value) : ''}
           onChange={(value) => {
             onChange({ value });
           }}
