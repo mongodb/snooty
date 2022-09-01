@@ -41,7 +41,7 @@ const iconStyling = css`
 `;
 
 const PortalContainer = forwardRef(({ ...props }, ref) => (
-  <div className={`${cx(portalStyle)} ${props.className}`} ref={ref} css={portalStyle}>
+  <div className={`${cx(portalStyle)} ${props.className}`} ref={ref}>
     {props.children}
   </div>
 ));

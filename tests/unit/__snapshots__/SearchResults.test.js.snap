@@ -430,8 +430,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   position: relative;
 }
 
-.emotion-45 {
-  emotion-43label: MaxWidthSelect;
+.emotion-44 {
   width: 175px;
 }
 
@@ -1436,8 +1435,7 @@ exports[`Search Results Page does not return results for a given search term wit
   position: relative;
 }
 
-.emotion-36 {
-  emotion-34label: MaxWidthSelect;
+.emotion-35 {
   width: 175px;
 }
 
@@ -4224,8 +4222,7 @@ exports[`Search Results Page renders results from a given search term query para
   position: relative;
 }
 
-.emotion-39 {
-  emotion-37label: MaxWidthSelect;
+.emotion-38 {
   width: 175px;
 }
 
