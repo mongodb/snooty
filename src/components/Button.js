@@ -16,8 +16,6 @@ const Button = ({
   if (uri) {
     componentProps.as = Link;
     componentProps.to = uri;
-  } else {
-    componentProps.href = uri;
   }
 
   return (
