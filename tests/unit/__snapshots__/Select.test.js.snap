@@ -2,7 +2,11 @@
 
 exports[`Select renders select correctly 1`] = `
 <DocumentFragment>
-  .emotion-1 {
+  .emotion-0 {
+  position: relative;
+}
+
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12,12 +16,12 @@ exports[`Select renders select correctly 1`] = `
   flex-direction: column;
 }
 
-.emotion-1>label+button,
-.emotion-1>p+button {
+.emotion-2>label+button,
+.emotion-2>p+button {
   margin-top: 3px;
 }
 
-.emotion-1>button>div>div>div {
+.emotion-2>button>div>div>div {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -28,7 +32,7 @@ exports[`Select renders select correctly 1`] = `
   align-items: center;
 }
 
-.emotion-2 {
+.emotion-3 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -68,35 +72,35 @@ exports[`Select renders select correctly 1`] = `
   font-size: 13px;
 }
 
-.emotion-2:focus {
+.emotion-3:focus {
   outline: none;
 }
 
-.emotion-2[disabled],
-.emotion-2:disabled {
+.emotion-3[disabled],
+.emotion-3:disabled {
   pointer-events: none;
 }
 
-.emotion-2:active,
-.emotion-2:focus,
-.emotion-2:hover {
+.emotion-3:active,
+.emotion-3:focus,
+.emotion-3:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-2:hover,
-.emotion-2:active {
+.emotion-3:hover,
+.emotion-3:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-2:focus {
+.emotion-3:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-2>*:last-child {
+.emotion-3>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -104,33 +108,33 @@ exports[`Select renders select correctly 1`] = `
   justify-content: flex-start;
 }
 
-.emotion-2>*:last-child>svg {
+.emotion-3>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-2>*:last-child>svg {
+.emotion-3>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-2>*:last-child {
+.emotion-3>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-2:focus {
+.emotion-3:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-2 {
+  .emotion-3 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-3 {
+.emotion-4 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -140,7 +144,7 @@ exports[`Select renders select correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-4 {
+.emotion-5 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -160,7 +164,7 @@ exports[`Select renders select correctly 1`] = `
   gap: 6px;
 }
 
-.emotion-5 {
+.emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -180,14 +184,14 @@ exports[`Select renders select correctly 1`] = `
   overflow: hidden;
 }
 
-.emotion-6 {
+.emotion-7 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-7 {
+.emotion-8 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -198,10 +202,10 @@ exports[`Select renders select correctly 1`] = `
 }
 
 <div
-    class="undefined portal-container emotion-0"
+    class="emotion-0 undefined emotion-1"
   >
     <div
-      class="emotion-1"
+      class="emotion-2"
     >
       <button
         aria-controls="select-1-menu"
@@ -210,7 +214,7 @@ exports[`Select renders select correctly 1`] = `
         aria-expanded="false"
         aria-invalid="false"
         aria-labelledby="select"
-        class="emotion-2"
+        class="emotion-3"
         data-leafygreen-ui="button"
         data-testid="lg-select"
         id="select-2"
@@ -218,22 +222,22 @@ exports[`Select renders select correctly 1`] = `
         value=""
       >
         <div
-          class="emotion-3"
+          class="emotion-4"
         />
         <div
-          class="emotion-4"
+          class="emotion-5"
         >
           <div
-            class="emotion-5"
+            class="emotion-6"
           >
             <div
-              class="emotion-6"
+              class="emotion-7"
             />
           </div>
           <svg
             alt=""
             aria-hidden="true"
-            class="emotion-7"
+            class="emotion-8"
             height="16"
             role="presentation"
             viewBox="0 0 16 16"
