@@ -427,7 +427,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-44 {
-  position: relative;
+  leafygreen-ui-cssveglabel: MaxWidthSelect;
   width: 175px;
 }
 
@@ -444,6 +444,17 @@ exports[`Search Results Page considers a given search filter query param and dis
 .emotion-45>label+button,
 .emotion-45>p+button {
   margin-top: 3px;
+}
+
+.emotion-45>button>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-46 {
@@ -897,7 +908,7 @@ exports[`Search Results Page considers a given search filter query param and dis
             class="emotion-43 portal-container emotion-44"
           >
             <div
-              class="emotion-45 lg-select"
+              class="emotion-45"
             >
               <button
                 aria-controls="select-57-menu"
@@ -908,7 +919,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-labelledby="select"
                 class="emotion-46"
                 data-leafygreen-ui="button"
-                data-testid="leafygreen-ui-select-menubutton"
+                data-testid="lg-select"
                 id="select-58"
                 type="button"
                 value="Realm"
@@ -954,7 +965,7 @@ exports[`Search Results Page considers a given search filter query param and dis
             class="emotion-43 portal-container emotion-44"
           >
             <div
-              class="emotion-45 lg-select"
+              class="emotion-45"
             >
               <button
                 aria-controls="select-59-menu"
@@ -965,7 +976,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-labelledby="select"
                 class="emotion-57"
                 data-leafygreen-ui="button"
-                data-testid="leafygreen-ui-select-menubutton"
+                data-testid="lg-select"
                 disabled=""
                 id="select-60"
                 type="button"
@@ -1418,7 +1429,7 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-35 {
-  position: relative;
+  leafygreen-ui-cssveglabel: MaxWidthSelect;
   width: 175px;
 }
 
@@ -1435,6 +1446,17 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-36>label+button,
 .emotion-36>p+button {
   margin-top: 3px;
+}
+
+.emotion-36>button>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-37 {
@@ -1860,7 +1882,7 @@ exports[`Search Results Page does not return results for a given search term wit
             class="emotion-34 portal-container emotion-35"
           >
             <div
-              class="emotion-36 lg-select"
+              class="emotion-36"
             >
               <button
                 aria-controls="select-73-menu"
@@ -1871,7 +1893,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 aria-labelledby="select"
                 class="emotion-37"
                 data-leafygreen-ui="button"
-                data-testid="leafygreen-ui-select-menubutton"
+                data-testid="lg-select"
                 id="select-74"
                 type="button"
                 value=""
@@ -1917,7 +1939,7 @@ exports[`Search Results Page does not return results for a given search term wit
             class="emotion-34 portal-container emotion-35"
           >
             <div
-              class="emotion-36 lg-select"
+              class="emotion-36"
             >
               <button
                 aria-controls="select-75-menu"
@@ -1928,7 +1950,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 aria-labelledby="select"
                 class="emotion-48"
                 data-leafygreen-ui="button"
-                data-testid="leafygreen-ui-select-menubutton"
+                data-testid="lg-select"
                 disabled=""
                 id="select-76"
                 type="button"
@@ -4191,7 +4213,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-38 {
-  position: relative;
+  leafygreen-ui-cssveglabel: MaxWidthSelect;
   width: 175px;
 }
 
@@ -4208,6 +4230,17 @@ exports[`Search Results Page renders results from a given search term query para
 .emotion-39>label+button,
 .emotion-39>p+button {
   margin-top: 3px;
+}
+
+.emotion-39>button>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-40 {
@@ -4632,7 +4665,7 @@ exports[`Search Results Page renders results from a given search term query para
             class="emotion-37 portal-container emotion-38"
           >
             <div
-              class="emotion-39 lg-select"
+              class="emotion-39"
             >
               <button
                 aria-controls="select-41-menu"
@@ -4643,7 +4676,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-labelledby="select"
                 class="emotion-40"
                 data-leafygreen-ui="button"
-                data-testid="leafygreen-ui-select-menubutton"
+                data-testid="lg-select"
                 id="select-42"
                 type="button"
                 value=""
@@ -4689,7 +4722,7 @@ exports[`Search Results Page renders results from a given search term query para
             class="emotion-37 portal-container emotion-38"
           >
             <div
-              class="emotion-39 lg-select"
+              class="emotion-39"
             >
               <button
                 aria-controls="select-43-menu"
@@ -4700,7 +4733,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-labelledby="select"
                 class="emotion-51"
                 data-leafygreen-ui="button"
-                data-testid="leafygreen-ui-select-menubutton"
+                data-testid="lg-select"
                 disabled=""
                 id="select-44"
                 type="button"

@@ -2,11 +2,7 @@
 
 exports[`Select renders select correctly 1`] = `
 <DocumentFragment>
-  .emotion-0 {
-  position: relative;
-}
-
-.emotion-1 {
+  .emotion-1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -19,6 +15,17 @@ exports[`Select renders select correctly 1`] = `
 .emotion-1>label+button,
 .emotion-1>p+button {
   margin-top: 3px;
+}
+
+.emotion-1>button>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-2 {
@@ -194,7 +201,7 @@ exports[`Select renders select correctly 1`] = `
     class="undefined portal-container emotion-0"
   >
     <div
-      class="emotion-1 lg-select"
+      class="emotion-1"
     >
       <button
         aria-controls="select-1-menu"
@@ -205,7 +212,7 @@ exports[`Select renders select correctly 1`] = `
         aria-labelledby="select"
         class="emotion-2"
         data-leafygreen-ui="button"
-        data-testid="leafygreen-ui-select-menubutton"
+        data-testid="lg-select"
         id="select-2"
         type="button"
         value=""

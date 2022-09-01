@@ -41,14 +41,10 @@ const expectFilteredResults = (wrapper, filteredByRealm) => {
 // filters are not shown until dropdown is opened
 // open filters by clicking select buttons first
 const expectValuesForFilters = (wrapper, category, version) => {
-  const selectElements = wrapper.container.getElementsByClassName('lg-select');
-  const dropdownButtons = [];
-  for (let selectElement of selectElements) {
-    dropdownButtons.push(selectElement.querySelector('button'));
-  }
+  const selectElements = wrapper.queryAllByTestId('lg-select');
 
-  expect(dropdownButtons[0].textContent).toBe(category);
-  expect(dropdownButtons[1].textContent).toBe(version);
+  expect(selectElements[0].textContent).toBe(category);
+  expect(selectElements[1].textContent).toBe(version);
 };
 
 // Unfiltered search results should still display tags for category and version on card
@@ -87,12 +83,8 @@ const filterByRealm = async (wrapper, screenSize) => {
   if (screenSize === 'mobile') {
     listboxIndex = 2;
   }
-  const selectElements = wrapper.container.getElementsByClassName('lg-select');
-  const dropdownButtons = [];
-  for (let selectElement of selectElements) {
-    dropdownButtons.push(selectElement.querySelector('button'));
-  }
-  const dropdownButton = dropdownButtons[listboxIndex];
+  const selectElements = wrapper.queryAllByTestId('lg-select');
+  const dropdownButton = selectElements[listboxIndex];
   expect(dropdownButton).toHaveAttribute('aria-expanded', 'false');
   userEvent.click(dropdownButton);
   tick();

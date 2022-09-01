@@ -69,6 +69,7 @@ const Select = ({
     <PortalContainer className={className} ref={portalContainer}>
       {showSelect && (
         <LGSelect
+          data-testid="lg-select"
           className={cx(buttonContentStyling)}
           value={value || ''}
           label={label}
