@@ -1,10 +1,9 @@
 import React, { useRef, forwardRef, useEffect, useState } from 'react';
-import { css } from '@emotion/react';
+import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
 import PropTypes from 'prop-types';
 import { theme } from '../theme/docsTheme';
-import '../styles/select.css';
 
 const Label = styled('p')`
   font-size: ${theme.fontSize.small};
@@ -15,14 +14,34 @@ const Label = styled('p')`
   margin: 0 0 12px !important;
 `;
 
+const portalStyle = css`
+  position: relative;
+`;
+
+const optionStyling = css`
+  align-items: center;
+
+  & > span > svg {
+    display: none;
+  }
+`;
+
+const buttonContentStyling = css`
+  & > button > div > div > div {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const iconStyling = css`
+  display: inline-block;
+  margin-right: ${theme.size.small};
+  max-height: 20px;
+  width: 30px;
+`;
+
 const PortalContainer = forwardRef(({ ...props }, ref) => (
-  <div
-    className={props.className + ' portal-container'}
-    ref={ref}
-    css={css`
-      position: relative;
-    `}
-  >
+  <div className={props.className + ' portal-container'} ref={ref} css={portalStyle}>
     {props.children}
   </div>
 ));
@@ -50,7 +69,7 @@ const Select = ({
     <PortalContainer className={className} ref={portalContainer}>
       {showSelect && (
         <LGSelect
-          className="lg-select"
+          className={cx(buttonContentStyling)}
           value={value || ''}
           label={label}
           aria-labelledby={(!label && 'select') || null}
@@ -67,17 +86,8 @@ const Select = ({
           }}
         >
           {choices.map((choice) => (
-            <Option className="option-item" key={choice.value} value={choice.value} role="option">
-              {choice.icon && (
-                <choice.icon
-                  css={css`
-                    display: inline-block;
-                    margin-right: ${theme.size.small};
-                    max-height: 20px;
-                    width: 30px;
-                  `}
-                ></choice.icon>
-              )}
+            <Option className={cx(optionStyling)} key={choice.value} value={choice.value} role="option">
+              {choice.icon && <choice.icon className={cx(iconStyling)} />}
               {choice.text}
             </Option>
           ))}
