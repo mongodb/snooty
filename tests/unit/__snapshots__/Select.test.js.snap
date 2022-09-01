@@ -202,7 +202,7 @@ exports[`Select renders select correctly 1`] = `
 }
 
 <div
-    class="emotion-0 undefined"
+    class="emotion-0"
   >
     <div
       class="emotion-1"
