@@ -85,6 +85,7 @@ const Select = ({
           onChange={(value) => {
             onChange({ value });
           }}
+          {...props}
         >
           {choices.map((choice) => (
             <Option className={cx(optionStyling)} key={choice.value} value={choice.value} role="option">
