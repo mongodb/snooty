@@ -5,6 +5,13 @@ import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 import { css, cx } from '@leafygreen-ui/emotion';
 
+// TODO: include mapping of colors to use against button 'variant' attributes
+const buttonStyling = css`
+  .introduction > & {
+    color: #ffffff;
+  }
+`;
+
 const Button = ({
   nodeData: {
     argument,
@@ -19,16 +26,7 @@ const Button = ({
   }
 
   return (
-    <LeafyButton
-      className={cx(
-        css`
-          color: #ffffff !important;
-        `,
-        'button'
-      )}
-      variant="primary"
-      {...componentProps}
-    >
+    <LeafyButton className={cx(uri ? buttonStyling : '', 'button')} variant="primary" {...componentProps}>
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}
