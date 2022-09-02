@@ -61,6 +61,17 @@ const Wrapper = styled('main')`
       grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
     }
 
+    [role='alert'] {
+      grid-column: 2 / 4;
+      grid-row: 1 / 1;
+      align-items: center;
+      margin: ${theme.size.default} 0;
+
+      @media ${theme.screenSize.upToLarge} {
+        grid-column: 2/2;
+      }
+    }
+
     h1 {
       align-self: end;
       grid-column: 2;
