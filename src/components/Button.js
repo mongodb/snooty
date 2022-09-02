@@ -7,9 +7,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 
 // TODO: include mapping of colors to use against button 'variant' attributes
 const buttonStyling = css`
-  .introduction > & {
-    color: #ffffff;
-  }
+  color: #ffffff !important;
 `;
 
 const Button = ({
