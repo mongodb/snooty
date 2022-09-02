@@ -38,7 +38,7 @@ describe('Select', () => {
   const dropdownOpen = (props = {}, openWithKeyboard = false) => {
     const wrapper = render(<SelectController {...props} />);
     // Dropdown should be closed by default
-    const dropdown = wrapper.getByRole('listbox');
+    const dropdown = wrapper.container.querySelector('button');
     expect(dropdown).toHaveAttribute('aria-expanded', 'false');
     if (openWithKeyboard) {
       userEvent.tab();
@@ -57,7 +57,7 @@ describe('Select', () => {
   });
 
   it('displays default text', () => {
-    const defaultText = 'Some default text';
+    const defaultText = 'Some default texts';
     const wrapper = render(<SelectController defaultText={defaultText} />);
     const renderedText = wrapper.getByText(defaultText);
     expect(renderedText).toBeTruthy();
@@ -79,42 +79,39 @@ describe('Select', () => {
 
   it('passes disabled prop through to select implementation when given', () => {
     const wrapper = render(<SelectController disabled />);
-    // Dropdown should be closed by default
-    // parent element access is limitation of implementation
-    // TODO: look at select implementation to see if disabled div and listbox role div can be coalesced
-    expect(wrapper.getByRole('listbox').parentElement).toHaveAttribute('aria-disabled', 'true');
+    expect(wrapper.container.querySelector('button')).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('closes the dropdown by clicking again on the toggle parent', () => {
     const wrapper = dropdownOpen();
-    const dropdown = wrapper.getByRole('listbox');
-    userEvent.click(dropdown);
+    const dropdownButton = wrapper.container.querySelector('button');
+    userEvent.click(dropdownButton);
     // Dropdown was previously open, it should now be closed
-    expect(dropdown).toHaveAttribute('aria-expanded', 'false');
+    expect(dropdownButton).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('updates the selected text when an item is clicked', () => {
     const defaultText = 'Default Text';
     const wrapper = dropdownOpen({ defaultText });
-    let renderedText = wrapper.getByText(defaultText);
-    expect(renderedText).toBeTruthy();
-    //Implementation stores the 'select' in the first option field, as rendered html
-    const firstOption = wrapper.queryAllByRole('option')[1];
+    let renderedText = wrapper.container.querySelector('button');
+    expect(renderedText.textContent).toBe(defaultText);
+    // Implementation stores the 'select' in the first option field, as rendered html
+    const firstOption = wrapper.queryAllByRole('option')[0];
     expect(firstOption.textContent).toBe(DEFAULT_CHOICES[0].text);
     userEvent.click(firstOption);
-    //check the first option field to make sure it updated
-    renderedText = wrapper.queryAllByRole('option')[0];
+    //check the button text to make sure it updated
+    renderedText = wrapper.container.querySelector('button');
     expect(renderedText.textContent).toBe(DEFAULT_CHOICES[0].text);
   });
 
-  it('passes the entire choice to the onChange callback', () => {
+  it('passes the value attribute of original choice to the onChange callback', () => {
     const customOnChange = jest.fn();
     const wrapper = dropdownOpen({ customOnChange });
-    const firstOption = wrapper.queryAllByRole('option')[1];
+    const firstOption = wrapper.queryAllByRole('option')[0];
     expect(firstOption.textContent).toBe(DEFAULT_CHOICES[0].text);
     userEvent.click(firstOption);
     expect(customOnChange.mock.calls.length).toBe(1);
-    expect(customOnChange.mock.calls[0][0]).toStrictEqual(DEFAULT_CHOICES[0]);
+    expect(customOnChange.mock.calls[0][0]).toStrictEqual({ value: DEFAULT_CHOICES[0].value });
   });
 
   it('should update selected text given a value', () => {
