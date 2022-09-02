@@ -34,7 +34,6 @@ exports[`button component renders correctly 1`] = `
   font-size: 13px;
   font-weight: 500;
   height: 36px;
-  color: #ffffff!important;
 }
 
 .emotion-0:focus {
@@ -64,6 +63,10 @@ exports[`button component renders correctly 1`] = `
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-0.button {
+  color: #ffffff;
 }
 
 .emotion-1 {
