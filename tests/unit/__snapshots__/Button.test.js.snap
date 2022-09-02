@@ -66,10 +66,6 @@ exports[`button component renders correctly 1`] = `
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.introduction>.emotion-0 {
-  color: #ffffff;
-}
-
 .emotion-1 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
