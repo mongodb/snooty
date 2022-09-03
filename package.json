@@ -121,7 +121,7 @@
     "sanitize-html": "^2.2.0",
     "shell-quote": "^1.7.3",
     "styled-components": "^5.2.1",
-    "theme-ui": "^0.13.1",
+    "theme-ui": "^0.14.7",
     "url-parse": "^1.5.8",
     "underscore": "^1.12.1",
     "xmlhttprequest-ssl": ">=1.6.2"
