@@ -96,7 +96,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const isProductLanding = page?.options?.template === 'product-landing';
 
   useEffect(() => {
-    if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
+    let anchorLinkTab = window.location.href.split('#')[1];
+
+    if (tabIds.includes(anchorLinkTab)) {
+      // Set tab from anchor link as active
+      setActiveTab({ name: tabsetName, value: anchorLinkTab });
+    } else if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
       // Set first tab as active if no tab was previously selected
       setActiveTab({ name: tabsetName, value: getTabId(children[0]) });
     }
@@ -153,7 +158,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
+              <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle} id={tabId}>
                 {tab.children.map((child, i) => (
                   <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
                 ))}
