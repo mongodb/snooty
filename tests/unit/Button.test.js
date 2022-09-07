@@ -15,7 +15,6 @@ describe('button component', () => {
 
   it('renders correctly', () => {
     const tree = render(<Button nodeData={mockData} />);
-    tree.debug();
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
