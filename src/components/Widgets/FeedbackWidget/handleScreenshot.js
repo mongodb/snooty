@@ -3,6 +3,9 @@ import { isBrowser } from '../../../utils/is-browser';
 // Client-side Only modules
 import { capture, OutputType } from 'html-screen-capture-js';
 import rasterizeHTML from 'rasterizehtml';
+import { fwTooltipId } from './components/LeafygreenTooltip';
+import { fwInstructionsId, fwExitButtonId } from './components/ScreenshotButton';
+import { fwFormId } from './FeedbackForm';
 
 async function takeScreenshot(subject, config = {}) {
   // Convert the page into a "clean" html document that inlines all styles, images, etc.
@@ -25,11 +28,10 @@ async function takeFeedbackScreenshot() {
     isBrowser &&
     (await takeScreenshot(document, {
       classesOfIgnoredDocBodyElements: [
-        'feedback-form', // Don't include the feedback form
-        'feedback-tooltip', // Don't include any button/star tooltips
-        'navbar-brand', // Don't include the MongoDB logo (temporary for CORS)
-        'overlayInstructions', // Don't include instruction overlay
-        'xButton', // Don't include the X button
+        fwFormId, // Don't include the feedback form
+        fwTooltipId, // Don't include any button/star tooltips
+        fwInstructionsId, // Don't include instruction overlay
+        fwExitButtonId, // Don't include the X button
       ],
     }));
   return dataUri;

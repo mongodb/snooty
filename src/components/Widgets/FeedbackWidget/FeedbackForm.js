@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import Loadable from '@loadable/component';
 import useScreenSize from '../../../hooks/useScreenSize';
 import { useFeedbackState } from './context';
@@ -11,10 +10,6 @@ import QualifiersView from './views/QualifiersView';
 import SupportView from './views/SupportView';
 import SubmittedView from './views/SubmittedView';
 const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
-
-const feedbackStyle = css`
-  z-index: 20;
-`;
 
 export function FeedbackContent({ view }) {
   const View = {
@@ -44,7 +39,7 @@ export default function FeedbackForm(props) {
 
   return (
     isOpen && (
-      <div className="feedback-form" hidden={!isOpen} css={feedbackStyle}>
+      <div className={fwFormId} hidden={!isOpen}>
         <Container isOpen={isOpen}>
           <FeedbackContent view={view} />
         </Container>
@@ -52,3 +47,6 @@ export default function FeedbackForm(props) {
     )
   );
 }
+
+export const feedbackId = 'feedback-card';
+export const fwFormId = 'feedback-form';

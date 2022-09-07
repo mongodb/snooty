@@ -7,7 +7,6 @@ import Loadable from '@loadable/component';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
 import useViewport from '../../../../hooks/useViewport';
-import { isBrowser } from '../../../../utils/is-browser';
 import validateEmail from '../../../../utils/validate-email';
 import { retrieveDataUri } from '../handleScreenshot';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
@@ -39,7 +38,7 @@ export default function CommentView({ ...props }) {
   const isValidEmail = useValidation(email, validateEmail);
 
   const handleSubmit = async () => {
-    if (isValidEmail && isBrowser) {
+    if (isValidEmail) {
       if (screenshotTaken) {
         const dataUri = await retrieveDataUri();
         await submitScreenshot({ dataUri, viewport });

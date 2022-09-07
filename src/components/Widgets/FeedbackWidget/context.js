@@ -150,6 +150,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       await abandonFeedback({ feedback_id: feedback._id });
       setFeedback(null);
     }
+    document.body.style.overflow = 'visible';
   }
 
   const value = {

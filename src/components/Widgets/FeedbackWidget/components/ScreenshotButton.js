@@ -7,7 +7,9 @@ import Portal from '@leafygreen-ui/portal';
 import Tooltip from './LeafygreenTooltip';
 import { CameraIcon } from '../icons';
 import { useFeedbackState } from '../context';
+import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
+import useNoScroll from '../hooks/useNoScroll';
 
 const instructionsBorderStyling = css`
   position: fixed;
@@ -46,18 +48,19 @@ const overlayElementStyle = (position, top, left, width, height) => css`
 `;
 
 // current hovered or selected component
-const hightlightedElementStyle = (position, top, left, width, height, lineStyle) => css`
+const highlightedElementStyle = (position, top, left, width, height, lineStyle) => css`
   ${baseStyle(position, top, left, width, height)};
   outline: #ffdd49 ${lineStyle} 10px;
   outline-offset: 10px;
   float: left;
   z-index: 11;
+  cursor: ${lineStyle === 'solid' ? 'unset' : 'pointer'};
 `;
 
-const xButtonStyle = (position, top, right) => css`
+const exitButtonStyle = (position, top, left) => css`
   position: ${position};
   top: ${Math.max(top - 5, 15)}px;
-  left: ${Math.min(right - 25, window.innerWidth - 45)}px;
+  left: ${Math.max(left - 5, 15)}px;
   color: #ffdd49;
   background-color: white;
   border-radius: 80%;
@@ -67,45 +70,40 @@ const xButtonStyle = (position, top, right) => css`
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
   const { setScreenshotTaken } = useFeedbackState();
-  const [isHovered, setIsHovered] = useState(false);
   const label = 'Take a Screenshot';
-  // TODO: incorporate tooltip for new screenshot icon from DOP-2400
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
-  const [currDOMState, setCurrDOMState] = useState(null);
+  const [currElemState, setCurrElemState] = useState(null);
 
   // border around highlighted element
-  const [isDOMElementClicked, setIsDOMElementClicked] = useState('dashed');
   const domElementClickedRef = useRef('dashed');
+  const [selectedElementBorderStyle, setSelectedElementBorderStyle] = useState('dashed');
 
   // store selected dom element and its attributes
-  const currDOM = useRef(null);
-  const currDOMWidth = useRef(0);
-  const currDOMHeight = useRef(0);
-  const currDOMLeft = useRef(0);
-  const currDOMTop = useRef(0);
-  const currDOMRight = useRef(0);
-  const currDOMBottom = useRef(0);
-  const currDOMPosition = useRef('absolute');
-  const screenshotButtonClicked = useRef(false);
+  const currElem = useRef(null);
+  const initialElemProperties = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0, position: 'absolute' };
+  const currElemProperties = useRef(initialElemProperties);
+  const [elemProps, setElemProps] = useState({});
 
-  // state representing the left, top, right, bottom coordinates of the current selected element
-  const [currElementBoundingBox, setCurrElementBoundingBox] = useState([0, 0, 0, 0]);
-  const [currDOMWidthState, setCurrDOMWidthState] = useState(0);
-  const [currDOMHeightState, setCurrDOMHeightState] = useState(0);
+  const documentScrollWidth = document.body.scrollWidth;
+  const documentScrollHeight = document.body.scrollHeight;
 
   useEffect(() => {
-    setCurrDOMState(currDOM.current);
-    setCurrDOMWidthState(currDOMWidth.current);
-    setCurrDOMHeightState(currDOMHeight.current);
-    setCurrElementBoundingBox([currDOMLeft.current, currDOMTop.current, currDOMRight.current, currDOMBottom.current]);
-    setIsDOMElementClicked(domElementClickedRef.current);
-    unlockScrolling();
-  }, [currDOMState]);
+    setElemProps({
+      width: currElemProperties.current['width'],
+      height: currElemProperties.current['height'],
+      top: currElemProperties.current['top'],
+      bottom: currElemProperties.current['bottom'],
+      left: currElemProperties.current['left'],
+      right: currElemProperties.current['right'],
+      position: currElemProperties.current['position'],
+    });
+    setSelectedElementBorderStyle(domElementClickedRef.current);
+  }, [currElemState]);
 
   // prevent FW from being selected
   const isFWSelected = useCallback((listOfElements) => {
     for (const elem in listOfElements) {
-      if (listOfElements[elem].id.includes('feedbackCard')) {
+      if (listOfElements[elem]?.id?.includes(feedbackId)) {
         return true;
       }
     }
@@ -114,137 +112,113 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // set properties of selected DOM element based on bounding box
   const setSelectedElementProperties = useCallback((currDOMRect) => {
-    currDOMWidth.current = currDOMRect.width;
-    currDOMHeight.current = currDOMRect.height;
-    currDOMLeft.current = currDOMRect.left;
-    currDOMRight.current = currDOMRect.right;
-    currDOMTop.current = currDOMRect.top;
-    currDOMBottom.current = currDOMRect.bottom;
+    const isScrolled = currElemProperties.current['position'] === 'absolute';
+
+    currElemProperties.current['width'] = currDOMRect.width;
+    currElemProperties.current['height'] = currDOMRect.height;
 
     // adjust for scrolling if element selected is not part of the side or top nav
-    if (currDOMPosition.current === 'absolute') {
-      currDOMRight.current += window.scrollX;
-      currDOMLeft.current += window.scrollX;
-      currDOMTop.current += window.scrollY;
-      currDOMBottom.current += window.scrollY;
-    }
+    currElemProperties.current['top'] = isScrolled ? currDOMRect.top + window.scrollY : currDOMRect.top;
+    currElemProperties.current['bottom'] = isScrolled ? currDOMRect.bottom + window.scrollY : currDOMRect.bottom;
+    currElemProperties.current['left'] = isScrolled ? currDOMRect.left + window.scrollX : currDOMRect.left;
+    currElemProperties.current['right'] = isScrolled ? currDOMRect.right + window.scrollX : currDOMRect.right;
   }, []);
 
   // event listener to check whether elements are being hovered over
   const handleElementHighlight = ({ pageX, pageY }) => {
-    // current position of mouse
-    const pos = `(${pageX}, ${pageY})`;
-    if (!!pos) {
-      if (domElementClickedRef.current === 'solid') {
-        document.removeEventListener('mousemove', handleElementHighlight);
-      }
+    if (domElementClickedRef.current === 'solid') {
+      document.removeEventListener('mousemove', handleElementHighlight);
+    }
 
-      let listOfElements = document.elementsFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset);
-      let domElement = null;
+    // current position of mouse with scrolling taken into account
+    let listOfElements = document.elementsFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset);
+    let domElement = null;
 
-      // get the topmost DOM element excluding overlays
-      if (!isFWSelected(listOfElements)) {
-        domElement = listOfElements[0];
-        for (const elem in listOfElements) {
-          if (!listOfElements[elem]?.className?.includes('overlay')) {
-            domElement = listOfElements[elem];
-            break;
-          }
-        }
-      }
-
-      // for elements in the top or side nav, set position to fixed. Otherwise set it to absolute
+    // get the topmost DOM element excluding overlays
+    if (!isFWSelected(listOfElements)) {
+      domElement = listOfElements[0];
       for (const elem in listOfElements) {
-        if (
-          listOfElements[elem]?.className?.includes('SidenavContainer') ||
-          listOfElements[elem]?.className?.includes('StyledHeaderContainer')
-        ) {
-          currDOMPosition.current = 'fixed';
+        if (!listOfElements[elem]?.className?.includes('overlay')) {
+          domElement = listOfElements[elem];
           break;
         }
-        currDOMPosition.current = 'absolute';
       }
+    }
 
-      // hovered element is different from current element
-      if (!!domElement && currDOM.current !== domElement) {
-        currDOM.current = domElement;
-        setCurrDOMState(domElement);
-
-        // set properties like width, height, top, left, etc. for selected element
-        setSelectedElementProperties(currDOM.current.getBoundingClientRect());
+    // for elements in the top or side nav, set position to fixed. Otherwise set it to absolute
+    for (const elem in listOfElements) {
+      if (
+        listOfElements[elem]?.className?.includes('SidenavContainer') ||
+        listOfElements[elem]?.className?.includes('StyledHeaderContainer')
+      ) {
+        currElemProperties.current['position'] = 'fixed';
+        break;
       }
+      currElemProperties.current['position'] = 'absolute';
+    }
+
+    // hovered element is different from current element
+    if (!!domElement && currElem.current !== domElement) {
+      currElem.current = domElement;
+      setCurrElemState(domElement);
+
+      // set properties like width, height, top, left, etc. for selected element
+      setSelectedElementProperties(currElem.current.getBoundingClientRect());
     }
   };
 
   // when screenshot button is first clicked
   const takeNewScreenshot = useCallback(() => {
     setIsScreenshotButtonClicked(true);
-    screenshotButtonClicked.current = true;
-    setIsDOMElementClicked('dashed');
     domElementClickedRef.current = 'dashed';
+    setSelectedElementBorderStyle('dashed');
   }, []);
-
-  const lockScrolling = () => {
-    document.body.style.overflow = 'hidden';
-  };
-
-  const unlockScrolling = () => {
-    document.body.style.overflow = 'visible';
-  };
 
   // close out the instructions panel
   const handleInstructionClick = () => {
-    document.getElementById('feedbackCard').style.display = 'block';
+    document.getElementById(feedbackId).style.display = 'block';
     resetProperties();
-    unlockScrolling();
   };
 
   // reset all the properties, overlays and selected elements
   const resetProperties = () => {
+    currElem.current = null;
+    currElemProperties.current = initialElemProperties;
     setIsScreenshotButtonClicked(false);
-    screenshotButtonClicked.current = false;
+    setCurrElemState(null);
     setScreenshotTaken(false);
-    setCurrDOMState(null);
-    currDOM.current = null;
-    currDOMWidth.current = 0;
-    currDOMHeight.current = 0;
-    currDOMLeft.current = 0;
-    currDOMTop.current = 0;
-    currDOMRight.current = 0;
-    currDOMBottom.current = 0;
   };
 
   const handleDOMElementClick = (e) => {
     e.preventDefault();
 
-    document.getElementById('feedbackCard').style.display = 'block';
     domElementClickedRef.current = 'solid';
-    setIsDOMElementClicked(domElementClickedRef.current);
+    setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    lockScrolling();
+    document.getElementById(feedbackId).style.display = 'block';
   };
 
-  const cancelButtonClick = (e) => {
+  const handleExitButtonClick = (e) => {
     resetProperties();
 
     setIsScreenshotButtonClicked(true);
-    screenshotButtonClicked.current = true;
-
-    setIsDOMElementClicked('dashed');
     domElementClickedRef.current = 'dashed';
+    setSelectedElementBorderStyle('dashed');
 
-    unlockScrolling();
     e.stopPropagation();
   };
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      document.getElementById('feedbackCard').style.display = 'none';
+      document.getElementById(feedbackId).style.display = 'none';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
     }
   }
+
+  // lock the page when element is selected
+  useNoScroll(!!currElem.current && domElementClickedRef.current === 'solid');
 
   return (
     <>
@@ -252,83 +226,77 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         <Portal>
           <>
             <img
-              className="overlayInstructions"
+              className={fwInstructionsId}
               src={withPrefix('assets/screenshotCTA.svg')}
               alt="Screenshot"
               css={instructionsPanelStyling}
               onClick={handleInstructionClick}
             />
-            <div className="overlayInstructions" css={instructionsBorderStyling} />
+            <div className={fwInstructionsId} css={instructionsBorderStyling} />
           </>
-          {!currDOM.current && (
+          {!currElem.current && (
             <div
               className="overlay"
-              css={overlayElementStyle('fixed', 0, 0, document.body.scrollWidth, document.body.scrollHeight)}
+              css={overlayElementStyle('fixed', 0, 0, documentScrollWidth, documentScrollHeight)}
             />
           )}
-          {!!currDOM.current && (
+          {!!currElem.current && (
             <>
               <div
                 className="overlay"
                 onClick={handleDOMElementClick}
                 role="button"
-                css={hightlightedElementStyle(
-                  currDOMPosition.current,
-                  currElementBoundingBox[1],
-                  currElementBoundingBox[0],
-                  currDOMWidthState,
-                  currDOMHeightState,
-                  isDOMElementClicked
+                css={highlightedElementStyle(
+                  elemProps['position'],
+                  elemProps['top'],
+                  elemProps['left'],
+                  elemProps['width'],
+                  elemProps['height'],
+                  selectedElementBorderStyle
                 )}
               />
               {domElementClickedRef.current === 'solid' && (
-                <div className="xButton">
+                <div className={fwExitButtonId}>
                   <Icon
                     glyph="XWithCircle"
-                    css={xButtonStyle(currDOMPosition.current, currElementBoundingBox[1], currElementBoundingBox[2])}
+                    css={exitButtonStyle(elemProps['position'], elemProps['top'], elemProps['left'])}
                     size={30}
-                    onClick={cancelButtonClick}
+                    onClick={handleExitButtonClick}
                   />
                 </div>
               )}
               <div
-                className="overlayLeft"
+                className="overlay-left"
+                css={overlayElementStyle(elemProps['position'], 0, 0, elemProps['left'] - 15, documentScrollHeight)}
+              />
+              <div
+                className="overlay-top"
                 css={overlayElementStyle(
-                  currDOMPosition.current,
+                  elemProps['position'],
                   0,
-                  0,
-                  currElementBoundingBox[0] - 15,
-                  document.body.scrollHeight
+                  elemProps['left'] - 15,
+                  elemProps['width'] + 30,
+                  elemProps['top'] - 15
                 )}
               />
               <div
-                className="overlayTop"
+                className="overlay-bottom"
                 css={overlayElementStyle(
-                  currDOMPosition.current,
-                  0,
-                  currElementBoundingBox[0] - 15,
-                  currDOMWidthState + 30,
-                  currElementBoundingBox[1] - 15
+                  elemProps['position'],
+                  elemProps['bottom'] + 15,
+                  elemProps['left'] - 15,
+                  elemProps['width'] + 30,
+                  documentScrollHeight - elemProps['bottom'] - 15
                 )}
               />
               <div
-                className="overlayBottom"
+                className="overlay-right"
                 css={overlayElementStyle(
-                  currDOMPosition.current,
-                  currElementBoundingBox[3] + 15,
-                  currElementBoundingBox[0] - 15,
-                  currDOMWidth.current + 30,
-                  document.body.scrollHeight - currElementBoundingBox[3] - 15
-                )}
-              />
-              <div
-                className="overlayRight"
-                css={overlayElementStyle(
-                  currDOMPosition.current,
+                  elemProps['position'],
                   0,
-                  currElementBoundingBox[0] + currDOMWidth.current + 15,
-                  document.body.scrollWidth - currElementBoundingBox[2],
-                  document.body.scrollHeight
+                  elemProps['left'] + elemProps['width'] + 15,
+                  documentScrollWidth - elemProps['right'],
+                  documentScrollHeight
                 )}
               />
             </>
@@ -336,27 +304,23 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         </Portal>
       )}
 
-      <div
-        className="screenshot-button"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+      <Tooltip
+        align="bottom"
+        justify="middle"
+        triggerEvent="hover"
+        trigger={
+          <Button variant="default" onClick={takeNewScreenshot} {...props}>
+            <CameraIcon />
+          </Button>
+        }
+        popoverZIndex={15}
       >
-        <Tooltip
-          align="bottom"
-          justify="middle"
-          triggerEvent="hover"
-          open={isHovered}
-          trigger={
-            <Button variant="default" label={label} onClick={takeNewScreenshot} {...props}>
-              <CameraIcon />
-            </Button>
-          }
-        >
-          {label}
-        </Tooltip>
-      </div>
+        {label}
+      </Tooltip>
     </>
   );
 };
 
 export default ScreenshotButton;
+export const fwInstructionsId = 'overlay-instructions';
+export const fwExitButtonId = 'exit-button';
