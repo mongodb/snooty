@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { useSiteMetadata } from '../hooks/use-site-metadata.js';
 import { theme } from '../theme/docsTheme.js';
+import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 
 const CONTENT_MAX_WIDTH = 1200;
 
@@ -52,6 +53,9 @@ const Wrapper = styled('main')`
         ${theme.size.xlarge},
         1fr
       );
+    grid-template-rows: [header] auto [introduction] auto [kicker] auto;
+    ${({ hasBanner }) =>
+      hasBanner && `grid-template-rows: [banner] auto [header] auto [introduction] auto [kicker] auto;`}
 
     @media ${theme.screenSize.upToLarge} {
       grid-template-columns: 48px 1fr 48px;
@@ -63,7 +67,7 @@ const Wrapper = styled('main')`
 
     [role='alert'] {
       grid-column: 2 / 4;
-      grid-row: 1 / 1;
+      grid-row: banner;
       align-items: center;
 
       @media ${theme.screenSize.upToLarge} {
@@ -74,7 +78,7 @@ const Wrapper = styled('main')`
     h1 {
       align-self: end;
       grid-column: 2;
-      grid-row: 1;
+      grid-row: header;
       ${({ isGuides }) =>
         isGuides &&
         `
@@ -93,7 +97,7 @@ const Wrapper = styled('main')`
 
       @media ${theme.screenSize.largeAndUp} {
         grid-column: 3;
-        grid-row: 1 / span 2;
+        grid-row: introduction;
       }
     }
 
@@ -119,7 +123,7 @@ const Wrapper = styled('main')`
 
     > .introduction {
       grid-column: 2;
-      grid-row: 2;
+      grid-row: introduction;
       p {
         ${({ isGuides }) =>
           isGuides &&
@@ -150,8 +154,25 @@ const Wrapper = styled('main')`
 
 const ProductLanding = ({ children }) => {
   const { project } = useSiteMetadata();
+
+  // shallow copy children, and search for existence of banner
+  const shallowChildren = children[0].props.nodeData.children.map((childNode) => {
+    const newNode = {};
+    for (let property in childNode) {
+      if (property !== 'children') {
+        newNode[property] = childNode[property];
+      }
+    }
+    return newNode;
+  });
+  const bannerNode = findKeyValuePair([{ children: shallowChildren }], 'name', 'banner');
+
   const isGuides = project === 'guides';
-  return <Wrapper isGuides={isGuides}>{children}</Wrapper>;
+  return (
+    <Wrapper hasBanner={!!bannerNode} isGuides={isGuides}>
+      {children}
+    </Wrapper>
+  );
 };
 
 ProductLanding.propTypes = {
