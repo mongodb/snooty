@@ -65,7 +65,6 @@ const Wrapper = styled('main')`
       grid-column: 2 / 4;
       grid-row: 1 / 1;
       align-items: center;
-      margin: ${theme.size.default} 0;
 
       @media ${theme.screenSize.upToLarge} {
         grid-column: 2/2;
