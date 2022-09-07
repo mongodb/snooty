@@ -23,10 +23,10 @@ const instructionsBorderStyling = css`
 
 const instructionsPanelStyling = css`
   position: fixed;
-  width: 1000px;
+  width: 800px;
   top: 0;
   left: 50%;
-  margin-left: -500px;
+  margin-left: -400px;
   cursor: pointer;
   z-index: 13;
 `;
