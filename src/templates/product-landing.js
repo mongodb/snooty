@@ -66,19 +66,16 @@ const Wrapper = styled('main')`
     }
 
     [role='alert'] {
-      grid-column: 2 / 4;
+      grid-column: 2 / 3;
       grid-row: banner;
       align-items: center;
-
-      @media ${theme.screenSize.upToLarge} {
-        grid-column: 2/2;
-      }
     }
 
     h1 {
       align-self: end;
       grid-column: 2;
       grid-row: header;
+
       ${({ isGuides }) =>
         isGuides &&
         `
@@ -97,13 +94,13 @@ const Wrapper = styled('main')`
 
       @media ${theme.screenSize.largeAndUp} {
         grid-column: 3;
-        grid-row: introduction;
+        grid-row: header/span 2;
       }
     }
 
     > .hero-img {
       grid-column: 1 / -1;
-      grid-row: 1 / 3;
+      grid-row: header / kicker;
       height: 310px;
       ${({ isGuides }) => !isGuides && `margin-bottom: ${theme.size.large};`}
       max-width: 100%;
@@ -154,22 +151,28 @@ const Wrapper = styled('main')`
 
 const ProductLanding = ({ children }) => {
   const { project } = useSiteMetadata();
+  const useHero = ['guides', 'realm'].includes(project);
+  const isGuides = project === 'guides';
 
   // shallow copy children, and search for existence of banner
-  const shallowChildren = children[0].props.nodeData.children.map((childNode) => {
-    const newNode = {};
-    for (let property in childNode) {
-      if (property !== 'children') {
-        newNode[property] = childNode[property];
+  const shallowChildren = children.reduce((res, child) => {
+    const copiedChildren = child.props.nodeData.children.map((childNode) => {
+      const newNode = {};
+      for (let property in childNode) {
+        if (property !== 'children') {
+          newNode[property] = childNode[property];
+        }
       }
-    }
-    return newNode;
-  });
+      return newNode;
+    });
+    res = res.concat(copiedChildren);
+    return res;
+  }, []);
+
   const bannerNode = findKeyValuePair([{ children: shallowChildren }], 'name', 'banner');
 
-  const isGuides = project === 'guides';
   return (
-    <Wrapper hasBanner={!!bannerNode} isGuides={isGuides}>
+    <Wrapper isGuides={isGuides} useHero={useHero} hasBanner={!!bannerNode}>
       {children}
     </Wrapper>
   );
