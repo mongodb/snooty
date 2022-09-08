@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { useFeedbackState } from '../context';
+import { useFeedbackContext } from '../context';
 
 //styling for individual dots in the progress bar
 const Dot = styled('span')`
@@ -23,7 +23,7 @@ const StyledBar = styled('span')`
 `;
 
 const ProgressBar = () => {
-  const { progress } = useFeedbackState();
+  const { progress } = useFeedbackContext();
   return (
     <StyledBar>
       <DotSpan>

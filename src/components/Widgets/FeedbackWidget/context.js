@@ -8,41 +8,40 @@ const FeedbackContext = createContext();
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
   const [selectedSentiment, selectSentiment] = useState(test.feedback?.sentiment || null);
-  const [isSupportRequest, setIsSupportRequest] = useState(test.isSupportRequest || false);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
   const user = useStitchUser();
 
   // Create a new feedback document
-  async function initializeFeedback(nextView = 'sentiment') {
+  const initializeFeedback = (nextView = 'sentiment') => {
     const newFeedback = {};
     setFeedback({ newFeedback });
     setView(nextView);
     setProgress([true, false, false]);
     return { newFeedback };
-  }
+  };
 
   // Once a user has selected the sentiment category, show them the comment/email input boxes.
-  async function setSentiment(sentiment) {
+  const setSentiment = (sentiment) => {
     selectSentiment(sentiment);
     if (view !== 'comment' && sentiment) {
       setView('comment');
       setProgress([true, true, false]);
     }
-  }
+  };
 
   // Upload a screenshot to S3 and attach it to the feedback
-  async function submitScreenshot({ dataUri, viewport }) {
+  const submitScreenshot = async ({ dataUri, viewport }) => {
     if (!selectedSentiment) return;
     const updatedFeedback = await addAttachment({
       feedback_id: feedback._id,
       attachment: { type: 'screenshot', dataUri, viewport },
     });
     setFeedback(updatedFeedback);
-  }
+  };
 
-  async function submitAllFeedback({ comment = '', email = '', snootyEnv }) {
+  const submitAllFeedback = async ({ comment = '', email = '', snootyEnv }) => {
     // Route the user to their "next steps"
 
     setProgress([true, true, true]);
@@ -74,11 +73,11 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     await createNewFeedback(newFeedback);
 
     setFeedback(newFeedback);
-  }
+  };
 
   // Stop giving feedback (if in progress) and reset the widget to the
   // initial state.
-  async function abandon() {
+  const abandon = () => {
     // Reset to the initial state
     setView('waiting');
     if (feedback) {
@@ -86,7 +85,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       setFeedback(null);
       selectSentiment(null);
     }
-  }
+  };
 
   const value = {
     feedback,
@@ -109,10 +108,10 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
 }
 
-export function useFeedbackState() {
+export const useFeedbackContext = () => {
   const feedback = useContext(FeedbackContext);
   if (!feedback && feedback !== null) {
-    throw new Error('You must nest useFeedbackState() inside of a FeedbackProvider.');
+    throw new Error('You must nest useFeedbackContext() inside of a FeedbackProvider.');
   }
   return feedback;
-}
+};

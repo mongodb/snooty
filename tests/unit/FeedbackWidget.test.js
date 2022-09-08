@@ -7,12 +7,11 @@ import {
   FeedbackTab,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
-import { BSON } from 'mongodb-stitch-server-sdk';
 import { matchers } from '@emotion/jest';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
 import {
-  //stitchFunctionMocks,
+  stitchFunctionMocks,
   mockStitchFunctions,
   clearMockStitchFunctions,
 } from '../utils/feedbackWidgetStitchFunctions';
@@ -165,7 +164,6 @@ describe('FeedbackWidget', () => {
     it('waiting state when the form is closed', async () => {
       wrapper = await mountFormWithFeedbackState({
         view: 'sentiment',
-        _id: new BSON.ObjectId(),
       });
       // Click the close button
       userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
@@ -177,7 +175,6 @@ describe('FeedbackWidget', () => {
       it('Shows 3 sentiment categories', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'sentiment',
-          _id: new BSON.ObjectId(),
         });
         expect(wrapper.queryAllByText('Yes, it did!')).toHaveLength(1);
         expect(wrapper.queryAllByText('No, I have feedback.')).toHaveLength(1);
@@ -187,7 +184,6 @@ describe('FeedbackWidget', () => {
       it('transitions to the negative path comment view when a negative category is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'sentiment',
-          _id: new BSON.ObjectId(),
         });
         userEvent.click(wrapper.queryByText('No, I have feedback.'));
         await tick();
@@ -198,7 +194,6 @@ describe('FeedbackWidget', () => {
       it('transitions to the positive path comment view when a positive category is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'sentiment',
-          _id: new BSON.ObjectId(),
         });
         userEvent.click(wrapper.queryByText('Yes, it did!'));
         await tick();
@@ -209,7 +204,6 @@ describe('FeedbackWidget', () => {
       it('transitions to the suggestion path comment view when a suggestion category is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'sentiment',
-          _id: new BSON.ObjectId(),
         });
         userEvent.click(wrapper.queryByText('I have a suggestion.'));
         await tick();
@@ -219,29 +213,13 @@ describe('FeedbackWidget', () => {
     });
 
     describe('CommentView', () => {
-      it('shows a comment text input', async () => {
+      it('shows correct comment view text', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'comment',
-          sentiment: 'positive',
-          comment: '',
-        });
-      });
-
-      it('shows an email text input', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'comment',
-          sentiment: 'positive',
+          sentiment: 'Positive',
           comment: '',
         });
         expect(wrapper.getByPlaceholderText('Email Address')).toBeTruthy();
-      });
-
-      it('shows a Send button for feedback', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'comment',
-          sentiment: 'positive',
-          comment: '',
-        });
         expect(wrapper.getByText('Send')).toBeTruthy();
       });
 
@@ -288,13 +266,13 @@ describe('FeedbackWidget', () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
             comment: 'This is a test comment.',
-            sentiment: 'positive',
+            sentiment: 'Positive',
             user: { email: 'test@example.com' },
           });
           // Click the submit button
           userEvent.click(wrapper.getByText('Send').closest('button'));
           await tick();
-          //expect(stitchFunctionMocks['submitAllFeedback']).toHaveBeenCalledTimes(1);
+          expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
         });
 
         it('raises an input error if an invalid email is specified', async () => {
@@ -314,42 +292,30 @@ describe('FeedbackWidget', () => {
       });
     });
 
-    //#todo
-    //selected sentiment isn't being set properly so these tests need to be fixed
-    describe('SubmittedView Negative Path', () => {
-      it('shows self-serve support links', async () => {
+    describe('SubmittedView', () => {
+      it('shows self-serve support links for negative path', async () => {
         wrapper = await mountFormWithFeedbackState({
-          selectedSentiment: 'Negative',
+          sentiment: 'Negative',
           view: 'submitted',
         });
-
-        //mock setSentiment
-        /** 
-        const selectedSentiment = 'Positive';
-        jest.mock('../../src/components/Widgets/FeedbackWidget/context', () => ({
-        selectSentiment: () => ({selectedSentiment}),
-        })); 
-        */
-        expect(wrapper.getByText('Thanks for your help!')).toBeTruthy();
+        expect(wrapper.getByText("We're sorry to hear that.")).toBeTruthy();
         expect(wrapper.getByText('Looking for more resources?')).toBeTruthy();
         expect(wrapper.getByText('MongoDB Community')).toBeTruthy();
         expect(wrapper.getByText('MongoDB Developer Center')).toBeTruthy();
         expect(wrapper.getByText('Have a support contract?')).toBeTruthy();
         expect(wrapper.getByText('Create a Support Case')).toBeTruthy();
       });
-    });
 
-    describe('SubmittedView', () => {
-      it('shows summary information', async () => {
+      it('shows summary information for positive path', async () => {
         wrapper = await mountFormWithFeedbackState({
+          sentiment: 'Positive',
           view: 'submitted',
-          sentiment: 'positive',
         });
         expect(wrapper.getByText('Thanks for your help!')).toBeTruthy();
         expect(wrapper.getByText('MongoDB Community')).toBeTruthy();
         expect(wrapper.getByText('MongoDB Developer Center')).toBeTruthy();
-        expect(wrapper.getByText('Have a support contract?')).toBeFalsy();
-        expect(wrapper.getByText('Create a Support Case')).toBeFalsy();
+        expect(wrapper.queryAllByText('Have a support contract?')).toHaveLength(0);
+        expect(wrapper.queryAllByText('Create a Support Case')).toHaveLength(0);
       });
     });
   });

@@ -1,9 +1,9 @@
 import React from 'react';
 import StarRating, { StarRatingLabel } from './components/StarRating';
-import { useFeedbackState } from './context';
+import { useFeedbackContext } from './context';
 
-export default function FeedbackHeading({ isVisible = true }) {
-  const { hideHeader } = useFeedbackState();
+const FeedbackHeading = ({ isVisible = true }) => {
+  const { hideHeader } = useFeedbackContext();
   return (
     isVisible &&
     !hideHeader && (
@@ -13,4 +13,6 @@ export default function FeedbackHeading({ isVisible = true }) {
       </>
     )
   );
-}
+};
+
+export default FeedbackHeading;

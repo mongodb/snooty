@@ -2,21 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import LeafygreenCard from '@leafygreen-ui/card';
-import { useFeedbackState } from './context';
+import { useFeedbackContext } from './context';
 import { displayNone } from '../../../utils/display-none';
 
-export default function FeedbackTab(props) {
-  const { feedback, initializeFeedback } = useFeedbackState();
-  return (
-    !feedback && (
-      <Container css={displayNone.onMobileAndTablet} onClick={() => initializeFeedback()}>
-        Share Feedback
-      </Container>
-    )
-  );
-}
-
-const Container = styled(LeafygreenCard)`
+const FeedbackContainer = styled(LeafygreenCard)`
   bottom: -6px;
   cursor: pointer;
   padding: 12px;
@@ -27,3 +16,16 @@ const Container = styled(LeafygreenCard)`
   font-weight: 500;
   color: ${palette.green.dark1};
 `;
+
+const FeedbackTab = () => {
+  const { feedback, initializeFeedback } = useFeedbackContext();
+  return (
+    !feedback && (
+      <FeedbackContainer css={displayNone.onMobileAndTablet} onClick={() => initializeFeedback()}>
+        Share Feedback
+      </FeedbackContainer>
+    )
+  );
+};
+
+export default FeedbackTab;

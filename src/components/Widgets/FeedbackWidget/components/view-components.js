@@ -1,66 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../../../../theme/docsTheme';
-import { useFeedbackState } from '../context';
+import { useFeedbackContext } from '../context';
 import { sentimentChoices } from '../views/SentimentView';
 import Emoji from '../components/Emoji';
-
-//header for the comment view
-//emoji icons and corresponding path labels
-export const CommentHeader = () => {
-  return (
-    <Heading>
-      {sentimentChoices.map((path) => (
-        <SentimentEmoji path={path} key={path.category} />
-      ))}
-    </Heading>
-  );
-};
-
-const ResponsiveEmoji = styled('div')`
-  cursor: pointer;
-  margin-top: 3px;
-  display: inline-block;
-  vertical-align: left;
-  width: 30%;
-  margin-top: -5px;
-`;
-
-const StyledSentimentPath = styled('span')`
-  font-weight: 400 !important;
-  font-size: ${theme.fontSize.small} !important;
-  text-align: center;
-  margin: 0px -10px;
-  margin-right: 2px;
-  line-height: 20px;
-  display: block;
-  letter-spacing: 0.2px;
-  padding: 3px;
-`;
-
-//renders each emoji icon in comment view
-//icon corresponding to the selected path highlighted, others are faded
-const SentimentEmoji = ({ path }) => {
-  const { selectedSentiment, selectSentiment } = useFeedbackState();
-  const sentiment = path.sentiment;
-  return (
-    <ResponsiveEmoji
-      onClick={() => selectSentiment(path.sentiment)}
-      style={{
-        opacity: sentiment === selectedSentiment ? '1' : '0.5',
-      }}
-    >
-      <Emoji sentiment={path.sentiment} />
-      <StyledSentimentPath
-        style={{
-          opacity: sentiment === selectedSentiment ? '0.7' : '0.0',
-        }}
-      >
-        {path.category}
-      </StyledSentimentPath>
-    </ResponsiveEmoji>
-  );
-};
 
 export const Layout = styled.div`
   display: flex;
@@ -97,3 +40,60 @@ export const Footer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+const ResponsiveEmoji = styled('div')`
+  cursor: pointer;
+  margin-top: 3px;
+  display: inline-block;
+  vertical-align: left;
+  width: 30%;
+  margin-top: -5px;
+`;
+
+const StyledSentimentPath = styled('span')`
+  font-weight: 400 !important;
+  font-size: ${theme.fontSize.small} !important;
+  text-align: center;
+  margin: 0px -10px;
+  margin-right: 2px;
+  line-height: 20px;
+  display: block;
+  letter-spacing: 0.2px;
+  padding: 3px;
+`;
+
+//renders each emoji icon in comment view
+//icon corresponding to the selected path highlighted, others are faded
+const SentimentEmoji = ({ path }) => {
+  const { selectedSentiment, selectSentiment } = useFeedbackContext();
+  const sentiment = path.sentiment;
+  return (
+    <ResponsiveEmoji
+      onClick={() => selectSentiment(path.sentiment)}
+      style={{
+        opacity: sentiment === selectedSentiment ? '1' : '0.5',
+      }}
+    >
+      <Emoji sentiment={path.sentiment} />
+      <StyledSentimentPath
+        style={{
+          opacity: sentiment === selectedSentiment ? '0.7' : '0.0',
+        }}
+      >
+        {path.category}
+      </StyledSentimentPath>
+    </ResponsiveEmoji>
+  );
+};
+
+//header for the comment view
+//emoji icons and corresponding path labels
+export const CommentHeader = () => {
+  return (
+    <Heading>
+      {sentimentChoices.map((path) => (
+        <SentimentEmoji path={path} key={path.category} />
+      ))}
+    </Heading>
+  );
+};

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Layout } from '../components/view-components';
 import { theme } from '../../../../theme/docsTheme';
-import { useFeedbackState } from '../context';
+import { useFeedbackContext } from '../context';
 import Emoji from '../components/Emoji';
 
 export const sentimentChoices = [
@@ -64,7 +64,7 @@ const SentimentView = () => {
 //each of the three sentiment categories can be selected
 //emoji and corresponding text
 const SentimentOption = ({ path }) => {
-  const { setSentiment } = useFeedbackState();
+  const { setSentiment } = useFeedbackContext();
   return (
     <StyledSentiment>
       <StyledSentimentOption onClick={() => setSentiment(path.sentiment)}>

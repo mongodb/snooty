@@ -338,6 +338,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   );
 };
 
-export default ScreenshotButton;
 export const fwInstructionsId = 'overlay-instructions';
 export const fwExitButtonId = 'exit-button';
+export default ScreenshotButton;

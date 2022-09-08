@@ -15,82 +15,6 @@ import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
 import validateEmail from '../../../../utils/validate-email';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
-function useValidation(inputValue, validator) {
-  const [isValid, setIsValid] = useState(null);
-  useEffect(() => {
-    setIsValid(validator(inputValue));
-  }, [inputValue, validator]);
-
-  return isValid;
-}
-
-export default function CommentView({ ...props }) {
-  const {
-    feedback,
-    isSupportRequest,
-    selectedSentiment,
-    submitComment,
-    submitAllFeedback,
-    submitScreenshot,
-    screenshotTaken,
-  } = useFeedbackState();
-  const placeholderText =
-    selectedSentiment === 'Positive'
-      ? 'How did this page help you?'
-      : selectedSentiment === 'Negative'
-      ? 'How could this page be more helpful?'
-      : 'What change would you like to see?';
-  const viewport = useViewport();
-  const [comment, setComment] = useState('');
-  const [email, setEmail] = useState('');
-  const [hasEmailError, setHasEmailError] = useState(false);
-  const isValidEmail = useValidation(email, validateEmail);
-  const { snootyEnv } = useSiteMetadata();
-
-  const handleSubmit = async () => {
-    if (isValidEmail) {
-      if (screenshotTaken) {
-        const dataUri = await retrieveDataUri();
-        await submitScreenshot({ dataUri, viewport });
-      }
-      await submitComment({ comment, email });
-      await submitAllFeedback();
-    } else {
-      setHasEmailError(true);
-    }
-  };
-
-  return (
-    <Layout>
-      <CommentHeader />
-      <StyledCommentInput
-        id="feedback-comment"
-        placeholder={placeholderText}
-        value={comment}
-        rows={4}
-        onChange={(e) => setComment(e.target.value)}
-        aria-labelledby="Text box for user comments"
-      />
-      <StyledEmailInput
-        id="feedback-email"
-        placeholder="Email Address"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        type={'email'}
-        aria-labelledby="text input for user emails"
-        errorMessage="Please enter a valid email"
-        state={hasEmailError ? 'error' : 'none'}
-        optional={true}
-        className={cx(FooterMargin({ hasEmailError }))}
-      />
-      <Footer>
-        <SubmitButton onClick={() => handleSubmit()}>{'Send'}</SubmitButton>
-        <ScreenshotButton />
-      </Footer>
-    </Layout>
-  );
-}
-
 const FooterMargin = ({ hasEmailError }) => LeafyCSS`
   margin-bottom: ${hasEmailError ? '0px' : '32px'} !important;
 `;
@@ -130,11 +54,81 @@ const StyledEmailInput = styled(TextInput)`
     ::placeholder {
       color: #5c6c75;
       height: 40px;
-      }
     }
+  }
   div > div {
     font-family: 'Euclid Circular A' !important;
     margin-bottom: -5px;
   }
-  }
 `;
+
+const useValidation = (inputValue, validator) => {
+  const [isValid, setIsValid] = useState(null);
+  useEffect(() => {
+    setIsValid(validator(inputValue));
+  }, [inputValue, validator]);
+
+  return isValid;
+};
+
+const CommentView = () => {
+  const { selectedSentiment, submitComment, submitAllFeedback, submitScreenshot, screenshotTaken  } = useFeedbackContext();
+  const placeholderText =
+    selectedSentiment === 'Positive'
+      ? 'How did this page help you?'
+      : selectedSentiment === 'Negative'
+      ? 'How could this page be more helpful?'
+      : 'What change would you like to see?';
+
+  const [comment, setComment] = useState('');
+  const [email, setEmail] = useState('');
+  const [hasEmailError, setHasEmailError] = useState(false);
+  const isValidEmail = useValidation(email, validateEmail);
+  const { snootyEnv } = useSiteMetadata();
+  const viewport = useViewport();
+
+  const handleSubmit = async () => {
+    if (isValidEmail) {
+      if (screenshotTaken) {
+        const dataUri = await retrieveDataUri();
+        await submitScreenshot({ dataUri, viewport });
+      }
+      await submitComment({ comment, email });
+      await submitAllFeedback();
+    } else {
+      setHasEmailError(true);
+    }
+  };
+
+  return (
+    <Layout>
+      <CommentHeader />
+      <StyledCommentInput
+        id="feedback-comment"
+        aria-labelledby="Comment Text Box"
+        placeholder={placeholderText}
+        value={comment}
+        rows={4}
+        onChange={(e) => setComment(e.target.value)}
+      />
+      <StyledEmailInput
+        id="feedback-email"
+        aria-labelledby="Email Text Box"
+        placeholder="Email Address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        type={'email'}
+        errorMessage="Please enter a valid email"
+        state={hasEmailError ? 'error' : 'none'}
+        optional={true}
+        className={cx(FooterMargin({ hasEmailError }))}
+      />
+      <Footer>
+        <SubmitButton onClick={() => handleSubmit()}>{'Send'}</SubmitButton>
+        <ScreenshotButton />
+      </Footer>
+    </Layout>
+  );
+};
+
+export default CommentView;
