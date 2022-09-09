@@ -11,13 +11,15 @@ import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
 
+const HIGHLIGHT_BORDER_SIZE = 5;
+
 const instructionsBorderStyling = css`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: #ffdd49 solid 10px;
+  border: #ffdd49 solid ${HIGHLIGHT_BORDER_SIZE}px;
   z-index: 11;
 `;
 
@@ -50,8 +52,8 @@ const overlayElementStyle = (position, top, left, width, height) => css`
 // current hovered or selected component
 const highlightedElementStyle = (position, top, left, width, height, lineStyle) => css`
   ${baseStyle(position, top, left, width, height)};
-  outline: #ffdd49 ${lineStyle} 10px;
-  outline-offset: 10px;
+  outline: #ffdd49 ${lineStyle} ${HIGHLIGHT_BORDER_SIZE}px;
+  outline-offset: 3px;
   float: left;
   z-index: 11;
   cursor: ${lineStyle === 'solid' ? 'unset' : 'pointer'};
@@ -59,8 +61,8 @@ const highlightedElementStyle = (position, top, left, width, height, lineStyle) 
 
 const exitButtonStyle = (position, top, left) => css`
   position: ${position};
-  top: ${Math.max(top - 5, 15)}px;
-  left: ${Math.max(left - 5, 15)}px;
+  top: ${Math.max(top + HIGHLIGHT_BORDER_SIZE, HIGHLIGHT_BORDER_SIZE * 2)}px;
+  left: ${Math.max(left + HIGHLIGHT_BORDER_SIZE, HIGHLIGHT_BORDER_SIZE * 2)}px;
   color: #ffdd49;
   background-color: white;
   border-radius: 80%;
@@ -260,33 +262,39 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
                   <Icon
                     glyph="XWithCircle"
                     css={exitButtonStyle(elemProps['position'], elemProps['top'], elemProps['left'])}
-                    size={30}
+                    size={24}
                     onClick={handleExitButtonClick}
                   />
                 </div>
               )}
               <div
                 className="overlay-left"
-                css={overlayElementStyle(elemProps['position'], 0, 0, elemProps['left'] - 15, documentScrollHeight)}
+                css={overlayElementStyle(
+                  elemProps['position'],
+                  0,
+                  0,
+                  elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                  documentScrollHeight
+                )}
               />
               <div
                 className="overlay-top"
                 css={overlayElementStyle(
                   elemProps['position'],
                   0,
-                  elemProps['left'] - 15,
-                  elemProps['width'] + 30,
-                  elemProps['top'] - 15
+                  elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                  elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
+                  elemProps['top'] - HIGHLIGHT_BORDER_SIZE
                 )}
               />
               <div
                 className="overlay-bottom"
                 css={overlayElementStyle(
                   elemProps['position'],
-                  elemProps['bottom'] + 15,
-                  elemProps['left'] - 15,
-                  elemProps['width'] + 30,
-                  documentScrollHeight - elemProps['bottom'] - 15
+                  elemProps['bottom'] + HIGHLIGHT_BORDER_SIZE,
+                  elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                  elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
+                  documentScrollHeight - elemProps['bottom'] - HIGHLIGHT_BORDER_SIZE
                 )}
               />
               <div
@@ -294,7 +302,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
                 css={overlayElementStyle(
                   elemProps['position'],
                   0,
-                  elemProps['left'] + elemProps['width'] + 15,
+                  elemProps['left'] + elemProps['width'] + HIGHLIGHT_BORDER_SIZE,
                   documentScrollWidth - elemProps['right'],
                   documentScrollHeight
                 )}
