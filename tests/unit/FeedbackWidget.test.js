@@ -287,7 +287,7 @@ describe('FeedbackWidget', () => {
           // Click the submit button
           userEvent.click(wrapper.getByText('Send').closest('button'));
           await tick();
-          expect(wrapper.getByText('Please enter a valid email')).toBeTruthy();
+          expect(wrapper.getByText('Please enter a valid email.')).toBeTruthy();
         });
       });
     });

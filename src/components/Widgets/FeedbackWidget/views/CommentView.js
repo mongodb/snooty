@@ -49,16 +49,25 @@ const StyledEmailInput = styled(TextInput)`
   }
   div > input {
     width: 202px;
-    padding-right: 60px;
     height: 30px;
     ::placeholder {
       color: #5c6c75;
       height: 40px;
     }
+    // padding within the text input
+    padding-left: 8px !important;
+    padding-right: ${({ state }) => (state === 'error' ? '34px' : '65px')} !important;
   }
+
+  // optional text styling
   div > div {
     font-family: 'Euclid Circular A' !important;
     margin-bottom: -5px;
+
+    // adjust error icon position
+    > svg {
+      margin-bottom: 7px;
+    }
   }
 `;
 
@@ -118,7 +127,7 @@ const CommentView = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         type={'email'}
-        errorMessage="Please enter a valid email"
+        errorMessage="Please enter a valid email."
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
         className={cx(FooterMargin({ hasEmailError }))}
