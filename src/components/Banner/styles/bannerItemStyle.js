@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import { theme } from '../../../theme/docsTheme';
 
 export const baseBannerStyle = css`
+  margin: ${theme.size.default} 0;
+
   /* Add margins below all child elements in the banner */
   & > div > div > * {
     margin: 0 0 12px;
