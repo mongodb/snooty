@@ -96,7 +96,7 @@ const CommentView = () => {
   const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     if (isValidEmail) {
       if (screenshotTaken) {
         const dataUri = await retrieveDataUri();
@@ -106,37 +106,41 @@ const CommentView = () => {
       await submitAllFeedback();
     } else {
       setHasEmailError(true);
+      e.preventDefault();
     }
   };
 
   return (
-    <Layout>
-      <CommentHeader />
-      <StyledCommentInput
-        id="feedback-comment"
-        aria-labelledby="Comment Text Box"
-        placeholder={placeholderText}
-        value={comment}
-        rows={4}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <StyledEmailInput
-        id="feedback-email"
-        aria-labelledby="Email Text Box"
-        placeholder="Email Address"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        type={'email'}
-        errorMessage="Please enter a valid email."
-        state={hasEmailError ? 'error' : 'none'}
-        optional={true}
-        className={cx(FooterMargin({ hasEmailError }))}
-      />
-      <Footer>
-        <SubmitButton onClick={() => handleSubmit()}>{'Send'}</SubmitButton>
-        <ScreenshotButton />
-      </Footer>
-    </Layout>
+    <form onSubmit={handleSubmit} novalidate="">
+      <Layout>
+        <CommentHeader />
+        <StyledCommentInput
+          type="text"
+          id="feedback-comment"
+          aria-labelledby="Comment Text Box"
+          placeholder={placeholderText}
+          value={comment}
+          rows={4}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <StyledEmailInput
+          type="email"
+          id="feedback-email"
+          aria-labelledby="Email Text Box"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          errorMessage="Please enter a valid email."
+          state={hasEmailError ? 'error' : 'none'}
+          optional={true}
+          className={cx(FooterMargin({ hasEmailError }))}
+        />
+        <Footer>
+          <SubmitButton type="submit">{'Send'}</SubmitButton>
+          <ScreenshotButton />
+        </Footer>
+      </Layout>
+    </form>
   );
 };
 
