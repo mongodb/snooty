@@ -17,6 +17,10 @@ export const useSiteMetadata = () => {
             snootyBranch
             snootyEnv
             user
+            associatedProducts {
+              name
+              versions
+            }
           }
         }
       }

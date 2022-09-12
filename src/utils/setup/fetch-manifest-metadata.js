@@ -10,6 +10,15 @@ const fetchManifestMetadata = () => {
     for (const entry of zipEntries) {
       if (entry.entryName === 'site.bson') {
         metadata = BSON.deserialize(entry.getData());
+
+        // TODO DOP-3210: remove test code. will be provided in metadata
+        // if (metadata['project'] === 'cloud-docs') {
+        metadata['associated_products'] = [
+          {
+            name: 'docs-atlas-cli',
+            versions: ['1.1', '1.0'],
+          },
+        ];
       }
     }
   }

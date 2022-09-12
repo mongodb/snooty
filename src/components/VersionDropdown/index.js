@@ -190,6 +190,8 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
 };
 
 VersionDropdown.propTypes = {
+  // TODO: add active version dropdown prop
+  // consume from version context
   repoBranches: PropTypes.shape({
     branches: PropTypes.arrayOf(
       PropTypes.shape({
