@@ -21,31 +21,40 @@ import {
 import Heading from '../../src/components/Heading';
 import headingData from './data/Heading.test.json';
 import { theme } from '../../src/theme/docsTheme';
+import {
+  screenshotFunctionMocks,
+  mockScreenshotFunctions,
+  clearMockScreenshotFunctions,
+} from '../utils/data/feedbackWidgetScreenshotFunctions';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
-  const { view, isSupportRequest, hideHeader, ...feedback } = feedbackState;
+  const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
-    <FeedbackProvider
-      test={{
-        view,
-        isSupportRequest,
-        feedback: Object.keys(feedback).length ? feedback : null,
-      }}
-      page={{
-        title: 'Test Page Please Ignore',
-        slug: '/test',
-        url: 'https://docs.mongodb.com/test',
-        docs_property: 'test',
-      }}
-      hideHeader={hideHeader}
-    >
-      <FeedbackForm />
-      <div>
-        <FeedbackTab />
-        <Heading nodeData={headingData} sectionDepth={1} />
-        <FeedbackFooter />
-      </div>
-    </FeedbackProvider>
+    <>
+      <p>Sample paragraph</p>
+      <FeedbackProvider
+        test={{
+          view,
+          isSupportRequest,
+          feedback: Object.keys(feedback).length ? feedback : null,
+          screenshotTaken,
+        }}
+        page={{
+          title: 'Test Page Please Ignore',
+          slug: '/test',
+          url: 'https://docs.mongodb.com/test',
+          docs_property: 'test',
+        }}
+        hideHeader={hideHeader}
+      >
+        <FeedbackForm />
+        <div>
+          <FeedbackTab />
+          <Heading nodeData={headingData} sectionDepth={1} />
+          <FeedbackFooter />
+        </div>
+      </FeedbackProvider>
+    </>
   );
   // Need to wait for the next tick to let Loadable components load
   await tick();
@@ -62,6 +71,8 @@ describe('FeedbackWidget', () => {
   beforeEach(setDesktop);
   beforeEach(mockStitchFunctions);
   afterEach(clearMockStitchFunctions);
+  beforeEach(mockScreenshotFunctions);
+  afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackTab (Desktop Viewport)', () => {
     it('shows the rating view when clicked', async () => {
@@ -293,20 +304,44 @@ describe('FeedbackWidget', () => {
         expect(wrapper.getByText('Send')).toBeTruthy();
       });
 
-      describe('when the Support button is clicked', () => {
-        it('submits the feedback and transitions to the support view', async () => {
+      describe('when the Screenshot button is clicked', () => {
+        it('shows the overlays and adds event listener', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
             rating: 2,
             qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            isSupportRequest: true,
+            comment: 'This is a test comment.',
+            user: { email: 'test@example.com' },
           });
-          userEvent.click(wrapper.getByText('Continue for Support').closest('button'));
+
+          // click on screenshot button
+          userEvent.click(wrapper.getAllByRole('button')[2]);
           await tick();
-          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
-          expect(wrapper.getByText('Create a case on the Support Portal')).toBeTruthy();
+
+          expect(screenshotFunctionMocks['addEventListener']).toHaveBeenCalled();
+
+          // shows overlays
+          expect(wrapper.getByRole('img').getElementsByClassName('overlayInstructions')).toBeTruthy();
+        });
+
+        it('adds the screenshot attachment on send', async () => {
+          wrapper = await mountFormWithFeedbackState({
+            view: 'comment',
+            rating: 2,
+            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+            comment: 'This is a test comment.',
+            user: { email: 'test@example.com' },
+            screenshotTaken: true,
+          });
+
+          userEvent.click(wrapper.getByText('Send').closest('button'));
+          await tick();
+
+          expect(screenshotFunctionMocks['retrieveDataUri']).toHaveBeenCalled();
+          expect(stitchFunctionMocks['addAttachment']).toHaveBeenCalled();
         });
       });
+
       describe('when the Submit button is clicked', () => {
         it('submits the feedback and transitions to the submitted view if the inputs are valid', async () => {
           wrapper = await mountFormWithFeedbackState({

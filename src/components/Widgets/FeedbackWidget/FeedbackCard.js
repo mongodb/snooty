@@ -1,16 +1,21 @@
 import React from 'react';
+import { css } from '@emotion/react';
 import LeafygreenCard from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
-
 import CloseButton from './components/CloseButton';
 import { useFeedbackState } from './context';
+import { feedbackId } from '../FeedbackWidget/FeedbackForm';
+
+const feedbackStyle = css`
+  z-index: 14;
+`;
 
 export default function FeedbackCard({ isOpen, children }) {
   const { abandon } = useFeedbackState();
 
   return (
     isOpen && (
-      <Floating>
+      <Floating id={feedbackId} css={feedbackStyle}>
         <Card>
           <CardHeader>
             <CloseButton onClick={() => abandon()} />
@@ -24,9 +29,9 @@ export default function FeedbackCard({ isOpen, children }) {
 
 const Floating = styled.div`
   position: fixed;
-  bottom: 256px;
+  bottom: 40px;
   right: 40px;
-  z-index: 10;
+  z-index: 20;
 `;
 const Card = styled(LeafygreenCard)`
   width: 320px;

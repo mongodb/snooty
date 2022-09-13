@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import {
   createNewFeedback,
   updateFeedback,
@@ -10,12 +10,13 @@ import {
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
 
-const FeedbackContext = React.createContext();
+const FeedbackContext = createContext();
 
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
-  const [feedback, setFeedback] = React.useState((test.feedback !== {} && test.feedback) || null);
-  const [isSupportRequest, setIsSupportRequest] = React.useState(test.isSupportRequest || false);
-  const [view, setView] = React.useState(test.view || 'waiting');
+  const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
+  const [isSupportRequest, setIsSupportRequest] = useState(test.isSupportRequest || false);
+  const [view, setView] = useState(test.view || 'waiting');
+  const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const user = useStitchUser();
 
   // Create a new feedback document
@@ -152,6 +153,8 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const value = {
     feedback,
     view,
+    setScreenshotTaken,
+    screenshotTaken,
     isSupportRequest,
     initializeFeedback,
     setRating,
@@ -174,7 +177,7 @@ function updateQualifier(qualifiers, id, value) {
 }
 
 export function useFeedbackState() {
-  const feedback = React.useContext(FeedbackContext);
+  const feedback = useContext(FeedbackContext);
   if (!feedback && feedback !== null) {
     throw new Error('You must nest useFeedbackState() inside of a FeedbackProvider.');
   }
