@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useMemo } from 'react';
+import React, { createContext, useReducer, useEffect, useState } from 'react';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 
@@ -6,31 +6,29 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 const STORAGE_KEY = 'activeVersions';
 
 function getInitBranchName(branches) {
-  const activeBranch = branches.find((b) => b.active);
+  const activeBranch = branches.find((b) => b.isStableBranch);
   if (activeBranch) {
     return activeBranch.name || activeBranch.gitBranchName;
   }
   return branches[0]?.name || null;
 }
 
-const versionStateReducer = (state, { project, versionName }) => {
-  return {
-    ...state,
-    [project]: versionName,
-  };
-};
-
-// return initial active versions of documents if not found in local storage
-function getInitVersions(metadata, repoBranches, associatedReposInfo) {
+function getInitVersions(branchListByProduct) {
   const initState = {};
-  // set version state of current project
-  initState[`${metadata.project}`] = getInitBranchName(repoBranches.branches);
-  // for each associated product, set version state
-  for (const productName in associatedReposInfo) {
-    initState[productName] = getInitBranchName(associatedReposInfo[productName]?.branches || []);
+  for (const productName in branchListByProduct) {
+    initState[productName] = getInitBranchName(branchListByProduct[productName]);
   }
   return initState;
 }
+
+// version state reducer helper fn
+// overwrite current state with any new state attributes
+const versionStateReducer = (state, newState) => {
+  return {
+    ...state,
+    ...newState,
+  };
+};
 // end helper functions
 
 const VersionContext = createContext({
@@ -43,29 +41,36 @@ const VersionContext = createContext({
 const VersionContextProvider = ({ repoBranches, associatedReposInfo, children }) => {
   const metadata = useSiteMetadata();
   // expose the available versions for current and associated products
-  const availableVersions = useMemo(async () => {
-    try {
-      // TODO: call client side fn to realm app services to get repo branches
+  // TODO: usememo not correct here. useEffect for async call
+  const [availableVersions, setAvailableVersions] = useState();
+  // on init, fetch versions from realm app services
+  useEffect(() => {
+    const getVersions = async () => {
+      // TODO: call client side stitch fn, that calls realm app services to get repo branches
+      // same code block as error, but with calls to stitch
       throw new Error('test err');
-    } catch (e) {
+    };
+
+    getVersions().catch((e) => {
+      // on error of realm function, fall back to build time fetches
       console.error(e);
       const versions = {};
       versions[metadata.project] = repoBranches?.branches || [];
       for (const productName in associatedReposInfo) {
-        versions[productName] = associatedReposInfo[productName]?.repoInfo?.branches || [];
+        versions[productName] = associatedReposInfo[productName].branches || [];
       }
-      return versions;
-    }
+      if (!activeVersions) {
+        setActiveVersions(getInitVersions(versions));
+      }
+      setAvailableVersions(versions);
+    });
     // does not need to refetch after initial fetch
     // also falls back to server side fetch for branches
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // tracks active versions across app
-  const [activeVersions, setActiveVersions] = useReducer(
-    versionStateReducer,
-    getLocalValue(STORAGE_KEY) || getInitVersions(metadata, repoBranches, associatedReposInfo)
-  );
+  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY));
   // update local storage when active versions change
   useEffect(() => {
     setLocalValue(STORAGE_KEY, activeVersions);
