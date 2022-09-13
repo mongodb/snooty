@@ -580,7 +580,7 @@ exports[`Search Results Page considers a given search filter query param and dis
             class="emotion-25 emotion-26"
           >
             <span
-              style="background-color:#FEF2C8"
+              style="background-color:#FFEC9E"
             >
               stitch
             </span>
@@ -590,7 +590,7 @@ exports[`Search Results Page considers a given search filter query param and dis
             class="emotion-27 emotion-28"
           >
             <span
-              style="background-color:#FEF2C8"
+              style="background-color:#FFEC9E"
             >
               Stitch
             </span>
@@ -1020,13 +1020,13 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-20 {
-  color: #061621;
+  color: #001E2B;
   height: 40px;
   width: 40px;
 }
 
 .emotion-22 {
-  color: #061621;
+  color: #001E2B;
   font-size: 18px;
   line-height: 21px;
   margin-bottom: 16px;
@@ -1530,13 +1530,13 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 }
 
 .emotion-8 {
-  color: #061621;
+  color: #001E2B;
   height: 40px;
   width: 40px;
 }
 
 .emotion-10 {
-  color: #061621;
+  color: #001E2B;
   font-size: 18px;
   line-height: 21px;
   margin-bottom: 16px;
@@ -3711,7 +3711,7 @@ exports[`Search Results Page renders results from a given search term query para
             class="emotion-19 emotion-20"
           >
             <span
-              style="background-color:#FEF2C8"
+              style="background-color:#FFEC9E"
             >
               stitch
             </span>
@@ -3721,7 +3721,7 @@ exports[`Search Results Page renders results from a given search term query para
             class="emotion-21 emotion-22"
           >
             <span
-              style="background-color:#FEF2C8"
+              style="background-color:#FFEC9E"
             >
               Stitch
             </span>

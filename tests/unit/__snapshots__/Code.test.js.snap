@@ -26,7 +26,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1 {
-  border: 1px solid #E7EEEC;
+  border: 1px solid #E8EDEB;
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
@@ -34,7 +34,7 @@ exports[`renders correctly 1`] = `
 
 .emotion-3 {
   padding: 10px;
-  color: #5D6C74;
+  color: #5C6C75;
   font-size: 14px;
   margin-left: 5px;
   border-bottom: none;

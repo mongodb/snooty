@@ -14,8 +14,8 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F2F6;
-  border: 1px solid #C5E4F2;
+  background-color: #E1F7FF;
+  border: 1px solid #C3E7FE;
   border-radius: 6px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -24,7 +24,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   position: relative;
   font-size: 14px;
   padding: 9px 12px 9px 20px;
-  color: #1A567E;
+  color: #083C90;
   margin: 24px 0px;
 }
 
@@ -57,7 +57,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 .emotion-2 {
   width: 26px;
   height: 26px;
-  background-color: #C5E4F2;
+  background-color: #C3E7FE;
   position: absolute;
   display: -webkit-box;
   display: -webkit-flex;
@@ -71,17 +71,13 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #007CAD;
+  border: 1px solid #016BF8;
   border-radius: 20px;
   margin-left: -5px;
 }
 
 .emotion-3 {
-  color: #007CAD;
-}
-
-.emotion-3 {
-  color: #007CAD;
+  color: #016BF8;
 }
 
 .emotion-4 {
@@ -246,8 +242,8 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F2F6;
-  border: 1px solid #C5E4F2;
+  background-color: #E1F7FF;
+  border: 1px solid #C3E7FE;
   border-radius: 6px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -256,7 +252,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   position: relative;
   font-size: 14px;
   padding: 9px 12px 9px 20px;
-  color: #1A567E;
+  color: #083C90;
   margin: 24px 0px;
 }
 
@@ -289,7 +285,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 .emotion-2 {
   width: 26px;
   height: 26px;
-  background-color: #C5E4F2;
+  background-color: #C3E7FE;
   position: absolute;
   display: -webkit-box;
   display: -webkit-flex;
@@ -303,17 +299,13 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #007CAD;
+  border: 1px solid #016BF8;
   border-radius: 20px;
   margin-left: -5px;
 }
 
 .emotion-3 {
-  color: #007CAD;
-}
-
-.emotion-3 {
-  color: #007CAD;
+  color: #016BF8;
 }
 
 .emotion-4 {
@@ -480,8 +472,8 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F2F6;
-  border: 1px solid #C5E4F2;
+  background-color: #E1F7FF;
+  border: 1px solid #C3E7FE;
   border-radius: 6px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -490,7 +482,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   position: relative;
   font-size: 14px;
   padding: 9px 12px 9px 20px;
-  color: #1A567E;
+  color: #083C90;
   margin: 24px 0px;
 }
 
@@ -523,7 +515,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 .emotion-2 {
   width: 26px;
   height: 26px;
-  background-color: #C5E4F2;
+  background-color: #C3E7FE;
   position: absolute;
   display: -webkit-box;
   display: -webkit-flex;
@@ -537,17 +529,13 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #007CAD;
+  border: 1px solid #016BF8;
   border-radius: 20px;
   margin-left: -5px;
 }
 
 .emotion-3 {
-  color: #007CAD;
-}
-
-.emotion-3 {
-  color: #007CAD;
+  color: #016BF8;
 }
 
 .emotion-4 {
@@ -712,8 +700,8 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F2F6;
-  border: 1px solid #C5E4F2;
+  background-color: #E1F7FF;
+  border: 1px solid #C3E7FE;
   border-radius: 6px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -722,7 +710,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   position: relative;
   font-size: 14px;
   padding: 9px 12px 9px 20px;
-  color: #1A567E;
+  color: #083C90;
   margin: 24px 0px;
 }
 
@@ -755,7 +743,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 .emotion-2 {
   width: 26px;
   height: 26px;
-  background-color: #C5E4F2;
+  background-color: #C3E7FE;
   position: absolute;
   display: -webkit-box;
   display: -webkit-flex;
@@ -769,17 +757,13 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #007CAD;
+  border: 1px solid #016BF8;
   border-radius: 20px;
   margin-left: -5px;
 }
 
 .emotion-3 {
-  color: #007CAD;
-}
-
-.emotion-3 {
-  color: #007CAD;
+  color: #016BF8;
 }
 
 .emotion-4 {

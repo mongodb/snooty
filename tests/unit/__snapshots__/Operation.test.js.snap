@@ -80,7 +80,7 @@ exports[`when no summary is present renders correctly  1`] = `
 }
 
 .emotion-6 {
-  color: #061621;
+  color: #001E2B;
 }
 
 @media only screen and (max-width: 480px) {
@@ -99,7 +99,7 @@ exports[`when no summary is present renders correctly  1`] = `
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #89979B;
+  color: #889397;
 }
 
 .emotion-10 {
@@ -410,7 +410,7 @@ exports[`when no summary or description is present renders correctly  1`] = `
 }
 
 .emotion-6 {
-  color: #061621;
+  color: #001E2B;
 }
 
 @media only screen and (max-width: 480px) {
@@ -429,7 +429,7 @@ exports[`when no summary or description is present renders correctly  1`] = `
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #89979B;
+  color: #889397;
 }
 
 .emotion-10 {
@@ -693,7 +693,7 @@ exports[`when rendering all fields renders correctly  1`] = `
 }
 
 .emotion-6 {
-  color: #061621;
+  color: #001E2B;
 }
 
 @media only screen and (max-width: 480px) {
@@ -712,7 +712,7 @@ exports[`when rendering all fields renders correctly  1`] = `
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #89979B;
+  color: #889397;
 }
 
 .emotion-10 {

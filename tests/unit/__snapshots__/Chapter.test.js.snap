@@ -88,9 +88,9 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-7 {
-  background-color: #E4F4E4;
+  background-color: #E3FCF7;
   border-radius: 4px;
-  color: #13AA52;
+  color: #00ED64;
   font-size: 13px;
   font-weight: bold;
   line-height: 24px;
@@ -197,7 +197,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-17:hover {
-  background-color: #E7EEEC;
+  background-color: #E8EDEB;
   color: unset;
 }
 
