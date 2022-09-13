@@ -18,6 +18,8 @@ function getInitVersions(branchListByProduct) {
   for (const productName in branchListByProduct) {
     initState[productName] = getInitBranchName(branchListByProduct[productName]);
   }
+  console.log('check initState');
+  console.log(initState);
   return initState;
 }
 
@@ -42,7 +44,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
   const metadata = useSiteMetadata();
   // expose the available versions for current and associated products
   // TODO: usememo not correct here. useEffect for async call
-  const [availableVersions, setAvailableVersions] = useState();
+  const [availableVersions, setAvailableVersions] = useState({});
   // on init, fetch versions from realm app services
   useEffect(() => {
     const getVersions = async () => {
@@ -53,13 +55,12 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
 
     getVersions().catch((e) => {
       // on error of realm function, fall back to build time fetches
-      console.error(e);
       const versions = {};
       versions[metadata.project] = repoBranches?.branches || [];
       for (const productName in associatedReposInfo) {
         versions[productName] = associatedReposInfo[productName].branches || [];
       }
-      if (!activeVersions) {
+      if (!activeVersions || !activeVersions.length) {
         setActiveVersions(getInitVersions(versions));
       }
       setAvailableVersions(versions);
@@ -70,7 +71,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
   }, []);
 
   // tracks active versions across app
-  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY));
+  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY) || []);
   // update local storage when active versions change
   useEffect(() => {
     setLocalValue(STORAGE_KEY, activeVersions);

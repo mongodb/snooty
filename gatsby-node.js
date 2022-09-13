@@ -134,6 +134,10 @@ exports.createPages = async ({ actions }) => {
     await Promise.all(
       siteMetadata.associatedProducts.map(async (product) => {
         associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+        // filter all branches of associated repo by associated versions only
+        associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
+          return product.versions.includes(branch.gitBranchName);
+        });
       })
     );
     let errMsg;
