@@ -27,5 +27,12 @@ module.exports = {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
       },
     },
+    {
+      displayName: 'context',
+      testMatch: ['<rootDir>/tests/context/*.test.js'],
+      transform: {
+        '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
+      },
+    },
   ],
 };

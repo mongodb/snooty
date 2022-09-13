@@ -5,16 +5,16 @@ import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 import { NavigationProvider } from '../context/navigation-context';
-import { VersionProvider } from '../context/version-context';
+import { VersionContextProvider } from '../context/version-context';
 
 const RootProvider = ({ children, headingNodes, selectors, repoBranches }) => (
   <TabProvider selectors={selectors}>
     <ContentsProvider headingNodes={headingNodes}>
       <HeaderContextProvider>
         <NavigationProvider>
-          <VersionProvider repoBranches={repoBranches}>
+          <VersionContextProvider repoBranches={repoBranches}>
             <SidenavContextProvider>{children}</SidenavContextProvider>
-          </VersionProvider>
+          </VersionContextProvider>
         </NavigationProvider>
       </HeaderContextProvider>
     </ContentsProvider>

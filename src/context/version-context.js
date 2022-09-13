@@ -4,8 +4,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const VersionContext = createContext({
   activeVersions: {},
-  // active version for each product is marked is key value pair
-  //
+  // active version for each product is marked is {[product name]: active version} pair
   setActiveVersions: () => {},
   availableVersions: {},
 });
@@ -42,7 +41,7 @@ function getInitVersions(metadata, repoBranches) {
   return initState;
 }
 
-export const VersionProvider = ({ repoBranches, children }) => {
+const VersionContextProvider = ({ repoBranches, children }) => {
   const metadata = useSiteMetadata();
 
   // this context logic tracks active versions across MongoDB docs
@@ -74,4 +73,4 @@ export const VersionProvider = ({ repoBranches, children }) => {
   );
 };
 
-export default VersionContext;
+export { VersionContext, VersionContextProvider };
