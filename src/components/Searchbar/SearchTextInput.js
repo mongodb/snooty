@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import TextInput from '@leafygreen-ui/text-input';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -10,14 +10,14 @@ const StyledTextInput = styled(TextInput)`
   div > input {
     background-color: transparent;
     border: none;
-    color: ${uiColors.gray.dark3};
+    color: ${palette.gray.dark3};
     font-weight: 300;
     letter-spacing: 0.5px;
     :focus {
       border: none;
     }
     ::placeholder {
-      color: ${uiColors.gray.dark1};
+      color: ${palette.gray.dark1};
     }
     @media ${theme.screenSize.upToSmall} {
       border: none;
@@ -38,7 +38,7 @@ const StyledTextInput = styled(TextInput)`
   }
 
   @media ${theme.screenSize.upToSmall} {
-    background-color: ${uiColors.white};
+    background-color: ${palette.white};
     padding-bottom: ${theme.size.tiny};
     div > input {
       /* Always have this element filled in for mobile */

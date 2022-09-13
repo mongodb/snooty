@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
@@ -17,7 +17,7 @@ const disableBodyScroll = css`
 `;
 
 const Container = styled('div')`
-  background-color: ${uiColors.white};
+  background-color: ${palette.white};
   position: fixed;
   left: 0;
   top: ${({ topValue }) => topValue};
@@ -32,7 +32,7 @@ const Container = styled('div')`
 
 const BackButton = styled('div')`
   align-items: center;
-  color: ${uiColors.gray.dark1};
+  color: ${palette.gray.dark1};
   cursor: pointer;
   display: flex;
   gap: 0 ${theme.size.small};

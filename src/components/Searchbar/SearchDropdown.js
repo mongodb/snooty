@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import AdvancedFiltersPane from './AdvancedFiltersPane';
@@ -78,7 +78,7 @@ const SearchResultsContainer = styled('div')`
   z-index: -1;
   ${fadeInAnimation(0, '0.2s')};
   @media ${theme.screenSize.upToSmall} {
-    background-color: ${uiColors.gray.light3};
+    background-color: ${palette.gray.light3};
     // Allows dropdown to use the whole viewport while keeping searchbar visible
     // when scrolling down through results
     height: calc(100vh - ${theme.header.navbarHeight});
@@ -104,14 +104,14 @@ const SearchFooter = styled('div')`
 `;
 
 const FilterFooterButton = styled(Button)`
-  color: ${uiColors.blue.base};
+  color: ${palette.blue.base};
   font-weight: bolder;
   ${baseFooterButtonStyle};
   ${filterButtonHover}
 `;
 
 const FilterResetButton = styled(Button)`
-  color: ${uiColors.gray.base};
+  color: ${palette.gray.base};
   ${baseFooterButtonStyle};
   ${filterButtonHover};
 `;

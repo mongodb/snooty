@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 
 import useNoScroll from './hooks/useNoScroll';
 
@@ -50,7 +50,7 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px;
-  background: ${uiColors.gray.light3};
+  background: ${palette.gray.light3};
   margin-bottom: 20px;
 `;
 const HeaderControls = styled.div`

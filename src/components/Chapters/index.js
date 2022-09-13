@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '@leafygreen-ui/icon';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 import CardGroup from '../Card/CardGroup';
 import BookIcon from '../icons/Book';
@@ -27,7 +27,7 @@ const plpGridColumns = css`
 `;
 
 const Container = styled('div')`
-  background-color: ${uiColors.gray.light3};
+  background-color: ${palette.gray.light3};
 `;
 
 // Additional div to allow the Container to stretch across the page, while keeping
@@ -42,7 +42,7 @@ const Content = styled('div')`
 `;
 
 const ViewController = styled('div')`
-  background-color: ${uiColors.gray.light3};
+  background-color: ${palette.gray.light3};
   margin-bottom: 20px;
   min-height: 84px;
   position: sticky;
@@ -68,7 +68,7 @@ const ViewOptions = styled('div')`
 
 const ViewOption = styled('span')`
   align-items: center;
-  color: ${({ isActive }) => (isActive ? uiColors.black : uiColors.gray.base)};
+  color: ${({ isActive }) => (isActive ? palette.black : palette.gray.base)};
   cursor: pointer;
   display: flex;
 
@@ -77,7 +77,7 @@ const ViewOption = styled('span')`
   }
 
   :hover {
-    color: ${uiColors.black};
+    color: ${palette.black};
   }
 `;
 
@@ -106,10 +106,10 @@ const guidesCardsStyle = css`
     font-weight: normal;
 
     > a {
-      color: ${uiColors.black};
+      color: ${palette.black};
 
       :hover {
-        color: ${uiColors.black};
+        color: ${palette.black};
       }
     }
   }

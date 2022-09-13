@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
@@ -39,7 +39,7 @@ const SearchbarContainer = styled.div(
     :focus,
     :focus-within {
       ${MagnifyingGlass} {
-        color: ${uiColors.gray.dark3};
+        color: ${palette.gray.dark3};
       }
     }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
 export const EMPTY_STATE_HEIGHT = '166px';
@@ -21,7 +21,7 @@ const MagnifyingGlassButton = styled(IconButton)`
 `;
 
 const MagnifyingGlass = styled(Icon)`
-  color: ${uiColors.black};
+  color: ${palette.black};
   height: ${MAGNIFYING_GLASS_SIZE};
   width: ${MAGNIFYING_GLASS_SIZE};
 `;
@@ -32,7 +32,7 @@ const SupportingText = styled('p')`
 `;
 
 const TitleText = styled('h3')`
-  color: ${uiColors.black};
+  color: ${palette.black};
   font-size: ${theme.fontSize.h3};
   line-height: 21px;
   margin-bottom: ${theme.size.default};
