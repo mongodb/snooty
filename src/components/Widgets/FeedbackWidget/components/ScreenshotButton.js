@@ -61,8 +61,8 @@ const highlightedElementStyle = (position, top, left, width, height, lineStyle) 
 
 const exitButtonStyle = (position, top, left) => css`
   position: ${position};
-  top: ${Math.max(top + HIGHLIGHT_BORDER_SIZE, HIGHLIGHT_BORDER_SIZE * 2)}px;
-  left: ${Math.max(left + HIGHLIGHT_BORDER_SIZE, HIGHLIGHT_BORDER_SIZE * 2)}px;
+  top: ${Math.max(top - 1, 8)}px;
+  left: ${Math.max(left - 1, 8)}px;
   color: #ffdd49;
   background-color: white;
   border-radius: 80%;

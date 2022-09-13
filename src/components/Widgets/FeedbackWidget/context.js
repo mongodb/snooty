@@ -121,9 +121,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   async function submitAllFeedback() {
     // Submit the full feedback document
-    // TODO: Uncomment out these lines to submit feedback and alert slack channels
-    const submittedFeedback = await submitFeedback({ feedback_id: 'null_id_for_testing_purposes' });
-    // const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
+    const submittedFeedback = await submitFeedback({ feedback_id: feedback._id });
     setFeedback(submittedFeedback);
     // Route the user to their "next steps"
     if (isSupportRequest) {
