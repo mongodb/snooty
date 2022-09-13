@@ -21,7 +21,7 @@ const TestConsumer = () => {
   const handleClick = (project, version) => {
     console.log(project);
     console.log(version);
-    setActiveVersions(project, version);
+    setActiveVersions({ project, version });
   };
   return (
     <>

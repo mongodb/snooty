@@ -15,7 +15,7 @@ const fetchManifestMetadata = () => {
         // if (metadata['project'] === 'cloud-docs') {
         metadata['associated_products'] = [
           {
-            name: 'docs-atlas-cli',
+            name: 'atlas-cli',
             versions: ['1.1', '1.0'],
           },
         ];

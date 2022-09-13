@@ -7,15 +7,15 @@ import { ContentsProvider } from './Contents/contents-context';
 import { NavigationProvider } from '../context/navigation-context';
 import { VersionContextProvider } from '../context/version-context';
 
-const RootProvider = ({ children, headingNodes, selectors, repoBranches }) => (
+const RootProvider = ({ children, headingNodes, selectors, repoBranches, associatedReposInfo }) => (
   <TabProvider selectors={selectors}>
     <ContentsProvider headingNodes={headingNodes}>
       <HeaderContextProvider>
-        <NavigationProvider>
-          <VersionContextProvider repoBranches={repoBranches}>
+        <VersionContextProvider repoBranches={repoBranches} associatedReposInfo={associatedReposInfo}>
+          <NavigationProvider>
             <SidenavContextProvider>{children}</SidenavContextProvider>
-          </VersionContextProvider>
-        </NavigationProvider>
+          </NavigationProvider>
+        </VersionContextProvider>
       </HeaderContextProvider>
     </ContentsProvider>
   </TabProvider>

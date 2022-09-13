@@ -127,8 +127,15 @@ exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
   let repoBranches = null;
+  const associatedReposInfo = {};
   try {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
+
+    await Promise.all(
+      siteMetadata.associatedProducts.map(async (product) => {
+        associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+      })
+    );
     let errMsg;
 
     if (!repoInfo) {
@@ -180,7 +187,8 @@ exports.createPages = async ({ actions }) => {
           component: path.resolve(__dirname, './src/components/DocumentBody.js'),
           context: {
             slug,
-            repoBranches: repoBranches,
+            repoBranches,
+            associatedReposInfo,
             template: pageNodes?.options?.template,
             page: pageNodes,
           },
