@@ -12,6 +12,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
   font-size: 13px;
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
@@ -243,6 +244,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
   font-size: 13px;
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
@@ -476,6 +478,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
   font-size: 13px;
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;
@@ -707,6 +710,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
   font-size: 13px;
   background-color: #E1F2F6;
   border: 1px solid #C5E4F2;

@@ -3,6 +3,7 @@
 exports[`renders a Banner correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  margin: 16px 0;
   font-size: 13px;
 }
 
