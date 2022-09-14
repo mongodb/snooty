@@ -1,6 +1,8 @@
 import React, { createContext, useReducer, useEffect, useState } from 'react';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { fetchDocument } from '../utils/realm';
+import { BRANCHES_COLLECTION } from '../build-constants';
 
 // begin helper functions
 const STORAGE_KEY = 'activeVersions';
@@ -29,6 +31,41 @@ const versionStateReducer = (state, newState) => {
     ...newState,
   };
 };
+/**
+ * async call to realm app services
+ * to get active branches for current+associated products
+ * maps and filters results by metadata.associatedProducts
+ * @returns versions{} <product_name: branch_object[]>
+ */
+const getBranches = async (metadata, repoBranches, associatedReposInfo) => {
+  try {
+    const versions = {};
+    const promises = metadata.associatedProducts.map(async (product) => {
+      const childRepoBranches = await fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
+        project: product.name,
+      });
+      // filter all branches of associated repo by associated versions only
+      versions[product.name] = childRepoBranches.branches.filter((branch) => {
+        return product.versions.includes(branch.gitBranchName);
+      });
+    });
+    promises.push(
+      fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
+        versions[metadata.project] = res.branches;
+      })
+    );
+    await Promise.all(promises);
+    return versions;
+  } catch (e) {
+    // on error of realm function, fall back to build time fetches
+    const versions = {};
+    versions[metadata.project] = repoBranches?.branches || [];
+    for (const productName in associatedReposInfo) {
+      versions[productName] = associatedReposInfo[productName].branches || [];
+    }
+    return versions;
+  }
+};
 // end helper functions
 
 const VersionContext = createContext({
@@ -52,19 +89,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
   const [availableVersions, setAvailableVersions] = useState({});
   // on init, fetch versions from realm app services
   useEffect(() => {
-    const getVersions = async () => {
-      // TODO: call client side stitch fn, that calls realm app services to get repo branches
-      // same code block as error, but with calls to stitch
-      throw new Error('test err');
-    };
-
-    getVersions().catch((e) => {
-      // on error of realm function, fall back to build time fetches
-      const versions = {};
-      versions[metadata.project] = repoBranches?.branches || [];
-      for (const productName in associatedReposInfo) {
-        versions[productName] = associatedReposInfo[productName].branches || [];
-      }
+    getBranches(metadata, repoBranches, associatedReposInfo).then((versions) => {
       if (!activeVersions || !Object.keys(activeVersions).length) {
         setActiveVersions(getInitVersions(versions));
       }
