@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { VersionContextProvider, VersionContext, STORAGE_KEY } from '../../src/context/version-context';
 import * as browserStorage from '../../src/utils/browser-storage';
-import userEvent from '@testing-library/user-event';
+import * as realm from '../../src/utils/realm';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 const project = 'cloud-docs';
@@ -16,7 +17,7 @@ const setProjectAndAssociatedProducts = () => {
         associatedProducts: [
           {
             name: 'atlas-cli',
-            versions: ['v1.1', 'v1.0'],
+            versions: ['v1.1', 'v1.2', 'master'],
           },
         ],
       },
@@ -94,13 +95,24 @@ const mockedAssociatedRepoInfo = {
         publishOriginalBranchName: true,
         active: true,
         aliases: ['stable'],
-        gitBranchName: 'v1.0',
+        gitBranchName: 'v1.2',
         isStableBranch: true,
         urlAliases: ['stable'],
         urlSlug: 'stable',
         versionSelectorLabel: 'Stable',
         buildsWithSnooty: true,
         id: { $oid: '62e2938ada7afd105b30c3d1' },
+      },
+      {
+        publishOriginalBranchName: true,
+        active: true,
+        aliases: ['test'],
+        gitBranchName: 'v1.1',
+        isStableBranch: true,
+        urlAliases: ['stable'],
+        urlSlug: 'stable',
+        versionSelectorLabel: 'Stable',
+        buildsWithSnooty: true,
       },
     ],
   },
@@ -117,7 +129,7 @@ const mountConsumer = () => {
 };
 
 describe('Version Context', () => {
-  let wrapper, mockedBrowserStorageSetter, mockedBrowserStorageGetter, mockedLocalStorage;
+  let wrapper, mockedBrowserStorageSetter, mockedBrowserStorageGetter, mockedLocalStorage, mockedRealm;
 
   beforeEach(() => {
     mockedLocalStorage = {};
@@ -130,9 +142,46 @@ describe('Version Context', () => {
     mockedBrowserStorageGetter = jest.spyOn(browserStorage, 'getLocalValue').mockImplementation((key) => {
       return mockedLocalStorage[key];
     });
+    mockedRealm = jest.spyOn(realm, 'fetchDocument').mockImplementation(async (database, collectionName, query) => {
+      switch (query.project) {
+        case 'cloud-docs':
+          return {
+            project: 'cloud-docs',
+            branches: [
+              {
+                name: 'master',
+                publishOriginalBranchName: false,
+                active: true,
+                aliases: null,
+                gitBranchName: 'master',
+                urlSlug: null,
+                urlAliases: null,
+                isStableBranch: true,
+              },
+            ],
+          };
+        case 'atlas-cli':
+          return {
+            project: 'atlas-cli',
+            branches: [
+              { gitBranchName: 'master', isStableBranch: false, active: true },
+              { gitBranchName: 'v1.1', isStableBranch: true, active: true },
+              { gitBranchName: 'v1.2', isStableBranch: true, active: true },
+            ],
+          };
+        default:
+          break;
+      }
+      return {
+        database,
+        collectionName,
+        query,
+      };
+    });
   });
 
   afterAll(() => {
+    mockedRealm.mockClear();
     mockedBrowserStorageSetter.mockClear();
     mockedBrowserStorageGetter.mockClear();
   });
@@ -142,27 +191,27 @@ describe('Version Context', () => {
     await act(async () => {
       wrapper = mountConsumer();
     });
-    cloudDocsRepoBranches.branches.forEach((branch) => {
-      expect(wrapper.getByText(getKey(project, branch.gitBranchName))).toBeTruthy();
-    });
+    for (let branch of cloudDocsRepoBranches.branches) {
+      expect(await wrapper.findByText(getKey(project, branch.gitBranchName))).toBeTruthy();
+    }
     for (let projectName in mockedAssociatedRepoInfo) {
       for (let branch of mockedAssociatedRepoInfo[projectName].branches) {
-        expect(wrapper.getByText(getKey(projectName, branch.gitBranchName))).toBeTruthy();
+        expect(await wrapper.findByText(getKey(projectName, branch.gitBranchName))).toBeTruthy();
       }
     }
 
     // active checks
-    const expectedActive = { 'cloud-docs': 'master', 'atlas-cli': 'v1.0' };
-    expect(wrapper.getByText(JSON.stringify(expectedActive))).toBeTruthy();
+    const expectedActive = { 'atlas-cli': 'v1.1', 'cloud-docs': 'master' };
+    expect(await wrapper.findByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 
   it('initializes with values from local storage', async () => {
-    mockedLocalStorage[STORAGE_KEY] = { 'atlas-cli': 'master' };
+    mockedLocalStorage[STORAGE_KEY] = { 'atlas-cli': 'v1.2' };
+    const expectedActive = { 'atlas-cli': 'v1.2' };
     await act(async () => {
       wrapper = mountConsumer();
     });
-    const expectedActive = { 'atlas-cli': 'master' };
-    expect(wrapper.getAllByText(JSON.stringify(expectedActive))).toBeTruthy();
+    expect(await wrapper.findAllByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 
   it('updates context values and local storage if called from consumers', async () => {
@@ -171,11 +220,15 @@ describe('Version Context', () => {
     });
     const option = wrapper.getByText('atlas-cli-master');
     userEvent.click(option);
-    const expectedActive = { 'cloud-docs': 'master', 'atlas-cli': 'master' };
-    expect(wrapper.getByText(JSON.stringify(expectedActive))).toBeTruthy();
+    const expectedActive = { 'atlas-cli': 'master', 'cloud-docs': 'master' };
+    expect(await wrapper.findByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 
-  it('calls client stitch fn to fetch documents on load', () => {
-    // TODO. mock stitch
+  it('calls client stitch fn to fetch documents on load', async () => {
+    // TODO. mock realm
+    await act(async () => {
+      wrapper = mountConsumer();
+    });
+    expect(mockedRealm).toHaveBeenCalled();
   });
 });
