@@ -18,8 +18,6 @@ function getInitVersions(branchListByProduct) {
   for (const productName in branchListByProduct) {
     initState[productName] = getInitBranchName(branchListByProduct[productName]);
   }
-  console.log('check initState');
-  console.log(initState);
   return initState;
 }
 
@@ -42,8 +40,15 @@ const VersionContext = createContext({
 
 const VersionContextProvider = ({ repoBranches, associatedReposInfo, children }) => {
   const metadata = useSiteMetadata();
+
+  // tracks active versions across app
+  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY) || {});
+  // update local storage when active versions change
+  useEffect(() => {
+    setLocalValue(STORAGE_KEY, activeVersions);
+  }, [activeVersions]);
+
   // expose the available versions for current and associated products
-  // TODO: usememo not correct here. useEffect for async call
   const [availableVersions, setAvailableVersions] = useState({});
   // on init, fetch versions from realm app services
   useEffect(() => {
@@ -60,7 +65,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
       for (const productName in associatedReposInfo) {
         versions[productName] = associatedReposInfo[productName].branches || [];
       }
-      if (!activeVersions || !activeVersions.length) {
+      if (!activeVersions || !Object.keys(activeVersions).length) {
         setActiveVersions(getInitVersions(versions));
       }
       setAvailableVersions(versions);
@@ -70,13 +75,6 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // tracks active versions across app
-  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY) || []);
-  // update local storage when active versions change
-  useEffect(() => {
-    setLocalValue(STORAGE_KEY, activeVersions);
-  }, [activeVersions]);
-
   return (
     <VersionContext.Provider value={{ activeVersions, setActiveVersions, availableVersions }}>
       {children}
@@ -84,4 +82,4 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
   );
 };
 
-export { VersionContext, VersionContextProvider };
+export { VersionContext, VersionContextProvider, STORAGE_KEY };
