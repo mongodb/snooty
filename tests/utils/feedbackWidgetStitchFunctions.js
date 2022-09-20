@@ -14,15 +14,6 @@ export function mockStitchFunctions() {
       };
     });
 
-  stitchFunctionMocks['addAttachment'] = jest
-    .spyOn(stitch, 'addAttachment')
-    .mockImplementation(({ feedback_id, attachment }) => {
-      return {
-        _id: feedback_id,
-        attachments: [attachment],
-      };
-    });
-
   stitchFunctionMocks['useStitchUser'] = jest.spyOn(stitch, 'useStitchUser').mockImplementation(() => {
     return {
       id: 'test-user-id',

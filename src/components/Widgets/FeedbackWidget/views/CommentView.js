@@ -95,7 +95,7 @@ const CommentView = () => {
   const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     if (isValidEmail) {
       if (screenshotTaken) {
         const dataUri = await retrieveDataUri();
@@ -105,7 +105,6 @@ const CommentView = () => {
       }
     } else {
       setHasEmailError(true);
-      e.preventDefault();
     }
   };
 

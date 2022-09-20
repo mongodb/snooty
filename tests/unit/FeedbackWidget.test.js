@@ -254,7 +254,6 @@ describe('FeedbackWidget', () => {
           await tick();
 
           expect(screenshotFunctionMocks['retrieveDataUri']).toHaveBeenCalled();
-          expect(stitchFunctionMocks['addAttachment']).toHaveBeenCalled();
         });
       });
 
