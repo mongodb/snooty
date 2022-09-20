@@ -11,7 +11,7 @@ const fetchManifestMetadata = () => {
       if (entry.entryName === 'site.bson') {
         metadata = BSON.deserialize(entry.getData());
 
-        if (process.env.TEST_EMBED_VERSIONS && metadata['project'] === 'cloud-docs') {
+        if (process.env.GATSBY_TEST_EMBED_VERSIONS && metadata['project'] === 'cloud-docs') {
           metadata['associated_products'] = [
             {
               name: 'atlas-cli',
