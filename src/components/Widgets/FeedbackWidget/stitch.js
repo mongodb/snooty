@@ -31,15 +31,7 @@ export const useStitchUser = () => {
 };
 
 // Feedback Widget Functions
-export async function createNewFeedback({ page, user, ...rest }) {
-  const feedback = await app.callFunction('feedback_create', [{ page, user, ...rest }]);
+export async function createNewFeedback({ page, user, attachment, ...rest }) {
+  const feedback = await app.callFunction('feedback_create', [{ page, user, attachment, ...rest }]);
   return feedback;
-}
-
-export async function addAttachment({ feedback_id, attachment }) {
-  if (!feedback_id) {
-    throw new Error('Must specify a feedback item _id to add an attachment to');
-  }
-  const result = await app.callFunction('feedback_addAttachment_updatedSDKs', [{ feedback_id, attachment }]);
-  return result;
 }

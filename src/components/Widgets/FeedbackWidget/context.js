@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import { createNewFeedback, useStitchUser, addAttachment } from './stitch';
+import { createNewFeedback, useStitchUser } from './stitch';
 import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
 
@@ -31,17 +31,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     }
   };
 
-  // Upload a screenshot to S3 and attach it to the feedback
-  const submitScreenshot = async ({ dataUri, viewport }) => {
-    if (!selectedSentiment) return;
-    const updatedFeedback = await addAttachment({
-      feedback_id: feedback._id,
-      attachment: { type: 'screenshot', dataUri, viewport },
-    });
-    setFeedback(updatedFeedback);
-  };
-
-  const submitAllFeedback = async ({ comment = '', email = '', snootyEnv }) => {
+  const submitAllFeedback = async ({ comment = '', email = '', snootyEnv, dataUri, viewport }) => {
     // Route the user to their "next steps"
 
     setProgress([true, true, true]);
@@ -62,6 +52,10 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
         isAnonymous: segment.isAnonymous,
         stitch_id: user && user.id,
         email: email,
+      },
+      attachment: {
+        dataUri,
+        viewport,
       },
       viewport: getViewport(),
       comment,
@@ -93,13 +87,11 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     view,
     setScreenshotTaken,
     screenshotTaken,
-    isSupportRequest,
     selectedSentiment,
     initializeFeedback,
     selectSentiment,
     setSentiment,
     setProgress,
-    submitScreenshot,
     submitAllFeedback,
     abandon,
     hideHeader,

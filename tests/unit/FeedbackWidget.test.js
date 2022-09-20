@@ -227,8 +227,6 @@ describe('FeedbackWidget', () => {
         it('shows the overlays and adds event listener', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
             comment: 'This is a test comment.',
             user: { email: 'test@example.com' },
           });
@@ -246,9 +244,8 @@ describe('FeedbackWidget', () => {
         it('adds the screenshot attachment on send', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
             comment: 'This is a test comment.',
+            sentiment: 'Positive',
             user: { email: 'test@example.com' },
             screenshotTaken: true,
           });

@@ -39,12 +39,5 @@ async function takeFeedbackScreenshot() {
 
 export async function retrieveDataUri() {
   const dataUri = await takeFeedbackScreenshot();
-
-  // TODO: remove this after testing, this downloads the image to preview screenshot
-  const link = document.createElement('a');
-  link.download = 'test.png';
-  link.href = dataUri;
-  link.click();
-
   return dataUri;
 }

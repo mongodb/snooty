@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { withPrefix } from 'gatsby-link';
+import { withPrefix } from 'gatsby';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
-import Tooltip from './LeafygreenTooltip';
-import { useFeedbackState } from '../context';
+import Tooltip from '@leafygreen-ui/tooltip';
+import { useFeedbackContext } from '../context';
 import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
@@ -21,15 +21,6 @@ const instructionsBorderStyling = css`
   height: 100%;
   border: #ffdd49 solid ${HIGHLIGHT_BORDER_SIZE}px;
   z-index: 11;
-`;
-
-//styling for entire screenshot icon selector
-const ScreenshotSelect = styled(Button)`
-  height: 28px;
-  z-index: 5;
-  width: 38px !important;
-  align-text: center;
-  margin-left: -8px;
 `;
 
 const instructionsPanelStyling = css`
@@ -79,8 +70,17 @@ const exitButtonStyle = (position, top, left) => css`
   z-index: 12;
 `;
 
+//styling for entire screenshot icon selector
+const ScreenshotSelect = styled(Button)`
+  height: 28px;
+  z-index: 5;
+  width: 38px !important;
+  align-text: center;
+  margin-left: -8px;
+`;
+
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken } = useFeedbackState();
+  const { setScreenshotTaken } = useFeedbackContext();
   const label = 'Take a Screenshot';
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [currElemState, setCurrElemState] = useState(null);
@@ -325,8 +325,10 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         align="bottom"
         justify="middle"
         triggerEvent="hover"
+        enabled={true}
+        darkMode={false}
         trigger={
-          <ScreenshotSelect variant="default" onClick={takeNewScreenshot} {...props}>
+          <ScreenshotSelect onClick={takeNewScreenshot} {...props}>
             <img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />
           </ScreenshotSelect>
         }

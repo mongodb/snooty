@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import LeafygreenCard from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
+import LeafygreenCard from '@leafygreen-ui/card';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
@@ -10,24 +10,6 @@ import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 const feedbackStyle = css`
   z-index: 14;
 `;
-
-export default function FeedbackCard({ isOpen, children }) {
-  const { abandon } = useFeedbackContext();
-
-  return (
-    isOpen && (
-      <FloatingContainer id={feedbackId} css={feedbackStyle}>
-        <Card>
-          <CardHeader>
-            <ProgressBar />
-            <CloseButton onClick={() => abandon()} />
-          </CardHeader>
-          <Content>{children}</Content>
-        </Card>
-      </FloatingContainer>
-    )
-  );
-}
 
 const FloatingContainer = styled.div`
   position: fixed;
@@ -59,7 +41,7 @@ const FeedbackCard = ({ isOpen, children }) => {
 
   return (
     isOpen && (
-      <FloatingContainer>
+      <FloatingContainer id={feedbackId} css={feedbackStyle}>
         <Card>
           <CardHeader>
             <ProgressBar />

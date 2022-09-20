@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import TextArea from '@leafygreen-ui/text-area';
@@ -8,7 +7,7 @@ import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
 import { Layout, CommentHeader, Footer } from '../components/view-components';
-import { useFeedbackState } from '../context';
+import { useFeedbackContext } from '../context';
 import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
@@ -81,7 +80,7 @@ const useValidation = (inputValue, validator) => {
 };
 
 const CommentView = () => {
-  const { selectedSentiment, submitComment, submitAllFeedback, submitScreenshot, screenshotTaken  } = useFeedbackContext();
+  const { selectedSentiment, submitAllFeedback, screenshotTaken } = useFeedbackContext();
   const placeholderText =
     selectedSentiment === 'Positive'
       ? 'How did this page help you?'
@@ -100,10 +99,10 @@ const CommentView = () => {
     if (isValidEmail) {
       if (screenshotTaken) {
         const dataUri = await retrieveDataUri();
-        await submitScreenshot({ dataUri, viewport });
+        await submitAllFeedback({ comment, email, snootyEnv, dataUri, viewport });
+      } else {
+        await submitAllFeedback({ comment, email, snootyEnv });
       }
-      await submitComment({ comment, email });
-      await submitAllFeedback();
     } else {
       setHasEmailError(true);
       e.preventDefault();
@@ -111,36 +110,36 @@ const CommentView = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} novalidate="">
-      <Layout>
-        <CommentHeader />
-        <StyledCommentInput
-          type="text"
-          id="feedback-comment"
-          aria-labelledby="Comment Text Box"
-          placeholder={placeholderText}
-          value={comment}
-          rows={4}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <StyledEmailInput
-          type="email"
-          id="feedback-email"
-          aria-labelledby="Email Text Box"
-          placeholder="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          errorMessage="Please enter a valid email."
-          state={hasEmailError ? 'error' : 'none'}
-          optional={true}
-          className={cx(FooterMargin({ hasEmailError }))}
-        />
-        <Footer>
-          <SubmitButton type="submit">{'Send'}</SubmitButton>
-          <ScreenshotButton />
-        </Footer>
-      </Layout>
-    </form>
+    <Layout>
+      <CommentHeader />
+      <StyledCommentInput
+        type="text"
+        id="feedback-comment"
+        aria-labelledby="Comment Text Box"
+        placeholder={placeholderText}
+        value={comment}
+        rows={4}
+        onChange={(e) => setComment(e.target.value)}
+      />
+      <StyledEmailInput
+        type="email"
+        id="feedback-email"
+        aria-labelledby="Email Text Box"
+        placeholder="Email Address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        errorMessage="Please enter a valid email."
+        state={hasEmailError ? 'error' : 'none'}
+        optional={true}
+        className={cx(FooterMargin({ hasEmailError }))}
+      />
+      <Footer>
+        <SubmitButton onClick={() => handleSubmit()} type="submit">
+          {'Send'}
+        </SubmitButton>
+        <ScreenshotButton />
+      </Footer>
+    </Layout>
   );
 };
 

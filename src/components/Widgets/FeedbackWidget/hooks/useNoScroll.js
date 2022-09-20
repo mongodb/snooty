@@ -1,8 +1,8 @@
-import React from 'react';
+import { useEffect } from 'react';
 import noScroll from 'no-scroll';
 
 const useNoScroll = (condition) => {
-  React.useEffect(() => {
+  useEffect(() => {
     if (condition) {
       noScroll.on();
       return () => noScroll.off();

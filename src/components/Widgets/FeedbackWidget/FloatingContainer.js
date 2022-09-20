@@ -4,7 +4,7 @@ import LeafygreenCard from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
-import { useFeedbackState } from './context';
+import { useFeedbackContext } from './context';
 import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 
 const feedbackStyle = css`
@@ -12,7 +12,7 @@ const feedbackStyle = css`
 `;
 
 export default function FloatingContainer({ isOpen, children }) {
-  const { abandon } = useFeedbackState();
+  const { abandon } = useFeedbackContext();
 
   return (
     isOpen && (
