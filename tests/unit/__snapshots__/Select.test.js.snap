@@ -16,11 +16,6 @@ exports[`Select renders select correctly 1`] = `
   flex-direction: column;
 }
 
-.emotion-1>label+button,
-.emotion-1>p+button {
-  margin-top: 3px;
-}
-
 .emotion-1>button>div>div>div {
   display: -webkit-box;
   display: -webkit-flex;
@@ -65,11 +60,9 @@ exports[`Select renders select correctly 1`] = `
   line-height: 20px;
   font-weight: 500;
   height: 36px;
-  font-weight: 400;
   background-color: #FFFFFF;
   color: #5C6C75;
   width: 100%;
-  font-size: 13px;
 }
 
 .emotion-2:focus {
@@ -102,6 +95,7 @@ exports[`Select renders select correctly 1`] = `
 
 .emotion-2>*:last-child {
   grid-template-columns: 1fr 16px;
+  padding: 0 12px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
@@ -116,15 +110,6 @@ exports[`Select renders select correctly 1`] = `
 
 .emotion-2>*:last-child>svg {
   color: #3D4F58;
-}
-
-.emotion-2>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-2:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {

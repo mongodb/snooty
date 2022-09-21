@@ -444,11 +444,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   flex-direction: column;
 }
 
-.emotion-46>label+button,
-.emotion-46>p+button {
-  margin-top: 3px;
-}
-
 .emotion-46>button>div>div>div {
   display: -webkit-box;
   display: -webkit-flex;
@@ -493,10 +488,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 20px;
   font-weight: 500;
   height: 36px;
-  font-weight: 400;
   background-color: #FFFFFF;
   width: 100%;
-  font-size: 13px;
 }
 
 .emotion-47:focus {
@@ -529,6 +522,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-47>*:last-child {
   grid-template-columns: 1fr 16px;
+  padding: 0 12px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
@@ -543,15 +537,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-47>*:last-child>svg {
   color: #3D4F58;
-}
-
-.emotion-47>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-47:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -661,10 +646,11 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 20px;
   font-weight: 500;
   height: 36px;
-  font-weight: 400;
   background-color: #FFFFFF;
+  background-color: #E8EDEB;
+  color: #889397;
+  cursor: not-allowed;
   width: 100%;
-  font-size: 13px;
 }
 
 .emotion-59:focus {
@@ -704,6 +690,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-59>*:last-child {
   grid-template-columns: 1fr 16px;
+  padding: 0 12px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
@@ -720,31 +707,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #3D4F58;
 }
 
-.emotion-59>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-59:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
-}
-
-.emotion-59:disabled {
-  cursor: not-allowed;
-  pointer-events: unset;
-  box-shadow: unset;
-}
-
-.emotion-59:disabled:active {
-  pointer-events: none;
-}
-
-.emotion-59:disabled {
-  background-color: #E8EDEB;
-  color: #889397;
-}
-
-.emotion-59:disabled>*:last-child>svg {
+.emotion-59>*:last-child>svg {
   color: #889397;
 }
 
@@ -1449,11 +1412,6 @@ exports[`Search Results Page does not return results for a given search term wit
   flex-direction: column;
 }
 
-.emotion-37>label+button,
-.emotion-37>p+button {
-  margin-top: 3px;
-}
-
 .emotion-37>button>div>div>div {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1498,11 +1456,9 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 20px;
   font-weight: 500;
   height: 36px;
-  font-weight: 400;
   background-color: #FFFFFF;
   color: #5C6C75;
   width: 100%;
-  font-size: 13px;
 }
 
 .emotion-38:focus {
@@ -1535,6 +1491,7 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-38>*:last-child {
   grid-template-columns: 1fr 16px;
+  padding: 0 12px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
@@ -1549,15 +1506,6 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-38>*:last-child>svg {
   color: #3D4F58;
-}
-
-.emotion-38>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-38:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -1667,11 +1615,12 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 20px;
   font-weight: 500;
   height: 36px;
-  font-weight: 400;
   background-color: #FFFFFF;
   color: #5C6C75;
+  background-color: #E8EDEB;
+  color: #889397;
+  cursor: not-allowed;
   width: 100%;
-  font-size: 13px;
 }
 
 .emotion-50:focus {
@@ -1711,6 +1660,7 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-50>*:last-child {
   grid-template-columns: 1fr 16px;
+  padding: 0 12px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
@@ -1727,31 +1677,7 @@ exports[`Search Results Page does not return results for a given search term wit
   color: #3D4F58;
 }
 
-.emotion-50>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-50:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
-}
-
-.emotion-50:disabled {
-  cursor: not-allowed;
-  pointer-events: unset;
-  box-shadow: unset;
-}
-
-.emotion-50:disabled:active {
-  pointer-events: none;
-}
-
-.emotion-50:disabled {
-  background-color: #E8EDEB;
-  color: #889397;
-}
-
-.emotion-50:disabled>*:last-child>svg {
+.emotion-50>*:last-child>svg {
   color: #889397;
 }
 
@@ -4236,11 +4162,6 @@ exports[`Search Results Page renders results from a given search term query para
   flex-direction: column;
 }
 
-.emotion-40>label+button,
-.emotion-40>p+button {
-  margin-top: 3px;
-}
-
 .emotion-40>button>div>div>div {
   display: -webkit-box;
   display: -webkit-flex;
@@ -4285,11 +4206,9 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 20px;
   font-weight: 500;
   height: 36px;
-  font-weight: 400;
   background-color: #FFFFFF;
   color: #5C6C75;
   width: 100%;
-  font-size: 13px;
 }
 
 .emotion-41:focus {
@@ -4322,6 +4241,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-41>*:last-child {
   grid-template-columns: 1fr 16px;
+  padding: 0 12px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
@@ -4336,15 +4256,6 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-41>*:last-child>svg {
   color: #3D4F58;
-}
-
-.emotion-41>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-41:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -4454,11 +4365,12 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 20px;
   font-weight: 500;
   height: 36px;
-  font-weight: 400;
   background-color: #FFFFFF;
   color: #5C6C75;
+  background-color: #E8EDEB;
+  color: #889397;
+  cursor: not-allowed;
   width: 100%;
-  font-size: 13px;
 }
 
 .emotion-53:focus {
@@ -4498,6 +4410,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-53>*:last-child {
   grid-template-columns: 1fr 16px;
+  padding: 0 12px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
@@ -4514,31 +4427,7 @@ exports[`Search Results Page renders results from a given search term query para
   color: #3D4F58;
 }
 
-.emotion-53>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-53:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
-}
-
-.emotion-53:disabled {
-  cursor: not-allowed;
-  pointer-events: unset;
-  box-shadow: unset;
-}
-
-.emotion-53:disabled:active {
-  pointer-events: none;
-}
-
-.emotion-53:disabled {
-  background-color: #E8EDEB;
-  color: #889397;
-}
-
-.emotion-53:disabled>*:last-child>svg {
+.emotion-53>*:last-child>svg {
   color: #889397;
 }
 
