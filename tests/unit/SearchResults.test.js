@@ -15,10 +15,14 @@ import mockInputData from '../utils/data/marian-manifests.json';
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
-const expectFilteredResults = (wrapper) => {
-  // Filtered property "Realm" and version "Latest" should be shown 3x:
+const expectFilteredResults = (wrapper, filteredByRealm) => {
+  // Filtered property "Realm" should be shown 3 or 4x:
   // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
-  expect(wrapper.queryAllByText('Realm').length).toBe(3);
+  // and (4) if it selected within the dropdown
+  const expectedRealmCount = filteredByRealm ? 4 : 3;
+  // Version "Latest" should be shown 3x:
+  // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
+  expect(wrapper.queryAllByText('Realm').length).toBe(expectedRealmCount);
   expect(wrapper.queryAllByText('Latest').length).toBe(3);
 
   // Check the search result card displays content according to the response
@@ -34,10 +38,13 @@ const expectFilteredResults = (wrapper) => {
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
 };
 
+// filters are not shown until dropdown is opened
+// open filters by clicking select buttons first
 const expectValuesForFilters = (wrapper, category, version) => {
-  const dropdowns = wrapper.queryAllByRole('listbox');
-  expect(within(dropdowns[0]).queryByText(category)).toBeTruthy();
-  expect(within(dropdowns[1]).queryByText(version)).toBeTruthy();
+  const selectElements = wrapper.queryAllByTestId('lg-select');
+
+  expect(selectElements[0].textContent).toBe(category);
+  expect(selectElements[1].textContent).toBe(version);
 };
 
 // Unfiltered search results should still display tags for category and version on card
@@ -76,11 +83,13 @@ const filterByRealm = async (wrapper, screenSize) => {
   if (screenSize === 'mobile') {
     listboxIndex = 2;
   }
-  const dropdown = wrapper.queryAllByRole('listbox')[listboxIndex];
-  expect(dropdown).toHaveAttribute('aria-expanded', 'false');
-  userEvent.click(dropdown);
+  const selectElements = wrapper.queryAllByTestId('lg-select');
+  const dropdownButton = selectElements[listboxIndex];
+  expect(dropdownButton).toHaveAttribute('aria-expanded', 'false');
+  userEvent.click(dropdownButton);
   tick();
-  userEvent.click(within(dropdown).getByText('Realm'));
+  const dropdownList = wrapper.queryAllByRole('listbox')[0];
+  userEvent.click(within(dropdownList).getByText('Realm'));
 };
 
 const openMobileSearch = async (wrapper) => {
@@ -196,7 +205,7 @@ describe('Search Results Page', () => {
     await act(async () => {
       await filterByRealm(renderStitchResults);
     });
-    expectFilteredResults(renderStitchResults);
+    expectFilteredResults(renderStitchResults, true);
   });
 
   it('resets search filters when hitting the "clear all filters" button', async () => {
@@ -211,7 +220,7 @@ describe('Search Results Page', () => {
     await act(async () => {
       await filterByRealm(renderStitchResults);
     });
-    expectFilteredResults(renderStitchResults);
+    expectFilteredResults(renderStitchResults, true);
 
     // Remove filters
     await act(async () => {
