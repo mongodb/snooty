@@ -38,6 +38,16 @@ const Wrapper = styled('main')`
     max-width: 500px;
   }
 
+  // realm PLP has full width p
+  ${({ isRealm }) =>
+    isRealm &&
+    `
+    section > p {
+      grid-column: 2/-2;
+      max-width: unset;
+    }
+  `}
+
   section p > a {
     letter-spacing: 0.5px;
     :hover {
@@ -154,6 +164,7 @@ const ProductLanding = ({ children }) => {
   const { project } = useSiteMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
+  const isRealm = project === 'realm';
 
   // shallow copy children, and search for existence of banner
   const shallowChildren = children.reduce((res, child) => {
@@ -173,7 +184,7 @@ const ProductLanding = ({ children }) => {
   const bannerNode = findKeyValuePair([{ children: shallowChildren }], 'name', 'banner');
 
   return (
-    <Wrapper isGuides={isGuides} useHero={useHero} hasBanner={!!bannerNode}>
+    <Wrapper isGuides={isGuides} isRealm={isRealm} useHero={useHero} hasBanner={!!bannerNode}>
       {children}
     </Wrapper>
   );
