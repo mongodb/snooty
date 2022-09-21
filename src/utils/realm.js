@@ -38,3 +38,11 @@ export const fetchSearchPropertyMapping = async (snootyEnv) => {
 export const fetchOASFile = async (apiName, database) => {
   return await fetchData('fetchOASFile', apiName, database);
 };
+
+export const fetchDocument = async (database, collectionName, query) => {
+  return await fetchData('fetchDocument', database, collectionName, query);
+};
+
+export const fetchDocuments = async (database, collectionName, query) => {
+  return await fetchData('fetchDocuments', database, collectionName, query);
+};

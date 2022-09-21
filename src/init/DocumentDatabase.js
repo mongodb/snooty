@@ -27,11 +27,11 @@ class StitchInterface {
     return this.stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   }
 
-  fetchRepoBranches() {
+  fetchRepoBranches(project = siteMetadata.project) {
     return this.stitchClient.callFunction('fetchDocument', [
       siteMetadata.reposDatabase,
       BRANCHES_COLLECTION,
-      constructReposFilter(siteMetadata.project),
+      constructReposFilter(project, project === siteMetadata.project),
     ]);
   }
 
