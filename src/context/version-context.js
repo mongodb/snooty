@@ -7,21 +7,21 @@ import { BRANCHES_COLLECTION } from '../build-constants';
 // begin helper functions
 const STORAGE_KEY = 'activeVersions';
 
-function getInitBranchName(branches) {
+const getInitBranchName = (branches) => {
   const activeBranch = branches.find((b) => b.isStableBranch);
   if (activeBranch) {
     return activeBranch.name || activeBranch.gitBranchName;
   }
   return branches[0]?.name || null;
-}
+};
 
-function getInitVersions(branchListByProduct) {
+const getInitVersions = (branchListByProduct) => {
   const initState = {};
   for (const productName in branchListByProduct) {
     initState[productName] = getInitBranchName(branchListByProduct[productName]);
   }
   return initState;
-}
+};
 
 // version state reducer helper fn
 // overwrite current state with any new state attributes
