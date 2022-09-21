@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
-import { Option, OptionGroup, Select, Size } from '@leafygreen-ui/select';
+import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
 import { generatePrefix } from './utils';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
@@ -15,13 +15,6 @@ import { baseUrl } from '../../utils/base-url';
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
-  & > button {
-    background-color: ${uiColors.white};
-  }
-
-  span {
-    font-size: ${theme.fontSize.default};
-  }
   ${'' /* Render version dropdown text in front of the Sidebar text */}
   button {
     z-index: 2;
@@ -170,7 +163,6 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
       onChange={navigate}
       placeholder={'Select a version'}
       popoverZIndex={3}
-      size={Size.Large}
       value={currentUrlSlug}
       usePortal={false}
       disabled={eol}

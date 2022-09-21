@@ -131,15 +131,17 @@ exports.createPages = async ({ actions }) => {
   try {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
 
-    await Promise.all(
-      siteMetadata.associatedProducts.map(async (product) => {
-        associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
-        // filter all branches of associated repo by associated versions only
-        associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
-          return product.versions.includes(branch.gitBranchName);
-        });
-      })
-    );
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+      await Promise.all(
+        siteMetadata.associatedProducts.map(async (product) => {
+          associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+          // filter all branches of associated repo by associated versions only
+          associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
+            return product.versions?.includes(branch.gitBranchName);
+          });
+        })
+      );
+    }
     let errMsg;
 
     if (!repoInfo) {
@@ -231,5 +233,15 @@ exports.createSchemaCustomization = ({ actions }) => {
     type SnootyMetadata implements Node @dontInfer {
         metadata: JSON!
     }
+
+    type AssociatedProduct {
+      name: String,
+      versions: [String]
+    }
+
+    type SiteSiteMetadata implements Node {
+      associatedProducts: [AssociatedProduct],
+    }
+
   `);
 };
