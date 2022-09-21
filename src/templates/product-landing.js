@@ -44,7 +44,7 @@ const Wrapper = styled('main')`
     `
     section > p {
       grid-column: 2/-2;
-      max-width: unset;
+      max-width: 775px;
     }
   `}
 
