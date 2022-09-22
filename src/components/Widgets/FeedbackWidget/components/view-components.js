@@ -1,24 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-
-const NEGATIVE_RATING_HEADING = "We're sorry to hear that.";
-const NEGATIVE_RATING_SUBHEADING = 'What seems to be the issue?';
-const POSITIVE_RATING_HEADING = "We're glad to hear that!";
-const POSITIVE_RATING_SUBHEADING = 'Tell us more.';
-export const RatingHeader = ({ isPositive, headingText, subheadingText }) => {
-  const heading = headingText ? headingText : isPositive ? POSITIVE_RATING_HEADING : NEGATIVE_RATING_HEADING;
-  const subheading = subheadingText
-    ? subheadingText
-    : isPositive
-    ? POSITIVE_RATING_SUBHEADING
-    : NEGATIVE_RATING_SUBHEADING;
-  return (
-    <>
-      <Heading>{heading}</Heading>
-      <Subheading>{subheading}</Subheading>
-    </>
-  );
-};
+import { theme } from '../../../../theme/docsTheme';
+import { useFeedbackContext } from '../context';
+import { sentimentChoices } from '../views/SentimentView';
+import Emoji from '../components/Emoji';
 
 export const Layout = styled.div`
   display: flex;
@@ -27,21 +12,22 @@ export const Layout = styled.div`
 `;
 
 export const Heading = styled.h2`
-  margin-top: 0;
+  margin-top: 5px;
   margin-bottom: 16px;
   width: 100%;
-  text-align: left;
+  text-align: center;
   font-weight: regular;
-  font-size: 16px;
+  font-size: ${theme.fontSize.default};
 `;
 
 export const Subheading = styled.p`
   margin-top: 0;
   margin-bottom: 16px;
+  margin-left: 10px;
   width: 100%;
   text-align: left;
   font-weight: regular;
-  font-size: 14px;
+  font-size: ${theme.fontSize.small};
 `;
 
 export const Footer = styled.div`
@@ -54,3 +40,60 @@ export const Footer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+const ResponsiveEmoji = styled('div')`
+  cursor: pointer;
+  margin-top: 3px;
+  display: inline-block;
+  vertical-align: left;
+  width: 30%;
+  margin-top: -5px;
+`;
+
+const StyledSentimentPath = styled('span')`
+  font-weight: 400 !important;
+  font-size: ${theme.fontSize.small} !important;
+  text-align: center;
+  margin: 0px -10px;
+  margin-right: 2px;
+  line-height: 20px;
+  display: block;
+  letter-spacing: 0.2px;
+  padding: 3px;
+`;
+
+//renders each emoji icon in comment view
+//icon corresponding to the selected path highlighted, others are faded
+const SentimentEmoji = ({ path }) => {
+  const { selectedSentiment, selectSentiment } = useFeedbackContext();
+  const sentiment = path.sentiment;
+  return (
+    <ResponsiveEmoji
+      onClick={() => selectSentiment(path.sentiment)}
+      style={{
+        opacity: sentiment === selectedSentiment ? '1' : '0.5',
+      }}
+    >
+      <Emoji sentiment={path.sentiment} />
+      <StyledSentimentPath
+        style={{
+          opacity: sentiment === selectedSentiment ? '0.7' : '0.0',
+        }}
+      >
+        {path.category}
+      </StyledSentimentPath>
+    </ResponsiveEmoji>
+  );
+};
+
+//header for the comment view
+//emoji icons and corresponding path labels
+export const CommentHeader = () => {
+  return (
+    <Heading>
+      {sentimentChoices.map((path) => (
+        <SentimentEmoji path={path} key={path.category} />
+      ))}
+    </Heading>
+  );
+};

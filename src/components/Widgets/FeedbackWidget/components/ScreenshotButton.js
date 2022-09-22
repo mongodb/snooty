@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
+import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { withPrefix } from 'gatsby-link';
+import { withPrefix } from 'gatsby';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
-import Tooltip from './LeafygreenTooltip';
-import { CameraIcon } from '../icons';
-import { useFeedbackState } from '../context';
+import Tooltip from '@leafygreen-ui/tooltip';
+import { useFeedbackContext } from '../context';
 import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
@@ -70,8 +70,17 @@ const exitButtonStyle = (position, top, left) => css`
   z-index: 12;
 `;
 
+//styling for entire screenshot icon selector
+const ScreenshotSelect = styled(Button)`
+  height: 28px;
+  z-index: 5;
+  width: 38px !important;
+  align-text: center;
+  margin-left: -8px;
+`;
+
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken } = useFeedbackState();
+  const { setScreenshotTaken } = useFeedbackContext();
   const label = 'Take a Screenshot';
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [currElemState, setCurrElemState] = useState(null);
@@ -316,10 +325,12 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         align="bottom"
         justify="middle"
         triggerEvent="hover"
+        enabled={true}
+        darkMode={false}
         trigger={
-          <Button variant="default" onClick={takeNewScreenshot} {...props}>
-            <CameraIcon />
-          </Button>
+          <ScreenshotSelect onClick={takeNewScreenshot} {...props}>
+            <img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />
+          </ScreenshotSelect>
         }
         popoverZIndex={15}
       >
@@ -329,6 +340,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   );
 };
 
-export default ScreenshotButton;
 export const fwInstructionsId = 'overlay-instructions';
 export const fwExitButtonId = 'exit-button';
+export default ScreenshotButton;

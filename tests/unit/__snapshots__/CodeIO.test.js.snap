@@ -294,6 +294,7 @@ exports[`CodeIO renders correctly 1`] = `
   border-color: #889397;
   color: #1C2D38;
   font-size: 13px;
+  line-height: 20px;
   font-weight: 500;
   height: 36px;
   padding: 0px;
@@ -307,6 +308,7 @@ exports[`CodeIO renders correctly 1`] = `
   outline: none;
 }
 
+.emotion-16[disabled],
 .emotion-16:disabled {
   pointer-events: none;
 }
@@ -320,6 +322,7 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-16:hover,
 .emotion-16:active {
+  color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
@@ -336,7 +339,7 @@ exports[`CodeIO renders correctly 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .emotion-18 {
@@ -355,7 +358,7 @@ exports[`CodeIO renders correctly 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  padding: 0 12px;
+  padding: 0 11px;
   gap: 6px;
 }
 

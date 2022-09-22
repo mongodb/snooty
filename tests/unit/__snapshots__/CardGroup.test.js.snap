@@ -196,20 +196,6 @@ exports[`renders correctly 1`] = `
   background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
 }
 
-.emotion-30 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-30 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-30 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
 .emotion-31 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;

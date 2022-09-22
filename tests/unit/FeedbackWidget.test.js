@@ -7,10 +7,7 @@ import {
   FeedbackTab,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
-import { BSON } from 'mongodb-stitch-server-sdk';
 import { matchers } from '@emotion/jest';
-
-import { FEEDBACK_QUALIFIERS_POSITIVE, FEEDBACK_QUALIFIERS_NEGATIVE } from './data/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
 import {
@@ -60,6 +57,10 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   await tick();
   return wrapper;
 }
+const snootyEnv = 'development';
+jest.mock('../../src/hooks/use-site-metadata', () => ({
+  useSiteMetadata: () => ({ snootyEnv }),
+}));
 
 expect.extend(matchers);
 
@@ -75,36 +76,35 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackTab (Desktop Viewport)', () => {
-    it('shows the rating view when clicked', async () => {
+    it('shows the sentiment category view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
       // Click the tab
-      userEvent.click(wrapper.getByText('Give Feedback'));
+      userEvent.click(wrapper.getByText('Share Feedback'));
 
       await tick();
       // After the click new feedback is initialized
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({
-        view: 'rating',
+        view: 'sentiment',
         comment: '',
-        rating: null,
       });
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
 
     it('is hidden on small/mobile and medium/tablet screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
     });
@@ -113,8 +113,8 @@ describe('FeedbackWidget', () => {
   describe('FeedbackHeading (Mobile Viewport)', () => {
     it('is hidden on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
     });
@@ -122,8 +122,8 @@ describe('FeedbackWidget', () => {
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(2);
-      expect(wrapper.queryAllByText('Give Feedback')[0]).toHaveStyleRule('display', 'none', {
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
         media: `${theme.screenSize.upToLarge}`,
       });
     });
@@ -131,176 +131,95 @@ describe('FeedbackWidget', () => {
     it('is visible on small/mobile screens', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(2);
     });
 
     it('is hidden on small/mobile screens when configured with page option', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({ hideHeader: true });
-      expect(wrapper.queryAllByText('Give Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
   });
 
   describe('FeedbackFooter', () => {
     it('is hidden on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
     });
 
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
 
     it('is visible on small/mobile screens', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(1);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
   });
 
   describe('FeedbackForm', () => {
-    it('abandons feedback when the form is closed', async () => {
+    it('waiting state when the form is closed', async () => {
       wrapper = await mountFormWithFeedbackState({
-        view: 'rating',
-        _id: new BSON.ObjectId(),
+        view: 'sentiment',
       });
       // Click the close button
       userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
       await tick();
-      expect(stitchFunctionMocks['abandonFeedback']).toHaveBeenCalledTimes(1);
-      expect(wrapper.queryAllByText('How helpful was this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
     });
 
-    describe('RatingView', () => {
-      it('shows a 5-star rating', async () => {
+    describe('SentimentView', () => {
+      it('Shows 3 sentiment categories', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'rating',
-          _id: new BSON.ObjectId(),
+          view: 'sentiment',
         });
-        expect(wrapper.container.getElementsByClassName('fa-star').length).toBe(5);
+        expect(wrapper.queryAllByText('Yes, it did!')).toHaveLength(1);
+        expect(wrapper.queryAllByText('No, I have feedback.')).toHaveLength(1);
+        expect(wrapper.queryAllByText('I have a suggestion.')).toHaveLength(1);
       });
 
-      it('transitions to the qualifiers view when a star is clicked', async () => {
+      it('transitions to the negative path comment view when a negative category is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'rating',
-          _id: new BSON.ObjectId(),
+          view: 'sentiment',
         });
-
-        // Simulate a 1-star rating
-        userEvent.click(wrapper.container.getElementsByClassName('fa-star')[0]);
+        userEvent.click(wrapper.queryByText('No, I have feedback.'));
         await tick();
-        expect(wrapper.getByText('What seems to be the issue?')).toBeTruthy();
-      });
-    });
-
-    describe('QualifiersView', () => {
-      it('shows positive qualifiers for a positive rating', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'qualifiers',
-          rating: 4,
-          qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
-          comment: '',
-        });
-        expect(wrapper.queryByText("We're glad to hear that!")).toBeTruthy();
-        expect(wrapper.queryByText('Tell us more.')).toBeTruthy();
+        expect(wrapper.getByText('Unhelpful')).toBeTruthy();
+        expect(wrapper.getByPlaceholderText('How could this page be more helpful?')).toBeTruthy();
       });
 
-      it('shows negative qualifiers for a negative rating', async () => {
+      it('transitions to the positive path comment view when a positive category is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'qualifiers',
-          rating: 2,
-          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-          comment: '',
+          view: 'sentiment',
         });
-        expect(wrapper.queryByText("We're sorry to hear that.")).toBeTruthy();
-        expect(wrapper.queryByText('What seems to be the issue?')).toBeTruthy();
-      });
-
-      it('calls updateFeedback in stitch when qualifier clicked', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'qualifiers',
-          rating: 4,
-          qualifiers: FEEDBACK_QUALIFIERS_POSITIVE,
-          comment: '',
-        });
-        expect(wrapper.queryAllByRole('checkbox').length).toBe(4);
-        expect(wrapper.queryAllByRole('checkbox', { checked: true }).length).toBe(0);
-
-        // Check the first qualifier
-        userEvent.click(wrapper.queryAllByRole('checkbox')[0].closest('div'));
+        userEvent.click(wrapper.queryByText('Yes, it did!'));
         await tick();
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(1);
-
-        // Check the second qualifier
-        userEvent.click(wrapper.queryAllByRole('checkbox')[1].closest('div'));
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(2);
-
-        // Uncheck the first qualifier
-        userEvent.click(wrapper.queryAllByRole('checkbox')[0].closest('div'));
-        await tick();
-        expect(stitchFunctionMocks['updateFeedback']).toHaveBeenCalledTimes(3);
+        expect(wrapper.getByText('Helpful')).toBeTruthy();
+        expect(wrapper.getByPlaceholderText('How did this page help you?')).toBeTruthy();
       });
 
-      describe('when the Continue button is clicked', () => {
-        it('transitions to the comment view', async () => {
-          wrapper = await mountFormWithFeedbackState({
-            view: 'qualifiers',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            comment: '',
-          });
-
-          userEvent.click(wrapper.getByText('Continue').closest('button'));
-
-          await tick();
-          expect(wrapper.getByText('What seems to be the issue?')).toBeTruthy();
+      it('transitions to the suggestion path comment view when a suggestion category is clicked', async () => {
+        wrapper = await mountFormWithFeedbackState({
+          view: 'sentiment',
         });
+        userEvent.click(wrapper.queryByText('I have a suggestion.'));
+        await tick();
+        expect(wrapper.getByText('Idea')).toBeTruthy();
+        expect(wrapper.getByPlaceholderText('What change would you like to see?')).toBeTruthy();
       });
     });
 
     describe('CommentView', () => {
-      it('shows a comment text input', async () => {
+      it('shows correct comment view text', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'comment',
-          rating: 2,
-          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
+          sentiment: 'Positive',
           comment: '',
         });
-        expect(wrapper.getByLabelText('Comment')).toBeTruthy();
-      });
-
-      it('shows an email text input', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'comment',
-          rating: 2,
-          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-          comment: '',
-        });
-        expect(wrapper.getByLabelText('Email Address')).toBeTruthy();
-      });
-
-      it('shows a Support button for feedback with a support request', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'comment',
-          rating: 2,
-          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-          comment: '',
-          isSupportRequest: true,
-        });
-        expect(wrapper.getByText('Continue for Support')).toBeTruthy();
-      });
-
-      it('shows a Submit button for feedback without a support request', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'comment',
-          rating: 2,
-          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-          comment: '',
-          isSupportRequest: false,
-        });
-
+        expect(wrapper.getByPlaceholderText('Email Address')).toBeTruthy();
         expect(wrapper.getByText('Send')).toBeTruthy();
       });
 
@@ -308,8 +227,6 @@ describe('FeedbackWidget', () => {
         it('shows the overlays and adds event listener', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
             comment: 'This is a test comment.',
             user: { email: 'test@example.com' },
           });
@@ -327,9 +244,8 @@ describe('FeedbackWidget', () => {
         it('adds the screenshot attachment on send', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
             comment: 'This is a test comment.',
+            sentiment: 'Positive',
             user: { email: 'test@example.com' },
             screenshotTaken: true,
           });
@@ -338,72 +254,64 @@ describe('FeedbackWidget', () => {
           await tick();
 
           expect(screenshotFunctionMocks['retrieveDataUri']).toHaveBeenCalled();
-          expect(stitchFunctionMocks['addAttachment']).toHaveBeenCalled();
         });
       });
 
-      describe('when the Submit button is clicked', () => {
+      describe('when the Send button is clicked', () => {
         it('submits the feedback and transitions to the submitted view if the inputs are valid', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
             comment: 'This is a test comment.',
+            sentiment: 'Positive',
             user: { email: 'test@example.com' },
           });
-
           // Click the submit button
           userEvent.click(wrapper.getByText('Send').closest('button'));
           await tick();
-
-          expect(stitchFunctionMocks['submitFeedback']).toHaveBeenCalledTimes(1);
+          expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
         });
+
         it('raises an input error if an invalid email is specified', async () => {
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
             comment: '',
+            user: { email: 'test invalid email' },
           });
-
           // Type in an invalid email address
-          const emailInput = wrapper.getByLabelText('Email Address');
-          userEvent.paste(emailInput, 'not-a-valid-email-address');
-
+          const emailInput = wrapper.getByPlaceholderText('Email Address');
+          userEvent.paste(emailInput, 'invalid email address');
           // Click the submit button
           userEvent.click(wrapper.getByText('Send').closest('button'));
           await tick();
-          expect(wrapper.getByLabelText('Please enter a valid email address.')).toBeTruthy();
+          expect(wrapper.getByText('Please enter a valid email.')).toBeTruthy();
         });
-      });
-    });
-
-    describe('SupportView', () => {
-      it('shows self-serve support links', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'support',
-          rating: 2,
-          qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-          isSupportRequest: true,
-        });
-        expect(wrapper.getByText("We're sorry to hear that.")).toBeTruthy();
-        expect(wrapper.getByText('Create a case on the Support Portal')).toBeTruthy();
-        expect(wrapper.getByText('Visit MongoDB Community')).toBeTruthy();
       });
     });
 
     describe('SubmittedView', () => {
-      it('shows summary information', async () => {
+      it('shows self-serve support links for negative path', async () => {
         wrapper = await mountFormWithFeedbackState({
+          sentiment: 'Negative',
           view: 'submitted',
-          feedback: {
-            rating: 2,
-            qualifiers: FEEDBACK_QUALIFIERS_NEGATIVE,
-            isSubmitted: true,
-          },
         });
-        expect(wrapper.getByText('We appreciate your feedback.')).toBeTruthy();
-        expect(wrapper.getByText(`We're working hard to improve the MongoDB Documentation.`)).toBeTruthy();
+        expect(wrapper.getByText("We're sorry to hear that.")).toBeTruthy();
+        expect(wrapper.getByText('Looking for more resources?')).toBeTruthy();
+        expect(wrapper.getByText('MongoDB Community')).toBeTruthy();
+        expect(wrapper.getByText('MongoDB Developer Center')).toBeTruthy();
+        expect(wrapper.getByText('Have a support contract?')).toBeTruthy();
+        expect(wrapper.getByText('Create a Support Case')).toBeTruthy();
+      });
+
+      it('shows summary information for positive path', async () => {
+        wrapper = await mountFormWithFeedbackState({
+          sentiment: 'Positive',
+          view: 'submitted',
+        });
+        expect(wrapper.getByText('Thanks for your help!')).toBeTruthy();
+        expect(wrapper.getByText('MongoDB Community')).toBeTruthy();
+        expect(wrapper.getByText('MongoDB Developer Center')).toBeTruthy();
+        expect(wrapper.queryAllByText('Have a support contract?')).toHaveLength(0);
+        expect(wrapper.queryAllByText('Create a Support Case')).toHaveLength(0);
       });
     });
   });
