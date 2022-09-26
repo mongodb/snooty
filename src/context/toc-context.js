@@ -4,7 +4,6 @@ import { VersionContext } from './version-context';
 
 const TocContext = createContext({
   activeToc: {}, // table of contents
-  // TODO: doc format of contents
 });
 
 const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availableVersions = {}) {
@@ -15,23 +14,17 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
   ) {
     return tocTree;
   }
-  // Q: how to filter by options.version and current versions?
-  // ie. v1.1.0 with atlas cli
-  // vs v1.1.0 with atlas-cli
-  // need to verify consistency of gitBranchName in "versions"
-  // need project name in versions
 
-  // if i mutate toctree, will it still be reset to full tree, since using useSnootyMetadata?
   tocTree.children = tocTree?.children?.filter((child) => {
     // if it has "versions" in options, filter those versions by available versions
     // don't include this child if available versions does not match
     // also should filter this toctree.children[].children[] by current version
     if (child.options?.versions) {
       child.options.versions = child.options.versions.filter((version) =>
-        availableVersions[child.slug].map((branchObj) => branchObj['gitBranchName']).includes(version)
+        availableVersions[child.options?.project]?.map((branchObj) => branchObj['gitBranchName']).includes(version)
       );
       child.children = child.children?.filter(
-        (versionedChild) => currentVersion[child.slug] === versionedChild.options.version
+        (versionedChild) => currentVersion[child.options?.project] === versionedChild.options?.version
       );
       return child.options.versions.length ? child : false;
     }
