@@ -14,24 +14,45 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
   ) {
     return tocTree;
   }
+  const res = {};
+  for (let key in tocTree) {
+    if (key !== 'children') {
+      res[key] = tocTree[key];
+    }
+  }
 
-  tocTree.children = tocTree?.children?.filter((child) => {
+  // want to mutate + filter children. make copies and append to res
+  res.children = tocTree?.children?.reduce((newChildren, child) => {
     // if it has "versions" in options, filter those versions by available versions
     // don't include this child if available versions does not match
     // also should filter this toctree.children[].children[] by current version
+    const childCopy = {
+      options: {},
+      children: [],
+    };
+    for (let key in child) {
+      if (!['options', 'children'].includes(key)) {
+        childCopy[key] = child[key];
+      }
+    }
     if (child.options?.versions) {
-      child.options.versions = child.options.versions.filter((version) =>
+      childCopy.options.versions = child.options.versions.filter((version) =>
         availableVersions[child.options?.project]?.map((branchObj) => branchObj['gitBranchName']).includes(version)
       );
-      child.children = child.children?.filter(
+      childCopy.children = child.children?.filter(
         (versionedChild) => currentVersion[child.options?.project] === versionedChild.options?.version
       );
-      return child.options.versions.length ? child : false;
+      if (childCopy.options?.versions?.length) {
+        newChildren.push(childCopy);
+      }
+    } else {
+      // no mutations. can return by reference
+      newChildren.push(child);
     }
-    return child;
-  });
+    return newChildren;
+  }, []);
 
-  return tocTree;
+  return res;
 };
 
 // ToC context that provides ToC content in form of *above*
