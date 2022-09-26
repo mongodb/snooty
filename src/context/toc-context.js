@@ -4,55 +4,54 @@ import { VersionContext } from './version-context';
 
 const TocContext = createContext({
   activeToc: {}, // table of contents
+  setActiveToc: () => {},
 });
 
+/**
+ *
+ * @param {object} tocTree toc tree head node
+ * @param {object} currentVersion see version-context currentVersion{}
+ * @param {object} availableVersions see version-context availableVersions{}
+ * @returns
+ */
 const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availableVersions = {}) {
+  const clonedToc = { ...tocTree };
   if (
     Object.keys(tocTree).length === 0 ||
     Object.keys(availableVersions).length === 0 ||
     Object.keys(currentVersion).length === 0
   ) {
-    return tocTree;
+    return clonedToc;
   }
-  const res = {};
-  for (let key in tocTree) {
-    if (key !== 'children') {
-      res[key] = tocTree[key];
+  clonedToc.children = clonedToc?.children?.filter((child) => {
+    // tocTree child.options.versions exists if it is specific to a version
+    // if no version, include the child
+    if (!child?.options?.versions) {
+      return true;
     }
-  }
+    const childProject = child.options.project;
 
-  // want to mutate + filter children. make copies and append to res
-  res.children = tocTree?.children?.reduce((newChildren, child) => {
-    // if it has "versions" in options, filter those versions by available versions
-    // don't include this child if available versions does not match
-    // also should filter this toctree.children[].children[] by current version
-    const childCopy = {
-      options: {},
-      children: [],
-    };
-    for (let key in child) {
-      if (!['options', 'children'].includes(key)) {
-        childCopy[key] = child[key];
-      }
-    }
-    if (child.options?.versions) {
-      childCopy.options.versions = child.options.versions.filter((version) =>
-        availableVersions[child.options?.project]?.map((branchObj) => branchObj['gitBranchName']).includes(version)
-      );
-      childCopy.children = child.children?.filter(
-        (versionedChild) => currentVersion[child.options?.project] === versionedChild.options?.version
-      );
-      if (childCopy.options?.versions?.length) {
-        newChildren.push(childCopy);
-      }
-    } else {
-      // no mutations. can return by reference
-      newChildren.push(child);
-    }
-    return newChildren;
-  }, []);
+    // filter ToC version options by version context
+    child.options.versions = child.options.versions.filter((version) =>
+      availableVersions[childProject]?.map((branchObj) => branchObj['gitBranchName']).includes(version)
+    );
 
-  return res;
+    // if ToC and version context don't match, don't show versioned ToC children
+    if (!child.options.versions.length) {
+      return false;
+    }
+
+    let targetVersion = currentVersion[childProject];
+    // if current version is not part of merged ToC, fallback to last
+    if (!targetVersion || !child.options.versions.includes(targetVersion)) {
+      targetVersion = child.options.versions[child.options.version.length - 1];
+      // NOTE. not updating version context since active versions should be most recent to their homepage
+    }
+    child.children = child.children?.filter((versionedChild) => versionedChild.options?.version === targetVersion);
+    return child;
+  });
+
+  return clonedToc;
 };
 
 // ToC context that provides ToC content in form of *above*
@@ -61,6 +60,7 @@ const TocContextProvider = ({ children }) => {
   const { activeVersions, availableVersions } = useContext(VersionContext);
   const { toctree } = useSnootyMetadata();
   const [activeToc, setActiveToc] = useState({});
+  // TODO: useReducer for setActiveToc
 
   // TODO: client side call to get Toc Metadata from Atlas
   // useEffect(() => {
@@ -69,8 +69,6 @@ const TocContextProvider = ({ children }) => {
 
   useEffect(() => {
     const filtered = filterTocByVersion(toctree, activeVersions, availableVersions);
-    console.log('filtered');
-    console.log(filtered);
     setActiveToc(filtered);
   }, [activeVersions, toctree, availableVersions]);
 
