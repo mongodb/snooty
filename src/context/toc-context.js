@@ -88,12 +88,10 @@ const TocContextProvider = ({ children }) => {
   useEffect(() => {
     getTocMetadata(database, project, parserUser, parserBranch, toctree).then((toctreeResponse) => {
       const filtered = filterTocByVersion(toctreeResponse, activeVersions, availableVersions);
-      console.log('setting filtered');
-      console.log(JSON.stringify(filtered.children[filtered.children.length - 1]));
       setActiveToc(filtered);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [activeVersions, availableVersions]);
 
   return <TocContext.Provider value={{ activeToc }}>{children}</TocContext.Provider>;
 };
