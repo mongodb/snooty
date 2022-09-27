@@ -6,8 +6,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { VersionContext } from './version-context';
 
 const TocContext = createContext({
-  activeToc: {}, // table of contents
-  setActiveToc: () => {},
+  activeToc: {}, // table of contents, represented by head node
 });
 
 /**
@@ -15,44 +14,37 @@ const TocContext = createContext({
  * @param {object} tocTree toc tree head node
  * @param {object} currentVersion see version-context currentVersion{}
  * @param {object} availableVersions see version-context availableVersions{}
- * @returns
+ * @returns tocTree toc tree head node, with nodes filtered by current and available versions
  */
 const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availableVersions = {}) {
   const clonedToc = { ...tocTree };
-  if (
-    Object.keys(tocTree).length === 0 ||
-    Object.keys(availableVersions).length === 0 ||
-    Object.keys(currentVersion).length === 0
-  ) {
+  if (Object.keys(tocTree).length === 0) {
     return clonedToc;
   }
   clonedToc.children =
-    clonedToc?.children?.filter((child) => {
-      // tocTree child.options.versions exists if it is specific to a version
-      // if no version, include the child
-      if (!child?.options?.versions) {
+    clonedToc.children?.filter((tocNode) => {
+      if (!tocNode?.options?.versions) {
         return true;
       }
-      const childProject = child.options.project;
-
+      const nodeProject = tocNode.options.project;
+      const availableVersionNames =
+        availableVersions[nodeProject]?.map((branchObj) => branchObj['gitBranchName']) || [];
       // filter ToC version options by version context
-      child.options.versions = child.options.versions.filter((version) =>
-        availableVersions[childProject]?.map((branchObj) => branchObj['gitBranchName']).includes(version)
-      );
-
+      tocNode.options.versions = tocNode.options.versions.filter((version) => availableVersionNames.includes(version));
       // if ToC and version context don't match, don't show versioned ToC children
-      if (!child.options.versions.length) {
+      if (!tocNode.options.versions.length) {
         return false;
       }
 
-      let targetVersion = currentVersion[childProject];
+      let targetVersion = currentVersion[nodeProject];
       // if current version is not part of merged ToC, fallback to last
-      if (!targetVersion || !child.options.versions.includes(targetVersion)) {
-        targetVersion = child.options.versions[child.options.version.length - 1];
-        // NOTE. not updating version context since active versions should be most recent to their homepage
+      if (!targetVersion || !tocNode.options.versions.includes(targetVersion)) {
+        targetVersion = tocNode.options.versions[tocNode.options.version.length - 1];
       }
-      child.children = child.children?.filter((versionedChild) => versionedChild.options?.version === targetVersion);
-      return child;
+      tocNode.children = tocNode.children?.filter(
+        (versionedChild) => versionedChild.options?.version === targetVersion
+      );
+      return tocNode;
     }) || [];
 
   return clonedToc;
@@ -85,15 +77,21 @@ const TocContextProvider = ({ children }) => {
   const { toctree } = useSnootyMetadata();
   const { database, project, parserUser, parserBranch } = useSiteMetadata();
   const [activeToc, setActiveToc] = useState({});
-  // TODO: optimization: useMemo here to have memoized version of activeToc
 
   useEffect(() => {
     getTocMetadata(database, project, parserUser, parserBranch, toctree).then((toctreeResponse) => {
       const filtered = filterTocByVersion(toctreeResponse, activeVersions, availableVersions);
       setActiveToc(filtered);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeVersions, availableVersions]);
+  }, [
+    activeVersions,
+    availableVersions, // variable dependencies
+    database,
+    parserBranch,
+    parserUser,
+    project,
+    toctree, // build time constants
+  ]);
 
   return <TocContext.Provider value={{ activeToc }}>{children}</TocContext.Provider>;
 };
