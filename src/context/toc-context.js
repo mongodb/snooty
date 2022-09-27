@@ -64,6 +64,8 @@ const getTocMetadata = async (db, project, parserUser, parserBranch, manifestTre
       page_id: `${project}/${parserUser}/${parserBranch}`,
     };
     if (process.env.GATSBY_TEST_EMBED_VERSIONS && project === 'cloud-docs') {
+      // TODO: remove testing code
+      db = 'snooty_dev';
       filter = {
         page_id: 'cloud-docs/spark/DOP-3225',
       };
