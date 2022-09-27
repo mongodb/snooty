@@ -4,7 +4,6 @@ const testTOCNode = require('./toc-test-data.json');
 
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
-  console.log('fetchmanifest');
   let metadata = {};
   if (process.env.GATSBY_MANIFEST_PATH) {
     const zip = new AdmZip(process.env.GATSBY_MANIFEST_PATH);

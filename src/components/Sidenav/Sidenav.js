@@ -203,7 +203,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
       return (
         <>
           {Object.keys(activeToc).length > 0 && (
-            <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />
+            <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={activeToc} />
           )}
         </>
       );
