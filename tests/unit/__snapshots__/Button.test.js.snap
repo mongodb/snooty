@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`button component renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   -webkit-appearance: none;
@@ -65,7 +65,55 @@ exports[`renders correctly 1`] = `
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
+.emotion-0.button {
+  color: #ffffff;
+}
+
 .emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-1:focus {
+  outline: none;
+}
+
+.emotion-1>code {
+  color: #016BF8;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-1:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.emotion-1:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-3 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -75,7 +123,7 @@ exports[`renders correctly 1`] = `
   border-radius: 6px;
 }
 
-.emotion-2 {
+.emotion-4 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -97,15 +145,15 @@ exports[`renders correctly 1`] = `
 
 <a
     aria-disabled="false"
-    class="emotion-0 button"
+    class="button emotion-0 emotion-1 emotion-2"
     data-leafygreen-ui="button"
     href="/install/"
   >
     <div
-      class="emotion-1"
+      class="emotion-3"
     />
     <div
-      class="emotion-2"
+      class="emotion-4"
     >
       Download Compass
     </div>

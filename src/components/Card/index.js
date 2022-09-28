@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
-import { uiColors } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
@@ -23,21 +23,21 @@ const StyledCard = styled(LeafyGreenCard)`
 `;
 
 const CardIcon = styled('img')`
-  width: ${theme.size.medium};
+  width: ${theme.size.large};
 `;
 
-const H4 = styled('h4')`
+const CompactIcon = styled('img')`
+  width: ${theme.size.medium};
+  @media ${theme.screenSize.upToSmall} {
+    width: 20px;
+  }
+`;
+
+const H4 = styled(Body)`
+  font-weight: 600;
   letter-spacing: 0.5px;
   margin: ${({ compact, theme }) =>
-    compact ? `0 0 ${theme.size.small}` : `${theme.size.medium} 0 ${theme.size.small} 0`};
-`;
-
-const CTA = styled('p')`
-  font-weight: bold;
-  margin-top: auto;
-  & > a:hover {
-    color: ${uiColors.blue.dark2};
-  }
+    compact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
 `;
 
 const FlexTag = styled(Tag)`
@@ -50,34 +50,23 @@ const CompactCard = styled(StyledCard)`
   padding: ${theme.size.large} ${theme.size.medium};
 `;
 
-const CompactIcon = styled('img')`
-  margin: auto;
-  width: ${theme.size.medium};
-  @media ${theme.screenSize.upToSmall} {
-    width: 20px;
-  }
-`;
-
-const CompactIconCircle = styled('div')`
-  background: ${uiColors.green.light3};
-  border-radius: 50%;
-  display: flex;
-  flex-shrink: 0 !important;
-  height: 48px;
-  width: 48px;
-  @media ${theme.screenSize.upToSmall} {
-    height: 40px;
-    width: 40px;
-  }
-`;
-
 const CompactTextWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-left: ${theme.size.medium};
+  margin-left: ${theme.size.small};
   @media ${theme.screenSize.upToSmall} {
     margin-left: ${theme.size.default};
+  }
+
+  p {
+    line-height: ${theme.size.medium};
+  }
+`;
+
+const StyledBody = styled(Body)`
+  a {
+    line-height: unset;
   }
 `;
 
@@ -88,37 +77,37 @@ const onCardClick = (url) => {
 const Card = ({
   isCompact,
   isExtraCompact,
+  page,
   nodeData: {
     children,
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
 }) => {
   const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
-  const Icon = isCompact ? CompactIcon : CardIcon;
+  const template = page?.options?.template;
+  const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
+
   return (
     <Card onClick={url ? () => onCardClick(url) : undefined}>
-      {icon && (
-        <ConditionalWrapper
-          condition={isCompact}
-          wrapper={(children) => <CompactIconCircle>{children}</CompactIconCircle>}
-        >
-          <Icon src={withPrefix(icon)} alt={iconAlt} />
-        </ConditionalWrapper>
-      )}
+      {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
         {tag && <FlexTag>{tag}</FlexTag>}
-        <H4 compact={isCompact || isExtraCompact}>{headline}</H4>
+        {headline && (
+          <H4 className="check-h4" compact={isCompact || isExtraCompact} weight="medium">
+            {headline}
+          </H4>
+        )}
         {children.map((child, i) => (
           // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
           <ComponentFactory nodeData={child} key={i} cardRef={true} />
         ))}
         {cta && (
-          <CTA>
+          <StyledBody>
             <Link to={url}>{cta}</Link>
-          </CTA>
+          </StyledBody>
         )}
       </ConditionalWrapper>
     </Card>
@@ -137,6 +126,7 @@ Card.propTypes = {
       url: PropTypes.string,
     }),
   }).isRequired,
+  page: PropTypes.object,
 };
 
 export default Card;

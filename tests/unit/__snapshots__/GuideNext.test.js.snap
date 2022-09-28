@@ -39,7 +39,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-4 {
-  color: #5D6C74;
+  color: #5C6C75;
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -113,59 +113,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-9 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  color: #007CAD;
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
-}
-
-.emotion-9:focus {
-  outline: none;
-}
-
-.emotion-10 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-10 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-10 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-10 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-10 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-10 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-11 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -175,7 +122,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   border-radius: 6px;
 }
 
-.emotion-12 {
+.emotion-10 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -195,19 +142,33 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   gap: 6px;
 }
 
-.emotion-13 {
+.emotion-11 {
+  position: relative;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: white;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
   margin-top: 40px;
   padding: 40px 24px;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-13 {
+  .emotion-11 {
     padding: 48px;
   }
 }
 
 @media not all and (max-width: 1023px) {
-  .emotion-13 {
+  .emotion-11 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -221,23 +182,12 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-.emotion-14 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-}
-
-.emotion-15 {
+.emotion-12 {
   margin-bottom: 24px;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-15 {
+  .emotion-12 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -247,29 +197,30 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-.emotion-18 {
+.emotion-15 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
+  line-height: 24px;
   height: 24px;
   text-align: center;
   width: 83px;
   margin-bottom: 8px;
 }
 
-.emotion-20 {
+.emotion-17 {
   color: #061621;
   font-weight: bold;
 }
 
-.emotion-22 {
+.emotion-19 {
   list-style: none;
   padding-left: 0;
 }
 
-.emotion-24 {
+.emotion-21 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -283,11 +234,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   position: relative;
 }
 
-.emotion-24:not(:last-child) {
+.emotion-21:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-24:not(:last-child):before {
+.emotion-21:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -296,7 +247,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   border-left: solid 1px #13AA52;
 }
 
-.emotion-26 {
+.emotion-23 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -316,18 +267,59 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   min-height: 20px;
 }
 
-.emotion-28 {
+.emotion-25 {
   color: #13AA52;
 }
 
-.emotion-29 {
+.emotion-27 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-29:hover,
-.emotion-29:active {
+.emotion-27:focus {
+  outline: none;
+}
+
+.emotion-27>code {
+  color: #016BF8;
+}
+
+.emotion-27::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-27:focus .emotion-27::after {
+  background-color: #0498EC;
+}
+
+.emotion-27:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-27:hover,
+.emotion-27:active {
   color: currentColor;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -354,57 +346,51 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       </p>
       <a
         aria-disabled="false"
-        class="emotion-8 emotion-9"
+        class="emotion-8"
         data-leafygreen-ui="button"
         href="https://university.mongodb.com/certification/developer/about"
-        rel="noopener noreferrer"
-        target="_blank"
       >
-        <span
+        <div
+          class="emotion-9"
+        />
+        <div
           class="emotion-10"
         >
-          <div
-            class="emotion-11"
-          />
-          <div
-            class="emotion-12"
-          >
-            Learn More
-          </div>
-        </span>
+          Learn More
+        </div>
       </a>
     </div>
     <div
-      class="emotion-13 emotion-14"
+      class="emotion-11"
     >
       <div
-        class="emotion-15 emotion-16"
+        class="emotion-12 emotion-13"
       >
         <div
-          class="emotion-17 emotion-18 emotion-19"
+          class="emotion-14 emotion-15 emotion-16"
         >
           Chapter 2
         </div>
         <div
-          class="emotion-20 emotion-21"
+          class="emotion-17 emotion-18"
         >
           CRUD
         </div>
       </div>
       <ul
-        class="emotion-22 emotion-23"
+        class="emotion-19 emotion-20"
       >
         <li
-          class="emotion-24 emotion-25"
+          class="emotion-21 emotion-22"
           color="#13AA52"
         >
           <div
-            class="emotion-26 emotion-27"
+            class="emotion-23 emotion-24"
             color="transparent"
           >
             <svg
               aria-label="Checkmark Icon"
-              class="emotion-28"
+              class="emotion-25"
               fill="none"
               height="16"
               role="img"
@@ -421,7 +407,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-29 emotion-30"
+            class="emotion-26 emotion-27 emotion-28"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -472,7 +458,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-4 {
-  color: #5D6C74;
+  color: #5C6C75;
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -576,6 +562,20 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-11 {
+  position: relative;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: white;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -602,22 +602,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-12 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-}
-
-.emotion-13 {
   margin-bottom: 24px;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-13 {
+  .emotion-12 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -627,29 +616,30 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   }
 }
 
-.emotion-16 {
+.emotion-15 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
+  line-height: 24px;
   height: 24px;
   text-align: center;
   width: 83px;
   margin-bottom: 8px;
 }
 
-.emotion-18 {
+.emotion-17 {
   color: #061621;
   font-weight: bold;
 }
 
-.emotion-20 {
+.emotion-19 {
   list-style: none;
   padding-left: 0;
 }
 
-.emotion-22 {
+.emotion-21 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -663,11 +653,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   position: relative;
 }
 
-.emotion-22:not(:last-child) {
+.emotion-21:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-22:not(:last-child):before {
+.emotion-21:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -676,7 +666,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   border-left: solid 1px #E7EEEC;
 }
 
-.emotion-24 {
+.emotion-23 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -696,14 +686,55 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   min-height: 20px;
 }
 
-.emotion-26 {
+.emotion-25 {
   color: #13AA52;
 }
 
 .emotion-27 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.emotion-27:focus {
+  outline: none;
+}
+
+.emotion-27>code {
+  color: #016BF8;
+}
+
+.emotion-27::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-27:focus .emotion-27::after {
+  background-color: #0498EC;
+}
+
+.emotion-27:hover::after {
+  background-color: #E8EDEB;
 }
 
 .emotion-27:hover,
@@ -733,7 +764,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
         aria-disabled="false"
         class="emotion-8"
         data-leafygreen-ui="button"
-        href="/server/read/"
+        href="server/read"
       >
         <div
           class="emotion-9"
@@ -746,35 +777,35 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       </a>
     </div>
     <div
-      class="emotion-11 emotion-12"
+      class="emotion-11"
     >
       <div
-        class="emotion-13 emotion-14"
+        class="emotion-12 emotion-13"
       >
         <div
-          class="emotion-15 emotion-16 emotion-17"
+          class="emotion-14 emotion-15 emotion-16"
         >
           Chapter 2
         </div>
         <div
-          class="emotion-18 emotion-19"
+          class="emotion-17 emotion-18"
         >
           CRUD
         </div>
       </div>
       <ul
-        class="emotion-20 emotion-21"
+        class="emotion-19 emotion-20"
       >
         <li
-          class="emotion-22 emotion-23"
+          class="emotion-21 emotion-22"
           color="#E7EEEC"
         >
           <div
-            class="emotion-24 emotion-25"
+            class="emotion-23 emotion-24"
             color="#13AA52"
           >
             <svg
-              class="emotion-26"
+              class="emotion-25"
               fill="currentColor"
               height="12"
               viewBox="0 0 7 12"
@@ -787,7 +818,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-27 emotion-28"
+            class="emotion-26 emotion-27 emotion-28"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -838,7 +869,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-4 {
-  color: #5D6C74;
+  color: #5C6C75;
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -942,6 +973,20 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-11 {
+  position: relative;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: white;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -968,22 +1013,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-12 {
-  position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
-  background-color: white;
-  color: #21313C;
-}
-
-.emotion-13 {
   margin-bottom: 24px;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-13 {
+  .emotion-12 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -993,29 +1027,30 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   }
 }
 
-.emotion-16 {
+.emotion-15 {
   background-color: #E4F4E4;
   border-radius: 4px;
   color: #13AA52;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
+  line-height: 24px;
   height: 24px;
   text-align: center;
   width: 83px;
   margin-bottom: 8px;
 }
 
-.emotion-18 {
+.emotion-17 {
   color: #061621;
   font-weight: bold;
 }
 
-.emotion-20 {
+.emotion-19 {
   list-style: none;
   padding-left: 0;
 }
 
-.emotion-22 {
+.emotion-21 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -1029,11 +1064,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   position: relative;
 }
 
-.emotion-22:not(:last-child) {
+.emotion-21:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-22:not(:last-child):before {
+.emotion-21:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -1042,7 +1077,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   border-left: solid 1px #13AA52;
 }
 
-.emotion-24 {
+.emotion-23 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1062,14 +1097,55 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   min-height: 20px;
 }
 
-.emotion-26 {
+.emotion-25 {
   color: #13AA52;
 }
 
 .emotion-27 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
   color: #061621;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.emotion-27:focus {
+  outline: none;
+}
+
+.emotion-27>code {
+  color: #016BF8;
+}
+
+.emotion-27::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-27:focus .emotion-27::after {
+  background-color: #0498EC;
+}
+
+.emotion-27:hover::after {
+  background-color: #E8EDEB;
 }
 
 .emotion-27:hover,
@@ -1130,7 +1206,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   color: #13AA52;
 }
 
-.emotion-40 {
+.emotion-41 {
   color: #3D4F58;
 }
 
@@ -1154,7 +1230,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
         aria-disabled="false"
         class="emotion-8"
         data-leafygreen-ui="button"
-        href="/cloud/connectionstring/"
+        href="cloud/connectionstring"
       >
         <div
           class="emotion-9"
@@ -1167,36 +1243,36 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       </a>
     </div>
     <div
-      class="emotion-11 emotion-12"
+      class="emotion-11"
     >
       <div
-        class="emotion-13 emotion-14"
+        class="emotion-12 emotion-13"
       >
         <div
-          class="emotion-15 emotion-16 emotion-17"
+          class="emotion-14 emotion-15 emotion-16"
         >
           Chapter 1
         </div>
         <div
-          class="emotion-18 emotion-19"
+          class="emotion-17 emotion-18"
         >
           Atlas
         </div>
       </div>
       <ul
-        class="emotion-20 emotion-21"
+        class="emotion-19 emotion-20"
       >
         <li
-          class="emotion-22 emotion-23"
+          class="emotion-21 emotion-22"
           color="#13AA52"
         >
           <div
-            class="emotion-24 emotion-25"
+            class="emotion-23 emotion-24"
             color="transparent"
           >
             <svg
               aria-label="Checkmark Icon"
-              class="emotion-26"
+              class="emotion-25"
               fill="none"
               height="16"
               role="img"
@@ -1213,18 +1289,18 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-27 emotion-28"
+            class="emotion-26 emotion-27 emotion-28"
             href="/cloud/account/"
           >
             Create and Manage a MongoDB Account
           </a>
         </li>
         <li
-          class="emotion-29 emotion-23"
+          class="emotion-29 emotion-22"
           color="#E7EEEC"
         >
           <div
-            class="emotion-31 emotion-25"
+            class="emotion-31 emotion-24"
             color="#13AA52"
           >
             <svg
@@ -1241,22 +1317,22 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-27 emotion-28"
+            class="emotion-26 emotion-27 emotion-28"
             href="/cloud/connectionstring/"
           >
             Set Up Atlas Connectivity
           </a>
         </li>
         <li
-          class="emotion-29 emotion-23"
+          class="emotion-29 emotion-22"
           color="#E7EEEC"
         >
           <div
-            class="emotion-24 emotion-25"
+            class="emotion-23 emotion-24"
             color="transparent"
           >
             <svg
-              class="emotion-40"
+              class="emotion-41"
               fill="currentColor"
               height="12"
               viewBox="0 0 7 12"
@@ -1269,7 +1345,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-27 emotion-28"
+            class="emotion-26 emotion-27 emotion-28"
             href="/cloud/migrate-from-aws-to-atlas/"
           >
             Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas

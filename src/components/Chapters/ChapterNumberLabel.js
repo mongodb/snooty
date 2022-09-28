@@ -10,6 +10,7 @@ const Label = styled('div')`
   color: ${uiColors.green.base};
   font-size: ${theme.fontSize.small};
   font-weight: bold;
+  line-height: ${theme.size.medium};
   height: ${theme.size.medium};
   text-align: center;
   width: 83px;

@@ -46,7 +46,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-// The Landing template exclusively represents docs.mongodb.com. All other landings use the ProductLanding template
+// The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
 const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
@@ -82,25 +82,24 @@ const Landing = ({ children }) => {
           h3,
           h4 {
             color: ${uiColors.black};
-            font-weight: bold;
           }
           h1,
           h2 {
             font-size: 32px;
-            margin-bottom: ${fontSize.default};
+            margin-bottom: ${size.default};
           }
           h2 {
             margin-top: ${size.large};
           }
           p {
             color: ${uiColors.black};
-            font-size: ${fontSize.default};
+            font-size: ${fontSize.small};
             letter-spacing: 0.5px;
             margin-bottom: ${size.default};
           }
           a {
             color: ${uiColors.blue.base};
-            font-size: ${fontSize.default};
+            font-size: ${fontSize.small};
             letter-spacing: 0.5px;
           }
           a:hover {

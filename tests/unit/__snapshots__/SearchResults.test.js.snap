@@ -63,7 +63,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #00684A;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -83,7 +83,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #1254B7;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -294,7 +294,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-25 {
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
   height: 24px;
@@ -329,7 +329,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-27 {
   font-family: 'Akzidenz Grotesk BQ Light';
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 20px;
   margin-bottom: 0;
@@ -426,29 +426,172 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
+.emotion-43 {
+  position: relative;
+}
+
 .emotion-44 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 1;
   width: 175px;
 }
 
 .emotion-46 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: pointer;
-  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.emotion-48 {
+.emotion-46>label+button,
+.emotion-46>p+button {
+  margin-top: 3px;
+}
+
+.emotion-46>button>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.emotion-47 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #1C2D38;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-47:focus {
+  outline: none;
+}
+
+.emotion-47[disabled],
+.emotion-47:disabled {
+  pointer-events: none;
+}
+
+.emotion-47:active,
+.emotion-47:focus,
+.emotion-47:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-47:hover,
+.emotion-47:active {
+  color: #1C2D38;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-47:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-47>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-47>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-47>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-47>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-47:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-47 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-48 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-49 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-50 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -456,34 +599,171 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 10px 16px;
-}
-
-.emotion-50 {
-  display: inline-block;
-  font-family: Akzidenz;
-  font-size: 14px;
-  margin: 0!important;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  gap: 4px;
   overflow: hidden;
+}
+
+.emotion-51 {
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-.emotion-55 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 0.3;
-  width: 175px;
+.emotion-52 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  justify-self: left;
 }
 
-.emotion-57 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: not-allowed;
+.emotion-59 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
   position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #1C2D38;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-59:focus {
+  outline: none;
+}
+
+.emotion-59[disabled],
+.emotion-59:disabled {
+  pointer-events: none;
+}
+
+.emotion-59:active,
+.emotion-59:focus,
+.emotion-59:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-59:hover,
+.emotion-59:active {
+  color: #1C2D38;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-59,
+.emotion-59:hover {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+  color: #889397;
+  cursor: not-allowed;
+}
+
+.emotion-59:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-59>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-59>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-59>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-59>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-59:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.emotion-59:disabled {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-59:disabled:active {
+  pointer-events: none;
+}
+
+.emotion-59:disabled {
+  background-color: #E8EDEB;
+  color: #889397;
+}
+
+.emotion-59:disabled>*:last-child>svg {
+  color: #889397;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-59 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-64 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  color: #C1C7C6;
+  justify-self: left;
 }
 
 <div
@@ -628,40 +908,56 @@ exports[`Search Results Page considers a given search filter query param and dis
           class="emotion-41 emotion-42"
         >
           <div
-            aria-disabled="false"
             class="emotion-43 emotion-44 emotion-45"
           >
             <div
-              aria-expanded="false"
-              class="emotion-46 emotion-47"
-              role="listbox"
-              tabindex="0"
+              class="emotion-46"
             >
-              <div
-                class="emotion-48 emotion-49"
-                role="option"
+              <button
+                aria-controls="select-57-menu"
+                aria-describedby="select-57-description"
+                aria-disabled="false"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-47"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                id="select-58"
+                type="button"
+                value="Realm"
               >
-                <p
-                  class="emotion-50 emotion-51"
+                <div
+                  class="emotion-48"
+                />
+                <div
+                  class="emotion-49"
                 >
-                  Realm
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
+                  <div
+                    class="emotion-50"
+                  >
+                    <div
+                      class="emotion-51"
+                    >
+                      Realm
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-52"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -669,39 +965,57 @@ exports[`Search Results Page considers a given search filter query param and dis
           class="emotion-41 emotion-42"
         >
           <div
-            aria-disabled="true"
-            class="emotion-43 emotion-55 emotion-45"
+            class="emotion-43 emotion-44 emotion-45"
           >
             <div
-              aria-expanded="false"
-              class="emotion-57 emotion-47"
-              role="listbox"
+              class="emotion-46"
             >
-              <div
-                class="emotion-48 emotion-49"
-                role="option"
+              <button
+                aria-controls="select-59-menu"
+                aria-describedby="select-59-description"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-59"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                disabled=""
+                id="select-60"
+                type="button"
+                value="Latest"
               >
-                <p
-                  class="emotion-50 emotion-51"
+                <div
+                  class="emotion-48"
+                />
+                <div
+                  class="emotion-49"
                 >
-                  Latest
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
+                  <div
+                    class="emotion-50"
+                  >
+                    <div
+                      class="emotion-51"
+                    >
+                      Latest
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-64"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -1117,29 +1431,173 @@ exports[`Search Results Page does not return results for a given search term wit
   margin-bottom: 16px;
 }
 
+.emotion-34 {
+  position: relative;
+}
+
 .emotion-35 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 1;
   width: 175px;
 }
 
 .emotion-37 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: pointer;
-  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.emotion-39 {
+.emotion-37>label+button,
+.emotion-37>p+button {
+  margin-top: 3px;
+}
+
+.emotion-37>button>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.emotion-38 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #1C2D38;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-38:focus {
+  outline: none;
+}
+
+.emotion-38[disabled],
+.emotion-38:disabled {
+  pointer-events: none;
+}
+
+.emotion-38:active,
+.emotion-38:focus,
+.emotion-38:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-38:hover,
+.emotion-38:active {
+  color: #1C2D38;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-38:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-38>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-38>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-38>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-38>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-38:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-38 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-39 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-40 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1147,34 +1605,172 @@ exports[`Search Results Page does not return results for a given search term wit
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 10px 16px;
-}
-
-.emotion-41 {
-  display: inline-block;
-  font-family: Akzidenz;
-  font-size: 14px;
-  margin: 0!important;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  gap: 4px;
   overflow: hidden;
+}
+
+.emotion-42 {
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-.emotion-46 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 0.3;
-  width: 175px;
+.emotion-43 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  justify-self: left;
 }
 
-.emotion-48 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: not-allowed;
+.emotion-50 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
   position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #1C2D38;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-50:focus {
+  outline: none;
+}
+
+.emotion-50[disabled],
+.emotion-50:disabled {
+  pointer-events: none;
+}
+
+.emotion-50:active,
+.emotion-50:focus,
+.emotion-50:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-50:hover,
+.emotion-50:active {
+  color: #1C2D38;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-50,
+.emotion-50:hover {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+  color: #889397;
+  cursor: not-allowed;
+}
+
+.emotion-50:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-50>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-50>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-50>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-50>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-50:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.emotion-50:disabled {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-50:disabled:active {
+  pointer-events: none;
+}
+
+.emotion-50:disabled {
+  background-color: #E8EDEB;
+  color: #889397;
+}
+
+.emotion-50:disabled>*:last-child>svg {
+  color: #889397;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-50 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-55 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  color: #C1C7C6;
+  justify-self: left;
 }
 
 <div
@@ -1289,40 +1885,56 @@ exports[`Search Results Page does not return results for a given search term wit
           class="emotion-32 emotion-33"
         >
           <div
-            aria-disabled="false"
             class="emotion-34 emotion-35 emotion-36"
           >
             <div
-              aria-expanded="false"
-              class="emotion-37 emotion-38"
-              role="listbox"
-              tabindex="0"
+              class="emotion-37"
             >
-              <div
-                class="emotion-39 emotion-40"
-                role="option"
+              <button
+                aria-controls="select-73-menu"
+                aria-describedby="select-73-description"
+                aria-disabled="false"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-38"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                id="select-74"
+                type="button"
+                value=""
               >
-                <p
-                  class="emotion-41 emotion-42"
+                <div
+                  class="emotion-39"
+                />
+                <div
+                  class="emotion-40"
                 >
-                  Filter by Category
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
+                  <div
+                    class="emotion-41"
+                  >
+                    <div
+                      class="emotion-42"
+                    >
+                      Filter by Category
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-43"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -1330,39 +1942,57 @@ exports[`Search Results Page does not return results for a given search term wit
           class="emotion-32 emotion-33"
         >
           <div
-            aria-disabled="true"
-            class="emotion-34 emotion-46 emotion-36"
+            class="emotion-34 emotion-35 emotion-36"
           >
             <div
-              aria-expanded="false"
-              class="emotion-48 emotion-38"
-              role="listbox"
+              class="emotion-37"
             >
-              <div
-                class="emotion-39 emotion-40"
-                role="option"
+              <button
+                aria-controls="select-75-menu"
+                aria-describedby="select-75-description"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-50"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                disabled=""
+                id="select-76"
+                type="button"
+                value=""
               >
-                <p
-                  class="emotion-41 emotion-42"
+                <div
+                  class="emotion-39"
+                />
+                <div
+                  class="emotion-40"
                 >
-                  Filter by Version
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
+                  <div
+                    class="emotion-41"
+                  >
+                    <div
+                      class="emotion-42"
+                    >
+                      Filter by Version
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-55"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -3416,7 +4046,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-19 {
   font-family: Akzidenz;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
   height: 24px;
@@ -3451,7 +4081,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-21 {
   font-family: 'Akzidenz Grotesk BQ Light';
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   line-height: 20px;
   margin-bottom: 0;
@@ -3484,7 +4114,7 @@ exports[`Search Results Page renders results from a given search term query para
   color: #00684A;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -3504,7 +4134,7 @@ exports[`Search Results Page renders results from a given search term query para
   color: #1254B7;
   cursor: pointer;
   height: 26px;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 8px;
 }
 
@@ -3588,29 +4218,173 @@ exports[`Search Results Page renders results from a given search term query para
   margin-bottom: 16px;
 }
 
+.emotion-37 {
+  position: relative;
+}
+
 .emotion-38 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 1;
   width: 175px;
 }
 
 .emotion-40 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: pointer;
-  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-.emotion-42 {
+.emotion-40>label+button,
+.emotion-40>p+button {
+  margin-top: 3px;
+}
+
+.emotion-40>button>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.emotion-41 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #1C2D38;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-41:focus {
+  outline: none;
+}
+
+.emotion-41[disabled],
+.emotion-41:disabled {
+  pointer-events: none;
+}
+
+.emotion-41:active,
+.emotion-41:focus,
+.emotion-41:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-41:hover,
+.emotion-41:active {
+  color: #1C2D38;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-41:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-41>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-41>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-41>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-41>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-41:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-41 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-42 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-43 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-44 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3618,34 +4392,172 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 10px 16px;
-}
-
-.emotion-44 {
-  display: inline-block;
-  font-family: Akzidenz;
-  font-size: 14px;
-  margin: 0!important;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  gap: 4px;
   overflow: hidden;
+}
+
+.emotion-45 {
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-.emotion-49 {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  line-height: 16px;
-  opacity: 0.3;
-  width: 175px;
+.emotion-46 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  justify-self: left;
 }
 
-.emotion-51 {
-  background-color: #fff;
-  border: 1px solid rgba(184, 196, 194, 0.4);
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(233, 233, 233, 0.3);
-  color: #000;
-  cursor: not-allowed;
+.emotion-53 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
   position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #1C2D38;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-53:focus {
+  outline: none;
+}
+
+.emotion-53[disabled],
+.emotion-53:disabled {
+  pointer-events: none;
+}
+
+.emotion-53:active,
+.emotion-53:focus,
+.emotion-53:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-53:hover,
+.emotion-53:active {
+  color: #1C2D38;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-53,
+.emotion-53:hover {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+  color: #889397;
+  cursor: not-allowed;
+}
+
+.emotion-53:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-53>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-53>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-53>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-53>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-53:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.emotion-53:disabled {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-53:disabled:active {
+  pointer-events: none;
+}
+
+.emotion-53:disabled {
+  background-color: #E8EDEB;
+  color: #889397;
+}
+
+.emotion-53:disabled>*:last-child>svg {
+  color: #889397;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-53 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-58 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  color: #C1C7C6;
+  justify-self: left;
 }
 
 <div
@@ -3759,40 +4671,56 @@ exports[`Search Results Page renders results from a given search term query para
           class="emotion-35 emotion-36"
         >
           <div
-            aria-disabled="false"
             class="emotion-37 emotion-38 emotion-39"
           >
             <div
-              aria-expanded="false"
-              class="emotion-40 emotion-41"
-              role="listbox"
-              tabindex="0"
+              class="emotion-40"
             >
-              <div
-                class="emotion-42 emotion-43"
-                role="option"
+              <button
+                aria-controls="select-41-menu"
+                aria-describedby="select-41-description"
+                aria-disabled="false"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-41"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                id="select-42"
+                type="button"
+                value=""
               >
-                <p
-                  class="emotion-44 emotion-45"
+                <div
+                  class="emotion-42"
+                />
+                <div
+                  class="emotion-43"
                 >
-                  Filter by Category
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
+                  <div
+                    class="emotion-44"
+                  >
+                    <div
+                      class="emotion-45"
+                    >
+                      Filter by Category
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-46"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -3800,39 +4728,57 @@ exports[`Search Results Page renders results from a given search term query para
           class="emotion-35 emotion-36"
         >
           <div
-            aria-disabled="true"
-            class="emotion-37 emotion-49 emotion-39"
+            class="emotion-37 emotion-38 emotion-39"
           >
             <div
-              aria-expanded="false"
-              class="emotion-51 emotion-41"
-              role="listbox"
+              class="emotion-40"
             >
-              <div
-                class="emotion-42 emotion-43"
-                role="option"
+              <button
+                aria-controls="select-43-menu"
+                aria-describedby="select-43-description"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-53"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                disabled=""
+                id="select-44"
+                type="button"
+                value=""
               >
-                <p
-                  class="emotion-44 emotion-45"
+                <div
+                  class="emotion-42"
+                />
+                <div
+                  class="emotion-43"
                 >
-                  Filter by Version
-                </p>
-                <svg
-                  aria-label="Caret Down Icon"
-                  class=""
-                  fill="none"
-                  height="16"
-                  role="img"
-                  viewBox="0 0 16 16"
-                  width="16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
+                  <div
+                    class="emotion-44"
+                  >
+                    <div
+                      class="emotion-45"
+                    >
+                      Filter by Version
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-58"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import ComponentFactory from '../ComponentFactory';
 
 const guiLabelStyle = css`
-  font-family: sans-serif;
   font-style: normal;
   font-weight: 700;
 `;

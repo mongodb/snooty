@@ -12,8 +12,10 @@ describe('Paragraph unit tests', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
-  it('handles formatting dangling punctuation after Links', () => {
+  it('handles formatting dangling punctuation after Links and no extra multiplying on rerenders', () => {
     const tree = render(<Paragraph nodeData={mockDataFormat} />);
     expect(tree.asFragment()).toMatchSnapshot();
+    const treeRerender = render(<Paragraph nodeData={mockDataFormat} />);
+    expect(treeRerender.asFragment()).toMatchSnapshot();
   });
 });
