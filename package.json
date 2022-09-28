@@ -71,7 +71,7 @@
     "@leafygreen-ui/logo": "^4.0.2",
     "@leafygreen-ui/modal": "^6.1.2",
     "@leafygreen-ui/palette": "^3.4.0",
-    "@leafygreen-ui/select": "^6.0.0",
+    "@leafygreen-ui/select": "^7.0.0",
     "@leafygreen-ui/side-nav": "^10.0.0",
     "@leafygreen-ui/table": "^2.0.2",
     "@leafygreen-ui/tabs": "^8.0.0",

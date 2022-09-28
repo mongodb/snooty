@@ -13,10 +13,15 @@ export const useSiteMetadata = () => {
             patchId
             pathPrefix
             project
+            reposDatabase
             siteUrl
             snootyBranch
             snootyEnv
             user
+            associatedProducts {
+              name
+              versions
+            }
           }
         }
       }
