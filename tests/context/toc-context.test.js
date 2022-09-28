@@ -8,68 +8,74 @@ import { VersionContext } from '../../src/context/version-context';
 
 import { TocContext, TocContextProvider } from '../../src/context/toc-context';
 
-// set sample server data
+// <------------------ START test data mocks ------------------>
 const siteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
 const realmMock = jest.spyOn(realm, 'fetchDocument');
 const project = 'cloud-docs';
-const sampleTocTree = {
-  title: [{ type: 'text', position: { start: { line: 0 } }, value: 'MongoDB Atlas' }],
-  slug: '/',
-  children: [
-    {
-      title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample page' }],
-      slug: 'sample-page',
-      children: [],
-    },
-    {
-      title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample page2' }],
-      slug: 'sample-page2',
-      children: [],
-    },
-    {
-      title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample page3' }],
-      slug: 'sample-page3',
-      options: {
-        versions: ['v1.0'],
-        project: 'atlas-cli',
+
+let sampleTocTree, responseTree, mockedResponse;
+
+const setResponse = () => {
+  sampleTocTree = {
+    title: [{ type: 'text', position: { start: { line: 0 } }, value: 'MongoDB Atlas' }],
+    slug: '/',
+    children: [
+      {
+        title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample page' }],
+        slug: 'sample-page',
+        children: [],
       },
-      children: [
-        {
-          title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample child v1.0' }],
-          slug: 'sample-child-v1.0',
-          options: {
-            version: 'v1.0',
-          },
+      {
+        title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample page2' }],
+        slug: 'sample-page2',
+        children: [],
+      },
+      {
+        title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample page3' }],
+        slug: 'sample-page3',
+        options: {
+          versions: ['v1.0'],
+          project: 'atlas-cli',
         },
-      ],
+        children: [
+          {
+            title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample child v1.0' }],
+            slug: 'sample-child-v1.0',
+            options: {
+              version: 'v1.0',
+            },
+          },
+        ],
+      },
+    ],
+  };
+
+  // set sample response data with deep copied sample toc
+  responseTree = JSON.parse(JSON.stringify(sampleTocTree));
+  responseTree.children[responseTree.children.length - 1].options = {
+    versions: ['v1.0', 'v1.2', 'v0.8'],
+    project: 'atlas-cli',
+  };
+  responseTree.children[responseTree.children.length - 1].children.push({
+    title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample child v1.2' }],
+    slug: 'sample-child-v1.2',
+    options: {
+      version: 'v1.2',
     },
-  ],
-};
-// set sample response data with deep copied sample toc
-const responseTree = JSON.parse(JSON.stringify(sampleTocTree));
-responseTree.children[responseTree.children.length - 1].options = {
-  versions: ['v1.0', 'v1.2', 'v0.8'],
-  project: 'atlas-cli',
-};
-responseTree.children[responseTree.children.length - 1].children.push({
-  title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample child v1.2' }],
-  slug: 'sample-child-v1.2',
-  options: {
-    version: 'v1.2',
-  },
-});
+  });
 
-responseTree.children[responseTree.children.length - 1].children.push({
-  title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample child v0.8' }],
-  slug: 'sample-child-v0.8',
-  options: {
-    version: 'v0.8',
-  },
-});
+  responseTree.children[responseTree.children.length - 1].children.push({
+    title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample child v0.8' }],
+    slug: 'sample-child-v0.8',
+    options: {
+      version: 'v0.8',
+    },
+  });
 
-const mockedResponse = {
-  toctree: responseTree,
+  mockedResponse = {
+    toctree: responseTree,
+  };
 };
 
 const setMocks = () => {
@@ -88,6 +94,10 @@ const setMocks = () => {
   // mock realm
   realmMock.mockResolvedValue(mockedResponse);
 };
+
+// <------------------ END test data mocks ------------------>
+
+// <------------------ START render helpers ------------------>
 
 const TestConsumer = () => {
   const { activeToc } = useContext(TocContext);
@@ -111,20 +121,14 @@ const mountConsumer = (
   );
 };
 
+// <------------------ END render helpers ------------------>
+
 describe('ToC Context', () => {
   let wrapper;
 
   beforeEach(async () => {
+    setResponse();
     setMocks();
-  });
-
-  it('sets ToC filtered by versioned nodes returned by realm call', async () => {
-    await act(async () => {
-      wrapper = mountConsumer();
-    });
-    expect(wrapper.getByText(/options/g)).toBeTruthy();
-    expect(wrapper.getByText(/v1.0/g)).toBeTruthy();
-    expect(wrapper.getByText(/v1.2/g)).toBeTruthy();
   });
 
   it('initializes ToC without versioned nodes if not in available versions', async () => {
@@ -132,6 +136,15 @@ describe('ToC Context', () => {
       wrapper = mountConsumer({}, {});
     });
     expect(wrapper.queryByText(/options/g)).toBeNull();
+  });
+
+  it('sets ToC based on response realm app service response', async () => {
+    await act(async () => {
+      wrapper = mountConsumer();
+    });
+    expect(wrapper.getByText(/options/g)).toBeTruthy();
+    expect(wrapper.getByText(/v1.0/g)).toBeTruthy();
+    expect(wrapper.getByText(/v1.2/g)).toBeTruthy();
   });
 
   it('calls realm function to fetch data', async () => {

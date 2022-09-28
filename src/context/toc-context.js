@@ -14,15 +14,17 @@ const TocContext = createContext({
  * @param {object} tocTree toc tree head node
  * @param {object} currentVersion see version-context currentVersion{}
  * @param {object} availableVersions see version-context availableVersions{}
+ * @modifies [tocTree.children[], tocTree.children[].options.versions[], tocTree.children[].options.versions]
+ *
  * @returns tocTree toc tree head node, with nodes filtered by current and available versions
  */
 const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availableVersions = {}) {
-  const clonedToc = { ...tocTree };
+  const shallowCloneToc = { ...tocTree };
   if (Object.keys(tocTree).length === 0) {
-    return clonedToc;
+    return shallowCloneToc;
   }
-  clonedToc.children =
-    clonedToc.children?.filter((tocNode) => {
+  shallowCloneToc.children =
+    shallowCloneToc.children?.filter((tocNode) => {
       if (!tocNode?.options?.versions) {
         return true;
       }
@@ -47,7 +49,7 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
       return tocNode;
     }) || [];
 
-  return clonedToc;
+  return shallowCloneToc;
 };
 
 const getTocMetadata = async (db, project, parserUser, parserBranch, manifestTree) => {
