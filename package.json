@@ -65,7 +65,7 @@
     "@leafygreen-ui/hooks": "^6.0.1",
     "@leafygreen-ui/icon": "^11.6.1",
     "@leafygreen-ui/icon-button": "^9.1.6",
-    "@leafygreen-ui/inline-definition": "^2.0.2",
+    "@leafygreen-ui/inline-definition": "^4.0.2",
     "@leafygreen-ui/leafygreen-provider": "^2.3.2",
     "@leafygreen-ui/lib": "^9.4.1",
     "@leafygreen-ui/logo": "^4.0.2",
