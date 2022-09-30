@@ -11,6 +11,7 @@ import { useFeedbackContext } from '../context';
 import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
+import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
@@ -94,6 +95,7 @@ const CommentView = () => {
   const isValidEmail = useValidation(email, validateEmail);
   const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
+  const { isTabletOrMobile } = useScreenSize();
 
   const handleSubmit = async () => {
     if (isValidEmail) {
@@ -136,7 +138,7 @@ const CommentView = () => {
         <SubmitButton onClick={() => handleSubmit()} type="submit">
           {'Send'}
         </SubmitButton>
-        <ScreenshotButton />
+        {!isTabletOrMobile && <ScreenshotButton />}
       </Footer>
     </Layout>
   );
