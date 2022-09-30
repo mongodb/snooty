@@ -11,19 +11,10 @@ exports[`renders with "connected" styling 1`] = `
   gap: 33px;
 }
 
-.emotion-0:first-of-type {
-  margin-top: 16px;
-}
-
 .emotion-0 h2,
 .emotion-0 h3,
 .emotion-0 h4 {
-  margin-top: 0px;
-}
-
-.emotion-0:last-of-type h3,
-.emotion-0:last-of-type h4 {
-  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 .emotion-0:not(:last-child):after {
@@ -186,19 +177,10 @@ exports[`renders with "connected" styling by default 1`] = `
   gap: 33px;
 }
 
-.emotion-0:first-of-type {
-  margin-top: 16px;
-}
-
 .emotion-0 h2,
 .emotion-0 h3,
 .emotion-0 h4 {
-  margin-top: 0px;
-}
-
-.emotion-0:last-of-type h3,
-.emotion-0:last-of-type h4 {
-  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 .emotion-0:not(:last-child):after {
@@ -360,19 +342,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   gap: 16px;
 }
 
-.emotion-0:first-of-type {
-  margin-top: 16px;
-}
-
 .emotion-0 h2,
 .emotion-0 h3,
 .emotion-0 h4 {
-  margin-top: 0px;
-}
-
-.emotion-0:last-of-type h3,
-.emotion-0:last-of-type h4 {
-  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 .emotion-2 {
