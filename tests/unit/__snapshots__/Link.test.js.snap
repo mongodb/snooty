@@ -501,10 +501,6 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
 exports[`Link component renders a variety of strings correctly internal link 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -556,10 +552,6 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
 exports[`Link component renders a variety of strings correctly internal link query param 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -611,10 +603,6 @@ exports[`Link component renders a variety of strings correctly internal link que
 exports[`Link component renders a variety of strings correctly internal link that already includes trailing slash 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -666,10 +654,6 @@ exports[`Link component renders a variety of strings correctly internal link tha
 exports[`Link component renders a variety of strings correctly internal link with hash 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
