@@ -28,7 +28,6 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
     <>
-      <p>Sample paragraph</p>
       <FeedbackProvider
         test={{
           view,
@@ -111,21 +110,10 @@ describe('FeedbackWidget', () => {
   });
 
   describe('FeedbackHeading (Mobile Viewport)', () => {
-    it('is hidden on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-      // expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
-      //   media: `${theme.screenSize.upToLarge}`,
-      // });
-    });
-
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(2);
-      // expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('display', 'none', {
-      //   media: `${theme.screenSize.upToLarge}`,
-      // });
     });
 
     it('is visible on small/mobile screens', async () => {
