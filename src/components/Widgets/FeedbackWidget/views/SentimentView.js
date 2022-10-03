@@ -5,23 +5,13 @@ import { Layout } from '../components/view-components';
 import { theme } from '../../../../theme/docsTheme';
 import { useFeedbackContext } from '../context';
 import Emoji from '../components/Emoji';
+import ViewHeader from '../components/ViewHeader';
 
 export const sentimentChoices = [
   { sentiment: 'Positive', copy: 'Yes, it did!', category: 'Helpful' },
   { sentiment: 'Negative', copy: 'No, I have feedback.', category: 'Unhelpful' },
   { sentiment: 'Suggestion', copy: 'I have a suggestion.', category: 'Idea' },
 ];
-
-const ViewHeader = styled('h3')`
-  font-weight: 600;
-  font-size: ${theme.fontSize.default};
-  text-align: center;
-  margin-left: -10px;
-  margin-top: 24px;
-  margin-bottom: 32px;
-  display: flex;
-  align-items: flex-end;
-`;
 
 const StyledSentiment = styled('div')`
   width: 87%;
@@ -49,11 +39,10 @@ const StyledSentimentOption = styled('h4')`
   }
 `;
 
-//first view of the FW
 const SentimentView = () => {
   return (
     <Layout>
-      <ViewHeader>Did this page help?</ViewHeader>
+      <ViewHeader />
       {sentimentChoices.map((path) => (
         <SentimentOption path={path} key={path.sentiment} />
       ))}

@@ -42,7 +42,7 @@ const FeedbackForm = () => {
       </div>
     )
   );
-}
+};
 
 export const feedbackId = 'feedback-card';
 export const fwFormId = 'feedback-form';
