@@ -34,7 +34,7 @@ const SubmittedView = () => {
         <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
         {isSentimentNegative && (
           <SupportCase selectedSentiment={selectedSentiment}>
-            {'Have a support contract?'}
+            {'Have a support contract? '}
             <a href="https://support.mongodb.com/">Create a Support Case</a>
           </SupportCase>
         )}
