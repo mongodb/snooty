@@ -1,5 +1,6 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
+const testTOCNode = require('./toc-test-data.json');
 
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
@@ -15,9 +16,10 @@ const fetchManifestMetadata = () => {
           metadata['associated_products'] = [
             {
               name: 'atlas-cli',
-              versions: ['v1.1', 'v1.0'],
+              versions: ['v1.1.7', 'v1.0'],
             },
           ];
+          metadata.toctree.children.push(testTOCNode);
         }
       }
     }

@@ -25,6 +25,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
+import { TocContext } from '../../context/toc-context';
 
 const SIDENAV_WIDTH = 268;
 
@@ -178,6 +179,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     setHideMobile(true);
   }, [setHideMobile]);
 
+  const { activeToc } = useContext(TocContext);
+
   // Renders side nav content based on the current project and template.
   // The guides docs typically have a different TOC compared to other docs.
   const navContent = useMemo(() => {
@@ -194,8 +197,19 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
         />
       );
     }
+
+    // TODO: update sidenav. use new context and show options for filtering versions via ToC
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+      return (
+        <>
+          {Object.keys(activeToc).length > 0 && (
+            <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={activeToc} />
+          )}
+        </>
+      );
+    }
     return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />;
-  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree]);
+  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree, activeToc]);
 
   const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : siteTitle;
 

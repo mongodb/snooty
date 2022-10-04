@@ -10,9 +10,9 @@ const STORAGE_KEY = 'activeVersions';
 const getInitBranchName = (branches) => {
   const activeBranch = branches.find((b) => b.isStableBranch);
   if (activeBranch) {
-    return activeBranch.name || activeBranch.gitBranchName;
+    return activeBranch.gitBranchName;
   }
-  return branches[0]?.name || null;
+  return branches[0]?.gitBranchName || null;
 };
 
 const getInitVersions = (branchListByProduct) => {
