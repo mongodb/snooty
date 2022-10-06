@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Card from '@leafygreen-ui/card';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
@@ -12,7 +12,7 @@ import { getPlaintext } from '../../../utils/get-plaintext';
 const Dot = styled('span')`
   height: 10px;
   width: 10px;
-  background-color: ${(props) => (props.isSelected ? `${uiColors.gray.dark3}` : `white`)};
+  background-color: ${(props) => (props.isSelected ? `${palette.gray.dark3}` : `white`)};
   border-color: black;
   border-radius: 50%;
   display: inline-block;
@@ -35,7 +35,7 @@ const DescriptionBody = styled('div')`
 
 const submittedStyle = ({ isCorrect }) => css`
   transition: unset !important;
-  ${isCorrect ? `border: 2px solid ${uiColors.green.base} !important;` : `opacity: 0.5;`}
+  ${isCorrect ? `border: 2px solid ${palette.green.base} !important;` : `opacity: 0.5;`}
 `;
 
 const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
@@ -44,8 +44,8 @@ const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
   padding: ${theme.size.default};
   min-height: unset;
   border-radius: 7px;
-  ${isSelected && `border-color: ${uiColors.black} !important;`};
-  ${isSubmitted ? submittedStyle({ isCorrect }) : `:hover{ border-color: ${uiColors.black} !important; }`}
+  ${isSelected && `border-color: ${palette.black} !important;`};
+  ${isSubmitted ? submittedStyle({ isCorrect }) : `:hover{ border-color: ${palette.black} !important; }`}
 `;
 
 const AnswerDescription = ({ description }) => {
@@ -58,8 +58,8 @@ const AnswerDescription = ({ description }) => {
   );
 };
 
-const correctIcon = <StyledIcon glyph="Checkmark" fill={uiColors.green.base} size="small" />;
-const incorrectIcon = <StyledIcon glyph="X" fill={uiColors.gray.base} size="small" />;
+const correctIcon = <StyledIcon glyph="Checkmark" fill={palette.green.base} size="small" />;
+const incorrectIcon = <StyledIcon glyph="X" fill={palette.gray.base} size="small" />;
 const UnsubmittedIcon = ({ isSelected }) => <Dot isSelected={isSelected} />;
 
 const ChoiceIconFactory = ({ isSubmitted, isSelected, isCorrect }) => {

@@ -6,7 +6,7 @@ import { default as CodeBlock } from '@leafygreen-ui/code';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { CodeContext } from './code-context';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -15,7 +15,7 @@ import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const captionStyle = css`
   padding: 10px;
-  color: ${uiColors.gray.dark1};
+  color: ${palette.gray.dark1};
   font-size: 14px;
   margin-left: 5px;
   border-bottom: none;
