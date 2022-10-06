@@ -19,6 +19,7 @@ module.exports = {
       transform: {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
       },
+      transformIgnorePatterns: [`/node_modules/(?!(@leafygreen-ui))`],
     },
     {
       displayName: 'utils',
@@ -26,6 +27,7 @@ module.exports = {
       transform: {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
       },
+      transformIgnorePatterns: [`/node_modules/(?!(@leafygreen-ui))`],
     },
   ],
 };
