@@ -175,6 +175,16 @@ exports[`renders correctly 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-19 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-19 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -221,7 +231,7 @@ exports[`renders correctly 1`] = `
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-18"
+          class="emotion-18 emotion-19"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"

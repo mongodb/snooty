@@ -56,15 +56,18 @@ exports[`admonitions render correctly 1`] = `
 }
 
 .emotion-2 {
-  color: #016BF8;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
   left: 20px;
   position: absolute;
 }
 
 .emotion-3 {
+  color: #016BF8;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -77,7 +80,7 @@ exports[`admonitions render correctly 1`] = `
   letter-spacing: 0.6px;
 }
 
-.emotion-4 {
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -89,7 +92,7 @@ exports[`admonitions render correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-5 {
+.emotion-6 {
   font-size: 16px;
   line-height: 28px;
 }
@@ -104,7 +107,7 @@ exports[`admonitions render correctly 1`] = `
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-2"
+        class="emotion-2 emotion-3"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"
@@ -118,16 +121,16 @@ exports[`admonitions render correctly 1`] = `
         />
       </svg>
       <h2
-        class="emotion-3"
+        class="emotion-4"
       >
         Note
       </h2>
     </div>
     <div
-      class="emotion-4"
+      class="emotion-5"
     >
       <div
-        class="emotion-5"
+        class="emotion-6"
       >
         These instructions are for installing MongoDB directly from
       </div>

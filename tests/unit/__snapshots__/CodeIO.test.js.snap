@@ -361,30 +361,33 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-19 {
   color: #FF0000;
+}
+
+.emotion-20 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-20>div>* {
+.emotion-21>div>* {
   display: inline!important;
 }
 
-.emotion-20 * {
+.emotion-21 * {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
 }
 
-.emotion-21 {
+.emotion-22 {
   border: 0;
   border-radius: 6px;
   overflow: hidden;
 }
 
-.emotion-23 {
+.emotion-24 {
   grid-area: code;
   overflow-x: auto;
   border-radius: inherit;
@@ -414,48 +417,48 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-23 {
+  .emotion-24 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-23 {
+  .emotion-24 {
     white-space: pre;
   }
 }
 
-.emotion-23:focus,
-.emotion-23:active,
-.emotion-23:focus-visible,
-.emotion-23:focus-within {
+.emotion-24:focus,
+.emotion-24:active,
+.emotion-24:focus-visible,
+.emotion-24:focus-within {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
-.emotion-26 {
+.emotion-27 {
   background-color: transparent;
   background-image: linear-gradient(90deg, #21313C, rgba(33,49,60,0));
   background-attachment: fixed;
 }
 
-.emotion-26>td {
+.emotion-27>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-26+tr>td {
+.emotion-27+tr>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-26+.emotion-26>td {
+.emotion-27+.emotion-27>td {
   border-top: 0;
 }
 
-.emotion-26:last-child>td {
+.emotion-27:last-child>td {
   border-bottom: 1px solid #21313C;
 }
 
-.emotion-27 {
+.emotion-28 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -558,7 +561,7 @@ exports[`CodeIO renders correctly 1`] = `
           <svg
             alt=""
             aria-hidden="true"
-            class="emotion-19"
+            class="emotion-19 emotion-20"
             fill="none"
             height="16"
             role="presentation"
@@ -578,16 +581,16 @@ exports[`CodeIO renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="emotion-20"
+      class="emotion-21"
     >
       <div
-        class="emotion-21"
+        class="emotion-22"
       >
         <div
           class="emotion-6"
         >
           <pre
-            class="emotion-23"
+            class="emotion-24"
             tabindex="-1"
           >
             <code
@@ -598,10 +601,10 @@ exports[`CodeIO renders correctly 1`] = `
               >
                 <tbody>
                   <tr
-                    class="emotion-26"
+                    class="emotion-27"
                   >
                     <td
-                      class="emotion-27"
+                      class="emotion-28"
                     >
                       1
                     </td>
