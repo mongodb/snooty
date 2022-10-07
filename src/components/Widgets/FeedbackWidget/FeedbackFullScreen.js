@@ -23,9 +23,6 @@ const FullScreen = styled.div(
 const Header = styled.div`
   padding: 8px;
   margin-bottom: 20px;
-`;
-
-const HeaderControls = styled.div`
   margin-top: 25px;
   position: relative;
   display: grid;
@@ -39,9 +36,9 @@ const HeaderControls = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 380px;
+  min-width: 280px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 56px;
 `;
 
 const FeedbackFullScreen = ({ isOpen, children }) => {
@@ -52,10 +49,8 @@ const FeedbackFullScreen = ({ isOpen, children }) => {
     isOpen && (
       <FullScreen totalHeaderHeight={totalHeaderHeight}>
         <Header>
-          <HeaderControls>
-            <ProgressBar />
-            <CloseButton size="xlarge" onClick={abandon} />
-          </HeaderControls>
+          <ProgressBar />
+          <CloseButton size="xlarge" onClick={abandon} />
         </Header>
         <Content>{children}</Content>
       </FullScreen>

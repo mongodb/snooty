@@ -14,29 +14,30 @@ const FeedbackContainer = styled(LeafygreenCard)`
   font-weight: 500;
   color: ${palette.green.dark1};
 
-  // 320px breakpoint - hovering tab on bottom left
+  // tab fixed at bottom of docs page
   @media ${theme.screenSize.upToSmall} {
-    left: 20px;
-    bottom: 20px;
+    position: static !important;
+    width: fit-content !important;
+    margin-left: 20px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    transform: rotate(0deg) !important;
   }
 
   @media ${theme.screenSize.smallAndUp} {
-    // 768px breakpoint - side tab
+    // tab positioned on side of page
     @media ${theme.screenSize.upToLarge} {
       transform: rotate(-90deg);
       top: 50%;
       right: -53px;
     }
 
-    // bottom tab
+    // tab positioned on bottom right of page
     @media ${theme.screenSize.largeAndUp} {
       bottom: -6px;
-      // 1024px breakpoint
       @media ${theme.screenSize.upTo2XLarge} {
         right: 16px;
       }
-
-      // 1440px and 1920px breakpoints
       @media ${theme.screenSize['2XLargeAndUp']} {
         right: 64px;
       }

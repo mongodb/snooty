@@ -76,7 +76,6 @@ const ScreenshotSelect = styled(Button)`
   z-index: 5;
   width: 38px !important;
   align-text: center;
-  margin-left: -8px;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {

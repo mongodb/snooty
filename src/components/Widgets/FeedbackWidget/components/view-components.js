@@ -25,7 +25,7 @@ export const Subheading = styled.p`
   margin-bottom: 16px;
   margin-left: 10px;
   width: 100%;
-  text-align: left;
+  text-align: center;
   font-weight: regular;
   font-size: ${theme.fontSize.small};
 `;

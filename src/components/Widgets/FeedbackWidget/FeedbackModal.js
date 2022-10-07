@@ -10,9 +10,10 @@ const Modal = styled(LeafygreenModal)`
 
   > div {
     padding-top: 200px;
-    > div {
-      padding-bottom: 0px;
-    }
+  }
+
+  > div > div {
+    padding: 32px 56px;
   }
 `;
 

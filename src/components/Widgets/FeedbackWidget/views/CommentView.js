@@ -20,7 +20,6 @@ const FooterMargin = ({ hasEmailError }) => LeafyCSS`
 `;
 
 const SubmitButton = styled(Button)`
-  margin-right: -8px !important;
   height: 28px !important;
   width: 55px;
   :focus {
@@ -29,7 +28,6 @@ const SubmitButton = styled(Button)`
 `;
 
 const StyledCommentInput = styled(TextArea)`
-  width: 202px;
   margin-top: -16px;
   z-index: 4;
   textarea::placeholder {
@@ -48,7 +46,6 @@ const StyledEmailInput = styled(TextInput)`
     font-size: 300px;
   }
   div > input {
-    width: 202px;
     height: 30px;
     ::placeholder {
       color: #5c6c75;
@@ -69,6 +66,11 @@ const StyledEmailInput = styled(TextInput)`
       margin-bottom: 7px;
     }
   }
+`;
+
+// responsive width for mobile and tablet views
+const widthStyling = (isMobile, isTabletOrMobile, currWindowWidth) => LeafyCSS`
+  width: ${isMobile ? Math.max(currWindowWidth - 32, 280) : isTabletOrMobile ? '368' : '202'}px !important;
 `;
 
 const useValidation = (inputValue, validator) => {
@@ -95,7 +97,8 @@ const CommentView = () => {
   const isValidEmail = useValidation(email, validateEmail);
   const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
-  const { isTabletOrMobile } = useScreenSize();
+  const { isMobile, isTabletOrMobile } = useScreenSize();
+  const currWindowWidth = window.innerWidth;
 
   const handleSubmit = async () => {
     if (isValidEmail) {
@@ -114,6 +117,7 @@ const CommentView = () => {
     <Layout>
       <CommentHeader />
       <StyledCommentInput
+        className={cx(widthStyling(isMobile, isTabletOrMobile, currWindowWidth))}
         type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
@@ -123,6 +127,7 @@ const CommentView = () => {
         onChange={(e) => setComment(e.target.value)}
       />
       <StyledEmailInput
+        className={cx(FooterMargin({ hasEmailError }), widthStyling(isMobile, isTabletOrMobile, currWindowWidth))}
         type="email"
         id="feedback-email"
         aria-labelledby="Email Text Box"
@@ -132,9 +137,8 @@ const CommentView = () => {
         errorMessage="Please enter a valid email."
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
-        className={cx(FooterMargin({ hasEmailError }))}
       />
-      <Footer>
+      <Footer className={cx(widthStyling(isMobile, isTabletOrMobile, currWindowWidth))}>
         <SubmitButton onClick={() => handleSubmit()} type="submit">
           {'Send'}
         </SubmitButton>
