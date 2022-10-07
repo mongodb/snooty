@@ -54,6 +54,9 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-3 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -71,7 +74,7 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2"
+      class="emotion-2 emotion-3"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -209,6 +212,9 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-3 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -229,7 +235,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2"
+      class="emotion-2 emotion-3"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -302,6 +308,9 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-3 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -322,7 +331,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2"
+      class="emotion-2 emotion-3"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -395,6 +404,9 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-3 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -415,7 +427,7 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2"
+      class="emotion-2 emotion-3"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"

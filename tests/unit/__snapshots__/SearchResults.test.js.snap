@@ -622,13 +622,16 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-53 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: left;
 }
 
-.emotion-59 {
+.emotion-60 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -667,42 +670,42 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-59:focus {
+.emotion-60:focus {
   outline: none;
 }
 
-.emotion-59[disabled],
-.emotion-59:disabled {
+.emotion-60[disabled],
+.emotion-60:disabled {
   pointer-events: none;
 }
 
-.emotion-59:active,
-.emotion-59:focus,
-.emotion-59:hover {
+.emotion-60:active,
+.emotion-60:focus,
+.emotion-60:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-59:hover,
-.emotion-59:active {
+.emotion-60:hover,
+.emotion-60:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-59,
-.emotion-59:hover {
+.emotion-60,
+.emotion-60:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-59:focus {
+.emotion-60:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-59>*:last-child {
+.emotion-60>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -710,55 +713,52 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-59>*:last-child>svg {
+.emotion-60>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-59>*:last-child>svg {
+.emotion-60>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-59>*:last-child {
+.emotion-60>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-59:focus {
+.emotion-60:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-59:disabled {
+.emotion-60:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-59:disabled:active {
+.emotion-60:disabled:active {
   pointer-events: none;
 }
 
-.emotion-59:disabled {
+.emotion-60:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-59:disabled>*:last-child>svg {
+.emotion-60:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-59 {
+  .emotion-60 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-64 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.emotion-66 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -945,7 +945,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-52"
+                    class="emotion-52 emotion-53"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -977,7 +977,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-59"
+                class="emotion-60"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -1003,7 +1003,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-64"
+                    class="emotion-52 emotion-66"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -1628,13 +1628,16 @@ exports[`Search Results Page does not return results for a given search term wit
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-44 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: left;
 }
 
-.emotion-50 {
+.emotion-51 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1674,42 +1677,42 @@ exports[`Search Results Page does not return results for a given search term wit
   font-size: 13px;
 }
 
-.emotion-50:focus {
+.emotion-51:focus {
   outline: none;
 }
 
-.emotion-50[disabled],
-.emotion-50:disabled {
+.emotion-51[disabled],
+.emotion-51:disabled {
   pointer-events: none;
 }
 
-.emotion-50:active,
-.emotion-50:focus,
-.emotion-50:hover {
+.emotion-51:active,
+.emotion-51:focus,
+.emotion-51:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-50:hover,
-.emotion-50:active {
+.emotion-51:hover,
+.emotion-51:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-50,
-.emotion-50:hover {
+.emotion-51,
+.emotion-51:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-50:focus {
+.emotion-51:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-50>*:last-child {
+.emotion-51>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -1717,55 +1720,52 @@ exports[`Search Results Page does not return results for a given search term wit
   justify-content: flex-start;
 }
 
-.emotion-50>*:last-child>svg {
+.emotion-51>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-50>*:last-child>svg {
+.emotion-51>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-50>*:last-child {
+.emotion-51>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-50:focus {
+.emotion-51:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-50:disabled {
+.emotion-51:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-50:disabled:active {
+.emotion-51:disabled:active {
   pointer-events: none;
 }
 
-.emotion-50:disabled {
+.emotion-51:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-50:disabled>*:last-child>svg {
+.emotion-51:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-50 {
+  .emotion-51 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-55 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.emotion-57 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -1922,7 +1922,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-43"
+                    class="emotion-43 emotion-44"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -1954,7 +1954,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-50"
+                class="emotion-51"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -1980,7 +1980,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-55"
+                    class="emotion-43 emotion-57"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -4415,13 +4415,16 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-47 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: left;
 }
 
-.emotion-53 {
+.emotion-54 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4461,42 +4464,42 @@ exports[`Search Results Page renders results from a given search term query para
   font-size: 13px;
 }
 
-.emotion-53:focus {
+.emotion-54:focus {
   outline: none;
 }
 
-.emotion-53[disabled],
-.emotion-53:disabled {
+.emotion-54[disabled],
+.emotion-54:disabled {
   pointer-events: none;
 }
 
-.emotion-53:active,
-.emotion-53:focus,
-.emotion-53:hover {
+.emotion-54:active,
+.emotion-54:focus,
+.emotion-54:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-53:hover,
-.emotion-53:active {
+.emotion-54:hover,
+.emotion-54:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-53,
-.emotion-53:hover {
+.emotion-54,
+.emotion-54:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-53:focus {
+.emotion-54:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-53>*:last-child {
+.emotion-54>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -4504,55 +4507,52 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: flex-start;
 }
 
-.emotion-53>*:last-child>svg {
+.emotion-54>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-53>*:last-child>svg {
+.emotion-54>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-53>*:last-child {
+.emotion-54>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-53:focus {
+.emotion-54:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-53:disabled {
+.emotion-54:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-53:disabled:active {
+.emotion-54:disabled:active {
   pointer-events: none;
 }
 
-.emotion-53:disabled {
+.emotion-54:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-53:disabled>*:last-child>svg {
+.emotion-54:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-53 {
+  .emotion-54 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-58 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.emotion-60 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -4708,7 +4708,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-46"
+                    class="emotion-46 emotion-47"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -4740,7 +4740,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-53"
+                class="emotion-54"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -4766,7 +4766,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-58"
+                    class="emotion-46 emotion-60"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
