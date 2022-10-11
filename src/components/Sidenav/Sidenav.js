@@ -164,6 +164,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const topValues = useStickyTopValues(eol);
 
   const showVersions = repoBranches?.branches?.length > 1;
+  // TODO: hide if associated product. will be shown by AssociatedVersionSelector
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
