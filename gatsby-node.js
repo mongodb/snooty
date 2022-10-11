@@ -141,6 +141,11 @@ exports.createPages = async ({ actions }) => {
           });
         })
       );
+
+      // TODO: add server side logic
+      // to check if current product has associated products
+      // either 1) fetchDocument for {associated_products: project}
+      // or 2) manifest metadata has info
     }
     let errMsg;
 

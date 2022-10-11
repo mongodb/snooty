@@ -54,6 +54,7 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
 
 const getTocMetadata = async (db, project, parserUser, parserBranch, manifestTree) => {
   try {
+    // TODO: update metadata to have 'project' field. don't have to construct page_id
     let filter = {
       page_id: `${project}/${parserUser}/${parserBranch}`,
     };

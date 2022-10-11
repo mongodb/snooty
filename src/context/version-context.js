@@ -8,7 +8,7 @@ import { BRANCHES_COLLECTION } from '../build-constants';
 const STORAGE_KEY = 'activeVersions';
 
 const getInitBranchName = (branches) => {
-  const activeBranch = branches.find((b) => b.isStableBranch);
+  const activeBranch = branches.find((b) => b.active);
   if (activeBranch) {
     return activeBranch.gitBranchName;
   }
@@ -46,12 +46,12 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo) => {
       });
       // filter all branches of associated repo by associated versions only
       versions[product.name] = childRepoBranches.branches.filter((branch) => {
-        return product.versions.includes(branch.gitBranchName);
+        return branch.active && product.versions.includes(branch.gitBranchName);
       });
     });
     promises.push(
       fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
-        versions[metadata.project] = res.branches;
+        versions[metadata.project] = res.branches.filter((branch) => branch.active);
       })
     );
     await Promise.all(promises);

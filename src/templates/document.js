@@ -10,6 +10,7 @@ import TabSelectors from '../components/Tabs/TabSelectors';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 
 const DocumentContainer = styled('div')`
   display: grid;
@@ -52,6 +53,7 @@ const Document = ({ children, pageContext: { slug, page } }) => {
         </div>
       </StyledMainColumn>
       <StyledRightColumn>
+        <AssociatedVersionSelector />
         <TabSelectors />
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>
