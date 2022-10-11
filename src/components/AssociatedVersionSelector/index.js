@@ -5,7 +5,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { fetchDocuments } from '../../utils/realm';
 import Select, { Label } from '../Select';
 
-const fetchUmbrellaProject = async (project, dbName) => {
+const fetchUmbrellaProject = async (project, dbName, backupResponse) => {
   try {
     const query = {
       'associated_products.name': project,
@@ -14,6 +14,7 @@ const fetchUmbrellaProject = async (project, dbName) => {
     return umbrellaProjects;
   } catch (e) {
     console.error(e);
+    return backupResponse;
     // on error, fall back to build time
   }
 };
@@ -26,7 +27,7 @@ const buildChoices = (branches) => {
 };
 
 const AssociatedVersionSelector = () => {
-  const { project, database } = useSiteMetadata();
+  const { project, database, umbrellaProjects } = useSiteMetadata();
   const [versions, setVersions] = useState([]);
   const { activeVersions, setActiveVersions, availableVersions } = useContext(VersionContext);
   // use activeversion to signal in select dropdown
@@ -47,12 +48,12 @@ const AssociatedVersionSelector = () => {
       return;
     }
 
-    fetchUmbrellaProject(project, database).then((umbrellaProjects) => {
+    fetchUmbrellaProject(project, database, umbrellaProjects).then((umbrellaProjects) => {
       if (umbrellaProjects.length > 0) {
         setVersions(availableVersions[project]);
       }
     });
-  }, [project, database, setVersions, availableVersions]);
+  }, [project, database, setVersions, availableVersions, umbrellaProjects]);
 
   return (
     <>

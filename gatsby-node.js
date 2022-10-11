@@ -132,6 +132,7 @@ exports.createPages = async ({ actions }) => {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
 
     if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+      // fetch associated child products
       await Promise.all(
         siteMetadata.associatedProducts.map(async (product) => {
           associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
@@ -142,6 +143,10 @@ exports.createPages = async ({ actions }) => {
         })
       );
 
+      // check if product is associated child product
+      siteMetadata.umbrellaProducts = await db.stitchInterface.getMetadata({
+        'associated_products.name': siteMetadata.project,
+      });
       // TODO: add server side logic
       // to check if current product has associated products
       // either 1) fetchDocument for {associated_products: project}
