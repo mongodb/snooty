@@ -61,7 +61,7 @@ const getPathPrefix = (pathPrefix) => {
  */
 const siteMetadata = {
   associatedProducts: manifestMetadata['associated_products'] || [],
-  umbrellaProducts: [], // set by verifying against Atlas snooty_<env>.metadata documents
+  isAssociatedProduct: false, // set by verifying against Atlas snooty_<env>.metadata documents
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
   reposDatabase: getReposDatabase(process.env.SNOOTY_ENV),

@@ -144,13 +144,10 @@ exports.createPages = async ({ actions }) => {
       );
 
       // check if product is associated child product
-      siteMetadata.umbrellaProducts = await db.stitchInterface.getMetadata({
+      const umbrellaProducts = await db.stitchInterface.getMetadata({
         'associated_products.name': siteMetadata.project,
       });
-      // TODO: add server side logic
-      // to check if current product has associated products
-      // either 1) fetchDocument for {associated_products: project}
-      // or 2) manifest metadata has info
+      siteMetadata.isAssociatedProduct = umbrellaProducts.length > 0;
     }
     let errMsg;
 

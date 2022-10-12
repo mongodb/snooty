@@ -28,7 +28,7 @@ const needsLegacyDropdown = (branches = []) => {
 };
 
 // Gets UI labels for supplied active branch names
-const getUILabel = (branch) => {
+export const getUILabel = (branch) => {
   if (!branch['active']) {
     console.warn(
       `Retrieving branch UI label for legacy/EOL'd/inactive branch: ${branch['gitBranchName']}. This should probably not be happening.`

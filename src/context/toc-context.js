@@ -55,15 +55,13 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
 const getTocMetadata = async (db, project, parserUser, parserBranch, manifestTree) => {
   try {
     // TODO: update metadata to have 'project' field. don't have to construct page_id
+    // NOTE: see snooty_dev.metadata for documents with 'project' field defined. input testing metadata
     let filter = {
-      page_id: `${project}/${parserUser}/${parserBranch}`,
+      project: `${project}`,
     };
     if (process.env.GATSBY_TEST_EMBED_VERSIONS && project === 'cloud-docs') {
       // TODO: remove testing code
       db = 'snooty_dev';
-      filter = {
-        page_id: 'cloud-docs/spark/DOP-3225',
-      };
     }
     const metadata = await fetchDocument(db, METADATA_COLLECTION, filter);
     return metadata.toctree;
