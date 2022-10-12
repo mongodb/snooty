@@ -73,6 +73,16 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-6 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-6 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -96,7 +106,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-5"
+        class="emotion-5 emotion-6"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"
@@ -189,6 +199,16 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-6 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-6 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -212,7 +232,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-5"
+        class="emotion-5 emotion-6"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"

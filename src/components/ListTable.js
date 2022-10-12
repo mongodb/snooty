@@ -21,6 +21,10 @@ const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
+
+  table & {
+    margin: 0;
+  }
 `;
 
 /* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
@@ -90,8 +94,15 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
               align-items: start;
             }
 
-            & > div > span > * {
+            & > div > span {
+              display: block;
+              align-self: center;
+            }
+
+            & > div > span > *,
+            & > div > span p {
               margin: 0 0 12px;
+              line-height: inherit;
             }
 
             /* Prevent extra margin below last element */
@@ -160,6 +171,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                   className={cx(css`
                     * {
                       font-size: ${theme.fontSize.small};
+                      font-weight: 600;
                     }
                     ${widths && `width: ${widths[colIndex]}%`}
                   `)}

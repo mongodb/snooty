@@ -8,6 +8,10 @@ const StyledInlineCode = styled(InlineCode)`
   /* Unset font size so it inherits it from its context */
   font-size: unset;
   display: inline;
+
+  a & {
+    color: inherit;
+  }
 `;
 
 const StyledNavigationInlineCode = styled('code')`
