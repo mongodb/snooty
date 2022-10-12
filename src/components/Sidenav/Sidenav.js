@@ -153,7 +153,18 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree, eol }) => {
+const Sidenav = ({
+  chapters,
+  guides,
+  page,
+  pageTitle,
+  repoBranches,
+  siteTitle,
+  slug,
+  toctree,
+  eol,
+  isAssociatedProduct,
+}) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
@@ -163,8 +174,10 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
 
-  const showVersions = repoBranches?.branches?.length > 1;
-  // TODO: hide if associated product. will be shown by AssociatedVersionSelector
+  let showVersions = repoBranches?.branches?.length > 1;
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS && isAssociatedProduct) {
+    showVersions = false;
+  }
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
