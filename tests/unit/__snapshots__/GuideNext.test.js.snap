@@ -272,10 +272,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-27 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -691,10 +687,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-27 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1102,10 +1094,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-27 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;

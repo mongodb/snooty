@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
-
-const Loadable = require('react-loadable');
+import { preloadAll } from 'react-loadable';
 
 global.navigator = {
   userAgent: 'node.js',
@@ -20,7 +19,7 @@ const rejectionHandler = (err) => {
 };
 
 beforeAll(async () => {
-  await Loadable.preloadAll();
+  await preloadAll();
   process.on('unhandledRejection', rejectionHandler);
 });
 

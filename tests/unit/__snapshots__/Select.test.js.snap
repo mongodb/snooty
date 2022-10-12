@@ -195,6 +195,9 @@ exports[`Select renders select correctly 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-8 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -237,7 +240,7 @@ exports[`Select renders select correctly 1`] = `
           <svg
             alt=""
             aria-hidden="true"
-            class="emotion-7"
+            class="emotion-7 emotion-8"
             height="16"
             role="presentation"
             viewBox="0 0 16 16"

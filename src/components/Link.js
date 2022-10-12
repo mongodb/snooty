@@ -20,7 +20,6 @@ const LGlinkStyling = css`
 
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
 const StyledGatsbyLink = styled(GatsbyLink)`
-  display: inline-flex;
   align-items: center;
   cursor: pointer;
   &:focus {
