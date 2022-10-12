@@ -28,7 +28,7 @@ const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
 `;
 
-const Document = ({ children, pageContext: { slug, page, repoBranches } }) => {
+const Document = ({ children, pageContext: { slug, page, repoBranches, isAssociatedProduct } }) => {
   const { project } = useSiteMetadata();
   const { parentPaths, slugToTitle, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
@@ -53,7 +53,7 @@ const Document = ({ children, pageContext: { slug, page, repoBranches } }) => {
         </div>
       </StyledMainColumn>
       <StyledRightColumn>
-        <AssociatedVersionSelector slug={slug} repoBranches={repoBranches} />
+        <AssociatedVersionSelector isAssociatedProduct={isAssociatedProduct} slug={slug} repoBranches={repoBranches} />
         <TabSelectors />
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>

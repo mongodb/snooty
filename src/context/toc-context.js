@@ -41,7 +41,9 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
       let targetVersion = currentVersion[nodeProject];
       // if current version is not part of merged ToC, fallback to last
       if (!targetVersion || !tocNode.options.versions.includes(targetVersion)) {
-        targetVersion = tocNode.options.versions[tocNode.options.version.length - 1];
+        // TODO: should update version context active version if not found
+        console.error(`target version for ${nodeProject} - ${targetVersion} not found`);
+        return false;
       }
       tocNode.children = tocNode.children?.filter(
         (versionedChild) => versionedChild.options?.version === targetVersion
@@ -81,6 +83,8 @@ const TocContextProvider = ({ children }) => {
 
   useEffect(() => {
     getTocMetadata(database, project, parserUser, parserBranch, toctree).then((toctreeResponse) => {
+      // TODO DOP-3309: break into two useEffects.
+      // have to call setActiveVersions if toc tree nodes and associated producst don't match
       const filtered = filterTocByVersion(toctreeResponse, activeVersions, availableVersions);
       setActiveToc(filtered);
     });

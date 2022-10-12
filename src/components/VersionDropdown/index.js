@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -6,6 +6,7 @@ import { uiColors } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
 import { generatePrefix } from './utils';
+import { setOptionSlug, useUrlSlug } from '../../hooks/use-url-slug';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { normalizePath } from '../../utils/normalize-path';
@@ -80,10 +81,6 @@ const getBranch = (branchName = '', branches = []) => {
   return branchCandidates?.[0] || null;
 };
 
-const setOptionSlug = (branch) => {
-  return branch['urlSlug'] || branch['gitBranchName'];
-};
-
 const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
   const slug = setOptionSlug(branch);
@@ -96,18 +93,11 @@ const createOption = (branch) => {
 
 const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, slug, eol }) => {
   const siteMetadata = useSiteMetadata();
-  const { parserBranch, project } = siteMetadata;
+  const { project } = siteMetadata;
 
   // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
   // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
-  const currentUrlSlug = useMemo(() => {
-    for (let branch of branches) {
-      if (branch.gitBranchName === parserBranch) {
-        return setOptionSlug(branch);
-      }
-    }
-    return parserBranch;
-  }, [branches, parserBranch]);
+  const { currentUrlSlug } = useUrlSlug(branches);
 
   if ((branches?.length ?? 0) < 2) {
     console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');

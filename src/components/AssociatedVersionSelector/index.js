@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { METADATA_COLLECTION } from '../../build-constants';
 import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { useUrlSlug } from '../../hooks/use-url-slug';
 import { fetchDocuments } from '../../utils/realm';
 import Select, { Label } from '../Select';
 import { getUILabel } from '../VersionDropdown';
@@ -42,20 +43,20 @@ const getSlugFromGitBranch = (branches, gitBranchName, siteMetadata, siteBasePre
   return assertTrailingSlash(normalizePath(`${prefixWithVersion}/${slug}`));
 };
 
-const AssociatedVersionSelector = ({ repoBranches: { siteBasePrefix }, slug }) => {
-  const { project, database, isAssociatedProduct } = useSiteMetadata();
+const getBranchFromSlug = (slug, branches) => branches.find((branch) => branch.urlSlug === slug);
+
+const AssociatedVersionSelector = ({ repoBranches: { branches, siteBasePrefix }, slug, isAssociatedProduct }) => {
+  const { project, database } = useSiteMetadata();
   const siteMetadata = useSiteMetadata();
   const [versions, setVersions] = useState([]);
   const { activeVersions, setActiveVersions, availableVersions } = useContext(VersionContext);
-  // use activeversion to signal in select dropdown
+  const { currentUrlSlug } = useUrlSlug(branches);
 
   const updateSelection = useCallback(
     ({ value }) => {
       const updatedVersion = {};
       updatedVersion[project] = value;
       setActiveVersions(updatedVersion);
-      // NEED TO NAVIGATE TO SAID VALUE
-      // note. version context is stored by gitBranchName
       const targetSlug = getSlugFromGitBranch(versions, value, siteMetadata, siteBasePrefix, slug);
       navigate(targetSlug);
     },
@@ -65,26 +66,36 @@ const AssociatedVersionSelector = ({ repoBranches: { siteBasePrefix }, slug }) =
   useEffect(() => {
     // find if current project is an associated project
     // only required on init
-    if (!availableVersions[project]) {
+    if (!availableVersions[project] || !isAssociatedProduct) {
       return;
     }
 
     fetchUmbrellaProject(project, database)
       .then((umbrellaProjects) => {
+        // call setActiveVersions if not matched with current version
+        const branch = getBranchFromSlug(currentUrlSlug, availableVersions[project]);
+        if (branch && branch.gitBranchName !== activeVersions[project]) {
+          const newVersionState = {};
+          newVersionState[project] = branch.gitBranchName;
+          setActiveVersions(newVersionState);
+        }
         if (umbrellaProjects.length > 0) {
           setVersions(availableVersions[project]);
         }
       })
       .catch((e) => {
-        if (isAssociatedProduct) {
-          setVersions(availableVersions[project]);
-        }
-      })
-      .finally(() => {
-        // if version is not specified in url, set to most recent local storage
-        // if set, ignore logic and route to desired target
+        setVersions(availableVersions[project]);
       });
-  }, [project, database, setVersions, activeVersions, availableVersions, isAssociatedProduct]);
+  }, [
+    project,
+    database,
+    setVersions,
+    activeVersions,
+    availableVersions,
+    isAssociatedProduct,
+    currentUrlSlug,
+    setActiveVersions,
+  ]);
 
   return (
     <>

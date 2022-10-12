@@ -13,12 +13,7 @@ const fetchManifestMetadata = () => {
         metadata = BSON.deserialize(entry.getData());
 
         if (process.env.GATSBY_TEST_EMBED_VERSIONS && metadata['project'] === 'cloud-docs') {
-          metadata['associated_products'] = [
-            {
-              name: 'atlas-cli',
-              versions: ['v1.1.7', 'v1.0'],
-            },
-          ];
+          metadata['associated_products'] = [{ name: 'atlas-cli', versions: ['master', 'v1.1', 'v1.0'] }];
           metadata.toctree.children.push(testTOCNode);
         }
       }
