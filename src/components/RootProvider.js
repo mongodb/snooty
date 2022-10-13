@@ -8,11 +8,22 @@ import { NavigationProvider } from '../context/navigation-context';
 import { VersionContextProvider } from '../context/version-context';
 import { TocContextProvider } from '../context/toc-context';
 
-const RootProvider = ({ children, headingNodes, selectors, repoBranches, associatedReposInfo }) => (
+const RootProvider = ({
+  children,
+  headingNodes,
+  selectors,
+  repoBranches,
+  associatedReposInfo,
+  isAssociatedProduct,
+}) => (
   <TabProvider selectors={selectors}>
     <ContentsProvider headingNodes={headingNodes}>
       <HeaderContextProvider>
-        <VersionContextProvider repoBranches={repoBranches} associatedReposInfo={associatedReposInfo}>
+        <VersionContextProvider
+          repoBranches={repoBranches}
+          associatedReposInfo={associatedReposInfo}
+          isAssociatedProduct={isAssociatedProduct}
+        >
           <TocContextProvider>
             <NavigationProvider>
               <SidenavContextProvider>{children}</SidenavContextProvider>

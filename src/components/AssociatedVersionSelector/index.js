@@ -1,29 +1,14 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { METADATA_COLLECTION } from '../../build-constants';
+import React, { useMemo, useEffect, useContext, useCallback } from 'react';
+import { useTheme, css } from '@emotion/react';
+import { navigate } from '@reach/router';
 import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { useUrlSlug } from '../../hooks/use-url-slug';
-import { fetchDocuments } from '../../utils/realm';
 import Select, { Label } from '../Select';
-import { getUILabel } from '../VersionDropdown';
+import { getUILabel, setOptionSlug } from '../VersionDropdown';
 import { normalizePath } from '../../utils/normalize-path';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { baseUrl } from '../../utils/base-url';
 import { generatePrefix } from '../VersionDropdown/utils';
-import { navigate } from '@reach/router';
-
-const fetchUmbrellaProject = async (project, dbName) => {
-  try {
-    const query = {
-      'associated_products.name': project,
-    };
-    const umbrellaProjects = fetchDocuments(dbName, METADATA_COLLECTION, query);
-    return umbrellaProjects;
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-};
 
 const buildChoices = (branches) => {
   return branches.map((branch) => ({
@@ -33,78 +18,130 @@ const buildChoices = (branches) => {
   }));
 };
 
-const getSlugFromGitBranch = (branches, gitBranchName, siteMetadata, siteBasePrefix, slug) => {
-  const branch = branches.find((b) => b.gitBranchName === gitBranchName);
-  const targetSlug = branch['urlSlug'] || branch['gitBranchName'];
-  if (targetSlug === 'legacy') {
-    return `${baseUrl()}legacy/?site=${siteMetadata.project}`;
-  }
-  const prefixWithVersion = generatePrefix(targetSlug, siteMetadata, siteBasePrefix);
-  return assertTrailingSlash(normalizePath(`${prefixWithVersion}/${slug}`));
-};
-
-const getBranchFromSlug = (slug, branches) => branches.find((branch) => branch.urlSlug === slug);
-
-const AssociatedVersionSelector = ({ repoBranches: { branches, siteBasePrefix }, slug, isAssociatedProduct }) => {
-  const { project, database } = useSiteMetadata();
+const AssociatedVersionSelector = ({ repoBranches: { siteBasePrefix }, slug }) => {
+  const { project, parserBranch } = useSiteMetadata();
   const siteMetadata = useSiteMetadata();
-  const [versions, setVersions] = useState([]);
-  const { activeVersions, setActiveVersions, availableVersions } = useContext(VersionContext);
-  const { currentUrlSlug } = useUrlSlug(branches);
+  const { activeVersions, setActiveVersions, availableVersions, showVersionDropdown } = useContext(VersionContext);
+  const { screenSize } = useTheme();
 
-  const updateSelection = useCallback(
+  // refer to src/components/VersionDropdown/index.js
+  // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
+  // Used to ensure that the context gets updated when user navigates to page via multiple alias urls
+  const currentUrlSlug = useMemo(() => {
+    if (!availableVersions[project]) {
+      return;
+    }
+    for (let branch of availableVersions[project]) {
+      if (branch.gitBranchName === parserBranch) {
+        return setOptionSlug(branch);
+      }
+    }
+    return parserBranch;
+  }, [parserBranch, availableVersions, project]);
+
+  // refer to src/components/VersionDropdown/index.js
+  const getUrl = useCallback(
+    (versionTarget) => {
+      if (versionTarget === 'legacy') {
+        return `${baseUrl()}legacy/?site=${project}`;
+      }
+      const prefixWithVersion = generatePrefix(versionTarget, siteMetadata, siteBasePrefix);
+      return assertTrailingSlash(normalizePath(`${prefixWithVersion}/${slug}`));
+    },
+    [project, siteBasePrefix, siteMetadata, slug]
+  );
+
+  // attempts to find branch by given url alias. can be alias, urlAliases, or gitBranchName
+  const findBranchByAlias = useCallback(
+    (alias) => {
+      if (!availableVersions[project]) {
+        return;
+      }
+
+      return availableVersions[project].find(
+        (b) => b.urlSlug === alias || b.urlAliases.includes(alias) || b.gitBranchName === alias
+      );
+    },
+    [availableVersions, project]
+  );
+
+  const findBranchByGit = useCallback(
+    (gitBranchName) => {
+      if (!availableVersions[project]) {
+        return;
+      }
+
+      return availableVersions[project].find((b) => b.gitBranchName === gitBranchName);
+    },
+    [availableVersions, project]
+  );
+
+  const onSelectChange = useCallback(
     ({ value }) => {
       const updatedVersion = {};
       updatedVersion[project] = value;
       setActiveVersions(updatedVersion);
-      const targetSlug = getSlugFromGitBranch(versions, value, siteMetadata, siteBasePrefix, slug);
-      navigate(targetSlug);
+
+      const targetBranch = findBranchByGit(value);
+      if (!targetBranch) {
+        console.error(`target branch not found for git branch <${value}>`);
+        return;
+      }
+
+      const target = targetBranch.alias || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
+      const urlTarget = getUrl(target);
+      navigate(urlTarget);
     },
-    [project, setActiveVersions, versions, siteMetadata, siteBasePrefix, slug]
+    [project, setActiveVersions, findBranchByGit, getUrl]
   );
 
   useEffect(() => {
-    // find if current project is an associated project
-    // only required on init
-    if (!availableVersions[project] || !isAssociatedProduct) {
+    // if current version differs from browser storage version
+    // update browser local storage
+    if (!currentUrlSlug) {
       return;
     }
-
-    fetchUmbrellaProject(project, database)
-      .then((umbrellaProjects) => {
-        // call setActiveVersions if not matched with current version
-        const branch = getBranchFromSlug(currentUrlSlug, availableVersions[project]);
-        if (branch && branch.gitBranchName !== activeVersions[project]) {
-          const newVersionState = {};
-          newVersionState[project] = branch.gitBranchName;
-          setActiveVersions(newVersionState);
-        }
-        if (umbrellaProjects.length > 0) {
-          setVersions(availableVersions[project]);
-        }
-      })
-      .catch((e) => {
-        setVersions(availableVersions[project]);
-      });
-  }, [
-    project,
-    database,
-    setVersions,
-    activeVersions,
-    availableVersions,
-    isAssociatedProduct,
-    currentUrlSlug,
-    setActiveVersions,
-  ]);
+    const currentBranch = findBranchByAlias(currentUrlSlug);
+    if (!currentBranch) {
+      console.error(`url <${currentUrlSlug}> does not correspond to any current branch`);
+      return;
+    }
+    console.log('current branch');
+    console.log(currentBranch);
+    console.log('current active versions');
+    console.log(activeVersions[project]);
+    if (activeVersions[project] !== currentBranch.gitBranchName) {
+      const newState = {};
+      newState[project] = currentBranch.gitBranchName;
+      console.log('update version context');
+      console.log(newState);
+      setActiveVersions(newState);
+    }
+  }, [activeVersions, availableVersions, currentUrlSlug, findBranchByAlias, project, setActiveVersions]);
 
   return (
     <>
-      {versions.length > 0 && (
-        <>
-          <Label>Specify your version</Label>
-          <Select choices={buildChoices(versions)} value={activeVersions[project]} onChange={updateSelection}></Select>
-        </>
-      )}
+      {process.env.GATSBY_TEST_EMBED_VERSIONS &&
+        showVersionDropdown &&
+        availableVersions[project] &&
+        availableVersions[project].length > 0 && (
+          <>
+            <Label>Specify your version</Label>
+            <Select
+              css={css`
+                width: 100%;
+
+                @media ${screenSize.smallAndUp} {
+                  /* Min width of right panel */
+                  max-width: 180px;
+                }
+              `}
+              choices={buildChoices(availableVersions[project])}
+              value={activeVersions[project]}
+              onChange={onSelectChange}
+            ></Select>
+          </>
+        )}
     </>
   );
 };

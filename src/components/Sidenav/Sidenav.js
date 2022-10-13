@@ -26,6 +26,7 @@ import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
+import { VersionContext } from '../../context/version-context';
 
 const SIDENAV_WIDTH = 268;
 
@@ -153,18 +154,7 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({
-  chapters,
-  guides,
-  page,
-  pageTitle,
-  repoBranches,
-  siteTitle,
-  slug,
-  toctree,
-  eol,
-  isAssociatedProduct,
-}) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree, eol }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
@@ -175,7 +165,9 @@ const Sidenav = ({
   const topValues = useStickyTopValues(eol);
 
   let showVersions = repoBranches?.branches?.length > 1;
-  if (process.env.GATSBY_TEST_EMBED_VERSIONS && isAssociatedProduct) {
+
+  const { showVersionDropdown } = useContext(VersionContext);
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS && showVersionDropdown) {
     showVersions = false;
   }
 

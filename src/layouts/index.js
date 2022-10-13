@@ -93,6 +93,7 @@ const DefaultLayout = ({
         associatedReposInfo={associatedReposInfo}
         headingNodes={page?.options?.headings}
         selectors={page?.options?.selectors}
+        isAssociatedProduct={isAssociatedProduct}
       >
         <GlobalGrid>
           <Header sidenav={sidenav} eol={eol} />
@@ -108,7 +109,6 @@ const DefaultLayout = ({
               slug={slug}
               toctree={toctree}
               eol={eol}
-              isAssociatedProduct={isAssociatedProduct}
             />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>

@@ -1,8 +1,8 @@
 import React, { createContext, useReducer, useEffect, useState } from 'react';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { fetchDocument } from '../utils/realm';
-import { BRANCHES_COLLECTION } from '../build-constants';
+import { fetchDocument, fetchDocuments } from '../utils/realm';
+import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
 
 // begin helper functions
 const STORAGE_KEY = 'activeVersions';
@@ -66,6 +66,18 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo) => {
     return versions;
   }
 };
+
+const getUmbrellaProject = async (project, dbName) => {
+  try {
+    const query = {
+      'associated_products.name': project,
+    };
+    const umbrellaProjects = fetchDocuments(dbName, METADATA_COLLECTION, query);
+    return umbrellaProjects;
+  } catch (e) {
+    console.error(e);
+  }
+};
 // end helper functions
 
 const VersionContext = createContext({
@@ -73,9 +85,10 @@ const VersionContext = createContext({
   // active version for each product is marked is {[product name]: active version} pair
   setActiveVersions: () => {},
   availableVersions: {},
+  showVersionDropdown: false,
 });
 
-const VersionContextProvider = ({ repoBranches, associatedReposInfo, children }) => {
+const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, children }) => {
   const metadata = useSiteMetadata();
 
   // tracks active versions across app
@@ -100,8 +113,19 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, children })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [showVersionDropdown, setShowVersionDropdown] = useState(isAssociatedProduct);
+  useEffect(() => {
+    if (!availableVersions) {
+      return;
+    }
+
+    getUmbrellaProject(metadata.project, metadata.database).then((metadataList) => {
+      setShowVersionDropdown(metadataList.length > 0);
+    });
+  }, [availableVersions, metadata.project, metadata.database]);
+
   return (
-    <VersionContext.Provider value={{ activeVersions, setActiveVersions, availableVersions }}>
+    <VersionContext.Provider value={{ activeVersions, setActiveVersions, availableVersions, showVersionDropdown }}>
       {children}
     </VersionContext.Provider>
   );
