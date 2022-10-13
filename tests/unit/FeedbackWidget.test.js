@@ -103,7 +103,7 @@ describe('FeedbackWidget', () => {
     it('is hidden on small/mobile and medium/tablet screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('left', '20px', {
+      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('margin-left', '20px', {
         media: `${theme.screenSize.upToSmall}`,
       });
     });

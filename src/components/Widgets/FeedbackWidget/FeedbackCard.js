@@ -1,21 +1,24 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
 import { feedbackId } from '../FeedbackWidget/FeedbackForm';
-
-const feedbackStyle = css`
-  z-index: 14;
-`;
+import { theme } from '../../../../src/theme/docsTheme';
 
 const FloatingContainer = styled.div`
   position: fixed;
-  bottom: 40px;
+  z-index: 14;
   right: 16px;
-  z-index: 20;
+
+  @media ${theme.screenSize.upToLarge} {
+    top: 40%;
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    bottom: 40px;
+  }
 `;
 
 const Card = styled(LeafygreenCard)`
@@ -41,7 +44,7 @@ const FeedbackCard = ({ isOpen, children }) => {
 
   return (
     isOpen && (
-      <FloatingContainer id={feedbackId} css={feedbackStyle}>
+      <FloatingContainer id={feedbackId}>
         <Card>
           <CardHeader>
             <ProgressBar />

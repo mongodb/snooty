@@ -30,9 +30,9 @@ const StyledSentimentOption = styled.h4(
   align-self: stretch;
   text-align: left;
   color: ${palette.gray.dark1} !important;
-  margin: 0px ${props.isTabletOrMobile ? '-56px' : '-25px'} !important;
+  margin: 0px ${props.isMobile ? '-56px' : '-25px'} !important;
   margin-bottom: 8px;
-  padding: 16px ${props.isTabletOrMobile ? '56px' : '32px'} !important;
+  padding: 16px ${props.isMobile ? '56px' : '32px'} !important;
   cursor: pointer;
   :hover {
     background-color: ${palette.gray.light2};
@@ -42,11 +42,11 @@ const StyledSentimentOption = styled.h4(
 
 const SentimentOption = ({ path }) => {
   const { setSentiment } = useFeedbackContext();
-  const { isTabletOrMobile } = useScreenSize();
+  const { isMobile } = useScreenSize();
 
   return (
     <StyledSentiment>
-      <StyledSentimentOption isTabletOrMobile={isTabletOrMobile} onClick={() => setSentiment(path.sentiment)}>
+      <StyledSentimentOption isMobile={isMobile} onClick={() => setSentiment(path.sentiment)}>
         <Emoji sentiment={path.sentiment} />
         {path.copy}
       </StyledSentimentOption>

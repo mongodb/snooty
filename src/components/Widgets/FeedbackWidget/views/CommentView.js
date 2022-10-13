@@ -68,9 +68,9 @@ const StyledEmailInput = styled(TextInput)`
   }
 `;
 
-// responsive width for mobile and tablet views
-const widthStyling = (isMobile, isTabletOrMobile, currWindowWidth) => LeafyCSS`
-  width: ${isMobile ? Math.max(currWindowWidth - 32, 280) : isTabletOrMobile ? '368' : '202'}px !important;
+// responsive width for mobile view
+const widthStyling = (isMobile, currWindowWidth) => LeafyCSS`
+  width: ${isMobile ? Math.max(currWindowWidth - 32, 280) : '202'}px !important;
 `;
 
 const useValidation = (inputValue, validator) => {
@@ -97,7 +97,7 @@ const CommentView = () => {
   const isValidEmail = useValidation(email, validateEmail);
   const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
-  const { isMobile, isTabletOrMobile } = useScreenSize();
+  const { isMobile } = useScreenSize();
   const currWindowWidth = window.innerWidth;
 
   const handleSubmit = async () => {
@@ -117,7 +117,7 @@ const CommentView = () => {
     <Layout>
       <CommentHeader />
       <StyledCommentInput
-        className={cx(widthStyling(isMobile, isTabletOrMobile, currWindowWidth))}
+        className={cx(widthStyling(isMobile, currWindowWidth))}
         type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
@@ -127,7 +127,7 @@ const CommentView = () => {
         onChange={(e) => setComment(e.target.value)}
       />
       <StyledEmailInput
-        className={cx(FooterMargin({ hasEmailError }), widthStyling(isMobile, isTabletOrMobile, currWindowWidth))}
+        className={cx(FooterMargin({ hasEmailError }), widthStyling(isMobile, currWindowWidth))}
         type="email"
         id="feedback-email"
         aria-labelledby="Email Text Box"
@@ -138,11 +138,11 @@ const CommentView = () => {
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
       />
-      <Footer className={cx(widthStyling(isMobile, isTabletOrMobile, currWindowWidth))}>
+      <Footer className={cx(widthStyling(isMobile, currWindowWidth))}>
         <SubmitButton onClick={() => handleSubmit()} type="submit">
           {'Send'}
         </SubmitButton>
-        {!isTabletOrMobile && <ScreenshotButton />}
+        {!isMobile && <ScreenshotButton />}
       </Footer>
     </Layout>
   );
