@@ -6,15 +6,18 @@ import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 import { NavigationProvider } from '../context/navigation-context';
 import { VersionContextProvider } from '../context/version-context';
+import { TocContextProvider } from '../context/toc-context';
 
 const RootProvider = ({ children, headingNodes, selectors, repoBranches, associatedReposInfo }) => (
   <TabProvider selectors={selectors}>
     <ContentsProvider headingNodes={headingNodes}>
       <HeaderContextProvider>
         <VersionContextProvider repoBranches={repoBranches} associatedReposInfo={associatedReposInfo}>
-          <NavigationProvider>
-            <SidenavContextProvider>{children}</SidenavContextProvider>
-          </NavigationProvider>
+          <TocContextProvider>
+            <NavigationProvider>
+              <SidenavContextProvider>{children}</SidenavContextProvider>
+            </NavigationProvider>
+          </TocContextProvider>
         </VersionContextProvider>
       </HeaderContextProvider>
     </ContentsProvider>

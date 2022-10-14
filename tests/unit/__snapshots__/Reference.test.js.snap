@@ -54,6 +54,16 @@ exports[`renders correctly 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-3 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-3 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -74,7 +84,7 @@ exports[`renders correctly 1`] = `
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2"
+      class="emotion-2 emotion-3"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"

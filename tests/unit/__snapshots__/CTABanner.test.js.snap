@@ -80,10 +80,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   color: #007CAD;
 }
 
-.emotion-3 {
-  color: #007CAD;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -155,6 +151,16 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-11 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-11 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -211,7 +217,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-10"
+          class="emotion-10 emotion-11"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -312,10 +318,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   color: #007CAD;
 }
 
-.emotion-3 {
-  color: #007CAD;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -387,6 +389,16 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-11 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-11 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -445,7 +457,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-10"
+          class="emotion-10 emotion-11"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -546,10 +558,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   color: #007CAD;
 }
 
-.emotion-3 {
-  color: #007CAD;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -621,6 +629,16 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-11 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-11 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -677,7 +695,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-10"
+          class="emotion-10 emotion-11"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -778,10 +796,6 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   color: #007CAD;
 }
 
-.emotion-3 {
-  color: #007CAD;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -853,6 +867,16 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.emotion-11 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-11 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -909,7 +933,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-10"
+          class="emotion-10 emotion-11"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"

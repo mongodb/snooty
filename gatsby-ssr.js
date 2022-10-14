@@ -7,7 +7,6 @@ import { theme } from './src/theme/docsTheme';
 
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
-    // Optimizely
     // GTM Pathway
     <script
       type="text/javascript"
@@ -15,7 +14,8 @@ export const onRenderBody = ({ setHeadComponents }) => {
         __html: `!function(e,n){var t=document.createElement("script"),o=null,x="pathway";t.async=!0,t.src='https://'+x+'.mongodb.com/'+(e?x+'-debug.js':''),document.head.append(t),t.addEventListener("load",function(){o=window.pathway.default,(n&&o.configure(n)),o.createProfile("mongodbcom").load(),window.segment=o})}();`,
       }}
     />,
-    <script src="https://cdn.optimizely.com/js/20988630008.js" />,
+    // Optimizely
+    <script async src="https://cdn.optimizely.com/js/20988630008.js" />,
     // Delighted
     <script
       type="text/javascript"
