@@ -11,6 +11,7 @@ import queryString from 'query-string';
 import MobileFilters from './MobileFilters';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from '../Searchbar/SearchContext';
@@ -345,6 +346,9 @@ const SearchResults = () => {
                   {searchResults.map(({ title, preview, url, searchProperty }, index) => (
                     <StyledSearchResult
                       key={`${url}${index}`}
+                      onClick={() =>
+                        reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                      }
                       title={title}
                       preview={preview}
                       url={url}

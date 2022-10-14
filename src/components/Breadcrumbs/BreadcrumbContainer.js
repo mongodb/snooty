@@ -7,6 +7,7 @@ import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -47,7 +48,17 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
         return (
           <React.Fragment key={title}>
             {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
-            <StyledLink to={url}>{formatText(title)}</StyledLink>
+            <StyledLink
+              to={url}
+              onClick={() => {
+                reportAnalytics('BreadcrumbClick', {
+                  parentPaths: breadcrumbs,
+                  breadcrumbClicked: url,
+                });
+              }}
+            >
+              {formatText(title)}
+            </StyledLink>
           </React.Fragment>
         );
       })}

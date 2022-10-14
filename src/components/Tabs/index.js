@@ -6,6 +6,7 @@ import { TabContext } from './tab-context';
 import { CodeProvider } from '../Code/code-context';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 
@@ -116,6 +117,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       setActiveTab({
         name: tabsetName,
         value: tabId,
+      });
+      reportAnalytics('Tab Selected', {
+        tabId,
+        tabSet: tabsetName,
       });
 
       // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render
