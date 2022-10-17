@@ -6,8 +6,8 @@ import { css } from '@emotion/react';
 import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { formatText } from '../../utils/format-text';
-import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
