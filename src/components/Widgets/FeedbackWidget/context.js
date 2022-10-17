@@ -7,7 +7,6 @@ import {
   useStitchUser,
   addAttachment,
 } from './stitch';
-import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
 
 const FeedbackContext = React.createContext();
@@ -20,7 +19,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
   // Create a new feedback document
   async function initializeFeedback(nextView = 'rating') {
-    const segment = getSegmentUserId();
     const newFeedback = {
       page: {
         title: page.title,
@@ -31,8 +29,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       },
       user: {
         stitch_id: user && user.id,
-        segment_id: segment.id,
-        isAnonymous: segment.isAnonymous,
       },
       viewport: getViewport(),
       ...test.feedback,
