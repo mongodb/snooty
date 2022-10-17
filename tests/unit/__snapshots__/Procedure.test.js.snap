@@ -2,7 +2,11 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  @media only screen and (max-width: 1023px) {
+  .emotion-0 {
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 1023px) {
   .emotion-0 {
     padding-bottom: 32px;
   }
@@ -23,19 +27,10 @@ exports[`renders correctly 1`] = `
   gap: 33px;
 }
 
-.emotion-2:first-of-type {
-  margin-top: 16px;
-}
-
 .emotion-2 h2,
 .emotion-2 h3,
 .emotion-2 h4 {
-  margin-top: 0px;
-}
-
-.emotion-2:last-of-type h3,
-.emotion-2:last-of-type h4 {
-  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 .emotion-2:not(:last-child):after {
@@ -109,10 +104,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-15 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -225,7 +216,11 @@ exports[`renders correctly 1`] = `
 
 exports[`renders steps nested in include nodes 1`] = `
 <DocumentFragment>
-  @media only screen and (max-width: 1023px) {
+  .emotion-0 {
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 1023px) {
   .emotion-0 {
     padding-bottom: 32px;
   }
@@ -246,19 +241,10 @@ exports[`renders steps nested in include nodes 1`] = `
   gap: 33px;
 }
 
-.emotion-2:first-of-type {
-  margin-top: 16px;
-}
-
 .emotion-2 h2,
 .emotion-2 h3,
 .emotion-2 h4 {
-  margin-top: 0px;
-}
-
-.emotion-2:last-of-type h3,
-.emotion-2:last-of-type h4 {
-  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 .emotion-2:not(:last-child):after {
@@ -686,7 +672,11 @@ exports[`renders steps nested in include nodes 1`] = `
 
 exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
-  .emotion-2 {
+  .emotion-0 {
+  margin-top: 16px;
+}
+
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -694,19 +684,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   gap: 16px;
 }
 
-.emotion-2:first-of-type {
-  margin-top: 16px;
-}
-
 .emotion-2 h2,
 .emotion-2 h3,
 .emotion-2 h4 {
-  margin-top: 0px;
-}
-
-.emotion-2:last-of-type h3,
-.emotion-2:last-of-type h4 {
-  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 .emotion-4 {
@@ -754,10 +735,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-15 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;

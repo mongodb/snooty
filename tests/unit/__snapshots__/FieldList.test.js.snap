@@ -25,6 +25,10 @@ exports[`renders correctly 1`] = `
   display: inline;
 }
 
+a .emotion-3 {
+  color: inherit;
+}
+
 .emotion-5 {
   font-size: 13px;
   line-height: 20px;
