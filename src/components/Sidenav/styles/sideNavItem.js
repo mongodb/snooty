@@ -8,7 +8,7 @@ export const sideNavItemBasePadding = css`
   padding-bottom: ${theme.size.small};
 `;
 
-export const sideNavItemTOCStyling = ({ level = 1 }) => css`
+export const sideNavItemTOCStyling = ({ level = 1, hasVersions }) => css`
   padding-bottom: ${theme.size.small};
   padding-left: calc(${theme.size.tiny} + (${level} * ${theme.size.default}));
   padding-right: ${theme.size.medium};
@@ -17,6 +17,7 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   align-items: flex-start;
   font-size: ${theme.fontSize.small};
   line-height: 20px !important;
+  ${hasVersions && `border-radius: 0;`}
 `;
 
 export const sideNavItemFontSize = css`

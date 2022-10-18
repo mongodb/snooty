@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
+import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
@@ -11,6 +12,7 @@ import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import SyncCloud from '../SyncCloud';
+import VersionSelector from './VersionSelector';
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
@@ -22,6 +24,27 @@ const caretStyle = LeafyCSS`
   min-width: 16px;
 `;
 
+const wrapperStyle = LeafyCSS`
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: ${palette.gray.light2}
+  }
+
+  > li {
+    flex: 1 1 auto;
+  }
+`;
+/**
+ *
+ * @param {hasVersions} boolean
+ * @returns Wrapper for Version Selector, or returns children
+ */
+const Wrapper = ({ children, hasVersions }) => {
+  return hasVersions ? <Box className={cx(wrapperStyle)}>{children}</Box> : <>{children}</>;
+};
+
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
@@ -30,6 +53,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
   const hasChildren = !!children.length;
+  const hasVersions = !!(options?.versions?.length > 1); // in the event there is only one version, do we show version selector?
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
@@ -76,20 +100,31 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       );
     }
     return (
-      <SideNavItem
-        as={Link}
-        to={target}
-        active={isSelected}
-        className={cx(sideNavItemTOCStyling({ level, isActive }))}
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
-        {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />}
-        {isTocIcon && <SyncCloud />}
-        {formattedTitle}
-      </SideNavItem>
+      <Wrapper hasVersions={hasVersions}>
+        <SideNavItem
+          as={Link}
+          to={target}
+          active={isSelected}
+          className={cx(sideNavItemTOCStyling({ level, isActive }))}
+          onClick={(e) => {
+            console.log(e);
+            setIsOpen(!isOpen);
+          }}
+        >
+          {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />}
+          {isTocIcon && <SyncCloud />}
+          {formattedTitle}
+        </SideNavItem>
+        {hasVersions && <VersionSelector versionedProject={options.project} />}
+        {hasVersions && <>O</>}
+      </Wrapper>
     );
+
+    // TODO: clean above up. if hasVersions, lets contain link within sidenavitem and have it be
+    // <li>
+    //   <a></a>
+    //   <versionselector
+    // </li>
   };
 
   return (

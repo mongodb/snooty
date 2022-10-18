@@ -41,7 +41,7 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
       let targetVersion = currentVersion[nodeProject];
       // if current version is not part of merged ToC, fallback to last
       if (!targetVersion || !tocNode.options.versions.includes(targetVersion)) {
-        targetVersion = tocNode.options.versions[tocNode.options.version.length - 1];
+        targetVersion = tocNode.options.versions[tocNode.options.versions.length - 1];
       }
       tocNode.children = tocNode.children?.filter(
         (versionedChild) => versionedChild.options?.version === targetVersion
@@ -79,6 +79,10 @@ const TocContextProvider = ({ children }) => {
   const { toctree } = useSnootyMetadata();
   const { database, project, parserUser, parserBranch } = useSiteMetadata();
   const [activeToc, setActiveToc] = useState({});
+
+  // TODO: separate into two functions:
+  // on init, fetch toc metadata and set local scope ToCTree
+  // on change of activeVersions, update activeToCTree. memoized version
 
   useEffect(() => {
     getTocMetadata(database, project, parserUser, parserBranch, toctree).then((toctreeResponse) => {
