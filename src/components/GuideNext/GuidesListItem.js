@@ -56,11 +56,11 @@ const GuideTitle = styled(Link)`
 
 const STATUSES = {
   next: {
-    circleColor: palette.green.base,
+    circleColor: palette.green.dark1,
     icon: (
       <IconLightningBolt
         css={css`
-          color: ${palette.green.base};
+          color: ${palette.green.dark1};
         `}
       />
     ),
@@ -68,8 +68,8 @@ const STATUSES = {
   },
   read: {
     circleColor: 'transparent',
-    icon: <Icon glyph="Checkmark" fill={palette.green.base} />,
-    lineColor: palette.green.base,
+    icon: <Icon glyph="Checkmark" fill={palette.green.dark1} />,
+    lineColor: palette.green.dark1,
   },
   unread: {
     circleColor: 'transparent',

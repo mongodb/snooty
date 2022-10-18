@@ -7,7 +7,7 @@ import { theme } from '../../theme/docsTheme';
 const Label = styled('div')`
   background-color: ${palette.green.light3};
   border-radius: ${theme.size.tiny};
-  color: ${palette.green.base};
+  color: ${palette.black};
   font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: ${theme.size.medium};
