@@ -32,8 +32,7 @@ const Wrapper = styled('main')`
     max-width: 100%;
   }
 
-  section p,
-  section ul {
+  section p {
     grid-column: 2;
     max-width: 500px;
   }
@@ -45,6 +44,11 @@ const Wrapper = styled('main')`
     section > p {
       grid-column: 2/-2;
       max-width: 775px;
+    }
+
+    section ul  {
+      grid-column: 2;
+      max-width: 500px;
     }
   `}
 
