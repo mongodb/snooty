@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
@@ -9,11 +9,9 @@ import SearchDropdown from './SearchDropdown';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
-import { reportAnalytics } from '../../utils/report-analytics';
 
 const BUTTON_SIZE = theme.size.medium;
 const NUMBER_SEARCH_RESULTS = 9;
-const REPORT_SEARCH_DELAY_TIME = 1000;
 const SEARCH_DELAY_TIME = 200;
 const SEARCHBAR_DESKTOP_WIDTH = '372px';
 const SEARCHBAR_HEIGHT = '36px';
@@ -39,7 +37,7 @@ const SearchbarContainer = styled.div(
     :focus,
     :focus-within {
       ${MagnifyingGlass} {
-        color: ${uiColors.gray.dark3};
+        color: ${palette.gray.dark3};
       }
     }
 
@@ -67,7 +65,6 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   // Use a second search filter state var to track filters but not make any calls yet
   const [draftSearchFilter, setDraftSearchFilter] = useState(defaultSearchFilter);
   const [searchEvent, setSearchEvent] = useState(null);
-  const [reportEvent, setReportEvent] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
   const searchContainerRef = useRef(null);
@@ -79,23 +76,17 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   // Focus Handlers
   const onExpand = useCallback(() => setIsExpanded(true), [setIsExpanded]);
   const onFocus = useCallback(() => {
-    if (!isFocused) {
-      reportAnalytics('SearchFocus', {});
-    }
     setIsFocused(true);
-  }, [isFocused]);
+  }, []);
   // Remove focus and close searchbar if it disrupts the navbar
   const onBlur = useCallback(() => {
     // Since this is tied to a document click off event, we want to be sure this is
     // really a blur and not just clicking outside of the searchbar
-    if (isFocused) {
-      reportAnalytics('SearchBlur', { query: value });
-    }
     setIsFocused(false);
     // The parent controls whether a searchbar is expanded by default, so this may
     // have no effect where the searchbar should always be open
     setIsExpanded(false);
-  }, [isFocused, setIsExpanded, value]);
+  }, [setIsExpanded]);
   // Close the dropdown and remove focus when clicked outside
   useClickOutside(searchContainerRef, onBlur);
   const onClose = useCallback(() => setIsExpanded(false), [setIsExpanded]);
@@ -105,11 +96,10 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
       setIsFocused(true);
       // Debounce any queued search event since the query has changed
       clearTimeout(searchEvent);
-      clearTimeout(reportEvent);
       setValue(searchTerm);
       // The below useEffect will then run to query a new search since `value` was updated
     },
-    [reportEvent, searchEvent]
+    [searchEvent]
   );
 
   // Update state on a new search query or filters
@@ -119,17 +109,12 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
     setSearchResults(getResultsFromJSON(resultJson, NUMBER_SEARCH_RESULTS));
   }, [getResultsFromJSON, searchFilter, searchParamsToURL, value]);
 
-  const reportSearchEvent = useCallback(() => {
-    reportAnalytics('SearchQuery', { query: value });
-  }, [value]);
-
   useEffect(() => {
     if (value) {
       // Set a timeout to trigger the search to avoid over-requesting
       setSearchEvent(setTimeout(fetchNewSearchResults, SEARCH_DELAY_TIME));
-      setReportEvent(setTimeout(reportSearchEvent, REPORT_SEARCH_DELAY_TIME));
     }
-  }, [fetchNewSearchResults, reportSearchEvent, value]);
+  }, [fetchNewSearchResults, value]);
 
   return (
     <SearchbarContainer isExpanded={isExpanded} isSearching={isSearching} onFocus={onFocus} ref={searchContainerRef}>

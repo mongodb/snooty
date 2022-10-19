@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchResult from './SearchResult';
-import { reportAnalytics } from '../../utils/report-analytics';
 
 const SEARCHBAR_HEIGHT = '36px';
 const SEARCH_RESULT_HEIGHT = '102px';
@@ -65,7 +64,6 @@ const StyledSearchResult = styled(SearchResult)`
 const SearchResults = ({ currentPage, totalResultsCount, visibleResults, ...props }) => {
   const hasResults = useMemo(() => !!totalResultsCount, [totalResultsCount]);
   const { isMobile } = useScreenSize();
-  const getRankFromPage = useCallback((index) => (currentPage - 1) * index + 1, [currentPage]);
   return (
     <SearchResultsContainer hasResults={hasResults} {...props}>
       <StyledResultText>
@@ -76,13 +74,6 @@ const SearchResults = ({ currentPage, totalResultsCount, visibleResults, ...prop
           <StyledSearchResult
             // Have to use index because multiple results can show with same url
             key={`${url}${index}`}
-            onClick={() =>
-              reportAnalytics('SearchSelection', {
-                areaFrom: 'Searchbar',
-                rank: getRankFromPage(index),
-                selectionUrl: url,
-              })
-            }
             learnMoreLink={isMobile}
             title={title}
             preview={preview}

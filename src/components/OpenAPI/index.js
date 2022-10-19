@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { RedocStandalone } from 'redoc';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 import { SidenavBackButton } from '../Sidenav';
 import Spinner from '../Spinner';
@@ -24,11 +24,11 @@ import { fetchOASFile } from '../../utils/realm';
 const badgeBorderRadius = '50px';
 const badgeBorderType = '1px solid';
 const codeFontFamily = 'Source Code Pro';
-const inlineCodeBackgroundColor = uiColors.gray.light3;
-const inlineCodeBorderColor = uiColors.gray.light1;
+const inlineCodeBackgroundColor = palette.gray.light3;
+const inlineCodeBorderColor = palette.gray.light1;
 const menuContentClass = 'menu-content';
 const menuTitleContainerClass = 'menu-title-container';
-const schemaDataTypeColor = uiColors.blue.dark3;
+const schemaDataTypeColor = palette.blue.dark3;
 const textFontFamily = 'Akzidenz';
 
 const codeBlockCss = css`
@@ -39,12 +39,12 @@ const codeBlockCss = css`
 
   // Code block divs
   div.hoverable {
-    color: ${uiColors.white};
+    color: ${palette.white};
   }
 
   // Highlight syntax in code blocks
   span.ellipsis:after {
-    color: ${uiColors.white};
+    color: ${palette.white};
   }
   span.token.boolean {
     color: #e06c75 !important;
@@ -56,7 +56,7 @@ const codeBlockCss = css`
     color: #61aeee !important;
   }
   span.token.punctuation {
-    color: ${uiColors.white};
+    color: ${palette.white};
   }
   span.token.string:not(.property) {
     color: #98c379 !important;
@@ -76,10 +76,10 @@ const inlineCodeCss = css`
 const leftSidebarCss = css`
   label[role='menuitem'] {
     :hover {
-      background-color: ${uiColors.gray.light2};
+      background-color: ${palette.gray.light2};
     }
     &.active {
-      background-color: ${uiColors.green.light3};
+      background-color: ${palette.green.light3};
     }
   }
 `;
@@ -87,7 +87,7 @@ const leftSidebarCss = css`
 const rightSidebarCss = css`
   ul.react-tabs__tab-list {
     li[role='tab'] {
-      background-color: ${uiColors.gray.dark2};
+      background-color: ${palette.gray.dark2};
       border: unset;
     }
   }
@@ -118,21 +118,21 @@ const schemaDataTypesCss = css`
 
 const spanHttpCss = css`
   span.get {
-    border: ${badgeBorderType} ${uiColors.blue.light2};
-    color: ${uiColors.blue.dark2};
+    border: ${badgeBorderType} ${palette.blue.light2};
+    color: ${palette.blue.dark2};
   }
   span.post {
-    border: ${badgeBorderType} ${uiColors.green.light2};
-    color: ${uiColors.green.dark2};
+    border: ${badgeBorderType} ${palette.green.light2};
+    color: ${palette.green.dark2};
   }
   span.patch,
   span.put {
-    border: ${badgeBorderType} ${uiColors.yellow.light2};
-    color: ${uiColors.yellow.dark2};
+    border: ${badgeBorderType} ${palette.yellow.light2};
+    color: ${palette.yellow.dark2};
   }
   span.delete {
-    border: ${badgeBorderType} ${uiColors.red.light2};
-    color: ${uiColors.red.dark2};
+    border: ${badgeBorderType} ${palette.red.light2};
+    color: ${palette.red.dark2};
   }
 
   // Left sidebar badges
@@ -165,7 +165,7 @@ const getGlobalCss = ({ topLarge, topMedium }) => css`
 
   // "deprecated" badge
   span[type='warning'] {
-    border: ${badgeBorderType} ${uiColors.yellow.light2};
+    border: ${badgeBorderType} ${palette.yellow.light2};
     border-radius: ${badgeBorderRadius};
   }
 
@@ -190,7 +190,7 @@ const getGlobalCss = ({ topLarge, topMedium }) => css`
 
         :hover,
         :focus {
-          color: ${uiColors.gray.dark3};
+          color: ${palette.gray.dark3};
           text-decoration: none;
         }
 
@@ -209,7 +209,7 @@ const getGlobalCss = ({ topLarge, topMedium }) => css`
 
 const Border = styled('hr')`
   border: unset;
-  border-bottom: 1px solid ${uiColors.gray.light2};
+  border-bottom: 1px solid ${palette.gray.light2};
   margin: ${theme.size.default} 0;
   width: 100%;
 `;
@@ -227,7 +227,7 @@ const LoadingMessage = styled('div')`
 `;
 
 const MenuTitle = styled('div')`
-  color: ${uiColors.gray.dark3};
+  color: ${palette.gray.dark3};
   font-size: ${theme.fontSize.default};
   font-weight: bold;
   line-height: 20px;
@@ -341,53 +341,53 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 large: '1200px',
               },
               codeBlock: {
-                backgroundColor: uiColors.black,
+                backgroundColor: palette.black,
               },
               colors: {
                 error: {
-                  main: uiColors.red.dark1,
+                  main: palette.red.dark1,
                 },
                 // Only applies to background color; color and border color touched by css
                 http: {
-                  get: uiColors.blue.light3,
-                  post: uiColors.green.light3,
-                  put: uiColors.yellow.light3,
-                  patch: uiColors.yellow.light3,
-                  delete: uiColors.red.light3,
+                  get: palette.blue.light3,
+                  post: palette.green.light3,
+                  put: palette.yellow.light3,
+                  patch: palette.yellow.light3,
+                  delete: palette.red.light3,
                 },
                 primary: {
-                  main: uiColors.gray.dark3,
+                  main: palette.gray.dark3,
                 },
                 responses: {
                   success: {
-                    color: uiColors.green.dark1,
-                    backgroundColor: uiColors.green.light3,
-                    tabTextColor: uiColors.green.base,
+                    color: palette.green.dark1,
+                    backgroundColor: palette.green.light3,
+                    tabTextColor: palette.green.base,
                   },
                   error: {
-                    color: uiColors.red.dark1,
-                    backgroundColor: uiColors.red.light3,
-                    tabTextColor: uiColors.red.base,
+                    color: palette.red.dark1,
+                    backgroundColor: palette.red.light3,
+                    tabTextColor: palette.red.base,
                   },
                 },
                 text: {
-                  primary: uiColors.gray.dark3,
+                  primary: palette.gray.dark3,
                 },
                 warning: {
-                  main: uiColors.yellow.light3,
-                  contrastText: uiColors.yellow.dark2,
+                  main: palette.yellow.light3,
+                  contrastText: palette.yellow.dark2,
                 },
               },
               rightPanel: {
-                backgroundColor: uiColors.gray.dark3,
+                backgroundColor: palette.gray.dark3,
               },
               schema: {
-                requireLabelColor: uiColors.red.base,
+                requireLabelColor: palette.red.base,
               },
               sidebar: {
-                activeTextColor: `${uiColors.green.dark3} !important`,
-                backgroundColor: uiColors.gray.light3,
-                textColor: uiColors.gray.dark3,
+                activeTextColor: `${palette.green.dark3} !important`,
+                backgroundColor: palette.gray.light3,
+                textColor: palette.gray.dark3,
                 width: '268px',
               },
               spacing: {
@@ -402,14 +402,14 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 },
                 code: {
                   backgroundColor: inlineCodeBackgroundColor,
-                  color: uiColors.black,
+                  color: palette.black,
                   fontFamily: codeFontFamily,
                   fontSize: theme.fontSize.small,
                 },
                 links: {
-                  color: uiColors.blue.base,
-                  hover: uiColors.blue.dark2,
-                  visited: uiColors.blue.base,
+                  color: palette.blue.base,
+                  hover: palette.blue.dark2,
+                  visited: palette.blue.base,
                 },
               },
             },

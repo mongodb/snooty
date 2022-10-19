@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { css } from '@emotion/react';
 import { getNestedValue } from '../utils/get-nested-value';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 
 const Image = ({ nodeData, handleImageLoaded, className }) => {
   const [height, setHeight] = useState(null);
@@ -44,7 +44,7 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
 
   const hasBorder = getNestedValue(['options', 'border'], nodeData);
   const borderStyling = css`
-    border: 0.5px solid ${uiColors.gray.light1};
+    border: 0.5px solid ${palette.gray.light1};
     width: 100%;
     border-radius: 4px;
   `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Card from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
 import GuidesList from './GuidesList';
@@ -40,7 +40,7 @@ const StyledChapterNumberLabel = styled(ChapterNumberLabel)`
 `;
 
 const ChapterTitle = styled('div')`
-  color: ${uiColors.black};
+  color: ${palette.black};
   font-weight: bold;
 `;
 

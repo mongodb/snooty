@@ -3,7 +3,7 @@ import { withPrefix } from 'gatsby';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Footer from '../components/Footer';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
@@ -17,7 +17,7 @@ const ErrorBox = styled('div')`
 `;
 
 const SupportLink = styled('a')`
-  color: ${uiColors.gray.dark2};
+  color: ${palette.gray.dark2};
   display: inline-block;
   font-family: Akzidenz;
   font-size: ${theme.fontSize.default};
@@ -26,7 +26,7 @@ const SupportLink = styled('a')`
   margin-left: ${theme.size.medium};
 
   :hover {
-    color: ${uiColors.gray.dark2};
+    color: ${palette.gray.dark2};
   }
 
   @media ${theme.screenSize.upToSmall} {

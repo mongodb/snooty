@@ -1,15 +1,15 @@
 import React, { useCallback, useContext } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { SidenavContext } from './sidenav-context';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
 
 const Container = styled('div')`
   align-items: center;
-  background-color: ${uiColors.gray.light3};
-  border-bottom: 1px solid ${uiColors.gray.light2};
+  background-color: ${palette.gray.light3};
+  border-bottom: 1px solid ${palette.gray.light2};
   display: flex;
   height: ${theme.header.docsMobileMenuHeight};
   justify-content: space-between;
@@ -19,7 +19,7 @@ const Container = styled('div')`
 `;
 
 const Text = styled('div')`
-  color: ${uiColors.black};
+  color: ${palette.black};
   margin-left: ${theme.size.large};
 `;
 

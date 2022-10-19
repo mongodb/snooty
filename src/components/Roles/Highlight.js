@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 
 const colorMap = {
-  'highlight-blue': uiColors.blue.light3,
-  'highlight-green': uiColors.green.light3,
-  'highlight-red': uiColors.red.light3,
-  'highlight-yellow': uiColors.yellow.light3,
+  'highlight-blue': palette.blue.light3,
+  'highlight-green': palette.green.light3,
+  'highlight-red': palette.red.light3,
+  'highlight-yellow': palette.yellow.light3,
 };
 
 const Highlight = ({ nodeData: { children, name } }) => (
