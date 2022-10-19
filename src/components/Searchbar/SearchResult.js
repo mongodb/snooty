@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useRef } from 'react';
 import sanitizeHtml from 'sanitize-html';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import SearchContext from './SearchContext';
@@ -13,7 +13,7 @@ const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const SEARCH_MATCH_STYLE = `background-color: ${uiColors.yellow.light2};`;
+const SEARCH_MATCH_STYLE = `background-color: ${palette.yellow.light2};`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
@@ -118,7 +118,7 @@ const sanitizePreviewHtml = (text) =>
   sanitizeHtml(text, {
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
-    allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
+    allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
   });
 
 const SearchResult = React.memo(

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { Layout, RatingHeader, Footer } from '../components/view-components';
 import { useFeedbackState } from '../context';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import validateEmail from '../../../../utils/validate-email';
 // import ScreenshotButton from '../components/ScreenshotButton';
 import Loadable from '@loadable/component';
@@ -69,7 +69,7 @@ export default function CommentView({ ...props }) {
 const SubmitButton = styled(Button)``;
 const InputStyle = css`
   padding: 14px;
-  border: 0.5px solid ${uiColors.gray.base};
+  border: 0.5px solid ${palette.gray.base};
   border-radius: 2px;
   flex-grow: 1;
   line-height: 24px;

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
@@ -8,7 +8,7 @@ import { ReadGuidesContextProvider } from './read-guides-context';
 import { theme } from '../../theme/docsTheme';
 
 const Container = styled('div')`
-  border-top: 1px solid ${uiColors.gray.light2};
+  border-top: 1px solid ${palette.gray.light2};
   margin-bottom: 24px;
   padding-top: 56px;
 

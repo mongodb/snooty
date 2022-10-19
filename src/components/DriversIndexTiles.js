@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
@@ -111,12 +111,12 @@ const StyledCard = styled(LeafyGreenCard)`
   flex-direction: row;
   padding: ${theme.size.default};
   align-items: center;
-  border: 1px solid ${uiColors.gray.light2};
+  border: 1px solid ${palette.gray.light2};
   box-shadow: none;
   font-size: ${theme.fontSize.default};
 
   &:hover {
-    box-shadow: 0 3px 6px -2px ${uiColors.gray.light1};
+    box-shadow: 0 3px 6px -2px ${palette.gray.light1};
     text-decoration: none;
   }
 `;

@@ -3,25 +3,25 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import useCopyClipboard from '../hooks/useCopyClipboard';
 
 const getCopyButtonStyle = (copied) => {
   const baseStyle = css`
     align-self: center;
-    color: ${uiColors.gray.base};
+    color: ${palette.gray.base};
   `;
 
   if (copied) {
     return css`
       ${baseStyle};
-      color: ${uiColors.white};
-      background-color: ${uiColors.green.base};
+      color: ${palette.white};
+      background-color: ${palette.green.base};
       &:focus,
       &:hover {
-        color: ${uiColors.white};
+        color: ${palette.white};
         &:before {
-          background-color: ${uiColors.green.base};
+          background-color: ${palette.green.base};
         }
       }
     `;
