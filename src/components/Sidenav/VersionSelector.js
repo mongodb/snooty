@@ -25,13 +25,9 @@ const StyledSelect = styled(Select)`
     width: max-content;
   }
 
-  > button {
+  button {
     z-index: 3;
     height: ${theme.size.medium};
-
-    ul {
-      min-width: 200px;
-    }
   }
 `;
 
