@@ -26,8 +26,7 @@ const caretStyle = LeafyCSS`
 
 const wrapperStyle = LeafyCSS`
   display: flex;
-  flex-direction: column;
-  cursor: pointer;
+  align-items: center;
 
   &:hover {
     background: ${palette.gray.light2}

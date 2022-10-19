@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import { navigate } from '@reach/router';
-import { Select, Option } from '@leafygreen-ui/select';
+import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
 import styled from '@emotion/styled';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
@@ -19,11 +19,19 @@ const buildChoices = (branches) => {
 
 const StyledSelect = styled(Select)`
   flex: 1 0 auto;
-  padding: ${theme.size.tiny} ${theme.size.large};
+
+  > div:nth-of-type(2) {
+    min-width: 150px;
+    width: max-content;
+  }
 
   > button {
     z-index: 3;
     height: ${theme.size.medium};
+
+    ul {
+      min-width: 200px;
+    }
   }
 `;
 
@@ -65,16 +73,10 @@ const VersionSelector = ({ versionedProject = '' }) => {
       value={activeVersions[versionedProject]}
       onChange={onChange}
       aria-labelledby={'select'}
-      usePortal={false}
       popoverZIndex={2}
       allowDeselect={false}
-    >
-      {options.map((choice) => (
-        <Option key={choice.value} value={choice.value} role="option">
-          {choice.text}
-        </Option>
-      ))}
-    </StyledSelect>
+      choices={options}
+    ></StyledSelect>
   );
 };
 
