@@ -58,7 +58,7 @@ const VersionSelector = ({ versionedProject = '' }) => {
     }
   };
 
-  const onChange = (value) => {
+  const onChange = ({ value }) => {
     const newState = {};
     newState[versionedProject] = value;
     setActiveVersions(newState);
