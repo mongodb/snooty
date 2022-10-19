@@ -68,11 +68,11 @@ const getGlobalCss = ({ topLarge, topMedium }) => css`
       list-style: none inside none;
 
       a {
-        font-size: ${theme.fontSize.default};
+        color: ${palette.gray.dark1};
+        font-size: ${theme.fontSize.small};
 
         :hover,
         :focus {
-          color: ${palette.gray.dark3};
           text-decoration: none;
         }
 
@@ -110,7 +110,7 @@ const LoadingMessage = styled('div')`
 
 const MenuTitle = styled('div')`
   color: ${palette.gray.dark3};
-  font-size: ${theme.fontSize.default};
+  font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: 20px;
   margin: ${theme.size.medium} ${theme.size.default};
