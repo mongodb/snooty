@@ -8,12 +8,14 @@ const codeFontFamily = 'Source Code Pro';
 const textFontFamily = '"Euclid Circular A", Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif';
 
 // Redoc's theme option: https://github.com/Redocly/redoc/#redoc-theme-object
+// For more precise options: https://github.com/Redocly/redoc/blob/16f542bbfe856e5ae5eb40636ac79421fa2f397b/src/theme.ts
 export const themeOption = {
   breakpoints: {
     small: '768px',
     medium: '1024px',
     large: '1200px',
   },
+  // Code blocks in right sidebar and main content
   codeBlock: {
     backgroundColor: palette.gray.dark3,
   },
@@ -29,6 +31,7 @@ export const themeOption = {
       patch: palette.yellow.dark3,
       delete: palette.red.dark3,
     },
+    // General primary theme color; used in tags and buttons like "Download" and "ApiSlackView"
     primary: {
       main: palette.black,
     },
@@ -62,7 +65,10 @@ export const themeOption = {
   },
   // Schema for each endpoint
   schema: {
+    linesColor: palette.black,
     requireLabelColor: palette.red.base,
+    // Data type
+    typeNameColor: palette.gray.dark3,
   },
   // Left sidebar
   sidebar: {
@@ -140,12 +146,18 @@ export const codeBlockCss = css`
 `;
 
 export const inlineCodeCss = css`
-  // InlineCode inside of Parameters and Schemas
-  span.sc-eLgOdN,
   // InlineCode found in data types of Parameters and Schemas; example: "string 24 characters"
-  span.sc-kIeTtH {
+  span.sc-GqfZa {
     background-color: ${palette.blue.light3};
     border-color: ${palette.blue.light2};
+    color: ${palette.blue.base};
+  }
+
+  // InlineCode inside of Parameters and Schemas for values, examples, and defaults
+  span.sc-clsHhM {
+    background-color: ${palette.gray.light3};
+    border-color: ${palette.gray.light2};
+    color: ${palette.gray.dark3};
   }
 `;
 
@@ -187,17 +199,16 @@ export const rightSidebarCss = css`
       }
     }
   }
+
+  // "Content type" box
+  div.sc-bBrOnJ {
+    background-color: ${palette.gray.dark2} !important;
+  }
 `;
 
 export const schemaDataTypesCss = css`
-  // Data types under query parameters; ex - "string" / "boolean"
-  span.sc-fWSCIC,
   // Regex next to data types under query parameters; ex - "^([\w]{24})$"
-  span.sc-hlTvYk,
-  // "Array of" keyword next to data types under query parameters
-  span.sc-GqfZa,
-  // Parenthesized data types under query paramters; ex - "(ObjectId)"
-  span.sc-dwfUOf {
+  span.sc-gGmIRh {
     color: ${palette.gray.dark3};
   }
 `;
