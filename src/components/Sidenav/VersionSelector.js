@@ -4,7 +4,6 @@ import { Select, Option } from '@leafygreen-ui/select';
 import { VersionContext } from '../../context/version-context';
 import styled from '@emotion/styled';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { cx, css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 
 const buildChoice = (branch) => {
@@ -20,16 +19,11 @@ const buildChoices = (branches) => {
 
 const StyledSelect = styled(Select)`
   flex: 1 0 auto;
+  padding: ${theme.size.tiny} ${theme.size.large};
 
   > button {
+    z-index: 3;
     height: ${theme.size.medium};
-  }
-`;
-
-const menuStyling = css`
-  > div {
-    min-width: 200px;
-    width: fit-content;
   }
 `;
 
@@ -43,6 +37,8 @@ const VersionSelector = ({ versionedProject = '' }) => {
   const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject]));
 
   useEffect(() => {
+    // TODO: verify options differ from ToC of umbrella vs associated product
+    // via difference of snooty.toml[associated_products] vs pool.repo_branches
     setOptions(buildChoices(availableVersions[versionedProject]));
   }, [availableVersions, versionedProject]);
 
@@ -51,9 +47,7 @@ const VersionSelector = ({ versionedProject = '' }) => {
     const slug = branch?.slug;
     if (slug) {
       console.log('navigating to slug ', slug);
-      // TODO: get url logic from DOP-3266
     }
-    // navigate()
   };
 
   const onChange = (value) => {
@@ -68,10 +62,10 @@ const VersionSelector = ({ versionedProject = '' }) => {
 
   return (
     <StyledSelect
-      portalClassName={cx(menuStyling)}
       value={activeVersions[versionedProject]}
       onChange={onChange}
       aria-labelledby={'select'}
+      usePortal={false}
       popoverZIndex={2}
       allowDeselect={false}
     >

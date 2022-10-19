@@ -26,7 +26,8 @@ const caretStyle = LeafyCSS`
 
 const wrapperStyle = LeafyCSS`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
 
   &:hover {
     background: ${palette.gray.light2}
@@ -105,9 +106,8 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           as={Link}
           to={target}
           active={isSelected}
-          className={cx(sideNavItemTOCStyling({ level, isActive }))}
+          className={cx(sideNavItemTOCStyling({ level }))}
           onClick={(e) => {
-            console.log(e);
             setIsOpen(!isOpen);
           }}
         >
@@ -116,15 +116,8 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           {formattedTitle}
         </SideNavItem>
         {hasVersions && <VersionSelector versionedProject={options.project} />}
-        {hasVersions && <>O</>}
       </Wrapper>
     );
-
-    // TODO: clean above up. if hasVersions, lets contain link within sidenavitem and have it be
-    // <li>
-    //   <a></a>
-    //   <versionselector
-    // </li>
   };
 
   return (
