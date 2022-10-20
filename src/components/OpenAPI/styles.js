@@ -7,7 +7,7 @@ const badgeBorderType = '1px solid';
 const codeFontFamily = 'Source Code Pro';
 const textFontFamily = '"Euclid Circular A", Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif';
 
-// Redoc's theme option: https://github.com/Redocly/redoc/#redoc-theme-object
+// Redoc's documented theme option: https://github.com/Redocly/redoc/#redoc-theme-object
 // For more precise options: https://github.com/Redocly/redoc/blob/16f542bbfe856e5ae5eb40636ac79421fa2f397b/src/theme.ts
 export const themeOption = {
   breakpoints: {
@@ -23,7 +23,9 @@ export const themeOption = {
     error: {
       main: palette.red.base,
     },
-    // Only applies to background color; color and border color touched by css
+    // Only applies to background color of badges on right sidebar/panel;
+    // color and border color touched by css
+    // Left sidebar have different colors. See: spanHttpCss
     http: {
       get: palette.blue.dark2,
       post: palette.green.dark3,
@@ -213,36 +215,60 @@ export const schemaDataTypesCss = css`
   }
 `;
 
+// HTTP badges
 export const spanHttpCss = css`
-  // HTTP badges
-  span.get {
-    border: ${badgeBorderType} ${palette.blue.dark1};
-    color: ${palette.blue.light2};
-  }
-  span.post {
-    border: ${badgeBorderType} ${palette.green.dark2};
-    color: ${palette.green.base};
-  }
-  span.patch,
-  span.put {
-    border: ${badgeBorderType} ${palette.yellow.dark2};
-    color: ${palette.yellow.light2};
-  }
-  span.delete {
-    border: ${badgeBorderType} ${palette.red.dark2};
-    color: ${palette.red.light2};
+  // Right sidebar badges
+  span.http-verb {
+    border: ${badgeBorderType};
+    border-radius: ${badgeBorderRadius};
+    font-weight: bold;
+
+    &.get {
+      border-color: ${palette.blue.dark1};
+      color: ${palette.blue.light2};
+    }
+    &.post {
+      border-color: ${palette.green.dark2};
+      color: ${palette.green.base};
+    }
+    &.patch,
+    &.put {
+      border-color: ${palette.yellow.dark2};
+      color: ${palette.yellow.light2};
+    }
+    &.delete {
+      border-color: ${palette.red.dark2};
+      color: ${palette.red.light2};
+    }
   }
 
   // Left sidebar badges
   span.operation-type {
+    border: ${badgeBorderType};
     border-radius: ${badgeBorderRadius};
     font-family: ${textFontFamily};
-  }
 
-  // Right sidebar badges
-  span.http-verb {
-    border-radius: ${badgeBorderRadius};
-    font-weight: bold;
+    &.get {
+      background-color: ${palette.blue.light3};
+      border-color: ${palette.blue.light2};
+      color: ${palette.blue.dark1};
+    }
+    &.post {
+      background-color: ${palette.green.light3};
+      border-color: ${palette.green.light2};
+      color: ${palette.green.dark2};
+    }
+    &.patch,
+    &.put {
+      background-color: ${palette.yellow.light3};
+      border-color: ${palette.yellow.light2};
+      color: ${palette.yellow.dark2};
+    }
+    &.delete {
+      background-color: ${palette.red.light3};
+      border-color: ${palette.red.light2};
+      color: ${palette.red.dark2};
+    }
   }
 `;
 
