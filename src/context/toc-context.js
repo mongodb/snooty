@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { useCallback } from 'react';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { fetchDocument } from '../utils/realm';
@@ -9,91 +10,119 @@ const TocContext = createContext({
   activeToc: {}, // table of contents, represented by head node
 });
 
-/**
- *
- * @param {object} tocTree toc tree head node
- * @param {object} currentVersion see version-context currentVersion{}
- * @param {object} availableVersions see version-context availableVersions{}
- * @modifies [tocTree.children[], tocTree.children[].options.versions[], tocTree.children[].options.versions]
- *
- * @returns tocTree toc tree head node, with nodes filtered by current and available versions
- */
-const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availableVersions = {}) {
-  const shallowCloneToc = { ...tocTree };
-  if (Object.keys(tocTree).length === 0) {
-    return shallowCloneToc;
-  }
-  shallowCloneToc.children =
-    shallowCloneToc.children?.filter((tocNode) => {
-      if (!tocNode?.options?.versions) {
-        return true;
-      }
-      const nodeProject = tocNode.options.project;
-      const availableVersionNames =
-        availableVersions[nodeProject]?.map((branchObj) => branchObj['gitBranchName']) || [];
-      // filter ToC version options by version context
-      tocNode.options.versions = tocNode.options.versions.filter((version) => availableVersionNames.includes(version));
-      // if ToC and version context don't match, don't show versioned ToC children
-      if (!tocNode.options.versions.length) {
-        return false;
-      }
-
-      let targetVersion = currentVersion[nodeProject];
-      // if current version is not part of merged ToC, fallback to last
-      if (!targetVersion || !tocNode.options.versions.includes(targetVersion)) {
-        targetVersion = tocNode.options.versions[tocNode.options.version.length - 1];
-      }
-      tocNode.children = tocNode.children?.filter(
-        (versionedChild) => versionedChild.options?.version === targetVersion
-      );
-      return tocNode;
-    }) || [];
-
-  return shallowCloneToc;
-};
-
-const getTocMetadata = async (db, project, parserUser, parserBranch, manifestTree) => {
-  try {
-    let filter = {
-      page_id: `${project}/${parserUser}/${parserBranch}`,
-    };
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS && project === 'cloud-docs') {
-      // TODO: remove testing code
-      db = 'snooty_dev';
-      filter = {
-        page_id: 'cloud-docs/spark/DOP-3225',
-      };
-    }
-    const metadata = await fetchDocument(db, METADATA_COLLECTION, filter);
-    return metadata.toctree;
-  } catch (e) {
-    console.error(e);
-    return manifestTree;
-  }
-};
-
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
 const TocContextProvider = ({ children }) => {
-  const { activeVersions, availableVersions } = useContext(VersionContext);
+  const { activeVersions, setActiveVersions } = useContext(VersionContext);
   const { toctree } = useSnootyMetadata();
-  const { database, project, parserUser, parserBranch } = useSiteMetadata();
+  const { database, project } = useSiteMetadata();
+  const [remoteToc, setRemoteToc] = useState();
   const [activeToc, setActiveToc] = useState({});
+  const mountedRef = useRef(true);
 
+  const getTocMetadata = useCallback(async () => {
+    try {
+      // TODO: update metadata to have 'project' field. don't have to construct page_id
+      // NOTE: see snooty_dev.metadata for documents with 'project' field defined. input testing metadata
+      let filter = {
+        project: `${project}`,
+      };
+      // TODO: remove testing code
+      let db = database;
+      if (process.env.GATSBY_TEST_EMBED_VERSIONS && project === 'cloud-docs') {
+        db = 'snooty_dev';
+      }
+      const metadata = await fetchDocument(db, METADATA_COLLECTION, filter);
+      return metadata.toctree;
+    } catch (e) {
+      // fallback to toctree from build time
+      console.error(e);
+      return toctree;
+    }
+    // below dependents are server constants
+  }, [database, project, toctree]);
+
+  const getFilteredToc = useCallback(() => {
+    // filter remoteToc by activeVersions and return a copy
+    let { children, ...clonedToc } = remoteToc;
+    clonedToc.children = [];
+    for (let node of remoteToc.children) {
+      // push any non versions children
+      if (!node?.options?.versions) {
+        clonedToc.children.push(node);
+        continue;
+      }
+
+      const nodeProject = node.options?.project;
+      const activeVersion = activeVersions[nodeProject];
+      // if selected version is not included in ToC, skip
+      if (node?.options?.versions && !node.options.versions.includes(activeVersion)) {
+        console.error(`selected version ${activeVersion} for project ${nodeProject} does not exist in ToC`);
+        continue;
+      }
+      // clone any versioned node not to mutate remoteToc
+      let { children, ...clonedNode } = node;
+      clonedNode.children = [];
+      for (let node of clonedNode.children) {
+        if (node.version === activeVersion) {
+          clonedNode.children.push(node);
+        }
+      }
+    }
+    return clonedToc;
+  }, [activeVersions, remoteToc]);
+
+  const correctActiveVersion = useCallback(
+    (tocNode) => {
+      // go through toc tree and see if any active versions are not available
+      // fall back to most recent if not available
+      const newVersions = {};
+      for (let node of tocNode.children) {
+        if (!node?.options?.versions || !node?.options?.project) {
+          continue;
+        }
+        if (!node.options.versions.includes(activeVersions[node.options.project])) {
+          newVersions[node.options.project] = node.options.versions[0];
+        }
+      }
+
+      if (Object.keys(newVersions).length) {
+        setActiveVersions(newVersions);
+      }
+    },
+    [activeVersions, setActiveVersions]
+  );
+
+  // initial effect is to fetch metadata
+  // should only run once on init
   useEffect(() => {
-    getTocMetadata(database, project, parserUser, parserBranch, toctree).then((toctreeResponse) => {
-      const filtered = filterTocByVersion(toctreeResponse, activeVersions, availableVersions);
-      setActiveToc(filtered);
+    if (remoteToc) {
+      return;
+    }
+
+    getTocMetadata().then((tocTreeResponse) => {
+      if (!mountedRef.current) {
+        return;
+      }
+      // TODO: update remoteToC *can mutate* if there is some mismatch between availableVersions and remoteToc
+      correctActiveVersion(tocTreeResponse);
+      setRemoteToc(tocTreeResponse);
     });
-  }, [
-    activeVersions,
-    availableVersions, // variable dependencies
-    database,
-    parserBranch,
-    parserUser,
-    project,
-    toctree, // build time constants
-  ]);
+
+    return () => {
+      mountedRef.current = false;
+    };
+  }, [remoteToc, setRemoteToc, getTocMetadata, correctActiveVersion]);
+
+  // one effect depends on activeVersions
+  // if activeVersion changes -> setActiveToc
+  useEffect(() => {
+    if (!remoteToc) {
+      return;
+    }
+    const filteredToc = getFilteredToc();
+    setActiveToc(filteredToc);
+  }, [remoteToc, activeVersions, setActiveToc, getFilteredToc]);
 
   return <TocContext.Provider value={{ activeToc }}>{children}</TocContext.Provider>;
 };
