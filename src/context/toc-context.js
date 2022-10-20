@@ -63,10 +63,14 @@ const TocContextProvider = ({ children }) => {
       // clone any versioned node not to mutate remoteToc
       let { children, ...clonedNode } = node;
       clonedNode.children = [];
-      for (let node of clonedNode.children) {
-        if (node.version === activeVersion) {
-          clonedNode.children.push(node);
+      for (let optionedNode of node.children) {
+        if (optionedNode?.options?.version === activeVersion) {
+          clonedNode.children.push(optionedNode);
         }
+      }
+
+      if (clonedNode.children.length) {
+        clonedToc.children.push(clonedNode);
       }
     }
     return clonedToc;
@@ -104,7 +108,6 @@ const TocContextProvider = ({ children }) => {
       if (!mountedRef.current) {
         return;
       }
-      // TODO: update remoteToC *can mutate* if there is some mismatch between availableVersions and remoteToc
       correctActiveVersion(tocTreeResponse);
       setRemoteToc(tocTreeResponse);
     });
