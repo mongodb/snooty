@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
@@ -18,7 +18,6 @@ const TocContextProvider = ({ children }) => {
   const { database, project } = useSiteMetadata();
   const [remoteToc, setRemoteToc] = useState();
   const [activeToc, setActiveToc] = useState({});
-  const mountedRef = useRef(true);
 
   const getTocMetadata = useCallback(async () => {
     try {
@@ -43,6 +42,8 @@ const TocContextProvider = ({ children }) => {
   }, [database, project, toctree]);
 
   const getFilteredToc = useCallback(() => {
+    console.log('check remoteToc');
+    console.log(remoteToc);
     // filter remoteToc by activeVersions and return a copy
     let { children, ...clonedToc } = remoteToc;
     clonedToc.children = [];
@@ -103,18 +104,10 @@ const TocContextProvider = ({ children }) => {
     if (remoteToc) {
       return;
     }
-
     getTocMetadata().then((tocTreeResponse) => {
-      if (!mountedRef.current) {
-        return;
-      }
       correctActiveVersion(tocTreeResponse);
       setRemoteToc(tocTreeResponse);
     });
-
-    return () => {
-      mountedRef.current = false;
-    };
   }, [remoteToc, setRemoteToc, getTocMetadata, correctActiveVersion]);
 
   // one effect depends on activeVersions

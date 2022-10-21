@@ -180,6 +180,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   }, [setHideMobile]);
 
   const { activeToc } = useContext(TocContext);
+  console.log('activeToc');
+  console.log(activeToc);
 
   // Renders side nav content based on the current project and template.
   // The guides docs typically have a different TOC compared to other docs.
