@@ -42,8 +42,6 @@ const TocContextProvider = ({ children }) => {
   }, [database, project, toctree]);
 
   const getFilteredToc = useCallback(() => {
-    console.log('check remoteToc');
-    console.log(remoteToc);
     // filter remoteToc by activeVersions and return a copy
     let { children, ...clonedToc } = remoteToc;
     clonedToc.children = [];

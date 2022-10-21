@@ -93,7 +93,6 @@ const setMocks = () => {
 
   // mock realm
   realmMock.mockImplementation(() => {
-    console.log('mocked imp');
     return mockedResponse;
   });
 };
