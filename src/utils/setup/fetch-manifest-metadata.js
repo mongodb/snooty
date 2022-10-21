@@ -16,7 +16,7 @@ const fetchManifestMetadata = () => {
           metadata['associated_products'] = [
             {
               name: 'atlas-cli',
-              versions: ['v1.1.7', 'v1.0'],
+              versions: ['v1.1', 'v1.0'],
             },
           ];
           metadata.toctree.children.push(testTOCNode);
