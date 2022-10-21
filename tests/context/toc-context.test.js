@@ -92,7 +92,10 @@ const setMocks = () => {
   }));
 
   // mock realm
-  realmMock.mockResolvedValue(mockedResponse);
+  realmMock.mockImplementation(() => {
+    console.log('mocked imp');
+    return mockedResponse;
+  });
 };
 
 // <------------------ END test data mocks ------------------>
@@ -112,8 +115,14 @@ const mountConsumer = (
     'cloud-docs': [{ gitBranchName: 'master' }],
   }
 ) => {
+  const setActiveVersions = (newState) => {
+    availableVersions = {
+      ...availableVersions,
+      ...newState,
+    };
+  };
   return render(
-    <VersionContext.Provider value={{ activeVersions, availableVersions }}>
+    <VersionContext.Provider value={{ activeVersions, availableVersions, setActiveVersions }}>
       <TocContextProvider>
         <TestConsumer></TestConsumer>
       </TocContextProvider>
@@ -131,10 +140,8 @@ describe('ToC Context', () => {
     setMocks();
   });
 
-  it('initializes ToC without versioned nodes if not in available versions', async () => {
-    await act(async () => {
-      wrapper = mountConsumer({}, {});
-    });
+  it('initializes ToC without versioned nodes if not in available versions', () => {
+    wrapper = mountConsumer({}, {});
     expect(wrapper.queryByText(/options/g)).toBeNull();
   });
 
