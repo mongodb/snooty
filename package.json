@@ -69,7 +69,7 @@
     "@leafygreen-ui/leafygreen-provider": "^2.3.2",
     "@leafygreen-ui/lib": "^9.5.2",
     "@leafygreen-ui/logo": "^4.0.2",
-    "@leafygreen-ui/modal": "^6.1.2",
+    "@leafygreen-ui/modal": "^10.1.0",
     "@leafygreen-ui/palette": "^3.4.3",
     "@leafygreen-ui/select": "^7.0.0",
     "@leafygreen-ui/side-nav": "^10.0.0",
