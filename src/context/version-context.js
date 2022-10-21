@@ -3,6 +3,7 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { fetchDocument, fetchDocuments } from '../utils/realm';
 import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
+import { useRef } from 'react';
 
 // begin helper functions
 const STORAGE_KEY = 'activeVersions';
@@ -90,12 +91,16 @@ const VersionContext = createContext({
 
 const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, children }) => {
   const metadata = useSiteMetadata();
+  const mountRef = useRef(true);
 
   // tracks active versions across app
   const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY) || {});
   // update local storage when active versions change
   useEffect(() => {
     setLocalValue(STORAGE_KEY, activeVersions);
+    return () => {
+      mountRef.current = false;
+    };
   }, [activeVersions]);
 
   // expose the available versions for current and associated products
@@ -103,6 +108,9 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   // on init, fetch versions from realm app services
   useEffect(() => {
     getBranches(metadata, repoBranches, associatedReposInfo).then((versions) => {
+      if (!mountRef.current) {
+        return;
+      }
       if (!activeVersions || !Object.keys(activeVersions).length) {
         setActiveVersions(getInitVersions(versions));
       }
@@ -120,6 +128,9 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
     }
 
     getUmbrellaProject(metadata.project, metadata.database).then((metadataList) => {
+      if (!mountRef.current) {
+        return;
+      }
       setShowVersionDropdown(metadataList.length > 0);
     });
   }, [availableVersions, metadata.project, metadata.database]);

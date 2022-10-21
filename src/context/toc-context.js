@@ -54,11 +54,11 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
   return shallowCloneToc;
 };
 
-const getTocMetadata = async (db, project, parserUser, parserBranch, manifestTree) => {
+const getTocMetadata = async (db, project, manifestTree) => {
   try {
     // TODO: update metadata to have 'project' field. don't have to construct page_id
     // NOTE: see snooty_dev.metadata for documents with 'project' field defined. input testing metadata
-    let filter = {
+    const filter = {
       project: `${project}`,
     };
     if (process.env.GATSBY_TEST_EMBED_VERSIONS && project === 'cloud-docs') {

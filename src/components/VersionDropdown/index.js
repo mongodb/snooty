@@ -1,16 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { uiColors } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
-import { generatePrefix } from './utils';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
-import { normalizePath } from '../../utils/normalize-path';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { baseUrl } from '../../utils/base-url';
+import { getUrl } from '../../utils/url-utils';
+import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-slug';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -80,13 +78,9 @@ const getBranch = (branchName = '', branches = []) => {
   return branchCandidates?.[0] || null;
 };
 
-export const setOptionSlug = (branch) => {
-  return branch['urlSlug'] || branch['gitBranchName'];
-};
-
 const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
-  const slug = setOptionSlug(branch);
+  const slug = getBranchSlug(branch);
   return (
     <Option key={slug} value={slug}>
       {UIlabel}
@@ -100,14 +94,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
 
   // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
   // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
-  const currentUrlSlug = useMemo(() => {
-    for (let branch of branches) {
-      if (branch.gitBranchName === parserBranch) {
-        return setOptionSlug(branch);
-      }
-    }
-    return parserBranch;
-  }, [branches, parserBranch]);
+  const currentUrlSlug = useCurrentUrlSlug(parserBranch, branches);
 
   if ((branches?.length ?? 0) < 2) {
     console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
@@ -126,18 +113,10 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
     }
   }
 
-  const getUrl = (optionValue) => {
-    if (optionValue === 'legacy') {
-      return `${baseUrl()}legacy/?site=${project}`;
-    }
-    const prefixWithVersion = generatePrefix(optionValue, siteMetadata, siteBasePrefix);
-    return assertTrailingSlash(normalizePath(`${prefixWithVersion}/${slug}`));
-  };
-
   // Used exclusively by the LG Select component's onChange function, which receives
   // the 'value' prop from the selected Option component
   const navigate = (optionValue) => {
-    const destination = getUrl(optionValue);
+    const destination = getUrl(optionValue, project, siteMetadata, siteBasePrefix);
     reachNavigate(destination);
   };
 
