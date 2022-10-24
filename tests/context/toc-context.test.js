@@ -139,8 +139,10 @@ describe('ToC Context', () => {
     setMocks();
   });
 
-  it('initializes ToC without versioned nodes if not in available versions', () => {
-    wrapper = mountConsumer({}, {});
+  it('initializes ToC without versioned nodes if not in available versions', async () => {
+    await act(async () => {
+      wrapper = mountConsumer({}, {});
+    });
     expect(wrapper.queryByText(/options/g)).toBeNull();
   });
 
