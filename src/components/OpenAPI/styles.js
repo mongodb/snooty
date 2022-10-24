@@ -115,6 +115,30 @@ export const themeOption = {
  *
  */
 
+const titleHeadingClass = 'sc-dFJsGO';
+
+export const headingsCss = css`
+  h1.${titleHeadingClass} {
+    color: ${palette.green.dark2};
+    font-family: 'MongoDB Value Serif';
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 40px;
+  }
+
+  h1.sc-fubCfw:not(.${titleHeadingClass}) {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+
+  h2.sc-pFZIQ {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+`;
+
 export const codeBlockCss = css`
   // General code tags, especially for code blocks
   code {

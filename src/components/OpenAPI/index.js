@@ -18,6 +18,7 @@ import { fetchOASFile } from '../../utils/realm';
 import {
   codeBlockCss,
   deprecatedBadgeCss,
+  headingsCss,
   inlineCodeCss,
   leftSidebarCss,
   rightSidebarCss,
@@ -43,6 +44,7 @@ const getTopAndHeight = (topValue) => css`
 // Overwrite css of Redoc's components that can be easily selected and that do not have
 // built-in theme options.
 const getGlobalCss = ({ topLarge, topMedium }) => css`
+  ${headingsCss}
   ${codeBlockCss}
   ${inlineCodeCss}
   ${leftSidebarCss}
