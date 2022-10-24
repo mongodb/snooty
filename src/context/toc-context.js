@@ -41,7 +41,9 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
       let targetVersion = currentVersion[nodeProject];
       // if current version is not part of merged ToC, fallback to last
       if (!targetVersion || !tocNode.options.versions.includes(targetVersion)) {
-        targetVersion = tocNode.options.versions[tocNode.options.version.length - 1];
+        // TODO: should update version context active version if not found
+        console.error(`target version for ${nodeProject} - ${targetVersion} not found`);
+        return false;
       }
       tocNode.children = tocNode.children?.filter(
         (versionedChild) => versionedChild.options?.version === targetVersion
@@ -52,17 +54,16 @@ const filterTocByVersion = function (tocTree = {}, currentVersion = {}, availabl
   return shallowCloneToc;
 };
 
-const getTocMetadata = async (db, project, parserUser, parserBranch, manifestTree) => {
+const getTocMetadata = async (db, project, manifestTree) => {
   try {
-    let filter = {
-      page_id: `${project}/${parserUser}/${parserBranch}`,
+    // TODO: update metadata to have 'project' field. don't have to construct page_id
+    // NOTE: see snooty_dev.metadata for documents with 'project' field defined. input testing metadata
+    const filter = {
+      project: `${project}`,
     };
     if (process.env.GATSBY_TEST_EMBED_VERSIONS && project === 'cloud-docs') {
       // TODO: remove testing code
       db = 'snooty_dev';
-      filter = {
-        page_id: 'cloud-docs/spark/DOP-3225',
-      };
     }
     const metadata = await fetchDocument(db, METADATA_COLLECTION, filter);
     return metadata.toctree;
@@ -82,6 +83,8 @@ const TocContextProvider = ({ children }) => {
 
   useEffect(() => {
     getTocMetadata(database, project, parserUser, parserBranch, toctree).then((toctreeResponse) => {
+      // TODO DOP-3309: break into two useEffects.
+      // have to call setActiveVersions if toc tree nodes and associated producst don't match
       const filtered = filterTocByVersion(toctreeResponse, activeVersions, availableVersions);
       setActiveToc(filtered);
     });
