@@ -1,7 +1,7 @@
 {
   "title": [{ "type": "text", "value": "Atlas CLI" }],
   "slug": "atlas-cli",
-  "options": { "versions": ["v1.0", "v1.1.7"], "project": "atlas-cli" },
+  "options": { "versions": ["v1.0", "v1.1"], "project": "atlas-cli" },
   "children": [
     {
       "title": [
@@ -207,7 +207,7 @@
       "slug": "/",
       "children": [],
       "options": {
-        "version": "v1.1.7",
+        "version": "v1.1",
         "drawer": true
       }
     },
@@ -222,7 +222,7 @@
               }
             }
           },
-          "value": "Install or Update the Atlas CLI v1.1.7"
+          "value": "Install or Update the Atlas CLI v1.1"
         }
       ],
       "slug": "install-atlas-cli",
@@ -250,7 +250,7 @@
       ],
       "options": {
         "drawer": false,
-        "version": "v1.1.7"
+        "version": "v1.1"
       }
     },
     {
@@ -264,7 +264,7 @@
               }
             }
           },
-          "value": "Connect from the Atlas CLI v1.1.7"
+          "value": "Connect from the Atlas CLI v1.1"
         }
       ],
       "slug": "connect-atlas-cli",
@@ -331,7 +331,7 @@
         }
       ],
       "options": {
-        "version": "v1.1.7",
+        "version": "v1.1",
         "drawer": false
       }
     },
@@ -362,7 +362,7 @@
                   }
                 }
               },
-              "value": "Configure Telemetry v1.1.7"
+              "value": "Configure Telemetry v1.1"
             }
           ],
           "slug": "telemetry",
@@ -373,7 +373,7 @@
         }
       ],
       "options": {
-        "version": "v1.1.7",
+        "version": "v1.1",
         "drawer": true
       }
     }

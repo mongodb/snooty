@@ -201,7 +201,7 @@ describe('Version Context', () => {
     }
 
     // active checks
-    const expectedActive = { 'atlas-cli': 'v1.1', 'cloud-docs': 'master' };
+    const expectedActive = { 'atlas-cli': 'master', 'cloud-docs': 'master' };
     expect(await wrapper.findByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 

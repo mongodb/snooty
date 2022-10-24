@@ -96,8 +96,9 @@ class StitchDocumentDatabase {
     return this.stitchInterface.fetchDocuments(DOCUMENTS_COLLECTION, buildFilter);
   }
 
-  async getMetadata() {
-    return this.stitchInterface.getMetadata(buildFilter);
+  async getMetadata(queryFilters) {
+    const filter = queryFilters || buildFilter;
+    return this.stitchInterface.getMetadata(filter);
   }
 
   async getAsset(checksum) {

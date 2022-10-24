@@ -74,7 +74,10 @@ const GlobalGrid = styled('div')`
   grid-template-rows: auto 1fr;
 `;
 
-const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template, associatedReposInfo } }) => {
+const DefaultLayout = ({
+  children,
+  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
+}) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
@@ -90,6 +93,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
         associatedReposInfo={associatedReposInfo}
         headingNodes={page?.options?.headings}
         selectors={page?.options?.selectors}
+        isAssociatedProduct={isAssociatedProduct}
       >
         <GlobalGrid>
           <Header sidenav={sidenav} eol={eol} />
