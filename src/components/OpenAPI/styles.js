@@ -64,6 +64,16 @@ export const themeOption = {
   // Right sidebar
   rightPanel: {
     backgroundColor: palette.black,
+    // Endpoints
+    servers: {
+      overlay: {
+        backgroundColor: palette.gray.dark3,
+        textColor: palette.white,
+      },
+      url: {
+        backgroundColor: palette.gray.dark3,
+      },
+    },
   },
   // Schema for each endpoint
   schema: {
@@ -151,23 +161,35 @@ export const codeBlockCss = css`
   }
 
   // Highlight syntax in code blocks
+  // Ellipsis for nested code
   span.ellipsis:after {
     color: ${palette.white};
   }
   span.token.boolean {
-    color: #e06c75 !important;
+    color: #ff6f44 !important;
   }
+  // Keywords such as "null"
   span.token.keyword {
-    color: #c678dd !important;
+    color: #ff7dc3 !important;
   }
   span.token.number {
-    color: #61aeee !important;
+    color: #2dc4ff !important;
   }
+  // Commas, periods, colons, etc.
   span.token.punctuation {
     color: ${palette.white};
   }
+  // Strings
   span.token.string:not(.property) {
-    color: #98c379 !important;
+    color: #35de7b !important;
+  }
+  // Object properties that are strings, found in the main column code blocks
+  span.token.string-property {
+    color: #2dc4ff !important;
+  }
+  // Variables and options in main column code blocks
+  span.token.parameter.variable {
+    color: #edb210 !important;
   }
 `;
 
@@ -190,6 +212,7 @@ export const inlineCodeCss = css`
 export const leftSidebarCss = css`
   label[role='menuitem'] {
     font-size: 13px;
+    font-weight: normal;
 
     :hover {
       background-color: ${palette.gray.light2};
@@ -211,24 +234,47 @@ export const rightSidebarCss = css`
 
     li.react-tabs__tab--selected {
       // General selected tab should have the following styles
-      background-color: ${palette.white};
-      color: ${palette.black} !important;
+      // Example: "Payload" button under "Request samples"
+      background-color: ${palette.gray.dark2} !important;
+      border: ${badgeBorderType} ${palette.gray.base};
+      color: ${palette.white} !important;
 
       &.tab-error {
         background-color: ${palette.gray.dark2} !important;
+        border: none;
         color: ${palette.red.light1} !important;
       }
 
       &.tab-success {
         background-color: ${palette.gray.dark2} !important;
+        border: none;
         color: ${palette.green.light1} !important;
       }
+    }
+  }
+
+  // Server endpoint buttons
+  button.sc-eFubAy {
+    background-color: ${palette.gray.dark3};
+  }
+
+  // Server endpoint overlay
+  div.sc-dUrnRO {
+    color: ${palette.white};
+
+    > span {
+      color: ${palette.white};
     }
   }
 
   // "Content type" box
   div.sc-bBrOnJ {
     background-color: ${palette.gray.dark2} !important;
+  }
+
+  // Container for "Copy", "Expand All", "Collapse All" code block buttons
+  div.sc-giIncl > button {
+    font-size: 13px;
   }
 `;
 
@@ -245,6 +291,7 @@ export const spanHttpCss = css`
   span.http-verb {
     border: ${badgeBorderType};
     border-radius: ${badgeBorderRadius};
+    font-size: 12px;
     font-weight: bold;
 
     &.get {
