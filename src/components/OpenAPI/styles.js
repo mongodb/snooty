@@ -260,6 +260,7 @@ export const rightSidebarCss = css`
 
   // Server endpoint overlay
   div.sc-dUrnRO {
+    border-color: ${palette.gray.dark2};
     color: ${palette.white};
 
     > span {
