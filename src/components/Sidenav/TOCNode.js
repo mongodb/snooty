@@ -6,6 +6,7 @@ import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
 import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
+import { theme } from '../../theme/docsTheme';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
@@ -27,9 +28,10 @@ const caretStyle = LeafyCSS`
 const wrapperStyle = LeafyCSS`
   display: flex;
   align-items: center;
+  padding-right: ${theme.size.medium};
 
   &:hover {
-    background: ${palette.gray.light2}
+    background: ${palette.gray.light2};
   }
 
   > li {

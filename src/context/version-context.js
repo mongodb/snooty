@@ -1,11 +1,13 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react';
+import React, { createContext, useReducer, useEffect, useState, useCallback, useRef } from 'react';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { fetchDocument, fetchDocuments } from '../utils/realm';
 import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
-import { useRef } from 'react';
+import { navigate } from '@reach/router';
+import { getUrl } from '../utils/url-utils';
+import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
 
-// begin helper functions
+// <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
 
 const getInitBranchName = (branches) => {
@@ -22,6 +24,14 @@ const getInitVersions = (branchListByProduct) => {
     initState[productName] = getInitBranchName(branchListByProduct[productName]);
   }
   return initState;
+};
+
+const findBranchByGit = (gitBranchName, branches) => {
+  if (!branches || !branches.length) {
+    return;
+  }
+
+  return branches.find((b) => b.gitBranchName === gitBranchName);
 };
 
 // version state reducer helper fn
@@ -79,7 +89,7 @@ const getUmbrellaProject = async (project, dbName) => {
     console.error(e);
   }
 };
-// end helper functions
+// <-------------- end helper functions -------------->
 
 const VersionContext = createContext({
   activeVersions: {},
@@ -87,12 +97,14 @@ const VersionContext = createContext({
   setActiveVersions: () => {},
   availableVersions: {},
   showVersionDropdown: false,
+  onVersionSelect: () => {},
 });
 
 const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, children }) => {
   const metadata = useSiteMetadata();
   const mountRef = useRef(true);
 
+  // TODO check whats going on here for 404 pages
   // tracks active versions across app
   const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY) || {});
   // update local storage when active versions change
@@ -135,8 +147,69 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
     });
   }, [availableVersions, metadata.project, metadata.database]);
 
+  // handler for selecting version on multiple dropdowns
+  const onVersionSelect = useCallback(
+    (targetProject, gitBranchName) => {
+      const updatedVersion = {};
+      updatedVersion[targetProject] = gitBranchName;
+      setActiveVersions(updatedVersion);
+
+      // navigate to new URL only if from same project
+      if (targetProject !== metadata.project) {
+        return;
+      }
+
+      const targetBranch = findBranchByGit(gitBranchName, availableVersions[metadata.project]);
+      if (!targetBranch) {
+        console.error(`target branch not found for git branch <${gitBranchName}>`);
+        return;
+      }
+      const target = targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
+      const urlTarget = getUrl(target, metadata.project, metadata, repoBranches?.siteBasePrefix);
+      navigate(urlTarget);
+    },
+    [availableVersions, metadata, repoBranches]
+  );
+
+  // attempts to find branch by given url alias. can be alias, urlAliases, or gitBranchName
+  const findBranchByAlias = useCallback(
+    (alias) => {
+      if (!availableVersions[metadata.project]) {
+        return;
+      }
+
+      return availableVersions[metadata.project].find(
+        (b) => b.urlSlug === alias || b.urlAliases.includes(alias) || b.gitBranchName === alias
+      );
+    },
+    [availableVersions, metadata.project]
+  );
+
+  // if context values differ from url, fix context.
+  // ie. user lands on "upcoming" version URL whilst context stores "stable"
+  const currentUrlSlug = useCurrentUrlSlug(metadata.parserBranch, availableVersions[metadata.project]);
+  useEffect(() => {
+    // if current version differs from browser storage version
+    // update browser local storage
+    if (!currentUrlSlug) {
+      return;
+    }
+    const currentBranch = findBranchByAlias(currentUrlSlug);
+    if (!currentBranch) {
+      console.error(`url <${currentUrlSlug}> does not correspond to any current branch`);
+      return;
+    }
+    if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
+      const newState = {};
+      newState[metadata.project] = currentBranch.gitBranchName;
+      setActiveVersions(newState);
+    }
+  }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
+
   return (
-    <VersionContext.Provider value={{ activeVersions, setActiveVersions, availableVersions, showVersionDropdown }}>
+    <VersionContext.Provider
+      value={{ activeVersions, setActiveVersions, availableVersions, showVersionDropdown, onVersionSelect }}
+    >
       {children}
     </VersionContext.Provider>
   );

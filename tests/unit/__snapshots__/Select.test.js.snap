@@ -21,17 +21,6 @@ exports[`Select renders select correctly 1`] = `
   margin-top: 3px;
 }
 
-.emotion-1>button>div>div>div {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .emotion-2 {
   -webkit-appearance: none;
   -moz-appearance: none;
