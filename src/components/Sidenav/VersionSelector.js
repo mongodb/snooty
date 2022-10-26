@@ -3,7 +3,6 @@ import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
-import { palette } from '@leafygreen-ui/palette';
 
 const buildChoice = (branch) => {
   return {
@@ -30,18 +29,8 @@ const StyledSelect = styled(Select)`
   }
 
   button {
-    height: ${theme.size.medium};
-    &[aria-expanded='false'] {
-      background: transparent;
-      border: none;
-      background: transparent;
-      color: ${palette.gray.dark1};
-
-      svg {
-        color: ${palette.gray.dark1};
-      }
-    }
     z-index: 3;
+    height: ${theme.size.medium};
   }
 `;
 
