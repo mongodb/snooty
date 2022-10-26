@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import { useTheme, css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import Select, { Label } from '../Select';
@@ -12,10 +12,25 @@ const buildChoices = (branches) => {
   }));
 };
 
+const StyledSelect = styled(Select)`
+  width: 100%;
+
+  button[aria-expanded='true'] {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  @media ${({ theme }) => theme.screenSize.smallAndUp} {
+    /* Min width of right panel */
+    max-width: 180px;
+  }
+`;
+
 const AssociatedVersionSelector = () => {
   const { project } = useSiteMetadata();
   const { activeVersions, availableVersions, showVersionDropdown, onVersionSelect } = useContext(VersionContext);
-  const { screenSize } = useTheme();
+  // const { screenSize } = useTheme();
 
   const onSelectChange = useCallback(
     ({ value }) => {
@@ -32,19 +47,11 @@ const AssociatedVersionSelector = () => {
         availableVersions[project].length > 0 && (
           <>
             <Label>Specify your version</Label>
-            <Select
-              css={css`
-                width: 100%;
-
-                @media ${screenSize.smallAndUp} {
-                  /* Min width of right panel */
-                  max-width: 180px;
-                }
-              `}
+            <StyledSelect
               choices={buildChoices(availableVersions[project])}
               value={activeVersions[project]}
               onChange={onSelectChange}
-            ></Select>
+            ></StyledSelect>
           </>
         )}
     </>

@@ -29,8 +29,13 @@ const StyledSelect = styled(Select)`
   }
 
   button {
-    z-index: 3;
     height: ${theme.size.medium};
+    &[aria-expanded='true'] {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+    z-index: 3;
   }
 `;
 
