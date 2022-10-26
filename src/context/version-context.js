@@ -179,7 +179,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
       }
 
       return availableVersions[metadata.project].find(
-        (b) => b.urlSlug === alias || b.urlAliases.includes(alias) || b.gitBranchName === alias
+        (b) => b.urlSlug === alias || b.urlAliases?.includes(alias) || b.gitBranchName === alias
       );
     },
     [availableVersions, metadata.project]
