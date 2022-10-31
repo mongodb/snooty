@@ -30,7 +30,6 @@ const StyledSelect = styled(Select)`
 const AssociatedVersionSelector = () => {
   const { project } = useSiteMetadata();
   const { activeVersions, availableVersions, showVersionDropdown, onVersionSelect } = useContext(VersionContext);
-  // const { screenSize } = useTheme();
 
   const onSelectChange = useCallback(
     ({ value }) => {
