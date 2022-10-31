@@ -129,7 +129,12 @@ const mountConsumer = () => {
 };
 
 describe('Version Context', () => {
-  let wrapper, mockedBrowserStorageSetter, mockedBrowserStorageGetter, mockedLocalStorage, mockedRealm;
+  let wrapper,
+    mockedBrowserStorageSetter,
+    mockedBrowserStorageGetter,
+    mockedLocalStorage,
+    mockedFetchDocument,
+    mockFetchDocuments;
 
   beforeEach(() => {
     mockedLocalStorage = {};
@@ -142,48 +147,57 @@ describe('Version Context', () => {
     mockedBrowserStorageGetter = jest.spyOn(browserStorage, 'getLocalValue').mockImplementation((key) => {
       return mockedLocalStorage[key];
     });
-    mockedRealm = jest.spyOn(realm, 'fetchDocument').mockImplementation(async (database, collectionName, query) => {
-      switch (query.project) {
-        case 'cloud-docs':
-          return {
-            project: 'cloud-docs',
-            branches: [
-              {
-                name: 'master',
-                publishOriginalBranchName: false,
-                active: true,
-                aliases: null,
-                gitBranchName: 'master',
-                urlSlug: null,
-                urlAliases: null,
-                isStableBranch: true,
-              },
-            ],
-          };
-        case 'atlas-cli':
-          return {
-            project: 'atlas-cli',
-            branches: [
-              { gitBranchName: 'master', isStableBranch: false, active: true },
-              { gitBranchName: 'v1.1', isStableBranch: true, active: true },
-              { gitBranchName: 'v1.2', isStableBranch: true, active: true },
-            ],
-          };
-        default:
-          break;
-      }
-      return {
-        database,
-        collectionName,
-        query,
-      };
-    });
+    mockedFetchDocument = jest
+      .spyOn(realm, 'fetchDocument')
+      .mockImplementation(async (database, collectionName, query) => {
+        switch (query.project) {
+          case 'cloud-docs':
+            return {
+              project: 'cloud-docs',
+              branches: [
+                {
+                  name: 'master',
+                  publishOriginalBranchName: false,
+                  active: true,
+                  aliases: null,
+                  gitBranchName: 'master',
+                  urlSlug: null,
+                  urlAliases: null,
+                  isStableBranch: true,
+                },
+              ],
+            };
+          case 'atlas-cli':
+            return {
+              project: 'atlas-cli',
+              branches: [
+                { gitBranchName: 'master', isStableBranch: false, active: true },
+                { gitBranchName: 'v1.1', isStableBranch: true, active: true },
+                { gitBranchName: 'v1.2', isStableBranch: true, active: true },
+              ],
+            };
+          default:
+            break;
+        }
+        return {
+          database,
+          collectionName,
+          query,
+        };
+      });
+  });
+  mockFetchDocuments = jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName, query) => {
+    if (query && query['associated_products'] === 'docs-atlas-cli') {
+      return [{}]; // spoofing data for "at least one parent association"
+    }
+    return [];
   });
 
   afterAll(() => {
-    mockedRealm.mockClear();
+    mockedFetchDocument.mockClear();
     mockedBrowserStorageSetter.mockClear();
     mockedBrowserStorageGetter.mockClear();
+    mockFetchDocuments.mockClear();
   });
 
   it('it has initial available and active version values if local storage is empty', async () => {
@@ -229,6 +243,6 @@ describe('Version Context', () => {
     await act(async () => {
       wrapper = mountConsumer();
     });
-    expect(mockedRealm).toHaveBeenCalled();
+    expect(mockedFetchDocument).toHaveBeenCalled();
   });
 });

@@ -53,7 +53,7 @@ const Document = ({ children, pageContext: { slug, page, repoBranches, isAssocia
         </div>
       </StyledMainColumn>
       <StyledRightColumn>
-        {isAssociatedProduct && <AssociatedVersionSelector slug={slug} repoBranches={repoBranches} />}
+        {isAssociatedProduct && <AssociatedVersionSelector />}
         <TabSelectors />
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>
