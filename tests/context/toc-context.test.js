@@ -92,7 +92,9 @@ const setMocks = () => {
   }));
 
   // mock realm
-  realmMock.mockResolvedValue(mockedResponse);
+  realmMock.mockImplementation(() => {
+    return mockedResponse;
+  });
 };
 
 // <------------------ END test data mocks ------------------>
@@ -112,8 +114,14 @@ const mountConsumer = (
     'cloud-docs': [{ gitBranchName: 'master' }],
   }
 ) => {
+  const setActiveVersions = (newState) => {
+    availableVersions = {
+      ...availableVersions,
+      ...newState,
+    };
+  };
   return render(
-    <VersionContext.Provider value={{ activeVersions, availableVersions }}>
+    <VersionContext.Provider value={{ activeVersions, availableVersions, setActiveVersions }}>
       <TocContextProvider>
         <TestConsumer></TestConsumer>
       </TocContextProvider>

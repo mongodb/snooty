@@ -10,6 +10,7 @@ import TabSelectors from '../components/Tabs/TabSelectors';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 
 const DocumentContainer = styled('div')`
   display: grid;
@@ -27,7 +28,7 @@ const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
 `;
 
-const Document = ({ children, pageContext: { slug, page } }) => {
+const Document = ({ children, pageContext: { slug, page, repoBranches, isAssociatedProduct } }) => {
   const { project } = useSiteMetadata();
   const { parentPaths, slugToTitle, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
@@ -52,6 +53,7 @@ const Document = ({ children, pageContext: { slug, page } }) => {
         </div>
       </StyledMainColumn>
       <StyledRightColumn>
+        {isAssociatedProduct && <AssociatedVersionSelector />}
         <TabSelectors />
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>

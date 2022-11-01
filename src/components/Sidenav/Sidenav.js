@@ -26,6 +26,7 @@ import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
+import { VersionContext } from '../../context/version-context';
 
 const SIDENAV_WIDTH = 268;
 
@@ -163,7 +164,12 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
 
-  const showVersions = repoBranches?.branches?.length > 1;
+  let showVersions = repoBranches?.branches?.length > 1;
+
+  const { showVersionDropdown } = useContext(VersionContext);
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS && showVersionDropdown) {
+    showVersions = false;
+  }
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
