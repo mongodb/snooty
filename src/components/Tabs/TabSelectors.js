@@ -35,6 +35,11 @@ const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => 
       css={css`
         width: 100%;
 
+        & button > div > div > div {
+          display: flex;
+          align-items: center;
+        }
+
         @media ${screenSize.smallAndUp} {
           /* Min width of right panel */
           max-width: 180px;
