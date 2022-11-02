@@ -214,9 +214,16 @@ exports.createPages = async ({ actions }) => {
           page: pageNodes,
         };
 
-        const openapiSpecStore = openapiPageMapping[slug];
-        if (!!openapiSpecStore) {
-          context['openapiSpecStore'] = openapiSpecStore;
+        if (openapiPageMetadata[slug]) {
+          const openapiSpecStore = openapiPageMapping[slug];
+          if (!!openapiSpecStore) {
+            context['openapiSpecStore'] = openapiSpecStore;
+          } else {
+            // Skip content page and log error if an OpenAPI content page was
+            // unsuccessful sourcing its spec content.
+            console.error(`OpenAPI content page "${slug}" detected, but no spec store found.`);
+            return;
+          }
         }
 
         createPage({

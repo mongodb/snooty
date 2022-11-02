@@ -1,10 +1,11 @@
 const { createStore } = require('redoc');
 const fetch = require('node-fetch');
 
-const fetchData = async (url) => {
+const fetchData = async (url, errMsg) => {
   const res = await fetch(url);
   if (!res.ok) {
-    throw new Error(res.statusText);
+    // Error should be caught when creating pages.
+    throw new Error(`${errMsg}; ${res.statusText}`);
   }
   return res.text();
 };
@@ -31,9 +32,9 @@ const getAtlasSourceStore = async (apiKeyword) => {
   }
 
   const versionURL = 'https://cloud.mongodb.com/version';
-  const gitHash = await fetchData(versionURL);
+  const gitHash = await fetchData(versionURL, 'Could not find current version or git hash.');
   const oasFileURL = `https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/${gitHash}.json`;
-  const oasFileContent = await fetchData(oasFileURL);
+  const oasFileContent = await fetchData(oasFileURL, `Unable to find spec from ${oasFileURL}.`);
 
   return createSerializedStore(oasFileContent);
 };
@@ -49,10 +50,14 @@ const constructOpenAPIPageMapping = async (openapiMetadata) => {
   for (const [slug, data] of entries) {
     const { source_type: sourceType, source } = data;
 
-    if (sourceType === 'url' || sourceType === 'local') {
-      mapping[slug] = await createSerializedStore(source);
-    } else if (sourceType === 'atlas') {
-      mapping[slug] = await getAtlasSourceStore(source);
+    try {
+      if (sourceType === 'url' || sourceType === 'local') {
+        mapping[slug] = await createSerializedStore(source);
+      } else if (sourceType === 'atlas') {
+        mapping[slug] = await getAtlasSourceStore(source);
+      }
+    } catch (err) {
+      console.error(err);
     }
   }
 
