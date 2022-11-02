@@ -40,7 +40,7 @@ const getAtlasSourceStore = async (apiKeyword) => {
 
 /**
  * @param {object} openapiMetadata
- * @returns {object} A mapping of OpenAPI content pages and their parsed spec stores
+ * @returns A mapping of OpenAPI content pages and their parsed spec stores
  */
 const constructOpenAPIPageMapping = async (openapiMetadata) => {
   const mapping = {};
