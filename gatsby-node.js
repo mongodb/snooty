@@ -214,7 +214,7 @@ exports.createPages = async ({ actions }) => {
           page: pageNodes,
         };
 
-        if (openapiPageMetadata[slug]) {
+        if (openapiPageMetadata?.[slug]) {
           const openapiSpecStore = openapiPageMapping[slug];
           if (!!openapiSpecStore) {
             context['openapiSpecStore'] = openapiSpecStore;
