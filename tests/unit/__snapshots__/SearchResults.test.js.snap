@@ -449,17 +449,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-top: 3px;
 }
 
-.emotion-46>button>div>div>div {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .emotion-47 {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1452,17 +1441,6 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-37>label+button,
 .emotion-37>p+button {
   margin-top: 3px;
-}
-
-.emotion-37>button>div>div>div {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .emotion-38 {
@@ -4239,17 +4217,6 @@ exports[`Search Results Page renders results from a given search term query para
 .emotion-40>label+button,
 .emotion-40>p+button {
   margin-top: 3px;
-}
-
-.emotion-40>button>div>div>div {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .emotion-41 {

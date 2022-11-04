@@ -26,13 +26,6 @@ const optionStyling = css`
   }
 `;
 
-const buttonContentStyling = css`
-  & > button > div > div > div {
-    display: flex;
-    align-items: center;
-  }
-`;
-
 const iconStyling = css`
   display: inline-block;
   margin-right: ${theme.size.small};
@@ -70,7 +63,6 @@ const Select = ({
       {showSelect && (
         <LGSelect
           data-testid="lg-select"
-          className={cx(buttonContentStyling)}
           value={value || ''}
           label={label}
           aria-labelledby={(!label && 'select') || null}
