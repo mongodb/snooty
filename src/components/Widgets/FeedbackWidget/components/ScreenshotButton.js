@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@leafygreen-ui/button';
 import Tooltip from './LeafygreenTooltip';
 import { CameraIcon, SpinnerIcon, CheckIcon } from '../icons';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenshot from '../hooks/useScreenshot';
 
 export default function ScreenshotButton({ size = 'default', ...props }) {
@@ -19,7 +19,7 @@ export default function ScreenshotButton({ size = 'default', ...props }) {
         trigger={
           <Button variant="default" label={label} onClick={takeScreenshot} {...props}>
             {screenshot ? (
-              <CheckIcon style={{ color: uiColors.green.base }} />
+              <CheckIcon style={{ color: palette.green.base }} />
             ) : loading ? (
               <SpinnerIcon />
             ) : (

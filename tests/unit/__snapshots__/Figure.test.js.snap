@@ -9,7 +9,7 @@ exports[`renders border correctly when specified as an option 1`] = `
 }
 
 .emotion-1 {
-  border: 0.5px solid #B8C4C2;
+  border: 0.5px solid #C1C7C6;
   width: 100%;
   border-radius: 4px;
   max-width: 100%;

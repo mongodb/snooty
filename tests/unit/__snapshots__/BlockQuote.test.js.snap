@@ -30,6 +30,11 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-16 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-17 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -47,19 +52,17 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-16:focus {
+.emotion-17:focus {
   outline: none;
 }
 
-.emotion-17 {
+.emotion-18 {
   position: relative;
 }
 
-.emotion-17::after {
+.emotion-18::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -69,28 +72,35 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-17::after {
+.constant-classname:focus .emotion-18::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-17::after {
+.constant-classname:hover .emotion-18::after {
   background-color: #E8EDEB;
 }
 
-.emotion-18 {
+.emotion-19 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-19 {
+.emotion-20 {
   position: relative;
   bottom: 4px;
   left: -1px;
   height: 12px;
 }
 
-.emotion-19 {
+.emotion-20 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-20 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -131,17 +141,17 @@ exports[`renders correctly 1`] = `
           class="emotion-0 emotion-1 emotion-2"
         >
           <span
-            class="constant-classname emotion-16"
+            class="constant-classname emotion-16 emotion-17"
           >
             <span
-              class="emotion-17"
+              class="emotion-18"
             >
               programmatic access
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-18 emotion-19"
+              class="emotion-19 emotion-20"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
