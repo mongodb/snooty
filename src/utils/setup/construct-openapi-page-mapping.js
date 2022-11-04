@@ -50,14 +50,10 @@ const constructOpenAPIPageMapping = async (openapiMetadata) => {
   for (const [slug, data] of entries) {
     const { source_type: sourceType, source } = data;
 
-    try {
-      if (sourceType === 'url' || sourceType === 'local') {
-        mapping[slug] = await createSerializedStore(source);
-      } else if (sourceType === 'atlas') {
-        mapping[slug] = await getAtlasSourceStore(source);
-      }
-    } catch (err) {
-      console.error(err);
+    if (sourceType === 'url' || sourceType === 'local') {
+      mapping[slug] = await createSerializedStore(source);
+    } else if (sourceType === 'atlas') {
+      mapping[slug] = await getAtlasSourceStore(source);
     }
   }
 

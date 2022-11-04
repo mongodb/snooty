@@ -197,7 +197,17 @@ exports.createPages = async ({ actions }) => {
   }
 
   const openapiPageMetadata = manifestMetadata['openapi_pages'];
-  const openapiPageMapping = !!openapiPageMetadata ? await constructOpenAPIPageMapping(openapiPageMetadata) : {};
+  let openapiPageMapping = {};
+  if (!!openapiPageMetadata) {
+    try {
+      openapiPageMapping = await constructOpenAPIPageMapping(openapiPageMetadata);
+    } catch (err) {
+      // Stop build process if there was an error constructing spec stores to avoid
+      // silent errors for OpenAPI content pages.
+      console.error(err);
+      process.exit(1);
+    }
+  }
 
   return new Promise((resolve, reject) => {
     PAGES.forEach((page) => {
@@ -214,16 +224,9 @@ exports.createPages = async ({ actions }) => {
           page: pageNodes,
         };
 
-        if (openapiPageMetadata?.[slug]) {
-          const openapiSpecStore = openapiPageMapping[slug];
-          if (!!openapiSpecStore) {
-            context['openapiSpecStore'] = openapiSpecStore;
-          } else {
-            // Skip content page and log error if an OpenAPI content page was
-            // unsuccessful sourcing its spec content.
-            console.error(`OpenAPI content page "${slug}" detected, but no spec store found.`);
-            return;
-          }
+        const openapiSpecStore = openapiPageMapping[slug];
+        if (!!openapiSpecStore) {
+          context['openapiSpecStore'] = openapiSpecStore;
         }
 
         createPage({
