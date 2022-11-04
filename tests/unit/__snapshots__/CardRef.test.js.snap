@@ -242,6 +242,11 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-52 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-53 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -259,19 +264,17 @@ exports[`card correctly with and without url 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-52:focus {
+.emotion-53:focus {
   outline: none;
 }
 
-.emotion-53 {
+.emotion-54 {
   position: relative;
 }
 
-.emotion-53::after {
+.emotion-54::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -281,11 +284,11 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-53::after {
+.constant-classname:focus .emotion-54::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-53::after {
+.constant-classname:hover .emotion-54::after {
   background-color: #E8EDEB;
 }
 
@@ -388,13 +391,13 @@ exports[`card correctly with and without url 1`] = `
           class="emotion-49 emotion-50 emotion-14"
         >
           <a
-            class="constant-classname emotion-52"
+            class="constant-classname emotion-52 emotion-53"
             href="https://docs.mongodb.com/realm/services/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-53"
+              class="emotion-54"
             >
               Learn more about MongoDB Realm Application Services
             </span>

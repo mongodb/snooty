@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
 import ComponentFactory from '../ComponentFactory';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
 const videoBannerStyling = css`
   ${baseBannerStyle};
-  background-color: ${uiColors.blue.light3};
-  border: 1px solid ${uiColors.blue.light2};
+  background-color: ${palette.blue.light3};
+  border: 1px solid ${palette.blue.light2};
   border-radius: 6px;
   display: flex;
   position: relative;
   font-size: 14px;
   padding: 9px 12px 9px 20px;
-  color: ${uiColors.blue.dark2};
+  color: ${palette.blue.dark2};
   margin: 24px 0px;
 
   > p {
@@ -26,12 +26,12 @@ const videoBannerStyling = css`
 const lgIconStyling = css`
   width: 26px;
   height: 26px;
-  background-color: ${uiColors.blue.light2};
+  background-color: ${palette.blue.light2};
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${uiColors.blue.base};
+  border: 1px solid ${palette.blue.base};
   border-radius: 20px;
   margin-left: -5px;
 `;
@@ -54,7 +54,7 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
     <a href={options?.url} css={linkStyling}>
       <div css={videoBannerStyling}>
         <div css={lgIconStyling}>
-          <Icon glyph={lgIcon} fill={uiColors.blue.base} />
+          <Icon glyph={lgIcon} fill={palette.blue.base} />
         </div>
         {children.map((child, i) => (
           <ComponentFactory {...rest} key={i} nodeData={child} />

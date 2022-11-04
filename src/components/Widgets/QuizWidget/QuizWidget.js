@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Card from '@leafygreen-ui/card';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
@@ -14,7 +14,7 @@ import { RealmAppProvider } from './RealmApp';
 import { quizAppId } from './realm-constants.json';
 
 const StyledCard = styled(Card)`
-  background-color: ${uiColors.gray.light3};
+  background-color: ${palette.gray.light3};
   width: 100%;
   padding: 40px;
 `;
@@ -35,7 +35,7 @@ const QuizSubtitle = styled('p')`
   font-weight: 500;
   font-size: ${theme.fontSize.small};
   line-height: 16.59px;
-  color: ${uiColors.gray.base};
+  color: ${palette.gray.base};
   margin: 0 !important;
 `;
 
@@ -49,7 +49,7 @@ const StyledButton = styled(Button)`
 
 const quizCompleteHeader = (
   <QuizHeader>
-    <Icon glyph="CheckmarkWithCircle" fill={uiColors.green.base} size="xlarge" />
+    <Icon glyph="CheckmarkWithCircle" fill={palette.green.base} size="xlarge" />
     <QuizTitle>Check your understanding</QuizTitle>
   </QuizHeader>
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import { baseUrl } from '../utils/base-url';
 
@@ -81,7 +81,7 @@ const Landing = ({ children }) => {
           h2,
           h3,
           h4 {
-            color: ${uiColors.black};
+            color: ${palette.black};
           }
           h1,
           h2 {
@@ -92,13 +92,13 @@ const Landing = ({ children }) => {
             margin-top: ${size.large};
           }
           p {
-            color: ${uiColors.black};
+            color: ${palette.black};
             font-size: ${fontSize.small};
             letter-spacing: 0.5px;
             margin-bottom: ${size.default};
           }
           a {
-            color: ${uiColors.blue.base};
+            color: ${palette.blue.base};
             font-size: ${fontSize.small};
             letter-spacing: 0.5px;
           }

@@ -3,6 +3,11 @@
 exports[`Link component renders a variety of strings correctly empty string 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-1 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -20,19 +25,17 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: relative;
 }
 
-.emotion-1::after {
+.emotion-2::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -42,21 +45,21 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-1::after {
+.constant-classname:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-1::after {
+.constant-classname:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
-.emotion-2 {
+.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-3 {
+.emotion-4 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -64,17 +67,17 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 }
 
 <span
-    class="constant-classname emotion-0"
+    class="constant-classname emotion-0 emotion-1"
   >
     <span
-      class="emotion-1"
+      class="emotion-2"
     >
       Empty string
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2 emotion-3"
+      class="emotion-3 emotion-4"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -96,6 +99,11 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 exports[`Link component renders a variety of strings correctly external MDB docs URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-1 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -113,19 +121,17 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: relative;
 }
 
-.emotion-1::after {
+.emotion-2::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -135,22 +141,22 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-1::after {
+.constant-classname:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-1::after {
+.constant-classname:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
 <a
-    class="constant-classname emotion-0"
+    class="constant-classname emotion-0 emotion-1"
     href="https://www.mongodb.com/docs/atlas/"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-1"
+      class="emotion-2"
     >
       MongoDB Atlas Docs
     </span>
@@ -161,6 +167,11 @@ exports[`Link component renders a variety of strings correctly external MDB docs
 exports[`Link component renders a variety of strings correctly external MDB non-docs URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-1 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -178,19 +189,17 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: relative;
 }
 
-.emotion-1::after {
+.emotion-2::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -200,21 +209,21 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-1::after {
+.constant-classname:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-1::after {
+.constant-classname:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
-.emotion-2 {
+.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-3 {
+.emotion-4 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -222,20 +231,20 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 }
 
 <a
-    class="constant-classname emotion-0"
+    class="constant-classname emotion-0 emotion-1"
     href="https://account.mongodb.com/account/"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-1"
+      class="emotion-2"
     >
       MongoDB Atlas Registration Page
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2 emotion-3"
+      class="emotion-3 emotion-4"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -257,6 +266,11 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 exports[`Link component renders a variety of strings correctly external URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-1 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -274,19 +288,17 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: relative;
 }
 
-.emotion-1::after {
+.emotion-2::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -296,21 +308,21 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-1::after {
+.constant-classname:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-1::after {
+.constant-classname:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
-.emotion-2 {
+.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-3 {
+.emotion-4 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -318,20 +330,20 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 }
 
 <a
-    class="constant-classname emotion-0"
+    class="constant-classname emotion-0 emotion-1"
     href="http://mongodb.com"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-1"
+      class="emotion-2"
     >
       MongoDB Company
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2 emotion-3"
+      class="emotion-3 emotion-4"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -353,6 +365,11 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 exports[`Link component renders a variety of strings correctly external non-MDB docs URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-1 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -370,19 +387,17 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: relative;
 }
 
-.emotion-1::after {
+.emotion-2::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -392,21 +407,21 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-1::after {
+.constant-classname:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-1::after {
+.constant-classname:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
-.emotion-2 {
+.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-3 {
+.emotion-4 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -414,20 +429,20 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 }
 
 <a
-    class="constant-classname emotion-0"
+    class="constant-classname emotion-0 emotion-1"
     href="https://safety.google/authentication/"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-1"
+      class="emotion-2"
     >
       Google 2-Step Verification
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2 emotion-3"
+      class="emotion-3 emotion-4"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -449,6 +464,11 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 exports[`Link component renders a variety of strings correctly identfies mailto links as external urls 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-1 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -466,19 +486,17 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: relative;
 }
 
-.emotion-1::after {
+.emotion-2::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -488,21 +506,21 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-1::after {
+.constant-classname:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-1::after {
+.constant-classname:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
 <a
-    class="constant-classname emotion-0"
+    class="constant-classname emotion-0 emotion-1"
     href="mailto:docs@mongodb.com"
     target="_self"
   >
     <span
-      class="emotion-1"
+      class="emotion-2"
     >
       docs@mongodb.com
     </span>

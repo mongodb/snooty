@@ -3,6 +3,11 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.emotion-1 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -10,11 +15,9 @@ exports[`renders correctly 1`] = `
   line-height: 24px;
   font-weight: 700;
   color: #001E2B;
-  margin-top: 24px;
-  margin-bottom: 8px;
 }
 
-.emotion-1 {
+.emotion-2 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -22,35 +25,35 @@ exports[`renders correctly 1`] = `
   visibility: hidden;
 }
 
-.emotion-2 {
+.emotion-3 {
   border-radius: 0!important;
   display: initial!important;
   margin: initial!important;
 }
 
-.emotion-4 {
+.emotion-5 {
   margin-top: -175px;
   position: absolute;
   padding-bottom: 2px;
 }
 
 <h3
-    class="contains-headerlink emotion-0"
+    class="emotion-0 contains-headerlink emotion-1"
     weight="medium"
   >
     Create an administrative username and password
     <a
-      class="headerlink emotion-1"
+      class="headerlink emotion-2"
       href="#create-an-administrative-username-and-password"
       title="Permalink to this heading"
     >
       <img
-        class="emotion-2 emotion-3"
+        class="emotion-3 emotion-4"
         src="/assets/link.svg"
       />
     </a>
     <div
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
       id="create-an-administrative-username-and-password"
     />
   </h3>

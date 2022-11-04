@@ -3,7 +3,7 @@
 exports[`GuideNext renders the default copy on the final guide 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  border-top: 1px solid #E7EEEC;
+  border-top: 1px solid #E8EDEB;
   margin-bottom: 24px;
   padding-top: 56px;
 }
@@ -198,9 +198,9 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-15 {
-  background-color: #E4F4E4;
+  background-color: #E3FCF7;
   border-radius: 4px;
-  color: #13AA52;
+  color: #001E2B;
   font-size: 13px;
   font-weight: bold;
   line-height: 24px;
@@ -211,7 +211,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-17 {
-  color: #061621;
+  color: #001E2B;
   font-weight: bold;
 }
 
@@ -244,7 +244,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   left: 10px;
   top: 20px;
   height: calc(100% - 20px);
-  border-left: solid 1px #13AA52;
+  border-left: solid 1px #00A35C;
 }
 
 .emotion-23 {
@@ -268,7 +268,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-25 {
-  color: #13AA52;
+  color: #00A35C;
 }
 
 .emotion-27 {
@@ -283,7 +283,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  color: #061621;
+  color: #001E2B;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -378,7 +378,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       >
         <li
           class="emotion-21 emotion-22"
-          color="#13AA52"
+          color="#00A35C"
         >
           <div
             class="emotion-23 emotion-24"
@@ -418,7 +418,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 exports[`GuideNext renders the first guide in the next chapter 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  border-top: 1px solid #E7EEEC;
+  border-top: 1px solid #E8EDEB;
   margin-bottom: 24px;
   padding-top: 56px;
 }
@@ -613,9 +613,9 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-15 {
-  background-color: #E4F4E4;
+  background-color: #E3FCF7;
   border-radius: 4px;
-  color: #13AA52;
+  color: #001E2B;
   font-size: 13px;
   font-weight: bold;
   line-height: 24px;
@@ -626,7 +626,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-17 {
-  color: #061621;
+  color: #001E2B;
   font-weight: bold;
 }
 
@@ -659,7 +659,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   left: 10px;
   top: 20px;
   height: calc(100% - 20px);
-  border-left: solid 1px #E7EEEC;
+  border-left: solid 1px #E8EDEB;
 }
 
 .emotion-23 {
@@ -668,7 +668,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   -ms-flex-align: center;
   align-items: center;
   border-radius: 50%;
-  border: solid 1px #13AA52;
+  border: solid 1px #00A35C;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -683,7 +683,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-25 {
-  color: #13AA52;
+  color: #00A35C;
 }
 
 .emotion-27 {
@@ -698,7 +698,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  color: #061621;
+  color: #001E2B;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -790,11 +790,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       >
         <li
           class="emotion-21 emotion-22"
-          color="#E7EEEC"
+          color="#E8EDEB"
         >
           <div
             class="emotion-23 emotion-24"
-            color="#13AA52"
+            color="#00A35C"
           >
             <svg
               class="emotion-25"
@@ -825,7 +825,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 exports[`GuideNext renders the next guide in the same chapter 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  border-top: 1px solid #E7EEEC;
+  border-top: 1px solid #E8EDEB;
   margin-bottom: 24px;
   padding-top: 56px;
 }
@@ -1020,9 +1020,9 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-15 {
-  background-color: #E4F4E4;
+  background-color: #E3FCF7;
   border-radius: 4px;
-  color: #13AA52;
+  color: #001E2B;
   font-size: 13px;
   font-weight: bold;
   line-height: 24px;
@@ -1033,7 +1033,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-17 {
-  color: #061621;
+  color: #001E2B;
   font-weight: bold;
 }
 
@@ -1066,7 +1066,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   left: 10px;
   top: 20px;
   height: calc(100% - 20px);
-  border-left: solid 1px #13AA52;
+  border-left: solid 1px #00A35C;
 }
 
 .emotion-23 {
@@ -1090,7 +1090,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-25 {
-  color: #13AA52;
+  color: #00A35C;
 }
 
 .emotion-27 {
@@ -1105,7 +1105,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  color: #061621;
+  color: #001E2B;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -1167,7 +1167,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   left: 10px;
   top: 20px;
   height: calc(100% - 20px);
-  border-left: solid 1px #E7EEEC;
+  border-left: solid 1px #E8EDEB;
 }
 
 .emotion-31 {
@@ -1176,7 +1176,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   -ms-flex-align: center;
   align-items: center;
   border-radius: 50%;
-  border: solid 1px #13AA52;
+  border: solid 1px #00A35C;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1191,7 +1191,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-33 {
-  color: #13AA52;
+  color: #00A35C;
 }
 
 .emotion-41 {
@@ -1252,7 +1252,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       >
         <li
           class="emotion-21 emotion-22"
-          color="#13AA52"
+          color="#00A35C"
         >
           <div
             class="emotion-23 emotion-24"
@@ -1285,11 +1285,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
         </li>
         <li
           class="emotion-29 emotion-22"
-          color="#E7EEEC"
+          color="#E8EDEB"
         >
           <div
             class="emotion-31 emotion-24"
-            color="#13AA52"
+            color="#00A35C"
           >
             <svg
               class="emotion-33"
@@ -1313,7 +1313,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
         </li>
         <li
           class="emotion-29 emotion-22"
-          color="#E7EEEC"
+          color="#E8EDEB"
         >
           <div
             class="emotion-23 emotion-24"
