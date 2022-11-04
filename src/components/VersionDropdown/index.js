@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
@@ -124,8 +124,8 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
 
   const eolVersionFlipperStyle = LeafyCSS`
     & > button {
-      background-color: ${uiColors.gray.light2} !important;
-      color: ${uiColors.gray.base} !important;
+      background-color: ${palette.gray.light2} !important;
+      color: ${palette.gray.base} !important;
     }
   `;
 

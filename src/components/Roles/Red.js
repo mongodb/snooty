@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 
 const Red = ({ nodeData: { children } }) => (
   <strong
     css={css`
-      color: ${uiColors.red.dark2};
+      color: ${palette.red.dark2};
     `}
   >
     {children.map((node, i) => (

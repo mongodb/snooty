@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 
 const Caption = styled('p')`
-  color: ${uiColors.gray.dark1};
+  color: ${palette.gray.dark1};
   /* TODO: Remove !important when mongodb-docs.css is removed */
   margin-top: ${theme.size.default} !important;
   text-align: center;
 
   /* TODO: Remove when mongodb-docs.css is removed */
   & > code {
-    color: ${uiColors.gray.dark1};
+    color: ${palette.gray.dark1};
   }
 `;
 
