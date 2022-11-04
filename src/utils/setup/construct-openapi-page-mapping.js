@@ -28,7 +28,7 @@ const getAtlasSourceStore = async (apiKeyword) => {
   // Currently, the only expected API fetched programmatically is the Cloud Admin API,
   // but it's possible to have more in the future with varying processes.
   if (apiKeyword !== 'cloud') {
-    return null;
+    throw new Error(`${apiKeyword} is not a supported API for building.`);
   }
 
   const versionURL = 'https://cloud.mongodb.com/version';

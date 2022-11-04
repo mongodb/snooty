@@ -55,4 +55,16 @@ describe('constructOpenAPIPageMapping', () => {
       expect(pageData.spec.data.info).toBeTruthy();
     }
   });
+
+  it('throws error on unsupported custom API sourcing', async () => {
+    const testMetadata = {
+      'path/to/page/atlas': {
+        source_type: 'atlas',
+        source: 'not-cloud',
+      },
+    };
+    await expect(constructOpenAPIPageMapping(testMetadata)).rejects.toThrow(
+      'not-cloud is not a supported API for building.'
+    );
+  });
 });
