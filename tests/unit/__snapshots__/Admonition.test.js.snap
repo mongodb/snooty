@@ -97,6 +97,11 @@ exports[`admonitions render correctly 1`] = `
   line-height: 28px;
 }
 
+.emotion-6 {
+  font-size: 16px;
+  line-height: 28px;
+}
+
 <div
     class="emotion-0"
     role="note"

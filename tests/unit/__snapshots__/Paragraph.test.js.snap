@@ -22,6 +22,11 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 }
 
 .emotion-3 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-4 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -39,19 +44,17 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-4 {
+.emotion-5 {
   position: relative;
 }
 
-.emotion-4::after {
+.emotion-5::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -61,28 +64,35 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-4::after {
+.constant-classname:focus .emotion-5::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-4::after {
+.constant-classname:hover .emotion-5::after {
   background-color: #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-6 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-6 {
+.emotion-7 {
   position: relative;
   bottom: 4px;
   left: -1px;
   height: 12px;
 }
 
-.emotion-6 {
+.emotion-7 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-7 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -93,20 +103,20 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
     class="emotion-0 emotion-1 emotion-2"
   >
     <a
-      class="constant-classname emotion-3"
+      class="constant-classname emotion-3 emotion-4"
       href="https://cloud.mongodb.com?tck=docs_realm"
       rel="noopener noreferrer"
       target="_blank"
     >
       <span
-        class="emotion-4"
+        class="emotion-5"
       >
         Deploy a Free Tier Cluster.
       </span>
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-5 emotion-6"
+        class="emotion-6 emotion-7"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"
@@ -148,6 +158,11 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 }
 
 .emotion-3 {
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-4 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -165,19 +180,17 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-4 {
+.emotion-5 {
   position: relative;
 }
 
-.emotion-4::after {
+.emotion-5::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -187,28 +200,35 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-4::after {
+.constant-classname:focus .emotion-5::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-4::after {
+.constant-classname:hover .emotion-5::after {
   background-color: #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-6 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-6 {
+.emotion-7 {
   position: relative;
   bottom: 4px;
   left: -1px;
   height: 12px;
 }
 
-.emotion-6 {
+.emotion-7 {
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+.emotion-7 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -219,20 +239,20 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
     class="emotion-0 emotion-1 emotion-2"
   >
     <a
-      class="constant-classname emotion-3"
+      class="constant-classname emotion-3 emotion-4"
       href="https://cloud.mongodb.com?tck=docs_realm"
       rel="noopener noreferrer"
       target="_blank"
     >
       <span
-        class="emotion-4"
+        class="emotion-5"
       >
         Deploy a Free Tier Cluster.
       </span>
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-5 emotion-6"
+        class="emotion-6 emotion-7"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"
