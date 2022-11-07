@@ -20,7 +20,7 @@ const ErrorBox = styled('div')`
 const SupportLink = styled(Link)`
   color: ${palette.gray.dark1};
   display: inline-block;
-  font-size: 13px;
+  font-size: ${theme.fontSize.small};
   line-height: 20px;
   margin-left: 16px;
 
