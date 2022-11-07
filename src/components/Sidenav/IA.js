@@ -18,7 +18,7 @@ const IA = ({ handleClick, header, ia }) => (
       const target = slug || url;
       return (
         <SideNavItem
-          className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
+          css={[sideNavItemBasePadding, sideNavItemFontSize]}
           key={target}
           as={Link}
           onClick={handleClick}
