@@ -159,8 +159,9 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     // for elements in the top or side nav, set position to fixed. Otherwise set it to absolute
     for (const elem in listOfElements) {
       if (
-        listOfElements[elem]?.className?.includes('SidenavContainer') ||
-        listOfElements[elem]?.className?.includes('StyledHeaderContainer')
+        elem &&
+        (listOfElements[elem]?.className?.includes('SidenavContainer') ||
+          listOfElements[elem]?.className?.includes('StyledHeaderContainer'))
       ) {
         currElemProperties.current['position'] = 'fixed';
         break;
@@ -187,7 +188,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // close out the instructions panel
   const handleInstructionClick = () => {
-    document.getElementById(feedbackId).style.display = 'block';
+    document.getElementById(feedbackId).style.left = 'initial';
     resetProperties();
   };
 
@@ -207,7 +208,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    document.getElementById(feedbackId).style.display = 'block';
+    document.getElementById(feedbackId).style.left = 'initial';
   };
 
   const handleExitButtonClick = (e) => {
@@ -222,7 +223,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      document.getElementById(feedbackId).style.display = 'none';
+      document.getElementById(feedbackId).style.left = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
     }
