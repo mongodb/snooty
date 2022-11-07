@@ -10,6 +10,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { OpenAPIContextProvider } from './OpenAPI/openapi-context';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
 // Delete this modified node from its original location.
@@ -80,7 +81,7 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 const DocumentBody = (props) => {
   const {
     location,
-    pageContext: { page, slug, template },
+    pageContext: { page, slug, template, openapiSpecStore },
   } = props;
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -111,11 +112,13 @@ const DocumentBody = (props) => {
         slug={slug}
       >
         <FootnoteContext.Provider value={{ footnotes }}>
-          <Template {...props}>
-            {pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-          </Template>
+          <OpenAPIContextProvider store={openapiSpecStore}>
+            <Template {...props}>
+              {pageNodes.map((child, index) => (
+                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+              ))}
+            </Template>
+          </OpenAPIContextProvider>
         </FootnoteContext.Provider>
       </Widgets>
       <UnifiedFooter hideLocale={true} />

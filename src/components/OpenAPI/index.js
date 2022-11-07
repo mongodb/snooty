@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
-import { RedocStandalone } from 'redoc';
+import { AppStore, Redoc, RedocStandalone } from 'redoc';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
@@ -26,6 +26,7 @@ import {
   spanHttpCss,
   themeOption,
 } from './styles';
+import { OpenAPIContext } from './openapi-context';
 
 // Important notes:
 // The contents of this file are (unfortunately) a hacky and brittle way of getting Redoc's React component to
@@ -143,7 +144,25 @@ const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
   );
 };
 
-const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
+const injectCustomComponents = (pageTitle, siteTitle) => {
+  // Don't inject anything if menu title container already exists.
+  const menuTest = document.querySelector(`.${menuTitleContainerClass}`);
+  if (menuTest) return;
+
+  const sidebarEl = document.querySelector(`.${menuContentClass}`);
+  if (!sidebarEl) return;
+  const searchEl = document.querySelector('div[role="search"]');
+  if (!searchEl) return;
+
+  // Insert back button and page title to redoc's sidenav
+  const menuTitleContainerEl = document.createElement('div');
+  menuTitleContainerEl.className = menuTitleContainerClass;
+  sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
+  render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
+};
+
+const OpenAPIPreview = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
+  console.log('Preview render');
   const usesRST = options?.['uses-rst'];
   const usesRealm = options?.['uses-realm'];
   const { database } = useSiteMetadata();
@@ -197,23 +216,9 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
         <RedocStandalone
           onLoaded={() => {
             setIsLoading(false);
-            const menuTest = document.querySelector(`.${menuTitleContainerClass}`);
-            if (menuTest) {
-              return;
-            }
-            // Insert back button and page title to redoc's sidenav
-            const sidebarEl = document.querySelector(`.${menuContentClass}`);
-            if (sidebarEl) {
-              const searchEl = document.querySelector('div[role="search"]');
-              if (searchEl) {
-                const menuTitleContainerEl = document.createElement('div');
-                menuTitleContainerEl.className = menuTitleContainerClass;
-                sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
-                const pageTitle = page?.options?.title || '';
-                const siteTitle = metadata?.title;
-                render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
-              }
-            }
+            const pageTitle = page?.options?.title || '';
+            const siteTitle = metadata?.title;
+            injectCustomComponents(pageTitle, siteTitle);
           }}
           options={{
             hideLoading: true,
@@ -226,6 +231,39 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
         />
       )}
     </>
+  );
+};
+
+const OpenAPIStatic = ({ metadata: { title: siteTitle }, topValues }) => {
+  console.log('Static render');
+  const { store } = useContext(OpenAPIContext);
+  store['options']['theme'] = themeOption;
+  const storeObject = AppStore.fromJS(store);
+  console.log(store);
+
+  useEffect(() => {
+    if (!store) return;
+    const pageTitle = store.spec.data.info.title;
+    injectCustomComponents(pageTitle, siteTitle);
+  }, [siteTitle, store]);
+
+  return (
+    <>
+      <Global styles={getGlobalCss(topValues)} />
+      <Redoc store={storeObject} />
+    </>
+  );
+};
+
+const OpenAPI = ({ metadata, nodeData, ...rest }) => {
+  const { options } = nodeData;
+  const isPreview = options['preview'];
+  const topValues = useStickyTopValues();
+
+  return isPreview ? (
+    <OpenAPIPreview metadata={metadata} nodeData={nodeData} topValues={topValues} {...rest} />
+  ) : (
+    <OpenAPIStatic metadata={metadata} topValues={topValues} />
   );
 };
 
