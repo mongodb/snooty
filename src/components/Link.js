@@ -58,7 +58,15 @@ const StyledGatsbyLink = styled(GatsbyLink)`
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
-const Link = ({ children, to, activeClassName, partiallyActive, showLinkArrow, ...other }) => {
+const Link = ({
+  children,
+  to,
+  activeClassName,
+  partiallyActive,
+  showLinkArrow,
+  hideExternalIcon: hideExternalIconProp,
+  ...other
+}) => {
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -78,8 +86,11 @@ const Link = ({ children, to, activeClassName, partiallyActive, showLinkArrow, .
       </StyledGatsbyLink>
     );
   }
-  const hideExternalIcon =
+
+  const shouldHideExternalIcon =
     !anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/)) ? false : true;
+  const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
+
   return (
     <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
       {children}
