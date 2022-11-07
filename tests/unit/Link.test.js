@@ -30,6 +30,11 @@ describe('Link component renders a variety of strings correctly', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
+  it('external URL with hidden external icon', () => {
+    const tree = setup({ to: 'http://mongodb.com', hideExternalIcon: true, text: 'MongoDB Company' });
+    expect(tree.asFragment()).toMatchSnapshot();
+  });
+
   it('internal link', () => {
     const tree = setup({ to: 'drivers/c', text: 'C Driver', className: 'test-class' });
     expect(tree.asFragment()).toMatchSnapshot();
