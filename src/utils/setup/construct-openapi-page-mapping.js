@@ -17,7 +17,11 @@ const fetchData = async (url, errMsg) => {
 const createSerializedStore = async (specString) => {
   const spec = JSON.parse(specString);
   const store = await createStore(spec);
-  return store.toJS();
+  const serializedStore = await store.toJS();
+  // Redoc's search worker uses shared memory. Dispose and reset shared memory for next spec.
+  // https://github.com/Redocly/redoc/blob/3d410b6002c656efa780254c9c45c6249f90bce1/src/services/SearchWorker.worker.ts#L80
+  store.search.searchWorker.dispose();
+  return serializedStore;
 };
 
 /**
