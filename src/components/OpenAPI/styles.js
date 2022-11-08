@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
+import { MENU_CONTENT_CLASS, MENU_TITLE_CONTAINER_CLASS } from './constants';
 import { theme } from '../../theme/docsTheme';
 
-const badgeBorderRadius = '50px';
+const badgeBorderRadius = '5px';
 const badgeBorderType = '1px solid';
 const codeFontFamily = 'Source Code Pro';
 const textFontFamily = '"Euclid Circular A", Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif';
@@ -127,7 +128,7 @@ export const themeOption = {
 
 const titleHeadingClass = 'sc-dFJsGO';
 
-export const headingsCss = css`
+const headingsCss = css`
   h1.${titleHeadingClass} {
     color: ${palette.green.dark2};
     font-family: 'MongoDB Value Serif';
@@ -149,7 +150,7 @@ export const headingsCss = css`
   }
 `;
 
-export const codeBlockCss = css`
+const codeBlockCss = css`
   // General code tags, especially for code blocks
   code {
     font-family: ${codeFontFamily};
@@ -193,7 +194,7 @@ export const codeBlockCss = css`
   }
 `;
 
-export const inlineCodeCss = css`
+const inlineCodeCss = css`
   // InlineCode found in data types of Parameters and Schemas; example: "string 24 characters"
   span.sc-GqfZa {
     background-color: ${palette.blue.light3};
@@ -209,7 +210,7 @@ export const inlineCodeCss = css`
   }
 `;
 
-export const leftSidebarCss = css`
+const leftSidebarCss = css`
   label[role='menuitem'] {
     font-size: 13px;
     font-weight: normal;
@@ -223,7 +224,7 @@ export const leftSidebarCss = css`
   }
 `;
 
-export const rightSidebarCss = css`
+const rightSidebarCss = css`
   // Status code / Response tabs
   ul.react-tabs__tab-list {
     li[role='tab'] {
@@ -279,7 +280,7 @@ export const rightSidebarCss = css`
   }
 `;
 
-export const schemaDataTypesCss = css`
+const schemaDataTypesCss = css`
   // Regex next to data types under query parameters; ex - "^([\w]{24})$"
   span.sc-gGmIRh {
     color: ${palette.gray.dark3};
@@ -287,7 +288,7 @@ export const schemaDataTypesCss = css`
 `;
 
 // HTTP badges
-export const spanHttpCss = css`
+const spanHttpCss = css`
   // Right sidebar badges
   span.http-verb {
     border: ${badgeBorderType};
@@ -344,9 +345,64 @@ export const spanHttpCss = css`
   }
 `;
 
-export const deprecatedBadgeCss = css`
+const deprecatedBadgeCss = css`
   // "deprecated" badge; related to the warning color theme
   span[type='warning'] {
     border-radius: 4px;
+  }
+`;
+
+const getTopAndHeight = (topValue) => css`
+  top: ${topValue} !important;
+  height: calc(100vh - ${topValue}) !important;
+`;
+
+// Overwrite css of Redoc's components that can be easily selected and that do not have
+// built-in theme options.
+export const getGlobalCss = ({ topLarge, topMedium }) => css`
+  ${headingsCss}
+  ${codeBlockCss}
+  ${inlineCodeCss}
+  ${leftSidebarCss}
+  ${rightSidebarCss}
+  ${schemaDataTypesCss}
+  ${spanHttpCss}
+  ${deprecatedBadgeCss}
+
+  // Overwrite the menu/sidebar's top and height using css because Redoc's scrollYOffset
+  // option doesn't take into account React state changes associated with screen size and viewport hooks.
+  .${MENU_CONTENT_CLASS} {
+    ${getTopAndHeight(topLarge)}
+
+    @media ${theme.screenSize.upToLarge} {
+      ${getTopAndHeight(topMedium)}
+    }
+  }
+
+  .${MENU_TITLE_CONTAINER_CLASS} {
+    padding-top: ${theme.size.default};
+
+    li {
+      list-style: none inside none;
+
+      a {
+        color: ${palette.gray.dark1};
+        font-size: ${theme.fontSize.small};
+
+        :hover,
+        :focus {
+          text-decoration: none;
+        }
+
+        ::before {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  // Prevent long enum names from overlapping with right sidebar code blocks
+  table {
+    word-break: break-word;
   }
 `;
