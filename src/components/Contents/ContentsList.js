@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { Label } from '../Select';
 import { palette } from '@leafygreen-ui/palette';
+import { Label } from '../Select';
 
 const List = styled('ul')`
   list-style-type: none;
