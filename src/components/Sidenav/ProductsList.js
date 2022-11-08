@@ -4,7 +4,7 @@ import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
 import { useAllProducts } from '../../hooks/useAllProducts';
 import { theme } from '../../theme/docsTheme';
@@ -41,12 +41,16 @@ const transitionClasses = css`
 
 const HeadingTitle = styled('span')`
   padding-left: ${theme.size.small};
+  font-size: ${theme.fontSize.small};
 `;
 
 const Products = styled(`ul`)`
   display: none;
   list-style-type: none;
   padding: 0;
+  li > a {
+    line-height: ${theme.size.medium};
+  }
 `;
 
 const ProductsListContainer = styled('div')`
@@ -56,8 +60,8 @@ const ProductsListContainer = styled('div')`
 
 const ProductsListHeading = styled('div')`
   align-items: center;
-  background-color: ${uiColors.gray.light3};
-  color: ${({ isOpen }) => (isOpen ? uiColors.gray.dark3 : uiColors.gray.dark1)};
+  background-color: ${palette.gray.light3};
+  color: ${({ isOpen }) => (isOpen ? palette.gray.dark3 : palette.gray.dark1)};
   cursor: pointer;
   display: flex;
   padding: ${theme.size.default} ${theme.size.medium} 12px;
@@ -66,12 +70,12 @@ const ProductsListHeading = styled('div')`
   z-index: 1;
 
   :hover {
-    color: ${uiColors.gray.dark3};
+    color: ${palette.gray.dark3};
   }
 `;
 
 const ProductLink = styled(Link)`
-  color: ${uiColors.gray.dark2};
+  color: ${palette.gray.dark2};
   display: inline-block;
   font-size: ${theme.fontSize.small};
   letter-spacing: 0;
@@ -79,7 +83,7 @@ const ProductLink = styled(Link)`
   width: 100%;
 
   :hover {
-    color: ${uiColors.gray.dark2};
+    color: ${palette.gray.dark2};
     font-weight: bold;
     text-decoration: none;
   }

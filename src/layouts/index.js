@@ -38,16 +38,8 @@ const globalCSS = css`
     width: 0;
   }
 
-  .contains-headerlink {
-    scroll-margin-top: ${theme.header.navbarHeight};
-
-    @media ${theme.screenSize.upToLarge} {
-      scroll-margin-top: ${theme.header.navbarMobileHeight};
-    }
-
-    @media ${theme.screenSize.upToSmall} {
-      scroll-margin-top: calc(${theme.header.navbarMobileHeight} + ${theme.header.docsMobileMenuHeight});
-    }
+  .header-buffer {
+    scroll-margin-top: ${theme.header.navbarScrollOffset};
   }
 
   ${'' /* Originally from docs-tools navbar.css */}
@@ -82,7 +74,10 @@ const GlobalGrid = styled('div')`
   grid-template-rows: auto 1fr;
 `;
 
-const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template } }) => {
+const DefaultLayout = ({
+  children,
+  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
+}) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
@@ -93,7 +88,13 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
     <>
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
-      <RootProvider headingNodes={page?.options?.headings} selectors={page?.options?.selectors}>
+      <RootProvider
+        repoBranches={repoBranches}
+        associatedReposInfo={associatedReposInfo}
+        headingNodes={page?.options?.headings}
+        selectors={page?.options?.selectors}
+        isAssociatedProduct={isAssociatedProduct}
+      >
         <GlobalGrid>
           <Header sidenav={sidenav} eol={eol} />
           {sidenav && (

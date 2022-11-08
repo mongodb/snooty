@@ -20,32 +20,46 @@ exports[`renders correctly 1`] = `
 
 .emotion-2 {
   position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
   background-color: white;
-  color: #21313C;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
   cursor: pointer;
 }
 
 .emotion-2:focus {
   outline: none;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3),0 0 0 3px #9DD0E7;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-2:hover {
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6);
+.emotion-2:hover,
+.emotion-2:active {
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-2:hover:focus {
-  box-shadow: 0 2px 6px -2px rgba(6,22,33,0.6),0 0 0 3px #9DD0E7;
+.emotion-2:hover:focus,
+.emotion-2:active:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
 .emotion-3 {
   width: 24px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-3 {
+    width: 20px;
+  }
 }
 
 .emotion-6 {
@@ -66,25 +80,51 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-7 {
+  font-weight: 600;
   letter-spacing: 0.5px;
-  margin: 24px 0 8px 0;
+  margin: 16px 0 8px 0;
 }
 
 .emotion-9 {
-  font-weight: bold;
-  margin-top: auto;
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  font-weight: 600;
 }
 
-.emotion-9>a:hover {
-  color: #1A567E;
+.emotion-10 {
+  margin-bottom: 16px;
 }
 
-.emotion-11 {
+.emotion-12 {
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  font-weight: 400;
+}
+
+.emotion-13 a {
+  line-height: unset;
+}
+
+.emotion-16 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
 }
 
-.emotion-12 {
+.emotion-17 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -105,25 +145,25 @@ exports[`renders correctly 1`] = `
   letter-spacing: 0px;
 }
 
-.emotion-12:focus {
+.emotion-17:focus {
   outline: none;
 }
 
-.emotion-13 {
+.emotion-18 {
   background-repeat: repeat-x;
   background-size: 2px 2px;
   background-position: center bottom;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-13 {
+[data-leafygreen-ui="anchor-container"]:hover .emotion-18 {
   background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-13 {
+[data-leafygreen-ui="anchor-container"]:focus .emotion-18 {
   background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
 }
 
-.emotion-14 {
+.emotion-19 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -146,33 +186,35 @@ exports[`renders correctly 1`] = `
     >
       Test card tag
     </span>
-    <h4
-      class="emotion-7 emotion-8"
+    <div
+      class="check-h4 emotion-7 emotion-8 emotion-9"
     >
       Test card headline
-    </h4>
-    <p>
+    </div>
+    <div
+      class="emotion-10 emotion-11 emotion-12"
+    >
       Test card paragraph
-    </p>
-    <p
-      class="emotion-9 emotion-10"
+    </div>
+    <div
+      class="emotion-13 emotion-14 emotion-12"
     >
       <a
-        class="emotion-11 emotion-12"
+        class="emotion-16 emotion-17"
         data-leafygreen-ui="anchor-container"
         href="https://university.mongodb.com/courses/M001/about"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-13"
+          class="emotion-18"
         >
           Test card CTA
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-14"
+          class="emotion-19"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -188,7 +230,7 @@ exports[`renders correctly 1`] = `
           />
         </svg>
       </a>
-    </p>
+    </div>
   </div>
 </DocumentFragment>
 `;

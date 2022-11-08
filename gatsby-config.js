@@ -16,13 +16,6 @@ module.exports = {
         stripQueryString: true,
       },
     },
-    {
-      resolve: 'gatsby-plugin-google-tagmanager',
-      options: {
-        id: 'GTM-GDFN',
-        includeInDevelopment: false,
-      },
-    },
   ],
   pathPrefix,
   siteMetadata,

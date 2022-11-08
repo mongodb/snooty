@@ -1,6 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
 import { createNewFeedback, useStitchUser } from './stitch';
-import { getSegmentUserId } from '../../../utils/segment';
 import { getViewport } from '../../../hooks/useViewport';
 
 const FeedbackContext = createContext();
@@ -39,7 +38,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
 
     if (!selectedSentiment) return;
     // Submit the full feedback document
-    const segment = getSegmentUserId();
     const newFeedback = {
       page: {
         title: page.title,
@@ -48,8 +46,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
         docs_property: page.docs_property,
       },
       user: {
-        segment_id: segment.id,
-        isAnonymous: segment.isAnonymous,
         stitch_id: user && user.id,
         email: email,
       },

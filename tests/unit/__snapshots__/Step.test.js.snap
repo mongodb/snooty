@@ -11,13 +11,15 @@ exports[`renders with "connected" styling 1`] = `
   gap: 33px;
 }
 
-.emotion-0 section>p>a {
-  font-weight: 600;
+.emotion-0 h2,
+.emotion-0 h3,
+.emotion-0 h4 {
+  margin-top: 4px;
 }
 
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E7EEEC;
+  border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
@@ -44,19 +46,14 @@ exports[`renders with "connected" styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #E4F4E4;
-  color: #116149;
+  background-color: #E3FCF7;
+  color: #00684A;
   height: 34px;
   width: 34px;
 }
 
 .emotion-6 {
-  margin-top: 5px;
   padding-bottom: 64px;
-}
-
-.emotion-6>section>:first-of-type {
-  margin-top: 0;
 }
 
 @media only screen and (max-width: 767px) {
@@ -69,6 +66,63 @@ exports[`renders with "connected" styling 1`] = `
   .emotion-6 {
     padding-bottom: 32px;
   }
+}
+
+.emotion-7 {
+  margin-bottom: 16px;
+}
+
+.emotion-9 {
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  font-weight: 400;
+}
+
+.emotion-13 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-13:focus {
+  outline: none;
+}
+
+.emotion-13>code {
+  color: #016BF8;
+}
+
+.emotion-13::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-13:focus .emotion-13::after {
+  background-color: #0498EC;
+}
+
+.emotion-13:hover::after {
+  background-color: #E8EDEB;
 }
 
 <div
@@ -84,18 +138,23 @@ exports[`renders with "connected" styling 1`] = `
       </div>
     </div>
     <div
-      class="emotion-6 emotion-7"
+      class="emotion-6"
     >
-      <p>
+      <div
+        class="emotion-7 emotion-8 emotion-9"
+      >
         Import data from CSV or JSON files into your MongoDB database.
-      </p>
-      <p>
+      </div>
+      <div
+        class="emotion-7 emotion-8 emotion-9"
+      >
         <a
+          class="emotion-13 emotion-14"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
         </a>
-      </p>
+      </div>
     </div>
   </div>
 </DocumentFragment>
@@ -112,13 +171,15 @@ exports[`renders with "connected" styling by default 1`] = `
   gap: 33px;
 }
 
-.emotion-0 section>p>a {
-  font-weight: 600;
+.emotion-0 h2,
+.emotion-0 h3,
+.emotion-0 h4 {
+  margin-top: 4px;
 }
 
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E7EEEC;
+  border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
@@ -145,19 +206,14 @@ exports[`renders with "connected" styling by default 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #E4F4E4;
-  color: #116149;
+  background-color: #E3FCF7;
+  color: #00684A;
   height: 34px;
   width: 34px;
 }
 
 .emotion-6 {
-  margin-top: 5px;
   padding-bottom: 64px;
-}
-
-.emotion-6>section>:first-of-type {
-  margin-top: 0;
 }
 
 @media only screen and (max-width: 767px) {
@@ -170,6 +226,63 @@ exports[`renders with "connected" styling by default 1`] = `
   .emotion-6 {
     padding-bottom: 32px;
   }
+}
+
+.emotion-7 {
+  margin-bottom: 16px;
+}
+
+.emotion-9 {
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  font-weight: 400;
+}
+
+.emotion-13 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-13:focus {
+  outline: none;
+}
+
+.emotion-13>code {
+  color: #016BF8;
+}
+
+.emotion-13::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-13:focus .emotion-13::after {
+  background-color: #0498EC;
+}
+
+.emotion-13:hover::after {
+  background-color: #E8EDEB;
 }
 
 <div
@@ -185,18 +298,23 @@ exports[`renders with "connected" styling by default 1`] = `
       </div>
     </div>
     <div
-      class="emotion-6 emotion-7"
+      class="emotion-6"
     >
-      <p>
+      <div
+        class="emotion-7 emotion-8 emotion-9"
+      >
         Import data from CSV or JSON files into your MongoDB database.
-      </p>
-      <p>
+      </div>
+      <div
+        class="emotion-7 emotion-8 emotion-9"
+      >
         <a
+          class="emotion-13 emotion-14"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
         </a>
-      </p>
+      </div>
     </div>
   </div>
 </DocumentFragment>
@@ -212,8 +330,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   gap: 16px;
 }
 
-.emotion-0 section>p>a {
-  font-weight: 600;
+.emotion-0 h2,
+.emotion-0 h3,
+.emotion-0 h4 {
+  margin-top: 4px;
 }
 
 .emotion-2 {
@@ -241,12 +361,61 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   width: 24px;
 }
 
-.emotion-6 {
-  margin-bottom: 24px;
+.emotion-7 {
+  margin-bottom: 16px;
 }
 
-.emotion-6>section>:first-of-type {
-  margin-top: 0;
+.emotion-9 {
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  font-weight: 400;
+}
+
+.emotion-13 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-13:focus {
+  outline: none;
+}
+
+.emotion-13>code {
+  color: #016BF8;
+}
+
+.emotion-13::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-13:focus .emotion-13::after {
+  background-color: #0498EC;
+}
+
+.emotion-13:hover::after {
+  background-color: #E8EDEB;
 }
 
 <div
@@ -262,18 +431,23 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
       </div>
     </div>
     <div
-      class="emotion-6 emotion-7"
+      class="emotion-6"
     >
-      <p>
+      <div
+        class="emotion-7 emotion-8 emotion-9"
+      >
         Import data from CSV or JSON files into your MongoDB database.
-      </p>
-      <p>
+      </div>
+      <div
+        class="emotion-7 emotion-8 emotion-9"
+      >
         <a
+          class="emotion-13 emotion-14"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
         </a>
-      </p>
+      </div>
     </div>
   </div>
 </DocumentFragment>

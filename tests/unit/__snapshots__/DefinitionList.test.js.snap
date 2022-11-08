@@ -4,6 +4,11 @@ exports[`DefinitionList renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   font-size: unset;
+  display: inline;
+}
+
+a .emotion-0 {
+  color: inherit;
 }
 
 .emotion-2 {

@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { useEventListener } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import SearchTextInput from './SearchTextInput';
@@ -15,7 +15,7 @@ import SearchContext from './SearchContext';
 const ARROW_DOWN_KEY = 40;
 const CLOSE_BUTTON_SIZE = theme.size.medium;
 const ENTER_KEY = 13;
-const GO_BUTTON_COLOR = uiColors.green.light3;
+const GO_BUTTON_COLOR = palette.green.light3;
 const GO_BUTTON_SIZE = '20px';
 
 const removeDefaultHoverEffects = css`
@@ -32,7 +32,7 @@ const removeDefaultHoverEffects = css`
 
 const ExpandedSearchbarContainer = styled('div')`
   display: flex;
-  background-color: ${uiColors.gray.light3};
+  background-color: ${palette.gray.light3};
   border-radius: ${theme.size.medium};
   // Prevent children from overflowing the page while expanding
   overflow-x: hidden;
@@ -41,12 +41,12 @@ const ExpandedSearchbarContainer = styled('div')`
   :hover,
   :focus,
   :focus-within {
-    background-color: ${uiColors.white};
+    background-color: ${palette.white};
     box-shadow: rgba(184, 196, 194, 0.56) 0px 0px 4px 0px;
   }
 
   @media ${theme.screenSize.upToSmall} {
-    background-color: ${uiColors.white};
+    background-color: ${palette.white};
     width: 100%;
 
     :hover,
@@ -93,7 +93,7 @@ const GoIcon = styled(Icon)`
 `;
 
 const MagnifyingGlass = styled(Icon)`
-  color: ${uiColors.gray.base};
+  color: ${palette.gray.base};
   transition: color 150ms ease-in;
 `;
 
@@ -183,7 +183,7 @@ const ExpandedSearchbar = ({ isFocused, onChange, onMobileClose }) => {
       )}
       {isMobile && (
         <CloseButton aria-label="Close Search" onClick={onMobileClose}>
-          <Icon glyph="X" fill={uiColors.gray.base} />
+          <Icon glyph="X" fill={palette.gray.base} />
         </CloseButton>
       )}
     </ExpandedSearchbarContainer>

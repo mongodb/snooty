@@ -4,7 +4,6 @@ exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   background-color: #FFFFFF;
-  border-radius: 4px;
   border: 1px solid #F9FBFA;
   padding: 32px 24px;
 }
@@ -39,13 +38,19 @@ exports[`renders correctly 1`] = `
 
 .emotion-2 {
   position: relative;
-  border-radius: 7px;
-  -webkit-transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  transition: border 300ms ease-in-out,box-shadow 300ms ease-in-out;
-  border: 1px solid #E7EEEC;
-  box-shadow: 0 4px 10px -4px rgba(6,22,33,0.3);
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
   background-color: white;
-  color: #21313C;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
 }
 
 .emotion-3 {
@@ -83,11 +88,12 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-7 {
-  background-color: #E4F4E4;
+  background-color: #E3FCF7;
   border-radius: 4px;
-  color: #13AA52;
-  font-size: 14px;
+  color: #001E2B;
+  font-size: 13px;
   font-weight: bold;
+  line-height: 24px;
   height: 24px;
   text-align: center;
   width: 83px;
@@ -104,6 +110,19 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-13 {
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  font-weight: 400;
+}
+
+.emotion-14 {
   list-style-type: none;
   list-style-image: url(/assets/lightning-bolt.svg);
   margin-bottom: 0;
@@ -113,12 +132,23 @@ exports[`renders correctly 1`] = `
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-13 {
+  .emotion-14 {
     grid-area: guides;
   }
 }
 
-.emotion-15 {
+.emotion-17 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
   border-radius: 4px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -130,17 +160,47 @@ exports[`renders correctly 1`] = `
   flex-direction: column;
   padding: 8px;
   position: relative;
+  font-size: 16px;
+  line-height: 24px;
 }
 
-.emotion-15:hover {
-  background-color: #E7EEEC;
+.emotion-17:focus {
+  outline: none;
+}
+
+.emotion-17>code {
+  color: #016BF8;
+}
+
+.emotion-17::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-17:focus .emotion-17::after {
+  background-color: #0498EC;
+}
+
+.emotion-17:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-17:hover {
+  background-color: #E8EDEB;
   color: unset;
-  -webkit-text-decoration: none;
-  text-decoration: none;
+}
+
+.emotion-17:hover::after {
+  content: none;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-15 {
+  .emotion-17 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -179,17 +239,17 @@ exports[`renders correctly 1`] = `
         Atlas
       </div>
       <div
-        class="emotion-11 emotion-12"
+        class="emotion-11 emotion-12 emotion-13"
       >
         Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.
       </div>
     </div>
     <ul
-      class="emotion-13 emotion-14"
+      class="emotion-14 emotion-15"
     >
       <li>
         <a
-          class="emotion-15 emotion-16"
+          class="emotion-16 emotion-17 emotion-18"
           href="/cloud/account/"
         >
           <span>
@@ -202,7 +262,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="emotion-15 emotion-16"
+          class="emotion-16 emotion-17 emotion-18"
           href="/cloud/connectionstring/"
         >
           <span>
@@ -213,7 +273,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="emotion-15 emotion-16"
+          class="emotion-16 emotion-17 emotion-18"
           href="/cloud/migrate-from-aws-to-atlas/"
         >
           <span>

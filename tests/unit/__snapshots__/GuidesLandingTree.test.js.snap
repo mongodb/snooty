@@ -15,9 +15,10 @@ exports[`renders correctly 1`] = `
   background: none;
   border: none;
   cursor: pointer;
+  position: relative;
   width: 100%;
   min-height: 32px;
-  padding: 4px 16px;
+  padding: 6px 16px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -27,31 +28,33 @@ exports[`renders correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight: normal;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #3D4F58;
-  -webkit-transition: background-color 150ms ease-in-out;
-  transition: background-color 150ms ease-in-out;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
   background-color: rgba(249,251,250,0);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   cursor: default;
   font-weight: bold;
   -webkit-text-decoration: none;
   text-decoration: none;
+  color: #00684A;
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 8px;
   padding-bottom: 8px;
+  font-size: 13px;
 }
 
 .emotion-1:hover {
-  background-color: #E7EEEC;
+  background-color: #E8EDEB;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -66,45 +69,89 @@ exports[`renders correctly 1`] = `
   border: 0;
 }
 
-.emotion-1,
-.emotion-1:hover {
-  color: #0B3B35;
-  background-color: #E4F4E4;
-}
-
 .emotion-1:before {
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
   content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
   -webkit-transform: scaleY(0.3);
   -moz-transform: scaleY(0.3);
   -ms-transform: scaleY(0.3);
   transform: scaleY(0.3);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  height: 20px;
-  margin: auto;
-  background-color: #019EE2;
-  opacity: 0;
-  border-radius: 0 3px 3px 0;
+}
+
+.emotion-1,
+.emotion-1:hover {
+  background-color: #E3FCF7;
+}
+
+.emotion-1:before {
+  -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+  background-color: #00A35C;
 }
 
 .emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0D324F;
-  background-color: #C5E4F2;
+  color: #0C2657;
+  background-color: #C3E7FE;
 }
 
 .emotion-1:focus:before {
-  opacity: 1;
   -webkit-transform: scaleY(1);
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+.emotion-2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-2>code {
+  color: #016BF8;
+}
+
+.emotion-2::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-2:focus .emotion-2::after {
+  background-color: #0498EC;
+}
+
+.emotion-2:hover::after {
+  background-color: #E8EDEB;
 }
 
 <li
@@ -113,8 +160,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="page"
       aria-disabled="false"
-      class="emotion-1"
-      data-leafygreen-ui="side-nav-item-container"
+      class="constant-classname emotion-1 emotion-2 emotion-3"
       href="/"
     >
       Overview
@@ -133,9 +179,10 @@ exports[`renders correctly 1`] = `
   background: none;
   border: none;
   cursor: pointer;
+  position: relative;
   width: 100%;
   min-height: 32px;
-  padding: 4px 16px;
+  padding: 6px 16px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -145,27 +192,28 @@ exports[`renders correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight: normal;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #3D4F58;
-  -webkit-transition: background-color 150ms ease-in-out;
-  transition: background-color 150ms ease-in-out;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
   background-color: rgba(249,251,250,0);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 8px;
   padding-bottom: 8px;
+  font-size: 13px;
 }
 
 .emotion-1:hover {
-  background-color: #E7EEEC;
+  background-color: #E8EDEB;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -181,38 +229,75 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1:before {
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
   content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
   -webkit-transform: scaleY(0.3);
   -moz-transform: scaleY(0.3);
   -ms-transform: scaleY(0.3);
   transform: scaleY(0.3);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  height: 20px;
-  margin: auto;
-  background-color: #019EE2;
-  opacity: 0;
-  border-radius: 0 3px 3px 0;
 }
 
 .emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0D324F;
-  background-color: #C5E4F2;
+  color: #0C2657;
+  background-color: #C3E7FE;
 }
 
 .emotion-1:focus:before {
-  opacity: 1;
   -webkit-transform: scaleY(1);
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+.emotion-2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-2>code {
+  color: #016BF8;
+}
+
+.emotion-2::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-2:focus .emotion-2::after {
+  background-color: #0498EC;
+}
+
+.emotion-2:hover::after {
+  background-color: #E8EDEB;
 }
 
 <li
@@ -221,8 +306,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="emotion-1"
-      data-leafygreen-ui="side-nav-item-container"
+      class="constant-classname emotion-1 emotion-2 emotion-3"
       href="/cloud/account/"
     >
       Atlas
@@ -241,9 +325,10 @@ exports[`renders correctly 1`] = `
   background: none;
   border: none;
   cursor: pointer;
+  position: relative;
   width: 100%;
   min-height: 32px;
-  padding: 4px 16px;
+  padding: 6px 16px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -253,27 +338,28 @@ exports[`renders correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight: normal;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #3D4F58;
-  -webkit-transition: background-color 150ms ease-in-out;
-  transition: background-color 150ms ease-in-out;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
   background-color: rgba(249,251,250,0);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   position: relative;
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 8px;
   padding-bottom: 8px;
+  font-size: 13px;
 }
 
 .emotion-1:hover {
-  background-color: #E7EEEC;
+  background-color: #E8EDEB;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -289,38 +375,75 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1:before {
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
   content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
   -webkit-transform: scaleY(0.3);
   -moz-transform: scaleY(0.3);
   -ms-transform: scaleY(0.3);
   transform: scaleY(0.3);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  height: 20px;
-  margin: auto;
-  background-color: #019EE2;
-  opacity: 0;
-  border-radius: 0 3px 3px 0;
 }
 
 .emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0D324F;
-  background-color: #C5E4F2;
+  color: #0C2657;
+  background-color: #C3E7FE;
 }
 
 .emotion-1:focus:before {
-  opacity: 1;
   -webkit-transform: scaleY(1);
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+.emotion-2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-2>code {
+  color: #016BF8;
+}
+
+.emotion-2::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-2:focus .emotion-2::after {
+  background-color: #0498EC;
+}
+
+.emotion-2:hover::after {
+  background-color: #E8EDEB;
 }
 
 <li
@@ -329,8 +452,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="emotion-1"
-      data-leafygreen-ui="side-nav-item-container"
+      class="constant-classname emotion-1 emotion-2 emotion-3"
       href="/server/read/"
     >
       CRUD

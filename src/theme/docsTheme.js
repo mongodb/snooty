@@ -5,7 +5,7 @@
 const fontSize = {
   xsmall: '11px',
   tiny: '12px',
-  small: '14px',
+  small: '13px',
   default: '16px',
   h1: '36px',
   h2: '24px',
@@ -73,6 +73,8 @@ const header = {
   navbarHeight: '88px',
   navbarMobileHeight: '56px',
   docsMobileMenuHeight: '52px',
+  // used for scrolling elements into place, considering sticky header
+  navbarScrollOffset: '175px',
 };
 
 const transitionSpeed = {

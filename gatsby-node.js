@@ -5,10 +5,11 @@ const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asse
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { getPageSlug } = require('./src/utils/get-page-slug');
-const { siteMetadata } = require('./src/utils/site-metadata');
+const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { ManifestDocumentDatabase, StitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { constructOpenAPIPageMapping } = require('./src/utils/setup/construct-openapi-page-mapping.js');
 
 // different types of references
 const PAGES = [];
@@ -23,9 +24,8 @@ let db;
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
 
-  // setup env variables
-  const envResults = validateEnvVariables();
-
+  // setup and validate env variables
+  const envResults = validateEnvVariables(manifestMetadata);
   if (envResults.error) {
     throw Error(envResults.message);
   }
@@ -34,10 +34,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   if (siteMetadata.manifestPath) {
     console.log('Loading documents from manifest');
-    db = new ManifestDocumentDatabase(siteMetadata.manifestPath);
+    db = manifestDocumentDatabase;
   } else {
     console.log('Loading documents from stitch');
-    db = new StitchDocumentDatabase();
+    db = stitchDocumentDatabase;
   }
 
   await db.connect();
@@ -127,9 +127,35 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
-  let repoBranches = null;
+  let repoBranches = null,
+    isAssociatedProduct = false;
+  const associatedReposInfo = {};
   try {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
+
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+      // fetch associated child products
+      await Promise.all(
+        siteMetadata.associatedProducts.map(async (product) => {
+          associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+          // filter all branches of associated repo by associated versions only
+          associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
+            return product.versions?.includes(branch.gitBranchName);
+          });
+        })
+      );
+
+      // check if product is associated child product
+      try {
+        const umbrellaProduct = await db.stitchInterface.getMetadata({
+          'associated_products.name': siteMetadata.project,
+        });
+        isAssociatedProduct = !!umbrellaProduct;
+      } catch (e) {
+        console.log('No umbrella product found. Not an associated product.');
+        isAssociatedProduct = false;
+      }
+    }
     let errMsg;
 
     if (!repoInfo) {
@@ -170,21 +196,43 @@ exports.createPages = async ({ actions }) => {
     throw err;
   }
 
+  const openapiPageMetadata = manifestMetadata['openapi_pages'];
+  let openapiPageMapping = {};
+  if (!!openapiPageMetadata) {
+    try {
+      openapiPageMapping = await constructOpenAPIPageMapping(openapiPageMetadata);
+    } catch (err) {
+      // Stop build process if there was an error constructing spec stores to avoid
+      // silent errors for OpenAPI content pages.
+      console.error(err);
+      process.exit(1);
+    }
+  }
+
   return new Promise((resolve, reject) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
 
       const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
+        const context = {
+          slug,
+          repoBranches,
+          associatedReposInfo,
+          isAssociatedProduct,
+          template: pageNodes?.options?.template,
+          page: pageNodes,
+        };
+
+        const openapiSpecStore = openapiPageMapping[slug];
+        if (!!openapiSpecStore) {
+          context['openapiSpecStore'] = openapiSpecStore;
+        }
+
         createPage({
           path: assertTrailingSlash(slug),
           component: path.resolve(__dirname, './src/components/DocumentBody.js'),
-          context: {
-            slug,
-            repoBranches: repoBranches,
-            template: pageNodes?.options?.template,
-            page: pageNodes,
-          },
+          context,
         });
       }
     });
@@ -220,5 +268,15 @@ exports.createSchemaCustomization = ({ actions }) => {
     type SnootyMetadata implements Node @dontInfer {
         metadata: JSON!
     }
+
+    type AssociatedProduct {
+      name: String,
+      versions: [String]
+    }
+
+    type SiteSiteMetadata implements Node {
+      associatedProducts: [AssociatedProduct],
+    }
+
   `);
 };

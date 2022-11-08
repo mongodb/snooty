@@ -5,6 +5,11 @@ exports[`renders correctly 1`] = `
   Returns:A JSON Web Token string encoded for the provided 
   .emotion-0 {
   font-size: unset;
+  display: inline;
+}
+
+a .emotion-0 {
+  color: inherit;
 }
 
 .emotion-2 {

@@ -1,0 +1,381 @@
+{
+  "title": [{ "type": "text", "value": "Atlas CLI" }],
+  "slug": "atlas-cli",
+  "options": { "versions": ["v1.0", "v1.1"], "project": "atlas-cli" },
+  "children": [
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "0"
+              }
+            }
+          },
+          "value": "Overview"
+        }
+      ],
+      "slug": "/",
+      "children": [],
+      "options": {
+        "version": "v1.0",
+        "drawer": true
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "4"
+              }
+            }
+          },
+          "value": "Install or Update the Atlas CLI v1.0"
+        }
+      ],
+      "slug": "install-atlas-cli",
+      "children": [
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Check Compatibility"
+            }
+          ],
+          "slug": "compatibility",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        }
+      ],
+      "options": {
+        "drawer": false,
+        "version": "v1.0"
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "4"
+              }
+            }
+          },
+          "value": "Connect from the Atlas CLI v1.0"
+        }
+      ],
+      "slug": "connect-atlas-cli",
+      "children": [
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Save Connection Settings"
+            }
+          ],
+          "slug": "atlas-cli-save-connection-settings",
+          "children": [],
+          "options": {
+            "drawer": true
+          }
+        },
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Atlas CLI Environment Variables"
+            }
+          ],
+          "slug": "atlas-cli-env-variables",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        },
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Migrate to the Atlas CLI"
+            }
+          ],
+          "slug": "migrate-to-atlas-cli",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        }
+      ],
+      "options": {
+        "version": "v1.0",
+        "drawer": false
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "3"
+              }
+            }
+          },
+          "value": "Configure Optional Settings"
+        }
+      ],
+      "slug": "configure-optional-settings",
+      "children": [
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Configure Telemetry v1.0"
+            }
+          ],
+          "slug": "telemetry",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        }
+      ],
+      "options": {
+        "version": "v1.0",
+        "drawer": true
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "0"
+              }
+            }
+          },
+          "value": "Overview"
+        }
+      ],
+      "slug": "/",
+      "children": [],
+      "options": {
+        "version": "v1.1",
+        "drawer": true
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "4"
+              }
+            }
+          },
+          "value": "Install or Update the Atlas CLI v1.1"
+        }
+      ],
+      "slug": "install-atlas-cli",
+      "children": [
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Check Compatibility"
+            }
+          ],
+          "slug": "compatibility",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        }
+      ],
+      "options": {
+        "drawer": false,
+        "version": "v1.1"
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "4"
+              }
+            }
+          },
+          "value": "Connect from the Atlas CLI v1.1"
+        }
+      ],
+      "slug": "connect-atlas-cli",
+      "children": [
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Save Connection Settings"
+            }
+          ],
+          "slug": "atlas-cli-save-connection-settings",
+          "children": [],
+          "options": {
+            "drawer": true
+          }
+        },
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Atlas CLI Environment Variables"
+            }
+          ],
+          "slug": "atlas-cli-env-variables",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        },
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Migrate to the Atlas CLI"
+            }
+          ],
+          "slug": "migrate-to-atlas-cli",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        }
+      ],
+      "options": {
+        "version": "v1.1",
+        "drawer": false
+      }
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": {
+                "$numberInt": "3"
+              }
+            }
+          },
+          "value": "Configure Optional Settings"
+        }
+      ],
+      "slug": "configure-optional-settings",
+      "children": [
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "4"
+                  }
+                }
+              },
+              "value": "Configure Telemetry v1.1"
+            }
+          ],
+          "slug": "telemetry",
+          "children": [],
+          "options": {
+            "drawer": false
+          }
+        }
+      ],
+      "options": {
+        "version": "v1.1",
+        "drawer": true
+      }
+    }
+  ]
+}

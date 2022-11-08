@@ -6,7 +6,7 @@ import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -17,7 +17,7 @@ import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
-import { sideNavItemBasePadding } from './styles/sideNavItem';
+import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -25,6 +25,8 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
+import { TocContext } from '../../context/toc-context';
+import { VersionContext } from '../../context/version-context';
 
 const SIDENAV_WIDTH = 268;
 
@@ -61,18 +63,20 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   a,
   p {
     letter-spacing: unset;
+    color: ${palette.black};
+  },
+  
+  // avoid GatsbyLink underline styling being applied to side nav
+  // may need to remove during DOP-2880
+  a:hover::after {
+    background-color: unset;
   }
 
-  // TODO: Remove when mongodb-docs.css is removed
-  a:hover,
-  a:focus {
-    color: unset;
-  }
 `;
 
 const titleStyle = LeafyCSS`
-  color: ${uiColors.gray.dark3};
-  font-size: ${theme.fontSize.default};
+  color: ${palette.gray.dark3};
+  font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: 20px;
   text-transform: none;
@@ -120,7 +124,7 @@ const Spaceholder = styled('div')`
 
 const Border = styled('hr')`
   border: unset;
-  border-bottom: 1px solid ${uiColors.gray.light2};
+  border-bottom: 1px solid ${palette.gray.light2};
   margin: ${theme.size.small} 0;
   width: 100%;
 `;
@@ -135,7 +139,7 @@ const ArtificialPadding = styled('div')`
 // This allows the products in the ProductsList to slide up/down when closing/opening the list
 // without appearing inline with above text
 const NavTopContainer = styled('div')`
-  background-color: ${uiColors.gray.light3};
+  background-color: ${palette.gray.light3};
   position: relative;
   z-index: 1;
 `;
@@ -160,7 +164,12 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
 
-  const showVersions = repoBranches?.branches?.length > 1;
+  let showVersions = repoBranches?.branches?.length > 1;
+
+  const { showVersionDropdown } = useContext(VersionContext);
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS && showVersionDropdown) {
+    showVersions = false;
+  }
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -175,6 +184,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const hideMobileSidenav = useCallback(() => {
     setHideMobile(true);
   }, [setHideMobile]);
+
+  const { activeToc } = useContext(TocContext);
 
   // Renders side nav content based on the current project and template.
   // The guides docs typically have a different TOC compared to other docs.
@@ -192,8 +203,19 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
         />
       );
     }
+
+    // TODO: update sidenav. use new context and show options for filtering versions via ToC
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+      return (
+        <>
+          {Object.keys(activeToc).length > 0 && (
+            <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={activeToc} />
+          )}
+        </>
+      );
+    }
     return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />;
-  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree]);
+  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree, activeToc]);
 
   const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : siteTitle;
 
@@ -278,7 +300,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 {/* Represents the generic links at the bottom of the side nav (e.g. "Contact Support") */}
                 {additionalLinks.map(({ glyph, title, url }) => (
                   <SideNavItem
-                    className={cx(sideNavItemBasePadding)}
+                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
                     key={url}
                     glyph={<Icon glyph={glyph} />}
                     href={url}

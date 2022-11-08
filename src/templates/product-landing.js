@@ -1,36 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { useSiteMetadata } from '../hooks/use-site-metadata.js';
 import { theme } from '../theme/docsTheme.js';
+import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 
 const CONTENT_MAX_WIDTH = 1200;
 
 const Wrapper = styled('main')`
-  color: ${uiColors.black};
   ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
   width: 100%;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 600;
-  }
-
   h1 {
-    font-size: ${theme.fontSize.h2};
-    margin-bottom: ${theme.size.default};
+    color: black;
   }
 
-  h2,
+  h2 {
+    margin-top: ${theme.size.small};
+    margin-bottom: ${theme.size.small};
+  }
+
   h3 {
-    font-size: 21px;
-    margin-top: 0px;
-    margin-bottom: ${theme.size.default};
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 8px;
   }
 
   section {
@@ -38,15 +33,26 @@ const Wrapper = styled('main')`
   }
 
   section p {
-    font-size: ${theme.fontSize.default};
     grid-column: 2;
-    letter-spacing: 0.5px;
-    margin-bottom: ${theme.size.small};
     max-width: 500px;
   }
 
+  // realm PLP has full width p
+  ${({ isRealm }) =>
+    isRealm &&
+    `
+    section > p {
+      grid-column: 2/-2;
+      max-width: 775px;
+    }
+
+    section ul  {
+      grid-column: 2;
+      max-width: 500px;
+    }
+  `}
+
   section p > a {
-    font-size: ${theme.fontSize.default};
     letter-spacing: 0.5px;
     :hover {
       text-decoration: none;
@@ -62,6 +68,9 @@ const Wrapper = styled('main')`
         ${theme.size.xlarge},
         1fr
       );
+    grid-template-rows: [header] auto [introduction] auto [kicker] auto;
+    ${({ hasBanner }) =>
+      hasBanner && `grid-template-rows: [banner] auto [header] auto [introduction] auto [kicker] auto;`}
 
     @media ${theme.screenSize.upToLarge} {
       grid-template-columns: 48px 1fr 48px;
@@ -71,15 +80,22 @@ const Wrapper = styled('main')`
       grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
     }
 
+    [role='alert'] {
+      grid-column: 2 / 3;
+      grid-row: banner;
+      align-items: center;
+    }
+
     h1 {
       align-self: end;
       grid-column: 2;
-      grid-row: 1;
+      grid-row: header;
+
       ${({ isGuides }) =>
         isGuides &&
         `
         @media ${theme.screenSize.mediumAndUp} {
-          color: ${uiColors.white};
+          color: ${palette.white};
         }
       `}
     }
@@ -87,19 +103,19 @@ const Wrapper = styled('main')`
     > img {
       display: block;
       grid-column: 2;
-      margin: auto;
+      margin-top: auto;
       max-width: 600px;
       width: 100%;
 
       @media ${theme.screenSize.largeAndUp} {
         grid-column: 3;
-        grid-row: 1 / span 2;
+        grid-row: header/span 2;
       }
     }
 
     > .hero-img {
       grid-column: 1 / -1;
-      grid-row: 1 / 3;
+      grid-row: header / kicker;
       height: 310px;
       ${({ isGuides }) => !isGuides && `margin-bottom: ${theme.size.large};`}
       max-width: 100%;
@@ -119,14 +135,16 @@ const Wrapper = styled('main')`
 
     > .introduction {
       grid-column: 2;
-      grid-row: 2;
-      ${({ isGuides }) =>
-        isGuides &&
-        `
-        @media ${theme.screenSize.mediumAndUp} {
-          color: ${uiColors.white};
-        }
-      `}
+      grid-row: introduction;
+      p {
+        ${({ isGuides }) =>
+          isGuides &&
+          `
+            @media ${theme.screenSize.mediumAndUp} {
+                color: ${palette.white};
+            }
+        `}
+      }
     }
 
     > .chapters {
@@ -148,8 +166,32 @@ const Wrapper = styled('main')`
 
 const ProductLanding = ({ children }) => {
   const { project } = useSiteMetadata();
+  const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
-  return <Wrapper isGuides={isGuides}>{children}</Wrapper>;
+  const isRealm = project === 'realm';
+
+  // shallow copy children, and search for existence of banner
+  const shallowChildren = children.reduce((res, child) => {
+    const copiedChildren = child.props.nodeData.children.map((childNode) => {
+      const newNode = {};
+      for (let property in childNode) {
+        if (property !== 'children') {
+          newNode[property] = childNode[property];
+        }
+      }
+      return newNode;
+    });
+    res = res.concat(copiedChildren);
+    return res;
+  }, []);
+
+  const bannerNode = findKeyValuePair([{ children: shallowChildren }], 'name', 'banner');
+
+  return (
+    <Wrapper isGuides={isGuides} isRealm={isRealm} useHero={useHero} hasBanner={!!bannerNode}>
+      {children}
+    </Wrapper>
+  );
 };
 
 ProductLanding.propTypes = {

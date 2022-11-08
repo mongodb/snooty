@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import { baseUrl } from '../utils/base-url';
 
@@ -46,7 +46,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-// The Landing template exclusively represents docs.mongodb.com. All other landings use the ProductLanding template
+// The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
 const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
@@ -81,26 +81,25 @@ const Landing = ({ children }) => {
           h2,
           h3,
           h4 {
-            color: ${uiColors.black};
-            font-weight: bold;
+            color: ${palette.black};
           }
           h1,
           h2 {
             font-size: 32px;
-            margin-bottom: ${fontSize.default};
+            margin-bottom: ${size.default};
           }
           h2 {
             margin-top: ${size.large};
           }
           p {
-            color: ${uiColors.black};
-            font-size: ${fontSize.default};
+            color: ${palette.black};
+            font-size: ${fontSize.small};
             letter-spacing: 0.5px;
             margin-bottom: ${size.default};
           }
           a {
-            color: ${uiColors.blue.base};
-            font-size: ${fontSize.default};
+            color: ${palette.blue.base};
+            font-size: ${fontSize.small};
             letter-spacing: 0.5px;
           }
           a:hover {

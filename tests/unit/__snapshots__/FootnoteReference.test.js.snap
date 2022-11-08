@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   <a
-    class="footnote-reference"
+    class="footnote-reference header-buffer"
     href="#footnote-1"
     id="ref-1-id1"
   >

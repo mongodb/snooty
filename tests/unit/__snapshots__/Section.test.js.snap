@@ -3,6 +3,28 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.emotion-1 {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.emotion-3 {
+  margin: unset;
+  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #21313C;
+  font-size: 32px;
+  line-height: 40px;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+}
+
+.emotion-4 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -10,13 +32,13 @@ exports[`renders correctly 1`] = `
   visibility: hidden;
 }
 
-.emotion-1 {
+.emotion-5 {
   border-radius: 0!important;
   display: initial!important;
   margin: initial!important;
 }
 
-.emotion-3 {
+.emotion-7 {
   margin-top: -175px;
   position: absolute;
   padding-bottom: 2px;
@@ -24,21 +46,22 @@ exports[`renders correctly 1`] = `
 
 <section>
     <h1
-      class="contains-headerlink"
+      class="emotion-0 contains-headerlink emotion-1 emotion-2 emotion-3"
+      weight="medium"
     >
       Connect to your MongoDB instance
       <a
-        class="headerlink emotion-0"
+        class="headerlink emotion-4"
         href="#"
         title="Permalink to this heading"
       >
         <img
-          class="emotion-1 emotion-2"
+          class="emotion-5 emotion-6"
           src="/assets/link.svg"
         />
       </a>
       <div
-        class="emotion-3 emotion-4"
+        class="emotion-7 emotion-8"
         id=""
       />
     </h1>
