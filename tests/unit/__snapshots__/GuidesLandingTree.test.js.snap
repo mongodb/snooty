@@ -46,11 +46,6 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   color: #00684A;
   position: relative;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 13px;
 }
 
 .emotion-1:hover {
@@ -126,6 +121,11 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
 }
 
 .emotion-2:focus {
@@ -205,11 +205,6 @@ exports[`renders correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   position: relative;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 13px;
 }
 
 .emotion-1:hover {
@@ -272,6 +267,11 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
 }
 
 .emotion-2:focus {
@@ -351,11 +351,6 @@ exports[`renders correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   position: relative;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 13px;
 }
 
 .emotion-1:hover {
@@ -418,6 +413,11 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
 }
 
 .emotion-2:focus {
