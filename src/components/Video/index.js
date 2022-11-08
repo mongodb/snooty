@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import VideoPlayButton from './VideoPlayButton';
@@ -21,9 +20,6 @@ const StyledReactPlayer = styled(ReactPlayer)`
     /* Redefines stacking context, allowing play button animation to stick on top */
     position: sticky;
   }
-`;
-
-const videoStyling = css`
   * {
     border-radius: 16px !important;
   }
@@ -59,7 +55,6 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
   return (
     <ReactPlayerWrapper>
       <StyledReactPlayer
-        css={videoStyling}
         config={{
           youtube: {
             playerVars: {

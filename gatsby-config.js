@@ -9,6 +9,7 @@ module.exports = {
     'gatsby-plugin-layout',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {

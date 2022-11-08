@@ -161,8 +161,13 @@ const injectCustomComponents = (pageTitle, siteTitle) => {
   render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
 };
 
+const REDOC_OPTIONS = {
+  hideLoading: true,
+  maxDisplayedEnumValues: 5,
+  theme: themeOption,
+};
+
 const OpenAPIPreview = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
-  console.log('Preview render');
   const usesRST = options?.['uses-rst'];
   const usesRealm = options?.['uses-realm'];
   const { database } = useSiteMetadata();
@@ -221,9 +226,7 @@ const OpenAPIPreview = ({ metadata, nodeData: { argument, children, options = {}
             injectCustomComponents(pageTitle, siteTitle);
           }}
           options={{
-            hideLoading: true,
-            maxDisplayedEnumValues: 5,
-            theme: themeOption,
+            ...REDOC_OPTIONS,
             untrustedSpec: !!specUrl,
           }}
           spec={spec}
@@ -235,11 +238,8 @@ const OpenAPIPreview = ({ metadata, nodeData: { argument, children, options = {}
 };
 
 const OpenAPIStatic = ({ metadata: { title: siteTitle }, topValues }) => {
-  console.log('Static render');
   const { store } = useContext(OpenAPIContext);
-  store['options']['theme'] = themeOption;
-  const storeObject = AppStore.fromJS(store);
-  console.log(store);
+  store['options'] = REDOC_OPTIONS;
 
   useEffect(() => {
     if (!store) return;
@@ -247,10 +247,16 @@ const OpenAPIStatic = ({ metadata: { title: siteTitle }, topValues }) => {
     injectCustomComponents(pageTitle, siteTitle);
   }, [siteTitle, store]);
 
+  if (!store) {
+    console.error('Missing spec store.');
+    return null;
+  }
+
+  const deserializedStore = AppStore.fromJS(store);
   return (
     <>
       <Global styles={getGlobalCss(topValues)} />
-      <Redoc store={storeObject} />
+      <Redoc store={deserializedStore} />
     </>
   );
 };
