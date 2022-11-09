@@ -100,7 +100,7 @@ const VersionContext = createContext({
   onVersionSelect: () => {},
 });
 
-const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, children }) => {
+const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, slug, children }) => {
   const metadata = useSiteMetadata();
   const mountRef = useRef(true);
 
@@ -165,10 +165,10 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
         return;
       }
       const target = targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
-      const urlTarget = getUrl(target, metadata.project, metadata, repoBranches?.siteBasePrefix);
+      const urlTarget = getUrl(target, metadata.project, metadata, repoBranches?.siteBasePrefix, slug);
       navigate(urlTarget);
     },
-    [availableVersions, metadata, repoBranches]
+    [availableVersions, metadata, repoBranches.siteBasePrefix, slug]
   );
 
   // attempts to find branch by given url alias. can be alias, urlAliases, or gitBranchName
