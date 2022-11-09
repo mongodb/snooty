@@ -10,6 +10,11 @@ class MockedStore {
         info: 'Example Spec',
       },
     };
+    this.search = {
+      searchWorker: {
+        dispose: () => {},
+      },
+    };
   }
 
   toJS() {
@@ -17,6 +22,8 @@ class MockedStore {
   }
 }
 
+// Issues with search worker used in Redoc's implementation being undefined in
+// our testing environment. Mock the AppStore object as a workaround.
 jest.mock('redoc', () => ({
   createStore: () => new MockedStore(),
 }));

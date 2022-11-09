@@ -36,7 +36,8 @@ const LoadingWidget = ({ className }) => (
   </LoadingContainer>
 );
 
-const OpenAPIPreview = ({ metadata, nodeData: { argument, children, options = {} }, page, topValues, ...rest }) => {
+// Sources and parses the specs on client-side
+const OpenAPIClientSide = ({ metadata, nodeData: { argument, children, options = {} }, page, topValues, ...rest }) => {
   const usesRST = options?.['uses-rst'];
   const usesRealm = options?.['uses-realm'];
   const { database } = useSiteMetadata();
@@ -81,7 +82,6 @@ const OpenAPIPreview = ({ metadata, nodeData: { argument, children, options = {}
   const needsWhitelistWarning = src && !hasValidSpecUrl;
   return (
     <>
-      {/* <Global styles={getGlobalCss(topValues)} /> */}
       {needsWhitelistWarning && <JustifiedWhitelistWarning />}
       {/* Temporary loading widget to be removed once the Redoc component loads */}
       {isLoading && !needsWhitelistWarning && <LoadingWidget className={tempLoadingDivClassName} />}
@@ -105,4 +105,4 @@ const OpenAPIPreview = ({ metadata, nodeData: { argument, children, options = {}
   );
 };
 
-export default OpenAPIPreview;
+export default OpenAPIClientSide;

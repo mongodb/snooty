@@ -6,16 +6,17 @@ import { OpenAPIContext } from './openapi-context';
 
 const OpenAPIStatic = ({ metadata: { title: siteTitle } }) => {
   const { store } = useContext(OpenAPIContext);
+  const { spec } = store;
   store['options'] = REDOC_OPTIONS;
 
   useEffect(() => {
-    if (!store) return;
-    const pageTitle = store.spec.data.info.title;
+    if (!spec) return;
+    const pageTitle = spec.data.info.title;
     injectCustomComponents(pageTitle, siteTitle);
-  }, [siteTitle, store]);
+  }, [siteTitle, spec]);
 
-  if (!store) {
-    console.error('Missing spec store.');
+  if (!spec) {
+    console.error('Missing spec.');
     return null;
   }
 
