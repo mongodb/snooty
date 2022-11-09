@@ -89,6 +89,7 @@ const DefaultLayout = ({
       <Global styles={globalCSS} />
       <SiteMetadata siteTitle={title} />
       <RootProvider
+        slug={slug}
         repoBranches={repoBranches}
         associatedReposInfo={associatedReposInfo}
         headingNodes={page?.options?.headings}

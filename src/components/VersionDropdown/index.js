@@ -116,7 +116,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
   // Used exclusively by the LG Select component's onChange function, which receives
   // the 'value' prop from the selected Option component
   const navigate = (optionValue) => {
-    const destination = getUrl(optionValue, project, siteMetadata, siteBasePrefix);
+    const destination = getUrl(optionValue, project, siteMetadata, siteBasePrefix, slug);
     reachNavigate(destination);
   };
 
