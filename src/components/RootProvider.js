@@ -12,6 +12,7 @@ const RootProvider = ({
   children,
   headingNodes,
   selectors,
+  slug,
   repoBranches,
   associatedReposInfo,
   isAssociatedProduct,
@@ -21,6 +22,7 @@ const RootProvider = ({
       <HeaderContextProvider>
         <VersionContextProvider
           repoBranches={repoBranches}
+          slug={slug}
           associatedReposInfo={associatedReposInfo}
           isAssociatedProduct={isAssociatedProduct}
         >
