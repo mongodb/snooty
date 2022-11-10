@@ -12,25 +12,33 @@ a .emotion-0 {
 }
 
 .emotion-2 {
-  background-color: #F9FBFA;
-  border: 1px solid #B8C4C2;
+  font-size: 13px;
+  line-height: 20px;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   border-radius: 3px;
   font-family: 'Source Code Pro',Menlo,monospace;
-  font-size: 14px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  display: inherit;
+  background-color: #F9FBFA;
+  border: 1px solid #E8EDEB;
+  color: #1C2D38;
   white-space: nowrap;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:hover>.emotion-2 {
-  box-shadow: 0 0 0 3px #E7EEEC;
+.constant-classname:hover>.emotion-2 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:focus>.emotion-2 {
-  box-shadow: 0 0 0 3px #C5E4F2;
+.constant-classname:hover>.emotion-2 {
+  box-shadow: 0 0 0 3px #E8EDEB;
+  border: 1px solid #C1C7C6;
+}
+
+.constant-classname:focus>.emotion-2 {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+  border: 1px solid #016BF8;
 }
 
 .emotion-3 {
@@ -59,15 +67,17 @@ a .emotion-0 {
 
 .emotion-10 {
   margin: unset;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #21313C;
-  font-size: 14px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  color: #001E2B;
   font-weight: 400;
+}
+
+.emotion-10 strong,
+.emotion-10 b {
+  font-weight: 700;
 }
 
 .emotion-11 {
@@ -135,7 +145,7 @@ a .emotion-0 {
       />
     </dt>
     <dd>
-      <div
+      <p
         class="emotion-8 emotion-9 emotion-10"
       >
         Specifies a configuration file for runtime configuration options. The
@@ -161,8 +171,8 @@ configuration options. See
         </a>
          for
 more information.
-      </div>
-      <div
+      </p>
+      <p
         class="emotion-8 emotion-9 emotion-10"
       >
         Ensure the configuration file uses ASCII encoding. The 
@@ -179,7 +189,7 @@ more information.
         
 instance does not support configuration files with non-ASCII encoding,
 including UTF-8.
-      </div>
+      </p>
     </dd>
   </dl>
 </DocumentFragment>

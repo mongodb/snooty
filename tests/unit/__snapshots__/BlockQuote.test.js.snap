@@ -8,15 +8,17 @@ exports[`renders correctly 1`] = `
 
 .emotion-2 {
   margin: unset;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #21313C;
-  font-size: 14px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  color: #001E2B;
   font-weight: 400;
+}
+
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
 }
 
 .emotion-3 {
@@ -28,11 +30,9 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-16 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-17 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -43,35 +43,41 @@ exports[`renders correctly 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-17:focus {
+.emotion-16:focus {
   outline: none;
 }
 
+.emotion-17 {
+  position: relative;
+}
+
+.emotion-17::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-17::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-17::after {
+  background-color: #E8EDEB;
+}
+
 .emotion-18 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-18 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-18 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-19 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -82,51 +88,50 @@ exports[`renders correctly 1`] = `
 }
 
 <blockquote>
-    <div
+    <p
       class="emotion-0 emotion-1 emotion-2"
     >
       There are several ways to connect to your MongoDB instance.
-    </div>
+    </p>
     <ol
       class="emotion-3"
     >
       <li
         class="emotion-4"
       >
-        <div
+        <p
           class="emotion-0 emotion-1 emotion-2"
         >
            for access through a downloadable user interface
-        </div>
+        </p>
       </li>
       <li
         class="emotion-4"
       >
-        <div
+        <p
           class="emotion-0 emotion-1 emotion-2"
         >
            interactive shell
-        </div>
+        </p>
       </li>
       <li
         class="emotion-4"
       >
-        <div
+        <p
           class="emotion-0 emotion-1 emotion-2"
         >
           <span
-            class="emotion-16 emotion-17"
-            data-leafygreen-ui="anchor-container"
+            class="constant-classname emotion-16"
           >
             <span
-              class="emotion-18"
+              class="emotion-17"
             >
               programmatic access
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-19"
+              class="emotion-18"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
@@ -144,7 +149,7 @@ exports[`renders correctly 1`] = `
           </span>
           
 through a number of programming APIs.
-        </div>
+        </p>
       </li>
     </ol>
   </blockquote>

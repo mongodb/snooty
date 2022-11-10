@@ -78,7 +78,7 @@
     "@leafygreen-ui/text-area": "^6.1.0",
     "@leafygreen-ui/text-input": "^10.1.0",
     "@leafygreen-ui/tooltip": "^7.1.0",
-    "@leafygreen-ui/typography": "^7.6.0",
+    "@leafygreen-ui/typography": "^13.0.0",
     "@loadable/component": "^5.14.1",
     "@mdb/consistent-nav": "1.2.16",
     "@mdb/flora": "^0.20.5",

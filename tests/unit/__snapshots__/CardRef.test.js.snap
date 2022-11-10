@@ -117,15 +117,17 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-11 {
   margin: unset;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #21313C;
-  font-size: 14px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
-  font-weight: 600;
+  color: #001E2B;
+  font-weight: 500;
+}
+
+.emotion-11 strong,
+.emotion-11 b {
+  font-weight: 700;
 }
 
 .emotion-12 {
@@ -134,15 +136,17 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-14 {
   margin: unset;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #21313C;
-  font-size: 14px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  color: #001E2B;
   font-weight: 400;
+}
+
+.emotion-14 strong,
+.emotion-14 b {
+  font-weight: 700;
 }
 
 .emotion-19 {
@@ -238,11 +242,9 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-52 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-53 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -253,32 +255,38 @@ exports[`card correctly with and without url 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-53:focus {
+.emotion-52:focus {
   outline: none;
 }
 
-.emotion-54 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
+.emotion-53 {
+  position: relative;
 }
 
-[data-leafygreen-ui="anchor-container"]:hover .emotion-54 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
+.emotion-53::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
 }
 
-[data-leafygreen-ui="anchor-container"]:focus .emotion-54 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
+.constant-classname:focus .emotion-53::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-53::after {
+  background-color: #E8EDEB;
 }
 
 <div
@@ -294,17 +302,17 @@ exports[`card correctly with and without url 1`] = `
       <div
         class="emotion-7 emotion-8"
       >
-        <div
+        <p
           class="check-h4 emotion-9 emotion-10 emotion-11"
         >
           Realm SDKs
-        </div>
-        <div
+        </p>
+        <p
           class="emotion-12 emotion-13 emotion-14"
         >
           Use platform-specific libraries to include and work with the Realm database in your application.
-        </div>
-        <div
+        </p>
+        <p
           class="emotion-12 emotion-13 emotion-14"
         >
           <a
@@ -353,7 +361,7 @@ exports[`card correctly with and without url 1`] = `
           >
             Node.js
           </a>
-        </div>
+        </p>
       </div>
     </div>
     <div
@@ -366,33 +374,32 @@ exports[`card correctly with and without url 1`] = `
       <div
         class="emotion-7 emotion-8"
       >
-        <div
+        <p
           class="check-h4 emotion-9 emotion-10 emotion-11"
         >
           MongoDB Realm
-        </div>
-        <div
+        </p>
+        <p
           class="emotion-12 emotion-13 emotion-14"
         >
           Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas.
-        </div>
-        <div
+        </p>
+        <p
           class="emotion-49 emotion-50 emotion-14"
         >
           <a
-            class="emotion-52 emotion-53"
-            data-leafygreen-ui="anchor-container"
+            class="constant-classname emotion-52"
             href="https://docs.mongodb.com/realm/services/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-54"
+              class="emotion-53"
             >
               Learn more about MongoDB Realm Application Services
             </span>
           </a>
-        </div>
+        </p>
       </div>
     </div>
   </div>

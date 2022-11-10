@@ -8,23 +8,23 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 
 .emotion-2 {
   margin: unset;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #21313C;
-  font-size: 14px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  color: #001E2B;
   font-weight: 400;
 }
 
-.emotion-3 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
 }
 
-.emotion-4 {
+.emotion-3 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -35,35 +35,41 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   outline: none;
 }
 
+.emotion-4 {
+  position: relative;
+}
+
+.emotion-4::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-4::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-4::after {
+  background-color: #E8EDEB;
+}
+
 .emotion-5 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-5 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-5 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-6 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -73,25 +79,24 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   height: 12px;
 }
 
-<div
+<p
     class="emotion-0 emotion-1 emotion-2"
   >
     <a
-      class="emotion-3 emotion-4"
-      data-leafygreen-ui="anchor-container"
+      class="constant-classname emotion-3"
       href="https://cloud.mongodb.com?tck=docs_realm"
       rel="noopener noreferrer"
       target="_blank"
     >
       <span
-        class="emotion-5"
+        class="emotion-4"
       >
         Deploy a Free Tier Cluster.
       </span>
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-6"
+        class="emotion-5"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"
@@ -107,7 +112,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
         />
       </svg>
     </a>
-  </div>
+  </p>
 </DocumentFragment>
 `;
 
@@ -119,23 +124,23 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 
 .emotion-2 {
   margin: unset;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #21313C;
-  font-size: 14px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  color: #001E2B;
   font-weight: 400;
 }
 
-.emotion-3 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
 }
 
-.emotion-4 {
+.emotion-3 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -146,35 +151,41 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   outline: none;
 }
 
+.emotion-4 {
+  position: relative;
+}
+
+.emotion-4::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-4::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-4::after {
+  background-color: #E8EDEB;
+}
+
 .emotion-5 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-5 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-5 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-6 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -184,25 +195,24 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   height: 12px;
 }
 
-<div
+<p
     class="emotion-0 emotion-1 emotion-2"
   >
     <a
-      class="emotion-3 emotion-4"
-      data-leafygreen-ui="anchor-container"
+      class="constant-classname emotion-3"
       href="https://cloud.mongodb.com?tck=docs_realm"
       rel="noopener noreferrer"
       target="_blank"
     >
       <span
-        class="emotion-5"
+        class="emotion-4"
       >
         Deploy a Free Tier Cluster.
       </span>
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-6"
+        class="emotion-5"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"
@@ -218,7 +228,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
         />
       </svg>
     </a>
-  </div>
+  </p>
 </DocumentFragment>
 `;
 
@@ -230,22 +240,24 @@ exports[`Paragraph unit tests renders correctly 1`] = `
 
 .emotion-2 {
   margin: unset;
-  font-family: Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #21313C;
-  font-size: 14px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  color: #001E2B;
   font-weight: 400;
 }
 
-<div
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
+}
+
+<p
     class="emotion-0 emotion-1 emotion-2"
   >
     Verify that MongoDB has started successfully by
 checking the process output for the following line:
-  </div>
+  </p>
 </DocumentFragment>
 `;

@@ -238,7 +238,7 @@ describe('FeedbackWidget', () => {
           expect(screenshotFunctionMocks['addEventListener']).toHaveBeenCalled();
 
           // shows overlays
-          expect(wrapper.getByRole('img').getElementsByClassName('overlayInstructions')).toBeTruthy();
+          expect(wrapper.getByAltText('Screenshot').getElementsByClassName('overlay-instructions')).toBeTruthy();
         });
 
         it('adds the screenshot attachment on send', async () => {
