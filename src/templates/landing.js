@@ -120,6 +120,10 @@ const Landing = ({ children }) => {
           }
           main h1:first-of-type {
             color: ${palette.white};
+
+            @media ${screenSize.upToMedium} {
+              color: ${palette.green.dark2};
+            }
           }
           .span-columns {
             grid-column: 3 / -3 !important;
@@ -160,12 +164,18 @@ const Landing = ({ children }) => {
             grid-column: 2 / 8;
             grid-row: 2 / 3;
 
-            p {
-              color: ${palette.white};
-            }
-
             @media ${screenSize.upToMedium} {
               grid-column: 2 / -2;
+
+              p {
+                color: ${palette.black};
+              }
+            }
+
+            @media ${screenSize.mediumAndUp} {
+              p {
+                color: ${palette.white};
+              }
             }
           }
           @media ${screenSize.upToLarge} {
