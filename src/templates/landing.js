@@ -118,6 +118,9 @@ const Landing = ({ children }) => {
               grid-column: 2 / -2;
             }
           }
+          main h1:first-of-type {
+            color: ${palette.white};
+          }
           .span-columns {
             grid-column: 3 / -3 !important;
             margin: ${size.xlarge} 0;
@@ -156,6 +159,10 @@ const Landing = ({ children }) => {
           .introduction {
             grid-column: 2 / 8;
             grid-row: 2 / 3;
+
+            p {
+              color: ${palette.white};
+            }
 
             @media ${screenSize.upToMedium} {
               grid-column: 2 / -2;
