@@ -168,7 +168,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
       const urlTarget = getUrl(target, metadata.project, metadata, repoBranches?.siteBasePrefix, slug);
       navigate(urlTarget);
     },
-    [availableVersions, metadata, repoBranches.siteBasePrefix, slug]
+    [availableVersions, metadata, repoBranches, slug]
   );
 
   // attempts to find branch by given url alias. can be alias, urlAliases, or gitBranchName

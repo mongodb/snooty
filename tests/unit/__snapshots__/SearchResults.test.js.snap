@@ -225,8 +225,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 100%;
   -webkit-text-decoration: none;
   text-decoration: none;
+  border-radius: 24px;
   background-color: #fff;
-  border-radius: 4px;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -298,7 +298,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 24px;
   letter-spacing: 0.5px;
   height: 24px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   margin-top: 0;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -310,7 +310,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 @media not all and (max-width: 480px) {
   .emotion-25 {
-    font-weight: bolder;
+    font-weight: 600;
   }
 }
 
@@ -322,18 +322,15 @@ exports[`Search Results Page considers a given search filter query param and dis
 
   @media not all and (max-width: 480px) {
     .emotion-25 {
-      font-weight: bolder;
+      font-weight: 600;
     }
   }
 }
 
 .emotion-27 {
-  font-family: 'Akzidenz Grotesk BQ Light';
   font-size: 13px;
-  letter-spacing: 0.5px;
   line-height: 20px;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin-bottom: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -341,22 +338,36 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-29 {
-  position: absolute;
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-29 strong,
+.emotion-29 b {
+  font-weight: 700;
+}
+
+.emotion-30 {
   bottom: 0;
   margin-bottom: 24px;
 }
 
-.emotion-35 {
+.emotion-36 {
   grid-area: filters;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-35 {
+  .emotion-36 {
     display: none;
   }
 }
 
-.emotion-37 {
+.emotion-38 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -372,12 +383,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-39 {
+.emotion-40 {
   grid-area: filters;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-39 {
+  .emotion-40 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -388,30 +399,30 @@ exports[`Search Results Page considers a given search filter query param and dis
     flex-direction: row;
   }
 
-  .emotion-39>div {
+  .emotion-40>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-39 {
+  .emotion-40 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-39>div {
+  .emotion-40>div {
     width: 100%;
   }
 
-  .emotion-39>div:first-of-type {
+  .emotion-40>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 }
 
-.emotion-41 {
+.emotion-42 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -426,15 +437,15 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-43 {
+.emotion-44 {
   position: relative;
 }
 
-.emotion-44 {
+.emotion-45 {
   width: 175px;
 }
 
-.emotion-46 {
+.emotion-47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -444,12 +455,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   flex-direction: column;
 }
 
-.emotion-46>label+button,
-.emotion-46>p+button {
+.emotion-47>label+button,
+.emotion-47>p+button {
   margin-top: 3px;
 }
 
-.emotion-47 {
+.emotion-48 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -488,35 +499,35 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-47:focus {
+.emotion-48:focus {
   outline: none;
 }
 
-.emotion-47[disabled],
-.emotion-47:disabled {
+.emotion-48[disabled],
+.emotion-48:disabled {
   pointer-events: none;
 }
 
-.emotion-47:active,
-.emotion-47:focus,
-.emotion-47:hover {
+.emotion-48:active,
+.emotion-48:focus,
+.emotion-48:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-47:hover,
-.emotion-47:active {
+.emotion-48:hover,
+.emotion-48:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-47:focus {
+.emotion-48:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-47>*:last-child {
+.emotion-48>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -524,33 +535,33 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-47>*:last-child>svg {
+.emotion-48>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-47>*:last-child>svg {
+.emotion-48>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-47>*:last-child {
+.emotion-48>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-47:focus {
+.emotion-48:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-47 {
+  .emotion-48 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-48 {
+.emotion-49 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -560,7 +571,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   border-radius: 5px;
 }
 
-.emotion-49 {
+.emotion-50 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -580,7 +591,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   gap: 6px;
 }
 
-.emotion-50 {
+.emotion-51 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -600,27 +611,27 @@ exports[`Search Results Page considers a given search filter query param and dis
   overflow: hidden;
 }
 
-.emotion-51 {
+.emotion-52 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-52 {
+.emotion-53 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-53 {
+.emotion-54 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: left;
 }
 
-.emotion-60 {
+.emotion-61 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -659,42 +670,42 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-60:focus {
+.emotion-61:focus {
   outline: none;
 }
 
-.emotion-60[disabled],
-.emotion-60:disabled {
+.emotion-61[disabled],
+.emotion-61:disabled {
   pointer-events: none;
 }
 
-.emotion-60:active,
-.emotion-60:focus,
-.emotion-60:hover {
+.emotion-61:active,
+.emotion-61:focus,
+.emotion-61:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-60:hover,
-.emotion-60:active {
+.emotion-61:hover,
+.emotion-61:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-60,
-.emotion-60:hover {
+.emotion-61,
+.emotion-61:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-60:focus {
+.emotion-61:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-60>*:last-child {
+.emotion-61>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -702,52 +713,52 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-60>*:last-child>svg {
+.emotion-61>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-60>*:last-child>svg {
+.emotion-61>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-60>*:last-child {
+.emotion-61>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-60:focus {
+.emotion-61:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-60:disabled {
+.emotion-61:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-60:disabled:active {
+.emotion-61:disabled:active {
   pointer-events: none;
 }
 
-.emotion-60:disabled {
+.emotion-61:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-60:disabled>*:last-child>svg {
+.emotion-61:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-60 {
+  .emotion-61 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-66 {
+.emotion-67 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -856,7 +867,8 @@ exports[`Search Results Page considers a given search filter query param and dis
              (realm filter)
           </p>
           <p
-            class="emotion-27 emotion-28"
+            class="emotion-27 emotion-28 emotion-29"
+            maxlines="2"
           >
             <span
               style="background-color:#FFEC9E"
@@ -866,15 +878,15 @@ exports[`Search Results Page considers a given search filter query param and dis
              preview (with realm filter)
           </p>
           <div
-            class="emotion-29 emotion-30"
+            class="emotion-30 emotion-31"
           >
             <span
-              class="emotion-31 emotion-9"
+              class="emotion-32 emotion-9"
             >
               Realm
             </span>
             <span
-              class="emotion-31 emotion-11"
+              class="emotion-32 emotion-11"
             >
               Latest
             </span>
@@ -883,24 +895,24 @@ exports[`Search Results Page considers a given search filter query param and dis
       </a>
     </div>
     <div
-      class="emotion-35 emotion-80"
+      class="emotion-36 emotion-80"
     >
       <h2
-        class="emotion-37 emotion-38"
+        class="emotion-38 emotion-39"
       >
         Specify your search
       </h2>
       <div
-        class="emotion-39 emotion-40"
+        class="emotion-40 emotion-41"
       >
         <div
-          class="emotion-41 emotion-42"
+          class="emotion-42 emotion-43"
         >
           <div
-            class="emotion-43 emotion-44 emotion-45"
+            class="emotion-44 emotion-45 emotion-46"
           >
             <div
-              class="emotion-46"
+              class="emotion-47"
             >
               <button
                 aria-controls="select-57-menu"
@@ -909,7 +921,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-47"
+                class="emotion-48"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-58"
@@ -917,16 +929,16 @@ exports[`Search Results Page considers a given search filter query param and dis
                 value="Realm"
               >
                 <div
-                  class="emotion-48"
+                  class="emotion-49"
                 />
                 <div
-                  class="emotion-49"
+                  class="emotion-50"
                 >
                   <div
-                    class="emotion-50"
+                    class="emotion-51"
                   >
                     <div
-                      class="emotion-51"
+                      class="emotion-52"
                     >
                       Realm
                     </div>
@@ -934,7 +946,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-52 emotion-53"
+                    class="emotion-53 emotion-54"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -951,13 +963,13 @@ exports[`Search Results Page considers a given search filter query param and dis
           </div>
         </div>
         <div
-          class="emotion-41 emotion-42"
+          class="emotion-42 emotion-43"
         >
           <div
-            class="emotion-43 emotion-44 emotion-45"
+            class="emotion-44 emotion-45 emotion-46"
           >
             <div
-              class="emotion-46"
+              class="emotion-47"
             >
               <button
                 aria-controls="select-59-menu"
@@ -966,7 +978,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-60"
+                class="emotion-61"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -975,16 +987,16 @@ exports[`Search Results Page considers a given search filter query param and dis
                 value="Latest"
               >
                 <div
-                  class="emotion-48"
+                  class="emotion-49"
                 />
                 <div
-                  class="emotion-49"
+                  class="emotion-50"
                 >
                   <div
-                    class="emotion-50"
+                    class="emotion-51"
                   >
                     <div
-                      class="emotion-51"
+                      class="emotion-52"
                     >
                       Latest
                     </div>
@@ -992,7 +1004,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-52 emotion-66"
+                    class="emotion-53 emotion-67"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -2384,7 +2396,6 @@ exports[`Search Results Page renders loading images before returning no results 
 
 .emotion-14 {
   background-color: #fff;
-  border-radius: 4px;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -3168,7 +3179,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
 
 .emotion-14 {
   background-color: #fff;
-  border-radius: 4px;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -3955,8 +3965,8 @@ exports[`Search Results Page renders results from a given search term query para
   height: 100%;
   -webkit-text-decoration: none;
   text-decoration: none;
+  border-radius: 24px;
   background-color: #fff;
-  border-radius: 4px;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -4028,7 +4038,7 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 24px;
   letter-spacing: 0.5px;
   height: 24px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   margin-top: 0;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -4040,7 +4050,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 @media not all and (max-width: 480px) {
   .emotion-19 {
-    font-weight: bolder;
+    font-weight: 600;
   }
 }
 
@@ -4052,18 +4062,15 @@ exports[`Search Results Page renders results from a given search term query para
 
   @media not all and (max-width: 480px) {
     .emotion-19 {
-      font-weight: bolder;
+      font-weight: 600;
     }
   }
 }
 
 .emotion-21 {
-  font-family: 'Akzidenz Grotesk BQ Light';
   font-size: 13px;
-  letter-spacing: 0.5px;
   line-height: 20px;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin-bottom: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -4071,12 +4078,26 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-23 {
-  position: absolute;
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-23 strong,
+.emotion-23 b {
+  font-weight: 700;
+}
+
+.emotion-24 {
   bottom: 0;
   margin-bottom: 24px;
 }
 
-.emotion-26 {
+.emotion-27 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -4096,7 +4117,7 @@ exports[`Search Results Page renders results from a given search term query para
   margin-right: 8px;
 }
 
-.emotion-28 {
+.emotion-29 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -4116,17 +4137,17 @@ exports[`Search Results Page renders results from a given search term query para
   margin-right: 8px;
 }
 
-.emotion-29 {
+.emotion-30 {
   grid-area: filters;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-29 {
+  .emotion-30 {
     display: none;
   }
 }
 
-.emotion-31 {
+.emotion-32 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -4142,12 +4163,12 @@ exports[`Search Results Page renders results from a given search term query para
   margin-bottom: 16px;
 }
 
-.emotion-33 {
+.emotion-34 {
   grid-area: filters;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-33 {
+  .emotion-34 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -4158,30 +4179,30 @@ exports[`Search Results Page renders results from a given search term query para
     flex-direction: row;
   }
 
-  .emotion-33>div {
+  .emotion-34>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-33 {
+  .emotion-34 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-33>div {
+  .emotion-34>div {
     width: 100%;
   }
 
-  .emotion-33>div:first-of-type {
+  .emotion-34>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 }
 
-.emotion-35 {
+.emotion-36 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -4196,15 +4217,15 @@ exports[`Search Results Page renders results from a given search term query para
   margin-bottom: 16px;
 }
 
-.emotion-37 {
+.emotion-38 {
   position: relative;
 }
 
-.emotion-38 {
+.emotion-39 {
   width: 175px;
 }
 
-.emotion-40 {
+.emotion-41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4214,12 +4235,12 @@ exports[`Search Results Page renders results from a given search term query para
   flex-direction: column;
 }
 
-.emotion-40>label+button,
-.emotion-40>p+button {
+.emotion-41>label+button,
+.emotion-41>p+button {
   margin-top: 3px;
 }
 
-.emotion-41 {
+.emotion-42 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4259,35 +4280,35 @@ exports[`Search Results Page renders results from a given search term query para
   font-size: 13px;
 }
 
-.emotion-41:focus {
+.emotion-42:focus {
   outline: none;
 }
 
-.emotion-41[disabled],
-.emotion-41:disabled {
+.emotion-42[disabled],
+.emotion-42:disabled {
   pointer-events: none;
 }
 
-.emotion-41:active,
-.emotion-41:focus,
-.emotion-41:hover {
+.emotion-42:active,
+.emotion-42:focus,
+.emotion-42:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-41:hover,
-.emotion-41:active {
+.emotion-42:hover,
+.emotion-42:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-41:focus {
+.emotion-42:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-41>*:last-child {
+.emotion-42>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -4295,33 +4316,33 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: flex-start;
 }
 
-.emotion-41>*:last-child>svg {
+.emotion-42>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-41>*:last-child>svg {
+.emotion-42>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-41>*:last-child {
+.emotion-42>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-41:focus {
+.emotion-42:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-41 {
+  .emotion-42 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-42 {
+.emotion-43 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -4331,7 +4352,7 @@ exports[`Search Results Page renders results from a given search term query para
   border-radius: 5px;
 }
 
-.emotion-43 {
+.emotion-44 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -4351,7 +4372,7 @@ exports[`Search Results Page renders results from a given search term query para
   gap: 6px;
 }
 
-.emotion-44 {
+.emotion-45 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4371,27 +4392,27 @@ exports[`Search Results Page renders results from a given search term query para
   overflow: hidden;
 }
 
-.emotion-45 {
+.emotion-46 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-46 {
+.emotion-47 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-47 {
+.emotion-48 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: left;
 }
 
-.emotion-54 {
+.emotion-55 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4431,42 +4452,42 @@ exports[`Search Results Page renders results from a given search term query para
   font-size: 13px;
 }
 
-.emotion-54:focus {
+.emotion-55:focus {
   outline: none;
 }
 
-.emotion-54[disabled],
-.emotion-54:disabled {
+.emotion-55[disabled],
+.emotion-55:disabled {
   pointer-events: none;
 }
 
-.emotion-54:active,
-.emotion-54:focus,
-.emotion-54:hover {
+.emotion-55:active,
+.emotion-55:focus,
+.emotion-55:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-54:hover,
-.emotion-54:active {
+.emotion-55:hover,
+.emotion-55:active {
   color: #1C2D38;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-54,
-.emotion-54:hover {
+.emotion-55,
+.emotion-55:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-54:focus {
+.emotion-55:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-54>*:last-child {
+.emotion-55>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -4474,52 +4495,52 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: flex-start;
 }
 
-.emotion-54>*:last-child>svg {
+.emotion-55>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-54>*:last-child>svg {
+.emotion-55>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-54>*:last-child {
+.emotion-55>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-54:focus {
+.emotion-55:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-54:disabled {
+.emotion-55:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-54:disabled:active {
+.emotion-55:disabled:active {
   pointer-events: none;
 }
 
-.emotion-54:disabled {
+.emotion-55:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-54:disabled>*:last-child>svg {
+.emotion-55:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-54 {
+  .emotion-55 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-60 {
+.emotion-61 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -4597,7 +4618,8 @@ exports[`Search Results Page renders results from a given search term query para
              (no filters)
           </p>
           <p
-            class="emotion-21 emotion-22"
+            class="emotion-21 emotion-22 emotion-23"
+            maxlines="2"
           >
             <span
               style="background-color:#FFEC9E"
@@ -4607,15 +4629,15 @@ exports[`Search Results Page renders results from a given search term query para
              preview (no filters)
           </p>
           <div
-            class="emotion-23 emotion-24"
+            class="emotion-24 emotion-25"
           >
             <span
-              class="emotion-25 emotion-26"
+              class="emotion-26 emotion-27"
             >
               Realm
             </span>
             <span
-              class="emotion-25 emotion-28"
+              class="emotion-26 emotion-29"
             >
               Latest
             </span>
@@ -4624,24 +4646,24 @@ exports[`Search Results Page renders results from a given search term query para
       </a>
     </div>
     <div
-      class="emotion-29 emotion-30"
+      class="emotion-30 emotion-31"
     >
       <h2
-        class="emotion-31 emotion-32"
+        class="emotion-32 emotion-33"
       >
         Specify your search
       </h2>
       <div
-        class="emotion-33 emotion-34"
+        class="emotion-34 emotion-35"
       >
         <div
-          class="emotion-35 emotion-36"
+          class="emotion-36 emotion-37"
         >
           <div
-            class="emotion-37 emotion-38 emotion-39"
+            class="emotion-38 emotion-39 emotion-40"
           >
             <div
-              class="emotion-40"
+              class="emotion-41"
             >
               <button
                 aria-controls="select-41-menu"
@@ -4650,7 +4672,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-41"
+                class="emotion-42"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-42"
@@ -4658,16 +4680,16 @@ exports[`Search Results Page renders results from a given search term query para
                 value=""
               >
                 <div
-                  class="emotion-42"
+                  class="emotion-43"
                 />
                 <div
-                  class="emotion-43"
+                  class="emotion-44"
                 >
                   <div
-                    class="emotion-44"
+                    class="emotion-45"
                   >
                     <div
-                      class="emotion-45"
+                      class="emotion-46"
                     >
                       Filter by Category
                     </div>
@@ -4675,7 +4697,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-46 emotion-47"
+                    class="emotion-47 emotion-48"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -4692,13 +4714,13 @@ exports[`Search Results Page renders results from a given search term query para
           </div>
         </div>
         <div
-          class="emotion-35 emotion-36"
+          class="emotion-36 emotion-37"
         >
           <div
-            class="emotion-37 emotion-38 emotion-39"
+            class="emotion-38 emotion-39 emotion-40"
           >
             <div
-              class="emotion-40"
+              class="emotion-41"
             >
               <button
                 aria-controls="select-43-menu"
@@ -4707,7 +4729,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-54"
+                class="emotion-55"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -4716,16 +4738,16 @@ exports[`Search Results Page renders results from a given search term query para
                 value=""
               >
                 <div
-                  class="emotion-42"
+                  class="emotion-43"
                 />
                 <div
-                  class="emotion-43"
+                  class="emotion-44"
                 >
                   <div
-                    class="emotion-44"
+                    class="emotion-45"
                   >
                     <div
-                      class="emotion-45"
+                      class="emotion-46"
                     >
                       Filter by Version
                     </div>
@@ -4733,7 +4755,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-46 emotion-60"
+                    class="emotion-47 emotion-61"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
