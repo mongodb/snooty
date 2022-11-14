@@ -3,6 +3,7 @@ import sanitizeHtml from 'sanitize-html';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import SearchContext from './SearchContext';
@@ -20,7 +21,7 @@ const largeResultTitle = css`
   line-height: ${theme.size.medium};
   /* Only add bold on larger devices */
   @media ${theme.screenSize.smallAndUp} {
-    font-weight: bolder;
+    font-weight: 600;
   }
 `;
 
@@ -59,6 +60,7 @@ const SearchResultLink = styled('a')`
   color: ${LINK_COLOR};
   height: 100%;
   text-decoration: none;
+  border-radius: ${theme.size.medium};
   :hover,
   :focus {
     color: ${LINK_COLOR};
@@ -70,13 +72,10 @@ const SearchResultLink = styled('a')`
   }
 `;
 
-const StyledPreviewText = styled('p')`
-  font-family: 'Akzidenz Grotesk BQ Light';
+const StyledPreviewText = styled(Body)`
   font-size: ${theme.fontSize.small};
-  letter-spacing: 0.5px;
   line-height: 20px;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin-bottom: ${theme.size.default};
   ${({ maxLines }) => truncate(maxLines)};
 `;
 
@@ -86,7 +85,7 @@ const StyledResultTitle = styled('p')`
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
   height: ${theme.size.medium};
-  margin-bottom: 6px;
+  margin-bottom: ${theme.size.small};
   margin-top: 0;
   ${truncate(1)};
   ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
@@ -100,7 +99,6 @@ const StyledTag = styled(Tag)`
 `;
 
 const StylingTagContainer = styled('div')`
-  position: absolute;
   bottom: 0;
   margin-bottom: ${theme.size.medium};
 `;
