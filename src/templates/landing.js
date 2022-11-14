@@ -118,6 +118,13 @@ const Landing = ({ children }) => {
               grid-column: 2 / -2;
             }
           }
+          main h1:first-of-type {
+            color: ${palette.white};
+
+            @media ${screenSize.upToMedium} {
+              color: ${palette.green.dark2};
+            }
+          }
           .span-columns {
             grid-column: 3 / -3 !important;
             margin: ${size.xlarge} 0;
@@ -159,6 +166,16 @@ const Landing = ({ children }) => {
 
             @media ${screenSize.upToMedium} {
               grid-column: 2 / -2;
+
+              p {
+                color: ${palette.black};
+              }
+            }
+
+            @media ${screenSize.mediumAndUp} {
+              p {
+                color: ${palette.white};
+              }
             }
           }
           @media ${screenSize.upToLarge} {
