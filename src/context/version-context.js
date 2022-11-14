@@ -1,11 +1,12 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef } from 'react';
-import { getLocalValue, setLocalValue } from '../utils/browser-storage';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { fetchDocument, fetchDocuments } from '../utils/realm';
-import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
 import { navigate } from '@reach/router';
-import { getUrl } from '../utils/url-utils';
+import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
+import { getLocalValue, setLocalValue } from '../utils/browser-storage';
+import { fetchDocument, fetchDocuments } from '../utils/realm';
+import { getUrl } from '../utils/url-utils';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
@@ -44,14 +45,16 @@ const versionStateReducer = (state, newState) => {
 };
 /**
  * async call to realm app services
- * to get active branches for current+associated products
- * maps and filters results by metadata.associatedProducts
+ * to get active branches for
+ * 1) current product (from site metadata)
+ * 2) associated products list (filter response by SnootyMetadata['associated_products'])
+ *
  * @returns versions{} <product_name: branch_object[]>
  */
-const getBranches = async (metadata, repoBranches, associatedReposInfo) => {
+const getBranches = async (metadata, repoBranches, associatedReposInfo, associatedProducts) => {
   try {
     const versions = {};
-    const promises = metadata.associatedProducts.map(async (product) => {
+    const promises = associatedProducts.map(async (product) => {
       const childRepoBranches = await fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
         project: product.name,
       });
@@ -102,6 +105,7 @@ const VersionContext = createContext({
 
 const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, slug, children }) => {
   const metadata = useSiteMetadata();
+  const { associated_products: associatedProducts } = useSnootyMetadata();
   const mountRef = useRef(true);
 
   // TODO check whats going on here for 404 pages
@@ -119,7 +123,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   const [availableVersions, setAvailableVersions] = useState({});
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, repoBranches, associatedReposInfo).then((versions) => {
+    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then((versions) => {
       if (!mountRef.current) {
         return;
       }
@@ -135,17 +139,13 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   const [showVersionDropdown, setShowVersionDropdown] = useState(isAssociatedProduct);
   useEffect(() => {
-    if (!availableVersions) {
-      return;
-    }
-
     getUmbrellaProject(metadata.project, metadata.database).then((metadataList) => {
       if (!mountRef.current) {
         return;
       }
       setShowVersionDropdown(metadataList.length > 0);
     });
-  }, [availableVersions, metadata.project, metadata.database]);
+  }, [metadata.project, metadata.database]);
 
   // handler for selecting version on multiple dropdowns
   const onVersionSelect = useCallback(
