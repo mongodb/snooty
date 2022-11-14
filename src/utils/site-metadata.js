@@ -60,7 +60,6 @@ const getPathPrefix = (pathPrefix) => {
  * Get site metadata used to identify this build and query correct documents
  */
 const siteMetadata = {
-  associatedProducts: manifestMetadata['associated_products'] || [],
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
   reposDatabase: getReposDatabase(process.env.SNOOTY_ENV),

@@ -135,8 +135,9 @@ exports.createPages = async ({ actions }) => {
 
     if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
       // fetch associated child products
+      const productList = manifestMetadata?.associated_products || [];
       await Promise.all(
-        siteMetadata.associatedProducts.map(async (product) => {
+        productList.map(async (product) => {
           associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
           // filter all branches of associated repo by associated versions only
           associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
@@ -268,15 +269,5 @@ exports.createSchemaCustomization = ({ actions }) => {
     type SnootyMetadata implements Node @dontInfer {
         metadata: JSON!
     }
-
-    type AssociatedProduct {
-      name: String,
-      versions: [String]
-    }
-
-    type SiteSiteMetadata implements Node {
-      associatedProducts: [AssociatedProduct],
-    }
-
   `);
 };
