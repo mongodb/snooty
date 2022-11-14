@@ -3,12 +3,12 @@ import sanitizeHtml from 'sanitize-html';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import SearchContext from './SearchContext';
 import { StyledTextInput } from './SearchTextInput';
 import Tag, { searchTagStyle } from '../Tag';
-import { Body } from '@leafygreen-ui/typography';
 
 const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
