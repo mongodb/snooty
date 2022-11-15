@@ -87,7 +87,7 @@
     "clipboard": "^2.0.8",
     "dotenv": "^8.2.0",
     "eventsource": "^2.0.2",
-    "gatsby": "^2.29.3",
+    "gatsby": "^5.0.1",
     "gatsby-plugin-canonical-urls": "^2.9.0",
     "gatsby-plugin-emotion": "5.5.0-next.0",
     "gatsby-plugin-google-tagmanager": "^2.8.0",
