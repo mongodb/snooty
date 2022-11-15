@@ -129,7 +129,6 @@ const StyledSearchFilters = styled(SearchFilters)`
 
 const searchResultStyling = css`
   background-color: #fff;
-  border-radius: ${theme.size.tiny};
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
