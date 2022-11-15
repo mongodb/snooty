@@ -61,7 +61,6 @@ const StyledEmailInput = styled(TextInput)`
   // optional text styling
   div > div {
     font-family: 'Euclid Circular A' !important;
-    margin-bottom: -5px;
 
     // adjust error icon position
     > svg {

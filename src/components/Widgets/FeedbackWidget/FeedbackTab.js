@@ -6,7 +6,7 @@ import { useFeedbackContext } from './context';
 import { displayNone } from '../../../utils/display-none';
 
 const FeedbackContainer = styled(LeafygreenCard)`
-  bottom: -6px;
+  bottom: -24px;
   cursor: pointer;
   padding: 12px;
   position: fixed;
