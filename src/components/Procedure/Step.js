@@ -16,12 +16,6 @@ const Circle = styled('div')`
 
 const StyledStep = styled('div')`
   display: flex;
-
-  h2,
-  h3,
-  h4 {
-    margin-top: ${theme.size.tiny};
-  }
 `;
 
 const StepBlock = styled('div')`
@@ -59,9 +53,21 @@ const landingStepStyles = {
       top: 0;
       z-index: -1;
     }
+
+    h2,
+    h3,
+    h4 {
+      margin-top: ${theme.size.tiny};
+    }
   `,
   normal: css`
     gap: ${theme.size.default};
+
+    h2,
+    h3,
+    h4 {
+      margin-top: unset;
+    }
   `,
 };
 
