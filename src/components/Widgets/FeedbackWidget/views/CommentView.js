@@ -50,7 +50,7 @@ const StyledEmailInput = styled(TextInput)`
     width: 202px;
     height: 30px;
     ::placeholder {
-      color: #5c6c75;
+      color: #b8c4c2;
       height: 40px;
     }
     // padding within the text input
@@ -60,8 +60,8 @@ const StyledEmailInput = styled(TextInput)`
 
   // optional text styling
   div > div {
-    font-family: 'Euclid Circular A' !important;
-
+    font-family: 'Euclid Circular A', Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    color: #b8c4c2;
     // adjust error icon position
     > svg {
       margin-bottom: 7px;
