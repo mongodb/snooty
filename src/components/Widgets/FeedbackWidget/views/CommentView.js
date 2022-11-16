@@ -62,10 +62,6 @@ const StyledEmailInput = styled(TextInput)`
   div > div {
     font-family: 'Euclid Circular A', Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     color: #b8c4c2;
-    // adjust error icon position
-    > svg {
-      margin-bottom: 7px;
-    }
   }
 `;
 
