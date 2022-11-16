@@ -13,6 +13,7 @@ import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
+import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from '../Searchbar/SearchContext';
 import SearchFilters from '../Searchbar/SearchFilters';
@@ -129,7 +130,6 @@ const StyledSearchFilters = styled(SearchFilters)`
 
 const searchResultStyling = css`
   background-color: #fff;
-  border-radius: ${theme.size.tiny};
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
@@ -350,7 +350,7 @@ const SearchResults = () => {
                         reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
                       }
                       title={title}
-                      preview={preview}
+                      preview={escapeHtml(preview)}
                       url={url}
                       useLargeTitle
                       searchProperty={searchProperty?.[0]}

@@ -9,7 +9,6 @@ const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
-const { constructOpenAPIPageMapping } = require('./src/utils/setup/construct-openapi-page-mapping.js');
 
 // different types of references
 const PAGES = [];
@@ -135,8 +134,9 @@ exports.createPages = async ({ actions }) => {
 
     if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
       // fetch associated child products
+      const productList = manifestMetadata?.associated_products || [];
       await Promise.all(
-        siteMetadata.associatedProducts.map(async (product) => {
+        productList.map(async (product) => {
           associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
           // filter all branches of associated repo by associated versions only
           associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
@@ -196,43 +196,23 @@ exports.createPages = async ({ actions }) => {
     throw err;
   }
 
-  const openapiPageMetadata = manifestMetadata['openapi_pages'];
-  let openapiPageMapping = {};
-  if (!!openapiPageMetadata) {
-    try {
-      openapiPageMapping = await constructOpenAPIPageMapping(openapiPageMetadata);
-    } catch (err) {
-      // Stop build process if there was an error constructing spec stores to avoid
-      // silent errors for OpenAPI content pages.
-      console.error(err);
-      process.exit(1);
-    }
-  }
-
   return new Promise((resolve, reject) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
 
       const slug = getPageSlug(page);
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
-        const context = {
-          slug,
-          repoBranches,
-          associatedReposInfo,
-          isAssociatedProduct,
-          template: pageNodes?.options?.template,
-          page: pageNodes,
-        };
-
-        const openapiSpecStore = openapiPageMapping[slug];
-        if (!!openapiSpecStore) {
-          context['openapiSpecStore'] = openapiSpecStore;
-        }
-
         createPage({
           path: assertTrailingSlash(slug),
           component: path.resolve(__dirname, './src/components/DocumentBody.js'),
-          context,
+          context: {
+            slug,
+            repoBranches,
+            associatedReposInfo,
+            isAssociatedProduct,
+            template: pageNodes?.options?.template,
+            page: pageNodes,
+          },
         });
       }
     });
@@ -268,15 +248,5 @@ exports.createSchemaCustomization = ({ actions }) => {
     type SnootyMetadata implements Node @dontInfer {
         metadata: JSON!
     }
-
-    type AssociatedProduct {
-      name: String,
-      versions: [String]
-    }
-
-    type SiteSiteMetadata implements Node {
-      associatedProducts: [AssociatedProduct],
-    }
-
   `);
 };

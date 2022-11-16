@@ -27,12 +27,6 @@ exports[`renders correctly 1`] = `
   gap: 33px;
 }
 
-.emotion-2 h2,
-.emotion-2 h3,
-.emotion-2 h4 {
-  margin-top: 4px;
-}
-
 .emotion-2:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E8EDEB;
@@ -41,6 +35,12 @@ exports[`renders correctly 1`] = `
   position: absolute;
   top: 0;
   z-index: -1;
+}
+
+.emotion-2 h2,
+.emotion-2 h3,
+.emotion-2 h4 {
+  margin-top: 4px;
 }
 
 .emotion-4 {
@@ -241,12 +241,6 @@ exports[`renders steps nested in include nodes 1`] = `
   gap: 33px;
 }
 
-.emotion-2 h2,
-.emotion-2 h3,
-.emotion-2 h4 {
-  margin-top: 4px;
-}
-
 .emotion-2:not(:last-child):after {
   content: '';
   border-left: 2px dashed #E8EDEB;
@@ -255,6 +249,12 @@ exports[`renders steps nested in include nodes 1`] = `
   position: absolute;
   top: 0;
   z-index: -1;
+}
+
+.emotion-2 h2,
+.emotion-2 h3,
+.emotion-2 h4 {
+  margin-top: 4px;
 }
 
 .emotion-4 {
@@ -690,7 +690,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 .emotion-2 h2,
 .emotion-2 h3,
 .emotion-2 h4 {
-  margin-top: 4px;
+  margin-top: unset;
 }
 
 .emotion-4 {
