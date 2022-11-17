@@ -32,7 +32,7 @@ const StyledSentimentOption = styled.h4(
   color: ${palette.gray.dark1} !important;
   margin: 0px ${props.isMobile ? '-56px' : '-25px'} !important;
   margin-bottom: 8px;
-  padding: 16px ${props.isMobile ? '56px' : '32px'} !important;
+  padding: 16px ${props.isMobile ? '56px' : '23px'} !important;
   cursor: pointer;
   :hover {
     background-color: ${palette.gray.light2};

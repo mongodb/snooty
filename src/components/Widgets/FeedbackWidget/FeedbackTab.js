@@ -6,7 +6,6 @@ import { useFeedbackContext } from './context';
 import { theme } from '../../../../src/theme/docsTheme';
 
 const FeedbackContainer = styled(LeafygreenCard)`
-  bottom: -24px;
   cursor: pointer;
   padding: 12px;
   position: fixed;
@@ -17,6 +16,9 @@ const FeedbackContainer = styled(LeafygreenCard)`
 
   // tab fixed at bottom of docs page
   @media ${theme.screenSize.upToSmall} {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
     position: static !important;
     width: fit-content !important;
     margin-left: 20px;
@@ -35,7 +37,7 @@ const FeedbackContainer = styled(LeafygreenCard)`
 
     // tab positioned on bottom right of page
     @media ${theme.screenSize.largeAndUp} {
-      bottom: -6px;
+      bottom: -24px;
       @media ${theme.screenSize.upTo2XLarge} {
         right: 16px;
       }
