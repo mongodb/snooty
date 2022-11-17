@@ -25,14 +25,14 @@ export const Subheading = styled.p`
   margin-bottom: 16px;
   margin-left: 10px;
   width: 100%;
-  text-align: left;
+  text-align: center;
   font-weight: regular;
   font-size: ${theme.fontSize.small};
 `;
 
 export const Footer = styled.div`
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   width: 100%;
   font-weight: normal;
   display: flex;

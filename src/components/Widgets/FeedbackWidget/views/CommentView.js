@@ -11,6 +11,7 @@ import { useFeedbackContext } from '../context';
 import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
+import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
@@ -19,7 +20,6 @@ const FooterMargin = ({ hasEmailError }) => LeafyCSS`
 `;
 
 const SubmitButton = styled(Button)`
-  margin-right: -8px !important;
   height: 28px !important;
   width: 55px;
   :focus {
@@ -28,7 +28,6 @@ const SubmitButton = styled(Button)`
 `;
 
 const StyledCommentInput = styled(TextArea)`
-  width: 202px;
   margin-top: -16px;
   z-index: 4;
   textarea::placeholder {
@@ -47,7 +46,6 @@ const StyledEmailInput = styled(TextInput)`
     font-size: 300px;
   }
   div > input {
-    width: 202px;
     height: 30px;
     ::placeholder {
       color: #b8c4c2;
@@ -63,6 +61,11 @@ const StyledEmailInput = styled(TextInput)`
     font-family: 'Euclid Circular A', Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     color: #b8c4c2;
   }
+`;
+
+// responsive width for mobile view
+const widthStyling = (isMobile, currWindowWidth) => LeafyCSS`
+  width: ${isMobile ? Math.max(currWindowWidth - 32, 280) : '202'}px !important;
 `;
 
 const useValidation = (inputValue, validator) => {
@@ -89,6 +92,8 @@ const CommentView = () => {
   const isValidEmail = useValidation(email, validateEmail);
   const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
+  const { isMobile } = useScreenSize();
+  const currWindowWidth = window.innerWidth;
 
   const handleSubmit = async () => {
     if (isValidEmail) {
@@ -107,6 +112,7 @@ const CommentView = () => {
     <Layout>
       <CommentHeader />
       <StyledCommentInput
+        className={cx(widthStyling(isMobile, currWindowWidth))}
         type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
@@ -116,6 +122,7 @@ const CommentView = () => {
         onChange={(e) => setComment(e.target.value)}
       />
       <StyledEmailInput
+        className={cx(FooterMargin({ hasEmailError }), widthStyling(isMobile, currWindowWidth))}
         type="email"
         id="feedback-email"
         aria-labelledby="Email Text Box"
@@ -125,13 +132,12 @@ const CommentView = () => {
         errorMessage="Please enter a valid email."
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
-        className={cx(FooterMargin({ hasEmailError }))}
       />
-      <Footer>
+      <Footer className={cx(widthStyling(isMobile, currWindowWidth))}>
         <SubmitButton onClick={() => handleSubmit()} type="submit">
           {'Send'}
         </SubmitButton>
-        <ScreenshotButton />
+        {!isMobile && <ScreenshotButton />}
       </Footer>
     </Layout>
   );

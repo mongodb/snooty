@@ -76,7 +76,6 @@ const ScreenshotSelect = styled(Button)`
   z-index: 5;
   width: 38px !important;
   align-text: center;
-  margin-left: -8px;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
@@ -113,12 +112,11 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // prevent FW from being selected
   const isFWSelected = useCallback((listOfElements) => {
-    for (const elem in listOfElements) {
-      if (listOfElements[elem]?.id?.includes(feedbackId)) {
+    for (let i = 0; i < listOfElements.length; i++) {
+      if (listOfElements[i]?.id?.includes(feedbackId)) {
         return true;
       }
     }
-    return false;
   }, []);
 
   // set properties of selected DOM element based on bounding box
@@ -148,21 +146,19 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     // get the topmost DOM element excluding overlays
     if (!isFWSelected(listOfElements)) {
       domElement = listOfElements[0];
-      for (const elem in listOfElements) {
-        if (!listOfElements[elem]?.className?.includes('overlay')) {
-          domElement = listOfElements[elem];
+      for (let i = 0; i < listOfElements.length; i++) {
+        const elem = String(listOfElements[i]?.className);
+        if (!!elem && !elem.includes('overlay')) {
+          domElement = listOfElements[i];
           break;
         }
       }
     }
 
     // for elements in the top or side nav, set position to fixed. Otherwise set it to absolute
-    for (const elem in listOfElements) {
-      if (
-        elem &&
-        (listOfElements[elem]?.className?.includes('SidenavContainer') ||
-          listOfElements[elem]?.className?.includes('StyledHeaderContainer'))
-      ) {
+    for (let i = 0; i < listOfElements.length; i++) {
+      const elem = String(listOfElements[i]?.className);
+      if (!!elem && (elem.includes('SidenavContainer') || elem.includes('StyledHeaderContainer'))) {
         currElemProperties.current['position'] = 'fixed';
         break;
       }

@@ -30,11 +30,13 @@ const SubmittedView = () => {
       <Subheading>Your input improves MongoDB's Documentation.</Subheading>
       <Subheading>
         <span>Looking for more resources? </span>
+        <br />
         <a href="https://developer.mongodb.com/community/forums/">MongoDB Community </a>
+        <br />
         <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
         {isSentimentNegative && (
           <SupportCase selectedSentiment={selectedSentiment}>
-            {'Have a support contract?'}
+            {'Have a support contract? '}
             <a href="https://support.mongodb.com/">Create a Support Case</a>
           </SupportCase>
         )}

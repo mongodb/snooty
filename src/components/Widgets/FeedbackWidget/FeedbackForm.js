@@ -4,7 +4,6 @@ import useScreenSize from '../../../hooks/useScreenSize';
 import { useFeedbackContext } from './context';
 import FeedbackFullScreen from './FeedbackFullScreen';
 import FeedbackCard from './FeedbackCard';
-import FeedbackModal from './FeedbackModal';
 import SentimentView from './views/SentimentView';
 import SubmittedView from './views/SubmittedView';
 const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
@@ -19,16 +18,14 @@ export const FeedbackContent = ({ view }) => {
 };
 
 const FeedbackForm = () => {
-  const { isMobile, isTabletOrMobile } = useScreenSize();
+  const { isMobile } = useScreenSize();
   const { view } = useFeedbackContext();
   const isOpen = view !== 'waiting';
+  const displayAs = isMobile ? 'fullscreen' : 'floating';
 
-  const displayAs = isMobile ? 'fullscreen' : isTabletOrMobile ? 'modal' : 'floating';
   const Container = {
-    // If big screen, render a floating card
+    // If desktop or tablet screen, render a floating card
     floating: FeedbackCard,
-    // If small screen, render a card in a modal
-    modal: FeedbackModal,
     // If mini screen, render a full screen app
     fullscreen: FeedbackFullScreen,
   }[displayAs];
