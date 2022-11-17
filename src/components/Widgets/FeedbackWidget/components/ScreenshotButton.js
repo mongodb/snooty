@@ -184,7 +184,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // close out the instructions panel
   const handleInstructionClick = () => {
-    document.getElementById(feedbackId).style.display = 'block';
+    document.getElementById(feedbackId).style.left = 'initial';
     resetProperties();
   };
 
@@ -204,7 +204,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    document.getElementById(feedbackId).style.display = 'block';
+    document.getElementById(feedbackId).style.left = 'initial';
   };
 
   const handleExitButtonClick = (e) => {
@@ -219,7 +219,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      document.getElementById(feedbackId).style.display = 'none';
+      document.getElementById(feedbackId).style.left = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
     }

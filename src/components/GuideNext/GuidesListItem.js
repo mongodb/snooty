@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { ReadGuidesContext } from './read-guides-context';
 import IconLightningBolt from '../icons/LightningBolt';
 import Link from '../Link';
@@ -44,7 +44,7 @@ const Circle = styled('div')`
 `;
 
 const GuideTitle = styled(Link)`
-  color: ${uiColors.black};
+  color: ${palette.black};
   text-decoration: none;
 
   :hover,
@@ -56,31 +56,31 @@ const GuideTitle = styled(Link)`
 
 const STATUSES = {
   next: {
-    circleColor: uiColors.green.base,
+    circleColor: palette.green.dark1,
     icon: (
       <IconLightningBolt
         css={css`
-          color: ${uiColors.green.base};
+          color: ${palette.green.dark1};
         `}
       />
     ),
-    lineColor: uiColors.gray.light2,
+    lineColor: palette.gray.light2,
   },
   read: {
     circleColor: 'transparent',
-    icon: <Icon glyph="Checkmark" fill={uiColors.green.base} />,
-    lineColor: uiColors.green.base,
+    icon: <Icon glyph="Checkmark" fill={palette.green.dark1} />,
+    lineColor: palette.green.dark1,
   },
   unread: {
     circleColor: 'transparent',
     icon: (
       <IconLightningBolt
         css={css`
-          color: ${uiColors.gray.dark2};
+          color: ${palette.gray.dark2};
         `}
       />
     ),
-    lineColor: uiColors.gray.light2,
+    lineColor: palette.gray.light2,
   },
 };
 

@@ -7,7 +7,7 @@ import Badge from '@leafygreen-ui/badge';
 import Card from '@leafygreen-ui/card';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
 import CopyButton from './CopyButton';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -55,9 +55,15 @@ const iconAdjust = css`
   top: -5px;
 `;
 
+const StyledCardContainer = styled(Card)`
+  padding: 0;
+  margin-bottom: ${theme.size.default};
+  overflow: hidden;
+`;
+
 const OperationHeader = styled('div')`
   align-items: baseline;
-  background-color: ${uiColors.gray.light3};
+  background-color: ${palette.gray.light3};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -73,7 +79,7 @@ const OperationHeader = styled('div')`
 `;
 
 const Path = styled('code')`
-  color: ${uiColors.black};
+  color: ${palette.black};
 
   @media ${theme.screenSize.upToSmall} {
     word-break: break-all;
@@ -137,12 +143,7 @@ const Operation = ({
   }, [hash, setShowDetails, showDetails]);
 
   return (
-    <Card
-      id={hash}
-      css={css`
-        margin-bottom: ${theme.size.default};
-      `}
-    >
+    <StyledCardContainer id={hash}>
       <OperationHeader>
         <Badge variant={methodBadgeMap[method]}>{method}</Badge>
         <div>
@@ -180,7 +181,7 @@ const Operation = ({
           ))}
         </Details>
       )}
-    </Card>
+    </StyledCardContainer>
   );
 };
 

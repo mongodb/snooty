@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
+import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
+import { theme } from '../../theme/docsTheme';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import SyncCloud from '../SyncCloud';
+import VersionSelector from './VersionSelector';
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
@@ -22,6 +25,28 @@ const caretStyle = LeafyCSS`
   min-width: 16px;
 `;
 
+const wrapperStyle = LeafyCSS`
+  display: flex;
+  align-items: center;
+  padding-right: ${theme.size.medium};
+
+  &:hover {
+    background: ${palette.gray.light2};
+  }
+
+  > li {
+    flex: 1 1 auto;
+  }
+`;
+/**
+ *
+ * @param {hasVersions} boolean
+ * @returns Wrapper for Version Selector, or returns children
+ */
+const Wrapper = ({ children, hasVersions }) => {
+  return hasVersions ? <Box className={cx(wrapperStyle)}>{children}</Box> : <>{children}</>;
+};
+
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
@@ -30,6 +55,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
   const hasChildren = !!children.length;
+  const hasVersions = !!(options?.versions?.length > 1); // in the event there is only one version, do we show version selector?
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
@@ -52,6 +78,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       <div
         css={css`
           margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
+          color: ${isActive ? `${palette.green.dark3};` : `${palette.gray.dark3};`};
         `}
       >
         {formatText(title, formatTextOptions)}
@@ -63,31 +90,34 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     if (isDrawer && hasChildren) {
       return (
         <SideNavItem
-          className={cx(sideNavItemTOCStyling({ level }))}
+          css={[sideNavItemTOCStyling({ level })]}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
         >
-          <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />
+          <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
       );
     }
     return (
-      <SideNavItem
-        as={Link}
-        to={target}
-        active={isSelected}
-        className={cx(sideNavItemTOCStyling({ level }))}
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
-        {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={uiColors.gray.base} />}
-        {isTocIcon && <SyncCloud />}
-        {formattedTitle}
-      </SideNavItem>
+      <Wrapper hasVersions={hasVersions}>
+        <SideNavItem
+          as={Link}
+          to={target}
+          active={isSelected}
+          css={[sideNavItemTOCStyling({ level })]}
+          onClick={(e) => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />}
+          {isTocIcon && <SyncCloud />}
+          {formattedTitle}
+        </SideNavItem>
+        {hasVersions && <VersionSelector versionedProject={options.project} />}
+      </Wrapper>
     );
   };
 

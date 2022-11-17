@@ -18,6 +18,7 @@ const tableContainerStyling = css`
 const tableCellStyling = css`
   display: table-cell;
   vertical-align: middle;
+  line-height: 28px;
 `;
 
 const textAlignLeft = css`

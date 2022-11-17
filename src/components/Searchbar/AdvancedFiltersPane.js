@@ -3,7 +3,7 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import SearchFilters from './SearchFilters';
 
@@ -27,7 +27,7 @@ const StyledAdvancedFiltersPane = styled('div')`
 `;
 
 const StyledReturnButton = styled(Button)`
-  color: ${uiColors.blue.base};
+  color: ${palette.blue.base};
   font-family: Akzidenz;
   font-size: ${theme.fontSize.tiny};
   letter-spacing: 0.5px;

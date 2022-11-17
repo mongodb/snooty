@@ -4,28 +4,41 @@ exports[`renders correctly with a directive_argument node 1`] = `
 <DocumentFragment>
   .emotion-0 {
   font-size: unset;
+  display: inline;
+}
+
+a .emotion-0 {
+  color: inherit;
 }
 
 .emotion-2 {
-  background-color: #F9FBFA;
-  border: 1px solid #B8C4C2;
+  font-size: 13px;
+  line-height: 20px;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   border-radius: 3px;
   font-family: 'Source Code Pro',Menlo,monospace;
-  font-size: 14px;
   line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  display: inherit;
+  background-color: #F9FBFA;
+  border: 1px solid #E8EDEB;
+  color: #1C2D38;
   white-space: nowrap;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:hover>.emotion-2 {
-  box-shadow: 0 0 0 3px #E7EEEC;
+.constant-classname:hover>.emotion-2 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-[data-leafygreen-ui="anchor-inline-code"]:focus>.emotion-2 {
-  box-shadow: 0 0 0 3px #C5E4F2;
+.constant-classname:hover>.emotion-2 {
+  box-shadow: 0 0 0 3px #E8EDEB;
+  border: 1px solid #C1C7C6;
+}
+
+.constant-classname:focus>.emotion-2 {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+  border: 1px solid #016BF8;
 }
 
 .emotion-3 {
@@ -46,6 +59,65 @@ exports[`renders correctly with a directive_argument node 1`] = `
   margin-top: -150px;
   position: absolute;
   padding-bottom: 2px;
+}
+
+.emotion-8 {
+  margin-bottom: 16px;
+}
+
+.emotion-10 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-10 strong,
+.emotion-10 b {
+  font-weight: 700;
+}
+
+.emotion-11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-11:focus {
+  outline: none;
+}
+
+.emotion-11>code {
+  color: #016BF8;
+}
+
+.emotion-11::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-11:focus .emotion-11::after {
+  background-color: #0498EC;
+}
+
+.emotion-11:hover::after {
+  background-color: #E8EDEB;
 }
 
 <dl
@@ -73,11 +145,14 @@ exports[`renders correctly with a directive_argument node 1`] = `
       />
     </dt>
     <dd>
-      <p>
+      <p
+        class="emotion-8 emotion-9 emotion-10"
+      >
         Specifies a configuration file for runtime configuration options. The
 configuration file is the preferred method for runtime configuration of
 
         <a
+          class="emotion-11 emotion-12"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code
@@ -89,6 +164,7 @@ configuration file is the preferred method for runtime configuration of
         . The options are equivalent to the command-line
 configuration options. See 
         <a
+          class="emotion-11 emotion-12"
           href="/reference/configuration-options/"
         >
           Configuration File Options
@@ -96,9 +172,12 @@ configuration options. See
          for
 more information.
       </p>
-      <p>
+      <p
+        class="emotion-8 emotion-9 emotion-10"
+      >
         Ensure the configuration file uses ASCII encoding. The 
         <a
+          class="emotion-11 emotion-12"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code
@@ -119,7 +198,7 @@ including UTF-8.
 exports[`renders correctly with no directive_argument nodes 1`] = `
 <DocumentFragment>
   <span
-    class="contains-headerlink"
+    class="header-buffer"
     id="std-label-php-language-center"
   />
 </DocumentFragment>

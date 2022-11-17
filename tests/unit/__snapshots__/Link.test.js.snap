@@ -3,11 +3,9 @@
 exports[`Link component renders a variety of strings correctly empty string 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-1 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -18,35 +16,41 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-1::after {
+  background-color: #E8EDEB;
+}
+
 .emotion-2 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -57,18 +61,17 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 }
 
 <span
-    class="emotion-0 emotion-1"
-    data-leafygreen-ui="anchor-container"
+    class="constant-classname emotion-0"
   >
     <span
-      class="emotion-2"
+      class="emotion-1"
     >
       Empty string
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-3"
+      class="emotion-2"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -89,22 +92,10 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 
 exports[`Link component renders a variety of strings correctly external MDB docs URL 1`] = `
 <DocumentFragment>
-  <a
-    href="https://www.mongodb.com/docs/atlas/"
-  >
-    MongoDB Atlas Docs
-  </a>
-</DocumentFragment>
-`;
-
-exports[`Link component renders a variety of strings correctly external MDB non-docs URL 1`] = `
-<DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-1 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -115,35 +106,106 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-1::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="constant-classname emotion-0"
+    href="https://www.mongodb.com/docs/atlas/"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <span
+      class="emotion-1"
+    >
+      MongoDB Atlas Docs
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Link component renders a variety of strings correctly external MDB non-docs URL 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-1::after {
+  background-color: #E8EDEB;
+}
+
 .emotion-2 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -154,21 +216,20 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 }
 
 <a
-    class="emotion-0 emotion-1"
-    data-leafygreen-ui="anchor-container"
+    class="constant-classname emotion-0"
     href="https://account.mongodb.com/account/"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-2"
+      class="emotion-1"
     >
       MongoDB Atlas Registration Page
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-3"
+      class="emotion-2"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -190,11 +251,9 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 exports[`Link component renders a variety of strings correctly external URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-1 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -205,35 +264,41 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-1::after {
+  background-color: #E8EDEB;
+}
+
 .emotion-2 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -244,21 +309,20 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 }
 
 <a
-    class="emotion-0 emotion-1"
-    data-leafygreen-ui="anchor-container"
+    class="constant-classname emotion-0"
     href="http://mongodb.com"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-2"
+      class="emotion-1"
     >
       MongoDB Company
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-3"
+      class="emotion-2"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -277,14 +341,12 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 </DocumentFragment>
 `;
 
-exports[`Link component renders a variety of strings correctly external non-MDB docs URL 1`] = `
+exports[`Link component renders a variety of strings correctly external URL with hidden external icon 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-1 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -295,35 +357,106 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #007CAD;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-1::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="constant-classname emotion-0"
+    href="http://mongodb.com"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <span
+      class="emotion-1"
+    >
+      MongoDB Company
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Link component renders a variety of strings correctly external non-MDB docs URL 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-1::after {
+  background-color: #E8EDEB;
+}
+
 .emotion-2 {
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: center bottom;
-}
-
-[data-leafygreen-ui="anchor-container"]:hover .emotion-2 {
-  background-image: linear-gradient( #E7EEEC 100%, #E7EEEC 0 );
-}
-
-[data-leafygreen-ui="anchor-container"]:focus .emotion-2 {
-  background-image: linear-gradient( to right, #9DD0E7 100%, #9DD0E7 0 );
-}
-
-.emotion-3 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -334,21 +467,20 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 }
 
 <a
-    class="emotion-0 emotion-1"
-    data-leafygreen-ui="anchor-container"
+    class="constant-classname emotion-0"
     href="https://safety.google/authentication/"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-2"
+      class="emotion-1"
     >
       Google 2-Step Verification
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-3"
+      class="emotion-2"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -369,18 +501,112 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 
 exports[`Link component renders a variety of strings correctly identfies mailto links as external urls 1`] = `
 <DocumentFragment>
-  <a
+  .emotion-0 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-1 {
+  position: relative;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-1::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="constant-classname emotion-0"
     href="mailto:docs@mongodb.com"
+    target="_self"
   >
-    docs@mongodb.com
+    <span
+      class="emotion-1"
+    >
+      docs@mongodb.com
+    </span>
   </a>
 </DocumentFragment>
 `;
 
 exports[`Link component renders a variety of strings correctly internal link 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0 emotion-1"
     href="/drivers/c/"
   >
     C Driver
@@ -390,8 +616,48 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
 
 exports[`Link component renders a variety of strings correctly internal link query param 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0 emotion-1"
     href="/drivers/ruby/?site=drivers"
   >
     C Driver
@@ -401,8 +667,48 @@ exports[`Link component renders a variety of strings correctly internal link que
 
 exports[`Link component renders a variety of strings correctly internal link that already includes trailing slash 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0 emotion-1"
     href="/drivers/nodejs/#installation"
   >
     C Driver
@@ -412,8 +718,48 @@ exports[`Link component renders a variety of strings correctly internal link tha
 
 exports[`Link component renders a variety of strings correctly internal link with hash 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0 emotion-1"
     href="/drivers/pymongo/#installation"
   >
     C Driver

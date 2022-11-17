@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
@@ -20,6 +20,11 @@ const align = (key) => {
 const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
+  margin: ${theme.size.medium} 0;
+
+  table & {
+    margin: 0;
+  }
 `;
 
 /* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
@@ -32,6 +37,34 @@ const unstyleThead = css`
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
+
+/**
+ * recursive traversal of nodeLists' children to look for
+ * id values of footnote references
+ *
+ * @param nodeList @node[]
+ * @returns str[]
+ */
+const getReferenceIds = (nodeList) => {
+  const referenceType = `footnote_reference`;
+  const results = [];
+  const iter = (node) => {
+    if (node['type'] === referenceType) {
+      results.push(`ref-${node['refname']}-${node['id']}`);
+    }
+    if (!node.children || !node.children.length) {
+      return;
+    }
+    for (let childNode of node.children) {
+      iter(childNode);
+    }
+  };
+
+  for (let node of nodeList) {
+    iter(node);
+  }
+  return results;
+};
 
 const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
   <Row>
@@ -51,7 +84,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
             vertical-align: top;
 
             /* Apply grey background to stub <th> cells (PD-1216) */
-            ${isStub && `background-clip: padding-box; background-color: ${uiColors.gray.light3};`}
+            ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
 
             * {
               font-size: ${theme.fontSize.small} !important;
@@ -61,8 +94,15 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
               align-items: start;
             }
 
-            & > div > span > * {
+            & > div > span {
+              display: block;
+              align-self: center;
+            }
+
+            & > div > span > *,
+            & > div > span p {
               margin: 0 0 12px;
+              line-height: inherit;
             }
 
             /* Prevent extra margin below last element */
@@ -107,39 +147,50 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
     }
   }
 
+  // get all ID's for elements within header, or first two rows of body
+  const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
+
   return (
-    <Table
-      className={cx(
-        styleTable({
-          customAlign: options?.align,
-          customWidth: options?.width,
-        })
-      )}
-      columns={headerRows.map((row, rowIndex) => (
-        <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
-          {row.children.map((cell, colIndex) => {
-            const skipPTag = hasOneChild(cell.children);
-            return (
-              <TableHeader
-                className={cx(css`
-                  * {
-                    font-size: ${theme.fontSize.small};
-                  }
-                  ${widths && `width: ${widths[colIndex]}%`}
-                `)}
-                key={`${rowIndex}-${colIndex}`}
-                label={cell.children.map((child, i) => (
-                  <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                ))}
-              />
-            );
-          })}
-        </HeaderRow>
+    <>
+      {elmIdsForScroll.map((id) => (
+        <div className="header-buffer" key={id} id={id} />
       ))}
-      data={bodyRows}
-    >
-      {({ datum }) => <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />}
-    </Table>
+      <Table
+        className={cx(
+          styleTable({
+            customAlign: options?.align,
+            customWidth: options?.width,
+          })
+        )}
+        columns={headerRows.map((row, rowIndex) => (
+          <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
+            {row.children.map((cell, colIndex) => {
+              const skipPTag = hasOneChild(cell.children);
+              return (
+                <TableHeader
+                  className={cx(css`
+                    * {
+                      font-size: ${theme.fontSize.small};
+                      font-weight: 600;
+                    }
+                    ${widths && `width: ${widths[colIndex]}%`}
+                  `)}
+                  key={`${rowIndex}-${colIndex}`}
+                  label={cell.children.map((child, i) => (
+                    <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                  ))}
+                />
+              );
+            })}
+          </HeaderRow>
+        ))}
+        data={bodyRows}
+      >
+        {({ datum }) => (
+          <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
+        )}
+      </Table>
+    </>
   );
 };
 

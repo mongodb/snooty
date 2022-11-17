@@ -6,7 +6,7 @@ const {
   ASSETS_COLLECTION,
   BRANCHES_COLLECTION,
 } = require('../build-constants');
-const { siteMetadata } = require('../utils/site-metadata');
+const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
 const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
@@ -27,11 +27,11 @@ class StitchInterface {
     return this.stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   }
 
-  fetchRepoBranches() {
+  fetchRepoBranches(project = siteMetadata.project) {
     return this.stitchClient.callFunction('fetchDocument', [
       siteMetadata.reposDatabase,
       BRANCHES_COLLECTION,
-      constructReposFilter(siteMetadata.project),
+      constructReposFilter(project, project === siteMetadata.project),
     ]);
   }
 
@@ -67,13 +67,7 @@ class ManifestDocumentDatabase {
   }
 
   async getMetadata() {
-    const zipEntries = this.zip.getEntries();
-    for (const entry of zipEntries) {
-      if (entry.entryName === 'site.bson') {
-        const doc = BSON.deserialize(entry.getData());
-        return doc;
-      }
-    }
+    return manifestMetadata;
   }
 
   async getAsset(checksum) {
@@ -102,8 +96,9 @@ class StitchDocumentDatabase {
     return this.stitchInterface.fetchDocuments(DOCUMENTS_COLLECTION, buildFilter);
   }
 
-  async getMetadata() {
-    return this.stitchInterface.getMetadata(buildFilter);
+  async getMetadata(queryFilters) {
+    const filter = queryFilters || buildFilter;
+    return this.stitchInterface.getMetadata(filter);
   }
 
   async getAsset(checksum) {
@@ -121,5 +116,5 @@ class StitchDocumentDatabase {
   }
 }
 
-exports.ManifestDocumentDatabase = ManifestDocumentDatabase;
-exports.StitchDocumentDatabase = StitchDocumentDatabase;
+exports.manifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
+exports.stitchDocumentDatabase = new StitchDocumentDatabase();

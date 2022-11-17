@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { useLocation } from '@reach/router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import queryString from 'query-string';
 import MobileFilters from './MobileFilters';
 import useScreenSize from '../../hooks/useScreenSize';
@@ -67,7 +67,7 @@ const FiltersContainer = styled('div')`
 
 const FilterHeader = styled('h2')`
   align-self: center;
-  color: ${uiColors.gray.dark2};
+  color: ${palette.gray.dark2};
   font-size: ${theme.fontSize.tiny};
   line-height: 15px;
   text-transform: uppercase;
@@ -129,7 +129,6 @@ const StyledSearchFilters = styled(SearchFilters)`
 
 const searchResultStyling = css`
   background-color: #fff;
-  border-radius: ${theme.size.tiny};
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;

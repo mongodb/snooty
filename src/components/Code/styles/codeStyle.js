@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const baseCodeStyle = css`
   display: table;
-  margin: ${theme.size.default} 0;
+  margin: ${theme.size.medium} 0;
   min-width: 150px;
   table-layout: fixed;
   width: 100%;
@@ -16,5 +16,5 @@ export const baseCodeStyle = css`
 `;
 
 export const borderCodeStyle = css`
-  border: 1px solid ${uiColors.gray.light2};
+  border: 1px solid ${palette.gray.light2};
 `;

@@ -6,6 +6,7 @@ import { useFeedbackContext } from './context';
 import { theme } from '../../../../src/theme/docsTheme';
 
 const FeedbackContainer = styled(LeafygreenCard)`
+  bottom: -24px;
   cursor: pointer;
   padding: 12px;
   position: fixed;

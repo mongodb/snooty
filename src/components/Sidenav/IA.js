@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { cx, css } from '@leafygreen-ui/emotion';
-import { sideNavItemBasePadding } from './styles/sideNavItem';
+import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 
@@ -17,7 +17,13 @@ const IA = ({ handleClick, header, ia }) => (
     {ia.map(({ title, slug, url }) => {
       const target = slug || url;
       return (
-        <SideNavItem className={cx(sideNavItemBasePadding)} key={target} as={Link} onClick={handleClick} to={target}>
+        <SideNavItem
+          css={[sideNavItemBasePadding, sideNavItemFontSize]}
+          key={target}
+          as={Link}
+          onClick={handleClick}
+          to={target}
+        >
           {formatText(title)}
         </SideNavItem>
       );

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { SidenavContext } from './sidenav-context';
 import { displayNone } from '../../utils/display-none';
 
@@ -14,7 +14,7 @@ const MenuButtonContainer = styled('div')`
 
 const MenuButton = styled(IconButton)`
   :focus {
-    color: ${uiColors.gray.dark3};
+    color: ${palette.gray.dark3};
   }
 
   :before {

@@ -26,6 +26,7 @@ const Card = styled(LeafygreenCard)`
   width: 234px;
   height: 340px;
   align-items: center;
+  padding: 0;
 `;
 
 const CardHeader = styled.div`

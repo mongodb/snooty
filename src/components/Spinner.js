@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 
 const rotate = keyframes`
   0% {
@@ -39,7 +39,7 @@ const Spinner = styled(SpinnerIcon)`
   animation: 2s ${rotate} linear infinite;
 
   path {
-    fill: ${uiColors.gray.dark3};
+    fill: ${palette.gray.dark3};
   }
 `;
 

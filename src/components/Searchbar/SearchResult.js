@@ -2,7 +2,8 @@ import React, { useCallback, useContext, useRef } from 'react';
 import sanitizeHtml from 'sanitize-html';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import SearchContext from './SearchContext';
@@ -13,14 +14,14 @@ const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const SEARCH_MATCH_STYLE = `background-color: ${uiColors.yellow.light2};`;
+const SEARCH_MATCH_STYLE = `background-color: ${palette.yellow.light2};`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
   line-height: ${theme.size.medium};
   /* Only add bold on larger devices */
   @media ${theme.screenSize.smallAndUp} {
-    font-weight: bolder;
+    font-weight: 600;
   }
 `;
 
@@ -59,6 +60,7 @@ const SearchResultLink = styled('a')`
   color: ${LINK_COLOR};
   height: 100%;
   text-decoration: none;
+  border-radius: ${theme.size.medium};
   :hover,
   :focus {
     color: ${LINK_COLOR};
@@ -70,13 +72,10 @@ const SearchResultLink = styled('a')`
   }
 `;
 
-const StyledPreviewText = styled('p')`
-  font-family: 'Akzidenz Grotesk BQ Light';
+const StyledPreviewText = styled(Body)`
   font-size: ${theme.fontSize.small};
-  letter-spacing: 0.5px;
   line-height: 20px;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin-bottom: ${theme.size.default};
   ${({ maxLines }) => truncate(maxLines)};
 `;
 
@@ -86,7 +85,7 @@ const StyledResultTitle = styled('p')`
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
   height: ${theme.size.medium};
-  margin-bottom: 6px;
+  margin-bottom: ${theme.size.small};
   margin-top: 0;
   ${truncate(1)};
   ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
@@ -100,7 +99,6 @@ const StyledTag = styled(Tag)`
 `;
 
 const StylingTagContainer = styled('div')`
-  position: absolute;
   bottom: 0;
   margin-bottom: ${theme.size.medium};
 `;
@@ -118,7 +116,7 @@ const sanitizePreviewHtml = (text) =>
   sanitizeHtml(text, {
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
-    allowedStyles: { span: { 'background-color': [new RegExp(`^${uiColors.yellow.light2}$`, 'i')] } },
+    allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
   });
 
 const SearchResult = React.memo(

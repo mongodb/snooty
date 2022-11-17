@@ -3,10 +3,11 @@ import { withPrefix } from 'gatsby';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import Footer from '../components/Footer';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
+import Link from '../components/Link';
 
 const ErrorBox = styled('div')`
   padding: 0px ${theme.size.default};
@@ -16,21 +17,20 @@ const ErrorBox = styled('div')`
   }
 `;
 
-const SupportLink = styled('a')`
-  color: ${uiColors.gray.dark2};
+const SupportLink = styled(Link)`
+  color: ${palette.gray.dark1};
   display: inline-block;
-  font-family: Akzidenz;
-  font-size: ${theme.fontSize.default};
-  letter-spacing: 0.5px;
-  line-height: ${theme.size.medium};
-  margin-left: ${theme.size.medium};
+  font-size: ${theme.fontSize.small};
+  line-height: 20px;
+  margin-left: 16px;
 
   :hover {
-    color: ${uiColors.gray.dark2};
+    color: ${palette.gray.dark1};
   }
 
   @media ${theme.screenSize.upToSmall} {
-    margin-left: ${theme.size.tiny};
+    margin-top: ${theme.size.default};
+    margin-left: 0;
   }
 `;
 
@@ -43,11 +43,7 @@ const NotFoundImage = () => {
       src={withPrefix(imgPath)}
       alt={altText}
       css={css`
-        width: 550px;
-
-        @media ${theme.screenSize.upToSmall} {
-          margin-bottom: 40px;
-        }
+        width: 444px;
       `}
     />
   );
@@ -58,8 +54,9 @@ const ErrorBoxContainer = () => {
     <ErrorBox>
       <p
         css={css`
+          font-family: 'MongoDB Value Serif';
           font-size: 32px;
-          line-height: ${theme.size.large};
+          line-height: 40px;
 
           @media ${theme.screenSize.upToSmall} {
             font-size: ${theme.fontSize.h2};
@@ -71,8 +68,7 @@ const ErrorBoxContainer = () => {
       <p
         css={css`
           font-size: ${theme.fontSize.default};
-          line-height: ${theme.size.medium};
-          margin-top: ${theme.size.medium};
+          line-height: 28px;
         `}
       >
         The page might have been moved or deleted.
@@ -98,14 +94,7 @@ const ErrorBoxContainer = () => {
         >
           Go to Docs Home
         </Button>
-        <SupportLink
-          href="https://support.mongodb.com/welcome"
-          css={css`
-            @media ${theme.screenSize.upToSmall} {
-              margin-top: ${theme.size.default};
-            }
-          `}
-        >
+        <SupportLink to="https://support.mongodb.com/welcome" hideExternalIcon={true}>
           Contact Support →
         </SupportLink>
       </div>

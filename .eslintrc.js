@@ -8,6 +8,7 @@ module.exports = {
   plugins: ['jest', '@emotion'],
   rules: {
     '@emotion/pkg-renaming': 'error',
+    'no-return-await': 1,
   },
   settings: {
     'import/resolver': {

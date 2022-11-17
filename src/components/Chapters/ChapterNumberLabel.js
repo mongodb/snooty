@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
 const Label = styled('div')`
-  background-color: ${uiColors.green.light3};
+  background-color: ${palette.green.light3};
   border-radius: ${theme.size.tiny};
-  color: ${uiColors.green.base};
+  color: ${palette.black};
   font-size: ${theme.fontSize.small};
   font-weight: bold;
+  line-height: ${theme.size.medium};
   height: ${theme.size.medium};
   text-align: center;
   width: 83px;

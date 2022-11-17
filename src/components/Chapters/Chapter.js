@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
-import { uiColors } from '@leafygreen-ui/palette';
+import { palette } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
 import ChapterNumberLabel from './ChapterNumberLabel';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
@@ -13,9 +14,8 @@ import { getPlaintext } from '../../utils/get-plaintext';
 const IMAGE_SIZE = 200;
 
 const Container = styled(Card)`
-  background-color: ${uiColors.white};
-  border-radius: ${theme.size.tiny};
-  border: 1px solid ${uiColors.gray.light3};
+  background-color: ${palette.white};
+  border: 1px solid ${palette.gray.light3};
   padding: ${theme.size.large} ${theme.size.medium};
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -79,7 +79,7 @@ const ChapterTitle = styled('div')`
   margin-top: ${theme.size.small};
 `;
 
-const ChapterDescription = styled('div')`
+const ChapterDescription = styled(Body)`
   margin-top: ${theme.size.small};
 `;
 
@@ -102,11 +102,16 @@ const GuideLink = styled(Link)`
   flex-direction: column;
   padding: ${theme.size.small};
   position: relative;
+  font-size: ${theme.size.default};
+  line-height: ${theme.size.medium};
 
   :hover {
-    background-color: ${uiColors.gray.light2};
+    background-color: ${palette.gray.light2};
     color: unset;
-    text-decoration: none;
+
+    ::after {
+      content: none;
+    }
   }
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -145,6 +150,8 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
   const guides = useMemo(() => getGuidesData(metadata, currentChapter), [metadata, currentChapter]);
 
   return (
+    // TODO: have to return specific typography here. card is explicit size 13 font
+
     <Container id={currentChapter?.id}>
       {image ? (
         <ChapterImage
