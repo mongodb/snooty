@@ -14,6 +14,10 @@ exports[`renders correctly 1`] = `
   vertical-align: top;
 }
 
+.emotion-2 {
+  font-size: 16px;
+}
+
 .emotion-2>th,
 .emotion-2>td {
   padding: 11px 5px 12px;
