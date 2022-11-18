@@ -53,6 +53,7 @@ const HeaderContainer = styled('div')`
 `;
 
 const HeaderText = styled('h1')`
+  color: ${palette.black} !important;
   font-size: 18px;
   line-height: 21px;
   ${commonTextStyling};
