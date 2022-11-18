@@ -34,6 +34,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-4 {
+  color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
   font-family: Akzidenz;
@@ -335,6 +336,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 20px;
 }
 
 .emotion-29 {
@@ -1093,6 +1095,7 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-4 {
+  color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
   font-family: Akzidenz;
@@ -2252,6 +2255,7 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-4 {
+  color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
   font-family: Akzidenz;
@@ -3035,6 +3039,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-4 {
+  color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
   font-family: Akzidenz;
@@ -3818,6 +3823,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-4 {
+  color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
   font-family: Akzidenz;
@@ -4075,6 +4081,7 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 20px;
 }
 
 .emotion-23 {
