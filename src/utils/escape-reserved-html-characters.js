@@ -4,6 +4,8 @@
  * See DOP-2863 for rationale.
  */
 export const escapeHtml = (unsafe) => {
+  if (!unsafe) return '';
+
   return unsafe
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
