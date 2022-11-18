@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { theme } from '../../../../theme/docsTheme';
 
 const StyledEmoji = styled('span')`
-  padding-right: ${theme.size.small};
   font-size: ${theme.fontSize.h2};
 `;
 

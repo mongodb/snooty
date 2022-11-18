@@ -48,7 +48,7 @@ const SentimentOption = ({ path }) => {
     <StyledSentiment>
       <StyledSentimentOption isMobile={isMobile} onClick={() => setSentiment(path.sentiment)}>
         <Emoji sentiment={path.sentiment} />
-        {path.copy}
+        &nbsp;{path.copy}
       </StyledSentimentOption>
     </StyledSentiment>
   );

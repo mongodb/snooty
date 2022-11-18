@@ -23,7 +23,6 @@ export const Heading = styled.h2`
 export const Subheading = styled.p`
   margin-top: 0;
   margin-bottom: 16px;
-  margin-left: 10px;
   width: 100%;
   text-align: center;
   font-weight: regular;
