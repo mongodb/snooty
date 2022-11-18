@@ -14,7 +14,7 @@ const Dot = styled('span')`
 `;
 
 const DotSpan = styled('span')`
-  padding-right: 72px;
+  padding-right: 60px;
 `;
 
 const StyledBar = styled('span')`

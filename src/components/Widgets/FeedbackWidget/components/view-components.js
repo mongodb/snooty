@@ -46,7 +46,7 @@ const ResponsiveEmoji = styled('div')`
   margin-top: 3px;
   display: inline-block;
   vertical-align: left;
-  width: 30%;
+  width: 33.3%;
   margin-top: -5px;
 `;
 
@@ -55,7 +55,6 @@ const StyledSentimentPath = styled('span')`
   font-size: ${theme.fontSize.small} !important;
   text-align: center;
   margin: 0px -10px;
-  margin-right: 2px;
   line-height: 20px;
   display: block;
   letter-spacing: 0.2px;

@@ -29,7 +29,7 @@ const Header = styled.div`
   grid-template-columns: 7fr 1fr;
   justify-content: center;
   > span {
-    padding-left: 120px !important;
+    padding-left: 116px !important;
   }
 `;
 

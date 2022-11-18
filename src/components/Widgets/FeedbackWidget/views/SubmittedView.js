@@ -12,7 +12,6 @@ const SupportCase = styled.div`
 const StyledHeading = styled.div`
   margin-top: 8px !important;
   margin-bottom: 16px !important;
-  margin-left: -5px;
 `;
 
 const SubmittedView = () => {
