@@ -77,6 +77,8 @@ const StyledPreviewText = styled(Body)`
   line-height: 20px;
   margin-bottom: ${theme.size.default};
   ${({ maxLines }) => truncate(maxLines)};
+  // Reserve some space inside of the search result card when there is no preview
+  min-height: 20px;
 `;
 
 const StyledResultTitle = styled('p')`
