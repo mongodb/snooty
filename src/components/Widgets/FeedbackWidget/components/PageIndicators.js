@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { theme } from '../../../../theme/docsTheme';
 import { palette } from '@leafygreen-ui/palette';
 import { useFeedbackContext } from '../context';
 
@@ -15,6 +16,9 @@ const Dot = styled('span')`
 
 const DotSpan = styled('span')`
   padding-right: 58px;
+  @media ${theme.screenSize.upToSmall} {
+    padding-rigth: 60px;
+  }
 `;
 
 const StyledBar = styled('span')`
