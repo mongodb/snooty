@@ -15,7 +15,7 @@ const getEmoji = (sentiment) => {
     case 'Suggestion':
       return '💡';
     default:
-      return 'noemoji';
+      return '💡';
   }
 };
 

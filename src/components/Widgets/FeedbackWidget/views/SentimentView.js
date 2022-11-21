@@ -40,6 +40,10 @@ const StyledSentimentOption = styled.h4(
 `
 );
 
+const StyledSentimentCopy = styled.span`
+  margin-left: 8px;
+`;
+
 const SentimentOption = ({ path }) => {
   const { setSentiment } = useFeedbackContext();
   const { isMobile } = useScreenSize();
@@ -48,7 +52,7 @@ const SentimentOption = ({ path }) => {
     <StyledSentiment>
       <StyledSentimentOption isMobile={isMobile} onClick={() => setSentiment(path.sentiment)}>
         <Emoji sentiment={path.sentiment} />
-        &nbsp;{path.copy}
+        <StyledSentimentCopy>{path.copy}</StyledSentimentCopy>
       </StyledSentimentOption>
     </StyledSentiment>
   );
