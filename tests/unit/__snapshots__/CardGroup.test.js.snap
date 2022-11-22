@@ -152,11 +152,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-15 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-16 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -174,17 +169,19 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-16:focus {
+.emotion-15:focus {
   outline: none;
 }
 
-.emotion-17 {
+.emotion-16 {
   position: relative;
 }
 
-.emotion-17::after {
+.emotion-16::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -194,35 +191,18 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-17::after {
+.constant-classname:focus .emotion-16::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-17::after {
+.constant-classname:hover .emotion-16::after {
   background-color: #E8EDEB;
 }
 
-.emotion-34 {
+.emotion-32 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-}
-
-.emotion-35 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-35 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-35 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -252,13 +232,13 @@ exports[`renders correctly 1`] = `
           class="emotion-12 emotion-13 emotion-11"
         >
           <a
-            class="constant-classname emotion-15 emotion-16"
+            class="constant-classname emotion-15"
             href="https://docs.atlas.mongodb.com/getting-started/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-17"
+              class="emotion-16"
             >
               Read Atlas docs
             </span>
@@ -286,20 +266,20 @@ exports[`renders correctly 1`] = `
           class="emotion-12 emotion-13 emotion-11"
         >
           <a
-            class="constant-classname emotion-15 emotion-16"
+            class="constant-classname emotion-15"
             href="https://university.mongodb.com/courses/M001/about"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-17"
+              class="emotion-16"
             >
               Learn MongoDB Basics
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-34 emotion-35"
+              class="emotion-32"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
@@ -338,13 +318,13 @@ exports[`renders correctly 1`] = `
           class="emotion-12 emotion-13 emotion-11"
         >
           <a
-            class="constant-classname emotion-15 emotion-16"
+            class="constant-classname emotion-15"
             href="https://docs.mongodb.com/manual/tutorial/getting-started/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-17"
+              class="emotion-16"
             >
               Read Server docs
             </span>

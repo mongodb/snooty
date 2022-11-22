@@ -299,16 +299,11 @@ exports[`renders steps nested in include nodes 1`] = `
 }
 
 .emotion-9 {
-  margin-top: 24px;
-  margin-bottom: 8px;
-}
-
-.emotion-10 {
   margin-top: 16px;
   margin-bottom: 24px;
 }
 
-.emotion-12 {
+.emotion-11 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -317,9 +312,11 @@ exports[`renders steps nested in include nodes 1`] = `
   font-weight: 400;
   font-family: 'MongoDB Value Serif','Times New Roman',serif;
   color: #00684A;
+  margin-top: 24px;
+  margin-bottom: 8px;
 }
 
-.emotion-13 {
+.emotion-12 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -327,23 +324,23 @@ exports[`renders steps nested in include nodes 1`] = `
   visibility: hidden;
 }
 
-.emotion-14 {
+.emotion-13 {
   border-radius: 0!important;
   display: initial!important;
   margin: initial!important;
 }
 
-.emotion-16 {
+.emotion-15 {
   margin-top: -175px;
   position: absolute;
   padding-bottom: 2px;
 }
 
-.emotion-18 {
+.emotion-17 {
   margin-bottom: 16px;
 }
 
-.emotion-20 {
+.emotion-19 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -353,8 +350,8 @@ exports[`renders steps nested in include nodes 1`] = `
   font-weight: 400;
 }
 
-.emotion-20 strong,
-.emotion-20 b {
+.emotion-19 strong,
+.emotion-19 b {
   font-weight: 700;
 }
 
@@ -378,27 +375,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="emotion-9 contains-headerlink emotion-10 emotion-11 emotion-12"
+            class="contains-headerlink emotion-9 emotion-10 emotion-11"
             weight="medium"
           >
             Step 1
             <a
-              class="headerlink emotion-13"
+              class="headerlink emotion-12"
               href="#step-1"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-14 emotion-15"
+                class="emotion-13 emotion-14"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-16 emotion-17"
+              class="emotion-15 emotion-16"
               id="step-1"
             />
           </h1>
           <p
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-17 emotion-18 emotion-19"
           >
             Content for step 1
           </p>
@@ -422,27 +419,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="emotion-9 contains-headerlink emotion-10 emotion-11 emotion-12"
+            class="contains-headerlink emotion-9 emotion-10 emotion-11"
             weight="medium"
           >
             Step 2
             <a
-              class="headerlink emotion-13"
+              class="headerlink emotion-12"
               href="#step-2"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-14 emotion-15"
+                class="emotion-13 emotion-14"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-16 emotion-17"
+              class="emotion-15 emotion-16"
               id="step-2"
             />
           </h1>
           <p
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-17 emotion-18 emotion-19"
           >
             Content for step 2
           </p>
@@ -466,27 +463,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="emotion-9 contains-headerlink emotion-10 emotion-11 emotion-12"
+            class="contains-headerlink emotion-9 emotion-10 emotion-11"
             weight="medium"
           >
             Step 3
             <a
-              class="headerlink emotion-13"
+              class="headerlink emotion-12"
               href="#step-3"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-14 emotion-15"
+                class="emotion-13 emotion-14"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-16 emotion-17"
+              class="emotion-15 emotion-16"
               id="step-3"
             />
           </h1>
           <p
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-17 emotion-18 emotion-19"
           >
             Content for step 3
           </p>
@@ -510,27 +507,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="emotion-9 contains-headerlink emotion-10 emotion-11 emotion-12"
+            class="contains-headerlink emotion-9 emotion-10 emotion-11"
             weight="medium"
           >
             Step 4
             <a
-              class="headerlink emotion-13"
+              class="headerlink emotion-12"
               href="#step-4"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-14 emotion-15"
+                class="emotion-13 emotion-14"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-16 emotion-17"
+              class="emotion-15 emotion-16"
               id="step-4"
             />
           </h1>
           <p
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-17 emotion-18 emotion-19"
           >
             Content for step 4
           </p>
@@ -554,27 +551,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="emotion-9 contains-headerlink emotion-10 emotion-11 emotion-12"
+            class="contains-headerlink emotion-9 emotion-10 emotion-11"
             weight="medium"
           >
             Step 5
             <a
-              class="headerlink emotion-13"
+              class="headerlink emotion-12"
               href="#step-5"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-14 emotion-15"
+                class="emotion-13 emotion-14"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-16 emotion-17"
+              class="emotion-15 emotion-16"
               id="step-5"
             />
           </h1>
           <p
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-17 emotion-18 emotion-19"
           >
             Content for step 5
           </p>
@@ -598,27 +595,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="emotion-9 contains-headerlink emotion-10 emotion-11 emotion-12"
+            class="contains-headerlink emotion-9 emotion-10 emotion-11"
             weight="medium"
           >
             Step 6
             <a
-              class="headerlink emotion-13"
+              class="headerlink emotion-12"
               href="#step-6"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-14 emotion-15"
+                class="emotion-13 emotion-14"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-16 emotion-17"
+              class="emotion-15 emotion-16"
               id="step-6"
             />
           </h1>
           <p
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-17 emotion-18 emotion-19"
           >
             Content for step 6
           </p>
@@ -642,27 +639,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="emotion-9 contains-headerlink emotion-10 emotion-11 emotion-12"
+            class="contains-headerlink emotion-9 emotion-10 emotion-11"
             weight="medium"
           >
             Step 7
             <a
-              class="headerlink emotion-13"
+              class="headerlink emotion-12"
               href="#step-7"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-14 emotion-15"
+                class="emotion-13 emotion-14"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-16 emotion-17"
+              class="emotion-15 emotion-16"
               id="step-7"
             />
           </h1>
           <p
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-17 emotion-18 emotion-19"
           >
             Content for step 7
           </p>

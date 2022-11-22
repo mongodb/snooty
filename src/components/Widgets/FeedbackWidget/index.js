@@ -1,18 +1,16 @@
-import { FeedbackProvider, useFeedbackState } from './context';
+import { FeedbackProvider, useFeedbackContext } from './context';
 import useFeedbackData from './useFeedbackData';
 import FeedbackForm from './FeedbackForm';
 import FeedbackTab from './FeedbackTab';
 import FeedbackHeading from './FeedbackHeading';
 import FeedbackFooter from './FeedbackFooter';
-import StarRating from './components/StarRating';
 
 export {
   FeedbackProvider,
-  useFeedbackState,
+  useFeedbackContext,
   useFeedbackData,
   FeedbackForm,
   FeedbackTab,
   FeedbackHeading,
   FeedbackFooter,
-  StarRating,
 };

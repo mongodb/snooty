@@ -3,11 +3,6 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-1 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -25,17 +20,19 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
-.emotion-2 {
+.emotion-1 {
   position: relative;
 }
 
-.emotion-2::after {
+.emotion-1::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -45,35 +42,18 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-2::after {
+.constant-classname:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-2::after {
+.constant-classname:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
-.emotion-3 {
+.emotion-2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-}
-
-.emotion-4 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-4 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-4 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -81,20 +61,20 @@ exports[`renders correctly 1`] = `
 }
 
 <a
-    class="constant-classname emotion-0 emotion-1"
+    class="constant-classname emotion-0"
     href="https://docs.mlab.com/subscriptions/#change-plans-using-rnr"
     rel="noopener noreferrer"
     target="_blank"
   >
     <span
-      class="emotion-2"
+      class="emotion-1"
     >
       mLab documentation
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-3 emotion-4"
+      class="emotion-2"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"

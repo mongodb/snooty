@@ -3,14 +3,6 @@
 exports[`renders correctly with pageTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-}
-
-.emotion-0 a {
-  color: #5C6C75;
-}
-
-.emotion-1 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -18,33 +10,38 @@ exports[`renders correctly with pageTitle 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
-}
-
-.emotion-1 strong,
-.emotion-1 b {
-  font-weight: 700;
-}
-
-.emotion-2 {
   font-size: 13px;
 }
 
-.emotion-2:last-of-type {
+.emotion-0 strong,
+.emotion-0 b {
+  font-weight: 700;
+}
+
+.emotion-0 a {
+  color: #5C6C75;
+}
+
+.emotion-1 {
+  font-size: 13px;
+}
+
+.emotion-1:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-2:hover,
-.emotion-2:focus {
+.emotion-1:hover,
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-2:hover:not(:last-of-type),
-.emotion-2:focus:not(:last-of-type) {
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
-.emotion-4 {
+.emotion-3 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -64,15 +61,15 @@ exports[`renders correctly with pageTitle 1`] = `
   font-weight: 400;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   outline: none;
 }
 
-.emotion-5 {
+.emotion-4 {
   position: relative;
 }
 
-.emotion-5::after {
+.emotion-4::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -82,23 +79,23 @@ exports[`renders correctly with pageTitle 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-5::after {
+.constant-classname:focus .emotion-4::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-5::after {
+.constant-classname:hover .emotion-4::after {
   background-color: #E8EDEB;
 }
 
-.emotion-6 {
+.emotion-5 {
   cursor: default;
 }
 
-.emotion-6:last-of-type {
+.emotion-5:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-9 {
+.emotion-8 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -113,15 +110,15 @@ exports[`renders correctly with pageTitle 1`] = `
   font-size: 13px;
 }
 
-.emotion-9:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-9>code {
+.emotion-8>code {
   color: #016BF8;
 }
 
-.emotion-9::after {
+.emotion-8::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -131,51 +128,51 @@ exports[`renders correctly with pageTitle 1`] = `
   border-radius: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
+.emotion-8:focus .emotion-8::after {
   background-color: #0498EC;
 }
 
-.emotion-9:hover::after {
+.emotion-8:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-9:last-of-type {
+.emotion-8:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-9:hover,
-.emotion-9:focus {
+.emotion-8:hover,
+.emotion-8:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-9:hover:not(:last-of-type),
-.emotion-9:focus:not(:last-of-type) {
+.emotion-8:hover:not(:last-of-type),
+.emotion-8:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
 <p
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <a
-      class="constant-classname emotion-2 emotion-3 emotion-4"
+      class="constant-classname emotion-1 emotion-2 emotion-3"
       href="https://www.mongodb.com/docs/"
       rel="noopener noreferrer"
       target="_blank"
     >
       <span
-        class="emotion-5"
+        class="emotion-4"
       >
         Docs Home
       </span>
     </a>
     <span
-      class="emotion-6 emotion-7"
+      class="emotion-5 emotion-6"
     >
        → 
     </span>
     <a
-      class="emotion-3 emotion-9 emotion-10"
+      class="emotion-2 emotion-8 emotion-9"
       href="/view-analyze/"
     >
       View & Analyze Data
@@ -187,14 +184,6 @@ exports[`renders correctly with pageTitle 1`] = `
 exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-}
-
-.emotion-0 a {
-  color: #5C6C75;
-}
-
-.emotion-1 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -202,33 +191,38 @@ exports[`renders correctly with siteTitle 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
-}
-
-.emotion-1 strong,
-.emotion-1 b {
-  font-weight: 700;
-}
-
-.emotion-2 {
   font-size: 13px;
 }
 
-.emotion-2:last-of-type {
+.emotion-0 strong,
+.emotion-0 b {
+  font-weight: 700;
+}
+
+.emotion-0 a {
+  color: #5C6C75;
+}
+
+.emotion-1 {
+  font-size: 13px;
+}
+
+.emotion-1:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-2:hover,
-.emotion-2:focus {
+.emotion-1:hover,
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-2:hover:not(:last-of-type),
-.emotion-2:focus:not(:last-of-type) {
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
-.emotion-4 {
+.emotion-3 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -248,15 +242,15 @@ exports[`renders correctly with siteTitle 1`] = `
   font-weight: 400;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   outline: none;
 }
 
-.emotion-5 {
+.emotion-4 {
   position: relative;
 }
 
-.emotion-5::after {
+.emotion-4::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -266,23 +260,23 @@ exports[`renders correctly with siteTitle 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-5::after {
+.constant-classname:focus .emotion-4::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-5::after {
+.constant-classname:hover .emotion-4::after {
   background-color: #E8EDEB;
 }
 
-.emotion-6 {
+.emotion-5 {
   cursor: default;
 }
 
-.emotion-6:last-of-type {
+.emotion-5:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-9 {
+.emotion-8 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -297,15 +291,15 @@ exports[`renders correctly with siteTitle 1`] = `
   font-size: 13px;
 }
 
-.emotion-9:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-9>code {
+.emotion-8>code {
   color: #016BF8;
 }
 
-.emotion-9::after {
+.emotion-8::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -315,51 +309,51 @@ exports[`renders correctly with siteTitle 1`] = `
   border-radius: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
+.emotion-8:focus .emotion-8::after {
   background-color: #0498EC;
 }
 
-.emotion-9:hover::after {
+.emotion-8:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-9:last-of-type {
+.emotion-8:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-9:hover,
-.emotion-9:focus {
+.emotion-8:hover,
+.emotion-8:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-9:hover:not(:last-of-type),
-.emotion-9:focus:not(:last-of-type) {
+.emotion-8:hover:not(:last-of-type),
+.emotion-8:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
 <p
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <a
-      class="constant-classname emotion-2 emotion-3 emotion-4"
+      class="constant-classname emotion-1 emotion-2 emotion-3"
       href="https://www.mongodb.com/docs/"
       rel="noopener noreferrer"
       target="_blank"
     >
       <span
-        class="emotion-5"
+        class="emotion-4"
       >
         Docs Home
       </span>
     </a>
     <span
-      class="emotion-6 emotion-7"
+      class="emotion-5 emotion-6"
     >
        → 
     </span>
     <a
-      class="emotion-3 emotion-9 emotion-10"
+      class="emotion-2 emotion-8 emotion-9"
       href="/"
     >
       MongoDB Compass

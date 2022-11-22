@@ -37,10 +37,6 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   color: #00ED64;
 }
 
-.emotion-5 {
-  color: #00ED64;
-}
-
 .emotion-6 {
   margin: 0 0 32px 0!important;
   font-weight: 500;
@@ -142,8 +138,9 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
-  color: #1C2D38;
+  color: #001E2B;
   font-size: 13px;
+  line-height: 20px;
   font-weight: 500;
   height: 36px;
 }
@@ -152,6 +149,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   outline: none;
 }
 
+.emotion-21[disabled],
 .emotion-21:disabled {
   pointer-events: none;
 }
@@ -165,6 +163,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
 
 .emotion-21:hover,
 .emotion-21:active {
+  color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
@@ -185,7 +184,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .emotion-25 {
@@ -204,7 +203,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  padding: 0 12px;
+  padding: 0 11px;
   gap: 6px;
 }
 

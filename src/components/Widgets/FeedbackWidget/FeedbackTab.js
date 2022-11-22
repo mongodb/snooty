@@ -1,30 +1,56 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { palette } from '@leafygreen-ui/palette';
 import LeafygreenCard from '@leafygreen-ui/card';
-import { useFeedbackState } from './context';
-import { displayNone } from '../../../utils/display-none';
-import { theme } from '../../../theme/docsTheme';
+import { useFeedbackContext } from './context';
+import { theme } from '../../../../src/theme/docsTheme';
 
-export default function FeedbackTab(props) {
-  const { feedback, initializeFeedback } = useFeedbackState();
-  return (
-    !feedback && (
-      <Container css={displayNone.onMobileAndTablet} onClick={() => initializeFeedback()}>
-        Give Feedback
-      </Container>
-    )
-  );
-}
-
-// TODO: resolve conflict with DOP-2400.
-const Container = styled(LeafygreenCard)`
-  position: fixed;
-  bottom: -24px;
-  right: 42px;
-  padding: 12px;
-  z-index: 9;
-  border-radius: 7px;
+const FeedbackContainer = styled(LeafygreenCard)`
   cursor: pointer;
+  padding: 12px;
+  position: fixed;
   user-select: none;
-  font-size: ${theme.fontSize.default};
+  z-index: 9;
+  font-weight: 500;
+  color: ${palette.green.dark1};
+
+  // tab fixed at bottom of docs page
+  @media ${theme.screenSize.upToSmall} {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    position: static !important;
+    width: fit-content !important;
+    margin-left: 20px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    transform: rotate(0deg) !important;
+  }
+
+  @media ${theme.screenSize.smallAndUp} {
+    // tab positioned on side of page
+    @media ${theme.screenSize.upToLarge} {
+      transform: rotate(-90deg);
+      top: 50%;
+      right: -53px;
+    }
+
+    // tab positioned on bottom right of page
+    @media ${theme.screenSize.largeAndUp} {
+      bottom: -24px;
+      @media ${theme.screenSize.upTo2XLarge} {
+        right: 16px;
+      }
+      @media ${theme.screenSize['2XLargeAndUp']} {
+        right: 64px;
+      }
+    }
+  }
 `;
+
+const FeedbackTab = () => {
+  const { feedback, initializeFeedback } = useFeedbackContext();
+  return !feedback && <FeedbackContainer onClick={() => initializeFeedback()}>Share Feedback</FeedbackContainer>;
+};
+
+export default FeedbackTab;
