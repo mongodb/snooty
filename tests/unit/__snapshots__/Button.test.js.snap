@@ -32,6 +32,7 @@ exports[`button component renders correctly 1`] = `
   border-color: #00684A;
   color: #FFFFFF;
   font-size: 13px;
+  line-height: 20px;
   font-weight: 500;
   height: 36px;
 }
@@ -40,6 +41,7 @@ exports[`button component renders correctly 1`] = `
   outline: none;
 }
 
+.emotion-0[disabled],
 .emotion-0:disabled {
   pointer-events: none;
 }
@@ -116,7 +118,7 @@ exports[`button component renders correctly 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .emotion-4 {
@@ -135,7 +137,7 @@ exports[`button component renders correctly 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  padding: 0 12px;
+  padding: 0 11px;
   gap: 6px;
 }
 
@@ -144,6 +146,7 @@ exports[`button component renders correctly 1`] = `
     class="button emotion-0 emotion-1 emotion-2"
     data-leafygreen-ui="button"
     href="/install/"
+    type="button"
   >
     <div
       class="emotion-3"

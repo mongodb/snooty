@@ -1,42 +1,61 @@
 import React from 'react';
-import LeafygreenCard from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
-
+import LeafygreenCard from '@leafygreen-ui/card';
+import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
-import { useFeedbackState } from './context';
+import { useFeedbackContext } from './context';
+import { feedbackId } from '../FeedbackWidget/FeedbackForm';
+import { theme } from '../../../../src/theme/docsTheme';
 
-export default function FeedbackCard({ isOpen, children }) {
-  const { abandon } = useFeedbackState();
+const FloatingContainer = styled.div`
+  position: fixed;
+  z-index: 14;
+  right: 16px;
+
+  @media ${theme.screenSize.upToLarge} {
+    top: 40%;
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    bottom: 40px;
+  }
+`;
+
+const Card = styled(LeafygreenCard)`
+  /* Card Size */
+  width: 234px;
+  height: 340px;
+  align-items: center;
+  padding: 0;
+`;
+
+const CardHeader = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+  margin-right: 10px;
+`;
+
+const Content = styled.div`
+  margin: 0px 24px;
+`;
+
+const FeedbackCard = ({ isOpen, children }) => {
+  const { abandon } = useFeedbackContext();
 
   return (
     isOpen && (
-      <Floating>
+      <FloatingContainer id={feedbackId}>
         <Card>
           <CardHeader>
+            <ProgressBar />
             <CloseButton onClick={() => abandon()} />
           </CardHeader>
           <Content>{children}</Content>
         </Card>
-      </Floating>
+      </FloatingContainer>
     )
   );
-}
+};
 
-const Floating = styled.div`
-  position: fixed;
-  bottom: 256px;
-  right: 40px;
-  z-index: 10;
-`;
-const Card = styled(LeafygreenCard)`
-  width: 320px;
-`;
-const CardHeader = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  margin-right: 10px;
-`;
-const Content = styled.div`
-  margin: 0px 24px;
-`;
+export default FeedbackCard;

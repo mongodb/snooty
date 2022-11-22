@@ -292,8 +292,9 @@ exports[`CodeIO renders correctly 1`] = `
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
-  color: #1C2D38;
+  color: #001E2B;
   font-size: 13px;
+  line-height: 20px;
   font-weight: 500;
   height: 36px;
   padding: 0px;
@@ -307,6 +308,7 @@ exports[`CodeIO renders correctly 1`] = `
   outline: none;
 }
 
+.emotion-16[disabled],
 .emotion-16:disabled {
   pointer-events: none;
 }
@@ -320,6 +322,7 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-16:hover,
 .emotion-16:active {
+  color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
@@ -336,7 +339,7 @@ exports[`CodeIO renders correctly 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .emotion-18 {
@@ -355,39 +358,36 @@ exports[`CodeIO renders correctly 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  padding: 0 12px;
+  padding: 0 11px;
   gap: 6px;
 }
 
 .emotion-19 {
   color: #FF0000;
-}
-
-.emotion-20 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-21>div>* {
+.emotion-20>div>* {
   display: inline!important;
 }
 
-.emotion-21 * {
+.emotion-20 * {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
 }
 
-.emotion-22 {
+.emotion-21 {
   border: 0;
   border-radius: 6px;
   overflow: hidden;
 }
 
-.emotion-24 {
+.emotion-23 {
   grid-area: code;
   overflow-x: auto;
   border-radius: inherit;
@@ -417,48 +417,48 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-24 {
+  .emotion-23 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-24 {
+  .emotion-23 {
     white-space: pre;
   }
 }
 
-.emotion-24:focus,
-.emotion-24:active,
-.emotion-24:focus-visible,
-.emotion-24:focus-within {
+.emotion-23:focus,
+.emotion-23:active,
+.emotion-23:focus-visible,
+.emotion-23:focus-within {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
-.emotion-27 {
+.emotion-26 {
   background-color: transparent;
   background-image: linear-gradient(90deg, #21313C, rgba(33,49,60,0));
   background-attachment: fixed;
 }
 
-.emotion-27>td {
+.emotion-26>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-27+tr>td {
+.emotion-26+tr>td {
   border-top: 1px solid #21313C;
 }
 
-.emotion-27+.emotion-27>td {
+.emotion-26+.emotion-26>td {
   border-top: 0;
 }
 
-.emotion-27:last-child>td {
+.emotion-26:last-child>td {
   border-bottom: 1px solid #21313C;
 }
 
-.emotion-28 {
+.emotion-27 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -561,7 +561,7 @@ exports[`CodeIO renders correctly 1`] = `
           <svg
             alt=""
             aria-hidden="true"
-            class="emotion-19 emotion-20"
+            class="emotion-19"
             fill="none"
             height="16"
             role="presentation"
@@ -581,16 +581,16 @@ exports[`CodeIO renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="emotion-21"
+      class="emotion-20"
     >
       <div
-        class="emotion-22"
+        class="emotion-21"
       >
         <div
           class="emotion-6"
         >
           <pre
-            class="emotion-24"
+            class="emotion-23"
             tabindex="-1"
           >
             <code
@@ -601,10 +601,10 @@ exports[`CodeIO renders correctly 1`] = `
               >
                 <tbody>
                   <tr
-                    class="emotion-27"
+                    class="emotion-26"
                   >
                     <td
-                      class="emotion-28"
+                      class="emotion-27"
                     >
                       1
                     </td>
