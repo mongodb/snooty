@@ -158,6 +158,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     // for elements in the top or side nav, set position to fixed. Otherwise set it to absolute
     for (let i = 0; i < listOfElements.length; i++) {
       const elem = String(listOfElements[i]?.className);
+      // This boolean check only triggers in development environments
       if (!!elem && (elem.includes('SidenavContainer') || elem.includes('StyledHeaderContainer'))) {
         currElemProperties.current['position'] = 'fixed';
         break;
