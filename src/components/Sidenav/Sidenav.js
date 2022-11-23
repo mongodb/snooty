@@ -260,7 +260,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 />
                 {ia && (
                   <IA
-                    header={<span css={[titleStyle]}>{formatText(pageTitle)}</span>}
+                    header={<span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
