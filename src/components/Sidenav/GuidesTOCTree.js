@@ -13,6 +13,7 @@ const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
   const currentChapterName = guides?.[slug]?.['chapter_name'];
   const guidesInChapter = chapters?.[currentChapterName]?.guides;
   const { activeHeadingId, headingNodes } = useContext(ContentsContext);
+  console.log('GuidesTOCTree');
 
   return (
     <>
