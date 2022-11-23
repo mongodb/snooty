@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
-import styled from '@emotion/styled';
 import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
 
 const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
 
-const StyledParagraph = styled(Body)`
+const paragraphStyling = css`
   margin-bottom: 16px;
 `;
 
@@ -18,11 +18,11 @@ const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
     return children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
   }
   return (
-    <StyledParagraph>
+    <Body className={cx(paragraphStyling)}>
       {children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} />
       ))}
-    </StyledParagraph>
+    </Body>
   );
 };
 

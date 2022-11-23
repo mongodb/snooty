@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
