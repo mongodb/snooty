@@ -405,7 +405,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27 emotion-28"
+            class="emotion-26 emotion-27"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -814,7 +814,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27 emotion-28"
+            class="emotion-26 emotion-27"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -1149,7 +1149,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
 }
 
-.emotion-29 {
+.emotion-28 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -1163,11 +1163,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   position: relative;
 }
 
-.emotion-29:not(:last-child) {
+.emotion-28:not(:last-child) {
   padding-bottom: 16px;
 }
 
-.emotion-29:not(:last-child):before {
+.emotion-28:not(:last-child):before {
   content: '';
   position: absolute;
   left: 10px;
@@ -1176,7 +1176,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   border-left: solid 1px #E8EDEB;
 }
 
-.emotion-31 {
+.emotion-30 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1196,11 +1196,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   min-height: 20px;
 }
 
-.emotion-33 {
+.emotion-32 {
   color: #00A35C;
 }
 
-.emotion-41 {
+.emotion-39 {
   color: #3D4F58;
 }
 
@@ -1283,22 +1283,22 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27 emotion-28"
+            class="emotion-26 emotion-27"
             href="/cloud/account/"
           >
             Create and Manage a MongoDB Account
           </a>
         </li>
         <li
-          class="emotion-29 emotion-22"
+          class="emotion-28 emotion-22"
           color="#E8EDEB"
         >
           <div
-            class="emotion-31 emotion-24"
+            class="emotion-30 emotion-24"
             color="#00A35C"
           >
             <svg
-              class="emotion-33"
+              class="emotion-32"
               fill="currentColor"
               height="12"
               viewBox="0 0 7 12"
@@ -1311,14 +1311,14 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27 emotion-28"
+            class="emotion-26 emotion-27"
             href="/cloud/connectionstring/"
           >
             Set Up Atlas Connectivity
           </a>
         </li>
         <li
-          class="emotion-29 emotion-22"
+          class="emotion-28 emotion-22"
           color="#E8EDEB"
         >
           <div
@@ -1326,7 +1326,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             color="transparent"
           >
             <svg
-              class="emotion-41"
+              class="emotion-39"
               fill="currentColor"
               height="12"
               viewBox="0 0 7 12"
@@ -1339,7 +1339,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27 emotion-28"
+            class="emotion-26 emotion-27"
             href="/cloud/migrate-from-aws-to-atlas/"
           >
             Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas

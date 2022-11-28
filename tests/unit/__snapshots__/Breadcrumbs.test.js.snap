@@ -172,7 +172,7 @@ exports[`renders correctly with pageTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-2 emotion-8 emotion-9"
+      class="emotion-2 emotion-8"
       href="/view-analyze/"
     >
       View & Analyze Data
@@ -353,7 +353,7 @@ exports[`renders correctly with siteTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-2 emotion-8 emotion-9"
+      class="emotion-2 emotion-8"
       href="/"
     >
       MongoDB Compass

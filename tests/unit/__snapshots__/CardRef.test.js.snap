@@ -131,10 +131,6 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-12 {
-  margin-bottom: 16px;
-}
-
-.emotion-14 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -142,14 +138,15 @@ exports[`card correctly with and without url 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
+  margin-bottom: 16px;
 }
 
-.emotion-14 strong,
-.emotion-14 b {
+.emotion-12 strong,
+.emotion-12 b {
   font-weight: 700;
 }
 
-.emotion-19 {
+.emotion-15 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -173,15 +170,15 @@ exports[`card correctly with and without url 1`] = `
   padding: 4px;
 }
 
-.emotion-19:focus {
+.emotion-15:focus {
   outline: none;
 }
 
-.emotion-19>code {
+.emotion-15>code {
   color: #016BF8;
 }
 
-.emotion-19::after {
+.emotion-15::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -191,19 +188,19 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.emotion-19:focus .emotion-19::after {
+.emotion-15:focus .emotion-15::after {
   background-color: #0498EC;
 }
 
-.emotion-19:hover::after {
+.emotion-15:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-19:after {
+.emotion-15:after {
   content: ' ➔';
 }
 
-.emotion-38 {
+.emotion-28 {
   position: relative;
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
@@ -221,27 +218,42 @@ exports[`card correctly with and without url 1`] = `
   cursor: pointer;
 }
 
-.emotion-38:focus {
+.emotion-28:focus {
   outline: none;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-38:hover,
-.emotion-38:active {
+.emotion-28:hover,
+.emotion-28:active {
   border: 1px solid #E8EDEB;
   box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-38:hover:focus,
-.emotion-38:active:focus {
+.emotion-28:hover:focus,
+.emotion-28:active:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-49 a {
+.emotion-37 a {
   line-height: unset;
 }
 
-.emotion-52 {
+.emotion-39 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-39 strong,
+.emotion-39 b {
+  font-weight: 700;
+}
+
+.emotion-40 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -263,15 +275,15 @@ exports[`card correctly with and without url 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-52:focus {
+.emotion-40:focus {
   outline: none;
 }
 
-.emotion-53 {
+.emotion-41 {
   position: relative;
 }
 
-.emotion-53::after {
+.emotion-41::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -281,11 +293,11 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-53::after {
+.constant-classname:focus .emotion-41::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-53::after {
+.constant-classname:hover .emotion-41::after {
   background-color: #E8EDEB;
 }
 
@@ -308,15 +320,15 @@ exports[`card correctly with and without url 1`] = `
           Realm SDKs
         </p>
         <p
-          class="emotion-12 emotion-13 emotion-14"
+          class="emotion-12"
         >
           Use platform-specific libraries to include and work with the Realm database in your application.
         </p>
         <p
-          class="emotion-12 emotion-13 emotion-14"
+          class="emotion-12"
         >
           <a
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-14 emotion-15"
             href="/sdk/android/#std-label-android-intro"
           >
             Android
@@ -324,7 +336,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-14 emotion-15"
             href="/sdk/ios/#std-label-ios-intro"
           >
             iOS
@@ -332,7 +344,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-14 emotion-15"
             href="/sdk/dotnet/#std-label-dotnet-intro"
           >
             .Net
@@ -340,7 +352,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-14 emotion-15"
             href="/web/#std-label-web-intro"
           >
             Web
@@ -348,7 +360,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-14 emotion-15"
             href="/sdk/react-native/#std-label-react-native-intro"
           >
             React Native
@@ -356,7 +368,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-14 emotion-15"
             href="/sdk/node/#std-label-node-intro"
           >
             Node.js
@@ -365,7 +377,7 @@ exports[`card correctly with and without url 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-38"
+      class="emotion-2 emotion-3 emotion-28"
     >
       <img
         class="emotion-5 emotion-6"
@@ -380,21 +392,21 @@ exports[`card correctly with and without url 1`] = `
           MongoDB Realm
         </p>
         <p
-          class="emotion-12 emotion-13 emotion-14"
+          class="emotion-12"
         >
           Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas.
         </p>
         <p
-          class="emotion-49 emotion-50 emotion-14"
+          class="emotion-37 emotion-38 emotion-39"
         >
           <a
-            class="constant-classname emotion-52"
+            class="constant-classname emotion-40"
             href="https://docs.mongodb.com/realm/services/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-53"
+              class="emotion-41"
             >
               Learn more about MongoDB Realm Application Services
             </span>

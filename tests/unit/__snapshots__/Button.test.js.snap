@@ -111,7 +111,7 @@ exports[`button component renders correctly 1`] = `
   background-color: #E8EDEB;
 }
 
-.emotion-3 {
+.emotion-2 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -121,7 +121,7 @@ exports[`button component renders correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-4 {
+.emotion-3 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -143,16 +143,16 @@ exports[`button component renders correctly 1`] = `
 
 <a
     aria-disabled="false"
-    class="button emotion-0 emotion-1 emotion-2"
+    class="button emotion-0 emotion-1"
     data-leafygreen-ui="button"
     href="/install/"
     type="button"
   >
     <div
-      class="emotion-3"
+      class="emotion-2"
     />
     <div
-      class="emotion-4"
+      class="emotion-3"
     >
       Download Compass
     </div>
