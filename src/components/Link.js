@@ -4,7 +4,7 @@ import { Link as GatsbyLink } from 'gatsby';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import styled from '@emotion/styled';
+import { css as emotionCss } from '@emotion/react';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 
@@ -15,11 +15,10 @@ import { isRelativeUrl } from '../utils/is-relative-url';
 
 const LGlinkStyling = css`
   text-decoration: none !important;
-  }
 `;
 
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
-const StyledGatsbyLink = styled(GatsbyLink)`
+const gatsbyLinkStyling = emotionCss`
   align-items: center;
   cursor: pointer;
   &:focus {
@@ -80,10 +79,16 @@ const Link = ({
     const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
     return (
-      <StyledGatsbyLink activeClassName={activeClassName} partiallyActive={partiallyActive} to={to} {...other}>
+      <GatsbyLink
+        css={gatsbyLinkStyling}
+        activeClassName={activeClassName}
+        partiallyActive={partiallyActive}
+        to={to}
+        {...other}
+      >
         {children}
         {decoration}
-      </StyledGatsbyLink>
+      </GatsbyLink>
     );
   }
 
@@ -92,7 +97,7 @@ const Link = ({
   const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
 
   return (
-    <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
+    <LGLink className={cx([LGlinkStyling])} href={to} hideExternalIcon={hideExternalIcon} {...other}>
       {children}
     </LGLink>
   );
