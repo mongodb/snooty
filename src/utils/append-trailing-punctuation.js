@@ -7,6 +7,8 @@ export const appendTrailingPunctuation = (nodes) => {
     const nextNode = nodes[i + 1];
     const isReference = currNode.type === 'reference' || currNode.type === 'ref_role';
     const hasDanglingSibling = nextNode?.type === 'text' && nextNode.value?.length === 1 && !nextNode.value.match(/\s/);
+    // TODO: if issues arise, instead of matching for non-whitespace, we might consider checking FOR certain singular punctuation
+    // ie: regex match for  .?!,:;)*"']}`
 
     if (isReference && hasDanglingSibling) {
       const copyOfNodeWithDeepCopiedChildren = deepCopyNodesChildren(currNode, nextNode.value);
