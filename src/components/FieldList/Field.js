@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import ComponentFactory from '../ComponentFactory';
+import { theme } from '../../theme/docsTheme';
 
 const Field = ({ nodeData: { children, label, name }, ...rest }) => (
   <tr
     css={css`
+      font-size: ${theme.fontSize.default};
       > th,
       > td {
         padding: 11px 5px 12px;

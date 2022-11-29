@@ -3,7 +3,7 @@ import { AnonymousCredential } from 'mongodb-stitch-browser-sdk';
 import { isBrowser } from '../../../utils/is-browser';
 import { getStitchClient } from '../../../utils/stitch';
 
-const APP_ID = 'feedback-ibcyy';
+const APP_ID = 'feedbackwidgetv3-dgcsv';
 export const app = isBrowser ? getStitchClient(APP_ID) : { auth: {} };
 
 // User Authentication & Management
@@ -31,39 +31,7 @@ export const useStitchUser = () => {
 };
 
 // Feedback Widget Functions
-export async function createNewFeedback({ page, user, ...rest }) {
-  const feedback = await app.callFunction('feedback_create', [{ page, user, ...rest }]);
+export async function createNewFeedback({ page, user, attachment, ...rest }) {
+  const feedback = await app.callFunction('feedback_create', [{ page, user, attachment, ...rest }]);
   return feedback;
-}
-
-export async function updateFeedback({ feedback_id, ...fields }) {
-  if (!feedback_id) {
-    throw new Error('Must specify a feedback item _id to update');
-  }
-  const feedback = await app.callFunction('feedback_update', [{ feedback_id, ...fields }]);
-  return feedback;
-}
-
-export async function submitFeedback({ feedback_id }) {
-  if (!feedback_id) {
-    throw new Error('Must specify a feedback item _id to submit');
-  }
-  const feedback = await app.callFunction('feedback_submit', [{ feedback_id }]);
-  return feedback;
-}
-
-export async function abandonFeedback({ feedback_id }) {
-  if (!feedback_id) {
-    throw new Error('Must specify a feedback item _id to abandon');
-  }
-  const result = await app.callFunction('feedback_abandon', [{ feedback_id }]);
-  return result.modifiedCount === 1;
-}
-
-export async function addAttachment({ feedback_id, attachment }) {
-  if (!feedback_id) {
-    throw new Error('Must specify a feedback item _id to add an attachment to');
-  }
-  const result = await app.callFunction('feedback_addAttachment', [{ feedback_id, attachment }]);
-  return result;
 }

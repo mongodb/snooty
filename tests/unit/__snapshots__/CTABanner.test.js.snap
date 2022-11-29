@@ -80,10 +80,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   color: #016BF8;
 }
 
-.emotion-3 {
-  color: #016BF8;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -104,11 +100,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 }
 
 .emotion-8 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-9 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -126,17 +117,19 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-9:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-10 {
+.emotion-9 {
   position: relative;
 }
 
-.emotion-10::after {
+.emotion-9::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -146,35 +139,18 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-10::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-10::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
-.emotion-11 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -218,20 +194,20 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-8 emotion-9"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-10"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-11 emotion-12"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -332,10 +308,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   color: #016BF8;
 }
 
-.emotion-3 {
-  color: #016BF8;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -356,11 +328,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 }
 
 .emotion-8 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-9 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -378,17 +345,19 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-9:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-10 {
+.emotion-9 {
   position: relative;
 }
 
-.emotion-10::after {
+.emotion-9::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -398,35 +367,18 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-10::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-10::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
-.emotion-11 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -472,20 +424,20 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-8 emotion-9"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-10"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-11 emotion-12"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -586,10 +538,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   color: #016BF8;
 }
 
-.emotion-3 {
-  color: #016BF8;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -610,11 +558,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 }
 
 .emotion-8 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-9 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -632,17 +575,19 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-9:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-10 {
+.emotion-9 {
   position: relative;
 }
 
-.emotion-10::after {
+.emotion-9::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -652,35 +597,18 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-10::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-10::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
-.emotion-11 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -724,20 +652,20 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-8 emotion-9"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-10"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-11 emotion-12"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
@@ -838,10 +766,6 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   color: #016BF8;
 }
 
-.emotion-3 {
-  color: #016BF8;
-}
-
 .emotion-4 {
   margin-bottom: 16px;
 }
@@ -862,11 +786,6 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 }
 
 .emotion-8 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-9 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -884,17 +803,19 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-9:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-10 {
+.emotion-9 {
   position: relative;
 }
 
-.emotion-10::after {
+.emotion-9::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -904,35 +825,18 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-10::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-10::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
-.emotion-11 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-12 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -976,20 +880,20 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-8 emotion-9"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-10"
+          class="emotion-9"
         >
           MongoDB University
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-11 emotion-12"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"

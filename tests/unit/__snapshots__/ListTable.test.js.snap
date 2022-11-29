@@ -72,32 +72,20 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   box-sizing: border-box;
   width: 100%;
   z-index: 0;
-}
-
-.emotion-5 {
   margin: 24px 0;
 }
 
-table .emotion-5 {
+table .emotion-4 {
   margin: 0;
 }
 
-.emotion-6 * {
+.emotion-5 * {
   border: 0!important;
   min-height: unset!important;
   padding: 0!important;
 }
 
-.emotion-7 {
-  width: 5%;
-}
-
-.emotion-7 * {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.emotion-8 {
+.emotion-6 {
   --lg-cell-padding-block: 10px;
   min-width: 40px;
   padding: var(--lg-cell-padding-block) 8px;
@@ -108,9 +96,15 @@ table .emotion-5 {
   line-height: 20px;
   border-bottom: 3px solid;
   border-color: #E8EDEB;
+  width: 5%;
 }
 
-.emotion-9 {
+.emotion-6 * {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,22 +118,61 @@ table .emotion-5 {
   align-items: center;
 }
 
-.emotion-10 {
+.emotion-8 {
   padding-right: 4px;
   color: #1C2D38;
 }
 
-.emotion-11 {
+.emotion-9 {
+  --lg-cell-padding-block: 10px;
+  min-width: 40px;
+  padding: var(--lg-cell-padding-block) 8px;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  text-align: left;
+  font-size: 13px;
+  line-height: 20px;
+  border-bottom: 3px solid;
+  border-color: #E8EDEB;
   width: 10%;
 }
 
-.emotion-11 * {
+.emotion-9 * {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.emotion-12 {
+  --lg-cell-padding-block: 10px;
+  min-width: 40px;
+  padding: var(--lg-cell-padding-block) 8px;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  text-align: left;
+  font-size: 13px;
+  line-height: 20px;
+  border-bottom: 3px solid;
+  border-color: #E8EDEB;
+  width: 15%;
+}
+
+.emotion-12 * {
   font-size: 13px;
   font-weight: 600;
 }
 
 .emotion-15 {
-  width: 15%;
+  --lg-cell-padding-block: 10px;
+  min-width: 40px;
+  padding: var(--lg-cell-padding-block) 8px;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  text-align: left;
+  font-size: 13px;
+  line-height: 20px;
+  border-bottom: 3px solid;
+  border-color: #E8EDEB;
+  width: 20%;
 }
 
 .emotion-15 * {
@@ -147,25 +180,26 @@ table .emotion-5 {
   font-weight: 600;
 }
 
-.emotion-19 {
-  width: 20%;
-}
-
-.emotion-19 * {
+.emotion-18 {
+  --lg-cell-padding-block: 10px;
+  min-width: 40px;
+  padding: var(--lg-cell-padding-block) 8px;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  text-align: left;
   font-size: 13px;
-  font-weight: 600;
-}
-
-.emotion-23 {
+  line-height: 20px;
+  border-bottom: 3px solid;
+  border-color: #E8EDEB;
   width: 30%;
 }
 
-.emotion-23 * {
+.emotion-18 * {
   font-size: 13px;
   font-weight: 600;
 }
 
-.emotion-31 {
+.emotion-24 {
   --lg-cell-min-height: 20px;
   position: relative;
   z-index: 1;
@@ -173,92 +207,58 @@ table .emotion-5 {
   color: #1C2D38;
 }
 
-.emotion-31>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
+.emotion-24>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
   min-height: var(--lg-cell-min-height);
   max-height: unset;
 }
 
-.emotion-31>:is(td, th):nth-child(1) {
+.emotion-24>:is(td, th):nth-child(1) {
   padding-left: 8px;
 }
 
-.emotion-31 :is(td, th):nth-child(1)>div {
+.emotion-24 :is(td, th):nth-child(1)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-31 :is(td, th):nth-child(2)>div {
+.emotion-24 :is(td, th):nth-child(2)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-31 :is(td, th):nth-child(3)>div {
+.emotion-24 :is(td, th):nth-child(3)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-31 :is(td, th):nth-child(4)>div {
+.emotion-24 :is(td, th):nth-child(4)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-31 :is(td, th):nth-child(5)>div {
+.emotion-24 :is(td, th):nth-child(5)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-31 :is(td, th):nth-child(6)>div {
+.emotion-24 :is(td, th):nth-child(6)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-32 {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  vertical-align: top;
-}
-
-.emotion-32 * {
-  font-size: 13px!important;
-}
-
-.emotion-32>div {
-  -webkit-align-items: start;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-}
-
-.emotion-32>div>span {
-  display: block;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-}
-
-.emotion-32>div>span>*,
-.emotion-32>div>span p {
-  margin: 0 0 12px;
-  line-height: inherit;
-}
-
-.emotion-32>div>span>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-33 {
+.emotion-25 {
   --lg-cell-padding-block: 10px;
   min-width: 40px;
   padding: var(--lg-cell-padding-block) 8px;
@@ -269,9 +269,40 @@ table .emotion-5 {
   line-height: 20px;
   line-height: 20px;
   position: relative;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
 }
 
-.emotion-34 {
+.emotion-25 * {
+  font-size: 13px!important;
+}
+
+.emotion-25>div {
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.emotion-25>div>span {
+  display: block;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.emotion-25>div>span>*,
+.emotion-25>div>span p {
+  margin: 0 0 12px;
+  line-height: inherit;
+}
+
+.emotion-25>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -282,7 +313,7 @@ table .emotion-5 {
   align-items: center;
 }
 
-.emotion-35 {
+.emotion-27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -304,94 +335,94 @@ table .emotion-5 {
       <table
         cellpadding="0"
         cellspacing="0"
-        class="emotion-4 emotion-5"
+        class="emotion-4"
       >
         <thead>
           <tr
-            class="emotion-6"
+            class="emotion-5"
             data-testid="leafygreen-ui-header-row"
           >
             <th
               aria-sort="none"
-              class="emotion-7 emotion-8"
+              class="emotion-6"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-9"
+                class="emotion-7"
               >
                 <span
-                  class="emotion-10"
+                  class="emotion-8"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-11 emotion-8"
+              class="emotion-9"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-9"
+                class="emotion-7"
               >
                 <span
-                  class="emotion-10"
+                  class="emotion-8"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-15 emotion-8"
+              class="emotion-12"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-9"
+                class="emotion-7"
               >
                 <span
-                  class="emotion-10"
+                  class="emotion-8"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-19 emotion-8"
+              class="emotion-15"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-9"
+                class="emotion-7"
               >
                 <span
-                  class="emotion-10"
+                  class="emotion-8"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-23 emotion-8"
+              class="emotion-18"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-9"
+                class="emotion-7"
               >
                 <span
-                  class="emotion-10"
+                  class="emotion-8"
                 />
               </div>
             </th>
             <th
               aria-sort="none"
-              class="emotion-19 emotion-8"
+              class="emotion-15"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-9"
+                class="emotion-7"
               >
                 <span
-                  class="emotion-10"
+                  class="emotion-8"
                 />
               </div>
             </th>
@@ -400,88 +431,88 @@ table .emotion-5 {
         <tbody>
           <tr
             aria-disabled="false"
-            class="emotion-31"
+            class="emotion-24"
             role="row"
           >
             <td
-              class="emotion-32 emotion-33"
+              class="emotion-25"
             >
               <div
-                class="emotion-34"
+                class="emotion-26"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-35"
+                  class="emotion-27"
                 >
                   notebook
                 </span>
               </div>
             </td>
             <td
-              class="emotion-32 emotion-33"
+              class="emotion-25"
             >
               <div
-                class="emotion-34"
+                class="emotion-26"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-35"
+                  class="emotion-27"
                 >
                   50
                 </span>
               </div>
             </td>
             <td
-              class="emotion-32 emotion-33"
+              class="emotion-25"
             >
               <div
-                class="emotion-34"
+                class="emotion-26"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-35"
+                  class="emotion-27"
                 >
                   8.5x11,in
                 </span>
               </div>
             </td>
             <td
-              class="emotion-32 emotion-33"
+              class="emotion-25"
             >
               <div
-                class="emotion-34"
+                class="emotion-26"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-35"
+                  class="emotion-27"
                 >
                   A
                 </span>
               </div>
             </td>
             <td
-              class="emotion-32 emotion-33"
+              class="emotion-25"
             >
               <div
-                class="emotion-34"
+                class="emotion-26"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-35"
+                  class="emotion-27"
                 >
                   college-ruled,perforated
                 </span>
               </div>
             </td>
             <td
-              class="emotion-32 emotion-33"
+              class="emotion-25"
             >
               <div
-                class="emotion-34"
+                class="emotion-26"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-35"
+                  class="emotion-27"
                 >
                   8
                 </span>
@@ -567,22 +598,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   box-sizing: border-box;
   width: 100%;
   z-index: 0;
-}
-
-.emotion-5 {
   margin: 24px 0;
 }
 
-table .emotion-5 {
+table .emotion-4 {
   margin: 0;
 }
 
-.emotion-6 * {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.emotion-7 {
+.emotion-5 {
   --lg-cell-padding-block: 10px;
   min-width: 40px;
   padding: var(--lg-cell-padding-block) 8px;
@@ -595,7 +618,12 @@ table .emotion-5 {
   border-color: #E8EDEB;
 }
 
-.emotion-8 {
+.emotion-5 * {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -609,12 +637,12 @@ table .emotion-5 {
   align-items: center;
 }
 
-.emotion-9 {
+.emotion-7 {
   padding-right: 4px;
   color: #1C2D38;
 }
 
-.emotion-30 {
+.emotion-23 {
   --lg-cell-min-height: 20px;
   position: relative;
   z-index: 1;
@@ -622,95 +650,58 @@ table .emotion-5 {
   color: #1C2D38;
 }
 
-.emotion-30>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
+.emotion-23>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
   min-height: var(--lg-cell-min-height);
   max-height: unset;
 }
 
-.emotion-30>:is(td, th):nth-child(1) {
+.emotion-23>:is(td, th):nth-child(1) {
   padding-left: 8px;
 }
 
-.emotion-30 :is(td, th):nth-child(1)>div {
+.emotion-23 :is(td, th):nth-child(1)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-30 :is(td, th):nth-child(2)>div {
+.emotion-23 :is(td, th):nth-child(2)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-30 :is(td, th):nth-child(3)>div {
+.emotion-23 :is(td, th):nth-child(3)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-30 :is(td, th):nth-child(4)>div {
+.emotion-23 :is(td, th):nth-child(4)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-30 :is(td, th):nth-child(5)>div {
+.emotion-23 :is(td, th):nth-child(5)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-30 :is(td, th):nth-child(6)>div {
+.emotion-23 :is(td, th):nth-child(6)>div {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-31 {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  vertical-align: top;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background-color: #F9FBFA;
-}
-
-.emotion-31 * {
-  font-size: 13px!important;
-}
-
-.emotion-31>div {
-  -webkit-align-items: start;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-}
-
-.emotion-31>div>span {
-  display: block;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-}
-
-.emotion-31>div>span>*,
-.emotion-31>div>span p {
-  margin: 0 0 12px;
-  line-height: inherit;
-}
-
-.emotion-31>div>span>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-32 {
+.emotion-24 {
   --lg-cell-padding-block: 10px;
   min-width: 40px;
   padding: var(--lg-cell-padding-block) 8px;
@@ -724,9 +715,43 @@ table .emotion-5 {
   font-weight: 600;
   border-right: 3px solid #E8EDEB;
   background-color: #F9FBFA;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #F9FBFA;
 }
 
-.emotion-33 {
+.emotion-24 * {
+  font-size: 13px!important;
+}
+
+.emotion-24>div {
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.emotion-24>div>span {
+  display: block;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.emotion-24>div>span>*,
+.emotion-24>div>span p {
+  margin: 0 0 12px;
+  line-height: inherit;
+}
+
+.emotion-24>div>span>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -737,48 +762,14 @@ table .emotion-5 {
   align-items: center;
 }
 
-.emotion-34 {
+.emotion-26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.emotion-35 {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  vertical-align: top;
-}
-
-.emotion-35 * {
-  font-size: 13px!important;
-}
-
-.emotion-35>div {
-  -webkit-align-items: start;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-}
-
-.emotion-35>div>span {
-  display: block;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-}
-
-.emotion-35>div>span>*,
-.emotion-35>div>span p {
-  margin: 0 0 12px;
-  line-height: inherit;
-}
-
-.emotion-35>div>span>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-36 {
+.emotion-27 {
   --lg-cell-padding-block: 10px;
   min-width: 40px;
   padding: var(--lg-cell-padding-block) 8px;
@@ -789,6 +780,37 @@ table .emotion-5 {
   line-height: 20px;
   line-height: 20px;
   position: relative;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.emotion-27 * {
+  font-size: 13px!important;
+}
+
+.emotion-27>div {
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.emotion-27>div>span {
+  display: block;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.emotion-27>div>span>*,
+.emotion-27>div>span p {
+  margin: 0 0 12px;
+  line-height: inherit;
+}
+
+.emotion-27>div>span>*:last-child {
+  margin-bottom: 0;
 }
 
 <div
@@ -806,7 +828,7 @@ table .emotion-5 {
       <table
         cellpadding="0"
         cellspacing="0"
-        class="emotion-4 emotion-5"
+        class="emotion-4"
       >
         <thead>
           <tr
@@ -815,15 +837,15 @@ table .emotion-5 {
           >
             <th
               aria-sort="none"
-              class="emotion-6 emotion-7"
+              class="emotion-5"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-8"
+                class="emotion-6"
               >
                 <span
-                  class="emotion-9"
+                  class="emotion-7"
                 >
                   name
                 </span>
@@ -831,15 +853,15 @@ table .emotion-5 {
             </th>
             <th
               aria-sort="none"
-              class="emotion-6 emotion-7"
+              class="emotion-5"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-8"
+                class="emotion-6"
               >
                 <span
-                  class="emotion-9"
+                  class="emotion-7"
                 >
                   quantity
                 </span>
@@ -847,15 +869,15 @@ table .emotion-5 {
             </th>
             <th
               aria-sort="none"
-              class="emotion-6 emotion-7"
+              class="emotion-5"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-8"
+                class="emotion-6"
               >
                 <span
-                  class="emotion-9"
+                  class="emotion-7"
                 >
                   size
                 </span>
@@ -863,15 +885,15 @@ table .emotion-5 {
             </th>
             <th
               aria-sort="none"
-              class="emotion-6 emotion-7"
+              class="emotion-5"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-8"
+                class="emotion-6"
               >
                 <span
-                  class="emotion-9"
+                  class="emotion-7"
                 >
                   status
                 </span>
@@ -879,15 +901,15 @@ table .emotion-5 {
             </th>
             <th
               aria-sort="none"
-              class="emotion-6 emotion-7"
+              class="emotion-5"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-8"
+                class="emotion-6"
               >
                 <span
-                  class="emotion-9"
+                  class="emotion-7"
                 >
                   tags
                 </span>
@@ -895,15 +917,15 @@ table .emotion-5 {
             </th>
             <th
               aria-sort="none"
-              class="emotion-6 emotion-7"
+              class="emotion-5"
               role="columnheader"
               scope="col"
             >
               <div
-                class="emotion-8"
+                class="emotion-6"
               >
                 <span
-                  class="emotion-9"
+                  class="emotion-7"
                 >
                   rating
                 </span>
@@ -914,90 +936,90 @@ table .emotion-5 {
         <tbody>
           <tr
             aria-disabled="false"
-            class="emotion-30"
+            class="emotion-23"
             role="row"
           >
             <th
-              class="emotion-31 emotion-32"
+              class="emotion-24"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   journal
                 </span>
               </div>
             </th>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   25
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   14x21,cm
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   A
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   brown, lined
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   9
                 </span>
@@ -1006,90 +1028,90 @@ table .emotion-5 {
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-30"
+            class="emotion-23"
             role="row"
           >
             <th
-              class="emotion-31 emotion-32"
+              class="emotion-24"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   notebook
                 </span>
               </div>
             </th>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   50
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   8.5x11,in
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   A
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   college-ruled,perforated
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   8
                 </span>
@@ -1098,90 +1120,90 @@ table .emotion-5 {
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-30"
+            class="emotion-23"
             role="row"
           >
             <th
-              class="emotion-31 emotion-32"
+              class="emotion-24"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   paper
                 </span>
               </div>
             </th>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   100
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   8.5x11,in
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   D
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   watercolor
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   10
                 </span>
@@ -1190,90 +1212,90 @@ table .emotion-5 {
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-30"
+            class="emotion-23"
             role="row"
           >
             <th
-              class="emotion-31 emotion-32"
+              class="emotion-24"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   planner
                 </span>
               </div>
             </th>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   75
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   22.85x30,cm
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   D
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   2019
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   10
                 </span>
@@ -1282,90 +1304,90 @@ table .emotion-5 {
           </tr>
           <tr
             aria-disabled="false"
-            class="emotion-30"
+            class="emotion-23"
             role="row"
           >
             <th
-              class="emotion-31 emotion-32"
+              class="emotion-24"
               role="rowheader"
               scope="row"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   postcard
                 </span>
               </div>
             </th>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   45
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   10x,cm
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   D
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   double-sided,white
                 </span>
               </div>
             </td>
             <td
-              class="emotion-35 emotion-36"
+              class="emotion-27"
             >
               <div
-                class="emotion-33"
+                class="emotion-25"
                 data-leafygreen-ui="td-inner-div"
               >
                 <span
-                  class="emotion-34"
+                  class="emotion-26"
                 >
                   2
                 </span>

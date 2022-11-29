@@ -30,11 +30,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-16 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-}
-
-.emotion-17 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -52,17 +47,19 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
 }
 
-.emotion-17:focus {
+.emotion-16:focus {
   outline: none;
 }
 
-.emotion-18 {
+.emotion-17 {
   position: relative;
 }
 
-.emotion-18::after {
+.emotion-17::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -72,35 +69,18 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-18::after {
+.constant-classname:focus .emotion-17::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-18::after {
+.constant-classname:hover .emotion-17::after {
   background-color: #E8EDEB;
 }
 
-.emotion-19 {
+.emotion-18 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-}
-
-.emotion-20 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-20 {
-  position: relative;
-  bottom: 4px;
-  left: -1px;
-  height: 12px;
-}
-
-.emotion-20 {
   position: relative;
   bottom: 4px;
   left: -1px;
@@ -141,17 +121,17 @@ exports[`renders correctly 1`] = `
           class="emotion-0 emotion-1 emotion-2"
         >
           <span
-            class="constant-classname emotion-16 emotion-17"
+            class="constant-classname emotion-16"
           >
             <span
-              class="emotion-18"
+              class="emotion-17"
             >
               programmatic access
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-19 emotion-20"
+              class="emotion-18"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"

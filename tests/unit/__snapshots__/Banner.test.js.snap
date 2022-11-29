@@ -63,6 +63,10 @@ exports[`renders a Banner correctly 1`] = `
 }
 
 .emotion-3 {
+  color: #016BF8;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -70,13 +74,6 @@ exports[`renders a Banner correctly 1`] = `
 }
 
 .emotion-4 {
-  color: #016BF8;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.emotion-5 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -94,7 +91,7 @@ exports[`renders a Banner correctly 1`] = `
   >
     <svg
       aria-label="Info With Circle Icon"
-      class="emotion-3 emotion-4"
+      class="emotion-3"
       height="16"
       role="img"
       viewBox="0 0 16 16"
@@ -108,7 +105,7 @@ exports[`renders a Banner correctly 1`] = `
       />
     </svg>
     <div
-      class="emotion-5"
+      class="emotion-4"
     >
       These instructions are for installing MongoDB directly from
     </div>

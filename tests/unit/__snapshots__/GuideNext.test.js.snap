@@ -79,6 +79,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   border-color: #00684A;
   color: #FFFFFF;
   font-size: 13px;
+  line-height: 20px;
   font-weight: 500;
   height: 36px;
 }
@@ -87,6 +88,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   outline: none;
 }
 
+.emotion-8[disabled],
 .emotion-8:disabled {
   pointer-events: none;
 }
@@ -119,7 +121,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .emotion-10 {
@@ -138,7 +140,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  padding: 0 12px;
+  padding: 0 11px;
   gap: 6px;
 }
 
@@ -494,6 +496,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   border-color: #00684A;
   color: #FFFFFF;
   font-size: 13px;
+  line-height: 20px;
   font-weight: 500;
   height: 36px;
 }
@@ -502,6 +505,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   outline: none;
 }
 
+.emotion-8[disabled],
 .emotion-8:disabled {
   pointer-events: none;
 }
@@ -534,7 +538,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .emotion-10 {
@@ -553,7 +557,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  padding: 0 12px;
+  padding: 0 11px;
   gap: 6px;
 }
 
@@ -901,6 +905,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   border-color: #00684A;
   color: #FFFFFF;
   font-size: 13px;
+  line-height: 20px;
   font-weight: 500;
   height: 36px;
 }
@@ -909,6 +914,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   outline: none;
 }
 
+.emotion-8[disabled],
 .emotion-8:disabled {
   pointer-events: none;
 }
@@ -941,7 +947,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .emotion-10 {
@@ -960,7 +966,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  padding: 0 12px;
+  padding: 0 11px;
   gap: 6px;
 }
 
