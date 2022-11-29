@@ -11,7 +11,8 @@ export const appendTrailingPunctuation = (nodes) => {
     // ie: regex match for  .?!,:;)*"']}`
 
     if (isReference && hasDanglingSibling) {
-      const copyOfNodeWithDeepCopiedChildren = deepCopyNodesChildren(currNode, nextNode.value);
+      const copyOfNodeWithDeepCopiedChildren = deepCopyNodesChildren(currNode);
+      copyOfNodeWithDeepCopiedChildren.children.push(nextNode);
       truncatedNodes.push(copyOfNodeWithDeepCopiedChildren);
       i++;
       continue;
@@ -21,15 +22,14 @@ export const appendTrailingPunctuation = (nodes) => {
   return truncatedNodes;
 };
 
-// Make a copy of node with a deep copy of the new child node with added punctuation
-function deepCopyNodesChildren(refNode, additionalValue) {
+// Make a copy of node with a deep copy of the new child node
+function deepCopyNodesChildren(refNode) {
   if (!refNode.children || !refNode.children.length) return { ...refNode };
   const copyOfChildren = [...refNode.children];
   const lastChild = copyOfChildren.pop();
 
   const deepCopyLastChild = {
     ...lastChild,
-    value: lastChild.value + additionalValue,
   };
 
   copyOfChildren.push(deepCopyLastChild);
