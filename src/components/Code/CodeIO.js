@@ -12,10 +12,8 @@ import Output from '../Code/Output';
 
 const outputButtonStyling = LeafyCss`
   padding: 0px;
-  font-size: ${theme.fontSize.tiny};
   height: 24px;
   margin: 8px;
-  font-weight: bold;
 `;
 
 const CodeIO = ({ nodeData: { children }, ...rest }) => {
@@ -89,6 +87,10 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 const IOToggle = styled.div`
   ${borderCodeStyle}
   border-top: none;
+  button {
+    font-size: ${theme.fontSize.tiny}; //Styling placed here to override Tabs styling precedence.
+    font-weight: normal;
+  }
 `;
 
 CodeIO.propTypes = {
