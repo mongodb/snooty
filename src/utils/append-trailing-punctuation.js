@@ -26,13 +26,7 @@ export const appendTrailingPunctuation = (nodes) => {
 function deepCopyNodesChildren(refNode) {
   if (!refNode.children || !refNode.children.length) return { ...refNode };
   const copyOfChildren = [...refNode.children];
-  const lastChild = copyOfChildren.pop();
 
-  const deepCopyLastChild = {
-    ...lastChild,
-  };
-
-  copyOfChildren.push(deepCopyLastChild);
   const copyOfNode = {
     ...refNode,
     children: copyOfChildren,
