@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
-import { css, cx } from '@leafygreen-ui/emotion';
+import { css } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { palette } from '@leafygreen-ui/palette';
 import ConditionalWrapper from '../ConditionalWrapper';
@@ -74,12 +74,10 @@ const Content = ({ argument, children, guideData }) => {
           as={Link}
           to={buttonUrl}
           variant="primary"
-          className={cx(
-            css`
-              color: #ffffff !important;
-            `,
-            'button'
-          )}
+          hideExternalIcon={true}
+          className={css`
+            color: #ffffff !important;
+          `}
         >
           {buttonText}
         </Button>

@@ -52,6 +52,16 @@ describe('GuideNext', () => {
     checkLocalStorage(currentSlug);
   });
 
+  it('renders whats next with proper url"', () => {
+    const currentSlug = 'server/read';
+    const wrapper = renderGuideNext(currentSlug, mockNodeData.noContent);
+    expect(wrapper.getByText(`What's Next`)).toBeTruthy();
+    expect(wrapper.queryAllByRole('link')[0]).toHaveAttribute(
+      'href',
+      'https://university.mongodb.com/certification/developer/about'
+    );
+  });
+
   it('renders custom copy', () => {
     const currentSlug = 'server/read';
     const wrapper = renderGuideNext(currentSlug, mockNodeData.customContent);
@@ -59,12 +69,5 @@ describe('GuideNext', () => {
     expect(wrapper.getByText('Hello this is my custom content. Description here!')).toBeTruthy();
     // Default copy title should not be present
     expect(wrapper.queryAllByText('Become a MongoDB Professional')).toHaveLength(0);
-  });
-
-  it('renders whats next with proper url"', () => {
-    const currentSlug = 'server/read';
-    const wrapper = renderGuideNext(currentSlug, mockNodeData.customContent);
-    expect(wrapper.getByText('Click This')).toBeTruthy();
-    expect(wrapper.queryAllByRole('link')[0]).toHaveAttribute('href', 'https://mongodb.com/');
   });
 });
