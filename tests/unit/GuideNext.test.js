@@ -52,6 +52,16 @@ describe('GuideNext', () => {
     checkLocalStorage(currentSlug);
   });
 
+  it('renders whats next with proper url"', () => {
+    const currentSlug = 'server/read';
+    const wrapper = renderGuideNext(currentSlug, mockNodeData.noContent);
+    expect(wrapper.getByText(`What's Next`)).toBeTruthy();
+    expect(wrapper.queryAllByRole('link')[0]).toHaveAttribute(
+      'href',
+      'https://university.mongodb.com/certification/developer/about'
+    );
+  });
+
   it('renders custom copy', () => {
     const currentSlug = 'server/read';
     const wrapper = renderGuideNext(currentSlug, mockNodeData.customContent);

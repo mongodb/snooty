@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
+import { css } from '@leafygreen-ui/emotion';
+import Link from '../Link';
 import { palette } from '@leafygreen-ui/palette';
 import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
@@ -68,7 +70,15 @@ const Content = ({ argument, children, guideData }) => {
       </ConditionalWrapper>
       {/* We only want to show the button if argument/children are empty */}
       {!hasCustomContent && buttonUrl && (
-        <Button href={buttonUrl} variant="primary">
+        <Button
+          as={Link}
+          to={buttonUrl}
+          variant="primary"
+          hideExternalIcon={true}
+          className={css`
+            color: #ffffff !important;
+          `}
+        >
           {buttonText}
         </Button>
       )}
