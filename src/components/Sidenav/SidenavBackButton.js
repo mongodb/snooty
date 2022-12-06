@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { css as emotionCSS } from '@emotion/react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -24,7 +23,7 @@ const Placeholder = styled(SideNavItem)`
   margin-bottom: 16px;
 `;
 
-const backButtonStyling = emotionCSS`
+const backButtonStyling = css`
   font-size: ${theme.fontSize.small};
   margin-bottom: 16px;
   font-weight: 400;
@@ -96,7 +95,7 @@ const SidenavBackButton = ({
     <>
       <SideNavItem
         as={Link}
-        css={[sideNavItemBasePadding, backButtonStyling]}
+        className={cx([sideNavItemBasePadding, backButtonStyling])}
         to={url}
         glyph={glyph}
         onClick={handleClick}

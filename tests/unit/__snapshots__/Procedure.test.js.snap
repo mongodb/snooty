@@ -85,10 +85,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-9 {
-  margin-bottom: 16px;
-}
-
-.emotion-11 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -96,14 +92,15 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
+  margin-bottom: 16px;
 }
 
-.emotion-11 strong,
-.emotion-11 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-15 {
+.emotion-11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -117,15 +114,15 @@ exports[`renders correctly 1`] = `
   color: #016BF8;
 }
 
-.emotion-15:focus {
+.emotion-11:focus {
   outline: none;
 }
 
-.emotion-15>code {
+.emotion-11>code {
   color: #016BF8;
 }
 
-.emotion-15::after {
+.emotion-11::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -135,11 +132,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.emotion-15:focus .emotion-15::after {
+.emotion-11:focus .emotion-11::after {
   background-color: #0498EC;
 }
 
-.emotion-15:hover::after {
+.emotion-11:hover::after {
   background-color: #E8EDEB;
 }
 
@@ -162,15 +159,15 @@ exports[`renders correctly 1`] = `
         class="emotion-8"
       >
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.
         </p>
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           <a
-            class="emotion-15 emotion-16"
+            class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -194,15 +191,15 @@ exports[`renders correctly 1`] = `
         class="emotion-8"
       >
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           Import data from CSV or JSON files into your MongoDB database.
         </p>
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           <a
-            class="emotion-15 emotion-16"
+            class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data
@@ -299,11 +296,6 @@ exports[`renders steps nested in include nodes 1`] = `
 }
 
 .emotion-9 {
-  margin-top: 16px;
-  margin-bottom: 24px;
-}
-
-.emotion-11 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -314,9 +306,11 @@ exports[`renders steps nested in include nodes 1`] = `
   color: #00684A;
   margin-top: 24px;
   margin-bottom: 8px;
+  margin-top: 16px;
+  margin-bottom: 24px;
 }
 
-.emotion-12 {
+.emotion-10 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -324,23 +318,19 @@ exports[`renders steps nested in include nodes 1`] = `
   visibility: hidden;
 }
 
-.emotion-13 {
+.emotion-11 {
   border-radius: 0!important;
   display: initial!important;
   margin: initial!important;
 }
 
-.emotion-15 {
+.emotion-13 {
   margin-top: -175px;
   position: absolute;
   padding-bottom: 2px;
 }
 
-.emotion-17 {
-  margin-bottom: 16px;
-}
-
-.emotion-19 {
+.emotion-15 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -348,10 +338,11 @@ exports[`renders steps nested in include nodes 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
+  margin-bottom: 16px;
 }
 
-.emotion-19 strong,
-.emotion-19 b {
+.emotion-15 strong,
+.emotion-15 b {
   font-weight: 700;
 }
 
@@ -375,27 +366,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="contains-headerlink emotion-9 emotion-10 emotion-11"
+            class="contains-headerlink emotion-9"
             weight="medium"
           >
             Step 1
             <a
-              class="headerlink emotion-12"
+              class="headerlink emotion-10"
               href="#step-1"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-13 emotion-14"
+                class="emotion-11 emotion-12"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-15 emotion-16"
+              class="emotion-13 emotion-14"
               id="step-1"
             />
           </h1>
           <p
-            class="emotion-17 emotion-18 emotion-19"
+            class="emotion-15"
           >
             Content for step 1
           </p>
@@ -419,27 +410,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="contains-headerlink emotion-9 emotion-10 emotion-11"
+            class="contains-headerlink emotion-9"
             weight="medium"
           >
             Step 2
             <a
-              class="headerlink emotion-12"
+              class="headerlink emotion-10"
               href="#step-2"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-13 emotion-14"
+                class="emotion-11 emotion-12"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-15 emotion-16"
+              class="emotion-13 emotion-14"
               id="step-2"
             />
           </h1>
           <p
-            class="emotion-17 emotion-18 emotion-19"
+            class="emotion-15"
           >
             Content for step 2
           </p>
@@ -463,27 +454,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="contains-headerlink emotion-9 emotion-10 emotion-11"
+            class="contains-headerlink emotion-9"
             weight="medium"
           >
             Step 3
             <a
-              class="headerlink emotion-12"
+              class="headerlink emotion-10"
               href="#step-3"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-13 emotion-14"
+                class="emotion-11 emotion-12"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-15 emotion-16"
+              class="emotion-13 emotion-14"
               id="step-3"
             />
           </h1>
           <p
-            class="emotion-17 emotion-18 emotion-19"
+            class="emotion-15"
           >
             Content for step 3
           </p>
@@ -507,27 +498,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="contains-headerlink emotion-9 emotion-10 emotion-11"
+            class="contains-headerlink emotion-9"
             weight="medium"
           >
             Step 4
             <a
-              class="headerlink emotion-12"
+              class="headerlink emotion-10"
               href="#step-4"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-13 emotion-14"
+                class="emotion-11 emotion-12"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-15 emotion-16"
+              class="emotion-13 emotion-14"
               id="step-4"
             />
           </h1>
           <p
-            class="emotion-17 emotion-18 emotion-19"
+            class="emotion-15"
           >
             Content for step 4
           </p>
@@ -551,27 +542,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="contains-headerlink emotion-9 emotion-10 emotion-11"
+            class="contains-headerlink emotion-9"
             weight="medium"
           >
             Step 5
             <a
-              class="headerlink emotion-12"
+              class="headerlink emotion-10"
               href="#step-5"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-13 emotion-14"
+                class="emotion-11 emotion-12"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-15 emotion-16"
+              class="emotion-13 emotion-14"
               id="step-5"
             />
           </h1>
           <p
-            class="emotion-17 emotion-18 emotion-19"
+            class="emotion-15"
           >
             Content for step 5
           </p>
@@ -595,27 +586,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="contains-headerlink emotion-9 emotion-10 emotion-11"
+            class="contains-headerlink emotion-9"
             weight="medium"
           >
             Step 6
             <a
-              class="headerlink emotion-12"
+              class="headerlink emotion-10"
               href="#step-6"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-13 emotion-14"
+                class="emotion-11 emotion-12"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-15 emotion-16"
+              class="emotion-13 emotion-14"
               id="step-6"
             />
           </h1>
           <p
-            class="emotion-17 emotion-18 emotion-19"
+            class="emotion-15"
           >
             Content for step 6
           </p>
@@ -639,27 +630,27 @@ exports[`renders steps nested in include nodes 1`] = `
       >
         <section>
           <h1
-            class="contains-headerlink emotion-9 emotion-10 emotion-11"
+            class="contains-headerlink emotion-9"
             weight="medium"
           >
             Step 7
             <a
-              class="headerlink emotion-12"
+              class="headerlink emotion-10"
               href="#step-7"
               title="Permalink to this heading"
             >
               <img
-                class="emotion-13 emotion-14"
+                class="emotion-11 emotion-12"
                 src="/assets/link.svg"
               />
             </a>
             <div
-              class="emotion-15 emotion-16"
+              class="emotion-13 emotion-14"
               id="step-7"
             />
           </h1>
           <p
-            class="emotion-17 emotion-18 emotion-19"
+            class="emotion-15"
           >
             Content for step 7
           </p>
@@ -716,10 +707,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-9 {
-  margin-bottom: 16px;
-}
-
-.emotion-11 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -727,14 +714,15 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
+  margin-bottom: 16px;
 }
 
-.emotion-11 strong,
-.emotion-11 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-15 {
+.emotion-11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -748,15 +736,15 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   color: #016BF8;
 }
 
-.emotion-15:focus {
+.emotion-11:focus {
   outline: none;
 }
 
-.emotion-15>code {
+.emotion-11>code {
   color: #016BF8;
 }
 
-.emotion-15::after {
+.emotion-11::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -766,11 +754,11 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   border-radius: 2px;
 }
 
-.emotion-15:focus .emotion-15::after {
+.emotion-11:focus .emotion-11::after {
   background-color: #0498EC;
 }
 
-.emotion-15:hover::after {
+.emotion-11:hover::after {
   background-color: #E8EDEB;
 }
 
@@ -793,15 +781,15 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         class="emotion-8"
       >
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.
         </p>
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           <a
-            class="emotion-15 emotion-16"
+            class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -825,15 +813,15 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         class="emotion-8"
       >
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           Import data from CSV or JSON files into your MongoDB database.
         </p>
         <p
-          class="emotion-9 emotion-10 emotion-11"
+          class="emotion-9"
         >
           <a
-            class="emotion-15 emotion-16"
+            class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data

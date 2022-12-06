@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { InlineCode } from '@leafygreen-ui/typography';
 import ComponentFactory from './ComponentFactory';
 
-const StyledInlineCode = styled(InlineCode)`
+const inlineCodeStyling = css`
   /* Unset font size so it inherits it from its context */
   font-size: unset;
   display: inline;
@@ -22,10 +23,10 @@ const StyledNavigationInlineCode = styled('code')`
 
 const Literal = ({ nodeData: { children }, formatTextOptions }) => {
   const navigationStyle = formatTextOptions?.literalEnableInline;
-  const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : StyledInlineCode;
+  const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : InlineCode;
 
   return (
-    <CurrInlineCode>
+    <CurrInlineCode className={cx(navigationStyle ? '' : inlineCodeStyling)}>
       {children.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}

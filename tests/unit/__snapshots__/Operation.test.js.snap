@@ -213,10 +213,6 @@ exports[`when no summary is present renders correctly  1`] = `
 }
 
 .emotion-17 {
-  margin-bottom: 16px;
-}
-
-.emotion-19 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -224,10 +220,11 @@ exports[`when no summary is present renders correctly  1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
+  margin-bottom: 16px;
 }
 
-.emotion-19 strong,
-.emotion-19 b {
+.emotion-17 strong,
+.emotion-17 b {
   font-weight: 700;
 }
 
@@ -315,7 +312,7 @@ exports[`when no summary is present renders correctly  1`] = `
       class="emotion-15 emotion-16"
     >
       <p
-        class="emotion-17 emotion-18 emotion-19"
+        class="emotion-17"
       >
         This is a description. Lorem ipsum dolor sit amet, consectetur adipiscing
 elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -826,10 +823,6 @@ exports[`when rendering all fields renders correctly  1`] = `
 }
 
 .emotion-17 {
-  margin-bottom: 16px;
-}
-
-.emotion-19 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -837,10 +830,11 @@ exports[`when rendering all fields renders correctly  1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
+  margin-bottom: 16px;
 }
 
-.emotion-19 strong,
-.emotion-19 b {
+.emotion-17 strong,
+.emotion-17 b {
   font-weight: 700;
 }
 
@@ -928,7 +922,7 @@ exports[`when rendering all fields renders correctly  1`] = `
       class="emotion-15 emotion-16"
     >
       <p
-        class="emotion-17 emotion-18 emotion-19"
+        class="emotion-17"
       >
         Get information about the currently logged in user.
       </p>

@@ -239,7 +239,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 }
 
 <a
-    class="emotion-0 emotion-1 emotion-2"
+    class="emotion-0 emotion-1"
     href="/documents/view/"
   >
     MongoDB Compass
@@ -396,7 +396,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 }
 
 <a
-    class="emotion-0 emotion-1 emotion-2"
+    class="emotion-0 emotion-1"
     href="/view-analyze/"
   >
     View & Analyze Data

@@ -46,6 +46,12 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   color: #00684A;
   position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  line-height: 20px;
 }
 
 .emotion-1:hover {
@@ -121,11 +127,6 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 13px;
 }
 
 .emotion-2:focus {
@@ -160,7 +161,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="page"
       aria-disabled="false"
-      class="constant-classname emotion-1 emotion-2 emotion-3"
+      class="constant-classname emotion-1 emotion-2"
       href="/"
     >
       Overview
@@ -205,6 +206,12 @@ exports[`renders correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  line-height: 20px;
 }
 
 .emotion-1:hover {
@@ -267,11 +274,6 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 13px;
 }
 
 .emotion-2:focus {
@@ -306,7 +308,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="constant-classname emotion-1 emotion-2 emotion-3"
+      class="constant-classname emotion-1 emotion-2"
       href="/cloud/account/"
     >
       Atlas
@@ -351,6 +353,12 @@ exports[`renders correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  line-height: 20px;
 }
 
 .emotion-1:hover {
@@ -413,11 +421,6 @@ exports[`renders correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 13px;
 }
 
 .emotion-2:focus {
@@ -452,7 +455,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="constant-classname emotion-1 emotion-2 emotion-3"
+      class="constant-classname emotion-1 emotion-2"
       href="/server/read/"
     >
       CRUD

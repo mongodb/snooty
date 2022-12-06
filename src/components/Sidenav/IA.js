@@ -12,13 +12,17 @@ const headerPadding = css`
   }
 `;
 
+const fontStyling = css`
+  line-height: 20px;
+`;
+
 const IA = ({ handleClick, header, ia }) => (
   <SideNavGroup className={cx(headerPadding)} header={header}>
     {ia.map(({ title, slug, url }) => {
       const target = slug || url;
       return (
         <SideNavItem
-          css={[sideNavItemBasePadding, sideNavItemFontSize]}
+          className={cx([sideNavItemBasePadding, sideNavItemFontSize, fontStyling])}
           key={target}
           as={Link}
           onClick={handleClick}

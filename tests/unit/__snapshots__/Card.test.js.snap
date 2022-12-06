@@ -101,10 +101,26 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-10 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
   margin-bottom: 16px;
 }
 
-.emotion-12 {
+.emotion-10 strong,
+.emotion-10 b {
+  font-weight: 700;
+}
+
+.emotion-11 a {
+  line-height: unset;
+}
+
+.emotion-13 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -114,16 +130,12 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-12 strong,
-.emotion-12 b {
+.emotion-13 strong,
+.emotion-13 b {
   font-weight: 700;
 }
 
-.emotion-13 a {
-  line-height: unset;
-}
-
-.emotion-16 {
+.emotion-14 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -145,15 +157,15 @@ exports[`renders correctly 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-16:focus {
+.emotion-14:focus {
   outline: none;
 }
 
-.emotion-17 {
+.emotion-15 {
   position: relative;
 }
 
-.emotion-17::after {
+.emotion-15::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -163,15 +175,15 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-17::after {
+.constant-classname:focus .emotion-15::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-17::after {
+.constant-classname:hover .emotion-15::after {
   background-color: #E8EDEB;
 }
 
-.emotion-18 {
+.emotion-16 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -200,28 +212,28 @@ exports[`renders correctly 1`] = `
       Test card headline
     </p>
     <p
-      class="emotion-10 emotion-11 emotion-12"
+      class="emotion-10"
     >
       Test card paragraph
     </p>
     <p
-      class="emotion-13 emotion-14 emotion-12"
+      class="emotion-11 emotion-12 emotion-13"
     >
       <a
-        class="constant-classname emotion-16"
+        class="constant-classname emotion-14"
         href="https://university.mongodb.com/courses/M001/about"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-17"
+          class="emotion-15"
         >
           Test card CTA
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-18"
+          class="emotion-16"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
