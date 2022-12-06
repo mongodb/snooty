@@ -81,7 +81,6 @@ const Link = ({
     return (
       <GatsbyLink
         css={gatsbyLinkStyling}
-        className={'gatsby-link'}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
@@ -98,7 +97,7 @@ const Link = ({
   const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
 
   return (
-    <LGLink className={cx(LGlinkStyling, 'lglink')} href={to} hideExternalIcon={hideExternalIcon} {...other}>
+    <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
       {children}
     </LGLink>
   );
