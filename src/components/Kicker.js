@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { Overline } from '@leafygreen-ui/typography';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
-const StyledKicker = styled(Overline)`
+const kickerStyling = css`
   color: ${palette.gray.base};
   grid-column: 2;
   margin-top: 48px;
@@ -21,11 +21,11 @@ const StyledKicker = styled(Overline)`
 
 const Kicker = ({ nodeData: { argument }, ...rest }) => {
   return (
-    <StyledKicker>
+    <Overline className={cx(kickerStyling)}>
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}
-    </StyledKicker>
+    </Overline>
   );
 };
 

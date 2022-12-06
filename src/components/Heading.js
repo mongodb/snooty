@@ -14,7 +14,7 @@ import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
-const StyledH2 = styled(H2)`
+const h2Styling = css`
   margin-top: 16px;
   margin-bottom: 24px;
 `;
@@ -26,7 +26,7 @@ const headingStyles = css`
 
 const determineHeading = (sectionDepth) => {
   if (sectionDepth === 1) {
-    return StyledH2;
+    return H2;
   } else if (sectionDepth === 2) {
     return H3;
   } else if (sectionDepth === 3) {
@@ -59,7 +59,11 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        <HeadingTag className={cx(headingStyles, 'contains-headerlink')} as={asHeading} weight="medium">
+        <HeadingTag
+          className={cx(headingStyles, 'contains-headerlink', sectionDepth === 1 ? h2Styling : '')}
+          as={asHeading}
+          weight="medium"
+        >
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}

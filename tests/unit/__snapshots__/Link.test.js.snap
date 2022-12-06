@@ -606,7 +606,7 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
 }
 
 <a
-    class="test-class emotion-0 emotion-1"
+    class="test-class emotion-0"
     href="/drivers/c/"
   >
     C Driver
@@ -657,7 +657,7 @@ exports[`Link component renders a variety of strings correctly internal link que
 }
 
 <a
-    class="test-class emotion-0 emotion-1"
+    class="test-class emotion-0"
     href="/drivers/ruby/?site=drivers"
   >
     C Driver
@@ -708,7 +708,7 @@ exports[`Link component renders a variety of strings correctly internal link tha
 }
 
 <a
-    class="test-class emotion-0 emotion-1"
+    class="test-class emotion-0"
     href="/drivers/nodejs/#installation"
   >
     C Driver
@@ -759,7 +759,7 @@ exports[`Link component renders a variety of strings correctly internal link wit
 }
 
 <a
-    class="test-class emotion-0 emotion-1"
+    class="test-class emotion-0"
     href="/drivers/pymongo/#installation"
   >
     C Driver

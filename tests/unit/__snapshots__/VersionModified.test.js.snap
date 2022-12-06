@@ -3,15 +3,6 @@
 exports[`when rendering a deprecated directive with 0 arguments renders correctly  1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: unset;
-  display: inline;
-}
-
-a .emotion-0 {
-  color: inherit;
-}
-
-.emotion-2 {
   font-size: 13px;
   line-height: 20px;
   -webkit-transition: all 0.15s ease-in-out;
@@ -24,21 +15,27 @@ a .emotion-0 {
   border: 1px solid #E8EDEB;
   color: #1C2D38;
   white-space: nowrap;
+  font-size: unset;
+  display: inline;
 }
 
-.constant-classname:hover>.emotion-2 {
+.constant-classname:hover>.emotion-0 {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.constant-classname:hover>.emotion-2 {
+.constant-classname:hover>.emotion-0 {
   box-shadow: 0 0 0 3px #E8EDEB;
   border: 1px solid #C1C7C6;
 }
 
-.constant-classname:focus>.emotion-2 {
+.constant-classname:focus>.emotion-0 {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
   border: 1px solid #016BF8;
+}
+
+a .emotion-0 {
+  color: inherit;
 }
 
 <div>
@@ -48,14 +45,14 @@ a .emotion-0 {
       </em>
       : 
       <code
-        class="emotion-0 emotion-1 emotion-2"
+        class="emotion-0"
       >
         replicationFactor
       </code>
        is deprecated. Use
 
       <code
-        class="emotion-0 emotion-1 emotion-2"
+        class="emotion-0"
       >
         replicationSpecs
       </code>

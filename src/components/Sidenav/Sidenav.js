@@ -74,7 +74,7 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
 
 `;
 
-const titleStyle = css`
+const titleStyle = LeafyCSS`
   color: ${palette.gray.dark3};
   font-size: ${theme.fontSize.small};
   font-weight: bold;
@@ -243,7 +243,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SideNavItem css={[titleStyle, sideNavItemBasePadding]} as={Link} to={baseUrl()}>
+                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
                   MongoDB Documentation
                 </SideNavItem>
                 <Border />
@@ -260,7 +260,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 />
                 {ia && (
                   <IA
-                    header={<span css={[titleStyle]}>{formatText(pageTitle)}</span>}
+                    header={<span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
@@ -282,7 +282,11 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             {!ia && !showAllProducts && (
               <>
                 {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
-                <SideNavItem css={[titleStyle, sideNavItemBasePadding]} as={Link} to={isGuidesTemplate ? slug : '/'}>
+                <SideNavItem
+                  className={cx(titleStyle, sideNavItemBasePadding)}
+                  as={Link}
+                  to={isGuidesTemplate ? slug : '/'}
+                >
                   {navTitle}
                 </SideNavItem>
               </>
@@ -296,7 +300,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 {/* Represents the generic links at the bottom of the side nav (e.g. "Contact Support") */}
                 {additionalLinks.map(({ glyph, title, url }) => (
                   <SideNavItem
-                    css={[sideNavItemBasePadding, sideNavItemFontSize]}
+                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
                     key={url}
                     glyph={<Icon glyph={glyph} />}
                     href={url}

@@ -66,12 +66,12 @@ exports[`renders a page with next and previous links correctly 1`] = `
   background-color: #E8EDEB;
 }
 
-.emotion-4 {
+.emotion-3 {
   display: inline-block;
   width: 270px;
 }
 
-.emotion-5 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -89,15 +89,15 @@ exports[`renders a page with next and previous links correctly 1`] = `
   text-align: right;
 }
 
-.emotion-5:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-5>code {
+.emotion-4>code {
   color: #016BF8;
 }
 
-.emotion-5::after {
+.emotion-4::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -107,15 +107,15 @@ exports[`renders a page with next and previous links correctly 1`] = `
   border-radius: 2px;
 }
 
-.emotion-5:focus .emotion-5::after {
+.emotion-4:focus .emotion-4::after {
   background-color: #0498EC;
 }
 
-.emotion-5:hover::after {
+.emotion-4:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-8 {
+.emotion-6 {
   display: table-cell;
   vertical-align: middle;
   line-height: 28px;
@@ -131,29 +131,29 @@ exports[`renders a page with next and previous links correctly 1`] = `
       ←  
     </span>
     <a
-      class="emotion-2 emotion-3"
+      class="emotion-2"
       href="/drivers/csharp/"
       title="Previous Section"
     >
       <span
-        class="emotion-4"
+        class="emotion-3"
       >
         MongoDB C#/.NET Driver
       </span>
     </a>
     <a
-      class="emotion-5 emotion-3"
+      class="emotion-4"
       href="/drivers/java/"
       title="Next Section"
     >
       <span
-        class="emotion-4"
+        class="emotion-3"
       >
         Java MongoDB Driver
       </span>
     </a>
     <span
-      class="emotion-8"
+      class="emotion-6"
     >
        →
     </span>
@@ -227,7 +227,7 @@ exports[`renders a page with no next link correctly 1`] = `
   background-color: #E8EDEB;
 }
 
-.emotion-4 {
+.emotion-3 {
   display: inline-block;
   width: 270px;
 }
@@ -241,12 +241,12 @@ exports[`renders a page with no next link correctly 1`] = `
       ←  
     </span>
     <a
-      class="emotion-2 emotion-3"
+      class="emotion-2"
       href="/drivers/go/"
       title="Previous Section"
     >
       <span
-        class="emotion-4"
+        class="emotion-3"
       >
         MongoDB Go Driver
       </span>
@@ -314,12 +314,12 @@ exports[`renders a page with no previous link correctly 1`] = `
   background-color: #E8EDEB;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: inline-block;
   width: 270px;
 }
 
-.emotion-4 {
+.emotion-3 {
   display: table-cell;
   vertical-align: middle;
   line-height: 28px;
@@ -330,18 +330,18 @@ exports[`renders a page with no previous link correctly 1`] = `
     class="emotion-0"
   >
     <a
-      class="emotion-1 emotion-2"
+      class="emotion-1"
       href="/drivers/go/"
       title="Next Section"
     >
       <span
-        class="emotion-3"
+        class="emotion-2"
       >
         MongoDB Go Driver
       </span>
     </a>
     <span
-      class="emotion-4"
+      class="emotion-3"
     >
        →
     </span>

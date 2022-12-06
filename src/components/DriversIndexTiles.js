@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { theme } from '../theme/docsTheme';
@@ -106,7 +107,7 @@ const StyledGrid = styled('div')`
   }
 `;
 
-const StyledCard = styled(LeafyGreenCard)`
+const cardStyling = css`
   display: flex;
   flex-direction: row;
   padding: ${theme.size.default};
@@ -137,10 +138,10 @@ const DriversIndexTiles = () => {
     <StyledGrid>
       {tiles.map((t) => (
         <GatsbyLink key={t.title} to={t.slug}>
-          <StyledCard className="styled-card-from-driver-index-tiles">
+          <LeafyGreenCard className={cx(cardStyling, 'styled-card-from-driver-index-tiles')}>
             <StyledIcon>{t.icon}</StyledIcon>
             {t.title}
-          </StyledCard>
+          </LeafyGreenCard>
         </GatsbyLink>
       ))}
     </StyledGrid>

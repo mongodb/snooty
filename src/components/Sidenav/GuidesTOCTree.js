@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { cx } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
@@ -25,7 +26,7 @@ const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
               <SideNavItem
                 active={isActiveGuide}
                 as={Link}
-                css={[sideNavItemTOCStyling({ level: 1 })]}
+                className={cx(sideNavItemTOCStyling({ level: 1 }))}
                 onClick={handleClick}
                 to={guide}
               >
@@ -36,7 +37,7 @@ const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
                   <SideNavItem
                     active={activeHeadingId === id}
                     as={Link}
-                    css={[sideNavItemTOCStyling({ level: 2 })]}
+                    className={cx(sideNavItemTOCStyling({ level: 2 }))}
                     key={id}
                     onClick={handleClick}
                     to={`#${id}`}
