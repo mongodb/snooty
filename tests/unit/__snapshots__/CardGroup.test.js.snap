@@ -39,6 +39,21 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-2 {
+  position: relative;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: white;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
+  cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -58,55 +73,37 @@ exports[`renders correctly 1`] = `
   padding: 32px 24px;
 }
 
-.emotion-2 p:last-of-type {
-  margin-bottom: 0;
-}
-
-.emotion-4 {
-  position: relative;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
-  border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 24px;
-  min-height: 68px;
-  cursor: pointer;
-}
-
-.emotion-4:focus {
+.emotion-2:focus {
   outline: none;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-4:hover,
-.emotion-4:active {
+.emotion-2:hover,
+.emotion-2:active {
   border: 1px solid #E8EDEB;
   box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-4:hover:focus,
-.emotion-4:active:focus {
+.emotion-2:hover:focus,
+.emotion-2:active:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-5 {
+.emotion-2 p:last-of-type {
+  margin-bottom: 0;
+}
+
+.emotion-3 {
   width: 24px;
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-5 {
+  .emotion-3 {
     width: 20px;
   }
 }
 
-.emotion-7 {
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -119,16 +116,16 @@ exports[`renders correctly 1`] = `
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-7 {
+  .emotion-5 {
     margin-left: 16px;
   }
 }
 
-.emotion-7 p {
+.emotion-5 p {
   line-height: 24px;
 }
 
-.emotion-9 {
+.emotion-7 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -139,16 +136,12 @@ exports[`renders correctly 1`] = `
   margin-bottom: 16px;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-7 strong,
+.emotion-7 b {
   font-weight: 700;
 }
 
-.emotion-10 a {
-  line-height: unset;
-}
-
-.emotion-12 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -158,12 +151,16 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-12 strong,
-.emotion-12 b {
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
-.emotion-13 {
+.emotion-8 a {
+  line-height: unset;
+}
+
+.emotion-9 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -185,15 +182,15 @@ exports[`renders correctly 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-13:focus {
+.emotion-9:focus {
   outline: none;
 }
 
-.emotion-14 {
+.emotion-10 {
   position: relative;
 }
 
-.emotion-14::after {
+.emotion-10::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -203,15 +200,15 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-14::after {
+.constant-classname:focus .emotion-10::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-14::after {
+.constant-classname:hover .emotion-10::after {
   background-color: #E8EDEB;
 }
 
-.emotion-28 {
+.emotion-20 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -225,32 +222,32 @@ exports[`renders correctly 1`] = `
     class="card-group  emotion-0 emotion-1"
   >
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-2"
     >
       <img
         alt="MongoDB Atlas icon"
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
         src="/images/icons/atlas.svg"
       />
       <div
-        class="emotion-7 emotion-8"
+        class="emotion-5 emotion-6"
       >
         <p
-          class="emotion-9"
+          class="emotion-7"
         >
           Use Compass to connect to your Atlas cluster
         </p>
         <p
-          class="emotion-10 emotion-11 emotion-12"
+          class="emotion-8"
         >
           <a
-            class="constant-classname emotion-13"
+            class="constant-classname emotion-9"
             href="https://docs.atlas.mongodb.com/getting-started/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-14"
+              class="emotion-10"
             >
               Read Atlas docs
             </span>
@@ -259,39 +256,39 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-2"
     >
       <img
         alt="MongoDB University icon"
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
         src="/images/icons/university.svg"
       />
       <div
-        class="emotion-7 emotion-8"
+        class="emotion-5 emotion-6"
       >
         <p
-          class="emotion-9"
+          class="emotion-7"
         >
           Learn MongoDB Basics with MongoDB University
         </p>
         <p
-          class="emotion-10 emotion-11 emotion-12"
+          class="emotion-8"
         >
           <a
-            class="constant-classname emotion-13"
+            class="constant-classname emotion-9"
             href="https://university.mongodb.com/courses/M001/about"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-14"
+              class="emotion-10"
             >
               Learn MongoDB Basics
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-28"
+              class="emotion-20"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
@@ -311,32 +308,32 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-2"
     >
       <img
         alt="MongoDB Server icon"
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
         src="/images/icons/server.svg"
       />
       <div
-        class="emotion-7 emotion-8"
+        class="emotion-5 emotion-6"
       >
         <p
-          class="emotion-9"
+          class="emotion-7"
         >
           Access more in-depth examples of querying data
         </p>
         <p
-          class="emotion-10 emotion-11 emotion-12"
+          class="emotion-8"
         >
           <a
-            class="constant-classname emotion-13"
+            class="constant-classname emotion-9"
             href="https://docs.mongodb.com/manual/tutorial/getting-started/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-14"
+              class="emotion-10"
             >
               Read Server docs
             </span>

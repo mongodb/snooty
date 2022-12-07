@@ -37,6 +37,20 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-2 {
+  position: relative;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: white;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -60,34 +74,17 @@ exports[`card correctly with and without url 1`] = `
   margin-bottom: 0;
 }
 
-.emotion-4 {
-  position: relative;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
-  border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 24px;
-  min-height: 68px;
-}
-
-.emotion-5 {
+.emotion-3 {
   width: 24px;
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-5 {
+  .emotion-3 {
     width: 20px;
   }
 }
 
-.emotion-7 {
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -100,22 +97,16 @@ exports[`card correctly with and without url 1`] = `
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-7 {
+  .emotion-5 {
     margin-left: 16px;
   }
 }
 
-.emotion-7 p {
+.emotion-5 p {
   line-height: 24px;
 }
 
-.emotion-9 {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin: 0 0 8px;
-}
-
-.emotion-11 {
+.emotion-7 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -123,14 +114,17 @@ exports[`card correctly with and without url 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
 }
 
-.emotion-11 strong,
-.emotion-11 b {
+.emotion-7 strong,
+.emotion-7 b {
   font-weight: 700;
 }
 
-.emotion-12 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -141,23 +135,12 @@ exports[`card correctly with and without url 1`] = `
   margin-bottom: 16px;
 }
 
-.emotion-12 strong,
-.emotion-12 b {
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
-.emotion-15 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
+.emotion-10 {
   background: #F9FBFA;
   border-radius: 4px;
   border: 1px solid #C1C7C6;
@@ -170,15 +153,33 @@ exports[`card correctly with and without url 1`] = `
   padding: 4px;
 }
 
-.emotion-15:focus {
-  outline: none;
+.emotion-10:after {
+  content: ' ➔';
 }
 
-.emotion-15>code {
+.emotion-11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
   color: #016BF8;
 }
 
-.emotion-15::after {
+.emotion-11:focus {
+  outline: none;
+}
+
+.emotion-11>code {
+  color: #016BF8;
+}
+
+.emotion-11::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -188,19 +189,15 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.emotion-15:focus .emotion-15::after {
+.emotion-11:focus .emotion-11::after {
   background-color: #0498EC;
 }
 
-.emotion-15:hover::after {
+.emotion-11:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-15:after {
-  content: ' ➔';
-}
-
-.emotion-28 {
+.emotion-22 {
   position: relative;
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
@@ -216,29 +213,46 @@ exports[`card correctly with and without url 1`] = `
   padding: 24px;
   min-height: 68px;
   cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding: 32px 24px;
 }
 
-.emotion-28:focus {
+.emotion-22:focus {
   outline: none;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-28:hover,
-.emotion-28:active {
+.emotion-22:hover,
+.emotion-22:active {
   border: 1px solid #E8EDEB;
   box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-28:hover:focus,
-.emotion-28:active:focus {
+.emotion-22:hover:focus,
+.emotion-22:active:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-37 a {
-  line-height: unset;
+.emotion-22 p:last-of-type {
+  margin-bottom: 0;
 }
 
-.emotion-39 {
+.emotion-29 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -248,12 +262,16 @@ exports[`card correctly with and without url 1`] = `
   font-weight: 400;
 }
 
-.emotion-39 strong,
-.emotion-39 b {
+.emotion-29 strong,
+.emotion-29 b {
   font-weight: 700;
 }
 
-.emotion-40 {
+.emotion-29 a {
+  line-height: unset;
+}
+
+.emotion-30 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -275,15 +293,15 @@ exports[`card correctly with and without url 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-40:focus {
+.emotion-30:focus {
   outline: none;
 }
 
-.emotion-41 {
+.emotion-31 {
   position: relative;
 }
 
-.emotion-41::after {
+.emotion-31::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -293,11 +311,11 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-41::after {
+.constant-classname:focus .emotion-31::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-41::after {
+.constant-classname:hover .emotion-31::after {
   background-color: #E8EDEB;
 }
 
@@ -305,30 +323,30 @@ exports[`card correctly with and without url 1`] = `
     class="card-group  emotion-0 emotion-1"
   >
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-2"
     >
       <img
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
         src="/images/icons/realm_sdk.svg"
       />
       <div
-        class="emotion-7 emotion-8"
+        class="emotion-5 emotion-6"
       >
         <p
-          class="check-h4 emotion-9 emotion-10 emotion-11"
+          class="emotion-7"
         >
           Realm SDKs
         </p>
         <p
-          class="emotion-12"
+          class="emotion-8"
         >
           Use platform-specific libraries to include and work with the Realm database in your application.
         </p>
         <p
-          class="emotion-12"
+          class="emotion-8"
         >
           <a
-            class="emotion-14 emotion-15"
+            class="emotion-10 emotion-11"
             href="/sdk/android/#std-label-android-intro"
           >
             Android
@@ -336,7 +354,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-14 emotion-15"
+            class="emotion-10 emotion-11"
             href="/sdk/ios/#std-label-ios-intro"
           >
             iOS
@@ -344,7 +362,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-14 emotion-15"
+            class="emotion-10 emotion-11"
             href="/sdk/dotnet/#std-label-dotnet-intro"
           >
             .Net
@@ -352,7 +370,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-14 emotion-15"
+            class="emotion-10 emotion-11"
             href="/web/#std-label-web-intro"
           >
             Web
@@ -360,7 +378,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-14 emotion-15"
+            class="emotion-10 emotion-11"
             href="/sdk/react-native/#std-label-react-native-intro"
           >
             React Native
@@ -368,7 +386,7 @@ exports[`card correctly with and without url 1`] = `
           
 
           <a
-            class="emotion-14 emotion-15"
+            class="emotion-10 emotion-11"
             href="/sdk/node/#std-label-node-intro"
           >
             Node.js
@@ -377,36 +395,36 @@ exports[`card correctly with and without url 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-28"
+      class="emotion-22"
     >
       <img
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
         src="/images/icons/realm.svg"
       />
       <div
-        class="emotion-7 emotion-8"
+        class="emotion-5 emotion-6"
       >
         <p
-          class="check-h4 emotion-9 emotion-10 emotion-11"
+          class="emotion-7"
         >
           MongoDB Realm
         </p>
         <p
-          class="emotion-12"
+          class="emotion-8"
         >
           Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas.
         </p>
         <p
-          class="emotion-37 emotion-38 emotion-39"
+          class="emotion-29"
         >
           <a
-            class="constant-classname emotion-40"
+            class="constant-classname emotion-30"
             href="https://docs.mongodb.com/realm/services/"
             rel="noopener noreferrer"
             target="_blank"
           >
             <span
-              class="emotion-41"
+              class="emotion-31"
             >
               Learn more about MongoDB Realm Application Services
             </span>

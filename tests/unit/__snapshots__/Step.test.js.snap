@@ -148,7 +148,7 @@ exports[`renders with "connected" styling 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
+          class=" emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -307,7 +307,7 @@ exports[`renders with "connected" styling by default 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
+          class=" emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -439,7 +439,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
+          class=" emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
