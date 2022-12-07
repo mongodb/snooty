@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { useLocation } from '@reach/router';
 import Badge from '@leafygreen-ui/badge';
 import Card from '@leafygreen-ui/card';
+import { css as LeafygreenCss, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
@@ -55,7 +56,7 @@ const iconAdjust = css`
   top: -5px;
 `;
 
-const StyledCardContainer = styled(Card)`
+const cardStyling = LeafygreenCss`
   padding: 0;
   margin-bottom: ${theme.size.default};
   overflow: hidden;
@@ -143,7 +144,7 @@ const Operation = ({
   }, [hash, setShowDetails, showDetails]);
 
   return (
-    <StyledCardContainer id={hash}>
+    <Card className={cx(cardStyling)} id={hash}>
       <OperationHeader>
         <Badge variant={methodBadgeMap[method]}>{method}</Badge>
         <div>
@@ -181,7 +182,7 @@ const Operation = ({
           ))}
         </Details>
       )}
-    </StyledCardContainer>
+    </Card>
   );
 };
 
