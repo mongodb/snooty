@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import ChapterNumberLabel from './ChapterNumberLabel';
@@ -13,7 +14,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 // Height and width of image
 const IMAGE_SIZE = 200;
 
-const Container = styled(Card)`
+const cardStyling = css`
   background-color: ${palette.white};
   border: 1px solid ${palette.gray.light3};
   padding: ${theme.size.large} ${theme.size.medium};
@@ -79,7 +80,7 @@ const ChapterTitle = styled('div')`
   margin-top: ${theme.size.small};
 `;
 
-const ChapterDescription = styled(Body)`
+const decriptionStyling = css`
   margin-top: ${theme.size.small};
 `;
 
@@ -152,7 +153,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
   return (
     // TODO: have to return specific typography here. card is explicit size 13 font
 
-    <Container id={currentChapter?.id}>
+    <Card className={cx(cardStyling)} id={currentChapter?.id}>
       {image ? (
         <ChapterImage
           src={withPrefix(image)}
@@ -166,7 +167,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
       <DescriptionContainer>
         <ChapterNumberLabel number={chapterNumber} />
         <ChapterTitle>{chapterTitle}</ChapterTitle>
-        <ChapterDescription>{description}</ChapterDescription>
+        <Body className={cx(decriptionStyling)}>{description}</Body>
       </DescriptionContainer>
       <GuidesList>
         {guides.map((guide, i) => {
@@ -183,7 +184,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
           );
         })}
       </GuidesList>
-    </Container>
+    </Card>
   );
 };
 
