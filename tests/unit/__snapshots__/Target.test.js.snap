@@ -74,6 +74,46 @@ a .emotion-0 {
   font-weight: 700;
 }
 
+.emotion-7 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-7:focus {
+  outline: none;
+}
+
+.emotion-7>code {
+  color: #016BF8;
+}
+
+.emotion-7::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-7:focus .emotion-7::after {
+  background-color: #0498EC;
+}
+
+.emotion-7:hover::after {
+  background-color: #E8EDEB;
+}
+
 <dl
     class="option"
   >
@@ -106,7 +146,7 @@ a .emotion-0 {
 configuration file is the preferred method for runtime configuration of
 
         <a
-          class=""
+          class=" emotion-7"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code
@@ -118,7 +158,7 @@ configuration file is the preferred method for runtime configuration of
         . The options are equivalent to the command-line
 configuration options. See 
         <a
-          class=""
+          class=" emotion-7"
           href="/reference/configuration-options/"
         >
           Configuration File Options
@@ -131,7 +171,7 @@ more information.
       >
         Ensure the configuration file uses ASCII encoding. The 
         <a
-          class=""
+          class=" emotion-7"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code

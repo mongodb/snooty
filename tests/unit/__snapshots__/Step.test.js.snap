@@ -84,6 +84,46 @@ exports[`renders with "connected" styling 1`] = `
   font-weight: 700;
 }
 
+.emotion-9 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-9:focus {
+  outline: none;
+}
+
+.emotion-9>code {
+  color: #016BF8;
+}
+
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-9:focus .emotion-9::after {
+  background-color: #0498EC;
+}
+
+.emotion-9:hover::after {
+  background-color: #E8EDEB;
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -108,7 +148,7 @@ exports[`renders with "connected" styling 1`] = `
         class="emotion-7"
       >
         <a
-          class=""
+          class=" emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -203,6 +243,46 @@ exports[`renders with "connected" styling by default 1`] = `
   font-weight: 700;
 }
 
+.emotion-9 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-9:focus {
+  outline: none;
+}
+
+.emotion-9>code {
+  color: #016BF8;
+}
+
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-9:focus .emotion-9::after {
+  background-color: #0498EC;
+}
+
+.emotion-9:hover::after {
+  background-color: #E8EDEB;
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -227,7 +307,7 @@ exports[`renders with "connected" styling by default 1`] = `
         class="emotion-7"
       >
         <a
-          class=""
+          class=" emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -295,6 +375,46 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   font-weight: 700;
 }
 
+.emotion-9 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-9:focus {
+  outline: none;
+}
+
+.emotion-9>code {
+  color: #016BF8;
+}
+
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-9:focus .emotion-9::after {
+  background-color: #0498EC;
+}
+
+.emotion-9:hover::after {
+  background-color: #E8EDEB;
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -319,7 +439,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         class="emotion-7"
       >
         <a
-          class=""
+          class=" emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data

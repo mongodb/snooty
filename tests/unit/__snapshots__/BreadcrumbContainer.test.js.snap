@@ -195,8 +195,48 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   color: #1C2D38;
 }
 
+.emotion-1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-1:focus {
+  outline: none;
+}
+
+.emotion-1>code {
+  color: #016BF8;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-1:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.emotion-1:hover::after {
+  background-color: #E8EDEB;
+}
+
 <a
-    class="emotion-0"
+    class="emotion-0 emotion-1"
     href="/documents/view/"
   >
     MongoDB Compass
@@ -312,8 +352,48 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   color: #1C2D38;
 }
 
+.emotion-1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-1:focus {
+  outline: none;
+}
+
+.emotion-1>code {
+  color: #016BF8;
+}
+
+.emotion-1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-1:focus .emotion-1::after {
+  background-color: #0498EC;
+}
+
+.emotion-1:hover::after {
+  background-color: #E8EDEB;
+}
+
 <a
-    class="emotion-0"
+    class="emotion-0 emotion-1"
     href="/view-analyze/"
   >
     View & Analyze Data

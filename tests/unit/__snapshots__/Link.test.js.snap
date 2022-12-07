@@ -565,8 +565,48 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
 
 exports[`Link component renders a variety of strings correctly internal link 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0"
     href="/drivers/c/"
   >
     C Driver
@@ -576,8 +616,48 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
 
 exports[`Link component renders a variety of strings correctly internal link query param 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0"
     href="/drivers/ruby/?site=drivers"
   >
     C Driver
@@ -587,8 +667,48 @@ exports[`Link component renders a variety of strings correctly internal link que
 
 exports[`Link component renders a variety of strings correctly internal link that already includes trailing slash 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0"
     href="/drivers/nodejs/#installation"
   >
     C Driver
@@ -598,8 +718,48 @@ exports[`Link component renders a variety of strings correctly internal link tha
 
 exports[`Link component renders a variety of strings correctly internal link with hash 1`] = `
 <DocumentFragment>
-  <a
-    class="test-class"
+  .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+<a
+    class="test-class emotion-0"
     href="/drivers/pymongo/#installation"
   >
     C Driver
