@@ -138,7 +138,7 @@ const DriversIndexTiles = () => {
     <StyledGrid>
       {tiles.map((t) => (
         <GatsbyLink key={t.title} to={t.slug}>
-          <LeafyGreenCard className={cx(cardStyling, 'styled-card-from-driver-index-tiles')}>
+          <LeafyGreenCard className={cx(cardStyling)}>
             <StyledIcon>{t.icon}</StyledIcon>
             {t.title}
           </LeafyGreenCard>
