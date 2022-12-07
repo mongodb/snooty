@@ -72,46 +72,6 @@ exports[`button component renders correctly 1`] = `
 }
 
 .emotion-1 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-1:focus {
-  outline: none;
-}
-
-.emotion-1>code {
-  color: #016BF8;
-}
-
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-1:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.emotion-1:hover::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-2 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -121,7 +81,7 @@ exports[`button component renders correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -143,16 +103,16 @@ exports[`button component renders correctly 1`] = `
 
 <a
     aria-disabled="false"
-    class="button emotion-0 emotion-1"
+    class="button emotion-0"
     data-leafygreen-ui="button"
     href="/install/"
     type="button"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     />
     <div
-      class="emotion-3"
+      class="emotion-2"
     >
       Download Compass
     </div>

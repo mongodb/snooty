@@ -133,18 +133,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-13 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
+.emotion-12 {
   border-radius: 4px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -160,43 +149,17 @@ exports[`renders correctly 1`] = `
   line-height: 24px;
 }
 
-.emotion-13:focus {
-  outline: none;
-}
-
-.emotion-13>code {
-  color: #016BF8;
-}
-
-.emotion-13::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-13:focus .emotion-13::after {
-  background-color: #0498EC;
-}
-
-.emotion-13:hover::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-13:hover {
+.emotion-12:hover {
   background-color: #E8EDEB;
   color: unset;
 }
 
-.emotion-13:hover::after {
+.emotion-12:hover::after {
   content: none;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-13 {
+  .emotion-12 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;

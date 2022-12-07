@@ -115,53 +115,13 @@ exports[`renders correctly 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-2 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-2:focus {
-  outline: none;
-}
-
-.emotion-2>code {
-  color: #016BF8;
-}
-
-.emotion-2::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-2:focus .emotion-2::after {
-  background-color: #0498EC;
-}
-
-.emotion-2:hover::after {
-  background-color: #E8EDEB;
-}
-
 <li
     class="emotion-0"
   >
     <a
       aria-current="page"
       aria-disabled="false"
-      class="constant-classname emotion-1 emotion-2"
+      class="constant-classname emotion-1"
       href="/"
     >
       Overview
@@ -262,53 +222,13 @@ exports[`renders correctly 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-2 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-2:focus {
-  outline: none;
-}
-
-.emotion-2>code {
-  color: #016BF8;
-}
-
-.emotion-2::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-2:focus .emotion-2::after {
-  background-color: #0498EC;
-}
-
-.emotion-2:hover::after {
-  background-color: #E8EDEB;
-}
-
 <li
     class="emotion-0"
   >
     <a
       aria-current="false"
       aria-disabled="false"
-      class="constant-classname emotion-1 emotion-2"
+      class="constant-classname emotion-1"
       href="/cloud/account/"
     >
       Atlas
@@ -409,53 +329,13 @@ exports[`renders correctly 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-2 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-2:focus {
-  outline: none;
-}
-
-.emotion-2>code {
-  color: #016BF8;
-}
-
-.emotion-2::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-2:focus .emotion-2::after {
-  background-color: #0498EC;
-}
-
-.emotion-2:hover::after {
-  background-color: #E8EDEB;
-}
-
 <li
     class="emotion-0"
   >
     <a
       aria-current="false"
       aria-disabled="false"
-      class="constant-classname emotion-1 emotion-2"
+      class="constant-classname emotion-1"
       href="/server/read/"
     >
       CRUD

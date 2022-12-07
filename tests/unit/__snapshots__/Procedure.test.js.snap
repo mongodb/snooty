@@ -100,46 +100,6 @@ exports[`renders correctly 1`] = `
   font-weight: 700;
 }
 
-.emotion-11 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-11:focus {
-  outline: none;
-}
-
-.emotion-11>code {
-  color: #016BF8;
-}
-
-.emotion-11::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-11:focus .emotion-11::after {
-  background-color: #0498EC;
-}
-
-.emotion-11:hover::after {
-  background-color: #E8EDEB;
-}
-
 <div
     class="emotion-0 emotion-1"
   >
@@ -167,7 +127,7 @@ exports[`renders correctly 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class=""
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -199,7 +159,7 @@ exports[`renders correctly 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class=""
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data
@@ -722,46 +682,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   font-weight: 700;
 }
 
-.emotion-11 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-11:focus {
-  outline: none;
-}
-
-.emotion-11>code {
-  color: #016BF8;
-}
-
-.emotion-11::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-11:focus .emotion-11::after {
-  background-color: #0498EC;
-}
-
-.emotion-11:hover::after {
-  background-color: #E8EDEB;
-}
-
 <div
     class="emotion-0 emotion-1"
   >
@@ -789,7 +709,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class=""
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -821,7 +741,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class=""
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data

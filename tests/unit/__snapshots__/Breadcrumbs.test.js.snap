@@ -111,46 +111,6 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #1C2D38;
 }
 
-.emotion-6 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-6:focus {
-  outline: none;
-}
-
-.emotion-6>code {
-  color: #016BF8;
-}
-
-.emotion-6::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-6:focus .emotion-6::after {
-  background-color: #0498EC;
-}
-
-.emotion-6:hover::after {
-  background-color: #E8EDEB;
-}
-
 <p
     class="emotion-0"
   >
@@ -172,7 +132,7 @@ exports[`renders correctly with pageTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-5 emotion-6"
+      class="emotion-5"
       href="/view-analyze/"
     >
       View & Analyze Data
@@ -292,46 +252,6 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #1C2D38;
 }
 
-.emotion-6 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-6:focus {
-  outline: none;
-}
-
-.emotion-6>code {
-  color: #016BF8;
-}
-
-.emotion-6::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-6:focus .emotion-6::after {
-  background-color: #0498EC;
-}
-
-.emotion-6:hover::after {
-  background-color: #E8EDEB;
-}
-
 <p
     class="emotion-0"
   >
@@ -353,7 +273,7 @@ exports[`renders correctly with siteTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-5 emotion-6"
+      class="emotion-5"
       href="/"
     >
       MongoDB Compass
