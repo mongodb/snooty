@@ -4,6 +4,7 @@ import { Link as GatsbyLink } from 'gatsby';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
+import { css as emotionCss } from '@emotion/react';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 
@@ -17,7 +18,7 @@ const LGlinkStyling = css`
 `;
 
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
-const gatsbyLinkStyling = css`
+const gatsbyLinkStyling = emotionCss`
   align-items: center;
   cursor: pointer;
   &:focus {
@@ -79,7 +80,7 @@ const Link = ({
 
     return (
       <GatsbyLink
-        className={cx(gatsbyLinkStyling)}
+        css={gatsbyLinkStyling}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
