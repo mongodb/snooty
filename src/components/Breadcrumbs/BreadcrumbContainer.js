@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { palette } from '@leafygreen-ui/palette';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { formatText } from '../../utils/format-text';
@@ -21,7 +22,8 @@ const StyledArrow = styled('span')`
   }
 `;
 
-const StyledLink = styled(Link)`
+const linkStyling = LeafyCss`
+  font-size: ${theme.fontSize.small};
   :last-of-type {
     ${activeColor}
   }
@@ -34,7 +36,6 @@ const StyledLink = styled(Link)`
       ${activeColor}
     }
   }
-  font-size: ${theme.fontSize.small};
 `;
 
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
@@ -48,7 +49,8 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
         return (
           <React.Fragment key={title}>
             {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
-            <StyledLink
+            <Link
+              className={cx(linkStyling)}
               to={url}
               onClick={() => {
                 reportAnalytics('BreadcrumbClick', {
@@ -58,7 +60,7 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
               }}
             >
               {formatText(title)}
-            </StyledLink>
+            </Link>
           </React.Fragment>
         );
       })}

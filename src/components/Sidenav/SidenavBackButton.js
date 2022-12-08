@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -14,7 +13,8 @@ import { formatText } from '../../utils/format-text';
 
 // Empty SideNavItem used as a placeholder while parent category page is fetched.
 // Look into implementing a loading skeleton for this when time permits
-const Placeholder = styled(SideNavItem)`
+const placeholderStyling = css`
+  s
   cursor: unset;
   height: 37px;
   :hover {
@@ -74,7 +74,7 @@ const SidenavBackButton = ({
       // Show placeholder since the data is likely being fetched
       return (
         <>
-          <Placeholder />
+          <SideNavItem className={cx(placeholderStyling)} />
           {border}
         </>
       );

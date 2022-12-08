@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 import { normalizePath } from '../utils/normalize-path';
 import { theme } from '../theme/docsTheme';
 
-// TODO: <untangle card-ref and refrole, this styling has the side effect of changing all refroles on cards into card-refs>
-const CardRef = styled(Link)`
+const cardRefStyling = css`
   background: ${palette.gray.light3};
   border-radius: ${theme.size.tiny};
   border: 1px solid ${palette.gray.light1};
@@ -32,14 +31,14 @@ const stopPropagation = function (e) {
 
 const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow }) => {
   // Render intersphinx target links
-  const CurrRefRole = cardRef ? CardRef : Link;
+  const stylingClass = cardRef ? cardRefStyling : '';
   if (url) {
     return (
-      <CurrRefRole to={url} showLinkArrow={showLinkArrow}>
+      <Link className={cx(stylingClass)} to={url} showLinkArrow={showLinkArrow}>
         {children.map((node, i) => (
           <ComponentFactory key={i} nodeData={node} />
         ))}
-      </CurrRefRole>
+      </Link>
     );
   }
 
@@ -61,11 +60,16 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, card
   }
 
   return (
-    <CurrRefRole to={normalizePath(link)} onClick={(e) => stopPropagation(e)} showLinkArrow={showLinkArrow}>
+    <Link
+      className={cx(stylingClass)}
+      to={normalizePath(link)}
+      onClick={(e) => stopPropagation(e)}
+      showLinkArrow={showLinkArrow}
+    >
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
-    </CurrRefRole>
+    </Link>
   );
 };
 

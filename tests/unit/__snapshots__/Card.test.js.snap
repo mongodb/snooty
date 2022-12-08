@@ -3,22 +3,6 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100%;
-  padding: 32px;
-}
-
-.emotion-0 p:last-of-type {
-  margin-bottom: 0;
-}
-
-.emotion-2 {
   position: relative;
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
@@ -34,35 +18,48 @@ exports[`renders correctly 1`] = `
   padding: 24px;
   min-height: 68px;
   cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  padding: 32px;
 }
 
-.emotion-2:focus {
+.emotion-0:focus {
   outline: none;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-2:hover,
-.emotion-2:active {
+.emotion-0:hover,
+.emotion-0:active {
   border: 1px solid #E8EDEB;
   box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-2:hover:focus,
-.emotion-2:active:focus {
+.emotion-0:hover:focus,
+.emotion-0:active:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-3 {
+.emotion-0 p:last-of-type {
+  margin-bottom: 0;
+}
+
+.emotion-1 {
   width: 24px;
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-3 {
+  .emotion-1 {
     width: 20px;
   }
 }
 
-.emotion-6 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -79,13 +76,7 @@ exports[`renders correctly 1`] = `
   margin-right: auto;
 }
 
-.emotion-7 {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin: 16px 0 8px 0;
-}
-
-.emotion-9 {
+.emotion-5 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -93,14 +84,17 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 16px 0 8px 0;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-5 strong,
+.emotion-5 b {
   font-weight: 700;
 }
 
-.emotion-10 {
+.emotion-6 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -111,16 +105,12 @@ exports[`renders correctly 1`] = `
   margin-bottom: 16px;
 }
 
-.emotion-10 strong,
-.emotion-10 b {
+.emotion-6 strong,
+.emotion-6 b {
   font-weight: 700;
 }
 
-.emotion-11 a {
-  line-height: unset;
-}
-
-.emotion-13 {
+.emotion-7 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -130,12 +120,16 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-13 strong,
-.emotion-13 b {
+.emotion-7 strong,
+.emotion-7 b {
   font-weight: 700;
 }
 
-.emotion-14 {
+.emotion-7 a {
+  line-height: unset;
+}
+
+.emotion-8 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -157,15 +151,15 @@ exports[`renders correctly 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-14:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-15 {
+.emotion-9 {
   position: relative;
 }
 
-.emotion-15::after {
+.emotion-9::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -175,15 +169,15 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-15::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-15::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
-.emotion-16 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -194,46 +188,46 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1 emotion-2"
+    class="emotion-0"
   >
     <img
       alt="MongoDB University icon"
-      class="emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
       src="/images/icons/university.svg"
     />
     <span
-      class="emotion-5 emotion-6"
+      class="emotion-3 emotion-4"
     >
       Test card tag
     </span>
     <p
-      class="check-h4 emotion-7 emotion-8 emotion-9"
+      class="emotion-5"
     >
       Test card headline
     </p>
     <p
-      class="emotion-10"
+      class="emotion-6"
     >
       Test card paragraph
     </p>
     <p
-      class="emotion-11 emotion-12 emotion-13"
+      class="emotion-7"
     >
       <a
-        class="constant-classname emotion-14"
+        class="constant-classname emotion-8"
         href="https://university.mongodb.com/courses/M001/about"
         rel="noopener noreferrer"
         target="_blank"
       >
         <span
-          class="emotion-15"
+          class="emotion-9"
         >
           Test card CTA
         </span>
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-16"
+          class="emotion-10"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
