@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
+import { css } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
-import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { css as emotionCss } from '@emotion/react';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
+import { joinClassNames } from '../utils/join-class-names';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -18,7 +18,7 @@ const LGlinkStyling = css`
 `;
 
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
-const gatsbyLinkStyling = emotionCss`
+const gatsbyLinkStyling = css`
   align-items: center;
   cursor: pointer;
   &:focus {
@@ -61,6 +61,7 @@ const Link = ({
   children,
   to,
   activeClassName,
+  className,
   partiallyActive,
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
@@ -80,7 +81,7 @@ const Link = ({
 
     return (
       <GatsbyLink
-        css={gatsbyLinkStyling}
+        className={joinClassNames(gatsbyLinkStyling, className)}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
@@ -97,7 +98,12 @@ const Link = ({
   const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
 
   return (
-    <LGLink className={cx(LGlinkStyling)} href={to} hideExternalIcon={hideExternalIcon} {...other}>
+    <LGLink
+      className={joinClassNames(LGlinkStyling, className)}
+      href={to}
+      hideExternalIcon={hideExternalIcon}
+      {...other}
+    >
       {children}
     </LGLink>
   );

@@ -34,10 +34,6 @@ exports[`renders a page with next and previous links correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 28px;
-  text-align: left;
 }
 
 .emotion-2:focus {
@@ -67,59 +63,15 @@ exports[`renders a page with next and previous links correctly 1`] = `
 }
 
 .emotion-3 {
-  display: inline-block;
-  width: 270px;
-}
-
-.emotion-4 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 28px;
-  text-align: right;
-}
-
-.emotion-4:focus {
-  outline: none;
-}
-
-.emotion-4>code {
-  color: #016BF8;
-}
-
-.emotion-4::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-4:focus .emotion-4::after {
-  background-color: #0498EC;
-}
-
-.emotion-4:hover::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-6 {
   display: table-cell;
   vertical-align: middle;
   line-height: 28px;
   text-align: left;
+}
+
+.emotion-4 {
+  display: inline-block;
+  width: 270px;
 }
 
 <div
@@ -131,29 +83,29 @@ exports[`renders a page with next and previous links correctly 1`] = `
       ←  
     </span>
     <a
-      class="emotion-2"
+      class="emotion-2 emotion-3"
       href="/drivers/csharp/"
       title="Previous Section"
     >
       <span
-        class="emotion-3"
+        class="emotion-4"
       >
         MongoDB C#/.NET Driver
       </span>
     </a>
     <a
-      class="emotion-4"
+      class="emotion-2 emotion-1"
       href="/drivers/java/"
       title="Next Section"
     >
       <span
-        class="emotion-3"
+        class="emotion-4"
       >
         Java MongoDB Driver
       </span>
     </a>
     <span
-      class="emotion-6"
+      class="emotion-3"
     >
        →
     </span>
@@ -195,10 +147,6 @@ exports[`renders a page with no next link correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 28px;
-  text-align: left;
 }
 
 .emotion-2:focus {
@@ -228,6 +176,13 @@ exports[`renders a page with no next link correctly 1`] = `
 }
 
 .emotion-3 {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 28px;
+  text-align: left;
+}
+
+.emotion-4 {
   display: inline-block;
   width: 270px;
 }
@@ -241,12 +196,12 @@ exports[`renders a page with no next link correctly 1`] = `
       ←  
     </span>
     <a
-      class="emotion-2"
+      class="emotion-2 emotion-3"
       href="/drivers/go/"
       title="Previous Section"
     >
       <span
-        class="emotion-3"
+        class="emotion-4"
       >
         MongoDB Go Driver
       </span>
@@ -282,10 +237,6 @@ exports[`renders a page with no previous link correctly 1`] = `
   line-height: 13px;
   outline: none;
   color: #016BF8;
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 28px;
-  text-align: right;
 }
 
 .emotion-1:focus {
@@ -315,11 +266,18 @@ exports[`renders a page with no previous link correctly 1`] = `
 }
 
 .emotion-2 {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 28px;
+  text-align: right;
+}
+
+.emotion-3 {
   display: inline-block;
   width: 270px;
 }
 
-.emotion-3 {
+.emotion-4 {
   display: table-cell;
   vertical-align: middle;
   line-height: 28px;
@@ -330,18 +288,18 @@ exports[`renders a page with no previous link correctly 1`] = `
     class="emotion-0"
   >
     <a
-      class="emotion-1"
+      class="emotion-1 emotion-2"
       href="/drivers/go/"
       title="Next Section"
     >
       <span
-        class="emotion-2"
+        class="emotion-3"
       >
         MongoDB Go Driver
       </span>
     </a>
     <span
-      class="emotion-3"
+      class="emotion-4"
     >
        →
     </span>
