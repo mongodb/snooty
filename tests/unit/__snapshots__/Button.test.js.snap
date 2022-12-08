@@ -3,6 +3,86 @@
 exports[`button component renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-0:focus .emotion-0::after {
+  background-color: #0498EC;
+}
+
+.emotion-0:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-1 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -37,78 +117,38 @@ exports[`button component renders correctly 1`] = `
   height: 36px;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-0[disabled],
-.emotion-0:disabled {
+.emotion-1[disabled],
+.emotion-1:disabled {
   pointer-events: none;
 }
 
-.emotion-0:active,
-.emotion-0:focus,
-.emotion-0:hover {
+.emotion-1:active,
+.emotion-1:focus,
+.emotion-1:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:hover,
-.emotion-0:active {
+.emotion-1:hover,
+.emotion-1:active {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-0.button {
+.emotion-1.button {
   color: #ffffff;
-}
-
-.emotion-1 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
-}
-
-.emotion-1:focus {
-  outline: none;
-}
-
-.emotion-1>code {
-  color: #016BF8;
-}
-
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.emotion-1:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.emotion-1:hover::after {
-  background-color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -143,7 +183,7 @@ exports[`button component renders correctly 1`] = `
 
 <a
     aria-disabled="false"
-    class="button emotion-0 emotion-1"
+    class="emotion-0 button emotion-1"
     data-leafygreen-ui="button"
     href="/install/"
     type="button"

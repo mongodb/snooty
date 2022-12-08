@@ -20,6 +20,8 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
   font-size: 13px;
 }
 
@@ -107,6 +109,8 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
   font-size: 13px;
 }
 
@@ -177,25 +181,6 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
      → 
   </span>
   .emotion-0 {
-  font-size: 13px;
-}
-
-.emotion-0:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-.emotion-1 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -209,15 +194,15 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   color: #016BF8;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
-.emotion-1>code {
+.emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-1::after {
+.emotion-0::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -227,12 +212,31 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   border-radius: 2px;
 }
 
-.emotion-1:focus .emotion-1::after {
+.emotion-0:focus .emotion-0::after {
   background-color: #0498EC;
 }
 
-.emotion-1:hover::after {
+.emotion-0:hover::after {
   background-color: #E8EDEB;
+}
+
+.emotion-1 {
+  font-size: 13px;
+}
+
+.emotion-1:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-1:hover,
+.emotion-1:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
+  color: #1C2D38;
 }
 
 <a
@@ -264,6 +268,8 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
   font-size: 13px;
 }
 
@@ -334,25 +340,6 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
      → 
   </span>
   .emotion-0 {
-  font-size: 13px;
-}
-
-.emotion-0:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-.emotion-1 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -366,15 +353,15 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   color: #016BF8;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
-.emotion-1>code {
+.emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-1::after {
+.emotion-0::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -384,12 +371,31 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   border-radius: 2px;
 }
 
-.emotion-1:focus .emotion-1::after {
+.emotion-0:focus .emotion-0::after {
   background-color: #0498EC;
 }
 
-.emotion-1:hover::after {
+.emotion-0:hover::after {
   background-color: #E8EDEB;
+}
+
+.emotion-1 {
+  font-size: 13px;
+}
+
+.emotion-1:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-1:hover,
+.emotion-1:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
+  color: #1C2D38;
 }
 
 <a

@@ -40,6 +40,8 @@ exports[`renders correctly with pageTitle 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
   font-size: 13px;
 }
 
@@ -93,25 +95,6 @@ exports[`renders correctly with pageTitle 1`] = `
 }
 
 .emotion-5 {
-  font-size: 13px;
-}
-
-.emotion-5:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-5:hover,
-.emotion-5:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-.emotion-6 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -125,15 +108,15 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-6:focus {
+.emotion-5:focus {
   outline: none;
 }
 
-.emotion-6>code {
+.emotion-5>code {
   color: #016BF8;
 }
 
-.emotion-6::after {
+.emotion-5::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -143,12 +126,31 @@ exports[`renders correctly with pageTitle 1`] = `
   border-radius: 2px;
 }
 
-.emotion-6:focus .emotion-6::after {
+.emotion-5:focus .emotion-5::after {
   background-color: #0498EC;
 }
 
-.emotion-6:hover::after {
+.emotion-5:hover::after {
   background-color: #E8EDEB;
+}
+
+.emotion-6 {
+  font-size: 13px;
+}
+
+.emotion-6:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-6:hover,
+.emotion-6:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:hover:not(:last-of-type),
+.emotion-6:focus:not(:last-of-type) {
+  color: #1C2D38;
 }
 
 <p
@@ -221,6 +223,8 @@ exports[`renders correctly with siteTitle 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
   font-size: 13px;
 }
 
@@ -274,25 +278,6 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-5 {
-  font-size: 13px;
-}
-
-.emotion-5:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-5:hover,
-.emotion-5:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-.emotion-6 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -306,15 +291,15 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-6:focus {
+.emotion-5:focus {
   outline: none;
 }
 
-.emotion-6>code {
+.emotion-5>code {
   color: #016BF8;
 }
 
-.emotion-6::after {
+.emotion-5::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -324,12 +309,31 @@ exports[`renders correctly with siteTitle 1`] = `
   border-radius: 2px;
 }
 
-.emotion-6:focus .emotion-6::after {
+.emotion-5:focus .emotion-5::after {
   background-color: #0498EC;
 }
 
-.emotion-6:hover::after {
+.emotion-5:hover::after {
   background-color: #E8EDEB;
+}
+
+.emotion-6 {
+  font-size: 13px;
+}
+
+.emotion-6:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-6:hover,
+.emotion-6:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:hover:not(:last-of-type),
+.emotion-6:focus:not(:last-of-type) {
+  color: #1C2D38;
 }
 
 <p

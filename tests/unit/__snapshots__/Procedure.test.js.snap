@@ -167,7 +167,7 @@ exports[`renders correctly 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -199,7 +199,7 @@ exports[`renders correctly 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data
@@ -789,7 +789,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -821,7 +821,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           class="emotion-9"
         >
           <a
-            class=" emotion-11"
+            class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data

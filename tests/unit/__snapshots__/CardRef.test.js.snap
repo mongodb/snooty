@@ -141,23 +141,6 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-10 {
-  background: #F9FBFA;
-  border-radius: 4px;
-  border: 1px solid #C1C7C6;
-  box-sizing: border-box;
-  display: inline-block;
-  font-size: 13px!important;
-  font-weight: 600;
-  margin-bottom: 4px;
-  margin-right: 4px;
-  padding: 4px;
-}
-
-.emotion-10:after {
-  content: ' ➔';
-}
-
-.emotion-11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -171,15 +154,15 @@ exports[`card correctly with and without url 1`] = `
   color: #016BF8;
 }
 
-.emotion-11:focus {
+.emotion-10:focus {
   outline: none;
 }
 
-.emotion-11>code {
+.emotion-10>code {
   color: #016BF8;
 }
 
-.emotion-11::after {
+.emotion-10::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -189,12 +172,29 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.emotion-11:focus .emotion-11::after {
+.emotion-10:focus .emotion-10::after {
   background-color: #0498EC;
 }
 
-.emotion-11:hover::after {
+.emotion-10:hover::after {
   background-color: #E8EDEB;
+}
+
+.emotion-11 {
+  background: #F9FBFA;
+  border-radius: 4px;
+  border: 1px solid #C1C7C6;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 13px!important;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  padding: 4px;
+}
+
+.emotion-11:after {
+  content: ' ➔';
 }
 
 .emotion-22 {
