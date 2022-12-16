@@ -46,7 +46,6 @@ import LiteralInclude from './LiteralInclude';
 import Meta from './Meta';
 import MongoWebShell from './MongoWebShell';
 import OpenAPI from './OpenAPI';
-import Operation from './Operation';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
 import QuizChoice from './Widgets/QuizWidget/QuizChoice';
@@ -173,7 +172,6 @@ const componentMap = {
   'mongo-web-shell': MongoWebShell,
   only: Cond,
   openapi: OpenAPI,
-  operation: Operation,
   paragraph: Paragraph,
   procedure: Procedure,
   quiz: QuizWidget,
