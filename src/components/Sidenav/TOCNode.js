@@ -54,7 +54,7 @@ const Wrapper = ({ children, hasVersions }) => {
 const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) => {
   const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
-  const hasChildren = !!children.length;
+  const hasChildren = !!children?.length;
   const hasVersions = !!(options?.versions?.length > 1); // in the event there is only one version, do we show version selector?
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
