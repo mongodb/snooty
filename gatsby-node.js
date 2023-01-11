@@ -201,10 +201,13 @@ exports.createPages = async ({ actions }) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
 
       const slug = getPageSlug(page);
+      const mainComponentRelativePath = `./src/components/DocumentBody${
+        process.env.GATSBY_STAGING_NAV === 'omit' ? '-NoNav' : ''
+      }.js`;
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
           path: assertTrailingSlash(slug),
-          component: path.resolve(__dirname, './src/components/DocumentBody.js'),
+          component: path.resolve(__dirname, mainComponentRelativePath),
           context: {
             slug,
             repoBranches,

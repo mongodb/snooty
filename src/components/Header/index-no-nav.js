@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-// import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { isBrowser } from '../../utils/is-browser';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
@@ -14,22 +11,21 @@ const StyledHeaderContainer = styled.header`
   z-index: 10;
 `;
 
+const StyledNavPlaceholder = styled.nav`
+  width: 100%;
+  height: 88px;
+  border-bottom: 1px solid #21313c;
+  background-color: white;
+`;
+
 const Header = ({ sidenav }) => {
-  const { project } = useSiteMetadata();
-
-  let searchProperty;
-  if (isBrowser) {
-    searchProperty = new URL(window.location).searchParams.get('searchProperty');
-  }
-
-  const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
-  const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
-  console.log('unified ', unifiedNavProperty);
-
   return (
     <StyledHeaderContainer>
       <SiteBanner />
-      <>{sidenav && <SidenavMobileMenuDropdown />}</>
+      <>
+        <StyledNavPlaceholder />
+        {sidenav && <SidenavMobileMenuDropdown />}
+      </>
     </StyledHeaderContainer>
   );
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
-import Header from '../components/Header';
+import Header from '../components/Header/index-no-nav'; // DOP-3388-fix
 import { Sidenav } from '../components/Sidenav';
 import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
