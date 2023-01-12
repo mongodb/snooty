@@ -2,8 +2,8 @@ const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
 
 const pathPrefix = generatePathPrefix(siteMetadata);
-const stageWithNoNav = process.env.GATSBY_STAGING_NAV === 'omit';
-const layoutRelativePath = `./src/layouts/index${stageWithNoNav ? `-no-nav` : ''}.js`;
+const containsNav = siteMetadata.snootyEnv.match(/pro?d(uction)?/);
+const layoutRelativePath = `./src/layouts/index${containsNav ? '' : `-no-nav`}.js`;
 
 module.exports = {
   plugins: [

@@ -202,7 +202,7 @@ exports.createPages = async ({ actions }) => {
 
       const slug = getPageSlug(page);
       const mainComponentRelativePath = `./src/components/DocumentBody${
-        process.env.GATSBY_STAGING_NAV === 'omit' ? '-NoNav' : ''
+        siteMetadata.snootyEnv.match(/pro?d(uction)?/) ? '' : '-NoNav'
       }.js`;
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
