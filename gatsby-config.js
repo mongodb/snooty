@@ -2,7 +2,7 @@ const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
 
 const pathPrefix = generatePathPrefix(siteMetadata);
-const containsNav = siteMetadata.snootyEnv.match(/pro?d(uction)?/);
+const containsNav = siteMetadata.snootyEnv.match(/pro?d(uction)?/) || process.env.NAV_FOOTER !== 'omit';
 const layoutRelativePath = `./src/layouts/index${containsNav ? '' : `-no-nav`}.js`;
 
 module.exports = {
