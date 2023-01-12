@@ -14,12 +14,11 @@ const StyledHeaderContainer = styled.header`
 const StyledNavPlaceholder = styled.nav`
   width: 100%;
   height: 88px;
-  border-bottom: 1px solid #21313c;
+  border-bottom: 1px solid #b8c4c2;
   background-color: white;
 `;
 
 const Header = ({ sidenav }) => {
-  console.log('hello na=nav header');
   return (
     <StyledHeaderContainer>
       <SiteBanner />

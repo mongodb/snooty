@@ -3,9 +3,7 @@ const { siteMetadata } = require('./src/utils/site-metadata');
 
 const pathPrefix = generatePathPrefix(siteMetadata);
 const containsNav = siteMetadata.snootyEnv.match(/pro?d(uction)?/) || process.env.NAV_FOOTER !== 'omit';
-console.log('containsNav ', containsNav);
 const layoutRelativePath = `./src/layouts/index${containsNav ? '' : `-no-nav`}.js`;
-console.log('layoutRelativePath ', layoutRelativePath);
 
 module.exports = {
   plugins: [

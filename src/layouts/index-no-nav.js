@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
-import Header from '../components/Header/index-no-nav'; // DOP-3388-fix
+import Header from '../components/Header/index-no-nav';
 import { Sidenav } from '../components/Sidenav';
 import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
@@ -22,6 +22,34 @@ const footerOverrides = css`
     }
   }
 `;
+
+// These fonts are ported over from @mdb/flora design system repo
+// They are used on the content areas and are not included in Snooty itself
+// Without consistent-nav, this is needed to keep the experience the same for the content writers' previews
+const AKZIDENZ_FAMILY = 'Akzidenz-Grotesk Std';
+const EUCLID_CIRCULAR_FAMILY = 'Euclid Circular A';
+const MONGODB_VALUE_SERIF_FAMILY = 'MongoDB Value Serif';
+const SOURCE_CODE_PRO_FAMILY = 'Source Code Pro';
+
+const FONT_SRCS = {
+  [AKZIDENZ_FAMILY]: {
+    light: 'https://static.mongodb.com/com/fonts/akzidenzgroteskbq_light-webfont.woff2',
+    medium: 'https://static.mongodb.com/com/fonts/akzidenzgroteskbq_medium-webfont.woff2',
+  },
+  [EUCLID_CIRCULAR_FAMILY]: {
+    regular: 'https://static.mongodb.com/com/fonts/EuclidCircularA-Regular-WebXL.woff2',
+    medium: 'https://static.mongodb.com/com/fonts/EuclidCircularA-Medium-WebXL.woff2',
+  },
+  [MONGODB_VALUE_SERIF_FAMILY]: {
+    regular: 'https://static.mongodb.com/com/fonts/MongoDBValueSerif-Regular.woff2',
+    medium: 'https://static.mongodb.com/com/fonts/MongoDBValueSerif-Medium.woff2',
+    bold: 'https://static.mongodb.com/com/fonts/MongoDBValueSerif-Bold.woff2',
+  },
+  [SOURCE_CODE_PRO_FAMILY]: {
+    regular: 'https://static.mongodb.com/com/fonts/SourceCodePro-Regular.ttf',
+    medium: 'https://static.mongodb.com/com/fonts/SourceCodePro-Medium.ttf',
+  },
+};
 
 const globalCSS = css`
   body {
@@ -63,6 +91,72 @@ const globalCSS = css`
   }
 
   ${footerOverrides}
+
+  /* Fonts that are usually provided by flora through consistent-nav */
+  @font-face {
+    font-family: ${AKZIDENZ_FAMILY};
+    src: url(${FONT_SRCS[AKZIDENZ_FAMILY].light}) format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${AKZIDENZ_FAMILY};
+    src: url(${FONT_SRCS[AKZIDENZ_FAMILY].medium}) format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${EUCLID_CIRCULAR_FAMILY};
+    src: url(${FONT_SRCS[EUCLID_CIRCULAR_FAMILY].regular}) format('woff2');
+    font-weight: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${EUCLID_CIRCULAR_FAMILY};
+    src: url(${FONT_SRCS[EUCLID_CIRCULAR_FAMILY].medium}) format('woff2');
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${MONGODB_VALUE_SERIF_FAMILY};
+    src: url(${FONT_SRCS[MONGODB_VALUE_SERIF_FAMILY].regular}) format('woff2');
+    font-weight: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${MONGODB_VALUE_SERIF_FAMILY};
+    src: url(${FONT_SRCS[MONGODB_VALUE_SERIF_FAMILY].medium}) format('woff2');
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${MONGODB_VALUE_SERIF_FAMILY};
+    src: url(${FONT_SRCS[MONGODB_VALUE_SERIF_FAMILY].bold}) format('woff2');
+    font-weight: bold;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${SOURCE_CODE_PRO_FAMILY};
+    src: url(${FONT_SRCS[SOURCE_CODE_PRO_FAMILY].regular}) format('truetype');
+    font-weight: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: ${SOURCE_CODE_PRO_FAMILY};
+    src: url(${FONT_SRCS[SOURCE_CODE_PRO_FAMILY].medium}) format('truetype');
+    font-weight: 500;
+    font-display: swap;
+  }
 `;
 
 const GlobalGrid = styled('div')`
@@ -84,7 +178,6 @@ const DefaultLayout = ({
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 
-  console.log('no-nav layout');
   return (
     <>
       <Global styles={globalCSS} />
