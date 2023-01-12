@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import FootnoteContext from './footnote-context';
 import { getNestedValue } from '../../utils/get-nested-value';
+import FootnoteContext from './footnote-context';
 
 /**
  * Component used to show a clickable reference to footnote on page

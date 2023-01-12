@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Loadable from '@loadable/component';
+import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import useScreenSize from '../hooks/useScreenSize';
+import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
-import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 
 const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 

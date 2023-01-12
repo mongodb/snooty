@@ -1,3 +1,5 @@
+const AdmZip = require('adm-zip');
+const BSON = require('bson');
 const { initStitch } = require('../utils/setup/init-stitch');
 const { constructReposFilter } = require('../utils/setup/construct-repos-filter');
 const {
@@ -8,8 +10,6 @@ const {
 } = require('../build-constants');
 const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
 const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
-const AdmZip = require('adm-zip');
-const BSON = require('bson');
 
 const DB = siteMetadata.database;
 const buildFilter = constructBuildFilter(siteMetadata);

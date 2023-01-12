@@ -5,10 +5,16 @@ module.exports = {
   },
   extends: ['react-app', 'plugin:import/errors'],
   ignorePatterns: ['node_modules/', 'public/'],
-  plugins: ['jest', '@emotion'],
+  plugins: ['jest', '@emotion', 'import'],
   rules: {
     '@emotion/pkg-renaming': 'error',
     'no-return-await': 1,
+    'import/order': [
+      'error',
+      {
+        groups: ['external', 'builtin', 'internal', 'parent', 'sibling', 'index'],
+      },
+    ],
   },
   settings: {
     'import/resolver': {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { ThemeProvider } from '@emotion/react';
 import Tabs from '../../src/components/Tabs';
 import { TabProvider } from '../../src/components/Tabs/tab-context';
 import { theme } from '../../src/theme/docsTheme';
@@ -9,7 +10,6 @@ import mockDataPlatforms from './data/Tabs-platform.test.json';
 import mockDataLanguages from './data/Tabs-languages.test.json';
 import mockDataHidden from './data/Tabs-hidden.test.json';
 import mockDataAnonymous from './data/Tabs-anonymous.test.json';
-import { ThemeProvider } from '@emotion/react';
 
 const mountTabs = ({ mockData }) => {
   return render(

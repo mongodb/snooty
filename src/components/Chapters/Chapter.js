@@ -6,10 +6,10 @@ import Card from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
-import ChapterNumberLabel from './ChapterNumberLabel';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
 import { getPlaintext } from '../../utils/get-plaintext';
+import ChapterNumberLabel from './ChapterNumberLabel';
 
 // Height and width of image
 const IMAGE_SIZE = 200;

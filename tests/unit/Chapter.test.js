@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import mockData from './data/Chapters.test.json';
 import Chapter from '../../src/components/Chapters/Chapter';
+import mockData from './data/Chapters.test.json';
 
 it('renders correctly', () => {
   const chapterData = mockData.nodeData.children[0];

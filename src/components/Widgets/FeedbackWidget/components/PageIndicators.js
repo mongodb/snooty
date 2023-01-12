@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { theme } from '../../../../theme/docsTheme';
 import { palette } from '@leafygreen-ui/palette';
+import { theme } from '../../../../theme/docsTheme';
 import { useFeedbackContext } from '../context';
 
 //styling for individual dots in the progress bar

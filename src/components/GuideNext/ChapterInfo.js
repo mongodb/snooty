@@ -4,9 +4,9 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Card from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
-import GuidesList from './GuidesList';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import { theme } from '../../theme/docsTheme';
+import GuidesList from './GuidesList';
 
 const cardStyling = css`
   margin-top: 40px;

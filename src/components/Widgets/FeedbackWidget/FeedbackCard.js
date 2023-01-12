@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
+import { feedbackId } from '../FeedbackWidget/FeedbackForm';
+import { theme } from '../../../../src/theme/docsTheme';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
-import { feedbackId } from '../FeedbackWidget/FeedbackForm';
-import { theme } from '../../../../src/theme/docsTheme';
 
 const FloatingContainer = styled.div`
   position: fixed;

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import LeafygreenCard from '@leafygreen-ui/card';
-import { useFeedbackContext } from './context';
 import { theme } from '../../../../src/theme/docsTheme';
+import { useFeedbackContext } from './context';
 
 const FeedbackContainer = styled(LeafygreenCard)`
   cursor: pointer;
