@@ -38,10 +38,9 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
   useEffect(() => {
     // handles URL validity checking for well-formed YT links
     if (url.includes('youtube') || url.includes('youtu.be')) {
-      const https = require('https');
       let testUrlValidity = 'https://www.youtube.com/oembed?url=' + url + '&format=json';
 
-      https.get(testUrlValidity, (res) => {
+      fetch(testUrlValidity, (res) => {
         // if valid URL, display default YT thumbnail
         if (res.statusCode === 200) {
           setPreviewImage(true);
