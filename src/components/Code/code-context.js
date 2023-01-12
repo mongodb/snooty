@@ -86,10 +86,10 @@ const getCurrentLanguageOption = (languageOptions, activeTabs) => {
 const CodeProvider = ({ children }) => {
   const { activeTabs, driverIconMap, selectors } = useContext(TabContext);
   const languageOptions = useMemo(() => generateLanguageOptions(selectors, driverIconMap), [driverIconMap, selectors]);
-  const codeBlockLanguage = useMemo(() => getCurrentLanguageOption(languageOptions, activeTabs), [
-    activeTabs,
-    languageOptions,
-  ]);
+  const codeBlockLanguage = useMemo(
+    () => getCurrentLanguageOption(languageOptions, activeTabs),
+    [activeTabs, languageOptions]
+  );
 
   return <CodeContext.Provider value={{ codeBlockLanguage, languageOptions }}>{children}</CodeContext.Provider>;
 };

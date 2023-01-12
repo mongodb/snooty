@@ -6,7 +6,6 @@ const pathPrefix = generatePathPrefix(siteMetadata);
 module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
-    'gatsby-plugin-layout',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     {
