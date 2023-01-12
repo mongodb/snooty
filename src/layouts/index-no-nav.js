@@ -84,6 +84,7 @@ const DefaultLayout = ({
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 
+  console.log('no-nav layout');
   return (
     <>
       <Global styles={globalCSS} />

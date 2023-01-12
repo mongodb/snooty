@@ -204,6 +204,7 @@ exports.createPages = async ({ actions }) => {
       const mainComponentRelativePath = `./src/components/DocumentBody${
         siteMetadata.snootyEnv.match(/pro?d(uction)?/) || process.env.NAV_FOOTER !== 'omit' ? '' : '-NoNav'
       }.js`;
+      // console.log('mainCompRelativePath ', mainComponentRelativePath)
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
           path: assertTrailingSlash(slug),

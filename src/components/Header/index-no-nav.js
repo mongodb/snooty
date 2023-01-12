@@ -19,6 +19,7 @@ const StyledNavPlaceholder = styled.nav`
 `;
 
 const Header = ({ sidenav }) => {
+  console.log('hello na=nav header');
   return (
     <StyledHeaderContainer>
       <SiteBanner />
