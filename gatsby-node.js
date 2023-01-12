@@ -74,7 +74,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
         }
       });
     }
-
     if (filename.endsWith('.txt')) {
       PAGES.push(key);
     }

@@ -28,6 +28,7 @@
     "xmlhttprequest-ssl": ">=1.6.2"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "build": "gatsby build --prefix-paths",
     "build:clean": "npm run clean && npm run build",
     "build:clean:stage": "npm run build:clean && make stage",
@@ -126,5 +127,9 @@
     "underscore": "^1.12.1",
     "url-parse": "^1.5.8",
     "xmlhttprequest-ssl": ">=1.6.2"
+  },
+  "resolutions": {
+    "remark-mdx": "2.0.0-next.7",
+    "htmlparser2": "6.1.0"
   }
 }
