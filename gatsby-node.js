@@ -248,7 +248,7 @@ exports.createPages = async ({ actions }) => {
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
   if (stage === 'build-html') {
     actions.setWebpackConfig({
       module: {
@@ -261,6 +261,23 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     });
   }
+
+  const providePlugins = {
+    Buffer: ['buffer', 'Buffer'],
+  };
+
+  const fallbacks = { stream: require.resolve('stream-browserify'), buffer: require.resolve('buffer/') };
+
+  if (stage === 'develop-html' || stage === 'develop') {
+    providePlugins.process = 'process/browser';
+    fallbacks.process = require.resolve('process/browser');
+  }
+  actions.setWebpackConfig({
+    plugins: [plugins.provide(providePlugins)],
+    resolve: {
+      fallback: fallbacks,
+    },
+  });
 };
 
 // Remove type inference, as our schema is too ambiguous for this to be useful.

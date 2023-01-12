@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
-import { Helmet } from 'react-helmet';
+import { Script, withPrefix } from 'gatsby';
+
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { baseUrl } from '../../utils/base-url';
@@ -29,17 +29,17 @@ const BreadcrumbSchema = ({ breadcrumb = [], siteTitle, slug }) => {
     ),
   ];
   return (
-    <Helmet>
+    <>
       {Array.isArray(breadcrumb) && (
-        <script type="application/ld+json">
+        <Script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: breadcrumbList,
           })}
-        </script>
+        </Script>
       )}
-    </Helmet>
+    </>
   );
 };
 

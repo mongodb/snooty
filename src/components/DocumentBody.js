@@ -10,6 +10,8 @@ import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
+import Meta from './Meta';
+import Twitter from './Twitter';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
 // Delete this modified node from its original location.
@@ -36,8 +38,9 @@ const normalizeCssClassNodes = (nodes, key, value) => {
 const getFootnotes = (nodes) => {
   const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
   const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
-  const numAnonRefs = footnoteReferences.filter((node) => !Object.prototype.hasOwnProperty.call(node, 'refname'))
-    .length;
+  const numAnonRefs = footnoteReferences.filter(
+    (node) => !Object.prototype.hasOwnProperty.call(node, 'refname')
+  ).length;
   // We label our footnotes by their index, regardless of their names to
   // circumvent cases such as [[1], [#], [2], ...]
   return footnotes.reduce((map, footnote, index) => {
@@ -97,12 +100,11 @@ const DocumentBody = (props) => {
 
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
-  const siteTitle = getNestedValue(['title'], metadata) || '';
+
   const { Template } = getTemplate(template);
 
   return (
     <>
-      <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
       <Widgets
         location={location}
         pageOptions={page?.options}
@@ -134,3 +136,32 @@ DocumentBody.propTypes = {
 };
 
 export default DocumentBody;
+
+export const Head = ({ pageContext }) => {
+  const { slug, page } = pageContext;
+  const pageNodes = getNestedValue(['children'], page) || [];
+  // console.log(pageNodes);
+  const meta = pageNodes.filter((c) => {
+    const lookup = c.type === 'directive' ? c.name : c.type;
+    // console.log('TYPE', lookup);
+    return lookup === 'meta';
+  });
+
+  const twitter = pageNodes.filter((c) => {
+    const lookup = c.type === 'directive' ? c.name : c.type;
+    return lookup === 'twitter';
+  });
+  const metadata = useSnootyMetadata();
+
+  const lookup = slug === '/' ? 'index' : slug;
+  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
+  const siteTitle = getNestedValue(['title'], metadata) || '';
+
+  return (
+    <>
+      <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
+      {meta.length > 0 && meta.map((c) => <Meta {...c} />)}
+      {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
+    </>
+  );
+};

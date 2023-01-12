@@ -43,7 +43,6 @@ import ListTable from './ListTable';
 import Literal from './Literal';
 import LiteralBlock from './LiteralBlock';
 import LiteralInclude from './LiteralInclude';
-import Meta from './Meta';
 import MongoWebShell from './MongoWebShell';
 import OpenAPI from './OpenAPI';
 import Paragraph from './Paragraph';
@@ -68,7 +67,7 @@ import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
-import Twitter from './Twitter';
+
 import VersionModified from './VersionModified';
 import Video from './Video';
 
@@ -93,6 +92,7 @@ const IGNORED_NAMES = new Set([
   'tabs-pillstrip',
   'tabs-selector',
   'toctree',
+  'meta',
 ]);
 const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
@@ -168,7 +168,6 @@ const componentMap = {
   literal: Literal,
   literal_block: LiteralBlock,
   literalinclude: LiteralInclude,
-  meta: Meta,
   'mongo-web-shell': MongoWebShell,
   only: Cond,
   openapi: OpenAPI,
@@ -193,7 +192,7 @@ const componentMap = {
   title_reference: TitleReference,
   topic: Topic,
   transition: Transition,
-  twitter: Twitter,
+
   versionadded: VersionModified,
   versionchanged: VersionModified,
   video: Video,

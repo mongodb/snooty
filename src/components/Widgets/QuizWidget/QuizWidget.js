@@ -11,7 +11,7 @@ import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { useRealmFuncs } from './RealmFuncs';
 import { RealmAppProvider } from './RealmApp';
-import { quizAppId } from './realm-constants.json';
+import { quizAppId } from './realm-constants';
 
 const StyledCard = styled(Card)`
   background-color: ${palette.gray.light3};

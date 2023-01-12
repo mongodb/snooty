@@ -10,15 +10,17 @@ export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     // GTM Pathway
     <script
+      key="pathway"
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `!function(e,n){var t=document.createElement("script"),o=null,x="pathway";t.async=!0,t.src='https://'+x+'.mongodb.com/'+(e?x+'-debug.js':''),document.head.append(t),t.addEventListener("load",function(){o=window.pathway.default,(n&&o.configure(n)),o.createProfile("mongodbcom").load(),window.segment=o})}();`,
       }}
     />,
     // Optimizely
-    <script async src="https://cdn.optimizely.com/js/20988630008.js" />,
+    <script key="optimizely" async src="https://cdn.optimizely.com/js/20988630008.js" />,
     // Delighted
     <script
+      key="delighted"
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `!function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var l=t.getElementsByTagName("script")[0];l.parentNode.insertBefore(o,l)}}(window,document,"Dk30CC86ba0nATlK","delighted");`,
