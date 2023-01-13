@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
 import { getNestedValue } from '../utils/get-nested-value';
+import ComponentFactory from './ComponentFactory';
 
 const HorizontalList = ({
   nodeData,

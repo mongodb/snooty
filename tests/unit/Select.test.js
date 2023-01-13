@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { render } from '@testing-library/react';
-import Select from '../../src/components/Select';
 import userEvent from '@testing-library/user-event';
+import Select from '../../src/components/Select';
 
 const DEFAULT_ATLAS_CHOICE = { text: 'MongoDB Atlas', value: 'atlas' };
 const DEFAULT_SERVER_CHOICE = { text: 'MongoDB Server', value: 'server' };

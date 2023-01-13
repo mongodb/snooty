@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Callout, { Variant } from '@leafygreen-ui/callout';
 import { cx, css } from '@leafygreen-ui/emotion';
-import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
 import { theme } from '../theme/docsTheme';
+import ComponentFactory from './ComponentFactory';
 
 export const admonitionMap = {
   example: Variant.Example,

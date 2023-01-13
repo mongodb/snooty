@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import Link from './Link';
 import { getPageTitle } from '../utils/get-page-title';
+import Link from './Link';
 
 const tableContainerStyling = css`
   padding-top: 2em;

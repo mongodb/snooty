@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import mockData from './data/Chapters.test.json';
 import GuidesLandingTree from '../../src/components/Sidenav/GuidesLandingTree';
+import mockData from './data/Chapters.test.json';
 
 const getWrapper = () => {
   const { chapters } = mockData.metadata;

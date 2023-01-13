@@ -1,5 +1,5 @@
-import * as stitch from '../../src/components/Widgets/FeedbackWidget/stitch';
 import { BSON } from 'mongodb-stitch-server-sdk';
+import * as stitch from '../../src/components/Widgets/FeedbackWidget/stitch';
 
 export const stitchFunctionMocks = {};
 export function mockStitchFunctions() {

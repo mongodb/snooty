@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavigationProvider } from '../context/navigation-context';
+import { VersionContextProvider } from '../context/version-context';
+import { TocContextProvider } from '../context/toc-context';
 import { HeaderContextProvider } from './Header/header-context';
 import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
-import { NavigationProvider } from '../context/navigation-context';
-import { VersionContextProvider } from '../context/version-context';
-import { TocContextProvider } from '../context/toc-context';
 
 const RootProvider = ({
   children,

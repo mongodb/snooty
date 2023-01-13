@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { theme } from '../../theme/docsTheme';
+import { formatText } from '../../utils/format-text';
 import { ContentsContext } from './contents-context';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
-import { theme } from '../../theme/docsTheme';
-import { formatText } from '../../utils/format-text';
 
 const StyledContents = styled('div')`
   @media ${theme.screenSize.largeAndUp} {

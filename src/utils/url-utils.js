@@ -1,5 +1,5 @@
-import { baseUrl } from './base-url';
 import { generatePrefix } from '../components/VersionDropdown/utils';
+import { baseUrl } from './base-url';
 import { assertTrailingSlash } from './assert-trailing-slash';
 import { normalizePath } from './normalize-path';
 

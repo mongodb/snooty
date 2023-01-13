@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
 import { ContentsContext } from '../Contents/contents-context';
 import { formatText } from '../../utils/format-text';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { isCurrentPage } from '../../utils/is-current-page';
+import { sideNavItemTOCStyling } from './styles/sideNavItem';
 
 const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
   const currentChapterName = guides?.[slug]?.['chapter_name'];

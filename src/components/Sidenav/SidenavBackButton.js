@@ -4,12 +4,12 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { sideNavItemBasePadding } from './styles/sideNavItem';
 import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
+import { sideNavItemBasePadding } from './styles/sideNavItem';
 
 // Empty SideNavItem used as a placeholder while parent category page is fetched.
 // Look into implementing a loading skeleton for this when time permits

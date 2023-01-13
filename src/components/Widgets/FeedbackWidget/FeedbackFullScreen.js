@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
+import { HeaderContext } from '../../Header/header-context';
 import useNoScroll from './hooks/useNoScroll';
 import { useFeedbackContext } from './context';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
-import { HeaderContext } from '../../Header/header-context';
 
 const FullScreen = styled.div(
   (props) => `

@@ -1,7 +1,7 @@
 const { execSync } = require('child_process');
 const userInfo = require('os').userInfo;
-const { DOTCOM_BASE_URL } = require('./base-url');
 const { fetchManifestMetadata } = require('../utils/setup/fetch-manifest-metadata');
+const { DOTCOM_BASE_URL } = require('./base-url');
 
 // loads vars from the .env file into process.env object
 const runningEnv = process.env.NODE_ENV || 'production';

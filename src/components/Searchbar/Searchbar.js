@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react'
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
+import { useClickOutside } from '../../hooks/use-click-outside';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { theme } from '../../theme/docsTheme';
 import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
 import SearchDropdown from './SearchDropdown';
-import { useClickOutside } from '../../hooks/use-click-outside';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { theme } from '../../theme/docsTheme';
 
 const BUTTON_SIZE = theme.size.medium;
 const NUMBER_SEARCH_RESULTS = 9;
