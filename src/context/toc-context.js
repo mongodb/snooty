@@ -17,7 +17,7 @@ const TocContextProvider = ({ children }) => {
   const { toctree } = useSnootyMetadata();
   const { database, project } = useSiteMetadata();
   const [remoteToc, setRemoteToc] = useState();
-  const [activeToc, setActiveToc] = useState({});
+  const [activeToc, setActiveToc] = useState(toctree);
 
   const getTocMetadata = useCallback(async () => {
     try {
