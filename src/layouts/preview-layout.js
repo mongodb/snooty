@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
-import Header from '../components/Header/index-no-nav';
+import PreviewHeader from '../components/Header/preview-header';
 import { Sidenav } from '../components/Sidenav';
 import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
@@ -191,7 +191,7 @@ const DefaultLayout = ({
         isAssociatedProduct={isAssociatedProduct}
       >
         <GlobalGrid>
-          <Header sidenav={sidenav} eol={eol} />
+          <PreviewHeader sidenav={sidenav} eol={eol} />
           {sidenav && (
             <Sidenav
               chapters={chapters}

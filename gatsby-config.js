@@ -2,8 +2,11 @@ const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
 
 const pathPrefix = generatePathPrefix(siteMetadata);
-const containsNav = siteMetadata.snootyEnv.match(/pro?d(uction)?/) || process.env.NAV_FOOTER !== 'omit';
-const layoutRelativePath = `./src/layouts/index${containsNav ? '' : `-no-nav`}.js`;
+
+// TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate components, add conditional for consistent-nav UnifiedNav in DefaultLayout
+const isFullBuild =
+  siteMetadata.snootyBranch.match(/pro?d/) || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
+const layoutComponentRelativePath = `./src/layouts/${isFullBuild ? 'index' : `preview-layout`}.js`;
 
 module.exports = {
   plugins: [
@@ -11,7 +14,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-layout',
       options: {
-        component: require.resolve(layoutRelativePath),
+        component: require.resolve(layoutComponentRelativePath),
       },
     },
     'gatsby-plugin-react-helmet',

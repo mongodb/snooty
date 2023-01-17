@@ -199,11 +199,12 @@ exports.createPages = async ({ actions }) => {
   return new Promise((resolve, reject) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
-
       const slug = getPageSlug(page);
-      const mainComponentRelativePath = `./src/components/DocumentBody${
-        siteMetadata.snootyEnv.match(/pro?d(uction)?/) || process.env.NAV_FOOTER !== 'omit' ? '' : '-NoNav'
-      }.js`;
+
+      // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
+      const isFullBuild = siteMetadata.snootyEnv.match(/pro?d/) || process.env.PREVIEW_BUILD_ENABLED !== 'TRUE';
+      const mainComponentRelativePath = `./src/components/DocumentBody${isFullBuild ? '' : 'Preview'}.js`;
+
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
           path: assertTrailingSlash(slug),

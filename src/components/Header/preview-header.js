@@ -11,7 +11,7 @@ const StyledHeaderContainer = styled.header`
   z-index: 10;
 `;
 
-const StyledNavPlaceholder = styled.nav`
+const StyledUnifiedNavPlaceholder = styled.nav`
   width: 100%;
   height: 88px;
   border-bottom: 1px solid #b8c4c2;
@@ -23,7 +23,7 @@ const Header = ({ sidenav }) => {
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        <StyledNavPlaceholder />
+        <StyledUnifiedNavPlaceholder />
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
