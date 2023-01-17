@@ -17,7 +17,7 @@ const TocContextProvider = ({ children }) => {
   const { toctree } = useSnootyMetadata();
   const { database, project } = useSiteMetadata();
   const [remoteToc, setRemoteToc] = useState();
-  const [activeToc, setActiveToc] = useState({});
+  const [activeToc, setActiveToc] = useState(toctree);
 
   const getTocMetadata = useCallback(async () => {
     try {
@@ -26,11 +26,7 @@ const TocContextProvider = ({ children }) => {
       let filter = {
         project: `${project}`,
       };
-      // TODO: remove testing code
       let db = database;
-      if (process.env.GATSBY_TEST_EMBED_VERSIONS && project === 'cloud-docs') {
-        db = 'snooty_dev';
-      }
       const metadata = await fetchDocument(db, METADATA_COLLECTION, filter);
       return metadata.toctree;
     } catch (e) {

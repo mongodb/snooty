@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
+import { theme } from '../../theme/docsTheme';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
 import { ReadGuidesContextProvider } from './read-guides-context';
-import { theme } from '../../theme/docsTheme';
 
 const Container = styled('div')`
   border-top: 1px solid ${palette.gray.light2};

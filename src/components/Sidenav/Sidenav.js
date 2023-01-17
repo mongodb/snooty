@@ -7,17 +7,7 @@ import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
-import GuidesLandingTree from './GuidesLandingTree';
-import GuidesTOCTree from './GuidesTOCTree';
-import IA from './IA';
-import IATransition from './IATransition';
 import Link from '../Link';
-import ProductsList from './ProductsList';
-import SidenavBackButton from './SidenavBackButton';
-import { SidenavContext } from './sidenav-context';
-import SidenavMobileTransition from './SidenavMobileTransition';
-import Toctree from './Toctree';
-import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -27,6 +17,16 @@ import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
+import GuidesLandingTree from './GuidesLandingTree';
+import GuidesTOCTree from './GuidesTOCTree';
+import IA from './IA';
+import IATransition from './IATransition';
+import ProductsList from './ProductsList';
+import SidenavBackButton from './SidenavBackButton';
+import { SidenavContext } from './sidenav-context';
+import SidenavMobileTransition from './SidenavMobileTransition';
+import Toctree from './Toctree';
+import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const SIDENAV_WIDTH = 268;
 
@@ -167,7 +167,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   let showVersions = repoBranches?.branches?.length > 1;
 
   const { showVersionDropdown } = useContext(VersionContext);
-  if (process.env.GATSBY_TEST_EMBED_VERSIONS && showVersionDropdown) {
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true' && showVersionDropdown) {
     showVersions = false;
   }
 
@@ -205,7 +205,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     }
 
     // TODO: update sidenav. use new context and show options for filtering versions via ToC
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
       return (
         <>
           {Object.keys(activeToc).length > 0 && (

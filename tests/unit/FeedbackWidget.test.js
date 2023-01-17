@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { matchers } from '@emotion/jest';
 import {
   FeedbackProvider,
   FeedbackForm,
   FeedbackTab,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
-import { matchers } from '@emotion/jest';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
 import {
@@ -16,13 +16,13 @@ import {
   clearMockStitchFunctions,
 } from '../utils/feedbackWidgetStitchFunctions';
 import Heading from '../../src/components/Heading';
-import headingData from './data/Heading.test.json';
 import { theme } from '../../src/theme/docsTheme';
 import {
   screenshotFunctionMocks,
   mockScreenshotFunctions,
   clearMockScreenshotFunctions,
 } from '../utils/data/feedbackWidgetScreenshotFunctions';
+import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;

@@ -7,12 +7,12 @@ import { palette } from '@leafygreen-ui/palette';
 import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
-import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import SyncCloud from '../SyncCloud';
+import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import VersionSelector from './VersionSelector';
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase

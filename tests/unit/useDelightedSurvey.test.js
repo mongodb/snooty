@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Gatsby from 'gatsby';
-import { useDelightedSurvey } from '../../src/hooks/useDelightedSurvey';
 import { render } from '@testing-library/react';
+import { useDelightedSurvey } from '../../src/hooks/useDelightedSurvey';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 

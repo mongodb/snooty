@@ -10,8 +10,8 @@ import BookIcon from '../icons/Book';
 import { theme } from '../../theme/docsTheme';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { getPlaintext } from '../../utils/get-plaintext';
-import RightColumn from './RightColumn';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
+import RightColumn from './RightColumn';
 
 const plpGridColumns = css`
   display: grid;

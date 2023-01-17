@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import FootnoteContext from './footnote-context';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
+import FootnoteContext from './footnote-context';
 
 const tableStyling = css`
   border: 0;

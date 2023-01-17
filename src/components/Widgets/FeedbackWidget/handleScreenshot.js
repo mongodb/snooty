@@ -1,8 +1,7 @@
-import { isBrowser } from '../../../utils/is-browser';
-
 // Client-side Only modules
 import { capture, OutputType } from 'html-screen-capture-js';
 import rasterizeHTML from 'rasterizehtml';
+import { isBrowser } from '../../../utils/is-browser';
 import { fwTooltipId } from './components/LeafygreenTooltip';
 import { fwInstructionsId, fwExitButtonId } from './components/ScreenshotButton';
 import { fwFormId } from './FeedbackForm';

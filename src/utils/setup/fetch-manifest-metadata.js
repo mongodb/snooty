@@ -1,6 +1,5 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
-const testTOCNode = require('./toc-test-data.json');
 
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
@@ -11,16 +10,6 @@ const fetchManifestMetadata = () => {
     for (const entry of zipEntries) {
       if (entry.entryName === 'site.bson') {
         metadata = BSON.deserialize(entry.getData());
-
-        if (process.env.GATSBY_TEST_EMBED_VERSIONS && metadata['project'] === 'cloud-docs') {
-          metadata['associated_products'] = [
-            {
-              name: 'atlas-cli',
-              versions: ['v1.1', 'v1.0'],
-            },
-          ];
-          metadata.toctree.children.push(testTOCNode);
-        }
       }
     }
   }

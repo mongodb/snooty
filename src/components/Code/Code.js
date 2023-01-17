@@ -7,10 +7,10 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { palette } from '@leafygreen-ui/palette';
-import { CodeContext } from './code-context';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
+import { CodeContext } from './code-context';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const captionStyle = css`

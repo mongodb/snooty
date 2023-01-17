@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import mockData from './data/Time.test.json';
 import Time from '../../src/components/Time';
+import mockData from './data/Time.test.json';
 
 it('renders correctly', () => {
   const wrapper = render(<Time nodeData={mockData} />);

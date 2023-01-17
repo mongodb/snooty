@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
+import { navigate } from 'gatsby';
 import Card from '../../src/components/Card';
 import { theme } from '../../src/theme/docsTheme';
-import { navigate } from 'gatsby';
 
 // data for this component
 import mockData from './data/Card.test.json';

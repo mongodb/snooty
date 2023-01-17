@@ -1,6 +1,6 @@
 import React from 'react';
-import useVisibleOnScroll from '../../src/hooks/useVisibleOnScroll';
 import { render } from '@testing-library/react';
+import useVisibleOnScroll from '../../src/hooks/useVisibleOnScroll';
 
 const TestComponent = () => {
   const isVisible = useVisibleOnScroll('.sentinel');

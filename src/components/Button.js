@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LeafyButton from '@leafygreen-ui/button';
+import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
-import { css, cx } from '@leafygreen-ui/emotion';
 
 // TODO: include mapping of colors to use against button 'variant' attributes
 const buttonStyling = css`
