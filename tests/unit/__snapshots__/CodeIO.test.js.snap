@@ -264,11 +264,6 @@ exports[`CodeIO renders correctly 1`] = `
   border-top: none;
 }
 
-.emotion-14 button {
-  font-size: 12px;
-  font-weight: normal;
-}
-
 .emotion-16 {
   -webkit-appearance: none;
   -moz-appearance: none;
