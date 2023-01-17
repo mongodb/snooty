@@ -10,6 +10,8 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 
+const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
+
 const getTabId = (node) => getNestedValue(['options', 'tabid'], node);
 
 // Name anonymous tabsets by alphabetizing their tabids and concatenating with a forward slash
@@ -22,13 +24,13 @@ const getPosition = (element) => {
 };
 
 const defaultTabsStyling = css`
-  button {
+  ${TAB_BUTTON_SELECTOR} {
     font-size: ${theme.size.default};
     align-items: center;
   }
 
   @media ${theme.screenSize.upToXLarge} {
-    button {
+    ${TAB_BUTTON_SELECTOR} {
       overflow: initial;
       max-width: initial;
       text-overflow: initial;
@@ -47,7 +49,7 @@ const landingTabsStyling = css`
     margin-top: ${theme.size.medium};
     margin-bottom: ${theme.size.large};
 
-    button[role='tab'] {
+    ${TAB_BUTTON_SELECTOR} {
       display: block;
       flex-grow: 1;
     }

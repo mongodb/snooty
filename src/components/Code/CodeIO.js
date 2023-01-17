@@ -5,7 +5,6 @@ import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { theme } from '../../theme/docsTheme';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 import Input from '../Code/Input';
 import Output from '../Code/Output';
@@ -87,10 +86,6 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 const IOToggle = styled.div`
   ${borderCodeStyle}
   border-top: none;
-  button {
-    font-size: ${theme.fontSize.tiny}; //Styling placed here to override Tabs styling precedence.
-    font-weight: normal;
-  }
 `;
 
 CodeIO.propTypes = {
