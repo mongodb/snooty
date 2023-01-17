@@ -167,7 +167,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   let showVersions = repoBranches?.branches?.length > 1;
 
   const { showVersionDropdown } = useContext(VersionContext);
-  if (process.env.GATSBY_TEST_EMBED_VERSIONS && showVersionDropdown) {
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true' && showVersionDropdown) {
     showVersions = false;
   }
 
@@ -205,7 +205,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     }
 
     // TODO: update sidenav. use new context and show options for filtering versions via ToC
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
       return (
         <>
           {Object.keys(activeToc).length > 0 && (

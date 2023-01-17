@@ -132,7 +132,7 @@ exports.createPages = async ({ actions }) => {
   try {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
 
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
       // fetch associated child products
       const productList = manifestMetadata?.associated_products || [];
       await Promise.all(
