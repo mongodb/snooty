@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
-import FootnoteContext from './Footnote/footnote-context';
-import SEO from './SEO';
-import Widgets from './Widgets';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import Widgets from './Widgets';
+import SEO from './SEO';
+import FootnoteContext from './Footnote/footnote-context';
+import ComponentFactory from './ComponentFactory';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
 // Delete this modified node from its original location.
