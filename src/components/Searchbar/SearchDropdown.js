@@ -5,11 +5,11 @@ import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
+import { displayNone } from '../../utils/display-none';
 import AdvancedFiltersPane from './AdvancedFiltersPane';
 import Pagination from './Pagination';
 import SearchResults from './SearchResults';
 import SearchContext from './SearchContext';
-import { displayNone } from '../../utils/display-none';
 
 const RESULTS_PER_PAGE = 3;
 const SEARCH_FOOTER_DESKTOP_HEIGHT = theme.size.xlarge;

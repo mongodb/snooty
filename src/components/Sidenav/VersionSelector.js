@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import styled from '@emotion/styled';
 import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
-import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 
 const buildChoice = (branch) => {

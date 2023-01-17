@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
-import { SidenavContext } from './sidenav-context';
 import { displayNone } from '../../utils/display-none';
+import { SidenavContext } from './sidenav-context';
 
 // This container prevents the leafygreen components from flashing when the media query is true
 const MenuButtonContainer = styled('div')`

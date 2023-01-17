@@ -2,10 +2,10 @@ import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { matchers } from '@emotion/jest';
 import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
 import { tick, setMatchMedia, setMobile } from '../utils';
-import { matchers } from '@emotion/jest';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 const setProject = (project) => {

@@ -4,10 +4,10 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
-import { ReadGuidesContext } from './read-guides-context';
 import IconLightningBolt from '../icons/LightningBolt';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
+import { ReadGuidesContext } from './read-guides-context';
 
 const CIRCLE_SIZE = 20;
 

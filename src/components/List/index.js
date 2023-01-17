@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from '../ComponentFactory';
 import { css, cx } from '@leafygreen-ui/emotion';
+import ComponentFactory from '../ComponentFactory';
 
 const enumtypeMap = {
   arabic: '1',

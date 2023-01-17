@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import useStickyTopValues from './useStickyTopValues';
 import { theme } from '../theme/docsTheme';
 import { isBrowser } from '../utils/is-browser';
+import useStickyTopValues from './useStickyTopValues';
 
 // Have a component become visible as the page is scrolled down on large screen sizes
 const useVisibleOnScroll = (selector) => {

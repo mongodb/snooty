@@ -7,9 +7,9 @@ import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
+import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchTextInput from './SearchTextInput';
 import { SearchResultLink } from './SearchResult';
-import { searchParamsToURL } from '../../utils/search-params-to-url';
 import SearchContext from './SearchContext';
 
 const ARROW_DOWN_KEY = 40;

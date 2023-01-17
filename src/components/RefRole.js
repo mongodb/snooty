@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import ComponentFactory from './ComponentFactory';
-import Link from './Link';
 import { normalizePath } from '../utils/normalize-path';
 import { theme } from '../theme/docsTheme';
+import ComponentFactory from './ComponentFactory';
+import Link from './Link';
 
 const cardRefStyling = css`
   background: ${palette.gray.light3};

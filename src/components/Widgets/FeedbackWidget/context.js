@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
-import { createNewFeedback, useStitchUser } from './stitch';
 import { getViewport } from '../../../hooks/useViewport';
+import { createNewFeedback, useStitchUser } from './stitch';
 
 const FeedbackContext = createContext();
 

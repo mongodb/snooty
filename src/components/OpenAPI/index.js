@@ -8,13 +8,13 @@ import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 import { SidenavBackButton } from '../Sidenav';
 import Spinner from '../Spinner';
-import { isLinkInWhitelist, WhitelistErrorCallout } from './whitelist';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { fetchOASFile } from '../../utils/realm';
+import { isLinkInWhitelist, WhitelistErrorCallout } from './whitelist';
 import {
   codeBlockCss,
   deprecatedBadgeCss,

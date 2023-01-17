@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useSiteMetadata } from './use-site-metadata';
 import { parseMarianManifests } from '../utils/parse-marian-manifests';
 import { MARIAN_URL } from '../constants';
 import { fetchSearchPropertyMapping } from '../utils/realm';
+import { useSiteMetadata } from './use-site-metadata';
 
 // Fetches manifests for search results and the mapping between search properties and their category/version names.
 export const useMarianManifests = () => {

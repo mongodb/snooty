@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { css } from '@emotion/react';
-import { getNestedValue } from '../utils/get-nested-value';
 import { palette } from '@leafygreen-ui/palette';
+import { getNestedValue } from '../utils/get-nested-value';
 
 const Image = ({ nodeData, handleImageLoaded, className }) => {
   const [height, setHeight] = useState(null);

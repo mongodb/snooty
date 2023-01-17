@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
-import { baseBannerStyle } from './styles/bannerItemStyle';
 import ComponentFactory from '../ComponentFactory';
+import { baseBannerStyle } from './styles/bannerItemStyle';
 
 export const alertMap = {
   info: LeafyVariant.Info,

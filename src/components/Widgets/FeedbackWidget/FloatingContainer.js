@@ -2,10 +2,10 @@ import React from 'react';
 import { css } from '@emotion/react';
 import LeafygreenCard from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
+import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
-import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 
 const feedbackStyle = css`
   z-index: 14;

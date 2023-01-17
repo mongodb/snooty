@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from '../ComponentFactory';
 import { cx, css } from '@leafygreen-ui/emotion';
+import ComponentFactory from '../ComponentFactory';
 
 const listParagraphStyles = css`
   & > p {

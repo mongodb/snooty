@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
+import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const fontStyling = css`
   line-height: 20px;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ComponentFactory from './ComponentFactory';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
+import ComponentFactory from './ComponentFactory';
 
 const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
 
