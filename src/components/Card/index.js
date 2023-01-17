@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
@@ -11,7 +12,7 @@ import Link from '../Link';
 import Tag from '../Tag';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 
-const StyledCard = styled(LeafyGreenCard)`
+const cardStyling = css`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -33,18 +34,17 @@ const CompactIcon = styled('img')`
   }
 `;
 
-const H4 = styled(Body)`
+const headingStyling = ({ isCompact, isExtraCompact }) => css`
   font-weight: 600;
   letter-spacing: 0.5px;
-  margin: ${({ compact, theme }) =>
-    compact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
+  margin: ${isCompact || isExtraCompact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
 `;
 
 const FlexTag = styled(Tag)`
   margin-right: auto;
 `;
 
-const CompactCard = styled(StyledCard)`
+const compactCardStyling = css`
   align-items: flex-start;
   flex-direction: row;
   padding: ${theme.size.large} ${theme.size.medium};
@@ -64,7 +64,7 @@ const CompactTextWrapper = styled('div')`
   }
 `;
 
-const StyledBody = styled(Body)`
+const bodyStyling = css`
   a {
     line-height: unset;
   }
@@ -83,12 +83,12 @@ const Card = ({
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
 }) => {
-  const Card = isCompact || isExtraCompact ? CompactCard : StyledCard;
+  const styling = [cardStyling, isCompact || isExtraCompact ? compactCardStyling : ''];
   const template = page?.options?.template;
   const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
 
   return (
-    <Card onClick={url ? () => onCardClick(url) : undefined}>
+    <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
       {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
@@ -96,21 +96,25 @@ const Card = ({
       >
         {tag && <FlexTag>{tag}</FlexTag>}
         {headline && (
-          <H4 className="check-h4" compact={isCompact || isExtraCompact} weight="medium">
+          <Body
+            className={cx(headingStyling({ isCompact, isExtraCompact }))}
+            compact={isCompact || isExtraCompact}
+            weight="medium"
+          >
             {headline}
-          </H4>
+          </Body>
         )}
         {children.map((child, i) => (
           // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
           <ComponentFactory nodeData={child} key={i} cardRef={true} />
         ))}
         {cta && (
-          <StyledBody>
+          <Body className={cx(bodyStyling)}>
             <Link to={url}>{cta}</Link>
-          </StyledBody>
+          </Body>
         )}
       </ConditionalWrapper>
-    </Card>
+    </LeafyGreenCard>
   );
 };
 

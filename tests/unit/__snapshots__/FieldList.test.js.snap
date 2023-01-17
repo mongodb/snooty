@@ -25,15 +25,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-3 {
-  font-size: unset;
-  display: inline;
-}
-
-a .emotion-3 {
-  color: inherit;
-}
-
-.emotion-5 {
   font-size: 13px;
   line-height: 20px;
   -webkit-transition: all 0.15s ease-in-out;
@@ -46,21 +37,27 @@ a .emotion-3 {
   border: 1px solid #E8EDEB;
   color: #1C2D38;
   white-space: nowrap;
+  font-size: unset;
+  display: inline;
 }
 
-.constant-classname:hover>.emotion-5 {
+.constant-classname:hover>.emotion-3 {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.constant-classname:hover>.emotion-5 {
+.constant-classname:hover>.emotion-3 {
   box-shadow: 0 0 0 3px #E8EDEB;
   border: 1px solid #C1C7C6;
 }
 
-.constant-classname:focus>.emotion-5 {
+.constant-classname:focus>.emotion-3 {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
   border: 1px solid #016BF8;
+}
+
+a .emotion-3 {
+  color: inherit;
 }
 
 <table
@@ -84,7 +81,7 @@ a .emotion-3 {
         <td>
           A JSON Web Token string encoded for the provided 
           <code
-            class="emotion-3 emotion-4 emotion-5"
+            class="emotion-3"
           >
             payload
           </code>

@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { cx } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
 import { ContentsContext } from '../Contents/contents-context';
 import { formatText } from '../../utils/format-text';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { isCurrentPage } from '../../utils/is-current-page';
+import { sideNavItemTOCStyling } from './styles/sideNavItem';
 
 const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
   const currentChapterName = guides?.[slug]?.['chapter_name'];
@@ -25,7 +26,7 @@ const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
               <SideNavItem
                 active={isActiveGuide}
                 as={Link}
-                css={[sideNavItemTOCStyling({ level: 1 })]}
+                className={cx(sideNavItemTOCStyling({ level: 1 }))}
                 onClick={handleClick}
                 to={guide}
               >
@@ -36,7 +37,7 @@ const GuidesTOCTree = ({ chapters, guides, handleClick, slug }) => {
                   <SideNavItem
                     active={activeHeadingId === id}
                     as={Link}
-                    css={[sideNavItemTOCStyling({ level: 2 })]}
+                    className={cx(sideNavItemTOCStyling({ level: 2 }))}
                     key={id}
                     onClick={handleClick}
                     to={`#${id}`}

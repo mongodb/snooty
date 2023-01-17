@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import Step from './Step';
 import { theme } from '../../theme/docsTheme';
+import Step from './Step';
 
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};

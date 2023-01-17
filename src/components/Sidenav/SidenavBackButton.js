@@ -1,21 +1,20 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { css as emotionCSS } from '@emotion/react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
-import { sideNavItemBasePadding } from './styles/sideNavItem';
 import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
+import { sideNavItemBasePadding } from './styles/sideNavItem';
 
 // Empty SideNavItem used as a placeholder while parent category page is fetched.
 // Look into implementing a loading skeleton for this when time permits
-const Placeholder = styled(SideNavItem)`
+const placeholderStyling = css`
+  s
   cursor: unset;
   height: 37px;
   :hover {
@@ -24,7 +23,7 @@ const Placeholder = styled(SideNavItem)`
   margin-bottom: 16px;
 `;
 
-const backButtonStyling = emotionCSS`
+const backButtonStyling = css`
   font-size: ${theme.fontSize.small};
   margin-bottom: 16px;
   font-weight: 400;
@@ -75,7 +74,7 @@ const SidenavBackButton = ({
       // Show placeholder since the data is likely being fetched
       return (
         <>
-          <Placeholder />
+          <SideNavItem className={cx(placeholderStyling)} />
           {border}
         </>
       );
@@ -96,7 +95,7 @@ const SidenavBackButton = ({
     <>
       <SideNavItem
         as={Link}
-        css={[sideNavItemBasePadding, backButtonStyling]}
+        className={cx([sideNavItemBasePadding, backButtonStyling])}
         to={url}
         glyph={glyph}
         onClick={handleClick}

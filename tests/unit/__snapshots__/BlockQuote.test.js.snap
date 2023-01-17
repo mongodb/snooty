@@ -3,10 +3,6 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  margin-bottom: 16px;
-}
-
-.emotion-2 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -14,22 +10,23 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
+  margin-bottom: 16px;
 }
 
-.emotion-2 strong,
-.emotion-2 b {
+.emotion-0 strong,
+.emotion-0 b {
   font-weight: 700;
 }
 
-.emotion-3 {
+.emotion-1 {
   margin-top: 0px;
 }
 
-.emotion-4>p {
+.emotion-2>p {
   margin-bottom: 8px;
 }
 
-.emotion-16 {
+.emotion-8 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -51,15 +48,15 @@ exports[`renders correctly 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-16:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-17 {
+.emotion-9 {
   position: relative;
 }
 
-.emotion-17::after {
+.emotion-9::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -69,15 +66,15 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-17::after {
+.constant-classname:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-17::after {
+.constant-classname:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
-.emotion-18 {
+.emotion-10 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -89,49 +86,49 @@ exports[`renders correctly 1`] = `
 
 <blockquote>
     <p
-      class="emotion-0 emotion-1 emotion-2"
+      class="emotion-0"
     >
       There are several ways to connect to your MongoDB instance.
     </p>
     <ol
-      class="emotion-3"
+      class="emotion-1"
     >
       <li
-        class="emotion-4"
+        class="emotion-2"
       >
         <p
-          class="emotion-0 emotion-1 emotion-2"
+          class="emotion-0"
         >
            for access through a downloadable user interface
         </p>
       </li>
       <li
-        class="emotion-4"
+        class="emotion-2"
       >
         <p
-          class="emotion-0 emotion-1 emotion-2"
+          class="emotion-0"
         >
            interactive shell
         </p>
       </li>
       <li
-        class="emotion-4"
+        class="emotion-2"
       >
         <p
-          class="emotion-0 emotion-1 emotion-2"
+          class="emotion-0"
         >
           <span
-            class="constant-classname emotion-16"
+            class="constant-classname emotion-8"
           >
             <span
-              class="emotion-17"
+              class="emotion-9"
             >
               programmatic access
             </span>
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-18"
+              class="emotion-10"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"

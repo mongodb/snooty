@@ -1,5 +1,5 @@
-import useMedia from './use-media';
 import { theme } from '../theme/docsTheme';
+import useMedia from './use-media';
 
 export default function useScreenSize() {
   const isMobile = useMedia(theme.screenSize.upToSmall);

@@ -2,9 +2,9 @@ import React, { useCallback, useContext } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
-import { SidenavContext } from './sidenav-context';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
+import { SidenavContext } from './sidenav-context';
 
 const Container = styled('div')`
   align-items: center;

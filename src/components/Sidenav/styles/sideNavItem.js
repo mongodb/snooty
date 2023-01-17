@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
@@ -13,9 +13,9 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   padding-left: calc(${theme.size.tiny} + (${level} * ${theme.size.default}));
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.small};
-  text-transform: none;
-  align-items: flex-start;
+  align-items: flex-start !important;
   font-size: ${theme.fontSize.small};
+  text-transform: none;
   line-height: 20px !important;
 `;
 

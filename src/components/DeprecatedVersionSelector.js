@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import Button from '@leafygreen-ui/button';
-import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { getSiteUrl } from '../utils/get-site-url';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
@@ -10,7 +10,7 @@ import Select from './Select';
 
 const SELECT_WIDTH = '336px';
 
-const StyledSelect = styled(Select)`
+const selectStyle = css`
   margin-bottom: ${theme.size.medium};
   width: ${SELECT_WIDTH};
 
@@ -114,14 +114,16 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
 
   return (
     <>
-      <StyledSelect
+      <Select
+        className={cx(selectStyle)}
         choices={productChoices}
         defaultText="Product"
         label="Select a Product"
         onChange={updateProduct}
         value={product}
       />
-      <StyledSelect
+      <Select
+        className={cx(selectStyle)}
         choices={versionChoices}
         defaultText="Version"
         disabled={product === ''}

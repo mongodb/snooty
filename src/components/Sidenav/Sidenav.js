@@ -7,17 +7,7 @@ import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
-import GuidesLandingTree from './GuidesLandingTree';
-import GuidesTOCTree from './GuidesTOCTree';
-import IA from './IA';
-import IATransition from './IATransition';
 import Link from '../Link';
-import ProductsList from './ProductsList';
-import SidenavBackButton from './SidenavBackButton';
-import { SidenavContext } from './sidenav-context';
-import SidenavMobileTransition from './SidenavMobileTransition';
-import Toctree from './Toctree';
-import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -27,6 +17,16 @@ import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
+import GuidesLandingTree from './GuidesLandingTree';
+import GuidesTOCTree from './GuidesTOCTree';
+import IA from './IA';
+import IATransition from './IATransition';
+import ProductsList from './ProductsList';
+import SidenavBackButton from './SidenavBackButton';
+import { SidenavContext } from './sidenav-context';
+import SidenavMobileTransition from './SidenavMobileTransition';
+import Toctree from './Toctree';
+import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const SIDENAV_WIDTH = 268;
 
@@ -74,7 +74,7 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
 
 `;
 
-const titleStyle = css`
+const titleStyle = LeafyCSS`
   color: ${palette.gray.dark3};
   font-size: ${theme.fontSize.small};
   font-weight: bold;
@@ -167,7 +167,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   let showVersions = repoBranches?.branches?.length > 1;
 
   const { showVersionDropdown } = useContext(VersionContext);
-  if (process.env.GATSBY_TEST_EMBED_VERSIONS && showVersionDropdown) {
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true' && showVersionDropdown) {
     showVersions = false;
   }
 
@@ -205,7 +205,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     }
 
     // TODO: update sidenav. use new context and show options for filtering versions via ToC
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS) {
+    if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
       return (
         <>
           {Object.keys(activeToc).length > 0 && (
@@ -243,7 +243,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SideNavItem css={[titleStyle, sideNavItemBasePadding]} as={Link} to={baseUrl()}>
+                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
                   MongoDB Documentation
                 </SideNavItem>
                 <Border />
@@ -260,7 +260,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 />
                 {ia && (
                   <IA
-                    header={<span css={[titleStyle]}>{formatText(pageTitle)}</span>}
+                    header={<span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
@@ -282,7 +282,11 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             {!ia && !showAllProducts && (
               <>
                 {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
-                <SideNavItem css={[titleStyle, sideNavItemBasePadding]} as={Link} to={isGuidesTemplate ? slug : '/'}>
+                <SideNavItem
+                  className={cx(titleStyle, sideNavItemBasePadding)}
+                  as={Link}
+                  to={isGuidesTemplate ? slug : '/'}
+                >
                   {navTitle}
                 </SideNavItem>
               </>
@@ -296,7 +300,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 {/* Represents the generic links at the bottom of the side nav (e.g. "Contact Support") */}
                 {additionalLinks.map(({ glyph, title, url }) => (
                   <SideNavItem
-                    css={[sideNavItemBasePadding, sideNavItemFontSize]}
+                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
                     key={url}
                     glyph={<Icon glyph={glyph} />}
                     href={url}

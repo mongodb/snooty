@@ -5,9 +5,9 @@ import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 import Input from '../Code/Input';
 import Output from '../Code/Output';
+import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const outputButtonStyling = LeafyCss`
   padding: 0px;

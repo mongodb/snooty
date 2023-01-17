@@ -63,7 +63,7 @@ const Sticky = styled('div')`
   }
 `;
 
-const StyledLink = styled(Link)`
+const linkStyling = css`
   display: flex;
   gap: 0 ${theme.size.small};
   margin-top: ${theme.size.small};
@@ -121,10 +121,10 @@ const RightColumn = ({ chapters = {} }) => {
         <LeafyGreenCard className={cx(learningCardStyle({ isVisible }))}>
           <LearningTitle>Still Learning MongoDB?</LearningTitle>
           <p>Explore these resources to learn some fundamental MongoDB concepts.</p>
-          <StyledLink to="https://university.mongodb.com/courses/M001/about">
+          <Link className={cx(linkStyling)} to="https://university.mongodb.com/courses/M001/about">
             <Icon glyph="University" />
             Take M001 MongoDB Basics →
-          </StyledLink>
+          </Link>
         </LeafyGreenCard>
       </Sticky>
     </Container>

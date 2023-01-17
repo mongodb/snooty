@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Toctree from '../../src/components/Sidenav/Toctree';
-import mockData from './data/Toctree.test.json';
 import { tick } from '../utils';
+import mockData from './data/Toctree.test.json';
 
 // mockData is a minimal toctree, based off of Realm's toctree:
 // /get-started (drawer)

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from './FeedbackWidget';
 import { isBrowser } from '../../utils/is-browser';
+import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from './FeedbackWidget';
 
 const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug }) => {
   const url = isBrowser ? window.location.href : null;

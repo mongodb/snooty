@@ -7,12 +7,12 @@ import { palette } from '@leafygreen-ui/palette';
 import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
-import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import SyncCloud from '../SyncCloud';
+import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import VersionSelector from './VersionSelector';
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
@@ -54,7 +54,7 @@ const Wrapper = ({ children, hasVersions }) => {
 const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) => {
   const { title, slug, url, children, options = {} } = node;
   const target = slug || url;
-  const hasChildren = !!children.length;
+  const hasChildren = !!children?.length;
   const hasVersions = !!(options?.versions?.length > 1); // in the event there is only one version, do we show version selector?
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
@@ -90,7 +90,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     if (isDrawer && hasChildren) {
       return (
         <SideNavItem
-          css={[sideNavItemTOCStyling({ level })]}
+          className={cx(sideNavItemTOCStyling({ level }))}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
@@ -107,7 +107,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           as={Link}
           to={target}
           active={isSelected}
-          css={[sideNavItemTOCStyling({ level })]}
+          className={cx(sideNavItemTOCStyling({ level }))}
           onClick={(e) => {
             setIsOpen(!isOpen);
           }}
