@@ -12,17 +12,6 @@ import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 
-// TODO: Delete this as a part of the css cleanup
-// Currently used to preserve behavior and stop legacy css
-// from overriding specified styles in imported footer
-const footerOverrides = css`
-  footer {
-    a:hover {
-      color: currentColor;
-    }
-  }
-`;
-
 // These fonts are ported over from @mdb/flora design system repo
 // They are used on the content areas and are not included in Snooty itself
 // Without consistent-nav, this is needed to keep the experience the same for the content writers' previews
@@ -89,8 +78,6 @@ const globalCSS = css`
       display: none !important;
     }
   }
-
-  ${footerOverrides}
 
   /* Fonts that are usually provided by flora through consistent-nav */
   @font-face {
