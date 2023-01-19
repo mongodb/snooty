@@ -3,10 +3,19 @@ const { siteMetadata } = require('./src/utils/site-metadata');
 
 const pathPrefix = generatePathPrefix(siteMetadata);
 
+// TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate components, add conditional for consistent-nav UnifiedNav in DefaultLayout
+const isFullBuild = siteMetadata.snootyEnv !== 'prd' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
+const layoutComponentRelativePath = `./src/layouts/${isFullBuild ? 'index' : `preview-layout`}.js`;
+
 module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
-    'gatsby-plugin-layout',
+    {
+      resolve: 'gatsby-plugin-layout',
+      options: {
+        component: require.resolve(layoutComponentRelativePath),
+      },
+    },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     {
