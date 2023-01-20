@@ -84,6 +84,7 @@
     "@mdb/flora": "^0.20.5",
     "@mdx-js/react": "^2.2.1",
     "adm-zip": "^0.5.9",
+    "babel-eslint": "^10.1.0",
     "bson": "^4.6.3",
     "buffer": "^6.0.3",
     "clipboard": "^2.0.8",
