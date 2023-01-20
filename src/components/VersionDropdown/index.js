@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
-import { navigate as reachNavigate } from '@reach/router';
+import { navigate as reachNavigate } from '@gatsbyjs/reach-router';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { getUrl } from '../../utils/url-utils';
