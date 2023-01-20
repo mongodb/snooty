@@ -152,7 +152,6 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   const [isLoading, setIsLoading] = useState(true);
   const [hasValidSpecUrl, setHasValidSpecUrl] = useState(true);
   const [src, setSrc] = useState(null);
-  const urlParams = isBrowser ? new URLSearchParams(window.location.search) : null;
   let specUrl, spec;
 
   // Attempt to fetch a spec from Realm
@@ -166,9 +165,12 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
   }, [argument, database, usesRealm]);
 
   useEffect(() => {
-    setSrc(urlParams?.get('src'));
-    setHasValidSpecUrl(!!src && isLinkInWhitelist(src));
-  }, [src, urlParams]);
+    if (isBrowser) {
+      const urlParams = URLSearchParams(window.location.search);
+      setSrc(urlParams?.get('src'));
+      setHasValidSpecUrl(!!src && isLinkInWhitelist(src));
+    }
+  }, [src]);
 
   // Use snooty openapi components, such as for docs-realm
   if (usesRST) {
