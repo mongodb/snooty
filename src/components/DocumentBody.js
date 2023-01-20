@@ -140,10 +140,10 @@ export default DocumentBody;
 export const Head = ({ pageContext }) => {
   const { slug, page } = pageContext;
   const pageNodes = getNestedValue(['children'], page) || [];
-  console.log(pageNodes);
+  // console.log(pageNodes);
   const meta = pageNodes.filter((c) => {
     const lookup = c.type === 'directive' ? c.name : c.type;
-    console.log('TYPE', lookup);
+    // console.log('TYPE', lookup);
     return lookup === 'meta';
   });
 
@@ -152,20 +152,19 @@ export const Head = ({ pageContext }) => {
     return lookup === 'twitter';
   });
   const metadata = useSnootyMetadata();
-  console.log('META', meta);
-  console.log('TWITTER', twitter);
+  // console.log('META', meta);
+  // console.log('TWITTER', twitter);
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
   const siteTitle = getNestedValue(['title'], metadata) || '';
+  if (meta.length > 0) {
+    console.log('META', meta);
+  }
   return (
     <>
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-      {meta.map((c) => (
-        <Meta {...c} />
-      ))}
-      {twitter.map((c) => (
-        <Twitter {...c} />
-      ))}
+      {meta.length > 0 && meta.map((c) => <Meta {...c} />)}
+      {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
     </>
   );
 };
