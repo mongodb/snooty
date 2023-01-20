@@ -1,10 +1,10 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import { baseUrl } from '../utils/base-url';
+import { Script } from 'gatsby';
 
 const CONTENT_MAX_WIDTH = 1440;
 
@@ -51,9 +51,9 @@ const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
-      <Helmet>
+      <>
         <title>MongoDB Documentation</title>
-        <script id="structured data" type="application/ld+json">
+        <Script id="structured data" type="application/ld+json">
           {JSON.stringify({
             '@context': 'http://schema.org',
             '@type': 'WebSite',
@@ -70,8 +70,8 @@ const Landing = ({ children }) => {
             author: 'MongoDB Documentation Team',
             inLanguage: 'English',
           })}
-        </script>
-      </Helmet>
+        </Script>
+      </>
       <div>
         <Wrapper>{children}</Wrapper>
       </div>

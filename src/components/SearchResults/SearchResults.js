@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Helmet } from 'react-helmet';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -317,9 +316,6 @@ const SearchResults = () => {
           setShowMobileFilters,
         }}
       >
-        <Helmet>
-          <title>Search Results</title>
-        </Helmet>
         {!!searchTerm ? (
           <SearchResultsContainer>
             <HeaderContainer>

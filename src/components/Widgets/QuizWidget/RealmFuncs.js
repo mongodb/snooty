@@ -1,5 +1,5 @@
 import { useCollection } from './hooks/useCollection';
-import { dataSourceName } from './realm-constants.json';
+import { dataSourceName } from './realm-constants';
 
 export function useRealmFuncs(dbName, collectionName) {
   const currentCollection = useCollection({
