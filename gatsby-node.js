@@ -244,14 +244,14 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
     plugins: [
       plugins.provide({
         Buffer: ['buffer', 'Buffer'],
-        process: 'process/browser',
+        // process: 'process/browser',
       }),
     ],
     resolve: {
       fallback: {
         stream: require.resolve('stream-browserify'),
         buffer: require.resolve('buffer/'),
-        process: require.resolve('process/browser'),
+        // process: require.resolve('process/browser'),
       },
     },
   });

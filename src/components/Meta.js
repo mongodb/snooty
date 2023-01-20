@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Meta = ({ nodeData: { options } }) => (
+const Meta = ({ options }) => (
   <>
     {Object.entries(options).map(([key, value]) => (
       <meta key={key} name={key} content={value} />
