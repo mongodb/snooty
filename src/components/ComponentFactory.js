@@ -43,7 +43,6 @@ import ListTable from './ListTable';
 import Literal from './Literal';
 import LiteralBlock from './LiteralBlock';
 import LiteralInclude from './LiteralInclude';
-import Meta from './Meta';
 import MongoWebShell from './MongoWebShell';
 import OpenAPI from './OpenAPI';
 import Paragraph from './Paragraph';
@@ -68,7 +67,7 @@ import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
-import Twitter from './Twitter';
+
 import VersionModified from './VersionModified';
 import Video from './Video';
 
@@ -168,7 +167,6 @@ const componentMap = {
   literal: Literal,
   literal_block: LiteralBlock,
   literalinclude: LiteralInclude,
-  meta: Meta,
   'mongo-web-shell': MongoWebShell,
   only: Cond,
   openapi: OpenAPI,
@@ -193,7 +191,7 @@ const componentMap = {
   title_reference: TitleReference,
   topic: Topic,
   transition: Transition,
-  twitter: Twitter,
+
   versionadded: VersionModified,
   versionchanged: VersionModified,
   video: Video,
