@@ -75,7 +75,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       });
     }
 
-    if (filename.endsWith('.txt')) {
+    if (
+      filename.endsWith('.txt') &&
+      (pageNode?.options?.template !== 'openapi' || filename.match(/openapi\/preview/))
+    ) {
       PAGES.push(key);
     }
   });
