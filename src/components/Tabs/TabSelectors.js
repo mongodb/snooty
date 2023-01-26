@@ -3,6 +3,7 @@ import { useTheme, css } from '@emotion/react';
 import Select from '../Select';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { theme } from '../../theme/docsTheme';
 import { TabContext } from './tab-context';
 
 const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
@@ -43,6 +44,16 @@ const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => 
         @media ${screenSize.smallAndUp} {
           /* Min width of right panel */
           max-width: 180px;
+        }
+
+        /* Override LG mobile style of enlarged mobile font */
+        @media ${screenSize.upToLarge} {
+          label,
+          p,
+          button,
+          span {
+            font-size: ${theme.fontSize.small};
+          }
         }
       `}
       choices={choices}
