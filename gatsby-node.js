@@ -76,7 +76,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       });
     }
 
-    if (filename.endsWith('.txt') && !isOpenApiCliPage(RESOLVED_REF_DOC_MAPPING[key], filename)) {
+    if (filename.endsWith('.txt') && !isOpenApiCliPage(filename, manifestMetadata)) {
       PAGES.push(key);
     }
   });
