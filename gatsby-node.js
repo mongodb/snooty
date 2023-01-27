@@ -8,7 +8,6 @@ const { getPageSlug } = require('./src/utils/get-page-slug');
 const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { isOpenApiCliPage } = require('./src/utils/is-openapi-cli-page');
 const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
 
 // different types of references
@@ -76,7 +75,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       });
     }
 
-    if (filename.endsWith('.txt') && !isOpenApiCliPage(filename, manifestMetadata)) {
+    if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       PAGES.push(key);
     }
   });
