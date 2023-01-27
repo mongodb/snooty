@@ -75,7 +75,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       });
     }
 
-    if (filename.endsWith('.txt')) {
+    if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       PAGES.push(key);
     }
   });
