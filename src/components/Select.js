@@ -1,5 +1,6 @@
 import React, { useRef, forwardRef, useEffect, useState } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
 import PropTypes from 'prop-types';
@@ -51,6 +52,7 @@ const Select = ({
 }) => {
   // show select after portal container has loaded for scroll + zindex consistency
   const portalContainer = useRef();
+  const { screenSize } = useTheme();
   const [showSelect, setShowSelect] = useState(false);
   useEffect(() => {
     if (portalContainer.current && !showSelect) {
@@ -77,6 +79,18 @@ const Select = ({
           onChange={(value) => {
             onChange({ value });
           }}
+          className={cx(css`
+            /* Override LG mobile style of enlarged mobile font */
+            @media ${screenSize.upToLarge} {
+              label,
+              p,
+              button,
+              div,
+              span {
+                font-size: ${theme.fontSize.small};
+              }
+            }
+          `)}
           {...props}
         >
           {choices.map((choice) => (
