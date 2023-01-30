@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from '../../src/theme/docsTheme';
 import Select from '../../src/components/Select';
 
 const DEFAULT_ATLAS_CHOICE = { text: 'MongoDB Atlas', value: 'atlas' };
@@ -22,14 +24,16 @@ const SelectController = ({
     setSelectValue(choice.value);
   };
   return (
-    <Select
-      choices={choices}
-      onChange={onChange}
-      defaultText={defaultText}
-      disabled={disabled}
-      label={label}
-      value={selectValue}
-    />
+    <ThemeProvider theme={theme}>
+      <Select
+        choices={choices}
+        onChange={onChange}
+        defaultText={defaultText}
+        disabled={disabled}
+        label={label}
+        value={selectValue}
+      />
+    </ThemeProvider>
   );
 };
 
@@ -119,6 +123,8 @@ describe('Select', () => {
     expect(wrapper.getByText(DEFAULT_CHOICES[0].text)).toBeTruthy();
   });
 
+  const Provider = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+
   it('should reset the form when null/empty string is passed as value', () => {
     const defaultText = 'Reset text';
     // Bypass SelectController so we can directly rerender with equivalent component + state
@@ -128,7 +134,8 @@ describe('Select', () => {
         choices={DEFAULT_CHOICES}
         onChange={() => {}}
         value={DEFAULT_CHOICES[0].value}
-      />
+      />,
+      { wrapper: Provider }
     );
     expect(wrapper.getByText(DEFAULT_CHOICES[0].text)).toBeTruthy();
     wrapper.rerender(<Select defaultText={defaultText} choices={DEFAULT_CHOICES} onChange={() => {}} value={''} />);

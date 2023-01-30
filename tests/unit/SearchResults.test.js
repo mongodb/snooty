@@ -5,11 +5,13 @@ import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@reach/router';
+import { ThemeProvider } from '@emotion/react';
 import { tick, setMobile } from '../utils';
 import SearchResults from '../../src/components/SearchResults';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as RealmUtil from '../../src/utils/realm';
 import mockInputData from '../utils/data/marian-manifests.json';
+import { theme } from '../../src/theme/docsTheme';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
@@ -110,6 +112,8 @@ const clearAllFilters = async (wrapper, screenSize) => {
   tick();
 };
 
+const Provider = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+
 describe('Search Results Page', () => {
   jest.useFakeTimers();
   mockStaticQuery();
@@ -125,21 +129,21 @@ describe('Search Results Page', () => {
 
   it('renders correctly without browser', () => {
     mockLocation(null);
-    const tree = render(<SearchResults />);
+    const tree = render(<SearchResults />, { wrapper: Provider });
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
   it('renders loading images before returning nonempty results', async () => {
     let renderLoadingSkeletonImgs;
     mockLocation('?q=stitch');
-    renderLoadingSkeletonImgs = render(<SearchResults />);
+    renderLoadingSkeletonImgs = render(<SearchResults />, { wrapper: Provider });
     expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
 
   it('renders loading images before returning no results', async () => {
     let renderLoadingSkeletonImgs;
     mockLocation('?q=noresultsreturned');
-    renderLoadingSkeletonImgs = render(<SearchResults />);
+    renderLoadingSkeletonImgs = render(<SearchResults />, { wrapper: Provider });
     expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
 
@@ -147,7 +151,7 @@ describe('Search Results Page', () => {
     let renderEmptyResults;
     mockLocation('?q=noresultsreturned');
     await act(async () => {
-      renderEmptyResults = render(<SearchResults />);
+      renderEmptyResults = render(<SearchResults />, { wrapper: Provider });
     });
     expect(renderEmptyResults.queryAllByText('No results found')).toBeTruthy();
   });
@@ -156,7 +160,7 @@ describe('Search Results Page', () => {
     let renderSearchLanding;
     mockLocation('');
     await act(async () => {
-      renderSearchLanding = render(<SearchResults />);
+      renderSearchLanding = render(<SearchResults />, { wrapper: Provider });
     });
     expect(renderSearchLanding.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
   });
@@ -165,7 +169,7 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = render(<SearchResults />, { wrapper: Provider });
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectUnfilteredSearchResultTags(renderStitchResults);
@@ -176,7 +180,7 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch&searchProperty=realm-master');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = render(<SearchResults />, { wrapper: Provider });
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectFilteredResults(renderStitchResults);
@@ -186,7 +190,7 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=realm');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = render(<SearchResults />, { wrapper: Provider });
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
@@ -196,7 +200,7 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = render(<SearchResults />, { wrapper: Provider });
     });
     expectUnfilteredResults(renderStitchResults);
 
@@ -212,7 +216,7 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = render(<SearchResults />, { wrapper: Provider });
     });
     expectUnfilteredResults(renderStitchResults);
 
@@ -234,7 +238,7 @@ describe('Search Results Page', () => {
     setMobile();
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = render(<SearchResults />, { wrapper: Provider });
     });
     expectUnfilteredResults(renderStitchResults);
 
@@ -273,7 +277,7 @@ describe('Search Results Page', () => {
     setMobile();
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = render(<SearchResults />, { wrapper: Provider });
     });
     expectUnfilteredResults(renderStitchResults);
 
