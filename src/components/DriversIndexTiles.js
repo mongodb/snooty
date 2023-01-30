@@ -35,7 +35,7 @@ const tiles = [
     icon: <IconCpp />,
   },
   {
-    slug: '${baseUrl()}drivers/csharp/current/',
+    slug: `${baseUrl()}drivers/csharp/current/`,
     title: 'C#',
     icon: <IconCsharp />,
   },
