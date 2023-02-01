@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -8,6 +8,7 @@ import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
@@ -38,6 +39,12 @@ const wrapperStyle = LeafyCSS`
     flex: 1 1 auto;
   }
 `;
+
+const overwriteLinkStyle = LeafyCSS`
+  span {
+    display: flex;
+  }
+`;
 /**
  *
  * @param {hasVersions} boolean
@@ -53,9 +60,10 @@ const Wrapper = ({ children, hasVersions }) => {
  */
 const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) => {
   const { title, slug, url, children, options = {} } = node;
-  const target = slug || url;
+  const { activeVersions } = useContext(VersionContext);
+  const target = options.urls?.[activeVersions[options.project]] || slug || url;
   const hasChildren = !!children?.length;
-  const hasVersions = !!(options?.versions?.length > 1); // in the event there is only one version, do we show version selector?
+  const hasVersions = !!(options?.versions?.length > 0); // in the event there is only one version, do we show version selector?
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && options.drawer);
@@ -107,10 +115,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           as={Link}
           to={target}
           active={isSelected}
-          className={cx(sideNavItemTOCStyling({ level }))}
+          className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
           onClick={(e) => {
             setIsOpen(!isOpen);
           }}
+          hideExternalIcon={true}
         >
           {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />}
           {isTocIcon && <SyncCloud />}

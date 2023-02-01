@@ -45,6 +45,9 @@ const VersionSelector = ({ versionedProject = '' }) => {
   // ie. on atlas-cli  v1.3 , switch to v1.0 -> should update link (what if link is 404)
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
 
+  // TODO: get versions as a prop, not from version context.
+  // version context shows available versions, but specific associated versions may be different
+
   const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject]));
 
   useEffect(() => {
