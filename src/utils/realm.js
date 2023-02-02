@@ -5,15 +5,23 @@ const config = {
   id: SNOOTY_STITCH_ID,
 };
 const app = new Realm.App(config);
+let loginDefer;
 
-const loginAnonymous = async () => {
-  const credentials = Realm.Credentials.anonymous();
-  try {
-    const user = await app.logIn(credentials);
-    return user;
-  } catch (err) {
-    console.error('Failed to log in', err);
+const loginAnonymous = () => {
+  if (loginDefer) {
+    return loginDefer;
   }
+  loginDefer = new Promise(async (res, rej) => {
+    try {
+      const credentials = Realm.Credentials.anonymous();
+      const user = await app.logIn(credentials);
+      res(user);
+    } catch (err) {
+      console.error('Failed to log in', err);
+      rej(err);
+    }
+  });
+  return loginDefer;
 };
 
 const fetchData = async (funcName, ...argsList) => {
