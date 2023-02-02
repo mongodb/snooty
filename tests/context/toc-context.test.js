@@ -33,10 +33,12 @@ const setResponse = () => {
       },
       {
         title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample page3' }],
-        slug: 'sample-page3',
         options: {
           versions: ['v1.0'],
           project: 'atlas-cli',
+          urls: {
+            'v1.0': 'sample-page3-v1.0',
+          },
         },
         children: [
           {
@@ -56,6 +58,11 @@ const setResponse = () => {
   responseTree.children[responseTree.children.length - 1].options = {
     versions: ['v1.0', 'v1.2', 'v0.8'],
     project: 'atlas-cli',
+    urls: {
+      'v1.0': 'sample-page3-v1.0',
+      'v1.2': 'sample-page3-v1.2',
+      'v0.8': 'sample-page3-v0.8',
+    },
   };
   responseTree.children[responseTree.children.length - 1].children.push({
     title: [{ type: 'text', position: { start: { line: 1 } }, value: 'sample child v1.2' }],
@@ -73,9 +80,11 @@ const setResponse = () => {
     },
   });
 
-  mockedResponse = {
-    toctree: responseTree,
-  };
+  mockedResponse = [
+    {
+      toctree: responseTree,
+    },
+  ];
 };
 
 const setMocks = () => {
