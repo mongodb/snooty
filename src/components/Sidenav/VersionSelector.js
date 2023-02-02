@@ -11,8 +11,8 @@ const buildChoice = (branch) => {
   };
 };
 
-const buildChoices = (branches) => {
-  return !branches ? [] : branches.map(buildChoice);
+const buildChoices = (branches, tocVersionNames) => {
+  return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
 };
 
 const StyledSelect = styled(Select)`
@@ -39,20 +39,13 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const VersionSelector = ({ versionedProject = '' }) => {
-  // verify if this version selector is for current product
-  // determines if we should use reach router or not
-  // ie. on atlas-cli  v1.3 , switch to v1.0 -> should update link (what if link is 404)
+const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-
-  // TODO: get versions as a prop, not from version context.
-  // version context shows available versions, but specific associated versions may be different
-
-  const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject]));
+  const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject], tocVersionNames));
 
   useEffect(() => {
-    setOptions(buildChoices(availableVersions[versionedProject]));
-  }, [availableVersions, versionedProject]);
+    setOptions(buildChoices(availableVersions[versionedProject], tocVersionNames));
+  }, [availableVersions, tocVersionNames, versionedProject]);
 
   const onChange = useCallback(
     ({ value }) => {

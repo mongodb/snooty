@@ -125,7 +125,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
-        {hasVersions && <VersionSelector versionedProject={options.project} />}
+        {hasVersions && <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />}
       </Wrapper>
     );
   };
