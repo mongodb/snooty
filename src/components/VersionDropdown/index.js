@@ -17,6 +17,14 @@ const StyledSelect = styled(Select)`
   button {
     z-index: 2;
   }
+
+  /* Override LG mobile style of enlarged mobile font */
+  @media ${theme.screenSize.upToLarge} {
+    div,
+    span {
+      font-size: ${theme.fontSize.small};
+    }
+  }
 `;
 
 // Returns true if there are any inactive (EOL'd/'legacy') branches

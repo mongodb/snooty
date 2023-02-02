@@ -21,6 +21,16 @@ exports[`Select renders select correctly 1`] = `
   margin-top: 3px;
 }
 
+@media only screen and (max-width: 1024px) {
+  .emotion-1 label,
+  .emotion-1 p,
+  .emotion-1 button,
+  .emotion-1 div,
+  .emotion-1 span {
+    font-size: 13px;
+  }
+}
+
 .emotion-2 {
   -webkit-appearance: none;
   -moz-appearance: none;

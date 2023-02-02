@@ -40,7 +40,7 @@ const breakpoints = {
   xSmall: 320,
   small: 480,
   medium: 767,
-  large: 1023,
+  large: 1024,
   xLarge: 1200,
   xxLarge: 1440,
   xxxLarge: 1920,
