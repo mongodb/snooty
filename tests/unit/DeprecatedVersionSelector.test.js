@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from '../../src/theme/docsTheme';
 import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
 
 const deprecatedVersions = {
@@ -16,13 +14,11 @@ const metadata = {
   deprecated_versions: deprecatedVersions,
 };
 
-const Provider = ({ children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-
 describe('DeprecatedVersionSelector when rendered', () => {
   jest.useFakeTimers();
 
   it('shows two dropdowns', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
     const productDropdown = wrapper.queryAllByText('Select a Product');
     const versionDropdown = wrapper.queryAllByText('Select a Version');
 
@@ -31,7 +27,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   });
 
   it('shows a disabled submit button', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
     const button = wrapper.getByTitle('View Documentation');
     expect(button).toBeTruthy();
@@ -39,12 +35,12 @@ describe('DeprecatedVersionSelector when rendered', () => {
   });
 
   it('shows a disabled version selector', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
     expect(wrapper.container.querySelectorAll('button')[1]).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('does not show either dropdown menu', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
     expect(wrapper.queryAllByText('mms')).toHaveLength(0);
     expect(wrapper.queryAllByText(deprecatedVersions.mms[0])).toHaveLength(0);
@@ -53,7 +49,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   // Test product dropdown
   describe('when the product button is clicked', () => {
     it('shows the dropdown menu with elements per metadata node', () => {
-      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
@@ -64,7 +60,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
     });
 
     it('version dropdown text is correct', () => {
-      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
@@ -74,7 +70,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
 
   describe('when the product button is clicked again', () => {
     it('hides the dropdown menu', () => {
-      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
@@ -93,7 +89,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
         'https://www.mongodb.com/docs/atlas-open-service-broker/',
       ],
     ])('generates the correct docs URL', (product, versionSelection, expectedUrl) => {
-      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />, { wrapper: Provider });
+      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
       userEvent.click(wrapper.getByText(product));

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
-import { useTheme } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
 import { navigate as reachNavigate } from '@reach/router';
@@ -17,6 +16,14 @@ const StyledSelect = styled(Select)`
   ${'' /* Render version dropdown text in front of the Sidebar text */}
   button {
     z-index: 2;
+  }
+
+  /* Override LG mobile style of enlarged mobile font */
+  @media ${theme.screenSize.upToLarge} {
+    div,
+    span {
+      font-size: ${theme.fontSize.small};
+    }
   }
 `;
 
@@ -90,7 +97,6 @@ const createOption = (branch) => {
 };
 
 const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, slug, eol }) => {
-  const { screenSize } = useTheme();
   const siteMetadata = useSiteMetadata();
   const { parserBranch, project } = siteMetadata;
 
@@ -138,18 +144,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
   return (
     <StyledSelect
       allowDeselect={false}
-      className={cx(
-        eol ? eolVersionFlipperStyle : '',
-        LeafyCSS`
-        /* Override LG mobile style of enlarged mobile font */
-        @media ${screenSize.upToLarge} {
-          div,
-          span {
-            font-size: ${theme.fontSize.small};
-          }
-        }
-      `
-      )}
+      className={cx(eol ? eolVersionFlipperStyle : '')}
       aria-labelledby="View a different version of documentation."
       defaultValue="master"
       onChange={navigate}
