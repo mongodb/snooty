@@ -152,14 +152,11 @@ export const Head = ({ pageContext }) => {
     return lookup === 'twitter';
   });
   const metadata = useSnootyMetadata();
-  // console.log('META', meta);
-  // console.log('TWITTER', twitter);
+
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
   const siteTitle = getNestedValue(['title'], metadata) || '';
-  if (meta.length > 0) {
-    console.log('META', meta);
-  }
+
   return (
     <>
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />

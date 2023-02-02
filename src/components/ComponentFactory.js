@@ -92,6 +92,7 @@ const IGNORED_NAMES = new Set([
   'tabs-pillstrip',
   'tabs-selector',
   'toctree',
+  'meta',
 ]);
 const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);

@@ -234,19 +234,21 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
       },
     });
   }
+
+  const providePlugins = {
+    Buffer: ['buffer', 'Buffer'],
+  };
+
+  const fallbacks = { stream: require.resolve('stream-browserify'), buffer: require.resolve('buffer/') };
+
+  if (stage === 'develop-html' || stage === 'develop') {
+    providePlugins.process = 'process/browser';
+    fallbacks.process = require.resolve('process/browser');
+  }
   actions.setWebpackConfig({
-    plugins: [
-      plugins.provide({
-        Buffer: ['buffer', 'Buffer'],
-        // process: 'process/browser',
-      }),
-    ],
+    plugins: [plugins.provide(providePlugins)],
     resolve: {
-      fallback: {
-        stream: require.resolve('stream-browserify'),
-        buffer: require.resolve('buffer/'),
-        // process: require.resolve('process/browser'),
-      },
+      fallback: fallbacks,
     },
   });
 };

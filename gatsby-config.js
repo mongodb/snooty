@@ -3,6 +3,8 @@ const { siteMetadata } = require('./src/utils/site-metadata');
 
 const pathPrefix = generatePathPrefix(siteMetadata);
 
+console.log('PATH PREFIX', pathPrefix);
+
 module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
