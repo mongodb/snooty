@@ -30,7 +30,7 @@ const TocContextProvider = ({ children }) => {
         sort: { build_id: -1 },
       };
 
-      if (associatedProducts.length || showVersionDropdown) {
+      if (associatedProducts?.length || showVersionDropdown) {
         filter['is_merged_toc'] = true;
       }
       let db = database;
@@ -42,7 +42,7 @@ const TocContextProvider = ({ children }) => {
       return toctree;
     }
     // below dependents are server constants
-  }, [project, parserBranch, associatedProducts.length, showVersionDropdown, database, toctree]);
+  }, [project, parserBranch, associatedProducts, showVersionDropdown, database, toctree]);
 
   const getFilteredToc = useCallback(() => {
     // filter remoteToc by activeVersions and return a copy
@@ -71,7 +71,7 @@ const TocContextProvider = ({ children }) => {
         }
       }
 
-      if (clonedNode.children.length) {
+      if (clonedNode.children?.length) {
         clonedToc.children.push(clonedNode);
       }
     }
