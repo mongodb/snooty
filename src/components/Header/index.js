@@ -18,8 +18,13 @@ const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
 
   let searchProperty;
+  const searchParams = [];
   if (isBrowser) {
-    searchProperty = new URL(window.location).searchParams.get('searchProperty');
+    const { searchParams, pathname } = new URL(window.location);
+    searchProperty = searchParams.get('searchProperty');
+
+    const paths = pathname.split('/').filter((s) => !!s && s !== 'docs');
+    searchParams.push({ name: paths[paths.length - 1] });
   }
 
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
@@ -29,7 +34,7 @@ const Header = ({ sidenav, eol }) => {
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} />}
+        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty, searchParams }} />}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
