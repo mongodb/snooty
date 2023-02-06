@@ -21,18 +21,18 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
 
   const getTocMetadata = useCallback(async () => {
     try {
-      let filter = {
+      const filter = {
         project: `${project}`,
         branch: parserBranch,
       };
-      let findOptions = {
+      const findOptions = {
         sort: { build_id: -1 },
       };
 
       if (associatedProducts?.length || showVersionDropdown) {
         filter['is_merged_toc'] = true;
       }
-      let db = database;
+      const db = database;
       const metadata = await fetchDocuments(db, METADATA_COLLECTION, filter, undefined, findOptions);
       return metadata[0]?.toctree ?? toctree;
     } catch (e) {

@@ -197,7 +197,7 @@ exports.createPages = async ({ actions }) => {
   }
 
   // get remote metadata for updated ToC in Atlas
-  let metadata;
+  let metadata = siteMetadata;
   try {
     const filter = {
       project: manifestMetadata.project,
