@@ -23,13 +23,16 @@ const Header = ({ sidenav, eol }) => {
     const { searchParams, pathname } = new URL(window.location);
     searchProperty = searchParams.get('searchProperty');
 
-    const paths = pathname.split('/').filter((s) => !!s && s !== 'docs');
-    searchParams.push({ name: paths[paths.length - 1] });
+    // when splitting path name, we get empty strings, so we want to filter those out
+    // we also don't want to include 'docs' or 'realm' in the searchParams
+    // 'docs' is implicit, and realm is already accounted for in the searchProperty
+    const paths = pathname.split('/').filter((s) => !!s && s !== 'docs' && s !== 'realm');
+
+    paths.forEach((pathTerm) => searchParams.push({ value: pathTerm }));
   }
 
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
-
   return (
     <StyledHeaderContainer>
       <SiteBanner />
