@@ -41,7 +41,7 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
       return remoteMetadata?.toctree || toctree;
     }
     // below dependents are server constants
-  }, [project, parserBranch, associatedProducts.length, showVersionDropdown, database, toctree, remoteMetadata.toctree]);
+  }, [project, parserBranch, associatedProducts, showVersionDropdown, database, toctree, remoteMetadata.toctree]);
 
   const getFilteredToc = useCallback(() => {
     // filter remoteToc by activeVersions and return a copy
