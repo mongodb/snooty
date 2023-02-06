@@ -25,7 +25,7 @@ const Header = ({ sidenav, eol }) => {
 
     // when splitting path name, we get empty strings, so we want to filter those out
     // we also don't want to include 'docs' or 'realm' in the searchParams
-    // 'docs' is implicit, and realm is already accounted for in the searchProperty
+    // docs and realm are already accounted for in the searchProperty
     const paths = pathname.split('/').filter((s) => !!s && s !== 'docs' && s !== 'realm');
 
     paths.forEach((pathTerm) => searchParams.push({ value: pathTerm }));
