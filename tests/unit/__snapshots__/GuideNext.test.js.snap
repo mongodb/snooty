@@ -8,7 +8,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   padding-top: 56px;
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-0 {
     -webkit-align-items: center;
     -webkit-box-align: center;
@@ -26,7 +26,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   margin-top: 8px;
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-2 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
@@ -215,7 +215,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   }
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-12 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
@@ -481,7 +481,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   padding-top: 56px;
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-0 {
     -webkit-align-items: center;
     -webkit-box-align: center;
@@ -499,7 +499,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   margin-top: 8px;
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-2 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
@@ -683,7 +683,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   }
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-12 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
@@ -895,7 +895,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   padding-top: 56px;
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-0 {
     -webkit-align-items: center;
     -webkit-box-align: center;
@@ -913,7 +913,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   margin-top: 8px;
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-2 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
@@ -1097,7 +1097,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   }
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-12 {
     -webkit-flex-basis: 0;
     -ms-flex-preferred-size: 0;
