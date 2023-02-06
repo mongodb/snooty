@@ -12,13 +12,12 @@ const TocContext = createContext({
 
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
-const TocContextProvider = ({ children }) => {
+const TocContextProvider = ({ children, remoteMetadata }) => {
   const { activeVersions, setActiveVersions, showVersionDropdown } = useContext(VersionContext);
   const { toctree, associated_products: associatedProducts } = useSnootyMetadata();
   const { database, project, parserBranch } = useSiteMetadata();
   const [remoteToc, setRemoteToc] = useState();
-  const [activeToc, setActiveToc] = useState(toctree);
-  //
+  const [activeToc, setActiveToc] = useState(remoteMetadata?.toctree || toctree);
 
   const getTocMetadata = useCallback(async () => {
     try {
@@ -39,10 +38,10 @@ const TocContextProvider = ({ children }) => {
     } catch (e) {
       // fallback to toctree from build time
       console.error(e);
-      return toctree;
+      return remoteMetadata?.toctree || toctree;
     }
     // below dependents are server constants
-  }, [project, parserBranch, associatedProducts, showVersionDropdown, database, toctree]);
+  }, [project, parserBranch, associatedProducts.length, showVersionDropdown, database, toctree, remoteMetadata.toctree]);
 
   const getFilteredToc = useCallback(() => {
     // filter remoteToc by activeVersions and return a copy
