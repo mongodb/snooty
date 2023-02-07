@@ -16,6 +16,7 @@ const RootProvider = ({
   repoBranches,
   associatedReposInfo,
   isAssociatedProduct,
+  remoteMetadata,
 }) => (
   <TabProvider selectors={selectors}>
     <ContentsProvider headingNodes={headingNodes}>
@@ -26,7 +27,7 @@ const RootProvider = ({
           associatedReposInfo={associatedReposInfo}
           isAssociatedProduct={isAssociatedProduct}
         >
-          <TocContextProvider>
+          <TocContextProvider remoteMetadata={remoteMetadata}>
             <NavigationProvider>
               <SidenavContextProvider>{children}</SidenavContextProvider>
             </NavigationProvider>

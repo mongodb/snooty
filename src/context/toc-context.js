@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { fetchDocument } from '../utils/realm';
+import { fetchDocuments } from '../utils/realm';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { VersionContext } from './version-context';
 
@@ -12,30 +12,36 @@ const TocContext = createContext({
 
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
-const TocContextProvider = ({ children }) => {
-  const { activeVersions, setActiveVersions } = useContext(VersionContext);
-  const { toctree } = useSnootyMetadata();
-  const { database, project } = useSiteMetadata();
+const TocContextProvider = ({ children, remoteMetadata }) => {
+  const { activeVersions, setActiveVersions, showVersionDropdown } = useContext(VersionContext);
+  const { toctree, associated_products: associatedProducts } = useSnootyMetadata();
+  const { database, project, parserBranch } = useSiteMetadata();
   const [remoteToc, setRemoteToc] = useState();
-  const [activeToc, setActiveToc] = useState(toctree);
+  const [activeToc, setActiveToc] = useState(remoteMetadata?.toctree || toctree);
 
   const getTocMetadata = useCallback(async () => {
     try {
-      // TODO: update metadata to have 'project' field. don't have to construct page_id
-      // NOTE: see snooty_dev.metadata for documents with 'project' field defined. input testing metadata
-      let filter = {
+      const filter = {
         project: `${project}`,
+        branch: parserBranch,
       };
-      let db = database;
-      const metadata = await fetchDocument(db, METADATA_COLLECTION, filter);
-      return metadata.toctree;
+      const findOptions = {
+        sort: { build_id: -1 },
+      };
+
+      if (associatedProducts?.length || showVersionDropdown) {
+        filter['is_merged_toc'] = true;
+      }
+      const db = database;
+      const metadata = await fetchDocuments(db, METADATA_COLLECTION, filter, undefined, findOptions);
+      return metadata[0]?.toctree ?? toctree;
     } catch (e) {
       // fallback to toctree from build time
       console.error(e);
-      return toctree;
+      return remoteMetadata?.toctree || toctree;
     }
     // below dependents are server constants
-  }, [database, project, toctree]);
+  }, [project, parserBranch, associatedProducts, showVersionDropdown, database, toctree, remoteMetadata]);
 
   const getFilteredToc = useCallback(() => {
     // filter remoteToc by activeVersions and return a copy
@@ -64,7 +70,7 @@ const TocContextProvider = ({ children }) => {
         }
       }
 
-      if (clonedNode.children.length) {
+      if (clonedNode.children?.length) {
         clonedToc.children.push(clonedNode);
       }
     }
