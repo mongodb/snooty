@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import * as reachRouter from '@gatsbyjs/reach-router';
+import { tick, setMobile } from '../utils';
 import SearchResults from '../../src/components/SearchResults';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as RealmUtil from '../../src/utils/realm';
