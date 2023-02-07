@@ -83,6 +83,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     setIsOpen(isActive);
   }, [isActive, isDrawer || hasChildren ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const onCaretClick = (event) => {
+    event.preventDefault();
+    setIsOpen(!isOpen);
+  };
+
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
     const formatTextOptions = {
@@ -111,7 +116,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
               setIsOpen(!isOpen);
             }}
           >
-            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />
+            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
             {isTocIcon && <SyncCloud />}
             {formattedTitle}
           </SideNavItem>
@@ -130,7 +135,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           }}
           hideExternalIcon={true}
         >
-          {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />}
+          {hasChildren && (
+            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+          )}
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
