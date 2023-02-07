@@ -50,8 +50,15 @@ const overwriteLinkStyle = LeafyCSS`
  * @param {hasVersions} boolean
  * @returns Wrapper for Version Selector, or returns children
  */
-const Wrapper = ({ children, hasVersions }) => {
-  return hasVersions ? <Box className={cx(wrapperStyle)}>{children}</Box> : <>{children}</>;
+const Wrapper = ({ children, hasVersions, project, versions }) => {
+  return hasVersions ? (
+    <Box className={cx(wrapperStyle)}>
+      {children}
+      {hasVersions && <VersionSelector versionedProject={project} tocVersionNames={versions} />}
+    </Box>
+  ) : (
+    <>{children}</>
+  );
 };
 
 /**
@@ -66,7 +73,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const hasVersions = !!(options?.versions?.length > 0); // in the event there is only one version, do we show version selector?
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
-  const isDrawer = !!(options && options.drawer);
+  const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: can
   const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
 
@@ -97,20 +104,22 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
 
     if (isDrawer && hasChildren) {
       return (
-        <SideNavItem
-          className={cx(sideNavItemTOCStyling({ level }))}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />
-          {isTocIcon && <SyncCloud />}
-          {formattedTitle}
-        </SideNavItem>
+        <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
+          <SideNavItem
+            className={cx(sideNavItemTOCStyling({ level }))}
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />
+            {isTocIcon && <SyncCloud />}
+            {formattedTitle}
+          </SideNavItem>
+        </Wrapper>
       );
     }
     return (
-      <Wrapper hasVersions={hasVersions}>
+      <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
         <SideNavItem
           as={Link}
           to={target}
@@ -125,7 +134,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
-        {hasVersions && <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />}
       </Wrapper>
     );
   };
