@@ -70,7 +70,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const { activeVersions } = useContext(VersionContext);
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
   const hasChildren = !!children?.length;
-  const hasVersions = !!(options?.versions?.length > 0); // in the event there is only one version, do we show version selector?
+  const hasVersions = !!(options?.versions?.length > 1);
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
