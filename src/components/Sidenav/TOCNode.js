@@ -73,7 +73,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   const hasVersions = !!(options?.versions?.length > 0); // in the event there is only one version, do we show version selector?
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
-  const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: can
+  const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
   const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
 
