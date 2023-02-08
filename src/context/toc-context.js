@@ -70,9 +70,7 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
         }
       }
 
-      if (clonedNode.children?.length) {
-        clonedToc.children.push(clonedNode);
-      }
+      clonedToc.children.push(clonedNode);
     }
     return clonedToc;
   }, [activeVersions, remoteToc]);
