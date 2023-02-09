@@ -17,26 +17,26 @@ const StyledHeaderContainer = styled.header`
 const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
   const { activeVersions } = useContext(VersionContext);
-  const version = `${project}-${activeVersions[project]}`;
+  const projectManifest = `${project}-${activeVersions[project]}`;
 
   let searchProperty;
   if (isBrowser) {
     const { searchParams } = new URL(window.location);
     searchProperty = searchParams.get('searchProperty');
   }
-  debugger;
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
+
+  const searchParams = [];
+
+  if (project.includes('drivers')) {
+    searchParams.push({ param: 'searchProperty', value: projectManifest });
+  }
   return (
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        {!eol && (
-          <UnifiedNav
-            position="relative"
-            property={{ name: unifiedNavProperty, searchParams: [{ param: 'searchProperty', value: version }] }}
-          />
-        )}
+        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty, searchParams }} />}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
