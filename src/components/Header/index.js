@@ -32,6 +32,7 @@ const Header = ({ sidenav, eol }) => {
   if (project.includes('drivers')) {
     searchParams.push({ param: 'searchProperty', value: projectManifest });
   }
+
   return (
     <StyledHeaderContainer>
       <SiteBanner />
