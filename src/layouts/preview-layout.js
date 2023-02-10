@@ -178,7 +178,7 @@ const DefaultLayout = ({
         isAssociatedProduct={isAssociatedProduct}
       >
         <GlobalGrid>
-          <PreviewHeader sidenav={sidenav} eol={eol} />
+          <PreviewHeader sidenav={sidenav} />
           {sidenav && (
             <Sidenav
               chapters={chapters}
