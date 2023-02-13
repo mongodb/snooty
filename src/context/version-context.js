@@ -3,6 +3,7 @@ import { navigate } from '@reach/router';
 import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
+import { useUmbrellaMetadata } from '../hooks/use-umbrella-metadata';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { fetchDocument, fetchDocuments } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
@@ -103,7 +104,7 @@ const VersionContext = createContext({
   onVersionSelect: () => {},
 });
 
-const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, slug, children }) => {
+const VersionContextProvider = ({ repoBranches, associatedReposInfo, slug, children }) => {
   const metadata = useSiteMetadata();
   const { associated_products: associatedProducts } = useSnootyMetadata();
   const mountRef = useRef(true);
@@ -137,7 +138,8 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [showVersionDropdown, setShowVersionDropdown] = useState(isAssociatedProduct);
+  const umbrellaMetadata = useUmbrellaMetadata();
+  const [showVersionDropdown, setShowVersionDropdown] = useState(Object.keys(umbrellaMetadata).length > 0);
   useEffect(() => {
     getUmbrellaProject(metadata.project, metadata.database).then((metadataList) => {
       if (!mountRef.current) {

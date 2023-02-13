@@ -19,6 +19,7 @@ let RESOLVED_REF_DOC_MAPPING = {};
 const assets = new Map();
 
 let db;
+let isAssociatedProduct;
 
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
@@ -130,6 +131,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
         'associated_products.name': siteMetadata.project,
         is_merged_toc: true,
       });
+      isAssociatedProduct = !!umbrellaMetadata;
     } catch (e) {
       console.log('No umbrella product found. Not an associated product.');
     }
@@ -151,8 +153,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
-  let repoBranches = null,
-    isAssociatedProduct = false;
+  let repoBranches = null;
   const associatedReposInfo = {};
   try {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
@@ -169,17 +170,6 @@ exports.createPages = async ({ actions }) => {
           });
         })
       );
-
-      // check if product is associated child product
-      try {
-        const umbrellaProduct = await db.stitchInterface.getMetadata({
-          'associated_products.name': siteMetadata.project,
-        });
-        isAssociatedProduct = !!umbrellaProduct;
-      } catch (e) {
-        console.log('No umbrella product found. Not an associated product.');
-        isAssociatedProduct = false;
-      }
     }
     let errMsg;
 
@@ -260,7 +250,6 @@ exports.createPages = async ({ actions }) => {
             repoBranches,
             associatedReposInfo,
             remoteMetadata: metadata,
-            isAssociatedProduct,
             template: pageNodes?.options?.template,
             page: pageNodes,
           },

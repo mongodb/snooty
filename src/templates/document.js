@@ -8,6 +8,7 @@ import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { useUmbrellaMetadata } from '../hooks/use-umbrella-metadata';
 import { getNestedValue } from '../utils/get-nested-value';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
@@ -28,9 +29,10 @@ const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
 `;
 
-const Document = ({ children, pageContext: { slug, page, repoBranches, isAssociatedProduct } }) => {
+const Document = ({ children, pageContext: { slug, page, repoBranches } }) => {
   const { project } = useSiteMetadata();
   const { parentPaths, slugToTitle, title, toctreeOrder } = useSnootyMetadata();
+  const { project: umbrellaProject } = useUmbrellaMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const isLanding = project === 'landing';
@@ -53,7 +55,7 @@ const Document = ({ children, pageContext: { slug, page, repoBranches, isAssocia
         </div>
       </StyledMainColumn>
       <StyledRightColumn>
-        {isAssociatedProduct && <AssociatedVersionSelector />}
+        {umbrellaProject && <AssociatedVersionSelector />}
         <TabSelectors />
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>

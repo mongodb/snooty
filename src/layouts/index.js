@@ -76,7 +76,7 @@ const GlobalGrid = styled('div')`
 
 const DefaultLayout = ({
   children,
-  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct, remoteMetadata },
+  pageContext: { page, slug, repoBranches, template, associatedReposInfo, remoteMetadata },
 }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
@@ -94,7 +94,6 @@ const DefaultLayout = ({
         associatedReposInfo={associatedReposInfo}
         headingNodes={page?.options?.headings}
         selectors={page?.options?.selectors}
-        isAssociatedProduct={isAssociatedProduct}
         remoteMetadata={remoteMetadata}
       >
         <GlobalGrid>

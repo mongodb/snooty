@@ -15,18 +15,12 @@ const RootProvider = ({
   slug,
   repoBranches,
   associatedReposInfo,
-  isAssociatedProduct,
   remoteMetadata,
 }) => (
   <TabProvider selectors={selectors}>
     <ContentsProvider headingNodes={headingNodes}>
       <HeaderContextProvider>
-        <VersionContextProvider
-          repoBranches={repoBranches}
-          slug={slug}
-          associatedReposInfo={associatedReposInfo}
-          isAssociatedProduct={isAssociatedProduct}
-        >
+        <VersionContextProvider repoBranches={repoBranches} slug={slug} associatedReposInfo={associatedReposInfo}>
           <TocContextProvider remoteMetadata={remoteMetadata}>
             <NavigationProvider>
               <SidenavContextProvider>{children}</SidenavContextProvider>
