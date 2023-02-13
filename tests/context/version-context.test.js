@@ -16,19 +16,15 @@ const setProjectAndAssociatedProducts = () => {
         project: project,
       },
     },
-    allSnootyMetadata: {
-      nodes: [
-        {
-          metadata: {
-            associated_products: [
-              {
-                name: 'atlas-cli',
-                versions: ['v1.1', 'v1.2', 'master'],
-              },
-            ],
+    snootyMetadata: {
+      metadata: {
+        associated_products: [
+          {
+            name: 'atlas-cli',
+            versions: ['v1.1', 'v1.2', 'master'],
           },
-        },
-      ],
+        ],
+      },
     },
   }));
 };
