@@ -12,6 +12,7 @@ import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { useUmbrellaMetadata } from '../../hooks/use-umbrella-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
@@ -217,7 +218,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />;
   }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree, activeToc]);
 
-  const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : siteTitle;
+  // TODO: update navTitle value here based on new useUmbrellaMetadata
+  const { title: umbrellaTitle } = useUmbrellaMetadata();
+  const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : umbrellaTitle || siteTitle;
 
   const guidesChapterNumber = useMemo(() => {
     if (!isGuidesTemplate) {

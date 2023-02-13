@@ -120,7 +120,32 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     },
     parent: null,
     metadata: metadataMinusStatic,
+    isRoot: true,
   });
+
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
+    let umbrellaMetadata;
+    try {
+      umbrellaMetadata = await db.stitchInterface.getMetadata({
+        'associated_products.name': siteMetadata.project,
+        is_merged_toc: true,
+      });
+    } catch (e) {
+      console.log('No umbrella product found. Not an associated product.');
+    }
+
+    createNode({
+      children: [],
+      id: createNodeId('umbrella'),
+      internal: {
+        contentDigest: createContentDigest(umbrellaMetadata),
+        type: 'SnootyMetadata',
+      },
+      parent: null,
+      metadata: umbrellaMetadata,
+      isUmbrella: true,
+    });
+  }
 };
 
 exports.createPages = async ({ actions }) => {
@@ -272,7 +297,9 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type SnootyMetadata implements Node @dontInfer {
-        metadata: JSON!
+      metadata: JSON!
+      isRoot: Boolean
+      isUmbrella: Boolean
     }
   `);
 };

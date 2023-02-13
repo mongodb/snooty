@@ -3,13 +3,11 @@ import { useStaticQuery, graphql } from 'gatsby';
 export default function useSnootyMetadata() {
   const data = useStaticQuery(graphql`
     query Metadata {
-      allSnootyMetadata {
-        nodes {
-          metadata
-        }
+      snootyMetadata(isRoot: { eq: true }) {
+        metadata
       }
     }
   `);
 
-  return data.allSnootyMetadata.nodes[0].metadata;
+  return data.snootyMetadata.metadata;
 }
