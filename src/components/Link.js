@@ -96,12 +96,14 @@ const Link = ({
   const shouldHideExternalIcon =
     !anchor && !(to.includes('www.mongodb.com/docs/') || to.match(/docs.*mongodb.com/)) ? false : true;
   const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
+  const target = hideExternalIcon ? '_self' : undefined;
 
   return (
     <LGLink
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
       hideExternalIcon={hideExternalIcon}
+      target={target}
       {...other}
     >
       {children}
