@@ -127,10 +127,15 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
     let umbrellaMetadata;
     try {
-      umbrellaMetadata = await db.stitchInterface.getMetadata({
-        'associated_products.name': siteMetadata.project,
-        is_merged_toc: true,
-      });
+      umbrellaMetadata = await db.stitchInterface.getMetadata(
+        {
+          'associated_products.name': siteMetadata.project,
+          is_merged_toc: true,
+        },
+        {
+          sort: { build_id: -1 },
+        }
+      );
       isAssociatedProduct = !!umbrellaMetadata;
     } catch (e) {
       console.log('No umbrella product found. Not an associated product.');
@@ -228,7 +233,6 @@ exports.createPages = async ({ actions }) => {
   } catch (e) {
     console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
     console.error(e);
-    metadata = siteMetadata;
   }
 
   return new Promise((resolve, reject) => {
