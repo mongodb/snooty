@@ -150,7 +150,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       <NodeLink />
       {isOpen &&
         children.map((c) => {
-          const key = c.slug || c.url;
+          const key = `${c?.options?.version || ''}-${c.slug || c.url}`;
           return (
             <TOCNode activeSection={activeSection} handleClick={handleClick} node={c} level={level + 1} key={key} />
           );
