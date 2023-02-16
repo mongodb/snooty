@@ -17,7 +17,6 @@ const StyledHeaderContainer = styled.header`
 const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
   const { activeVersions } = useContext(VersionContext);
-  const projectManifest = `${project}-${activeVersions[project]}`;
 
   let searchProperty;
   if (isBrowser) {
@@ -30,6 +29,8 @@ const Header = ({ sidenav, eol }) => {
   const searchParams = [];
 
   if (project.includes('drivers')) {
+    const projectManifest = `${project}-${activeVersions[project]}`;
+
     searchParams.push({ param: 'searchProperty', value: projectManifest });
   }
 
