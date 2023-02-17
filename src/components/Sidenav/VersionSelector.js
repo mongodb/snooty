@@ -31,6 +31,7 @@ const StyledSelect = styled(Select)`
     @media ${theme.screenSize.upToLarge} {
       width: max-content;
       max-width: calc(100vw - (${theme.size.medium} * 2));
+      // (max viewport width - padding) inferred from the max width of the side nav in mobile
     }
   }
 
