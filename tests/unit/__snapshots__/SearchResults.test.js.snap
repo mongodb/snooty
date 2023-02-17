@@ -443,11 +443,21 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-44 {
+  width: 175px;
+}
+
+.emotion-46 {
   position: relative;
 }
 
-.emotion-45 {
-  width: 175px;
+@media only screen and (max-width: 1024px) {
+  .emotion-46 label,
+  .emotion-46 p,
+  .emotion-46 button,
+  .emotion-46 div,
+  .emotion-46 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-47 {
@@ -1411,11 +1421,21 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-34 {
+  width: 175px;
+}
+
+.emotion-36 {
   position: relative;
 }
 
-.emotion-35 {
-  width: 175px;
+@media only screen and (max-width: 1024px) {
+  .emotion-36 label,
+  .emotion-36 p,
+  .emotion-36 button,
+  .emotion-36 div,
+  .emotion-36 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-37 {
@@ -4178,11 +4198,21 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-38 {
+  width: 175px;
+}
+
+.emotion-40 {
   position: relative;
 }
 
-.emotion-39 {
-  width: 175px;
+@media only screen and (max-width: 1024px) {
+  .emotion-40 label,
+  .emotion-40 p,
+  .emotion-40 button,
+  .emotion-40 div,
+  .emotion-40 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-41 {
