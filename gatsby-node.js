@@ -203,7 +203,7 @@ exports.createPages = async ({ actions }) => {
       project: manifestMetadata.project,
       branch: manifestMetadata.branch,
     };
-    if (isAssociatedProduct || manifestMetadata?.associated_products.length) {
+    if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
       filter['is_merged_toc'] = true;
     }
     const findOptions = {
