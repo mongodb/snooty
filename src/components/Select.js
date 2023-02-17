@@ -72,7 +72,7 @@ const Select = ({
   }, [showSelect]);
 
   return (
-    <PortalContainer className={className} ref={portalContainer}>
+    <PortalContainer className={`${className} ${cx(selectStyle)}`} ref={portalContainer}>
       {showSelect && (
         <LGSelect
           data-testid="lg-select"

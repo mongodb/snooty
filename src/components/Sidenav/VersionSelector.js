@@ -24,8 +24,15 @@ const StyledSelect = styled(Select)`
   }
 
   > div:nth-of-type(2) {
-    min-width: 150px;
-    width: max-content;
+    width: 150px;
+    right: 0px;
+    left: unset;
+
+    @media ${theme.screenSize.upToLarge} {
+      width: max-content;
+      max-width: calc(100vw - (${theme.size.medium} * 2));
+      // (max viewport width - padding) inferred from the max width of the side nav in mobile
+    }
   }
 
   button {
@@ -36,6 +43,13 @@ const StyledSelect = styled(Select)`
       }
     }
     z-index: 3;
+  }
+
+  span {
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 `;
 
