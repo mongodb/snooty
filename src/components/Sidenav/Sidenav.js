@@ -217,7 +217,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />;
   }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree, activeToc]);
 
-  const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : siteTitle;
+  const navTitle = isGuidesTemplate
+    ? guides?.[slug]?.['chapter_name']
+    : formatText(process.env.GATSBY_TEST_EMBED_VERSIONS === 'true' ? activeToc.title : toctree.title);
 
   const guidesChapterNumber = useMemo(() => {
     if (!isGuidesTemplate) {
