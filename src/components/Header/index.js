@@ -27,7 +27,7 @@ const Header = ({ sidenav, eol }) => {
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
-  const searchParams = [{ param: 'searchProperty', value: 'drivers-master' }];
+  const searchParams = [];
   if (driversSet.has(project)) {
     const projectManifest = `${project}-${activeVersions[project]}`;
 
