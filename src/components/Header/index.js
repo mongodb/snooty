@@ -17,7 +17,26 @@ const StyledHeaderContainer = styled.header`
 
 const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
-  const { activeVersions } = useContext(VersionContext);
+  const { activeVersions, availableVersions } = useContext(VersionContext);
+
+  const gitBranchName = activeVersions[project];
+  const { node } = availableVersions;
+
+  let version;
+
+  // For some branches, such as master, the gitBranchName in the MongoDB collection differs
+  // from the version selector label (e.g., node's master branch has a versionSelectorLabel of upcoming)
+  // the gitBranchName needs to be mapped from the gitBranchName to the versionSelectorName as the
+  // searchProperty field needs this value instead.
+  // we filter here to find the correct MongoDB entry that contains the corresponding gitBranchName and then
+  // pluck out the versionSelectorLabel
+  const currRepoBranch = node?.filter((repoBranch) => repoBranch.gitBranchName === gitBranchName);
+
+  if (!currRepoBranch || currRepoBranch.length === 0) {
+    console.warn(`WARNING: No corresponding repo branch found for given git branch ${gitBranchName}`);
+  } else {
+    version = currRepoBranch[0].versionSelectorLabel;
+  }
 
   let searchProperty;
   if (isBrowser) {
@@ -29,7 +48,7 @@ const Header = ({ sidenav, eol }) => {
 
   const searchParams = [];
   if (driversSet.has(project)) {
-    const projectManifest = `${project}-${activeVersions[project]}`;
+    const projectManifest = `${project}-${version}`;
 
     searchParams.push({ param: 'searchProperty', value: projectManifest });
   }
