@@ -7,6 +7,7 @@ import SiteBanner from '../Banner/SiteBanner';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import { VersionContext } from '../../context/version-context';
+import { driversSet } from '../../utils/drivers-set';
 const StyledHeaderContainer = styled.header`
   grid-area: header;
   position: sticky;
@@ -26,9 +27,8 @@ const Header = ({ sidenav, eol }) => {
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
-  const searchParams = [];
-
-  if (project.includes('drivers')) {
+  const searchParams = [{ param: 'searchProperty', value: 'drivers-master' }];
+  if (driversSet.has(project)) {
     const projectManifest = `${project}-${activeVersions[project]}`;
 
     searchParams.push({ param: 'searchProperty', value: projectManifest });
