@@ -5,15 +5,23 @@ const config = {
   id: SNOOTY_STITCH_ID,
 };
 const app = new Realm.App(config);
+let loginDefer;
 
-const loginAnonymous = async () => {
-  const credentials = Realm.Credentials.anonymous();
-  try {
-    const user = await app.logIn(credentials);
-    return user;
-  } catch (err) {
-    console.error('Failed to log in', err);
+const loginAnonymous = () => {
+  if (loginDefer) {
+    return loginDefer;
   }
+  loginDefer = new Promise(async (res, rej) => {
+    try {
+      const credentials = Realm.Credentials.anonymous();
+      const user = await app.logIn(credentials);
+      res(user);
+    } catch (err) {
+      console.error('Failed to log in', err);
+      rej(err);
+    }
+  });
+  return loginDefer;
 };
 
 const fetchData = async (funcName, ...argsList) => {
@@ -39,10 +47,10 @@ export const fetchOASFile = async (apiName, database) => {
   return fetchData('fetchOASFile', apiName, database);
 };
 
-export const fetchDocument = async (database, collectionName, query) => {
-  return fetchData('fetchDocument', database, collectionName, query);
+export const fetchDocument = async (database, collectionName, query, projections) => {
+  return fetchData('fetchDocument', database, collectionName, query, projections);
 };
 
-export const fetchDocuments = async (database, collectionName, query) => {
-  return fetchData('fetchDocuments', database, collectionName, query);
+export const fetchDocuments = async (database, collectionName, query, projections, options) => {
+  return fetchData('fetchDocuments', database, collectionName, query, projections, options);
 };

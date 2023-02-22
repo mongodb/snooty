@@ -6,6 +6,16 @@ exports[`Select renders select correctly 1`] = `
   position: relative;
 }
 
+@media only screen and (max-width: 1024px) {
+  .emotion-0 label,
+  .emotion-0 p,
+  .emotion-0 button,
+  .emotion-0 div,
+  .emotion-0 span {
+    font-size: 13px;
+  }
+}
+
 .emotion-1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -19,6 +29,16 @@ exports[`Select renders select correctly 1`] = `
 .emotion-1>label+button,
 .emotion-1>p+button {
   margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-1 label,
+  .emotion-1 p,
+  .emotion-1 button,
+  .emotion-1 div,
+  .emotion-1 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-2 {
@@ -191,7 +211,7 @@ exports[`Select renders select correctly 1`] = `
 }
 
 <div
-    class="emotion-0"
+    class="undefined emotion-0"
   >
     <div
       class="emotion-1"

@@ -443,11 +443,21 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-44 {
+  width: 175px;
+}
+
+.emotion-46 {
   position: relative;
 }
 
-.emotion-45 {
-  width: 175px;
+@media only screen and (max-width: 1024px) {
+  .emotion-46 label,
+  .emotion-46 p,
+  .emotion-46 button,
+  .emotion-46 div,
+  .emotion-46 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-47 {
@@ -463,6 +473,16 @@ exports[`Search Results Page considers a given search filter query param and dis
 .emotion-47>label+button,
 .emotion-47>p+button {
   margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-47 label,
+  .emotion-47 p,
+  .emotion-47 button,
+  .emotion-47 div,
+  .emotion-47 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-48 {
@@ -1401,11 +1421,21 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-34 {
+  width: 175px;
+}
+
+.emotion-36 {
   position: relative;
 }
 
-.emotion-35 {
-  width: 175px;
+@media only screen and (max-width: 1024px) {
+  .emotion-36 label,
+  .emotion-36 p,
+  .emotion-36 button,
+  .emotion-36 div,
+  .emotion-36 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-37 {
@@ -1421,6 +1451,16 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-37>label+button,
 .emotion-37>p+button {
   margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-37 label,
+  .emotion-37 p,
+  .emotion-37 button,
+  .emotion-37 div,
+  .emotion-37 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-38 {
@@ -4158,11 +4198,21 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-38 {
+  width: 175px;
+}
+
+.emotion-40 {
   position: relative;
 }
 
-.emotion-39 {
-  width: 175px;
+@media only screen and (max-width: 1024px) {
+  .emotion-40 label,
+  .emotion-40 p,
+  .emotion-40 button,
+  .emotion-40 div,
+  .emotion-40 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-41 {
@@ -4178,6 +4228,16 @@ exports[`Search Results Page renders results from a given search term query para
 .emotion-41>label+button,
 .emotion-41>p+button {
   margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-41 label,
+  .emotion-41 p,
+  .emotion-41 button,
+  .emotion-41 div,
+  .emotion-41 span {
+    font-size: 13px;
+  }
 }
 
 .emotion-42 {

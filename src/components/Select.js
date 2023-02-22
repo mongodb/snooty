@@ -18,6 +18,19 @@ const portalStyle = css`
   position: relative;
 `;
 
+/* Override LG mobile style of enlarged mobile font */
+const selectStyle = css`
+  @media ${theme.screenSize.upToLarge} {
+    label,
+    p,
+    button,
+    div,
+    span {
+      font-size: ${theme.fontSize.small};
+    }
+  }
+`;
+
 const optionStyling = css`
   align-items: center;
 
@@ -59,7 +72,7 @@ const Select = ({
   }, [showSelect]);
 
   return (
-    <PortalContainer className={className} ref={portalContainer}>
+    <PortalContainer className={`${className} ${cx(selectStyle)}`} ref={portalContainer}>
       {showSelect && (
         <LGSelect
           data-testid="lg-select"
@@ -77,6 +90,7 @@ const Select = ({
           onChange={(value) => {
             onChange({ value });
           }}
+          className={cx(selectStyle)}
           {...props}
         >
           {choices.map((choice) => (

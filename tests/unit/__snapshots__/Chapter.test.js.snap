@@ -31,7 +31,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-@media not all and (max-width: 1023px) {
+@media not all and (max-width: 1024px) {
   .emotion-0 {
     grid-column-gap: 40px;
     scroll-margin-top: 180px;

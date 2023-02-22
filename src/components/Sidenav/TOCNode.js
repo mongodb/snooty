@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -8,6 +8,7 @@ import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
@@ -38,13 +39,26 @@ const wrapperStyle = LeafyCSS`
     flex: 1 1 auto;
   }
 `;
+
+const overwriteLinkStyle = LeafyCSS`
+  span {
+    display: flex;
+  }
+`;
 /**
  *
  * @param {hasVersions} boolean
  * @returns Wrapper for Version Selector, or returns children
  */
-const Wrapper = ({ children, hasVersions }) => {
-  return hasVersions ? <Box className={cx(wrapperStyle)}>{children}</Box> : <>{children}</>;
+const Wrapper = ({ children, hasVersions, project, versions }) => {
+  return hasVersions ? (
+    <Box className={cx(wrapperStyle)}>
+      {children}
+      {hasVersions && <VersionSelector versionedProject={project} tocVersionNames={versions} />}
+    </Box>
+  ) : (
+    <>{children}</>
+  );
 };
 
 /**
@@ -53,12 +67,13 @@ const Wrapper = ({ children, hasVersions }) => {
  */
 const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) => {
   const { title, slug, url, children, options = {} } = node;
-  const target = slug || url;
+  const { activeVersions } = useContext(VersionContext);
+  const target = options.urls?.[activeVersions[options.project]] || slug || url;
   const hasChildren = !!children?.length;
-  const hasVersions = !!(options?.versions?.length > 1); // in the event there is only one version, do we show version selector?
+  const hasVersions = !!(options?.versions?.length > 1);
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
-  const isDrawer = !!(options && options.drawer);
+  const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
   const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
 
@@ -67,6 +82,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   useEffect(() => {
     setIsOpen(isActive);
   }, [isActive, isDrawer || hasChildren ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onCaretClick = (event) => {
+    event.preventDefault();
+    setIsOpen(!isOpen);
+  };
 
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
@@ -89,34 +109,38 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
 
     if (isDrawer && hasChildren) {
       return (
-        <SideNavItem
-          className={cx(sideNavItemTOCStyling({ level }))}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />
-          {isTocIcon && <SyncCloud />}
-          {formattedTitle}
-        </SideNavItem>
+        <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
+          <SideNavItem
+            className={cx(sideNavItemTOCStyling({ level }))}
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+            {isTocIcon && <SyncCloud />}
+            {formattedTitle}
+          </SideNavItem>
+        </Wrapper>
       );
     }
     return (
-      <Wrapper hasVersions={hasVersions}>
+      <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
         <SideNavItem
           as={Link}
           to={target}
           active={isSelected}
-          className={cx(sideNavItemTOCStyling({ level }))}
+          className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
           onClick={(e) => {
             setIsOpen(!isOpen);
           }}
+          hideExternalIcon={true}
         >
-          {hasChildren && <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} />}
+          {hasChildren && (
+            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+          )}
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
-        {hasVersions && <VersionSelector versionedProject={options.project} />}
       </Wrapper>
     );
   };
@@ -126,7 +150,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       <NodeLink />
       {isOpen &&
         children.map((c) => {
-          const key = c.slug || c.url;
+          const key = `${c?.options?.version || ''}-${c.slug || c.url}`;
           return (
             <TOCNode activeSection={activeSection} handleClick={handleClick} node={c} level={level + 1} key={key} />
           );
