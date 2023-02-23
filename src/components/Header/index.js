@@ -9,6 +9,7 @@ import { isBrowser } from '../../utils/is-browser';
 import { VersionContext } from '../../context/version-context';
 import { driversSet } from '../../utils/drivers-set';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+
 const StyledHeaderContainer = styled.header`
   grid-area: header;
   position: sticky;
