@@ -396,8 +396,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
         class="constant-classname emotion-8"
         data-leafygreen-ui="button"
         href="https://university.mongodb.com/certification/developer/about"
-        rel="noopener noreferrer"
-        target="_blank"
+        target="_self"
         type="button"
       >
         <span
