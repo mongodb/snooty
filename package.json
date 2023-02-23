@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.13.38",
+  "version": "0.13.39",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^14",
