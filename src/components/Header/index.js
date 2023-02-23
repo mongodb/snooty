@@ -8,6 +8,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import { VersionContext } from '../../context/version-context';
 import { driversSet } from '../../utils/drivers-set';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 const StyledHeaderContainer = styled.header`
   grid-area: header;
   position: sticky;
@@ -17,9 +18,8 @@ const StyledHeaderContainer = styled.header`
 
 const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
-  const { activeVersions, availableVersions } = useContext(VersionContext);
-
-  const gitBranchName = activeVersions[project];
+  const { availableVersions } = useContext(VersionContext);
+  const { branch } = useSnootyMetadata();
   const { node } = availableVersions;
 
   let version;
@@ -30,12 +30,12 @@ const Header = ({ sidenav, eol }) => {
   // searchProperty field needs this value instead.
   // we filter here to find the correct MongoDB entry that contains the corresponding gitBranchName and then
   // pluck out the versionSelectorLabel
-  const currRepoBranch = node?.filter((repoBranch) => repoBranch.gitBranchName === gitBranchName);
+  const currRepoBranch = node?.filter((repoBranch) => repoBranch.gitBranchName === branch);
 
   if (!currRepoBranch || currRepoBranch.length === 0) {
-    console.warn(`WARNING: No corresponding repo branch found for given git branch ${gitBranchName}`);
+    console.warn(`WARNING: No corresponding repo branch found for given git branch ${branch}`);
   } else {
-    version = currRepoBranch[0].versionSelectorLabel;
+    version = currRepoBranch[0].urlSlug;
   }
 
   let searchProperty;
