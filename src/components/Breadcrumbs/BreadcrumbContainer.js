@@ -46,7 +46,7 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
     <>
       {breadcrumbs.map(({ title, url }, index) => {
         const isFirst = index === 0;
-        const renderKey = typeof title === 'string' ? title : title[0].value;
+        const renderKey = typeof title === 'string' ? title : title[0]?.value; // could return undefined which is fine, we would still get a unique key
         return (
           <React.Fragment key={`${renderKey}-${index}`}>
             {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
