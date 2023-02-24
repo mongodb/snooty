@@ -46,8 +46,9 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
     <>
       {breadcrumbs.map(({ title, url }, index) => {
         const isFirst = index === 0;
+        const renderKey = typeof title === 'string' ? title : title[0].value;
         return (
-          <React.Fragment key={`${title}-${index}`}>
+          <React.Fragment key={`${renderKey}-${index}`}>
             {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
             <Link
               className={cx(linkStyling)}
