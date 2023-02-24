@@ -19,8 +19,9 @@ const StyledHeaderContainer = styled.header`
 
 const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
-  const { availableVersions } = useContext(VersionContext);
   const { branch } = useSnootyMetadata();
+  const { availableVersions } = useContext(VersionContext);
+
   const { node } = availableVersions;
 
   let version;
