@@ -11,8 +11,8 @@ const buildChoice = (branch) => {
   };
 };
 
-const buildChoices = (branches) => {
-  return !branches ? [] : branches.map(buildChoice);
+const buildChoices = (branches, tocVersionNames) => {
+  return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
 };
 
 const StyledSelect = styled(Select)`
@@ -24,8 +24,15 @@ const StyledSelect = styled(Select)`
   }
 
   > div:nth-of-type(2) {
-    min-width: 150px;
-    width: max-content;
+    width: 150px;
+    right: 0px;
+    left: unset;
+
+    @media ${theme.screenSize.upToLarge} {
+      width: max-content;
+      max-width: calc(100vw - (${theme.size.medium} * 2));
+      // (max viewport width - padding) inferred from the max width of the side nav in mobile
+    }
   }
 
   button {
@@ -37,19 +44,22 @@ const StyledSelect = styled(Select)`
     }
     z-index: 3;
   }
+
+  span {
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
 `;
 
-const VersionSelector = ({ versionedProject = '' }) => {
-  // verify if this version selector is for current product
-  // determines if we should use reach router or not
-  // ie. on atlas-cli  v1.3 , switch to v1.0 -> should update link (what if link is 404)
+const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-
-  const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject]));
+  const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject], tocVersionNames));
 
   useEffect(() => {
-    setOptions(buildChoices(availableVersions[versionedProject]));
-  }, [availableVersions, versionedProject]);
+    setOptions(buildChoices(availableVersions[versionedProject], tocVersionNames));
+  }, [availableVersions, tocVersionNames, versionedProject]);
 
   const onChange = useCallback(
     ({ value }) => {

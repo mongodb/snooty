@@ -196,6 +196,26 @@ exports.createPages = async ({ actions }) => {
     throw err;
   }
 
+  // get remote metadata for updated ToC in Atlas
+  let metadata = siteMetadata;
+  try {
+    const filter = {
+      project: manifestMetadata.project,
+      branch: manifestMetadata.branch,
+    };
+    if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
+      filter['is_merged_toc'] = true;
+    }
+    const findOptions = {
+      sort: { build_id: -1 },
+    };
+    metadata = await db.stitchInterface.getMetadata(filter, findOptions);
+  } catch (e) {
+    console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
+    console.error(e);
+    metadata = siteMetadata;
+  }
+
   return new Promise((resolve, reject) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
@@ -214,6 +234,7 @@ exports.createPages = async ({ actions }) => {
             slug,
             repoBranches,
             associatedReposInfo,
+            remoteMetadata: metadata,
             isAssociatedProduct,
             template: pageNodes?.options?.template,
             page: pageNodes,

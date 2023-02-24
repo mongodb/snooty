@@ -39,8 +39,14 @@ class StitchInterface {
     return this.stitchClient.callFunction('fetchDocuments', [DB, collection, buildFilter]);
   }
 
-  async getMetadata(buildFilter) {
-    return this.stitchClient.callFunction('fetchDocument', [DB, METADATA_COLLECTION, buildFilter]);
+  async getMetadata(buildFilter, findOptions) {
+    return this.stitchClient.callFunction('fetchDocument', [
+      DB,
+      METADATA_COLLECTION,
+      buildFilter,
+      undefined,
+      findOptions,
+    ]);
   }
 }
 

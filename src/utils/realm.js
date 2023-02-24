@@ -47,10 +47,10 @@ export const fetchOASFile = async (apiName, database) => {
   return fetchData('fetchOASFile', apiName, database);
 };
 
-export const fetchDocument = async (database, collectionName, query) => {
-  return fetchData('fetchDocument', database, collectionName, query);
+export const fetchDocument = async (database, collectionName, query, projections) => {
+  return fetchData('fetchDocument', database, collectionName, query, projections);
 };
 
-export const fetchDocuments = async (database, collectionName, query) => {
-  return fetchData('fetchDocuments', database, collectionName, query);
+export const fetchDocuments = async (database, collectionName, query, projections, options) => {
+  return fetchData('fetchDocuments', database, collectionName, query, projections, options);
 };

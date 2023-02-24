@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
+import { theme } from '../../theme/docsTheme';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
@@ -13,9 +14,23 @@ const StyledHeaderContainer = styled.header`
 
 const StyledUnifiedNavPlaceholder = styled.nav`
   width: 100%;
-  height: 88px;
+  height: ${theme.header.navbarHeight};
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid #b8c4c2;
   background-color: white;
+
+  @media ${theme.screenSize.upToLarge} {
+    height: ${theme.header.navbarMobileHeight};
+  }
+`;
+
+const StyledStagingWarning = styled.p`
+  margin: 0 20px;
+
+  @media ${theme.screenSize.upToLarge} {
+    font-size: ${theme.fontSize.small};
+  }
 `;
 
 const Header = ({ sidenav }) => {
@@ -23,7 +38,9 @@ const Header = ({ sidenav }) => {
     <StyledHeaderContainer>
       <SiteBanner />
       <>
-        <StyledUnifiedNavPlaceholder />
+        <StyledUnifiedNavPlaceholder>
+          <StyledStagingWarning>This is a staging build.</StyledStagingWarning>
+        </StyledUnifiedNavPlaceholder>
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
@@ -32,7 +49,6 @@ const Header = ({ sidenav }) => {
 
 Header.propTypes = {
   sidenav: PropTypes.bool,
-  eol: PropTypes.bool.isRequired,
 };
 
 export default Header;
