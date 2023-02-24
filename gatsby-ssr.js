@@ -3,7 +3,6 @@ import { ThemeProvider } from '@emotion/react';
 import { renderStylesToString } from '@leafygreen-ui/emotion';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { renderToString } from 'react-dom/server';
-import { Helmet } from 'react-helmet';
 import { theme } from './src/theme/docsTheme';
 
 export const onRenderBody = ({ setHeadComponents }) => {
@@ -26,12 +25,6 @@ export const onRenderBody = ({ setHeadComponents }) => {
         __html: `!function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var l=t.getElementsByTagName("script")[0];l.parentNode.insertBefore(o,l)}}(window,document,"Dk30CC86ba0nATlK","delighted");`,
       }}
     />,
-    // Set meta on SSR here.
-    // Add dynamic meta, required on page render.
-    // React Helmet will override with any nested/latter tags from SSR'ed components.
-    <Helmet>
-      <meta name="robots" content="index"></meta>
-    </Helmet>,
   ]);
 };
 
