@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { UnifiedNav } from '@mdb/consistent-nav';
@@ -6,9 +6,7 @@ import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
-import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import SearchContext from '../Searchbar/SearchContext';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
@@ -30,9 +28,13 @@ const Header = ({ sidenav, eol }) => {
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
   const searchParams = [];
-  const projectManifest = `${project}-${branch}`;
+  console.log(project);
 
-  searchParams.push({ param: 'searchProperty', value: projectManifest });
+  if (project !== 'landing') {
+    const projectManifest = `${project}-${branch}`;
+
+    searchParams.push({ param: 'searchProperty', value: projectManifest });
+  }
 
   return (
     <StyledHeaderContainer>
