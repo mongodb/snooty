@@ -56,7 +56,7 @@ const linkStyling = ({ depth, isActive }) => css`
 const ContentsListItem = ({ children, depth = 0, id, isActive = false }) => {
   return (
     <li className={listItemStyling({ isActive })}>
-      <Link className={linkStyling({ depth, isActive })} to={`#${id}`} depth={depth}>
+      <Link className={linkStyling({ depth, isActive })} to={`#${id}`} depth={depth} isActive={isActive}>
         {children}
       </Link>
     </li>
