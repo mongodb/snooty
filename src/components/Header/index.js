@@ -7,6 +7,7 @@ import SiteBanner from '../Banner/SiteBanner';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { useMarianManifests } from '../../hooks/use-marian-manifests';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
@@ -18,6 +19,7 @@ const StyledHeaderContainer = styled.header`
 const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
   const { branch } = useSnootyMetadata();
+  const { searchPropertyMapping } = useMarianManifests();
 
   let searchProperty;
   if (isBrowser) {
@@ -28,9 +30,9 @@ const Header = ({ sidenav, eol }) => {
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
   const searchParams = [];
-  console.log(project);
+  console.log(searchPropertyMapping);
 
-  if (project !== 'landing') {
+  if (project in searchPropertyMapping) {
     const projectManifest = `${project}-${branch}`;
 
     searchParams.push({ param: 'searchProperty', value: projectManifest });
