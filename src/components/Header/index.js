@@ -8,6 +8,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import SearchContext from '../Searchbar/SearchContext';
 
 const StyledHeaderContainer = styled.header`
   grid-area: header;
@@ -19,25 +20,6 @@ const StyledHeaderContainer = styled.header`
 const Header = ({ sidenav, eol }) => {
   const { project } = useSiteMetadata();
   const { branch } = useSnootyMetadata();
-  const { availableVersions } = useContext(VersionContext);
-
-  const { node } = availableVersions;
-
-  let version;
-
-  // For some branches, such as master, the gitBranchName in the MongoDB collection differs
-  // from the version selector label (e.g., node's master branch has a versionSelectorLabel of upcoming)
-  // the gitBranchName needs to be mapped from the gitBranchName to the versionSelectorName as the
-  // searchProperty field needs this value instead.
-  // we filter here to find the correct MongoDB entry that contains the corresponding gitBranchName and then
-  // pluck out the versionSelectorLabel
-  const currRepoBranch = node?.filter((repoBranch) => repoBranch.gitBranchName === branch);
-
-  if (!currRepoBranch || currRepoBranch.length === 0) {
-    console.warn(`WARNING: No corresponding repo branch found for given git branch ${branch}`);
-  } else {
-    version = currRepoBranch[0].urlSlug;
-  }
 
   let searchProperty;
   if (isBrowser) {
@@ -48,7 +30,7 @@ const Header = ({ sidenav, eol }) => {
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
   const searchParams = [];
-  const projectManifest = `${project}-${version}`;
+  const projectManifest = `${project}-${branch}`;
 
   searchParams.push({ param: 'searchProperty', value: projectManifest });
 
