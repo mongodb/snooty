@@ -30,10 +30,9 @@ const Header = ({ sidenav, eol }) => {
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
   const searchParams = [];
+  const projectManifest = `${project}-${branch}`;
 
-  if (project in searchPropertyMapping) {
-    const projectManifest = `${project}-${branch}`;
-
+  if (projectManifest in searchPropertyMapping) {
     searchParams.push({ param: 'searchProperty', value: projectManifest });
   }
 
