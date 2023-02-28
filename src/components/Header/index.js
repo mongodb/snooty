@@ -36,14 +36,11 @@ const Header = ({ sidenav, eol }) => {
 
   /**
    * The searchPropertyMapping object will contain a new property
-   * called "propertyToSearchMap". This map contains a mapping from
+   * called "projectToSearchMap". This map contains a mapping from
    * the project name to the true search manifest name in cases where the
    * project name is NOT the search manifest name.
-   *
-   * NOTE: The change in the fetchSearchPropertyMapping that adds this property
-   * is currently in the DRAFT state, and is not included at this time.
    */
-  if (project in searchPropertyMapping.projectToSearchMap) {
+  if (searchPropertyMapping.projectToSearchMap && project in searchPropertyMapping.projectToSearchMap) {
     searchManifestName = searchPropertyMapping.projectToSearchMap[project];
   }
 
