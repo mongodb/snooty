@@ -13,7 +13,7 @@ const StyledHeaderContainer = styled.header`
   grid-area: header;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1000;
 `;
 
 const Header = ({ sidenav, eol }) => {
