@@ -43,8 +43,8 @@ const Header = ({ sidenav, eol }) => {
    * NOTE: The change in the fetchSearchPropertyMapping that adds this property
    * is currently in the DRAFT state, and is not included at this time.
    */
-  if (project in searchPropertyMapping.propertyToSearchMap) {
-    searchManifestName = searchPropertyMapping.propertyToSearchMap[project];
+  if (project in searchPropertyMapping.projectToSearchMap) {
+    searchManifestName = searchPropertyMapping.projectToSearchMap[project];
   }
 
   const projectManifest = `${searchManifestName}-${branch}`;
