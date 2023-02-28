@@ -4,6 +4,10 @@ import { renderStylesToString } from '@leafygreen-ui/emotion';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
+// import IndexLayout from './src/layouts/index';
+// import PreviewLayout from './src/layouts/preview-layout';
+// import { useSiteMetadata } from './src/hooks/use-site-metadata';
+// import { isFullBuild } from './src/utils/is-full-build';
 
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
@@ -38,3 +42,10 @@ export const wrapRootElement = ({ element }) => (
     <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
   </ThemeProvider>
 );
+
+// export const wrapPageElement = ({ element, props }) => {
+//   const { snootyEnv } = useSiteMetadata();
+//   // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate components, add conditional for consistent-nav UnifiedNav in DefaultLayout
+//   const Layout = isFullBuild(snootyEnv) ? IndexLayout : PreviewLayout;
+//   return (<Layout pageContext={props.pageContext}>{element}</Layout>);
+// };
