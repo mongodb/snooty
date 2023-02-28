@@ -22,6 +22,7 @@ const Header = ({ sidenav, eol }) => {
   const { searchPropertyMapping } = useMarianManifests();
 
   let searchProperty;
+
   if (isBrowser) {
     const { searchParams } = new URL(window.location);
     searchProperty = searchParams.get('searchProperty');
@@ -30,7 +31,23 @@ const Header = ({ sidenav, eol }) => {
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
   const searchParams = [];
-  const projectManifest = `${project}-${branch}`;
+
+  let searchManifestName = project;
+
+  /**
+   * The searchPropertyMapping object will contain a new property
+   * called "propertyToSearchMap". This map contains a mapping from
+   * the project name to the true search manifest name in cases where the
+   * project name is NOT the search manifest name.
+   *
+   * NOTE: The change in the fetchSearchPropertyMapping that adds this property
+   * is currently in the DRAFT state, and is not included at this time.
+   */
+  if (project in searchPropertyMapping.propertyToSearchMap) {
+    searchManifestName = searchPropertyMapping.propertyToSearchMap[project];
+  }
+
+  const projectManifest = `${searchManifestName}-${branch}`;
 
   if (projectManifest in searchPropertyMapping) {
     searchParams.push({ param: 'searchProperty', value: projectManifest });
