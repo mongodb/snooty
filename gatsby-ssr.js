@@ -44,6 +44,7 @@ export const wrapRootElement = ({ element }) => (
 );
 
 // React component wrapper for hook usage. TODO: separate this into its own component file for both browser and ssr
+// Comment out everything below + the related imports to get it to work on develop.
 const LayoutWrapper = ({ children, pageContext }) => {
   const { snootyEnv } = useSiteMetadata();
   // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate components, add conditional for consistent-nav UnifiedNav in DefaultLayout

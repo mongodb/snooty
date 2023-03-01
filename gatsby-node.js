@@ -277,7 +277,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
     resolve: {
       fallback: fallbacks,
     },
-    module,
   });
 };
 
