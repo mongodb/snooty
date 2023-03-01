@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
-import { baseUrl } from '../utils/base-url';
 import { Script } from 'gatsby';
+import { baseUrl } from '../utils/base-url';
 
 const CONTENT_MAX_WIDTH = 1440;
 
