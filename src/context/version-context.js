@@ -58,10 +58,8 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
       const childRepoBranches = await fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
         project: product.name,
       });
-      // filter all branches of associated repo by associated versions only
-      versions[product.name] = childRepoBranches.branches.filter((branch) => {
-        return branch.active && product.versions.includes(branch.gitBranchName);
-      });
+      // filter all branches of associated repo by active property
+      versions[product.name] = childRepoBranches.branches.filter((branch) => branch.active);
     });
     promises.push(
       fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
