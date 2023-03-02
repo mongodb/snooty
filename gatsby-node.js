@@ -20,6 +20,62 @@ const assets = new Map();
 
 let db;
 
+let isAssociatedProduct = false;
+const associatedReposInfo = {};
+
+// Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
+// or data are found, the node will be null
+const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
+    // fetch associated child products
+    const productList = manifestMetadata?.associated_products || [];
+    await Promise.all(
+      productList.map(async (product) => {
+        associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+      })
+    );
+    // check if product is associated child product
+    try {
+      const umbrellaProduct = await db.stitchInterface.getMetadata({
+        'associated_products.name': siteMetadata.project,
+      });
+      isAssociatedProduct = !!umbrellaProduct;
+    } catch (e) {
+      console.log('No umbrella product found. Not an associated product.');
+      isAssociatedProduct = false;
+    }
+  }
+
+  // get remote metadata for updated ToC in Atlas
+  try {
+    const filter = {
+      project: manifestMetadata.project,
+      branch: manifestMetadata.branch,
+    };
+    if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
+      filter['is_merged_toc'] = true;
+    }
+    const findOptions = {
+      sort: { build_id: -1 },
+    };
+    const remoteMetadata = await db.stitchInterface.getMetadata(filter, findOptions);
+
+    createNode({
+      children: [],
+      id: createNodeId('remoteMetadata'),
+      internal: {
+        contentDigest: createContentDigest(remoteMetadata),
+        type: 'RemoteMetadata',
+      },
+      parent: null,
+      remoteMetadata: remoteMetadata,
+    });
+  } catch (e) {
+    console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
+    console.error(e);
+  }
+};
+
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   const { createNode } = actions;
 
@@ -98,6 +154,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     });
   });
 
+  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
@@ -126,36 +184,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
-  let repoBranches = null,
-    isAssociatedProduct = false;
-  const associatedReposInfo = {};
+  let repoBranches = null;
   try {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
-
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
-      // fetch associated child products
-      const productList = manifestMetadata?.associated_products || [];
-      await Promise.all(
-        productList.map(async (product) => {
-          associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
-          // filter all branches of associated repo by associated versions only
-          associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
-            return product.versions?.includes(branch.gitBranchName);
-          });
-        })
-      );
-
-      // check if product is associated child product
-      try {
-        const umbrellaProduct = await db.stitchInterface.getMetadata({
-          'associated_products.name': siteMetadata.project,
-        });
-        isAssociatedProduct = !!umbrellaProduct;
-      } catch (e) {
-        console.log('No umbrella product found. Not an associated product.');
-        isAssociatedProduct = false;
-      }
-    }
     let errMsg;
 
     if (!repoInfo) {
@@ -196,26 +227,6 @@ exports.createPages = async ({ actions }) => {
     throw err;
   }
 
-  // get remote metadata for updated ToC in Atlas
-  let metadata = siteMetadata;
-  try {
-    const filter = {
-      project: manifestMetadata.project,
-      branch: manifestMetadata.branch,
-    };
-    if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
-      filter['is_merged_toc'] = true;
-    }
-    const findOptions = {
-      sort: { build_id: -1 },
-    };
-    metadata = await db.stitchInterface.getMetadata(filter, findOptions);
-  } catch (e) {
-    console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
-    console.error(e);
-    metadata = siteMetadata;
-  }
-
   return new Promise((resolve, reject) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
@@ -234,7 +245,6 @@ exports.createPages = async ({ actions }) => {
             slug,
             repoBranches,
             associatedReposInfo,
-            remoteMetadata: metadata,
             isAssociatedProduct,
             template: pageNodes?.options?.template,
             page: pageNodes,
@@ -289,7 +299,11 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type SnootyMetadata implements Node @dontInfer {
-        metadata: JSON!
+      metadata: JSON!
+    }
+
+    type RemoteMetadata implements Node @dontInfer {
+      remoteMetadata: JSON
     }
   `);
 };

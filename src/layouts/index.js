@@ -10,6 +10,7 @@ import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -75,10 +76,11 @@ const GlobalGrid = styled('div')`
 
 const DefaultLayout = ({
   children,
-  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct, remoteMetadata },
+  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
 }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
+  const remoteMetadata = useRemoteMetadata();
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
