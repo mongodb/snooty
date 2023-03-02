@@ -32,10 +32,6 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
     await Promise.all(
       productList.map(async (product) => {
         associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
-        // filter all branches of associated repo by associated versions only
-        associatedReposInfo[product.name].branches = associatedReposInfo[product.name].branches.filter((branch) => {
-          return product.versions?.includes(branch.gitBranchName);
-        });
       })
     );
     // check if product is associated child product
