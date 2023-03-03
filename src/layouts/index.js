@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -75,14 +75,23 @@ const GlobalGrid = styled('div')`
 `;
 
 const DefaultLayout = ({
+  location,
   children,
   pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct, remoteMetadata },
 }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
+  const isInPresentationMode = useMemo(() => {
+    const url = new URL(location.href);
+    const path = url.searchParams;
+    return path.has('presentation');
+  }, [location]);
+
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
+
+  console.log('is in presentation mode', isInPresentationMode);
 
   return (
     <>
@@ -98,20 +107,24 @@ const DefaultLayout = ({
         remoteMetadata={remoteMetadata}
       >
         <GlobalGrid>
-          <Header sidenav={sidenav} eol={eol} />
-          {sidenav && (
-            <Sidenav
-              chapters={chapters}
-              guides={guides}
-              page={page}
-              pageTitle={pageTitle}
-              publishedBranches={publishedBranches}
-              repoBranches={repoBranches}
-              siteTitle={title}
-              slug={slug}
-              toctree={toctree}
-              eol={eol}
-            />
+          {!isInPresentationMode && (
+            <>
+              <Header sidenav={sidenav} eol={eol} />
+              {sidenav && (
+                <Sidenav
+                  chapters={chapters}
+                  guides={guides}
+                  page={page}
+                  pageTitle={pageTitle}
+                  publishedBranches={publishedBranches}
+                  repoBranches={repoBranches}
+                  siteTitle={title}
+                  slug={slug}
+                  toctree={toctree}
+                  eol={eol}
+                />
+              )}
+            </>
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>
