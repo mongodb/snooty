@@ -5,7 +5,7 @@ import MainColumn from '../components/MainColumn';
 
 const Wrapper = styled(MainColumn)`
   max-width: unset;
-  margin-right: 130px;
+  margin-right: 160px;
 `;
 
 const Instruqt = ({ children }) => <Wrapper>{children}</Wrapper>;
