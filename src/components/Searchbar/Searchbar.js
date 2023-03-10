@@ -5,7 +5,6 @@ import { palette } from '@leafygreen-ui/palette';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
-import CondensedSearchbar from './CondensedSearchbar';
 import ExpandedSearchbar, { MagnifyingGlass } from './ExpandedSearchbar';
 import SearchContext from './SearchContext';
 import SearchDropdown from './SearchDropdown';
@@ -74,7 +73,6 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
   const onApplyFilters = useCallback(() => setSearchFilter(draftSearchFilter), [draftSearchFilter]);
 
   // Focus Handlers
-  const onExpand = useCallback(() => setIsExpanded(true), [setIsExpanded]);
   const onFocus = useCallback(() => {
     setIsFocused(true);
   }, []);
@@ -132,7 +130,7 @@ const Searchbar = ({ getResultsFromJSON, isExpanded, setIsExpanded, searchParams
           {isSearching && <SearchDropdown applySearchFilter={onApplyFilters} results={searchResults} />}
         </SearchContext.Provider>
       ) : (
-        <CondensedSearchbar onExpand={onExpand} />
+        <></>
       )}
     </SearchbarContainer>
   );
