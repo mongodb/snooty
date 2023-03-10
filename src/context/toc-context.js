@@ -13,7 +13,7 @@ const TocContext = createContext({
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
 const TocContextProvider = ({ children, remoteMetadata }) => {
-  const { activeVersions, setActiveVersions, showVersionDropdown } = useContext(VersionContext);
+  const { activeVersions, showVersionDropdown } = useContext(VersionContext);
   const { toctree, associated_products: associatedProducts } = useSnootyMetadata();
   const { database, project, parserBranch } = useSiteMetadata();
   const [remoteToc, setRemoteToc] = useState();
@@ -75,27 +75,6 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
     return clonedToc;
   }, [activeVersions, remoteToc]);
 
-  const correctActiveVersion = useCallback(
-    (tocNode) => {
-      // go through toc tree and see if any active versions are not available
-      // fall back to most recent if not available
-      const newVersions = {};
-      for (let node of tocNode.children) {
-        if (!node?.options?.versions || !node?.options?.project) {
-          continue;
-        }
-        if (!node.options.versions.includes(activeVersions[node.options.project])) {
-          newVersions[node.options.project] = node.options.versions[0];
-        }
-      }
-
-      if (Object.keys(newVersions).length) {
-        setActiveVersions(newVersions);
-      }
-    },
-    [activeVersions, setActiveVersions]
-  );
-
   // initial effect is to fetch metadata
   // should only run once on init
   useEffect(() => {
@@ -103,10 +82,9 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
       return;
     }
     getTocMetadata().then((tocTreeResponse) => {
-      correctActiveVersion(tocTreeResponse);
       setRemoteToc(tocTreeResponse);
     });
-  }, [remoteToc, setRemoteToc, getTocMetadata, correctActiveVersion]);
+  }, [remoteToc, setRemoteToc, getTocMetadata]);
 
   // one effect depends on activeVersions
   // if activeVersion changes -> setActiveToc
