@@ -8,7 +8,6 @@ import { theme } from '../../theme/docsTheme';
 import { getNestedValue } from '../../utils/get-nested-value';
 import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
-import { StyledTextInput } from './SearchTextInput';
 
 const ARROW_DOWN_KEY = 40;
 const ARROW_UP_KEY = 38;
@@ -162,10 +161,7 @@ const SearchResult = React.memo(
       const prevSibling = getNestedValue(['current', 'previousSibling'], resultLinkRef);
       if (prevSibling) {
         // If these don't match, we have gone up out of the results
-        if (prevSibling.nodeName !== resultLinkRef.current.nodeName) {
-          // This is the first result, so let's go to the search bar
-          document.querySelector(`${StyledTextInput} input`).focus();
-        } else {
+        if (prevSibling.nodeName === resultLinkRef.current.nodeName) {
           prevSibling.focus();
         }
       }
