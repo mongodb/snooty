@@ -243,8 +243,7 @@ exports[`renders correctly 1`] = `
           <a
             class="constant-classname emotion-9"
             href="https://www.mongodb.com/docs/atlas/getting-started/"
-            rel="noopener noreferrer"
-            target="_blank"
+            target="_self"
           >
             <span
               class="emotion-10"
@@ -329,8 +328,7 @@ exports[`renders correctly 1`] = `
           <a
             class="constant-classname emotion-9"
             href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
-            rel="noopener noreferrer"
-            target="_blank"
+            target="_self"
           >
             <span
               class="emotion-10"
