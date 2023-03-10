@@ -6,7 +6,6 @@ import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
-import AdvancedFiltersPane from './AdvancedFiltersPane';
 import Pagination from './Pagination';
 import SearchResults from './SearchResults';
 import SearchContext from './SearchContext';
@@ -56,12 +55,6 @@ const fadeInAnimation = (startingOpacity, seconds) => css`
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: ${seconds};
-`;
-
-const FixedHeightFiltersPane = styled(AdvancedFiltersPane)`
-  height: ${SEARCH_RESULTS_DESKTOP_HEIGHT};
-  padding-left: ${theme.size.medium};
-  padding-right: ${theme.size.medium};
 `;
 
 const FixedHeightSearchResults = styled(SearchResults)`
@@ -147,7 +140,6 @@ const SearchDropdown = ({ results = [], applySearchFilter }) => {
   }, [currentPage, isMobile, results]);
   return showAdvancedFilters ? (
     <SearchResultsContainer>
-      <FixedHeightFiltersPane closeFiltersPane={closeFiltersPane} />
       <SearchFooter>
         <FilterResetButton onClick={onReset}>Reset</FilterResetButton>
         <FilterFooterButton onClick={onApplyFilters}>Apply Search Criteria{filterText}</FilterFooterButton>
