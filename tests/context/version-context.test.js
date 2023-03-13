@@ -223,7 +223,7 @@ describe('Version Context', () => {
     }
 
     // active checks
-    const expectedActive = { 'atlas-cli': 'master', 'cloud-docs': 'master' };
+    const expectedActive = { 'cloud-docs': 'master', 'atlas-cli': 'master' };
     expect(await wrapper.findByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 
@@ -242,7 +242,7 @@ describe('Version Context', () => {
     });
     const option = wrapper.getByText('atlas-cli-master');
     userEvent.click(option);
-    const expectedActive = { 'atlas-cli': 'master', 'cloud-docs': 'master' };
+    const expectedActive = { 'cloud-docs': 'master', 'atlas-cli': 'master' };
     expect(await wrapper.findByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 
