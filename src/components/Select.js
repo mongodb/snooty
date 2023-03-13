@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useEffect, useState } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
@@ -64,43 +64,35 @@ const Select = ({
 }) => {
   // show select after portal container has loaded for scroll + zindex consistency
   const portalContainer = useRef();
-  const [showSelect, setShowSelect] = useState(false);
-  useEffect(() => {
-    if (portalContainer.current && !showSelect) {
-      setShowSelect(true);
-    }
-  }, [showSelect]);
 
   return (
     <PortalContainer className={`${className} ${cx(selectStyle)}`} ref={portalContainer}>
-      {showSelect && (
-        <LGSelect
-          data-testid="lg-select"
-          value={value || ''}
-          label={label}
-          aria-labelledby={(!label && 'select') || null}
-          size="default"
-          allowDeselect={false}
-          disabled={disabled}
-          portalContainer={portalContainer.current}
-          scrollContainer={portalContainer.current}
-          popoverZIndex={2}
-          placeholder={defaultText}
-          defaultValue={value ? String(value) : ''}
-          onChange={(value) => {
-            onChange({ value });
-          }}
-          className={cx(selectStyle)}
-          {...props}
-        >
-          {choices.map((choice) => (
-            <Option className={cx(optionStyling)} key={choice.value} value={choice.value} role="option">
-              {choice.icon && <choice.icon className={cx(iconStyling)} />}
-              {choice.text}
-            </Option>
-          ))}
-        </LGSelect>
-      )}
+      <LGSelect
+        data-testid="lg-select"
+        value={value || ''}
+        label={label}
+        aria-labelledby={(!label && 'select') || null}
+        size="default"
+        allowDeselect={false}
+        disabled={disabled}
+        portalContainer={portalContainer.current}
+        scrollContainer={portalContainer.current}
+        popoverZIndex={2}
+        placeholder={defaultText}
+        defaultValue={value ? String(value) : ''}
+        onChange={(value) => {
+          onChange({ value });
+        }}
+        className={cx(selectStyle)}
+        {...props}
+      >
+        {choices.map((choice) => (
+          <Option className={cx(optionStyling)} key={choice.value} value={choice.value} role="option">
+            {choice.icon && <choice.icon className={cx(iconStyling)} />}
+            {choice.text}
+          </Option>
+        ))}
+      </LGSelect>
     </PortalContainer>
   );
 };

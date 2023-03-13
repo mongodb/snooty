@@ -69,14 +69,31 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
     await Promise.all(promises);
     return versions;
   } catch (e) {
+    return getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo);
     // on error of realm function, fall back to build time fetches
-    const versions = {};
-    versions[metadata.project] = repoBranches?.branches || [];
-    for (const productName in associatedReposInfo) {
-      versions[productName] = associatedReposInfo[productName].branches || [];
-    }
-    return versions;
   }
+};
+
+const getDefaultAvailVersions = (project, repoBranches, associatedReposInfo) => {
+  const versions = {};
+  versions[project] = repoBranches?.branches || [];
+  for (const productName in associatedReposInfo) {
+    versions[productName] = associatedReposInfo[productName].branches || [];
+  }
+  return versions;
+};
+
+const getDefaultActiveVersions = (repoBranches, project, associatedReposInfo) => {
+  const versions = {};
+  if (repoBranches?.branches.length) {
+    versions[project] = repoBranches.branches[0].gitBranchName;
+  }
+  for (const productName in associatedReposInfo) {
+    if (associatedReposInfo[productName].branches?.length) {
+      versions[productName] = associatedReposInfo[productName].branches[0].gitBranchName;
+    }
+  }
+  return versions;
 };
 
 const getUmbrellaProject = async (project, dbName) => {
@@ -109,7 +126,10 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // TODO check whats going on here for 404 pages
   // tracks active versions across app
-  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY) || {});
+  const [activeVersions, setActiveVersions] = useReducer(
+    versionStateReducer,
+    getLocalValue(STORAGE_KEY) || getDefaultActiveVersions(repoBranches, metadata.project, associatedReposInfo)
+  );
   // update local storage when active versions change
   useEffect(() => {
     setLocalValue(STORAGE_KEY, activeVersions);
@@ -119,7 +139,9 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   }, [activeVersions]);
 
   // expose the available versions for current and associated products
-  const [availableVersions, setAvailableVersions] = useState({});
+  const [availableVersions, setAvailableVersions] = useState(
+    getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo)
+  );
   // on init, fetch versions from realm app services
   useEffect(() => {
     getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then((versions) => {
