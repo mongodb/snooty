@@ -27,13 +27,13 @@ afterAll(() => {
   process.removeListener('unhandledRejection', rejectionHandler);
 });
 
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
-Object.defineProperty(global.self, 'crypto', {
-  value: {
-    getRandomValues: (arr) => crypto.randomBytes(arr.length),
-  },
-});
+// Object.defineProperty(global.self, 'crypto', {
+//   value: {
+//     getRandomValues: (arr) => crypto.randomBytes(arr.length),
+//   },
+// });
 
-window.matchMedia = () => ({ addListener: () => {}, removeListener: () => {} });
-window.scrollTo = () => {};
+// window.matchMedia = () => ({ addListener: () => {}, removeListener: () => {} });
+// window.scrollTo = () => {};
