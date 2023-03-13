@@ -147,7 +147,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
 
   // project prop is passed down from parent ToC node
   // hide node if not active according to version context
-  if (parentProj && activeVersions[parentProj] && activeVersions[parentProj] !== options.version) {
+  if (parentProj && (!activeVersions[parentProj] || activeVersions[parentProj] !== options.version)) {
     return <></>;
   }
 
