@@ -97,6 +97,7 @@ const VersionContext = createContext({
   // active version for each product is marked is {[product name]: active version} pair
   setActiveVersions: () => {},
   availableVersions: {},
+  setAvailableVersions: () => {},
   showVersionDropdown: false,
   onVersionSelect: () => {},
 });

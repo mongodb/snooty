@@ -13,11 +13,11 @@ const TocContext = createContext({
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
 const TocContextProvider = ({ children, remoteMetadata }) => {
-  const { activeVersions, showVersionDropdown } = useContext(VersionContext);
+  const { activeVersions, setActiveVersions, showVersionDropdown } = useContext(VersionContext);
   const { toctree, associated_products: associatedProducts } = useSnootyMetadata();
   const { database, project, parserBranch } = useSiteMetadata();
-  const [remoteToc, setRemoteToc] = useState();
   const [activeToc, setActiveToc] = useState(remoteMetadata?.toctree || toctree);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const getTocMetadata = useCallback(async () => {
     try {
@@ -43,58 +43,41 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
     // below dependents are server constants
   }, [project, parserBranch, associatedProducts, showVersionDropdown, database, toctree, remoteMetadata]);
 
-  const getFilteredToc = useCallback(() => {
-    // filter remoteToc by activeVersions and return a copy
-    let { children, ...clonedToc } = remoteToc;
-    clonedToc.children = [];
-    for (let node of remoteToc.children) {
-      // push any non versions children
-      if (!node?.options?.versions) {
-        clonedToc.children.push(node);
-        continue;
-      }
-
-      const nodeProject = node.options?.project;
-      const activeVersion = activeVersions[nodeProject];
-      // if selected version is not included in ToC, skip
-      if (node?.options?.versions && !node.options.versions.includes(activeVersion)) {
-        console.error(`selected version ${activeVersion} for project ${nodeProject} does not exist in ToC`);
-        continue;
-      }
-      // clone any versioned node not to mutate remoteToc
-      let { children, ...clonedNode } = node;
-      clonedNode.children = [];
-      for (let optionedNode of node.children) {
-        if (optionedNode?.options?.version === activeVersion) {
-          clonedNode.children.push(optionedNode);
+  const setInitVersion = useCallback(
+    (tocNode) => {
+      // for ToC with project option
+      // set an active version for this project
+      // if it doesn't already exist
+      // NOTE: do we need to traverse full ToC tree? for now just immediate children
+      for (let node of tocNode.children) {
+        if (!node?.options?.versions || !node?.options?.project) {
+          continue;
+        }
+        if (
+          !activeVersions[node.options.project] ||
+          !node.options.versions.includes(activeVersions[node.options.project])
+        ) {
+          // TODO: persistence module should order this in default
+          setActiveVersions({ [node.options.project]: node.options.versions[0] });
         }
       }
-
-      clonedToc.children.push(clonedNode);
-    }
-    return clonedToc;
-  }, [activeVersions, remoteToc]);
+    },
+    [activeVersions, setActiveVersions]
+  );
 
   // initial effect is to fetch metadata
   // should only run once on init
   useEffect(() => {
-    if (remoteToc) {
+    if (!Object.keys(activeVersions).length || isLoaded) {
       return;
     }
     getTocMetadata().then((tocTreeResponse) => {
-      setRemoteToc(tocTreeResponse);
+      setInitVersion(tocTreeResponse);
+      setActiveToc(tocTreeResponse);
+      setIsLoaded(true);
     });
-  }, [remoteToc, setRemoteToc, getTocMetadata]);
-
-  // one effect depends on activeVersions
-  // if activeVersion changes -> setActiveToc
-  useEffect(() => {
-    if (!remoteToc) {
-      return;
-    }
-    const filteredToc = getFilteredToc();
-    setActiveToc(filteredToc);
-  }, [remoteToc, activeVersions, setActiveToc, getFilteredToc]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeVersions]);
 
   return <TocContext.Provider value={{ activeToc }}>{children}</TocContext.Provider>;
 };

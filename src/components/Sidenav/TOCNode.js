@@ -65,7 +65,7 @@ const Wrapper = ({ children, hasVersions, project, versions }) => {
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
-const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) => {
+const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }) => {
   const { title, slug, url, children, options = {} } = node;
   const { activeVersions } = useContext(VersionContext);
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
@@ -145,6 +145,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
     );
   };
 
+  // project prop is passed down from parent ToC node
+  // hide node if not active according to version context
+  if (parentProj && activeVersions[parentProj] && activeVersions[parentProj] !== options.version) {
+    return <></>;
+  }
+
   return (
     <>
       <NodeLink />
@@ -152,7 +158,14 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         children.map((c) => {
           const key = `${c?.options?.version || ''}-${c.slug || c.url}`;
           return (
-            <TOCNode activeSection={activeSection} handleClick={handleClick} node={c} level={level + 1} key={key} />
+            <TOCNode
+              activeSection={activeSection}
+              handleClick={handleClick}
+              node={c}
+              level={level + 1}
+              key={key}
+              parentProj={options.project}
+            />
           );
         })}
     </>
