@@ -12,6 +12,8 @@ import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 
+const QUERY_PARAM_FOR_DISABLING_ELEMENTS = 'presentation';
+
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
 // from overriding specified styles in imported footer
@@ -83,15 +85,25 @@ const DefaultLayout = ({
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
   const isInPresentationMode = useMemo(() => {
-    const url = new URL(location.href);
-    const path = url.searchParams;
-    return path.has('presentation');
+    const forPresentationMode = () => {
+      const url = new URL(location.href);
+      const path = url.searchParams;
+      return path.has(QUERY_PARAM_FOR_DISABLING_ELEMENTS);
+    };
+
+    const forPresnetationModeLocalDev = () => {
+      const url = new URL(location.href);
+      const hash = url.hash;
+      const queryParam = `?${QUERY_PARAM_FOR_DISABLING_ELEMENTS}`;
+      return hash.includes(queryParam);
+    };
+    return process.env.GATSBY_SNOOTY_DEV ? forPresnetationModeLocalDev() : forPresentationMode();
   }, [location]);
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 
-  console.log('is in presentation mode', isInPresentationMode);
+  console.log('location', location);
 
   return (
     <>
@@ -134,6 +146,18 @@ const DefaultLayout = ({
 };
 
 DefaultLayout.propTypes = {
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+    host: PropTypes.string,
+    hostname: PropTypes.string,
+    href: PropTypes.string,
+    key: PropTypes.string,
+    origin: PropTypes.string,
+    pathname: PropTypes.string,
+    port: PropTypes.string,
+    protocol: PropTypes.string,
+    search: PropTypes.string,
+  }),
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
     chapters: PropTypes.object,
