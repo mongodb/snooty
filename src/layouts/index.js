@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
+import { useLocation } from '@reach/router';
+import queryString from 'query-string';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
@@ -11,8 +13,6 @@ import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-
-const QUERY_PARAM_FOR_DISABLING_ELEMENTS = 'presentation';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -77,28 +77,17 @@ const GlobalGrid = styled('div')`
 `;
 
 const DefaultLayout = ({
-  location,
   children,
   pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct, remoteMetadata },
 }) => {
+  const { search } = useLocation();
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
   const isInPresentationMode = useMemo(() => {
-    const forPresentationMode = () => {
-      const url = new URL(location.href);
-      const path = url.searchParams;
-      return path.has(QUERY_PARAM_FOR_DISABLING_ELEMENTS);
-    };
-
-    const forPresentationModeLocalDev = () => {
-      const url = new URL(location.href);
-      const hash = url.hash;
-      const queryParam = `?${QUERY_PARAM_FOR_DISABLING_ELEMENTS}`;
-      return hash.includes(queryParam);
-    };
-    return process.env.GATSBY_SNOOTY_DEV ? forPresentationModeLocalDev() : forPresentationMode();
-  }, [location]);
+    const { presentation } = queryString.parse(search);
+    return presentation;
+  }, [search]);
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
