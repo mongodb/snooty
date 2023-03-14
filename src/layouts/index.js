@@ -91,13 +91,13 @@ const DefaultLayout = ({
       return path.has(QUERY_PARAM_FOR_DISABLING_ELEMENTS);
     };
 
-    const forPresnetationModeLocalDev = () => {
+    const forPresentationModeLocalDev = () => {
       const url = new URL(location.href);
       const hash = url.hash;
       const queryParam = `?${QUERY_PARAM_FOR_DISABLING_ELEMENTS}`;
       return hash.includes(queryParam);
     };
-    return process.env.GATSBY_SNOOTY_DEV ? forPresnetationModeLocalDev() : forPresentationMode();
+    return process.env.GATSBY_SNOOTY_DEV ? forPresentationModeLocalDev() : forPresentationMode();
   }, [location]);
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
