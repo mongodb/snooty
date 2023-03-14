@@ -83,6 +83,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     setIsOpen(isActive);
   }, [isActive, isDrawer || hasChildren ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // project prop is passed down from parent ToC node
+  // hide node if not active according to version context
+  if (parentProj && (!activeVersions[parentProj] || activeVersions[parentProj] !== options.version)) {
+    return null;
+  }
+
   const onCaretClick = (event) => {
     event.preventDefault();
     setIsOpen(!isOpen);
@@ -144,12 +150,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
       </Wrapper>
     );
   };
-
-  // project prop is passed down from parent ToC node
-  // hide node if not active according to version context
-  if (parentProj && (!activeVersions[parentProj] || activeVersions[parentProj] !== options.version)) {
-    return <></>;
-  }
 
   return (
     <>
