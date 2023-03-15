@@ -91,9 +91,10 @@ const filterByRealm = async (wrapper, screenSize) => {
   const dropdownButton = selectElements[listboxIndex];
   expect(dropdownButton).toHaveAttribute('aria-expanded', 'false');
   userEvent.click(dropdownButton);
-  tick();
+  await tick();
   const dropdownList = wrapper.queryAllByRole('listbox')[0];
   userEvent.click(within(dropdownList).getByText('Realm'));
+  await tick();
 };
 
 const openMobileSearch = async (wrapper) => {
@@ -196,7 +197,7 @@ describe('Search Results Page', () => {
     expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
   });
 
-  it.only('updates the page UI when a property is changed', async () => {
+  it('updates the page UI when a property is changed', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
@@ -205,10 +206,7 @@ describe('Search Results Page', () => {
     expectUnfilteredResults(renderStitchResults);
 
     // Change the filters, which should change the shown results
-
-    await act(async () => {
-      await filterByRealm(renderStitchResults);
-    });
+    await filterByRealm(renderStitchResults);
     expectFilteredResults(renderStitchResults, true);
   });
 
@@ -221,9 +219,7 @@ describe('Search Results Page', () => {
     expectUnfilteredResults(renderStitchResults);
 
     // Change filters
-    await act(async () => {
-      await filterByRealm(renderStitchResults);
-    });
+    await filterByRealm(renderStitchResults);
     expectFilteredResults(renderStitchResults, true);
 
     // Remove filters
@@ -249,10 +245,8 @@ describe('Search Results Page', () => {
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
     // Set filters but don't apply them
-    await act(async () => {
-      // Filter using listbox at index 2, which should appear on mobile
-      await filterByRealm(renderStitchResults, 'mobile');
-    });
+    // Filter using listbox at index 2, which should appear on mobile
+    await filterByRealm(renderStitchResults, 'mobile');
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
@@ -288,9 +282,7 @@ describe('Search Results Page', () => {
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
     // Set filters but don't apply them
-    await act(async () => {
-      await filterByRealm(renderStitchResults, 'mobile');
-    });
+    await filterByRealm(renderStitchResults, 'mobile');
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
