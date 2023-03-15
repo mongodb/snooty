@@ -1,8 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
-import { useLocation } from '@reach/router';
-import queryString from 'query-string';
 import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
@@ -11,6 +9,7 @@ import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
+import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 
@@ -80,14 +79,10 @@ const DefaultLayout = ({
   children,
   pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct, remoteMetadata },
 }) => {
-  const { search } = useLocation();
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
-  const isInPresentationMode = useMemo(() => {
-    const { presentation } = queryString.parse(search);
-    return presentation;
-  }, [search]);
+  const isInPresentationMode = usePresentationMode();
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);

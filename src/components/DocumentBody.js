@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from '@reach/router';
-import queryString from 'query-string';
 import { UnifiedFooter } from '@mdb/consistent-nav';
+import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
@@ -102,12 +101,7 @@ const DocumentBody = (props) => {
   const siteTitle = getNestedValue(['title'], metadata) || '';
   const { Template } = getTemplate(template);
 
-  const { search } = useLocation();
-
-  const isInPresentationMode = useMemo(() => {
-    const { presentation } = queryString.parse(search);
-    return presentation;
-  }, [search]);
+  const isInPresentationMode = usePresentationMode();
 
   return (
     <>
