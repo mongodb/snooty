@@ -82,6 +82,10 @@ const titleStyle = LeafyCSS`
   text-transform: none;
   :hover {
     background-color: inherit;
+
+    &:after, span:after {
+      display: none;
+    }
   }
 `;
 
