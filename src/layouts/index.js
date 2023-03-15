@@ -82,7 +82,7 @@ const DefaultLayout = ({
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
 
-  const isInPresentationMode = usePresentationMode();
+  const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
@@ -101,24 +101,21 @@ const DefaultLayout = ({
         remoteMetadata={remoteMetadata}
       >
         <GlobalGrid>
-          {!isInPresentationMode && (
-            <>
-              <Header sidenav={sidenav} eol={eol} />
-              {sidenav && (
-                <Sidenav
-                  chapters={chapters}
-                  guides={guides}
-                  page={page}
-                  pageTitle={pageTitle}
-                  publishedBranches={publishedBranches}
-                  repoBranches={repoBranches}
-                  siteTitle={title}
-                  slug={slug}
-                  toctree={toctree}
-                  eol={eol}
-                />
-              )}
-            </>
+          {!isInPresentationMode && <Header sidenav={sidenav} eol={eol} />}
+          {sidenav && (
+            <Sidenav
+              chapters={chapters}
+              guides={guides}
+              page={page}
+              pageTitle={pageTitle}
+              publishedBranches={publishedBranches}
+              repoBranches={repoBranches}
+              siteTitle={title}
+              slug={slug}
+              toctree={toctree}
+              eol={eol}
+              isInPresentationMode={isInPresentationMode}
+            />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>

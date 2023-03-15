@@ -101,7 +101,7 @@ const DocumentBody = (props) => {
   const siteTitle = getNestedValue(['title'], metadata) || '';
   const { Template } = getTemplate(template);
 
-  const isInPresentationMode = usePresentationMode();
+  const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   return (
     <>
