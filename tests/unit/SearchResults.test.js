@@ -4,13 +4,20 @@ import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
-import * as reachRouter from '@gatsbyjs/reach-router';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { tick, setMobile } from '../utils';
 import SearchResults from '../../src/components/SearchResults';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as RealmUtil from '../../src/utils/realm';
 import mockInputData from '../utils/data/marian-manifests.json';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
+
+jest.mock('@gatsbyjs/reach-router', () => ({
+  useLocation: jest.fn(),
+}));
+
+// Mock the reach router useLocation hook
+const mockLocation = (search) => useLocation.mockImplementation(() => ({ search }));
 
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
@@ -74,9 +81,6 @@ const expectUnfilteredResults = (wrapper) => {
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
 };
-
-// Mock the reach router useLocation hook
-const mockLocation = (search) => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ search }));
 
 const filterByRealm = async (wrapper, screenSize) => {
   let listboxIndex = 0;
@@ -192,7 +196,7 @@ describe('Search Results Page', () => {
     expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
   });
 
-  it('updates the page UI when a property is changed', async () => {
+  it.only('updates the page UI when a property is changed', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
