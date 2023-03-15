@@ -82,6 +82,10 @@ const titleStyle = LeafyCSS`
   text-transform: none;
   :hover {
     background-color: inherit;
+
+    &:after, span:after {
+      display: none;
+    }
   }
 `;
 
@@ -287,7 +291,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 <SideNavItem
                   className={cx(titleStyle, sideNavItemBasePadding)}
                   as={Link}
-                  to={isGuidesTemplate ? slug : '/'}
+                  to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
+                  hideExternalIcon={true}
                 >
                   {navTitle}
                 </SideNavItem>
