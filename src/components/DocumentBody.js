@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from '@reach/router';
 import queryString from 'query-string';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
@@ -101,10 +102,12 @@ const DocumentBody = (props) => {
   const siteTitle = getNestedValue(['title'], metadata) || '';
   const { Template } = getTemplate(template);
 
+  const { search } = useLocation();
+
   const isInPresentationMode = useMemo(() => {
-    const { presentation } = queryString.parse(location.search);
+    const { presentation } = queryString.parse(search);
     return presentation;
-  }, [location]);
+  }, [search]);
 
   return (
     <>
