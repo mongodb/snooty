@@ -125,18 +125,6 @@ const DefaultLayout = ({
 };
 
 DefaultLayout.propTypes = {
-  location: PropTypes.shape({
-    hash: PropTypes.string,
-    host: PropTypes.string,
-    hostname: PropTypes.string,
-    href: PropTypes.string,
-    key: PropTypes.string,
-    origin: PropTypes.string,
-    pathname: PropTypes.string,
-    port: PropTypes.string,
-    protocol: PropTypes.string,
-    search: PropTypes.string,
-  }),
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
     chapters: PropTypes.object,
