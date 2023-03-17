@@ -117,15 +117,17 @@ const DocumentBody = (props) => {
             publishedBranches={getNestedValue(['publishedBranches'], metadata)}
             slug={slug}
           >
-            <FootnoteContext.Provider value={{ footnotes }}>{children}</FootnoteContext.Provider>
+            {children}
           </Widgets>
         )}
         children={
-          <Template {...props}>
-            {pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-          </Template>
+          <FootnoteContext.Provider value={{ footnotes }}>
+            <Template {...props}>
+              {pageNodes.map((child, index) => (
+                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+              ))}
+            </Template>
+          </FootnoteContext.Provider>
         }
       ></ConditionalWrapper>
       {!isInPresentationMode && <UnifiedFooter hideLocale={true} />}
