@@ -66,11 +66,19 @@ const globalCSS = css`
   ${footerOverrides}
 `;
 
-const GlobalGrid = styled('div')`
-  display: grid;
+const gridAreaForPresentationView = css`
+  grid-template-areas: 'contents';
+`;
+
+const gridAreaForDefaultView = css`
   grid-template-areas:
     'header header'
     'sidenav contents';
+`;
+
+const GlobalGrid = styled('div')`
+  display: grid;
+  ${({ isInPresentationMode }) => (isInPresentationMode ? gridAreaForPresentationView : gridAreaForDefaultView)};
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
 `;
@@ -100,22 +108,25 @@ const DefaultLayout = ({
         isAssociatedProduct={isAssociatedProduct}
         remoteMetadata={remoteMetadata}
       >
-        <GlobalGrid>
-          {!isInPresentationMode && <Header sidenav={sidenav} eol={eol} />}
-          {sidenav && (
-            <Sidenav
-              chapters={chapters}
-              guides={guides}
-              page={page}
-              pageTitle={pageTitle}
-              publishedBranches={publishedBranches}
-              repoBranches={repoBranches}
-              siteTitle={title}
-              slug={slug}
-              toctree={toctree}
-              eol={eol}
-              isInPresentationMode={isInPresentationMode}
-            />
+        <GlobalGrid isInPresentationMode={isInPresentationMode}>
+          {!isInPresentationMode && (
+            <>
+              <Header sidenav={sidenav} eol={eol} />
+              {sidenav && (
+                <Sidenav
+                  chapters={chapters}
+                  guides={guides}
+                  page={page}
+                  pageTitle={pageTitle}
+                  publishedBranches={publishedBranches}
+                  repoBranches={repoBranches}
+                  siteTitle={title}
+                  slug={slug}
+                  toctree={toctree}
+                  eol={eol}
+                />
+              )}
+            </>
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>

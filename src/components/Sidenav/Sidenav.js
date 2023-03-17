@@ -249,90 +249,86 @@ const Sidenav = ({
     <>
       <Global styles={disableScroll(!hideMobile)} />
       <SidenavContainer {...topValues}>
-        {!isInPresentationMode && (
-          <>
-            <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
-              <LeafygreenSideNav
-                aria-label="Side navigation"
-                className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
-                collapsed={isCollapsed}
-                setCollapsed={setCollapsed}
-                widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
-              >
-                <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
-                  <NavTopContainer>
-                    <ArtificialPadding />
-                    <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
-                      MongoDB Documentation
-                    </SideNavItem>
-                    <Border />
-                    <SidenavBackButton
-                      handleClick={() => {
-                        setBack(true);
-                        hideMobileSidenav();
-                      }}
-                      project={project}
-                      currentSlug={slug}
-                      target={isGuidesTemplate ? '/' : ''}
-                      titleOverride={isGuidesTemplate ? siteTitle : ''}
-                      eol={eol}
-                    />
-                    {ia && (
-                      <IA
-                        header={<span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
-                        handleClick={() => {
-                          setBack(false);
-                          hideMobileSidenav();
-                        }}
-                        ia={ia}
-                      />
-                    )}
-                    {showAllProducts && (
-                      <Border
-                        css={css`
-                          margin-bottom: 0;
-                        `}
-                      />
-                    )}
-                  </NavTopContainer>
-                  {showAllProducts && <ProductsList />}
-                </IATransition>
-
-                {!ia && !showAllProducts && (
-                  <>
-                    {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
-                    <SideNavItem
-                      className={cx(titleStyle, sideNavItemBasePadding)}
-                      as={Link}
-                      to={isGuidesTemplate ? slug : '/'}
-                    >
-                      {navTitle}
-                    </SideNavItem>
-                  </>
+        <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
+          <LeafygreenSideNav
+            aria-label="Side navigation"
+            className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
+            collapsed={isCollapsed}
+            setCollapsed={setCollapsed}
+            widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
+          >
+            <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
+              <NavTopContainer>
+                <ArtificialPadding />
+                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
+                  MongoDB Documentation
+                </SideNavItem>
+                <Border />
+                <SidenavBackButton
+                  handleClick={() => {
+                    setBack(true);
+                    hideMobileSidenav();
+                  }}
+                  project={project}
+                  currentSlug={slug}
+                  target={isGuidesTemplate ? '/' : ''}
+                  titleOverride={isGuidesTemplate ? siteTitle : ''}
+                  eol={eol}
+                />
+                {ia && (
+                  <IA
+                    header={<span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
+                    handleClick={() => {
+                      setBack(false);
+                      hideMobileSidenav();
+                    }}
+                    ia={ia}
+                  />
                 )}
-                {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} eol={eol} />}
-                {!ia && navContent}
-
-                {isDocsLanding && (
-                  <>
-                    <Spaceholder />
-                    {/* Represents the generic links at the bottom of the side nav (e.g. "Contact Support") */}
-                    {additionalLinks.map(({ glyph, title, url }) => (
-                      <SideNavItem
-                        className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
-                        key={url}
-                        glyph={<Icon glyph={glyph} />}
-                        href={url}
-                      >
-                        {title}
-                      </SideNavItem>
-                    ))}
-                  </>
+                {showAllProducts && (
+                  <Border
+                    css={css`
+                      margin-bottom: 0;
+                    `}
+                  />
                 )}
-              </LeafygreenSideNav>
-            </SidenavMobileTransition>
-          </>
-        )}
+              </NavTopContainer>
+              {showAllProducts && <ProductsList />}
+            </IATransition>
+
+            {!ia && !showAllProducts && (
+              <>
+                {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
+                <SideNavItem
+                  className={cx(titleStyle, sideNavItemBasePadding)}
+                  as={Link}
+                  to={isGuidesTemplate ? slug : '/'}
+                >
+                  {navTitle}
+                </SideNavItem>
+              </>
+            )}
+            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} eol={eol} />}
+            {!ia && navContent}
+
+            {isDocsLanding && (
+              <>
+                <Spaceholder />
+                {/* Represents the generic links at the bottom of the side nav (e.g. "Contact Support") */}
+                {additionalLinks.map(({ glyph, title, url }) => (
+                  <SideNavItem
+                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
+                    key={url}
+                    glyph={<Icon glyph={glyph} />}
+                    href={url}
+                  >
+                    {title}
+                  </SideNavItem>
+                ))}
+              </>
+            )}
+          </LeafygreenSideNav>
+        </SidenavMobileTransition>
       </SidenavContainer>
     </>
   );
