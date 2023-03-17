@@ -101,8 +101,8 @@ const DefaultLayout = ({
         remoteMetadata={remoteMetadata}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode && <Header sidenav={sidenav} eol={eol} />}
-          {sidenav && !isInPresentationMode && (
+          {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} /> : <div />}
+          {sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}
               guides={guides}
@@ -115,6 +115,8 @@ const DefaultLayout = ({
               toctree={toctree}
               eol={eol}
             />
+          ) : (
+            <div />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>
