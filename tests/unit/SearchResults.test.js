@@ -4,13 +4,20 @@ import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
-import * as reachRouter from '@gatsbyjs/reach-router';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { tick, setMobile } from '../utils';
 import SearchResults from '../../src/components/SearchResults';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as RealmUtil from '../../src/utils/realm';
 import mockInputData from '../utils/data/marian-manifests.json';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
+
+jest.mock('@gatsbyjs/reach-router', () => ({
+  useLocation: jest.fn(),
+}));
+
+// Mock the reach router useLocation hook
+const mockLocation = (search) => useLocation.mockImplementation(() => ({ search }));
 
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
@@ -75,9 +82,6 @@ const expectUnfilteredResults = (wrapper) => {
   expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
 };
 
-// Mock the reach router useLocation hook
-const mockLocation = (search) => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ search }));
-
 const filterByRealm = async (wrapper, screenSize) => {
   let listboxIndex = 0;
   if (screenSize === 'mobile') {
@@ -87,9 +91,10 @@ const filterByRealm = async (wrapper, screenSize) => {
   const dropdownButton = selectElements[listboxIndex];
   expect(dropdownButton).toHaveAttribute('aria-expanded', 'false');
   userEvent.click(dropdownButton);
-  tick();
+  await tick();
   const dropdownList = wrapper.queryAllByRole('listbox')[0];
   userEvent.click(within(dropdownList).getByText('Realm'));
+  await tick();
 };
 
 const openMobileSearch = async (wrapper) => {
@@ -201,10 +206,7 @@ describe('Search Results Page', () => {
     expectUnfilteredResults(renderStitchResults);
 
     // Change the filters, which should change the shown results
-
-    await act(async () => {
-      await filterByRealm(renderStitchResults);
-    });
+    await filterByRealm(renderStitchResults);
     expectFilteredResults(renderStitchResults, true);
   });
 
@@ -217,9 +219,7 @@ describe('Search Results Page', () => {
     expectUnfilteredResults(renderStitchResults);
 
     // Change filters
-    await act(async () => {
-      await filterByRealm(renderStitchResults);
-    });
+    await filterByRealm(renderStitchResults);
     expectFilteredResults(renderStitchResults, true);
 
     // Remove filters
@@ -245,10 +245,8 @@ describe('Search Results Page', () => {
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
     // Set filters but don't apply them
-    await act(async () => {
-      // Filter using listbox at index 2, which should appear on mobile
-      await filterByRealm(renderStitchResults, 'mobile');
-    });
+    // Filter using listbox at index 2, which should appear on mobile
+    await filterByRealm(renderStitchResults, 'mobile');
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
@@ -284,9 +282,7 @@ describe('Search Results Page', () => {
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
     // Set filters but don't apply them
-    await act(async () => {
-      await filterByRealm(renderStitchResults, 'mobile');
-    });
+    await filterByRealm(renderStitchResults, 'mobile');
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 

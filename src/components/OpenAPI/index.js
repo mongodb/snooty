@@ -166,7 +166,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
 
   useEffect(() => {
     if (isBrowser) {
-      const urlParams = URLSearchParams(window.location.search);
+      const urlParams = new URLSearchParams(window.location.search);
       setSrc(urlParams?.get('src'));
       setHasValidSpecUrl(!!src && isLinkInWhitelist(src));
     }
