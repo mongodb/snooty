@@ -291,7 +291,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 <SideNavItem
                   className={cx(titleStyle, sideNavItemBasePadding)}
                   as={Link}
-                  to={isGuidesTemplate ? slug : '/'}
+                  to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
+                  hideExternalIcon={true}
                 >
                   {navTitle}
                 </SideNavItem>
