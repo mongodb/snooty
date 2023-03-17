@@ -8,6 +8,7 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import Widgets from './Widgets';
+import ConditionalWrapper from './ConditionalWrapper';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
@@ -106,22 +107,27 @@ const DocumentBody = (props) => {
   return (
     <>
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-      <Widgets
-        location={location}
-        pageOptions={page?.options}
-        pageTitle={pageTitle}
-        publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-        slug={slug}
-        isInPresentationMode={isInPresentationMode}
-      >
-        <FootnoteContext.Provider value={{ footnotes }}>
+      <ConditionalWrapper
+        condition={!isInPresentationMode}
+        wrapper={(children) => (
+          <Widgets
+            location={location}
+            pageOptions={page?.options}
+            pageTitle={pageTitle}
+            publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+            slug={slug}
+          >
+            <FootnoteContext.Provider value={{ footnotes }}>{children}</FootnoteContext.Provider>
+          </Widgets>
+        )}
+        children={
           <Template {...props}>
             {pageNodes.map((child, index) => (
               <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
             ))}
           </Template>
-        </FootnoteContext.Provider>
-      </Widgets>
+        }
+      ></ConditionalWrapper>
       {!isInPresentationMode && <UnifiedFooter hideLocale={true} />}
     </>
   );

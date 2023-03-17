@@ -66,19 +66,11 @@ const globalCSS = css`
   ${footerOverrides}
 `;
 
-const gridAreaForPresentationView = css`
-  grid-template-areas: 'contents';
-`;
-
-const gridAreaForDefaultView = css`
+const GlobalGrid = styled('div')`
+  display: grid;
   grid-template-areas:
     'header header'
     'sidenav contents';
-`;
-
-const GlobalGrid = styled('div')`
-  display: grid;
-  ${({ isInPresentationMode }) => (isInPresentationMode ? gridAreaForPresentationView : gridAreaForDefaultView)};
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
 `;
@@ -109,24 +101,20 @@ const DefaultLayout = ({
         remoteMetadata={remoteMetadata}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode && (
-            <>
-              <Header sidenav={sidenav} eol={eol} />
-              {sidenav && (
-                <Sidenav
-                  chapters={chapters}
-                  guides={guides}
-                  page={page}
-                  pageTitle={pageTitle}
-                  publishedBranches={publishedBranches}
-                  repoBranches={repoBranches}
-                  siteTitle={title}
-                  slug={slug}
-                  toctree={toctree}
-                  eol={eol}
-                />
-              )}
-            </>
+          {!isInPresentationMode && <Header sidenav={sidenav} eol={eol} />}
+          {sidenav && !isInPresentationMode && (
+            <Sidenav
+              chapters={chapters}
+              guides={guides}
+              page={page}
+              pageTitle={pageTitle}
+              publishedBranches={publishedBranches}
+              repoBranches={repoBranches}
+              siteTitle={title}
+              slug={slug}
+              toctree={toctree}
+              eol={eol}
+            />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>

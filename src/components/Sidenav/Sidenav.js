@@ -158,18 +158,7 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({
-  chapters,
-  guides,
-  page,
-  pageTitle,
-  repoBranches,
-  siteTitle,
-  slug,
-  toctree,
-  eol,
-  isInPresentationMode,
-}) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, toctree, eol }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
@@ -344,7 +333,6 @@ Sidenav.propTypes = {
   siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
   eol: PropTypes.bool.isRequired,
-  isInPresentationMode: PropTypes.bool,
 };
 
 export default Sidenav;
