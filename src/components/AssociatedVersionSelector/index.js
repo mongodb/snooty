@@ -42,6 +42,7 @@ const AssociatedVersionSelector = () => {
     <>
       {process.env.GATSBY_TEST_EMBED_VERSIONS === 'true' &&
         showVersionDropdown &&
+        activeVersions[project] &&
         availableVersions[project] &&
         availableVersions[project].length > 0 && (
           <>

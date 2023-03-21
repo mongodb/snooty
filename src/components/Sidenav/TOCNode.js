@@ -50,8 +50,8 @@ const overwriteLinkStyle = LeafyCSS`
  * @param {hasVersions} boolean
  * @returns Wrapper for Version Selector, or returns children
  */
-const Wrapper = ({ children, hasVersions, project, versions }) => {
-  return hasVersions ? (
+const Wrapper = ({ activeVersions, children, hasVersions, project, versions }) => {
+  return hasVersions && activeVersions[project] ? (
     <Box className={cx(wrapperStyle)}>
       {children}
       {hasVersions && <VersionSelector versionedProject={project} tocVersionNames={versions} />}
@@ -115,7 +115,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
 
     if (isDrawer && hasChildren) {
       return (
-        <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
+        <Wrapper
+          activeVersions={activeVersions}
+          hasVersions={hasVersions}
+          project={options.project}
+          versions={options.versions}
+        >
           <SideNavItem
             className={cx(sideNavItemTOCStyling({ level }))}
             onClick={() => {
@@ -130,7 +135,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
       );
     }
     return (
-      <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
+      <Wrapper
+        activeVersions={activeVersions}
+        hasVersions={hasVersions}
+        project={options.project}
+        versions={options.versions}
+      >
         <SideNavItem
           as={Link}
           to={target}
