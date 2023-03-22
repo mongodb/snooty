@@ -12,14 +12,27 @@ import Link from '../Link';
 import Tag from '../Tag';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 
-const cardStyling = css`
+const cardBaseStyles = css`
   display: flex;
-  flex-direction: column;
   height: 100%;
   padding: ${theme.size.large};
+`;
+
+const cardStyling = css`
+  flex-direction: column;
 
   p:last-of-type {
     margin-bottom: 0;
+  }
+`;
+
+const cardDriverStyle = css`
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 18px;
+    font-weight: 400;
+    font-size: 16px;
   }
 `;
 
@@ -77,13 +90,18 @@ const onCardClick = (url) => {
 const Card = ({
   isCompact,
   isExtraCompact,
+  isForDrivers,
   page,
   nodeData: {
     children,
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
 }) => {
-  const styling = [cardStyling, isCompact || isExtraCompact ? compactCardStyling : ''];
+  const styling = [
+    cardBaseStyles,
+    isForDrivers ? cardDriverStyle : cardStyling,
+    isCompact || isExtraCompact ? compactCardStyling : '',
+  ];
   const template = page?.options?.template;
   const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
 
@@ -119,6 +137,7 @@ const Card = ({
 };
 
 Card.propTypes = {
+  isForDrivers: PropTypes.bool,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
     options: PropTypes.shape({
