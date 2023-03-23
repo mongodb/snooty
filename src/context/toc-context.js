@@ -13,7 +13,7 @@ const TocContext = createContext({
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
 const TocContextProvider = ({ children, remoteMetadata }) => {
-  const { activeVersions, setActiveVersions, showVersionDropdown } = useContext(VersionContext);
+  const { activeVersions, setActiveVersions, availableVersions, showVersionDropdown } = useContext(VersionContext);
   const { toctree, associated_products: associatedProducts } = useSnootyMetadata();
   const { database, project, parserBranch } = useSiteMetadata();
   const [activeToc, setActiveToc] = useState(remoteMetadata?.toctree || toctree);
@@ -57,12 +57,17 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
           !activeVersions[node.options.project] ||
           !node.options.versions.includes(activeVersions[node.options.project])
         ) {
-          // TODO: persistence module should order this in default
-          setActiveVersions({ [node.options.project]: node.options.versions[0] });
+          // assumption is that first branch in pool.repos_branches
+          // exists as a toc node here. otherwise, fallback to first ToC option
+          const gitBranchNames = availableVersions[node.options.project].map((b) => b.gitBranchName);
+          const intersection = gitBranchNames.filter((b) => node.options.versions.includes(b));
+          setActiveVersions({
+            [node.options.project]: intersection.length ? intersection[0] : node.options.versions[0],
+          });
         }
       }
     },
-    [activeVersions, setActiveVersions]
+    [activeVersions, setActiveVersions, availableVersions]
   );
 
   // initial effect is to fetch metadata

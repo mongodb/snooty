@@ -83,16 +83,22 @@ const getDefaultAvailVersions = (project, repoBranches, associatedReposInfo) => 
   return versions;
 };
 
-const getDefaultActiveVersions = (repoBranches, project, associatedReposInfo) => {
-  const versions = {};
-  if (repoBranches?.branches.length) {
-    versions[project] = repoBranches.branches[0].gitBranchName;
-  }
-  for (const productName in associatedReposInfo) {
-    if (associatedReposInfo[productName].branches?.length) {
-      versions[productName] = associatedReposInfo[productName].branches[0].gitBranchName;
-    }
-  }
+const getDefaultActiveVersions = ([metadata, associatedReposInfo]) => {
+  // for current metadata.project, should always default to metadata.parserBranch
+  const { project, parserBranch } = metadata;
+  let versions = {};
+  versions[project] = parserBranch;
+  // return this merged with local storage
+  versions = {
+    ...getLocalValue(STORAGE_KEY),
+    ...versions,
+  };
+
+  // for any umbrella / associated products
+  // we should depend on local storage
+  // otherwise, setting init on build will be overwritten by local storage
+  // and result in double render
+
   return versions;
 };
 
@@ -128,7 +134,8 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   // tracks active versions across app
   const [activeVersions, setActiveVersions] = useReducer(
     versionStateReducer,
-    getLocalValue(STORAGE_KEY) || getDefaultActiveVersions(repoBranches, metadata.project, associatedReposInfo)
+    [metadata, associatedReposInfo],
+    getDefaultActiveVersions
   );
   // update local storage when active versions change
   useEffect(() => {

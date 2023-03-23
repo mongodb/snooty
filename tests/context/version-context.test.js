@@ -14,6 +14,7 @@ const setProjectAndAssociatedProducts = () => {
     site: {
       siteMetadata: {
         project: project,
+        parserBranch: 'master',
       },
     },
     allSnootyMetadata: {
@@ -223,13 +224,13 @@ describe('Version Context', () => {
     }
 
     // active checks
-    const expectedActive = { 'cloud-docs': 'master', 'atlas-cli': 'master' };
+    const expectedActive = { 'cloud-docs': 'master' };
     expect(await wrapper.findByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 
   it('initializes with values from local storage', async () => {
     mockedLocalStorage[STORAGE_KEY] = { 'atlas-cli': 'v1.2' };
-    const expectedActive = { 'atlas-cli': 'v1.2' };
+    const expectedActive = { 'atlas-cli': 'v1.2', 'cloud-docs': 'master' };
     await act(async () => {
       wrapper = mountConsumer();
     });
