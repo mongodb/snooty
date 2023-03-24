@@ -15,11 +15,11 @@ import { isRelativeUrl } from '../../utils/is-relative-url';
 const cardBaseStyles = css`
   display: flex;
   height: 100%;
-  padding: ${theme.size.large};
 `;
 
 const cardStyling = css`
   flex-direction: column;
+  padding: ${theme.size.large};
 
   p:last-of-type {
     margin-bottom: 0;
@@ -28,11 +28,8 @@ const cardStyling = css`
 
 const cardDriverStyle = css`
   p {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 18px;
+    margin: 0 0 0 18px;
     font-weight: 400;
-    font-size: 16px;
   }
 `;
 

@@ -41,7 +41,8 @@ const StyledGrid = styled('div')`
   grid-column-gap: ${theme.size.medium};
   grid-row-gap: ${theme.size.medium};
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
-  margin: ${theme.size.large} 0;
+  margin: ${({ isForDrivers }) =>
+    isForDrivers ? `${theme.size.large} 0 ${theme.size.xlarge}` : `${theme.size.large} 0`};
 
   @media ${theme.screenSize.upToXLarge} {
     grid-template-columns: repeat(2, 1fr);
@@ -79,6 +80,7 @@ const CardGroup = ({
       columns={columns}
       noMargin={true}
       isCarousel={isCarousel}
+      isForDrivers={isForDrivers}
     >
       {children.map((child, i) => (
         <ComponentFactory
