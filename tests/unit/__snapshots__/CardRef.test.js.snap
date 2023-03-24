@@ -56,10 +56,10 @@ exports[`card correctly with and without url 1`] = `
   display: -ms-flexbox;
   display: flex;
   height: 100%;
-  padding: 32px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  padding: 32px;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -218,10 +218,10 @@ exports[`card correctly with and without url 1`] = `
   display: -ms-flexbox;
   display: flex;
   height: 100%;
-  padding: 32px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  padding: 32px;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;

@@ -23,10 +23,10 @@ exports[`renders correctly 1`] = `
   display: -ms-flexbox;
   display: flex;
   height: 100%;
-  padding: 32px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  padding: 32px;
 }
 
 .emotion-0:focus {
