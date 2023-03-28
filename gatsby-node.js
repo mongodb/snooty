@@ -132,25 +132,23 @@ exports.createPages = async ({ actions }) => {
   try {
     const repoInfo = await db.stitchInterface.fetchRepoBranches();
 
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
-      // fetch associated child products
-      const productList = manifestMetadata?.associated_products || [];
-      await Promise.all(
-        productList.map(async (product) => {
-          associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
-        })
-      );
+    // fetch associated child products
+    const productList = manifestMetadata?.associated_products || [];
+    await Promise.all(
+      productList.map(async (product) => {
+        associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+      })
+    );
 
-      // check if product is associated child product
-      try {
-        const umbrellaProduct = await db.stitchInterface.getMetadata({
-          'associated_products.name': siteMetadata.project,
-        });
-        isAssociatedProduct = !!umbrellaProduct;
-      } catch (e) {
-        console.log('No umbrella product found. Not an associated product.');
-        isAssociatedProduct = false;
-      }
+    // check if product is associated child product
+    try {
+      const umbrellaProduct = await db.stitchInterface.getMetadata({
+        'associated_products.name': siteMetadata.project,
+      });
+      isAssociatedProduct = !!umbrellaProduct;
+    } catch (e) {
+      console.log('No umbrella product found. Not an associated product.');
+      isAssociatedProduct = false;
     }
     let errMsg;
 
