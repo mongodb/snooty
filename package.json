@@ -101,7 +101,7 @@
     "gatsby-plugin-layout": "^4.7.0",
     "gatsby-plugin-sitemap": "^6.0.0",
     "hex-rgb": "^5.0.0",
-    "highlight.js": "~10.6.0",
+    "highlight.js": "~11.5.0",
     "html-screen-capture-js": "^1.0.50",
     "https-browserify": "^1.0.0",
     "immer": "^9.0.6",
