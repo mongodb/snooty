@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -50,22 +50,22 @@ const overwriteLinkStyle = LeafyCSS`
  * @param {hasVersions} boolean
  * @returns Wrapper for Version Selector, or returns children
  */
-const Wrapper = ({ activeVersions, children, hasVersions, project, versions }) => {
+const Wrapper = forwardRef(({ activeVersions, children, hasVersions, project, versions }, ref) => {
   return hasVersions && activeVersions[project] ? (
-    <Box className={cx(wrapperStyle)}>
+    <Box className={cx(wrapperStyle)} ref={ref}>
       {children}
       {hasVersions && <VersionSelector versionedProject={project} tocVersionNames={versions} />}
     </Box>
   ) : (
-    <>{children}</>
+    <Box ref={ref}>{children}</Box>
   );
-};
+});
 
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
-const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }) => {
+const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, currentSlug, parentProj = '' }) => {
   const { title, slug, url, children, options = {} } = node;
   const { activeVersions } = useContext(VersionContext);
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
@@ -76,6 +76,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
   const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
+  const tocNodeRef = useRef(null);
+  useEffect(() => {
+    if (tocNodeRef.current) {
+      tocNodeRef.current.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+    }
+  }, []);
 
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
@@ -116,6 +122,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     if (isDrawer && hasChildren) {
       return (
         <Wrapper
+          ref={tocNodeRef}
           activeVersions={activeVersions}
           hasVersions={hasVersions}
           project={options.project}
@@ -136,6 +143,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     }
     return (
       <Wrapper
+        ref={tocNodeRef}
         activeVersions={activeVersions}
         hasVersions={hasVersions}
         project={options.project}

@@ -168,7 +168,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
 
-  let showVersions = repoBranches?.branches?.length > 1;
+  let showVersions = repoBranches?.branches?.filter((b) => b.active)?.length > 1;
 
   const { showVersionDropdown } = useContext(VersionContext);
   if (showVersionDropdown) {
