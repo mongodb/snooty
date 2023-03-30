@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -26,10 +26,11 @@ const caretStyle = LeafyCSS`
   min-width: 16px;
 `;
 
-const wrapperStyle = LeafyCSS`
+const wrapperStyle = ({ hasVersions }) => LeafyCSS`
   display: flex;
   align-items: center;
-  padding-right: ${theme.size.medium};
+  scroll-margin-bottom: 200px;
+  ${hasVersions && `padding-right: ${theme.size.medium};`}
 
   &:hover {
     background: ${palette.gray.light2};
@@ -45,21 +46,8 @@ const overwriteLinkStyle = LeafyCSS`
     display: flex;
   }
 `;
-/**
- *
- * @param {hasVersions} boolean
- * @returns Wrapper for Version Selector, or returns children
- */
-const Wrapper = forwardRef(({ activeVersions, children, hasVersions, project, versions }, ref) => {
-  return hasVersions && activeVersions[project] ? (
-    <Box className={cx(wrapperStyle)} ref={ref}>
-      {children}
-      {hasVersions && <VersionSelector versionedProject={project} tocVersionNames={versions} />}
-    </Box>
-  ) : (
-    <Box ref={ref}>{children}</Box>
-  );
-});
+
+const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
 
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
@@ -77,11 +65,15 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
   const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
   const tocNodeRef = useRef(null);
+
+  // effect of scrolling toc node into view on load
   useEffect(() => {
-    if (tocNodeRef.current) {
-      tocNodeRef.current.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+    // TODO: can improve this by awaiting for navigation context
+    // fetchProjectParents
+    if (tocNodeRef.current && currentSlug === slug) {
+      tocNodeRef.current.scrollIntoView(scrollBehavior);
     }
-  }, []);
+  }, [tocNodeRef, currentSlug, slug]);
 
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
@@ -121,13 +113,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
 
     if (isDrawer && hasChildren) {
       return (
-        <Wrapper
-          ref={tocNodeRef}
-          activeVersions={activeVersions}
-          hasVersions={hasVersions}
-          project={options.project}
-          versions={options.versions}
-        >
+        <Box ref={tocNodeRef} className={cx(wrapperStyle({ hasVersions }))}>
           <SideNavItem
             className={cx(sideNavItemTOCStyling({ level }))}
             onClick={() => {
@@ -138,17 +124,14 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
             {isTocIcon && <SyncCloud />}
             {formattedTitle}
           </SideNavItem>
-        </Wrapper>
+          {hasVersions && activeVersions[options.project] && (
+            <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
+          )}
+        </Box>
       );
     }
     return (
-      <Wrapper
-        ref={tocNodeRef}
-        activeVersions={activeVersions}
-        hasVersions={hasVersions}
-        project={options.project}
-        versions={options.versions}
-      >
+      <Box ref={tocNodeRef} className={cx(wrapperStyle({ hasVersions }))}>
         <SideNavItem
           as={Link}
           to={target}
@@ -165,7 +148,10 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
-      </Wrapper>
+        {hasVersions && activeVersions[options.project] && (
+          <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
+        )}
+      </Box>
     );
   };
 
@@ -182,6 +168,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
               node={c}
               level={level + 1}
               key={key}
+              currentSlug={currentSlug}
               parentProj={options.project}
             />
           );
