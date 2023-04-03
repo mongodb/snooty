@@ -17,6 +17,15 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   font-size: ${theme.fontSize.small};
   text-transform: none;
   line-height: 20px !important;
+
+  // overwrite LG link underlines
+  // @leafygreen-ui/typography v13.0.0
+  :hover {
+    &:after,
+    span:after {
+      display: none;
+    }
+  }
 `;
 
 export const sideNavItemFontSize = css`

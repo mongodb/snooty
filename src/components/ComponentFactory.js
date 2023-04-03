@@ -144,7 +144,7 @@ const componentMap = {
   deprecated: VersionModified,
   'deprecated-version-selector': DeprecatedVersionSelector,
   describe: Describe,
-  'drivers-index-tiles': DriversIndexTiles,
+  'drivers-index-tiles': DriversIndexTiles, // deprecated.
   emphasis: Emphasis,
   extract: Extract,
   field: Field,

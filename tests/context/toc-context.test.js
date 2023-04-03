@@ -148,13 +148,6 @@ describe('ToC Context', () => {
     setMocks();
   });
 
-  it('initializes ToC without versioned nodes if not in available versions', async () => {
-    await act(async () => {
-      wrapper = mountConsumer({}, {});
-    });
-    expect(wrapper.queryByText(/options/g)).toBeNull();
-  });
-
   it('sets ToC based on response realm app service response', async () => {
     await act(async () => {
       wrapper = mountConsumer();

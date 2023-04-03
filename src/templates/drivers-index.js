@@ -8,8 +8,8 @@ import MainColumn from '../components/MainColumn';
 
 const DocumentContainer = styled('div')`
   display: grid;
-  grid-template-areas: 'left main right';
-  grid-template-columns: 1fr minmax(${theme.size.xlarge}, auto) 1fr;
+  grid-template-areas: 'main right';
+  grid-template-columns: minmax(${theme.size.xlarge}, auto) 1fr;
 `;
 
 const StyledMainColumn = styled(MainColumn)`
