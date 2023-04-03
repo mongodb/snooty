@@ -82,6 +82,10 @@ const titleStyle = LeafyCSS`
   text-transform: none;
   :hover {
     background-color: inherit;
+
+    &:after, span:after {
+      display: none;
+    }
   }
 `;
 
@@ -167,7 +171,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   let showVersions = repoBranches?.branches?.length > 1;
 
   const { showVersionDropdown } = useContext(VersionContext);
-  if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true' && showVersionDropdown) {
+  if (showVersionDropdown) {
     showVersions = false;
   }
 
@@ -204,22 +208,13 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
       );
     }
 
-    // TODO: update sidenav. use new context and show options for filtering versions via ToC
-    if (process.env.GATSBY_TEST_EMBED_VERSIONS === 'true') {
-      return (
-        <>
-          {Object.keys(activeToc).length > 0 && (
-            <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={activeToc} />
-          )}
-        </>
-      );
+    if (!Object.keys(activeToc).length) {
+      return null;
     }
-    return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />;
-  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, toctree, activeToc]);
+    return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={activeToc} />;
+  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, activeToc]);
 
-  const navTitle = isGuidesTemplate
-    ? guides?.[slug]?.['chapter_name']
-    : formatText(process.env.GATSBY_TEST_EMBED_VERSIONS === 'true' ? activeToc.title : toctree.title);
+  const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : formatText(activeToc.title);
 
   const guidesChapterNumber = useMemo(() => {
     if (!isGuidesTemplate) {
@@ -287,7 +282,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 <SideNavItem
                   className={cx(titleStyle, sideNavItemBasePadding)}
                   as={Link}
-                  to={isGuidesTemplate ? slug : '/'}
+                  to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
+                  hideExternalIcon={true}
                 >
                   {navTitle}
                 </SideNavItem>

@@ -58,10 +58,10 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  height: 100%;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  height: 100%;
   padding: 32px;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
@@ -242,9 +242,8 @@ exports[`renders correctly 1`] = `
         >
           <a
             class="constant-classname emotion-9"
-            href="https://docs.atlas.mongodb.com/getting-started/"
-            rel="noopener noreferrer"
-            target="_blank"
+            href="https://www.mongodb.com/docs/atlas/getting-started/"
+            target="_self"
           >
             <span
               class="emotion-10"
@@ -328,9 +327,8 @@ exports[`renders correctly 1`] = `
         >
           <a
             class="constant-classname emotion-9"
-            href="https://docs.mongodb.com/manual/tutorial/getting-started/"
-            rel="noopener noreferrer"
-            target="_blank"
+            href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
+            target="_self"
           >
             <span
               class="emotion-10"

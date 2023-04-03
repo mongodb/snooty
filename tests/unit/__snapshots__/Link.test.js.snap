@@ -143,8 +143,7 @@ exports[`Link component renders a variety of strings correctly external MDB docs
 <a
     class="constant-classname emotion-0"
     href="https://www.mongodb.com/docs/atlas/"
-    rel="noopener noreferrer"
-    target="_blank"
+    target="_self"
   >
     <span
       class="emotion-1"
@@ -394,8 +393,7 @@ exports[`Link component renders a variety of strings correctly external URL with
 <a
     class="constant-classname emotion-0"
     href="http://mongodb.com"
-    rel="noopener noreferrer"
-    target="_blank"
+    target="_self"
   >
     <span
       class="emotion-1"

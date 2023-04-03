@@ -8,6 +8,7 @@ import { Sidenav } from '../components/Sidenav';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
+import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
@@ -82,6 +83,8 @@ const DefaultLayout = ({
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
 
+  const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug);
 
@@ -97,9 +100,9 @@ const DefaultLayout = ({
         isAssociatedProduct={isAssociatedProduct}
         remoteMetadata={remoteMetadata}
       >
-        <GlobalGrid>
-          <Header sidenav={sidenav} eol={eol} />
-          {sidenav && (
+        <GlobalGrid isInPresentationMode={isInPresentationMode}>
+          {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} /> : <div />}
+          {sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}
               guides={guides}
@@ -112,6 +115,8 @@ const DefaultLayout = ({
               toctree={toctree}
               eol={eol}
             />
+          ) : (
+            <div />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>

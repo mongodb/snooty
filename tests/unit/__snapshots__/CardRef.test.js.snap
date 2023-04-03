@@ -55,10 +55,10 @@ exports[`card correctly with and without url 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  height: 100%;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  height: 100%;
   padding: 32px;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
@@ -217,10 +217,10 @@ exports[`card correctly with and without url 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  height: 100%;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  height: 100%;
   padding: 32px;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
@@ -420,8 +420,7 @@ exports[`card correctly with and without url 1`] = `
           <a
             class="constant-classname emotion-30"
             href="https://docs.mongodb.com/realm/services/"
-            rel="noopener noreferrer"
-            target="_blank"
+            target="_self"
           >
             <span
               class="emotion-31"

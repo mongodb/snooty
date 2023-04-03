@@ -58,10 +58,8 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
       const childRepoBranches = await fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
         project: product.name,
       });
-      // filter all branches of associated repo by associated versions only
-      versions[product.name] = childRepoBranches.branches.filter((branch) => {
-        return branch.active && product.versions.includes(branch.gitBranchName);
-      });
+      // filter all branches of associated repo by active property
+      versions[product.name] = childRepoBranches.branches.filter((branch) => branch.active);
     });
     promises.push(
       fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
@@ -71,14 +69,37 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
     await Promise.all(promises);
     return versions;
   } catch (e) {
+    return getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo);
     // on error of realm function, fall back to build time fetches
-    const versions = {};
-    versions[metadata.project] = repoBranches?.branches || [];
-    for (const productName in associatedReposInfo) {
-      versions[productName] = associatedReposInfo[productName].branches || [];
-    }
-    return versions;
   }
+};
+
+const getDefaultAvailVersions = (project, repoBranches, associatedReposInfo) => {
+  const versions = {};
+  versions[project] = repoBranches?.branches || [];
+  for (const productName in associatedReposInfo) {
+    versions[productName] = associatedReposInfo[productName].branches || [];
+  }
+  return versions;
+};
+
+const getDefaultActiveVersions = ([metadata, associatedReposInfo]) => {
+  // for current metadata.project, should always default to metadata.parserBranch
+  const { project, parserBranch } = metadata;
+  let versions = {};
+  versions[project] = parserBranch;
+  // return this merged with local storage
+  versions = {
+    ...getLocalValue(STORAGE_KEY),
+    ...versions,
+  };
+
+  // for any umbrella / associated products
+  // we should depend on local storage
+  // otherwise, setting init on build will be overwritten by local storage
+  // and result in double render
+
+  return versions;
 };
 
 const getUmbrellaProject = async (project, dbName) => {
@@ -99,6 +120,7 @@ const VersionContext = createContext({
   // active version for each product is marked is {[product name]: active version} pair
   setActiveVersions: () => {},
   availableVersions: {},
+  setAvailableVersions: () => {},
   showVersionDropdown: false,
   onVersionSelect: () => {},
 });
@@ -110,7 +132,11 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // TODO check whats going on here for 404 pages
   // tracks active versions across app
-  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, getLocalValue(STORAGE_KEY) || {});
+  const [activeVersions, setActiveVersions] = useReducer(
+    versionStateReducer,
+    [metadata, associatedReposInfo],
+    getDefaultActiveVersions
+  );
   // update local storage when active versions change
   useEffect(() => {
     setLocalValue(STORAGE_KEY, activeVersions);
@@ -120,7 +146,9 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   }, [activeVersions]);
 
   // expose the available versions for current and associated products
-  const [availableVersions, setAvailableVersions] = useState({});
+  const [availableVersions, setAvailableVersions] = useState(
+    getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo)
+  );
   // on init, fetch versions from realm app services
   useEffect(() => {
     getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then((versions) => {
