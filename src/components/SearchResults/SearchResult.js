@@ -1,16 +1,13 @@
-import React, { useCallback, useContext, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import sanitizeHtml from 'sanitize-html';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
-import { getNestedValue } from '../../utils/get-nested-value';
 import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 
-const ARROW_DOWN_KEY = 40;
-const ARROW_UP_KEY = 38;
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `background-color: ${palette.yellow.light2};`;
@@ -132,61 +129,15 @@ const SearchResult = React.memo(
     url,
     ...props
   }) => {
-    const { searchContainerRef, searchPropertyMapping, searchTerm } = useContext(SearchContext);
+    const { searchPropertyMapping, searchTerm } = useContext(SearchContext);
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
 
-    const onArrowDown = useCallback(
-      (resultLinkRef) => {
-        const nextSibling = getNestedValue(['current', 'nextSibling'], resultLinkRef);
-        if (nextSibling) {
-          nextSibling.focus();
-        } else {
-          // This is the last result, so let's loop back to the top
-          if (searchContainerRef && searchContainerRef.current) {
-            const firstLink = searchContainerRef.current.querySelector(`${SearchResultLink}`);
-            if (firstLink) {
-              firstLink.focus();
-            }
-          }
-        }
-      },
-      [searchContainerRef]
-    );
-
-    const onArrowUp = (resultLinkRef) => {
-      const prevSibling = getNestedValue(['current', 'previousSibling'], resultLinkRef);
-      if (prevSibling) {
-        // If these don't match, we have gone up out of the results
-        if (prevSibling.nodeName === resultLinkRef.current.nodeName) {
-          prevSibling.focus();
-        }
-      }
-    };
-    // Navigate with arrow keys
-    const onKeyDown = useCallback(
-      (e) => {
-        // Only allow arrow keys if we are within the searchbar (not if this is being reused)
-        if (searchContainerRef) {
-          if (e.key === 'ArrowDown' || e.keyCode === ARROW_DOWN_KEY) {
-            e.preventDefault();
-            // find next result and focus
-            onArrowDown(resultLinkRef);
-          } else if (e.key === 'ArrowUp' || e.keyCode === ARROW_UP_KEY) {
-            e.preventDefault();
-            // find previous result and focus
-            onArrowUp(resultLinkRef);
-          }
-        }
-      },
-      [onArrowDown, searchContainerRef]
-    );
-
     return (
-      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} onKeyDown={onKeyDown} {...props}>
+      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
             dangerouslySetInnerHTML={{
