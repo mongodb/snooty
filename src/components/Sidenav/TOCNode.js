@@ -50,8 +50,8 @@ const overwriteLinkStyle = LeafyCSS`
  * @param {hasVersions} boolean
  * @returns Wrapper for Version Selector, or returns children
  */
-const Wrapper = ({ children, hasVersions, project, versions }) => {
-  return hasVersions ? (
+const Wrapper = ({ activeVersions, children, hasVersions, project, versions }) => {
+  return hasVersions && activeVersions[project] ? (
     <Box className={cx(wrapperStyle)}>
       {children}
       {hasVersions && <VersionSelector versionedProject={project} tocVersionNames={versions} />}
@@ -65,7 +65,7 @@ const Wrapper = ({ children, hasVersions, project, versions }) => {
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
-const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) => {
+const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }) => {
   const { title, slug, url, children, options = {} } = node;
   const { activeVersions } = useContext(VersionContext);
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
@@ -82,6 +82,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
   useEffect(() => {
     setIsOpen(isActive);
   }, [isActive, isDrawer || hasChildren ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // project prop is passed down from parent ToC node
+  // hide node if not active according to version context
+  if (parentProj && (!activeVersions[parentProj] || activeVersions[parentProj] !== options.version)) {
+    return null;
+  }
 
   const onCaretClick = (event) => {
     event.preventDefault();
@@ -109,7 +115,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
 
     if (isDrawer && hasChildren) {
       return (
-        <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
+        <Wrapper
+          activeVersions={activeVersions}
+          hasVersions={hasVersions}
+          project={options.project}
+          versions={options.versions}
+        >
           <SideNavItem
             className={cx(sideNavItemTOCStyling({ level }))}
             onClick={() => {
@@ -124,7 +135,12 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
       );
     }
     return (
-      <Wrapper hasVersions={hasVersions} project={options.project} versions={options.versions}>
+      <Wrapper
+        activeVersions={activeVersions}
+        hasVersions={hasVersions}
+        project={options.project}
+        versions={options.versions}
+      >
         <SideNavItem
           as={Link}
           to={target}
@@ -152,7 +168,14 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node }) 
         children.map((c) => {
           const key = `${c?.options?.version || ''}-${c.slug || c.url}`;
           return (
-            <TOCNode activeSection={activeSection} handleClick={handleClick} node={c} level={level + 1} key={key} />
+            <TOCNode
+              activeSection={activeSection}
+              handleClick={handleClick}
+              node={c}
+              level={level + 1}
+              key={key}
+              parentProj={options.project}
+            />
           );
         })}
     </>

@@ -41,7 +41,8 @@ const StyledGrid = styled('div')`
   grid-column-gap: ${theme.size.medium};
   grid-row-gap: ${theme.size.medium};
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
-  margin: ${theme.size.large} 0;
+  margin: ${({ isForDrivers }) =>
+    isForDrivers ? `${theme.size.large} 0 ${theme.size.xlarge}` : `${theme.size.large} 0`};
 
   @media ${theme.screenSize.upToXLarge} {
     grid-template-columns: repeat(2, 1fr);
@@ -64,22 +65,32 @@ const CardGroup = ({
   className,
   nodeData: {
     children,
-    options: { columns, layout, style },
+    options: { columns, layout, style, type },
   },
   ...rest
 }) => {
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
+  const isForDrivers = type === 'drivers';
+
   return (
     <StyledGrid
       className={['card-group', className].join(' ')}
       columns={columns}
       noMargin={true}
       isCarousel={isCarousel}
+      isForDrivers={isForDrivers}
     >
       {children.map((child, i) => (
-        <ComponentFactory {...rest} key={i} nodeData={child} isCompact={isCompact} isExtraCompact={isExtraCompact} />
+        <ComponentFactory
+          {...rest}
+          key={i}
+          nodeData={child}
+          isCompact={isCompact}
+          isExtraCompact={isExtraCompact}
+          isForDrivers={isForDrivers}
+        />
       ))}
     </StyledGrid>
   );

@@ -159,8 +159,7 @@ exports[`renders correctly with pageTitle 1`] = `
     <a
       class="constant-classname emotion-1"
       href="https://www.mongodb.com/docs/"
-      rel="noopener noreferrer"
-      target="_blank"
+      target="_self"
     >
       <span
         class="emotion-2"
@@ -342,8 +341,7 @@ exports[`renders correctly with siteTitle 1`] = `
     <a
       class="constant-classname emotion-1"
       href="https://www.mongodb.com/docs/"
-      rel="noopener noreferrer"
-      target="_blank"
+      target="_self"
     >
       <span
         class="emotion-2"

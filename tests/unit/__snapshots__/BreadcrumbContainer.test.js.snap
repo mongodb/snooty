@@ -69,8 +69,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 <a
     class="constant-classname emotion-0"
     href="https://www.mongodb.com/docs/"
-    rel="noopener noreferrer"
-    target="_blank"
+    target="_self"
   >
     <span
       class="emotion-1"
@@ -158,8 +157,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 <a
     class="constant-classname emotion-0"
     href="https://www.mongodb.com/docs/view-analyze"
-    rel="noopener noreferrer"
-    target="_blank"
+    target="_self"
   >
     <span
       class="emotion-1"
@@ -317,8 +315,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 <a
     class="constant-classname emotion-0"
     href="https://www.mongodb.com/docs/"
-    rel="noopener noreferrer"
-    target="_blank"
+    target="_self"
   >
     <span
       class="emotion-1"
