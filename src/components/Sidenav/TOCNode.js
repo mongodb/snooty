@@ -57,7 +57,7 @@ const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
-const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, currentSlug, parentProj = '' }) => {
+const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }) => {
   const { title, slug, url, children, options = {} } = node;
   const { activeVersions } = useContext(VersionContext);
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
@@ -75,11 +75,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
   const isScrolled = useRef(false);
   useEffect(() => {
     if (isScrolled.current) return;
-    if (completedFetch && tocNodeRef.current && currentSlug === slug) {
+    if (completedFetch && tocNodeRef.current && isSelectedTocNode(activeSection, slug)) {
       tocNodeRef.current.scrollIntoView(scrollBehavior);
       isScrolled.current = true;
     }
-  }, [tocNodeRef, currentSlug, slug, completedFetch]);
+  }, [tocNodeRef, activeSection, slug, completedFetch]);
 
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
@@ -119,7 +119,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
 
     if (isDrawer && hasChildren) {
       return (
-        <Box ref={tocNodeRef} className={cx({ [wrapperStyle]: true }, { [wrapperPadding]: hasVersions })}>
+        <Box ref={tocNodeRef} className={cx(wrapperStyle, { [wrapperPadding]: hasVersions })}>
           <SideNavItem
             className={cx(sideNavItemTOCStyling({ level }))}
             onClick={() => {
@@ -137,7 +137,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
       );
     }
     return (
-      <Box ref={tocNodeRef} className={cx({ [wrapperStyle]: true }, { [wrapperPadding]: hasVersions })}>
+      <Box ref={tocNodeRef} className={cx(wrapperStyle, { [wrapperPadding]: hasVersions })}>
         <SideNavItem
           as={Link}
           to={target}
@@ -174,7 +174,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
               node={c}
               level={level + 1}
               key={key}
-              currentSlug={currentSlug}
               parentProj={options.project}
             />
           );
