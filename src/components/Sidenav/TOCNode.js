@@ -8,6 +8,7 @@ import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { NavigationContext } from '../../context/navigation-context';
 import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
@@ -26,11 +27,10 @@ const caretStyle = LeafyCSS`
   min-width: 16px;
 `;
 
-const wrapperStyle = ({ hasVersions }) => LeafyCSS`
+const wrapperStyle = LeafyCSS`
   display: flex;
   align-items: center;
-  scroll-margin-bottom: 200px;
-  ${hasVersions && `padding-right: ${theme.size.medium};`}
+  scroll-margin-bottom: ${theme.size.xxlarge};
 
   &:hover {
     background: ${palette.gray.light2};
@@ -39,6 +39,10 @@ const wrapperStyle = ({ hasVersions }) => LeafyCSS`
   > li {
     flex: 1 1 auto;
   }
+`;
+
+const wrapperPadding = LeafyCSS`
+  padding-right: ${theme.size.medium};
 `;
 
 const overwriteLinkStyle = LeafyCSS`
@@ -67,13 +71,15 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
   const tocNodeRef = useRef(null);
 
   // effect of scrolling toc node into view on load
+  const { completedFetch } = useContext(NavigationContext);
+  const isScrolled = useRef(false);
   useEffect(() => {
-    // TODO: can improve this by awaiting for navigation context
-    // fetchProjectParents
-    if (tocNodeRef.current && currentSlug === slug) {
+    if (isScrolled.current) return;
+    if (completedFetch && tocNodeRef.current && currentSlug === slug) {
       tocNodeRef.current.scrollIntoView(scrollBehavior);
+      isScrolled.current = true;
     }
-  }, [tocNodeRef, currentSlug, slug]);
+  }, [tocNodeRef, currentSlug, slug, completedFetch]);
 
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
@@ -113,7 +119,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
 
     if (isDrawer && hasChildren) {
       return (
-        <Box ref={tocNodeRef} className={cx(wrapperStyle({ hasVersions }))}>
+        <Box ref={tocNodeRef} className={cx({ [wrapperStyle]: true }, { [wrapperPadding]: hasVersions })}>
           <SideNavItem
             className={cx(sideNavItemTOCStyling({ level }))}
             onClick={() => {
@@ -131,7 +137,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, cu
       );
     }
     return (
-      <Box ref={tocNodeRef} className={cx(wrapperStyle({ hasVersions }))}>
+      <Box ref={tocNodeRef} className={cx({ [wrapperStyle]: true }, { [wrapperPadding]: hasVersions })}>
         <SideNavItem
           as={Link}
           to={target}
