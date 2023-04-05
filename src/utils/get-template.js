@@ -1,4 +1,13 @@
-import { Blank, Document, DriversIndex, Landing, OpenAPITemplate, ProductLanding, NotFound } from '../templates';
+import {
+  Blank,
+  Document,
+  DriversIndex,
+  Instruqt,
+  Landing,
+  OpenAPITemplate,
+  ProductLanding,
+  NotFound,
+} from '../templates';
 
 const getTemplate = (templateName) => {
   let template;
@@ -13,6 +22,10 @@ const getTemplate = (templateName) => {
       break;
     case 'errorpage':
       template = NotFound;
+      break;
+    case 'instruqt':
+      template = Instruqt;
+      sidenav = true;
       break;
     case 'landing':
       template = Landing;
