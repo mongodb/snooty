@@ -75,11 +75,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   const isScrolled = useRef(false);
   useEffect(() => {
     if (isScrolled.current) return;
-    if (completedFetch && tocNodeRef.current && isSelectedTocNode(activeSection, slug)) {
+    if (completedFetch && tocNodeRef.current && isSelected) {
       tocNodeRef.current.scrollIntoView(scrollBehavior);
       isScrolled.current = true;
     }
-  }, [tocNodeRef, activeSection, slug, completedFetch]);
+  }, [tocNodeRef, completedFetch, isSelected]);
 
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
