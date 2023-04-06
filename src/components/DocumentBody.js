@@ -122,7 +122,11 @@ const DocumentBody = (props) => {
           </Template>
         </FootnoteContext.Provider>
       </Widgets>
-      {!isInPresentationMode && <UnifiedFooter hideLocale={true} />}
+      {!isInPresentationMode && (
+        <div data-testid="consistent-footer">
+          <UnifiedFooter hideLocale={true} />
+        </div>
+      )}
     </>
   );
 };
