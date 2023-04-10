@@ -144,10 +144,8 @@ export default DocumentBody;
 export const Head = ({ pageContext }) => {
   const { slug, page } = pageContext;
   const pageNodes = getNestedValue(['children'], page) || [];
-  // console.log(pageNodes);
   const meta = pageNodes.filter((c) => {
     const lookup = c.type === 'directive' ? c.name : c.type;
-    // console.log('TYPE', lookup);
     return lookup === 'meta';
   });
 
