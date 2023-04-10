@@ -81,6 +81,7 @@ import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
+import Instruqt from './Instruqt';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -158,6 +159,7 @@ const componentMap = {
   hlist: HorizontalList,
   image: Image,
   include: Include,
+  instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
   line: Line,

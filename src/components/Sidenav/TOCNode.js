@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -8,6 +8,7 @@ import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { NavigationContext } from '../../context/navigation-context';
 import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
@@ -29,7 +30,7 @@ const caretStyle = LeafyCSS`
 const wrapperStyle = LeafyCSS`
   display: flex;
   align-items: center;
-  padding-right: ${theme.size.medium};
+  scroll-margin-bottom: ${theme.size.xxlarge};
 
   &:hover {
     background: ${palette.gray.light2};
@@ -40,26 +41,17 @@ const wrapperStyle = LeafyCSS`
   }
 `;
 
+const wrapperPadding = LeafyCSS`
+  padding-right: ${theme.size.medium};
+`;
+
 const overwriteLinkStyle = LeafyCSS`
   span {
     display: flex;
   }
 `;
-/**
- *
- * @param {hasVersions} boolean
- * @returns Wrapper for Version Selector, or returns children
- */
-const Wrapper = ({ activeVersions, children, hasVersions, project, versions }) => {
-  return hasVersions && activeVersions[project] ? (
-    <Box className={cx(wrapperStyle)}>
-      {children}
-      {hasVersions && <VersionSelector versionedProject={project} tocVersionNames={versions} />}
-    </Box>
-  ) : (
-    <>{children}</>
-  );
-};
+
+const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
 
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
@@ -76,6 +68,18 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
   const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
+  const tocNodeRef = useRef(null);
+
+  // effect of scrolling toc node into view on load
+  const { completedFetch } = useContext(NavigationContext);
+  const isScrolled = useRef(false);
+  useEffect(() => {
+    if (isScrolled.current) return;
+    if (completedFetch && tocNodeRef.current && isSelected) {
+      tocNodeRef.current.scrollIntoView(scrollBehavior);
+      isScrolled.current = true;
+    }
+  }, [tocNodeRef, completedFetch, isSelected]);
 
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
@@ -115,12 +119,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
 
     if (isDrawer && hasChildren) {
       return (
-        <Wrapper
-          activeVersions={activeVersions}
-          hasVersions={hasVersions}
-          project={options.project}
-          versions={options.versions}
-        >
+        <Box ref={tocNodeRef} className={cx(wrapperStyle, { [wrapperPadding]: hasVersions })}>
           <SideNavItem
             className={cx(sideNavItemTOCStyling({ level }))}
             onClick={() => {
@@ -131,16 +130,14 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
             {isTocIcon && <SyncCloud />}
             {formattedTitle}
           </SideNavItem>
-        </Wrapper>
+          {hasVersions && activeVersions[options.project] && (
+            <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
+          )}
+        </Box>
       );
     }
     return (
-      <Wrapper
-        activeVersions={activeVersions}
-        hasVersions={hasVersions}
-        project={options.project}
-        versions={options.versions}
-      >
+      <Box ref={tocNodeRef} className={cx(wrapperStyle, { [wrapperPadding]: hasVersions })}>
         <SideNavItem
           as={Link}
           to={target}
@@ -157,7 +154,10 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           {isTocIcon && <SyncCloud />}
           {formattedTitle}
         </SideNavItem>
-      </Wrapper>
+        {hasVersions && activeVersions[options.project] && (
+          <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
+        )}
+      </Box>
     );
   };
 

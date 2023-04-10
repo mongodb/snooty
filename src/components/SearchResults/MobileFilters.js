@@ -4,9 +4,9 @@ import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
-import SearchContext from '../Searchbar/SearchContext';
-import SearchFilters from '../Searchbar/SearchFilters';
 import { theme } from '../../theme/docsTheme';
+import SearchContext from './SearchContext';
+import SearchFilters from './SearchFilters';
 
 // Temporarily apply this css rule to prevent body scrolling only while
 // this component is mounted.

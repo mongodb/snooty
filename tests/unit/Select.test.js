@@ -7,7 +7,7 @@ const DEFAULT_ATLAS_CHOICE = { text: 'MongoDB Atlas', value: 'atlas' };
 const DEFAULT_SERVER_CHOICE = { text: 'MongoDB Server', value: 'server' };
 const DEFAULT_CHOICES = [DEFAULT_SERVER_CHOICE, DEFAULT_ATLAS_CHOICE];
 
-// Simple wrapper to add state control around the Pagination component
+// Simple wrapper to add state control
 const SelectController = ({
   choices = DEFAULT_CHOICES,
   customOnChange = null,
