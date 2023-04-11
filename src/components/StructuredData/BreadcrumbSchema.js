@@ -7,8 +7,8 @@ import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { baseUrl } from '../../utils/base-url';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
-const getBreadcrumbList = (breadcrumb, siteUrl) =>
-  breadcrumb.map(({ path, plaintext }, index) => ({
+const getBreadcrumbList = (breadcrumbs, siteUrl) =>
+  breadcrumbs.map(({ path, plaintext }, index) => ({
     '@type': 'ListItem',
     position: index + 2,
     name: plaintext,
@@ -18,7 +18,7 @@ const getBreadcrumbList = (breadcrumb, siteUrl) =>
 const BreadcrumbSchema = ({ slug }) => {
   const { project, siteUrl } = useSiteMetadata();
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
-  const breadcrumbs = parentPaths[slug];
+  const breadcrumbs = parentPaths[slug] ?? [];
   const breadcrumbList = [
     {
       '@type': 'ListItem',
