@@ -3,8 +3,6 @@ import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
-import { Script } from 'gatsby';
-import { baseUrl } from '../utils/base-url';
 
 const CONTENT_MAX_WIDTH = 1440;
 
@@ -53,24 +51,6 @@ const Landing = ({ children }) => {
     <>
       <>
         <title>MongoDB Documentation</title>
-        <Script id="structured data" type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'http://schema.org',
-            '@type': 'WebSite',
-            name: 'MongoDB Documentation',
-            url: baseUrl(),
-            publisher: {
-              '@type': 'Organization',
-              name: 'MongoDB',
-              logo: {
-                '@type': 'imageObject',
-                url: 'https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png',
-              },
-            },
-            author: 'MongoDB Documentation Team',
-            inLanguage: 'English',
-          })}
-        </Script>
       </>
       <div>
         <Wrapper>{children}</Wrapper>
