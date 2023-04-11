@@ -49,9 +49,6 @@ const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
-      <>
-        <title>MongoDB Documentation</title>
-      </>
       <div>
         <Wrapper>{children}</Wrapper>
       </div>

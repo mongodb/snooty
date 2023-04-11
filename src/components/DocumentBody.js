@@ -161,15 +161,15 @@ export const Head = ({ pageContext }) => {
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
   const siteTitle = getNestedValue(['title'], metadata) || '';
 
-  const isDocsLanding = metadata.project === 'landing';
+  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
   return (
     <>
-      <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLanding} />
+      <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
       {meta.length > 0 && meta.map((c) => <Meta {...c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
-      {isDocsLanding && <DocsLandingSD />}
+      {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
     </>
   );

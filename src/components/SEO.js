@@ -6,7 +6,7 @@ const metaUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 
 const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle }) => (
   <>
-    <title>{showDocsLandingTitle ? 'MongoDB Documentation' : `${pageTitle} - ${siteTitle}`}</title>
+    <title>{showDocsLandingTitle ? 'MongoDB Documentation' : `${pageTitle} — ${siteTitle}`}</title>
 
     {/* Twitter Tags - default values, may be overwritten by Twitter component */}
     <meta name="twitter:card" content="summary_large_image" />
