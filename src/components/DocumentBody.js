@@ -14,6 +14,7 @@ import ComponentFactory from './ComponentFactory';
 import Meta from './Meta';
 import Twitter from './Twitter';
 import DocsLandingSD from './StructuredData/DocsLandingSD';
+import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 
 // Modify the AST so that the node modified by cssclass is included in its "children" array.
 // Delete this modified node from its original location.
@@ -143,7 +144,7 @@ DocumentBody.propTypes = {
 export default DocumentBody;
 
 export const Head = ({ pageContext }) => {
-  const { slug, page, template, project } = pageContext;
+  const { slug, page, template } = pageContext;
   const pageNodes = getNestedValue(['children'], page) || [];
   const meta = pageNodes.filter((c) => {
     const lookup = c.type === 'directive' ? c.name : c.type;
@@ -160,16 +161,16 @@ export const Head = ({ pageContext }) => {
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
   const siteTitle = getNestedValue(['title'], metadata) || '';
 
-  const isDocsLanding = project === 'landing';
-  const needsBreadcrumbs = template === 'document';
-  console.log(needsBreadcrumbs);
+  const isDocsLanding = metadata.project === 'landing';
+  const needsBreadcrumbs = template === 'document' || template === undefined;
 
   return (
     <>
-      <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
+      <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLanding} />
       {meta.length > 0 && meta.map((c) => <Meta {...c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLanding && <DocsLandingSD />}
+      {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
     </>
   );
 };
