@@ -8,7 +8,6 @@ import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { getNestedValue } from '../utils/get-nested-value';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 
@@ -30,7 +29,7 @@ const StyledRightColumn = styled(RightColumn)`
 
 const Document = ({ children, pageContext: { slug, page, repoBranches, isAssociatedProduct } }) => {
   const { project } = useSiteMetadata();
-  const { parentPaths, slugToTitle, title, toctreeOrder } = useSnootyMetadata();
+  const { slugToTitle, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const isLanding = project === 'landing';
@@ -41,13 +40,7 @@ const Document = ({ children, pageContext: { slug, page, repoBranches, isAssocia
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
-          <Breadcrumbs
-            homeUrl={breadcrumbsHomeUrl}
-            pageTitle={breadcrumbsPageTitle}
-            parentPaths={getNestedValue([slug], parentPaths)}
-            siteTitle={title}
-            slug={slug}
-          />
+          <Breadcrumbs homeUrl={breadcrumbsHomeUrl} pageTitle={breadcrumbsPageTitle} siteTitle={title} slug={slug} />
           {children}
           {showPrevNext && <InternalPageNav slug={slug} slugTitleMapping={slugToTitle} toctreeOrder={toctreeOrder} />}
         </div>

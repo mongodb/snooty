@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import queryString from 'query-string';
-import { useLocation } from '@reach/router';
+import { useLocation } from '@gatsbyjs/reach-router';
 
 export const usePresentationMode = () => {
   const { search } = useLocation();

@@ -425,6 +425,10 @@ exports[`Search Results Page considers a given search filter query param and dis
     margin-bottom: 8px;
     margin-right: 0;
   }
+
+  .emotion-40>div>div {
+    width: 100%;
+  }
 }
 
 .emotion-42 {
@@ -899,8 +903,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-47"
             >
               <button
-                aria-controls="select-81-menu"
-                aria-describedby="select-81-description"
+                aria-controls="select-37-menu"
+                aria-describedby="select-37-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -908,7 +912,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 class="emotion-48"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-82"
+                id="select-38"
                 type="button"
                 value="Realm"
               >
@@ -956,8 +960,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-47"
             >
               <button
-                aria-controls="select-83-menu"
-                aria-describedby="select-83-description"
+                aria-controls="select-39-menu"
+                aria-describedby="select-39-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -966,7 +970,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-84"
+                id="select-40"
                 type="button"
                 value="Latest"
               >
@@ -1402,6 +1406,10 @@ exports[`Search Results Page does not return results for a given search term wit
   .emotion-30>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
+  }
+
+  .emotion-30>div>div {
+    width: 100%;
   }
 }
 
@@ -1848,8 +1856,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-37"
             >
               <button
-                aria-controls="select-101-menu"
-                aria-describedby="select-101-description"
+                aria-controls="select-61-menu"
+                aria-describedby="select-61-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -1857,7 +1865,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 class="emotion-38"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-102"
+                id="select-62"
                 type="button"
                 value=""
               >
@@ -1905,8 +1913,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-37"
             >
               <button
-                aria-controls="select-103-menu"
-                aria-describedby="select-103-description"
+                aria-controls="select-63-menu"
+                aria-describedby="select-63-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -1915,7 +1923,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-104"
+                id="select-64"
                 type="button"
                 value=""
               >
@@ -4180,6 +4188,10 @@ exports[`Search Results Page renders results from a given search term query para
     margin-bottom: 8px;
     margin-right: 0;
   }
+
+  .emotion-34>div>div {
+    width: 100%;
+  }
 }
 
 .emotion-36 {
@@ -4625,8 +4637,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-41"
             >
               <button
-                aria-controls="select-61-menu"
-                aria-describedby="select-61-description"
+                aria-controls="select-17-menu"
+                aria-describedby="select-17-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -4634,7 +4646,7 @@ exports[`Search Results Page renders results from a given search term query para
                 class="emotion-42"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-62"
+                id="select-18"
                 type="button"
                 value=""
               >
@@ -4682,8 +4694,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-41"
             >
               <button
-                aria-controls="select-63-menu"
-                aria-describedby="select-63-description"
+                aria-controls="select-19-menu"
+                aria-describedby="select-19-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -4692,7 +4704,7 @@ exports[`Search Results Page renders results from a given search term query para
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-64"
+                id="select-20"
                 type="button"
                 value=""
               >

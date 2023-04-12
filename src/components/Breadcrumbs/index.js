@@ -5,7 +5,6 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
-import BreadcrumbSchema from './BreadcrumbSchema';
 import BreadcrumbContainer from './BreadcrumbContainer';
 
 const breadcrumbBodyStyle = css`
@@ -15,7 +14,7 @@ const breadcrumbBodyStyle = css`
   }
 `;
 
-const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle, slug }) => {
+const Breadcrumbs = ({ homeUrl = null, pageTitle = null, siteTitle, slug }) => {
   const homeCrumb = {
     title: 'Docs Home',
     url: homeUrl || baseUrl(),
@@ -27,25 +26,15 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, parentPaths, siteTitle,
   };
 
   return (
-    <>
-      <BreadcrumbSchema breadcrumb={parentPaths} siteTitle={siteTitle} slug={slug} />
-      <Body className={cx(breadcrumbBodyStyle)}>
-        <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
-      </Body>
-    </>
+    <Body className={cx(breadcrumbBodyStyle)}>
+      <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+    </Body>
   );
 };
 
 Breadcrumbs.propTypes = {
   homeUrl: PropTypes.string,
   pageTitle: PropTypes.string,
-  parentPaths: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string,
-      plaintext: PropTypes.string,
-      title: PropTypes.arrayOf(PropTypes.object),
-    })
-  ),
   siteTitle: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
 };

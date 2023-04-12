@@ -5,7 +5,6 @@ import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
 import PreviewHeader from '../components/Header/preview-header';
 import { Sidenav } from '../components/Sidenav';
-import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
@@ -168,7 +167,6 @@ const DefaultLayout = ({
   return (
     <>
       <Global styles={globalCSS} />
-      <SiteMetadata siteTitle={title} />
       <RootProvider
         slug={slug}
         repoBranches={repoBranches}
