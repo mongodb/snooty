@@ -77,7 +77,7 @@
     "@leafygreen-ui/palette": "^3.4.3",
     "@leafygreen-ui/select": "^7.0.0",
     "@leafygreen-ui/side-nav": "^10.0.0",
-    "@leafygreen-ui/table": "^6.1.0",
+    "@leafygreen-ui/table": "^11.0",
     "@leafygreen-ui/tabs": "^8.0.0",
     "@leafygreen-ui/text-area": "^6.1.0",
     "@leafygreen-ui/text-input": "^10.1.0",
