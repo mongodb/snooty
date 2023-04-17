@@ -1,3 +1,7 @@
-import * as reachRouter from '@reach/router';
+import { useLocation } from '@gatsbyjs/reach-router';
 
-export const mockLocation = (search) => jest.spyOn(reachRouter, 'useLocation').mockImplementation(() => ({ search }));
+jest.mock('@gatsbyjs/reach-router', () => ({
+  useLocation: jest.fn(),
+}));
+
+export const mockLocation = (search) => useLocation.mockImplementation(() => ({ search }));
