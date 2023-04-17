@@ -5,13 +5,13 @@ import styled from '@emotion/styled';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
 import { Sidenav } from '../components/Sidenav';
-import SiteMetadata from '../components/site-metadata';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -77,10 +77,11 @@ const GlobalGrid = styled('div')`
 
 const DefaultLayout = ({
   children,
-  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct, remoteMetadata },
+  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
 }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
+  const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
@@ -90,7 +91,6 @@ const DefaultLayout = ({
   return (
     <>
       <Global styles={globalCSS} />
-      <SiteMetadata siteTitle={title} />
       <RootProvider
         slug={slug}
         repoBranches={repoBranches}

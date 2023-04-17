@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef } from 'react';
-import { navigate } from '@reach/router';
+import { navigate } from '@gatsbyjs/reach-router';
 import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';

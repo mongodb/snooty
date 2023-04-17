@@ -37,3 +37,4 @@ Object.defineProperty(global.self, 'crypto', {
 
 window.matchMedia = () => ({ addListener: () => {}, removeListener: () => {} });
 window.scrollTo = () => {};
+global.fetch = jest.fn();
