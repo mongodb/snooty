@@ -1,0 +1,32 @@
+{
+  "slug": "community-supported-drivers",
+  "repoBranch": {
+    "branches": [
+      {
+        "name": "master",
+        "publishOriginalBranchName": false,
+        "active": true,
+        "aliases": null,
+        "gitBranchName": "master",
+        "isStableBranch": true,
+        "urlAliases": null,
+        "urlSlug": null,
+        "versionSelectorLabel": "master",
+        "buildsWithSnooty": true,
+        "id": "634991b4246409bf0cc51123"
+      }
+    ],
+    "siteBasePrefix": "docs-qa/drivers"
+  },
+  "associatedReposInfo": {},
+  "remoteMetadata": null,
+  "isAssociatedProduct": false,
+  "template": "blank",
+  "page": {
+    "type": "root",
+    "position": { "start": { "line": 0 } },
+    "children": [{ "type": "section", "position": [], "children": [] }],
+    "fileid": "community-supported-drivers.txt",
+    "options": { "orphan": "", "template": "blank" }
+  }
+}

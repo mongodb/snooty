@@ -1,0 +1,45 @@
+{
+  "branch": "feature/DOP-3375",
+  "eol": false,
+  "parentPaths": {
+    "c": [],
+    "cxx": [],
+    "java-drivers": []
+  },
+  "project": "drivers",
+  "slugToTitle": {
+    "c": [{ "position": { "start": { "line": 4 } }, "type": "text", "value": "MongoDB C Driver" }],
+    "cxx": [{ "position": { "start": { "line": 4 } }, "type": "text", "value": "MongoDB C++ Driver" }],
+    "java-drivers": [{ "position": { "start": { "line": 4 } }, "type": "text", "value": "MongoDB Java Driver" }]
+  },
+  "title": "MongoDB Drivers",
+  "toctree": {
+    "children": [
+      {
+        "children": [],
+        "options": {
+          "drawer": true
+        },
+        "slug": "c",
+        "title": [{ "position": { "start": { "line": 0 } }, "type": "text", "value": "MongoDB C Driver" }]
+      },
+      {
+        "children": [],
+        "options": {
+          "drawer": true
+        },
+        "slug": "cxx",
+        "title": [{ "position": { "start": { "line": 0 } }, "type": "text", "value": "MongoDB C++ Driver" }]
+      },
+      {
+        "children": [],
+        "options": {
+          "drawer": false
+        },
+        "slug": "java-drivers",
+        "title": [{ "position": { "start": { "line": 0 } }, "type": "text", "value": "MongoDB Java Driver" }]
+      }
+    ]
+  },
+  "toctreeOrder": ["c", "cxx", "java-drivers"]
+}
