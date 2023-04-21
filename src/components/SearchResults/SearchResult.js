@@ -117,6 +117,11 @@ const sanitizePreviewHtml = (text) =>
     allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
   });
 
+const setAliasesKey = {
+  'manual-upcoming': 'manual-v6.3',
+  'manual-manual': 'manual-v6.2',
+};
+
 const SearchResult = React.memo(
   ({
     learnMoreLink = false,
@@ -133,8 +138,9 @@ const SearchResult = React.memo(
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
-    const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
-    const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
+    const key = setAliasesKey[searchProperty] ? setAliasesKey[searchProperty] : searchProperty;
+    const category = searchPropertyMapping?.[key]?.['categoryTitle'];
+    const version = searchPropertyMapping?.[key]?.['versionSelectorLabel'];
 
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
