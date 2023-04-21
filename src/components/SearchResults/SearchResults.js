@@ -284,7 +284,6 @@ const SearchResults = () => {
       if (searchTerm) {
         const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
         const resultJson = await result.json();
-        console.log('search result json', resultJson);
         if (!!resultJson?.results) {
           setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
         }
@@ -293,8 +292,6 @@ const SearchResults = () => {
     };
     fetchNewSearchResults();
   }, [searchFilter, searchPropertyMapping, searchTerm]);
-
-  console.log('searchResults', searchResults);
 
   return (
     <>
