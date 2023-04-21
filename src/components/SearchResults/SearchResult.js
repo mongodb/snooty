@@ -6,6 +6,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle } from '../Tag';
+import { tempKey } from '../../utils/get-temp-mapping';
 import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
@@ -117,11 +118,6 @@ const sanitizePreviewHtml = (text) =>
     allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
   });
 
-const setAliasesKey = {
-  'manual-upcoming': 'manual-v6.3',
-  'manual-manual': 'manual-v6.2',
-};
-
 const SearchResult = React.memo(
   ({
     learnMoreLink = false,
@@ -138,7 +134,7 @@ const SearchResult = React.memo(
     const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
-    const key = setAliasesKey[searchProperty] ? setAliasesKey[searchProperty] : searchProperty;
+    const key = tempKey(searchProperty);
     const category = searchPropertyMapping?.[key]?.['categoryTitle'];
     const version = searchPropertyMapping?.[key]?.['versionSelectorLabel'];
 
