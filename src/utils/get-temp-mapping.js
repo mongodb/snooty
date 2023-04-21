@@ -1,3 +1,4 @@
+// My need to update if aliases change
 export const setAliasesKeys = {
   'manual-upcoming': 'manual-v6.0',
   'manual-manual': 'manual-v6.2',
