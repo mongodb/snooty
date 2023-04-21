@@ -1,4 +1,5 @@
 // My need to update if aliases change
+//TODO: should remove when root cause is fixed
 export const setAliasesKeys = {
   'manual-upcoming': 'manual-v6.0',
   'manual-manual': 'manual-v6.2',
