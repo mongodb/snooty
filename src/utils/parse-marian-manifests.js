@@ -2,7 +2,7 @@ import { compareBranchesWithVersionNumbers } from './compare-branches-with-versi
 import { tempKey } from './get-temp-mapping';
 
 const locatedOutdatedTemporaryFile = (outDatedManifest) => {
-  return ['manual-manual', 'manual-upcoming'].includes(outDatedManifest);
+  return ['manual-manual', 'manual-upcoming', 'manual-master'].includes(outDatedManifest);
 };
 
 export const getSortedBranchesForProperty = (parsedManifest, property) => {
