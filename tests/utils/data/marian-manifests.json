@@ -155,7 +155,7 @@
       "versionSelectorLabel": "5.2 (non-existent)"
     },
     "manual-v6.3": {
-       "categoryTitle": "MongoDB Server",
+      "categoryTitle": "MongoDB Server",
       "versionSelectorLabel": "6.3 (current)"
     },
     "mms-cloud-master": {
