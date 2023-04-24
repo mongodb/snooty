@@ -84,6 +84,7 @@
     "manual-v3.6",
     "manual-v4.0",
     "manual-v5.3",
+    "manual-v6.3",
     "mms-cloud-master",
     "mms-onprem-current",
     "mms-onprem-master",
@@ -152,6 +153,10 @@
     "manual-v5.2": {
       "categoryTitle": "MongoDB Server",
       "versionSelectorLabel": "5.2 (non-existent)"
+    },
+    "manual-v6.3": {
+       "categoryTitle": "MongoDB Server",
+      "versionSelectorLabel": "6.3 (current)"
     },
     "mms-cloud-master": {
       "categoryTitle": "Cloud Manager",
