@@ -386,7 +386,6 @@ const SearchResults = () => {
                         margin-top: 80px;
                       `}
                     >
-                      empty res here at 388
                       <EmptyResults />
                     </EmptyResultsContainer>
                     <FiltersContainer>
