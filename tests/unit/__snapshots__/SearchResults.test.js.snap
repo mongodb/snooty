@@ -903,8 +903,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-47"
             >
               <button
-                aria-controls="select-37-menu"
-                aria-describedby="select-37-description"
+                aria-controls="select-33-menu"
+                aria-describedby="select-33-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -912,7 +912,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 class="emotion-48"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-38"
+                id="select-34"
                 type="button"
                 value="Realm"
               >
@@ -960,8 +960,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-47"
             >
               <button
-                aria-controls="select-39-menu"
-                aria-describedby="select-39-description"
+                aria-controls="select-35-menu"
+                aria-describedby="select-35-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -970,7 +970,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-40"
+                id="select-36"
                 type="button"
                 value="Latest"
               >
@@ -1856,8 +1856,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-37"
             >
               <button
-                aria-controls="select-61-menu"
-                aria-describedby="select-61-description"
+                aria-controls="select-53-menu"
+                aria-describedby="select-53-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -1865,7 +1865,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 class="emotion-38"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-62"
+                id="select-54"
                 type="button"
                 value=""
               >
@@ -1913,8 +1913,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-37"
             >
               <button
-                aria-controls="select-63-menu"
-                aria-describedby="select-63-description"
+                aria-controls="select-55-menu"
+                aria-describedby="select-55-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -1923,7 +1923,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-64"
+                id="select-56"
                 type="button"
                 value=""
               >
