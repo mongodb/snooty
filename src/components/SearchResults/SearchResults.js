@@ -280,15 +280,16 @@ const SearchResults = () => {
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
   useEffect(() => {
+    if (!searchTerm || !Object.keys(searchPropertyMapping).length) {
+      return;
+    }
     const fetchNewSearchResults = async () => {
-      if (searchTerm) {
-        const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
-        const resultJson = await result.json();
-        if (!!resultJson?.results) {
-          setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
-        }
-        setSearchFinished(true);
+      const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
+      const resultJson = await result.json();
+      if (!!resultJson?.results) {
+        setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
       }
+      setSearchFinished(true);
     };
     fetchNewSearchResults();
   }, [searchFilter, searchPropertyMapping, searchTerm]);
@@ -385,6 +386,7 @@ const SearchResults = () => {
                         margin-top: 80px;
                       `}
                     >
+                      empty res here at 388
                       <EmptyResults />
                     </EmptyResultsContainer>
                     <FiltersContainer>
