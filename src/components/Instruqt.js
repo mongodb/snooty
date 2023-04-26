@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { css } from '@emotion/react';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
+import { theme } from '../theme/docsTheme';
 
 const controlsStyle = css`
   width: 100%;
@@ -12,6 +13,7 @@ const controlsStyle = css`
   justify-content: flex-end;
   align-items: center;
   padding: 0 1rem;
+  margin-bottom: ${theme.size.default};
 `;
 
 const Instruqt = ({ nodeData: { argument }, nodeData }) => {
