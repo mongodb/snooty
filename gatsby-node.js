@@ -4,6 +4,7 @@ const { baseUrl } = require('./src/utils/base-url');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('./src/utils/get-nested-value');
+const { removeNestedValue } = require('./src/utils/remove-nested-value.js');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
@@ -118,6 +119,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
+
     if (pageNode) {
       val.static_assets.forEach((asset) => {
         const checksum = asset.checksum;
@@ -229,6 +231,11 @@ exports.createPages = async ({ actions }) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
       const slug = getPageSlug(page);
+
+      // Parse each document before passing it to createPage
+      // to remove all positions fields as it is only used in the parser for logging
+      removeNestedValue('position', 'children', [pageNodes]);
+      console.log('page nodes', pageNodes);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
       const isFullBuild =
