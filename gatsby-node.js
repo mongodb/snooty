@@ -122,7 +122,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
     // Parse each document before pages are created via createPage
     // to remove all positions fields as it is only used in the parser for logging
-    removeNestedValue('position', 'children', [RESOLVED_REF_DOC_MAPPING[key]?.ast]);
+    removeNestedValue('position', 'children', [val?.ast]);
 
     if (pageNode) {
       val.static_assets.forEach((asset) => {
