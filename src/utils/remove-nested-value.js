@@ -1,8 +1,8 @@
 /*
  * Safely remove  values from a deeply nested object.
  * Arguments:
- * - t: the target to have deleted
- * - k: the traversal target (key)
+ * - target: the target key to be deleted
+ * - traversalKey: the target key to traverse
  * - arr: an array containing the objects to search for the target value
  */
 const removeNestedValue = (target, traversalKey, arr) => {
