@@ -235,7 +235,6 @@ exports.createPages = async ({ actions }) => {
       // Parse each document before passing it to createPage
       // to remove all positions fields as it is only used in the parser for logging
       removeNestedValue('position', 'children', [pageNodes]);
-      console.log('page nodes', pageNodes);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
       const isFullBuild =
