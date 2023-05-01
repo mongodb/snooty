@@ -5,21 +5,20 @@
  * - k: the traversal target (key)
  * - arr: an array containing the objects to search for the target value
  */
-const removeNestedValue = (t, k, arr) => {
+const removeNestedValue = (target, traversalKey, arr) => {
   if (!arr) return undefined;
 
   arr.forEach((entry) => {
-    Object.entries(entry).forEach(([key, val]) => {
-      if (key === t) {
-        delete entry[t];
-      }
+    if (entry.hasOwnProperty(target)) {
+      delete entry[target];
+    }
 
-      if (key === k && !val.length) return;
-
-      if (key === k && Array.isArray(val)) {
-        removeNestedValue(t, k, val);
+    if (entry.hasOwnProperty(traversalKey)) {
+      const children = entry[traversalKey];
+      if (Array.isArray(children) && children.length) {
+        removeNestedValue(target, traversalKey, children);
       }
-    });
+    }
   });
 };
 
