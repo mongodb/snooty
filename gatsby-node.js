@@ -120,6 +120,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
 
+    // Parse each document before pages are created via createPage
+    // to remove all positions fields as it is only used in the parser for logging
+    removeNestedValue('position', 'children', [RESOLVED_REF_DOC_MAPPING[key]?.ast]);
+
     if (pageNode) {
       val.static_assets.forEach((asset) => {
         const checksum = asset.checksum;
@@ -231,10 +235,6 @@ exports.createPages = async ({ actions }) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
       const slug = getPageSlug(page);
-
-      // Parse each document before passing it to createPage
-      // to remove all positions fields as it is only used in the parser for logging
-      removeNestedValue('position', 'children', [pageNodes]);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
       const isFullBuild =
