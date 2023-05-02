@@ -1,0 +1,147 @@
+export const mockData = [
+  {
+    date: '2024-02-01',
+    paths: [
+      {
+        path: '/api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}',
+        httpMethod: 'PUT',
+        operationId: 'updateAlertConfiguration',
+        tag: 'Alert Configurations',
+        versions: [
+          {
+            version: '2023-01-01',
+            stabilityLevel: 'stable',
+            changeType: 'removed',
+            changes: [
+              {
+                change: 'resource version 2023-01-01 was removed, latest available resource version is 2023-02-01',
+                changeCode: 'resource-version-removed',
+                backwardCompatible: true,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    date: '2023-02-01',
+    paths: [
+      {
+        path: '/api/atlas/v2/groups/byName/{groupName}',
+        httpMethod: 'GET',
+        operationId: 'getProjectByName',
+        tag: 'Projects',
+        versions: [
+          {
+            version: '2023-02-01',
+            stabilityLevel: 'stable',
+            changeType: 'release',
+            changes: [
+              {
+                change: 'resource version added.',
+                changeCode: 'resource-version-added',
+                backwardCompatible: false,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: '/api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}',
+        httpMethod: 'PUT',
+        operationId: 'updateAlertConfiguration',
+        tag: 'Alert Configurations',
+        versions: [
+          {
+            version: '2023-02-01',
+            stabilityLevel: 'stable',
+            changeType: 'release',
+            changes: [
+              {
+                change: 'resource version added.',
+                changeCode: 'resource-version-added',
+                backwardCompatible: false,
+              },
+              {
+                change:
+                  "for the 'query' request parameter 'clusterName', default value was changed from 'default' to 'cluster0'",
+                changeCode: 'request-parameter-default-value-changed',
+                backwardCompatible: false,
+              },
+              {
+                change: "added the optional property 'links' in the response with the '200' status.",
+                changeCode: 'response-optional-property-added',
+                backwardCompatible: true,
+              },
+            ],
+          },
+          {
+            version: '2023-01-01',
+            stabilityLevel: 'stable',
+            changeType: 'deprecate',
+            sunsetDate: '2024-02-01',
+            changes: [
+              {
+                change: 'deprecated by resource version 2023-02-01 and marked for removal for 2024-02-01.',
+                changeCode: 'resource-version-deprecated',
+                backwardCompatible: false,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: '/api/atlas/v2/groups/{groupId}/accessList',
+        httpMethod: 'POST',
+        operationId: 'createProjectIpAccessList',
+        tag: 'Project IP Access List',
+        versions: [
+          {
+            version: '2023-01-01',
+            stabilityLevel: 'stable',
+            changeType: 'update',
+            changes: [
+              {
+                change: "added the optional property 'name' in the response with the '200' status.",
+                changeCode: 'response-optional-property-added',
+                backwardCompatible: true,
+              },
+              {
+                change: "added the optional property 'comment' in the response with the '200' status.",
+                changeCode: 'response-optional-property-added',
+                backwardCompatible: true,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    date: '2023-02-22',
+    paths: [
+      {
+        path: '/api/atlas/v2/groups/byName/{groupName}',
+        httpMethod: 'GET',
+        operationId: 'getProjectByName',
+        tag: 'Projects',
+        versions: [
+          {
+            version: '2023-02-01',
+            stabilityLevel: 'stable',
+            changeType: 'update',
+            changes: [
+              {
+                change:
+                  "added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.",
+                changeCode: 'response-optional-property-added',
+                backwardCompatible: true,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
