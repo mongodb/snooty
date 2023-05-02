@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import { H2 } from '@leafygreen-ui/typography';
+
+import { useState } from 'react';
+
 import Button from '@leafygreen-ui/button';
 import FiltersPanel from './FiltersPanel';
 import ChangeList from './ChangeList';
@@ -17,14 +20,22 @@ const ChangelogHeader = styled.div`
   align-items: center;
 `;
 
+export const ALL_VERSIONS = 'allVersions';
+export const COMPARE_VERSIONS = 'compareVersions';
+
 const OpenAPIChangelog = () => {
+  const [changeLogView, setChangelogView] = useState(ALL_VERSIONS);
+
+  function handleChangelogViewChange(value) {
+    setChangelogView(value);
+  }
   return (
     <ChangelogPage>
       <ChangelogHeader>
         <H2>API Changelog</H2>
         <Button>Download API Changelog</Button>
       </ChangelogHeader>
-      <FiltersPanel />
+      <FiltersPanel changeLogView={changeLogView} handleChange={handleChangelogViewChange} />
       <ChangeList />
     </ChangelogPage>
   );
