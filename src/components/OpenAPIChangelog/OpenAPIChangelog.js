@@ -24,18 +24,23 @@ export const ALL_VERSIONS = 'allVersions';
 export const COMPARE_VERSIONS = 'compareVersions';
 
 const OpenAPIChangelog = () => {
-  const [changeLogView, setChangelogView] = useState(ALL_VERSIONS);
+  const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
+  const [selectedResourceVersion, setSelectedResourceVersion] = useState('All');
+  const [resourceVersions, setResourceVersions] = useState(['All']);
+  const [resourceVersionOne, setResourceVersionOne] = useState('');
+  const [resourceVersionTwo, setResourceVersionTwo] = useState('');
 
-  function handleChangelogViewChange(value) {
-    setChangelogView(value);
+  function handleVersionModeChange(value) {
+    setVersionMode(value);
   }
+
   return (
     <ChangelogPage>
       <ChangelogHeader>
         <H2>API Changelog</H2>
         <Button>Download API Changelog</Button>
       </ChangelogHeader>
-      <FiltersPanel changeLogView={changeLogView} handleChange={handleChangelogViewChange} />
+      <FiltersPanel changeLogView={versionMode} handleVersionModeChange={handleVersionModeChange} />
       <ChangeList />
     </ChangelogPage>
   );
