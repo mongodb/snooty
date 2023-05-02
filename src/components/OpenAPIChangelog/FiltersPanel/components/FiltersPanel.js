@@ -14,7 +14,7 @@ const FiltersPanel = ({ versionMode, handleVersionModeChange, resourceVersions }
   return (
     <Wrapper>
       <VersionModeSegmentedControl versionMode={versionMode} handleVersionModeChange={handleVersionModeChange} />
-      {versionMode === COMPARE_VERSIONS ? <DiffSelect resourceVersions={resourceVersions} /> : <></>}
+      {versionMode === COMPARE_VERSIONS ? <DiffSelect resourceVersions={resourceVersions} /> : null}
       <ResourceSelect resourceVersions={resourceVersions} />
     </Wrapper>
   );

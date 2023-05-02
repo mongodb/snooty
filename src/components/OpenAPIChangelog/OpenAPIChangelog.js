@@ -19,7 +19,7 @@ const ChangelogHeader = styled.div`
   align-items: center;
 `;
 
-const MOCK_RESOURCE_VERSIONS = ['2020-01-01'];
+const MOCK_RESOURCE_VERSIONS = ['2020-01-01', '2021-01-01', '2022-01-01', '2023-01-01'];
 
 const OpenAPIChangelog = () => {
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
