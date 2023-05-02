@@ -7,6 +7,8 @@ import ChangeList from './ChangeList';
 const ChangelogPage = styled.div`
   width: 100%;
   margin-top: 60px;
+  padding-left: 64px;
+  padding-right: 64px;
 `;
 
 const ChangelogHeader = styled.div`
