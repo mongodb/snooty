@@ -7,6 +7,7 @@ import {
   OpenAPITemplate,
   ProductLanding,
   NotFound,
+  Changelog,
 } from '../templates';
 
 const getTemplate = (templateName) => {
@@ -33,6 +34,10 @@ const getTemplate = (templateName) => {
       break;
     case 'openapi':
       template = OpenAPITemplate;
+      break;
+    case 'changelog':
+      template = Changelog;
+      sidenav = true;
       break;
     case 'product-landing':
       template = ProductLanding;

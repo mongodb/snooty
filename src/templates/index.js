@@ -6,5 +6,6 @@ import Landing from './landing';
 import NotFound from './NotFound';
 import OpenAPITemplate from './openapi';
 import ProductLanding from './product-landing';
+import Changelog from './changelog';
 
-export { Blank, Document, DriversIndex, Instruqt, Landing, NotFound, OpenAPITemplate, ProductLanding };
+export { Blank, Document, DriversIndex, Instruqt, Landing, NotFound, OpenAPITemplate, ProductLanding, Changelog };
