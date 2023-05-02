@@ -7,11 +7,11 @@ const Wrapper = styled.div`
   margin-top: 32px;
 `;
 
-const FiltersPanel = ({ versionMode, handleVersionModeChange }) => {
+const FiltersPanel = ({ versionMode, handleVersionModeChange, resourceVersions }) => {
   return (
     <Wrapper>
       <VersionModeSegmentedControl versionMode={versionMode} handleVersionModeChange={handleVersionModeChange} />
-      <ResourceSelect />
+      <ResourceSelect resourceVersions={resourceVersions} />
     </Wrapper>
   );
 };

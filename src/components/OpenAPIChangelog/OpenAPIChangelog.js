@@ -19,10 +19,11 @@ const ChangelogHeader = styled.div`
   align-items: center;
 `;
 
+const MOCK_RESOURCE_VERSIONS = ['2020-01-01'];
 const OpenAPIChangelog = () => {
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResourceVersion, setSelectedResourceVersion] = useState('All');
-  const [resourceVersions, setResourceVersions] = useState(['All']);
+  const [resourceVersions, setResourceVersions] = useState(MOCK_RESOURCE_VERSIONS);
   const [resourceVersionOne, setResourceVersionOne] = useState('');
   const [resourceVersionTwo, setResourceVersionTwo] = useState('');
 
@@ -36,7 +37,11 @@ const OpenAPIChangelog = () => {
         <H2>API Changelog</H2>
         <Button>Download API Changelog</Button>
       </ChangelogHeader>
-      <FiltersPanel changeLogView={versionMode} handleVersionModeChange={handleVersionModeChange} />
+      <FiltersPanel
+        resourceVersions={resourceVersions}
+        changeLogView={versionMode}
+        handleVersionModeChange={handleVersionModeChange}
+      />
       <ChangeList />
     </ChangelogPage>
   );

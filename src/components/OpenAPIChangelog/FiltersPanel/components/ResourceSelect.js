@@ -1,4 +1,4 @@
-import { Combobox, ComboboxOption, ComboboxGroup } from '@leafygreen-ui/combobox';
+import { Combobox, ComboboxOption } from '@leafygreen-ui/combobox';
 import styled from '@emotion/styled';
 
 const ResourceSelectContainer = styled.div`
@@ -6,19 +6,13 @@ const ResourceSelectContainer = styled.div`
   margin-top: 24px;
 `;
 
-export default function ResourceSelect() {
+export default function ResourceSelect({ resourceVersions }) {
   return (
     <ResourceSelectContainer>
       <Combobox label="Select Resource">
-        <ComboboxOption value="apple" />
-        <ComboboxOption value="banana" />
-        <ComboboxOption value="carrot" />
-        <ComboboxOption value="dragonfruit" />
-        <ComboboxGroup label="Peppers">
-          <ComboboxOption value="cayenne" />
-          <ComboboxOption value="habanero" />
-          <ComboboxOption value="jalapeno" displayName="Jalapeño" />
-        </ComboboxGroup>
+        {resourceVersions.map((version) => (
+          <ComboboxOption value={version} />
+        ))}
       </Combobox>
     </ResourceSelectContainer>
   );
