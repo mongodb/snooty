@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import { H2 } from '@leafygreen-ui/typography';
-
 import { useState } from 'react';
-
 import Button from '@leafygreen-ui/button';
 import FiltersPanel from './FiltersPanel';
 import ChangeList from './ChangeList';
+import { ALL_VERSIONS } from './FiltersPanel/constants';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -19,9 +18,6 @@ const ChangelogHeader = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
-export const ALL_VERSIONS = 'allVersions';
-export const COMPARE_VERSIONS = 'compareVersions';
 
 const OpenAPIChangelog = () => {
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);

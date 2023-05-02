@@ -1,26 +1,11 @@
 import styled from '@emotion/styled';
-import { SegmentedControl, SegmentedControlOption } from '@leafygreen-ui/segmented-control';
 import { Combobox, ComboboxOption, ComboboxGroup } from '@leafygreen-ui/combobox';
-
-import { ALL_VERSIONS, COMPARE_VERSIONS } from './OpenAPIChangelog';
+import VersionModeSegmentedControl from './VersionModeSegmentedControl';
 
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 32px;
 `;
-
-function VersionModeSegmentedControl({ versionMode, handleVersionModeChange }) {
-  return (
-    <SegmentedControl key="changelog-view" value={versionMode} onChange={handleVersionModeChange}>
-      <SegmentedControlOption key="all-versions" value={ALL_VERSIONS}>
-        All Versions
-      </SegmentedControlOption>
-      <SegmentedControlOption key="compare-versions" value={COMPARE_VERSIONS}>
-        Compare Two Versions
-      </SegmentedControlOption>
-    </SegmentedControl>
-  );
-}
 
 const ResourceSelectContainer = styled.div`
   width: 100%;
