@@ -1,17 +1,21 @@
 import styled from '@emotion/styled';
 import { H3 } from '@leafygreen-ui/typography';
+import { format } from 'date-fns';
 import ResourceChangesBlock from './ResourceChangesBlock';
 
 const Wrapper = styled.section`
   width: 100%;
+  margin-top: 28px;
 `;
 
-const ChangelogReleaseBlock = ({ releaseBlock: { date: releaseDate, paths } }) => {
+const ChangelogReleaseBlock = ({ data: { date: releaseDate, paths } }) => {
+  const formattedReleaseDate = format(new Date(releaseDate.replace(/-/g, '/')), 'dd MMMM y');
+
   return (
     <Wrapper>
-      <H3>{releaseDate}</H3>
+      <H3>{`${formattedReleaseDate} Release`}</H3>
       {paths.map((path, i) => (
-        <ResourceChangesBlock resourceChanges={path} />
+        <ResourceChangesBlock data={path} />
       ))}
     </Wrapper>
   );

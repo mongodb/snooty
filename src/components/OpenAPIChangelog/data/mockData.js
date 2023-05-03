@@ -1,4 +1,4 @@
-export const mockData = [
+export const mockChangelog = [
   {
     date: '2024-02-01',
     paths: [
@@ -145,3 +145,44 @@ export const mockData = [
     ],
   },
 ];
+
+export const mockDiff = [
+  {
+    path: '/api/atlas/v2/federationSettings/{federationSettingsId}/connectedOrgConfigs',
+    httpMethod: 'GET',
+    operationId: 'listConnectedOrgConfigs',
+    tag: 'Federated Authentication',
+    changes: [
+      {
+        change: "removed the non-success response with the status '400'.",
+        changeCode: 'response-non-success-status-removed',
+        backwardCompatible: false,
+      },
+      {
+        change: "added the new optional 'query' request parameter 'envelope'.",
+        changeCode: 'new-optional-request-parameter',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/accessList',
+    httpMethod: 'POST',
+    operationId: 'createProjectIpAccessList',
+    tag: 'Project IP Access List',
+    changes: [
+      {
+        change: "removed the required property 'name' from the response with the '200' status.",
+        changeCode: 'response-required-property-removed',
+        backwardCompatible: false,
+      },
+    ],
+  },
+];
+
+export const mockIndex = {
+  runDate: '2023-04-03',
+  runId: '20230403105948111',
+  specRevision: '422ab47f864909549362a7b39688404c82e2540b',
+  versions: ['2023-01-01', '2023-02-01', '2023-08-11~preview'],
+};
