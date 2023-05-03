@@ -32,8 +32,6 @@ const OpenAPIChangelog = () => {
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResource, setSelectedResource] = useState('All');
-  const [resourceVersions, setResourceVersions] = useState(MOCK_RESOURCE_VERSIONS);
-  const [resources, setResources] = useState(MOCK_RESOURCES);
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceOneDefault);
   const [resourceVersionTwo, setResourceVersionTwo] = useState(resourceTwoDefault);
 
@@ -45,6 +43,14 @@ const OpenAPIChangelog = () => {
     setSelectedResource(value);
   }
 
+  function handleResourceVersionOneChange(value) {
+    setResourceVersionOne(value);
+  }
+
+  function handleResourceVersionTwoChange(value) {
+    setResourceVersionTwo(value);
+  }
+
   return (
     <ChangelogPage>
       <ChangelogHeader>
@@ -53,13 +59,15 @@ const OpenAPIChangelog = () => {
       </ChangelogHeader>
       <FiltersPanel
         handleSelectedResourceChange={handleSelectedResourceChange}
-        resources={resources}
+        resources={MOCK_RESOURCES}
         selectedResource={selectedResource}
-        resourceVersions={resourceVersions}
+        resourceVersions={MOCK_RESOURCE_VERSIONS}
         versionMode={versionMode}
         handleVersionModeChange={handleVersionModeChange}
         resourceVersionOne={resourceVersionOne}
         resourceVersionTwo={resourceVersionTwo}
+        handleResourceVersionOneChange={handleResourceVersionOneChange}
+        handleResourceVersionTwoChange={handleResourceVersionTwoChange}
       />
       <ChangeList />
     </ChangelogPage>

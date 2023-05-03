@@ -10,7 +10,13 @@ const DiffSelectItem = styled.div`
   flex-grow: 1;
 `;
 
-export default function DiffSelect({ resourceVersions, resourceVersionOne, resourceVersionTwo }) {
+export default function DiffSelect({
+  resourceVersions,
+  resourceVersionOne,
+  resourceVersionTwo,
+  handleVersionOneChange,
+  handleVersionTwoChange,
+}) {
   const versionOneOptions = resourceVersions
     .filter((version) => version !== resourceVersionTwo)
     .map((version) => <ComboboxOption key={version} value={version}></ComboboxOption>);
@@ -22,12 +28,12 @@ export default function DiffSelect({ resourceVersions, resourceVersionOne, resou
   return (
     <DiffSelectContainer>
       <DiffSelectItem>
-        <Combobox value={resourceVersionOne} label="Resource Version 1">
+        <Combobox value={resourceVersionOne} label="Resource Version 1" onChange={handleVersionOneChange}>
           {versionOneOptions}
         </Combobox>
       </DiffSelectItem>
       <DiffSelectItem>
-        <Combobox value={resourceVersionTwo} label="Resource Version 2">
+        <Combobox value={resourceVersionTwo} label="Resource Version 2" onChange={handleVersionTwoChange}>
           {versionTwoOptions}
         </Combobox>
       </DiffSelectItem>

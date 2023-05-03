@@ -19,6 +19,8 @@ const FiltersPanel = ({
   handleSelectedResourceChange,
   resourceVersionOne,
   resourceVersionTwo,
+  handleResourceVersionOneChange,
+  handleResourceVersionTwoChange,
 }) => {
   return (
     <Wrapper>
@@ -28,6 +30,8 @@ const FiltersPanel = ({
           resourceVersionOne={resourceVersionOne}
           resourceVersionTwo={resourceVersionTwo}
           resourceVersions={resourceVersions}
+          handleVersionOneChange={handleResourceVersionOneChange}
+          handleVersionTwoChange={handleResourceVersionTwoChange}
         />
       ) : null}
       <ResourceSelect
