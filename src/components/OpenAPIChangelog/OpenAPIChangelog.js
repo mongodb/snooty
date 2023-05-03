@@ -19,8 +19,8 @@ const ChangelogHeader = styled.div`
   align-items: center;
 `;
 
-const MOCK_RESOURCE_VERSIONS = ['2023-01-01 (latest)', '2022-01-01', '2021-01-01', '2020-01-01'];
-const MOCK_RESOURCES = [
+export const MOCK_RESOURCE_VERSIONS = ['2023-01-01 (latest)', '2022-01-01', '2021-01-01', '2020-01-01'];
+export const MOCK_RESOURCES = [
   'All',
   'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore',
   'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/before',
