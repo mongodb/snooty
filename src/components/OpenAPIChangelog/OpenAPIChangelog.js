@@ -19,17 +19,30 @@ const ChangelogHeader = styled.div`
   align-items: center;
 `;
 
-const MOCK_RESOURCE_VERSIONS = ['2020-01-01', '2021-01-01', '2022-01-01', '2023-01-01'];
+const MOCK_RESOURCE_VERSIONS = ['2023-01-01 (latest)', '2022-01-01', '2021-01-01', '2020-01-01'];
+const MOCK_RESOURCES = [
+  'All',
+  'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore',
+  'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/before',
+];
 
 const OpenAPIChangelog = () => {
+  const resourceOneDefault = MOCK_RESOURCE_VERSIONS[0];
+  const resourceTwoDefault = MOCK_RESOURCE_VERSIONS[1];
+
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResource, setSelectedResource] = useState('All');
   const [resourceVersions, setResourceVersions] = useState(MOCK_RESOURCE_VERSIONS);
-  const [resourceVersionOne, setResourceVersionOne] = useState('');
-  const [resourceVersionTwo, setResourceVersionTwo] = useState('');
+  const [resources, setResources] = useState(MOCK_RESOURCES);
+  const [resourceVersionOne, setResourceVersionOne] = useState(resourceOneDefault);
+  const [resourceVersionTwo, setResourceVersionTwo] = useState(resourceTwoDefault);
 
   function handleVersionModeChange(value) {
     setVersionMode(value);
+  }
+
+  function handleSelectedResourceChange(value) {
+    setSelectedResource(value);
   }
 
   return (
@@ -39,6 +52,9 @@ const OpenAPIChangelog = () => {
         <Button>Download API Changelog</Button>
       </ChangelogHeader>
       <FiltersPanel
+        handleSelectedResourceChange={handleSelectedResourceChange}
+        resources={resources}
+        selectedResource={selectedResource}
         resourceVersions={resourceVersions}
         versionMode={versionMode}
         handleVersionModeChange={handleVersionModeChange}

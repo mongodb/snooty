@@ -10,12 +10,23 @@ const Wrapper = styled.div`
   margin-top: 32px;
 `;
 
-const FiltersPanel = ({ versionMode, handleVersionModeChange, resourceVersions }) => {
+const FiltersPanel = ({
+  versionMode,
+  handleVersionModeChange,
+  resourceVersions,
+  selectedResource,
+  resources,
+  handleSelectedResourceChange,
+}) => {
   return (
     <Wrapper>
-      <VersionModeSegmentedControl versionMode={versionMode} handleVersionModeChange={handleVersionModeChange} />
+      <VersionModeSegmentedControl versionMode={versionMode} handleChange={handleVersionModeChange} />
       {versionMode === COMPARE_VERSIONS ? <DiffSelect resourceVersions={resourceVersions} /> : null}
-      <ResourceSelect resourceVersions={resourceVersions} />
+      <ResourceSelect
+        resources={resources}
+        selectedResource={selectedResource}
+        handleChange={handleSelectedResourceChange}
+      />
     </Wrapper>
   );
 };

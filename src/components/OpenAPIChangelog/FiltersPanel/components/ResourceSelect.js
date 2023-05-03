@@ -6,11 +6,11 @@ const ResourceSelectContainer = styled.div`
   margin-top: 24px;
 `;
 
-export default function ResourceSelect({ resourceVersions }) {
+export default function ResourceSelect({ resources, selectedResource, handleChange }) {
   return (
     <ResourceSelectContainer>
-      <Combobox label="Select Resource">
-        {resourceVersions.map((version) => (
+      <Combobox label="Select Resource" value={selectedResource} onChange={handleChange}>
+        {resources.map((version) => (
           <ComboboxOption value={version} />
         ))}
       </Combobox>
