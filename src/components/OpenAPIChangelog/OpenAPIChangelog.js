@@ -58,6 +58,8 @@ const OpenAPIChangelog = () => {
         resourceVersions={resourceVersions}
         versionMode={versionMode}
         handleVersionModeChange={handleVersionModeChange}
+        resourceVersionOne={resourceVersionOne}
+        resourceVersionTwo={resourceVersionTwo}
       />
       <ChangeList />
     </ChangelogPage>

@@ -17,11 +17,19 @@ const FiltersPanel = ({
   selectedResource,
   resources,
   handleSelectedResourceChange,
+  resourceVersionOne,
+  resourceVersionTwo,
 }) => {
   return (
     <Wrapper>
       <VersionModeSegmentedControl versionMode={versionMode} handleChange={handleVersionModeChange} />
-      {versionMode === COMPARE_VERSIONS ? <DiffSelect resourceVersions={resourceVersions} /> : null}
+      {versionMode === COMPARE_VERSIONS ? (
+        <DiffSelect
+          resourceVersionOne={resourceVersionOne}
+          resourceVersionTwo={resourceVersionTwo}
+          resourceVersions={resourceVersions}
+        />
+      ) : null}
       <ResourceSelect
         resources={resources}
         selectedResource={selectedResource}
