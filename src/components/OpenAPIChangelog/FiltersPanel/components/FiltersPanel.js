@@ -12,32 +12,32 @@ const Wrapper = styled.div`
 
 const FiltersPanel = ({
   versionMode,
-  handleVersionModeChange,
   resourceVersions,
   selectedResource,
   resources,
-  handleSelectedResourceChange,
   resourceVersionOne,
   resourceVersionTwo,
-  handleResourceVersionOneChange,
-  handleResourceVersionTwoChange,
+  setSelectedResource,
+  setVersionMode,
+  setResourceVersionOne,
+  setResourceVersionTwo,
 }) => {
   return (
     <Wrapper>
-      <VersionModeSegmentedControl versionMode={versionMode} handleChange={handleVersionModeChange} />
+      <VersionModeSegmentedControl versionMode={versionMode} handleChange={(value) => setVersionMode(value)} />
       {versionMode === COMPARE_VERSIONS ? (
         <DiffSelect
           resourceVersionOne={resourceVersionOne}
           resourceVersionTwo={resourceVersionTwo}
           resourceVersions={resourceVersions}
-          handleVersionOneChange={handleResourceVersionOneChange}
-          handleVersionTwoChange={handleResourceVersionTwoChange}
+          handleVersionOneChange={(value) => setResourceVersionOne(value)}
+          handleVersionTwoChange={(value) => setResourceVersionTwo(value)}
         />
       ) : null}
       <ResourceSelect
         resources={resources}
         selectedResource={selectedResource}
-        handleChange={handleSelectedResourceChange}
+        handleChange={(value) => setSelectedResource(value)}
       />
     </Wrapper>
   );
