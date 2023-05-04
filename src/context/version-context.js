@@ -54,6 +54,7 @@ const versionStateReducer = (state, newState) => {
 const getBranches = async (metadata, repoBranches, associatedReposInfo, associatedProducts) => {
   try {
     const versions = {};
+    const groups = {};
     const promises = associatedProducts.map(async (product) => {
       const childRepoBranches = await fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
         project: product.name,
@@ -64,26 +65,27 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
     promises.push(
       fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
         versions[metadata.project] = res.branches.filter((branch) => branch.active);
+        groups[metadata.project] = res.groups || [];
       })
     );
     await Promise.all(promises);
-    return versions;
+    return { versions, groups };
   } catch (e) {
-    return getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo);
+    return getDefaults(metadata.project, repoBranches, associatedReposInfo);
     // on error of realm function, fall back to build time fetches
   }
 };
 
-const getDefaultAvailVersions = (project, repoBranches, associatedReposInfo) => {
+const getDefaults = (project, repoBranches, associatedReposInfo, key = 'branches') => {
   const versions = {};
-  versions[project] = repoBranches?.branches || [];
+  versions[project] = repoBranches?.[key] || [];
   for (const productName in associatedReposInfo) {
-    versions[productName] = associatedReposInfo[productName].branches || [];
+    versions[productName] = associatedReposInfo[productName][key] || [];
   }
   return versions;
 };
 
-const getDefaultActiveVersions = ([metadata, associatedReposInfo]) => {
+const getDefaultActiveVersions = ([metadata]) => {
   // for current metadata.project, should always default to metadata.parserBranch
   const { project, parserBranch } = metadata;
   let versions = {};
@@ -120,6 +122,7 @@ const VersionContext = createContext({
   // active version for each product is marked is {[product name]: active version} pair
   setActiveVersions: () => {},
   availableVersions: {},
+  availableGroups: {},
   setAvailableVersions: () => {},
   showVersionDropdown: false,
   onVersionSelect: () => {},
@@ -147,17 +150,22 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // expose the available versions for current and associated products
   const [availableVersions, setAvailableVersions] = useState(
-    getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo)
+    getDefaults(metadata.project, repoBranches, associatedReposInfo)
   );
+  const [availableGroups, setAvailableGroups] = useState(
+    getDefaults(metadata.project, repoBranches, associatedReposInfo, 'groups')
+  );
+
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then((versions) => {
+    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then(({ versions, groups }) => {
       if (!mountRef.current) {
         return;
       }
       if (!activeVersions || !Object.keys(activeVersions).length) {
         setActiveVersions(getInitVersions(versions));
       }
+      setAvailableGroups(groups);
       setAvailableVersions(versions);
     });
     // does not need to refetch after initial fetch
@@ -236,7 +244,14 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   return (
     <VersionContext.Provider
-      value={{ activeVersions, setActiveVersions, availableVersions, showVersionDropdown, onVersionSelect }}
+      value={{
+        activeVersions,
+        setActiveVersions,
+        availableVersions,
+        availableGroups,
+        showVersionDropdown,
+        onVersionSelect,
+      }}
     >
       {children}
     </VersionContext.Provider>
