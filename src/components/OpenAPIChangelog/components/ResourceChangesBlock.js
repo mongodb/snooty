@@ -51,12 +51,13 @@ const ResourceChangesBlock = ({ data: { path, httpMethod, operationId, tag, chan
   return (
     <Wrapper>
       <Flex>
+        {/* Work on a more programmatic way to infer the spec page path */}
         <LGLink href={`${pathPrefix}/reference/api-resources-spec/v2.0/${resourceTag}`} hideExternalIcon>
           <ResourceHeader>
             {httpMethod} {path}
           </ResourceHeader>
         </LGLink>
-        <ChangeTypeBadge variant={badge.variant}>{badge.label}</ChangeTypeBadge>
+        {badge ? <ChangeTypeBadge variant={badge.variant}>{badge.label}</ChangeTypeBadge> : null}
       </Flex>
       <ChangeListUL>
         {resourceChanges.map((change, i) => (
