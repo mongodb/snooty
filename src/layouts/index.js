@@ -119,8 +119,7 @@ const DefaultLayout = ({
           ) : (
             <div />
           )}
-          <OpenAPIChangelog />
-          {/* <ContentTransition slug={slug}>{children}</ContentTransition> */}
+          <ContentTransition slug={slug}>{children}</ContentTransition>
         </GlobalGrid>
       </RootProvider>
     </>
