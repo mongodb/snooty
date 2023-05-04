@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllByTestId, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
 
@@ -10,7 +10,7 @@ describe('OpenAPIChangelog tests', () => {
   });
 
   describe('Version Mode segmented control tests', () => {
-    it('Does not display diff options when all versions are selected', () => {
+    it('Does not display diff options when the all versions option is selected', () => {
       const { getByTestId, getByLabelText } = render(<OpenAPIChangelog />);
 
       const allVersionsOption = getByTestId('all-versions-option');
@@ -21,6 +21,22 @@ describe('OpenAPIChangelog tests', () => {
 
       expect(() => getByLabelText('Resource Version 1')).toThrowError();
       expect(() => getByLabelText('Resource Version 2')).toThrowError();
+    });
+
+    it('Does display diff options when compares versions option is selected', () => {
+      const { getByTestId, getByLabelText } = render(<OpenAPIChangelog />);
+
+      const compareVersionsOption = getByTestId('version-control-option');
+      const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
+
+      userEvent.click(compareVersionsOptionButton);
+
+      const isCompareVersionsSelected = compareVersionsOptionButton.getAttribute('aria-selected');
+
+      expect(isCompareVersionsSelected).toBe('true');
+
+      expect(() => getByLabelText('Resource Version 1')).toBeTruthy();
+      expect(() => getByLabelText('Resource Version 2')).toBeTruthy();
     });
   });
 

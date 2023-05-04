@@ -689,6 +689,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           >
             <div
               class="emotion-13"
+              data-testid="all-versions-option"
               tabindex="-1"
             >
               <button
@@ -717,6 +718,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           >
             <div
               class="emotion-13"
+              data-testid="version-control-option"
               tabindex="-1"
             >
               <button
