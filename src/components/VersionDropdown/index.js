@@ -165,7 +165,7 @@ const VersionDropdown = ({ repoBranches: { siteBasePrefix }, slug, eol }) => {
               {groupedBranchNames?.reduce((res, bn) => {
                 const branch = getBranch(bn, branches);
                 if (branch) {
-                  res.push(createOption(bn, branches));
+                  res.push(createOption(branch));
                 }
                 return res;
               }, [])}
