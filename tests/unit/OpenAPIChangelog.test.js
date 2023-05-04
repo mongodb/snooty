@@ -54,6 +54,7 @@ describe('OpenAPIChangelog tests', () => {
       // assert
       expect(options.length).toEqual(3);
     });
+
     it('Updates the Select Resources combobox when option is selected from dropdown', () => {
       const expectedSelectedValue = 'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore';
       const tree = render(<OpenAPIChangelog />);
@@ -72,6 +73,56 @@ describe('OpenAPIChangelog tests', () => {
 
       // assert
       expect(actualSelectedValue).toEqual(expectedSelectedValue);
+    });
+  });
+
+  describe('version compare comboboxes tests', () => {
+    it('has different options from each other', () => {
+      const { getByTestId, getByLabelText, getAllByTestId } = render(<OpenAPIChangelog />);
+
+      // switch to compare versions on segment control
+      const compareVersionsOption = getByTestId('version-control-option');
+      const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
+
+      userEvent.click(compareVersionsOptionButton);
+
+      // get diff comboboxes and open each to reveal the resource version options of each
+      const resourceVersionOneCombobox = getByLabelText('Resource Version 1');
+      const resourceVersionTwoCombobox = getByLabelText('Resource Version 2');
+
+      userEvent.click(resourceVersionOneCombobox);
+      const resourceVersionOneOptions = getAllByTestId('version-one-option');
+
+      const getOptionStrings = (o) => {
+        /**
+         * The selected option has a <strong> tag that surronds the value.
+         * For example, if '2023-01-01' is selected, calling o.getElementsByTagName('span')[0].innerHTML
+         * will get us '<strong>2023-01-01</strong>'. We can strip it by getting the firstElementChild,
+         * and returning the innerHTML of that. The firstElementChild will be the <strong> element.
+         * If there is no firstElementChild, the value will be null and we just return the string like normal
+         */
+        if (o.getElementsByTagName('span')[0].firstElementChild) {
+          return o.getElementsByTagName('span')[0].firstElementChild.innerHTML;
+        }
+
+        return o.getElementsByTagName('span')[0].innerHTML;
+      };
+
+      const resourceVersionOneOptionValues = resourceVersionOneOptions.map(getOptionStrings);
+      const selectedResourceVersionOneOption = resourceVersionOneOptionValues[0];
+
+      // select first option again to close combobox
+      userEvent.click(resourceVersionOneOptions[0]);
+
+      userEvent.click(resourceVersionTwoCombobox);
+      const resourceVersionTwoOptions = getAllByTestId('version-two-option');
+
+      const resourceVersionTwoOptionValues = resourceVersionTwoOptions.map(getOptionStrings);
+
+      const selectedResourceVersionTwoOption = resourceVersionTwoOptionValues[0];
+
+      expect(resourceVersionOneOptionValues).not.toContain(selectedResourceVersionTwoOption);
+      expect(resourceVersionTwoOptionValues).not.toContain(selectedResourceVersionOneOption);
     });
   });
 });
