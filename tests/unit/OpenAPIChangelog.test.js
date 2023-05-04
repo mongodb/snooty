@@ -9,23 +9,39 @@ describe('OpenAPIChangelog tests', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
-  it('Updates the dropdown when selected', async () => {
-    const expectedSelectedValue = 'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore';
-    const tree = render(<OpenAPIChangelog />);
-    const selectResourceInputEl = tree.getByLabelText('Select Resource');
+  describe('Select Resources combobox tests', () => {
+    it('Has all of the options available when dropdown is opened', () => {
+      const { getByLabelText, getAllByTestId } = render(<OpenAPIChangelog />);
+      const selectResourceInputEl = getByLabelText('Select Resource');
 
-    // open dropdown
-    userEvent.click(selectResourceInputEl);
+      // open dropdown
+      userEvent.click(selectResourceInputEl);
 
-    // get options
-    const options = tree.getAllByTestId('resource-select-option');
+      // retrieve dropdown options
 
-    // click second option
-    userEvent.click(options[1]);
+      const options = getAllByTestId('resource-select-option');
 
-    const actualSelectedValue = selectResourceInputEl.getAttribute('value');
+      // act
+      expect(options.length).toEqual(3);
+    });
+    it('Updates the Select Resources combobox when option is selected from dropdown', () => {
+      const expectedSelectedValue = 'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore';
+      const tree = render(<OpenAPIChangelog />);
+      const selectResourceInputEl = tree.getByLabelText('Select Resource');
 
-    // act
-    expect(actualSelectedValue).toEqual(expectedSelectedValue);
+      // open dropdown
+      userEvent.click(selectResourceInputEl);
+
+      // get options
+      const options = tree.getAllByTestId('resource-select-option');
+
+      // click second option
+      userEvent.click(options[1]);
+
+      const actualSelectedValue = selectResourceInputEl.getAttribute('value');
+
+      // act
+      expect(actualSelectedValue).toEqual(expectedSelectedValue);
+    });
   });
 });
