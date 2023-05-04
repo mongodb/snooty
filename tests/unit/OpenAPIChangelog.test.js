@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { getAllByTestId, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
 
@@ -7,6 +7,21 @@ describe('OpenAPIChangelog tests', () => {
   it('OpenAPIChangelog renders correctly', () => {
     const tree = render(<OpenAPIChangelog />);
     expect(tree.asFragment()).toMatchSnapshot();
+  });
+
+  describe('Version Mode segmented control tests', () => {
+    it('Does not display diff options when all versions are selected', () => {
+      const { getByTestId, getByLabelText } = render(<OpenAPIChangelog />);
+
+      const allVersionsOption = getByTestId('all-versions-option');
+
+      const isAllVersionsSelected = allVersionsOption.firstElementChild.getAttribute('aria-selected');
+
+      expect(isAllVersionsSelected).toBe('true');
+
+      expect(() => getByLabelText('Resource Version 1')).toThrowError();
+      expect(() => getByLabelText('Resource Version 2')).toThrowError();
+    });
   });
 
   describe('Select Resources combobox tests', () => {
@@ -18,10 +33,9 @@ describe('OpenAPIChangelog tests', () => {
       userEvent.click(selectResourceInputEl);
 
       // retrieve dropdown options
-
       const options = getAllByTestId('resource-select-option');
 
-      // act
+      // assert
       expect(options.length).toEqual(3);
     });
     it('Updates the Select Resources combobox when option is selected from dropdown', () => {
@@ -40,7 +54,7 @@ describe('OpenAPIChangelog tests', () => {
 
       const actualSelectedValue = selectResourceInputEl.getAttribute('value');
 
-      // act
+      // assert
       expect(actualSelectedValue).toEqual(expectedSelectedValue);
     });
   });
