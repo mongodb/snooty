@@ -29,17 +29,19 @@ DescriptionTerm.propTypes = {
   html_id: PropTypes.string.isRequired,
 };
 
-const Target = ({ nodeData: { children, html_id, name }, ...rest }) => {
+const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => {
   // If directive_argument node is not present, render an empty span with the target ID
   // Otherwise, render directive_argument as a dictionary node and attach the
   // ID to the description term field
   const [, dictList] = partition(children, (elem) => elem.type === 'target_identifier');
   const [[descriptionTerm], descriptionDetails] = partition(dictList, (elem) => elem.type === 'directive_argument');
+  const hidden = options && options.hidden ? true : false;
 
   return (
     <React.Fragment>
-      {/* Render binary and program targets as empty spans such that their IDs are rendered on the page. */}
-      {dictList.length > 0 && !['binary', 'program'].includes(name) ? (
+      {/* Render binary and program targets **and targets with the :hidden: flag
+      as empty spans such that their IDs are rendered on the page. */}
+      {dictList.length > 0 && !['binary', 'program'].includes(name) && !hidden ? (
         <dl className={name}>
           {descriptionTerm && <DescriptionTerm {...rest} {...descriptionTerm} html_id={html_id} />}
           <dd>
