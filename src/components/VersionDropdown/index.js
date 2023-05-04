@@ -161,7 +161,15 @@ const VersionDropdown = ({ repoBranches: { siteBasePrefix }, slug, eol }) => {
         const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>
-            <>{groupedBranchNames?.map((bn) => createOption(getBranch(bn, branches)))}</>
+            <>
+              {groupedBranchNames?.reduce((res, bn) => {
+                const branch = getBranch(bn, branches);
+                if (branch) {
+                  res.push(createOption(bn, branches));
+                }
+                return res;
+              }, [])}
+            </>
           </OptionGroup>
         );
       })}
