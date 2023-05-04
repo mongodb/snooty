@@ -6,7 +6,7 @@
  * - arr: an array containing the objects to search for the target value
  */
 const removeNestedValue = (target, traversalKey, arr) => {
-  if (!arr) return undefined;
+  if (!arr) return;
 
   arr.forEach((entry) => {
     if (entry.hasOwnProperty(target)) {
