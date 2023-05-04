@@ -8,14 +8,14 @@ const ChangeListItem = styled.li`
   line-height: 28px;
 `;
 
-const Flex = styled.div`
+export const Flex = styled.div`
   display: inline-flex;
   align-items: center;
+  gap: 5px;
 `;
 
 const LIWrapper = styled(Flex)`
   height: 28px;
-  gap: 5px;
 `;
 
 const Change = ({ change, backwardCompatible }) => {
@@ -28,7 +28,6 @@ const Change = ({ change, backwardCompatible }) => {
           <Tooltip
             align={Align.Top}
             justify={Justify.Middle}
-            baseFontSize={13}
             trigger={
               <Flex>
                 <Icon glyph="ImportantWithCircle" fill={palette.red.base} />

@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
+import Badge from '@leafygreen-ui/badge';
 import { palette } from '@leafygreen-ui/palette';
 import { Link as LGLink, Subtitle } from '@leafygreen-ui/typography';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { generatePathPrefix } from '../../../utils/generate-path-prefix';
-import Change from './Change';
+import { changeTypeBadge } from '../utils/changeTypeBadge';
+import Change, { Flex } from './Change';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,6 +14,10 @@ const Wrapper = styled.div`
 
 const ResourceHeader = styled(Subtitle)`
   color: ${palette.blue.base};
+`;
+
+const ChangeTypeBadge = styled(Badge)`
+  margin-top: 2px;
 `;
 
 const ChangeListUL = styled.ul`
@@ -27,24 +33,31 @@ const ChangeListUL = styled.ul`
   }
 `;
 
-const ResourceChangesBlock = ({ data: { path, httpMethod, operationId, tag, changes, versions } }) => {
+const ResourceChangesBlock = ({ data: { path, httpMethod, operationId, tag, changes, changeType, versions } }) => {
   const metadata = useSiteMetadata();
   const pathPrefix = generatePathPrefix(metadata);
   const resourceTag = `#tag/${tag.split(' ').join('-')}/operation/${operationId}`;
 
   const resourceChanges =
-    changes ??
-    versions.map((version) => version.changes.map((change) => ({ ...change, version: version.version }))).flat();
+    changes ||
+    versions
+      .map((version) =>
+        version.changes.map((change) => ({ ...change, version: version.version, changeType: versions[0].changeType }))
+      )
+      .flat();
 
-  // TODO: badge for (only?) full changelog list... Asking Ciprian
+  const badge = changeTypeBadge[changeType || versions[0].changeType];
 
   return (
     <Wrapper>
-      <LGLink href={`${pathPrefix}/reference/api-resources-spec/v2.0/${resourceTag}`} hideExternalIcon>
-        <ResourceHeader>
-          {httpMethod} {path}
-        </ResourceHeader>
-      </LGLink>
+      <Flex>
+        <LGLink href={`${pathPrefix}/reference/api-resources-spec/v2.0/${resourceTag}`} hideExternalIcon>
+          <ResourceHeader>
+            {httpMethod} {path}
+          </ResourceHeader>
+        </LGLink>
+        <ChangeTypeBadge variant={badge.variant}>{badge.label}</ChangeTypeBadge>
+      </Flex>
       <ChangeListUL>
         {resourceChanges.map((change, i) => (
           <Change key={`change-${i}`} {...change} />

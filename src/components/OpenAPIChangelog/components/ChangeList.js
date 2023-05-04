@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import ChangelogReleaseBlock from './ChangelogReleaseBlock';
+import ReleaseDateBlock from './ReleaseDateBlock';
 import ResourceChangesBlock from './ResourceChangesBlock';
 
 const Wrapper = styled.div`
@@ -7,7 +7,8 @@ const Wrapper = styled.div`
 `;
 
 const ChangeList = ({ versionMode, changes }) => {
-  const ChangeListComponent = versionMode ? ResourceChangesBlock : ChangelogReleaseBlock;
+  // TODO: replace with correct conditional
+  const ChangeListComponent = versionMode ? ResourceChangesBlock : ReleaseDateBlock;
 
   return (
     <Wrapper>

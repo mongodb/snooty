@@ -152,6 +152,7 @@ export const mockDiff = [
     httpMethod: 'GET',
     operationId: 'listConnectedOrgConfigs',
     tag: 'Federated Authentication',
+    changeType: 'update',
     changes: [
       {
         change: "removed the non-success response with the status '400'.",
@@ -170,6 +171,7 @@ export const mockDiff = [
     httpMethod: 'POST',
     operationId: 'createProjectIpAccessList',
     tag: 'Project IP Access List',
+    changeType: 'removed',
     changes: [
       {
         change: "removed the required property 'name' from the response with the '200' status.",

@@ -8,7 +8,7 @@ const Wrapper = styled.section`
   margin-top: 28px;
 `;
 
-const ChangelogReleaseBlock = ({ data: { date: releaseDate, paths } }) => {
+const ReleaseDateBlock = ({ data: { date: releaseDate, paths } }) => {
   const formattedReleaseDate = format(new Date(releaseDate.replace(/-/g, '/')), 'dd MMMM y');
 
   return (
@@ -21,4 +21,4 @@ const ChangelogReleaseBlock = ({ data: { date: releaseDate, paths } }) => {
   );
 };
 
-export default ChangelogReleaseBlock;
+export default ReleaseDateBlock;
