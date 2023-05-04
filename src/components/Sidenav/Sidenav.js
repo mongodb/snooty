@@ -171,7 +171,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   let showVersions = repoBranches?.branches?.filter((b) => b.active)?.length > 1;
 
   const { showVersionDropdown } = useContext(VersionContext);
-  // showVersionDropdown === isAssociatedProduct
   if (showVersionDropdown) {
     showVersions = false;
   }
