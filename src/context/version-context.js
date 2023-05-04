@@ -64,7 +64,7 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
     });
     promises.push(
       fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
-        versions[metadata.project] = res.branches.filter((branch) => branch.active);
+        versions[metadata.project] = res.branches?.filter((branch) => branch.active) || [];
         groups[metadata.project] = res.groups || [];
       })
     );
