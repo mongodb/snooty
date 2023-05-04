@@ -10,6 +10,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
+const LEGACY_GIT_BRANCH = 'legacy';
 
 const getInitBranchName = (branches) => {
   const activeBranch = branches.find((b) => b.active);
@@ -55,6 +56,7 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
   try {
     const versions = {};
     const groups = {};
+    let hasEolBranches = false;
     const promises = associatedProducts.map(async (product) => {
       const childRepoBranches = await fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
         project: product.name,
@@ -66,10 +68,11 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
       fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
         versions[metadata.project] = res.branches?.filter((branch) => branch.active) || [];
         groups[metadata.project] = res.groups || [];
+        hasEolBranches = res.branches.some((b) => !b.active);
       })
     );
     await Promise.all(promises);
-    return { versions, groups };
+    return { versions, groups, hasEolBranches };
   } catch (e) {
     return getDefaults(metadata.project, repoBranches, associatedReposInfo);
     // on error of realm function, fall back to build time fetches
@@ -125,6 +128,7 @@ const VersionContext = createContext({
   availableGroups: {},
   setAvailableVersions: () => {},
   showVersionDropdown: false,
+  showEol: false,
   onVersionSelect: () => {},
 });
 
@@ -155,19 +159,23 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   const [availableGroups, setAvailableGroups] = useState(
     getDefaults(metadata.project, repoBranches, associatedReposInfo, 'groups')
   );
+  const [showEol, setShowEol] = useState(repoBranches['branches']?.some((b) => !b.active) || false);
 
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then(({ versions, groups }) => {
-      if (!mountRef.current) {
-        return;
+    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then(
+      ({ versions, groups, hasEolBranches }) => {
+        if (!mountRef.current) {
+          return;
+        }
+        if (!activeVersions || !Object.keys(activeVersions).length) {
+          setActiveVersions(getInitVersions(versions));
+        }
+        setAvailableGroups(groups);
+        setAvailableVersions(versions);
+        setShowEol(hasEolBranches);
       }
-      if (!activeVersions || !Object.keys(activeVersions).length) {
-        setActiveVersions(getInitVersions(versions));
-      }
-      setAvailableGroups(groups);
-      setAvailableVersions(versions);
-    });
+    );
     // does not need to refetch after initial fetch
     // also falls back to server side fetch for branches
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -196,11 +204,14 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
       }
 
       const targetBranch = findBranchByGit(gitBranchName, availableVersions[metadata.project]);
-      if (!targetBranch) {
+      if (!targetBranch && gitBranchName !== LEGACY_GIT_BRANCH) {
         console.error(`target branch not found for git branch <${gitBranchName}>`);
         return;
       }
-      const target = targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
+      const target =
+        gitBranchName === LEGACY_GIT_BRANCH
+          ? gitBranchName
+          : targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
       const urlTarget = getUrl(target, metadata.project, metadata, repoBranches?.siteBasePrefix, slug);
       navigate(urlTarget);
     },
@@ -251,6 +262,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
         availableGroups,
         showVersionDropdown,
         onVersionSelect,
+        showEol,
       }}
     >
       {children}

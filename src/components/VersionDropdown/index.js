@@ -26,12 +26,6 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-// Returns true if there are any inactive (EOL'd/'legacy') branches
-const needsLegacyDropdown = (branches = []) => {
-  const isLegacy = (branch = {}) => !branch['active'];
-  return branches.some(isLegacy);
-};
-
 // Gets UI labels for supplied active branch names
 export const getUILabel = (branch) => {
   if (!branch['active']) {
@@ -95,10 +89,10 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ repoBranches: { siteBasePrefix }, slug, eol }) => {
+const VersionDropdown = ({ eol }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, project } = siteMetadata;
-  const { availableVersions, availableGroups, onVersionSelect } = useContext(VersionContext);
+  const { availableVersions, availableGroups, onVersionSelect, showEol } = useContext(VersionContext);
   let branches = availableVersions[siteMetadata.project];
   let groups = availableGroups[siteMetadata.project];
 
@@ -173,7 +167,7 @@ const VersionDropdown = ({ repoBranches: { siteBasePrefix }, slug, eol }) => {
           </OptionGroup>
         );
       })}
-      {needsLegacyDropdown(branches) && <Option value="legacy">Legacy Docs</Option>}
+      {showEol && <Option value="legacy">Legacy Docs</Option>}
     </StyledSelect>
   );
 };
