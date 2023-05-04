@@ -17,10 +17,9 @@ const ChangelogHeader = styled.div`
   align-items: center;
 `;
 
-const OpenAPIChangelog = () => {
+/* Remove props when useStaticQuery is implemented, this is here for testing purposes */
+const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff }) => {
   const [versionMode, setVersionMode] = useState(false);
-  const changelog = mockChangelog;
-  const diff = mockDiff;
 
   return (
     <ChangelogPage>
