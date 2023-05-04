@@ -16,24 +16,6 @@ import Twitter from './Twitter';
 import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 
-// Modify the AST so that the node modified by cssclass is included in its "children" array.
-// Delete this modified node from its original location.
-const normalizeCssClassNodes = (nodes, key, value) => {
-  const searchNode = (node, i, arr) => {
-    // If a cssclass node has no children, add the proceeding node to its array of children,
-    // thereby appending the specified class to that component.
-    if (node[key] === value && i < arr.length - 1 && node.children.length === 0) {
-      const nextNode = arr[i + 1];
-      node.children.push(nextNode);
-      arr.splice(i + 1, 1);
-    }
-    if (node.children) {
-      node.children.forEach(searchNode);
-    }
-  };
-  nodes.forEach(searchNode);
-};
-
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
 // - labels: the numerical label for the footnote
@@ -90,8 +72,6 @@ const DocumentBody = (props) => {
   } = props;
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
-    // Standardize cssclass nodes that appear on the page
-    normalizeCssClassNodes(pageNodes, 'name', 'cssclass');
     const footnotes = getFootnotes(pageNodes);
 
     return { pageNodes, footnotes };
