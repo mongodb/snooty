@@ -12,7 +12,6 @@ import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
 import Cond from './Cond';
 import Container from './Container';
-import CSSClass from './CSSClass';
 import CTA from './CTA';
 import CTABanner from './Banner/CTABanner';
 import DefinitionList from './DefinitionList';
@@ -133,12 +132,10 @@ const componentMap = {
   'card-group': CardGroup,
   chapter: Chapter,
   chapters: Chapters,
-  class: CSSClass,
   code: Code,
   'io-code-block': CodeIO,
   cond: Cond,
   container: Container,
-  cssclass: CSSClass,
   cta: CTA,
   'cta-banner': CTABanner,
   definitionList: DefinitionList,
