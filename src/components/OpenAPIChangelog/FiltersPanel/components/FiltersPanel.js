@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { COMPARE_VERSIONS } from '../constants';
 import VersionModeSegmentedControl from './VersionModeSegmentedControl';
 import ResourceSelect from './ResourceSelect';
 import DiffSelect from './DiffSelect';
@@ -11,29 +10,29 @@ const Wrapper = styled.div`
 `;
 
 const FiltersPanel = ({
-  versionMode,
+  isVersionCompare,
   resourceVersions,
   selectedResource,
   resources,
   resourceVersionOne,
   resourceVersionTwo,
   setSelectedResource,
-  setVersionMode,
+  setIsVersionCompare,
   setResourceVersionOne,
   setResourceVersionTwo,
 }) => {
   return (
     <Wrapper>
-      <VersionModeSegmentedControl versionMode={versionMode} handleChange={(value) => setVersionMode(value)} />
-      {versionMode === COMPARE_VERSIONS ? (
+      <VersionModeSegmentedControl isVersionCompare={isVersionCompare} handleChange={setIsVersionCompare} />
+      {isVersionCompare && (
         <DiffSelect
           resourceVersionOne={resourceVersionOne}
           resourceVersionTwo={resourceVersionTwo}
           resourceVersions={resourceVersions}
-          handleVersionOneChange={(value) => setResourceVersionOne(value)}
-          handleVersionTwoChange={(value) => setResourceVersionTwo(value)}
+          handleVersionOneChange={setResourceVersionOne}
+          handleVersionTwoChange={setResourceVersionTwo}
         />
-      ) : null}
+      )}
       <ResourceSelect
         resources={resources}
         selectedResource={selectedResource}

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Button from '@leafygreen-ui/button';
 import FiltersPanel from './FiltersPanel';
 import ChangeList from './ChangeList';
-import { ALL_VERSIONS } from './FiltersPanel/constants';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -30,7 +29,7 @@ const OpenAPIChangelog = () => {
   const resourceOneDefault = MOCK_RESOURCE_VERSIONS[0];
   const resourceTwoDefault = MOCK_RESOURCE_VERSIONS[1];
 
-  const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
+  const [isVersionCompare, setIsVersionCompare] = useState(false);
   const [selectedResource, setSelectedResource] = useState('All');
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceOneDefault);
   const [resourceVersionTwo, setResourceVersionTwo] = useState(resourceTwoDefault);
@@ -45,11 +44,11 @@ const OpenAPIChangelog = () => {
         resources={MOCK_RESOURCES}
         selectedResource={selectedResource}
         resourceVersions={MOCK_RESOURCE_VERSIONS}
-        versionMode={versionMode}
+        isVersionCompare={isVersionCompare}
         resourceVersionOne={resourceVersionOne}
         resourceVersionTwo={resourceVersionTwo}
         setSelectedResource={setSelectedResource}
-        setVersionMode={setVersionMode}
+        setIsVersionCompare={setIsVersionCompare}
         setResourceVersionOne={setResourceVersionOne}
         setResourceVersionTwo={setResourceVersionTwo}
       />

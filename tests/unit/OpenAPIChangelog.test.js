@@ -3,6 +3,28 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
 
+/**
+ * Helper function to strip HTML from combobox list options
+ * @param {*} o  the option element that is returned from the combobox
+ * @returns an object containing the stripped down text for the option, and a boolean
+ * stating whether or not the option is selected. This is helpful for testing to make sure
+ * we get the option that is selected from the dropdown.
+ */
+const getComboboxOptionStrings = (o) => {
+  /**
+   * The selected option has a <strong> tag that surronds the value.
+   * For example, if '2023-01-01' is selected, calling o.getElementsByTagName('span')[0].innerHTML
+   * will get us '<strong>2023-01-01</strong>'. We can strip it by getting the firstElementChild,
+   * and returning the innerHTML of that. The firstElementChild will be the <strong> element.
+   * If there is no firstElementChild, the value will be null and we just return the string like normal
+   */
+  if (o.getElementsByTagName('span')[0].firstElementChild) {
+    return { optionValue: o.getElementsByTagName('span')[0].firstElementChild.innerHTML, isSelected: true };
+  }
+
+  return { optionValue: o.getElementsByTagName('span')[0].innerHTML, isSelected: false };
+};
+
 describe('OpenAPIChangelog tests', () => {
   it('OpenAPIChangelog renders correctly', () => {
     const tree = render(<OpenAPIChangelog />);
@@ -90,37 +112,30 @@ describe('OpenAPIChangelog tests', () => {
       const resourceVersionOneCombobox = getByLabelText('Resource Version 1');
       const resourceVersionTwoCombobox = getByLabelText('Resource Version 2');
 
+      // open resource version 1 combobox
       userEvent.click(resourceVersionOneCombobox);
+
       const resourceVersionOneOptions = getAllByTestId('version-one-option');
 
-      const getOptionStrings = (o) => {
-        /**
-         * The selected option has a <strong> tag that surronds the value.
-         * For example, if '2023-01-01' is selected, calling o.getElementsByTagName('span')[0].innerHTML
-         * will get us '<strong>2023-01-01</strong>'. We can strip it by getting the firstElementChild,
-         * and returning the innerHTML of that. The firstElementChild will be the <strong> element.
-         * If there is no firstElementChild, the value will be null and we just return the string like normal
-         */
-        if (o.getElementsByTagName('span')[0].firstElementChild) {
-          return o.getElementsByTagName('span')[0].firstElementChild.innerHTML;
-        }
-
-        return o.getElementsByTagName('span')[0].innerHTML;
-      };
-
-      const resourceVersionOneOptionValues = resourceVersionOneOptions.map(getOptionStrings);
-      const selectedResourceVersionOneOption = resourceVersionOneOptionValues[0];
+      // get the options for the Resource Version 1 combobox as strings
+      const resourceVersionOneOptionValues = resourceVersionOneOptions.map(getComboboxOptionStrings);
+      const selectedResourceVersionOneOption = resourceVersionOneOptionValues.find((o) => o.isSelected).optionValue;
 
       // select first option again to close combobox
       userEvent.click(resourceVersionOneOptions[0]);
 
+      // open the Resource Version 2 combobox
       userEvent.click(resourceVersionTwoCombobox);
+
+      // get the dropdown items
       const resourceVersionTwoOptions = getAllByTestId('version-two-option');
 
-      const resourceVersionTwoOptionValues = resourceVersionTwoOptions.map(getOptionStrings);
+      // get the options for the Resource Version 2 combobox as strings
+      const resourceVersionTwoOptionValues = resourceVersionTwoOptions.map(getComboboxOptionStrings);
 
-      const selectedResourceVersionTwoOption = resourceVersionTwoOptionValues[0];
+      const selectedResourceVersionTwoOption = resourceVersionTwoOptionValues.find((o) => o.isSelected).optionValue;
 
+      // expect that the selected option for each version does not exist as an option for the other combobox
       expect(resourceVersionOneOptionValues).not.toContain(selectedResourceVersionTwoOption);
       expect(resourceVersionTwoOptionValues).not.toContain(selectedResourceVersionOneOption);
     });
