@@ -1,8 +1,8 @@
 import { SegmentedControl, SegmentedControlOption } from '@leafygreen-ui/segmented-control';
 
-export default function VersionModeSegmentedControl({ versionMode, handleChange }) {
+export default function VersionModeSegmentedControl({ isVersionCompare, handleChange }) {
   return (
-    <SegmentedControl value={versionMode} onChange={handleChange}>
+    <SegmentedControl value={isVersionCompare} onChange={handleChange}>
       <SegmentedControlOption data-testid="all-versions-option" value={false}>
         All Versions
       </SegmentedControlOption>
