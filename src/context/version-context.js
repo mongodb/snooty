@@ -10,6 +10,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
+const LEGACY_GIT_BRANCH = 'legacy';
 
 const getInitBranchName = (branches) => {
   const activeBranch = branches.find((b) => b.active);
@@ -52,38 +53,56 @@ const versionStateReducer = (state, newState) => {
  * @returns versions{} <product_name: branch_object[]>
  */
 const getBranches = async (metadata, repoBranches, associatedReposInfo, associatedProducts) => {
+  let hasEolBranches = false;
   try {
-    const versions = {};
-    const promises = associatedProducts.map(async (product) => {
-      const childRepoBranches = await fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
-        project: product.name,
-      });
-      // filter all branches of associated repo by active property
-      versions[product.name] = childRepoBranches.branches.filter((branch) => branch.active);
-    });
-    promises.push(
-      fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project }).then((res) => {
-        versions[metadata.project] = res.branches.filter((branch) => branch.active);
-      })
-    );
-    await Promise.all(promises);
-    return versions;
+    const promises = [fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project })];
+    for (let associatedProduct of associatedProducts) {
+      promises.push(
+        fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
+          project: associatedProduct.name,
+        })
+      );
+    }
+    const allBranches = await Promise.all(promises);
+    const fetchedRepoBranches = allBranches[0];
+    hasEolBranches = fetchedRepoBranches?.branches?.some((b) => !b.active);
+    const fetchedAssociatedReposInfo = allBranches.slice(1).reduce((res, repoBranch) => {
+      res[repoBranch.project] = repoBranch;
+      return res;
+    }, {});
+    const versions = getDefaultVersions(metadata.project, fetchedRepoBranches, fetchedAssociatedReposInfo);
+    const groups = getDefaultGroups(metadata.project, fetchedRepoBranches);
+
+    return { versions, groups, hasEolBranches };
   } catch (e) {
-    return getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo);
+    return {
+      versions: getDefaultVersions(metadata.project, repoBranches, associatedReposInfo),
+      groups: getDefaultGroups(metadata.project, repoBranches),
+      hasEolBranches,
+    };
     // on error of realm function, fall back to build time fetches
   }
 };
 
-const getDefaultAvailVersions = (project, repoBranches, associatedReposInfo) => {
+const getDefaultVersions = (project, repoBranches, associatedReposInfo) => {
   const versions = {};
-  versions[project] = repoBranches?.branches || [];
+  const VERSION_KEY = 'branches';
+  const activeFilter = (b) => b.active;
+  versions[project] = (repoBranches?.[VERSION_KEY] || []).filter(activeFilter);
   for (const productName in associatedReposInfo) {
-    versions[productName] = associatedReposInfo[productName].branches || [];
+    versions[productName] = (associatedReposInfo[productName][VERSION_KEY] || []).filter(activeFilter);
   }
   return versions;
 };
 
-const getDefaultActiveVersions = ([metadata, associatedReposInfo]) => {
+const getDefaultGroups = (project, repoBranches) => {
+  const groups = {};
+  const GROUP_KEY = 'groups';
+  groups[project] = repoBranches?.[GROUP_KEY] || [];
+  return groups;
+};
+
+const getDefaultActiveVersions = ([metadata]) => {
   // for current metadata.project, should always default to metadata.parserBranch
   const { project, parserBranch } = metadata;
   let versions = {};
@@ -120,8 +139,10 @@ const VersionContext = createContext({
   // active version for each product is marked is {[product name]: active version} pair
   setActiveVersions: () => {},
   availableVersions: {},
+  availableGroups: {},
   setAvailableVersions: () => {},
   showVersionDropdown: false,
+  showEol: false,
   onVersionSelect: () => {},
 });
 
@@ -147,19 +168,28 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // expose the available versions for current and associated products
   const [availableVersions, setAvailableVersions] = useState(
-    getDefaultAvailVersions(metadata.project, repoBranches, associatedReposInfo)
+    getDefaultVersions(metadata.project, repoBranches, associatedReposInfo)
   );
+  const [availableGroups, setAvailableGroups] = useState(
+    getDefaultGroups(metadata.project, repoBranches, associatedReposInfo)
+  );
+  const [showEol, setShowEol] = useState(repoBranches['branches']?.some((b) => !b.active) || false);
+
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then((versions) => {
-      if (!mountRef.current) {
-        return;
+    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then(
+      ({ versions, groups, hasEolBranches }) => {
+        if (!mountRef.current) {
+          return;
+        }
+        if (!activeVersions || !Object.keys(activeVersions).length) {
+          setActiveVersions(getInitVersions(versions));
+        }
+        setAvailableGroups(groups);
+        setAvailableVersions(versions);
+        setShowEol(hasEolBranches);
       }
-      if (!activeVersions || !Object.keys(activeVersions).length) {
-        setActiveVersions(getInitVersions(versions));
-      }
-      setAvailableVersions(versions);
-    });
+    );
     // does not need to refetch after initial fetch
     // also falls back to server side fetch for branches
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -188,11 +218,14 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
       }
 
       const targetBranch = findBranchByGit(gitBranchName, availableVersions[metadata.project]);
-      if (!targetBranch) {
+      if (!targetBranch && gitBranchName !== LEGACY_GIT_BRANCH) {
         console.error(`target branch not found for git branch <${gitBranchName}>`);
         return;
       }
-      const target = targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
+      const target =
+        gitBranchName === LEGACY_GIT_BRANCH
+          ? gitBranchName
+          : targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
       const urlTarget = getUrl(target, metadata.project, metadata, repoBranches?.siteBasePrefix, slug);
       navigate(urlTarget);
     },
@@ -236,7 +269,15 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   return (
     <VersionContext.Provider
-      value={{ activeVersions, setActiveVersions, availableVersions, showVersionDropdown, onVersionSelect }}
+      value={{
+        activeVersions,
+        setActiveVersions,
+        availableVersions,
+        availableGroups,
+        showVersionDropdown,
+        onVersionSelect,
+        showEol,
+      }}
     >
       {children}
     </VersionContext.Provider>
