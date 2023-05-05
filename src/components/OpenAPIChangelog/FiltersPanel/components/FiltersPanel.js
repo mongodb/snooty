@@ -33,11 +33,7 @@ const FiltersPanel = ({
           handleVersionTwoChange={setResourceVersionTwo}
         />
       )}
-      <ResourceSelect
-        resources={resources}
-        selectedResource={selectedResource}
-        handleChange={(value) => setSelectedResource(value)}
-      />
+      <ResourceSelect resources={resources} selectedResource={selectedResource} handleChange={setSelectedResource} />
     </Wrapper>
   );
 };
