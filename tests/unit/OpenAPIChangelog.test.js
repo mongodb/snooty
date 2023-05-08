@@ -33,7 +33,7 @@ describe('OpenAPIChangelog tests', () => {
 
   describe('Version Mode segmented control tests', () => {
     it('Does not display diff options when the all versions option is selected', () => {
-      const { getByTestId, getByLabelText } = render(<OpenAPIChangelog />);
+      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog />);
 
       const allVersionsOption = getByTestId('all-versions-option');
 
@@ -41,8 +41,8 @@ describe('OpenAPIChangelog tests', () => {
 
       expect(isAllVersionsSelected).toBe('true');
 
-      expect(() => getByLabelText('Resource Version 1')).toThrowError();
-      expect(() => getByLabelText('Resource Version 2')).toThrowError();
+      expect(queryByLabelText('Resource Version 1')).not.toBeInTheDocument();
+      expect(queryByLabelText('Resource Version 2')).not.toBeInTheDocument();
     });
 
     it('Does display diff options when compares versions option is selected', () => {
