@@ -46,7 +46,7 @@ describe('OpenAPIChangelog tests', () => {
     });
 
     it('Does display diff options when compares versions option is selected', () => {
-      const { getByTestId, getByLabelText } = render(<OpenAPIChangelog />);
+      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog />);
 
       const compareVersionsOption = getByTestId('version-control-option');
       const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
@@ -57,8 +57,8 @@ describe('OpenAPIChangelog tests', () => {
 
       expect(isCompareVersionsSelected).toBe('true');
 
-      expect(() => getByLabelText('Resource Version 1')).toBeTruthy();
-      expect(() => getByLabelText('Resource Version 2')).toBeTruthy();
+      expect(queryByLabelText('Resource Version 1')).toBeInTheDocument();
+      expect(queryByLabelText('Resource Version 2')).toBeInTheDocument();
     });
   });
 
