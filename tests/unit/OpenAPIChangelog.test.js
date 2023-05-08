@@ -22,7 +22,7 @@ describe('OpenAPI Changelog', () => {
     expect(component.asFragment()).toMatchSnapshot();
   });
 
-  it('renders diff correctly', async () => {
+  it('renders diff correctly', () => {
     const component = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
 
     let listitems = component.getAllByRole('listitem');

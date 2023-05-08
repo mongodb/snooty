@@ -13,7 +13,7 @@ const ChangeList = ({ versionMode, changes }) => {
   return (
     <Wrapper>
       {changes.map((data, i) => (
-        <ChangeListComponent key={`change-list-${i}`} data={data} />
+        <ChangeListComponent key={`change-list-${i}`} {...data} />
       ))}
     </Wrapper>
   );

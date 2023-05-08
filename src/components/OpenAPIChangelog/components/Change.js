@@ -24,7 +24,7 @@ const Change = ({ change, backwardCompatible }) => {
   return (
     <ChangeListItem>
       <LIWrapper>
-        {backwardCompatible ? null : (
+        {!backwardCompatible && (
           <Tooltip
             align={Align.Top}
             justify={Justify.Middle}

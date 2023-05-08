@@ -8,7 +8,7 @@ const Wrapper = styled.section`
   margin-top: 28px;
 `;
 
-const ReleaseDateBlock = ({ data: { date: releaseDate, paths } }) => {
+const ReleaseDateBlock = ({ date: releaseDate, paths }) => {
   const formattedReleaseDate = format(new Date(releaseDate.replace(/-/g, '/')), 'dd MMMM y');
 
   return (

@@ -33,18 +33,12 @@ const ChangeListUL = styled.ul`
   }
 `;
 
-const ResourceChangesBlock = ({ data: { path, httpMethod, operationId, tag, changes, changeType, versions } }) => {
+const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, changeType, versions }) => {
   const metadata = useSiteMetadata();
   const pathPrefix = generatePathPrefix(metadata);
   const resourceTag = `#tag/${tag.split(' ').join('-')}/operation/${operationId}`;
 
-  const resourceChanges =
-    changes ||
-    versions
-      .map((version) =>
-        version.changes.map((change) => ({ ...change, version: version.version, changeType: versions[0].changeType }))
-      )
-      .flat();
+  const resourceChanges = changes || versions.map((version) => version.changes.map((change) => change)).flat();
 
   const badge = changeTypeBadge[changeType || versions[0].changeType];
 
