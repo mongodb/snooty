@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import { H2 } from '@leafygreen-ui/typography';
-import { useState } from 'react';
 import Button from '@leafygreen-ui/button';
-import FiltersPanel from './FiltersPanel';
-import ChangeList from './ChangeList';
+import FiltersPanel from './components/FiltersPanel';
+import ChangeList from './components/ChangeList';
+import { mockChangelog, mockDiff } from './data/mockData';
+import { ALL_VERSIONS } from './utils/constants';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -24,15 +26,15 @@ export const MOCK_RESOURCES = [
   'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/before',
 ];
 
-const OpenAPIChangelog = () => {
+/* Remove props when useStaticQuery is implemented, this is here for testing purposes */
+const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff }) => {
   const resourceOneDefault = MOCK_RESOURCE_VERSIONS[0];
   const resourceTwoDefault = MOCK_RESOURCE_VERSIONS[1];
 
-  const [isVersionCompare, setIsVersionCompare] = useState(false);
+  const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceOneDefault);
   const [resourceVersionTwo, setResourceVersionTwo] = useState(resourceTwoDefault);
-
   return (
     <ChangelogPage>
       <ChangelogHeader>
@@ -43,15 +45,15 @@ const OpenAPIChangelog = () => {
         resources={MOCK_RESOURCES}
         selectedResource={selectedResources}
         resourceVersions={MOCK_RESOURCE_VERSIONS}
-        isVersionCompare={isVersionCompare}
+        versionMode={versionMode}
         resourceVersionOne={resourceVersionOne}
         resourceVersionTwo={resourceVersionTwo}
         setSelectedResource={setSelectedResources}
-        setIsVersionCompare={setIsVersionCompare}
+        setVersionMode={setVersionMode}
         setResourceVersionOne={setResourceVersionOne}
         setResourceVersionTwo={setResourceVersionTwo}
       />
-      <ChangeList />
+      <ChangeList versionMode={versionMode} changes={versionMode === ALL_VERSIONS ? diff : changelog} />
     </ChangelogPage>
   );
 };

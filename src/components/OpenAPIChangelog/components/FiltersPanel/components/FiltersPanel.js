@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Combobox, ComboboxOption } from '@leafygreen-ui/combobox';
 import { SegmentedControl, SegmentedControlOption } from '@leafygreen-ui/segmented-control';
+import { ALL_VERSIONS, COMPARE_VERSIONS } from '../../../utils/constants';
 import DiffSelect from './DiffSelect';
 
 const Wrapper = styled.div`
@@ -14,27 +15,27 @@ const ResourceSelectContainer = styled.div`
   margin-top: 24px;
 `;
 const FiltersPanel = ({
-  isVersionCompare,
+  versionMode,
   resourceVersions,
   resources,
   setSelectedResources,
   resourceVersionOne,
   resourceVersionTwo,
-  setIsVersionCompare,
+  setVersionMode,
   setResourceVersionOne,
   setResourceVersionTwo,
 }) => {
   return (
     <Wrapper>
-      <SegmentedControl value={isVersionCompare} onChange={setIsVersionCompare}>
-        <SegmentedControlOption data-testid="all-versions-option" value={false}>
+      <SegmentedControl value={versionMode} onChange={setVersionMode}>
+        <SegmentedControlOption data-testid="all-versions-option" value={ALL_VERSIONS}>
           All Versions
         </SegmentedControlOption>
-        <SegmentedControlOption data-testid="version-control-option" value={true}>
+        <SegmentedControlOption data-testid="version-control-option" value={COMPARE_VERSIONS}>
           Compare Two Versions
         </SegmentedControlOption>
       </SegmentedControl>
-      {isVersionCompare && (
+      {versionMode === COMPARE_VERSIONS && (
         <DiffSelect
           resourceVersionOne={resourceVersionOne}
           resourceVersionTwo={resourceVersionTwo}
