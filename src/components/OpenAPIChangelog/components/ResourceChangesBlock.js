@@ -3,8 +3,9 @@ import Badge from '@leafygreen-ui/badge';
 import { palette } from '@leafygreen-ui/palette';
 import { Link as LGLink, Subtitle } from '@leafygreen-ui/typography';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
-import { generatePathPrefix } from '../../../utils/generate-path-prefix';
+import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 import { changeTypeBadge } from '../utils/changeTypeBadge';
+import { getResourceLinkUrl } from '../utils/getResourceLinkUrl';
 import Change, { Flex } from './Change';
 
 const Wrapper = styled.div`
@@ -35,18 +36,16 @@ const ChangeListUL = styled.ul`
 
 const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, changeType, versions }) => {
   const metadata = useSiteMetadata();
-  const pathPrefix = generatePathPrefix(metadata);
-  const resourceTag = `#tag/${tag.split(' ').join('-')}/operation/${operationId}`;
+  const { openapi_pages } = useSnootyMetadata();
 
+  const resourceLinkUrl = getResourceLinkUrl(metadata, tag, operationId, openapi_pages);
   const resourceChanges = changes || versions.map((version) => version.changes.map((change) => change)).flat();
-
   const badge = changeTypeBadge[changeType || versions[0].changeType];
 
   return (
     <Wrapper>
       <Flex>
-        {/* Work on a more programmatic way to infer the spec page path */}
-        <LGLink href={`${pathPrefix}/reference/api-resources-spec/v2.0/${resourceTag}`} hideExternalIcon>
+        <LGLink href={resourceLinkUrl} hideExternalIcon>
           <ResourceHeader>
             {httpMethod} {path}
           </ResourceHeader>

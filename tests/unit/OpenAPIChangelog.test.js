@@ -16,6 +16,10 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   }),
 }));
 
+jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
+  openapi_pages: ['reference/api-resources-spec/v2'],
+}));
+
 describe('OpenAPI Changelog', () => {
   it('renders changelog correctly', () => {
     const component = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);

@@ -349,7 +349,7 @@ exports[`OpenAPI Changelog renders changelog correctly 1`] = `
     <label
       for="all-versions"
     >
-      All Versions
+       All Versions
     </label>
     <br />
     <input
@@ -359,7 +359,7 @@ exports[`OpenAPI Changelog renders changelog correctly 1`] = `
     <label
       for="compare-two"
     >
-      Compare Two Versions
+       Compare Two Versions
     </label>
     <div
       class="emotion-8 emotion-9"
@@ -383,7 +383,7 @@ exports[`OpenAPI Changelog renders changelog correctly 1`] = `
           >
             <a
               class="constant-classname emotion-19"
-              href="//reference/api-resources-spec/v2.0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
+              href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
               <span
@@ -433,7 +433,7 @@ exports[`OpenAPI Changelog renders changelog correctly 1`] = `
           >
             <a
               class="constant-classname emotion-19"
-              href="//reference/api-resources-spec/v2.0/#tag/Projects/operation/getProjectByName"
+              href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
               <span
@@ -495,7 +495,7 @@ exports[`OpenAPI Changelog renders changelog correctly 1`] = `
           >
             <a
               class="constant-classname emotion-19"
-              href="//reference/api-resources-spec/v2.0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
+              href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
               <span
@@ -626,7 +626,7 @@ exports[`OpenAPI Changelog renders changelog correctly 1`] = `
           >
             <a
               class="constant-classname emotion-19"
-              href="//reference/api-resources-spec/v2.0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
+              href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
               target="_self"
             >
               <span
@@ -685,7 +685,7 @@ exports[`OpenAPI Changelog renders changelog correctly 1`] = `
           >
             <a
               class="constant-classname emotion-19"
-              href="//reference/api-resources-spec/v2.0/#tag/Projects/operation/getProjectByName"
+              href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
               <span
@@ -1058,7 +1058,7 @@ exports[`OpenAPI Changelog renders diff correctly 1`] = `
     <label
       for="all-versions"
     >
-      All Versions
+       All Versions
     </label>
     <br />
     <input
@@ -1068,7 +1068,7 @@ exports[`OpenAPI Changelog renders diff correctly 1`] = `
     <label
       for="compare-two"
     >
-      Compare Two Versions
+       Compare Two Versions
     </label>
     <div
       class="emotion-8 emotion-9"
@@ -1084,7 +1084,7 @@ exports[`OpenAPI Changelog renders diff correctly 1`] = `
         >
           <a
             class="constant-classname emotion-16"
-            href="//reference/api-resources-spec/v2.0/#tag/Federated-Authentication/operation/listConnectedOrgConfigs"
+            href="//0/#tag/Federated-Authentication/operation/listConnectedOrgConfigs"
             target="_self"
           >
             <span
@@ -1155,7 +1155,7 @@ exports[`OpenAPI Changelog renders diff correctly 1`] = `
         >
           <a
             class="constant-classname emotion-16"
-            href="//reference/api-resources-spec/v2.0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
+            href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
             target="_self"
           >
             <span
