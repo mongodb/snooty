@@ -500,6 +500,8 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   min-width: 13px;
   -webkit-transition: width ease-in-out 100ms;
   transition: width ease-in-out 100ms;
+  width: 0px;
+  max-width: 100%;
 }
 
 .emotion-31:not(:first-child) {
@@ -543,104 +545,12 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-33 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: color,box-shadow;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-  color: #889397;
-  margin-block: calc(8px - 100%);
-  margin-inline: -6px;
-}
-
-.emotion-33:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  opacity: 0;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-33:active:before,
-.emotion-33:hover:before,
-.emotion-33:focus:before {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-33:focus {
-  outline: none;
-}
-
-.emotion-33:active,
-.emotion-33:hover {
-  color: #001E2B;
-}
-
-.emotion-33:active:before,
-.emotion-33:hover:before {
-  background-color: #E8EDEB;
-}
-
-.emotion-33:focus-visible {
-  color: #001E2B;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-33:focus-visible:before {
-  background-color: #E8EDEB;
-}
-
-.emotion-34 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-35 {
   color: #3D4F58;
   height: 16px;
   width: 16px;
 }
 
-.emotion-36 {
+.emotion-34 {
   width: 100%;
 }
 
@@ -785,44 +695,16 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
                 autocomplete="off"
                 class="emotion-31"
                 id="combobox-input-1"
-                placeholder="Select"
-                value="All"
+                placeholder="All"
+                value=""
               />
             </div>
             <div
               class="emotion-32"
             >
-              <button
-                aria-disabled="false"
-                aria-label="Clear selection"
-                class="emotion-33"
-                tabindex="0"
-              >
-                <div
-                  class="emotion-34"
-                >
-                  <svg
-                    aria-label="XWith Circle Icon"
-                    class=""
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M8 15A7 7 0 108 1a7 7 0 000 14zm1.414-9.828a1 1 0 111.414 1.414L9.414 8l1.414 1.414a1 1 0 11-1.414 1.414L8 9.414l-1.414 1.414a1 1 0 11-1.414-1.414L6.586 8 5.172 6.586a1 1 0 011.414-1.414L8 6.586l1.414-1.414z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </button>
               <svg
                 aria-label="Caret Down Icon"
-                class="emotion-35"
+                class="emotion-33"
                 fill="none"
                 height="16"
                 role="img"
@@ -841,7 +723,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-36 emotion-37"
+      class="emotion-34 emotion-35"
     />
   </div>
 </DocumentFragment>

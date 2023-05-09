@@ -28,12 +28,22 @@ export default function DiffSelect({
   return (
     <DiffSelectContainer>
       <DiffSelectItem>
-        <Combobox value={resourceVersionOne} label="Resource Version 1" onChange={handleVersionOneChange}>
+        <Combobox
+          clearable={false}
+          value={resourceVersionOne}
+          label="Resource Version 1"
+          onChange={handleVersionOneChange}
+        >
           {versionOneOptions}
         </Combobox>
       </DiffSelectItem>
       <DiffSelectItem>
-        <Combobox value={resourceVersionTwo} label="Resource Version 2" onChange={handleVersionTwoChange}>
+        <Combobox
+          clearable={false}
+          value={resourceVersionTwo}
+          label="Resource Version 2"
+          onChange={handleVersionTwoChange}
+        >
           {versionTwoOptions}
         </Combobox>
       </DiffSelectItem>

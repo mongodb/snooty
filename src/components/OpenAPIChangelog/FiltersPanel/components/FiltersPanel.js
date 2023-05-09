@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import VersionModeSegmentedControl from './VersionModeSegmentedControl';
-import ResourceSelect from './ResourceSelect';
+import { Combobox, ComboboxOption } from '@leafygreen-ui/combobox';
+import { SegmentedControl, SegmentedControlOption } from '@leafygreen-ui/segmented-control';
 import DiffSelect from './DiffSelect';
 
 const Wrapper = styled.div`
@@ -9,21 +9,31 @@ const Wrapper = styled.div`
   margin-top: 32px;
 `;
 
+const ResourceSelectContainer = styled.div`
+  width: 100%;
+  margin-top: 24px;
+`;
 const FiltersPanel = ({
   isVersionCompare,
   resourceVersions,
-  selectedResource,
   resources,
+  setSelectedResources,
   resourceVersionOne,
   resourceVersionTwo,
-  setSelectedResource,
   setIsVersionCompare,
   setResourceVersionOne,
   setResourceVersionTwo,
 }) => {
   return (
     <Wrapper>
-      <VersionModeSegmentedControl isVersionCompare={isVersionCompare} handleChange={setIsVersionCompare} />
+      <SegmentedControl value={isVersionCompare} onChange={setIsVersionCompare}>
+        <SegmentedControlOption data-testid="all-versions-option" value={false}>
+          All Versions
+        </SegmentedControlOption>
+        <SegmentedControlOption data-testid="version-control-option" value={true}>
+          Compare Two Versions
+        </SegmentedControlOption>
+      </SegmentedControl>
       {isVersionCompare && (
         <DiffSelect
           resourceVersionOne={resourceVersionOne}
@@ -33,7 +43,13 @@ const FiltersPanel = ({
           handleVersionTwoChange={setResourceVersionTwo}
         />
       )}
-      <ResourceSelect resources={resources} selectedResource={selectedResource} handleChange={setSelectedResource} />
+      <ResourceSelectContainer>
+        <Combobox label="Select Resource" placeholder="All" onChange={setSelectedResources} multiselect>
+          {resources.map((version) => (
+            <ComboboxOption key={version} value={version} data-testid="resource-select-option" />
+          ))}
+        </Combobox>
+      </ResourceSelectContainer>
     </Wrapper>
   );
 };

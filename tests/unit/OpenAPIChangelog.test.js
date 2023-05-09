@@ -67,6 +67,8 @@ describe('OpenAPIChangelog tests', () => {
       const { getByLabelText, getAllByTestId } = render(<OpenAPIChangelog />);
       const selectResourceInputEl = getByLabelText('Select Resource');
 
+      console.log(selectResourceInputEl.outerHTML);
+
       // open dropdown
       userEvent.click(selectResourceInputEl);
 

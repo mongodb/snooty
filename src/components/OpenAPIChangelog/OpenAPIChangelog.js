@@ -20,7 +20,6 @@ const ChangelogHeader = styled.div`
 
 export const MOCK_RESOURCE_VERSIONS = ['2023-01-01 (latest)', '2022-01-01', '2021-01-01', '2020-01-01'];
 export const MOCK_RESOURCES = [
-  'All',
   'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore',
   'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/before',
 ];
@@ -30,7 +29,7 @@ const OpenAPIChangelog = () => {
   const resourceTwoDefault = MOCK_RESOURCE_VERSIONS[1];
 
   const [isVersionCompare, setIsVersionCompare] = useState(false);
-  const [selectedResource, setSelectedResource] = useState('All');
+  const [selectedResources, setSelectedResources] = useState([]);
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceOneDefault);
   const [resourceVersionTwo, setResourceVersionTwo] = useState(resourceTwoDefault);
 
@@ -42,12 +41,12 @@ const OpenAPIChangelog = () => {
       </ChangelogHeader>
       <FiltersPanel
         resources={MOCK_RESOURCES}
-        selectedResource={selectedResource}
+        selectedResource={selectedResources}
         resourceVersions={MOCK_RESOURCE_VERSIONS}
         isVersionCompare={isVersionCompare}
         resourceVersionOne={resourceVersionOne}
         resourceVersionTwo={resourceVersionTwo}
-        setSelectedResource={setSelectedResource}
+        setSelectedResource={setSelectedResources}
         setIsVersionCompare={setIsVersionCompare}
         setResourceVersionOne={setResourceVersionOne}
         setResourceVersionTwo={setResourceVersionTwo}
