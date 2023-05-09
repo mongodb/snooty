@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
-import { navigate as reachNavigate } from '@gatsbyjs/reach-router';
+import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
-import { getUrl } from '../../utils/url-utils';
 import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-slug';
 
 const StyledSelect = styled(Select)`
@@ -26,12 +25,6 @@ const StyledSelect = styled(Select)`
     }
   }
 `;
-
-// Returns true if there are any inactive (EOL'd/'legacy') branches
-const needsLegacyDropdown = (branches = []) => {
-  const isLegacy = (branch = {}) => !branch['active'];
-  return branches.some(isLegacy);
-};
 
 // Gets UI labels for supplied active branch names
 export const getUILabel = (branch) => {
@@ -96,9 +89,19 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, slug, eol }) => {
+const VersionDropdown = ({ eol }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, project } = siteMetadata;
+  const { availableVersions, availableGroups, onVersionSelect, showEol } = useContext(VersionContext);
+  let branches = availableVersions[siteMetadata.project];
+  let groups = availableGroups[siteMetadata.project];
+
+  const onSelectChange = useCallback(
+    (value) => {
+      onVersionSelect(project, value);
+    },
+    [onVersionSelect, project]
+  );
 
   // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
   // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
@@ -121,13 +124,6 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
     }
   }
 
-  // Used exclusively by the LG Select component's onChange function, which receives
-  // the 'value' prop from the selected Option component
-  const navigate = (optionValue) => {
-    const destination = getUrl(optionValue, project, siteMetadata, siteBasePrefix, slug);
-    reachNavigate(destination);
-  };
-
   const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
 
   const eolVersionFlipperStyle = LeafyCSS`
@@ -147,7 +143,7 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
       className={cx(eol ? eolVersionFlipperStyle : '')}
       aria-labelledby="View a different version of documentation."
       defaultValue="master"
-      onChange={navigate}
+      onChange={onSelectChange}
       placeholder={'Select a version'}
       popoverZIndex={3}
       value={currentUrlSlug}
@@ -159,11 +155,19 @@ const VersionDropdown = ({ repoBranches: { branches, groups, siteBasePrefix }, s
         const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>
-            <>{groupedBranchNames?.map((bn) => createOption(getBranch(bn, branches)))}</>
+            <>
+              {groupedBranchNames?.reduce((res, bn) => {
+                const branch = getBranch(bn, branches);
+                if (branch) {
+                  res.push(createOption(branch));
+                }
+                return res;
+              }, [])}
+            </>
           </OptionGroup>
         );
       })}
-      {needsLegacyDropdown(branches) && <Option value="legacy">Legacy Docs</Option>}
+      {showEol && <Option value="legacy">Legacy Docs</Option>}
     </StyledSelect>
   );
 };
