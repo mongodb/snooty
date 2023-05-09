@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Combobox } from '@leafygreen-ui/combobox';
 import userEvent from '@testing-library/user-event';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
 
@@ -66,6 +65,7 @@ describe('OpenAPIChangelog tests', () => {
   describe('Select Resources combobox tests', () => {
     it('Has all of the options available when dropdown is opened', () => {
       const { getByLabelText, getAllByTestId } = render(<OpenAPIChangelog />);
+
       const selectResourceInputEl = getByLabelText('Select Resource');
       console.log(selectResourceInputEl.outerHTML);
 
