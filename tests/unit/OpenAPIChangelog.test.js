@@ -44,13 +44,13 @@ jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
 
 describe('OpenAPIChangelog tests', () => {
   it('OpenAPIChangelog renders correctly', () => {
-    const tree = render(<OpenAPIChangelog />);
+    const tree = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
   describe('Version Mode segmented control tests', () => {
     it('Does not display diff options when the all versions option is selected', () => {
-      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog />);
+      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
 
       const allVersionsOption = getByTestId('all-versions-option');
 
@@ -63,7 +63,7 @@ describe('OpenAPIChangelog tests', () => {
     });
 
     it('Does display diff options when compares versions option is selected', () => {
-      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog />);
+      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
 
       const compareVersionsOption = getByTestId('version-control-option');
       const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
@@ -81,7 +81,7 @@ describe('OpenAPIChangelog tests', () => {
 
   describe('Select Resources combobox tests', () => {
     it('Has all of the options available when dropdown is opened', () => {
-      const { getByLabelText, getAllByTestId } = render(<OpenAPIChangelog />);
+      const { getByLabelText, getAllByTestId } = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
 
       const selectResourceInputEl = getByLabelText('Select Resource');
       console.log(selectResourceInputEl.outerHTML);
@@ -98,7 +98,7 @@ describe('OpenAPIChangelog tests', () => {
 
     it('Updates the Select Resources combobox when option is selected from dropdown', () => {
       const expectedSelectedValue = 'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore';
-      const tree = render(<OpenAPIChangelog />);
+      const tree = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
       const selectResourceInputEl = tree.getByLabelText('Select Resource');
 
       // open dropdown
@@ -119,7 +119,9 @@ describe('OpenAPIChangelog tests', () => {
 
   describe('version compare comboboxes tests', () => {
     it('has different options from each other', () => {
-      const { getByTestId, getByLabelText, getAllByTestId } = render(<OpenAPIChangelog />);
+      const { getByTestId, getByLabelText, getAllByTestId } = render(
+        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />
+      );
 
       // switch to compare versions on segment control
       const compareVersionsOption = getByTestId('version-control-option');
