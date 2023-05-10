@@ -5,7 +5,7 @@ import Button from '@leafygreen-ui/button';
 import FiltersPanel from './components/FiltersPanel';
 import ChangeList from './components/ChangeList';
 import { mockChangelog, mockDiff } from './data/mockData';
-import { ALL_VERSIONS } from './utils/constants';
+import { ALL_VERSIONS, COMPARE_VERSIONS } from './utils/constants';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -20,21 +20,23 @@ const ChangelogHeader = styled.div`
   align-items: center;
 `;
 
-export const MOCK_RESOURCE_VERSIONS = ['2023-01-01 (latest)', '2022-01-01', '2021-01-01', '2020-01-01'];
-export const MOCK_RESOURCES = [
-  'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore',
-  'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/before',
-];
-
 /* Remove props when useStaticQuery is implemented, this is here for testing purposes */
 const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff }) => {
-  const resourceOneDefault = MOCK_RESOURCE_VERSIONS[0];
-  const resourceTwoDefault = MOCK_RESOURCE_VERSIONS[1];
+  const resources = diff.map((d) => d.path);
+
+  const resourceVersions = changelog
+    .map((change) => change.date)
+    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+
+  resourceVersions[0] += ' (latest)';
+  const resourceOneDefault = resourceVersions[0];
+  const resourceTwoDefault = resourceVersions[1];
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceOneDefault);
   const [resourceVersionTwo, setResourceVersionTwo] = useState(resourceTwoDefault);
+
   return (
     <ChangelogPage>
       <ChangelogHeader>
@@ -42,9 +44,9 @@ const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff }) => {
         <Button>Download API Changelog</Button>
       </ChangelogHeader>
       <FiltersPanel
-        resources={MOCK_RESOURCES}
+        resources={resources}
         selectedResource={selectedResources}
-        resourceVersions={MOCK_RESOURCE_VERSIONS}
+        resourceVersions={resourceVersions}
         versionMode={versionMode}
         resourceVersionOne={resourceVersionOne}
         resourceVersionTwo={resourceVersionTwo}
@@ -53,7 +55,11 @@ const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff }) => {
         setResourceVersionOne={setResourceVersionOne}
         setResourceVersionTwo={setResourceVersionTwo}
       />
-      <ChangeList versionMode={versionMode} changes={versionMode === ALL_VERSIONS ? diff : changelog} />
+      <ChangeList
+        versionMode={versionMode}
+        changes={versionMode === COMPARE_VERSIONS ? diff : changelog}
+        selectedResources={selectedResources}
+      />
     </ChangelogPage>
   );
 };

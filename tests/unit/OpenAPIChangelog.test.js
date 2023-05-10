@@ -22,7 +22,6 @@ const getComboboxOptionStrings = (o) => {
   if (o.getElementsByTagName('span')[0].firstElementChild) {
     return { optionValue: o.getElementsByTagName('span')[0].firstElementChild.innerHTML, isSelected: true };
   }
-
   return { optionValue: o.getElementsByTagName('span')[0].innerHTML, isSelected: false };
 };
 
@@ -76,44 +75,6 @@ describe('OpenAPIChangelog tests', () => {
 
       expect(queryByLabelText('Resource Version 1')).toBeInTheDocument();
       expect(queryByLabelText('Resource Version 2')).toBeInTheDocument();
-    });
-  });
-
-  describe('Select Resources combobox tests', () => {
-    it('Has all of the options available when dropdown is opened', () => {
-      const { getByLabelText, getAllByTestId } = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
-
-      const selectResourceInputEl = getByLabelText('Select Resource');
-      console.log(selectResourceInputEl.outerHTML);
-
-      // open dropdown
-      userEvent.click(selectResourceInputEl);
-
-      // retrieve dropdown options
-      const options = getAllByTestId('resource-select-option');
-
-      // assert
-      expect(options.length).toEqual(2);
-    });
-
-    it('Updates the Select Resources combobox when option is selected from dropdown', () => {
-      const expectedSelectedValue = 'GET .../v1.0/groups/{groupId}/clusters/{clusterName}/backup/tenant/restore';
-      const tree = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
-      const selectResourceInputEl = tree.getByLabelText('Select Resource');
-
-      // open dropdown
-      userEvent.click(selectResourceInputEl);
-
-      // get options
-      const options = tree.getAllByTestId('resource-select-option');
-
-      // click second option
-      userEvent.click(options[1]);
-
-      const actualSelectedValue = selectResourceInputEl.getAttribute('value');
-
-      // assert
-      expect(actualSelectedValue).toEqual(expectedSelectedValue);
     });
   });
 

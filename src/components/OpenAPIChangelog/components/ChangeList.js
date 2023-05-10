@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { COMPARE_VERSIONS } from '../utils/constants';
+
 import ReleaseDateBlock from './ReleaseDateBlock';
 import ResourceChangesBlock from './ResourceChangesBlock';
 
@@ -7,8 +9,7 @@ const Wrapper = styled.div`
 `;
 
 const ChangeList = ({ versionMode, changes }) => {
-  // TODO: replace with correct conditional
-  const ChangeListComponent = versionMode ? ResourceChangesBlock : ReleaseDateBlock;
+  const ChangeListComponent = versionMode === COMPARE_VERSIONS ? ResourceChangesBlock : ReleaseDateBlock;
 
   return (
     <Wrapper>
