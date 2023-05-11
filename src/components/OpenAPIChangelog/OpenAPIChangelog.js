@@ -10,8 +10,6 @@ import { ALL_VERSIONS, COMPARE_VERSIONS } from './utils/constants';
 const ChangelogPage = styled.div`
   width: 100%;
   margin-top: 60px;
-  padding-left: 64px;
-  padding-right: 64px;
 `;
 
 const ChangelogHeader = styled.div`
@@ -27,6 +25,7 @@ const ChangelogHeader = styled.div`
 
 /* Remove props when useStaticQuery is implemented, this is here for testing purposes */
 const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff, index = mockIndex }) => {
+  // TODO: Replace with full list of resources
   const resources = diff.map((d) => `${d.httpMethod} ${d.path}`);
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
   resourceVersions[0] += ' (latest)';
