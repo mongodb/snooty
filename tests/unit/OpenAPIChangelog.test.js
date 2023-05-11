@@ -99,12 +99,12 @@ describe('OpenAPIChangelog tests', () => {
 
       const resourceVersionOneOptions = getAllByTestId('version-one-option');
 
+      // choose first option
+      userEvent.click(resourceVersionOneOptions[0]);
+
       // get the options for the Resource Version 1 combobox as strings
       const resourceVersionOneOptionValues = resourceVersionOneOptions.map(getComboboxOptionStrings);
       const selectedResourceVersionOneOption = resourceVersionOneOptionValues.find((o) => o.isSelected).optionValue;
-
-      // select first option again to close combobox
-      userEvent.click(resourceVersionOneOptions[0]);
 
       // open the Resource Version 2 combobox
       userEvent.click(resourceVersionTwoCombobox);
@@ -112,9 +112,11 @@ describe('OpenAPIChangelog tests', () => {
       // get the dropdown items
       const resourceVersionTwoOptions = getAllByTestId('version-two-option');
 
+      // choose first option
+      userEvent.click(resourceVersionTwoOptions[0]);
+
       // get the options for the Resource Version 2 combobox as strings
       const resourceVersionTwoOptionValues = resourceVersionTwoOptions.map(getComboboxOptionStrings);
-
       const selectedResourceVersionTwoOption = resourceVersionTwoOptionValues.find((o) => o.isSelected).optionValue;
 
       // expect that the selected option for each version does not exist as an option for the other combobox

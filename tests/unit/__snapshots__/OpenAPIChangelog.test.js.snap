@@ -23,6 +23,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   align-items: center;
 }
 
+.emotion-2 span {
+  font-size: 26px;
+  color: lightgray;
+}
+
 .emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -147,6 +152,10 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-11 {
+  margin-bottom: 32px;
+}
+
+.emotion-13 {
   --segment-gap: 5px;
   --indicator-height: calc(100% - 2 * var(--wrapper-padding));
   --wrapper-padding: 3px;
@@ -175,11 +184,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   background-color: var(--background-color);
 }
 
-.emotion-11:focus {
+.emotion-13:focus {
   outline: none;
 }
 
-.emotion-11:after {
+.emotion-13:after {
   content: '';
   position: absolute;
   width: 100%;
@@ -190,7 +199,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   pointer-events: none;
 }
 
-.emotion-12 {
+.emotion-14 {
   --base-text-color: #5C6C75;
   --base-background-color: rgba(255, 255, 255, 0);
   --base-shadow-color: rgba(255, 255, 255, 0);
@@ -222,14 +231,14 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   z-index: 3;
 }
 
-.emotion-12:first-child,
-.emotion-12[data-lg-checked='true'],
-.emotion-12[data-lg-checked='true']+[data-lg-checked='false'],
-.emotion-12:focus-within+:not(:focus-within) {
+.emotion-14:first-child,
+.emotion-14[data-lg-checked='true'],
+.emotion-14[data-lg-checked='true']+[data-lg-checked='false'],
+.emotion-14:focus-within+:not(:focus-within) {
   --divider-background-color: transparent;
 }
 
-.emotion-12:before {
+.emotion-14:before {
   --divider-width: 1px;
   content: '';
   position: absolute;
@@ -247,14 +256,14 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   background-color: var(--divider-background-color);
 }
 
-.emotion-13 {
+.emotion-15 {
   width: 100%;
   height: 100%;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-14 {
+.emotion-16 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-box;
   display: -webkit-flex;
@@ -291,33 +300,33 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   border: none;
 }
 
-.emotion-14 svg {
+.emotion-16 svg {
   -webkit-transition: color 150ms ease-in-out;
   transition: color 150ms ease-in-out;
 }
 
-.emotion-14:hover {
+.emotion-16:hover {
   color: var(--hover-text-color);
 }
 
-.emotion-14[aria-selected='true'] {
+.emotion-16[aria-selected='true'] {
   color: var(--active-text-color);
 }
 
-.emotion-14:disabled {
+.emotion-16:disabled {
   color: var(--disabled-text-color);
   cursor: not-allowed;
 }
 
-.emotion-14[aria-selected='false']:not(:disabled):not(:hover) svg {
+.emotion-16[aria-selected='false']:not(:disabled):not(:hover) svg {
   color: #889397;
 }
 
-.emotion-14:focus {
+.emotion-16:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-15 {
+.emotion-17 {
   min-height: var(--line-height);
   gap: calc(var(--font-size) / 2);
   display: -webkit-box;
@@ -331,19 +340,19 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   min-width: 0;
 }
 
-.emotion-15 svg {
+.emotion-17 svg {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-16 {
+.emotion-18 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.emotion-22 {
+.emotion-24 {
   position: absolute;
   width: 100%;
   height: var(--indicator-height);
@@ -368,7 +377,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           );
 }
 
-.emotion-23 {
+.emotion-25 {
   position: absolute;
   height: var(--indicator-height);
   width: 100%;
@@ -381,18 +390,27 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   width: 0;
 }
 
-.emotion-24 {
+.emotion-26 {
   width: 100%;
-  margin-top: 24px;
+  margin-top: 18px;
 }
 
-.emotion-26 {
+.emotion-28 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   width: 100%;
   min-width: 43px;
 }
 
-.emotion-27 {
+.emotion-29 label {
+  margin-bottom: 0;
+}
+
+.emotion-29 span>span {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-31 {
   margin-bottom: 4px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -403,7 +421,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   flex-direction: column;
 }
 
-.emotion-28 {
+.emotion-32 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight: bold;
   color: #001E2B;
@@ -411,7 +429,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   line-height: 20px;
 }
 
-.emotion-29 {
+.emotion-33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -440,7 +458,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   padding-right: 12px;
 }
 
-.emotion-29::after {
+.emotion-33::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -458,11 +476,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   transition-property: box-shadow;
 }
 
-.emotion-29:hover {
+.emotion-33:hover {
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-30 {
+.emotion-34 {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
@@ -482,7 +500,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   max-height: calc((72px) + (4px * 2));
 }
 
-.emotion-31 {
+.emotion-35 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   width: 100%;
   border: none;
@@ -504,35 +522,35 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   max-width: 100%;
 }
 
-.emotion-31:not(:first-child) {
+.emotion-35:not(:first-child) {
   padding-left: 4px;
 }
 
-.emotion-31:placeholder-shown {
+.emotion-35:placeholder-shown {
   min-width: 100%;
 }
 
-.emotion-31:focus {
+.emotion-35:focus {
   outline: none;
 }
 
-.emotion-31::-webkit-input-placeholder {
+.emotion-35::-webkit-input-placeholder {
   color: #5C6C75;
 }
 
-.emotion-31::-moz-placeholder {
+.emotion-35::-moz-placeholder {
   color: #5C6C75;
 }
 
-.emotion-31:-ms-input-placeholder {
+.emotion-35:-ms-input-placeholder {
   color: #5C6C75;
 }
 
-.emotion-31::placeholder {
+.emotion-35::placeholder {
   color: #5C6C75;
 }
 
-.emotion-32 {
+.emotion-36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -544,22 +562,18 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   gap: 8px;
 }
 
-.emotion-33 {
+.emotion-37 {
   color: #3D4F58;
   height: 16px;
   width: 16px;
 }
 
-.emotion-34 {
-  width: 100%;
-}
-
-.emotion-36 {
+.emotion-40 {
   width: 100%;
   margin-top: 28px;
 }
 
-.emotion-38 {
+.emotion-42 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -569,12 +583,12 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #001E2B;
 }
 
-.emotion-39 {
+.emotion-43 {
   width: 100%;
   margin: 22px 0;
 }
 
-.emotion-41 {
+.emotion-45 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -586,7 +600,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   gap: 5px;
 }
 
-.emotion-43 {
+.emotion-47 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -606,15 +620,15 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-43:focus {
+.emotion-47:focus {
   outline: none;
 }
 
-.emotion-44 {
+.emotion-48 {
   position: relative;
 }
 
-.emotion-44::after {
+.emotion-48::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -624,19 +638,19 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-44::after {
+.constant-classname:focus .emotion-48::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-44::after {
+.constant-classname:hover .emotion-48::after {
   background-color: #E8EDEB;
 }
 
-.emotion-45 {
+.emotion-49 {
   color: #016BF8;
 }
 
-.emotion-47 {
+.emotion-51 {
   margin: unset;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -646,11 +660,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #001E2B;
 }
 
-.emotion-48 {
+.emotion-52 {
   margin-top: 2px;
 }
 
-.emotion-50 {
+.emotion-54 {
   font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -675,25 +689,25 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #970606;
 }
 
-.emotion-51 {
+.emotion-55 {
   margin: 0;
   padding-left: 7px;
   list-style-type: none;
 }
 
-.emotion-51 li:before {
+.emotion-55 li:before {
   content: '•';
   vertical-align: top;
   line-height: 28px;
   margin-right: 5px;
 }
 
-.emotion-53 {
+.emotion-57 {
   margin-top: 12px;
   line-height: 28px;
 }
 
-.emotion-55 {
+.emotion-59 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -706,7 +720,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   height: 28px;
 }
 
-.emotion-71 {
+.emotion-75 {
   font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -731,11 +745,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #00684A;
 }
 
-.emotion-78 {
+.emotion-82 {
   position: relative;
 }
 
-.emotion-81 {
+.emotion-85 {
   color: #DB3030;
 }
 
@@ -748,7 +762,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       <h2
         class="emotion-4"
       >
-        API Changelog
+        API Changelog 2.0~422ab47f864
       </h2>
       <button
         aria-disabled="false"
@@ -770,36 +784,36 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       class="emotion-8 emotion-9"
     >
       <div
-        class="emotion-10"
+        class="emotion-10 emotion-11 emotion-12"
       >
         <div
           aria-label="segmented-control-1"
           aria-owns="segmented-control-1-0 segmented-control-1-1"
-          class="emotion-11"
+          class="emotion-13"
           role="tablist"
         >
           <div
-            class="emotion-12"
+            class="emotion-14"
             data-lg-checked="true"
           >
             <div
-              class="emotion-13"
+              class="emotion-15"
               data-testid="all-versions-option"
               tabindex="-1"
             >
               <button
                 aria-selected="true"
-                class="emotion-14"
+                class="emotion-16"
                 id="segmented-control-1-0"
                 role="tab"
                 tabindex="0"
                 type="button"
               >
                 <div
-                  class="emotion-15"
+                  class="emotion-17"
                 >
                   <span
-                    class="emotion-16"
+                    class="emotion-18"
                   >
                     All Versions
                   </span>
@@ -808,27 +822,27 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             </div>
           </div>
           <div
-            class="emotion-12"
+            class="emotion-14"
             data-lg-checked="false"
           >
             <div
-              class="emotion-13"
+              class="emotion-15"
               data-testid="version-control-option"
               tabindex="-1"
             >
               <button
                 aria-selected="false"
-                class="emotion-14"
+                class="emotion-16"
                 id="segmented-control-1-1"
                 role="tab"
                 tabindex="-1"
                 type="button"
               >
                 <div
-                  class="emotion-15"
+                  class="emotion-17"
                 >
                   <span
-                    class="emotion-16"
+                    class="emotion-18"
                   >
                     Compare Two Versions
                   </span>
@@ -837,24 +851,24 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             </div>
           </div>
           <div
-            class="emotion-22"
+            class="emotion-24"
           />
           <div
-            class="emotion-23"
+            class="emotion-25"
           />
         </div>
       </div>
       <div
-        class="emotion-24 emotion-25"
+        class="emotion-26 emotion-27"
       >
         <div
-          class="emotion-26"
+          class="emotion-28 emotion-29 emotion-30"
         >
           <div
-            class="emotion-27"
+            class="emotion-31"
           >
             <label
-              class="emotion-28"
+              class="emotion-32"
               for="combobox-input-1"
               id="combobox-label-1"
             >
@@ -865,12 +879,12 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             aria-controls="combobox-menu-1"
             aria-expanded="false"
             aria-owns="combobox-menu-1"
-            class="emotion-29"
+            class="emotion-33"
             role="combobox"
             tabindex="-1"
           >
             <div
-              class="emotion-30"
+              class="emotion-34"
             >
               <input
                 aria-autocomplete="list"
@@ -878,18 +892,18 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
                 aria-label="Select Resource"
                 aria-labelledby="combobox-label-1"
                 autocomplete="off"
-                class="emotion-31"
+                class="emotion-35"
                 id="combobox-input-1"
                 placeholder="All"
                 value=""
               />
             </div>
             <div
-              class="emotion-32"
+              class="emotion-36"
             >
               <svg
                 aria-label="Caret Down Icon"
-                class="emotion-33"
+                class="emotion-37"
                 fill="none"
                 height="16"
                 role="img"
@@ -908,51 +922,51 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-34 emotion-35"
+      class="emotion-8 emotion-39"
     >
       <section
-        class="emotion-36 emotion-37"
+        class="emotion-40 emotion-41"
       >
         <h3
-          class="emotion-38"
+          class="emotion-42"
         >
           01 February 2024 Release
         </h3>
         <div
-          class="emotion-39 emotion-40"
+          class="emotion-43 emotion-44"
         >
           <div
-            class="emotion-41 emotion-42"
+            class="emotion-45 emotion-46"
           >
             <a
-              class="constant-classname emotion-43"
+              class="constant-classname emotion-47"
               href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
               <span
-                class="emotion-44"
+                class="emotion-48"
               >
                 <h6
-                  class="emotion-45 emotion-46 emotion-47"
+                  class="emotion-49 emotion-50 emotion-51"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-48 emotion-49 emotion-50"
+              class="emotion-52 emotion-53 emotion-54"
             >
               Removed
             </div>
           </div>
           <ul
-            class="emotion-51 emotion-52"
+            class="emotion-55 emotion-56"
           >
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 Resource version 2023-01-01 was removed, latest available resource version is 2023-02-01
               </div>
@@ -961,55 +975,55 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         </div>
       </section>
       <section
-        class="emotion-36 emotion-37"
+        class="emotion-40 emotion-41"
       >
         <h3
-          class="emotion-38"
+          class="emotion-42"
         >
           01 February 2023 Release
         </h3>
         <div
-          class="emotion-39 emotion-40"
+          class="emotion-43 emotion-44"
         >
           <div
-            class="emotion-41 emotion-42"
+            class="emotion-45 emotion-46"
           >
             <a
-              class="constant-classname emotion-43"
+              class="constant-classname emotion-47"
               href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
               <span
-                class="emotion-44"
+                class="emotion-48"
               >
                 <h6
-                  class="emotion-45 emotion-46 emotion-47"
+                  class="emotion-49 emotion-50 emotion-51"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-48 emotion-49 emotion-71"
+              class="emotion-52 emotion-53 emotion-75"
             >
               Released
             </div>
           </div>
           <ul
-            class="emotion-51 emotion-52"
+            class="emotion-55 emotion-56"
           >
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 <div
-                  class="emotion-78 emotion-41 emotion-42"
+                  class="emotion-82 emotion-45 emotion-46"
                 >
                   <svg
                     aria-label="Important With Circle Icon"
-                    class="emotion-81"
+                    class="emotion-85"
                     fill="none"
                     height="16"
                     role="img"
@@ -1031,47 +1045,47 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           </ul>
         </div>
         <div
-          class="emotion-39 emotion-40"
+          class="emotion-43 emotion-44"
         >
           <div
-            class="emotion-41 emotion-42"
+            class="emotion-45 emotion-46"
           >
             <a
-              class="constant-classname emotion-43"
+              class="constant-classname emotion-47"
               href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
               <span
-                class="emotion-44"
+                class="emotion-48"
               >
                 <h6
-                  class="emotion-45 emotion-46 emotion-47"
+                  class="emotion-49 emotion-50 emotion-51"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-48 emotion-49 emotion-71"
+              class="emotion-52 emotion-53 emotion-75"
             >
               Released
             </div>
           </div>
           <ul
-            class="emotion-51 emotion-52"
+            class="emotion-55 emotion-56"
           >
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 <div
-                  class="emotion-78 emotion-41 emotion-42"
+                  class="emotion-82 emotion-45 emotion-46"
                 >
                   <svg
                     aria-label="Important With Circle Icon"
-                    class="emotion-81"
+                    class="emotion-85"
                     fill="none"
                     height="16"
                     role="img"
@@ -1091,17 +1105,17 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               </div>
             </li>
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 <div
-                  class="emotion-78 emotion-41 emotion-42"
+                  class="emotion-82 emotion-45 emotion-46"
                 >
                   <svg
                     aria-label="Important With Circle Icon"
-                    class="emotion-81"
+                    class="emotion-85"
                     fill="none"
                     height="16"
                     role="img"
@@ -1121,26 +1135,26 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               </div>
             </li>
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 Added the optional property 'links' in the response with the '200' status.
               </div>
             </li>
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 <div
-                  class="emotion-78 emotion-41 emotion-42"
+                  class="emotion-82 emotion-45 emotion-46"
                 >
                   <svg
                     aria-label="Important With Circle Icon"
-                    class="emotion-81"
+                    class="emotion-85"
                     fill="none"
                     height="16"
                     role="img"
@@ -1162,49 +1176,49 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           </ul>
         </div>
         <div
-          class="emotion-39 emotion-40"
+          class="emotion-43 emotion-44"
         >
           <div
-            class="emotion-41 emotion-42"
+            class="emotion-45 emotion-46"
           >
             <a
-              class="constant-classname emotion-43"
+              class="constant-classname emotion-47"
               href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
               target="_self"
             >
               <span
-                class="emotion-44"
+                class="emotion-48"
               >
                 <h6
-                  class="emotion-45 emotion-46 emotion-47"
+                  class="emotion-49 emotion-50 emotion-51"
                 >
                   POST /api/atlas/v2/groups/{groupId}/accessList
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-48 emotion-49 emotion-71"
+              class="emotion-52 emotion-53 emotion-75"
             >
               Updated
             </div>
           </div>
           <ul
-            class="emotion-51 emotion-52"
+            class="emotion-55 emotion-56"
           >
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 Added the optional property 'name' in the response with the '200' status.
               </div>
             </li>
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 Added the optional property 'comment' in the response with the '200' status.
               </div>
@@ -1213,48 +1227,48 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         </div>
       </section>
       <section
-        class="emotion-36 emotion-37"
+        class="emotion-40 emotion-41"
       >
         <h3
-          class="emotion-38"
+          class="emotion-42"
         >
           22 February 2023 Release
         </h3>
         <div
-          class="emotion-39 emotion-40"
+          class="emotion-43 emotion-44"
         >
           <div
-            class="emotion-41 emotion-42"
+            class="emotion-45 emotion-46"
           >
             <a
-              class="constant-classname emotion-43"
+              class="constant-classname emotion-47"
               href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
               <span
-                class="emotion-44"
+                class="emotion-48"
               >
                 <h6
-                  class="emotion-45 emotion-46 emotion-47"
+                  class="emotion-49 emotion-50 emotion-51"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-48 emotion-49 emotion-71"
+              class="emotion-52 emotion-53 emotion-75"
             >
               Updated
             </div>
           </div>
           <ul
-            class="emotion-51 emotion-52"
+            class="emotion-55 emotion-56"
           >
             <li
-              class="emotion-53 emotion-54"
+              class="emotion-57 emotion-58"
             >
               <div
-                class="emotion-55 emotion-56"
+                class="emotion-59 emotion-60"
               >
                 Added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.
               </div>
