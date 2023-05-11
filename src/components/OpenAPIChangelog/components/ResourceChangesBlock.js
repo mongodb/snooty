@@ -4,7 +4,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { Link as LGLink, Subtitle } from '@leafygreen-ui/typography';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
-import { changeTypeBadge } from '../utils/changeTypeBadge';
+import { getChangeTypeBadge } from '../utils/constants';
 import { getResourceLinkUrl } from '../utils/getResourceLinkUrl';
 import Change, { Flex } from './Change';
 
@@ -40,7 +40,7 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, cha
 
   const resourceLinkUrl = getResourceLinkUrl(metadata, tag, operationId, openapi_pages);
   const resourceChanges = changes || versions.map((version) => version.changes.map((change) => change)).flat();
-  const badge = changeTypeBadge[changeType || versions[0].changeType];
+  const badge = getChangeTypeBadge[changeType || versions[0].changeType];
 
   return (
     <Wrapper>
