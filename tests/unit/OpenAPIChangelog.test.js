@@ -64,7 +64,7 @@ describe('OpenAPIChangelog tests', () => {
     it('Does display diff options when compares versions option is selected', () => {
       const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
 
-      const compareVersionsOption = getByTestId('version-control-option');
+      const compareVersionsOption = getByTestId('compare-versions-option');
       const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
 
       userEvent.click(compareVersionsOptionButton);
@@ -85,7 +85,7 @@ describe('OpenAPIChangelog tests', () => {
       );
 
       // switch to compare versions on segment control
-      const compareVersionsOption = getByTestId('version-control-option');
+      const compareVersionsOption = getByTestId('compare-versions-option');
       const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
 
       userEvent.click(compareVersionsOptionButton);

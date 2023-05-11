@@ -825,7 +825,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           >
             <div
               class="emotion-15"
-              data-testid="version-control-option"
+              data-testid="compare-versions-option"
               tabindex="-1"
             >
               <button

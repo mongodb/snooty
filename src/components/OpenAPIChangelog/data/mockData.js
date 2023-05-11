@@ -25,6 +25,32 @@ export const mockChangelog = [
     ],
   },
   {
+    date: '2023-02-22',
+    paths: [
+      {
+        path: '/api/atlas/v2/groups/byName/{groupName}',
+        httpMethod: 'GET',
+        operationId: 'getProjectByName',
+        tag: 'Projects',
+        versions: [
+          {
+            version: '2023-02-01',
+            stabilityLevel: 'stable',
+            changeType: 'update',
+            changes: [
+              {
+                change:
+                  "added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.",
+                changeCode: 'response-optional-property-added',
+                backwardCompatible: true,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
     date: '2023-02-01',
     paths: [
       {
@@ -118,32 +144,6 @@ export const mockChangelog = [
       },
     ],
   },
-  {
-    date: '2023-02-22',
-    paths: [
-      {
-        path: '/api/atlas/v2/groups/byName/{groupName}',
-        httpMethod: 'GET',
-        operationId: 'getProjectByName',
-        tag: 'Projects',
-        versions: [
-          {
-            version: '2023-02-01',
-            stabilityLevel: 'stable',
-            changeType: 'update',
-            changes: [
-              {
-                change:
-                  "added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.",
-                changeCode: 'response-optional-property-added',
-                backwardCompatible: true,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 export const mockDiff = [
@@ -188,4 +188,13 @@ export const mockIndex = {
   specRevision: '422ab47f864909549362a7b39688404c82e2540b',
   specRevisionShort: '422ab47f864',
   versions: ['2023-01-01', '2023-02-01', '2023-08-11~preview'],
+};
+
+export const getMockResourcesList = () => {
+  const resourcesList = new Set();
+  mockChangelog.forEach((release) =>
+    release.paths.forEach(({ httpMethod, path }) => resourcesList.add(`${httpMethod} ${path}`))
+  );
+
+  return Array.from(resourcesList);
 };
