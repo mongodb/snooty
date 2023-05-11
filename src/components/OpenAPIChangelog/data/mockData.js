@@ -186,5 +186,6 @@ export const mockIndex = {
   runDate: '2023-04-03',
   runId: '20230403105948111',
   specRevision: '422ab47f864909549362a7b39688404c82e2540b',
+  specRevisionShort: '422ab47f864',
   versions: ['2023-01-01', '2023-02-01', '2023-08-11~preview'],
 };

@@ -1,13 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Combobox, ComboboxOption } from '@leafygreen-ui/combobox';
+import { css, cx } from '@leafygreen-ui/emotion';
 
 const DiffSelectContainer = styled.div`
   display: flex;
   gap: 14px;
 `;
+
 const DiffSelectItem = styled.div`
   flex-grow: 1;
+`;
+
+const marginlessLabel = css`
+  label {
+    margin-bottom: 0;
+  }
 `;
 
 export default function DiffSelect({
@@ -30,8 +38,9 @@ export default function DiffSelect({
       <DiffSelectItem>
         <Combobox
           clearable={false}
-          value={resourceVersionOne}
+          placeholder="Select Version"
           label="Resource Version 1"
+          className={cx(marginlessLabel)}
           onChange={handleVersionOneChange}
         >
           {versionOneOptions}
@@ -40,8 +49,9 @@ export default function DiffSelect({
       <DiffSelectItem>
         <Combobox
           clearable={false}
-          value={resourceVersionTwo}
+          placeholder="Select Version"
           label="Resource Version 2"
+          className={cx(marginlessLabel)}
           onChange={handleVersionTwoChange}
         >
           {versionTwoOptions}

@@ -4,7 +4,7 @@ import { H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import FiltersPanel from './components/FiltersPanel';
 import ChangeList from './components/ChangeList';
-import { mockChangelog, mockDiff } from './data/mockData';
+import { mockChangelog, mockDiff, mockIndex } from './data/mockData';
 import { ALL_VERSIONS, COMPARE_VERSIONS } from './utils/constants';
 
 const ChangelogPage = styled.div`
@@ -18,29 +18,28 @@ const ChangelogHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  span {
+    font-size: 26px;
+    color: lightgray;
+  }
 `;
 
 /* Remove props when useStaticQuery is implemented, this is here for testing purposes */
-const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff }) => {
-  const resources = diff.map((d) => d.path);
-
-  const resourceVersions = changelog
-    .map((change) => change.date)
-    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
-
+const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff, index = mockIndex }) => {
+  const resources = diff.map((d) => `${d.httpMethod} ${d.path}`);
+  const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
   resourceVersions[0] += ' (latest)';
-  const resourceOneDefault = resourceVersions[0];
-  const resourceTwoDefault = resourceVersions[1];
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
-  const [resourceVersionOne, setResourceVersionOne] = useState(resourceOneDefault);
-  const [resourceVersionTwo, setResourceVersionTwo] = useState(resourceTwoDefault);
+  const [resourceVersionOne, setResourceVersionOne] = useState();
+  const [resourceVersionTwo, setResourceVersionTwo] = useState();
 
   return (
     <ChangelogPage>
       <ChangelogHeader>
-        <H2>API Changelog</H2>
+        <H2>API Changelog 2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`}</H2>
         <Button>Download API Changelog</Button>
       </ChangelogHeader>
       <FiltersPanel
@@ -55,11 +54,13 @@ const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff }) => {
         setResourceVersionOne={setResourceVersionOne}
         setResourceVersionTwo={setResourceVersionTwo}
       />
-      <ChangeList
-        versionMode={versionMode}
-        changes={versionMode === COMPARE_VERSIONS ? diff : changelog}
-        selectedResources={selectedResources}
-      />
+      {(versionMode === ALL_VERSIONS || (resourceVersionOne && resourceVersionTwo)) && (
+        <ChangeList
+          versionMode={versionMode}
+          changes={versionMode === COMPARE_VERSIONS ? diff : changelog}
+          selectedResources={selectedResources}
+        />
+      )}
     </ChangelogPage>
   );
 };

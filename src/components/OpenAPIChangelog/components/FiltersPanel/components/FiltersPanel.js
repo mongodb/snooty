@@ -10,10 +10,25 @@ const Wrapper = styled.div`
   margin-top: 32px;
 `;
 
+const StyledSegmentedControl = styled(SegmentedControl)`
+  margin-bottom: 32px;
+`;
+
 const ResourceSelectContainer = styled.div`
   width: 100%;
-  margin-top: 24px;
+  margin-top: 18px;
 `;
+
+const ResourceSelect = styled(Combobox)`
+  label {
+    margin-bottom: 0;
+  }
+
+  span > span {
+    text-decoration: none;
+  }
+`;
+
 const FiltersPanel = ({
   versionMode,
   resourceVersions,
@@ -27,14 +42,14 @@ const FiltersPanel = ({
 }) => {
   return (
     <Wrapper>
-      <SegmentedControl value={versionMode} onChange={setVersionMode}>
+      <StyledSegmentedControl value={versionMode} onChange={setVersionMode}>
         <SegmentedControlOption data-testid="all-versions-option" value={ALL_VERSIONS}>
           All Versions
         </SegmentedControlOption>
         <SegmentedControlOption data-testid="version-control-option" value={COMPARE_VERSIONS}>
           Compare Two Versions
         </SegmentedControlOption>
-      </SegmentedControl>
+      </StyledSegmentedControl>
       {versionMode === COMPARE_VERSIONS && (
         <DiffSelect
           resourceVersionOne={resourceVersionOne}
@@ -45,11 +60,11 @@ const FiltersPanel = ({
         />
       )}
       <ResourceSelectContainer>
-        <Combobox label="Select Resource" placeholder="All" onChange={setSelectedResources} multiselect>
+        <ResourceSelect label="Select Resource" placeholder="All" onChange={setSelectedResources} multiselect>
           {resources.map((version) => (
             <ComboboxOption key={version} value={version} data-testid="resource-select-option" />
           ))}
-        </Combobox>
+        </ResourceSelect>
       </ResourceSelectContainer>
     </Wrapper>
   );
