@@ -1,6 +1,9 @@
 import { Variant } from '@leafygreen-ui/badge';
 
-export const changeTypeBadge = {
+export const ALL_VERSIONS = 'ALL_VERSIONS';
+export const COMPARE_VERSIONS = 'COMPARE_VERSIONS';
+
+export const getChangeTypeBadge = {
   release: {
     variant: Variant.Green,
     label: 'Released',
