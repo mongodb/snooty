@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Combobox, ComboboxOption } from '@leafygreen-ui/combobox';
 import { SegmentedControl, SegmentedControlOption } from '@leafygreen-ui/segmented-control';
 import { ALL_VERSIONS, COMPARE_VERSIONS } from '../../../utils/constants';
+import { theme } from '../../../../../theme/docsTheme';
 import DiffSelect from './DiffSelect';
 
 const Wrapper = styled.div`
@@ -12,6 +13,12 @@ const Wrapper = styled.div`
 
 const StyledSegmentedControl = styled(SegmentedControl)`
   margin-bottom: 28px;
+
+  @media ${theme.screenSize.upToMedium} {
+    button {
+      font-size: 13px;
+    }
+  }
 `;
 
 const ResourceSelectContainer = styled.div`

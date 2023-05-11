@@ -3,6 +3,7 @@ import Badge from '@leafygreen-ui/badge';
 import { palette } from '@leafygreen-ui/palette';
 import { Link as LGLink, Subtitle } from '@leafygreen-ui/typography';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+import { theme } from '../../../theme/docsTheme';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 import { getChangeTypeBadge } from '../utils/constants';
 import { getResourceLinkUrl } from '../utils/getResourceLinkUrl';
@@ -15,6 +16,14 @@ const Wrapper = styled.div`
 
 const ResourceHeader = styled(Subtitle)`
   color: ${palette.blue.base};
+  word-break: break-all;
+`;
+
+const FlexLinkWrapper = styled(Flex)`
+  @media ${theme.screenSize.upToMedium} {
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 
 const ChangeTypeBadge = styled(Badge)`
@@ -23,15 +32,7 @@ const ChangeTypeBadge = styled(Badge)`
 
 const ChangeListUL = styled.ul`
   margin: 0;
-  padding-left: 7px;
-  list-style-type: none;
-
-  li:before {
-    content: '•';
-    vertical-align: top;
-    line-height: 28px;
-    margin-right: 5px;
-  }
+  list-style-position: start;
 `;
 
 const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, changeType, versions }) => {
@@ -44,14 +45,14 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, cha
 
   return (
     <Wrapper>
-      <Flex>
+      <FlexLinkWrapper>
         <LGLink href={resourceLinkUrl} hideExternalIcon>
           <ResourceHeader>
             {httpMethod} {path}
           </ResourceHeader>
         </LGLink>
         {badge ? <ChangeTypeBadge variant={badge.variant}>{badge.label}</ChangeTypeBadge> : null}
-      </Flex>
+      </FlexLinkWrapper>
       <ChangeListUL>
         {resourceChanges.map((change, i) => (
           <Change key={`change-${i}`} {...change} />
