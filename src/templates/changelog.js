@@ -17,8 +17,7 @@ const Wrapper = styled(MainColumn)`
 
 const DocumentContainer = styled('div')`
   display: grid;
-  grid-template-areas: 'main right';
-  grid-template-columns: minmax(0, auto) 1fr;
+  grid-template-areas: 'main';
 `;
 
 const Changelog = ({ children }) => (

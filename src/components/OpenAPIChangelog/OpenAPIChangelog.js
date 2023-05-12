@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { H2 } from '@leafygreen-ui/typography';
+import { Body, H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import FiltersPanel from './components/FiltersPanel';
 import ChangeList from './components/ChangeList';
@@ -31,15 +32,32 @@ const ChangelogHeader = styled.div`
   }
 `;
 
+const Title = styled.div`
+  display: flex;
+  align-items: end;
+  gap: 10px;
+
+  p {
+    color: ${palette.gray.dark1};
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    flex-direction: column;
+    align-items: start;
+    gap: 0;
+  }
+`;
+
 const DownloadButton = styled(Button)`
   min-width: 182px;
 `;
 
 /* Remove props when useStaticQuery is implemented, this is here for testing purposes */
 const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff, index = mockIndex }) => {
-  // TODO: Replace with full list of resources
+  // TODO: Aggregate this list of resources on build
   const resources = getMockResourcesList();
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
+  // TODO: Reminder: account for this on any diff fetch
   resourceVersions[0] += ' (latest)';
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
@@ -79,7 +97,10 @@ const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff, index = 
   return (
     <ChangelogPage>
       <ChangelogHeader>
-        <H2>API Changelog 2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`}</H2>
+        <Title>
+          <H2>API Changelog</H2>
+          <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
+        </Title>
         <DownloadButton>Download API Changelog</DownloadButton>
       </ChangelogHeader>
       <FiltersPanel
