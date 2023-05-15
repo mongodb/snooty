@@ -9,6 +9,7 @@ const Wrapper = styled(MainColumn)`
   grid-area: main;
   overflow-x: auto;
   margin-right: 64px;
+  margin-left: 75px;
 
   @media ${theme.screenSize.upToMedium} {
     margin: ${theme.size.default} ${theme.size.medium} ${theme.size.xlarge} !important;

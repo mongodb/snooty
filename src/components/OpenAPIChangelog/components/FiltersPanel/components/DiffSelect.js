@@ -6,6 +6,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 const DiffSelectContainer = styled.div`
   display: flex;
   gap: 14px;
+  padding: 0 5px;
 `;
 
 const DiffSelectItem = styled.div`

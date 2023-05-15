@@ -27,6 +27,9 @@ const ResourceSelectContainer = styled.div`
 `;
 
 const ResourceSelect = styled(Combobox)`
+  margin: 0 5px;
+  width: calc(100% - 10px);
+
   label {
     margin-bottom: 0;
   }

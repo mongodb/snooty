@@ -101,6 +101,7 @@ const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff, index = 
           <H2>API Changelog</H2>
           <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
         </Title>
+        {/* TODO: link to S3 bucket for full changelog */}
         <DownloadButton>Download API Changelog</DownloadButton>
       </ChangelogHeader>
       <FiltersPanel
