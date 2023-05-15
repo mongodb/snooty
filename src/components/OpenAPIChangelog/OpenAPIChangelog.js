@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import { H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
-import FiltersPanel from './FiltersPanel';
-import ChangeList from './ChangeList';
+import FiltersPanel from './components/FiltersPanel';
+import ChangeList from './components/ChangeList';
+import { mockChangelog, mockDiff, mockIndex } from './data/mockData';
+import { ALL_VERSIONS, COMPARE_VERSIONS } from './utils/constants';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -13,17 +16,50 @@ const ChangelogHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  span {
+    font-size: 26px;
+    color: lightgray;
+  }
 `;
 
-const OpenAPIChangelog = () => {
+/* Remove props when useStaticQuery is implemented, this is here for testing purposes */
+const OpenAPIChangelog = ({ changelog = mockChangelog, diff = mockDiff, index = mockIndex }) => {
+  // TODO: Replace with full list of resources
+  const resources = diff.map((d) => `${d.httpMethod} ${d.path}`);
+  const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
+  resourceVersions[0] += ' (latest)';
+
+  const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
+  const [selectedResources, setSelectedResources] = useState([]);
+  const [resourceVersionOne, setResourceVersionOne] = useState();
+  const [resourceVersionTwo, setResourceVersionTwo] = useState();
+
   return (
     <ChangelogPage>
       <ChangelogHeader>
-        <H2>API Changelog</H2>
+        <H2>API Changelog 2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`}</H2>
         <Button>Download API Changelog</Button>
       </ChangelogHeader>
-      <FiltersPanel />
-      <ChangeList />
+      <FiltersPanel
+        resources={resources}
+        selectedResource={selectedResources}
+        resourceVersions={resourceVersions}
+        versionMode={versionMode}
+        resourceVersionOne={resourceVersionOne}
+        resourceVersionTwo={resourceVersionTwo}
+        setSelectedResource={setSelectedResources}
+        setVersionMode={setVersionMode}
+        setResourceVersionOne={setResourceVersionOne}
+        setResourceVersionTwo={setResourceVersionTwo}
+      />
+      {(versionMode === ALL_VERSIONS || (resourceVersionOne && resourceVersionTwo)) && (
+        <ChangeList
+          versionMode={versionMode}
+          changes={versionMode === COMPARE_VERSIONS ? diff : changelog}
+          selectedResources={selectedResources}
+        />
+      )}
     </ChangelogPage>
   );
 };

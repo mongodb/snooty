@@ -1,0 +1,1280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  width: 100%;
+  margin-top: 60px;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 span {
+  font-size: 26px;
+  color: lightgray;
+}
+
+.emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 400;
+  font-family: 'MongoDB Value Serif','Times New Roman',serif;
+  color: #00684A;
+}
+
+.emotion-5 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+}
+
+.emotion-5:focus {
+  outline: none;
+}
+
+.emotion-5[disabled],
+.emotion-5:disabled {
+  pointer-events: none;
+}
+
+.emotion-5:active,
+.emotion-5:focus,
+.emotion-5:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-5:hover,
+.emotion-5:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-5:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-6 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-7 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-8 {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.emotion-11 {
+  margin-bottom: 32px;
+}
+
+.emotion-13 {
+  --segment-gap: 5px;
+  --indicator-height: calc(100% - 2 * var(--wrapper-padding));
+  --wrapper-padding: 3px;
+  --outer-radius: 8px;
+  --indicator-radius: 6px;
+  --background-color: #F9FBFA;
+  --inner-shadow: 0px 1px 2px rgba(0,30,43,0.3) inset;
+  --outer-shadow: 0px 1px 1px #E8EDEB;
+  --hover-background-color: #FFFFFF;
+  --indicator-background-color: #001E2B;
+  --indicator-border-color: #001E2B;
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(
+          0,
+          1fr
+        );
+  gap: var(--segment-gap);
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: var(--wrapper-padding);
+  border-radius: var(--outer-radius);
+  background-color: var(--background-color);
+}
+
+.emotion-13:focus {
+  outline: none;
+}
+
+.emotion-13:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: var(--inner-shadow),var(--outer-shadow);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.emotion-14 {
+  --base-text-color: #5C6C75;
+  --base-background-color: rgba(255, 255, 255, 0);
+  --base-shadow-color: rgba(255, 255, 255, 0);
+  --hover-text-color: #1C2D38;
+  --active-text-color: #FFFFFF;
+  --disabled-text-color: #C1C7C6;
+  --divider-background-color: #C1C7C6;
+  --font-size: 13px;
+  --line-height: 24px;
+  --padding-inline: 12px;
+  --text-transform: none;
+  --font-weight: 500;
+  --divider-height: 18px;
+  --padding-block: 3px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.emotion-14:first-child,
+.emotion-14[data-lg-checked='true'],
+.emotion-14[data-lg-checked='true']+[data-lg-checked='false'],
+.emotion-14:focus-within+:not(:focus-within) {
+  --divider-background-color: transparent;
+}
+
+.emotion-14:before {
+  --divider-width: 1px;
+  content: '';
+  position: absolute;
+  height: var(--divider-height);
+  width: var(--divider-width);
+  left: calc(0px - (var(--segment-gap) + var(--divider-width)) / 2);
+  top: calc(
+            (
+                var(--line-height) + var(--padding-block) * 2 -
+                  var(--divider-height)
+              ) / 2
+          );
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  background-color: var(--divider-background-color);
+}
+
+.emotion-15 {
+  width: 100%;
+  height: 100%;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-16 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: var(--padding-block) var(--padding-inline);
+  background-color: var(--base-background-color);
+  border-radius: var(--indicator-radius);
+  text-align: center;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  text-transform: var(--text-transform, none);
+  font-weight: var(--font-weight);
+  color: var(--base-text-color);
+  box-shadow: 0px 1px 2px var(--base-shadow-color);
+  cursor: pointer;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+.emotion-16 svg {
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+}
+
+.emotion-16:hover {
+  color: var(--hover-text-color);
+}
+
+.emotion-16[aria-selected='true'] {
+  color: var(--active-text-color);
+}
+
+.emotion-16:disabled {
+  color: var(--disabled-text-color);
+  cursor: not-allowed;
+}
+
+.emotion-16[aria-selected='false']:not(:disabled):not(:hover) svg {
+  color: #889397;
+}
+
+.emotion-16:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-17 {
+  min-height: var(--line-height);
+  gap: calc(var(--font-size) / 2);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.emotion-17 svg {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-18 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emotion-24 {
+  position: absolute;
+  width: 100%;
+  height: var(--indicator-height);
+  z-index: 2;
+  border-radius: var(--indicator-radius);
+  background-color: var(--indicator-background-color);
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  opacity: 1;
+  width: calc(50% - 2 * var(--wrapper-padding));
+  -webkit-transform: translateX(
+            calc(0% + 1 * var(--wrapper-padding))
+          );
+  -moz-transform: translateX(
+            calc(0% + 1 * var(--wrapper-padding))
+          );
+  -ms-transform: translateX(
+            calc(0% + 1 * var(--wrapper-padding))
+          );
+  transform: translateX(
+            calc(0% + 1 * var(--wrapper-padding))
+          );
+}
+
+.emotion-25 {
+  position: absolute;
+  height: var(--indicator-height);
+  width: 100%;
+  border-radius: var(--indicator-radius);
+  background-color: var(--hover-background-color);
+  z-index: 0;
+  opacity: 0;
+  -webkit-transition: opacity 100ms ease-in-out;
+  transition: opacity 100ms ease-in-out;
+  width: 0;
+}
+
+.emotion-26 {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.emotion-28 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  width: 100%;
+  min-width: 43px;
+}
+
+.emotion-29 label {
+  margin-bottom: 0;
+}
+
+.emotion-29 span>span {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-31 {
+  margin-bottom: 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-32 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.emotion-33 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  cursor: text;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: background-color,box-shadow,border-color;
+  border: 1px solid;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  color: #1C2D38;
+  background-color: #FFFFFF;
+  border-color: #889397;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.emotion-33::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  bottom: -21px;
+  left: 50%;
+  -webkit-translate: -50% 0%;
+  -moz-translate: -50% 0%;
+  -ms-translate: -50% 0%;
+  translate: -50% 0%;
+  border-radius: 20%;
+  box-shadow: 0 0 0 0 rgb(255 255 255 / 0%);
+  -webkit-transition: 150ms linear;
+  transition: 150ms linear;
+  transition-property: box-shadow;
+}
+
+.emotion-33:hover {
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-34 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 4px;
+  overflow-x: hidden;
+  min-height: 24px;
+  max-height: calc((72px) + (4px * 2));
+}
+
+.emotion-35 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  width: 100%;
+  border: none;
+  cursor: inherit;
+  background-color: inherit;
+  color: inherit;
+  box-sizing: content-box;
+  padding: 0;
+  margin: 0;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  height: 24px;
+  font-size: 13px;
+  line-height: 20px;
+  min-width: 13px;
+  -webkit-transition: width ease-in-out 100ms;
+  transition: width ease-in-out 100ms;
+  width: 0px;
+  max-width: 100%;
+}
+
+.emotion-35:not(:first-child) {
+  padding-left: 4px;
+}
+
+.emotion-35:placeholder-shown {
+  min-width: 100%;
+}
+
+.emotion-35:focus {
+  outline: none;
+}
+
+.emotion-35::-webkit-input-placeholder {
+  color: #5C6C75;
+}
+
+.emotion-35::-moz-placeholder {
+  color: #5C6C75;
+}
+
+.emotion-35:-ms-input-placeholder {
+  color: #5C6C75;
+}
+
+.emotion-35::placeholder {
+  color: #5C6C75;
+}
+
+.emotion-36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.emotion-37 {
+  color: #3D4F58;
+  height: 16px;
+  width: 16px;
+}
+
+.emotion-40 {
+  width: 100%;
+  margin-top: 28px;
+}
+
+.emotion-42 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+}
+
+.emotion-43 {
+  width: 100%;
+  margin: 22px 0;
+}
+
+.emotion-45 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.emotion-47 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-47:focus {
+  outline: none;
+}
+
+.emotion-48 {
+  position: relative;
+}
+
+.emotion-48::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-48::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-48::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-49 {
+  color: #016BF8;
+}
+
+.emotion-51 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #001E2B;
+}
+
+.emotion-52 {
+  margin-top: 2px;
+}
+
+.emotion-54 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-transform: uppercase;
+  border: 1px solid;
+  letter-spacing: 1px;
+  background-color: #FFEAE5;
+  border-color: #FFCDC7;
+  color: #970606;
+}
+
+.emotion-55 {
+  margin: 0;
+  padding-left: 7px;
+  list-style-type: none;
+}
+
+.emotion-55 li:before {
+  content: '•';
+  vertical-align: top;
+  line-height: 28px;
+  margin-right: 5px;
+}
+
+.emotion-57 {
+  margin-top: 12px;
+  line-height: 28px;
+}
+
+.emotion-59 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+}
+
+.emotion-75 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-transform: uppercase;
+  border: 1px solid;
+  letter-spacing: 1px;
+  background-color: #E3FCF7;
+  border-color: #C0FAE6;
+  color: #00684A;
+}
+
+.emotion-82 {
+  position: relative;
+}
+
+.emotion-85 {
+  color: #DB3030;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2 emotion-3"
+    >
+      <h2
+        class="emotion-4"
+      >
+        API Changelog 2.0~422ab47f864
+      </h2>
+      <button
+        aria-disabled="false"
+        class="emotion-5"
+        data-leafygreen-ui="button"
+        type="button"
+      >
+        <div
+          class="emotion-6"
+        />
+        <div
+          class="emotion-7"
+        >
+          Download API Changelog
+        </div>
+      </button>
+    </div>
+    <div
+      class="emotion-8 emotion-9"
+    >
+      <div
+        class="emotion-10 emotion-11 emotion-12"
+      >
+        <div
+          aria-label="segmented-control-1"
+          aria-owns="segmented-control-1-0 segmented-control-1-1"
+          class="emotion-13"
+          role="tablist"
+        >
+          <div
+            class="emotion-14"
+            data-lg-checked="true"
+          >
+            <div
+              class="emotion-15"
+              data-testid="all-versions-option"
+              tabindex="-1"
+            >
+              <button
+                aria-selected="true"
+                class="emotion-16"
+                id="segmented-control-1-0"
+                role="tab"
+                tabindex="0"
+                type="button"
+              >
+                <div
+                  class="emotion-17"
+                >
+                  <span
+                    class="emotion-18"
+                  >
+                    All Versions
+                  </span>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="emotion-14"
+            data-lg-checked="false"
+          >
+            <div
+              class="emotion-15"
+              data-testid="version-control-option"
+              tabindex="-1"
+            >
+              <button
+                aria-selected="false"
+                class="emotion-16"
+                id="segmented-control-1-1"
+                role="tab"
+                tabindex="-1"
+                type="button"
+              >
+                <div
+                  class="emotion-17"
+                >
+                  <span
+                    class="emotion-18"
+                  >
+                    Compare Two Versions
+                  </span>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="emotion-24"
+          />
+          <div
+            class="emotion-25"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-26 emotion-27"
+      >
+        <div
+          class="emotion-28 emotion-29 emotion-30"
+        >
+          <div
+            class="emotion-31"
+          >
+            <label
+              class="emotion-32"
+              for="combobox-input-1"
+              id="combobox-label-1"
+            >
+              Select Resource
+            </label>
+          </div>
+          <div
+            aria-controls="combobox-menu-1"
+            aria-expanded="false"
+            aria-owns="combobox-menu-1"
+            class="emotion-33"
+            role="combobox"
+            tabindex="-1"
+          >
+            <div
+              class="emotion-34"
+            >
+              <input
+                aria-autocomplete="list"
+                aria-controls="combobox-menu-1"
+                aria-label="Select Resource"
+                aria-labelledby="combobox-label-1"
+                autocomplete="off"
+                class="emotion-35"
+                id="combobox-input-1"
+                placeholder="All"
+                value=""
+              />
+            </div>
+            <div
+              class="emotion-36"
+            >
+              <svg
+                aria-label="Caret Down Icon"
+                class="emotion-37"
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="emotion-8 emotion-39"
+    >
+      <section
+        class="emotion-40 emotion-41"
+      >
+        <h3
+          class="emotion-42"
+        >
+          01 February 2024 Release
+        </h3>
+        <div
+          class="emotion-43 emotion-44"
+        >
+          <div
+            class="emotion-45 emotion-46"
+          >
+            <a
+              class="constant-classname emotion-47"
+              href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
+              target="_self"
+            >
+              <span
+                class="emotion-48"
+              >
+                <h6
+                  class="emotion-49 emotion-50 emotion-51"
+                >
+                  PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
+                </h6>
+              </span>
+            </a>
+            <div
+              class="emotion-52 emotion-53 emotion-54"
+            >
+              Removed
+            </div>
+          </div>
+          <ul
+            class="emotion-55 emotion-56"
+          >
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                Resource version 2023-01-01 was removed, latest available resource version is 2023-02-01
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="emotion-40 emotion-41"
+      >
+        <h3
+          class="emotion-42"
+        >
+          01 February 2023 Release
+        </h3>
+        <div
+          class="emotion-43 emotion-44"
+        >
+          <div
+            class="emotion-45 emotion-46"
+          >
+            <a
+              class="constant-classname emotion-47"
+              href="//0/#tag/Projects/operation/getProjectByName"
+              target="_self"
+            >
+              <span
+                class="emotion-48"
+              >
+                <h6
+                  class="emotion-49 emotion-50 emotion-51"
+                >
+                  GET /api/atlas/v2/groups/byName/{groupName}
+                </h6>
+              </span>
+            </a>
+            <div
+              class="emotion-52 emotion-53 emotion-75"
+            >
+              Released
+            </div>
+          </div>
+          <ul
+            class="emotion-55 emotion-56"
+          >
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                <div
+                  class="emotion-82 emotion-45 emotion-46"
+                >
+                  <svg
+                    aria-label="Important With Circle Icon"
+                    class="emotion-85"
+                    fill="none"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                Resource version added.
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="emotion-43 emotion-44"
+        >
+          <div
+            class="emotion-45 emotion-46"
+          >
+            <a
+              class="constant-classname emotion-47"
+              href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
+              target="_self"
+            >
+              <span
+                class="emotion-48"
+              >
+                <h6
+                  class="emotion-49 emotion-50 emotion-51"
+                >
+                  PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
+                </h6>
+              </span>
+            </a>
+            <div
+              class="emotion-52 emotion-53 emotion-75"
+            >
+              Released
+            </div>
+          </div>
+          <ul
+            class="emotion-55 emotion-56"
+          >
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                <div
+                  class="emotion-82 emotion-45 emotion-46"
+                >
+                  <svg
+                    aria-label="Important With Circle Icon"
+                    class="emotion-85"
+                    fill="none"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                Resource version added.
+              </div>
+            </li>
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                <div
+                  class="emotion-82 emotion-45 emotion-46"
+                >
+                  <svg
+                    aria-label="Important With Circle Icon"
+                    class="emotion-85"
+                    fill="none"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                For the 'query' request parameter 'clusterName', default value was changed from 'default' to 'cluster0'
+              </div>
+            </li>
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                Added the optional property 'links' in the response with the '200' status.
+              </div>
+            </li>
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                <div
+                  class="emotion-82 emotion-45 emotion-46"
+                >
+                  <svg
+                    aria-label="Important With Circle Icon"
+                    class="emotion-85"
+                    fill="none"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                Deprecated by resource version 2023-02-01 and marked for removal for 2024-02-01.
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="emotion-43 emotion-44"
+        >
+          <div
+            class="emotion-45 emotion-46"
+          >
+            <a
+              class="constant-classname emotion-47"
+              href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
+              target="_self"
+            >
+              <span
+                class="emotion-48"
+              >
+                <h6
+                  class="emotion-49 emotion-50 emotion-51"
+                >
+                  POST /api/atlas/v2/groups/{groupId}/accessList
+                </h6>
+              </span>
+            </a>
+            <div
+              class="emotion-52 emotion-53 emotion-75"
+            >
+              Updated
+            </div>
+          </div>
+          <ul
+            class="emotion-55 emotion-56"
+          >
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                Added the optional property 'name' in the response with the '200' status.
+              </div>
+            </li>
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                Added the optional property 'comment' in the response with the '200' status.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="emotion-40 emotion-41"
+      >
+        <h3
+          class="emotion-42"
+        >
+          22 February 2023 Release
+        </h3>
+        <div
+          class="emotion-43 emotion-44"
+        >
+          <div
+            class="emotion-45 emotion-46"
+          >
+            <a
+              class="constant-classname emotion-47"
+              href="//0/#tag/Projects/operation/getProjectByName"
+              target="_self"
+            >
+              <span
+                class="emotion-48"
+              >
+                <h6
+                  class="emotion-49 emotion-50 emotion-51"
+                >
+                  GET /api/atlas/v2/groups/byName/{groupName}
+                </h6>
+              </span>
+            </a>
+            <div
+              class="emotion-52 emotion-53 emotion-75"
+            >
+              Updated
+            </div>
+          </div>
+          <ul
+            class="emotion-55 emotion-56"
+          >
+            <li
+              class="emotion-57 emotion-58"
+            >
+              <div
+                class="emotion-59 emotion-60"
+              >
+                Added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+</DocumentFragment>
+`;
