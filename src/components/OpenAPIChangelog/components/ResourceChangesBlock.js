@@ -44,7 +44,7 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, cha
   const badge = getChangeTypeBadge[changeType || versions[0].changeType];
 
   return (
-    <Wrapper>
+    <Wrapper data-testid="resource-changes-block">
       <FlexLinkWrapper>
         <LGLink href={resourceLinkUrl} hideExternalIcon>
           <ResourceHeader>

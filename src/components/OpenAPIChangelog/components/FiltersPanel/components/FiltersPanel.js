@@ -78,7 +78,7 @@ const FiltersPanel = ({
           multiselect
         >
           {resources.map((version) => (
-            <ComboboxOption key={version} value={version} data-testid="resource-select-option" />
+            <ComboboxOption key={version} value={version} />
           ))}
         </ResourceSelect>
       </ResourceSelectContainer>

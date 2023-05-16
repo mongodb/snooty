@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
-import { mockChangelog, mockDiff } from './data/OpenAPIChangelog';
+import { mockChangelog, mockDiff, mockIndex } from './data/OpenAPIChangelog';
 
 /**
  * Helper function to strip HTML from combobox list options
@@ -43,13 +43,15 @@ jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
 
 describe('OpenAPIChangelog tests', () => {
   it('OpenAPIChangelog renders correctly', () => {
-    const tree = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
+    const tree = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />);
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
   describe('Version Mode segmented control tests', () => {
     it('Does not display diff options when the all versions option is selected', () => {
-      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
+      const { getByTestId, queryByLabelText } = render(
+        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
+      );
 
       const allVersionsOption = getByTestId('all-versions-option');
 
@@ -62,7 +64,9 @@ describe('OpenAPIChangelog tests', () => {
     });
 
     it('Does display diff options when compares versions option is selected', () => {
-      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />);
+      const { getByTestId, queryByLabelText } = render(
+        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
+      );
 
       const compareVersionsOption = getByTestId('compare-versions-option');
       const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
@@ -81,7 +85,7 @@ describe('OpenAPIChangelog tests', () => {
   describe('version compare comboboxes tests', () => {
     it('has different options from each other', () => {
       const { getByTestId, getByLabelText, getAllByTestId } = render(
-        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} />
+        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
       );
 
       // switch to compare versions on segment control
@@ -122,6 +126,43 @@ describe('OpenAPIChangelog tests', () => {
       // expect that the selected option for each version does not exist as an option for the other combobox
       expect(resourceVersionOneOptionValues).not.toContain(selectedResourceVersionTwoOption);
       expect(resourceVersionTwoOptionValues).not.toContain(selectedResourceVersionOneOption);
+    });
+
+    it('should show no changes of two unselected versions', () => {
+      const { getByTestId, queryAllByTestId } = render(
+        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
+      );
+      // switch to compare versions on segment control
+      const compareVersionsOption = getByTestId('compare-versions-option');
+      const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
+
+      userEvent.click(compareVersionsOptionButton);
+
+      expect(queryAllByTestId('resource-changes-block')).toHaveLength(0);
+    });
+
+    it('should show changes on user selection', () => {
+      const { getByTestId, getByLabelText, getAllByTestId, queryAllByTestId } = render(
+        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
+      );
+
+      // switch to compare versions on segment control
+      const compareVersionsOption = getByTestId('compare-versions-option');
+      const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
+
+      userEvent.click(compareVersionsOptionButton);
+
+      // open the Resource Version 2 combobox
+      const resourceVersionTwoCombobox = getByLabelText('Resource Version 2');
+      userEvent.click(resourceVersionTwoCombobox);
+
+      // get the dropdown items
+      const resourceVersionTwoOptions = getAllByTestId('version-two-option');
+
+      // choose first option
+      userEvent.click(resourceVersionTwoOptions[0]);
+
+      expect(queryAllByTestId('resource-changes-block')).toHaveLength(mockDiff.length);
     });
   });
 });
