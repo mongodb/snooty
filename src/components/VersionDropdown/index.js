@@ -83,7 +83,7 @@ const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
   const slug = getBranchSlug(branch);
   return (
-    <Option key={slug} value={slug}>
+    <Option key={slug} value={branch.gitBranchName}>
       {UIlabel}
     </Option>
   );
@@ -92,7 +92,7 @@ const createOption = (branch) => {
 const VersionDropdown = ({ eol }) => {
   const siteMetadata = useSiteMetadata();
   const { parserBranch, project } = siteMetadata;
-  const { availableVersions, availableGroups, onVersionSelect, showEol } = useContext(VersionContext);
+  const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
   let branches = availableVersions[siteMetadata.project];
   let groups = availableGroups[siteMetadata.project];
 
@@ -146,7 +146,7 @@ const VersionDropdown = ({ eol }) => {
       onChange={onSelectChange}
       placeholder={'Select a version'}
       popoverZIndex={3}
-      value={currentUrlSlug}
+      value={activeVersions[project]}
       usePortal={false}
       disabled={eol}
     >

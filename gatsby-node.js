@@ -288,7 +288,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
     resolve: {
       fallback: fallbacks,
       alias: {
-        process: require.resolve('./stubs/process.js'),
+        process: 'process/browser',
       },
     },
   });
