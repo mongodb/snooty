@@ -16,7 +16,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
       }}
     />,
     // Optimizely
-    <script key="optimizely" async src="https://cdn.optimizely.com/js/20988630008.js" />,
+    <script key="optimizely" src="https://cdn.optimizely.com/js/20988630008.js" />,
     // Delighted
     <script
       key="delighted"
