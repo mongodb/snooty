@@ -3,15 +3,22 @@ import styled from '@emotion/styled';
 import { Combobox, ComboboxOption } from '@leafygreen-ui/combobox';
 import { SegmentedControl, SegmentedControlOption } from '@leafygreen-ui/segmented-control';
 import { ALL_VERSIONS, COMPARE_VERSIONS } from '../../../utils/constants';
+import { theme } from '../../../../../theme/docsTheme';
 import DiffSelect from './DiffSelect';
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-top: 32px;
+  margin-top: 28px;
 `;
 
 const StyledSegmentedControl = styled(SegmentedControl)`
-  margin-bottom: 32px;
+  margin-bottom: 28px;
+
+  @media ${theme.screenSize.upToMedium} {
+    button {
+      font-size: 13px;
+    }
+  }
 `;
 
 const ResourceSelectContainer = styled.div`
@@ -20,6 +27,9 @@ const ResourceSelectContainer = styled.div`
 `;
 
 const ResourceSelect = styled(Combobox)`
+  margin: 0 5px;
+  width: calc(100% - 10px);
+
   label {
     margin-bottom: 0;
   }
@@ -46,7 +56,7 @@ const FiltersPanel = ({
         <SegmentedControlOption data-testid="all-versions-option" value={ALL_VERSIONS}>
           All Versions
         </SegmentedControlOption>
-        <SegmentedControlOption data-testid="version-control-option" value={COMPARE_VERSIONS}>
+        <SegmentedControlOption data-testid="compare-versions-option" value={COMPARE_VERSIONS}>
           Compare Two Versions
         </SegmentedControlOption>
       </StyledSegmentedControl>
@@ -60,9 +70,15 @@ const FiltersPanel = ({
         />
       )}
       <ResourceSelectContainer>
-        <ResourceSelect label="Select Resource" placeholder="All" onChange={setSelectedResources} multiselect>
+        <ResourceSelect
+          label="Select Resource"
+          placeholder="All"
+          onChange={setSelectedResources}
+          popoverZIndex={3}
+          multiselect
+        >
           {resources.map((version) => (
-            <ComboboxOption key={version} value={version} data-testid="resource-select-option" />
+            <ComboboxOption key={version} value={version} />
           ))}
         </ResourceSelect>
       </ResourceSelectContainer>
