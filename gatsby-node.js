@@ -1,3 +1,4 @@
+const yaml = require('js-yaml');
 const path = require('path');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { baseUrl } = require('./src/utils/base-url');
@@ -71,6 +72,47 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
     });
   } catch (e) {
     console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
+    console.error(e);
+  }
+};
+
+// Creates node for ChangelogData, used only for OpenAPIChangelog in cloud-docs.
+// TODO: Make sure this only runs in cloud-docs... or maybe if there's an instance of api-changelog?
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  const s3BucketPrefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi/';
+
+  try {
+    const indexResp = await fetch(`${s3BucketPrefix}index.yaml`);
+    const indexText = await indexResp.text();
+    const index = yaml.safeLoad(indexText, 'utf8');
+
+    const { runId } = index;
+
+    if (!runId || typeof runId !== 'string') throw new Error('runId was not available!'); // better error handling obvi
+
+    const changelogResp = await fetch(`${s3BucketPrefix}${runId}/changelog.yaml`);
+    const changelogText = await changelogResp.text();
+    const changelog = yaml.safeLoad(changelogText, 'utf8');
+
+    console.log(changelog);
+
+    const changelogData = {
+      index,
+      changelog,
+    };
+
+    createNode({
+      children: [],
+      id: createNodeId('changelogData'),
+      internal: {
+        contentDigest: createContentDigest(changelogData),
+        type: 'ChangelogData',
+      },
+      parent: null,
+      changelogData: changelogData,
+    });
+  } catch (e) {
+    console.error('Error while fetching changelog data from S3');
     console.error(e);
   }
 };
@@ -159,6 +201,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+  await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
@@ -308,6 +351,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type RemoteMetadata implements Node @dontInfer {
       remoteMetadata: JSON
+    }
+
+    type ChangelogData implements Node @dontInfer {
+      changelogData: JSON
     }
   `);
 };
