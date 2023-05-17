@@ -1110,3 +1110,7 @@ dl.method > dt em {
     margin-left: 25px;
   }
 }
+
+#tooltip-1 {
+  z-index: 3;
+}
