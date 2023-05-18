@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body, H2 } from '@leafygreen-ui/typography';
@@ -7,8 +7,9 @@ import { theme } from '../../theme/docsTheme';
 import useChangelogData from '../../utils/use-changelog-data';
 import FiltersPanel from './components/FiltersPanel';
 import ChangeList from './components/ChangeList';
-import { getMockResourcesList, mockDiff } from './data/mockData';
-import { ALL_VERSIONS, COMPARE_VERSIONS } from './utils/constants';
+import { mockDiff } from './data/mockData';
+import { ALL_VERSIONS, getDownloadChangelogUrl } from './utils/constants';
+import getDiffResourcesList from './utils/getDiffResourcesList';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -54,27 +55,39 @@ const DownloadButton = styled(Button)`
 `;
 
 const OpenAPIChangelog = ({ diff = mockDiff }) => {
-  const { changelog, index } = useChangelogData();
-  // TODO: Aggregate this list of resources on build
-  const resources = getMockResourcesList();
+  const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
   // TODO: Reminder: account for this on any diff fetch
-  resourceVersions[0] += ' (latest)';
+  if (resourceVersions.length) resourceVersions[0] += ' (latest)';
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
-  const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
+  const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0] || null);
   const [resourceVersionTwo, setResourceVersionTwo] = useState();
+
+  // TODO: Fetch diff, getDiffResourcesList on changes to version selectors
+  const diffResourcesList = getDiffResourcesList(diff);
+  const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId), [index]);
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
   const [filteredChangelog, setFilteredChangelog] = useState(changelog);
 
+  /*  
+    Clear filters on version mode change.
+    Different Resources are available in either mode, not always comparable.
+  */
+  useEffect(() => {
+    setSelectedResources([]);
+  }, [versionMode]);
+
+  /* Filter diff based on changes in selectedResources filtering */
   useEffect(() => {
     if (!selectedResources.length) {
       setFilteredDiff(diff);
     } else setFilteredDiff(diff.filter(({ httpMethod, path }) => selectedResources.includes(`${httpMethod} ${path}`)));
-  }, [selectedResources, diff]);
+  }, [selectedResources, diff, versionMode]);
 
+  /* Filter changelog based on changes in selectedResources filtering */
   useEffect(() => {
     if (!selectedResources.length) {
       setFilteredChangelog(changelog);
@@ -93,7 +106,7 @@ const OpenAPIChangelog = ({ diff = mockDiff }) => {
       });
       setFilteredChangelog(filteredResources);
     }
-  }, [selectedResources, changelog]);
+  }, [selectedResources, changelog, versionMode]);
 
   return (
     <ChangelogPage>
@@ -103,11 +116,13 @@ const OpenAPIChangelog = ({ diff = mockDiff }) => {
           <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
         </Title>
         {/* TODO: link to S3 bucket for full changelog */}
-        <DownloadButton>Download API Changelog</DownloadButton>
+        <DownloadButton href={downloadChangelogUrl} disabled={!index.runId}>
+          Download API Changelog
+        </DownloadButton>
       </ChangelogHeader>
       <FiltersPanel
-        resources={resources}
-        selectedResource={selectedResources}
+        resources={versionMode === ALL_VERSIONS ? changelogResourcesList : diffResourcesList}
+        selectedResources={selectedResources}
         resourceVersions={resourceVersions}
         versionMode={versionMode}
         resourceVersionOne={resourceVersionOne}
@@ -120,7 +135,7 @@ const OpenAPIChangelog = ({ diff = mockDiff }) => {
       {(versionMode === ALL_VERSIONS || (resourceVersionOne && resourceVersionTwo)) && (
         <ChangeList
           versionMode={versionMode}
-          changes={versionMode === COMPARE_VERSIONS ? filteredDiff : filteredChangelog}
+          changes={versionMode === ALL_VERSIONS ? filteredChangelog : filteredDiff}
           selectedResources={selectedResources}
         />
       )}

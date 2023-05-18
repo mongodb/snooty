@@ -5,8 +5,8 @@ import { Link as LGLink, Subtitle } from '@leafygreen-ui/typography';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { theme } from '../../../theme/docsTheme';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
-import { getChangeTypeBadge } from '../utils/constants';
-import { getResourceLinkUrl } from '../utils/getResourceLinkUrl';
+import { changeTypeBadges } from '../utils/constants';
+import getResourceLinkUrl from '../utils/getResourceLinkUrl';
 import Change, { Flex } from './Change';
 
 const Wrapper = styled.div`
@@ -41,7 +41,7 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, cha
 
   const resourceLinkUrl = getResourceLinkUrl(metadata, tag, operationId, openapi_pages);
   const resourceChanges = changes || versions.map((version) => version.changes.map((change) => change)).flat();
-  const badge = getChangeTypeBadge[changeType || versions[0].changeType];
+  const changeTypeBadge = changeTypeBadges[changeType || versions[0].changeType];
 
   return (
     <Wrapper data-testid="resource-changes-block">
@@ -51,7 +51,9 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, cha
             {httpMethod} {path}
           </ResourceHeader>
         </LGLink>
-        {badge ? <ChangeTypeBadge variant={badge.variant}>{badge.label}</ChangeTypeBadge> : null}
+        {changeTypeBadge ? (
+          <ChangeTypeBadge variant={changeTypeBadge.variant}>{changeTypeBadge.label}</ChangeTypeBadge>
+        ) : null}
       </FlexLinkWrapper>
       <ChangeListUL>
         {resourceChanges.map((change, i) => (

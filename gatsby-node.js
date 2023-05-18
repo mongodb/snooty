@@ -76,31 +76,42 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-// Creates node for ChangelogData, used only for OpenAPIChangelog in cloud-docs.
+/* Creates node for ChangelogData, used only for OpenAPI Changelog in cloud-docs. */
 // TODO: Make sure this only runs in cloud-docs... or maybe if there's an instance of api-changelog?
 const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
   const s3BucketPrefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi/';
 
   try {
+    /* Fetch OpenAPI Changelog metadata (index.yaml) */
     const indexResp = await fetch(`${s3BucketPrefix}index.yaml`);
     const indexText = await indexResp.text();
     const index = yaml.safeLoad(indexText, 'utf8');
 
     const { runId } = index;
 
-    if (!runId || typeof runId !== 'string') throw new Error('runId was not available!'); // better error handling obvi
+    if (!runId || typeof runId !== 'string')
+      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!'); // better error handling obvi
+    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
 
+    /* Using metadata runId, fetch OpenAPI Changelog full change list */
     const changelogResp = await fetch(`${s3BucketPrefix}${runId}/changelog.yaml`);
     const changelogText = await changelogResp.text();
     const changelog = yaml.safeLoad(changelogText, 'utf8');
 
-    console.log(changelog);
+    /* Aggregate all Resources in changelog for frontend filter */
+    const resourcesListSet = new Set();
+    changelog.forEach((release) =>
+      release.paths.forEach(({ httpMethod, path }) => resourcesListSet.add(`${httpMethod} ${path}`))
+    );
+    const changelogResourcesList = Array.from(resourcesListSet);
 
     const changelogData = {
       index,
       changelog,
+      changelogResourcesList,
     };
 
+    /* Create Node for useStaticQuery with all Changelog data */
     createNode({
       children: [],
       id: createNodeId('changelogData'),
@@ -112,12 +123,26 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
       changelogData: changelogData,
     });
   } catch (e) {
-    console.error('Error while fetching changelog data from S3');
+    console.error('Error while fetching OpenAPI Changelog data from S3');
     console.error(e);
+
+    /* Create empty Node for useStaticQuery to ensure build */
+    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
+    createNode({
+      children: [],
+      id: createNodeId('changelogData'),
+      internal: {
+        contentDigest: createContentDigest({}),
+        type: 'ChangelogData',
+      },
+      parent: null,
+      changelogData: {},
+    });
   }
 };
 
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
+  let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
   // setup and validate env variables
@@ -180,6 +205,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       PAGES.push(key);
     }
+    if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
   // Get all MongoDB products for the sidenav
@@ -201,7 +227,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
-  await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
+  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();

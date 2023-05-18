@@ -39,6 +39,7 @@ export default function DiffSelect({
       <DiffSelectItem>
         <Combobox
           clearable={false}
+          placeholder="Select Version"
           value={resourceVersionOne}
           label="Resource Version 1"
           className={cx(marginlessLabel)}

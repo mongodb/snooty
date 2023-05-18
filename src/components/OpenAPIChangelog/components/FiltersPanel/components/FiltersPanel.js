@@ -41,8 +41,9 @@ const ResourceSelect = styled(Combobox)`
 
 const FiltersPanel = ({
   versionMode,
-  resourceVersions,
   resources,
+  resourceVersions,
+  selectedResources,
   setSelectedResources,
   resourceVersionOne,
   resourceVersionTwo,
@@ -73,6 +74,7 @@ const FiltersPanel = ({
         <ResourceSelect
           label="Select Resource"
           placeholder="All"
+          value={selectedResources}
           onChange={setSelectedResources}
           popoverZIndex={3}
           multiselect
