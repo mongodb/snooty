@@ -51,9 +51,9 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, cha
             {httpMethod} {path}
           </ResourceHeader>
         </LGLink>
-        {changeTypeBadge ? (
+        {changeTypeBadge && (
           <ChangeTypeBadge variant={changeTypeBadge.variant}>{changeTypeBadge.label}</ChangeTypeBadge>
-        ) : null}
+        )}
       </FlexLinkWrapper>
       <ChangeListUL>
         {resourceChanges.map((change, i) => (

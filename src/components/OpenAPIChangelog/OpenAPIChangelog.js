@@ -57,17 +57,17 @@ const DownloadButton = styled(Button)`
 const OpenAPIChangelog = ({ diff = mockDiff }) => {
   const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
+  const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId), [index]);
   // TODO: Reminder: account for this on any diff fetch
   if (resourceVersions.length) resourceVersions[0] += ' (latest)';
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
-  const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0] || null);
+  const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
   const [resourceVersionTwo, setResourceVersionTwo] = useState();
 
   // TODO: Fetch diff, getDiffResourcesList on changes to version selectors
   const diffResourcesList = getDiffResourcesList(diff);
-  const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId), [index]);
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
   const [filteredChangelog, setFilteredChangelog] = useState(changelog);
@@ -85,7 +85,7 @@ const OpenAPIChangelog = ({ diff = mockDiff }) => {
     if (!selectedResources.length) {
       setFilteredDiff(diff);
     } else setFilteredDiff(diff.filter(({ httpMethod, path }) => selectedResources.includes(`${httpMethod} ${path}`)));
-  }, [selectedResources, diff, versionMode]);
+  }, [selectedResources, diff]);
 
   /* Filter changelog based on changes in selectedResources filtering */
   useEffect(() => {
@@ -106,7 +106,7 @@ const OpenAPIChangelog = ({ diff = mockDiff }) => {
       });
       setFilteredChangelog(filteredResources);
     }
-  }, [selectedResources, changelog, versionMode]);
+  }, [selectedResources, changelog]);
 
   return (
     <ChangelogPage>
@@ -115,7 +115,6 @@ const OpenAPIChangelog = ({ diff = mockDiff }) => {
           <H2>API Changelog</H2>
           <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
         </Title>
-        {/* TODO: link to S3 bucket for full changelog */}
         <DownloadButton href={downloadChangelogUrl} disabled={!index.runId}>
           Download API Changelog
         </DownloadButton>
