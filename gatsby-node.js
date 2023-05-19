@@ -1,3 +1,4 @@
+const yaml = require('js-yaml');
 const path = require('path');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { baseUrl } = require('./src/utils/base-url');
@@ -75,7 +76,72 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
+/* Creates node for ChangelogData, used only for OpenAPI Changelog in cloud-docs. */
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi/';
+
+  try {
+    /* Fetch OpenAPI Changelog metadata (index.yaml) */
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}index.yaml`);
+    const indexText = await indexResp.text();
+    const index = yaml.safeLoad(indexText, 'utf8');
+
+    const { runId } = index;
+
+    if (!runId || typeof runId !== 'string')
+      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!'); // better error handling obvi
+    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
+
+    /* Using metadata runId, fetch OpenAPI Changelog full change list */
+    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}${runId}/changelog.yaml`);
+    const changelogText = await changelogResp.text();
+    const changelog = yaml.safeLoad(changelogText, 'utf8');
+
+    /* Aggregate all Resources in changelog for frontend filter */
+    const resourcesListSet = new Set();
+    changelog.forEach((release) =>
+      release.paths.forEach(({ httpMethod, path }) => resourcesListSet.add(`${httpMethod} ${path}`))
+    );
+    const changelogResourcesList = Array.from(resourcesListSet);
+
+    const changelogData = {
+      index,
+      changelog,
+      changelogResourcesList,
+    };
+
+    /* Create Node for useStaticQuery with all Changelog data */
+    createNode({
+      children: [],
+      id: createNodeId('changelogData'),
+      internal: {
+        contentDigest: createContentDigest(changelogData),
+        type: 'ChangelogData',
+      },
+      parent: null,
+      changelogData: changelogData,
+    });
+  } catch (e) {
+    console.error('Error while fetching OpenAPI Changelog data from S3');
+    console.error(e);
+
+    /* Create empty Node for useStaticQuery to ensure build */
+    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
+    createNode({
+      children: [],
+      id: createNodeId('changelogData'),
+      internal: {
+        contentDigest: createContentDigest({}),
+        type: 'ChangelogData',
+      },
+      parent: null,
+      changelogData: {},
+    });
+  }
+};
+
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
+  let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
   // setup and validate env variables
@@ -138,6 +204,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       PAGES.push(key);
     }
+    if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
   // Get all MongoDB products for the sidenav
@@ -159,6 +226,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
@@ -308,6 +377,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type RemoteMetadata implements Node @dontInfer {
       remoteMetadata: JSON
+    }
+
+    type ChangelogData implements Node @dontInfer {
+      changelogData: JSON
     }
   `);
 };

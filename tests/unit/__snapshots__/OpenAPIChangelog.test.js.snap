@@ -851,11 +851,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           (2.0~422ab47f864)
         </p>
       </div>
-      <button
+      <a
         aria-disabled="false"
         class="emotion-8 emotion-9 emotion-10"
         data-leafygreen-ui="button"
-        type="button"
+        href="https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi/20230403105948111/changelog.yaml"
       >
         <div
           class="emotion-11"
@@ -865,7 +865,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         >
           Download API Changelog
         </div>
-      </button>
+      </a>
     </div>
     <div
       class="emotion-13 emotion-14"

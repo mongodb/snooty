@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
@@ -25,20 +26,41 @@ const getComboboxOptionStrings = (o) => {
   return { optionValue: o.getElementsByTagName('span')[0].innerHTML, isSelected: false };
 };
 
-jest.mock('../../src/hooks/use-site-metadata', () => ({
-  useSiteMetadata: () => ({
-    commitHash: '',
-    parserBranch: '',
-    patchId: '',
-    pathPrefix: '',
-    project: '',
-    snootyBranch: '',
-    user: '',
-  }),
-}));
-
 jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
   openapi_pages: ['reference/api-resources-spec/v2'],
+}));
+
+/* Aggregate all Resources in changelog for frontend filter */
+const mockResourcesListSet = new Set();
+mockChangelog.forEach((release) =>
+  release.paths.forEach(({ httpMethod, path }) => mockResourcesListSet.add(`${httpMethod} ${path}`))
+);
+const mockChangelogResourcesList = Array.from(mockResourcesListSet);
+
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+useStaticQuery.mockImplementation(() => ({
+  site: {
+    siteMetadata: {
+      commitHash: '',
+      parserBranch: '',
+      patchId: '',
+      pathPrefix: '',
+      project: '',
+      snootyBranch: '',
+      user: '',
+    },
+  },
+  allChangelogData: {
+    nodes: [
+      {
+        changelogData: {
+          index: mockIndex,
+          changelog: mockChangelog,
+          changelogResourcesList: mockChangelogResourcesList,
+        },
+      },
+    ],
+  },
 }));
 
 describe('OpenAPIChangelog tests', () => {
