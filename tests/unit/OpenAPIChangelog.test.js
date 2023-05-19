@@ -26,18 +26,6 @@ const getComboboxOptionStrings = (o) => {
   return { optionValue: o.getElementsByTagName('span')[0].innerHTML, isSelected: false };
 };
 
-// jest.mock('../../src/hooks/use-site-metadata', () => ({
-//   useSiteMetadata: () => ({
-//     commitHash: '',
-//     parserBranch: '',
-//     patchId: '',
-//     pathPrefix: '',
-//     project: '',
-//     snootyBranch: '',
-//     user: '',
-//   }),
-// }));
-
 jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
   openapi_pages: ['reference/api-resources-spec/v2'],
 }));

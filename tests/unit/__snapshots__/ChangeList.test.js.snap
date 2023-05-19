@@ -1,0 +1,838 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog correctly 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.emotion-2 {
+  width: 100%;
+  margin-top: 28px;
+}
+
+.emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+}
+
+.emotion-5 {
+  width: 100%;
+  margin: 22px 0;
+}
+
+.emotion-7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-7 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: start;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+  }
+}
+
+.emotion-9 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-9:focus {
+  outline: none;
+}
+
+.emotion-10 {
+  position: relative;
+}
+
+.emotion-10::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-10::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-10::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-11 {
+  color: #016BF8;
+  word-break: break-all;
+}
+
+.emotion-13 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #001E2B;
+}
+
+.emotion-14 {
+  margin-top: 2px;
+}
+
+.emotion-16 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-transform: uppercase;
+  border: 1px solid;
+  letter-spacing: 1px;
+  background-color: #FFEAE5;
+  border-color: #FFCDC7;
+  color: #970606;
+}
+
+.emotion-17 {
+  margin: 0;
+  list-style-position: start;
+}
+
+.emotion-19 {
+  margin-top: 12px;
+  line-height: 28px;
+}
+
+.emotion-35 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-transform: uppercase;
+  border: 1px solid;
+  letter-spacing: 1px;
+  background-color: #E3FCF7;
+  border-color: #C0FAE6;
+  color: #00684A;
+}
+
+.emotion-40 {
+  position: relative;
+}
+
+.emotion-41 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+  margin-right: 5px;
+}
+
+.emotion-43 {
+  color: #DB3030;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <section
+      class="emotion-2 emotion-3"
+    >
+      <h3
+        class="emotion-4"
+      >
+        01 February 2024 Release
+      </h3>
+      <div
+        class="emotion-5 emotion-6"
+        data-testid="resource-changes-block"
+      >
+        <div
+          class="emotion-7 emotion-8"
+        >
+          <a
+            class="constant-classname emotion-9"
+            href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
+            target="_self"
+          >
+            <span
+              class="emotion-10"
+            >
+              <h6
+                class="emotion-11 emotion-12 emotion-13"
+              >
+                PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
+              </h6>
+            </span>
+          </a>
+          <div
+            class="emotion-14 emotion-15 emotion-16"
+          >
+            Removed
+          </div>
+        </div>
+        <ul
+          class="emotion-17 emotion-18"
+        >
+          <li
+            class="emotion-19 emotion-20"
+          >
+            Resource version 2023-01-01 was removed, latest available resource version is 2023-02-01
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section
+      class="emotion-2 emotion-3"
+    >
+      <h3
+        class="emotion-4"
+      >
+        01 February 2023 Release
+      </h3>
+      <div
+        class="emotion-5 emotion-6"
+        data-testid="resource-changes-block"
+      >
+        <div
+          class="emotion-7 emotion-8"
+        >
+          <a
+            class="constant-classname emotion-9"
+            href="//0/#tag/Projects/operation/getProjectByName"
+            target="_self"
+          >
+            <span
+              class="emotion-10"
+            >
+              <h6
+                class="emotion-11 emotion-12 emotion-13"
+              >
+                GET /api/atlas/v2/groups/byName/{groupName}
+              </h6>
+            </span>
+          </a>
+          <div
+            class="emotion-14 emotion-15 emotion-35"
+          >
+            Released
+          </div>
+        </div>
+        <ul
+          class="emotion-17 emotion-18"
+        >
+          <li
+            class="emotion-19 emotion-20"
+          >
+            <div
+              class="emotion-40 emotion-41 emotion-42"
+            >
+              <svg
+                aria-label="Important With Circle Icon"
+                class="emotion-43"
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            Resource version added.
+          </li>
+        </ul>
+      </div>
+      <div
+        class="emotion-5 emotion-6"
+        data-testid="resource-changes-block"
+      >
+        <div
+          class="emotion-7 emotion-8"
+        >
+          <a
+            class="constant-classname emotion-9"
+            href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
+            target="_self"
+          >
+            <span
+              class="emotion-10"
+            >
+              <h6
+                class="emotion-11 emotion-12 emotion-13"
+              >
+                PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
+              </h6>
+            </span>
+          </a>
+          <div
+            class="emotion-14 emotion-15 emotion-35"
+          >
+            Released
+          </div>
+        </div>
+        <ul
+          class="emotion-17 emotion-18"
+        >
+          <li
+            class="emotion-19 emotion-20"
+          >
+            <div
+              class="emotion-40 emotion-41 emotion-42"
+            >
+              <svg
+                aria-label="Important With Circle Icon"
+                class="emotion-43"
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            Resource version added.
+          </li>
+          <li
+            class="emotion-19 emotion-20"
+          >
+            <div
+              class="emotion-40 emotion-41 emotion-42"
+            >
+              <svg
+                aria-label="Important With Circle Icon"
+                class="emotion-43"
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            For the 'query' request parameter 'clusterName', default value was changed from 'default' to 'cluster0'
+          </li>
+          <li
+            class="emotion-19 emotion-20"
+          >
+            Added the optional property 'links' in the response with the '200' status.
+          </li>
+          <li
+            class="emotion-19 emotion-20"
+          >
+            <div
+              class="emotion-40 emotion-41 emotion-42"
+            >
+              <svg
+                aria-label="Important With Circle Icon"
+                class="emotion-43"
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            Deprecated by resource version 2023-02-01 and marked for removal for 2024-02-01.
+          </li>
+        </ul>
+      </div>
+      <div
+        class="emotion-5 emotion-6"
+        data-testid="resource-changes-block"
+      >
+        <div
+          class="emotion-7 emotion-8"
+        >
+          <a
+            class="constant-classname emotion-9"
+            href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
+            target="_self"
+          >
+            <span
+              class="emotion-10"
+            >
+              <h6
+                class="emotion-11 emotion-12 emotion-13"
+              >
+                POST /api/atlas/v2/groups/{groupId}/accessList
+              </h6>
+            </span>
+          </a>
+          <div
+            class="emotion-14 emotion-15 emotion-35"
+          >
+            Updated
+          </div>
+        </div>
+        <ul
+          class="emotion-17 emotion-18"
+        >
+          <li
+            class="emotion-19 emotion-20"
+          >
+            Added the optional property 'name' in the response with the '200' status.
+          </li>
+          <li
+            class="emotion-19 emotion-20"
+          >
+            Added the optional property 'comment' in the response with the '200' status.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section
+      class="emotion-2 emotion-3"
+    >
+      <h3
+        class="emotion-4"
+      >
+        22 February 2023 Release
+      </h3>
+      <div
+        class="emotion-5 emotion-6"
+        data-testid="resource-changes-block"
+      >
+        <div
+          class="emotion-7 emotion-8"
+        >
+          <a
+            class="constant-classname emotion-9"
+            href="//0/#tag/Projects/operation/getProjectByName"
+            target="_self"
+          >
+            <span
+              class="emotion-10"
+            >
+              <h6
+                class="emotion-11 emotion-12 emotion-13"
+              >
+                GET /api/atlas/v2/groups/byName/{groupName}
+              </h6>
+            </span>
+          </a>
+          <div
+            class="emotion-14 emotion-15 emotion-35"
+          >
+            Updated
+          </div>
+        </div>
+        <ul
+          class="emotion-17 emotion-18"
+        >
+          <li
+            class="emotion-19 emotion-20"
+          >
+            Added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.emotion-2 {
+  width: 100%;
+  margin: 22px 0;
+}
+
+.emotion-4 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-4 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: start;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+  }
+}
+
+.emotion-6 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-6:focus {
+  outline: none;
+}
+
+.emotion-7 {
+  position: relative;
+}
+
+.emotion-7::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.constant-classname:focus .emotion-7::after {
+  background-color: #0498EC;
+}
+
+.constant-classname:hover .emotion-7::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-8 {
+  color: #016BF8;
+  word-break: break-all;
+}
+
+.emotion-10 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #001E2B;
+}
+
+.emotion-11 {
+  margin-top: 2px;
+}
+
+.emotion-13 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-transform: uppercase;
+  border: 1px solid;
+  letter-spacing: 1px;
+  background-color: #E3FCF7;
+  border-color: #C0FAE6;
+  color: #00684A;
+}
+
+.emotion-14 {
+  margin: 0;
+  list-style-position: start;
+}
+
+.emotion-16 {
+  margin-top: 12px;
+  line-height: 28px;
+}
+
+.emotion-18 {
+  position: relative;
+}
+
+.emotion-19 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+  margin-right: 5px;
+}
+
+.emotion-21 {
+  color: #DB3030;
+}
+
+.emotion-35 {
+  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-transform: uppercase;
+  border: 1px solid;
+  letter-spacing: 1px;
+  background-color: #FFEAE5;
+  border-color: #FFCDC7;
+  color: #970606;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2 emotion-3"
+      data-testid="resource-changes-block"
+    >
+      <div
+        class="emotion-4 emotion-5"
+      >
+        <a
+          class="constant-classname emotion-6"
+          href="//0/#tag/Federated-Authentication/operation/listConnectedOrgConfigs"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            <h6
+              class="emotion-8 emotion-9 emotion-10"
+            >
+              GET /api/atlas/v2/federationSettings/{federationSettingsId}/connectedOrgConfigs
+            </h6>
+          </span>
+        </a>
+        <div
+          class="emotion-11 emotion-12 emotion-13"
+        >
+          Updated
+        </div>
+      </div>
+      <ul
+        class="emotion-14 emotion-15"
+      >
+        <li
+          class="emotion-16 emotion-17"
+        >
+          <div
+            class="emotion-18 emotion-19 emotion-20"
+          >
+            <svg
+              aria-label="Important With Circle Icon"
+              class="emotion-21"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          Removed the non-success response with the status '400'.
+        </li>
+        <li
+          class="emotion-16 emotion-17"
+        >
+          Added the new optional 'query' request parameter 'envelope'.
+        </li>
+      </ul>
+    </div>
+    <div
+      class="emotion-2 emotion-3"
+      data-testid="resource-changes-block"
+    >
+      <div
+        class="emotion-4 emotion-5"
+      >
+        <a
+          class="constant-classname emotion-6"
+          href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            <h6
+              class="emotion-8 emotion-9 emotion-10"
+            >
+              POST /api/atlas/v2/groups/{groupId}/accessList
+            </h6>
+          </span>
+        </a>
+        <div
+          class="emotion-11 emotion-12 emotion-35"
+        >
+          Removed
+        </div>
+      </div>
+      <ul
+        class="emotion-14 emotion-15"
+      >
+        <li
+          class="emotion-16 emotion-17"
+        >
+          <div
+            class="emotion-18 emotion-19 emotion-20"
+          >
+            <svg
+              aria-label="Important With Circle Icon"
+              class="emotion-21"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          Removed the required property 'name' from the response with the '200' status.
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
+`;
