@@ -54,3 +54,7 @@ export const fetchDocument = async (database, collectionName, query, projections
 export const fetchDocuments = async (database, collectionName, query, projections, options) => {
   return fetchData('fetchDocuments', database, collectionName, query, projections, options);
 };
+
+export const fetchOADiff = async (runId, diffString) => {
+  return fetchData('fetchOADiff', runId, diffString);
+};

@@ -78,11 +78,11 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
 
 /* Creates node for ChangelogData, used only for OpenAPI Changelog in cloud-docs. */
 const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
-  const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi/';
+  const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
 
   try {
     /* Fetch OpenAPI Changelog metadata (index.yaml) */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}index.yaml`);
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
     const indexText = await indexResp.text();
     const index = yaml.safeLoad(indexText, 'utf8');
 
@@ -93,7 +93,7 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
 
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}${runId}/changelog.yaml`);
+    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.yaml`);
     const changelogText = await changelogResp.text();
     const changelog = yaml.safeLoad(changelogText, 'utf8');
 
