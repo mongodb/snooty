@@ -5,12 +5,11 @@ import { Body, H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import { theme } from '../../theme/docsTheme';
 import useChangelogData from '../../utils/use-changelog-data';
-import { fetchOADiff } from '../../utils/realm';
 import FiltersPanel from './components/FiltersPanel';
 import ChangeList from './components/ChangeList';
+import { useFetchDiff } from './utils/useFetchDiff';
 import { ALL_VERSIONS, getDownloadChangelogUrl } from './utils/constants';
 import getDiffResourcesList from './utils/getDiffResourcesList';
-import { getDiffRequestFormat } from './utils/getDiffRequestFormat';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -65,21 +64,11 @@ const OpenAPIChangelog = () => {
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
   const [resourceVersionTwo, setResourceVersionTwo] = useState();
 
-  const [diff, setDiff] = useState([]);
+  const [diff] = useFetchDiff({ resourceVersionOne, resourceVersionTwo, index });
   const [diffResourcesList, setDiffResourcesList] = useState(getDiffResourcesList(diff));
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
   const [filteredChangelog, setFilteredChangelog] = useState(changelog);
-
-  /* Fetch diff on selection of two Resources to compare */
-  useEffect(() => {
-    if (!resourceVersionOne || !resourceVersionTwo || !index.runId) return;
-    const fromAndToDiffString = getDiffRequestFormat(resourceVersionOne, resourceVersionTwo);
-
-    fetchOADiff(index.runId, fromAndToDiffString)
-      .then((response) => setDiff(response))
-      .catch((err) => console.error(err));
-  }, [resourceVersionOne, resourceVersionTwo, index.runId]);
 
   /* Update diffResourcesList on diff change */
   useEffect(() => {
