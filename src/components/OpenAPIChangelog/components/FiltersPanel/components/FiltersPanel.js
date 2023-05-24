@@ -54,10 +54,14 @@ const FiltersPanel = ({
   return (
     <Wrapper>
       <StyledSegmentedControl value={versionMode} onChange={setVersionMode}>
-        <SegmentedControlOption data-testid="all-versions-option" value={ALL_VERSIONS}>
+        <SegmentedControlOption data-testid="all-versions-option" value={ALL_VERSIONS} aria-controls={ALL_VERSIONS}>
           All Versions
         </SegmentedControlOption>
-        <SegmentedControlOption data-testid="compare-versions-option" value={COMPARE_VERSIONS}>
+        <SegmentedControlOption
+          data-testid="compare-versions-option"
+          value={COMPARE_VERSIONS}
+          aria-controls={COMPARE_VERSIONS}
+        >
           Compare Two Versions
         </SegmentedControlOption>
       </StyledSegmentedControl>

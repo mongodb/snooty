@@ -164,6 +164,16 @@ export const mockDiff = [
         changeCode: 'new-optional-request-parameter',
         backwardCompatible: true,
       },
+      {
+        change: 'this change should be hidden!',
+        changeCode: 'operation-id-changed',
+        backwardCompatible: true,
+      },
+      {
+        change: 'this change should be hidden!',
+        changeCode: 'operation-tag-changed',
+        backwardCompatible: false,
+      },
     ],
   },
   {

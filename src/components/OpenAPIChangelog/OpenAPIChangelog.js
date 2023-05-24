@@ -7,7 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import useChangelogData from '../../utils/use-changelog-data';
 import FiltersPanel from './components/FiltersPanel';
 import ChangeList from './components/ChangeList';
-import { mockDiff } from './data/mockData';
+import { useFetchDiff } from './utils/useFetchDiff';
 import { ALL_VERSIONS, getDownloadChangelogUrl } from './utils/constants';
 import getDiffResourcesList from './utils/getDiffResourcesList';
 
@@ -54,28 +54,31 @@ const DownloadButton = styled(Button)`
   min-width: 182px;
 `;
 
-const OpenAPIChangelog = ({ diff = mockDiff }) => {
+const OpenAPIChangelog = () => {
   const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
   const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId), [index]);
-  // TODO: Reminder: account for this on any diff fetch
-  if (resourceVersions.length) resourceVersions[0] += ' (latest)';
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
   const [resourceVersionTwo, setResourceVersionTwo] = useState();
 
-  // TODO: Fetch diff, getDiffResourcesList on changes to version selectors
-  const diffResourcesList = getDiffResourcesList(diff);
+  const [diff] = useFetchDiff({ resourceVersionOne, resourceVersionTwo, index });
+  const [diffResourcesList, setDiffResourcesList] = useState(getDiffResourcesList(diff));
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
   const [filteredChangelog, setFilteredChangelog] = useState(changelog);
 
-  /*  
-    Clear filters on version mode change.
-    Different Resources are available in either mode, not always comparable.
-  */
+  /* Update diffResourcesList on diff change */
+  useEffect(() => {
+    if (diff && diff.length) {
+      setDiffResourcesList(getDiffResourcesList(diff));
+    }
+  }, [diff]);
+
+  /*  Clear filters on version mode change.
+    Different Resources are available in either mode, not always comparable. */
   useEffect(() => {
     setSelectedResources([]);
   }, [versionMode]);
