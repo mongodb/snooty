@@ -35,17 +35,16 @@ const ChangeListUL = styled.ul`
   list-style-position: start;
 `;
 
-const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, changeType, versions }) => {
+const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, versions }) => {
   const metadata = useSiteMetadata();
   const { openapi_pages } = useSnootyMetadata();
-
   const resourceLinkUrl = getResourceLinkUrl(metadata, tag, operationId, openapi_pages);
+
   const allResourceChanges = changes || versions.map((version) => version.changes.map((change) => change)).flat();
   const publicResourceChanges = allResourceChanges.filter(
     (c) => c.changeCode !== 'operation-id-changed' || c.changeCode !== 'operation-tag-changed'
   );
-  // TODO: Removed third option below when Ciprian has re-added "changeType" to diff
-  const changeTypeBadge = changeTypeBadges[changeType || versions?.[0]?.changeType || 'release'];
+  const changeTypeBadge = versions?.[0]?.changeType ? changeTypeBadges[versions[0].changeType] : null;
 
   return (
     <Wrapper data-testid="resource-changes-block">

@@ -2,6 +2,7 @@ import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import * as realm from '../../src/utils/realm';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
 import { mockChangelog, mockDiff, mockIndex } from './data/OpenAPIChangelog';
 
@@ -64,16 +65,32 @@ useStaticQuery.mockImplementation(() => ({
 }));
 
 describe('OpenAPIChangelog tests', () => {
+  let mockFetchOADiff;
+
+  beforeEach(() => {
+    mockFetchOADiff = jest.spyOn(realm, 'fetchOADiff').mockImplementation(async (runId, fromAndToDiffString) => {
+      return mockDiff;
+    });
+  });
+
+  afterAll(() => {
+    mockFetchOADiff.mockClear();
+  });
+
   it('OpenAPIChangelog renders correctly', () => {
-    const tree = render(<OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />);
+    const tree = render(<OpenAPIChangelog />);
     expect(tree.asFragment()).toMatchSnapshot();
+  });
+
+  it('should show specRevision short hash', () => {
+    const { queryByText } = render(<OpenAPIChangelog />);
+
+    expect(queryByText(new RegExp(mockIndex.specRevisionShort, 'i'))).toBeInTheDocument();
   });
 
   describe('Version Mode segmented control tests', () => {
     it('Does not display diff options when the all versions option is selected', () => {
-      const { getByTestId, queryByLabelText } = render(
-        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
-      );
+      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog />);
 
       const allVersionsOption = getByTestId('all-versions-option');
 
@@ -86,9 +103,7 @@ describe('OpenAPIChangelog tests', () => {
     });
 
     it('Does display diff options when compares versions option is selected', () => {
-      const { getByTestId, queryByLabelText } = render(
-        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
-      );
+      const { getByTestId, queryByLabelText } = render(<OpenAPIChangelog />);
 
       const compareVersionsOption = getByTestId('compare-versions-option');
       const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
@@ -106,9 +121,7 @@ describe('OpenAPIChangelog tests', () => {
 
   describe('version compare comboboxes tests', () => {
     it('has different options from each other', () => {
-      const { getByTestId, getByLabelText, getAllByTestId } = render(
-        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
-      );
+      const { getByTestId, getByLabelText, getAllByTestId } = render(<OpenAPIChangelog />);
 
       // switch to compare versions on segment control
       const compareVersionsOption = getByTestId('compare-versions-option');
@@ -151,9 +164,7 @@ describe('OpenAPIChangelog tests', () => {
     });
 
     it('should show no changes of two unselected versions', () => {
-      const { getByTestId, queryAllByTestId } = render(
-        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
-      );
+      const { getByTestId, queryAllByTestId } = render(<OpenAPIChangelog />);
       // switch to compare versions on segment control
       const compareVersionsOption = getByTestId('compare-versions-option');
       const compareVersionsOptionButton = compareVersionsOption.firstElementChild;
@@ -163,10 +174,8 @@ describe('OpenAPIChangelog tests', () => {
       expect(queryAllByTestId('resource-changes-block')).toHaveLength(0);
     });
 
-    it('should show changes on user selection', () => {
-      const { getByTestId, getByLabelText, getAllByTestId, queryAllByTestId } = render(
-        <OpenAPIChangelog changelog={mockChangelog} diff={mockDiff} index={mockIndex} />
-      );
+    it('should show changes on user selection', async () => {
+      const { getByTestId, getByLabelText, getAllByTestId, findAllByTestId } = render(<OpenAPIChangelog />);
 
       // switch to compare versions on segment control
       const compareVersionsOption = getByTestId('compare-versions-option');
@@ -184,7 +193,7 @@ describe('OpenAPIChangelog tests', () => {
       // choose first option
       userEvent.click(resourceVersionTwoOptions[0]);
 
-      expect(queryAllByTestId('resource-changes-block')).toHaveLength(mockDiff.length);
+      expect(await findAllByTestId('resource-changes-block')).toHaveLength(mockDiff.length);
     });
   });
 });

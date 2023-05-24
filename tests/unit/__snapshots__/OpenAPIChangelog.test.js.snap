@@ -889,6 +889,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               tabindex="-1"
             >
               <button
+                aria-controls="ALL_VERSIONS"
                 aria-selected="true"
                 class="emotion-21"
                 id="segmented-control-1-0"
@@ -918,6 +919,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               tabindex="-1"
             >
               <button
+                aria-controls="COMPARE_VERSIONS"
                 aria-selected="false"
                 class="emotion-21"
                 id="segmented-control-1-1"

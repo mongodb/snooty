@@ -623,49 +623,20 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
 }
 
 .emotion-11 {
-  margin-top: 2px;
-}
-
-.emotion-13 {
-  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
-  border-radius: 5px;
-  height: 18px;
-  padding-left: 6px;
-  padding-right: 6px;
-  text-transform: uppercase;
-  border: 1px solid;
-  letter-spacing: 1px;
-  background-color: #E3FCF7;
-  border-color: #C0FAE6;
-  color: #00684A;
-}
-
-.emotion-14 {
   margin: 0;
   list-style-position: start;
 }
 
-.emotion-16 {
+.emotion-13 {
   margin-top: 12px;
   line-height: 28px;
 }
 
-.emotion-18 {
+.emotion-15 {
   position: relative;
 }
 
-.emotion-19 {
+.emotion-16 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -678,33 +649,8 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
   margin-right: 5px;
 }
 
-.emotion-21 {
+.emotion-18 {
   color: #DB3030;
-}
-
-.emotion-35 {
-  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
-  border-radius: 5px;
-  height: 18px;
-  padding-left: 6px;
-  padding-right: 6px;
-  text-transform: uppercase;
-  border: 1px solid;
-  letter-spacing: 1px;
-  background-color: #FFEAE5;
-  border-color: #FFCDC7;
-  color: #970606;
 }
 
 <div
@@ -732,24 +678,19 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
             </h6>
           </span>
         </a>
-        <div
-          class="emotion-11 emotion-12 emotion-13"
-        >
-          Updated
-        </div>
       </div>
       <ul
-        class="emotion-14 emotion-15"
+        class="emotion-11 emotion-12"
       >
         <li
-          class="emotion-16 emotion-17"
+          class="emotion-13 emotion-14"
         >
           <div
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-15 emotion-16 emotion-17"
           >
             <svg
               aria-label="Important With Circle Icon"
-              class="emotion-21"
+              class="emotion-18"
               fill="none"
               height="16"
               role="img"
@@ -768,9 +709,40 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           Removed the non-success response with the status '400'.
         </li>
         <li
-          class="emotion-16 emotion-17"
+          class="emotion-13 emotion-14"
         >
           Added the new optional 'query' request parameter 'envelope'.
+        </li>
+        <li
+          class="emotion-13 emotion-14"
+        >
+          This change should be hidden!
+        </li>
+        <li
+          class="emotion-13 emotion-14"
+        >
+          <div
+            class="emotion-15 emotion-16 emotion-17"
+          >
+            <svg
+              aria-label="Important With Circle Icon"
+              class="emotion-18"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+          This change should be hidden!
         </li>
       </ul>
     </div>
@@ -796,24 +768,19 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
             </h6>
           </span>
         </a>
-        <div
-          class="emotion-11 emotion-12 emotion-35"
-        >
-          Removed
-        </div>
       </div>
       <ul
-        class="emotion-14 emotion-15"
+        class="emotion-11 emotion-12"
       >
         <li
-          class="emotion-16 emotion-17"
+          class="emotion-13 emotion-14"
         >
           <div
-            class="emotion-18 emotion-19 emotion-20"
+            class="emotion-15 emotion-16 emotion-17"
           >
             <svg
               aria-label="Important With Circle Icon"
-              class="emotion-21"
+              class="emotion-18"
               fill="none"
               height="16"
               role="img"
