@@ -8,7 +8,6 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
   const [diff, setDiff] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
     if (!resourceVersionOne || !resourceVersionTwo || !index.runId) return;
 
     const fromAndToDiffLabel = getDiffRequestFormat(resourceVersionOne, resourceVersionTwo);
@@ -18,6 +17,7 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
       setDiff(mostRecentDiffData);
       setIsLoading(false);
     } else {
+      setIsLoading(true);
       fetchOADiff(index.runId, fromAndToDiffLabel)
         .then((response) => {
           setDiff(response);
