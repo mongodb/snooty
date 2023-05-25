@@ -64,10 +64,6 @@ const StyledLoadingSkeleton = styled.div`
   /* inner div padding */
   box-sizing: border-box;
   margin-bottom: 25px;
-
-  ul > span > span {
-    margin: 10px 0;
-  }
 `;
 
 const OpenAPIChangelog = () => {
@@ -164,7 +160,7 @@ const OpenAPIChangelog = () => {
             <StyledLoadingSkeleton key={index}>
               <Skeleton borderRadius="12px" width="50%" height="25px" />
               <ul>
-                <Skeleton count={4} borderRadius="12px" height="15px" />
+                <Skeleton count={4} borderRadius="12px" height="15px" style={{ margin: '10px 0' }} />
               </ul>
             </StyledLoadingSkeleton>
           ))}
