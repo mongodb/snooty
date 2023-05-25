@@ -64,7 +64,7 @@ const OpenAPIChangelog = () => {
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
   const [resourceVersionTwo, setResourceVersionTwo] = useState();
 
-  const [diff] = useFetchDiff({ resourceVersionOne, resourceVersionTwo, index });
+  const [diff] = useFetchDiff(resourceVersionOne, resourceVersionTwo);
   const [diffResourcesList, setDiffResourcesList] = useState(getDiffResourcesList(diff));
 
   const [filteredDiff, setFilteredDiff] = useState(diff);

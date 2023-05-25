@@ -86,11 +86,10 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     const indexText = await indexResp.text();
     const index = yaml.safeLoad(indexText, 'utf8');
 
-    const { runId } = index;
+    const { runId, versions } = index;
 
     if (!runId || typeof runId !== 'string')
-      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!'); // better error handling obvi
-    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
+      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!');
 
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
     const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.yaml`);
@@ -104,10 +103,21 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     );
     const changelogResourcesList = Array.from(resourcesListSet);
 
+    /* Fetch most recent Resource Versions' diff */
+    const mostRecentResourceVersions = versions.slice(-2);
+    const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
+    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.yaml`);
+    const mostRecentDiffText = await mostRecentDiffResp.text();
+    const mostRecentDiffData = yaml.safeLoad(mostRecentDiffText, 'utf8');
+
     const changelogData = {
       index,
       changelog,
       changelogResourcesList,
+      mostRecentDiff: {
+        mostRecentDiffLabel,
+        mostRecentDiffData,
+      },
     };
 
     /* Create Node for useStaticQuery with all Changelog data */
@@ -125,7 +135,7 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     console.error('Error while fetching OpenAPI Changelog data from S3');
     console.error(e);
 
-    /* Create empty Node for useStaticQuery to ensure build */
+    /* Create empty Node for useStaticQuery to ensure successful build */
     // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
     createNode({
       children: [],
