@@ -3,24 +3,32 @@ import { fetchOADiff } from '../../../utils/realm';
 import useChangelogData from '../../../utils/use-changelog-data';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
 
-export const useFetchDiff = (resourceVersionOne, resourceVersionTwo) => {
+export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading) => {
   const { index = {}, mostRecentDiff = {} } = useChangelogData();
   const [diff, setDiff] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (!resourceVersionOne || !resourceVersionTwo || !index.runId) return;
 
     const fromAndToDiffLabel = getDiffRequestFormat(resourceVersionOne, resourceVersionTwo);
-    const { mostRecentDiffData, mostRecentDiffLabel } = mostRecentDiff;
+    const { mostRecentDiffLabel, mostRecentDiffData } = mostRecentDiff;
 
     if (mostRecentDiffLabel === fromAndToDiffLabel && Array.isArray(mostRecentDiffData)) {
       setDiff(mostRecentDiffData);
+      setIsLoading(false);
     } else {
       fetchOADiff(index.runId, fromAndToDiffLabel)
-        .then((response) => setDiff(response))
-        .catch((err) => console.error(err));
+        .then((response) => {
+          setDiff(response);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setIsLoading(false);
+        });
     }
-  }, [resourceVersionOne, resourceVersionTwo, index, mostRecentDiff]);
+  }, [resourceVersionOne, resourceVersionTwo, index, setIsLoading, mostRecentDiff]);
 
   return [diff, setDiff];
 };
