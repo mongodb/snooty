@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchOADiff } from '../../../utils/realm';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
 
-export const useFetchDiff = ({ resourceVersionOne, resourceVersionTwo, index, setIsLoading }) => {
+export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, index, setIsLoading) => {
   const [diff, setDiff] = useState([]);
 
   useEffect(() => {
