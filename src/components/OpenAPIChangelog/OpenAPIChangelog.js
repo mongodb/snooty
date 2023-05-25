@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body, H2 } from '@leafygreen-ui/typography';
@@ -54,6 +55,21 @@ const DownloadButton = styled(Button)`
   min-width: 182px;
 `;
 
+const SkeletonWrapper = styled.div`
+  width: 100%;
+  margin-top: 32px;
+`;
+
+const StyledLoadingSkeleton = styled.div`
+  /* inner div padding */
+  box-sizing: border-box;
+  margin-bottom: 25px;
+
+  ul > span > span {
+    margin: 10px 0;
+  }
+`;
+
 const OpenAPIChangelog = () => {
   const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
@@ -63,8 +79,9 @@ const OpenAPIChangelog = () => {
   const [selectedResources, setSelectedResources] = useState([]);
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
   const [resourceVersionTwo, setResourceVersionTwo] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [diff] = useFetchDiff({ resourceVersionOne, resourceVersionTwo, index });
+  const [diff] = useFetchDiff({ resourceVersionOne, resourceVersionTwo, index, setIsLoading });
   const [diffResourcesList, setDiffResourcesList] = useState(getDiffResourcesList(diff));
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
@@ -140,6 +157,18 @@ const OpenAPIChangelog = () => {
           changes={versionMode === ALL_VERSIONS ? filteredChangelog : filteredDiff}
           selectedResources={selectedResources}
         />
+      )}
+      {isLoading && (
+        <SkeletonWrapper>
+          {[...Array(3)].map((_, index) => (
+            <StyledLoadingSkeleton key={index}>
+              <Skeleton borderRadius="12px" width="50%" height="25px" />
+              <ul>
+                <Skeleton count={4} borderRadius="12px" height="15px" />
+              </ul>
+            </StyledLoadingSkeleton>
+          ))}
+        </SkeletonWrapper>
       )}
     </ChangelogPage>
   );
