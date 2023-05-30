@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body, H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
+import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { theme } from '../../theme/docsTheme';
 import useChangelogData from '../../utils/use-changelog-data';
 import FiltersPanel from './components/FiltersPanel';
@@ -76,8 +78,9 @@ const OpenAPIChangelog = () => {
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
   const [resourceVersionTwo, setResourceVersionTwo] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
 
-  const [diff] = useFetchDiff(resourceVersionOne, resourceVersionTwo, setIsLoading);
+  const [diff] = useFetchDiff(resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen);
   const [diffResourcesList, setDiffResourcesList] = useState(getDiffResourcesList(diff));
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
@@ -166,6 +169,19 @@ const OpenAPIChangelog = () => {
           ))}
         </SkeletonWrapper>
       )}
+      <ToastProvider
+        portalClassName={css`
+          z-index: 3;
+        `}
+      >
+        <Toast
+          title="We've encountered an error fetching this data"
+          description="Please try again at a later time."
+          variant={Variant.Warning}
+          open={toastOpen}
+          onClose={() => setToastOpen(false)}
+        />
+      </ToastProvider>
     </ChangelogPage>
   );
 };
