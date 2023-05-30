@@ -1,0 +1,338 @@
+// different types of references
+const PAGES = [];
+
+// in-memory object with key/value = filename/document
+let RESOLVED_REF_DOC_MAPPING = {};
+
+const assets = new Map();
+
+let db;
+
+let isAssociatedProduct = false;
+const associatedReposInfo = {};
+
+// Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
+// or data are found, the node will be null
+const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  // fetch associated child products
+  const productList = manifestMetadata?.associated_products || [];
+  await Promise.all(
+    productList.map(async (product) => {
+      associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+    })
+  );
+  // check if product is associated child product
+  try {
+    const umbrellaProduct = await db.stitchInterface.getMetadata({
+      'associated_products.name': siteMetadata.project,
+    });
+    isAssociatedProduct = !!umbrellaProduct;
+  } catch (e) {
+    console.log('No umbrella product found. Not an associated product.');
+    isAssociatedProduct = false;
+  }
+
+  // get remote metadata for updated ToC in Atlas
+  try {
+    const filter = {
+      project: manifestMetadata.project,
+      branch: manifestMetadata.branch,
+    };
+    if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
+      filter['is_merged_toc'] = true;
+    }
+    const findOptions = {
+      sort: { build_id: -1 },
+    };
+    const remoteMetadata = await db.stitchInterface.getMetadata(filter, findOptions);
+
+    createNode({
+      children: [],
+      id: createNodeId('remoteMetadata'),
+      internal: {
+        contentDigest: createContentDigest(remoteMetadata),
+        type: 'RemoteMetadata',
+      },
+      parent: null,
+      remoteMetadata: remoteMetadata,
+    });
+  } catch (e) {
+    console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
+    console.error(e);
+  }
+};
+
+/* Creates node for ChangelogData, used only for OpenAPI Changelog in cloud-docs. */
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
+
+  try {
+    /* Fetch OpenAPI Changelog metadata (index.yaml) */
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
+    const indexText = await indexResp.text();
+    const index = yaml.safeLoad(indexText, 'utf8');
+
+    const { runId } = index;
+
+    if (!runId || typeof runId !== 'string')
+      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!'); // better error handling obvi
+    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
+
+    /* Using metadata runId, fetch OpenAPI Changelog full change list */
+    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.yaml`);
+    const changelogText = await changelogResp.text();
+    const changelog = yaml.safeLoad(changelogText, 'utf8');
+
+    /* Aggregate all Resources in changelog for frontend filter */
+    const resourcesListSet = new Set();
+    changelog.forEach((release) =>
+      release.paths.forEach(({ httpMethod, path }) => resourcesListSet.add(`${httpMethod} ${path}`))
+    );
+    const changelogResourcesList = Array.from(resourcesListSet);
+
+    const changelogData = {
+      index,
+      changelog,
+      changelogResourcesList,
+    };
+
+    /* Create Node for useStaticQuery with all Changelog data */
+    createNode({
+      children: [],
+      id: createNodeId('changelogData'),
+      internal: {
+        contentDigest: createContentDigest(changelogData),
+        type: 'ChangelogData',
+      },
+      parent: null,
+      changelogData: changelogData,
+    });
+  } catch (e) {
+    console.error('Error while fetching OpenAPI Changelog data from S3');
+    console.error(e);
+
+    /* Create empty Node for useStaticQuery to ensure build */
+    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
+    createNode({
+      children: [],
+      id: createNodeId('changelogData'),
+      internal: {
+        contentDigest: createContentDigest({}),
+        type: 'ChangelogData',
+      },
+      parent: null,
+      changelogData: {},
+    });
+  }
+};
+// exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
+let hasOpenAPIChangelog = false;
+const { createNode } = actions;
+
+// setup and validate env variables
+// const envResults = validateEnvVariables(manifestMetadata);
+// if (envResults.error) {
+// throw Error(envResults.message);
+// }
+
+// wait to connect to stitch
+
+// if (siteMetadata.manifestPath) {
+// console.log('Loading documents from manifest');
+// db = manifestDocumentDatabase;
+// } else {
+// console.log('Loading documents from stitch');
+// db = stitchDocumentDatabase;
+// }
+
+// await db.connect();
+
+// const documents = await db.getDocuments();
+
+// if (documents.length === 0) {
+// console.error(
+// 'Snooty could not find AST entries for the',
+// siteMetadata.parserBranch,
+// 'branch of',
+// siteMetadata.project,
+// 'within',
+// siteMetadata.database
+// );
+// process.exit(1);
+// }
+// const pageIdPrefix = constructPageIdPrefix(siteMetadata);
+// documents.forEach((doc) => {
+// const { page_id, ...rest } = doc;
+// RESOLVED_REF_DOC_MAPPING[page_id.replace(`${pageIdPrefix}/`, '')] = rest;
+// });
+
+// Identify page documents and parse each document for images
+// Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
+// const pageNode = getNestedValue(['ast', 'children'], val);
+// const filename = getNestedValue(['filename'], val) || '';
+
+// // Parse each document before pages are created via createPage
+// // to remove all positions fields as it is only used in the parser for logging
+// removeNestedValue('position', 'children', [val?.ast]);
+
+// if (pageNode) {
+// val.static_assets.forEach((asset) => {
+// const checksum = asset.checksum;
+// if (assets.has(checksum)) {
+// assets.set(checksum, new Set([...assets.get(checksum), asset.key]));
+// } else {
+// assets.set(checksum, new Set([asset.key]));
+// }
+// });
+// }
+
+// if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
+// PAGES.push(key);
+// }
+// if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
+// });
+
+// // Get all MongoDB products for the sidenav
+// const products = await db.fetchAllProducts(siteMetadata.database);
+// products.forEach((product) => {
+// const url = baseUrl(product.baseUrl + product.slug);
+
+// createNode({
+// children: [],
+// id: createNodeId(`Product-${product.title}`),
+// internal: {
+// contentDigest: createContentDigest(product),
+// type: 'Product',
+// },
+// parent: null,
+// title: product.title,
+// url,
+// });
+// });
+
+// await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+// if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+// await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
+
+// await saveAssetFiles(assets, db);
+// const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
+
+// const { parentPaths, slugToTitle } = metadataMinusStatic;
+// if (parentPaths) {
+// transformBreadcrumbs(parentPaths, slugToTitle);
+// }
+
+// //Save files in the static_files field of metadata document, including intersphinx inventories
+// if (staticFiles) {
+// await saveStaticFiles(staticFiles);
+// }
+
+// createNode({
+// children: [],
+// id: createNodeId('metadata'),
+// internal: {
+// contentDigest: createContentDigest(metadataMinusStatic),
+// type: 'SnootyMetadata',
+// },
+// parent: null,
+// metadata: metadataMinusStatic,
+// });
+// };
+
+/*
+exports.createPages = async ({ actions }) => {
+  const { createPage } = actions;
+
+  let repoBranches = null;
+  try {
+    const repoInfo = await db.stitchInterface.fetchRepoBranches();
+    let errMsg;
+
+    if (!repoInfo) {
+      errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+    }
+
+    // We should expect the number of branches for a docs repo to be 1 or more.
+    if (!repoInfo.branches?.length) {
+      errMsg = `No version information found for ${siteMetadata.project}`;
+    }
+
+    if (errMsg) {
+      throw errMsg;
+    }
+
+    // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+    // dotcom environments seem to be consistent.
+    let envKey = siteMetadata.snootyEnv;
+    if (!envKey || envKey === 'development') {
+      envKey = 'dotcomprd';
+    } else if (envKey === 'production') {
+      envKey = 'prd';
+    } else if (envKey === 'staging') {
+      envKey = 'stg';
+    }
+
+    // We're overfetching data here. We only need branches and prefix at the least
+    repoBranches = {
+      branches: repoInfo.branches,
+      siteBasePrefix: repoInfo.prefix[envKey],
+    };
+
+    if (repoInfo.groups?.length > 0) {
+      repoBranches.groups = repoInfo.groups;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+
+  return new Promise((resolve, reject) => {
+    PAGES.forEach((page) => {
+      const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
+      const slug = getPageSlug(page);
+
+      // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
+      const isFullBuild =
+        siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
+      const mainComponentRelativePath = `./src/components/DocumentBody${isFullBuild ? '' : 'Preview'}.js`;
+
+      if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
+        createPage({
+          path: assertTrailingSlash(slug),
+          component: path.resolve(__dirname, mainComponentRelativePath),
+          context: {
+            slug,
+            repoBranches,
+            associatedReposInfo,
+            isAssociatedProduct,
+            template: pageNodes?.options?.template,
+            page: pageNodes,
+          },
+        });
+      }
+    });
+
+    resolve();
+  });
+};
+*/
+ 
+// Remove type inference, as our schema is too ambiguous for this to be useful.
+// https://www.gatsbyjs.com/docs/scaling-issues/#switch-off-type-inference-for-sitepagecontext
+// exports.createSchemaCustomization = ({ actions }) => {
+// // TODO add other stuff they put in context.
+// actions.createTypes(`
+// type SitePage implements Node @dontInfer {
+// path: String!
+// }
+
+// type RemoteMetadata implements Node @dontInfer {
+// remoteMetadata: JSON
+// }
+
+// type ChangelogData implements Node @dontInfer {
+// changelogData: JSON
+// }
+// `);
+// };
+

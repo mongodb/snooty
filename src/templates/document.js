@@ -56,12 +56,14 @@ const Document = ({ children, pageContext: { slug, page, repoBranches, isAssocia
 
 Document.propTypes = {
   pageContext: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
+  data: PropTypes.shape({
     page: PropTypes.shape({
       children: PropTypes.array,
       options: PropTypes.object,
     }).isRequired,
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
+  })
 };
 
 export default Document;

@@ -10,15 +10,16 @@ const isFullBuild =
   siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
 const layoutComponentRelativePath = `./src/layouts/${isFullBuild ? 'index' : `preview-layout`}.js`;
 
+console.log({siteMetadata})
 module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
-    {
-      resolve: 'gatsby-plugin-layout',
-      options: {
-        component: require.resolve(layoutComponentRelativePath),
-      },
-    },
+    // {
+      // resolve: 'gatsby-plugin-layout',
+      // options: {
+        // component: require.resolve(layoutComponentRelativePath),
+      // },
+    // },
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-canonical-urls',

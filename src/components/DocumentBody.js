@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { graphql } from "gatsby"
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
@@ -8,13 +9,9 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import Widgets from './Widgets';
-import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
-import Meta from './Meta';
-import Twitter from './Twitter';
-import DocsLandingSD from './StructuredData/DocsLandingSD';
-import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
+import Layout from "../layouts"
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -68,8 +65,13 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 const DocumentBody = (props) => {
   const {
     location,
-    pageContext: { page, slug, template },
+    pageContext: { slug },
+    data,
   } = props;
+  const page = data.page.ast
+  const template = page?.options?.template
+  props.pageContext.page = page
+
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
@@ -89,7 +91,15 @@ const DocumentBody = (props) => {
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   return (
-    <>
+    <Layout
+    pageContext={{
+      page,
+        slug,
+        template,
+        publishedBranches: getNestedValue(['publishedBranches'], metadata),
+        ...props.pageContext
+    }}
+    >
       <Widgets
         location={location}
         pageOptions={page?.options}
@@ -111,50 +121,23 @@ const DocumentBody = (props) => {
           <UnifiedFooter hideLocale={true} />
         </div>
       )}
-    </>
+    </Layout>
   );
 };
 
 DocumentBody.propTypes = {
   location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
-    page: PropTypes.shape({
-      children: PropTypes.array,
-    }).isRequired,
     slug: PropTypes.string.isRequired,
   }),
 };
 
 export default DocumentBody;
 
-export const Head = ({ pageContext }) => {
-  const { slug, page, template } = pageContext;
-  const pageNodes = getNestedValue(['children'], page) || [];
-  const meta = pageNodes.filter((c) => {
-    const lookup = c.type === 'directive' ? c.name : c.type;
-    return lookup === 'meta';
-  });
-
-  const twitter = pageNodes.filter((c) => {
-    const lookup = c.type === 'directive' ? c.name : c.type;
-    return lookup === 'twitter';
-  });
-  const metadata = useSnootyMetadata();
-
-  const lookup = slug === '/' ? 'index' : slug;
-  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
-  const siteTitle = getNestedValue(['title'], metadata) || '';
-
-  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
-  const needsBreadcrumbs = template === 'document' || template === undefined;
-
-  return (
-    <>
-      <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
-      {meta.length > 0 && meta.map((c) => <Meta {...c} />)}
-      {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
-      {isDocsLandingHomepage && <DocsLandingSD />}
-      {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
-    </>
-  );
-};
+export const query = graphql`
+  query($id: String) {
+    page(id: {eq: $id}) {
+      ast
+    }
+  }
+`
