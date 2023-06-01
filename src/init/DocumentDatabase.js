@@ -48,6 +48,14 @@ class StitchInterface {
       findOptions,
     ]);
   }
+
+  async fetchDocument(database, collectionName, query) {
+    return this.stitchClient.callFunction('fetchDocument', [database, collectionName, query]);
+  }
+
+  async updateOAChangelogMetadata(metadata) {
+    return this.stitchClient.callFunction('updateOAChangelogMetadata', [metadata]);
+  }
 }
 
 class ManifestDocumentDatabase {
@@ -119,6 +127,14 @@ class StitchDocumentDatabase {
 
   async fetchAllProducts() {
     return this.stitchInterface.fetchAllProducts();
+  }
+
+  async fetchDocument(database, collectionName, query) {
+    return this.stitchInterface.fetchDocument(database, collectionName, query);
+  }
+
+  async updateOAChangelogMetadata(metadata) {
+    return this.stitchInterface.updateOAChangelogMetadata(metadata);
   }
 }
 

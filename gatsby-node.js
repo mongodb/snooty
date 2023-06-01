@@ -132,12 +132,17 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     try {
       const { changelog, changelogResourcesList, mostRecentDiff } = await fetchChangelogData(runId, versions);
       changelogData = { ...changelogData, changelog, changelogResourcesList, mostRecentDiff };
+      await db.stitchInterface.updateOAChangelogMetadata(index);
     } catch (error) {
-      // TODO: Fetch runId & index from Atlas
-      const oldIndex = { runId: 'lalala', versions: [] };
-      const { runId: oldRunId, versions: oldVersions } = oldIndex;
-      const oldChangelogData = fetchChangelogData(oldRunId, oldVersions);
-      changelogData = { oldIndex, ...oldChangelogData };
+      /* If any error occurs, fetch last successful metadata and build changelog node */
+      const lastSuccessfulIndex = await db.stitchInterface.fetchDocument(
+        'openapi_changelog',
+        'atlas_admin_metadata',
+        {}
+      );
+      const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
+      const oldChangelogData = fetchChangelogData(lastRunId, lastVersions);
+      changelogData = { index: lastSuccessfulIndex, ...oldChangelogData };
     }
 
     /* Create Node for useStaticQuery with all Changelog data */
