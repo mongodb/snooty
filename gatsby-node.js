@@ -76,21 +76,10 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-/* Creates node for ChangelogData, used only for OpenAPI Changelog in cloud-docs. */
-const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
-  const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
+const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
 
+const fetchChangelogData = async (runId, versions) => {
   try {
-    /* Fetch OpenAPI Changelog metadata (index.yaml) */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
-    const indexText = await indexResp.text();
-    const index = yaml.safeLoad(indexText, 'utf8');
-
-    const { runId, versions } = index;
-
-    if (!runId || typeof runId !== 'string')
-      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!');
-
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
     const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.yaml`);
     const changelogText = await changelogResp.text();
@@ -110,15 +99,46 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     const mostRecentDiffText = await mostRecentDiffResp.text();
     const mostRecentDiffData = yaml.safeLoad(mostRecentDiffText, 'utf8');
 
-    const changelogData = {
-      index,
+    return {
       changelog,
       changelogResourcesList,
       mostRecentDiff: {
-        mostRecentDiffLabel,
         mostRecentDiffData,
+        mostRecentDiffLabel,
       },
     };
+  } catch (error) {
+    console.warn('Changelog error: Most recent runId not successful. Using last successful runId to build Changelog.');
+    throw new Error(error);
+  }
+};
+
+/* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  try {
+    /* Fetch OpenAPI Changelog metadata */
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
+    const indexText = await indexResp.text();
+    const index = yaml.safeLoad(indexText, 'utf8');
+
+    const { runId, versions } = index;
+
+    if (!runId || typeof runId !== 'string')
+      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!');
+
+    let changelogData = {
+      index,
+    };
+    try {
+      const { changelog, changelogResourcesList, mostRecentDiff } = await fetchChangelogData(runId, versions);
+      changelogData = { ...changelogData, changelog, changelogResourcesList, mostRecentDiff };
+    } catch (error) {
+      // TODO: Fetch runId & index from Atlas
+      const oldIndex = { runId: 'lalala', versions: [] };
+      const { runId: oldRunId, versions: oldVersions } = oldIndex;
+      const oldChangelogData = fetchChangelogData(oldRunId, oldVersions);
+      changelogData = { oldIndex, ...oldChangelogData };
+    }
 
     /* Create Node for useStaticQuery with all Changelog data */
     createNode({
@@ -136,7 +156,6 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     console.error(e);
 
     /* Create empty Node for useStaticQuery to ensure successful build */
-    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
     createNode({
       children: [],
       id: createNodeId('changelogData'),
