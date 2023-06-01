@@ -89,6 +89,7 @@ const OpenAPIChangelog = () => {
   /* Update diffResourcesList on diff change */
   useEffect(() => {
     if (diff && diff.length) {
+      setSelectedResources([]);
       setDiffResourcesList(getDiffResourcesList(diff));
     }
   }, [diff]);
