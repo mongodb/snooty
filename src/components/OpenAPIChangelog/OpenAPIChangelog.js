@@ -151,7 +151,7 @@ const OpenAPIChangelog = () => {
         setResourceVersionOne={setResourceVersionOne}
         setResourceVersionTwo={setResourceVersionTwo}
       />
-      {(versionMode === ALL_VERSIONS || (resourceVersionOne && resourceVersionTwo)) && (
+      {!isLoading && (versionMode === ALL_VERSIONS || (resourceVersionOne && resourceVersionTwo)) && (
         <ChangeList
           versionMode={versionMode}
           changes={versionMode === ALL_VERSIONS ? filteredChangelog : filteredDiff}
