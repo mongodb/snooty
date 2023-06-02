@@ -103,8 +103,8 @@ const fetchChangelogData = async (runId, versions) => {
       changelog,
       changelogResourcesList,
       mostRecentDiff: {
-        mostRecentDiffData,
         mostRecentDiffLabel,
+        mostRecentDiffData,
       },
     };
   } catch (error) {
@@ -130,8 +130,8 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
       index,
     };
     try {
-      const { changelog, changelogResourcesList, mostRecentDiff } = await fetchChangelogData(runId, versions);
-      changelogData = { ...changelogData, changelog, changelogResourcesList, mostRecentDiff };
+      const receivedChangelogData = await fetchChangelogData(runId, versions);
+      changelogData = { ...changelogData, ...receivedChangelogData };
       await db.stitchInterface.updateOAChangelogMetadata(index);
     } catch (error) {
       /* If any error occurs, fetch last successful metadata and build changelog node */
@@ -141,8 +141,8 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
         {}
       );
       const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
-      const oldChangelogData = fetchChangelogData(lastRunId, lastVersions);
-      changelogData = { index: lastSuccessfulIndex, ...oldChangelogData };
+      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions);
+      changelogData = { index: lastSuccessfulIndex, ...receivedChangelogData };
     }
 
     /* Create Node for useStaticQuery with all Changelog data */
