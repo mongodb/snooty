@@ -109,7 +109,7 @@ const fetchChangelogData = async (runId, versions) => {
     };
   } catch (error) {
     console.warn('Changelog error: Most recent runId not successful. Using last successful runId to build Changelog.');
-    throw new Error(error);
+    throw error;
   }
 };
 
