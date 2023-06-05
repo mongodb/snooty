@@ -21,6 +21,7 @@ const selectStyle = css`
 
 const PROPERTY_NAME_MAPPING = {
   'atlas-open-service-broker': 'MongoDB Atlas Open Service Broker on Kubernetes',
+  'atlas-cli': 'MongoDB Atlas CLI'
   'bi-connector': 'MongoDB Connector for BI',
   charts: 'MongoDB Charts',
   cloud: 'MongoDB Atlas',
