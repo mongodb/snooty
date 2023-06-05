@@ -81,6 +81,7 @@ const FiltersPanel = ({
           value={selectedResources}
           onChange={setSelectedResources}
           popoverZIndex={3}
+          searchEmptyMessage="To see results, select two versions to compare"
           multiselect
         >
           {resources.map((version) => (
