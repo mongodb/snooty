@@ -130,6 +130,7 @@
     "sanitize-html": "^2.2.0",
     "shell-quote": "^1.7.3",
     "stream-browserify": "^3.0.0",
+    "stream-json": "^1.8.0",
     "styled-components": "^5.3.6",
     "theme-ui": "^0.15.4",
     "underscore": "^1.12.1",

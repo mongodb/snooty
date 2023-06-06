@@ -1,5 +1,9 @@
-const yaml = require('js-yaml');
+// const yaml = require('js-yaml');
 const path = require('path');
+const util = require(`util`);
+const stream = require('stream');
+const { promisify } = require('util');
+const fs = require('fs').promises;
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { baseUrl } = require('./src/utils/base-url');
 const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
@@ -11,7 +15,23 @@ const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
+const { parser } = require(`stream-json/jsonl/Parser`);
+const fastq = require(`fastq`)
+
+const decode = parser();
+
+// Create the transformer
+const logTransform = new stream.Transform({
+  readableObjectMode: true,
+  writableObjectMode: true,
+  transform(chunk, encoding, callback) {
+    console.log(util.inspect(chunk.toString().slice(-200), { depth: null, colors: true }));
+    this.push(chunk);
+    callback();
+  },
+});
 
 // type Page = {
 // id: string,
@@ -48,63 +68,153 @@ exports.createSchemaCustomization = async ({ actions }) => {
   createTypes(typeDefs);
 };
 
+let pageCount = 0;
+const fileWritePromises = []
+const saveFile = async (file, data) => {
+  await fs.mkdir(path.join('static', path.dirname(file)), {
+    recursive: true,
+  });
+  await fs.writeFile(path.join('static', file), data, 'binary');
+  console.log(`wrote asset`, file)
+};
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
   const { createNode } = actions;
   const lastFetched = await cache.get(`lastFetched`);
   console.log({ lastFetched });
+  const httpStream = got.stream(`http://localhost:3000/projects/docs/DOCS-16126-5.0.18-release-notes/documents`);
+  try {
+    decode.on(`data`, async (_entry) => {
+      const entry = _entry.value;
+      // if (![`page`, `metadata`, `timestamp`].includes(entry.type)) {
+        // console.log(entry);
+      // }
 
-  lastFetched ? console.log(`fetching only changed pages`) : console.log(`fetching all pages`);
-  let response;
-  console.time(`fetch updates`);
+      if (entry.type === `timestamp`) {
+        cache.set(`lastFetched`, entry.data);
+      }
+
+      if (entry.type === `asset`) {
+        console.log(`asset`, entry.data.filenames)
+        entry.data.filenames.forEach(filePath => {
+          fileWritePromises.push(saveFile(filePath, Buffer.from(entry.data.assetData, `base64`)))
+        })
+      }
+
+      if (entry.type === `metadata`) {
+        // Create metadata node.
+        const { static_files: staticFiles, ...metadataMinusStatic } = entry.data;
+
+        const { parentPaths, slugToTitle } = metadataMinusStatic;
+        if (parentPaths) {
+          transformBreadcrumbs(parentPaths, slugToTitle);
+        }
+
+        // Save files in the static_files field of metadata document, including intersphinx inventories.
+        if (staticFiles) {
+          await saveStaticFiles(staticFiles);
+        }
+
+        createNode({
+          children: [],
+          id: createNodeId('metadata'),
+          internal: {
+            contentDigest: createContentDigest(metadataMinusStatic),
+            type: 'SnootyMetadata',
+          },
+          parent: null,
+          metadata: metadataMinusStatic,
+        });
+      }
+
+      // Pages
+      if (entry.type === `page`) {
+        pageCount += 1;
+        if (pageCount % 100 === 0) {
+          console.log({ pageCount });
+        }
+        const { source, ...page } = entry.data;
+        // console.log({page})
+        page.id = createNodeId(page.page_id);
+        page.internal = {
+          type: `Page`,
+          contentDigest: createContentDigest(page),
+        };
+
+        createNode(page);
+      }
+    });
+
+    console.time(`source updates`);
+    await pipeline(httpStream, decode);
+    console.timeEnd(`source updates`);
+
+    // Wait for HTTP connection to close.
+  } catch (error) {
+    console.log(`stream-changes error`, { error });
+    // if (error.code === `ECONNRESET`) {
+      // // Ignore and just try calling again.
+    // } else {
+      throw error;
+    // }
+  }
+
+  // Wait for all assets to be written.
+  await Promise.all(fileWritePromises)
+
+  // lastFetched ? console.log(`fetching only changed pages`) : console.log(`fetching all pages`);
+  // let response;
   // if (!lastFetched) {
-  response = await got(
-    `http://localhost:3000/projects/docs/DOCS-16126-5.0.18-release-notes/documents/updated/1684249414358`
-  ).json();
+  // response = await got(
+  // `http://localhost:3000/projects/docs/DOCS-16126-5.0.18-release-notes/documents/updated/1684249414358`
+  // ).json();
+  // const writeStream = fs.createWriteStream(`/tmp/data.jsonl`)
+
   // TODO restore
   // } else {
   // response = await got(
   // `http://localhost:3000/docs/updated/${lastFetched}`
   // ).json();
   // }
-  console.timeEnd(`fetch updates`);
-  console.log(response);
-  await cache.set(`lastFetched`, response.timestamp);
+  // console.timeEnd(`fetch updates`);
+  // console.log(response);
 
-  // Create metadata node.
-  const { static_files: staticFiles, ...metadataMinusStatic } = response.data.metadata[0];
+  if (false) {
+    // Create metadata node.
+    const { static_files: staticFiles, ...metadataMinusStatic } = response.data.metadata[0];
 
-  const { parentPaths, slugToTitle } = metadataMinusStatic;
-  if (parentPaths) {
-    transformBreadcrumbs(parentPaths, slugToTitle);
+    const { parentPaths, slugToTitle } = metadataMinusStatic;
+    if (parentPaths) {
+      transformBreadcrumbs(parentPaths, slugToTitle);
+    }
+
+    // Save files in the static_files field of metadata document, including intersphinx inventories.
+    if (staticFiles) {
+      await saveStaticFiles(staticFiles);
+    }
+
+    createNode({
+      children: [],
+      id: createNodeId('metadata'),
+      internal: {
+        contentDigest: createContentDigest(metadataMinusStatic),
+        type: 'SnootyMetadata',
+      },
+      parent: null,
+      metadata: metadataMinusStatic,
+    });
+
+    // Create document nodes.
+    response.data.documents.forEach((datum) => {
+      const { source, ...page } = datum;
+      page.id = createNodeId(page.page_id);
+      page.internal = {
+        type: `Page`,
+        contentDigest: createContentDigest(page),
+      };
+
+      createNode(page);
+    });
   }
-
-  // Save files in the static_files field of metadata document, including intersphinx inventories.
-  if (staticFiles) {
-    await saveStaticFiles(staticFiles);
-  }
-
-  createNode({
-    children: [],
-    id: createNodeId('metadata'),
-    internal: {
-      contentDigest: createContentDigest(metadataMinusStatic),
-      type: 'SnootyMetadata',
-    },
-    parent: null,
-    metadata: metadataMinusStatic,
-  });
-
-  // Create document nodes.
-  response.data.documents.forEach((datum) => {
-    const { source, ...page } = datum;
-    page.id = createNodeId(page.page_id);
-    page.internal = {
-      type: `Page`,
-      contentDigest: createContentDigest(page),
-    };
-
-    createNode(page);
-  });
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
@@ -165,7 +275,7 @@ exports.createPages = async ({ actions, graphql }) => {
         slug,
         repoBranches: {
           branches: [`main`],
-          siteBasePrefix: `/`
+          siteBasePrefix: `/`,
         },
         associatedReposInfo: null,
         isAssociatedProduct: null,
