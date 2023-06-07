@@ -130,15 +130,27 @@ export default DocumentBody;
 export const Head = ({ pageContext }) => {
   const { slug, page, template } = pageContext;
   const pageNodes = getNestedValue(['children'], page) || [];
-  const meta = pageNodes.filter((c) => {
+
+  // getting the meta from pageNodes
+  // extract the section
+  const section = pageNodes.find((node) => node.type === 'section');
+  console.log('sections', section);
+
+  // get the nested values from section that will be used for the lookup
+  const sectionNodes = getNestedValue(['children'], section);
+
+  const meta = sectionNodes.filter((c) => {
+    console.log('c type', c.type);
     const lookup = c.type === 'directive' ? c.name : c.type;
+    console.log('lookup', lookup);
     return lookup === 'meta';
   });
 
-  const twitter = pageNodes.filter((c) => {
+  const twitter = sectionNodes.filter((c) => {
     const lookup = c.type === 'directive' ? c.name : c.type;
     return lookup === 'twitter';
   });
+
   const metadata = useSnootyMetadata();
 
   const lookup = slug === '/' ? 'index' : slug;
@@ -151,7 +163,7 @@ export const Head = ({ pageContext }) => {
   return (
     <>
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
-      {meta.length > 0 && meta.map((c) => <Meta {...c} />)}
+      {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} {...c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
