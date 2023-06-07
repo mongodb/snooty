@@ -4,6 +4,7 @@ import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
+import { grabMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
@@ -63,18 +64,6 @@ const getNamedFootnoteReferences = (footnoteReferences, refname) => {
 // we may return an empty array
 const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
-};
-
-// Grabs the metadata values in question and returns them as an array
-// for the Meta & TwitterMeta tags
-const grabMetaFromDirective = (nodes, target) => {
-  if (!nodes) {
-    return [];
-  }
-  return nodes.filter((c) => {
-    const lookup = c.type === 'directive' ? c.name : c.type;
-    return lookup === target;
-  });
 };
 
 const DocumentBody = (props) => {

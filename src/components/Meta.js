@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 const Meta = ({ options }) => {
   return (
     <>
-      {Object.entries(options).map(([key, value]) => (
-        <meta key={key} name={key} content={value} />
-      ))}
+      {options &&
+        Object.entries(options).map(([key, value]) => (
+          <meta data-testid="directive-meta" key={key} name={key} content={value} />
+        ))}
     </>
   );
 };
