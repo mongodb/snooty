@@ -65,6 +65,18 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
+// Grabs the metadata values in question and returns them as an array
+// for the Meta & TwitterMeta tags
+const grabMetaFromDirective = (nodes, target) => {
+  if (!nodes) {
+    return [];
+  }
+  return nodes.filter((c) => {
+    const lookup = c.type === 'directive' ? c.name : c.type;
+    return lookup === target;
+  });
+};
+
 const DocumentBody = (props) => {
   const {
     location,
@@ -134,22 +146,13 @@ export const Head = ({ pageContext }) => {
   // getting the meta from pageNodes
   // extract the section
   const section = pageNodes.find((node) => node.type === 'section');
-  console.log('sections', section);
 
   // get the nested values from section that will be used for the lookup
   const sectionNodes = getNestedValue(['children'], section);
 
-  const meta = sectionNodes.filter((c) => {
-    console.log('c type', c.type);
-    const lookup = c.type === 'directive' ? c.name : c.type;
-    console.log('lookup', lookup);
-    return lookup === 'meta';
-  });
+  const meta = grabMetaFromDirective(sectionNodes, 'meta');
 
-  const twitter = sectionNodes.filter((c) => {
-    const lookup = c.type === 'directive' ? c.name : c.type;
-    return lookup === 'twitter';
-  });
+  const twitter = grabMetaFromDirective(sectionNodes, 'twitter');
 
   const metadata = useSnootyMetadata();
 
