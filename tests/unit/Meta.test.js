@@ -7,20 +7,24 @@ import Meta from '../../src/components/Meta';
 // data for this component
 import { metaTestData } from './data/Meta.test';
 
-it('does not renders a Meta correctly when the meta value is present', () => {
-  const c = {};
-  const wrapper = render(<Meta {...c} />);
-  expect(wrapper.queryByTestId('directive-meta')).not.toBeInTheDocument();
-});
-
-it('renders meta tags correctly when meta data is presented', () => {
-  const section = metaTestData.find((node) => node.type === 'section');
-  const sectionNodes = getNestedValue(['children'], section);
-  const meta = grabMetaFromDirective(sectionNodes, 'meta');
-
-  meta.forEach((c) => {
-    render(<Meta {...c} />);
+describe('Meta Tag', () => {
+  it('does not renders a Meta correctly when the meta value is present', () => {
+    const c = {
+      options: {},
+    };
+    const wrapper = render(<Meta nodeDate={c} />);
+    expect(wrapper.queryByTestId('directive-meta')).not.toBeInTheDocument();
   });
 
-  expect(screen.getAllByTestId('directive-meta')).toHaveLength(2);
+  it('renders meta tags correctly when meta data is presented', () => {
+    const section = metaTestData.find((node) => node.type === 'section');
+    const sectionNodes = getNestedValue(['children'], section);
+    const meta = grabMetaFromDirective(sectionNodes, 'meta');
+
+    meta.forEach((c) => {
+      render(<Meta nodeDate={c} />);
+    });
+
+    expect(screen.getAllByTestId('directive-meta')).toHaveLength(2);
+  });
 });
