@@ -4,7 +4,7 @@ import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
-import { grabMetaFromDirective } from '../utils/get-meta-from-directive';
+import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
@@ -132,16 +132,13 @@ export const Head = ({ pageContext }) => {
   const { slug, page, template } = pageContext;
   const pageNodes = getNestedValue(['children'], page) || [];
 
-  // getting the meta from pageNodes
-  // extract the section
-  const section = pageNodes.find((node) => node.type === 'section');
-
-  // get the nested values from section that will be used for the lookup
-  const sectionNodes = getNestedValue(['children'], section);
-
-  const meta = grabMetaFromDirective(sectionNodes, 'meta');
-
-  const twitter = grabMetaFromDirective(sectionNodes, 'twitter');
+  /**
+   * @param root sets the key to look for in the top-level of pageNodes
+   * @param nodes the children of the type found (i.e. section)
+   * @param target the lookup value that we are looking for
+   */
+  const meta = getMetaFromDirective('section', pageNodes, 'meta');
+  const twitter = getMetaFromDirective('section', pageNodes, 'twitter');
 
   const metadata = useSnootyMetadata();
 

@@ -1,6 +1,8 @@
+const { getNestedValue } = require('./get-nested-value');
+
 // Grabs the metadata values in question and returns them as an array
 // for the Meta & TwitterMeta tags
-const grabMetaFromDirective = (nodes, target) => {
+const grabMetadata = (nodes, target) => {
   if (!nodes) {
     return [];
   }
@@ -9,5 +11,15 @@ const grabMetaFromDirective = (nodes, target) => {
     return lookup === target;
   });
 };
+const getMetaFromDirective = (root, nodes, target) => {
+  // getting the meta from pageNodes
+  // extract the section
+  const section = nodes.find((node) => node.type === root);
 
-module.exports.grabMetaFromDirective = grabMetaFromDirective;
+  // get the nested values from section that will be used for the lookup
+  const sectionNodes = getNestedValue(['children'], section);
+
+  return grabMetadata(sectionNodes, target);
+};
+
+module.exports.getMetaFromDirective = getMetaFromDirective;

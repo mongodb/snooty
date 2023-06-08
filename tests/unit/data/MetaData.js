@@ -1,4 +1,4 @@
-export const metaTestData = [{
+export const testPageNodes = [{
     "type": "target",
     "children": [{
       "type": "target_identifier",
