@@ -155,7 +155,7 @@ export const Head = ({ pageContext }) => {
   return (
     <>
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
-      {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeDate={c} />)}
+      {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}

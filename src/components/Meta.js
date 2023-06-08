@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Meta = ({ nodeDate: { options } }) => {
+const Meta = ({ nodeData: { options } }) => {
   return (
     <>
       {options &&
@@ -13,7 +13,7 @@ const Meta = ({ nodeDate: { options } }) => {
 };
 
 Meta.propTypes = {
-  nodeDate: PropTypes.shape({
+  nodeData: PropTypes.shape({
     options: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
 };

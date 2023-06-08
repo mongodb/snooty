@@ -5,14 +5,15 @@ import { grabMetaFromDirective } from '../../src/utils/get-meta-from-directive';
 import Meta from '../../src/components/Meta';
 
 // data for this component
-import { metaTestData } from './data/Meta.test';
+import { metaTestData } from './data/MetaData';
 
 describe('Meta Tag', () => {
+  console.log('this is a test suit');
   it('does not renders a Meta correctly when the meta value is present', () => {
     const c = {
       options: {},
     };
-    const wrapper = render(<Meta nodeDate={c} />);
+    const wrapper = render(<Meta nodeData={c} />);
     expect(wrapper.queryByTestId('directive-meta')).not.toBeInTheDocument();
   });
 
@@ -22,7 +23,7 @@ describe('Meta Tag', () => {
     const meta = grabMetaFromDirective(sectionNodes, 'meta');
 
     meta.forEach((c) => {
-      render(<Meta nodeDate={c} />);
+      render(<Meta nodeData={c} />);
     });
 
     expect(screen.getAllByTestId('directive-meta')).toHaveLength(2);
