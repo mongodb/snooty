@@ -5,6 +5,7 @@ import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
+import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
 import { NavigationContext } from '../../context/navigation-context';
 import { VersionContext } from '../../context/version-context';
@@ -90,7 +91,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
         css={css`
           margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
           color: ${isActive ? `${palette.green.dark3};` : `${palette.gray.dark3};`};
+          scroll-margin-bottom: ${theme.size.xxlarge};
         `}
+        ref={tocNodeRef}
       >
         {formatText(title, formatTextOptions)}
       </div>
