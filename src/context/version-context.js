@@ -22,8 +22,9 @@ const getInitBranchName = (branches) => {
 
 const getInitVersions = (branchListByProduct) => {
   const initState = {};
+  const localStorage = getLocalValue(STORAGE_KEY);
   for (const productName in branchListByProduct) {
-    initState[productName] = getInitBranchName(branchListByProduct[productName]);
+    initState[productName] = localStorage[productName] || getInitBranchName(branchListByProduct[productName]);
   }
   return initState;
 };
@@ -102,22 +103,15 @@ const getDefaultGroups = (project, repoBranches) => {
   return groups;
 };
 
-const getDefaultActiveVersions = ([metadata]) => {
+const getDefaultActiveVersions = ([metadata, associatedReposInfo]) => {
   // for current metadata.project, should always default to metadata.parserBranch
   const { project, parserBranch } = metadata;
   let versions = {};
   versions[project] = parserBranch;
-  // return this merged with local storage
-  versions = {
-    ...getLocalValue(STORAGE_KEY),
-    ...versions,
-  };
-
   // for any umbrella / associated products
-  // we should depend on local storage
+  // we should depend on local storage after data fetch
   // otherwise, setting init on build will be overwritten by local storage
   // and result in double render
-
   return versions;
 };
 
@@ -182,9 +176,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
         if (!mountRef.current) {
           return;
         }
-        if (!activeVersions || !Object.keys(activeVersions).length) {
-          setActiveVersions(getInitVersions(versions));
-        }
+        setActiveVersions(getInitVersions(versions));
         setAvailableGroups(groups);
         setAvailableVersions(versions);
         setShowEol(hasEolBranches);
@@ -261,7 +253,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
       return;
     }
     if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
-      const newState = {};
+      const newState = { ...activeVersions };
       newState[metadata.project] = currentBranch.gitBranchName;
       setActiveVersions(newState);
     }

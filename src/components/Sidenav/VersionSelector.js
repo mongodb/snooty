@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import styled from '@emotion/styled';
+import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
 import { theme } from '../../theme/docsTheme';
@@ -15,7 +15,7 @@ const buildChoices = (branches, tocVersionNames) => {
   return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
 };
 
-const StyledSelect = styled(Select)`
+const SelectStyle = css`
   flex: 1 0 auto;
 
   > div:first-of-type {
@@ -42,7 +42,6 @@ const StyledSelect = styled(Select)`
         transform: rotate(180deg);
       }
     }
-    z-index: 3;
   }
 
   span {
@@ -51,6 +50,10 @@ const StyledSelect = styled(Select)`
     display: -webkit-box;
     -webkit-box-orient: vertical;
   }
+`;
+
+const WrapperStyle = css`
+  margin-left: auto;
 `;
 
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
@@ -68,15 +71,22 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     [onVersionSelect, versionedProject]
   );
 
+  const onClick = useCallback((e) => {
+    e.stopPropagation();
+  }, []);
+
   return (
-    <StyledSelect
-      value={activeVersions[versionedProject]}
-      onChange={onChange}
-      aria-labelledby={'select'}
-      popoverZIndex={2}
-      allowDeselect={false}
-      choices={options}
-    ></StyledSelect>
+    <div onClick={onClick} className={cx(WrapperStyle)}>
+      <Select
+        value={activeVersions[versionedProject]}
+        className={cx(SelectStyle)}
+        onChange={onChange}
+        aria-labelledby={'select'}
+        popoverZIndex={2}
+        allowDeselect={false}
+        choices={options}
+      ></Select>
+    </div>
   );
 };
 
