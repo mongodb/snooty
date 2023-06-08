@@ -21,8 +21,11 @@ const getInitBranchName = (branches) => {
 };
 
 const getInitVersions = (branchListByProduct) => {
+  console.log('getInitVersions');
   const initState = {};
   const localStorage = getLocalValue(STORAGE_KEY);
+  console.log('localStorage');
+  console.log(localStorage);
   for (const productName in branchListByProduct) {
     initState[productName] = localStorage?.[productName] || getInitBranchName(branchListByProduct[productName]);
   }
@@ -155,7 +158,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   );
   // update local storage when active versions change
   useEffect(() => {
-    if (firstLoad) {
+    if (firstLoad.current) {
       firstLoad.current = false;
       return;
     }
