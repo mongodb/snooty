@@ -141,7 +141,7 @@ describe('Version Context', () => {
   let wrapper,
     mockedBrowserStorageSetter,
     mockedBrowserStorageGetter,
-    mockedLocalStorage,
+    mockedLocalStorage = {},
     mockedFetchDocument,
     mockFetchDocuments;
 
@@ -224,13 +224,13 @@ describe('Version Context', () => {
     }
 
     // active checks
-    const expectedActive = { 'cloud-docs': 'master' };
+    const expectedActive = { 'cloud-docs': 'master', 'atlas-cli': 'master' };
     expect(await wrapper.findByText(JSON.stringify(expectedActive))).toBeTruthy();
   });
 
   it('initializes with values from local storage', async () => {
     mockedLocalStorage[STORAGE_KEY] = { 'atlas-cli': 'v1.2' };
-    const expectedActive = { 'atlas-cli': 'v1.2', 'cloud-docs': 'master' };
+    const expectedActive = { 'cloud-docs': 'master', 'atlas-cli': 'v1.2' };
     await act(async () => {
       wrapper = mountConsumer();
     });

@@ -24,7 +24,7 @@ const getInitVersions = (branchListByProduct) => {
   const initState = {};
   const localStorage = getLocalValue(STORAGE_KEY);
   for (const productName in branchListByProduct) {
-    initState[productName] = localStorage[productName] || getInitBranchName(branchListByProduct[productName]);
+    initState[productName] = localStorage?.[productName] || getInitBranchName(branchListByProduct[productName]);
   }
   return initState;
 };
@@ -144,6 +144,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   const metadata = useSiteMetadata();
   const { associated_products: associatedProducts } = useSnootyMetadata();
   const mountRef = useRef(true);
+  const firstLoad = useRef(true);
 
   // TODO check whats going on here for 404 pages
   // tracks active versions across app
@@ -154,11 +155,15 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   );
   // update local storage when active versions change
   useEffect(() => {
+    if (firstLoad) {
+      firstLoad.current = false;
+      return;
+    }
     setLocalValue(STORAGE_KEY, activeVersions);
     return () => {
       mountRef.current = false;
     };
-  }, [activeVersions]);
+  }, [activeVersions, firstLoad]);
 
   // expose the available versions for current and associated products
   const [availableVersions, setAvailableVersions] = useState(
