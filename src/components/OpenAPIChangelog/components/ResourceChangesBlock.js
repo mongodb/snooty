@@ -42,12 +42,11 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, ver
 
   const allResourceChanges =
     changes || versions.map((version) => (version.changes ? version.changes.map((change) => change) : null)).flat();
+  /* Filter out all null changes or non-public-facing changes */
   const publicResourceChanges = allResourceChanges.filter(
     (c) => c && (c.changeCode !== 'operation-id-changed' || c.changeCode !== 'operation-tag-changed')
   );
   const changeTypeBadge = versions?.[0]?.changeType ? changeTypeBadges[versions[0].changeType] : null;
-
-  console.log('publicResourceChanges ', publicResourceChanges);
 
   return (
     <Wrapper data-testid="resource-changes-block">

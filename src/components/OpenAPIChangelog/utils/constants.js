@@ -6,8 +6,6 @@ export const COMPARE_VERSIONS = 'COMPARE_VERSIONS';
 export const getDownloadChangelogUrl = (runId) =>
   `https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog/${runId}/changelog.json`;
 
-// https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog/20230516174500/changelog.json
-
 export const changeTypeBadges = {
   release: {
     variant: Variant.Green,
