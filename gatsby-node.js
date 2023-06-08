@@ -76,7 +76,8 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
+// const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
+const atlasAdminChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
 
 const fetchChangelogData = async (runId, versions) => {
   try {
@@ -117,7 +118,7 @@ const fetchChangelogData = async (runId, versions) => {
 const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
   try {
     /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/dev.yaml`);
     const indexText = await indexResp.text();
     const index = yaml.safeLoad(indexText, 'utf8');
 

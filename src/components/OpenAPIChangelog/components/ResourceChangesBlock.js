@@ -40,11 +40,14 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, ver
   const { openapi_pages } = useSnootyMetadata();
   const resourceLinkUrl = getResourceLinkUrl(metadata, tag, operationId, openapi_pages);
 
-  const allResourceChanges = changes || versions.map((version) => version.changes.map((change) => change)).flat();
+  const allResourceChanges =
+    changes || versions.map((version) => (version.changes ? version.changes.map((change) => change) : null)).flat();
   const publicResourceChanges = allResourceChanges.filter(
-    (c) => c.changeCode !== 'operation-id-changed' || c.changeCode !== 'operation-tag-changed'
+    (c) => c && (c.changeCode !== 'operation-id-changed' || c.changeCode !== 'operation-tag-changed')
   );
   const changeTypeBadge = versions?.[0]?.changeType ? changeTypeBadges[versions[0].changeType] : null;
+
+  console.log('publicResourceChanges ', publicResourceChanges);
 
   return (
     <Wrapper data-testid="resource-changes-block">

@@ -73,6 +73,9 @@ const OpenAPIChangelog = () => {
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
   const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId), [index]);
 
+  console.log(index.runId);
+  console.log(downloadChangelogUrl);
+
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
   const [resourceVersionOne, setResourceVersionOne] = useState(resourceVersions[0]);
@@ -136,7 +139,7 @@ const OpenAPIChangelog = () => {
           <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
         </Title>
         <DownloadButton href={downloadChangelogUrl} disabled={!index.runId}>
-          Download API Changelog
+          Download Full API Changelog
         </DownloadButton>
       </ChangelogHeader>
       <FiltersPanel
