@@ -52,7 +52,7 @@ const selectStyle = css`
   }
 `;
 
-const WrapperStyle = css`
+const wrapperStyle = css`
   margin-left: auto;
 `;
 
@@ -76,7 +76,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
   }, []);
 
   return (
-    <div onClick={onClick} className={cx(WrapperStyle)}>
+    <div onClick={onClick} className={cx(wrapperStyle)}>
       <Select
         value={activeVersions[versionedProject]}
         className={cx(selectStyle)}
