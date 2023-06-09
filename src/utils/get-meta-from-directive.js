@@ -11,15 +11,21 @@ const grabMetadata = (nodes, target) => {
     return lookup === target;
   });
 };
-const getMetaFromDirective = (root, nodes, target) => {
+const getMetaFromDirective = (type, nodes, target) => {
+  let collectionOfMetadata = [];
+  // check the root level first
+  // and collect the metadata
+  collectionOfMetadata = [...collectionOfMetadata, ...grabMetadata(nodes, target)];
   // getting the meta from pageNodes
-  // extract the section
-  const section = nodes.find((node) => node.type === root);
+  // extract the section to look for the metadata in the second layer
+  const section = nodes.find((node) => node.type === type);
 
-  // get the nested values from section that will be used for the lookup
+  // get the nested values from section
+  // and look for the metadata to collect
   const sectionNodes = getNestedValue(['children'], section);
+  collectionOfMetadata = [...collectionOfMetadata, ...grabMetadata(sectionNodes, target)];
 
-  return grabMetadata(sectionNodes, target);
+  return collectionOfMetadata;
 };
 
 module.exports.getMetaFromDirective = getMetaFromDirective;
