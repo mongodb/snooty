@@ -15,7 +15,7 @@ const buildChoices = (branches, tocVersionNames) => {
   return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
 };
 
-const SelectStyle = css`
+const selectStyle = css`
   flex: 1 0 auto;
 
   > div:first-of-type {
@@ -79,7 +79,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     <div onClick={onClick} className={cx(WrapperStyle)}>
       <Select
         value={activeVersions[versionedProject]}
-        className={cx(SelectStyle)}
+        className={cx(selectStyle)}
         onChange={onChange}
         aria-labelledby={'select'}
         popoverZIndex={2}
