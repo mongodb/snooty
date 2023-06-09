@@ -103,7 +103,7 @@ const getDefaultGroups = (project, repoBranches) => {
   return groups;
 };
 
-const getDefaultActiveVersions = ([metadata, associatedReposInfo]) => {
+const getDefaultActiveVersions = (metadata) => {
   // for current metadata.project, should always default to metadata.parserBranch
   const { project, parserBranch } = metadata;
   let versions = {};
@@ -147,11 +147,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // TODO check whats going on here for 404 pages
   // tracks active versions across app
-  const [activeVersions, setActiveVersions] = useReducer(
-    versionStateReducer,
-    [metadata, associatedReposInfo],
-    getDefaultActiveVersions
-  );
+  const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, metadata, getDefaultActiveVersions);
   // update local storage when active versions change
   useEffect(() => {
     const existing = getLocalValue(STORAGE_KEY);
