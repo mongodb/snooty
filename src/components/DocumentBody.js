@@ -132,11 +132,6 @@ export const Head = ({ pageContext }) => {
   const { slug, page, template } = pageContext;
   const pageNodes = getNestedValue(['children'], page) || [];
 
-  /**
-   * @param root sets the key to look for in the top-level of pageNodes
-   * @param nodes the children of the type found (i.e. section)
-   * @param target the lookup value that we are looking for
-   */
   const meta = getMetaFromDirective('section', pageNodes, 'meta');
   const twitter = getMetaFromDirective('section', pageNodes, 'twitter');
 
