@@ -855,7 +855,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         aria-disabled="false"
         class="emotion-8 emotion-9 emotion-10"
         data-leafygreen-ui="button"
-        href="https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi/20230403105948111/changelog.yaml"
+        href="https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog/20230403105948111/changelog.json"
       >
         <div
           class="emotion-11"
@@ -863,7 +863,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         <div
           class="emotion-12"
         >
-          Download API Changelog
+          Download Full API Changelog
         </div>
       </a>
     </div>
