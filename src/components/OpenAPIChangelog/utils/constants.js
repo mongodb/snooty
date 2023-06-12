@@ -4,7 +4,7 @@ export const ALL_VERSIONS = 'ALL_VERSIONS';
 export const COMPARE_VERSIONS = 'COMPARE_VERSIONS';
 
 export const getDownloadChangelogUrl = (runId) =>
-  `https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi/${runId}/changelog.yaml`;
+  `https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog/${runId}/changelog.json`;
 
 export const changeTypeBadges = {
   release: {

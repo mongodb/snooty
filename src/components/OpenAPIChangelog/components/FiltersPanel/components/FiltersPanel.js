@@ -4,6 +4,7 @@ import { Combobox, ComboboxOption } from '@leafygreen-ui/combobox';
 import { SegmentedControl, SegmentedControlOption } from '@leafygreen-ui/segmented-control';
 import { ALL_VERSIONS, COMPARE_VERSIONS } from '../../../utils/constants';
 import { theme } from '../../../../../theme/docsTheme';
+import useScreenSize from '../../../../../hooks/useScreenSize';
 import DiffSelect from './DiffSelect';
 
 const Wrapper = styled.div`
@@ -51,6 +52,8 @@ const FiltersPanel = ({
   setResourceVersionOne,
   setResourceVersionTwo,
 }) => {
+  const { isMobile } = useScreenSize();
+
   return (
     <Wrapper>
       <StyledSegmentedControl value={versionMode} onChange={setVersionMode}>
@@ -81,6 +84,8 @@ const FiltersPanel = ({
           value={selectedResources}
           onChange={setSelectedResources}
           popoverZIndex={3}
+          searchEmptyMessage="To see results, select two versions to compare"
+          chipCharacterLimit={isMobile ? 12 : 50}
           multiselect
         >
           {resources.map((version) => (
