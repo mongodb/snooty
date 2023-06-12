@@ -5,6 +5,7 @@ import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
@@ -12,6 +13,10 @@ import Layout from '../layouts';
 import Widgets from './Widgets';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
+import Meta from './Meta';
+import Twitter from './Twitter';
+import DocsLandingSD from './StructuredData/DocsLandingSD';
+import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -141,3 +146,30 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = ({ pageContext }) => {
+  const { slug, page, template } = pageContext;
+  const pageNodes = getNestedValue(['children'], page) || [];
+
+  const meta = getMetaFromDirective('section', pageNodes, 'meta');
+  const twitter = getMetaFromDirective('section', pageNodes, 'twitter');
+
+  const metadata = useSnootyMetadata();
+
+  const lookup = slug === '/' ? 'index' : slug;
+  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
+  const siteTitle = getNestedValue(['title'], metadata) || '';
+
+  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
+  const needsBreadcrumbs = template === 'document' || template === undefined;
+
+  return (
+    <>
+      <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
+      {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
+      {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
+      {isDocsLandingHomepage && <DocsLandingSD />}
+      {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
+    </>
+  );
+};

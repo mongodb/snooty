@@ -1,4 +1,3 @@
-// const yaml = require('js-yaml');
 const path = require('path');
 const stream = require('stream');
 const { promisify } = require('util');
