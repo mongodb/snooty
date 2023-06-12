@@ -1,50 +1,18 @@
 // const yaml = require('js-yaml');
 const path = require('path');
-const util = require(`util`);
 const stream = require('stream');
 const { promisify } = require('util');
 const fs = require('fs').promises;
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
-const { baseUrl } = require('./src/utils/base-url');
-const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
+const { saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
-const { getNestedValue } = require('./src/utils/get-nested-value');
-const { removeNestedValue } = require('./src/utils/remove-nested-value.js');
-const { getPageSlug } = require('./src/utils/get-page-slug');
-const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
-const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
-const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { manifestMetadata } = require('./src/utils/site-metadata');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
-const fastq = require(`fastq`);
 const { sourceNodes } = require(`./other-things-to-source`);
 
 const decode = parser();
-
-// Create the transformer
-const logTransform = new stream.Transform({
-  readableObjectMode: true,
-  writableObjectMode: true,
-  transform(chunk, encoding, callback) {
-    console.log(util.inspect(chunk.toString().slice(-200), { depth: null, colors: true }));
-    this.push(chunk);
-    callback();
-  },
-});
-
-// type Page = {
-// id: string,
-// page_id: string,
-// pagePath: string,
-// ast: any,
-// static_assets: Array<string>,
-// internal: {
-// type: string,
-// contentDigest: string,
-// },
-// };
 
 exports.onPreInit = () => {
   // setup and validate env variables

@@ -1,15 +1,10 @@
 const yaml = require('js-yaml');
 const path = require('path');
-const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { baseUrl } = require('./src/utils/base-url');
-const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
-const { getNestedValue } = require('./src/utils/get-nested-value');
-const { removeNestedValue } = require('./src/utils/remove-nested-value.js');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
-const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
 
 // different types of references

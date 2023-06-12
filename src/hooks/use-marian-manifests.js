@@ -12,9 +12,9 @@ export const useMarianManifests = () => {
 
   useEffect(() => {
     async function fetchManifests(propertyMapping) {
-      // const result = await fetch(MARIAN_URL + `status`);
-      // const jsonResult = await result.json();
-      // setFilters(parseMarianManifests(jsonResult.manifests, propertyMapping));
+      const result = await fetch(MARIAN_URL + `status`);
+      const jsonResult = await result.json();
+      setFilters(parseMarianManifests(jsonResult.manifests, propertyMapping));
     }
     const fetchMapping = async () => {
       let mapping = {};
