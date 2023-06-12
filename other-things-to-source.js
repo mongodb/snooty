@@ -1,10 +1,22 @@
+const yaml = require('js-yaml');
+const path = require('path');
+const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
+const { baseUrl } = require('./src/utils/base-url');
+const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
+const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
+const { getNestedValue } = require('./src/utils/get-nested-value');
+const { removeNestedValue } = require('./src/utils/remove-nested-value.js');
+const { getPageSlug } = require('./src/utils/get-page-slug');
+const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
+const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
+const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
+const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+
 // different types of references
 const PAGES = [];
 
 // in-memory object with key/value = filename/document
 let RESOLVED_REF_DOC_MAPPING = {};
-
-const assets = new Map();
 
 let db;
 
@@ -62,22 +74,10 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-/* Creates node for ChangelogData, used only for OpenAPI Changelog in cloud-docs. */
-const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
-  const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
+const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
 
+const fetchChangelogData = async (runId, versions) => {
   try {
-    /* Fetch OpenAPI Changelog metadata (index.yaml) */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
-    const indexText = await indexResp.text();
-    const index = yaml.safeLoad(indexText, 'utf8');
-
-    const { runId } = index;
-
-    if (!runId || typeof runId !== 'string')
-      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!'); // better error handling obvi
-    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
-
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
     const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.yaml`);
     const changelogText = await changelogResp.text();
@@ -90,11 +90,58 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     );
     const changelogResourcesList = Array.from(resourcesListSet);
 
-    const changelogData = {
-      index,
+    /* Fetch most recent Resource Versions' diff */
+    const mostRecentResourceVersions = versions.slice(-2);
+    const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
+    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.yaml`);
+    const mostRecentDiffText = await mostRecentDiffResp.text();
+    const mostRecentDiffData = yaml.safeLoad(mostRecentDiffText, 'utf8');
+
+    return {
       changelog,
       changelogResourcesList,
+      mostRecentDiff: {
+        mostRecentDiffLabel,
+        mostRecentDiffData,
+      },
     };
+  } catch (error) {
+    console.warn('Changelog error: Most recent runId not successful. Using last successful runId to build Changelog.');
+    throw error;
+  }
+};
+
+/* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  try {
+    /* Fetch OpenAPI Changelog metadata */
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
+    const indexText = await indexResp.text();
+    const index = yaml.safeLoad(indexText, 'utf8');
+
+    const { runId, versions } = index;
+
+    if (!runId || typeof runId !== 'string')
+      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!');
+
+    let changelogData = {
+      index,
+    };
+    try {
+      const receivedChangelogData = await fetchChangelogData(runId, versions);
+      changelogData = { ...changelogData, ...receivedChangelogData };
+      await db.stitchInterface.updateOAChangelogMetadata(index);
+    } catch (error) {
+      /* If any error occurs, fetch last successful metadata and build changelog node */
+      const lastSuccessfulIndex = await db.stitchInterface.fetchDocument(
+        'openapi_changelog',
+        'atlas_admin_metadata',
+        {}
+      );
+      const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
+      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions);
+      changelogData = { index: lastSuccessfulIndex, ...receivedChangelogData };
+    }
 
     /* Create Node for useStaticQuery with all Changelog data */
     createNode({
@@ -111,8 +158,7 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     console.error('Error while fetching OpenAPI Changelog data from S3');
     console.error(e);
 
-    /* Create empty Node for useStaticQuery to ensure build */
-    // TODO: Create fallback using cached runId of last successful run: might necessitate atlas collection
+    /* Create empty Node for useStaticQuery to ensure successful build */
     createNode({
       children: [],
       id: createNodeId('changelogData'),
@@ -125,121 +171,48 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     });
   }
 };
-// exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
-let hasOpenAPIChangelog = false;
-const { createNode } = actions;
 
-// setup and validate env variables
-// const envResults = validateEnvVariables(manifestMetadata);
-// if (envResults.error) {
-// throw Error(envResults.message);
-// }
+exports.sourceNodes = async ({ hasOpenAPIChangelog, createNode, createContentDigest, createNodeId }) => {
+  // setup and validate env variables
+  const envResults = validateEnvVariables(manifestMetadata);
+  if (envResults.error) {
+    throw Error(envResults.message);
+  }
 
-// wait to connect to stitch
+  // wait to connect to stitch
+  if (siteMetadata.manifestPath) {
+    console.log('Loading documents from manifest');
+    db = manifestDocumentDatabase;
+  } else {
+    console.log('Loading documents from stitch');
+    db = stitchDocumentDatabase;
+  }
 
-// if (siteMetadata.manifestPath) {
-// console.log('Loading documents from manifest');
-// db = manifestDocumentDatabase;
-// } else {
-// console.log('Loading documents from stitch');
-// db = stitchDocumentDatabase;
-// }
+  await db.connect();
 
-// await db.connect();
+  // Get all MongoDB products for the sidenav
+  const products = await db.fetchAllProducts(siteMetadata.database);
+  products.forEach((product) => {
+    const url = baseUrl(product.baseUrl + product.slug);
 
-// const documents = await db.getDocuments();
+    createNode({
+      children: [],
+      id: createNodeId(`Product-${product.title}`),
+      internal: {
+        contentDigest: createContentDigest(product),
+        type: 'Product',
+      },
+      parent: null,
+      title: product.title,
+      url,
+    });
+  });
 
-// if (documents.length === 0) {
-// console.error(
-// 'Snooty could not find AST entries for the',
-// siteMetadata.parserBranch,
-// 'branch of',
-// siteMetadata.project,
-// 'within',
-// siteMetadata.database
-// );
-// process.exit(1);
-// }
-// const pageIdPrefix = constructPageIdPrefix(siteMetadata);
-// documents.forEach((doc) => {
-// const { page_id, ...rest } = doc;
-// RESOLVED_REF_DOC_MAPPING[page_id.replace(`${pageIdPrefix}/`, '')] = rest;
-// });
+  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
+};
 
-// Identify page documents and parse each document for images
-// Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
-// const pageNode = getNestedValue(['ast', 'children'], val);
-// const filename = getNestedValue(['filename'], val) || '';
-
-// // Parse each document before pages are created via createPage
-// // to remove all positions fields as it is only used in the parser for logging
-// removeNestedValue('position', 'children', [val?.ast]);
-
-// if (pageNode) {
-// val.static_assets.forEach((asset) => {
-// const checksum = asset.checksum;
-// if (assets.has(checksum)) {
-// assets.set(checksum, new Set([...assets.get(checksum), asset.key]));
-// } else {
-// assets.set(checksum, new Set([asset.key]));
-// }
-// });
-// }
-
-// if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
-// PAGES.push(key);
-// }
-// if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
-// });
-
-// // Get all MongoDB products for the sidenav
-// const products = await db.fetchAllProducts(siteMetadata.database);
-// products.forEach((product) => {
-// const url = baseUrl(product.baseUrl + product.slug);
-
-// createNode({
-// children: [],
-// id: createNodeId(`Product-${product.title}`),
-// internal: {
-// contentDigest: createContentDigest(product),
-// type: 'Product',
-// },
-// parent: null,
-// title: product.title,
-// url,
-// });
-// });
-
-// await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
-// if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
-// await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
-
-// await saveAssetFiles(assets, db);
-// const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
-
-// const { parentPaths, slugToTitle } = metadataMinusStatic;
-// if (parentPaths) {
-// transformBreadcrumbs(parentPaths, slugToTitle);
-// }
-
-// //Save files in the static_files field of metadata document, including intersphinx inventories
-// if (staticFiles) {
-// await saveStaticFiles(staticFiles);
-// }
-
-// createNode({
-// children: [],
-// id: createNodeId('metadata'),
-// internal: {
-// contentDigest: createContentDigest(metadataMinusStatic),
-// type: 'SnootyMetadata',
-// },
-// parent: null,
-// metadata: metadataMinusStatic,
-// });
-// };
-
-/*
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
@@ -315,24 +288,58 @@ exports.createPages = async ({ actions }) => {
     resolve();
   });
 };
-*/
- 
+
+// Prevent errors when running gatsby build caused by browser packages run in a node environment.
+exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /mongodb-stitch-browser-sdk/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+
+  const providePlugins = {
+    Buffer: ['buffer', 'Buffer'],
+    process: require.resolve('./stubs/process.js'),
+  };
+
+  const fallbacks = { stream: require.resolve('stream-browserify'), buffer: require.resolve('buffer/') };
+
+  actions.setWebpackConfig({
+    plugins: [plugins.provide(providePlugins)],
+    resolve: {
+      fallback: fallbacks,
+      alias: {
+        process: 'process/browser',
+      },
+    },
+  });
+};
+
 // Remove type inference, as our schema is too ambiguous for this to be useful.
 // https://www.gatsbyjs.com/docs/scaling-issues/#switch-off-type-inference-for-sitepagecontext
-// exports.createSchemaCustomization = ({ actions }) => {
-// // TODO add other stuff they put in context.
-// actions.createTypes(`
-// type SitePage implements Node @dontInfer {
-// path: String!
-// }
+exports.createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+    type SitePage implements Node @dontInfer {
+      path: String!
+    }
 
-// type RemoteMetadata implements Node @dontInfer {
-// remoteMetadata: JSON
-// }
+    type SnootyMetadata implements Node @dontInfer {
+      metadata: JSON!
+    }
 
-// type ChangelogData implements Node @dontInfer {
-// changelogData: JSON
-// }
-// `);
-// };
+    type RemoteMetadata implements Node @dontInfer {
+      remoteMetadata: JSON
+    }
 
+    type ChangelogData implements Node @dontInfer {
+      changelogData: JSON
+    }
+  `);
+};

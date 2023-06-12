@@ -19,6 +19,7 @@ const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const fastq = require(`fastq`)
+const {sourceNodes} = require(`./other-things-to-source`)
 
 const decode = parser();
 
@@ -61,8 +62,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
       pagePath: String
       ast: JSON!
     }
+
     type SnootyMetadata implements Node @dontInfer {
       metadata: JSON
+    }
+
+    type RemoteMetadata implements Node @dontInfer {
+      remoteMetadata: JSON
+    }
+
+    type ChangelogData implements Node @dontInfer {
+      changelogData: JSON
     }
   `;
   createTypes(typeDefs);
@@ -78,6 +88,7 @@ const saveFile = async (file, data) => {
   console.log(`wrote asset`, file)
 };
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
+  let hasOpenAPIChangelog = false;
   const { createNode } = actions;
   const lastFetched = await cache.get(`lastFetched`);
   console.log({ lastFetched });
@@ -128,6 +139,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
 
       // Pages
       if (entry.type === `page`) {
+        if (entry.data?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
         pageCount += 1;
         if (pageCount % 100 === 0) {
           console.log({ pageCount });
@@ -151,70 +163,14 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
     // Wait for HTTP connection to close.
   } catch (error) {
     console.log(`stream-changes error`, { error });
-    // if (error.code === `ECONNRESET`) {
-      // // Ignore and just try calling again.
-    // } else {
-      throw error;
-    // }
+    throw error;
   }
 
   // Wait for all assets to be written.
   await Promise.all(fileWritePromises)
-
-  // lastFetched ? console.log(`fetching only changed pages`) : console.log(`fetching all pages`);
-  // let response;
-  // if (!lastFetched) {
-  // response = await got(
-  // `http://localhost:3000/projects/docs/DOCS-16126-5.0.18-release-notes/documents/updated/1684249414358`
-  // ).json();
-  // const writeStream = fs.createWriteStream(`/tmp/data.jsonl`)
-
-  // TODO restore
-  // } else {
-  // response = await got(
-  // `http://localhost:3000/docs/updated/${lastFetched}`
-  // ).json();
-  // }
-  // console.timeEnd(`fetch updates`);
-  // console.log(response);
-
-  if (false) {
-    // Create metadata node.
-    const { static_files: staticFiles, ...metadataMinusStatic } = response.data.metadata[0];
-
-    const { parentPaths, slugToTitle } = metadataMinusStatic;
-    if (parentPaths) {
-      transformBreadcrumbs(parentPaths, slugToTitle);
-    }
-
-    // Save files in the static_files field of metadata document, including intersphinx inventories.
-    if (staticFiles) {
-      await saveStaticFiles(staticFiles);
-    }
-
-    createNode({
-      children: [],
-      id: createNodeId('metadata'),
-      internal: {
-        contentDigest: createContentDigest(metadataMinusStatic),
-        type: 'SnootyMetadata',
-      },
-      parent: null,
-      metadata: metadataMinusStatic,
-    });
-
-    // Create document nodes.
-    response.data.documents.forEach((datum) => {
-      const { source, ...page } = datum;
-      page.id = createNodeId(page.page_id);
-      page.internal = {
-        type: `Page`,
-        contentDigest: createContentDigest(page),
-      };
-
-      createNode(page);
-    });
-  }
+  console.time(`old source nodes`)
+  await sourceNodes({hasOpenAPIChangelog, createNode, createContentDigest, createNodeId})
+  console.timeEnd(`old source nodes`)
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
