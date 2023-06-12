@@ -79,7 +79,6 @@ const DefaultLayout = ({
   children,
   pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
 }) => {
-  console.log({ repoBranches });
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();

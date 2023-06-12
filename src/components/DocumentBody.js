@@ -11,6 +11,7 @@ import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import Layout from '../layouts';
 import Widgets from './Widgets';
+import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
 import Meta from './Meta';
