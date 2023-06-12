@@ -63,7 +63,7 @@ Document.propTypes = {
       children: PropTypes.array,
       options: PropTypes.object,
     }).isRequired,
-  })
+  }),
 };
 
 export default Document;

@@ -18,8 +18,8 @@ const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
-const fastq = require(`fastq`)
-const {sourceNodes} = require(`./other-things-to-source`)
+const fastq = require(`fastq`);
+const { sourceNodes } = require(`./other-things-to-source`);
 
 const decode = parser();
 
@@ -79,13 +79,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
 };
 
 let pageCount = 0;
-const fileWritePromises = []
+const fileWritePromises = [];
 const saveFile = async (file, data) => {
   await fs.mkdir(path.join('static', path.dirname(file)), {
     recursive: true,
   });
   await fs.writeFile(path.join('static', file), data, 'binary');
-  console.log(`wrote asset`, file)
+  console.log(`wrote asset`, file);
 };
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
   let hasOpenAPIChangelog = false;
@@ -97,7 +97,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
     decode.on(`data`, async (_entry) => {
       const entry = _entry.value;
       // if (![`page`, `metadata`, `timestamp`].includes(entry.type)) {
-        // console.log(entry);
+      // console.log(entry);
       // }
 
       if (entry.type === `timestamp`) {
@@ -105,10 +105,10 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
       }
 
       if (entry.type === `asset`) {
-        console.log(`asset`, entry.data.filenames)
-        entry.data.filenames.forEach(filePath => {
-          fileWritePromises.push(saveFile(filePath, Buffer.from(entry.data.assetData, `base64`)))
-        })
+        console.log(`asset`, entry.data.filenames);
+        entry.data.filenames.forEach((filePath) => {
+          fileWritePromises.push(saveFile(filePath, Buffer.from(entry.data.assetData, `base64`)));
+        });
       }
 
       if (entry.type === `metadata`) {
@@ -167,10 +167,10 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
   }
 
   // Wait for all assets to be written.
-  await Promise.all(fileWritePromises)
-  console.time(`old source nodes`)
-  await sourceNodes({hasOpenAPIChangelog, createNode, createContentDigest, createNodeId})
-  console.timeEnd(`old source nodes`)
+  await Promise.all(fileWritePromises);
+  console.time(`old source nodes`);
+  await sourceNodes({ hasOpenAPIChangelog, createNode, createContentDigest, createNodeId });
+  console.timeEnd(`old source nodes`);
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.

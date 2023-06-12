@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { graphql } from "gatsby"
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
@@ -8,10 +8,10 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import Layout from '../layouts';
 import Widgets from './Widgets';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
-import Layout from "../layouts"
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -68,9 +68,9 @@ const DocumentBody = (props) => {
     pageContext: { slug },
     data,
   } = props;
-  const page = data.page.ast
-  const template = page?.options?.template
-  props.pageContext.page = page
+  const page = data.page.ast;
+  const template = page?.options?.template;
+  props.pageContext.page = page;
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -92,13 +92,13 @@ const DocumentBody = (props) => {
 
   return (
     <Layout
-    pageContext={{
-      page,
+      pageContext={{
+        page,
         slug,
         template,
         publishedBranches: getNestedValue(['publishedBranches'], metadata),
-        ...props.pageContext
-    }}
+        ...props.pageContext,
+      }}
     >
       <Widgets
         location={location}
@@ -135,9 +135,9 @@ DocumentBody.propTypes = {
 export default DocumentBody;
 
 export const query = graphql`
-  query($id: String) {
-    page(id: {eq: $id}) {
+  query ($id: String) {
+    page(id: { eq: $id }) {
       ast
     }
   }
-`
+`;
