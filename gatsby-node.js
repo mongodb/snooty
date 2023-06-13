@@ -69,16 +69,12 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
 
       if (entry.type === `timestamp`) {
         cache.set(`lastFetched`, entry.data);
-      }
-
-      if (entry.type === `asset`) {
+      } else if (entry.type === `asset`) {
         console.log(`asset`, entry.data.filenames);
         entry.data.filenames.forEach((filePath) => {
           fileWritePromises.push(saveFile(filePath, Buffer.from(entry.data.assetData, `base64`)));
         });
-      }
-
-      if (entry.type === `metadata`) {
+      } else if (entry.type === `metadata`) {
         // Create metadata node.
         const { static_files: staticFiles, ...metadataMinusStatic } = entry.data;
 
@@ -102,10 +98,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
           parent: null,
           metadata: metadataMinusStatic,
         });
-      }
-
-      // Pages
-      if (entry.type === `page`) {
+      } else if (entry.type === `page`) {
         if (entry.data?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
         pageCount += 1;
         if (pageCount % 100 === 0) {
