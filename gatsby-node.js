@@ -1,4 +1,3 @@
-const yaml = require('js-yaml');
 const path = require('path');
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { baseUrl } = require('./src/utils/base-url');
@@ -76,14 +75,13 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
+const atlasAdminChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
 
 const fetchChangelogData = async (runId, versions) => {
   try {
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.yaml`);
-    const changelogText = await changelogResp.text();
-    const changelog = yaml.safeLoad(changelogText, 'utf8');
+    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.json`);
+    const changelog = await changelogResp.json();
 
     /* Aggregate all Resources in changelog for frontend filter */
     const resourcesListSet = new Set();
@@ -95,9 +93,8 @@ const fetchChangelogData = async (runId, versions) => {
     /* Fetch most recent Resource Versions' diff */
     const mostRecentResourceVersions = versions.slice(-2);
     const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.yaml`);
-    const mostRecentDiffText = await mostRecentDiffResp.text();
-    const mostRecentDiffData = yaml.safeLoad(mostRecentDiffText, 'utf8');
+    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
+    const mostRecentDiffData = await mostRecentDiffResp.json();
 
     return {
       changelog,
@@ -117,14 +114,13 @@ const fetchChangelogData = async (runId, versions) => {
 const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
   try {
     /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/index.yaml`);
-    const indexText = await indexResp.text();
-    const index = yaml.safeLoad(indexText, 'utf8');
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/prod.json`);
+    const index = await indexResp.json();
 
     const { runId, versions } = index;
 
     if (!runId || typeof runId !== 'string')
-      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.yaml!');
+      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.json!');
 
     let changelogData = {
       index,

@@ -136,7 +136,7 @@ const OpenAPIChangelog = () => {
           <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
         </Title>
         <DownloadButton href={downloadChangelogUrl} disabled={!index.runId}>
-          Download API Changelog
+          Download Full API Changelog
         </DownloadButton>
       </ChangelogHeader>
       <FiltersPanel

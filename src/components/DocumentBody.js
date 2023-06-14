@@ -4,6 +4,7 @@ import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
@@ -130,15 +131,10 @@ export default DocumentBody;
 export const Head = ({ pageContext }) => {
   const { slug, page, template } = pageContext;
   const pageNodes = getNestedValue(['children'], page) || [];
-  const meta = pageNodes.filter((c) => {
-    const lookup = c.type === 'directive' ? c.name : c.type;
-    return lookup === 'meta';
-  });
 
-  const twitter = pageNodes.filter((c) => {
-    const lookup = c.type === 'directive' ? c.name : c.type;
-    return lookup === 'twitter';
-  });
+  const meta = getMetaFromDirective('section', pageNodes, 'meta');
+  const twitter = getMetaFromDirective('section', pageNodes, 'twitter');
+
   const metadata = useSnootyMetadata();
 
   const lookup = slug === '/' ? 'index' : slug;
@@ -151,7 +147,7 @@ export const Head = ({ pageContext }) => {
   return (
     <>
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
-      {meta.length > 0 && meta.map((c) => <Meta {...c} />)}
+      {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}

@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
-import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
@@ -27,24 +26,6 @@ const caretStyle = LeafyCSS`
   min-width: 16px;
 `;
 
-const wrapperStyle = LeafyCSS`
-  display: flex;
-  align-items: center;
-  scroll-margin-bottom: ${theme.size.xxlarge};
-
-  &:hover {
-    background: ${palette.gray.light2};
-  }
-
-  > li {
-    flex: 1 1 auto;
-  }
-`;
-
-const wrapperPadding = LeafyCSS`
-  padding-right: ${theme.size.medium};
-`;
-
 const overwriteLinkStyle = LeafyCSS`
   span {
     display: flex;
@@ -63,6 +44,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
   const hasChildren = !!children?.length;
   const hasVersions = !!(options?.versions?.length > 1);
+
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
@@ -109,7 +91,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
         css={css`
           margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
           color: ${isActive ? `${palette.green.dark3};` : `${palette.gray.dark3};`};
+          scroll-margin-bottom: ${theme.size.xxlarge};
         `}
+        ref={tocNodeRef}
       >
         {formatText(title, formatTextOptions)}
       </div>
@@ -119,45 +103,43 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
 
     if (isDrawer && hasChildren) {
       return (
-        <Box ref={tocNodeRef} className={cx(wrapperStyle, { [wrapperPadding]: hasVersions })}>
-          <SideNavItem
-            className={cx(sideNavItemTOCStyling({ level }))}
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          >
-            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
-            {isTocIcon && <SyncCloud />}
-            {formattedTitle}
-          </SideNavItem>
+        <SideNavItem
+          className={cx(sideNavItemTOCStyling({ level }))}
+          as="a"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+          {isTocIcon && <SyncCloud />}
+          {formattedTitle}
           {hasVersions && activeVersions[options.project] && (
             <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
           )}
-        </Box>
+        </SideNavItem>
       );
     }
+
     return (
-      <Box ref={tocNodeRef} className={cx(wrapperStyle, { [wrapperPadding]: hasVersions })}>
-        <SideNavItem
-          as={Link}
-          to={target}
-          active={isSelected}
-          className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
-          onClick={(e) => {
-            setIsOpen(!isOpen);
-          }}
-          hideExternalIcon={true}
-        >
-          {hasChildren && (
-            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
-          )}
-          {isTocIcon && <SyncCloud />}
-          {formattedTitle}
-        </SideNavItem>
+      <SideNavItem
+        as={Link}
+        to={target}
+        active={isSelected}
+        className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
+        onClick={(e) => {
+          setIsOpen(!isOpen);
+        }}
+        hideExternalIcon={true}
+      >
+        {hasChildren && (
+          <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+        )}
+        {isTocIcon && <SyncCloud />}
+        {formattedTitle}
         {hasVersions && activeVersions[options.project] && (
           <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
         )}
-      </Box>
+      </SideNavItem>
     );
   };
 

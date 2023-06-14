@@ -50,13 +50,10 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
       // if it doesn't already exist
       // NOTE: do we need to traverse full ToC tree? for now just immediate children
       for (let node of tocNode.children) {
-        if (!node?.options?.versions || !node?.options?.project) {
+        if (!node?.options?.versions || !node?.options?.project || !activeVersions[node.options.project]) {
           continue;
         }
-        if (
-          !activeVersions[node.options.project] ||
-          !node.options.versions.includes(activeVersions[node.options.project])
-        ) {
+        if (!node.options.versions.includes(activeVersions[node.options.project])) {
           // assumption is that first branch in pool.repos_branches
           // exists as a toc node here. otherwise, fallback to first ToC option
           const gitBranchNames = availableVersions[node.options.project].map((b) => b.gitBranchName);
