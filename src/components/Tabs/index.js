@@ -100,7 +100,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   useEffect(() => {
     if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
       const index = children.findIndex((item) => item.options.tabid === 'nodejs');
-      if (index > 0) {
+      if (index > -1) {
         // Set first tab to nodejs if no tab was previously selected
         setActiveTab({ name: tabsetName, value: getTabId(children[index]) });
       } else {
