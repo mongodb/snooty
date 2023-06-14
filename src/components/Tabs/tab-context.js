@@ -13,6 +13,7 @@ import IconRust from '../icons/Rust';
 import IconScala from '../icons/Scala';
 import IconShell from '../icons/Shell';
 import IconSwift from '../icons/Swift';
+import IconKotlin from '../icons/Kotlin';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 
 const DRIVER_ICON_MAP = {
@@ -23,6 +24,7 @@ const DRIVER_ICON_MAP = {
   go: IconGo,
   'java-sync': IconJava,
   'java-async': IconJava,
+  kotlin: IconKotlin,
   nodejs: IconNode,
   php: IconPHP,
   python: IconPython,
