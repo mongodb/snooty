@@ -99,8 +99,14 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
   useEffect(() => {
     if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
-      // Set first tab as active if no tab was previously selected
-      setActiveTab({ name: tabsetName, value: getTabId(children[0]) });
+      const index = children.findIndex((item) => item.options.tabid === 'nodejs');
+      if (index > 0) {
+        // Set first tab to nodejs if no tab was previously selected
+        setActiveTab({ name: tabsetName, value: getTabId(children[index]) });
+      } else {
+        // Set first tab as active if no tab was previously selected and cant find nodejs
+        setActiveTab({ name: tabsetName, value: getTabId(children[0]) });
+      }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
