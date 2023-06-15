@@ -54,8 +54,6 @@ const SiteBanner = () => {
     return null;
   }
 
-  console.log('banner content', bannerContent);
-
   return (
     <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
       <StyledBannerContent imgPath={bannerContent.imgPath} mobileImgPath={bannerContent.mobileImgPath} />
