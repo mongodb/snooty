@@ -5,6 +5,7 @@ import IconCpp from '../icons/Cpp';
 import IconCsharp from '../icons/Csharp';
 import IconGo from '../icons/Go';
 import IconJava from '../icons/Java';
+import IconKotlin from '../icons/Kotlin';
 import IconNode from '../icons/Node';
 import IconPHP from '../icons/Php';
 import IconPython from '../icons/Python';
@@ -23,6 +24,7 @@ const DRIVER_ICON_MAP = {
   go: IconGo,
   'java-sync': IconJava,
   'java-async': IconJava,
+  kotlin: IconKotlin,
   nodejs: IconNode,
   php: IconPHP,
   python: IconPython,

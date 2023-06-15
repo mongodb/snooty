@@ -19,7 +19,6 @@ import IconRuby from './icons/Ruby';
 import IconRust from './icons/Rust';
 import IconScala from './icons/Scala';
 import IconSwift from './icons/Swift';
-import IconKotlin from './icons/Kotlin';
 
 // DriversIndexTiles is used to display the drivers as Cards on drivers landing page
 
@@ -49,11 +48,6 @@ const tiles = [
     slug: '/java-drivers/',
     title: 'Java',
     icon: <IconJava />,
-  },
-  {
-    slug: '/kotlin/',
-    title: 'Kotlin',
-    icon: <IconKotlin />,
   },
   {
     slug: `${baseUrl()}drivers/node/current/`,
