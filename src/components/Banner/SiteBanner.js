@@ -6,7 +6,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
 import { normalizePath } from '../../utils/normalize-path';
-import { fetchBanner } from '../../utils/realm';
+import { fetchBannerEnhance } from '../../utils/realm';
 
 const getBannerSource = (src) => {
   if (src == null || src === '') return null;
@@ -40,7 +40,7 @@ const SiteBanner = () => {
   useEffect(() => {
     const fetchBannerContent = async () => {
       try {
-        setBannerContent(await fetchBanner(snootyEnv));
+        setBannerContent(await fetchBannerEnhance(snootyEnv));
       } catch (err) {
         console.error(err);
       }
@@ -53,6 +53,8 @@ const SiteBanner = () => {
   if (bannerContent == null) {
     return null;
   }
+
+  console.log('banner content', bannerContent);
 
   return (
     <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
