@@ -11,8 +11,6 @@ const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
 
-const decode = parser();
-
 exports.onPreInit = () => {
   // setup and validate env variables
   const envResults = validateEnvVariables(manifestMetadata);
@@ -45,8 +43,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
   createTypes(typeDefs);
 };
 
-let pageCount = 0;
-const fileWritePromises = [];
 const saveFile = async (file, data) => {
   await fs.mkdir(path.join('static', path.dirname(file)), {
     recursive: true,
@@ -55,12 +51,15 @@ const saveFile = async (file, data) => {
   console.log(`wrote asset`, file);
 };
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
+  let pageCount = 0;
+  const fileWritePromises = [];
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
   const lastFetched = await cache.get(`lastFetched`);
   console.log({ lastFetched });
   const httpStream = got.stream(`http://localhost:3000/projects/docs/DOCS-16126-5.0.18-release-notes/documents`);
   try {
+    const decode = parser();
     decode.on(`data`, async (_entry) => {
       const entry = _entry.value;
       // if (![`page`, `metadata`, `timestamp`].includes(entry.type)) {
@@ -169,6 +168,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
   const templatePath = path.resolve(`./src/components/DocumentBody.js`);
+  console.time(`query createPages`)
   const result = await graphql(`
     query {
       allPage {
@@ -180,6 +180,7 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     }
   `);
+  console.timeEnd(`query createPages`)
 
   result.data.allPage.nodes.forEach((node) => {
     const slug = node.page_id === `index` ? `/` : node.page_id;
