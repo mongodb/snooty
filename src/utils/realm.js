@@ -31,6 +31,10 @@ const fetchData = async (funcName, ...argsList) => {
   return app.currentUser.callFunction(funcName, ...argsList);
 };
 
+export const fetchBannerEnhance = async (snootyEnv) => {
+  return fetchData('getBannerEnhance', snootyEnv);
+};
+
 export const fetchBanner = async (snootyEnv) => {
   return fetchData('getBanner', snootyEnv === 'development');
 };
