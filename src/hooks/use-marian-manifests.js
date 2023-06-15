@@ -17,7 +17,7 @@ export const useMarianManifests = () => {
         const jsonResult = await result.json();
         setFilters(parseMarianManifests(jsonResult.manifests, propertyMapping));
       } catch (err) {
-        console.log('Failed to fetch the MARIAN_URL.', err);
+        console.error('Failed to fetch the MARIAN_URL.', err);
       }
     }
     const fetchMapping = async () => {
