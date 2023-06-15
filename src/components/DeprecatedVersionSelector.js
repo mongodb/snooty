@@ -21,6 +21,7 @@ const selectStyle = css`
 
 const PROPERTY_NAME_MAPPING = {
   'atlas-open-service-broker': 'MongoDB Atlas Open Service Broker on Kubernetes',
+  'atlas-cli': 'MongoDB Atlas CLI',
   'bi-connector': 'MongoDB Connector for BI',
   charts: 'MongoDB Charts',
   cloud: 'MongoDB Atlas',
@@ -93,7 +94,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     const versionOptions = deprecatedVersions[product];
     const hostName = getSiteUrl(product);
     const versionName = isVersioned(versionOptions) ? version : '';
-    return ['docs', 'mms', 'cloud-docs'].includes(product)
+    return ['docs', 'mms', 'cloud-docs', 'atlas-cli'].includes(product)
       ? `${hostName}/${versionName}`
       : `${hostName}/${product}/${versionName}`;
   };
