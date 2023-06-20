@@ -5,7 +5,8 @@ const fs = require('fs').promises;
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
-const { manifestMetadata } = require('./src/utils/site-metadata');
+const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
+const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
@@ -18,6 +19,10 @@ exports.onPreInit = () => {
     throw Error(envResults.message);
   }
 };
+
+let isAssociatedProduct = false;
+let associatedReposInfo = {};
+let db;
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
@@ -49,14 +54,20 @@ const saveFile = async (file, data) => {
   });
   await fs.writeFile(path.join('static', file), data, 'binary');
 };
+
+const pageIdPrefix = constructPageIdPrefix(siteMetadata);
+
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
-  let pageCount = 0;
-  const fileWritePromises = [];
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
+
+  let pageCount = 0;
+  const fileWritePromises = [];
   const lastFetched = await cache.get(`lastFetched`);
   console.log({ lastFetched });
-  const httpStream = got.stream(`http://localhost:3000/projects/docs/DOCS-16126-5.0.18-release-notes/documents`);
+  const httpStream = got.stream(
+    `http://localhost:3000/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents`
+  );
   try {
     const decode = parser();
     decode.on(`data`, async (_entry) => {
@@ -98,11 +109,13 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
       } else if (entry.type === `page`) {
         if (entry.data?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
         pageCount += 1;
-        if (pageCount % 100 === 0) {
-          console.log({ pageCount });
-        }
         const { source, ...page } = entry.data;
-        page.id = createNodeId(page.page_id);
+        const page_id = page.page_id.replace(`${pageIdPrefix}/`, '');
+        page.page_id = page_id;
+        if (pageCount % 100 === 0) {
+          console.log({ pageCount, page_id });
+        }
+        page.id = createNodeId(page_id);
         page.internal = {
           type: `Page`,
           contentDigest: createContentDigest(page),
@@ -110,7 +123,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
 
         const pagePathNode = {
           id: page.id + `/path`,
-          page_id: page.page_id,
+          page_id: page_id,
           pageNodeId: page.id,
           internal: {
             type: `PagePath`,
@@ -135,8 +148,18 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
 
   // Wait for all assets to be written.
   await Promise.all(fileWritePromises);
+
+  // Source old nodes.
   console.time(`old source nodes`);
-  await sourceNodes({ hasOpenAPIChangelog, createNode, createContentDigest, createNodeId });
+  const { _db, _isAssociatedProduct, _associatedReposInfo } = await sourceNodes({
+    hasOpenAPIChangelog,
+    createNode,
+    createContentDigest,
+    createNodeId,
+  });
+  db = _db;
+  isAssociatedProduct = _isAssociatedProduct;
+  associatedReposInfo = _associatedReposInfo;
   console.timeEnd(`old source nodes`);
 };
 
@@ -188,6 +211,49 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `);
 
+  let repoBranches = null;
+  try {
+    const repoInfo = await db.stitchInterface.fetchRepoBranches();
+    let errMsg;
+
+    if (!repoInfo) {
+      errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+    }
+
+    // We should expect the number of branches for a docs repo to be 1 or more.
+    if (!repoInfo.branches?.length) {
+      errMsg = `No version information found for ${siteMetadata.project}`;
+    }
+
+    if (errMsg) {
+      throw errMsg;
+    }
+
+    // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+    // dotcom environments seem to be consistent.
+    let envKey = siteMetadata.snootyEnv;
+    if (!envKey || envKey === 'development') {
+      envKey = 'dotcomprd';
+    } else if (envKey === 'production') {
+      envKey = 'prd';
+    } else if (envKey === 'staging') {
+      envKey = 'stg';
+    }
+
+    // We're overfetching data here. We only need branches and prefix at the least
+    repoBranches = {
+      branches: repoInfo.branches,
+      siteBasePrefix: repoInfo.prefix[envKey],
+    };
+
+    if (repoInfo.groups?.length > 0) {
+      repoBranches.groups = repoInfo.groups;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+
   result.data.allPagePath.nodes.forEach((node) => {
     const slug = node.page_id === `index` ? `/` : node.page_id;
     createPage({
@@ -196,14 +262,9 @@ exports.createPages = async ({ actions, graphql }) => {
       context: {
         id: node.pageNodeId,
         slug,
-        repoBranches: {
-          branches: [`main`],
-          siteBasePrefix: `/`,
-        },
-        associatedReposInfo: null,
-        isAssociatedProduct: null,
-        // template: pageNodes?.options?.template,
-        // page: pageNodes,
+        repoBranches,
+        associatedReposInfo,
+        isAssociatedProduct,
       },
     });
   });

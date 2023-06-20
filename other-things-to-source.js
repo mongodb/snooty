@@ -206,6 +206,8 @@ exports.sourceNodes = async ({ hasOpenAPIChangelog, createNode, createContentDig
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
+
+  return { _db: db, _isAssociatedProduct: isAssociatedProduct, _associatedReposInfo: associatedReposInfo };
 };
 
 exports.createPages = async ({ actions }) => {
