@@ -6,6 +6,7 @@ const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumb
 const { saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
+const { getNestedValue } = require('./src/utils/get-nested-value');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
@@ -110,29 +111,36 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
         if (entry.data?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
         pageCount += 1;
         const { source, ...page } = entry.data;
-        const page_id = page.page_id.replace(`${pageIdPrefix}/`, '');
-        page.page_id = page_id;
-        if (pageCount % 100 === 0) {
-          console.log({ pageCount, page_id });
+
+        const filename = getNestedValue(['filename'], page) || '';
+        // The old gatsby sourceNodes has this code — I'm not sure it actually
+        // is a concern (I couldn't find any page documents that didn't end in .txt)
+        // but Chesterton's Fence and all.
+        if (filename.endsWith('.txt')) {
+          const page_id = page.page_id.replace(`${pageIdPrefix}/`, '');
+          page.page_id = page_id;
+          if (pageCount % 100 === 0) {
+            console.log({ pageCount, page_id });
+          }
+          page.id = createNodeId(page_id);
+          page.internal = {
+            type: `Page`,
+            contentDigest: createContentDigest(page),
+          };
+
+          const pagePathNode = {
+            id: page.id + `/path`,
+            page_id: page_id,
+            pageNodeId: page.id,
+            internal: {
+              type: `PagePath`,
+              contentDigest: page.internal.contentDigest,
+            },
+          };
+
+          createNode(page);
+          createNode(pagePathNode);
         }
-        page.id = createNodeId(page_id);
-        page.internal = {
-          type: `Page`,
-          contentDigest: createContentDigest(page),
-        };
-
-        const pagePathNode = {
-          id: page.id + `/path`,
-          page_id: page_id,
-          pageNodeId: page.id,
-          internal: {
-            type: `PagePath`,
-            contentDigest: page.internal.contentDigest,
-          },
-        };
-
-        createNode(page);
-        createNode(pagePathNode);
       }
     });
 
