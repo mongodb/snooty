@@ -48,7 +48,6 @@ const saveFile = async (file, data) => {
     recursive: true,
   });
   await fs.writeFile(path.join('static', file), data, 'binary');
-  console.log(`wrote asset`, file);
 };
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
   let pageCount = 0;
@@ -69,7 +68,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
       if (entry.type === `timestamp`) {
         cache.set(`lastFetched`, entry.data);
       } else if (entry.type === `asset`) {
-        console.log(`asset`, entry.data.filenames);
         entry.data.filenames.forEach((filePath) => {
           fileWritePromises.push(saveFile(filePath, Buffer.from(entry.data.assetData, `base64`)));
         });
@@ -104,14 +102,24 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
           console.log({ pageCount });
         }
         const { source, ...page } = entry.data;
-        // console.log({page})
         page.id = createNodeId(page.page_id);
         page.internal = {
           type: `Page`,
           contentDigest: createContentDigest(page),
         };
 
+        const pagePathNode = {
+          id: page.id + `/path`,
+          page_id: page.page_id,
+          pageNodeId: page.id,
+          internal: {
+            type: `PagePath`,
+            contentDigest: page.internal.contentDigest,
+          },
+        };
+
         createNode(page);
+        createNode(pagePathNode);
       }
     });
 
@@ -168,27 +176,25 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
   const templatePath = path.resolve(`./src/components/DocumentBody.js`);
-  console.time(`query createPages`)
   const result = await graphql(`
     query {
-      allPage {
+      allPagePath {
         totalCount
         nodes {
-          id
+          pageNodeId
           page_id
         }
       }
     }
   `);
-  console.timeEnd(`query createPages`)
 
-  result.data.allPage.nodes.forEach((node) => {
+  result.data.allPagePath.nodes.forEach((node) => {
     const slug = node.page_id === `index` ? `/` : node.page_id;
     createPage({
       path: slug,
       component: templatePath,
       context: {
-        id: node.id,
+        id: node.pageNodeId,
         slug,
         repoBranches: {
           branches: [`main`],
