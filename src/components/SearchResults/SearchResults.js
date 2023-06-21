@@ -5,7 +5,9 @@ import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
+import { SearchInput } from '@leafygreen-ui/search-input';
 import { palette } from '@leafygreen-ui/palette';
+import { H1 } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -49,14 +51,6 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
-`;
-
-const HeaderText = styled('h1')`
-  color: ${palette.black} !important;
-  font-size: 18px;
-  line-height: 21px;
-  ${commonTextStyling};
-  letter-spacing: 0.8px;
 `;
 
 const FiltersContainer = styled('div')`
@@ -236,6 +230,7 @@ const SearchResults = () => {
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
+  const [searchField, setSearchField] = useState(null);
   const [searchFilter, setSearchFilter] = useState(null);
   const [searchFinished, setSearchFinished] = useState(false);
   const [firstRenderComplete, setFirstRenderComplete] = useState(false);
@@ -274,6 +269,7 @@ const SearchResults = () => {
     setFirstRenderComplete(true);
     const { q, searchProperty } = queryString.parse(search);
     setSearchTerm(q);
+    setSearchField(q);
     setSearchFilter(searchProperty);
   }, [search]);
 
@@ -320,7 +316,17 @@ const SearchResults = () => {
         {!!searchTerm ? (
           <SearchResultsContainer>
             <HeaderContainer>
-              <HeaderText>Search results for "{searchTerm}"</HeaderText>
+              <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+              <SearchInput
+                value={searchField}
+                placeholder={searchTerm}
+                onSubmit={(event) => {
+                  setSearchTerm(event.target[0].value);
+                }}
+                onChange={(e) => {
+                  setSearchField(e.target.value);
+                }}
+              />
               {!!searchFilter && (
                 <FilterBadgesWrapper>
                   {selectedCategory && (
