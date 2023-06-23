@@ -79,7 +79,7 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
       } else if (entry.type === `metadata`) {
         // Create metadata node.
         const { static_files: staticFiles, ...metadataMinusStatic } = entry.data;
-        manifestMetadata = metadataMinusStatic
+        manifestMetadata = metadataMinusStatic;
 
         const { parentPaths, slugToTitle } = metadataMinusStatic;
         if (parentPaths) {
@@ -113,9 +113,6 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
         if (filename.endsWith('.txt')) {
           const page_id = page.page_id.replace(`${pageIdPrefix}/`, '');
           page.page_id = page_id;
-          if (pageCount % 100 === 0) {
-            console.log({ pageCount, page_id });
-          }
           page.id = createNodeId(page_id);
           page.internal = {
             type: `Page`,
@@ -134,6 +131,10 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
 
           createNode(page);
           createNode(pagePathNode);
+
+          if (pageCount % 100 === 0) {
+            console.log({ pageCount, page_id, id: page.id });
+          }
         }
       }
     });
@@ -199,6 +200,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
   });
 };
 
+let repoBranches = null;
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
   const templatePath = path.resolve(`./src/components/DocumentBody.js`);
@@ -214,48 +216,56 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `);
 
-  let repoBranches = null;
-  try {
-    const repoInfo = await db.stitchInterface.fetchRepoBranches();
-    let errMsg;
+  if (!repoBranches) {
+    console.log(`fetchRepoBranches`)
+    try {
+      const repoInfo = await db.stitchInterface.fetchRepoBranches();
+      let errMsg;
 
-    if (!repoInfo) {
-      errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+      if (!repoInfo) {
+        errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+      }
+
+      // We should expect the number of branches for a docs repo to be 1 or more.
+      if (!repoInfo.branches?.length) {
+        errMsg = `No version information found for ${siteMetadata.project}`;
+      }
+
+      if (errMsg) {
+        throw errMsg;
+      }
+
+      // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+      // dotcom environments seem to be consistent.
+      let envKey = siteMetadata.snootyEnv;
+      if (!envKey || envKey === 'development') {
+        envKey = 'dotcomprd';
+      } else if (envKey === 'production') {
+        envKey = 'prd';
+      } else if (envKey === 'staging') {
+        envKey = 'stg';
+      }
+
+      // We're overfetching data here. We only need branches and prefix at the least
+      repoBranches = {
+        branches: repoInfo.branches,
+        siteBasePrefix: repoInfo.prefix[envKey],
+      };
+
+      if (repoInfo.groups?.length > 0) {
+        repoBranches.groups = repoInfo.groups;
+      }
+    } catch (err) {
+      console.error(err);
+      throw err;
     }
-
-    // We should expect the number of branches for a docs repo to be 1 or more.
-    if (!repoInfo.branches?.length) {
-      errMsg = `No version information found for ${siteMetadata.project}`;
-    }
-
-    if (errMsg) {
-      throw errMsg;
-    }
-
-    // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
-    // dotcom environments seem to be consistent.
-    let envKey = siteMetadata.snootyEnv;
-    if (!envKey || envKey === 'development') {
-      envKey = 'dotcomprd';
-    } else if (envKey === 'production') {
-      envKey = 'prd';
-    } else if (envKey === 'staging') {
-      envKey = 'stg';
-    }
-
-    // We're overfetching data here. We only need branches and prefix at the least
-    repoBranches = {
-      branches: repoInfo.branches,
-      siteBasePrefix: repoInfo.prefix[envKey],
-    };
-
-    if (repoInfo.groups?.length > 0) {
-      repoBranches.groups = repoInfo.groups;
-    }
-  } catch (err) {
-    console.error(err);
-    throw err;
   }
+  repoBranches.groups = repoBranches.groups.map(group => {
+    return _.omit(group, [`id`])
+  })
+  repoBranches.branches = repoBranches.branches.map(group => {
+    return _.omit(group, [`id`])
+  })
 
   result.data.allPagePath.nodes.forEach((node) => {
     const slug = node.page_id === `index` ? `/` : node.page_id;
