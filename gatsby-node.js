@@ -11,6 +11,7 @@ const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
+const _ = require(`lodash`);
 
 let isAssociatedProduct = false;
 let associatedReposInfo = {};
@@ -48,18 +49,18 @@ const saveFile = async (file, data) => {
 };
 
 const pageIdPrefix = constructPageIdPrefix(siteMetadata);
-let manifestMetadata
+let manifestMetadata;
 
-exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
+exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDigest, cache }) => {
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
   let pageCount = 0;
   const fileWritePromises = [];
-  const lastFetched = await cache.get(`lastFetched`);
+  const lastFetched = (await cache.get(`lastFetched`)) || 0;
   console.log({ lastFetched });
   const httpStream = got.stream(
-    `http://localhost:3000/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents`
+    `http://localhost:3000/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents/updated/${lastFetched}`
   );
   try {
     const decode = parser();
