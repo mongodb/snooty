@@ -4,22 +4,13 @@ const { promisify } = require('util');
 const fs = require('fs').promises;
 const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
 const { saveStaticFiles } = require('./src/utils/setup/save-asset-files');
-const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
-const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
+const { siteMetadata } = require('./src/utils/site-metadata');
 const { getNestedValue } = require('./src/utils/get-nested-value');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
-
-exports.onPreInit = () => {
-  // setup and validate env variables
-  const envResults = validateEnvVariables(manifestMetadata);
-  if (envResults.error) {
-    throw Error(envResults.message);
-  }
-};
 
 let isAssociatedProduct = false;
 let associatedReposInfo = {};
@@ -57,6 +48,7 @@ const saveFile = async (file, data) => {
 };
 
 const pageIdPrefix = constructPageIdPrefix(siteMetadata);
+let manifestMetadata
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache }) => {
   let hasOpenAPIChangelog = false;
@@ -86,6 +78,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
       } else if (entry.type === `metadata`) {
         // Create metadata node.
         const { static_files: staticFiles, ...metadataMinusStatic } = entry.data;
+        manifestMetadata = metadataMinusStatic
 
         const { parentPaths, slugToTitle } = metadataMinusStatic;
         if (parentPaths) {
@@ -160,6 +153,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, cache
   // Source old nodes.
   console.time(`old source nodes`);
   const { _db, _isAssociatedProduct, _associatedReposInfo } = await sourceNodes({
+    metadata: manifestMetadata,
     hasOpenAPIChangelog,
     createNode,
     createContentDigest,

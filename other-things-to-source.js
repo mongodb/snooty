@@ -3,7 +3,7 @@ const path = require('path');
 const { baseUrl } = require('./src/utils/base-url');
 const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getPageSlug } = require('./src/utils/get-page-slug');
-const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
+const { siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
 
@@ -20,9 +20,9 @@ const associatedReposInfo = {};
 
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
-const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }) => {
+const createRemoteMetadataNode = async ({ metadata, createNode, createNodeId, createContentDigest }) => {
   // fetch associated child products
-  const productList = manifestMetadata?.associated_products || [];
+  const productList = metadata?.associated_products || [];
   await Promise.all(
     productList.map(async (product) => {
       associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
@@ -42,10 +42,10 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   // get remote metadata for updated ToC in Atlas
   try {
     const filter = {
-      project: manifestMetadata.project,
-      branch: manifestMetadata.branch,
+      project: metadata.project,
+      branch: metadata.branch,
     };
-    if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
+    if (isAssociatedProduct || metadata?.associated_products?.length) {
       filter['is_merged_toc'] = true;
     }
     const findOptions = {
@@ -167,13 +167,7 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
   }
 };
 
-exports.sourceNodes = async ({ hasOpenAPIChangelog, createNode, createContentDigest, createNodeId }) => {
-  // setup and validate env variables
-  const envResults = validateEnvVariables(manifestMetadata);
-  if (envResults.error) {
-    throw Error(envResults.message);
-  }
-
+exports.sourceNodes = async ({ metadata, hasOpenAPIChangelog, createNode, createContentDigest, createNodeId }) => {
   // wait to connect to stitch
   if (siteMetadata.manifestPath) {
     console.log('Loading documents from manifest');
@@ -203,7 +197,7 @@ exports.sourceNodes = async ({ hasOpenAPIChangelog, createNode, createContentDig
     });
   });
 
-  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+  await createRemoteMetadataNode({ metadata, createNode, createNodeId, createContentDigest });
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
