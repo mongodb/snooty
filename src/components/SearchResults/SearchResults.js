@@ -7,7 +7,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import { palette } from '@leafygreen-ui/palette';
-import { H1 } from '@leafygreen-ui/typography';
+import { H1, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -216,6 +216,11 @@ const StyledTag = styled(Tag)`
   ${searchTagStyle}
 `;
 
+const ResultTag = styled('div')`
+  display: flex;
+  flex-direction: row;
+`;
+
 const MobileSearchButtonWrapper = styled('div')`
   display: none;
   margin-top: ${theme.size.default};
@@ -327,17 +332,22 @@ const SearchResults = () => {
                   setSearchField(e.target.value);
                 }}
               />
-              {!!searchFilter && (
-                <FilterBadgesWrapper>
-                  {selectedCategory && (
-                    <StyledTag variant="green" onClick={resetFilters}>
-                      {selectedCategory}
-                      <Icon glyph="X" />
-                    </StyledTag>
-                  )}
-                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                </FilterBadgesWrapper>
-              )}
+              <ResultTag style={{ paddingTop: '10px' }}>
+                <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                  {searchResults?.length ? searchResults.length : '0'} RESULTS
+                </Overline>
+                {!!searchFilter && (
+                  <FilterBadgesWrapper>
+                    {selectedCategory && (
+                      <StyledTag variant="green" onClick={resetFilters}>
+                        {selectedCategory}
+                        <Icon glyph="X" />
+                      </StyledTag>
+                    )}
+                    {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                  </FilterBadgesWrapper>
+                )}
+              </ResultTag>
               <MobileSearchButtonWrapper>
                 <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
                   {mobileFilterButton.text}

@@ -14,10 +14,11 @@ const baseStyle = css`
 export const searchTagStyle = css`
   cursor: pointer;
   height: 26px;
-  font-size: ${theme.fontSize.small};
+  padding: 4px 13px 4px 13px;
+  border-radius: 12px;
+  font-size: ${theme.fontSize.tiny};
   margin-right: ${theme.size.small};
 `;
-
 const VARIANTS = {
   blue: css`
     background-color: ${palette.blue.light3};
