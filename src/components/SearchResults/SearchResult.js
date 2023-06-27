@@ -14,6 +14,7 @@ const SEARCH_MATCH_STYLE = `background-color: ${palette.yellow.light2};`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
+  color: #016bf8;
   line-height: ${theme.size.medium};
   /* Only add bold on larger devices */
   @media ${theme.screenSize.smallAndUp} {
