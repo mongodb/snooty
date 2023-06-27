@@ -351,8 +351,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #00684A;
   cursor: pointer;
   height: 26px;
-  padding: 4px 13px 4px 13px;
-  border-radius: 12px;
+  padding: 4px 11px 4px 11px;
+  border-radius: 11px;
   font-size: 12px;
   margin-right: 8px;
 }
@@ -373,8 +373,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #1254B7;
   cursor: pointer;
   height: 26px;
-  padding: 4px 13px 4px 13px;
-  border-radius: 12px;
+  padding: 4px 11px 4px 11px;
+  border-radius: 11px;
   font-size: 12px;
   margin-right: 8px;
 }
@@ -1140,6 +1140,7 @@ exports[`Search Results Page considers a given search filter query param and dis
               fill="none"
               height="16"
               role="img"
+              style="margin-left: 8px; margin-right: -2px;"
               viewBox="0 0 16 16"
               width="16"
               xmlns="http://www.w3.org/2000/svg"
@@ -5810,8 +5811,8 @@ exports[`Search Results Page renders results from a given search term query para
   color: #00684A;
   cursor: pointer;
   height: 26px;
-  padding: 4px 13px 4px 13px;
-  border-radius: 12px;
+  padding: 4px 11px 4px 11px;
+  border-radius: 11px;
   font-size: 12px;
   margin-right: 8px;
 }
@@ -5832,8 +5833,8 @@ exports[`Search Results Page renders results from a given search term query para
   color: #1254B7;
   cursor: pointer;
   height: 26px;
-  padding: 4px 13px 4px 13px;
-  border-radius: 12px;
+  padding: 4px 11px 4px 11px;
+  border-radius: 11px;
   font-size: 12px;
   margin-right: 8px;
 }

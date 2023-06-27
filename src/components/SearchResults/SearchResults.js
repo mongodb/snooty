@@ -342,7 +342,7 @@ const SearchResults = () => {
                     {selectedCategory && (
                       <StyledTag variant="green" onClick={resetFilters}>
                         {selectedCategory}
-                        <Icon glyph="X" />
+                        <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
                       </StyledTag>
                     )}
                     {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
