@@ -530,7 +530,7 @@ th {
   --mms-gray5: #babdbe;
   --mms-green2: #13aa52;
   --mms-warning-text: #ffb618;
-  --sans-serif: 'Akzidenz', 'Helvetica Neue', sans-serif;
+  --sans-serif: 'Euclid Circular A', 'Helvetica Neue', sans-serif;
   --monospace: 'Source Code Pro', monospace;
   --hr-style: 1px solid #e0e7e8;
   --hr-style: 1px solid var(--light-grey-primary);
@@ -966,63 +966,6 @@ div td pre {
   font-style: normal;
   font-weight: 400;
 }
-@font-face {
-  font-family: Akzidenz;
-  src: url(fonts/akzidgrostdreg.eot);
-  src: url(fonts/akzidgrostdreg.eot#iefix) format('embedded-opentype'), url(fonts/akzidgrostdreg.woff) format('woff'),
-    url(fonts/akzidgrostdreg.ttf) format('truetype');
-  font-style: normal;
-  font-weight: 400;
-}
-@font-face {
-  font-family: Akzidenz;
-  src: url(fonts/akzidgrostdita.eot);
-  src: url(fonts/akzidgrostdita.eot#iefix) format('embedded-opentype'), url(fonts/akzidgrostdita.woff) format('woff'),
-    url(fonts/akzidgrostdita.ttf) format('truetype');
-  font-style: italic;
-  font-weight: 400;
-}
-@font-face {
-  font-family: Akzidenz;
-  src: url(fonts/akzidgrostdmed.eot);
-  src: url(fonts/akzidgrostdmed.eot#iefix) format('embedded-opentype'), url(fonts/akzidgrostdmed.woff) format('woff'),
-    url(fonts/akzidgrostdmed.ttf) format('truetype');
-  font-style: normal;
-  font-weight: 500;
-}
-@font-face {
-  font-family: Akzidenz;
-  src: url(fonts/akzidgrostdmed.eot);
-  src: url(fonts/akzidgrostdmed.eot#iefix) format('embedded-opentype'), url(fonts/akzidgrostdmed.woff) format('woff'),
-    url(fonts/akzidgrostdmed.ttf) format('truetype');
-  font-style: normal;
-  font-weight: 700;
-}
-@font-face {
-  font-family: Akzidenz;
-  src: url(fonts/akzidgrostdmedita.eot);
-  src: url(fonts/akzidgrostdmedita.eot#iefix) format('embedded-opentype'),
-    url(fonts/akzidgrostdmedita.woff) format('woff'), url(fonts/akzidgrostdmedita.ttf) format('truetype');
-  font-style: italic;
-  font-weight: 700;
-}
-@font-face {
-  font-family: Akzidenz;
-  font-family: 'Akzidenz Grotesk BQ Light';
-  src: url(fonts/akzidgrostdlig.eot);
-  src: url(fonts/akzidgrostdlig.eot#iefix) format('embedded-opentype'), url(fonts/akzidgrostdlig.woff) format('woff'),
-    url(fonts/akzidgrostdlig.ttf) format('truetype');
-  font-style: normal;
-  font-weight: 200;
-}
-@font-face {
-  font-family: Akzidenz;
-  src: url(fonts/akzidgrostdligita.eot);
-  src: url(fonts/akzidgrostdligita.eot#iefix) format('embedded-opentype'),
-    url(fonts/akzidgrostdligita.woff) format('woff'), url(fonts/akzidgrostdligita.ttf) format('truetype');
-  font-style: italic;
-  font-weight: 200;
-}
 
 div.document {
   margin-left: 25px;
@@ -1050,7 +993,7 @@ dl.binary {
   height: 0;
 }
 body {
-  font-family: "Euclid Circular A", Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Euclid Circular A', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 0;
   color: #21313C;
   margin: 0;

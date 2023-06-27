@@ -42,7 +42,7 @@ const EmptyStateContainer = styled('div')`
   align-items: center;
   display: flex;
   flex-direction: column;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   letter-spacing: 0.5px;
   margin: 0 auto;
   max-width: ${MAX_WIDTH};

@@ -37,7 +37,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -297,7 +297,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-25 {
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
@@ -381,7 +381,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -1084,7 +1084,7 @@ exports[`Search Results Page does not return results for a given search term wit
   color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -1221,7 +1221,7 @@ exports[`Search Results Page does not return results for a given search term wit
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   letter-spacing: 0.5px;
   margin: 0 auto;
   max-width: 337px;
@@ -1363,7 +1363,7 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -2019,7 +2019,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   letter-spacing: 0.5px;
   margin: 0 auto;
   max-width: 337px;
@@ -2230,7 +2230,7 @@ exports[`Search Results Page renders loading images before returning no results 
   color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -2438,7 +2438,7 @@ exports[`Search Results Page renders loading images before returning no results 
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -3017,7 +3017,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -3225,7 +3225,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -3804,7 +3804,7 @@ exports[`Search Results Page renders results from a given search term query para
   color: #001E2B!important;
   font-size: 18px;
   line-height: 21px;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -4020,7 +4020,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-19 {
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
@@ -4144,7 +4144,7 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
