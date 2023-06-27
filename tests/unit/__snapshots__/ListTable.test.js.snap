@@ -66,7 +66,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-4 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   position: relative;
   border-collapse: collapse;
   box-sizing: border-box;
@@ -207,7 +207,7 @@ table .emotion-4 {
   color: #1C2D38;
 }
 
-.emotion-24>:is(td, th)>.lg-ui-td-inner-div-0000 {
+.emotion-24>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
   min-height: var(--lg-cell-min-height);
   max-height: unset;
 }
@@ -266,6 +266,7 @@ table .emotion-4 {
   vertical-align: baseline;
   text-align: left;
   font-size: 13px;
+  line-height: 20px;
   line-height: 20px;
   position: relative;
   overflow-wrap: anywhere;
@@ -437,7 +438,8 @@ table .emotion-4 {
               class="emotion-25"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-26"
+                class="emotion-26"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-27"
@@ -450,7 +452,8 @@ table .emotion-4 {
               class="emotion-25"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-26"
+                class="emotion-26"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-27"
@@ -463,7 +466,8 @@ table .emotion-4 {
               class="emotion-25"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-26"
+                class="emotion-26"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-27"
@@ -476,7 +480,8 @@ table .emotion-4 {
               class="emotion-25"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-26"
+                class="emotion-26"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-27"
@@ -489,7 +494,8 @@ table .emotion-4 {
               class="emotion-25"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-26"
+                class="emotion-26"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-27"
@@ -502,7 +508,8 @@ table .emotion-4 {
               class="emotion-25"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-26"
+                class="emotion-26"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-27"
@@ -585,7 +592,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-4 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   position: relative;
   border-collapse: collapse;
   box-sizing: border-box;
@@ -643,7 +650,7 @@ table .emotion-4 {
   color: #1C2D38;
 }
 
-.emotion-23>:is(td, th)>.lg-ui-td-inner-div-0000 {
+.emotion-23>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
   min-height: var(--lg-cell-min-height);
   max-height: unset;
 }
@@ -702,6 +709,7 @@ table .emotion-4 {
   vertical-align: baseline;
   text-align: left;
   font-size: 13px;
+  line-height: 20px;
   line-height: 20px;
   position: relative;
   font-weight: 600;
@@ -769,6 +777,7 @@ table .emotion-4 {
   vertical-align: baseline;
   text-align: left;
   font-size: 13px;
+  line-height: 20px;
   line-height: 20px;
   position: relative;
   overflow-wrap: anywhere;
@@ -936,7 +945,8 @@ table .emotion-4 {
               scope="row"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -949,7 +959,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -962,7 +973,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -975,7 +987,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -988,7 +1001,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1001,7 +1015,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1022,7 +1037,8 @@ table .emotion-4 {
               scope="row"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1035,7 +1051,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1048,7 +1065,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1061,7 +1079,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1074,7 +1093,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1087,7 +1107,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1108,7 +1129,8 @@ table .emotion-4 {
               scope="row"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1121,7 +1143,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1134,7 +1157,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1147,7 +1171,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1160,7 +1185,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1173,7 +1199,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1194,7 +1221,8 @@ table .emotion-4 {
               scope="row"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1207,7 +1235,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1220,7 +1249,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1233,7 +1263,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1246,7 +1277,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1259,7 +1291,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1280,7 +1313,8 @@ table .emotion-4 {
               scope="row"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1293,7 +1327,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1306,7 +1341,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1319,7 +1355,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1332,7 +1369,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"
@@ -1345,7 +1383,8 @@ table .emotion-4 {
               class="emotion-27"
             >
               <div
-                class="lg-ui-td-inner-div-0000 emotion-25"
+                class="emotion-25"
+                data-leafygreen-ui="td-inner-div"
               >
                 <span
                   class="emotion-26"

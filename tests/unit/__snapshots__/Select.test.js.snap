@@ -65,7 +65,7 @@ exports[`Select renders select correctly 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -104,7 +104,7 @@ exports[`Select renders select correctly 1`] = `
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-2:focus-visible {
+.emotion-2:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -131,12 +131,12 @@ exports[`Select renders select correctly 1`] = `
   padding: 0 4px 0 12px;
 }
 
-.emotion-2:focus-visible {
+.emotion-2:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-@media only screen and (max-width: 768px) and (hover: none) and (pointer: coarse),@media only screen and (max-width: 768px) and (hover: none) and (pointer: none) {
+@media only screen and (max-width: 1024px) {
   .emotion-2 {
     height: 36px;
     font-size: 16px;
@@ -223,7 +223,8 @@ exports[`Select renders select correctly 1`] = `
         aria-expanded="false"
         aria-invalid="false"
         aria-labelledby="select"
-        class="lg-ui-button-0000 emotion-2"
+        class="emotion-2"
+        data-leafygreen-ui="button"
         data-testid="lg-select"
         id="select-2"
         type="button"
