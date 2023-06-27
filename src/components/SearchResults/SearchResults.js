@@ -124,8 +124,6 @@ const StyledSearchFilters = styled(SearchFilters)`
 
 const searchResultStyling = css`
   background-color: #fff;
-  border-radius: 45px;
-  text-color: red;
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
@@ -181,7 +179,7 @@ const StyledLoadingSkeletonContainer = styled('div')`
 `;
 
 const StyledSearchResults = styled('div')`
-  // box-shadow: none;
+  box-shadow: none;
   display: grid;
   grid-area: results;
   /* Build space between rows into row height for hover effect */
@@ -191,10 +189,10 @@ const StyledSearchResults = styled('div')`
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
   :hover {
     > ${StyledSearchResult} {
+      opacity: 0.2;
+      transition: opacity 150ms ease-in;
       :hover {
         opacity: 1;
-        box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(0, 0, 0, 0.2);
       }
     }
   }

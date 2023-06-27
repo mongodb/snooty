@@ -491,6 +491,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-27 {
+  box-shadow: none;
   display: grid;
   grid-area: results;
   grid-auto-rows: calc(152px + 16px);
@@ -498,10 +499,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   width: 100%;
 }
 
+.emotion-27:hover>.emotion-29 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
 .emotion-27:hover>.emotion-29:hover {
   opacity: 1;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .emotion-27:not(:hover)>.emotion-29 {
@@ -517,8 +522,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
   border-radius: 24px;
   background-color: #fff;
-  border-radius: 45px;
-  text-color: red;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -597,7 +600,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-size: 16px;
-  color: #016BF8;
   line-height: 24px;
 }
 
@@ -610,7 +612,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 @media only screen and (max-width: 480px) {
   .emotion-34 {
     font-size: 16px;
-    color: #016BF8;
     line-height: 24px;
   }
 
@@ -3337,6 +3338,7 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-21 {
+  box-shadow: none;
   display: grid;
   grid-area: results;
   grid-auto-rows: calc(152px + 16px);
@@ -3344,10 +3346,14 @@ exports[`Search Results Page renders loading images before returning no results 
   width: 100%;
 }
 
+.emotion-21:hover>.e1yoi6mj7 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
 .emotion-21:hover>.e1yoi6mj7:hover {
   opacity: 1;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .emotion-21:not(:hover)>.e1yoi6mj7 {
@@ -3358,8 +3364,6 @@ exports[`Search Results Page renders loading images before returning no results 
 
 .emotion-23 {
   background-color: #fff;
-  border-radius: 45px;
-  text-color: red;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -4481,6 +4485,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-21 {
+  box-shadow: none;
   display: grid;
   grid-area: results;
   grid-auto-rows: calc(152px + 16px);
@@ -4488,10 +4493,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
   width: 100%;
 }
 
+.emotion-21:hover>.e1yoi6mj7 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
 .emotion-21:hover>.e1yoi6mj7:hover {
   opacity: 1;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .emotion-21:not(:hover)>.e1yoi6mj7 {
@@ -4502,8 +4511,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
 
 .emotion-23 {
   background-color: #fff;
-  border-radius: 45px;
-  text-color: red;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -5625,6 +5632,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-21 {
+  box-shadow: none;
   display: grid;
   grid-area: results;
   grid-auto-rows: calc(152px + 16px);
@@ -5632,10 +5640,14 @@ exports[`Search Results Page renders results from a given search term query para
   width: 100%;
 }
 
+.emotion-21:hover>.emotion-23 {
+  opacity: 0.2;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
 .emotion-21:hover>.emotion-23:hover {
   opacity: 1;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .emotion-21:not(:hover)>.emotion-23 {
@@ -5651,8 +5663,6 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
   border-radius: 24px;
   background-color: #fff;
-  border-radius: 45px;
-  text-color: red;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
   height: 152px;
   position: relative;
@@ -5731,7 +5741,6 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-size: 16px;
-  color: #016BF8;
   line-height: 24px;
 }
 
@@ -5744,7 +5753,6 @@ exports[`Search Results Page renders results from a given search term query para
 @media only screen and (max-width: 480px) {
   .emotion-28 {
     font-size: 16px;
-    color: #016BF8;
     line-height: 24px;
   }
 
