@@ -78,7 +78,7 @@ exports[`renders correctly 1`] = `
 
 .emotion-5 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -96,7 +96,7 @@ exports[`renders correctly 1`] = `
 
 .emotion-6 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -112,7 +112,7 @@ exports[`renders correctly 1`] = `
 
 .emotion-7 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -132,7 +132,7 @@ exports[`renders correctly 1`] = `
 .emotion-8 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -149,6 +149,13 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-8:hover,
+.emotion-8:focus,
+.emotion-8:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-8:focus {
@@ -169,11 +176,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-9::after {
+.lg-ui-0001:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-9::after {
+.lg-ui-0001:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
@@ -214,10 +221,9 @@ exports[`renders correctly 1`] = `
       class="emotion-7"
     >
       <a
-        class="constant-classname emotion-8"
+        class="lg-ui-0001 emotion-8"
         href="https://university.mongodb.com/courses/M001/about"
         rel="noopener noreferrer"
-        target="_blank"
       >
         <span
           class="emotion-9"

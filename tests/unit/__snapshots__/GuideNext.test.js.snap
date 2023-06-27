@@ -52,7 +52,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 .emotion-8 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -104,6 +104,13 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   color: #ffffff!important;
 }
 
+.emotion-8:hover,
+.emotion-8:focus,
+.emotion-8:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 .emotion-8:focus {
   outline: none;
 }
@@ -152,11 +159,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-9::after {
+.lg-ui-0001:focus .emotion-9::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-9::after {
+.lg-ui-0001:hover .emotion-9::after {
   background-color: #E8EDEB;
 }
 
@@ -393,7 +400,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       </p>
       <a
         aria-disabled="false"
-        class="constant-classname emotion-8"
+        class="lg-ui-0001 emotion-8"
         data-leafygreen-ui="button"
         href="https://university.mongodb.com/certification/developer/about"
         target="_self"

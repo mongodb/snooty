@@ -4,7 +4,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 <DocumentFragment>
   .emotion-0 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -21,7 +21,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 .emotion-1 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -38,6 +38,13 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-1:hover,
+.emotion-1:focus,
+.emotion-1:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1:focus {
@@ -58,11 +65,11 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-2::after {
+.lg-ui-0001:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-2::after {
+.lg-ui-0001:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
@@ -80,10 +87,9 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
     class="emotion-0"
   >
     <a
-      class="constant-classname emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://cloud.mongodb.com?tck=docs_realm"
       rel="noopener noreferrer"
-      target="_blank"
     >
       <span
         class="emotion-2"
@@ -117,7 +123,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 <DocumentFragment>
   .emotion-0 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -134,7 +140,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 .emotion-1 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -151,6 +157,13 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-1:hover,
+.emotion-1:focus,
+.emotion-1:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1:focus {
@@ -171,11 +184,11 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-2::after {
+.lg-ui-0001:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-2::after {
+.lg-ui-0001:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
@@ -193,10 +206,9 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
     class="emotion-0"
   >
     <a
-      class="constant-classname emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://cloud.mongodb.com?tck=docs_realm"
       rel="noopener noreferrer"
-      target="_blank"
     >
       <span
         class="emotion-2"
@@ -230,7 +242,7 @@ exports[`Paragraph unit tests renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
