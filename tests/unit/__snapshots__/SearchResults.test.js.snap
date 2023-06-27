@@ -123,7 +123,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -157,7 +157,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-14:focus {
+.emotion-14:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -513,7 +513,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -551,7 +551,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-48:focus {
+.emotion-48:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -578,12 +578,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   padding: 0 4px 0 12px;
 }
 
-.emotion-48:focus {
+.emotion-48:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) and (hover: none) and (pointer: coarse),@media only screen and (max-width: 768px) and (hover: none) and (pointer: none) {
   .emotion-48 {
     height: 36px;
     font-size: 16px;
@@ -651,7 +651,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -723,7 +723,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   padding: 0 4px 0 12px;
 }
 
-.emotion-60:focus {
+.emotion-60:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
@@ -747,11 +747,22 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #889397;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) and (hover: none) and (pointer: coarse),@media only screen and (max-width: 768px) and (hover: none) and (pointer: none) {
   .emotion-60 {
     height: 36px;
     font-size: 16px;
   }
+}
+
+.emotion-65 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  color: #C1C7C6;
+  justify-self: left;
 }
 
 <div
@@ -801,8 +812,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       >
         <button
           aria-disabled="false"
-          class="emotion-14"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-14"
           type="button"
         >
           <div
@@ -903,16 +913,15 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-47"
             >
               <button
-                aria-controls="select-33-menu"
-                aria-describedby="select-33-description"
+                aria-controls="select-9-menu"
+                aria-describedby="select-9-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-48"
-                data-leafygreen-ui="button"
+                class="lg-ui-button-0000 emotion-48"
                 data-testid="lg-select"
-                id="select-34"
+                id="select-10"
                 type="button"
                 value="Realm"
               >
@@ -960,17 +969,16 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-47"
             >
               <button
-                aria-controls="select-35-menu"
-                aria-describedby="select-35-description"
+                aria-controls="select-11-menu"
+                aria-describedby="select-11-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-60"
-                data-leafygreen-ui="button"
+                class="lg-ui-button-0000 emotion-60"
                 data-testid="lg-select"
                 disabled=""
-                id="select-36"
+                id="select-12"
                 type="button"
                 value="Latest"
               >
@@ -992,7 +1000,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-53"
+                    class="emotion-65"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -1010,8 +1018,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="emotion-14"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-14"
           type="button"
         >
           <div
@@ -1126,7 +1133,7 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -1160,7 +1167,7 @@ exports[`Search Results Page does not return results for a given search term wit
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-8:focus {
+.emotion-8:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -1495,7 +1502,7 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -1534,7 +1541,7 @@ exports[`Search Results Page does not return results for a given search term wit
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-38:focus {
+.emotion-38:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -1561,12 +1568,12 @@ exports[`Search Results Page does not return results for a given search term wit
   padding: 0 4px 0 12px;
 }
 
-.emotion-38:focus {
+.emotion-38:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) and (hover: none) and (pointer: coarse),@media only screen and (max-width: 768px) and (hover: none) and (pointer: none) {
   .emotion-38 {
     height: 36px;
     font-size: 16px;
@@ -1634,7 +1641,7 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -1707,7 +1714,7 @@ exports[`Search Results Page does not return results for a given search term wit
   padding: 0 4px 0 12px;
 }
 
-.emotion-50:focus {
+.emotion-50:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
@@ -1731,11 +1738,22 @@ exports[`Search Results Page does not return results for a given search term wit
   color: #889397;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) and (hover: none) and (pointer: coarse),@media only screen and (max-width: 768px) and (hover: none) and (pointer: none) {
   .emotion-50 {
     height: 36px;
     font-size: 16px;
   }
+}
+
+.emotion-55 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  color: #C1C7C6;
+  justify-self: left;
 }
 
 <div
@@ -1754,8 +1772,7 @@ exports[`Search Results Page does not return results for a given search term wit
       >
         <button
           aria-disabled="false"
-          class="emotion-8"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-8"
           type="button"
         >
           <div
@@ -1856,16 +1873,15 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-37"
             >
               <button
-                aria-controls="select-53-menu"
-                aria-describedby="select-53-description"
+                aria-controls="select-13-menu"
+                aria-describedby="select-13-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-38"
-                data-leafygreen-ui="button"
+                class="lg-ui-button-0000 emotion-38"
                 data-testid="lg-select"
-                id="select-54"
+                id="select-14"
                 type="button"
                 value=""
               >
@@ -1913,17 +1929,16 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-37"
             >
               <button
-                aria-controls="select-55-menu"
-                aria-describedby="select-55-description"
+                aria-controls="select-15-menu"
+                aria-describedby="select-15-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-50"
-                data-leafygreen-ui="button"
+                class="lg-ui-button-0000 emotion-50"
                 data-testid="lg-select"
                 disabled=""
-                id="select-56"
+                id="select-16"
                 type="button"
                 value=""
               >
@@ -1945,7 +1960,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-43"
+                    class="emotion-55"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -1963,8 +1978,7 @@ exports[`Search Results Page does not return results for a given search term wit
         </div>
         <button
           aria-disabled="false"
-          class="emotion-8"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-8"
           type="button"
         >
           <div
@@ -2272,7 +2286,7 @@ exports[`Search Results Page renders loading images before returning no results 
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -2306,7 +2320,7 @@ exports[`Search Results Page renders loading images before returning no results 
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-8:focus {
+.emotion-8:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -2461,8 +2475,7 @@ exports[`Search Results Page renders loading images before returning no results 
       >
         <button
           aria-disabled="false"
-          class="emotion-8"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-8"
           type="button"
         >
           <div
@@ -3059,7 +3072,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -3093,7 +3106,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-8:focus {
+.emotion-8:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -3248,8 +3261,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
       >
         <button
           aria-disabled="false"
-          class="emotion-8"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-8"
           type="button"
         >
           <div
@@ -3846,7 +3858,7 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -3880,7 +3892,7 @@ exports[`Search Results Page renders results from a given search term query para
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-8:focus {
+.emotion-8:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4276,7 +4288,7 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -4315,7 +4327,7 @@ exports[`Search Results Page renders results from a given search term query para
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-42:focus {
+.emotion-42:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4342,12 +4354,12 @@ exports[`Search Results Page renders results from a given search term query para
   padding: 0 4px 0 12px;
 }
 
-.emotion-42:focus {
+.emotion-42:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) and (hover: none) and (pointer: coarse),@media only screen and (max-width: 768px) and (hover: none) and (pointer: none) {
   .emotion-42 {
     height: 36px;
     font-size: 16px;
@@ -4415,7 +4427,7 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -4488,7 +4500,7 @@ exports[`Search Results Page renders results from a given search term query para
   padding: 0 4px 0 12px;
 }
 
-.emotion-54:focus {
+.emotion-54:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
@@ -4512,11 +4524,22 @@ exports[`Search Results Page renders results from a given search term query para
   color: #889397;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) and (hover: none) and (pointer: coarse),@media only screen and (max-width: 768px) and (hover: none) and (pointer: none) {
   .emotion-54 {
     height: 36px;
     font-size: 16px;
   }
+}
+
+.emotion-59 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  color: #C1C7C6;
+  justify-self: left;
 }
 
 <div
@@ -4535,8 +4558,7 @@ exports[`Search Results Page renders results from a given search term query para
       >
         <button
           aria-disabled="false"
-          class="emotion-8"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-8"
           type="button"
         >
           <div
@@ -4637,16 +4659,15 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-41"
             >
               <button
-                aria-controls="select-17-menu"
-                aria-describedby="select-17-description"
+                aria-controls="select-5-menu"
+                aria-describedby="select-5-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-42"
-                data-leafygreen-ui="button"
+                class="lg-ui-button-0000 emotion-42"
                 data-testid="lg-select"
-                id="select-18"
+                id="select-6"
                 type="button"
                 value=""
               >
@@ -4694,17 +4715,16 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-41"
             >
               <button
-                aria-controls="select-19-menu"
-                aria-describedby="select-19-description"
+                aria-controls="select-7-menu"
+                aria-describedby="select-7-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-54"
-                data-leafygreen-ui="button"
+                class="lg-ui-button-0000 emotion-54"
                 data-testid="lg-select"
                 disabled=""
-                id="select-20"
+                id="select-8"
                 type="button"
                 value=""
               >
@@ -4726,7 +4746,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-47"
+                    class="emotion-59"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -4744,8 +4764,7 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="emotion-8"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-8"
           type="button"
         >
           <div

@@ -92,7 +92,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #00684A;
   border-color: #00684A;
@@ -139,7 +139,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-8:focus {
+.emotion-8:focus-visible {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -202,16 +202,16 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -400,8 +400,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       </p>
       <a
         aria-disabled="false"
-        class="lg-ui-0001 emotion-8"
-        data-leafygreen-ui="button"
+        class="lg-ui-0001 lg-ui-button-0000 emotion-8"
         href="https://university.mongodb.com/certification/developer/about"
         target="_self"
         type="button"
@@ -592,7 +591,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #00684A;
   border-color: #00684A;
@@ -628,7 +627,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-9:focus {
+.emotion-9:focus-visible {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -669,16 +668,16 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -824,8 +823,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       </div>
       <a
         aria-disabled="false"
-        class="emotion-8 emotion-9"
-        data-leafygreen-ui="button"
+        class="emotion-8 lg-ui-button-0000 emotion-9"
         href="/server/read/"
         type="button"
       >
@@ -1006,7 +1004,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #00684A;
   border-color: #00684A;
@@ -1042,7 +1040,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-9:focus {
+.emotion-9:focus-visible {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -1083,16 +1081,16 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -1293,8 +1291,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       </div>
       <a
         aria-disabled="false"
-        class="emotion-8 emotion-9"
-        data-leafygreen-ui="button"
+        class="emotion-8 lg-ui-button-0000 emotion-9"
         href="/cloud/connectionstring/"
         type="button"
       >

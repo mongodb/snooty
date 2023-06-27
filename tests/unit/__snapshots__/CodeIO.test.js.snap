@@ -288,7 +288,7 @@ exports[`CodeIO renders correctly 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -325,7 +325,7 @@ exports[`CodeIO renders correctly 1`] = `
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -545,8 +545,7 @@ exports[`CodeIO renders correctly 1`] = `
     >
       <button
         aria-disabled="false"
-        class="emotion-16"
-        data-leafygreen-ui="button"
+        class="lg-ui-button-0000 emotion-16"
         role="button"
         type="button"
       >
