@@ -4,7 +4,7 @@ exports[`renders correctly with pageTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -25,7 +25,7 @@ exports[`renders correctly with pageTitle 1`] = `
 .emotion-1 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -43,6 +43,13 @@ exports[`renders correctly with pageTitle 1`] = `
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
   font-size: 13px;
+}
+
+.emotion-1:hover,
+.emotion-1:focus,
+.emotion-1:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1:focus {
@@ -78,11 +85,11 @@ exports[`renders correctly with pageTitle 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-2::after {
+.lg-ui-0001:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-2::after {
+.lg-ui-0001:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
@@ -157,7 +164,7 @@ exports[`renders correctly with pageTitle 1`] = `
     class="emotion-0"
   >
     <a
-      class="constant-classname emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://www.mongodb.com/docs/"
       target="_self"
     >
@@ -186,7 +193,7 @@ exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -207,7 +214,7 @@ exports[`renders correctly with siteTitle 1`] = `
 .emotion-1 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -225,6 +232,13 @@ exports[`renders correctly with siteTitle 1`] = `
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
   font-size: 13px;
+}
+
+.emotion-1:hover,
+.emotion-1:focus,
+.emotion-1:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1:focus {
@@ -260,11 +274,11 @@ exports[`renders correctly with siteTitle 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-2::after {
+.lg-ui-0001:focus .emotion-2::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-2::after {
+.lg-ui-0001:hover .emotion-2::after {
   background-color: #E8EDEB;
 }
 
@@ -339,7 +353,7 @@ exports[`renders correctly with siteTitle 1`] = `
     class="emotion-0"
   >
     <a
-      class="constant-classname emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://www.mongodb.com/docs/"
       target="_self"
     >

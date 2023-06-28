@@ -78,7 +78,7 @@ const StyledPreviewText = styled(Body)`
 `;
 
 const StyledResultTitle = styled('p')`
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;

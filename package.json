@@ -85,7 +85,7 @@
     "@leafygreen-ui/text-input": "^10.1.0",
     "@leafygreen-ui/toast": "^6.1.4",
     "@leafygreen-ui/tooltip": "^7.1.0",
-    "@leafygreen-ui/typography": "^13.0.0",
+    "@leafygreen-ui/typography": "^16.5.1",
     "@loadable/component": "^5.14.1",
     "@mdb/consistent-nav": "1.2.38",
     "@mdb/flora": "^1.5.6",
