@@ -15,6 +15,11 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   color: #ffffff;
 }
 
+.emotion-0 a:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
 .emotion-1 {
   box-sizing: border-box;
   margin: 0;
@@ -436,6 +441,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
+                alt=""
                 class="emotion-39"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wrvghw9q75ytq1-github.svg?auto=format%252Ccompress"
               />
@@ -452,6 +458,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
+                alt=""
                 class="emotion-39"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsfh9d9z2m4jvx-stackoverflow.svg?auto=format%252Ccompress"
               />
@@ -468,6 +475,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
+                alt=""
                 class="emotion-39"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsmr3g1ckzd0hs-linkedin.svg?auto=format%252Ccompress"
               />
@@ -484,6 +492,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
+                alt=""
                 class="emotion-39"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsxwxsvrivp4q4-youtube.svg?auto=format%252Ccompress"
               />
@@ -500,6 +509,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
+                alt=""
                 class="emotion-39"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wt4s3sy4hlc22k-twitter.svg?auto=format%252Ccompress"
               />
@@ -516,6 +526,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
+                alt=""
                 class="emotion-39"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wtbzfgc05d27pb-twitch.svg?auto=format%252Ccompress"
               />
@@ -532,6 +543,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
+                alt=""
                 class="emotion-39"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wtks9piclp67yr-facebook.svg?auto=format%252Ccompress"
               />
