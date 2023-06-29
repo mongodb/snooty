@@ -52,6 +52,8 @@ const saveFile = async (file, data) => {
 
 let manifestMetadata;
 
+const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
+
 exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDigest, cache }) => {
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
@@ -62,9 +64,9 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
   console.log({ lastFetched });
   let url;
   if (isPreview) {
-    url = `http://localhost:3000/projects/${process.env.GATSBY_SITE}/documents`;
+    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
   } else {
-    url = `http://localhost:3000/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents/updated/${lastFetched}`;
+    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents/updated/${lastFetched}`;
   }
   const httpStream = got.stream(url);
   try {
@@ -273,11 +275,11 @@ exports.createPages = async ({ actions, graphql }) => {
   });
 
   result.data.allPagePath.nodes.forEach((node) => {
-    let slug
+    let slug;
     if (isPreview) {
-     slug = path.join(`BRANCH--${node.branch}`, node.page_id);
+      slug = path.join(`BRANCH--${node.branch}`, node.page_id);
     } else {
-      slug = node.page_id
+      slug = node.page_id;
     }
     createPage({
       path: slug,
