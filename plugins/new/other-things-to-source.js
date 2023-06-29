@@ -1,10 +1,10 @@
 const yaml = require('js-yaml');
 const path = require('path');
-const { baseUrl } = require('./src/utils/base-url');
-const { getPageSlug } = require('./src/utils/get-page-slug');
-const { siteMetadata } = require('./src/utils/site-metadata');
-const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
-const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { baseUrl } = require('../../src/utils/base-url');
+const { getPageSlug } = require('../../src/utils/get-page-slug');
+const { siteMetadata } = require('../../src/utils/site-metadata');
+const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
+const { manifestDocumentDatabase, stitchDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 
 // different types of references
 const PAGES = [];
@@ -257,7 +257,7 @@ exports.createPages = async ({ actions }) => {
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
       const isFullBuild =
         siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
-      const mainComponentRelativePath = `./src/components/DocumentBody${isFullBuild ? '' : 'Preview'}.js`;
+      const mainComponentRelativePath = `../../src/components/DocumentBody${isFullBuild ? '' : 'Preview'}.js`;
 
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({

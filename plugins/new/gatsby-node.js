@@ -2,10 +2,10 @@ const path = require('path');
 const stream = require('stream');
 const { promisify } = require('util');
 const fs = require('fs').promises;
-const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
-const { saveStaticFiles } = require('./src/utils/setup/save-asset-files');
-const { siteMetadata } = require('./src/utils/site-metadata');
-const { getNestedValue } = require('./src/utils/get-nested-value');
+const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
+const { saveStaticFiles } = require('../../src/utils/setup/save-asset-files');
+const { siteMetadata } = require('../../src/utils/site-metadata');
+const { getNestedValue } = require('../../src/utils/get-nested-value');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
@@ -210,7 +210,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 let repoBranches = null;
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
-  const templatePath = path.resolve(`./src/components/DocumentBody.js`);
+  const templatePath = path.resolve(`../../src/components/DocumentBody.js`);
   const result = await graphql(`
     query {
       allPagePath {
