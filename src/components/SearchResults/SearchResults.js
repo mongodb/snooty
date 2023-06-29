@@ -53,6 +53,14 @@ const HeaderContainer = styled('div')`
   grid-area: header;
 `;
 
+const HeaderText = styled('h1')`
+  color: ${palette.black} !important;
+  font-size: 18px;
+  line-height: 21px;
+  ${commonTextStyling};
+  letter-spacing: 0.8px;
+`;
+
 const FiltersContainer = styled('div')`
   grid-area: filters;
   @media ${theme.screenSize.upToMedium} {
@@ -239,6 +247,7 @@ const SearchResults = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
+  const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
@@ -315,17 +324,23 @@ const SearchResults = () => {
       >
         <SearchResultsContainer>
           <HeaderContainer>
-            <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
-            <SearchInput
-              value={searchField}
-              placeholder="Search"
-              onSubmit={(event) => {
-                setSearchTerm(event.target[0].value);
-              }}
-              onChange={(e) => {
-                setSearchField(e.target.value);
-              }}
-            />
+            {newSearchInput ? (
+              <>
+                <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+                <SearchInput
+                  value={searchField}
+                  placeholder="Search"
+                  onSubmit={(event) => {
+                    setSearchTerm(event.target[0].value);
+                  }}
+                  onChange={(e) => {
+                    setSearchField(e.target.value);
+                  }}
+                />
+              </>
+            ) : (
+              <HeaderText>Search results for "{searchTerm}"</HeaderText>
+            )}
             {!!searchFilter && (
               <FilterBadgesWrapper>
                 {selectedCategory && (
