@@ -6,7 +6,6 @@ const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumb
 const { saveStaticFiles } = require('./src/utils/setup/save-asset-files');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { getNestedValue } = require('./src/utils/get-nested-value');
-const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);

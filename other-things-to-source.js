@@ -1,7 +1,6 @@
 const yaml = require('js-yaml');
 const path = require('path');
 const { baseUrl } = require('./src/utils/base-url');
-const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
 const { getPageSlug } = require('./src/utils/get-page-slug');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
