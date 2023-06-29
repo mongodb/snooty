@@ -16,18 +16,21 @@ const _ = require(`lodash`);
 let isAssociatedProduct = false;
 let associatedReposInfo = {};
 let db;
+const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
     type Page implements Node @dontInfer {
       page_id: String
+      branch: String
       pagePath: String
       ast: JSON!
     }
 
     type SnootyMetadata implements Node @dontInfer {
       metadata: JSON
+      branch: String
     }
 
     type RemoteMetadata implements Node @dontInfer {
@@ -48,7 +51,6 @@ const saveFile = async (file, data) => {
   await fs.writeFile(path.join('static', file), data, 'binary');
 };
 
-const pageIdPrefix = constructPageIdPrefix(siteMetadata);
 let manifestMetadata;
 
 exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDigest, cache }) => {
@@ -59,16 +61,17 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
   const fileWritePromises = [];
   const lastFetched = (await cache.get(`lastFetched`)) || 0;
   console.log({ lastFetched });
-  const httpStream = got.stream(
-    `http://localhost:3000/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents/updated/${lastFetched}`
-  );
+  let url;
+  if (isPreview) {
+    url = `http://localhost:3000/projects/${process.env.GATSBY_SITE}/documents`;
+  } else {
+    url = `http://localhost:3000/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents/updated/${lastFetched}`;
+  }
+  const httpStream = got.stream(url);
   try {
     const decode = parser();
     decode.on(`data`, async (_entry) => {
       const entry = _entry.value;
-      // if (![`page`, `metadata`, `timestamp`].includes(entry.type)) {
-      // console.log(entry);
-      // }
 
       if (entry.type === `timestamp`) {
         cache.set(`lastFetched`, entry.data);
@@ -93,11 +96,12 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
 
         createNode({
           children: [],
-          id: createNodeId('metadata'),
+          id: createNodeId('metadata' + metadataMinusStatic.branch),
           internal: {
             contentDigest: createContentDigest(metadataMinusStatic),
             type: 'SnootyMetadata',
           },
+          branch: metadataMinusStatic.branch,
           parent: null,
           metadata: metadataMinusStatic,
         });
@@ -111,9 +115,10 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
         // is a concern (I couldn't find any page documents that didn't end in .txt)
         // but Chesterton's Fence and all.
         if (filename.endsWith('.txt')) {
-          const page_id = page.page_id.replace(`${pageIdPrefix}/`, '');
+          const branch = page.page_id.split(`/`).slice(2, 3)[0];
+          const page_id = `/` + page.page_id.split(`/`).slice(3).join(`/`);
           page.page_id = page_id;
-          page.id = createNodeId(page_id);
+          page.id = createNodeId(page_id + branch);
           page.internal = {
             type: `Page`,
             contentDigest: createContentDigest(page),
@@ -122,6 +127,7 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
           const pagePathNode = {
             id: page.id + `/path`,
             page_id: page_id,
+            branch,
             pageNodeId: page.id,
             internal: {
               type: `PagePath`,
@@ -132,7 +138,7 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
           createNode(page);
           createNode(pagePathNode);
 
-          if (pageCount % 100 === 0) {
+          if (pageCount % 1000 === 0) {
             console.log({ pageCount, page_id, id: page.id });
           }
         }
@@ -210,6 +216,7 @@ exports.createPages = async ({ actions, graphql }) => {
         totalCount
         nodes {
           pageNodeId
+          branch
           page_id
         }
       }
@@ -217,7 +224,6 @@ exports.createPages = async ({ actions, graphql }) => {
   `);
 
   if (!repoBranches) {
-    console.log(`fetchRepoBranches`)
     try {
       const repoInfo = await db.stitchInterface.fetchRepoBranches();
       let errMsg;
@@ -260,15 +266,20 @@ exports.createPages = async ({ actions, graphql }) => {
       throw err;
     }
   }
-  repoBranches.groups = repoBranches.groups.map(group => {
-    return _.omit(group, [`id`])
-  })
-  repoBranches.branches = repoBranches.branches.map(group => {
-    return _.omit(group, [`id`])
-  })
+  repoBranches.groups = repoBranches.groups.map((group) => {
+    return _.omit(group, [`id`]);
+  });
+  repoBranches.branches = repoBranches.branches.map((group) => {
+    return _.omit(group, [`id`]);
+  });
 
   result.data.allPagePath.nodes.forEach((node) => {
-    const slug = node.page_id === `index` ? `/` : node.page_id;
+    let slug
+    if (isPreview) {
+     slug = path.join(`BRANCH--${node.branch}`, node.page_id);
+    } else {
+      slug = node.page_id
+    }
     createPage({
       path: slug,
       component: templatePath,

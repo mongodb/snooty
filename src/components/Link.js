@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { Link as GatsbyLink } from 'gatsby';
 import { css } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
@@ -67,6 +68,7 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   ...other
 }) => {
+  const location = useLocation();
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -76,6 +78,20 @@ const Link = ({
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
+
+    // If we're in preview mode, we build the pages of each branch of the site within
+    // its own namespace so each author can preview their own pages e.g.
+    // /BRANCH--branch1/doc-path
+    // /BRANCH--branch2/doc-path
+    //
+    // So to navigate with the namespaced site, we add to each link the current namespace
+    // the user is browsing in.
+    const firstPathSegment = location.pathname.split(`/`).slice(1, 2)[0];
+    if (process.env.GATSBY_IS_PREVIEW === `true` && firstPathSegment.startsWith(`BRANCH--`)) {
+      if (!to.startsWith(firstPathSegment)) {
+        to = `/` + firstPathSegment + to;
+      }
+    }
 
     const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
