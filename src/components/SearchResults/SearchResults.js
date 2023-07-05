@@ -339,7 +339,7 @@ const SearchResults = () => {
                 />
               </>
             ) : (
-              <HeaderText>Search results for "{searchTerm}"</HeaderText>
+              <>{!!searchTerm && <HeaderText>Search results for "{searchTerm}"</HeaderText>}</>
             )}
             {!!searchFilter && (
               <FilterBadgesWrapper>
@@ -427,7 +427,12 @@ const SearchResults = () => {
           ) : (
             <>
               {!searchResults?.length && (
-                <EmptyResultsContainer>
+                <EmptyResultsContainer
+                  css={css`
+                    grid-area: results;
+                    margin-top: 200px;
+                  `}
+                >
                   {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
                 </EmptyResultsContainer>
               )}
