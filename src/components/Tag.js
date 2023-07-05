@@ -15,7 +15,7 @@ export const searchTagStyle = css`
   cursor: pointer;
   height: 26px;
   padding: 4px 11px 4px 11px;
-  border-radius: 11px;
+  border-radius: 12px;
   font-size: ${theme.fontSize.tiny};
   margin-right: ${theme.size.small};
 `;
