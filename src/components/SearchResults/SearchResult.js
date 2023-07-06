@@ -10,10 +10,11 @@ import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const SEARCH_MATCH_STYLE = `background-color: ${palette.yellow.light2};`;
+const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
+  color: #016bf8;
   line-height: ${theme.size.medium};
   /* Only add bold on larger devices */
   @media ${theme.screenSize.smallAndUp} {
@@ -114,7 +115,11 @@ const sanitizePreviewHtml = (text) =>
   sanitizeHtml(text, {
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
-    allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
+    // allowedStyles: { span: {
+    //   'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+    //   'border-radius':[`^\d+(?:px|em|%)$`],
+    //   'padding-left': [`^\d+(?:px|em|%)$`],
+    //   'padding-right': [`^\d+(?:px|em|%)$`] } },
   });
 
 const SearchResult = React.memo(
@@ -130,7 +135,6 @@ const SearchResult = React.memo(
     ...props
   }) => {
     const { searchPropertyMapping, searchTerm } = useContext(SearchContext);
-    const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
@@ -141,7 +145,7 @@ const SearchResult = React.memo(
         <SearchResultContainer>
           <StyledResultTitle
             dangerouslySetInnerHTML={{
-              __html: sanitizePreviewHtml(highlightedTitle),
+              __html: sanitizePreviewHtml(title),
             }}
             useLargeTitle={useLargeTitle}
           />
