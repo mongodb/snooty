@@ -322,123 +322,153 @@ const SearchResults = () => {
           setShowMobileFilters,
         }}
       >
-        <SearchResultsContainer>
-          <HeaderContainer>
-            {newSearchInput ? (
-              <>
-                <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
-                <SearchInput
-                  value={searchField}
-                  placeholder="Search"
-                  onSubmit={(event) => {
-                    setSearchTerm(event.target[0].value);
-                  }}
-                  onChange={(e) => {
-                    setSearchField(e.target.value);
-                  }}
-                />
-              </>
-            ) : (
-              <>{!!searchTerm && <HeaderText>Search results for "{searchTerm}"</HeaderText>}</>
-            )}
-            {!!searchFilter && (
-              <FilterBadgesWrapper>
-                {selectedCategory && (
-                  <StyledTag variant="green" onClick={resetFilters}>
-                    {selectedCategory}
-                    <Icon glyph="X" />
-                  </StyledTag>
-                )}
-                {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-              </FilterBadgesWrapper>
-            )}
-            <MobileSearchButtonWrapper>
-              <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
-                {mobileFilterButton.text}
-              </Button>
-            </MobileSearchButtonWrapper>
-          </HeaderContainer>
-          {!!searchTerm ? (
-            <>
-              {searchResults?.length ? (
+        {!!searchTerm ? (
+          <SearchResultsContainer>
+            <HeaderContainer>
+              {newSearchInput ? (
                 <>
-                  <StyledSearchResults>
-                    {searchResults.map(({ title, preview, url, searchProperty }, index) => (
-                      <StyledSearchResult
-                        key={`${url}${index}`}
-                        onClick={() =>
-                          reportAnalytics('SearchSelection', {
-                            areaFrom: 'ResultsPage',
-                            rank: index,
-                            selectionUrl: url,
-                          })
-                        }
-                        title={title}
-                        preview={escapeHtml(preview)}
-                        url={url}
-                        useLargeTitle
-                        searchProperty={searchProperty?.[0]}
-                      />
-                    ))}
-                  </StyledSearchResults>
-                  <FiltersContainer>
-                    <FilterHeader>{specifySearchText}</FilterHeader>
-                    <StyledSearchFilters />
-                  </FiltersContainer>
+                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+                  <SearchInput
+                    value={searchField}
+                    placeholder="Search"
+                    onSubmit={(event) => {
+                      setSearchResults([]);
+                      setSearchFinished(false);
+                      setSearchTerm(event.target[0].value);
+                    }}
+                    onChange={(e) => {
+                      setSearchField(e.target.value);
+                    }}
+                  />
                 </>
               ) : (
-                <>
-                  {!searchFinished ? (
-                    <>
-                      <StyledSearchResults>
-                        {[...Array(10)].map((_, index) => (
-                          <StyledLoadingSkeletonContainer key={index}>
-                            <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={200} />
-                            <Skeleton borderRadius={SKELETON_BORDER_RADIUS} />
-                            <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} inline width={60} />
-                          </StyledLoadingSkeletonContainer>
-                        ))}
-                      </StyledSearchResults>
-                      <FiltersContainer>
-                        <FilterHeader>{specifySearchText}</FilterHeader>
-                        <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} width={200} />
-                      </FiltersContainer>
-                    </>
-                  ) : (
-                    <>
-                      <EmptyResultsContainer
-                        css={css`
-                          grid-area: results;
-                          margin-top: 80px;
-                        `}
-                      >
-                        <EmptyResults />
-                      </EmptyResultsContainer>
-                      <FiltersContainer>
-                        <FilterHeader>{specifySearchText}</FilterHeader>
-                        <StyledSearchFilters />
-                      </FiltersContainer>
-                    </>
+                <>{!!searchTerm && <HeaderText>Search results for "{searchTerm}"</HeaderText>}</>
+              )}
+              {!!searchFilter && (
+                <FilterBadgesWrapper>
+                  {selectedCategory && (
+                    <StyledTag variant="green" onClick={resetFilters}>
+                      {selectedCategory}
+                      <Icon glyph="X" />
+                    </StyledTag>
                   )}
-                </>
+                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                </FilterBadgesWrapper>
               )}
-              {showMobileFilters && isTabletOrMobile && <MobileFilters />}
-            </>
-          ) : (
-            <>
-              {!searchResults?.length && (
-                <EmptyResultsContainer
-                  css={css`
-                    grid-area: results;
-                    margin-top: 200px;
-                  `}
-                >
-                  {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
-                </EmptyResultsContainer>
-              )}
-            </>
-          )}
-        </SearchResultsContainer>
+              <MobileSearchButtonWrapper>
+                <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+                  {mobileFilterButton.text}
+                </Button>
+              </MobileSearchButtonWrapper>
+            </HeaderContainer>
+            {!!searchTerm ? (
+              <>
+                {searchResults?.length ? (
+                  <>
+                    <StyledSearchResults>
+                      {searchResults.map(({ title, preview, url, searchProperty }, index) => (
+                        <StyledSearchResult
+                          key={`${url}${index}`}
+                          onClick={() =>
+                            reportAnalytics('SearchSelection', {
+                              areaFrom: 'ResultsPage',
+                              rank: index,
+                              selectionUrl: url,
+                            })
+                          }
+                          title={title}
+                          preview={escapeHtml(preview)}
+                          url={url}
+                          useLargeTitle
+                          searchProperty={searchProperty?.[0]}
+                        />
+                      ))}
+                    </StyledSearchResults>
+                    <FiltersContainer>
+                      <FilterHeader>{specifySearchText}</FilterHeader>
+                      <StyledSearchFilters />
+                    </FiltersContainer>
+                  </>
+                ) : (
+                  <>
+                    {!searchFinished ? (
+                      <>
+                        <StyledSearchResults>
+                          {[...Array(10)].map((_, index) => (
+                            <StyledLoadingSkeletonContainer key={index}>
+                              <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={200} />
+                              <Skeleton borderRadius={SKELETON_BORDER_RADIUS} />
+                              <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} inline width={60} />
+                            </StyledLoadingSkeletonContainer>
+                          ))}
+                        </StyledSearchResults>
+                        <FiltersContainer>
+                          <FilterHeader>{specifySearchText}</FilterHeader>
+                          <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} width={200} />
+                        </FiltersContainer>
+                      </>
+                    ) : (
+                      <>
+                        <EmptyResultsContainer
+                          css={css`
+                            grid-area: results;
+                            margin-top: 80px;
+                          `}
+                        >
+                          <EmptyResults />
+                        </EmptyResultsContainer>
+                        <FiltersContainer>
+                          <FilterHeader>{specifySearchText}</FilterHeader>
+                          <StyledSearchFilters />
+                        </FiltersContainer>
+                      </>
+                    )}
+                  </>
+                )}
+                {showMobileFilters && isTabletOrMobile && <MobileFilters />}
+              </>
+            ) : (
+              <>
+                {!searchResults?.length && (
+                  <EmptyResultsContainer
+                    css={css`
+                      margin-top: 200px;
+                    `}
+                  >
+                    {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
+                  </EmptyResultsContainer>
+                )}
+              </>
+            )}
+          </SearchResultsContainer>
+        ) : (
+          <>
+            {newSearchInput && (
+              <SearchResultsContainer>
+                <HeaderContainer>
+                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+                  <SearchInput
+                    value={searchField}
+                    placeholder="Search"
+                    onSubmit={(event) => {
+                      setSearchResults([]);
+                      setSearchFinished(false);
+                      setSearchTerm(event.target[0].value);
+                    }}
+                    onChange={(e) => {
+                      setSearchField(e.target.value);
+                    }}
+                  />
+                </HeaderContainer>
+              </SearchResultsContainer>
+            )}
+            {!searchResults?.length && (
+              <EmptyResultsContainer>
+                {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
+              </EmptyResultsContainer>
+            )}
+          </>
+        )}
       </SearchContext.Provider>
     </>
   );
