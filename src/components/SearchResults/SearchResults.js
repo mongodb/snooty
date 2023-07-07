@@ -332,6 +332,8 @@ const SearchResults = () => {
                     value={searchField}
                     placeholder="Search"
                     onSubmit={(event) => {
+                      const newValue = event.target[0]?.value;
+                      if (newValue === searchTerm) return;
                       setSearchResults([]);
                       setSearchFinished(false);
                       setSearchTerm(event.target[0].value);
