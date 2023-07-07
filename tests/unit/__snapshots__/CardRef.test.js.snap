@@ -108,7 +108,7 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-7 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -126,7 +126,7 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-8 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -254,7 +254,7 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-29 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -274,7 +274,7 @@ exports[`card correctly with and without url 1`] = `
 .emotion-30 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -291,6 +291,13 @@ exports[`card correctly with and without url 1`] = `
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-30:hover,
+.emotion-30:focus,
+.emotion-30:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-30:focus {
@@ -311,11 +318,11 @@ exports[`card correctly with and without url 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-31::after {
+.lg-ui-0001:focus .emotion-31::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-31::after {
+.lg-ui-0001:hover .emotion-31::after {
   background-color: #E8EDEB;
 }
 
@@ -418,7 +425,7 @@ exports[`card correctly with and without url 1`] = `
           class="emotion-29"
         >
           <a
-            class="constant-classname emotion-30"
+            class="lg-ui-0001 emotion-30"
             href="https://docs.mongodb.com/realm/services/"
             target="_self"
           >

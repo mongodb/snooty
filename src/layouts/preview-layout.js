@@ -14,16 +14,11 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 // These fonts are ported over from @mdb/flora design system repo
 // They are used on the content areas and are not included in Snooty itself
 // Without consistent-nav, this is needed to keep the experience the same for the content writers' previews
-const AKZIDENZ_FAMILY = 'Akzidenz-Grotesk Std';
 const EUCLID_CIRCULAR_FAMILY = 'Euclid Circular A';
 const MONGODB_VALUE_SERIF_FAMILY = 'MongoDB Value Serif';
 const SOURCE_CODE_PRO_FAMILY = 'Source Code Pro';
 
 const FONT_SRCS = {
-  [AKZIDENZ_FAMILY]: {
-    light: 'https://static.mongodb.com/com/fonts/akzidenzgroteskbq_light-webfont.woff2',
-    medium: 'https://static.mongodb.com/com/fonts/akzidenzgroteskbq_medium-webfont.woff2',
-  },
   [EUCLID_CIRCULAR_FAMILY]: {
     regular: 'https://static.mongodb.com/com/fonts/EuclidCircularA-Regular-WebXL.woff2',
     medium: 'https://static.mongodb.com/com/fonts/EuclidCircularA-Medium-WebXL.woff2',
@@ -79,22 +74,6 @@ const globalCSS = css`
   }
 
   /* Fonts that are usually provided by flora through consistent-nav */
-  @font-face {
-    font-family: ${AKZIDENZ_FAMILY};
-    src: url(${FONT_SRCS[AKZIDENZ_FAMILY].light}) format('woff2');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: ${AKZIDENZ_FAMILY};
-    src: url(${FONT_SRCS[AKZIDENZ_FAMILY].medium}) format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-
   @font-face {
     font-family: ${EUCLID_CIRCULAR_FAMILY};
     src: url(${FONT_SRCS[EUCLID_CIRCULAR_FAMILY].regular}) format('woff2');

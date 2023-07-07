@@ -35,7 +35,7 @@ const SEARCH_RESULT_HEIGHT = '152px';
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
 const commonTextStyling = css`
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;

@@ -73,7 +73,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 
 .emotion-6 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 32px;
   line-height: 40px;
@@ -84,7 +84,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 
 .emotion-7 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -496,7 +496,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 
 .emotion-37 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-weight: bold;
+  font-weight: 700;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -648,7 +648,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 
 .emotion-47 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 24px;
   line-height: 32px;
@@ -688,7 +688,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 .emotion-52 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -703,6 +703,13 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   line-height: 13px;
   color: #016BF8;
   font-weight: 400;
+}
+
+.emotion-52:hover,
+.emotion-52:focus,
+.emotion-52:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-52:focus {
@@ -723,11 +730,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-53::after {
+.lg-ui-0001:focus .emotion-53::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-53::after {
+.lg-ui-0001:hover .emotion-53::after {
   background-color: #E8EDEB;
 }
 
@@ -738,7 +745,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 
 .emotion-56 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 18px;
   line-height: 24px;
@@ -1029,7 +1036,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             class="emotion-50 emotion-51"
           >
             <a
-              class="constant-classname emotion-52"
+              class="lg-ui-0001 emotion-52"
               href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
@@ -1076,7 +1083,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             class="emotion-50 emotion-51"
           >
             <a
-              class="constant-classname emotion-52"
+              class="lg-ui-0001 emotion-52"
               href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
@@ -1135,7 +1142,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             class="emotion-50 emotion-51"
           >
             <a
-              class="constant-classname emotion-52"
+              class="lg-ui-0001 emotion-52"
               href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
@@ -1251,7 +1258,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             class="emotion-50 emotion-51"
           >
             <a
-              class="constant-classname emotion-52"
+              class="lg-ui-0001 emotion-52"
               href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
               target="_self"
             >
@@ -1303,7 +1310,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             class="emotion-50 emotion-51"
           >
             <a
-              class="constant-classname emotion-52"
+              class="lg-ui-0001 emotion-52"
               href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
