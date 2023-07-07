@@ -123,19 +123,17 @@ const StyledSearchFilters = styled(SearchFilters)`
 `;
 
 const searchResultStyling = css`
-  background-color: #ffffff;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
   border-radius: 45px;
-  border: 1px solid rgba(58, 63, 60, 0.15);
   background-color: #fff;
-  box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
   /* place-self adds both align-self and justify-self for flexbox */
   place-self: center;
   width: 100%;
   > div {
-    padding: ${theme.size.medium};
+    padding: 20px;
+    padding-left: 30px;
   }
   :hover,
   :focus {

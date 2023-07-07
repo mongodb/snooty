@@ -14,7 +14,6 @@ const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-r
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
-  color: #016bf8;
   line-height: ${theme.size.medium};
   /* Only add bold on larger devices */
   @media ${theme.screenSize.smallAndUp} {
@@ -53,6 +52,22 @@ const SearchResultContainer = styled('div')`
   position: relative;
 `;
 
+const StyledResultTitle = styled('p')`
+  font-family: Akzidenz;
+  color: #016bf8;
+  font-size: ${theme.fontSize.small};
+  line-height: ${theme.size.medium};
+  letter-spacing: 0.5px;
+  height: ${theme.size.medium};
+  margin-bottom: ${theme.size.small};
+  margin-top: 0;
+  ${truncate(1)};
+  ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
+  @media ${theme.screenSize.upToSmall} {
+    ${largeResultTitle};
+  }
+`;
+
 const SearchResultLink = styled('a')`
   color: ${LINK_COLOR};
   height: 100%;
@@ -67,6 +82,11 @@ const SearchResultLink = styled('a')`
       transition: background-color 150ms ease-in;
     }
   }
+  :visited {
+    ${StyledResultTitle} {
+      color: #5e0c9e;
+    }
+  }
 `;
 
 const StyledPreviewText = styled(Body)`
@@ -76,21 +96,6 @@ const StyledPreviewText = styled(Body)`
   ${({ maxLines }) => truncate(maxLines)};
   // Reserve some space inside of the search result card when there is no preview
   min-height: 20px;
-`;
-
-const StyledResultTitle = styled('p')`
-  font-family: Akzidenz;
-  font-size: ${theme.fontSize.small};
-  line-height: ${theme.size.medium};
-  letter-spacing: 0.5px;
-  height: ${theme.size.medium};
-  margin-bottom: ${theme.size.small};
-  margin-top: 0;
-  ${truncate(1)};
-  ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
-  @media ${theme.screenSize.upToSmall} {
-    ${largeResultTitle};
-  }
 `;
 
 const StyledTag = styled(Tag)`
