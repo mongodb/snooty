@@ -15,10 +15,7 @@ const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-r
 const largeResultTitle = css`
   font-size: ${theme.size.default};
   line-height: ${theme.size.medium};
-  /* Only add bold on larger devices */
-  @media ${theme.screenSize.smallAndUp} {
-    font-weight: 600;
-  }
+  font-weight: 600;
 `;
 
 // Truncates text to a maximum number of lines
@@ -44,11 +41,6 @@ const LearnMoreLink = styled('a')`
 
 const SearchResultContainer = styled('div')`
   height: 100%;
-  @media ${theme.screenSize.upToSmall} {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
   position: relative;
 `;
 
