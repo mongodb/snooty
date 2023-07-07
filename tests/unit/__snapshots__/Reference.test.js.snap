@@ -5,7 +5,7 @@ exports[`renders correctly 1`] = `
   .emotion-0 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -22,6 +22,13 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-0:hover,
+.emotion-0:focus,
+.emotion-0:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-0:focus {
@@ -42,11 +49,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-1::after {
+.lg-ui-0001:focus .emotion-1::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-1::after {
+.lg-ui-0001:hover .emotion-1::after {
   background-color: #E8EDEB;
 }
 
@@ -61,10 +68,9 @@ exports[`renders correctly 1`] = `
 }
 
 <a
-    class="constant-classname emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="https://docs.mlab.com/subscriptions/#change-plans-using-rnr"
     rel="noopener noreferrer"
-    target="_blank"
   >
     <span
       class="emotion-1"

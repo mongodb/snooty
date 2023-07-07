@@ -58,7 +58,7 @@ const StyledEmailInput = styled(TextInput)`
 
   // optional text styling
   div > div {
-    font-family: 'Euclid Circular A', Akzidenz, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-family: 'Euclid Circular A', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     color: #b8c4c2;
   }
 `;

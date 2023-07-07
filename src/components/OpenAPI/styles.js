@@ -5,7 +5,7 @@ import { theme } from '../../theme/docsTheme';
 const badgeBorderRadius = '50px';
 const badgeBorderType = '1px solid';
 const codeFontFamily = 'Source Code Pro';
-const textFontFamily = '"Euclid Circular A", Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif';
+const textFontFamily = '"Euclid Circular A", "Helvetica Neue", Helvetica, Arial, sans-serif';
 
 // Redoc's documented theme option: https://github.com/Redocly/redoc/#redoc-theme-object
 // For more precise options: https://github.com/Redocly/redoc/blob/16f542bbfe856e5ae5eb40636ac79421fa2f397b/src/theme.ts

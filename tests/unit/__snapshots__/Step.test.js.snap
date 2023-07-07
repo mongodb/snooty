@@ -70,7 +70,7 @@ exports[`renders with "connected" styling 1`] = `
 
 .emotion-7 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -229,7 +229,7 @@ exports[`renders with "connected" styling by default 1`] = `
 
 .emotion-7 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -361,7 +361,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 
 .emotion-7 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;

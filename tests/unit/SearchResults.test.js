@@ -32,7 +32,7 @@ const expectFilteredResults = (wrapper, filteredByRealm) => {
 
   // Check the result does link to the provided doc
   expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
-  expect(wrapper.queryAllByDisplayValue('stitch').length).toBe(1);
+  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
 
   // Check the dropdowns are filled in
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
@@ -69,8 +69,7 @@ const expectUnfilteredResults = (wrapper) => {
   );
 
   // We always show this text automatically on page load in the search bar, regardless of filter
-  expect(wrapper.queryAllByDisplayValue('stitch').length).toBe(1);
-
+  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
 };

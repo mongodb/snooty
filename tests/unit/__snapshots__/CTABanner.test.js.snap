@@ -82,7 +82,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 
 .emotion-4 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -99,7 +99,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 .emotion-6 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -116,6 +116,13 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-6:focus {
@@ -136,11 +143,11 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-7::after {
+.lg-ui-0001:focus .emotion-7::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-7::after {
+.lg-ui-0001:hover .emotion-7::after {
   background-color: #E8EDEB;
 }
 
@@ -191,10 +198,9 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-6"
+        class="lg-ui-0001 emotion-6"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
-        target="_blank"
       >
         <span
           class="emotion-7"
@@ -307,7 +313,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 
 .emotion-4 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -324,7 +330,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 .emotion-6 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -341,6 +347,13 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-6:focus {
@@ -361,11 +374,11 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-7::after {
+.lg-ui-0001:focus .emotion-7::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-7::after {
+.lg-ui-0001:hover .emotion-7::after {
   background-color: #E8EDEB;
 }
 
@@ -418,10 +431,9 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-6"
+        class="lg-ui-0001 emotion-6"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
-        target="_blank"
       >
         <span
           class="emotion-7"
@@ -534,7 +546,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 
 .emotion-4 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -551,7 +563,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 .emotion-6 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -568,6 +580,13 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-6:focus {
@@ -588,11 +607,11 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-7::after {
+.lg-ui-0001:focus .emotion-7::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-7::after {
+.lg-ui-0001:hover .emotion-7::after {
   background-color: #E8EDEB;
 }
 
@@ -643,10 +662,9 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-6"
+        class="lg-ui-0001 emotion-6"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
-        target="_blank"
       >
         <span
           class="emotion-7"
@@ -759,7 +777,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 
 .emotion-4 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 13px;
   line-height: 20px;
@@ -776,7 +794,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 .emotion-6 {
   font-size: 13px;
   line-height: 20px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -793,6 +811,13 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+}
+
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-6:focus {
@@ -813,11 +838,11 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   border-radius: 2px;
 }
 
-.constant-classname:focus .emotion-7::after {
+.lg-ui-0001:focus .emotion-7::after {
   background-color: #0498EC;
 }
 
-.constant-classname:hover .emotion-7::after {
+.lg-ui-0001:hover .emotion-7::after {
   background-color: #E8EDEB;
 }
 
@@ -868,10 +893,9 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="constant-classname emotion-6"
+        class="lg-ui-0001 emotion-6"
         href="https://university.mongodb.com/"
         rel="noopener noreferrer"
-        target="_blank"
       >
         <span
           class="emotion-7"

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
-import Tag, { searchTagStyle } from '../Tag';
+import Tag, { searchTagStyle, searchTagStyleFeature } from '../Tag';
 import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
@@ -45,8 +45,7 @@ const SearchResultContainer = styled('div')`
 `;
 
 const StyledResultTitle = styled('p')`
-  font-family: Akzidenz;
-  color: #016bf8;
+  font-family: 'Euclid Circular A';
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -91,7 +90,7 @@ const StyledPreviewText = styled(Body)`
 `;
 
 const StyledTag = styled(Tag)`
-  ${searchTagStyle}
+  ${({ newSearchInput }) => (newSearchInput ? searchTagStyleFeature : searchTagStyle)}
 `;
 
 const StylingTagContainer = styled('div')`
@@ -136,6 +135,7 @@ const SearchResult = React.memo(
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
+    const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
@@ -153,9 +153,21 @@ const SearchResult = React.memo(
             }}
           />
           <StylingTagContainer>
-            {!!category && <StyledTag variant="green">{category}</StyledTag>}
-            {!!version && <StyledTag variant="blue">{version}</StyledTag>}
-            {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
+            {!!category && (
+              <StyledTag variant="green" newSearchInput={newSearchInput}>
+                {category}
+              </StyledTag>
+            )}
+            {!!version && (
+              <StyledTag variant="blue" newSearchInput={newSearchInput}>
+                {version}
+              </StyledTag>
+            )}
+            {url.includes('/api/') && (
+              <StyledTag variant="purple" newSearchInput={newSearchInput}>
+                {'API'}
+              </StyledTag>
+            )}
           </StylingTagContainer>
           {learnMoreLink && (
             <MobileFooterContainer>
