@@ -16,7 +16,7 @@ import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-f
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
-import Tag, { searchTagStyle } from '../Tag';
+import Tag, { searchTagStyle, searchTagStyleFeature } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
@@ -222,7 +222,7 @@ const FilterBadgesWrapper = styled('div')`
 `;
 
 const StyledTag = styled(Tag)`
-  ${searchTagStyle}
+  ${({ newSearchInput }) => (newSearchInput ? searchTagStyleFeature : searchTagStyle)}
 `;
 
 const ResultTag = styled('div')`
@@ -355,12 +355,16 @@ const SearchResults = () => {
                     {!!searchFilter && (
                       <FilterBadgesWrapper>
                         {selectedCategory && (
-                          <StyledTag variant="green" onClick={resetFilters}>
+                          <StyledTag variant="green" onClick={resetFilters} newSearchInput={newSearchInput}>
                             {selectedCategory}
                             <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
                           </StyledTag>
                         )}
-                        {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                        {selectedVersion && (
+                          <StyledTag variant="blue" newSearchInput={newSearchInput}>
+                            {selectedVersion}
+                          </StyledTag>
+                        )}
                       </FilterBadgesWrapper>
                     )}
                   </ResultTag>
@@ -371,12 +375,16 @@ const SearchResults = () => {
                   {!!searchFilter && (
                     <FilterBadgesWrapper>
                       {selectedCategory && (
-                        <StyledTag variant="green" onClick={resetFilters}>
+                        <StyledTag variant="green" onClick={resetFilters} newSearchInput={newSearchInput}>
                           {selectedCategory}
                           <Icon glyph="X" />
                         </StyledTag>
                       )}
-                      {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                      {selectedVersion && (
+                        <StyledTag variant="blue" newSearchInput={newSearchInput}>
+                          {selectedVersion}
+                        </StyledTag>
+                      )}
                     </FilterBadgesWrapper>
                   )}
                 </>
