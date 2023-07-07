@@ -35,7 +35,7 @@ const SEARCH_RESULT_HEIGHT = '152px';
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
 const commonTextStyling = css`
-  font-family: Akzidenz;
+  font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
@@ -51,6 +51,14 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
+`;
+
+const HeaderText = styled('h1')`
+  color: ${palette.black} !important;
+  font-size: 18px;
+  line-height: 21px;
+  ${commonTextStyling};
+  letter-spacing: 0.8px;
 `;
 
 const FiltersContainer = styled('div')`
@@ -245,6 +253,7 @@ const SearchResults = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
+  const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
@@ -322,33 +331,56 @@ const SearchResults = () => {
         {!!searchTerm ? (
           <SearchResultsContainer>
             <HeaderContainer>
-              <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
-              <SearchInput
-                value={searchField}
-                placeholder={searchTerm}
-                onSubmit={(event) => {
-                  setSearchTerm(event.target[0].value);
-                }}
-                onChange={(e) => {
-                  setSearchField(e.target.value);
-                }}
-              />
-              <ResultTag style={{ paddingTop: '10px' }}>
-                <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
-                  {searchResults?.length ? searchResults.length : '0'} RESULTS
-                </Overline>
-                {!!searchFilter && (
-                  <FilterBadgesWrapper>
-                    {selectedCategory && (
-                      <StyledTag variant="green" onClick={resetFilters}>
-                        {selectedCategory}
-                        <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
-                      </StyledTag>
+              {newSearchInput ? (
+                <>
+                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+                  <SearchInput
+                    value={searchField}
+                    placeholder="Search"
+                    onSubmit={(event) => {
+                      const newValue = event.target[0]?.value;
+                      if (newValue === searchTerm) return;
+                      setSearchResults([]);
+                      setSearchFinished(false);
+                      setSearchTerm(event.target[0].value);
+                    }}
+                    onChange={(e) => {
+                      setSearchField(e.target.value);
+                    }}
+                  />
+                  <ResultTag style={{ paddingTop: '10px' }}>
+                    <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                      {searchResults?.length ? searchResults.length : '0'} RESULTS
+                    </Overline>
+                    {!!searchFilter && (
+                      <FilterBadgesWrapper>
+                        {selectedCategory && (
+                          <StyledTag variant="green" onClick={resetFilters}>
+                            {selectedCategory}
+                            <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
+                          </StyledTag>
+                        )}
+                        {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                      </FilterBadgesWrapper>
                     )}
-                    {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                  </FilterBadgesWrapper>
-                )}
-              </ResultTag>
+                  </ResultTag>
+                </>
+              ) : (
+                <>
+                  <HeaderText>Search results for "{searchTerm}"</HeaderText>
+                  {!!searchFilter && (
+                    <FilterBadgesWrapper>
+                      {selectedCategory && (
+                        <StyledTag variant="green" onClick={resetFilters}>
+                          {selectedCategory}
+                          <Icon glyph="X" />
+                        </StyledTag>
+                      )}
+                      {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                    </FilterBadgesWrapper>
+                  )}
+                </>
+              )}
               <MobileSearchButtonWrapper>
                 <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
                   {mobileFilterButton.text}
@@ -362,7 +394,11 @@ const SearchResults = () => {
                     <StyledSearchResult
                       key={`${url}${index}`}
                       onClick={() =>
-                        reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                        reportAnalytics('SearchSelection', {
+                          areaFrom: 'ResultsPage',
+                          rank: index,
+                          selectionUrl: url,
+                        })
                       }
                       title={title}
                       preview={escapeHtml(preview)}
@@ -417,6 +453,27 @@ const SearchResults = () => {
           </SearchResultsContainer>
         ) : (
           <>
+            {newSearchInput && (
+              <SearchResultsContainer>
+                <HeaderContainer>
+                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+                  <SearchInput
+                    value={searchField}
+                    placeholder="Search"
+                    onSubmit={(event) => {
+                      const newValue = event.target[0]?.value;
+                      if (newValue === searchTerm) return;
+                      setSearchResults([]);
+                      setSearchFinished(false);
+                      setSearchTerm(event.target[0].value);
+                    }}
+                    onChange={(e) => {
+                      setSearchField(e.target.value);
+                    }}
+                  />
+                </HeaderContainer>
+              </SearchResultsContainer>
+            )}
             {!searchResults?.length && (
               <EmptyResultsContainer>
                 {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}

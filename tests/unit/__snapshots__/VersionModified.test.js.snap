@@ -5,12 +5,12 @@ exports[`when rendering a deprecated directive with 0 arguments renders correctl
   .emotion-0 {
   font-size: 13px;
   line-height: 20px;
+  display: inline;
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   border-radius: 3px;
   font-family: 'Source Code Pro',Menlo,monospace;
   line-height: 20px;
-  display: inherit;
   background-color: #F9FBFA;
   border: 1px solid #E8EDEB;
   color: #1C2D38;
@@ -19,17 +19,17 @@ exports[`when rendering a deprecated directive with 0 arguments renders correctl
   display: inline;
 }
 
-.constant-classname:hover>.emotion-0 {
+.lg-ui-0000:hover>.emotion-0 {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.constant-classname:hover>.emotion-0 {
+.lg-ui-0000:hover>.emotion-0 {
   box-shadow: 0 0 0 3px #E8EDEB;
   border: 1px solid #C1C7C6;
 }
 
-.constant-classname:focus>.emotion-0 {
+.lg-ui-0000:focus-visible>.emotion-0 {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
   border: 1px solid #016BF8;
 }
