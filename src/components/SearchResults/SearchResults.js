@@ -171,7 +171,6 @@ const StyledSearchResult = styled(SearchResult)`
 const StyledLoadingSkeletonContainer = styled('div')`
   ${searchResultStyling}
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 1) !important;
-  color: red;
 
   /* inner div padding */
   box-sizing: border-box;
@@ -314,8 +313,7 @@ const SearchResults = () => {
       <Global
         styles={css`
           body {
-            // background-color: #f9fbfa !important;
-            background-color: #ffffff !important;
+            ${newSearchInput ? `background-color: #ffffff !important;` : ` background-color: #f9fbfa !important;`}
           }
         `}
       />

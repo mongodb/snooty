@@ -46,7 +46,7 @@ const SearchResultContainer = styled('div')`
 
 const StyledResultTitle = styled('p')`
   font-family: 'Euclid Circular A';
-  color: #016bf8;
+  ${({ newSearchInput }) => (newSearchInput ? `color: #016bf8;` : ``)}
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -75,9 +75,12 @@ const SearchResultLink = styled('a')`
     }
   }
   :visited {
-    ${StyledResultTitle} {
+    ${({ newSearchInput }) =>
+      newSearchInput
+        ? `${StyledResultTitle} {
       color: #5e0c9e;
-    }
+    }`
+        : ``}
   }
 `;
 
@@ -139,13 +142,14 @@ const SearchResult = React.memo(
     const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
     return (
-      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
+      <SearchResultLink newSearchInput={newSearchInput} ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}
             useLargeTitle={useLargeTitle}
+            newSearchInput={newSearchInput}
           />
           <StyledPreviewText
             maxLines={maxLines}
