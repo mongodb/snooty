@@ -31,6 +31,7 @@ const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
 const SKELETON_BORDER_RADIUS = '12px';
 const SEARCH_RESULT_HEIGHT = '152px';
+const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
@@ -222,7 +223,7 @@ const FilterBadgesWrapper = styled('div')`
 `;
 
 const StyledTag = styled(Tag)`
-  ${({ newSearchInput }) => (newSearchInput ? searchTagStyleFeature : searchTagStyle)}
+  ${newSearchInput ? searchTagStyleFeature : searchTagStyle}
 `;
 
 const ResultTag = styled('div')`
@@ -355,16 +356,12 @@ const SearchResults = () => {
                     {!!searchFilter && (
                       <FilterBadgesWrapper>
                         {selectedCategory && (
-                          <StyledTag variant="green" onClick={resetFilters} newSearchInput={newSearchInput}>
+                          <StyledTag variant="green" onClick={resetFilters}>
                             {selectedCategory}
                             <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
                           </StyledTag>
                         )}
-                        {selectedVersion && (
-                          <StyledTag variant="blue" newSearchInput={newSearchInput}>
-                            {selectedVersion}
-                          </StyledTag>
-                        )}
+                        {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
                       </FilterBadgesWrapper>
                     )}
                   </ResultTag>
@@ -375,16 +372,12 @@ const SearchResults = () => {
                   {!!searchFilter && (
                     <FilterBadgesWrapper>
                       {selectedCategory && (
-                        <StyledTag variant="green" onClick={resetFilters} newSearchInput={newSearchInput}>
+                        <StyledTag variant="green" onClick={resetFilters}>
                           {selectedCategory}
                           <Icon glyph="X" />
                         </StyledTag>
                       )}
-                      {selectedVersion && (
-                        <StyledTag variant="blue" newSearchInput={newSearchInput}>
-                          {selectedVersion}
-                        </StyledTag>
-                      )}
+                      {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
                     </FilterBadgesWrapper>
                   )}
                 </>
