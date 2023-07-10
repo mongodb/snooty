@@ -8,16 +8,20 @@ const pathPrefix = generatePathPrefix(siteMetadata);
 // siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
 // const layoutComponentRelativePath = `./src/layouts/${isFullBuild ? 'index' : `preview-layout`}.js`;
 
+const shouldUseGCSourcePlugin = process.env.USE_NEW_PLUGIN === `true`;
+
 const plugins = [
   'gatsby-plugin-emotion',
-  process.env.USE_NEW_PLUGIN === `true` ? 'new' : 'old',
+  shouldUseGCSourcePlugin ? 'new' : 'old',
   // {
   // resolve: 'gatsby-plugin-layout',
   // options: {
   // component: require.resolve(layoutComponentRelativePath),
   // },
   // },
-  'gatsby-plugin-sitemap',
+  // Sitemap plugin can potentially error out when too many pages are being built
+  // at once
+  shouldUseGCSourcePlugin ? '' : 'gatsby-plugin-sitemap',
   {
     resolve: 'gatsby-plugin-canonical-urls',
     options: {
