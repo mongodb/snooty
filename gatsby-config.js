@@ -21,7 +21,6 @@ const plugins = [
   // },
   // Sitemap plugin can potentially error out when too many pages are being built
   // at once
-  shouldUseGCSourcePlugin ? '' : 'gatsby-plugin-sitemap',
   {
     resolve: 'gatsby-plugin-canonical-urls',
     options: {
@@ -30,6 +29,10 @@ const plugins = [
     },
   },
 ];
+
+if (shouldUseGCSourcePlugin) {
+  plugins.push('gatsby-plugin-sitemap');
+}
 
 module.exports = {
   plugins,
