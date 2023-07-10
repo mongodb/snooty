@@ -115,11 +115,14 @@ const sanitizePreviewHtml = (text) =>
   sanitizeHtml(text, {
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
-    // allowedStyles: { span: {
-    //   'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
-    //   'border-radius':[`^\d+(?:px|em|%)$`],
-    //   'padding-left': [`^\d+(?:px|em|%)$`],
-    //   'padding-right': [`^\d+(?:px|em|%)$`] } },
+    allowedStyles: {
+      span: {
+        'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+        'border-radius': [`^+(?:px|em|%)$`],
+        'padding-left': [`^+(?:px|em|%)$`],
+        'padding-right': [`^+(?:px|em|%)$`],
+      },
+    },
   });
 
 const SearchResult = React.memo(
