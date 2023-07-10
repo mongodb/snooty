@@ -118,9 +118,9 @@ const sanitizePreviewHtml = (text) =>
     allowedStyles: {
       span: {
         'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
-        'border-radius': [`^+(?:px|em|%)$`],
-        'padding-left': [`^+(?:px|em|%)$`],
-        'padding-right': [`^+(?:px|em|%)$`],
+        'border-radius': [new RegExp(`^3px$`)],
+        'padding-left': [new RegExp(`^2px$`)],
+        'padding-right': [new RegExp(`^2px$`)],
       },
     },
   });
