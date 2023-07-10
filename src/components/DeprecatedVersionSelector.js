@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
+import { keyBy } from 'lodash';
 import Button from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { getSiteUrl } from '../utils/get-site-url';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
+import { fetchDocuments } from '../utils/realm';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { BRANCHES_COLLECTION } from '../build-constants';
 import Select from './Select';
 
 const SELECT_WIDTH = '336px';
@@ -18,30 +21,6 @@ const selectStyle = css`
     width: 100%;
   }
 `;
-
-const PROPERTY_NAME_MAPPING = {
-  'atlas-open-service-broker': 'MongoDB Atlas Open Service Broker on Kubernetes',
-  'atlas-cli': 'MongoDB Atlas CLI',
-  'bi-connector': 'MongoDB Connector for BI',
-  charts: 'MongoDB Charts',
-  cloud: 'MongoDB Atlas',
-  compass: 'MongoDB Compass',
-  docs: 'MongoDB Server',
-  drivers: 'MongoDB Drivers',
-  'kafka-connector': 'MongoDB Kafka Connector',
-  'kubernetes-operator': 'MongoDB Enterprise Kubernetes Operator',
-  mongocli: 'MongoDB CLI',
-  mongoid: 'Mongoid',
-  mms: 'MongoDB Ops Manager',
-  'ruby-driver': 'MongoDB Ruby Driver',
-  'spark-connector': 'MongoDB Connector for Spark',
-};
-
-const fullProductName = (property) => {
-  if (!property) return null;
-  // Display full product name on product dropdown
-  return PROPERTY_NAME_MAPPING[property.replace('_', '-')] || property;
-};
 
 const isPrimaryBranch = (version) => {
   return version === 'main' || version === 'master';
@@ -64,15 +43,42 @@ const isVersioned = (versionOptions) => {
   return !(versionOptions.length === 1 && isPrimaryBranch(versionOptions[0]));
 };
 
+// Add docs-mms to reposMap. It does not have a document in repos_branches.
+const addOldGenToReposMap = (reposMap) => {
+  return {
+    ...reposMap,
+    mms: {
+      displayName: 'MongoDB Ops Manager',
+      url: { dotcomprd: 'http://mongodb.com/' },
+      prefix: { dotcomprd: 'docs/ops-manager' },
+    },
+  };
+};
+
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
+  const { reposDatabase } = useSiteMetadata();
   const [product, setProduct] = useState('');
   const [version, setVersion] = useState('');
+  const [reposMap, setReposMap] = useState({});
+
   const updateProduct = useCallback(({ value }) => {
     setProduct(value);
     setVersion('');
   }, []);
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
   const buttonDisabled = !(product && version);
+
+  // Fetch repos_branches for `displayName` and url
+  // TODO: constants???
+  useEffect(() => {
+    if (reposDatabase) {
+      fetchDocuments(reposDatabase, BRANCHES_COLLECTION).then((resp) => {
+        const reposBranchesMap = keyBy(resp, 'project');
+        const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
+        setReposMap(reposBranchesMapWithOldGen);
+      });
+    }
+  }, [reposDatabase]);
 
   useEffect(() => {
     if (isBrowser) {
@@ -92,18 +98,19 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     }
 
     const versionOptions = deprecatedVersions[product];
-    const hostName = getSiteUrl(product);
+    const hostName = reposMap[product].url['dotcomprd'] + reposMap[product].prefix['dotcomprd'];
     const versionName = isVersioned(versionOptions) ? version : '';
-    return ['docs', 'mms', 'cloud-docs', 'atlas-cli'].includes(product)
-      ? `${hostName}/${versionName}`
-      : `${hostName}/${product}/${versionName}`;
+    return `${hostName}/${versionName}`;
   };
 
   const productChoices = deprecatedVersions
-    ? Object.keys(deprecatedVersions).map((product) => ({
-        text: fullProductName(product),
-        value: product,
-      }))
+    ? Object.keys(deprecatedVersions)
+        .map((product) => ({
+          text: reposMap[product]?.displayName,
+          value: product,
+        }))
+        // Ensure invalid entries do not break selector
+        .filter(({ text }) => text)
     : [];
 
   const versionChoices = deprecatedVersions[product]
