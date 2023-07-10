@@ -191,7 +191,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 
   const providePlugins = {
     Buffer: ['buffer', 'Buffer'],
-    process: require.resolve('./stubs/process.js'),
+    process: require.resolve('../../stubs/process.js'),
   };
 
   const fallbacks = { stream: require.resolve('stream-browserify'), buffer: require.resolve('buffer/') };
@@ -210,7 +210,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 let repoBranches = null;
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
-  const templatePath = path.resolve(`../../src/components/DocumentBody.js`);
+  const templatePath = path.join(__dirname, `../../src/components/DocumentBody.js`);
   const result = await graphql(`
     query {
       allPagePath {
