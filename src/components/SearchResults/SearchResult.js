@@ -11,6 +11,7 @@ import SearchContext from './SearchContext';
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
+const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
@@ -94,7 +95,7 @@ const StyledPreviewText = styled(Body)`
 `;
 
 const StyledTag = styled(Tag)`
-  ${({ newSearchInput }) => (newSearchInput ? searchTagStyleFeature : searchTagStyle)}
+  ${newSearchInput ? searchTagStyleFeature : searchTagStyle}
 `;
 
 const StylingTagContainer = styled('div')`
@@ -142,7 +143,6 @@ const SearchResult = React.memo(
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
-    const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
     return (
       <SearchResultLink newSearchInput={newSearchInput} ref={resultLinkRef} href={url} onClick={onClick} {...props}>
@@ -161,21 +161,9 @@ const SearchResult = React.memo(
             }}
           />
           <StylingTagContainer>
-            {!!category && (
-              <StyledTag variant="green" newSearchInput={newSearchInput}>
-                {category}
-              </StyledTag>
-            )}
-            {!!version && (
-              <StyledTag variant="blue" newSearchInput={newSearchInput}>
-                {version}
-              </StyledTag>
-            )}
-            {url.includes('/api/') && (
-              <StyledTag variant="purple" newSearchInput={newSearchInput}>
-                {'API'}
-              </StyledTag>
-            )}
+            {!!category && <StyledTag variant="green">{category}</StyledTag>}
+            {!!version && <StyledTag variant="blue">{version}</StyledTag>}
+            {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
           </StylingTagContainer>
           {learnMoreLink && (
             <MobileFooterContainer>
