@@ -64,9 +64,9 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
   console.log({ lastFetched });
   let url;
   if (lastFetched) {
-    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
-  } else {
     url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents?updated=${lastFetched}`;
+  } else {
+    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
   }
   const httpStream = got.stream(url);
   try {
@@ -82,7 +82,7 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
         });
       } else if (entry.type === `metadata`) {
         // Create metadata node.
-        const { build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = entry.data;
+        const { _id, build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = entry.data;
         manifestMetadata = metadataMinusStatic;
 
         const { parentPaths, slugToTitle } = metadataMinusStatic;
