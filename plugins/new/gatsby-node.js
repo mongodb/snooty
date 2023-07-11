@@ -63,10 +63,10 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
   const lastFetched = (await cache.get(`lastFetched`)) || 0;
   console.log({ lastFetched });
   let url;
-  if (isPreview) {
+  if (lastFetched) {
     url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
   } else {
-    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/${process.env.GATSBY_PARSER_BRANCH}/documents/updated/${lastFetched}`;
+    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents?updated=${lastFetched}`;
   }
   const httpStream = got.stream(url);
   try {
