@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
+import * as realm from '../../src/utils/realm';
 
 const deprecatedVersions = {
   docs: ['v2.2', 'v2.4', 'v2.6', 'v3.0', 'v3.2', 'v3.4'],
@@ -14,8 +15,57 @@ const metadata = {
   deprecated_versions: deprecatedVersions,
 };
 
+const mockedReposBranches = [
+  {
+    project: 'docs',
+    displayName: 'MongoDB Manual',
+    url: {
+      dotcomprd: 'https://mongodb.com/',
+    },
+    prefix: {
+      dotcomprd: 'docs',
+    },
+  },
+  {
+    project: 'mongocli',
+    displayName: 'MongoDB Command Line Interface',
+    url: {
+      dotcomprd: 'https://mongodb.com/',
+    },
+    prefix: {
+      dotcomprd: 'docs/mongocli',
+    },
+  },
+  {
+    project: 'atlas-open-service-broker',
+    displayName: 'MongoDB Atlas Open Service Broker on Kubernetes',
+    url: {
+      dotcomprd: 'https://mongodb.com/',
+    },
+    prefix: {
+      dotcomprd: 'docs/atlas-open-service-broker',
+    },
+  },
+];
+
+jest.mock('../../src/hooks/use-site-metadata', () => ({
+  useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
+}));
+
 describe('DeprecatedVersionSelector when rendered', () => {
-  jest.useFakeTimers();
+  let mockFetchDocuments;
+
+  // jest.useFakeTimers();
+
+  beforeEach(() => {
+    mockFetchDocuments = jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName) => {
+      return mockedReposBranches;
+    });
+  });
+
+  afterAll(() => {
+    mockFetchDocuments.mockClear();
+  });
 
   it('shows two dropdowns', () => {
     const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
@@ -54,9 +104,9 @@ describe('DeprecatedVersionSelector when rendered', () => {
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
 
-      expect(wrapper.getByText('MongoDB Server')).toBeTruthy();
-      expect(wrapper.getByText('MongoDB Ops Manager')).toBeTruthy();
-      expect(wrapper.getByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
+      expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
+      expect(wrapper.findByText('MongoDB Ops Manager')).toBeTruthy();
+      expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
     });
 
     it('version dropdown text is correct', () => {
@@ -82,23 +132,25 @@ describe('DeprecatedVersionSelector when rendered', () => {
 
   describe('when the selected product has a single deprecated version', () => {
     test.each([
-      ['MongoDB CLI', 'Version 0.5.0', 'https://www.mongodb.com/docs/mongocli/v0.5.0'],
+      ['MongoDB Command Line Interface', 'Version 0.5.0', 'https://mongodb.com/docs/mongocli/v0.5.0'],
       [
         'MongoDB Atlas Open Service Broker on Kubernetes',
         'latest',
-        'https://www.mongodb.com/docs/atlas-open-service-broker/',
+        'https://mongodb.com/docs/atlas-open-service-broker/',
       ],
-    ])('generates the correct docs URL', (product, versionSelection, expectedUrl) => {
+    ])('generates the correct docs URL', async (product, versionSelection, expectedUrl) => {
       const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
-      userEvent.click(wrapper.getByText(product));
+      const productOption = await wrapper.findByText(product);
+      userEvent.click(productOption);
 
       const versionDropdown = wrapper.container.querySelectorAll('button')[1];
       userEvent.click(versionDropdown);
-      userEvent.click(wrapper.getByText(versionSelection));
+      const versionOption = await wrapper.findByText(versionSelection);
+      userEvent.click(versionOption);
 
-      const button = wrapper.getByTitle('View Documentation');
+      const button = await wrapper.findByTitle('View Documentation');
       expect(button).toHaveAttribute('aria-disabled', 'false');
       expect(button.href).toEqual(expectedUrl);
     });
