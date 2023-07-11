@@ -82,7 +82,7 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
         });
       } else if (entry.type === `metadata`) {
         // Create metadata node.
-        const { static_files: staticFiles, ...metadataMinusStatic } = entry.data;
+        const { build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = entry.data;
         manifestMetadata = metadataMinusStatic;
 
         const { parentPaths, slugToTitle } = metadataMinusStatic;
