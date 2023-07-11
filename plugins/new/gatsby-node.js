@@ -267,12 +267,22 @@ exports.createPages = async ({ actions, graphql }) => {
       throw err;
     }
   }
-  repoBranches.groups = repoBranches.groups.map((group) => {
-    return _.omit(group, [`id`]);
-  });
-  repoBranches.branches = repoBranches.branches.map((group) => {
-    return _.omit(group, [`id`]);
-  });
+
+  if (repoBranches.groups) {
+    repoBranches.groups = repoBranches.groups.map((group) => {
+      return _.omit(group, [`id`]);
+    });
+  } else {
+    repoBranches.groups = [];
+  }
+
+  if (repoBranches.branches) {
+    repoBranches.branches = repoBranches.branches.map((group) => {
+      return _.omit(group, [`id`]);
+    });
+  } else {
+    repoBranches.branches = [];
+  }
 
   result.data.allPagePath.nodes.forEach((node) => {
     let slug;
