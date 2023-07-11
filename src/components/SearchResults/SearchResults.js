@@ -5,7 +5,9 @@ import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
+import { SearchInput } from '@leafygreen-ui/search-input';
 import { palette } from '@leafygreen-ui/palette';
+import { H1 } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -236,6 +238,7 @@ const SearchResults = () => {
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
+  const [searchField, setSearchField] = useState(null);
   const [searchFilter, setSearchFilter] = useState(null);
   const [searchFinished, setSearchFinished] = useState(false);
   const [firstRenderComplete, setFirstRenderComplete] = useState(false);
@@ -244,6 +247,7 @@ const SearchResults = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
+  const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
@@ -274,6 +278,7 @@ const SearchResults = () => {
     setFirstRenderComplete(true);
     const { q, searchProperty } = queryString.parse(search);
     setSearchTerm(q);
+    setSearchField(q);
     setSearchFilter(searchProperty);
   }, [search]);
 
@@ -320,7 +325,27 @@ const SearchResults = () => {
         {!!searchTerm ? (
           <SearchResultsContainer>
             <HeaderContainer>
-              <HeaderText>Search results for "{searchTerm}"</HeaderText>
+              {newSearchInput ? (
+                <>
+                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+                  <SearchInput
+                    value={searchField}
+                    placeholder="Search"
+                    onSubmit={(event) => {
+                      const newValue = event.target[0]?.value;
+                      if (newValue === searchTerm) return;
+                      setSearchResults([]);
+                      setSearchFinished(false);
+                      setSearchTerm(event.target[0].value);
+                    }}
+                    onChange={(e) => {
+                      setSearchField(e.target.value);
+                    }}
+                  />
+                </>
+              ) : (
+                <HeaderText>Search results for "{searchTerm}"</HeaderText>
+              )}
               {!!searchFilter && (
                 <FilterBadgesWrapper>
                   {selectedCategory && (
@@ -345,7 +370,11 @@ const SearchResults = () => {
                     <StyledSearchResult
                       key={`${url}${index}`}
                       onClick={() =>
-                        reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                        reportAnalytics('SearchSelection', {
+                          areaFrom: 'ResultsPage',
+                          rank: index,
+                          selectionUrl: url,
+                        })
                       }
                       title={title}
                       preview={escapeHtml(preview)}
@@ -400,6 +429,27 @@ const SearchResults = () => {
           </SearchResultsContainer>
         ) : (
           <>
+            {newSearchInput && (
+              <SearchResultsContainer>
+                <HeaderContainer>
+                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+                  <SearchInput
+                    value={searchField}
+                    placeholder="Search"
+                    onSubmit={(event) => {
+                      const newValue = event.target[0]?.value;
+                      if (newValue === searchTerm) return;
+                      setSearchResults([]);
+                      setSearchFinished(false);
+                      setSearchTerm(event.target[0].value);
+                    }}
+                    onChange={(e) => {
+                      setSearchField(e.target.value);
+                    }}
+                  />
+                </HeaderContainer>
+              </SearchResultsContainer>
+            )}
             {!searchResults?.length && (
               <EmptyResultsContainer>
                 {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
