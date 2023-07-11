@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
@@ -9,7 +8,6 @@ import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import Layout from '../layouts';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -71,13 +69,8 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 const DocumentBody = (props) => {
   const {
     location,
-    pageContext: { slug },
-    data,
+    pageContext: { page, slug, template },
   } = props;
-  const page = data.page.ast;
-  const template = page?.options?.template;
-  props.pageContext.page = page;
-
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
@@ -97,15 +90,7 @@ const DocumentBody = (props) => {
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   return (
-    <Layout
-      pageContext={{
-        page,
-        slug,
-        template,
-        publishedBranches: getNestedValue(['publishedBranches'], metadata),
-        ...props.pageContext,
-      }}
-    >
+    <>
       <Widgets
         location={location}
         pageOptions={page?.options}
@@ -127,26 +112,21 @@ const DocumentBody = (props) => {
           <UnifiedFooter hideLocale={true} />
         </div>
       )}
-    </Layout>
+    </>
   );
 };
 
 DocumentBody.propTypes = {
   location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
+    page: PropTypes.shape({
+      children: PropTypes.array,
+    }).isRequired,
     slug: PropTypes.string.isRequired,
   }),
 };
 
 export default DocumentBody;
-
-export const query = graphql`
-  query ($id: String) {
-    page(id: { eq: $id }) {
-      ast
-    }
-  }
-`;
 
 export const Head = ({ pageContext }) => {
   const { slug, page, template } = pageContext;
