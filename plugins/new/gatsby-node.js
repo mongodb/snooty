@@ -64,9 +64,9 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
   console.log({ lastFetched });
   let url;
   if (lastFetched) {
-    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
-  } else {
     url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents?updated=${lastFetched}`;
+  } else {
+    url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
   }
   const httpStream = got.stream(url);
   try {
