@@ -5,12 +5,13 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
-import Tag, { searchTagStyle } from '../Tag';
+import Tag, { searchTagStyle, searchTagStyleFeature } from '../Tag';
 import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `background-color: ${palette.yellow.light2};`;
+const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
@@ -93,7 +94,7 @@ const StyledResultTitle = styled('p')`
 `;
 
 const StyledTag = styled(Tag)`
-  ${searchTagStyle}
+  ${newSearchInput ? searchTagStyleFeature : searchTagStyle}
 `;
 
 const StylingTagContainer = styled('div')`
