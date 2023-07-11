@@ -210,7 +210,9 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 let repoBranches = null;
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
-  const templatePath = path.join(__dirname, `../../src/components/DocumentBody.js`);
+  const templatePath = isPreview
+    ? path.join(__dirname, `../../src/components/DocumentBodyPreview.js`)
+    : path.join(__dirname, `../../src/components/DocumentBody.js`);
   const result = await graphql(`
     query {
       allPagePath {

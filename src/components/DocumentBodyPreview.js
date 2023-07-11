@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import Layout from '../layouts/preview-layout';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -62,8 +64,12 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 const DocumentBody = (props) => {
   const {
     location,
-    pageContext: { page, slug, template },
+    pageContext: { slug },
+    data,
   } = props;
+  const page = data.page.ast;
+  const template = page?.options?.template;
+  props.pageContext.page = page;
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
@@ -81,7 +87,15 @@ const DocumentBody = (props) => {
   const { Template } = getTemplate(template);
 
   return (
-    <>
+    <Layout
+      pageContext={{
+        page,
+        slug,
+        template,
+        publishedBranches: getNestedValue(['publishedBranches'], metadata),
+        ...props.pageContext,
+      }}
+    >
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
       <Widgets
         location={location}
@@ -99,7 +113,7 @@ const DocumentBody = (props) => {
         </FootnoteContext.Provider>
       </Widgets>
       <footer style={{ width: '100%', height: '568px', backgroundColor: '#061621' }}></footer>
-    </>
+    </Layout>
   );
 };
 
@@ -114,3 +128,11 @@ DocumentBody.propTypes = {
 };
 
 export default DocumentBody;
+
+export const query = graphql`
+  query ($id: String) {
+    page(id: { eq: $id }) {
+      ast
+    }
+  }
+`;
