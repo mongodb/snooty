@@ -81,7 +81,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       fetchDocuments(reposDatabase, BRANCHES_COLLECTION).then((resp) => {
         const reposBranchesMap = keyBy(resp, 'project');
         const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
-        setReposMap({ ...reposBranchesMapWithOldGen });
+        setReposMap(reposBranchesMapWithOldGen);
       });
     }
   }, [reposDatabase]);

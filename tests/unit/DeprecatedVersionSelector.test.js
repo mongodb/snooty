@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
 import * as realm from '../../src/utils/realm';
@@ -53,9 +53,7 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
 }));
 
 describe('DeprecatedVersionSelector when rendered', () => {
-  let mockFetchDocuments;
-
-  // jest.useFakeTimers();
+  let wrapper, mockFetchDocuments;
 
   beforeEach(() => {
     mockFetchDocuments = jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName) => {
@@ -67,30 +65,35 @@ describe('DeprecatedVersionSelector when rendered', () => {
     mockFetchDocuments.mockClear();
   });
 
-  it('shows two dropdowns', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
-    const productDropdown = wrapper.queryAllByText('Select a Product');
-    const versionDropdown = wrapper.queryAllByText('Select a Version');
+  it('shows two dropdowns', async () => {
+    wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+
+    const productDropdown = await wrapper.findAllByText('Select a Product');
+    const versionDropdown = await wrapper.findAllByText('Select a Version');
 
     expect(productDropdown).toBeTruthy();
     expect(versionDropdown).toBeTruthy();
   });
 
-  it('shows a disabled submit button', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+  it('shows a disabled submit button', async () => {
+    wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
-    const button = wrapper.getByTitle('View Documentation');
+    const button = await wrapper.findByTitle('View Documentation');
     expect(button).toBeTruthy();
     expect(button).toBeDisabled();
   });
 
-  it('shows a disabled version selector', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+  it('shows a disabled version selector', async () => {
+    wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+
+    await wrapper.findAllByRole('button');
     expect(wrapper.container.querySelectorAll('button')[1]).toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('does not show either dropdown menu', () => {
-    const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+  it('does not show either dropdown menu', async () => {
+    await waitFor(() => {
+      wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+    });
 
     expect(wrapper.queryAllByText('mms')).toHaveLength(0);
     expect(wrapper.queryAllByText(deprecatedVersions.mms[0])).toHaveLength(0);
@@ -99,7 +102,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   // Test product dropdown
   describe('when the product button is clicked', () => {
     it('shows the dropdown menu with elements per metadata node', () => {
-      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+      wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
@@ -110,7 +113,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
     });
 
     it('version dropdown text is correct', () => {
-      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+      wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
@@ -120,7 +123,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
 
   describe('when the product button is clicked again', () => {
     it('hides the dropdown menu', () => {
-      const wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+      wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
