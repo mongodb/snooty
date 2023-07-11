@@ -30,7 +30,7 @@ const plugins = [
   },
 ];
 
-if (shouldUseGCSourcePlugin) {
+if (!shouldUseGCSourcePlugin) {
   plugins.push('gatsby-plugin-sitemap');
 }
 
