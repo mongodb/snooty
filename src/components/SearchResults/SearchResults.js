@@ -132,8 +132,12 @@ const StyledSearchFilters = styled(SearchFilters)`
 `;
 
 const searchResultStyling = css`
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 45px;
+  ${newSearchInput
+    ? `
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 45px;
+    `
+    : `box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);`}
   background-color: #fff;
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
@@ -141,8 +145,7 @@ const searchResultStyling = css`
   place-self: center;
   width: 100%;
   > div {
-    padding: 20px;
-    padding-left: 30px;
+    ${newSearchInput ? `padding: 20px; padding-left: 30px;` : `padding: ${theme.size.medium};`}
   }
   :hover,
   :focus {
@@ -190,6 +193,7 @@ const StyledLoadingSkeletonContainer = styled('div')`
 `;
 
 const StyledSearchResults = styled('div')`
+  box-shadow: none;
   display: grid;
   grid-area: results;
   /* Build space between rows into row height for hover effect */
@@ -199,13 +203,11 @@ const StyledSearchResults = styled('div')`
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
   :hover {
     > ${StyledSearchResult} {
-      // opacity: 0.2;
-      // transition: opacity 150ms ease-in;
-      // delete this ^^
+      ${!newSearchInput && `opacity: 0.2; transition: opacity 150ms ease-in;`}
 
       :hover {
         opacity: 1;
-        box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
+        ${newSearchInput && `box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);`}
       }
     }
   }

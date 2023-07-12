@@ -10,8 +10,10 @@ import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
 const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
+const SEARCH_MATCH_STYLE = newSearchInput
+  ? `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`
+  : `background-color: ${palette.yellow.light2};`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
@@ -42,12 +44,11 @@ const LearnMoreLink = styled('a')`
 
 const SearchResultContainer = styled('div')`
   height: 100%;
-  position: relative;
 `;
 
 const StyledResultTitle = styled('p')`
   font-family: 'Euclid Circular A';
-  ${({ newSearchInput }) => (newSearchInput ? `color: #016bf8;` : ``)}
+  ${newSearchInput ? `color: #016bf8;` : ``}
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -59,6 +60,7 @@ const StyledResultTitle = styled('p')`
   @media ${theme.screenSize.upToSmall} {
     ${largeResultTitle};
   }
+  position: relative;
 `;
 
 const SearchResultLink = styled('a')`
@@ -76,12 +78,7 @@ const SearchResultLink = styled('a')`
     }
   }
   :visited {
-    ${({ newSearchInput }) =>
-      newSearchInput
-        ? `${StyledResultTitle} {
-      color: #5e0c9e;
-    }`
-        : ``}
+    ${newSearchInput ? `${StyledResultTitle} {color: #5e0c9e;}` : ``}
   }
 `;
 
@@ -113,18 +110,27 @@ const highlightSearchTerm = (text, searchTerm) =>
 
 // since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
 const sanitizePreviewHtml = (text) =>
-  sanitizeHtml(text, {
-    allowedTags: ['span'],
-    allowedAttributes: { span: ['style'] },
-    allowedStyles: {
-      span: {
-        'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
-        'border-radius': [new RegExp(`^3px$`)],
-        'padding-left': [new RegExp(`^2px$`)],
-        'padding-right': [new RegExp(`^2px$`)],
-      },
-    },
-  });
+  sanitizeHtml(
+    text,
+    newSearchInput
+      ? {
+          allowedTags: ['span'],
+          allowedAttributes: { span: ['style'] },
+          allowedStyles: {
+            span: {
+              'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+              'border-radius': [new RegExp(`^3px$`)],
+              'padding-left': [new RegExp(`^2px$`)],
+              'padding-right': [new RegExp(`^2px$`)],
+            },
+          },
+        }
+      : {
+          allowedTags: ['span'],
+          allowedAttributes: { span: ['style'] },
+          allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
+        }
+  );
 
 const SearchResult = React.memo(
   ({
@@ -139,21 +145,31 @@ const SearchResult = React.memo(
     ...props
   }) => {
     const { searchPropertyMapping, searchTerm } = useContext(SearchContext);
+    const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
+    const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
     return (
-      <SearchResultLink newSearchInput={newSearchInput} ref={resultLinkRef} href={url} onClick={onClick} {...props}>
+      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
-          <StyledResultTitle
-            dangerouslySetInnerHTML={{
-              __html: sanitizePreviewHtml(title),
-            }}
-            useLargeTitle={useLargeTitle}
-            newSearchInput={newSearchInput}
-          />
+          {newSearchInput ? (
+            <StyledResultTitle
+              dangerouslySetInnerHTML={{
+                __html: sanitizePreviewHtml(title),
+              }}
+              useLargeTitle={useLargeTitle}
+            />
+          ) : (
+            <StyledResultTitle
+              dangerouslySetInnerHTML={{
+                __html: sanitizePreviewHtml(highlightedTitle),
+              }}
+              useLargeTitle={useLargeTitle}
+            />
+          )}
           <StyledPreviewText
             maxLines={maxLines}
             dangerouslySetInnerHTML={{
