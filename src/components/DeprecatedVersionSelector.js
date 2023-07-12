@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import { keyBy, isEmpty } from 'lodash';
+import keyBy from 'lodash.keyby';
+import isEmpty from 'lodash.isempty';
 import Button from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { isBrowser } from '../utils/is-browser';
@@ -52,13 +53,16 @@ const hasValidHostName = (repoDocument) => {
 // Add mms-docs to reposMap. It does not have a document in repos_branches collection.
 // TODO: Remove when mms-docs is added to repos_branches
 const addOldGenToReposMap = (reposMap) => {
-  return {
-    ...reposMap,
+  const oldGenRepos = {
     mms: {
       displayName: 'MongoDB Ops Manager',
       url: { dotcomprd: 'http://mongodb.com/' },
       prefix: { dotcomprd: 'docs/ops-manager' },
     },
+  };
+  return {
+    ...oldGenRepos,
+    ...reposMap,
   };
 };
 
@@ -103,6 +107,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       return null;
     }
 
+    // Utilizing hardcoded env because legacy sites are not available on dev/stage
     const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
     const versionOptions = deprecatedVersions[product];
     const versionName = isVersioned(versionOptions) ? version : '';
