@@ -7,7 +7,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import { palette } from '@leafygreen-ui/palette';
-import { H1 } from '@leafygreen-ui/typography';
+import { H1, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -16,7 +16,7 @@ import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-f
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
-import Tag, { searchTagStyle } from '../Tag';
+import Tag, { searchTagStyle, searchTagStyleFeature } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
@@ -31,6 +31,7 @@ const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
 const SKELETON_BORDER_RADIUS = '12px';
 const SEARCH_RESULT_HEIGHT = '152px';
+const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
@@ -169,6 +170,7 @@ const StyledSearchResult = styled(SearchResult)`
 const StyledLoadingSkeletonContainer = styled('div')`
   ${searchResultStyling}
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 1) !important;
+  color: red;
 
   /* inner div padding */
   box-sizing: border-box;
@@ -221,7 +223,12 @@ const FilterBadgesWrapper = styled('div')`
 `;
 
 const StyledTag = styled(Tag)`
-  ${searchTagStyle}
+  ${newSearchInput ? searchTagStyleFeature : searchTagStyle}
+`;
+
+const ResultTag = styled('div')`
+  display: flex;
+  flex-direction: row;
 `;
 
 const MobileSearchButtonWrapper = styled('div')`
@@ -342,20 +349,38 @@ const SearchResults = () => {
                       setSearchField(e.target.value);
                     }}
                   />
+                  <ResultTag style={{ paddingTop: '10px' }}>
+                    <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                      {searchResults?.length ? searchResults.length : '0'} RESULTS
+                    </Overline>
+                    {!!searchFilter && (
+                      <FilterBadgesWrapper>
+                        {selectedCategory && (
+                          <StyledTag variant="green" onClick={resetFilters}>
+                            {selectedCategory}
+                            <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
+                          </StyledTag>
+                        )}
+                        {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                      </FilterBadgesWrapper>
+                    )}
+                  </ResultTag>
                 </>
               ) : (
-                <HeaderText>Search results for "{searchTerm}"</HeaderText>
-              )}
-              {!!searchFilter && (
-                <FilterBadgesWrapper>
-                  {selectedCategory && (
-                    <StyledTag variant="green" onClick={resetFilters}>
-                      {selectedCategory}
-                      <Icon glyph="X" />
-                    </StyledTag>
+                <>
+                  <HeaderText>Search results for "{searchTerm}"</HeaderText>
+                  {!!searchFilter && (
+                    <FilterBadgesWrapper>
+                      {selectedCategory && (
+                        <StyledTag variant="green" onClick={resetFilters}>
+                          {selectedCategory}
+                          <Icon glyph="X" />
+                        </StyledTag>
+                      )}
+                      {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                    </FilterBadgesWrapper>
                   )}
-                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                </FilterBadgesWrapper>
+                </>
               )}
               <MobileSearchButtonWrapper>
                 <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>

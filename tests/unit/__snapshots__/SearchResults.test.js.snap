@@ -883,7 +883,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       </a>
     </div>
     <div
-      class="emotion-36 emotion-80"
+      class="emotion-36 emotion-37"
     >
       <h2
         class="emotion-38 emotion-39"
@@ -2357,17 +2357,17 @@ exports[`Search Results Page renders loading images before returning no results 
   width: 100%;
 }
 
-.emotion-12:hover>.e1yoi6mj6 {
+.emotion-12:hover>.e1yoi6mj7 {
   opacity: 0.2;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-12:hover>.e1yoi6mj6:hover {
+.emotion-12:hover>.e1yoi6mj7:hover {
   opacity: 1;
 }
 
-.emotion-12:not(:hover)>.e1yoi6mj6 {
+.emotion-12:not(:hover)>.e1yoi6mj7 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
@@ -2381,6 +2381,7 @@ exports[`Search Results Page renders loading images before returning no results 
   place-self: center;
   width: 100%;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
   box-sizing: border-box;
   padding: 15px;
   display: grid;
@@ -3144,17 +3145,17 @@ exports[`Search Results Page renders loading images before returning nonempty re
   width: 100%;
 }
 
-.emotion-12:hover>.e1yoi6mj6 {
+.emotion-12:hover>.e1yoi6mj7 {
   opacity: 0.2;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-12:hover>.e1yoi6mj6:hover {
+.emotion-12:hover>.e1yoi6mj7:hover {
   opacity: 1;
 }
 
-.emotion-12:not(:hover)>.e1yoi6mj6 {
+.emotion-12:not(:hover)>.e1yoi6mj7 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
@@ -3168,6 +3169,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   place-self: center;
   width: 100%;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
   box-sizing: border-box;
   padding: 15px;
   display: grid;
