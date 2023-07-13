@@ -64,18 +64,13 @@ const EmptyStateContainer2 = styled('div')`
   max-width: ${MAX_WIDTH};
 `;
 
-const NoResultIcon = styled('img')`
-  // display: inline-block;
-`;
 const NoResultText = styled('div')`
   padding-left: 56px;
   padding-top: 20px;
-  // display: inline-block;
 `;
 
 const SupportingText2 = styled('p')`
   color: var(--gray-dark-1-new, #5c6c75);
-  /* New Brand/Body 1 [NEW] */
   font-size: 13px;
   font-family: Euclid Circular A;
   font-style: normal;
@@ -121,7 +116,7 @@ const EmptyResults = ({ type }) => {
         </EmptyStateContainer>
       ) : (
         <EmptyStateContainer2>
-          <NoResultIcon src={withPrefix('assets/noResults.svg')} alt="no results found" />
+          <img src={withPrefix('assets/noResults.svg')} alt="no results found" />
           <NoResultText>
             <H3>No results found</H3>
             <SupportingText2>
