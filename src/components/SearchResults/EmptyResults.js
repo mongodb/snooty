@@ -1,14 +1,18 @@
 import React, { useCallback } from 'react';
+import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
+import { H3 } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
+
+const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
 export const EMPTY_STATE_HEIGHT = '166px';
 const MAGNIFYING_GLASS_SIZE = '40px';
-const MAX_WIDTH = '337px';
+const MAX_WIDTH = newSearchInput ? '637px' : '337px';
 
 const MagnifyingGlassButton = styled(IconButton)`
   /* Give 8px space on each side for hover state */
@@ -49,6 +53,36 @@ const EmptyStateContainer = styled('div')`
   text-align: center;
 `;
 
+const EmptyStateContainer2 = styled('div')`
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  grid-column-gap: 5px;
+  font-family: 'Euclid Circular A';
+  letter-spacing: 0.5px;
+  margin: 0 auto;
+  max-width: ${MAX_WIDTH};
+`;
+
+const NoResultIcon = styled('img')`
+  // display: inline-block;
+`;
+const NoResultText = styled('div')`
+  padding-left: 56px;
+  padding-top: 20px;
+  // display: inline-block;
+`;
+
+const SupportingText2 = styled('p')`
+  color: var(--gray-dark-1-new, #5c6c75);
+  /* New Brand/Body 1 [NEW] */
+  font-size: 13px;
+  font-family: Euclid Circular A;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+`;
+
 const EMPTY_RESULT_TYPES = {
   noResultsFound: {
     title: 'No results found. Please search again.',
@@ -74,15 +108,30 @@ const EmptyResults = ({ type }) => {
   const description = EMPTY_RESULT_TYPES?.[type]?.description || EMPTY_RESULT_TYPES.noResultsFound.description;
 
   return (
-    <EmptyStateContainer>
-      <MagnifyingGlassButton aria-label="Search MongoDB Documentation" onClick={focusOnSearchbar}>
-        <MagnifyingGlass glyph="MagnifyingGlass" />
-      </MagnifyingGlassButton>
-      <TitleText>
-        <strong>{title}</strong>
-      </TitleText>
-      <SupportingText>{description}</SupportingText>
-    </EmptyStateContainer>
+    <>
+      {!newSearchInput ? (
+        <EmptyStateContainer>
+          <MagnifyingGlassButton aria-label="Search MongoDB Documentation" onClick={focusOnSearchbar}>
+            <MagnifyingGlass glyph="MagnifyingGlass" />
+          </MagnifyingGlassButton>
+          <TitleText>
+            <strong>{title}</strong>
+          </TitleText>
+          <SupportingText>{description}</SupportingText>
+        </EmptyStateContainer>
+      ) : (
+        <EmptyStateContainer2>
+          <NoResultIcon src={withPrefix('assets/noResults.svg')} alt="no results found" />
+          <NoResultText>
+            <H3>No results found</H3>
+            <SupportingText2>
+              We weren’t able to find any results for your query. Try adjusting your keywords to find what you’re
+              looking for.
+            </SupportingText2>
+          </NoResultText>
+        </EmptyStateContainer2>
+      )}
+    </>
   );
 };
 
