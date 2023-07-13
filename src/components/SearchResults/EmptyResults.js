@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { withPrefix } from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
@@ -7,6 +6,7 @@ import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
 import { H3 } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
+import NoResults from '../SVGs/NoResults';
 
 const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
@@ -116,7 +116,7 @@ const EmptyResults = ({ type }) => {
         </EmptyStateContainer>
       ) : (
         <EmptyStateContainer2>
-          <img src={withPrefix('assets/noResults.svg')} alt="no results found" />
+          <NoResults />
           <NoResultText>
             <H3>No results found</H3>
             <SupportingText2>
