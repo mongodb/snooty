@@ -155,21 +155,12 @@ const SearchResult = React.memo(
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
-          {newSearchInput ? (
-            <StyledResultTitle
-              dangerouslySetInnerHTML={{
-                __html: sanitizePreviewHtml(title),
-              }}
-              useLargeTitle={useLargeTitle}
-            />
-          ) : (
-            <StyledResultTitle
-              dangerouslySetInnerHTML={{
-                __html: sanitizePreviewHtml(highlightedTitle),
-              }}
-              useLargeTitle={useLargeTitle}
-            />
-          )}
+          <StyledResultTitle
+            dangerouslySetInnerHTML={{
+              __html: sanitizePreviewHtml(newSearchInput ? title : highlightedTitle),
+            }}
+            useLargeTitle={useLargeTitle}
+          />
           <StyledPreviewText
             maxLines={maxLines}
             dangerouslySetInnerHTML={{
