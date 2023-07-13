@@ -336,9 +336,7 @@ exports.createPages = async ({ actions }) => {
       const slug = getPageSlug(page);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
-      const isFullBuild =
-        siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
-      const mainComponentRelativePath = `../../src/components/DocumentBody${isFullBuild ? '' : 'Preview'}.js`;
+      const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
 
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
@@ -403,6 +401,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type SnootyMetadata implements Node @dontInfer {
       metadata: JSON!
+      branch: String
     }
 
     type RemoteMetadata implements Node @dontInfer {
