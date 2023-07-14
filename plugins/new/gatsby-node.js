@@ -11,6 +11,7 @@ const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
 const _ = require(`lodash`);
+const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 
 let isAssociatedProduct = false;
 let associatedReposInfo = {};
@@ -61,14 +62,22 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
   let pageCount = 0;
   const fileWritePromises = [];
   const lastFetched = (await cache.get(`lastFetched`)) || 0;
+  const lastClientAccessToken = await cache.get('lastClientAccessToken');
   console.log({ lastFetched });
+
+  // Generate client access token only if trying to access Snooty Data API's staging instance
+  const clientAccessToken = APIBase.includes('.staging') ? fetchClientAccessToken(lastClientAccessToken) : '';
   let url;
   if (lastFetched) {
     url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents?updated=${lastFetched}`;
   } else {
     url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
   }
-  const httpStream = got.stream(url);
+  const httpStream = got.stream(url, {
+    headers: {
+      Authorization: `Bearer ${clientAccessToken}`,
+    },
+  });
   try {
     const decode = parser();
     decode.on(`data`, async (_entry) => {
@@ -76,6 +85,7 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
 
       if (entry.type === `timestamp`) {
         cache.set(`lastFetched`, entry.data);
+        cache.set('lastClientAccessToken', clientAccessToken);
       } else if (entry.type === `asset`) {
         entry.data.filenames.forEach((filePath) => {
           fileWritePromises.push(saveFile(filePath, Buffer.from(entry.data.assetData, `base64`)));
