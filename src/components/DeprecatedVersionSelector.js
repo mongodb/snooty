@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import keyBy from 'lodash.keyby';
-import isEmpty from 'lodash.isempty';
+import { keyBy, isEmpty } from 'lodash';
 import Button from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { isBrowser } from '../utils/is-browser';
