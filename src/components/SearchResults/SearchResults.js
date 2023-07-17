@@ -292,11 +292,18 @@ const SearchResults = () => {
     setFirstRenderComplete(true);
     const { q, searchProperty } = queryString.parse(search);
     if (q === '' && !firstRenderComplete) setFirstLoadEmpty(true);
-    if (q === '') setSearchFinished(true);
+    if (q === '') {
+      console.log('FINISHED: if search is empty');
+      setSearchFinished(true);
+    }
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
   }, [search, firstRenderComplete]);
+
+  useEffect(() => {
+    setSearchFinished(false);
+  }, [searchFilter]);
 
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
@@ -351,7 +358,10 @@ const SearchResults = () => {
                       const newValue = event.target[0]?.value;
                       if (newValue === searchTerm) return;
                       setSearchResults([]);
-                      if (!!newValue) setSearchFinished(false);
+                      if (!!newValue) {
+                        console.log('FINISHED: got new value');
+                        setSearchFinished(false);
+                      }
                       setSearchTerm(event.target[0].value);
                       setFirstLoadEmpty(false);
                     }}
@@ -398,7 +408,7 @@ const SearchResults = () => {
                 </Button>
               </MobileSearchButtonWrapper>
             </HeaderContainer>
-            {searchResults?.length ? (
+            {searchResults?.length && searchFinished ? (
               <>
                 <StyledSearchResults>
                   {searchResults.map(({ title, preview, url, searchProperty }, index) => (
