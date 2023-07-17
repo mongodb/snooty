@@ -261,7 +261,6 @@ const SearchResults = () => {
   const [firstLoadEmpty, setFirstLoadEmpty] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
-  const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
