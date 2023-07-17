@@ -108,7 +108,7 @@ const highlightSearchTerm = (text, searchTerm) =>
     (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
-const attrFeatureJson = newSearchInput
+const spanAllowedStyles = newSearchInput
   ? {
       'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
       'border-radius': [new RegExp(`^3px$`)],
@@ -123,7 +123,7 @@ const sanitizePreviewHtml = (text) =>
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
     allowedStyles: {
-      span: attrFeatureJson,
+      span: spanAllowedStyles,
     },
   });
 
