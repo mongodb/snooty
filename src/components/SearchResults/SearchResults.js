@@ -292,23 +292,22 @@ const SearchResults = () => {
     setFirstRenderComplete(true);
     const { q, searchProperty } = queryString.parse(search);
     if (q === '' && !firstRenderComplete) setFirstLoadEmpty(true);
-    if (q === '') {
-      console.log('FINISHED: if search is empty');
-      setSearchFinished(true);
-    }
+    if (q === '') setSearchFinished(true);
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
   }, [search, firstRenderComplete]);
 
+  // add loading skeleton when new filter selected and loading results
   useEffect(() => {
-    setSearchFinished(false);
-  }, [searchFilter]);
+    newSearchInput && setSearchFinished(false);
+  }, [searchFilter, newSearchInput]);
 
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
   useEffect(() => {
     if (!searchTerm || !Object.keys(searchPropertyMapping).length) {
+      if (!searchTerm && firstRenderComplete) setSearchFinished(true);
       return;
     }
     const fetchNewSearchResults = async () => {
@@ -320,7 +319,7 @@ const SearchResults = () => {
       setSearchFinished(true);
     };
     fetchNewSearchResults();
-  }, [searchFilter, searchPropertyMapping, searchTerm]);
+  }, [searchFilter, searchPropertyMapping, searchTerm, firstRenderComplete]);
 
   return (
     <>
@@ -358,10 +357,7 @@ const SearchResults = () => {
                       const newValue = event.target[0]?.value;
                       if (newValue === searchTerm) return;
                       setSearchResults([]);
-                      if (!!newValue) {
-                        console.log('FINISHED: got new value');
-                        setSearchFinished(false);
-                      }
+                      if (!!newValue) setSearchFinished(false);
                       setSearchTerm(event.target[0].value);
                       setFirstLoadEmpty(false);
                     }}
@@ -500,8 +496,9 @@ const SearchResults = () => {
                       const newValue = event.target[0]?.value;
                       if (newValue === searchTerm) return;
                       setSearchResults([]);
-                      setSearchFinished(false);
+                      if (!!newValue) setSearchFinished(false);
                       setSearchTerm(event.target[0].value);
+                      setFirstLoadEmpty(false);
                     }}
                     onChange={(e) => {
                       setSearchField(e.target.value);
@@ -510,7 +507,7 @@ const SearchResults = () => {
                 </HeaderContainer>
               </SearchResultsContainer>
             )}
-            {!searchResults?.length && (
+            {!searchResults?.length && searchFinished && (
               <EmptyResultsContainer>
                 {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
               </EmptyResultsContainer>
