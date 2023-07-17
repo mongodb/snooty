@@ -132,15 +132,20 @@ const StyledSearchFilters = styled(SearchFilters)`
 `;
 
 const searchResultStyling = css`
+  ${newSearchInput
+    ? `
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 45px;
+    `
+    : `box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);`}
   background-color: #fff;
-  box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 0.4);
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
   /* place-self adds both align-self and justify-self for flexbox */
   place-self: center;
   width: 100%;
   > div {
-    padding: ${theme.size.medium};
+    ${newSearchInput ? `padding: 20px; padding-left: 30px;` : `padding: ${theme.size.medium};`}
   }
   :hover,
   :focus {
@@ -198,10 +203,11 @@ const StyledSearchResults = styled('div')`
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
   :hover {
     > ${StyledSearchResult} {
-      opacity: 0.2;
-      transition: opacity 150ms ease-in;
+      ${!newSearchInput && `opacity: 0.2; transition: opacity 150ms ease-in;`}
+
       :hover {
         opacity: 1;
+        ${newSearchInput && `box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);`}
       }
     }
   }
@@ -311,7 +317,7 @@ const SearchResults = () => {
       <Global
         styles={css`
           body {
-            background-color: #f9fbfa !important;
+            ${newSearchInput ? `background-color: #ffffff !important;` : ` background-color: #f9fbfa !important;`}
           }
         `}
       />
