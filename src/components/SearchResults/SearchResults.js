@@ -261,7 +261,6 @@ const SearchResults = () => {
   const [firstLoadEmpty, setFirstLoadEmpty] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
-  const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
   const resetFilters = useCallback(() => {
     setSelectedCategory(null);
@@ -301,7 +300,7 @@ const SearchResults = () => {
   // add loading skeleton when new filter selected and loading results
   useEffect(() => {
     newSearchInput && setSearchFinished(false);
-  }, [searchFilter, newSearchInput]);
+  }, [searchFilter]);
 
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
