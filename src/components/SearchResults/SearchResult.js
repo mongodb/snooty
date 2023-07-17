@@ -108,29 +108,24 @@ const highlightSearchTerm = (text, searchTerm) =>
     (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
+const spanAllowedStyles = newSearchInput
+  ? {
+      'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+      'border-radius': [new RegExp(`^3px$`)],
+      'padding-left': [new RegExp(`^2px$`)],
+      'padding-right': [new RegExp(`^2px$`)],
+    }
+  : { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] };
+
 // since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
 const sanitizePreviewHtml = (text) =>
-  sanitizeHtml(
-    text,
-    newSearchInput
-      ? {
-          allowedTags: ['span'],
-          allowedAttributes: { span: ['style'] },
-          allowedStyles: {
-            span: {
-              'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
-              'border-radius': [new RegExp(`^3px$`)],
-              'padding-left': [new RegExp(`^2px$`)],
-              'padding-right': [new RegExp(`^2px$`)],
-            },
-          },
-        }
-      : {
-          allowedTags: ['span'],
-          allowedAttributes: { span: ['style'] },
-          allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
-        }
-  );
+  sanitizeHtml(text, {
+    allowedTags: ['span'],
+    allowedAttributes: { span: ['style'] },
+    allowedStyles: {
+      span: spanAllowedStyles,
+    },
+  });
 
 const SearchResult = React.memo(
   ({
@@ -155,21 +150,12 @@ const SearchResult = React.memo(
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
-          {newSearchInput ? (
-            <StyledResultTitle
-              dangerouslySetInnerHTML={{
-                __html: sanitizePreviewHtml(title),
-              }}
-              useLargeTitle={useLargeTitle}
-            />
-          ) : (
-            <StyledResultTitle
-              dangerouslySetInnerHTML={{
-                __html: sanitizePreviewHtml(highlightedTitle),
-              }}
-              useLargeTitle={useLargeTitle}
-            />
-          )}
+          <StyledResultTitle
+            dangerouslySetInnerHTML={{
+              __html: sanitizePreviewHtml(newSearchInput ? title : highlightedTitle),
+            }}
+            useLargeTitle={useLargeTitle}
+          />
           <StyledPreviewText
             maxLines={maxLines}
             dangerouslySetInnerHTML={{
