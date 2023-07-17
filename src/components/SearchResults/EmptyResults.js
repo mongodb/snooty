@@ -70,7 +70,7 @@ const NoResultText = styled('div')`
 `;
 
 const SupportingText2 = styled('p')`
-  color: var(--gray-dark-1-new, #5c6c75);
+  color: ${palette.gray.dark1};
   font-size: 13px;
   font-family: Euclid Circular A;
   font-style: normal;
