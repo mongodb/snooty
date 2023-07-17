@@ -251,7 +251,7 @@ const SearchResults = () => {
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
-  const [searchField, setSearchField] = useState(null);
+  const [searchField, setSearchField] = useState('');
   const [searchFilter, setSearchFilter] = useState(null);
   const [searchFinished, setSearchFinished] = useState(false);
   const [firstRenderComplete, setFirstRenderComplete] = useState(false);
