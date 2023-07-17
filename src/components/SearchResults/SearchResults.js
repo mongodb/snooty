@@ -291,8 +291,8 @@ const SearchResults = () => {
   useEffect(() => {
     setFirstRenderComplete(true);
     const { q, searchProperty } = queryString.parse(search);
-    if (q === '' && !firstRenderComplete) setFirstLoadEmpty(true);
-    if (q === '') setSearchFinished(true);
+    if ((q === '' || q === undefined) && !firstRenderComplete) setFirstLoadEmpty(true);
+    if (q === '' || q === undefined) setSearchFinished(true);
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
