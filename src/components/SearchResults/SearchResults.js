@@ -358,22 +358,24 @@ const SearchResults = () => {
                       setSearchField(e.target.value);
                     }}
                   />
-                  <ResultTag style={{ paddingTop: '10px' }}>
-                    <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
-                      {searchResults?.length ? searchResults.length : '0'} RESULTS
-                    </Overline>
-                    {!!searchFilter && (
-                      <FilterBadgesWrapper>
-                        {selectedCategory && (
-                          <StyledTag variant="green" onClick={resetFilters}>
-                            {selectedCategory}
-                            <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
-                          </StyledTag>
-                        )}
-                        {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                      </FilterBadgesWrapper>
-                    )}
-                  </ResultTag>
+                  {(!!searchTerm || !firstLoadEmpty) && (
+                    <ResultTag style={{ paddingTop: '10px' }}>
+                      <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                        {searchResults?.length ? searchResults.length : '0'} RESULTS
+                      </Overline>
+                      {!!searchFilter && (
+                        <FilterBadgesWrapper>
+                          {selectedCategory && (
+                            <StyledTag variant="green" onClick={resetFilters}>
+                              {selectedCategory}
+                              <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
+                            </StyledTag>
+                          )}
+                          {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                        </FilterBadgesWrapper>
+                      )}
+                    </ResultTag>
+                  )}
                 </>
               ) : (
                 <>
@@ -459,16 +461,11 @@ const SearchResults = () => {
                         </FiltersContainer>
                       </>
                     ) : (
-                      <>
-                        <FiltersContainer
-                          css={css`
-                            margin-bottom: 550px;
-                          `}
-                        >
-                          <FilterHeader>{specifySearchText}</FilterHeader>
-                          <StyledSearchFilters />
-                        </FiltersContainer>
-                      </>
+                      <FiltersContainer
+                        css={css`
+                          margin-bottom: 550px;
+                        `}
+                      />
                     )}
                   </>
                 )}
@@ -478,27 +475,6 @@ const SearchResults = () => {
           </SearchResultsContainer>
         ) : (
           <>
-            {newSearchInput && (
-              <SearchResultsContainer>
-                <HeaderContainer>
-                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
-                  <SearchInput
-                    value={searchField}
-                    placeholder="Search"
-                    onSubmit={(event) => {
-                      const newValue = event.target[0]?.value;
-                      if (newValue === searchTerm) return;
-                      setSearchResults([]);
-                      setSearchFinished(false);
-                      setSearchTerm(event.target[0].value);
-                    }}
-                    onChange={(e) => {
-                      setSearchField(e.target.value);
-                    }}
-                  />
-                </HeaderContainer>
-              </SearchResultsContainer>
-            )}
             {!searchResults?.length && (
               <EmptyResultsContainer>
                 {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
