@@ -3,8 +3,6 @@ const { siteMetadata } = require('./src/utils/site-metadata');
 
 const pathPrefix = generatePathPrefix(siteMetadata);
 
-console.log('PATH PREFIX', pathPrefix);
-
 // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate components, add conditional for consistent-nav UnifiedNav in DefaultLayout
 const isFullBuild =
   siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
@@ -20,11 +18,12 @@ module.exports = {
       },
     },
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-react-helmet',
     {
-      resolve: 'gatsby-plugin-canonical-urls',
+      resolve: 'gatsby-plugin-react-helmet-canonical-urls',
       options: {
         siteUrl: `${siteMetadata.siteUrl}${pathPrefix}`,
-        stripQueryString: true,
+        noQueryString: true,
       },
     },
   ],
