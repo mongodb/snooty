@@ -10,6 +10,7 @@ const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
 const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 
 // different types of references
 const PAGES = [];
@@ -334,6 +335,7 @@ exports.createPages = async ({ actions }) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
       const slug = getPageSlug(page);
+      const pathPrefix = generatePathPrefix(siteMetadata);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
       const isFullBuild =
@@ -352,6 +354,8 @@ exports.createPages = async ({ actions }) => {
             template: pageNodes?.options?.template,
             page: pageNodes,
             siteUrl: siteMetadata.siteUrl,
+            pathPrefix,
+            project: siteMetadata.project,
           },
         });
       }
