@@ -351,6 +351,7 @@ exports.createPages = async ({ actions }) => {
             isAssociatedProduct,
             template: pageNodes?.options?.template,
             page: pageNodes,
+            siteUrl: siteMetadata.siteUrl,
           },
         });
       }
