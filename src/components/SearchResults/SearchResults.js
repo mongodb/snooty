@@ -258,6 +258,7 @@ const SearchResults = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [FirstLoadEmpty, setFirstLoadEmpty] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
 
@@ -289,8 +290,10 @@ const SearchResults = () => {
   useEffect(() => {
     setFirstRenderComplete(true);
     const { q, searchProperty } = queryString.parse(search);
-    // if ((q === '' || q === undefined) && !firstRenderComplete) setFirstLoadEmpty(true);
-    if (q === '' || q === undefined) setSearchFinished(true);
+    if (q === '' || q === undefined) {
+      if (!firstRenderComplete) setFirstLoadEmpty(true);
+      setSearchFinished(true);
+    }
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
@@ -346,11 +349,11 @@ const SearchResults = () => {
                 placeholder="Search"
                 onSubmit={(event) => {
                   const newValue = event.target[0]?.value;
-                  if (newValue === searchTerm || !newValue?.length) return;
+                  if (newValue === searchTerm) return;
                   setSearchResults([]);
                   if (!!newValue) setSearchFinished(false);
                   setSearchTerm(event.target[0].value);
-                  // setFirstLoadEmpty(false);
+                  setFirstLoadEmpty(false);
                 }}
                 onChange={(e) => {
                   setSearchField(e.target.value);
@@ -396,16 +399,30 @@ const SearchResults = () => {
             )}
 
             {/* empty search results */}
-            {!!searchTerm && !!searchFinished && !searchResults.length && (
+            {!!searchFinished && !searchResults.length && (
               <>
-                <EmptyResultsContainer
-                  css={css`
-                    grid-area: results;
-                    margin-top: 80px;
-                  `}
-                >
-                  <EmptyResults />
-                </EmptyResultsContainer>
+                {FirstLoadEmpty ? (
+                  <FiltersContainer
+                    css={css`
+                      margin-bottom: 550px;
+                    `}
+                  />
+                ) : (
+                  <>
+                    <EmptyResultsContainer
+                      css={css`
+                        grid-area: results;
+                        margin-top: 80px;
+                      `}
+                    >
+                      <EmptyResults />
+                    </EmptyResultsContainer>
+                    <FiltersContainer>
+                      <FilterHeader>{specifySearchText}</FilterHeader>
+                      <StyledSearchFilters />
+                    </FiltersContainer>
+                  </>
+                )}
               </>
             )}
 
