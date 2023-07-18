@@ -258,7 +258,7 @@ const SearchResults = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const [FirstLoadEmpty, setFirstLoadEmpty] = useState(false);
+  const [firstLoadEmpty, setFirstLoadEmpty] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
 
@@ -361,9 +361,7 @@ const SearchResults = () => {
               />
               <ResultTag style={{ paddingTop: '10px' }}>
                 <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
-                  {!!searchTerm && !!searchFinished && (
-                    <>{searchResults?.length ? searchResults.length : '0'} RESULTS</>
-                  )}
+                  {!firstLoadEmpty && <>{searchResults?.length ? searchResults.length : '0'} RESULTS</>}
                 </Overline>
                 {!!searchFilter && (
                   <FilterBadgesWrapper>
@@ -401,7 +399,7 @@ const SearchResults = () => {
             {/* empty search results */}
             {!!searchFinished && !searchResults.length && (
               <>
-                {FirstLoadEmpty ? (
+                {firstLoadEmpty ? (
                   <FiltersContainer
                     css={css`
                       margin-bottom: 550px;
