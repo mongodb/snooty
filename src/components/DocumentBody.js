@@ -131,7 +131,7 @@ export default DocumentBody;
 export const Head = ({ pageContext }) => {
   const { slug, page, template, repoBranches, siteUrl, pathPrefix, project } = pageContext;
   /**
-   * Getting the eol life to know how
+   * Getting the eol to know how
    * to handle the canonical URL
    */
   const { eol } = useSnootyMetadata();
