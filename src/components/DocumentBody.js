@@ -129,7 +129,13 @@ DocumentBody.propTypes = {
 export default DocumentBody;
 
 export const Head = ({ pageContext }) => {
-  const { slug, page, template } = pageContext;
+  const { slug, page, template, repoBranches, siteUrl } = pageContext;
+  /**
+   * Getting the eol life to know how
+   * to handle the canonical URL
+   */
+  const { eol } = useSnootyMetadata();
+
   const pageNodes = getNestedValue(['children'], page) || [];
 
   const meta = getMetaFromDirective('section', pageNodes, 'meta');
@@ -144,9 +150,24 @@ export const Head = ({ pageContext }) => {
   const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
+  // Override should only be for use cases in DOP-3823
+  let canonical = null;
+  if (eol) {
+    const stableBranch = repoBranches.branches.find((branch) => {
+      return branch.active && branch.isStableBranch;
+    });
+
+    canonical = `${siteUrl}/${stableBranch.urlSlug}`;
+  }
+
   return (
     <>
-      <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
+      <SEO
+        canonical={canonical}
+        pageTitle={pageTitle}
+        siteTitle={siteTitle}
+        showDocsLandingTitle={isDocsLandingHomepage}
+      />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
