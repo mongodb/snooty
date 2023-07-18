@@ -129,7 +129,7 @@ DocumentBody.propTypes = {
 export default DocumentBody;
 
 export const Head = ({ pageContext }) => {
-  const { slug, page, template, repoBranches, siteUrl } = pageContext;
+  const { slug, page, template, repoBranches, siteUrl, pathPrefix, project } = pageContext;
   /**
    * Getting the eol life to know how
    * to handle the canonical URL
@@ -152,12 +152,27 @@ export const Head = ({ pageContext }) => {
 
   // Override should only be for use cases in DOP-3823
   let canonical = null;
+
   if (eol) {
     const stableBranch = repoBranches.branches.find((branch) => {
       return branch.active && branch.isStableBranch;
     });
 
-    canonical = `${siteUrl}/${stableBranch.urlSlug}`;
+    const parsePathPrefix = pathPrefix.split('/');
+    const projectNameIndex = parsePathPrefix.indexOf(project);
+
+    if (projectNameIndex !== -1) {
+      let index = projectNameIndex + 1;
+      if (process.env.GATSBY_SNOOTY_DEV) {
+        index = projectNameIndex - 1;
+      }
+
+      // Swamp to stable version
+      parsePathPrefix.splice(index, 1, stableBranch.urlSlug);
+    }
+
+    // use the final path prefix
+    canonical = `${siteUrl}${parsePathPrefix.join('/')}`;
   }
 
   return (
