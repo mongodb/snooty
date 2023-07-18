@@ -258,7 +258,7 @@ const SearchResults = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const [firstLoadEmpty, setFirstLoadEmpty] = useState(false);
+  const [FirstLoadEmpty, setFirstLoadEmpty] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
 
@@ -290,8 +290,10 @@ const SearchResults = () => {
   useEffect(() => {
     setFirstRenderComplete(true);
     const { q, searchProperty } = queryString.parse(search);
-    if ((q === '' || q === undefined) && !firstRenderComplete) setFirstLoadEmpty(true);
-    if (q === '' || q === undefined) setSearchFinished(true);
+    if (q === '' || q === undefined) {
+      if (!firstRenderComplete) setFirstLoadEmpty(true);
+      setSearchFinished(true);
+    }
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
@@ -337,61 +339,144 @@ const SearchResults = () => {
           setShowMobileFilters,
         }}
       >
-        {!(!newSearchInput && !searchTerm) ? (
+        {newSearchInput && (
+          <SearchResultsContainer>
+            {/* new header for search bar */}
+            <HeaderContainer>
+              <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+              <SearchInput
+                value={searchField}
+                placeholder="Search"
+                onSubmit={(event) => {
+                  const newValue = event.target[0]?.value;
+                  if (newValue === searchTerm) return;
+                  setSearchResults([]);
+                  if (!!newValue) setSearchFinished(false);
+                  setSearchTerm(event.target[0].value);
+                  setFirstLoadEmpty(false);
+                }}
+                onChange={(e) => {
+                  setSearchField(e.target.value);
+                }}
+              />
+              <ResultTag style={{ paddingTop: '10px' }}>
+                <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                  {!!searchTerm && !!searchFinished && (
+                    <>{searchResults?.length ? searchResults.length : '0'} RESULTS</>
+                  )}
+                </Overline>
+                {!!searchFilter && (
+                  <FilterBadgesWrapper>
+                    {selectedCategory && (
+                      <StyledTag variant="green" onClick={resetFilters}>
+                        {selectedCategory}
+                        <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
+                      </StyledTag>
+                    )}
+                    {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                  </FilterBadgesWrapper>
+                )}
+              </ResultTag>
+            </HeaderContainer>
+
+            {/* loading state for new search input */}
+            {!!searchTerm && !searchFinished && (
+              <>
+                <StyledSearchResults>
+                  {[...Array(10)].map((_, index) => (
+                    <StyledLoadingSkeletonContainer key={index}>
+                      <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={200} />
+                      <Skeleton borderRadius={SKELETON_BORDER_RADIUS} />
+                      <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} inline width={60} />
+                    </StyledLoadingSkeletonContainer>
+                  ))}
+                </StyledSearchResults>
+                <FiltersContainer>
+                  <FilterHeader>{specifySearchText}</FilterHeader>
+                  <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} width={200} />
+                </FiltersContainer>
+              </>
+            )}
+
+            {/* empty search results */}
+            {!!searchFinished && !searchResults.length && (
+              <>
+                {FirstLoadEmpty ? (
+                  <FiltersContainer
+                    css={css`
+                      margin-bottom: 550px;
+                    `}
+                  />
+                ) : (
+                  <>
+                    <EmptyResultsContainer
+                      css={css`
+                        grid-area: results;
+                        margin-top: 80px;
+                      `}
+                    >
+                      <EmptyResults />
+                    </EmptyResultsContainer>
+                    <FiltersContainer>
+                      <FilterHeader>{specifySearchText}</FilterHeader>
+                      <StyledSearchFilters />
+                    </FiltersContainer>
+                  </>
+                )}
+              </>
+            )}
+
+            {/* search results for new search page */}
+            {!!searchTerm && !!searchFinished && !!searchResults.length && (
+              <>
+                <StyledSearchResults>
+                  {searchResults.map(({ title, preview, url, searchProperty }, index) => (
+                    <StyledSearchResult
+                      key={`${url}${index}`}
+                      onClick={() =>
+                        reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                      }
+                      title={title}
+                      preview={escapeHtml(preview)}
+                      url={url}
+                      useLargeTitle
+                      searchProperty={searchProperty?.[0]}
+                    />
+                  ))}
+                </StyledSearchResults>
+                <FiltersContainer>
+                  <FilterHeader>{specifySearchText}</FilterHeader>
+                  <StyledSearchFilters />
+                </FiltersContainer>
+              </>
+            )}
+          </SearchResultsContainer>
+        )}
+
+        {/* old search page */}
+        {!newSearchInput && !searchTerm && (
+          <>
+            {!searchResults?.length && (
+              <EmptyResultsContainer>
+                {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
+              </EmptyResultsContainer>
+            )}
+          </>
+        )}
+        {!newSearchInput && !!searchTerm && (
           <SearchResultsContainer>
             <HeaderContainer>
-              {newSearchInput ? (
-                <>
-                  <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
-                  <SearchInput
-                    value={searchField}
-                    placeholder="Search"
-                    onSubmit={(event) => {
-                      const newValue = event.target[0]?.value;
-                      if (newValue === searchTerm) return;
-                      setSearchResults([]);
-                      if (!!newValue) setSearchFinished(false);
-                      setSearchTerm(event.target[0].value);
-                      setFirstLoadEmpty(false);
-                    }}
-                    onChange={(e) => {
-                      setSearchField(e.target.value);
-                    }}
-                  />
-                  {(!!searchTerm || !firstLoadEmpty) && (
-                    <ResultTag style={{ paddingTop: '10px' }}>
-                      <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
-                        {searchResults?.length ? searchResults.length : '0'} RESULTS
-                      </Overline>
-                      {!!searchFilter && (
-                        <FilterBadgesWrapper>
-                          {selectedCategory && (
-                            <StyledTag variant="green" onClick={resetFilters}>
-                              {selectedCategory}
-                              <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
-                            </StyledTag>
-                          )}
-                          {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                        </FilterBadgesWrapper>
-                      )}
-                    </ResultTag>
+              <HeaderText>Search results for "{searchTerm}"</HeaderText>
+              {!!searchFilter && (
+                <FilterBadgesWrapper>
+                  {selectedCategory && (
+                    <StyledTag variant="green" onClick={resetFilters}>
+                      {selectedCategory}
+                      <Icon glyph="X" />
+                    </StyledTag>
                   )}
-                </>
-              ) : (
-                <>
-                  <HeaderText>Search results for "{searchTerm}"</HeaderText>
-                  {!!searchFilter && (
-                    <FilterBadgesWrapper>
-                      {selectedCategory && (
-                        <StyledTag variant="green" onClick={resetFilters}>
-                          {selectedCategory}
-                          <Icon glyph="X" />
-                        </StyledTag>
-                      )}
-                      {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                    </FilterBadgesWrapper>
-                  )}
-                </>
+                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                </FilterBadgesWrapper>
               )}
               <MobileSearchButtonWrapper>
                 <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
@@ -406,11 +491,7 @@ const SearchResults = () => {
                     <StyledSearchResult
                       key={`${url}${index}`}
                       onClick={() =>
-                        reportAnalytics('SearchSelection', {
-                          areaFrom: 'ResultsPage',
-                          rank: index,
-                          selectionUrl: url,
-                        })
+                        reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
                       }
                       title={title}
                       preview={escapeHtml(preview)}
@@ -445,42 +526,24 @@ const SearchResults = () => {
                   </>
                 ) : (
                   <>
-                    {!firstLoadEmpty ? (
-                      <>
-                        <EmptyResultsContainer
-                          css={css`
-                            grid-area: results;
-                            margin-top: 80px;
-                          `}
-                        >
-                          <EmptyResults />
-                        </EmptyResultsContainer>
-                        <FiltersContainer>
-                          <FilterHeader>{specifySearchText}</FilterHeader>
-                          <StyledSearchFilters />
-                        </FiltersContainer>
-                      </>
-                    ) : (
-                      <FiltersContainer
-                        css={css`
-                          margin-bottom: 550px;
-                        `}
-                      />
-                    )}
+                    <EmptyResultsContainer
+                      css={css`
+                        grid-area: results;
+                        margin-top: 80px;
+                      `}
+                    >
+                      <EmptyResults />
+                    </EmptyResultsContainer>
+                    <FiltersContainer>
+                      <FilterHeader>{specifySearchText}</FilterHeader>
+                      <StyledSearchFilters />
+                    </FiltersContainer>
                   </>
                 )}
               </>
             )}
             {showMobileFilters && isTabletOrMobile && <MobileFilters />}
           </SearchResultsContainer>
-        ) : (
-          <>
-            {!searchResults?.length && (
-              <EmptyResultsContainer>
-                {firstRenderComplete ? <EmptyResults type={'searchLandingPage'} /> : <EmptyPlaceholder />}
-              </EmptyResultsContainer>
-            )}
-          </>
         )}
       </SearchContext.Provider>
     </>
