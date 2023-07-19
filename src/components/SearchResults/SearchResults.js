@@ -300,10 +300,6 @@ const SearchResults = () => {
   }, [search, firstRenderComplete]);
 
   // add loading skeleton when new filter selected and loading results
-  useEffect(() => {
-    if (newSearchInput) setSearchFinished(false);
-  }, [searchFilter]);
-
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
   useEffect(() => {
@@ -311,6 +307,7 @@ const SearchResults = () => {
       if (!searchTerm && firstRenderComplete) setSearchFinished(true);
       return;
     }
+    if (newSearchInput) setSearchFinished(false);
     const fetchNewSearchResults = async () => {
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
       const resultJson = await result.json();
@@ -400,10 +397,6 @@ const SearchResults = () => {
                     </StyledLoadingSkeletonContainer>
                   ))}
                 </StyledSearchResults>
-                <FiltersContainer>
-                  <FilterHeader>{specifySearchText}</FilterHeader>
-                  <StyledSearchFilters />
-                </FiltersContainer>
               </>
             )}
 
@@ -426,10 +419,6 @@ const SearchResults = () => {
                     >
                       <EmptyResults />
                     </EmptyResultsContainer>
-                    <FiltersContainer>
-                      <FilterHeader>{specifySearchText}</FilterHeader>
-                      <StyledSearchFilters />
-                    </FiltersContainer>
                   </>
                 )}
               </>
@@ -453,11 +442,13 @@ const SearchResults = () => {
                     />
                   ))}
                 </StyledSearchResults>
-                <FiltersContainer>
-                  <FilterHeader>{specifySearchText}</FilterHeader>
-                  <StyledSearchFilters />
-                </FiltersContainer>
               </>
+            )}
+            {!firstLoadEmpty && (
+              <FiltersContainer>
+                <FilterHeader>{specifySearchText}</FilterHeader>
+                <StyledSearchFilters />
+              </FiltersContainer>
             )}
             {showMobileFilters && isTabletOrMobile && <MobileFilters />}
           </SearchResultsContainer>
