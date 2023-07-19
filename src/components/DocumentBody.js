@@ -151,7 +151,7 @@ export const Head = ({ pageContext }) => {
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
   // Override should only be for use cases in DOP-3823
-  let canonical = `${siteUrl}/${pathPrefix}/${slug}`;
+  let canonical = `${siteUrl}/${pathPrefix}/${slug === '/' ? '' : slug}`;
 
   if (metadata.eol) {
     const stableBranch = repoBranches.branches.find((branch) => {
