@@ -81,6 +81,11 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
     setVersion(null);
     setSelectedCategory(null);
     setSelectedVersion(null);
+    let searchParams = new URLSearchParams(window.location.search);
+    searchParams.delete('searchProperty');
+    searchParams.delete('searchVersion');
+    let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+    window.history.replaceState(null, '', newRelativePathQuery);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
 
   // Update selected version and category automatically, if we're not manually applying filters
@@ -120,6 +125,11 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
   useEffect(() => {
     if (filters && selectedCategory && filters[selectedCategory] && selectedVersion && !manuallyApplyFilters) {
       setSearchFilter(filters[selectedCategory][selectedVersion]);
+      let searchParams = new URLSearchParams(window.location.search);
+      searchParams.set('searchProperty', selectedCategory);
+      searchParams.set('searchVersion', selectedVersion);
+      let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+      window.history.pushState(null, '', newRelativePathQuery);
     }
   }, [filters, manuallyApplyFilters, selectedVersion, selectedCategory, setSearchFilter]);
 
