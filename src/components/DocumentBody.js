@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { usePathPrefix } from '../hooks/use-path-prefix';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
@@ -133,6 +134,7 @@ export const Head = ({ pageContext }) => {
   const { slug, page, template, repoBranches } = pageContext;
 
   const { siteUrl } = useSiteMetadata();
+  const pathPrefix = usePathPrefix();
 
   const pageNodes = getNestedValue(['children'], page) || [];
 
@@ -149,7 +151,7 @@ export const Head = ({ pageContext }) => {
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
   // Override should only be for use cases in DOP-3823
-  let canonical = null;
+  let canonical = `${siteUrl}/${pathPrefix}/${slug}`;
 
   if (metadata.eol) {
     const stableBranch = repoBranches.branches.find((branch) => {
