@@ -301,7 +301,7 @@ const SearchResults = () => {
 
   // add loading skeleton when new filter selected and loading results
   useEffect(() => {
-    newSearchInput && setSearchFinished(false);
+    if (newSearchInput) setSearchFinished(false);
   }, [searchFilter]);
 
   // Update results on a new search query or filters
@@ -402,7 +402,7 @@ const SearchResults = () => {
                 </StyledSearchResults>
                 <FiltersContainer>
                   <FilterHeader>{specifySearchText}</FilterHeader>
-                  <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} width={200} />
+                  <StyledSearchFilters />
                 </FiltersContainer>
               </>
             )}
