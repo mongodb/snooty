@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
@@ -129,12 +130,9 @@ DocumentBody.propTypes = {
 export default DocumentBody;
 
 export const Head = ({ pageContext }) => {
-  const { slug, page, template, repoBranches, siteUrl, pathPrefix, project } = pageContext;
-  /**
-   * Getting the eol to know how
-   * to handle the canonical URL
-   */
-  const { eol } = useSnootyMetadata();
+  const { slug, page, template, repoBranches } = pageContext;
+
+  const { siteUrl } = useSiteMetadata();
 
   const pageNodes = getNestedValue(['children'], page) || [];
 
@@ -153,26 +151,12 @@ export const Head = ({ pageContext }) => {
   // Override should only be for use cases in DOP-3823
   let canonical = null;
 
-  if (eol) {
+  if (metadata.eol) {
     const stableBranch = repoBranches.branches.find((branch) => {
       return branch.active && branch.isStableBranch;
     });
-
-    const parsePathPrefix = pathPrefix.split('/');
-    const projectNameIndex = parsePathPrefix.indexOf(project);
-
-    if (projectNameIndex !== -1) {
-      let index = projectNameIndex + 1;
-      if (process.env.GATSBY_SNOOTY_DEV) {
-        index = projectNameIndex - 1;
-      }
-
-      // Swamp to stable version
-      parsePathPrefix.splice(index, 1, stableBranch.urlSlug);
-    }
-
     // use the final path prefix
-    canonical = `${siteUrl}${parsePathPrefix.join('/')}`;
+    canonical = `${siteUrl}/${repoBranches.siteBasePrefix}/${stableBranch.urlSlug}`;
   }
 
   return (
