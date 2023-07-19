@@ -382,17 +382,24 @@ const SearchResults = () => {
                   {!firstLoadEmpty && <>{searchResults?.length ? searchResults.length : '0'} RESULTS</>}
                 </Overline>
                 {!!searchFilter && (
-                  <FilterBadgesWrapper>
-                    {selectedCategory && (
-                      <StyledTag variant="green" onClick={resetFilters}>
-                        {selectedCategory}
-                        <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
-                      </StyledTag>
-                    )}
-                    {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                  </FilterBadgesWrapper>
+                  <>
+                    <FilterBadgesWrapper>
+                      {selectedCategory && (
+                        <StyledTag variant="green" onClick={resetFilters}>
+                          {selectedCategory}
+                          <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
+                        </StyledTag>
+                      )}
+                      {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                    </FilterBadgesWrapper>
+                  </>
                 )}
               </ResultTag>
+              <MobileSearchButtonWrapper>
+                <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+                  {mobileFilterButton.text}
+                </Button>
+              </MobileSearchButtonWrapper>
             </HeaderContainer>
 
             {/* loading state for new search input */}
@@ -466,6 +473,7 @@ const SearchResults = () => {
                 </FiltersContainer>
               </>
             )}
+            {showMobileFilters && isTabletOrMobile && <MobileFilters />}
           </SearchResultsContainer>
         )}
 
