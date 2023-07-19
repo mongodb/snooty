@@ -381,6 +381,11 @@ const SearchResults = () => {
                   </FilterBadgesWrapper>
                 )}
               </ResultTag>
+              <MobileSearchButtonWrapper>
+                <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+                  {mobileFilterButton.text}
+                </Button>
+              </MobileSearchButtonWrapper>
             </HeaderContainer>
 
             {/* loading state for new search input */}
@@ -454,6 +459,7 @@ const SearchResults = () => {
                 </FiltersContainer>
               </>
             )}
+            {showMobileFilters && isTabletOrMobile && <MobileFilters />}
           </SearchResultsContainer>
         )}
 
