@@ -299,12 +299,15 @@ const SearchResults = () => {
     setSearchFilter(searchProperty);
   }, [search, firstRenderComplete]);
 
+  // add loading skeleton when new filter selected and loading results
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
   useEffect(() => {
     if (!searchTerm || !Object.keys(searchPropertyMapping).length) {
+      if (!searchTerm && firstRenderComplete) setSearchFinished(true);
       return;
     }
+    if (newSearchInput) setSearchFinished(false);
     const fetchNewSearchResults = async () => {
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
       const resultJson = await result.json();
@@ -314,7 +317,7 @@ const SearchResults = () => {
       setSearchFinished(true);
     };
     fetchNewSearchResults();
-  }, [searchFilter, searchPropertyMapping, searchTerm]);
+  }, [searchFilter, searchPropertyMapping, searchTerm, firstRenderComplete]);
 
   return (
     <>
@@ -375,6 +378,11 @@ const SearchResults = () => {
                   </FilterBadgesWrapper>
                 )}
               </ResultTag>
+              <MobileSearchButtonWrapper>
+                <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+                  {mobileFilterButton.text}
+                </Button>
+              </MobileSearchButtonWrapper>
             </HeaderContainer>
 
             {/* loading state for new search input */}
@@ -389,10 +397,6 @@ const SearchResults = () => {
                     </StyledLoadingSkeletonContainer>
                   ))}
                 </StyledSearchResults>
-                <FiltersContainer>
-                  <FilterHeader>{specifySearchText}</FilterHeader>
-                  <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} width={200} />
-                </FiltersContainer>
               </>
             )}
 
@@ -415,10 +419,6 @@ const SearchResults = () => {
                     >
                       <EmptyResults />
                     </EmptyResultsContainer>
-                    <FiltersContainer>
-                      <FilterHeader>{specifySearchText}</FilterHeader>
-                      <StyledSearchFilters />
-                    </FiltersContainer>
                   </>
                 )}
               </>
@@ -442,12 +442,15 @@ const SearchResults = () => {
                     />
                   ))}
                 </StyledSearchResults>
-                <FiltersContainer>
-                  <FilterHeader>{specifySearchText}</FilterHeader>
-                  <StyledSearchFilters />
-                </FiltersContainer>
               </>
             )}
+            {!firstLoadEmpty && (
+              <FiltersContainer>
+                <FilterHeader>{specifySearchText}</FilterHeader>
+                <StyledSearchFilters />
+              </FiltersContainer>
+            )}
+            {showMobileFilters && isTabletOrMobile && <MobileFilters />}
           </SearchResultsContainer>
         )}
 
@@ -482,7 +485,7 @@ const SearchResults = () => {
                 </Button>
               </MobileSearchButtonWrapper>
             </HeaderContainer>
-            {searchResults?.length ? (
+            {searchResults?.length && searchFinished ? (
               <>
                 <StyledSearchResults>
                   {searchResults.map(({ title, preview, url, searchProperty }, index) => (
