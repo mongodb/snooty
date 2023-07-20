@@ -145,6 +145,7 @@ const SearchResult = React.memo(
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
+    const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
