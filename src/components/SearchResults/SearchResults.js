@@ -336,7 +336,6 @@ const SearchResults = () => {
     setFirstLoadEmpty(false);
     let searchParams = new URLSearchParams(window.location.search);
     searchParams.set('q', newValue);
-    console.log(searchFilter);
     let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   };
