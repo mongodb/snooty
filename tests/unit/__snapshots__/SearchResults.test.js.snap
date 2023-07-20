@@ -230,8 +230,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
@@ -280,20 +280,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-23 {
   height: 100%;
-  position: relative;
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-23 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-  }
 }
 
 .emotion-25 {
@@ -310,24 +296,15 @@ exports[`Search Results Page considers a given search filter query param and dis
   overflow: hidden;
   font-size: 16px;
   line-height: 24px;
-}
-
-@media not all and (max-width: 480px) {
-  .emotion-25 {
-    font-weight: 600;
-  }
+  font-weight: 600;
+  position: relative;
 }
 
 @media only screen and (max-width: 480px) {
   .emotion-25 {
     font-size: 16px;
     line-height: 24px;
-  }
-
-  @media not all and (max-width: 480px) {
-    .emotion-25 {
-      font-weight: 600;
-    }
+    font-weight: 600;
   }
 }
 
@@ -2374,8 +2351,8 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-14 {
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
@@ -3162,8 +3139,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-14 {
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
@@ -3955,8 +3932,8 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
@@ -4005,20 +3982,6 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-17 {
   height: 100%;
-  position: relative;
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-17 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-  }
 }
 
 .emotion-19 {
@@ -4035,24 +3998,15 @@ exports[`Search Results Page renders results from a given search term query para
   overflow: hidden;
   font-size: 16px;
   line-height: 24px;
-}
-
-@media not all and (max-width: 480px) {
-  .emotion-19 {
-    font-weight: 600;
-  }
+  font-weight: 600;
+  position: relative;
 }
 
 @media only screen and (max-width: 480px) {
   .emotion-19 {
     font-size: 16px;
     line-height: 24px;
-  }
-
-  @media not all and (max-width: 480px) {
-    .emotion-19 {
-      font-weight: 600;
-    }
+    font-weight: 600;
   }
 }
 

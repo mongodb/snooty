@@ -10,16 +10,15 @@ import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const SEARCH_MATCH_STYLE = `background-color: ${palette.yellow.light2};`;
 const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
+const SEARCH_MATCH_STYLE = newSearchInput
+  ? `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`
+  : `background-color: ${palette.yellow.light2};`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
   line-height: ${theme.size.medium};
-  /* Only add bold on larger devices */
-  @media ${theme.screenSize.smallAndUp} {
-    font-weight: 600;
-  }
+  font-weight: 600;
 `;
 
 // Truncates text to a maximum number of lines
@@ -45,10 +44,21 @@ const LearnMoreLink = styled('a')`
 
 const SearchResultContainer = styled('div')`
   height: 100%;
+`;
+
+const StyledResultTitle = styled('p')`
+  font-family: 'Euclid Circular A';
+  ${newSearchInput ? `color: #016bf8;` : ``}
+  font-size: ${theme.fontSize.small};
+  line-height: ${theme.size.medium};
+  letter-spacing: 0.5px;
+  height: ${theme.size.medium};
+  margin-bottom: ${theme.size.small};
+  margin-top: 0;
+  ${truncate(1)};
+  ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
   @media ${theme.screenSize.upToSmall} {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    ${largeResultTitle};
   }
   position: relative;
 `;
@@ -67,6 +77,9 @@ const SearchResultLink = styled('a')`
       transition: background-color 150ms ease-in;
     }
   }
+  :visited {
+    ${newSearchInput ? `${StyledResultTitle} {color: #5e0c9e;}` : ``}
+  }
 `;
 
 const StyledPreviewText = styled(Body)`
@@ -76,21 +89,6 @@ const StyledPreviewText = styled(Body)`
   ${({ maxLines }) => truncate(maxLines)};
   // Reserve some space inside of the search result card when there is no preview
   min-height: 20px;
-`;
-
-const StyledResultTitle = styled('p')`
-  font-family: 'Euclid Circular A';
-  font-size: ${theme.fontSize.small};
-  line-height: ${theme.size.medium};
-  letter-spacing: 0.5px;
-  height: ${theme.size.medium};
-  margin-bottom: ${theme.size.small};
-  margin-top: 0;
-  ${truncate(1)};
-  ${({ useLargeTitle }) => useLargeTitle && largeResultTitle};
-  @media ${theme.screenSize.upToSmall} {
-    ${largeResultTitle};
-  }
 `;
 
 const StyledTag = styled(Tag)`
@@ -110,12 +108,23 @@ const highlightSearchTerm = (text, searchTerm) =>
     (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
+const spanAllowedStyles = newSearchInput
+  ? {
+      'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+      'border-radius': [new RegExp(`^3px$`)],
+      'padding-left': [new RegExp(`^2px$`)],
+      'padding-right': [new RegExp(`^2px$`)],
+    }
+  : { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] };
+
 // since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
 const sanitizePreviewHtml = (text) =>
   sanitizeHtml(text, {
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
-    allowedStyles: { span: { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] } },
+    allowedStyles: {
+      span: spanAllowedStyles,
+    },
   });
 
 const SearchResult = React.memo(
@@ -136,13 +145,14 @@ const SearchResult = React.memo(
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
+    const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
             dangerouslySetInnerHTML={{
-              __html: sanitizePreviewHtml(highlightedTitle),
+              __html: sanitizePreviewHtml(newSearchInput ? title : highlightedTitle),
             }}
             useLargeTitle={useLargeTitle}
           />
