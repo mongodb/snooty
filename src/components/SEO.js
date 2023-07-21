@@ -13,7 +13,7 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical }) => (
     <meta property="twitter:title" content={pageTitle} />
     <meta name="twitter:image" content={metaUrl} />
     <meta name="twitter:image:alt" content="MongoDB logo featuring a green leaf on a dark green background." />
-    <link id="canonical" rel="canonical" key={canonical} href={canonical} />
+    <link id="canonical" data-testid="canonical" rel="canonical" key={canonical} href={canonical} />
   </>
 );
 
