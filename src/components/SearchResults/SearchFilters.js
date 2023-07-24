@@ -81,10 +81,10 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
     setVersion(null);
     setSelectedCategory(null);
     setSelectedVersion(null);
-    let searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(window.location.search);
     searchParams.delete('searchProperty');
     searchParams.delete('searchVersion');
-    let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+    const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
 
@@ -109,10 +109,10 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
       updateVersionChoices(categoryTitle);
       setVersion(versionSelectorLabel);
 
-      let searchParams = new URLSearchParams(window.location.search);
+      const searchParams = new URLSearchParams(window.location.search);
       searchParams.set('searchProperty', searchFilter);
       searchParams.set('searchVersion', versionSelectorLabel);
-      let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+      const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
       window.history.pushState(null, '', newRelativePathQuery);
     } else {
       setCategory(null);

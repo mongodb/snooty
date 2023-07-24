@@ -267,10 +267,10 @@ const SearchResults = () => {
     // Reset version and search filter since a search filter requires both a category and version
     setSelectedVersion(null);
     setSearchFilter(null);
-    let searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(window.location.search);
     searchParams.delete('searchProperty');
     searchParams.delete('searchVersion');
-    let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+    const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   }, []);
 
@@ -324,16 +324,16 @@ const SearchResults = () => {
     fetchNewSearchResults();
   }, [searchFilter, searchPropertyMapping, searchTerm, firstRenderComplete]);
 
-  const newSearch = (event) => {
+  const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
     if (newValue === searchTerm) return;
     setSearchResults([]);
     if (!!newValue) setSearchFinished(false);
     setSearchTerm(event.target[0].value);
     setFirstLoadEmpty(false);
-    let searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('q', newValue);
-    let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+    const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   };
 
@@ -368,7 +368,7 @@ const SearchResults = () => {
               <SearchInput
                 value={searchField}
                 placeholder="Search"
-                onSubmit={newSearch}
+                onSubmit={submitNewSearch}
                 onChange={(e) => {
                   setSearchField(e.target.value);
                 }}
