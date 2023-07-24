@@ -157,8 +157,23 @@ export const Head = ({ pageContext }) => {
     const stableBranch = repoBranches.branches.find((branch) => {
       return branch.active && branch.isStableBranch;
     });
-    // use the final path prefix
-    canonical = `${siteUrl}/${repoBranches.siteBasePrefix}/${stableBranch.urlSlug}`;
+
+    if (stableBranch) {
+      // if a stable branch is found, use the following canonical tag
+      // which points to the most current version
+      canonical = `${siteUrl}/${repoBranches.siteBasePrefix}/${stableBranch.urlSlug}`;
+    } else {
+      // this means the entire page is EoL'd and a writer should provide the canonical tag
+      let _canonical = `${siteUrl}`;
+      if (metadata.canonical) {
+        _canonical = metadata.canonical;
+      } else {
+        console.warn(
+          `${repoBranches.siteBasePrefix} seems to be an EoL'd product. A canonical URL should be provided in the snooty.toml`
+        );
+      }
+      canonical = _canonical;
+    }
   }
 
   return (
