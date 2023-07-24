@@ -168,7 +168,9 @@ export const Head = ({ pageContext }) => {
       if (metadata.canonical) {
         _canonical = metadata.canonical;
       } else {
-        console.warn('The needed canonical is missing from the .toml');
+        console.warn(
+          `${repoBranches.siteBasePrefix} seems to be an EoL'd product. A canonical URL should be provided in the snooty.toml`
+        );
       }
       canonical = _canonical;
     }
