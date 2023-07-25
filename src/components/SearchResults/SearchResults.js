@@ -328,7 +328,7 @@ const SearchResults = () => {
     const newValue = event.target[0]?.value;
     if (newValue === searchTerm) return;
     setSearchResults([]);
-    if (!!newValue) setSearchFinished(false);
+    if (newValue) setSearchFinished(false);
     setSearchTerm(event.target[0].value);
     setFirstLoadEmpty(false);
     const searchParams = new URLSearchParams(window.location.search);
