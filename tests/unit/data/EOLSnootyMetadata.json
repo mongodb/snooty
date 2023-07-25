@@ -1,0 +1,50 @@
+{
+  "project": "atlas-open-service-broker",
+  "branch": "master",
+  "title": "Atlas Open Service Broker",
+  "eol": true,
+  "canonical": "https://www.mongodb.com/docs/atlas/atlas-operator/",
+  "slugToTitle": {
+    "tutorial/manage-database-users": [ ],
+    "tutorial/delete-cluster": [ ],
+    "tutorial/deploy-replica-set": [ ],
+    "tutorial/deploy-sharded-cluster": [ ],
+    "index": [ ],
+    "deploy": [ ],
+    "tutorial/edit-cluster": [ ],
+    "release-notes": [ ],
+    "tutorial/whitelist-providers": [ ],
+    "installation": [ ],
+    "third-party-licenses": [ ]
+  },
+  "toctree": {
+    "title": [ ],
+    "slug": "/",
+    "children": [ ]
+  },
+  "toctreeOrder": [
+    "/",
+    "installation",
+    "tutorial/whitelist-providers",
+    "deploy",
+    "tutorial/deploy-replica-set",
+    "tutorial/deploy-sharded-cluster",
+    "tutorial/edit-cluster",
+    "tutorial/delete-cluster",
+    "tutorial/manage-database-users",
+    "third-party-licenses",
+    "release-notes"
+  ],
+  "parentPaths": {
+    "installation": [],
+    "tutorial/whitelist-providers": [ "installation" ],
+    "deploy": [],
+    "tutorial/deploy-replica-set": [ ],
+    "tutorial/deploy-sharded-cluster": [  ],
+    "tutorial/edit-cluster": [  ],
+    "tutorial/delete-cluster": [],
+    "tutorial/manage-database-users": [],
+    "third-party-licenses": [],
+    "release-notes": []
+  }
+}
