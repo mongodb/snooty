@@ -56,6 +56,7 @@ const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 
 exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDigest, cache, webhookBody }) => {
   console.log({ webhookBody });
+  console.log(webhookBody);
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
