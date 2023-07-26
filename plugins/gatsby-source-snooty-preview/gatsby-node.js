@@ -31,11 +31,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
       branch: String
       pagePath: String
       ast: JSON!
+      metadata: SnootyMetadata @link
     }
 
     type SnootyMetadata implements Node @dontInfer {
       metadata: JSON
       branch: String
+      project: String
     }
 
     type RemoteMetadata implements Node @dontInfer {
@@ -59,6 +61,10 @@ const saveFile = async (file, data) => {
 let manifestMetadata;
 
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
+
+function createSnootyMetadataId({ branch, project, createNodeId }) {
+  return createNodeId(`metadata-${branch}-${project}`);
+}
 
 exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDigest, cache, webhookBody }) => {
   console.log({ webhookBody });
@@ -104,7 +110,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
         const { _id, build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = entry.data;
         manifestMetadata = metadataMinusStatic;
 
-        const { parentPaths, slugToTitle } = metadataMinusStatic;
+        const { parentPaths, slugToTitle, branch, project } = metadataMinusStatic;
         if (parentPaths) {
           transformBreadcrumbs(parentPaths, slugToTitle);
         }
@@ -116,12 +122,13 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
 
         createNode({
           children: [],
-          id: createNodeId('metadata' + metadataMinusStatic.branch),
+          id: createSnootyMetadataId({ createNodeId, branch, project }),
           internal: {
             contentDigest: createContentDigest(metadataMinusStatic),
             type: 'SnootyMetadata',
           },
-          branch: metadataMinusStatic.branch,
+          branch,
+          project,
           parent: null,
           metadata: metadataMinusStatic,
         });
@@ -135,9 +142,12 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
         // is a concern (I couldn't find any page documents that didn't end in .txt)
         // but Chesterton's Fence and all.
         if (filename.endsWith('.txt')) {
-          const branch = page.page_id.split(`/`).slice(2, 3)[0];
+          const branch = page.page_id.split(`/`)[2];
           const page_id = `/` + page.page_id.split(`/`).slice(3).join(`/`);
+          const project = page.page_id.split(`/`)[0];
+
           page.page_id = page_id;
+          page.metadata = createSnootyMetadataId({ createNodeId, branch, project });
           page.id = createNodeId(page_id + branch);
           page.internal = {
             type: `Page`,
@@ -148,6 +158,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
             id: page.id + `/path`,
             page_id: page_id,
             branch,
+            project,
             pageNodeId: page.id,
             internal: {
               type: `PagePath`,
@@ -239,6 +250,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           pageNodeId
           branch
           page_id
+          project
         }
       }
     }
@@ -315,7 +327,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     result.data.allPagePath.nodes.forEach((node) => {
       let slug;
       if (isPreview) {
-        slug = path.join(`BRANCH--${node.branch}`, node.page_id);
+        slug = path.join(node.project, node.branch, node.page_id);
       } else {
         slug = node.page_id;
       }

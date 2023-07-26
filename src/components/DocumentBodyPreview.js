@@ -5,7 +5,6 @@ import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
 import Layout from '../layouts/preview-layout';
 import Widgets from './Widgets';
 import SEO from './SEO';
@@ -68,6 +67,7 @@ const DocumentBody = (props) => {
     data,
   } = props;
   const page = data.page.ast;
+  const metadata = data.page.metadata.metadata;
   const template = page?.options?.template;
   props.pageContext.page = page;
   const initialization = () => {
@@ -78,8 +78,6 @@ const DocumentBody = (props) => {
   };
 
   const [{ pageNodes, footnotes }] = useState(initialization);
-
-  const metadata = useSnootyMetadata();
 
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
@@ -95,6 +93,7 @@ const DocumentBody = (props) => {
         publishedBranches: getNestedValue(['publishedBranches'], metadata),
         ...props.pageContext,
       }}
+      metadata={metadata}
     >
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
       <Widgets
@@ -133,6 +132,9 @@ export const query = graphql`
   query ($id: String) {
     page(id: { eq: $id }) {
       ast
+      metadata {
+        metadata
+      }
     }
   }
 `;

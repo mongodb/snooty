@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { NavigationProvider } from '../context/navigation-context';
 import { VersionContextProvider } from '../context/version-context';
 import { TocContextProvider } from '../context/toc-context';
+import { MetadataProvider } from '../utils/use-snooty-metadata';
 import { HeaderContextProvider } from './Header/header-context';
 import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
@@ -17,25 +18,28 @@ const RootProvider = ({
   associatedReposInfo,
   isAssociatedProduct,
   remoteMetadata,
+  metadata,
 }) => (
-  <TabProvider selectors={selectors}>
-    <ContentsProvider headingNodes={headingNodes}>
-      <HeaderContextProvider>
-        <VersionContextProvider
-          repoBranches={repoBranches}
-          slug={slug}
-          associatedReposInfo={associatedReposInfo}
-          isAssociatedProduct={isAssociatedProduct}
-        >
-          <TocContextProvider remoteMetadata={remoteMetadata}>
-            <NavigationProvider>
-              <SidenavContextProvider>{children}</SidenavContextProvider>
-            </NavigationProvider>
-          </TocContextProvider>
-        </VersionContextProvider>
-      </HeaderContextProvider>
-    </ContentsProvider>
-  </TabProvider>
+  <MetadataProvider metadata={metadata}>
+    <TabProvider selectors={selectors}>
+      <ContentsProvider headingNodes={headingNodes}>
+        <HeaderContextProvider>
+          <VersionContextProvider
+            repoBranches={repoBranches}
+            slug={slug}
+            associatedReposInfo={associatedReposInfo}
+            isAssociatedProduct={isAssociatedProduct}
+          >
+            <TocContextProvider remoteMetadata={remoteMetadata}>
+              <NavigationProvider>
+                <SidenavContextProvider>{children}</SidenavContextProvider>
+              </NavigationProvider>
+            </TocContextProvider>
+          </VersionContextProvider>
+        </HeaderContextProvider>
+      </ContentsProvider>
+    </TabProvider>
+  </MetadataProvider>
 );
 
 RootProvider.propTypes = {
