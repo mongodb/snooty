@@ -12,7 +12,7 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
   // meta directive and grab the index
   const canonicalIndex = Array.isArray(meta)
     ? meta.findIndex((_meta) => {
-        return Object.entries(_meta.options, 'canonical');
+        return Object.hasOwn(_meta.options, 'canonical');
       })
     : -1;
 
