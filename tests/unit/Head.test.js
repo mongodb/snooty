@@ -83,6 +83,13 @@ describe('Head', () => {
       },
     };
 
+    const expectCanonicalTagToBeCorrect = (canonicalTag) => {
+      expect(canonicalTag).toBeInTheDocument();
+      expect(canonicalTag).toHaveAttribute('id', 'canonical');
+      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
+      expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical);
+    };
+
     let mockPageContext = mockHeadPageContext;
     it('renders the canonical tag from directive rather than pulling from snooty.toml', () => {
       mockPageContext = mockCompleteEOLPageContext;
@@ -90,10 +97,7 @@ describe('Head', () => {
       render(<Head pageContext={mockPageContext} />);
 
       const canonicalTag = screen.getByTestId('canonical');
-      expect(canonicalTag).toBeInTheDocument();
-      expect(canonicalTag).toHaveAttribute('id', 'canonical');
-      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical);
+      expectCanonicalTagToBeCorrect(canonicalTag);
     });
 
     it("renders the canonical tag from directive rather than pulling from stable branch (version eol'd)", () => {
@@ -101,10 +105,7 @@ describe('Head', () => {
       render(<Head pageContext={mockPageContext} />);
 
       const canonicalTag = screen.getByTestId('canonical');
-      expect(canonicalTag).toBeInTheDocument();
-      expect(canonicalTag).toHaveAttribute('id', 'canonical');
-      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical);
+      expectCanonicalTagToBeCorrect(canonicalTag);
     });
 
     it('renders the canonical tag from directive rather than pulling from default logic', () => {
@@ -116,10 +117,7 @@ describe('Head', () => {
       render(<Head pageContext={mockPageContext} />);
 
       const canonicalTag = screen.getByTestId('canonical');
-      expect(canonicalTag).toBeInTheDocument();
-      expect(canonicalTag).toHaveAttribute('id', 'canonical');
-      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical);
+      expectCanonicalTagToBeCorrect(canonicalTag);
     });
   });
 });
