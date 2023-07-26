@@ -6,7 +6,7 @@ const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
 
 const plugins = [
   'gatsby-plugin-emotion',
-  isPreview ? 'new' : 'old',
+  isPreview ? 'gatsby-source-snooty-preview' : 'gatsby-source-snooty-prod',
   {
     resolve: 'gatsby-plugin-canonical-urls',
     options: {
