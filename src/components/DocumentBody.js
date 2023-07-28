@@ -148,7 +148,7 @@ export const Head = ({ pageContext }) => {
 
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
-  let canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
+  const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
 
   return (
     <>
