@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { usePathPrefix } from '../hooks/use-path-prefix';
+import { useCanonicalUrl } from '../hooks/use-canonical-url';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
@@ -133,9 +132,6 @@ export default DocumentBody;
 export const Head = ({ pageContext }) => {
   const { slug, page, template, repoBranches } = pageContext;
 
-  const { siteUrl } = useSiteMetadata();
-  const pathPrefix = usePathPrefix();
-
   const pageNodes = getNestedValue(['children'], page) || [];
 
   const meta = getMetaFromDirective('section', pageNodes, 'meta');
@@ -150,31 +146,9 @@ export const Head = ({ pageContext }) => {
   const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
-  // Override should only be for use cases in DOP-3823
-  let canonical = `${siteUrl}${pathPrefix}/${slug === '/' ? '' : slug}`;
-
-  if (metadata.eol) {
-    const stableBranch = repoBranches.branches.find((branch) => {
-      return branch.active && branch.isStableBranch;
-    });
-
-    if (stableBranch) {
-      // if a stable branch is found, use the following canonical tag
-      // which points to the most current version
-      canonical = `${siteUrl}/${repoBranches.siteBasePrefix}/${stableBranch.urlSlug}`;
-    } else {
-      // this means the entire page is EoL'd and a writer should provide the canonical tag
-      let _canonical = `${siteUrl}`;
-      if (metadata.canonical) {
-        _canonical = metadata.canonical;
-      } else {
-        console.warn(
-          `${repoBranches.siteBasePrefix} seems to be an EoL'd product. A canonical URL should be provided in the snooty.toml`
-        );
-      }
-      canonical = _canonical;
-    }
-  }
+  // Retrieves the canonical URL based on certain situations
+  // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
+  const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
 
   return (
     <>

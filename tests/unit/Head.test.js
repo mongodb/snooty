@@ -9,7 +9,7 @@ import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
 import mockHeadPageContext from './data/HeadPageContext.test.json';
 
 describe('Head', () => {
-  describe("Completely EOL'd", () => {
+  describe("Canonical for completely EOL'd", () => {
     beforeEach(() => {
       mockStaticQuery({}, mockEOLSnootyMetadata);
     });
@@ -25,7 +25,7 @@ describe('Head', () => {
     });
   });
 
-  describe("Version is EOL'd", () => {
+  describe("Canonical for EOL'd version", () => {
     beforeEach(() => {
       mockStaticQuery({}, mockEOLSnootyMetadata);
     });
@@ -45,7 +45,7 @@ describe('Head', () => {
     });
   });
 
-  describe("Non-EoL'd", () => {
+  describe("Canonical for non-EoL'd", () => {
     beforeEach(() => {
       const modMockEOLSnootyMetadataToBeNotEOL = { ...mockEOLSnootyMetadata, eol: false };
       mockStaticQuery({}, modMockEOLSnootyMetadataToBeNotEOL);
@@ -64,6 +64,60 @@ describe('Head', () => {
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
       expect(canonicalTag).toHaveAttribute('href', canonical);
+    });
+  });
+
+  describe('Canonical when pulled from directive', () => {
+    beforeEach(() => {
+      mockStaticQuery({}, mockEOLSnootyMetadata);
+    });
+
+    const metaCanonical = {
+      type: 'directive',
+      children: [],
+      domain: '',
+      name: 'meta',
+      argument: [],
+      options: {
+        canonical: 'http://we-the-best.com',
+      },
+    };
+
+    const expectCanonicalTagToBeCorrect = (canonicalTag) => {
+      expect(canonicalTag).toBeInTheDocument();
+      expect(canonicalTag).toHaveAttribute('id', 'canonical');
+      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
+      expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical);
+    };
+
+    let mockPageContext = mockHeadPageContext;
+    it('renders the canonical tag from directive rather than pulling from snooty.toml', () => {
+      mockPageContext = mockCompleteEOLPageContext;
+      mockPageContext.page.children.push(metaCanonical);
+      render(<Head pageContext={mockPageContext} />);
+
+      const canonicalTag = screen.getByTestId('canonical');
+      expectCanonicalTagToBeCorrect(canonicalTag);
+    });
+
+    it("renders the canonical tag from directive rather than pulling from stable branch (version eol'd)", () => {
+      mockPageContext.page.children.push(metaCanonical);
+      render(<Head pageContext={mockPageContext} />);
+
+      const canonicalTag = screen.getByTestId('canonical');
+      expectCanonicalTagToBeCorrect(canonicalTag);
+    });
+
+    it('renders the canonical tag from directive rather than pulling from default logic', () => {
+      //need to override what happens in the beforeEach of this describe
+      const modMockEOLSnootyMetadataToBeNotEOL = { ...mockEOLSnootyMetadata, eol: false };
+      mockStaticQuery({}, modMockEOLSnootyMetadataToBeNotEOL);
+
+      mockPageContext.page.children.push(metaCanonical);
+      render(<Head pageContext={mockPageContext} />);
+
+      const canonicalTag = screen.getByTestId('canonical');
+      expectCanonicalTagToBeCorrect(canonicalTag);
     });
   });
 });
