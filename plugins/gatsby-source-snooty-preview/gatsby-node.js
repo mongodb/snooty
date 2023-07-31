@@ -1,3 +1,4 @@
+const _ = require(`lodash`);
 const path = require('path');
 const stream = require('stream');
 const { promisify } = require('util');
@@ -10,7 +11,6 @@ const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
-const _ = require(`lodash`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 
 let isAssociatedProduct = false;
@@ -68,18 +68,20 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, createContentDige
   console.log({ lastFetched });
 
   // Generate client access token only if trying to access Snooty Data API's staging instance
-  const clientAccessToken = APIBase.includes('.staging') ? fetchClientAccessToken(lastClientAccessToken) : '';
+  const clientAccessToken = APIBase.includes('.staging') ? await fetchClientAccessToken(lastClientAccessToken) : '';
   let url;
   if (lastFetched) {
     url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents?updated=${lastFetched}`;
   } else {
     url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
   }
-  const httpStream = got.stream(url, {
-    headers: {
-      Authorization: `Bearer ${clientAccessToken}`,
-    },
-  });
+
+  const headers = {};
+  if (clientAccessToken) {
+    headers['Authorization'] = `Bearer ${clientAccessToken}`;
+  }
+  const httpStream = got.stream(url, { headers });
+
   try {
     const decode = parser();
     decode.on(`data`, async (_entry) => {

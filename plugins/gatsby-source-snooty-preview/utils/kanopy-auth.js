@@ -12,10 +12,10 @@ const validateConfigType = (configProp, configType) => {
 /**
  * Generates the authZ token needed for requesting an access token to Kanopy.
  */
-const getAuthUrlBearerToken = () => {
-  const clientId = process.env.SDA_CLIENT_ID;
+const getClientCredentialsHeader = () => {
+  const clientId = process.env.OAUTH_CLIENT_ID;
   validateConfigType(clientId, 'client ID');
-  const clientSecret = process.env.SDA_CLIENT_SECRET;
+  const clientSecret = process.env.OAUTH_CLIENT_SECRET;
   validateConfigType(clientSecret, 'client secret');
   return Buffer.from(`${clientId}:${clientSecret}`, 'utf-8').toString('base64');
 };
@@ -24,17 +24,17 @@ const getAuthUrlBearerToken = () => {
  * Generates a new access token to allow for authentication against Kanopy services.
  */
 const generateNewAccessToken = async () => {
-  const grantType = process.env.SDA_GRANT_TYPE;
+  const grantType = process.env.OAUTH_GRANT_TYPE;
   validateConfigType(grantType, 'grant type');
-  const scope = process.env.SDA_SCOPE;
+  const scope = process.env.OAUTH_SCOPE;
   validateConfigType(scope, 'scope');
-  const authUrl = process.env.SDA_TOKEN_AUTH_URL;
+  const authUrl = process.env.OAUTH_TOKEN_AUTH_URL;
   validateConfigType(authUrl, 'auth token url');
 
   // Request a new access token from Kanopy's token authentication endpoint
   const authRequestUrl = `${authUrl}?grant_type=${grantType}&scope=${scope}`;
   const headers = {
-    authorization: `Basic ${getAuthUrlBearerToken()}`,
+    authorization: `Basic ${getClientCredentialsHeader()}`,
     accept: 'application/json',
     'Content-Type': 'application/x-www-form-urlencoded',
     'cache-control': 'no-cache',
@@ -65,7 +65,7 @@ const fetchClientAccessToken = async (prevToken) => {
     token = await generateNewAccessToken();
   } else {
     const decodedValue = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString('ascii'));
-    // Token is expired
+    // Token is expired, or near expiration
     if (decodedValue.exp < Date.now() / 1000) {
       token = await generateNewAccessToken();
     }
