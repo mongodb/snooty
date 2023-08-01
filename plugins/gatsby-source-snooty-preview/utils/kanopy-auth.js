@@ -60,17 +60,15 @@ const generateNewAccessToken = async () => {
  * @param prevToken
  */
 const fetchClientAccessToken = async (prevToken) => {
-  let token = prevToken;
-  if (!token) {
-    token = await generateNewAccessToken();
-  } else {
-    const decodedValue = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString('ascii'));
-    // Token is expired, or near expiration
-    if (decodedValue.exp < Date.now() / 1000) {
-      token = await generateNewAccessToken();
-    }
+  if (!prevToken) {
+    return generateNewAccessToken();
   }
-  return token;
+  const decodedValue = JSON.parse(Buffer.from(prevToken.split('.')[1], 'base64').toString('ascii'));
+  // Token is expired, or near expiration
+  if (decodedValue.exp < Date.now() / 1000) {
+    return generateNewAccessToken();
+  }
+  return prevToken;
 };
 
 module.exports = { fetchClientAccessToken };
