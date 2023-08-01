@@ -12,11 +12,16 @@ const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
+const { callPostBuildWebhook } = require('./utils/post-build.js');
 
 let isAssociatedProduct = false;
 let associatedReposInfo = {};
 let db;
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
+
+// Global variable to allow webhookBody from sourceNodes step to be passed down
+// to other Gatsby build steps that might not pass webhookBody natively.
+let currentWebhookBody = {};
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
@@ -57,6 +62,7 @@ const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 
 exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDigest, cache, webhookBody }) => {
   console.log({ webhookBody });
+  currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
@@ -164,6 +170,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
     await pipeline(httpStream, decode);
     console.timeEnd(`source updates`);
   } catch (error) {
+    callPostBuildWebhook(webhookBody, 'failed');
     reporter.panic('There was an issue sourcing nodes', error);
   }
 
@@ -276,6 +283,8 @@ exports.createPages = async ({ actions, graphql }) => {
         repoBranches.groups = repoInfo.groups;
       }
     } catch (err) {
+      // Fetching repoBranches data shouldn't be vital for preview/staging builds,
+      // so we do not exit the process
       console.error(err);
       throw err;
     }
@@ -318,6 +327,6 @@ exports.createPages = async ({ actions, graphql }) => {
   });
 };
 
-exports.onPostBuild = async ({ webhookBody }) => {
-  console.log({ onPostBuildWebhookBody: webhookBody });
+exports.onPostBuild = async () => {
+  callPostBuildWebhook(currentWebhookBody, 'success');
 };
