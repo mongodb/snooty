@@ -63,8 +63,9 @@ const fetchClientAccessToken = async (prevToken) => {
   if (!prevToken) {
     return generateNewAccessToken();
   }
+  // Decoded value is the JSON object representation of the token string, with token's expiration date
   const decodedValue = JSON.parse(Buffer.from(prevToken.split('.')[1], 'base64').toString('ascii'));
-  // Token is expired, or near expiration
+  // Check if token is expired, or near expiration
   if (decodedValue.exp < Date.now() / 1000) {
     return generateNewAccessToken();
   }
