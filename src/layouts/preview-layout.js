@@ -142,7 +142,7 @@ const DefaultLayout = ({
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = metadata;
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
-  useDelightedSurvey(slug);
+  useDelightedSurvey(slug, metadata.project);
 
   return (
     <>
@@ -155,7 +155,6 @@ const DefaultLayout = ({
           headingNodes={page?.options?.headings}
           selectors={page?.options?.selectors}
           isAssociatedProduct={isAssociatedProduct}
-          metadata={metadata}
         >
           <GlobalGrid>
             <PreviewHeader sidenav={sidenav} />

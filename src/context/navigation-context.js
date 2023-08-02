@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { isBrowser } from '../utils/is-browser';
 import { fetchProjectParents } from '../utils/realm';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 const NavigationContext = React.createContext({
   parents: [],
@@ -9,7 +10,8 @@ const NavigationContext = React.createContext({
 });
 
 const NavigationProvider = ({ children }) => {
-  const { database, project } = useSiteMetadata();
+  const { database } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   const [parents, setParents] = useState([]);
   const [completedFetch, setCompletedFetch] = useState(false);
 
