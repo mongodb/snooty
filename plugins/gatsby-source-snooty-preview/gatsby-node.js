@@ -329,11 +329,5 @@ exports.createPages = async ({ actions, graphql }) => {
 
 exports.onPostBuild = async (nodeOptions, pluginOptions) => {
   console.log('onPostBuild!!!');
-  console.log(
-    JSON.stringify({
-      nodeOptions,
-      pluginOptions,
-    })
-  );
   await callPostBuildWebhook(currentWebhookBody, 'success');
 };
