@@ -9,6 +9,7 @@ import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
+import { MetadataProvider } from '../utils/use-snooty-metadata';
 
 // These fonts are ported over from @mdb/flora design system repo
 // They are used on the content areas and are not included in Snooty itself
@@ -146,34 +147,36 @@ const DefaultLayout = ({
   return (
     <>
       <Global styles={globalCSS} />
-      <RootProvider
-        slug={slug}
-        repoBranches={repoBranches}
-        associatedReposInfo={associatedReposInfo}
-        headingNodes={page?.options?.headings}
-        selectors={page?.options?.selectors}
-        isAssociatedProduct={isAssociatedProduct}
-        metadata={metadata}
-      >
-        <GlobalGrid>
-          <PreviewHeader sidenav={sidenav} />
-          {sidenav && (
-            <Sidenav
-              chapters={chapters}
-              guides={guides}
-              page={page}
-              pageTitle={pageTitle}
-              publishedBranches={publishedBranches}
-              repoBranches={repoBranches}
-              siteTitle={title}
-              slug={slug}
-              toctree={toctree}
-              eol={eol}
-            />
-          )}
-          <ContentTransition slug={slug}>{children}</ContentTransition>
-        </GlobalGrid>
-      </RootProvider>
+      <MetadataProvider metadata={metadata}>
+        <RootProvider
+          slug={slug}
+          repoBranches={repoBranches}
+          associatedReposInfo={associatedReposInfo}
+          headingNodes={page?.options?.headings}
+          selectors={page?.options?.selectors}
+          isAssociatedProduct={isAssociatedProduct}
+          metadata={metadata}
+        >
+          <GlobalGrid>
+            <PreviewHeader sidenav={sidenav} />
+            {sidenav && (
+              <Sidenav
+                chapters={chapters}
+                guides={guides}
+                page={page}
+                pageTitle={pageTitle}
+                publishedBranches={publishedBranches}
+                repoBranches={repoBranches}
+                siteTitle={title}
+                slug={slug}
+                toctree={toctree}
+                eol={eol}
+              />
+            )}
+            <ContentTransition slug={slug}>{children}</ContentTransition>
+          </GlobalGrid>
+        </RootProvider>
+      </MetadataProvider>
     </>
   );
 };

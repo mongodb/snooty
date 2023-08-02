@@ -12,7 +12,10 @@ const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
 const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
 
 const DB = siteMetadata.database;
-const buildFilter = constructBuildFilter(siteMetadata);
+const buildFilter = constructBuildFilter({
+  ...siteMetadata,
+  project: process.env.GATSBY_SITE,
+});
 
 class StitchInterface {
   constructor() {
@@ -27,11 +30,11 @@ class StitchInterface {
     return this.stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
   }
 
-  fetchRepoBranches(project = siteMetadata.project) {
+  fetchRepoBranches(project = process.env.GATSBY_SITE) {
     return this.stitchClient.callFunction('fetchDocument', [
       siteMetadata.reposDatabase,
       BRANCHES_COLLECTION,
-      constructReposFilter(project, project === siteMetadata.project),
+      constructReposFilter(project, project === process.env.GATSBY_SITE),
     ]);
   }
 

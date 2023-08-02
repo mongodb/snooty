@@ -199,7 +199,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       'Snooty could not find AST entries for the',
       siteMetadata.parserBranch,
       'branch of',
-      siteMetadata.project,
+      process.env.GATSBY_SITE,
       'within',
       siteMetadata.database
     );
@@ -395,8 +395,12 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 // https://www.gatsbyjs.com/docs/scaling-issues/#switch-off-type-inference-for-sitepagecontext
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
-    type SitePage implements Node @dontInfer {
-      path: String!
+    type Page implements Node @dontInfer {
+      page_id: String
+      branch: String
+      pagePath: String
+      ast: JSON!
+      metadata: SnootyMetadata @link
     }
 
     type SnootyMetadata implements Node @dontInfer {

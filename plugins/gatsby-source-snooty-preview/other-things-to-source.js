@@ -203,6 +203,7 @@ exports.sourceNodes = async ({ metadata, hasOpenAPIChangelog, createNode, create
   return { _db: db, _isAssociatedProduct: isAssociatedProduct, _associatedReposInfo: associatedReposInfo };
 };
 
+// this Hook is not called currently so it's no-op
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 

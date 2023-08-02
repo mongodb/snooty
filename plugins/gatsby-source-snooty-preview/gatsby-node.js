@@ -61,6 +61,7 @@ const saveFile = async (file, data) => {
 let manifestMetadata;
 
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
+const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER || `mmeigs`;
 
 function createSnootyMetadataId({ branch, project, createNodeId }) {
   return createNodeId(`metadata-${branch}-${project}`);
@@ -83,9 +84,9 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
     const clientAccessToken = APIBase.includes('.staging') ? await fetchClientAccessToken(lastClientAccessToken) : '';
     let url;
     if (lastFetched) {
-      url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents?updated=${lastFetched}`;
+      url = `${APIBase}/user/${GATSBY_CLOUD_SITE_USER}/documents?updated=${lastFetched}`;
     } else {
-      url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
+      url = `${APIBase}/user/${GATSBY_CLOUD_SITE_USER}/documents`;
     }
 
     const headers = {};
@@ -236,7 +237,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
   });
 };
 
-let repoBranches = null;
+let perProjectRepoBranches = new Map();
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const templatePath = isPreview
@@ -252,6 +253,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           page_id
           project
         }
+        allProjects: distinct(field: { project: SELECT })
       }
     }
   `);
@@ -261,66 +263,72 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic('There was an error in the graphql query', result.errors);
   }
 
-  if (!repoBranches) {
-    try {
-      const repoInfo = await db.stitchInterface.fetchRepoBranches();
-      let errMsg;
+  for (const project of result.data.allPagePath.allProjects) {
+    let repoBranches = perProjectRepoBranches.get(project);
 
-      if (!repoInfo) {
-        errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+    if (!repoBranches) {
+      try {
+        const repoInfo = await db.stitchInterface.fetchRepoBranches(project);
+        let errMsg;
+
+        if (!repoInfo) {
+          errMsg = `Repo data for ${project} could not be found.`;
+        }
+
+        // We should expect the number of branches for a docs repo to be 1 or more.
+        if (!repoInfo.branches?.length) {
+          errMsg = `No version information found for ${project}`;
+        }
+
+        if (errMsg) {
+          throw errMsg;
+        }
+
+        // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+        // dotcom environments seem to be consistent.
+        let envKey = siteMetadata.snootyEnv;
+        if (!envKey || envKey === 'development') {
+          envKey = 'dotcomprd';
+        } else if (envKey === 'production') {
+          envKey = 'prd';
+        } else if (envKey === 'staging') {
+          envKey = 'stg';
+        }
+
+        // We're overfetching data here. We only need branches and prefix at the least
+        repoBranches = {
+          branches: repoInfo.branches,
+          siteBasePrefix: repoInfo.prefix[envKey],
+        };
+
+        if (repoInfo.groups?.length > 0) {
+          repoBranches.groups = repoInfo.groups;
+        }
+      } catch (err) {
+        // Fetching repoBranches data shouldn't be vital for preview/staging builds,
+        // so we do not exit the process
+        console.error(err);
+        throw err;
       }
-
-      // We should expect the number of branches for a docs repo to be 1 or more.
-      if (!repoInfo.branches?.length) {
-        errMsg = `No version information found for ${siteMetadata.project}`;
-      }
-
-      if (errMsg) {
-        throw errMsg;
-      }
-
-      // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
-      // dotcom environments seem to be consistent.
-      let envKey = siteMetadata.snootyEnv;
-      if (!envKey || envKey === 'development') {
-        envKey = 'dotcomprd';
-      } else if (envKey === 'production') {
-        envKey = 'prd';
-      } else if (envKey === 'staging') {
-        envKey = 'stg';
-      }
-
-      // We're overfetching data here. We only need branches and prefix at the least
-      repoBranches = {
-        branches: repoInfo.branches,
-        siteBasePrefix: repoInfo.prefix[envKey],
-      };
-
-      if (repoInfo.groups?.length > 0) {
-        repoBranches.groups = repoInfo.groups;
-      }
-    } catch (err) {
-      // Fetching repoBranches data shouldn't be vital for preview/staging builds,
-      // so we do not exit the process
-      console.error(err);
-      throw err;
     }
-  }
 
-  if (repoBranches.groups) {
-    repoBranches.groups = repoBranches.groups.map((group) => {
-      return _.omit(group, [`id`]);
-    });
-  } else {
-    repoBranches.groups = [];
-  }
+    if (repoBranches.groups) {
+      repoBranches.groups = repoBranches.groups.map((group) => {
+        return _.omit(group, [`id`]);
+      });
+    } else {
+      repoBranches.groups = [];
+    }
 
-  if (repoBranches.branches) {
-    repoBranches.branches = repoBranches.branches.map((group) => {
-      return _.omit(group, [`id`]);
-    });
-  } else {
-    repoBranches.branches = [];
+    if (repoBranches.branches) {
+      repoBranches.branches = repoBranches.branches.map((group) => {
+        return _.omit(group, [`id`]);
+      });
+    } else {
+      repoBranches.branches = [];
+    }
+
+    perProjectRepoBranches.set(project, repoBranches);
   }
 
   try {
@@ -337,7 +345,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         context: {
           id: node.pageNodeId,
           slug,
-          repoBranches,
+          repoBranches: perProjectRepoBranches.get(node.project),
           associatedReposInfo,
           isAssociatedProduct,
         },
