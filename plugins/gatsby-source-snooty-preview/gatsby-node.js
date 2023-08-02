@@ -327,7 +327,11 @@ exports.createPages = async ({ actions, graphql }) => {
   });
 };
 
-exports.onPostBuild = async (nodeOptions, pluginOptions) => {
+exports.onPostBootstrap = () => {
+  console.log('onPostBootstrap!!!');
+};
+
+exports.onPostBuild = async () => {
   console.log('onPostBuild!!!');
   await callPostBuildWebhook(currentWebhookBody, 'success');
 };
