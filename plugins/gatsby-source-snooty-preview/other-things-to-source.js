@@ -166,7 +166,14 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
   }
 };
 
-exports.sourceNodes = async ({ metadata, hasOpenAPIChangelog, createNode, createContentDigest, createNodeId }) => {
+exports.sourceNodes = async ({
+  metadata,
+  hasOpenAPIChangelog,
+  hasCloudDocsProject,
+  createNode,
+  createContentDigest,
+  createNodeId,
+}) => {
   // wait to connect to stitch
   if (siteMetadata.manifestPath) {
     console.log('Loading documents from manifest');
@@ -197,7 +204,7 @@ exports.sourceNodes = async ({ metadata, hasOpenAPIChangelog, createNode, create
   });
 
   await createRemoteMetadataNode({ metadata, createNode, createNodeId, createContentDigest });
-  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+  if (hasCloudDocsProject && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
   return { _db: db, _isAssociatedProduct: isAssociatedProduct, _associatedReposInfo: associatedReposInfo };

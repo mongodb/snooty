@@ -71,6 +71,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
   console.log({ webhookBody });
   currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
+  let hasCloudDocsProject = false;
   const { createNode } = actions;
 
   let pageCount = 0;
@@ -112,6 +113,9 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
         manifestMetadata = metadataMinusStatic;
 
         const { parentPaths, slugToTitle, branch, project } = metadataMinusStatic;
+        if (project === `cloud-docs`) {
+          hasCloudDocsProject = true;
+        }
         if (parentPaths) {
           transformBreadcrumbs(parentPaths, slugToTitle);
         }
@@ -194,6 +198,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
   const { _db, _isAssociatedProduct, _associatedReposInfo } = await sourceNodes({
     metadata: manifestMetadata,
     hasOpenAPIChangelog,
+    hasCloudDocsProject,
     createNode,
     createContentDigest,
     createNodeId,
