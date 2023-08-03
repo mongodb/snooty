@@ -244,6 +244,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   `);
 
+  if (result.errors) {
+    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    reporter.panic('There was an error in the graphql query', result.errors);
+  }
+
   if (!repoBranches) {
     try {
       const repoInfo = await db.stitchInterface.fetchRepoBranches();
