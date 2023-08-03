@@ -10,10 +10,10 @@ const constructSnootyHeader = (payloadString) =>
 
 /**
  * Calls the post-build webhook to let the Autobuilder know that the Gatsby Cloud
- * build is complete.
+ * build is finished.
  * @param {object} webhookBody - The webhook body passed to the source plugin to
  * initiate the preview build.
- * @param {string} status - The status of the build, typically "success" or "failed".
+ * @param {string} status - The status of the build, typically "completed" or "failed".
  * This value should coincide with the Autobuilder's job statuses.
  */
 const callPostBuildWebhook = async (webhookBody, status) => {
@@ -21,6 +21,12 @@ const callPostBuildWebhook = async (webhookBody, status) => {
   // that was not called by the preview webhook
   if (!webhookBody || !Object.keys(webhookBody).length) {
     console.log('No webhookBody found. This build will not call the post-build webhook.');
+    return;
+  }
+
+  const supportedStatuses = ['completed', 'failed'];
+  if (!supportedStatuses.includes(status)) {
+    console.log(`Post-build webhook call does not support status "${status}".`);
     return;
   }
 

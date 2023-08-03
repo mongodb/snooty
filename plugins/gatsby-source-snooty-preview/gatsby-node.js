@@ -226,7 +226,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 };
 
 let repoBranches = null;
-exports.createPages = async ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const templatePath = isPreview
     ? path.join(__dirname, `../../src/components/DocumentBodyPreview.js`)
@@ -306,32 +306,38 @@ exports.createPages = async ({ actions, graphql }) => {
     repoBranches.branches = [];
   }
 
-  result.data.allPagePath.nodes.forEach((node) => {
-    let slug;
-    if (isPreview) {
-      slug = path.join(`BRANCH--${node.branch}`, node.page_id);
-    } else {
-      slug = node.page_id;
-    }
-    createPage({
-      path: slug,
-      component: templatePath,
-      context: {
-        id: node.pageNodeId,
-        slug,
-        repoBranches,
-        associatedReposInfo,
-        isAssociatedProduct,
-      },
+  try {
+    result.data.allPagePath.nodes.forEach((node) => {
+      let slug;
+      if (isPreview) {
+        slug = path.join(`BRANCH--${node.branch}`, node.page_id);
+      } else {
+        slug = node.page_id;
+      }
+      createPage({
+        path: slug,
+        component: templatePath,
+        context: {
+          id: node.pageNodeId,
+          slug,
+          repoBranches,
+          associatedReposInfo,
+          isAssociatedProduct,
+        },
+      });
     });
-  });
+  } catch (err) {
+    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    reporter.panic('Could not build pages off of graphl query', err);
+  }
 };
 
-exports.onPostBootstrap = () => {
-  console.log('onPostBootstrap!!!');
-};
-
+// `onPostBuild` is run by Gatsby Cloud after everything is built, but before the
+// content is deployed to the preview site. This can result in a short delay between
+// when the post-build webhook is called and when the content is updated.
+// Ideally, we would use Gatsby Cloud's Outgoing Notifications feature once it can
+// support passing through custom data from the preview webhook's body (to include the
+// Autobuilder job ID associated with the GC build).
 exports.onPostBuild = async () => {
-  console.log('onPostBuild!!!');
-  await callPostBuildWebhook(currentWebhookBody, 'success');
+  await callPostBuildWebhook(currentWebhookBody, 'completed');
 };
