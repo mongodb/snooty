@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState, useCallback, useRef } from 'react';
+import React, { createContext, useReducer, useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { navigate } from '@gatsbyjs/reach-router';
 import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
@@ -141,8 +141,14 @@ const VersionContext = createContext({
 });
 
 const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, slug, children }) => {
-  const metadata = useSiteMetadata();
-  const { associated_products: associatedProducts } = useSnootyMetadata();
+  const siteMetadata = useSiteMetadata();
+  const { associated_products: associatedProducts, project } = useSnootyMetadata();
+  const metadata = useMemo(() => {
+    return {
+      ...siteMetadata,
+      project,
+    };
+  }, [siteMetadata, project]);
   const mountRef = useRef(true);
 
   // TODO check whats going on here for 404 pages
