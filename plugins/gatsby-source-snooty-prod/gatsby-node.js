@@ -37,7 +37,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   // check if product is associated child product
   try {
     const umbrellaProduct = await db.stitchInterface.getMetadata({
-      'associated_products.name': siteMetadata.project,
+      'associated_products.name': process.env.GATSBY_SITE,
     });
     isAssociatedProduct = !!umbrellaProduct;
   } catch (e) {
@@ -256,7 +256,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
-  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+  if (process.env.GATSBY_SITE === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
   await saveAssetFiles(assets, db);
