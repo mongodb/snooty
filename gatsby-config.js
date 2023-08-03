@@ -1,8 +1,8 @@
 const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
 
-const pathPrefix = generatePathPrefix(siteMetadata);
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
+const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata, process.env.GATSBY_SITE) : undefined;
 
 const plugins = [
   'gatsby-plugin-emotion',
