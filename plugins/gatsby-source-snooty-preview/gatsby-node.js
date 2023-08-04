@@ -12,11 +12,16 @@ const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
+const { callPostBuildWebhook } = require('./utils/post-build.js');
 
 let isAssociatedProduct = false;
 let associatedReposInfo = {};
 let db;
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
+
+// Global variable to allow webhookBody from sourceNodes step to be passed down
+// to other Gatsby build steps that might not pass webhookBody natively.
+let currentWebhookBody = {};
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
@@ -57,7 +62,7 @@ const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 
 exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDigest, cache, webhookBody }) => {
   console.log({ webhookBody });
-  console.log(webhookBody);
+  currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
@@ -165,6 +170,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
     await pipeline(httpStream, decode);
     console.timeEnd(`source updates`);
   } catch (error) {
+    callPostBuildWebhook(webhookBody, 'failed');
     reporter.panic('There was an issue sourcing nodes', error);
   }
 
@@ -220,7 +226,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 };
 
 let repoBranches = null;
-exports.createPages = async ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const templatePath = isPreview
     ? path.join(__dirname, `../../src/components/DocumentBodyPreview.js`)
@@ -237,6 +243,11 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     }
   `);
+
+  if (result.errors) {
+    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    reporter.panic('There was an error in the graphql query', result.errors);
+  }
 
   if (!repoBranches) {
     try {
@@ -277,6 +288,8 @@ exports.createPages = async ({ actions, graphql }) => {
         repoBranches.groups = repoInfo.groups;
       }
     } catch (err) {
+      // Fetching repoBranches data shouldn't be vital for preview/staging builds,
+      // so we do not exit the process
       console.error(err);
       throw err;
     }
@@ -298,23 +311,38 @@ exports.createPages = async ({ actions, graphql }) => {
     repoBranches.branches = [];
   }
 
-  result.data.allPagePath.nodes.forEach((node) => {
-    let slug;
-    if (isPreview) {
-      slug = path.join(`BRANCH--${node.branch}`, node.page_id);
-    } else {
-      slug = node.page_id;
-    }
-    createPage({
-      path: slug,
-      component: templatePath,
-      context: {
-        id: node.pageNodeId,
-        slug,
-        repoBranches,
-        associatedReposInfo,
-        isAssociatedProduct,
-      },
+  try {
+    result.data.allPagePath.nodes.forEach((node) => {
+      let slug;
+      if (isPreview) {
+        slug = path.join(`BRANCH--${node.branch}`, node.page_id);
+      } else {
+        slug = node.page_id;
+      }
+      createPage({
+        path: slug,
+        component: templatePath,
+        context: {
+          id: node.pageNodeId,
+          slug,
+          repoBranches,
+          associatedReposInfo,
+          isAssociatedProduct,
+        },
+      });
     });
-  });
+  } catch (err) {
+    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    reporter.panic('Could not build pages off of graphl query', err);
+  }
+};
+
+// `onPostBuild` is run by Gatsby Cloud after everything is built, but before the
+// content is deployed to the preview site. This can result in a short delay between
+// when the post-build webhook is called and when the content is updated.
+// Ideally, we would use Gatsby Cloud's Outgoing Notifications feature once it can
+// support passing through custom data from the preview webhook's body (to include the
+// Autobuilder job ID associated with the GC build).
+exports.onPostBuild = async () => {
+  await callPostBuildWebhook(currentWebhookBody, 'completed');
 };
