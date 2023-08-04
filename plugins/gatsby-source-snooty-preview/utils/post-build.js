@@ -39,7 +39,7 @@ const callPostBuildWebhook = async (webhookBody, status) => {
     'x-snooty-signature': constructSnootyHeader(body),
   };
 
-  console.log('Calling post-build webhook.');
+  console.log(`Calling post-build webhook with status "${status}".`);
   const res = await fetch(process.env.AUTOBUILDER_POST_BUILD_WEBHOOK, { method: 'POST', body, headers });
   // Calling the webhook from this function should assume we are fulfilling the requirements of the call.
   // Any error thrown here is definitely unexpected.
