@@ -75,12 +75,14 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-const atlasAdminChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
+// const atlasAdminChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
+const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
 
 const fetchChangelogData = async (runId, versions) => {
   try {
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.json`);
+    // const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.json`);
+    const changelogResp = await fetch(`${atlasAdminDevChangelogS3Prefix}/${runId}/changelog.json`);
     const changelog = await changelogResp.json();
 
     /* Aggregate all Resources in changelog for frontend filter */
@@ -93,7 +95,8 @@ const fetchChangelogData = async (runId, versions) => {
     /* Fetch most recent Resource Versions' diff */
     const mostRecentResourceVersions = versions.slice(-2);
     const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
+    // const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
+    const mostRecentDiffResp = await fetch(`${atlasAdminDevChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
     const mostRecentDiffData = await mostRecentDiffResp.json();
 
     return {
@@ -114,7 +117,8 @@ const fetchChangelogData = async (runId, versions) => {
 const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
   try {
     /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/prod.json`);
+    // const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/prod.json`);
+    const indexResp = await fetch(`${atlasAdminDevChangelogS3Prefix}/dev.json`);
     const index = await indexResp.json();
 
     const { runId, versions } = index;

@@ -55,6 +55,6 @@ export const fetchDocuments = async (database, collectionName, query, projection
   return fetchData('fetchDocuments', database, collectionName, query, projections, options);
 };
 
-export const fetchOADiff = async (runId, diffString) => {
-  return fetchData('fetchOADiff', runId, diffString);
+export const fetchOADiff = async (runId, diffString, snootyEnv) => {
+  return fetchData('fetchOADiff', runId, diffString, snootyEnv);
 };

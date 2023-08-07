@@ -8,6 +8,7 @@ import Button from '@leafygreen-ui/button';
 import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { theme } from '../../theme/docsTheme';
 import useChangelogData from '../../utils/use-changelog-data';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import FiltersPanel from './components/FiltersPanel';
 import ChangeList from './components/ChangeList';
 import { useFetchDiff } from './utils/useFetchDiff';
@@ -69,6 +70,7 @@ const StyledLoadingSkeleton = styled.div`
 `;
 
 const OpenAPIChangelog = () => {
+  const { snootyEnv } = useSiteMetadata();
   const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
   const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId), [index]);
@@ -80,7 +82,7 @@ const OpenAPIChangelog = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
 
-  const [diff] = useFetchDiff(resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen);
+  const [diff] = useFetchDiff(resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv);
   const [diffResourcesList, setDiffResourcesList] = useState(getDiffResourcesList(diff));
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
