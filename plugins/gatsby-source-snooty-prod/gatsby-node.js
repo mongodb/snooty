@@ -404,8 +404,16 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type SnootyMetadata implements Node @dontInfer {
-      metadata: JSON!
+      metadata: JSON
       branch: String
+      project: String
+    }
+
+    type PagePath implements Node @dontInfer {
+      page_id: String!
+      branch: String!
+      project: String!
+      pageNodeId: String!
     }
 
     type RemoteMetadata implements Node @dontInfer {
