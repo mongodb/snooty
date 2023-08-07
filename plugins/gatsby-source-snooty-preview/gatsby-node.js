@@ -34,6 +34,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
       metadata: SnootyMetadata @link
     }
 
+    type PagePath implements Node @dontInfer {
+      page_id: String!
+      branch: String!
+      project: String!
+      pageNodeId: String!
+    }
+
     type SnootyMetadata implements Node @dontInfer {
       metadata: JSON
       branch: String
@@ -67,12 +74,12 @@ function createSnootyMetadataId({ branch, project, createNodeId }) {
   return createNodeId(`metadata-${branch}-${project}`);
 }
 
-exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDigest, cache, webhookBody }) => {
+exports.sourceNodes = async ({ actions, createNodeId, getNode, reporter, createContentDigest, cache, webhookBody }) => {
   console.log({ webhookBody });
   currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
   let hasCloudDocsProject = false;
-  const { createNode } = actions;
+  const { createNode, deleteNode } = actions;
 
   let pageCount = 0;
   const fileWritePromises = [];
@@ -99,6 +106,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
     const decode = parser();
     decode.on(`data`, async (_entry) => {
       const entry = _entry.value;
+      const shouldDeleteContentNode = entry.data?.deleted;
 
       if (entry.type === `timestamp`) {
         cache.set(`lastFetched`, entry.data);
@@ -110,33 +118,39 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
       } else if (entry.type === `metadata`) {
         // Create metadata node.
         const { _id, build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = entry.data;
-        manifestMetadata = metadataMinusStatic;
-
         const { parentPaths, slugToTitle, branch, project } = metadataMinusStatic;
-        if (project === `cloud-docs`) {
-          hasCloudDocsProject = true;
-        }
-        if (parentPaths) {
-          transformBreadcrumbs(parentPaths, slugToTitle);
-        }
+        const nodeId = createSnootyMetadataId({ createNodeId, branch, project });
 
-        // Save files in the static_files field of metadata document, including intersphinx inventories.
-        if (staticFiles) {
-          await saveStaticFiles(staticFiles);
-        }
+        if (shouldDeleteContentNode) {
+          deleteNode(getNode(nodeId));
+        } else {
+          manifestMetadata = metadataMinusStatic;
 
-        createNode({
-          children: [],
-          id: createSnootyMetadataId({ createNodeId, branch, project }),
-          internal: {
-            contentDigest: createContentDigest(metadataMinusStatic),
-            type: 'SnootyMetadata',
-          },
-          branch,
-          project,
-          parent: null,
-          metadata: metadataMinusStatic,
-        });
+          if (project === `cloud-docs`) {
+            hasCloudDocsProject = true;
+          }
+          if (parentPaths) {
+            transformBreadcrumbs(parentPaths, slugToTitle);
+          }
+
+          // Save files in the static_files field of metadata document, including intersphinx inventories.
+          if (staticFiles) {
+            await saveStaticFiles(staticFiles);
+          }
+
+          createNode({
+            children: [],
+            id: nodeId,
+            internal: {
+              contentDigest: createContentDigest(metadataMinusStatic),
+              type: 'SnootyMetadata',
+            },
+            branch,
+            project,
+            parent: null,
+            metadata: metadataMinusStatic,
+          });
+        }
       } else if (entry.type === `page`) {
         if (entry.data?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
         pageCount += 1;
@@ -151,31 +165,39 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
           const page_id = `/` + page.page_id.split(`/`).slice(3).join(`/`);
           const project = page.page_id.split(`/`)[0];
 
-          page.page_id = page_id;
-          page.metadata = createSnootyMetadataId({ createNodeId, branch, project });
-          page.id = createNodeId(page_id + branch);
-          page.internal = {
-            type: `Page`,
-            contentDigest: createContentDigest(page),
-          };
+          const pageNodeId = createNodeId(page_id + branch);
+          const pagePathNodeId = pageNodeId + `/path`;
 
-          const pagePathNode = {
-            id: page.id + `/path`,
-            page_id: page_id,
-            branch,
-            project,
-            pageNodeId: page.id,
-            internal: {
-              type: `PagePath`,
-              contentDigest: page.internal.contentDigest,
-            },
-          };
+          if (shouldDeleteContentNode) {
+            deleteNode(getNode(pageNodeId));
+            deleteNode(getNode(pagePathNodeId));
+          } else {
+            page.page_id = page_id;
+            page.metadata = createSnootyMetadataId({ createNodeId, branch, project });
+            page.id = pageNodeId;
+            page.internal = {
+              type: `Page`,
+              contentDigest: createContentDigest(page),
+            };
 
-          createNode(page);
-          createNode(pagePathNode);
+            const pagePathNode = {
+              id: pagePathNodeId,
+              page_id: page_id,
+              branch,
+              project,
+              pageNodeId: page.id,
+              internal: {
+                type: `PagePath`,
+                contentDigest: page.internal.contentDigest,
+              },
+            };
 
-          if (pageCount % 1000 === 0) {
-            console.log({ pageCount, page_id, id: page.id });
+            createNode(page);
+            createNode(pagePathNode);
+
+            if (pageCount % 1000 === 0) {
+              console.log({ pageCount, page_id, id: page.id });
+            }
           }
         }
       }
