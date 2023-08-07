@@ -3,7 +3,7 @@ import { fetchOADiff } from '../../../utils/realm';
 import useChangelogData from '../../../utils/use-changelog-data';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
 
-export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen) => {
+export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv) => {
   const { index = {}, mostRecentDiff = {} } = useChangelogData();
   const [diff, setDiff] = useState([]);
 
@@ -18,7 +18,7 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
       setIsLoading(false);
     } else {
       setIsLoading(true);
-      fetchOADiff(index.runId, fromAndToDiffLabel)
+      fetchOADiff(index.runId, fromAndToDiffLabel, snootyEnv)
         .then((response) => {
           setDiff(response);
           setIsLoading(false);
@@ -30,7 +30,7 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
           setTimeout(() => setToastOpen(false), 5000);
         });
     }
-  }, [resourceVersionOne, resourceVersionTwo, index, mostRecentDiff, setIsLoading, setToastOpen]);
+  }, [resourceVersionOne, resourceVersionTwo, index, mostRecentDiff, setIsLoading, setToastOpen, snootyEnv]);
 
   return [diff, setDiff];
 };
