@@ -1,4 +1,5 @@
 const _ = require(`lodash`);
+const { getDataStore } = require('gatsby/dist/datastore');
 const path = require('path');
 const stream = require('stream');
 const { promisify } = require('util');
@@ -74,18 +75,31 @@ function createSnootyMetadataId({ branch, project, createNodeId }) {
   return createNodeId(`metadata-${branch}-${project}`);
 }
 
+let isFirstRun = true;
 exports.sourceNodes = async ({ actions, createNodeId, getNode, reporter, createContentDigest, cache, webhookBody }) => {
   console.log({ webhookBody });
   currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
   let hasCloudDocsProject = false;
-  const { createNode, deleteNode } = actions;
+  const { createNode, deleteNode, touchNode } = actions;
 
   let pageCount = 0;
   const fileWritePromises = [];
   const lastFetched = (await cache.get(`lastFetched`)) || 0;
   const lastClientAccessToken = await cache.get('lastClientAccessToken');
   console.log({ lastFetched });
+
+  if (isFirstRun && lastFetched) {
+    // nodes of following types are managed statefully:
+    // SnootyMetadata, Page, PagePath
+    // we need to touch on them on delta updates on first run of a process to prevent them from being garbage collected
+    const datastore = getDataStore();
+    for (const nodeType of ['SnootyMetadata', 'Page', 'PagePath']) {
+      for (const node of datastore.iterateNodesByType(nodeType)) {
+        touchNode(node);
+      }
+    }
+  }
 
   try {
     // Generate client access token only if trying to access Snooty Data API's staging instance
@@ -229,6 +243,7 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, reporter, createC
   isAssociatedProduct = _isAssociatedProduct;
   associatedReposInfo = _associatedReposInfo;
   console.timeEnd(`old source nodes`);
+  isFirstRun = false;
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
