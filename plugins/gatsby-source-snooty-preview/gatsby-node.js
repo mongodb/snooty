@@ -15,8 +15,8 @@ const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
 
-let isAssociatedProduct = false;
-let associatedReposInfo = {};
+let isAssociatedProductPerProjectAndBranch = {};
+let associatedReposInfoPerProjectAndBranch = {};
 let db;
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
 
@@ -66,8 +66,6 @@ const saveFile = async (file, data) => {
   await fs.writeFile(path.join('static', file), data, 'binary');
 };
 
-let manifestMetadata;
-
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER || `mmeigs`;
 
@@ -76,11 +74,19 @@ function createSnootyMetadataId({ branch, project, createNodeId }) {
 }
 
 let isFirstRun = true;
-exports.sourceNodes = async ({ actions, createNodeId, getNode, reporter, createContentDigest, cache, webhookBody }) => {
+exports.sourceNodes = async ({
+  actions,
+  createNodeId,
+  getNode,
+  getNodesByType,
+  reporter,
+  createContentDigest,
+  cache,
+  webhookBody,
+}) => {
   console.log({ webhookBody });
   currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
-  let hasCloudDocsProject = false;
   const { createNode, deleteNode, touchNode } = actions;
 
   let pageCount = 0;
@@ -138,11 +144,6 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, reporter, createC
         if (shouldDeleteContentNode) {
           deleteNode(getNode(nodeId));
         } else {
-          manifestMetadata = metadataMinusStatic;
-
-          if (project === `cloud-docs`) {
-            hasCloudDocsProject = true;
-          }
           if (parentPaths) {
             transformBreadcrumbs(parentPaths, slugToTitle);
           }
@@ -231,17 +232,16 @@ exports.sourceNodes = async ({ actions, createNodeId, getNode, reporter, createC
 
   // Source old nodes.
   console.time(`old source nodes`);
-  const { _db, _isAssociatedProduct, _associatedReposInfo } = await sourceNodes({
-    metadata: manifestMetadata,
+  const { _db, _isAssociatedProductPerProjectAndBranch, _associatedReposInfoPerProjectAndBranch } = await sourceNodes({
     hasOpenAPIChangelog,
-    hasCloudDocsProject,
     createNode,
     createContentDigest,
     createNodeId,
+    getNodesByType,
   });
   db = _db;
-  isAssociatedProduct = _isAssociatedProduct;
-  associatedReposInfo = _associatedReposInfo;
+  isAssociatedProductPerProjectAndBranch = _isAssociatedProductPerProjectAndBranch;
+  associatedReposInfoPerProjectAndBranch = _associatedReposInfoPerProjectAndBranch;
   console.timeEnd(`old source nodes`);
   isFirstRun = false;
 };
@@ -279,7 +279,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
   });
 };
 
-let perProjectRepoBranches = new Map();
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const templatePath = isPreview
@@ -305,6 +304,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic('There was an error in the graphql query', result.errors);
   }
 
+  let perProjectRepoBranches = new Map();
   for (const project of result.data.allPagePath.allProjects) {
     let repoBranches = perProjectRepoBranches.get(project);
 
@@ -381,6 +381,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       } else {
         slug = node.page_id;
       }
+      const projectAndBranchId = `${node.project}-${node.branch}`;
       createPage({
         path: slug,
         component: templatePath,
@@ -388,8 +389,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           id: node.pageNodeId,
           slug,
           repoBranches: perProjectRepoBranches.get(node.project),
-          associatedReposInfo,
-          isAssociatedProduct,
+          associatedReposInfo: associatedReposInfoPerProjectAndBranch[projectAndBranchId],
+          isAssociatedProduct: isAssociatedProductPerProjectAndBranch[projectAndBranchId],
         },
       });
     });

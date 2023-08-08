@@ -1,27 +1,28 @@
 const yaml = require('js-yaml');
-const path = require('path');
 const { baseUrl } = require('../../src/utils/base-url');
-const { getPageSlug } = require('../../src/utils/get-page-slug');
 const { siteMetadata } = require('../../src/utils/site-metadata');
-const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
 const { manifestDocumentDatabase, stitchDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
-
-// different types of references
-const PAGES = [];
-
-// in-memory object with key/value = filename/document
-let RESOLVED_REF_DOC_MAPPING = {};
 
 let db;
 
-let isAssociatedProduct = false;
-const associatedReposInfo = {};
+const isAssociatedProductPerProjectAndBranch = {};
+const associatedReposInfoPerProjectAndBranch = {};
 
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
 const createRemoteMetadataNode = async ({ metadata, createNode, createNodeId, createContentDigest }) => {
   // fetch associated child products
   const productList = metadata?.associated_products || [];
+
+  const projectAndBranchId = `${metadata.project}-${metadata.branch}`;
+
+  let associatedReposInfo = associatedReposInfoPerProjectAndBranch[projectAndBranchId];
+  if (!associatedReposInfo) {
+    associatedReposInfo = associatedReposInfoPerProjectAndBranch[projectAndBranchId] = {};
+  }
+
+  let isAssociatedProduct = false;
+
   await Promise.all(
     productList.map(async (product) => {
       associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
@@ -30,13 +31,15 @@ const createRemoteMetadataNode = async ({ metadata, createNode, createNodeId, cr
   // check if product is associated child product
   try {
     const umbrellaProduct = await db.stitchInterface.getMetadata({
-      'associated_products.name': siteMetadata.project,
+      'associated_products.name': metadata.project,
     });
     isAssociatedProduct = !!umbrellaProduct;
   } catch (e) {
     console.log('No umbrella product found. Not an associated product.');
     isAssociatedProduct = false;
   }
+
+  isAssociatedProductPerProjectAndBranch[projectAndBranchId] = isAssociatedProduct;
 
   // get remote metadata for updated ToC in Atlas
   try {
@@ -167,12 +170,11 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
 };
 
 exports.sourceNodes = async ({
-  metadata,
   hasOpenAPIChangelog,
-  hasCloudDocsProject,
   createNode,
   createContentDigest,
   createNodeId,
+  getNodesByType,
 }) => {
   // wait to connect to stitch
   if (siteMetadata.manifestPath) {
@@ -203,88 +205,23 @@ exports.sourceNodes = async ({
     });
   });
 
-  await createRemoteMetadataNode({ metadata, createNode, createNodeId, createContentDigest });
+  const nodes = getNodesByType(`SnootyMetadata`);
+  let hasCloudDocsProject = false;
+  for (const { metadata } of nodes) {
+    await createRemoteMetadataNode({ metadata, createNode, createNodeId, createContentDigest });
+    if (metadata.project === `cloud-docs`) {
+      hasCloudDocsProject = true;
+    }
+  }
+
   if (hasCloudDocsProject && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
-  return { _db: db, _isAssociatedProduct: isAssociatedProduct, _associatedReposInfo: associatedReposInfo };
-};
-
-// this Hook is not called currently so it's no-op
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions;
-
-  let repoBranches = null;
-  try {
-    const repoInfo = await db.stitchInterface.fetchRepoBranches();
-    let errMsg;
-
-    if (!repoInfo) {
-      errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
-    }
-
-    // We should expect the number of branches for a docs repo to be 1 or more.
-    if (!repoInfo.branches?.length) {
-      errMsg = `No version information found for ${siteMetadata.project}`;
-    }
-
-    if (errMsg) {
-      throw errMsg;
-    }
-
-    // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
-    // dotcom environments seem to be consistent.
-    let envKey = siteMetadata.snootyEnv;
-    if (!envKey || envKey === 'development') {
-      envKey = 'dotcomprd';
-    } else if (envKey === 'production') {
-      envKey = 'prd';
-    } else if (envKey === 'staging') {
-      envKey = 'stg';
-    }
-
-    // We're overfetching data here. We only need branches and prefix at the least
-    repoBranches = {
-      branches: repoInfo.branches,
-      siteBasePrefix: repoInfo.prefix[envKey],
-    };
-
-    if (repoInfo.groups?.length > 0) {
-      repoBranches.groups = repoInfo.groups;
-    }
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-
-  return new Promise((resolve, reject) => {
-    PAGES.forEach((page) => {
-      const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
-      const slug = getPageSlug(page);
-
-      // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
-      const isFullBuild =
-        siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
-      const mainComponentRelativePath = `../../src/components/DocumentBody${isFullBuild ? '' : 'Preview'}.js`;
-
-      if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
-        createPage({
-          path: assertTrailingSlash(slug),
-          component: path.resolve(__dirname, mainComponentRelativePath),
-          context: {
-            slug,
-            repoBranches,
-            associatedReposInfo,
-            isAssociatedProduct,
-            template: pageNodes?.options?.template,
-            page: pageNodes,
-          },
-        });
-      }
-    });
-
-    resolve();
-  });
+  return {
+    _db: db,
+    _isAssociatedProductPerProjectAndBranch: isAssociatedProductPerProjectAndBranch,
+    _associatedReposInfoPerProjectAndBranch: associatedReposInfoPerProjectAndBranch,
+  };
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
