@@ -57,7 +57,7 @@ const createRemoteMetadataNode = async ({ metadata, createNode, createNodeId, cr
 
     createNode({
       children: [],
-      id: createNodeId('remoteMetadata'),
+      id: createNodeId(`remoteMetadata-${projectAndBranchId}`),
       internal: {
         contentDigest: createContentDigest(remoteMetadata),
         type: 'RemoteMetadata',
