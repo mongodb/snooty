@@ -47,35 +47,38 @@ const createRemoteMetadataNode = async ({
 
   isAssociatedProductPerProjectAndBranch[projectAndBranchId] = isAssociatedProduct;
 
+  // in Preview, RemoteMetadata is not used so skipping data fetching and node creation
+  // keeping this code here in case we need to use RemoteMetadata in Preview in the future
+  //
   // get remote metadata for updated ToC in Atlas
-  try {
-    const filter = {
-      project: metadata.project,
-      branch: metadata.branch,
-      github_username,
-    };
-    if (isAssociatedProduct || metadata?.associated_products?.length) {
-      filter['is_merged_toc'] = true;
-    }
-    const findOptions = {
-      sort: { build_id: -1 },
-    };
-    const remoteMetadata = await db.stitchInterface.getMetadata(filter, findOptions);
+  // try {
+  //   const filter = {
+  //     project: metadata.project,
+  //     branch: metadata.branch,
+  //     github_username,
+  //   };
+  //   if (isAssociatedProduct || metadata?.associated_products?.length) {
+  //     filter['is_merged_toc'] = true;
+  //   }
+  //   const findOptions = {
+  //     sort: { build_id: -1 },
+  //   };
+  //   const remoteMetadata = await db.stitchInterface.getMetadata(filter, findOptions);
 
-    createNode({
-      children: [],
-      id: createNodeId(`remoteMetadata-${projectAndBranchId}`),
-      internal: {
-        contentDigest: createContentDigest(remoteMetadata),
-        type: 'RemoteMetadata',
-      },
-      parent: null,
-      remoteMetadata: remoteMetadata,
-    });
-  } catch (e) {
-    console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
-    console.error(e);
-  }
+  //   createNode({
+  //     children: [],
+  //     id: createNodeId(`remoteMetadata-${projectAndBranchId}`),
+  //     internal: {
+  //       contentDigest: createContentDigest(remoteMetadata),
+  //       type: 'RemoteMetadata',
+  //     },
+  //     parent: null,
+  //     remoteMetadata: remoteMetadata,
+  //   });
+  // } catch (e) {
+  //   console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
+  //   console.error(e);
+  // }
 };
 
 const atlasAdminChangelogS3Prefix = 'https://mms-openapi-poc.s3.eu-west-1.amazonaws.com/openapi';
