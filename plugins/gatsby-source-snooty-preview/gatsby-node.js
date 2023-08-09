@@ -234,6 +234,7 @@ exports.sourceNodes = async ({
   console.time(`old source nodes`);
   const { _db, _isAssociatedProductPerProjectAndBranch, _associatedReposInfoPerProjectAndBranch } = await sourceNodes({
     hasOpenAPIChangelog,
+    github_username: GATSBY_CLOUD_SITE_USER,
     createNode,
     createContentDigest,
     createNodeId,

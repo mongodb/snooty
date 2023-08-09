@@ -10,7 +10,13 @@ const associatedReposInfoPerProjectAndBranch = {};
 
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
-const createRemoteMetadataNode = async ({ metadata, createNode, createNodeId, createContentDigest }) => {
+const createRemoteMetadataNode = async ({
+  metadata,
+  github_username,
+  createNode,
+  createNodeId,
+  createContentDigest,
+}) => {
   // fetch associated child products
   const productList = metadata?.associated_products || [];
 
@@ -46,6 +52,7 @@ const createRemoteMetadataNode = async ({ metadata, createNode, createNodeId, cr
     const filter = {
       project: metadata.project,
       branch: metadata.branch,
+      github_username,
     };
     if (isAssociatedProduct || metadata?.associated_products?.length) {
       filter['is_merged_toc'] = true;
@@ -171,6 +178,7 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
 
 exports.sourceNodes = async ({
   hasOpenAPIChangelog,
+  github_username,
   createNode,
   createContentDigest,
   createNodeId,
@@ -208,7 +216,7 @@ exports.sourceNodes = async ({
   const nodes = getNodesByType(`SnootyMetadata`);
   let hasCloudDocsProject = false;
   for (const { metadata } of nodes) {
-    await createRemoteMetadataNode({ metadata, createNode, createNodeId, createContentDigest });
+    await createRemoteMetadataNode({ metadata, github_username, createNode, createNodeId, createContentDigest });
     if (metadata.project === `cloud-docs`) {
       hasCloudDocsProject = true;
     }
