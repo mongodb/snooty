@@ -1,8 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { mockLocation } from '../utils/mock-location';
 import Link from '../../src/components/Link';
 
 const setup = ({ text, ...rest }) => render(<Link {...rest}>{text}</Link>);
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 describe('Link component renders a variety of strings correctly', () => {
   it('empty string', () => {

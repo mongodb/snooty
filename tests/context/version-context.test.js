@@ -13,26 +13,23 @@ const setProjectAndAssociatedProducts = () => {
   useStaticQuery.mockImplementation(() => ({
     site: {
       siteMetadata: {
-        project: project,
         parserBranch: 'master',
       },
     },
-    allSnootyMetadata: {
-      nodes: [
-        {
-          metadata: {
-            associated_products: [
-              {
-                name: 'atlas-cli',
-                versions: ['v1.1', 'v1.2', 'master'],
-              },
-            ],
-          },
-        },
-      ],
-    },
   }));
 };
+
+jest.mock(`../../src/utils/use-snooty-metadata`, () => {
+  return () => ({
+    project,
+    associated_products: [
+      {
+        name: 'atlas-cli',
+        versions: ['v1.1', 'v1.2', 'master'],
+      },
+    ],
+  });
+});
 
 const getKey = (project, branchName) => `${project}-${branchName}`;
 

@@ -29,6 +29,7 @@ const getComboboxOptionStrings = (o) => {
 
 jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
   openapi_pages: ['reference/api-resources-spec/v2'],
+  project: '',
 }));
 
 /* Aggregate all Resources in changelog for frontend filter */
@@ -46,7 +47,6 @@ useStaticQuery.mockImplementation(() => ({
       parserBranch: '',
       patchId: '',
       pathPrefix: '',
-      project: '',
       snootyBranch: '',
       user: '',
     },

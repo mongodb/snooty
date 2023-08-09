@@ -7,6 +7,7 @@ import { mockChangelog, mockDiff } from './data/OpenAPIChangelog';
 
 jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
   openapi_pages: ['reference/api-resources-spec/v2'],
+  project: '',
 }));
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
@@ -17,7 +18,6 @@ useStaticQuery.mockImplementation(() => ({
       parserBranch: '',
       patchId: '',
       pathPrefix: '',
-      project: '',
       snootyBranch: '',
       user: '',
     },
