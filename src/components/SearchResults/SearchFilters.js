@@ -8,6 +8,7 @@ import { getSortedBranchesForProperty } from '../../utils/parse-marian-manifests
 import SearchContext from './SearchContext';
 
 const FILTER_WIDTH = '175px';
+const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
 const SelectWrapper = styled('div')`
   align-items: center;
@@ -84,6 +85,7 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.delete('searchProperty');
     searchParams.delete('searchVersion');
+    if (newSearchInput) searchParams.set('page', '1');
     const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
@@ -112,6 +114,7 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
       const searchParams = new URLSearchParams(window.location.search);
       searchParams.set('searchProperty', searchFilter);
       searchParams.set('searchVersion', versionSelectorLabel);
+      searchParams.set('page', '1');
       const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
       window.history.pushState(null, '', newRelativePathQuery);
     } else {

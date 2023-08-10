@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
+import Pagination from '@leafygreen-ui/pagination';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import { palette } from '@leafygreen-ui/palette';
 import { H1, Overline } from '@leafygreen-ui/typography';
@@ -12,7 +13,8 @@ import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
+// NOT USING THIS FRONT END QUERY ANYMORE
+// import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
@@ -270,6 +272,7 @@ const SearchResults = () => {
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.delete('searchProperty');
     searchParams.delete('searchVersion');
+    if (newSearchInput) searchParams.set('page', '1');
     const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   }, []);
@@ -299,6 +302,12 @@ const SearchResults = () => {
       if (!firstRenderComplete) setFirstLoadEmpty(true);
       setSearchFinished(true);
     }
+    if (newSearchInput) {
+      let searchParams = new URLSearchParams(window.location.search);
+      searchParams.set('page', '1');
+      let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+      window.history.replaceState(null, '', newRelativePathQuery);
+    }
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
@@ -314,11 +323,26 @@ const SearchResults = () => {
     }
     if (newSearchInput) setSearchFinished(false);
     const fetchNewSearchResults = async () => {
-      const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
-      const resultJson = await result.json();
-      if (!!resultJson?.results) {
-        setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
+      let result;
+      if (newSearchInput) {
+        let searchParams = new URLSearchParams(window.location.search);
+        const pageNumber = parseInt(searchParams.get('page'));
+        result = await fetch(searchParamsToURL(searchTerm, searchFilter, pageNumber));
+      } else {
+        result = await fetch(searchParamsToURL(searchTerm, searchFilter));
       }
+      /////////////////////////////////////////////////////////// VERSION 1: without the total count
+      const resultJson = await result.json();
+      /////////////////////////////////////////////////////////// VERSION 2: returns total count
+      // const answer = await result.json();
+      // const resultJson = {"results": answer.results[0].rows}
+      // console.log("the results are", resultJson);
+      // console.log("the total count is", answer.results[0].totalRows.count.lowerBound);
+
+      if (!!resultJson?.results) {
+        setSearchResults(resultJson.results);
+      }
+
       setSearchFinished(true);
     };
     fetchNewSearchResults();
@@ -333,8 +357,57 @@ const SearchResults = () => {
     setFirstLoadEmpty(false);
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('q', newValue);
+    searchParams.set('page', '1');
     const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
+  };
+
+  const forwardClick = async () => {
+    let searchParams = new URLSearchParams(window.location.search);
+    let newPage = parseInt(searchParams.get('page')) + 1;
+    searchParams.set('page', newPage);
+    let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+    window.history.replaceState(null, '', newRelativePathQuery);
+    setSearchResults([]);
+    setSearchFinished(false);
+    const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
+    /////////////////////////////////////////////////////////// VERSION 1: without the total count
+    const resultJson = await result.json();
+    /////////////////////////////////////////////////////////// VERSION 2: returns total count
+    // const answer = await result.json();
+    // const resultJson = {"results": answer.results[0].rows}
+    // console.log("the results are", resultJson);
+    // console.log("the total count is", answer.results[0].totalRows.count.lowerBound);
+
+    if (!!resultJson?.results) {
+      setSearchResults(resultJson.results);
+    }
+
+    setSearchFinished(true);
+  };
+  const backwardClick = async () => {
+    let searchParams = new URLSearchParams(window.location.search);
+    let newPage = parseInt(searchParams.get('page')) - 1;
+    if (newPage < 1) return;
+    searchParams.set('page', newPage);
+    let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+    window.history.replaceState(null, '', newRelativePathQuery);
+    setSearchResults([]);
+    setSearchFinished(false);
+    const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
+    /////////////////////////////////////////////////////////// VERSION 1: without the total count
+    const resultJson = await result.json();
+    /////////////////////////////////////////////////////////// VERSION 2: returns total count
+    // const answer = await result.json();
+    // const resultJson = {"results": answer.results[0].rows}
+    // console.log("the results are", resultJson);
+    // console.log("the total count is", answer.results[0].totalRows.count.lowerBound);
+
+    if (!!resultJson?.results) {
+      setSearchResults(resultJson.results);
+    }
+
+    setSearchFinished(true);
   };
 
   return (
@@ -452,6 +525,15 @@ const SearchResults = () => {
                       searchProperty={searchProperty?.[0]}
                     />
                   ))}
+                  {
+                    <>
+                      <Pagination
+                        currentPage={new URLSearchParams(window.location.search).get('page')}
+                        onForwardArrowClick={forwardClick}
+                        onBackArrowClick={backwardClick}
+                      ></Pagination>{' '}
+                    </>
+                  }
                 </StyledSearchResults>
               </>
             )}
