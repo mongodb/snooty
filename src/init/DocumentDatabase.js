@@ -24,37 +24,39 @@ class StitchInterface {
   }
 
   fetchAllProducts() {
-    return this.stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
+    return this.stitchClient.callFunction('fetchAllProducts', siteMetadata.database);
   }
 
   fetchRepoBranches(project = siteMetadata.project) {
-    return this.stitchClient.callFunction('fetchDocument', [
+    return this.stitchClient.callFunction(
+      'fetchDocument',
       siteMetadata.reposDatabase,
       BRANCHES_COLLECTION,
-      constructReposFilter(project, project === siteMetadata.project),
-    ]);
+      constructReposFilter(project, project === siteMetadata.project)
+    );
   }
 
   async fetchDocuments(collection, buildFilter) {
-    return this.stitchClient.callFunction('fetchDocuments', [DB, collection, buildFilter]);
+    return this.stitchClient.callFunction('fetchDocuments', DB, collection, buildFilter);
   }
 
   async getMetadata(buildFilter, findOptions) {
-    return this.stitchClient.callFunction('fetchDocument', [
+    return this.stitchClient.callFunction(
+      'fetchDocument',
       DB,
       METADATA_COLLECTION,
       buildFilter,
       undefined,
-      findOptions,
-    ]);
+      findOptions
+    );
   }
 
   async fetchDocument(database, collectionName, query) {
-    return this.stitchClient.callFunction('fetchDocument', [database, collectionName, query]);
+    return this.stitchClient.callFunction('fetchDocument', database, collectionName, query);
   }
 
   async updateOAChangelogMetadata(metadata) {
-    return this.stitchClient.callFunction('updateOAChangelogMetadata', [metadata]);
+    return this.stitchClient.callFunction('updateOAChangelogMetadata', metadata);
   }
 }
 
