@@ -177,7 +177,8 @@ exports.sourceNodes = async ({
         // but Chesterton's Fence and all.
         if (filename.endsWith('.txt')) {
           const branch = page.page_id.split(`/`)[2];
-          const page_id = `/` + page.page_id.split(`/`).slice(3).join(`/`);
+          const raw_page_id = page.page_id.split(`/`).slice(3).join(`/`);
+          const page_id = raw_page_id === `index` ? `/` : `/${raw_page_id}`;
           const project = page.page_id.split(`/`)[0];
 
           const pageNodeId = createNodeId(page_id + branch);
