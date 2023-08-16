@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { HeaderContext } from '../Header/header-context';
-import { SNOOTY_STITCH_ID } from '../../build-constants';
+import { SNOOTY_REALM_APP_ID } from '../../build-constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
@@ -10,7 +10,7 @@ import { fetchBanner } from '../../utils/realm';
 
 const getBannerSource = (src) => {
   if (src == null || src === '') return null;
-  const srcUrl = `${SNOOTY_STITCH_ID}.mongodbstitch.com/${src}`;
+  const srcUrl = `${SNOOTY_REALM_APP_ID}.mongodbstitch.com/${src}`;
   return `https://${normalizePath(srcUrl)}`;
 };
 
