@@ -3,15 +3,29 @@ import { SNOOTY_REALM_APP_ID } from '../build-constants';
 
 const app = new Realm.App({ id: SNOOTY_REALM_APP_ID });
 
+// acts as a singleton to prevent multiple login
+// attempts.
+
+let loginDefer;
+
 const loginAnonymous = async () => {
-  try {
-    if (!app.currentUser) {
-      await app.logIn(Realm.Credentials.anonymous());
-    }
-    return app.currentUser;
-  } catch (error) {
-    console.error(`Failed to authenticate`);
+  if (loginDefer) {
+    return loginDefer;
   }
+
+  loginDefer = new Promise(async (res, rej) => {
+    try {
+      const credentials = Realm.Credentials.anonymous();
+      const user = await app.logIn(credentials);
+      res(user);
+    } catch (err) {
+      console.error('Failed to login', err);
+    }
+  });
+
+  return loginDefer.finally(() => {
+    loginDefer = null;
+  });
 };
 
 const callAuthenticatedFunction = async (funcName, ...argsList) => {
