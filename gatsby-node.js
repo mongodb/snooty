@@ -201,7 +201,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     console.log('Loading documents from manifest');
     db = manifestDocumentDatabase;
   } else {
-    console.log('Loading documents from stitch');
+    console.log('Loading documents from realm');
     db = realmDocumentDatabase;
   }
 
