@@ -21,7 +21,7 @@ export async function logout() {
     console.warn('No logged in user.');
   }
 }
-export const useStitchUser = () => {
+export const useRealmUser = () => {
   const [user, setUser] = React.useState(app.currentUser);
   React.useEffect(() => {
     loginAnonymous().then(setUser);
