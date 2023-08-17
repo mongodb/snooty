@@ -377,19 +377,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   try {
     result.data.allPagePath.nodes.forEach((node) => {
-      let slug;
+      let pagePath;
       if (isPreview) {
-        slug = path.join(node.project, node.branch, node.page_id);
+        pagePath = path.join(node.project, node.branch, node.page_id);
       } else {
-        slug = node.page_id;
+        pagePath = node.page_id;
       }
       const projectAndBranchId = `${node.project}-${node.branch}`;
       createPage({
-        path: slug,
+        path: pagePath,
         component: templatePath,
         context: {
           id: node.pageNodeId,
-          slug,
+          slug: node.page_id,
           repoBranches: perProjectRepoBranches.get(node.project),
           associatedReposInfo: associatedReposInfoPerProjectAndBranch[projectAndBranchId],
           isAssociatedProduct: isAssociatedProductPerProjectAndBranch[projectAndBranchId],
