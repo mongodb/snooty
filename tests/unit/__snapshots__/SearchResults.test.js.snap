@@ -230,8 +230,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
@@ -280,20 +280,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-23 {
   height: 100%;
-  position: relative;
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-23 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-  }
 }
 
 .emotion-25 {
@@ -310,24 +296,15 @@ exports[`Search Results Page considers a given search filter query param and dis
   overflow: hidden;
   font-size: 16px;
   line-height: 24px;
-}
-
-@media not all and (max-width: 480px) {
-  .emotion-25 {
-    font-weight: 600;
-  }
+  font-weight: 600;
+  position: relative;
 }
 
 @media only screen and (max-width: 480px) {
   .emotion-25 {
     font-size: 16px;
     line-height: 24px;
-  }
-
-  @media not all and (max-width: 480px) {
-    .emotion-25 {
-      font-weight: 600;
-    }
+    font-weight: 600;
   }
 }
 
@@ -883,7 +860,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       </a>
     </div>
     <div
-      class="emotion-36 emotion-80"
+      class="emotion-36 emotion-37"
     >
       <h2
         class="emotion-38 emotion-39"
@@ -2357,30 +2334,31 @@ exports[`Search Results Page renders loading images before returning no results 
   width: 100%;
 }
 
-.emotion-12:hover>.e1yoi6mj6 {
+.emotion-12:hover>.e1yoi6mj7 {
   opacity: 0.2;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-12:hover>.e1yoi6mj6:hover {
+.emotion-12:hover>.e1yoi6mj7:hover {
   opacity: 1;
 }
 
-.emotion-12:not(:hover)>.e1yoi6mj6 {
+.emotion-12:not(:hover)>.e1yoi6mj7 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
 .emotion-14 {
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
   width: 100%;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
   box-sizing: border-box;
   padding: 15px;
   display: grid;
@@ -3144,30 +3122,31 @@ exports[`Search Results Page renders loading images before returning nonempty re
   width: 100%;
 }
 
-.emotion-12:hover>.e1yoi6mj6 {
+.emotion-12:hover>.e1yoi6mj7 {
   opacity: 0.2;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-12:hover>.e1yoi6mj6:hover {
+.emotion-12:hover>.e1yoi6mj7:hover {
   opacity: 1;
 }
 
-.emotion-12:not(:hover)>.e1yoi6mj6 {
+.emotion-12:not(:hover)>.e1yoi6mj7 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
 .emotion-14 {
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
   width: 100%;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
   box-sizing: border-box;
   padding: 15px;
   display: grid;
@@ -3953,8 +3932,8 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(231, 238, 236, 0.4);
+  background-color: #fff;
   height: 152px;
   position: relative;
   place-self: center;
@@ -4003,20 +3982,6 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-17 {
   height: 100%;
-  position: relative;
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-17 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-  }
 }
 
 .emotion-19 {
@@ -4033,24 +3998,15 @@ exports[`Search Results Page renders results from a given search term query para
   overflow: hidden;
   font-size: 16px;
   line-height: 24px;
-}
-
-@media not all and (max-width: 480px) {
-  .emotion-19 {
-    font-weight: 600;
-  }
+  font-weight: 600;
+  position: relative;
 }
 
 @media only screen and (max-width: 480px) {
   .emotion-19 {
     font-size: 16px;
     line-height: 24px;
-  }
-
-  @media not all and (max-width: 480px) {
-    .emotion-19 {
-      font-weight: 600;
-    }
+    font-weight: 600;
   }
 }
 

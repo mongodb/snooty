@@ -1,0 +1,1159 @@
+{
+    "slug": "/",
+    "repoBranches": {
+        "branches": [
+            {
+                "name": "master",
+                "publishOriginalBranchName": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "master",
+                "isStableBranch": false,
+                "urlAliases": [
+                    "upcoming",
+                    "v1.27"
+                ],
+                "urlSlug": "upcoming",
+                "versionSelectorLabel": "1.27 (upcoming)",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.26",
+                "publishOriginalBranchName": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.26",
+                "isStableBranch": true,
+                "urlAliases": [
+                    "stable",
+                    "1.26",
+                    "1.26.0",
+                    "1.26.1"
+                ],
+                "urlSlug": "stable",
+                "versionSelectorLabel": "1.26.1 (stable)",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.25",
+                "publishOriginalBranch": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.25",
+                "isStableBranch": false,
+                "urlAliases": [],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.25",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.24",
+                "publishOriginalBranch": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.24",
+                "isStableBranch": false,
+                "urlAliases": [],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.24",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.23",
+                "publishOriginalBranch": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.23",
+                "isStableBranch": false,
+                "urlAliases": [],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.23",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.22",
+                "publishOriginalBranchName": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.22",
+                "isStableBranch": false,
+                "urlAliases": [
+                    null
+                ],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.22",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.21",
+                "publishOriginalBranchName": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.21",
+                "isStableBranch": false,
+                "urlAliases": [
+                    null
+                ],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.21",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.20",
+                "publishOriginalBranchName": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.20",
+                "isStableBranch": false,
+                "urlAliases": [
+                    null
+                ],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.20",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.19",
+                "publishOriginalBranchName": true,
+                "active": true,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.19",
+                "isStableBranch": false,
+                "urlAliases": [
+                    null
+                ],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.19",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.18",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.18",
+                "isStableBranch": false,
+                "urlAliases": [
+                    null
+                ],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.18",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.17",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.17",
+                "isStableBranch": false,
+                "urlAliases": [
+                    null
+                ],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.17",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.16",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": [
+                    null
+                ],
+                "gitBranchName": "v1.16",
+                "isStableBranch": false,
+                "urlAliases": [
+                    null
+                ],
+                "urlSlug": null,
+                "versionSelectorLabel": "1.16",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.15",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.15",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.15",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.14",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.14",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.14",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.13",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.13",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.13",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.12",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.12",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.12",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.11",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.11",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.11",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.10",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.10",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.10",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.9",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.9",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.9",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.8",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.8",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.8",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.7",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.7",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.7",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.6",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.6",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.6",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.5",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.5",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.5",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.4.0",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.4.0",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.4",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.3.0",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.3.0",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.3",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.2.0",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.2.0",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.2",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.1.0",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.1.0",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.1",
+                "buildsWithSnooty": true
+            },
+            {
+                "name": "v1.0.0",
+                "publishOriginalBranchName": true,
+                "active": false,
+                "aliases": null,
+                "gitBranchName": "v1.0.0",
+                "isStableBranch": false,
+                "urlAliases": null,
+                "urlSlug": null,
+                "versionSelectorLabel": "1.0",
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "0.5",
+                "buildsWithSnooty": false,
+                "active": false
+            },
+            {
+                "gitBranchName": "0.0.4",
+                "buildsWithSnooty": false,
+                "active": false
+            },
+            {
+                "gitBranchName": "0.0.3",
+                "buildsWithSnooty": false,
+                "active": false
+            },
+            {
+                "gitBranchName": "0.2",
+                "buildsWithSnooty": false,
+                "active": false
+            },
+            {
+                "gitBranchName": "0.1",
+                "buildsWithSnooty": false,
+                "active": false
+            }
+        ],
+        "siteBasePrefix": "docs/mongocli"
+    },
+    "associatedReposInfo": {},
+    "isAssociatedProduct": false,
+    "template": "product-landing",
+    "page": {
+        "type": "root",
+        "children": [
+            {
+                "type": "section",
+                "children": [
+                    {
+                        "type": "heading",
+                        "children": [
+                            {
+                                "type": "text",
+                                "value": "What is mongocli?"
+                            }
+                        ],
+                        "id": "what-is-mongocli-"
+                    },
+                    {
+                        "type": "directive",
+                        "children": [
+                            {
+                                "type": "paragraph",
+                                "children": [
+                                    {
+                                        "type": "text",
+                                        "value": "The MongoDB CLI is a modern command line interface that enables you to manage\nyour MongoDB services from the terminal."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "directive",
+                                "children": [],
+                                "domain": "mongodb",
+                                "name": "button",
+                                "argument": [
+                                    {
+                                        "type": "text",
+                                        "position": {
+                                            "start": {
+                                                "line": 13
+                                            }
+                                        },
+                                        "value": "Install MongoDB CLI"
+                                    }
+                                ],
+                                "options": {
+                                    "uri": "https://www.mongodb.com/try/download/mongocli"
+                                }
+                            },
+                            {
+                                "type": "paragraph",
+                                "children": [
+                                    {
+                                        "type": "ref_role",
+                                        "children": [
+                                            {
+                                                "type": "text",
+                                                "value": "View installation instructions"
+                                            }
+                                        ],
+                                        "domain": "std",
+                                        "name": "doc",
+                                        "target": "",
+                                        "flag": "",
+                                        "fileid": [
+                                            "/install",
+                                            ""
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "domain": "mongodb",
+                        "name": "introduction",
+                        "argument": []
+                    },
+                    {
+                        "type": "directive",
+                        "children": [],
+                        "domain": "",
+                        "name": "image",
+                        "argument": [
+                            {
+                                "type": "text",
+                                "position": {
+                                    "start": {
+                                        "line": 18
+                                    }
+                                },
+                                "value": "/images/hero.png"
+                            }
+                        ],
+                        "options": {
+                            "alt": "Homepage hero image",
+                            "checksum": "dcb3ea50be8166b3807798930e9afd619d17d29e956a3bf9d7d6a78364834b47"
+                        }
+                    },
+                    {
+                        "type": "directive",
+                        "children": [],
+                        "domain": "mongodb",
+                        "name": "kicker",
+                        "argument": [
+                            {
+                                "type": "text",
+                                "position": {
+                                    "start": {
+                                        "line": 21
+                                    }
+                                },
+                                "value": "What You Can Do"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "section",
+                        "children": [
+                            {
+                                "type": "heading",
+                                "children": [
+                                    {
+                                        "type": "text",
+                                        "value": "Manage your Deployment from the Command Line"
+                                    }
+                                ],
+                                "id": "manage-your-deployment-from-the-command-line"
+                            },
+                            {
+                                "type": "paragraph",
+                                "children": [
+                                    {
+                                        "type": "text",
+                                        "value": "Use simple, one-line commands to interact with MongoDB "
+                                    },
+                                    {
+                                        "type": "substitution_reference",
+                                        "children": [
+                                            {
+                                                "type": "text",
+                                                "value": "Atlas"
+                                            }
+                                        ],
+                                        "name": "service"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "value": ",\n"
+                                    },
+                                    {
+                                        "type": "substitution_reference",
+                                        "children": [
+                                            {
+                                                "type": "text",
+                                                "value": "Cloud Manager"
+                                            }
+                                        ],
+                                        "name": "cloud-short"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "value": ", or "
+                                    },
+                                    {
+                                        "type": "substitution_reference",
+                                        "children": [
+                                            {
+                                                "type": "text",
+                                                "value": "Ops Manager"
+                                            }
+                                        ],
+                                        "name": "onprem"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "value": ", and to automate management tasks for your deployments."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "directive",
+                                "children": [
+                                    {
+                                        "type": "directive",
+                                        "children": [
+                                            {
+                                                "type": "directive",
+                                                "children": [
+                                                    {
+                                                        "type": "directive",
+                                                        "children": [
+                                                            {
+                                                                "type": "section",
+                                                                "children": [
+                                                                    {
+                                                                        "type": "heading",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "Create API Keys"
+                                                                            }
+                                                                        ],
+                                                                        "id": "create-api-keys"
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "In the "
+                                                                            },
+                                                                            {
+                                                                                "type": "substitution_reference",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "text",
+                                                                                        "value": "Atlas"
+                                                                                    }
+                                                                                ],
+                                                                                "name": "service"
+                                                                            },
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": " UI, create an API key to programmatically access\nyour organization or project."
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "ref_role",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "text",
+                                                                                        "value": "To learn more, see Configure Atlas API Access"
+                                                                                    }
+                                                                                ],
+                                                                                "domain": "std",
+                                                                                "name": "label",
+                                                                                "target": "atlas-prog-api-key",
+                                                                                "flag": "",
+                                                                                "url": "https://www.mongodb.com/docs/atlas/configure-api-access/#std-label-atlas-prog-api-key"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "domain": "mongodb",
+                                                        "name": "step",
+                                                        "argument": [
+                                                            {
+                                                                "type": "text",
+                                                                "position": {
+                                                                    "start": {
+                                                                        "line": 36
+                                                                    }
+                                                                },
+                                                                "value": "Create API Keys"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "directive",
+                                                        "children": [
+                                                            {
+                                                                "type": "section",
+                                                                "children": [
+                                                                    {
+                                                                        "type": "heading",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "Create a Project"
+                                                                            }
+                                                                        ],
+                                                                        "id": "create-a-project"
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "If you don't have an existing project, create one to group clusters\nthat share users, settings, or environments."
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "reference",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "text",
+                                                                                        "value": "To learn more, see Create a Project"
+                                                                                    }
+                                                                                ],
+                                                                                "refuri": "https://www.mongodb.com/docs/atlas/tutorial/manage-projects/#std-label-create-project"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "domain": "mongodb",
+                                                        "name": "step",
+                                                        "argument": [
+                                                            {
+                                                                "type": "text",
+                                                                "position": {
+                                                                    "start": {
+                                                                        "line": 43
+                                                                    }
+                                                                },
+                                                                "value": "Create a Project"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "directive",
+                                                        "children": [
+                                                            {
+                                                                "type": "section",
+                                                                "children": [
+                                                                    {
+                                                                        "type": "heading",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "Create a Profile"
+                                                                            }
+                                                                        ],
+                                                                        "id": "create-a-profile"
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "Store your API keys, organization and project IDs, and other\nsettings in a profile to easily access your MongoDB deployments."
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "ref_role",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "text",
+                                                                                        "value": "To learn more, see Configure the MongoDB CLI"
+                                                                                    }
+                                                                                ],
+                                                                                "domain": "std",
+                                                                                "name": "label",
+                                                                                "target": "mcli-configure",
+                                                                                "flag": "",
+                                                                                "fileid": [
+                                                                                    "configure",
+                                                                                    "std-label-mcli-configure"
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "domain": "mongodb",
+                                                        "name": "step",
+                                                        "argument": [
+                                                            {
+                                                                "type": "text",
+                                                                "position": {
+                                                                    "start": {
+                                                                        "line": 50
+                                                                    }
+                                                                },
+                                                                "value": "Create a Profile"
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "domain": "mongodb",
+                                                "name": "procedure",
+                                                "argument": []
+                                            },
+                                            {
+                                                "type": "directive",
+                                                "children": [],
+                                                "domain": "",
+                                                "name": "image",
+                                                "argument": [
+                                                    {
+                                                        "type": "text",
+                                                        "position": {
+                                                            "start": {
+                                                                "line": 57
+                                                            }
+                                                        },
+                                                        "value": "/images/config.gif"
+                                                    }
+                                                ],
+                                                "options": {
+                                                    "alt": "MongoDB CLI config command",
+                                                    "checksum": "f89ccb09ca279e13f153aff88d50d5680a84cf202443922344569124741f40a8"
+                                                }
+                                            }
+                                        ],
+                                        "domain": "",
+                                        "name": "tab",
+                                        "argument": [
+                                            {
+                                                "type": "text",
+                                                "position": {
+                                                    "start": {
+                                                        "line": 31
+                                                    }
+                                                },
+                                                "value": "Configure the MongoDB CLI"
+                                            }
+                                        ],
+                                        "options": {
+                                            "tabid": "configure"
+                                        }
+                                    },
+                                    {
+                                        "type": "directive",
+                                        "children": [
+                                            {
+                                                "type": "directive",
+                                                "children": [
+                                                    {
+                                                        "type": "directive",
+                                                        "children": [
+                                                            {
+                                                                "type": "section",
+                                                                "children": [
+                                                                    {
+                                                                        "type": "heading",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "Quick Start"
+                                                                            }
+                                                                        ],
+                                                                        "id": "quick-start"
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": "Create, configure and connect to an "
+                                                                            },
+                                                                            {
+                                                                                "type": "substitution_reference",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "text",
+                                                                                        "value": "Atlas"
+                                                                                    }
+                                                                                ],
+                                                                                "name": "service"
+                                                                            },
+                                                                            {
+                                                                                "type": "text",
+                                                                                "value": " cluster in one command."
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "paragraph",
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "ref_role",
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "text",
+                                                                                        "value": "To learn more, see Get Started with MongoDB Atlas"
+                                                                                    }
+                                                                                ],
+                                                                                "domain": "std",
+                                                                                "name": "label",
+                                                                                "target": "mcli-quick-start-atlas",
+                                                                                "flag": "",
+                                                                                "fileid": [
+                                                                                    "quick-start/atlas",
+                                                                                    "std-label-mcli-quick-start-atlas"
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "domain": "mongodb",
+                                                        "name": "step",
+                                                        "argument": [
+                                                            {
+                                                                "type": "text",
+                                                                "position": {
+                                                                    "start": {
+                                                                        "line": 65
+                                                                    }
+                                                                },
+                                                                "value": "Quick Start"
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "domain": "mongodb",
+                                                "name": "procedure",
+                                                "argument": []
+                                            },
+                                            {
+                                                "type": "directive",
+                                                "children": [],
+                                                "domain": "",
+                                                "name": "image",
+                                                "argument": [
+                                                    {
+                                                        "type": "text",
+                                                        "position": {
+                                                            "start": {
+                                                                "line": 71
+                                                            }
+                                                        },
+                                                        "value": "/images/quickstart.gif"
+                                                    }
+                                                ],
+                                                "options": {
+                                                    "alt": "MongoDB CLI quickstart command",
+                                                    "checksum": "4fbcbb9f7d7f4ad061fe55491d8201bb259848b05e9d4d351bf3545991725f18"
+                                                }
+                                            }
+                                        ],
+                                        "domain": "",
+                                        "name": "tab",
+                                        "argument": [
+                                            {
+                                                "type": "text",
+                                                "position": {
+                                                    "start": {
+                                                        "line": 60
+                                                    }
+                                                },
+                                                "value": "Create a Cluster with One Command"
+                                            }
+                                        ],
+                                        "options": {
+                                            "tabid": "create-cluster"
+                                        }
+                                    }
+                                ],
+                                "domain": "",
+                                "name": "tabs",
+                                "argument": []
+                            },
+                            {
+                                "type": "directive",
+                                "children": [],
+                                "domain": "mongodb",
+                                "name": "kicker",
+                                "argument": [
+                                    {
+                                        "type": "text",
+                                        "position": {
+                                            "start": {
+                                                "line": 74
+                                            }
+                                        },
+                                        "value": "Related Products & Resources"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "section",
+                        "children": [
+                            {
+                                "type": "heading",
+                                "children": [
+                                    {
+                                        "type": "text",
+                                        "value": "Go Further with the MongoDB CLI"
+                                    }
+                                ],
+                                "id": "go-further-with-the-mongodb-cli"
+                            },
+                            {
+                                "type": "paragraph",
+                                "children": [
+                                    {
+                                        "type": "text",
+                                        "value": "Explore advanced features of the MongoDB CLI and the MongoDB services you can\ninteract with."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "directive",
+                                "children": [
+                                    {
+                                        "type": "directive",
+                                        "children": [
+                                            {
+                                                "type": "paragraph",
+                                                "children": [
+                                                    {
+                                                        "type": "text",
+                                                        "value": "Interact with your cloud deployments through a GUI"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "domain": "mongodb",
+                                        "name": "card",
+                                        "argument": [],
+                                        "options": {
+                                            "cta": "Read Atlas docs",
+                                            "url": "https://www.mongodb.com/docs/atlas/getting-started/",
+                                            "icon": "/images/icons/atlas.svg",
+                                            "icon-alt": "MongoDB Atlas icon",
+                                            "checksum": "19ffb0be3b701fc806c5b442aeb098cc76181ab270f3c57b108197321fecd4d0"
+                                        }
+                                    },
+                                    {
+                                        "type": "directive",
+                                        "children": [
+                                            {
+                                                "type": "paragraph",
+                                                "children": [
+                                                    {
+                                                        "type": "text",
+                                                        "value": "Explore more advanced MongoDB CLI use cases"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "domain": "mongodb",
+                                        "name": "card",
+                                        "argument": [],
+                                        "options": {
+                                            "cta": "Read Reference Docs",
+                                            "url": "https://www.mongodb.com/docs/mongocli/stable/command/mongocli/",
+                                            "icon": "/images/icons/reference.svg",
+                                            "icon-alt": "MongoCLI Reference icon",
+                                            "checksum": "cb759dc55c41c5850e4d42f4495e5e5a29a7ee255e14b9afb37c57486138480f"
+                                        }
+                                    },
+                                    {
+                                        "type": "directive",
+                                        "children": [
+                                            {
+                                                "type": "paragraph",
+                                                "children": [
+                                                    {
+                                                        "type": "text",
+                                                        "value": "Review common error messages and issues"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "domain": "mongodb",
+                                        "name": "card",
+                                        "argument": [],
+                                        "options": {
+                                            "cta": "Read Troubleshooting Docs",
+                                            "url": "https://www.mongodb.com/docs/mongocli/stable/troubleshooting/",
+                                            "icon": "/images/icons/troubleshooting.svg",
+                                            "icon-alt": "MongoCLI Troubleshooting icon",
+                                            "checksum": "809f6b722bd532b32da74a13801fa452f1064ae6da70dc254e8a453a95b77be9"
+                                        }
+                                    }
+                                ],
+                                "domain": "mongodb",
+                                "name": "card-group",
+                                "argument": [],
+                                "options": {
+                                    "columns": 3,
+                                    "style": "compact"
+                                }
+                            },
+                            {
+                                "type": "directive",
+                                "children": [],
+                                "domain": "",
+                                "name": "toctree",
+                                "argument": [],
+                                "options": {
+                                    "titlesonly": true
+                                },
+                                "entries": [
+                                    {
+                                        "title": "Overview",
+                                        "slug": "/index"
+                                    },
+                                    {
+                                        "slug": "/install/compatibility"
+                                    },
+                                    {
+                                        "slug": "/install"
+                                    },
+                                    {
+                                        "slug": "/configure"
+                                    },
+                                    {
+                                        "slug": "/quick-start"
+                                    },
+                                    {
+                                        "title": "MongoDB CLI Commands",
+                                        "slug": "/command/mongocli"
+                                    },
+                                    {
+                                        "slug": "/reference"
+                                    },
+                                    {
+                                        "slug": "/troubleshooting"
+                                    },
+                                    {
+                                        "title": "Release Notes",
+                                        "slug": "/release-notes"
+                                    },
+                                    {
+                                        "slug": "/third-party-licenses"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "fileid": "index.txt",
+        "options": {
+            "template": "product-landing",
+            "hidefeedback": "header",
+            "noprevnext": ""
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.14.10",
+  "version": "0.14.12",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -99,7 +99,6 @@
     "dotenv": "^8.2.0",
     "eventsource": "^2.0.2",
     "gatsby": "^5.0.0",
-    "gatsby-plugin-canonical-urls": "^5.0.0",
     "gatsby-plugin-emotion": "^8.0.0",
     "gatsby-plugin-google-tagmanager": "^5.0.0",
     "gatsby-plugin-layout": "^4.7.0",
@@ -110,6 +109,7 @@
     "https-browserify": "^1.0.0",
     "immer": "^9.0.6",
     "json-schema": "^0.4.0",
+    "lodash": "^4.6.0",
     "minimist": "^1.2.6",
     "mobx": "^6.1.5",
     "mongodb-stitch-browser-sdk": "^4.8.0",

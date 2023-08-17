@@ -4,18 +4,14 @@ const { siteMetadata } = require('./src/utils/site-metadata');
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
 const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata, process.env.GATSBY_SITE) : undefined;
 
-const plugins = [
-  'gatsby-plugin-emotion',
-  isPreview ? 'gatsby-source-snooty-preview' : 'gatsby-source-snooty-prod',
-  {
-    resolve: 'gatsby-plugin-canonical-urls',
-    options: {
-      siteUrl: `${siteMetadata.siteUrl}${pathPrefix}`,
-      stripQueryString: true,
-    },
-  },
-];
+console.log('PATH PREFIX', pathPrefix);
 
+// Specifies which plugins to use depending on build environment
+const plugins = ['gatsby-plugin-emotion', isPreview ? 'gatsby-source-snooty-preview' : 'gatsby-source-snooty-prod'];
+
+// PRODUCTION DEPLOYMENTS --
+// If not a preview build, use the layout that includes the
+// consistent navbar and footer and generate a sitemap.
 if (!isPreview) {
   plugins.push(`gatsby-plugin-sitemap`);
   const layoutComponentRelativePath = `./src/layouts/index.js`;
