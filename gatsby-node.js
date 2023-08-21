@@ -9,7 +9,7 @@ const { getPageSlug } = require('./src/utils/get-page-slug');
 const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
 const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { manifestDocumentDatabase, stitchDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase, realmDocumentDatabase } = require('./src/init/DocumentDatabase.js');
 
 // different types of references
 const PAGES = [];
@@ -31,12 +31,12 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   const productList = manifestMetadata?.associated_products || [];
   await Promise.all(
     productList.map(async (product) => {
-      associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+      associatedReposInfo[product.name] = await db.realmInterface.fetchRepoBranches(product.name);
     })
   );
   // check if product is associated child product
   try {
-    const umbrellaProduct = await db.stitchInterface.getMetadata({
+    const umbrellaProduct = await db.realmInterface.getMetadata({
       'associated_products.name': siteMetadata.project,
     });
     isAssociatedProduct = !!umbrellaProduct;
@@ -57,7 +57,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
     const findOptions = {
       sort: { build_id: -1 },
     };
-    const remoteMetadata = await db.stitchInterface.getMetadata(filter, findOptions);
+    const remoteMetadata = await db.realmInterface.getMetadata(filter, findOptions);
 
     createNode({
       children: [],
@@ -75,12 +75,13 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-const atlasAdminChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
+const atlasAdminProdChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
+const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
 
-const fetchChangelogData = async (runId, versions) => {
+const fetchChangelogData = async (runId, versions, s3Prefix) => {
   try {
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.json`);
+    const changelogResp = await fetch(`${s3Prefix}/${runId}/changelog.json`);
     const changelog = await changelogResp.json();
 
     /* Aggregate all Resources in changelog for frontend filter */
@@ -93,7 +94,7 @@ const fetchChangelogData = async (runId, versions) => {
     /* Fetch most recent Resource Versions' diff */
     const mostRecentResourceVersions = versions.slice(-2);
     const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
+    const mostRecentDiffResp = await fetch(`${s3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
     const mostRecentDiffData = await mostRecentDiffResp.json();
 
     return {
@@ -111,10 +112,24 @@ const fetchChangelogData = async (runId, versions) => {
 };
 
 /* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
-const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest, siteMetadata }) => {
   try {
+    const { snootyEnv } = siteMetadata;
+    let atlasAdminChangelogS3Prefix;
+    let indexLocation;
+    switch (snootyEnv) {
+      case 'staging':
+      case 'development':
+        atlasAdminChangelogS3Prefix = atlasAdminDevChangelogS3Prefix;
+        indexLocation = 'dev.json';
+        break;
+      case 'production':
+      default:
+        atlasAdminChangelogS3Prefix = atlasAdminProdChangelogS3Prefix;
+        indexLocation = 'prod.json';
+    }
     /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/prod.json`);
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/${indexLocation}`);
     const index = await indexResp.json();
 
     const { runId, versions } = index;
@@ -126,18 +141,18 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
       index,
     };
     try {
-      const receivedChangelogData = await fetchChangelogData(runId, versions);
+      const receivedChangelogData = await fetchChangelogData(runId, versions, atlasAdminChangelogS3Prefix);
       changelogData = { ...changelogData, ...receivedChangelogData };
-      await db.stitchInterface.updateOAChangelogMetadata(index);
+      if (snootyEnv === 'production') await db.realmInterface.updateOAChangelogMetadata(index);
     } catch (error) {
       /* If any error occurs, fetch last successful metadata and build changelog node */
-      const lastSuccessfulIndex = await db.stitchInterface.fetchDocument(
+      const lastSuccessfulIndex = await db.realmInterface.fetchDocument(
         'openapi_changelog',
         'atlas_admin_metadata',
         {}
       );
       const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
-      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions);
+      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions, atlasAdminProdChangelogS3Prefix);
       changelogData = { index: lastSuccessfulIndex, ...receivedChangelogData };
     }
 
@@ -186,8 +201,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     console.log('Loading documents from manifest');
     db = manifestDocumentDatabase;
   } else {
-    console.log('Loading documents from stitch');
-    db = stitchDocumentDatabase;
+    console.log('Loading documents from realm');
+    db = realmDocumentDatabase;
   }
 
   await db.connect();
@@ -238,7 +253,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   // Get all MongoDB products for the sidenav
-  const products = await db.fetchAllProducts(siteMetadata.database);
+  const products = await db.fetchAllProducts();
   products.forEach((product) => {
     const url = baseUrl(product.baseUrl + product.slug);
 
@@ -257,7 +272,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
-    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata });
 
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
@@ -289,7 +304,7 @@ exports.createPages = async ({ actions }) => {
 
   let repoBranches = null;
   try {
-    const repoInfo = await db.stitchInterface.fetchRepoBranches();
+    const repoInfo = await db.realmInterface.fetchRepoBranches();
     let errMsg;
 
     if (!repoInfo) {
@@ -362,19 +377,6 @@ exports.createPages = async ({ actions }) => {
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
 exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
-  if (stage === 'build-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /mongodb-stitch-browser-sdk/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    });
-  }
-
   const providePlugins = {
     Buffer: ['buffer', 'Buffer'],
     process: require.resolve('./stubs/process.js'),

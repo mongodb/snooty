@@ -49,6 +49,7 @@ useStaticQuery.mockImplementation(() => ({
       project: '',
       snootyBranch: '',
       user: '',
+      snootyEnv: 'production',
     },
   },
   allChangelogData: {
@@ -68,9 +69,11 @@ describe('OpenAPIChangelog tests', () => {
   let mockFetchOADiff;
 
   beforeEach(() => {
-    mockFetchOADiff = jest.spyOn(realm, 'fetchOADiff').mockImplementation(async (runId, fromAndToDiffString) => {
-      return mockDiff;
-    });
+    mockFetchOADiff = jest
+      .spyOn(realm, 'fetchOADiff')
+      .mockImplementation(async (runId, fromAndToDiffString, snootyEnv) => {
+        return mockDiff;
+      });
   });
 
   afterAll(() => {

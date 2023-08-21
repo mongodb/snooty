@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
+import { useCanonicalUrl } from '../hooks/use-canonical-url';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
@@ -129,7 +130,8 @@ DocumentBody.propTypes = {
 export default DocumentBody;
 
 export const Head = ({ pageContext }) => {
-  const { slug, page, template } = pageContext;
+  const { slug, page, template, repoBranches } = pageContext;
+
   const pageNodes = getNestedValue(['children'], page) || [];
 
   const meta = getMetaFromDirective('section', pageNodes, 'meta');
@@ -144,9 +146,18 @@ export const Head = ({ pageContext }) => {
   const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
+  // Retrieves the canonical URL based on certain situations
+  // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
+  const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
+
   return (
     <>
-      <SEO pageTitle={pageTitle} siteTitle={siteTitle} showDocsLandingTitle={isDocsLandingHomepage} />
+      <SEO
+        canonical={canonical}
+        pageTitle={pageTitle}
+        siteTitle={siteTitle}
+        showDocsLandingTitle={isDocsLandingHomepage}
+      />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
