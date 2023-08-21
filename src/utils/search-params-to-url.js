@@ -3,7 +3,7 @@ import { baseUrl } from './base-url';
 import { assertTrailingSlash } from './assert-trailing-slash';
 
 // Search helper function to generate marian URL from params and filters
-export const searchParamsToURL = (searchQuery, searchFilters, pageNumber = 0, isMarian = true) => {
+export const searchParamsToURL = (searchQuery, searchFilters, pageNumber = 1, isMarian = true) => {
   const queryParams = `?q=${searchQuery}${searchFilters ? `&searchProperty=${searchFilters}` : ''}&page=${pageNumber}`;
   const url = isMarian ? MARIAN_URL : baseUrl();
   return `${assertTrailingSlash(url)}search${queryParams}`;

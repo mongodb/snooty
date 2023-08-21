@@ -8,7 +8,7 @@ import Icon from '@leafygreen-ui/icon';
 import Pagination from '@leafygreen-ui/pagination';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import { palette } from '@leafygreen-ui/palette';
-import { H1, Overline } from '@leafygreen-ui/typography';
+import { H1 } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -303,7 +303,10 @@ const SearchResults = () => {
     }
     if (newSearchInput) {
       let searchParams = new URLSearchParams(window.location.search);
-      searchParams.set('page', '1');
+      const page = parseInt(searchParams.get('page'));
+      if (!page) {
+        searchParams.set('page', '1');
+      }
       let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
       window.history.replaceState(null, '', newRelativePathQuery);
     }
@@ -446,9 +449,10 @@ const SearchResults = () => {
                 }}
               />
               <ResultTag style={{ paddingTop: '10px' }}>
-                <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                {/* TODO: add number of results from metadata */}
+                {/* <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
                   {!firstLoadEmpty && <>{searchResults?.length ? searchResults.length : '0'} RESULTS</>}
-                </Overline>
+                </Overline> */}
                 {!!searchFilter && (
                   <FilterBadgesWrapper>
                     {selectedCategory && (
@@ -527,7 +531,7 @@ const SearchResults = () => {
                   {
                     <>
                       <Pagination
-                        currentPage={new URLSearchParams(window.location.search).get('page')}
+                        currentPage={parseInt(new URLSearchParams(window.location.search).get('page'))}
                         onForwardArrowClick={forwardClick}
                         onBackArrowClick={backwardClick}
                       ></Pagination>{' '}
