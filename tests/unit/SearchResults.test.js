@@ -175,9 +175,18 @@ describe('Search Results Page', () => {
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
     });
-    renderStitchResults.debug();
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectFilteredResults(renderStitchResults);
+  });
+
+  it('does not return results for a given search term with an ill-formed searchProperty', async () => {
+    let renderStitchResults;
+    mockLocation('?q=realm');
+    await act(async () => {
+      renderStitchResults = render(<SearchResults />);
+    });
+    expect(renderStitchResults.asFragment()).toMatchSnapshot();
+    expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
   });
 
   it('updates the page UI when a property is changed', async () => {
