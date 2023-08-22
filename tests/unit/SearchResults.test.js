@@ -175,6 +175,7 @@ describe('Search Results Page', () => {
     await act(async () => {
       renderStitchResults = render(<SearchResults />);
     });
+    renderStitchResults.debug();
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectFilteredResults(renderStitchResults);
   });

@@ -85,7 +85,7 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.delete('searchProperty');
     searchParams.delete('searchVersion');
-    if (newSearchInput) searchParams.set('page', '1');
+    if (newSearchInput && searchParams.get('q')) searchParams.set('page', '1');
     const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);

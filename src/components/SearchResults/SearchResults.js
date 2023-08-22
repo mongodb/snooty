@@ -13,6 +13,7 @@ import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
@@ -298,11 +299,12 @@ const SearchResults = () => {
     if (q === '' || q === undefined) {
       if (!firstRenderComplete) setFirstLoadEmpty(true);
       setSearchFinished(true);
+      return;
     }
     if (newSearchInput) {
       let searchParams = new URLSearchParams(window.location.search);
       const page = parseInt(searchParams.get('page'));
-      if (!page) {
+      if (!page && !!search) {
         searchParams.set('page', '1');
       }
       let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
@@ -317,31 +319,35 @@ const SearchResults = () => {
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
   useEffect(() => {
-    console.log(312);
-    console.log(searchTerm);
-    console.log(searchPropertyMapping);
     if (!searchTerm || !Object.keys(searchPropertyMapping).length) {
       if (!searchTerm && firstRenderComplete) setSearchFinished(true);
       return;
     }
     if (newSearchInput) setSearchFinished(false);
     const fetchNewSearchResults = async () => {
-      // const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
-      let result;
-      if (newSearchInput) {
-        let searchParams = new URLSearchParams(window.location.search);
-        const pageNumber = parseInt(searchParams.get('page'));
-        result = await fetch(searchParamsToURL(searchTerm, searchFilter, pageNumber));
-      } else {
-        result = await fetch(searchParamsToURL(searchTerm, searchFilter));
-      }
+      let searchParams = new URLSearchParams(window.location.search);
+      const pageNumber = parseInt(searchParams.get('page'));
+      const result = await fetch(searchParamsToURL(searchTerm, searchFilter, pageNumber));
       const resultJson = await result.json();
-      if (!!resultJson?.results) {
+      if (newSearchInput && !!resultJson?.results) {
         setSearchResults(resultJson.results);
       }
       setSearchFinished(true);
     };
-    fetchNewSearchResults();
+
+    const fetchDeprecatedSearchResults = async () => {
+      const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
+      const resultJson = await result.json();
+      if (!!resultJson?.results) {
+        setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
+      }
+      setSearchFinished(true);
+    };
+    if (newSearchInput) {
+      fetchNewSearchResults();
+    } else {
+      fetchDeprecatedSearchResults();
+    }
   }, [searchFilter, searchPropertyMapping, searchTerm, firstRenderComplete]);
 
   const submitNewSearch = (event) => {
@@ -357,6 +363,29 @@ const SearchResults = () => {
     const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   };
+
+  const onPageClick = useCallback(
+    async (isForward) => {
+      const currentPage = parseInt(new URLSearchParams(window.location.search).get('page'));
+      const newPage = isForward ? currentPage + 1 : currentPage - 1;
+      if (newPage < 1) {
+        return;
+      }
+      const searchParams = new URLSearchParams(window.location.search);
+      searchParams.set('page', newPage);
+      const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+      window.history.replaceState(null, '', newRelativePathQuery);
+      // setSearchResults([]);
+      setSearchFinished(false);
+      const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
+      const resJson = await result.json();
+      if (!!resJson?.results) {
+        setSearchResults(resJson.results);
+      }
+      setSearchFinished(true);
+    },
+    [searchFilter, searchTerm]
+  );
 
   return (
     <>
@@ -474,6 +503,16 @@ const SearchResults = () => {
                       searchProperty={searchProperty?.[0]}
                     />
                   ))}
+                  {
+                    <>
+                      <Pagination
+                        currentPage={parseInt(new URLSearchParams(window.location.search).get('page'))}
+                        // TODO: add count after facet meta query
+                        onForwardArrowClick={onPageClick.bind(null, true)}
+                        onBackArrowClick={onPageClick.bind(null, false)}
+                      ></Pagination>{' '}
+                    </>
+                  }
                 </StyledSearchResults>
               </>
             )}
@@ -534,19 +573,6 @@ const SearchResults = () => {
                       searchProperty={searchProperty?.[0]}
                     />
                   ))}
-                  {
-                    <>
-                      <Pagination
-                        currentPage={parseInt(new URLSearchParams(window.location.search).get('page'))}
-                        onForwardArrowClick={() => {
-                          console.log('forwardClick');
-                        }}
-                        onBackArrowClick={() => {
-                          console.log('backwardClick');
-                        }}
-                      ></Pagination>{' '}
-                    </>
-                  }
                 </StyledSearchResults>
                 <FiltersContainer>
                   <FilterHeader>{specifySearchText}</FilterHeader>
