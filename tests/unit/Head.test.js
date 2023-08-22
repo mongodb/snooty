@@ -29,13 +29,13 @@ describe('Head', () => {
     beforeEach(() => {
       mockStaticQuery({}, mockEOLSnootyMetadata);
     });
-    it('renders the canonical tag structured from the Head component', () => {
+    it('renders the canonical tag structured from the Head component with trailing slash', () => {
       render(<Head pageContext={mockHeadPageContext} />);
       const { siteUrl } = useSiteMetadata();
       const urlSlug = 'stable';
       const siteBasePrefix = mockHeadPageContext.repoBranches.siteBasePrefix;
 
-      const currentVersion = `${siteUrl}/${siteBasePrefix}/${urlSlug}`;
+      const currentVersion = `${siteUrl}/${siteBasePrefix}/${urlSlug}/`;
 
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
