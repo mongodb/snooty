@@ -302,12 +302,12 @@ const SearchResults = () => {
       return;
     }
     if (newSearchInput) {
-      let searchParams = new URLSearchParams(window.location.search);
+      const searchParams = new URLSearchParams(window.location.search);
       const page = parseInt(searchParams.get('page'));
       if (!page && !!search) {
         searchParams.set('page', '1');
       }
-      let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+      const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
       window.history.replaceState(null, '', newRelativePathQuery);
     }
     setSearchTerm(q);
@@ -366,12 +366,12 @@ const SearchResults = () => {
 
   const onPageClick = useCallback(
     async (isForward) => {
-      const currentPage = parseInt(new URLSearchParams(window.location.search).get('page'));
+      const searchParams = new URLSearchParams(window.location.search);
+      const currentPage = parseInt(searchParams.get('page'));
       const newPage = isForward ? currentPage + 1 : currentPage - 1;
       if (newPage < 1) {
         return;
       }
-      const searchParams = new URLSearchParams(window.location.search);
       searchParams.set('page', newPage);
       const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
       window.history.replaceState(null, '', newRelativePathQuery);
@@ -510,6 +510,9 @@ const SearchResults = () => {
                         // TODO: add count after facet meta query
                         onForwardArrowClick={onPageClick.bind(null, true)}
                         onBackArrowClick={onPageClick.bind(null, false)}
+                        shouldDisableBackArrow={parseInt(new URLSearchParams(window.location.search).get('page')) === 1}
+                        // TODO: should disable if at max count from meta query
+                        shouldDisableForwardArrow={searchResults?.length && searchResults?.length < 10}
                       ></Pagination>{' '}
                     </>
                   }
