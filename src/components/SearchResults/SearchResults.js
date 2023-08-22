@@ -6,13 +6,13 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
+import Pagination from '@leafygreen-ui/pagination';
 import { palette } from '@leafygreen-ui/palette';
-import { H1, Overline } from '@leafygreen-ui/typography';
+import { H1 } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { getSearchbarResultsFromJSON } from '../../utils/get-searchbar-results-from-json';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
@@ -299,6 +299,15 @@ const SearchResults = () => {
       if (!firstRenderComplete) setFirstLoadEmpty(true);
       setSearchFinished(true);
     }
+    if (newSearchInput) {
+      let searchParams = new URLSearchParams(window.location.search);
+      const page = parseInt(searchParams.get('page'));
+      if (!page) {
+        searchParams.set('page', '1');
+      }
+      let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+      window.history.replaceState(null, '', newRelativePathQuery);
+    }
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
@@ -308,16 +317,27 @@ const SearchResults = () => {
   // Update results on a new search query or filters
   // When the filter is changed, find the corresponding property to display
   useEffect(() => {
+    console.log(312);
+    console.log(searchTerm);
+    console.log(searchPropertyMapping);
     if (!searchTerm || !Object.keys(searchPropertyMapping).length) {
       if (!searchTerm && firstRenderComplete) setSearchFinished(true);
       return;
     }
     if (newSearchInput) setSearchFinished(false);
     const fetchNewSearchResults = async () => {
-      const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
+      // const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
+      let result;
+      if (newSearchInput) {
+        let searchParams = new URLSearchParams(window.location.search);
+        const pageNumber = parseInt(searchParams.get('page'));
+        result = await fetch(searchParamsToURL(searchTerm, searchFilter, pageNumber));
+      } else {
+        result = await fetch(searchParamsToURL(searchTerm, searchFilter));
+      }
       const resultJson = await result.json();
       if (!!resultJson?.results) {
-        setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
+        setSearchResults(resultJson.results);
       }
       setSearchFinished(true);
     };
@@ -328,11 +348,12 @@ const SearchResults = () => {
     const newValue = event.target[0]?.value;
     if (newValue === searchTerm) return;
     setSearchResults([]);
-    if (newValue) setSearchFinished(false);
+    if (!!newValue) setSearchFinished(false);
     setSearchTerm(event.target[0].value);
     setFirstLoadEmpty(false);
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('q', newValue);
+    searchParams.set('page', '1');
     const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
   };
@@ -374,9 +395,10 @@ const SearchResults = () => {
                 }}
               />
               <ResultTag style={{ paddingTop: '10px' }}>
-                <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                {/* TODO: add number of results from metadata */}
+                {/* <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
                   {!firstLoadEmpty && <>{searchResults?.length ? searchResults.length : '0'} RESULTS</>}
-                </Overline>
+                </Overline> */}
                 {!!searchFilter && (
                   <FilterBadgesWrapper>
                     {selectedCategory && (
@@ -512,6 +534,19 @@ const SearchResults = () => {
                       searchProperty={searchProperty?.[0]}
                     />
                   ))}
+                  {
+                    <>
+                      <Pagination
+                        currentPage={parseInt(new URLSearchParams(window.location.search).get('page'))}
+                        onForwardArrowClick={() => {
+                          console.log('forwardClick');
+                        }}
+                        onBackArrowClick={() => {
+                          console.log('backwardClick');
+                        }}
+                      ></Pagination>{' '}
+                    </>
+                  }
                 </StyledSearchResults>
                 <FiltersContainer>
                   <FilterHeader>{specifySearchText}</FilterHeader>
