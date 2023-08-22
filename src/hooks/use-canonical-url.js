@@ -1,3 +1,4 @@
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { useSiteMetadata } from './use-site-metadata';
 import { usePathPrefix } from './use-path-prefix';
 
@@ -51,5 +52,6 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
     }
   }
 
+  canonical = assertTrailingSlash(canonical);
   return canonical;
 };
