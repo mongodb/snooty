@@ -377,13 +377,10 @@ const SearchResults = () => {
       searchParams.set('page', newPage);
       const newRelativePathQuery = pathname + '?' + searchParams.toString();
       navigate(newRelativePathQuery);
-      // setSearchResults([]);
       setSearchFinished(false);
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
       const resJson = await result.json();
-      if (!!resJson?.results) {
-        setSearchResults(resJson.results);
-      }
+      setSearchResults(resJson?.results || []);
       setSearchFinished(true);
     },
     [pathname, search, searchFilter, searchTerm]
@@ -514,7 +511,7 @@ const SearchResults = () => {
                         onBackArrowClick={onPageClick.bind(null, false)}
                         shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
                         // TODO: should disable if at max count from meta query
-                        shouldDisableForwardArrow={searchResults?.length && searchResults?.length < 10}
+                        shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
                       ></Pagination>{' '}
                     </>
                   }
