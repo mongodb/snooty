@@ -249,32 +249,44 @@ const MobileSearchButtonWrapper = styled('div')`
 `;
 
 const SearchResults = () => {
-  const { search, pathname } = useLocation();
+  const { search } = useLocation();
+  // reading properties from URL
+  // TODO: move these to context. Search Context should define these properties for getting/setting
+  const searchParams = new URLSearchParams(search);
+  const page = parseInt(searchParams.get('page') || 1);
+  const searchTerm = searchParams.get('q');
+  const searchFilter = searchParams.get('searchProperty');
+
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(null);
-  const [searchField, setSearchField] = useState('');
-  const [searchFilter, setSearchFilter] = useState(null);
+  const [searchField, setSearchField] = useState(searchTerm || '');
   const [searchFinished, setSearchFinished] = useState(false);
-  const [firstRenderComplete, setFirstRenderComplete] = useState(false);
+  const [firstRenderComplete] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const [firstLoadEmpty, setFirstLoadEmpty] = useState(false);
+  const [firstLoadEmpty] = useState(false);
   const { filters, searchPropertyMapping } = useMarianManifests();
   const specifySearchText = 'Specify your search';
 
+  const setSearchFilter = useCallback(
+    (searchProperty) => {
+      const searchParams = new URLSearchParams(search);
+      if (searchProperty) {
+        searchParams.set('searchProperty', searchProperty);
+      } else {
+        searchParams.delete('searchProperty');
+      }
+      searchParams.set('page', '1');
+      const queryPath = '?' + searchParams.toString();
+      navigate(queryPath);
+    },
+    [search]
+  );
+
   const resetFilters = useCallback(() => {
-    setSelectedCategory(null);
-    // Reset version and search filter since a search filter requires both a category and version
-    setSelectedVersion(null);
     setSearchFilter(null);
-    const searchParams = new URLSearchParams(search);
-    searchParams.delete('searchProperty');
-    searchParams.delete('searchVersion');
-    const newRelativePathQuery = pathname + '?' + searchParams.toString();
-    navigate(newRelativePathQuery);
-  }, [pathname, search]);
+  }, [setSearchFilter]);
 
   const showFilterOptions = useCallback(() => {
     setShowMobileFilters(true);
@@ -293,77 +305,50 @@ const SearchResults = () => {
     };
   }
 
-  // Parse the incoming query string for a search term and property
+  // handle all changes to URL, consisting of:
+  // 1) query string
+  // 2) page query param
+  // 3) search property query param
   useEffect(() => {
-    setFirstRenderComplete(true);
-    const { q, searchProperty } = queryString.parse(search);
-    if (q === '' || q === undefined) {
-      if (!firstRenderComplete) setFirstLoadEmpty(true);
-      setSearchFinished(true);
+    if (!searchTerm || !searchPropertyMapping || !Object.keys(searchPropertyMapping).length) {
       return;
     }
-    if (newSearchInput) {
-      const searchParams = new URLSearchParams(search);
-      const page = parseInt(searchParams.get('page'));
-      if (!page && !!search) {
-        searchParams.set('page', '1');
-      }
-      const newRelativePathQuery = pathname + '?' + searchParams.toString();
-      navigate(newRelativePathQuery);
-    }
-    setSearchTerm(q);
-    setSearchField(q);
-    setSearchFilter(searchProperty);
-  }, [search, firstRenderComplete, pathname]);
+    setSearchFinished(false);
 
-  // add loading skeleton when new filter selected and loading results
-  // Update results on a new search query or filters
-  // When the filter is changed, find the corresponding property to display
-  useEffect(() => {
-    if (!searchTerm || !Object.keys(searchPropertyMapping).length) {
-      if (!searchTerm && firstRenderComplete) setSearchFinished(true);
-      return;
-    }
-    if (newSearchInput) setSearchFinished(false);
-    const fetchNewSearchResults = async () => {
-      const searchParams = new URLSearchParams(search);
-      const pageNumber = parseInt(searchParams.get('page'));
-      const result = await fetch(searchParamsToURL(searchTerm, searchFilter, pageNumber));
-      const resultJson = await result.json();
-      if (newSearchInput && !!resultJson?.results) {
-        setSearchResults(resultJson.results);
-      }
-      setSearchFinished(true);
+    const fetchSearchResults = async () => {
+      const res = await fetch(searchParamsToURL(searchTerm, searchFilter, page));
+      return (await res.json()).results;
     };
 
     const fetchDeprecatedSearchResults = async () => {
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter));
       const resultJson = await result.json();
       if (!!resultJson?.results) {
-        setSearchResults(getSearchbarResultsFromJSON(resultJson, searchPropertyMapping));
+        return getSearchbarResultsFromJSON(resultJson, searchPropertyMapping);
       }
-      setSearchFinished(true);
     };
-    if (newSearchInput) {
-      fetchNewSearchResults();
-    } else {
-      fetchDeprecatedSearchResults();
-    }
-  }, [searchFilter, searchPropertyMapping, searchTerm, firstRenderComplete, search]);
+
+    const request = newSearchInput ? fetchSearchResults : fetchDeprecatedSearchResults;
+
+    request()
+      .then(setSearchResults)
+      .catch((e) => {
+        console.error(`Error fetching search results: ${e}`);
+      })
+      .finally(() => {
+        setSearchFinished(true);
+      });
+  }, [searchTerm, page, searchFilter, searchPropertyMapping]);
 
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
     const { page } = queryString.parse(search);
     if (newValue === searchTerm && parseInt(page) === 1) return;
-    setSearchResults([]);
-    if (!!newValue) setSearchFinished(false);
-    setSearchTerm(event.target[0].value);
-    setFirstLoadEmpty(false);
     const searchParams = new URLSearchParams(search);
     searchParams.set('q', newValue);
     searchParams.set('page', '1');
-    const newRelativePathQuery = pathname + '?' + searchParams.toString();
-    navigate(newRelativePathQuery);
+    const queryPath = '?' + searchParams.toString();
+    navigate(queryPath);
   };
 
   const onPageClick = useCallback(
@@ -375,15 +360,15 @@ const SearchResults = () => {
         return;
       }
       searchParams.set('page', newPage);
-      const newRelativePathQuery = pathname + '?' + searchParams.toString();
-      navigate(newRelativePathQuery);
+      const queryPath = '?' + searchParams.toString();
+      navigate(queryPath);
       setSearchFinished(false);
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
       const resJson = await result.json();
       setSearchResults(resJson?.results || []);
       setSearchFinished(true);
     },
-    [pathname, search, searchFilter, searchTerm]
+    [search, searchFilter, searchTerm]
   );
 
   return (
@@ -512,7 +497,7 @@ const SearchResults = () => {
                         shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
                         // TODO: should disable if at max count from meta query
                         shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
-                      ></Pagination>{' '}
+                      ></Pagination>
                     </>
                   }
                 </StyledSearchResults>

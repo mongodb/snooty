@@ -8,7 +8,6 @@ import { getSortedBranchesForProperty } from '../../utils/parse-marian-manifests
 import SearchContext from './SearchContext';
 
 const FILTER_WIDTH = '175px';
-const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
 const SelectWrapper = styled('div')`
   align-items: center;
@@ -22,16 +21,8 @@ const MaxWidthSelect = styled(Select)`
 `;
 
 const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props }) => {
-  const {
-    filters,
-    searchFilter,
-    searchPropertyMapping,
-    setSearchFilter,
-    selectedVersion,
-    selectedCategory,
-    setSelectedVersion,
-    setSelectedCategory,
-  } = useContext(SearchContext);
+  const { filters, searchFilter, searchPropertyMapping, setSearchFilter, setSelectedVersion, setSelectedCategory } =
+    useContext(SearchContext);
 
   // Current category and version for dropdown. If manuallyApplyFilter === true, selectedCategory + selectedVersion
   // will not be set automatically.
@@ -49,10 +40,11 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
         if (setDefaultVersion) {
           setVersion(versions[0]);
         }
+        setSearchFilter(filters[category][versions[0]]);
         setVersionChoices(versions.map((b) => ({ text: b, value: b })));
       }
     },
-    [filters]
+    [filters, setSearchFilter]
   );
 
   const onVersionChange = useCallback(({ value }) => {
@@ -82,12 +74,6 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
     setVersion(null);
     setSelectedCategory(null);
     setSelectedVersion(null);
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.delete('searchProperty');
-    searchParams.delete('searchVersion');
-    if (newSearchInput && searchParams.get('q')) searchParams.set('page', '1');
-    const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-    window.history.replaceState(null, '', newRelativePathQuery);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
 
   // Update selected version and category automatically, if we're not manually applying filters
@@ -110,13 +96,6 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
       setCategory(categoryTitle);
       updateVersionChoices(categoryTitle);
       setVersion(versionSelectorLabel);
-
-      const searchParams = new URLSearchParams(window.location.search);
-      searchParams.set('searchProperty', searchFilter);
-      searchParams.set('searchVersion', versionSelectorLabel);
-      if (newSearchInput) searchParams.set('page', '1');
-      const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-      window.history.pushState(null, '', newRelativePathQuery);
     } else {
       setCategory(null);
       setVersion(null);
@@ -129,13 +108,6 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
     properties.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
     setCategoryChoices(properties.map((p) => ({ text: p, value: p })));
   }, [filters]);
-
-  // Update search filter once a property and version are chosen
-  useEffect(() => {
-    if (filters && selectedCategory && filters[selectedCategory] && selectedVersion && !manuallyApplyFilters) {
-      setSearchFilter(filters[selectedCategory][selectedVersion]);
-    }
-  }, [filters, manuallyApplyFilters, selectedVersion, selectedCategory, setSearchFilter]);
 
   return (
     <div {...props}>
