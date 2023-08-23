@@ -1,3 +1,4 @@
+import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
@@ -248,7 +249,7 @@ const MobileSearchButtonWrapper = styled('div')`
 `;
 
 const SearchResults = () => {
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(null);
@@ -268,12 +269,12 @@ const SearchResults = () => {
     // Reset version and search filter since a search filter requires both a category and version
     setSelectedVersion(null);
     setSearchFilter(null);
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(search);
     searchParams.delete('searchProperty');
     searchParams.delete('searchVersion');
-    const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-    window.history.replaceState(null, '', newRelativePathQuery);
-  }, []);
+    const newRelativePathQuery = pathname + '?' + searchParams.toString();
+    navigate(newRelativePathQuery);
+  }, [pathname, search]);
 
   const showFilterOptions = useCallback(() => {
     setShowMobileFilters(true);
@@ -302,18 +303,18 @@ const SearchResults = () => {
       return;
     }
     if (newSearchInput) {
-      const searchParams = new URLSearchParams(window.location.search);
+      const searchParams = new URLSearchParams(search);
       const page = parseInt(searchParams.get('page'));
       if (!page && !!search) {
         searchParams.set('page', '1');
       }
-      const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-      window.history.replaceState(null, '', newRelativePathQuery);
+      const newRelativePathQuery = pathname + '?' + searchParams.toString();
+      navigate(newRelativePathQuery);
     }
     setSearchTerm(q);
     setSearchField(q);
     setSearchFilter(searchProperty);
-  }, [search, firstRenderComplete]);
+  }, [search, firstRenderComplete, pathname]);
 
   // add loading skeleton when new filter selected and loading results
   // Update results on a new search query or filters
@@ -325,7 +326,7 @@ const SearchResults = () => {
     }
     if (newSearchInput) setSearchFinished(false);
     const fetchNewSearchResults = async () => {
-      let searchParams = new URLSearchParams(window.location.search);
+      const searchParams = new URLSearchParams(search);
       const pageNumber = parseInt(searchParams.get('page'));
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter, pageNumber));
       const resultJson = await result.json();
@@ -348,33 +349,34 @@ const SearchResults = () => {
     } else {
       fetchDeprecatedSearchResults();
     }
-  }, [searchFilter, searchPropertyMapping, searchTerm, firstRenderComplete]);
+  }, [searchFilter, searchPropertyMapping, searchTerm, firstRenderComplete, search]);
 
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
-    if (newValue === searchTerm) return;
+    const { page } = queryString.parse(search);
+    if (newValue === searchTerm && parseInt(page) === 1) return;
     setSearchResults([]);
     if (!!newValue) setSearchFinished(false);
     setSearchTerm(event.target[0].value);
     setFirstLoadEmpty(false);
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(search);
     searchParams.set('q', newValue);
     searchParams.set('page', '1');
-    const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-    window.history.replaceState(null, '', newRelativePathQuery);
+    const newRelativePathQuery = pathname + '?' + searchParams.toString();
+    navigate(newRelativePathQuery);
   };
 
   const onPageClick = useCallback(
     async (isForward) => {
-      const searchParams = new URLSearchParams(window.location.search);
+      const searchParams = new URLSearchParams(search);
       const currentPage = parseInt(searchParams.get('page'));
       const newPage = isForward ? currentPage + 1 : currentPage - 1;
       if (newPage < 1) {
         return;
       }
       searchParams.set('page', newPage);
-      const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-      window.history.replaceState(null, '', newRelativePathQuery);
+      const newRelativePathQuery = pathname + '?' + searchParams.toString();
+      navigate(newRelativePathQuery);
       // setSearchResults([]);
       setSearchFinished(false);
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
@@ -384,7 +386,7 @@ const SearchResults = () => {
       }
       setSearchFinished(true);
     },
-    [searchFilter, searchTerm]
+    [pathname, search, searchFilter, searchTerm]
   );
 
   return (
@@ -506,11 +508,11 @@ const SearchResults = () => {
                   {
                     <>
                       <Pagination
-                        currentPage={parseInt(new URLSearchParams(window.location.search).get('page'))}
+                        currentPage={parseInt(new URLSearchParams(search).get('page'))}
                         // TODO: add count after facet meta query
                         onForwardArrowClick={onPageClick.bind(null, true)}
                         onBackArrowClick={onPageClick.bind(null, false)}
-                        shouldDisableBackArrow={parseInt(new URLSearchParams(window.location.search).get('page')) === 1}
+                        shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
                         // TODO: should disable if at max count from meta query
                         shouldDisableForwardArrow={searchResults?.length && searchResults?.length < 10}
                       ></Pagination>{' '}
