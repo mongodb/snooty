@@ -250,15 +250,22 @@ const MobileSearchButtonWrapper = styled('div')`
 const SearchResults = () => {
   const { search } = useLocation();
 
-  const { page, searchTerm, searchFilter, selectedCategory, selectedVersion, searchPropertyMapping } =
-    useContext(SearchContext);
+  const {
+    page,
+    searchTerm,
+    searchFilter,
+    selectedCategory,
+    selectedVersion,
+    searchPropertyMapping,
+    showMobileFilters,
+    setShowMobileFilters,
+  } = useContext(SearchContext);
 
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchField, setSearchField] = useState(searchTerm || '');
   const [searchFinished, setSearchFinished] = useState(false);
   const [firstRenderComplete] = useState(false);
-  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [firstLoadEmpty] = useState(false);
   const specifySearchText = 'Specify your search';
 
@@ -283,7 +290,7 @@ const SearchResults = () => {
 
   const showFilterOptions = useCallback(() => {
     setShowMobileFilters(true);
-  }, []);
+  }, [setShowMobileFilters]);
 
   let mobileFilterButton = {
     glyph: 'X',

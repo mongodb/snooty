@@ -1,12 +1,15 @@
 // Tests for the search results page
+import * as gatsby from 'gatsby';
 import React from 'react';
 import { render, within } from '@testing-library/react';
+import { createHistory, createMemorySource, LocationProvider } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import { mockLocation } from '../utils/mock-location';
 import { tick, setMobile } from '../utils';
 import SearchResults from '../../src/components/SearchResults';
+import { SearchContextProvider } from '../../src/components/SearchResults/SearchContext';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as RealmUtil from '../../src/utils/realm';
 import mockInputData from '../utils/data/marian-manifests.json';
@@ -107,10 +110,29 @@ const clearAllFilters = async (wrapper, screenSize) => {
   tick();
 };
 
+function renderSearchResults({ route = '/search', history = createHistory(createMemorySource(route)) } = {}) {
+  return render(
+    <LocationProvider history={history}>
+      <SearchContextProvider>
+        <SearchResults />
+      </SearchContextProvider>
+    </LocationProvider>
+  );
+}
+
 describe('Search Results Page', () => {
   jest.useFakeTimers();
-  mockStaticQuery();
-  jest.spyOn(RealmUtil, 'fetchSearchPropertyMapping').mockImplementation(() => mockInputData.searchPropertyMapping);
+  let navigateSpy;
+
+  beforeEach(() => {
+    mockStaticQuery();
+    jest.spyOn(RealmUtil, 'fetchSearchPropertyMapping').mockImplementation(() => mockInputData.searchPropertyMapping);
+    navigateSpy = jest.spyOn(gatsby, 'navigate').mockImplementation((...args) => {});
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
   beforeAll(() => {
     window.fetch = mockMarianFetch;
@@ -122,21 +144,21 @@ describe('Search Results Page', () => {
 
   it('renders correctly without browser', () => {
     mockLocation(null);
-    const tree = render(<SearchResults />);
+    const tree = renderSearchResults();
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
   it('renders loading images before returning nonempty results', async () => {
     let renderLoadingSkeletonImgs;
     mockLocation('?q=stitch');
-    renderLoadingSkeletonImgs = render(<SearchResults />);
+    renderLoadingSkeletonImgs = renderSearchResults();
     expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
 
   it('renders loading images before returning no results', async () => {
     let renderLoadingSkeletonImgs;
     mockLocation('?q=noresultsreturned');
-    renderLoadingSkeletonImgs = render(<SearchResults />);
+    renderLoadingSkeletonImgs = renderSearchResults();
     expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
 
@@ -144,7 +166,7 @@ describe('Search Results Page', () => {
     let renderEmptyResults;
     mockLocation('?q=noresultsreturned');
     await act(async () => {
-      renderEmptyResults = render(<SearchResults />);
+      renderEmptyResults = renderSearchResults();
     });
     expect(renderEmptyResults.queryAllByText('No results found')).toBeTruthy();
   });
@@ -153,7 +175,7 @@ describe('Search Results Page', () => {
     let renderSearchLanding;
     mockLocation('');
     await act(async () => {
-      renderSearchLanding = render(<SearchResults />);
+      renderSearchLanding = renderSearchResults();
     });
     expect(renderSearchLanding.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
   });
@@ -162,7 +184,7 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectUnfilteredSearchResultTags(renderStitchResults);
@@ -173,7 +195,7 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=stitch&searchProperty=realm-master');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectFilteredResults(renderStitchResults);
@@ -183,43 +205,42 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=realm');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
   });
 
-  it('updates the page UI when a property is changed', async () => {
+  it('navigates to a new page with updated query parameters when a property is changed', async () => {
     let renderStitchResults;
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      const renderRes = renderSearchResults();
+      renderStitchResults = renderRes;
     });
     expectUnfilteredResults(renderStitchResults);
 
     // Change the filters, which should change the shown results
     await filterByRealm(renderStitchResults);
-    renderStitchResults.debug();
-    // expectFilteredResults(renderStitchResults, true);
+    const expectedQuery = '?q=stitch&searchProperty=realm-master&page=1';
+    expect(navigateSpy).toBeCalled();
+    expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
   });
 
-  it('resets search filters when hitting the "clear all filters" button', async () => {
+  it('navigates with new search query parameters when hitting the "clear all filters" button', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&searchProperty=realm-master');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
-    expectUnfilteredResults(renderStitchResults);
+    expectFilteredResults(renderStitchResults);
 
-    // Change filters
-    await filterByRealm(renderStitchResults);
-    // expectFilteredResults(renderStitchResults, true);
-
-    // Remove filters
-    // await act(async () => {
-    //   await clearAllFilters(renderStitchResults);
-    // });
-    // expectUnfilteredResults(renderStitchResults);
+    await act(async () => {
+      await clearAllFilters(renderStitchResults);
+    });
+    const expectedQuery = '?q=stitch&page=1';
+    expect(navigateSpy).toBeCalled();
+    expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
   });
 
   it('specifies search filters through mobile', async () => {
@@ -227,7 +248,7 @@ describe('Search Results Page', () => {
     setMobile();
     mockLocation('?q=stitch');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expectUnfilteredResults(renderStitchResults);
 
@@ -237,55 +258,15 @@ describe('Search Results Page', () => {
     });
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
-    // Set filters but don't apply them
-    // Filter using listbox at index 2, which should appear on mobile
-    await filterByRealm(renderStitchResults, 'mobile');
-    expectUnfilteredResults(renderStitchResults);
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
-
     // Apply filters
+    await filterByRealm(renderStitchResults, 'mobile');
     await act(async () => {
       const applyFiltersButton = renderStitchResults.getByText('Apply filters').closest('button');
       userEvent.click(applyFiltersButton);
       tick();
     });
-    // expectFilteredResults(renderStitchResults);
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
-
-    // Remove filters
-    await act(async () => {
-      await clearAllFilters(renderStitchResults, 'mobile');
-    });
-    expectUnfilteredResults(renderStitchResults);
-  });
-
-  it('cancels search filter application on mobile', async () => {
-    let renderStitchResults;
-    setMobile();
-    mockLocation('?q=stitch');
-    await act(async () => {
-      renderStitchResults = render(<SearchResults />);
-    });
-    expectUnfilteredResults(renderStitchResults);
-
-    // Open mobile search options
-    await act(async () => {
-      await openMobileSearch(renderStitchResults);
-    });
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
-
-    // Set filters but don't apply them
-    await filterByRealm(renderStitchResults, 'mobile');
-    expectUnfilteredResults(renderStitchResults);
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
-
-    // Hit back button
-    await act(async () => {
-      const backButton = renderStitchResults.getByText(MOBILE_SEARCH_BACK_BUTTON_TEXT);
-      userEvent.click(backButton);
-      tick();
-    });
-    expectUnfilteredResults(renderStitchResults);
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
+    const expectedQuery = '?q=stitch&searchProperty=realm-master&page=1';
+    expect(navigateSpy).toBeCalled();
+    expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
   });
 });

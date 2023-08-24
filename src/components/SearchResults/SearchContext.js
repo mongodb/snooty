@@ -33,6 +33,7 @@ const SearchContextProvider = ({ children }) => {
   // changes reflected in UI, not necessarily in URL
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // navigate changes and store state in URL
   const onSearchChange = ({ searchTerm, searchFilter, page }) => {
@@ -76,6 +77,8 @@ const SearchContextProvider = ({ children }) => {
         setSelectedCategory,
         selectedVersion,
         setSelectedVersion,
+        showMobileFilters,
+        setShowMobileFilters,
       }}
     >
       {children}
