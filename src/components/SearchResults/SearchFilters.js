@@ -21,68 +21,76 @@ const MaxWidthSelect = styled(Select)`
 `;
 
 const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props }) => {
-  const { filters, searchFilter, searchPropertyMapping, setSearchFilter, setSelectedVersion, setSelectedCategory } =
-    useContext(SearchContext);
+  const {
+    filters,
+    searchFilter,
+    searchPropertyMapping,
+    setSearchFilter,
+    selectedCategory,
+    selectedVersion,
+    setSelectedVersion,
+    setSelectedCategory,
+  } = useContext(SearchContext);
 
-  // Current category and version for dropdown. If manuallyApplyFilter === true, selectedCategory + selectedVersion
+  // Current selectedCategory and selectedVersion for dropdown. If manuallyApplyFilter === true, selectedCategory + selectedVersion
   // will not be set automatically.
   const [categoryChoices, setCategoryChoices] = useState([]);
-  const [category, setCategory] = useState(null);
   const [versionChoices, setVersionChoices] = useState([]);
-  const [version, setVersion] = useState(null);
 
   const hasOneVersion = useMemo(() => versionChoices && versionChoices.length === 1, [versionChoices]);
 
   const updateVersionChoices = useCallback(
-    (category, setDefaultVersion = false) => {
-      if (filters && filters[category]) {
-        const versions = getSortedBranchesForProperty(filters, category);
+    (selectedCategory, setDefaultVersion = false) => {
+      if (filters && filters[selectedCategory]) {
+        const versions = getSortedBranchesForProperty(filters, selectedCategory);
         if (setDefaultVersion) {
-          setVersion(versions[0]);
+          setSelectedVersion(versions[0]);
+          setSearchFilter(filters[selectedCategory][versions[0]]);
         }
-        setSearchFilter(filters[category][versions[0]]);
         setVersionChoices(versions.map((b) => ({ text: b, value: b })));
       }
     },
-    [filters, setSearchFilter]
+    [filters, setSearchFilter, setSelectedVersion]
   );
 
-  const onVersionChange = useCallback(({ value }) => {
-    setVersion(value);
-  }, []);
+  const onVersionChange = useCallback(
+    ({ value }) => {
+      setSelectedVersion(value);
+      setSearchFilter(filters[selectedCategory][value]);
+    },
+    [filters, selectedCategory, setSearchFilter, setSelectedVersion]
+  );
 
   const onCategoryChange = useCallback(
     ({ value }) => {
-      setCategory(value);
+      setSelectedCategory(value);
       updateVersionChoices(value, true);
     },
-    [updateVersionChoices]
+    [setSelectedCategory, updateVersionChoices]
   );
 
   const applyFilters = useCallback(() => {
-    setSelectedCategory(category);
-    setSelectedVersion(version);
+    setSelectedCategory(selectedCategory);
+    setSelectedVersion(selectedVersion);
 
     if (onApplyFilters) {
       onApplyFilters();
     }
-  }, [version, onApplyFilters, category, setSelectedVersion, setSelectedCategory]);
+  }, [selectedVersion, onApplyFilters, selectedCategory, setSelectedVersion, setSelectedCategory]);
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
-    setCategory(null);
-    setVersion(null);
     setSelectedCategory(null);
     setSelectedVersion(null);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
 
-  // Update selected version and category automatically, if we're not manually applying filters
+  // Update selected selectedVersion and selectedCategory automatically, if we're not manually applying filters
   useEffect(() => {
     if (!manuallyApplyFilters) {
-      setSelectedVersion(version);
-      setSelectedCategory(category);
+      setSelectedVersion(selectedVersion);
+      setSelectedCategory(selectedCategory);
     }
-  }, [version, manuallyApplyFilters, category, setSelectedVersion, setSelectedCategory]);
+  }, [selectedVersion, manuallyApplyFilters, selectedCategory, setSelectedVersion, setSelectedCategory]);
 
   // Update filters to match an existing filter should it exist
   useEffect(() => {
@@ -92,13 +100,8 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
         return;
       }
 
-      const { categoryTitle, versionSelectorLabel } = currentFilter;
-      setCategory(categoryTitle);
+      const { categoryTitle } = currentFilter;
       updateVersionChoices(categoryTitle);
-      setVersion(versionSelectorLabel);
-    } else {
-      setCategory(null);
-      setVersion(null);
     }
   }, [filters, searchFilter, searchPropertyMapping, updateVersionChoices]);
 
@@ -116,7 +119,7 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
           choices={categoryChoices}
           onChange={onCategoryChange}
           defaultText="Filter by Category"
-          value={category}
+          value={selectedCategory}
         />
       </SelectWrapper>
       <SelectWrapper>
@@ -124,9 +127,9 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
           choices={versionChoices}
           onChange={onVersionChange}
           // We disable this select if there is only one option
-          disabled={!category || hasOneVersion}
+          disabled={!selectedCategory || hasOneVersion}
           defaultText="Filter by Version"
-          value={version}
+          value={selectedVersion}
         />
       </SelectWrapper>
       {manuallyApplyFilters ? (
