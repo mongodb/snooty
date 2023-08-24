@@ -2,7 +2,6 @@
 import * as gatsby from 'gatsby';
 import React from 'react';
 import { render, within } from '@testing-library/react';
-import { createHistory, createMemorySource, LocationProvider } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
@@ -110,13 +109,11 @@ const clearAllFilters = async (wrapper, screenSize) => {
   tick();
 };
 
-function renderSearchResults({ route = '/search', history = createHistory(createMemorySource(route)) } = {}) {
+function renderSearchResults() {
   return render(
-    <LocationProvider history={history}>
-      <SearchContextProvider>
-        <SearchResults />
-      </SearchContextProvider>
-    </LocationProvider>
+    <SearchContextProvider>
+      <SearchResults />
+    </SearchContextProvider>
   );
 }
 
@@ -142,9 +139,12 @@ describe('Search Results Page', () => {
     window.fetch = null;
   });
 
-  it('renders correctly without browser', () => {
+  it('renders correctly without browser', async () => {
     mockLocation(null);
-    const tree = renderSearchResults();
+    let tree;
+    await act(async () => {
+      tree = renderSearchResults();
+    });
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
