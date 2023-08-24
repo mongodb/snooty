@@ -254,6 +254,7 @@ const SearchResults = () => {
     page,
     searchTerm,
     searchFilter,
+    setSearchFilter,
     selectedCategory,
     selectedVersion,
     searchPropertyMapping,
@@ -268,21 +269,6 @@ const SearchResults = () => {
   const [firstRenderComplete] = useState(false);
   const [firstLoadEmpty] = useState(false);
   const specifySearchText = 'Specify your search';
-
-  const setSearchFilter = useCallback(
-    (searchProperty) => {
-      const searchParams = new URLSearchParams(search);
-      if (searchProperty) {
-        searchParams.set('searchProperty', searchProperty);
-      } else {
-        searchParams.delete('searchProperty');
-      }
-      searchParams.set('page', '1');
-      const queryPath = '?' + searchParams.toString();
-      navigate(queryPath);
-    },
-    [search]
-  );
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
