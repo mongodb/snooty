@@ -176,7 +176,7 @@ exports.sourceNodes = async ({
           const page_id = raw_page_id === `index` ? `/` : `/${raw_page_id}`;
           const project = page.page_id.split(`/`)[0];
 
-          const pageNodeId = createNodeId(page_id + branch);
+          const pageNodeId = createNodeId(page_id + project + branch);
           const pagePathNodeId = pageNodeId + `/path`;
 
           if (shouldDeleteContentNode) {
