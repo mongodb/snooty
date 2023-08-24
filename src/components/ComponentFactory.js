@@ -67,6 +67,7 @@ import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
+import ChatbotUi from './ChatbotUi';
 
 import VersionModified from './VersionModified';
 import Video from './Video';
@@ -132,6 +133,7 @@ const componentMap = {
   'card-group': CardGroup,
   chapter: Chapter,
   chapters: Chapters,
+  chatbot: ChatbotUi,
   code: Code,
   'io-code-block': CodeIO,
   cond: Cond,
