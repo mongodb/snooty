@@ -249,12 +249,6 @@ const MobileSearchButtonWrapper = styled('div')`
 
 const SearchResults = () => {
   const { search } = useLocation();
-  // reading properties from URL
-  // TODO: move these to context. Search Context should define these properties for getting/setting
-  // const searchParams = new URLSearchParams(search);
-  // const page = parseInt(searchParams.get('page') || 1);
-  // const searchTerm = searchParams.get('q');
-  // const searchFilter = searchParams.get('searchProperty');
 
   const { page, searchTerm, searchFilter, selectedCategory, selectedVersion, searchPropertyMapping } =
     useContext(SearchContext);
