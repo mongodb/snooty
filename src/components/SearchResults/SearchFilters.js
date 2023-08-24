@@ -84,13 +84,26 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
     setSelectedVersion(null);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
 
-  // Update selected selectedVersion and selectedCategory automatically, if we're not manually applying filters
+  // when filters are loaded, validate searchFilter from URL
+  // against available searchPropertyMapping
+  // update selected selectedVersion and selectedCategory automatically, if we're not manually applying filters
   useEffect(() => {
-    if (!manuallyApplyFilters) {
-      setSelectedVersion(selectedVersion);
-      setSelectedCategory(selectedCategory);
+    if (!filters || !Object.keys(filters).length) {
+      return;
     }
-  }, [selectedVersion, manuallyApplyFilters, selectedCategory, setSelectedVersion, setSelectedCategory]);
+    const currentFilter = searchPropertyMapping[searchFilter];
+    if (!currentFilter) {
+      setSelectedCategory(null);
+      setSelectedVersion(null);
+      return;
+    }
+
+    const { categoryTitle, versionSelectorLabel } = currentFilter;
+    if (!manuallyApplyFilters) {
+      setSelectedCategory(categoryTitle);
+      setSelectedVersion(versionSelectorLabel);
+    }
+  }, [manuallyApplyFilters, setSelectedVersion, setSelectedCategory, filters, searchFilter, searchPropertyMapping]);
 
   // Update filters to match an existing filter should it exist
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
@@ -31,7 +31,6 @@ const SearchContextProvider = ({ children }) => {
 
   // state vars to derive selected category and versions in dropdown
   // changes reflected in UI, not necessarily in URL
-
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
 
@@ -43,7 +42,11 @@ const SearchContextProvider = ({ children }) => {
     }
     if (searchFilter !== undefined) {
       // searchFilter can be null
-      newSearch.set('searchProperty', searchFilter);
+      if (searchFilter === null) {
+        newSearch.delete('searchProperty');
+      } else {
+        newSearch.set('searchProperty', searchFilter);
+      }
       newSearch.set('page', 1);
     }
     if (page) {
@@ -51,23 +54,6 @@ const SearchContextProvider = ({ children }) => {
     }
     navigate(`?${newSearch.toString()}`);
   };
-
-  // when filters are loaded, validate searchFilter from URL
-  // against available searchPropertyMapping
-  useEffect(() => {
-    if (filters && searchFilter) {
-      const currentFilter = searchPropertyMapping[searchFilter];
-      if (!currentFilter) {
-        setSelectedCategory(null);
-        setSelectedVersion(null);
-        return;
-      }
-
-      const { categoryTitle, versionSelectorLabel } = currentFilter;
-      setSelectedCategory(categoryTitle);
-      setSelectedVersion(versionSelectorLabel);
-    }
-  }, [filters, searchFilter, searchPropertyMapping]);
 
   return (
     <SearchContext.Provider

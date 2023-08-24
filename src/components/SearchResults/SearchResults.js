@@ -298,10 +298,8 @@ const SearchResults = () => {
     };
   }
 
-  // handle all changes to URL, consisting of:
-  // 1) query string
-  // 2) page query param
-  // 3) search property query param
+  // async call to fetch search results
+  // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
     if (!searchTerm || !searchPropertyMapping || !Object.keys(searchPropertyMapping).length) {
       return;
