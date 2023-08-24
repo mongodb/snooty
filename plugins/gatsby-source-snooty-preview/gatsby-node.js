@@ -1,4 +1,3 @@
-const _ = require(`lodash`);
 const { getDataStore } = require('gatsby/dist/datastore');
 const path = require('path');
 const stream = require('stream');
@@ -6,7 +5,6 @@ const { promisify } = require('util');
 const fs = require('fs').promises;
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
 const { saveStaticFiles } = require('../../src/utils/setup/save-asset-files');
-const { siteMetadata } = require('../../src/utils/site-metadata');
 const { getNestedValue } = require('../../src/utils/get-nested-value');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
@@ -15,9 +13,6 @@ const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
 
-let isAssociatedProductPerProjectAndBranch = {};
-let associatedReposInfoPerProjectAndBranch = {};
-let db;
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
 
 // Global variable to allow webhookBody from sourceNodes step to be passed down
@@ -233,7 +228,7 @@ exports.sourceNodes = async ({
 
   // Source old nodes.
   console.time(`old source nodes`);
-  const { _db, _isAssociatedProductPerProjectAndBranch, _associatedReposInfoPerProjectAndBranch } = await sourceNodes({
+  await sourceNodes({
     hasOpenAPIChangelog,
     github_username: GATSBY_CLOUD_SITE_USER,
     createNode,
@@ -241,9 +236,6 @@ exports.sourceNodes = async ({
     createNodeId,
     getNodesByType,
   });
-  db = _db;
-  isAssociatedProductPerProjectAndBranch = _isAssociatedProductPerProjectAndBranch;
-  associatedReposInfoPerProjectAndBranch = _associatedReposInfoPerProjectAndBranch;
   console.timeEnd(`old source nodes`);
   isFirstRun = false;
 };
@@ -306,75 +298,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic('There was an error in the graphql query', result.errors);
   }
 
-  let perProjectRepoBranches = new Map();
-  for (const project of result.data.allPagePath.allProjects) {
-    let repoBranches = perProjectRepoBranches.get(project);
-
-    if (!repoBranches) {
-      try {
-        const repoInfo = await db.stitchInterface.fetchRepoBranches(project);
-        let errMsg;
-
-        if (!repoInfo) {
-          errMsg = `Repo data for ${project} could not be found.`;
-        }
-
-        // We should expect the number of branches for a docs repo to be 1 or more.
-        if (!repoInfo.branches?.length) {
-          errMsg = `No version information found for ${project}`;
-        }
-
-        if (errMsg) {
-          throw errMsg;
-        }
-
-        // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
-        // dotcom environments seem to be consistent.
-        let envKey = siteMetadata.snootyEnv;
-        if (!envKey || envKey === 'development') {
-          envKey = 'dotcomprd';
-        } else if (envKey === 'production') {
-          envKey = 'prd';
-        } else if (envKey === 'staging') {
-          envKey = 'stg';
-        }
-
-        // We're overfetching data here. We only need branches and prefix at the least
-        repoBranches = {
-          branches: repoInfo.branches,
-          siteBasePrefix: repoInfo.prefix[envKey],
-        };
-
-        if (repoInfo.groups?.length > 0) {
-          repoBranches.groups = repoInfo.groups;
-        }
-      } catch (err) {
-        // Fetching repoBranches data shouldn't be vital for preview/staging builds,
-        // so we do not exit the process
-        console.error(err);
-        throw err;
-      }
-    }
-
-    if (repoBranches.groups) {
-      repoBranches.groups = repoBranches.groups.map((group) => {
-        return _.omit(group, [`id`]);
-      });
-    } else {
-      repoBranches.groups = [];
-    }
-
-    if (repoBranches.branches) {
-      repoBranches.branches = repoBranches.branches.map((group) => {
-        return _.omit(group, [`id`]);
-      });
-    } else {
-      repoBranches.branches = [];
-    }
-
-    perProjectRepoBranches.set(project, repoBranches);
-  }
-
   try {
     result.data.allPagePath.nodes.forEach((node) => {
       let pagePath;
@@ -383,16 +306,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       } else {
         pagePath = node.page_id;
       }
-      const projectAndBranchId = `${node.project}-${node.branch}`;
+
       createPage({
         path: pagePath,
         component: templatePath,
         context: {
           id: node.pageNodeId,
           slug: node.page_id,
-          repoBranches: perProjectRepoBranches.get(node.project),
-          associatedReposInfo: associatedReposInfoPerProjectAndBranch[projectAndBranchId],
-          isAssociatedProduct: isAssociatedProductPerProjectAndBranch[projectAndBranchId],
+          repoBranches: {},
+          associatedReposInfo: {},
+          isAssociatedProduct: {},
         },
       });
     });
