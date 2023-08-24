@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
@@ -41,8 +41,10 @@ const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 const ChatbotUi = () => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui">
-      {/* We can wrap this in a Suspend to render a loading state if we decided we want that */}
-      <LazyChatbot />
+      {/* We wrapped this in a Suspend. We can use this opportunity to render a loading state if we decided we want that */}
+      <Suspense fallback={<div />}>
+        <LazyChatbot />
+      </Suspense>
     </StyledChatBotUiContainer>
   );
 };
