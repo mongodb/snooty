@@ -311,7 +311,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
               >
                 <path
                   clip-rule="evenodd"
-                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   fill="currentColor"
                   fill-rule="evenodd"
                 />
@@ -370,7 +370,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
               >
                 <path
                   clip-rule="evenodd"
-                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   fill="currentColor"
                   fill-rule="evenodd"
                 />
@@ -396,7 +396,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
               >
                 <path
                   clip-rule="evenodd"
-                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   fill="currentColor"
                   fill-rule="evenodd"
                 />
@@ -427,7 +427,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
               >
                 <path
                   clip-rule="evenodd"
-                  d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   fill="currentColor"
                   fill-rule="evenodd"
                 />
@@ -714,7 +714,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
             >
               <path
                 clip-rule="evenodd"
-                d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -750,7 +750,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
             >
               <path
                 clip-rule="evenodd"
-                d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -804,7 +804,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
             >
               <path
                 clip-rule="evenodd"
-                d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
