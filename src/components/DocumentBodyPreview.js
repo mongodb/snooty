@@ -82,6 +82,7 @@ const DocumentBody = (props) => {
 
   return (
     <>
+      <ComponentFactory nodeData={{ type: 'chatbot' }} />
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
       <Widgets
         location={location}

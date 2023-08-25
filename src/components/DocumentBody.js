@@ -92,7 +92,6 @@ const DocumentBody = (props) => {
 
   return (
     <>
-      <ComponentFactory nodeData={{ type: 'chatbot' }} />
       <Widgets
         location={location}
         pageOptions={page?.options}
