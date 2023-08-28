@@ -16,7 +16,6 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
-// import { useMarianManifests } from '../../hooks/use-marian-manifests';
 import Tag, { searchTagStyleFeature } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
