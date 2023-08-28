@@ -246,7 +246,7 @@ describe('Search Results Page', () => {
   it('specifies search filters through mobile', async () => {
     let renderStitchResults;
     setMobile();
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1');
     await act(async () => {
       renderStitchResults = renderSearchResults();
     });
@@ -265,8 +265,39 @@ describe('Search Results Page', () => {
       userEvent.click(applyFiltersButton);
       tick();
     });
-    const expectedQuery = '?q=stitch&searchProperty=realm-master&page=1';
+    const expectedQuery = '?q=stitch&page=1&searchProperty=realm-master';
     expect(navigateSpy).toBeCalled();
     expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
+  });
+
+  it('cancels search filter application on mobile', async () => {
+    let renderStitchResults;
+    setMobile();
+    mockLocation('?q=stitch&page=1');
+    await act(async () => {
+      renderStitchResults = renderSearchResults();
+    });
+    expectUnfilteredResults(renderStitchResults);
+
+    // Open mobile search options
+    await act(async () => {
+      await openMobileSearch(renderStitchResults);
+    });
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
+
+    // Set filters but don't apply them
+    await filterByRealm(renderStitchResults, 'mobile');
+    expectUnfilteredResults(renderStitchResults);
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
+
+    // Hit back button
+    await act(async () => {
+      const backButton = renderStitchResults.getByText(MOBILE_SEARCH_BACK_BUTTON_TEXT);
+      userEvent.click(backButton);
+      tick();
+    });
+    expectUnfilteredResults(renderStitchResults);
+    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
+    expect(navigateSpy).toHaveBeenCalledTimes(0);
   });
 });

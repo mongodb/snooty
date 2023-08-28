@@ -36,6 +36,8 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
   // will not be set automatically.
   const [categoryChoices, setCategoryChoices] = useState([]);
   const [versionChoices, setVersionChoices] = useState([]);
+  const [mobileCategory, setMobileCategory] = useState(null);
+  const [mobileVersion, setMobileVersion] = useState(null);
 
   const hasOneVersion = useMemo(() => versionChoices && versionChoices.length === 1, [versionChoices]);
 
@@ -44,44 +46,72 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
       if (filters && filters[selectedCategory]) {
         const versions = getSortedBranchesForProperty(filters, selectedCategory);
         if (setDefaultVersion) {
-          setSelectedVersion(versions[0]);
-          setSearchFilter(filters[selectedCategory][versions[0]]);
+          const defaultVersion = versions[0];
+          if (manuallyApplyFilters) {
+            setMobileVersion(defaultVersion);
+          } else {
+            setSelectedVersion(defaultVersion);
+            setSearchFilter(filters[selectedCategory][defaultVersion]);
+          }
         }
         setVersionChoices(versions.map((b) => ({ text: b, value: b })));
       }
     },
-    [filters, setSearchFilter, setSelectedVersion]
+    [filters, manuallyApplyFilters, setSearchFilter, setSelectedVersion]
   );
 
   const onVersionChange = useCallback(
     ({ value }) => {
-      setSelectedVersion(value);
-      setSearchFilter(filters[selectedCategory][value]);
+      if (!manuallyApplyFilters) {
+        setSelectedVersion(value);
+        setSearchFilter(filters[selectedCategory][value]);
+      } else {
+        setMobileVersion(value);
+      }
     },
-    [filters, selectedCategory, setSearchFilter, setSelectedVersion]
+    [filters, manuallyApplyFilters, selectedCategory, setSearchFilter, setSelectedVersion]
   );
 
   const onCategoryChange = useCallback(
     ({ value }) => {
-      setSelectedCategory(value);
+      if (!manuallyApplyFilters) {
+        setSelectedCategory(value);
+      } else {
+        setMobileCategory(value);
+      }
       updateVersionChoices(value, true);
     },
-    [setSelectedCategory, updateVersionChoices]
+    [manuallyApplyFilters, setSelectedCategory, updateVersionChoices]
   );
 
   const applyFilters = useCallback(() => {
-    setSelectedCategory(selectedCategory);
-    setSelectedVersion(selectedVersion);
+    const selectedFilter = filters?.[mobileCategory]?.[mobileVersion];
+    if (manuallyApplyFilters && selectedFilter) {
+      setSelectedCategory(mobileCategory);
+      setSelectedVersion(mobileVersion);
+      setSearchFilter(selectedFilter);
+    }
 
     if (onApplyFilters) {
       onApplyFilters();
     }
-  }, [selectedVersion, onApplyFilters, selectedCategory, setSelectedVersion, setSelectedCategory]);
+  }, [
+    filters,
+    mobileCategory,
+    mobileVersion,
+    manuallyApplyFilters,
+    onApplyFilters,
+    setSelectedCategory,
+    setSelectedVersion,
+    setSearchFilter,
+  ]);
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
     setSelectedCategory(null);
     setSelectedVersion(null);
+    setMobileCategory(null);
+    setMobileVersion(null);
   }, [setSearchFilter, setSelectedVersion, setSelectedCategory]);
 
   // when filters are loaded, validate searchFilter from URL
@@ -132,7 +162,7 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
           choices={categoryChoices}
           onChange={onCategoryChange}
           defaultText="Filter by Category"
-          value={selectedCategory}
+          value={manuallyApplyFilters && mobileCategory ? mobileCategory : selectedCategory}
         />
       </SelectWrapper>
       <SelectWrapper>
@@ -142,7 +172,7 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
           // We disable this select if there is only one option
           disabled={!selectedCategory || hasOneVersion}
           defaultText="Filter by Version"
-          value={selectedVersion}
+          value={manuallyApplyFilters && mobileVersion ? mobileVersion : selectedVersion}
         />
       </SelectWrapper>
       {manuallyApplyFilters ? (
