@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
 
-const formWith = (measurement) => {
+const formWidth = (measurement) => {
   let _measurement = measurement;
 
   if (typeof measurement !== 'string' && typeof measurement !== 'number') {
@@ -25,14 +25,14 @@ const formWith = (measurement) => {
 const StyledChatBotUiContainer = styled.div`
   margin-left: 60px;
   margin-top: 20px;
-  ${formWith(771)}
+  ${formWidth(771)}
 
   @media ${theme.screenSize.upToXLarge} {
-    ${formWith(704)}
+    ${formWidth(704)}
   }
 
   @media ${theme.screenSize.upToMedium} {
-    ${formWith('90%')}
+    ${formWidth('90%')}
   }
 `;
 
