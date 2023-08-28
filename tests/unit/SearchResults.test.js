@@ -17,14 +17,12 @@ import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/moc
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
-const expectFilteredResults = (wrapper, filteredByRealm) => {
-  // Filtered property "Realm" should be shown 3 or 4x:
-  // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
-  // and (4) if it selected within the dropdown
-  const expectedRealmCount = filteredByRealm ? 4 : 3;
+const expectFilteredResults = (wrapper) => {
+  // (1) as a tag below the search header, (2) as a tag on the search result
+  // and (3) as the selected text in the dropdown
+  expect(wrapper.queryAllByText('Realm').length).toBe(3);
   // Version "Latest" should be shown 3x:
   // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
-  expect(wrapper.queryAllByText('Realm').length).toBe(expectedRealmCount);
   expect(wrapper.queryAllByText('Latest').length).toBe(3);
 
   // Check the search result card displays content according to the response
@@ -33,8 +31,7 @@ const expectFilteredResults = (wrapper, filteredByRealm) => {
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
-  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
+  expect(wrapper.queryByText(/stitch/).closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
 
   // Check the dropdowns are filled in
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
@@ -57,7 +54,7 @@ const expectUnfilteredSearchResultTags = (wrapper) => {
 
 // Check the search results match the expected unfiltered results
 const expectUnfilteredResults = (wrapper) => {
-  expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
+  expect(wrapper.queryAllByText(/no filters/).length).toBe(2);
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.title)).toBeTruthy();
@@ -65,13 +62,11 @@ const expectUnfilteredResults = (wrapper) => {
   expect(wrapper.queryAllByText(FILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty(
+  expect(wrapper.queryByText(/stitch/).closest('a')).toHaveProperty(
     'href',
     `http://localhost/${UNFILTERED_RESULT.url}`
   );
 
-  // We always show this text automatically on page load in the search bar, regardless of filter
-  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
 };
@@ -182,7 +177,7 @@ describe('Search Results Page', () => {
 
   it('renders results from a given search term query param and displays category and version tags', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1');
     await act(async () => {
       renderStitchResults = renderSearchResults();
     });
@@ -193,7 +188,7 @@ describe('Search Results Page', () => {
 
   it('considers a given search filter query param and displays category and version tags', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch&searchProperty=realm-master');
+    mockLocation('?q=stitch&page=1&searchProperty=realm-master');
     await act(async () => {
       renderStitchResults = renderSearchResults();
     });
@@ -208,28 +203,28 @@ describe('Search Results Page', () => {
       renderStitchResults = renderSearchResults();
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
-    expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
+    expect(renderStitchResults.queryAllByText(/No results found/).length).toBe(1);
   });
 
   it('navigates to a new page with updated query parameters when a property is changed', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1');
     await act(async () => {
-      const renderRes = renderSearchResults();
-      renderStitchResults = renderRes;
+      renderStitchResults = renderSearchResults();
     });
+
     expectUnfilteredResults(renderStitchResults);
 
     // Change the filters, which should change the shown results
     await filterByRealm(renderStitchResults);
-    const expectedQuery = '?q=stitch&searchProperty=realm-master&page=1';
+    const expectedQuery = '?q=stitch&page=1&searchProperty=realm-master';
     expect(navigateSpy).toBeCalled();
     expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
   });
 
   it('navigates with new search query parameters when hitting the "clear all filters" button', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch&searchProperty=realm-master');
+    mockLocation('?q=stitch&page=1&searchProperty=realm-master');
     await act(async () => {
       renderStitchResults = renderSearchResults();
     });

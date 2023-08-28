@@ -284,7 +284,9 @@ const SearchResults = () => {
     };
 
     fetchSearchResults()
-      .then(setSearchResults)
+      .then((searchRes) => {
+        setSearchResults(searchRes || []);
+      })
       .catch((e) => {
         console.error(`Error fetching search results: ${e}`);
       })
