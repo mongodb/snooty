@@ -7,6 +7,7 @@ import { HeaderContextProvider } from './Header/header-context';
 import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
+import { SearchContextProvider } from './SearchResults/SearchContext';
 
 const RootProvider = ({
   children,
@@ -29,7 +30,9 @@ const RootProvider = ({
         >
           <TocContextProvider remoteMetadata={remoteMetadata}>
             <NavigationProvider>
-              <SidenavContextProvider>{children}</SidenavContextProvider>
+              <SidenavContextProvider>
+                <SearchContextProvider>{children}</SearchContextProvider>
+              </SidenavContextProvider>
             </NavigationProvider>
           </TocContextProvider>
         </VersionContextProvider>
