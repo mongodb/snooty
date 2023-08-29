@@ -31,11 +31,11 @@ export const mockMarianFetch = (url) => {
   switch (endpoint) {
     case 'status':
       return allowJsonPromise({ manifests: ['realm-master'] });
-    case 'search?q=stitch':
+    case 'search?q=stitch&page=1':
       return allowJsonPromise({
         results: [UNFILTERED_RESULT],
       });
-    case 'search?q=stitch&searchProperty=realm-master':
+    case 'search?q=stitch&page=1&searchProperty=realm-master':
       return allowJsonPromise({
         results: [FILTERED_RESULT],
       });
