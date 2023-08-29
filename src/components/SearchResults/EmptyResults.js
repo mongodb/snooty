@@ -24,7 +24,7 @@ const NoResultText = styled('div')`
   padding-top: 20px;
 `;
 
-const SupportingText2 = styled('p')`
+const SupportingText = styled('p')`
   color: ${palette.gray.dark1};
   font-size: 13px;
   font-family: Euclid Circular A;
@@ -39,10 +39,10 @@ const EmptyResults = ({ type }) => {
       <NoResults />
       <NoResultText>
         <H3>No results found</H3>
-        <SupportingText2>
+        <SupportingText>
           We weren’t able to find any results for your query. Try adjusting your keywords to find what you’re looking
           for.
-        </SupportingText2>
+        </SupportingText>
       </NoResultText>
     </EmptyStateContainer>
   );

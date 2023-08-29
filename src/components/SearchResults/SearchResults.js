@@ -16,7 +16,7 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToURL } from '../../utils/search-params-to-url';
-import Tag, { searchTagStyleFeature } from '../Tag';
+import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
@@ -210,7 +210,7 @@ const FilterBadgesWrapper = styled('div')`
 `;
 
 const StyledTag = styled(Tag)`
-  ${searchTagStyleFeature}
+  ${searchTagStyle}
 `;
 
 const ResultTag = styled('div')`

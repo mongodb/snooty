@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
-import Tag, { searchTagStyleFeature } from '../Tag';
+import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
@@ -89,7 +89,7 @@ const StyledPreviewText = styled(Body)`
 `;
 
 const StyledTag = styled(Tag)`
-  ${searchTagStyleFeature}
+  ${searchTagStyle}
 `;
 
 const StylingTagContainer = styled('div')`
