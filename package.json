@@ -76,6 +76,7 @@
     "@leafygreen-ui/lib": "^9.5.2",
     "@leafygreen-ui/logo": "^4.0.2",
     "@leafygreen-ui/modal": "^10.1.0",
+    "@leafygreen-ui/pagination": "^1.0.9",
     "@leafygreen-ui/palette": "^3.4.3",
     "@leafygreen-ui/search-input": "^2.0.8",
     "@leafygreen-ui/segmented-control": "^8.0.0",
