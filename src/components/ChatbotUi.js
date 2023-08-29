@@ -1,7 +1,11 @@
 import React, { Suspense, lazy } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
+import 'react-loading-skeleton/dist/skeleton.css';
+
+const SKELETON_BORDER_RADIUS = '12px';
 
 const formWidth = (measurement) => {
   let _measurement = measurement;
@@ -36,13 +40,24 @@ const StyledChatBotUiContainer = styled.div`
   }
 `;
 
+const StyledLoadingSkeletonContainer = styled.div`
+  margin-top: 35px;
+  margin-bottom: 30px;
+`;
+
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ChatbotUi = () => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui">
       {/* We wrapped this in a Suspend. We can use this opportunity to render a loading state if we decided we want that */}
-      <Suspense fallback={<div />}>
+      <Suspense
+        fallback={
+          <StyledLoadingSkeletonContainer>
+            <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={38} />
+          </StyledLoadingSkeletonContainer>
+        }
+      >
         <LazyChatbot />
       </Suspense>
     </StyledChatBotUiContainer>
