@@ -1994,48 +1994,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   >
     <div
       class="emotion-2 emotion-3"
-    >
-      <button
-        aria-disabled="false"
-        aria-label="Search MongoDB Documentation"
-        class="emotion-4 emotion-5 emotion-6"
-        tabindex="0"
-      >
-        <div
-          class="emotion-7"
-        >
-          <svg
-            aria-label="Magnifying Glass Icon"
-            class="emotion-8 emotion-9"
-            fill="none"
-            height="16"
-            role="img"
-            viewBox="0 0 16 16"
-            width="16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.323 9.819a5.302 5.302 0 006.463.805l4.144 4.144a1.3 1.3 0 101.838-1.838l-4.144-4.144a5.302 5.302 0 00-8.3-6.463 5.3 5.3 0 000 7.496zM7.98 4.162A2.7 2.7 0 114.162 7.98 2.7 2.7 0 017.98 4.162z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-        </div>
-      </button>
-      <h3
-        class="emotion-10 emotion-11"
-      >
-        <strong>
-          Search MongoDB Documentation
-        </strong>
-      </h3>
-      <p
-        class="emotion-12 emotion-13"
-      >
-        Find guides, examples, and best practices for working with the MongoDB data platform.
-      </p>
-    </div>
+    />
   </div>
 </DocumentFragment>
 `;
