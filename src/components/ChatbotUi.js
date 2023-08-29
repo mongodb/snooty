@@ -29,6 +29,8 @@ const formWidth = (measurement) => {
 const StyledChatBotUiContainer = styled.div`
   margin-left: 60px;
   margin-top: 20px;
+  position: relative;
+  z-index: 1;
   ${formWidth(771)}
 
   @media ${theme.screenSize.upToXLarge} {
@@ -41,8 +43,8 @@ const StyledChatBotUiContainer = styled.div`
 `;
 
 const StyledLoadingSkeletonContainer = styled.div`
-  margin-top: 35px;
   margin-bottom: 30px;
+  margin-top: 35px;
 `;
 
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
