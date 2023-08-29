@@ -60,7 +60,7 @@ const ChatbotUi = () => {
           </StyledLoadingSkeletonContainer>
         }
       >
-        <LazyChatbot />
+        <LazyChatbot serverBaseUrl="https://chat-server.docs.staging.corp.mongodb.com/api/v1" />
       </Suspense>
     </StyledChatBotUiContainer>
   );
