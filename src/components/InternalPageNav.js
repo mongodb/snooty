@@ -35,9 +35,21 @@ const titleSpanStyling = css`
 `;
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
-  const slugIndex = toctreeOrder.indexOf(slug);
+  const slugWithoutSlash = slug[0] === '/' ? slug.slice(1) : slug;
+  const slugIndex = toctreeOrder.indexOf(slugWithoutSlash);
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
+
+  console.log(slug);
+  console.log('slugIndex ', slugIndex);
+  console.log('prev next ', prevSlug, nextSlug);
+
+  if (slug.includes('organizations')) {
+    console.log(toctreeOrder);
+    const filtered = toctreeOrder.filter((el) => el.includes('organizations'));
+    console.log(filtered);
+  }
+
   return (
     <div css={tableContainerStyling}>
       {prevSlug && (
