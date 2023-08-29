@@ -82,8 +82,6 @@ const DocumentBody = (props) => {
 
   return (
     <>
-      {/* TODO: Will need to update from manually passing in the nodeData when the directive is created in the parser */}
-      <ComponentFactory nodeData={{ type: 'chatbot' }} />
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
       <Widgets
         location={location}
