@@ -29,6 +29,7 @@ const formWidth = (measurement) => {
 const StyledChatBotUiContainer = styled.div`
   margin-left: 60px;
   margin-top: 20px;
+  margin-bottom: 16px;
   position: relative;
   z-index: 1;
   ${formWidth(771)}
@@ -40,11 +41,10 @@ const StyledChatBotUiContainer = styled.div`
   @media ${theme.screenSize.upToMedium} {
     ${formWidth('90%')}
   }
-`;
 
-const StyledLoadingSkeletonContainer = styled.div`
-  margin-bottom: 30px;
-  margin-top: 35px;
+  p {
+    color: #001e2b !important; /* a workaround for handling the color issue until the next release of the mongodb-chatbot-ui */
+  }
 `;
 
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
@@ -53,14 +53,8 @@ const ChatbotUi = () => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui">
       {/* We wrapped this in a Suspend. We can use this opportunity to render a loading state if we decided we want that */}
-      <Suspense
-        fallback={
-          <StyledLoadingSkeletonContainer>
-            <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={38} />
-          </StyledLoadingSkeletonContainer>
-        }
-      >
-        <LazyChatbot serverBaseUrl="https://chat-server.docs.staging.corp.mongodb.com/api/v1" />
+      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={82} />}>
+        <LazyChatbot />
       </Suspense>
     </StyledChatBotUiContainer>
   );
