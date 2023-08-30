@@ -60,7 +60,7 @@ const MobileFilters = () => {
           <Icon glyph="ArrowLeft" />
           Back to search results
         </BackButton>
-        <Label>Specify your search</Label>
+        <Label>Refine your search</Label>
         <SearchFilters manuallyApplyFilters={true} onApplyFilters={closeMobileFilters} />
       </Container>
     </>
