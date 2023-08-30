@@ -38,7 +38,6 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
   const slugIndex = toctreeOrder.indexOf(slug);
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
-
   return (
     <div css={tableContainerStyling}>
       {prevSlug && (
