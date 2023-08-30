@@ -14,18 +14,12 @@ const baseStyle = css`
 export const searchTagStyle = css`
   cursor: pointer;
   height: 26px;
-  font-size: ${theme.fontSize.small};
-  margin-right: ${theme.size.small};
-`;
-
-export const searchTagStyleFeature = css`
-  cursor: pointer;
-  height: 26px;
   padding: 4px 11px 4px 11px;
   border-radius: 12px;
   font-size: ${theme.fontSize.tiny};
   margin-right: ${theme.size.small};
 `;
+
 const VARIANTS = {
   blue: css`
     background-color: ${palette.blue.light3};
