@@ -306,13 +306,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       } else {
         pagePath = node.page_id;
       }
+      let slug = node.page_id;
+      if (slug !== '/' && slug[0] === '/') slug = slug.slice(1);
 
       createPage({
         path: pagePath,
         component: templatePath,
         context: {
           id: node.pageNodeId,
-          slug: node.page_id,
+          slug,
           repoBranches: {},
           associatedReposInfo: {},
           isAssociatedProduct: {},
