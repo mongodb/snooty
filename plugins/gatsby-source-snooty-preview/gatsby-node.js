@@ -307,6 +307,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         pagePath = node.page_id;
       }
       let slug = node.page_id;
+      // Slices off leading slash to ensure slug matches an entry within the toctreeOrder and renders InternalPageNav components
       if (slug !== '/' && slug[0] === '/') slug = slug.slice(1);
 
       createPage({
