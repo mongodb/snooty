@@ -306,13 +306,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       } else {
         pagePath = node.page_id;
       }
+      let slug = node.page_id;
+      // Slices off leading slash to ensure slug matches an entry within the toctreeOrder and renders InternalPageNav components
+      if (slug !== '/' && slug[0] === '/') slug = slug.slice(1);
 
       createPage({
         path: pagePath,
         component: templatePath,
         context: {
           id: node.pageNodeId,
-          slug: node.page_id,
+          slug,
           // Hardcode static/safe values to prevent incremental builds from rebuilding versioned preview pages
           repoBranches: {},
           associatedReposInfo: {},
