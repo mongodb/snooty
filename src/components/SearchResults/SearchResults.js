@@ -271,11 +271,13 @@ const SearchResults = () => {
     };
   }
 
+  //effect called to autofocus search box on page render
   useEffect(() => {
     if (searchBoxRef.current) {
       searchBoxRef.current.focus();
     }
   }, []);
+
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
