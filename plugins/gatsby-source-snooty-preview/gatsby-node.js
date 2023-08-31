@@ -316,9 +316,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         context: {
           id: node.pageNodeId,
           slug,
+          // Hardcode static/safe values to prevent incremental builds from rebuilding versioned preview pages
           repoBranches: {},
           associatedReposInfo: {},
-          isAssociatedProduct: {},
+          isAssociatedProduct: false,
         },
       });
     });
