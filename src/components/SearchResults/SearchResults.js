@@ -1,5 +1,5 @@
 import { navigate } from 'gatsby';
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -248,6 +248,7 @@ const SearchResults = () => {
   const [searchFinished, setSearchFinished] = useState(false);
   const [firstLoadEmpty] = useState(false);
   const specifySearchText = 'Specify your search';
+  const searchBoxRef = useRef(null);
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
@@ -270,6 +271,11 @@ const SearchResults = () => {
     };
   }
 
+  useEffect(() => {
+    if (searchBoxRef.current) {
+      searchBoxRef.current.focus();
+    }
+  }, []);
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
@@ -340,6 +346,7 @@ const SearchResults = () => {
         <HeaderContainer>
           <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
           <SearchInput
+            ref={searchBoxRef}
             value={searchField}
             placeholder="Search"
             onSubmit={submitNewSearch}
