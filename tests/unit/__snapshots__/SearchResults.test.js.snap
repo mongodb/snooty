@@ -37,11 +37,10 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -1154,12 +1153,12 @@ exports[`Search Results Page considers a given search filter query param and dis
     <div
       class="emotion-2 emotion-3"
     >
-      <h1
+      <h3
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 40px;"
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
          Search Results
-      </h1>
+      </h3>
       <form
         class="emotion-5"
         role="search"
@@ -1621,11 +1620,10 @@ exports[`Search Results Page does not return results for a given search term wit
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -2042,16 +2040,6 @@ exports[`Search Results Page does not return results for a given search term wit
   padding-top: 20px;
 }
 
-.emotion-26 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 500;
-  color: #001E2B;
-}
-
 .emotion-27 {
   color: #5C6C75;
   font-size: 13px;
@@ -2461,12 +2449,12 @@ exports[`Search Results Page does not return results for a given search term wit
     <div
       class="emotion-2 emotion-3"
     >
-      <h1
+      <h3
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 40px;"
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
          Search Results
-      </h1>
+      </h3>
       <form
         class="emotion-5"
         role="search"
@@ -2839,7 +2827,7 @@ exports[`Search Results Page does not return results for a given search term wit
           class="emotion-24 emotion-25"
         >
           <h3
-            class="emotion-26"
+            class="emotion-4"
           >
             No results found
           </h3>
@@ -3053,11 +3041,10 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -3753,12 +3740,12 @@ exports[`Search Results Page renders correctly without browser 1`] = `
     <div
       class="emotion-2 emotion-3"
     >
-      <h1
+      <h3
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 40px;"
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
          Search Results
-      </h1>
+      </h3>
       <form
         class="emotion-5"
         role="search"
@@ -4036,11 +4023,10 @@ exports[`Search Results Page renders loading images before returning no results 
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -4903,12 +4889,12 @@ exports[`Search Results Page renders loading images before returning no results 
     <div
       class="emotion-2 emotion-3"
     >
-      <h1
+      <h3
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 40px;"
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
          Search Results
-      </h1>
+      </h3>
       <form
         class="emotion-5"
         role="search"
@@ -5667,11 +5653,10 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -6534,12 +6519,12 @@ exports[`Search Results Page renders loading images before returning nonempty re
     <div
       class="emotion-2 emotion-3"
     >
-      <h1
+      <h3
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 40px;"
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
          Search Results
-      </h1>
+      </h3>
       <form
         class="emotion-5"
         role="search"
@@ -7298,11 +7283,10 @@ exports[`Search Results Page renders results from a given search term query para
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -8413,12 +8397,12 @@ exports[`Search Results Page renders results from a given search term query para
     <div
       class="emotion-2 emotion-3"
     >
-      <h1
+      <h3
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 40px;"
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
          Search Results
-      </h1>
+      </h3>
       <form
         class="emotion-5"
         role="search"
