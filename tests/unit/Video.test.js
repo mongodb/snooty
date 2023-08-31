@@ -15,6 +15,11 @@ it('Vimeo video renders correctly', () => {
   expect(tree.asFragment()).toMatchSnapshot();
 });
 
+it('Wistia video renders correctly', () => {
+  const tree = render(<Video nodeData={mockData.validWistiaURL} />);
+  expect(tree.asFragment()).toMatchSnapshot();
+});
+
 it('DailyMotion video renders correctly', () => {
   const tree = render(<Video nodeData={mockData.validDailyMotionURL} />);
   expect(tree.asFragment()).toMatchSnapshot();
@@ -30,7 +35,7 @@ describe('Console warning messages', () => {
     render(<Video nodeData={mockData.invalidVideoURL1} />);
     render(<Video nodeData={mockData.invalidVideoURL2} />);
     expect(consoleOutput).toEqual([
-      'Invalid URL: https://docs.mongodb.com/realm/ has been passed into the Video component',
+      'Media Not Found: A video player could not be found for the following https://docs.mongodb.com/realm/',
       'Invalid URL: https://www.youtube.com/ has been passed into the Video component',
     ]);
   });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactPlayer from 'react-player/youtube';
+import ReactPlayerYT from 'react-player/youtube';
+import ReactPlayerWistia from 'react-player/wistia';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -7,13 +8,33 @@ import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import VideoPlayButton from './VideoPlayButton';
 
+// Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
+const REACT_PLAYERS = {
+  yt: {
+    player: ReactPlayerYT,
+    config: {
+      youtube: {
+        playerVars: {
+          autohide: 1,
+          modestbranding: 1,
+          rel: 0,
+        },
+      },
+    },
+  },
+  wistia: {
+    player: ReactPlayerWistia,
+    config: {},
+  },
+};
+
 const ReactPlayerWrapper = styled('div')`
   position: relative;
   padding-top: 56.25%;
   margin: ${theme.size.medium} 0px;
 `;
 
-const StyledReactPlayer = styled(ReactPlayer)`
+const videoStyling = css`
   position: absolute;
   top: 0;
   left: 0;
@@ -21,17 +42,27 @@ const StyledReactPlayer = styled(ReactPlayer)`
     /* Redefines stacking context, allowing play button animation to stick on top */
     position: sticky;
   }
-`;
-
-const videoStyling = css`
   * {
     border-radius: 16px !important;
   }
 `;
 
+const getTheSupportedMedia = (url) => {
+  let supportedType = null;
+
+  if (url.includes('youtube') || url.includes('youtu.be')) {
+    supportedType = 'yt';
+  }
+
+  if (url.includes('wistia')) {
+    supportedType = 'wistia';
+  }
+
+  return REACT_PLAYERS[supportedType];
+};
+
 const Video = ({ nodeData: { argument }, ...rest }) => {
   const url = `${argument[0]['refuri']}`;
-  const playable = ReactPlayer.canPlay(url);
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
 
@@ -49,6 +80,16 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
     }
   }, [url]);
 
+  const ReactSupportedMedia = getTheSupportedMedia(url);
+
+  if (!ReactSupportedMedia) {
+    console.warn(`Media Not Found: A video player could not be found for the following ${url}`);
+    return null;
+  }
+
+  const ReactPlayer = ReactSupportedMedia.player;
+  const playable = ReactPlayer.canPlay(url);
+
   // handles remaining cases for invalid video URLs
   if (!playable) {
     console.warn(`Invalid URL: ${url} has been passed into the Video component`);
@@ -57,17 +98,9 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
 
   return (
     <ReactPlayerWrapper>
-      <StyledReactPlayer
+      <ReactPlayer
         css={videoStyling}
-        config={{
-          youtube: {
-            playerVars: {
-              autohide: 1,
-              modestbranding: 1,
-              rel: 0,
-            },
-          },
-        }}
+        config={ReactSupportedMedia.config}
         controls
         url={url}
         width="100%"
