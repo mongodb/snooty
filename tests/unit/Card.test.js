@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { navigate } from 'gatsby';
+import { mockLocation } from '../utils/mock-location';
 import Card from '../../src/components/Card';
 import { theme } from '../../src/theme/docsTheme';
 
@@ -15,6 +16,10 @@ it('renders correctly', () => {
     </ThemeProvider>
   );
   expect(tree.asFragment()).toMatchSnapshot();
+});
+
+beforeAll(() => {
+  mockLocation(null, `/`);
 });
 
 describe('relative urls passed to Card', () => {

@@ -41,8 +41,8 @@ describe('VersionDropdown utils', () => {
     });
 
     it('returns a prefix when staging with no pathPrefix', () => {
+      process.env.GATSBY_SITE = 'bi-connector';
       const mockSiteMetadata = {
-        project: 'bi-connector',
         snootyEnv: 'staging',
         user: 'docsworker-xlarge',
       };

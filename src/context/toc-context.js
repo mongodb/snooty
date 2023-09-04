@@ -14,8 +14,8 @@ const TocContext = createContext({
 // filters all available ToC by currently selected version via VersionContext
 const TocContextProvider = ({ children, remoteMetadata }) => {
   const { activeVersions, setActiveVersions, availableVersions, showVersionDropdown } = useContext(VersionContext);
-  const { toctree, associated_products: associatedProducts } = useSnootyMetadata();
-  const { database, project, parserBranch } = useSiteMetadata();
+  const { project, toctree, associated_products: associatedProducts } = useSnootyMetadata();
+  const { database, parserBranch } = useSiteMetadata();
   const [activeToc, setActiveToc] = useState(remoteMetadata?.toctree || toctree);
   const [isLoaded, setIsLoaded] = useState(false);
 

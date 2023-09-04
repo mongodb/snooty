@@ -9,7 +9,7 @@ import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { MetadataProvider } from '../utils/use-snooty-metadata';
 
 // These fonts are ported over from @mdb/flora design system repo
 // They are used on the content areas and are not included in Snooty itself
@@ -136,43 +136,46 @@ const GlobalGrid = styled('div')`
 const DefaultLayout = ({
   children,
   pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
+  metadata,
 }) => {
   const { sidenav } = getTemplate(template);
-  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
+  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = metadata;
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
-  useDelightedSurvey(slug);
+  useDelightedSurvey(slug, metadata.project);
 
   return (
     <>
       <Global styles={globalCSS} />
-      <RootProvider
-        slug={slug}
-        repoBranches={repoBranches}
-        associatedReposInfo={associatedReposInfo}
-        headingNodes={page?.options?.headings}
-        selectors={page?.options?.selectors}
-        isAssociatedProduct={isAssociatedProduct}
-      >
-        <GlobalGrid>
-          <PreviewHeader sidenav={sidenav} />
-          {sidenav && (
-            <Sidenav
-              chapters={chapters}
-              guides={guides}
-              page={page}
-              pageTitle={pageTitle}
-              publishedBranches={publishedBranches}
-              repoBranches={repoBranches}
-              siteTitle={title}
-              slug={slug}
-              toctree={toctree}
-              eol={eol}
-            />
-          )}
-          <ContentTransition slug={slug}>{children}</ContentTransition>
-        </GlobalGrid>
-      </RootProvider>
+      <MetadataProvider metadata={metadata}>
+        <RootProvider
+          slug={slug}
+          repoBranches={repoBranches}
+          associatedReposInfo={associatedReposInfo}
+          headingNodes={page?.options?.headings}
+          selectors={page?.options?.selectors}
+          isAssociatedProduct={isAssociatedProduct}
+        >
+          <GlobalGrid>
+            <PreviewHeader sidenav={sidenav} />
+            {sidenav && (
+              <Sidenav
+                chapters={chapters}
+                guides={guides}
+                page={page}
+                pageTitle={pageTitle}
+                publishedBranches={publishedBranches}
+                repoBranches={repoBranches}
+                siteTitle={title}
+                slug={slug}
+                toctree={toctree}
+                eol={eol}
+              />
+            )}
+            <ContentTransition slug={slug}>{children}</ContentTransition>
+          </GlobalGrid>
+        </RootProvider>
+      </MetadataProvider>
     </>
   );
 };

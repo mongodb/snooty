@@ -67,7 +67,6 @@ const siteMetadata = {
   parserUser: process.env.GATSBY_PARSER_USER || userInfo().username,
   patchId: process.env.PATCH_ID || '',
   pathPrefix: getPathPrefix(process.env.PATH_PREFIX),
-  project: manifestMetadata['project'] || process.env.GATSBY_SITE,
   siteUrl: DOTCOM_BASE_URL,
   snootyBranch: gitBranch,
   snootyEnv: process.env.SNOOTY_ENV || 'development',

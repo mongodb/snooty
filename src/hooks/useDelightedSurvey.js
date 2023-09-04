@@ -4,8 +4,8 @@ import { useSiteMetadata } from './use-site-metadata';
 const ENABLED_SITES = new Set(['atlas-app-services', 'cloud-docs', 'docs', 'golang', 'java', 'node', 'realm']);
 const ENABLED_ENVS = new Set(['dotcomprd', 'production']);
 
-export const useDelightedSurvey = (slug) => {
-  const { parserBranch, project, snootyEnv } = useSiteMetadata();
+export const useDelightedSurvey = (slug, project) => {
+  const { parserBranch, snootyEnv } = useSiteMetadata();
 
   useEffect(() => {
     if (ENABLED_ENVS.has(snootyEnv) && ENABLED_SITES.has(project)) {

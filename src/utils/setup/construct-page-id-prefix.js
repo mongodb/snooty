@@ -1,4 +1,5 @@
 // Concatenates a site prefix to return a page id
-const constructPageIdPrefix = ({ project, parserUser, parserBranch }) => `${project}/${parserUser}/${parserBranch}`;
+const constructPageIdPrefix = ({ parserUser, parserBranch }) =>
+  `${process.env.GATSBY_SITE}/${parserUser}/${parserBranch}`;
 
 module.exports = { constructPageIdPrefix };

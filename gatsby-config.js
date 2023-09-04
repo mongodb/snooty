@@ -1,8 +1,8 @@
 const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
 
-const pathPrefix = generatePathPrefix(siteMetadata);
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
+const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata, process.env.GATSBY_SITE) : undefined;
 
 const plugins = [
   'gatsby-plugin-emotion',
@@ -19,6 +19,14 @@ const plugins = [
 if (!isPreview) {
   plugins.push(`gatsby-plugin-sitemap`);
   const layoutComponentRelativePath = `./src/layouts/index.js`;
+  plugins.push({
+    resolve: 'gatsby-plugin-layout',
+    options: {
+      component: require.resolve(layoutComponentRelativePath),
+    },
+  });
+} else {
+  const layoutComponentRelativePath = `./src/layouts/preview-layout-outer.js`;
   plugins.push({
     resolve: 'gatsby-plugin-layout',
     options: {

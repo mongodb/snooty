@@ -8,8 +8,8 @@ const NavigationContext = React.createContext({
   completedFetch: false,
 });
 
-const NavigationProvider = ({ children }) => {
-  const { database, project } = useSiteMetadata();
+const NavigationProvider = ({ children, project }) => {
+  const { database } = useSiteMetadata();
   const [parents, setParents] = useState([]);
   const [completedFetch, setCompletedFetch] = useState(false);
 

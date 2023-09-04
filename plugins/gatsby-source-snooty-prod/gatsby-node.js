@@ -37,7 +37,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   // check if product is associated child product
   try {
     const umbrellaProduct = await db.stitchInterface.getMetadata({
-      'associated_products.name': siteMetadata.project,
+      'associated_products.name': process.env.GATSBY_SITE,
     });
     isAssociatedProduct = !!umbrellaProduct;
   } catch (e) {
@@ -199,7 +199,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       'Snooty could not find AST entries for the',
       siteMetadata.parserBranch,
       'branch of',
-      siteMetadata.project,
+      process.env.GATSBY_SITE,
       'within',
       siteMetadata.database
     );
@@ -256,7 +256,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
-  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+  if (process.env.GATSBY_SITE === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
 
   await saveAssetFiles(assets, db);
@@ -395,13 +395,25 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 // https://www.gatsbyjs.com/docs/scaling-issues/#switch-off-type-inference-for-sitepagecontext
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
-    type SitePage implements Node @dontInfer {
-      path: String!
+    type Page implements Node @dontInfer {
+      page_id: String
+      branch: String
+      pagePath: String
+      ast: JSON!
+      metadata: SnootyMetadata @link
     }
 
     type SnootyMetadata implements Node @dontInfer {
-      metadata: JSON!
+      metadata: JSON
       branch: String
+      project: String
+    }
+
+    type PagePath implements Node @dontInfer {
+      page_id: String!
+      branch: String!
+      project: String!
+      pageNodeId: String!
     }
 
     type RemoteMetadata implements Node @dontInfer {

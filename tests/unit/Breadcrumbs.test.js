@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
+import { mockLocation } from '../utils/mock-location';
 import Breadcrumbs from '../../src/components/Breadcrumbs/index';
 
 import mockData from './data/Breadcrumbs.test.json';
@@ -18,6 +19,10 @@ useStaticQuery.mockImplementation(() => ({
     },
   },
 }));
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 it('renders correctly with pageTitle', () => {
   const tree = render(

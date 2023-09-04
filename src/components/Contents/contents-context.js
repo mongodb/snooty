@@ -1,6 +1,6 @@
 import React from 'react';
 import useActiveHeading from '../../hooks/useActiveHeading';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const defaultContextValue = {
   activeHeadingId: null,
@@ -12,7 +12,7 @@ const ContentsContext = React.createContext(defaultContextValue);
 
 const ContentsProvider = ({ children, headingNodes = [] }) => {
   const activeHeadingId = useActiveHeading(headingNodes);
-  const { project } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   // The guides site is the only site that takes advantage of headings, but never uses the Contents component
   const showContentsComponent = project !== 'guides';
 

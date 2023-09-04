@@ -1,9 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { mockLocation } from '../utils/mock-location';
 import Procedure from '../../src/components/Procedure';
 
 // data for this component
 import mockData from './data/Procedure.test.json';
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 it('renders correctly', () => {
   const tree = render(<Procedure nodeData={mockData.testSteps} />);

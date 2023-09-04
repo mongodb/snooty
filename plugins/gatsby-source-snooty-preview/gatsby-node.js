@@ -1,4 +1,5 @@
 const _ = require(`lodash`);
+const { getDataStore } = require('gatsby/dist/datastore');
 const path = require('path');
 const stream = require('stream');
 const { promisify } = require('util');
@@ -14,8 +15,8 @@ const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
 
-let isAssociatedProduct = false;
-let associatedReposInfo = {};
+let isAssociatedProductPerProjectAndBranch = {};
+let associatedReposInfoPerProjectAndBranch = {};
 let db;
 const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
 
@@ -31,11 +32,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
       branch: String
       pagePath: String
       ast: JSON!
+      metadata: SnootyMetadata @link
+    }
+
+    type PagePath implements Node @dontInfer {
+      page_id: String!
+      branch: String!
+      project: String!
+      pageNodeId: String!
     }
 
     type SnootyMetadata implements Node @dontInfer {
       metadata: JSON
       branch: String
+      project: String
     }
 
     type RemoteMetadata implements Node @dontInfer {
@@ -50,21 +60,34 @@ exports.createSchemaCustomization = async ({ actions }) => {
 };
 
 const saveFile = async (file, data) => {
-  await fs.mkdir(path.join('static', path.dirname(file)), {
+  await fs.mkdir(path.join('public', path.dirname(file)), {
     recursive: true,
   });
-  await fs.writeFile(path.join('static', file), data, 'binary');
+  await fs.writeFile(path.join('public', file), data, 'binary');
 };
 
-let manifestMetadata;
-
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
+const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER || `mmeigs`;
 
-exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDigest, cache, webhookBody }) => {
+function createSnootyMetadataId({ branch, project, createNodeId }) {
+  return createNodeId(`metadata-${branch}-${project}`);
+}
+
+let isFirstRun = true;
+exports.sourceNodes = async ({
+  actions,
+  createNodeId,
+  getNode,
+  getNodesByType,
+  reporter,
+  createContentDigest,
+  cache,
+  webhookBody,
+}) => {
   console.log({ webhookBody });
   currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
-  const { createNode } = actions;
+  const { createNode, deleteNode, touchNode } = actions;
 
   let pageCount = 0;
   const fileWritePromises = [];
@@ -72,14 +95,26 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
   const lastClientAccessToken = await cache.get('lastClientAccessToken');
   console.log({ lastFetched });
 
+  if (isFirstRun && lastFetched) {
+    // nodes of following types are managed statefully:
+    // SnootyMetadata, Page, PagePath
+    // we need to touch on them on delta updates on first run of a process to prevent them from being garbage collected
+    const datastore = getDataStore();
+    for (const nodeType of ['SnootyMetadata', 'Page', 'PagePath']) {
+      for (const node of datastore.iterateNodesByType(nodeType)) {
+        touchNode(node);
+      }
+    }
+  }
+
   try {
     // Generate client access token only if trying to access Snooty Data API's staging instance
     const clientAccessToken = APIBase.includes('.staging') ? await fetchClientAccessToken(lastClientAccessToken) : '';
     let url;
     if (lastFetched) {
-      url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents?updated=${lastFetched}`;
+      url = `${APIBase}/user/${GATSBY_CLOUD_SITE_USER}/documents?updated=${lastFetched}`;
     } else {
-      url = `${APIBase}/projects/${process.env.GATSBY_SITE}/documents`;
+      url = `${APIBase}/user/${GATSBY_CLOUD_SITE_USER}/documents`;
     }
 
     const headers = {};
@@ -91,6 +126,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
     const decode = parser();
     decode.on(`data`, async (_entry) => {
       const entry = _entry.value;
+      const shouldDeleteContentNode = entry.data?.deleted;
 
       if (entry.type === `timestamp`) {
         cache.set(`lastFetched`, entry.data);
@@ -102,29 +138,34 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
       } else if (entry.type === `metadata`) {
         // Create metadata node.
         const { _id, build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = entry.data;
-        manifestMetadata = metadataMinusStatic;
+        const { parentPaths, slugToTitle, branch, project } = metadataMinusStatic;
+        const nodeId = createSnootyMetadataId({ createNodeId, branch, project });
 
-        const { parentPaths, slugToTitle } = metadataMinusStatic;
-        if (parentPaths) {
-          transformBreadcrumbs(parentPaths, slugToTitle);
+        if (shouldDeleteContentNode) {
+          deleteNode(getNode(nodeId));
+        } else {
+          if (parentPaths) {
+            transformBreadcrumbs(parentPaths, slugToTitle);
+          }
+
+          // Save files in the static_files field of metadata document, including intersphinx inventories.
+          if (staticFiles) {
+            await saveStaticFiles(staticFiles);
+          }
+
+          createNode({
+            children: [],
+            id: nodeId,
+            internal: {
+              contentDigest: createContentDigest(metadataMinusStatic),
+              type: 'SnootyMetadata',
+            },
+            branch,
+            project,
+            parent: null,
+            metadata: metadataMinusStatic,
+          });
         }
-
-        // Save files in the static_files field of metadata document, including intersphinx inventories.
-        if (staticFiles) {
-          await saveStaticFiles(staticFiles);
-        }
-
-        createNode({
-          children: [],
-          id: createNodeId('metadata' + metadataMinusStatic.branch),
-          internal: {
-            contentDigest: createContentDigest(metadataMinusStatic),
-            type: 'SnootyMetadata',
-          },
-          branch: metadataMinusStatic.branch,
-          parent: null,
-          metadata: metadataMinusStatic,
-        });
       } else if (entry.type === `page`) {
         if (entry.data?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
         pageCount += 1;
@@ -135,31 +176,44 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
         // is a concern (I couldn't find any page documents that didn't end in .txt)
         // but Chesterton's Fence and all.
         if (filename.endsWith('.txt')) {
-          const branch = page.page_id.split(`/`).slice(2, 3)[0];
-          const page_id = `/` + page.page_id.split(`/`).slice(3).join(`/`);
-          page.page_id = page_id;
-          page.id = createNodeId(page_id + branch);
-          page.internal = {
-            type: `Page`,
-            contentDigest: createContentDigest(page),
-          };
+          const branch = page.page_id.split(`/`)[2];
+          const raw_page_id = page.page_id.split(`/`).slice(3).join(`/`);
+          const page_id = raw_page_id === `index` ? `/` : `/${raw_page_id}`;
+          const project = page.page_id.split(`/`)[0];
 
-          const pagePathNode = {
-            id: page.id + `/path`,
-            page_id: page_id,
-            branch,
-            pageNodeId: page.id,
-            internal: {
-              type: `PagePath`,
-              contentDigest: page.internal.contentDigest,
-            },
-          };
+          const pageNodeId = createNodeId(page_id + branch);
+          const pagePathNodeId = pageNodeId + `/path`;
 
-          createNode(page);
-          createNode(pagePathNode);
+          if (shouldDeleteContentNode) {
+            deleteNode(getNode(pageNodeId));
+            deleteNode(getNode(pagePathNodeId));
+          } else {
+            page.page_id = page_id;
+            page.metadata = createSnootyMetadataId({ createNodeId, branch, project });
+            page.id = pageNodeId;
+            page.internal = {
+              type: `Page`,
+              contentDigest: createContentDigest(page),
+            };
 
-          if (pageCount % 1000 === 0) {
-            console.log({ pageCount, page_id, id: page.id });
+            const pagePathNode = {
+              id: pagePathNodeId,
+              page_id: page_id,
+              branch,
+              project,
+              pageNodeId: page.id,
+              internal: {
+                type: `PagePath`,
+                contentDigest: page.internal.contentDigest,
+              },
+            };
+
+            createNode(page);
+            createNode(pagePathNode);
+
+            if (pageCount % 1000 === 0) {
+              console.log({ pageCount, page_id, id: page.id });
+            }
           }
         }
       }
@@ -179,17 +233,19 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter, createContentDig
 
   // Source old nodes.
   console.time(`old source nodes`);
-  const { _db, _isAssociatedProduct, _associatedReposInfo } = await sourceNodes({
-    metadata: manifestMetadata,
+  const { _db, _isAssociatedProductPerProjectAndBranch, _associatedReposInfoPerProjectAndBranch } = await sourceNodes({
     hasOpenAPIChangelog,
+    github_username: GATSBY_CLOUD_SITE_USER,
     createNode,
     createContentDigest,
     createNodeId,
+    getNodesByType,
   });
   db = _db;
-  isAssociatedProduct = _isAssociatedProduct;
-  associatedReposInfo = _associatedReposInfo;
+  isAssociatedProductPerProjectAndBranch = _isAssociatedProductPerProjectAndBranch;
+  associatedReposInfoPerProjectAndBranch = _associatedReposInfoPerProjectAndBranch;
   console.timeEnd(`old source nodes`);
+  isFirstRun = false;
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
@@ -225,7 +281,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
   });
 };
 
-let repoBranches = null;
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const templatePath = isPreview
@@ -239,7 +294,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           pageNodeId
           branch
           page_id
+          project
         }
+        allProjects: distinct(field: { project: SELECT })
       }
     }
   `);
@@ -249,85 +306,94 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic('There was an error in the graphql query', result.errors);
   }
 
-  if (!repoBranches) {
-    try {
-      const repoInfo = await db.stitchInterface.fetchRepoBranches();
-      let errMsg;
+  let perProjectRepoBranches = new Map();
+  for (const project of result.data.allPagePath.allProjects) {
+    let repoBranches = perProjectRepoBranches.get(project);
 
-      if (!repoInfo) {
-        errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
+    if (!repoBranches) {
+      try {
+        const repoInfo = await db.stitchInterface.fetchRepoBranches(project);
+        let errMsg;
+
+        if (!repoInfo) {
+          errMsg = `Repo data for ${project} could not be found.`;
+        }
+
+        // We should expect the number of branches for a docs repo to be 1 or more.
+        if (!repoInfo.branches?.length) {
+          errMsg = `No version information found for ${project}`;
+        }
+
+        if (errMsg) {
+          throw errMsg;
+        }
+
+        // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+        // dotcom environments seem to be consistent.
+        let envKey = siteMetadata.snootyEnv;
+        if (!envKey || envKey === 'development') {
+          envKey = 'dotcomprd';
+        } else if (envKey === 'production') {
+          envKey = 'prd';
+        } else if (envKey === 'staging') {
+          envKey = 'stg';
+        }
+
+        // We're overfetching data here. We only need branches and prefix at the least
+        repoBranches = {
+          branches: repoInfo.branches,
+          siteBasePrefix: repoInfo.prefix[envKey],
+        };
+
+        if (repoInfo.groups?.length > 0) {
+          repoBranches.groups = repoInfo.groups;
+        }
+      } catch (err) {
+        // Fetching repoBranches data shouldn't be vital for preview/staging builds,
+        // so we do not exit the process
+        console.error(err);
+        throw err;
       }
-
-      // We should expect the number of branches for a docs repo to be 1 or more.
-      if (!repoInfo.branches?.length) {
-        errMsg = `No version information found for ${siteMetadata.project}`;
-      }
-
-      if (errMsg) {
-        throw errMsg;
-      }
-
-      // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
-      // dotcom environments seem to be consistent.
-      let envKey = siteMetadata.snootyEnv;
-      if (!envKey || envKey === 'development') {
-        envKey = 'dotcomprd';
-      } else if (envKey === 'production') {
-        envKey = 'prd';
-      } else if (envKey === 'staging') {
-        envKey = 'stg';
-      }
-
-      // We're overfetching data here. We only need branches and prefix at the least
-      repoBranches = {
-        branches: repoInfo.branches,
-        siteBasePrefix: repoInfo.prefix[envKey],
-      };
-
-      if (repoInfo.groups?.length > 0) {
-        repoBranches.groups = repoInfo.groups;
-      }
-    } catch (err) {
-      // Fetching repoBranches data shouldn't be vital for preview/staging builds,
-      // so we do not exit the process
-      console.error(err);
-      throw err;
     }
-  }
 
-  if (repoBranches.groups) {
-    repoBranches.groups = repoBranches.groups.map((group) => {
-      return _.omit(group, [`id`]);
-    });
-  } else {
-    repoBranches.groups = [];
-  }
+    if (repoBranches.groups) {
+      repoBranches.groups = repoBranches.groups.map((group) => {
+        return _.omit(group, [`id`]);
+      });
+    } else {
+      repoBranches.groups = [];
+    }
 
-  if (repoBranches.branches) {
-    repoBranches.branches = repoBranches.branches.map((group) => {
-      return _.omit(group, [`id`]);
-    });
-  } else {
-    repoBranches.branches = [];
+    if (repoBranches.branches) {
+      repoBranches.branches = repoBranches.branches.map((group) => {
+        return _.omit(group, [`id`]);
+      });
+    } else {
+      repoBranches.branches = [];
+    }
+
+    perProjectRepoBranches.set(project, repoBranches);
   }
 
   try {
     result.data.allPagePath.nodes.forEach((node) => {
-      let slug;
+      let pagePath;
       if (isPreview) {
-        slug = path.join(`BRANCH--${node.branch}`, node.page_id);
+        pagePath = path.join(node.project, node.branch, node.page_id);
       } else {
-        slug = node.page_id;
+        pagePath = node.page_id;
       }
+      const projectAndBranchId = `${node.project}-${node.branch}`;
       createPage({
-        path: slug,
+        path: pagePath,
         component: templatePath,
         context: {
           id: node.pageNodeId,
-          slug,
-          repoBranches,
-          associatedReposInfo,
-          isAssociatedProduct,
+          slug: node.page_id,
+          repoBranches: perProjectRepoBranches.get(node.project),
+          associatedReposInfo: associatedReposInfoPerProjectAndBranch[projectAndBranchId],
+          isAssociatedProduct: isAssociatedProductPerProjectAndBranch[projectAndBranchId],
+          project: node.project,
         },
       });
     });

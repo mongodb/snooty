@@ -1,25 +1,17 @@
 import React from 'react';
-import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
+import { mockLocation } from '../utils/mock-location';
 import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
 import { tick, setMatchMedia, setMobile } from '../utils';
 
-const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
-const setProject = (project) => {
-  useStaticQuery.mockImplementation(() => ({
-    site: {
-      siteMetadata: {
-        project,
-      },
-    },
-  }));
-};
+jest.mock(`../../src/utils/use-snooty-metadata`, () => {
+  return () => ({ project: 'test-project' });
+});
 
 const mountSidenav = async () => {
-  setProject('test-project');
   const wrapper = render(
     <SidenavContextProvider>
       <SidenavMobileMenuButton />
@@ -40,6 +32,10 @@ const findCollapseButton = (wrapper) => {
 };
 
 expect.extend(matchers);
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 describe('Sidenav', () => {
   jest.useFakeTimers();

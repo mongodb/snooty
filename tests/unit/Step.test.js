@@ -1,9 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { mockLocation } from '../utils/mock-location';
 import Step from '../../src/components/Procedure/Step';
 
 // data for this component
 import mockData from './data/Step.test.json';
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 it('renders with "connected" styling by default', () => {
   const tree = render(<Step nodeData={mockData} stepNumber={1} />);

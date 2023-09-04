@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { mockLocation } from '../utils/mock-location';
 import Chapters from '../../src/components/Chapters';
 import { tick } from '../utils';
 import { SidenavContext } from '../../src/components/Sidenav';
@@ -20,6 +21,10 @@ const mountChapters = () => {
     </ThemeProvider>
   );
 };
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 describe('Chapters', () => {
   jest.useFakeTimers();

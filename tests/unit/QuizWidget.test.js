@@ -12,8 +12,14 @@ const timestamp = 1466424490000;
 const mockDate = new Date(timestamp);
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
-  useSiteMetadata: () => ({ siteUrl, project }),
+  useSiteMetadata: () => ({ siteUrl }),
 }));
+
+jest.mock(`../../src/utils/use-snooty-metadata`, () => {
+  return () => ({
+    project,
+  });
+});
 
 describe('quiz widget snapshots', () => {
   const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);

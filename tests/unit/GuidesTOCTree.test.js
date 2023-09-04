@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { mockLocation } from '../utils/mock-location';
 import { ContentsContext } from '../../src/components/Contents/contents-context';
 import GuidesTOCTree from '../../src/components/Sidenav/GuidesTOCTree';
 import mockData from './data/Chapters.test.json';
@@ -19,6 +20,10 @@ const getWrapper = ({ currentSlug }) => {
     </ContentsContext.Provider>
   );
 };
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 it('renders with correct active slug', () => {
   const currentSlug = 'cloud/account';
