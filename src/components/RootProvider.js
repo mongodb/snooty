@@ -17,26 +17,33 @@ const RootProvider = ({
   associatedReposInfo,
   isAssociatedProduct,
   remoteMetadata,
-}) => (
-  <TabProvider selectors={selectors}>
-    <ContentsProvider headingNodes={headingNodes}>
-      <HeaderContextProvider>
-        <VersionContextProvider
-          repoBranches={repoBranches}
-          slug={slug}
-          associatedReposInfo={associatedReposInfo}
-          isAssociatedProduct={isAssociatedProduct}
-        >
-          <TocContextProvider remoteMetadata={remoteMetadata}>
-            <NavigationProvider>
+  project,
+}) => {
+  let providers = (
+    <TabProvider selectors={selectors}>
+      <ContentsProvider headingNodes={headingNodes}>
+        <HeaderContextProvider>
+          <VersionContextProvider
+            repoBranches={repoBranches}
+            slug={slug}
+            associatedReposInfo={associatedReposInfo}
+            isAssociatedProduct={isAssociatedProduct}
+          >
+            <TocContextProvider remoteMetadata={remoteMetadata}>
               <SidenavContextProvider>{children}</SidenavContextProvider>
-            </NavigationProvider>
-          </TocContextProvider>
-        </VersionContextProvider>
-      </HeaderContextProvider>
-    </ContentsProvider>
-  </TabProvider>
-);
+            </TocContextProvider>
+          </VersionContextProvider>
+        </HeaderContextProvider>
+      </ContentsProvider>
+    </TabProvider>
+  );
+
+  if (project) {
+    providers = <NavigationProvider project={project}>{providers}</NavigationProvider>;
+  }
+
+  return providers;
+};
 
 RootProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,

@@ -393,6 +393,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           repoBranches: perProjectRepoBranches.get(node.project),
           associatedReposInfo: associatedReposInfoPerProjectAndBranch[projectAndBranchId],
           isAssociatedProduct: isAssociatedProductPerProjectAndBranch[projectAndBranchId],
+          project: node.project,
         },
       });
     });

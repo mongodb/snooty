@@ -25,6 +25,14 @@ if (!isPreview) {
       component: require.resolve(layoutComponentRelativePath),
     },
   });
+} else {
+  const layoutComponentRelativePath = `./src/layouts/preview-layout-outer.js`;
+  plugins.push({
+    resolve: 'gatsby-plugin-layout',
+    options: {
+      component: require.resolve(layoutComponentRelativePath),
+    },
+  });
 }
 
 module.exports = {
