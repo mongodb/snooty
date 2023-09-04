@@ -99,6 +99,7 @@ const DefaultLayout = ({
         selectors={page?.options?.selectors}
         isAssociatedProduct={isAssociatedProduct}
         remoteMetadata={remoteMetadata}
+        project={project}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} /> : <div />}
