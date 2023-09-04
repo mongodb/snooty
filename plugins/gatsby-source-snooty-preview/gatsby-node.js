@@ -320,6 +320,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           repoBranches: {},
           associatedReposInfo: {},
           isAssociatedProduct: false,
+          project: node.project,
         },
       });
     });
