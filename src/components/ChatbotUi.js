@@ -4,7 +4,11 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { CHATBOT_SERVER_BASE_URL } from '../constants';
+
+const CHATBOT_SERVER_BASE_URL =
+  process.env.SNOOTY_ENV === 'dotcomprd'
+    ? 'https://knowledge.corp.mongodb.com/api/v1'
+    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
 const SKELETON_BORDER_RADIUS = '12px';
 

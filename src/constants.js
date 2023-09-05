@@ -19,6 +19,3 @@ export const MARIAN_URL = process.env.GATSBY_MARIAN_URL || 'https://docs-search-
 export const MUT_CANDIDATES = {
   mainColumn: 'main-column',
 };
-
-export const CHATBOT_SERVER_BASE_URL =
-  process.env.CHATBOT_SERVER_BASE_URL || 'https://knowledge.staging.corp.mongodb.com/api/v1';
