@@ -347,7 +347,10 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H3 style={{ color: '#00684A', paddingBottom: '24px' }}> Search Results</H3>
+          <H3 as="h1" style={{ color: '#00684A', paddingBottom: '24px' }}>
+            {' '}
+            Search Results
+          </H3>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
