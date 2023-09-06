@@ -10,11 +10,8 @@ const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
-const { isGatsbyPreview } = require('../../src/utils/is-gatsby-preview.js');
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
-
-const isPreview = isGatsbyPreview;
 
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
@@ -299,12 +296,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   try {
     result.data.allPagePath.nodes.forEach((node) => {
-      let pagePath;
-      if (isPreview) {
-        pagePath = path.join(node.project, node.branch, node.page_id);
-      } else {
-        pagePath = node.page_id;
-      }
+      const pagePath = path.join(node.project, node.branch, node.page_id);
       let slug = node.page_id;
       // Slices off leading slash to ensure slug matches an entry within the toctreeOrder and renders InternalPageNav components
       if (slug !== '/' && slug[0] === '/') slug = slug.slice(1);
