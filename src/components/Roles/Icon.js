@@ -35,7 +35,7 @@ const RoleIcon = ({ nodeData: { target, name } }) => {
   } else if (name === 'icon-mms') {
     return <i className={`mms-icon-${target} mms-icon`}></i>;
   } else if (name === 'icon-lg') {
-    return <Icon glyph={target} />;
+    return <Icon glyph={target} className="lg-icon" />;
   }
 };
 
