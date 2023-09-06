@@ -246,7 +246,7 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchField, setSearchField] = useState(searchTerm || '');
   const [searchFinished, setSearchFinished] = useState(true);
-  const [searchCount, setSearchCount] = useState(null);
+  const [searchCount, setSearchCount] = useState();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const specifySearchText = 'Specify your search';
 
@@ -317,7 +317,7 @@ const SearchResults = () => {
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
-        setSearchCount(undefined);
+        setSearchCount();
       });
   }, [searchTerm, page, searchFilter, searchPropertyMapping, isFirstLoad]);
 
@@ -374,7 +374,7 @@ const SearchResults = () => {
             }}
           />
           <ResultTag style={{ paddingTop: '10px' }}>
-            {searchFinished && Number.isInteger(searchCount) && (
+            {Number.isInteger(searchCount) && (
               <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
                 <>{searchCount} RESULTS</>
               </Overline>
