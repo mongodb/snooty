@@ -9,14 +9,16 @@ import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
 
-const StyledHeaderContainer = styled.header`
+const StyledHeaderContainer = styled.header(
+  (props) => `
   grid-area: header;
-  position: sticky;
   top: 0;
   z-index: 1000;
-`;
+  ${props.template !== 'landing' ? 'position: sticky;' : ''}
+  `
+);
 
-const Header = ({ sidenav, eol }) => {
+const Header = ({ sidenav, eol, template }) => {
   const { project } = useSiteMetadata();
   const { branch } = useSnootyMetadata();
   const { searchPropertyMapping } = useMarianManifests();
@@ -51,7 +53,7 @@ const Header = ({ sidenav, eol }) => {
   }
 
   return (
-    <StyledHeaderContainer>
+    <StyledHeaderContainer template={template}>
       <SiteBanner />
       <>
         {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty, searchParams }} />}

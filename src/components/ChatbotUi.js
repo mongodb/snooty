@@ -31,11 +31,17 @@ const formWidth = (measurement) => {
   `;
 };
 
-const StyledChatBotUiContainer = styled.div`
+const StyledChatBotUiContainer = styled.div(({ template }) => {
+  return `
+  ${
+    template === 'landing'
+      ? `position: sticky;
+  top: 0px;`
+      : `position: relative;`
+  }
   margin-left: 60px;
   margin-top: 20px;
   margin-bottom: 16px;
-  position: relative;
   z-index: 1;
   ${formWidth(771)}
 
@@ -51,12 +57,13 @@ const StyledChatBotUiContainer = styled.div`
     color: #001e2b !important; /* a workaround for handling the color issue until the next release of the mongodb-chatbot-ui */
   }
 `;
+});
 
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
-const ChatbotUi = () => {
+const ChatbotUi = ({ template }) => {
   return (
-    <StyledChatBotUiContainer data-testid="chatbot-ui">
+    <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspend. We can use this opportunity to render a loading state if we decided we want that */}
       <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={82} />}>
         <LazyChatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} />
