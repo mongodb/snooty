@@ -21,6 +21,8 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const getTocMetadata = useCallback(async () => {
+    // Embedded versioning is not expected to work in staging builds, so we should
+    // be able to safely return the default toctree.
     if (isGatsbyPreview) {
       return toctree;
     }
