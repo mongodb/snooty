@@ -83,6 +83,8 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 import Instruqt from './Instruqt';
+import Products from './Products';
+import ProductItem from './Products/ProductItem';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -162,6 +164,8 @@ const componentMap = {
   instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
+  'landing:product': ProductItem,
+  'landing:products': Products,
   line: Line,
   line_block: LineBlock,
   list: List,
