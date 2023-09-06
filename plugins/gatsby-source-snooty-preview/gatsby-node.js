@@ -10,10 +10,11 @@ const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
+const { isGatsbyPreview } = require('../../src/utils/is-gatsby-preview.js');
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
 
-const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
+const isPreview = isGatsbyPreview;
 
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
@@ -275,9 +276,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
-  const templatePath = isPreview
-    ? path.join(__dirname, `../../src/components/DocumentBodyPreview.js`)
-    : path.join(__dirname, `../../src/components/DocumentBody.js`);
+  const templatePath = path.join(__dirname, `../../src/components/DocumentBodyPreview.js`);
   const result = await graphql(`
     query {
       allPagePath {

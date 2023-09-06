@@ -1,3 +1,5 @@
+import { isGatsbyPreview } from './is-gatsby-preview';
+
 export const isCurrentPage = (currentUrl, slug) => {
   // If we're in preview mode, we build the pages of each branch of the site within
   // its own namespace so each author can preview their own pages e.g.
@@ -8,7 +10,7 @@ export const isCurrentPage = (currentUrl, slug) => {
   // the currentUrl.
   let modifiedCurrentUrl = currentUrl;
   const firstPathSegment = currentUrl.split(`/`).slice(0, 1)[0];
-  if (process.env.GATSBY_IS_PREVIEW === `true` && firstPathSegment.startsWith(`BRANCH--`)) {
+  if (isGatsbyPreview && firstPathSegment.startsWith(`BRANCH--`)) {
     modifiedCurrentUrl = currentUrl.split(`/`).slice(1).join(`/`);
   }
   const trimSlashes = (str) => str.replace(/^\/|\/$/g, '');

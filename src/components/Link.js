@@ -8,6 +8,7 @@ import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
+import { isGatsbyPreview } from '../utils/is-gatsby-preview';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -79,7 +80,7 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    if (process.env.GATSBY_IS_PREVIEW === `true`) {
+    if (isGatsbyPreview) {
       // If we're in preview mode, we build the pages of each project and branch of the site within
       // its own namespace so each author can preview their own pages e.g.
       // /project1/branch1/doc-path

@@ -4,6 +4,7 @@ import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { fetchDocuments } from '../utils/realm';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { isGatsbyPreview } from '../utils/is-gatsby-preview';
 import { VersionContext } from './version-context';
 
 const TocContext = createContext({
@@ -20,6 +21,10 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const getTocMetadata = useCallback(async () => {
+    if (isGatsbyPreview) {
+      return toctree;
+    }
+
     try {
       const filter = {
         project: `${project}`,

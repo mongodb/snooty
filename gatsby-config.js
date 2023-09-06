@@ -1,7 +1,8 @@
 const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
+const { isGatsbyPreview } = require('./src/utils/is-gatsby-preview');
 
-const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
+const isPreview = isGatsbyPreview();
 const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata, process.env.GATSBY_SITE) : undefined;
 
 console.log('PATH PREFIX', pathPrefix);
