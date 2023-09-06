@@ -1157,7 +1157,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         class="emotion-4"
         style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -2453,7 +2453,7 @@ exports[`Search Results Page does not return results for a given search term wit
         class="emotion-4"
         style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -3744,7 +3744,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         class="emotion-4"
         style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -4893,7 +4893,7 @@ exports[`Search Results Page renders loading images before returning no results 
         class="emotion-4"
         style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -6523,7 +6523,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         class="emotion-4"
         style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -8401,7 +8401,7 @@ exports[`Search Results Page renders results from a given search term query para
         class="emotion-4"
         style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
