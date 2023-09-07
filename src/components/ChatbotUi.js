@@ -5,6 +5,11 @@ import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+const CHATBOT_SERVER_BASE_URL =
+  process.env.SNOOTY_ENV === 'production' || process.env.SNOOTY_ENV === 'dotcomprd'
+    ? 'https://knowledge.mongodb.com/api/v1'
+    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+
 const SKELETON_BORDER_RADIUS = '12px';
 
 const formWidth = (measurement) => {
@@ -54,7 +59,7 @@ const ChatbotUi = () => {
     <StyledChatBotUiContainer data-testid="chatbot-ui">
       {/* We wrapped this in a Suspend. We can use this opportunity to render a loading state if we decided we want that */}
       <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={82} />}>
-        <LazyChatbot />
+        <LazyChatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} />
       </Suspense>
     </StyledChatBotUiContainer>
   );

@@ -247,7 +247,7 @@ const SearchResults = () => {
   const [searchField, setSearchField] = useState(searchTerm || '');
   const [searchFinished, setSearchFinished] = useState(false);
   const [firstLoadEmpty] = useState(false);
-  const specifySearchText = 'Specify your search';
+  const specifySearchText = 'Refine your search';
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
