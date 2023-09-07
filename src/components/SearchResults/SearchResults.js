@@ -459,7 +459,7 @@ const SearchResults = () => {
               {
                 <>
                   <Pagination
-                    currentPage={parseInt(new URLSearchParams(search).get('page'))}
+                    currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
                     numTotalItems={searchCount}
                     onForwardArrowClick={onPageClick.bind(null, true)}
                     onBackArrowClick={onPageClick.bind(null, false)}
