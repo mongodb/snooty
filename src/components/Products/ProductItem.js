@@ -46,16 +46,12 @@ const StyledArticle = styled.article`
   }
 `;
 
-const ProductItem = ({
-  nodeData: {
-    children,
-    options: { icon },
-  },
-}) => {
-  console.log('children-->', children);
+const ProductItem = ({ nodeData: { children, options } }) => {
+  const icon = options.icon;
+  const iconAlt = options['icon-alt'];
   return (
     <StyledSection>
-      <StyledImage src={withPrefix(icon)} alt="Atlas" />
+      <StyledImage src={withPrefix(icon)} alt={iconAlt} />
       <StyledArticle>
         {children.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} />
