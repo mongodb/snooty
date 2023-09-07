@@ -3,8 +3,11 @@ import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
+import ChatbotUi from '../components/ChatbotUi';
 
 const CONTENT_MAX_WIDTH = 1440;
+
+const SHOW_CHATBOT = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
 const Wrapper = styled('main')`
   margin: 0 auto;
@@ -45,12 +48,15 @@ const Wrapper = styled('main')`
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children }) => {
+const Landing = ({ children, pageContext }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
       <div>
-        <Wrapper>{children}</Wrapper>
+        <Wrapper>
+          {SHOW_CHATBOT && <ChatbotUi template={pageContext?.template} />}
+          {children}
+        </Wrapper>
       </div>
       <Global
         styles={css`
