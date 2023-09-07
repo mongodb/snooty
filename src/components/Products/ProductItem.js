@@ -54,7 +54,7 @@ const ProductItem = ({ nodeData: { children, options } }) => {
       <StyledImage src={withPrefix(icon)} alt={iconAlt} />
       <StyledArticle>
         {children.map((child, i) => (
-          <ComponentFactory nodeData={child} key={i} />
+          <ComponentFactory nodeData={child} key={i} showLinkArrow={true} />
         ))}
       </StyledArticle>
     </StyledSection>

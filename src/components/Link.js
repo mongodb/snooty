@@ -106,6 +106,7 @@ const Link = ({
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
       hideExternalIcon={hideExternalIcon}
+      arrowAppearance={showLinkArrow ? 'persist' : 'none'}
       target={target}
       {...other}
     >
