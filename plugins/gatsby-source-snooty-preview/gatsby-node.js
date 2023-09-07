@@ -13,8 +13,6 @@ const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
 
-const isPreview = process.env.GATSBY_IS_PREVIEW === `true`;
-
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
 let currentWebhookBody = {};
@@ -275,9 +273,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
-  const templatePath = isPreview
-    ? path.join(__dirname, `../../src/components/DocumentBodyPreview.js`)
-    : path.join(__dirname, `../../src/components/DocumentBody.js`);
+  const templatePath = path.join(__dirname, `../../src/components/DocumentBodyPreview.js`);
   const result = await graphql(`
     query {
       allPagePath {
@@ -300,12 +296,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   try {
     result.data.allPagePath.nodes.forEach((node) => {
-      let pagePath;
-      if (isPreview) {
-        pagePath = path.join(node.project, node.branch, node.page_id);
-      } else {
-        pagePath = node.page_id;
-      }
+      const pagePath = path.join(node.project, node.branch, node.page_id);
       let slug = node.page_id;
       // Slices off leading slash to ensure slug matches an entry within the toctreeOrder and renders InternalPageNav components
       if (slug !== '/' && slug[0] === '/') slug = slug.slice(1);
