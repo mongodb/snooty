@@ -424,7 +424,7 @@ const SearchResults = () => {
         )}
 
         {/* empty search results */}
-        {!isFirstLoad && !!searchFinished && !searchResults.length && (
+        {!isFirstLoad && searchFinished && !searchResults?.length && (
           <>
             <>
               <EmptyResultsContainer
