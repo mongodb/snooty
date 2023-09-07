@@ -472,7 +472,7 @@ const SearchResults = () => {
             </StyledSearchResults>
           </>
         )}
-        {!isFirstLoad && !!searchFinished && (
+        {!isFirstLoad && searchFinished && (
           <FiltersContainer>
             <FilterHeader>{specifySearchText}</FilterHeader>
             <StyledSearchFilters />
