@@ -73,6 +73,11 @@ exports[`Search Results Page considers a given search filter query param and dis
   border-color: #889397;
 }
 
+.emotion-6:not(:disabled):focus-within {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: #FFFFFF;
+}
+
 .emotion-6:hover:not(:disabled):not(:focus-within),
 .emotion-6:active:not(:disabled):not(:focus-within) {
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -1420,7 +1425,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       <h2
         class="emotion-58 emotion-59"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-60 emotion-61"
@@ -1650,6 +1655,11 @@ exports[`Search Results Page does not return results for a given search term wit
   color: #001E2B;
   background: #FFFFFF;
   border-color: #889397;
+}
+
+.emotion-6:not(:disabled):focus-within {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: #FFFFFF;
 }
 
 .emotion-6:hover:not(:disabled):not(:focus-within),
@@ -2554,7 +2564,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -2847,7 +2857,7 @@ exports[`Search Results Page does not return results for a given search term wit
       <h2
         class="emotion-31 emotion-32"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-33 emotion-34"
@@ -3077,6 +3087,11 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   color: #001E2B;
   background: #FFFFFF;
   border-color: #889397;
+}
+
+.emotion-6:not(:disabled):focus-within {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: #FFFFFF;
 }
 
 .emotion-6:hover:not(:disabled):not(:focus-within),
@@ -3420,7 +3435,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -3500,6 +3515,11 @@ exports[`Search Results Page renders loading images before returning no results 
   color: #001E2B;
   background: #FFFFFF;
   border-color: #889397;
+}
+
+.emotion-6:not(:disabled):focus-within {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: #FFFFFF;
 }
 
 .emotion-6:hover:not(:disabled):not(:focus-within),
@@ -3968,7 +3988,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -4048,6 +4068,11 @@ exports[`Search Results Page renders loading images before returning nonempty re
   color: #001E2B;
   background: #FFFFFF;
   border-color: #889397;
+}
+
+.emotion-6:not(:disabled):focus-within {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: #FFFFFF;
 }
 
 .emotion-6:hover:not(:disabled):not(:focus-within),
@@ -4516,7 +4541,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -4596,6 +4621,11 @@ exports[`Search Results Page renders results from a given search term query para
   color: #001E2B;
   background: #FFFFFF;
   border-color: #889397;
+}
+
+.emotion-6:not(:disabled):focus-within {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: #FFFFFF;
 }
 
 .emotion-6:hover:not(:disabled):not(:focus-within),
@@ -5775,7 +5805,7 @@ exports[`Search Results Page renders results from a given search term query para
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -5910,7 +5940,7 @@ exports[`Search Results Page renders results from a given search term query para
       <h2
         class="emotion-52 emotion-53"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-54 emotion-55"
