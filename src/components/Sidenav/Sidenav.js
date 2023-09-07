@@ -29,6 +29,7 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const SIDENAV_WIDTH = 268;
+const CHATBOT_ENABLED = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
 // Use LG's css here to style the component without passing props
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
@@ -98,7 +99,7 @@ const disableScroll = (shouldDisableScroll) => css`
 
 // use eol status to determine side nav styling
 const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing'
+  ${template === 'landing' && CHATBOT_ENABLED
     ? `
     top: 0px;
     height: calc(100vh);`
