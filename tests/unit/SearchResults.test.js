@@ -87,8 +87,8 @@ const filterByRealm = async (wrapper, screenSize) => {
 };
 
 const openMobileSearch = async (wrapper) => {
-  const specifySearchButton = wrapper.queryAllByText('Specify your search')[0].closest('button');
-  userEvent.click(specifySearchButton);
+  const refineSearchButton = wrapper.queryAllByText('Refine your search')[0].closest('button');
+  userEvent.click(refineSearchButton);
   tick();
 };
 

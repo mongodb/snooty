@@ -1420,7 +1420,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       <h2
         class="emotion-58 emotion-59"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-60 emotion-61"
@@ -2554,7 +2554,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -2847,7 +2847,7 @@ exports[`Search Results Page does not return results for a given search term wit
       <h2
         class="emotion-31 emotion-32"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-33 emotion-34"
@@ -3814,7 +3814,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -3825,7 +3825,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       <h2
         class="emotion-19 emotion-20"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-21 emotion-22"
@@ -4986,7 +4986,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -5451,7 +5451,7 @@ exports[`Search Results Page renders loading images before returning no results 
       <h2
         class="emotion-44 emotion-45"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-46 emotion-47"
@@ -6612,7 +6612,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -7077,7 +7077,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
       <h2
         class="emotion-44 emotion-45"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-46 emotion-47"
@@ -8486,7 +8486,7 @@ exports[`Search Results Page renders results from a given search term query para
                 fill-rule="evenodd"
               />
             </svg>
-            Specify your search
+            Refine your search
           </div>
         </button>
       </div>
@@ -8621,7 +8621,7 @@ exports[`Search Results Page renders results from a given search term query para
       <h2
         class="emotion-52 emotion-53"
       >
-        Specify your search
+        Refine your search
       </h2>
       <div
         class="emotion-54 emotion-55"
