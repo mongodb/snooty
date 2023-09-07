@@ -16,6 +16,9 @@ export const searchParamsToURL = (searchQuery, searchFilters, pageNumber = 1, is
  */
 export const searchParamsToMetaURL = (searchQuery, searchFilters, facetSelections) => {
   let queryParams = `?q=${searchQuery}${searchFilters ? `&searchProperty=${searchFilters}` : ''}`;
+  // TODO: DOP-3929
+  // use facet selections to expand facets, restrict count
+  //
   // for (const facetSelection of facetSelections) {
   //   for (const facetKey in facetSelection) {
   //     queryParams += `&facets.${facetKey}=${facetSelection[facetKey]}`
