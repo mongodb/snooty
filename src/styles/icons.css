@@ -4882,9 +4882,3 @@
   color: color(var(--alert-red) tint(25%));
   color: var(--mms-alert-red-dark);
 }
-
-/* LeafyGreen icons */
-
-.lg-icon {
-  vertical-align: middle;
-}

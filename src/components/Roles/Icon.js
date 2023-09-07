@@ -16,6 +16,10 @@ const syncPillStyle = css`
   top: -3px;
 `;
 
+const leafyGreenIconStyle = css`
+  vertical-align: middle;
+`;
+
 const RoleIcon = ({ nodeData: { target, name } }) => {
   if (target === 'sync-pill') {
     return (
@@ -35,7 +39,7 @@ const RoleIcon = ({ nodeData: { target, name } }) => {
   } else if (name === 'icon-mms') {
     return <i className={`mms-icon-${target} mms-icon`}></i>;
   } else if (name === 'icon-lg') {
-    return <Icon glyph={target} className="lg-icon" />;
+    return <Icon glyph={target} css={leafyGreenIconStyle} />;
   }
 };
 
