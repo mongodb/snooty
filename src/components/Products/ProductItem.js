@@ -41,6 +41,8 @@ const StyledArticle = styled.article`
 `;
 
 const StyledH3element = styled.h3`
+  font-size: 24px;
+  font-weight: 500;
   margin: 0;
   padding-top: 4px;
 `;
