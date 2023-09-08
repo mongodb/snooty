@@ -115,6 +115,7 @@ const roleMap = {
   'icon-fa4': RoleIcon,
   'icon-mms': RoleIcon,
   'icon-charts': RoleIcon,
+  'icon-lg': RoleIcon,
   kbd: RoleKbd,
   red: RoleRed,
   required: RoleRequired,
