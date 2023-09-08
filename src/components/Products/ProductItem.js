@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
@@ -65,6 +66,16 @@ const ProductItem = ({ nodeData: { children, options, argument } }) => {
       </StyledArticle>
     </StyledSection>
   );
+};
+
+ProductItem.prototype = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
+    options: PropTypes.shape({
+      columns: PropTypes.number,
+    }),
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
 };
 
 export default ProductItem;
