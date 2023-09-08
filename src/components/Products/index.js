@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 
 const StyledSectionContainer = styled.section`
@@ -17,6 +18,12 @@ const Products = ({ nodeData: { children } }) => {
       ))}
     </StyledSectionContainer>
   );
+};
+
+Products.prototype = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
 };
 
 export default Products;
