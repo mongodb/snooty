@@ -62,6 +62,7 @@ const getTheSupportedMedia = (url) => {
 };
 
 const Video = ({ nodeData: { argument }, ...rest }) => {
+  debugger;
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));

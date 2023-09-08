@@ -83,6 +83,7 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 import Instruqt from './Instruqt';
+import { MoreWays } from './Landing/MoreWays';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -163,6 +164,7 @@ const componentMap = {
   instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
+  'landing:more-ways': MoreWays,
   line: Line,
   line_block: LineBlock,
   list: List,
@@ -213,7 +215,7 @@ const ComponentFactory = (props) => {
     }
 
     // Warn on unexpected usage of domains, but don't break
-    const validDomains = ['mongodb', 'std'];
+    const validDomains = ['mongodb', 'std', 'landing'];
     if (domain && !validDomains.includes(domain)) {
       console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }
