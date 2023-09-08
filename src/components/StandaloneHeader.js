@@ -16,7 +16,7 @@ const StandaloneHeader = ({ nodeData: { argument, options } }) => {
 
 StandaloneHeader.prototype = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
     options: PropTypes.shape({
       columns: PropTypes.number,
     }),
