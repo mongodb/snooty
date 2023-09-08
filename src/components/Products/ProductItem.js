@@ -22,16 +22,15 @@ const StyledSection = styled.div`
 `;
 
 const StyledImage = styled.img`
+  height: 61px;
   width: 61px;
 `;
 
 const StyledArticle = styled.article`
-  h2 {
-    margin-top: 2px;
-  }
   p:first-of-type {
     font-size: 24px;
     font-weight: 500;
+    margin-top: 4px;
   }
   p {
     font-size: ${FONT_SIZE};
