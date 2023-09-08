@@ -1,60 +1,53 @@
 import React, { Suspense, lazy } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+const CHATBOT_SERVER_BASE_URL =
+  process.env.SNOOTY_ENV === 'production' || process.env.SNOOTY_ENV === 'dotcomprd'
+    ? 'https://knowledge.mongodb.com/api/v1'
+    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+
 const SKELETON_BORDER_RADIUS = '12px';
 
-const formWidth = (measurement) => {
-  let _measurement = measurement;
-
-  if (typeof measurement !== 'string' && typeof measurement !== 'number') {
-    console.error('using the wrong measurement value');
-    // set it to the original style from the package
-    _measurement = '100%';
+const StyledChatBotUiContainer = styled.div(
+  ({ template }) => `
+  ${
+    template === 'landing'
+      ? `position: sticky;
+  top: 0px;`
+      : `position: relative;`
   }
-
-  if (typeof measurement === 'number') {
-    _measurement = `${measurement}px`;
-  }
-  return css`
-    form {
-      width: ${_measurement};
-    }
-  `;
-};
-
-const StyledChatBotUiContainer = styled.div`
-  margin-left: 60px;
-  margin-top: 20px;
-  margin-bottom: 16px;
-  position: relative;
+  padding: 16px 50px;
   z-index: 1;
-  ${formWidth(771)}
+  width: 100%;
+  background: ${palette.white};
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 
-  @media ${theme.screenSize.upToXLarge} {
-    ${formWidth(704)}
+  > div {
+    max-width: 771px;
+    p {
+      color: ${palette.black};
+    }
+
+    @media ${theme.screenSize.upToLarge} {
+      max-width: unset;
+    }
   }
 
-  @media ${theme.screenSize.upToMedium} {
-    ${formWidth('90%')}
-  }
-
-  p {
-    color: #001e2b !important; /* a workaround for handling the color issue until the next release of the mongodb-chatbot-ui */
-  }
-`;
+`
+);
 
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
-const ChatbotUi = () => {
+const ChatbotUi = ({ template }) => {
   return (
-    <StyledChatBotUiContainer data-testid="chatbot-ui">
-      {/* We wrapped this in a Suspend. We can use this opportunity to render a loading state if we decided we want that */}
+    <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
+      {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
       <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={82} />}>
-        <LazyChatbot />
+        <LazyChatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} />
       </Suspense>
     </StyledChatBotUiContainer>
   );
