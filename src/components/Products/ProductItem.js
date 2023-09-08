@@ -27,11 +27,6 @@ const StyledImage = styled.img`
 `;
 
 const StyledArticle = styled.article`
-  p:first-of-type {
-    font-size: 24px;
-    font-weight: 500;
-    margin-top: 4px;
-  }
   p {
     font-size: ${FONT_SIZE};
     line-height: 28px;
@@ -45,13 +40,23 @@ const StyledArticle = styled.article`
   }
 `;
 
-const ProductItem = ({ nodeData: { children, options } }) => {
+const StyledH3element = styled.h3`
+  margin: 0;
+  padding-top: 4px;
+`;
+
+const ProductItem = ({ nodeData: { children, options, argument } }) => {
   const icon = options.icon;
   const iconAlt = options['icon-alt'];
   return (
     <StyledSection>
       <StyledImage src={withPrefix(icon)} alt={iconAlt} />
       <StyledArticle>
+        <StyledH3element>
+          {argument.map((child, i) => (
+            <ComponentFactory nodeData={child} key={i} />
+          ))}
+        </StyledH3element>
         {children.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} showLinkArrow={true} />
         ))}
