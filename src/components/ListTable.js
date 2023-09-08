@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
+import { Table, Row, Cell, TableHead, HeaderRow, V11Adapter} from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
@@ -131,6 +131,9 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
 
+  console.log(bodyRows)
+  console.log("length: ", bodyRows.length)
+
   // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
   const headerRows =
     headerRowCount > 0
@@ -156,40 +159,40 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         <div className="header-buffer" key={id} id={id} />
       ))}
       <Table
-        className={cx(
-          styleTable({
-            customAlign: options?.align,
-            customWidth: options?.width,
-          })
-        )}
-        columns={headerRows.map((row, rowIndex) => (
-          <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
-            {row.children.map((cell, colIndex) => {
-              const skipPTag = hasOneChild(cell.children);
-              return (
-                <TableHeader
-                  className={cx(css`
-                    * {
-                      font-size: ${theme.fontSize.small};
-                      font-weight: 600;
-                    }
-                    ${widths && `width: ${widths[colIndex]}%`}
-                  `)}
-                  key={`${rowIndex}-${colIndex}`}
-                  label={cell.children.map((child, i) => (
-                    <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                  ))}
-                />
-              );
-            })}
-          </HeaderRow>
-        ))}
-        data={bodyRows}
-      >
-        {({ datum }) => (
-          <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
-        )}
-      </Table>
+          className={cx(
+            styleTable({
+              customAlign: options?.align,
+              customWidth: options?.width,
+            })
+          )}
+          columns={headerRows.map((row, rowIndex) => (
+            <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
+              {row.children.map((cell, colIndex) => {
+                const skipPTag = hasOneChild(cell.children);
+                return (
+                  <TableHead
+                    className={cx(css`
+                      * {
+                        font-size: ${theme.fontSize.small};
+                        font-weight: 600;
+                      }
+                      ${widths && `width: ${widths[colIndex]}%`}
+                    `)}
+                    key={`${rowIndex}-${colIndex}`}
+                    label={cell.children.map((child, i) => (
+                      <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                    ))}
+                  />
+                );
+              })}
+            </HeaderRow>
+          ))}
+          data={bodyRows}
+        >
+          {({ datum }) => (
+            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
+          )}
+        </Table>
     </>
   );
 };

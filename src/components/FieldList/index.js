@@ -16,7 +16,7 @@ const Table = styled('table')`
 `;
 
 const FieldList = ({ nodeData: { children }, ...rest }) => (
-  <Table>
+  <Table shouldAlternateRowColor={children.length > 4 ? true : false}>
     <colgroup>
       <col className="field-name" />
       <col className="field-body" />
