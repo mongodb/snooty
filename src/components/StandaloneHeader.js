@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
-import Link from './Link';
 import SectionHeader from './SectionHeader';
+import Link from './Link';
 
 const StyledStandaloneContainer = styled.div`
   align-items: center;

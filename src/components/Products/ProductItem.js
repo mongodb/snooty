@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import { css } from '@leafygreen-ui/emotion';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
@@ -42,7 +43,7 @@ const StyledArticle = styled.article`
   }
 `;
 
-const StyledSectionHeader = styled(SectionHeader)`
+const customStyleHeader = css`
   padding-top: 4px;
 `;
 
@@ -53,11 +54,11 @@ const ProductItem = ({ nodeData: { children, options, argument } }) => {
     <StyledSection>
       <StyledImage src={withPrefix(icon)} alt={iconAlt} />
       <StyledArticle>
-        <StyledSectionHeader as="h3">
+        <SectionHeader as="h3" customStyles={customStyleHeader}>
           {argument.map((child, i) => (
             <ComponentFactory nodeData={child} key={i} />
           ))}
-        </StyledSectionHeader>
+        </SectionHeader>
         {children.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} showLinkArrow={true} />
         ))}
