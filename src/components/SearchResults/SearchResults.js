@@ -9,13 +9,13 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { palette } from '@leafygreen-ui/palette';
-import { H1 } from '@leafygreen-ui/typography';
+import { H1, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
-import { searchParamsToURL } from '../../utils/search-params-to-url';
+import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
 import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
@@ -245,8 +245,9 @@ const SearchResults = () => {
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchField, setSearchField] = useState(searchTerm || '');
-  const [searchFinished, setSearchFinished] = useState(false);
-  const [firstLoadEmpty] = useState(false);
+  const [searchFinished, setSearchFinished] = useState(true);
+  const [searchCount, setSearchCount] = useState();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
@@ -282,9 +283,18 @@ const SearchResults = () => {
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
-    if (!searchTerm || !searchPropertyMapping || !Object.keys(searchPropertyMapping).length) {
+    if (!searchPropertyMapping || !Object.keys(searchPropertyMapping).length) {
       return;
     }
+    if (!searchTerm) {
+      if (isFirstLoad) {
+        return;
+      }
+      setSearchResults([]);
+      setSearchCount(0);
+      return;
+    }
+    setIsFirstLoad(false);
     setSearchFinished(false);
 
     const fetchSearchResults = async () => {
@@ -292,17 +302,33 @@ const SearchResults = () => {
       return (await res.json()).results;
     };
 
+    const fetchSearchMeta = async () => {
+      // TODO: allow search facet selections
+      const res = await fetch(searchParamsToMetaURL(searchTerm, searchFilter));
+      return res.json();
+    };
+
     fetchSearchResults()
       .then((searchRes) => {
         setSearchResults(searchRes || []);
       })
       .catch((e) => {
-        console.error(`Error fetching search results: ${e}`);
+        console.error(`Error fetching search results: ${JSON.stringify(e)}`);
       })
       .finally(() => {
         setSearchFinished(true);
       });
-  }, [searchTerm, page, searchFilter, searchPropertyMapping]);
+
+    // fetch search meta
+    fetchSearchMeta()
+      .then((res) => {
+        setSearchCount(res?.count);
+      })
+      .catch((e) => {
+        console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
+        setSearchCount();
+      });
+  }, [searchTerm, page, searchFilter, searchPropertyMapping, isFirstLoad]);
 
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
@@ -358,10 +384,11 @@ const SearchResults = () => {
             }}
           />
           <ResultTag style={{ paddingTop: '10px' }}>
-            {/* TODO: add number of results from metadata */}
-            {/* <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
-                  {!firstLoadEmpty && <>{searchResults?.length ? searchResults.length : '0'} RESULTS</>}
-                </Overline> */}
+            {Number.isInteger(searchCount) && (
+              <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+                <>{searchCount} RESULTS</>
+              </Overline>
+            )}
             {!!searchFilter && (
               <FilterBadgesWrapper>
                 {selectedCategory && (
@@ -397,26 +424,18 @@ const SearchResults = () => {
         )}
 
         {/* empty search results */}
-        {!!searchFinished && !searchResults.length && (
+        {!isFirstLoad && searchFinished && !searchResults?.length && (
           <>
-            {firstLoadEmpty ? (
-              <FiltersContainer
+            <>
+              <EmptyResultsContainer
                 css={css`
-                  margin-bottom: 550px;
+                  grid-area: results;
+                  margin-top: 80px;
                 `}
-              />
-            ) : (
-              <>
-                <EmptyResultsContainer
-                  css={css`
-                    grid-area: results;
-                    margin-top: 80px;
-                  `}
-                >
-                  <EmptyResults />
-                </EmptyResultsContainer>
-              </>
-            )}
+              >
+                <EmptyResults />
+              </EmptyResultsContainer>
+            </>
           </>
         )}
 
@@ -440,8 +459,8 @@ const SearchResults = () => {
               {
                 <>
                   <Pagination
-                    currentPage={parseInt(new URLSearchParams(search).get('page'))}
-                    // TODO: add count after facet meta query
+                    currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
+                    numTotalItems={searchCount}
                     onForwardArrowClick={onPageClick.bind(null, true)}
                     onBackArrowClick={onPageClick.bind(null, false)}
                     shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
@@ -453,7 +472,7 @@ const SearchResults = () => {
             </StyledSearchResults>
           </>
         )}
-        {!firstLoadEmpty && (
+        {!isFirstLoad && searchFinished && (
           <FiltersContainer>
             <FilterHeader>{specifySearchText}</FilterHeader>
             <StyledSearchFilters />
