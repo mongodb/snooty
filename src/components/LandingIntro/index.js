@@ -49,7 +49,7 @@ const containerStyling = css(`
     }
   }
   
-  @media ${theme.screenSize.upToSmall} {
+  @media ${theme.screenSize.upToMedium} {
     grid-template-columns: 1fr;
     padding: 38px 18px;
 
@@ -84,7 +84,7 @@ const headerStyling = css`
   grid-row: 1;
   margin-bottom: 20px;
 
-  @media ${theme.screenSize.upToSmall} {
+  @media ${theme.screenSize.upToMedium} {
     grid-row: 2;
   }
 `;
