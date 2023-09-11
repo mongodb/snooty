@@ -4,6 +4,7 @@ import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import IALinkedData from './IALinkedData';
 
@@ -17,27 +18,66 @@ const fontStyling = css`
   line-height: 20px;
 `;
 
-const IA = ({ handleClick, header, ia }) => (
-  <SideNavGroup className={cx(headerPadding)} header={header}>
-    {ia.map(({ title, slug, url, linked_data: linkedData }) => {
-      const target = slug || url;
-      return (
-        <>
-          <SideNavItem
-            className={cx([sideNavItemBasePadding, sideNavItemFontSize, fontStyling])}
-            key={target}
-            as={Link}
-            onClick={handleClick}
-            to={target}
-          >
-            {formatText(title)}
-          </SideNavItem>
-          {linkedData?.length > 0 && <IALinkedData linkedData={linkedData} />}
-        </>
-      );
-    })}
-  </SideNavGroup>
-);
+/**
+ * Traverses the IA tree to look for nodes with IDs and linked data.
+ * @param {*} iaTreeNode
+ * @param {*} mapping
+ */
+const traverseIATree = (iaTreeNode, mapping) => {
+  if (!iaTreeNode) {
+    return;
+  }
+
+  if (iaTreeNode.id && iaTreeNode.linked_data) {
+    mapping[iaTreeNode.id] = iaTreeNode.linked_data;
+  }
+
+  if (iaTreeNode.children?.length) {
+    iaTreeNode.children.forEach((node) => {
+      traverseIATree(node, mapping);
+    });
+  }
+};
+
+/**
+ * Finds IA linked data across the IA tree.
+ * @param {*} iaTree
+ */
+const findIALinkedData = (iaTree) => {
+  const mapping = {};
+  traverseIATree(iaTree, mapping);
+  return mapping;
+};
+
+const IA = ({ handleClick, header, ia }) => {
+  const { iatree } = useSnootyMetadata();
+  const linkedDataMapping = findIALinkedData(iatree);
+
+  return (
+    <SideNavGroup className={cx(headerPadding)} header={header}>
+      {ia.map(({ title, slug, url, id }) => {
+        const target = slug || url;
+        // We use the linked data from the mapping since the linked data and the
+        // IA entry might not always be on the same page (such as the "/search" page).
+        const linkedData = linkedDataMapping[id];
+        return (
+          <>
+            <SideNavItem
+              className={cx([sideNavItemBasePadding, sideNavItemFontSize, fontStyling])}
+              key={target}
+              as={Link}
+              onClick={handleClick}
+              to={target}
+            >
+              {formatText(title)}
+            </SideNavItem>
+            {linkedData && <IALinkedData linkedData={linkedData} />}
+          </>
+        );
+      })}
+    </SideNavGroup>
+  );
+};
 
 IA.propTypes = {
   handleClick: PropTypes.func,
