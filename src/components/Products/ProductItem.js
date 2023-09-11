@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
+import SectionHeader from '../SectionHeader';
 
 const FONT_SIZE = '16px';
 
@@ -41,10 +42,7 @@ const StyledArticle = styled.article`
   }
 `;
 
-const StyledH3element = styled.h3`
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0;
+const StyledSectionHeader = styled(SectionHeader)`
   padding-top: 4px;
 `;
 
@@ -55,11 +53,11 @@ const ProductItem = ({ nodeData: { children, options, argument } }) => {
     <StyledSection>
       <StyledImage src={withPrefix(icon)} alt={iconAlt} />
       <StyledArticle>
-        <StyledH3element>
+        <StyledSectionHeader as="h3">
           {argument.map((child, i) => (
             <ComponentFactory nodeData={child} key={i} />
           ))}
-        </StyledH3element>
+        </StyledSectionHeader>
         {children.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} showLinkArrow={true} />
         ))}
