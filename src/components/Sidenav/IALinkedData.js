@@ -25,7 +25,7 @@ const liStyling = css`
   :focus {
     border: 1px solid ${palette.blue.light1};
 
-    // Override SideNavItem's ::before psuedoelement
+    // Override SideNavItem's ::before pseudo-element
     :focus:before {
       display: none;
     }
@@ -54,7 +54,7 @@ const liStyling = css`
     align-items: center;
     gap: 8px;
 
-    // Remove LG Link's existing underline psuedoelement
+    // Remove LG Link's existing underline pseudo-element
     :after {
       display: none;
     }
