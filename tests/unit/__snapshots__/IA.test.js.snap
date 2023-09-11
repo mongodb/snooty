@@ -1,0 +1,1409 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a page IA with IA linked data 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+}
+
+.emotion-0~.emotion-0>.constant-classname {
+  padding: 16px 16px 8px 16px;
+}
+
+.emotion-0>div {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.emotion-1 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 16px 16px 8px;
+  color: #00684A;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: #001E2B;
+  color: inherit;
+}
+
+.emotion-4 {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.emotion-5 {
+  width: 100%;
+}
+
+.emotion-6 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  min-height: 32px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 13px;
+  line-height: 20px;
+  position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:focus {
+  outline: none;
+}
+
+.emotion-6:hover {
+  background-color: #E8EDEB;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-6::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-6:before {
+  content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+}
+
+.emotion-6:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0C2657;
+  background-color: #C3E7FE;
+}
+
+.emotion-6:focus:before {
+  -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+.emotion-7 {
+  position: relative;
+}
+
+.emotion-7::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-7::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-7::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-12 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-12:focus {
+  outline: none;
+}
+
+.emotion-12>code {
+  color: #016BF8;
+}
+
+.emotion-12::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-12:focus .emotion-12::after {
+  background-color: #0498EC;
+}
+
+.emotion-12:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-13 {
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  min-height: 32px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 13px;
+  line-height: 20px;
+  position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.emotion-13:hover {
+  background-color: #E8EDEB;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-13:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-13::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-13:before {
+  content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+}
+
+.emotion-13:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0C2657;
+  background-color: #C3E7FE;
+}
+
+.emotion-13:focus:before {
+  -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+.emotion-17 {
+  display: grid;
+  -webkit-column-gap: 8px;
+  column-gap: 8px;
+  row-gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  list-style-type: none;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  padding: 8px;
+}
+
+.emotion-19 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  min-height: 32px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 13px;
+  line-height: 20px;
+  position: relative;
+  border-radius: 20px;
+  font-size: 13px;
+  max-width: 120px;
+  height: 32px;
+}
+
+.emotion-19:hover,
+.emotion-19:focus,
+.emotion-19:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-19:focus {
+  outline: none;
+}
+
+.emotion-19:hover {
+  background-color: #E8EDEB;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-19:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-19::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-19:before {
+  content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+}
+
+.emotion-19:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0C2657;
+  background-color: #C3E7FE;
+}
+
+.emotion-19:focus:before {
+  -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+.emotion-19:focus {
+  border: 1px solid #0498EC;
+}
+
+.emotion-19:focus:focus:before {
+  display: none;
+}
+
+.emotion-19:focus>span>span {
+  position: relative;
+}
+
+.emotion-19:focus>span>span::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 4px;
+  left: 0;
+  border-radius: 2px;
+  background-color: #0498EC;
+}
+
+.emotion-19>span {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.emotion-19>span:after {
+  display: none;
+}
+
+<li
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+      data-testid="side-nav-group-header-label"
+      id="menu-group-label-id-3"
+    >
+      <div
+        class="emotion-2"
+      >
+        <div
+          class="emotion-3"
+        />
+      </div>
+    </div>
+    <ul
+      aria-labelledby="menu-group-label-id-3"
+      class="emotion-4"
+    >
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="lg-ui-0001 constant-classname emotion-6"
+          href="https://www.mongodb.com/docs/atlas/getting-started/"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            Atlas
+          </span>
+        </a>
+      </li>
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="lg-ui-0001 constant-classname emotion-6"
+          href="https://www.mongodb.com/docs/manual/"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            MongoDB Database Manual
+          </span>
+        </a>
+      </li>
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="emotion-12 constant-classname emotion-13"
+          href="/tools-and-connectors/"
+        >
+          Tools and Connectors
+        </a>
+      </li>
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="lg-ui-0001 constant-classname emotion-6"
+          href="https://www.mongodb.com/docs/drivers/"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            Client Libraries
+          </span>
+        </a>
+      </li>
+      <ul
+        class="emotion-17"
+      >
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/c/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="C Driver icon"
+                height="16"
+                src="/icons/c.svg"
+                width="16"
+              />
+              <span>
+                C
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/cxx/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="C plus plus Driver icon"
+                height="16"
+                src="/icons/c++.svg"
+                width="16"
+              />
+              <span>
+                C++
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/csharp/current/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="C sharp Driver icon"
+                height="16"
+                src="/icons/csharp.svg"
+                width="16"
+              />
+              <span>
+                C#
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/go/current/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Go Driver icon"
+                height="16"
+                src="/icons/go.svg"
+                width="16"
+              />
+              <span>
+                Go
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/java-drivers/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Java Driver icon"
+                height="16"
+                src="/icons/java.svg"
+                width="16"
+              />
+              <span>
+                Java
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/kotlin-drivers/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Kotlin Driver icon"
+                height="16"
+                src="/icons/kotlin.svg"
+                width="16"
+              />
+              <span>
+                Kotlin
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/node/current/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Node Driver icon"
+                height="16"
+                src="/icons/node.svg"
+                width="16"
+              />
+              <span>
+                Node.js
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/php/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="PHP Driver icon"
+                height="16"
+                src="/icons/php.svg"
+                width="16"
+              />
+              <span>
+                PHP
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/python/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Python Driver icon"
+                height="16"
+                src="/icons/python.svg"
+                width="16"
+              />
+              <span>
+                Python
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/ruby/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Ruby Driver icon"
+                height="16"
+                src="/icons/ruby.svg"
+                width="16"
+              />
+              <span>
+                Ruby
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/rust/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Rust Driver icon"
+                height="16"
+                src="/icons/rust.svg"
+                width="16"
+              />
+              <span>
+                Rust
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/scala/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Scala Driver icon"
+                height="16"
+                src="/icons/scala.svg"
+                width="16"
+              />
+              <span>
+                Scala
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/swift/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="Swift Driver icon"
+                height="16"
+                src="/icons/swift.svg"
+                width="16"
+              />
+              <span>
+                Swift
+              </span>
+            </span>
+          </a>
+        </li>
+        <li
+          class="emotion-5"
+        >
+          <a
+            aria-current="false"
+            aria-disabled="false"
+            class="lg-ui-0001 constant-classname emotion-19"
+            href="https://www.mongodb.com/docs/drivers/typescript/"
+            target="_self"
+          >
+            <span
+              class="emotion-7"
+            >
+              <img
+                alt="TypeScript Driver icon"
+                height="16"
+                src="/icons/ts.svg"
+                width="16"
+              />
+              <span>
+                TypeScript
+              </span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </ul>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`renders a simple page IA correctly 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+}
+
+.emotion-0~.emotion-0>.constant-classname {
+  padding: 16px 16px 8px 16px;
+}
+
+.emotion-0>div {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.emotion-1 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 16px 16px 8px;
+  color: #00684A;
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  margin: unset;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: #001E2B;
+  color: inherit;
+}
+
+.emotion-4 {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.emotion-5 {
+  width: 100%;
+}
+
+.emotion-6 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  min-height: 32px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 13px;
+  line-height: 20px;
+  position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:focus {
+  outline: none;
+}
+
+.emotion-6:hover {
+  background-color: #E8EDEB;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-6::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-6:before {
+  content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+}
+
+.emotion-6:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0C2657;
+  background-color: #C3E7FE;
+}
+
+.emotion-6:focus:before {
+  -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+.emotion-7 {
+  position: relative;
+}
+
+.emotion-7::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-7::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-7::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-12 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-12:focus {
+  outline: none;
+}
+
+.emotion-12>code {
+  color: #016BF8;
+}
+
+.emotion-12::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-12:focus .emotion-12::after {
+  background-color: #0498EC;
+}
+
+.emotion-12:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-13 {
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  min-height: 32px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #001E2B;
+  -webkit-transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
+  background-color: rgba(249,251,250,0);
+  font-size: 13px;
+  line-height: 20px;
+  position: relative;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.emotion-13:hover {
+  background-color: #E8EDEB;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-13:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.emotion-13::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-13:before {
+  content: '';
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 0 6px 6px 0;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scaleY(0.3);
+  -moz-transform: scaleY(0.3);
+  -ms-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+}
+
+.emotion-13:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0C2657;
+  background-color: #C3E7FE;
+}
+
+.emotion-13:focus:before {
+  -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+  background-color: #0498EC;
+}
+
+<li
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+      data-testid="side-nav-group-header-label"
+      id="menu-group-label-id-1"
+    >
+      <div
+        class="emotion-2"
+      >
+        <div
+          class="emotion-3"
+        />
+      </div>
+    </div>
+    <ul
+      aria-labelledby="menu-group-label-id-1"
+      class="emotion-4"
+    >
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="lg-ui-0001 constant-classname emotion-6"
+          href="https://www.mongodb.com/docs/atlas/getting-started/"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            Atlas
+          </span>
+        </a>
+      </li>
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="lg-ui-0001 constant-classname emotion-6"
+          href="https://www.mongodb.com/docs/manual/"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            MongoDB Database Manual
+          </span>
+        </a>
+      </li>
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="emotion-12 constant-classname emotion-13"
+          href="/tools-and-connectors/"
+        >
+          Tools and Connectors
+        </a>
+      </li>
+      <li
+        class="emotion-5"
+      >
+        <a
+          aria-current="false"
+          aria-disabled="false"
+          class="lg-ui-0001 constant-classname emotion-6"
+          href="https://www.mongodb.com/docs/drivers/"
+          target="_self"
+        >
+          <span
+            class="emotion-7"
+          >
+            Client Libraries
+          </span>
+        </a>
+      </li>
+    </ul>
+  </li>
+</DocumentFragment>
+`;

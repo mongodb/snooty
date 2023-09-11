@@ -64,9 +64,9 @@ const liStyling = css`
 const IALinkedData = ({ linkedData }) => {
   return (
     <ul className={cx(ulStyling)}>
-      {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt }) => {
+      {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt }, index) => {
         return (
-          <SideNavItem className={cx(liStyling)} as={Link} to={url}>
+          <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url}>
             <img height={16} width={16} src={withPrefix(icon)} alt={iconAlt} />
             <span>{headline}</span>
           </SideNavItem>
