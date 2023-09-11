@@ -7,7 +7,9 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import SectionHeader from '../SectionHeader';
 
-const FONT_SIZE = '16px';
+const FONT_SIZE = theme.fontSize.default;
+const HEIGHT = '61px';
+const WIDTH = '61px';
 
 const StyledSection = styled.div`
   margin-bottom: 34px;
@@ -22,11 +24,6 @@ const StyledSection = styled.div`
   @media ${theme.screenSize.largeAndUp} {
     width: 58vw;
   }
-`;
-
-const StyledImage = styled.img`
-  height: 61px;
-  width: 61px;
 `;
 
 const StyledArticle = styled.article`
@@ -52,9 +49,9 @@ const ProductItem = ({ nodeData: { children, options, argument } }) => {
   const iconAlt = options['icon-alt'];
   return (
     <StyledSection>
-      <StyledImage src={withPrefix(icon)} alt={iconAlt} />
+      <img src={withPrefix(icon)} alt={iconAlt} height={HEIGHT} width={WIDTH} />
       <StyledArticle>
-        <SectionHeader as="h3" customStyles={customStyleHeader}>
+        <SectionHeader customStyles={customStyleHeader}>
           {argument.map((child, i) => (
             <ComponentFactory nodeData={child} key={i} />
           ))}

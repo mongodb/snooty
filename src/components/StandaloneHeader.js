@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 import SectionHeader from './SectionHeader';
@@ -17,6 +18,10 @@ const StyledStandaloneContainer = styled.div`
   }
 `;
 
+const customStyleHeader = css`
+  color: #061621;
+`;
+
 const StandaloneHeader = ({ nodeData: { argument, options } }) => {
   const ele = useRef(null);
   useEffect(() => {
@@ -29,7 +34,7 @@ const StandaloneHeader = ({ nodeData: { argument, options } }) => {
   }, []);
   return (
     <StyledStandaloneContainer ref={ele}>
-      <SectionHeader as="h3">
+      <SectionHeader customStyles={customStyleHeader}>
         {argument.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} />
         ))}
