@@ -102,10 +102,11 @@ const Landing = ({ children, pageContext }) => {
             }
           }
           main h1:first-of-type {
-            color: ${palette.white};
+            color: ${palette.black};
+            grid-column: 2/-1;
 
             @media ${screenSize.upToMedium} {
-              color: ${palette.green.dark2};
+              color: ${palette.black};
             }
           }
           .span-columns {

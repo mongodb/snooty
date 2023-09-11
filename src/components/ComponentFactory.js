@@ -34,6 +34,7 @@ import Image from './Image';
 import Include from './Include';
 import Introduction from './Introduction';
 import Kicker from './Kicker';
+import LandingIntro from './LandingIntro';
 import Line from './LineBlock/Line';
 import LineBlock from './LineBlock';
 import List from './List';
@@ -163,6 +164,7 @@ const componentMap = {
   instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
+  'landing:introduction': LandingIntro,
   line: Line,
   line_block: LineBlock,
   list: List,
