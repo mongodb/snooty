@@ -9,7 +9,7 @@ const getMarginStyles = (isForDriver, sideMarginValue) => {
   if (typeof sideMarginValue !== 'number') {
     console.warn('sideMarginValue only accepts a number');
   }
-  return isForDriver ? `${theme.size.large} ${sideMarginValue}px ${theme.size.xlarge}` : `${theme.size.large} 0`;
+  return isForDriver ? `0 ${sideMarginValue}px ${theme.size.xlarge}` : `${theme.size.large} 0`;
 };
 
 const getColumnValue = (props) => props.columns || React.Children.count(props.children);

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@leafygreen-ui/emotion';
@@ -23,17 +23,8 @@ const customStyleHeader = css`
 `;
 
 const StandaloneHeader = ({ nodeData: { argument, options } }) => {
-  const ele = useRef(null);
-  useEffect(() => {
-    // When using the standalone header next to the card-group element, remove card group
-    // margin top styles.
-    const nextSib = ele.current.nextSibling;
-    if (nextSib.classList.contains('card-group')) {
-      nextSib.style.marginTop = '0px';
-    }
-  }, []);
   return (
-    <StyledStandaloneContainer ref={ele}>
+    <StyledStandaloneContainer>
       <SectionHeader customStyles={customStyleHeader}>
         {argument.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} />
