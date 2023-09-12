@@ -15,6 +15,7 @@ const containerStyling = css(`
   position: relative;
   background: ${palette.green.light3};
   border-radius: ${theme.size.medium};
+  z-index: 0;
 
   > p {
     grid-row: 2;
