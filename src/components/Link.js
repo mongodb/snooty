@@ -34,6 +34,10 @@ const gatsbyLinkStyling = css`
     color: ${palette.blue.base};
   }
 
+  > svg {
+    margin-left: 3px;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -68,8 +72,6 @@ const Link = ({
   ...other
 }) => {
   if (!to) to = '';
-
-  if (to === 'https://learn.mongodb.com') debugger;
 
   const anchor = to.startsWith('#');
   const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
@@ -112,11 +114,11 @@ const Link = ({
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
       hideExternalIcon={hideExternalIcon}
+      arrowAppearance={showLinkArrow ? 'persist' : 'none'}
       target={target}
       {...other}
     >
       {children}
-      {hideExternalIcon && decoration}
     </LGLink>
   );
 };
