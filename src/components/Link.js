@@ -99,11 +99,7 @@ const Link = ({
 
   const shouldHideExternalIcon =
     !anchor &&
-    !(
-      to?.replace(/(^https:\/\/)|(www\.)/g, '').startsWith('mongodb.com/docs/') ||
-      to.match(/docs.*mongodb.com/) ||
-      to.match(/learn.*mongodb.com/)
-    )
+    !(to?.replace(/(^https:\/\/)|(www\.)/g, '').startsWith('mongodb.com/docs/') || to.match(/docs.*mongodb.com/))
       ? false
       : true;
   const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
