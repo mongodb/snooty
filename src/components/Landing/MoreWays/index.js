@@ -1,4 +1,4 @@
-import { H3 } from '@leafygreen-ui/typography';
+import { Subtitle } from '@leafygreen-ui/typography';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 
@@ -25,8 +25,10 @@ const VideoItem = styled('div')`
 `;
 
 const DescriptionItem = styled('div')`
+  margin-top: 24px;
   max-width: 50%;
   @media ${theme.screenSize.upToLarge} {
+    margin-top: 0px;
     max-width: 100%;
   }
 `;
@@ -42,7 +44,7 @@ export const MoreWays = ({ nodeData: { children, options, argument }, ...rest })
         <Video nodeData={{ argument: [{ refuri: options.video_url }] }} />
       </VideoItem>
       <DescriptionItem>
-        <H3 className={cx(headerStyles)}>{argument[0]?.value}</H3>
+        <Subtitle className={cx(headerStyles)}>{argument[0]?.value}</Subtitle>
         {children.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} {...rest} />
         ))}
