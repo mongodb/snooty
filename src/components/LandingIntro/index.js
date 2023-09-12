@@ -40,7 +40,7 @@ const containerStyling = css(`
 
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: 60% 40%;
-    column-gap: 35px;
+    column-gap: 80px;
   }
 
   @media ${theme.screenSize.upToMedium} {
