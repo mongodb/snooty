@@ -74,7 +74,6 @@ const Link = ({
   if (!to) to = '';
 
   const anchor = to.startsWith('#');
-  const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor) {
@@ -82,6 +81,7 @@ const Link = ({
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
+    const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
     return (
       <GatsbyLink
