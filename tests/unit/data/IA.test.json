@@ -1,0 +1,436 @@
+{
+  "pageIA": [
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 11
+            }
+          },
+          "value": "Atlas"
+        }
+      ],
+      "url": "https://www.mongodb.com/docs/atlas/getting-started/"
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 14
+            }
+          },
+          "value": "MongoDB Database Manual"
+        }
+      ],
+      "url": "https://www.mongodb.com/docs/manual/"
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 17
+            }
+          },
+          "value": "Tools and Connectors"
+        }
+      ],
+      "slug": "/tools-and-connectors"
+    },
+    {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 20
+            }
+          },
+          "value": "Client Libraries"
+        }
+      ],
+      "url": "https://www.mongodb.com/docs/drivers/"
+    }
+  ],
+  "iaTreeMetadata": {
+    "iatree": {
+      "title": [
+        {
+          "type": "text",
+          "position": {
+            "start": {
+              "line": 7
+            }
+          },
+          "value": "MongoDB Documentation"
+        }
+      ],
+      "slug": "/",
+      "children": [
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 11
+                }
+              },
+              "value": "Atlas"
+            }
+          ],
+          "url": "https://www.mongodb.com/docs/atlas/getting-started/",
+          "children": []
+        },
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 14
+                }
+              },
+              "value": "MongoDB Database Manual"
+            }
+          ],
+          "url": "https://www.mongodb.com/docs/manual/",
+          "children": []
+        },
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 17
+                }
+              },
+              "value": "Tools and Connectors"
+            }
+          ],
+          "slug": "/tools-and-connectors",
+          "children": [
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 8
+                    }
+                  },
+                  "value": "Compass"
+                }
+              ],
+              "project_name": "compass",
+              "url": "https://www.mongodb.com/docs/compass/current/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 12
+                    }
+                  },
+                  "value": "Charts"
+                }
+              ],
+              "project_name": "charts",
+              "url": "https://www.mongodb.com/docs/charts/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 16
+                    }
+                  },
+                  "value": "MongoDB for VS Code"
+                }
+              ],
+              "project_name": "mongodb-vscode",
+              "url": "https://www.mongodb.com/docs/mongodb-vscode/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 20
+                    }
+                  },
+                  "value": "MongoDB Analyzer"
+                }
+              ],
+              "project_name": "mongodb-analyzer",
+              "url": "https://www.mongodb.com/docs/mongodb-analyzer/current/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 24
+                    }
+                  },
+                  "value": "BI Connector"
+                }
+              ],
+              "project_name": "bi-connector",
+              "url": "https://www.mongodb.com/docs/bi-connector/current/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 28
+                    }
+                  },
+                  "value": "Kafka Connector"
+                }
+              ],
+              "project_name": "kafka-connector",
+              "url": "https://docs.mongodb.com/kafka-connector/current/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 32
+                    }
+                  },
+                  "value": "Spark Connector"
+                }
+              ],
+              "project_name": "spark-connector",
+              "url": "https://www.mongodb.com/docs/spark-connector/current/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 36
+                    }
+                  },
+                  "value": "Atlas SQL"
+                }
+              ],
+              "project_name": "atlas-sql",
+              "url": "https://www.mongodb.com/docs/atlas/data-federation/query/query-with-sql/",
+              "primary": false,
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 40
+                    }
+                  },
+                  "value": "Cloud Manager"
+                }
+              ],
+              "url": "https://www.mongodb.com/docs/cloud-manager",
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 43
+                    }
+                  },
+                  "value": "Ops Manager"
+                }
+              ],
+              "url": "https://www.mongodb.com/docs/ops-manager/current/",
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 46
+                    }
+                  },
+                  "value": "MongoDB Kubernetes Operators"
+                }
+              ],
+              "url": "https://www.mongodb.com/docs/kubernetes-operator/stable/",
+              "children": []
+            },
+            {
+              "title": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 49
+                    }
+                  },
+                  "value": "Relational Migrator"
+                }
+              ],
+              "url": "https://www.mongodb.com/docs/relational-migrator/",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 20
+                }
+              },
+              "value": "Client Libraries"
+            }
+          ],
+          "url": "https://www.mongodb.com/docs/drivers/",
+          "id": "client-libraries",
+          "linked_data": [
+            {
+              "headline": "C",
+              "url": "https://www.mongodb.com/docs/drivers/c/",
+              "icon": "/icons/c.svg",
+              "icon-alt": "C Driver icon",
+              "checksum": "c923b03f942ccc678ad3d3a49217e4e2fd9cf3676f0e870b76f2dfc1407a0633"
+            },
+            {
+              "headline": "C++",
+              "url": "https://www.mongodb.com/docs/drivers/cxx/",
+              "icon": "/icons/c++.svg",
+              "icon-alt": "C plus plus Driver icon",
+              "checksum": "d49fa95d68d3c78266bce2bdcb9dfd8e0696c1491e3ac86156dac922308e5f30"
+            },
+            {
+              "headline": "C#",
+              "url": "https://www.mongodb.com/docs/drivers/csharp/current/",
+              "icon": "/icons/csharp.svg",
+              "icon-alt": "C sharp Driver icon",
+              "checksum": "27aed2ab3ece7ba128c5844db30d5481fa47aa51b18bcd102002521ec9eec703"
+            },
+            {
+              "headline": "Go",
+              "url": "https://www.mongodb.com/docs/drivers/go/current/",
+              "icon": "/icons/go.svg",
+              "icon-alt": "Go Driver icon",
+              "checksum": "bc21957614de28443e1d070fedf5836fe3b4c1a0c316396c3842b275a832d2cb"
+            },
+            {
+              "headline": "Java",
+              "url": "https://www.mongodb.com/docs/drivers/java-drivers/",
+              "icon": "/icons/java.svg",
+              "icon-alt": "Java Driver icon",
+              "checksum": "a42a10a6e60069b6ea3d180c048487b114bb040ee4a69f47cb409572d52077e0"
+            },
+            {
+              "headline": "Kotlin",
+              "url": "https://www.mongodb.com/docs/drivers/kotlin-drivers/",
+              "icon": "/icons/kotlin.svg",
+              "icon-alt": "Kotlin Driver icon",
+              "checksum": "e94fb2c3a39fa89d6912a7ee06d56c1bf84faf566186b06d5adda3849f5335b0"
+            },
+            {
+              "headline": "Node.js",
+              "url": "https://www.mongodb.com/docs/drivers/node/current/",
+              "icon": "/icons/node.svg",
+              "icon-alt": "Node Driver icon",
+              "checksum": "0c5f653475908658b4ab6fc228e2a9e6b346f0c781a5caf1a91c78d2a906dcb2"
+            },
+            {
+              "headline": "PHP",
+              "url": "https://www.mongodb.com/docs/drivers/php/",
+              "icon": "/icons/php.svg",
+              "icon-alt": "PHP Driver icon",
+              "checksum": "7a0100ce20aa1bb8d094403ac98cb0fa6cb97962ef0ad4fcf1fd9f990fe0bb34"
+            },
+            {
+              "headline": "Python",
+              "url": "https://www.mongodb.com/docs/drivers/python/",
+              "icon": "/icons/python.svg",
+              "icon-alt": "Python Driver icon",
+              "checksum": "18fb8770c1b4873e3438a7cb39c07b4ef6533c39772dbaa51f7e943df6151f95"
+            },
+            {
+              "headline": "Ruby",
+              "url": "https://www.mongodb.com/docs/drivers/ruby/",
+              "icon": "/icons/ruby.svg",
+              "icon-alt": "Ruby Driver icon",
+              "checksum": "3825ba6afd6cb530bc688cc1fb3269e010aa20c94bffb4f014831b9e6231deb1"
+            },
+            {
+              "headline": "Rust",
+              "url": "https://www.mongodb.com/docs/drivers/rust/",
+              "icon": "/icons/rust.svg",
+              "icon-alt": "Rust Driver icon",
+              "checksum": "3277063aacde19a349b1934c5e88ad4a4b359096a0aa2583a499a368eb835559"
+            },
+            {
+              "headline": "Scala",
+              "url": "https://www.mongodb.com/docs/drivers/scala/",
+              "icon": "/icons/scala.svg",
+              "icon-alt": "Scala Driver icon",
+              "checksum": "701523e6111362b79f4b79d6cee3c8968980f3d3c09c92561f365cce05acc5fa"
+            },
+            {
+              "headline": "Swift",
+              "url": "https://www.mongodb.com/docs/drivers/swift/",
+              "icon": "/icons/swift.svg",
+              "icon-alt": "Swift Driver icon",
+              "checksum": "cc2229380552e9f9fa518397c1250d1aced1660e989a209b72bd7e28f8a4c2ab"
+            },
+            {
+              "headline": "TypeScript",
+              "url": "https://www.mongodb.com/docs/drivers/typescript/",
+              "icon": "/icons/ts.svg",
+              "icon-alt": "TypeScript Driver icon",
+              "checksum": "c285374c3049314fc1a6c9423f2e0027a900a9a0f3a6aa51e13b857d9fb9aac2"
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  }
+}
