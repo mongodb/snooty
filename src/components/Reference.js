@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
-const Reference = ({ nodeData }) => {
+const Reference = ({ nodeData, ...rest }) => {
   return (
-    <Link to={nodeData.refuri}>
+    <Link to={nodeData.refuri} {...rest}>
       {nodeData.children.map((element, index) => (
         <ComponentFactory key={index} nodeData={element} />
       ))}
