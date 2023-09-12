@@ -34,10 +34,6 @@ const gatsbyLinkStyling = css`
     color: ${palette.blue.base};
   }
 
-  > svg {
-    margin-left: 3px;
-  }
-
   &::after {
     content: '';
     position: absolute;
@@ -72,7 +68,11 @@ const Link = ({
   ...other
 }) => {
   if (!to) to = '';
+
+  if (to === 'https://learn.mongodb.com') debugger;
+
   const anchor = to.startsWith('#');
+  const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor) {
@@ -80,8 +80,6 @@ const Link = ({
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
-
-    const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
     return (
       <GatsbyLink
@@ -99,7 +97,11 @@ const Link = ({
 
   const shouldHideExternalIcon =
     !anchor &&
-    !(to?.replace(/(^https:\/\/)|(www\.)/g, '').startsWith('mongodb.com/docs/') || to.match(/docs.*mongodb.com/))
+    !(
+      to?.replace(/(^https:\/\/)|(www\.)/g, '').startsWith('mongodb.com/docs/') ||
+      to.match(/docs.*mongodb.com/) ||
+      to.match(/learn.*mongodb.com/)
+    )
       ? false
       : true;
   const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
@@ -110,11 +112,11 @@ const Link = ({
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
       hideExternalIcon={hideExternalIcon}
-      arrowAppearance={showLinkArrow ? 'persist' : 'none'}
       target={target}
       {...other}
     >
       {children}
+      {hideExternalIcon && decoration}
     </LGLink>
   );
 };

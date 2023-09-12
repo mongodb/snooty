@@ -46,7 +46,7 @@ export const MoreWays = ({ nodeData: { children, options, argument }, ...rest })
       <DescriptionItem>
         <Subtitle className={cx(headerStyles)}>{argument[0]?.value}</Subtitle>
         {children.map((child, i) => (
-          <ComponentFactory nodeData={child} key={i} {...rest} />
+          <ComponentFactory nodeData={child} key={i} {...rest} showLinkArrow={true} />
         ))}
       </DescriptionItem>
     </StyledContainer>
