@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Row, Cell, TableHead, HeaderRow, V11Adapter} from '@leafygreen-ui/table';
+import { Table, Row, Cell, TableHead, HeaderRow, TableBody, HeaderCell } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
@@ -70,6 +70,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
   <Row>
     {row.map((cell, colIndex) => {
       const isStub = colIndex <= stubColumnCount - 1;
+      debugger;
       const skipPTag = hasOneChild(cell.children);
       const contents = cell.children.map((child, i) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
@@ -128,11 +129,15 @@ ListTableRow.propTypes = {
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
+
+  debugger;
+  console.log('List table');
+  console.log(children);
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
 
-  console.log(bodyRows)
-  console.log("length: ", bodyRows.length)
+  console.log(bodyRows);
+  console.log('length: ', bodyRows.length);
 
   // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
   const headerRows =
@@ -153,24 +158,73 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   // get all ID's for elements within header, or first two rows of body
   const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
 
+  const listTableRow = (datum) => {
+    return <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />;
+  };
+
+  //creating dummy values to place in header
+  const dummyArr = Array(columnCount);
+  for (let i = 0; i < columnCount; i++) {
+    dummyArr[i] = i;
+    console.log('Dummy arr at index ', i, ': ', dummyArr[i]);
+  }
+  console.log('dummy arr');
+  console.log(dummyArr);
+
   return (
     <>
       {elmIdsForScroll.map((id) => (
         <div className="header-buffer" key={id} id={id} />
       ))}
       <Table
-          className={cx(
-            styleTable({
-              customAlign: options?.align,
-              customWidth: options?.width,
-            })
-          )}
-          columns={headerRows.map((row, rowIndex) => (
+        className={cx(
+          styleTable({
+            customAlign: options?.align,
+            customWidth: options?.width,
+          })
+        )}
+        // columns={headerRows.map((row, rowIndex) => (
+        //   <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
+        //     {row.children.map((cell, colIndex) => {
+        //       const skipPTag = hasOneChild(cell.children);
+        //       return (
+        //         <TableHead
+        //           className={cx(css`
+        //             * {
+        //               font-size: ${theme.fontSize.small};
+        //               font-weight: 600;
+        //             }
+        //             ${widths && `width: ${widths[colIndex]}%`}
+        //           `)}
+        //           key={`${rowIndex}-${colIndex}`}
+        //           label={cell.children.map((child, i) => (
+        //             <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+        //           ))}
+        //         />
+        //       );
+        //     })}
+        //   </HeaderRow>
+        // ))}
+        data={bodyRows}
+      >
+        <TableHead>
+          {/* <HeaderRow key="1" className={cx(headerRowCount === 0 ? unstyleThead : null)}>
+            {dummyArr.map((element) => {
+              console.log('ELEMENT HERE: ', element);
+              return (
+                <HeaderCell key={element} columnName={element}>
+                  {element}
+                </HeaderCell>
+              );
+            })}
+          </HeaderRow> */}
+          {headerRows.map((row, rowIndex) => (
             <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
               {row.children.map((cell, colIndex) => {
                 const skipPTag = hasOneChild(cell.children);
+                console.log(row, cell);
                 return (
-                  <TableHead
+                  <HeaderCell
                     className={cx(css`
                       * {
                         font-size: ${theme.fontSize.small};
@@ -179,20 +233,29 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                       ${widths && `width: ${widths[colIndex]}%`}
                     `)}
                     key={`${rowIndex}-${colIndex}`}
-                    label={cell.children.map((child, i) => (
+                    // label={cell.children.map((child, i) => (
+                    //   <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                    // ))}
+                  >
+                    {cell.children.map((child, i) => (
                       <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
                     ))}
-                  />
+                  </HeaderCell>
                 );
               })}
             </HeaderRow>
           ))}
-          data={bodyRows}
-        >
-          {({ datum }) => (
+        </TableHead>
+        <TableBody>
+          {bodyRows.map((row) => (
+            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row?.children?.[0]?.children} />
+          ))}
+        </TableBody>
+        {/* {listTableRow(datum)} */}
+        {/* {({ datum }) => (
             <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
-          )}
-        </Table>
+          )()} */}
+      </Table>
     </>
   );
 };
