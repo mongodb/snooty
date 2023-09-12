@@ -10,7 +10,7 @@ const containerStyling = css(`
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: max-content;
-  column-gap: max(6%, 60px);
+  column-gap: max(6%, 80px);
   padding: 40px 40px;
   position: relative;
   background: ${palette.green.light3};
