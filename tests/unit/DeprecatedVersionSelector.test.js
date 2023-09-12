@@ -56,7 +56,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   let wrapper, mockFetchDocuments;
 
   beforeEach(() => {
-    mockFetchDocuments = jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName) => {
+    mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
       return mockedReposBranches;
     });
   });
