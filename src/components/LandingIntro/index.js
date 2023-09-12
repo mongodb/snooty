@@ -99,7 +99,7 @@ const LandingIntro = ({ nodeData: { children, options, argument } }) => {
         ))}
       </H3>
       {children.map((child, i) => (
-        <ComponentFactory nodeData={child} key={i} showLinkArrow={true} />
+        <ComponentFactory nodeData={child} key={i} />
       ))}
     </div>
   );
