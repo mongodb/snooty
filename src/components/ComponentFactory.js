@@ -84,6 +84,9 @@ import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 import Instruqt from './Instruqt';
 import { MoreWays } from './Landing/MoreWays';
+import Products from './Products';
+import ProductItem from './Products/ProductItem';
+import StandaloneHeader from './StandaloneHeader';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -164,7 +167,9 @@ const componentMap = {
   instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
-  'landing:more-ways': MoreWays,
+  'landing:client-libraries': StandaloneHeader,
+  'landing:product': ProductItem,
+  'landing:products': Products,
   line: Line,
   line_block: LineBlock,
   list: List,
