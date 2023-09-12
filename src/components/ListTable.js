@@ -70,7 +70,6 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
   <Row>
     {row.map((cell, colIndex) => {
       const isStub = colIndex <= stubColumnCount - 1;
-      debugger;
       const skipPTag = hasOneChild(cell.children);
       const contents = cell.children.map((child, i) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
@@ -130,14 +129,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
 
-  debugger;
-  console.log('List table');
-  console.log(children);
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
-
-  console.log(bodyRows);
-  console.log('length: ', bodyRows.length);
 
   // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
   const headerRows =
@@ -157,19 +150,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
 
   // get all ID's for elements within header, or first two rows of body
   const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
-
-  const listTableRow = (datum) => {
-    return <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />;
-  };
-
-  //creating dummy values to place in header
-  const dummyArr = Array(columnCount);
-  for (let i = 0; i < columnCount; i++) {
-    dummyArr[i] = i;
-    console.log('Dummy arr at index ', i, ': ', dummyArr[i]);
-  }
-  console.log('dummy arr');
-  console.log(dummyArr);
 
   return (
     <>
@@ -222,7 +202,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
               {row.children.map((cell, colIndex) => {
                 const skipPTag = hasOneChild(cell.children);
-                console.log(row, cell);
                 return (
                   <HeaderCell
                     className={cx(css`
