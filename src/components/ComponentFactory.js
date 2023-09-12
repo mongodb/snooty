@@ -167,6 +167,7 @@ const componentMap = {
   instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
+  'landing:more-ways': MoreWays,
   'landing:client-libraries': StandaloneHeader,
   'landing:product': ProductItem,
   'landing:products': Products,
