@@ -104,6 +104,9 @@ const Landing = ({ children, pageContext }) => {
           main h1:first-of-type {
             color: ${palette.black};
             grid-column: 2/-1;
+            margin: ${size.large} 0;
+            font-size: 48px;
+            line-height: 62px;
 
             @media ${screenSize.upToMedium} {
               color: ${palette.black};
