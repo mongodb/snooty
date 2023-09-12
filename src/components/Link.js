@@ -72,7 +72,6 @@ const Link = ({
   ...other
 }) => {
   if (!to) to = '';
-
   const anchor = to.startsWith('#');
 
   // Use Gatsby Link for internal links, and <a> for others
@@ -81,6 +80,7 @@ const Link = ({
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
+
     const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
     return (
