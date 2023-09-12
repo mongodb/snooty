@@ -28,6 +28,10 @@ exports[`renders correctly 1`] = `
   color: #016BF8;
 }
 
+.emotion-1>svg {
+  margin-left: 3px;
+}
+
 .emotion-1::after {
   content: '';
   position: absolute;
@@ -193,6 +197,10 @@ exports[`renders correctly 1`] = `
   color: #016BF8;
 }
 
+.emotion-1>svg {
+  margin-left: 3px;
+}
+
 .emotion-1::after {
   content: '';
   position: absolute;
@@ -338,6 +346,10 @@ exports[`renders correctly 1`] = `
 
 .emotion-1>code {
   color: #016BF8;
+}
+
+.emotion-1>svg {
+  margin-left: 3px;
 }
 
 .emotion-1::after {
