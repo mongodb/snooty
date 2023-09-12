@@ -108,8 +108,9 @@ const Landing = ({ children, pageContext }) => {
             font-size: 48px;
             line-height: 62px;
 
-            @media ${screenSize.upToMedium} {
-              color: ${palette.black};
+            @media ${screenSize.upToSmall} {
+              font-size: 32px;
+              line-height: 40px;
             }
           }
           .span-columns {
