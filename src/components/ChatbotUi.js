@@ -6,7 +6,7 @@ import { theme } from '../theme/docsTheme';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const CHATBOT_SERVER_BASE_URL =
-  process.env.SNOOTY_ENV === 'production' || process.env.SNOOTY_ENV === 'dotcomprd'
+  process.env.SNOOTY_ENV === 'dotcomprd'
     ? 'https://knowledge.mongodb.com/api/v1'
     : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
