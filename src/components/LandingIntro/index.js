@@ -6,15 +6,15 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
 const containerStyling = css(`
-  background: ${palette.green.light3};
-  padding: ${theme.size.large} 40px ${theme.size.large} ${theme.size.medium};
   grid-column: 2/-2;
-  border-radius: ${theme.size.medium};
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: max-content;
-  position: relative;
   column-gap: max(6%, 60px);
+  padding: 40px 40px;
+  position: relative;
+  background: ${palette.green.light3};
+  border-radius: ${theme.size.medium};
 
   > p {
     grid-row: 2;
@@ -30,12 +30,12 @@ const containerStyling = css(`
     grid-row: 1/3;
     grid-column: 2;
     position: absolute;
-    left: calc(50% - 150px);
-    z-index: 1;
-    top: calc(50% + 16px);
+    top: calc(50% + 20px);
     transform: translateY(calc(-50%));
+    right: 40px;
     height: auto;
-    width: auto;
+    width: 400px;
+    z-index: 1;
   }
 
   @media ${theme.screenSize.upToLarge} {
@@ -59,10 +59,10 @@ const containerStyling = css(`
       position: relative;
       height: auto;
       width: 100%;
-      z-index: 1;
       top: unset;
       transform: unset;
       margin-bottom: 20px;
+      z-index: 1;
     }
 
     > p {
