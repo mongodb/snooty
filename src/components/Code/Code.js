@@ -27,9 +27,19 @@ const sourceCodeStyle = css`
   justify-content: center;
 `;
 
+const convertCustomLanguages = (languageStrList) =>
+  // TODO: this should be similar to code-context.js generateLanguageOptions
+  languageStrList.map((lang) => ({
+    id: lang,
+    displayName: lang,
+    language: 'Python',
+  }));
+
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
   darkMode,
+  customLanguageOptions,
+  customLanguage,
 }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
@@ -39,6 +49,12 @@ const Code = ({
   if (getLanguage(lang) === 'none') {
     language = getLanguage(lang);
   }
+
+  // passed props takes precedence over node data
+  const finalLanguage = customLanguage || language;
+  const finalLanguages =
+    customLanguageOptions?.length > 0 ? convertCustomLanguages(customLanguageOptions) : languageOptions;
+
   const captionSpecified = !!caption;
   const sourceSpecified = !!source;
   const captionBorderRadius = captionSpecified ? '0px' : '12px';
@@ -99,8 +115,8 @@ const Code = ({
       <CodeBlock
         copyable={copyable}
         highlightLines={emphasizeLines}
-        language={language}
-        languageOptions={languageOptions}
+        language={finalLanguage}
+        languageOptions={finalLanguages}
         darkMode={darkMode}
         onChange={(selectedOption) => {
           const tabsetName = 'drivers';

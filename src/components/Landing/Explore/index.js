@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { H3 } from '@leafygreen-ui/typography';
+// import { H3 } from '@leafygreen-ui/typography';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
@@ -64,12 +64,12 @@ const blockStyle = css`
 //     flex-shrink: 0;
 // `;
 
-const HeaderStyle = styled('div')`
-  width: 329px;
-  height: 32px;
-  padding-top: 73.72px;
-  padding-bottom: 44px;
-`;
+// const HeaderStyle = styled('div')`
+//   width: 329px;
+//   height: 32px;
+//   padding-top: 73.72px;
+//   padding-bottom: 44px;
+// `;
 
 // const buttonStyle = css `
 //     display: flex;
@@ -92,18 +92,11 @@ const HeaderStyle = styled('div')`
 // const exportComponent =createIconComponent(exportGlyph);
 
 const Explore = ({ nodeData: { children, argument }, ...rest }) => {
-  let title = argument[0]?.value;
+  // let title = argument[0]?.value;
   return (
     <ExploreItem>
       <div className={cx(leftCol)}>
-        <HeaderStyle>
-          <H3 as="h2" darkMode={true}>
-            {title}
-          </H3>{' '}
-          {/*  color?*/}
-        </HeaderStyle>
-
-        {children.slice(0, 2).map((child, i) => (
+        {children.slice(0, 3).map((child, i) => (
           <ComponentFactory
             key={i}
             nodeData={child}
@@ -116,11 +109,12 @@ const Explore = ({ nodeData: { children, argument }, ...rest }) => {
 
       <div className={cx(blockStyle)}>
         <ComponentFactory
-          nodeData={children[2]}
+          nodeData={children[3]}
           darkMode={true}
           showLineNumbers={false}
           switcher={true}
-          languageOptions={['Python']}
+          customLanguageOptions={['python']}
+          customLanguage={'python'}
         />
       </div>
     </ExploreItem>
