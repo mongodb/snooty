@@ -171,6 +171,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           })
         )}
         data={bodyRows}
+        // Alternate row color if # of rows > 4
+        shouldAlternateRowColor={bodyRows.length > 4 ? true : false}
       >
         <TableHead>
           {headerRows.map((row, rowIndex) => (
