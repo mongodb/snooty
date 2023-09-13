@@ -79,9 +79,16 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
           className={cx(css`
             overflow-wrap: anywhere;
             word-break: break-word;
+            padding: 10px 8px;
 
             /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
             vertical-align: top;
+
+            > div {
+              max-height: unset;
+              min-height: unset;
+              line-height: 20px;
+            }
 
             /* Apply grey background to stub <th> cells (PD-1216) */
             ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
@@ -91,29 +98,32 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
             }
 
             & > div {
-              align-items: start;
-            }
-
-            & > div > span {
+              max-height: unset;
               display: block;
-              align-self: center;
+              align-items: start;
+              // line-height: 20px;
             }
 
-            & > div > span > *,
-            & > div > span p {
-              margin: 0 0 12px;
-              line-height: inherit;
-            }
+            // & > div > span {
+            //   display: block;
+            //   align-self: center;
+            // }
 
-            /* Prevent extra margin below last element */
-            & > div > span > *:last-child {
-              margin-bottom: 0;
-            }
+            // & > div > span > *,
+            // & > div > span p {
+            //   margin: 0 0 12px;
+            //   line-height: inherit;
+            // }
+
+            // /* Prevent extra margin below last element */
+            // & > div > span > *:last-child {
+            //   margin-bottom: 0;
+            // }
           `)}
           isHeader={isStub}
           key={colIndex}
         >
-          {contents}
+          <div>{contents}</div>
         </Cell>
       );
     })}
@@ -208,7 +218,13 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                       * {
                         font-size: ${theme.fontSize.small};
                         font-weight: 600;
+                        height: unset;
                       }
+                      line-height: 24px;
+                      height: unset;
+                      padding: 10px 8px;
+                      // Match the left padding of table body cells
+                      //padding-left: 24px;
                       ${widths && `width: ${widths[colIndex]}%`}
                     `)}
                     key={`${rowIndex}-${colIndex}`}
@@ -216,9 +232,11 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                     //   <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
                     // ))}
                   >
-                    {cell.children.map((child, i) => (
-                      <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                    ))}
+                    <div>
+                      {cell.children.map((child, i) => (
+                        <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                      ))}
+                    </div>
                   </HeaderCell>
                 );
               })}
