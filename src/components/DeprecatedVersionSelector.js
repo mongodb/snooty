@@ -6,9 +6,8 @@ import Button from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
-import { fetchDocuments } from '../utils/realm';
+import { fetchDocsets } from '../utils/realm';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { BRANCHES_COLLECTION } from '../build-constants';
 import Select from './Select';
 
 const SELECT_WIDTH = '336px';
@@ -81,7 +80,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   // Fetch repos_branches for `displayName` and url
   useEffect(() => {
     if (reposDatabase) {
-      fetchDocuments(reposDatabase, BRANCHES_COLLECTION).then((resp) => {
+      fetchDocsets(reposDatabase).then((resp) => {
         const reposBranchesMap = keyBy(resp, 'project');
         const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
         setReposMap(reposBranchesMapWithOldGen);
