@@ -36,7 +36,47 @@ const unstyleThead = css`
   }
 `;
 
-const tableRowStyle = css``;
+const styleTableRow = ({ isStub }) => css`
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  padding: 10px 8px;
+
+  /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
+  vertical-align: top;
+
+  > div {
+    max-height: unset;
+    min-height: unset;
+    line-height: 20px;
+  }
+
+  /* Apply grey background to stub <th> cells (PD-1216) */
+  ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
+
+  * {
+    font-size: ${theme.fontSize.small} !important;
+  }
+
+  & > div {
+    max-height: unset;
+    display: block;
+    align-items: start;
+  }
+`;
+
+const styleHeader = ({ widths, colIndex }) => css`
+  div {
+    font-size: ${theme.fontSize.small};
+    font-weight: 600;
+    height: unset;
+  }
+
+  line-height: 24px;
+  height: unset;
+  padding: 10px 8px;
+
+  ${widths && `width: ${widths[colIndex]}%`}
+`;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
@@ -77,37 +117,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
       ));
       return (
-        <Cell
-          className={cx(css`
-            overflow-wrap: anywhere;
-            word-break: break-word;
-            padding: 10px 8px;
-
-            /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
-            vertical-align: top;
-
-            > div {
-              max-height: unset;
-              min-height: unset;
-              line-height: 20px;
-            }
-
-            /* Apply grey background to stub <th> cells (PD-1216) */
-            ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
-
-            * {
-              font-size: ${theme.fontSize.small} !important;
-            }
-
-            & > div {
-              max-height: unset;
-              display: block;
-              align-items: start;
-            }
-          `)}
-          isHeader={isStub}
-          key={colIndex}
-        >
+        <Cell className={cx(styleTableRow(isStub))} isHeader={isStub} key={colIndex}>
           <div>{contents}</div>
         </Cell>
       );
@@ -201,18 +211,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const skipPTag = hasOneChild(cell.children);
                 return (
                   <HeaderCell
-                    className={cx(css`
-                      * {
-                        font-size: ${theme.fontSize.small};
-                        font-weight: 600;
-                        height: unset;
-                      }
-                      line-height: 24px;
-                      height: unset;
-                      padding: 10px 8px;
-
-                      ${widths && `width: ${widths[colIndex]}%`}
-                    `)}
+                    className={cx(styleHeader({ widths, colIndex }))}
                     key={`${rowIndex}-${colIndex}`}
                     // label={cell.children.map((child, i) => (
                     //   <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
