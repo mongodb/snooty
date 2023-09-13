@@ -79,6 +79,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
           className={cx(css`
             overflow-wrap: anywhere;
             word-break: break-word;
+            padding: 10px 8px;
 
             /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
             vertical-align: top;
@@ -91,7 +92,10 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
             }
 
             & > div {
+              max-height: unset;
+              display: block;
               align-items: start;
+              line-height: 20px;
             }
 
             & > div > span {
@@ -205,7 +209,10 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 return (
                   <HeaderCell
                     className={cx(css`
+                      padding: 10px 8px;
+                      line-height: 20px;
                       * {
+                        height: unset;
                         font-size: ${theme.fontSize.small};
                         font-weight: 600;
                       }
