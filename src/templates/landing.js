@@ -102,10 +102,15 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             }
           }
           main h1:first-of-type {
-            color: ${palette.white};
+            color: ${palette.black};
+            grid-column: 2/-1;
+            margin: ${size.large} 0;
+            font-size: 48px;
+            line-height: 62px;
 
-            @media ${screenSize.upToMedium} {
-              color: ${palette.green.dark2};
+            @media ${screenSize.upToSmall} {
+              font-size: 32px;
+              line-height: 40px;
             }
           }
           .span-columns {
