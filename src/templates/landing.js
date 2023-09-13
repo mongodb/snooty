@@ -48,13 +48,13 @@ const Wrapper = styled('main')`
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children, pageContext }) => {
+const Landing = ({ children, pageContext, useChatbot }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
       <div>
         <Wrapper>
-          {SHOW_CHATBOT && <ChatbotUi template={pageContext?.template} />}
+          {SHOW_CHATBOT && useChatbot && <ChatbotUi template={pageContext?.template} />}
           {children}
         </Wrapper>
       </div>
@@ -189,6 +189,7 @@ Landing.propTypes = {
   pageContext: PropTypes.shape({
     page: PropTypes.object.isRequired,
   }).isRequired,
+  useChatbot: PropTypes.bool,
 };
 
 export default Landing;
