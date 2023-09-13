@@ -1,11 +1,12 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { H3 } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
-const containerStyling = css`
+const FlexboxContainer = styled('div')`
   grid-column: 2/-2;
   display: flex;
   column-gap: max(10%, 80px);
@@ -22,7 +23,7 @@ const containerStyling = css`
   }
 `;
 
-const descriptionStyling = css`
+const DescriptionContainer = styled('div')`
   padding: 28px 0;
   flex: 1 0 340px;
 
@@ -37,7 +38,7 @@ const descriptionStyling = css`
   }
 `;
 
-const heroImageStyling = css`
+const ImageContainer = styled('div')`
   display: flex;
   flex: 1 1 400px;
   align-items: center;
@@ -51,6 +52,7 @@ const heroImageStyling = css`
 
   @media ${theme.screenSize.upToMedium} {
     flex: auto;
+    align-self: center;
   }
 `;
 
@@ -59,8 +61,8 @@ const headerStyling = css`
 `;
 
 const LandingIntro = ({ nodeData: { children, argument } }) => (
-  <div className={cx(containerStyling)}>
-    <div className={cx(descriptionStyling)}>
+  <FlexboxContainer>
+    <DescriptionContainer>
       <H3 className={cx(headerStyling)}>
         {argument.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} />
@@ -70,12 +72,12 @@ const LandingIntro = ({ nodeData: { children, argument } }) => (
       {children.slice(0, 2).map((child, i) => (
         <ComponentFactory nodeData={child} key={i} />
       ))}
-    </div>
-    <div className={cx(heroImageStyling)}>
+    </DescriptionContainer>
+    <ImageContainer>
       {/* assume last child is image */}
       <ComponentFactory nodeData={children[2]} />
-    </div>
-  </div>
+    </ImageContainer>
+  </FlexboxContainer>
 );
 
 export default LandingIntro;
