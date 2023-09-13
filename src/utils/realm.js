@@ -61,6 +61,10 @@ export const fetchDocuments = async (database, collectionName, query, projection
   return callAuthenticatedFunction('fetchDocuments', database, collectionName, query, projections, options);
 };
 
+export const fetchDocsets = async (database) => {
+  return callAuthenticatedFunction('fetchDocsets', database);
+};
+
 export const fetchOADiff = async (runId, diffString, snootyEnv) => {
   return callAuthenticatedFunction('fetchOADiff', runId, diffString, snootyEnv);
 };
