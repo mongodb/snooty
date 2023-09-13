@@ -39,7 +39,7 @@ const unstyleThead = css`
 const styleTableRow = ({ isStub }) => css`
   overflow-wrap: anywhere;
   word-break: break-word;
-  padding: 10px 8px;
+  padding: 10px ${theme.size.small};
 
   /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
   vertical-align: top;
@@ -71,9 +71,9 @@ const styleHeader = ({ widths, colIndex }) => css`
     height: unset;
   }
 
-  line-height: 24px;
+  line-height: ${theme.size.medium};
   height: unset;
-  padding: 10px 8px;
+  padding: 10px ${theme.size.small};
 
   ${widths && `width: ${widths[colIndex]}%`}
 `;
@@ -170,53 +170,15 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
-        // columns={headerRows.map((row, rowIndex) => (
-        //   <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
-        //     {row.children.map((cell, colIndex) => {
-        //       const skipPTag = hasOneChild(cell.children);
-        //       return (
-        //         <TableHead
-        //           className={cx(css`
-        //             * {
-        //               font-size: ${theme.fontSize.small};
-        //               font-weight: 600;
-        //             }
-        //             ${widths && `width: ${widths[colIndex]}%`}
-        //           `)}
-        //           key={`${rowIndex}-${colIndex}`}
-        //           label={cell.children.map((child, i) => (
-        //             <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-        //           ))}
-        //         />
-        //       );
-        //     })}
-        //   </HeaderRow>
-        // ))}
         data={bodyRows}
       >
         <TableHead>
-          {/* <HeaderRow key="1" className={cx(headerRowCount === 0 ? unstyleThead : null)}>
-            {dummyArr.map((element) => {
-              console.log('ELEMENT HERE: ', element);
-              return (
-                <HeaderCell key={element} columnName={element}>
-                  {element}
-                </HeaderCell>
-              );
-            })}
-          </HeaderRow> */}
           {headerRows.map((row, rowIndex) => (
             <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
               {row.children.map((cell, colIndex) => {
                 const skipPTag = hasOneChild(cell.children);
                 return (
-                  <HeaderCell
-                    className={cx(styleHeader({ widths, colIndex }))}
-                    key={`${rowIndex}-${colIndex}`}
-                    // label={cell.children.map((child, i) => (
-                    //   <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                    // ))}
-                  >
+                  <HeaderCell className={cx(styleHeader({ widths, colIndex }))} key={`${rowIndex}-${colIndex}`}>
                     <div>
                       {cell.children.map((child, i) => (
                         <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
@@ -233,10 +195,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row?.children?.[0]?.children} />
           ))}
         </TableBody>
-        {/* {listTableRow(datum)} */}
-        {/* {({ datum }) => (
-            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
-          )()} */}
       </Table>
     </>
   );
