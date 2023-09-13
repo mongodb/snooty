@@ -17,6 +17,10 @@ const Button = ({
     argument,
     options: { uri },
   },
+  variant = 'primary',
+  darkMode,
+  size = 'default',
+  baseFontSize,
   ...rest
 }) => {
   const componentProps = {};
@@ -26,7 +30,14 @@ const Button = ({
   }
 
   return (
-    <LeafyButton className={cx(componentProps.as ? buttonStyling : '', 'button')} variant="primary" {...componentProps}>
+    <LeafyButton
+      className={cx(componentProps.as ? buttonStyling : '', 'button')}
+      baseFontSize={baseFontSize}
+      size={size}
+      darkMode={darkMode}
+      variant={variant}
+      {...componentProps}
+    >
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}

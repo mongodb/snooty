@@ -29,6 +29,7 @@ const sourceCodeStyle = css`
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
+  darkMode,
 }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
@@ -100,6 +101,7 @@ const Code = ({
         highlightLines={emphasizeLines}
         language={language}
         languageOptions={languageOptions}
+        darkMode={darkMode}
         onChange={(selectedOption) => {
           const tabsetName = 'drivers';
           setActiveTab({ name: tabsetName, value: selectedOption.id });
