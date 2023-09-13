@@ -36,6 +36,8 @@ const unstyleThead = css`
   }
 `;
 
+const tableRowStyle = css``;
+
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
 /**
@@ -101,24 +103,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
               max-height: unset;
               display: block;
               align-items: start;
-              // line-height: 20px;
             }
-
-            // & > div > span {
-            //   display: block;
-            //   align-self: center;
-            // }
-
-            // & > div > span > *,
-            // & > div > span p {
-            //   margin: 0 0 12px;
-            //   line-height: inherit;
-            // }
-
-            // /* Prevent extra margin below last element */
-            // & > div > span > *:last-child {
-            //   margin-bottom: 0;
-            // }
           `)}
           isHeader={isStub}
           key={colIndex}
@@ -141,6 +126,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
 
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
+
+  //TODO: generate unique component ID for table, row, column
 
   // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
   const headerRows =
@@ -223,8 +210,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                       line-height: 24px;
                       height: unset;
                       padding: 10px 8px;
-                      // Match the left padding of table body cells
-                      //padding-left: 24px;
+
                       ${widths && `width: ${widths[colIndex]}%`}
                     `)}
                     key={`${rowIndex}-${colIndex}`}
@@ -244,7 +230,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           ))}
         </TableHead>
         <TableBody>
-          {bodyRows.map((row) => (
+          {bodyRows.map((row, i) => (
             <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row?.children?.[0]?.children} />
           ))}
         </TableBody>
