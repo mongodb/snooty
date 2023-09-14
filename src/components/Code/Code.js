@@ -99,8 +99,8 @@ const Code = ({
       <CodeBlock
         copyable={copyable}
         highlightLines={emphasizeLines}
-        language={language}
-        languageOptions={languageOptions}
+        language={'Python'}
+        languageOptions={['Python']}
         darkMode={darkMode}
         onChange={(selectedOption) => {
           const tabsetName = 'drivers';
