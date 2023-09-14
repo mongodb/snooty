@@ -1,6 +1,5 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
-const { baseUrl } = require('../../src/utils/base-url');
 const { saveAssetFiles, saveStaticFiles } = require('../../src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('../../src/utils/get-nested-value');
@@ -10,6 +9,8 @@ const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadat
 const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix');
 const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
+const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
+const { createProductNodes } = require('../utils/products.js');
 
 // different types of references
 const PAGES = [];
@@ -72,100 +73,6 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   } catch (e) {
     console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
     console.error(e);
-  }
-};
-
-const atlasAdminChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
-
-const fetchChangelogData = async (runId, versions) => {
-  try {
-    /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.json`);
-    const changelog = await changelogResp.json();
-
-    /* Aggregate all Resources in changelog for frontend filter */
-    const resourcesListSet = new Set();
-    changelog.forEach((release) =>
-      release.paths.forEach(({ httpMethod, path }) => resourcesListSet.add(`${httpMethod} ${path}`))
-    );
-    const changelogResourcesList = Array.from(resourcesListSet);
-
-    /* Fetch most recent Resource Versions' diff */
-    const mostRecentResourceVersions = versions.slice(-2);
-    const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
-    const mostRecentDiffData = await mostRecentDiffResp.json();
-
-    return {
-      changelog,
-      changelogResourcesList,
-      mostRecentDiff: {
-        mostRecentDiffLabel,
-        mostRecentDiffData,
-      },
-    };
-  } catch (error) {
-    console.warn('Changelog error: Most recent runId not successful. Using last successful runId to build Changelog.');
-    throw error;
-  }
-};
-
-/* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
-const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest }) => {
-  try {
-    /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/prod.json`);
-    const index = await indexResp.json();
-
-    const { runId, versions } = index;
-
-    if (!runId || typeof runId !== 'string')
-      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.json!');
-
-    let changelogData = {
-      index,
-    };
-    try {
-      const receivedChangelogData = await fetchChangelogData(runId, versions);
-      changelogData = { ...changelogData, ...receivedChangelogData };
-    } catch (error) {
-      /* If any error occurs, fetch last successful metadata and build changelog node */
-      const lastSuccessfulIndex = await db.realmInterface.fetchDocument(
-        'openapi_changelog',
-        'atlas_admin_metadata',
-        {}
-      );
-      const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
-      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions);
-      changelogData = { index: lastSuccessfulIndex, ...receivedChangelogData };
-    }
-
-    /* Create Node for useStaticQuery with all Changelog data */
-    createNode({
-      children: [],
-      id: createNodeId('changelogData'),
-      internal: {
-        contentDigest: createContentDigest(changelogData),
-        type: 'ChangelogData',
-      },
-      parent: null,
-      changelogData: changelogData,
-    });
-  } catch (e) {
-    console.error('Error while fetching OpenAPI Changelog data from S3');
-    console.error(e);
-
-    /* Create empty Node for useStaticQuery to ensure successful build */
-    createNode({
-      children: [],
-      id: createNodeId('changelogData'),
-      internal: {
-        contentDigest: createContentDigest({}),
-        type: 'ChangelogData',
-      },
-      parent: null,
-      changelogData: {},
-    });
   }
 };
 
@@ -236,27 +143,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
-  // Get all MongoDB products for the sidenav
-  const products = await db.fetchAllProducts();
-  products.forEach((product) => {
-    const url = baseUrl(product.baseUrl + product.slug);
-
-    createNode({
-      children: [],
-      id: createNodeId(`Product-${product.title}`),
-      internal: {
-        contentDigest: createContentDigest(product),
-        type: 'Product',
-      },
-      parent: null,
-      title: product.title,
-      url,
-    });
-  });
+  await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
   if (process.env.GATSBY_SITE === 'cloud-docs' && hasOpenAPIChangelog)
-    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest });
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, db });
 
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
@@ -358,7 +249,7 @@ exports.createPages = async ({ actions }) => {
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
-exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
+exports.onCreateWebpackConfig = ({ plugins, actions }) => {
   const providePlugins = {
     Buffer: ['buffer', 'Buffer'],
     process: require.resolve('../../stubs/process.js'),
