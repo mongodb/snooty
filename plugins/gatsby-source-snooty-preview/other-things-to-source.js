@@ -1,7 +1,7 @@
 const yaml = require('js-yaml');
 const { baseUrl } = require('../../src/utils/base-url');
 const { siteMetadata } = require('../../src/utils/site-metadata');
-const { manifestDocumentDatabase, stitchDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 
 let db;
 
@@ -193,7 +193,7 @@ exports.sourceNodes = async ({
     db = manifestDocumentDatabase;
   } else {
     console.log('Loading documents from stitch');
-    db = stitchDocumentDatabase;
+    db = realmDocumentDatabase;
   }
 
   await db.connect();
