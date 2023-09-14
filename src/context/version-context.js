@@ -1,10 +1,10 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef } from 'react';
 import { navigate } from '@gatsbyjs/reach-router';
-import { BRANCHES_COLLECTION, METADATA_COLLECTION } from '../build-constants';
+import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
-import { fetchDocument, fetchDocuments } from '../utils/realm';
+import { fetchDocset, fetchDocuments } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 
@@ -56,10 +56,10 @@ const versionStateReducer = (state, newState) => {
 const getBranches = async (metadata, repoBranches, associatedReposInfo, associatedProducts) => {
   let hasEolBranches = false;
   try {
-    const promises = [fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, { project: metadata.project })];
+    const promises = [fetchDocset(metadata.reposDatabase, { project: metadata.project })];
     for (let associatedProduct of associatedProducts) {
       promises.push(
-        fetchDocument(metadata.reposDatabase, BRANCHES_COLLECTION, {
+        fetchDocset(metadata.reposDatabase, {
           project: associatedProduct.name,
         })
       );
