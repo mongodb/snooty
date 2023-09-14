@@ -4,6 +4,7 @@ import ReactPlayerWistia from 'react-player/wistia';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import VideoPlayButton from './VideoPlayButton';
@@ -21,10 +22,12 @@ const REACT_PLAYERS = {
         },
       },
     },
+    name: 'youtube',
   },
   wistia: {
     player: ReactPlayerWistia,
     config: {},
+    name: 'wistia',
   },
 };
 
@@ -32,9 +35,11 @@ const ReactPlayerWrapper = styled('div')`
   position: relative;
   padding-top: 56.25%;
   margin: ${theme.size.medium} 0px;
+  border-radius: 16px;
+  overflow: hidden;
 `;
 
-const videoStyling = css`
+const videoStyling = ({ name }) => css`
   position: absolute;
   top: 0;
   left: 0;
@@ -42,9 +47,11 @@ const videoStyling = css`
     /* Redefines stacking context, allowing play button animation to stick on top */
     position: sticky;
   }
-  * {
-    border-radius: 16px !important;
-  }
+
+  ${name === 'wistia' &&
+  `video {
+    background: ${palette.white} !important
+  }`}
 `;
 
 const getTheSupportedMedia = (url) => {
@@ -99,7 +106,7 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
   return (
     <ReactPlayerWrapper>
       <ReactPlayer
-        css={videoStyling}
+        css={videoStyling(ReactSupportedMedia)}
         config={ReactSupportedMedia.config}
         controls
         url={url}

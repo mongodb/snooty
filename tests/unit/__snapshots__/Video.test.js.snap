@@ -10,6 +10,8 @@ exports[`Wistia video renders correctly 1`] = `
   position: relative;
   padding-top: 56.25%;
   margin: 24px 0px;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .emotion-2 {
@@ -23,8 +25,8 @@ exports[`Wistia video renders correctly 1`] = `
   position: sticky;
 }
 
-.emotion-2 * {
-  border-radius: 16px!important;
+.emotion-2 video {
+  background: #FFFFFF!important;
 }
 
 .emotion-3 {
@@ -212,6 +214,8 @@ exports[`YouTube video renders correctly 1`] = `
   position: relative;
   padding-top: 56.25%;
   margin: 24px 0px;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .emotion-2 {
@@ -223,10 +227,6 @@ exports[`YouTube video renders correctly 1`] = `
 .emotion-2>div {
   position: -webkit-sticky;
   position: sticky;
-}
-
-.emotion-2 * {
-  border-radius: 16px!important;
 }
 
 <div

@@ -57,6 +57,10 @@ export const fetchDocument = async (database, collectionName, query, projections
   return callAuthenticatedFunction('fetchDocument', database, collectionName, query, projections);
 };
 
+export const fetchDocset = async (database, matchConditions) => {
+  return callAuthenticatedFunction('fetchDocset', database, matchConditions);
+};
+
 export const fetchDocuments = async (database, collectionName, query, projections, options) => {
   return callAuthenticatedFunction('fetchDocuments', database, collectionName, query, projections, options);
 };
