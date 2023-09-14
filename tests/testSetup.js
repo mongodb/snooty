@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import EventSource from 'eventsourcemock';
 import { preloadAll } from 'react-loadable';
 
 global.navigator = {
@@ -36,5 +37,6 @@ Object.defineProperty(global.self, 'crypto', {
 });
 
 window.matchMedia = () => ({ addListener: () => {}, removeListener: () => {} });
+window.EventSource = () => ({ EventSource: EventSource });
 window.scrollTo = () => {};
 global.fetch = jest.fn();

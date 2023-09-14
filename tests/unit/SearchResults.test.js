@@ -1,4 +1,5 @@
 // Tests for the search results page
+import * as gatsby from 'gatsby';
 import React from 'react';
 import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -7,6 +8,7 @@ import { act } from 'react-dom/test-utils';
 import { mockLocation } from '../utils/mock-location';
 import { tick, setMobile } from '../utils';
 import SearchResults from '../../src/components/SearchResults';
+import { SearchContextProvider } from '../../src/components/SearchResults/SearchContext';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as RealmUtil from '../../src/utils/realm';
 import mockInputData from '../utils/data/marian-manifests.json';
@@ -15,14 +17,12 @@ import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/moc
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
 // Check the search results include the property-filtered results
-const expectFilteredResults = (wrapper, filteredByRealm) => {
-  // Filtered property "Realm" should be shown 3 or 4x:
-  // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
-  // and (4) if it selected within the dropdown
-  const expectedRealmCount = filteredByRealm ? 4 : 3;
+const expectFilteredResults = (wrapper) => {
+  // (1) as a tag below the search header, (2) as a tag on the search result
+  // and (3) as the selected text in the dropdown
+  expect(wrapper.queryAllByText('Realm').length).toBe(3);
   // Version "Latest" should be shown 3x:
   // (1) as the selected text in the dropdown, (2) as a tag below the search header, (3) as a tag on the search result
-  expect(wrapper.queryAllByText('Realm').length).toBe(expectedRealmCount);
   expect(wrapper.queryAllByText('Latest').length).toBe(3);
 
   // Check the search result card displays content according to the response
@@ -31,8 +31,7 @@ const expectFilteredResults = (wrapper, filteredByRealm) => {
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
-  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
+  expect(wrapper.queryByText(/stitch/).closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
 
   // Check the dropdowns are filled in
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
@@ -55,7 +54,7 @@ const expectUnfilteredSearchResultTags = (wrapper) => {
 
 // Check the search results match the expected unfiltered results
 const expectUnfilteredResults = (wrapper) => {
-  expect(wrapper.queryAllByText('(no filters)').length).toBe(1);
+  expect(wrapper.queryAllByText(/no filters/).length).toBe(2);
 
   // Check the search result card displays content according to the response
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.title)).toBeTruthy();
@@ -63,13 +62,11 @@ const expectUnfilteredResults = (wrapper) => {
   expect(wrapper.queryAllByText(FILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  expect(wrapper.queryByText('stitch').closest('a')).toHaveProperty(
+  expect(wrapper.queryByText(/stitch/).closest('a')).toHaveProperty(
     'href',
     `http://localhost/${UNFILTERED_RESULT.url}`
   );
 
-  // We always show this text automatically on page load in the search bar, regardless of filter
-  expect(wrapper.queryAllByText('Search results for "stitch"').length).toBe(1);
   // Check the dropdowns are not filled in
   expectValuesForFilters(wrapper, 'Filter by Category', 'Filter by Version');
 };
@@ -90,8 +87,8 @@ const filterByRealm = async (wrapper, screenSize) => {
 };
 
 const openMobileSearch = async (wrapper) => {
-  const specifySearchButton = wrapper.queryAllByText('Specify your search')[0].closest('button');
-  userEvent.click(specifySearchButton);
+  const refineSearchButton = wrapper.queryAllByText('Refine your search')[0].closest('button');
+  userEvent.click(refineSearchButton);
   tick();
 };
 
@@ -107,10 +104,27 @@ const clearAllFilters = async (wrapper, screenSize) => {
   tick();
 };
 
+function renderSearchResults() {
+  return render(
+    <SearchContextProvider>
+      <SearchResults />
+    </SearchContextProvider>
+  );
+}
+
 describe('Search Results Page', () => {
   jest.useFakeTimers();
-  mockStaticQuery();
-  jest.spyOn(RealmUtil, 'fetchSearchPropertyMapping').mockImplementation(() => mockInputData.searchPropertyMapping);
+  let navigateSpy;
+
+  beforeEach(() => {
+    mockStaticQuery();
+    jest.spyOn(RealmUtil, 'fetchSearchPropertyMapping').mockImplementation(() => mockInputData.searchPropertyMapping);
+    navigateSpy = jest.spyOn(gatsby, 'navigate').mockImplementation((...args) => {});
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
   beforeAll(() => {
     window.fetch = mockMarianFetch;
@@ -120,23 +134,26 @@ describe('Search Results Page', () => {
     window.fetch = null;
   });
 
-  it('renders correctly without browser', () => {
+  it('renders correctly without browser', async () => {
     mockLocation(null);
-    const tree = render(<SearchResults />);
+    let tree;
+    await act(async () => {
+      tree = renderSearchResults();
+    });
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
   it('renders loading images before returning nonempty results', async () => {
     let renderLoadingSkeletonImgs;
     mockLocation('?q=stitch');
-    renderLoadingSkeletonImgs = render(<SearchResults />);
+    renderLoadingSkeletonImgs = renderSearchResults();
     expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
 
   it('renders loading images before returning no results', async () => {
     let renderLoadingSkeletonImgs;
     mockLocation('?q=noresultsreturned');
-    renderLoadingSkeletonImgs = render(<SearchResults />);
+    renderLoadingSkeletonImgs = renderSearchResults();
     expect(renderLoadingSkeletonImgs.asFragment()).toMatchSnapshot();
   });
 
@@ -144,7 +161,7 @@ describe('Search Results Page', () => {
     let renderEmptyResults;
     mockLocation('?q=noresultsreturned');
     await act(async () => {
-      renderEmptyResults = render(<SearchResults />);
+      renderEmptyResults = renderSearchResults();
     });
     expect(renderEmptyResults.queryAllByText('No results found')).toBeTruthy();
   });
@@ -153,16 +170,16 @@ describe('Search Results Page', () => {
     let renderSearchLanding;
     mockLocation('');
     await act(async () => {
-      renderSearchLanding = render(<SearchResults />);
+      renderSearchLanding = renderSearchResults();
     });
     expect(renderSearchLanding.queryAllByText('Search MongoDB Documentation')).toBeTruthy();
   });
 
   it('renders results from a given search term query param and displays category and version tags', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectUnfilteredSearchResultTags(renderStitchResults);
@@ -171,9 +188,9 @@ describe('Search Results Page', () => {
 
   it('considers a given search filter query param and displays category and version tags', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch&searchProperty=realm-master');
+    mockLocation('?q=stitch&page=1&searchProperty=realm-master');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
     expectFilteredResults(renderStitchResults);
@@ -183,50 +200,50 @@ describe('Search Results Page', () => {
     let renderStitchResults;
     mockLocation('?q=realm');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expect(renderStitchResults.asFragment()).toMatchSnapshot();
-    expect(renderStitchResults.queryAllByText('No results found. Please search again.').length).toBe(1);
+    expect(renderStitchResults.queryAllByText(/No results found/).length).toBe(1);
   });
 
-  it('updates the page UI when a property is changed', async () => {
+  it('navigates to a new page with updated query parameters when a property is changed', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
+
     expectUnfilteredResults(renderStitchResults);
 
     // Change the filters, which should change the shown results
     await filterByRealm(renderStitchResults);
-    expectFilteredResults(renderStitchResults, true);
+    const expectedQuery = '?q=stitch&page=1&searchProperty=realm-master';
+    expect(navigateSpy).toBeCalled();
+    expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
   });
 
-  it('resets search filters when hitting the "clear all filters" button', async () => {
+  it('navigates with new search query parameters when hitting the "clear all filters" button', async () => {
     let renderStitchResults;
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1&searchProperty=realm-master');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
-    expectUnfilteredResults(renderStitchResults);
+    expectFilteredResults(renderStitchResults);
 
-    // Change filters
-    await filterByRealm(renderStitchResults);
-    expectFilteredResults(renderStitchResults, true);
-
-    // Remove filters
     await act(async () => {
       await clearAllFilters(renderStitchResults);
     });
-    expectUnfilteredResults(renderStitchResults);
+    const expectedQuery = '?q=stitch&page=1';
+    expect(navigateSpy).toBeCalled();
+    expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
   });
 
   it('specifies search filters through mobile', async () => {
     let renderStitchResults;
     setMobile();
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expectUnfilteredResults(renderStitchResults);
 
@@ -236,34 +253,24 @@ describe('Search Results Page', () => {
     });
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
-    // Set filters but don't apply them
-    // Filter using listbox at index 2, which should appear on mobile
-    await filterByRealm(renderStitchResults, 'mobile');
-    expectUnfilteredResults(renderStitchResults);
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
-
     // Apply filters
+    await filterByRealm(renderStitchResults, 'mobile');
     await act(async () => {
       const applyFiltersButton = renderStitchResults.getByText('Apply filters').closest('button');
       userEvent.click(applyFiltersButton);
       tick();
     });
-    expectFilteredResults(renderStitchResults);
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
-
-    // Remove filters
-    await act(async () => {
-      await clearAllFilters(renderStitchResults, 'mobile');
-    });
-    expectUnfilteredResults(renderStitchResults);
+    const expectedQuery = '?q=stitch&page=1&searchProperty=realm-master';
+    expect(navigateSpy).toBeCalled();
+    expect(navigateSpy.mock.calls[0]?.[0]).toEqual(expectedQuery);
   });
 
   it('cancels search filter application on mobile', async () => {
     let renderStitchResults;
     setMobile();
-    mockLocation('?q=stitch');
+    mockLocation('?q=stitch&page=1');
     await act(async () => {
-      renderStitchResults = render(<SearchResults />);
+      renderStitchResults = renderSearchResults();
     });
     expectUnfilteredResults(renderStitchResults);
 
@@ -286,5 +293,6 @@ describe('Search Results Page', () => {
     });
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
+    expect(navigateSpy).toHaveBeenCalledTimes(0);
   });
 });

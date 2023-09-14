@@ -67,6 +67,7 @@ import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
+import ChatbotUi from './ChatbotUi';
 
 import VersionModified from './VersionModified';
 import Video from './Video';
@@ -82,6 +83,9 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 import Instruqt from './Instruqt';
+import Products from './Products';
+import ProductItem from './Products/ProductItem';
+import StandaloneHeader from './StandaloneHeader';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -114,6 +118,7 @@ const roleMap = {
   'icon-fa4': RoleIcon,
   'icon-mms': RoleIcon,
   'icon-charts': RoleIcon,
+  'icon-lg': RoleIcon,
   kbd: RoleKbd,
   red: RoleRed,
   required: RoleRequired,
@@ -132,6 +137,7 @@ const componentMap = {
   'card-group': CardGroup,
   chapter: Chapter,
   chapters: Chapters,
+  chatbot: ChatbotUi,
   code: Code,
   'io-code-block': CodeIO,
   cond: Cond,
@@ -160,6 +166,9 @@ const componentMap = {
   instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
+  'landing:client-libraries': StandaloneHeader,
+  'landing:product': ProductItem,
+  'landing:products': Products,
   line: Line,
   line_block: LineBlock,
   list: List,
@@ -210,7 +219,7 @@ const ComponentFactory = (props) => {
     }
 
     // Warn on unexpected usage of domains, but don't break
-    const validDomains = ['mongodb', 'std'];
+    const validDomains = ['mongodb', 'std', 'landing'];
     if (domain && !validDomains.includes(domain)) {
       console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }

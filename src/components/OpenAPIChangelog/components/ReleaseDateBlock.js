@@ -13,7 +13,7 @@ const ReleaseDateBlock = ({ date: releaseDate, paths }) => {
 
   return (
     <Wrapper>
-      <H3>{`${formattedReleaseDate} Release`}</H3>
+      <H3 as="h2">{`${formattedReleaseDate} Release`}</H3>
       {paths.map((path, i) => (
         <ResourceChangesBlock key={`resource-${i}`} {...path} />
       ))}

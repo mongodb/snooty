@@ -29,6 +29,7 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const SIDENAV_WIDTH = 268;
+const CHATBOT_ENABLED = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
 // Use LG's css here to style the component without passing props
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
@@ -97,25 +98,31 @@ const disableScroll = (shouldDisableScroll) => css`
 `;
 
 // use eol status to determine side nav styling
-const getTopAndHeight = (topValue) => css`
-  top: ${topValue};
-  height: calc(100vh - ${topValue});
+const getTopAndHeight = (topValue, template) => css`
+  ${template === 'landing' && CHATBOT_ENABLED
+    ? `
+    top: 0px;
+    height: calc(100vh);`
+    : `
+    top: ${topValue};
+    height: calc(100vh - ${topValue});
+  `}
 `;
 
 // Keep the side nav container sticky to allow LG's side nav to push content seemlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall }) => css`
+  ({ topLarge, topMedium, topSmall, template }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: 2;
-    ${getTopAndHeight(topLarge)};
+    ${getTopAndHeight(topLarge, template)};
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium)};
+      ${getTopAndHeight(topMedium, template)};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall)};
+      ${getTopAndHeight(topSmall, template)};
     }
   `
 );
@@ -228,7 +235,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   return (
     <>
       <Global styles={disableScroll(!hideMobile)} />
-      <SidenavContainer {...topValues}>
+      <SidenavContainer {...topValues} template={template}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"

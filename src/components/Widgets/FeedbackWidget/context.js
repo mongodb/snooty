@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 import { getViewport } from '../../../hooks/useViewport';
-import { createNewFeedback, useStitchUser } from './stitch';
+import { createNewFeedback, useRealmUser } from './realm';
 
 const FeedbackContext = createContext();
 
@@ -10,7 +10,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
-  const user = useStitchUser();
+  const user = useRealmUser();
 
   // Create a new feedback document
   const initializeFeedback = (nextView = 'sentiment') => {

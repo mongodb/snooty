@@ -1,6 +1,6 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
-const { initStitch } = require('../utils/setup/init-stitch');
+const { initRealm } = require('../utils/setup/init-realm');
 const { constructReposFilter } = require('../utils/setup/construct-repos-filter');
 const {
   DOCUMENTS_COLLECTION,
@@ -17,58 +17,53 @@ const buildFilter = constructBuildFilter({
   project: process.env.GATSBY_SITE,
 });
 
-class StitchInterface {
+class RealmInterface {
   constructor() {
-    this.stitchClient = null;
+    this.realmClient = null;
   }
 
   async connect() {
-    this.stitchClient = await initStitch();
+    this.realmClient = await initRealm();
   }
 
   fetchAllProducts() {
-    return this.stitchClient.callFunction('fetchAllProducts', [siteMetadata.database]);
+    return this.realmClient.callFunction('fetchAllProducts', siteMetadata.database);
   }
 
-  fetchRepoBranches(project = process.env.GATSBY_SITE) {
-    return this.stitchClient.callFunction('fetchDocument', [
+  fetchRepoBranches(project = siteMetadata.project) {
+    return this.realmClient.callFunction(
+      'fetchDocument',
       siteMetadata.reposDatabase,
       BRANCHES_COLLECTION,
-      constructReposFilter(project, project === process.env.GATSBY_SITE),
-    ]);
+      constructReposFilter(project, project === siteMetadata.project)
+    );
   }
 
   async fetchDocuments(collection, buildFilter) {
-    return this.stitchClient.callFunction('fetchDocuments', [DB, collection, buildFilter]);
+    return this.realmClient.callFunction('fetchDocuments', DB, collection, buildFilter);
   }
 
   async getMetadata(buildFilter, findOptions) {
-    return this.stitchClient.callFunction('fetchDocument', [
-      DB,
-      METADATA_COLLECTION,
-      buildFilter,
-      undefined,
-      findOptions,
-    ]);
+    return this.realmClient.callFunction('fetchDocument', DB, METADATA_COLLECTION, buildFilter, undefined, findOptions);
   }
 
   async fetchDocument(database, collectionName, query) {
-    return this.stitchClient.callFunction('fetchDocument', [database, collectionName, query]);
+    return this.realmClient.callFunction('fetchDocument', database, collectionName, query);
   }
 
   async updateOAChangelogMetadata(metadata) {
-    return this.stitchClient.callFunction('updateOAChangelogMetadata', [metadata]);
+    return this.realmClient.callFunction('updateOAChangelogMetadata', metadata);
   }
 }
 
 class ManifestDocumentDatabase {
   constructor(path) {
     this.zip = new AdmZip(path);
-    this.stitchInterface = new StitchInterface();
+    this.realmInterface = new RealmInterface();
   }
 
   async connect() {
-    await this.stitchInterface.connect();
+    await this.realmInterface.connect();
   }
 
   async getDocuments() {
@@ -96,31 +91,31 @@ class ManifestDocumentDatabase {
   }
 
   async fetchAllProducts() {
-    return this.stitchInterface.fetchAllProducts();
+    return this.realmInterface.fetchAllProducts();
   }
 }
 
-class StitchDocumentDatabase {
+class RealmDocumentDatabase {
   constructor() {
-    this.stitchInterface = new StitchInterface();
+    this.realmInterface = new RealmInterface();
   }
 
   async connect() {
-    await this.stitchInterface.connect();
+    await this.realmInterface.connect();
   }
 
   async getDocuments() {
-    return this.stitchInterface.fetchDocuments(DOCUMENTS_COLLECTION, buildFilter);
+    return this.realmInterface.fetchDocuments(DOCUMENTS_COLLECTION, buildFilter);
   }
 
   async getMetadata(queryFilters) {
     const filter = queryFilters || buildFilter;
-    return this.stitchInterface.getMetadata(filter);
+    return this.realmInterface.getMetadata(filter);
   }
 
   async getAsset(checksum) {
     const assetQuery = { _id: checksum };
-    const assetDataDocuments = await this.stitchInterface.fetchDocuments(ASSETS_COLLECTION, assetQuery);
+    const assetDataDocuments = await this.realmInterface.fetchDocuments(ASSETS_COLLECTION, assetQuery);
 
     for (const result of assetDataDocuments) {
       return result.data.buffer;
@@ -129,17 +124,17 @@ class StitchDocumentDatabase {
   }
 
   async fetchAllProducts() {
-    return this.stitchInterface.fetchAllProducts();
+    return this.realmInterface.fetchAllProducts();
   }
 
   async fetchDocument(database, collectionName, query) {
-    return this.stitchInterface.fetchDocument(database, collectionName, query);
+    return this.realmInterface.fetchDocument(database, collectionName, query);
   }
 
   async updateOAChangelogMetadata(metadata) {
-    return this.stitchInterface.updateOAChangelogMetadata(metadata);
+    return this.realmInterface.updateOAChangelogMetadata(metadata);
   }
 }
 
 exports.manifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
-exports.stitchDocumentDatabase = new StitchDocumentDatabase();
+exports.realmDocumentDatabase = new RealmDocumentDatabase();

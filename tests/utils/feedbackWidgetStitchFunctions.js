@@ -1,20 +1,20 @@
-import { BSON } from 'mongodb-stitch-server-sdk';
-import * as stitch from '../../src/components/Widgets/FeedbackWidget/stitch';
+import * as Realm from 'realm-web';
+import * as realm from '../../src/components/Widgets/FeedbackWidget/realm';
 
 export const stitchFunctionMocks = {};
 export function mockStitchFunctions() {
   stitchFunctionMocks['createNewFeedback'] = jest
-    .spyOn(stitch, 'createNewFeedback')
+    .spyOn(realm, 'createNewFeedback')
     .mockImplementation(({ page, user, ...rest }) => {
       return {
-        _id: new BSON.ObjectId(),
+        _id: new Realm.BSON.ObjectId(),
         page,
         user,
         ...rest,
       };
     });
 
-  stitchFunctionMocks['useStitchUser'] = jest.spyOn(stitch, 'useStitchUser').mockImplementation(() => {
+  stitchFunctionMocks['useRealmUser'] = jest.spyOn(realm, 'useRealmUser').mockImplementation(() => {
     return {
       id: 'test-user-id',
     };

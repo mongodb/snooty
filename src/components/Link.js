@@ -36,6 +36,10 @@ const gatsbyLinkStyling = css`
     color: ${palette.blue.base};
   }
 
+  > svg {
+    margin-left: 3px;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -123,6 +127,7 @@ const Link = ({
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
       hideExternalIcon={hideExternalIcon}
+      arrowAppearance={showLinkArrow ? 'persist' : 'none'}
       target={target}
       {...other}
     >

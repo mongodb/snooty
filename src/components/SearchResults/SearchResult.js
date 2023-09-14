@@ -5,15 +5,12 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
-import Tag, { searchTagStyle, searchTagStyleFeature } from '../Tag';
+import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
-const SEARCH_MATCH_STYLE = newSearchInput
-  ? `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`
-  : `background-color: ${palette.yellow.light2};`;
+const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
@@ -48,7 +45,7 @@ const SearchResultContainer = styled('div')`
 
 const StyledResultTitle = styled('p')`
   font-family: 'Euclid Circular A';
-  ${newSearchInput ? `color: #016bf8;` : ``}
+  color: #016bf8;
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -78,7 +75,7 @@ const SearchResultLink = styled('a')`
     }
   }
   :visited {
-    ${newSearchInput ? `${StyledResultTitle} {color: #5e0c9e;}` : ``}
+    ${StyledResultTitle}
   }
 `;
 
@@ -92,7 +89,7 @@ const StyledPreviewText = styled(Body)`
 `;
 
 const StyledTag = styled(Tag)`
-  ${newSearchInput ? searchTagStyleFeature : searchTagStyle}
+  ${searchTagStyle}
 `;
 
 const StylingTagContainer = styled('div')`
@@ -108,14 +105,12 @@ const highlightSearchTerm = (text, searchTerm) =>
     (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
-const spanAllowedStyles = newSearchInput
-  ? {
-      'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
-      'border-radius': [new RegExp(`^3px$`)],
-      'padding-left': [new RegExp(`^2px$`)],
-      'padding-right': [new RegExp(`^2px$`)],
-    }
-  : { 'background-color': [new RegExp(`^${palette.yellow.light2}$`, 'i')] };
+const spanAllowedStyles = {
+  'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+  'border-radius': [new RegExp(`^3px$`)],
+  'padding-left': [new RegExp(`^2px$`)],
+  'padding-right': [new RegExp(`^2px$`)],
+};
 
 // since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
 const sanitizePreviewHtml = (text) =>
@@ -140,19 +135,17 @@ const SearchResult = React.memo(
     ...props
   }) => {
     const { searchPropertyMapping, searchTerm } = useContext(SearchContext);
-    const highlightedTitle = highlightSearchTerm(title, searchTerm);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
-    const newSearchInput = process.env.GATSBY_TEST_SEARCH_UI === 'true';
 
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
             dangerouslySetInnerHTML={{
-              __html: sanitizePreviewHtml(newSearchInput ? title : highlightedTitle),
+              __html: sanitizePreviewHtml(title),
             }}
             useLargeTitle={useLargeTitle}
           />

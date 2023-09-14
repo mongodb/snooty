@@ -9,7 +9,7 @@ const { getPageSlug } = require('../../src/utils/get-page-slug');
 const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata');
 const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix');
-const { manifestDocumentDatabase, stitchDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 
 // different types of references
 const PAGES = [];
@@ -31,12 +31,12 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   const productList = manifestMetadata?.associated_products || [];
   await Promise.all(
     productList.map(async (product) => {
-      associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+      associatedReposInfo[product.name] = await db.realmInterface.fetchRepoBranches(product.name);
     })
   );
   // check if product is associated child product
   try {
-    const umbrellaProduct = await db.stitchInterface.getMetadata({
+    const umbrellaProduct = await db.realmInterface.getMetadata({
       'associated_products.name': process.env.GATSBY_SITE,
     });
     isAssociatedProduct = !!umbrellaProduct;
@@ -57,7 +57,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
     const findOptions = {
       sort: { build_id: -1 },
     };
-    const remoteMetadata = await db.stitchInterface.getMetadata(filter, findOptions);
+    const remoteMetadata = await db.realmInterface.getMetadata(filter, findOptions);
 
     createNode({
       children: [],
@@ -128,10 +128,9 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     try {
       const receivedChangelogData = await fetchChangelogData(runId, versions);
       changelogData = { ...changelogData, ...receivedChangelogData };
-      await db.stitchInterface.updateOAChangelogMetadata(index);
     } catch (error) {
       /* If any error occurs, fetch last successful metadata and build changelog node */
-      const lastSuccessfulIndex = await db.stitchInterface.fetchDocument(
+      const lastSuccessfulIndex = await db.realmInterface.fetchDocument(
         'openapi_changelog',
         'atlas_admin_metadata',
         {}
@@ -186,8 +185,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     console.log('Loading documents from manifest');
     db = manifestDocumentDatabase;
   } else {
-    console.log('Loading documents from stitch');
-    db = stitchDocumentDatabase;
+    console.log('Loading documents from realm');
+    db = realmDocumentDatabase;
   }
 
   await db.connect();
@@ -238,7 +237,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 
   // Get all MongoDB products for the sidenav
-  const products = await db.fetchAllProducts(siteMetadata.database);
+  const products = await db.fetchAllProducts();
   products.forEach((product) => {
     const url = baseUrl(product.baseUrl + product.slug);
 
@@ -289,7 +288,7 @@ exports.createPages = async ({ actions }) => {
 
   let repoBranches = null;
   try {
-    const repoInfo = await db.stitchInterface.fetchRepoBranches();
+    const repoInfo = await db.realmInterface.fetchRepoBranches();
     let errMsg;
 
     if (!repoInfo) {
@@ -360,19 +359,6 @@ exports.createPages = async ({ actions }) => {
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
 exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
-  if (stage === 'build-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /mongodb-stitch-browser-sdk/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    });
-  }
-
   const providePlugins = {
     Buffer: ['buffer', 'Buffer'],
     process: require.resolve('../../stubs/process.js'),

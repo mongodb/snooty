@@ -5,6 +5,13 @@ import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 
+const getMarginStyles = (isForDriver, sideMarginValue) => {
+  if (typeof sideMarginValue !== 'number') {
+    console.warn('sideMarginValue only accepts a number');
+  }
+  return isForDriver ? `0 ${sideMarginValue}px ${theme.size.xlarge}` : `${theme.size.large} 0`;
+};
+
 const getColumnValue = (props) => props.columns || React.Children.count(props.children);
 
 // Carousel styling refers to the horizontal scrolling display of the Cards;
@@ -41,8 +48,15 @@ const StyledGrid = styled('div')`
   grid-column-gap: ${theme.size.medium};
   grid-row-gap: ${theme.size.medium};
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
-  margin: ${({ isForDrivers }) =>
-    isForDrivers ? `${theme.size.large} 0 ${theme.size.xlarge}` : `${theme.size.large} 0`};
+  margin: ${({ isForDrivers }) => getMarginStyles(isForDrivers, 0)};
+
+  @media ${theme.screenSize.upToMedium} {
+    margin: ${({ isForDrivers }) => getMarginStyles(isForDrivers, 42)};
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    margin: ${({ isForDrivers }) => getMarginStyles(isForDrivers, 24)};
+  }
 
   @media ${theme.screenSize.upToXLarge} {
     grid-template-columns: repeat(2, 1fr);

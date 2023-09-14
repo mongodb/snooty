@@ -31,12 +31,12 @@ const createRemoteMetadataNode = async ({
 
   await Promise.all(
     productList.map(async (product) => {
-      associatedReposInfo[product.name] = await db.stitchInterface.fetchRepoBranches(product.name);
+      associatedReposInfo[product.name] = await db.realmInterface.fetchRepoBranches(product.name);
     })
   );
   // check if product is associated child product
   try {
-    const umbrellaProduct = await db.stitchInterface.getMetadata({
+    const umbrellaProduct = await db.realmInterface.getMetadata({
       'associated_products.name': metadata.project,
     });
     isAssociatedProduct = !!umbrellaProduct;
@@ -63,7 +63,7 @@ const createRemoteMetadataNode = async ({
   //   const findOptions = {
   //     sort: { build_id: -1 },
   //   };
-  //   const remoteMetadata = await db.stitchInterface.getMetadata(filter, findOptions);
+  //   const remoteMetadata = await db.realmInterface.getMetadata(filter, findOptions);
 
   //   createNode({
   //     children: [],
@@ -137,10 +137,10 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
     try {
       const receivedChangelogData = await fetchChangelogData(runId, versions);
       changelogData = { ...changelogData, ...receivedChangelogData };
-      await db.stitchInterface.updateOAChangelogMetadata(index);
+      await db.realmInterface.updateOAChangelogMetadata(index);
     } catch (error) {
       /* If any error occurs, fetch last successful metadata and build changelog node */
-      const lastSuccessfulIndex = await db.stitchInterface.fetchDocument(
+      const lastSuccessfulIndex = await db.realmInterface.fetchDocument(
         'openapi_changelog',
         'atlas_admin_metadata',
         {}
