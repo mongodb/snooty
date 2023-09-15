@@ -13,6 +13,12 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
     publishedBranches,
   });
 
+  // DOP-4025: hide feedback tab on homepage
+  const hideFeedback = pageOptions.hidefeedback === 'page';
+  if (hideFeedback) {
+    return <>{children}</>;
+  }
+
   return (
     <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
       {children}
