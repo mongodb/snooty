@@ -11,7 +11,6 @@ const ExploreItem = styled('div')`
   background-position: right;
   background-repeat: no-repeat;
   background-color: ${palette.black};
-  //padding: 24px 108px 0 65px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -20,12 +19,11 @@ const ExploreItem = styled('div')`
   grid-column-end: 14;
   column-gap: 63px;
   row-gap: 32px;
-  max-width: 1440px;
-  min-height: 336px;
+  max-width: 1540px;
+  min-height: 386px;
 
   @media ${theme.screenSize.upToLarge} {
     flex-direction: row;
-    //flex: auto;
     padding: 2px 52px 0 42px;
   }
 
@@ -34,44 +32,42 @@ const ExploreItem = styled('div')`
   }
 
   @media ${theme.screenSize.xLargeAndUp} {
-    padding: 24px 108px 0 65px;
+    padding: 24px 62px 0 65px;
   }
 `;
 
 const leftCol = css`
-  flex: 2 0 350px;
+  flex: 2 0 310px;
+  font-size: 16px;
   @media ${theme.screenSize.upToLarge} {
     flex: 1 0 100%;
     width: 100%;
   }
-
   p {
     color: ${palette.gray.light2};
   }
 `;
 
 const blockStyle = css`
-  height: 224px;
   padding-top: 8px;
   font-size: 13px;
-  //min-width: 425px;
   max-width: 682px;
-  //padding-bottom: 100px;
+  pre {
+    //padding-bottom: 100px;
+  }
   @media ${theme.screenSize.upToLarge} {
     padding-bottom: 0px;
     min-width: 0px;
-    //flex: 1 0 auto;
     width: 100%;
   }
   @media ${theme.screenSize.xLargeAndUp} {
-    min-width: 425px;
-    flex: 1 0 425px;
+    max-width: 400px;
+    flex: 1 0 400px;
   }
 `;
 
 const HeaderStyle = styled('div')`
   width: 329px;
-  //height: 32px;
   padding-top: 50px;
   padding-bottom: 24px;
   width: 100%;
@@ -92,7 +88,7 @@ const Explore = ({ nodeData: { children, argument }, ...rest }) => {
             <ComponentFactory
               key={i}
               nodeData={child}
-              baseFontSize={'16'}
+              baseFontSize={16}
               darkMode={true}
               variant={'default'}
               rightGlyph={'Export'}
