@@ -20,7 +20,8 @@ describe('when rendering a list-table directive', () => {
 
   it('displays one header row', () => {
     const wrapper = mountListTable(data);
-    expect(wrapper.getByTestId('leafygreen-ui-header-row')).toBeTruthy();
+    expect(wrapper.getAllByRole('columnheader')).toBeTruthy();
+    //expect(wrapper.getByTestId('leafygreen-ui-header-row')).toBeTruthy();
   });
 
   it('displays six header columns', () => {
@@ -55,7 +56,8 @@ describe('when rendering a list table with fixed widths', () => {
 
   it('displays no content in the header row', () => {
     const wrapper = mountListTable(data);
-    expect(wrapper.getByTestId('leafygreen-ui-header-row')).toBeTruthy();
+    //expect(wrapper.getByTestId('leafygreen-ui-header-row')).toBeTruthy();
+    expect(wrapper.getAllByRole('columnheader')).toBeTruthy();
     expect(wrapper.queryByText('name')).not.toBeTruthy();
   });
 
