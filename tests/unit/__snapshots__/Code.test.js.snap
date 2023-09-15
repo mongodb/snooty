@@ -215,7 +215,7 @@ exports[`renders correctly 1`] = `
           tabindex="-1"
         >
           <code
-            class="lg-highlight-hljs-light Python emotion-7"
+            class="lg-highlight-hljs-light javascript emotion-7"
           >
             <table
               class="emotion-8"
@@ -245,7 +245,18 @@ exports[`renders correctly 1`] = `
                   <td
                     class="emotion-9"
                   >
-                              --drop --file ~\\downloads\\inventory.crud.json
+                              --drop --file ~\\downloads\\inventory.
+                    <span
+                      class="lg-highlight-property"
+                    >
+                      crud
+                    </span>
+                    .
+                    <span
+                      class="lg-highlight-property"
+                    >
+                      json
+                    </span>
                   </td>
                 </tr>
               </tbody>
@@ -461,7 +472,7 @@ exports[`renders correctly when none is passed in as a language 1`] = `
           tabindex="-1"
         >
           <code
-            class="lg-highlight-hljs-light Python emotion-4"
+            class="lg-highlight-hljs-light none emotion-4"
           >
             <table
               class="emotion-5"
@@ -473,31 +484,7 @@ exports[`renders correctly when none is passed in as a language 1`] = `
                   <td
                     class="emotion-6"
                   >
-                    [{plot A trio of guys 
-                    <span
-                      class="lg-highlight-keyword"
-                    >
-                      try
-                    </span>
-                     
-                    <span
-                      class="lg-highlight-keyword"
-                    >
-                      and
-                    </span>
-                     make up 
-                    <span
-                      class="lg-highlight-keyword"
-                    >
-                      for
-                    </span>
-                     missed opportunities 
-                    <span
-                      class="lg-highlight-keyword"
-                    >
-                      in
-                    </span>
-                     childhood by forming a three-player baseball team to compete against standard children baseball squads.}]
+                    [{plot A trio of guys try and make up for missed opportunities in childhood by forming a three-player baseball team to compete against standard children baseball squads.}]
                   </td>
                 </tr>
               </tbody>
