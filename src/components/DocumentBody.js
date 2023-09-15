@@ -98,6 +98,7 @@ const DocumentBody = (props) => {
         pageTitle={pageTitle}
         publishedBranches={getNestedValue(['publishedBranches'], metadata)}
         slug={slug}
+        template={template}
         isInPresentationMode={isInPresentationMode}
       >
         <FootnoteContext.Provider value={{ footnotes }}>

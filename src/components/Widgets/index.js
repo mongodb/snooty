@@ -4,7 +4,7 @@ import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from './FeedbackWidget';
 
-const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode }) => {
+const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode, template }) => {
   const url = isBrowser ? window.location.href : null;
   const hideFeedbackHeader = pageOptions.hidefeedback === 'header';
   const { project } = useSnootyMetadata();
@@ -16,7 +16,7 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
   });
 
   // DOP-4025: hide feedback tab on homepage
-  if (project === 'landing' && slug === '/') {
+  if (project === 'landing' && slug === '/' && template === 'landing') {
     return <>{children}</>;
   }
   return (

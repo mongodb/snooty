@@ -564,6 +564,21 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 
 exports[`DocumentBody renders the necessary elements 2`] = `
 .emotion-0 {
+  position: relative;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: border,box-shadow;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: white;
+  color: #1C2D38;
+  border-radius: 24px;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 24px;
+  min-height: 68px;
+  cursor: pointer;
   cursor: pointer;
   padding: 12px;
   position: fixed;
@@ -574,6 +589,22 @@ exports[`DocumentBody renders the necessary elements 2`] = `
   z-index: 9;
   font-weight: 500;
   color: #00684A;
+}
+
+.emotion-0:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
+}
+
+.emotion-0:hover,
+.emotion-0:active {
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
+}
+
+.emotion-0:hover:focus,
+.emotion-0:active:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
 @media only screen and (max-width: 480px) {
@@ -632,42 +663,8 @@ exports[`DocumentBody renders the necessary elements 2`] = `
   }
 }
 
-.emotion-2 {
-  position: relative;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
-  border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 24px;
-  min-height: 68px;
-  cursor: pointer;
-}
-
-.emotion-2:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
-}
-
-.emotion-2:hover,
-.emotion-2:active {
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
-}
-
-.emotion-2:hover:focus,
-.emotion-2:active:focus {
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
-}
-
 <div
-  class="emotion-0 emotion-1 emotion-2"
+  class="emotion-0"
 >
   Share Feedback
 </div>
