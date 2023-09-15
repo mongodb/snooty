@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { H3 } from '@leafygreen-ui/typography';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
@@ -25,6 +24,7 @@ const ExploreItem = styled('div')`
   row-gap: 32px;
   max-width: 1440px;
   min-height: 336px;
+
   @media ${theme.screenSize.upToLarge} {
     flex-direction: row;
     //flex: auto;
@@ -41,7 +41,6 @@ const ExploreItem = styled('div')`
 `;
 
 const leftCol = css`
-  font-size: 16px;
   flex: 2 0 350px;
 
   @media ${theme.screenSize.upToLarge} {
@@ -101,42 +100,43 @@ const HeaderStyle = styled('div')`
 
 // const exportComponent =createIconComponent(exportGlyph);
 
-const Explore = ({ nodeData: { children, argument }, ...rest }) => {
-  let title = argument[0]?.value;
+const Explore = ({ nodeData: { children } }) => {
+  console.log(children[0].children[0].value);
   return (
     <ExploreItem>
       <div className={cx(leftCol)}>
         <HeaderStyle>
           <H3 as="h2" darkMode={true}>
-            {title}
+            {children[0].children[0].value}
           </H3>
         </HeaderStyle>
         <div>
-          {children.slice(0, 2).map((child, i) => (
+          {children.slice(1, 3).map((child, i) => (
             <ComponentFactory
               key={i}
               nodeData={child}
               baseFontSize={'16'}
               darkMode={true}
               variant={'default'}
+              rightGlyph={'Export'}
             ></ComponentFactory>
           ))}
         </div>
       </div>
 
       <div className={cx(blockStyle)}>
-        <ComponentFactory nodeData={children[2]} darkMode={true} showLineNumbers={false} overflow={false} />
+        {children.slice(3).map((child, i) => (
+          <ComponentFactory
+            key={i}
+            nodeData={child}
+            darkMode={true}
+            showLineNumbers={false}
+            overflow={false}
+          ></ComponentFactory>
+        ))}
       </div>
     </ExploreItem>
   );
-};
-
-Explore.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object),
-    darkMode: PropTypes.bool,
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default Explore;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import Badge from '@leafygreen-ui/badge';
 import { css } from '@emotion/react';
+import Icon from '@leafygreen-ui/icon';
 
 const cloudSyncStyle = css`
   padding-right: 7px;
@@ -13,6 +14,10 @@ const syncPillStyle = css`
   margin-left: 4px;
   position: relative;
   top: -3px;
+`;
+
+const leafyGreenIconStyle = css`
+  vertical-align: middle;
 `;
 
 const RoleIcon = ({ nodeData: { target, name } }) => {
@@ -33,6 +38,8 @@ const RoleIcon = ({ nodeData: { target, name } }) => {
     return <i className={`charts-icon-${target} charts-icon`}></i>;
   } else if (name === 'icon-mms') {
     return <i className={`mms-icon-${target} mms-icon`}></i>;
+  } else if (name === 'icon-lg') {
+    return <Icon glyph={target} css={leafyGreenIconStyle} />;
   }
 };
 

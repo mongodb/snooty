@@ -214,6 +214,10 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   color: #016BF8;
 }
 
+.emotion-0>svg {
+  margin-left: 3px;
+}
+
 .emotion-0::after {
   content: '';
   position: absolute;
@@ -377,6 +381,10 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 
 .emotion-0>code {
   color: #016BF8;
+}
+
+.emotion-0>svg {
+  margin-left: 3px;
 }
 
 .emotion-0::after {

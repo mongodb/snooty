@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LeafyButton from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
+import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
@@ -21,6 +22,7 @@ const Button = ({
   darkMode,
   size = 'default',
   baseFontSize,
+  rightGlyph,
   ...rest
 }) => {
   const componentProps = {};
@@ -36,6 +38,7 @@ const Button = ({
       size={size}
       darkMode={darkMode}
       variant={variant}
+      rightGlyph={<Icon glyph={rightGlyph} />}
       {...componentProps}
     >
       {argument.map((child, i) => (

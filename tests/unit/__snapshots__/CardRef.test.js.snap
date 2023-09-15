@@ -15,6 +15,18 @@ exports[`card correctly with and without url 1`] = `
   margin: 32px 0;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-0 {
+    margin: 32px 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    margin: 32px 0;
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   .emotion-0 {
     grid-template-columns: repeat(2, 1fr);
@@ -160,6 +172,10 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-10>code {
   color: #016BF8;
+}
+
+.emotion-10>svg {
+  margin-left: 3px;
 }
 
 .emotion-10::after {

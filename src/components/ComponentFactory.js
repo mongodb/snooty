@@ -34,6 +34,7 @@ import Image from './Image';
 import Include from './Include';
 import Introduction from './Introduction';
 import Kicker from './Kicker';
+import LandingIntro from './LandingIntro';
 import Line from './LineBlock/Line';
 import LineBlock from './LineBlock';
 import List from './List';
@@ -84,6 +85,10 @@ import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 import Instruqt from './Instruqt';
 import Explore from './Landing/Explore';
+import { MoreWays } from './Landing/MoreWays';
+import Products from './Products';
+import ProductItem from './Products/ProductItem';
+import StandaloneHeader from './StandaloneHeader';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -116,6 +121,7 @@ const roleMap = {
   'icon-fa4': RoleIcon,
   'icon-mms': RoleIcon,
   'icon-charts': RoleIcon,
+  'icon-lg': RoleIcon,
   kbd: RoleKbd,
   red: RoleRed,
   required: RoleRequired,
@@ -164,6 +170,11 @@ const componentMap = {
   introduction: Introduction,
   kicker: Kicker,
   'landing:explore': Explore,
+  'landing:more-ways': MoreWays,
+  'landing:client-libraries': StandaloneHeader,
+  'landing:introduction': LandingIntro,
+  'landing:product': ProductItem,
+  'landing:products': Products,
   line: Line,
   line_block: LineBlock,
   list: List,

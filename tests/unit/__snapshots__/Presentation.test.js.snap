@@ -573,7 +573,7 @@ exports[`DocumentBody renders the necessary elements 2`] = `
   user-select: none;
   z-index: 9;
   font-weight: 500;
-  color: #00A35C;
+  color: #00684A;
 }
 
 @media only screen and (max-width: 480px) {

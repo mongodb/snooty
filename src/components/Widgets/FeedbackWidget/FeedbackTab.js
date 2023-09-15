@@ -12,7 +12,7 @@ const FeedbackContainer = styled(LeafygreenCard)`
   user-select: none;
   z-index: 9;
   font-weight: 500;
-  color: ${palette.green.dark1};
+  color: ${palette.green.dark2};
 
   // tab fixed at bottom of docs page
   @media ${theme.screenSize.upToSmall} {

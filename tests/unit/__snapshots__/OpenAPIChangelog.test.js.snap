@@ -847,11 +847,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       <div
         class="emotion-4 emotion-5"
       >
-        <h2
+        <h1
           class="emotion-6"
         >
           API Changelog
-        </h2>
+        </h1>
         <p
           class="emotion-7"
         >
@@ -1023,11 +1023,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       <section
         class="emotion-13 emotion-46"
       >
-        <h3
+        <h2
           class="emotion-47"
         >
           01 February 2024 Release
-        </h3>
+        </h2>
         <div
           class="emotion-48 emotion-49"
           data-testid="resource-changes-block"
@@ -1070,11 +1070,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       <section
         class="emotion-13 emotion-46"
       >
-        <h3
+        <h2
           class="emotion-47"
         >
           01 February 2023 Release
-        </h3>
+        </h2>
         <div
           class="emotion-48 emotion-49"
           data-testid="resource-changes-block"
@@ -1297,11 +1297,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       <section
         class="emotion-13 emotion-46"
       >
-        <h3
+        <h2
           class="emotion-47"
         >
           22 February 2023 Release
-        </h3>
+        </h2>
         <div
           class="emotion-48 emotion-49"
           data-testid="resource-changes-block"
