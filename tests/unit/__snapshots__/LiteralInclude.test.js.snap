@@ -235,7 +235,7 @@ exports[`renders correctly 1`] = `
           tabindex="-1"
         >
           <code
-            class="lg-highlight-hljs-light java emotion-4"
+            class="lg-highlight-hljs-light Python emotion-4"
           >
             <table
               class="emotion-5"
