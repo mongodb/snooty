@@ -43,6 +43,20 @@ const Wrapper = styled('main')`
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
+
+      &:not(.compact, .extra-compact) {
+        p {
+          font-weight: 500;
+        }
+        p:first-of-type {
+          margin-bottom: ${({ theme }) => theme.size.large};
+        }
+
+        @media ${({ theme }) => theme.screenSize.upToMedium} {
+          margin-left: 42px;
+          margin-right: 42px;
+        }
+      }
     }
   }
 `;
