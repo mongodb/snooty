@@ -84,6 +84,7 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
 import Instruqt from './Instruqt';
+import Explore from './Landing/Explore';
 import { MoreWays } from './Landing/MoreWays';
 import Products from './Products';
 import ProductItem from './Products/ProductItem';
@@ -168,6 +169,7 @@ const componentMap = {
   instruqt: Instruqt,
   introduction: Introduction,
   kicker: Kicker,
+  'landing:explore': Explore,
   'landing:more-ways': MoreWays,
   'landing:client-libraries': StandaloneHeader,
   'landing:introduction': LandingIntro,

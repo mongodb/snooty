@@ -80,7 +80,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
 
     const button = await wrapper.findByTitle('View Documentation');
     expect(button).toBeTruthy();
-    expect(button).toBeDisabled();
+    expect(button).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('shows a disabled version selector', async () => {

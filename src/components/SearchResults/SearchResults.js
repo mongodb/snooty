@@ -245,6 +245,7 @@ const SearchResults = () => {
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
   const [searchField, setSearchField] = useState(searchTerm || '');
+
   const [searchFinished, setSearchFinished] = useState(true);
   const [searchCount, setSearchCount] = useState();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
