@@ -99,7 +99,6 @@
     "bson": "^4.6.3",
     "buffer": "^6.0.3",
     "clipboard": "^2.0.8",
-    "cx": "^23.9.0",
     "dotenv": "^8.2.0",
     "eventsource": "^2.0.2",
     "gatsby": "^5.0.0",
