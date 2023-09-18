@@ -19,6 +19,14 @@ const ExploreItem = styled.div`
 
   display: grid;
   grid-template-columns: minmax(64px, 1fr) repeat(12, minmax(0, 120px)) minmax(64px, 1fr);
+
+  @media ${theme.screenSize.upToLarge} {
+    grid-template-columns: 48px 1fr 48px;
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+  }
 `;
 
 const ExploreContent = styled.div`
