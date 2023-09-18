@@ -14,13 +14,13 @@ const CHATBOT_SERVER_BASE_URL =
 const SKELETON_BORDER_RADIUS = '12px';
 
 // Match landing template max width for alignment purposes
-const CONTENT_MAX_WIDTH = 1440;
+const CONTENT_MAX_WIDTH = theme.breakpoints.xxLarge;
 
 const landingTemplateStyling = css`
   position: sticky;
   top: 0px;
   display: grid;
-  padding: 16px 0;
+  padding: ${theme.size.default} 0;
   // Use landing template's grid layout to help with alignment
   @media ${theme.screenSize.mediumAndUp} {
     grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(
@@ -41,6 +41,8 @@ const landingTemplateStyling = css`
     grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
   }
 
+  // Ensure direct children (Chatbot and Loading Skeleton) of the container are
+  // in the correct column
   > div,
   span {
     grid-column: 2 / -2;
@@ -48,7 +50,7 @@ const landingTemplateStyling = css`
 `;
 
 const StyledChatBotUiContainer = styled.div`
-  padding: 16px 50px;
+  padding: ${theme.size.default} 50px;
   z-index: 1;
   width: 100%;
   background: ${palette.white};
