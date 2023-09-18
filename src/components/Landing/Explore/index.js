@@ -15,18 +15,10 @@ const ExploreItem = styled.div`
   background-color: ${palette.black};
   grid-column-start: 1;
   grid-column-end: 15;
-  min-height: 337px;
+  padding: 56px 0;
 
   display: grid;
   grid-template-columns: minmax(64px, 1fr) repeat(12, minmax(0, 120px)) minmax(64px, 1fr);
-
-  @media ${theme.screenSize.upToLarge} {
-    padding-top: 2px;
-  }
-
-  @media ${theme.screenSize.LargeAndUp} {
-    padding-top: 24px;
-  }
 `;
 
 const ExploreContent = styled.div`
@@ -34,10 +26,9 @@ const ExploreContent = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   flex: 1 1 100%;
-  grid-column-start: 2;
-  grid-column-end: -2;
+  grid-column: 2/-2;
   column-gap: 63px;
-  min-height: 337px;
+  row-gap: 32px;
 
   @media ${theme.screenSize.upToLarge} {
     flex-direction: row;
@@ -45,9 +36,11 @@ const ExploreContent = styled.div`
 `;
 
 const HeaderStyle = styled.div`
-  width: 329px;
-  padding-top: 50px;
   padding-bottom: 24px;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    white-space: nowrap;
+  }
 `;
 
 const leftCol = css`
@@ -63,7 +56,6 @@ const leftCol = css`
 `;
 
 const blockStyle = css`
-  padding-top: 8px;
   font-size: 13px;
   max-width: 682px;
   @media ${theme.screenSize.upToLarge} {
