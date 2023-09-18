@@ -380,7 +380,7 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H1> Search Results</H1>
+          <H1>Search Results</H1>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
