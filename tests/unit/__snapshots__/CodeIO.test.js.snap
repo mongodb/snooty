@@ -288,7 +288,7 @@ exports[`CodeIO renders correctly 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -302,9 +302,13 @@ exports[`CodeIO renders correctly 1`] = `
   margin: 8px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus {
   outline: none;
+}
+
+.emotion-16[disabled],
+.emotion-16:disabled {
+  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -314,18 +318,14 @@ exports[`CodeIO renders correctly 1`] = `
   text-decoration: none;
 }
 
-.emotion-16:focus {
-  color: #001E2B;
-}
-
-.emotion-16:hover[aria-disabled='false'],
+.emotion-16:hover,
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -356,8 +356,6 @@ exports[`CodeIO renders correctly 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -547,7 +545,8 @@ exports[`CodeIO renders correctly 1`] = `
     >
       <button
         aria-disabled="false"
-        class="lg-ui-button-0000 emotion-16"
+        class="emotion-16"
+        data-leafygreen-ui="button"
         role="button"
         type="button"
       >

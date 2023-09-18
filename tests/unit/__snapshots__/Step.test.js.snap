@@ -85,32 +85,43 @@ exports[`renders with "connected" styling 1`] = `
 }
 
 .emotion-9 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   cursor: pointer;
-  position: relative;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
+}
+
+.emotion-9:hover,
+.emotion-9:focus,
+.emotion-9:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-9:focus {
   outline: none;
 }
 
-.emotion-9>code {
-  color: #016BF8;
+.emotion-10 {
+  position: relative;
 }
 
-.emotion-9>svg {
-  margin-left: 3px;
-}
-
-.emotion-9::after {
+.emotion-10::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -120,11 +131,11 @@ exports[`renders with "connected" styling 1`] = `
   border-radius: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
+.lg-ui-0001:focus .emotion-10::after {
   background-color: #0498EC;
 }
 
-.emotion-9:hover::after {
+.lg-ui-0001:hover .emotion-10::after {
   background-color: #E8EDEB;
 }
 
@@ -152,10 +163,14 @@ exports[`renders with "connected" styling 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
-          href="/import-export/#std-label-compass-import-export"
+          class="lg-ui-0001 emotion-9"
+          href=""
         >
-          To learn more, see Import and Export Data
+          <span
+            class="emotion-10"
+          >
+            To learn more, see Import and Export Data
+          </span>
         </a>
       </p>
     </div>
@@ -248,32 +263,43 @@ exports[`renders with "connected" styling by default 1`] = `
 }
 
 .emotion-9 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   cursor: pointer;
-  position: relative;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
+}
+
+.emotion-9:hover,
+.emotion-9:focus,
+.emotion-9:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-9:focus {
   outline: none;
 }
 
-.emotion-9>code {
-  color: #016BF8;
+.emotion-10 {
+  position: relative;
 }
 
-.emotion-9>svg {
-  margin-left: 3px;
-}
-
-.emotion-9::after {
+.emotion-10::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -283,11 +309,11 @@ exports[`renders with "connected" styling by default 1`] = `
   border-radius: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
+.lg-ui-0001:focus .emotion-10::after {
   background-color: #0498EC;
 }
 
-.emotion-9:hover::after {
+.lg-ui-0001:hover .emotion-10::after {
   background-color: #E8EDEB;
 }
 
@@ -315,10 +341,14 @@ exports[`renders with "connected" styling by default 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
-          href="/import-export/#std-label-compass-import-export"
+          class="lg-ui-0001 emotion-9"
+          href=""
         >
-          To learn more, see Import and Export Data
+          <span
+            class="emotion-10"
+          >
+            To learn more, see Import and Export Data
+          </span>
         </a>
       </p>
     </div>
@@ -384,32 +414,43 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-9 {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   cursor: pointer;
-  position: relative;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: 400;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
-  line-height: 13px;
-  outline: none;
-  color: #016BF8;
+}
+
+.emotion-9:hover,
+.emotion-9:focus,
+.emotion-9:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-9:focus {
   outline: none;
 }
 
-.emotion-9>code {
-  color: #016BF8;
+.emotion-10 {
+  position: relative;
 }
 
-.emotion-9>svg {
-  margin-left: 3px;
-}
-
-.emotion-9::after {
+.emotion-10::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -419,11 +460,11 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   border-radius: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
+.lg-ui-0001:focus .emotion-10::after {
   background-color: #0498EC;
 }
 
-.emotion-9:hover::after {
+.lg-ui-0001:hover .emotion-10::after {
   background-color: #E8EDEB;
 }
 
@@ -451,10 +492,14 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
-          href="/import-export/#std-label-compass-import-export"
+          class="lg-ui-0001 emotion-9"
+          href=""
         >
-          To learn more, see Import and Export Data
+          <span
+            class="emotion-10"
+          >
+            To learn more, see Import and Export Data
+          </span>
         </a>
       </p>
     </div>

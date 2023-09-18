@@ -121,7 +121,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -132,9 +132,13 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   height: 36px;
 }
 
-.emotion-8:focus,
-.emotion-8:focus-visible {
+.emotion-8:focus {
   outline: none;
+}
+
+.emotion-8[disabled],
+.emotion-8:disabled {
+  pointer-events: none;
 }
 
 .emotion-8:active,
@@ -144,18 +148,14 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   text-decoration: none;
 }
 
-.emotion-8:focus {
-  color: #001E2B;
-}
-
-.emotion-8:hover[aria-disabled='false'],
+.emotion-8:hover,
 .emotion-8:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-8:focus-visible {
+.emotion-8:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -190,8 +190,6 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -862,7 +860,8 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       </div>
       <a
         aria-disabled="false"
-        class="lg-ui-button-0000 emotion-8 emotion-9 emotion-10"
+        class="emotion-8 emotion-9 emotion-10"
+        data-leafygreen-ui="button"
         href="https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog/20230403105948111/changelog.json"
       >
         <div
