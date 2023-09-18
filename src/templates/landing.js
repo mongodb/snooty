@@ -44,12 +44,13 @@ const Wrapper = styled('main')`
         grid-column: 2 / -2 !important;
       }
 
-      &:not(.compact, .extra-compact) {
+      &:not(.compact, .extra-compact, .drivers) {
         p {
           font-weight: 500;
-        }
-        p:first-of-type {
-          margin-bottom: ${({ theme }) => theme.size.large};
+
+          a {
+            margin-top: ${({ theme }) => theme.size.medium};
+          }
         }
 
         @media ${({ theme }) => theme.screenSize.upToMedium} {
