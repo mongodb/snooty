@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
@@ -12,14 +13,41 @@ const CHATBOT_SERVER_BASE_URL =
 
 const SKELETON_BORDER_RADIUS = '12px';
 
-const StyledChatBotUiContainer = styled.div(
-  ({ template }) => `
-  ${
-    template === 'landing'
-      ? `position: sticky;
-  top: 0px;`
-      : `position: relative;`
+// Match landing template max width for alignment purposes
+const CONTENT_MAX_WIDTH = 1440;
+
+const landingTemplateStyling = css`
+  position: sticky;
+  top: 0px;
+  display: grid;
+  padding: 16px 0;
+  // Use landing template's grid layout to help with alignment
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(
+        ${theme.size.xlarge},
+        1fr
+      );
   }
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: 48px repeat(12, 1fr) 48px;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    grid-template-columns: ${theme.size.large} 1fr ${theme.size.large};
+  }
+
+  @media ${theme.screenSize.upToXSmall} {
+    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+  }
+
+  > div,
+  span {
+    grid-column: 2 / -2;
+  }
+`;
+
+const StyledChatBotUiContainer = styled.div`
   padding: 16px 50px;
   z-index: 1;
   width: 100%;
@@ -28,6 +56,7 @@ const StyledChatBotUiContainer = styled.div(
 
   > div {
     max-width: 830px;
+
     p {
       color: ${palette.black};
     }
@@ -37,8 +66,8 @@ const StyledChatBotUiContainer = styled.div(
     }
   }
 
-`
-);
+  ${({ template }) => template === 'landing' && landingTemplateStyling};
+`;
 
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
