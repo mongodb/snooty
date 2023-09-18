@@ -6,6 +6,9 @@ import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 
+// Match landing template max width for alignment purposes
+const CONTENT_MAX_WIDTH = theme.breakpoints.xxLarge;
+
 const ExploreItem = styled.div`
   @media ${theme.screenSize.xLargeAndUp} {
     background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="308" height="337" viewBox="0 0 308 337" fill="none"><path d="M183.5 11.2773L183.5 11.2907C183.875 39.1797 204.911 61.9519 230.994 61.9519H322.506C347.71 61.9519 368 84.0794 368 111.024V260.048C368 314.013 327.418 358 277.119 358C226.813 358 185.869 314.402 185.869 260.048V209.976C185.869 182.064 164.447 159.301 138.375 159.301H46.494C21.6488 159.301 1 137.561 1 110.229V11.6747C1 -15.2539 21.6438 -37 46.494 -37H138.006C162.866 -37 183.5 -15.6405 183.5 11.2773Z" stroke="%2300ED64" margin-left="865px" stoke-width="2"/></svg>');
@@ -20,11 +23,23 @@ const ExploreItem = styled.div`
   display: grid;
   grid-template-columns: minmax(64px, 1fr) repeat(12, minmax(0, 120px)) minmax(64px, 1fr);
 
-  @media ${theme.screenSize.upToLarge} {
-    grid-template-columns: 48px 1fr 48px;
+  // Use landing template's grid layout to help with alignment
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(
+        ${theme.size.xlarge},
+        1fr
+      );
   }
 
   @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: 48px repeat(12, 1fr) 48px;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    grid-template-columns: ${theme.size.large} 1fr ${theme.size.large};
+  }
+
+  @media ${theme.screenSize.upToXSmall} {
     grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
   }
 `;
