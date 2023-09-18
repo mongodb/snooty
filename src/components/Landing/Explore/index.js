@@ -12,17 +12,16 @@ const ExploreItem = styled('div')`
     background-position: right;
     background-repeat: no-repeat;
   }
+  display: grid;
   background-color: ${palette.black};
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  flex: 1 1 100%;
   grid-column-start: 1;
   grid-column-end: 15;
-  column-gap: 63px;
+
+  grid-template-columns: minmax(64px, 1fr) repeat(12, minmax(0, 120px)) minmax(64px, 1fr);
+  /* column-gap: 63px; */
   min-height: 337px;
 
-  @media ${theme.screenSize.upToLarge} {
+  /* @media ${theme.screenSize.upToLarge} {
     flex-direction: row;
     padding: 2px 52px 0 42px;
     width: 100%;
@@ -36,6 +35,34 @@ const ExploreItem = styled('div')`
   @media ${theme.screenSize.xLargeAndUp} {
     padding: 24px 62px 0 65px;
     width: 100%;
+  } */
+`;
+
+const ExploreContent = styled.div`
+  /* background-color: ${palette.black}; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+  grid-column-start: 2;
+  grid-column-end: -2;
+  column-gap: 63px;
+  min-height: 337px;
+
+  @media ${theme.screenSize.upToLarge} {
+    flex-direction: row;
+    /* padding: 2px 52px 0 42px; */
+    /* width: 100%; */
+  }
+
+  @media ${theme.screenSize.LargeAndUp} {
+    /* padding: 24px 52px 0 65px; */
+    /* width: 100%; */
+  }
+
+  @media ${theme.screenSize.xLargeAndUp} {
+    /* padding: 24px 62px 0 65px;
+    width: 100%; */
   }
 `;
 
@@ -77,35 +104,37 @@ const Explore = ({ nodeData: { children, argument }, ...rest }) => {
   const title = argument[0]?.value;
   return (
     <ExploreItem>
-      <div className={cx(leftCol)}>
-        <HeaderStyle>
-          <H3 as="h2" darkMode={true}>
-            {title}
-          </H3>
-        </HeaderStyle>
-        <div>
-          {children.slice(0, 2).map((child, i) => (
-            <ComponentFactory
-              key={i}
-              nodeData={child}
-              baseFontSize={16}
-              darkMode={true}
-              variant={'default'}
-              rightGlyph={'Export'}
-              hideExternalIcon={true}
-            ></ComponentFactory>
-          ))}
+      <ExploreContent>
+        <div className={cx(leftCol)}>
+          <HeaderStyle>
+            <H3 as="h2" darkMode={true}>
+              {title}
+            </H3>
+          </HeaderStyle>
+          <div>
+            {children.slice(0, 2).map((child, i) => (
+              <ComponentFactory
+                key={i}
+                nodeData={child}
+                baseFontSize={16}
+                darkMode={true}
+                variant={'default'}
+                rightGlyph={'Export'}
+                hideExternalIcon={true}
+              ></ComponentFactory>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className={cx(blockStyle)}>
-        <ComponentFactory
-          nodeData={children[2]}
-          darkMode={true}
-          showLineNumbers={false}
-          overflow={false}
-        ></ComponentFactory>
-      </div>
+        <div className={cx(blockStyle)}>
+          <ComponentFactory
+            nodeData={children[2]}
+            darkMode={true}
+            showLineNumbers={false}
+            overflow={false}
+          ></ComponentFactory>
+        </div>
+      </ExploreContent>
     </ExploreItem>
   );
 };
