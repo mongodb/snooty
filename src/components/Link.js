@@ -34,10 +34,6 @@ const gatsbyLinkStyling = css`
     color: ${palette.blue.base};
   }
 
-  > svg {
-    margin-left: 3px;
-  }
-
   &::after {
     content: '';
     position: absolute;
