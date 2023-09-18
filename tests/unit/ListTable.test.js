@@ -37,7 +37,7 @@ describe('when rendering a list-table directive', () => {
 
   it('renders one stub column per row', () => {
     const wrapper = mountListTable(data);
-    expect(wrapper.queryAllByRole('rowheader')).toHaveLength(5);
+    expect(wrapper.getAllByRole('rowheader')).toHaveLength(5);
   });
 });
 

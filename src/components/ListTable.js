@@ -116,11 +116,21 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
       const contents = cell.children.map((child, i) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
       ));
-      return (
-        <Cell className={cx(styleTableRow(isStub))} isHeader={isStub} key={colIndex}>
-          <div>{contents}</div>
-        </Cell>
-      );
+      if (isStub) {
+        console.log('STUB');
+        return (
+          <th>Hello</th>
+          // <HeaderCell className={cx(styleTableRow(isStub))} key={colIndex}>
+          //   <div>{contents}</div>
+          // </HeaderCell>
+        );
+      } else {
+        return (
+          <Cell className={cx(styleTableRow(isStub))} key={colIndex}>
+            <div>{contents}</div>
+          </Cell>
+        );
+      }
     })}
   </Row>
 );
