@@ -51,6 +51,12 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
+
+  > h1:first-of-type {
+    color: ${palette.green.dark2};
+    padding-bottom: 40px;
+    margin: unset;
+  }
 `;
 
 const FiltersContainer = styled('div')`
@@ -374,7 +380,7 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H1 style={{ color: '#00684A', paddingBottom: '40px' }}> Search Results</H1>
+          <H1>Search Results</H1>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
