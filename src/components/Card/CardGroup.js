@@ -90,7 +90,14 @@ const CardGroup = ({
 
   return (
     <StyledGrid
-      className={['card-group', isCompact ? 'compact' : '', isExtraCompact ? 'extra-compact' : '', className].join(' ')}
+      className={[
+        'card-group',
+        isCompact ? 'compact' : '',
+        isExtraCompact ? 'extra-compact' : '',
+        isForDrivers ? 'drivers' : '',
+        'card-group',
+        className,
+      ].join(' ')}
       columns={columns}
       noMargin={true}
       isCarousel={isCarousel}
