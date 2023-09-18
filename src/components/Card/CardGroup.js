@@ -95,7 +95,6 @@ const CardGroup = ({
         isCompact ? 'compact' : '',
         isExtraCompact ? 'extra-compact' : '',
         isForDrivers ? 'drivers' : '',
-        'card-group',
         className,
       ].join(' ')}
       columns={columns}

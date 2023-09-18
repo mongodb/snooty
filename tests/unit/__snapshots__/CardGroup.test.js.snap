@@ -228,7 +228,7 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-    class="card-group compact   card-group  emotion-0 emotion-1"
+    class="card-group compact    emotion-0 emotion-1"
   >
     <div
       class="emotion-2"
