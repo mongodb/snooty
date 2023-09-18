@@ -44,12 +44,6 @@ const Wrapper = styled('main')`
         grid-column: 2 / -2 !important;
       }
 
-      &.drivers {
-        > div {
-          align-items: center;
-        }
-      }
-
       &:not(.compact, .extra-compact, .drivers) {
         p {
           font-weight: 500;
