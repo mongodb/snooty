@@ -13,6 +13,9 @@ import { joinClassNames } from '../utils/join-class-names';
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
  */
 
+const ArrowRightStyling = css`
+  margin-left: 3px;
+`;
 const LGlinkStyling = css`
   text-decoration: none !important;
 `;
@@ -77,7 +80,14 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
+    const decoration = showLinkArrow ? (
+      <ArrowRightStyling>
+        {' '}
+        <ArrowRightIcon role="presentation" size={12} />{' '}
+      </ArrowRightStyling>
+    ) : (
+      ''
+    );
 
     return (
       <GatsbyLink
@@ -97,17 +107,25 @@ const Link = ({
   const isMDBLink = strippedUrl.includes('mongodb.com');
   const showExtIcon = !anchor && !isMDBLink;
   const target = !showExtIcon ? '_self' : undefined;
+  const decoration = showLinkArrow ? (
+    <ArrowRightStyling>
+      {' '}
+      <ArrowRightIcon role="presentation" size={12} />{' '}
+    </ArrowRightStyling>
+  ) : (
+    ''
+  );
 
   return (
     <LGLink
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
-      arrowAppearance={showLinkArrow ? 'persist' : 'none'}
       target={target}
       {...other}
     >
       {children}
+      {decoration}
     </LGLink>
   );
 };
