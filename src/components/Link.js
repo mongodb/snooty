@@ -114,19 +114,16 @@ const Link = ({
     );
   }
 
-  const shouldHideExternalIcon =
-    !anchor &&
-    !(to?.replace(/(^https:\/\/)|(www\.)/g, '').startsWith('mongodb.com/docs/') || to.match(/docs.*mongodb.com/))
-      ? false
-      : true;
-  const hideExternalIcon = hideExternalIconProp ?? shouldHideExternalIcon;
-  const target = hideExternalIcon ? '_self' : undefined;
+  const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
+  const isMDBLink = strippedUrl.includes('mongodb.com');
+  const showExtIcon = !anchor && !isMDBLink;
+  const target = !showExtIcon ? '_self' : undefined;
 
   return (
     <LGLink
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
-      hideExternalIcon={hideExternalIcon}
+      hideExternalIcon={!showExtIcon}
       arrowAppearance={showLinkArrow ? 'persist' : 'none'}
       target={target}
       {...other}

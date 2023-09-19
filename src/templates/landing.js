@@ -43,6 +43,26 @@ const Wrapper = styled('main')`
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
+
+      &:not(.compact, .extra-compact, .drivers) {
+        p {
+          font-weight: 500;
+
+          a {
+            margin-top: ${({ theme }) => theme.size.medium};
+          }
+        }
+
+        @media ${({ theme }) => theme.screenSize.upToMedium} {
+          margin-left: 42px;
+          margin-right: 42px;
+        }
+
+        @media ${({ theme }) => theme.screenSize.upToSmall} {
+          margin-left: ${({ theme }) => theme.size.medium};
+          margin-right: ${({ theme }) => theme.size.medium};
+        }
+      }
     }
   }
 `;
@@ -102,10 +122,15 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             }
           }
           main h1:first-of-type {
-            color: ${palette.white};
+            color: ${palette.black};
+            grid-column: 2/-1;
+            margin: ${size.large} 0;
+            font-size: 48px;
+            line-height: 62px;
 
-            @media ${screenSize.upToMedium} {
-              color: ${palette.green.dark2};
+            @media ${screenSize.upToSmall} {
+              font-size: 32px;
+              line-height: 40px;
             }
           }
           .span-columns {

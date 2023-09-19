@@ -134,7 +134,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -145,13 +145,9 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   height: 36px;
 }
 
-.emotion-21:focus {
+.emotion-21:focus,
+.emotion-21:focus-visible {
   outline: none;
-}
-
-.emotion-21[disabled],
-.emotion-21:disabled {
-  pointer-events: none;
 }
 
 .emotion-21:active,
@@ -161,14 +157,18 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   text-decoration: none;
 }
 
-.emotion-21:hover,
+.emotion-21:focus {
+  color: #001E2B;
+}
+
+.emotion-21:hover[aria-disabled='false'],
 .emotion-21:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-21:focus {
+.emotion-21:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -203,6 +203,8 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -272,8 +274,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
     </div>
     <button
       aria-disabled="false"
-      class="emotion-21 emotion-22 emotion-23"
-      data-leafygreen-ui="button"
+      class="lg-ui-button-0000 emotion-21 emotion-22 emotion-23"
       type="button"
     >
       <div
