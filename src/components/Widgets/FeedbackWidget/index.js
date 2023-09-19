@@ -2,7 +2,7 @@ import { FeedbackProvider, useFeedbackContext } from './context';
 import useFeedbackData from './useFeedbackData';
 import FeedbackForm from './FeedbackForm';
 import FeedbackTab from './FeedbackTab';
-import FeedbackHeading from './FeedbackHeading';
+//import FeedbackHeading from './FeedbackHeading';
 import FeedbackFooter from './FeedbackFooter';
 
 export {
@@ -11,6 +11,6 @@ export {
   useFeedbackData,
   FeedbackForm,
   FeedbackTab,
-  FeedbackHeading,
+  //FeedbackHeading,
   FeedbackFooter,
 };
