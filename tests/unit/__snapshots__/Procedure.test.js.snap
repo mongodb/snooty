@@ -101,43 +101,28 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-11 {
-  font-size: 13px;
-  line-height: 20px;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   cursor: pointer;
-  line-height: 13px;
-  color: #016BF8;
-  font-weight: 400;
+  position: relative;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
-}
-
-.emotion-11:hover,
-.emotion-11:focus,
-.emotion-11:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
 }
 
 .emotion-11:focus {
   outline: none;
 }
 
-.emotion-12 {
-  position: relative;
+.emotion-11>code {
+  color: #016BF8;
 }
 
-.emotion-12::after {
+.emotion-11::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -147,11 +132,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-0001:focus .emotion-12::after {
+.emotion-11:focus .emotion-11::after {
   background-color: #0498EC;
 }
 
-.lg-ui-0001:hover .emotion-12::after {
+.emotion-11:hover::after {
   background-color: #E8EDEB;
 }
 
@@ -182,14 +167,10 @@ exports[`renders correctly 1`] = `
           class="emotion-9"
         >
           <a
-            class="lg-ui-0001 emotion-11"
-            href=""
+            class="emotion-11"
+            href="/connect/#std-label-connect-run-compass"
           >
-            <span
-              class="emotion-12"
-            >
-              To learn more, see Connect to MongoDB
-            </span>
+            To learn more, see Connect to MongoDB
           </a>
         </p>
       </div>
@@ -218,14 +199,10 @@ exports[`renders correctly 1`] = `
           class="emotion-9"
         >
           <a
-            class="lg-ui-0001 emotion-11"
-            href=""
+            class="emotion-11"
+            href="/import-export/#std-label-compass-import-export"
           >
-            <span
-              class="emotion-12"
-            >
-              To learn more, see Import and Export Data
-            </span>
+            To learn more, see Import and Export Data
           </a>
         </p>
       </div>
@@ -746,43 +723,28 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-11 {
-  font-size: 13px;
-  line-height: 20px;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   cursor: pointer;
-  line-height: 13px;
-  color: #016BF8;
-  font-weight: 400;
+  position: relative;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
-}
-
-.emotion-11:hover,
-.emotion-11:focus,
-.emotion-11:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
 }
 
 .emotion-11:focus {
   outline: none;
 }
 
-.emotion-12 {
-  position: relative;
+.emotion-11>code {
+  color: #016BF8;
 }
 
-.emotion-12::after {
+.emotion-11::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -792,11 +754,11 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-0001:focus .emotion-12::after {
+.emotion-11:focus .emotion-11::after {
   background-color: #0498EC;
 }
 
-.lg-ui-0001:hover .emotion-12::after {
+.emotion-11:hover::after {
   background-color: #E8EDEB;
 }
 
@@ -827,14 +789,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           class="emotion-9"
         >
           <a
-            class="lg-ui-0001 emotion-11"
-            href=""
+            class="emotion-11"
+            href="/connect/#std-label-connect-run-compass"
           >
-            <span
-              class="emotion-12"
-            >
-              To learn more, see Connect to MongoDB
-            </span>
+            To learn more, see Connect to MongoDB
           </a>
         </p>
       </div>
@@ -863,14 +821,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           class="emotion-9"
         >
           <a
-            class="lg-ui-0001 emotion-11"
-            href=""
+            class="emotion-11"
+            href="/import-export/#std-label-compass-import-export"
           >
-            <span
-              class="emotion-12"
-            >
-              To learn more, see Import and Export Data
-            </span>
+            To learn more, see Import and Export Data
           </a>
         </p>
       </div>

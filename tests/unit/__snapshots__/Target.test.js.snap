@@ -75,43 +75,28 @@ a .emotion-0 {
 }
 
 .emotion-7 {
-  font-size: 13px;
-  line-height: 20px;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   cursor: pointer;
-  line-height: 13px;
-  color: #016BF8;
-  font-weight: 400;
+  position: relative;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
-}
-
-.emotion-7:hover,
-.emotion-7:focus,
-.emotion-7:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
 }
 
 .emotion-7:focus {
   outline: none;
 }
 
-.emotion-8 {
-  position: relative;
+.emotion-7>code {
+  color: #016BF8;
 }
 
-.emotion-8::after {
+.emotion-7::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -121,11 +106,11 @@ a .emotion-0 {
   border-radius: 2px;
 }
 
-.lg-ui-0001:focus .emotion-8::after {
+.emotion-7:focus .emotion-7::after {
   background-color: #0498EC;
 }
 
-.lg-ui-0001:hover .emotion-8::after {
+.emotion-7:hover::after {
   background-color: #E8EDEB;
 }
 
@@ -161,30 +146,22 @@ a .emotion-0 {
 configuration file is the preferred method for runtime configuration of
 
         <a
-          class="lg-ui-0001 emotion-7"
-          href=""
+          class="emotion-7"
+          href="/reference/program/mongos/#std-program-mongos"
         >
-          <span
-            class="emotion-8"
+          <code
+            class="emotion-0"
           >
-            <code
-              class="emotion-0"
-            >
-              mongos
-            </code>
-          </span>
+            mongos
+          </code>
         </a>
         . The options are equivalent to the command-line
 configuration options. See 
         <a
-          class="lg-ui-0001 emotion-7"
-          href=""
+          class="emotion-7"
+          href="/reference/configuration-options/"
         >
-          <span
-            class="emotion-8"
-          >
-            Configuration File Options
-          </span>
+          Configuration File Options
         </a>
          for
 more information.
@@ -194,18 +171,14 @@ more information.
       >
         Ensure the configuration file uses ASCII encoding. The 
         <a
-          class="lg-ui-0001 emotion-7"
-          href=""
+          class="emotion-7"
+          href="/reference/program/mongos/#std-program-mongos"
         >
-          <span
-            class="emotion-8"
+          <code
+            class="emotion-0"
           >
-            <code
-              class="emotion-0"
-            >
-              mongos
-            </code>
-          </span>
+            mongos
+          </code>
         </a>
         
 instance does not support configuration files with non-ASCII encoding,

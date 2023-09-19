@@ -153,25 +153,46 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-10 {
-  font-size: 13px;
-  line-height: 20px;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   cursor: pointer;
-  line-height: 13px;
-  color: #016BF8;
-  font-weight: 400;
+  position: relative;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  line-height: 13px;
+  outline: none;
+  color: #016BF8;
+}
+
+.emotion-10:focus {
+  outline: none;
+}
+
+.emotion-10>code {
+  color: #016BF8;
+}
+
+.emotion-10::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.emotion-10:focus .emotion-10::after {
+  background-color: #0498EC;
+}
+
+.emotion-10:hover::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-11 {
   background: #F9FBFA;
   border-radius: 4px;
   border: 1px solid #C1C7C6;
@@ -184,41 +205,8 @@ exports[`card correctly with and without url 1`] = `
   padding: 4px;
 }
 
-.emotion-10:hover,
-.emotion-10:focus,
-.emotion-10:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-10:focus {
-  outline: none;
-}
-
-.emotion-10:after {
+.emotion-11:after {
   content: ' ➔';
-}
-
-.emotion-11 {
-  position: relative;
-}
-
-.emotion-11::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-11::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-11::after {
-  background-color: #E8EDEB;
 }
 
 .emotion-22 {
@@ -328,6 +316,28 @@ exports[`card correctly with and without url 1`] = `
   outline: none;
 }
 
+.emotion-31 {
+  position: relative;
+}
+
+.emotion-31::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-31::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-31::after {
+  background-color: #E8EDEB;
+}
+
 <div
     class="card-group  extra-compact   emotion-0 emotion-1"
   >
@@ -355,74 +365,50 @@ exports[`card correctly with and without url 1`] = `
           class="emotion-8"
         >
           <a
-            class="lg-ui-0001 emotion-10"
-            href=""
+            class="emotion-10 emotion-11"
+            href="/sdk/android/#std-label-android-intro"
           >
-            <span
-              class="emotion-11"
-            >
-              Android
-            </span>
+            Android
           </a>
           
 
           <a
-            class="lg-ui-0001 emotion-10"
-            href=""
+            class="emotion-10 emotion-11"
+            href="/sdk/ios/#std-label-ios-intro"
           >
-            <span
-              class="emotion-11"
-            >
-              iOS
-            </span>
+            iOS
           </a>
           
 
           <a
-            class="lg-ui-0001 emotion-10"
-            href=""
+            class="emotion-10 emotion-11"
+            href="/sdk/dotnet/#std-label-dotnet-intro"
           >
-            <span
-              class="emotion-11"
-            >
-              .Net
-            </span>
+            .Net
           </a>
           
 
           <a
-            class="lg-ui-0001 emotion-10"
-            href=""
+            class="emotion-10 emotion-11"
+            href="/web/#std-label-web-intro"
           >
-            <span
-              class="emotion-11"
-            >
-              Web
-            </span>
+            Web
           </a>
           
 
           <a
-            class="lg-ui-0001 emotion-10"
-            href=""
+            class="emotion-10 emotion-11"
+            href="/sdk/react-native/#std-label-react-native-intro"
           >
-            <span
-              class="emotion-11"
-            >
-              React Native
-            </span>
+            React Native
           </a>
           
 
           <a
-            class="lg-ui-0001 emotion-10"
-            href=""
+            class="emotion-10 emotion-11"
+            href="/sdk/node/#std-label-node-intro"
           >
-            <span
-              class="emotion-11"
-            >
-              Node.js
-            </span>
+            Node.js
           </a>
         </p>
       </div>
@@ -456,7 +442,7 @@ exports[`card correctly with and without url 1`] = `
             target="_self"
           >
             <span
-              class="emotion-11"
+              class="emotion-31"
             >
               Learn more about MongoDB Realm Application Services
             </span>
