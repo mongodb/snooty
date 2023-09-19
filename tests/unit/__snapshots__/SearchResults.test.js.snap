@@ -412,7 +412,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -423,9 +423,13 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 36px;
 }
 
-.emotion-22:focus,
-.emotion-22:focus-visible {
+.emotion-22:focus {
   outline: none;
+}
+
+.emotion-22[disabled],
+.emotion-22:disabled {
+  pointer-events: none;
 }
 
 .emotion-22:active,
@@ -435,18 +439,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
 }
 
-.emotion-22:focus {
-  color: #001E2B;
-}
-
-.emotion-22:hover[aria-disabled='false'],
+.emotion-22:hover,
 .emotion-22:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-22:focus-visible {
+.emotion-22:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -477,8 +477,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   pointer-events: none;
   position: relative;
   z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -991,26 +989,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   }
 }
 
-.emotion-70 {
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-  position: relative;
-  z-index: 0;
-  padding: 0 11px;
-  gap: 6px;
-}
-
 .emotion-71 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1183,8 +1161,7 @@ exports[`Search Results Page considers a given search filter query param and dis
     >
       <h1
         class="emotion-4"
-
-        style="color: rgb(0, 104, 74); padding-bottom: 24px;
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -1290,7 +1267,8 @@ exports[`Search Results Page considers a given search filter query param and dis
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="emotion-22"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div
@@ -1484,7 +1462,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-23"
                 />
                 <div
-                  class="emotion-70"
+                  class="emotion-24"
                 >
                   <div
                     class="emotion-71"
@@ -1542,7 +1520,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-23"
                 />
                 <div
-                  class="emotion-70"
+                  class="emotion-24"
                 >
                   <div
                     class="emotion-71"
@@ -1574,7 +1552,8 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="emotion-22"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div
@@ -1974,7 +1953,7 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -1985,9 +1964,13 @@ exports[`Search Results Page does not return results for a given search term wit
   height: 36px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus {
   outline: none;
+}
+
+.emotion-16[disabled],
+.emotion-16:disabled {
+  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -1997,18 +1980,14 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
 }
 
-.emotion-16:focus {
-  color: #001E2B;
-}
-
-.emotion-16:hover[aria-disabled='false'],
+.emotion-16:hover,
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -2039,8 +2018,6 @@ exports[`Search Results Page does not return results for a given search term wit
   pointer-events: none;
   position: relative;
   z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -2313,26 +2290,6 @@ exports[`Search Results Page does not return results for a given search term wit
   }
 }
 
-.emotion-43 {
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-  position: relative;
-  z-index: 0;
-  padding: 0 11px;
-  gap: 6px;
-}
-
 .emotion-44 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2579,7 +2536,8 @@ exports[`Search Results Page does not return results for a given search term wit
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-16"
+          class="emotion-16"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div
@@ -2931,7 +2889,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-43"
+                  class="emotion-18"
                 >
                   <div
                     class="emotion-44"
@@ -2989,7 +2947,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-43"
+                  class="emotion-18"
                 >
                   <div
                     class="emotion-44"
@@ -3021,7 +2979,8 @@ exports[`Search Results Page does not return results for a given search term wit
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-16"
+          class="emotion-16"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div
@@ -3323,7 +3282,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -3334,9 +3293,13 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   height: 36px;
 }
 
-.emotion-13:focus,
-.emotion-13:focus-visible {
+.emotion-13:focus {
   outline: none;
+}
+
+.emotion-13[disabled],
+.emotion-13:disabled {
+  pointer-events: none;
 }
 
 .emotion-13:active,
@@ -3346,18 +3309,14 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   text-decoration: none;
 }
 
-.emotion-13:focus {
-  color: #001E2B;
-}
-
-.emotion-13:hover[aria-disabled='false'],
+.emotion-13:hover,
 .emotion-13:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-13:focus-visible {
+.emotion-13:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -3388,8 +3347,6 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -3409,6 +3366,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
     >
       <h1
         class="emotion-4"
+        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -3454,7 +3412,8 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-13"
+          class="emotion-13"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div
@@ -3533,11 +3492,10 @@ exports[`Search Results Page renders loading images before returning no results 
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -3855,7 +3813,7 @@ exports[`Search Results Page renders loading images before returning no results 
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -3866,9 +3824,13 @@ exports[`Search Results Page renders loading images before returning no results 
   height: 36px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus {
   outline: none;
+}
+
+.emotion-16[disabled],
+.emotion-16:disabled {
+  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -3878,18 +3840,14 @@ exports[`Search Results Page renders loading images before returning no results 
   text-decoration: none;
 }
 
-.emotion-16:focus {
-  color: #001E2B;
-}
-
-.emotion-16:hover[aria-disabled='false'],
+.emotion-16:hover,
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -3920,8 +3878,6 @@ exports[`Search Results Page renders loading images before returning no results 
   pointer-events: none;
   position: relative;
   z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -4014,7 +3970,8 @@ exports[`Search Results Page renders loading images before returning no results 
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-16"
+          class="emotion-16"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div
@@ -4414,7 +4371,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -4425,6 +4382,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
   height: 36px;
 }
 
+.emotion-16:focus {
+  outline: none;
+}
+
+.emotion-16[disabled],
+.emotion-16:disabled {
+  pointer-events: none;
+}
+
 .emotion-16:active,
 .emotion-16:focus,
 .emotion-16:hover {
@@ -4432,19 +4398,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
   text-decoration: none;
 }
 
-.emotion-16:focus {
-  color: #001E2B;
-}
-
-.emotion-16:hover[aria-disabled='false'],
+.emotion-16:hover,
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-
-.emotion-16:focus-visible {
+.emotion-16:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4475,7 +4436,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
   pointer-events: none;
   position: relative;
   z-index: 0;
-
   padding: 0 11px;
   gap: 6px;
 }
@@ -4485,469 +4445,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
   height: 16px;
   width: 16px;
   justify-self: right;
-}
-
-.emotion-20 {
-  box-shadow: none;
-  display: grid;
-  grid-area: results;
-  grid-auto-rows: calc(152px + 16px);
-  height: 100%;
-  width: 100%;
-}
-
-.emotion-20:hover>.e1yoi6mj6:hover {
-  opacity: 1;
-  box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
-}
-
-.emotion-20:not(:hover)>.e1yoi6mj6 {
-  opacity: 1;
-  -webkit-transition: opacity 150ms ease-in;
-  transition: opacity 150ms ease-in;
-}
-
-.emotion-22 {
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 45px;
-  background-color: #fff;
-  height: 152px;
-  position: relative;
-  place-self: center;
-  width: 100%;
-  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
-  color: red;
-  box-sizing: border-box;
-  padding: 15px;
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
-}
-
-.emotion-22>div {
-  padding: 20px;
-  padding-left: 30px;
-}
-
-.emotion-22:hover,
-.emotion-22:focus {
-  color: unset;
-  -webkit-text-decoration: unset;
-  text-decoration: unset;
-}
-
-.emotion-22:hover>div,
-.emotion-22:focus>div {
-  background-color: unset!important;
-}
-
-.emotion-22:before {
-  content: '';
-  position: absolute;
-  top: calc(-16px / 2);
-  left: 0;
-  right: 0;
-  bottom: calc(-16px / 2);
-  background-color: transparent;
-}
-
-.emotion-22 * {
-  padding: 2px;
-  height: 15px!important;
-  margin-right: 10px!important;
-}
-
-.emotion-42 {
-  grid-area: filters;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-42 {
-    display: none;
-  }
-}
-
-.emotion-44 {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  color: #3D4F58;
-  font-size: 12px;
-  line-height: 15px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  font-family: 'Euclid Circular A';
-  font-weight: bolder;
-  letter-spacing: 0.5px;
-  margin: 0;
-  margin-bottom: 16px;
-}
-
-.emotion-46 {
-  grid-area: filters;
-}
-
-@media only screen and (max-width: 767px) {
-  .emotion-46 {
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: none;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-  }
-
-  .emotion-46>div {
-    margin-bottom: 0;
-    margin-right: 8px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-46 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-
-  .emotion-46>div {
-    width: 100%;
-  }
-
-  .emotion-46>div:first-of-type {
-    margin-bottom: 8px;
-    margin-right: 0;
-  }
-
-  .emotion-46>div>div {
-    width: 100%;
-  }
-}
-
-.emotion-48 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.emotion-50 {
-  width: 175px;
-}
-
-.emotion-52 {
-  position: relative;
-}
-
-@media only screen and (max-width: 1024px) {
-  .emotion-52 label,
-  .emotion-52 p,
-  .emotion-52 button,
-  .emotion-52 div,
-  .emotion-52 span {
-    font-size: 13px;
-  }
-}
-
-.emotion-53 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-53>label+button,
-.emotion-53>p+button {
-  margin-top: 3px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .emotion-53 label,
-  .emotion-53 p,
-  .emotion-53 button,
-  .emotion-53 div,
-  .emotion-53 span {
-    font-size: 13px;
-  }
-}
-
-.emotion-54 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  border: 1px solid transparent;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  border-radius: 6px;
-  background-color: #F9FBFA;
-  border-color: #889397;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
-  height: 36px;
-  font-weight: 400;
-  background-color: #FFFFFF;
-  color: #5C6C75;
-  width: 100%;
-  font-size: 13px;
-}
-
-.emotion-54:focus {
-  outline: none;
-}
-
-.emotion-54[disabled],
-.emotion-54:disabled {
-  pointer-events: none;
-}
-
-.emotion-54:active,
-.emotion-54:focus,
-.emotion-54:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-54:hover,
-.emotion-54:active {
-  color: #001E2B;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-54:focus {
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-54>*:last-child {
-  grid-template-columns: 1fr 16px;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  -webkit-justify-content: flex-start;
-  justify-content: flex-start;
-}
-
-.emotion-54>*:last-child>svg {
-  justify-self: right;
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-54>*:last-child>svg {
-  color: #3D4F58;
-}
-
-.emotion-54>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-54:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
-}
-
-@media only screen and (max-width: 1024px) {
-  .emotion-54 {
-    height: 36px;
-    font-size: 16px;
-  }
-}
-
-.emotion-57 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  gap: 4px;
-  overflow: hidden;
-}
-
-.emotion-58 {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.emotion-59 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: #889397;
-  height: 16px;
-  width: 16px;
-  justify-self: left;
-}
-
-.emotion-66 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  border: 1px solid transparent;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  border-radius: 6px;
-  background-color: #F9FBFA;
-  border-color: #889397;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
-  height: 36px;
-  font-weight: 400;
-  background-color: #FFFFFF;
-  color: #5C6C75;
-  width: 100%;
-  font-size: 13px;
-}
-
-.emotion-66:focus {
-  outline: none;
-}
-
-.emotion-66[disabled],
-.emotion-66:disabled {
-  pointer-events: none;
-}
-
-.emotion-66:active,
-.emotion-66:focus,
-.emotion-66:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-66:hover,
-.emotion-66:active {
-  color: #001E2B;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-66,
-.emotion-66:hover {
-  background-color: #E8EDEB;
-  border-color: #C1C7C6;
-  color: #889397;
-  cursor: not-allowed;
-}
-
-.emotion-66:focus {
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-66>*:last-child {
-  grid-template-columns: 1fr 16px;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  -webkit-justify-content: flex-start;
-  justify-content: flex-start;
-}
-
-.emotion-66>*:last-child>svg {
-  justify-self: right;
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-66>*:last-child>svg {
-  color: #3D4F58;
-}
-
-.emotion-66>*:last-child {
-  padding: 0 4px 0 12px;
-}
-
-.emotion-66:focus {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: rgba(255, 255, 255, 0);
-}
-
-.emotion-66:disabled {
-  cursor: not-allowed;
-  pointer-events: unset;
-  box-shadow: unset;
-}
-
-.emotion-66:disabled:active {
-  pointer-events: none;
-}
-
-.emotion-66:disabled {
-  background-color: #E8EDEB;
-  color: #889397;
-}
-
-.emotion-66:disabled>*:last-child>svg {
-  color: #889397;
-}
-
-@media only screen and (max-width: 1024px) {
-  .emotion-66 {
-    height: 36px;
-    font-size: 16px;
-  }
 }
 
 <div
@@ -5033,573 +4530,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
           aria-disabled="false"
           class="emotion-16"
           data-leafygreen-ui="button"
-          type="button"
-        >
-          <div
-            class="emotion-17"
-          />
-          <div
-            class="emotion-18"
-          >
-            <svg
-              alt=""
-              aria-hidden="true"
-              class="emotion-19"
-              fill="none"
-              height="16"
-              role="presentation"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
-                fill="currentColor"
-                fill-rule="evenodd"
-              />
-            </svg>
-            Refine your search
-          </div>
-        </button>
-      </div>
-    </div>
-    <div
-      class="emotion-20 emotion-21"
-    >
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-      <div
-        class="emotion-22 emotion-23"
-      >
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 200px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <br />
-        </span>
-        <span
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-          <span
-            class="react-loading-skeleton"
-            style="width: 60px; border-radius: 12px;"
-          >
-            ‌
-          </span>
-        </span>
-      </div>
-    </div>
-=======
-<div
-    class="emotion-0 emotion-1"
-  >
-    <div
-      class="emotion-2 emotion-3"
-    >
-      <h1
-        class="emotion-4"
-      >
-        Search Results
-      </h1>
-      <form
-        class="emotion-5"
-        role="search"
-      >
-        <div
-          class="emotion-6"
-          role="searchbox"
-          tabindex="-1"
-        >
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-7"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-          <input
-            class="emotion-8"
-            placeholder="Search"
-            type="search"
-            value="stitch"
-          />
-          <button
-            aria-disabled="false"
-            aria-label="Clear search"
-            class="emotion-9"
-            tabindex="0"
-            type="button"
-          >
-            <div
-              class="emotion-10"
-            >
-              <svg
-                aria-label="XWith Circle Icon"
-                class="emotion-11"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  clip-rule="evenodd"
-                  d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9.41421 5.17157C9.80474 4.78105 10.4379 4.78105 10.8284 5.17157C11.219 5.5621 11.219 6.19526 10.8284 6.58579L9.41421 8L10.8284 9.41421C11.219 9.80474 11.219 10.4379 10.8284 10.8284C10.4379 11.219 9.80474 11.219 9.41421 10.8284L8 9.41421L6.58579 10.8284C6.19526 11.219 5.5621 11.219 5.17157 10.8284C4.78105 10.4379 4.78105 9.80474 5.17157 9.41421L6.58579 8L5.17157 6.58579C4.78105 6.19526 4.78105 5.5621 5.17157 5.17157C5.5621 4.78105 6.19526 4.78105 6.58579 5.17157L8 6.58579L9.41421 5.17157Z"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </button>
-        </div>
-      </form>
-      <div
-        class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
-      />
-      <div
-        class="emotion-14 emotion-15"
-      >
-        <button
-          aria-disabled="false"
-          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -5999,7 +4929,7 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -6010,9 +4940,13 @@ exports[`Search Results Page renders results from a given search term query para
   height: 36px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus {
   outline: none;
+}
+
+.emotion-16[disabled],
+.emotion-16:disabled {
+  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -6022,18 +4956,14 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
 }
 
-.emotion-16:focus {
-  color: #001E2B;
-}
-
-.emotion-16:hover[aria-disabled='false'],
+.emotion-16:hover,
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -6064,8 +4994,6 @@ exports[`Search Results Page renders results from a given search term query para
   pointer-events: none;
   position: relative;
   z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -6623,26 +5551,6 @@ exports[`Search Results Page renders results from a given search term query para
   }
 }
 
-.emotion-64 {
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-  position: relative;
-  z-index: 0;
-  padding: 0 11px;
-  gap: 6px;
-}
-
 .emotion-65 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -6889,7 +5797,8 @@ exports[`Search Results Page renders results from a given search term query para
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-16"
+          class="emotion-16"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div
@@ -7083,7 +5992,7 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-64"
+                  class="emotion-18"
                 >
                   <div
                     class="emotion-65"
@@ -7141,7 +6050,7 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-64"
+                  class="emotion-18"
                 >
                   <div
                     class="emotion-65"
@@ -7173,7 +6082,8 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-16"
+          class="emotion-16"
+          data-leafygreen-ui="button"
           type="button"
         >
           <div

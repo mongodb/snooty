@@ -51,12 +51,6 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
-
-  > h1:first-of-type {
-    color: ${palette.green.dark2};
-    padding-bottom: 40px;
-    margin: unset;
-  }
 `;
 
 const FiltersContainer = styled('div')`
