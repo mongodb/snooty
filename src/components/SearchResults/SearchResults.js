@@ -9,7 +9,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { palette } from '@leafygreen-ui/palette';
-import { H3, Overline } from '@leafygreen-ui/typography';
+import { H3, H1, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -374,7 +374,7 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H3 as="h1" style={{ color: '#00684A', paddingBottom: '24px' }}>
+          <H3 as={H1} style={{ color: '#00684A', paddingBottom: '24px' }}>
             Search Results
           </H3>
           <SearchInput
