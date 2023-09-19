@@ -13,6 +13,7 @@ import {
 const getTemplate = (templateName) => {
   let template;
   let sidenav;
+  let useChatbot = false;
   switch (templateName) {
     case 'blank':
       template = Blank;
@@ -31,6 +32,7 @@ const getTemplate = (templateName) => {
     case 'landing':
       template = Landing;
       sidenav = true;
+      useChatbot = true;
       break;
     case 'openapi':
       template = OpenAPITemplate;
@@ -43,6 +45,10 @@ const getTemplate = (templateName) => {
       template = ProductLanding;
       sidenav = true;
       break;
+    case 'search':
+      template = Landing;
+      sidenav = true;
+      break;
     // Default template and guide template share very similar layouts
     default:
       template = Document;
@@ -50,7 +56,7 @@ const getTemplate = (templateName) => {
       break;
   }
 
-  return { Template: template, sidenav };
+  return { Template: template, sidenav, useChatbot };
 };
 
 export { getTemplate };

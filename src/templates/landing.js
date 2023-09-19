@@ -3,8 +3,11 @@ import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
+import ChatbotUi from '../components/ChatbotUi';
 
 const CONTENT_MAX_WIDTH = 1440;
+
+const SHOW_CHATBOT = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
 const Wrapper = styled('main')`
   margin: 0 auto;
@@ -40,17 +43,40 @@ const Wrapper = styled('main')`
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
+
+      &:not(.compact, .extra-compact, .drivers) {
+        p {
+          font-weight: 500;
+
+          a {
+            margin-top: ${({ theme }) => theme.size.medium};
+          }
+        }
+
+        @media ${({ theme }) => theme.screenSize.upToMedium} {
+          margin-left: 42px;
+          margin-right: 42px;
+        }
+
+        @media ${({ theme }) => theme.screenSize.upToSmall} {
+          margin-left: ${({ theme }) => theme.size.medium};
+          margin-right: ${({ theme }) => theme.size.medium};
+        }
+      }
     }
   }
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children }) => {
+const Landing = ({ children, pageContext, useChatbot }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
       <div>
-        <Wrapper>{children}</Wrapper>
+        <Wrapper>
+          {SHOW_CHATBOT && useChatbot && <ChatbotUi template={pageContext?.template} />}
+          {children}
+        </Wrapper>
       </div>
       <Global
         styles={css`
@@ -96,10 +122,15 @@ const Landing = ({ children }) => {
             }
           }
           main h1:first-of-type {
-            color: ${palette.white};
+            color: ${palette.black};
+            grid-column: 2/-1;
+            margin: ${size.large} 0;
+            font-size: 48px;
+            line-height: 62px;
 
-            @media ${screenSize.upToMedium} {
-              color: ${palette.green.dark2};
+            @media ${screenSize.upToSmall} {
+              font-size: 32px;
+              line-height: 40px;
             }
           }
           .span-columns {
@@ -183,6 +214,7 @@ Landing.propTypes = {
   pageContext: PropTypes.shape({
     page: PropTypes.object.isRequired,
   }).isRequired,
+  useChatbot: PropTypes.bool,
 };
 
 export default Landing;

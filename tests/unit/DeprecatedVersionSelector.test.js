@@ -56,7 +56,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   let wrapper, mockFetchDocuments;
 
   beforeEach(() => {
-    mockFetchDocuments = jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName) => {
+    mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
       return mockedReposBranches;
     });
   });
@@ -80,7 +80,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
 
     const button = await wrapper.findByTitle('View Documentation');
     expect(button).toBeTruthy();
-    expect(button).toBeDisabled();
+    expect(button).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('shows a disabled version selector', async () => {

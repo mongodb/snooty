@@ -1,18 +1,18 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { theme } from '../../../../src/theme/docsTheme';
 import { useFeedbackContext } from './context';
 
-const FeedbackContainer = styled(LeafygreenCard)`
+const containerStyle = css`
   cursor: pointer;
   padding: 12px;
   position: fixed;
   user-select: none;
   z-index: 9;
   font-weight: 500;
-  color: ${palette.green.dark1};
+  color: ${palette.green.dark2};
 
   // tab fixed at bottom of docs page
   @media ${theme.screenSize.upToSmall} {
@@ -50,7 +50,13 @@ const FeedbackContainer = styled(LeafygreenCard)`
 
 const FeedbackTab = () => {
   const { feedback, initializeFeedback } = useFeedbackContext();
-  return !feedback && <FeedbackContainer onClick={() => initializeFeedback()}>Share Feedback</FeedbackContainer>;
+  return (
+    !feedback && (
+      <LeafygreenCard className={cx(containerStyle)} onClick={() => initializeFeedback()}>
+        Share Feedback
+      </LeafygreenCard>
+    )
+  );
 };
 
 export default FeedbackTab;

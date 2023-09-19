@@ -28,6 +28,8 @@ const cardStyling = css`
 
 const cardDriverStyle = css`
   padding: ${theme.size.default} ${theme.size.medium};
+  align-items: center;
+
   p {
     margin: 0 0 0 18px;
     font-weight: 400;

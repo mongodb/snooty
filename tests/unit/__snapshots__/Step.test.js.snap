@@ -106,6 +106,10 @@ exports[`renders with "connected" styling 1`] = `
   color: #016BF8;
 }
 
+.emotion-9>svg {
+  margin-left: 3px;
+}
+
 .emotion-9::after {
   content: '';
   position: absolute;
@@ -265,6 +269,10 @@ exports[`renders with "connected" styling by default 1`] = `
   color: #016BF8;
 }
 
+.emotion-9>svg {
+  margin-left: 3px;
+}
+
 .emotion-9::after {
   content: '';
   position: absolute;
@@ -395,6 +403,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 
 .emotion-9>code {
   color: #016BF8;
+}
+
+.emotion-9>svg {
+  margin-left: 3px;
 }
 
 .emotion-9::after {

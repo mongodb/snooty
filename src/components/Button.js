@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LeafyButton from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
@@ -17,16 +18,30 @@ const Button = ({
     argument,
     options: { uri },
   },
+  variant = 'primary',
+  darkMode,
+  size = 'default',
+  baseFontSize,
+  rightGlyph,
   ...rest
 }) => {
   const componentProps = {};
   if (uri) {
     componentProps.as = Link;
     componentProps.to = uri;
+    componentProps.href = uri;
   }
 
   return (
-    <LeafyButton className={cx(componentProps.as ? buttonStyling : '', 'button')} variant="primary" {...componentProps}>
+    <LeafyButton
+      className={cx(componentProps.as ? buttonStyling : '', 'button')}
+      baseFontSize={baseFontSize}
+      size={size}
+      darkMode={darkMode}
+      variant={variant}
+      rightGlyph={<Icon glyph={rightGlyph} />}
+      {...componentProps}
+    >
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}
