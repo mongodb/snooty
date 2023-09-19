@@ -10,7 +10,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -33,13 +33,15 @@ exports[`Search Results Page considers a given search filter query param and dis
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 62px;
+  font-family: 'MongoDB Value Serif','Times New Roman',serif;
+  color: #00684A;
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1599,7 +1601,7 @@ exports[`Search Results Page does not return results for a given search term wit
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -1622,13 +1624,15 @@ exports[`Search Results Page does not return results for a given search term wit
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 62px;
+  font-family: 'MongoDB Value Serif','Times New Roman',serif;
+  color: #00684A;
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -2050,6 +2054,16 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-24 {
   padding-left: 56px;
   padding-top: 20px;
+}
+
+.emotion-26 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-27 {
@@ -2839,7 +2853,7 @@ exports[`Search Results Page does not return results for a given search term wit
           class="emotion-24 emotion-25"
         >
           <h3
-            class="emotion-4"
+            class="emotion-26"
           >
             No results found
           </h3>
@@ -3026,7 +3040,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -3049,13 +3063,15 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 62px;
+  font-family: 'MongoDB Value Serif','Times New Roman',serif;
+  color: #00684A;
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -3459,7 +3475,7 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -3482,13 +3498,15 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 62px;
+  font-family: 'MongoDB Value Serif','Times New Roman',serif;
+  color: #00684A;
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -4017,7 +4035,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -4040,13 +4058,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 62px;
+  font-family: 'MongoDB Value Serif','Times New Roman',serif;
+  color: #00684A;
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -4575,7 +4595,7 @@ exports[`Search Results Page renders results from a given search term query para
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -4598,13 +4618,15 @@ exports[`Search Results Page renders results from a given search term query para
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 62px;
+  font-family: 'MongoDB Value Serif','Times New Roman',serif;
+  color: #00684A;
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
