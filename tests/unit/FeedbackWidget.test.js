@@ -113,13 +113,13 @@ describe('FeedbackWidget', () => {
     it('is visible on medium/tablet screens', async () => {
       setTablet();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
 
     it('is visible on small/mobile screens', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(2);
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
 
     it('is hidden on small/mobile screens when configured with page option', async () => {

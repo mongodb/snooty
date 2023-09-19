@@ -2,11 +2,10 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
-//import Loadable from '@loadable/component';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import useScreenSize from '../hooks/useScreenSize';
 import ComponentFactory from './ComponentFactory';
-//import TabSelectors from './Tabs/TabSelectors';
+import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
@@ -51,9 +50,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
         wrapper={(children) => (
           <HeadingContainer stackVertically={isMobile}>
             {children}
-            <ChildContainer isStacked={isMobile}>
-              {/* {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />} */}
-            </ChildContainer>
+            <ChildContainer isStacked={isMobile}>{hasSelectors ? <TabSelectors /> : ''}</ChildContainer>
           </HeadingContainer>
         )}
       >
