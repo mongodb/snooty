@@ -80,7 +80,7 @@ const SearchResultsContainer = styled('div')`
   grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
   margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
   max-width: 1150px;
-  row-gap: ${theme.size.large};
+  row-gap: ${theme.size.small};
 
   @media ${theme.screenSize.upTo2XLarge} {
     margin: ${theme.size.large} 40px ${theme.size.xlarge} 40px;
