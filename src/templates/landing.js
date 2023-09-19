@@ -68,13 +68,13 @@ const Wrapper = styled('main')`
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children, pageContext, useChatbot }) => {
+const Landing = ({ children, pageContext, isSearch }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
       <div>
         <Wrapper>
-          {SHOW_CHATBOT && useChatbot && <ChatbotUi template={pageContext?.template} />}
+          {SHOW_CHATBOT && !isSearch && <ChatbotUi template={pageContext?.template} />}
           {children}
         </Wrapper>
       </div>
@@ -121,18 +121,21 @@ const Landing = ({ children, pageContext, useChatbot }) => {
               grid-column: 2 / -2;
             }
           }
-          main h1:first-of-type {
-            color: ${palette.black};
-            grid-column: 2/-1;
-            margin: ${size.large} 0;
-            font-size: 48px;
-            line-height: 62px;
-
-            @media ${screenSize.upToSmall} {
-              font-size: 32px;
-              line-height: 40px;
+          ${!isSearch &&
+          `
+            main h1:first-of-type {
+              color: ${palette.black};
+              grid-column: 2/-1;
+              margin: ${size.large} 0;
+              font-size: 48px;
+              line-height: 62px;
+  
+              @media ${screenSize.upToSmall} {
+                font-size: 32px;
+                line-height: 40px;
+              }
             }
-          }
+          `}
           .span-columns {
             grid-column: 3 / -3 !important;
             margin: ${size.xlarge} 0;
@@ -214,7 +217,7 @@ Landing.propTypes = {
   pageContext: PropTypes.shape({
     page: PropTypes.object.isRequired,
   }).isRequired,
-  useChatbot: PropTypes.bool,
+  isSearch: PropTypes.bool,
 };
 
 export default Landing;
