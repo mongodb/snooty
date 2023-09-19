@@ -38,7 +38,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   // check if product is associated child product
   try {
     const umbrellaProduct = await db.realmInterface.getMetadata({
-      'associated_products.name': process.env.GATSBY_SITE,
+      'associated_products.name': siteMetadata.project,
     });
     isAssociatedProduct = !!umbrellaProduct;
   } catch (e) {
@@ -105,7 +105,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       'Snooty could not find AST entries for the',
       siteMetadata.parserBranch,
       'branch of',
-      process.env.GATSBY_SITE,
+      siteMetadata.project,
       'within',
       siteMetadata.database
     );
@@ -146,7 +146,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
-  if (process.env.GATSBY_SITE === 'cloud-docs' && hasOpenAPIChangelog)
+  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, db });
 
   await saveAssetFiles(assets, db);

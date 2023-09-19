@@ -18,5 +18,5 @@ export const generatePrefix = (version, siteMetadata, siteBasePrefix) => {
   }
 
   // For staging, replace current version in dynamically generated path prefix
-  return generatePathPrefix({ ...siteMetadata, parserBranch: version }, process.env.GATSBY_SITE);
+  return generatePathPrefix({ ...siteMetadata, parserBranch: version });
 };

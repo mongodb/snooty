@@ -12,10 +12,7 @@ const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
 const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
 
 const DB = siteMetadata.database;
-const buildFilter = constructBuildFilter({
-  ...siteMetadata,
-  project: process.env.GATSBY_SITE,
-});
+const buildFilter = constructBuildFilter(siteMetadata);
 
 class RealmInterface {
   constructor() {

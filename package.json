@@ -38,6 +38,7 @@
     "build:clean:stage": "npm run build:clean && make stage",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
+    "develop:preview": "GATSBY_IS_PREVIEW=true gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
     "format": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
