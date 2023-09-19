@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { css } from '@leafygreen-ui/emotion';
+import styled from '@emotion/styled';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
@@ -13,9 +14,10 @@ import { joinClassNames } from '../utils/join-class-names';
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
  */
 
-const ArrowRightStyling = css`
+const ArrowRightStyling = styled.span`
   margin-left: 3px;
 `;
+
 const LGlinkStyling = css`
   text-decoration: none !important;
 `;
@@ -73,21 +75,22 @@ const Link = ({
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
+  //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
+  const decoration = showLinkArrow ? (
+    <ArrowRightStyling>
+      {' '}
+      <ArrowRightIcon role="presentation" size={12} />{' '}
+    </ArrowRightStyling>
+  ) : (
+    ''
+  );
+
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
-
-    const decoration = showLinkArrow ? (
-      <ArrowRightStyling>
-        {' '}
-        <ArrowRightIcon role="presentation" size={12} />{' '}
-      </ArrowRightStyling>
-    ) : (
-      ''
-    );
 
     return (
       <GatsbyLink
@@ -107,14 +110,6 @@ const Link = ({
   const isMDBLink = strippedUrl.includes('mongodb.com');
   const showExtIcon = !anchor && !isMDBLink;
   const target = !showExtIcon ? '_self' : undefined;
-  const decoration = showLinkArrow ? (
-    <ArrowRightStyling>
-      {' '}
-      <ArrowRightIcon role="presentation" size={12} />{' '}
-    </ArrowRightStyling>
-  ) : (
-    ''
-  );
 
   return (
     <LGLink
