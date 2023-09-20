@@ -11,7 +11,7 @@ const StyledContainer = styled('div')`
   flex-direction: row;
   justify-content: center;
   grid-column-start: 2;
-  grid-column-end: 14;
+  grid-column-end: -2;
   max-width: 1440px;
   column-gap: 2rem;
   @media ${theme.screenSize.upToLarge} {

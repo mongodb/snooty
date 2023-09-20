@@ -187,7 +187,6 @@ exports[`button component renders correctly 1`] = `
     aria-disabled="false"
     class="emotion-0 lg-ui-button-0000 button emotion-1"
     href="/install/"
-    type="button"
   >
     <div
       class="emotion-2"
