@@ -36,23 +36,3 @@ exports.sourceNodes = async ({
   if (hasCloudDocsProject && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, db });
 };
-
-// Prevent errors when running gatsby build caused by browser packages run in a node environment.
-exports.onCreateWebpackConfig = ({ plugins, actions }) => {
-  const providePlugins = {
-    Buffer: ['buffer', 'Buffer'],
-    process: require.resolve('./stubs/process.js'),
-  };
-
-  const fallbacks = { stream: require.resolve('stream-browserify'), buffer: require.resolve('buffer/') };
-
-  actions.setWebpackConfig({
-    plugins: [plugins.provide(providePlugins)],
-    resolve: {
-      fallback: fallbacks,
-      alias: {
-        process: 'process/browser',
-      },
-    },
-  });
-};
