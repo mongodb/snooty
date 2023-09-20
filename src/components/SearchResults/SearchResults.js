@@ -1,7 +1,8 @@
 import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { css, Global } from '@emotion/react';
+import { Global } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -39,6 +40,11 @@ const commonTextStyling = css`
   font-weight: bolder;
   letter-spacing: 0.5px;
   margin: 0;
+`;
+
+const headerStyle = css`
+  color: ${palette.green.dark2};
+  padding-bottom: 24px;
 `;
 
 const EmptyResultsContainer = styled('div')`
@@ -374,7 +380,7 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H3 as={H1} style={{ color: '#00684A', paddingBottom: '24px' }}>
+          <H3 as={H1} className={cx(headerStyle)}>
             Search Results
           </H3>
           <SearchInput

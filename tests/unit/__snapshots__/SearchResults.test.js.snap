@@ -49,6 +49,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 32px;
   font-weight: 500;
   color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -414,7 +416,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -425,13 +427,9 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 36px;
 }
 
-.emotion-22:focus {
+.emotion-22:focus,
+.emotion-22:focus-visible {
   outline: none;
-}
-
-.emotion-22[disabled],
-.emotion-22:disabled {
-  pointer-events: none;
 }
 
 .emotion-22:active,
@@ -441,14 +439,18 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
 }
 
-.emotion-22:hover,
+.emotion-22:focus {
+  color: #001E2B;
+}
+
+.emotion-22:hover[aria-disabled='false'],
 .emotion-22:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-22:focus {
+.emotion-22:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -479,6 +481,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -516,13 +520,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 45px;
-  background-color: #fff;
-  height: 152px;
-  position: relative;
-  place-self: center;
-  width: 100%;
 }
 
 .emotion-29:hover,
@@ -537,33 +534,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: rgba(231, 238, 236, 0.4);
   -webkit-transition: background-color 150ms ease-in;
   transition: background-color 150ms ease-in;
-}
-
-.emotion-29>div {
-  padding: 20px;
-  padding-left: 30px;
-}
-
-.emotion-29:hover,
-.emotion-29:focus {
-  color: unset;
-  -webkit-text-decoration: unset;
-  text-decoration: unset;
-}
-
-.emotion-29:hover>div,
-.emotion-29:focus>div {
-  background-color: unset!important;
-}
-
-.emotion-29:before {
-  content: '';
-  position: absolute;
-  top: calc(-16px / 2);
-  left: 0;
-  right: 0;
-  bottom: calc(-16px / 2);
-  background-color: transparent;
 }
 
 .emotion-31 {
@@ -782,10 +752,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: 'Euclid Circular A';
-  font-weight: bolder;
-  letter-spacing: 0.5px;
-  margin: 0;
   margin-bottom: 16px;
 }
 
@@ -991,6 +957,26 @@ exports[`Search Results Page considers a given search filter query param and dis
   }
 }
 
+.emotion-70 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-71 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1163,7 +1149,6 @@ exports[`Search Results Page considers a given search filter query param and dis
     >
       <h1
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -1269,8 +1254,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       >
         <button
           aria-disabled="false"
-          class="emotion-22"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-22"
           type="button"
         >
           <div
@@ -1464,7 +1448,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-23"
                 />
                 <div
-                  class="emotion-24"
+                  class="emotion-70"
                 >
                   <div
                     class="emotion-71"
@@ -1522,7 +1506,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-23"
                 />
                 <div
-                  class="emotion-24"
+                  class="emotion-70"
                 >
                   <div
                     class="emotion-71"
@@ -1554,8 +1538,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="emotion-22"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-22"
           type="button"
         >
           <div
@@ -1640,6 +1623,8 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 32px;
   font-weight: 500;
   color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -1957,7 +1942,7 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -1968,13 +1953,9 @@ exports[`Search Results Page does not return results for a given search term wit
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -1984,14 +1965,18 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -2022,6 +2007,8 @@ exports[`Search Results Page does not return results for a given search term wit
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -2036,8 +2023,6 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-20 {
   margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
   margin-top: calc(50vh - 28px - 40px - 166px / 2);
-  grid-area: results;
-  margin-top: 80px;
 }
 
 .emotion-22 {
@@ -2094,10 +2079,6 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: 'Euclid Circular A';
-  font-weight: bolder;
-  letter-spacing: 0.5px;
-  margin: 0;
   margin-bottom: 16px;
 }
 
@@ -2304,6 +2285,26 @@ exports[`Search Results Page does not return results for a given search term wit
   }
 }
 
+.emotion-43 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-44 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2477,7 +2478,6 @@ exports[`Search Results Page does not return results for a given search term wit
     >
       <h1
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -2550,8 +2550,7 @@ exports[`Search Results Page does not return results for a given search term wit
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -2903,7 +2902,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-43"
                 >
                   <div
                     class="emotion-44"
@@ -2961,7 +2960,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-43"
                 >
                   <div
                     class="emotion-44"
@@ -2993,8 +2992,7 @@ exports[`Search Results Page does not return results for a given search term wit
         </div>
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -3079,6 +3077,8 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   line-height: 32px;
   font-weight: 500;
   color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -3298,7 +3298,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -3309,13 +3309,9 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   height: 36px;
 }
 
-.emotion-13:focus {
+.emotion-13:focus,
+.emotion-13:focus-visible {
   outline: none;
-}
-
-.emotion-13[disabled],
-.emotion-13:disabled {
-  pointer-events: none;
 }
 
 .emotion-13:active,
@@ -3325,14 +3321,18 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   text-decoration: none;
 }
 
-.emotion-13:hover,
+.emotion-13:focus {
+  color: #001E2B;
+}
+
+.emotion-13:hover[aria-disabled='false'],
 .emotion-13:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-13:focus {
+.emotion-13:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -3363,6 +3363,8 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -3382,7 +3384,6 @@ exports[`Search Results Page renders correctly without browser 1`] = `
     >
       <h1
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -3428,8 +3429,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <button
           aria-disabled="false"
-          class="emotion-13"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-13"
           type="button"
         >
           <div
@@ -3514,6 +3514,8 @@ exports[`Search Results Page renders loading images before returning no results 
   line-height: 32px;
   font-weight: 500;
   color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -3831,7 +3833,7 @@ exports[`Search Results Page renders loading images before returning no results 
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -3842,13 +3844,9 @@ exports[`Search Results Page renders loading images before returning no results 
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -3858,14 +3856,18 @@ exports[`Search Results Page renders loading images before returning no results 
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -3896,6 +3898,8 @@ exports[`Search Results Page renders loading images before returning no results 
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -3915,7 +3919,6 @@ exports[`Search Results Page renders loading images before returning no results 
     >
       <h1
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -3988,8 +3991,7 @@ exports[`Search Results Page renders loading images before returning no results 
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -4074,6 +4076,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
   line-height: 32px;
   font-weight: 500;
   color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -4391,7 +4395,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -4402,13 +4406,9 @@ exports[`Search Results Page renders loading images before returning nonempty re
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -4418,14 +4418,18 @@ exports[`Search Results Page renders loading images before returning nonempty re
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4456,6 +4460,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -4475,7 +4481,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
     >
       <h1
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -4548,8 +4553,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -4634,6 +4638,8 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 32px;
   font-weight: 500;
   color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -4951,7 +4957,7 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -4962,13 +4968,9 @@ exports[`Search Results Page renders results from a given search term query para
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -4978,14 +4980,18 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -5016,6 +5022,8 @@ exports[`Search Results Page renders results from a given search term query para
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -5053,13 +5061,6 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 45px;
-  background-color: #fff;
-  height: 152px;
-  position: relative;
-  place-self: center;
-  width: 100%;
 }
 
 .emotion-23:hover,
@@ -5074,33 +5075,6 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: rgba(231, 238, 236, 0.4);
   -webkit-transition: background-color 150ms ease-in;
   transition: background-color 150ms ease-in;
-}
-
-.emotion-23>div {
-  padding: 20px;
-  padding-left: 30px;
-}
-
-.emotion-23:hover,
-.emotion-23:focus {
-  color: unset;
-  -webkit-text-decoration: unset;
-  text-decoration: unset;
-}
-
-.emotion-23:hover>div,
-.emotion-23:focus>div {
-  background-color: unset!important;
-}
-
-.emotion-23:before {
-  content: '';
-  position: absolute;
-  top: calc(-16px / 2);
-  left: 0;
-  right: 0;
-  bottom: calc(-16px / 2);
-  background-color: transparent;
 }
 
 .emotion-25 {
@@ -5363,10 +5337,6 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: 'Euclid Circular A';
-  font-weight: bolder;
-  letter-spacing: 0.5px;
-  margin: 0;
   margin-bottom: 16px;
 }
 
@@ -5573,6 +5543,26 @@ exports[`Search Results Page renders results from a given search term query para
   }
 }
 
+.emotion-64 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-65 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -5746,7 +5736,6 @@ exports[`Search Results Page renders results from a given search term query para
     >
       <h1
         class="emotion-4"
-        style="color: rgb(0, 104, 74); padding-bottom: 24px;"
       >
         Search Results
       </h1>
@@ -5819,8 +5808,7 @@ exports[`Search Results Page renders results from a given search term query para
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -6014,7 +6002,7 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-64"
                 >
                   <div
                     class="emotion-65"
@@ -6072,7 +6060,7 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-64"
                 >
                   <div
                     class="emotion-65"
@@ -6104,8 +6092,7 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
