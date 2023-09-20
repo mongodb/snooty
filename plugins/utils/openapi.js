@@ -1,9 +1,10 @@
-const atlasAdminChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
+const atlasAdminProdChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
+const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
 
-const fetchChangelogData = async (runId, versions) => {
+const fetchChangelogData = async (runId, versions, s3Prefix) => {
   try {
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/changelog.json`);
+    const changelogResp = await fetch(`${s3Prefix}/${runId}/changelog.json`);
     const changelog = await changelogResp.json();
 
     /* Aggregate all Resources in changelog for frontend filter */
@@ -16,7 +17,7 @@ const fetchChangelogData = async (runId, versions) => {
     /* Fetch most recent Resource Versions' diff */
     const mostRecentResourceVersions = versions.slice(-2);
     const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${atlasAdminChangelogS3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
+    const mostRecentDiffResp = await fetch(`${s3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
     const mostRecentDiffData = await mostRecentDiffResp.json();
 
     return {
@@ -34,10 +35,24 @@ const fetchChangelogData = async (runId, versions) => {
 };
 
 /* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
-const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest, db }) => {
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest, siteMetadata, db }) => {
   try {
+    const { snootyEnv } = siteMetadata;
+    let atlasAdminChangelogS3Prefix;
+    let indexLocation;
+    switch (snootyEnv) {
+      case 'staging':
+      case 'development':
+        atlasAdminChangelogS3Prefix = atlasAdminDevChangelogS3Prefix;
+        indexLocation = 'dev.json';
+        break;
+      case 'production':
+      default:
+        atlasAdminChangelogS3Prefix = atlasAdminProdChangelogS3Prefix;
+        indexLocation = 'prod.json';
+    }
     /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/prod.json`);
+    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/${indexLocation}`);
     const index = await indexResp.json();
 
     const { runId, versions } = index;
@@ -49,8 +64,9 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
       index,
     };
     try {
-      const receivedChangelogData = await fetchChangelogData(runId, versions);
+      const receivedChangelogData = await fetchChangelogData(runId, versions, atlasAdminChangelogS3Prefix);
       changelogData = { ...changelogData, ...receivedChangelogData };
+      if (snootyEnv === 'production') await db.realmInterface.updateOAChangelogMetadata(index);
     } catch (error) {
       /* If any error occurs, fetch last successful metadata and build changelog node */
       const lastSuccessfulIndex = await db.realmInterface.fetchDocument(
@@ -59,7 +75,7 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
         {}
       );
       const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
-      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions);
+      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions, atlasAdminProdChangelogS3Prefix);
       changelogData = { index: lastSuccessfulIndex, ...receivedChangelogData };
     }
 

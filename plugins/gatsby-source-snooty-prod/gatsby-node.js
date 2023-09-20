@@ -147,7 +147,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
-    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, db });
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();

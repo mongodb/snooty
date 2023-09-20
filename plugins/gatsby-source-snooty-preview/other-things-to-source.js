@@ -1,10 +1,10 @@
 const { siteMetadata } = require('../../src/utils/site-metadata');
-const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
+const { realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 const { createOpenAPIChangelogNode } = require('../utils/openapi');
 const { createProductNodes } = require('../utils/products');
 
-let db;
-
+// Sources nodes for the preview plugin that are not directly related to data
+// from the Snooty Data API
 exports.sourceNodes = async ({
   hasOpenAPIChangelog,
   createNode,
@@ -12,15 +12,7 @@ exports.sourceNodes = async ({
   createNodeId,
   getNodesByType,
 }) => {
-  // wait to connect to stitch
-  if (siteMetadata.manifestPath) {
-    console.log('Loading documents from manifest');
-    db = manifestDocumentDatabase;
-  } else {
-    console.log('Loading documents from stitch');
-    db = realmDocumentDatabase;
-  }
-
+  let db = realmDocumentDatabase;
   await db.connect();
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
@@ -34,5 +26,5 @@ exports.sourceNodes = async ({
   }
 
   if (hasCloudDocsProject && hasOpenAPIChangelog)
-    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, db });
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 };
