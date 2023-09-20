@@ -78,7 +78,7 @@ const ChatbotUi = ({ template }) => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
-      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={82} />}>
+      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={82} />}>
         <LazyChatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} />
       </Suspense>
     </StyledChatBotUiContainer>
