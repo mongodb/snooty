@@ -57,6 +57,11 @@ const Wrapper = styled('main')`
           margin-left: 42px;
           margin-right: 42px;
         }
+
+        @media ${({ theme }) => theme.screenSize.upToSmall} {
+          margin-left: ${({ theme }) => theme.size.medium};
+          margin-right: ${({ theme }) => theme.size.medium};
+        }
       }
     }
   }
