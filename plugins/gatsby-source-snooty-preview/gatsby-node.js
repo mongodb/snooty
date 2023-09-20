@@ -239,20 +239,7 @@ exports.sourceNodes = async ({
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
-exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
-  if (stage === 'build-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /mongodb-stitch-browser-sdk/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    });
-  }
-
+exports.onCreateWebpackConfig = ({ plugins, actions }) => {
   const providePlugins = {
     Buffer: ['buffer', 'Buffer'],
     process: require.resolve('../../stubs/process.js'),

@@ -86,7 +86,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     throw Error(envResults.message);
   }
 
-  // wait to connect to stitch
+  // wait to connect to Realm
 
   if (siteMetadata.manifestPath) {
     console.log('Loading documents from manifest');
