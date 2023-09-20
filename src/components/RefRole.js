@@ -32,7 +32,6 @@ const stopPropagation = function (e) {
 const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow }) => {
   // Render intersphinx target links
   const stylingClass = cardRef ? cardRefStyling : '';
-  console.log(url);
   if (url) {
     return (
       <Link className={cx(stylingClass)} to={url} showLinkArrow={showLinkArrow}>
