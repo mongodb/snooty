@@ -92,7 +92,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #00684A;
   border-color: #00684A;
@@ -115,13 +115,9 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   outline: none;
 }
 
-.emotion-8:focus {
+.emotion-8:focus,
+.emotion-8:focus-visible {
   outline: none;
-}
-
-.emotion-8[disabled],
-.emotion-8:disabled {
-  pointer-events: none;
 }
 
 .emotion-8:active,
@@ -131,7 +127,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration: none;
 }
 
-.emotion-8:hover,
+.emotion-8:focus {
+  color: #FFFFFF;
+}
+
+.emotion-8:hover[aria-disabled='false'],
 .emotion-8:active {
   color: #FFFFFF;
   background-color: #00593f;
@@ -139,7 +139,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-8:focus {
+.emotion-8:focus-visible {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -193,6 +193,8 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -398,11 +400,9 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       <p>
         Congrats. You’ve completed all the guides. Want to take the next step? Register for the developer exam.
       </p>
-      <a
+      <span
         aria-disabled="false"
-        class="lg-ui-0001 emotion-8"
-        data-leafygreen-ui="button"
-        href="https://university.mongodb.com/certification/developer/about"
+        class="lg-ui-0001 lg-ui-button-0000 emotion-8"
         target="_self"
         type="button"
       >
@@ -418,7 +418,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
             Learn More
           </div>
         </span>
-      </a>
+      </span>
     </div>
     <div
       class="emotion-12"
@@ -592,7 +592,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #00684A;
   border-color: #00684A;
@@ -604,13 +604,9 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   color: #ffffff!important;
 }
 
-.emotion-9:focus {
+.emotion-9:focus,
+.emotion-9:focus-visible {
   outline: none;
-}
-
-.emotion-9[disabled],
-.emotion-9:disabled {
-  pointer-events: none;
 }
 
 .emotion-9:active,
@@ -620,7 +616,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration: none;
 }
 
-.emotion-9:hover,
+.emotion-9:focus {
+  color: #FFFFFF;
+}
+
+.emotion-9:hover[aria-disabled='false'],
 .emotion-9:active {
   color: #FFFFFF;
   background-color: #00593f;
@@ -628,7 +628,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-9:focus {
+.emotion-9:focus-visible {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -660,6 +660,8 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -824,8 +826,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       </div>
       <a
         aria-disabled="false"
-        class="emotion-8 emotion-9"
-        data-leafygreen-ui="button"
+        class="emotion-8 lg-ui-button-0000 emotion-9"
         href="/server/read/"
         type="button"
       >
@@ -1006,7 +1007,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #00684A;
   border-color: #00684A;
@@ -1018,13 +1019,9 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   color: #ffffff!important;
 }
 
-.emotion-9:focus {
+.emotion-9:focus,
+.emotion-9:focus-visible {
   outline: none;
-}
-
-.emotion-9[disabled],
-.emotion-9:disabled {
-  pointer-events: none;
 }
 
 .emotion-9:active,
@@ -1034,7 +1031,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
 }
 
-.emotion-9:hover,
+.emotion-9:focus {
+  color: #FFFFFF;
+}
+
+.emotion-9:hover[aria-disabled='false'],
 .emotion-9:active {
   color: #FFFFFF;
   background-color: #00593f;
@@ -1042,7 +1043,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-9:focus {
+.emotion-9:focus-visible {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -1074,6 +1075,8 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -1293,8 +1296,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       </div>
       <a
         aria-disabled="false"
-        class="emotion-8 emotion-9"
-        data-leafygreen-ui="button"
+        class="emotion-8 lg-ui-button-0000 emotion-9"
         href="/cloud/connectionstring/"
         type="button"
       >
