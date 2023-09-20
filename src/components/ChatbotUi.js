@@ -55,10 +55,10 @@ const StyledChatBotUiContainer = styled.div`
   width: 100%;
   background: ${palette.white};
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
-  margin-left: -32px;
 
   > div {
     max-width: 862px;
+    margin-left: -32px;
 
     p {
       color: ${palette.black};
@@ -72,21 +72,13 @@ const StyledChatBotUiContainer = styled.div`
   ${({ template }) => template === 'landing' && landingTemplateStyling};
 `;
 
-// the chatbot has 32px of left-side padding which makes the
-// loading skeleton have an alignment issue. it's great
-const SkeletonWrapper = styled.span`
-  padding-left: 32px;
-`;
-
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ChatbotUi = ({ template }) => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
-      <Suspense
-        fallback={<Skeleton wrapper={SkeletonWrapper} borderRadius={SKELETON_BORDER_RADIUS} width={771} height={82} />}
-      >
+      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={771} height={82} />}>
         <LazyChatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} />
       </Suspense>
     </StyledChatBotUiContainer>
