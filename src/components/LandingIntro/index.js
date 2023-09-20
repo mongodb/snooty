@@ -36,13 +36,14 @@ const DescriptionContainer = styled('div')`
     margin-top: 20px;
     flex: auto;
   }
+  align-self: center;
 `;
 
 const ImageContainer = styled('div')`
   display: flex;
-  flex: 1 1 400px;
+  flex: 1 1 440px;
   align-items: center;
-  max-width: 400px;
+  max-width: 440px;
 
   img {
     width: 100%;
