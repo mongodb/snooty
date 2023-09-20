@@ -350,6 +350,10 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   color: #016BF8;
 }
 
+.emotion-27>svg {
+  margin-left: 3px;
+}
+
 .emotion-27::after {
   content: '';
   position: absolute;
@@ -548,6 +552,10 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 
 .emotion-8>code {
   color: #016BF8;
+}
+
+.emotion-8>svg {
+  margin-left: 3px;
 }
 
 .emotion-8::after {
@@ -963,6 +971,10 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 
 .emotion-8>code {
   color: #016BF8;
+}
+
+.emotion-8>svg {
+  margin-left: 3px;
 }
 
 .emotion-8::after {

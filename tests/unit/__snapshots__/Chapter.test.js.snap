@@ -155,6 +155,10 @@ exports[`renders correctly 1`] = `
   color: #016BF8;
 }
 
+.emotion-12>svg {
+  margin-left: 3px;
+}
+
 .emotion-12::after {
   content: '';
   position: absolute;
