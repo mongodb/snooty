@@ -45,6 +45,7 @@ describe('constructBuildFilter', () => {
   it('returns documents without commit hashes or patch ids', () => {
     process.env.GATSBY_SITE = 'test-repo';
     const sitemetadata = {
+      project: 'test-repo',
       parserUser: 'test-user',
       parserBranch: 'master',
     };
@@ -59,6 +60,7 @@ describe('constructBuildFilter', () => {
   it('returns documents with commit hash and patch id', () => {
     process.env.GATSBY_SITE = 'test-repo';
     const sitemetadata = {
+      project: 'test-repo',
       parserUser: 'test-user',
       parserBranch: 'master-copy',
       commitHash: '1',
