@@ -79,7 +79,15 @@ const ChatbotUi = ({ template }) => {
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
       <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={82} />}>
-        <LazyChatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} />
+        <LazyChatbot
+          serverBaseUrl={CHATBOT_SERVER_BASE_URL}
+          suggestedPrompts={[
+            "How do you deploy a free cluster in Atlas?",
+            "How do you import or migrate data into MongoDB Atlas?",
+            "Get started with MongoDB",
+            "Why should I use Atlas Search?",
+          ]}
+        />
       </Suspense>
     </StyledChatBotUiContainer>
   );
