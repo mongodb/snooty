@@ -20,7 +20,7 @@ const landingTemplateStyling = css`
   position: sticky;
   top: 0px;
   display: grid;
-  padding: ${theme.size.default} 0;
+  padding: 0;
   // Use landing template's grid layout to help with alignment
   @media ${theme.screenSize.mediumAndUp} {
     grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(
@@ -82,10 +82,10 @@ const ChatbotUi = ({ template }) => {
         <LazyChatbot
           serverBaseUrl={CHATBOT_SERVER_BASE_URL}
           suggestedPrompts={[
-            "How do you deploy a free cluster in Atlas?",
-            "How do you import or migrate data into MongoDB Atlas?",
-            "Get started with MongoDB",
-            "Why should I use Atlas Search?",
+            'How do you deploy a free cluster in Atlas?',
+            'How do you import or migrate data into MongoDB Atlas?',
+            'Get started with MongoDB',
+            'Why should I use Atlas Search?',
           ]}
         />
       </Suspense>
