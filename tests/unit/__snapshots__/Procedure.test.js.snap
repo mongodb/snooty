@@ -122,10 +122,6 @@ exports[`renders correctly 1`] = `
   color: #016BF8;
 }
 
-.emotion-11>svg {
-  margin-left: 3px;
-}
-
 .emotion-11::after {
   content: '';
   position: absolute;
@@ -746,10 +742,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 
 .emotion-11>code {
   color: #016BF8;
-}
-
-.emotion-11>svg {
-  margin-left: 3px;
 }
 
 .emotion-11::after {

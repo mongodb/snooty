@@ -24,10 +24,6 @@ exports[`button component renders correctly 1`] = `
   color: #016BF8;
 }
 
-.emotion-0>svg {
-  margin-left: 3px;
-}
-
 .emotion-0::after {
   content: '';
   position: absolute;
@@ -66,10 +62,6 @@ exports[`button component renders correctly 1`] = `
 
 .emotion-0>code {
   color: #016BF8;
-}
-
-.emotion-0>svg {
-  margin-left: 3px;
 }
 
 .emotion-0::after {

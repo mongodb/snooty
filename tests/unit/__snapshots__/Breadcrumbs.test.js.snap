@@ -123,10 +123,6 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-5>svg {
-  margin-left: 3px;
-}
-
 .emotion-5::after {
   content: '';
   position: absolute;
@@ -314,10 +310,6 @@ exports[`renders correctly with siteTitle 1`] = `
 
 .emotion-5>code {
   color: #016BF8;
-}
-
-.emotion-5>svg {
-  margin-left: 3px;
 }
 
 .emotion-5::after {
