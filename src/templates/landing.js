@@ -9,6 +9,28 @@ const CONTENT_MAX_WIDTH = 1440;
 
 const SHOW_CHATBOT = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
+const newLandingCardStyling = () => css`
+  &:not(.compact, .extra-compact, .drivers) {
+    p {
+      font-weight: 500;
+
+      a {
+        margin-top: ${({ theme }) => theme.size.medium};
+      }
+    }
+
+    @media ${({ theme }) => theme.screenSize.upToMedium} {
+      margin-left: 42px;
+      margin-right: 42px;
+    }
+
+    @media ${({ theme }) => theme.screenSize.upToSmall} {
+      margin-left: ${({ theme }) => theme.size.medium};
+      margin-right: ${({ theme }) => theme.size.medium};
+    }
+  }
+`;
+
 const Wrapper = styled('main')`
   margin: 0 auto;
   width: 100%;
@@ -44,25 +66,7 @@ const Wrapper = styled('main')`
         grid-column: 2 / -2 !important;
       }
 
-      &:not(.compact, .extra-compact, .drivers) {
-        p {
-          font-weight: 500;
-
-          a {
-            margin-top: ${({ theme }) => theme.size.medium};
-          }
-        }
-
-        @media ${({ theme }) => theme.screenSize.upToMedium} {
-          margin-left: 42px;
-          margin-right: 42px;
-        }
-
-        @media ${({ theme }) => theme.screenSize.upToSmall} {
-          margin-left: ${({ theme }) => theme.size.medium};
-          margin-right: ${({ theme }) => theme.size.medium};
-        }
-      }
+      ${({ newChatbotLanding }) => newChatbotLanding && newLandingCardStyling()}
     }
   }
 `;
@@ -73,7 +77,7 @@ const Landing = ({ children, pageContext, isSearch, useChatbot }) => {
   return (
     <>
       <div>
-        <Wrapper>
+        <Wrapper newChatbotLanding={SHOW_CHATBOT && useChatbot}>
           {SHOW_CHATBOT && useChatbot && <ChatbotUi template={pageContext?.template} />}
           {children}
         </Wrapper>
@@ -124,16 +128,25 @@ const Landing = ({ children, pageContext, isSearch, useChatbot }) => {
           ${!isSearch &&
           `
           main h1:first-of-type {
-            color: ${palette.black};
-            grid-column: 2/-1;
-            margin: ${size.large} 0;
-            font-size: 48px;
-            line-height: 62px;
+            color: ${palette.white};
+            ${SHOW_CHATBOT && useChatbot
+              ? `
+              color: ${palette.black};
+              grid-column: 2/-1;
+              margin: ${size.large} 0;
+              font-size: 48px;
+              line-height: 62px;
 
-            @media ${screenSize.upToSmall} {
-              font-size: 32px;
-              line-height: 40px;
-            }
+              @media ${screenSize.upToSmall} {
+                font-size: 32px;
+                line-height: 40px;
+              }
+            `
+              : `
+              @media ${screenSize.upToMedium} {
+                color: ${palette.green.dark2};
+              }
+              `}
           }
           `}
           .span-columns {
