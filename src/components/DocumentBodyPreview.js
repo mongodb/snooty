@@ -69,6 +69,8 @@ const DocumentBody = (props) => {
   const page = data.page.ast;
   const metadata = data.page.metadata.metadata;
   const template = page?.options?.template;
+  // Adds page to pageContext to mimic current behavior of passing entire page AST down
+  // pageContext for templates
   props.pageContext.page = page;
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -87,8 +89,8 @@ const DocumentBody = (props) => {
   return (
     <Layout
       pageContext={{
-        page,
-        slug,
+        // Pass down data missing from the preview plugin, but are present in the
+        // prod plugin for consistency
         template,
         publishedBranches: getNestedValue(['publishedBranches'], metadata),
         ...props.pageContext,

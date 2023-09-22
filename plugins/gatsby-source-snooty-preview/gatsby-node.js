@@ -60,7 +60,7 @@ const saveFile = async (file, data) => {
 };
 
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
-const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER || `mmeigs`;
+const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER;
 
 function createSnootyMetadataId({ branch, project, createNodeId }) {
   return createNodeId(`metadata-${branch}-${project}`);
@@ -101,6 +101,10 @@ exports.sourceNodes = async ({
   }
 
   try {
+    if (!GATSBY_CLOUD_SITE_USER) {
+      throw new Error('Missing GATSBY_CLOUD_SITE_USER');
+    }
+
     // Generate client access token only if trying to access Snooty Data API's staging instance
     const clientAccessToken = APIBase.includes('.staging') ? await fetchClientAccessToken(lastClientAccessToken) : '';
     let url;
@@ -191,7 +195,7 @@ exports.sourceNodes = async ({
 
             const pagePathNode = {
               id: pagePathNodeId,
-              page_id: page_id,
+              page_id,
               branch,
               project,
               pageNodeId: page.id,
