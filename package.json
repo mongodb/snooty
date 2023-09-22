@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.14.15",
+  "version": "0.14.18",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -115,7 +115,7 @@
     "lodash": "^4.6.0",
     "minimist": "^1.2.6",
     "mobx": "^6.1.5",
-    "mongodb-chatbot-ui": "^0.0.4",
+    "mongodb-chatbot-ui": "^0.0.6",
     "no-scroll": "^2.1.1",
     "node-fetch": "^3.3.2",
     "process": "^0.11.10",
