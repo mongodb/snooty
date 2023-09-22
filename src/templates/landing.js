@@ -129,8 +129,9 @@ const Landing = ({ children, pageContext, isSearch, useChatbot }) => {
           `
           main h1:first-of-type {
             color: ${palette.white};
-            ${SHOW_CHATBOT && useChatbot
-              ? `
+            ${
+              SHOW_CHATBOT && useChatbot
+                ? `
               color: ${palette.black};
               grid-column: 2/-1;
               margin: ${size.large} 0;
@@ -142,11 +143,12 @@ const Landing = ({ children, pageContext, isSearch, useChatbot }) => {
                 line-height: 40px;
               }
             `
-              : `
+                : `
               @media ${screenSize.upToMedium} {
                 color: ${palette.green.dark2};
               }
-              `}
+              `
+            }
           }
           `}
           .span-columns {
