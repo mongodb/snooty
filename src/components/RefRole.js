@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { normalizePath } from '../utils/normalize-path';
 import { theme } from '../theme/docsTheme';
+import { normalizePath } from '../utils/normalize-path';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
