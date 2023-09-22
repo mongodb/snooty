@@ -548,10 +548,6 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
   color: #016BF8;
 }
 
-.emotion-0>svg {
-  margin-left: 3px;
-}
-
 .emotion-0::after {
   content: '';
   position: absolute;
@@ -601,10 +597,6 @@ exports[`Link component renders a variety of strings correctly internal link que
 
 .emotion-0>code {
   color: #016BF8;
-}
-
-.emotion-0>svg {
-  margin-left: 3px;
 }
 
 .emotion-0::after {
@@ -658,10 +650,6 @@ exports[`Link component renders a variety of strings correctly internal link tha
   color: #016BF8;
 }
 
-.emotion-0>svg {
-  margin-left: 3px;
-}
-
 .emotion-0::after {
   content: '';
   position: absolute;
@@ -711,10 +699,6 @@ exports[`Link component renders a variety of strings correctly internal link wit
 
 .emotion-0>code {
   color: #016BF8;
-}
-
-.emotion-0>svg {
-  margin-left: 3px;
 }
 
 .emotion-0::after {
