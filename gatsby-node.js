@@ -132,8 +132,22 @@ const fetchChangelogData = async (runId, versions, s3Prefix) => {
     /* Fetch most recent Resource Versions' diff */
     const mostRecentResourceVersions = versions.slice(-2);
     const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${s3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
-    const mostRecentDiffData = await mostRecentDiffResp.json();
+    // const mostRecentDiffResp = await fetch(`${s3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
+    // const mostRecentDiffData = await mostRecentDiffResp.json();
+
+    //filter hideFromChangelog in diff
+    const hideDiffChanges = (diffData) => {
+      const pathUpdate = (path) => {
+        if (path !== null && path.changes !== null) {
+          path.changes = path.changes.filter((change) => !change.hideFromChangelog);
+        }
+        return path;
+      };
+      diffData = diffData.map(pathUpdate);
+      return diffData.filter((path) => path !== null && path.changes !== null && path.changes.length !== 0);
+    };
+
+    const mostRecentDiffData = hideDiffChanges(testingDiff);
 
     return {
       changelog,
@@ -3330,3 +3344,471 @@ exports.createSchemaCustomization = ({ actions }) => {
 //     ],
 //   },
 // ];
+
+const testingDiff = [
+  {
+    path: '/api/atlas/v2/groups/{groupId}/access',
+    httpMethod: 'POST',
+    operationId: 'addUserToProject',
+    tag: 'Projects',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+        hideFromChangelog: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/clusters',
+    httpMethod: 'GET',
+    operationId: 'listClusters',
+    tag: 'Clusters',
+    changes: [
+      {
+        change: "the 'backupEnabled' response's property default value 'false' was added",
+        changeCode: 'response-property-default-value-added',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'numShards' response's property default value '1.00' was removed",
+        changeCode: 'response-property-default-value-removed',
+        backwardCompatible: true,
+      },
+      {
+        change:
+          "the response optional properties 'results/items/mongoDBVersion, results/items/replicationSpecs/items/id' became read-only",
+        changeCode: 'response-optional-property-became-read-only',
+        backwardCompatible: true,
+        hideFromChangelog: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/clusters',
+    httpMethod: 'POST',
+    operationId: 'createCluster',
+    tag: 'Clusters',
+    changes: [
+      {
+        change: "the 'replicationSpecs/items/numShards' request property's min was set to '1.00'",
+        changeCode: 'request-property-min-set',
+        backwardCompatible: true,
+      },
+      {
+        change: "added the new optional request property 'replicationSpecs/items/regionConfigs'",
+        changeCode: 'new-optional-request-property',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request optional property 'mongoDBVersion' became read-only",
+        changeCode: 'request-optional-property-became-read-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request optional property 'replicationSpecs/items/id' became read-only",
+        changeCode: 'request-optional-property-became-read-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'backupEnabled' request property default value 'false' was added",
+        changeCode: 'request-property-default-value-added',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'numShards' request property default value '1.00' was removed",
+        changeCode: 'request-property-default-value-removed',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'backupEnabled' response's property default value 'false' was added",
+        changeCode: 'response-property-default-value-added',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'numShards' response's property default value '1.00' was removed",
+        changeCode: 'response-property-default-value-removed',
+        backwardCompatible: true,
+      },
+      {
+        change:
+          "removed the request properties 'autoScaling, numShards, providerBackupEnabled, providerSettings, replicationFactor, replicationSpec, replicationSpecs/items/regionsConfig'",
+        changeCode: 'request-property-removed',
+        backwardCompatible: true,
+      },
+      {
+        change: "the response optional properties 'mongoDBVersion, replicationSpecs/items/id' became read-only",
+        changeCode: 'response-optional-property-became-read-only',
+        backwardCompatible: true,
+        hideFromChangelog: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/clusters/{clusterName}',
+    httpMethod: 'GET',
+    operationId: 'getCluster',
+    tag: 'Clusters',
+    changes: [
+      {
+        change: "the 'backupEnabled' response's property default value 'false' was added",
+        changeCode: 'response-property-default-value-added',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'numShards' response's property default value '1.00' was removed",
+        changeCode: 'response-property-default-value-removed',
+        backwardCompatible: true,
+      },
+      {
+        change: "the response optional properties 'mongoDBVersion, replicationSpecs/items/id' became read-only",
+        changeCode: 'response-optional-property-became-read-only',
+        backwardCompatible: true,
+        hideFromChangelog: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/clusters/{clusterName}',
+    httpMethod: 'PATCH',
+    operationId: 'updateCluster',
+    tag: 'Clusters',
+    changes: [
+      {
+        change: "the 'replicationSpecs/items/numShards' request property's min was set to '1.00'",
+        changeCode: 'request-property-min-set',
+        backwardCompatible: true,
+      },
+      {
+        change: "added the new optional request property 'replicationSpecs/items/regionConfigs'",
+        changeCode: 'new-optional-request-property',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request optional property 'mongoDBVersion' became read-only",
+        changeCode: 'request-optional-property-became-read-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request optional property 'replicationSpecs/items/id' became read-only",
+        changeCode: 'request-optional-property-became-read-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'backupEnabled' request property default value 'false' was added",
+        changeCode: 'request-property-default-value-added',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'numShards' request property default value '1.00' was removed",
+        changeCode: 'request-property-default-value-removed',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'backupEnabled' response's property default value 'false' was added",
+        changeCode: 'response-property-default-value-added',
+        backwardCompatible: true,
+      },
+      {
+        change: "the 'numShards' response's property default value '1.00' was removed",
+        changeCode: 'response-property-default-value-removed',
+        backwardCompatible: true,
+      },
+      {
+        change:
+          "removed the request properties 'autoScaling, numShards, providerBackupEnabled, providerSettings, replicationFactor, replicationSpec, replicationSpecs/items/regionsConfig'",
+        changeCode: 'request-property-removed',
+        backwardCompatible: true,
+      },
+      {
+        change: "the response optional properties 'mongoDBVersion, replicationSpecs/items/id' became read-only",
+        changeCode: 'response-optional-property-became-read-only',
+        backwardCompatible: true,
+        hideFromChangelog: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/customZoneMapping',
+    httpMethod: 'POST',
+    operationId: 'createCustomZoneMapping',
+    tag: 'Global Clusters',
+    changes: [
+      {
+        change: "removed the request property 'customZoneMappings'",
+        changeCode: 'request-property-removed',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/clusters/{clusterName}/globalWrites/managedNamespaces',
+    httpMethod: 'POST',
+    operationId: 'createManagedNamespace',
+    tag: 'Global Clusters',
+    changes: [
+      {
+        change: "the request optional property 'isCustomShardKeyHashed' became not write-only",
+        changeCode: 'request-optional-property-became-not-write-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request optional property 'isShardKeyUnique' became not write-only",
+        changeCode: 'request-optional-property-became-not-write-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request optional property 'numInitialChunks' became not write-only",
+        changeCode: 'request-optional-property-became-not-write-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request optional property 'presplitHashedZones' became not write-only",
+        changeCode: 'request-optional-property-became-not-write-only',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request property 'collection' became optional",
+        changeCode: 'request-property-became-optional',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request property 'customShardKey' became optional",
+        changeCode: 'request-property-became-optional',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request property 'db' became optional",
+        changeCode: 'request-property-became-optional',
+        backwardCompatible: true,
+      },
+      {
+        change: "the request required property 'customShardKey' became not read-only",
+        changeCode: 'request-required-property-became-not-read-only',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams',
+    httpMethod: 'GET',
+    operationId: 'listStreamInstances',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams',
+    httpMethod: 'POST',
+    operationId: 'createStreamInstance',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}',
+    httpMethod: 'DELETE',
+    operationId: 'deleteStreamInstance',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}',
+    httpMethod: 'GET',
+    operationId: 'getStreamInstance',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}',
+    httpMethod: 'PATCH',
+    operationId: 'updateStreamInstance',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}/connections',
+    httpMethod: 'GET',
+    operationId: 'listStreamConnections',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}/connections',
+    httpMethod: 'POST',
+    operationId: 'createStreamConnection',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}/connections/{connectionName}',
+    httpMethod: 'DELETE',
+    operationId: 'deleteStreamConnection',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}/connections/{connectionName}',
+    httpMethod: 'GET',
+    operationId: 'getStreamConnection',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/groups/{groupId}/streams/{tenantName}/connections/{connectionName}',
+    httpMethod: 'PATCH',
+    operationId: 'updateStreamConnection',
+    tag: 'Streams',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/orgs/{orgId}/serviceAccounts',
+    httpMethod: 'GET',
+    operationId: 'listServiceAccounts',
+    tag: 'Organizations',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/orgs/{orgId}/serviceAccounts',
+    httpMethod: 'POST',
+    operationId: 'createServiceAccount',
+    tag: 'Organizations',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/orgs/{orgId}/serviceAccounts/{serviceAccountId}',
+    httpMethod: 'DELETE',
+    operationId: 'deleteServiceAccount',
+    tag: 'Organizations',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/orgs/{orgId}/serviceAccounts/{serviceAccountId}',
+    httpMethod: 'GET',
+    operationId: 'getServiceAccount',
+    tag: 'Organizations',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/orgs/{orgId}/serviceAccounts/{serviceAccountId}',
+    httpMethod: 'PATCH',
+    operationId: 'updateServiceAccount',
+    tag: 'Organizations',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/orgs/{orgId}/serviceAccounts/{serviceAccountId}/secrets/{serviceAccountId}/secrets',
+    httpMethod: 'POST',
+    operationId: 'createServiceAccountSecret',
+    tag: 'Organizations',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+  {
+    path: '/api/atlas/v2/orgs/{orgId}/serviceAccounts/{serviceAccountId}/secrets/{serviceAccountId}/secrets/{secretId}',
+    httpMethod: 'DELETE',
+    operationId: 'deleteServiceAccountSecret',
+    tag: 'Organizations',
+    changes: [
+      {
+        change: 'endpoint added',
+        changeCode: 'endpoint-added',
+        backwardCompatible: true,
+      },
+    ],
+  },
+];
