@@ -74,7 +74,7 @@ const ChatbotUi = ({ template }) => {
   const { snootyEnv } = useSiteMetadata();
 
   const CHATBOT_SERVER_BASE_URL =
-    snootyEnv === 'production' || snootyEnv === 'dotcomprd'
+    snootyEnv === 'dotcomprd'
       ? 'https://knowledge.mongodb.com/api/v1'
       : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
