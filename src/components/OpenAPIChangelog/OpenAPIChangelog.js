@@ -72,6 +72,15 @@ const StyledLoadingSkeleton = styled.div`
 const OpenAPIChangelog = () => {
   const { snootyEnv } = useSiteMetadata();
   const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
+  //updatedChangeLog = changelog.filter()
+  //console.log(changelog);
+
+  //changelog
+  //date
+  //paths
+  //versions
+  //changes
+
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
   const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId, snootyEnv), [index, snootyEnv]);
 
@@ -190,3 +199,5 @@ const OpenAPIChangelog = () => {
 };
 
 export default OpenAPIChangelog;
+
+//filter here

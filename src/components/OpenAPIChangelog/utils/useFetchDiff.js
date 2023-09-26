@@ -20,6 +20,7 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
       setIsLoading(true);
       fetchOADiff(index.runId, fromAndToDiffLabel, snootyEnv)
         .then((response) => {
+          //add filtering to take out hideFromChangelog
           setDiff(response);
           setIsLoading(false);
         })
