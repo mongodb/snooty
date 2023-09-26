@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
-import Loadable from '@loadable/component';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import useScreenSize from '../hooks/useScreenSize';
 import ComponentFactory from './ComponentFactory';
@@ -11,8 +10,6 @@ import { TabContext } from './Tabs/tab-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
-
-const FeedbackHeading = Loadable(() => import('./Widgets/FeedbackWidget/FeedbackHeading'));
 
 const h2Styling = css`
   margin-top: 16px;
@@ -41,10 +38,9 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const asHeading = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
-  const hidefeedbackheader = page?.options?.hidefeedback === 'header' || page?.options?.hidefeedback === 'page';
   const { selectors } = useContext(TabContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
-  const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && (hasSelectors || !hidefeedbackheader));
+  const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
 
   return (
     <>
@@ -53,9 +49,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
         wrapper={(children) => (
           <HeadingContainer stackVertically={isMobile}>
             {children}
-            <ChildContainer isStacked={isMobile}>
-              {hasSelectors ? <TabSelectors /> : <FeedbackHeading isStacked={isMobile} />}
-            </ChildContainer>
+            <ChildContainer isStacked={isMobile}>{hasSelectors && <TabSelectors />}</ChildContainer>
           </HeadingContainer>
         )}
       >

@@ -174,10 +174,6 @@ exports[`card correctly with and without url 1`] = `
   color: #016BF8;
 }
 
-.emotion-10>svg {
-  margin-left: 3px;
-}
-
 .emotion-10::after {
   content: '';
   position: absolute;

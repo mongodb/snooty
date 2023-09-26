@@ -5,11 +5,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import 'react-loading-skeleton/dist/skeleton.css';
-
-const CHATBOT_SERVER_BASE_URL =
-  process.env.SNOOTY_ENV === 'dotcomprd'
-    ? 'https://knowledge.mongodb.com/api/v1'
-    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const SKELETON_BORDER_RADIUS = '12px';
 
@@ -75,6 +71,13 @@ const StyledChatBotUiContainer = styled.div`
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ChatbotUi = ({ template }) => {
+  const { snootyEnv } = useSiteMetadata();
+
+  const CHATBOT_SERVER_BASE_URL =
+    snootyEnv === 'dotcomprd'
+      ? 'https://knowledge.mongodb.com/api/v1'
+      : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
