@@ -44,7 +44,9 @@ export const MoreWays = ({ nodeData: { children, options, argument }, ...rest })
         <Video nodeData={{ argument: [{ refuri: options.video_url }] }} />
       </VideoItem>
       <DescriptionItem>
-        <Subtitle className={cx(headerStyles)}>{argument[0]?.value}</Subtitle>
+        <Subtitle as="h3" className={cx(headerStyles)}>
+          {argument[0]?.value}
+        </Subtitle>
         {children.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} {...rest} showLinkArrow={true} hideExternalIcon={true} />
         ))}
