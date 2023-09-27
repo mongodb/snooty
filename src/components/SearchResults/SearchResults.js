@@ -22,7 +22,10 @@ import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
+import { Facets } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
+
+const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
 
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_COLUMN_WIDTH = '173px';
@@ -40,6 +43,14 @@ const commonTextStyling = css`
   letter-spacing: 0.5px;
   margin: 0;
 `;
+
+// const facetStyling = css`
+//   grid-area: filters;
+
+//   @media ${theme.screenSize.upToMedium} {
+//     display: none;
+//   }
+// `;
 
 const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
@@ -82,8 +93,15 @@ const FilterHeader = styled('h2')`
 const SearchResultsContainer = styled('div')`
   column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
-  grid-template-areas: 'header .' 'results filters';
-  grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+  ${SHOW_FACETS
+    ? `
+    grid-template-areas: 'header header' 'filters results';
+    grid-template-columns: ${FILTER_COLUMN_WIDTH} auto;
+  `
+    : `
+    grid-template-areas: 'header .' 'results filters';
+    grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+  `}
   margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
   max-width: 1150px;
   row-gap: ${theme.size.large};
@@ -479,10 +497,17 @@ const SearchResults = () => {
             </StyledSearchResults>
           </>
         )}
+
         {!isFirstLoad && searchFinished && (
           <FiltersContainer>
-            <FilterHeader>{specifySearchText}</FilterHeader>
-            <StyledSearchFilters />
+            {SHOW_FACETS ? (
+              <Facets />
+            ) : (
+              <>
+                <FilterHeader>{specifySearchText}</FilterHeader>
+                <StyledSearchFilters />
+              </>
+            )}
           </FiltersContainer>
         )}
         {showMobileFilters && isTabletOrMobile && <MobileFilters />}
