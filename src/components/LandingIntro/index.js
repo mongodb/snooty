@@ -64,7 +64,7 @@ const headerStyling = css`
 const LandingIntro = ({ nodeData: { children, argument } }) => (
   <FlexboxContainer>
     <DescriptionContainer>
-      <H3 className={cx(headerStyling)}>
+      <H3 as="h2" className={cx(headerStyling)}>
         {argument.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} />
         ))}
