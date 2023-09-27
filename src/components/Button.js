@@ -39,7 +39,7 @@ const Button = ({
       size={size}
       darkMode={darkMode}
       variant={variant}
-      rightGlyph={<Icon glyph={rightGlyph} />}
+      rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : null}
       {...componentProps}
     >
       {argument.map((child, i) => (
