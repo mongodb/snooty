@@ -10,7 +10,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -33,12 +33,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -48,6 +42,15 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 62px;
   font-family: 'MongoDB Value Serif','Times New Roman',serif;
   color: #00684A;
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -517,13 +520,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 45px;
-  background-color: #fff;
-  height: 152px;
-  position: relative;
-  place-self: center;
-  width: 100%;
 }
 
 .emotion-29:hover,
@@ -538,33 +534,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: rgba(231, 238, 236, 0.4);
   -webkit-transition: background-color 150ms ease-in;
   transition: background-color 150ms ease-in;
-}
-
-.emotion-29>div {
-  padding: 20px;
-  padding-left: 30px;
-}
-
-.emotion-29:hover,
-.emotion-29:focus {
-  color: unset;
-  -webkit-text-decoration: unset;
-  text-decoration: unset;
-}
-
-.emotion-29:hover>div,
-.emotion-29:focus>div {
-  background-color: unset!important;
-}
-
-.emotion-29:before {
-  content: '';
-  position: absolute;
-  top: calc(-16px / 2);
-  left: 0;
-  right: 0;
-  bottom: calc(-16px / 2);
-  background-color: transparent;
 }
 
 .emotion-31 {
@@ -783,10 +752,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: 'Euclid Circular A';
-  font-weight: bolder;
-  letter-spacing: 0.5px;
-  margin: 0;
   margin-bottom: 16px;
 }
 
@@ -1619,7 +1584,7 @@ exports[`Search Results Page does not return results for a given search term wit
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -1642,12 +1607,6 @@ exports[`Search Results Page does not return results for a given search term wit
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -1657,6 +1616,15 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 62px;
   font-family: 'MongoDB Value Serif','Times New Roman',serif;
   color: #00684A;
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -2055,8 +2023,6 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-20 {
   margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
   margin-top: calc(50vh - 28px - 40px - 166px / 2);
-  grid-area: results;
-  margin-top: 80px;
 }
 
 .emotion-22 {
@@ -2113,10 +2079,6 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: 'Euclid Circular A';
-  font-weight: bolder;
-  letter-spacing: 0.5px;
-  margin: 0;
   margin-bottom: 16px;
 }
 
@@ -3076,7 +3038,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -3099,12 +3061,6 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -3114,6 +3070,15 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   line-height: 62px;
   font-family: 'MongoDB Value Serif','Times New Roman',serif;
   color: #00684A;
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -3510,7 +3475,7 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -3533,12 +3498,6 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -3548,6 +3507,15 @@ exports[`Search Results Page renders loading images before returning no results 
   line-height: 62px;
   font-family: 'MongoDB Value Serif','Times New Roman',serif;
   color: #00684A;
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -4069,7 +4037,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -4092,12 +4060,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -4107,6 +4069,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
   line-height: 62px;
   font-family: 'MongoDB Value Serif','Times New Roman',serif;
   color: #00684A;
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -4628,7 +4599,7 @@ exports[`Search Results Page renders results from a given search term query para
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
   max-width: 1150px;
-  row-gap: 32px;
+  row-gap: 8px;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -4651,12 +4622,6 @@ exports[`Search Results Page renders results from a given search term query para
   grid-area: header;
 }
 
-.emotion-2>h1:first-of-type {
-  color: #00684A;
-  padding-bottom: 40px;
-  margin: unset;
-}
-
 .emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -4666,6 +4631,15 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 62px;
   font-family: 'MongoDB Value Serif','Times New Roman',serif;
   color: #00684A;
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
+  color: #00684A;
+  padding-bottom: 24px;
 }
 
 .emotion-5 {
@@ -5087,13 +5061,6 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-text-decoration: none;
   text-decoration: none;
   border-radius: 24px;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 45px;
-  background-color: #fff;
-  height: 152px;
-  position: relative;
-  place-self: center;
-  width: 100%;
 }
 
 .emotion-23:hover,
@@ -5108,33 +5075,6 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: rgba(231, 238, 236, 0.4);
   -webkit-transition: background-color 150ms ease-in;
   transition: background-color 150ms ease-in;
-}
-
-.emotion-23>div {
-  padding: 20px;
-  padding-left: 30px;
-}
-
-.emotion-23:hover,
-.emotion-23:focus {
-  color: unset;
-  -webkit-text-decoration: unset;
-  text-decoration: unset;
-}
-
-.emotion-23:hover>div,
-.emotion-23:focus>div {
-  background-color: unset!important;
-}
-
-.emotion-23:before {
-  content: '';
-  position: absolute;
-  top: calc(-16px / 2);
-  left: 0;
-  right: 0;
-  bottom: calc(-16px / 2);
-  background-color: transparent;
 }
 
 .emotion-25 {
@@ -5397,10 +5337,6 @@ exports[`Search Results Page renders results from a given search term query para
   line-height: 15px;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: 'Euclid Circular A';
-  font-weight: bolder;
-  letter-spacing: 0.5px;
-  margin: 0;
   margin-bottom: 16px;
 }
 

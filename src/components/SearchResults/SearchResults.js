@@ -1,7 +1,8 @@
 import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { css, Global } from '@emotion/react';
+import { Global } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -9,7 +10,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { palette } from '@leafygreen-ui/palette';
-import { H1, Overline } from '@leafygreen-ui/typography';
+import { H3, H1, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -41,6 +42,11 @@ const commonTextStyling = css`
   margin: 0;
 `;
 
+const headerStyle = css`
+  color: ${palette.green.dark2};
+  padding-bottom: 24px;
+`;
+
 const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
   must account for any margins added from using the blank landing template,
@@ -51,12 +57,6 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
-
-  > h1:first-of-type {
-    color: ${palette.green.dark2};
-    padding-bottom: 40px;
-    margin: unset;
-  }
 `;
 
 const FiltersContainer = styled('div')`
@@ -86,7 +86,7 @@ const SearchResultsContainer = styled('div')`
   grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
   margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
   max-width: 1150px;
-  row-gap: ${theme.size.large};
+  row-gap: ${theme.size.small};
 
   @media ${theme.screenSize.upTo2XLarge} {
     margin: ${theme.size.large} 40px ${theme.size.xlarge} 40px;
@@ -380,7 +380,9 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H1>Search Results</H1>
+          <H3 as={H1} className={cx(headerStyle)}>
+            Search Results
+          </H3>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
