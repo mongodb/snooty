@@ -1,5 +1,514 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Search Results Page Facets component renders all facets 1`] = `
+.emotion-0 {
+  margin-bottom: 36px;
+}
+
+.emotion-1 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.emotion-1 strong,
+.emotion-1 b {
+  font-weight: 700;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0 8px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #112733;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.emotion-7 {
+  color: #3D4F58;
+}
+
+<div
+  data-testid="facets-container"
+>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Genre
+    </p>
+    <div
+      data-checked="false"
+    >
+      Reference
+    </div>
+    <div
+      data-checked="false"
+    >
+      Tutorial
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Target Product
+    </p>
+    <div
+      data-checked="false"
+    >
+      Atlas
+    </div>
+    <div
+      data-checked="false"
+    >
+      BI Connector
+    </div>
+    <div
+      data-checked="false"
+    >
+      Cloud Manager
+    </div>
+    <div
+      data-checked="false"
+    >
+      Cluster-to-Cluster Sync
+    </div>
+    <div
+      data-checked="false"
+    >
+      Community Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+    >
+      Compass
+    </div>
+    <div
+      data-checked="false"
+    >
+      Database Tools
+    </div>
+    <div
+      data-checked="false"
+    >
+      Drivers
+    </div>
+    <div
+      data-checked="false"
+    >
+      Enterprise Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+    >
+      Kafka Connector
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB Analyzer
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB CLI
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB for VS Code
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB Shell
+    </div>
+    <div
+      data-checked="false"
+    >
+      Ops Manager
+    </div>
+    <div
+      data-checked="false"
+    >
+      Realm
+    </div>
+    <div
+      data-checked="false"
+    >
+      Relational Migrator
+    </div>
+    <div
+      data-checked="false"
+    >
+      Server
+    </div>
+    <div
+      data-checked="false"
+    >
+      Spark Connector
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Programming Language
+    </p>
+    <div
+      data-checked="false"
+    >
+      Objective C
+    </div>
+    <div
+      data-checked="false"
+    >
+      C
+    </div>
+    <div
+      data-checked="false"
+    >
+      C#
+    </div>
+    <div
+      data-checked="false"
+    >
+      C++
+    </div>
+    <div
+      data-checked="false"
+    >
+      Dart
+    </div>
+    <div
+      class="emotion-6"
+    >
+      <svg
+        aria-label="Chevron Down Icon"
+        class="emotion-7"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      Show more
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Search Results Page Facets component renders facets with selected values 1`] = `
+.emotion-0 {
+  margin-bottom: 36px;
+}
+
+.emotion-1 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.emotion-1 strong,
+.emotion-1 b {
+  font-weight: 700;
+}
+
+.emotion-4 {
+  margin-left: 22px;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0 8px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #112733;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.emotion-6 {
+  color: #3D4F58;
+}
+
+<div
+  data-testid="facets-container"
+>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Genre
+    </p>
+    <div
+      data-checked="false"
+    >
+      Reference
+    </div>
+    <div
+      data-checked="true"
+    >
+      Tutorial
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Target Product
+    </p>
+    <div
+      data-checked="true"
+    >
+      Atlas
+    </div>
+    <div
+      class="emotion-4"
+    >
+      <div
+        data-checked="false"
+      >
+        App Services
+      </div>
+      <div
+        data-checked="false"
+      >
+        Charts
+      </div>
+      <div
+        data-checked="true"
+      >
+        Atlas CLI
+      </div>
+      <div
+        data-checked="false"
+      >
+        Data API
+      </div>
+      <div
+        data-checked="false"
+      >
+        Data Federation
+      </div>
+      <div
+        class="emotion-5"
+      >
+        <svg
+          aria-label="Chevron Down Icon"
+          class="emotion-6"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        Show more
+      </div>
+    </div>
+    <div
+      data-checked="false"
+    >
+      BI Connector
+    </div>
+    <div
+      data-checked="false"
+    >
+      Cloud Manager
+    </div>
+    <div
+      data-checked="false"
+    >
+      Cluster-to-Cluster Sync
+    </div>
+    <div
+      data-checked="false"
+    >
+      Community Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+    >
+      Compass
+    </div>
+    <div
+      data-checked="false"
+    >
+      Database Tools
+    </div>
+    <div
+      data-checked="false"
+    >
+      Drivers
+    </div>
+    <div
+      data-checked="false"
+    >
+      Enterprise Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+    >
+      Kafka Connector
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB Analyzer
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB CLI
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB for VS Code
+    </div>
+    <div
+      data-checked="false"
+    >
+      MongoDB Shell
+    </div>
+    <div
+      data-checked="false"
+    >
+      Ops Manager
+    </div>
+    <div
+      data-checked="false"
+    >
+      Realm
+    </div>
+    <div
+      data-checked="false"
+    >
+      Relational Migrator
+    </div>
+    <div
+      data-checked="false"
+    >
+      Server
+    </div>
+    <div
+      data-checked="false"
+    >
+      Spark Connector
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Programming Language
+    </p>
+    <div
+      data-checked="false"
+    >
+      Objective C
+    </div>
+    <div
+      data-checked="false"
+    >
+      C
+    </div>
+    <div
+      data-checked="false"
+    >
+      C#
+    </div>
+    <div
+      data-checked="false"
+    >
+      C++
+    </div>
+    <div
+      data-checked="false"
+    >
+      Dart
+    </div>
+    <div
+      class="emotion-5"
+    >
+      <svg
+        aria-label="Chevron Down Icon"
+        class="emotion-6"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      Show more
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Search Results Page considers a given search filter query param and displays category and version tags 1`] = `
 <DocumentFragment>
   .emotion-0 {

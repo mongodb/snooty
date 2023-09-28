@@ -16,6 +16,12 @@ import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/moc
 
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 
+// Mock LG Checkbox component to avoid potential React incompatibilities with testing:
+// "Error: Uncaught [TypeError: e.addEventListener is not a function]"
+jest.mock('@leafygreen-ui/checkbox', () => {
+  return ({ label, checked }) => <div data-checked={checked}>{label}</div>;
+});
+
 // Check the search results include the property-filtered results
 const expectFilteredResults = (wrapper) => {
   // (1) as a tag below the search header, (2) as a tag on the search result
@@ -104,9 +110,9 @@ const clearAllFilters = async (wrapper, screenSize) => {
   tick();
 };
 
-function renderSearchResults() {
+function renderSearchResults({ showFacets }) {
   return render(
-    <SearchContextProvider>
+    <SearchContextProvider showFacets={showFacets}>
       <SearchResults />
     </SearchContextProvider>
   );
@@ -294,5 +300,33 @@ describe('Search Results Page', () => {
     expectUnfilteredResults(renderStitchResults);
     expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeFalsy();
     expect(navigateSpy).toHaveBeenCalledTimes(0);
+  });
+
+  // Note that snapshots might not be entirely accurate due to mocked LG component
+  describe.only('Facets component', () => {
+    const facetsContainerId = 'facets-container';
+
+    it('renders all facets', async () => {
+      let tree;
+      mockLocation('?q=test&page=1');
+      await act(async () => {
+        tree = renderSearchResults({ showFacets: true });
+      });
+      expect(tree.getByTestId(facetsContainerId)).toMatchSnapshot();
+    });
+    it('renders facets with selected values', async () => {
+      let tree;
+      mockLocation(
+        '?q=test&page=1&facets.genre=tutorial&facets.target_product=atlas&facets.target_product>atlas>sub_product=atlas-cli'
+      );
+      await act(async () => {
+        tree = renderSearchResults({ showFacets: true });
+      });
+      const facetsContainer = tree.getByTestId(facetsContainerId);
+      // Check that the number of checked items match the number of facets in mocked location
+      const numFacetsSelected = 3;
+      expect(facetsContainer.querySelectorAll('[data-checked=true]')).toHaveLength(numFacetsSelected);
+      expect(tree.getByTestId(facetsContainerId)).toMatchSnapshot();
+    });
   });
 });

@@ -6,7 +6,7 @@ const Facets = () => {
   const facets = useFacets();
 
   return (
-    <div>
+    <div data-testid="facets-container">
       {facets?.length > 0 &&
         facets.map((facetOption) => {
           return <FacetOption key={facetOption.id} facetOption={facetOption} />;
