@@ -161,8 +161,8 @@ const StyledChapterNumberLabel = styled(ChapterNumberLabel)`
 
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
-  { glyph: 'Person', title: 'Join our community', url: 'https://community.mongodb.com/' },
-  { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
+  { glyph: 'Person', title: 'Join our community', url: 'https://www.mongodb.com/community/' },
+  { glyph: 'University', title: 'Register for Courses', url: 'https://learn.mongodb.com/' },
 ];
 
 const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, eol }) => {
