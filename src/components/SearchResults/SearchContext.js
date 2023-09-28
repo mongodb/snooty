@@ -50,7 +50,7 @@ const getSelectedFacetParams = (searchParams) => {
   return selectedFacets;
 };
 
-const SearchContextProvider = ({ children, showFacets = false, }) => {
+const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
   // get vars from URL

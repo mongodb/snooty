@@ -91,10 +91,13 @@ const FilterHeader = styled('h2')`
 const SearchResultsContainer = styled('div')`
   column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
-  ${({ showFacets }) => showFacets ? `
+  ${({ showFacets }) =>
+    showFacets
+      ? `
     grid-template-areas: 'header header' 'filters results';
     grid-template-columns: ${FILTER_COLUMN_WIDTH} auto;
-  ` : `
+  `
+      : `
     grid-template-areas: 'header .' 'results filters';
     grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
   `}

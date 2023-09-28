@@ -42,7 +42,11 @@ const FacetOption = ({ className, facetOption: { name, id, options }, isNested =
 
   return (
     <div className={cx(optionStyle(isNested), className)}>
-      {!isNested && <Body className={cx(optionNameStyle)} weight={'bold'}>{name}</Body>}
+      {!isNested && (
+        <Body className={cx(optionNameStyle)} weight={'bold'}>
+          {name}
+        </Body>
+      )}
       {displayedOptions.map((facet) => {
         return <FacetValue key={facet.id} facetValue={facet} />;
       })}
