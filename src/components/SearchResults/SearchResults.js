@@ -25,8 +25,6 @@ import MobileFilters from './MobileFilters';
 import { Facets } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
-
 const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
@@ -93,12 +91,10 @@ const FilterHeader = styled('h2')`
 const SearchResultsContainer = styled('div')`
   column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
-  ${SHOW_FACETS
-    ? `
+  ${({ showFacets }) => showFacets ? `
     grid-template-areas: 'header header' 'filters results';
     grid-template-columns: ${FILTER_COLUMN_WIDTH} auto;
-  `
-    : `
+  ` : `
     grid-template-areas: 'header .' 'results filters';
     grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
   `}
@@ -264,6 +260,7 @@ const SearchResults = () => {
     searchPropertyMapping,
     showMobileFilters,
     setShowMobileFilters,
+    showFacets,
   } = useContext(SearchContext);
 
   const { isTabletOrMobile } = useScreenSize();
@@ -395,7 +392,7 @@ const SearchResults = () => {
           }
         `}
       />
-      <SearchResultsContainer>
+      <SearchResultsContainer showFacets={showFacets}>
         {/* new header for search bar */}
         <HeaderContainer>
           <H1>Search Results</H1>
@@ -500,8 +497,11 @@ const SearchResults = () => {
 
         {!isFirstLoad && searchFinished && (
           <FiltersContainer>
-            {SHOW_FACETS ? (
-              <Facets />
+            {showFacets ? (
+              <>
+                {/* Avoid showing Facets component to avoid clashing values with mobile filter */}
+                {!showMobileFilters && <Facets />}
+              </>
             ) : (
               <>
                 <FilterHeader>{specifySearchText}</FilterHeader>

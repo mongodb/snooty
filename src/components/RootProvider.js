@@ -9,6 +9,8 @@ import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 import { SearchContextProvider } from './SearchResults/SearchContext';
 
+const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
+
 const RootProvider = ({
   children,
   headingNodes,
@@ -31,7 +33,7 @@ const RootProvider = ({
           <TocContextProvider remoteMetadata={remoteMetadata}>
             <NavigationProvider>
               <SidenavContextProvider>
-                <SearchContextProvider>{children}</SearchContextProvider>
+                <SearchContextProvider showFacets={SHOW_FACETS}>{children}</SearchContextProvider>
               </SidenavContextProvider>
             </NavigationProvider>
           </TocContextProvider>

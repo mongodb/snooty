@@ -22,6 +22,7 @@ const SearchContext = createContext({
   setSelectedFacets: () => {},
   handleFacetChange: () => {},
   shouldAutofocus: false,
+  showFacets: false,
 });
 
 /**
@@ -49,7 +50,7 @@ const getSelectedFacetParams = (searchParams) => {
   return selectedFacets;
 };
 
-const SearchContextProvider = ({ children }) => {
+const SearchContextProvider = ({ children, showFacets = false, }) => {
   const { search } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
   // get vars from URL
@@ -158,6 +159,7 @@ const SearchContextProvider = ({ children }) => {
         handleFacetChange,
         showMobileFilters,
         setShowMobileFilters,
+        showFacets,
       }}
     >
       {children}
