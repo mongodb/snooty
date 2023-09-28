@@ -13,6 +13,10 @@ const optionStyle = (isNested) => css`
   ${!isNested && 'margin-bottom: 36px;'}
 `;
 
+const optionNameStyle = css`
+  margin-bottom: 8px;
+`;
+
 const showMoreStyle = css`
   display: flex;
   align-items: center;
@@ -38,7 +42,7 @@ const FacetOption = ({ className, facetOption: { name, id, options }, isNested =
 
   return (
     <div className={cx(optionStyle(isNested), className)}>
-      {!isNested && <Body weight={'medium'}>{name}</Body>}
+      {!isNested && <Body className={cx(optionNameStyle)} weight={'bold'}>{name}</Body>}
       {displayedOptions.map((facet) => {
         return <FacetValue key={facet.id} facetValue={facet} />;
       })}
