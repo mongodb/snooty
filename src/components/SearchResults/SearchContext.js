@@ -39,6 +39,7 @@ const getSelectedFacetParams = (searchParams) => {
       continue;
     }
 
+    // Reconstruct facet object
     const strippedKey = key.split(FACETS_KEY_PREFIX)[1];
     const facetIds = searchParams.getAll(key);
     facetIds.forEach((id) => {
