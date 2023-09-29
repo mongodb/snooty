@@ -96,10 +96,6 @@ a .emotion-0 {
   color: #016BF8;
 }
 
-.emotion-7>svg {
-  margin-left: 3px;
-}
-
 .emotion-7::after {
   content: '';
   position: absolute;

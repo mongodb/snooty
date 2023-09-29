@@ -4,7 +4,11 @@ import { cx } from '@leafygreen-ui/emotion';
 import { H3 } from '@leafygreen-ui/typography';
 
 const SectionHeader = ({ children, customStyles }) => {
-  return <H3 className={cx(customStyles)}>{children}</H3>;
+  return (
+    <H3 as="h2" className={cx(customStyles)}>
+      {children}
+    </H3>
+  );
 };
 
 SectionHeader.prototype = {

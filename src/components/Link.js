@@ -36,10 +36,6 @@ const gatsbyLinkStyling = css`
     color: ${palette.blue.base};
   }
 
-  > svg {
-    margin-left: 3px;
-  }
-
   &::after {
     content: '';
     position: absolute;
@@ -77,6 +73,16 @@ const Link = ({
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
+  //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
+  const decoration = showLinkArrow ? (
+    <span>
+      {' '}
+      <ArrowRightIcon role="presentation" size={12} />{' '}
+    </span>
+  ) : (
+    ''
+  );
+
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor) {
     if (!to.startsWith('/')) to = `/${to}`;
@@ -97,8 +103,6 @@ const Link = ({
         to = projectAndBranchPrefix + to;
       }
     }
-
-    const decoration = showLinkArrow ? <ArrowRightIcon role="presentation" size={12} /> : '';
 
     return (
       <GatsbyLink
@@ -124,11 +128,11 @@ const Link = ({
       className={joinClassNames(LGlinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
-      arrowAppearance={showLinkArrow ? 'persist' : 'none'}
       target={target}
       {...other}
     >
       {children}
+      {decoration}
     </LGLink>
   );
 };
