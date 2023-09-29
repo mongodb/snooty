@@ -123,12 +123,51 @@ const mockedAssociatedRepoInfo = {
         versionSelectorLabel: 'Stable',
         buildsWithSnooty: true,
       },
+      {
+        publishOriginalBranchName: true,
+        active: false,
+        aliases: ['test'],
+        gitBranchName: 'v1.0',
+        isStableBranch: true,
+        urlAliases: [],
+        urlSlug: 'v1.0',
+        versionSelectorLabel: 'v1.0',
+        buildsWithSnooty: true,
+      },
     ],
   },
 };
 
 const mountConsumer = () => {
   setProjectAndAssociatedProducts();
+  return render(
+    <VersionContextProvider repoBranches={cloudDocsRepoBranches} associatedReposInfo={mockedAssociatedRepoInfo}>
+      test consumer below
+      <TestConsumer />
+    </VersionContextProvider>
+  );
+};
+
+const mountAtlasCliConsumer = (eol) => {
+  const project = 'atlas-cli';
+  useStaticQuery.mockImplementationOnce(() => ({
+    site: {
+      siteMetadata: {
+        project: project,
+        parserBranch: eol ? 'v1.0' : 'master',
+      },
+    },
+    allSnootyMetadata: {
+      nodes: [
+        {
+          metadata: {
+            associated_products: [],
+          },
+        },
+      ],
+    },
+  }));
+
   return render(
     <VersionContextProvider repoBranches={cloudDocsRepoBranches} associatedReposInfo={mockedAssociatedRepoInfo}>
       test consumer below
@@ -179,8 +218,9 @@ describe('Version Context', () => {
             project: 'atlas-cli',
             branches: [
               { gitBranchName: 'master', isStableBranch: false, active: true },
-              { gitBranchName: 'v1.1', isStableBranch: true, active: true },
               { gitBranchName: 'v1.2', isStableBranch: true, active: true },
+              { gitBranchName: 'v1.1', isStableBranch: true, active: true },
+              { gitBranchName: 'v1.0', isStableBranch: false, active: false },
             ],
           };
         default:
@@ -216,7 +256,7 @@ describe('Version Context', () => {
     }
     for (let projectName in mockedAssociatedRepoInfo) {
       for (let branch of mockedAssociatedRepoInfo[projectName].branches) {
-        expect(await wrapper.findByText(getKey(projectName, branch.gitBranchName))).toBeTruthy();
+        if (branch.active) expect(await wrapper.findByText(getKey(projectName, branch.gitBranchName))).toBeTruthy();
       }
     }
 
@@ -250,5 +290,26 @@ describe('Version Context', () => {
       wrapper = mountConsumer();
     });
     expect(mockedFetchDocset).toHaveBeenCalled();
+  });
+
+  it('initializes activeVersions values with no EOL branches if current version is not EOL', async () => {
+    const project = 'atlas-cli';
+    await act(async () => {
+      wrapper = mountAtlasCliConsumer(false);
+    });
+    for (let branch of mockedAssociatedRepoInfo['atlas-cli'].branches) {
+      if (branch.active) expect(await wrapper.findByText(getKey(project, branch.gitBranchName))).toBeTruthy();
+      else expect(await wrapper.queryByText(getKey(project, branch.gitBranchName))).toBeNull();
+    }
+  });
+
+  it('initializes activeVersions values with EOL branches if current version is EOL', async () => {
+    const project = 'atlas-cli';
+    await act(async () => {
+      wrapper = mountAtlasCliConsumer(true);
+    });
+    for (let branch of mockedAssociatedRepoInfo['atlas-cli'].branches) {
+      expect(await wrapper.findByText(getKey(project, branch.gitBranchName))).toBeTruthy();
+    }
   });
 });
