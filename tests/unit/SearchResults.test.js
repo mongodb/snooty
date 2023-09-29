@@ -31,7 +31,10 @@ const expectFilteredResults = (wrapper) => {
   expect(wrapper.queryAllByText(UNFILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  expect(wrapper.queryByText(/stitch/).closest('a')).toHaveProperty('href', `http://localhost/${FILTERED_RESULT.url}`);
+  expect(wrapper.queryAllByText(/stitch/)[1].closest('a')).toHaveProperty(
+    'href',
+    `http://localhost/${FILTERED_RESULT.url}`
+  );
 
   // Check the dropdowns are filled in
   expectValuesForFilters(wrapper, 'Realm', 'Latest');
@@ -62,7 +65,7 @@ const expectUnfilteredResults = (wrapper) => {
   expect(wrapper.queryAllByText(FILTERED_RESULT.title).length).toBe(0);
 
   // Check the result does link to the provided doc
-  expect(wrapper.queryByText(/stitch/).closest('a')).toHaveProperty(
+  expect(wrapper.queryAllByText(/stitch/)[1].closest('a')).toHaveProperty(
     'href',
     `http://localhost/${UNFILTERED_RESULT.url}`
   );
