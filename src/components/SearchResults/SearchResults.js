@@ -42,14 +42,6 @@ const commonTextStyling = css`
   margin: 0;
 `;
 
-// const facetStyling = css`
-//   grid-area: filters;
-
-//   @media ${theme.screenSize.upToMedium} {
-//     display: none;
-//   }
-// `;
-
 const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
   must account for any margins added from using the blank landing template,
