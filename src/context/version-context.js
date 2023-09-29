@@ -89,7 +89,7 @@ const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   const { project, parserBranch } = metadata;
   const versions = {};
   const VERSION_KEY = 'branches';
-  const currentBranch = repoBranches?.[VERSION_KEY].find((b) => b.gitBranchName === parserBranch);
+  const currentBranch = repoBranches?.[VERSION_KEY]?.find((b) => b.gitBranchName === parserBranch);
   const filter = !currentBranch || currentBranch.active ? (b) => b.active : () => true;
   versions[project] = (repoBranches?.[VERSION_KEY] || []).filter(filter);
   for (const productName in associatedReposInfo) {
