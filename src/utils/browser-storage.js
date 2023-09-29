@@ -3,20 +3,29 @@ import { isBrowser } from './is-browser';
 const isValidStorage = isBrowser;
 
 export const setLocalValue = (key, value) => {
-  if (isValidStorage) {
-    const prevState = JSON.parse(window.localStorage.getItem('mongodb-docs'));
-    localStorage.setItem('mongodb-docs', JSON.stringify({ ...prevState, [key]: value }));
+  try {
+    if (isValidStorage) {
+      const prevState = JSON.parse(window.localStorage.getItem('mongodb-docs'));
+      localStorage.setItem('mongodb-docs', JSON.stringify({ ...prevState, [key]: value }));
+    }
+  } catch {
+    console.error('Error');
   }
 };
 
 export const getLocalValue = (key) => {
-  if (isValidStorage && JSON.parse(window.localStorage.getItem('mongodb-docs'))) {
-    const docsObj = JSON.parse(window.localStorage.getItem('mongodb-docs'));
-    if (docsObj) {
-      return docsObj[key];
+  try {
+    if (isValidStorage && JSON.parse(window.localStorage.getItem('mongodb-docs'))) {
+      const docsObj = JSON.parse(window.localStorage.getItem('mongodb-docs'));
+      if (docsObj) {
+        return docsObj[key];
+      }
     }
+    return undefined;
+  } catch {
+    console.error('Error');
+    return undefined;
   }
-  return undefined;
 };
 
 export const setSessionValue = (key, value) => {
