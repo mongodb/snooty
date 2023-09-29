@@ -71,13 +71,13 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
       res[repoBranch.project] = repoBranch;
       return res;
     }, {});
-    const versions = getDefaultVersions(metadata.project, fetchedRepoBranches, fetchedAssociatedReposInfo);
+    const versions = getDefaultVersions(metadata, fetchedRepoBranches, fetchedAssociatedReposInfo);
     const groups = getDefaultGroups(metadata.project, fetchedRepoBranches);
 
     return { versions, groups, hasEolBranches };
   } catch (e) {
     return {
-      versions: getDefaultVersions(metadata.project, repoBranches, associatedReposInfo),
+      versions: getDefaultVersions(metadata, repoBranches, associatedReposInfo),
       groups: getDefaultGroups(metadata.project, repoBranches),
       hasEolBranches,
     };
@@ -85,13 +85,15 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
   }
 };
 
-const getDefaultVersions = (project, repoBranches, associatedReposInfo) => {
+const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
+  const { project, parserBranch } = metadata;
   const versions = {};
   const VERSION_KEY = 'branches';
-  const activeFilter = (b) => b.active;
-  versions[project] = (repoBranches?.[VERSION_KEY] || []).filter(activeFilter);
+  const currentBranch = repoBranches?.[VERSION_KEY]?.find((b) => b.gitBranchName === parserBranch);
+  const filter = !currentBranch || currentBranch.active ? (b) => b.active : () => true;
+  versions[project] = (repoBranches?.[VERSION_KEY] || []).filter(filter);
   for (const productName in associatedReposInfo) {
-    versions[productName] = (associatedReposInfo[productName][VERSION_KEY] || []).filter(activeFilter);
+    versions[productName] = (associatedReposInfo[productName][VERSION_KEY] || []).filter(filter);
   }
   return versions;
 };
@@ -159,7 +161,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // expose the available versions for current and associated products
   const [availableVersions, setAvailableVersions] = useState(
-    getDefaultVersions(metadata.project, repoBranches, associatedReposInfo)
+    getDefaultVersions(metadata, repoBranches, associatedReposInfo)
   );
   const [availableGroups, setAvailableGroups] = useState(
     getDefaultGroups(metadata.project, repoBranches, associatedReposInfo)
