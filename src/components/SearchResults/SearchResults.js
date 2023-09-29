@@ -280,10 +280,12 @@ const SearchResults = () => {
     };
   }
 
-  //effect called to autofocus search box on page render
+  // effect called to autofocus search box on page render
   useEffect(() => {
     if (searchBoxRef.current) {
       searchBoxRef.current.focus();
+      // Add class for Smartling localization
+      searchBoxRef.current.classList.add('sl-search-input');
     }
   }, []);
 
@@ -393,6 +395,10 @@ const SearchResults = () => {
             }}
           />
           <ResultTag style={{ paddingTop: '10px' }}>
+            {/* Classname-attached searchTerm needed for Smartling localization */}
+            <span style={{ display: 'none' }} className="sl-search-keyword">
+              {searchTerm}
+            </span>
             {Number.isInteger(searchCount) && (
               <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
                 <>{searchCount} RESULTS</>
