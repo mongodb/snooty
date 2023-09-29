@@ -86,7 +86,7 @@ const DocumentBody = (props) => {
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
 
-  const { Template, useChatbot } = getTemplate(template);
+  const { Template, useChatbot, isSearch } = getTemplate(template);
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
@@ -101,7 +101,7 @@ const DocumentBody = (props) => {
         isInPresentationMode={isInPresentationMode}
       >
         <FootnoteContext.Provider value={{ footnotes }}>
-          <Template {...props} useChatbot={useChatbot}>
+          <Template {...props} useChatbot={useChatbot} isSearch={isSearch}>
             {pageNodes.map((child, index) => (
               <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
             ))}
