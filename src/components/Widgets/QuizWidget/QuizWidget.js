@@ -9,6 +9,7 @@ import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { getPlaintext } from '../../../utils/get-plaintext';
+import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 import { useRealmFuncs } from './RealmFuncs';
 import { RealmAppProvider } from './RealmApp';
 import { quizAppId } from './realm-constants';
@@ -119,7 +120,7 @@ const QuizWidget = ({ nodeData: { children, options } }) => {
   const [selectedResponse, setSelectedResponse] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { quizId, quizDate } = unwrappedOptions(options);
-  const { project } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   const shouldRender = verifySingleAnswerCount(choices) && question?.type === 'paragraph';
   return (
     shouldRender && (

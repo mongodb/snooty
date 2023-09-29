@@ -4,6 +4,7 @@ import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { fetchDocuments } from '../utils/realm';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { isGatsbyPreview } from '../utils/is-gatsby-preview';
 import { VersionContext } from './version-context';
 
 const TocContext = createContext({
@@ -14,16 +15,22 @@ const TocContext = createContext({
 // filters all available ToC by currently selected version via VersionContext
 const TocContextProvider = ({ children, remoteMetadata }) => {
   const { activeVersions, setActiveVersions, availableVersions, showVersionDropdown } = useContext(VersionContext);
-  const { toctree, associated_products: associatedProducts } = useSnootyMetadata();
-  const { database, project, parserBranch } = useSiteMetadata();
+  const { project, branch, toctree, associated_products: associatedProducts } = useSnootyMetadata();
+  const { database } = useSiteMetadata();
   const [activeToc, setActiveToc] = useState(remoteMetadata?.toctree || toctree);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const getTocMetadata = useCallback(async () => {
+    // Embedded versioning is not expected to work in staging builds, so we should
+    // be able to safely return the default toctree.
+    if (isGatsbyPreview()) {
+      return toctree;
+    }
+
     try {
       const filter = {
-        project: `${project}`,
-        branch: parserBranch,
+        project,
+        branch,
       };
       const findOptions = {
         sort: { build_id: -1 },
@@ -41,7 +48,7 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
       return remoteMetadata?.toctree || toctree;
     }
     // below dependents are server constants
-  }, [project, parserBranch, associatedProducts, showVersionDropdown, database, toctree, remoteMetadata]);
+  }, [project, branch, associatedProducts, showVersionDropdown, database, toctree, remoteMetadata]);
 
   const setInitVersion = useCallback(
     (tocNode) => {

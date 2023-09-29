@@ -16,8 +16,8 @@ const getBreadcrumbList = (breadcrumbs, siteUrl) =>
   }));
 
 const BreadcrumbSchema = ({ slug }) => {
-  const { project, siteUrl } = useSiteMetadata();
-  const { parentPaths, title: siteTitle } = useSnootyMetadata();
+  const { siteUrl } = useSiteMetadata();
+  const { project, parentPaths, title: siteTitle } = useSnootyMetadata();
   const breadcrumbs = parentPaths[slug] ?? [];
   const breadcrumbList = [
     {
