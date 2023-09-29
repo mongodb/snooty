@@ -1,13 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { mockLocation } from '../utils/mock-location';
-import mockStaticQuery from '../utils/mockStaticQuery';
 import DocumentBody from '../../src/components/DocumentBody';
 import mockPageContext from './data/PageContext.test.json';
 import mockSnootyMetadata from './data/SnootyMetadata.json';
 
-beforeAll(() => {
-  mockStaticQuery({}, mockSnootyMetadata);
+jest.mock(`../../src/utils/use-snooty-metadata`, () => {
+  return () => mockSnootyMetadata;
 });
 
 describe('DocumentBody', () => {

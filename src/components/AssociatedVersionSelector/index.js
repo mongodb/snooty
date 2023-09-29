@@ -1,9 +1,9 @@
 import React, { useContext, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { VersionContext } from '../../context/version-context';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import Select, { Label } from '../Select';
 import { getUILabel } from '../VersionDropdown';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const buildChoices = (branches) => {
   return branches.map((branch) => ({
@@ -28,7 +28,7 @@ const StyledSelect = styled(Select)`
 `;
 
 const AssociatedVersionSelector = () => {
-  const { project } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   const { activeVersions, availableVersions, showVersionDropdown, onVersionSelect } = useContext(VersionContext);
 
   const onSelectChange = useCallback(

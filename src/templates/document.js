@@ -7,7 +7,6 @@ import InternalPageNav from '../components/InternalPageNav';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 
@@ -28,8 +27,7 @@ const StyledRightColumn = styled(RightColumn)`
 `;
 
 const Document = ({ children, pageContext: { slug, page, repoBranches, isAssociatedProduct } }) => {
-  const { project } = useSiteMetadata();
-  const { slugToTitle, title, toctreeOrder } = useSnootyMetadata();
+  const { project, slugToTitle, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const isLanding = project === 'landing';
@@ -56,12 +54,14 @@ const Document = ({ children, pageContext: { slug, page, repoBranches, isAssocia
 
 Document.propTypes = {
   pageContext: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+  }).isRequired,
+  data: PropTypes.shape({
     page: PropTypes.shape({
       children: PropTypes.array,
       options: PropTypes.object,
     }).isRequired,
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
 
 export default Document;
