@@ -6,7 +6,9 @@ import { act } from 'react-dom/test-utils';
 import { VersionContextProvider, VersionContext, STORAGE_KEY } from '../../src/context/version-context';
 import * as browserStorage from '../../src/utils/browser-storage';
 import * as realm from '../../src/utils/realm';
+import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 
+const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 const project = 'cloud-docs';
 const setProjectAndAssociatedProducts = () => {
@@ -17,10 +19,7 @@ const setProjectAndAssociatedProducts = () => {
       },
     },
   }));
-};
-
-jest.mock(`../../src/utils/use-snooty-metadata`, () => {
-  return () => ({
+  snootyMetadataMock.mockImplementation(() => ({
     project,
     associated_products: [
       {
@@ -28,8 +27,8 @@ jest.mock(`../../src/utils/use-snooty-metadata`, () => {
         versions: ['v1.1', 'v1.2', 'master'],
       },
     ],
-  });
-});
+  }));
+};
 
 const getKey = (project, branchName) => `${project}-${branchName}`;
 
@@ -154,16 +153,14 @@ const mountAtlasCliConsumer = (eol) => {
         parserBranch: eol ? 'v1.0' : 'master',
       },
     },
-    allSnootyMetadata: {
-      nodes: [
-        {
-          metadata: {
-            associated_products: [],
-          },
-        },
-      ],
-    },
   }));
+
+  snootyMetadataMock.mockImplementationOnce(() => {
+    return {
+      project,
+      associated_products: [],
+    };
+  });
 
   return render(
     <VersionContextProvider repoBranches={cloudDocsRepoBranches} associatedReposInfo={mockedAssociatedRepoInfo}>
