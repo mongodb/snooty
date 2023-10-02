@@ -1,15 +1,28 @@
 import { expect, jest, test } from '@jest/globals';
-import { setLocalValue } from '../../src/utils/browser-storage';
+import { setLocalValue, getLocalValue } from '../../src/utils/browser-storage';
 
-jest.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
+const errMsg = 'getItem error';
+const mockLocalStorage = jest.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
   return {
     getItem: (key) => {
-      throw new Error('Testing error in browser-storage.test.js');
+      throw new Error(errMsg);
     },
   };
 });
 
-test('browser loads if setLocalValue breaks', () => {
-  expect(window.localStorage.getItem).toThrow();
-  expect(setLocalValue).not.toThrow();
+describe('when rendering in the browser', () => {
+  test('setLocalValue does not break if no storage', () => {
+    expect(window.localStorage.getItem).toThrowError(errMsg);
+    expect(setLocalValue).not.toThrow();
+  });
+
+  test('getLocalValue does not break if no storage', () => {
+    expect(window.localStorage.getItem).toThrowError(errMsg);
+    expect(getLocalValue).not.toThrow();
+  });
+});
+
+// // reset window.localStorage.getItem just so we don't mess up any global objects
+afterAll(() => {
+  mockLocalStorage.mockRestore();
 });
