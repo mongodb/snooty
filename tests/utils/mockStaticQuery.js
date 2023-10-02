@@ -1,13 +1,10 @@
 import * as Gatsby from 'gatsby';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
-const mockStaticQuery = (mockSiteMetadata = {}, mockSnootyMetadata = {}) => {
+const mockStaticQuery = (mockSiteMetadata = {}) => {
   useStaticQuery.mockImplementation(() => ({
     site: {
       siteMetadata: mockSiteMetadata,
-    },
-    allSnootyMetadata: {
-      nodes: [{ metadata: mockSnootyMetadata }],
     },
   }));
 };

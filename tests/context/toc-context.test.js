@@ -97,6 +97,7 @@ const setMocks = () => {
   }));
 
   snootyMetadataMock.mockImplementation(() => ({
+    branch: 'master',
     toctree: sampleTocTree,
   }));
 

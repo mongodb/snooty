@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { useSiteMetadata } from '../hooks/use-site-metadata.js';
 import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
+import useSnootyMetadata from '../utils/use-snooty-metadata.js';
 
 const CONTENT_MAX_WIDTH = 1200;
 
@@ -165,7 +165,7 @@ const Wrapper = styled('main')`
 `;
 
 const ProductLanding = ({ children }) => {
-  const { project } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
   const isRealm = project === 'realm';
