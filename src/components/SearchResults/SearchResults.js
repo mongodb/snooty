@@ -9,7 +9,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { palette } from '@leafygreen-ui/palette';
-import { H1, Overline } from '@leafygreen-ui/typography';
+import { H3, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -54,7 +54,7 @@ const HeaderContainer = styled('div')`
 
   > h1:first-of-type {
     color: ${palette.green.dark2};
-    padding-bottom: 40px;
+    padding-bottom: 24px;
     margin: unset;
   }
 `;
@@ -382,7 +382,7 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H1>Search Results</H1>
+          <H3 as="h1"> Search Results</H3>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
