@@ -68,8 +68,8 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-const AVAILABLE_LANGUAGES = ['English', '简体中文'];
 const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
+const AVAILABLE_LANGUAGES = ['English', '简体中文'];
 
 const DocumentBody = (props) => {
   const {
@@ -82,19 +82,17 @@ const DocumentBody = (props) => {
     if (!HIDE_UNIFIED_FOOTER_LOCALE) {
       const footer = document.getElementById('footer-container');
       const footerUlElement = footer?.querySelector('ul[role=listbox]');
-
       if (footerUlElement) {
         // For DOP-4060 we only want to support English and Simple Chinese (for now)
-        const children = Array.from(footerUlElement.children).reduce((accum, child) => {
-          if (AVAILABLE_LANGUAGES.includes(child.innerText)) {
-            accum.push(child);
+        const availableOptions = Array.from(footerUlElement.childNodes).reduce((accumulator, child) => {
+          if (AVAILABLE_LANGUAGES.includes(child.textContent)) {
+            accumulator.push(child);
           }
-
-          return accum;
+          return accumulator;
         }, []);
 
         footerUlElement.innerHTML = null;
-        children.forEach((child) => {
+        availableOptions.forEach((child) => {
           footerUlElement.appendChild(child);
         });
       }
