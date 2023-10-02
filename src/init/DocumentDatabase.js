@@ -48,6 +48,10 @@ class RealmInterface {
     return this.realmClient.callFunction('fetchDocument', database, collectionName, query);
   }
 
+  async fetchDocset(matchConditions = { project: siteMetadata.project }) {
+    return this.realmClient.callFunction('fetchDocset', DB, matchConditions);
+  }
+
   async updateOAChangelogMetadata(metadata) {
     return this.realmClient.callFunction('updateOAChangelogMetadata', metadata);
   }
@@ -126,6 +130,10 @@ class RealmDocumentDatabase {
 
   async fetchDocument(database, collectionName, query) {
     return this.realmInterface.fetchDocument(database, collectionName, query);
+  }
+
+  async fetchDocset(matchConditions) {
+    return this.realmInterface.fetchDocset(matchConditions);
   }
 
   async updateOAChangelogMetadata(metadata) {
