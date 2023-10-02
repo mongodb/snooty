@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
@@ -68,10 +68,29 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 };
 
 const DocumentBody = (props) => {
+  const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
+
   const {
     location,
     pageContext: { page, slug, template },
   } = props;
+
+  useEffect(() => {
+    // A workaround to remove the other locale options.
+    if (!HIDE_UNIFIED_FOOTER_LOCALE) {
+      const footer = document.querySelector('[data-testid=consistent-footer');
+      const footerUlElement = footer?.querySelector('[data-testid=options]');
+      if (footerUlElement) {
+        // For DOP-4060 we only want to support English and Simple Chinese (for now)
+        const en = footerUlElement.firstChild;
+        const simpleChinese = footerUlElement.lastChild;
+        footerUlElement.innerHTML = null;
+        footerUlElement.appendChild(en);
+        footerUlElement.appendChild(simpleChinese);
+      }
+    }
+  }, [HIDE_UNIFIED_FOOTER_LOCALE]);
+
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
@@ -89,6 +108,17 @@ const DocumentBody = (props) => {
   const { Template, useChatbot } = getTemplate(template);
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+
+  const onSelectLocale = (locale) => {
+    const localeHrefMap = {
+      'zh-cn': 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/zh-cn/docs-qa/',
+      'en-us': 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/,',
+    };
+
+    if (typeof window !== 'undefined') {
+      window.location.href = localeHrefMap[locale];
+    }
+  };
 
   return (
     <>
@@ -110,7 +140,7 @@ const DocumentBody = (props) => {
       </Widgets>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer">
-          <UnifiedFooter hideLocale={true} />
+          <UnifiedFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
         </div>
       )}
     </>
