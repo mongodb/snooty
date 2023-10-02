@@ -1,20 +1,15 @@
 import { setLocalValue } from '../../src/utils/browser-storage';
 import { expect, jest, test } from '@jest/globals';
 
-Object.defineProperty(window, 'localStorage', {
-  value: {
-    getItem: jest.fn(),
-  },
-});
-
-const mockGetItem = jest.spyOn(window.localStorage, 'getItem');
-
-// mock window.localStorage.getItem so it always throws an error
-mockGetItem.mockImplementation((key) => {
-  throw new Error('Error in test');
+jest.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
+  return {
+    getItem: (key) => {
+      throw new Error('Test');
+    },
+  };
 });
 
 test('browser loads if setLocalValue breaks', () => {
-  expect(mockGetItem).toThrow();
+  expect(window.localStorage.getItem).toThrow();
   expect(setLocalValue).not.toThrow();
 });
