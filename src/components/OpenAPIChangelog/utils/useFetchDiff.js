@@ -11,6 +11,7 @@ const hideDiffChanges = (diffData) => {
     }
     return path;
   };
+
   diffData = diffData.map(pathUpdate);
   return diffData.filter((path) => path !== null && path.changes !== null && path.changes.length !== 0);
 };
