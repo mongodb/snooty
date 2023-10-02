@@ -1,15 +1,11 @@
-import { useStaticQuery, graphql } from 'gatsby';
+import React from 'react';
+
+const MetadataContext = React.createContext();
 
 export default function useSnootyMetadata() {
-  const data = useStaticQuery(graphql`
-    query Metadata {
-      allSnootyMetadata {
-        nodes {
-          metadata
-        }
-      }
-    }
-  `);
+  return React.useContext(MetadataContext);
+}
 
-  return data.allSnootyMetadata.nodes[0].metadata;
+export function MetadataProvider({ children, metadata }) {
+  return <MetadataContext.Provider value={metadata}>{children}</MetadataContext.Provider>;
 }

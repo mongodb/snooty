@@ -1,6 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { mockLocation } from '../utils/mock-location';
 import ContentsListItem from '../../src/components/Contents/ContentsListItem';
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 describe('ContentsListItem', () => {
   it('renders correctly when active or inactive', () => {

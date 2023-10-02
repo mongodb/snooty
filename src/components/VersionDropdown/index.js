@@ -8,6 +8,7 @@ import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-slug';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -90,11 +91,11 @@ const createOption = (branch) => {
 };
 
 const VersionDropdown = ({ eol }) => {
-  const siteMetadata = useSiteMetadata();
-  const { parserBranch, project } = siteMetadata;
+  const { parserBranch } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
-  let branches = availableVersions[siteMetadata.project];
-  let groups = availableGroups[siteMetadata.project];
+  let branches = availableVersions[project];
+  let groups = availableGroups[project];
 
   const onSelectChange = useCallback(
     (value) => {
