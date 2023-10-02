@@ -1,6 +1,4 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { setLocalValue, getLocalValue } from '../../src/utils/browser-storage';
+import { setLocalValue } from '../../src/utils/browser-storage';
 import { expect, jest, test } from '@jest/globals';
 
 Object.defineProperty(window, 'localStorage', {
