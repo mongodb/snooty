@@ -9,6 +9,7 @@ import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -78,8 +79,8 @@ const DocumentBody = (props) => {
   useEffect(() => {
     // A workaround to remove the other locale options.
     if (!HIDE_UNIFIED_FOOTER_LOCALE) {
-      const footer = document.querySelector('[data-testid=consistent-footer');
-      const footerUlElement = footer?.querySelector('[data-testid=options]');
+      const footer = document.getElementById('footer-container');
+      const footerUlElement = footer?.querySelector('ul');
       if (footerUlElement) {
         // For DOP-4060 we only want to support English and Simple Chinese (for now)
         const en = footerUlElement.firstChild;
@@ -115,7 +116,7 @@ const DocumentBody = (props) => {
       'en-us': 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/,',
     };
 
-    if (typeof window !== 'undefined') {
+    if (isBrowser) {
       window.location.href = localeHrefMap[locale];
     }
   };
@@ -139,7 +140,7 @@ const DocumentBody = (props) => {
         </FootnoteContext.Provider>
       </Widgets>
       {!isInPresentationMode && (
-        <div data-testid="consistent-footer">
+        <div data-testid="consistent-footer" id="footer-container">
           <UnifiedFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
         </div>
       )}
