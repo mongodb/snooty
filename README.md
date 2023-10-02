@@ -19,7 +19,7 @@ npm install --legacy-peer-deps
 
 ### .env file setup
 
-You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments. These variables let Snooty know where to look for your AST zip files, within DOP team's database. (You can also use [local AST files](#running-with-local-manifest-path)))
+You'll need to set some environment variables in two separate files at the root of this directory for separate production/development environments. These variables let Snooty know where to look for your AST zip files, within DOP team's database. (You can also use [local AST files](#running-with-local-manifest-path).)
 
 #### `.env.development`
 
@@ -80,6 +80,26 @@ GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
 GATSBY_SNOOTY_DEV=true
 ```
 
+### Running with Gatsby Cloud preview
+
+Snooty uses Gatsby Cloud to perform content staging builds for MongoDB documentation. These builds source their ASTs through the [Snooty Data API](https://github.com/mongodb/snooty-data-api) and require additional environment variables for setup. To emulate a Gatsby Cloud preview build locally, include the following in your `.env.development` file:
+
+```
+GATSBY_CLOUD_SITE_USER=<YOUR GITHUB USERNAME>
+```
+
+Since building with the Gatsby Cloud preview source plugin expects build data to be present in our team's database, please use the Autobuilder to perform one or more builds prior to running the frontend. Otherwise, use a different `GATSBY_CLOUD_SITE_USER`.
+
+When ready, run the following command:
+
+```shell
+npm run develop:preview
+```
+
+This command will run the `gatsby-source-snooty-preview` source plugin, where all AST data for the specified `GATSBY_CLOUD_SITE_USER` will be used to mimic a Gatsby Cloud site locally. All build data across every unique project + branch combination for that user will be built on the single site. To access the built content, go to `http://localhost:8000/<PROJECT>/<BRANCH>/<PAGE_PATH>`.
+
+Note that this process assumes that the default public Snooty Data API endpoint is being used. If the staging instance of the API is desired, you will need to set the `API_BASE` env to the staging URL, include the expected client credentials as environment variables (found in Parameter Store), and then run the build on the office VPN. Please see the team's Gatsby Cloud template sites as examples.
+
 ## Staging
 
 Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux
@@ -91,6 +111,10 @@ npm run build:clean:stage
 ```
 
 :warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
+
+### Staging with Gatsby Cloud preview
+
+If your changes specifically affect Gatsby Cloud preview builds, set up and use your own Gatsby Cloud site (denoted by GitHub username) in our team's organization. The feature branch can be assigned to the Gatsby Cloud site. Multiple feature branches in parallel may require the use of multiple Gatsby Cloud sites. See this [wiki page](https://wiki.corp.mongodb.com/display/DE/How+to+Set+Up+a+New+Gatsby+Cloud+Site) for help with setup.
 
 ## Releasing
 
@@ -166,5 +190,5 @@ We have set up a precommit hook that will format staged files. Prettier also off
 [React](https://reactjs.org/docs/getting-started.html)
 [Gatsby](https://www.gatsbyjs.com/docs/)
 [Emotion](https://emotion.sh/docs/introduction)
-[mongodb/stitch](http://stitch-sdks.s3-website-us-east-1.amazonaws.com/stitch-sdks/js/4/index.html)
+[mongodb/Realm](https://www.mongodb.com/docs/realm-sdks/js/latest/)
 [LeafyGreen UI](https://www.mongodb.design/)

@@ -1,17 +1,25 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+// Keep mockLocation on top to ensure mock is applied
+import { mockLocation } from '../utils/mock-location';
 import IA from '../../src/components/Sidenav/IA';
-import mockStaticQuery from '../utils/mockStaticQuery';
+import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 import sampleData from './data/IA.test.json';
 
+jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
+
 it('renders a simple page IA correctly', () => {
-  mockStaticQuery({}, {});
+  useSnootyMetadata.mockImplementation(() => ({}));
   const tree = render(<IA ia={sampleData.pageIA} />);
   expect(tree.asFragment()).toMatchSnapshot();
 });
 
 it('renders a page IA with IA linked data', () => {
-  mockStaticQuery({}, sampleData.iaTreeMetadata);
+  useSnootyMetadata.mockImplementation(() => sampleData.iaTreeMetadata);
   const mockIAData = [...sampleData.pageIA];
   // Programmatically add an ID for linked data, in case sample data order changes.
   for (const mockData of mockIAData) {

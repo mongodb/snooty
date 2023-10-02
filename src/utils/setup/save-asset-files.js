@@ -2,10 +2,10 @@ const fs = require('fs').promises;
 const path = require('path');
 
 const saveFile = async (file, data) => {
-  await fs.mkdir(path.join('static', path.dirname(file)), {
+  await fs.mkdir(path.join('public', path.dirname(file)), {
     recursive: true,
   });
-  await fs.writeFile(path.join('static', file), data, 'binary');
+  await fs.writeFile(path.join('public', file), data, 'binary');
 };
 
 // Write all assets to static directory
