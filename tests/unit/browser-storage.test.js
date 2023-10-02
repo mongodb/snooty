@@ -1,5 +1,5 @@
-import { setLocalValue } from '../../src/utils/browser-storage';
 import { expect, jest, test } from '@jest/globals';
+import { setLocalValue } from '../../src/utils/browser-storage';
 
 jest.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
   return {
