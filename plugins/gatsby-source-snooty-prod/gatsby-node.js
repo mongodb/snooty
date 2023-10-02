@@ -180,6 +180,7 @@ exports.createPages = async ({ actions }) => {
   let repoBranches = null;
   try {
     const repoInfo = await db.realmInterface.fetchDocset();
+    console.log('repoInfo', repoInfo);
     let errMsg;
 
     if (!repoInfo) {
