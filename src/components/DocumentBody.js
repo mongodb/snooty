@@ -68,9 +68,10 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-const DocumentBody = (props) => {
-  const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
+const AVAILABLE_LANGUAGES = ['English', '简体中文'];
+const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
 
+const DocumentBody = (props) => {
   const {
     location,
     pageContext: { page, slug, template },
@@ -80,17 +81,25 @@ const DocumentBody = (props) => {
     // A workaround to remove the other locale options.
     if (!HIDE_UNIFIED_FOOTER_LOCALE) {
       const footer = document.getElementById('footer-container');
-      const footerUlElement = footer?.querySelector('ul');
+      const footerUlElement = footer?.querySelector('ul[role=listbox]');
+
       if (footerUlElement) {
         // For DOP-4060 we only want to support English and Simple Chinese (for now)
-        const en = footerUlElement.firstChild;
-        const simpleChinese = footerUlElement.lastChild;
+        const children = Array.from(footerUlElement.children).reduce((accum, child) => {
+          if (AVAILABLE_LANGUAGES.includes(child.innerText)) {
+            accum.push(child);
+          }
+
+          return accum;
+        }, []);
+
         footerUlElement.innerHTML = null;
-        footerUlElement.appendChild(en);
-        footerUlElement.appendChild(simpleChinese);
+        children.forEach((child) => {
+          footerUlElement.appendChild(child);
+        });
       }
     }
-  }, [HIDE_UNIFIED_FOOTER_LOCALE]);
+  }, []);
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
