@@ -4,7 +4,7 @@ import { setLocalValue } from '../../src/utils/browser-storage';
 jest.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
   return {
     getItem: (key) => {
-      throw new Error('Test');
+      throw new Error('Testing error in browser-storage.test.js');
     },
   };
 });

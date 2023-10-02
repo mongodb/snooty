@@ -9,7 +9,7 @@ export const setLocalValue = (key, value) => {
       localStorage.setItem('mongodb-docs', JSON.stringify({ ...prevState, [key]: value }));
     }
   } catch {
-    console.error('Error');
+    console.error('Error setting localStorage value');
   }
 };
 
@@ -23,7 +23,7 @@ export const getLocalValue = (key) => {
     }
     return undefined;
   } catch {
-    console.error('Error');
+    console.error('Error getting localStorage value');
     return undefined;
   }
 };
