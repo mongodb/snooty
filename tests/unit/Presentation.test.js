@@ -10,6 +10,9 @@ jest.mock(`../../src/utils/use-snooty-metadata`, () => {
 });
 
 describe('DocumentBody', () => {
+  beforeAll(() => {
+    jest.spyOn(document, 'querySelector');
+  });
   it('renders the necessary elements', () => {
     mockLocation(null);
     render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
@@ -20,9 +23,8 @@ describe('DocumentBody', () => {
 
     if (!process.env.GATSBY_HIDE_UNIFIED_FOOTER_LOCALE) {
       const languageSelector = screen.getByTestId('options');
-      console.log('languageSelector', languageSelector);
       expect(languageSelector).toBeInTheDocument();
-      expect(languageSelector.querySelectorAll('li')).toHaveLength(9); // need to update this so it can render 2
+      expect(languageSelector.querySelectorAll('li')).toHaveLength(2);
     }
 
     const feedbackWidget = screen.getByText('Share Feedback');
