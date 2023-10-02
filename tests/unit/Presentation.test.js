@@ -18,6 +18,13 @@ describe('DocumentBody', () => {
     expect(footer).toBeVisible();
     expect(footer).toMatchSnapshot();
 
+    if (!process.env.GATSBY_HIDE_UNIFIED_FOOTER_LOCALE) {
+      const languageSelector = screen.getByTestId('options');
+      console.log('languageSelector', languageSelector);
+      expect(languageSelector).toBeInTheDocument();
+      expect(languageSelector.querySelectorAll('li')).toHaveLength(9); // need to update this so it can render 2
+    }
+
     const feedbackWidget = screen.getByText('Share Feedback');
     expect(feedbackWidget).toBeVisible();
     expect(feedbackWidget).toMatchSnapshot();
