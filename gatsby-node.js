@@ -85,28 +85,26 @@ const fetchChangelogData = async (runId, versions, s3Prefix) => {
     const unfilteredChangelog = await changelogResp.json();
 
     const hideChanges = (changelog) => {
-      const versionUpdate = (version) => {
-        if (version !== null && version.changes !== null) {
+      const versionUpdate = ({ ...version }) => {
+        if (version && version.changes) {
           version.changes = version.changes.filter((change) => !change.hideFromChangelog);
         }
         return version;
       };
 
       //pathUpdate takes the array of versions from the specific path passed in and takes each version and runs versionUpdate on it
-      const pathUpdate = (path) => {
+      const pathUpdate = ({ ...path }) => {
         path.versions = path.versions.map(versionUpdate);
         path.versions = path.versions.filter(
-          (version) => version && version.changes !== null && version.changes.length !== 0
+          (version) => version && version.changes !== null && version.changes.length
         );
         return path;
       };
 
       //dateUpdate takes the array of paths from the specific date section passed in and takes each path and runs pathUpdate on it
-      const dateUpdate = (dateSection) => {
+      const dateUpdate = ({ ...dateSection }) => {
         dateSection.paths = dateSection.paths.map(pathUpdate);
-        dateSection.paths = dateSection.paths.filter(
-          (path) => path !== null && path.versions !== null && path.versions.length !== 0
-        );
+        dateSection.paths = dateSection.paths.filter((path) => path && path.versions !== null && path.versions.length);
         return dateSection;
       };
 
@@ -134,14 +132,14 @@ const fetchChangelogData = async (runId, versions, s3Prefix) => {
 
     //filter hideFromChangelog in diff
     const hideDiffChanges = (diffData) => {
-      const pathUpdate = (path) => {
-        if (path !== null && path.changes !== null) {
+      const pathUpdate = ({ ...path }) => {
+        if (path && path.changes) {
           path.changes = path.changes.filter((change) => !change.hideFromChangelog);
         }
         return path;
       };
       diffData = diffData.map(pathUpdate);
-      return diffData.filter((path) => path !== null && path.changes !== null && path.changes.length !== 0);
+      return diffData.filter((path) => path && path.changes !== null && path.changes.length);
     };
 
     const mostRecentDiffData = hideDiffChanges(mostRecentDiffDataUnfiltered);

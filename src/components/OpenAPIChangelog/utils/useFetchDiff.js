@@ -3,17 +3,17 @@ import { fetchOADiff } from '../../../utils/realm';
 import useChangelogData from '../../../utils/use-changelog-data';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
 
-//filter hideFromChangelog in diff
+//nested filtering of Diff changes with hideFromChangelog
 const hideDiffChanges = (diffData) => {
-  const pathUpdate = (path) => {
-    if (path !== null && path.changes !== null) {
+  const pathUpdate = ({ ...path }) => {
+    if (path && path.changes) {
       path.changes = path.changes.filter((change) => !change.hideFromChangelog);
     }
     return path;
   };
 
   diffData = diffData.map(pathUpdate);
-  return diffData.filter((path) => path !== null && path.changes !== null && path.changes.length !== 0);
+  return diffData.filter((path) => path && path.changes !== null && path.changes.length);
 };
 
 export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv) => {
