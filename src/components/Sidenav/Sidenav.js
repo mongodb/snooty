@@ -11,12 +11,12 @@ import Link from '../Link';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -161,13 +161,13 @@ const StyledChapterNumberLabel = styled(ChapterNumberLabel)`
 
 const additionalLinks = [
   { glyph: 'Support', title: 'Contact Support', url: 'https://support.mongodb.com/welcome' },
-  { glyph: 'Person', title: 'Join our community', url: 'https://community.mongodb.com/' },
-  { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
+  { glyph: 'Person', title: 'Join our community', url: 'https://www.mongodb.com/community/' },
+  { glyph: 'University', title: 'Register for Courses', url: 'https://learn.mongodb.com/' },
 ];
 
 const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, eol }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
-  const { project } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;

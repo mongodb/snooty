@@ -1,16 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { mockLocation } from '../utils/mock-location';
-import mockStaticQuery from '../utils/mockStaticQuery';
 import DocumentBody from '../../src/components/DocumentBody';
 import mockPageContext from './data/PageContext.test.json';
 import mockSnootyMetadata from './data/SnootyMetadata.json';
 
-beforeAll(() => {
-  mockStaticQuery({}, mockSnootyMetadata);
+jest.mock(`../../src/utils/use-snooty-metadata`, () => {
+  return () => mockSnootyMetadata;
 });
 
 describe('DocumentBody', () => {
+  beforeAll(() => {
+    jest.spyOn(document, 'querySelector');
+  });
   it('renders the necessary elements', () => {
     mockLocation(null);
     render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
@@ -18,6 +20,12 @@ describe('DocumentBody', () => {
     const footer = screen.getByTestId('consistent-footer');
     expect(footer).toBeVisible();
     expect(footer).toMatchSnapshot();
+
+    if (!process.env.GATSBY_HIDE_UNIFIED_FOOTER_LOCALE) {
+      const languageSelector = screen.getByTestId('options');
+      expect(languageSelector).toBeInTheDocument();
+      expect(languageSelector.querySelectorAll('li')).toHaveLength(2);
+    }
 
     const feedbackWidget = screen.getByText('Share Feedback');
     expect(feedbackWidget).toBeVisible();

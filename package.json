@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.14.18",
+  "version": "0.14.19",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -38,6 +38,7 @@
     "build:clean:stage": "npm run build:clean && make stage",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
+    "develop:preview": "GATSBY_IS_PREVIEW=true gatsby develop",
     "ensure-master": "node scripts/ensure-master.js",
     "format": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
@@ -135,6 +136,7 @@
     "sanitize-html": "^2.2.0",
     "shell-quote": "^1.7.3",
     "stream-browserify": "^3.0.0",
+    "stream-json": "^1.8.0",
     "styled-components": "^5.3.6",
     "theme-ui": "^0.15.4",
     "underscore": "^1.12.1",

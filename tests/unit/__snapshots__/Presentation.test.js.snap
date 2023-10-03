@@ -136,6 +136,132 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .emotion-7 {
+    margin-top: 24px;
+  }
+}
+
+.emotion-8 {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  display: inline-block;
+  position: relative;
+}
+
+.emotion-9 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  height: 48px;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 300;
+  background-color: transparent;
+  padding-left: 0;
+}
+
+.emotion-10 {
+  font-family: Akzidenz-Grotesk Std;
+  font-size: 16px;
+  line-height: 16px;
+  color: #ffffff;
+  padding-left: 16px;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.emotion-11 {
+  padding: 0 16px;
+}
+
+.emotion-12 {
+  -webkit-transform: rotateZ(0.5deg);
+  -moz-transform: rotateZ(0.5deg);
+  -ms-transform: rotateZ(0.5deg);
+  transform: rotateZ(0.5deg);
+  -webkit-transition: -webkit-transform .15s ease-in-out;
+  transition: transform .15s ease-in-out;
+  z-index: 0;
+}
+
+.emotion-13 {
+  stroke: #ffffff;
+}
+
+.emotion-14 {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  width: 100%;
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  min-width: min-content;
+  padding: 16px;
+  line-height: 16px;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: Akzidenz-Grotesk Std;
+  background-color: #21313c;
+  border: 1px solid #b8c4c2;
+  border-radius: 8px;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.15);
+}
+
+.emotion-15 {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.emotion-16 {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.emotion-16:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.emotion-16:hover {
+  border-radius: 2px;
+  background-color: #3d4f58;
+  color: #0ad05b;
+}
+
+.emotion-18 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
   display: none;
   font-family: Akzidenz-Grotesk Std;
   font-weight: 300;
@@ -144,12 +270,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-7 {
+  .emotion-18 {
     display: block;
   }
 }
 
-.emotion-8 {
+.emotion-19 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -160,12 +286,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-8 {
+  .emotion-19 {
     margin-top: 0px;
   }
 }
 
-.emotion-9 {
+.emotion-20 {
   font-family: Akzidenz-Grotesk Std;
   font-weight: 500;
   font-size: 16px;
@@ -175,12 +301,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-9 {
+  .emotion-20 {
     margin-top: initial;
   }
 }
 
-.emotion-10 {
+.emotion-21 {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -189,16 +315,16 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-10 {
+  .emotion-21 {
     display: block;
   }
 }
 
-.emotion-11 {
+.emotion-22 {
   margin-bottom: 24px;
 }
 
-.emotion-12 {
+.emotion-23 {
   color: #ffffff;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -216,11 +342,11 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   align-items: center;
 }
 
-.emotion-39 {
+.emotion-50 {
   margin-right: 16px;
 }
 
-.emotion-58 {
+.emotion-69 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -233,13 +359,14 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-58 {
+  .emotion-69 {
     display: none;
   }
 }
 
 <div
   data-testid="consistent-footer"
+  id="footer-container"
 >
   <footer
     class="emotion-0"
@@ -267,29 +394,97 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               />
             </a>
           </div>
+          <div
+            class="emotion-7"
+          >
+            <img
+              src="https://webimages.mongodb.com/_com_assets/cms/kr6zmbrgbwlke2l97-atlas-global-deployments.svg?auto=format%252Ccompress"
+            />
+            <div
+              class="emotion-8"
+            >
+              <button
+                aria-label="Language Selector"
+                class="emotion-9"
+                role="button"
+                type="button"
+              >
+                <span
+                  class="emotion-10"
+                  data-testid="selected-value"
+                >
+                  English
+                </span>
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    class="emotion-12"
+                    data-testid="icon"
+                    fill="none"
+                    height="9"
+                    viewBox="0 0 16 9"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      class="emotion-13"
+                      d="M1.06689 0.799988L8.00023 7.73332L14.9336 0.799988"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-14"
+              >
+                <ul
+                  class="emotion-15"
+                  data-testid="options"
+                  role="listbox"
+                >
+                  <li
+                    class="emotion-16"
+                    role="option"
+                    tabindex="0"
+                  >
+                    English
+                  </li>
+                  <li
+                    class="emotion-16"
+                    role="option"
+                    tabindex="0"
+                  >
+                    简体中文
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div
-          class="emotion-7"
+          class="emotion-18"
         >
           © 2023 MongoDB, Inc.
         </div>
       </div>
       <div
-        class="emotion-8"
+        class="emotion-19"
       >
         <p
-          class="emotion-9"
+          class="emotion-20"
         >
           About
         </p>
         <ul
-          class="emotion-10"
+          class="emotion-21"
         >
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.mongodb.com/careers"
               rel="noreferrer noopener"
               target="_self"
@@ -298,10 +493,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://investors.mongodb.com"
               rel="noreferrer noopener"
               target="_self"
@@ -310,10 +505,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.mongodb.com/legal/legal-notices"
               rel="noreferrer noopener"
               target="_self"
@@ -322,10 +517,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.mongodb.com/legal/privacy-policy"
               rel="noreferrer noopener"
               target="_self"
@@ -334,10 +529,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.mongodb.com/security"
               rel="noreferrer noopener"
               target="_self"
@@ -346,10 +541,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.mongodb.com/cloud/trust"
               rel="noreferrer noopener"
               target="_self"
@@ -360,21 +555,21 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         </ul>
       </div>
       <div
-        class="emotion-8"
+        class="emotion-19"
       >
         <p
-          class="emotion-9"
+          class="emotion-20"
         >
           Support
         </p>
         <ul
-          class="emotion-10"
+          class="emotion-21"
         >
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.mongodb.com/contact"
               rel="noreferrer noopener"
               target="_self"
@@ -383,10 +578,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://support.mongodb.com/welcome"
               rel="noreferrer noopener"
               target="_self"
@@ -395,10 +590,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://status.cloud.mongodb.com/"
               rel="noreferrer noopener"
               target="_self"
@@ -407,10 +602,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.mongodb.com/products/enterprise-grade-support"
               rel="noreferrer noopener"
               target="_self"
@@ -421,130 +616,130 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         </ul>
       </div>
       <div
-        class="emotion-8"
+        class="emotion-19"
       >
         <p
-          class="emotion-9"
+          class="emotion-20"
         >
           Social
         </p>
         <ul
-          class="emotion-10"
+          class="emotion-21"
         >
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://github.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
             >
               <img
                 alt=""
-                class="emotion-39"
+                class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wrvghw9q75ytq1-github.svg?auto=format%252Ccompress"
               />
               Github
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://stackoverflow.com/tags/mongodb/info"
               rel="noreferrer noopener"
               target="_self"
             >
               <img
                 alt=""
-                class="emotion-39"
+                class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsfh9d9z2m4jvx-stackoverflow.svg?auto=format%252Ccompress"
               />
               Stack Overflow
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://www.linkedin.com/company/mongodbinc/"
               rel="noreferrer noopener"
               target="_self"
             >
               <img
                 alt=""
-                class="emotion-39"
+                class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsmr3g1ckzd0hs-linkedin.svg?auto=format%252Ccompress"
               />
               LinkedIn
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://youtube.com/user/mongodb"
               rel="noreferrer noopener"
               target="_self"
             >
               <img
                 alt=""
-                class="emotion-39"
+                class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsxwxsvrivp4q4-youtube.svg?auto=format%252Ccompress"
               />
               Youtube
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://twitter.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
             >
               <img
                 alt=""
-                class="emotion-39"
+                class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wt4s3sy4hlc22k-twitter.svg?auto=format%252Ccompress"
               />
               Twitter
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://twitch.tv/mongodb/videos"
               rel="noreferrer noopener"
               target="_self"
             >
               <img
                 alt=""
-                class="emotion-39"
+                class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wtbzfgc05d27pb-twitch.svg?auto=format%252Ccompress"
               />
               Twitch
             </a>
           </li>
           <li
-            class="emotion-11"
+            class="emotion-22"
           >
             <a
-              class="emotion-12"
+              class="emotion-23"
               href="https://facebook.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
             >
               <img
                 alt=""
-                class="emotion-39"
+                class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wtks9piclp67yr-facebook.svg?auto=format%252Ccompress"
               />
               Facebook
@@ -553,7 +748,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         </ul>
       </div>
       <div
-        class="emotion-58"
+        class="emotion-69"
       >
         © 2023 MongoDB, Inc.
       </div>

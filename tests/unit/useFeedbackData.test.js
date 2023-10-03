@@ -8,12 +8,17 @@ useStaticQuery.mockImplementation(() => ({
   site: {
     siteMetadata: {
       parserBranch: 'testbranch',
-      project: 'testproject',
       snootyBranch: 'test',
       user: 'testuser',
     },
   },
 }));
+
+jest.mock(`../../src/utils/use-snooty-metadata`, () => {
+  return () => ({
+    project: 'testproject',
+  });
+});
 
 const Test = (props) => {
   const feedbackData = useFeedbackData(props.data);
