@@ -15,12 +15,14 @@ const checkboxStyle = css`
   }
 `;
 
+const initChecked = (searchParams, key, id) => searchParams.getAll(`facets.${key}`).includes(id);
+
 const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
-  const { handleFacetChange, selectedFacets } = useContext(SearchContext);
+  const { handleFacetChange, searchParams } = useContext(SearchContext);
   // Differentiate between facets with the same id found under different facet options
   const fullFacetId = `${key}>${id}`;
   // Decide on initial state based on selected facets deduced from query params
-  const [isChecked, setIsChecked] = useState(() => !!selectedFacets.find((facet) => facet.fullFacetId === fullFacetId));
+  const [isChecked, setIsChecked] = useState(() => initChecked(searchParams, key, id));
 
   const onChangeHandler = useCallback(
     ({ target }) => {
