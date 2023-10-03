@@ -7,11 +7,14 @@ const useFacets = () => {
 
   // Fetch facets
   useEffect(() => {
+    if (facets.length) {
+      return;
+    }
     const fetchFacets = async () => {
       setFacets(statusV2);
     };
     fetchFacets();
-  }, []);
+  }, [facets]);
 
   return facets;
 };

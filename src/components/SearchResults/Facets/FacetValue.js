@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { css, cx } from '@leafygreen-ui/emotion';
 import SearchContext from '../SearchContext';
@@ -15,19 +15,18 @@ const checkboxStyle = css`
   }
 `;
 
-const initChecked = (searchParams, key, id) => searchParams.getAll(`facets.${key}`).includes(id);
+export const initChecked = (searchParams, key, id) => searchParams.getAll(`facets.${key}`).includes(id);
 
 const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
   const { handleFacetChange, searchParams } = useContext(SearchContext);
   // Differentiate between facets with the same id found under different facet options
   const fullFacetId = `${key}>${id}`;
   // Decide on initial state based on selected facets deduced from query params
-  const [isChecked, setIsChecked] = useState(() => initChecked(searchParams, key, id));
+  // const [isChecked, setIsChecked] = useState(() => initChecked(searchParams, key, id));
+  const isChecked = useMemo(() => initChecked(searchParams, key, id), [id, key, searchParams]);
 
   const onChangeHandler = useCallback(
     ({ target }) => {
-      const { checked } = target;
-      setIsChecked(checked);
       handleFacetChange({ target, name, key, id });
     },
     [handleFacetChange, name, key, id]

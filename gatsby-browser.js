@@ -1,4 +1,5 @@
 import React from 'react';
+// use prefix
 import { ThemeProvider } from '@emotion/react';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { theme } from './src/theme/docsTheme';
@@ -10,3 +11,12 @@ export const wrapRootElement = ({ element }) => (
     <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
   </ThemeProvider>
 );
+
+export const shouldUpdateScroll = ({ routerProps: { location }, _getSavedScrollPosition }) => {
+  // stage and log that prefix
+  // seung.park/DOP-xxxx/landing/search  ???????
+  if (location.pathname === '/search/') {
+    return false;
+  }
+  return true;
+};

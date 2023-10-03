@@ -23,7 +23,7 @@ import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
-import { Facets } from './Facets';
+import { Facets, FacetTags } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const DESKTOP_COLUMN_GAP = '46px';
@@ -262,7 +262,7 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchField, setSearchField] = useState(searchTerm || '');
 
-  const [searchFinished, setSearchFinished] = useState(true);
+  const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
@@ -419,6 +419,7 @@ const SearchResults = () => {
                 {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
               </FilterBadgesWrapper>
             )}
+            {showFacets && <FacetTags></FacetTags>}
           </ResultTag>
           <MobileSearchButtonWrapper>
             <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
