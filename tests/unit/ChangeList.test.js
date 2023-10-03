@@ -53,4 +53,38 @@ describe('OpenAPIChangelog ChangeList', () => {
       expect(queryByText(change.change)).toBeNull();
     });
   });
+
+  it('does not render all version changelog changes with "hideFromChangelog=true"', () => {
+    const hiddenChanges = mockChangelog.reduce((acc, date) => {
+      date.paths.forEach((path) =>
+        path.versions.forEach((version) =>
+          version.changes.forEach((change) => change.hideFromChangelog && acc.push(change))
+        )
+      );
+      return acc;
+    }, []);
+
+    const { queryByText } = render(<ChangeList changes={mockDiff} versionMode={COMPARE_VERSIONS} />);
+
+    expect(hiddenChanges).toHaveLength(2);
+
+    hiddenChanges.forEach((change) => {
+      expect(queryByText(change.change)).toBeNull();
+    });
+  });
+
+  it('does not render Diff changelog changes with "hideFromChangelog=true"', () => {
+    const hiddenChanges = mockDiff.reduce((acc, resource) => {
+      resource.changes.forEach((change) => change.hideFromChangelog && acc.push(change));
+      return acc;
+    }, []);
+
+    const { queryByText } = render(<ChangeList changes={mockDiff} versionMode={COMPARE_VERSIONS} />);
+
+    expect(hiddenChanges).toHaveLength(2);
+
+    hiddenChanges.forEach((change) => {
+      expect(queryByText(change.change)).toBeNull();
+    });
+  });
 });

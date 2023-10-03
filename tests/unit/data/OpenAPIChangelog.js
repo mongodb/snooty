@@ -17,6 +17,7 @@ export const mockChangelog = [
                 change: 'resource version 2023-01-01 was removed, latest available resource version is 2023-02-01',
                 changeCode: 'resource-version-removed',
                 backwardCompatible: true,
+                hideFromChangelog: true,
               },
             ],
           },
@@ -42,6 +43,7 @@ export const mockChangelog = [
                 change: 'resource version added.',
                 changeCode: 'resource-version-added',
                 backwardCompatible: false,
+                hideFromChangelog: false,
               },
             ],
           },
@@ -62,6 +64,7 @@ export const mockChangelog = [
                 change: 'resource version added.',
                 changeCode: 'resource-version-added',
                 backwardCompatible: false,
+                hideFromChangelog: true,
               },
               {
                 change:
@@ -158,6 +161,7 @@ export const mockDiff = [
         change: "removed the non-success response with the status '400'.",
         changeCode: 'response-non-success-status-removed',
         backwardCompatible: false,
+        hideFromChangelog: true,
       },
       {
         change: "added the new optional 'query' request parameter 'envelope'.",
@@ -173,6 +177,7 @@ export const mockDiff = [
         change: 'this change should be hidden!',
         changeCode: 'operation-tag-changed',
         backwardCompatible: false,
+        hideFromChangelog: false,
       },
     ],
   },
@@ -187,6 +192,7 @@ export const mockDiff = [
         change: "removed the required property 'name' from the response with the '200' status.",
         changeCode: 'response-required-property-removed',
         backwardCompatible: false,
+        hideFromChangelog: true,
       },
     ],
   },
